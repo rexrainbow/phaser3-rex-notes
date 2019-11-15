@@ -12,7 +12,8 @@ import GetAllMatch from './match/GetAllMatch.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
-    constructor(scene, config) {
+    constructor(parent, config) {
+        var scene = parent.scene;
         this.scene = scene;
         this.board = scene.rexBoard.add.board(GetValue(config, 'board', undefined));
         this.match = scene.rexBoard.add.match(GetValue(config, 'match', undefined));
@@ -95,7 +96,12 @@ class Board {
     }
 
     getNeighborChessAtAngle(chess, angle) {
-        var neighborTileXY = this.board.getNeighborTileXYAtAngle(chess, angle);
+        var direction = this.board.angleSnapToDirection(chess, angle);
+        return this.getNeighborChessAtDirection(chess, direction);
+    }
+
+    getNeighborChessAtDirection(chess, direction) {
+        var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
         var neighborChess = (neighborTileXY) ?
             this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
             null;

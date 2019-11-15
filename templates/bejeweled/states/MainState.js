@@ -141,17 +141,16 @@ class State extends FSM {
     }
 
     // Select chess
-    selectChess(chess) {
-        switch (this.state) {
-            case 'SELECT1':
-                this.selectedChess1 = chess;
-                this.next();
-                break;
-            case 'SELECT2':
-                this.selectedChess2 = chess;
-                this.next();
-                break;
-        }
+    selectChess1(chess) {
+        this.selectedChess1 = chess;
+        this.next();
+        return this;
+    }
+
+    selectChess2(chess) {
+        this.selectedChess2 = chess;
+        this.next();
+        return this;
     }
 }
 

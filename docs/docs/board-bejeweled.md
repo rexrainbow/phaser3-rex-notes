@@ -79,6 +79,8 @@ var bejeweled = new Bejeweled(scene, {
         // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
     },
     onFallingChessCallback: undefined,
+
+    // input: true
 })
 ```
 
@@ -97,6 +99,8 @@ Configurations
     - `onMatchLinesCallback`, `onMatchLinesCallbackScope` : [On matched lines](board-bejeweled.md#on-matched-lines)
     - `onEliminatingChessCallback`, `onEliminatingChessCallbackScope` : [On eliminating chess](board-bejeweled.md#on-eliminating-chess)
     - `onFallingChessCallback`, `onFallingChessCallback` : [On falling chess](board-bejeweled.md#on-falling-chess)
+- Touch input
+    - `input` : Set `true` to register default touch input logic.
 
 It also install [Board plugins](board.md) into Game system.
 
@@ -198,3 +202,40 @@ Use csees:
 ```javascript
 bejeweled.start();
 ```
+
+### Input control
+
+- Enable
+    ```javascript
+    bejeweled.setInputEnable();
+    ```
+- Disable
+    ```javascript
+    bejeweled.setInputEnable(false);
+    ```
+
+### Get chess
+
+- Get chess via worldXY position
+    ```javascript
+    var chess = bejeweled.worldXYToChess(worldX, worldY);
+    ```
+- Get chess via tileXY position
+    ```javascript
+    var chess = bejeweled.tileXYToChess(tileX, tileY);
+    ```
+- Get neighbor chess via angle
+    ```javascript
+    var chess2 = bejeweled.getNeighborChessAtAngle(chess1, angle);
+    ```
+    - `chess1` : Chess object, or tileXY position `{x, y}`.
+    - `angle` : Angle in radius.
+- Get neighbor chess via direction
+    ```javascript
+    var chess2 = bejeweled.getNeighborChessAtDirection(chess1, direction);
+    ```
+    - `chess1` : Chess object, or tileXY position `{x, y}`.
+    - `direction` : Number, or string number.
+        - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
+        - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
+        - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).

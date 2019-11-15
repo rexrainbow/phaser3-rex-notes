@@ -1,6 +1,7 @@
 import BoardPlugin from '../../plugins/board-plugin.js';
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
+import Input from './input/Input.js';
 
 const EE = Phaser.Events.EventEmitter;
 
@@ -10,27 +11,20 @@ class Bejeweled extends EE {
         super();
 
         this.scene = scene;
-        this.board = new Board(scene, config);
+        this.board = new Board(this, config);
         this.mainState = new MainState(this, config);
+        this.input = new Input(this, config);
 
         this.boot();
     }
 
     boot() {
-        // touch control
-        this.scene.input
-            .on('pointerdown', this.selectChess, this)
-            .on('pointerup', this.selectChess, this);
-
         this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {
-        this.scene.input
-            .off('pointerdown', this.selectChess, this)
-            .off('pointerup', this.selectChess, this);
-
         super.shutdown();
+        this.input.shutdown();
         this.board.shutdown();
         this.mainState.shutdown();
 
@@ -56,18 +50,43 @@ class Bejeweled extends EE {
         return this;
     }
 
-    selectChess(pointer) {
-        if (pointer.isDown) {
-            var chess = this.board.worldXYToChess(pointer.worldX, pointer.worldY);
-            this.mainState.selectChess(chess);
-        } else { // pointer-up
-            var chess1 = this.mainState.selectedChess1;
-            if (chess1) {
-                var chess2 = this.board.getNeighborChessAtAngle(chess1, pointer.getAngle());
-                this.mainState.selectChess(chess2);
-            }
-        }
+    // Input methods
+    get selectedChess1() {
+        return this.mainState.selectChess1;
     }
+
+    selectChess1(chess) {
+        this.mainState.selectChess1(chess);
+        return this;
+    }
+
+    selectChess2(chess) {
+        this.mainState.selectChess2(chess);
+        return this;
+    }
+
+    setInputEnable(enable) {
+        this.input.setEnable(enable);
+        return this;
+    }
+
+    // Board methods    
+    worldXYToChess(worldX, worldY) {
+        return this.board.worldXYToChess(worldX, worldY);
+    }
+
+    tileXYToChess(tileX, tileY) {
+        return this.board.tileXYToChess(tileX, tileY);
+    }
+
+    getNeighborChessAtAngle(chess, angle) {
+        return this.board.getNeighborChessAtAngle(chess, angle);
+    }
+
+    getNeighborChessAtDirection(chess, direction) {
+        return this.board.getNeighborChessAtDirection(chess, direction);
+    }
+
 }
 
 var loadRexBoardPlugin = function (scene) {
