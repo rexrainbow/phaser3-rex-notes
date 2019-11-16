@@ -205,18 +205,28 @@ bejeweled.start();
 
 ### Input control
 
-- Enable
+#### Default input
+
+1. Enable default input control
     ```javascript
-    bejeweled.setInputEnable();
+    var bejeweled = new Bejeweled(scene, {
+        // ...
+        input: true
+    });
     ```
-- Disable
-    ```javascript
-    bejeweled.setInputEnable(false);
-    ```
+1. Enable/disable temporarily.
+    - Enable
+        ```javascript
+        bejeweled.setInputEnable();
+        ```
+    - Disable
+        ```javascript
+        bejeweled.setInputEnable(false);
+        ```
 
 #### Custom input
 
-1. Disable default input control
+1. Discard default input control
     ```javascript
     var bejeweled = new Bejeweled(scene, {
         // ...

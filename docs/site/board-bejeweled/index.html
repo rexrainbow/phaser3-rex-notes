@@ -4444,6 +4444,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#default-input" class="md-nav__link">
+    Default input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-input" class="md-nav__link">
     Custom input
   </a>
@@ -4792,6 +4799,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#default-input" class="md-nav__link">
+    Default input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-input" class="md-nav__link">
     Custom input
   </a>
@@ -5022,7 +5036,15 @@
 </pre></div>
 
 <h3 id="input-control">Input control<a class="headerlink" href="#input-control" title="Permanent link">&para;</a></h3>
-<ul>
+<h4 id="default-input">Default input<a class="headerlink" href="#default-input" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Enable default input control
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</pre></div></li>
+<li>Enable/disable temporarily.<ul>
 <li>Enable
     <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">();</span>
 </pre></div></li>
@@ -5030,9 +5052,11 @@
     <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+</li>
+</ol>
 <h4 id="custom-input">Custom input<a class="headerlink" href="#custom-input" title="Permanent link">&para;</a></h4>
 <ol>
-<li>Disable default input control
+<li>Discard default input control
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="kc">false</span>
