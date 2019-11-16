@@ -5075,7 +5075,7 @@
             <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">!==</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectedChess1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectedChess1</span><span class="p">))</span> <span class="p">{</span>
             <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">},</span> <span class="nx">scene</span><span class="p">);</span>

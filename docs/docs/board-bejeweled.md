@@ -247,7 +247,7 @@ bejeweled.start();
                 return;
             }
             var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
-            if (chess !== bejeweled.selectedChess1) {
+            if (chess && (chess !== this.bejeweled.selectedChess1)) {
                 bejeweled.selectChess2(chess);
             }
         }, scene);

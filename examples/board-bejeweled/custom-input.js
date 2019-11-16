@@ -67,7 +67,7 @@ class Demo extends Phaser.Scene {
                     return;
                 }
                 var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
-                if (chess !== this.bejeweled.selectedChess1) {
+                if (chess && (chess !== this.bejeweled.selectedChess1)) {
                     this.bejeweled.selectChess2(chess);
                 }
             }, this)
