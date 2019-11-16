@@ -52,7 +52,7 @@ class Bejeweled extends EE {
 
     // Input methods
     get selectedChess1() {
-        return this.mainState.selectChess1;
+        return this.mainState.selectedChess1;
     }
 
     selectChess1(chess) {

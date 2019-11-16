@@ -4390,6 +4390,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#angle-snap-to-direction" class="md-nav__link">
+    Angle snap to direction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#align-world-position-to-grid" class="md-nav__link">
     Align world position to grid
   </a>
@@ -5201,6 +5208,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#angle-snap-to-direction" class="md-nav__link">
+    Angle snap to direction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#align-world-position-to-grid" class="md-nav__link">
     Align world position to grid
   </a>
@@ -5811,6 +5825,19 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getOppositeDirection</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="angle-snap-to-direction">Angle snap to direction<a class="headerlink" href="#angle-snap-to-direction" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleSnapToDirection</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>chess</code> : Chess object, or tileXY, or <code>undefined</code>.</li>
+<li><code>angle</code> : Angle in radius.</li>
+<li><code>direction</code> : Integer number.<ul>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>.</li>
+<li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>.</li>
+</ul>
+</li>
+</ul>
 <h3 id="align-world-position-to-grid">Align world position to grid<a class="headerlink" href="#align-world-position-to-grid" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Align one chess object
@@ -5868,6 +5895,15 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileDirection</span><span class="p">(</span><span class="nx">srcTile</span><span class="p">,</span> <span class="nx">neighborTileXY</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>direction</code> : Return <code>null</code> if these 2 tile positions are not neighbors.</li>
+</ul>
+</li>
+<li>Get neighbor tile position at angle
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXYAtAngle</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+<span class="c1">// var out = board.getNeighborTileXY(srcTileXY, angle, out);</span>
+</pre></div><ul>
+<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
+<li><code>angle</code> : Angle in radius.</li>
+<li><code>neighborTileXY</code> : Tile position <code>{x, y}</code> of neighbor. Retrun <code>null</code> if no neighbor there (i.e. source chess is at the edge of board.)</li>
 </ul>
 </li>
 </ul>

@@ -4435,6 +4435,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input-control" class="md-nav__link">
+    Input control
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-input" class="md-nav__link">
+    Custom input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4763,6 +4783,26 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input-control" class="md-nav__link">
+    Input control
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-input" class="md-nav__link">
+    Custom input
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4863,6 +4903,8 @@
         <span class="c1">// return eventEmitter; // custom falling task, fires &#39;complete&#39; event to continue FSM</span>
     <span class="p">},</span>
     <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="c1">// input: true</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -4885,6 +4927,10 @@
 <li><code>onMatchLinesCallback</code>, <code>onMatchLinesCallbackScope</code> : <a href="./#on-matched-lines">On matched lines</a></li>
 <li><code>onEliminatingChessCallback</code>, <code>onEliminatingChessCallbackScope</code> : <a href="./#on-eliminating-chess">On eliminating chess</a></li>
 <li><code>onFallingChessCallback</code>, <code>onFallingChessCallback</code> : <a href="./#on-falling-chess">On falling chess</a></li>
+</ul>
+</li>
+<li>Touch input<ul>
+<li><code>input</code> : Set <code>true</code> to register default touch input logic.</li>
 </ul>
 </li>
 </ul>
@@ -4974,6 +5020,71 @@
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </pre></div>
+
+<h3 id="input-control">Input control<a class="headerlink" href="#input-control" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable
+    <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">();</span>
+</pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="custom-input">Custom input<a class="headerlink" href="#custom-input" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Disable default input control
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre></div></li>
+<li>Add custom input logic like
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess1</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nx">scene</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">isDown</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">!==</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectedChess1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">},</span> <span class="nx">scene</span><span class="p">);</span>
+</pre></div></li>
+</ol>
+<p>Helper methods</p>
+<ul>
+<li>Get chess via worldXY position
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</pre></div></li>
+<li>Get chess via tileXY position
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">tileXYToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</pre></div></li>
+<li>Get neighbor chess via angle
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtAngle</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>chess1</code> : Chess object, or tileXY position <code>{x, y}</code>.</li>
+<li><code>angle</code> : Angle in radius.</li>
+</ul>
+</li>
+<li>Get neighbor chess via direction
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtDirection</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>chess1</code> : Chess object, or tileXY position <code>{x, y}</code>.</li>
+<li><code>direction</code> : Number, or string number.<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
                 
                   
                 

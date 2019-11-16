@@ -214,7 +214,36 @@ bejeweled.start();
     bejeweled.setInputEnable(false);
     ```
 
-### Get chess
+#### Custom input
+
+1. Disable default input control
+    ```javascript
+    var bejeweled = new Bejeweled(scene, {
+        // ...
+        input: false
+    });
+    ```
+1. Add custom input logic like
+    ```javascript
+    scene.input
+        .on('pointerdown', function (pointer) {
+            var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess) {
+                bejeweled.selectChess1(chess);
+            }
+        }, scene)
+        .on('pointermove', function (pointer) {
+            if (!pointer.isDown) {
+                return;
+            }
+            var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess !== bejeweled.selectedChess1) {
+                bejeweled.selectChess2(chess);
+            }
+        }, scene);
+    ```
+
+Helper methods
 
 - Get chess via worldXY position
     ```javascript
