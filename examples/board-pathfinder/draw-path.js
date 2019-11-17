@@ -105,11 +105,14 @@ class Board extends RexPlugins.Board.Board {
                 alpha: 1
             }
         })
-            .setDepth(-1);
         this.forEachTileXY(function (tileXY, board) {
             var points = board.getGridPoints(tileXY.x, tileXY.y, true);
             gridGraphics.strokePoints(points, true);
         })
+        scene.add.renderTexture(0, 0, 800, 600)
+            .draw(gridGraphics)
+            .setDepth(-1);
+        gridGraphics.destroy()
 
         this.pathGraphics = scene.add.graphics({
             lineStyle: {
@@ -118,20 +121,22 @@ class Board extends RexPlugins.Board.Board {
                 alpha: 1
             }
         })
+        this.pathTexture = scene.add.renderTexture(0, 0, 800, 600)
             .setDepth(2);
     }
 
     clearPath() {
-        this.pathGraphics
-            .clear();
+        this.pathTexture.clear();
         return this;
     }
 
     drawPath(tileXYArray) {
-        var worldXYArray = this.tileXYArrayToWorldXYArray(tileXYArray);
         this.pathGraphics
+            .strokePoints(this.tileXYArrayToWorldXYArray(tileXYArray));
+        this.pathTexture
             .clear()
-            .strokePoints(worldXYArray);
+            .draw(this.pathGraphics);
+        this.pathGraphics.clear();
         return this;
     }
 }
