@@ -485,7 +485,7 @@ emitter.fromJSON(config);
 emitter.setQuantity(quantity);
 ```
 
-#### Particles
+### Particles
 
 - Hard limit the amount of particle objects
     ```javascript
@@ -556,7 +556,7 @@ emitter.setQuantity(quantity);
     }
     ```
 
-##### Properties
+#### Properties
 
 - `emitter`
 - `frame`
