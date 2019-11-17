@@ -54,14 +54,13 @@ Reference: [load image](loader.md#image)
         // },
         // **emit zone**
         // emitZone: {
-        // type: 'random',    // 'random', or 'edge'
-        // source: geom,      // Geom like Circle, or a Path or Curve
-
-        // **type = edge**
-        // quantity: 1,
-        // stepRate: 0,
-        // yoyo: false,
-        // seamless: true
+        //     type: 'random',    // 'random', or 'edge'
+        //     source: geom,      // Geom like Circle, or a Path or Curve
+        //     **type = edge**
+        //     quantity: 1,
+        //     stepRate: 0,
+        //     yoyo: false,
+        //     seamless: true
         // },
 
         // **target position**
@@ -69,8 +68,8 @@ Reference: [load image](loader.md#image)
         // moveToY:          // { min, max }, or { min, max, steps }
         // **death zone**
         // deathZone: {
-        // type: 'onEnter',  // 'onEnter', or 'onLeave'
-        // source: geom      // Geom like Circle or Rect that supports a 'contains' function
+        //      type: 'onEnter',  // 'onEnter', or 'onLeave'
+        //      source: geom      // Geom like Circle or Rect that supports a 'contains' function
         // }
 
         // **angle**
@@ -163,27 +162,122 @@ Reference: [load image](loader.md#image)
                 quantity: 1
             }
             ```
-    - Custom source of emit zone:
-        - `type` = `random`
+    - `emitZone` :
+        - [Emit zone](particles.md#emit-zone)
             ```javascript
             {
-                getRandomPoint: function(point) {
-                    // point.x = ...
-                    // point.y = ...
-                    return point;
-                }
-            }
+                type: 'random',
+                source: geom,
+            }            
             ```
-        - `type` = `edge`
+        - [Emit edge](particles.md#emit-edge)
             ```javascript
             {
-                getPoints: function(quantity, stepRate) {
-                    // output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}
-                    return output;
-                }
-            }
+                type: 'edge',
+                source: curve,
+            
+                quantity: 1,
+                stepRate: 0,
+                yoyo: false,
+                seamless: true
+            }            
             ```
-    - Custom source of death zone :
+    - [`deathZone`](particles.md#death-zone)
+        ```javascript
+        {
+            type: 'onEnter',
+            source: geom
+        }
+        ```
+    - Immortal particle : Set `lifespan` to `Infinity`.
+
+### Emit zone
+
+```javascript
+var config = {
+    type: 'random',
+    source: geom,
+};
+emitter.setEmitZone(config);
+```
+
+- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md)
+    - Custom zone
+        ```javascript
+        {
+            getRandomPoint: function(point) {
+                // point.x = ...
+                // point.y = ...
+                return point;
+            }
+        }
+        ```
+
+#### Zone source
+
+- Get
+    ```javascript
+    var source = emitter.emitZone.source;
+    ```
+
+### Emit edge
+
+```javascript
+var config = {
+    type: 'edge',
+    source: curve,
+
+    quantity: 1,
+    stepRate: 0,
+    yoyo: false,
+    seamless: true
+};
+emitter.setEmitZone(config);
+```
+
+- `source` : [Path or Curve](path.md)
+    - Custom edge
+        ```javascript
+        {
+            getPoints: function(quantity, stepRate) {
+                // output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}
+                return output;
+            }
+        }
+        ```
+- `quantity` : The number of particles to place on the source edge. Set to 0 to use `stepRate` instead.
+- `stepRate` : The distance between each particle. When set, `quantity` is implied and should be set to 0.
+- `yoyo` : Whether particles are placed from start to end and then end to start.
+- `seamless` : Whether one endpoint will be removed if it's identical to the other.
+
+#### Curve surce
+
+- Get curve source
+    ```javascript
+    var source = emitter.emitZone.source;
+    ```
+- Update points of curve source
+    ```javascript
+    emitter.emitZone.updateSource();
+    ```
+- Set source to another curve, also update points
+    ```javascript
+    emitter.emitZone.changeSource(curve);
+    ```
+
+### Death zone
+
+```javascript
+var config = {
+     type: 'onEnter',
+     source: geom
+};
+emitter.setDeathZone(config);
+```
+
+- `type` : 'onEnter' or 'onLeave'
+- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md)
+    - Custom `source` :
         ```javascript
         {
             contains: function (x, y) {
@@ -192,7 +286,13 @@ Reference: [load image](loader.md#image)
             }
         }
         ```
-    - Immortal particle : Set `lifespan` to `Infinity`.
+
+#### Zone source
+
+- Get
+    ```javascript
+    var source = emitter.deathZone.source;
+    ```
 
 ### Control
 
@@ -384,67 +484,6 @@ emitter.fromJSON(config);
 ```javascript
 emitter.setQuantity(quantity);
 ```
-
-#### Emit zone
-
-```javascript
-var config = {
-    type: 'random',    // 'random', or 'edge'
-    source: geom,      // Geom like Circle, or a Path or Curve
-
-    // **type = edge**
-    quantity: 1,
-    stepRate: 0,
-    yoyo: false,
-    seamless: true
-};
-emitter.setEmitZone(config);
-```
-
-- Custom `source` :
-    - `type` = `random`
-        ```javascript
-        {
-            getRandomPoint: function(point) {
-                // point.x = ...
-                // point.y = ...
-                return point;
-            }
-        }
-        ```
-    - `type` = `edge`
-        ```javascript
-        {
-            getPoints: function(quantity, stepRate) {
-                // output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}
-                return output;
-            }
-        }
-        ```
-        - Force updating edge zone
-            ```javascript
-            emitter.emitZone.updateSource();
-            ```
-
-#### Death zone
-
-```javascript
-var config = {
-     type: 'onEnter',  // 'onEnter', or 'onLeave'
-     source: geom      // Geom like Circle or Rect that supports a 'contains' function
-};
-emitter.setDeathZone(config);
-```
-
-- Custom `source` :
-    ```javascript
-    {
-        contains: function (x, y) {
-            // ...
-            return bool;
-        }
-    }
-    ```
 
 #### Particles
 

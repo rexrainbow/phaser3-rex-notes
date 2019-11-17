@@ -762,6 +762,66 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#emit-zone" class="md-nav__link">
+    Emit zone
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-source" class="md-nav__link">
+    Zone source
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emit-edge" class="md-nav__link">
+    Emit edge
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curve-surce" class="md-nav__link">
+    Curve surce
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#death-zone" class="md-nav__link">
+    Death zone
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-source_1" class="md-nav__link">
+    Zone source
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" class="md-nav__link">
     Control
   </a>
@@ -821,20 +881,6 @@
           <li class="md-nav__item">
   <a href="#quantity" class="md-nav__link">
     Quantity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#emit-zone" class="md-nav__link">
-    Emit zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#death-zone" class="md-nav__link">
-    Death zone
   </a>
   
 </li>
@@ -4769,6 +4815,66 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#emit-zone" class="md-nav__link">
+    Emit zone
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-source" class="md-nav__link">
+    Zone source
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#emit-edge" class="md-nav__link">
+    Emit edge
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#curve-surce" class="md-nav__link">
+    Curve surce
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#death-zone" class="md-nav__link">
+    Death zone
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-source_1" class="md-nav__link">
+    Zone source
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" class="md-nav__link">
     Control
   </a>
@@ -4828,20 +4934,6 @@
           <li class="md-nav__item">
   <a href="#quantity" class="md-nav__link">
     Quantity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#emit-zone" class="md-nav__link">
-    Emit zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#death-zone" class="md-nav__link">
-    Death zone
   </a>
   
 </li>
@@ -4980,14 +5072,13 @@
     <span class="c1">// },</span>
     <span class="c1">// **emit zone**</span>
     <span class="c1">// emitZone: {</span>
-    <span class="c1">// type: &#39;random&#39;,    // &#39;random&#39;, or &#39;edge&#39;</span>
-    <span class="c1">// source: geom,      // Geom like Circle, or a Path or Curve</span>
-
-    <span class="c1">// **type = edge**</span>
-    <span class="c1">// quantity: 1,</span>
-    <span class="c1">// stepRate: 0,</span>
-    <span class="c1">// yoyo: false,</span>
-    <span class="c1">// seamless: true</span>
+    <span class="c1">//     type: &#39;random&#39;,    // &#39;random&#39;, or &#39;edge&#39;</span>
+    <span class="c1">//     source: geom,      // Geom like Circle, or a Path or Curve</span>
+    <span class="c1">//     **type = edge**</span>
+    <span class="c1">//     quantity: 1,</span>
+    <span class="c1">//     stepRate: 0,</span>
+    <span class="c1">//     yoyo: false,</span>
+    <span class="c1">//     seamless: true</span>
     <span class="c1">// },</span>
 
     <span class="c1">// **target position**</span>
@@ -4995,8 +5086,8 @@
     <span class="c1">// moveToY:          // { min, max }, or { min, max, steps }</span>
     <span class="c1">// **death zone**</span>
     <span class="c1">// deathZone: {</span>
-    <span class="c1">// type: &#39;onEnter&#39;,  // &#39;onEnter&#39;, or &#39;onLeave&#39;</span>
-    <span class="c1">// source: geom      // Geom like Circle or Rect that supports a &#39;contains&#39; function</span>
+    <span class="c1">//      type: &#39;onEnter&#39;,  // &#39;onEnter&#39;, or &#39;onLeave&#39;</span>
+    <span class="c1">//      source: geom      // Geom like Circle or Rect that supports a &#39;contains&#39; function</span>
     <span class="c1">// }</span>
 
     <span class="c1">// **angle**</span>
@@ -5100,8 +5191,47 @@
 </pre></div></li>
 </ul>
 </li>
-<li>Custom source of emit zone:<ul>
-<li><code>type</code> = <code>random</code>
+<li><code>emitZone</code> :<ul>
+<li><a href="./#emit-zone">Emit zone</a>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
+<span class="p">}</span>            
+</pre></div></li>
+<li><a href="./#emit-edge">Emit edge</a>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
+
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>            
+</pre></div></li>
+</ul>
+</li>
+<li><a href="./#death-zone"><code>deathZone</code></a>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Immortal particle : Set <code>lifespan</code> to <code>Infinity</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="emit-zone">Emit zone<a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
+<li>Custom zone
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">getRandomPoint</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// point.x = ...</span>
@@ -5110,7 +5240,31 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div></li>
-<li><code>type</code> = <code>edge</code>
+</ul>
+</li>
+</ul>
+<h4 id="zone-source">Zone source<a class="headerlink" href="#zone-source" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="emit-edge">Emit edge<a class="headerlink" href="#emit-edge" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
+    <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
+
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>source</code> : <a href="../path/">Path or Curve</a><ul>
+<li>Custom edge
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">getPoints</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">quantity</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}</span>
@@ -5120,7 +5274,35 @@
 </pre></div></li>
 </ul>
 </li>
-<li>Custom source of death zone :
+<li><code>quantity</code> : The number of particles to place on the source edge. Set to 0 to use <code>stepRate</code> instead.</li>
+<li><code>stepRate</code> : The distance between each particle. When set, <code>quantity</code> is implied and should be set to 0.</li>
+<li><code>yoyo</code> : Whether particles are placed from start to end and then end to start.</li>
+<li><code>seamless</code> : Whether one endpoint will be removed if it's identical to the other.</li>
+</ul>
+<h4 id="curve-surce">Curve surce<a class="headerlink" href="#curve-surce" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get curve source
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</pre></div></li>
+<li>Update points of curve source
+    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
+</pre></div></li>
+<li>Set source to another curve, also update points
+    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">changeSource</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
+     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
+<span class="p">};</span>
+<span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>type</code> : 'onEnter' or 'onLeave'</li>
+<li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
+<li>Custom <code>source</code> :
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">contains</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
@@ -5128,10 +5310,15 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div></li>
-<li>Immortal particle : Set <code>lifespan</code> to <code>Infinity</code>.</li>
 </ul>
 </li>
-</ol>
+</ul>
+<h4 id="zone-source_1">Zone source<a class="headerlink" href="#zone-source_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Start
@@ -5300,65 +5487,6 @@
 <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setQuantity</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="emit-zone">Emit zone<a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>    <span class="c1">// &#39;random&#39;, or &#39;edge&#39;</span>
-    <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>      <span class="c1">// Geom like Circle, or a Path or Curve</span>
-
-    <span class="c1">// **type = edge**</span>
-    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">};</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>Custom <code>source</code> :<ul>
-<li><code>type</code> = <code>random</code>
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">getRandomPoint</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// point.x = ...</span>
-        <span class="c1">// point.y = ...</span>
-        <span class="k">return</span> <span class="nx">point</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></li>
-<li><code>type</code> = <code>edge</code>
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">getPoints</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">quantity</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}</span>
-        <span class="k">return</span> <span class="nx">output</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div><ul>
-<li>Force updating edge zone
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>  <span class="c1">// &#39;onEnter&#39;, or &#39;onLeave&#39;</span>
-     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>      <span class="c1">// Geom like Circle or Rect that supports a &#39;contains&#39; function</span>
-<span class="p">};</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>Custom <code>source</code> :
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">contains</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// ...</span>
-        <span class="k">return</span> <span class="nx">bool</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></li>
-</ul>
 <h4 id="particles">Particles<a class="headerlink" href="#particles" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Hard limit the amount of particle objects

@@ -40,10 +40,6 @@ var path = new Phaser.Curves.Path(json);
     ```javascript
     var curve = new Phaser.Curves.Line(p0, p1); // p0, p1: {x, y}
     ```
-    or
-    ```javascript
-    var curve = new Phaser.Curves.Line([x0, y0, x1, y1]);
-    ```
 1. Add to path
     ```javascript
     path.add(curve);
