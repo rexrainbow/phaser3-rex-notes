@@ -4252,6 +4252,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-position-chess" class="md-nav__link">
+    World position -&gt; chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#contains" class="md-nav__link">
     Contains
   </a>
@@ -5070,6 +5077,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-position-chess" class="md-nav__link">
+    World position -&gt; chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#contains" class="md-nav__link">
     Contains
   </a>
@@ -5613,6 +5627,28 @@
 </pre></div><ul>
 <li><code>tileXYArray</code> : An array of tileXY <code>{x, y}</code></li>
 <li><code>out</code> : An array of chess</li>
+</ul>
+</li>
+</ul>
+<h3 id="world-position-chess">World position -&gt; chess<a class="headerlink" href="#world-position-chess" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get chess at (worldX, worldY)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToChessArray</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+<span class="c1">// var out = board.worldXYToChessArray(tileX, tileY, out);</span>
+</pre></div><ul>
+<li><code>out</code> : An array of chess</li>
+</ul>
+</li>
+<li>Get chess at (worldX, worldY), tileZ
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>chess</code> : A game object</li>
+</ul>
+</li>
+<li>Get chess at (worldX, worldY)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>chess</code> : A game object at a tileZ.</li>
 </ul>
 </li>
 </ul>

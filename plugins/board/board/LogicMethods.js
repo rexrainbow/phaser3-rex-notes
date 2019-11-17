@@ -7,9 +7,12 @@ import SetBoardHeight from './boarddata/SetBoardHeight.js';
 import TileXYToWorldX from './worldposition/TileXYToWorldX.js';
 import TileXYToWorldY from './worldposition/TileXYToWorldY.js';
 import TileXYToWorldXY from './worldposition/TileXYToWorldXY.js';
+import TileXYArrayToWorldXYArray from './worldposition/TileXYArrayToWorldXYArray.js';
 import WorldXYToTileX from './worldposition/WorldXYToTileX.js';
 import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
 import WorldXYToTileXY from './worldposition/WorldXYToTileXY.js';
+import WorldXYToChessArray from './worldposition/WorldXYToChessArray.js';
+import WorldXYToChess from './worldposition/WorldXYToChess.js';
 import WorldXYSnapToGrid from './worldposition/WorldXYSnapToGrid.js';
 import AngleBetween from './worldposition/AngleBetween.js';
 import IsAngleInCone from './worldposition/IsAngleInCone.js';
@@ -80,9 +83,12 @@ export default {
     tileXYToWorldX: TileXYToWorldX,
     tileXYToWorldY: TileXYToWorldY,
     tileXYToWorldXY: TileXYToWorldXY,
+    tileXYArrayToWorldXYArray: TileXYArrayToWorldXYArray,
     worldXYToTileX: WorldXYToTileX,
     worldXYToTileY: WorldXYToTileY,
     worldXYToTileXY: WorldXYToTileXY,
+    worldXYToChessArray: WorldXYToChessArray,
+    worldXYToChess: WorldXYToChess,
     worldXYSnapToGrid: WorldXYSnapToGrid,
     angleBetween: AngleBetween,
     isAngleInCone: IsAngleInCone,

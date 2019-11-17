@@ -237,6 +237,25 @@ var tileXYZ = board.chessToTileXYZ(chess);
     - `tileXYArray` : An array of tileXY `{x, y}`
     - `out` : An array of chess
 
+### World position -> chess
+
+- Get chess at (worldX, worldY)
+    ```javascript
+    var out = board.worldXYToChessArray(worldX, worldY);
+    // var out = board.worldXYToChessArray(tileX, tileY, out);
+    ```
+    - `out` : An array of chess
+- Get chess at (worldX, worldY), tileZ
+    ```javascript
+    var chess = board.worldXYToChess(worldX, worldY, tileZ);
+    ```
+    - `chess` : A game object
+- Get chess at (worldX, worldY)
+    ```javascript
+    var chess = board.worldXYToChess(worldX, worldY);
+    ```
+    - `chess` : A game object at a tileZ.
+
 ### Contains
 
 - Is (tileX, tileY) inside board?

@@ -87,8 +87,7 @@ class Board {
     }
 
     worldXYToChess(worldX, worldY) {
-        var tileXY = this.board.worldXYToTileXY(worldX, worldY, true);
-        return this.tileXYToChess(tileXY.x, tileXY.y);
+        return this.board.worldXYToChess(worldX, worldY, this.chessTileZ);
     }
 
     tileXYToChess(tileX, tileY) {
