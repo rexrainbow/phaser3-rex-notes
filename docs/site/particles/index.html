@@ -776,6 +776,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-zone" class="md-nav__link">
+    Clear zone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -796,6 +803,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-edge-zone" class="md-nav__link">
+    Clear edge zone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -812,6 +826,13 @@
           <li class="md-nav__item">
   <a href="#zone-source_1" class="md-nav__link">
     Zone source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-zone_1" class="md-nav__link">
+    Clear zone
   </a>
   
 </li>
@@ -4829,6 +4850,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-zone" class="md-nav__link">
+    Clear zone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4849,6 +4877,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clear-edge-zone" class="md-nav__link">
+    Clear edge zone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4865,6 +4900,13 @@
           <li class="md-nav__item">
   <a href="#zone-source_1" class="md-nav__link">
     Zone source
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear-zone_1" class="md-nav__link">
+    Clear zone
   </a>
   
 </li>
@@ -5060,7 +5102,7 @@
 </ul>
 </li>
 <li>Create a particle emitter
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createEmitter</span><span class="p">({</span>
     <span class="c1">// **basic properties of particles**</span>
     <span class="c1">// **initial position**</span>
     <span class="c1">// x: 0,             // { min, max }, or { min, max, steps }</span>
@@ -5148,8 +5190,7 @@
     <span class="c1">// rotate: 0,         // { start, end }, or { start, end, ease },</span>
     <span class="c1">// timeScale: 1,</span>
 
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createEmitter</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div><ul>
 <li>Format of value<ul>
 <li><code>{min, max}</code> : Pick a random value between min and max</li>
@@ -5222,15 +5263,14 @@
 </li>
 </ol>
 <h3 id="emit-zone">Emit zone<a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
-<span class="p">};</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
+<li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, or <a href="../path/">Path or Curve</a>, which has <code>getRandomPoint(point)</code> method<ul>
 <li>Custom zone
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">getRandomPoint</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
@@ -5249,8 +5289,12 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h4 id="clear-zone">Clear zone<a class="headerlink" href="#clear-zone" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="emit-edge">Emit edge<a class="headerlink" href="#emit-edge" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
 
@@ -5258,12 +5302,11 @@
     <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">};</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>source</code> : <a href="../path/">Path or Curve</a>, or Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
+<li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, or <a href="../path/">Path or Curve</a>, which has <code>getPoints(quantity, stepRate)</code> method<ul>
 <li>Custom edge
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">getPoints</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">quantity</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">)</span> <span class="p">{</span>
@@ -5276,8 +5319,8 @@
 </li>
 <li><code>quantity</code> : The number of particles to place on the source edge. Set to 0 to use <code>stepRate</code> instead.</li>
 <li><code>stepRate</code> : The distance between each particle. When set, <code>quantity</code> is implied and should be set to 0.</li>
-<li><code>yoyo</code> : Whether particles are placed from start to end and then end to start.</li>
-<li><code>seamless</code> : Whether one endpoint will be removed if it's identical to the other.</li>
+<li><code>yoyo</code> : Whether particles are placed from start to end and then end to start. Default is <code>false</code>.</li>
+<li><code>seamless</code> : Whether one endpoint will be removed if it's identical to the other. Default is <code>true</code>.</li>
 </ul>
 <h4 id="curve-surce">Curve surce<a class="headerlink" href="#curve-surce" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5291,12 +5334,15 @@
     <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">changeSource</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h4 id="clear-edge-zone">Clear edge zone<a class="headerlink" href="#clear-edge-zone" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">({</span>
      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
      <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
-<span class="p">};</span>
-<span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
@@ -5319,6 +5365,10 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h4 id="clear-zone_1">Clear zone<a class="headerlink" href="#clear-zone_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Start
@@ -5576,14 +5626,13 @@
 <span class="c1">//var well = particles.createGravityWell(x, y, power, epsilon, gravity);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">({</span>
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
     <span class="c1">// power: 0,</span>
     <span class="c1">// epsilon: 100,</span>
     <span class="c1">// gravity: 50</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div></li>
 <li>Enable<ul>
 <li>Active

@@ -352,3 +352,9 @@ var out = curve.getBounds();    // accuracy = 16
 ```
 
 - `out` : A [rectangle object](geom-rectangle.md)
+
+### Destroy
+
+```javascript
+path.destroy();
+```

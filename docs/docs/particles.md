@@ -42,7 +42,7 @@ Reference: [load image](loader.md#image)
         ```
 1. Create a particle emitter
     ```javascript
-    var config = {
+    var emitter = particles.createEmitter({
         // **basic properties of particles**
         // **initial position**
         // x: 0,             // { min, max }, or { min, max, steps }
@@ -130,8 +130,7 @@ Reference: [load image](loader.md#image)
         // rotate: 0,         // { start, end }, or { start, end, ease },
         // timeScale: 1,
 
-    };
-    var emitter = particles.createEmitter(config);
+    });
     ```
     - Format of value
         - `{min, max}` : Pick a random value between min and max
@@ -194,14 +193,13 @@ Reference: [load image](loader.md#image)
 ### Emit zone
 
 ```javascript
-var config = {
+emitter.setEmitZone({
     type: 'random',
     source: geom,
-};
-emitter.setEmitZone(config);
+});
 ```
 
-- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md)
+- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md), or [Path or Curve](path.md), which has `getRandomPoint(point)` method
     - Custom zone
         ```javascript
         {
@@ -220,10 +218,16 @@ emitter.setEmitZone(config);
     var source = emitter.emitZone.source;
     ```
 
+#### Clear zone
+
+```javascript
+emitter.setEmitZone();
+```
+
 ### Emit edge
 
 ```javascript
-var config = {
+emitter.setEmitZone({
     type: 'edge',
     source: curve,
 
@@ -231,11 +235,10 @@ var config = {
     stepRate: 0,
     yoyo: false,
     seamless: true
-};
-emitter.setEmitZone(config);
+});
 ```
 
-- `source` : [Path or Curve](path.md), or Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md)
+- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md), or [Path or Curve](path.md), which has `getPoints(quantity, stepRate)` method
     - Custom edge
         ```javascript
         {
@@ -247,8 +250,8 @@ emitter.setEmitZone(config);
         ```
 - `quantity` : The number of particles to place on the source edge. Set to 0 to use `stepRate` instead.
 - `stepRate` : The distance between each particle. When set, `quantity` is implied and should be set to 0.
-- `yoyo` : Whether particles are placed from start to end and then end to start.
-- `seamless` : Whether one endpoint will be removed if it's identical to the other.
+- `yoyo` : Whether particles are placed from start to end and then end to start. Default is `false`.
+- `seamless` : Whether one endpoint will be removed if it's identical to the other. Default is `true`.
 
 #### Curve surce
 
@@ -265,14 +268,19 @@ emitter.setEmitZone(config);
     emitter.emitZone.changeSource(curve);
     ```
 
+#### Clear edge zone
+
+```javascript
+emitter.setEmitZone();
+```
+
 ### Death zone
 
 ```javascript
-var config = {
+emitter.setDeathZone({
      type: 'onEnter',
      source: geom
-};
-emitter.setDeathZone(config);
+});
 ```
 
 - `type` : 'onEnter' or 'onLeave'
@@ -293,6 +301,12 @@ emitter.setDeathZone(config);
     ```javascript
     var source = emitter.deathZone.source;
     ```
+
+#### Clear zone
+
+```javascript
+emitter.setDeathZone();
+```
 
 ### Control
 
@@ -579,14 +593,13 @@ emitter.setQuantity(quantity);
     ```
     or
     ```javascript
-    var config = {
+    var well = particles.createGravityWell({
         // x: 0,
         // y: 0,
         // power: 0,
         // epsilon: 100,
         // gravity: 50
-    };
-    var well = particles.createGravityWell(config);
+    });
     ```
 - Enable
     - Active
