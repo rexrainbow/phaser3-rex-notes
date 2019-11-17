@@ -136,11 +136,15 @@ var tileXYArray = pathFinder.getPath(endTileXY);
 
 ```javascript
 var tileXYArray = pathFinder.findPath(endTileXY);
+// var tileXYArray = pathFinder.findPath(endTileXY, movingPoints, isClosest, out);
 ```
 
 - `endTileXY` : Tile position
 - `tileXYArray` : Moving path in an array of tile positions `{x,y,pathCost}`
     - Uses [moveTo behavior](board-moveto.md) to move chess along path.
+- `movingPoints`
+    - `pathFinder.INFINITY` (*undefined*) : Infinity moving points. Default value.
+- `isClosest` : Set `true` to get closest path.
 
 !!! note "Path mode"
     - Set `pathMode` to A* (`'A*'`, `'A*-random'`, or `'A*-line'`) to speed up calculating.

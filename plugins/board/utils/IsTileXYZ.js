@@ -1,8 +1,8 @@
-var IsTileXYZ = function (tileXYZ) {
-    return (!!tileXYZ) &&
-        tileXYZ.hasOwnProperty('x') &&
-        tileXYZ.hasOwnProperty('y') &&
-        tileXYZ.hasOwnProperty('z');
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
+
+var IsTileXYZ = function (obj) {
+    return (obj) &&
+        (IsPlainObject(obj) || obj.isTileXYZ);
 }
 
 export default IsTileXYZ;

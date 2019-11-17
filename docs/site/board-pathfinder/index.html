@@ -4937,6 +4937,7 @@
 </div>
 <h3 id="find-moving-path">Find moving path<a class="headerlink" href="#find-moving-path" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">findPath</span><span class="p">(</span><span class="nx">endTileXY</span><span class="p">);</span>
+<span class="c1">// var tileXYArray = pathFinder.findPath(endTileXY, movingPoints, isClosest, out);</span>
 </pre></div>
 
 <ul>
@@ -4945,6 +4946,11 @@
 <li>Uses <a href="../board-moveto/">moveTo behavior</a> to move chess along path.</li>
 </ul>
 </li>
+<li><code>movingPoints</code><ul>
+<li><code>pathFinder.INFINITY</code> (<em>undefined</em>) : Infinity moving points. Default value.</li>
+</ul>
+</li>
+<li><code>isClosest</code> : Set <code>true</code> to get closest path.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Path mode</p>

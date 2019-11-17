@@ -14,6 +14,7 @@ class Node {
         this.key = undefined;
         this.x = undefined;
         this.y = undefined;
+        this.isTileXYZ = true;
         // overwrite
 
         this._px = undefined;
