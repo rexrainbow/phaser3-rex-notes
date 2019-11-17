@@ -235,7 +235,7 @@ var config = {
 emitter.setEmitZone(config);
 ```
 
-- `source` : [Path or Curve](path.md)
+- `source` : [Path or Curve](path.md), or Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md)
     - Custom edge
         ```javascript
         {
