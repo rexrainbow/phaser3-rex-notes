@@ -3638,22 +3638,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-line" class="md-nav__link">
-    Add line
+  <a href="#line" class="md-nav__link">
+    Line
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-circleellipsearc" class="md-nav__link">
-    Add circle/ellipse/arc
+  <a href="#circleellipsearc" class="md-nav__link">
+    Circle/ellipse/arc
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-spline" class="md-nav__link">
-    Add spline
+  <a href="#spline" class="md-nav__link">
+    Spline
   </a>
   
     <nav class="md-nav">
@@ -3672,15 +3672,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-quadratic-bezier-curve" class="md-nav__link">
-    Add quadratic bezier curve
+  <a href="#quadratic-bezier-curve" class="md-nav__link">
+    Quadratic bezier curve
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-cubic-bezier-curve" class="md-nav__link">
-    Add cubic bezier curve
+  <a href="#cubic-bezier-curve" class="md-nav__link">
+    Cubic bezier curve
   </a>
   
 </li>
@@ -4785,22 +4785,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-line" class="md-nav__link">
-    Add line
+  <a href="#line" class="md-nav__link">
+    Line
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-circleellipsearc" class="md-nav__link">
-    Add circle/ellipse/arc
+  <a href="#circleellipsearc" class="md-nav__link">
+    Circle/ellipse/arc
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-spline" class="md-nav__link">
-    Add spline
+  <a href="#spline" class="md-nav__link">
+    Spline
   </a>
   
     <nav class="md-nav">
@@ -4819,15 +4819,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-quadratic-bezier-curve" class="md-nav__link">
-    Add quadratic bezier curve
+  <a href="#quadratic-bezier-curve" class="md-nav__link">
+    Quadratic bezier curve
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-cubic-bezier-curve" class="md-nav__link">
-    Add cubic bezier curve
+  <a href="#cubic-bezier-curve" class="md-nav__link">
+    Cubic bezier curve
   </a>
   
 </li>
@@ -4963,23 +4963,41 @@ or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </pre></div></p>
 <h3 id="add-curve">Add curve<a class="headerlink" href="#add-curve" title="Permanent link">&para;</a></h3>
-<h4 id="add-line">Add line<a class="headerlink" href="#add-line" title="Permanent link">&para;</a></h4>
-<ol>
+<h4 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add line object<ol>
 <li>Create line object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">);</span> <span class="c1">// p0, p1: {x, y}</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y0</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y1</span><span class="p">});</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">]);</span>
 </pre></div></li>
 <li>Add to path
     <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<p>Add line started from previous end point to next point</p>
-<p><div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">endX</span><span class="p">,</span> <span class="nx">endY</span><span class="p">);</span>
+</li>
+<li>Add line started from previous end point to next point
+    <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">endX</span><span class="p">,</span> <span class="nx">endY</span><span class="p">);</span>
 </pre></div>
-or
-<div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point : Phaser.Math.Vector2</span>
-</pre></div></p>
-<h4 id="add-circleellipsearc">Add circle/ellipse/arc<a class="headerlink" href="#add-circleellipsearc" title="Permanent link">&para;</a></h4>
-<ol>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Vector2</span><span class="p">({</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">}));</span>
+</pre></div></li>
+</ul>
+<p>Properties:</p>
+<ul>
+<li><code>curve.p0</code> : The first endpoint.<ul>
+<li><code>curve.p0.x</code>, <code>curve.p0.y</code></li>
+</ul>
+</li>
+<li><code>curve.p1</code> : The second endpoint.<ul>
+<li><code>curve.p1.x</code>, <code>curve.p1.y</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="circleellipsearc">Circle/ellipse/arc<a class="headerlink" href="#circleellipsearc" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add circle/ellipse/arc object<ol>
 <li>Create circle/ellipse/arc object<ul>
 <li>Circle
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
@@ -4988,7 +5006,7 @@ or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">);</span>
 </pre></div></li>
 <li>Arc
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">clockwise</span><span class="p">,</span> <span class="nx">rotation</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">clockwise</span><span class="p">,</span>     <span class="nx">rotation</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 </li>
@@ -4996,8 +5014,8 @@ or
     <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<p>Add circle/ellipse/arc started from previous end point to next point</p>
-<ul>
+</li>
+<li>Add circle/ellipse/arc started from previous end point to next point<ul>
 <li>Circle
     <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">circleTo</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
 </pre></div></li>
@@ -5008,49 +5026,65 @@ or
     <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">ellipseTo</span><span class="p">(</span><span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">clockwise</span><span class="p">,</span> <span class="nx">rotation</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h4 id="add-spline">Add spline<a class="headerlink" href="#add-spline" title="Permanent link">&para;</a></h4>
-<ol>
+</li>
+</ul>
+<p>Properties:</p>
+<ul>
+<li><code>curve.p0</code> : Center point.<ul>
+<li><code>curve.p0.x</code>, <code>curve.p0.y</code></li>
+</ul>
+</li>
+<li><code>curve.xRadius</code>, <code>curve.yRadius</code> : Horizontal/vertical radiuse.</li>
+<li><code>curve.startAngle</code>, <code>curve.endAngle</code> : Start/end angle, in degrees.</li>
+<li><code>curve.clockwise</code> : <code>true</code> if Clockwise, <code>false</code> if anti-clockwise.</li>
+<li><code>curve.angle</code> : Rotation, in degrees.<ul>
+<li><code>curve.rotation</code> : Rotation, in radians.</li>
+</ul>
+</li>
+</ul>
+<h4 id="spline">Spline<a class="headerlink" href="#spline" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add spline object<ol>
 <li>Create spline object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
     <span class="nx">p0</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="nx">p1</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="c1">// ...</span>
-<span class="p">];</span>
-<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="p">]);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
     <span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span>
     <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span>
     <span class="c1">// ...</span>
-<span class="p">];</span>
-<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="p">]);</span>
 </pre></div></li>
 <li>Add to path
     <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<p>Add spline started from previous end point to next point</p>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
+</li>
+<li>Add spline started from previous end point to next point
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">;</span>
+<span class="nx">path</span><span class="p">.</span><span class="nx">splineTo</span><span class="p">([</span>
     <span class="nx">p0</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="nx">p1</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="c1">// ...</span>
-<span class="p">];</span>
-<span class="nx">path</span><span class="p">.</span><span class="nx">splineTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="p">]);</span>
 </pre></div>
-or
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">splineTo</span><span class="p">([</span>
     <span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span>
     <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span>
     <span class="c1">// ...</span>
-<span class="p">];</span>
-<span class="nx">path</span><span class="p">.</span><span class="nx">splineTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
-</pre></div></p>
+<span class="p">]);</span>
+</pre></div></li>
+</ul>
 <h5 id="append-point">Append point<a class="headerlink" href="#append-point" title="Permanent link">&para;</a></h5>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">addPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="add-quadratic-bezier-curve">Add quadratic bezier curve<a class="headerlink" href="#add-quadratic-bezier-curve" title="Permanent link">&para;</a></h4>
+<h4 id="quadratic-bezier-curve">Quadratic bezier curve<a class="headerlink" href="#quadratic-bezier-curve" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create quadratic bezier curve object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
@@ -5073,7 +5107,7 @@ or
 or
 <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">quadraticBezierTo</span><span class="p">(</span><span class="nx">endPoint</span><span class="p">,</span> <span class="nx">controlPoint</span><span class="p">);</span>  <span class="c1">// point : Phaser.Math.Vector2</span>
 </pre></div></p>
-<h4 id="add-cubic-bezier-curve">Add cubic bezier curve<a class="headerlink" href="#add-cubic-bezier-curve" title="Permanent link">&para;</a></h4>
+<h4 id="cubic-bezier-curve">Cubic bezier curve<a class="headerlink" href="#cubic-bezier-curve" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create quadratic bezier curve object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint1</span><span class="p">,</span> <span class="nx">controlPoint2</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
@@ -5181,13 +5215,13 @@ or
 or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
 </pre></div></p>
+<p>Length of path/curve will be cached.</p>
 <h4 id="update-length">Update length<a class="headerlink" href="#update-length" title="Permanent link">&para;</a></h4>
 <p><div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">updateArcLengths</span><span class="p">();</span>
 </pre></div>
 or
 <div class="codehilite"><pre><span></span><span class="nx">curve</span><span class="p">.</span><span class="nx">updateArcLengths</span><span class="p">();</span>
 </pre></div></p>
-<p>Length of path/curve will be cached.</p>
 <h3 id="curves-to-json">Curves to JSON<a class="headerlink" href="#curves-to-json" title="Permanent link">&para;</a></h3>
 <p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
 </pre></div>

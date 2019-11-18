@@ -328,6 +328,8 @@ or
 var l = curve.getLength();
 ```
 
+Length of path/curve will be cached.
+
 #### Update length
 
 ```javascript
@@ -337,8 +339,6 @@ or
 ```javascript
 curve.updateArcLengths();
 ```
-
-Length of path/curve will be cached.
 
 ### Curves to JSON
 
