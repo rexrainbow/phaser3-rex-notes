@@ -34,106 +34,121 @@ var path = new Phaser.Curves.Path(json);
 
 ### Add curve
 
-#### Add line
+#### Line
 
-1. Create line object
-    ```javascript
-    var curve = new Phaser.Curves.Line(p0, p1); // p0, p1: {x, y}
-    ```
-1. Add to path
-    ```javascript
-    path.add(curve);
-    ```
-
-Add line started from previous end point to next point
-
-```javascript
-path.lineTo(endX, endY);
-```
-or
-```javascript
-path.lineTo(point);  // point : Phaser.Math.Vector2
-```
-
-#### Add circle/ellipse/arc
-
-1. Create circle/ellipse/arc object
-    - Circle
+- Add line object
+    1. Create line object
         ```javascript
-        var curve = new Phaser.Curves.Ellipse(x, y, radius);
+        var curve = new Phaser.Curves.Line({x: x0, y: y0}, {x: x1, y: y1});
         ```
-    - Ellipse
+        or
         ```javascript
-        var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius);
+        var curve = new Phaser.Curves.Line([x0, y0, x1, y1]);
         ```
-    - Arc
+    1. Add to path
         ```javascript
-        var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius, startAngle, endAngle, clockwise, rotation);
+        path.add(curve);
         ```
-1. Add to path
+- Add line started from previous end point to next point
     ```javascript
-    path.add(curve);
-    ```
-
-Add circle/ellipse/arc started from previous end point to next point
-
-- Circle
-    ```javascript
-    path.circleTo(radius);
-    ```
-- Ellipse
-    ```javascript
-    path.ellipseTo(xRadius, yRadius);
-    ```
-- Arc
-    ```javascript
-    path.ellipseTo(xRadius, yRadius, startAngle, endAngle, clockwise, rotation);
-    ```
-
-#### Add spline
-
-1. Create spline object
-    ```javascript
-    var points = [
-        p0,            // {x, y}, or [x, y]
-        p1,            // {x, y}, or [x, y]
-        // ...
-    ];
-    var curve = new Phaser.Curves.Spline(points);
+    path.lineTo(endX, endY);
     ```
     or
     ```javascript
-    var points = [
+    path.lineTo(new Phaser.Math.Vector2({x, y}));
+    ```
+
+Properties:
+
+- `curve.p0` : The first endpoint.
+    - `curve.p0.x`, `curve.p0.y`
+- `curve.p1` : The second endpoint.
+    - `curve.p1.x`, `curve.p1.y`
+
+#### Circle/ellipse/arc
+
+- Add circle/ellipse/arc object
+    1. Create circle/ellipse/arc object
+        - Circle
+            ```javascript
+            var curve = new Phaser.Curves.Ellipse(x, y, radius);
+            ```
+        - Ellipse
+            ```javascript
+            var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius);
+            ```
+        - Arc
+            ```javascript
+            var curve = new Phaser.Curves.Ellipse(x, y, xRadius, yRadius, startAngle, endAngle, clockwise,     rotation);
+            ```
+    1. Add to path
+        ```javascript
+        path.add(curve);
+        ```
+- Add circle/ellipse/arc started from previous end point to next point
+    - Circle
+        ```javascript
+        path.circleTo(radius);
+        ```
+    - Ellipse
+        ```javascript
+        path.ellipseTo(xRadius, yRadius);
+        ```
+    - Arc
+        ```javascript
+        path.ellipseTo(xRadius, yRadius, startAngle, endAngle, clockwise, rotation);
+        ```
+
+Properties:
+
+- `curve.p0` : Center point.
+    - `curve.p0.x`, `curve.p0.y`
+- `curve.xRadius`, `curve.yRadius` : Horizontal/vertical radiuse.
+- `curve.startAngle`, `curve.endAngle` : Start/end angle, in degrees.
+- `curve.clockwise` : `true` if Clockwise, `false` if anti-clockwise.
+- `curve.angle` : Rotation, in degrees.
+    - `curve.rotation` : Rotation, in radians.
+
+#### Spline
+
+- Add spline object
+    1. Create spline object
+        ```javascript
+        var curve = new Phaser.Curves.Spline([
+            p0,            // {x, y}, or [x, y]
+            p1,            // {x, y}, or [x, y]
+            // ...
+        ]);
+        ```
+        or
+        ```javascript
+        var curve = new Phaser.Curves.Spline([
+            x0, y0,
+            x1, y1,
+            // ...
+        ]);
+        ```
+    1. Add to path
+        ```javascript
+        path.add(curve);
+        ```
+- Add spline started from previous end point to next point
+    ```javascript
+    var points = ;
+    path.splineTo([
+        p0,            // {x, y}, or [x, y]
+        p1,            // {x, y}, or [x, y]
+        // ...
+    ]);
+    ```
+    or
+    ```javascript
+    path.splineTo([
         x0, y0,
         x1, y1,
         // ...
-    ];
-    var curve = new Phaser.Curves.Spline(points);
+    ]);
     ```
-1. Add to path
-    ```javascript
-    path.add(curve);
-    ```
-
-Add spline started from previous end point to next point
-
-```javascript
-var points = [
-    p0,            // {x, y}, or [x, y]
-    p1,            // {x, y}, or [x, y]
-    // ...
-];
-path.splineTo(points);
-```
-or
-```javascript
-var points = [
-    x0, y0,
-    x1, y1,
-    // ...
-];
-path.splineTo(points);
-```
 
 ##### Append point
 
@@ -141,7 +156,7 @@ path.splineTo(points);
 var point = curve.addPoint(x, y);
 ```
 
-#### Add quadratic bezier curve
+#### Quadratic bezier curve
 
 1. Create quadratic bezier curve object
     ```javascript
@@ -171,7 +186,7 @@ or
 path.quadraticBezierTo(endPoint, controlPoint);  // point : Phaser.Math.Vector2
 ```
 
-#### Add cubic bezier curve
+#### Cubic bezier curve
 
 1. Create quadratic bezier curve object
     ```javascript
