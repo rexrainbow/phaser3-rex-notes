@@ -1,4 +1,5 @@
-import Align from '../../plugins/utils/align/align/index.js';
+import NinePatchPlugin from '../../plugins/ninepatch-plugin.js'
+
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -7,21 +8,42 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.load.image('bg3', 'https://i.ibb.co/jyg60YK/actionbox.png'); // 372 x 561
+    }
 
     create() {
-        var bg = this.add.rectangle(0, 0, 10, 10, 0x880088).setDisplaySize(300, 300).setOrigin(1);
-        var obj = this.add.rectangle(0, 0, 10, 10, 0x008800).setDisplaySize(40, 40).setOrigin(1);
+        this.add.rexNinePatch({
+            x: 200, y: 430,
+            width: 372*2, height: 561/2,
+            key: 'bg3',
+            columns: [100, undefined, 100],
+            rows: [100, undefined, 100],
+            stretchMode: 0
+        }).setScale(0.5)
 
-        Align.In.Center(bg, this.add.zone(400, 300, 800, 600));
+        this.add.rexNinePatch({
+            x: 200, y: 200,
+            width: 372*2, height: 561,
+            key: 'bg3',
+            columns: [100, undefined, 100],
+            rows: [100, undefined, 100],
+            stretchMode: 0
+        }).setScale(0.5)
 
-        Align.In.TopLeft(obj, bg);
+        this.add.rexNinePatch({
+            x: 500, y: 200,
+            width: 372/2, height: 561,
+            key: 'bg3',
+            columns: [100, undefined, 100],
+            rows: [100, undefined, 100],
+            stretchMode: 0
+        }).setScale(0.5)
     }
 
     update(time, delta) {
     }
 }
-
 
 var config = {
     type: Phaser.AUTO,
@@ -32,7 +54,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexNinePatch',
+            plugin: NinePatchPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
