@@ -44,18 +44,6 @@ class Line extends RenderTexture {
         }
     }
 
-    preDestroy() {
-        if (this._image) {
-            this._image.destroy();
-            this._image = undefined;
-        }
-        if (this._tileSprite) {
-            this._tileSprite.destroy();
-            this._tileSprite = undefined;
-        }
-        super.preDestroy();
-    }
-
     get x0() {
         return this._x0;
     }

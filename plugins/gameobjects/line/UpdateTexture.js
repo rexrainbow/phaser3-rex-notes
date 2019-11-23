@@ -1,3 +1,5 @@
+import MakeChildImageGameObject from '../../utils/rendertexture/MakeChildImageGameObject.js';
+
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
 
@@ -68,24 +70,12 @@ var UpdateTexture = function () {
     if (lineBodyFrame && (remainderWidth > 0) && (lineBodyHeight > 0)) {
         var lineBody;
         if (this.lineBodyExtendMode === 0) {
-            if (this._image === undefined) {
-                this._image = this.scene.make.image({
-                    add: false,
-                    origin: { x: 0, y: 0 },
-                });
-            }
-            lineBody = this._image;
+            lineBody = MakeChildImageGameObject(this, '_image', 'image');
             lineBody
                 .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
                 .setDisplaySize(remainderWidth, lineBodyHeight);
         } else {
-            if (this._tileSprite === undefined) {
-                this._tileSprite = this.scene.make.tileSprite({
-                    add: false,
-                    origin: { x: 0, y: 0 },
-                });
-            }
-            lineBody = this._tileSprite;
+            lineBody = MakeChildImageGameObject(this, '_tileSprite', 'tileSprite');
             lineBody
                 .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
                 .setSize(remainderWidth, lineBodyHeight);

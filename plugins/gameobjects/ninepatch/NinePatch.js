@@ -34,25 +34,13 @@ class NinePatch extends RenderTexture {
         this.columns = {};
         this.rows = {};
         this.stretchMode = {};
-        this._image = undefined;
-        this._tileSprite = undefined;
+        this._tileSprite = undefined; // Reserved for drawing image
+        this._image = undefined; // Reserved for drawing image
 
         this.setOrigin(0.5, 0.5);
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
         this.setTexture(key, columns, rows); // Also update render texture
-    }
-
-    preDestroy() {
-        if (this._image) {
-            this._image.destroy();
-            this._image = undefined;
-        }
-        if (this._tileSprite) {
-            this._tileSprite.destroy();
-            this._tileSprite = undefined;
-        }
-        super.preDestroy();
     }
 
     setGetFrameNameCallback(callback) {
