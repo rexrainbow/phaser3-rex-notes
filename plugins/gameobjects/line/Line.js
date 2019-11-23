@@ -7,8 +7,8 @@ class Line extends RenderTexture {
     constructor(scene, config) {
         super(scene);
         this.redraw = false;
-        this._tileSprite = undefined;
-        this._image = undefined;
+        this._tileSprite = undefined; // Reserved for drawing image
+        this._image = undefined; // Reserved for drawing image
 
         var lineStart = GetValue(config, 'start', undefined);
         if (typeof (lineStart) === 'string') {
