@@ -176,6 +176,20 @@ txt.setFont(key);
 // txt.setFont(key, size, align);
 ```
 
+### Wrap
+
+- Wrap
+    ```javascript
+    txt.setMaxWidth(width);
+    // txt.setMaxWidth(width, wordWrapCharCode);
+    ```
+    - `width` : Line width in pixels.
+    - `wordWrapCharCode` : The character code to check for when word wrapping. Defaults to 32 (the *space* character)
+- Disable wrapping
+    ```javascript
+    txt.setMaxWidth(0);
+    ```
+
 ### Get bound
 
 ```javascript

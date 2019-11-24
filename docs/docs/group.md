@@ -97,17 +97,160 @@ group.clear();
 
 ### Group actions
 
-```javascript
-group.playAnimation(key, startFrame);
-```
+#### Property
 
-```javascript
-group.toggleVisible();
-```
+- Set property
+    ```javascript
+    group.propertyValueSet(key, value);
+    // group.propertyValueSet(key, value, step, index, direction);
+    ```
+    - `direction` : 
+        - `1` : From beginning to end 
+        - `-1` : From end to beginning
+- Increase property
+    ```javascript
+    group.propertyValueInc(key, value);
+    // group.propertyValueInc(key, value, step, index, direction);
+    ```
+    - `direction` : 
+        - `1` : From beginning to end 
+        - `-1` : From end to beginning
 
-```javascript
-group.setDepth(value, step);
-```
+#### Position
+
+- Set Position
+    ```javascript
+    group.setX(value);
+    // group.setX(value, step);
+    group.setX(value);
+    // group.setY(value, step);
+    group.setXY(x, y);
+    // group.setXY(x, y, stepX, stepY);
+    ```
+- Increase Position
+    ```javascript
+    group.incX(value);
+    // group.incX(value, step);
+    group.incY(value);
+    // group.incY(value, step);
+    group.incXY(x, y);
+    // group.incXY(x, y, stepX, stepY);
+    ```
+- Shift position
+    ```javascript
+    group.shiftPosition(x, y);
+    // group.shiftPosition(x, y, direction);
+    ```
+    - `direction` : 
+        - `0` : First to last
+        - `1` : Last to first
+
+#### Angle
+
+- Set angle
+    ```javascript
+    group.angle(value);
+    // group.angle(value, step);
+    ```
+    ```javascript
+    group.rotate(value);
+    // group.rotate(value, step);
+    ```
+- Rotate around
+    ```javascript
+    group.rotateAround(point, angle);
+    ```
+    ```javascript
+    group.rotateAroundDistance(point, angle, distance);
+    ```
+
+#### Visible
+
+- Set visible
+    ```javascript
+    group.setVisible(value);
+    // group.setVisible(value, index, direction);
+    ```
+    - `index` : An optional offset to start searching from within the items array.
+    - `direction` : The direction to iterate through the array.
+        - `1` : From beginning to end
+        - `-1` : From end to beginning
+- Toggle visible
+    ```javascript
+    group.toggleVisible();
+    ```
+
+#### Alpha
+
+- Set alpha
+    ```javascript
+    group.setAlpha(value);
+    // group.setAlpha(value, step);
+    ```
+
+#### Tint
+
+- Set tint
+    ```javascript
+    group.setTint(value);
+    // group.setTint(topLeft, topRight, bottomLeft, bottomRight);
+    ```
+
+#### Blend mode
+
+- Set blend mode
+    ```javascript
+    group.setBlendMode(value);
+    ```
+
+#### Scale
+
+- Set scale
+    ```javascript
+    group.scaleX(value);
+    // group.scaleX(value, step);
+    group.scaleY(value);
+    // group.scaleY(value, step);
+    group.scaleXY(scaleX, scaleY);
+    // group.scaleXY(scaleX, scaleY, stepX, stepY);
+    ```
+
+#### Origin
+
+- Set origin
+    ```javascript
+    group.setOrigin(originX, originY);
+    // group.setOrigin(originX, originY, stepX, stepY);
+    ```
+
+#### Depth
+
+- Set depth
+    ```javascript
+    group.setDepth(value, step);
+    ```
+
+#### Animation
+
+- Play animation
+    ```javascript
+    group.playAnimation(key, startFrame);
+    ```
+
+#### Hit area
+
+- Set hit-area
+    ```javascript
+    group.setHitArea();
+    // group.setHitArea(hitArea, hitAreaCallback);
+    ```
+
+#### Shuffle
+
+- Shuffle array
+    ```javascript
+    group.shuffle();
+    ```
 
 ### Active/inactive game objects
 

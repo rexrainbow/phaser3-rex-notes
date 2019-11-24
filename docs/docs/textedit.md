@@ -149,3 +149,9 @@ Text editor will be closed when
 - Touch outside of editor, or
 - Open another text editor, or
 - Call `editor.close()`
+
+### Get DOM
+
+```javascript
+var inputText = editor.inputText.node;
+```

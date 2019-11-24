@@ -1419,6 +1419,103 @@
     Group actions
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#property" class="md-nav__link">
+    Property
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position" class="md-nav__link">
+    Position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visible" class="md-nav__link">
+    Visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha" class="md-nav__link">
+    Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tint" class="md-nav__link">
+    Tint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blend-mode" class="md-nav__link">
+    Blend mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale" class="md-nav__link">
+    Scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depth" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation" class="md-nav__link">
+    Animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area" class="md-nav__link">
+    Hit area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" class="md-nav__link">
+    Shuffle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4683,6 +4780,103 @@
     Group actions
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#property" class="md-nav__link">
+    Property
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position" class="md-nav__link">
+    Position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visible" class="md-nav__link">
+    Visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha" class="md-nav__link">
+    Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tint" class="md-nav__link">
+    Tint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blend-mode" class="md-nav__link">
+    Blend mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale" class="md-nav__link">
+    Scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depth" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation" class="md-nav__link">
+    Animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area" class="md-nav__link">
+    Hit area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" class="md-nav__link">
+    Shuffle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4810,15 +5004,157 @@
 </pre></div></li>
 </ul>
 <h3 id="group-actions">Group actions<a class="headerlink" href="#group-actions" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">playAnimation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">startFrame</span><span class="p">);</span>
+<h4 id="property">Property<a class="headerlink" href="#property" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set property
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">propertyValueSet</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.propertyValueSet(key, value, step, index, direction);</span>
+</pre></div><ul>
+<li><code>direction</code> : <ul>
+<li><code>1</code> : From beginning to end </li>
+<li><code>-1</code> : From end to beginning</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Increase property
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">propertyValueInc</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.propertyValueInc(key, value, step, index, direction);</span>
+</pre></div><ul>
+<li><code>direction</code> : <ul>
+<li><code>1</code> : From beginning to end </li>
+<li><code>-1</code> : From end to beginning</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set Position
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.setX(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">setX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.setY(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">setXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// group.setXY(x, y, stepX, stepY);</span>
+</pre></div></li>
+<li>Increase Position
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">incX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.incX(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">incY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.incY(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">incXY</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// group.incXY(x, y, stepX, stepY);</span>
+</pre></div></li>
+<li>Shift position
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">shiftPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// group.shiftPosition(x, y, direction);</span>
+</pre></div><ul>
+<li><code>direction</code> : <ul>
+<li><code>0</code> : First to last</li>
+<li><code>1</code> : Last to first</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set angle
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">angle</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.angle(value, step);</span>
 </pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">toggleVisible</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.rotate(value, step);</span>
+</pre></div></li>
+<li>Rotate around
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
 </pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
-</pre></div>
-
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">rotateAroundDistance</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">angle</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set visible
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.setVisible(value, index, direction);</span>
+</pre></div><ul>
+<li><code>index</code> : An optional offset to start searching from within the items array.</li>
+<li><code>direction</code> : The direction to iterate through the array.<ul>
+<li><code>1</code> : From beginning to end</li>
+<li><code>-1</code> : From end to beginning</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Toggle visible
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">toggleVisible</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h4 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set alpha
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.setAlpha(value, step);</span>
+</pre></div></li>
+</ul>
+<h4 id="tint">Tint<a class="headerlink" href="#tint" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set tint
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setTint</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.setTint(topLeft, topRight, bottomLeft, bottomRight);</span>
+</pre></div></li>
+</ul>
+<h4 id="blend-mode">Blend mode<a class="headerlink" href="#blend-mode" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set blend mode
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set scale
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.scaleX(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// group.scaleY(value, step);</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">scaleXY</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
+<span class="c1">// group.scaleXY(scaleX, scaleY, stepX, stepY);</span>
+</pre></div></li>
+</ul>
+<h4 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set origin
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">originX</span><span class="p">,</span> <span class="nx">originY</span><span class="p">);</span>
+<span class="c1">// group.setOrigin(originX, originY, stepX, stepY);</span>
+</pre></div></li>
+</ul>
+<h4 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set depth
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Play animation
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">playAnimation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">startFrame</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="hit-area">Hit area<a class="headerlink" href="#hit-area" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set hit-area
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setHitArea</span><span class="p">();</span>
+<span class="c1">// group.setHitArea(hitArea, hitAreaCallback);</span>
+</pre></div></li>
+</ul>
+<h4 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Shuffle array
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="activeinactive-game-objects">Active/inactive game objects<a class="headerlink" href="#activeinactive-game-objects" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set inactive

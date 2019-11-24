@@ -1813,6 +1813,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies-inside-an-area" class="md-nav__link">
+    Bodies inside an area
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
@@ -4893,6 +4906,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies-inside-an-area" class="md-nav__link">
+    Bodies inside an area
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
@@ -5192,6 +5218,23 @@
 </ul>
 </li>
 </ul>
+<h3 id="bodies-inside-an-area">Bodies inside an area<a class="headerlink" href="#bodies-inside-an-area" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Overlap a rectangle area
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bodies</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">overlapRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">includeDynamic</span><span class="p">,</span> <span class="nx">includeStatic</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>includeDynamic</code> : Set <code>true</code> to search Dynamic Bodies</li>
+<li><code>includeStatic</code> : Set <code>true</code> to search Static Bodies</li>
+</ul>
+</li>
+<li>Overlap a circle area
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bodies</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">overlapCirc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">includeDynamic</span><span class="p">,</span> <span class="nx">includeStatic</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>includeDynamic</code> : Set <code>true</code> to search Dynamic Bodies</li>
+<li><code>includeStatic</code> : Set <code>true</code> to search Static Bodies</li>
+</ul>
+</li>
+</ul>
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>World bounds
@@ -5246,10 +5289,18 @@
 <ul>
 <li>Closest
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point: {x,y}</span>
-</pre></div></li>
+<span class="c1">// var body = scene.physics.closest(point, targets);</span>
+</pre></div><ul>
+<li><code>targets</code> : Array of Arcade Physics Game Object, Body or Static Body.</li>
+</ul>
+</li>
 <li>Furthest
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">furthest</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point: {x,y}</span>
-</pre></div></li>
+<span class="c1">// var body = scene.physics.furthest(point, targets);</span>
+</pre></div><ul>
+<li><code>targets</code> : Array of Arcade Physics Game Object, Body or Static Body.</li>
+</ul>
+</li>
 </ul>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <h4 id="draw-body-velocity">Draw body &amp; velocity<a class="headerlink" href="#draw-body-velocity" title="Permanent link">&para;</a></h4>

@@ -203,6 +203,21 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
         var right = scene.physics.world.bounds.right;
         ```
 
+### Bodies inside an area
+
+- Overlap a rectangle area
+    ```javascript
+    var bodies = scene.physics.overlapRect(x, y, width, height, includeDynamic, includeStatic);
+    ```
+    - `includeDynamic` : Set `true` to search Dynamic Bodies
+    - `includeStatic` : Set `true` to search Static Bodies
+- Overlap a circle area
+    ```javascript
+    var bodies = scene.physics.overlapCirc(x, y, radius, includeDynamic, includeStatic);
+    ```
+    - `includeDynamic` : Set `true` to search Dynamic Bodies
+    - `includeStatic` : Set `true` to search Static Bodies
+
 #### Events
 
 - World bounds
@@ -266,11 +281,15 @@ Total Gravity = world.gravity + body.gravity
 - Closest
     ```javascript
     var body = scene.physics.closest(point);  // point: {x,y}
+    // var body = scene.physics.closest(point, targets);
     ```
+    - `targets` : Array of Arcade Physics Game Object, Body or Static Body.
 - Furthest
     ```javascript
     var body = scene.physics.furthest(point);  // point: {x,y}
+    // var body = scene.physics.furthest(point, targets);
     ```
+    - `targets` : Array of Arcade Physics Game Object, Body or Static Body.
 
 ### Debug
 

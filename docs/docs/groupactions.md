@@ -260,6 +260,20 @@ Phaser.Actions.ScaleY(gameObjects, value, step, index, direction);
 Phaser.Actions.ScaleXY(gameObjects, x, y, stepX, stepY, index, direction);
 ```
 
+### Scroll factor
+
+```javascript
+Phaser.Actions.SetScrollFactorX(gameObjects, value, step, index, direction);
+```
+
+```javascript
+Phaser.Actions.SetScrollFactorY(gameObjects, value, step, index, direction);
+```
+
+```javascript
+Phaser.Actions.SetScrollFactor(gameObjects, x, y, stepX, stepY, index, direction);
+```
+
 ### Depth
 
 ```javascript
