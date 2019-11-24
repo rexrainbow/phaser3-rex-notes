@@ -7,24 +7,24 @@ var UpdateTexture = function () {
         return this;
     }
 
-    var remainderWidth = this.width - this.columns.minWidth;
+    var stretchWidth = this.width - this.columns.minWidth;
     var proportionWidth, fixedPartScaleX;
-    if (remainderWidth >= 0) {
-        proportionWidth = (this.columns.stretch > 0) ? (remainderWidth / this.columns.stretch) : 0;
+    if (stretchWidth >= 0) {
+        proportionWidth = (this.columns.stretch > 0) ? (stretchWidth / this.columns.stretch) : 0;
         fixedPartScaleX = 1;
     } else {
         proportionWidth = 0;
-        fixedPartScaleX = (-remainderWidth / this.columns.minWidth);
+        fixedPartScaleX = (this.width / this.columns.minWidth);
     }
 
-    var remainderHeight = this.height - this.rows.minHeight;
+    var stretchHeight = this.height - this.rows.minHeight;
     var proportionHeight, fixedPartScaleY;
-    if (remainderHeight >= 0) {
-        proportionHeight = (this.rows.stretch > 0) ? (remainderHeight / this.rows.stretch) : 0;
+    if (stretchHeight >= 0) {
+        proportionHeight = (this.rows.stretch > 0) ? (stretchHeight / this.rows.stretch) : 0;
         fixedPartScaleY = 1;
     } else {
         proportionHeight = 0;
-        fixedPartScaleY = (-remainderHeight / this.rows.minHeight);
+        fixedPartScaleY = (this.height / this.rows.minHeight);
     }
 
     var frameName, col, row, colWidth, rowHeight;
