@@ -94,12 +94,14 @@ var SetTexture = function (key, columns, rows) {
                 frameName = this.getFrameNameCallback(i, j);
                 if (frameName) {
                     texture.add(
-                        this.getFrameNameCallback(i, j), 0,
+                        frameName, 0,
                         offsetX, offsetY,
                         colWidth, rowHeight
                     );
                     // Do nothing if frameName is existed
                 }
+            } else {
+                console.warn(`Size of Grid(${i},${j}) = ${colWidth}x${rowHeight}, which is invalid`);
             }
             offsetX += colWidth;
         }

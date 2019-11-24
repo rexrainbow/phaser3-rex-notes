@@ -3,7 +3,11 @@ import MakeChildImageGameObject from '../../../utils/rendertexture/MakeChildImag
 var UpdateTexture = function () {
     this.clear();
 
-    if ((this.textureKey === undefined) || (!this.scene.textures.get(this.textureKey))) {
+    if (this.textureKey === undefined) {
+        return this;
+    }
+    var texture = this.scene.textures.get(this.textureKey);
+    if (!texture) {
         return this;
     }
 
@@ -40,7 +44,7 @@ var UpdateTexture = function () {
             colWidth = (col.stretch === 0) ? (col.width * fixedPartScaleX) : (proportionWidth * col.stretch);
 
             frameName = this.getFrameNameCallback(i, j);
-            if (frameName && (colWidth > 0) && (rowHeight > 0)) {
+            if (frameName && (colWidth > 0) && (rowHeight > 0) && texture.has(frameName)) {
                 if ((row.stretch === 0) && (col.stretch === 0)) { // Fixed parts
                     imageType = 0; // Draw image
                 } else { // Stretchable parts
