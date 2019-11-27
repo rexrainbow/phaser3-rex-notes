@@ -60,7 +60,7 @@ Default configuration
     width: undefined,
     height: undefined,
 
-    type: 'text',    // 'text'|'password'|'textarea'
+    type: 'text',    // 'text'|'password'|'textarea'|'number'|'color'|...
 
     // Element properties
     id: undefined,
@@ -85,7 +85,7 @@ Default configuration
 - `x`, `y` : Position
 - `width`, `height` : Size of element
 - `type` : Type of element
-    - `'text'`, `'password'`, or `'textarea'`
+    - `'text'`, `'password'`, `'textarea'`, `'number'`, `'color'`, ...
 - Element properties
     - `id` : `id` element property.
     - `text` : `value` element property.
