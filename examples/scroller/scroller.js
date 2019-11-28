@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
         var config = {
             image: 'knighthawks',
             width: 31,
-            height: 25,
+            height: 24,
             chars: Phaser.GameObjects.RetroFont.TEXT_SET2,
             charsPerRow: 10,
             spacing: {
