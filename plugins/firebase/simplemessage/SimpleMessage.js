@@ -1,89 +1,108 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
+import GetRef from '../utils/GetRef.js';
 
 class SimpleMessage {
-    constructor() {
+    constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.isUpdating = false;
+        this.database = config.app.database();
+        this.rootPath = GetValue(config, 'root', '');
+
+        // Sender
+        this.lastSendToID = undefined;
+        this.sendToRef = undefined;
         this.skipFirst = true;
         this.stamp = false;
-        this.ref = undefined;
-        this.onReadCallback = undefined;
+        var senderID = GetValue(config, 'senderID', '');
+        var senderName = GetValue(config, 'senderName', '');
+        this.setSender(senderID, senderName);
+
+        // Receiver
+        this.isReceiving = false;
+        this.receiverID = undefined;
+        this.receiverRef = undefined;
     }
 
-    setRef(ref) {
-        var isUpdating = this.isUpdating;
-        this.stopUpdate();
-        this.ref = ref;
-        if (isUpdating) {
-            this.startUpdate();
-        }
+    setSender(senderID, senderName) {
+        this.senderID = senderID;
+        this.senderName = senderName;
+        return this;
     }
 
-    send(message, senderID, senderName) {
-        if (this.ref === undefined) {
-            return this;
+    send(sendToID, message) {
+        if (sendToID !== this.lastSendToID) {
+            this.lastSendToID = sendToID;
+            this.sendToRef = GetRef(this.database, this.rootPath, sendToID);
         }
 
-        // Clean message
-        if (message == undefined) {
-            this.ref.remove();
+        // Clear message
+        if (message === undefined) {
+            this.sendToRef.remove();
             return this;
         }
 
         var d = {
             message: message,
-            senderID: senderID,
-            senderName: senderName,
+            senderID: this.senderID,
+            senderName: this.senderName,
             stamp: this.stamp,
         };
         this.skipFirst = false;
-        this.ref.set(d);
         this.stamp = !this.stamp;
+        this.sendToRef.set(d);
         return this;
     }
 
-    onRead(snapshot) {
+    startReceiving(receiverID) {
+        if (receiverID === undefined) {
+            receiverID = this.senderID;
+        }
+        if (this.isReceiving && (receiverID === this.receiverID)) {
+            return this;
+        }
+
+        this.stopReceiving();
+
+        this.isReceiving = true;
+        this.receiverID = receiverID;
+        this.skipFirst = true;  // Skip previous message
+        this.receiverRef = GetRef(this.database, this.rootPath, receiverID);
+        this.receiverRef.on('value', this._onReceive, this);
+        this.receiverRef.onDisconnect().remove();
+        return this;
+    }
+
+    stopReceiving() {
+        if (!this.isReceiving) {
+            return this;
+        }
+
+        this.isReceiving = false;
+        this.receiverID = undefined;
+        this.receiverRef.off('value', this._onReceive, this);
+        this.receiverRef.remove();
+        this.receiverRef.onDisconnect().cancel();
+        this.receiverRef = undefined;
+        return this;
+    }
+
+    _onReceive(snapshot) {
         var d = snapshot.val();
-        if (self.skipFirst) {
-            self.skipFirst = false;
+        if (this.skipFirst) {
+            this.skipFirst = false;
             return;
         }
         if (d == null) {
             return;
         }
 
-        self.emit('receive', d);
+        this.emit('receive', d);
     }
 
-    startUpdate(ref) {
-        this.stopUpdate();
-
-        this.isUpdating = true;
-        this.skipFirst = true;  // Skip previous message
-        if (ref !== undefined) {
-            this.ref = ref;
-        }
-        this.ref.on('value', this.onRead);
-        this.ref.onDisconnect().remove();
-        return this;
-    }
-
-    stopUpdate() {
-        if (!this.isUpdating) {
-            return this;
-        }
-
-        this.isUpdating = false;
-        this.ref.off('value', this.onRead);
-        this.ref.remove();
-        this.ref.onDisconnect().cancel();
-        return this;
-    }
 }
 
 Object.assign(
