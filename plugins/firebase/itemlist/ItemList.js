@@ -1,6 +1,7 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import ItemMethods from './ItemMethods.js';
+import DefaultGetItemCallback from './callbacks/DefaultGetItemCallback.js';
 import UpdateOnce from './updaters/UpdateOnce.js';
 import UpdateChild from './updaters/UpdateChild.js';
 import UpdateAll from './updaters/UpdateAll.js';
@@ -15,9 +16,15 @@ class ItemList {
         this.isUpdating = false;
         this.items = [];
         this.itemID2Index = {};
+        this.eventNames = {
+            update: GetValue(config, 'eventNames.update', 'update'),
+            add: GetValue(config, 'eventNames.add', 'add'),
+            remove: GetValue(config, 'eventNames.remove', 'remove'),
+            change: GetValue(config, 'eventNames.change', 'change')
+        }
         this.setItemIDKey(GetValue(config, 'itemIDKey', '__itemID__'));
         this.setMode(GetValue(config, 'mode', 1));
-        this.setGetitemCallback(Getvalue(config, 'getItemCallback', undefined), Getvalue(config, 'getItemCallbackScope', undefined));
+        this.setGetitemCallback(Getvalue(config, 'getItemCallback', DefaultGetItemCallback), Getvalue(config, 'getItemCallbackScope', this));
         this.setQuery(GetValue(config, 'query', undefined));
     }
 

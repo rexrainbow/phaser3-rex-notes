@@ -3,17 +3,16 @@ import GetValue from '../../utils/object/GetValue.js';
 import GetRef from '../utils/GetRef.js';
 
 class SimpleMessage {
-    constructor(config) {
+    constructor(app, config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.database = config.app.database();
+        this.database = app.database();
         this.rootPath = GetValue(config, 'root', '');
 
         // Sender
-        this.lastSendToID = undefined;
         this.sendToRef = undefined;
         this.skipFirst = true;
         this.stamp = false;
@@ -32,8 +31,8 @@ class SimpleMessage {
     }
 
     send(sendToID, message) {
-        if (sendToID !== this.lastSendToID) {
-            this.lastSendToID = sendToID;
+        debugger
+        if ((!this.sendToRef) || (this.sendToRef.key !== sendToID)) {
             this.sendToRef = GetRef(this.database, this.rootPath, sendToID);
         }
 
@@ -59,17 +58,16 @@ class SimpleMessage {
         if (receiverID === undefined) {
             receiverID = this.senderID;
         }
-        if (this.isReceiving && (receiverID === this.receiverID)) {
+        if (this.isReceiving && (this.receiverRef.key === receiverID)) {
             return this;
         }
 
         this.stopReceiving();
 
         this.isReceiving = true;
-        this.receiverID = receiverID;
         this.skipFirst = true;  // Skip previous message
         this.receiverRef = GetRef(this.database, this.rootPath, receiverID);
-        this.receiverRef.on('value', this._onReceive, this);
+        this.receiverRef.on('value', OnReceive, this);
         this.receiverRef.onDisconnect().remove();
         return this;
     }
@@ -80,26 +78,25 @@ class SimpleMessage {
         }
 
         this.isReceiving = false;
-        this.receiverID = undefined;
-        this.receiverRef.off('value', this._onReceive, this);
+        this.receiverRef.off('value', OnReceive, this);
         this.receiverRef.remove();
         this.receiverRef.onDisconnect().cancel();
         return this;
     }
 
-    _onReceive(snapshot) {
-        if (this.skipFirst) {
-            this.skipFirst = false;
-            return;
-        }        
-        var d = snapshot.val();
-        if (d == null) {
-            return;
-        }
+}
 
-        this.emit('receive', d);
+var OnReceive = function (snapshot) {
+    if (this.skipFirst) {
+        this.skipFirst = false;
+        return;
+    }
+    var d = snapshot.val();
+    if (d == null) {
+        return;
     }
 
+    this.emit('receive', d);
 }
 
 Object.assign(

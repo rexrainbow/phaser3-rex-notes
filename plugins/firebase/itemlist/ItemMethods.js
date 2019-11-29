@@ -32,17 +32,12 @@ var Methods = {
 
     addItem(snapshot, prevName, pushMode) {
         var item;
-        if (this.getItemCallback) {
-            var callback = this.getItemCallback;
-            var scope = this.getItemCallbackScope;
-            if (scope) {
-                item = callback.call(scope, snapshot);
-            } else {
-                item = callback(snapshot);
-            }
+        var callback = this.getItemCallback;
+        var scope = this.getItemCallbackScope;
+        if (scope) {
+            item = callback.call(scope, snapshot);
         } else {
-            item = snapshot.val();
-            item[this.keyItemID] = snapshot.key;
+            item = callback(snapshot);
         }
 
         if (pushMode) {

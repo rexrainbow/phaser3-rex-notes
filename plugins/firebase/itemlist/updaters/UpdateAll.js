@@ -1,4 +1,4 @@
-import GetAllChildrenCallback from './GetAllChildrenCallback.js';
+import GetAllChildrenCallback from '../callbacks/GetAllChildrenCallback.js';
 
 var Updater = {
     start(query) {

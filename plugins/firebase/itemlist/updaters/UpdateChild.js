@@ -1,6 +1,6 @@
-import AddChildCallback from './AddChildCallback.js';
-import RemovechildCallback from './RemoveChildCallback.js';
-import ChangeChildCallback from './ChangeChildCallback.js';
+import AddChildCallback from '../callbacks/AddChildCallback.js';
+import RemovechildCallback from '../callbacks/RemoveChildCallback.js';
+import ChangeChildCallback from '../callbacks/ChangeChildCallback.js';
 
 var Updater = {
     start(query) {

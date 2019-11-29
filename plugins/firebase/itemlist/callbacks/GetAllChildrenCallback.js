@@ -5,7 +5,7 @@ var ReceiveAllCallback = function (snapshot) {
     }, this);
     this.updateItemID2Index();
 
-    this.emit('update', this.items);
+    this.emit(this.eventNames.update, this.items);
 }
 
 export default ReceiveAllCallback;

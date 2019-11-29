@@ -16,9 +16,8 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
 
-        var firebaseApp = firebase.initializeApp(firebaseConfig);
+        var app = firebase.initializeApp(firebaseConfig);
         var config = {
-            app: firebaseApp,
             root: 'simple-message',
 
             senderID: 'aabb',
@@ -26,7 +25,7 @@ class Demo extends Phaser.Scene {
         }
 
         var simpleMode = true;
-        var messager = (simpleMode) ? (new SimpleMessage(config)) : (new StackMessage(config));
+        var messager = (simpleMode) ? (new SimpleMessage(app, config)) : (new StackMessage(app, config));
 
         messager
             .send('aabb', '1') // This message won't be received if simpleMode is true
