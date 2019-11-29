@@ -91,11 +91,11 @@ class SimpleMessage {
     }
 
     _onReceive(snapshot) {
-        var d = snapshot.val();
         if (this.skipFirst) {
             this.skipFirst = false;
             return;
-        }
+        }        
+        var d = snapshot.val();
         if (d == null) {
             return;
         }

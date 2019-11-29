@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import firebaseConfig from './firebaseConfig.js';
 import SimpleMessage from '../../plugins/firebase/simplemessage/SimpleMessage.js';
+import StackMessage from '../../plugins/firebase/stackmessage/StackMessage.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,15 +17,21 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
 
         var firebaseApp = firebase.initializeApp(firebaseConfig);
-        var messager = new SimpleMessage({
+        var config = {
             app: firebaseApp,
             root: 'simple-message',
 
             senderID: 'aabb',
             senderName: 'rex'
-        })
+        }
+
+        var simpleMode = true;
+        var messager = (simpleMode) ? (new SimpleMessage(config)) : (new StackMessage(config));
 
         messager
+            .send('aabb', '1') // This message won't be received if simpleMode is true
+            .send('aabb', '2') // This message won't be received if simpleMode is true
+            .send('aabb', '3') // This message won't be received if simpleMode is true
             .on('receive', function (d) {
                 print.text += `${d.senderName}: ${d.message}\n`;
             })
