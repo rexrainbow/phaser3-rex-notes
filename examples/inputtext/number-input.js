@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
             fixedHeight: 100,
         }).setOrigin(0.5);
         var inputText = this.add.rexInputText(400, 400, 10, 10, {
+            id: 'myNumberInput',
             type: 'number',
             text: '0',
             fontSize: '12px',
@@ -26,11 +27,26 @@ class Demo extends Phaser.Scene {
                 printText.text = inputText.text;
             })
 
+        inputText.node.addEventListener("keypress", function (evt) {
+            if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57) {
+                evt.preventDefault();
+            }
+        });
+
         printText.text = inputText.text;
 
         // this.input.keyboard.addKey('ENTER').on('down', function (event) {
         //     console.log('enter');
         // });
+
+        var style = document.createElement('style');
+        style.innerHTML = `
+        #myNumberInput::-webkit-inner-spin-button, 
+        #myNumberInput::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }`;
+        document.head.appendChild(style);
     }
 
     update() { }
