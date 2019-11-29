@@ -15,9 +15,7 @@ class StackMessage {
         // Sender
         this.lastSendToID = undefined;
         this.sendToRef = undefined;
-        var senderID = GetValue(config, 'senderID', '');
-        var senderName = GetValue(config, 'senderName', '');
-        this.setSender(senderID, senderName);
+        this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
 
         // Receiver
         this.isReceiving = false;
@@ -81,7 +79,6 @@ class StackMessage {
         this.receiverRef.off('child_added', this._onReceive, this);
         this.receiverRef.remove();
         this.receiverRef.onDisconnect().cancel();
-        this.receiverRef = undefined;
         return this;
     }
 

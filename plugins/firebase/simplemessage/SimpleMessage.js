@@ -17,9 +17,7 @@ class SimpleMessage {
         this.sendToRef = undefined;
         this.skipFirst = true;
         this.stamp = false;
-        var senderID = GetValue(config, 'senderID', '');
-        var senderName = GetValue(config, 'senderName', '');
-        this.setSender(senderID, senderName);
+        this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
 
         // Receiver
         this.isReceiving = false;
@@ -86,7 +84,6 @@ class SimpleMessage {
         this.receiverRef.off('value', this._onReceive, this);
         this.receiverRef.remove();
         this.receiverRef.onDisconnect().cancel();
-        this.receiverRef = undefined;
         return this;
     }
 
