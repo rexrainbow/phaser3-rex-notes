@@ -31,7 +31,6 @@ class SimpleMessage {
     }
 
     send(sendToID, message) {
-        debugger
         if ((!this.sendToRef) || (this.sendToRef.key !== sendToID)) {
             this.sendToRef = GetRef(this.database, this.rootPath, sendToID);
         }

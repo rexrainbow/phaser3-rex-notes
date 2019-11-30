@@ -1,4 +1,4 @@
-var RemoveChildCallback = function (params) {
+var RemoveChildCallback = function (snapshot) {
     var item = this.removeItem(snapshot);
     this.updateItemID2Index();
 

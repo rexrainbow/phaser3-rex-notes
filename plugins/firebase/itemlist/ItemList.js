@@ -24,7 +24,7 @@ class ItemList {
         }
         this.setItemIDKey(GetValue(config, 'itemIDKey', '__itemID__'));
         this.setMode(GetValue(config, 'mode', 1));
-        this.setGetitemCallback(Getvalue(config, 'getItemCallback', DefaultGetItemCallback), Getvalue(config, 'getItemCallbackScope', this));
+        this.setGetitemCallback(GetValue(config, 'getItemCallback', DefaultGetItemCallback), GetValue(config, 'getItemCallbackScope', this));
         this.setQuery(GetValue(config, 'query', undefined));
     }
 

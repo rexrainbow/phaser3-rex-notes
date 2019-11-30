@@ -12,17 +12,27 @@ var Methods = {
         return this.items;
     },
 
+    hasItem(itemID) {
+        return this.itemID2Index.hasOwnProperty(itemID);
+    },
+
     getItemIndexFromItemID(itemID) {
+        if (itemID == null) {
+            return null;
+        }
         return this.itemID2Index[itemID];
     },
 
     getItemFromItemID(itemID) {
-        var i = this.getItemIndexFromItemID(itemID);
-        if (i == null) {
+        if (itemID == null) {
+            return null;
+        }
+        var index = this.getItemIndexFromItemID(itemID);
+        if (index == null) {
             return null;
         }
 
-        return this.items[i];
+        return this.items[index];
     },
 
     forEach(callback, scope) {

@@ -25,7 +25,9 @@ class Demo extends Phaser.Scene {
         }
 
         var simpleMode = true;
-        var messager = (simpleMode) ? (new SimpleMessage(app, config)) : (new StackMessage(app, config));
+        var messagerClass = (simpleMode) ? SimpleMessage : StackMessage;
+        var messager = new messagerClass(app, config);
+
 
         messager
             .send('aabb', '1') // This message won't be received if simpleMode is true
