@@ -16,17 +16,20 @@ var AddUser = function (userID, userName) {
     userRef.set(d)
         .then(function () {
             if (self.maxUsers > 0) {
-                rootRef.limitToFirst(self.maxUsers);
-                return rootRef.once('value')
-                    .then(function (snapshot) {
-                        if (!Contains(snapshot, userID)) {
+                setTimeout(function () {
+                    rootRef.limitToFirst(self.maxUsers).once('value')
+                        .then(function (snapshot) {
+                            if (Contains(snapshot, userID)) {
+                                return;
+                            }
+                            // UserID is not in firstN list
                             userRef.remove()
                                 .then(function () {
                                     userRef.onDisconnect().cancel();
-                                })
-                            throw new Error();
-                        }
-                    })
+                                });
+                            self.emit('join-fail', d);
+                        });
+                }, 0);
             }
         })
         .catch(function (error) {
@@ -39,7 +42,8 @@ var AddUser = function (userID, userName) {
 var Contains = function (snapshot, userID) {
     var result = false;
     snapshot.forEach(function (childSnapshot) {
-        if (childSnapshot.val().ID === userID) {
+        var user = childSnapshot.val();
+        if (user.ID === userID) {
             result = true;
             return true;
         }

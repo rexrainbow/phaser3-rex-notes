@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import ItemList from '../itemlist/ItemList.js';
 import GetRef from '../utils/GetRef.js';
 import AddUser from './AddUser.js';
+import RemoveUser from './RemoveUser.js';
 
 class OnlineUserList {
     constructor(app, config) {
@@ -15,19 +16,21 @@ class OnlineUserList {
         this.rootPath = GetValue(config, 'root', '');
 
         this.setMaxUsers(GetValue(config, 'maxUsers', 0));
-        this.userID2ItemID = {};
-        this.userList = (new ItemList({
+        this.userList = new ItemList({
             eventEmitter: this.getEventEmitter(),
             itemIDKey: 'joinAt',
             eventNames: {
-                add: 'join',
-                remove: 'leave'
+                add: GetValue(config, 'eventNames.join', 'join'),
+                remove: GetValue(config, 'eventNames.leave', 'leave')
             }
-        }))
-            .on('join', function (user) {
+        });
+
+        this.userID2ItemID = {};
+        this.userList
+            .on(this.userList.eventNames.add, function (user) {
                 this.userID2ItemID[user.ID] = user.joinAt;
             }, this)
-            .on('leave', function (user) {
+            .on(this.userList.eventNames.remove, function (user) {
                 delete this.userID2ItemID[user.ID];
             }, this)
     }
@@ -72,9 +75,10 @@ class OnlineUserList {
     }
 
     startUpdate() {
-        var query = GetRef(this.database, this.rootPath)
+        debugger
+        var query = GetRef(this.database, this.rootPath);
         if (this.maxUsers > 0) {
-            query.limitToFirst(this.maxUsers);
+            query = query.limitToFirst(this.maxUsers);
         }
         this.userList.startUpdate(query);
         return this;
@@ -87,7 +91,8 @@ class OnlineUserList {
 }
 
 var methods = {
-    addUser: AddUser
+    addUser: AddUser,
+    removeUser: RemoveUser,
 }
 Object.assign(
     OnlineUserList.prototype,

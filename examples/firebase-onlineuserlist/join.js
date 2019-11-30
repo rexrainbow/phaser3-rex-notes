@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import firebaseConfig from './firebaseConfig.js';
 import OnlineUserList from '../../plugins/firebase/onlineuserlist/OnlineUserList.js';
+import undefined from 'firebase/database';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,7 +19,7 @@ class Demo extends Phaser.Scene {
         var app = firebase.initializeApp(firebaseConfig);
         var onlineUserList = new OnlineUserList(app, {
             root: 'online-userlist',
-            maxUsers: 10
+            maxUsers: 3
         });
         onlineUserList
             .on('join', function (user) {
@@ -28,10 +29,22 @@ class Demo extends Phaser.Scene {
                 console.log('Join-fail', user)
             })
             .startUpdate()
-            .addUser('aabb', 'rex')
+            .addUser(genText(10), genText(5))
     }
 
     update() { }
+}
+
+const RandomInt = Phaser.Math.Between;
+const RandomItem = Phaser.Utils.Array.GetRandom;
+const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+var genText = function (min, max) {
+    var count = (max === undefined) ? min : RandomInt(min, max);
+    var s = '';
+    for (var j = 0; j < count; j++) {
+        s += RandomItem(possible);
+    }
+    return s;
 }
 
 var config = {
