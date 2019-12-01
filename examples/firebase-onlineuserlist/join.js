@@ -30,6 +30,9 @@ class Demo extends Phaser.Scene {
             })
             .startUpdate()
             .addUser(genText(10), genText(5))
+            .catch(function () {
+                debugger
+            })
     }
 
     update() { }

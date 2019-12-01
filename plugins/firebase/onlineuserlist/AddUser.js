@@ -12,7 +12,7 @@ var AddUser = function (userID, userName) {
         'ID': userID,
         'name': userName
     };
-    if (this.maxUsers > 0) {
+    if (this.maxUsers === 0) {
         return userRef.set(d);
     }
 
@@ -35,7 +35,6 @@ var AddUser = function (userID, userName) {
                 .then(function () {
                     userRef.onDisconnect().cancel();
                 });
-            self.emit('join-fail', d);
             return Promise.reject();
         })
         .catch(function (error) {
