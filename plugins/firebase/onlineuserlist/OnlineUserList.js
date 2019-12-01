@@ -21,7 +21,8 @@ class OnlineUserList {
             itemIDKey: 'joinAt',
             eventNames: {
                 add: GetValue(config, 'eventNames.join', 'join'),
-                remove: GetValue(config, 'eventNames.leave', 'leave')
+                remove: GetValue(config, 'eventNames.leave', 'leave'),
+                update: GetValue(config, 'eventNames.update', 'update')
             }
         });
 

@@ -1,11 +1,11 @@
-var RemoveUser = function(userID) {
+var RemoveUser = function (userID) {
     if (!this.contains(userID)) {
-        return this;
+        return Promise.resolve();  // Promise
     }
     var itemID = this.userID2ItemID[userID];
     var userRef = GetRef(this.database, this.rootPath, itemID);
     userRef.remove();
-    return this;
+    return userRef.remove();  // Promise
 }
 
 export default RemoveUser;

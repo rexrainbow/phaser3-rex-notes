@@ -2,7 +2,7 @@ import GetRef from '../utils/GetRef.js';
 
 var AddUser = function (userID, userName) {
     if (this.contains(userID)) {
-        return this;
+        return Promise.resolve();  // Promise
     }
 
     var rootRef = GetRef(this.database, this.rootPath);
@@ -12,31 +12,36 @@ var AddUser = function (userID, userName) {
         'ID': userID,
         'name': userName
     };
+    if (this.maxUsers > 0) {
+        return userRef.set(d);
+    }
+
     var self = this;
-    userRef.set(d)
+    return userRef.set(d)
         .then(function () {
-            if (self.maxUsers > 0) {
-                setTimeout(function () {
-                    rootRef.limitToFirst(self.maxUsers).once('value')
-                        .then(function (snapshot) {
-                            if (Contains(snapshot, userID)) {
-                                return;
-                            }
-                            // UserID is not in firstN list
-                            userRef.remove()
-                                .then(function () {
-                                    userRef.onDisconnect().cancel();
-                                });
-                            self.emit('join-fail', d);
-                        });
-                }, 0);
+            setTimeout(function () {
+                return Promise.resolve();
+            }, 0);
+        })
+        .then(function () {
+            return rootRef.limitToFirst(self.maxUsers).once('value');
+        })
+        .then(function (snapshot) {
+            if (Contains(snapshot, userID)) {
+                return Promise.resolve();
             }
+            // UserID is not in firstN list
+            userRef.remove()
+                .then(function () {
+                    userRef.onDisconnect().cancel();
+                });
+            self.emit('join-fail', d);
+            return Promise.reject();
         })
         .catch(function (error) {
             self.emit('join-fail', d);
+            return Promise.reject();
         });
-
-    return this;
 };
 
 var Contains = function (snapshot, userID) {
