@@ -2,6 +2,7 @@ import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js
 import GetValue from '../../utils/object/GetValue.js';
 import ItemList from '../itemlist/ItemList.js';
 import GetRef from '../utils/GetRef.js';
+import GetFilterString from './GetFilterString.js';
 
 class RoomList {
     constructor(app, config) {
@@ -15,7 +16,12 @@ class RoomList {
 
         this.roomList = new ItemList({
             eventEmitter: this.getEventEmitter(),
-            itemIDKey: 'roomID'
+            itemIDKey: 'roomID',
+            eventNames: {
+                add: GetValue(config, 'eventNames.add', 'add'),
+                remove: GetValue(config, 'eventNames.remove', 'remove'),
+                update: GetValue(config, 'eventNames.update', 'update')
+            }
         })
 
     }
@@ -29,10 +35,13 @@ class RoomList {
         return this.roomList.getItems();
     }
 
-    startUpdate() {
+    startUpdate(roomType) {
         var query = GetRef(this.database, this.rootPath);
-        if (this.maxUsers > 0) {
-            query = query.limitToFirst(this.maxUsers);
+        query = query.orderByChild('filter');
+        if (roomType === undefined) {
+            query = query.startAt('open').endAt('open~');
+        } else {
+            query = query.equalTo(GetFilterString('open', roomType));
         }
         this.userList.startUpdate(query);
         return this;
