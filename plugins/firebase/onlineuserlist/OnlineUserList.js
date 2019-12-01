@@ -74,8 +74,7 @@ class OnlineUserList {
         return this.userID2ItemID.hasOwnProperty(userID);
     }
 
-    startUpdate() {
-        debugger
+    startUpdate(roomType) {
         var query = GetRef(this.database, this.rootPath);
         if (this.maxUsers > 0) {
             query = query.limitToFirst(this.maxUsers);
