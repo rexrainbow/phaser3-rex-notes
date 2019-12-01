@@ -24,22 +24,40 @@ class Demo extends Phaser.Scene {
             senderName: 'rex'
         }
 
-        var simpleMode = true;
+        var simpleMode = false;
         var messagerClass = (simpleMode) ? SimpleMessage : StackMessage;
         var messager = new messagerClass(app, config);
 
 
         messager
-            .send('aabb', '1') // This message won't be received if simpleMode is true
-            .send('aabb', '2') // This message won't be received if simpleMode is true
-            .send('aabb', '3') // This message won't be received if simpleMode is true
-            .on('receive', function (d) {
-                print.text += `${d.senderName}: ${d.message}\n`;
+            .send('aabb', '1')  // This message won't be received if simpleMode is true
+            .then(function () {
+                return messager.send('aabb', '2');
+                // This message won't be received if simpleMode is true
             })
-            .startReceiving()
-            .send('aabb', 'hello')
-            .send('aabb', 'hello')
-            .send('aabb', 'world')
+            .then(function () {
+                return messager.send('aabb', '3');
+                // This message won't be received if simpleMode is true
+            })
+            .then(function () {
+                messager.on('receive', function (d) {
+                    print.text += `${d.senderName}: ${d.message}\n`;
+                })
+                messager.startReceiving();
+                return Promise.resolve();
+            })
+            .then(function () {
+                return messager.send('aabb', 'hello');
+            })
+            .then(function () {
+                return messager.send('aabb', 'hello');
+            })
+            .then(function () {
+                return messager.send('aabb', 'world');
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     update() { }
