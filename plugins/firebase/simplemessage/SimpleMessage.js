@@ -11,18 +11,22 @@ class SimpleMessage {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.database = app.database();
-        this.rootPath = GetValue(config, 'root', '');
+        this.setRootPath(GetValue(config, 'root', ''));
 
         // Sender
-        this.sendToRef = undefined;
         this.skipFirst = true;
         this.stamp = false;
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
 
         // Receiver
         this.isReceiving = false;
-        this.receiverID = undefined;
+    }
+
+    setRootPath(rootPath) {
+        this.rootPath = rootPath;
+        this.sendToRef = undefined;
         this.receiverRef = undefined;
+        return this;
     }
 
     setSender(senderID, senderName) {

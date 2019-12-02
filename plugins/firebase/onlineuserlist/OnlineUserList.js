@@ -13,7 +13,7 @@ class OnlineUserList {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.database = app.database();
-        this.rootPath = GetValue(config, 'root', '');
+        this.setRootPath(GetValue(config, 'root', ''));
 
         this.setMaxUsers(GetValue(config, 'maxUsers', 0));
         this.userList = new ItemList({
@@ -34,6 +34,11 @@ class OnlineUserList {
             .on(this.userList.eventNames.remove, function (user) {
                 delete this.userID2ItemID[user.ID];
             }, this)
+    }
+
+    setRootPath(rootPath) {
+        this.rootPath = rootPath;
+        return this;
     }
 
     setMaxUsers(maxUsers) {
