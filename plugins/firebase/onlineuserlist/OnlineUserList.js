@@ -76,6 +76,14 @@ class OnlineUserList {
         return this.userList.getItemFromItemID(itemID);
     }
 
+    getUserRef(userID) {
+        if (!this.contains(userID)) {
+            return null;
+        }
+        var itemID = this.userID2ItemID[userID];
+        return GetRef(this.database, this.rootPath, itemID);
+    }
+
     contains(userID) {
         return this.userID2ItemID.hasOwnProperty(userID);
     }
