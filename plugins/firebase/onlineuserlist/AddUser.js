@@ -1,4 +1,5 @@
 import GetRef from '../utils/GetRef.js';
+import Delay from '../../utils/promise/Delay.js';
 
 var AddUser = function (userID, userName) {
     if (this.contains(userID)) {
@@ -19,9 +20,7 @@ var AddUser = function (userID, userName) {
     var self = this;
     return userRef.set(d)
         .then(function () {
-            setTimeout(function () {
-                return Promise.resolve();
-            }, 0);
+            return Delay(0);
         })
         .then(function () {
             return rootRef.limitToFirst(self.maxUsers).once('value');

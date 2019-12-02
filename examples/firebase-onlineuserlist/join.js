@@ -1,8 +1,9 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import firebaseConfig from './firebaseConfig.js';
+
 import OnlineUserList from '../../plugins/firebase/onlineuserlist/OnlineUserList.js';
-import undefined from 'firebase/database';
+import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,7 +20,7 @@ class Demo extends Phaser.Scene {
         var app = firebase.initializeApp(firebaseConfig);
         var onlineUserList = new OnlineUserList(app, {
             root: 'online-userlist',
-            maxUsers: 3
+            maxUsers: 2
         });
         onlineUserList
             .on('join', function (user) {
@@ -28,26 +29,16 @@ class Demo extends Phaser.Scene {
             .on('join-fail', function (user) {
                 console.log('Join-fail', user)
             })
-            .startUpdate()
-            .addUser(genText(10), genText(5))
-            .catch(function () {
+            .addUser(GetRandomWord(10), GetRandomWord(5))
+            .then(function (params) {
+                onlineUserList.startUpdate(); // Don't startUpdate before addUser
+            })
+            .catch(function (error) {
                 debugger
             })
     }
 
     update() { }
-}
-
-const RandomInt = Phaser.Math.Between;
-const RandomItem = Phaser.Utils.Array.GetRandom;
-const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-var genText = function (min, max) {
-    var count = (max === undefined) ? min : RandomInt(min, max);
-    var s = '';
-    for (var j = 0; j < count; j++) {
-        s += RandomItem(possible);
-    }
-    return s;
 }
 
 var config = {

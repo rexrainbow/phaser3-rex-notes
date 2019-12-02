@@ -4,7 +4,6 @@ var RemoveUser = function (userID) {
     }
     var itemID = this.userID2ItemID[userID];
     var userRef = GetRef(this.database, this.rootPath, itemID);
-    userRef.remove();
     return userRef.remove();  // Promise
 }
 

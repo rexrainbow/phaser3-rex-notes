@@ -1,4 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -56,11 +57,11 @@ var createGrid = function (scene, col, row) {
 
 const Random = Phaser.Math.Between;
 var createItem = function (scene) {
-    var text = genText();
+    var word = GetRandomWord(2, 4);
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_PRIMARY)
             .setStrokeStyle(2, COLOR_LIGHT, 1),
-        text: scene.add.text(0, 0, text, {
+        text: scene.add.text(0, 0, word, {
             fontSize: 18
         }),
         icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, Random(0, 0xffffff)),
@@ -73,17 +74,6 @@ var createItem = function (scene) {
             icon: 10,
         }
     });
-}
-
-const RandomInt = Phaser.Math.Between;
-const RandomItem = Phaser.Utils.Array.GetRandom;
-const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-var genText = function () {
-    var s = '';
-    for (var j = 0, jcnt = RandomInt(2, 4); j < jcnt; j++) {
-        s += RandomItem(possible);
-    }
-    return s;
 }
 
 var config = {
