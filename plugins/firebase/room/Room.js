@@ -1,7 +1,8 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
-import GetRef from '../utils/GetRef.js';
-import CreatRoom from './CreateRoom.js';
+import OnlineUserList from '../onlineuserlist/OnlineUserList.js';
+import Methods from './Methods.js';
+
 
 class Room {
     constructor(app, config) {
@@ -13,8 +14,25 @@ class Room {
         this.database = app.database();
         this.rootPath = GetValue(config, 'root', '');
 
-        this.lockAction = false;
+        // User properties
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
+        // Room properties
+        this.roomID = undefined;
+        this.roomName = undefined;
+        this.doorState = undefined;
+        this.leftRoomFlag = false;
+        this.isRemoveRoomWhenLeft = undefined;
+        this.usersList = new OnlineUserList(app, {
+            eventEmitter: this.getEventEmitter(),
+            eventNames: {
+                join: GetValue(config, 'eventNames.join', 'user.join'),
+                leave: GetValue(config, 'eventNames.leave', 'user.leave'),
+                update: GetValue(config, 'eventNames.update', 'userlist.update')
+            }
+        });
+
+        // Monitor
+        this.monitorRefPaths = [];
     }
 
     setUser(userID, userName) {
@@ -23,36 +41,17 @@ class Room {
         return this;
     }
 
-
-    joinRoom(roomID, leftThenJoin) {
-
-    }
-
-    leaveRoom() {
-
-    }
-
-    kickUser(userId) {
-
-    }
-
-    joinRandomRoom(leftThenJoin, retry) {
-
-    }
-
-    getUserList(roomID) {
-
+    isInRoom(roomID) {
+        return (roomID === undefined) ? (this.roomID !== undefined) : (this.roomID === roomID);
     }
 }
 
-var methods = {
-    CreateRoom: CreateRoom
-}
+
 
 Object.assign(
     Room.prototype,
     EventEmitterMethods,
-    methods
+    Methods
 );
 
 export default Room;

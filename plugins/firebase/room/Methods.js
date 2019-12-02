@@ -1,0 +1,25 @@
+import CreateRoom from './CreateRoom.js';
+import JoinRoom from './JoinRoom.js';
+import JoinRandomRoom from './JoinRandomRoom.js';
+import LeaveRoom from './LeaveRoom.js';
+import RemoveRoom from './RemoveRoom.js';
+import GetUserList from './GetUserList.js';
+import KickUser from './KickUser.js';
+import MonitorMyStateOn from './MonitorMyStateOn.js';
+import MonitorMyStateOff from './MonitorMyStateOff.js';
+import OnLeftRoom from './OnLeftRoom.js';
+
+var methods = {
+    createRoom: CreateRoom,
+    joinRoom: JoinRoom,
+    joinRandomRoom: JoinRandomRoom,
+    leaveRoom: LeaveRoom,
+    removeRoom: RemoveRoom,
+    getUserList: GetUserList,
+    kickUser: KickUser,
+    monitorMyStateOn: MonitorMyStateOn,
+    MonitorMyStateOff: MonitorMyStateOff,
+    onLeftRoom: OnLeftRoom
+}
+
+export default methods;
