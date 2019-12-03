@@ -1,5 +1,4 @@
-import Const from './Const.js';
-import GetValue from '../../utils/object/GetValue.js';
+import MergeRight from '../../utils/object/MergeRight.js';
 import GetFilterString from './GetFilterString.js';
 
 var TryCreateRoom = function (config) {
@@ -30,36 +29,34 @@ var TestRoomAlive = function (roomID) {
 }
 
 var CreateRoom = function (config) {
+    config = MergeRight(DefaultConfig, config);
     var roomID = config.roomID;
-    var roomName = GetValue(config, 'roomName', '');
-    var roomType = GetValue(config, 'roomType', '');
-    var maxUsers = GetValue(config, 'maxUsers', 0);
-    var isPersistedRoom = GetValue(config, 'presisted', false);
-    var doorState = GetValue(config, 'door', 'open'); // 0(close), 1(open)
-    var join = GetValue(config, 'join', true);
+    var roomName = config.roomName;
+    var join = config.join;
 
     var roomRef = this.getRoomRef(roomID);
     var roomFilterRef = this.getRoomFilterRef(roomID);
     var roomMetadataRef = this.getRoomMetadataRef(roomID);
 
     // Remove room when creater is offline
-    this.isRemoveRoomWhenLeft = !isPersistedRoom;
+    this.isRemoveRoomWhenLeft = !config.presisted;
     if (this.isRemoveRoomWhenLeft) {
         roomRef.onDisconnect().remove();
         roomFilterRef.onDisconnect().remove();
         roomMetadataRef.onDisconnect().remove();
     }
 
-    var filter = GetFilterString(doorState, roomType);
+    var filter = GetFilterString(config.doorState, config.roomType);
     // Room
     var roomData = {
         alive: true
     };
-    if (join) {    // TODO:  ??
+    if (join) {
         this.usersList
             .setRootPath(`${this.rootPath}/rooms/${roomID}/users`)
-            .setMaxUsers(maxUsers)
-            .addUser(this.userID, this.userName, true);
+            .setMaxUsers(0)
+            .addUser(this.userID, this.userName)
+            .setMaxUsers(config.maxUsers);
     }
     // Room-filter
     var roomFilterData = {
@@ -70,7 +67,7 @@ var CreateRoom = function (config) {
     var roomMetadata = {
         name: roomName,
         filter: filter,
-        maxUsers: maxUsers,
+        maxUsers: config.maxUsers,
         moderators: {}
     };
     roomMetadata.moderators[this.userID] = this.userName;
@@ -83,10 +80,26 @@ var CreateRoom = function (config) {
     this.isRoomCreator = true;
     var self = this;
     return this.getRootRef().update(d)
+        .then(function () {
+            if (join) {
+                self.onJoinRoom(config);
+            }
+            return Promise.resolve();
+        })
         .catch(function (error) {
             self.isRoomCreator = false;
             return Promise.reject(error);
         });
+}
+
+var DefaultConfig = {
+    roomID: '',
+    roomName: '',
+    roomType: '',
+    maxUsers: 0,
+    presisted: false,
+    door: 'open',
+    join: false
 }
 
 export default TryCreateRoom;

@@ -19,6 +19,7 @@ class Room {
         this.isRoomCreator = false;
         this.roomID = undefined;
         this.roomName = undefined;
+        this.roomType = undefined;
         this.doorState = undefined;
         this.leftRoomFlag = false;
         this.isRemoveRoomWhenLeft = undefined;

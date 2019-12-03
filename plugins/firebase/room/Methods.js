@@ -7,6 +7,7 @@ import GetUserList from './GetUserList.js';
 import KickUser from './KickUser.js';
 import MonitorMyStateOn from './MonitorMyStateOn.js';
 import MonitorMyStateOff from './MonitorMyStateOff.js';
+import OnJoinRoom from './OnJoinRoom.js';
 import OnLeftRoom from './OnLeftRoom.js';
 import GetRefMethods from './GetRefMethods.js';
 
@@ -20,6 +21,7 @@ var Methods = {
     kickUser: KickUser,
     monitorMyStateOn: MonitorMyStateOn,
     MonitorMyStateOff: MonitorMyStateOff,
+    onJoinRoom: OnJoinRoom,
     onLeftRoom: OnLeftRoom
 }
 

@@ -10,9 +10,9 @@ var OnLeftRoom = function () {
     this.monitorMyStateOff();
     this.usersList.stopUpdate().clear();
 
-    this.emit('room.leave', d);
+    this.emit('leave', d);
     if (!this.leftRoomFlag) {
-        this.emit('room.kicked', d);
+        this.emit('kicked', d);
     }
     this.leftRoomFlag = false;
 }
