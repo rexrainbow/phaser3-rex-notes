@@ -1,7 +1,7 @@
 import GetRef from '../utils/GetRef.js';
 import Delay from '../../utils/promise/Delay.js';
 
-var AddUser = function (userID, userName, isFirstUser) {
+var AddUser = function (userID, userName) {
     if (this.contains(userID)) {
         return Promise.resolve();  // Promise
     }
@@ -15,22 +15,17 @@ var AddUser = function (userID, userName, isFirstUser) {
     var rootRef = GetRef(this.database, this.rootPath);
     var userRef = rootRef.push();
 
+    userRef.onDisconnect().remove();
     // Go promise
-    if ((this.maxUsers === 0) || isFirstUser) { // Unlimit user list, or is first user
-        return userRef.onDisconnect().remove()
-            .then(function () {
-                return userRef.set(d);
-            })
+    if (this.maxUsers === 0) { // Unlimit user list
+        return userRef.set(d)
             .catch(function (error) {
                 self.emit('join-fail', d);
                 return Promise.reject();
             });
 
     } else { // Limited user list
-        return userRef.onDisconnect().remove()
-            .then(function () {
-                return userRef.set(d);
-            })
+        return userRef.set(d)
             .then(function () {
                 return Delay(0);
             })
