@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
             senderName: 'rex'
         }
 
-        var simpleMode = false;
+        var simpleMode = true;
         var messagerClass = (simpleMode) ? SimpleMessage : StackMessage;
         var messager = new messagerClass(app, config);
 

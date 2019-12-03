@@ -1,7 +1,9 @@
 import GetRef from '../utils/GetRef.js';
 import Delay from '../../utils/promise/Delay.js';
 
-var AddUser = function (userID, userName) {
+var Join = function () {
+    var userID = this.userInfo.userID;
+    var userName = this.userInfo.userName;
     if (this.contains(userID)) {
         return Promise.resolve();  // Promise
     }
@@ -9,8 +11,8 @@ var AddUser = function (userID, userName) {
     // Prepare data
     var self = this;
     var d = {
-        'ID': userID,
-        'name': userName
+        userID: userID,
+        userName: userName
     };
     var rootRef = GetRef(this.database, this.rootPath);
     var userRef = rootRef.push();
@@ -54,7 +56,7 @@ var Contains = function (snapshot, userID) {
     var result = false;
     snapshot.forEach(function (childSnapshot) {
         var user = childSnapshot.val();
-        if (user.ID === userID) {
+        if (user.userID === userID) {
             result = true;
             return true;
         }
@@ -62,4 +64,4 @@ var Contains = function (snapshot, userID) {
     return result;
 }
 
-export default AddUser;
+export default Join;

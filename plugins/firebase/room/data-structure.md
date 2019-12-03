@@ -40,9 +40,8 @@ rooms/
         # users in this room.
         users/
             <joinAt>
-                ID - The id of the user.
-                # monitor ID == null for "user kicked-out"
-                name - The name of the user.
+                userID - The id of the user.
+                userName - The name of the user.
 
         <"channel-"+channel_name> - custom channel
 

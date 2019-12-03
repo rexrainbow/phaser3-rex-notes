@@ -23,18 +23,17 @@ class Demo extends Phaser.Scene {
             maxUsers: 2
         });
         onlineUserList
-            .on('join', function (user) {
-                console.log('Join:', user)
-            })
-            .on('join-fail', function (user) {
-                console.log('Join-fail', user)
-            })
-            .addUser(GetRandomWord(10), GetRandomWord(5))
+            .setUser(GetRandomWord(10), GetRandomWord(5))
+            .join()
             .then(function (params) {
-                onlineUserList.startUpdate(); // Don't startUpdate before addUser
+                onlineUserList
+                    .on('join', function (user) {
+                        console.log('Join:', user)
+                    })
+                    .startUpdate(); // Don't startUpdate before addUser
             })
             .catch(function (error) {
-                debugger
+                console.log('Join-fail', user)
             })
     }
 

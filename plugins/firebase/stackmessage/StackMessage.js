@@ -26,9 +26,15 @@ class StackMessage {
         return this;
     }
 
-    setSender(senderID, senderName) {
-        this.senderID = senderID;
-        this.senderName = senderName;
+    setSender(userID, userName) {
+        if (typeof (userID) === 'string') {
+            this.senderInfo = {
+                userID: userID,
+                userName: userName
+            }
+        } else {
+            this.senderInfo = userID;
+        }
         return this;
     }
 }

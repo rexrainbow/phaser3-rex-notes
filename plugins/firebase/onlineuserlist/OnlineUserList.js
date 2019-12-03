@@ -2,8 +2,8 @@ import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js
 import GetValue from '../../utils/object/GetValue.js';
 import ItemList from '../itemlist/ItemList.js';
 import GetRef from '../utils/GetRef.js';
-import AddUser from './AddUser.js';
-import RemoveUser from './RemoveUser.js';
+import Join from './Join.js';
+import Leave from './Leave.js';
 
 class OnlineUserList {
     constructor(app, config) {
@@ -15,6 +15,7 @@ class OnlineUserList {
         this.database = app.database();
         this.setRootPath(GetValue(config, 'root', ''));
 
+        this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
         this.setMaxUsers(GetValue(config, 'maxUsers', 0));
         this.userList = new ItemList({
             eventEmitter: this.getEventEmitter(),
@@ -29,15 +30,27 @@ class OnlineUserList {
         this.userID2ItemID = {};
         this.userList
             .on(this.userList.eventNames.add, function (user) {
-                this.userID2ItemID[user.ID] = user.joinAt;
+                this.userID2ItemID[user.userID] = user.joinAt;
             }, this)
             .on(this.userList.eventNames.remove, function (user) {
-                delete this.userID2ItemID[user.ID];
+                delete this.userID2ItemID[user.userID];
             }, this)
     }
 
     setRootPath(rootPath) {
         this.rootPath = rootPath;
+        return this;
+    }
+
+    setUser(userID, userName) {
+        if (typeof (userID) === 'string') {
+            this.userInfo = {
+                userID: userID,
+                userName: userName
+            }
+        } else {
+            this.userInfo = userID;
+        }
         return this;
     }
 
@@ -65,7 +78,7 @@ class OnlineUserList {
 
     isFirstUser(userID) {
         var user = this.usersList.getItems()[0];
-        return (user && (user.ID === userID));
+        return (user && (user.userID === userID));
     }
 
     getUser(userID) {
@@ -104,8 +117,8 @@ class OnlineUserList {
 }
 
 var methods = {
-    addUser: AddUser,
-    removeUser: RemoveUser,
+    join: Join,
+    leave: Leave,
 }
 Object.assign(
     OnlineUserList.prototype,

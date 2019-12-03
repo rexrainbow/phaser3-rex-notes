@@ -1,4 +1,5 @@
-var RemoveUser = function (userID) {
+var Leave = function () {
+    var userID = this.userInfo.userID;
     if (!this.contains(userID)) {
         return Promise.resolve();  // Promise
     }
@@ -7,4 +8,4 @@ var RemoveUser = function (userID) {
     return userRef.remove();  // Promise
 }
 
-export default RemoveUser;
+export default Leave;

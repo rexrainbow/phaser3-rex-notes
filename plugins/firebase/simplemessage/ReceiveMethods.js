@@ -3,7 +3,7 @@ import GetRef from '../utils/GetRef.js';
 var methods = {
     startReceiving(receiverID) {
         if (receiverID === undefined) {
-            receiverID = this.senderID;
+            receiverID = this.senderInfo.userID;
         }
         if (this.isReceiving && (this.receiverRef.key === receiverID)) {
             return this;

@@ -12,8 +12,8 @@ var Send = function (sendToID, message) {
 
     var d = {
         message: message,
-        senderID: this.senderID,
-        senderName: this.senderName
+        senderID: this.senderInfo.userID,
+        senderName: this.senderInfo.userName,
     };
     return this.sendToRef.push(d); // Promise
 }

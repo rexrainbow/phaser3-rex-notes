@@ -1,5 +1,5 @@
 ```
 <joinAt>
-    ID - The id of the user.
-    name - The name of the user.
+    userID - The id of the user.
+    userName - The name of the user.
 ```
