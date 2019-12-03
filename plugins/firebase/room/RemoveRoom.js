@@ -1,5 +1,3 @@
-import GetRef from '../utils/GetRef.js';
-
 var RemoveRoom = function (roomID) {
     if (roomID === undefined) {
         roomID = this.roomID;
@@ -12,8 +10,7 @@ var RemoveRoom = function (roomID) {
     d[`room-filter/${roomID}`] = null;
     d[`room-metadata/${roomID}`] = null;
     d[`rooms/${roomID}`] = null;
-    var rootRef = GetRef(this.database, this.rootPath);
-    return rootRef.update(d);
+    return this.getRootRef().update(d);
 }
 
 export default RemoveRoom;

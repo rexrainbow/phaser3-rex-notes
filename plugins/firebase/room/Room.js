@@ -3,7 +3,6 @@ import GetValue from '../../utils/object/GetValue.js';
 import OnlineUserList from '../onlineuserlist/OnlineUserList.js';
 import Methods from './Methods.js';
 
-
 class Room {
     constructor(app, config) {
         // Event emitter
@@ -17,6 +16,7 @@ class Room {
         // User properties
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
         // Room properties
+        this.isRoomCreator = false;
         this.roomID = undefined;
         this.roomName = undefined;
         this.doorState = undefined;
@@ -45,7 +45,6 @@ class Room {
         return (roomID === undefined) ? (this.roomID !== undefined) : (this.roomID === roomID);
     }
 }
-
 
 
 Object.assign(

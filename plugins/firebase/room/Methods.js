@@ -8,8 +8,9 @@ import KickUser from './KickUser.js';
 import MonitorMyStateOn from './MonitorMyStateOn.js';
 import MonitorMyStateOff from './MonitorMyStateOff.js';
 import OnLeftRoom from './OnLeftRoom.js';
+import GetRefMethods from './GetRefMethods.js';
 
-var methods = {
+var Methods = {
     createRoom: CreateRoom,
     joinRoom: JoinRoom,
     joinRandomRoom: JoinRandomRoom,
@@ -22,4 +23,9 @@ var methods = {
     onLeftRoom: OnLeftRoom
 }
 
-export default methods;
+Object.assign(
+    Methods,
+    GetRefMethods
+);
+
+export default Methods;

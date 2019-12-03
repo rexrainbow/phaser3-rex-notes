@@ -1,7 +1,7 @@
 import GetRef from '../utils/GetRef.js';
 import Delay from '../../utils/promise/Delay.js';
 
-var AddUser = function (userID, userName) {
+var AddUser = function (userID, userName, isFirstUser) {
     if (this.contains(userID)) {
         return Promise.resolve();  // Promise
     }
@@ -16,7 +16,7 @@ var AddUser = function (userID, userName) {
     var userRef = rootRef.push();
 
     // Go promise
-    if (this.maxUsers === 0) { // Unlimit user list
+    if ((this.maxUsers === 0) || isFirstUser) { // Unlimit user list, or is first user
         return userRef.onDisconnect().remove()
             .then(function () {
                 return userRef.set(d);
