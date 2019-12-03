@@ -55,7 +55,8 @@ var CreateRoom = function (config) {
         this.usersList
             .setRootPath(`${this.rootPath}/rooms/${roomID}/users`)
             .setMaxUsers(0)
-            .addUser(this.userID, this.userName)
+            .setUser(this.userID, this.userName)
+            .join()
             .setMaxUsers(config.maxUsers);
     }
     // Room-filter

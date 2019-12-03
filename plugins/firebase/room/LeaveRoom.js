@@ -9,7 +9,7 @@ var LeaveRoom = function () {
         return this.removeRoom();
     } else {
         // Leave user list only -> MonitorMyState -> OnLeftRoom
-        return this.usersList.removeUser(this.userID);
+        return this.usersList.leave();
     }
 }
 
