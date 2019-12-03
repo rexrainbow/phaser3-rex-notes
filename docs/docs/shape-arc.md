@@ -62,7 +62,7 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
 !!! warning "No tint methods"
     Uses `arc.setFillStyle(color, alpha)` to change color.
 
-### Propertirs
+### Properties
 
 - Radius
     - Get
