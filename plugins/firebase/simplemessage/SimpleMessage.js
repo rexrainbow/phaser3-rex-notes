@@ -22,6 +22,14 @@ class SimpleMessage {
         this.isReceiving = false;
     }
 
+    shutdown() {
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         this.sendToRef = undefined;

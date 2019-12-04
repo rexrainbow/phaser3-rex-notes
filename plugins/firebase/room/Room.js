@@ -30,15 +30,31 @@ class Room {
                 leave: GetValue(config, 'eventNames.leave', 'user.leave'),
                 update: GetValue(config, 'eventNames.update', 'userlist.update')
             }
-        });
+        })
+        this.usersList
+            .setUser(this.userInfo);
 
         // Monitor
         this.monitorRefPaths = [];
     }
 
+    shutdown() {
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
     setUser(userID, userName) {
-        this.userID = userID;
-        this.userName = userName;
+        if (typeof (userID) === 'string') {
+            this.userInfo = {
+                userID: userID,
+                userName: userName
+            }
+        } else {
+            this.userInfo = userID;
+        }
         return this;
     }
 

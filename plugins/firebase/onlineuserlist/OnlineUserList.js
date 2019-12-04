@@ -37,6 +37,14 @@ class OnlineUserList {
             }, this)
     }
 
+    shutdown() {
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         return this;

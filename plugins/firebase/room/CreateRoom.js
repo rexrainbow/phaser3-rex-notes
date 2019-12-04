@@ -55,7 +55,6 @@ var CreateRoom = function (config) {
         this.usersList
             .setRootPath(`${this.rootPath}/rooms/${roomID}/users`)
             .setMaxUsers(0)
-            .setUser(this.userID, this.userName)
             .join()
             .setMaxUsers(config.maxUsers);
     }
