@@ -138,6 +138,9 @@ module.exports = {
         // parse
         'parse': './plugins/parse.js',
 
+        // firebase
+        'firebaseplugin': './plugins/firebase-plugin.js',
+
         // templates
         'bejeweled': './templates/bejeweled/Bejeweled.js',
         'uiplugin': './templates/ui/ui-plugin.js',

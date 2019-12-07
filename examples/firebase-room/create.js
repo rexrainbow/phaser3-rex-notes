@@ -1,8 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+import FirebasePlugin from '../../plugins/firebase-plugin.js';
 import firebaseConfig from './firebaseConfig.js';
 
-import Room from '../../plugins/firebase/room/Room.js';
 import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 
 class Demo extends Phaser.Scene {
@@ -17,8 +15,8 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
 
-        var app = firebase.initializeApp(firebaseConfig);
-        var room = new Room(app, {
+        var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
+        var room = rexFire.add.room({
             root: 'test-room'
         })
             .setUser(GetRandomWord(10), GetRandomWord(5))
@@ -48,7 +46,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexFire',
+            plugin: FirePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

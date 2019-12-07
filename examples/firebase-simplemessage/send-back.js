@@ -1,8 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
+import FirebasePlugin from '../../plugins/firebase-plugin.js';
 import firebaseConfig from './firebaseConfig.js';
-import SimpleMessage from '../../plugins/firebase/simplemessage/SimpleMessage.js';
-import StackMessage from '../../plugins/firebase/stackmessage/StackMessage.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,17 +13,16 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
 
-        var app = firebase.initializeApp(firebaseConfig);
-        var config = {
+        var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
+
+        var simpleMode = true;
+        var messagerName = (simpleMode) ? 'simpleMessage' : 'stackMessage';
+        var messager = rexFire.add[messagerName]({
             root: 'simple-message',
 
             senderID: 'aabb',
             senderName: 'rex'
-        }
-
-        var simpleMode = true;
-        var messagerClass = (simpleMode) ? SimpleMessage : StackMessage;
-        var messager = new messagerClass(app, config);
+        });
 
 
         messager
@@ -40,10 +36,12 @@ class Demo extends Phaser.Scene {
                 // This message won't be received if simpleMode is true
             })
             .then(function () {
-                messager.on('receive', function (d) {
-                    print.text += `${d.senderName}: ${d.message}\n`;
-                })
-                messager.startReceiving();
+                messager
+                    .on('receive', function (d) {
+                        print.text += `${d.senderName}: ${d.message}\n`;
+                    })
+                    .startReceiving()
+
                 return Promise.resolve();
             })
             .then(function () {
@@ -72,7 +70,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexFire',
+            plugin: FirePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

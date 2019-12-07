@@ -70,7 +70,7 @@ var CreateRoom = function (config) {
         maxUsers: config.maxUsers,
         moderators: {}
     };
-    roomMetadata.moderators[this.userID] = this.userName;
+    roomMetadata.moderators[this.userInfo.userID] = this.userInfo.userName;
 
     var d = {};
     d[`rooms/${roomID}`] = roomData;
