@@ -18,14 +18,12 @@ class Demo extends Phaser.Scene {
         var simpleMode = true;
         var messagerName = (simpleMode) ? 'simpleMessage' : 'stackMessage';
         var messager = rexFire.add[messagerName]({
-            root: 'simple-message',
-
-            senderID: 'aabb',
-            senderName: 'rex'
+            root: 'simple-message'
         });
 
 
         messager
+            .setSender('aabb', 'rex')
             .send('aabb', '1')  // This message won't be received if simpleMode is true
             .then(function () {
                 return messager.send('aabb', '2');

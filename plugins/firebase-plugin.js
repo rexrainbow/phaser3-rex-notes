@@ -21,6 +21,10 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
         this.add.initializeApp(config);
         return this;
     }
+
+    get app() {
+        return this.add.app;
+    }
 }
 
 
