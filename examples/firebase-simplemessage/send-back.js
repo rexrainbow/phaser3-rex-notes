@@ -72,7 +72,7 @@ var config = {
     plugins: {
         global: [{
             key: 'rexFire',
-            plugin: FirePlugin,
+            plugin: FirebasePlugin,
             start: true
         }]
     }
