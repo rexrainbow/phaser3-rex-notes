@@ -77,18 +77,18 @@ var CreateMessageBox = function (scene, config) {
 };
 
 var CreateInputPanel = function (scene, config) {
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.inputBackground);
+    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.inputBackground); // Height is 40
     var nameBox = scene.rexUI.add.BBCodeText(0, 0, config.name, {
         halign: 'right',
         valign: 'center',
         fixedWidth: 100,
-        fixedHeight: 20
+        fixedHeight: 40
     });
 
     var inputBox = scene.rexUI.add.BBCodeText(0, 0, '', {
         valign: 'center',
         fixedWidth: 100,
-        fixedHeight: 20,
+        fixedHeight: 40,
         backgroundColor: `#${config.color.inputBox.toString(16)}`
     });
     var SendBtn = scene.rexUI.add.BBCodeText(0, 0, 'Send', {
