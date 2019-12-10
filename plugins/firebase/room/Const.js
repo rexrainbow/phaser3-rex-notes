@@ -1,5 +1,5 @@
 var Const = {
-    close: 0,
+    closed: 0,
     open: 1
 };
 

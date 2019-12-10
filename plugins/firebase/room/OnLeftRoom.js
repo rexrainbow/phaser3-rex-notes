@@ -8,7 +8,7 @@ var OnLeftRoom = function () {
     this.doorState = undefined;
 
     this.monitorMyStateOff();
-    this.usersList.stopUpdate().clear();
+    this.userList.stopUpdate().clear();
 
     this.emit('leave', d);
     if (!this.leftRoomFlag) {

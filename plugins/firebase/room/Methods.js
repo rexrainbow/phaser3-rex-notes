@@ -5,10 +5,9 @@ import LeaveRoom from './LeaveRoom.js';
 import RemoveRoom from './RemoveRoom.js';
 import GetUserList from './GetUserList.js';
 import KickUser from './KickUser.js';
-import MonitorMyStateOn from './MonitorMyStateOn.js';
-import MonitorMyStateOff from './MonitorMyStateOff.js';
 import OnJoinRoom from './OnJoinRoom.js';
 import OnLeftRoom from './OnLeftRoom.js';
+import IsRoomOpened from './IsRoomOpened.js';
 import GetRefMethods from './GetRefMethods.js';
 
 var Methods = {
@@ -19,10 +18,9 @@ var Methods = {
     removeRoom: RemoveRoom,
     getUserList: GetUserList,
     kickUser: KickUser,
-    monitorMyStateOn: MonitorMyStateOn,
-    MonitorMyStateOff: MonitorMyStateOff,
     onJoinRoom: OnJoinRoom,
-    onLeftRoom: OnLeftRoom
+    onLeftRoom: OnLeftRoom,
+    isRoomOpened: IsRoomOpened
 }
 
 Object.assign(

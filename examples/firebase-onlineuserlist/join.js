@@ -23,13 +23,12 @@ class Demo extends Phaser.Scene {
 
         onlineUserList
             .setUser(GetRandomWord(10), GetRandomWord(5))
+            .on('join', function (user) {
+                console.log('Join:', user)
+            })
             .join()
             .then(function (params) {
-                onlineUserList
-                    .on('join', function (user) {
-                        console.log('Join:', user)
-                    })
-                    .startUpdate(); // Don't startUpdate before addUser
+                onlineUserList.startUpdate(); // Don't startUpdate before addUser
             })
             .catch(function (error) {
                 console.log('Join-fail', user)

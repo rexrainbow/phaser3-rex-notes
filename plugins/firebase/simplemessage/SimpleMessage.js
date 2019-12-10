@@ -17,6 +17,7 @@ class SimpleMessage {
         // Sender
         this.skipFirst = true;
         this.stamp = false;
+        this.senderInfo = { userID: '', userName: '' };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
 
         // Receiver
@@ -24,7 +25,8 @@ class SimpleMessage {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this.stopReceiving()
+            .destroyEventEmitter();
     }
 
     destroy() {
@@ -40,10 +42,8 @@ class SimpleMessage {
 
     setSender(userID, userName) {
         if (typeof (userID) === 'string') {
-            this.senderInfo = {
-                userID: userID,
-                userName: userName
-            }
+            this.senderInfo.userID = userID;
+            this.senderInfo.userName = userName;
         } else {
             this.senderInfo = userID;
         }

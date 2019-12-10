@@ -27,7 +27,7 @@ room-metadata/
             <userID> - userName
         # ignore room if user can not join
 
-        maxPeers - The maximum number of peers that can join this room.
+        maxUsers - The maximum number of users that can join this room.
         # limit the amount of users
 
         extra/

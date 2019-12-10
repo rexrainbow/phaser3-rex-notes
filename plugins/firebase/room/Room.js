@@ -15,6 +15,7 @@ class Room {
         this.rootPath = GetValue(config, 'root', '');
 
         // User properties
+        this.userInfo = { userID: '', userName: '' };
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
         // Room properties
         this.isRoomCreator = false;
@@ -24,15 +25,21 @@ class Room {
         this.doorState = undefined;
         this.leftRoomFlag = false;
         this.isRemoveRoomWhenLeft = undefined;
-        this.usersList = new OnlineUserList(app, {
+        this.userList = new OnlineUserList(app, {
             eventEmitter: this.getEventEmitter(),
             eventNames: {
-                join: GetValue(config, 'eventNames.join', 'user.join'),
-                leave: GetValue(config, 'eventNames.leave', 'user.leave'),
-                update: GetValue(config, 'eventNames.update', 'userlist.update')
+                join: GetValue(config, 'eventNames.join', 'user.join'), // Any user join
+                leave: GetValue(config, 'eventNames.leave', 'user.leave'), // Any user leave
+                update: GetValue(config, 'eventNames.update', 'userlist.update'), // Update user list
+                init: GetValue(config, 'eventNames.init', 'userlist.init')
             }
-        })
-        this.usersList
+        });
+        this.userList
+            .on('user.leave', function (user) {
+                if (user.userID === this.userInfo.userID) {
+                    this.onLeftRoom(); // Current user is left or kicked
+                }
+            }, this)
             .setUser(this.userInfo);
 
         // Monitor
@@ -40,7 +47,9 @@ class Room {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this
+            .destroyEventEmitter()
+            .leaveRoom();
     }
 
     destroy() {
@@ -49,10 +58,8 @@ class Room {
 
     setUser(userID, userName) {
         if (typeof (userID) === 'string') {
-            this.userInfo = {
-                userID: userID,
-                userName: userName
-            }
+            this.userInfo.userID = userID;
+            this.userInfo.userName = userName;
         } else {
             this.userInfo = userID;
         }
@@ -61,6 +68,10 @@ class Room {
 
     isInRoom(roomID) {
         return (roomID === undefined) ? (this.roomID !== undefined) : (this.roomID === roomID);
+    }
+
+    get maxUsers() {
+        return this.userList.maxUsers;
     }
 }
 

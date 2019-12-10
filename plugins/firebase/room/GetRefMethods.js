@@ -47,6 +47,10 @@ var Methods = {
             ref = ref.child(userID);
         }
         return ref;
+    },
+
+    getUserListPath(roomID) {
+        return `${this.rootPath}/rooms/${roomID}/users`;
     }
 }
 

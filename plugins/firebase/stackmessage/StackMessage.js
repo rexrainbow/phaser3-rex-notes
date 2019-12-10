@@ -15,13 +15,15 @@ class StackMessage {
         this.setRootPath(GetValue(config, 'root', ''));
 
         // Sender
+        this.senderInfo = { userID: '', userName: '' };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
         // Receiver
         this.isReceiving = false;
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this.stopReceiving()
+            .destroyEventEmitter();
     }
 
     destroy() {
@@ -37,10 +39,8 @@ class StackMessage {
 
     setSender(userID, userName) {
         if (typeof (userID) === 'string') {
-            this.senderInfo = {
-                userID: userID,
-                userName: userName
-            }
+            this.senderInfo.userID = userID;
+            this.senderInfo.userName = userName;
         } else {
             this.senderInfo = userID;
         }

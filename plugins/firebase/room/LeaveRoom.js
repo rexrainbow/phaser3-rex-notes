@@ -8,9 +8,10 @@ var LeaveRoom = function () {
         // Remove room, include user list
         return this.removeRoom();
     } else {
-        // Leave user list only -> MonitorMyState -> OnLeftRoom
-        return this.usersList.leave();
+        // Leave user list only        
+        return this.userList.leave();
     }
+    // Emit 'user.leave' event -> onLeftRoom
 }
 
 export default LeaveRoom;

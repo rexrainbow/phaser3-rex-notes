@@ -16,6 +16,7 @@ class OnlineUserList {
         this.database = app.database();
         this.setRootPath(GetValue(config, 'root', ''));
 
+        this.userInfo = { userID: '', userName: '' };
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
         this.setMaxUsers(GetValue(config, 'maxUsers', 0));
         this.userList = new ItemList({
@@ -32,6 +33,9 @@ class OnlineUserList {
         this.userList
             .on(this.userList.eventNames.add, function (user) {
                 this.userID2ItemID[user.userID] = user.joinAt;
+                if (user.userID === this.userInfo.userID) {
+                    this.emit('init', this.getUsers());
+                }
             }, this)
             .on(this.userList.eventNames.remove, function (user) {
                 delete this.userID2ItemID[user.userID];
@@ -39,7 +43,12 @@ class OnlineUserList {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this
+            .stopUpdate()
+            .destroyEventEmitter()
+            .leave();
+
+        this.userList.shutdown();
     }
 
     destroy() {
@@ -53,10 +62,8 @@ class OnlineUserList {
 
     setUser(userID, userName) {
         if (typeof (userID) === 'string') {
-            this.userInfo = {
-                userID: userID,
-                userName: userName
-            }
+            this.userInfo.userID = userID;
+            this.userInfo.userName = userName;
         } else {
             this.userInfo = userID;
         }
@@ -96,6 +103,10 @@ class OnlineUserList {
         }
         var itemID = this.userID2ItemID[userID];
         return this.userList.getItemFromItemID(itemID);
+    }
+
+    getUsers() {
+        return this.userList.getItems();
     }
 
     getUserRef(userID) {

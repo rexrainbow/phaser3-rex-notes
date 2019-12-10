@@ -28,6 +28,16 @@ class ItemList {
         this.setQuery(GetValue(config, 'query', undefined));
     }
 
+    shutdown() {
+        this
+            .stopUpdate()
+            .clear();
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
     setItemIDKey(key) {
         this.keyItemID = key;
         return this;

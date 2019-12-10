@@ -1,5 +1,5 @@
 import MergeRight from '../../utils/object/MergeRight.js';
-import GetFilterString from './GetFilterString.js';
+import { GetFilterString } from './RoomFilterMethods.js';
 
 var TryCreateRoom = function (config) {
     if (config === undefined) {
@@ -10,19 +10,19 @@ var TryCreateRoom = function (config) {
     }
 
     var self = this;
-    return TestRoomAlive.call(self, config.roomID)
+    return RegisterRoom.call(self, config.roomID)
         .then(function () { // Create room
             return CreateRoom.call(self, config);
         });
 }
 
-var TestRoomAlive = function (roomID) {
+var RegisterRoom = function (roomID) {
     return this.getRoomAliveRef(roomID)
-        .transaction(function (value) { // Test if room is existed
-            if (value === null) {
+        .transaction(function (value) {
+            if (value === null) {  // Room is not existed, register success
                 return true;
             }
-            else {
+            else {  // Room is existed, register fail
                 return;    // Abort the transaction
             }
         });
@@ -32,6 +32,8 @@ var CreateRoom = function (config) {
     config = MergeRight(DefaultConfig, config);
     var roomID = config.roomID;
     var roomName = config.roomName;
+    var roomType = config.roomType;
+    var doorState = config.doorState;
     var join = config.join;
 
     var roomRef = this.getRoomRef(roomID);
@@ -46,16 +48,17 @@ var CreateRoom = function (config) {
         roomMetadataRef.onDisconnect().remove();
     }
 
-    var filter = GetFilterString(config.doorState, config.roomType);
+    var filter = GetFilterString(doorState, roomType);
     // Room
     var roomData = {
         alive: true
     };
     if (join) {
-        this.usersList
-            .setRootPath(`${this.rootPath}/rooms/${roomID}/users`)
-            .setMaxUsers(0)
-            .join()
+        this.userList
+            .setRootPath(this.getUserListPath(roomID))
+            .setMaxUsers(0) // Don't test max user count
+            .join(); // Promise
+        this.userList
             .setMaxUsers(config.maxUsers);
     }
     // Room-filter
@@ -81,6 +84,10 @@ var CreateRoom = function (config) {
     var self = this;
     return this.getRootRef().update(d)
         .then(function () {
+            self.roomID = roomID;
+            self.roomName = roomName;
+            self.roomType = roomType;
+            self.emit('create', self);
             if (join) {
                 self.onJoinRoom(config);
             }
@@ -88,6 +95,7 @@ var CreateRoom = function (config) {
         })
         .catch(function (error) {
             self.isRoomCreator = false;
+            self.emit('create-fail', self);
             return Promise.reject(error);
         });
 }
@@ -99,7 +107,7 @@ var DefaultConfig = {
     maxUsers: 0,
     presisted: false,
     door: 'open',
-    join: false
+    join: true
 }
 
 export default TryCreateRoom;
