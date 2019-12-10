@@ -82,13 +82,13 @@ var CreateInputPanel = function (scene, config) {
         halign: 'right',
         valign: 'center',
         fixedWidth: 100,
-        fixedHeight: 40
+        fixedHeight: 20
     });
 
     var inputBox = scene.rexUI.add.BBCodeText(0, 0, '', {
         valign: 'center',
         fixedWidth: 100,
-        fixedHeight: 40,
+        fixedHeight: 20,
         backgroundColor: `#${config.color.inputBox.toString(16)}`
     });
     var SendBtn = scene.rexUI.add.BBCodeText(0, 0, 'Send', {
@@ -96,6 +96,8 @@ var CreateInputPanel = function (scene, config) {
     });
 
     return scene.rexUI.add.label({
+        height: 40,
+
         background: background,
         icon: nameBox,
         text: inputBox,
