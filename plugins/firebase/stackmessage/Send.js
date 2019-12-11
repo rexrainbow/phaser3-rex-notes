@@ -15,7 +15,16 @@ var Send = function (sendToID, message) {
         senderID: this.senderInfo.userID,
         senderName: this.senderInfo.userName,
     };
-    return this.sendToRef.push(d); // Promise
+    var self = this;
+    return this.sendToRef.push(d)
+        .then(function () {
+            self.emit('send', d);
+            return Promise.resolve();
+        })
+        .catch(function (error) {
+            self.emit('send-fail', d);
+            return Promise.reject(error);
+        }); // Promise
 }
 
 export default Send;
