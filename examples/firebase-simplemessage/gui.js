@@ -14,7 +14,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        // var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
+        var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
+        var messager = rexFire.add.simpleMessage({
+            root: 'chat-ui'
+        });
+
         var mainPanel = CreateMainPanel(this, {
             x: 400, y: 300,
             width: 640, height: 560,
@@ -25,25 +29,41 @@ class Demo extends Phaser.Scene {
                 inputBackground: 0x685784,
                 inputBox: 0x182456
             },
-            name: GetRandomWord(5, 10)
+            userName: GetRandomWord(5, 10)
         })
-            .layout()
+            .layout();
 
+        // Control
+        var userID = GetRandomWord(10);
+        var channelName = 'lobby';
+        mainPanel
+            .on('send-message', function (userName, message) {
+                messager
+                    .setSender(userID, userName)
+                    .send(channelName, message)
+            })
+        messager
+            .on('receive', function (d) {
+                var s = `[${d.senderName}] ${d.message}\n`;
+                mainPanel.appendMessage(s);
+            })
+            .startReceiving(channelName);
     }
 
     update() { }
 }
 
 var CreateMainPanel = function (scene, config) {
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.background);
-    var messageBox = CreateMessageBox(scene, config);
-    var inputPanel = CreateInputPanel(scene, config);
-
     var mainPanel = scene.rexUI.add.sizer({
         x: config.x, y: config.y,
         width: config.width, height: config.height,
         orientation: 'y'
-    })
+    });
+    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.background);
+    var messageBox = CreateMessageBox(mainPanel, config);
+    var inputPanel = CreateInputPanel(mainPanel, config);
+
+    mainPanel
         .addBackground(background)
         .add(
             messageBox, //child
@@ -63,8 +83,9 @@ var CreateMainPanel = function (scene, config) {
     return mainPanel;
 };
 
-var CreateMessageBox = function (scene, config) {
-    return scene.rexUI.add.textArea({
+var CreateMessageBox = function (parent, config) {
+    var scene = parent.scene;
+    var messageBox = scene.rexUI.add.textArea({
         text: scene.rexUI.add.BBCodeText(0, 0, '', {
 
         }),
@@ -72,34 +93,47 @@ var CreateMessageBox = function (scene, config) {
         slider: {
             track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, config.color.track),
             thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, config.color.thumb),
-        }
-    })
+        },
+
+        name: 'messageBox'
+    });
+
+    // Control
+    parent.appendMessage = function (s) {
+        messageBox
+            .appendText(s)
+            .scrollToBottom()
+    }
+    return messageBox;
 };
 
-var CreateInputPanel = function (scene, config) {
-    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, config.color.inputBackground); // Height is 40
-    var nameBox = scene.rexUI.add.BBCodeText(0, 0, config.name, {
+var CreateInputPanel = function (parent, config) {
+    var scene = parent.scene;
+    var background = scene.rexUI.add.roundRectangle(0, 0, 2, 2, { bl: 20, br: 20 }, config.color.inputBackground); // Height is 40
+    var userNameBox = scene.rexUI.add.BBCodeText(0, 0, config.userName, {
         halign: 'right',
         valign: 'center',
-        fixedWidth: 100,
+        fixedWidth: 120,
         fixedHeight: 20
     });
 
-    var inputBox = scene.rexUI.add.BBCodeText(0, 0, '', {
+    var inputBox = scene.rexUI.add.BBCodeText(0, 0, 'Hello world', {
+        halign: 'left',
         valign: 'center',
         fixedWidth: 100,
         fixedHeight: 20,
         backgroundColor: `#${config.color.inputBox.toString(16)}`
     });
+
     var SendBtn = scene.rexUI.add.BBCodeText(0, 0, 'Send', {
 
     });
 
-    return scene.rexUI.add.label({
+    var inputPanel = scene.rexUI.add.label({
         height: 40,
 
         background: background,
-        icon: nameBox,
+        icon: userNameBox,
         text: inputBox,
         expandTextWidth: true,
         action: SendBtn,
@@ -114,6 +148,30 @@ var CreateInputPanel = function (scene, config) {
             text: 10,
         }
     });
+
+    // Control
+    SendBtn
+        .setInteractive()
+        .on('pointerdown', function () {
+            if (inputBox.text !== '') {
+                parent.emit('send-message', userNameBox.text, inputBox.text);
+                inputBox.text = '';
+            }
+        });
+
+    userNameBox
+        .setInteractive()
+        .on('pointerdown', function () {
+            scene.rexUI.edit(userNameBox);
+        });
+
+    inputBox
+        .setInteractive()
+        .on('pointerdown', function () {
+            scene.rexUI.edit(inputBox);
+        });
+
+    return inputPanel;
 }
 
 var config = {
@@ -124,6 +182,9 @@ var config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    dom: {
+        createContainer: true
     },
     scene: Demo,
     plugins: {
