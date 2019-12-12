@@ -40,6 +40,7 @@ module.exports = {
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
         'awaitloaderplugin': './plugins/awaitloader-plugin.js',
+        'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
 
         // actions                    
         'gridalignplugin': './plugins/gridalign-plugin.js',
