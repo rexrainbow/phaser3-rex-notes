@@ -14,9 +14,7 @@ class Demo extends Phaser.Scene {
         var callback = function(successCallback, failureCallback) {
             setTimeout(successCallback, 1000);
         }
-        this.load.rexAwait('fn0', {
-            callback: callback
-        });        
+        this.load.rexAwait(callback);        
     }
 
     create() {

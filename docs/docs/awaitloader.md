@@ -46,6 +46,14 @@ or install it in previous scene (i.e. a preload scene).
 In preload stage:
 
 ```javascript
+this.load.rexAwait(function(successCallback, failureCallback) {
+    // successCallback();
+}, scope);
+```
+
+or
+
+```javascript
 var callback = function(successCallback, failureCallback) {
     // successCallback();
 };
