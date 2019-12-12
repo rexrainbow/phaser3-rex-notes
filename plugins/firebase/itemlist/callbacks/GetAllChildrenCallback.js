@@ -1,8 +1,8 @@
 var ReceiveAllCallback = function (snapshot) {
     this.clear();
-    snapshot.forEach(function (childSnapshot) {
+    snapshot.forEach((function (childSnapshot) {
         this.addItem(childSnapshot, null, true);
-    }, this);
+    }).bind(this));
     this.updateItemID2Index();
 
     this.emit(this.eventNames.update, this.items);

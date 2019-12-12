@@ -14,9 +14,13 @@ var methods = {
         this.isReceiving = true;
         this.skipFirst = true;  // Skip previous message
         this.receiverRef = GetRef(this.database, this.rootPath, receiverID);
-        this.receiverRef.limitToFirst(1).on('child_added', OnReceive, this);
-        this.receiverRef.onDisconnect().remove();
-        return this;
+
+        var self = this;
+        return this.receiverRef.once('value')
+            .then(function (snapshot) {
+                snapshot.forEach(OnReceive.bind(self));
+                self.receiverRef.limitToFirst(1).on('child_added', OnReceive, self);
+            });  // Promise
     },
 
     stopReceiving() {
@@ -26,9 +30,7 @@ var methods = {
 
         this.isReceiving = false;
         this.receiverRef.off('child_added', OnReceive, this);
-        this.receiverRef.remove();
-        this.receiverRef.onDisconnect().cancel();
-        return this;
+        return Promise.resolve(); // Promise
     }
 }
 

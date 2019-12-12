@@ -23,6 +23,9 @@ class Demo extends Phaser.Scene {
 
 
         messager
+            .on('receive', function (d) {
+                print.text += `${d.senderName}: ${d.message}\n`;
+            })
             .setSender('aabb', 'rex')
             .send('aabb', '1')  // This message won't be received if simpleMode is true
             .then(function () {
@@ -34,13 +37,7 @@ class Demo extends Phaser.Scene {
                 // This message won't be received if simpleMode is true
             })
             .then(function () {
-                messager
-                    .on('receive', function (d) {
-                        print.text += `${d.senderName}: ${d.message}\n`;
-                    })
-                    .startReceiving()
-
-                return Promise.resolve();
+                return messager.startReceiving();
             })
             .then(function () {
                 return messager.send('aabb', 'hello');

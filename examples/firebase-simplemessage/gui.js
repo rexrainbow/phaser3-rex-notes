@@ -47,7 +47,7 @@ class Demo extends Phaser.Scene {
                 var s = `[${d.senderName}] ${d.message}\n`;
                 mainPanel.appendMessage(s);
             })
-            .startReceiving(channelName);
+            .startReceiving(channelName); // Promise
     }
 
     update() { }
