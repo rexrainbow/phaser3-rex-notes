@@ -37,7 +37,8 @@ class Demo extends Phaser.Scene {
                 // This message won't be received if simpleMode is true
             })
             .then(function () {
-                return messager.startReceiving();
+                messager.startReceiving();
+                return Promise.resolve();
             })
             .then(function () {
                 return messager.send('aabb', 'hello');

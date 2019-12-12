@@ -16,7 +16,7 @@ var methods = {
         this.receiverRef = GetRef(this.database, this.rootPath, receiverID);
         this.receiverRef.on('value', OnReceive, this);
         this.receiverRef.onDisconnect().remove();
-        return Promise.resolve(); // Promise
+        return this;
     },
 
     stopReceiving() {
@@ -28,7 +28,7 @@ var methods = {
         this.receiverRef.off('value', OnReceive, this);
         this.receiverRef.remove();
         this.receiverRef.onDisconnect().cancel();
-        return Promise.resolve(); // Promise
+        return this;
     }
 }
 
