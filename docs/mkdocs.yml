@@ -290,6 +290,8 @@ nav:
             - Authentication: firebase-auth.md
             - Firestore: firebase-firestore.md
             - Storage: firebase-storage.md
+            - Applications:
+                - Simple message: firebase-simplemessage.md
 - Tools: tools.md
 
 
