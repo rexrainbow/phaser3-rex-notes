@@ -1,9 +1,9 @@
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 
 class AwaitFile extends Phaser.Loader.File {
-    constructor(loader, fileConfig) {
-        super(loader, fileConfig);
-    }
+    // constructor(loader, fileConfig) {
+    //     super(loader, fileConfig);
+    // }
 
     load() {
         if (this.state === FILE_POPULATED) {

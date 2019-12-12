@@ -5,9 +5,9 @@ const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class WebFont extends Phaser.Loader.File {
-    constructor(loader, fileConfig) {
-        super(loader, fileConfig);
-    }
+    // constructor(loader, fileConfig) {
+    //     super(loader, fileConfig);
+    // }
 
     load() {
         if (this.state === FILE_POPULATED) {
