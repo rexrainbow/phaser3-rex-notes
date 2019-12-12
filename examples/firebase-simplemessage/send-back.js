@@ -15,9 +15,7 @@ class Demo extends Phaser.Scene {
 
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
 
-        var simpleMode = true;
-        var messagerName = (simpleMode) ? 'simpleMessage' : 'stackMessage';
-        var messager = rexFire.add[messagerName]({
+        var messager = rexFire.add.simpleMessage({
             root: 'simple-message'
         });
 
@@ -27,14 +25,14 @@ class Demo extends Phaser.Scene {
                 print.text += `${d.senderName}: ${d.message}\n`;
             })
             .setSender('aabb', 'rex')
-            .send('aabb', '1')  // This message won't be received if simpleMode is true
+            .send('aabb', '1')  // This message won't be received
             .then(function () {
                 return messager.send('aabb', '2');
-                // This message won't be received if simpleMode is true
+                // This message won't be received
             })
             .then(function () {
                 return messager.send('aabb', '3');
-                // This message won't be received if simpleMode is true
+                // This message won't be received
             })
             .then(function () {
                 messager.startReceiving();

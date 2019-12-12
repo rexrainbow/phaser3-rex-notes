@@ -1,7 +1,6 @@
 import ObjectFactory from './firebase/ObjectFactory.js'
 
 import SimpleMessageFactory from './firebase/simplemessage/Factory.js';
-import StackMessageFactory from './firebase/stackmessage/Factory.js';
 import OnlineUserListFactory from './firebase/onlineuserlist/Factory.js';
 import RoomFactory from './firebase/room/Factory.js';
 
