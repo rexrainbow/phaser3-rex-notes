@@ -37,6 +37,8 @@ var game = new Phaser.Game(config);
 
 ### Create instance
 
+*Firebase engine api is boundled into this plugin already*
+
 1. Initialize firebase application
     ```javascript
     var rexFire = scene.plugins.get('rexFire').initializeApp({
