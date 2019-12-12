@@ -1,3 +1,4 @@
+import LoaderCallback from './firebase/preload/LoaderCallback.js';
 import ObjectFactory from './firebase/ObjectFactory.js'
 
 import SimpleMessageFactory from './firebase/simplemessage/Factory.js';
@@ -9,6 +10,7 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         this.add = new ObjectFactory();
+        pluginManager.registerFileType('rexFirebasePreload', LoaderCallback);
     }
 
     start() {
@@ -23,6 +25,11 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
 
     get app() {
         return this.add.app;
+    }
+
+    preload(scene, config) {
+        // scene.sys.load['rexFirebasePreload'] = LoaderCallback;
+        scene.load.rexFirebasePreload(config);
     }
 }
 
