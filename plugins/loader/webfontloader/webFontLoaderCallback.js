@@ -1,4 +1,4 @@
-import WebFontFile from './webFontFile.js';
+import WebFont from './webFont.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -24,7 +24,7 @@ const loaderCallback = function (key, config) {
             config: config
         };
     }
-    this.addFile(new WebFontFile(this, config));
+    this.addFile(new WebFont(this, config));
 
     return this;
 }

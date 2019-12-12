@@ -1,10 +1,10 @@
-import WebFont from 'webfontloader';
+import googleWebFontLoader from 'webfontloader';
 import TestFont from './TestFont.js';
 
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class WebFontFile extends Phaser.Loader.File {
+class WebFont extends Phaser.Loader.File {
     constructor(loader, fileConfig) {
         super(loader, fileConfig);
     }
@@ -29,7 +29,7 @@ class WebFontFile extends Phaser.Loader.File {
             config.inactive = this.onError.bind(this);
             config.fontactive = this.onFontActive.bind(this);
             config.fontinactive = this.onFontInactive.bind(this);
-            WebFont.load(config);
+            googleWebFontLoader.load(config);
         }
     }
 
@@ -85,4 +85,4 @@ class WebFontFile extends Phaser.Loader.File {
     }
 }
 
-export default WebFontFile;
+export default WebFont;
