@@ -35,9 +35,17 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Create instance
+### Import SDK
 
-*Firebase engine api is boundled into this plugin already*
+*Firebase SDK dose not boundle into this plugin*
+
+- Download SDK from [CDN](https://firebase.google.com/docs/web/setup/#libraries-cdn) via script tags.
+- Download SDK during preload stage.
+    ```javascript
+    scene.plugins.get('rexFire').preload(scene);
+    ```
+
+### Create instance
 
 1. Initialize firebase application
     ```javascript

@@ -1,10 +1,15 @@
 import Delay from '../../utils/promise/Delay.js';
 
-var AvailableTestPromise = async function (config) {
-    while (!AvailableTest(config)) {
-        await Delay(10);
+var AvailableTestPromise = function (config) {
+    if (AvailableTest(config)) {
+        return Promise.resolve();
     }
-    return Promise.resolve();
+    
+    // console.log('tset again')
+    return Delay(10)
+        .then(function () {
+            return AvailableTestPromise(config);
+        });
 }
 
 var AvailableTest = function (config) {
