@@ -1,6 +1,6 @@
 ## Introduction
 
-Broadcast real-time messages.
+Broadcast real-time messages, using [firebase-database](https://firebase.google.com/docs/database/).
 
 - Author: Rex
 

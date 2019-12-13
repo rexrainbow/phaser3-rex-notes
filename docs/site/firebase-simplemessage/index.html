@@ -4587,6 +4587,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#import-sdk" class="md-nav__link">
+    Import SDK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" class="md-nav__link">
     Create instance
   </a>
@@ -4703,6 +4710,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#import-sdk" class="md-nav__link">
+    Import SDK
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" class="md-nav__link">
     Create instance
   </a>
@@ -4750,7 +4764,7 @@
                   <h1>Simple message</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Broadcast real-time messages.</p>
+<p>Broadcast real-time messages, using <a href="https://firebase.google.com/docs/database/">firebase-database</a>.</p>
 <ul>
 <li>Author: Rex</li>
 </ul>
@@ -4778,8 +4792,15 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="import-sdk">Import SDK<a class="headerlink" href="#import-sdk" title="Permanent link">&para;</a></h3>
+<p><em>Firebase SDK dose not boundle into this plugin</em></p>
+<ul>
+<li>Download SDK from <a href="https://firebase.google.com/docs/web/setup/#libraries-cdn">CDN</a> via script tags.</li>
+<li>Download SDK during preload stage.
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">preload</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<p><em>Firebase engine api is boundled into this plugin already</em></p>
 <ol>
 <li>Initialize firebase application
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rexFire</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">initializeApp</span><span class="p">({</span>
