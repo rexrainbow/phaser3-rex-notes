@@ -10,7 +10,6 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         this.add = new ObjectFactory();
-        pluginManager.registerFileType('rexFirebasePreload', LoaderCallback);
     }
 
     start() {
@@ -28,11 +27,8 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     preload(scene, config) {
-        if (!scene.sys.load.hasOwnProperty('rexFirebasePreload')) {
-            scene.sys.load['rexFirebasePreload'] = LoaderCallback;
-        }
-
-        scene.load.rexFirebasePreload(config);
+        LoaderCallback.call(scene.sys.load, config);
+        return this;
     }
 }
 
