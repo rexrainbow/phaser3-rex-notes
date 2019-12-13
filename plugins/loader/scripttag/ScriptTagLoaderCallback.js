@@ -20,8 +20,6 @@ var CreateAwiatFile = function (loader, url) {
 
     return new AwaitFile(loader, {
         type: 'scriptTag',
-        url: '',
-        key: (new Date()).getTime().toString(),
         config: { callback: callback }
     });
 }

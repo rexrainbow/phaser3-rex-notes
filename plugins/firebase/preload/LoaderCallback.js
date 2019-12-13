@@ -12,9 +12,6 @@ const LoaderCallback = function (config) {
     }
 
     this.addFile(new AwaitFile(this, {
-        type: 'firebaseScriptTag',
-        url: '',
-        key: (new Date()).getTime().toString(),
         config: { callback: callback }
     }));
     return this;

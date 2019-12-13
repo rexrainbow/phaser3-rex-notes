@@ -8,9 +8,6 @@ const loaderCallback = function (key, config) {
         var callback = key;
         var scope = config;
         config = {
-            type: 'await',
-            url: '',
-            key: (new Date()).getTime().toString(),
             config: {
                 callback: callback,
                 scope: scope,
@@ -18,21 +15,13 @@ const loaderCallback = function (key, config) {
         };
     } else if (IsPlainObject(key)) {
         config = key;
-        if (config.hasOwnProperty('config')) {
-            config.type = 'await';
-            config.url = '';
-        } else {
+        if (!config.hasOwnProperty('config')) {
             config = {
-                key: (new Date()).getTime().toString(),
-                type: 'await',
-                url: '',
                 config: config
             };
         }
     } else {
         config = {
-            type: 'await',
-            url: '',
             key: key,
             config: config
         };
