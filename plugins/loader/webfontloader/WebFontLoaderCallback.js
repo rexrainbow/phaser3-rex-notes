@@ -1,4 +1,4 @@
-import WebFont from './webFont.js';
+import WebFont from './WebFont.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 

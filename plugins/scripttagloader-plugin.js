@@ -1,16 +1,16 @@
 
-import loaderCallback from './loader/scripttag/scriptTagLoaderCallback.js';
+import LoaderCallback from './loader/scripttag/ScriptTagLoaderCallback.js';
 
-class AwaitLoaderPlugin extends Phaser.Plugins.BasePlugin {
+class ScriptTagLoaderPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 
-        pluginManager.registerFileType('rexScriptTag', loaderCallback);
+        pluginManager.registerFileType('rexScriptTag', LoaderCallback);
     }
 
     addToScene(scene) {
-        scene.sys.load['rexScriptTag'] = loaderCallback;
+        scene.sys.load['rexScriptTag'] = LoaderCallback;
     }
 }
 
-export default AwaitLoaderPlugin;
+export default ScriptTagLoaderPlugin;

@@ -1,6 +1,6 @@
 
-import loaderCallback from './loader/scripttag/scriptTagLoaderCallback.js';
+import LoaderCallback from './loader/scripttag/ScriptTagLoaderCallback.js';
 
-Phaser.Loader.FileTypesManager.register('rexScriptTag', loaderCallback);
+Phaser.Loader.FileTypesManager.register('rexScriptTag', LoaderCallback);
 
-export default loaderCallback;
+export default LoaderCallback;
