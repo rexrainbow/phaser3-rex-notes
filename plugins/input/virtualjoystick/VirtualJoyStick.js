@@ -1,14 +1,25 @@
 import TouchCursor from '../../touchcursor.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class VirtualJoyStick {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
+        // Event emitter
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
+        config.eventEmitter = this.getEventEmitter();
+
         this.scene = scene;
         this.base = undefined;
         this.thumb = undefined;
         this.touchCursor = undefined;
-        this.radius = GetValue(config, 'radius', 100);
+        this.setRadius(GetValue(config, 'radius', 100));
 
         this.addBase(GetValue(config, 'base', undefined), config);
         this.addThumb(GetValue(config, 'thumb', undefined));
@@ -23,6 +34,16 @@ class VirtualJoyStick {
         }
 
         this.boot();
+    }
+
+    destroy() {
+        this.destroyEventEmitter();
+        this.base.destroy(); // Also destroy touchCursor behavior
+        this.thumb.destroy();
+
+        this.base = undefined;
+        this.thumb = undefined;
+        this.touchCursor = undefined;
     }
 
     createCursorKeys() {
@@ -137,15 +158,8 @@ class VirtualJoyStick {
         this.touchCursor.setEnable(value);
     }
 
-    on() {
-        var ee = this.touchCursor.events;
-        ee.on.apply(ee, arguments);
-        return this;
-    }
-
-    once() {
-        var ee = this.touchCursor.events;
-        ee.once.apply(ee, arguments);
+    setRadius(radius) {
+        this.radius = radius;
         return this;
     }
 
@@ -164,6 +178,7 @@ class VirtualJoyStick {
             gameObject = this.scene.add.circle(0, 0, this.radius)
                 .setStrokeStyle(3, 0x0000ff);
         }
+
         this.touchCursor = new TouchCursor(gameObject, config)
         this.base = gameObject;
         return this;
@@ -191,15 +206,6 @@ class VirtualJoyStick {
         this.touchCursor.on('update', this.update, this);
     }
 
-    destroy() {
-        this.base.destroy(); // Also destroy touchCursor behavior
-        this.thumb.destroy();
-
-        this.base = undefined;
-        this.thumb = undefined;
-        this.touchCursor = undefined;
-    }
-
     update() {
         var touchCursor = this.touchCursor;
         if (touchCursor.anyKeyDown) {
@@ -220,5 +226,10 @@ class VirtualJoyStick {
 
 
 }
+
+Object.assign(
+    VirtualJoyStick.prototype,
+    EventEmitterMethods
+);
 
 export default VirtualJoyStick;

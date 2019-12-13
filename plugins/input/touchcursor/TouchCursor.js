@@ -1,6 +1,6 @@
 import VectorToCursorKeys from '../../utils/input/VectorToCursorKeys.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const CircleClass = Phaser.Geom.Circle;
 const CircleContains = Phaser.Geom.Circle.Contains;
@@ -10,7 +10,11 @@ class TouchCursor extends VectorToCursorKeys {
         super(config);
         //this.resetFromJSON(config); // this function had been called in super(config)
 
-        this.events = new EE();
+        // Event emitter
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
+
         this.scene = gameObject.scene;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
@@ -49,12 +53,11 @@ class TouchCursor extends VectorToCursorKeys {
         }
         // gameObject events will be removed when this gameObject destroyed 
 
-        this.events.destroy();
+        this.destroyEventEmitter();
 
         this.pointer = undefined;
         this.scene = undefined;
         this.gameObject = undefined;
-        this.events = undefined;
     }
 
     destroy() {
@@ -78,7 +81,7 @@ class TouchCursor extends VectorToCursorKeys {
         var p0 = this.gameObject,
             p1 = pointer;
         this.setVector(p0.x, p0.y, p1.x, p1.y);
-        this.events.emit('update');
+        this.emit('update');
     }
 
     onKeyUp(pointer) {
@@ -87,21 +90,14 @@ class TouchCursor extends VectorToCursorKeys {
         }
         this.pointer = undefined;
         this.clearVector();
-        this.events.emit('update');
-    }
-
-    on() {
-        var ee = this.events;
-        ee.on.apply(ee, arguments);
-        return this;
-    }
-
-    once() {
-        var ee = this.events;
-        ee.once.apply(ee, arguments);
-        return this;
+        this.emit('update');
     }
 
 }
+
+Object.assign(
+    TouchCursor.prototype,
+    EventEmitterMethods
+);
 
 export default TouchCursor;
