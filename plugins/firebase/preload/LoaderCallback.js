@@ -1,16 +1,14 @@
 import Preload from './Preload.js';
 import AwaitFile from '../../loader/awaitloader/awaitFile.js';
-import Delay from '../../utils/promise/Delay.js'
 
 
 const LoaderCallback = function (config) {
     var callback = function (successCallback, failureCallback) {
-        Preload(config)
+        return Preload(config)
             .then(function () {
-                return Delay(10);
+                setTimeout(successCallback, 0);
             })
-            .then(successCallback)
-            .catch(failureCallback);
+            .catch(failureCallback)
     }
 
     this.addFile(new AwaitFile(this, {

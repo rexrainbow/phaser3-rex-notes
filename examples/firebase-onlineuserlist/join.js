@@ -10,7 +10,9 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+        this.plugins.get('rexFire').preload(this);
+    }
 
     create() {
         var print = this.add.text(0, 0, '');

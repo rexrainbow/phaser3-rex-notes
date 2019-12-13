@@ -1,22 +1,21 @@
 var LoadScript = function (url, onload) {
-    var scripts = document.getElementsByTagName("script");
-    var exist = false;
+    var scripts = document.getElementsByTagName('script');
     for (var i = 0, cnt = scripts.length; i < cnt; i++) {
         if (scripts[i].src.indexOf(url) != -1) {
-            exist = true;
-            break;
+            if (onload) {
+                onload();
+            }
+            return;
         }
     }
-    if (!exist) {
-        var newScriptTag = document.createElement("script");
-        newScriptTag.type = "text/javascript";
-        newScriptTag.src = url;
 
-        if (onload) {
-            newScriptTag.onload = onload;
-        }
+    var newScriptTag = document.createElement('script');
+    newScriptTag.setAttribute('src', url);
 
-        document.getElementsByTagName("head")[0].appendChild(newScriptTag);
+    if (onload) {
+        newScriptTag.onload = onload;
     }
+
+    document.head.appendChild(newScriptTag);
 };
 export default LoadScript;

@@ -1,4 +1,3 @@
-import 'firebase/database';
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import OnlineUserList from '../onlineuserlist/OnlineUserList.js';

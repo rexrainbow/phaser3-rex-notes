@@ -1,5 +1,3 @@
-import firebase from 'firebase/app';
-
 class ObjectFactory {
     constructor() {
         this.app = undefined;
