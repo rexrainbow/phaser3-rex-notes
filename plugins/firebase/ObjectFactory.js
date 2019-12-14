@@ -1,12 +1,9 @@
 class ObjectFactory {
     constructor() {
-        this.app = undefined;
     }
 
     initializeApp(config) {
-        if (this.app === undefined) {
-            this.app = firebase.initializeApp(config);
-        }
+        firebase.initializeApp(config);
         return this;
     }
 

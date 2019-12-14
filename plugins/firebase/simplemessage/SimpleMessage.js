@@ -4,13 +4,13 @@ import Send from './Send.js';
 import ReceiveMethods from './ReceiveMethods.js';
 
 class SimpleMessage {
-    constructor(app, config) {
+    constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.database = app.database();
+        this.database = firebase.database();
         this.setRootPath(GetValue(config, 'root', ''));
 
         // Sender

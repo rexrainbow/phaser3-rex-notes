@@ -22,10 +22,6 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
         return this;
     }
 
-    get app() {
-        return this.add.app;
-    }
-
     preload(scene, config) {
         LoaderCallback.call(scene.sys.load, config);
         return this;

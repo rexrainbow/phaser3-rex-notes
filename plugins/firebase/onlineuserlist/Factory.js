@@ -3,7 +3,7 @@ import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../utils/object/SetValue.js';
 
 ObjectFactory.register('onlineUserList', function (config) {
-    return new OnlineUserList(this.app, config);
+    return new OnlineUserList(config);
 });
 
 SetValue(window, 'RexPlugins.Fire.OnlineUserList', OnlineUserList);

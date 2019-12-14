@@ -4795,7 +4795,11 @@
 <h3 id="import-sdk">Import SDK<a class="headerlink" href="#import-sdk" title="Permanent link">&para;</a></h3>
 <p><em>Firebase SDK dose not boundle into this plugin</em></p>
 <ul>
-<li>Download SDK from <a href="https://firebase.google.com/docs/web/setup/#libraries-cdn">CDN</a> via script tags.</li>
+<li>Download SDK from <a href="https://firebase.google.com/docs/web/setup/#libraries-cdn">CDN</a> via script tags.<ul>
+<li>Firebase core</li>
+<li>Firebase-database</li>
+</ul>
+</li>
 <li>Download SDK during preload stage.
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">preload</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </pre></div></li>

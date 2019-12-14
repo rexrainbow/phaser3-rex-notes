@@ -40,6 +40,8 @@ var game = new Phaser.Game(config);
 *Firebase SDK dose not boundle into this plugin*
 
 - Download SDK from [CDN](https://firebase.google.com/docs/web/setup/#libraries-cdn) via script tags.
+    - Firebase core
+    - Firebase-database
 - Download SDK during preload stage.
     ```javascript
     scene.plugins.get('rexFire').preload(scene);

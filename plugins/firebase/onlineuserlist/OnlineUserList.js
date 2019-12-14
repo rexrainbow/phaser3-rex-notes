@@ -6,13 +6,13 @@ import Join from './Join.js';
 import Leave from './Leave.js';
 
 class OnlineUserList {
-    constructor(app, config) {
+    constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.database = app.database();
+        this.database = firebase.database();
         this.setRootPath(GetValue(config, 'root', ''));
 
         this.userInfo = { userID: '', userName: '' };

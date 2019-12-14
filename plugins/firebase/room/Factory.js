@@ -3,7 +3,7 @@ import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../utils/object/SetValue.js';
 
 ObjectFactory.register('room', function (config) {
-    return new Room(this.app, config);
+    return new Room(config);
 });
 
 SetValue(window, 'RexPlugins.Fire.Room', Room);
