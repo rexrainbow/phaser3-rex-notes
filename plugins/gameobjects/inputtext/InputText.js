@@ -222,10 +222,10 @@ const ElementProperties = {
 };
 
 const StyleProperties = {
-    align: ['text-align', undefined],
+    align: ['textAlign', undefined],
     width: ['width', undefined],
     height: ['height', undefined],
-    fontFamily: ['font-family', undefined],
+    fontFamily: ['fontFamily', undefined],
     fontSize: ['font-size', undefined],
     color: ['color', '#ffffff'],
     backgroundColor: ['backgroundColor', 'transparent'],

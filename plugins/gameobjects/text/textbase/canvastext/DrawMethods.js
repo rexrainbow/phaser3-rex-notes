@@ -1,12 +1,5 @@
 import CONST from '../const.js';
 
-const HALIGN_LEFT = CONST.hleft;
-const HALIGN_CENTER = CONST.hcenter;
-const HALIGN_RIGHT = CONST.hright;
-const VALIGN_TOP = CONST.vtop;
-const VALIGN_CENTER = CONST.vcenter;
-const VALIGN_BOTTOM = CONST.vbottom;
-
 export default {
     draw(startX, startY, boxWidth, boxHeight) {
         var penManager = this.penManager;
@@ -32,9 +25,9 @@ export default {
         var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
         if ((maxLines > 0) && (totalLinesNum > maxLines)) {
             drawLinesNum = maxLines;
-            if (valign === VALIGN_CENTER) { // center
+            if (valign === 'center') { // center
                 drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
-            } else if (valign === VALIGN_BOTTOM) { // bottom
+            } else if (valign === 'bottom') { // bottom
                 drawLineStartIdx = totalLinesNum - drawLinesNum;
             } else {
                 drawLineStartIdx = 0;
@@ -46,9 +39,9 @@ export default {
         drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
         var offsetX, offsetY;
-        if (valign === VALIGN_CENTER) { // center
+        if (valign === 'center') { // center
             offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
-        } else if (valign === VALIGN_BOTTOM) { // bottom
+        } else if (valign === 'bottom') { // bottom
             offsetY = Math.max(boxHeight - (drawLinesNum * lineHeight) - 2, 0);
         } else {
             offsetY = 0;
@@ -60,9 +53,9 @@ export default {
                 continue;
             }
 
-            if (halign === HALIGN_CENTER) { // center
+            if (halign === 'center') { // center
                 offsetX = (boxWidth - lineWidth) / 2;
-            } else if (halign === HALIGN_RIGHT) { // right
+            } else if (halign === 'right') { // right
                 offsetX = boxWidth - lineWidth;
             } else {
                 offsetX = 0;

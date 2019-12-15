@@ -19,6 +19,7 @@ var CreateInputText = function (text, config) {
     config.fontSize = GetValue(config, 'fontSize', style.fontSize);
     config.color = GetValue(config, 'color', style.color);
     config.backgroundColor = backgroundColor;
+    config.align = GetValue(config, 'align', GetAlign(style));
 
     var inputText = new InputText(scene,
         text.x, text.y,
@@ -29,6 +30,16 @@ var CreateInputText = function (text, config) {
     inputText.setOrigin(text.originX, text.originY);
     scene.add.existing(inputText);
     return inputText;
+}
+
+var GetAlign = function (style) {
+    if (style.hasOwnProperty('align')) {
+        return style.align;
+    } else if (style.hasOwnProperty('halign')) {
+        return style.halign;
+    } else {
+        return 'left';
+    }
 }
 
 export default CreateInputText;

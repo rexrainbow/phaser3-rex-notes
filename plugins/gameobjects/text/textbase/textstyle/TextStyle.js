@@ -47,8 +47,8 @@ var propertyMap = {
     underlineOffset: ['underline.offset', 0],
 
     // align
-    halign: ['halign', 0],
-    valign: ['valign', 0],
+    halign: ['halign', 'left'],
+    valign: ['valign', 'top'],
 
     // size
     maxLines: ['maxLines', 0],
@@ -133,12 +133,6 @@ class TextStyle {
             updateText = true;
         }
 
-        if (style && style.hasOwnProperty('halign') && typeof style.halign === 'string') {
-            style.halign = HALIGNMODE[style.halign.toLowerCase()] || 0;
-        }
-        if (style && style.hasOwnProperty('valign') && typeof style.valign === 'string') {
-            style.valign = VALIGNMODE[style.valign.toLowerCase()] || 0;
-        }
         if (style && style.hasOwnProperty('wrap')) {
             var wrap = style.wrap;
             if (wrap.hasOwnProperty('mode')) {
@@ -477,17 +471,10 @@ class TextStyle {
 
     setAlign(halign, valign) {
         if (halign === undefined) {
-            halign = 0;
+            halign = 'left';
         }
         if (valign === undefined) {
-            valign = 0;
-        }
-
-        if (typeof halign === 'string') {
-            halign = HALIGNMODE[halign.toLowerCase()] || 0;
-        }
-        if (typeof valign === 'string') {
-            valign = HALIGNMODE[valign.toLowerCase()] || 0;
+            valign = 'top';
         }
         this.halign = halign;
         this.valign = valign;
@@ -497,10 +484,7 @@ class TextStyle {
 
     setHAlign(halign) {
         if (halign === undefined) {
-            halign = 0;
-        }
-        if (typeof halign === 'string') {
-            halign = HALIGNMODE[halign.toLowerCase()] || 0;
+            halign = 'left';
         }
         this.halign = halign;
 
@@ -509,10 +493,7 @@ class TextStyle {
 
     setVAlign(valign) {
         if (valign === undefined) {
-            valign = 0;
-        }
-        if (typeof valign === 'string') {
-            valign = HALIGNMODE[valign.toLowerCase()] || 0;
+            valign = 'top';
         }
         this.valign = valign;
 
