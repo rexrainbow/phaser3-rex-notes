@@ -2,9 +2,9 @@ import Preload from './Preload.js';
 import AwaitFile from '../../loader/awaitloader/awaitFile.js';
 
 
-const LoaderCallback = function (config) {
+const LoaderCallback = function (urlConfig, firebaseConfig) {
     var callback = function (successCallback, failureCallback) {
-        return Preload(config)
+        return Preload(urlConfig, firebaseConfig)
             .then(function () {
                 setTimeout(successCallback, 0);
             })

@@ -3,7 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import Send from './Send.js';
 import ReceiveMethods from './ReceiveMethods.js';
 
-class SimpleMessage {
+class Broadcast {
     constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
@@ -54,10 +54,10 @@ var methods = {
     send: Send
 }
 Object.assign(
-    SimpleMessage.prototype,
+    Broadcast.prototype,
     EventEmitterMethods,
     ReceiveMethods,
     methods
 );
 
-export default SimpleMessage;
+export default Broadcast;

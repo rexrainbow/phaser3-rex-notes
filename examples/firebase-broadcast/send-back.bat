@@ -1,5 +1,5 @@
 @echo off
-set main=./examples/firebase-simplemessage/send-back.js
+set main=./examples/firebase-broadcast/send-back.js
 cd ..
 cd ..
 webpack --config webpack.config.js

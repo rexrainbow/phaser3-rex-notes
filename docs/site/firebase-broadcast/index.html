@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-simplemessage/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-broadcast/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Simple message - Notes of Phaser 3</title>
+        <title>Broadcast - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Simple message
+                Broadcast
               
             </span>
           
@@ -4542,11 +4542,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Simple message
+        Broadcast
       </label>
     
-    <a href="./" title="Simple message" class="md-nav__link md-nav__link--active">
-      Simple message
+    <a href="./" title="Broadcast" class="md-nav__link md-nav__link--active">
+      Broadcast
     </a>
     
       
@@ -4758,10 +4758,10 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/firebase-simplemessage.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/firebase-broadcast.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Simple message</h1>
+                  <h1>Broadcast</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Broadcast real-time messages, using <a href="https://firebase.google.com/docs/database/">firebase-database</a>.</p>
@@ -4771,7 +4771,7 @@
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/firebase-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexfirebaseplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-simplemessage">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-broadcast">Sample code</a></p>
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
 <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
@@ -4801,7 +4801,7 @@
 </ul>
 </li>
 <li>Download SDK during preload stage.
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">preload</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">preload</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>    
 </pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
@@ -4816,8 +4816,8 @@
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">});</span>
 </pre></div></li>
-<li>Create simple message instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">simpleMessage</span><span class="p">({</span>
+<li>Create broadcast instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="c1">// senderID: &#39;&#39;,</span>
     <span class="c1">// senderName: &#39;&#39;</span>

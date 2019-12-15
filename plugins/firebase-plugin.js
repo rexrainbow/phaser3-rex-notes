@@ -1,7 +1,7 @@
 import LoaderCallback from './firebase/preload/LoaderCallback.js';
 import ObjectFactory from './firebase/ObjectFactory.js'
 
-import SimpleMessageFactory from './firebase/simplemessage/Factory.js';
+import BroadcastFactory from './firebase/broadcast/Factory.js';
 import OnlineUserListFactory from './firebase/onlineuserlist/Factory.js';
 import RoomFactory from './firebase/room/Factory.js';
 
@@ -22,8 +22,8 @@ class FirebasePlugin extends Phaser.Plugins.BasePlugin {
         return this;
     }
 
-    preload(scene, config) {
-        LoaderCallback.call(scene.sys.load, config);
+    preload(scene, urlConfig, firebaseConfig) {
+        LoaderCallback.call(scene.sys.load, urlConfig, firebaseConfig);
         return this;
     }
 }

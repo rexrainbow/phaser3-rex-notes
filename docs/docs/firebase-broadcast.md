@@ -10,7 +10,7 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-simplemessage)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-broadcast)
 
 ### Install global plugin
 
@@ -44,7 +44,7 @@ var game = new Phaser.Game(config);
     - Firebase-database
 - Download SDK during preload stage.
     ```javascript
-    scene.plugins.get('rexFire').preload(scene);
+    scene.plugins.get('rexFire').preload(scene);    
     ```
 
 ### Create instance
@@ -60,9 +60,9 @@ var game = new Phaser.Game(config);
        messagingSenderId: '...'
     });
     ```
-2. Create simple message instance
+2. Create broadcast instance
     ```javascript
-    var messager = rexFire.add.simpleMessage({
+    var messager = rexFire.add.broadcast({
         root: '',
         // senderID: '',
         // senderName: ''

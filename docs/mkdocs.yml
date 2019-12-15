@@ -292,7 +292,7 @@ nav:
             - Firestore: firebase-firestore.md
             - Storage: firebase-storage.md
             - Applications:
-                - Simple message: firebase-simplemessage.md
+                - Broadcast: firebase-broadcast.md
 - Tools: tools.md
 
 

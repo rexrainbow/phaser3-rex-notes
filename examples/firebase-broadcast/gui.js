@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
-        var messager = rexFire.add.simpleMessage({
+        var messager = rexFire.add.broadcast({
             root: 'chat-ui'
         });
 

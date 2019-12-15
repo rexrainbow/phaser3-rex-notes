@@ -3,18 +3,18 @@ import MergeRight from '../../utils/object/MergeRight.js';
 import LoadScript from '../../utils/loader/LoadScript.js';
 import AvailableTest from './AvailableTest.js';
 
-var Preload = function (config) {
-    config = MergeRight(DefaultConfig, config);
+var Preload = function (urlConfig, firebaseConfig) {
+    urlConfig = MergeRight(DefaultConfig, urlConfig);
 
-    return LoadScriptPromise(config.app)  // Load firebase-app
+    return LoadScriptPromise(urlConfig.app)  // Load firebase-app
         .then(function () { // Load other SDK
             var count = 0;
             var url;
-            for (var k in config) {
+            for (var k in urlConfig) {
                 if (k === 'app') {
                     continue;
                 }
-                url = config[k];
+                url = urlConfig[k];
                 if (!url) {
                     continue;
                 }
@@ -32,7 +32,13 @@ var Preload = function (config) {
             }
         })
         .then(function () { // Wait until all vairalbe are available
-            return AvailableTest(config);
+            return AvailableTest(urlConfig);
+        })
+        .then(function(){
+            if (firebaseConfig !== undefined) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            return Promise.resolve();
         })
 }
 
