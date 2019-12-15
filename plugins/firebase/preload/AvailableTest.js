@@ -29,6 +29,10 @@ var AvailableTest = function (config) {
 var TestCallbacks = {
     database: function () {
         return (firebase.database !== undefined);
+    },
+
+    firestore: function () {
+        return (firebase.firestore !== undefined);
     }
 }
 

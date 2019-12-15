@@ -21,7 +21,6 @@ class Demo extends Phaser.Scene {
             root: 'broadcast-test'
         });
 
-
         messager
             .on('receive', function (d) {
                 print.text += `${d.senderName}: ${d.message}\n`;
