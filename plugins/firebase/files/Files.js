@@ -37,10 +37,10 @@ class Files {
         return this;
     }
 
-    getFileQuery(ownerID, fileName, type) {
+    getFileQuery(ownerID, fileID, type) {
         var query = this.rootRef;
         query = (ownerID) ? this.rootRef.where('ownerID', '==', ownerID) : query;
-        query = (fileName) ? query.where('fileName', '==', fileName) : query;
+        query = (fileID) ? query.where('fileID', '==', fileID) : query;
         query = (type) ? query.where('type', '==', type) : query;
         return query;
     }

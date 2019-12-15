@@ -1,4 +1,4 @@
-var Save = function (fileName, header, content, updateMode) {
+var Save = function (fileID, header, content, updateMode) {
     if (typeof (content) === 'boolean') {
         updateMode = content;
         content = undefined;
@@ -10,17 +10,17 @@ var Save = function (fileName, header, content, updateMode) {
     var ownerID = this.ownerInfo.userID;
     if (header !== undefined) {
         header.ownerID = ownerID;
-        header.fileName = fileName;
+        header.fileID = fileID;
         header.type = 'header';
     }
     if (content !== undefined) {
         content.ownerID = ownerID;
-        content.fileName = fileName;
+        content.fileID = fileID;
         content.type = 'content';
     }
 
     var self = this;
-    return this.getFileQuery(ownerID, fileName)
+    return this.getFileQuery(ownerID, fileID)
         .get()
         .then(function (querySnapshot) {
             var batch = self.database.batch();
@@ -54,18 +54,18 @@ var Save = function (fileName, header, content, updateMode) {
             return batch.commit();
         })
         .then(function () {
-            self.emit('save', fileName);
+            self.emit('save', fileID);
             return Promise.resolve({
                 ownerID: ownerID,
-                fileName: fileName
+                fileID: fileID
             });
         })
         .catch(function (error) {
-            self.emit('save-fail', fileName);
+            self.emit('save-fail', fileID);
             return Promise.reject({
                 error: error,
                 ownerID: ownerID,
-                fileName: fileName
+                fileID: fileID
             });
         });
 }

@@ -29,7 +29,7 @@ var ConstructData = function (arr) {
     var header;
     for (var i = 0, cnt = arr.length; i < cnt; i++) {
         header = arr[i];
-        dict[header.fileName] = header;
+        dict[header.fileID] = header;
     }
     return dict;
 }

@@ -3,28 +3,28 @@
 room-filter/
     <roomID>
         filter -  close/open + "|" + public/private/...
-        name - The display name of the room.
+        name - The display name of the room
 
 
 # header of room, write by owner of room. Each room has unique roomID.
 # read it when joining the room
 room-metadata/
     <roomID>
-        name - The display name of the room.
+        name - The display name of the room
 
         # monitor filter to catch room open/close event
         filter -  close/open + "|" + public/private/...
 
         # moderators of this room
         moderators/
-            <userID> - userName 
+            <userID> - Unique ID of user 
 
         # join permission
         permission - null("anyone")/("black-list")/("white-list")
         black-list/
-            <userID> - userName
+            <userID> - Unique ID of user
         white-list/
-            <userID> - userName
+            <userID> - Unique ID of user
         # ignore room if user can not join
 
         maxUsers - The maximum number of users that can join this room.
@@ -32,7 +32,7 @@ room-metadata/
 
         extra/
 
-# body of room data. Each room has unique roomID.
+# body of room data. Each room has unique roomID
 rooms/
     <roomID>
         alive - true or null
@@ -40,19 +40,19 @@ rooms/
         # users in this room.
         users/
             <joinAt>
-                userID - The id of the user.
-                userName - The name of the user.
+                userID - Unique ID of user
+                userName - The name of the user
 
         <"channel-"+channel_name> - custom channel
 
 
-# write by each user, user could join to many rooms.
+# write by each user, user could join to many rooms
 user-metadata\
     <joinAt>
         user/
-            ID - The id of the user.
-            name - The display name of the user.
+            ID - Unique ID of user
+            name - The display name of the user
         room/
             ID - The id of the room
-            name - The display name of the room.
+            name - The display name of the room
 ```

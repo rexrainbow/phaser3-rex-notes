@@ -1,7 +1,7 @@
-var Delete = function (fileName) {
+var Delete = function (fileID) {
     var ownerID = this.ownerInfo.userID;
     var self = this;
-    return this.getFileQuery(ownerID, fileName)
+    return this.getFileQuery(ownerID, fileID)
         .get()
         .then(function (querySnapshot) {
             var batch = self.database.batch();
@@ -28,25 +28,25 @@ var Delete = function (fileName) {
             return batch.commit();
         })
         .then(function () {
-            if (self.lastHeaders.hasOwnProperty(fileName)) {
-                delete self.lastHeaders[fileName];
+            if (self.lastHeaders.hasOwnProperty(fileID)) {
+                delete self.lastHeaders[fileID];
             }
-            if (self.lastFileData && (self.lastFileData.header.fileName === fileName)) {
+            if (self.lastFileData && (self.lastFileData.header.fileID === fileID)) {
                 self.lastFileData = undefined;
             }
 
-            self.emit('delete', fileName);
+            self.emit('delete', fileID);
             return Promise.resolve({
                 ownerID: ownerID,
-                fileName: fileName
+                fileID: fileID
             });
         })
         .catch(function (error) {
-            self.emit('delete-fail', fileName);
+            self.emit('delete-fail', fileID);
             return Promise.reject({
                 error: error,
                 ownerID: ownerID,
-                fileName: fileName
+                fileID: fileID
             });
         });
 }
