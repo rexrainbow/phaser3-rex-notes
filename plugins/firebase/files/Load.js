@@ -2,7 +2,7 @@ var Load = function (fileName) {
     var ownerID = this.ownerInfo.userID;
 
     var self = this;
-    return this.getFileQuery(undefined, fileName)
+    return this.getFileQuery(ownerID, fileName)
         .get()
         .then(function (querySnapshot) {
             var header, content;
@@ -17,6 +17,7 @@ var Load = function (fileName) {
                         break;
                 }
             });
+            self.lastFileData = ConstructData(header, content);
             self.emit('load', fileName, header, content);
             return Promise.resolve({
                 ownerID: ownerID,
@@ -34,5 +35,12 @@ var Load = function (fileName) {
             });
         });
 }
+
+var ConstructData = function (header, content) {
+    return {
+        header: header,
+        content: content
+    }
+};
 
 export default Load;

@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import Save from './Save.js';
 import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';
+import Delete from './Delete.js';
 
 class Files {
     constructor(app, config) {
@@ -17,6 +18,9 @@ class Files {
         // Owner
         this.ownerInfo = { userID: '' };
         this.setOwner(GetValue(config, 'ownerID', ''));
+
+        this.lastFileData = undefined;
+        this.lastHeaders = {};
     }
 
     shutdown() {
@@ -34,17 +38,10 @@ class Files {
     }
 
     getFileQuery(ownerID, fileName, type) {
-        if (ownerID === undefined) {
-            ownerID = this.ownerInfo.userID;
-        }
-
-        var query = (ownerID) ? this.rootRef.where('ownerID', '==', ownerID) : this.rootRef;
-        if (fileName !== undefined) {
-            query = query.where('fileName', '==', fileName);
-        }
-        if (type !== undefined) {
-            query = query.where('type', '==', type);
-        }
+        var query = this.rootRef;
+        query = (ownerID) ? this.rootRef.where('ownerID', '==', ownerID) : query;
+        query = (fileName) ? query.where('fileName', '==', fileName) : query;
+        query = (type) ? query.where('type', '==', type) : query;
         return query;
     }
 
@@ -61,7 +58,8 @@ class Files {
 var methods = {
     save: Save,
     load: Load,
-    loadHeaders: LoadHeaders
+    loadHeaders: LoadHeaders,
+    delete: Delete
 }
 
 Object.assign(

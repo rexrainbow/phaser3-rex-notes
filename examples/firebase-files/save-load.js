@@ -29,9 +29,17 @@ class Demo extends Phaser.Scene {
             })
             .then(function (result) {
                 console.log('Load file:', result.fileName, result.header, result.content);
+
+                return fileManager.save('slot2', { description: 'ccdd' });
             })
-            .catch(function (error, fileName) {
-                debugger;
+            .then(function () {
+                return fileManager.loadHeaders();
+            })
+            .then(function (result) {
+                console.log('Load headers', result.headers);
+            })
+            .catch(function (result) {
+                console.log('Error', result.error);
             })
     }
 
