@@ -23,7 +23,11 @@ class Demo extends Phaser.Scene {
 
         fileManager
             .setOwner('rex')
-            .save('slot1', { description: 'aabb' }, { a: 10, b: 20 })
+            .loadHeaders()
+            .then(function (result) {
+                console.log('Load headers', result.headers);
+                return fileManager.save('slot1', { description: 'aabb' }, { a: 10, b: 20 });
+            })
             .then(function (result) {
                 return fileManager.load(result.fileID);
             })

@@ -44,7 +44,7 @@ var Save = function (fileID, header, content, updateMode) {
                 }
             }
             header.headerDocID = headerDocRef.id;
-            if (content) {
+            if (contentDocRef) {
                 header.contentDocID = contentDocRef.id;
             }
 
