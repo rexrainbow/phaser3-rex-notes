@@ -1,18 +1,22 @@
+import DocToHeader from './DocToHeader.js';
+import Clear from '../../utils/object/Clear.js';
+
 var LoadHeaders = function () {
     var ownerID = this.ownerInfo.userID;
     var self = this;
     return this.getFileQuery(ownerID, undefined, 'header')
         .get()
         .then(function (querySnapshot) {
-            var headers = [];
+            var header;
+            Clear(self.cacheHeaders);
             querySnapshot.forEach(function (doc) {
-                headers.push(doc.data());
+                header = DocToHeader(doc);
+                self.cacheHeaders[header.fileID] = header;
             });
-            self.lastHeaders = ConstructData(headers);
-            self.emit('loadheaders', self.lastHeaders);
+            self.emit('loadheaders', self.cacheHeaders);
             return Promise.resolve({
                 ownerID: ownerID,
-                headers: self.lastHeaders
+                headers: self.cacheHeaders
             });
         })
         .catch(function () {
@@ -22,16 +26,6 @@ var LoadHeaders = function () {
                 ownerID: ownerID
             });
         });
-}
-
-var ConstructData = function (arr) {
-    var dict = {};
-    var header;
-    for (var i = 0, cnt = arr.length; i < cnt; i++) {
-        header = arr[i];
-        dict[header.fileID] = header;
-    }
-    return dict;
 }
 
 export default LoadHeaders;

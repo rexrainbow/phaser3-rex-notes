@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
+import Clear from '../../utils/object/Clear.js';
 import Save from './Save.js';
 import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';
@@ -15,12 +16,13 @@ class Files {
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
+        this.cacheFileData = undefined;
+        this.cacheHeaders = {};
+
         // Owner
         this.ownerInfo = { userID: '' };
         this.setOwner(GetValue(config, 'ownerID', ''));
 
-        this.lastFileData = undefined;
-        this.lastHeaders = {};
     }
 
     shutdown() {
@@ -46,11 +48,21 @@ class Files {
     }
 
     setOwner(userID) {
+        var prevUserID = this.ownerInfo.userID;
         if (typeof (userID) === 'string') {
             this.ownerInfo.userID = userID;
         } else {
             this.ownerInfo = userID;
         }
+        if (prevUserID !== this.ownerInfo.userID) {
+            this.clearCache();
+        }
+        return this;
+    }
+
+    clearCache() {
+        this.cacheFileData = undefined;
+        Clear(this.cacheHeaders);
         return this;
     }
 }

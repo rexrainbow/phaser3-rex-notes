@@ -17,7 +17,7 @@ var Load = function (fileID) {
                         break;
                 }
             });
-            self.lastFileData = ConstructData(header, content);
+            self.cacheFileData = ConstructData(header, content);
             self.emit('load', fileID, header, content);
             return Promise.resolve({
                 ownerID: ownerID,

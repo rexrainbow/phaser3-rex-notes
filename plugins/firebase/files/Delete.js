@@ -1,38 +1,34 @@
 var Delete = function (fileID) {
     var ownerID = this.ownerInfo.userID;
     var self = this;
-    return this.getFileQuery(ownerID, fileID)
-        .get()
-        .then(function (querySnapshot) {
-            var batch = self.database.batch();
-            var headerDocRef, contentDocRef;
-            querySnapshot.forEach(function (doc) {
-                var docRef = self.rootRef.doc(doc.id);
-                var docData = doc.data();
-                switch (docData.type) {
-                    case 'header':
-                        headerDocRef = docRef;
-                        break;
-                    case 'content':
-                        contentDocRef = docRef;
-                        break;
-                }
-            });
-
-            if (headerDocRef) {
-                batch.delete(headerDocRef);
+    return LoadHeader.call(this, fileID) // Try load header
+        .then(function (prevHeader) {
+            if (!prevHeader) { // File dose not exist
+                return Promise.resolve({
+                    ownerID: ownerID,
+                    fileID: fileID
+                });
             }
+
+            var headerDocRef, contentDocRef;
+            headerDocRef = self.rootRef.doc(prevHeader.headerDocID);
+            if (prevHeader.contentDocID) {
+                contentDocRef = self.rootRef.doc(prevHeader.contentDocID);
+            }
+
+            var batch = self.database.batch();
+            batch.delete(headerDocRef);
             if (contentDocRef) {
                 batch.delete(contentDocRef);
             }
             return batch.commit();
         })
         .then(function () {
-            if (self.lastHeaders.hasOwnProperty(fileID)) {
-                delete self.lastHeaders[fileID];
+            if (self.cacheHeaders.hasOwnProperty(fileID)) {
+                delete self.cacheHeaders[fileID];
             }
-            if (self.lastFileData && (self.lastFileData.header.fileID === fileID)) {
-                self.lastFileData = undefined;
+            if (self.cacheFileData && (self.cacheFileData.header.fileID === fileID)) {
+                self.cacheFileData = undefined;
             }
 
             self.emit('delete', fileID);

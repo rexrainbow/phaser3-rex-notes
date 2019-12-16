@@ -23,14 +23,14 @@ class Demo extends Phaser.Scene {
 
         fileManager
             .setOwner('rex')
-            .save('slot1', { description: 'aabb' })
+            .save('slot1', { description: 'aabb' }, { a: 10, b: 20 })
             .then(function (result) {
-                return fileManager.load(result.fileName);
+                return fileManager.load(result.fileID);
             })
             .then(function (result) {
-                console.log('Load file:', result.fileName, result.header, result.content);
+                console.log('Load file:', result.fileID, result.header, result.content);
 
-                return fileManager.save('slot2', { description: 'ccdd' });
+                return fileManager.save('slot2', { description: 'ccdd' }, { c: 10, d: 20 });
             })
             .then(function () {
                 return fileManager.loadHeaders();

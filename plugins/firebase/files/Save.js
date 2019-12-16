@@ -1,3 +1,5 @@
+import LoadHeader from './LoadHeader.js';
+
 var Save = function (fileID, header, content, updateMode) {
     if (typeof (content) === 'boolean') {
         updateMode = content;
@@ -8,47 +10,48 @@ var Save = function (fileID, header, content, updateMode) {
     }
 
     var ownerID = this.ownerInfo.userID;
-    if (header !== undefined) {
-        header.ownerID = ownerID;
-        header.fileID = fileID;
-        header.type = 'header';
+    if (header === undefined) {
+        header = {};
     }
-    if (content !== undefined) {
+    header.ownerID = ownerID;
+    header.fileID = fileID;
+    header.type = 'header';
+
+    if (content) {
         content.ownerID = ownerID;
         content.fileID = fileID;
         content.type = 'content';
     }
+    var writeCommand = (updateMode) ? 'update' : 'set';
 
     var self = this;
-    return this.getFileQuery(ownerID, fileID)
-        .get()
-        .then(function (querySnapshot) {
-            var batch = self.database.batch();
-            var writeCommand = (updateMode) ? 'update' : 'set';
+    return LoadHeader.call(this, fileID) // Try load header
+        .then(function (prevHeader) {
             var headerDocRef, contentDocRef;
-            querySnapshot.forEach(function (doc) {
-                var docRef = self.rootRef.doc(doc.id);
-                var docData = doc.data();
-                switch (docData.type) {
-                    case 'header':
-                        headerDocRef = docRef;
-                        break;
-                    case 'content':
-                        contentDocRef = docRef;
-                        break;
+            if (prevHeader) { // Overwrite file
+                headerDocRef = self.rootRef.doc(prevHeader.headerDocID);
+                if (content) {
+                    if (prevHeader.contentDocID) {
+                        contentDocRef = self.rootRef.doc(prevHeader.contentDocID);
+                    } else {
+                        contentDocRef = self.rootRef.doc();
+                    }
                 }
-            });
-
-            if (header) {
-                if (headerDocRef === undefined) {
-                    headerDocRef = self.rootRef.doc();
-                }
-                batch[writeCommand](headerDocRef, header);
-            }
-            if (content) {
-                if (contentDocRef === undefined) {
+            } else { // Add new file
+                headerDocRef = self.rootRef.doc();
+                if (content) {
                     contentDocRef = self.rootRef.doc();
                 }
+            }
+            header.headerDocID = headerDocRef.id;
+            if (content) {
+                header.contentDocID = contentDocRef.id;
+            }
+
+
+            var batch = self.database.batch();
+            batch[writeCommand](headerDocRef, header);
+            if (content) {
                 batch[writeCommand](contentDocRef, content);
             }
             return batch.commit();
