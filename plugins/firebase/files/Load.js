@@ -17,7 +17,6 @@ var Load = function (fileID) {
                         break;
                 }
             });
-            self.cacheFileData = ConstructData(header, content);
             self.emit('load', fileID, header, content);
             return Promise.resolve({
                 ownerID: ownerID,
@@ -35,12 +34,5 @@ var Load = function (fileID) {
             });
         });
 }
-
-var ConstructData = function (header, content) {
-    return {
-        header: header,
-        content: content
-    }
-};
 
 export default Load;

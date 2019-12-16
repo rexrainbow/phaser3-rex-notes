@@ -7,7 +7,7 @@ var LoadHeader = function (fileID) {
         return Promise.resolve(header);
     }
 
-    // Can't find in local headers, load from firestore    
+    // Can't find in cache headers, load from firestore    
     var self = this;
     return this.getFileQuery(ownerID, fileID, 'header').limit(1)
         .get()
@@ -15,7 +15,7 @@ var LoadHeader = function (fileID) {
             let header = undefined;
             querySnapshot.forEach(function (doc) {
                 header = DocToHeader(doc);
-                self.cacheHeaders[fileID] = header;
+                self.cacheHeaders[fileID] = header; // Cache it
             });
             return Promise.resolve(header);
         });

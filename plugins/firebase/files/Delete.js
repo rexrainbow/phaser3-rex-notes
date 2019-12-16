@@ -10,25 +10,16 @@ var Delete = function (fileID) {
                 });
             }
 
-            var headerDocRef, contentDocRef;
-            headerDocRef = self.rootRef.doc(prevHeader.headerDocID);
-            if (prevHeader.contentDocID) {
-                contentDocRef = self.rootRef.doc(prevHeader.contentDocID);
-            }
-
             var batch = self.database.batch();
-            batch.delete(headerDocRef);
-            if (contentDocRef) {
-                batch.delete(contentDocRef);
+            batch.delete(self.rootRef.doc(prevHeader.headerDocID));
+            if (prevHeader.contentDocID) {
+                batch.delete(self.rootRef.doc(prevHeader.contentDocID));
             }
             return batch.commit();
         })
         .then(function () {
             if (self.cacheHeaders.hasOwnProperty(fileID)) {
                 delete self.cacheHeaders[fileID];
-            }
-            if (self.cacheFileData && (self.cacheFileData.header.fileID === fileID)) {
-                self.cacheFileData = undefined;
             }
 
             self.emit('delete', fileID);

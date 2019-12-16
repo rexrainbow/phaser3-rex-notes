@@ -1,10 +1,11 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
-import Clear from '../../utils/object/Clear.js';
 import Save from './Save.js';
 import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';
 import Delete from './Delete.js';
+import Clear from './Clear.js';
+import ClearDict from '../../utils/object/Clear.js';
 
 class Files {
     constructor(app, config) {
@@ -16,7 +17,6 @@ class Files {
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
-        this.cacheFileData = undefined;
         this.cacheHeaders = {};
 
         // Owner
@@ -61,8 +61,7 @@ class Files {
     }
 
     clearCache() {
-        this.cacheFileData = undefined;
-        Clear(this.cacheHeaders);
+        ClearDict(this.cacheHeaders);
         return this;
     }
 }
@@ -71,7 +70,8 @@ var methods = {
     save: Save,
     load: Load,
     loadHeaders: LoadHeaders,
-    delete: Delete
+    delete: Delete,
+    clear: Clear,
 }
 
 Object.assign(
