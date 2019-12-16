@@ -8,7 +8,7 @@ import Clear from './Clear.js';
 import ClearDict from '../../utils/object/Clear.js';
 
 class Files {
-    constructor(app, config) {
+    constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
