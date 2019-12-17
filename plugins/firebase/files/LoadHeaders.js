@@ -13,14 +13,12 @@ var LoadHeaders = function () {
                 header = DocToHeader(doc);
                 self.cacheHeaders[header.fileID] = header;
             });
-            self.emit('loadheaders', self.cacheHeaders);
             return Promise.resolve({
                 ownerID: ownerID,
                 headers: self.cacheHeaders
             });
         })
         .catch(function () {
-            self.emit('loadheaders-fail');
             return Promise.reject({
                 error: error,
                 ownerID: ownerID

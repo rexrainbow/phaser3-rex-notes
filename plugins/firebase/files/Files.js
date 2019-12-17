@@ -1,4 +1,3 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import Save from './Save.js';
 import Load from './Load.js';
@@ -9,11 +8,6 @@ import ClearDict from '../../utils/object/Clear.js';
 
 class Files {
     constructor(config) {
-        // Event emitter
-        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
-
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
@@ -26,7 +20,6 @@ class Files {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
     }
 
     destroy() {
@@ -41,7 +34,7 @@ class Files {
 
     getFileQuery(ownerID, fileID, type) {
         var query = this.rootRef;
-        query = (ownerID) ? this.rootRef.where('ownerID', '==', ownerID) : query;
+        query = (ownerID) ? query.where('ownerID', '==', ownerID) : query;
         query = (fileID) ? query.where('fileID', '==', fileID) : query;
         query = (type) ? query.where('type', '==', type) : query;
         return query;
@@ -76,7 +69,6 @@ var methods = {
 
 Object.assign(
     Files.prototype,
-    EventEmitterMethods,
     methods
 );
 

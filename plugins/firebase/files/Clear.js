@@ -17,13 +17,11 @@ var Clear = function () {
         })
         .then(function () {
             self.clearCache();
-            self.emit('deleteall', fileID);
             return Promise.resolve({
                 ownerID: ownerID
             });
         })
         .catch(function (error) {
-            self.emit('deleteall-fail', fileID);
             return Promise.reject({
                 error: error,
                 ownerID: ownerID

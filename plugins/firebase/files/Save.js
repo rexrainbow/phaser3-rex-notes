@@ -43,7 +43,12 @@ var Save = function (fileID, header, content, updateMode) {
                     contentDocRef = self.rootRef.doc();
                 }
             }
-            header.headerDocID = headerDocRef.id;
+
+            // Don't save headerDocID to server
+            if (header.hasOwnProperty('headerDocID')) {
+                delete header.headerDocID;
+            }
+            // Save contentDocID
             if (contentDocRef) {
                 header.contentDocID = contentDocRef.id;
             }
@@ -57,14 +62,12 @@ var Save = function (fileID, header, content, updateMode) {
             return batch.commit();
         })
         .then(function () {
-            self.emit('save', fileID);
             return Promise.resolve({
                 ownerID: ownerID,
                 fileID: fileID
             });
         })
         .catch(function (error) {
-            self.emit('save-fail', fileID);
             return Promise.reject({
                 error: error,
                 ownerID: ownerID,

@@ -1,6 +1,6 @@
 - Header (Required)
     ```
-    <document>
+    <randomID>
         ownerID - Unique ID of owner
         fileID - Unique file ID of each owner
         type - 'header'
@@ -10,7 +10,7 @@
     ```
 - Content (Optional)
     ```
-    <document>
+    <randomID>
         ownerID - Unique ID of owner
         fileID - Unique file ID of each owner
         type - 'content'

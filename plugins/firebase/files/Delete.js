@@ -22,14 +22,12 @@ var Delete = function (fileID) {
                 delete self.cacheHeaders[fileID];
             }
 
-            self.emit('delete', fileID);
             return Promise.resolve({
                 ownerID: ownerID,
                 fileID: fileID
             });
         })
         .catch(function (error) {
-            self.emit('delete-fail', fileID);
             return Promise.reject({
                 error: error,
                 ownerID: ownerID,
