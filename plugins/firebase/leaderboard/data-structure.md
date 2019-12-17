@@ -1,0 +1,7 @@
+- <randomID>
+    - `userID` - Unique ID of owner
+    - `boardID` - Unique ID of board
+    - `score` - Score of owner # Key of ordering
+    - `timestamp` - Updated timestamp
+    - `userName` - Name of the owner (Optional)
+    - ...

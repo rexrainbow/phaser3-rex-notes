@@ -1,4 +1,2 @@
-```
-<alias>
-    id - id
-```
+- <alias>
+    - `id` - ID
