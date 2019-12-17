@@ -1,7 +1,7 @@
-const RandomInt = Phaser.Math.Between;
-const RandomItem = Phaser.Utils.Array.GetRandom;
-const CANDIDATES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+import RandomInt from '../math/Between.js';
+import RandomItem from '../array/GetRandom.js';
 
+const CANDIDATES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 var GetRandomWord = function (min, max, candidates) {
     if (candidates === undefined) {
         candidates = CANDIDATES;
