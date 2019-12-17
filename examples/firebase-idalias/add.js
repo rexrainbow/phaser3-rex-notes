@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
             })
             .then(function (result) {
                 console.log('Get: ', result);
-                return idAlias.getRandomDigits('ccdd');
+                return idAlias.getRandomAlias('ccdd', 10, '0123456789');
             })
             .then(function (result) {
                 console.log('Get: ', result);

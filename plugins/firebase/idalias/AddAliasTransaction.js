@@ -1,4 +1,5 @@
-var AddAliasTransaction = function (id, alias) {
+var Add = function (id, alias) {
+    var self = this;
     return this.database.runTransaction(function (transaction) {
         var aliasRef = self.getAliasRef(alias);
         return transaction.get(aliasRef).then(function (doc) {
@@ -11,4 +12,4 @@ var AddAliasTransaction = function (id, alias) {
         });
     });
 }
-export default AddAliasTransaction;
+export default Add;

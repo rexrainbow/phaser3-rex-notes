@@ -1,9 +1,9 @@
 import GetValue from '../../utils/object/GetValue.js';
 import Add from './Add.js';
-import AddRandomDigits from './AddRandomDigits.js';
+import AddRandom from './AddRandom.js';
 import GetId from './GetId.js';
 import GetAlias from './GetAlias.js';
-import GetRandomDigits from './GetRandomDigits.js';
+import GetRandomAlias from './GetRandomAlias.js';
 import Remove from './Remove.js';
 
 class IdAlias {
@@ -32,10 +32,10 @@ class IdAlias {
 
 var methods = {
     add: Add,
-    addRandomDigits: AddRandomDigits,
+    addRandom: AddRandom,
     getId: GetId,
     getAlias: GetAlias,
-    getRandomDigits: GetRandomDigits,
+    getRandomAlias: GetRandomAlias,
     remove: Remove
 }
 
