@@ -3,7 +3,7 @@ import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../utils/object/SetValue.js';
 
 ObjectFactory.register('idAlias', function (config) {
-    return new IdAlias(this.app, config);
+    return new IdAlias(config);
 });
 
 SetValue(window, 'RexPlugins.Fire.IdAlias', IdAlias);

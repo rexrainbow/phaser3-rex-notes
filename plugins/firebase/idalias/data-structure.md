@@ -1,4 +1,4 @@
 ```
-<document>
-    alias - id
+<alias>
+    id - id
 ```
