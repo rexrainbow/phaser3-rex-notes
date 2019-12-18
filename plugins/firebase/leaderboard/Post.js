@@ -1,4 +1,4 @@
-import { GetTime } from './GetTime.js';
+import { GetTime } from '../../utils/datetime/GetTime.js'
 
 const TIMETYPES = ['D', 'W', 'M', 'Y'];
 var Post = function (score, extraData) {
