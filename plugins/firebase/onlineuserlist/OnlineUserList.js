@@ -1,6 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
-import ItemList from '../utils/itemlist/ItemList.js.js';
+import ItemList from '../utils/itemlist/ItemList.js';
 import Join from './Join.js';
 import Leave from './Leave.js';
 

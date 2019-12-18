@@ -1,21 +1,20 @@
-import { GetTime } from '../../utils/datetime/GetTime.js'
-
-const TIMETYPES = ['D', 'W', 'M', 'Y'];
 var Post = function (score, extraData) {
-    var curTimeData = GetTime();
     var newRecord = {
         userID: this.userInfo.userID,
         boardID: this.boardID,
-        userName: this.userInfo.userName,
-        tagD: curTimeData.d,
-        tagW: curTimeData.w,
-        tagM: curTimeData.m,
-        tagY: curTimeData.y,
-        scoreD: score,
-        scoreW: score,
-        scoreM: score,
-        scoreY: score,
+        userName: this.userInfo.userName
     };
+    var curTimeData = GetTime();
+    for (var t in this.timeFilter) {
+        if (!this.timeFilter[t]) {
+            continue;
+        }
+
+        var T = t.toUpperCase();
+        newRecord[`tag${T}`] = curTimeData[t];
+        newRecord[`score${T}`] = score;
+
+    }
     if (this.tag) {
         newRecord.tag = this.tag;
     }
@@ -35,12 +34,15 @@ var Post = function (score, extraData) {
             });
 
             if (prevRecord) {
-                var timeType, timeTagKey, scoreKey;
-                for (var i = 0, cnt = TIMETYPES.length; i < cnt; i++) {
-                    timeType = TIMETYPES[i];
-                    timeTagKey = `tag${timeType}`;
+                for (var t in self.timeFilter) {
+                    if (!self.timeFilter[t]) {
+                        continue;
+                    }
+
+                    var T = t.toUpperCase();
+                    var timeTagKey = `tag${T}`;
                     if (prevRecord[timeTagKey] === newRecord[timeTagKey]) {
-                        scoreKey = `score${timeType}`;
+                        var scoreKey = `score${T}`;
                         newRecord[scoreKey] = Math.max(prevRecord[scoreKey], newRecord[scoreKey]);
                     }
                 }
@@ -53,4 +55,15 @@ var Post = function (score, extraData) {
         });
 }
 
+var GetTime = function (timeStamp) {
+    var date = (timeStamp) ? (new Date(timeStamp)) : (new Date());
+    var Jan1st = new Date(date.getFullYear(), 0, 1);
+    var week = Math.ceil((((date - Jan1st) / 86400000) + Jan1st.getDay() + 1) / 7);
+    return {
+        d: date.getDate(),
+        w: week,
+        m: (date.getMonth() + 1),
+        y: (date.getFullYear())
+    };
+}
 export default Post;

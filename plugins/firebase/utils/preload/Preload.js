@@ -1,7 +1,7 @@
-import DefaultConfig from './DefaultConfig.js.js';
+import DefaultConfig from './DefaultConfig.js';
 import MergeRight from '../../../utils/object/MergeRight.js';
 import LoadScript from '../../../utils/loader/LoadScript.js';
-import AvailableTest from './AvailableTest.js.js';
+import AvailableTest from './AvailableTest.js';
 
 var Preload = function (urlConfig, firebaseConfig) {
     urlConfig = MergeRight(DefaultConfig, urlConfig);

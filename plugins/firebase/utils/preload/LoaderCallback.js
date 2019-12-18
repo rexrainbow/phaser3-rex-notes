@@ -1,6 +1,5 @@
 import Preload from './Preload.js';
-import AwaitFile from '../../loader/awaitloader/awaitFile.js';
-
+import AwaitFile from '../../../loader/awaitloader/AwaitFile.js';
 
 const LoaderCallback = function (urlConfig, firebaseConfig) {
     var callback = function (successCallback, failureCallback) {

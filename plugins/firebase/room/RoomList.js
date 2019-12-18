@@ -1,6 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
-import ItemList from '../utils/itemlist/ItemList.js.js';
+import ItemList from '../utils/itemlist/ItemList.js';
 import GetFilterString from './GetFilterString.js';
 
 class RoomList {

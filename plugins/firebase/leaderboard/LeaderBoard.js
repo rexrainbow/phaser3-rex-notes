@@ -1,6 +1,5 @@
 import GetValue from '../../utils/object/GetValue.js';
 import Post from './Post.js';
-import Config from '../preload/DefaultConfig.js';
 
 class LeaderBoard {
     constructor(config) {
@@ -10,7 +9,13 @@ class LeaderBoard {
         this.userInfo = { userID: '', userName: '' };
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
         this.setBoardID(GetValue(config, 'boardID', ''));
-        this.setTag(GetValue(Config, 'tag', undefined));
+        this.setTag(GetValue(config, 'tag', undefined));
+        this.timeFilter = {
+            d: GetValue(config, 'timeFilter.day', true),
+            w: GetValue(config, 'timeFilter.week', true),
+            m: GetValue(config, 'timeFilter.month', true),
+            y: GetValue(config, 'timeFilter.year', true)
+        }
     }
 
     shutdown() {
