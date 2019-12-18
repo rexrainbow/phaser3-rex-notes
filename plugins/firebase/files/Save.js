@@ -9,16 +9,16 @@ var Save = function (fileID, header, content, updateMode) {
         updateMode = false;
     }
 
-    var ownerID = this.ownerInfo.userID;
+    var userID = this.userInfo.userID;
     if (header === undefined) {
         header = {};
     }
-    header.ownerID = ownerID;
+    header.userID = userID;
     header.fileID = fileID;
     header.type = 'header';
 
     if (content) {
-        content.ownerID = ownerID;
+        content.userID = userID;
         content.fileID = fileID;
         content.type = 'content';
     }
@@ -63,14 +63,14 @@ var Save = function (fileID, header, content, updateMode) {
         })
         .then(function () {
             return Promise.resolve({
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID
             });
         })
         .catch(function (error) {
             return Promise.reject({
                 error: error,
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID
             });
         });

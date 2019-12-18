@@ -1,15 +1,15 @@
 import DocToHeader from './DocToHeader.js';
 
 var LoadHeader = function (fileID) {
-    var ownerID = this.ownerInfo.userID;
+    var userID = this.userInfo.userID;
     let header = this.cacheHeaders[fileID];
-    if (header && (header.ownerID === ownerID)) {
+    if (header && (header.userID === userID)) {
         return Promise.resolve(header);
     }
 
     // Can't find in cache headers, load from firestore    
     var self = this;
-    return this.getFileQuery(ownerID, fileID, 'header').limit(1)
+    return this.getFileQuery(userID, fileID, 'header').limit(1)
         .get()
         .then(function (querySnapshot) {
             let header = undefined;

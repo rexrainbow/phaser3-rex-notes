@@ -1,10 +1,10 @@
 import DocToHeader from './DocToHeader.js';
 
 var Load = function (fileID) {
-    var ownerID = this.ownerInfo.userID;
+    var userID = this.userInfo.userID;
 
     var self = this;
-    return this.getFileQuery(ownerID, fileID)
+    return this.getFileQuery(userID, fileID)
         .get()
         .then(function (querySnapshot) {
             var header, content;
@@ -19,7 +19,7 @@ var Load = function (fileID) {
                 }
             });
             return Promise.resolve({
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID,
                 header: header,
                 content: content
@@ -28,7 +28,7 @@ var Load = function (fileID) {
         .catch(function () {
             return Promise.reject({
                 error: error,
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID
             });
         });

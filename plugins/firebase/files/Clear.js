@@ -1,7 +1,7 @@
 var Clear = function () {
-    var ownerID = this.ownerInfo.userID;
+    var userID = this.userInfo.userID;
     var self = this;
-    return this.getFileQuery(ownerID, undefined, 'header')
+    return this.getFileQuery(userID, undefined, 'header')
         .get()
         .then(function (querySnapshot) {
             var batch = self.database.batch();
@@ -18,13 +18,13 @@ var Clear = function () {
         .then(function () {
             self.clearCache();
             return Promise.resolve({
-                ownerID: ownerID
+                userID: userID
             });
         })
         .catch(function (error) {
             return Promise.reject({
                 error: error,
-                ownerID: ownerID
+                userID: userID
             });
         });
 }

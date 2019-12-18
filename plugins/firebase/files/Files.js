@@ -14,8 +14,8 @@ class Files {
         this.cacheHeaders = {};
 
         // Owner
-        this.ownerInfo = { userID: '' };
-        this.setOwner(GetValue(config, 'ownerID', ''));
+        this.userInfo = { userID: '' };
+        this.setOwner(GetValue(config, 'userID', ''));
 
     }
 
@@ -32,22 +32,14 @@ class Files {
         return this;
     }
 
-    getFileQuery(ownerID, fileID, type) {
-        var query = this.rootRef;
-        query = (ownerID) ? query.where('ownerID', '==', ownerID) : query;
-        query = (fileID) ? query.where('fileID', '==', fileID) : query;
-        query = (type) ? query.where('type', '==', type) : query;
-        return query;
-    }
-
     setOwner(userID) {
-        var prevUserID = this.ownerInfo.userID;
+        var prevUserID = this.userInfo.userID;
         if (typeof (userID) === 'string') {
-            this.ownerInfo.userID = userID;
+            this.userInfo.userID = userID;
         } else {
-            this.ownerInfo = userID;
+            this.userInfo = userID;
         }
-        if (prevUserID !== this.ownerInfo.userID) {
+        if (prevUserID !== this.userInfo.userID) {
             this.clearCache();
         }
         return this;
@@ -57,6 +49,15 @@ class Files {
         ClearDict(this.cacheHeaders);
         return this;
     }
+
+    getFileQuery(userID, fileID, type) {
+        var query = this.rootRef;
+        query = (userID) ? query.where('userID', '==', userID) : query;
+        query = (fileID) ? query.where('fileID', '==', fileID) : query;
+        query = (type) ? query.where('type', '==', type) : query;
+        return query;
+    }
+
 }
 
 var methods = {

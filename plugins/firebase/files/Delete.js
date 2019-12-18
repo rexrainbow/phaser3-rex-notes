@@ -1,11 +1,11 @@
 var Delete = function (fileID) {
-    var ownerID = this.ownerInfo.userID;
+    var userID = this.userInfo.userID;
     var self = this;
     return LoadHeader.call(this, fileID) // Try load header
         .then(function (prevHeader) {
             if (!prevHeader) { // File dose not exist
                 return Promise.resolve({
-                    ownerID: ownerID,
+                    userID: userID,
                     fileID: fileID
                 });
             }
@@ -23,14 +23,14 @@ var Delete = function (fileID) {
             }
 
             return Promise.resolve({
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID
             });
         })
         .catch(function (error) {
             return Promise.reject({
                 error: error,
-                ownerID: ownerID,
+                userID: userID,
                 fileID: fileID
             });
         });
