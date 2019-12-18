@@ -1,5 +1,3 @@
-import GetRef from '../utils/GetRef.js';
-
 var methods = {
     startReceiving(receiverID) {
         if (receiverID === undefined) {
@@ -13,7 +11,7 @@ var methods = {
 
         this.isReceiving = true;
         this.skipFirst = true;  // Skip previous message
-        this.receiverRef = GetRef(this.database, this.rootPath, receiverID);
+        this.receiverRef = this.database.ref(this.rootPath).child(receiverID);
         this.receiverRef.on('value', OnReceive, this);
         this.receiverRef.onDisconnect().remove();
         return this;

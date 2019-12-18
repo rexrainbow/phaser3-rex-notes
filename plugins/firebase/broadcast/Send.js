@@ -1,8 +1,6 @@
-import GetRef from '../utils/GetRef.js';
-
 var Send = function (sendToID, message) {
     if ((!this.sendToRef) || (this.sendToRef.key !== sendToID)) {
-        this.sendToRef = GetRef(this.database, this.rootPath, sendToID);
+        this.sendToRef = this.database.ref(this.rootPath).child(sendToID);
     }
 
     // Clear message

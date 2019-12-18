@@ -1,7 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import ItemList from '../itemlist/ItemList.js';
-import GetRef from '../utils/GetRef.js';
 import GetFilterString from './GetFilterString.js';
 
 class RoomList {
@@ -36,7 +35,7 @@ class RoomList {
     }
 
     startUpdate(roomType) {
-        var query = GetRef(this.database, this.rootPath);
+        var query = this.database.ref(this.rootPath);
         query = query.orderByChild('filter');
         if (roomType === undefined) {
             query = query.startAt('open').endAt('open~');

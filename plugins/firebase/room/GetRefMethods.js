@@ -1,8 +1,10 @@
-import GetRef from '../utils/GetRef.js';
-
 var Methods = {
     getRootRef(childKey) {
-        return GetRef(this.database, this.rootPath, childKey);
+        var ref = this.database.ref(this.rootPath);
+        if (childKey) {
+            ref = ref.child(childKey);
+        }
+        return ref;
     },
 
     getRoomRef(roomID, childKey) {

@@ -4,7 +4,7 @@ var Leave = function () {
         return Promise.resolve();  // Promise
     }
     var itemID = this.userID2ItemID[userID];
-    var userRef = GetRef(this.database, this.rootPath, itemID);
+    var userRef = this.database.ref(this.rootPath).child(itemID);
     return userRef.remove();  // Promise
 }
 

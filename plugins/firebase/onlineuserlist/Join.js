@@ -1,4 +1,3 @@
-import GetRef from '../utils/GetRef.js';
 import Delay from '../../utils/promise/Delay.js';
 
 var Join = function () {
@@ -14,7 +13,7 @@ var Join = function () {
         userID: userID,
         userName: userName
     };
-    var rootRef = GetRef(this.database, this.rootPath);
+    var rootRef = this.database.ref(this.rootPath);
     var userRef = rootRef.push();
 
     userRef.onDisconnect().remove();

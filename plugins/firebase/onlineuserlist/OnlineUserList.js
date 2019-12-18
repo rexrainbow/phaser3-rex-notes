@@ -1,7 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import ItemList from '../itemlist/ItemList.js';
-import GetRef from '../utils/GetRef.js';
 import Join from './Join.js';
 import Leave from './Leave.js';
 
@@ -113,7 +112,7 @@ class OnlineUserList {
             return null;
         }
         var itemID = this.userID2ItemID[userID];
-        return GetRef(this.database, this.rootPath, itemID);
+        return this.database.ref(this.rootPath).child(itemID);
     }
 
     contains(userID) {
@@ -121,7 +120,7 @@ class OnlineUserList {
     }
 
     startUpdate() {
-        var query = GetRef(this.database, this.rootPath);
+        var query = this.database.ref(this.rootPath);
         if (this.maxUsers > 0) {
             query = query.limitToFirst(this.maxUsers);
         }
