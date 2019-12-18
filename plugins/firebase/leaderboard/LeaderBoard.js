@@ -51,12 +51,14 @@ class LeaderBoard {
         query = (boardID) ? query.where('boardID', '==', boardID) : query;
         query = (customTag) ? query.where('tag', '==', customTag) : query;
         query = (userID) ? query.where('userID', '==', userID) : query;
-        query = (timeTag) ? query.where('timeTag', '==', timeTag) : query;
-        return query;
-    }
 
-    getNewRecordID() {
-        return this.rootRef.doc().id;
+        if (timeTag !== undefined) {
+            for(var k in timeTag) { // {d:10}, {w:10}, {m:5}, or {y:2020}
+                query = query.where(`tag${k.toUpperCase()}`, '==', timeTag[k]);
+                break;
+            }
+        }
+        return query;
     }
 }
 
