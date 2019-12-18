@@ -6,6 +6,7 @@ import OnlineUserListFactory from './firebase/onlineuserlist/Factory.js';
 import RoomFactory from './firebase/room/Factory.js';
 import FilesFactory from './firebase/files/Factory.js';
 import IdAliasFactory from './firebase/idalias/Factory.js';
+import LeaderBoardFactory from './firebase/leaderboard/Factory.js';
 
 class FirebasePlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {

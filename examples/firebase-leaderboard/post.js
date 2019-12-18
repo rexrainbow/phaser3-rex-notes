@@ -15,22 +15,19 @@ class Demo extends Phaser.Scene {
     create() {
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
 
-        var idAlias = rexFire.add.idAlias({
-            root: 'idalias-test'
+        var leaderBoard = rexFire.add.leaderBoard({
+            root: 'leaderboard-test'
         })
 
-        idAlias
-            .add('aabb', 'rex')
+        leaderBoard
+            .setUser('aabb', 'rex')
+            .setBoardID('lv1')
+            .post(100)
             .then(function (result) {
-                console.log('Add: ', result);
-                return idAlias.getId('rex');
+                debugger
             })
-            .then(function (result) {
-                console.log('Get: ', result);
-                return idAlias.getRandomAlias('ccdd', { digits: 10, candidates: '0123456789' });
-            })
-            .then(function (result) {
-                console.log('Get: ', result);
+            .catch(function (error) {
+                debugger
             })
 
     }

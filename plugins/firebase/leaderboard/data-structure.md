@@ -1,7 +1,8 @@
 - <randomID>
-    - `userID` - Unique ID of owner
     - `boardID` - Unique ID of board
+    - `tag` - Custom filter tag, optional
+    - `userID` - Unique ID of owner
+    - `timeTag` - Time tag, 'd-x', 'w-x', 'm-x', 'y-x'
     - `score` - Score of owner # Key of ordering
-    - `timestamp` - Updated timestamp
-    - `userName` - Name of the owner (Optional)
+    - `userName` - Name of the owner, optional
     - ...
