@@ -53,10 +53,8 @@ class LeaderBoard {
         query = (userID) ? query.where('userID', '==', userID) : query;
 
         if (timeTag !== undefined) {
-            for(var k in timeTag) { // {d:10}, {w:10}, {m:5}, or {y:2020}
-                query = query.where(`tag${k.toUpperCase()}`, '==', timeTag[k]);
-                break;
-            }
+            timeTag = timeTag.split(':'); // 'tagD:10', 'tagW:10', 'tagM:10', 'tagY:2020'
+            query = query.where(timeTag[0], '==', timeTag[1]);
         }
         return query;
     }
