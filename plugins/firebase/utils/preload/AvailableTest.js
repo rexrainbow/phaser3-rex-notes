@@ -1,4 +1,4 @@
-import Delay from '../../utils/promise/Delay.js';
+import Delay from '../../../utils/promise/Delay.js';
 
 var AvailableTestPromise = function (config) {
     if (AvailableTest(config)) {

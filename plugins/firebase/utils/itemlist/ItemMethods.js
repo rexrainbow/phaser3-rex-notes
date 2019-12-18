@@ -1,5 +1,5 @@
-import Clear from '../../utils/object/Clear.js';
-import SpliceOne from '../../utils/array/SpliceOne.js';
+import Clear from '../../../utils/object/Clear.js';
+import SpliceOne from '../../../utils/array/SpliceOne.js';
 
 var Methods = {
     clear() {

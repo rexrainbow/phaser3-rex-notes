@@ -1,4 +1,4 @@
-import LoaderCallback from './firebase/preload/LoaderCallback.js';
+import LoaderCallback from './firebase/utils/preload/LoaderCallback.js';
 import ObjectFactory from './firebase/ObjectFactory.js'
 
 import BroadcastFactory from './firebase/broadcast/Factory.js';

@@ -1,5 +1,5 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetValue from '../../utils/object/GetValue.js';
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import ItemMethods from './ItemMethods.js';
 import DefaultGetItemCallback from './callbacks/DefaultGetItemCallback.js';
 import UpdateOnce from './updaters/UpdateOnce.js';
