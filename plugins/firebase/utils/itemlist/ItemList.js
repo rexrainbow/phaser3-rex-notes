@@ -1,7 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import ItemMethods from './ItemMethods.js';
-import DefaultGetItemCallback from './DefaultGetItemCallback.js';
 import UpdateOnce from './updaters/UpdateOnce.js';
 import UpdateChild from './updaters/UpdateChild.js';
 import UpdateAll from './updaters/UpdateAll.js';
@@ -91,6 +90,12 @@ class ItemList {
         this.updater.stop.call(this);
         return this;
     }
+}
+
+var DefaultGetItemCallback = function (snapshot) {
+    var item = snapshot.val();
+    item[this.keyItemID] = snapshot.key;
+    return item;
 }
 
 Object.assign(

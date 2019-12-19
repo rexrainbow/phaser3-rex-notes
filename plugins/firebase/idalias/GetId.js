@@ -1,6 +1,5 @@
 var GetId = function (alias) {
-    return this.getAliasRef(alias)
-        .get()
+    return this.getAliasRef(alias).get()
         .then(function (doc) {
             var id;
             if (doc.exists) {

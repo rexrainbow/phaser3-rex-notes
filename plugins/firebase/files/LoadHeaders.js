@@ -4,8 +4,7 @@ import ClearDict from '../../utils/object/Clear.js';
 var LoadHeaders = function () {
     var userID = this.userInfo.userID;
     var self = this;
-    return this.getFileQuery(userID, undefined, 'header')
-        .get()
+    return this.getFileQuery(userID, undefined, 'header').get()
         .then(function (querySnapshot) {
             var header;
             ClearDict(self.cacheHeaders);

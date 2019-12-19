@@ -4,8 +4,7 @@ var Load = function (fileID) {
     var userID = this.userInfo.userID;
 
     var self = this;
-    return this.getFileQuery(userID, fileID)
-        .get()
+    return this.getFileQuery(userID, fileID).get()
         .then(function (querySnapshot) {
             var header, content;
             querySnapshot.forEach(function (doc) {

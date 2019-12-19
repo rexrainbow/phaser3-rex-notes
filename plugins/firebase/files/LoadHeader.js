@@ -9,8 +9,7 @@ var LoadHeader = function (fileID) {
 
     // Can't find in cache headers, load from firestore    
     var self = this;
-    return this.getFileQuery(userID, fileID, 'header').limit(1)
-        .get()
+    return this.getFileQuery(userID, fileID, 'header').limit(1).get()
         .then(function (querySnapshot) {
             let header = undefined;
             querySnapshot.forEach(function (doc) {
