@@ -24,7 +24,7 @@ var RemoveChildCallback = function (snapshot) {
     this.emit(this.eventNames.update, this.items);
 }
 
-var ReceiveAllCallback = function (snapshot) {
+var GetAllChildrenCallback = function (snapshot) {
     this.clear();
     snapshot.forEach((function (childSnapshot) {
         this.addItem(childSnapshot, null, true);
@@ -38,5 +38,5 @@ export {
     AddChildCallback,
     ChangeChildCallback,
     RemoveChildCallback,
-    ReceiveAllCallback
+    GetAllChildrenCallback
 }
