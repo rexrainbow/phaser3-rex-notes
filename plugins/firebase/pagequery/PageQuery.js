@@ -3,7 +3,7 @@ import LoadFirstPage from './LoadFirstPage.js';
 import LoadNextPage from './LoadNextPage.js';
 import LoadPreviousPage from './LoadPreviousPage.js';
 
-class Page {
+class PageQuery {
     constructor(config) {
         this.setItemCount(GetValue(config, 'itemCount', 10));
         this.setQuery(
@@ -25,6 +25,7 @@ class Page {
     setQuery(nextQuery, prevQuery) {
         this.nextQuery = nextQuery;
         this.prevQuery = prevQuery;
+        this.pageIndex = undefined;
         return this;
     }
 }
@@ -36,8 +37,8 @@ var methods = {
 }
 
 Object.assign(
-    Page.prototype,
+    PageQuery.prototype,
     methods
 );
 
-export default Page;
+export default PageQuery;

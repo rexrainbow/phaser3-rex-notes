@@ -8,7 +8,7 @@ var LoadFirstPage = function () {
             self.endItemIndex = self.startItemIndex + docCount - 1;
             self.startDocRef = querySnapshot.docs[0];
             self.endDocRef = querySnapshot.docs[docCount - 1];
-            return Promise.resolve(querySnapshot);
+            return Promise.resolve(querySnapshot.docs);
         })
 }
 

@@ -1,4 +1,8 @@
 var LoadPreviousPage = function () {
+    if (this.pageIndex === undefined) {
+        return this.loadFirstPage();
+    }
+
     var self = this;
     return this.prevQuery.startAfter(this.startDocRef).limit(this.itemCount).get()
         .then(function (querySnapshot) {
@@ -8,8 +12,7 @@ var LoadPreviousPage = function () {
             self.startItemIndex = self.endItemIndex - docCount + 1;
             self.startDocRed = querySnapshot.docs[docCount - 1];
             self.endDocRef = querySnapshot.docs[0];
-            // querySnapshot.docs.reverse();
-            return Promise.resolve(querySnapshot);
+            return Promise.resolve(querySnapshot.docs.reverse());
         })
 }
 
