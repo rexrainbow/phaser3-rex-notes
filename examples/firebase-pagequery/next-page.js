@@ -66,7 +66,14 @@ class Demo extends Phaser.Scene {
                     console.log(doc.data());
                 });
                 return pageQuery.loadNextPage();
-            })            
+            })
+            .then(function (docs) {
+                console.log(`Next pageQuery:${pageQuery.pageIndex}`)
+                docs.forEach(function (doc) {
+                    console.log(doc.data());
+                });
+                return pageQuery.loadNextPage();
+            })
             .then(function (docs) {
                 console.log(`Next pageQuery:${pageQuery.pageIndex}`)
                 docs.forEach(function (doc) {
