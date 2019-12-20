@@ -141,6 +141,7 @@ module.exports = {
 
         // firebase
         'firebaseplugin': './plugins/firebase-plugin.js',
+        'firebase': './plugins/firebase.js',
 
         // templates
         'bejeweled': './templates/bejeweled/Bejeweled.js',
