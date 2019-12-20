@@ -24,11 +24,11 @@ class Demo extends Phaser.Scene {
             }
         })
 
-        var batch = db.batch();
+        var promises = [];
         for (var i = 0; i < 10; i++) {
-            batch.set(rootRef.doc(`item-${i}`), { i: i });
+            promises.push(rootRef.doc(`item-${i}`).set({ i: i }));
         }
-        batch.commit()
+        Promise.all(promises)
             .then(function () {
                 return pageQuery.loadFirstPage();
             })
