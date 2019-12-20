@@ -1,5 +1,9 @@
 import GetValue from '../../utils/object/GetValue.js';
 import Post from './Post.js';
+import LoadFirstPage from './LoadFirstPage.js';
+import LoadNextPage from './LoadNextPage.js';
+import LoadPreviousPage from './LoadPreviousPage.js';
+import GetTime from './GetTime.js';
 
 class LeaderBoard {
     constructor(config) {
@@ -16,6 +20,11 @@ class LeaderBoard {
             m: GetValue(config, 'timeFilter.month', true),
             y: GetValue(config, 'timeFilter.year', true)
         }
+        this.setTimeFilterType(GetValue(config, 'timeFilterType', 'year'));
+
+        this.page = new PageQuery();
+        this.setPageItemCount(GetValue(config, 'pageItemCount', 10));
+        this.resetQueryFlag = true;
     }
 
     shutdown() {
@@ -28,6 +37,7 @@ class LeaderBoard {
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         this.rootRef = this.database.collection(rootPath);
+        this.resetQueryFlag = true;
         return this;
     }
 
@@ -43,11 +53,24 @@ class LeaderBoard {
 
     setBoardID(boardID) {
         this.boardID = boardID;
+        this.resetQueryFlag = true;
         return this;
     }
 
     setTag(tag) {
         this.tag = tag;
+        this.resetQueryFlag = true;
+        return this;
+    }
+
+    setTimeFilterType(type) {
+        this.timeFilterType = type;
+        this.resetQueryFlag = true;
+        return this;
+    }
+
+    setPageItemCount(count) {
+        this.page.setItemCount(count);
         return this;
     }
 
@@ -63,10 +86,33 @@ class LeaderBoard {
         }
         return query;
     }
+
+    resetPageQuery() {
+        if (!this.resetQueryFlag) {
+            return this;
+        }
+
+        var t = this.timeFilterType[0];
+        var T = t.toUpperCase();
+        var curTimeData = GetTime()[t];
+        var timeTag = `tag${T}:${curTimeData}`;
+        var scoreTag = `score${T}`;
+
+        var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTag);
+        var nextPageQuery = baseQuery.orderBy(scoreTag, 'desc');
+        var prevPageQuery = baseQuery.orderBy(scoreTag);
+
+        this.page.setQuery(nextPageQuery, prevPageQuery);
+        this.resetQueryFlag = false;
+        return this;
+    }
 }
 
 var methods = {
-    post: Post
+    post: Post,
+    loadFirstPage: LoadFirstPage,
+    loadNextPage: LoadNextPage,
+    loadPreviousPage: LoadPreviousPage,
 }
 
 Object.assign(
