@@ -15,6 +15,11 @@
 1. Install [node.js](https://nodejs.org/en/)
 2. Click `install.bat`
     - `npm install`
+3. If you don't have wepback in global:
+    ```
+    npm install --global webpack
+    npm install --global webpack-cli
+    ```
 
 ### Run examples
 
