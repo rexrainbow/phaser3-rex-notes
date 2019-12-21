@@ -2,6 +2,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import LoadFirstPage from './LoadFirstPage.js';
 import LoadNextPage from './LoadNextPage.js';
 import LoadPreviousPage from './LoadPreviousPage.js';
+import LoadCurrentPage from './LoadCurrentPage.js';
 
 class PageQuery {
     constructor(config) {
@@ -13,8 +14,10 @@ class PageQuery {
         this.pageIndex = undefined;
         this.startItemIndex = undefined;
         this.endItemIndex = undefined;
-        this.startDocRef = undefined;
-        this.endDocRef = undefined;
+        this.currPageStartDocRef = undefined; // For loading previous page
+        this.currPageEndDocRef = undefined; // For loading next page
+        this.prevPageEndDocRef = undefined; // For loading current page
+        this.cacheItems = undefined;
     }
 
     setItemCount(count) {
@@ -33,7 +36,8 @@ class PageQuery {
 var methods = {
     loadFirstPage: LoadFirstPage,
     loadNextPage: LoadNextPage,
-    loadPreviousPage: LoadPreviousPage
+    loadPreviousPage: LoadPreviousPage,
+    loadCurrentPage: LoadCurrentPage
 }
 
 Object.assign(

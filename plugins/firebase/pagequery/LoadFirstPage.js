@@ -6,9 +6,13 @@ var LoadFirstPage = function () {
             self.pageIndex = 0;
             self.startItemIndex = 0;
             self.endItemIndex = self.startItemIndex + docCount - 1;
-            self.startDocRef = querySnapshot.docs[0];
-            self.endDocRef = querySnapshot.docs[docCount - 1];
-            return Promise.resolve(querySnapshot.docs);
+            // Doc reference for paging
+            self.prevPageEndDocRef = undefined;
+            self.currPageStartDocRef = querySnapshot.docs[0];
+            self.currPageEndDocRef = querySnapshot.docs[docCount - 1];
+            // Cache result items
+            self.cacheItems = querySnapshot.docs;
+            return Promise.resolve(self.cacheItems);
         })
 }
 
