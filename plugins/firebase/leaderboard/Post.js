@@ -1,21 +1,23 @@
 import GetTime from './GetTime.js';
+import { TimeTagKeys, ScoreKeys } from './Const.js';
 
 var Post = function (score, extraData) {
     var newRecord = {
-        userID: this.userInfo.userID,
-        boardID: this.boardID,
-        userName: this.userInfo.userName
+        userID: this.userInfo.userID
     };
+    if (this.boardID) {
+        newRecord.boardID = this.boardID;
+    }
+    if (this.userInfo.userName) {
+        newRecord.userName = this.userInfo.userName;
+    }
     var curTimeData = GetTime();
     for (var t in this.timeFilter) {
         if (!this.timeFilter[t]) {
             continue;
         }
-
-        var T = t.toUpperCase();
-        newRecord[`tag${T}`] = curTimeData[t];
-        newRecord[`score${T}`] = score;
-
+        newRecord[TimeTagKeys[t]] = curTimeData[t];
+        newRecord[ScoreKeys[t]] = score;
     }
     if (this.tag) {
         newRecord.tag = this.tag;
@@ -27,7 +29,6 @@ var Post = function (score, extraData) {
     var self = this;
     return this.getRecordQuery(this.boardID, this.tag, this.userInfo.userID, undefined).limit(1).get()
         .then(function (querySnapshot) {
-            debugger
             var prevRecord, docID;
             querySnapshot.forEach(function (doc) {
                 prevRecord = doc.data();
@@ -40,10 +41,9 @@ var Post = function (score, extraData) {
                         continue;
                     }
 
-                    var T = t.toUpperCase();
-                    var timeTagKey = `tag${T}`;
+                    var timeTagKey = TimeTagKeys[t];
                     if (prevRecord[timeTagKey] === newRecord[timeTagKey]) {
-                        var scoreKey = `score${T}`;
+                        var scoreKey = ScoreKeys[t];
                         newRecord[scoreKey] = Math.max(prevRecord[scoreKey], newRecord[scoreKey]);
                     }
                 }

@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import OnlineUserList from '../onlineuserlist/OnlineUserList.js';
 import Methods from './Methods.js';
 
@@ -56,11 +57,11 @@ class Room {
     }
 
     setUser(userID, userName) {
-        if (typeof (userID) === 'string') {
+        if (IsPlainObject(userID)) {
+            this.userInfo = userID;
+        } else {
             this.userInfo.userID = userID;
             this.userInfo.userName = userName;
-        } else {
-            this.userInfo = userID;
         }
         return this;
     }

@@ -1,18 +1,17 @@
 import GetValue from '../../utils/object/GetValue.js';
-import Post from './Post.js';
-import LoadFirstPage from './LoadFirstPage.js';
-import LoadNextPage from './LoadNextPage.js';
-import LoadPreviousPage from './LoadPreviousPage.js';
-import GetTime from './GetTime.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
+import Post from './Post.js';;
+import LoadMethods from './LoadMethods.js';
+import PageQuery from '../pagequery/PageQuery.js';
 
 class LeaderBoard {
     constructor(config) {
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
-        this.userInfo = { userID: '', userName: '' };
-        this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', ''));
-        this.setBoardID(GetValue(config, 'boardID', ''));
+        this.userInfo = { userID: undefined, userName: undefined };
+        this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', undefined));
+        this.setBoardID(GetValue(config, 'boardID', undefined));
         this.setTag(GetValue(config, 'tag', undefined));
         this.timeFilter = {
             d: GetValue(config, 'timeFilter.day', true),
@@ -35,37 +34,37 @@ class LeaderBoard {
     }
 
     setRootPath(rootPath) {
+        this.resetQueryFlag |= (this.rootPath !== rootPath);
         this.rootPath = rootPath;
         this.rootRef = this.database.collection(rootPath);
-        this.resetQueryFlag = true;
         return this;
     }
 
     setUser(userID, userName) {
-        if (typeof (userID) === 'string') {
+        if (IsPlainObject(userID)) {
+            this.userInfo = userID;
+        } else {
             this.userInfo.userID = userID;
             this.userInfo.userName = userName;
-        } else {
-            this.userInfo = userID;
         }
         return this;
     }
 
     setBoardID(boardID) {
+        this.resetQueryFlag |= (this.boardID !== boardID);
         this.boardID = boardID;
-        this.resetQueryFlag = true;
         return this;
     }
 
     setTag(tag) {
+        this.resetQueryFlag |= (this.tag !== tag);
         this.tag = tag;
-        this.resetQueryFlag = true;
         return this;
     }
 
     setTimeFilterType(type) {
+        this.resetQueryFlag |= (this.timeFilterType !== type);
         this.timeFilterType = type;
-        this.resetQueryFlag = true;
         return this;
     }
 
@@ -74,50 +73,36 @@ class LeaderBoard {
         return this;
     }
 
-    getRecordQuery(boardID, customTag, userID, timeTag) {
+    getRecordQuery(boardID, customTag, userID, timeTagKey) {
         var query = this.rootRef;
         query = (boardID) ? query.where('boardID', '==', boardID) : query;
         query = (customTag) ? query.where('tag', '==', customTag) : query;
         query = (userID) ? query.where('userID', '==', userID) : query;
 
-        if (timeTag !== undefined) {
-            timeTag = timeTag.split(':'); // 'tagD:10', 'tagW:10', 'tagM:10', 'tagY:2020'
-            query = query.where(timeTag[0], '==', timeTag[1]);
+        if (timeTagKey !== undefined) {
+            query = query.where(timeTagKey[0], '==', timeTagKey[1]);
         }
         return query;
     }
 
-    resetPageQuery() {
-        if (!this.resetQueryFlag) {
-            return this;
-        }
+    isFirstPage() {
+        return (this.page.pageIndex === 0);
+    }
 
-        var t = this.timeFilterType[0];
-        var T = t.toUpperCase();
-        var curTimeData = GetTime()[t];
-        var timeTag = `tag${T}:${curTimeData}`;
-        var scoreTag = `score${T}`;
-
-        var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTag);
-        var nextPageQuery = baseQuery.orderBy(scoreTag, 'desc');
-        var prevPageQuery = baseQuery.orderBy(scoreTag);
-
-        this.page.setQuery(nextPageQuery, prevPageQuery);
-        this.resetQueryFlag = false;
-        return this;
+    isLastPage() {
+        return this.page.cacheItems &&
+            (this.page.cacheItems.length < this.page.itemCount);
     }
 }
 
 var methods = {
-    post: Post,
-    loadFirstPage: LoadFirstPage,
-    loadNextPage: LoadNextPage,
-    loadPreviousPage: LoadPreviousPage,
+    post: Post
 }
 
 Object.assign(
     LeaderBoard.prototype,
-    methods
+    methods,
+    LoadMethods
 );
 
 export default LeaderBoard;

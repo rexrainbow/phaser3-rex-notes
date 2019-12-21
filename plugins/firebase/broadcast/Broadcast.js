@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Send from './Send.js';
 import ReceiveMethods from './ReceiveMethods.js';
 
@@ -40,11 +41,11 @@ class Broadcast {
     }
 
     setSender(userID, userName) {
-        if (typeof (userID) === 'string') {
+        if (IsPlainObject(userID)) {
+            this.senderInfo = userID;
+        } else {
             this.senderInfo.userID = userID;
             this.senderInfo.userName = userName;
-        } else {
-            this.senderInfo = userID;
         }
         return this;
     }

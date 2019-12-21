@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import ItemList from '../utils/itemlist/ItemList.js';
 import Join from './Join.js';
 import Leave from './Leave.js';
@@ -59,11 +60,11 @@ class OnlineUserList {
     }
 
     setUser(userID, userName) {
-        if (typeof (userID) === 'string') {
+        if (IsPlainObject(userID)) {
+            this.userInfo = userID;
+        } else {
             this.userInfo.userID = userID;
             this.userInfo.userName = userName;
-        } else {
-            this.userInfo = userID;
         }
         return this;
     }

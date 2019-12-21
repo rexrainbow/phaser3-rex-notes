@@ -1,4 +1,5 @@
 import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Save from './Save.js';
 import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';
@@ -34,10 +35,10 @@ class Files {
 
     setOwner(userID) {
         var prevUserID = this.userInfo.userID;
-        if (typeof (userID) === 'string') {
-            this.userInfo.userID = userID;
-        } else {
+        if (IsPlainObject(userID)) {
             this.userInfo = userID;
+        } else {
+            this.userInfo.userID = userID;
         }
         if (prevUserID !== this.userInfo.userID) {
             this.clearCache();
