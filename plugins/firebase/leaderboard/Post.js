@@ -12,12 +12,16 @@ var Post = function (score, extraData) {
         newRecord.userName = this.userInfo.userName;
     }
     var curTimeData = GetTime();
-    for (var t in this.timeFilter) {
-        if (!this.timeFilter[t]) {
-            continue;
+    if (this.timeFilters !== false) {
+        for (var t in this.timeFilters) {
+            if (!this.timeFilters[t]) {
+                continue;
+            }
+            newRecord[TimeTagKeys[t]] = curTimeData[t];
+            newRecord[ScoreKeys[t]] = score;
         }
-        newRecord[TimeTagKeys[t]] = curTimeData[t];
-        newRecord[ScoreKeys[t]] = score;
+    } else { // No time filters
+        newRecord.score = score;
     }
     if (this.tag) {
         newRecord.tag = this.tag;
@@ -36,16 +40,20 @@ var Post = function (score, extraData) {
             });
 
             if (prevRecord) {
-                for (var t in self.timeFilter) {
-                    if (!self.timeFilter[t]) {
-                        continue;
-                    }
+                if (self.timeFilters !== false) {
+                    for (var t in self.timeFilters) {
+                        if (!self.timeFilters[t]) {
+                            continue;
+                        }
 
-                    var timeTagKey = TimeTagKeys[t];
-                    if (prevRecord[timeTagKey] === newRecord[timeTagKey]) {
-                        var scoreKey = ScoreKeys[t];
-                        newRecord[scoreKey] = Math.max(prevRecord[scoreKey], newRecord[scoreKey]);
+                        var timeTagKey = TimeTagKeys[t];
+                        if (prevRecord[timeTagKey] === newRecord[timeTagKey]) {
+                            var scoreKey = ScoreKeys[t];
+                            newRecord[scoreKey] = Math.max(prevRecord[scoreKey], newRecord[scoreKey]);
+                        }
                     }
+                } else { // No time filters
+                    newRecord.score = Math.max(prevRecord.score, newRecord.score);
                 }
             }
             if (docID === undefined) {

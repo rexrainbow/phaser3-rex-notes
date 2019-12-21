@@ -47,11 +47,20 @@ var Methods = {
             return this;
         }
 
-        var t = this.timeFilterType[0];
-        var timeTagKey = [TimeTagKeys[t], GetTime()[t]];
+        var timeTagKey, scoreKey;
+
+        if (this.timeFilters !== false) {
+            var t = this.timeFilterType[0];
+            timeTagKey = [TimeTagKeys[t], GetTime()[t]];
+            scoreKey = ScoreKeys[t];
+        } else { // No time filters
+            timeTagKey = undefined;
+            scoreKey = 'score';
+        }
+
         var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
-        var nextPageQuery = baseQuery.orderBy(ScoreKeys[t], 'desc');
-        var prevPageQuery = baseQuery.orderBy(ScoreKeys[t]);
+        var nextPageQuery = baseQuery.orderBy(scoreKey, 'desc');
+        var prevPageQuery = baseQuery.orderBy(scoreKey);
 
         this.page.setQuery(nextPageQuery, prevPageQuery);
         this.resetQueryFlag = false;
@@ -67,11 +76,14 @@ var DocsToDataArray = function (docs) {
     var scoreKey = ScoreKeys[this.timeFilterType[0]]
     for (var i = 0, cnt = docs.length; i < cnt; i++) {
         item = docs[i].data();
-        item.score = item[scoreKey];
-        // Remove timeFilterKeys, and scoreKeys
-        for (var t in this.timeFilter) {
-            delete item[TimeTagKeys[t]];
-            delete item[ScoreKeys[t]];
+
+        if (this.timeFilters !== false) {
+            item.score = item[scoreKey];
+            // Remove timeFilterKeys, and scoreKeys
+            for (var t in this.timeFilters) {
+                delete item[TimeTagKeys[t]];
+                delete item[ScoreKeys[t]];
+            }
         }
         items.push(item);
     }

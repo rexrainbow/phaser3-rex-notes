@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
 
         var leaderBoard = rexFire.add.leaderBoard({
             root: 'leaderboard-test',
+            // timeFilters: true,
             pageItemCount: 3
         })
 

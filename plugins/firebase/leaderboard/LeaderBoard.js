@@ -13,12 +13,7 @@ class LeaderBoard {
         this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', undefined));
         this.setBoardID(GetValue(config, 'boardID', undefined));
         this.setTag(GetValue(config, 'tag', undefined));
-        this.timeFilter = {
-            d: GetValue(config, 'timeFilter.day', true),
-            w: GetValue(config, 'timeFilter.week', true),
-            m: GetValue(config, 'timeFilter.month', true),
-            y: GetValue(config, 'timeFilter.year', true)
-        }
+        this.setTimeFilters(GetValue(config, 'timeFilters', false));
         this.setTimeFilterType(GetValue(config, 'timeFilterType', 'year'));
 
         this.page = new PageQuery();
@@ -59,6 +54,20 @@ class LeaderBoard {
     setTag(tag) {
         this.resetQueryFlag |= (this.tag !== tag);
         this.tag = tag;
+        return this;
+    }
+
+    setTimeFilters(filters) {
+        if (filters === false) {
+            this.timeFilters = false;
+        } else { // filters is true, or a plain object
+            this.timeFilters = {
+                d: GetValue(filters, 'day', true),
+                w: GetValue(filters, 'week', true),
+                m: GetValue(filters, 'month', true),
+                y: GetValue(filters, 'year', true)
+            }
+        }
         return this;
     }
 
