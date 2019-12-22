@@ -34,10 +34,11 @@ var Post = function (score, extraData) {
     return this.getRecordQuery(this.boardID, this.tag, this.userInfo.userID, undefined).limit(1).get()
         .then(function (querySnapshot) {
             var prevRecord, docID;
-            querySnapshot.forEach(function (doc) {
+            if (querySnapshot.size > 0) {
+                var doc = querySnapshot.docs[0];
                 prevRecord = doc.data();
                 docID = doc.id;
-            });
+            }
 
             if (prevRecord) {
                 if (self.timeFilters !== false) {
