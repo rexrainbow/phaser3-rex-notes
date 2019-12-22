@@ -2,6 +2,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
 import LoadPageMethods from './LoadPageMethods.js';
+import GetScore from './GetScore.js';
 import PageQuery from '../pagequery/PageQuery.js';
 
 class LeaderBoard {
@@ -105,7 +106,8 @@ class LeaderBoard {
 }
 
 var methods = {
-    post: Post
+    post: Post,
+    getScore: GetScore
 }
 
 Object.assign(
