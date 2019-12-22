@@ -48,7 +48,6 @@ var Methods = {
         }
 
         var timeTagKey, scoreKey;
-
         if (this.timeFilters !== false) {
             var t = this.timeFilterType[0];
             timeTagKey = [TimeTagKeys[t], GetTime()[t]];
