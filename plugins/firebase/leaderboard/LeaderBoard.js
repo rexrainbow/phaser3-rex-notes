@@ -1,7 +1,7 @@
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
-import LoadMethods from './LoadMethods.js';
+import LoadPageMethods from './LoadPageMethods.js';
 import PageQuery from '../pagequery/PageQuery.js';
 
 class LeaderBoard {
@@ -111,7 +111,7 @@ var methods = {
 Object.assign(
     LeaderBoard.prototype,
     methods,
-    LoadMethods
+    LoadPageMethods
 );
 
 export default LeaderBoard;

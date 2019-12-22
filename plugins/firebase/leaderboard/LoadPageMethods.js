@@ -65,15 +65,13 @@ var Methods = {
         this.page.setQuery(nextPageQuery, prevPageQuery);
         this.resetQueryFlag = false;
         return this;
-    },
-
-
+    }
 }
 
 var DocsToDataArray = function (docs) {
     var items = [], item;
 
-    var scoreKey = ScoreKeys[this.timeFilterType[0]]
+    var scoreKey = ScoreKeys[this.timeFilterType[0]];
     for (var i = 0, cnt = docs.length; i < cnt; i++) {
         item = docs[i].data();
 
