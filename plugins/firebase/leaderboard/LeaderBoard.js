@@ -4,8 +4,7 @@ import Post from './Post.js';;
 import LoadPageMethods from './LoadPageMethods.js';
 import GetScore from './GetScore.js';
 import GetRank from './GetRank.js';
-import DeleteUserScores from './DeleteUserScores.js';
-import DeleteBaord from './DeleteBoard.js';
+import DeleteMethods from './DeleteMethods.js';
 import GetQueryMethods from './GetQueryMethods.js';
 import PageQuery from '../pagequery/PageQuery.js';
 
@@ -100,16 +99,15 @@ class LeaderBoard {
 var methods = {
     post: Post,
     getScore: GetScore,
-    getRank: GetRank,
-    deleteUserScores: DeleteUserScores,
-    deleteBaord: DeleteBaord
+    getRank: GetRank
 }
 
 Object.assign(
     LeaderBoard.prototype,
     methods,
     GetQueryMethods,
-    LoadPageMethods
+    LoadPageMethods,
+    DeleteMethods
 );
 
 export default LeaderBoard;
