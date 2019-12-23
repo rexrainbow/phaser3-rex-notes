@@ -8,6 +8,7 @@ import FilesFactory from './firebase/files/Factory.js';
 import IdAliasFactory from './firebase/idalias/Factory.js';
 import PageQueryFactory from './firebase/pagequery/Factory.js';
 import LeaderBoardFactory from './firebase/leaderboard/Factory.js';
+import MessagesFactory from './firebase/messages/Factory.js';
 
 class FirebasePlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {

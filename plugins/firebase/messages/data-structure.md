@@ -2,4 +2,5 @@
     - `senderID` - Unique ID of sender
 	- `senderName` - Name of sender
     - `message` - Message
-    - `receiverID` - Unique ID of receiver
+    - `timestamp` - Server-timestamp
+    - `receiverID` - Unique ID of receiver, optional

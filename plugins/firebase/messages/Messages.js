@@ -1,33 +1,18 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Send from './Send.js';
-import ReceiveMethods from './ReceiveMethods.js';
 
-class Broadcast {
+class Messages {
     constructor(config) {
-        // Event emitter
-        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
-
-        this.database = firebase.database();
+        this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
-        // Sender
-        this.skipFirst = true;
-        this.stamp = false;
         this.senderInfo = { userID: '', userName: undefined };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
-        this.setReceiver(GetValue(config, 'receiverID', ''));
-
-        // Receiver
-        this.isReceiving = false;
+        this.setReceiver(GetValue(config, 'receiverID', undefined));
     }
 
     shutdown() {
-        this.stopReceiving()
-            .destroyEventEmitter();
     }
 
     destroy() {
@@ -36,8 +21,7 @@ class Broadcast {
 
     setRootPath(rootPath) {
         this.rootPath = rootPath;
-        this.sendToRef = undefined;
-        this.receiverRef = undefined;
+        this.rootRef = this.database.collection(rootPath);
         return this;
     }
 
@@ -55,16 +39,25 @@ class Broadcast {
         this.receiverID = receiverID;
         return this;
     }
+
+    getReceiverQuery(receiverID, senderID) {
+        if (receiverID === undefined) {
+            receiverID = this.receiverID;
+        }
+        var query = this.rootRef;
+        query = (receiverID) ? query.where('receiverID', '==', receiverID) : query;
+        query = (senderID) ? query.where('senderID', '==', senderID) : query;
+        return query;
+    }
 }
 
 var methods = {
     send: Send
 }
+
 Object.assign(
-    Broadcast.prototype,
-    EventEmitterMethods,
-    ReceiveMethods,
+    Messages.prototype,
     methods
 );
 
-export default Broadcast;
+export default Messages;
