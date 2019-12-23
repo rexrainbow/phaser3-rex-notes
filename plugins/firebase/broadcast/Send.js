@@ -17,6 +17,9 @@ var Send = function (message, sendToID) {
         senderName: this.senderInfo.userName,
         stamp: this.stamp,
     };
+    if (this.senderInfo.userName !== undefined) {
+        d.senderName = this.senderInfo.userName;
+    }
     this.skipFirst = false;
     this.stamp = !this.stamp;
     var self = this;

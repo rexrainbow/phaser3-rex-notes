@@ -4,9 +4,9 @@ import GetTime from './GetTime.js';
 var Methods = {
     getRecordQuery(boardID, customTag, userID, timeTagKey) {
         var query = this.rootRef;
-        query = (boardID) ? query.where('boardID', '==', boardID) : query;
-        query = (customTag) ? query.where('tag', '==', customTag) : query;
-        query = (userID) ? query.where('userID', '==', userID) : query;
+        query = (boardID !== undefined) ? query.where('boardID', '==', boardID) : query;
+        query = (customTag !== undefined) ? query.where('tag', '==', customTag) : query;
+        query = (userID !== undefined) ? query.where('userID', '==', userID) : query;
 
         if (timeTagKey !== undefined) {
             query = query.where(timeTagKey[0], '==', timeTagKey[1]);

@@ -45,8 +45,8 @@ class Messages {
             receiverID = this.receiverID;
         }
         var query = this.rootRef;
-        query = (receiverID) ? query.where('receiverID', '==', receiverID) : query;
-        query = (senderID) ? query.where('senderID', '==', senderID) : query;
+        query = (receiverID !== undefined) ? query.where('receiverID', '==', receiverID) : query;
+        query = (senderID !== undefined) ? query.where('senderID', '==', senderID) : query;
         return query;
     }
 }

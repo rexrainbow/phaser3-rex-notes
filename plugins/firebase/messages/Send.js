@@ -3,19 +3,19 @@ var Send = function (message, sendToID) {
         sendToID = this.receiverID;
     }
 
-    var data = {
+    var d = {
         senderID: this.senderInfo.userID,
         message: message,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }
-    if (this.senderInfo.userName) {
-        data.senderName = this.senderInfo.userName;
+    if (this.senderInfo.userName !== undefined) {
+        d.senderName = this.senderInfo.userName;
     }
-    if (sendToID) {
-        data.receiverID = sendToID;
+    if (sendToID !== undefined) {
+        d.receiverID = sendToID;
     }
 
-    return this.rootRef.add(data);
+    return this.rootRef.add(d);
 }
 
 export default Send;

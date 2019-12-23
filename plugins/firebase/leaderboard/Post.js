@@ -5,7 +5,7 @@ var Post = function (score, extraData) {
     var newRecord = {
         userID: this.userInfo.userID
     };
-    if (this.boardID) {
+    if (this.boardID !== undefined) {
         newRecord.boardID = this.boardID;
     }
     if (this.userInfo.userName) {
