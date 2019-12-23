@@ -72,7 +72,7 @@ var game = new Phaser.Game(config);
     - `root` : Path of this messager.
     - `senderID` : User ID of sender.
     - `senderName` : Display name of sender.
-    - `receiverID` : (Default) ID of receiver/channel.
+    - `receiverID` : Default ID of receiver/channel.
 
 ### Send message
 
