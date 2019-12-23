@@ -3,7 +3,9 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
 import LoadPageMethods from './LoadPageMethods.js';
 import GetScore from './GetScore.js';
+import GetRank from './GetRank.js';
 import PageQuery from '../pagequery/PageQuery.js';
+import GetPageQuery from './GetPageQuery.js';
 
 class LeaderBoard {
     constructor(config) {
@@ -107,7 +109,9 @@ class LeaderBoard {
 
 var methods = {
     post: Post,
-    getScore: GetScore
+    getScore: GetScore,
+    getRank: GetRank,
+    getPageQuery: GetPageQuery
 }
 
 Object.assign(

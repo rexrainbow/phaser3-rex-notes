@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
         var leaderBoard = rexFire.add.leaderBoard({
             root: 'leaderboard-test',
-            timeFilters: true,
+            // timeFilters: true,
             pageItemCount: 3
         })
 
@@ -31,8 +31,12 @@ class Demo extends Phaser.Scene {
             .then(function () {
                 return leaderBoard.setUser('3').getScore();
             })
-            .then(function (data) {
-                console.log('Get score:', data);
+            .then(function (result) {
+                console.log('Get score:', result);
+                return leaderBoard.getRank();
+            })
+            .then(function(result){
+                console.log('Get rank:', result);
             })
             .catch(function (error) {
                 debugger;

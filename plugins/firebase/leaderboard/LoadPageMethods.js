@@ -1,4 +1,3 @@
-import GetTime from './GetTime.js';
 import { TimeTagKeys, ScoreKeys } from './Const.js';
 
 var Methods = {
@@ -47,21 +46,7 @@ var Methods = {
             return this;
         }
 
-        var timeTagKey, scoreKey;
-        if (this.timeFilters !== false) {
-            var t = this.timeFilterType[0];
-            timeTagKey = [TimeTagKeys[t], GetTime()[t]];
-            scoreKey = ScoreKeys[t];
-        } else { // No time filters
-            timeTagKey = undefined;
-            scoreKey = 'score';
-        }
-
-        var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
-        var nextPageQuery = baseQuery.orderBy(scoreKey, 'desc');
-        var prevPageQuery = baseQuery.orderBy(scoreKey);
-
-        this.page.setQuery(nextPageQuery, prevPageQuery);
+        this.page.setQuery(this.getPageQuery());
         this.resetQueryFlag = false;
         return this;
     }
