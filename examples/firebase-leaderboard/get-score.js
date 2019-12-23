@@ -29,24 +29,10 @@ class Demo extends Phaser.Scene {
         }
         Promise.all(promises)
             .then(function () {
-                return leaderBoard
-                    .setTimeFilterType('year')
-                    .loadFirstPage();
+                return leaderBoard.setUser('3').getScore();
             })
-            .then(function (ranks) {
-                console.log('Load first page', ranks);
-                return leaderBoard.loadNextPage();
-            })
-            .then(function (ranks) {
-                console.log('Load next page', ranks);
-                return leaderBoard.loadNextPage();
-            })
-            .then(function (ranks) {
-                console.log('Load next page', ranks);
-                return leaderBoard.loadPreviousPage();
-            })
-            .then(function (ranks) {
-                console.log('Load previous page', ranks);
+            .then(function (data) {
+                console.log('Get score:', data);
             })
             .catch(function (error) {
                 debugger;

@@ -12,7 +12,15 @@ var ScoreKeys = {
     y: 'scoreY'
 }
 
+var FullTimeName = {
+    d: 'day',
+    w: 'week',
+    m: 'month',
+    y: 'year'
+}
+
 export {
     TimeTagKeys,
-    ScoreKeys
+    ScoreKeys,
+    FullTimeName
 }
