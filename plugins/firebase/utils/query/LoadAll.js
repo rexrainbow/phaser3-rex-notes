@@ -3,8 +3,7 @@ var LoadAll = function (query) {
         itemCount: 1000,
         query: { next: query }
     });
-    var docs = [];
-    return LoadNextPage(pageQuery, docs);
+    return LoadNextPage(pageQuery, []);
 }
 
 var LoadNextPage = function (pageQuery, resultDocs) {

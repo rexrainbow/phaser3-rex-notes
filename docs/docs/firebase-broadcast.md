@@ -65,12 +65,14 @@ var game = new Phaser.Game(config);
     var messager = rexFire.add.broadcast({
         root: '',
         // senderID: '',
-        // senderName: ''
+        // senderName: '',
+        // receiverID: ''
     });
     ```
     - `root` : Path of this messager.
     - `senderID` : User ID of sender.
     - `senderName` : Display name of sender.
+    - `receiverID` : (Default) ID of receiver/channel.
 
 ### Send message
 
@@ -89,10 +91,11 @@ var game = new Phaser.Game(config);
     - `userName` : Display name of sender.
 1. Send message to receiverID
     ```javascript
-    messager.send(receiverID, message);
+    messager.send(message);
+    // messager.send(message, receiverID);
     ```
-    - `receiverID` : ID of receiver/channel.
     - `message` : A string message, or a JSON data.
+    - `receiverID` : Set to `undefined` to use default receiverID.
 
 ### Receive messages
 
@@ -106,12 +109,19 @@ var game = new Phaser.Game(config);
     ```
 1. Start receiving
     ```javascript
-    messager.startReceiving(receiverID);
+    messager.startReceiving();
+    // messager.startReceiving(receiverID);
     ```
-    - `receiverID` : ID of receiver/channel.
+    - `receiverID` : Set to `undefined` to use default receiverID.
 1. Stop receive
     ```javascript
     messager.stopReceiving();
     ```
 
 Only receive messages after invoking `startReceiving` method. Previous messages won't be got anymore.
+
+### Set default receiver
+
+```javascript
+messager.setReceiver(receiverID);
+```

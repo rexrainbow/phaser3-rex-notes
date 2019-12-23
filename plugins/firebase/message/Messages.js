@@ -1,15 +1,13 @@
 import GetValue from '../../utils/object/GetValue.js';
-import Add from './Add.js';
-import AddRandom from './AddRandom.js';
-import GetId from './GetId.js';
-import GetAlias from './GetAlias.js';
-import GetRandomAlias from './GetRandomAlias.js';
-import Remove from './Remove.js';
 
-class IdAlias {
+
+class Messages {
     constructor(config) {
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
+        
+        this.userInfo = { userID: undefined, userName: undefined };
+        this.setUser(GetValue(config, 'userID', ''), GetValue(config, 'userName', undefined));
     }
 
     shutdown() {
@@ -25,23 +23,23 @@ class IdAlias {
         return this;
     }
 
-    getAliasRef(alias) {
-        return this.rootRef.doc(alias);
+    setUser(userID, userName) {
+        if (IsPlainObject(userID)) {
+            this.userInfo = userID;
+        } else {
+            this.userInfo.userID = userID;
+            this.userInfo.userName = userName;
+        }
+        return this;
     }
 }
 
 var methods = {
-    add: Add,
-    addRandom: AddRandom,
-    getId: GetId,
-    getAlias: GetAlias,
-    getRandomAlias: GetRandomAlias,
-    remove: Remove
 }
 
 Object.assign(
-    IdAlias.prototype,
+    Messages.prototype,
     methods
 );
 
-export default IdAlias;
+export default Messages;

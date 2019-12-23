@@ -19,6 +19,7 @@ class Broadcast {
         this.stamp = false;
         this.senderInfo = { userID: '', userName: '' };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
+        this.setReceiver(GetValue(config, 'receiverID', ''));
 
         // Receiver
         this.isReceiving = false;
@@ -47,6 +48,11 @@ class Broadcast {
             this.senderInfo.userID = userID;
             this.senderInfo.userName = userName;
         }
+        return this;
+    }
+
+    setReceiver(receiverID) {
+        this.receiverID = receiverID;
         return this;
     }
 }

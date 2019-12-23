@@ -1,7 +1,7 @@
 var methods = {
     startReceiving(receiverID) {
         if (receiverID === undefined) {
-            receiverID = this.senderInfo.userID;
+            receiverID = this.receiverID;
         }
         if (this.isReceiving && (this.receiverRef.key === receiverID)) {
             return this;

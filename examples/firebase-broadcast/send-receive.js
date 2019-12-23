@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { 
+    preload() {
         this.plugins.get('rexFire').preload(this);
     }
 
@@ -18,21 +18,23 @@ class Demo extends Phaser.Scene {
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
 
         var messager = rexFire.add.broadcast({
-            root: 'broadcast-test'
+            root: 'broadcast-test',
+            senderID: 'aabb',
+            senderName: 'rex',
+            receiverID: 'aabb'
         });
 
         messager
             .on('receive', function (d) {
                 print.text += `${d.senderName}: ${d.message}\n`;
             })
-            .setSender('aabb', 'rex')
-            .send('aabb', '1')  // This message won't be received
+            .send('1')  // This message won't be received
             .then(function () {
-                return messager.send('aabb', '2');
+                return messager.send('2');
                 // This message won't be received
             })
             .then(function () {
-                return messager.send('aabb', '3');
+                return messager.send('3');
                 // This message won't be received
             })
             .then(function () {
@@ -40,13 +42,13 @@ class Demo extends Phaser.Scene {
                 return Promise.resolve();
             })
             .then(function () {
-                return messager.send('aabb', 'hello');
+                return messager.send('hello');
             })
             .then(function () {
-                return messager.send('aabb', 'hello');
+                return messager.send('hello');
             })
             .then(function () {
-                return messager.send('aabb', 'world');
+                return messager.send('world');
             })
             .catch(function (error) {
                 console.log(error);

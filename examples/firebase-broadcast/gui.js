@@ -18,7 +18,8 @@ class Demo extends Phaser.Scene {
     create() {
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
         var messager = rexFire.add.broadcast({
-            root: 'chat-ui'
+            root: 'chat-ui',
+            receiverID: 'lobby'
         });
 
         var mainPanel = CreateMainPanel(this, {
@@ -37,19 +38,18 @@ class Demo extends Phaser.Scene {
 
         // Control
         var userID = GetRandomWord(10);
-        var channelName = 'lobby';
         mainPanel
             .on('send-message', function (userName, message) {
                 messager
                     .setSender(userID, userName)
-                    .send(channelName, message)
+                    .send(message)
             })
         messager
             .on('receive', function (d) {
                 var s = `[${d.senderName}] ${d.message}\n`;
                 mainPanel.appendMessage(s);
             })
-            .startReceiving(channelName); // Promise
+            .startReceiving();
     }
 
     update() { }

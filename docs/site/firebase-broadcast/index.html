@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,12 +55,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -4614,6 +4614,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-default-receiver" class="md-nav__link">
+    Set default receiver
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4737,6 +4744,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-default-receiver" class="md-nav__link">
+    Set default receiver
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4820,12 +4834,14 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="c1">// senderID: &#39;&#39;,</span>
-    <span class="c1">// senderName: &#39;&#39;</span>
+    <span class="c1">// senderName: &#39;&#39;,</span>
+    <span class="c1">// receiverID: &#39;&#39;</span>
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>root</code> : Path of this messager.</li>
 <li><code>senderID</code> : User ID of sender.</li>
 <li><code>senderName</code> : Display name of sender.</li>
+<li><code>receiverID</code> : (Default) ID of receiver/channel.</li>
 </ul>
 </li>
 </ol>
@@ -4845,10 +4861,11 @@
 </ul>
 </li>
 <li>Send message to receiverID
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<span class="c1">// messager.send(message, receiverID);</span>
 </pre></div><ul>
-<li><code>receiverID</code> : ID of receiver/channel.</li>
 <li><code>message</code> : A string message, or a JSON data.</li>
+<li><code>receiverID</code> : Set to <code>undefined</code> to use default receiverID.</li>
 </ul>
 </li>
 </ol>
@@ -4862,9 +4879,10 @@
 <span class="p">})</span>
 </pre></div></li>
 <li>Start receiving
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">startReceiving</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">startReceiving</span><span class="p">();</span>
+<span class="c1">// messager.startReceiving(receiverID);</span>
 </pre></div><ul>
-<li><code>receiverID</code> : ID of receiver/channel.</li>
+<li><code>receiverID</code> : Set to <code>undefined</code> to use default receiverID.</li>
 </ul>
 </li>
 <li>Stop receive
@@ -4872,8 +4890,12 @@
 </pre></div></li>
 </ol>
 <p>Only receive messages after invoking <code>startReceiving</code> method. Previous messages won't be got anymore.</p>
+<h3 id="set-default-receiver">Set default receiver<a class="headerlink" href="#set-default-receiver" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
+</pre></div>
                 
                   
+                
                 
               
               
@@ -4950,7 +4972,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.c648116f.js"></script>
+      <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
