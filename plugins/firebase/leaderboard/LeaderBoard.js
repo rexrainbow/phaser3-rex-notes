@@ -4,8 +4,10 @@ import Post from './Post.js';;
 import LoadPageMethods from './LoadPageMethods.js';
 import GetScore from './GetScore.js';
 import GetRank from './GetRank.js';
+import DeleteUserScores from './DeleteUserScores.js';
+import DeleteBaord from './DeleteBoard.js';
+import GetQueryMethods from './GetQueryMethods.js';
 import PageQuery from '../pagequery/PageQuery.js';
-import GetPageQuery from './GetPageQuery.js';
 
 class LeaderBoard {
     constructor(config) {
@@ -85,18 +87,6 @@ class LeaderBoard {
         return this;
     }
 
-    getRecordQuery(boardID, customTag, userID, timeTagKey) {
-        var query = this.rootRef;
-        query = (boardID) ? query.where('boardID', '==', boardID) : query;
-        query = (customTag) ? query.where('tag', '==', customTag) : query;
-        query = (userID) ? query.where('userID', '==', userID) : query;
-
-        if (timeTagKey !== undefined) {
-            query = query.where(timeTagKey[0], '==', timeTagKey[1]);
-        }
-        return query;
-    }
-
     isFirstPage() {
         return (this.page.pageIndex === 0);
     }
@@ -111,12 +101,14 @@ var methods = {
     post: Post,
     getScore: GetScore,
     getRank: GetRank,
-    getPageQuery: GetPageQuery
+    deleteUserScores: DeleteUserScores,
+    deleteBaord: DeleteBaord
 }
 
 Object.assign(
     LeaderBoard.prototype,
     methods,
+    GetQueryMethods,
     LoadPageMethods
 );
 

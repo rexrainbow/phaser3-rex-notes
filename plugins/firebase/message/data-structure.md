@@ -1,0 +1,5 @@
+- <randomID>
+    - `senderID` - Unique ID of sender
+	- `senderName` - Name of sender
+    - `message` - Message
+    - `receiverID` - Unique ID of receiver
