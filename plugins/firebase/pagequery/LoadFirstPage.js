@@ -1,6 +1,15 @@
-var LoadFirstPage = function () {
+var LoadFirstPage = function (baselineDoc) {
+    if (baselineDoc !== undefined) {
+        this.setBaselineDoc(baselineDoc);
+    }
+
+    var query = this.nextQuery;
+    if (this.baselineDocRef) {
+        query = query[this.baselineMode](this.baselineDocRef)
+    }
+    query = query.limit(this.itemCount);
     var self = this;
-    return this.nextQuery.limit(this.itemCount).get()
+    return query.get()
         .then(function (querySnapshot) {
             var docCount = querySnapshot.size;
             self.pageIndex = 0;

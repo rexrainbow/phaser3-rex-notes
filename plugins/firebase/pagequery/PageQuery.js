@@ -9,7 +9,10 @@ class PageQuery {
     constructor(config) {
         this.setItemCount(GetValue(config, 'itemCount', 10));
         this.setQuery(GetValue(config, 'query', undefined));
+        this.setBaselineDoc(GetValue(config, 'baselineDoc', undefined), GetValue(config, 'baselineMode', 'startAt'));
         this.pageIndex = undefined;
+        this.baselineDocRef = undefined;
+        this.baselineMode = 'startAt';
         this.startItemIndex = undefined;
         this.endItemIndex = undefined;
         this.currPageStartDocRef = undefined; // For loading previous page
@@ -34,6 +37,16 @@ class PageQuery {
         }
 
         this.pageIndex = undefined;
+        return this;
+    }
+
+    setBaselineDoc(doc, mode) {
+        if (doc) {
+            this.baselineDocRef = doc.ref;
+            this.baselineMode = mode;
+        } else {
+            this.baselineDocRef = undefined;
+        }
         return this;
     }
 }
