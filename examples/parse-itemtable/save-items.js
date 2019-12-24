@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 import ItemTable from '../../plugins/parse/itemtable/ItemTable.js';
 
 class Demo extends Phaser.Scene {

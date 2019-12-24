@@ -1,5 +1,4 @@
 import Parse from 'parse/dist/parse.min.js';
-import ItemTable from '../../plugins/parse/itemtable/ItemTable.js';
 import QuickLogin from '../../plugins/parse/quicklogin/QuickLogin.js';
 
 class Demo extends Phaser.Scene {
@@ -10,7 +9,7 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -19,32 +18,16 @@ class Demo extends Phaser.Scene {
             'DbgfGW40cdqUQug8cv6NDAplB1D9daNIjcYtdGSQ' // This is your Javascript key
         );
 
-        var table = new ItemTable({
-            className: 'ownerTest',
-            primaryKeys: ['name'],
-            ownerWrite: true,
-        });
-
-        QuickLogin('rex', 'aabb')
+        QuickLogin('rex', 'rex')
             .then(function () {
-                console.log('login');
-                return Promise.resolve();
-            })
-            .then(function () {
-                return table
-                    .save({
-                        name: 'player0',
-                        hp: 20
-                    });
+                debugger
             })
             .catch(function (error) {
-                console.log(error);
+                debugger
             })
-
-
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
