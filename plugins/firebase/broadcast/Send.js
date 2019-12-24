@@ -1,9 +1,6 @@
-var Send = function (message, sendToID) {
-    if (sendToID === undefined) {
-        sendToID = this.receiverID;
-    }
-    if ((!this.sendToRef) || (this.sendToRef.key !== sendToID)) {
-        this.sendToRef = this.database.ref(this.rootPath).child(sendToID);
+var Send = function (message) {
+    if ((!this.sendToRef) || (this.sendToRef.key !== this.receiverID)) {
+        this.sendToRef = this.database.ref(this.rootPath).child(this.receiverID);
     }
 
     // Clear message

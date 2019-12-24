@@ -1,9 +1,6 @@
 var methods = {
-    startReceiving(receiverID) {
-        if (receiverID === undefined) {
-            receiverID = this.receiverID;
-        }
-        if (this.isReceiving && (this.receiverRef.key === receiverID)) {
+    startReceiving() {
+        if (this.isReceiving && (this.receiverRef.key === this.receiverID)) {
             return this;
         }
 
@@ -11,7 +8,7 @@ var methods = {
 
         this.isReceiving = true;
         this.skipFirst = true;  // Skip previous message
-        this.receiverRef = this.database.ref(this.rootPath).child(receiverID);
+        this.receiverRef = this.database.ref(this.rootPath).child(this.receiverID);
         this.receiverRef.on('value', OnReceive, this);
         this.receiverRef.onDisconnect().remove();
         return this;
