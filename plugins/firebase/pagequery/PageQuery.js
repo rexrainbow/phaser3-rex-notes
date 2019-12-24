@@ -7,9 +7,9 @@ import LoadCurrentPage from './LoadCurrentPage.js';
 
 class PageQuery {
     constructor(config) {
-        this.setItemCount(GetValue(config, 'itemCount', 10));
+        this.setItemCount(GetValue(config, 'itemCount', 100));
         this.setQuery(GetValue(config, 'query', undefined));
-        this.setBaselineDoc(GetValue(config, 'baselineDoc', undefined), GetValue(config, 'baselineMode', 'startAt'));
+        this.setBaselineDoc(GetValue(config, 'baselineDoc', undefined), GetValue(config, 'baselineMode', undefined));
         this.pageIndex = undefined;
         this.baselineDocRef = undefined;
         this.baselineMode = 'startAt';
@@ -43,7 +43,7 @@ class PageQuery {
     setBaselineDoc(doc, mode) {
         if (doc) {
             this.baselineDocRef = doc.ref;
-            this.baselineMode = mode;
+            this.baselineMode = mode; // 'startAt' or 'startAfter'
         } else {
             this.baselineDocRef = undefined;
         }

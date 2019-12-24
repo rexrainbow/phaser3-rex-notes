@@ -3,8 +3,9 @@ var LoadPreviousPage = function () {
         return this.loadFirstPage();
     }
 
+    var query = this.prevQuery.startAfter(this.currPageStartDocRef).limit(this.itemCount + 1);
     var self = this;
-    return this.prevQuery.startAfter(this.currPageStartDocRef).limit(this.itemCount + 1).get()
+    return query.get()
         // Get one more document for previous page end
         .then(function (querySnapshot) {
             var docCount = querySnapshot.size - 1;

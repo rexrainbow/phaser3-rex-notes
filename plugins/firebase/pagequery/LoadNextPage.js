@@ -3,8 +3,9 @@ var LoadNextPage = function () {
         return this.loadFirstPage();
     }
 
+    var query = this.nextQuery.startAfter(this.currPageEndDocRef).limit(this.itemCount);
     var self = this;
-    return this.nextQuery.startAfter(this.currPageEndDocRef).limit(this.itemCount).get()
+    return query.get()
         .then(function (querySnapshot) {
             var docCount = querySnapshot.size;
             self.pageIndex += 1;
