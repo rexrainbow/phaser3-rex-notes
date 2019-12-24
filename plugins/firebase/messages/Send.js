@@ -1,8 +1,4 @@
-var Send = function (message, sendToID) {
-    if (sendToID === undefined) {
-        sendToID = this.receiverID;
-    }
-
+var Send = function (message) {
     var d = {
         senderID: this.senderInfo.userID,
         message: message,
@@ -11,8 +7,8 @@ var Send = function (message, sendToID) {
     if (this.senderInfo.userName !== undefined) {
         d.senderName = this.senderInfo.userName;
     }
-    if (sendToID !== undefined) {
-        d.receiverID = sendToID;
+    if (this.receiverID !== undefined) {
+        d.receiverID = this.receiverID;
     }
 
     return this.rootRef.add(d);

@@ -1,8 +1,4 @@
-var LoadFirstPage = function (baselineDoc) {
-    if (baselineDoc !== undefined) {
-        this.setBaselineDoc(baselineDoc);
-    }
-
+var LoadFirstPage = function () {
     var query = this.nextQuery;
     if (this.baselineDocRef) {
         query = query[this.baselineMode](this.baselineDocRef)

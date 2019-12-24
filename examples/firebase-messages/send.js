@@ -15,14 +15,26 @@ class Demo extends Phaser.Scene {
     create() {
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
 
-        var messages = rexFire.add.messages({
+        var messager = rexFire.add.messages({
             root: 'messages-test',
             senderID: 'aabb',
             senderName: 'rex'
         })
 
-        messages
-            .send('hello')
+        debugger
+        messager
+            .on('receive', function (d) {
+                console.log(d);
+                console.log(messager.cacheMessages);
+            })
+            .loadPreviousMessages()
+            .then(function (messages) {
+                console.log(messages);
+
+                return messager
+                    .startReceiving()
+                    .send((new Date()).toString());
+            })
             .then(function () {
                 debugger
             })

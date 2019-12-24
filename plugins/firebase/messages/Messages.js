@@ -1,18 +1,37 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Send from './Send.js';
+import ReceiveMethods from './ReceiveMethods.js';
+import GetQueryMethods from './GetQueryMethods.js';
+import PageQuery from '../pagequery/PageQuery.js';
 
 class Messages {
     constructor(config) {
+        // Event emitter
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
+
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
         this.senderInfo = { userID: '', userName: undefined };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
         this.setReceiver(GetValue(config, 'receiverID', undefined));
+
+        this.skipFirst = true;
+        this.unsubscribe = undefined;
+        this.page = new PageQuery();
+        this.setPageItemCount(GetValue(config, 'pageItemCount', 100));
+        this.resetQueryFlag = true;
+        this.cacheMessages = [];
     }
 
     shutdown() {
+        this
+            .stopReceiving()
+            .destroyEventEmitter();
     }
 
     destroy() {
@@ -20,6 +39,7 @@ class Messages {
     }
 
     setRootPath(rootPath) {
+        this.resetQueryFlag |= (this.rootPath !== rootPath);
         this.rootPath = rootPath;
         this.rootRef = this.database.collection(rootPath);
         return this;
@@ -36,18 +56,14 @@ class Messages {
     }
 
     setReceiver(receiverID) {
+        this.resetQueryFlag |= (this.receiverID !== receiverID);
         this.receiverID = receiverID;
         return this;
     }
 
-    getReceiverQuery(receiverID, senderID) {
-        if (receiverID === undefined) {
-            receiverID = this.receiverID;
-        }
-        var query = this.rootRef;
-        query = (receiverID !== undefined) ? query.where('receiverID', '==', receiverID) : query;
-        query = (senderID !== undefined) ? query.where('senderID', '==', senderID) : query;
-        return query;
+    setPageItemCount(count) {
+        this.page.setItemCount(count);
+        return this;
     }
 }
 
@@ -57,7 +73,10 @@ var methods = {
 
 Object.assign(
     Messages.prototype,
-    methods
+    EventEmitterMethods,
+    methods,
+    ReceiveMethods,
+    GetQueryMethods
 );
 
 export default Messages;

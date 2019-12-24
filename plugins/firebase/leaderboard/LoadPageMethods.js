@@ -46,8 +46,8 @@ var Methods = {
             return this;
         }
 
-        this.page.setQuery(this.getPageQuery());
         this.resetQueryFlag = false;
+        this.page.setQuery(this.getPageQuery());
         return this;
     }
 }
