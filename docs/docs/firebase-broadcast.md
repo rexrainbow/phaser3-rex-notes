@@ -72,11 +72,11 @@ var game = new Phaser.Game(config);
     - `root` : Path of this messager.
     - `senderID` : User ID of sender.
     - `senderName` : Display name of sender.
-    - `receiverID` : Default ID of receiver/channel.
+    - `receiverID` : ID of receiver/channel.
 
 ### Send message
 
-1. Set sender
+1. Set sender in config, or `setSender` method
     ```javascript
     messager.setSender(userID, userName);
     ```
@@ -89,13 +89,16 @@ var game = new Phaser.Game(config);
     ```
     - `userID` : User ID of sender.
     - `userName` : Display name of sender.
+1. Set receiver in config, or `setReceiver` method
+    ```javascript
+    messager.setReceiver(receiverID);
+    ```
+    - `receiverID` : ID of receiver/channel.
 1. Send message to receiverID
     ```javascript
     messager.send(message);
-    // messager.send(message, receiverID);
     ```
     - `message` : A string message, or a JSON data.
-    - `receiverID` : Set to `undefined` to use default receiverID.
 
 ### Receive messages
 
@@ -107,21 +110,18 @@ var game = new Phaser.Game(config);
         // var message = data.message;
     })
     ```
+1. Set receiver in config, or `setReceiver` method
+    ```javascript
+    messager.setReceiver(receiverID);
+    ```
+    - `receiverID` : ID of receiver/channel.
 1. Start receiving
     ```javascript
     messager.startReceiving();
-    // messager.startReceiving(receiverID);
     ```
-    - `receiverID` : Set to `undefined` to use default receiverID.
 1. Stop receive
     ```javascript
     messager.stopReceiving();
     ```
 
 Only receive messages after invoking `startReceiving` method. Previous messages won't be got anymore.
-
-### Set default receiver
-
-```javascript
-messager.setReceiver(receiverID);
-```
