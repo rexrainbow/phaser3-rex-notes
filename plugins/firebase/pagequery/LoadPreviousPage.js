@@ -20,6 +20,7 @@ var LoadPreviousPage = function () {
             self.cacheItems = querySnapshot.docs;
             self.cacheItems.pop(); // Pop up endDoc of previous page
             self.cacheItems.reverse();
+            self.isFullPage = (docCount === self.itemCount);
             return Promise.resolve(self.cacheItems);
         })
 }

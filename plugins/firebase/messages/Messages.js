@@ -65,6 +65,10 @@ class Messages {
         this.page.setItemCount(count);
         return this;
     }
+
+    get hasPreviousMessage() {
+        return (this.page.isFullPage !== false);
+    }
 }
 
 var methods = {

@@ -7,16 +7,17 @@ var LoadFirstPage = function () {
     var self = this;
     return query.get()
         .then(function (querySnapshot) {
-            var docCount = querySnapshot.size;
+            var docCount = querySnapshot.size;            
             self.pageIndex = 0;
             self.startItemIndex = 0;
-            self.endItemIndex = self.startItemIndex + docCount - 1;
+            self.endItemIndex = self.startItemIndex + docCount - 1;            
             // Doc reference for paging
             self.prevPageEndDocRef = undefined;
             self.currPageStartDocRef = querySnapshot.docs[0];
             self.currPageEndDocRef = querySnapshot.docs[docCount - 1];
             // Cache result items
             self.cacheItems = querySnapshot.docs;
+            self.isFullPage = (docCount === self.itemCount);
             return Promise.resolve(self.cacheItems);
         })
 }

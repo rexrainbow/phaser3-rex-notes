@@ -19,6 +19,7 @@ class PageQuery {
         this.currPageEndDocRef = undefined; // For loading next page
         this.prevPageEndDocRef = undefined; // For loading current page
         this.cacheItems = undefined;
+        this.isFullPage = undefined;
     }
 
     setItemCount(count) {
@@ -37,6 +38,7 @@ class PageQuery {
         }
 
         this.pageIndex = undefined;
+        this.isFullPage = undefined;
         return this;
     }
 

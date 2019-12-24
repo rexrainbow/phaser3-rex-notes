@@ -91,8 +91,7 @@ class LeaderBoard {
     }
 
     isLastPage() {
-        return this.page.cacheItems &&
-            (this.page.cacheItems.length < this.page.itemCount);
+        return (this.page.isFullPage === false);
     }
 }
 

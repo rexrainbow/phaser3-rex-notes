@@ -17,6 +17,7 @@ var LoadNextPage = function () {
             self.currPageEndDocRef = querySnapshot.docs[docCount - 1];
             // Cache result items
             self.cacheItems = querySnapshot.docs;
+            self.isFullPage = (docCount === self.itemCount);
             return Promise.resolve(self.cacheItems);
         })
 }
