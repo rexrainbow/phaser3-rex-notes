@@ -9,15 +9,13 @@ class PageLoader {
     constructor(config) {
         this.setItemCount(GetValue(config, 'itemCount', 100));
         this.setQuery(GetValue(config, 'query', undefined));
+        this.setDataMode(GetValue(config, 'dataMode', 0));
         this.setBaselineDoc(GetValue(config, 'baselineDoc', undefined), GetValue(config, 'baselineMode', undefined));
         this.pageIndex = undefined;
         this.baselineDocRef = undefined;
         this.baselineMode = 'startAt';
         this.startItemIndex = undefined;
         this.endItemIndex = undefined;
-        this.currPageStartDocRef = undefined; // For loading previous page
-        this.currPageEndDocRef = undefined; // For loading next page
-        this.prevPageEndDocRef = undefined; // For loading current page
         this.cacheItems = undefined;
         this.isFullPage = undefined;
     }
@@ -39,6 +37,14 @@ class PageLoader {
 
         this.pageIndex = undefined;
         this.isFullPage = undefined;
+        return this;
+    }
+
+    setDataMode(mode) {
+        if (typeof (mode) === 'string') {
+            mode = DATAMODE[mode];
+        }
+        this.dataMode = mode;
         return this;
     }
 
@@ -64,5 +70,10 @@ Object.assign(
     PageLoader.prototype,
     methods
 );
+
+const DATAMODE = {
+    static: 0,
+    dynamic: 1
+}
 
 export default PageLoader;

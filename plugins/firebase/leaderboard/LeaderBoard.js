@@ -20,7 +20,9 @@ class LeaderBoard {
         this.setTimeFilters(GetValue(config, 'timeFilters', false));
         this.setTimeFilterType(GetValue(config, 'timeFilterType', 'year'));
 
-        this.page = new PageLoader();
+        this.page = new PageLoader({
+            dataMode: 'dynamic'
+        });
         this.setPageItemCount(GetValue(config, 'pageItemCount', 10));
         this.resetQueryFlag = true;
     }
