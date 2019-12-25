@@ -11,7 +11,6 @@ var Load = function (query, startIndex, totalLineCount) {
 
 var LoadNextPage = function (query, totalLineCount, startIndex, resultItems) {
     var lineCount = Math.min(totalLineCount, 1000);
-    var nextStartIndex = startIndex + lineCount;
     totalLineCount -= lineCount;
     return query.skip(startIndex).limit(lineCount).find()
         .then(function (items) {
@@ -20,6 +19,7 @@ var LoadNextPage = function (query, totalLineCount, startIndex, resultItems) {
             if ((totalLineCount === 0) || (items.length < lineCount)) { // Is last page
                 return Promise.resolve(resultItems);
             } else {
+                var nextStartIndex = startIndex + items.length;
                 return LoadNextPage(query, totalLineCount, nextStartIndex, resultItems);
             }
         })

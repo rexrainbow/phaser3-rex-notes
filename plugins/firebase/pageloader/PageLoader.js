@@ -1,9 +1,9 @@
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
-import LoadFirstPage from './LoadFirstPage.js.js';
-import LoadNextPage from './LoadNextPage.js.js';
-import LoadPreviousPage from './LoadPreviousPage.js.js';
-import LoadCurrentPage from './LoadCurrentPage.js.js';
+import LoadFirstPage from './LoadFirstPage.js';
+import LoadNextPage from './LoadNextPage.js';
+import LoadPreviousPage from './LoadPreviousPage.js';
+import LoadCurrentPage from './LoadCurrentPage.js';
 
 class PageLoader {
     constructor(config) {

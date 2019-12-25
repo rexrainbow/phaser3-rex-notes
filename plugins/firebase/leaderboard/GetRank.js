@@ -1,4 +1,4 @@
-import Find from '../utils/query/Find.js';
+import FindFirst from '../utils/query/FindFirst.js';
 
 var GetRank = function (userID) {
     if (userID === undefined) {
@@ -10,7 +10,7 @@ var GetRank = function (userID) {
         var item = doc.data();
         return (item.userID === userID);
     }
-    return Find(query, testCallback)
+    return FindFirst(query, testCallback)
         .then(function (result) {
             return Promise.resolve({ userID: userID, rank: result.index });
         })

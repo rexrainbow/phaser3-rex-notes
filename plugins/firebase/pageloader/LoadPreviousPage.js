@@ -1,26 +1,26 @@
+import Load from '../utils/query/Load.js';
+
 var LoadPreviousPage = function () {
     if ((this.pageIndex === undefined) || (this.pageIndex === 1)) {
         return this.loadFirstPage();
     }
 
-    var query = this.prevQuery.startAfter(this.currPageStartDocRef).limit(this.itemCount + 1);
     var self = this;
-    return query.get()
-        // Get one more document for previous page end
-        .then(function (querySnapshot) {
-            var docCount = querySnapshot.size - 1;
+    return Load(this.prevQuery, (this.itemCount + 1), this.currPageStartDocRef, 'startAfter')
+        .then(function (docs) {
+            // Get one more document for previous page end
+            var docCount = docs.length - 1;
+            self.cacheItems = docs;
+            self.cacheItems.pop(); // Pop up endDoc of previous page
+            self.cacheItems.reverse();
             self.pageIndex -= 1;
             self.endItemIndex = self.startItemIndex - 1;
             self.startItemIndex = self.endItemIndex - docCount + 1;
-            // Doc reference for paging
-            self.prevPageEndDocRef = querySnapshot.docs[docCount];
-            self.startDocRed = querySnapshot.docs[docCount - 1];
-            self.currPageEndDocRef = querySnapshot.docs[0];
-            // Cache result items
-            self.cacheItems = querySnapshot.docs;
-            self.cacheItems.pop(); // Pop up endDoc of previous page
-            self.cacheItems.reverse();
             self.isFullPage = (docCount === self.itemCount);
+            // Doc reference for paging
+            self.prevPageEndDocRef = docs[docCount];
+            self.currPageStartDocRef = docs[docCount - 1];
+            self.currPageEndDocRef = docs[0];
             return Promise.resolve(self.cacheItems);
         })
 }
