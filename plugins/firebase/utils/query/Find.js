@@ -1,7 +1,7 @@
-import PageQuery from '../../pagequery/PageQuery.js';
+import PageLoader from '../../pageloader/PageLoader.js';
 
 var FindDoc = function (query, testCallback) {
-    var pageQuery = new PageQuery({
+    var pageQuery = new PageLoader({
         itemCount: 1000,
         query: { next: query }
     })

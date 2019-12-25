@@ -1,7 +1,7 @@
-import PageQuery from '../../pagequery/PageQuery.js';
+import PageLoader from '../../pageloader/PageLoader.js';
 
 var Delete = function (query) {
-    var pageQuery = new PageQuery({
+    var pageQuery = new PageLoader({
         itemCount: 500,
         query: { next: query }
     })

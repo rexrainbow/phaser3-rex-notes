@@ -1,5 +1,5 @@
 var LoadAll = function (query) {
-    var pageQuery = new PageQuery({
+    var pageQuery = new PageLoader({
         itemCount: 1000,
         query: { next: query }
     });
@@ -9,10 +9,9 @@ var LoadAll = function (query) {
 var LoadNextPage = function (pageQuery, resultDocs) {
     return pageQuery.loadNextPage()
         .then(function (docs) {
-            if (docs.length > 0) {
-                resultDocs.push(...docs);
-            }
-            if (docs.length < pageQuery.itemCount ) {
+            resultDocs.push(...docs);
+
+            if (docs.length < pageQuery.itemCount) {
                 return Promise.resolve(resultDocs);
             } else {
                 return LoadNextPage(pageQuery, resultDocs);

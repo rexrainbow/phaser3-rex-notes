@@ -6,7 +6,7 @@ import GetScore from './GetScore.js';
 import GetRank from './GetRank.js';
 import DeleteMethods from './DeleteMethods.js';
 import GetQueryMethods from './GetQueryMethods.js';
-import PageQuery from '../pagequery/PageQuery.js';
+import PageLoader from '../pageloader/PageLoader.js';
 
 class LeaderBoard {
     constructor(config) {
@@ -20,7 +20,7 @@ class LeaderBoard {
         this.setTimeFilters(GetValue(config, 'timeFilters', false));
         this.setTimeFilterType(GetValue(config, 'timeFilterType', 'year'));
 
-        this.page = new PageQuery();
+        this.page = new PageLoader();
         this.setPageItemCount(GetValue(config, 'pageItemCount', 10));
         this.resetQueryFlag = true;
     }
