@@ -4,7 +4,7 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Send from './Send.js';
 import ReceiveMethods from './ReceiveMethods.js';
 import GetQueryMethods from './GetQueryMethods.js';
-import PageQuery from '../pagequery/PageQuery.js';
+import PageLoader from '../pageloader/PageLoader.js';
 
 class Messages {
     constructor(config) {
@@ -22,7 +22,7 @@ class Messages {
 
         this.skipFirst = true;
         this.unsubscribe = undefined;
-        this.page = new PageQuery();
+        this.page = new PageLoader();
         this.setPageItemCount(GetValue(config, 'pageItemCount', 100));
         this.resetQueryFlag = true;
         this.cacheMessages = [];

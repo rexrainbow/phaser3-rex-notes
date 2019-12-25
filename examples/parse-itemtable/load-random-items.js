@@ -38,23 +38,17 @@ class Demo extends Phaser.Scene {
 
 
         Promise.all(promises)
-            // Load random 2 items
             .then(function () {
-                return table.loadRandomItems(2);
+                return table.loadRandomItems(2);  // Load random 2 items
             })
             .then(function (results) {
                 console.log('---- Load random ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return Promise.resolve();
-            })
-            // Load random 2 items
-            .then(function () {
-                return table.loadRandomItems(2);
+                return table.loadRandomItems(2);  // Load random 2 items
             })
             .then(function (results) {
                 console.log('---- Load random ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return Promise.resolve();
             })
             .catch(function (error) {
                 console.log(error);

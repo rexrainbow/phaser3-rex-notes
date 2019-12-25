@@ -38,29 +38,22 @@ class Demo extends Phaser.Scene {
 
 
         Promise.all(promises)
-            // Load all
             .then(function () {
-                return table.loadAll();
+                return table.loadAll();  // Load all
             })
             .then(function (results) {
                 console.log('---- Load all ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return Promise.resolve();
-            })
-            // Load a page
-            .then(function () {
-                var query = table.createQuery().ascending('hp');
+
+                var query = table.createQuery().ascending('hp');  // Load a page
                 return table.loadCurrentPage(query);
             })
             .then(function (results) {
                 console.log('---- Load current page ----');
                 console.log(JSON.parse(JSON.stringify(results)));
                 console.log(table.isLastPage);
-                return Promise.resolve();
-            })
-            // Load next page
-            .then(function () {
-                var query = table.createQuery().ascending('hp');
+
+                var query = table.createQuery().ascending('hp');  // Load next page
                 return table.loadNextPage(query);
             })
             .then(function (results) {

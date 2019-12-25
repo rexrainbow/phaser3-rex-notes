@@ -1,37 +1,28 @@
-var Load = function (query, startIndex, linesCnt) {
+var Load = function (query, startIndex, totalLineCount) {
     if (startIndex === undefined) {
         startIndex = 0;
     }
-    if (linesCnt === undefined) {
-        linesCnt = Infinity;
+    if (totalLineCount === undefined) {
+        totalLineCount = Infinity;
     }
 
-    var retItems = [];
-    var isOnePage = (linesCnt <= 1000);
-    var linesInPage = Math.min(linesCnt, 1000);
-
-    return new Promise(function (resolve, reject) {
-        var queryPage = function (start_) {
-            query
-                .skip(start_)
-                .limit(linesInPage)
-                .find()
-                .then(function (results) {
-                    retItems.push.apply(retItems, results);
-    
-                    if (isOnePage || (results.length < linesInPage)) {
-                        // Done
-                        resolve(retItems);
-                    } else {
-                        // Query next page
-                        queryPage(start_ + linesInPage);
-                    }
-                })
-                .catch(reject);
-        };
-    
-        queryPage(startIndex);
-    });
+    return LoadNextPage(query, totalLineCount, startIndex, []);
 };
 
+var LoadNextPage = function (query, totalLineCount, startIndex, resultItems) {
+    var lineCount = Math.min(totalLineCount, 1000);
+    var nextStartIndex = startIndex + lineCount;
+    totalLineCount -= lineCount;
+    return query.skip(startIndex).limit(lineCount).find()
+        .then(function (items) {
+            resultItems.push(...items);
+
+            if ((totalLineCount === 0) || (items.length < lineCount)) { // Is last page
+                return Promise.resolve(resultItems);
+            } else {
+                return LoadNextPage(query, totalLineCount, nextStartIndex, resultItems);
+            }
+        })
+
+}
 export default Load;

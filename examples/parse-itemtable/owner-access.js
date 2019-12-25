@@ -28,9 +28,7 @@ class Demo extends Phaser.Scene {
         QuickLogin('rex', 'aabb')
             .then(function () {
                 console.log('login');
-                return Promise.resolve();
-            })
-            .then(function () {
+
                 return table
                     .save({
                         name: 'player0',

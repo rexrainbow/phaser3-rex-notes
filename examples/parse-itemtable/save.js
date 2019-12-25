@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -46,10 +46,10 @@ class Demo extends Phaser.Scene {
             // save parse item
             .save(
                 table.createItem()
-                .set('name', 'player1')
-                .set('hp', 100)
-                .increment('mp', 1)
-                .set('coin', 100)
+                    .set('name', 'player1')
+                    .set('hp', 100)
+                    .increment('mp', 1)
+                    .set('coin', 100)
             )
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
@@ -63,7 +63,7 @@ class Demo extends Phaser.Scene {
             });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

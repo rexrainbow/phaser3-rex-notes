@@ -4,72 +4,59 @@ import Load from './Load.js';
 class PageLoader {
     constructor(config) {
         this.items = [];
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.items.length = 0;
         this.startIndex = 0;
         this.pageIndex = 0;
         this.isLastPage = false;
-        this.setLinesCount(GetValue(o, 'lines', 10));
+        this.setLinesCount(GetValue(config, 'lines', 10));
     }
 
-    setLinesCount(linesCnt) {
-        this.linesInPage = linesCnt;
+    setLinesCount(lineCount) {
+        this.lineCount = lineCount;
         return this;
     }
 
-    loadLines(query, startIndex, linesCnt) {
+    loadLines(query, startIndex, lineCount) {
         if (startIndex === undefined) {
             startIndex = 0;
         }
-        if (linesCnt === undefined) {
-            linesCnt = Infinity;
+        if (lineCount === undefined) {
+            lineCount = Infinity;
         }
 
         this.items.length = 0;
 
         var self = this;
-        return new Promise(function (resolve, reject) {
-            Load(query, startIndex, linesCnt)
-                .then(function (items) {
-                    self.items = items;
-                    self.startIndex = startIndex;
-                    self.pageIndex = Math.floor(startIndex / self.linesInPage);
-                    if (linesCnt <= 1000) {
-                        self.isLastPage = (items.length < linesCnt);
-                    } else {
-                        self.isLastPage = true;
-                    }
-
-                    resolve(items, startIndex);
-                })
-                .catch(function (error) {
-                    self.isLastPage = false;
-
-                    reject(error);
-                })
-        });
+        return Load(query, startIndex, lineCount)
+            .then(function (items) {
+                self.items = items;
+                self.startIndex = startIndex;
+                self.pageIndex = Math.floor(startIndex / self.lineCount);
+                self.isLastPage = (lineCount === Infinity) ? true : (lineCount > items.length);
+                return Promise.resolve(items);
+            })
+            .catch(function (error) {
+                self.isLastPage = false;
+                return Promise.reject(error);
+            })
     }
 
     loadPage(query, pageIndex) {
-        var startIndex = pageIndex * this.linesInPage;
-        return this.loadLines(query, startIndex, this.linesInPage);
+        var startIndex = pageIndex * this.lineCount;
+        return this.loadLines(query, startIndex, this.lineCount);
     }
 
     loadCurrentPage(query) {
-        return this.loadLines(query, this.startIndex, this.linesInPage);
+        return this.loadLines(query, this.startIndex, this.lineCount);
     }
 
     loadNextPage(query) {
-        var startIndex = this.startIndex + this.linesInPage;
-        return this.loadLines(query, startIndex, this.linesInPage);
+        var startIndex = this.startIndex + this.lineCount;
+        return this.loadLines(query, startIndex, this.lineCount);
     }
 
     loadPreviousPage(query) {
-        var startIndex = this.startIndex - this.linesInPage;
-        return this.loadLines(query, startIndex, this.linesInPage);
+        var startIndex = this.startIndex - this.lineCount;
+        return this.loadLines(query, startIndex, this.lineCount);
     }
 
     getItem(i) {

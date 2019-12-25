@@ -38,28 +38,23 @@ class Demo extends Phaser.Scene {
 
 
         Promise.all(promises)
-            // Load all
             .then(function () {
-                return table.loadAll();
+                return table.loadAll();  // Load all
             })
             .then(function (results) {
                 console.log('---- Load all ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return Promise.resolve();
-            })
-            // Remove
-            .then(function () {
+
+                // Remove
                 var query = table.createQuery().greaterThanOrEqualTo('hp', 30);
                 return table.remove(query);
-            })
-            // Load all
+            })            
             .then(function () {
-                return table.loadAll();
+                return table.loadAll();  // Load all
             })
             .then(function (results) {
                 console.log('---- Load all ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return Promise.resolve();
             })
             .catch(function (error) {
                 console.log(error);

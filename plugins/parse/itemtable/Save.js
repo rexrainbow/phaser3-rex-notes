@@ -7,30 +7,26 @@ var Save = function (data) {
         return this.saveItems(data);
     }
 
-    var self = this;
-    return new Promise(function (resolve, reject) {
-        if (self.primaryKeys.length > 0) {
-            getQuery.call(self, data)
-                .first()
-                .then(function (result) {
-                    if (result) {
-                        var itemID = result.id;
-                        if (data instanceof self.customClass) {
-                            data.set('id', itemID);
-                        } else {
-                            data.id = itemID;
-                        }
-                    }
-                    saveItem.call(self, data).then(resolve).catch(reject);
-                })
-                .catch(reject);
-        } else {
-            saveItem.call(self, data).then(resolve).catch(reject);
-        }
-    });
+    if (this.primaryKeys.length > 0) {
+        var self = this;
+        return GetQuery.call(this, data).first()
+            .then(function (item) {
+                if (item) {
+                    var itemID = item.id;
+                    if (data instanceof self.customClass) {
+                        data.set('id', itemID);
+                    } else {
+                        data.id = itemID;
+                    }                    
+                }
+                return SaveItem.call(self, data);
+            })
+    } else {
+        return SaveItem.call(this, data);
+    }
 }
 
-var getQuery = function (data) {
+var GetQuery = function (data) {
     var query = this.createQuery().select('id');
     var isItem = (data instanceof this.customClass);
     var key, value;
@@ -42,7 +38,7 @@ var getQuery = function (data) {
     return query;
 }
 
-var saveItem = function (data) {
+var SaveItem = function (data) {
     var item = DataToItem(data, this.customClass);
     SetOwnerAccessMode(item, this.ownerRead, this.ownerWrite);
     return item.save();
