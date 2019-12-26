@@ -1,4 +1,4 @@
-import LoadInRange from '../utils/query/LoadInRange.js';
+import Load from '../utils/query/Load.js';
 
 var LoadCurrentPage = function () {
     if ((this.pageIndex === undefined) || (this.pageIndex === 0)) {
@@ -11,7 +11,7 @@ var LoadCurrentPage = function () {
 
 var LoadStaticPage = function () {
     var self = this;
-    return LoadInRange(this.nextQuery, 0, this.itemCount, this.prevPageEndDocRef, 'startAfter')
+    return Load(this.nextQuery, this.itemCount, 0, this.prevPageEndDocRef, 'startAfter')
         .then(function (docs) {
             var docCount = docs.length;
             self.cacheItems = docs;
@@ -27,7 +27,7 @@ var LoadStaticPage = function () {
 var LoadDynamicPage = function () {
     var skip = this.pageIndex * this.itemCount;
     var self = this;
-    return LoadInRange(this.nextQuery, skip, this.itemCount, this.baselineDocRef, this.baselineMode)
+    return Load(this.nextQuery, this.itemCount, skip, this.baselineDocRef, this.baselineMode)
         .then(function (docs) {
             var docCount = docs.length;
             self.cacheItems = docs;

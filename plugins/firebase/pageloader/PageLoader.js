@@ -4,6 +4,7 @@ import LoadFirstPage from './LoadFirstPage.js';
 import LoadNextPage from './LoadNextPage.js';
 import LoadPreviousPage from './LoadPreviousPage.js';
 import LoadCurrentPage from './LoadCurrentPage.js';
+import LoadInRange from './LoadInRange.js';
 
 class PageLoader {
     constructor(config) {
@@ -63,7 +64,8 @@ var methods = {
     loadFirstPage: LoadFirstPage,
     loadNextPage: LoadNextPage,
     loadPreviousPage: LoadPreviousPage,
-    loadCurrentPage: LoadCurrentPage
+    loadCurrentPage: LoadCurrentPage,
+    load: LoadInRange
 }
 
 Object.assign(

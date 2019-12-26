@@ -1,7 +1,7 @@
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
-import LoadPageMethods from './LoadPageMethods.js';
+import LoadMethods from './LoadMethods.js';
 import GetScore from './GetScore.js';
 import GetRank from './GetRank.js';
 import DeleteMethods from './DeleteMethods.js';
@@ -107,7 +107,7 @@ Object.assign(
     LeaderBoard.prototype,
     methods,
     GetQueryMethods,
-    LoadPageMethods,
+    LoadMethods,
     DeleteMethods
 );
 

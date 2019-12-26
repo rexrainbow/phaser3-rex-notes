@@ -41,6 +41,16 @@ var Methods = {
             })
     },
 
+    load(count, skip) {
+        this.resetPageQuery();
+
+        var self = this;
+        return this.page.load(count, skip)
+            .then(function (docs) {
+                return Promise.resolve(DocsToDataArray.call(self, docs));
+            })
+    },
+
     resetPageQuery() {
         if (!this.resetQueryFlag) {
             return this;
