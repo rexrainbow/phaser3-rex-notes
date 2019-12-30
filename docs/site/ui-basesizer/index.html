@@ -5015,13 +5015,58 @@
 <p>Method <code>sizer.add</code> is override in each sizer class usually.</p>
 </div>
 <h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
-<p>Draw all bounds of children.</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
-</pre></div>
-
 <ul>
+<li>Draw bounds on a graphics game object
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</pre></div><ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>color</code> : Default value is <code>0xffffff</code></li>
+</ul>
+</li>
+<li>Draw bounds and display name of child
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// color: 0xffffff,</span>
+
+    <span class="c1">// name: false, </span>
+    <span class="c1">// name: true, </span>
+    <span class="c1">// name: {</span>
+    <span class="c1">//     createTextCallback: function(scene) {</span>
+    <span class="c1">//         return scene.add.text(0, 0, &#39;&#39;);        </span>
+    <span class="c1">//     },</span>
+    <span class="c1">//     align: &#39;left-top&#39;</span>
+    <span class="c1">// }</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
+<li><code>name</code> :<ul>
+<li><code>false</code> : Don't display child name, default value</li>
+<li><code>true</code> : Display child name with default text game object, aligned at left-top of child bounds.</li>
+<li>Plain object : <ul>
+<li><code>name.createTextCallback</code> : Callback of creating customized text game object for child name
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">childBoundsRect</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return scene.add.text(0, 0, &#39;&#39;); </span>
+<span class="p">}</span>
+</pre></div></li>
+<li><code>name.align</code> : <ul>
+<li><code>'left-top'</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> : Align text game object at left-top. Default value</li>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align text game object at center</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align text game object at left-center</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align text game object at right-center</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game text object at top-center</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game text object at bottom-center</li>
+<li><code>'left-bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_LEFT</code> : Align text game object at left-bottom</li>
+<li><code>'right-top'</code>, or <code>Phaser.Display.Align.TOP_RIGHT</code> : Align text game object at right-top</li>
+<li><code>'right-bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_RIGHT</code> : Align text game object at right-bottom</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Text game objects of these children's name will be attached on graphics game object, <code>graphics.clear()</code>, or <code>graphics.destroy()</code> will also destroy these text game objects</li>
+</ul>
+</li>
 </ul>
 <h3 id="anchor">Anchor<a class="headerlink" href="#anchor" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setAnchor</span><span class="p">({</span>

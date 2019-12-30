@@ -176,14 +176,50 @@ sizer.pin(gameObject);
 
 ### Draw bounds
 
-Draw all bounds of children.
+- Draw bounds on a graphics game object
+    ```javascript
+    sizer.drawBounds(graphics, color);
+    ```
+    - `graphics` : [Graphics game object](graphics.md)
+    - `color` : Default value is `0xffffff`
+- Draw bounds and display name of child
+    ```javascript
+    sizer.drawBounds(graphics, {
+        // color: 0xffffff,
 
-```javascript
-sizer.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`
+        // name: false, 
+        // name: true, 
+        // name: {
+        //     createTextCallback: function(scene) {
+        //         return scene.add.text(0, 0, '');        
+        //     },
+        //     align: 'left-top'
+        // }
+    });
+    ```
+    - `graphics` : [Graphics game object](graphics.md)
+    - `color` : Default value is `0xffffff`
+    - `name` :
+        - `false` : Don't display child name, default value
+        - `true` : Display child name with default text game object, aligned at left-top of child bounds.
+        - Plain object : 
+            - `name.createTextCallback` : Callback of creating customized text game object for child name
+                ```javascript
+                function(scene, child, childBoundsRect) {
+                    // return scene.add.text(0, 0, ''); 
+                }
+                ```
+            - `name.align` : 
+                - `'left-top'`, or `Phaser.Display.Align.TOP_LEFT` : Align text game object at left-top. Default value
+                - `'center'`, or `Phaser.Display.Align.CENTER` : Align text game object at center
+                - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align text game object at left-center
+                - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align text game object at right-center
+                - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game text object at top-center
+                - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game text object at bottom-center
+                - `'left-bottom'`, or `Phaser.Display.Align.BOTTOM_LEFT` : Align text game object at left-bottom
+                - `'right-top'`, or `Phaser.Display.Align.TOP_RIGHT` : Align text game object at right-top
+                - `'right-bottom'`, or `Phaser.Display.Align.BOTTOM_RIGHT` : Align text game object at right-bottom
+    - Text game objects of these children's name will be attached on graphics game object, `graphics.clear()`, or `graphics.destroy()` will also destroy these text game objects
 
 ### Anchor
 
