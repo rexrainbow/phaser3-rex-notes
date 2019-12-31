@@ -6,6 +6,6 @@ ObjectFactory.register('itemTable', function (config) {
     return new ItemTable(config);
 });
 
-SetValue(window, 'RexPlugins.Fire.ItemTable', ItemTable);
+SetValue(window, 'RexPlugins.Parse.ItemTable', ItemTable);
 
 export default ItemTable;

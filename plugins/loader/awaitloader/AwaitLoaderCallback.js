@@ -1,4 +1,4 @@
-import AwaitFile from './awaitFile.js';
+import AwaitFile from './AwaitFile.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

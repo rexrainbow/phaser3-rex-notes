@@ -1,9 +1,10 @@
 import GetValue from '../../utils/object/GetValue.js';
-import PageLoader from '../utils/PageLoader.js';
+import PageLoader from '../pageloader/PageLoader.js';
+import LoadMethods from './LoadMethods.js';
 import Copy from '../../utils/array/Copy.js'
 import Save from './Save.js';
 import SaveItems from './SaveItems.js';
-import Remove from '../utils/Remove.js';
+import Delete from '../utils/query/Delete.js';
 import LoadRandomItems from './LoadRandomItems.js';
 import GetItemCount from './GetItemCount.js';
 
@@ -59,38 +60,6 @@ class ItemTable {
         return new Parse.Query(this.customClass);
     }
 
-    // Load methods
-    loadItem(itemId) {
-        return this.createQuery().get(itemId);
-    }
-
-    loadPage(query, pageIndex) {
-        return this.pageLoader.loadPage(query, pageIndex);
-    }
-
-    loadCurrentPage(query) {
-        return this.pageLoader.loadCurrentPage(query);
-    }
-
-    loadNextPage(query) {
-        return this.pageLoader.loadNextPage(query);
-    }
-
-    loadPreviousPage(query) {
-        return this.pageLoader.loadPreviousPage(query);
-    }
-
-    loadLines(query, startIndex, linesCnt) {
-        return this.pageLoader.loadLines(query, startIndex, linesCnt);
-    }
-
-    loadAll(query) {
-        if (query === undefined) {
-            query = this.createQuery();
-        }
-        return this.pageLoader.loadLines(query);
-    }
-
     get startIndex() {
         return this.pageLoader.startIndex;
     }
@@ -103,7 +72,7 @@ class ItemTable {
         return this.pageLoader.isLastPage;
     }
 
-    // Remove
+    // Delete
     removeItem(itemId) {
         return this.createItem().set('id', itemId).destroy();
     }
@@ -112,12 +81,13 @@ class ItemTable {
 var methods = {
     save: Save,
     saveItems: SaveItems,
-    remove: Remove,
+    remove: Delete,
     loadRandomItems: LoadRandomItems,
     getItemCount: GetItemCount,
 }
 Object.assign(
     ItemTable.prototype,
+    LoadMethods,
     methods
 );
 

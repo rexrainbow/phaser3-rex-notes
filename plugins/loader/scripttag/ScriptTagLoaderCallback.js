@@ -1,5 +1,5 @@
 import LoadScript from '../../utils/loader/LoadScript.js';
-import AwaitFile from '../awaitloader/awaitFile.js';
+import AwaitFile from '../awaitloader/AwaitFile.js';
 
 
 const loaderCallback = function (url) {

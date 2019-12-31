@@ -1,6 +1,6 @@
 import LoaderCallback from './parse/utils/preload/LoaderCallback.js';
 import ObjectFactory from './parse/ObjectFactory.js';
-
+import PageLoaderFactory from './parse/pageloader/Factory.js'
 import ItemTableFactory from './parse/itemtable/Factory.js';
 import QuickLogin from './parse/quicklogin/QuickLogin.js';
 

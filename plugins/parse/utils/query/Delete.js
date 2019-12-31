@@ -1,6 +1,6 @@
 import Load from './Load.js';
 
-var Remove = function (query) {
+var Delete = function (query) {
     query.select('id');
 
     return Load(query)
@@ -12,4 +12,4 @@ var Remove = function (query) {
         });
 }
 
-export default Remove;
+export default Delete;
