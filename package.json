@@ -57,7 +57,6 @@
         "eventemitter3": "^3.1.2",
         "lokijs": "^1.5.7",
         "papaparse": "^4.6.3",
-        "parse": "^2.8.0",
         "webfontloader": "^1.6.28"
     }
 }
