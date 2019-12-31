@@ -1,8 +1,25 @@
-import Parse from 'parse/dist/parse.min.js';
+import ObjectFactory from './parse/ObjectFactory.js';
+import Preload from './parse/utils/preload/Preload.js';
 import ItemTable from './parse/itemtable/ItemTable.js';
 import QuickLogin from './parse/quicklogin/QuickLogin.js';
 
-import SetValue from './utils/object/SetValue.js';
-SetValue(window, 'Parse', Parse);
-SetValue(window, 'RexPlugins.Parse.ItemTable', ItemTable);
-SetValue(window, 'RexPlugins.Parse.QuickLogin', QuickLogin);
+class ParsePlugin {
+    constructor() {
+        this.add = new ObjectFactory();
+    }
+
+    preload(url) {
+        return Preload(url);
+    }
+}
+
+var methods = {
+    quickLogin: QuickLogin
+}
+Object.assign(
+    ParsePlugin.prototype,
+    methods
+);
+
+
+export default ParsePlugin;

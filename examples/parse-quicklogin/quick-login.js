@@ -1,5 +1,4 @@
-import Parse from 'parse/dist/parse.min.js';
-import QuickLogin from '../../plugins/parse/quicklogin/QuickLogin.js';
+import ParsePlugin from '../../plugins/parse-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,7 +8,9 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() { }
+    preload() {
+        this.plugins.get('rexParse').preload(this);
+    }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -18,7 +19,8 @@ class Demo extends Phaser.Scene {
             'DbgfGW40cdqUQug8cv6NDAplB1D9daNIjcYtdGSQ' // This is your Javascript key
         );
 
-        QuickLogin('rex', 'rex')
+        var rexParse = this.plugins.get('rexParse');
+        rexParse.quickLogin('rex', 'rex')
             .then(function () {
                 debugger
             })
@@ -39,7 +41,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexParse',
+            plugin: ParsePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

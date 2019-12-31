@@ -7,31 +7,31 @@ class PageLoader {
         this.startIndex = 0;
         this.pageIndex = 0;
         this.isLastPage = false;
-        this.setLinesCount(GetValue(config, 'lines', 10));
+        this.setItemCount(GetValue(config, 'lines', 10));
     }
 
-    setLinesCount(lineCount) {
-        this.lineCount = lineCount;
+    setItemCount(itemCount) {
+        this.itemCount = itemCount;
         return this;
     }
 
-    loadLines(query, startIndex, lineCount) {
+    loadLines(query, startIndex, itemCount) {
         if (startIndex === undefined) {
             startIndex = 0;
         }
-        if (lineCount === undefined) {
-            lineCount = Infinity;
+        if (itemCount === undefined) {
+            itemCount = Infinity;
         }
 
         this.items.length = 0;
 
         var self = this;
-        return Load(query, startIndex, lineCount)
+        return Load(query, startIndex, itemCount)
             .then(function (items) {
                 self.items = items;
                 self.startIndex = startIndex;
-                self.pageIndex = Math.floor(startIndex / self.lineCount);
-                self.isLastPage = (lineCount === Infinity) ? true : (lineCount > items.length);
+                self.pageIndex = Math.floor(startIndex / self.itemCount);
+                self.isLastPage = (itemCount === Infinity) ? true : (itemCount > items.length);
                 return Promise.resolve(items);
             })
             .catch(function (error) {
@@ -41,22 +41,22 @@ class PageLoader {
     }
 
     loadPage(query, pageIndex) {
-        var startIndex = pageIndex * this.lineCount;
-        return this.loadLines(query, startIndex, this.lineCount);
+        var startIndex = pageIndex * this.itemCount;
+        return this.loadLines(query, startIndex, this.itemCount);
     }
 
     loadCurrentPage(query) {
-        return this.loadLines(query, this.startIndex, this.lineCount);
+        return this.loadLines(query, this.startIndex, this.itemCount);
     }
 
     loadNextPage(query) {
-        var startIndex = this.startIndex + this.lineCount;
-        return this.loadLines(query, startIndex, this.lineCount);
+        var startIndex = this.startIndex + this.itemCount;
+        return this.loadLines(query, startIndex, this.itemCount);
     }
 
     loadPreviousPage(query) {
-        var startIndex = this.startIndex - this.lineCount;
-        return this.loadLines(query, startIndex, this.lineCount);
+        var startIndex = this.startIndex - this.itemCount;
+        return this.loadLines(query, startIndex, this.itemCount);
     }
 
     getItem(i) {

@@ -137,6 +137,7 @@ module.exports = {
         'graphplugin': './plugins/graph-plugin.js',
 
         // parse
+        'parseplugin': './plugins/parse-plugin.js',
         'parse': './plugins/parse.js',
 
         // firebase

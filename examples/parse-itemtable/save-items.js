@@ -1,5 +1,4 @@
-import Parse from 'parse/dist/parse.min.js';
-import ItemTable from '../../plugins/parse/itemtable/ItemTable.js';
+import ParsePlugin from '../../plugins/parse-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,7 +8,7 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -18,17 +17,18 @@ class Demo extends Phaser.Scene {
             'DbgfGW40cdqUQug8cv6NDAplB1D9daNIjcYtdGSQ' // This is your Javascript key
         );
 
-        var table0 = new ItemTable({
-                className: 'messages'
-            })
+        var rexParse = this.plugins.get('rexParse');
+        var table0 = rexParse.add.itemTable({
+            className: 'messages'
+        })
             .save([{
-                    name: 'player0',
-                    message: 'hello'
-                },
-                {
-                    name: 'player0',
-                    message: 'world'
-                }
+                name: 'player0',
+                message: 'hello'
+            },
+            {
+                name: 'player0',
+                message: 'world'
+            }
             ])
             .then(function () {
                 console.log('save table0 complete');
@@ -37,18 +37,19 @@ class Demo extends Phaser.Scene {
                 console.log(error)
             })
 
-        var table1 = new ItemTable({
-                className: 'characters',
-                primaryKeys: ['name']
-            })
+        var rexParse = this.plugins.get('rexParse');
+        var table1 = rexParse.add.itemTable({
+            className: 'characters',
+            primaryKeys: ['name']
+        })
             .save([{
-                    name: 'player0',
-                    hp: 10
-                },
-                {
-                    name: 'player1',
-                    hp: 20
-                }
+                name: 'player0',
+                hp: 10
+            },
+            {
+                name: 'player1',
+                hp: 20
+            }
             ])
             .then(function () {
                 console.log('save table1 complete');
@@ -58,7 +59,7 @@ class Demo extends Phaser.Scene {
             })
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
@@ -70,7 +71,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexParse',
+            plugin: ParsePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

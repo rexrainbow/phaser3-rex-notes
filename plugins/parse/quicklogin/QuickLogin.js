@@ -1,5 +1,3 @@
-import Parse from 'parse/dist/parse.min.js';
-
 var QuickLogin = function (userName, password) {
     return Parse.User.logOut() // // Log-out first
         .then(function () {

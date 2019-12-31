@@ -1,4 +1,3 @@
-import Parse from 'parse/dist/parse.min.js';
 import Load from './Load.js';
 
 var Remove = function (query) {

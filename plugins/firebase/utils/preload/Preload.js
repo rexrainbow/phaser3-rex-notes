@@ -1,6 +1,6 @@
 import DefaultConfig from './DefaultConfig.js';
 import MergeRight from '../../../utils/object/MergeRight.js';
-import LoadScript from '../../../utils/loader/LoadScript.js';
+import LoadScriptPromise from '../../../utils/loader/LoadScriptPromise.js';
 import AvailableTest from './AvailableTest.js';
 
 var Preload = function (urlConfig, firebaseConfig) {
@@ -41,11 +41,5 @@ var Preload = function (urlConfig, firebaseConfig) {
             return Promise.resolve();
         })
 }
-
-var LoadScriptPromise = function (url) {
-    return new Promise(function (resolve, reject) {
-        LoadScript(url, resolve);
-    });
-};
 
 export default Preload;
