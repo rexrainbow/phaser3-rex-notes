@@ -5031,8 +5031,9 @@
     <span class="c1">// name: true, </span>
     <span class="c1">// name: {</span>
     <span class="c1">//     createTextCallback: function(scene) {</span>
-    <span class="c1">//         return scene.add.text(0, 0, &#39;&#39;);        </span>
+    <span class="c1">//         return scene.add.text(0, 0, &#39;&#39;);</span>
     <span class="c1">//     },</span>
+    <span class="c1">//     createTextCallbackScope: undefined,</span>
     <span class="c1">//     align: &#39;left-top&#39;</span>
     <span class="c1">// }</span>
 <span class="p">});</span>
@@ -5048,6 +5049,7 @@
     <span class="c1">// return scene.add.text(0, 0, &#39;&#39;); </span>
 <span class="p">}</span>
 </pre></div></li>
+<li><code>name.createTextCallbackScope</code> : Callback scope of <code>name.createTextCallback</code>, default is <code>undefined</code></li>
 <li><code>name.align</code> : <ul>
 <li><code>'left-top'</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> : Align text game object at left-top. Default value</li>
 <li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align text game object at center</li>

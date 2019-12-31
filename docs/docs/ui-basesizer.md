@@ -191,8 +191,9 @@ sizer.pin(gameObject);
         // name: true, 
         // name: {
         //     createTextCallback: function(scene) {
-        //         return scene.add.text(0, 0, '');        
+        //         return scene.add.text(0, 0, '');
         //     },
+        //     createTextCallbackScope: undefined,
         //     align: 'left-top'
         // }
     });
@@ -209,6 +210,7 @@ sizer.pin(gameObject);
                     // return scene.add.text(0, 0, ''); 
                 }
                 ```
+            - `name.createTextCallbackScope` : Callback scope of `name.createTextCallback`, default is `undefined`
             - `name.align` : 
                 - `'left-top'`, or `Phaser.Display.Align.TOP_LEFT` : Align text game object at left-top. Default value
                 - `'center'`, or `Phaser.Display.Align.CENTER` : Align text game object at center
