@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         var table = rexParse.add.itemTable({
             className: 'characters',
             primaryKeys: ['name'],
-            lines: 3,
+            itemCount: 3,
         });
 
         // Save something
@@ -41,12 +41,12 @@ class Demo extends Phaser.Scene {
 
         Promise.all(promises)
             .then(function () {
-                return table.loadRandomItems(2);  // Load random 2 items
+                return table.loadRandomItems(2);  // Load 2 random items
             })
             .then(function (results) {
                 console.log('---- Load random ----');
                 console.log(JSON.parse(JSON.stringify(results)));
-                return table.loadRandomItems(2);  // Load random 2 items
+                return table.loadRandomItems(2);  // Load 2 random items
             })
             .then(function (results) {
                 console.log('---- Load random ----');

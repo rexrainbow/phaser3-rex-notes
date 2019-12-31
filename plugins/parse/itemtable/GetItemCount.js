@@ -1,6 +1,6 @@
 var GetItemCount = function (query) {
     if (query === undefined) {
-        query = this.createQuery();
+        query = this.baseQuery;
     }
     return query.count();
 }

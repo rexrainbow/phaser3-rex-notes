@@ -8,7 +8,9 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() { }
+    preload() {
+        this.plugins.get('rexParse').preload(this);
+    }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -21,14 +23,9 @@ class Demo extends Phaser.Scene {
         var table0 = rexParse.add.itemTable({
             className: 'messages'
         })
-            .save([{
-                name: 'player0',
-                message: 'hello'
-            },
-            {
-                name: 'player0',
-                message: 'world'
-            }
+            .save([
+                { name: 'player0', message: 'hello' },
+                { name: 'player0', message: 'world' }
             ])
             .then(function () {
                 console.log('save table0 complete');
@@ -42,14 +39,9 @@ class Demo extends Phaser.Scene {
             className: 'characters',
             primaryKeys: ['name']
         })
-            .save([{
-                name: 'player0',
-                hp: 10
-            },
-            {
-                name: 'player1',
-                hp: 20
-            }
+            .save([
+                { name: 'player0', hp: 10 },
+                { name: 'player1', hp: 20 }
             ])
             .then(function () {
                 console.log('save table1 complete');

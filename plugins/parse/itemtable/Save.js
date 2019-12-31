@@ -27,7 +27,7 @@ var Save = function (data) {
 }
 
 var GetQuery = function (data) {
-    var query = this.createQuery().select('id');
+    var query = this.baseQuery.select('id');
     var isItem = (data instanceof this.customClass);
     var key, value;
     for (var i = 0, cnt = this.primaryKeys.length; i < cnt; i++) {

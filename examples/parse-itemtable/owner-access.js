@@ -8,7 +8,9 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() { }
+    preload() {
+        this.plugins.get('rexParse').preload(this);
+    }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL

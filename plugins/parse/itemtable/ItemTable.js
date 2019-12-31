@@ -1,16 +1,19 @@
 import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../pageloader/PageLoader.js';
 import LoadMethods from './LoadMethods.js';
-import Copy from '../../utils/array/Copy.js'
+import DeleteMethods from './DeleteMethods.js';
+import Copy from '../../utils/array/Copy.js';
 import Save from './Save.js';
 import SaveItems from './SaveItems.js';
-import Delete from '../utils/query/Delete.js';
-import LoadRandomItems from './LoadRandomItems.js';
 import GetItemCount from './GetItemCount.js';
 
 class ItemTable {
     constructor(config) {
+        this.pageLoader = new PageLoader();
+
         this.setClassName(GetValue(config, 'className', 'Item'));
+        this.setItemCount(GetValue(config, 'itemCount', 100));
+        this.setQuery();  // Reset to base query
         this.primaryKeys = [];
         var primaryKeys = GetValue(config, 'primaryKeys', undefined);
         if (primaryKeys) {
@@ -20,9 +23,6 @@ class ItemTable {
         this.setOwnerReadMode(GetValue(config, 'ownerRead', undefined));
         this.setOwnerWriteMode(GetValue(config, 'ownerWrite', undefined));
 
-        this.pageLoader = new PageLoader({
-            lines: GetValue(config, 'lines', 10)
-        });
     }
 
     setClassName(className) {
@@ -56,7 +56,20 @@ class ItemTable {
         return new this.customClass();
     }
 
-    createQuery() {
+    setItemCount(itemCount) {
+        this.pageLoader.setItemCount(itemCount);
+        return this;
+    }
+
+    setQuery(query) {
+        if (query === undefined) {
+            query = this.baseQuery;
+        }
+        this.pageLoader.setQuery(query);
+        return this;
+    }
+
+    get baseQuery() {
         return new Parse.Query(this.customClass);
     }
 
@@ -71,23 +84,17 @@ class ItemTable {
     get isLastPage() {
         return this.pageLoader.isLastPage;
     }
-
-    // Delete
-    removeItem(itemId) {
-        return this.createItem().set('id', itemId).destroy();
-    }
 }
 
 var methods = {
     save: Save,
     saveItems: SaveItems,
-    remove: Delete,
-    loadRandomItems: LoadRandomItems,
     getItemCount: GetItemCount,
 }
 Object.assign(
     ItemTable.prototype,
     LoadMethods,
+    DeleteMethods,
     methods
 );
 

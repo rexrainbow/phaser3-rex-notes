@@ -8,7 +8,9 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() { }
+    preload() {
+        this.plugins.get('rexParse').preload(this);
+    }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -25,12 +27,14 @@ class Demo extends Phaser.Scene {
 
         table
             // Save json data
-            .save({
-                name: 'player0',
-                hp: 20,
-                mp: 5,
-                coin: 20
-            })
+            .save(
+                {
+                    name: 'player0',
+                    hp: 20,
+                    mp: 5,
+                    coin: 20
+                }
+            )
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
                 return table.loadItem(item.id);

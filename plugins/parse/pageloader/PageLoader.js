@@ -7,18 +7,18 @@ class PageLoader {
         this.startIndex = 0;
         this.pageIndex = 0;
         this.isLastPage = false;
-        this.setItemCount(GetValue(config, 'lines', 10));
+        this.setItemCount(GetValue(config, 'itemCount', 100));
         this.setQuery(GetValue(config, 'query', undefined));
     }
 
     setItemCount(itemCount) {
         this.itemCount = itemCount;
+        this.pageIndex = Math.floor(this.startIndex / itemCount);
         return this;
     }
 
     setQuery(query) {
         this.query = query;
-        this.items.length = 0;
         return this;
     }
 

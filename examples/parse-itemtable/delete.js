@@ -9,7 +9,9 @@ class Demo extends Phaser.Scene {
         this.txt;
     }
 
-    preload() {}
+    preload() {
+        this.plugins.get('rexParse').preload(this);
+    }
 
     create() {
         Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
@@ -22,7 +24,7 @@ class Demo extends Phaser.Scene {
         var table = rexParse.add.itemTable({
             className: 'characters',
             primaryKeys: ['name'],
-            lines: 3,
+            itemCount: 3,
         });
 
         // Save something
@@ -39,18 +41,18 @@ class Demo extends Phaser.Scene {
 
         Promise.all(promises)
             .then(function () {
-                return table.loadAll();  // Load all
+                return table.load();  // Load all
             })
             .then(function (results) {
                 console.log('---- Load all ----');
                 console.log(JSON.parse(JSON.stringify(results)));
 
                 // Remove
-                var query = table.createQuery().greaterThanOrEqualTo('hp', 30);
-                return table.remove(query);
-            })            
+                var query = table.baseQuery.greaterThanOrEqualTo('hp', 30);
+                return table.delete(query);
+            })
             .then(function () {
-                return table.loadAll();  // Load all
+                return table.load();  // Load all
             })
             .then(function (results) {
                 console.log('---- Load all ----');
@@ -63,7 +65,7 @@ class Demo extends Phaser.Scene {
 
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

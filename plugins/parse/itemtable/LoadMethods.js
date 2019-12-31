@@ -1,34 +1,39 @@
+import Load from '../utils/query/Load.js';
+import LoadRandomItems from './LoadRandomItems.js';
+
 var Methods = {
     loadItem(itemId) {
-        return this.createQuery().get(itemId);
+        return this.baseQuery.get(itemId);
     },
 
-    loadPage(query, pageIndex) {
-        return this.pageLoader.loadPage(query, pageIndex);
+    loadPage(pageIndex) {
+        return this.pageLoader.loadPage(pageIndex);
     },
 
-    loadCurrentPage(query) {
-        return this.pageLoader.loadCurrentPage(query);
+    loadCurrentPage() {
+        return this.pageLoader.loadCurrentPage();
     },
 
-    loadNextPage(query) {
-        return this.pageLoader.loadNextPage(query);
+    loadNextPage() {
+        return this.pageLoader.loadNextPage();
     },
 
-    loadPreviousPage(query) {
-        return this.pageLoader.loadPreviousPage(query);
+    loadPreviousPage() {
+        return this.pageLoader.loadPreviousPage();
     },
 
-    loadItems(query, startIndex, linesCnt) {
-        return this.pageLoader.loadItems(query, startIndex, linesCnt);
+    loadItems(startIndex, itemCount) {
+        return this.pageLoader.loadItems(startIndex, itemCount);
     },
 
-    loadAll(query) {
+    load(query) {
         if (query === undefined) {
-            query = this.createQuery();
+            query = this.baseQuery;
         }
-        return this.pageLoader.loadItems(query);
-    }
+        return Load(query);
+    },
+
+    loadRandomItems: LoadRandomItems
 }
 
 export default Methods;
