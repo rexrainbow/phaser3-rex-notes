@@ -1,4 +1,5 @@
 import CreateRoom from './CreateRoom.js';
+import CreateRandomRoom from './CreateRandomRoom.js';
 import JoinRoom from './JoinRoom.js';
 import JoinRandomRoom from './JoinRandomRoom.js';
 import LeaveRoom from './LeaveRoom.js';
@@ -12,6 +13,7 @@ import GetRefMethods from './GetRefMethods.js';
 
 var Methods = {
     createRoom: CreateRoom,
+    createRandomRoom: CreateRandomRoom,
     joinRoom: JoinRoom,
     joinRandomRoom: JoinRandomRoom,
     leaveRoom: LeaveRoom,

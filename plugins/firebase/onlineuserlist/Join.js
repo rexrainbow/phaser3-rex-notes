@@ -19,11 +19,7 @@ var Join = function () {
     userRef.onDisconnect().remove();
     // Go promise
     if (this.maxUsers === 0) { // Unlimit user list
-        return userRef.set(d)
-            .catch(function (error) {
-                self.emit('join-fail', d);
-                return Promise.reject();
-            });
+        return userRef.set(d);
 
     } else { // Limited user list
         return userRef.set(d)
@@ -42,10 +38,6 @@ var Join = function () {
                     .then(function () {
                         userRef.onDisconnect().cancel();
                     });
-                return Promise.reject();
-            })
-            .catch(function (error) {
-                self.emit('join-fail', d);
                 return Promise.reject();
             });
     }

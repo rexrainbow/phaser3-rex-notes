@@ -27,10 +27,6 @@ var JoinRoom = function (config) {
             self.onJoinRoom(config);
             return Promise.resolve();
         })
-        .catch(function () {
-            self.emit('join-fail', config);
-            return Promise.reject();
-        })
 }
 
 var IsRoomOpened = function (config) {

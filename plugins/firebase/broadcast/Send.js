@@ -20,15 +20,7 @@ var Send = function (message) {
     this.skipFirst = false;
     this.stamp = !this.stamp;
     var self = this;
-    return this.sendToRef.set(d)
-        .then(function () {
-            self.emit('send', d);
-            return Promise.resolve();
-        })
-        .catch(function (error) {
-            self.emit('send-fail', d);
-            return Promise.reject(error);
-        }); // Promise
+    return this.sendToRef.set(d);
 }
 
 export default Send;

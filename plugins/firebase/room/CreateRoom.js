@@ -87,7 +87,6 @@ var CreateRoom = function (config) {
             self.roomID = roomID;
             self.roomName = roomName;
             self.roomType = roomType;
-            self.emit('create', self);
             if (join) {
                 self.onJoinRoom(config);
             }
@@ -95,7 +94,6 @@ var CreateRoom = function (config) {
         })
         .catch(function (error) {
             self.isRoomCreator = false;
-            self.emit('create-fail', self);
             return Promise.reject(error);
         });
 }
