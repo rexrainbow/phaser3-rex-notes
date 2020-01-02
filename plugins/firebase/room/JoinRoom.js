@@ -1,4 +1,6 @@
 import { GetRoomType } from "./RoomFilterMethods.js";
+import GetValue from '../../utils/object/GetValue.js';
+import OnJoinRoom from './OnJoinRoom.js';
 
 var TryJoinRoom = function (config) {
     var leftThenJoin = GetValue(config, 'leftThenJoin', true);
@@ -15,16 +17,22 @@ var TryJoinRoom = function (config) {
 }
 
 var JoinRoom = function (config) {
+    var roomID = GetValue(config, 'roomID', undefined);
+    if (roomID === undefined) {
+        return Promise.reject();
+    }
+
+    this.isRemoveRoomWhenLeft = false;
     var self = this;
     return IsRoomOpened.call(self, config)
         .then(function (metadata) {
             return self.userList
-                .setRootPath(this.getUserListPath(config.roomID))
+                .setRootPath(self.getUserListPath(config.roomID))
                 .setMaxUsers(metadata.maxUsers)
                 .join();
         })
         .then(function () {
-            self.onJoinRoom(config);
+            OnJoinRoom.call(self, config);
             return Promise.resolve(config);
         })
 }

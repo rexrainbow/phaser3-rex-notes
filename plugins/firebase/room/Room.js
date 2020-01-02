@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import OnlineUserList from '../onlineuserlist/OnlineUserList.js';
 import Methods from './Methods.js';
+import OnLeftRoom from './OnLeftRoom.js';
 
 class Room {
     constructor(config) {
@@ -37,7 +38,7 @@ class Room {
         this.userList
             .on('user.leave', function (user) {
                 if (user.userID === this.userInfo.userID) {
-                    this.onLeftRoom(); // Current user is left or kicked
+                    OnLeftRoom.call(this);  // Current user is left or kicked
                 }
             }, this)
             .setUser(this.userInfo);

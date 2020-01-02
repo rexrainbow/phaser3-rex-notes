@@ -2,6 +2,7 @@ import FirebasePlugin from '../../plugins/firebase-plugin.js';
 import firebaseConfig from './firebaseConfig.js';
 
 import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
+import Delay from '../../plugins/utils/promise/Delay.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,28 +16,72 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 0, '');
+        this.plugins.get('rexFire').initializeApp(firebaseConfig);
 
-        var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
-        var room = rexFire.add.room({
-            root: 'test-room'
-        })
-            .setUser(GetRandomWord(10), GetRandomWord(5))
-            .createRandomRoom({
-                digits: 6,
-                candidates: '0123456789',
-                maxUsers: 2
-            })
+        var self = this;
+        CreateRandomRoom.call(self)
             .then(function (roomConfig) {
-                console.log(roomConfig);
+                return Delay(1000)
+                    .then(function () {
+                        JoinRoom.call(self, roomConfig.roomID)
+                    })
             })
-            .catch(function (error) {
-                debugger
-            })
-
     }
 
     update() { }
+}
+
+var CreateRoomInstance = function () {
+    var rexFire = this.plugins.get('rexFire');
+    var room = rexFire.add.room({
+        root: 'test-room'
+    })
+        .setUser(GetRandomWord(5), '')
+
+    room
+        .on('user.join', function (userInfo) {
+            console.log(`${room.userInfo.userID}: User ${userInfo.userID} joined room ${room.roomID}`)
+        })
+        .on('user.leave', function(userInfo){
+            console.log(`${room.userInfo.userID}: User ${userInfo.userID} left room ${room.roomID}`)
+        })
+    return room;
+}
+
+var CreateRandomRoom = function () {
+    // Simulate an user creates a random room
+    var room = CreateRoomInstance.call(this)
+    var userID = room.userInfo.userID;
+    return room
+        .createRandomRoom({
+            digits: 6,
+            candidates: '0123456789',
+            maxUsers: 2
+        })
+        .then(function (roomConfig) {
+            console.log(`${userID}: Create room ${roomConfig.roomID}`)
+            return Promise.resolve(roomConfig)
+        });
+}
+
+var JoinRoom = function (roomID) {
+    // Simulate an user joins a room via roomId
+    var room = CreateRoomInstance.call(this)
+    var userID = room.userInfo.userID;
+
+    // Leave room after 1000ms
+    setTimeout(function(){
+        room.leaveRoom();
+    }, 1000)
+
+    return room
+        .joinRoom({
+            roomID: roomID
+        })
+        .then(function (roomConfig) {
+            console.log(`${userID}: Join room ${roomConfig.roomID}`)
+            return Promise.resolve(roomConfig);
+        })
 }
 
 var config = {

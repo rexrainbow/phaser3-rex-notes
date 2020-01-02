@@ -1,20 +1,13 @@
 var OnLeftRoom = function () {
-    var d = {
-        roomID: this.roomID,
-        roomName: this.roomName
-    }
-    this.roomID = undefined;
-    this.roomName = undefined;
-    this.doorState = undefined;
-
-    this.monitorMyStateOff();
     this.userList.stopUpdate().clear();
 
-    this.emit('leave', d);
-    if (!this.leftRoomFlag) {
-        this.emit('kicked', d);
-    }
-    this.leftRoomFlag = false;
+    // Clear room info later
+    var self = this;
+    setTimeout(function () {
+        self.roomID = undefined;
+        self.roomName = undefined;
+        self.doorState = undefined;
+        self.leftRoomFlag = false;
+    }, 0);
 }
-
 export default OnLeftRoom;

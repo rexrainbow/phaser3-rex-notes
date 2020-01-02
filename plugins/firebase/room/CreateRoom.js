@@ -1,5 +1,6 @@
 import MergeRight from '../../utils/object/MergeRight.js';
 import { GetFilterString } from './RoomFilterMethods.js';
+import OnJoinRoom from './OnJoinRoom.js';
 
 var TryCreateRoom = function (config) {
     if (config === undefined) {
@@ -69,7 +70,7 @@ var CreateRoom = function (config) {
     roomMetadata.moderators[this.userInfo.userID] = this.userInfo.userName;
     d[`room-metadata/${roomID}`] = roomMetadata;
 
-    this.isRoomCreator = true;
+
     var self = this;
     return new Promise(function (resolve, reject) {
         if (join) {
@@ -85,21 +86,15 @@ var CreateRoom = function (config) {
         }
     })
         .then(function () {
-            self.getRootRef().update(d)
+            return self.getRootRef().update(d)
         })
         .then(function () {
-            self.roomID = roomID;
-            self.roomName = roomName;
-            self.roomType = roomType;
+            self.isRoomCreator = true;
             if (join) {
-                self.onJoinRoom(config);
+                OnJoinRoom.call(self, config);
             }
             return Promise.resolve(config);
         })
-        .catch(function (error) {
-            self.isRoomCreator = false;
-            return Promise.reject(error);
-        });
 }
 
 var DefaultConfig = {

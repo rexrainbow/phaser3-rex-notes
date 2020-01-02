@@ -11,7 +11,7 @@ var LeaveRoom = function () {
         // Leave user list only        
         return this.userList.leave();
     }
-    // Emit 'user.leave' event -> onLeftRoom
+    // Emit 'user.leave' event -> OnLeftRoom
 }
 
 export default LeaveRoom;
