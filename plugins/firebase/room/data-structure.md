@@ -2,7 +2,7 @@
 # filter to monitor opened rooms
 room-filter/
     <roomID>
-        filter -  close/open + "|" + public/private/...
+        filter -  open/closed + "|" + public/private/...
         name - The display name of the room
 
 
@@ -12,8 +12,8 @@ room-metadata/
     <roomID>
         name - The display name of the room
 
-        # monitor filter to catch room open/close event
-        filter -  close/open + "|" + public/private/...
+        # monitor filter to catch room open/closed event
+        filter -  open/closed + "|" + public/private/...
 
         # moderators of this room
         moderators/
