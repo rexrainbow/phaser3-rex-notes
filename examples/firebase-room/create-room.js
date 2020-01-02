@@ -27,8 +27,8 @@ class Demo extends Phaser.Scene {
                 roomType: 'private',
                 maxUsers: 2
             })
-            .then(function () {
-                debugger
+            .then(function (roomConfig) {
+                console.log(roomConfig);
             })
             .catch(function (error) {
                 debugger
