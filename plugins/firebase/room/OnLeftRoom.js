@@ -1,12 +1,6 @@
 var OnLeftRoom = function () {
     this.userList.stopUpdate().clear();
 
-    var d = {
-        roomID: this.roomID,
-        roomName: this.roomName
-    }
-    this.emit('leave', d);
-
     // Clear room info later
     var self = this;
     setTimeout(function () {
