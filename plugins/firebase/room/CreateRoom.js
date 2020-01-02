@@ -33,7 +33,7 @@ var CreateRoom = function (config) {
     var roomID = config.roomID;
     var roomName = config.roomName;
     var roomType = config.roomType;
-    var doorState = config.doorState;
+    var doorState = config.door;
     var join = config.join;
 
     var roomRef = this.getRoomRef(roomID);
