@@ -3,15 +3,23 @@ var LeaveRoom = function () {
         return Promise.resolve();
     }
 
-    this.leftRoomFlag = true;
-    if (this.isRemoveRoomWhenLeft) {
-        // Remove room, include user list
-        return this.removeRoom();
-    } else {
-        // Leave user list only        
-        return this.userList.leave();
-    }
-    // Emit 'user.leave' event -> OnLeftRoom
+    var self = this;
+    return new Promise(function (resolve, reject) {
+        // Emit 'user.leave' event -> OnLeftRoom
+        self.once('leave', function () {
+            resolve();
+        })
+        self.leftRoomFlag = true;
+        if (self.isRemoveRoomWhenLeft) {
+            // Remove room, include user list
+            self.removeRoom()
+                .catch(reject)
+        } else {
+            // Leave user list only        
+            self.userList.leave()
+                .catch(reject)
+        }
+    });
 }
 
 export default LeaveRoom;
