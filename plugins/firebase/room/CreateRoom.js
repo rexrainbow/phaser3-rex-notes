@@ -49,23 +49,16 @@ var CreateRoom = function (config) {
     }
 
     var filter = GetFilterString(doorState, roomType);
-    // Room
-    var roomData = {
-        alive: true
-    };
-    if (join) {
-        this.userList
-            .setRootPath(this.getUserListPath(roomID))
-            .setMaxUsers(0) // Don't test max user count
-            .join(); // Promise
-        this.userList
-            .setMaxUsers(config.maxUsers);
-    }
+
+    var d = {};
+
     // Room-filter
     var roomFilterData = {
         filter: filter,
         name: roomName
     };
+    d[`room-filter/${roomID}`] = roomFilterData;
+
     // Room-metadata
     var roomMetadata = {
         name: roomName,
@@ -74,15 +67,26 @@ var CreateRoom = function (config) {
         moderators: {}
     };
     roomMetadata.moderators[this.userInfo.userID] = this.userInfo.userName;
-
-    var d = {};
-    d[`rooms/${roomID}`] = roomData;
-    d[`room-filter/${roomID}`] = roomFilterData;
     d[`room-metadata/${roomID}`] = roomMetadata;
 
     this.isRoomCreator = true;
     var self = this;
-    return this.getRootRef().update(d)
+    return new Promise(function (resolve, reject) {
+        if (join) {
+            var promise = self.userList
+                .setRootPath(self.getUserListPath(roomID))
+                .setMaxUsers(0) // Don't test max user count
+                .join(); // Promise
+            self.userList
+                .setMaxUsers(config.maxUsers);
+            return promise.then(resolve, reject);
+        } else {
+            return resolve();
+        }
+    })
+        .then(function () {
+            self.getRootRef().update(d)
+        })
         .then(function () {
             self.roomID = roomID;
             self.roomName = roomName;
@@ -90,7 +94,7 @@ var CreateRoom = function (config) {
             if (join) {
                 self.onJoinRoom(config);
             }
-            return Promise.resolve();
+            return Promise.resolve(config);
         })
         .catch(function (error) {
             self.isRoomCreator = false;

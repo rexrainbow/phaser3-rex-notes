@@ -41,9 +41,6 @@ class Room {
                 }
             }, this)
             .setUser(this.userInfo);
-
-        // Monitor
-        this.monitorRefPaths = [];
     }
 
     shutdown() {

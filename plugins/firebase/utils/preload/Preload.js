@@ -8,7 +8,7 @@ var Preload = function (urlConfig, firebaseConfig) {
 
     return LoadScriptPromise(urlConfig.app)  // Load firebase-app
         .then(function () { // Load other SDK
-            var count = 0;
+            var promises = [];
             var url;
             for (var k in urlConfig) {
                 if (k === 'app') {
@@ -18,23 +18,19 @@ var Preload = function (urlConfig, firebaseConfig) {
                 if (!url) {
                     continue;
                 }
-                count++;
-                LoadScript(url, function () {
-                    count--;
-                    if (count === 0) {
-                        return Promise.resolve();
-                    }
-                })
+                promises.push(LoadScriptPromise(url))
             }
 
-            if (count === 0) {
+            if (promises.length === 0) {
                 return Promise.resolve();
+            } else {
+                return Promise.all(promises);
             }
         })
         .then(function () { // Wait until all vairalbe are available
             return AvailableTest(urlConfig);
         })
-        .then(function(){
+        .then(function () {
             if (firebaseConfig !== undefined) {
                 firebase.initializeApp(firebaseConfig);
             }

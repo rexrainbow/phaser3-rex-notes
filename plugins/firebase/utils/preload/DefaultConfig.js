@@ -1,9 +1,9 @@
-const VERSION = '7.5.2';
+const VERSION = '7.6.1';
 
 const Config = {
     app: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-app.js`,
 
-    // auth: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-auth.js`,
+    auth: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-auth.js`,
     database: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-database.js`,
     firestore: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-firestore.js`,
     // storage: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-storage.js`,

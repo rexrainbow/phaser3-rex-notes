@@ -4,7 +4,6 @@ var OnJoinRoom = function (config) {
     this.roomType = config.roomType;
 
     this.userList.startUpdate();
-    this.emit('join', this);
 }
 
 export default OnJoinRoom;

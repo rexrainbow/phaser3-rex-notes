@@ -25,7 +25,7 @@ var JoinRoom = function (config) {
         })
         .then(function () {
             self.onJoinRoom(config);
-            return Promise.resolve();
+            return Promise.resolve(config);
         })
 }
 
