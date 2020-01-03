@@ -11,39 +11,39 @@ var Join = function (userID, userName) {
     }
 
     // Prepare data
-    var self = this;
     var d = {
         userID: userID,
         userName: userName
     };
+    var maxUsers = this.maxUsers;
     var rootRef = this.database.ref(this.rootPath);
     var userRef = rootRef.push();
 
     userRef.onDisconnect().remove();
-    // Go promise
-    if (this.maxUsers === 0) { // Unlimit user list
-        return userRef.set(d);
+    return userRef.set(d)
+        .then(function () {
+            return Delay(0);
+        })
+        .then(function () {
+            // No user count limitation
+            if (maxUsers === 0) {
+                return Promise.resolve();
+            }
 
-    } else { // Limited user list
-        return userRef.set(d)
-            .then(function () {
-                return Delay(0);
-            })
-            .then(function () {
-                return rootRef.limitToFirst(self.maxUsers).once('value');
-            })
-            .then(function (snapshot) {
-                if (Contains(snapshot, userID)) {
-                    return Promise.resolve();
-                }
-                // UserID is not in firstN list
-                userRef.remove()
-                    .then(function () {
-                        userRef.onDisconnect().cancel();
-                    });
-                return Promise.reject();
-            });
-    }
+            // Has user count limitation
+            return rootRef.limitToFirst(maxUsers).once('value')
+                .then(function (snapshot) {
+                    if (Contains(snapshot, userID)) {
+                        return Promise.resolve();
+                    }
+                    // UserID is not in firstN list
+                    userRef.remove()
+                        .then(function () {
+                            userRef.onDisconnect().cancel();
+                        });
+                    return Promise.reject();
+                });
+        })
 };
 
 var Contains = function (snapshot, userID) {
