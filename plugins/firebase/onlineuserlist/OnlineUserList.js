@@ -4,7 +4,7 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import ItemList from '../utils/itemlist/ItemList.js';
 import Join from './Join.js';
 import Leave from './Leave.js';
-import Rename from './Rename.js';
+import ChangeUserName from './ChangeUserName.js';
 
 class OnlineUserList {
     constructor(config) {
@@ -171,7 +171,7 @@ class OnlineUserList {
 var methods = {
     join: Join,
     leave: Leave,
-    rename: Rename
+    changeUserName: ChangeUserName
 }
 
 Object.assign(

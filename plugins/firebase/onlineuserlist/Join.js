@@ -38,12 +38,15 @@ var Join = function (userID, userName) {
                     if (Contains(snapshot, userID)) {
                         return Promise.resolve();
                     }
+
                     // UserID is not in firstN list
-                    userRef.remove()
+                    return userRef.remove()
                         .then(function () {
-                            userRef.onDisconnect().cancel();
-                        });
-                    return Promise.reject();
+                            return userRef.onDisconnect().cancel()
+                        })
+                        .then(function () {
+                            return Promise.reject()
+                        })
                 });
         })
 };

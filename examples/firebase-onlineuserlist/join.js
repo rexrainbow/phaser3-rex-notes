@@ -28,13 +28,16 @@ class Demo extends Phaser.Scene {
             .on('join', function (user) {
                 console.log('Join:', user)
             })
+            .on('change', function (user, prev) {
+                console.log('Change:', user, prev)
+            })
             .join()
-            .then(function (params) {
+            .then(function () {
                 userList.startUpdate(); // Don't startUpdate before addUser
-                return userList.rename('rex')
+                return userList.changeUserName('rex')
             })
             .catch(function (error) {
-                console.log('Join-fail')
+                debugger
             })
     }
 
