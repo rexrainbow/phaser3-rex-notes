@@ -19,8 +19,10 @@ var Join = function (userID, userName) {
     var rootRef = this.database.ref(this.rootPath);
     var userRef = rootRef.push();
 
-    userRef.onDisconnect().remove();
-    return userRef.set(d)
+    return userRef.onDisconnect().remove()
+        .then(function () {
+            return userRef.set(d)
+        })
         .then(function () {
             return Delay(0);
         })

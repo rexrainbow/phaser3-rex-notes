@@ -11,7 +11,7 @@ var CreateUserList = function (config) {
         }
     });
     userList
-        .on('user.leave', function (user) {
+        .on('userlist.leave', function (user) {
             if (user.userID === this.userID) {
                 OnLeftRoom.call(this);  // Current user is left or kicked
             }
@@ -22,7 +22,9 @@ var CreateUserList = function (config) {
 }
 
 var OnLeftRoom = function () {
-    this.userList.stopUpdate().clear();
+    this.userList
+        .stopUpdate()
+        .clear()
 
     // Clear room info later
     var self = this;

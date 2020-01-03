@@ -38,12 +38,12 @@ var CreateRoomInstance = function () {
     })
         .setUser(GetRandomWord(5), '')
 
-    room
+        room
         .on('userlist.join', function (userInfo) {
-            console.log(`${room.userID}: User ${userInfo.userID} joined room ${room.roomID}`)
+            console.log(`${room.userID}: User ${userInfo.userID} join room ${room.roomID}`, Clone(room.getUserList()))
         })
         .on('userlist.leave', function (userInfo) {
-            console.log(`${room.userID}: User ${userInfo.userID} left room ${room.roomID}`)
+            console.log(`${room.userID}: User ${userInfo.userID} leave room ${room.roomID}`)
         })
     return room;
 }
@@ -71,7 +71,21 @@ var JoinRoom = function (roomID) {
 
     // Leave room after 1000ms
     setTimeout(function () {
-        room.leaveRoom();
+        var prevRoomID = room.roomID;
+        room
+            .leaveRoom()
+            .then(function () {
+                return room.getUserList(prevRoomID)
+            })
+            .then(function (users) {
+                console.log(`Room ${prevRoomID} has users:`, users);
+                return Delay(1000)
+
+            })
+            .then(function () {
+                return room.joinRandomRoom()
+            })
+
     }, 1000)
 
     return room
