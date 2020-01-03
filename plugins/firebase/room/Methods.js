@@ -6,7 +6,7 @@ import LeaveRoom from './LeaveRoom.js';
 import RemoveRoom from './RemoveRoom.js';
 import KickUser from './KickUser.js';
 import IsRoomOpened from './IsRoomOpened.js';
-import { SetRoomState, OpenRoom, CloseRoom } from './SetRoomState.js';
+import { ChangeRoomState, OpenRoom, CloseRoom } from './ChangeRoomState.js';
 import GetUserList from './GetUserList.js';
 import GetRoomList from './GetRoomList.js';
 import GetRefMethods from './GetRefMethods.js';
@@ -20,7 +20,7 @@ var Methods = {
     removeRoom: RemoveRoom,
     kickUser: KickUser,
     isRoomOpened: IsRoomOpened,
-    setRoomState: SetRoomState,
+    changeRoomState: ChangeRoomState,
     openRoom: OpenRoom,
     closeRoom: CloseRoom,
     getUserList: GetUserList,
