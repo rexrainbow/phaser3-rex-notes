@@ -21,10 +21,10 @@ class Demo extends Phaser.Scene {
         var self = this;
         CreateRoom.call(self)
             .then(function (roomConfig) {
-                return Delay(1000)
-                    .then(function () {
-                        JoinRoom.call(self, roomConfig.roomID)
-                    })
+                return Delay(1000, roomConfig)
+            })
+            .then(function (roomConfig) {
+                return JoinRoom.call(self, roomConfig.roomID)
             })
     }
 
@@ -70,7 +70,7 @@ var JoinRoom = function (roomID) {
     var userID = room.userInfo.userID;
 
     // Leave room after 1000ms
-    setTimeout(function(){
+    setTimeout(function () {
         room.leaveRoom();
     }, 1000)
 
