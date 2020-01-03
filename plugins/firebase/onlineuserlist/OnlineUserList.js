@@ -4,6 +4,7 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import ItemList from '../utils/itemlist/ItemList.js';
 import Join from './Join.js';
 import Leave from './Leave.js';
+import Rename from './Rename.js';
 
 class OnlineUserList {
     constructor(config) {
@@ -108,11 +109,17 @@ class OnlineUserList {
     }
 
     isFirstUser(userID) {
+        if (userID === undefined) {
+            userID = this.userID;
+        }
         var user = this.usersList.getItems()[0];
         return (user && (user.userID === userID));
     }
 
     getUser(userID) {
+        if (userID === undefined) {
+            userID = this.userID;
+        }
         if (!this.contains(userID)) {
             return null;
         }
@@ -124,15 +131,25 @@ class OnlineUserList {
         return this.userList.getItems();
     }
 
+    getRootRef() {
+        return this.database.ref(this.rootPath)
+    }
+
     getUserRef(userID) {
+        if (userID === undefined) {
+            userID = this.userID;
+        }
         if (!this.contains(userID)) {
             return null;
         }
         var itemID = this.userID2ItemID[userID];
-        return this.database.ref(this.rootPath).child(itemID);
+        return this.getRootRef().child(itemID);
     }
 
     contains(userID) {
+        if (userID === undefined) {
+            userID = this.userID;
+        }
         return this.userID2ItemID.hasOwnProperty(userID);
     }
 
@@ -154,7 +171,9 @@ class OnlineUserList {
 var methods = {
     join: Join,
     leave: Leave,
+    rename: Rename
 }
+
 Object.assign(
     OnlineUserList.prototype,
     EventEmitterMethods,

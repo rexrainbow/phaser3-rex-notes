@@ -18,22 +18,23 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
 
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
-        var onlineUserList = rexFire.add.onlineUserList({
+        var userList = rexFire.add.onlineUserList({
             root: 'online-userlist',
             maxUsers: 2
         });
 
-        onlineUserList
+        userList
             .setUser(GetRandomWord(10), GetRandomWord(5))
             .on('join', function (user) {
                 console.log('Join:', user)
             })
             .join()
             .then(function (params) {
-                onlineUserList.startUpdate(); // Don't startUpdate before addUser
+                userList.startUpdate(); // Don't startUpdate before addUser
+                return userList.rename('rex')
             })
             .catch(function (error) {
-                console.log('Join-fail', user)
+                console.log('Join-fail')
             })
     }
 
