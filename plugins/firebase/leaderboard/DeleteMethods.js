@@ -3,7 +3,7 @@ import Delete from '../utils/query/Delete.js';
 var Methods = {
     deleteUserScores(userID) {
         if (userID === undefined) {
-            userID = this.userInfo.userID;
+            userID = this.userID;
         }
 
         var query = this.getRecordQuery(undefined, undefined, userID, undefined);

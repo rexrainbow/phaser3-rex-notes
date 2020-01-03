@@ -9,7 +9,7 @@ var Save = function (fileID, header, content, updateMode) {
         updateMode = false;
     }
 
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
     if (header === undefined) {
         header = {};
     }

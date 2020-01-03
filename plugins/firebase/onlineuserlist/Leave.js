@@ -1,5 +1,8 @@
-var Leave = function () {
-    var userID = this.userInfo.userID;
+var Leave = function (userID) {
+    if (userID === undefined) {
+        userID = this.userID;
+    }
+
     if (!this.contains(userID)) {
         return Promise.resolve();  // Promise
     }

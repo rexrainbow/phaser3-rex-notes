@@ -27,6 +27,14 @@ class Files {
         this.shutdown();
     }
 
+    get userID() {
+        return this.userInfo.userID;
+    }
+
+    set userID(value) {
+        this.userInfo.userID = value;
+    }
+
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         this.rootRef = this.database.collection(rootPath);
@@ -34,13 +42,13 @@ class Files {
     }
 
     setOwner(userID) {
-        var prevUserID = this.userInfo.userID;
+        var prevUserID = this.userID;
         if (IsPlainObject(userID)) {
             this.userInfo = userID;
         } else {
-            this.userInfo.userID = userID;
+            this.userID = userID;
         }
-        if (prevUserID !== this.userInfo.userID) {
+        if (prevUserID !== this.userID) {
             this.clearCache();
         }
         return this;

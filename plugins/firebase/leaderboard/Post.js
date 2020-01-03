@@ -3,13 +3,13 @@ import { TimeTagKeys, ScoreKeys } from './Const.js';
 
 var Post = function (score, extraData) {
     var newRecord = {
-        userID: this.userInfo.userID
+        userID: this.userID
     };
     if (this.boardID !== undefined) {
         newRecord.boardID = this.boardID;
     }
-    if (this.userInfo.userName) {
-        newRecord.userName = this.userInfo.userName;
+    if (this.userName) {
+        newRecord.userName = this.userName;
     }
     var curTimeData = GetTime();
     if (this.timeFilters !== false) {
@@ -31,7 +31,7 @@ var Post = function (score, extraData) {
     }
     var curTimeData = GetTime();
     var self = this;
-    return this.getRecordQuery(this.boardID, this.tag, this.userInfo.userID, undefined).limit(1).get()
+    return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1).get()
         .then(function (querySnapshot) {
             var prevRecord, docID;
             if (querySnapshot.size > 0) {

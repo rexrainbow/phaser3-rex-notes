@@ -1,4 +1,4 @@
-import { GetRoomState } from "./RoomFilterMethods.js";
+import { GetRoomState } from './utils/RoomFilterMethods.js';
 
 var IsRoomOpened = function (metadata) {
     if (metadata == null) {
@@ -10,7 +10,7 @@ var IsRoomOpened = function (metadata) {
         return false;
     }
 
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
     var IsModerator = metadata.moderators.hasOwnProperty(userID);
     if (IsModerator) {
         return true;

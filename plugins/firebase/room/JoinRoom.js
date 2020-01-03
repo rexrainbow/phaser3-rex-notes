@@ -1,6 +1,6 @@
-import { GetRoomType } from "./RoomFilterMethods.js";
+import { GetRoomType } from './utils/RoomFilterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
-import OnJoinRoom from './OnJoinRoom.js';
+import OnJoinRoom from './utils/OnJoinRoom.js';
 
 var TryJoinRoom = function (config) {
     var leftThenJoin = GetValue(config, 'leftThenJoin', true);
@@ -42,9 +42,12 @@ var IsRoomOpened = function (config) {
     return this.getRoomMetadataRef(config.roomID).once('value')
         .then(function (snapshot) {
             var metadata = snapshot.val();
+            if (metadata === null) { // Can't find room
+                return Promise.reject();
+            }
+
             config.roomName = metadata.name;
             config.roomType = GetRoomType(metadata.filter);
-
             if (!self.isRoomOpened(metadata)) {
                 return Promise.reject();
             } else {

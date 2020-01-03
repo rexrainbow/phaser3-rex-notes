@@ -1,8 +1,11 @@
 import Delay from '../../utils/promise/Delay.js';
 
-var Join = function () {
-    var userID = this.userInfo.userID;
-    var userName = this.userInfo.userName;
+var Join = function (userID, userName) {
+    if (userID === undefined) {
+        userID = this.userID;
+        userName = this.userName;
+    }
+
     if (this.contains(userID)) {
         return Promise.resolve();  // Promise
     }

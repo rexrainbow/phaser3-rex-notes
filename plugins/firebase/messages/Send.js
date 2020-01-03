@@ -1,11 +1,11 @@
 var Send = function (message) {
     var d = {
-        senderID: this.senderInfo.userID,
+        senderID: this.userID,
         message: message,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }
-    if (this.senderInfo.userName !== undefined) {
-        d.senderName = this.senderInfo.userName;
+    if (this.userName !== undefined) {
+        d.senderName = this.userName;
     }
     if (this.receiverID !== undefined) {
         d.receiverID = this.receiverID;

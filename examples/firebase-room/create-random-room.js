@@ -3,6 +3,7 @@ import firebaseConfig from './firebaseConfig.js';
 
 import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 import Delay from '../../plugins/utils/promise/Delay.js';
+import Clone from '../../plugins/utils/object/Clone.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -23,7 +24,7 @@ class Demo extends Phaser.Scene {
             .then(function (roomConfig) {
                 return Delay(1000, roomConfig)
             })
-            .then(function(roomConfig){
+            .then(function (roomConfig) {
                 return JoinRoom.call(self, roomConfig.roomID)
             })
     }
@@ -39,11 +40,11 @@ var CreateRoomInstance = function () {
         .setUser(GetRandomWord(5), '')
 
     room
-        .on('user.join', function (userInfo) {
-            console.log(`${room.userInfo.userID}: User ${userInfo.userID} joined room ${room.roomID}`)
+        .on('userlist.join', function (userInfo) {
+            console.log(`${room.userID}: User ${userInfo.userID} join room ${room.roomID}`, Clone(room.getUserList()))
         })
-        .on('user.leave', function(userInfo){
-            console.log(`${room.userInfo.userID}: User ${userInfo.userID} left room ${room.roomID}`)
+        .on('userlist.leave', function (userInfo) {
+            console.log(`${room.userID}: User ${userInfo.userID} leave room ${room.roomID}`)
         })
     return room;
 }
@@ -51,7 +52,7 @@ var CreateRoomInstance = function () {
 var CreateRandomRoom = function () {
     // Simulate an user creates a random room
     var room = CreateRoomInstance.call(this)
-    var userID = room.userInfo.userID;
+    var userID = room.userID;
     return room
         .createRandomRoom({
             digits: 6,
@@ -70,8 +71,22 @@ var JoinRoom = function (roomID) {
     var userID = room.userInfo.userID;
 
     // Leave room after 1000ms
-    setTimeout(function(){
-        room.leaveRoom();
+    setTimeout(function () {
+        var prevRoomID = room.roomID;
+        room
+            .leaveRoom()
+            .then(function () {
+                return room.getUserList(prevRoomID)
+            })
+            .then(function (users) {
+                console.log(`Room ${prevRoomID} has users:`, users);
+                return Delay(1000)
+
+            })
+            .then(function () {
+                return room.joinRandomRoom()
+            })
+
     }, 1000)
 
     return room

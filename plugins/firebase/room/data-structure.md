@@ -1,6 +1,6 @@
 ```
 # filter to monitor opened rooms
-room-filter/
+room-filters/
     <roomID>
         filter -  open/closed + "|" + public/private/...
         name - The display name of the room

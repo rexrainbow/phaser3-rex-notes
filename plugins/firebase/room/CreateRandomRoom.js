@@ -16,7 +16,7 @@ var CreateRandomRoom = function (config) {
 var TryCreateRandomRoom = function (digits, candidates, retry, config) {
     config.roomID = GetRandomWord(digits, digits, candidates);
     if (retry <= 0) {
-        return Promise.reject();
+        return Promise.reject(config);
     }
     retry--;
     var self = this;

@@ -10,16 +10,14 @@ var Send = function (message) {
 
     var d = {
         message: message,
-        senderID: this.senderInfo.userID,
-        senderName: this.senderInfo.userName,
+        senderID: this.userID,
         stamp: this.stamp,
     };
-    if (this.senderInfo.userName !== undefined) {
-        d.senderName = this.senderInfo.userName;
+    if (this.userName !== undefined) {
+        d.senderName = this.userName;
     }
     this.skipFirst = false;
     this.stamp = !this.stamp;
-    var self = this;
     return this.sendToRef.set(d);
 }
 

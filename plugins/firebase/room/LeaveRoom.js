@@ -9,8 +9,12 @@ var LeaveRoom = function () {
         // Remove room, include user list
         return this.removeRoom()
     } else {
+        var prevRoomInfo = this.getRoomInfo();
         // Leave user list only        
         return this.userList.leave()
+            .then(function () {
+                return Promise.resolve(prevRoomInfo)
+            })
     }
 }
 

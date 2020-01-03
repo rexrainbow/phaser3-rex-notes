@@ -1,6 +1,6 @@
 import MergeRight from '../../utils/object/MergeRight.js';
-import { GetFilterString } from './RoomFilterMethods.js';
-import OnJoinRoom from './OnJoinRoom.js';
+import { GetFilterString } from './utils/RoomFilterMethods.js';
+import OnJoinRoom from './utils/OnJoinRoom.js';
 
 var TryCreateRoom = function (config) {
     if (config === undefined) {
@@ -58,7 +58,7 @@ var CreateRoom = function (config) {
         filter: filter,
         name: roomName
     };
-    d[`room-filter/${roomID}`] = roomFilterData;
+    d[`room-filters/${roomID}`] = roomFilterData;
 
     // Room-metadata
     var roomMetadata = {
@@ -67,7 +67,7 @@ var CreateRoom = function (config) {
         maxUsers: config.maxUsers,
         moderators: {}
     };
-    roomMetadata.moderators[this.userInfo.userID] = this.userInfo.userName;
+    roomMetadata.moderators[this.userID] = this.userName;
     d[`room-metadata/${roomID}`] = roomMetadata;
 
 

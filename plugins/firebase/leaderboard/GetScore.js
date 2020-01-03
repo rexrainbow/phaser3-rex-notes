@@ -2,7 +2,7 @@ import { TimeTagKeys, ScoreKeys, FullTimeName } from './Const.js';
 
 var GetScore = function (userID) {
     if (userID === undefined) {
-        userID = this.userInfo.userID;
+        userID = this.userID;
     }
     var self = this;
     return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1).get()

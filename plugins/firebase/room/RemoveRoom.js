@@ -10,7 +10,12 @@ var RemoveRoom = function (roomID) {
     d[`room-filter/${roomID}`] = null;
     d[`room-metadata/${roomID}`] = null;
     d[`rooms/${roomID}`] = null;
-    return this.getRootRef().update(d);
+
+    var prevRoomInfo = this.getRoomInfo();
+    return this.getRootRef().update(d)
+        .then(function () {
+            return Promise.resolve(prevRoomInfo);
+        })
 }
 
 export default RemoveRoom;

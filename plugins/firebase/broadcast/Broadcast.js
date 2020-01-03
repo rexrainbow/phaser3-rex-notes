@@ -17,7 +17,7 @@ class Broadcast {
         // Sender
         this.skipFirst = true;
         this.stamp = false;
-        this.senderInfo = { userID: '', userName: undefined };
+        this.userInfo = { userID: '', userName: undefined };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
         this.setReceiver(GetValue(config, 'receiverID', ''));
 
@@ -34,6 +34,22 @@ class Broadcast {
         this.shutdown();
     }
 
+    get userID() {
+        return this.userInfo.userID;
+    }
+
+    set userID(value) {
+        this.userInfo.userID = value;
+    }
+
+    get userName() {
+        return this.userInfo.userName;
+    }
+
+    set userName(value) {
+        this.userInfo.userName = value;
+    }
+
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         this.sendToRef = undefined;
@@ -43,10 +59,10 @@ class Broadcast {
 
     setSender(userID, userName) {
         if (IsPlainObject(userID)) {
-            this.senderInfo = userID;
+            this.userInfo = userID;
         } else {
-            this.senderInfo.userID = userID;
-            this.senderInfo.userName = userName;
+            this.userID = userID;
+            this.userName = userName;
         }
         return this;
     }

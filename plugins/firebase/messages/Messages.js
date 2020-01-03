@@ -16,7 +16,7 @@ class Messages {
         this.database = firebase.firestore();
         this.setRootPath(GetValue(config, 'root', ''));
 
-        this.senderInfo = { userID: '', userName: undefined };
+        this.userInfo = { userID: '', userName: undefined };
         this.setSender(GetValue(config, 'senderID', ''), GetValue(config, 'senderName', ''));
         this.setReceiver(GetValue(config, 'receiverID', undefined));
 
@@ -38,6 +38,22 @@ class Messages {
         this.shutdown();
     }
 
+    get userID() {
+        return this.userInfo.userID;
+    }
+
+    set userID(value) {
+        this.userInfo.userID = value;
+    }
+
+    get userName() {
+        return this.userInfo.userName;
+    }
+
+    set userName(value) {
+        this.userInfo.userName = value;
+    }
+
     setRootPath(rootPath) {
         this.resetQueryFlag |= (this.rootPath !== rootPath);
         this.rootPath = rootPath;
@@ -47,10 +63,10 @@ class Messages {
 
     setSender(userID, userName) {
         if (IsPlainObject(userID)) {
-            this.senderInfo = userID;
+            this.userInfo = userID;
         } else {
-            this.senderInfo.userID = userID;
-            this.senderInfo.userName = userName;
+            this.userID = userID;
+            this.userName = userName;
         }
         return this;
     }

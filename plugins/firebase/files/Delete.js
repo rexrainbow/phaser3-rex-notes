@@ -1,5 +1,5 @@
 var Delete = function (fileID) {
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
     var self = this;
     return LoadHeader.call(this, fileID) // Try load header
         .then(function (prevHeader) {

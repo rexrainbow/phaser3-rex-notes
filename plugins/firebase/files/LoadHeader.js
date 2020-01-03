@@ -1,7 +1,7 @@
 import DocToHeader from './DocToHeader.js';
 
 var LoadHeader = function (fileID) {
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
     let header = this.cacheHeaders[fileID];
     if (header && (header.userID === userID)) {
         return Promise.resolve(header);

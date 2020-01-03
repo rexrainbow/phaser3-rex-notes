@@ -1,7 +1,7 @@
 import DocToHeader from './DocToHeader.js';
 
 var Load = function (fileID) {
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
 
     var self = this;
     return this.getFileQuery(userID, fileID).get()

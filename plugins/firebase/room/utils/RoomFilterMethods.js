@@ -7,6 +7,9 @@ var GetRoomType = function (filterString) {
 }
 
 var GetFilterString = function (roomState, roomType) {
+    if (roomType === undefined) {
+        roomType = '';
+    }
     return `${roomState}|${roomType}`;
 }
 

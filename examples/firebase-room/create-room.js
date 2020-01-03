@@ -39,11 +39,11 @@ var CreateRoomInstance = function () {
         .setUser(GetRandomWord(5), '')
 
     room
-        .on('user.join', function (userInfo) {
-            console.log(`${room.userInfo.userID}: User ${userInfo.userID} joined room ${room.roomID}`)
+        .on('userlist.join', function (userInfo) {
+            console.log(`${room.userID}: User ${userInfo.userID} joined room ${room.roomID}`)
         })
-        .on('user.leave', function (userInfo) {
-            console.log(`${room.userInfo.userID}: User ${userInfo.userID} left room ${room.roomID}`)
+        .on('userlist.leave', function (userInfo) {
+            console.log(`${room.userID}: User ${userInfo.userID} left room ${room.roomID}`)
         })
     return room;
 }
@@ -67,7 +67,7 @@ var CreateRoom = function () {
 var JoinRoom = function (roomID) {
     // Simulate an user joins a room via roomId
     var room = CreateRoomInstance.call(this)
-    var userID = room.userInfo.userID;
+    var userID = room.userID;
 
     // Leave room after 1000ms
     setTimeout(function () {

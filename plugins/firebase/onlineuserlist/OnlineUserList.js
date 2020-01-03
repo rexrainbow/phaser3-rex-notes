@@ -54,6 +54,22 @@ class OnlineUserList {
         this.shutdown();
     }
 
+    get userID() {
+        return this.userInfo.userID;
+    }
+
+    set userID(value) {
+        this.userInfo.userID = value;
+    }
+
+    get userName() {
+        return this.userInfo.userName;
+    }
+
+    set userName(value) {
+        this.userInfo.userName = value;
+    }
+
     setRootPath(rootPath) {
         this.rootPath = rootPath;
         return this;
@@ -63,8 +79,8 @@ class OnlineUserList {
         if (IsPlainObject(userID)) {
             this.userInfo = userID;
         } else {
-            this.userInfo.userID = userID;
-            this.userInfo.userName = userName;
+            this.userID = userID;
+            this.userName = userName;
         }
         return this;
     }

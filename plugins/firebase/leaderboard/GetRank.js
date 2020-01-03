@@ -2,7 +2,7 @@ import FindFirst from '../utils/query/FindFirst.js';
 
 var GetRank = function (userID) {
     if (userID === undefined) {
-        userID = this.userInfo.userID;
+        userID = this.userID;
     }
 
     var query = this.getPageQuery().next;

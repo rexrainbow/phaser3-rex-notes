@@ -1,3 +1,5 @@
+import { GetFilterString } from './utils/RoomFilterMethods.js';
+
 var Methods = {
     getRootRef(childKey) {
         var ref = this.database.ref(this.rootPath);
@@ -27,7 +29,7 @@ var Methods = {
     },
 
     getRoomFilterRef(roomID) {
-        var ref = this.getRootRef('room-filter');
+        var ref = this.getRootRef('room-filters');
         if (roomID !== undefined) {
             ref = ref.child(roomID);
         }
@@ -53,6 +55,20 @@ var Methods = {
 
     getUserListPath(roomID) {
         return `${this.rootPath}/rooms/${roomID}/users`;
+    },
+
+    getRoomListQuery(roomType, roomState) {
+        if (roomState === undefined) {
+            roomState = 'open';
+        }
+        var query = this.getRoomFilterRef();
+        query = query.orderByChild('filter');
+        if (roomType === undefined) {
+            query = query.startAt(roomState).endAt(`${roomState}~`);
+        } else {
+            query = query.equalTo(GetFilterString(roomState, roomType));
+        }
+        return query;
     }
 }
 

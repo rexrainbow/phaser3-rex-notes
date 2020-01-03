@@ -1,5 +1,5 @@
 var Clear = function () {
-    var userID = this.userInfo.userID;
+    var userID = this.userID;
     var self = this;
     return this.getFileQuery(userID, undefined, 'header')
         .get()
