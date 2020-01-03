@@ -1,7 +1,6 @@
 var ChangeUserName = function (userName) {
     var self = this;
     return new Promise(function (resolve, reject) {
-        self.userName = userName;
         var userRef = self.getUserRef();
         if (userRef) { // Find userRef
             resolve(userRef)
@@ -15,6 +14,10 @@ var ChangeUserName = function (userName) {
     })
         .then(function (userRef) { // Set userName
             return userRef.child('userName').set(userName)
+        })
+        .then(function () {
+            self.userName = userName;
+            return Promise.resolve();
         })
 }
 
