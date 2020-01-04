@@ -1,14 +1,13 @@
 ```
-# filter to monitor opened rooms
+# Filter to monitor opened rooms
 room-filters/
     <roomID>
         filter -  open/closed + "|" + public/private/...
         name - The display name of the room
 
 
-# header of room, write by owner of room. Each room has unique roomID.
-# read it when joining the room
-room-metadata/
+# Header of room, write by owner of room. Each room has unique roomID
+room-data/
     <roomID>
         name - The display name of the room
 
@@ -32,7 +31,7 @@ room-metadata/
 
         extra/
 
-# body of room data. Each room has unique roomID
+# Body of room data. Each room has unique roomID
 rooms/
     <roomID>
         alive - true or null
@@ -46,8 +45,8 @@ rooms/
         <"channel-"+channel_name> - custom channel
 
 
-# write by each user, user could join to many rooms
-user-metadata\
+# Write by each user, user could join to many rooms
+user-data\
     <joinAt>
         user/
             ID - Unique ID of user

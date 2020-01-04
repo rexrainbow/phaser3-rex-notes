@@ -36,8 +36,8 @@ var Methods = {
         return ref;
     },
 
-    getRoomMetadataRef(roomID) {
-        var ref = this.getRootRef('room-metadata');
+    getRoomDataRef(roomID) {
+        var ref = this.getRootRef('room-data');
         if (roomID !== undefined) {
             ref = ref.child(roomID);
         }
@@ -45,8 +45,8 @@ var Methods = {
     },
 
     // TODO: ??
-    getUserMetadataRef(userID) {
-        var ref = this.getRootRef('user-metadata');
+    getUserDataRef(userID) {
+        var ref = this.getRootRef('user-data');
         if (userID !== undefined) {
             ref = ref.child(userID);
         }

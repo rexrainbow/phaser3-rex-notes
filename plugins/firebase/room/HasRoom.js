@@ -3,7 +3,7 @@ var HasRoom = function (roomID) {
         return Promise.resolve(true);
     }
 
-    return this.getRoomMetadataRef(roomID).once('value')
+    return this.getRoomDataRef(roomID).once('value')
         .then(function (snapshot) {
             var hasRoom = (snapshot.val() !== null);
             return Promise.resolve(hasRoom);

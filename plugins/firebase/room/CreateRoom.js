@@ -39,7 +39,7 @@ var CreateRoom = function (config) {
 
     var roomRef = this.getRoomRef(roomID);
     var roomFilterRef = this.getRoomFilterRef(roomID);
-    var roomMetadataRef = this.getRoomMetadataRef(roomID);
+    var roomMetadataRef = this.getRoomDataRef(roomID);
 
     // Remove room when creater is offline
     this.isRemoveRoomWhenLeft = !config.presisted;
@@ -68,7 +68,7 @@ var CreateRoom = function (config) {
         moderators: {}
     };
     roomMetadata.moderators[this.userID] = this.userName;
-    d[`room-metadata/${roomID}`] = roomMetadata;
+    d[`room-data/${roomID}`] = roomMetadata;
 
 
     var self = this;

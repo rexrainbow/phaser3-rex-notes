@@ -39,7 +39,7 @@ var JoinRoom = function (config) {
 
 var IsRoomOpened = function (config) {
     var self = this;
-    return this.getRoomMetadataRef(config.roomID).once('value')
+    return this.getRoomDataRef(config.roomID).once('value')
         .then(function (snapshot) {
             var metadata = snapshot.val();
             if (metadata === null) { // Can't find room

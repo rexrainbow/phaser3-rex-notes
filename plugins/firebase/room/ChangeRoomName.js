@@ -15,7 +15,7 @@ var ChangeRoomName = function (roomID, roomName) {
             }
             var d = {};
             d[`room-filters/${roomID}/name`] = roomName;
-            d[`room-metadata/${roomID}/name`] = roomName;
+            d[`room-data/${roomID}/name`] = roomName;
             return self.getRootRef().update(d)
         })
 }

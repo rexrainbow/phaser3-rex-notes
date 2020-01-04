@@ -8,7 +8,7 @@ var RemoveRoom = function (roomID) {
 
     var d = {};
     d[`room-filter/${roomID}`] = null;
-    d[`room-metadata/${roomID}`] = null;
+    d[`room-data/${roomID}`] = null;
     d[`rooms/${roomID}`] = null;
 
     var prevRoomInfo = this.getRoomInfo();

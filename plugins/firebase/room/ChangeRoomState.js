@@ -19,7 +19,7 @@ var ChangeRoomState = function (roomID, roomState) {
             var filter = GetFilterString(roomState, self.roomType);
             var d = {};
             d[`room-filters/${roomID}/filter`] = filter;
-            d[`room-metadata/${roomID}/filter`] = filter;
+            d[`room-data/${roomID}/filter`] = filter;
             return self.getRootRef().update(d)
         })
 }
