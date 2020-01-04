@@ -4,6 +4,7 @@ room-filters/
     <roomID>
         filter -  open/closed + "|" + public/private/...
         name - The display name of the room
+        data - JSON data
 
 
 # Header of room, write by owner of room. Each room has unique roomID

@@ -7,6 +7,7 @@ import RemoveRoom from './RemoveRoom.js';
 import KickUser from './KickUser.js';
 import IsRoomOpened from './IsRoomOpened.js';
 import { ChangeRoomState, OpenRoom, CloseRoom } from './ChangeRoomState.js';
+import ChangeFilterData from './ChangeFilterData.js';
 import ChangeRoomName from './ChangeRoomName.js';
 import GetUserList from './GetUserList.js';
 import GetRoomList from './GetRoomList.js';
@@ -23,6 +24,7 @@ var Methods = {
     kickUser: KickUser,
     isRoomOpened: IsRoomOpened,
     changeRoomState: ChangeRoomState,
+    changeFilterData: ChangeFilterData,
     changeRoomName: ChangeRoomName,
     openRoom: OpenRoom,
     closeRoom: CloseRoom,

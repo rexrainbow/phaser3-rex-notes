@@ -57,11 +57,14 @@ var CreateRandomRoom = function () {
         .createRandomRoom({
             digits: 6,
             candidates: '0123456789',
-            maxUsers: 2
+            maxUsers: 2,
+
+            filterData: { a: 10, b: 20 }
         })
         .then(function (roomConfig) {
             console.log(`${userID}: Create room ${roomConfig.roomID}`)
-            room.changeRoomName('aaabbb')
+            // room.changeRoomName('aaabbb')
+            // room.changeFilterData({ a: 30, b: 40 })
             return Promise.resolve(roomConfig)
         });
 }

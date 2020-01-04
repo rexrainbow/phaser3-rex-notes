@@ -36,6 +36,7 @@ var CreateRoom = function (config) {
     var roomType = config.roomType;
     var doorState = config.door;
     var join = config.join;
+    var filterData = config.filterData;
 
     var roomRef = this.getRoomRef(roomID);
     var roomFilterRef = this.getRoomFilterRef(roomID);
@@ -58,6 +59,9 @@ var CreateRoom = function (config) {
         filter: filter,
         name: roomName
     };
+    if (filterData) {
+        roomFilterData.data = filterData;
+    }
     d[`room-filters/${roomID}`] = roomFilterData;
 
     // Room-metadata
@@ -104,7 +108,8 @@ var DefaultConfig = {
     maxUsers: 0,
     presisted: false,
     door: 'open',
-    join: true
+    join: true,
+    filterData: undefined
 }
 
 export default TryCreateRoom;
