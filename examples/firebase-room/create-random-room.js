@@ -61,6 +61,7 @@ var CreateRandomRoom = function () {
         })
         .then(function (roomConfig) {
             console.log(`${userID}: Create room ${roomConfig.roomID}`)
+            room.changeRoomName('aaabbb')
             return Promise.resolve(roomConfig)
         });
 }

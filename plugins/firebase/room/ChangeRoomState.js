@@ -9,13 +9,11 @@ var ChangeRoomState = function (roomID, roomState) {
         roomID = this.roomID;
     }
 
-    // TODO: Who can set room-state?
     var self = this;
-    return this.getRoomMetadataRef(roomID).once('value')
-        .then(function (snapshot) {
-            var metadata = snapshot.val();
-            if (metadata === null) { // Can't find room
-                return Promise.reject();
+    return this.hasRoom(roomID)
+        .then(function (hasRoom) {
+            if (!hasRoom) {
+                return Promise.resolve();
             }
 
             var filter = GetFilterString(roomState, self.roomType);

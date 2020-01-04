@@ -7,8 +7,10 @@ import RemoveRoom from './RemoveRoom.js';
 import KickUser from './KickUser.js';
 import IsRoomOpened from './IsRoomOpened.js';
 import { ChangeRoomState, OpenRoom, CloseRoom } from './ChangeRoomState.js';
+import ChangeRoomName from './ChangeRoomName.js';
 import GetUserList from './GetUserList.js';
 import GetRoomList from './GetRoomList.js';
+import HasRoom from './HasRoom.js';
 import GetRefMethods from './GetRefMethods.js';
 
 var Methods = {
@@ -21,10 +23,12 @@ var Methods = {
     kickUser: KickUser,
     isRoomOpened: IsRoomOpened,
     changeRoomState: ChangeRoomState,
+    changeRoomName: ChangeRoomName,
     openRoom: OpenRoom,
     closeRoom: CloseRoom,
     getUserList: GetUserList,
-    getRoomList: GetRoomList
+    getRoomList: GetRoomList,
+    hasRoom: HasRoom
 }
 
 Object.assign(
