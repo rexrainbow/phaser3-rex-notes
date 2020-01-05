@@ -29,6 +29,8 @@ class Broadcast {
         var historyMaxLength = GetValue(config, 'history', 0);
         if (historyMaxLength === true) {
             historyMaxLength = -1;
+        } else if (historyMaxLength === false) {
+            historyMaxLength = 0;
         }
         this.history = new History({
             maxLength: historyMaxLength
