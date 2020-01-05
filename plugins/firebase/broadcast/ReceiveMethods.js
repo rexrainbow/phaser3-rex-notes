@@ -37,6 +37,8 @@ var OnReceive = function (snapshot) {
         return;
     }
 
+    delete d.stamp;
+    this.history.add(d);
     this.emit('receive', d);
 }
 

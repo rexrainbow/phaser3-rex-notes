@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Send from './Send.js';
 import ReceiveMethods from './ReceiveMethods.js';
+import History from './History.js';
 
 class Broadcast {
     constructor(config) {
@@ -23,6 +24,16 @@ class Broadcast {
 
         // Receiver
         this.isReceiving = false;
+
+        // History messages
+        var historyMaxLength = GetValue(config, 'history', 0);
+        if (historyMaxLength === true) {
+            historyMaxLength = -1;
+        }
+        this.history = new History({
+            maxLength: historyMaxLength
+        });
+
     }
 
     shutdown() {
@@ -69,6 +80,24 @@ class Broadcast {
 
     setReceiver(receiverID) {
         this.receiverID = receiverID;
+        return this;
+    }
+
+    changeUserName(userID, userName) {
+        if (userID === this.userID) {
+            this.userName = userName;
+        }
+        this.history.changeUserName(userID, userName);
+        return this;
+    }
+
+    forEachHistoryMessage(callback, scope) {
+        this.history.forEach(callback, scope);
+        return this;
+    }
+
+    clearHistoryMessage() {
+        this.history.clear();
         return this;
     }
 }
