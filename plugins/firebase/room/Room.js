@@ -31,15 +31,25 @@ class Room {
         this.userList = CreateUserList.call(this, config);
         // Room list
         this.roomList = CreateRoomList.call(this, config);
-
         // Broadcast
         this.broadcast = CreateBroadcast.call(this, config);
     }
 
     shutdown() {
+        var self = this;
         this
             .destroyEventEmitter()
             .leaveRoom()
+            .then(function () {
+                self.userList.destroy();
+                self.userList = undefined;
+
+                self.roomList.destroy();
+                self.roomList = undefined;
+
+                self.broadcast.destroy();
+                self.broadcast = undefined;
+            })
     }
 
     destroy() {
