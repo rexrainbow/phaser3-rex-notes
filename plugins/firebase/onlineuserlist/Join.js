@@ -29,6 +29,7 @@ var Join = function (userID, userName) {
         .then(function () {
             // No user count limitation
             if (maxUsers === 0) {
+                self.isInList = true;
                 return Promise.resolve();
             }
 
@@ -36,9 +37,11 @@ var Join = function (userID, userName) {
             return rootRef.limitToFirst(maxUsers).once('value')
                 .then(function (snapshot) {
                     if (Contains(snapshot, userID)) {
+                        self.isInList = true;
                         return Promise.resolve();
                     }
 
+                    self.isInList = false;
                     // UserID is not in firstN list
                     return userRef.remove()
                         .then(function () {

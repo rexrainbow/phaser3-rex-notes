@@ -30,6 +30,7 @@ class OnlineUserList {
             }
         });
 
+        this.isInList = false;
         this.userID2ItemID = {};
         this.userList
             .on(this.userList.eventNames.add, function (user) {
@@ -40,6 +41,10 @@ class OnlineUserList {
             }, this)
             .on(this.userList.eventNames.remove, function (user) {
                 delete this.userID2ItemID[user.userID];
+
+                if (user.userID === this.userID) {
+                    this.isInList = false;
+                }
             }, this)
     }
 
