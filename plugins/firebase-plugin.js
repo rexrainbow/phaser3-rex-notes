@@ -3,6 +3,7 @@ import ObjectFactory from './firebase/ObjectFactory.js'
 import BroadcastFactory from './firebase/broadcast/Factory.js';
 import OnlineUserListFactory from './firebase/onlineuserlist/Factory.js';
 import RoomFactory from './firebase/room/Factory.js';
+import SingleRoomFactory from './firebase/singleroom/Factory.js';
 import PageLoaderFactory from './firebase/pageloader/Factory.js';
 import FilesFactory from './firebase/files/Factory.js';
 import IdAliasFactory from './firebase/idalias/Factory.js';
