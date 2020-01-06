@@ -8,7 +8,9 @@ var CreateUserList = function (config) {
             leave: 'userlist.leave', // Any user leave
             update: 'userlist.update', // Update user list
             init: 'userlist.init'
-        }
+        },
+
+        userID: this.userInfo
     });
     userList
         .on('userlist.leave', function (user) {
@@ -16,7 +18,6 @@ var CreateUserList = function (config) {
                 OnLeftRoom.call(this);  // Current user is left or kicked
             }
         }, this)
-        .setUser(this.userInfo);
 
     this
         .on('join', function () {

@@ -5,11 +5,11 @@ var CreateBroadcast = function (config) {
         eventEmitter: this.getEventEmitter(),
         eventNames: {
             receive: 'broadcast.receive'
-        }
-    });
+        },
 
-    broadcast
-        .setSender(this.userInfo);
+        receiverID: 'boradcast',
+        senderID: this.userInfo
+    });
 
     this
         .on('join', function (roomConfig) {
