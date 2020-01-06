@@ -46,6 +46,9 @@ var CreateRoomInstance = function () {
         .on('userlist.leave', function (userInfo) {
             console.log(`${room.userID}: User ${userInfo.userID} leave room ${room.roomID}`)
         })
+        .on('broadcast.receive', function (message) {
+            console.log(`${room.userID}: Receive message '${message.message}' sent from ${message.senderID}`)
+        })
     return room;
 }
 
@@ -53,6 +56,14 @@ var CreateRandomRoom = function () {
     // Simulate an user creates a random room
     var room = CreateRoomInstance.call(this)
     var userID = room.userID;
+
+    room
+        .on('userlist.join', function (userInfo) {
+            // Send welcom message later, user might not be initialized yet now
+            setTimeout(function () {
+                room.send(`Hello ${userInfo.userID}`)
+            }, 300)
+        })
     return room
         .createRandomRoom({
             digits: 6,
@@ -85,12 +96,10 @@ var JoinRoom = function (roomID) {
             .then(function (users) {
                 console.log(`Room ${prevRoomID} has users:`, users);
                 return Delay(1000)
-
             })
             .then(function () {
                 return room.joinRandomRoom()
             })
-
     }, 1000)
 
     return room

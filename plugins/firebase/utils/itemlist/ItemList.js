@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
+import Merge from '../../../utils/object/Merge.js';
 import ItemMethods from './ItemMethods.js';
 import UpdateOnce from './updaters/UpdateOnce.js';
 import UpdateChild from './updaters/UpdateChild.js';
@@ -11,16 +12,11 @@ class ItemList {
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
+        this.eventNames = Merge(GetValue(config, 'eventNames', {}), DefaultEventNames);
 
         this.isUpdating = false;
         this.items = [];
         this.itemID2Index = {};
-        this.eventNames = {
-            update: GetValue(config, 'eventNames.update', 'update'),
-            add: GetValue(config, 'eventNames.add', 'add'),
-            remove: GetValue(config, 'eventNames.remove', 'remove'),
-            change: GetValue(config, 'eventNames.change', 'change')
-        }
         this.setItemIDKey(GetValue(config, 'itemIDKey', '__itemID__'));
         this.setMode(GetValue(config, 'mode', 1));
         this.setGetitemCallback(GetValue(config, 'getItemCallback', DefaultGetItemCallback), GetValue(config, 'getItemCallbackScope', this));
@@ -103,6 +99,13 @@ Object.assign(
     EventEmitterMethods,
     ItemMethods
 );
+
+const DefaultEventNames = {
+    update: 'update',
+    add: 'add',
+    remove: 'remove',
+    change: 'change'
+}
 
 const Updaters = {
     0: UpdateOnce,

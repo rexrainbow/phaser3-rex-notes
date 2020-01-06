@@ -18,13 +18,22 @@ var CreateUserList = function (config) {
         }, this)
         .setUser(this.userInfo);
 
+    this
+        .on('join', function () {
+            userList
+                .startUpdate()
+        })
+        .on('leave', function () {
+            userList
+                .stopUpdate()
+                .clear()
+        })
+
     return userList;
 }
 
 var OnLeftRoom = function () {
-    this.userList
-        .stopUpdate()
-        .clear()
+    this.emit('leave');
 
     // Clear room info later
     var self = this;

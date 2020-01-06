@@ -25,7 +25,8 @@ class OnlineUserList {
             eventNames: {
                 add: GetValue(config, 'eventNames.join', 'join'),
                 remove: GetValue(config, 'eventNames.leave', 'leave'),
-                update: GetValue(config, 'eventNames.update', 'update')
+                update: GetValue(config, 'eventNames.update', 'update'),
+                init: GetValue(config, 'eventNames.init', 'init')
             }
         });
 
@@ -34,7 +35,7 @@ class OnlineUserList {
             .on(this.userList.eventNames.add, function (user) {
                 this.userID2ItemID[user.userID] = user.joinAt;
                 if (user.userID === this.userInfo.userID) {
-                    this.emit('init', this.getUsers());
+                    this.emit(this.userList.eventNames.init, this.getUsers());
                 }
             }, this)
             .on(this.userList.eventNames.remove, function (user) {

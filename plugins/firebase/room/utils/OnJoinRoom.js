@@ -3,7 +3,7 @@ var OnJoinRoom = function (config) {
     this.roomName = config.roomName;
     this.roomType = config.roomType;
 
-    this.userList.startUpdate();
+    this.emit('join', config);
 }
 
 export default OnJoinRoom;

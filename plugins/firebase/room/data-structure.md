@@ -43,7 +43,11 @@ rooms/
                 userID - Unique ID of user
                 userName - The name of the user
 
-        <"channel-"+channel_name> - custom channel
+        broadcast/
+            - `message` - Message
+            - `senderID` - Unique ID of sender
+	        - `senderName` - Name of sender
+	        - `stamp` - Toggle between true and false        
 
 
 # Write by each user, user could join to many rooms

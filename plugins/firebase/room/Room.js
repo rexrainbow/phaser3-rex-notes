@@ -2,6 +2,7 @@ import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js
 import GetValue from '../../utils/object/GetValue.js';
 import CreateUserList from './utils/CreateUserList.js';
 import CreateRoomList from './utils/CreateRoomList.js';
+import CreateBroadcast from './utils/CreateBroadcast.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Methods from './Methods.js';
 
@@ -30,12 +31,15 @@ class Room {
         this.userList = CreateUserList.call(this, config);
         // Room list
         this.roomList = CreateRoomList.call(this, config);
+
+        // Broadcast
+        this.broadcast = CreateBroadcast.call(this, config);
     }
 
     shutdown() {
         this
             .destroyEventEmitter()
-            .leaveRoom();
+            .leaveRoom()
     }
 
     destroy() {
@@ -86,6 +90,9 @@ class Room {
         return this.userList.maxUsers;
     }
 
+    send(message) {
+        return this.broadcast.send(message);
+    }
 }
 
 

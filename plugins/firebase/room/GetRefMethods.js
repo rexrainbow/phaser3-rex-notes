@@ -53,8 +53,16 @@ var Methods = {
         return ref;
     },
 
+    getRoomDataPath(roomID, childKey) {
+        var path = `${this.rootPath}/rooms/${roomID}`;
+        if (childKey) {
+            path += `/${childKey}`;
+        }
+        return path;
+    },
+
     getUserListPath(roomID) {
-        return `${this.rootPath}/rooms/${roomID}/users`;
+        return this.getRoomDataPath(roomID, 'users');
     },
 
     getRoomListQuery(roomType, roomState) {
