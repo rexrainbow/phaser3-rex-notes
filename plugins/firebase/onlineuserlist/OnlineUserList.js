@@ -26,7 +26,9 @@ class OnlineUserList {
                 add: GetValue(config, 'eventNames.join', 'join'),
                 remove: GetValue(config, 'eventNames.leave', 'leave'),
                 update: GetValue(config, 'eventNames.update', 'update'),
-                init: GetValue(config, 'eventNames.init', 'init')
+                change: GetValue(config, 'eventNames.change', 'change'),
+                init: GetValue(config, 'eventNames.init', 'init'),
+                changename: GetValue(config, 'eventNames.changename', 'changename')
             }
         });
 
@@ -44,6 +46,14 @@ class OnlineUserList {
 
                 if (user.userID === this.userID) {
                     this.isInList = false;
+                }
+            }, this)
+            .on(this.userList.eventNames.change, function (currUserInfo, prevUserInfo) {
+                var userID = currUserInfo.userID,
+                    userName = currUserInfo.userName,
+                    prevUserName = prevUserInfo.userName;
+                if (userName !== prevUserName) {
+                    this.emit(this.userList.eventNames.changename, userID, userName, prevUserName);
                 }
             }, this)
     }

@@ -1,4 +1,5 @@
 import Broadcast from '../../broadcast/Broadcast.js';
+import GetValue from '../../../utils/object/GetValue.js';
 
 var CreateBroadcast = function (config) {
     var broadcast = new Broadcast({
@@ -8,19 +9,21 @@ var CreateBroadcast = function (config) {
         },
 
         receiverID: 'boradcast',
-        senderID: this.userInfo
+        senderID: this.userInfo,
+        history: GetValue(config, 'boradcast.history', false)
     });
 
     this
         .on('join', function (roomConfig) {
             broadcast
                 .setRootPath(this.getRoomDataPath(roomConfig.roomID))
-                .setReceiver('boradcast')
                 .startReceiving()
         }, this)
         .on('leave', function () {
-            broadcast
-                .stopReceiving()
+            broadcast.stopReceiving()
+        }, this)
+        .on('userlist.changename', function (userID, userName) {
+            broadcast.changeUserName(userID, userName);
         }, this)
 
     return broadcast;

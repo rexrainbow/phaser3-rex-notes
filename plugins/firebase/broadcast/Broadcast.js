@@ -95,12 +95,11 @@ class Broadcast {
         return this;
     }
 
-    forEachHistoryMessage(callback, scope) {
-        this.history.forEach(callback, scope);
-        return this;
+    getHistory() {
+        return this.history.records;
     }
 
-    clearHistoryMessage() {
+    clearHistory() {
         this.history.clear();
         return this;
     }

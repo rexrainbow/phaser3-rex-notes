@@ -7,7 +7,8 @@ var CreateUserList = function (config) {
             join: 'userlist.join', // Any user join
             leave: 'userlist.leave', // Any user leave
             update: 'userlist.update', // Update user list
-            init: 'userlist.init'
+            init: 'userlist.init',
+            changename: 'userlist.changename'
         },
 
         userID: this.userInfo

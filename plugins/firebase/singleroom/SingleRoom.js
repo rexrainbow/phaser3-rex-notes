@@ -70,6 +70,10 @@ class SingleRoom {
     send(message) {
         return this.broadcast.send(message);
     }
+
+    getBroadcastHistory() {
+        return this.broadcast.getHistory();
+    }
 }
 
 Object.assign(

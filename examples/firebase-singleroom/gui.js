@@ -21,7 +21,10 @@ class Demo extends Phaser.Scene {
 
         var rexFire = this.plugins.get('rexFire').initializeApp(firebaseConfig);
         var room = rexFire.add.singleRoom({
-            root: 'simple-room-ui'
+            root: 'simple-room-ui',
+            broadcast: {
+                history: true
+            }
         });
 
         var mainPanel = CreateMainPanel(this, {
@@ -39,23 +42,29 @@ class Demo extends Phaser.Scene {
             .layout();
 
         // Control
-
         mainPanel
             .on('send-message', function (userName, message) {
                 room.send(message)
             })
+            .on('change-name', function (newUserName, preUserName) {
+                room.changeUserName(newUserName);
+            })
+
         room
             .on('userlist.update', function (users) {
-                var s = []
-                users.forEach(function (user) {
-                    s.push(user.userName)
-                })
-                s = s.join('\n');
-                mainPanel.setUserList(s);
+                mainPanel.setUserList(users);
             })
             .on('broadcast.receive', function (d) {
                 var s = `[${d.senderName}] ${d.message}\n`;
                 mainPanel.appendMessage(s);
+            })
+            .on('userlist.changename', function () {
+                var history = room.getBroadcastHistory();
+                var s = [];
+                history.forEach(function (d) {
+                    s.push(`[${d.senderName}] ${d.message}\n`)
+                })
+                mainPanel.setMessage(s.join(''))
             })
             .setUser(userID, userName)
             .joinRoom()
@@ -129,8 +138,12 @@ var CreateUserListBox = function (parent, config) {
     });
 
     // Control
-    parent.setUserList = function (content) {
-        userListBox.setText(content);
+    parent.setUserList = function (users) {
+        var s = []
+        users.forEach(function (user) {
+            s.push(user.userName)
+        })
+        userListBox.setText(s.join('\n'));
     }
     return userListBox;
 }
@@ -154,6 +167,11 @@ var CreateMessageBox = function (parent, config) {
     parent.appendMessage = function (s) {
         messageBox
             .appendText(s)
+            .scrollToBottom()
+    }
+    parent.setMessage = function (s) {
+        messageBox
+            .setText(s)
             .scrollToBottom()
     }
     return messageBox;
@@ -214,7 +232,17 @@ var CreateInputPanel = function (parent, config) {
     userNameBox
         .setInteractive()
         .on('pointerdown', function () {
-            scene.rexUI.edit(userNameBox);
+            var prevUserName = userNameBox.text;
+            scene.rexUI.edit(
+                userNameBox,  // text game object
+                undefined,  // Config
+                function (textObject) { // onClose
+                    var currUserName = textObject.text
+                    if (currUserName !== prevUserName) {
+                        parent.emit('change-name', currUserName, prevUserName);
+                    }
+                }
+            );
         });
 
     inputBox

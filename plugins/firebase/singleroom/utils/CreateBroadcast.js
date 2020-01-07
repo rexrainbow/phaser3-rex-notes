@@ -1,4 +1,5 @@
 import Broadcast from '../../broadcast/Broadcast.js';
+import GetValue from '../../../utils/object/GetValue.js';
 
 var CreateBroadcast = function (config) {
     var broadcast = new Broadcast({
@@ -8,13 +9,21 @@ var CreateBroadcast = function (config) {
         },
 
         root: this.rootPath,
-        receiverID: 'boradcast',
-        senderID: this.userInfo
+        receiverID: 'broadcast',
+        senderID: this.userInfo,
+        history: GetValue(config, 'broadcast.history', false)
     });
 
     this
-        .on('join', broadcast.startReceiving, broadcast)
-        .on('leave', broadcast.stopReceiving, broadcast)
+        .on('join', function () {
+            broadcast.startReceiving()
+        })
+        .on('leave', function () {
+            broadcast.stopReceiving()
+        })
+        .on('userlist.changename', function (userID, userName) {
+            broadcast.changeUserName(userID, userName);
+        }, this)
 
     return broadcast;
 }

@@ -103,6 +103,10 @@ class Room {
     send(message) {
         return this.broadcast.send(message);
     }
+
+    getBroadcastHistory() {
+        return this.broadcast.getHistory();
+    }
 }
 
 

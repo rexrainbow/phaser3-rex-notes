@@ -12,7 +12,7 @@ class History {
         }
 
         this.records.push(record);
-        if (this.records.length > this.maxLength) {
+        if ((this.maxLength > 0) && (this.records.length > this.maxLength)) {
             this.records.shift();
         }
         return this;
@@ -20,15 +20,6 @@ class History {
 
     clear() {
         this.records.length = 0;
-        return this;
-    }
-
-    forEach(callback, scope) {
-        if (this.maxLength === 0) {
-            return this;
-        }
-
-        this.records.forEach(callback, scope);
         return this;
     }
 
