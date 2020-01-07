@@ -43,10 +43,10 @@ class Demo extends Phaser.Scene {
 
         // Control
         mainPanel
-            .on('send-message', function (userName, message) {
+            .on('send-message', function (message) {
                 room.send(message)
             })
-            .on('change-name', function (newUserName, preUserName) {
+            .on('change-name', function (newUserName) {
                 room.changeUserName(newUserName);
             })
 
@@ -54,17 +54,11 @@ class Demo extends Phaser.Scene {
             .on('userlist.update', function (users) {
                 mainPanel.setUserList(users);
             })
-            .on('broadcast.receive', function (d) {
-                var s = `[${d.senderName}] ${d.message}\n`;
-                mainPanel.appendMessage(s);
+            .on('broadcast.receive', function (message) {
+                mainPanel.appendMessage(message);
             })
             .on('userlist.changename', function () {
-                var history = room.getBroadcastHistory();
-                var s = [];
-                history.forEach(function (d) {
-                    s.push(`[${d.senderName}] ${d.message}\n`)
-                })
-                mainPanel.setMessages(s.join(''))
+                mainPanel.setMessages(room.getBroadcastHistory())
             })
             .setUser(userID, userName)
             .joinRoom()
@@ -164,14 +158,22 @@ var CreateMessageBox = function (parent, config) {
     });
 
     // Control
-    parent.appendMessage = function (s) {
+    var messageToString = function (message) {
+        return `[${message.senderName}] ${message.message}\n`;
+    }
+    parent.appendMessage = function (message) {
+        var s = messageToString(message);
         messageBox
             .appendText(s)
             .scrollToBottom()
     }
-    parent.setMessages = function (s) {
+    parent.setMessages = function (messages) {
+        var s = [];
+        messages.forEach(function (message) {
+            s.push(messageToString(message))
+        })
         messageBox
-            .setText(s)
+            .setText(s.join(''))
             .scrollToBottom()
     }
     return messageBox;
@@ -224,7 +226,7 @@ var CreateInputPanel = function (parent, config) {
         .setInteractive()
         .on('pointerdown', function () {
             if (inputBox.text !== '') {
-                parent.emit('send-message', userNameBox.text, inputBox.text);
+                parent.emit('send-message', inputBox.text, userNameBox.text);
                 inputBox.text = '';
             }
         });
