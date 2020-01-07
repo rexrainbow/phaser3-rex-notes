@@ -1,15 +1,15 @@
-import Preload from './firebase/utils/preload/Preload.js';
+import Preload from './firebase/preload/Preload.js';
 import ObjectFactory from './firebase/ObjectFactory.js'
 
-import BroadcastFactory from './firebase/broadcast/Factory.js';
-import OnlineUserListFactory from './firebase/onlineuserlist/Factory.js';
-import RoomFactory from './firebase/room/Factory.js';
-import SingleRoomFactory from './firebase/singleroom/Factory.js';
-import PageLoaderFactory from './firebase/pageloader/Factory.js';
-import FilesFactory from './firebase/files/Factory.js';
-import IdAliasFactory from './firebase/idalias/Factory.js';
-import LeaderBoardFactory from './firebase/leaderboard/Factory.js';
-import MessagesFactory from './firebase/messages/Factory.js';
+import BroadcastFactory from './firebase/database/broadcast/Factory.js';
+import OnlineUserListFactory from './firebase/database/onlineuserlist/Factory.js';
+import RoomFactory from './firebase/database/room/Factory.js';
+import SingleRoomFactory from './firebase/database/singleroom/Factory.js';
+import PageLoaderFactory from './firebase/firestore/pageloader/Factory.js';
+import FilesFactory from './firebase/firestore/files/Factory.js';
+import IdAliasFactory from './firebase/firestore/idalias/Factory.js';
+import LeaderBoardFactory from './firebase/firestore/leaderboard/Factory.js';
+import MessagesFactory from './firebase/firestore/messages/Factory.js';
 
 class FirebasePlugin {
     constructor() {
