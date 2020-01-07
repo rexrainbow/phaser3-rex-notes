@@ -14,12 +14,12 @@ var CreateBroadcast = function (config) {
     });
 
     this
-        .on('join', function (roomConfig) {
+        .on('room.join', function (roomConfig) {
             broadcast
                 .setRootPath(this.getRoomDataPath(roomConfig.roomID))
                 .startReceiving()
         }, this)
-        .on('leave', function () {
+        .on('room.leave', function () {
             broadcast.stopReceiving()
         }, this)
         .on('userlist.changename', function (userID, userName) {

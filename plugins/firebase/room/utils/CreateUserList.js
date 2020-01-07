@@ -7,6 +7,7 @@ var CreateUserList = function (config) {
             join: 'userlist.join', // Any user join
             leave: 'userlist.leave', // Any user leave
             update: 'userlist.update', // Update user list
+            change: 'userlist.change', // Any user(name) change
             init: 'userlist.init',
             changename: 'userlist.changename'
         },
@@ -21,11 +22,11 @@ var CreateUserList = function (config) {
         }, this)
 
     this
-        .on('join', function () {
+        .on('room.join', function () {
             userList
                 .startUpdate()
         })
-        .on('leave', function () {
+        .on('room.leave', function () {
             userList
                 .stopUpdate()
                 .clear()
@@ -35,7 +36,7 @@ var CreateUserList = function (config) {
 }
 
 var OnLeftRoom = function () {
-    this.emit('leave');
+    this.emit('room.leave');
 
     // Clear room info later
     var self = this;

@@ -64,7 +64,7 @@ class Demo extends Phaser.Scene {
                 history.forEach(function (d) {
                     s.push(`[${d.senderName}] ${d.message}\n`)
                 })
-                mainPanel.setMessage(s.join(''))
+                mainPanel.setMessages(s.join(''))
             })
             .setUser(userID, userName)
             .joinRoom()
@@ -169,7 +169,7 @@ var CreateMessageBox = function (parent, config) {
             .appendText(s)
             .scrollToBottom()
     }
-    parent.setMessage = function (s) {
+    parent.setMessages = function (s) {
         messageBox
             .setText(s)
             .scrollToBottom()

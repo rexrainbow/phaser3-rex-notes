@@ -2,7 +2,7 @@ var JoinRoom = function () {
     var self = this;
     return this.userList.join()
         .then(function () {
-            self.emit('join');
+            self.emit('room.join');
             return Promise.resolve();
         })
 }

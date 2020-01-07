@@ -15,10 +15,10 @@ var CreateBroadcast = function (config) {
     });
 
     this
-        .on('join', function () {
+        .on('room.join', function () {
             broadcast.startReceiving()
         })
-        .on('leave', function () {
+        .on('room.leave', function () {
             broadcast.stopReceiving()
         })
         .on('userlist.changename', function (userID, userName) {

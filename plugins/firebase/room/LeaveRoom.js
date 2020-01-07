@@ -3,7 +3,7 @@ var LeaveRoom = function () {
         return Promise.resolve();
     }
 
-    // 'userlist.leave' event -> 'leave' event -> then
+    // 'userlist.leave' event -> 'room.leave' event -> then
     this.leftRoomFlag = true;
     if (this.isRemoveRoomWhenLeft) {
         // Remove room, include user list
