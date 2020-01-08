@@ -11,34 +11,34 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const Line = Phaser.Geom.Line;
 
 class Hexagon extends Polygon {
-    constructor(x, y, size, type) {
+    constructor(x, y, size, orientationType) {
         super();
         if (IsPlainObject(x)) {
             var config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             size = GetValue(config, 'size', 0);
-            type = GetValue(config, 'type', 1);
+            orientationType = GetValue(config, 'type', 1);
         }
         var points = this.points;
         for (var i = 0; i < 6; i++) {
             points.push({});
         }
-        this.setTo(x, y, size, type);
+        this.setTo(x, y, size, orientationType);
     }
 
     // override
-    setTo(x, y, size, type) {
-        if (typeof (type) === 'string') {
-            type = ORIENTATIONTYPE[type]
+    setTo(x, y, size, orientationType) {
+        if (typeof (orientationType) === 'string') {
+            orientationType = ORIENTATIONTYPE[orientationType]
         }
 
         this._x = x;
         this._y = y;
         this._size = size;
-        this._type = type;
+        this._orientationType = orientationType;
 
-        SetPoints(x, y, size, type, this.points);
+        SetPoints(x, y, size, orientationType, this.points);
         this.calculateArea();
         this.width = Width(this);
         this.height = Height(this);
@@ -136,7 +136,7 @@ class Hexagon extends Polygon {
     }
 
     set size(value) {
-        this.setTo(this._x, this._y, value, this.type);
+        this.setTo(this._x, this._y, value, this._orientationType);
     }
 
     setSize(value) {
@@ -144,16 +144,16 @@ class Hexagon extends Polygon {
         return this;
     }
 
-    get type() {
-        return this._type;
+    get orientationType() {
+        return this._orientationType;
     }
 
-    set type(value) {
+    set orientationType(value) {
         this.setTo(this._x, this._y, this._size, value);
     }
 
-    setType(type) {
-        this.type = type;
+    setType(orientationType) {
+        this.orientationType = orientationType;
     }
 
     isEmpty() {

@@ -47,7 +47,7 @@ var game = new Phaser.Game(config);
 ### Create shape
 
 ```javascript
-var hexagon = scene.plugins.get('rexHexagon').add(x, y, size, type);
+var hexagon = scene.plugins.get('rexHexagon').add(x, y, size, orientationType);
 ```
 or
 ```javascript
@@ -55,19 +55,19 @@ var hexagon = scene.plugins.get('rexHexagon').add({
     x: 0,
     y: 0,
     size: 20,
-    type: 0     // 0|'flat'|'vertical'|1|'pointy'|'horizontal'
+    orientationType: 0     // 0|'flat'|'vertical'|1|'pointy'|'horizontal'
 });
 ```
 or
 ```javascript
-var hexagon = new rexHexagon(x, y, size, type);
-// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, type);
+var hexagon = new rexHexagon(x, y, size, orientationType);
+// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, orientationType);
 ```
 
 - `x` : Center X.
 - `y` : Center Y.
 - `size` : Distance between center to each corner.
-- `type` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
+- `orientationType` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
     - `0`, `'flat'`, or `'y'`
     - `1`, `'pointy'` or ,`'x'`
 
@@ -79,7 +79,7 @@ See [Polygon shape](geom-polygon.md#draw-on-graphics).
 
 - All properties
     ```javascript
-    hexagon.setTo(x, y, size, type);
+    hexagon.setTo(x, y, size, orientationType);
     ```
 - Position
     ```javascript
@@ -110,15 +110,15 @@ See [Polygon shape](geom-polygon.md#draw-on-graphics).
     ```javascript
     hexagon.size = size;
     ```
-- Type
+- Orientation type
     ```javascript
-    hexagon.setType(type);
+    hexagon.setType(orientationType);
     ```
     or
     ```javascript
-    hexagon.type = type;
+    hexagon.orientationType = orientationType;
     ```
-    - `type` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
+    - `orientationType` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
         - `0`, `'flat'`, or `'y'`
         - `1`, `'pointy'` or ,`'x'` 
 

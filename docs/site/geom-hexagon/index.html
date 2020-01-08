@@ -4823,25 +4823,25 @@
 </pre></div>
 
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHexagon&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">type</span><span class="p">);</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHexagon&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">orientationType</span><span class="p">);</span>
 </pre></div>
 or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHexagon&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">size</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="mi">0</span>     <span class="c1">// 0|&#39;flat&#39;|&#39;vertical&#39;|1|&#39;pointy&#39;|&#39;horizontal&#39;</span>
+    <span class="nx">orientationType</span><span class="o">:</span> <span class="mi">0</span>     <span class="c1">// 0|&#39;flat&#39;|&#39;vertical&#39;|1|&#39;pointy&#39;|&#39;horizontal&#39;</span>
 <span class="p">});</span>
 </pre></div>
 or
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexHexagon</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">type</span><span class="p">);</span>
-<span class="c1">// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, type);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexHexagon</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">orientationType</span><span class="p">);</span>
+<span class="c1">// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, orientationType);</span>
 </pre></div></p>
 <ul>
 <li><code>x</code> : Center X.</li>
 <li><code>y</code> : Center Y.</li>
 <li><code>size</code> : Distance between center to each corner.</li>
-<li><code>type</code> : See <a href="https://www.redblobgames.com/grids/hexagons/#basics">here</a><ul>
+<li><code>orientationType</code> : See <a href="https://www.redblobgames.com/grids/hexagons/#basics">here</a><ul>
 <li><code>0</code>, <code>'flat'</code>, or <code>'y'</code></li>
 <li><code>1</code>, <code>'pointy'</code> or ,<code>'x'</code></li>
 </ul>
@@ -4852,7 +4852,7 @@ or
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All properties
-    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">type</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">orientationType</span><span class="p">);</span>
 </pre></div></li>
 <li>Position
     <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
@@ -4877,13 +4877,13 @@ or
     or
     <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="nx">size</span><span class="p">;</span>
 </pre></div></li>
-<li>Type
-    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
+<li>Orientation type
+    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">orientationType</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">orientationType</span> <span class="o">=</span> <span class="nx">orientationType</span><span class="p">;</span>
 </pre></div><ul>
-<li><code>type</code> : See <a href="https://www.redblobgames.com/grids/hexagons/#basics">here</a><ul>
+<li><code>orientationType</code> : See <a href="https://www.redblobgames.com/grids/hexagons/#basics">here</a><ul>
 <li><code>0</code>, <code>'flat'</code>, or <code>'y'</code></li>
 <li><code>1</code>, <code>'pointy'</code> or ,<code>'x'</code> </li>
 </ul>
