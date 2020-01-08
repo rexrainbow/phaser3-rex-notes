@@ -27,6 +27,7 @@
 
 ## File structure
 
+- Folder `dist` : Plugin minify files
 - Folder `plugins`, `templates` : Source code of plugins and templates
 - Folder `examples` : Test code of plugins
 - Folder `docs` : Some notes of phaser3, and my plugins.
