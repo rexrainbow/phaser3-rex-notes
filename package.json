@@ -6,7 +6,8 @@
     "files": [
         "plugins",
         "templates",
-        "dist"
+        "dist",
+        "rollup"
     ],
     "main": "./plugins/index.js",
     "scripts": {
