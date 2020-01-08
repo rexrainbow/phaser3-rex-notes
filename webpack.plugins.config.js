@@ -6,9 +6,6 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
-        // single pack
-        'plugins': './plugins/index.js',
-
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
         'bbcodetext': './plugins/bbcodetext.js',
