@@ -7,7 +7,7 @@ A container with pages, only current page is visible.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexuiplugin.min.js)
 
 [Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/pages/Pages.js)
 

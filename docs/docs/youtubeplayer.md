@@ -7,7 +7,7 @@ Play youtube video on iframe.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexyoutubeplayerplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexyoutubeplayerplugin.min.js)
 
 [Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer.js)
 

@@ -7,7 +7,7 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/webfontloader-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexwebfontloaderplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/webfontloader-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexwebfontloaderplugin.min.js)
 
 ## Usage
 

@@ -7,7 +7,7 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexvideoplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexvideoplugin.min.js)
 
 [Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video.js)
 

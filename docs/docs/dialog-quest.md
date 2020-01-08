@@ -7,7 +7,7 @@ Flow control of [question manager](quest.md) with a [dialog](ui-dialog.md).
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/dialog-quest/DialogQuest.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexdialogquest.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/dialog-quest/DialogQuest.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexdialogquest.min.js)
 
 ## Usage
 

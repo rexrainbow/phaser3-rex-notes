@@ -7,7 +7,7 @@
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inputtext-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexinputtextplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inputtext-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexinputtextplugin.min.js)
 
 [Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inputtext.js)
 

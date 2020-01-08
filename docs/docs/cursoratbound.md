@@ -7,7 +7,7 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/cursoratbound-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexcursoratboundplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/cursoratbound-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcursoratboundplugin.min.js)
 
 ## Usage
 

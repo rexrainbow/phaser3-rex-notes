@@ -7,7 +7,7 @@ Map mouse-wheeling to (up/down) cursor key state.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/mousewheeltoupdown-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexmousewheeltoupdownplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/mousewheeltoupdown-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexmousewheeltoupdownplugin.min.js)
 
 ## Usage
 

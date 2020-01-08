@@ -7,7 +7,7 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextexttypingplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexttypingplugin.min.js)
 
 ## Usage
 

@@ -7,7 +7,7 @@ Adjust color in HSL domain, post processing filter.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/hsladjustpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexhsladjustpipelineplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/hsladjustpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexhsladjustpipelineplugin.min.js)
 
 ## Usage
 

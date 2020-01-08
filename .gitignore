@@ -1,4 +1,4 @@
 /node_modules/*
-/dist/*
+/preview-dist/*
 /index.html
 package-lock.json

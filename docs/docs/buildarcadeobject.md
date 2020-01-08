@@ -7,7 +7,7 @@ Create arcade body, and inject arcade object methods.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/buildarcadeobject-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexbuildarcadeobjectplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/buildarcadeobject-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbuildarcadeobjectplugin.min.js)
 
 ## Usage
 

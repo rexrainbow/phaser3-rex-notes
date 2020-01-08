@@ -7,7 +7,7 @@ Perlin2/Perlin3 noise and simplex2/simplex3 noise. ([Reference](https://github.c
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/perlin-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexperlinplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/perlin-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexperlinplugin.min.js)
 
 ## Usage
 

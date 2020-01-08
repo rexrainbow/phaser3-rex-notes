@@ -7,7 +7,7 @@ Rhombus shape and methods, extends from [Polygon shape](geom-rhombus.md).
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/rhombus-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexrhombusplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/rhombus-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexrhombusplugin.min.js)
 
 ## Usage
 

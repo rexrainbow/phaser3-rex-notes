@@ -7,7 +7,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/toonifypipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextoonifypipelineplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/toonifypipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextoonifypipelineplugin.min.js)
 
 ## Usage
 

@@ -7,7 +7,7 @@ Match3-like gameplay template.
 
 ## Source code
 
-[Template](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/bejeweled/Bejeweled.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexbejeweled.min.js)
+[Template](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/bejeweled/Bejeweled.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbejeweled.min.js)
 
 ## Usage
 

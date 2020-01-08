@@ -7,7 +7,7 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pixelationpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexpixelationpipelineplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pixelationpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexpixelationpipelineplugin.min.js)
 
 ## Usage
 

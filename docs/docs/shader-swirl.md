@@ -7,7 +7,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/swirlpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexswirlpipelineplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/swirlpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexswirlpipelineplugin.min.js)
 
 ## Usage
 
