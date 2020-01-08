@@ -1,4 +1,4 @@
-import TileData from './TileData.js';
+import { CreateTileData } from './TileData.js';
 import AreTileXYEqual from '../utils/AreTileXYEqual.js';
 
 import GetRandom from '../../utils/array/GetRandom.js';
@@ -18,7 +18,7 @@ var GetNextTile = function (curTileData, preTileData) {
         if (!board.contains(neighborTileXY.x, neighborTileXY.y, this.pathTileZ)) {
             continue;
         }
-        neighborTileData = new TileData(neighborTileXY.x, neighborTileXY.y, directions[i]);
+        neighborTileData = CreateTileData(neighborTileXY.x, neighborTileXY.y, directions[i]);
 
         if (directions[i] === curTileData.direction) {
             forwardTileData = neighborTileData;

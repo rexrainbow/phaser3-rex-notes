@@ -1,14 +1,5 @@
-class TileData {
-    constructor(x, y, direction) {
-        this.setTo(x, y, direction);
-    }
-
-    setTo(x, y, direction) {
-        this.x = x;
-        this.y = y;
-        this.direction = direction;
-        return this;
-    }
+var CreateTileData = function (x, y, direction) {
+    return { x: x, y: y, direction: direction };
 }
 
-export default TileData;
+export { CreateTileData };

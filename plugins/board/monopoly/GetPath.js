@@ -1,4 +1,4 @@
-import TileData from './TileData.js';
+import { CreateTileData } from './TileData.js';
 import CONST from './const.js';
 
 const STOP = CONST.STOP;
@@ -11,7 +11,7 @@ var GetPath = function (movingPoints, out) {
         return out;
     }
     var curTileXYZ = this.chessData.tileXYZ,
-        curTileData = new TileData(curTileXYZ.x, curTileXYZ.y, this.face),
+        curTileData = CreateTileData(curTileXYZ.x, curTileXYZ.y, this.face),
         nextTileData;
     var cost;
     while (movingPoints > 0) {
