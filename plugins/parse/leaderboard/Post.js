@@ -32,7 +32,7 @@ var Post = function (score, extraData) {
     }
     var curTimeData = GetTime();
     var self = this;
-    return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1).find()
+    return this.getMyRecordQuery().find()
         .then(function (results) {
             var prevRecord = results[0];
             if (prevRecord) {

@@ -14,6 +14,10 @@ var Methods = {
         return query;
     },
 
+    getMyRecordQuery() {        
+        return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
+    },
+
     getPageQuery() {
         var timeTagKey, scoreKey;
         if (this.timeFilters !== false) {
