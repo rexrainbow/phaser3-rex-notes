@@ -6,7 +6,7 @@ class PageLoader {
         this.items = [];
         this.startIndex = 0;
         this.pageIndex = 0;
-        this.isLastPage = false;
+        this.isFullPage = false;
         this.setItemCount(GetValue(config, 'itemCount', 100));
         this.setQuery(GetValue(config, 'query', undefined));
     }

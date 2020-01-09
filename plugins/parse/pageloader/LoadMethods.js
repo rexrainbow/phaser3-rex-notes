@@ -17,11 +17,11 @@ var Methods = {
                 self.items = items;
                 self.startIndex = startIndex;
                 self.pageIndex = Math.floor(startIndex / self.itemCount);
-                self.isLastPage = (itemCount === Infinity) ? true : (itemCount > items.length);
+                self.isFullPage = (itemCount === Infinity) ? true : (itemCount === items.length);
                 return Promise.resolve(items);
             })
             .catch(function (error) {
-                self.isLastPage = false;
+                self.isFullPage = false;
                 return Promise.reject(error);
             })
     },
