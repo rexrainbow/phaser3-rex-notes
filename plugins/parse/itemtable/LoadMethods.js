@@ -2,8 +2,23 @@ import Load from '../utils/query/Load.js';
 import LoadRandomItems from './LoadRandomItems.js';
 
 var Methods = {
-    loadItem(itemId) {
-        return this.baseQuery.get(itemId);
+    loadItem(itemId, select) {
+        if (typeof (itemId) === 'string') {
+            var query = this.baseQuery;
+            if (select) {
+                query = query.select(select);
+            }
+            return query.get(itemId);
+        } else { // Query by primary keys
+            var query = this.getQuery(itemId).limit(1);
+            if (select) {
+                query = query.select(select);
+            }
+            return query.find()
+                .then(function (result) {
+                    return Promise.resolve(result[0]);
+                })
+        }
     },
 
     loadPage(pageIndex) {

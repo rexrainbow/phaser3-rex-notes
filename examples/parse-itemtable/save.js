@@ -36,35 +36,35 @@ class Demo extends Phaser.Scene {
                 }
             )
             .then(function (item) {
-                console.log(JSON.parse(JSON.stringify(item)));
+                console.log('Save result:', JSON.parse(JSON.stringify(item)));
                 return table.loadItem(item.id);
             })
             .then(function (item) {
-                console.log(JSON.parse(JSON.stringify(item)));
+                console.log('Load result', JSON.parse(JSON.stringify(item)));
+                return table.save({
+                    name: 'player0',
+                    coin: 30
+                })
             })
+            .then(function (item) {
+                console.log('Save result:', JSON.parse(JSON.stringify(item)));
+                return table.loadItem(item.id);
+            })
+            .then(function (item) {
+                console.log('Load result', JSON.parse(JSON.stringify(item)));
+                return table.save([
+                    { name: 'player0', hp: 1 },
+                    { name: 'player1', hp: 3 }
+                ])
+            })
+            .then(function (items) {
+                console.log('Save result', JSON.parse(JSON.stringify(items)));
+            })
+
             .catch(function (error) {
                 console.log(error);
             });
 
-        table
-            // save parse item
-            .save(
-                table.createItem()
-                    .set('name', 'player1')
-                    .set('hp', 100)
-                    .increment('mp', 1)
-                    .set('coin', 100)
-            )
-            .then(function (item) {
-                console.log(JSON.parse(JSON.stringify(item)));
-                return table.loadItem(item.id);
-            })
-            .then(function (item) {
-                console.log(JSON.parse(JSON.stringify(item)));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     }
 
     update() { }

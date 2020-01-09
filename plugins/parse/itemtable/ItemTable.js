@@ -1,5 +1,6 @@
 import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../pageloader/PageLoader.js';
+import GetQuery from './GetQuery.js';
 import LoadMethods from './LoadMethods.js';
 import DeleteMethods from './DeleteMethods.js';
 import Copy from '../../utils/array/Copy.js';
@@ -87,6 +88,7 @@ class ItemTable {
 }
 
 var methods = {
+    getQuery: GetQuery,
     save: Save,
     saveItems: SaveItems,
     getItemCount: GetItemCount,

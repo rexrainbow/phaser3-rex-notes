@@ -51,9 +51,8 @@ var Post = function (score, extraData) {
                 } else { // No time filters
                     newRecord.score = Math.max(prevRecord.get('score'), newRecord.score);
                 }
-                newRecord.id = prevRecord.id;
             }
-            var item = DataToItem(newRecord, self.customClass);
+            var item = DataToItem(newRecord, self.customClass, prevRecord);
             return item.save();
         });
 }

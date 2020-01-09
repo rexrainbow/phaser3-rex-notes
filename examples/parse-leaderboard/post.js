@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
         leaderboard
             // Save json data
             .setUser('aabb', 'rex')
-            .post(120)
+            .post(100)
             .then(function (result) {
                 console.log(JSON.parse(JSON.stringify(result)));
             })
