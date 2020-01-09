@@ -4,7 +4,7 @@ import Post from './Post.js';;
 // import LoadMethods from './LoadMethods.js';
 import GetScore from './GetScore.js';
 // import GetRank from './GetRank.js';
-// import DeleteMethods from './DeleteMethods.js';
+import DeleteMethods from './DeleteMethods.js';
 import GetQueryMethods from './GetQueryMethods.js';
 import PageLoader from '../pageloader/PageLoader.js';
 
@@ -121,7 +121,7 @@ Object.assign(
     methods,
     GetQueryMethods,
     // LoadMethods,
-    // DeleteMethods
+    DeleteMethods
 );
 
 export default LeaderBoard;
