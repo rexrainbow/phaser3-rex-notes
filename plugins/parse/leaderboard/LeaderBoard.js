@@ -3,7 +3,7 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
 import LoadMethods from './LoadMethods.js';
 import GetScore from './GetScore.js';
-// import GetRank from './GetRank.js';
+import GetRank from './GetRank.js';
 import DeleteMethods from './DeleteMethods.js';
 import GetQueryMethods from './GetQueryMethods.js';
 import PageLoader from '../pageloader/PageLoader.js';
@@ -117,7 +117,7 @@ class LeaderBoard {
 var methods = {
     post: Post,
     getScore: GetScore,
-    // getRank: GetRank
+    getRank: GetRank
 }
 
 Object.assign(

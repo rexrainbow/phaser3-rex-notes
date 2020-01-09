@@ -14,8 +14,11 @@ var Methods = {
         return query;
     },
 
-    getMyRecordQuery() {        
-        return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1);
+    getMyRecordQuery(userID) {        
+        if (userID === undefined) {
+            userID = this.userID;
+        }
+        return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
     },
 
     getPageQuery() {

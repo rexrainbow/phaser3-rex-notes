@@ -1,11 +1,8 @@
 import { TimeTagKeys, ScoreKeys, FullTimeName } from './Const.js';
 
 var GetScore = function (userID) {
-    if (userID === undefined) {
-        userID = this.userID;
-    }
     var self = this;
-    return this.getMyRecordQuery().get()
+    return this.getMyRecordQuery(userID).get()
         .then(function (querySnapshot) {
             var item;
             if (querySnapshot.size > 0) {

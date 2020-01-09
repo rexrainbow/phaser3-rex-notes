@@ -1,11 +1,8 @@
 import { TimeTagKeys, ScoreKeys, FullTimeName } from './Const.js';
 
 var GetScore = function (userID) {
-    if (userID === undefined) {
-        userID = this.userID;
-    }
     var self = this;
-    return this.getMyRecordQuery().find()
+    return this.getMyRecordQuery(userID).find()
         .then(function (results) {
             var myRecord = results[0];
             if (myRecord) {
@@ -13,9 +10,9 @@ var GetScore = function (userID) {
                 if (self.timeFilters !== false) {
                     var scores = {};
                     for (var t in self.timeFilters) {
-                        scores[FullTimeName[t]] = [item[ScoreKeys[t]], item[TimeTagKeys[t]]];
-                        delete item[TimeTagKeys[t]];
-                        delete item[ScoreKeys[t]];
+                        scores[FullTimeName[t]] = [myRecord[ScoreKeys[t]], myRecord[TimeTagKeys[t]]];
+                        delete myRecord[TimeTagKeys[t]];
+                        delete myRecord[ScoreKeys[t]];
                     }
                     myRecord.scores = scores;
                 }
