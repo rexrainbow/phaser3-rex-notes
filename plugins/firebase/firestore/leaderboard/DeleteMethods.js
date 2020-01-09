@@ -1,7 +1,7 @@
 import Delete from '../utils/query/Delete.js';
 
 var Methods = {
-    deleteUserScores(userID) {
+    deleteUserScore(userID) {
         if (userID === undefined) {
             userID = this.userID;
         }
