@@ -1,7 +1,7 @@
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import Post from './Post.js';;
-// import LoadMethods from './LoadMethods.js';
+import LoadMethods from './LoadMethods.js';
 import GetScore from './GetScore.js';
 // import GetRank from './GetRank.js';
 import DeleteMethods from './DeleteMethods.js';
@@ -49,6 +49,7 @@ class LeaderBoard {
     }
 
     setClassName(className) {
+        this.resetQueryFlag = true;
         this.customClass = Parse.Object.extend(className);
         return this;
     }
@@ -64,11 +65,13 @@ class LeaderBoard {
     }
 
     setBoardID(boardID) {
+        this.resetQueryFlag |= (this.boardID !== boardID);
         this.boardID = boardID;
         return this;
     }
 
     setTag(tag) {
+        this.resetQueryFlag |= (this.tag !== tag);
         this.tag = tag;
         return this;
     }
@@ -88,6 +91,7 @@ class LeaderBoard {
     }
 
     setTimeFilterType(type) {
+        this.resetQueryFlag |= (this.timeFilterType !== type);
         this.timeFilterType = type;
         return this;
     }
@@ -120,7 +124,7 @@ Object.assign(
     LeaderBoard.prototype,
     methods,
     GetQueryMethods,
-    // LoadMethods,
+    LoadMethods,
     DeleteMethods
 );
 

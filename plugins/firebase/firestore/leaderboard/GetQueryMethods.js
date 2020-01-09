@@ -15,7 +15,7 @@ var Methods = {
     },
 
     getMyRecordQuery() {
-        return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
+        return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1);
     },
 
     getPageQuery() {

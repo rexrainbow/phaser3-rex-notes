@@ -31,6 +31,10 @@ var Methods = {
         return this.loadItems(startIndex, this.itemCount);
     },
 
+    loadFirstPage() {
+        return this.loadItems(0, this.itemCount);
+    },
+
     loadCurrentPage() {
         return this.loadItems(this.startIndex, this.itemCount);
     },

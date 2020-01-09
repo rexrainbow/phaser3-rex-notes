@@ -15,7 +15,7 @@ var Methods = {
     },
 
     getMyRecordQuery() {        
-        return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1);
+        return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1);
     },
 
     getPageQuery() {
@@ -29,13 +29,9 @@ var Methods = {
             scoreKey = 'score';
         }
 
-        var baseQuery = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
-        var nextPageQuery = baseQuery.orderBy(scoreKey, 'desc');
-        var prevPageQuery = baseQuery.orderBy(scoreKey);
-        return {
-            next: nextPageQuery,
-            previous: prevPageQuery
-        }
+        var query = this.getRecordQuery(this.boardID, this.tag, undefined, timeTagKey);
+        query = query.descending(scoreKey);
+        return query;
     }
 }
 
