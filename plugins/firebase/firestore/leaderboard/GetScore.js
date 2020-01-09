@@ -5,7 +5,7 @@ var GetScore = function (userID) {
         userID = this.userID;
     }
     var self = this;
-    return this.getRecordQuery(this.boardID, this.tag, userID, undefined).limit(1).get()
+    return this.getMyRecordQuery().get()
         .then(function (querySnapshot) {
             var item;
             if (querySnapshot.size > 0) {

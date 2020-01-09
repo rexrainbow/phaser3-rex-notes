@@ -31,7 +31,7 @@ var Post = function (score, extraData) {
     }
     var curTimeData = GetTime();
     var self = this;
-    return this.getRecordQuery(this.boardID, this.tag, this.userID, undefined).limit(1).get()
+    return this.getMyRecordQuery().get()
         .then(function (querySnapshot) {
             var prevRecord, docID;
             if (querySnapshot.size > 0) {
