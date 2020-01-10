@@ -19,7 +19,7 @@ var CreateChess = function (tileX, tileY, symbols) {
     // Add to board
     board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
     // behaviors
-    gameObject.rexMoveTo = scene.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
+    gameObject.rexMoveTo = this.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
 }
 
 export default CreateChess;

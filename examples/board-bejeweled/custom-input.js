@@ -1,3 +1,4 @@
+import BoardPlugin from '../../plugins/board-plugin.js';
 import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
 class Demo extends Phaser.Scene {
@@ -93,7 +94,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexBoard',
+            plugin: BoardPlugin,
+            mapping: 'rexBoard'
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -15,8 +15,12 @@ Match3-like gameplay template.
 
 ### Create bejeweled object
 
+[Install rexBoard plugin](board.md#install-scene-plugin) before creating bejeweled object.
+
 ```javascript
 var bejeweled = new Bejeweled(scene, {
+    // rexBoard: 'rexBoard',
+
     board: {
         grid: {
             gridType: 'quadGrid',
@@ -86,6 +90,7 @@ var bejeweled = new Bejeweled(scene, {
 
 Configurations
 
+- `rexBoard` : Key of 'rexBoard' plugin. Default is `'rexBoard'`.
 - Board properties
     - `board.width` : Board width in tiles.
     - `board.height` : [Board height](board-bejeweled.md#board-height) in tiles.

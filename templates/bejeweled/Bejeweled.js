@@ -1,15 +1,16 @@
-import BoardPlugin from '../../plugins/board-plugin.js';
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 import Input from './input/Input.js';
 
 const EE = Phaser.Events.EventEmitter;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Bejeweled extends EE {
     constructor(scene, config) {
-        loadRexBoardPlugin(scene);
         super();
 
+        var rexBoardKey = GetValue(config, 'rexBoard', 'rexBoard');
+        this.rexBoard = scene[rexBoardKey];
         this.scene = scene;
         this.board = new Board(this, config);
         this.mainState = new MainState(this, config);
@@ -89,10 +90,4 @@ class Bejeweled extends EE {
 
 }
 
-var loadRexBoardPlugin = function (scene) {
-    if (Phaser.Plugins.PluginCache.hasCustom('RexBoardPlugin')) {
-        return;
-    }
-    scene.load.scenePlugin('RexBoardPlugin', BoardPlugin, 'rexBoard', 'rexBoard').start();
-}
 export default Bejeweled;

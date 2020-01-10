@@ -4902,7 +4902,10 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-bejeweled">Sample code</a></p>
 <h3 id="create-bejeweled-object">Create bejeweled object<a class="headerlink" href="#create-bejeweled-object" title="Permanent link">&para;</a></h3>
+<p><a href="../board/#install-scene-plugin">Install rexBoard plugin</a> before creating bejeweled object.</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// rexBoard: &#39;rexBoard&#39;,</span>
+
     <span class="nx">board</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
@@ -4972,6 +4975,7 @@
 
 <p>Configurations</p>
 <ul>
+<li><code>rexBoard</code> : Key of 'rexBoard' plugin. Default is <code>'rexBoard'</code>.</li>
 <li>Board properties<ul>
 <li><code>board.width</code> : Board width in tiles.</li>
 <li><code>board.height</code> : <a href="./#board-height">Board height</a> in tiles.</li>

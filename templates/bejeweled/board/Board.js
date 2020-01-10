@@ -13,10 +13,11 @@ import GetAllMatch from './match/GetAllMatch.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
     constructor(parent, config) {
-        var scene = parent.scene;
+        var scene = parent.scene;        
         this.scene = scene;
-        this.board = scene.rexBoard.add.board(GetValue(config, 'board', undefined));
-        this.match = scene.rexBoard.add.match(GetValue(config, 'match', undefined));
+        this.rexBoard = parent.rexBoard;
+        this.board = this.rexBoard.add.board(GetValue(config, 'board', undefined));
+        this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
 
         this.initSymbolsMap = GetValue(config, 'initMap', undefined); // 2d array
