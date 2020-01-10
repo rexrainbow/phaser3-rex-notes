@@ -19,13 +19,9 @@
     ```
     npm i phaser3-rex-plugins
     ```
-1. Import ui plugin
-    ```javascript
-    import RexUI from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-    ```
 1. Install ui plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+    import RexUI from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
     
     var config = {
         // ...
