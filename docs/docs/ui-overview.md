@@ -1,3 +1,48 @@
+## Install ui plugins
+
+### Install from minify file
+
+1. Download minify file ([link](https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js)).
+1. Install ui plugin in preload stage
+    ```javascript
+    scene.load.scenePlugin({
+        key: 'rexuiplugin',
+        url: filePath,
+        sceneKey: 'rexUI'
+    });
+    ```
+    - `key` : Must be `'rexuiplugin'`
+
+### Install from npm package
+
+1. Install rex plugins
+    ```
+    npm i phaser3-rex-plugins
+    ```
+1. Import ui plugin
+    ```javascript
+    import RexUI from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    ```
+1. Install ui plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+    
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+
 ## List of ui plugins
 
 ### UI components
