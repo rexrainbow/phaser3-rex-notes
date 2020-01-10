@@ -101,22 +101,22 @@ Built-in keyboard events of phaser.
     keyObj.on('down', function(event) { /* ... */ });
     keyObj.on('up', function(event) { /* ... */ });
     ```
-    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
-    - `event.stopPropagation()` : Stop it reaching any other Scene.
+    - `event.originalEvent.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.originalEvent.stopPropagation()` : Stop it reaching any other Scene.
 1. On key-down/on key-up
     ```javascript
     scene.input.keyboard.on('keydown-' + 'W', function (event) { /* ... */ });
     scene.input.keyboard.on('keyup-' + 'W', function (event) { /* ... */ });
     ```
-    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
-    - `event.stopPropagation()` : Stop it reaching any other Scene.    
+    - `event.originalEvent.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.originalEvent.stopPropagation()` : Stop it reaching any other Scene.    
 1. Any key-down/on key-up
     ```javascript
     scene.input.keyboard.on('keydown', function (eventName, event) { /* ... */ });
     scene.input.keyboard.on('keyup', function (eventName, event) { /* ... */ });
     ```
-    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
-    - `event.stopPropagation()` : Stop it reaching any other Scene.
+    - `event.originalEvent.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.originalEvent.stopPropagation()` : Stop it reaching any other Scene.
 
 ### Destroy key object
 
