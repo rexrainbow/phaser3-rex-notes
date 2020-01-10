@@ -21,14 +21,14 @@
     ```
 1. Install ui plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import RexUI from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
     
     var config = {
         // ...
         plugins: {
             scene: [{
                 key: 'rexUI',
-                plugin: RexUI,
+                plugin: RexUIPlugin,
                 mapping: 'rexUI'
             },
             // ...
