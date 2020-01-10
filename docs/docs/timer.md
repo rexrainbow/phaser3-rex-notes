@@ -46,7 +46,7 @@ Execute callback when time-out, built-in object of phaser.
         callback: callback,
         args: [],
         callbackScope: thisArg,
-        loop: fasle,
+        loop: false,
         repeat: 0,
         startAt: 0,
         timeScale: 1,
