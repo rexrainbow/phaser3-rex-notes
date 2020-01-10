@@ -28,7 +28,7 @@
         plugins: {
             scene: [{
                 key: 'rexUI',
-                plugin: UIPlugin,
+                plugin: RexUI,
                 mapping: 'rexUI'
             },
             // ...
