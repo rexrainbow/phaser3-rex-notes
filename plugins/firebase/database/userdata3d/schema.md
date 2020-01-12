@@ -1,3 +1,0 @@
-- <userID>
-    - <itemID>
-        - <key> : Number, string, or JSON

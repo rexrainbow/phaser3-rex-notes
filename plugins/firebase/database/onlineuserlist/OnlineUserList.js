@@ -92,6 +92,10 @@ class OnlineUserList {
         return this;
     }
 
+    get rootRef() {
+        return this.database.ref(this.rootPath);
+    }
+
     setUser(userID, userName) {
         if (IsPlainObject(userID)) {
             this.userInfo = userID;
@@ -147,8 +151,8 @@ class OnlineUserList {
         return this.userList.getItems();
     }
 
-    getRootRef() {
-        return this.database.ref(this.rootPath)
+    get rootRef() {
+        return this.database.ref(this.rootPath);
     }
 
     getUserRef(userID) {
@@ -159,7 +163,7 @@ class OnlineUserList {
             return null;
         }
         var itemID = this.userID2ItemID[userID];
-        return this.getRootRef().child(itemID);
+        return this.rootRef.child(itemID);
     }
 
     contains(userID) {

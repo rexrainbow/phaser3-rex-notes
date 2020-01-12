@@ -1,15 +1,15 @@
 var SetValue = function () {
-    var userID, itemID, key, value;
+    var page, row, col, value;
 
     switch (arguments.length) {
-        case 4: // Set key of an item
-            [userID, itemID, key, value] = arguments;
+        case 4: // Set col of an item
+            [page, row, col, value] = arguments;
             break;
         case 3: // Set item of an user
-            [userID, itemID, value] = arguments;
+            [page, row, value] = arguments;
             break;
         case 2: // Set user data
-            [userID, value] = arguments;
+            [page, value] = arguments;
             break;
         case 1: // Set all users data
             value = arguments[0];
@@ -19,7 +19,7 @@ var SetValue = function () {
             break;
     }
 
-    return this.getKeyRef(userID, itemID, key).set(value);
+    return this.getKeyRef(page, row, col).set(value);
 }
 
 export default SetValue;

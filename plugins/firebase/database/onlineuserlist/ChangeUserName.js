@@ -5,7 +5,7 @@ var ChangeUserName = function (userName) {
         if (userRef) { // Find userRef
             resolve(userRef)
         } else { // Query userRef
-            var query = self.getRootRef().orderByChild('userID').equalTo(self.userID);
+            var query = self.rootRef.orderByChild('userID').equalTo(self.userID);
             query.once('child_added')
                 .then(function (snapshot) {
                     resolve(snapshot.ref)

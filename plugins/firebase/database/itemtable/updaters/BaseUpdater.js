@@ -1,8 +1,6 @@
-import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
-import GetValue from '../../../utils/object/GetValue.js';
-import SetValue from './SetValue.js';
+import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 
-class UserData3d {
+class BaseUpdater {
     constructor(config) {
         // Event emitter
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
@@ -12,10 +10,14 @@ class UserData3d {
 
         this.database = firebase.database();
         this.setRootPath(GetValue(config, 'root', ''));
+        this.setValue(GetValue(config, 'value', undefined));
+        this.startUpdate();
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this
+            .destroyEventEmitter()
+            .stopUpdate();
     }
 
     destroy() {
@@ -27,26 +29,27 @@ class UserData3d {
         return this;
     }
 
-    getRootRef() {
-        return this.database.ref(this.rootPath)
+    get rootRef() {
+        return this.database.ref(this.rootPath);
     }
 
-    getRef(userID, itemID, key) {
-        var ref = this.getRootRef();
-        ref = (userID) ? ref.child(userID) : ref;
-        ref = (itemID) ? ref.child(itemID) : ref;
-        ref = (key) ? ref.child(key) : ref;
-        return ref;
-    }
+    // Overwrite
+    setValue(key, value) { }
+
+    // Overwrite
+    startUpdate() { }
+
+    // Overwrite
+    stopUpdate() { }
+
 }
 
 var methods = {
-    setValue: SetValue
 }
 Object.assign(
-    UserData3d.prototype,
+    BaseUpdater.prototype,
     EventEmitterMethods,
     methods
 );
 
-export default UserData3d
+export default BaseUpdater;
