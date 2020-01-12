@@ -1,6 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import SetValue from './SetValue.js';
+import Save from './Save.js';
 
 class ItemTable {
     constructor(config) {
@@ -40,17 +40,17 @@ class ItemTable {
         return this.database.ref(this.rootPath)
     }
 
-    getRef(page, row, col) {
+    getRef(key0, key1, key2) {
         var ref = this.getRootRef();
-        ref = (page) ? ref.child(page) : ref;
-        ref = (row) ? ref.child(row) : ref;
-        ref = (col) ? ref.child(col) : ref;
+        ref = (key0) ? ref.child(key0) : ref;
+        ref = (key1) ? ref.child(key1) : ref;
+        ref = (key2) ? ref.child(key2) : ref;
         return ref;
     }
 }
 
 var methods = {
-    setValue: SetValue
+    save: Save
 }
 Object.assign(
     ItemTable.prototype,
