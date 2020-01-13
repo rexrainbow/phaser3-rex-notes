@@ -6,7 +6,7 @@ import RowUpdater from './read/RowUpdater.js';
 import Pagepdater from './read/PageUpdater.js';
 import SetData from './write/SetData.js';
 import RemoveData from './write/RemoveData.js';
-import IncValue from './write/IncValue.js/index.js';
+import IncValue from './write/IncValue.js';
 import Transaction from './write/Transaction.js';
 import UpdateData from './write/UpdateData.js';
 import RemoveDataOnDisconnect from './write/RemoveDataOnDisconnect.js';

@@ -27,7 +27,10 @@ class Demo extends Phaser.Scene {
                 console.log(`${key0}.${key1}.${key2} = ${value}`);
             })
             .startUpdate()
-            .setValue('p0', 'r0', 'c0', 123)
+            .removeDataOnDisconnect('p0')
+            .then(function () {
+                return table.setData('p0', 'r0', 'c0', 123);
+            })
             .then(function () {
                 console.log(table.getData())
                 return table.incValue('p0', 'r0', 'c0', 100);
