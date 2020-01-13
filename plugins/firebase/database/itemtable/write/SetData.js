@@ -11,11 +11,8 @@ var SetData = function () {
         case 2:
             [key0, value] = arguments;
             break;
-        case 1:
+        default:
             value = arguments[0];
-            break;
-        default: // Clear
-            value = null;
             break;
     }
 

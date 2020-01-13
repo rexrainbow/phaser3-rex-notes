@@ -1,13 +1,16 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import Merge from '../../../utils/object/Merge.js';
-import SetData from './SetData.js';
-import IncValue from './IncValue.js';
-import Transaction from './Transaction.js';
-import UpdateData from './UpdateData.js';
-import ColumnUpdater from './updaters/ColumnUpdater.js';
-import RowUpdater from './updaters/RowUpdater.js';
-import Pagepdater from './updaters/PageUpdater.js';
+import ColumnUpdater from './read/ColumnUpdater.js';
+import RowUpdater from './read/RowUpdater.js';
+import Pagepdater from './read/PageUpdater.js';
+import SetData from './write/SetData.js';
+import RemoveData from './write/RemoveData.js';
+import IncValue from './write/IncValue.js/index.js';
+import Transaction from './write/Transaction.js';
+import UpdateData from './write/UpdateData.js';
+import RemoveDataOnDisconnect from './write/RemoveDataOnDisconnect.js';
+import SetDataOnDisconnect from './write/SetDataOnDisconnect.js';
 
 class ItemTable {
     constructor(config) {
@@ -79,18 +82,6 @@ class ItemTable {
     }
 }
 
-const DefaultEventNames = {
-    addkey0: 'addkey0',
-    removekey0: 'removekey0',
-    changekey0: 'changekey0',
-    addkey1: 'addkey1',
-    removekey1: 'removekey1',
-    changekey1: 'changekey1',
-    addkey2: 'addkey2',
-    removekey2: 'removekey2',
-    changekey2: 'changekey2',
-}
-
 var UpdaterClasses = {
     1: ColumnUpdater,
     2: RowUpdater,
@@ -99,9 +90,12 @@ var UpdaterClasses = {
 
 var methods = {
     setData: SetData,
+    removeData: RemoveData,
     incValue: IncValue,
     transaction: Transaction,
     updateData: UpdateData,
+    removeDataOnDisconnect: RemoveDataOnDisconnect,
+    setDataOnDisconnect: SetDataOnDisconnect
 }
 Object.assign(
     ItemTable.prototype,
@@ -113,6 +107,18 @@ const TABLE_TYPE = {
     '1d': 1,
     '2d': 2,
     '3d': 3
+}
+
+const DefaultEventNames = {
+    addkey0: 'addkey0',
+    removekey0: 'removekey0',
+    changekey0: 'changekey0',
+    addkey1: 'addkey1',
+    removekey1: 'removekey1',
+    changekey1: 'changekey1',
+    addkey2: 'addkey2',
+    removekey2: 'removekey2',
+    changekey2: 'changekey2',
 }
 
 export default ItemTable

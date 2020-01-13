@@ -11,7 +11,7 @@ var Transaction = function () {
         case 2:
             [key0, callback] = arguments;
             break;
-        case 1:
+        default:
             callback = arguments[0];
             break;
     }
