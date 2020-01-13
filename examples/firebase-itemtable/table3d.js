@@ -20,17 +20,17 @@ class Demo extends Phaser.Scene {
         })
 
         table
-            .on('addcol', function (page, row, col, value) {
-                console.log(`${page}.${row}.${col} = ${value}`);
+            .on('addkey2', function (key0, key1, key2, value) {
+                console.log(`${key0}.${key1}.${key2} = ${value}`);
             })
-            .on('changecol', function (page, row, col, value) {
-                console.log(`${page}.${row}.${col} = ${value}`);
+            .on('changekey2', function (key0, key1, key2, value) {
+                console.log(`${key0}.${key1}.${key2} = ${value}`);
             })
             .startUpdate()
-            .save('p0', 'row0', 'col0', 123)
+            .save('p0', 'r0', 'c0', 123)
             .then(function () {
                 console.log(table.getData())
-                return table.save('p0', 'row0', 'col0', 456);
+                return table.save('p0', 'r0', 'c0', 456);
             })
             .then(function () {
                 console.log(table.getData())

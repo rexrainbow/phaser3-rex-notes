@@ -41,7 +41,8 @@ class Broadcast {
     }
 
     shutdown() {
-        this.stopReceiving()
+        this
+            .stopReceiving()
             .destroyEventEmitter();
     }
 

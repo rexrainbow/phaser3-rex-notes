@@ -12,6 +12,7 @@ export default {
         if (this._eventEmitter && this._privateEE) {
             this._eventEmitter.shutdown();
         }
+        return this;
     },
 
     getEventEmitter() {

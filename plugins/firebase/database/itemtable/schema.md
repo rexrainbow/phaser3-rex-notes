@@ -1,14 +1,14 @@
 ## 1D table
 
-- <col> : Number, string, or JSON
+- <key0> : Number, string, or JSON
 
 ## 2D table
 
-- <row>
-    - <col> : Number, string, or JSON
+- <key0>
+    - <key1> : Number, string, or JSON
 
 ## 3D table
 
-- <page>
-    - <row>
-        - <col> : Number, string, or JSON
+- <key0>
+    - <key1>
+        - <key2> : Number, string, or JSON

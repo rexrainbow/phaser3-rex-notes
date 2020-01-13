@@ -77,13 +77,15 @@ class ItemTable {
 }
 
 const DefaultEventNames = {
-    addpage: 'addpage',
-    removepage: 'removepage',
-    addrow: 'addrow',
-    removerow: 'removerow',
-    addcol: 'addcol',
-    removecol: 'removecol',
-    changecol: 'changecol'
+    addkey0: 'addkey0',
+    removekey0: 'removekey0',
+    changekey0: 'changekey0',
+    addkey1: 'addkey1',
+    removekey1: 'removekey1',
+    changekey1: 'changekey1',
+    addkey2: 'addkey2',
+    removekey2: 'removekey2',
+    changekey2: 'changekey2',
 }
 
 var UpdaterClasses = {

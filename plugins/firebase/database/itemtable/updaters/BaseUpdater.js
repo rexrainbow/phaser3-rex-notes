@@ -19,8 +19,8 @@ class BaseUpdater {
 
     shutdown() {
         this
-            .destroyEventEmitter()
-            .stopUpdate();
+            .stopUpdate()
+            .destroyEventEmitter();
     }
 
     destroy() {

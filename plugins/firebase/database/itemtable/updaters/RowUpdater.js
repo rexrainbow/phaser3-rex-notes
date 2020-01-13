@@ -19,10 +19,10 @@ class RowUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 2:
-                this.emit(this.eventNames.addrow, this.key, key, value);
+                this.emit(this.eventNames.addkey0, this.key, key, value);
                 break;
             default: // 3
-                this.emit(this.eventNames.addrow, this.key, key, value);
+                this.emit(this.eventNames.addkey1, this.key, key, value);
                 break;
         }
     }
@@ -33,10 +33,10 @@ class RowUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 2:
-                this.emit(this.eventNames.removerow, key);
+                this.emit(this.eventNames.removekey0, key);
                 break;
             default: // 3
-                this.emit(this.eventNames.removerow, this.key, key);
+                this.emit(this.eventNames.removekey1, this.key, key);
                 break;
         }
     }

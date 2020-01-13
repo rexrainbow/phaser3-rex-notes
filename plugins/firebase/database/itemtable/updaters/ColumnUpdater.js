@@ -20,13 +20,13 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.addcol, key, value);
+                this.emit(this.eventNames.addkey0, key, value);
                 break;
             case 2:
-                this.emit(this.eventNames.addcol, this.key, key, value);
+                this.emit(this.eventNames.addkey1, this.key, key, value);
                 break;
             default: // 3
-                this.emit(this.eventNames.addcol, this.pageKey, this.key, key, value);
+                this.emit(this.eventNames.addkey2, this.pageKey, this.key, key, value);
                 break;
         }
     }
@@ -37,13 +37,13 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.removecol, key);
+                this.emit(this.eventNames.removekey0, key);
                 break;
             case 2:
-                this.emit(this.eventNames.removecol, this.key, key);
+                this.emit(this.eventNames.removekey1, this.key, key);
                 break;
             default: // 3
-                this.emit(this.eventNames.removecol, this.pageKey, this.key, key);
+                this.emit(this.eventNames.removekey2, this.pageKey, this.key, key);
                 break;
         }
     }
@@ -55,13 +55,13 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.changecol, key, value);
+                this.emit(this.eventNames.changekey0, key, value);
                 break;
             case 2:
-                this.emit(this.eventNames.changecol, this.key, key, value);
+                this.emit(this.eventNames.changekey1, this.key, key, value);
                 break;
             default: // 3
-                this.emit(this.eventNames.changecol, this.pageKey, this.key, key, value);
+                this.emit(this.eventNames.changekey2, this.pageKey, this.key, key, value);
                 break;
         }
     }
