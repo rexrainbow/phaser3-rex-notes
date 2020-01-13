@@ -1,4 +1,4 @@
-var SetValue = function () {
+var SetData = function () {
     var key0, key1, key2, value;
 
     switch (arguments.length) {
@@ -22,4 +22,4 @@ var SetValue = function () {
     return this.getRef(key0, key1, key2).set(value);
 }
 
-export default SetValue;
+export default SetData;

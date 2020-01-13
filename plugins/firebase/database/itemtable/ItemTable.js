@@ -1,8 +1,10 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import Merge from '../../../utils/object/Merge.js';
-import SetValue from './SetValue.js';
+import SetData from './SetData.js';
 import IncValue from './IncValue.js';
+import Transaction from './Transaction.js';
+import UpdateData from './UpdateData.js';
 import ColumnUpdater from './updaters/ColumnUpdater.js';
 import RowUpdater from './updaters/RowUpdater.js';
 import Pagepdater from './updaters/PageUpdater.js';
@@ -96,8 +98,10 @@ var UpdaterClasses = {
 };
 
 var methods = {
-    setValue: SetValue,
+    setData: SetData,
     incValue: IncValue,
+    transaction: Transaction,
+    updateData: UpdateData,
 }
 Object.assign(
     ItemTable.prototype,
