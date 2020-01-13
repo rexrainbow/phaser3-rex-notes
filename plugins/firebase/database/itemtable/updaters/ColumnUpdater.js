@@ -1,13 +1,6 @@
 import BaseUpdater from './BaseUpdater.js';
-import GetValue from '../../../utils/object/GetValue.js';
-import Clear from '../../../../utils/object/Clear.js';
 
 class ColumnUpdater extends BaseUpdater {
-    constructor(config) {
-        super(config);
-        this.data = {};
-    }
-
     startUpdate() {
         this.rootRef.on('child_added', this.addCol, this);
         this.rootRef.on('child_removed', this.removeCol, this);
@@ -23,30 +16,80 @@ class ColumnUpdater extends BaseUpdater {
     addCol(snapshot) {
         var key = snapshot.key,
             value = snapshot.val();
-        this.setValue(key, value);
+        this.setData(key, value);
+
+        switch (this.type) {
+            case 1:
+                this.emit(this.eventNames.addcol, key, value);
+                break;
+            case 2:
+                this.emit(this.eventNames.addcol, this.key, key, value);
+                break;
+            default: // 3
+                this.emit(this.eventNames.addcol, this.pageKey, this.key, key, value);
+                break;
+        }
     }
 
     removeCol(snapshot) {
         var key = snapshot.key;
-        delete this.data[key];
+        this.removeChild(key);
+
+        switch (this.type) {
+            case 1:
+                this.emit(this.eventNames.removecol, key);
+                break;
+            case 2:
+                this.emit(this.eventNames.removecol, this.key, key);
+                break;
+            default: // 3
+                this.emit(this.eventNames.removecol, this.pageKey, this.key, key);
+                break;
+        }
     }
 
     changeColValue(snapshot) {
         var key = snapshot.key,
             value = snapshot.val();
-        this.setValue(key, value);
+        this.setData(key, value);
+
+        switch (this.type) {
+            case 1:
+                this.emit(this.eventNames.changecol, key, value);
+                break;
+            case 2:
+                this.emit(this.eventNames.changecol, this.key, key, value);
+                break;
+            default: // 3
+                this.emit(this.eventNames.changecol, this.pageKey, this.key, key, value);
+                break;
+        }
     }
 
-    setValue(key, value) {
-        if (key === undefined) {
-            Clear(this.data);
-        } else if (value === undefined) {
-            this.data = key; // JSON data
-        } else {
-            this.data[key] = value;
+    setChildData(key, data) {
+        this.data[key] = data;
+        return this;
+    }
+
+    removeChild(key) {
+        if (this.data.hasOwnProperty(key)) {
+            delete this.data[key];
         }
         return this;
     }
+
+    getData(key) {
+        if (key === undefined) {
+            return this.data;
+        } else {
+            return this.data[key];
+        }
+    }
+
+    get pageKey() {
+        return this.parent.key;
+    }
+
 }
 
 export default ColumnUpdater;

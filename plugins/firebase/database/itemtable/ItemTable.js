@@ -1,6 +1,10 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
+import Merge from '../../../utils/object/Merge.js';
 import Save from './Save.js';
+import ColumnUpdater from './updaters/ColumnUpdater.js';
+import RowUpdater from './updaters/RowUpdater.js';
+import Pagepdater from './updaters/PageUpdater.js';
 
 class ItemTable {
     constructor(config) {
@@ -16,7 +20,9 @@ class ItemTable {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
+        this
+            .destroyEventEmitter()
+            .stopUpdate();
     }
 
     destroy() {
@@ -33,6 +39,13 @@ class ItemTable {
             type = TABLE_TYPE[type];
         }
         this.tableType = type;
+        var UpdaterClass = UpdaterClasses[type];
+        this.updater = new UpdaterClass({
+            parent: this,
+            key: '',
+            type: type,
+            eventEmitter: this.getEventEmitter()
+        })
         return this;
     }
 
@@ -47,7 +60,37 @@ class ItemTable {
         ref = (key2) ? ref.child(key2) : ref;
         return ref;
     }
+
+    startUpdate() {
+        this.updater.startUpdate();
+        return this;
+    }
+
+    stopUpdate() {
+        this.updater.stopUpdate();
+        return this;
+    }
+
+    getData(key0, key1, key2) {
+        return this.updater.getData(key0, key1, key2);
+    }
 }
+
+const DefaultEventNames = {
+    addpage: 'addpage',
+    removepage: 'removepage',
+    addrow: 'addrow',
+    removerow: 'removerow',
+    addcol: 'addcol',
+    removecol: 'removecol',
+    changecol: 'changecol'
+}
+
+var UpdaterClasses = {
+    1: ColumnUpdater,
+    2: RowUpdater,
+    3: Pagepdater
+};
 
 var methods = {
     save: Save

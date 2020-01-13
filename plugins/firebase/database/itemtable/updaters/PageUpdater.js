@@ -1,4 +1,5 @@
 import BaseUpdater from './BaseUpdater.js';
+import RowUpdater from './RowUpdater.js';
 
 class PageUpdater extends BaseUpdater {
     constructor(config) {
@@ -16,11 +17,22 @@ class PageUpdater extends BaseUpdater {
     }
 
     addPage(snapshot) {
+        var key = snapshot.key,
+            value = snapshot.val();
+        this.setData(key, value);
 
+        this.emit(this.eventNames.addpage, key, value);
     }
 
     removePage(snapshot) {
+        var key = snapshot.key;
+        this.removeChild(key);
 
+        this.emit(this.eventNames.removepage, key);
+    }
+
+    get childClass() {
+        return RowUpdater;
     }
 }
 

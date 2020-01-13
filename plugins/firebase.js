@@ -5,6 +5,8 @@ import BroadcastFactory from './firebase/database/broadcast/Factory.js';
 import OnlineUserListFactory from './firebase/database/onlineuserlist/Factory.js';
 import RoomFactory from './firebase/database/room/Factory.js';
 import SingleRoomFactory from './firebase/database/singleroom/Factory.js';
+import ItemTableFactory from './firebase/database/itemtable/Factory.js';
+
 import PageLoaderFactory from './firebase/firestore/pageloader/Factory.js';
 import FilesFactory from './firebase/firestore/files/Factory.js';
 import IdAliasFactory from './firebase/firestore/idalias/Factory.js';

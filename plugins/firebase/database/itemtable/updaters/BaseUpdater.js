@@ -3,14 +3,17 @@ import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMeth
 class BaseUpdater {
     constructor(config) {
         // Event emitter
-        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
-        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
-        this.setEventEmitter(eventEmitter, EventEmitterClass);
-        this.eventNames = Merge(GetValue(config, 'eventNames', {}), DefaultEventNames);
+        this.setEventEmitter(config.eventEmitter, config.EventEmitterClass);
+
+        this.parent = config.parent;
+        this.key = config.key;
+        this.type = config.type;
+        this.eventNames = this.parent.eventNames;
 
         this.database = firebase.database();
-        this.setRootPath(GetValue(config, 'root', ''));
-        this.setValue(GetValue(config, 'value', undefined));
+        this.setRootPath(`${this.parent.rootPath}/${this.key}`);
+        this.data = {};
+        this.setData(config.data);
         this.startUpdate();
     }
 
@@ -33,23 +36,81 @@ class BaseUpdater {
         return this.database.ref(this.rootPath);
     }
 
+    setData(key, value) {
+        if (key === undefined) {
+            // Clear
+            for (var key in this.data) {
+                this.removeChild(key);
+            }
+        } else if (value === undefined) {
+            var data = key; // JSON data
+            for (key in this.data) { // Not in new data
+                if (!data.hasOwnProperty(key)) {
+                    this.removeChild(key);
+                }
+            }
+            for (key in data) {
+                this.setChildData(key, data[key]);
+            }
+        } else {
+            this.setChildData(key, value); // Pass data to column-updater
+        }
+        return this;
+    }
+
     // Overwrite
-    setValue(key, value) { }
+    getData(key0, key1, key2) {
+        if (key0 === undefined) {
+            var data = {};
+            for (var key in this.data) {
+                data[key] = this.data[key].getData();
+            }
+            return data;
+        } else {
+            return this.data[key0].getData(key1, key2);
+        }
+    }
+
+    // Overwrite
+    get childClass() {
+        return undefined;
+    }
+
+    // Overwrite
+    setChildData(key, data) {
+        if (!this.data.hasOwnProperty(key)) {
+            this.data[key] = new this.childClass({
+                parent: this,
+                key: key,
+                type: this.type,
+                eventEmitter: this.getEventEmitter(),
+                value: data
+            });
+        } else {
+            this.data[key].setData(data);
+        }
+        return this;
+    }
+
+    // Overwrite
+    removeChild(key) {
+        if (this.data.hasOwnProperty(key)) {
+            this.data[key].destroy();
+            delete this.data[key];
+        }
+        return this;
+    }
 
     // Overwrite
     startUpdate() { }
 
     // Overwrite
     stopUpdate() { }
-
 }
 
-var methods = {
-}
 Object.assign(
     BaseUpdater.prototype,
-    EventEmitterMethods,
-    methods
+    EventEmitterMethods
 );
 
 export default BaseUpdater;

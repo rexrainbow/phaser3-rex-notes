@@ -19,7 +19,7 @@ var SetValue = function () {
             break;
     }
 
-    return this.getKeyRef(key0, key1, key2).set(value);
+    return this.getRef(key0, key1, key2).set(value);
 }
 
 export default SetValue;
