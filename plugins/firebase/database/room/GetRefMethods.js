@@ -65,6 +65,10 @@ var Methods = {
         return this.getRoomDataPath(roomID, 'users');
     },
 
+    getItemTablePath(roomID) {
+        return this.getRoomDataPath(roomID, 'itemTable');
+    },
+
     getRoomListQuery(roomType, roomState) {
         if (roomState === undefined) {
             roomState = 'open';

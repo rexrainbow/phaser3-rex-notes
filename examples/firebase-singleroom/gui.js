@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
         // Control
         mainPanel
             .on('send-message', function (message) {
-                room.send(message)
+                room.broadcast.send(message)
             })
             .on('change-name', function (newUserName) {
                 room.changeUserName(newUserName);
@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
                 mainPanel.appendMessage(message);
             })
             .on('userlist.changename', function () {
-                mainPanel.setMessages(room.getBroadcastHistory())
+                mainPanel.setMessages(room.broadcast.getHistory())
             })
             .setUser(userID, userName)
             .joinRoom()

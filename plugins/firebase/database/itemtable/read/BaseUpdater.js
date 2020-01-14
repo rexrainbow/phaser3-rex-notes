@@ -20,6 +20,7 @@ class BaseUpdater {
     shutdown() {
         this
             .stopUpdate()
+            .clear()
             .destroyEventEmitter();
     }
 
@@ -38,10 +39,7 @@ class BaseUpdater {
 
     setData(key, value) {
         if (key === undefined) {
-            // Clear
-            for (var key in this.data) {
-                this.removeChild(key);
-            }
+            this.clear(); // Clear
         } else if (value === undefined) {
             var data = key; // JSON data
             for (key in this.data) { // Not in new data
@@ -54,6 +52,13 @@ class BaseUpdater {
             }
         } else {
             this.setChildData(key, value); // Pass data to column-updater
+        }
+        return this;
+    }
+
+    clear() {
+        for (var key in this.data) {
+            this.removeChild(key);
         }
         return this;
     }

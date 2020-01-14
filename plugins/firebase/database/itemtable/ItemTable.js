@@ -1,6 +1,5 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import Merge from '../../../utils/object/Merge.js';
 import ColumnUpdater from './read/ColumnUpdater.js';
 import RowUpdater from './read/RowUpdater.js';
 import Pagepdater from './read/PageUpdater.js';
@@ -18,7 +17,7 @@ class ItemTable {
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
-        this.eventNames = Merge(GetValue(config, 'eventNames', {}), DefaultEventNames);
+        this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.database = firebase.database();
         this.setRootPath(GetValue(config, 'root', ''));
@@ -74,6 +73,11 @@ class ItemTable {
 
     stopUpdate() {
         this.updater.stopUpdate();
+        return this;
+    }
+
+    clear() {
+        this.updater.clear();
         return this;
     }
 

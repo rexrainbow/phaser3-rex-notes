@@ -30,7 +30,10 @@ room-data/
         maxUsers - The maximum number of users that can join this room.
         # limit the amount of users
 
-        extra/
+        itemTable/
+            - <key0>
+                - <key1>
+                    - <key2> : value
 
 # Body of room data. Each room has unique roomID
 rooms/

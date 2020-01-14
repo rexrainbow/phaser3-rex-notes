@@ -2,6 +2,7 @@ import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods
 import GetValue from '../../../utils/object/GetValue.js';
 import CreateUserList from './utils/CreateUserList.js';
 import CreateBroadcast from './utils/CreateBroadcast.js';
+import CreateItemTable from './utils/CreateItemTable.js';
 import IsPlainObject from '../../../utils/object/IsPlainObject.js';
 import Methods from './Methods.js';
 
@@ -24,6 +25,8 @@ class SingleRoom {
         this.userList = CreateUserList.call(this, config);
         // Broadcast
         this.broadcast = CreateBroadcast.call(this, config);
+        // Item table
+        this.itemTable = CreateItemTable.call(this, config);
     }
 
     shutdown() {
@@ -65,14 +68,6 @@ class SingleRoom {
 
     get maxUsers() {
         return this.userList.maxUsers;
-    }
-
-    send(message) {
-        return this.broadcast.send(message);
-    }
-
-    getBroadcastHistory() {
-        return this.broadcast.getHistory();
     }
 }
 

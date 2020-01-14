@@ -21,6 +21,10 @@ var Methods = {
 
     getUserListPath() {
         return this.getRoomDataPath('users');
+    },
+
+    getItemTablePath() {
+        return this.getRoomDataPath('itemTable');
     }
 }
 

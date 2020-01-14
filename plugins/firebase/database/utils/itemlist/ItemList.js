@@ -1,6 +1,5 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../../utils/object/GetValue.js';
-import Merge from '../../../../utils/object/Merge.js';
 import ItemMethods from './ItemMethods.js';
 import UpdateOnce from './updaters/UpdateOnce.js';
 import UpdateChild from './updaters/UpdateChild.js';
@@ -12,7 +11,7 @@ class ItemList {
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
-        this.eventNames = Merge(GetValue(config, 'eventNames', {}), DefaultEventNames);
+        this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.isUpdating = false;
         this.items = [];

@@ -2,6 +2,11 @@ import Broadcast from '../../broadcast/Broadcast.js';
 import GetValue from '../../../../utils/object/GetValue.js';
 
 var CreateBroadcast = function (config) {
+    var broadcastConfig = GetValue(config, 'broadcast', true);
+    if (!broadcastConfig) {
+        return null;
+    }
+
     var broadcast = new Broadcast({
         eventEmitter: this.getEventEmitter(),
         eventNames: {
@@ -11,7 +16,7 @@ var CreateBroadcast = function (config) {
         root: this.rootPath,
         receiverID: 'broadcast',
         senderID: this.userInfo,
-        history: GetValue(config, 'broadcast.history', false)
+        history: GetValue(broadcastConfig, 'history', false)
     });
 
     this

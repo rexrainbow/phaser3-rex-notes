@@ -3,6 +3,7 @@ import GetValue from '../../../utils/object/GetValue.js';
 import CreateUserList from './utils/CreateUserList.js';
 import CreateRoomList from './utils/CreateRoomList.js';
 import CreateBroadcast from './utils/CreateBroadcast.js';
+import CreateItemTable from './utils/CreateItemTable.js';
 import IsPlainObject from '../../../utils/object/IsPlainObject.js';
 import Methods from './Methods.js';
 
@@ -33,6 +34,8 @@ class Room {
         this.roomList = CreateRoomList.call(this, config);
         // Broadcast
         this.broadcast = CreateBroadcast.call(this, config);
+        // Item table
+        this.itemTable = CreateItemTable.call(this, config);
     }
 
     shutdown() {
@@ -98,14 +101,6 @@ class Room {
 
     get maxUsers() {
         return this.userList.maxUsers;
-    }
-
-    send(message) {
-        return this.broadcast.send(message);
-    }
-
-    getBroadcastHistory() {
-        return this.broadcast.getHistory();
     }
 }
 
