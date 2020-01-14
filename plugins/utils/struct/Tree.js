@@ -1,5 +1,6 @@
 import SetValue from '../object/SetValue.js';
 import Clear from '../object/Clear.js';
+import DeepClone from '../object/DeepClone.js';
 
 class Tree {
     constructor() {
@@ -18,6 +19,9 @@ class Tree {
     }
 
     getValue(keys) {
+        if (arguments.length > 1) {
+            keys = arguments;
+        }
         if (keys === undefined) {
             return this.data;
         } else {
@@ -54,6 +58,10 @@ class Tree {
     clear() {
         Clear(this.data);
         return this;
+    }
+
+    clone() {
+        return DeepClone(this.data);
     }
 }
 
