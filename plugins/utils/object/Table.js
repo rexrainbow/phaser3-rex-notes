@@ -1,5 +1,5 @@
-import SetValue from '../object/SetValue.js';
-import Clear from '../object/Clear.js';
+import SetValue from './SetValue.js';
+import Clear from './Clear.js';
 
 class Table {
     constructor() {
