@@ -1,2 +1,2 @@
-import Pool from './utils/object/Stack.js';
+import Pool from './utils/struct/Stack.js';
 export default Pool;

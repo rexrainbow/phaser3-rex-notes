@@ -1,7 +1,7 @@
-import SetValue from './SetValue.js';
-import Clear from './Clear.js';
+import SetValue from '../object/SetValue.js';
+import Clear from '../object/Clear.js';
 
-class Table {
+class Tree {
     constructor() {
         this.data = {};
     }
@@ -57,4 +57,4 @@ class Table {
     }
 }
 
-export default Table;
+export default Tree;
