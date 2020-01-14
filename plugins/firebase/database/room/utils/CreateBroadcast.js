@@ -15,7 +15,7 @@ var CreateBroadcast = function (config) {
 
         receiverID: 'boradcast',
         senderID: this.userInfo,
-        history: GetValue(conbroadcastConfigig, 'history', false)
+        history: GetValue(broadcastConfig, 'history', false)
     });
 
     this

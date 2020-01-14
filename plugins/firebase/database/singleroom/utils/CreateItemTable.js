@@ -14,12 +14,12 @@ var CreateItemTable = function (config) {
     this
         .on('room.join', function () {
             itemTable
-                .startReceiving()
+                .startUpdate()
         })
         .on('room.leave', function () {
             itemTable
                 .clear()
-                .stopReceiving()
+                .stopUpdate()
         })
 
     return itemTable;

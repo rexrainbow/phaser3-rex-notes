@@ -30,7 +30,7 @@ room-data/
         maxUsers - The maximum number of users that can join this room.
         # limit the amount of users
 
-        itemTable/
+        table/
             - <key0>
                 - <key1>
                     - <key2> : value

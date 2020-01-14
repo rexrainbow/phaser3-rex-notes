@@ -24,7 +24,7 @@ var Methods = {
     },
 
     getItemTablePath() {
-        return this.getRoomDataPath('itemTable');
+        return this.getRoomDataPath('table');
     }
 }
 

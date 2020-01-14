@@ -11,16 +11,16 @@ var CreateItemTable = function (config) {
     var itemTable = new ItemTable(itemTableConfig);
 
     this
-        .on('room.join', function () {
+        .on('room.join', function (roomConfig) {
             itemTable
                 .setRootPath(this.getItemTablePath(roomConfig.roomID))
-                .startReceiving()
-        })
+                .startUpdate()
+        }, this)
         .on('room.leave', function () {
             itemTable
                 .clear()
-                .stopReceiving()
-        })
+                .stopUpdate()
+        }, this)
 
     return itemTable;
 }

@@ -66,7 +66,7 @@ var Methods = {
     },
 
     getItemTablePath(roomID) {
-        return this.getRoomDataPath(roomID, 'itemTable');
+        return this.getRoomDataPath(roomID, 'table');
     },
 
     getRoomListQuery(roomType, roomState) {

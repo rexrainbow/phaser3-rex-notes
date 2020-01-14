@@ -14,7 +14,7 @@ rooms/
 	        - `senderName` - Name of sender
 	        - `stamp` - Toggle between true and false        
 
-        itemTable/
+        table/
             - <key0>
                 - <key1>
                     - <key2> : value

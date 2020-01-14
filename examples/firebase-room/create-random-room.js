@@ -35,7 +35,15 @@ class Demo extends Phaser.Scene {
 var CreateRoomInstance = function () {
     var rexFire = this.plugins.get('rexFire');
     var room = rexFire.add.room({
-        root: 'test-room'
+        root: 'test-room',
+        itemTable: {
+            type: '1d',
+            eventNames: {
+                addkey0: 'table.update',
+                removekey0: 'table.update',
+                changekey0: 'table.update'
+            }
+        }
     })
         .setUser(GetRandomWord(5), '')
 
@@ -49,6 +57,9 @@ var CreateRoomInstance = function () {
         .on('broadcast.receive', function (message) {
             console.log(`${room.userID}: Receive message '${message.message}' sent from ${message.senderID}`)
         })
+        .on('table.update', function () {
+            console.log(`${room.userID}: Table content:`, room.itemTable.getData())
+        })
     return room;
 }
 
@@ -61,7 +72,7 @@ var CreateRandomRoom = function () {
         .on('userlist.join', function (userInfo) {
             // Send welcom message later, user might not be initialized yet now
             setTimeout(function () {
-                room.send(`Hello ${userInfo.userID}`)
+                room.broadcast.send(`Hello ${userInfo.userID}`)
             }, 300)
         })
     return room
@@ -76,6 +87,7 @@ var CreateRandomRoom = function () {
             console.log(`${userID}: Create room ${roomConfig.roomID}`)
             // room.changeRoomName('aaabbb')
             // room.changeFilterData({ a: 30, b: 40 })
+            room.itemTable.setData('a', 10);
             return Promise.resolve(roomConfig)
         });
 }

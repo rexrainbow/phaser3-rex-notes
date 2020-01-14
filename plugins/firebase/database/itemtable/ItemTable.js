@@ -20,11 +20,12 @@ class ItemTable {
         this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.database = firebase.database();
-        this.setRootPath(GetValue(config, 'root', ''));
         this.setTableType(GetValue(config, 'type', 3));
+        this.setRootPath(GetValue(config, 'root', ''));
     }
 
     shutdown() {
+        this.updater.destroy();
         this
             .destroyEventEmitter()
             .stopUpdate();
@@ -36,6 +37,7 @@ class ItemTable {
 
     setRootPath(rootPath) {
         this.rootPath = rootPath;
+        this.updater.setRootPath(rootPath);
         return this;
     }
 
@@ -67,7 +69,9 @@ class ItemTable {
     }
 
     startUpdate() {
-        this.updater.startUpdate();
+        this.updater
+            .clear()
+            .startUpdate();
         return this;
     }
 

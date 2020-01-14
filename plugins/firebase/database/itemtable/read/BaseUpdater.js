@@ -11,10 +11,9 @@ class BaseUpdater {
         this.eventNames = this.parent.eventNames;
 
         this.database = firebase.database();
-        this.setRootPath(`${this.parent.rootPath}/${this.key}`);
+        this.setRootPath();
         this.data = {};
         this.setData(config.data);
-        this.startUpdate();
     }
 
     shutdown() {
@@ -29,7 +28,18 @@ class BaseUpdater {
     }
 
     setRootPath(rootPath) {
+        if (rootPath === undefined) {
+            rootPath = `${this.parent.rootPath}/${this.key}`;
+        }
         this.rootPath = rootPath;
+
+        var child;
+        for (var key in this.data) {
+            child = this.data[key];
+            if (child instanceof BaseUpdater) {
+                child.setRootPath();
+            }
+        }
         return this;
     }
 
@@ -84,13 +94,15 @@ class BaseUpdater {
     // Overwrite
     setChildData(key, data) {
         if (!this.data.hasOwnProperty(key)) {
-            this.data[key] = new this.childClass({
+            var child = new this.childClass({
                 parent: this,
                 key: key,
                 type: this.type,
                 eventEmitter: this.getEventEmitter(),
                 value: data
             });
+            child.startUpdate();
+            this.data[key] = child;
         } else {
             this.data[key].setData(data);
         }
