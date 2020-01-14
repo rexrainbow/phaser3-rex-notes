@@ -1,26 +1,27 @@
-var isInValidKey = function (keys) {
-    return (keys == null) || (keys === "") || (keys.length === 0);
+var IsInValidKey = function (keys) {
+    return (keys == null) || (keys === '') || (keys.length === 0);
 };
 
-var getEntry = function (target, keys, defaultEntry) {
-    if (defaultEntry === undefined) {
-        defaultEntry = {};
-    }
+var GetEntry = function (target, keys, defaultEntry) {
     var entry = target;
-    if (isInValidKey(keys)) {
+    if (IsInValidKey(keys)) {
         //entry = root;
     } else {
-        if (typeof (keys) === "string") {
-            keys = keys.split(".");
+        if (typeof (keys) === 'string') {
+            keys = keys.split('.');
         }
 
         var key;
         for (var i = 0, cnt = keys.length; i < cnt; i++) {
             key = keys[i];
-            if ((entry[key] == null) || (typeof (entry[key]) !== "object")) {
+            if ((entry[key] == null) || (typeof (entry[key]) !== 'object')) {
                 var newEntry;
                 if (i === cnt - 1) {
-                    newEntry = defaultEntry;
+                    if (defaultEntry === undefined) {
+                        newEntry = {};
+                    } else {
+                        newEntry = defaultEntry;
+                    }
                 } else {
                     newEntry = {};
                 }
@@ -34,31 +35,34 @@ var getEntry = function (target, keys, defaultEntry) {
 
     return entry;
 };
+
 var SetValue = function (target, keys, value) {
     // no object
-    if (typeof (target) !== "object") {
+    if (typeof (target) !== 'object') {
         return;
     }
 
     // invalid key
-    else if (isInValidKey(keys)) {
+    else if (IsInValidKey(keys)) {
         // don't erase target
         if (value == null) {
             return;
         }
         // set target to another object
-        else if (typeof (value) === "object") {
+        else if (typeof (value) === 'object') {
             target = value;
         }
     } else {
-        if (typeof (keys) === "string") {
-            keys = keys.split(".");
+        if (typeof (keys) === 'string') {
+            keys = keys.split('.');
         }
 
         var lastKey = keys.pop();
-        var entry = getEntry(target, keys);
+        var entry = GetEntry(target, keys);
         entry[lastKey] = value;
     }
+
+    return target;
 };
 
 export default SetValue;
