@@ -8,7 +8,7 @@ class BaseUpdater {
         this.parent = config.parent;
         this.key = config.key;
         this.type = config.type;
-        this.eventNames = this.parent.eventNames;
+        this.eventNames = config.eventNames;
 
         this.database = firebase.database();
         this.setRootPath();
@@ -99,6 +99,7 @@ class BaseUpdater {
                 key: key,
                 type: this.type,
                 eventEmitter: this.getEventEmitter(),
+                eventNames: this.eventNames,
                 value: data
             });
             child.startUpdate();

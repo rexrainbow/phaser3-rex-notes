@@ -88,6 +88,7 @@ var CreateRandomRoom = function () {
             // room.changeRoomName('aaabbb')
             // room.changeFilterData({ a: 30, b: 40 })
             room.itemTable.setData('a', 10);
+            room.itemTable.setData('b', 20);
             return Promise.resolve(roomConfig)
         });
 }

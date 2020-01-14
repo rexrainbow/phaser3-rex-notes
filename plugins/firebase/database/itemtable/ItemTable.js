@@ -51,7 +51,8 @@ class ItemTable {
             parent: this,
             key: '',
             type: type,
-            eventEmitter: this.getEventEmitter()
+            eventEmitter: this.getEventEmitter(),
+            eventNames: this.eventNames
         })
         return this;
     }

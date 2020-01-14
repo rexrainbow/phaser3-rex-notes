@@ -7,9 +7,13 @@ var CreateItemTable = function (config) {
         return null;
     }
 
-    itemTableConfig.eventEmitter = this.getEventEmitter();
-    itemTableConfig.root = this.getItemTablePath()
-    var itemTable = new ItemTable(itemTableConfig);
+    var itemTable = new ItemTable({
+        eventEmitter: this.getEventEmitter(),
+        root: this.getItemTablePath(),
+
+        type: GetValue(itemTableConfig, 'type', 1),
+        eventNames: GetValue(itemTableConfig, 'eventNames', {})
+    });
 
     this
         .on('room.join', function () {
