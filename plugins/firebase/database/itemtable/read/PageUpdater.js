@@ -9,11 +9,13 @@ class PageUpdater extends BaseUpdater {
     startUpdate() {
         this.rootRef.on('child_added', this.addPage, this);
         this.rootRef.on('child_removed', this.removePage, this);
+        return this;
     }
 
     stopUpdate() {
         this.rootRef.off('child_added', this.addPage, this);
         this.rootRef.off('child_removed', this.removePage, this);
+        return this;
     }
 
     addPage(snapshot) {

@@ -39,6 +39,7 @@ var CreateRoomInstance = function () {
         itemTable: {
             type: '1d',
             eventNames: {
+                init: 'table.init',
                 addkey0: 'table.update',
                 removekey0: 'table.update',
                 changekey0: 'table.update'
@@ -57,8 +58,14 @@ var CreateRoomInstance = function () {
         .on('broadcast.receive', function (message) {
             console.log(`${room.userID}: Receive message '${message.message}' sent from ${message.senderID}`)
         })
+        .on('table.init', function () {
+            console.log(`${room.userID}: Table init, `, room.itemTable.cloneData())
+        })
         .on('table.update', function () {
-            console.log(`${room.userID}: Table content:`, room.itemTable.getData())
+            if (!room.itemTable.initialFlag) {
+                return;
+            }
+            console.log(`${room.userID}: Table update, `, room.itemTable.cloneData())
         })
     return room;
 }

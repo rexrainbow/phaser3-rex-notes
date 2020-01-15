@@ -5,12 +5,14 @@ class ColumnUpdater extends BaseUpdater {
         this.rootRef.on('child_added', this.addCol, this);
         this.rootRef.on('child_removed', this.removeCol, this);
         this.rootRef.on('child_changed', this.changeColValue, this);
+        return this;
     }
 
     stopUpdate() {
         this.rootRef.off('child_added', this.addCol, this);
         this.rootRef.off('child_removed', this.removeCol, this);
         this.rootRef.off('child_changed', this.changeColValue, this);
+        return this;
     }
 
     addCol(snapshot) {
@@ -63,26 +65,6 @@ class ColumnUpdater extends BaseUpdater {
             default: // 3
                 this.emit(this.eventNames.changekey2, this.pageKey, this.key, key, value);
                 break;
-        }
-    }
-
-    setChildData(key, data) {
-        this.data[key] = data;
-        return this;
-    }
-
-    removeChild(key) {
-        if (this.data.hasOwnProperty(key)) {
-            delete this.data[key];
-        }
-        return this;
-    }
-
-    getData(key) {
-        if (key === undefined) {
-            return this.data;
-        } else {
-            return this.data[key];
         }
     }
 

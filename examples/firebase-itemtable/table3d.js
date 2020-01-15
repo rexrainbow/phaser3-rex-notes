@@ -32,11 +32,11 @@ class Demo extends Phaser.Scene {
                 return table.setData('p0', 'r0', 'c0', 123);
             })
             .then(function () {
-                console.log(table.getData())
+                console.log(table.cloneData())
                 return table.incValue('p0', 'r0', 'c0', 100);
             })
             .then(function () {
-                console.log(table.getData())
+                console.log(table.cloneData())
             })
 
     }

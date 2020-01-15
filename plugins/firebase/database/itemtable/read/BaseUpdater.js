@@ -7,13 +7,18 @@ class BaseUpdater {
 
         this.parent = config.parent;
         this.key = config.key;
+        if (this.parent) {
+            this.fullKeyPath = ExtendKeyPath(this.parent.fullKeyPath, this.key);
+        } else {
+            this.fullKeyPath = '';
+        }
         this.type = config.type;
         this.eventNames = config.eventNames;
+        this.table = config.table;
 
         this.database = firebase.database();
         this.setRootPath();
-        this.data = {};
-        this.setData(config.data);
+        this.children = {};
     }
 
     shutdown() {
@@ -29,13 +34,14 @@ class BaseUpdater {
 
     setRootPath(rootPath) {
         if (rootPath === undefined) {
-            rootPath = `${this.parent.rootPath}/${this.key}`;
+            var parentRootPath = (this.parent) ? this.parent.rootPath : '';
+            rootPath = `${parentRootPath}/${this.key}`;
         }
         this.rootPath = rootPath;
 
         var child;
-        for (var key in this.data) {
-            child = this.data[key];
+        for (var key in this.children) {
+            child = this.children[key];
             if (child instanceof BaseUpdater) {
                 child.setRootPath();
             }
@@ -47,12 +53,23 @@ class BaseUpdater {
         return this.database.ref(this.rootPath);
     }
 
+    load() {
+        var self = this;
+        return this.rootRef.once('value')
+            .then(function (snapshot) {
+                // Won't add any child
+                var value = snapshot.val() || {};
+                self.table.setValue(value)
+                return Promise.resolve(value)
+            })
+    }
+
     setData(key, value) {
         if (key === undefined) {
             this.clear(); // Clear
         } else if (value === undefined) {
             var data = key; // JSON data
-            for (key in this.data) { // Not in new data
+            for (key in this.children) { // Not in new data
                 if (!data.hasOwnProperty(key)) {
                     this.removeChild(key);
                 }
@@ -67,23 +84,11 @@ class BaseUpdater {
     }
 
     clear() {
-        for (var key in this.data) {
+        this.table.removeKey(this.fullKeyPath);
+        for (var key in this.children) {
             this.removeChild(key);
         }
         return this;
-    }
-
-    // Overwrite
-    getData(key0, key1, key2) {
-        if (key0 === undefined) {
-            var data = {};
-            for (var key in this.data) {
-                data[key] = this.data[key].getData();
-            }
-            return data;
-        } else {
-            return this.data[key0].getData(key1, key2);
-        }
     }
 
     // Overwrite
@@ -93,28 +98,33 @@ class BaseUpdater {
 
     // Overwrite
     setChildData(key, data) {
-        if (!this.data.hasOwnProperty(key)) {
-            var child = new this.childClass({
-                parent: this,
-                key: key,
-                type: this.type,
-                eventEmitter: this.getEventEmitter(),
-                eventNames: this.eventNames,
-                value: data
-            });
-            child.startUpdate();
-            this.data[key] = child;
+        var keyPath = ExtendKeyPath(this.fullKeyPath, key);
+        this.table.setValue(keyPath, data);
+
+        if (!this.children.hasOwnProperty(key)) {
+            if (this.childClass) {
+                var child = new this.childClass({
+                    parent: this,
+                    key: key,
+                    type: this.type,
+                    eventEmitter: this.getEventEmitter(),
+                    eventNames: this.eventNames,
+                    table: this.table
+                });
+                child.startUpdate();
+                this.children[key] = child;
+            }
         } else {
-            this.data[key].setData(data);
+            this.children[key].setData(data);
         }
         return this;
     }
 
     // Overwrite
     removeChild(key) {
-        if (this.data.hasOwnProperty(key)) {
-            this.data[key].destroy();
-            delete this.data[key];
+        if (this.children.hasOwnProperty(key)) {
+            this.children[key].destroy();
+            delete this.children[key];
         }
         return this;
     }
@@ -124,6 +134,16 @@ class BaseUpdater {
 
     // Overwrite
     stopUpdate() { }
+}
+
+var ExtendKeyPath = function (baseKeyPath, newKey) {
+    if ((baseKeyPath == null) || (baseKeyPath === '')) {
+        return newKey;
+    } else if ((newKey == null) || (newKey === '')) {
+        return baseKeyPath;
+    } else {
+        return `${baseKeyPath}.${newKey}`;
+    }
 }
 
 Object.assign(

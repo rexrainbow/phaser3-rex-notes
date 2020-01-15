@@ -19,15 +19,16 @@ class Tree {
     }
 
     getValue(keys) {
-        if (arguments.length > 1) {
-            keys = arguments;
-        }
         if (keys === undefined) {
             return this.data;
         } else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split('.');
+            }
+
             var entry = this.data;
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                if ((entry == null) || (typeof (entry) !== 'object')) {
+                if (!IsObject(entry)) {
                     return undefined;
                 }
                 entry = entry[keys[i]];
@@ -36,20 +37,31 @@ class Tree {
         }
     }
 
+    cloneValue(keys) {
+        return DeepClone(this.getValue(keys));
+    }
+
     removeKey(keys) {
         if (keys === undefined) {
             this.clear();
         } else {
+            if (typeof (keys) === 'string') {
+                keys = keys.split('.');
+            }
+
             var lastKey = keys.pop();
             var entry = this.data;
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                if ((entry == null) || (typeof (entry) !== 'object')) {
+                if (!IsObject(entry)) {
                     // Stop here
                     return this;
                 }
                 entry = entry[keys[i]];
             }
-            delete entry[lastKey];
+
+            if (IsObject(entry)) {
+                delete entry[lastKey];
+            }
         }
 
         return this;
@@ -59,10 +71,10 @@ class Tree {
         Clear(this.data);
         return this;
     }
+}
 
-    clone() {
-        return DeepClone(this.data);
-    }
+var IsObject = function (obj) {
+    return (obj != null) && (typeof (obj) === 'object')
 }
 
 export default Tree;

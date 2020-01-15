@@ -1,5 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
+import Table from '../../../utils/struct/Tree.js';
 import ColumnUpdater from './read/ColumnUpdater.js';
 import RowUpdater from './read/RowUpdater.js';
 import Pagepdater from './read/PageUpdater.js';
@@ -20,8 +21,10 @@ class ItemTable {
         this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.database = firebase.database();
+        this.table = new Table();
         this.setTableType(GetValue(config, 'type', 3));
         this.setRootPath(GetValue(config, 'root', ''));
+        this.initialFlag = false;
     }
 
     shutdown() {
@@ -48,12 +51,13 @@ class ItemTable {
         this.tableType = type;
         var UpdaterClass = UpdaterClasses[type];
         this.updater = new UpdaterClass({
-            parent: this,
-            key: '',
             type: type,
             eventEmitter: this.getEventEmitter(),
-            eventNames: this.eventNames
+            eventNames: this.eventNames,
+            table: this.table
         })
+
+
         return this;
     }
 
@@ -70,8 +74,17 @@ class ItemTable {
     }
 
     startUpdate() {
+        var self = this;
+        this.initialFlag = false;
         this.updater
             .clear()
+            .load()
+            .then(function (value) {
+                self.initialFlag = true;
+                self.emit(self.eventNames.init, value);
+            })
+
+        this.updater
             .startUpdate();
         return this;
     }
@@ -86,8 +99,12 @@ class ItemTable {
         return this;
     }
 
-    getData(key0, key1, key2) {
-        return this.updater.getData(key0, key1, key2);
+    getData() {
+        return this.table.getValue(arguments);
+    }
+
+    cloneData() {
+        return this.table.cloneValue(arguments);
     }
 }
 
@@ -119,6 +136,7 @@ const TABLE_TYPE = {
 }
 
 const DefaultEventNames = {
+    init: 'init',
     addkey0: 'addkey0',
     removekey0: 'removekey0',
     changekey0: 'changekey0',
