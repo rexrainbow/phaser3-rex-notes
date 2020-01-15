@@ -105,11 +105,15 @@ class LeaderBoard {
         return new Parse.Query(this.customClass);
     }
 
-    isFirstPage() {
+    get pageIndex() {
+        return this.page.pageIndex;
+    }
+
+    get isFirstPage() {
         return (this.page.pageIndex === 0);
     }
 
-    isLastPage() {
+    get isLastPage() {
         return (this.page.isFullPage === false);
     }
 }
