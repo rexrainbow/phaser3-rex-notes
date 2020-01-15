@@ -102,6 +102,10 @@ class Room {
     get maxUsers() {
         return this.userList.maxUsers;
     }
+
+    get isFirstUser() {
+        return this.isInRoom() && this.userList.isFirstUser(this.userID);
+    }
 }
 
 
