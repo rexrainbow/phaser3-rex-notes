@@ -22,7 +22,7 @@ class LeaderBoard {
 
         this.page = new PageLoader({
             dataMode: 'dynamic',
-            itemCount: GetValue(config, 'pageItemCount', 10)
+            itemCount: GetValue(config, 'pageItemCount', 100)
         });
         this.resetQueryFlag = true;
     }
