@@ -281,18 +281,16 @@ nav:
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
+- Firebase:
+    - Authentication: firebase-auth.md
+    - Firestore: firebase-firestore.md
+    - Storage: firebase-storage.md
+    - Applications:
+        - Leaderboard: firebase-leaderboard.md
+        - Broadcast: firebase-broadcast.md
 - Storage:
-    - Offline:
-        - Key-value pairs:
-            - LocalStorage: localstorage.md
-            - LocalForage: localforage.md
-    - Online:
-        - Firebase:
-            - Authentication: firebase-auth.md
-            - Firestore: firebase-firestore.md
-            - Storage: firebase-storage.md
-            - Applications:
-                - Broadcast: firebase-broadcast.md
+    - LocalStorage: localstorage.md
+    - LocalForage: localforage.md        
 - Tools: tools.md
 
 

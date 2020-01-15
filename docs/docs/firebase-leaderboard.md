@@ -1,6 +1,6 @@
 ## Introduction
 
-Leader board/score board, using [firebase-firestore](https://firebase.google.com/docs/firestore/).
+Descending sort score of users, using [firebase-firestore](https://firebase.google.com/docs/firestore/).
 
 - Author: Rex
 
@@ -65,7 +65,12 @@ var game = new Phaser.Game(config);
     var leaderBoard = rexFire.add.leaderBoard({
         root: '',
         // timeFilters: false,
-        // pageItemCount: 100
+        // timeFilterType: 'year',
+        // pageItemCount: 100,
+        // boardID: undefined,
+        // tag: undefined,
+        // userID: '',
+        // userName: undefined
     });
     ```
     - `root` : Path of this leaderBoard.
@@ -81,57 +86,179 @@ var game = new Phaser.Game(config);
                 year: true
             }
             ```
-    - `senderName` : Display name of sender.
-    - `receiverID` : ID of receiver/channel.
+    - `timeFilterType` : Type of time filter.
+        - `'day'`, or `'d'` : Filter scores by current day.
+        - `'week'`, or `'w'` : Filter scores by current week. 
+        - `'month'`, `'m'` : Filter scores by current month.
+        - `'year'`, `'y'` : Filter scores by current year. Default value.
+    - `pageItemCount` : Item count of a page, default value is `100`
+    - `boardID` : Board ID, optional.
+    - `tag` : Custom tag, optional.
+    - `userID` : User ID.
+    - `userName` : Display name of user, optional.
 
-### Send message
+!!! note "Time filter enabled"
+    Add [indexes](https://firebase.google.com/docs/firestore/query-data/indexing) if time filter is enabled.  
+    - `tagD`(ascending), `scoreD`(descending)  
+    - `tagW`(ascending), `scoreW`(descending)  
+    - `tagM`(ascending), `scoreM`(descending)  
+    - `tagY`(ascending), `scoreY`(descending)
 
-1. Set sender in config, or `setSender` method
+### Post score
+
+1. Set user
     ```javascript
-    leaderBoard.setSender(userID, userName);
+    leaderBoard.setUser(userID, userName);
     ```
     or
     ```javascript
-    leaderBoard.setSender({
+    leaderBoard.setUser({
         userID: userID,
         userName: userName
     });
     ```
-    - `userID` : User ID of sender.
-    - `userName` : Display name of sender.
-1. Set receiver in config, or `setReceiver` method
+    - `userID` : User ID.
+    - `userName` : Display name of user, optional.
+1. Set board property, optional.
+    - Board ID
+        ```javascript
+        leaderBoard.setBoardID(boardID);
+        ```
+    - Custom tag
+        ```javascript
+        leaderBoard.setTag(tag);
+        ```
+1. Post score
     ```javascript
-    leaderBoard.setReceiver(receiverID);
+    leaderBoard.post(score)
+    // leaderBoard.post(score, extraData)
+    // leaderBoard.post(score, extraData, timestamp)
+        .then(function(record) { })
+        .catch(function(error) { })
     ```
-    - `receiverID` : ID of receiver/channel.
-1. Send message to receiverID
-    ```javascript
-    leaderBoard.send(message);
-    ```
-    - `message` : A string message, or a JSON data.
+    - `score` : A number, scores will be sorted descend.
+    - `extraData` : Extra data in JSON format.
+    - `timestamp` : Timestamp of posting.
+        - `undefined` : Current time.
+        - A number : For debug usage
 
-### Receive messages
+### Get my score
 
-1. Register receive event
+```javascript
+leaderBoard.getScore()
+// leaderBoard.getScore(userID)
+    .then(function(score) { })
+    .catch(function(error) { })
+```
+
+- `userID` : User ID, optional.
+    - `undefined` : Current user ID.
+- `score` : Score object.
+    - Time filter enabled : 
+        ```javascript
+        {
+            userID: userID,
+            scores: {
+                day: [scoreD, tagD],
+                week: [scoreW, tagW],
+                month: [scoreM, tagM],
+                year: [scoreY, tagY]
+            }
+        }
+        ```
+        - `scoreD`, `scoreW`, `scoreM`, `scoreY` : Score of day/week/month/year.
+        - `tagD`, `tagW`, `tagM`, `tagY` : Time tag of day/week/month/year.
+    - Time filter disabled : `{userID, score}`
+
+### Get my rank
+
+```javascript
+leaderBoard.getRank()
+// leaderBoard.getRank(userID)
+    .then(function(rank) { })
+    .catch(function(error) { })
+```
+
+- `userID` : User ID, optional.
+    - `undefined` : Current user ID.
+- `rank` : Rank object. `{userID, rank}`
+
+### Get scores
+
+1. Set board property, optional.
+    - Board ID
+        ```javascript
+        leaderBoard.setBoardID(boardID);
+        ```
+    - Custom tag
+        ```javascript
+        leaderBoard.setTag(tag);
+        ```
+1. Set time filter, optional.
     ```javascript
-    leaderBoard.on('receive', function(data){
-        // var senderID = data.senderID;
-        // var senderName = data.senderName;
-        // var message = data.message;
-    })
+    leaderBoard.setTimeFilterType(type);    
     ```
-1. Set receiver in config, or `setReceiver` method
+    - `type` : 
+        - `'day'`, or `'d'` : Filter scores by current day.
+        - `'week'`, or `'w'` : Filter scores by current week. 
+        - `'month'`, `'m'` : Filter scores by current month.
+        - `'year'`, `'y'` : Filter scores by current year.
+1. Load scores page by page.
+    - Load first page.
+        ```javascript
+        leaderBoard.loadFirstPage()
+            .then(function(scores) { })
+            .catch(function(error) { })
+        ```
+        - `scores` : An array of score object. Each score object is `{userID, userName, socre}`
+    - Load next page.
+        ```javascript
+        leaderBoard.loadNextPage()
+            .then(function(scores) { })
+            .catch(function(error) { })
+        ```
+        - `scores` : An array of score object. Each score object is `{userID, userName, socre}`
+    - Load previous page.
+        ```javascript
+        leaderBoard.loadPreviousPage()
+            .then(function(scores) { })
+            .catch(function(error) { })
+        ```
+        - `scores` : An array of score object. Each score object is `{userID, userName, socre}`
+    - Reload current page.
+        ```javascript
+        leaderBoard.loadCurrentPage()
+            .then(function(scores) { })
+            .catch(function(error) { })
+        ```
+        - `scores` : An array of score object. Each score object is `{userID, userName, socre}`
+
+#### Page index
+
+- Current page index
     ```javascript
-    leaderBoard.setReceiver(receiverID);
+    var pageIndex = leaderBoard.pageIndex;
     ```
-    - `receiverID` : ID of receiver/channel.
-1. Start receiving
+- Is first page
     ```javascript
-    leaderBoard.startReceiving();
+    var isFirstPage = leaderBoard.isFirstPage;
     ```
-1. Stop receive
+- Is last page
     ```javascript
-    leaderBoard.stopReceiving();
+    var isLastPage = leaderBoard.isLastPage;
     ```
 
-Only receive messages after invoking `startReceiving` method. Previous messages won't be got anymore.
+### Delete
+
+- Delete user
+    ```javascript
+    leaderBoard.deleteUserScore(userID)
+        .then(function(){ })
+        .catch(function(){ })
+    ```
+- Delete board
+    ```javascript
+    leaderBoard.deleteBoard(boardID, tag)
+        .then(function(){ })
+        .catch(function(){ })    
+    ```
