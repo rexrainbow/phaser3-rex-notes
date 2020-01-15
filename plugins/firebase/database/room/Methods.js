@@ -14,6 +14,7 @@ import GetUserList from './GetUserList.js';
 import GetRoomList from './GetRoomList.js';
 import HasRoom from './HasRoom.js';
 import GetRefMethods from './GetRefMethods.js';
+import ClearRoom from './ClearRoom.js';
 
 var Methods = {
     createRoom: CreateRoom,
@@ -32,7 +33,8 @@ var Methods = {
     closeRoom: CloseRoom,
     getUserList: GetUserList,
     getRoomList: GetRoomList,
-    hasRoom: HasRoom
+    hasRoom: HasRoom,
+    clearRoom: ClearRoom
 }
 
 Object.assign(
