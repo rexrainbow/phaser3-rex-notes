@@ -1,7 +1,7 @@
 import GetTime from './GetTime.js';
 import { TimeTagKeys, ScoreKeys } from './Const.js';
 
-var Post = function (score, extraData) {
+var Post = function (score, extraData, timeStamp) {
     var newRecord = {
         userID: this.userID
     };
@@ -11,7 +11,7 @@ var Post = function (score, extraData) {
     if (this.userName) {
         newRecord.userName = this.userName;
     }
-    var curTimeData = GetTime();
+    var curTimeData = GetTime(timeStamp);
     if (this.timeFilters !== false) {
         for (var t in this.timeFilters) {
             if (!this.timeFilters[t]) {
