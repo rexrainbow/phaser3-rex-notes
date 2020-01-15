@@ -154,18 +154,7 @@ leaderBoard.getScore()
 - `userID` : User ID, optional.
     - `undefined` : Current user ID.
 - `score` : Score object.
-    - Time filter enabled : 
-        ```javascript
-        {
-            userID: userID,
-            scores: {
-                day: [scoreD, tagD],
-                week: [scoreW, tagW],
-                month: [scoreM, tagM],
-                year: [scoreY, tagY]
-            }
-        }
-        ```
+    - Time filter enabled :  `{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY}`
         - `scoreD`, `scoreW`, `scoreM`, `scoreY` : Score of day/week/month/year.
         - `tagD`, `tagW`, `tagM`, `tagY` : Time tag of day/week/month/year.
     - Time filter disabled : `{userID, score}`
