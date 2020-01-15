@@ -1,6 +1,6 @@
 ## Introduction
 
-Descending sort score of users, using [firebase-firestore](https://firebase.google.com/docs/firestore/).
+Descending sort scores, using [firebase-firestore](https://firebase.google.com/docs/firestore/).
 
 - Author: Rex
 
