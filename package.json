@@ -40,7 +40,7 @@
         "eslint-plugin-import": "^2.18.2",
         "expose-loader": "^0.7.5",
         "html-webpack-plugin": "^3.2.0",
-        "phaser": "3.21.0",
+        "phaser": "3.22.0",
         "raw-loader": "^0.5.1",
         "rollup": "^1.24.0",
         "rollup-plugin-babel": "^4.3.3",
