@@ -4832,7 +4832,7 @@
     <span class="c1">// userName: undefined</span>
 <span class="p">});</span>
 </pre></div><ul>
-<li><code>root</code> : Path of this leaderBoard.</li>
+<li><code>root</code> : Collection name of this leaderboard.</li>
 <li><code>timeFilters</code> : Time filter of day/week/month/year.<ul>
 <li><code>false</code> : Don't use any time filter.</li>
 <li><code>true</code> : Enable all time filters.</li>
@@ -4864,10 +4864,10 @@
 <div class="admonition note">
 <p class="admonition-title">Time filter enabled</p>
 <p>Add <a href="https://firebase.google.com/docs/firestore/query-data/indexing">indexes</a> if time filter is enabled.<br />
-- <code>tagD</code>(ascending), <code>scoreD</code>(descending)<br />
-- <code>tagW</code>(ascending), <code>scoreW</code>(descending)<br />
-- <code>tagM</code>(ascending), <code>scoreM</code>(descending)<br />
-- <code>tagY</code>(ascending), <code>scoreY</code>(descending)</p>
+- <code>tagD</code>(ascending), <code>scoreD</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
+- <code>tagW</code>(ascending), <code>scoreW</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
+- <code>tagM</code>(ascending), <code>scoreM</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
+- <code>tagY</code>(ascending), <code>scoreY</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)</p>
 </div>
 <h3 id="post-score">Post score<a class="headerlink" href="#post-score" title="Permanent link">&para;</a></h3>
 <ol>
@@ -4923,17 +4923,7 @@
 </ul>
 </li>
 <li><code>score</code> : Score object.<ul>
-<li>Time filter enabled : 
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">userID</span><span class="o">:</span> <span class="nx">userID</span><span class="p">,</span>
-    <span class="nx">scores</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">day</span><span class="o">:</span> <span class="p">[</span><span class="nx">scoreD</span><span class="p">,</span> <span class="nx">tagD</span><span class="p">],</span>
-        <span class="nx">week</span><span class="o">:</span> <span class="p">[</span><span class="nx">scoreW</span><span class="p">,</span> <span class="nx">tagW</span><span class="p">],</span>
-        <span class="nx">month</span><span class="o">:</span> <span class="p">[</span><span class="nx">scoreM</span><span class="p">,</span> <span class="nx">tagM</span><span class="p">],</span>
-        <span class="nx">year</span><span class="o">:</span> <span class="p">[</span><span class="nx">scoreY</span><span class="p">,</span> <span class="nx">tagY</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div><ul>
+<li>Time filter enabled :  <code>{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY}</code><ul>
 <li><code>scoreD</code>, <code>scoreW</code>, <code>scoreM</code>, <code>scoreY</code> : Score of day/week/month/year.</li>
 <li><code>tagD</code>, <code>tagW</code>, <code>tagM</code>, <code>tagY</code> : Time tag of day/week/month/year.</li>
 </ul>

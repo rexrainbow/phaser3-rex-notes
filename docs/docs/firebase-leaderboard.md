@@ -73,7 +73,7 @@ var game = new Phaser.Game(config);
         // userName: undefined
     });
     ```
-    - `root` : Path of this leaderBoard.
+    - `root` : Collection name of this leaderboard.
     - `timeFilters` : Time filter of day/week/month/year.
         - `false` : Don't use any time filter.
         - `true` : Enable all time filters.
@@ -99,10 +99,10 @@ var game = new Phaser.Game(config);
 
 !!! note "Time filter enabled"
     Add [indexes](https://firebase.google.com/docs/firestore/query-data/indexing) if time filter is enabled.  
-    - `tagD`(ascending), `scoreD`(descending)  
-    - `tagW`(ascending), `scoreW`(descending)  
-    - `tagM`(ascending), `scoreM`(descending)  
-    - `tagY`(ascending), `scoreY`(descending)
+    - `tagD`(ascending), `scoreD`(descending), `boardID`(ascending), `tag`(ascending)  
+    - `tagW`(ascending), `scoreW`(descending), `boardID`(ascending), `tag`(ascending)  
+    - `tagM`(ascending), `scoreM`(descending), `boardID`(ascending), `tag`(ascending)  
+    - `tagY`(ascending), `scoreY`(descending), `boardID`(ascending), `tag`(ascending)
 
 ### Post score
 
