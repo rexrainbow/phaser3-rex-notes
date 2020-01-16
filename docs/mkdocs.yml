@@ -287,6 +287,7 @@ nav:
     - Storage: firebase-storage.md
     - Applications:
         - Leaderboard: firebase-leaderboard.md
+        - Files: firebase-files.md
         - Broadcast: firebase-broadcast.md
 - Storage:
     - LocalStorage: localstorage.md
