@@ -64,24 +64,11 @@ var game = new Phaser.Game(config);
     ```javascript
     var userList = rexFire.add.onlineUserList({
         root: '',
-        // maxUsers: 0,
-        // eventNames: {
-        //     join: 'join',
-        //     leave: 'leave',
-        //     update: 'update',
-        //     change: 'change',
-        //     init: 'init',
-        //     changename: 'changename'
-        // }
+        // maxUsers: 0
     });
     ```
     - `root` : Path of this online user list.
     - `maxUsers`: Maximum users in this list. Set to `0` to have infinity users.
-    - `eventNames` : Rename event names.
-        - `eventNames.join` : Event name, any user join list.
-        - `eventNames.leave` : Event name, any user leave list.
-        - `eventNames.update` : Event name, user list updated.
-        - `eventNames.changename` : Event name, user name is changed.
 
 ### Join
 

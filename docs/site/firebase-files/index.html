@@ -4541,8 +4541,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../firebase-onlineuserlist/" title="Online user list" class="md-nav__link">
+      Online user list
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../firebase-broadcast/" title="Broadcast" class="md-nav__link">
       Broadcast
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-idalias/" title="ID-alias" class="md-nav__link">
+      ID-alias
     </a>
   </li>
 
@@ -4769,7 +4793,7 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Initialize firebase application
+<li>Initialize firebase application.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rexFire</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4779,14 +4803,12 @@
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">});</span>
 </pre></div></li>
-<li>Create leader board instance
+<li>Create leader board instance.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fileManager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">files</span><span class="p">({</span>
-    <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// userID: &#39;&#39;</span>
+    <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>root</code> : Collection name of these files.</li>
-<li><code>userID</code> : User ID of file owner.</li>
 </ul>
 </li>
 </ol>
@@ -4909,13 +4931,13 @@
           </a>
         
         
-          <a href="../firebase-broadcast/" title="Broadcast" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../firebase-onlineuserlist/" title="Online user list" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Broadcast
+                Online user list
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

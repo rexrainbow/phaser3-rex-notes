@@ -3342,6 +3342,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distance" class="md-nav__link">
+    Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speed" class="md-nav__link">
+    Speed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -4484,8 +4504,32 @@
 
 
   <li class="md-nav__item">
+    <a href="../firebase-onlineuserlist/" title="Online user list" class="md-nav__link">
+      Online user list
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../firebase-broadcast/" title="Broadcast" class="md-nav__link">
       Broadcast
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-idalias/" title="ID-alias" class="md-nav__link">
+      ID-alias
     </a>
   </li>
 
@@ -4590,6 +4634,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#distance" class="md-nav__link">
+    Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#speed" class="md-nav__link">
+    Speed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -4619,10 +4683,29 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="distance">Distance<a class="headerlink" href="#distance" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get distance between 2 points
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">BetweenPoints</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span> <span class="c1">// a, b: {x, y}</span>
 </pre></div></li>
+<li>Get squared distance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">BetweenPointsSquared</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span> <span class="c1">// a, b: {x, y}</span>
+</pre></div></li>
+<li>Get Chebyshev distance (the maximum of the horizontal and vertical distances)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">Chebyshev</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+</pre></div></li>
+<li>Get snake distance/rectilinear distance/Manhattan distance (the sum of the horizontal and vertical distance)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">Snake</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+</pre></div></li>
+<li>Get power distance (the sum of the horizontal power distance and vertical power distance)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Distance</span><span class="p">.</span><span class="nx">Power</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="speed">Speed<a class="headerlink" href="#speed" title="Permanent link">&para;</a></h3>
+<ul>
 <li>Get speed
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">GetSpeed</span><span class="p">(</span><span class="nx">distance</span><span class="p">,</span> <span class="nx">time</span><span class="p">);</span>
 </pre></div><ul>

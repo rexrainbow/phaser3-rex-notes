@@ -4443,6 +4443,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../firebase-onlineuserlist/" title="Online user list" class="md-nav__link">
+      Online user list
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -4537,6 +4549,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-idalias/" title="ID-alias" class="md-nav__link">
+      ID-alias
+    </a>
   </li>
 
         
@@ -4754,7 +4778,7 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Initialize firebase application
+<li>Initialize firebase application.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rexFire</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4764,24 +4788,20 @@
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">});</span>
 </pre></div></li>
-<li>Create broadcast instance
+<li>Create broadcast instance.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// senderID: &#39;&#39;,</span>
-    <span class="c1">// senderName: &#39;&#39;,</span>
     <span class="c1">// receiverID: &#39;&#39;</span>
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>root</code> : Path of this messager.</li>
-<li><code>senderID</code> : User ID of sender.</li>
-<li><code>senderName</code> : Display name of sender.</li>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 </ul>
 </li>
 </ol>
 <h3 id="send-message">Send message<a class="headerlink" href="#send-message" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Set sender in config, or <code>setSender</code> method
+<li>Set sender in config, or <code>setSender</code> method.
     <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setSender</span><span class="p">(</span><span class="nx">userID</span><span class="p">,</span> <span class="nx">userName</span><span class="p">);</span>
 </pre></div>
     or
@@ -4794,13 +4814,13 @@
 <li><code>userName</code> : Display name of sender.</li>
 </ul>
 </li>
-<li>Set receiver in config, or <code>setReceiver</code> method
+<li>Set receiver in config, or <code>setReceiver</code> method.
     <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 </ul>
 </li>
-<li>Send message to receiverID
+<li>Send message to receiverID.
     <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>message</code> : A string message, or a JSON data.</li>
@@ -4851,7 +4871,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../firebase-files/" title="Files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../firebase-onlineuserlist/" title="Online user list" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4860,19 +4880,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Files
+                Online user list
               </span>
             </div>
           </a>
         
         
-          <a href="../localstorage/" title="LocalStorage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../firebase-idalias/" title="ID-alias" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                LocalStorage
+                ID-alias
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

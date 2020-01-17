@@ -290,6 +290,7 @@ nav:
         - Files: firebase-files.md
         - Online user list: firebase-onlineuserlist.md
         - Broadcast: firebase-broadcast.md
+        - ID-alias: firebase-idalias.md
 - Storage:
     - LocalStorage: localstorage.md
     - LocalForage: localforage.md        
