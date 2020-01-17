@@ -3,6 +3,8 @@
 ## Links
 
 - [Phaser3](https://github.com/photonstorm/phaser)
+    - [Discord channel](https://discord.gg/phaser)
+    - [Forum](https://phaser.discourse.group/)
 - [API](https://photonstorm.github.io/phaser3-docs/index.html)
 - [Notes](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html)
     - [rexUI](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/ui-overview/)
