@@ -4832,10 +4832,18 @@
 <li><code>alias</code> : Another unique ID.</li>
 </ul>
 </li>
-<li>Get alias
-    <div class="codehilite"><pre><span></span><span class="nx">idAlias</span><span class="p">.</span><span class="nx">getId</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+<li>Get ID from alias
+    <div class="codehilite"><pre><span></span><span class="nx">idAlias</span><span class="p">.</span><span class="nx">getId</span><span class="p">(</span><span class="nx">alias</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
         <span class="c1">// var alias = result.alias;</span>
+        <span class="c1">// var id = result.id; // Return undefined if alias is not existed.</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
+</pre></div></li>
+<li>Get alias from ID
+    <div class="codehilite"><pre><span></span><span class="nx">idAlias</span><span class="p">.</span><span class="nx">getAlias</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="c1">// var alias = result.alias; // Return undefined if id is not existed.</span>
         <span class="c1">// var id = result.id;</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>

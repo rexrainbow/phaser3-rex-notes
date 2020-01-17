@@ -105,11 +105,20 @@ idAlias.getRandomAlias(id, {
     ```
     - `id` : An unique ID.
     - `alias` : Another unique ID.
-- Get alias
+- Get ID from alias
     ```javascript
-    idAlias.getId(id)
+    idAlias.getId(alias)
         .then(function(result) { 
             // var alias = result.alias;
+            // var id = result.id; // Return undefined if alias is not existed.
+        })
+        .catch(function(error) { })
+    ```
+- Get alias from ID
+    ```javascript
+    idAlias.getAlias(id)
+        .then(function(result) { 
+            // var alias = result.alias; // Return undefined if id is not existed.
             // var id = result.id;
         })
         .catch(function(error) { })
