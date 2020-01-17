@@ -51,7 +51,7 @@ var game = new Phaser.Game(config);
 
 ### Create instance
 
-1. Initialize firebase application
+1. Initialize firebase application.
     ```javascript
     var rexFire = scene.plugins.get('rexFire').initializeApp({
        apiKey: '...',
@@ -62,15 +62,13 @@ var game = new Phaser.Game(config);
        messagingSenderId: '...'
     });
     ```
-2. Create leader board instance
+2. Create leader board instance.
     ```javascript
     var fileManager = rexFire.add.files({
-        root: '',
-        // userID: ''
+        root: ''
     });
     ```
     - `root` : Collection name of these files.
-    - `userID` : User ID of file owner.
 
 ### Save file
 

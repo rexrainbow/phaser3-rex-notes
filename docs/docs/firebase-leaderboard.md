@@ -49,7 +49,7 @@ var game = new Phaser.Game(config);
 
 ### Create instance
 
-1. Initialize firebase application
+1. Initialize firebase application.
     ```javascript
     var rexFire = scene.plugins.get('rexFire').initializeApp({
        apiKey: '...',
@@ -60,7 +60,7 @@ var game = new Phaser.Game(config);
        messagingSenderId: '...'
     });
     ```
-2. Create leader board instance
+2. Create leader board instance.
     ```javascript
     var leaderBoard = rexFire.add.leaderBoard({
         root: '',
@@ -68,9 +68,7 @@ var game = new Phaser.Game(config);
         // timeFilterType: 'year',
         // pageItemCount: 100,
         // boardID: undefined,
-        // tag: undefined,
-        // userID: '',
-        // userName: undefined
+        // tag: undefined
     });
     ```
     - `root` : Collection name of this leaderboard.
@@ -94,8 +92,6 @@ var game = new Phaser.Game(config);
     - `pageItemCount` : Item count of a page, default value is `100`
     - `boardID` : Board ID, optional.
     - `tag` : Custom tag, optional.
-    - `userID` : User ID.
-    - `userName` : Display name of user, optional.
 
 !!! note "Time filter enabled"
     Add [indexes](https://firebase.google.com/docs/firestore/query-data/indexing) if time filter is enabled.  
@@ -106,7 +102,7 @@ var game = new Phaser.Game(config);
 
 ### Post score
 
-1. Set user
+1. Set user.
     ```javascript
     leaderBoard.setUser(userID, userName);
     ```

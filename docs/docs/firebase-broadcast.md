@@ -49,7 +49,7 @@ var game = new Phaser.Game(config);
 
 ### Create instance
 
-1. Initialize firebase application
+1. Initialize firebase application.
     ```javascript
     var rexFire = scene.plugins.get('rexFire').initializeApp({
        apiKey: '...',
@@ -60,23 +60,19 @@ var game = new Phaser.Game(config);
        messagingSenderId: '...'
     });
     ```
-2. Create broadcast instance
+2. Create broadcast instance.
     ```javascript
     var messager = rexFire.add.broadcast({
         root: '',
-        // senderID: '',
-        // senderName: '',
         // receiverID: ''
     });
     ```
     - `root` : Path of this messager.
-    - `senderID` : User ID of sender.
-    - `senderName` : Display name of sender.
     - `receiverID` : ID of receiver/channel.
 
 ### Send message
 
-1. Set sender in config, or `setSender` method
+1. Set sender in config, or `setSender` method.
     ```javascript
     messager.setSender(userID, userName);
     ```
@@ -89,12 +85,12 @@ var game = new Phaser.Game(config);
     ```
     - `userID` : User ID of sender.
     - `userName` : Display name of sender.
-1. Set receiver in config, or `setReceiver` method
+1. Set receiver in config, or `setReceiver` method.
     ```javascript
     messager.setReceiver(receiverID);
     ```
     - `receiverID` : ID of receiver/channel.
-1. Send message to receiverID
+1. Send message to receiverID.
     ```javascript
     messager.send(message);
     ```
