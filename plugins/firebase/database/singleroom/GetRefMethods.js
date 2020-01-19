@@ -23,8 +23,8 @@ var Methods = {
         return this.getRoomDataPath('users');
     },
 
-    getItemTablePath() {
-        return this.getRoomDataPath('table');
+    getItemTablePath(key) {
+        return `${this.getRoomDataPath('tables')}/${key}`;
     }
 }
 

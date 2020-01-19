@@ -4,6 +4,7 @@ import Table from '../../../utils/struct/Tree.js';
 import ColumnUpdater from './read/ColumnUpdater.js';
 import RowUpdater from './read/RowUpdater.js';
 import Pagepdater from './read/PageUpdater.js';
+import Init from './read/Init.js';
 import SetData from './write/SetData.js';
 import RemoveData from './write/RemoveData.js';
 import IncValue from './write/IncValue.js';
@@ -74,16 +75,7 @@ class ItemTable {
     }
 
     startUpdate() {
-        var self = this;
-        this.initialFlag = false;
-        this.updater
-            .clear()
-            .load()
-            .then(function (value) {
-                self.initialFlag = true;
-                self.emit(self.eventNames.init, value);
-            })
-
+        Init.call(this);
         this.updater
             .startUpdate();
         return this;
@@ -137,6 +129,7 @@ const TABLE_TYPE = {
 
 const DefaultEventNames = {
     init: 'init',
+    update: 'update',
     addkey0: 'addkey0',
     removekey0: 'removekey0',
     changekey0: 'changekey0',
@@ -145,7 +138,7 @@ const DefaultEventNames = {
     changekey1: 'changekey1',
     addkey2: 'addkey2',
     removekey2: 'removekey2',
-    changekey2: 'changekey2',
+    changekey2: 'changekey2'
 }
 
 export default ItemTable

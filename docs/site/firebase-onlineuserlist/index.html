@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,12 +55,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -4443,6 +4443,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../firebase-singleroom/" title="Single room" class="md-nav__link">
+      Single room
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -4539,6 +4551,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#user-list" class="md-nav__link">
+    User list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -4569,6 +4588,18 @@
   <li class="md-nav__item">
     <a href="../firebase-broadcast/" title="Broadcast" class="md-nav__link">
       Broadcast
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-itemtable/" title="Item table" class="md-nav__link">
+      Item table
     </a>
   </li>
 
@@ -4745,6 +4776,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#user-list" class="md-nav__link">
+    User list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -4872,6 +4910,28 @@
 <div class="codehilite"><pre><span></span><span class="nx">userList</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="user-list">User list<a class="headerlink" href="#user-list" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get users in user list
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">getUsers</span><span class="p">();</span>
+</pre></div><ul>
+<li><code>users</code> : Array of user <code>{userID, userName}</code></li>
+</ul>
+</li>
+<li>Is first user in user list?
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFirstUser</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isFirstUser</span><span class="p">(</span><span class="nx">userID</span><span class="p">);</span>
+<span class="c1">// var isFirstUser = userList.isFirstUser();  // Current user is first user</span>
+</pre></div></li>
+<li>User list is full
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFull</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isFull</span><span class="p">();</span>
+</pre></div></li>
+<li>Maximun users setting value
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">maxUsers</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">maxUsers</span><span class="p">;</span>
+</pre></div></li>
+<li>Current user is in list
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInList</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isInList</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Any user join
@@ -4886,7 +4946,7 @@
 <li><code>user</code> : <code>{userID, userName}</code></li>
 </ul>
 </li>
-<li>User list updated
+<li>User list updated, includes user join, user leave, and user name changed
     <div class="codehilite"><pre><span></span><span class="nx">userList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="nx">users</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>users</code> : Array of user <code>{userID, userName}</code></li>
@@ -4898,7 +4958,6 @@
 </ul>
                 
                   
-                
                 
               
               
@@ -4917,7 +4976,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../firebase-files/" title="Files" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../firebase-singleroom/" title="Single room" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4926,7 +4985,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Files
+                Single room
               </span>
             </div>
           </a>
@@ -4975,7 +5034,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c648116f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

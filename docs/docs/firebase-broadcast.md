@@ -64,11 +64,16 @@ var game = new Phaser.Game(config);
     ```javascript
     var messager = rexFire.add.broadcast({
         root: '',
-        // receiverID: ''
+        // receiverID: '',
+        // history: 0
     });
     ```
     - `root` : Path of this messager.
     - `receiverID` : ID of receiver/channel.
+    - `history` : Stored received (history)  messages in client side.
+        - `0`, or `false` : No history message stored.
+        - `-1`, or `true` : Infinity history message stored. i.e. store all messages from starting updating.
+        - A number larger then `0` : Length of stored history message.
 
 ### Send message
 
@@ -121,3 +126,16 @@ var game = new Phaser.Game(config);
     ```
 
 Only receive messages after invoking `startReceiving` method. Previous messages won't be got anymore.
+
+#### Received messages
+
+Received messages will be saved in client side.
+
+- Get received (history) messages.
+    ```javascript
+    var messages = messager.getHistory();
+    ```
+- Clear history messages.
+    ```javascript
+    messager.clearHistory();
+    ```

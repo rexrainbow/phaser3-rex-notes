@@ -31,6 +31,7 @@ class ColumnUpdater extends BaseUpdater {
                 this.emit(this.eventNames.addkey2, this.pageKey, this.key, key, value);
                 break;
         }
+        this.emit(this.eventNames.update, this.table.data);
     }
 
     removeCol(snapshot) {
@@ -48,6 +49,7 @@ class ColumnUpdater extends BaseUpdater {
                 this.emit(this.eventNames.removekey2, this.pageKey, this.key, key);
                 break;
         }
+        this.emit(this.eventNames.update, this.table.data);        
     }
 
     changeColValue(snapshot) {
@@ -66,6 +68,7 @@ class ColumnUpdater extends BaseUpdater {
                 this.emit(this.eventNames.changekey2, this.pageKey, this.key, key, value);
                 break;
         }
+        this.emit(this.eventNames.update, this.table.data);        
     }
 
     get pageKey() {

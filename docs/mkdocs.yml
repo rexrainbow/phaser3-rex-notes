@@ -288,8 +288,10 @@ nav:
     - Applications:
         - Leaderboard: firebase-leaderboard.md
         - Files: firebase-files.md
+        - Single room: firebase-singleroom.md
         - Online user list: firebase-onlineuserlist.md
         - Broadcast: firebase-broadcast.md
+        - Item table: firebase-itemtable.md
         - ID-alias: firebase-idalias.md
 - Storage:
     - LocalStorage: localstorage.md

@@ -36,15 +36,13 @@ var CreateRoomInstance = function () {
     var rexFire = this.plugins.get('rexFire');
     var room = rexFire.add.room({
         root: 'test-room',
-        itemTable: {
-            type: '1d',
-            eventNames: {
-                init: 'table.init',
-                addkey0: 'table.update',
-                removekey0: 'table.update',
-                changekey0: 'table.update'
+        tables: [
+            {
+                // A 1d table named 'data'
+                key: 'data',
+                type: '1d'
             }
-        }
+        ]
     })
         .setUser(GetRandomWord(5), '')
 
@@ -58,14 +56,14 @@ var CreateRoomInstance = function () {
         .on('broadcast.receive', function (message) {
             console.log(`${room.userID}: Receive message '${message.message}' sent from ${message.senderID}`)
         })
-        .on('table.init', function () {
-            console.log(`${room.userID}: Table init, `, room.itemTable.cloneData())
+        .on('tables.data.init', function () {
+            console.log(`${room.userID}: Tables.data init, `, room.getTable('data').cloneData())
         })
-        .on('table.update', function () {
-            if (!room.itemTable.initialFlag) {
+        .on('tables.data.update', function () {
+            if (!room.getTable('data').initialFlag) {
                 return;
             }
-            console.log(`${room.userID}: Table update, `, room.itemTable.cloneData())
+            console.log(`${room.userID}: Tables.data update, `, room.getTable('data').cloneData())
         })
     return room;
 }
@@ -94,8 +92,8 @@ var CreateRandomRoom = function () {
             console.log(`${userID}: Create room ${roomConfig.roomID}`)
             // room.changeRoomName('aaabbb')
             // room.changeFilterData({ a: 30, b: 40 })
-            room.itemTable.setData('a', 10);
-            room.itemTable.setData('b', 20);
+            room.getTable('data').setData('a', 10);
+            room.getTable('data').setData('b', 20);
             return Promise.resolve(roomConfig)
         });
 }

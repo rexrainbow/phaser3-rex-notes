@@ -108,6 +108,31 @@ userList.leave(userID);
 userList.changeUserName(newUserName);
 ```
 
+### User list
+
+- Get users in user list
+    ```javascript
+    var users = userList.getUsers();
+    ```
+    - `users` : Array of user `{userID, userName}`
+- Is first user in user list?
+    ```javascript
+    var isFirstUser = userList.isFirstUser(userID);
+    // var isFirstUser = userList.isFirstUser();  // Current user is first user
+    ```
+- User list is full
+    ```javascript
+    var isFull = userList.isFull();
+    ```
+- Maximun users setting value
+    ```javascript
+    var maxUsers = userList.maxUsers;
+    ```
+- Current user is in list
+    ```javascript
+    var isInList = userList.isInList;
+    ```
+
 ### Events
 
 - Any user join
@@ -120,7 +145,7 @@ userList.changeUserName(newUserName);
     userList.on('leave', user);
     ```
     - `user` : `{userID, userName}`
-- User list updated
+- User list updated, includes user join, user leave, and user name changed
     ```javascript
     userList.on('update', users);
     ```

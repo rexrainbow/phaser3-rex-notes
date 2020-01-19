@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,12 +55,12 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
@@ -4445,6 +4445,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../firebase-singleroom/" title="Single room" class="md-nav__link">
+      Single room
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../firebase-onlineuserlist/" title="Online user list" class="md-nav__link">
       Online user list
     </a>
@@ -4534,6 +4546,19 @@
     Receive messages
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#received-messages" class="md-nav__link">
+    Received messages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -4549,6 +4574,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-itemtable/" title="Item table" class="md-nav__link">
+      Item table
+    </a>
   </li>
 
         
@@ -4707,6 +4744,19 @@
     Receive messages
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#received-messages" class="md-nav__link">
+    Received messages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -4791,11 +4841,18 @@
 <li>Create broadcast instance.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// receiverID: &#39;&#39;</span>
+    <span class="c1">// receiverID: &#39;&#39;,</span>
+    <span class="c1">// history: 0</span>
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>root</code> : Path of this messager.</li>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
+<li><code>history</code> : Stored received (history)  messages in client side.<ul>
+<li><code>0</code>, or <code>false</code> : No history message stored.</li>
+<li><code>-1</code>, or <code>true</code> : Infinity history message stored. i.e. store all messages from starting updating.</li>
+<li>A number larger then <code>0</code> : Length of stored history message.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -4850,9 +4907,18 @@
 </pre></div></li>
 </ol>
 <p>Only receive messages after invoking <code>startReceiving</code> method. Previous messages won't be got anymore.</p>
+<h4 id="received-messages">Received messages<a class="headerlink" href="#received-messages" title="Permanent link">&para;</a></h4>
+<p>Received messages will be saved in client side.</p>
+<ul>
+<li>Get received (history) messages.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">messager</span><span class="p">.</span><span class="nx">getHistory</span><span class="p">();</span>
+</pre></div></li>
+<li>Clear history messages.
+    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">clearHistory</span><span class="p">();</span>
+</pre></div></li>
+</ul>
                 
                   
-                
                 
               
               
@@ -4886,13 +4952,13 @@
           </a>
         
         
-          <a href="../firebase-idalias/" title="ID-alias" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../firebase-itemtable/" title="Item table" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                ID-alias
+                Item table
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -4929,7 +4995,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c648116f.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

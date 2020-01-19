@@ -3,7 +3,7 @@ import GetValue from '../../../utils/object/GetValue.js';
 import CreateUserList from './utils/CreateUserList.js';
 import CreateRoomList from './utils/CreateRoomList.js';
 import CreateBroadcast from './utils/CreateBroadcast.js';
-import CreateItemTable from './utils/CreateItemTable.js';
+import CreateTables from './utils/CreateTables.js';
 import IsPlainObject from '../../../utils/object/IsPlainObject.js';
 import Methods from './Methods.js';
 
@@ -34,8 +34,8 @@ class Room {
         this.roomList = CreateRoomList.call(this, config);
         // Broadcast
         this.broadcast = CreateBroadcast.call(this, config);
-        // Item table
-        this.itemTable = CreateItemTable.call(this, config);
+        // Item tables
+        this.tables = CreateTables.call(this, config);
     }
 
     shutdown() {
@@ -99,12 +99,24 @@ class Room {
         return (roomID === undefined) ? (this.roomID !== undefined) : (this.roomID === roomID);
     }
 
+    isFull() {
+        return this.userList.isFull();
+    }
+
+    isFirstUser(userID) {
+        return this.userList.isFirstUser(userID);
+    }
+
+    getUsers() {
+        return this.userList.getUsers();
+    }
+
     get maxUsers() {
         return this.userList.maxUsers;
     }
 
-    get isFirstUser() {
-        return this.isInRoom() && this.userList.isFirstUser(this.userID);
+    getTable(key) {
+        return this.tables[key];
     }
 }
 
