@@ -5,17 +5,70 @@ Move through path tiles, used in monopoly-like application, chess behavior of Bo
 - Author: Rex
 - Behavior of chess
 
-## Source code
+## Live demo
 
-Included in [board plugin](board.md#source-code).
+- [Monopoly](https://codepen.io/rexrainbow/pen/WWJxZL)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-monopoly)
 
-### Install scene plugin
+### Install plugin
 
-Included in board plugin.
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    ```
+- Add monopoly behavior
+    ```javascript
+    var monopoly = scene.rexBoard.add.monopoly(chess, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add monopoly behavior
+    ```javascript
+    var monopoly = scene.rexBoard.add.monopoly(chess, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Monopoly } from 'phaser3-rex-plugins/plugins/board.js';
+    ```
+- Add monopoly behavior
+    ```javascript
+    var board = new Monopoly(chess, config);
+    ```
 
 ### Create instance
 

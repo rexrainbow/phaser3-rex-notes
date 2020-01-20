@@ -5,10 +5,6 @@ Properties of chess, chess behavior of Board system.
 - Author: Rex
 - Behavior of chess
 
-## Source code
-
-Included in [board plugin](board.md#source-code).
-
 ## Usage
 
 ### Add chess data object

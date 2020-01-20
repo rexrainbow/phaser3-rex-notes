@@ -5,38 +5,74 @@ Core object of Board system.
 - Author: Rex
 - Member of scene
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/board-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexboardplugin.min.js)
+- [Touch events](https://codepen.io/rexrainbow/pen/QVrGpE)
+- [Get tileXY at direction](https://codepen.io/rexrainbow/pen/QWWVrMx)
+- [Line to tileXY array](https://codepen.io/rexrainbow/pen/aMBXOE)
+- [Triangle to tileXY array](https://codepen.io/rexrainbow/pen/wLYmyw)
+- [Ellipse to tileXY array](https://codepen.io/rexrainbow/pen/LYYJmxE)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Install scene plugin
+#### Load minify file
 
-Install plugin in [configuration of game](game.md#configuration)
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    ```
+- Add board object
+    ```javascript
+    var board = scene.rexBoard.add.board(config);
+    ```
 
-```javascript
-import BoardPlugin from './plugins/board-plugin.js';
+#### Import plugin
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexBoard',
-            plugin: BoardPlugin,
-            mapping: 'rexBoard'
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add board object
+    ```javascript
+    var board = scene.rexBoard.add.board(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Board, HexagonGrid, QuadGrid } from 'phaser3-rex-plugins/plugins/board.js';
+    ```
+- Add board object
+    ```javascript
+    var board = new Board(scene, config);
+    ```
 
 ### Add board object
 

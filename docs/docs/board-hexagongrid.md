@@ -5,17 +5,9 @@ Hexagon grid object of Board system.
 - Author: Rex
 - Grid object of board
 
-## Source code
-
-Included in [board plugin](board.md#source-code).
-
 ## Usage
 
-See [board examples](board.md#usage).
-
-### Install scene plugin
-
-Included in board plugin.
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board)
 
 ### Create instance
 

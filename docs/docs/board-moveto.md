@@ -5,17 +5,70 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 - Author: Rex
 - Behavior of chess
 
-## Source code
+## Live demo
 
-Included in [board plugin](board.md#source-code).
+- [Push](https://codepen.io/rexrainbow/pen/rNNqpPg)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-moveto)
 
-### Install scene plugin
+### Install plugin
 
-Included in board plugin.
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = scene.rexBoard.add.moveTo(chess, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = scene.rexBoard.add.moveTo(chess, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { MoveTo } from 'phaser3-rex-plugins/plugins/board.js';
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = new MoveTo(chess, config);
+    ```
 
 ### Create instance
 

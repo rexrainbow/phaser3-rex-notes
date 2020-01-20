@@ -5,17 +5,75 @@ Find moveable area or moving path, chess behavior of Board system.
 - Author: Rex
 - Behavior of chess
 
-## Source code
+## Live demo
 
-Included in [board plugin](board.md#source-code).
+- [Find area, get path](https://codepen.io/rexrainbow/pen/qvJwjJ)
+- [Draw path](https://codepen.io/rexrainbow/pen/JjjwPgE)
+- [Energy drain](https://codepen.io/rexrainbow/pen/vMjNNm)
+- [Turning cost](https://codepen.io/rexrainbow/pen/xeyvPx)
+- [Move from high to low](https://codepen.io/rexrainbow/pen/NJOmQg)
+- [Chinese checkers](https://codepen.io/rexrainbow/pen/axXrZg)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-pathfinder)
 
-### Install scene plugin
+### Install plugin
 
-Included in board plugin.
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    ```
+- Add path-finder behavior
+    ```javascript
+    var pathFinder = scene.rexBoard.add.pathFinder(chess, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add path-finder behavior
+    ```javascript
+    var pathFinder = scene.rexBoard.add.pathFinder(chess, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { PathFinder } from 'phaser3-rex-plugins/plugins/board.js';
+    ```
+- Add path-finder behavior
+    ```javascript
+    var pathFinder = new PathFinder(chess, config);
+    ```
 
 ### Create instance
 

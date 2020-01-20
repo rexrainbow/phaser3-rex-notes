@@ -5,17 +5,61 @@ Match3-like gameplay template.
 - Author: Rex
 - Template
 
-## Source code
+## Live demo
 
-[Template](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/bejeweled/Bejeweled.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbejeweled.min.js)
+- [Default](https://codepen.io/rexrainbow/pen/wEVYoY)
+- [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-bejeweled)
 
-### Create bejeweled object
+### Install plugin
 
-[Install rexBoard plugin](board.md#install-scene-plugin) before creating bejeweled object.
+#### Load minify file
+
+- Load rexBoard plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    scene.load.script('rexbejeweled', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbejeweled.min.js');
+    ```
+- Add bejeweled object
+    ```javascript
+    var bejeweled = new rexbejeweled(scene, config);
+    ```
+
+#### Import template
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install rexBoard plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    import Bejeweled from 'phaser3-rex-plugins/templates/bejeweled/Bejeweled.js';
+
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add bejeweled object
+    ```javascript
+    var bejeweled = new Bejeweled(scene, config);
+    ```
+
+### Create bejeweled object
 
 ```javascript
 var bejeweled = new Bejeweled(scene, {

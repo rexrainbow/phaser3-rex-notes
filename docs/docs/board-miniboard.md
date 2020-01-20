@@ -5,17 +5,66 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 - Author: Rex
 - Container Game object of chess group
 
-## Source code
-
-Included in [board plugin](board.md#source-code).
-
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-miniBoard)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-miniboard)
 
-### Install scene plugin
+### Install plugin
 
-Included in board plugin.
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
+    ```
+- Add container
+    ```javascript
+    var miniBoard = scene.rexBoard.add.miniBoard(x, y, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add container
+    ```javascript
+    var miniBoard = scene.rexBoard.add.miniBoard(x, y, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { MiniBoard } from 'phaser3-rex-plugins/plugins/board.js';
+    ```
+- Add match object
+    ```javascript
+    var miniBoard = new MiniBoard(scene, x, y, config);
+    ```
 
 ### Add Container
 
