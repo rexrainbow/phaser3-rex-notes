@@ -13,42 +13,94 @@ Move game object toward current angle of game object, with a constant speed.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bullet)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexBullet from './plugins/bullet.js';
-```
-
-### Install global plugin
-
-Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import BulletPlugin from './plugins/bullet-plugin.js';
-
-var config = {
-    // ...
-    physics: {
-        default: 'arcade',
-        arcade: {
-            // debug: true
+- Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        // ...
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
         }
-    },
-    plugins: {
-        global: [{
-            key: 'rexBullet',
-            plugin: BulletPlugin,
-            start: true
+    }
+    var game = new Phaser.Game(config);
+    ```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexbulletplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbulletplugin.min.js', true);
+    ```
+- Add bullet behavior
+    ```javascript
+    var bullet = scene.plugins.get('rexbulletplugin').add(gameObject, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BulletPlugin from 'phaser3-rex-plugins/plugins/bullet-plugin.js';
+    var config = {
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
         },
         // ...
-        ]
+        plugins: {
+            global: [{
+                key: 'rexBullet',
+                plugin: BulletPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add bullet behavior
+    ```javascript
+    var bullet = scene.plugins.get('rexBullet').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        // ...
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
+        }
     }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    var game = new Phaser.Game(config);
+    ```
+- Import class
+    ```javascript
+    import Bullet from 'phaser3-rex-plugins/plugins/bullet.js';
+    ```
+- Add bullet behavior
+    ```javascript
+    var bullet = new Bullet(gameObject, config);
+    ```
 
 ### Create instance
 

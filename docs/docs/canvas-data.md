@@ -5,44 +5,74 @@ Get image data from texture, or text object.
 - Author: Rex
 - Method only
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvasdata-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcanvasdataplugin.min.js)
+- [Text to bit-map](https://codepen.io/rexrainbow/pen/RzzOjK)
+- [Texture to color-map](https://codepen.io/rexrainbow/pen/dBBLvY)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasdata)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexCanvasData from './plugins/canvasdata.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcanvasdataplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcanvasdataplugin.min.js', true);
+    ```
+- Add canvas-data object
+    ```javascript
+    var canvasData = scene.plugins.get('rexcanvasdataplugin').textObjectToBitMap(textObject);
+    var canvasData = scene.plugins.get('rexcanvasdataplugin').textureTColorMap(textureKey, frameName);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import CanvasDataPlugin from './plugins/canvasdata-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexCanvasData',
-            plugin: CanvasDataPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CanvasDataPlugin from 'phaser3-rex-plugins/plugins/canvasdata-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCanvasData',
+                plugin: CanvasDataPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add canvas-data object
+    ```javascript
+    var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject);
+    var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import CanvasData from 'phaser3-rex-plugins/plugins/canvasdata.js';
+    ```
+- Add canvas-data object
+    ```javascript
+    var canvasdata = CanvasData.textObjectToBitMap(textObject);
+    var canvasdata = CanvasData.textureTColorMap(textureKey, frameName);
+    ```
 
 ### Text object -> Bit map
 

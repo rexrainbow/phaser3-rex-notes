@@ -8,44 +8,70 @@ Set position based on visible window.
 - Author: Rex
 - Behavior of game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/anchor-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexanchorplugin.min.js)
+- [Anchor](https://codepen.io/rexrainbow/pen/oVxWVB)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/anchor)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexAnchor from './plugins/anchor.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexanchorplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexanchorplugin.min.js', true);
+    ```
+- Add anchor behavior
+    ```javascript
+    var anchor = scene.plugins.get('rexanchorplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import AnchorPlugin from './plugins/anchor-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexAnchor',
-            plugin: AnchorPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import AnchorPlugin from 'phaser3-rex-plugins/plugins/anchor-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexAnchor',
+                plugin: AnchorPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add anchor behavior
+    ```javascript
+    var anchor = scene.plugins.get('rexAnchor').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Anchor from 'phaser3-rex-plugins/plugins/anchor.js';
+    ```
+- Add anchor behavior
+    ```javascript
+    var anchor = new Anchor(gameObject, config);
+    ```
 
 ### Create instance
 

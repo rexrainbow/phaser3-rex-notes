@@ -5,15 +5,71 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 - Author: Rex
 - Game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/circlemaskimage-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcirclemaskimageplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/circlemaskimage.js)
+- [Circle-mask-image](https://codepen.io/rexrainbow/pen/XWrMKBY)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circlemaskimage)
+
+### Install plugin
+
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcirclemaskimageplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcirclemaskimageplugin.min.js', true);
+    ```
+- Add circle-mask-image object
+    ```javascript
+    var image = scene.add.rexCircleMaskImage(x, y, key, frame, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CircleMaskImagePlugin from 'phaser3-rex-plugins/plugins/circlemaskimage-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCircleMaskImagePlugin',
+                plugin: CircleMaskImagePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add circle-mask-image object
+    ```javascript
+    var image = scene.add.rexCircleMaskImage(x, y, key, frame, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import CircleMaskImage from 'phaser3-rex-plugins/plugins/circlemaskimage.js';
+    ```
+- Add circle-mask-image object
+    ```javascript    
+    var image = new CircleMaskImage(scene, x, y, key, frame, config);
+    sscene.add.existing(image);
+    ```
 
 ### Install plugin
 
@@ -39,14 +95,15 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var image = scene.add.rexCircleMaskImage(x, y, key, frame, config);
+var image = scene.add.rexCircleMaskImage(x, y, key, frame, {
+    maskType: 0
+});
 ```
 
-- `config` :
-    - `maskType` : Type of mask.
-        - `null` : No mask.
-        - `0`, or `'circle'` : Circle mask.
-        - `1`, or `'ellipse'` : Ellipse mask.
+- `maskType` : Type of mask.
+    - `null` : No mask.
+    - `0`, or `'circle'` : Circle mask.
+    - `1`, or `'ellipse'` : Ellipse mask.
 
 
 Add image from JSON

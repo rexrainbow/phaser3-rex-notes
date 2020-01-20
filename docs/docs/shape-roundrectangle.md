@@ -5,11 +5,9 @@ Round rectangle shape.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/roundrectangle-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexroundrectangleplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/roundrectangle.js)
+- [Round rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)
 
 ## Usage
 
@@ -17,24 +15,61 @@ Round rectangle shape.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexRoundRectanglePlugin',
-            plugin: RoundRectanglePlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexroundrectangleplugin', 'https://raw.githubusercontent.com/rexrainbow/    phaser3-rex-notes/master/dist/rexroundrectangleplugin.min.js', true);
+    ```
+- Add shape object
+    ```javascript
+    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexRoundRectanglePlugin',
+                plugin: RoundRectanglePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add shape object
+    ```javascript
+    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import RoundRectangle from 'phaser3-rex-plugins/plugins/roundrectangle.js';
+    ```
+- Add shape object
+    ```javascript    
+    var rect = new RoundRectangle(scene, x, y, width, height, radius, fillColor);
+    scene.add.existing(rect);
+    ```
 
 ### Create shape
 
@@ -139,8 +174,8 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
 - Define class
     ```javascript
     class MyRoundRectangle extends RexPlugins.GameObjects.RoundRectangle {
-        constructor(x, y, width, height, radius, fillColor, fillAlpha) {
-            super(x, y, width, height, radius, fillColor, fillAlpha);
+        constructor(scene, x, y, width, height, radius, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, radius, fillColor, fillAlpha);
             // ...
             scene.add.existing(this);
         }

@@ -5,15 +5,66 @@ Get time from previous closing application to now.
 - Author: Rex
 - Standalone object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/awaytime-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexawaytimeplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/awaytime)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
+
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexawaytimeplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexawaytimeplugin.min.js', true);
+    ```
+- Get away-time
+    ```javascript
+    var awayTime = scene.plugins.get('rexawaytimeplugin').awayTime;
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import AwayTimePlugin from 'phaser3-rex-plugins/plugins/awaytime-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexAwayTime',
+                plugin: AwayTimePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Get away-time
+    ```javascript
+    var awayTime = scene.plugins.get('rexAwayTime').awayTime;
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import AwayTime from 'phaser3-rex-plugins/plugins/awaytime.js';
+    ```
+- Get away-time
+    ```javascript
+    var awayTime = (new AwayTime()).awayTime;
+    ```
 
 ### Import class
 

@@ -5,15 +5,74 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbbcodetextplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext.js)
+- [BBCode text](https://codepen.io/rexrainbow/pen/OZbOyg)
+- [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)
+- [Align](https://codepen.io/rexrainbow/pen/qGxrjZ)
+- [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bbcodetext)
+
+### Install plugin
+
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
+    ```
+- Add text object
+    ```javascript
+    var txt = scene.add.rexBBCodeText(x, y, content);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BBCodeTextPlugin from 'phaser3-rex-plugins/plugins/bbcodetext-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexBBCodeTextPlugin',
+                plugin: BBCodeTextPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add text object
+    ```javascript
+    var txt = scene.add.rexBBCodeText(x, y, content, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import BBCodeText from 'phaser3-rex-plugins/plugins/bbcodetext.js';
+    ```
+- Add text object
+    ```javascript    
+    var txt = new BBCodeText(scene, x, y, content, config);
+    sscene.add.existing(txt);
+    ```
 
 ### BBCode
 
@@ -28,27 +87,6 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     - Underline with color setting : `[u=red]text[/u]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
-
-### Install plugin
-
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexBBCodeTextPlugin',
-            plugin: BBCodeTextPlugin,
-            start: true
-        },
-        // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
 
 ### Add text object
 

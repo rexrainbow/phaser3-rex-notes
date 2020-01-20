@@ -5,44 +5,66 @@ Fires 'click' event when touch releasd after pressed.
 - Author: Rex
 - Behavior of game object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/button-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbuttonplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/button)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexButton from './plugins/button.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexbuttonplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbuttonplugin.min.js', true);
+    ```
+- Add button behavior
+    ```javascript
+    var button = scene.plugins.get('rexbuttonplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ButtonPlugin from './plugins/button-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexButton',
-            plugin: ButtonPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ButtonPlugin from 'phaser3-rex-plugins/plugins/button-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexButtonn',
+                plugin: ButtonPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add button behavior
+    ```javascript
+    var button = scene.plugins.get('rexButtonn').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Button from 'phaser3-rex-plugins/plugins/button.js';
+    ```
+- Add button behavior
+    ```javascript
+    var button = new Button(gameObject, config);
+    ```
 
 ### Create instance
 

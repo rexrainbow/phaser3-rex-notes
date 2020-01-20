@@ -5,44 +5,66 @@ Data manager with buffs, extends from [built-in data manager](datamanager.md).
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/buffdata-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbuffdataplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/buffdata)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexBuffData from './plugins/buffdata.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexbuffdataplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbuffdataplugin.min.js', true);
+    ```
+- Add buff data manager object
+    ```javascript
+    var data = scene.plugins.get('rexbuffdataplugin').add(parent);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import BuffDataPlugin from './plugins/buffdata-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexBuffData',
-            plugin: BuffDataPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import BuffDataPlugin from 'phaser3-rex-plugins/plugins/buffdata-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexBuffData',
+                plugin: BuffDataPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add buff data manager object
+    ```javascript
+    var data = scene.plugins.get('rexBuffData').add(parent);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import BuffData from 'phaser3-rex-plugins/plugins/buffdata.js';
+    ```
+- Add buff data manager object
+    ```javascript
+    var data = new BuffData(parent);
+    ```
 
 ### Create instance
 

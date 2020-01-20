@@ -5,6 +5,12 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 - Author: Rex
 - Game object
 
+## Live demo
+
+- [Kaleidoscope](https://codepen.io/rexrainbow/pen/RdzvVj)
+- [chartjs](https://codepen.io/rexrainbow/pen/LmYpjE)
+
+
 ## Source code
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvas-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcanvasplugin.min.js)
@@ -17,24 +23,61 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexCanvasPlugin',
-            plugin: CanvasPlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcanvasplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcanvasplugin.min.js', true);
+    ```
+- Add canvas object
+    ```javascript
+    var canvas = scene.add.rexCanvas(x, y, width, height);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CanvasPlugin from 'phaser3-rex-plugins/plugins/canvas-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexCanvasPlugin',
+                plugin: CanvasPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add canvas object
+    ```javascript
+    var canvas = scene.add.rexCanvas(x, y, width, height);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Canvas from 'phaser3-rex-plugins/plugins/canvas.js';
+    ```
+- Add canvas object
+    ```javascript    
+    var canvas = new Canvas(scene, x, y, width, height);
+    sscene.add.existing(canvas);
+    ```
 
 ### Create instance
 
