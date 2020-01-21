@@ -4,94 +4,126 @@ Descending sort scores, using [firebase-firestore](https://firebase.google.com/d
 
 - Author: Rex
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/firebase-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfirebaseplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-leaderboard)
 
-### Install global plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import FirebasePlugin from './plugins/firebase-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexFire',
-            plugin: FirebasePlugin,
-            start: true
-        },
-        // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
-
-### Import SDK
-
-*Firebase SDK dose not boundle into this plugin*
-
-- Download SDK from [CDN](https://firebase.google.com/docs/web/setup/#libraries-cdn) via script tags.
-    - Firebase core
-    - Firebase-database
-- Download SDK during preload stage.
-    ```javascript
-    scene.plugins.get('rexFire').preload(scene);    
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    </body>    
     ```
-
-### Create instance
-
-1. Initialize firebase application.
+- Load plugin (minify file) in preload stage
     ```javascript
-    var rexFire = scene.plugins.get('rexFire').initializeApp({
+    scene.load.plugin('rexfirebaseplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js', true);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
        apiKey: '...',
        authDomain: '...',
        databaseURL: '...',
        projectId: '...',
        storageBucket: '...',
        messagingSenderId: '...'
-    });
+    })
     ```
-2. Create leader board instance.
+- Add leader-board object
     ```javascript
-    var leaderBoard = rexFire.add.leaderBoard({
-        root: '',
-        // timeFilters: false,
-        // timeFilterType: 'year',
-        // pageItemCount: 100,
-        // boardID: undefined,
-        // tag: undefined
-    });
+    var leaderBoard = scene.plugins.get('rexfirebaseplugin').add.leaderBoard(config);
     ```
-    - `root` : Collection name of this leaderboard.
-    - `timeFilters` : Time filter of day/week/month/year.
-        - `false` : Don't use any time filter.
-        - `true` : Enable all time filters.
-        - JSON object, enable some time filters.
-            ```javascript
-            {
-                day: true,
-                week: true,
-                month: true,
-                year: true
-            }
-            ```
-    - `timeFilterType` : Type of time filter.
-        - `'day'`, or `'d'` : Filter scores by current day.
-        - `'week'`, or `'w'` : Filter scores by current week. 
-        - `'month'`, `'m'` : Filter scores by current month.
-        - `'year'`, `'y'` : Filter scores by current year. Default value.
-    - `pageItemCount` : Item count of a page, default value is `100`
-    - `boardID` : Board ID, optional.
-    - `tag` : Custom tag, optional.
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-firestore.js"></script>
+    </body>    
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import FirebasePlugin from 'phaser3-rex-plugins/plugins/firebase-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexFirebase',
+                plugin: FirebasePlugin,
+                start: true
+            }]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
+       apiKey: '...',
+       authDomain: '...',
+       databaseURL: '...',
+       projectId: '...',
+       storageBucket: '...',
+       messagingSenderId: '...'
+    })
+    ```
+- Add leader-board object
+    ```javascript
+    var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard(config);
+    ```
+
+### Create instance
+
+```javascript
+var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
+    root: '',
+    // timeFilters: false,
+    // timeFilterType: 'year',
+    // pageItemCount: 100,
+    // boardID: undefined,
+    // tag: undefined
+});
+```
+
+- `root` : Collection name of this leaderboard.
+- `timeFilters` : Time filter of day/week/month/year.
+    - `false` : Don't use any time filter.
+    - `true` : Enable all time filters.
+    - JSON object, enable some time filters.
+        ```javascript
+        {
+            day: true,
+            week: true,
+            month: true,
+            year: true
+        }
+        ```
+- `timeFilterType` : Type of time filter.
+    - `'day'`, or `'d'` : Filter scores by current day.
+    - `'week'`, or `'w'` : Filter scores by current week. 
+    - `'month'`, `'m'` : Filter scores by current month.
+    - `'year'`, `'y'` : Filter scores by current year. Default value.
+- `pageItemCount` : Item count of a page, default value is `100`
+- `boardID` : Board ID, optional.
+- `tag` : Custom tag, optional.
 
 !!! note "Time filter enabled"
     Add [indexes](https://firebase.google.com/docs/firestore/query-data/indexing) if time filter is enabled.  

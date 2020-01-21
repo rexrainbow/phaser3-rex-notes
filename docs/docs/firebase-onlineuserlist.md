@@ -4,71 +4,103 @@ Online user list, using [firebase-database](https://firebase.google.com/docs/dat
 
 - Author: Rex
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/firebase-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfirebaseplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-onlineuserlist)
 
-### Install global plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import FirebasePlugin from './plugins/firebase-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexFire',
-            plugin: FirebasePlugin,
-            start: true
-        },
-        // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
-
-### Import SDK
-
-*Firebase SDK dose not boundle into this plugin*
-
-- Download SDK from [CDN](https://firebase.google.com/docs/web/setup/#libraries-cdn) via script tags.
-    - Firebase core
-    - Firebase-database
-- Download SDK during preload stage.
-    ```javascript
-    scene.plugins.get('rexFire').preload(scene);    
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+    </body>    
     ```
-
-### Create instance
-
-1. Initialize firebase application
+- Load plugin (minify file) in preload stage
     ```javascript
-    var rexFire = scene.plugins.get('rexFire').initializeApp({
+    scene.load.plugin('rexfirebaseplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js', true);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
        apiKey: '...',
        authDomain: '...',
        databaseURL: '...',
        projectId: '...',
        storageBucket: '...',
        messagingSenderId: '...'
-    });
+    })
     ```
-2. Create broadcast instance
+- Add online-user-list object
     ```javascript
-    var userList = rexFire.add.onlineUserList({
-        root: '',
-        // maxUsers: 0
-    });
+    var userList = scene.plugins.get('rexfirebaseplugin').add.onlineUserList(config);
     ```
-    - `root` : Path of this online user list.
-    - `maxUsers`: Maximum users in this list. Set to `0` to have infinity users.
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+    </body>    
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import FirebasePlugin from 'phaser3-rex-plugins/plugins/firebase-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexFirebase',
+                plugin: FirebasePlugin,
+                start: true
+            }]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
+       apiKey: '...',
+       authDomain: '...',
+       databaseURL: '...',
+       projectId: '...',
+       storageBucket: '...',
+       messagingSenderId: '...'
+    })
+    ```
+- Add online-user-list object
+    ```javascript
+    var userList = scene.plugins.get('rexFirebase').add.onlineUserList(config);
+    ```
+
+### Create instance
+
+```javascript
+var userList = scene.plugins.get('rexFirebase').add.onlineUserList({
+    root: '',
+    // maxUsers: 0
+});
+```
+
+- `root` : Path of this online user list.
+- `maxUsers`: Maximum users in this list. Set to `0` to have infinity users.
 
 ### Join
 

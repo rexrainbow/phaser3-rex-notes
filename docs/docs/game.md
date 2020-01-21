@@ -107,12 +107,6 @@ or
     physics: {
         default: false  // no physics system enabled
     },
-    //physics: {
-    //    system: 'impact',
-    //    setBounds: true,
-    //    gravity: 0,
-    //    cellSize: 64
-    //},
 
     loader:{
         baseURL: '',

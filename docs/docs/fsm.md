@@ -5,79 +5,73 @@
 - Author: Rex
 - Object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fsm-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfsmplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fsm)
 
-### New class
+### Install plugin
 
-#### Import FSM class
+#### Load minify file
 
-```javascript
-import FSM from './plugins/fsm.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexfsmplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfsmplugin.min.js', true);
+    ```
+- Add FSM object
+    ```javascript
+    var state = scene.plugins.get('rexfsmplugin').add(config);
+    ```
 
-#### Create new class
+#### Import plugin
 
-```javascript
-class State extends FSM {
-    constructor() {
-        super();
-    }
-
-    next_A() { return 'B' }
-
-    enter_A() { /* ... */ }
-
-    exit_A() { /* ... */ }
-}
-```
-
-Members:
-
-- `next_` + stateName: Callback to get next state.
-- `enter_` + stateName: Callback when enter state.
-- `exit_` + stateName: Callback when exit state.
-
-#### Create instance
-
-```javascript
-var state = new State();
-```
-
-### Create by config
-
-#### Install global plugin
-
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import FSMPlugin from './plugins/fsm-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexFSM',
-            plugin: FSMPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import FSMPlugin from 'phaser3-rex-plugins/plugins/fsm-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexFSM',
+                plugin: FSMPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add FSM object
+    ```javascript
+    var state = scene.plugins.get('rexFSM').add(config);
+    ```
 
-#### Create instance
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import FSM from 'phaser3-rex-plugins/plugins/fsm.js';
+    ```
+- Add FSM object
+    ```javascript
+    var state = new FSM(config);
+    ```
+
+### Create instance
+
+#### Create by config
 
 ```javascript
-var config = {
+var state = scene.plugins.get('rexFSM').add({
     start: 'A',   // default: undefined
     states: {
         A: {
@@ -94,9 +88,8 @@ var config = {
         // ...
     },
     enable: true,
-    eventEmitter: undefined,
-}
-var state = scene.plugins.get('rexFSM').add(config)
+    eventEmitter: undefined
+});
 ```
 
 - `start`: Initial state.
@@ -112,6 +105,31 @@ var state = scene.plugins.get('rexFSM').add(config)
     - `undefined` : Create a private event emitter, default value.
     - `false` : Don't add any event emitter, i.e. no event will be fired.
     - [Event emitter object](eventemitter3.md) : Fire event through this event emitter.
+
+#### Inheritance
+
+1. Create new class
+    ```javascript
+    class State extends FSM {
+        constructor() {
+            super();
+        }
+    
+        next_A() { return 'B' }
+    
+        enter_A() { /* ... */ }
+    
+        exit_A() { /* ... */ }
+    }
+    ```
+    Members:
+        - `next_` + stateName: Callback to get next state.
+        - `enter_` + stateName: Callback when enter state.
+        - `exit_` + stateName: Callback when exit state.
+1. Create instance
+    ```javascript
+    var state = new State();
+    ```
 
 ### Read state
 

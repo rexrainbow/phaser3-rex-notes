@@ -4,76 +4,108 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
 
 - Author: Rex
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/firebase-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfirebaseplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-broadcast)
 
-### Install global plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import FirebasePlugin from './plugins/firebase-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexFire',
-            plugin: FirebasePlugin,
-            start: true
-        },
-        // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
-
-### Import SDK
-
-*Firebase SDK dose not boundle into this plugin*
-
-- Download SDK from [CDN](https://firebase.google.com/docs/web/setup/#libraries-cdn) via script tags.
-    - Firebase core
-    - Firebase-database
-- Download SDK during preload stage.
-    ```javascript
-    scene.plugins.get('rexFire').preload(scene);    
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+    </body>    
     ```
-
-### Create instance
-
-1. Initialize firebase application.
+- Load plugin (minify file) in preload stage
     ```javascript
-    var rexFire = scene.plugins.get('rexFire').initializeApp({
+    scene.load.plugin('rexfirebaseplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js', true);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
        apiKey: '...',
        authDomain: '...',
        databaseURL: '...',
        projectId: '...',
        storageBucket: '...',
        messagingSenderId: '...'
-    });
+    })
     ```
-2. Create broadcast instance.
+- Add messager object
     ```javascript
-    var messager = rexFire.add.broadcast({
-        root: '',
-        // receiverID: '',
-        // history: 0
-    });
+    var messager = scene.plugins.get('rexfirebaseplugin').add.broadcast(config);
     ```
-    - `root` : Path of this messager.
-    - `receiverID` : ID of receiver/channel.
-    - `history` : Stored received (history)  messages in client side.
-        - `0`, or `false` : No history message stored.
-        - `-1`, or `true` : Infinity history message stored. i.e. store all messages from starting updating.
-        - A number larger then `0` : Length of stored history message.
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+    </body>    
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import FirebasePlugin from 'phaser3-rex-plugins/plugins/firebase-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexFirebase',
+                plugin: FirebasePlugin,
+                start: true
+            }]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
+       apiKey: '...',
+       authDomain: '...',
+       databaseURL: '...',
+       projectId: '...',
+       storageBucket: '...',
+       messagingSenderId: '...'
+    })
+    ```
+- Add messager object
+    ```javascript
+    var messager = scene.plugins.get('rexFirebase').add.broadcast(config);
+    ```
+
+### Create instance
+
+```javascript
+var messager = scene.plugins.get('rexFirebase').add.broadcast({
+    root: '',
+    // receiverID: '',
+    // history: 0
+});
+```
+
+- `root` : Path of this messager.
+- `receiverID` : ID of receiver/channel.
+- `history` : Stored received (history)  messages in client side.
+    - `0`, or `false` : No history message stored.
+    - `-1`, or `true` : Infinity history message stored. i.e. store all messages from starting updating.
+    - A number larger then `0` : Length of stored history message.
 
 ### Send message
 
