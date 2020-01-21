@@ -5,44 +5,66 @@ Check conditions to find passed tests listed in a csv table.
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/conditionstable-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexconditionstableplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/conditions-table)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexConditionsTable from './plugins/conditionstable.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexconditionstableplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexconditionstableplugin.min.js', true);
+    ```
+- Add conditions-table object
+    ```javascript
+    var conditionstable = scene.plugins.get('rexconditionstableplugin').add();
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ConditionsTablePlugin from './plugins/conditionstable-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexConditionsTable',
-            plugin: ConditionsTablePlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ConditionsTablePlugin from 'phaser3-rex-plugins/plugins/conditionstable-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexConditionsTable',
+                plugin: ConditionsTablePlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add conditions-table object
+    ```javascript
+    var conditionstable = scene.plugins.get('rexConditionsTable').add();
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ConditionsTable from 'phaser3-rex-plugins/plugins/conditionstable.js';
+    ```
+- Add conditions-table object
+    ```javascript
+    var conditionstable = new ConditionsTable();
+    ```
 
 ### Create instance
 

@@ -5,44 +5,70 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 - Author: Rex
 - Member of scene
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/cursoratbound-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcursoratboundplugin.min.js)
+- [Camera scrolling](https://codepen.io/rexrainbow/pen/mQQrMv)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/cursor-at-bound)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexCursorAtBound from './plugins/cursoratbound.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcursoratboundplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcursoratboundplugin.min.js', true);
+    ```
+- Add cursor-at-bound object
+    ```javascript
+    var cursorAtBound = scene.plugins.get('rexcursoratboundplugin').add(scene, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import CursorAtBoundPlugin from './plugins/cursoratbound-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexCursorAtBound',
-            plugin: CursorAtBoundPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CursorAtBoundPlugin from 'phaser3-rex-plugins/plugins/cursoratbound-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCursorAtBound',
+                plugin: CursorAtBoundPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add cursor-at-bound object
+    ```javascript
+    var cursorAtBound = scene.plugins.get('rexCursorAtBound').add(scene, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import CursorAtBound from 'phaser3-rex-plugins/plugins/cursoratbound.js';
+    ```
+- Add cursor-at-bound object
+    ```javascript
+    var cursorAtBound = new CursorAtBound(scene, config);
+    ```
 
 ### Create instance
 

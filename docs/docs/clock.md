@@ -5,44 +5,66 @@ A clock to count elapsed time.
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexclockplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/clock)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexClock from './plugins/clock.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexclockplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexclockplugin.min.js', true);
+    ```
+- Add clock object
+    ```javascript
+    var clock = scene.plugins.get('rexclockplugin').add(scene, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ClockPlugin from './plugins/clock-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexClock',
-            plugin: ClockPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ClockPlugin from 'phaser3-rex-plugins/plugins/clock-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexClock',
+                plugin: ClockPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add clock object
+    ```javascript
+    var clock = scene.plugins.get('rexClock').add(scene, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Clock from 'phaser3-rex-plugins/plugins/clock.js';
+    ```
+- Add clock object
+    ```javascript
+    var clock = new Clock(scene, config);
+    ```
 
 ### Create instance
 

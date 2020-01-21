@@ -5,44 +5,66 @@ Run script in csv format. Csv could be edited by excel or google document.
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvscenario-plugin.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexCSVScenario from './plugins/csvscenario.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcsvscenarioplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcsvscenarioplugin.min.js', true);
+    ```
+- Add csv-scenario object
+    ```javascript
+    var scenario = scene.plugins.get('rexcsvscenarioplugin').add(scene);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import CSVScenarioPlugin from './plugins/csvscenario-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexCSVScenario',
-            plugin: CSVScenarioPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CsvScenarioPlugin from 'phaser3-rex-plugins/plugins/csvscenario-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCsvScenario',
+                plugin: CsvScenarioPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add csv-scenario object
+    ```javascript
+    var scenario = scene.plugins.get('rexCsvScenario').add(scene);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import CsvScenario from 'phaser3-rex-plugins/plugins/csvscenario.js';
+    ```
+- Add csv-scenario object
+    ```javascript
+    var scenario = new CsvScenario(scene);
+    ```
 
 ### Create instance
 

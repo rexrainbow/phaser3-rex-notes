@@ -5,49 +5,71 @@ Hash table indexed by (col-key, row-key) from csv string.
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcsvtohashtableplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-hash-table)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexHashTable from './plugins/csvtohashtable.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcsvtohashtableplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcsvtohashtableplugin.min.js', true);
+    ```
+- Add hash-table object
+    ```javascript
+    var table = scene.plugins.get('rexcsvtohashtableplugin').add();
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import HashTablePlugin from './plugins/csvtohashtable-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexHashTable',
-            plugin: HashTablePlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import CsvToHashTablePlugin from 'phaser3-rex-plugins/plugins/csvtohashtable-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexCsvToHashTable',
+                plugin: CsvToHashTablePlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add hash-table object
+    ```javascript
+    var table = scene.plugins.get('rexCsvToHashTable').add();
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import CsvToHashTable from 'phaser3-rex-plugins/plugins/csvtohashtable.js';
+    ```
+- Add hash-table object
+    ```javascript
+    var table = new CsvToHashTable();
+    ```
 
 ### Create instance
 
 ```javascript
-var table = scene.plugins.get('rexHashTable').add();
+var table = scene.plugins.get('rexCsvToHashTable').add();
 ```
 
 ### Load table from csv string

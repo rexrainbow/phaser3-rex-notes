@@ -5,44 +5,70 @@ Get dragging angle around a specific point.
 - Author: Rex
 - Member of scene
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragrotate-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexdragrotateplugin.min.js)
+- [Spin-button](https://codepen.io/rexrainbow/pen/NJKywR)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dragrotate)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexDragRotate from './plugins/dragrotate.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexdragrotateplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdragrotateplugin.min.js', true);
+    ```
+- Add drag-rotate input
+    ```javascript
+    var dragRotate = scene.plugins.get('rexdragrotateplugin').add(scene, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import DragRotatePlugin from './plugins/dragrotate-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexDragRotate',
-            plugin: DragRotatePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import DragRotatePlugin from 'phaser3-rex-plugins/plugins/dragrotate-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexDragRotate',
+                plugin: DragRotatePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add drag-rotate input
+    ```javascript
+    var dragRotate = scene.plugins.get('rexDragRotate').add(scene, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import DragRotate from 'phaser3-rex-plugins/plugins/dragrotate.js';
+    ```
+- Add drag-rotate input
+    ```javascript
+    var dragRotate = new DragRotate(scene, config);
+    ```
 
 ### Create instance
 
@@ -142,8 +168,8 @@ Return `true` if `(dragRotate.state === 1)` and catched touch pointer just moved
             ```javascript
             gameObject.angle += dragRotate.deltAangle;
             ```    
-    - `dragRotate.cw` : Return `true` if dragging is clock-wise.
-    - `dragRotate.ccw` : Return `true` if dragging is counter-clock-wise.
+    - `dragRotate.cw` : Return `true` if dragging is dragrotate-wise.
+    - `dragRotate.ccw` : Return `true` if dragging is counter-dragrotate-wise.
 
 #### On drag start, on drag end
 

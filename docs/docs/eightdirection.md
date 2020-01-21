@@ -5,50 +5,102 @@ Move game object by cursor keys, with a constant speed.
 - Author: Rex
 - Arcade behavior of game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/eightdirection-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexeightdirectionplugin.min.js)
+- [Virtual-joyStick + Eight-direction](https://codepen.io/rexrainbow/pen/KxWpWa)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/eightdirection)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexEightDirection from './plugins/eightdirection.js';
-```
-
-### Install global plugin
-
-Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import EightDirectionPlugin from './plugins/eightdirection-plugin.js';
-
-var config = {
-    // ...
-    physics: {
-        default: 'arcade',
-        arcade: {
-            // debug: true
+- Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        // ...
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
         }
-    },
-    plugins: {
-        global: [{
-            key: 'rexEightDirection',
-            plugin: EightDirectionPlugin,
-            start: true
+    }
+    var game = new Phaser.Game(config);
+    ```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexeightdirectionplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexeightdirectionplugin.min.js', true);
+    ```
+- Add eight-direction behavior
+    ```javascript
+    var eightDirection = scene.plugins.get('rexeightdirectionplugin').add(gameObject, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable [arcade physics engine](arcade-world.md) and install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import EightDirectionPlugin from 'phaser3-rex-plugins/plugins/eightdirection-plugin.js';
+    var config = {
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
         },
         // ...
-        ]
+        plugins: {
+            global: [{
+                key: 'rexEightDirection',
+                plugin: EightDirectionPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add eight-direction behavior
+    ```javascript
+    var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable [arcade physics engine](arcade-world.md) in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        // ...
+        physics: {
+            default: 'arcade',
+            arcade: {
+                // debug: true
+            }
+        }
     }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    var game = new Phaser.Game(config);
+    ```
+- Import class
+    ```javascript
+    import EightDirection from 'phaser3-rex-plugins/plugins/eightdirection.js';
+    ```
+- Add eight-direction behavior
+    ```javascript
+    var eightDirection = new EightDirection(gameObject, config);
+    ```
 
 ### Create instance
 

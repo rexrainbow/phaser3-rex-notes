@@ -13,8 +13,6 @@ Generate array from csv string.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-array)
 
-User could import class directly, or install it by global plugin.
-
 ### Import class
 
 ```javascript
