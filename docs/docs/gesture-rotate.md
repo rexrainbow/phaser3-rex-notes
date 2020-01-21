@@ -5,36 +5,70 @@ Get spin angle from 2 dragging touch pointers.
 - Author: Rex
 - Member of scene
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gestures-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgesturesplugin.min.js)
+- [Rotate & rotate](https://codepen.io/rexrainbow/pen/PvNEPy)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gesture-rotate)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import GesturesPlugin from './plugins/gestures-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexgesturesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgesturesplugin.min.js', 'rexGestures', 'rexGestures');
+    ```
+- Add rotate input
+    ```javascript
+    var rotate = scene.rexGestures.add.rotate(config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexGestures',
-            plugin: GesturesPlugin,
-            mapping: 'rexGestures'
-        }]
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexGestures',
+                plugin: GesturesPlugin,
+                mapping: 'rexGestures'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add rotate input
+    ```javascript
+    var rotate = scene.rexGestures.add.rotate(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Rotate } from 'phaser3-rex-plugins/plugins/gestures.js';
+    ```
+- Add rotate input
+    ```javascript
+    var rotate = new Rotate(scene, config);
+    ```
 
 ### Create instance
 

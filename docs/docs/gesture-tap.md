@@ -5,65 +5,117 @@ Get tap/multi-taps events of a game object.
 - Author: Rex
 - Behavior of game object
 
-## Source code
+## Live demo
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gestures-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgesturesplugin.min.js)
+- [Tap object](https://codepen.io/rexrainbow/pen/KLWZPq)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gesture-tap)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import GesturesPlugin from './plugins/gestures-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexgesturesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgesturesplugin.min.js', 'rexGestures', 'rexGestures');
+    ```
+- Add tap input
+    ```javascript
+    var tap = scene.rexGestures.add.tap(config);
+    // var tap = scene.rexGestures.add.tap(gameObject, config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexGestures',
-            plugin: GesturesPlugin,
-            mapping: 'rexGestures'
-        }]
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import GesturesPlugin from 'phaser3-rex-plugins/plugins/gestures-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexGestures',
+                plugin: GesturesPlugin,
+                mapping: 'rexGestures'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add tap input
+    ```javascript
+    var tap = scene.rexGestures.add.tap(config);
+    // var tap = scene.rexGestures.add.tap(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Tap } from 'phaser3-rex-plugins/plugins/gestures.js';
+    ```
+- Add tap input
+    ```javascript
+    var tap = new Tap(scene, config);
+    // var tap = new Tap(gameObject, config);
+    ```
 
 ### Create instance
 
-```javascript
-var tap = scene.rexGestures.add.tap(gameObject, {
-    // enable: true,
-
-    // time: 250,
-    // tapInterval: 200,
-    // threshold: 9,
-    // tapOffset: 10,
-
-    // taps: undefined,
-    // minTaps: undefined,
-    // maxTaps: undefined,
-});
-```
-
-- `enable` : Set `false` to disable input events.
-- `time` : Max time of the pointer to be down.
-- `tapInterval` : Max time between the multi-tap taps.
-- `threshold` : Minimal movement when pointer is down.
-- `tapOffset` : A multi-tap can be a bit off the initial position.
-- `taps` : Fire `tap` event only when taps count reaches this value.
-    - `undefined` : Fire `tap` event only when tapped end. i.e pointer-up time exceeds `tapInterval`.
-- `minTaps` : Fire `tap` event only when taps count is larger than this value.
-    - `undefined` : Don't check taps count.
-- `maxTaps` : Fire `tap` event only when taps count is less than this value.
-    - `undefined` : Don't check taps count.
+- Pan input
+    ```javascript
+    var tap = scene.rexGestures.add.tap({
+        // enable: true,
+    
+        // time: 250,
+        // tapInterval: 200,
+        // threshold: 9,
+        // tapOffset: 10,
+    
+        // taps: undefined,
+        // minTaps: undefined,
+        // maxTaps: undefined,
+    });
+    ```
+    - `enable` : Set `false` to disable input events.
+    - `time` : Max time of the pointer to be down.
+    - `tapInterval` : Max time between the multi-tap taps.
+    - `threshold` : Minimal movement when pointer is down.
+    - `tapOffset` : A multi-tap can be a bit off the initial position.
+    - `taps` : Fire `tap` event only when taps count reaches this value.
+        - `undefined` : Fire `tap` event only when tapped end. i.e pointer-up time exceeds `tapInterval`.
+    - `minTaps` : Fire `tap` event only when taps count is larger than this value.
+        - `undefined` : Don't check taps count.
+    - `maxTaps` : Fire `tap` event only when taps count is less than this value.
+        - `undefined` : Don't check taps count.
+- Pan behavior of game object
+    ```javascript
+    var tap = scene.rexGestures.add.tap(gameObject, {
+        // enable: true,
+    
+        // time: 250,
+        // tapInterval: 200,
+        // threshold: 9,
+        // tapOffset: 10,
+    
+        // taps: undefined,
+        // minTaps: undefined,
+        // maxTaps: undefined,
+    });
+    ```
 
 ### Enable
 
