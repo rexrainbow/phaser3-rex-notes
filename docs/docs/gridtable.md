@@ -5,11 +5,14 @@ Viewer of grid table, to manipulate game object of each visible cell.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgridtableplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable.js)
+- [Grid table](https://codepen.io/rexrainbow/pen/vjJeMR)
+- [Grid table & slider](https://codepen.io/rexrainbow/pen/rrPyXL)
+- [Grid table & scroller](https://codepen.io/rexrainbow/pen/GXjPrL)
+- [Grid table & slider & scroller](https://codepen.io/rexrainbow/pen/xaLdyr)
+- [Horizontal scrolling](https://codepen.io/rexrainbow/pen/QVjXRM)
+- [Varying cell height](https://codepen.io/rexrainbow/pen/VGwPJz)
 
 ## Usage
 
@@ -17,24 +20,61 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexGridTablePlugin',
-            plugin: GridTablePlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexgridtableplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js', true);
+    ```
+- Add table object
+    ```javascript
+    var table = scene.add.rexGridTable(x, y, width, height, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import GridTablePlugin from 'phaser3-rex-plugins/plugins/gridtable-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexGridTablePlugin',
+                plugin: GridTablePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add table object
+    ```javascript
+    var table = scene.add.rexGridTable(x, y, width, height, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import GridTable from 'phaser3-rex-plugins/plugins/gridtable.js';
+    ```
+- Add table object
+    ```javascript    
+    var table = new GridTable(scene, x, y, width, height, config);
+    sscene.add.existing(table);
+    ```
 
 ### Create instance
 

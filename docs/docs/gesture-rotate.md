@@ -5,7 +5,7 @@ Get spin angle from 2 dragging touch pointers.
 - Author: Rex
 - Member of scene
 
-## Live demo
+## Live demos
 
 - [Rotate & rotate](https://codepen.io/rexrainbow/pen/PvNEPy)
 

@@ -5,7 +5,7 @@ Map cursor-at-(left/right/top/botttom-)bound to (left/right/up/down) cursor key 
 - Author: Rex
 - Member of scene
 
-## Live demo
+## Live demos
 
 - [Camera scrolling](https://codepen.io/rexrainbow/pen/mQQrMv)
 

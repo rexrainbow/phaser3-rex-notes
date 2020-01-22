@@ -5,44 +5,70 @@ Set position of game object on a [path](path.md).
 - Author: Rex
 - Behavior of game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pathfollower-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexpathfollowerplugin.min.js)
+- [Path follower](https://codepen.io/rexrainbow/pen/GXKPKB)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pathfollower)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexPathFollower from './plugins/pathfollower.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexpathfollowerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpathfollowerplugin.min.js', true);
+    ```
+- Add path-follower behavior
+    ```javascript
+    var pathFollower = scene.plugins.get('rexpathfollowerplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import PathFollowerPlugin from './plugins/pathfollower-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexPathFollower',
-            plugin: PathFollowerPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import PathFollowerPlugin from 'phaser3-rex-plugins/plugins/pathfollower-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexPathFollower',
+                plugin: PathFollowerPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add path-follower behavior
+    ```javascript
+    var pathFollower = scene.plugins.get('rexPathFollower').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import PathFollower from 'phaser3-rex-plugins/plugins/pathfollower.js';
+    ```
+- Add path-follower behavior
+    ```javascript
+    var pathFollower = new PathFollower(gameObject, config);
+    ```
 
 ### Create instance
 

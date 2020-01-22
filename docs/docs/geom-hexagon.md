@@ -1,48 +1,70 @@
 ## Introduction
 
-[Hexagon shape](https://www.redblobgames.com/grids/hexagons/) and methods, extends from [Polygon shape](geom-hexagon.md).
+[Hexagon shape](https://www.redblobgames.com/grids/hexagons/) and methods, extends from [Polygon geometry object](geom-polygon.md).
 
 - Author: Rex
 - Geometry object
-
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/hexagon-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexhexagonplugin.min.js)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/hexagon)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexHexagon from './plugins/hexagon.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexhexagonplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhexagonplugin.min.js', true);
+    ```
+- Add hexagon geometry object
+    ```javascript
+    var hexagon = scene.plugins.get('rexhexagonplugin').add(x, y, size, orientationType);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import HexagonPlugin from './plugins/hexagon-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexHexagon',
-            plugin: HexagonPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import HexagonPlugin from 'phaser3-rex-plugins/plugins/hexagon-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexHexagon',
+                plugin: HexagonPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add hexagon geometry object
+    ```javascript
+    var hexagon = scene.plugins.get('rexHexagon').add(x, y, size, orientationType);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Hexagon from 'phaser3-rex-plugins/plugins/hexagon.js';
+    ```
+- Add hexagon geometry object
+    ```javascript
+    var hexagon = new Hexagon(x, y, size, orientationType);
+    ```
 
 ### Create shape
 
@@ -60,8 +82,7 @@ var hexagon = scene.plugins.get('rexHexagon').add({
 ```
 or
 ```javascript
-var hexagon = new rexHexagon(x, y, size, orientationType);
-// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, orientationType);
+var hexagon = new Phaser.Geom.rexHexagon(x, y, size, orientationType);
 ```
 
 - `x` : Center X.

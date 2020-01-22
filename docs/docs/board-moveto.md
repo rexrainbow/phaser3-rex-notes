@@ -5,7 +5,7 @@ Move chess towards target position with a steady speed, chess behavior of Board 
 - Author: Rex
 - Behavior of chess
 
-## Live demo
+## Live demos
 
 - [Push](https://codepen.io/rexrainbow/pen/rNNqpPg)
 

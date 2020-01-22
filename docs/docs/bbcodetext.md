@@ -5,7 +5,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Author: Rex
 - Game object
 
-## Live demo
+## Live demos
 
 - [BBCode text](https://codepen.io/rexrainbow/pen/OZbOyg)
 - [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)

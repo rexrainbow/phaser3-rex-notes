@@ -5,7 +5,7 @@ Core object of Board system.
 - Author: Rex
 - Member of scene
 
-## Live demo
+## Live demos
 
 - [Touch events](https://codepen.io/rexrainbow/pen/QVrGpE)
 - [Get tileXY at direction](https://codepen.io/rexrainbow/pen/QWWVrMx)

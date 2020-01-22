@@ -5,7 +5,7 @@ Move game object by cursor keys, with a constant speed.
 - Author: Rex
 - Arcade behavior of game object
 
-## Live demo
+## Live demos
 
 - [Virtual-joyStick + Eight-direction](https://codepen.io/rexrainbow/pen/KxWpWa)
 

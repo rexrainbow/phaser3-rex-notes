@@ -5,7 +5,7 @@ Get tap/multi-taps events of a game object.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Tap object](https://codepen.io/rexrainbow/pen/KLWZPq)
 

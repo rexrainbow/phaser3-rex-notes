@@ -5,7 +5,7 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 - Author: Rex
 - Game object
 
-## Live demo
+## Live demos
 
 - [Kaleidoscope](https://codepen.io/rexrainbow/pen/RdzvVj)
 - [chartjs](https://codepen.io/rexrainbow/pen/LmYpjE)

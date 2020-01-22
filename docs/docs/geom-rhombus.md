@@ -1,48 +1,70 @@
 ## Introduction
 
-Rhombus shape and methods, extends from [Polygon shape](geom-rhombus.md).
+Rhombus shape and methods, extends from [Polygon geometry object](geom-polygon.md).
 
 - Author: Rex
 - Geometry object
-
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/rhombus-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexrhombusplugin.min.js)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/rhombus)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexRhombus from './plugins/rhombus.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexrhombusplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexrhombusplugin.min.js', true);
+    ```
+- Add rhombus geometry object
+    ```javascript
+    var rhombus = scene.plugins.get('rexrhombusplugin').add(x, y, width, height);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import RhombusPlugin from './plugins/rhombus-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexRhombus',
-            plugin: RhombusPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import RhombusPlugin from 'phaser3-rex-plugins/plugins/rhombus-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexRhombus',
+                plugin: RhombusPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add rhombus geometry object
+    ```javascript
+    var rhombus = scene.plugins.get('rexRhombus').add(x, y, width, height);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Rhombus from 'phaser3-rex-plugins/plugins/rhombus.js';
+    ```
+- Add rhombus geometry object
+    ```javascript
+    var rhombus = new Rhombus(x, y, width, height);
+    ```
 
 ### Create shape
 

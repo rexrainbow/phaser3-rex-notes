@@ -5,7 +5,7 @@ Visible testing, to find field of view, chess behavior of Board system.
 - Author: Rex
 - Behavior of chess
 
-## Live demo
+## Live demos
 
 - [Field of view](https://codepen.io/rexrainbow/pen/qvGLPd)
 - [Line of sigh](https://codepen.io/rexrainbow/pen/pYwxmv)

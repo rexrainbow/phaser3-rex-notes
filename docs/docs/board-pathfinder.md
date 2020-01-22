@@ -5,7 +5,7 @@ Find moveable area or moving path, chess behavior of Board system.
 - Author: Rex
 - Behavior of chess
 
-## Live demo
+## Live demos
 
 - [Find area, get path](https://codepen.io/rexrainbow/pen/qvJwjJ)
 - [Draw path](https://codepen.io/rexrainbow/pen/JjjwPgE)

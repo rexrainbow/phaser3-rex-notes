@@ -5,7 +5,7 @@ Get image data from texture, or text object.
 - Author: Rex
 - Method only
 
-## Live demo
+## Live demos
 
 - [Text to bit-map](https://codepen.io/rexrainbow/pen/RzzOjK)
 - [Texture to color-map](https://codepen.io/rexrainbow/pen/dBBLvY)

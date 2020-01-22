@@ -5,7 +5,7 @@ Get pan events of a game object.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Pan & rotate](https://codepen.io/rexrainbow/pen/PvNEPy)
 

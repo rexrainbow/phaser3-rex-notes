@@ -5,44 +5,71 @@ Question manager.
 - Author: Rex
 - Member of scene, or game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/quest-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexquestplugin.min.js)
+- [Branch](https://codepen.io/rexrainbow/pen/wLoWyE)
+- [Shuffle](https://codepen.io/rexrainbow/pen/NZreRG)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/quest)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexQuest from './plugins/quest.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexquestplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexquestplugin.min.js', true);
+    ```
+- Add quest-manager object
+    ```javascript
+    var questionManager = scene.plugins.get('rexquestplugin').add(config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import QuestPlugin from './plugins/quest-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexQuest',
-            plugin: QuestPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import QuestPlugin from 'phaser3-rex-plugins/plugins/quest-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexQuest',
+                plugin: QuestPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add quest-manager object
+    ```javascript
+    var questionManager = scene.plugins.get('rexQuest').add(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Quest from 'phaser3-rex-plugins/plugins/quest.js';
+    ```
+- Add quest-manager object
+    ```javascript
+    var questionManager = new Quest(config);
+    ```
 
 ### Question manager
 

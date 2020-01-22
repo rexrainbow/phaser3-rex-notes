@@ -5,11 +5,9 @@ Draw a line with start/end/body textures.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/line-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexlineplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/line.js)
+- [Line](https://codepen.io/rexrainbow/pen/PoYewoW)
 
 ## Usage
 
@@ -17,24 +15,61 @@ Draw a line with start/end/body textures.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexLinePlugin',
-            plugin: LinePlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexlineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlineplugin.min.js', true);
+    ```
+- Add line object
+    ```javascript
+    var line = scene.add.rexLine(config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import LinePlugin from 'phaser3-rex-plugins/plugins/line-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexLinePlugin',
+                plugin: LinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add line object
+    ```javascript
+    var line = scene.add.rexLine(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Line from 'phaser3-rex-plugins/plugins/line.js';
+    ```
+- Add line object
+    ```javascript    
+    var line = new Line(scene, config);
+    sscene.add.existing(line);
+    ```
 
 ### Create instance
 

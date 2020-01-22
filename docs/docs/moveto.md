@@ -5,44 +5,70 @@ Move game object towards target position with a steady speed.
 - Author: Rex
 - Behavior of game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/moveto-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexmovetoplugin.min.js)
+- [Move-to](https://codepen.io/rexrainbow/pen/YOPONx)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/moveto)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexMoveTo from './plugins/moveto.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexmovetoplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexmovetoplugin.min.js', true);
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = scene.plugins.get('rexmovetoplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import MoveToPlugin from './plugins/moveto-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexMoveTo',
-            plugin: MoveToPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import MoveToPlugin from 'phaser3-rex-plugins/plugins/moveto-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexMoveTo',
+                plugin: MoveToPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import MoveTo from 'phaser3-rex-plugins/plugins/moveto.js';
+    ```
+- Add move-to behavior
+    ```javascript
+    var moveTo = new MoveTo(gameObject, config);
+    ```
 
 ### Create instance
 

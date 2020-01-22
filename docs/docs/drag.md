@@ -5,7 +5,7 @@ Drag game object.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Try dragging](https://codepen.io/rexrainbow/pen/rvbwNv)
 

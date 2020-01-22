@@ -5,11 +5,10 @@
 - Author: Rex
 - [DOM Game object](domelement.md)
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inputtext-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexinputtextplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inputtext.js)
+- [Input text](https://codepen.io/rexrainbow/pen/WBxveQ)
+- [Number input](https://codepen.io/rexrainbow/pen/mddNbPj)
 
 ## Usage
 
@@ -17,31 +16,61 @@
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    parent: divId,
-    dom: {
-        createContainer: true
-    },
-    plugins: {
-        global: [{
-            key: 'rexInputTextPlugin',
-            plugin: InputTextPlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
+    ```
+- Add input-text object
+    ```javascript
+    var inputText = scene.add.rexInputText(x, y, width, height, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexInputTextPlugin',
+                plugin: InputTextPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add input-text object
+    ```javascript
+    var inputText = scene.add.rexInputText(x, y, width, height, config);
+    ```
 
-- Set `parent` to divId
-- Set `dom.createContainer` to `true`.
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import InputText from 'phaser3-rex-plugins/plugins/inputtext.js';
+    ```
+- Add input-text object
+    ```javascript    
+    var inputText = new InputText(scene, x, y, width, height, config);
+    sscene.add.existing(inputText);
+    ```
 
 ### Add text object
 

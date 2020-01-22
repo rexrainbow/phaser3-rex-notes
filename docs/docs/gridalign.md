@@ -15,41 +15,70 @@ See also [built-in grid-align](groupactions.md#grid-align).
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridalign)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexGridAlign from './plugins/gridalign.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexgridalignplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridalignplugin.min.js', true);
+    ```
+- Grid-align objects
+    ```javascript
+    scene.plugins.get('rexgridalignplugin').quad(gameObjects, config);
+    scene.plugins.get('rexgridalignplugin').hexagon(gameObjects, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import GridAlignPlugin from './plugins/gridalign-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexGridAlign',
-            plugin: GridAlignPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import GridAlignPlugin from 'phaser3-rex-plugins/plugins/gridalign-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexGridAlign',
+                plugin: GridAlignPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Grid-align objects
+    ```javascript
+    scene.plugins.get('rexGridAlign').quad(gameObjects, config);
+    scene.plugins.get('rexGridAlign').hexagon(gameObjects, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { QuadGridAlign, HexagonGridAlign } from 'phaser3-rex-plugins/plugins/gridalign.js';
+    ```
+- Grid-align objects
+    ```javascript
+    QuadGridAlign(gameObjects, config);
+    HexagonGridAlign(gameObjects, config);
+    ```
 
 ### Quadrilateral grid
 
 ```javascript
-scene.plugins.get('rexGridAlign').quad(items, {
+scene.plugins.get('rexGridAlign').quad(gameObjects, {
     width: -1,
     height: -1,
     cellWidth: 1,
@@ -87,7 +116,7 @@ scene.plugins.get('rexGridAlign').quad(items, {
 ### Hexagon grid
 
 ```javascript
-scene.plugins.get('rexGridAlign').hexagon(items, {
+scene.plugins.get('rexGridAlign').hexagon(gameObjects, {
     width: -1,
     height: -1,
     cellWidth: 1,

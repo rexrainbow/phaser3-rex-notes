@@ -8,7 +8,7 @@ Set position based on visible window.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Anchor](https://codepen.io/rexrainbow/pen/oVxWVB)
 

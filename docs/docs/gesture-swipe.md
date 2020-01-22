@@ -5,7 +5,7 @@ Get swipe events of a game object.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Swipe](https://codepen.io/rexrainbow/pen/joWZbw)
 

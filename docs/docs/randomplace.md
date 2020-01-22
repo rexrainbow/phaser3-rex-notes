@@ -5,49 +5,75 @@ Place objects randomly inside an area without overlapping.
 - Author: Rex
 - Methods
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/randomplace-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexrandomplaceplugin.min.js)
+- [Random place](https://codepen.io/rexrainbow/pen/gOYXPrQ)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/randomplace)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexRandomPlace from './plugins/randomplace.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexrandomplaceplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexrandomplaceplugin.min.js', true);
+    ```
+- Random place objects
+    ```javascript
+    scene.plugins.get('rexrandomplaceplugin').randomPlace(gameObjects, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import RandomPlacePlugin from './plugins/randomplace-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexRandomPlace',
-            plugin: RandomPlacePlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import RandomPlacePlugin from 'phaser3-rex-plugins/plugins/randomplace-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexRandomPlace',
+                plugin: RandomPlacePlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Random place objects
+    ```javascript
+    scene.plugins.get('rexRandomPlace').randomPlace(gameObjects, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import RandomPlace from 'phaser3-rex-plugins/plugins/randomplace.js';
+    ```
+- Random place objects
+    ```javascript
+    RandomPlace(gameObjects, config);
+    ```
 
 ### Random place
 
 ```javascript
-scene.plugins.get('rexRandomPlace').randomPlace(items, {
+scene.plugins.get('rexRandomPlace').randomPlace(gameObjects, {
     radius: radius,
 
     getPositionCallback: undefined,
@@ -55,7 +81,7 @@ scene.plugins.get('rexRandomPlace').randomPlace(items, {
 });
 ```
 
-- `items` : An array of items. Each item can be
+- `gameObjects` : An array of gameObjects. Each item can be
     - A game objects.
     - A plain object contains
         ```javascript

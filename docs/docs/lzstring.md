@@ -5,44 +5,66 @@ Compress string using LZ-based compression algorithm. [Reference](https://github
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lzstring-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexlzstringplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lzstring)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexXOR from './plugins/lzstring.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexlzstringplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlzstringplugin.min.js', true);
+    ```
+- Add lz-string object
+    ```javascript
+    var lzstring = scene.plugins.get('rexlzstringplugin').add(config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import LZString from './plugins/lzstring-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexLZString',
-            plugin: LZString,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import LZStringPlugin from 'phaser3-rex-plugins/plugins/lzstring-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexLZString',
+                plugin: LZStringPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add lz-string object
+    ```javascript
+    var lzstring = scene.plugins.get('rexLZString').add(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import LZString from 'phaser3-rex-plugins/plugins/lzstring.js';
+    ```
+- Add lz-string object
+    ```javascript
+    var lzstring = new LZString(config);
+    ```
 
 ### Create instance
 

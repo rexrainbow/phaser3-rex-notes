@@ -5,7 +5,7 @@ Await custom task in preload stage.
 - Author: Rex
 - Custom File of loader
 
-## Live demo
+## Live demos
 
 - [Wait 1000ms](https://codepen.io/rexrainbow/pen/jvNGbm)
 

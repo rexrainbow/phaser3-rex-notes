@@ -5,7 +5,7 @@ Move through path tiles, used in monopoly-like application, chess behavior of Bo
 - Author: Rex
 - Behavior of chess
 
-## Live demo
+## Live demos
 
 - [Monopoly](https://codepen.io/rexrainbow/pen/WWJxZL)
 

@@ -5,11 +5,10 @@ Stretchable image.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/ninepatch-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexninepatchplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/ninepatch.js)
+- [3x3](https://codepen.io/rexrainbow/pen/gOYzydR)
+- [5x5](https://codepen.io/rexrainbow/pen/vYBzYer)
 
 ## Usage
 
@@ -17,24 +16,61 @@ Stretchable image.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexNinePatchPlugin',
-            plugin: NinePatchPlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexninepatchplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexninepatchplugin.min.js', true);
+    ```
+- Add nine-patch object
+    ```javascript
+    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import NinePatchPlugin from 'phaser3-rex-plugins/plugins/ninepatch-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexNinePatchPlugin',
+                plugin: NinePatchPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add nine-patch object
+    ```javascript
+    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import NinePatch from 'phaser3-rex-plugins/plugins/ninepatch.js';
+    ```
+- Add nine-patch object
+    ```javascript    
+    var ninePatch = new NinePatch(scene, x, y, width, height, key, columns, rows, config);
+    sscene.add.existing(ninePatch);
+    ```
 
 ### Create instance
 

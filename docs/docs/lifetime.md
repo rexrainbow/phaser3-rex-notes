@@ -5,44 +5,66 @@ Destroy game object when time-out.
 - Author: Rex
 - Behavior of game object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lifetime-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexlifetimeplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lifetime)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexLifeTime from './plugins/lifeTime.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexlifetimeplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexlifetimeplugin.min.js', true);
+    ```
+- Add life-time behavior
+    ```javascript
+    var lifeTime = scene.plugins.get('rexlifetimeplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import LifeTimePlugin from './plugins/lifeTime-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexLifeTime',
-            plugin: LifeTimePlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import LifeTimePlugin from 'phaser3-rex-plugins/plugins/lifetime-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexLifeTime',
+                plugin: LifeTimePlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add life-time behavior
+    ```javascript
+    var lifeTime = scene.plugins.get('rexLifeTime').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import LifeTime from 'phaser3-rex-plugins/plugins/lifetime.js';
+    ```
+- Add life-time behavior
+    ```javascript
+    var lifeTime = new LifeTime(gameObject, config);
+    ```
 
 ### Create instance
 

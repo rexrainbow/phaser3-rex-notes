@@ -1,4 +1,4 @@
-const VERSION = '7.6.1';
+const VERSION = '7.7.0';
 
 const Config = {
     app: `https://www.gstatic.com/firebasejs/${VERSION}/firebase-app.js`,

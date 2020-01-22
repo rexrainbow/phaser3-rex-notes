@@ -5,44 +5,66 @@ Predict the intersection position of two game objects with constant moving speed
 - Author: Rex
 - Behavior of game object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/interception-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexinterceptionplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/interception)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexInterception from './plugins/interception.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexinterceptionplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinterceptionplugin.min.js', true);
+    ```
+- Add interception behavior
+    ```javascript
+    var interception = scene.plugins.get('rexinterceptionplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import InterceptionPlugin from './plugins/interception-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexInterception',
-            plugin: InterceptionPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import InterceptionPlugin from 'phaser3-rex-plugins/plugins/interception-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexInterception',
+                plugin: InterceptionPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add interception behavior
+    ```javascript
+    var interception = scene.plugins.get('rexInterception').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Interception from 'phaser3-rex-plugins/plugins/interception.js';
+    ```
+- Add interception behavior
+    ```javascript
+    var interception = new Interception(gameObject, config);
+    ```
 
 ### Create instance
 

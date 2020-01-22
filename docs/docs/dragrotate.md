@@ -5,7 +5,7 @@ Get dragging angle around a specific point.
 - Author: Rex
 - Member of scene
 
-## Live demo
+## Live demos
 
 - [Spin-button](https://codepen.io/rexrainbow/pen/NJKywR)
 

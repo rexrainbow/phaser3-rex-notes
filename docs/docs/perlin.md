@@ -5,49 +5,76 @@ Perlin2/Perlin3 noise and simplex2/simplex3 noise. ([Reference](https://github.c
 - Author: Rex
 - Method only
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/perlin-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexperlinplugin.min.js)
+- [Perlin2](https://codepen.io/rexrainbow/pen/BXyvOo)
+- [Terrain generator](https://codepen.io/rexrainbow/pen/YmyzoE)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/perlin/)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexPerlin from './plugins/perlin.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexperlinplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexperlinplugin.min.js', true);
+    ```
+- Add perlin noise object
+    ```javascript
+    var noise = scene.plugins.get('rexperlinplugin').add(seed);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import PerlinPlugin from './plugins/perlin-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexPerlin',
-            plugin: PerlinPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import PerlinPlugin from 'phaser3-rex-plugins/plugins/perlin-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexPerlin',
+                plugin: PerlinPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add perlin noise object
+    ```javascript
+    var noise = scene.plugins.get('rexPerlin').add(seed);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Perlin from 'phaser3-rex-plugins/plugins/perlin.js';
+    ```
+- Add perlin noise object
+    ```javascript
+    var noise = new Perlin(seed);
+    ```
 
 ### Create noise instance
 
 ```javascript
-var noise = cene.plugins.get('rexPerlin').add(seed);
+var noise = scene.plugins.get('rexPerlin').add(seed);
 ```
 
 - `seed` : A seed for this noise, like `Math.random()`

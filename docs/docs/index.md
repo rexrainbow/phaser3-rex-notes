@@ -17,8 +17,8 @@
 1. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
 1. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Board/Shape](board-shape.md): Grid (polygon) shape object.
-1. [Build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
 1. [Buff data](buffdata.md): Data manager with buffs.
+1. [Build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
 1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
@@ -54,7 +54,7 @@
 1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
-1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
+1. [Hexagon](geom-hexagon.md): Hexagon geometry object.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.
@@ -87,8 +87,8 @@
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
-1. [TCRP.Player](tcrp-player.md): Run commands on time.
-1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
+1. [TCRP/Player](tcrp-player.md): Run commands on time.
+1. [TCRP/Recorder](tcrp-recoder.md): Store commands with time.
 1. [Text/edit](textedit.md): Create an input text object above a text object to edit string content.
 1. [Text/typing](texttyping.md): Typing text on text object.
 1. [Text/page](textpage.md): Display text page by page on text object.

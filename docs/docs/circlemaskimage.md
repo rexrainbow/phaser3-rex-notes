@@ -5,7 +5,7 @@ Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.m
 - Author: Rex
 - Game object
 
-## Live demo
+## Live demos
 
 - [Circle-mask-image](https://codepen.io/rexrainbow/pen/XWrMKBY)
 

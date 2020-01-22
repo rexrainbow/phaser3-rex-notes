@@ -5,7 +5,7 @@ Get press events of a game object.
 - Author: Rex
 - Behavior of game object
 
-## Live demo
+## Live demos
 
 - [Press object](https://codepen.io/rexrainbow/pen/pmrPzW)
 

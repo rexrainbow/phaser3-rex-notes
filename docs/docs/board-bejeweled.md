@@ -5,7 +5,7 @@ Match3-like gameplay template.
 - Author: Rex
 - Template
 
-## Live demo
+## Live demos
 
 - [Default](https://codepen.io/rexrainbow/pen/wEVYoY)
 - [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
