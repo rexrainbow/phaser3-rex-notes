@@ -13,7 +13,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-toonify)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 

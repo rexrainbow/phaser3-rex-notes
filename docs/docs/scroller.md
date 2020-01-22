@@ -13,7 +13,7 @@ Drag content. Slow down when dragging released, pull back when out of bounds.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/scroller)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 

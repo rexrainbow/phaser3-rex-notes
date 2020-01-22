@@ -72,7 +72,7 @@
     sscene.add.existing(inputText);
     ```
 
-### Add text object
+### Add input text object
 
 ```javascript
 var inputText = scene.add.rexInputText(x, y, width, height, config);

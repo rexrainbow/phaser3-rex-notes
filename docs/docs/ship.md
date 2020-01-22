@@ -13,7 +13,7 @@ Move game object as a [space ship](https://labs.phaser.io/view.html?src=src\phys
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ship)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 

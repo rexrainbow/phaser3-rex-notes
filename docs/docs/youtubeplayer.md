@@ -5,11 +5,9 @@ Play youtube video on iframe.
 - Author: Rex
 - [DOM Game object](domelement.md)
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexyoutubeplayerplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer.js)
+- [Youtube player](https://codepen.io/rexrainbow/pen/PvVeBR)
 
 ## Usage
 
@@ -17,31 +15,93 @@ Play youtube video on iframe.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    parent: divId,
-    dom: {
-        createContainer: true
-    },
-    plugins: {
-        global: [{
-            key: 'rexYoutubePlayerPlugin',
-            plugin: YoutubePlayerPlugin,
-            start: true
-        },
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
+    ```
+- Add youtube player object
+    ```javascript
+    var youtubePlayer = scene.add.rexYoutubePlayer(x, y, width, height, config);
+    ```
 
-- Set `parent` to divId
-- Set `dom.createContainer` to `true`.
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import YoutubePlayerPlugin from 'phaser3-rex-plugins/plugins/youtubeplayer-plugin.js';
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexYoutubePlayer',
+                plugin: YoutubePlayerPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
+- Add youtube player object
+    ```javascript
+    var youtubePlayer = scene.add.rexYoutubePlayer(x, y, width, height, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
+- Import class
+    ```javascript
+    import YoutubePlayer from 'phaser3-rex-plugins/plugins/youtubeplayer.js';
+    ```
+- Add youtube player object
+    ```javascript    
+    var youtubePlayer = new YoutubePlayer(scene, x, y, width, height, config);
+    sscene.add.existing(youtubePlayer);
+    ```
 
 ### Add youtube player object
 

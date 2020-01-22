@@ -13,7 +13,7 @@ Create an [input text object](inputtext.md) above a text object to edit string c
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textedit)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 

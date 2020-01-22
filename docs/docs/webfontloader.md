@@ -5,9 +5,9 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 - Author: Rex
 - Custom File of loader
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/webfontloader-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexwebfontloaderplugin.min.js)
+- [Webfont loader](https://codepen.io/rexrainbow/pen/vjqmXp)
 
 ## Usage
 
@@ -15,31 +15,65 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'WebFontLoader',
-            plugin: WebFontLoaderPlugin,
-            start: true
-        },
-        // ...
-        ]
+- Load plugin (minify file) in preload stage
+    ```javascript
+    var sceneConfig = {
+        // ....
+        pack: {
+            files: [{
+                type: 'plugin',
+                key: 'rexwebfontloaderplugin',
+                url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/    rexwebfontloaderplugin.min.js',
+                start: true
+            }]
+        }
+    };
+    class MyScene extends Phaser.Scene {
+        constructor() {
+            super(sceneConfig)
+        }
+        // ....
+
+        preload() {
+            // rexwebfontloaderplugin will be installed before preload(), but not added to loader yet
+            // Call addToScene(scene) to add this await loader to loader of this scene
+            this.plugins.get('rexwebfontloaderplugin').addToScene(this);
+
+            this.load.rexWebFont(config);
+        }
     }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    ```
 
-or install it in previous scene (i.e. a preload scene).
+#### Import plugin
 
-!!! warning
-    The best way of installing this plugin is to load it in game config. 
-
-    This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using `this.load.plugin(...)`, or loading in payload of scene)
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import WebfontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexWebfontLoader',
+                plugin: WebfontLoaderPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- In preload stage
+    ```javascript
+    scene.load.rexWebFont(config);
+    ```
 
 ### Load webfont
 

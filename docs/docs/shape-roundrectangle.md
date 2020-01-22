@@ -5,7 +5,7 @@ Round rectangle shape.
 - Author: Rex
 - Game object
 
-## Live demo
+## Live demos
 
 - [Round rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)
 

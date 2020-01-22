@@ -9,10 +9,6 @@ Await custom task in preload stage.
 
 - [Wait 1000ms](https://codepen.io/rexrainbow/pen/jvNGbm)
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/awaitloader-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexawaitloaderplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/awaitloader)

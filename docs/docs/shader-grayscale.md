@@ -13,7 +13,7 @@ Gray scale post processing filter.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-grayscale)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 

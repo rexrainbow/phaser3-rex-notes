@@ -13,36 +13,65 @@ Encrypt or decrypt string by XOR algorithm.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/xor)
 
-User could import class directly, or install it by global plugin.
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexXOR from './plugins/xor.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexxorplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexxorplugin.min.js', true);
+    ```
+- Encrypt, or decrypt
+    ```javascript
+    var encResult = scene.plugins.get('rexxorplugin').Encrypt(src, pwd);
+    var decResult = scene.plugins.get('rexxorplugin').Decrypt(encResult, pwd);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import XORPlugin from './plugins/xor-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexXOR',
-            plugin: XORPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import XORPlugin from 'phaser3-rex-plugins/plugins/xor-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexXOR',
+                plugin: XORPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Encrypt, or decrypt
+    ```javascript
+    var encResult = scene.plugins.get('rexXOR').Encrypt(src, pwd);
+    var decResult = scene.plugins.get('rexXOR').Decrypt(encResult, pwd);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import XOR from 'phaser3-rex-plugins/plugins/xor.js';
+    ```
+- Encrypt, or decrypt
+    ```javascript
+    var encResult = XOR.Encrypt(src, pwd);
+    var decResult = XOR.Decrypt(encResult, pwd);
+    ```
 
 ### Encrypt
 

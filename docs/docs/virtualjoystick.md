@@ -13,7 +13,7 @@ Simulate curosr keys according touch events.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/virtualjoystick)
 
-User could import class directly, or install it by global plugin.
+ 
 
 ### Import class
 
