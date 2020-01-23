@@ -5,6 +5,10 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 - Author: Rex
 - A camera filter
 
+## Live demos
+
+- [Toonify](https://codepen.io/rexrainbow/pen/ErWNXa)
+
 ## Source code
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/toonifypipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextoonifypipelineplugin.min.js)
@@ -13,36 +17,62 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-toonify)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexToonifyPipeline from './plugins/toonifypipeline.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextoonifypipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifypipelineplugin.min.js', true);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rextoonifypipelineplugin').add(scene, key, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ToonifyPipelinePlugin from './plugins/toonifypipeline-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexToonifyPipeline',
-            plugin: ToonifyPipelinePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ToonifyPipelinePlugin from 'phaser3-rex-plugins/plugins/toonifypipeline-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexToonifyPipeline',
+                plugin: ToonifyPipelinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexToonifyPipeline').add(scene, key, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ToonifyPipeline from 'phaser3-rex-plugins/plugins/toonifypipeline.js';
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = new ToonifyPipeline(scene, key, config);
+    ```
 
 ### Apply filter
 

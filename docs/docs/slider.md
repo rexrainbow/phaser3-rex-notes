@@ -5,6 +5,10 @@ Drag thumb on a slider bar.
 - Author: Rex
 - Behavior of game object
 
+## Live demos
+
+- [Slider](https://codepen.io/rexrainbow/pen/eKJGZB)
+
 ## Source code
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/slider-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexsliderplugin.min.js)
@@ -13,36 +17,62 @@ Drag thumb on a slider bar.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/slider)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexSlider from './plugins/slider.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexsliderplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsliderplugin.min.js', true);
+    ```
+- Add slider behavior
+    ```javascript
+    var slider = scene.plugins.get('rexsliderplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import SliderPlugin from './plugins/slider-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexSlider',
-            plugin: SliderPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import SliderPlugin from 'phaser3-rex-plugins/plugins/slider-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexSlider',
+                plugin: SliderPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add slider behavior
+    ```javascript
+    var slider = scene.plugins.get('rexSlider').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Slider from 'phaser3-rex-plugins/plugins/slider.js';
+    ```
+- Add slider behavior
+    ```javascript
+    var slider = new Slider(gameObject, config);
+    ```
 
 ### Create instance
 

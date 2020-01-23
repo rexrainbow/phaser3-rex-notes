@@ -5,11 +5,9 @@ Displays text with multi-color, font face, or font size with tags.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tagtext-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextagtextplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tagtext.js)
+- [Tag text](https://codepen.io/rexrainbow/pen/KRaOpb)
 
 ## Usage
 
@@ -17,24 +15,61 @@ Displays text with multi-color, font face, or font size with tags.
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexTagTextPlugin',
-            plugin: TagTextPlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextagtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextagtextplugin.min.js', true);
+    ```
+- Add text object
+    ```javascript
+    var txt = scene.add.rexTagText(x, y, content, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TagTextPlugin from 'phaser3-rex-plugins/plugins/tagtext-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexTagTextPlugin',
+                plugin: TagTextPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add text object
+    ```javascript
+    var txt = scene.add.rexTagText(x, y, content, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import TagText from 'phaser3-rex-plugins/plugins/tagtext.js';
+    ```
+- Add text object
+    ```javascript    
+    var txt = new TagText(scene, x, y, content, config);
+    sscene.add.existing(txt);
+    ```
 
 ### Add text object
 

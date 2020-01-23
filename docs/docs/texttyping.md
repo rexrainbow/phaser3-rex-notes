@@ -5,6 +5,10 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 - Author: Rex
 - Behavior of text object
 
+## Live demos
+
+- [BBCode text + page + typing](https://codepen.io/rexrainbow/pen/yjZveb)
+
 ## Source code
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexttypingplugin.min.js)
@@ -13,41 +17,66 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/texttyping)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexTextTyping from './plugins/texttyping.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextexttypingplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexttypingplugin.min.js', true);
+    ```
+- Add typing behavior
+    ```javascript
+    var typing = scene.plugins.get('rextexttypingplugin').add(textGameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import TextTypingPlugin from './plugins/texttyping-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexTextTyping',
-            plugin: TextTypingPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TextTypingPlugin from 'phaser3-rex-plugins/plugins/texttyping-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexTextTyping',
+                plugin: TextTypingPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add typing behavior
+    ```javascript
+    var typing = scene.plugins.get('rexTextTyping').add(textGameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import TextTyping from 'phaser3-rex-plugins/plugins/texttyping.js';
+    ```
+- Add typing behavior
+    ```javascript
+    var typing = new TextTyping(textGameObject, config);
 
 ### Create instance
 
 ```javascript
-var typing = scene.plugins.get('rexTextTyping').add(txt, {
+var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
     //speed: 333,       // typing speed in ms
     //typeMode: 0,      //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text
@@ -55,8 +84,7 @@ var typing = scene.plugins.get('rexTextTyping').add(txt, {
 });
 ```
 
-Configuration
-
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 - `speed` : Typing speed in ms.
 - `typeMode` :
     - `'left-to-right'`, or `0` : Typing characters from left to right.

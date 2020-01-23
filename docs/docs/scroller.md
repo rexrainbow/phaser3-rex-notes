@@ -5,44 +5,70 @@ Drag content. Slow down when dragging released, pull back when out of bounds.
 - Author: Rex
 - Behavior of game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/scroller-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexscrollerplugin.min.js)
+- [Scroller](https://codepen.io/rexrainbow/pen/Kxzgre)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/scroller)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexScroller from './plugins/scroller.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexscrollerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscrollerplugin.min.js', true);
+    ```
+- Add scroller behavior
+    ```javascript
+    var scroller = scene.plugins.get('rexscrollerplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ScrollerPlugin from './plugins/scroller-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexScroller',
-            plugin: ScrollerPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ScrollerPlugin from 'phaser3-rex-plugins/plugins/scroller-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexScroller',
+                plugin: ScrollerPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add scroller behavior
+    ```javascript
+    var scroller = scene.plugins.get('rexScroller').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Scroller from 'phaser3-rex-plugins/plugins/scroller.js';
+    ```
+- Add scroller behavior
+    ```javascript
+    var scroller = new Scroller(gameObject, config);
+    ```
 
 ### Create instance
 

@@ -18,6 +18,19 @@
 
 #### Load minify file
 
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
 - Load plugin (minify file) in preload stage
     ```javascript
     scene.load.plugin('rexinputtextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexinputtextplugin.min.js', true);
@@ -37,6 +50,10 @@
     ```javascript
     import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
     var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
         // ...
         plugins: {
             global: [{
@@ -62,6 +79,19 @@
     ```
     npm i phaser3-rex-plugins
     ```
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
     import InputText from 'phaser3-rex-plugins/plugins/inputtext.js';

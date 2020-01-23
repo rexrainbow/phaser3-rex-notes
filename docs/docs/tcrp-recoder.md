@@ -13,41 +13,67 @@ Recorder of **T** ime-**C** ommand-**R** ecorder-**P** layer, to store commands 
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tcrp)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexTCRP from './plugins/tcrp.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextcrpplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextcrpplugin.min.js', true);
+    ```
+- Create instance
+    ```javascript
+    var recorder = scene.plugins.get('rextcrpplugin').addRecorder(scene);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import TCRPPlugin from './plugins/tcrp-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexTCRP',
-            plugin: TCRPPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexTCRP',
+                plugin: TCRPPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create instance
+    ```javascript
+    var recorder = scene.plugins.get('rexTCRP').addRecorder(scene);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
+    ```
+- Create instance
+    ```javascript
+    var recorder = new TCRP.Recorder(scene, config);
+    ```
 
 ### Create instance
 
 ```javascript
-var recorder = scene.plugins.get('rexTextTyping').addRecorder(scene);
+var recorder = scene.plugins.get('rexTCRP').addRecorder(scene);
 ```
 
 ### Start recording

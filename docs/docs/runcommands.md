@@ -5,18 +5,71 @@ Run commands in array.
 - Author: Rex
 - Method only
 
-## Source code
-
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/runcommands/RunCommands.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/run-commands)
 
+### Install plugin
+
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexruncommandsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexruncommandsplugin.min.js', true);
+    ```
+- Run commands
+    ```javascript
+    scene.plugins.get('rexruncommandsplugin').run(commands, scope);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import RunCommandsPlugin from 'phaser3-rex-plugins/plugins/runcommands-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexRunCommands',
+                plugin: RunCommandsPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Run commands
+    ```javascript
+    scene.plugins.get('rexRunCommands').run(commands, scope);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import RunCommands from 'phaser3-rex-plugins/plugins/runcommands.js';
+    ```
+- Add rotate-to behavior
+    ```javascript
+    RunCommands(commands, scope);
+    ```
+
 ### Run commands
 
 ```javascript
-runCommands(commands, scope);
+scene.plugins.get('rexRunCommands').run(commands, scope);
 ```
 
 - Format of command :

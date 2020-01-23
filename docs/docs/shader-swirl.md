@@ -5,44 +5,70 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 - Author: Rex
 - A camera filter
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/swirlpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexswirlpipelineplugin.min.js)
+- [Swirl](https://codepen.io/rexrainbow/pen/RBXQBo)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-swirl)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexSwirlpipeline from './plugins/swirlpipeline.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexswirlpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexswirlpipelineplugin.min.js', true);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexswirlpipelineplugin').add(scene, key, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import SwirlPipelinePlugin from './plugins/swirlpipeline-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexSwirlPipeline',
-            plugin: SwirlPipelinePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import SwirlPipelinePlugin from 'phaser3-rex-plugins/plugins/swirlpipeline-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexSwirlPipeline',
+                plugin: SwirlPipelinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexSwirlPipeline').add(scene, key, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import SwirlPipeline from 'phaser3-rex-plugins/plugins/swirlpipeline.js';
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = new SwirlPipeline(scene, key, config);
+    ```
 
 ### Apply filter
 

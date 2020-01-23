@@ -5,44 +5,70 @@ Adjust color in HSL domain, post processing filter.
 - Author: Rex
 - A camera filter
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/hsladjustpipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexhsladjustpipelineplugin.min.js)
+- [HSL adjust](https://codepen.io/rexrainbow/pen/daPdoY)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-hsladjust)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexHslAdjustPipeline from './plugins/hsladjustpipeline.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexhsladjustpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhsladjustpipelineplugin.min.js', true);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexhsladjustpipelineplugin').add(scene, key, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import HslAdjustPipelinePlugin from './plugins/hsladjustpipeline-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexHslAdjustPipeline',
-            plugin: HslAdjustPipelinePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import HSLAdjustPipelinePlugin from 'phaser3-rex-plugins/plugins/hsladjustpipeline-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexHSLAdjustPipeline',
+                plugin: HSLAdjustPipelinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexHSLAdjustPipeline').add(scene, key, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import HSLAdjustPipeline from 'phaser3-rex-plugins/plugins/hsladjustpipeline.js';
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = new HSLAdjustPipeline(scene, key, config);
+    ```
 
 ### Apply filter
 

@@ -5,10 +5,6 @@ Move game object toward current angle of game object, with a constant speed.
 - Author: Rex
 - Arcade behavior of game object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bullet-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexbulletplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bullet)

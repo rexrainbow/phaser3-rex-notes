@@ -13,41 +13,67 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tcrp)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexTCRP from './plugins/tcrp.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextcrpplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextcrpplugin.min.js', true);
+    ```
+- Create instance
+    ```javascript
+    var player = scene.plugins.get('rextcrpplugin').addPlayer(scene, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import TCRPPlugin from './plugins/tcrp-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexTCRP',
-            plugin: TCRPPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TCRPPlugin from 'phaser3-rex-plugins/plugins/tcrp-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexTCRP',
+                plugin: TCRPPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create instance
+    ```javascript
+    var player = scene.plugins.get('rexTCRP').addPlayer(scene, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import TCRP from 'phaser3-rex-plugins/plugins/tcrp.js';
+    ```
+- Create instance
+    ```javascript
+    var player = new TCRP.Player(scene, config);
+    ```
 
 ### Create instance
 
 ```javascript
-var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
+var player = scene.plugins.get('rexTCRP').addPlayer(scene, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // dtMode: 0,          // 'abs'|'absolute'|0|'inc'|'increment'|1
     // commands: [],       // [[dt, command], [dt, command], ...]
@@ -70,7 +96,7 @@ player.load(commands, scope, {
 });
 ```
 
-- Commands : see also [Run commands](runcommands.md)
+- Commands : see also [Run commands](tcrp.md)
     ```javascript
     [
         [dt, command],

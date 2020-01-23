@@ -5,6 +5,10 @@ Shake position of game object.
 - Author: Rex
 - Behavior of game object
 
+## Live demos
+
+- [Shake position](https://codepen.io/rexrainbow/pen/JwMbxR)
+
 ## Source code
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/shakeposition-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexshakepositionplugin.min.js)
@@ -13,36 +17,62 @@ Shake position of game object.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shake)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexShake from './plugins/shakeposition.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexshakepositionplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexshakepositionplugin.min.js', true);
+    ```
+- Add shake-position behavior
+    ```javascript
+    var shakePosition = scene.plugins.get('rexshakepositionplugin').add(gameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import ShakePlugin from './plugins/shakeposition-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexShake',
-            plugin: ShakePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexShakePosition',
+                plugin: ShakePositionPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add shake-position behavior
+    ```javascript
+    var shakePosition = scene.plugins.get('rexShakePosition').add(gameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ShakePosition from 'phaser3-rex-plugins/plugins/shakeposition.js';
+    ```
+- Add shake-position behavior
+    ```javascript
+    var shakePosition = new ShakePosition(gameObject, config);
+    ```
 
 ### Create instance
 

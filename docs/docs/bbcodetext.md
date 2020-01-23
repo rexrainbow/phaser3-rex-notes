@@ -26,7 +26,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
     ```
 - Add text object
     ```javascript
-    var txt = scene.add.rexBBCodeText(x, y, content);
+    var txt = scene.add.rexBBCodeText(x, y, content, config);
     ```
 
 #### Import plugin

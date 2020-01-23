@@ -5,44 +5,70 @@ Gray scale post processing filter.
 - Author: Rex
 - A camera filter
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/grayscalepipeline-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgrayscalepipelineplugin.min.js)
+- [Gray scale](https://codepen.io/rexrainbow/pen/MZNaNP)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-grayscale)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexGrayScalepipeline from './plugins/grayscalepipeline.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexgrayscalepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgrayscalepipelineplugin.min.js', true);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexgrayscalepipelineplugin').add(scene, key, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import GrayScalePipelinePlugin from './plugins/grayscalepipeline-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexGrayScalePipeline',
-            plugin: GrayScalePipelinePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import GrayScalePipelinePlugin from 'phaser3-rex-plugins/plugins/grayscalepipeline-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexGrayScalePipeline',
+                plugin: GrayScalePipelinePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = scene.plugins.get('rexGrayScalePipeline').add(scene, key, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import GrayScalePipeline from 'phaser3-rex-plugins/plugins/grayscalepipeline.js';
+    ```
+- Create pipeline instance
+    ```javascript
+    var customPipeline = new GrayScalePipeline(scene, key, config);
+    ```
 
 ### Apply filter
 

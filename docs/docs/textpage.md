@@ -5,59 +5,80 @@ Display text page by page on [text object](text.md), [bbcode text object](bbcode
 - Author: Rex
 - Behavior of text object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextextpageplugin.min.js)
+- [BBCode text + page + typing](https://codepen.io/rexrainbow/pen/yjZveb)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textpage)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexTextPage from './plugins/textpage.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextextpageplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextextpageplugin.min.js', true);
+    ```
+- Add page behavior
+    ```javascript
+    var page = scene.plugins.get('rextextpageplugin').add(textGameObject, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import TextPagePlugin from './plugins/textpage-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexTextPage',
-            plugin: TextPagePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TextPagePlugin from 'phaser3-rex-plugins/plugins/textpage-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexTextPage',
+                plugin: TextPagePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add page behavior
+    ```javascript
+    var page = scene.plugins.get('rexTextPage').add(textGameObject, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import TextPage from 'phaser3-rex-plugins/plugins/textpage.js';
+    ```
+- Add page behavior
+    ```javascript
+    var page = new TextPage(textGameObject, config);
+    ```
 
 ### Create instance
 
 ```javascript
-var txt = scene.add.text(x, y, '', {
-    wordWrap:  {
-        width: 500
-    },
-    maxLines: 7
-});
-var page = scene.plugins.get('rexTextPage').add(txt, {
+var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     //text: '',       // content in string or array
 });
 ```
 
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 - `text` : content in string or array, optional
 
 ### Set content

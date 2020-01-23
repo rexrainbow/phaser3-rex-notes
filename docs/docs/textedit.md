@@ -1,56 +1,106 @@
 ## Introduction
 
-Create an [input text object](inputtext.md) above a text object to edit string content.
+Create an [input text object](textedit.md) above a text object to edit string content.
 
 - Author: Rex
 - Behavior of text object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textedit-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexteditplugin.min.js)
+- [Text edit](https://codepen.io/rexrainbow/pen/GaxqLZ)
+- [Number edit](https://codepen.io/rexrainbow/pen/OJLQyKz)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textedit)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexTextEdit from './plugins/textedit.js';
-```
-
-### Install global plugin
-
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import TextEditPlugin from './plugins/textedit-plugin.js';
-
-var config = {
-    // ...
-    parent: divId,
-    dom: {
-        createContainer: true
-    },
-    plugins: {
-        global: [{
-            key: 'rexTextEdit',
-            plugin: TextEditPlugin,
-            start: true
-        },
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rextexteditplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js', true);
+    ```
+- Add text-edit behavior
+    ```javascript
+    var editor = scene.plugins.get('rextexteditplugin').edit(textGameObject)
+    ```
 
-- Set `parent` to divId
-- Set `dom.createContainer` to `true`.
+#### Import plugin
 
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import TextEditPlugin from 'phaser3-rex-plugins/plugins/textedit-plugin.js';
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexTextEdit',
+                plugin: TextEditPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add text-edit behavior
+    ```javascript
+    var editor = scene.plugins.get('rexTextEdit').edit(textGameObject)
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Enable dom element in [configuration of game](game.md#configuration)
+    ```javascript
+    var config = {
+        parent: divId,
+        dom: {
+            createContainer: true
+        },        
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - Set `parent` to divId
+    - Set `dom.createContainer` to `true`.
+- Import class
+    ```javascript
+    import TextEdit from 'phaser3-rex-plugins/plugins/textedit.js';
+    ```
+- Add text-edit behavior
+    ```javascript
+    var editor = new TextEdit(textGameObject)
+    ```
+ 
 ### Open text editor
 
 [An easy way](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js) to open a text editor.
@@ -60,7 +110,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
 // var editor = scene.plugins.get('rexTextEdit').edit(textObject, config, onClose);
 ```
 
-- `textObject` : Text object, [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 - `config` : 
     - `config.type` : 
         - `text` (default), or 
@@ -73,14 +123,14 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
             textObject.text = text;
         }
         ```
-    - [More configuration parameters](inputtext.md#add-text-object)...
+    - [More configuration parameters](textedit.md#add-text-object)...
 - `onClose` : Callback invoked when text editor is closed.
     ```javascript
     var callback = function(textObject) {
     }
     ```
 
-Create a text editor ([input element](inputtext.md)) above text object.
+Create a text editor ([input element](textedit.md)) above text object.
 
 - Size, font size, font family, font color, background color of text editor will be equal to text object.
 - Text object will be invisible when text editor is opened.
@@ -94,12 +144,10 @@ Create a text editor ([input element](inputtext.md)) above text object.
 ### Create instance
 
 ```javascript
-var txt = scene.add.text(x, y, 'abc', {
-    fixedWidth: 200,
-    fixedHeight: 30,
-});
-var editor = scene.plugins.get('rexTextEdit').add(txt);
+var editor = scene.plugins.get('rexTextEdit').add(textGameObject);
 ```
+
+- `textGameObject` : [Text](text.md), [bbcodt-text](bbcodetext.md), or [tag-text](tagtext.md)
 
 ### Open editor
 
@@ -119,14 +167,14 @@ editor.open(config);
             textObject.text = text;
         }
         ```
-    - [More configuration parameters](inputtext.md#add-text-object)...
+    - [More configuration parameters](textedit.md#add-text-object)...
 - `onClose` : Callback invoked when text editor is closed.
     ```javascript
     var callback = function(textObject) {
     }
     ```
 
-Create a text editor ([input element](inputtext.md)) above text object.
+Create a text editor ([input element](textedit.md)) above text object.
 
 - Size, font size, font family, font color, background color of text editor will be equal to text object.
 - Text object will be invisible when text editor is opened.

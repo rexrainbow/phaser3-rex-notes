@@ -5,44 +5,70 @@ Run sequence commands in array.
 - Author: Rex
 - Object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sequence-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexsequenceplugin.min.js)
+- [Sequence](https://codepen.io/rexrainbow/pen/vjPpQa)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/run-sequence)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import Sequence from './plugins/sequence.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexsequenceplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsequenceplugin.min.js', true);
+    ```
+- Create sequence instance
+    ```javascript
+    var seq = this.plugins.get('rexsequenceplugin').add(config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import SequencePlugin from './plugins/sequence-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexSequence',
-            plugin: SequencePlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import SequencePlugin from 'phaser3-rex-plugins/plugins/sequence-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexSequence',
+                plugin: SequencePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create sequence instance
+    ```javascript
+    var seq = this.plugins.get('rexSequence').add(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import Sequence from 'phaser3-rex-plugins/plugins/sequence.js';
+    ```
+- Create sequence instance
+    ```javascript
+    var seq = new Sequence(config);
+    ```
 
 ### Create sequence instance
 
@@ -77,7 +103,7 @@ seq.load(commands, actionScope);
     ```
 - [ActionScope](sequence.md#action-of-commands)
 
-Format of command is the same as [run-command](runcommands#run-commands).
+Format of command is the same as [run-command](sequence#run-commands).
 
 ### Run commands
 
