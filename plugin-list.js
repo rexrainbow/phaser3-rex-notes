@@ -66,6 +66,7 @@ module.exports = {
     'soundfadeplugin': './plugins/soundfade-plugin.js',
 
     // control
+    'runcommandsplugin': './plugins/runcommands-plugin.js',
     'sequenceplugin': './plugins/sequence-plugin.js',
     'fsmplugin': './plugins/fsm-plugin.js',
     'tcrpplugin': './plugins/tcrp-plugin.js',

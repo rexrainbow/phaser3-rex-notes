@@ -1,5 +1,6 @@
+import RunCommandsPlugin from '../../plugins/runcommands-plugin.js';
 import CSVToArray from '../../plugins/csvtoarray.js';
-import runCommands from '../../plugins/runcommands.js';
+
 
 const Map = Phaser.Structs.Map;
 
@@ -60,12 +61,12 @@ move-sprite-to,A,300,200,1`;
 
         var cmds = CSVToArray(csvString);
 
-        runCommands(cmds, myCmds, {
+        this.plugins.get('rexRunCommands').run(cmds, myCmds, {
             argsConvert: true
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
@@ -77,7 +78,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexRunCommands',
+            plugin: RunCommandsPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -1,4 +1,4 @@
-import RunCommands from '../../plugins/runcommands.js';
+import RunCommandsPlugin from '../../plugins/runcommands-plugin.js';
 
 const Map = Phaser.Structs.Map;
 
@@ -62,10 +62,10 @@ class Demo extends Phaser.Scene {
 
         ];
 
-        RunCommands(cmds, myCmds);
+        this.plugins.get('rexRunCommands').run(cmds, myCmds);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
@@ -77,7 +77,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexRunCommands',
+            plugin: RunCommandsPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
