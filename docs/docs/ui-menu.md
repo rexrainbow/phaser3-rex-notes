@@ -5,38 +5,71 @@ A container with buttons and sub-menu.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexuiplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/menu/Menu.js)
+- [Pop-up menu](https://codepen.io/rexrainbow/pen/PxOEBr)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-menu)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    ```
+- Add menu object
+    ```javascript
+    var menu = scene.rexUI.add.menu(config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        },
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add menu object
+    ```javascript
+    var menu = scene.rexUI.add.menu(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Menu } from 'phaser3-rex-plugins/templates/ui/index.js';
+    ```
+- Add menu object
+    ```javascript    
+    var menu = new Menu(scene, config);
+    sscene.add.existing(menu);
+    ```
 
 ### Add menu object
 

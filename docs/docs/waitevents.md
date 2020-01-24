@@ -4,49 +4,71 @@ Wait fired events or callbacks.
 
 - Author: Rex
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/waitevents-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexwaiteventsplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/waitevents)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexWaitEvents from './plugins/waitevents.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexwaiteventsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexwaiteventsplugin.min.js', true);
+    ```
+- Create instance
+    ```javascript
+    var waitEvents = scene.plugins.get('rexwaiteventsplugin').add(completeCallback, completeCallbackScope);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import WaitEventsPlugin from './plugins/waitevents-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexWaitEvents',
-            plugin: WaitEventsPlugin,
-            start: true
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import WaitEventsPlugin from 'phaser3-rex-plugins/plugins/waitevents-plugin.js';
+    var config = {
+        // ...
+        plugins: {
+            global: [{
+                key: 'rexWaitEvents',
+                plugin: WaitEventsPlugin,
+                start: true
+            },
+            // ...
+            ]
         }
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create instance
+    ```javascript
+    var waitEvents = scene.plugins.get('rexWaitEvents').add(completeCallback, completeCallbackScope);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import WaitEvents from 'phaser3-rex-plugins/plugins/waitevents.js';
+    ```
+- Create instance
+    ```javascript
+    var waitEvents = new WaitEvents(completeCallback, completeCallbackScope);
+    ```
 
 ### Create instance
 
 ```javascript
-var waitevents = scene.plugins.get('rexWaitEvents').add(completeCallback, completeCallbackScope);
+var waitEvents = scene.plugins.get('rexWaitEvents').add(completeCallback, completeCallbackScope);
 ```
 
 - `completeCallback`, `completeCallbackScope` : Callback when all waitting events are fired.
@@ -54,7 +76,7 @@ var waitevents = scene.plugins.get('rexWaitEvents').add(completeCallback, comple
 ### Set complete callback
 
 ```javascript
-waitevents.setCompleteCallback(completeCallback, completeCallbackScope);
+waitEvents.setCompleteCallback(completeCallback, completeCallbackScope);
 ```
 
 - `completeCallback`, `completeCallbackScope` : Callback when all waitting events are fired.
@@ -64,7 +86,7 @@ waitevents.setCompleteCallback(completeCallback, completeCallbackScope);
 #### Callback
 
 ```javascript
-var callback = waitevents.waitCallback();
+var callback = waitEvents.waitCallback();
 ```
 
 - `callback` : A function object which invoked when waitting event finished.
@@ -80,5 +102,5 @@ scene.time.delayedCall(1500, waitEvents.waitCallback());
 #### Callback from event emitter
 
 ```javascript
-waitevents.waitEvent(eventEmitter, eventName);
+waitEvents.waitEvent(eventEmitter, eventName);
 ```

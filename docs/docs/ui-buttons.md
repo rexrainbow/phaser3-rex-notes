@@ -5,38 +5,67 @@ A container with a group of buttons.
 - Author: Rex
 - Game object
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexuiplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/buttons/Buttons.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-buttons)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    ```
+- Add buttons object
+    ```javascript
+    var buttons = scene.rexUI.add.buttons(config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        },
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add buttons object
+    ```javascript
+    var buttons = scene.rexUI.add.buttons(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Buttons } from 'phaser3-rex-plugins/templates/ui/index.js';
+    ```
+- Add buttons object
+    ```javascript    
+    var buttons = new Buttons(scene, config);
+    sscene.add.existing(buttons);
+    ```
 
 ### Add Buttons object
 

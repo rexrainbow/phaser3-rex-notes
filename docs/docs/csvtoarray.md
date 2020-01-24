@@ -5,10 +5,6 @@ Generate array from csv string.
 - Reference: [Papa Parse](https://www.papaparse.com/)
 - Method only
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtoarray-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcsvtoarrayplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-array)

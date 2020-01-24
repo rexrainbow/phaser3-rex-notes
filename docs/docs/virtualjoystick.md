@@ -5,49 +5,75 @@ Simulate curosr keys according touch events.
 - Author: Rex
 - Member of scene
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/virtualjoystick-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexvirtualjoystickplugin.min.js)
+- [Virtual joysticj](https://codepen.io/rexrainbow/pen/oyqvQY)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/virtualjoystick)
 
- 
+### Install plugin
 
-### Import class
+#### Load minify file
 
-```javascript
-import rexVirtualJoyStick from './plugins/virtualjoystick.js';
-```
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
+    ```
+- Create instance
+    ```javascript
+    var joyStick = scene.plugins.get('rexvirtualjoystickplugin').addPlayer(scene, config);
+    ```
 
-### Install global plugin
+#### Import plugin
 
-Install plugin in [configuration of game](game.md#configuration)
-
-```javascript
-import VirtualJoyStickPlugin from './plugins/virtualjoystick-plugin.js';
-
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexVirtualJoyStick',
-            plugin: VirtualJoyStickPlugin,
-            start: true
-        },
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import VirtualJoystickPlugin from 'phaser3-rex-plugins/plugins/virtualjoystick-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexVirtualJoystick',
+                plugin: VirtualJoystickPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Create instance
+    ```javascript
+    var joyStick = scene.plugins.get('rexVirtualJoystick').addPlayer(scene, config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import VirtualJoystick from 'phaser3-rex-plugins/plugins/virtualjoystick.js';
+    ```
+- Create instance
+    ```javascript
+    var joyStick = new VirtualJoystick(scene, config);
+    ```
 
 ### Create instance
 
 ```javascript
-var joystick = scene.plugins.get('rexVirtualJoyStick').add(scene, {
+var joystick = scene.plugins.get('rexVirtualJoystick').add(scene, {
     x: x,
     y: y,
     radius: radius,

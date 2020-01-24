@@ -9,10 +9,6 @@ Drag thumb on a slider bar.
 
 - [Slider](https://codepen.io/rexrainbow/pen/eKJGZB)
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/slider-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexsliderplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/slider)

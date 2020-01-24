@@ -9,10 +9,6 @@ Shake position of game object.
 
 - [Shake position](https://codepen.io/rexrainbow/pen/JwMbxR)
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/shakeposition-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexshakepositionplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shake)

@@ -5,43 +5,78 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexuiplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/gridtable/GridTable.js)
+- [Grid table](https://codepen.io/rexrainbow/pen/XyJbWX)
+- [Varying cell size](https://codepen.io/rexrainbow/pen/vYBdNQy)
+- [Sizer cell](https://codepen.io/rexrainbow/pen/pooZWme)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridtable)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    ```
+- Add table object
+    ```javascript
+    var table = scene.rexUI.add.gridTable(config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        },
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add table object
+    ```javascript
+    var table = scene.rexUI.add.gridTable(config);
+    ```
 
-### Add grid table object
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { GridTable } from 'phaser3-rex-plugins/templates/ui/index.js';
+    ```
+- Add table object
+    ```javascript    
+    var table = new GridTable(scene, config);
+    sscene.add.existing(table);
+    ```
+
+### Add table object
 
 ```javascript
-var gridTable = scene.rexUI.add.gridTable({
+var table = scene.rexUI.add.gridTable({
     // x: 0,
     // y: 0,
     // anchor: undefined,
@@ -228,7 +263,7 @@ var gridTable = scene.rexUI.add.gridTable({
     ```
 - Create instance
     ```javascript
-    var gridTable = new MyGridTable(scene, config);
+    var table = new MyGridTable(scene, config);
     ```
 
 ### Layout children
@@ -236,104 +271,104 @@ var gridTable = scene.rexUI.add.gridTable({
 Arrange position of all elements.
 
 ```javascript
-gridTable.layout();
+table.layout();
 ```
 
 ### Items
 
 - Set
     ```javascript
-    gridTable.setItems(items);
+    table.setItems(items);
     ```
     - `items` : Array of item data for each cell.
     - This method will update each visible cell of grid table.
 - Clear all items
     ```javascript
-    gridTable.setItems();
+    table.setItems();
     ```
 - Get
    ```javascript
-   var items = gridTable.items;
+   var items = table.items;
    ```
 
 ### Scroll content
 
 - Set
     ```javascript
-    gridTable.setChildOY(oy);
+    table.setChildOY(oy);
     ```
     or
     ```javascript
-    gridTable.childOY = oy;
+    table.childOY = oy;
     ```
 - Get
     ```javascript
-    var childOY = gridTable.childOY;
+    var childOY = table.childOY;
     ```
 - Top OY
     ```javascript
-    var topOY = gridTable.topChildOY;
+    var topOY = table.topChildOY;
     ```
 - Bottom OY
     ```javascript
-    var bottomOY = gridTable.bottomChildOY;
+    var bottomOY = table.bottomChildOY;
     ```
 
 #### Scroll by percentage
 
 - Set
     ```javascript
-    gridTable.setT(t);  // t: 0~1
+    table.setT(t);  // t: 0~1
     ```
     or
     ```javascript
-    gridTable.t = t;
+    table.t = t;
     ```
 - Get
     ```javascript
-    var t = gridTable.t;
+    var t = table.t;
     ```
 
 ### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
-    gridTable.scrollToTop();
+    table.scrollToTop();
     ```
-    - Equal to `gridTable.t = 0;`
+    - Equal to `table.t = 0;`
 - Scroll to bottom
     ```javascript
-    gridTable.scrollToBottom();
+    table.scrollToBottom();
     ```
-    - Equal to `gridTable.t = 1;`
+    - Equal to `table.t = 1;`
 
 ### Enable/disable scrolling
 
 - Slider
     - Set enable state
         ```javascript
-        gridTable.setSliderEnable(enabled);
+        table.setSliderEnable(enabled);
         ```
         or
         ```javascript
-        gridTable.sliderEnable = enabled;
+        table.sliderEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = gridTable.sliderEnable;
+        var enable = table.sliderEnable;
         ```
 - Scroller
     - Set enable state
         ```javascript
-        gridTable.setScrollerEnable(enabled);
+        table.setScrollerEnable(enabled);
         ```
         or
         ```javascript
-        gridTable.scrollerEnable = enabled;
+        table.scrollerEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = gridTable.scrollerEnable;
+        var enable = table.scrollerEnable;
         ```
 
 ### Refresh table cells
@@ -350,7 +385,7 @@ See [base sizer object](ui-basesizer.md).
 
 - [Tap](gesture-tap.md) cell
     ```javascript
-    gridTable.on(tapEventName, function(cellContainer, cellIndex) {
+    table.on(tapEventName, function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -359,12 +394,12 @@ See [base sizer object](ui-basesizer.md).
     - `cellIndex` : Index of triggered cell.
 - [Press](gesture-press.md) cell
     ```javascript
-    gridTable.on(`cell.pressstart`, function(cellContainer, cellIndex) {
+    table.on(`cell.pressstart`, function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
     ```javascript
-    gridTable.on(`cell.pressend`, function(cellContainer, cellIndex) {
+    table.on(`cell.pressend`, function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -372,7 +407,7 @@ See [base sizer object](ui-basesizer.md).
     - `cellIndex` : Index of triggered cell.
 - Pointer-over cell
     ```javascript
-    gridTable.on('cell.over', function(cellContainer, cellIndex) {
+    table.on('cell.over', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -380,7 +415,7 @@ See [base sizer object](ui-basesizer.md).
     - `cellIndex` : Index of triggered cell.
 - Pointer-out cell
     ```javascript
-    gridTable.on('cell.out', function(cellContainer, cellIndex) {
+    table.on('cell.out', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -388,7 +423,7 @@ See [base sizer object](ui-basesizer.md).
     - `cellIndex` : Index of triggered cell.
 - Click cell
     ```javascript
-    gridTable.on('cell.click', function(cellContainer, cellIndex) {
+    table.on('cell.click', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -400,26 +435,26 @@ See [base sizer object](ui-basesizer.md).
 - Get element
     - Background game object
         ```javascript
-        var background = gridTable.getElement('background');
+        var background = table.getElement('background');
         ```
     - Grid table
         ```javascript
-        var table = gridTable.getElement('table');
+        var table = table.getElement('table');
         ```
     - Slider
         - Track
             ```javascript
-            var track = gridTable.getElement('slider.track');
+            var track = table.getElement('slider.track');
             ```
         - Thumb
             ```javascript
-            var thumb = gridTable.getElement('slider.thumb');
+            var thumb = table.getElement('slider.thumb');
             ```
     - Scroller
         ```javascript
-        var scroller = gridTable.getElement('scroller');
+        var scroller = table.getElement('scroller');
         ```
 - Get by name
     ```javascript
-    var gameObject = gridTable.getElement('#' + name);
+    var gameObject = table.getElement('#' + name);
     ```

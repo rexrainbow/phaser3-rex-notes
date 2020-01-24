@@ -5,10 +5,6 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 - Author: Rex
 - Member of scene
 
-## Source code
-
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp/PlayerPlugin.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tcrp)

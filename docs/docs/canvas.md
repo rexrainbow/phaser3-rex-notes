@@ -10,13 +10,6 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 - [Kaleidoscope](https://codepen.io/rexrainbow/pen/RdzvVj)
 - [chartjs](https://codepen.io/rexrainbow/pen/LmYpjE)
 
-
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvas-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcanvasplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvas.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvas)

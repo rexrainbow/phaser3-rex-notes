@@ -5,43 +5,77 @@ A container with a panel, slider, and scroller.
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexuiplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/scollablepanel/ScrollablePanel.js)
+- [Scroll-able panel + grid sizer](https://codepen.io/rexrainbow/pen/YMyBom)
+- [Scroll-able panel + fix-width sizer](https://codepen.io/rexrainbow/pen/eYOdKBR)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-scollablepanel)
 
-### Install scene plugin
+### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');
+    ```
+- Add scrollable-panel object
+    ```javascript
+    var panel = scene.rexUI.add.scrollablePanel(config);
+    ```
 
-var config = {
-    // ...
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        },
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add scrollable-panel object
+    ```javascript
+    var panel = scene.rexUI.add.scrollablePanel(config);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { ScrollablePanel } from 'phaser3-rex-plugins/templates/ui/index.js';
+    ```
+- Add scrollable-panel object
+    ```javascript    
+    var panel = new ScrollablePanel(scene, config);
+    sscene.add.existing(panel);
+    ```
 
 ### Add scroll-able panel object
 
 ```javascript
-var scrollablePanel = scene.rexUI.add.scrollablePanel({
+var panel = scene.rexUI.add.scrollablePanel({
     // x: 0,
     // y: 0,
     // anchor: undefined,
@@ -182,7 +216,7 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
     ```
 - Create instance
     ```javascript
-    var scrollablePanel = new MyPanel(scene, config);
+    var panel = new MyPanel(scene, config);
     ```
 
 ### Layout children
@@ -190,87 +224,87 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
 Arrange position of all elements.
 
 ```javascript
-scrollablePanel.layout();
+panel.layout();
 ```
 
 ### Scroll content
 
 - Set
     ```javascript
-    scrollablePanel.setChildOY(oy);
+    panel.setChildOY(oy);
     ```
     or
     ```javascript
-    scrollablePanel.childOY = oy;
+    panel.childOY = oy;
     ```
 - Get
     ```javascript
-    var childOY = scrollablePanel.childOY;
+    var childOY = panel.childOY;
     ```
 
 #### Scroll by percentage
 
 - Set
     ```javascript
-    scrollablePanel.setT(t);  // t: 0~1
+    panel.setT(t);  // t: 0~1
     ```
     or
     ```javascript
-    scrollablePanel.t = t;
+    panel.t = t;
     ```
 - Get
     ```javascript
-    var t = scrollablePanel.t;
+    var t = panel.t;
     ```
 - Top OY
     ```javascript
-    var topOY = scrollablePanel.topChildOY;
+    var topOY = panel.topChildOY;
     ```
 - Bottom OY
     ```javascript
-    var bottomOY = scrollablePanel.bottomChildOY;
+    var bottomOY = panel.bottomChildOY;
     ```
 
 ### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
-    scrollablePanel.scrollToTop();
+    panel.scrollToTop();
     ```
-    - Equal to `scrollablePanel.t = 0;`
+    - Equal to `panel.t = 0;`
 - Scroll to bottom
     ```javascript
-    scrollablePanel.scrollToBottom();
+    panel.scrollToBottom();
     ```
-    - Equal to `scrollablePanel.t = 1;`
+    - Equal to `panel.t = 1;`
 
 ### Enable/disable scrolling
 
 - Slider
     - Set enable state
         ```javascript
-        scrollablePanel.setSliderEnable(enabled);
+        panel.setSliderEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.sliderEnable = enabled;
+        panel.sliderEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.sliderEnable;
+        var enable = panel.sliderEnable;
         ```
 - Scroller
     - Set enable state
         ```javascript
-        scrollablePanel.setScrollerEnable(enabled);
+        panel.setScrollerEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.scrollerEnable = enabled;
+        panel.scrollerEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.scrollerEnable;
+        var enable = panel.scrollerEnable;
         ```
 
 ### Other properties
@@ -282,26 +316,26 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 - Get element
     - Background game object
         ```javascript
-        var background = scrollablePanel.getElement('background');
+        var background = panel.getElement('background');
         ```
     - Panel game object
         ```javascript
-        var panel = scrollablePanel.getElement('panel');
+        var panel = panel.getElement('panel');
         ```
     - Slider
         - Track
             ```javascript
-            var track = scrollablePanel.getElement('slider.track');
+            var track = panel.getElement('slider.track');
             ```
         - Thumb
             ```javascript
-            var thumb = scrollablePanel.getElement('slider.thumb');
+            var thumb = panel.getElement('slider.thumb');
             ```
     - Scroller
         ```javascript
-        var scroller = scrollablePanel.getElement('scroller');
+        var scroller = panel.getElement('scroller');
         ```
 - Get by name
     ```javascript
-    var gameObject = scrollablePanel.getElement('#' + name);
+    var gameObject = panel.getElement('#' + name);
     ```

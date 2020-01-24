@@ -7,10 +7,6 @@ See also [built-in grid-align](groupactions.md#grid-align).
 - Author: Rex
 - Methods
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridalign-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgridalignplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridalign)

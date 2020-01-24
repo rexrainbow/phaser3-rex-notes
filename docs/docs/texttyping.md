@@ -9,10 +9,6 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 - [BBCode text + page + typing](https://codepen.io/rexrainbow/pen/yjZveb)
 
-## Source code
-
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexttypingplugin.min.js)
-
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/texttyping)
