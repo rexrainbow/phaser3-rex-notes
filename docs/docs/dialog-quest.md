@@ -5,13 +5,87 @@ Flow control of [question manager](quest.md) with a [dialog](ui-dialog.md).
 - Author: Rex
 - Template
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/dialog-quest/DialogQuest.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexdialogquest.min.js)
+- [Branch](https://codepen.io/rexrainbow/pen/wLyvxQ)
+- [Shuffle](https://codepen.io/rexrainbow/pen/WqMLoV)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dialog-quest)
+
+### Install plugin
+
+#### Load minify file
+
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.scenePlugin('rexuiplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js', 'rexUI', 'rexUI');    
+    scene.load.script('rexdialogquest', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdialogquest.min.js');
+    ```
+- Add dialog and quest object
+    ```javascript
+    var dialog = scene.rexUI.add.dialog(config); 
+    var quest = new rexdialogquest({
+        dialog: dialog,
+        // ...
+    });
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+    import DialogQuest from 'phaser3-rex-plugins/templates/dialog-quest/DialogQuest.js';
+    var config = {
+        // ...
+        plugins: {
+            scene: [{
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add dialog and quest object
+    ```javascript
+    var dialog = scene.rexUI.add.dialog(config); 
+    var quest = new DialogQuest({
+        dialog: dialog,
+        // ...
+    });
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import { Dialog } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import DialogQuest from 'phaser3-rex-plugins/templates/dialog-quest/DialogQuest.js';
+    ```
+- Add dialog object
+    ```javascript    
+    var dialog = new Dialog(scene, config);
+    sscene.add.existing(dialog);
+    var quest = new DialogQuest({
+        dialog: dialog,
+        // ...
+    });
+    ```
 
 ### Create dialog-quest object
 

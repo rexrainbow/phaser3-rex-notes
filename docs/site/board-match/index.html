@@ -4298,13 +4298,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4313,9 +4306,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-scene-plugin" class="md-nav__link">
-    Install scene plugin
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4776,13 +4796,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4791,9 +4804,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-scene-plugin" class="md-nav__link">
-    Install scene plugin
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4951,12 +4991,56 @@
 <li>Author: Rex</li>
 <li>Application of Board system</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-match">Sample code</a></p>
-<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
-<p>Included in board plugin.</p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Add match object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">BoardPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexBoard&#39;</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+<li>Add match object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Match</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add match object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Match</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="add-match-object">Add match object<a class="headerlink" href="#add-match-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">match</span><span class="p">({</span>
    <span class="nx">board</span><span class="o">:</span> <span class="nx">board</span><span class="p">,</span>

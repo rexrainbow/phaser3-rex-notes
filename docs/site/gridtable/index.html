@@ -1343,8 +1343,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -1361,6 +1361,33 @@
   <a href="#install-plugin" class="md-nav__link">
     Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4814,8 +4841,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -4832,6 +4859,33 @@
   <a href="#install-plugin" class="md-nav__link">
     Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5025,14 +5079,35 @@
 <li>Author: Rex</li>
 <li>Game object</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexgridtableplugin.min.js">minify</a></p>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable.js">Class</a></p>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/vjJeMR">Grid table</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/rrPyXL">Grid table &amp; slider</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/GXjPrL">Grid table &amp; scroller</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/xaLdyr">Grid table &amp; slider &amp; scroller</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/QVjXRM">Horizontal scrolling</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/VGwPJz">Varying cell height</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridtable">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexgridtableplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+<li>Add table object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GridTablePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
@@ -5046,8 +5121,24 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
+</pre></div></li>
+<li>Add table object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GridTable</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add table object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GridTable</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">cellsCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>

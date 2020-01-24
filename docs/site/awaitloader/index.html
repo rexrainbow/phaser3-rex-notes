@@ -530,8 +530,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -548,6 +548,26 @@
   <a href="#install-plugin" class="md-nav__link">
     Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4661,8 +4681,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -4679,6 +4699,26 @@
   <a href="#install-plugin" class="md-nav__link">
     Install plugin
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4721,17 +4761,57 @@
 <li>Author: Rex</li>
 <li>Custom File of loader</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/awaitloader-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexawaitloaderplugin.min.js">minify</a></p>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/jvNGbm">Wait 1000ms</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/awaitloader">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sceneConfig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+    <span class="nx">pack</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;plugin&#39;</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexawaitloaderplugin&#39;</span><span class="p">,</span>
+            <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/    rexawaitloaderplugin.min.js&#39;</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}]</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="kr">class</span> <span class="nx">MyScene</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">sceneConfig</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// ....</span>
+
+    <span class="nx">preload</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// rexawaitloaderplugin will be installed before preload(), but not added to loader yet</span>
+        <span class="c1">// Call addToScene(scene) to add this await loader to loader of this scene</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexawaitloaderplugin&#39;</span><span class="p">).</span><span class="nx">addToScene</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span> 
+            <span class="c1">// successCallback()</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">AwaitLoaderPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/awaitloader-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;AwaitLoader&#39;</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexAwaitLoader&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">AwaitLoaderPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
@@ -4741,17 +4821,16 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<p>or install it in previous scene (i.e. a preload scene).</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The best way of installing this plugin is to load it in game config. </p>
-<p>This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using <code>this.load.plugin(...)</code>, or loading in payload of scene)</p>
-</div>
+</pre></div></li>
+<li>In preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="c1">// successCallback()</span>
+<span class="p">});</span>
+</pre></div></li>
+</ul>
 <h3 id="await-task">Await task<a class="headerlink" href="#await-task" title="Permanent link">&para;</a></h3>
 <p>In preload stage:</p>
-<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// successCallback();</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div>
@@ -4760,7 +4839,7 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">successCallback</span><span class="p">,</span> <span class="nx">failureCallback</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// successCallback();</span>
 <span class="p">};</span>
-<span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexAwait</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
     <span class="c1">// scope: scope</span>
 <span class="p">});</span>

@@ -992,8 +992,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -1007,16 +1007,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-class" class="md-nav__link">
     Import class
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -4713,8 +4733,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -4728,16 +4748,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-class" class="md-nav__link">
     Import class
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -4816,30 +4856,55 @@
                   <h1>Edit</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Create an <a href="../inputtext/">input text object</a> above a text object to edit string content.</p>
+<p>Create an <a href="./">input text object</a> above a text object to edit string content.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Behavior of text object</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textedit-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexteditplugin.min.js">minify</a></p>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/GaxqLZ">Text edit</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/OJLQyKz">Number edit</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textedit">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexTextEdit</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/textedit.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextEditPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/textedit-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
     <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">},</span>
+    <span class="p">},</span>        
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexteditplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+<li>Add text-edit behavior
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexteditplugin&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextEditPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textedit-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>        
+    <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTextEdit&#39;</span><span class="p">,</span>
@@ -4852,11 +4917,36 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
+</pre></div></li>
+<li>Add text-edit behavior
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>        
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div><ul>
 <li>Set <code>parent</code> to divId</li>
 <li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextEdit</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textedit.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add text-edit behavior
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextEdit</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">)</span>
+</pre></div></li>
 </ul>
 <h3 id="open-text-editor">Open text editor<a class="headerlink" href="#open-text-editor" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js">An easy way</a> to open a text editor.</p>
@@ -4865,7 +4955,7 @@
 </pre></div>
 
 <ul>
-<li><code>textObject</code> : Text object, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
+<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
 <li><code>config</code> : <ul>
 <li><code>config.type</code> : <ul>
 <li><code>text</code> (default), or </li>
@@ -4879,7 +4969,7 @@
     <span class="nx">textObject</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
-<li><a href="../inputtext/#add-text-object">More configuration parameters</a>...</li>
+<li><a href="./#add-text-object">More configuration parameters</a>...</li>
 </ul>
 </li>
 <li><code>onClose</code> : Callback invoked when text editor is closed.
@@ -4887,7 +4977,7 @@
 <span class="p">}</span>
 </pre></div></li>
 </ul>
-<p>Create a text editor (<a href="../inputtext/">input element</a>) above text object.</p>
+<p>Create a text editor (<a href="./">input element</a>) above text object.</p>
 <ul>
 <li>Size, font size, font family, font color, background color of text editor will be equal to text object.</li>
 <li>Text object will be invisible when text editor is opened.</li>
@@ -4901,13 +4991,12 @@
 </li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">fixedWidth</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="nx">fixedHeight</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-<span class="p">});</span>
-<span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">txt</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">);</span>
 </pre></div>
 
+<ul>
+<li><code>textGameObject</code> : <a href="../text/">Text</a>, <a href="../bbcodetext/">bbcodt-text</a>, or <a href="../tagtext/">tag-text</a></li>
+</ul>
 <h3 id="open-editor">Open editor<a class="headerlink" href="#open-editor" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">editor</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="c1">// editor.open(config, onClose);</span>
@@ -4926,7 +5015,7 @@
     <span class="nx">textObject</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
-<li><a href="../inputtext/#add-text-object">More configuration parameters</a>...</li>
+<li><a href="./#add-text-object">More configuration parameters</a>...</li>
 </ul>
 </li>
 <li><code>onClose</code> : Callback invoked when text editor is closed.
@@ -4934,7 +5023,7 @@
 <span class="p">}</span>
 </pre></div></li>
 </ul>
-<p>Create a text editor (<a href="../inputtext/">input element</a>) above text object.</p>
+<p>Create a text editor (<a href="./">input element</a>) above text object.</p>
 <ul>
 <li>Size, font size, font family, font color, background color of text editor will be equal to text object.</li>
 <li>Text object will be invisible when text editor is opened.</li>

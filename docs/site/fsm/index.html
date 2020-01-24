@@ -2822,13 +2822,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -2837,30 +2830,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-class" class="md-nav__link">
-    New class
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-fsm-class" class="md-nav__link">
-    Import FSM class
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-new-class" class="md-nav__link">
-    Create new class
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -2871,23 +2864,23 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-by-config" class="md-nav__link">
-    Create by config
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#create-by-config" class="md-nav__link">
+    Create by config
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance_1" class="md-nav__link">
-    Create instance
+  <a href="#inheritance" class="md-nav__link">
+    Inheritance
   </a>
   
 </li>
@@ -4756,13 +4749,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4771,30 +4757,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-class" class="md-nav__link">
-    New class
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-fsm-class" class="md-nav__link">
-    Import FSM class
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-new-class" class="md-nav__link">
-    Create new class
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -4805,23 +4791,23 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-by-config" class="md-nav__link">
-    Create by config
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#create-by-config" class="md-nav__link">
+    Create by config
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance_1" class="md-nav__link">
-    Create instance
+  <a href="#inheritance" class="md-nav__link">
+    Inheritance
   </a>
   
 </li>
@@ -4911,44 +4897,25 @@
 <li>Author: Rex</li>
 <li>Object</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fsm-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfsmplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fsm">Sample code</a></p>
-<h3 id="new-class">New class<a class="headerlink" href="#new-class" title="Permanent link">&para;</a></h3>
-<h4 id="import-fsm-class">Import FSM class<a class="headerlink" href="#import-fsm-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSM</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h4 id="create-new-class">Create new class<a class="headerlink" href="#create-new-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">State</span> <span class="kr">extends</span> <span class="nx">FSM</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="nx">next_A</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span> <span class="p">}</span>
-
-    <span class="nx">enter_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-
-    <span class="nx">exit_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>Members:</p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>next_</code> + stateName: Callback to get next state.</li>
-<li><code>enter_</code> + stateName: Callback when enter state.</li>
-<li><code>exit_</code> + stateName: Callback when exit state.</li>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfsmplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfsmplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+<li>Add FSM object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfsmplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
 </ul>
-<h4 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">State</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h3>
-<h4 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h4>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSMPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm-plugin.js&#39;</span><span class="p">;</span>
-
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSMPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/fsm-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -4963,10 +4930,26 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="create-instance_1">Create instance<a class="headerlink" href="#create-instance_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</pre></div></li>
+<li>Add FSM object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSM</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/fsm.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add FSM object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FSM</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<h4 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>   <span class="c1">// default: undefined</span>
     <span class="nx">states</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
@@ -4983,9 +4966,8 @@
         <span class="c1">// ...</span>
     <span class="p">},</span>
     <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+    <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
@@ -5009,6 +4991,29 @@
 </ul>
 </li>
 </ul>
+<h4 id="inheritance">Inheritance<a class="headerlink" href="#inheritance" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Create new class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">State</span> <span class="kr">extends</span> <span class="nx">FSM</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nx">next_A</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span> <span class="p">}</span>
+
+    <span class="nx">enter_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+
+    <span class="nx">exit_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+    Members:
+        - <code>next_</code> + stateName: Callback to get next state.
+        - <code>enter_</code> + stateName: Callback when enter state.
+        - <code>exit_</code> + stateName: Callback when exit state.</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">State</span><span class="p">();</span>
+</pre></div></li>
+</ol>
 <h3 id="read-state">Read state<a class="headerlink" href="#read-state" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Current state

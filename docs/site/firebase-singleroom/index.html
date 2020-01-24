@@ -4475,13 +4475,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4490,16 +4483,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#import-sdk" class="md-nav__link">
-    Import SDK
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4793,13 +4799,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4808,16 +4807,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#import-sdk" class="md-nav__link">
-    Import SDK
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4982,61 +4994,89 @@
 <ul>
 <li>Author: Rex</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/firebase-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexfirebaseplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-singleroom">Sample code</a></p>
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFire&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FirebasePlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="import-sdk">Import SDK<a class="headerlink" href="#import-sdk" title="Permanent link">&para;</a></h3>
-<p><em>Firebase SDK dose not boundle into this plugin</em></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Download SDK from <a href="https://firebase.google.com/docs/web/setup/#libraries-cdn">CDN</a> via script tags.<ul>
-<li>Firebase core</li>
-<li>Firebase-database</li>
-</ul>
-</li>
-<li>Download SDK during preload stage.
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">preload</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>    
+<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs and initialize Firebase</a>
+    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
+    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
 </pre></div></li>
-</ul>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<ol>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
 <li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rexFire</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFire&#39;</span><span class="p">).</span><span class="nx">initializeApp</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-<span class="p">});</span>
+<span class="p">})</span>
 </pre></div></li>
-<li>Create room instance.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">rexFire</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">singleRoom</span><span class="p">({</span>
+<li>Add single-room object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">singleRoom</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs and initialize Firebase</a>
+    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
+    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFirebase&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FirebasePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+<li>Initialize firebase application.
+    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
+   <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
+<span class="p">})</span>
+</pre></div></li>
+<li>Add single-room object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">singleRoom</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">singleRoom</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="c1">// broadcast: true,</span>
     <span class="c1">// tables: undefined</span>
 <span class="p">});</span>
-</pre></div><ul>
+</pre></div>
+
+<ul>
 <li><code>root</code> : Path of this room.</li>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 <li><code>broadcast</code> : <a href="../firebase-broadcast/">Broadcast</a> chat messages.<ul>
@@ -5082,8 +5122,6 @@
 </ul>
 </li>
 </ul>
-</li>
-</ol>
 <h3 id="join-room">Join room<a class="headerlink" href="#join-room" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Set userID and user name.

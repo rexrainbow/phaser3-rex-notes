@@ -968,8 +968,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -983,16 +983,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-class" class="md-nav__link">
     Import class
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -4734,8 +4754,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" class="md-nav__link">
-    Source code
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
   </a>
   
 </li>
@@ -4749,16 +4769,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-class" class="md-nav__link">
     Import class
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" class="md-nav__link">
-    Install global plugin
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -4863,19 +4903,29 @@
 <li>Author: Rex</li>
 <li>Behavior of text object</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rextexttypingplugin.min.js">minify</a></p>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/yjZveb">BBCode text + page + typing</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/texttyping">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexTextTyping</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/texttyping.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextTypingPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/texttyping-plugin.js&#39;</span><span class="p">;</span>
-
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextexttypingplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextexttypingplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+<li>Add typing behavior
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">typing</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextexttypingplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextTypingPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/texttyping-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -4890,10 +4940,25 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
+</pre></div></li>
+<li>Add typing behavior
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">typing</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextTyping</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/texttyping.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add typing behavior
+    ```javascript
+    var typing = new TextTyping(textGameObject, config);</li>
+</ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">typing</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">typing</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">//speed: 333,       // typing speed in ms</span>
     <span class="c1">//typeMode: 0,      //0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
     <span class="c1">//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text</span>
@@ -4901,8 +4966,8 @@
 <span class="p">});</span>
 </pre></div>
 
-<p>Configuration</p>
 <ul>
+<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
 <li><code>speed</code> : Typing speed in ms.</li>
 <li><code>typeMode</code> :<ul>
 <li><code>'left-to-right'</code>, or <code>0</code> : Typing characters from left to right.</li>

@@ -5,11 +5,9 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 - Author: Rex
 - [DOM Game object](domelement.md), or [Canvas Game object](canvas.md)
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexvideoplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video.js)
+- [DOM video, and canvas video](https://codepen.io/rexrainbow/pen/VOVxWr)
 
 ## Usage
 
@@ -17,32 +15,66 @@ Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canva
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    parent: divId,
-    dom: {
-        createContainer: true
-    },
-    plugins: {
-        global: [{
-            key: 'rexVideoPlugin',
-            plugin: VideoPlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexvideoplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvideoplugin.min.js', true);
+    ```
+- Add video object
+    ```javascript
+    var video = scene.add.rexVideoCanvas(x, y, width, height, config);    
+    // var video = scene.add.rexVideo(x, y, width, height, config);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import VideoPlugin from 'phaser3-rex-plugins/plugins/video-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexVideo',
+                plugin: VideoPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add video object
+    ```javascript
+    var video = scene.add.rexVideoCanvas(x, y, width, height, config);
+    // var video = scene.add.rexVideo(x, y, width, height, config);
+    ```
 
-- To play video on DOM
-    - Set `parent` to divId
-    - Set `dom.createContainer` to `true`.
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import VideoCanvas from 'phaser3-rex-plugins/plugins/videocanvas/VideoCanvas.js';
+    // import VideoDOM from 'phaser3-rex-plugins/plugins/videodom/VideoDOM.js';
+    ```
+- Add text object
+    ```javascript    
+    var video = new VideoCanvas(scene, x, y, width, height, config);
+    sscene.add.existing(video);
+    // var video = new VideoDOM(scene, x, y, width, height, config);
+    // sscene.add.existing(video);
+    ```
 
 ### Add video object
 

@@ -7,11 +7,9 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 - Author: Rex
 - Game object
 
-## Source code
+## Live demos
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/dist/rexcontainerliteplugin.min.js)
-
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite.js)
+- [Rotate, alpha](https://codepen.io/rexrainbow/pen/NBgpYd)
 
 ## Usage
 
@@ -19,24 +17,61 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 ### Install plugin
 
-Install plugin in [configuration of game](game.md#configuration)
+#### Load minify file
 
-```javascript
-var config = {
-    // ...
-    plugins: {
-        global: [{
-            key: 'rexContainerLitePlugin',
-            plugin: ContainerLitePlugin,
-            start: true
-        },
+- Load plugin (minify file) in preload stage
+    ```javascript
+    scene.load.plugin('rexcontainerliteplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcontainerliteplugin.min.js', true);
+    ```
+- Add container object
+    ```javascript
+    var container = scene.add.rexContainerLite(x, y);
+    ```
+
+#### Import plugin
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Install plugin in [configuration of game](game.md#configuration)
+    ```javascript
+    import ContainerLitePlugin from 'phaser3-rex-plugins/plugins/containerlite-plugin.js';
+    var config = {
         // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
+        plugins: {
+            global: [{
+                key: 'rexContainerLitePlugin',
+                plugin: ContainerLitePlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add container object
+    ```javascript
+    var container = scene.add.rexContainerLite(x, y);
+    ```
+
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- Import class
+    ```javascript
+    import ContainerLite from 'phaser3-rex-plugins/plugins/containerlite.js';
+    ```
+- Add container object
+    ```javascript    
+    var container = new ContainerLite(scene, x, y);
+    sscene.add.existing(container);
+    ```
 
 ### Add container object
 
