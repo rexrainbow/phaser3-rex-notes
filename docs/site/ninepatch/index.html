@@ -4871,6 +4871,13 @@
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
 </pre></div></li>
+<li>Add <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/webpack.plugins.config.js#L43-L47">webpack <code>DefinePlugin</code></a>
+    <div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">DefinePlugin</span><span class="p">({</span>
+    <span class="nx">__DEV__</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BUILD_DEV</span> <span class="o">||</span> <span class="s1">&#39;true&#39;</span><span class="p">)),</span>
+    <span class="nx">WEBGL_RENDERER</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">CANVAS_RENDERER</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">})</span>   
+</pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
     <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">NinePatchPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/ninepatch-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
@@ -4896,6 +4903,13 @@
 <ul>
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li>Add <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/webpack.plugins.config.js#L43-L47">webpack <code>DefinePlugin</code></a>
+    <div class="codehilite"><pre><span></span><span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">DefinePlugin</span><span class="p">({</span>
+    <span class="nx">__DEV__</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">BUILD_DEV</span> <span class="o">||</span> <span class="s1">&#39;true&#39;</span><span class="p">)),</span>
+    <span class="nx">WEBGL_RENDERER</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">CANVAS_RENDERER</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">})</span>   
 </pre></div></li>
 <li>Import class
     <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">NinePatch</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/ninepatch.js&#39;</span><span class="p">;</span>

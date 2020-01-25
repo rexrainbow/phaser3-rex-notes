@@ -53,8 +53,8 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
-            WEBGL_RENDERER: true, // I did this to make webpack work, but I'm not really sure it should always be true
-            CANVAS_RENDERER: true // I did this to make webpack work, but I'm not really sure it should always be true
+            WEBGL_RENDERER: true,
+            CANVAS_RENDERER: true
         }),
         new HtmlWebpackPlugin({
             filename: '../index.html',

@@ -32,6 +32,14 @@ Round rectangle shape.
     ```
     npm i phaser3-rex-plugins
     ```
+- Add [webpack `DefinePlugin`](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/webpack.plugins.config.js#L43-L47)
+    ```javascript
+    new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+        WEBGL_RENDERER: true,
+        CANVAS_RENDERER: true
+    })   
+    ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
     import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
@@ -60,6 +68,14 @@ Round rectangle shape.
 - Install rex plugins from npm
     ```
     npm i phaser3-rex-plugins
+    ```
+- Add [webpack `DefinePlugin`](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/webpack.plugins.config.js#L43-L47)
+    ```javascript
+    new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+        WEBGL_RENDERER: true,
+        CANVAS_RENDERER: true
+    })   
     ```
 - Import class
     ```javascript
