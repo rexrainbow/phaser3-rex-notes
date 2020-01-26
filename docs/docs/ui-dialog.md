@@ -95,6 +95,12 @@ var dialog = scene.rexUI.add.dialog({
         // ...
     ],
 
+    leftToolbar: [
+        buttonGameObject,
+        buttonGameObject,
+        // ...
+    ],
+
     content: contentGameObject,
 
     description: descriptionGameObject,
@@ -134,6 +140,7 @@ var dialog = scene.rexUI.add.dialog({
         actionsRight: 0,
 
         toolbarItem: 0,
+        leftToolbarItem: 0,
         choice: 0,
         action: 0,
     },
@@ -175,6 +182,7 @@ var dialog = scene.rexUI.add.dialog({
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.
+- `leftToolbar` : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
@@ -191,6 +199,7 @@ var dialog = scene.rexUI.add.dialog({
     - `space.choicesLeft`, `space.choicesRight` : Extra left/right padding of choice buttons.
     - `space.actionsLeft`, `space.actionsRight` : Extra left/right padding of actions buttons.
     - `space.toolbarItem` : Space between each toolbar item game objects.
+    - `space.leftToolbarItem` : Space between each left-toolbar item game objects.
     - `space.choice` : Space between each choice-button game objects.
     - `space.action` : Space between each action-button game objects.
 - `expand` : Expand width of element
@@ -264,7 +273,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     }, scope);
     ```
     - `button` : Triggered button game object
-    - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
+    - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
@@ -275,7 +284,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     }, scope);
     ```
     - `button` : Triggered button game object.
-    - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
+    - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
@@ -327,7 +336,31 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         or
         ```javascript
         var button = dialog.getElement('actions[' + index + ']');
-        ```        
+        ```
+    - Toolbar button game object
+        ```javascript
+        var buttons = dialog.getElement('toolbar');
+        ```
+        or
+        ```javascript
+        var button = dialog.getToolbar(index);
+        ```
+        or
+        ```javascript
+        var button = dialog.getElement('toolbar[' + index + ']');
+        ```
+    - Left-toolbar button game object
+        ```javascript
+        var buttons = dialog.getElement('leftToolbar');
+        ```
+        or
+        ```javascript
+        var button = dialog.getLeftToolbar(index);
+        ```
+        or
+        ```javascript
+        var button = dialog.getElement('leftToolbar[' + index + ']');
+        ```
 - Get by name
     ```javascript
     var gameObject = dialog.getElement('#' + name);
@@ -338,16 +371,20 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 Hidden elements won't be counted when layouting. 
 Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
 
-- Show choice/action button
+- Show choice/action/toolbar/left-toolbar button
     ```javascript
     dialog.showChoice(index);
     dialog.showAction(index);
+    dialog.showToolbar(index);
+    dialog.showLeftToolbar(index);
     ```
     - `index` : A number index, or a button game object.
-- Hide action/choice button.
+- Hide choice/action/toolbar/left-toolbar button.
     ```javascript
     dialog.hideChoice(index);
     dialog.hideAction(index);
+    dialog.hideToolbar(index);
+    dialog.hideLeftToolbar(index);
     ```
     - `index` : A number index, or a button game object.
 
@@ -356,6 +393,8 @@ Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
 ```javascript
 dialog.forEachChoice(callback, scope);
 dialog.forEachAction(callback, scope);
+dialog.forEachToolbar(callback, scope);
+dialog.forEachLeftToolbar(callback, scope);
 ```
 
 - `callback` : 

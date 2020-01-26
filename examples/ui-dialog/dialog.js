@@ -25,6 +25,11 @@ class Demo extends Phaser.Scene {
                 createLabel(this, 'X')
             ],
 
+            leftToolbar: [
+                createLabel(this, 'A'),
+                createLabel(this, 'B')
+            ],            
+
             content: createLabel(this, 'Content'),
 
             description: createLabel(this, 'Description'),
@@ -68,7 +73,7 @@ class Demo extends Phaser.Scene {
             },
 
             align: {
-                // title: 'center',
+                title: 'center',
                 // content: 'right',
                 // description: 'left',
                 // choices: 'left',

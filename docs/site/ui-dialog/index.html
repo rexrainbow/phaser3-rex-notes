@@ -4976,6 +4976,12 @@
         <span class="c1">// ...</span>
     <span class="p">],</span>
 
+    <span class="nx">leftToolbar</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+
     <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
 
     <span class="nx">description</span><span class="o">:</span> <span class="nx">descriptionGameObject</span><span class="p">,</span>
@@ -5015,6 +5021,7 @@
         <span class="nx">actionsRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
         <span class="nx">toolbarItem</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">leftToolbarItem</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">choice</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">action</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
@@ -5063,6 +5070,7 @@
 <li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of dialog.</li>
 <li><code>title</code> : Game object of title, optional.</li>
 <li><code>toolbar</code> : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.</li>
+<li><code>leftToolbar</code> : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.</li>
 <li><code>content</code> : Game object of content, optional.</li>
 <li><code>description</code> : Game object of description, optional.</li>
 <li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.</li>
@@ -5079,6 +5087,7 @@
 <li><code>space.choicesLeft</code>, <code>space.choicesRight</code> : Extra left/right padding of choice buttons.</li>
 <li><code>space.actionsLeft</code>, <code>space.actionsRight</code> : Extra left/right padding of actions buttons.</li>
 <li><code>space.toolbarItem</code> : Space between each toolbar item game objects.</li>
+<li><code>space.leftToolbarItem</code> : Space between each left-toolbar item game objects.</li>
 <li><code>space.choice</code> : Space between each choice-button game objects.</li>
 <li><code>space.action</code> : Space between each action-button game objects.</li>
 </ul>
@@ -5157,7 +5166,7 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>button</code> : Triggered button game object</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, or <code>'toolbar'</code>.</li>
+<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code>.</li>
 <li><code>index</code> : Index of triggered button game object.</li>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
@@ -5169,7 +5178,7 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, or <code>'toolbar'</code>.</li>
+<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
 <li><code>index</code> : Index of triggered button game object.</li>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
@@ -5216,6 +5225,24 @@
     or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
 </pre></div></li>
+<li>Toolbar button game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;toolbar&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;toolbar[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Left-toolbar button game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftToolbar&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftToolbar[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 </li>
 <li>Get by name
@@ -5226,16 +5253,20 @@
 <p>Hidden elements won't be counted when layouting. 
 Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
 <ul>
-<li>Show choice/action button
+<li>Show choice/action/toolbar/left-toolbar button
     <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">showChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">showAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">showToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">showLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>index</code> : A number index, or a button game object.</li>
 </ul>
 </li>
-<li>Hide action/choice button.
+<li>Hide choice/action/toolbar/left-toolbar button.
     <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">hideChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">hideAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>index</code> : A number index, or a button game object.</li>
 </ul>
@@ -5244,6 +5275,8 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
 <h3 id="for-each-button">For each button<a class="headerlink" href="#for-each-button" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachChoice</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachAction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachToolbar</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachLeftToolbar</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div>
 
 <ul>
