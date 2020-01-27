@@ -63,7 +63,7 @@ A container with buttons and sub-menu.
     ```
 - Import class
     ```javascript
-    import { Menu } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Menu } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add menu object
     ```javascript    

@@ -63,7 +63,7 @@ Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid
     ```
 - Import class
     ```javascript
-    import { HexagonMap } from 'phaser3-rex-plugins/plugins/board.js';
+    import { HexagonMap } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Create tile positions
     ```javascript

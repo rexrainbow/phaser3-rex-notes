@@ -4528,6 +4528,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4732,6 +4739,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4874,6 +4888,37 @@
 </pre></div></li>
 <li>Add messager object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
+</pre></div></li>
+<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs and initialize Firebase</a>
+    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
+    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
+</pre></div></li>
+<li>Initialize firebase application.
+    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
+   <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+   <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
+<span class="p">})</span>
+</pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Broadcast</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
+</pre></div></li>
+<li>Add messager object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>

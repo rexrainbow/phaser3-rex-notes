@@ -64,7 +64,7 @@ A container with a panel, slider, and scroller.
     ```
 - Import class
     ```javascript
-    import { ScrollablePanel } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { ScrollablePanel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add scrollable-panel object
     ```javascript    

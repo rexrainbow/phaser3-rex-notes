@@ -67,7 +67,7 @@ Core object of Board system.
     ```
 - Import class
     ```javascript
-    import { Board, HexagonGrid, QuadGrid } from 'phaser3-rex-plugins/plugins/board.js';
+    import { Board, HexagonGrid, QuadGrid } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add board object
     ```javascript

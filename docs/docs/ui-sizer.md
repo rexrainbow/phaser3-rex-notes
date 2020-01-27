@@ -65,7 +65,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
     ```
 - Import class
     ```javascript
-    import { Sizer } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add sizer object
     ```javascript    

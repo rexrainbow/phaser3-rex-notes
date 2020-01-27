@@ -92,6 +92,42 @@ Each owner has several files, each file contains header and content indexed by f
     var fileManager = scene.plugins.get('rexFirebase').add.files(config);
     ```
 
+#### Import class
+
+- Install rex plugins from npm
+    ```
+    npm i phaser3-rex-plugins
+    ```
+- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+    ```html
+    <body>
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.7.0/firebase-app.js"></script>
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.7.0/firebase-database.js"></script>
+    </body>    
+    ```
+- Initialize firebase application.
+    ```javascript
+    firebase.initializeApp({
+       apiKey: '...',
+       authDomain: '...',
+       databaseURL: '...',
+       projectId: '...',
+       storageBucket: '...',
+       messagingSenderId: '...'
+    })
+    ```
+- Import class
+    ```javascript
+    import { Files } from 'phaser3-rex-plugins/plugins/firebase-components.js';
+    ```
+- Add file-manager object
+    ```javascript
+    var fileManager = new Files(config);
+    ```
+
 ### Create instance
 
 ```javascript

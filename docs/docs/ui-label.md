@@ -59,7 +59,7 @@ A container with an icon, text, and background.
     ```
 - Import class
     ```javascript
-    import { Label } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Label } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add label object
     ```javascript    

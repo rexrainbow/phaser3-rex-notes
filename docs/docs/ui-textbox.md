@@ -59,7 +59,7 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
     ```
 - Import class
     ```javascript
-    import { TextBox } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { TextBox } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add text-box object
     ```javascript    

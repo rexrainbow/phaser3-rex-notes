@@ -63,7 +63,7 @@ Move chess towards target position with a steady speed, chess behavior of Board 
     ```
 - Import class
     ```javascript
-    import { MoveTo } from 'phaser3-rex-plugins/plugins/board.js';
+    import { MoveTo } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add move-to behavior
     ```javascript

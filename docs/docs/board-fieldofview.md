@@ -64,7 +64,7 @@ Visible testing, to find field of view, chess behavior of Board system.
     ```
 - Import class
     ```javascript
-    import { FieldOfView } from 'phaser3-rex-plugins/plugins/board.js';
+    import { FieldOfView } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add field-of-view object
     ```javascript

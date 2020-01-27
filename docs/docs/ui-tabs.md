@@ -63,7 +63,7 @@ A container with 4 groups of buttons around a center panel.
     ```
 - Import class
     ```javascript
-    import { Tabs } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Tabs } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add tabs object
     ```javascript    

@@ -66,7 +66,7 @@ A container with a title, content, buttons and background.
     ```
 - Import class
     ```javascript
-    import { Dialog } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Dialog } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add dialog object
     ```javascript    

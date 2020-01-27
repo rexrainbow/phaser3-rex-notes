@@ -63,7 +63,7 @@ Layout children game objects in grids.
     ```
 - Import class
     ```javascript
-    import { GridSizer } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { GridSizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add sizer object
     ```javascript    

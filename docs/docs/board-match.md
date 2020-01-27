@@ -59,7 +59,7 @@ Get matched chess.
     ```
 - Import class
     ```javascript
-    import { Match } from 'phaser3-rex-plugins/plugins/board.js';
+    import { Match } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add match object
     ```javascript

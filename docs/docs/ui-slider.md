@@ -63,7 +63,7 @@ A container with a track, indicator, thumb and background.
     ```
 - Import class
     ```javascript
-    import { Slider } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Slider } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add slider object
     ```javascript    

@@ -59,7 +59,7 @@ Grid (polygon) shape object.
     ```
 - Import class
     ```javascript
-    import { Shape } from 'phaser3-rex-plugins/plugins/board.js';
+    import { Shape } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add shape object
     ```javascript

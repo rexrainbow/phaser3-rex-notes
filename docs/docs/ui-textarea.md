@@ -63,7 +63,7 @@ A container with a text, slider, and scroller.
     ```
 - Import class
     ```javascript
-    import { TextArea } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { TextArea } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add text-area object
     ```javascript    

@@ -63,7 +63,7 @@ A container with pages, only current page is visible.
     ```
 - Import class
     ```javascript
-    import { Pages } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Pages } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add pages object
     ```javascript    

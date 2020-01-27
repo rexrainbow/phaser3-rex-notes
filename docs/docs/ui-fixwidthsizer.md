@@ -64,7 +64,7 @@ Layout children game objects into lines.
     ```
 - Import class
     ```javascript
-    import { FixWidthSizer } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { FixWidthSizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add sizer object
     ```javascript    

@@ -68,7 +68,7 @@ Find moveable area or moving path, chess behavior of Board system.
     ```
 - Import class
     ```javascript
-    import { PathFinder } from 'phaser3-rex-plugins/plugins/board.js';
+    import { PathFinder } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add path-finder behavior
     ```javascript

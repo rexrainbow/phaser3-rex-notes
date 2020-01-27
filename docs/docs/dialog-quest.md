@@ -74,7 +74,7 @@ Flow control of [question manager](quest.md) with a [dialog](ui-dialog.md).
     ```
 - Import class
     ```javascript
-    import { Dialog } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Dialog } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     import DialogQuest from 'phaser3-rex-plugins/templates/dialog-quest/DialogQuest.js';
     ```
 - Add dialog object

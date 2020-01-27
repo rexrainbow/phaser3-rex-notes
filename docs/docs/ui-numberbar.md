@@ -64,7 +64,7 @@ A container with an icon, slider, text, and background.
     ```
 - Import class
     ```javascript
-    import { NumberBar } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { NumberBar } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add number bar object
     ```javascript    

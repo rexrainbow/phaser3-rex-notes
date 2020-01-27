@@ -63,7 +63,7 @@ Show text message for a short while.
     ```
 - Import class
     ```javascript
-    import { Toast } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Toast } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add toast object
     ```javascript    

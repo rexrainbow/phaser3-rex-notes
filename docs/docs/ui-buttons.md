@@ -59,7 +59,7 @@ A container with a group of buttons.
     ```
 - Import class
     ```javascript
-    import { Buttons } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { Buttons } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add buttons object
     ```javascript    

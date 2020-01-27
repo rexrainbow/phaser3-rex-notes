@@ -63,7 +63,7 @@ Move through path tiles, used in monopoly-like application, chess behavior of Bo
     ```
 - Import class
     ```javascript
-    import { Monopoly } from 'phaser3-rex-plugins/plugins/board.js';
+    import { Monopoly } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
 - Add monopoly behavior
     ```javascript

@@ -65,7 +65,7 @@ A container with a [grid table](gridtable.md), slider, and scroller.
     ```
 - Import class
     ```javascript
-    import { GridTable } from 'phaser3-rex-plugins/templates/ui/index.js';
+    import { GridTable } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add table object
     ```javascript    
