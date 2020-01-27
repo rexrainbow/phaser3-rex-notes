@@ -6,9 +6,7 @@ Line shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);

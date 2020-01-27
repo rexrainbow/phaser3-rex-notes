@@ -6,9 +6,7 @@ Star shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);

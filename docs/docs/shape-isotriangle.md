@@ -6,9 +6,7 @@ Iso-triangle shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var isoTriangle = scene.add.isotriangle(x, y, size, height, reversed, fillTop, fillLeft, fillRight);

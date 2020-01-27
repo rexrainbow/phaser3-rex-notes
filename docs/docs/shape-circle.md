@@ -6,9 +6,7 @@ Circle shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var circle = scene.add.circle(x, y, radius, fillColor);

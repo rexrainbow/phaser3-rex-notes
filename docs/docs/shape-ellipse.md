@@ -6,9 +6,8 @@ Ellipse shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
+### Create shape object
 
-### Add shape object
 
 ```javascript
 var ellipse = scene.add.ellipse(x, y, width, height, fillColor);

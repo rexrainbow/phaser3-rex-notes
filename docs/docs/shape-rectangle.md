@@ -6,9 +6,7 @@ Rectangle shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var rect = scene.add.rectangle(x, y, width, height, fillColor);

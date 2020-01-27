@@ -6,9 +6,7 @@ Iso-box shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var isoBox = scene.add.isobox(x, y, size, height, fillTop, fillLeft, fillRight);

@@ -6,9 +6,7 @@ Curve shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var curve = scene.add.curve(x, y, path, fillColor);

@@ -8,8 +8,6 @@ Arc shape, built-in game object of phaser.
 
 ### Create shape
 
-### Add shape object
-
 ```javascript
 var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillColor);
 // var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillColor, fillAlpha);

@@ -6,9 +6,7 @@ Triangle shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);

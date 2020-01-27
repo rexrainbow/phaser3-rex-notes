@@ -6,9 +6,7 @@ Polygon shape, built-in game object of phaser.
 
 ## Usage
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var polygon = scene.add.polygon(x, y, points, fillColor);

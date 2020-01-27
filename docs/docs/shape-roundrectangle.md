@@ -87,9 +87,7 @@ Round rectangle shape.
     scene.add.existing(rect);
     ```
 
-### Create shape
-
-### Add shape object
+### Create shape object
 
 ```javascript
 var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
