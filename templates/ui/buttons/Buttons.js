@@ -79,11 +79,6 @@ class Buttons extends Sizer {
     }
 }
 
-const SetTypeCallbacks = {
-    radio: SetRadioType,
-    checkboxes: SetCheckboxesType
-}
-
 Object.assign(
     Buttons.prototype,
     ButtonMethods
