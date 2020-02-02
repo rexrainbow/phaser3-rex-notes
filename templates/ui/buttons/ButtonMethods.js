@@ -1,12 +1,5 @@
-import {
-    ButtonSetInteractive,
-    FireEvent
-} from './ButtonSetInteractive.js';
-import {
-    Show,
-    Hide,
-    IsShown,
-} from '../utils/Hide.js';
+import { FireEvent } from './ButtonSetInteractive.js';
+import { Show, Hide, IsShown } from '../utils/Hide.js';
 
 export default {
     getButton(index) {

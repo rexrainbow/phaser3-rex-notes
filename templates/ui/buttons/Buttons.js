@@ -1,9 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
-import {
-    ButtonSetInteractive,
-    FireEvent
-} from './ButtonSetInteractive.js';
+import { ButtonSetInteractive } from './ButtonSetInteractive.js';
 import ButtonMethods from './ButtonMethods.js';
+// import SetType from './types/SetType.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -76,7 +74,14 @@ class Buttons extends Sizer {
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', (buttons) ? buttons : []);
+
+        // SetType.call(this, config);
     }
+}
+
+const SetTypeCallbacks = {
+    radio: SetRadioType,
+    checkboxes: SetCheckboxesType
 }
 
 Object.assign(
