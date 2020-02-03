@@ -5,6 +5,10 @@ A container with a group of buttons.
 - Author: Rex
 - Game object
 
+## Live demos
+
+- [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-buttons)
@@ -96,7 +100,11 @@ var buttons = scene.rexUI.add.buttons({
     space: 0,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+
+    // type: undefined,
+    // setValueCallback: undefined,
+    // setValueCallbackScope: undefined
 });
 ```
 
@@ -124,6 +132,20 @@ var buttons = scene.rexUI.add.buttons({
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `space` : Spaces between 2 button game objects.
 - `name` : Set name of this button game objects.
+- `type` : Type/behavior of these buttons.
+    - `undefined` : No extra behavior, default value.
+    - `'checkboxes'` : Set these buttons to checkboxes.
+    - `'radio'` : Set these buttons to radio.
+- `setValueCallback` : Callback to set value of a button.
+    - `undefined` : No callback, default value.
+    - A function object.
+        ```javascript
+        function(button, value) {
+            // ...
+        }
+        ```
+        - `button` : Button game object.
+        - `value`: `true`, or `false`
 
 ### Custom class
 
@@ -247,3 +269,46 @@ buttons.forEachButtton(callback, scope);
         // ...
     }
     ```
+
+### Checkboxes/radio
+
+- Configure buttons to checkboxes
+    ```javascript
+    var buttons = scene.rexUI.add.buttons({
+        buttons: [
+            buttonGameObject,
+            buttonGameObject,
+            // ...
+        ],
+    
+        type: 'checkboxes',
+        setValueCallback: function(button, value) {
+            // ...
+        },
+        // setValueCallbackScope: undefined
+    });
+    ```
+    - `buttons` : Array of button game objects.
+        - Property `name` of each button game object will be used as a key in [`buttons.data`](gameobject.md#private-data)
+    - `type` : Set type to `'checkboxes'`, or `'radio'`.
+    - `setValueCallback` : Callback to set value of a button.
+        ```javascript
+        function(button, value) {
+            // ...
+        }
+        ```
+        - `button` : Button game object.
+        - `value`: `true`, or `false`
+    - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
+- Read state of button
+    ```javascript
+    var state = buttons.getData(key);
+    ```
+    - `key` : `name` property of a button game object. (i.e. `button.name`)
+    - `state` : `true`, or `false`
+- Set state of button
+    ```javascript
+    buttons.setData(key, state);
+    ```
+    - `key` : `name` property of a button game object. (i.e. `button.name`)
+    - `state` : `true`, or `false`

@@ -32,12 +32,8 @@ class Demo extends Phaser.Scene {
 
             type: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
             setValueCallback: function (button, value) {
-                var icon = button.getElement('icon');
-                if (value) {
-                    icon.setFillStyle(COLOR_LIGHT).setStrokeStyle(1, COLOR_DARK);
-                } else {
-                    icon.setFillStyle().setStrokeStyle(1, COLOR_DARK);
-                }
+                button.getElement('icon')
+                    .setFillStyle((value)? COLOR_LIGHT : undefined);
             }
 
         })
@@ -70,7 +66,7 @@ var createButton = function (scene, text, name) {
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),
-        icon: scene.add.circle(0, 0, 10),
+        icon: scene.add.circle(0, 0, 10).setStrokeStyle(1, COLOR_DARK),
         space: {
             left: 10,
             right: 10,
