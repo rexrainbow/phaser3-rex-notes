@@ -1,7 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import { ButtonSetInteractive } from './ButtonSetInteractive.js';
 import ButtonMethods from './ButtonMethods.js';
-// import SetType from './types/SetType.js';
+import SetType from './types/SetType.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -75,7 +75,7 @@ class Buttons extends Sizer {
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', (buttons) ? buttons : []);
 
-        // SetType.call(this, config);
+        SetType.call(this, config);
     }
 }
 

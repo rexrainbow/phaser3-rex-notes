@@ -11,7 +11,7 @@ const SetTypeCallbacks = {
 var SetType = function (config) {
     var type = GetValue(config, 'type', undefined);
     if (type && SetTypeCallbacks.hasOwnProperty(type)) {
-        SetTypeCallbacks.call(this, config);
+        SetTypeCallbacks[type].call(this, config);
     }
 }
 
