@@ -204,15 +204,15 @@ buttons.emitButtonClick(index);
         ```
     - Button game objects
         ```javascript
-        var bottons = buttons.getElement('buttons');
+        var buttonObjects = buttons.getElement('buttons');
         ```
         or
         ```javascript
-        var button = buttons.getButton(index);
+        var buttonObject = buttons.getButton(index);
         ```
         or
         ```javascript
-        var botton = buttons.getElement('buttons[0]'); // First button
+        var buttonObjects = buttons.getElement('buttons[0]'); // First button
         ```
 - Get by name
     ```javascript
@@ -243,7 +243,7 @@ buttons.forEachButtton(callback, scope);
 
 - `callback` : 
     ```javascript
-    function(button, index, buttons) {
+    function(button, index, buttonArray) {
         // ...
     }
     ```
