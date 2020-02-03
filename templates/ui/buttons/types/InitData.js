@@ -15,7 +15,7 @@ var InitData = function (config, initialValue) {
     }
 
     if (setValueCallback) {
-        var callback = function (parent, key, value) {
+        dataManager.events.on('changedata', function (parent, key, value) {
             var button = this.getElement(`#${key}`);
             if (!button) {
                 return;
@@ -26,13 +26,13 @@ var InitData = function (config, initialValue) {
             } else {
                 setValueCallback(button, value);
             }
-        }
-        dataManager.events.on('setdata', callback, this)
-        dataManager.events.on('changedata', callback, this)
+        }, this)
     }
 
     this.childrenMap.buttons.forEach(function (button) {
-        dataManager.set(button.name, initialValue);
+        var key = button.name;
+        dataManager.set(key, undefined);
+        dataManager.set(key, initialValue); // Trigger data event 'changedata'
     })
     this._dataManager = dataManager;
 }

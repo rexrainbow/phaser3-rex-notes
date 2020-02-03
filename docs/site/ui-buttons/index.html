@@ -3998,6 +3998,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4104,6 +4111,13 @@
           <li class="md-nav__item">
   <a href="#for-each-button" class="md-nav__link">
     For each button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkboxesradio" class="md-nav__link">
+    Checkboxes/radio
   </a>
   
 </li>
@@ -4743,6 +4757,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4853,6 +4874,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#checkboxesradio" class="md-nav__link">
+    Checkboxes/radio
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4884,6 +4912,10 @@
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/PowMEjX">Checkboxes/radio</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-buttons">Sample code</a></p>
@@ -4963,7 +4995,11 @@
     <span class="nx">space</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false</span>
+    <span class="c1">// draggable: false,</span>
+
+    <span class="c1">// type: undefined,</span>
+    <span class="c1">// setValueCallback: undefined,</span>
+    <span class="c1">// setValueCallbackScope: undefined</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -5006,6 +5042,25 @@
 </li>
 <li><code>space</code> : Spaces between 2 button game objects.</li>
 <li><code>name</code> : Set name of this button game objects.</li>
+<li><code>type</code> : Type/behavior of these buttons.<ul>
+<li><code>undefined</code> : No extra behavior, default value.</li>
+<li><code>'checkboxes'</code> : Set these buttons to checkboxes.</li>
+<li><code>'radio'</code> : Set these buttons to radio.</li>
+</ul>
+</li>
+<li><code>setValueCallback</code> : Callback to set value of a button.<ul>
+<li><code>undefined</code> : No callback, default value.</li>
+<li>A function object.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>button</code> : Button game object.</li>
+<li><code>value</code>: <code>true</code>, or <code>false</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5079,13 +5134,13 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
 </pre></div></li>
 <li>Button game objects
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttonObjects</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons&#39;</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttonObject</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons[0]&#39;</span><span class="p">);</span> <span class="c1">// First button</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttonObjects</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons[0]&#39;</span><span class="p">);</span> <span class="c1">// First button</span>
 </pre></div></li>
 </ul>
 </li>
@@ -5116,10 +5171,59 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 
 <ul>
 <li><code>callback</code> : 
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">buttons</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">buttonArray</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </pre></div></li>
+</ul>
+<h3 id="checkboxesradio">Checkboxes/radio<a class="headerlink" href="#checkboxesradio" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Configure buttons to checkboxes
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">buttons</span><span class="p">({</span>
+    <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkboxes&#39;</span><span class="p">,</span>
+    <span class="nx">setValueCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">},</span>
+    <span class="c1">// setValueCallbackScope: undefined</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>buttons</code> : Array of button game objects.<ul>
+<li>Property <code>name</code> of each button game object will be used as a key in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
+</ul>
+</li>
+<li><code>type</code> : Set type to <code>'checkboxes'</code>, or <code>'radio'</code>.</li>
+<li><code>setValueCallback</code> : Callback to set value of a button.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>button</code> : Button game object.</li>
+<li><code>value</code>: <code>true</code>, or <code>false</code></li>
+</ul>
+</li>
+<li>State of a button : Stored in <a href="../gameobject/#private-data"><code>buttons.data</code></a></li>
+</ul>
+</li>
+<li>Read state of button
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
+<li><code>state</code> : <code>true</code>, or <code>false</code></li>
+</ul>
+</li>
+<li>Set state of button
+    <div class="codehilite"><pre><span></span><span class="nx">buttons</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">state</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>key</code> : <code>name</code> property of a button game object. (i.e. <code>button.name</code>)</li>
+<li><code>state</code> : <code>true</code>, or <code>false</code></li>
+</ul>
+</li>
 </ul>
                 
                   
