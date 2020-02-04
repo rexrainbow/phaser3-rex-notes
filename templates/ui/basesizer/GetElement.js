@@ -1,3 +1,5 @@
+import IsArray from '../../../plugins/utils/object/IsArray.js';
+
 var GetElement = function (mapNameList) {
     if (this.childrenMap === undefined) {
         return undefined;
@@ -14,14 +16,7 @@ var GetElement = function (mapNameList) {
         element;
     if (name.charAt(0) === '#') {
         name = name.substring(1);
-        var elements = GetAllElements(this.childrenMap, tmpArray);
-        for (var i = 0, cnt = elements.length; i < cnt; i++) {
-            if (elements[i].name === name) {
-                element = elements[i];
-                break;
-            }
-        }
-        tmpArray.length = 0;
+        element = GetElementByName(this.childrenMap, name);
     } else if (name.indexOf('[') === (-1)) {
         element = this.childrenMap[name];
     } else { // name[]
@@ -43,23 +38,35 @@ var GetElement = function (mapNameList) {
     }
 };
 
-var GetAllElements = function (children, out) {
-    if (out === undefined) {
-        out = [];
-    }
+var GetElementByName = function (children, name) {
     var child;
-    for (var key in children) {
-        child = children[key];
-        if (child.name !== undefined) {
-            out.push(child);
-        } else {
-            GetAllElements(child, out);
+    if (IsArray(children)) {
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = TestName(children[i], name);
+            if (child) {
+                return child;
+            }
+        }
+    } else { // Is plain object
+        for (var key in children) {
+            child = TestName(children[key], name);
+            if (child) {
+                return child;
+            }
         }
     }
-    return out;
+}
+
+var TestName = function (gameObject, name) {
+    if (!gameObject) {
+        return null;
+    } else if (gameObject.hasOwnProperty('name')) {
+        return (gameObject.name === name) ? gameObject : null;
+    } else { // Array, or plain object
+        return GetElementByName(gameObject, name);
+    }
 }
 
 const RE_OBJ = /(\S+)\[(\d+)\]/i;
-var tmpArray = [];
 
 export default GetElement;
