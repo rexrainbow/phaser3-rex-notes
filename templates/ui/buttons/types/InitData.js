@@ -18,9 +18,9 @@ var InitData = function (config, initialValue) {
         var key = button.name;
 
         if (setValueCallback) {
-            dataManager.events.on(`changedata-${key}`, function (parent, value) {
+            dataManager.events.on(`changedata-${key}`, function (parent, value, previousValue) {
                 if (setValueCallbackScope) {
-                    setValueCallback.call(setValueCallbackScope, button, value);
+                    setValueCallback.call(setValueCallbackScope, button, value, previousValue);
                 } else {
                     setValueCallback(button, value);
                 }

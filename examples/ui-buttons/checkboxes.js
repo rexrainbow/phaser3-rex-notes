@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
             type: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
             setValueCallback: function (button, value) {
                 button.getElement('icon')
-                    .setFillStyle((value)? COLOR_LIGHT : undefined);
+                    .setFillStyle((value) ? COLOR_LIGHT : undefined);
             }
 
         })
@@ -43,11 +43,16 @@ class Demo extends Phaser.Scene {
         // Dump states
         var print = this.add.text(0, 0, '');
         var dumpButtonStates = function () {
-            var s = '';
-            buttons.data.each(function (buttons, key, value) {
-                s += `${key}:${value}\n`
-            })
-            print.setText(s);
+            if (CheckboxesMode) { // checkboxes
+                var s = '';
+                buttons.data.each(function (buttons, key, value) {
+                    s += `${key}:${value}\n`
+                })
+                print.setText(s);
+            } else { // radio
+                print.setText(buttons.value);
+            }
+
         }
         buttons.on('button.click', dumpButtonStates);
         dumpButtonStates();

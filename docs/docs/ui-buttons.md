@@ -140,12 +140,13 @@ var buttons = scene.rexUI.add.buttons({
     - `undefined` : No callback, default value.
     - A function object.
         ```javascript
-        function(button, value) {
+        function(button, value, previousValue) {
             // ...
         }
         ```
         - `button` : Button game object.
-        - `value`: `true`, or `false`
+        - `value`: `true`, or `false`.
+        - `previousValue` : `true`, or `false`.
 
 ### Custom class
 
@@ -272,7 +273,7 @@ buttons.forEachButtton(callback, scope);
 
 ### Checkboxes/radio
 
-- Configure buttons to checkboxes
+- Configure buttons to checkboxes/radio
     ```javascript
     var buttons = scene.rexUI.add.buttons({
         buttons: [
@@ -282,7 +283,7 @@ buttons.forEachButtton(callback, scope);
         ],
     
         type: 'checkboxes',
-        setValueCallback: function(button, value) {
+        setValueCallback: function(button, value, previousValue) {
             // ...
         },
         // setValueCallbackScope: undefined
@@ -298,17 +299,34 @@ buttons.forEachButtton(callback, scope);
         }
         ```
         - `button` : Button game object.
-        - `value`: `true`, or `false`
+        - `value`: `true`, or `false`.
+        - `previousValue` : `true`, or `false`.
     - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
-- Read state of button
+
+#### Checkboxes
+
+- Read state
     ```javascript
     var state = buttons.getData(key);
     ```
     - `key` : `name` property of a button game object. (i.e. `button.name`)
     - `state` : `true`, or `false`
-- Set state of button
+- Set state
     ```javascript
     buttons.setData(key, state);
     ```
     - `key` : `name` property of a button game object. (i.e. `button.name`)
     - `state` : `true`, or `false`
+
+#### Radio
+
+- Read state
+    ```javascript
+    var value = buttons.value;
+    ```
+    - `value` : `name` property of a button game object. (i.e. `button.name`)
+- Set state
+    ```javascript
+    buttons.value = key;
+    ```
+    - `key` : `name` property of a button game object. (i.e. `button.name`)

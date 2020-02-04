@@ -3,22 +3,42 @@ import InitData from './InitData.js';
 var SetRadioType = function (config) {
     InitData.call(this, config);
 
-    this.on('button.click', function (button) {
-        var dataManager = this._dataManager;
-        this.getElement('buttons').forEach(function (btn) {
-            var key = btn.name;
-            var value = dataManager.get(key);
-            if (btn === button) {
-                if (!value) {
-                    dataManager.set(key, true);
-                }
-            } else { // btn !== button
-                if (value) {
-                    dataManager.set(key, false);
-                }
+    var selectedValue = undefined;
+    Object.defineProperty(this, 'value', {
+        get: function () {
+            return selectedValue;
+        },
+        set: (function (value) {
+            if (value === selectedValue) {
+                return;
             }
-        }, this);
+
+            selectedValue = value;
+
+            // Update state of button -> Fire `changedata-btnName` event -> setValueCallback
+            var dataManager = this._dataManager;
+            this.getElement('buttons').forEach(function (button) {
+                var key = button.name;
+                var state = dataManager.get(key);
+                if (key === value) {
+                    if (!state) {
+                        dataManager.set(key, true);
+                    }
+                } else {
+                    if (state) {
+                        dataManager.set(key, false);
+                    }
+                }
+            });
+        }).bind(this),
+        enumerable: true,
+        configurable: true
+    });
+
+    this.on('button.click', function (button) {
+        this.value = button.name;
     }, this);
+
 }
 
 export default SetRadioType;

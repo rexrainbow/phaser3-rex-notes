@@ -32,6 +32,11 @@ var FireEvent = function (eventName, button, pointer, event) {
         }
     }
 
+    // Buttons is a child. Fire internal events.
+    if (this.eventEmitter !== this) {
+        this.emit(eventName, button, index, pointer, event);
+    }
+
     if (this.groupName !== undefined) {
         this.eventEmitter.emit(eventName, button, this.groupName, index, pointer, event);
     } else {
