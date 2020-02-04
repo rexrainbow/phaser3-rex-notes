@@ -9,6 +9,7 @@ Stretchable image.
 
 - [3x3](https://codepen.io/rexrainbow/pen/gOYzydR)
 - [5x5](https://codepen.io/rexrainbow/pen/vYBzYer)
+- [Custom frame name](https://codepen.io/rexrainbow/pen/poJzywP)
 
 ## Usage
 
@@ -162,11 +163,11 @@ var ninePatch = scene.add.rexNinePatch({
         }
         ```
 - `getFrameNameCallback` : Callback to get frame name of each cell.
-    - `undefined` : Use default callback, which will return `${colIndex},${rowIndex}`.
+    - `undefined` : Use default callback, which will return `'${colIndex},${rowIndex}'`.
     - Function object : Return a string, or `undefined`.
         ```javascript
         function(colIndex, rowIndex) {
-            return `${colIndex},${rowIndex}`
+            return `${colIndex},${rowIndex}`;
         }
         ```
 
