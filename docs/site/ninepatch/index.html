@@ -4853,6 +4853,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/gOYzydR">3x3</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYBzYer">5x5</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/poJzywP">Custom frame name</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ninepatch">Sample code</a></p>
@@ -4997,10 +4998,10 @@
 </ul>
 </li>
 <li><code>getFrameNameCallback</code> : Callback to get frame name of each cell.<ul>
-<li><code>undefined</code> : Use default callback, which will return <code>${colIndex},${rowIndex}</code>.</li>
+<li><code>undefined</code> : Use default callback, which will return <code>'${colIndex},${rowIndex}'</code>.</li>
 <li>Function object : Return a string, or <code>undefined</code>.
     <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">colIndex</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">rowIndex</span><span class="si">}</span><span class="sb">`</span>
+    <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">colIndex</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">rowIndex</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
 </ul>
