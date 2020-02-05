@@ -1,0 +1,70 @@
+site_name: Rex plugins
+nav:
+- Home: firebase-overview.md
+- Firebase applications:
+    - Overview: firebase-overview.md
+    - Leaderboard: firebase-leaderboard.md
+    - Files: firebase-files.md
+    - Single room: firebase-singleroom.md
+    - Online user list: firebase-onlineuserlist.md
+    - Broadcast: firebase-broadcast.md
+    - Item table: firebase-itemtable.md
+    - ID-alias: firebase-idalias.md
+
+
+extra_javascript:
+- js/mermaid/mermaid.min.js
+- js/umlconvert.js 
+
+theme:
+    name: 'material'
+    logo:
+        icon: 'memory'    
+    favicon: 'images/logo.svg'
+    palette:
+        primary: 'blue'
+        accent: 'blue'
+
+site_author: rexrainbow
+site_url: https://rexrainbow.github.io/phaser3-rex-notes/rexfirebase-docs/site/firebase-overview
+
+extra:
+    social:
+        - type: 'twitter'
+          link: https://twitter.com/rexrainbow
+        - type: github
+          link: https://github.com/rexrainbow/
+
+
+google_analytics:
+    - 'UA-119804412-1'
+    - 'auto'      
+
+markdown_extensions:
+- admonition
+- codehilite:
+    guess_lang: false
+    linenums: false
+- toc:
+    permalink: true
+- footnotes
+- meta
+- def_list
+- pymdownx.arithmatex
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.caret
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.emoji:
+    emoji_generator: !!python/name:pymdownx.emoji.to_png
+- pymdownx.inlinehilite
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences:
+    custom_fences: [
+       {name: mermaid, class: mermaid}
+    ]
+- pymdownx.tasklist
+- pymdownx.tilde
