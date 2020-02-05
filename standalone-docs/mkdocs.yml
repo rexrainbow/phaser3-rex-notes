@@ -25,9 +25,6 @@ theme:
         primary: 'blue'
         accent: 'blue'
 
-site_author: rexrainbow
-site_url: https://rexrainbow.github.io/phaser3-rex-notes/rexfirebase-docs/site/firebase-overview
-
 extra:
     social:
         - type: 'twitter'
