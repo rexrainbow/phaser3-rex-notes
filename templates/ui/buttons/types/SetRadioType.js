@@ -3,17 +3,17 @@ import InitData from './InitData.js';
 var SetRadioType = function (config) {
     InitData.call(this, config);
 
-    var selectedValue = undefined;
+    this._value = undefined;
     Object.defineProperty(this, 'value', {
-        get: function () {
-            return selectedValue;
-        },
+        get: (function () {
+            return this._value;
+        }).bind(this),
         set: (function (value) {
-            if (value === selectedValue) {
+            if (value === this._value) {
                 return;
             }
 
-            selectedValue = value;
+            this._value = value;
 
             // Update state of button -> Fire `changedata-btnName` event -> setValueCallback
             var dataManager = this._dataManager;
