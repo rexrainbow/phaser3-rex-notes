@@ -27,6 +27,14 @@ import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import Toast from './toast/Toast.js';
 
+import Tap from './tap/Tap.js';
+import Press from './press/Press.js';
+import Swipe from './swipe/Swipe.js';
+import Pan from './pan/Pan.js';
+import Pinch from './pinch/Pinch.js';
+import Rotate from './rotate/Rotate.js';
+import Flip from './flip/Flip.js';
+
 import GetParentSizer from './utils/GetParentSizer.js'
 import GetTopmostSizer from './utils/GetTopmostSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -66,6 +74,14 @@ export {
     ScrollableBlock,
     ScrollablePanel,
     Toast,
+
+    Tap,
+    Press,
+    Swipe,
+    Pan,
+    Pinch,
+    Rotate,
+    Flip,
 
     GetParentSizer,
     GetTopmostSizer,
