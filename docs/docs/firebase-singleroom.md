@@ -12,7 +12,7 @@ Chat room, using [firebase-database](https://firebase.google.com/docs/database/)
 
 #### Load minify file
 
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -48,7 +48,7 @@ Chat room, using [firebase-database](https://firebase.google.com/docs/database/)
     ```
     npm i phaser3-rex-plugins
     ```
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -96,7 +96,7 @@ Chat room, using [firebase-database](https://firebase.google.com/docs/database/)
     ```
     npm i phaser3-rex-plugins
     ```
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->

@@ -14,7 +14,7 @@ Each owner has several files, each file contains header and content indexed by f
 
 #### Load minify file
 
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -50,7 +50,7 @@ Each owner has several files, each file contains header and content indexed by f
     ```
     npm i phaser3-rex-plugins
     ```
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -98,7 +98,7 @@ Each owner has several files, each file contains header and content indexed by f
     ```
     npm i phaser3-rex-plugins
     ```
-- [Add Firebase SDKs and initialize Firebase](https://firebase.google.com/docs/web/setup)
+- [Add Firebase SDKs](https://firebase.google.com/docs/web/setup)
     ```html
     <body>
         <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
