@@ -10,5 +10,8 @@ export default function (duration) {
     }
 
     this._fade = FadeIn(this, duration, this._fade);
+    this._fade.once('complete', function () {
+        this.emit('fadein.complete', this);
+    }, this);
     return this;
 }

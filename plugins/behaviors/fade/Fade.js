@@ -81,12 +81,6 @@ class Fade {
             return this;
         }
 
-        if (this.duration === 0) {
-            this.gameObject.setAlpha(this.alphaEnd);
-            this.complete();
-            return this;
-        }
-
         this.gameObject.setAlpha(this.alphaStart);
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,

@@ -12,5 +12,8 @@ export default function (duration, orientation, ease) {
     }
 
     this._scale = PopUp(this, duration, orientation, ease, this._scale);
+    this._scale.once('complete', function () {
+        this.emit('popup.complete', this);
+    }, this);
     return this;
 };

@@ -13,5 +13,8 @@ export default function (duration, orientation, ease, destroyMode) {
     }
 
     this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
+    this._scale.once('complete', function () {
+        this.emit('scaledown.complete', this);
+    }, this);
     return this;
 }

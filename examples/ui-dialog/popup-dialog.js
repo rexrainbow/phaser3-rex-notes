@@ -79,6 +79,8 @@ var createDialog = function (scene, x, y, onClick) {
         .layout()
         .pushIntoBounds()
         //.drawBounds(this.add.graphics(), 0xff0000)
+        .on('popup.complete', function () { console.log('popup.complete') })
+        .on('scaledown.complete', function () { console.log('scaledown.complete') })
         .popUp(500);
 
     dialog

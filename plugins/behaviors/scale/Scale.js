@@ -105,12 +105,6 @@ class Scale {
             return this;
         }
 
-        if (this.duration === 0) {
-            this.gameObject.setScale(this.scaleEnd.x, this.scaleEnd.y);
-            this.complete();
-            return this;
-        }
-
         this.gameObject.setScale(this.scaleStart.x, this.scaleStart.y);
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,

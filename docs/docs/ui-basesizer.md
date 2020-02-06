@@ -61,24 +61,24 @@ sizer.pushIntoBounds(bounds);
 
 ### Scale
 
-- Pop up
-    - Pop up width and height
+- Pop-up
+    - Pop-up width and height
         ```javascript
         sizer.popUp(duration);
         // sizer.popUp(duration, undefined, ease);
         ```
         - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-    - Pop up width only
+    - Pop-up width only
         ```javascript
         sizer.popUp(duration, 'x');
         // sizer.popUp(duration, 'x', ease);
         ```
-    - Pop up height only
+    - Pop-up height only
         ```javascript
         sizer.popUp(duration, 'y');
         // sizer.popUp(duration, 'y', ease);
         ```
-    - Pop up via config
+    - Pop-up via config
         ```javascript
         sizer.popUp({
             duration: undefined,
@@ -87,51 +87,69 @@ sizer.pushIntoBounds(bounds);
         })
         ```
         - `orientation` : `undefined`, `x`, or `y`
-- Scale down destroy
-    - Scale down width and height
+- Scale-down destroy
+    - Scale-down width and height
         ```javascript
         sizer.scaleDownDestroy(duration);
         // sizer.scaleDownDestroy(duration, undefined, ease);
         ```
         - `ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
-    - Scale down width only
+    - Scale-down width only
         ```javascript
         sizer.scaleDownDestroy(duration, 'x');
         // sizer.scaleDownDestroy(duration, 'x', ease);
         ```
-    - Scale down height only
+    - Scale-down height only
         ```javascript
         sizer.scaleDownDestroy(duration, 'y');
         // sizer.scaleDownDestroy(duration, 'y', ease);
         ```
-- Scale down without destroy
-    - Scale down width and height
+- Scale-down without destroy
+    - Scale-down width and height
         ```javascript
         sizer.scaleDownDestroy(duration, undefined, ease, false);
         ```
-    - Scale down width only
+    - Scale-down width only
         ```javascript
         sizer.scaleDownDestroy(duration, 'x', ease, false);
         ```
-    - Scale down height only
+    - Scale-down height only
         ```javascript
         sizer.scaleDownDestroy(duration, 'y', ease, false);
+        ```
+- Events
+    - Pop-up complete
+        ```javascript
+        sizer.on('popup.complete', function(sizer) { });
+        ```
+    - Scale-down, scale-down destroy complete
+        ```javascript
+        sizer.on('scaledown.complete', function(sizer) { });
         ```
 
 ### Fade
 
-- Fade in
+- Fade-in
     ```javascript
     sizer.fadeIn(duration);
     ```
-- Fade out destroy
+- Fade-out destroy
     ```javascript
     sizer.fadeOutDestroy(duration);
     ```
-- Fade out without destroy
+- Fade-out without destroy
     ```javascript
     sizer.fadeOutDestroy(duration, false);
     ```
+- Events
+    - Fade-in complete
+        ```javascript
+        sizer.on('fadein.complete', function(sizer) { });
+        ```
+    - Fade-out, fade-out destroy complete
+        ```javascript
+        sizer.on('fadeout.complete', function(sizer) { });
+        ```    
 
 ### Drag top-most sizer
 

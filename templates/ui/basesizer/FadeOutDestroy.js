@@ -10,5 +10,8 @@ export default function (duration, destroyMode) {
         destroyMode = GetValue(config, 'destroy', undefined);
     }
     this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
+    this._fade.once('complete', function () {
+        this.emit('fadeout.complete', this);
+    }, this);
     return this;
 };
