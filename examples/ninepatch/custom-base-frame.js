@@ -12,12 +12,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(100, 100, 'atlas', 'button_coral_s_w_slice9');
+        this.add.image(100, 100, 'atlas', 'button_green_s_w_slice9');
         this.add.rexNinePatch({
             x: 400, y: 300,
             width: 300, height: 400,
             key: 'atlas',
-            baseFrame: 'button_coral_s_w_slice9',
+            baseFrame: 'button_green_s_w_slice9',
             columns: [30, undefined, 30],
             rows: [30, undefined, 30]          
         })
