@@ -1,0 +1,272 @@
+{
+	"textures": [
+		{
+			"image": "atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 559,
+				"h": 187
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "button_coral_s_b_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 2,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_coral_s_g_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 2,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_coral_s_w_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 95,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_coral_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 95,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_green_s_b_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 188,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_green_s_w_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 188,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_green_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 281,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_white_s_b_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 281,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_white_s_c_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 374,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_white_s_g_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 374,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_white_s_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 467,
+						"y": 2,
+						"w": 90,
+						"h": 90
+					}
+				},
+				{
+					"filename": "button_white_slice9",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 90,
+						"h": 90
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 90,
+						"h": 90
+					},
+					"frame": {
+						"x": 467,
+						"y": 95,
+						"w": 90,
+						"h": 90
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:49e3876664f170da5a75d5086c0cd6b7:f8a3c72a14a6c950cd204bc907b20be3:cbce6b53f0f49e0bf15173c25c41f876$"
+	}
+}

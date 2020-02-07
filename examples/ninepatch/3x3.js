@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('bg2', 'assets/images/nine-patch.png');
+        this.load.image('bg2', 'assets/images/ninepatch/nine-patch.png');
     }
 
     create() {
