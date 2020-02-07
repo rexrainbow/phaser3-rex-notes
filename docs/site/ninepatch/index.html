@@ -4923,7 +4923,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4934,7 +4935,8 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4946,7 +4948,8 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4959,7 +4962,8 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4997,10 +5001,18 @@
 </pre></div></li>
 </ul>
 </li>
+<li><code>baseFrame</code> : Frame name of base texture.<ul>
+<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
+</ul>
+</li>
 <li><code>getFrameNameCallback</code> : Callback to get frame name of each cell.<ul>
-<li><code>undefined</code> : Use default callback, which will return <code>'${colIndex},${rowIndex}'</code>.</li>
+<li><code>undefined</code> : Use default callback.<ul>
+<li>If <code>baseFrame</code> is <code>'__BASE'</code> : return <code>${colIndex},${rowIndex}</code></li>
+<li>Else : return <code>${baseFrame}_${colIndex},${rowIndex}</code></li>
+</ul>
+</li>
 <li>Function object : Return a string, or <code>undefined</code>.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">colIndex</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">rowIndex</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div></li>
@@ -5037,7 +5049,7 @@
 </pre></div>
 
 <h3 id="set-texture-of-source-image">Set texture of source image<a class="headerlink" href="#set-texture-of-source-image" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">);</span>
 </pre></div>
 
 <ul>
@@ -5056,6 +5068,10 @@
 <li>Height of odd rows (row <code>1</code>, row <code>3</code>, ...) will be stretched.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li><code>baseFrame</code> : Frame name of base texture.<ul>
+<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
 </ul>
 </li>
 </ul>

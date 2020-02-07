@@ -40,7 +40,9 @@ class NinePatch extends RenderTexture {
         this.setOrigin(0.5, 0.5);
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
-        this.setTexture(key, columns, rows); // Also update render texture
+
+        var baseFrameName = GetValue(config, 'baseFrame', undefined);
+        this.setTexture(key, columns, rows, baseFrameName); // Also update render texture
     }
 
     setGetFrameNameCallback(callback) {

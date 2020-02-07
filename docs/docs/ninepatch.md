@@ -94,7 +94,8 @@ Stretchable image.
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, {
     stretchMode: 0,
-    getFrameNameCallback: undefined,
+    baseFrame: undefined,
+    getFrameNameCallback: undefined
 });
 ```
 
@@ -107,7 +108,8 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, {
     rows: undefined,
 
     stretchMode: 0,
-    getFrameNameCallback: undefined,
+    baseFrame: undefined,
+    getFrameNameCallback: undefined
 });
 ```
 
@@ -121,7 +123,8 @@ var ninePatch = scene.add.rexNinePatch(x, y, {
     rows: undefined,
 
     stretchMode: 0,
-    getFrameNameCallback: undefined,
+    baseFrame: undefined,
+    getFrameNameCallback: undefined
 });
 ```
 
@@ -136,7 +139,8 @@ var ninePatch = scene.add.rexNinePatch({
     rows: undefined,
 
     stretchMode: 0,
-    getFrameNameCallback: undefined,
+    baseFrame: undefined,
+    getFrameNameCallback: undefined
 });
 ```
 
@@ -162,11 +166,15 @@ var ninePatch = scene.add.rexNinePatch({
             internal: 0, // 'scale', or 1, 'repeat'
         }
         ```
+- `baseFrame` : Frame name of base texture.
+    - `undefined` : Use default base frame `'__BASE'`.
 - `getFrameNameCallback` : Callback to get frame name of each cell.
-    - `undefined` : Use default callback, which will return `'${colIndex},${rowIndex}'`.
+    - `undefined` : Use default callback.
+        - If `baseFrame` is `'__BASE'` : return `${colIndex},${rowIndex}`
+        - Else : return `${baseFrame}_${colIndex},${rowIndex}`
     - Function object : Return a string, or `undefined`.
         ```javascript
-        function(colIndex, rowIndex) {
+        function(colIndex, rowIndex, baseFrame) {
             return `${colIndex},${rowIndex}`;
         }
         ```
@@ -203,7 +211,7 @@ ninePatch.resize(width, height);
 ### Set texture of source image
 
 ```javascript
-ninePatch.setTexture(key, columns, rows);
+ninePatch.setTexture(key, columns, rows, baseFrame);
 ```
 
 - `key` : Texture key of source image.
@@ -215,6 +223,8 @@ ninePatch.setTexture(key, columns, rows);
     - A number array, like `[20, 20, 20]` : Height of each row.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+- `baseFrame` : Frame name of base texture.
+    - `undefined` : Use default base frame `'__BASE'`.
 
 ### Set stretch mode
 

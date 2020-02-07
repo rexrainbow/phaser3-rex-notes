@@ -1,5 +1,10 @@
-var SetTexture = function (key, columns, rows) {
+var SetTexture = function (key, columns, rows, baseFrameName) {
+    if (baseFrameName === undefined) {
+        baseFrameName = '__BASE';
+    }
+
     this.textureKey = key;
+    this.baseFrameName = baseFrameName;
     this.columns.data = columns;
     this.columns.count = (columns) ? columns.length : 0;
     this.columns.stretch = 0;
@@ -20,8 +25,8 @@ var SetTexture = function (key, columns, rows) {
     }
 
     // Get remainder width/height for unknown width/height
-    var srcFrame = texture.frames.__BASE;
-    var remainderTextureWidth = srcFrame.width;
+    var baseFrame = texture.frames[baseFrameName];
+    var remainderTextureWidth = baseFrame.width;
     var unknownColumnWidthCount = 0;
     for (var i = 0, cnt = columns.length; i < cnt; i++) {
         if (columns[i] === undefined) {
@@ -34,7 +39,7 @@ var SetTexture = function (key, columns, rows) {
     }
     var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
 
-    var remainderTextureHeight = srcFrame.height;
+    var remainderTextureHeight = baseFrame.height;
     var unknownRowHeightCount = 0;
     for (var i = 0, cnt = rows.length; i < cnt; i++) {
         if (rows[i] === undefined) {
@@ -91,11 +96,11 @@ var SetTexture = function (key, columns, rows) {
             }
 
             if ((colWidth >= 1) && (rowHeight >= 1)) {
-                frameName = this.getFrameNameCallback(i, j);
+                frameName = this.getFrameNameCallback(i, j, baseFrameName);
                 if (frameName) {
                     texture.add(
                         frameName, 0,
-                        offsetX, offsetY,
+                        (offsetX + baseFrame.cutX), (offsetY + baseFrame.cutY),
                         colWidth, rowHeight
                     );
                     // Do nothing if frameName is existed
