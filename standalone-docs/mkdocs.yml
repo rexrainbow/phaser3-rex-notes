@@ -1,6 +1,6 @@
 site_name: Rex plugins
 nav:
-- Home: firebase-overview.md
+- Home: index.md
 - Firebase applications:
     - Overview: firebase-overview.md
     - Leaderboard: firebase-leaderboard.md
@@ -24,6 +24,9 @@ theme:
     palette:
         primary: 'blue'
         accent: 'blue'
+
+site_author: rexrainbow
+site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
 
 extra:
     social:
