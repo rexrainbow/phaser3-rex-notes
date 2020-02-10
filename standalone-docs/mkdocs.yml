@@ -26,7 +26,7 @@ theme:
         accent: 'blue'
 
 site_author: rexrainbow
-site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
+site_url: https://rexrainbow.github.io/phaser3-rex-notes/standalone-docs/site/index.html
 
 extra:
     social:
