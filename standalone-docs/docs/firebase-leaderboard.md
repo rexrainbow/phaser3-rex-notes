@@ -4,6 +4,10 @@ Descending sort scores, using [firebase-firestore](https://firebase.google.com/d
 
 - Author: Rex
 
+## Live demos
+
+- [Post & paging](https://codepen.io/rexrainbow/pen/oNgPxbm)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-leaderboard)

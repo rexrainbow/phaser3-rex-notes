@@ -6,6 +6,10 @@ Each owner has several files, each file contains header and content indexed by f
 
 - Author: Rex
 
+## Live demos
+
+- [Get random alias](https://codepen.io/rexrainbow/pen/jOEBYQG)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-idalias)
