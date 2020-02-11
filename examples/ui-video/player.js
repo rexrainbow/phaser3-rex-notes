@@ -14,6 +14,7 @@ class Demo extends Phaser.Scene {
     preload() {
         this.load.image('play', './assets/images/play.png');
         this.load.image('pause', './assets/images/pause.png');
+        this.load.video('test', './assets/video/test.mp4', 'canplaythrough', false, true);
     }
 
     create() {
@@ -73,46 +74,39 @@ var CreateControllerPanel = function (scene) {
 }
 
 var CreateVideoPanel = function (scene) {
-    return scene.rexUI.add.videoCanvas({
-        width: 600,
-        height: 337.5,
-        src: './assets/video/test.mp4',
-        autoPlay: false
-    });
+    return scene.add.video(0, 0, 'test')
+        .setDisplaySize(600, 337.5)
 }
 
 var ControlVideo = function (controller, video) {
     // Play button
     var playButton = controller.getElement('icon');
-    video
-        .on('pause', function () {
-            playButton.setTexture('play');
-        })
-        .on('playing', function () {
-            playButton.setTexture('pause');
-        });
-
     playButton
         .setInteractive()
         .on('pointerdown', function () {
             var textureKey = playButton.texture.key;
             if (textureKey === 'play') {
                 video.play();
+                playButton.setTexture('pause');
             } else {
-                video.pause();
+                video.setPaused();
+                playButton.setTexture('play');
             }
         });
 
     // Playback time
-    video.on('playbacktimechange', function (video) {
-        if ((video.t === 0) || (controller.value !== video.t)) {
-            controller.value = video.t;
-            controller.text = Math.floor(video.playbackTime * 10) / 10;
+    var lastVideoProgress = undefined;
+    video.scene.events.on('update', function () {
+        var currentVideoProgress = video.getProgress();
+        if (lastVideoProgress !== currentVideoProgress) {
+            lastVideoProgress = currentVideoProgress;
+            controller.value = currentVideoProgress;
+            controller.text = Math.floor(video.getCurrentTime() * 10) / 10;
         }
     })
     controller.on('valuechange', function (newValue) {
-        if (video.t !== newValue) {
-            video.t = newValue;
+        if (video.getProgress() !== newValue) {
+            video.seekTo(newValue);
         }
     });
 }
