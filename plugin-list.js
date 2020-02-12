@@ -8,7 +8,6 @@ module.exports = {
     'gridtableplugin': './plugins/gridtable-plugin.js',
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
-    'videoplugin': './plugins/video-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',

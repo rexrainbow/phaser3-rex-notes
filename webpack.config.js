@@ -20,8 +20,7 @@ switch (testMode) {
         phaser = path.join(phaserModule, 'src/phaser.js');
         break;
     default:
-        var phaserModule = path.join(__dirname, testMode); // Other phaser path
-        phaser = path.join(phaserModule, 'src/phaser.js');
+        phaser = path.join(__dirname, testMode); // Other phaser path
         break;
 }
 

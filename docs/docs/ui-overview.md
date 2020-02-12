@@ -180,38 +180,6 @@
 
 ### Video objects
 
-1. [Video DOM](rexvideo.md): Create a video dom to play video.
-    ```javascript
-    var video = scene.rexUI.add.video(x, y, width, height, config);
-    // var video = scene.rexUI.add.video(config);
-    ```
-    or
-    ```javascript
-    class MyVideo extends RexPlugins.UI.Video {
-        constructor(scene, x, y, width, height, config) {
-            super(scene, x, y, width, height, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
-1. [Video canvas](rexvideo.md): Create a canvas to play video.
-    ```javascript
-    var video = scene.rexUI.add.videoCanvas(x, y, width, height, config);
-    // var video = scene.rexUI.add.videoCanvas(config);
-    ```
-    or
-    ```javascript
-    class MyVideo extends RexPlugins.UI.VideoCanvas {
-        constructor(scene, x, y, width, height, config) {
-            super(scene, x, y, width, height, config);
-            // ...
-            scene.add.existing(this);
-        }
-        // ...
-    }
-    ```
 1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
     ```javascript
     var video = scene.rexUI.add.youtubePlayer(x, y, width, height, config);
@@ -348,6 +316,6 @@ var isInBounds = scene.rexUI.isInTouching(gameObject);
 - [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
 - [Fix-width sizer](https://codepen.io/rexrainbow/pen/WPJPdK)
 - [Chart](https://codepen.io/rexrainbow/pen/qwVBNy)
-- [Video](https://codepen.io/rexrainbow/pen/Gazmyz)
+- [Video player](https://codepen.io/rexrainbow/pen/Gazmyz)
 - [Anchor](https://codepen.io/rexrainbow/pen/jJqXxB)
 - [Round-rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)

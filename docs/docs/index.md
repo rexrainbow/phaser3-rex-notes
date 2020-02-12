@@ -115,10 +115,6 @@
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
 1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
 
-## Deprecated
-
-1. [Video](rexvideo.md): Play video on DOM, or on canvas.
-
 ## Links
 
 - [Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)

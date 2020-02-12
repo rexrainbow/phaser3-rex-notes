@@ -9,6 +9,7 @@ A container with an icon, slider, text, and background.
 
 - [Number bar](https://codepen.io/rexrainbow/pen/jXWebo)
 - [Color picker](https://codepen.io/rexrainbow/pen/qLZPXr)
+- [Video player](https://codepen.io/rexrainbow/pen/Gazmyz)
 
 ## Usage
 

@@ -80,16 +80,26 @@ var CreateVideoPanel = function (scene) {
 
 var ControlVideo = function (controller, video) {
     // Play button
+    var played = false;
     var playButton = controller.getElement('icon');
     playButton
         .setInteractive()
         .on('pointerdown', function () {
             var textureKey = playButton.texture.key;
             if (textureKey === 'play') {
-                video.play();
-                playButton.setTexture('pause');
+                if (!played) {
+                    played = true;
+                    video.play();
+                } else {
+                    video.setPaused(false);
+                }
             } else {
                 video.setPaused();
+            }
+
+            if (video.isPlaying()) {
+                playButton.setTexture('pause');
+            } else {
                 playButton.setTexture('play');
             }
         });
