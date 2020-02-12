@@ -699,6 +699,26 @@
     Add video object
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-video-from-video-cache" class="md-nav__link">
+    Reference video from Video Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-video-from-url" class="md-nav__link">
+    Load video from URL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4782,6 +4802,26 @@
     Add video object
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reference-video-from-video-cache" class="md-nav__link">
+    Reference video from Video Cache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-video-from-url" class="md-nav__link">
+    Load video from URL
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4927,14 +4967,12 @@
 
 <p>Reference: <a href="../loader/#video">load video</a></p>
 <h3 id="add-video-object">Add video object<a class="headerlink" href="#add-video-object" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Reference video from Video Cache
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>key</code> : Key of the Video this Game Object will play, as stored in the Video Cache.</li>
-</ul>
-</li>
-<li>Load video from URL<ol>
+<h4 id="reference-video-from-video-cache">Reference video from Video Cache<a class="headerlink" href="#reference-video-from-video-cache" title="Permanent link">&para;</a></h4>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</pre></div>
+- <code>key</code> : Key of the Video this Game Object will play, as stored in the Video Cache.</p>
+<h4 id="load-video-from-url">Load video from URL<a class="headerlink" href="#load-video-from-url" title="Permanent link">&para;</a></h4>
+<ol>
 <li>Add video object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div></li>
@@ -4952,8 +4990,6 @@
 </ul>
 </li>
 </ol>
-</li>
-</ul>
 <div class="admonition note">
 <p class="admonition-title">Control multiple video game object independently</p>
 <p>Each <code>scene.load.video(key, ...)</code> will create a video element in cache. Video game object with the same <em>key</em> will reference the same video element and will be controlled at the same time.<br />

@@ -16,26 +16,29 @@ Reference: [load video](loader.md#video)
 
 ### Add video object
 
-- Reference video from Video Cache
+#### Reference video from Video Cache
+
+```javascript
+var video = scene.add.video(x, y, key);
+```
+- `key` : Key of the Video this Game Object will play, as stored in the Video Cache.
+
+#### Load video from URL
+
+1. Add video object
     ```javascript
-    var video = scene.add.video(x, y, key);
+    var video = scene.add.video(x, y);
     ```
-    - `key` : Key of the Video this Game Object will play, as stored in the Video Cache.
-- Load video from URL
-    1. Add video object
-        ```javascript
-        var video = scene.add.video(x, y);
-        ```
-    2. Play video from URL
-        ```javascript
-        video.loadURL(url);
-        // video.loadURL(url, loadEvent, noAudio);
-        ```
-        - `loadEvent` : The load event to listen for when *not* loading as a blob.
-            - `'loadeddata'` : Data for the current frame is available. Default value.
-            - `'canplay'` : The video is ready to start playing.
-            - `'canplaythrough'` : The video can be played all the way through, without stopping.
-        - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+2. Play video from URL
+    ```javascript
+    video.loadURL(url);
+    // video.loadURL(url, loadEvent, noAudio);
+    ```
+    - `loadEvent` : The load event to listen for when *not* loading as a blob.
+        - `'loadeddata'` : Data for the current frame is available. Default value.
+        - `'canplay'` : The video is ready to start playing.
+        - `'canplaythrough'` : The video can be played all the way through, without stopping.
+    - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
 
 !!! note "Control multiple video game object independently"
     Each `scene.load.video(key, ...)` will create a video element in cache. Video game object with the same *key* will reference the same video element and will be controlled at the same time.  
