@@ -44,7 +44,7 @@ var video = scene.add.video(x, y, key);
 !!! note "Control multiple video game object independently"
     Each `scene.load.video(key, ...)` will create a video element in cache. Video game object with the same *key* will reference the same video element and will be controlled at the same time.  
     To control multiple video game object independently :  
-    - Load video with different key for each video game object, or
+    - Load video with different key for each video game object, or  
     - `video.loadURL(url)`
 
 ### Play
