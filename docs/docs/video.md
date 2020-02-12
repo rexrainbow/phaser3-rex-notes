@@ -21,6 +21,7 @@ Reference: [load video](loader.md#video)
 ```javascript
 var video = scene.add.video(x, y, key);
 ```
+
 - `key` : Key of the Video this Game Object will play, as stored in the Video Cache.
 
 #### Load video from URL
