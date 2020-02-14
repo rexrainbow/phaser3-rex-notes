@@ -37,8 +37,8 @@ class WaitEvents {
         return this;
     }
 
-    remove(eventEmitter) {
-        this.events.delete(eventEmitter);
+    remove(callback) {
+        this.events.delete(callback);
         if (this.events.size === 0) {
             if (this.scope) {
                 this.completeCallback.call(this.scope);

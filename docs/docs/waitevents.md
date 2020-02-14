@@ -104,3 +104,17 @@ scene.time.delayedCall(1500, waitEvents.waitCallback());
 ```javascript
 waitEvents.waitEvent(eventEmitter, eventName);
 ```
+
+### Remove waiting event
+
+```javascript
+callback();
+```
+
+or 
+
+```javascript
+waitEvents.remove(callback);
+```
+
+- `callback` : A function object created via `waitEvents.waitCallback()`
