@@ -41,9 +41,9 @@ var video = scene.add.video(x, y, key);
         - `'canplaythrough'` : The video can be played all the way through, without stopping.
     - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
 
-!!! note "Control multiple video game object independently"
+!!! note "Control multiple video game objects independently"
     Each `scene.load.video(key, ...)` will create a video element in cache. Video game object with the same *key* will reference the same video element and will be controlled at the same time.  
-    To control multiple video game object independently :  
+    To control multiple video game objects independently :  
     - Load video with different key for each video game object, or  
     - `video.loadURL(url)`
 
@@ -57,6 +57,9 @@ video.play();
 - `loop` : Should the video loop automatically when it reaches the end? **Not all browsers support _seamless_ video looping for all encoding formats**.
 - `markerIn`, `markerOut` : Optional in/out marker time, in *seconds*, for playback of a sequence of the video.
 
+!!! note "Play video first time"
+    Call `video.play()` when playing video first time.
+
 ### Pause
 
 - Pause
@@ -68,6 +71,9 @@ video.play();
     ```javascript
     video.setPaused(false);
     ```
+
+!!! note "Play video after paused"
+    Call `video.setPaused(false)` to resume playing.
 
 ### Stop
 
