@@ -1,12 +1,13 @@
 import TextureMethods from './texture/TextureMethods.js';
 import DefaultGetFrameNameCallback from './utils/DefaultGetFrameNameCallback.js';
+import IsArray from '../../utils/object/IsArray.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class NinePatch extends RenderTexture {
-    constructor(scene, x, y, width, height, key, columns, rows, config) {
+    constructor(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
@@ -14,6 +15,7 @@ class NinePatch extends RenderTexture {
             width = GetValue(config, 'width', 1);
             height = GetValue(config, 'height', 1);
             key = GetValue(config, 'key', undefined);
+            baseFrame = GetValue(config, 'baseFrame', undefined);
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
         } else if (IsPlainObject(width)) {
@@ -21,11 +23,27 @@ class NinePatch extends RenderTexture {
             width = GetValue(config, 'width', 1);
             height = GetValue(config, 'height', 1);
             key = GetValue(config, 'key', undefined);
+            baseFrame = GetValue(config, 'baseFrame', undefined);
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
         } else if (IsPlainObject(key)) {
             config = key;
             key = GetValue(config, 'key', undefined);
+            baseFrame = GetValue(config, 'baseFrame', undefined);
+            columns = GetValue(config, 'columns', undefined);
+            rows = GetValue(config, 'rows', undefined);
+        } else if (IsPlainObject(baseFrame)) {
+            config = baseFrame;
+            baseFrame = GetValue(config, 'baseFrame', undefined);
+            columns = GetValue(config, 'columns', undefined);
+            rows = GetValue(config, 'rows', undefined);
+        } else if (IsArray(baseFrame)) {
+            config = rows;
+            rows = columns;
+            columns = baseFrame;
+            baseFrame = GetValue(config, 'baseFrame', undefined);
+        } else if (IsPlainObject(columns)) {
+            config = columns;
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
         }
@@ -40,9 +58,7 @@ class NinePatch extends RenderTexture {
         this.setOrigin(0.5, 0.5);
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
-
-        var baseFrameName = GetValue(config, 'baseFrame', undefined);
-        this.setTexture(key, columns, rows, baseFrameName); // Also update render texture
+        this.setTexture(key, columns, rows, baseFrame); // Also update render texture
     }
 
     setGetFrameNameCallback(callback) {

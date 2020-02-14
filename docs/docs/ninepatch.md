@@ -25,7 +25,7 @@ Stretchable image.
     ```
 - Add nine-patch object
     ```javascript
-    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, config);
+    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, baseFrame, columns, rows, config);
     ```
 
 #### Import plugin
@@ -62,7 +62,7 @@ Stretchable image.
     ```
 - Add nine-patch object
     ```javascript
-    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, config);
+    var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, baseFrame, columns, rows, config);
     ```
 
 #### Import class
@@ -85,14 +85,36 @@ Stretchable image.
     ```
 - Add nine-patch object
     ```javascript    
-    var ninePatch = new NinePatch(scene, x, y, width, height, key, columns, rows, config);
+    var ninePatch = new NinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config);
     sscene.add.existing(ninePatch);
     ```
 
 ### Create instance
 
 ```javascript
+var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, baseFrame, columns, rows, {
+    stretchMode: 0,
+    getFrameNameCallback: undefined
+});
+```
+
+or
+
+```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, {
+    stretchMode: 0,
+    baseFrame: undefined,
+    getFrameNameCallback: undefined
+});
+```
+
+or
+
+```javascript
+var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, {
+    columns: undefined,
+    rows: undefined,
+
     stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -147,6 +169,8 @@ var ninePatch = scene.add.rexNinePatch({
 - `x`, `y` : Position of this object.
 - `width`, `height` : Size of this object.
 - `key` : Texture key of source image.
+- `baseFrame` : Frame name of base texture.
+    - `undefined` : Use default base frame `'__BASE'`.
 - `columns` : Configuration of columns.
     - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Width of each column. `undefined` value will be replaced by remainder value from texture width.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
@@ -166,8 +190,6 @@ var ninePatch = scene.add.rexNinePatch({
             internal: 0, // 'scale', or 1, 'repeat'
         }
         ```
-- `baseFrame` : Frame name of base texture.
-    - `undefined` : Use default base frame `'__BASE'`.
 - `getFrameNameCallback` : Callback to get frame name of each cell.
     - `undefined` : Use default callback.
         - If `baseFrame` is `'__BASE'` : return `${colIndex},${rowIndex}`
@@ -184,8 +206,8 @@ var ninePatch = scene.add.rexNinePatch({
 - Define class
     ```javascript
     class MyNinePatch extends NinePatch {
-        constructor(scene, x, y, width, height, key, columns, rows, config) {
-            super(scene, x, y, width, height, key, columns, rows, config);
+        constructor(scene, x, y, width, height, key, baseFrame, columns, rows, config) {
+            super(scene, x, y, width, height, key, baseFrame, columns, rows, config);
             // ...
             scene.add.existing(this);
         }
@@ -199,7 +221,7 @@ var ninePatch = scene.add.rexNinePatch({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var ninePatch = new MyNinePatch(scene, x, y, width, height, key, columns, rows, config);
+    var ninePatch = new MyNinePatch(scene, x, y, width, height, key, baseFrame, columns, rows, config);
     ```
 
 ### Resize
