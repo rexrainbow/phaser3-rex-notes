@@ -233,10 +233,13 @@ ninePatch.resize(width, height);
 ### Set texture of source image
 
 ```javascript
-ninePatch.setTexture(key, columns, rows, baseFrame);
+ninePatch.setTexture(key, baseFrame, columns, rows);
+// ninePatch.setTexture(key, columns, rows);
 ```
 
 - `key` : Texture key of source image.
+- `baseFrame` : Frame name of base texture.
+    - `undefined` : Use default base frame `'__BASE'`. Default value.
 - `columns` : Configuration of columns.
     - A number array, like `[20, 20, 20]` : Width of each column.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
@@ -245,8 +248,6 @@ ninePatch.setTexture(key, columns, rows, baseFrame);
     - A number array, like `[20, 20, 20]` : Height of each row.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
-- `baseFrame` : Frame name of base texture.
-    - `undefined` : Use default base frame `'__BASE'`.
 
 ### Set stretch mode
 

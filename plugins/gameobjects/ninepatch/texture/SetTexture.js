@@ -1,4 +1,12 @@
-var SetTexture = function (key, columns, rows, baseFrameName) {
+import IsArray from '../../../utils/object/IsArray.js';
+
+var SetTexture = function (key, baseFrameName, columns, rows) {
+    if (IsArray(baseFrameName)) {
+        rows = columns;
+        columns = baseFrameName;
+        baseFrameName = undefined;
+    }
+
     if (baseFrameName === undefined) {
         baseFrameName = '__BASE';
     }
