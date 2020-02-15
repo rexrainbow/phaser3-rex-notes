@@ -58,15 +58,17 @@ class PathFinder {
 
     setChess(gameObject) {
         if (gameObject) {
-            // Remove attatched event from previous gameObject
-            if (this.gameObject && this.gameObject.once) {
-                this.gameObject.off('destroy', this.setChess, this);
-            }
-            this.gameObject = gameObject;
-            this.chessData = GetChessData(gameObject);
-            // Attach event
-            if (this.gameObject && this.gameObject.once) {
-                this.gameObject.once('destroy', this.setChess, this);
+            if (this.gameObject !== gameObject) {
+                // Remove attatched event from previous gameObject
+                if (this.gameObject && this.gameObject.once) {
+                    this.gameObject.off('destroy', this.setChess, this);
+                }
+                this.gameObject = gameObject;
+                this.chessData = GetChessData(gameObject);
+                // Attach event
+                if (this.gameObject && this.gameObject.once) {
+                    this.gameObject.once('destroy', this.setChess, this);
+                }
             }
         } else {
             this.gameObject = undefined;
