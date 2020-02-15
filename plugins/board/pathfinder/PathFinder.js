@@ -1,6 +1,7 @@
 import GetChessData from '../chess/GetChessData.js';
 import Methods from './Methods.js';
 import CONST from './const.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 const BLOCKER = CONST.BLOCKER;
@@ -8,10 +9,15 @@ const INFINITY = CONST.INFINITY;
 
 class PathFinder {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.chessData = GetChessData(gameObject);
+        if (IsPlainObject(gameObject)) {
+            config = gameObject;
+            gameObject = undefined;
+        }
+
+        this.setChess(gameObject);
         this.nodeManager = undefined;
         this.resetFromJSON(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
@@ -32,7 +38,7 @@ class PathFinder {
     }
 
     boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
+        if (this.gameObject && this.gameObject.once) { // oops, bob object does not have event emitter
             this.gameObject.once('destroy', this.destroy, this);
         }
     }
@@ -41,13 +47,31 @@ class PathFinder {
         if (this.nodeManager !== undefined) {
             this.nodeManager.destroy();
         }
-        this.gameObject = undefined;
-        this.chessData = undefined;
+        this.setChess();
         return this;
     }
 
     destroy() {
         this.shutdown();
+        return this;
+    }
+
+    setChess(gameObject) {
+        if (gameObject) {
+            // Remove attatched event from previous gameObject
+            if (this.gameObject && this.gameObject.once) {
+                this.gameObject.off('destroy', this.setChess, this);
+            }
+            this.gameObject = gameObject;
+            this.chessData = GetChessData(gameObject);
+            // Attach event
+            if (this.gameObject && this.gameObject.once) {
+                this.gameObject.once('destroy', this.setChess, this);
+            }
+        } else {
+            this.gameObject = undefined;
+            this.chessData = undefined;
+        }
         return this;
     }
 

@@ -3,7 +3,7 @@
 Find moveable area or moving path, chess behavior of Board system.
 
 - Author: Rex
-- Behavior of chess
+- Application of Board system, or behavior of chess
 
 ## Live demos
 
@@ -26,9 +26,9 @@ Find moveable area or moving path, chess behavior of Board system.
     ```javascript
     scene.load.scenePlugin('rexboardplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js', 'rexBoard', 'rexBoard');
     ```
-- Add path-finder behavior
+- Add path-finder
     ```javascript
-    var pathFinder = scene.rexBoard.add.pathFinder(chess, config);
+    var pathFinder = scene.rexBoard.add.pathFinder(config);
     ```
 
 #### Import plugin
@@ -55,9 +55,9 @@ Find moveable area or moving path, chess behavior of Board system.
     };
     var game = new Phaser.Game(config);
     ```
-- Add path-finder behavior
+- Add path-finder
     ```javascript
-    var pathFinder = scene.rexBoard.add.pathFinder(chess, config);
+    var pathFinder = scene.rexBoard.add.pathFinder(config);
     ```
 
 #### Import class
@@ -70,15 +70,15 @@ Find moveable area or moving path, chess behavior of Board system.
     ```javascript
     import { PathFinder } from 'phaser3-rex-plugins/plugins/board-components.js';
     ```
-- Add path-finder behavior
+- Add path-finder
     ```javascript
-    var pathFinder = new PathFinder(chess, config);
+    var pathFinder = new PathFinder(config);
     ```
 
 ### Create instance
 
 ```javascript
-var pathFinder = scene.rexBoard.add.pathFinder(chess, {
+var pathFinder = scene.rexBoard.add.pathFinder({
     // occupiedTest: false,
     // blockerTest: false,
 
@@ -120,6 +120,21 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
 - `weight` : Weight parameter for A* searching mode.
 - `cacheCost` : Set `false` to get cost every time. It is useful when cost is a function of (current tile, previous tile).
 - `shuffleNeighbors` : Shuffle neighbors.
+
+#### Create behavior
+
+```javascript
+var pathFinder = scene.rexBoard.add.pathFinder(chess, config);
+```
+
+### Set chess
+
+```javascript
+pathFinder.setChess(chess);
+```
+
+!!! note
+    Don't use this method if pathFinder is a behavior of Chess
 
 ### Cost function
 

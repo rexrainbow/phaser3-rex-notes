@@ -45,8 +45,7 @@ class Demo extends Phaser.Scene {
             .on('tilemove', function (pointer, tileXY) {
                 if (state === 'PICK_CHESS') {
                     pathTileXYArray.length = 1;
-                    chess.getPath(tileXY, pathTileXYArray);
-                    board.drawPath(pathTileXYArray);
+                    board.drawPath(board.getPath(chess, tileXY, pathTileXYArray));
                 }
             })
 
@@ -123,6 +122,11 @@ class Board extends RexPlugins.Board.Board {
         })
         this.pathTexture = scene.add.renderTexture(0, 0, 800, 600)
             .setDepth(2);
+
+        this.pathFinder = scene.rexBoard.add.pathFinder({
+            occupiedTest: true,
+            pathMode: 'A*',
+        });
     }
 
     clearPath() {
@@ -139,6 +143,12 @@ class Board extends RexPlugins.Board.Board {
         this.pathGraphics.clear();
         return this;
     }
+
+    getPath(chess, endTileXY, out) {
+        return this.pathFinder
+            .setChess(chess)
+            .findPath(endTileXY, undefined, false, out);
+    }
 }
 
 class ChessA extends RexPlugins.Board.Shape {
@@ -153,14 +163,6 @@ class ChessA extends RexPlugins.Board.Shape {
 
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
-        this.pathFinder = scene.rexBoard.add.pathFinder(this, {
-            occupiedTest: true,
-            pathMode: 'A*',
-        });
-    }
-
-    getPath(endTileXY, out) {
-        return this.pathFinder.findPath(endTileXY, undefined, false, out);
     }
 
     moveAlongPath(path) {
