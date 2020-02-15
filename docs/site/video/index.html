@@ -4994,9 +4994,9 @@
 </li>
 </ol>
 <div class="admonition note">
-<p class="admonition-title">Control multiple video game object independently</p>
+<p class="admonition-title">Control multiple video game objects independently</p>
 <p>Each <code>scene.load.video(key, ...)</code> will create a video element in cache. Video game object with the same <em>key</em> will reference the same video element and will be controlled at the same time.<br />
-To control multiple video game object independently :<br />
+To control multiple video game objects independently :<br />
 - Load video with different key for each video game object, or<br />
 - <code>video.loadURL(url)</code></p>
 </div>
@@ -5009,6 +5009,10 @@ To control multiple video game object independently :<br />
 <li><code>loop</code> : Should the video loop automatically when it reaches the end? <strong>Not all browsers support <em>seamless</em> video looping for all encoding formats</strong>.</li>
 <li><code>markerIn</code>, <code>markerOut</code> : Optional in/out marker time, in <em>seconds</em>, for playback of a sequence of the video.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Play video first time</p>
+<p>Call <code>video.play()</code> when playing video first time.</p>
+</div>
 <h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Pause
@@ -5019,6 +5023,10 @@ To control multiple video game object independently :<br />
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Play video after paused</p>
+<p>Call <code>video.setPaused(false)</code> to resume playing.</p>
+</div>
 <h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
 <p>Stops the video playing and clears all internal event listeners.</p>
 <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>

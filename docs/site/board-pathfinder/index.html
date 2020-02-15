@@ -4315,6 +4315,26 @@
     Create instance
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-behavior" class="md-nav__link">
+    Create behavior
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-chess" class="md-nav__link">
+    Set chess
+  </a>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4802,6 +4822,26 @@
     Create instance
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-behavior" class="md-nav__link">
+    Create behavior
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-chess" class="md-nav__link">
+    Set chess
+  </a>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4895,7 +4935,7 @@
 <p>Find moveable area or moving path, chess behavior of Board system.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Behavior of chess</li>
+<li>Application of Board system, or behavior of chess</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
@@ -4914,8 +4954,8 @@
 <li>Load plugin (minify file) in preload stage
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
 </pre></div></li>
-<li>Add path-finder behavior
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add path-finder
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -4940,8 +4980,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
-<li>Add path-finder behavior
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add path-finder
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -4952,12 +4992,12 @@
 <li>Import class
     <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">PathFinder</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </pre></div></li>
-<li>Add path-finder behavior
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add path-finder
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PathFinder</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">({</span>
     <span class="c1">// occupiedTest: false,</span>
     <span class="c1">// blockerTest: false,</span>
 
@@ -5010,6 +5050,18 @@
 <li><code>cacheCost</code> : Set <code>false</code> to get cost every time. It is useful when cost is a function of (current tile, previous tile).</li>
 <li><code>shuffleNeighbors</code> : Shuffle neighbors.</li>
 </ul>
+<h4 id="create-behavior">Create behavior<a class="headerlink" href="#create-behavior" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-chess">Set chess<a class="headerlink" href="#set-chess" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">pathFinder</span><span class="p">.</span><span class="nx">setChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Don't use this method if pathFinder is a behavior of Chess</p>
+</div>
 <h3 id="cost-function">Cost function<a class="headerlink" href="#cost-function" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTileXY</span><span class="p">,</span> <span class="nx">preTileXY</span><span class="p">,</span> <span class="nx">pathFinder</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>

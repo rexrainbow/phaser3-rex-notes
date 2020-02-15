@@ -4864,7 +4864,7 @@
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexninepatchplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexninepatchplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </pre></div></li>
 <li>Add nine-patch object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -4897,7 +4897,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 <li>Add nine-patch object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -4916,12 +4916,30 @@
     <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">NinePatch</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/ninepatch.js&#39;</span><span class="p">;</span>
 </pre></div></li>
 <li>Add nine-patch object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NinePatch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NinePatch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">ninePatch</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
@@ -4971,6 +4989,10 @@
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>key</code> : Texture key of source image.</li>
+<li><code>baseFrame</code> : Frame name of base texture.<ul>
+<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
+</ul>
+</li>
 <li><code>columns</code> : Configuration of columns.<ul>
 <li>A number array, like <code>[20, 20, 20]</code>, or <code>[20, undefined, 20]</code> : Width of each column. <code>undefined</code> value will be replaced by remainder value from texture width.<ul>
 <li>Width of odd columns (column <code>0</code>, column <code>2</code>, ...) will be origin width.</li>
@@ -5001,10 +5023,6 @@
 </pre></div></li>
 </ul>
 </li>
-<li><code>baseFrame</code> : Frame name of base texture.<ul>
-<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
-</ul>
-</li>
 <li><code>getFrameNameCallback</code> : Callback to get frame name of each cell.<ul>
 <li><code>undefined</code> : Use default callback.<ul>
 <li>If <code>baseFrame</code> is <code>'__BASE'</code> : return <code>${colIndex},${rowIndex}</code></li>
@@ -5023,8 +5041,8 @@
 <ul>
 <li>Define class
     <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyNinePatch</span> <span class="kr">extends</span> <span class="nx">NinePatch</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -5041,7 +5059,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNinePatch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNinePatch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
@@ -5049,11 +5067,16 @@
 </pre></div>
 
 <h3 id="set-texture-of-source-image">Set texture of source image<a class="headerlink" href="#set-texture-of-source-image" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">);</span>
+<span class="c1">// ninePatch.setTexture(key, columns, rows);</span>
 </pre></div>
 
 <ul>
 <li><code>key</code> : Texture key of source image.</li>
+<li><code>baseFrame</code> : Frame name of base texture.<ul>
+<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>. Default value.</li>
+</ul>
+</li>
 <li><code>columns</code> : Configuration of columns.<ul>
 <li>A number array, like <code>[20, 20, 20]</code> : Width of each column.<ul>
 <li>Width of odd columns (column <code>0</code>, column <code>2</code>, ...) will be origin width.</li>
@@ -5068,10 +5091,6 @@
 <li>Height of odd rows (row <code>1</code>, row <code>3</code>, ...) will be stretched.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><code>baseFrame</code> : Frame name of base texture.<ul>
-<li><code>undefined</code> : Use default base frame <code>'__BASE'</code>.</li>
 </ul>
 </li>
 </ul>

@@ -2916,6 +2916,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#remove-waiting-event" class="md-nav__link">
+    Remove waiting event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4797,6 +4804,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#remove-waiting-event" class="md-nav__link">
+    Remove waiting event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4909,6 +4923,18 @@
 <h4 id="callback-from-event-emitter">Callback from event emitter<a class="headerlink" href="#callback-from-event-emitter" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="remove-waiting-event">Remove waiting event<a class="headerlink" href="#remove-waiting-event" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">callback</span><span class="p">();</span>
+</pre></div>
+
+<p>or </p>
+<div class="codehilite"><pre><span></span><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>callback</code> : A function object created via <code>waitEvents.waitCallback()</code></li>
+</ul>
                 
                   
                 
