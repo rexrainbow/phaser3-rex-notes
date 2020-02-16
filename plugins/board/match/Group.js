@@ -7,8 +7,10 @@ var Group = function (startTileX, startTileY, out) {
         out = [];
     }
 
+    var board = this.board;
+    var wildcard = this.wildcard;
     var targetSymbol = this.getSymbol(startTileX, startTileY);
-    if (targetSymbol == null) {
+    if ((targetSymbol == null) || (targetSymbol === wildcard)) {
         return out;
     }
 
@@ -16,9 +18,7 @@ var Group = function (startTileX, startTileY, out) {
         globalQueue = new Queue();
     }
 
-    var symbol, wildcard = this.wildcard;
-    var board = this.board;
-    var curTileXY;
+    var curTileXY, symbol;
     globalQueue.push(startTileX, startTileY);
     while (globalQueue.length) {
         curTileXY = globalQueue.pop();

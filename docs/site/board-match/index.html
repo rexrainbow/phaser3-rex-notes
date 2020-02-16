@@ -4390,8 +4390,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dump-symbols" class="md-nav__link">
-    Dump symbols
+  <a href="#for-each-symbol-cahce" class="md-nav__link">
+    For each symbol cahce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildcard-symbol" class="md-nav__link">
+    Wildcard symbol
   </a>
   
 </li>
@@ -4895,8 +4902,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dump-symbols" class="md-nav__link">
-    Dump symbols
+  <a href="#for-each-symbol-cahce" class="md-nav__link">
+    For each symbol cahce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildcard-symbol" class="md-nav__link">
+    Wildcard symbol
   </a>
   
 </li>
@@ -5137,8 +5151,8 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">symbol</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">getSymbol</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="dump-symbols">Dump symbols<a class="headerlink" href="#dump-symbols" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">dumpSymobls</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">symbol</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+<h4 id="for-each-symbol-cahce">For each symbol cahce<a class="headerlink" href="#for-each-symbol-cahce" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">symbol</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
 </pre></div>
 
@@ -5149,6 +5163,18 @@
 </ul>
 </li>
 <li><code>board</code> : <a href="../board/">Board</a> object</li>
+</ul>
+<h4 id="wildcard-symbol">Wildcard symbol<a class="headerlink" href="#wildcard-symbol" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">setWildcard</span><span class="p">(</span><span class="nx">symbol</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">wildcard</span> <span class="o">=</span> <span class="nx">symbol</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">wildcard</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">wildcard</span><span class="p">;</span>
+</pre></div></li>
 </ul>
 <h3 id="directions-mask">Directions mask<a class="headerlink" href="#directions-mask" title="Permanent link">&para;</a></h3>
 <p>Enable/Disable matching at directions, all directions are enbale by default.</p>
@@ -5217,7 +5243,7 @@
     <div class="codehilite"><pre><span></span><span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">startTileX</span><span class="p">,</span> <span class="nx">startTileY</span><span class="p">);</span>
 <span class="c1">// out = match.group(startTileX, startTileY, out);</span>
 </pre></div><ul>
-<li><code>startTileX</code>, <code>startTileY</code> : Tile position of grouping, to group neighbors with the same symbol.</li>
+<li><code>startTileX</code>, <code>startTileY</code> : Tile position of grouping, to group neighbors with the same symbol. Can't start from <code>null</code>, <code>undefined</code> or wildcard symbol.</li>
 </ul>
 </li>
 </ul>

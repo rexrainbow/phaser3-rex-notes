@@ -1,4 +1,3 @@
-import RhombusPlugin from '../../plugins/rhombus-plugin.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -8,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var config = {
@@ -23,7 +22,7 @@ class Demo extends Phaser.Scene {
         this.add.text(0, 0, `Match count= ${board.lastMatchedCount}`);
     }
 
-    update() {}
+    update() { }
 }
 
 var getQuadGrid = function (scene) {
@@ -122,11 +121,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexRhombus',
-            plugin: RhombusPlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexBoard',
             plugin: BoardPlugin,

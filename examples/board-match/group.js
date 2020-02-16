@@ -1,4 +1,3 @@
-import RhombusPlugin from '../../plugins/rhombus-plugin.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -123,11 +122,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexRhombus',
-            plugin: RhombusPlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexBoard',
             plugin: BoardPlugin,

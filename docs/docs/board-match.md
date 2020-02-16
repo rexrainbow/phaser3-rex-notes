@@ -160,10 +160,10 @@ match.setSymbol(tileX, tileY, symbol);
 var symbol = match.getSymbol(tileX, tileY);
 ```
 
-#### Dump symbols
+#### For each symbol cahce
 
 ```javascript
-match.dumpSymobls(function(tileXY, symbol, board) {
+match.forEach(function(tileXY, symbol, board) {
 }, scope)
 ```
 
@@ -171,6 +171,21 @@ match.dumpSymobls(function(tileXY, symbol, board) {
 - `symbol` : A string or a number
     - `null` : No symbol
 - `board` : [Board](board.md) object
+
+#### Wildcard symbol
+
+- Set
+    ```javascript
+    match.setWildcard(symbol);
+    ```
+    or
+    ```javascript
+    match.wildcard = symbol;
+    ```
+- Get
+    ```javascript
+    var wildcard = match.wildcard;
+    ```
 
 ### Directions mask
 
@@ -244,4 +259,4 @@ var hasAnyMatchN = match.anyMatch(pattern);
     tileXYArray = match.group(startTileX, startTileY);
     // out = match.group(startTileX, startTileY, out);
     ```
-    - `startTileX`, `startTileY` : Tile position of grouping, to group neighbors with the same symbol.
+    - `startTileX`, `startTileY` : Tile position of grouping, to group neighbors with the same symbol. Can't start from `null`, `undefined` or wildcard symbol.
