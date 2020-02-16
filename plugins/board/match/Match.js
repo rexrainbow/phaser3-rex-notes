@@ -22,7 +22,7 @@ class Match {
         return this;
     }
 
-    boot() {}
+    boot() { }
 
     shutdown() {
         this.board = undefined;
@@ -66,22 +66,10 @@ class Match {
         return this;
     }
 
-    setSymbol(tileX, tileY, callback, scope) {
+    setSymbol(tileX, tileY, symbol) {
         var board = this.board;
         if (!board.contains(tileX, tileY)) {
             return this;
-        }
-        var symbol;
-        if (IsFunction(callback)) {
-            globTileXY.x = tileX;
-            globTileXY.y = tileY;
-            if (scope) {
-                symbol = callback.call(scope, globTileXY, board);
-            } else {
-                symbol = callback(globTileXY, board);
-            }
-        } else {
-            symbol = callback;
         }
 
         this.symbols[this.tileXYToKey(tileX, tileY)] = symbol;
@@ -116,13 +104,12 @@ class Match {
         var symbol;
         if (IsFunction(callback)) {
             // Get symbol by callback
-            var tileXY;
             for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
-                tileXY = this.keyToTileXY(i);
+                this.keyToTileXY(i, globTileXY);
                 if (scope) {
-                    symbol = callback.call(scope, tileXY, board);
+                    symbol = callback.call(scope, globTileXY, board);
                 } else {
-                    symbol = callback(tileXY, board);
+                    symbol = callback(globTileXY, board);
                 }
                 this.symbols[i] = symbol;
             }

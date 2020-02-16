@@ -8,9 +8,10 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
+        var print = this.add.text(0, 0, '');
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -19,11 +20,17 @@ class Demo extends Phaser.Scene {
             // wrap: true
         }
         var board = new Board(this, config);
-        board.fillChess().match3();
-        this.add.text(0, 0, `Match count= ${board.lastMatchedCount}`);
+        board
+            .fillChess()
+            .refreshSymbols()
+            .setInteractive()
+            .on('tiledown', function (pointer, tileXY) {
+                var out = board.group(tileXY.x, tileXY.y);
+                print.text = `Group size= ${out.length}`;
+            })
     }
 
-    update() {}
+    update() { }
 }
 
 var getQuadGrid = function (scene) {
@@ -72,7 +79,6 @@ class Board extends RexPlugins.Board.Board {
         this.match = scene.rexBoard.add.match({
             board: this
         });
-        this.lastMatchedCount = 0;
     }
 
     fillChess() {
@@ -96,18 +102,13 @@ class Board extends RexPlugins.Board.Board {
         return this;
     }
 
-    match3() {
-        var matchedCount = 0;
-        this.refreshSymbols();
-        this.match.match(3, function (result, board) {
-            var chess = board.tileXYArrayToChessArray(result.tileXY, 0);
-            for (var i = 0, cnt = chess.length; i < cnt; i++) {
-                chess[i].setScale(0.7);
-            }
-            matchedCount++;
-        });
-        this.lastMatchedCount = matchedCount;
-        return this;
+    group(tileX, tileY) {
+        var out = this.match.group(tileX, tileY);
+        var chess = this.tileXYArrayToChessArray(out, 0);
+        for (var i = 0, cnt = chess.length; i < cnt; i++) {
+            chess[i].setScale(0.7);
+        }
+        return chess;
     }
 }
 

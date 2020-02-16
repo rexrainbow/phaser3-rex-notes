@@ -1,6 +1,6 @@
 ## Introduction
 
-Get matched chess.
+Get matched chess in lines, or neighbors grouping.
 
 - Author: Rex
 - Application of Board system
@@ -154,16 +154,6 @@ match.refreshSymbols(function(tileXY, board) {
 match.setSymbol(tileX, tileY, symbol);
 ```
 
-or
-
-```javascript
-match.setSymbol(tileX, tileY, (function(tileXY, board) {
-    // var chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
-    // if (chess == null) { return null; }
-    return symbol;
-}, scope);
-```
-
 #### Get symbol
 
 ```javascript
@@ -196,7 +186,7 @@ match.setDirMask(dir, value);
     - [Hexagon grid](board-hexagongrid.md) : `0`, `1`, `2`
 - `value` : `true` or `false`
 
-### Match
+### Line grouping
 
 #### Match-N
 
@@ -246,3 +236,12 @@ match.match(pattern, function (result, board) {
 ```javascript
 var hasAnyMatchN = match.anyMatch(pattern);
 ```
+
+### Neighbors grouping
+
+- Group by neighbors with the same symbol
+    ```javascript
+    tileXYArray = match.group(startTileX, startTileY);
+    // out = match.group(startTileX, startTileY, out);
+    ```
+    - `startTileX`, `startTileY` : Tile position of grouping, to group neighbors with the same symbol.

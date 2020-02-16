@@ -4409,8 +4409,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#match" class="md-nav__link">
-    Match
+  <a href="#line-grouping" class="md-nav__link">
+    Line grouping
   </a>
   
     <nav class="md-nav">
@@ -4458,6 +4458,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neighbors-grouping" class="md-nav__link">
+    Neighbors grouping
+  </a>
   
 </li>
         
@@ -4907,8 +4914,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#match" class="md-nav__link">
-    Match
+  <a href="#line-grouping" class="md-nav__link">
+    Line grouping
   </a>
   
     <nav class="md-nav">
@@ -4959,6 +4966,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#neighbors-grouping" class="md-nav__link">
+    Neighbors grouping
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4986,7 +5000,7 @@
                   <h1>Match</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get matched chess.</p>
+<p>Get matched chess in lines, or neighbors grouping.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Application of Board system</li>
@@ -5119,14 +5133,6 @@
 <div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">symbol</span><span class="p">);</span>
 </pre></div>
 
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">setSymbol</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// var chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);</span>
-    <span class="c1">// if (chess == null) { return null; }</span>
-    <span class="k">return</span> <span class="nx">symbol</span><span class="p">;</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div>
-
 <h4 id="get-symbol">Get symbol<a class="headerlink" href="#get-symbol" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">symbol</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">getSymbol</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 </pre></div>
@@ -5158,7 +5164,7 @@
 </li>
 <li><code>value</code> : <code>true</code> or <code>false</code></li>
 </ul>
-<h3 id="match">Match<a class="headerlink" href="#match" title="Permanent link">&para;</a></h3>
+<h3 id="line-grouping">Line grouping<a class="headerlink" href="#line-grouping" title="Permanent link">&para;</a></h3>
 <h4 id="match-n">Match-N<a class="headerlink" href="#match-n" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var chess = board.tileXYArrayToChess(result.tileXY, 0);</span>
@@ -5204,6 +5210,17 @@
 <h5 id="any-match-pattern">Any match pattern<a class="headerlink" href="#any-match-pattern" title="Permanent link">&para;</a></h5>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasAnyMatchN</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">anyMatch</span><span class="p">(</span><span class="nx">pattern</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="neighbors-grouping">Neighbors grouping<a class="headerlink" href="#neighbors-grouping" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Group by neighbors with the same symbol
+    <div class="codehilite"><pre><span></span><span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">startTileX</span><span class="p">,</span> <span class="nx">startTileY</span><span class="p">);</span>
+<span class="c1">// out = match.group(startTileX, startTileY, out);</span>
+</pre></div><ul>
+<li><code>startTileX</code>, <code>startTileY</code> : Tile position of grouping, to group neighbors with the same symbol.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
