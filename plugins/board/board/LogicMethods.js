@@ -4,6 +4,10 @@ import GetChessUID from '../chess/GetChessUID.js';
 import SetBoardWidth from './boarddata/SetBoardWidth.js';
 import SetBoardHeight from './boarddata/SetBoardHeight.js';
 
+import TileXYZToKey from '../utils/tilexyzkey/TileXYZToKey.js';
+import TileXYToKey from '../utils/tilexyzkey/TileXYToKey.js';
+import KeyToTileXYZ from '../utils/tilexyzkey/KeyToTileXYZ.js';
+
 import TileXYToWorldX from './worldposition/TileXYToWorldX.js';
 import TileXYToWorldY from './worldposition/TileXYToWorldY.js';
 import TileXYToWorldXY from './worldposition/TileXYToWorldXY.js';
@@ -79,6 +83,10 @@ export default {
 
     setBoardWidth: SetBoardWidth,
     setBoardHeight: SetBoardHeight,
+
+    tileXYZToKey: TileXYZToKey,
+    tileXYToKey: TileXYToKey,
+    keyToTileXYZ: KeyToTileXYZ,
 
     tileXYToWorldX: TileXYToWorldX,
     tileXYToWorldY: TileXYToWorldY,
