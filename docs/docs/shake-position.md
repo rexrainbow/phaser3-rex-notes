@@ -8,6 +8,7 @@ Shake position of game object.
 ## Live demos
 
 - [Shake position](https://codepen.io/rexrainbow/pen/JwMbxR)
+- [Shake position on mutliple game objects](https://codepen.io/rexrainbow/pen/WNvGNBW)
 
 ## Usage
 
