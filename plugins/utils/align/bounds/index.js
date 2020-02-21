@@ -1,29 +1,33 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+import CenterOn from './CenterOn.js';
+import GetBottom from './GetBottom.js';
+import GetCenterX from './GetCenterX.js';
+import GetCenterY from './GetCenterY.js';
+import GetLeft from './GetLeft.js';
+import GetOffsetX from './GetOffsetX.js';
+import GetOffsetY from './GetOffsetY.js';
+import GetRight from './GetRight.js';
+import GetTop from './GetTop.js';
+import SetBottom from './SetBottom.js';
+import SetCenterX from './SetCenterX.js';
+import SetCenterY from './SetCenterY.js';
+import SetLeft from './SetLeft.js';
+import SetRight from './SetRight.js';
+import SetTop from './SetTop.js';
 
-/**
- * @namespace Phaser.Display.Bounds
- */
-
-module.exports = {
-
-    CenterOn: require('./CenterOn'),
-    GetBottom: require('./GetBottom'),
-    GetCenterX: require('./GetCenterX'),
-    GetCenterY: require('./GetCenterY'),
-    GetLeft: require('./GetLeft'),
-    GetOffsetX: require('./GetOffsetX'),
-    GetOffsetY: require('./GetOffsetY'),
-    GetRight: require('./GetRight'),
-    GetTop: require('./GetTop'),
-    SetBottom: require('./SetBottom'),
-    SetCenterX: require('./SetCenterX'),
-    SetCenterY: require('./SetCenterY'),
-    SetLeft: require('./SetLeft'),
-    SetRight: require('./SetRight'),
-    SetTop: require('./SetTop')
-    
-};
+export default {
+    CenterOn: CenterOn,
+    GetBottom: GetBottom,
+    GetCenterX: GetCenterX,
+    GetCenterY: GetCenterY,
+    GetLeft: GetLeft,
+    GetOffsetX: GetOffsetX,
+    GetOffsetY: GetOffsetY,
+    GetRight: GetRight,
+    GetTop: GetTop,
+    SetBottom: SetBottom,
+    SetCenterX: SetCenterX,
+    SetCenterY: SetCenterY,
+    SetLeft: SetLeft,
+    SetRight: SetRight,
+    SetTop: SetTop
+}

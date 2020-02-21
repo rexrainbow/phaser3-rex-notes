@@ -1,9 +1,3 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
 var ALIGN_CONST = {
 
     /**
@@ -125,4 +119,4 @@ var ALIGN_CONST = {
 
 };
 
-module.exports = ALIGN_CONST;
+export default ALIGN_CONST;

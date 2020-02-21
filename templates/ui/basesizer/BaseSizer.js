@@ -1,5 +1,6 @@
 import Container from '../container/Container.js';
 import Methods from './Methods.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -68,7 +69,7 @@ class Base extends Container {
     }
 
     get left() {
-        return this.x - (this.displayWidth * this.originX);
+        return this.x - (GetDisplayWidth(this) * this.originX);
     }
 
     set left(value) {
@@ -81,7 +82,7 @@ class Base extends Container {
     }
 
     get right() {
-        return this.left + this.displayWidth;
+        return this.left + GetDisplayWidth(this);
     }
 
     set right(value) {
@@ -94,7 +95,7 @@ class Base extends Container {
     }
 
     get centerX() {
-        return this.left + (this.displayWidth / 2);
+        return this.left + (GetDisplayWidth(this) / 2);
     }
 
     set centerX(value) {
@@ -107,7 +108,7 @@ class Base extends Container {
     }
 
     get top() {
-        return this.y - (this.displayHeight * this.originY);
+        return this.y - (GetDisplayHeight(this) * this.originY);
     }
 
     set top(value) {
@@ -120,7 +121,7 @@ class Base extends Container {
     }
 
     get bottom() {
-        return this.top + this.displayHeight;
+        return this.top + GetDisplayHeight(this);
     }
 
     set bottom(value) {
@@ -133,7 +134,7 @@ class Base extends Container {
     }
 
     get centerY() {
-        return this.top + (this.displayHeight / 2);
+        return this.top + (GetDisplayHeight(this) / 2);
     }
 
     set centerY(value) {

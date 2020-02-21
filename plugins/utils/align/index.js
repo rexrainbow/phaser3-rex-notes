@@ -1,16 +1,7 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+import Align from './align/index.js';
+import Bounds from './bounds/index.js';
 
-/**
- * @namespace Phaser.Display
- */
-
-module.exports = {
-
-    Align: require('./align'),
-    Bounds: require('./bounds'),
-
+export default {
+    Align: Align,
+    Bounds: Bounds
 };

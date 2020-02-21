@@ -3,6 +3,7 @@ import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
@@ -68,10 +69,10 @@ var Layout = function (parent, newWidth, newHeight) {
         }
 
         if (childWidth === undefined) {
-            childWidth = child.displayWidth;
+            childWidth = GetDisplayWidth(child);
         }
         if (childHeight === undefined) {
-            childHeight = child.displayHeight;
+            childHeight = GetDisplayHeight(child);
         }
 
         // Set position

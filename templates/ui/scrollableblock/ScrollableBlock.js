@@ -1,6 +1,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import SCROLLMODE from '../utils/ScrollModeConst.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -74,11 +75,11 @@ class ScrollableBlock extends BaseSizer {
     }
 
     get childHeight() {
-        return (this.scrollMode === 0) ? this.child.displayHeight : this.child.displayWidth;
+        return (this.scrollMode === 0) ? GetDisplayHeight(this.child) : GetDisplayWidth(this.child);
     }
 
     get childWidth() {
-        return (this.scrollMode === 0) ? this.child.displayWidth : this.child.displayHeight;
+        return (this.scrollMode === 0) ? GetDisplayWidth(this.child) : GetDisplayHeight(this.child);
     }
 
     get topChildOY() {

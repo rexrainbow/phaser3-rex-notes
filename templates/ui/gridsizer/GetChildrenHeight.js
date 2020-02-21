@@ -1,3 +1,5 @@
+import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+
 var GetChildrenHeight = function () {
     if (this.rexSizer.hidden) {
         return 0;
@@ -23,7 +25,7 @@ var GetChildrenHeight = function () {
 
                 childHeight = (child.isRexSizer) ?
                     Math.max(child.minHeight, child.childrenHeight) :
-                    child.displayHeight;
+                    GetDisplayHeight(child);
                 padding = child.rexSizer.padding;
                 childHeight += (padding.top + padding.bottom);
                 rowHeight = Math.max(rowHeight, childHeight);

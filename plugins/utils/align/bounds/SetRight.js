@@ -1,27 +1,10 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+import { GetDisplayWidth } from '../../size/GetDisplaySize.js';
 
-/**
- * Positions the Game Object so that the left of its bounds aligns with the given coordinate.
- *
- * @function Phaser.Display.Bounds.SetRight
- * @since 3.0.0
- *
- * @generic {Phaser.GameObjects.GameObject} G - [gameObject,$return]
- *
- * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object that will be re-positioned.
- * @param {number} value - The coordinate to position the Game Object bounds on.
- *
- * @return {Phaser.GameObjects.GameObject} The Game Object that was positioned.
- */
-var SetRight = function (gameObject, value)
-{
-    gameObject.x = (value - gameObject.displayWidth) + (gameObject.displayWidth * gameObject.originX);
+var SetRight = function (gameObject, value) {
+    var width = GetDisplayWidth(gameObject);
+    gameObject.x = (value - width) + (width * gameObject.originX);
 
     return gameObject;
 };
 
-module.exports = SetRight;
+export default SetRight;

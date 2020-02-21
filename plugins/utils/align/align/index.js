@@ -1,20 +1,10 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
-
-var CONST = require('./const');
-
-/**
- * @namespace Phaser.Display.Align
- */
+import AlignIn from './in/index.js';
+import AlignTo from './to/index.js';
+import CONST from './const.js';
 
 var Align = {
-
-    In: require('./in'),
-    To: require('./to')
-
+    In: AlignIn,
+    To: AlignTo
 };
 
 //   Merge in the consts
@@ -24,4 +14,4 @@ Object.assign(
 );
 
 
-module.exports = Align;
+export default Align;

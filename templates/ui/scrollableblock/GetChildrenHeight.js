@@ -1,3 +1,5 @@
+import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+
 var GetChildrenHeight = function () {
     if (this.rexSizer.hidden) {
         return 0;
@@ -13,7 +15,7 @@ var GetChildrenHeight = function () {
     } else { // scroll x
         result = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
-            child.displayHeight;
+            GetDisplayHeight(child);
     }
 
     return result;

@@ -1,5 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const AlignLeft = Phaser.Display.Align.LEFT_CENTER;
 const AlignTop = Phaser.Display.Align.TOP_CENTER;
@@ -18,10 +19,12 @@ var UpdateIndicator = function (t) {
     var thumb = this.childrenMap.thumb;
     if (thumb) {
         if (this.orientation === 0) { // x, extend height
-            var thumbBottom = (thumb.y - (thumb.displayHeight * thumb.originY)) + thumb.displayHeight;
+            var thumbHeight = GetDisplayHeight(thumb);
+            var thumbBottom = (thumb.y - (thumbHeight * thumb.originY)) + thumbHeight;
             newHeight = thumbBottom - this.top;
         } else { // y, extend width
-            var thumbRight = (thumb.x - (thumb.displayWidth * thumb.originX)) + thumb.displayWidth;
+            var thumbWidth = GetDisplayWidth(thumb);
+            var thumbRight = (thumb.x - (thumbWidth * thumb.originX)) + thumbWidth;
             newWidth = thumbRight - this.left;
         }
     } else {

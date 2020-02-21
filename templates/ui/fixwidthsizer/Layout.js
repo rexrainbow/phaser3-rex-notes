@@ -1,6 +1,7 @@
 import RunChildrenWrap from './RunChildrenWrap.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     if (this.rexSizer.hidden) {
@@ -68,9 +69,9 @@ var Layout = function (parent, newWidth, newHeight) {
                 }
 
                 y = (itemY + padding.top);
-                width = child.displayWidth;
-                height = child.displayHeight;
-                itemX = x + child.displayWidth + padding.right;
+                width = GetDisplayWidth(child);
+                height = GetDisplayHeight(child);
+                itemX = x + width + padding.right;
             } else { // y
                 x = (itemX + padding.left);
 
@@ -81,9 +82,9 @@ var Layout = function (parent, newWidth, newHeight) {
                     y += this.itemSpacing;
                 }
 
-                width = child.displayWidth;
-                height = child.displayHeight;
-                itemY = y + child.displayHeight + padding.bottom;
+                width = GetDisplayWidth(child);
+                height = GetDisplayHeight(child);
+                itemY = y + height + padding.bottom;
             }
 
             GlobZone.setPosition(x, y).setSize(width, height);

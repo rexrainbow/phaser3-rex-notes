@@ -1,29 +1,11 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+import { GetDisplayHeight } from '../../size/GetDisplaySize.js';
 
-/**
- * Positions the Game Object so that the center top of its bounds aligns with the given coordinate.
- *
- * @function Phaser.Display.Bounds.SetCenterY
- * @since 3.0.0
- *
- * @generic {Phaser.GameObjects.GameObject} G - [gameObject,$return]
- *
- * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object that will be re-positioned.
- * @param {number} y - The coordinate to position the Game Object bounds on.
- *
- * @return {Phaser.GameObjects.GameObject} The Game Object that was positioned.
- */
-var SetCenterY = function (gameObject, y)
-{
-    var offsetY = gameObject.displayHeight * gameObject.originY;
-
-    gameObject.y = (y + offsetY) - (gameObject.displayHeight * 0.5);
+var SetCenterY = function (gameObject, y) {
+    var height = GetDisplayHeight(gameObject);
+    var offsetY = height * gameObject.originY;
+    gameObject.y = (y + offsetY) - (height * 0.5);
 
     return gameObject;
 };
 
-module.exports = SetCenterY;
+export default SetCenterY;

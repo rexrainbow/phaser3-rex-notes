@@ -1,22 +1,8 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+import { GetDisplayHeight } from '../../size/GetDisplaySize.js';
 
-/**
- * Returns the center y coordinate from the bounds of the Game Object.
- *
- * @function Phaser.Display.Bounds.GetCenterY
- * @since 3.0.0
- *
- * @param {Phaser.GameObjects.GameObject} gameObject - The Game Object to get the bounds value from.
- *
- * @return {number} The center y coordinate of the bounds of the Game Object.
- */
-var GetCenterY = function (gameObject)
-{
-    return gameObject.y - (gameObject.displayHeight * gameObject.originY) + (gameObject.displayHeight * 0.5);
+var GetCenterY = function (gameObject) {
+    var height = GetDisplayHeight(gameObject);
+    return gameObject.y - (height * gameObject.originY) + (height * 0.5);
 };
 
-module.exports = GetCenterY;
+export default GetCenterY;
