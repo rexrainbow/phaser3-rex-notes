@@ -10,6 +10,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 ## Live demos
 
 - [Nested sizer](https://codepen.io/rexrainbow/pen/NOzorp)
+- [Proportion](https://codepen.io/rexrainbow/pen/GRJNKPo)
 
 ## Usage
 
