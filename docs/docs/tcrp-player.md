@@ -92,7 +92,7 @@ player.load(commands, scope, {
 });
 ```
 
-- Commands : see also [Run commands](tcrp.md)
+- Commands : see also [Run commands](runcommands.md)
     ```javascript
     [
         [dt, command],
