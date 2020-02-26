@@ -49,8 +49,7 @@ var createLabel = function (scene, text) {
             bottom: 20,
             icon: 10
         }
-    })
-        .layout();
+    });
 }
 
 var config = {
