@@ -167,13 +167,14 @@ var GetFooterSizer = function (scene, orientation) {
 
 var CreateFooterButton = function (scene, text, orientation) {
     return scene.rexUI.add.label({
-        height: 40,
+        height: (orientation === 0) ? 40 : undefined,
+        width: (orientation === 0) ? undefined : 40,
         orientation: orientation,
         background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
         text: scene.add.text(0, 0, text),
         icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
         align: 'center',
-        space: {           
+        space: {
             icon: 10
         }
     });
