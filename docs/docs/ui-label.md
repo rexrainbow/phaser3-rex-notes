@@ -5,6 +5,10 @@ A container with an icon, text, and background.
 - Author: Rex
 - Game object
 
+## Live demos
+
+- [Align](https://codepen.io/rexrainbow/pen/WNvpoWw)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-label)
