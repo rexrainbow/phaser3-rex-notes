@@ -57,7 +57,7 @@ class Demo extends Phaser.Scene {
         // drag table content
         var topRight = table.getTopRight();
         var bottomRight = table.getBottomRight();
-        var thumb = this.add.image(0, 0, 'dot').setScale(4, 4);
+        var thumb = this.add.rectangle(0, 0, 20, 20, 0xffffff);
         thumb.slider = this.plugins.get('rexSlider').add(thumb, {
             endPoints: [{
                 x: topRight.x + 10,

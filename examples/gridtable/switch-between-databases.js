@@ -115,10 +115,11 @@ var newTable = function (scene, config) {
 }
 
 var addDragContentBehavior = function (table) {
-    table.touchState = table.scene.plugins.get('rexTouchState').add(table)
+    var touchState = table.scene.plugins.get('rexTouchState').add(table)
+    touchState
         .on('touchmove', function (pointer) {
             table.addTableOXY(this.dx, this.dy).updateTable();
-        });
+        }, touchState);
     return table;
 }
 

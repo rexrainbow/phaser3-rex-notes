@@ -66,7 +66,7 @@ class Table {
         return this;
     }
 
-    insertNewCell(cellIdx, count) {
+    insertNewCells(cellIdx, count) {
         var cells = this.cells;
         if (cellIdx === cells.length) {
             // append at end of array
@@ -88,7 +88,7 @@ class Table {
         return this;
     }
 
-    removeCell(cellIdx, count) {
+    removeCells(cellIdx, count) {
         var endIdx = cellIdx + count;
         for (var i = cellIdx; i < endIdx; i++) {
             this.freeCell(i);

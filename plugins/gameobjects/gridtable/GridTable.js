@@ -3,13 +3,12 @@ import Table from './Table.js';
 import DefaultMask from '../../utils/mask/DefaultMask.js';
 import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
-import MaskChildren from '../containerlite/MaskChildren.js';
+import Methods from './methods/Methods.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
 const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
@@ -79,11 +78,6 @@ class GridTable extends Container {
             return;
         }
 
-        if (!fromScene) {
-            // Recycle cell containers
-            this.setCellsCount(0);
-        }
-
         this.table.destroy(fromScene);
         this.table = undefined;
         if (this.cellContainersPool) {
@@ -106,88 +100,6 @@ class GridTable extends Container {
         return this;
     }
 
-    setCellsCount(count) {
-        var cellsCount = this.cellsCount;
-        if (cellsCount === count) {
-            return this;
-        }
-
-        if (cellsCount > count) {
-            this.removeCell(count, cellsCount - count);
-        } else { // cellsCount < count
-            this.insertNewCell(cellsCount, count - cellsCount);
-        }
-        return this;
-    }
-
-    setColumnCount(count) {
-        if (this.table.colCount === count) {
-            return this;
-        }
-        this.table.setColumnCount(count);
-        return this;
-    }
-
-    setGridSize(colCount, rowCount) {
-        this.setCellsCount(colCount * rowCount);
-        this.table.setColumnCount(colCount);
-        return this;
-    }
-
-    insertNewCell(cellIdx, count) {
-        if (typeof (cellIdx) === 'object') {
-            cellIdx = cellIdx.index;
-        }
-        if (count === undefined) {
-            count = 1;
-        }
-        if (count <= 0) {
-            return this;
-        }
-        cellIdx = Clamp(cellIdx, 0, this.cellsCount);
-        this.table.insertNewCell(cellIdx, count);
-        return this;
-    }
-
-    removeCell(cellIdx, count) {
-        if (typeof (cellIdx) === 'object') {
-            cellIdx = cellIdx.index;
-        }
-        if (count === undefined) {
-            count = 1;
-        }
-        if (cellIdx < 0) {
-            count += cellIdx;
-            cellIdx = 0;
-        }
-        if (count <= 0) {
-            return this;
-        }
-        // out-of-range
-        if (cellIdx > this.cellsCount) {
-            return this;
-        }
-
-        if (cellIdx <= this.lastVisibleCellIdx) {
-            var preList = this.preVisibleCells;
-            var curList = this.visibleCells;
-            var cell;
-            for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
-                cell = this.getCell(i, false);
-                if (cell) {
-                    if (curList.contains(cell)) {
-                        this.hideCell(cell);
-                        curList.delete(cell);
-                    }
-                    preList.delete(cell);
-                }
-            }
-        }
-
-        this.table.removeCell(cellIdx, count);
-        return this;
-    }
-
     get tableOY() {
         return this._tableOY;
     }
@@ -204,90 +116,6 @@ class GridTable extends Container {
         this.setTableOX(ox).updateTable();
     }
 
-    setTableOY(oy) {
-        var table = this.table;
-        var topTableOY = this.topTableOY;
-        var bottomTableOY = this.bottomTableOY;
-        var tableOYExceedTop = this.tableOYExceedTop(oy);
-        var tableOYExeceedBottom = this.tableOYExeceedBottom(oy);
-        if (this.clampTableOXYMode) {
-            var rowCount = table.rowCount;
-            var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
-
-            // less then 1 page            
-            if (rowCount < visibleRowCount) {
-                oy = 0;
-            } else if (tableOYExceedTop) {
-                oy = topTableOY
-            } else if (tableOYExeceedBottom) {
-                oy = bottomTableOY;
-            }
-        }
-
-        if (this._tableOY !== oy) {
-            this._tableOY = oy;
-        }
-
-
-        if (tableOYExceedTop) {
-            if (!this.execeedTopState) {
-                this.emit('execeedtop', this, oy, topTableOY);
-            }
-        }
-        this.execeedTopState = tableOYExceedTop;
-
-        if (tableOYExeceedBottom) {
-            if (!this.execeedBottomState) {
-                this.emit('execeedbottom', this, oy, bottomTableOY);
-            }
-        }
-        this.execeedBottomState = tableOYExeceedBottom;
-        return this;
-    }
-
-    setTableOX(ox) {
-        var table = this.table;
-        var leftTableOX = this.leftTableOX;
-        var rightTableOX = this.rightTableOX;
-        var tableOXExeceedLeft = this.tableOXExeceedLeft(ox);
-        var tableOXExeceedRight = this.tableOXExeceedRight(ox);
-        if (this.clampTableOXYMode) {
-            var colCount = table.colCount;
-            var visibleColCount = table.widthToColIndex(this.instWidth, true);
-
-            // less then 1 page            
-            if (colCount < visibleColCount) {
-                ox = 0;
-            } else if (tableOXExeceedLeft) {
-                ox = leftTableOX
-            } else {
-                // var tableVisibleWidth = this.tableVisibleWidth;
-                if (tableOXExeceedRight)
-                    ox = rightTableOX;
-            }
-        }
-
-        if (this._tableOX !== ox) {
-            this._tableOX = ox;
-        }
-
-
-        if (tableOXExeceedLeft) {
-            if (!this.execeedLeftState) {
-                this.emit('execeedleft', this, ox, leftTableOX);
-            }
-        }
-        this.execeedLeftState = tableOXExeceedLeft;
-
-        if (tableOXExeceedRight) {
-            if (!this.execeedRightState) {
-                this.emit('execeedright', this, ox, rightTableOX);
-            }
-        }
-        this.execeedRightState = tableOXExeceedRight;
-        return this;
-    }
-
     setTableOXY(ox, oy) {
         this.setTableOY(oy).setTableOX(ox);
         return this;
@@ -302,7 +130,6 @@ class GridTable extends Container {
         this.setTableOX(this.tableOX + dx);
         return this;
     }
-
 
     addTableOXY(dx, dy) {
         this.addTableOY(dy).addTableOX(dx);
@@ -328,21 +155,6 @@ class GridTable extends Container {
 
     get t() {
         return this.getTableOYPercentage();
-    }
-
-    updateTable(refresh) {
-        if (refresh === undefined) {
-            refresh = false;
-        }
-        if (refresh) {
-            this.clearVisibleCellIndexes();
-            this.hideCells();
-        }
-        this.clearVisibleCellIndexes();
-        this.showCells();
-        this.hideCells();
-        this.maskCells();
-        return this;
     }
 
     getCell(cellIdx) {
@@ -388,51 +200,6 @@ class GridTable extends Container {
         return this;
     }
 
-    pointerToCellIndex(x, y) {
-        y -= (this.y + this.topLeftY);
-        x -= (this.x + this.topLeftX);
-        var offsetTableOY = this.tableOY - ((this.scrollMode === 0) ? y : x);
-        var offsetTableOX = this.tableOX - ((this.scrollMode === 0) ? x : y);
-
-        var table = this.table;
-        var rowIdx = table.heightToRowIndex(-offsetTableOY);
-        var colIdx = table.widthToColIndex(-offsetTableOX);
-        var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-        if (cellIdx === null) {
-            return null;
-        }
-        if (!this.cellIsVisible(cellIdx)) {
-            return null;
-        }
-        return cellIdx;
-    }
-
-    pointerToCellContainer(x, y) {
-        var cellIdx = this.pointerToCellIndex(x, y);
-        if (cellIdx === null) {
-            return undefined;
-        }
-        return this.getCellContainer(cellIdx);
-    }
-
-    cellIsVisible(cellIdx) {
-        var cell = this.table.getCell(cellIdx, false);
-        return cell && this.visibleCells.contains(cell);
-    }
-
-    // For when you know this Set will be modified during the iteration
-    eachVisibleCell(callback, scope) {
-        this.visibleCells.each(callback, scope);
-        return this;
-    }
-
-    // For when you absolutely know this Set won't be modified during the iteration
-    iterateVisibleCell(callback, scope) {
-        this.visibleCells.iterate(callback, scope);
-        return this;
-    }
-
-    // Internal
     setCellsMask(maskConfig) {
         var maskEnable, maskPadding;
         if (maskConfig === true) {
@@ -451,183 +218,6 @@ class GridTable extends Container {
         }
 
         return this;
-    }
-
-    maskCells() {
-        var children = [];
-        var cells = this.visibleCells.entries, container;
-        for (var i = 0, cnt = cells.length; i < cnt; i++) {
-            container = cells[i].getContainer();
-            if (container) {
-                if (container.isRexContainerLite) { // ContainerLite
-                    container.getAllChildren(children);
-                } else { // Others
-                    children.push(container);
-                }
-            }
-        }
-        MaskChildren(this, this.cellsMask, children);
-    }
-
-    resize(width, height) {
-        if ((this.width === width) && (this.height === height)) {
-            return this;
-        }
-
-        super.resize(width, height);
-        if (this.cellsMask) {
-            ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
-        }
-
-        if (this.expandCellSize) {
-            this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
-        }
-        this.updateTable(true);
-        return this;
-    }
-
-    clearVisibleCellIndexes() {
-        var tmp = this.preVisibleCells;
-        this.preVisibleCells = this.visibleCells;
-        this.visibleCells = tmp;
-        this.visibleCells.clear();
-    }
-
-    showCells() {
-        if (this.cellsCount === 0) {
-            return;
-        }
-        var table = this.table;
-        var rowIdx = table.heightToRowIndex(-this.tableOY);
-        if (rowIdx < 0) {
-            rowIdx = 0;
-        }
-
-        var colIdx = table.widthToColIndex(-this.tableOX);
-        if (colIdx < 0) {
-            colIdx = 0;
-        }
-
-        var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-        var bottomBound = this.bottomBound;
-        var rightBound = this.rightBound;
-        var lastIdx = table.cellsCount - 1;
-        var lastColIdx = table.colCount - 1;
-
-        var cellTLX0 = this.getTLX(colIdx),
-            cellTLX = cellTLX0;
-        var cellTLY = this.getTLY(rowIdx);
-        this.visibleStartY = null;
-        this.visibleEndY = null;
-        this.visibleStartX = null;
-        this.visibleEndX = null;
-        this.lastVisibleCellIdx = null;
-        while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
-            if (this.table.isValidCellIdx(cellIdx)) {
-                if (this.visibleStartY === null) {
-                    this.visibleStartY = rowIdx;
-                    this.visibleEndY = rowIdx;
-                }
-                if (this.visibleStartX === null) {
-                    this.visibleStartX = colIdx;
-                    this.visibleEndX = colIdx;
-                }
-
-                if (this.lastVisibleCellIdx === null) {
-                    this.lastVisibleCellIdx = cellIdx;
-                }
-
-                if (this.visibleEndY < rowIdx) {
-                    this.visibleEndY = rowIdx;
-                }
-
-                if (this.visibleEndX < colIdx) {
-                    this.visibleEndX = colIdx;
-                }
-
-                if (this.lastVisibleCellIdx < cellIdx) {
-                    this.lastVisibleCellIdx = cellIdx;
-                }
-
-                var cell = table.getCell(cellIdx, true);
-                this.visibleCells.set(cell);
-                if (!this.preVisibleCells.contains(cell)) {
-                    this.showCell(cell);
-                }
-                if (this.scrollMode === 0) {
-                    cell.setXY(cellTLX, cellTLY);
-                } else {
-                    cell.setXY(cellTLY, cellTLX);
-                }
-            }
-
-            if ((cellTLX < rightBound) && (colIdx < lastColIdx)) {
-                cellTLX += table.getColWidth(colIdx);
-                colIdx += 1;
-            } else {
-                cellTLX = cellTLX0;
-                cellTLY += table.getRowHeight(rowIdx);
-
-                colIdx = this.visibleStartX;
-                rowIdx += 1;
-            }
-
-            cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
-        }
-    }
-
-    showCell(cell) {
-        // Attach container to cell by cell.setContainer(container) under this event
-        var reusedCellContainer = null;
-        if (this.cellContainersPool) {
-            reusedCellContainer = this.cellContainersPool.getFirstDead();
-            if (reusedCellContainer !== null) { // Reuse this game object
-                reusedCellContainer.setActive(true).setVisible(true);
-            }
-        }
-
-        this.emit('cellvisible', cell, reusedCellContainer);
-
-        if (this.cellContainersPool) {
-            var cellContainer = cell.getContainer();
-            if (cellContainer) {
-                if (reusedCellContainer === null) {
-                    this.cellContainersPool.add(cellContainer); // New cell container, add to pool
-                } else if (reusedCellContainer !== cellContainer) {
-                    // Why reusedCellContainer is not equal to cellContainer?
-                    this.cellContainersPool.add(cellContainer); // New cell container, add to pool
-                    this.cellContainersPool.killAndHide(reusedCellContainer); // Unused cell container, put back to pool
-                }
-            } else { // No cell container added
-                if (reusedCellContainer !== null) {
-                    this.cellContainersPool.killAndHide(reusedCellContainer); // Unused cell container, put back to pool
-                }
-            }
-        }
-    }
-
-    hideCells() {
-        var preList = this.preVisibleCells;
-        var curList = this.visibleCells;
-        preList.iterate(function (cell) {
-            if (!curList.contains(cell)) {
-                this.hideCell(cell);
-            }
-        }, this);
-    }
-
-    hideCell(cell) {
-        // Option: pop container of cell by cell.popContainer() under this event 
-        this.emit('cellinvisible', cell);
-
-        if (this.cellContainersPool) {
-            var cellContainer = cell.popContainer(); // null if already been removed
-            if (cellContainer) {
-                this.cellContainersPool.killAndHide(cellContainer);
-            }
-        }
-
-        cell.destroyContainer(); // Destroy container of cell
     }
 
     get instHeight() {
@@ -660,34 +250,6 @@ class GridTable extends Container {
 
     get rightTableOX() {
         return -this.tableVisibleWidth;
-    }
-
-    tableOYExceedTop(oy) {
-        if (oy === undefined) {
-            oy = this.tableOY;
-        }
-        return (oy > this.topTableOY);
-    }
-
-    tableOYExeceedBottom(oy) {
-        if (oy === undefined) {
-            oy = this.tableOY;
-        }
-        return (oy < this.bottomTableOY);
-    }
-
-    tableOXExeceedLeft(ox) {
-        if (ox === undefined) {
-            ox = this.tableOX;
-        }
-        return (ox > this.leftTableOX);
-    }
-
-    tableOXExeceedRight(ox) {
-        if (ox === undefined) {
-            ox = this.tableOX;
-        }
-        return (ox < this.rightTableOX);
     }
 
     get tableVisibleHeight() {
@@ -747,23 +309,29 @@ class GridTable extends Container {
         }
     }
 
-    getTLX(colIdx) {
-        var ox = (this.scrollMode === 0) ? this.topLeftX : this.topLeftY;
-        var x = this.tableOX + this.table.colIndexToWidth(0, colIdx - 1) + ox;
-        return x;
-    }
-
-    getTLY(rowIdx) {
-        var oy = (this.scrollMode === 0) ? this.topLeftY : this.topLeftX;
-        var y = this.tableOY + this.table.rowIndexToHeight(0, rowIdx - 1) + oy;
-        return y;
+    resize (width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+    
+        super.resize(width, height);
+        if (this.cellsMask) {
+            ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
+        }
+    
+        if (this.expandCellSize) {
+            this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
+        }
+        this.updateTable(true);
+        return this;
     }
 };
 
 // mixin
 Object.assign(
     GridTable.prototype,
-    Components.GetBounds
+    Components.GetBounds,
+    Methods
 );
 
 const SCROLLMODE = {
@@ -772,7 +340,5 @@ const SCROLLMODE = {
     h: 1,
     horizontal: 1
 };
-
-var P0 = {}; // reuse point object
 
 export default GridTable;
