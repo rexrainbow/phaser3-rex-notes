@@ -10,4 +10,14 @@ var IterateVisibleCell = function (callback, scope) {
     return this;
 }
 
-export { EachVisibleCell, IterateVisibleCell };
+var EachCell = function (callback, scope) {
+    this.table.cells.slice().forEach(callback, scope);
+    return this;
+}
+
+var IterateCell = function (callback, scope) {
+    this.table.cells.forEach(callback, scope);
+    return this;
+}
+
+export { EachVisibleCell, IterateVisibleCell, EachCell, IterateCell };
