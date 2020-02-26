@@ -1,6 +1,8 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
 import CreateScrollableSizer from './CreateScrollableSizer.js';
+import ResizeController from './ResizeController.js';
+import UpdateController from './UpdateController.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -111,32 +113,6 @@ class Scrollable extends Sizer {
         super.layout(parent, newWidth, newHeight);
         this.resizeController();
         return this;
-    }
-
-    resizeController() {
-        var topChildOY = this.topChildOY;
-        var bottomChildOY = this.bottomChildOY;
-        var scroller = this.childrenMap.scroller;
-        var slider = this.childrenMap.slider;
-        if (scroller) {
-            scroller.setBounds(bottomChildOY, topChildOY);
-        }
-        if (slider) {
-            slider.setEnable(bottomChildOY !== topChildOY);
-        }
-        this.updateController();
-        return this;
-    }
-
-    updateController() {
-        var scroller = this.childrenMap.scroller;
-        var slider = this.childrenMap.slider;
-        if (scroller) {
-            scroller.setValue(this.childOY);
-        }
-        if (slider) {
-            slider.setValue(this.t);
-        }
     }
 
     set t(t) {
@@ -256,4 +232,16 @@ class Scrollable extends Sizer {
         return this;
     }
 }
+
+var Methods = {
+    resizeController: ResizeController,
+    updateController: UpdateController
+}
+
+// mixin
+Object.assign(
+    Scrollable.prototype,
+    Methods
+);
+
 export default Scrollable;
