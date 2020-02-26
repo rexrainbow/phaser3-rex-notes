@@ -1,7 +1,5 @@
 import DataMethods from '../../utils/data/DataMethods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 class Cell {
     constructor(parent, config) {
         this.container = null;
