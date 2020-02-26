@@ -7,7 +7,7 @@ class Cell {
         this.container = null;
         this.setParent(parent);
         this._deltaHeight = 0;
-        this.resetFromJSON(config);
+        // this.resetFromJSON(config);
     }
 
     setParent(parent) {
@@ -15,45 +15,9 @@ class Cell {
         this.parentContainer = parent.getParentContainer();
     }
 
-    resetFromJSON(o) {
-        if (!o) {
-            return this;
-        }
-
-        var height = GetValue(o, 'height', undefined);
-        if (height !== undefined) {
-            this.height = height;
-        }
-
-        var width = GetValue(o, 'width', undefined);
-        if (width !== undefined) {
-            this.width = width;
-        }
-
-        var data = GetValue(o, 'data', undefined);
-        if (data !== undefined) {
-            this.clearData();
-            for (var key in data) {
-                this.setData(key, data[key]);
-            }
-        }
-
-        var container = GetValue(o, 'container', undefined);
-        if (container !== undefined) {
-            this.setContainer(container);
-        }
-
-        return this;
-    }
-
-    toJSON() {
-        return {
-            width: this.width,
-            height: this.height,
-            data: this.cloneData(),
-            container: this.container
-        }
-    }
+    // resetFromJSON(o) {
+    //     return this;
+    // }
 
     destroy(fromScene) {
         if (fromScene === undefined) {
