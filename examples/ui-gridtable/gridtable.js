@@ -54,14 +54,7 @@ class Demo extends Phaser.Scene {
                 text: this.add.text(0, 0, 'Header'),
             }),
 
-            footer: this.rexUI.add.label({
-                width: (scrollMode === 0) ? undefined : 30,
-                height: (scrollMode === 0) ? 30 : undefined,
-
-                orientation: scrollMode,
-                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                text: this.add.text(0, 0, 'Footer'),
-            }),
+            footer: GetFooterSizer(this, scrollMode),
 
             space: {
                 left: 20,
@@ -153,6 +146,37 @@ var getItems = function (count) {
         });
     }
     return data;
+}
+
+var GetFooterSizer = function (scene, orientation) {
+    return scene.rexUI.add.sizer({
+        orientation: orientation
+    })
+        .add(
+            CreateFooterButton(scene, 'Reset', orientation),   // child
+            1,         // proportion
+            'center'   // align
+        )
+        .add(
+            CreateFooterButton(scene, 'Exit', orientation),    // child
+            1,         // proportion
+            'center'   // align
+        )
+        .layout()
+}
+
+var CreateFooterButton = function (scene, text, orientation) {
+    return scene.rexUI.add.label({
+        height: 40,
+        orientation: orientation,
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
+        text: scene.add.text(0, 0, text),
+        icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+        align: 'center',
+        space: {           
+            icon: 10
+        }
+    });
 }
 
 var config = {
