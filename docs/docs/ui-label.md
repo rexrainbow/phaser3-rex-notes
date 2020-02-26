@@ -87,6 +87,7 @@ var label = scene.rexUI.add.label({
     expandTextHeight: false,
     action: actionGameObject,
     actionMask: false,
+    align: undefined,
 
     space: {
         left: 0,
@@ -124,6 +125,10 @@ var label = scene.rexUI.add.label({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
+- `align` : Alignment of icon, text, action-icon game objects.
+    - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
+    - `'center'` : Align game objects at center.
+    - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
