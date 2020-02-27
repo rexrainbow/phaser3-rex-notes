@@ -48,6 +48,10 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
         ```javascript
         ellipse.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        ellipse.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -56,6 +60,10 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
     - Set
         ```javascript
         ellipse.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        ellipse.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

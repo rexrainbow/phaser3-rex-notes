@@ -217,6 +217,10 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
         ```javascript
         rect.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        rect.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript

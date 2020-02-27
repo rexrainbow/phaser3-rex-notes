@@ -47,6 +47,10 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
         ```javascript
         triangle.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        triangle.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -55,6 +59,10 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
     - Set
         ```javascript
         triangle.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        triangle.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

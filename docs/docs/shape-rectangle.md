@@ -47,6 +47,10 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
         ```javascript
         rect.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        rect.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -55,6 +59,10 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
     - Set
         ```javascript
         rect.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        rect.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

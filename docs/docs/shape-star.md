@@ -51,6 +51,10 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
         ```javascript
         star.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        star.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -59,6 +63,10 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
     - Set
         ```javascript
         star.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        star.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

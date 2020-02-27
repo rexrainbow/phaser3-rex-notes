@@ -47,6 +47,10 @@ var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);
         ```javascript
         line.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        line.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -55,6 +59,10 @@ var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);
     - Set
         ```javascript
         line.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        line.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

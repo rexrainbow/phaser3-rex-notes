@@ -49,6 +49,10 @@ var curve = scene.add.curve(x, y, path, fillColor);
         ```javascript
         curve.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        curve.setFillStyle();
+        ```        
 - Stroke color
     - Get
         ```javascript

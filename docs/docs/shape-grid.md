@@ -46,6 +46,10 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
         ```javascript
         grid.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        grid.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -54,6 +58,10 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
     - Set
         ```javascript
         grid.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        grid.setStrokeStyle();
         ```
 - Alternating color
     - Get
@@ -64,6 +72,10 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
         ```javascript
         grid.setAltFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        grid.setAltFillStyle();
+        ```
 - Outline color
     - Get
         ```javascript
@@ -72,6 +84,10 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
     - Set
         ```javascript
         grid.setOutlineStyle(color, alpha;
+        ```
+    - Clear
+        ```javascript
+        grid.setOutlineStyle();
         ```
 
 !!! warning "No tint methods"

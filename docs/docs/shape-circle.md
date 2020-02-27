@@ -47,6 +47,10 @@ var circle = scene.add.circle(x, y, radius, fillColor);
         ```javascript
         circle.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        circle.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -55,6 +59,10 @@ var circle = scene.add.circle(x, y, radius, fillColor);
     - Set
         ```javascript
         circle.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        circle.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

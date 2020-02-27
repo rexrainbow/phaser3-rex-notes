@@ -55,6 +55,10 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
         ```javascript
         polygon.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        polygon.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -63,6 +67,10 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
     - Set
         ```javascript
         polygon.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        polygon.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

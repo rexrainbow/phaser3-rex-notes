@@ -47,6 +47,10 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
         ```javascript
         arc.setFillStyle(color, alpha);
         ```
+    - Clear
+        ```javascript
+        arc.setFillStyle();
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -55,6 +59,10 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
     - Set
         ```javascript
         arc.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        arc.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"

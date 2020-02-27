@@ -189,7 +189,17 @@ var CreateFooterButton = function (scene, text, orientation) {
         space: {
             icon: 10
         }
-    });
+    })
+        .setInteractive()
+        .on('pointerdown', function () {
+            console.log(`Pointer down ${text}`)
+        })
+        .on('pointerover', function(){
+            this.getElement('background').setStrokeStyle(1, 0xffffff);
+        })
+        .on('pointerout', function(){
+            this.getElement('background').setStrokeStyle();
+        })
 }
 
 var config = {
