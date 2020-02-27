@@ -15,6 +15,19 @@ class Swipe extends OnePointerTracer {
         var stateConfig = {
             states: {
                 IDLE: {
+                    enter: function () {
+                        self.x = 0;
+                        self.y = 0;
+                        self.worldX = 0;
+                        self.worldY = 0;
+                    },
+                    exit: function () {
+                        var pointer = self.lastPointer;
+                        self.x = pointer.x;
+                        self.y = pointer.y;
+                        self.worldX = pointer.worldX;
+                        self.worldY = pointer.worldY;
+                    }
                 },
                 BEGIN: {
                     enter: function () {

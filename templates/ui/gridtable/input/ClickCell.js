@@ -1,7 +1,7 @@
 import Button from '../../../../plugins/input/button/Button.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-var ClickCell = function (table) {
+var ClickCell = function (table, tableConfig) {
     table._click = new Button(table, {
         threshold: 10
     });

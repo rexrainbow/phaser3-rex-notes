@@ -126,4 +126,6 @@ swipe.on('swipe', function(swipe){
 ```
 
 - `swipe.left`, `swipe.right`, `swipe.up`, `swipe.down` : Swipe direction states.
+- `swipe.worldX`, `swipe.worldY` : World position of swiping start.
+- `swipe.x`, `swipe.y` : Scene position of swiping start.
 - `swipe.dragVelocity` : Velocity of dragging.

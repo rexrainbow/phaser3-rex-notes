@@ -60,7 +60,7 @@ class GridTable extends Scrollable {
         TableOnCellVisible.call(this, table);
 
         if (GetValue(tableConfig, 'interactive', true)) {
-            TableSetInteractive.call(this, table);
+            TableSetInteractive.call(this, table, tableConfig);
         }
         this.setItems(GetValue(config, 'items', []));
     }

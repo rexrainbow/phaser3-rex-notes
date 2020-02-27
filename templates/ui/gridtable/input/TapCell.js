@@ -1,8 +1,10 @@
 import Tap from '../../tap/Tap.js';
 import EmitCellEvent from './EmitCellEvent.js';
 
-var TapCell = function (table) {
-    table._tap = new Tap(table);
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var TapCell = function (table, tableConfig) {
+    table._tap = new Tap(table, GetValue(tableConfig, 'tap', undefined));
     table._tap
         .on('tap', function (tap) {
             var eventName = `cell.${tap.tapsCount}tap`

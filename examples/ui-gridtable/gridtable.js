@@ -132,6 +132,18 @@ class Demo extends Phaser.Scene {
             .on('cell.pressend', function (cellContainer, cellIndex) {
                 this.print.text += 'press-end (' + cellIndex + ': ' + cellContainer.text + ')\n';
             }, this)
+            .on('cell.swiperight', function (cellContainer, cellIndex) {
+                this.print.text += 'swipe-right (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.swipeleft', function (cellContainer, cellIndex) {
+                this.print.text += 'swipe-left (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.swipeup', function (cellContainer, cellIndex) {
+                this.print.text += 'swipe-up (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.swipedown', function (cellContainer, cellIndex) {
+                this.print.text += 'swipe-down (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
     }
 
     update() { }

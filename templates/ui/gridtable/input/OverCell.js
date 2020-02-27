@@ -1,6 +1,6 @@
 import EmitCellEvent from './EmitCellEvent.js';
 
-var OverCell = function (table) {
+var OverCell = function (table, tableConfig) {
     table
         .on('pointermove', OnMove, this)
         .on('pointerover', OnMove, this)
