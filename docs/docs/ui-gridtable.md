@@ -405,6 +405,17 @@ See [base sizer object](ui-basesizer.md).
     ```
     - `cellContainer` : Container game object of triggered cell.
     - `cellIndex` : Index of triggered cell.
+- [Swipe](gesture-swipe.md) cell
+    ```javascript
+    table.on(swipeEventName, function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+    - `swipeEventName` : 
+        - `'cell.swipeleft'`, `'cell.swiperight'`, for vertical scrolling mode.
+        - `'cell.swipeup'`, `'cell.swipedown'`, for horizontal scrolling mode.
+    - `cellContainer` : Container game object of triggered cell.
+    - `cellIndex` : Index of triggered cell.
 - Pointer-over cell
     ```javascript
     table.on('cell.over', function(cellContainer, cellIndex) {
