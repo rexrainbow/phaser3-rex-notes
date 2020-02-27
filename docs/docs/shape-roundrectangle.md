@@ -230,6 +230,10 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
         ```javascript
         rect.setStrokeStyle(lineWidth, color, alpha);
         ```
+    - Clear
+        ```javascript
+        rect.setStrokeStyle();
+        ```
 
 !!! warning "No tint methods"
     Uses `rect.setFillStyle(color, alpha)` to change color.
