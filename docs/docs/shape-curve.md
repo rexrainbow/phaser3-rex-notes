@@ -52,7 +52,7 @@ var curve = scene.add.curve(x, y, path, fillColor);
     - Clear
         ```javascript
         curve.setFillStyle();
-        ```        
+        ```
 - Stroke color
     - Get
         ```javascript
@@ -61,6 +61,10 @@ var curve = scene.add.curve(x, y, path, fillColor);
     - Set
         ```javascript
         curve.setStrokeStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        curve.setStrokeStyle();
         ```
 
 !!! warning "No tint methods"
