@@ -92,8 +92,8 @@ var buttons = scene.rexUI.add.buttons({
         buttonGameObject,
         // ...
     ],
-    align: undefined,
     expand: false,
+    align: undefined,
     click: {
         mode: 'pointerup',
         clickInterval: 100
@@ -123,11 +123,11 @@ var buttons = scene.rexUI.add.buttons({
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top to bottom.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : Array of button game objects.
-- `align` : Alignment of these button game objects.
+- `expand` : Set `true` to expand width, or height of buton game objects.
+- `align` : Alignment of these button game objects. Only valid when `expand` is `false`.
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
     - `'center'` : Align game objects at center.
     - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
-- `expand` : Set `true` to expand width, or height of buton game objects.
 - `click`: Configuration of [button clicking](button.md).
     - `click.mode` :
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
