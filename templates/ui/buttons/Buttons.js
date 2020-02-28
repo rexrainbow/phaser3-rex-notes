@@ -31,14 +31,18 @@ class Buttons extends Sizer {
         }
 
         if (buttons) {
+            var expand = GetValue(config, 'expand', false);
+            var proportion = (expand) ? 1 : 0;
             var buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
             var clickConfig = GetValue(config, 'click', undefined);
 
             // Add space
-            if (
-                (buttonsAlign === 'right') ||
-                (buttonsAlign === 'bottom') ||
-                (buttonsAlign === 'center')
+            if ((!expand) &&
+                (
+                    (buttonsAlign === 'right') ||
+                    (buttonsAlign === 'bottom') ||
+                    (buttonsAlign === 'center')
+                )
             ) {
                 this.addSpace();
             }
@@ -62,12 +66,12 @@ class Buttons extends Sizer {
                         bottom: 0
                     }
                 }
-                this.add(button, 0, 'center', padding, true);
+                this.add(button, proportion, 'center', padding, true);
                 ButtonSetInteractive.call(this, button, clickConfig);
             }
 
             // Add space
-            if (buttonsAlign === 'center') {
+            if ((!expand) && (buttonsAlign === 'center')) {
                 this.addSpace();
             }
         }

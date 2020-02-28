@@ -7,6 +7,7 @@ A container with a group of buttons.
 
 ## Live demos
 
+- [Expand](https://codepen.io/rexrainbow/pen/XWbRZLR)
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
 
 ## Usage
@@ -92,6 +93,7 @@ var buttons = scene.rexUI.add.buttons({
         // ...
     ],
     align: undefined,
+    expand: false,
     click: {
         mode: 'pointerup',
         clickInterval: 100
@@ -125,6 +127,7 @@ var buttons = scene.rexUI.add.buttons({
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
     - `'center'` : Align game objects at center.
     - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
+- `expand` : Set `true` to expand width, or height of buton game objects.
 - `click`: Configuration of [button clicking](button.md).
     - `click.mode` :
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.

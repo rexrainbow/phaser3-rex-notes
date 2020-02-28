@@ -47,6 +47,9 @@ class TextBlock extends BaseSizer {
         }
 
         this.setTextObject(textObject, textMaskEnable);
+
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('text', textObject);
     }
 
     destroy(fromScene) {
