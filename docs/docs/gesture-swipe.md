@@ -82,7 +82,7 @@ Get swipe events of a game object.
     
         // threshold: 10,
         // velocityThreshold: 1000,
-        // direction: '8dir',
+        // dir: '8dir',
     });
     ```
     - `enable` : Set `false` to disable input events.

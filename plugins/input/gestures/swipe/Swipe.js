@@ -97,8 +97,8 @@ class Swipe extends OnePointerTracer {
     get dragVelocity() {
         var velocity;
         switch (this.dirMode) {
-            case 0: velocity = this.getVelocityX(); break; // up & down
-            case 1: velocity = this.getVelocityY(); break; // left & right
+            case 0: velocity = this.getVelocityY(); break; // up & down
+            case 1: velocity = this.getVelocityX(); break; // left & right
             default: velocity = this.getVelocity(); break; // 4 dir, 8 dir
         }
         return velocity;

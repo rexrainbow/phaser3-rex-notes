@@ -4,19 +4,21 @@ import EmitCellEvent from './EmitCellEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SwipeCell = function (table, tableConfig) {
-    table._swipe = new Swipe(table, GetValue(tableConfig, 'swipe', undefined));
+    var swipeConfig = GetValue(tableConfig, 'swipe', undefined);
+    if (swipeConfig === undefined) {
+        swipeConfig = {};
+    }
+    swipeConfig.dir = (table.scrollMode === 0) ? 1 : 0;
+    table._swipe = new Swipe(table, swipeConfig);
     table._swipe
         .on('swipe', function (swipe) {
-            var isValidSwipe = (table.scrollMode === 0) ? (swipe.left || swipe.right) : (swipe.up || swipe.down);
-            if (isValidSwipe) {
-                var cellIndex = table.pointerToCellIndex(swipe.x, swipe.y);
-                var dirName =
-                    (swipe.left) ? 'left' :
-                        (swipe.right) ? 'right' :
-                            (swipe.up) ? 'up' : 'down';
+            var cellIndex = table.pointerToCellIndex(swipe.x, swipe.y);
+            var dirName =
+                (swipe.left) ? 'left' :
+                    (swipe.right) ? 'right' :
+                        (swipe.up) ? 'up' : 'down';
 
-                EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, cellIndex);
-            }
+            EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, cellIndex);
         }, this)
 };
 

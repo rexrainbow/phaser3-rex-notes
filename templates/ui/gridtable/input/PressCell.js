@@ -4,7 +4,8 @@ import EmitCellEvent from './EmitCellEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var PressCell = function (table, tableConfig) {
-    table._press = new Press(table, GetValue(tableConfig, 'press', undefined));
+    var pressConfig = GetValue(tableConfig, 'press', undefined);
+    table._press = new Press(table, pressConfig);
     table._press
         .on('pressstart', function (press) {
             var cellIndex = table.pointerToCellIndex(press.x, press.y);
