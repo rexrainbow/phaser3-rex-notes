@@ -16,7 +16,7 @@ class TextEdit {
     }
 
     boot() {
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
 
         return this;
     }

@@ -62,7 +62,7 @@ class Anchor {
 
     boot() {
         this.scaleManamger.on('resize', this.anchor, this);
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
 
         this.anchor();
     }

@@ -39,7 +39,7 @@ class Interception extends TickTask {
     boot() {
         super.boot();
         if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.once('destroy', this.destroy, this);
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
@@ -92,7 +92,7 @@ class Interception extends TickTask {
 
             // Add new target
             if (target) {
-                target.once('destroy', this.setTarget, this);
+                target.on('destroy', this.setTarget, this);
             }
             this._target = target;
         }

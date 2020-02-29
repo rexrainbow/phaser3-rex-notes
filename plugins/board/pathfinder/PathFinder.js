@@ -39,7 +39,7 @@ class PathFinder {
 
     boot() {
         if (this.gameObject && this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.once('destroy', this.destroy, this);
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
@@ -67,7 +67,7 @@ class PathFinder {
                 this.chessData = GetChessData(gameObject);
                 // Attach event
                 if (this.gameObject && this.gameObject.once) {
-                    this.gameObject.once('destroy', this.setChess, this);
+                    this.gameObject.on('destroy', this.setChess, this);
                 }
             }
         } else {

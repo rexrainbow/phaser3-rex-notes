@@ -32,7 +32,7 @@ class Input {
             .on('pressstart', OnPressStart, this)
             .on('pressend', OnPressEnd, this);
 
-        board.once('destroy', this.destroy, this);
+        board.on('destroy', this.destroy, this);
     }
 
     destroy() {

@@ -33,7 +33,7 @@ class Bank {
                 gameObject[uidKey] = uid;
             }
             if (this.autoRemove && gameObject.on) {
-                gameObject.once('destroy', function () {
+                gameObject.on('destroy', function () {
                     this.remove(uid);
                 }, this)
             }

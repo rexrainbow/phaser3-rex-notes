@@ -36,6 +36,8 @@ export default {
             this.items.splice(index, 0, item);
         }
 
+        this.addDestroyCallback(item);
+
         return this;
     },
 
@@ -69,38 +71,47 @@ export default {
     remove(item, index) {
         if (item) {
             index = this.items.indexOf(item);
+            if (index === -1) {
+                return this;
+            }
+        } else {
+            item = this.items[index];
+            if (!item) {
+                return this;
+            }
         }
 
-        if (index === -1) {
-            return this;
-        }
 
         if (index === (this.items.length - 1)) {
             this.items.length -= 1;
         } else {
             SpliceOne(this.items, index);
         }
+
+        this.removeDestroyCallback(item);
+
         return this;
     },
 
     removeFirst() {
-        SpliceOne(this.items, 0);
+        this.remove(undefined, 0);
         return this;
     },
 
     removeLast() {
-        this.items.length -= 1;
+        this.remove(undefined, (this.item.length - 1));
         return this;
     },
 
     removeMultiple(items) {
-        for (var i = 0, cnt = items.length; i < cnt; i++) {
-            this.remove(items[i]);
+        for (var i = items.length; i > 0; i--) {
+            this.remove(items[i - 1]);
         }
         return this;
     },
 
     clear() {
+        this.removeDestroyCallback(this.items);
         this.items.length = 0;
         return this;
     },
@@ -112,7 +123,9 @@ export default {
             out = this.newList();
         }
 
+        out.clear();
         Clone(this.items, out.items);
+        out.addDestroyCallback(out.items)
         return out;
     },
 
@@ -140,12 +153,14 @@ export default {
     },
 
     slice(start, end, out) {
+        var result = this.items.slice(start, (end + 1));
+
         if (out === undefined) {
             out = this.newList();
         }
-
-        var result = this.items.slice(start, (end + 1));
+        out.clear();
         Clone(result, out.items);
+        out.addDestroyCallback(out.items);
         return out;
     },
 
@@ -163,5 +178,4 @@ export default {
         Shuffle(this.items);
         return this;
     }
-
 };

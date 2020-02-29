@@ -186,6 +186,10 @@ var listA = scene.plugins.get('rexUniqueItemList').add();
     ```javascript
     listA.clear();
     ```
+- Destroy all items
+    ```javascript
+    listA.destroyItems();
+    ```
 
 #### Pop
 

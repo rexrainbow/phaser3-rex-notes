@@ -16,7 +16,7 @@ class Chess {
     boot() {
         var type = typeof (this.parent);
         if ((type !== 'number') && (type !== 'string') && this.parent.on) {
-            this.parent.once('destroy', this.destroy, this);
+            this.parent.on('destroy', this.destroy, this);
         }
     }
 

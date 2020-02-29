@@ -38,7 +38,7 @@ class TouchState {
         this.gameObject.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('postupdate', this.postupdate, this);
 
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {

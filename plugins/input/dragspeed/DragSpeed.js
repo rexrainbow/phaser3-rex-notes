@@ -38,7 +38,7 @@ class DragSpeed {
         this.gameObject.on('pointerup', this.onPointOut, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
         this.scene.events.on('preupdate', this.preupdate, this);
     }
 

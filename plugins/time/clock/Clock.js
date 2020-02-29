@@ -35,7 +35,7 @@ class Clock extends TickTask {
 
         var parentEE = GetEventEmitter(this.parent);
         if (parentEE) {
-            parentEE.once('destroy', this.destroy, this);
+            parentEE.on('destroy', this.destroy, this);
         }
     }
 

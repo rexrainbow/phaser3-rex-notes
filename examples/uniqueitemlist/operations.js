@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
         console.log('union', listA.union(listB).getItems());
         console.log('intersect', listA.intersect(listB).getItems());
         console.log('difference', listA.difference(listB).getItems());
-        console.log('slice', listA.slice(1, 4).getItems());
+        console.log('slice[1:4]', listA.slice(1, 4).getItems());
         console.log('shuffle', listA.shuffle().getItems());
         console.log('popRandom', listA.popRandom(), listA.getItems());
         console.log('pop', listA.pop(), listA.getItems());

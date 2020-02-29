@@ -58,7 +58,7 @@ class Slider {
 
     boot() {
         this.gameObject.on('drag', this.onDragging, this);
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {

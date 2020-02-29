@@ -8,7 +8,7 @@ class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
     start() {
         this._awayTime = this.add();
         var eventEmitter = this.game.events;
-        eventEmitter.once('destroy', this.destroy, this);
+        eventEmitter.on('destroy', this.destroy, this);
     }
 
     destroy() {

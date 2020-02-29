@@ -33,7 +33,7 @@ class Flip {
 
     boot() {
         if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.once('destroy', this.destroy, this);
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 

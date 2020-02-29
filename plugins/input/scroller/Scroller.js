@@ -69,7 +69,7 @@ class Scroller {
 
     boot() {
         this.scene.events.on('update', this._state.update, this._state);
-        this.gameObject.once('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {
