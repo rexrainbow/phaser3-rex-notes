@@ -87,6 +87,7 @@ module.exports = {
     'restorabledataplugin': './plugins/restorabledata-plugin.js',
     'buffdataplugin': './plugins/buffdata-plugin.js',
     'canvasdataplugin': './plugins/canvasdata-plugin.js',
+    'uniqueitemlistplugin': './plugins/uniqueitemlist-plugin.js',
 
     // math
     'gashaponplugin': './plugins/gashapon-plugin.js',

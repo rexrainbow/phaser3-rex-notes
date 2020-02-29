@@ -17,9 +17,13 @@ var Clone = function (obj, out) {
 
     if (objIsArray) {
         out.length = obj.length;
-    }
-    for (var key in obj) {
-        out[key] = obj[key];
+        for (var i = 0, cnt = obj.length; i < cnt; i++) {
+            out[i] = obj[i];
+        }
+    } else {
+        for (var key in obj) {
+            out[key] = obj[key];
+        }
     }
 
     return out;

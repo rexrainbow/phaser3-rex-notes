@@ -190,6 +190,7 @@ nav:
         - Random: array-random.md
         - Filter/Map: array-filter.md
         - Number array: create-number-array.md
+        - Unique item list: uniqueitemlist.md
     - CSV:
         - CSV to array: csvtoarray.md
         - CSV to hash table: csvtohashtable.md
