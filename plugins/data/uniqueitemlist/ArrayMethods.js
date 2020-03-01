@@ -110,9 +110,20 @@ export default {
         return this;
     },
 
-    clear() {
+    clear(destroyItems) {
+        var items;
+        if (destroyItems) {
+            items = this.cloneItems();
+        }
+
         this.removeDestroyCallback(this.items);
         this.items.length = 0;
+
+        if (destroyItems) {
+            for (var i = items.length; i > 0; i--) {
+                items[i].destroy();
+            }
+        }
         return this;
     },
 

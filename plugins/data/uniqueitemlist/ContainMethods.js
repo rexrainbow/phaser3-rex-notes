@@ -3,7 +3,8 @@ export default {
         return (this.items.indexOf(item) > -1);
     },
 
-    any(items) {
+    any(listB) {
+        var items = (this.isList(listB)) ? listB.items : listB;
         for (var i = 0, cnt = items; i < cnt; i++) {
             if (this.contains(items[i])) {
                 return true;
@@ -12,7 +13,8 @@ export default {
         return false;
     },
 
-    all(items) {
+    all(listB) {
+        var items = (this.isList(listB)) ? listB.items : listB;
         for (var i = 0, cnt = items; i < cnt; i++) {
             if (!this.contains(items[i])) {
                 return false;

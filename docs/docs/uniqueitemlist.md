@@ -3,7 +3,7 @@
 List of unique items. Support array and set methods.
 
 - Author: Rex
-- Member of scene
+- Data structure
 
 ## Usage
 
@@ -117,14 +117,12 @@ var listA = scene.plugins.get('rexUniqueItemList').add();
     ```
 - Has any item
     ```javascript
-    var hasAny = listA.any(items);
+    var hasAny = listA.any(listB);
     ```
-    - `items` : Array of items.
 - Has all items
     ```javascript
-    var hasAll = listA.all(items);
+    var hasAll = listA.all(listB);
     ```
-    - `items` : Array of items.
 
 ### Array operations
 
@@ -188,7 +186,7 @@ var listA = scene.plugins.get('rexUniqueItemList').add();
     ```
 - Destroy all items
     ```javascript
-    listA.destroyItems();
+    listA.clear(true);
     ```
 
 #### Pop
