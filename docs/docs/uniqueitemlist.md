@@ -69,29 +69,20 @@ List of unique items. Support array and set methods.
 ### Create instance
 
 ```javascript
-var listA = scene.plugins.get('rexUniqueItemList').add();
+var listA = scene.plugins.get('rexUniqueItemList').add({
+    // items: undefined,
+    // enableDestroyCallback: true
+});
 ```
+
+- `items` : Initial items.
+- `enableDestroyCallback` : Set `true` to remove item when item is destroyed (from item's 'destroy' event)
 
 or
 
 ```javascript
 var listA = scene.plugins.get('rexUniqueItemList').add(items);
 ```
-- `items` : Initial items.
-
-or
-
-```javascript
-var listA = scene.plugins.get('rexUniqueItemList').add({
-    items: undefined,
-    // destroyCallback: listA.remove,
-    // destroyCallbackScope: listA
-});
-```
-
-- `destroyCallback` : Callback for item's destroy event.
-    - `false` : No callback registered to item's destroy event.
-- `destroyCallbackScope` : Scope for item's destroy event.
 
 ### Items
 
