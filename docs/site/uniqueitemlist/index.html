@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textbox/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/uniqueitemlist/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Text box - Notes of Phaser 3</title>
+        <title>Unique item list - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Text box
+                Unique item list
               
             </span>
           
@@ -2901,10 +2901,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -2992,10 +2994,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3" checked>
     
     <label class="md-nav__link" for="nav-10-3">
       Array
@@ -3071,11 +3075,181 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Unique item list
+      </label>
+    
+    <a href="./" title="Unique item list" class="md-nav__link md-nav__link--active">
       Unique item list
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#items" class="md-nav__link">
+    Items
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-count" class="md-nav__link">
+    Item count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contains" class="md-nav__link">
+    Contains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-operations" class="md-nav__link">
+    Array operations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    Add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    Remove
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop" class="md-nav__link">
+    Pop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slice" class="md-nav__link">
+    Slice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort" class="md-nav__link">
+    Sort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-operations" class="md-nav__link">
+    Set operations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3861,12 +4035,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       UI
@@ -3942,141 +4114,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Text box
-      </label>
-    
-    <a href="./" title="Text box" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ui-textbox/" title="Text box" class="md-nav__link">
       Text box
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-textbox-object" class="md-nav__link">
-    Add textbox object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    Layout children
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#typing" class="md-nav__link">
-    Typing
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#page" class="md-nav__link">
-    Page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4777,50 +4819,90 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-textbox-object" class="md-nav__link">
-    Add textbox object
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
+  <a href="#items" class="md-nav__link">
+    Items
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-count" class="md-nav__link">
+    Item count
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    Layout children
+  <a href="#contains" class="md-nav__link">
+    Contains
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#array-operations" class="md-nav__link">
+    Array operations
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    Add
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#typing" class="md-nav__link">
-    Typing
+  <a href="#remove" class="md-nav__link">
+    Remove
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#page" class="md-nav__link">
-    Page
+  <a href="#pop" class="md-nav__link">
+    Pop
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
+  <a href="#slice" class="md-nav__link">
+    Slice
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
+  <a href="#sort" class="md-nav__link">
+    Sort
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-operations" class="md-nav__link">
+    Set operations
   </a>
   
 </li>
@@ -4846,27 +4928,27 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-textbox.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/uniqueitemlist.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Text box</h1>
+                  <h1>Unique item list</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A container with an icon, (<a href="../texttyping/">typing</a> and <a href="../textpage/">paging</a>) text, and background.</p>
+<p>List of unique items. Support array and set methods.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Game object</li>
+<li>Data structure</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-textbox">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/uniqueitemlist">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexuniqueitemlistplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuniqueitemlistplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add text-box object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">textBox</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add list object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listA</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexuniqueitemlistplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -4875,14 +4957,14 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UniqueItemListPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/uniqueitemlist-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUniqueItemList&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UniqueItemListPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -4891,8 +4973,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add text-box object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">textBox</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add list object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listA</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexUniqueItemList&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -4901,173 +4983,185 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">TextBox</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UniqueItemList</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/uniqueitemlist.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add text-box object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextBox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">textBox</span><span class="p">);</span>
+<li>Add list object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listA</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">UniqueItemList</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-textbox-object">Add textbox object<a class="headerlink" href="#add-textbox-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">textBox</span><span class="p">({</span>
-    <span class="c1">// x: 0,</span>
-    <span class="c1">// y: 0,</span>
-    <span class="c1">// anchor: undefined,</span>
-    <span class="c1">// width: undefined,</span>
-    <span class="c1">// height: undefined,</span>
-
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
-    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
-    <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
-    <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
-    <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
-    <span class="nx">actionMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-
-    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
-        <span class="nx">icon</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">text</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">},</span>
-
-    <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listA</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexUniqueItemList&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+    <span class="c1">// items: undefined,</span>
+    <span class="c1">// enableDestroyCallback: true</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
-<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
-<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
-<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
-<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
-<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+<li><code>items</code> : Initial items.</li>
+<li><code>enableDestroyCallback</code> : Set <code>true</code> to remove item when item is destroyed (from item's 'destroy' event)</li>
 </ul>
-</li>
-<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>orientation</code> :<ul>
-<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
-<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
-</ul>
-</li>
-<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of textBox.</li>
-<li><code>icon</code> : Game object of icon, optional.</li>
-<li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
-<li><code>text</code> : Game object of text.<ul>
-<li>Max lines and wrapped width<ul>
-<li><a href="../text/">Built-in text object</a> : <code>maxLines</code> and wrap width (<code>wordWrap.width</code>).</li>
-<li><a href="../bbcodetext/">BBcode text object</a> : <code>maxLines</code> and wrap width (<code>wrap.width</code>).</li>
-<li><a href="../tagtext/">Tag text object</a> : <code>maxLines</code> and wrap width (<code>wrap.width</code>).</li>
-</ul>
-</li>
-<li>Fixed width and fixed height<ul>
-<li><a href="../text/">Built-in text object</a> : <code>fixedWidth</code> and <code>fixedHeight</code>, set to <code>0</code> to disable this feature.</li>
-<li><a href="../bbcodetext/">BBcode text object</a> : <code>fixedWidth</code> and <code>fixedHeight</code>, set to <code>0</code> to disable this feature.</li>
-<li><a href="../tagtext/">Tag text object</a> : <code>fixedWidth</code> and <code>fixedHeight</code>, set to <code>0</code> to disable this feature.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>action</code> : Game object of action icon, optional.</li>
-<li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.</li>
-<li><code>space</code> : Pads spaces<ul>
-<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
-<li><code>space.icon</code> : Space between icon game object and text game object.</li>
-<li><code>space.text</code> : Space between text game object and action icon game object.</li>
-</ul>
-</li>
-<li><code>name</code> : Set name of this textBox.</li>
-<li><code>draggable</code> : Set <code>true</code> to drag to-most sizer.</li>
-</ul>
-<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyTextBox</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TextBox</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-        <span class="c1">// ...</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyTextBox</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
-<p>Arrange position of all elements.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listA</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexUniqueItemList&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
 </code></pre></div>
 
-<p>This method will be invoked when size of text has been changed automatically.</p>
-<h3 id="typing">Typing<a class="headerlink" href="#typing" title="Permanent link">&para;</a></h3>
+<h3 id="items">Items<a class="headerlink" href="#items" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Start
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">typingSpeed</span><span class="p">);</span>
+<li>Get first item
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get last item
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">getLast</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get item at index
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get items
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Clone items to a new array
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">cloneItems</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="item-count">Item count<a class="headerlink" href="#item-count" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get item count
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</code></pre></div></li>
+<li>List is empty
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEmpty</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="contains">Contains<a class="headerlink" href="#contains" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Has item
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasItem</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Has any item
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasAny</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">any</span><span class="p">(</span><span class="nx">listB</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Has all items
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasAll</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">listB</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="array-operations">Array operations<a class="headerlink" href="#array-operations" title="Permanent link">&para;</a></h3>
+<h4 id="add">Add<a class="headerlink" href="#add" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add to last
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">addLast</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add to first
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">addFirst</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Insert to index
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Insert, or move to index
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">iindex</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add items
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Clone list
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">newList</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+<span class="c1">// listA.clone(listB)</span>
+</code></pre></div></li>
+</ul>
+<h4 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Remove item
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove first
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">removeFirst</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Remove last
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">removeLast</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Remove item at index
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove items
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">removeMultiple</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove all items
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Destroy all items
+    <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="pop">Pop<a class="headerlink" href="#pop" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pop first item
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">popFirst</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pop last item
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">popLast</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Pop item at index
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Pop a random item
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">popRandom</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h4 id="slice">Slice<a class="headerlink" href="#slice" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Extract items from startIndex to endIndex (item of endIndex is included)
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">newList</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// listA.slice(startIndex, endIndex, listB);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="sort">Sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Sort
+   <div class="codehilite"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">itemA</span><span class="p">,</span> <span class="nx">itemB</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">itemA</span> <span class="o">&gt;</span> <span class="nx">itemB</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">itemA</span> <span class="o">&lt;</span> <span class="nx">itemB</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Reverse
+   <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Shuffle
+   <div class="codehilite"><pre><span></span><code><span class="nx">listA</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="set-operations">Set operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
+<ul>
+<li>C = A | B
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listC</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">listB</span><span class="p">);</span>
+<span class="nx">listA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">listB</span><span class="p">,</span> <span class="nx">listC</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>content</code> : Content string.</li>
-<li><code>speed</code> : Typing speed in ms.</li>
+<li><code>listC</code> : Result unique-item-list. Can be <code>listA</code>, or <code>listB</code>.</li>
 </ul>
 </li>
-<li>Stop
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Stop and show all text
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Pause
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Resume
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Is typing
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
-</code></pre></div></li>
+<li>C = A &amp; B
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listC</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">listB</span><span class="p">);</span>
+<span class="nx">listA</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">listB</span><span class="p">,</span> <span class="nx">listC</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>listC</code> : Result unique-item-list. Can be <code>listA</code>, or <code>listB</code>.</li>
 </ul>
-<h3 id="page">Page<a class="headerlink" href="#page" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Type next page
-    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">typeNextPage</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Is last page
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isLastPage</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">isLastPage</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Is first page
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isLastPage</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">isFirstPage</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Current page index
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageIndex</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">pageIndex</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Number of pages
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageIndex</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">pageCount</span><span class="p">;</span>
-</code></pre></div></li>
+</li>
+<li>C = A - B
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">listC</span> <span class="o">=</span> <span class="nx">listA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">listB</span><span class="p">);</span>
+<span class="nx">listA</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">listB</span><span class="p">,</span> <span class="nx">listC</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>listC</code> : Result unique-item-list. Can be <code>listA</code>, or <code>listB</code>.</li>
 </ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>On typing a character
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>On Typing the last character of current page.
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</li>
 </ul>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-label/">label object</a>, <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
                 
                   
                 
@@ -5089,7 +5183,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../create-number-array/" title="Number array" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5098,19 +5192,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Label
+                Number array
               </span>
             </div>
           </a>
         
         
-          <a href="../ui-textarea/" title="Text area" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../csvtoarray/" title="CSV to array" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Text area
+                CSV to array
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

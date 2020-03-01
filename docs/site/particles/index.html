@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3338,6 +3338,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5120,24 +5132,24 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</code></pre></div>
 
 <p>Reference: <a href="../loader/#image">load image</a></p>
 <h3 id="add-particle">Add particle<a class="headerlink" href="#add-particle" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create a particle manager
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
 <li>Create particle manager and emitters
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[</span>
     <span class="nx">emitterConfig0</span><span class="p">,</span>
     <span class="nx">emitterConfig1</span><span class="p">,</span>
     <span class="c1">// ...</span>
 <span class="p">]);</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">particles</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">particles</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">emitters</span><span class="o">:</span> <span class="p">[</span>
@@ -5146,11 +5158,11 @@
         <span class="c1">// ...</span>
     <span class="p">]</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Create a particle emitter
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createEmitter</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createEmitter</span><span class="p">({</span>
     <span class="c1">// **basic properties of particles**</span>
     <span class="c1">// **initial position**</span>
     <span class="c1">// x: 0,             // { min, max }, or { min, max, steps }</span>
@@ -5239,7 +5251,7 @@
     <span class="c1">// timeScale: 1,</span>
 
 <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Format of value<ul>
 <li><code>{min, max}</code> : Pick a random value between min and max</li>
 <li><code>{start, end}</code> : Pick values incremented continuously across a range. (<code>ease</code>=<code>'Linear'</code>)<ul>
@@ -5272,23 +5284,23 @@
 <li>String or number value</li>
 <li>Array of string or number value</li>
 <li>Configuration object :
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>emitZone</code> :<ul>
 <li><a href="./#emit-zone">Emit zone</a>
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
 <span class="p">}</span>            
-</pre></div></li>
+</code></pre></div></li>
 <li><a href="./#emit-edge">Emit edge</a>
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
 
@@ -5297,52 +5309,52 @@
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>            
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li><a href="./#death-zone"><code>deathZone</code></a>
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Immortal particle : Set <code>lifespan</code> to <code>Infinity</code>.</li>
 </ul>
 </li>
 </ol>
 <h3 id="emit-zone">Emit zone<a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, or <a href="../path/">Path or Curve</a>, which has <code>getRandomPoint(point)</code> method<ul>
 <li>Custom zone
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">getRandomPoint</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">point</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// point.x = ...</span>
         <span class="c1">// point.y = ...</span>
         <span class="k">return</span> <span class="nx">point</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h4 id="zone-source">Zone source<a class="headerlink" href="#zone-source" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h4 id="clear-zone">Clear zone<a class="headerlink" href="#clear-zone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="emit-edge">Emit edge<a class="headerlink" href="#emit-edge" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
 
@@ -5351,18 +5363,18 @@
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, or <a href="../path/">Path or Curve</a>, which has <code>getPoints(quantity, stepRate)</code> method<ul>
 <li>Custom edge
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">getPoints</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">quantity</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// output = [point0, point1, ...];  // point: Phaser.Math.Vector2, or {x, y}</span>
         <span class="k">return</span> <span class="nx">output</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>quantity</code> : The number of particles to place on the source edge. Set to 0 to use <code>stepRate</code> instead.</li>
@@ -5373,159 +5385,159 @@
 <h4 id="curve-surce">Curve surce<a class="headerlink" href="#curve-surce" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get curve source
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Update points of curve source
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Set source to another curve, also update points
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">changeSource</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitZone</span><span class="p">.</span><span class="nx">changeSource</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="clear-edge-zone">Clear edge zone<a class="headerlink" href="#clear-edge-zone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">({</span>
      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
      <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>type</code> : 'onEnter' or 'onLeave'</li>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
 <li>Custom <code>source</code> :
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">contains</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
         <span class="k">return</span> <span class="nx">bool</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h4 id="zone-source_1">Zone source<a class="headerlink" href="#zone-source_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">deathZone</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h4 id="clear-zone_1">Clear zone<a class="headerlink" href="#clear-zone_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Start
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>  <span class="c1">// set `on` to true</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>  <span class="c1">// set `on` to true</span>
+</code></pre></div></li>
 <li>Stop
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>   <span class="c1">// set `on` to false</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>   <span class="c1">// set `on` to false</span>
+</code></pre></div></li>
 <li>Pause
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>  <span class="c1">// set `active` to false</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>  <span class="c1">// set `active` to false</span>
+</code></pre></div></li>
 <li>Resume
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>  <span class="c1">// set `active` to true</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>  <span class="c1">// set `active` to true</span>
+</code></pre></div></li>
 <li>Explode
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">explode</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">explode</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Emit
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitParticleAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">count</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitParticleAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">count</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitParticle</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">emitParticle</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Kill all alive particles
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">killAll</span><span class="p">()</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">killAll</span><span class="p">()</span>
+</code></pre></div></li>
 </ul>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
 
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Emitter<ul>
 <li>Position
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Follow<ul>
 <li>Start
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">startFollow</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">startFollow</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
 <span class="c1">// emitter.startFollow(target, offsetX, offsetY, trackVisible);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>trackVisible</code> : Whether the emitter's visible state will track the target's visible state.    </li>
 </ul>
 </li>
 <li>Stop
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">stopFollow</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">stopFollow</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>All emitters
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
 <span class="nx">particles</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h4 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Emitter
-   <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setRadial</span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>   <span class="c1">// set true to emit particles in all directions between angle min and max</span>
+   <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setRadial</span><span class="p">(</span><span class="nx">bool</span><span class="p">);</span>   <span class="c1">// set true to emit particles in all directions between angle min and max</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>All emitters
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// angle in degrees</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// angle in degrees</span>
 <span class="c1">// particles.setRotation(angle); // angle in radians</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">angle</span> <span class="o">=</span> <span class="nx">angle</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">angle</span> <span class="o">=</span> <span class="nx">angle</span><span class="p">;</span>
 <span class="c1">// particles.rotation = angle;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h4 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Emitter
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setScaleX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setScaleX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">setScaleY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>All emitters
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// particles.setScale(x, y);</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">scaleX</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">scaleX</span><span class="p">;</span>
 <span class="nx">particles</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h4 id="render">Render<a class="headerlink" href="#render" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Frame
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frames</span><span class="p">);</span>  <span class="c1">// pickRandom = true, quantity = 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frames</span><span class="p">);</span>  <span class="c1">// pickRandom = true, quantity = 1</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frames</span><span class="p">,</span> <span class="nx">pickRandom</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>frames</code> : One or more texture frames, or a configuration object.<ul>
 <li>String or number value</li>
 <li>Array of string or number value</li>
 <li>Configuration object :
-    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>pickRandom</code> : Whether frames should be assigned at random from <code>frames</code>.</li>
@@ -5533,37 +5545,37 @@
 </ul>
 </li>
 <li>Alpha
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>   <span class="c1">// value: 0 ~ 1 </span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>   <span class="c1">// value: 0 ~ 1 </span>
+</code></pre></div></li>
 <li>Visible
-   <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">visible</span><span class="p">);</span>  <span class="c1">// visible: true/false</span>
-</pre></div></li>
+   <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">visible</span><span class="p">);</span>  <span class="c1">// visible: true/false</span>
+</code></pre></div></li>
 <li>Blend mode
-   <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">// Phaser.BlendModes</span>
-</pre></div></li>
+   <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">// Phaser.BlendModes</span>
+</code></pre></div></li>
 </ul>
 <h4 id="physics">Physics<a class="headerlink" href="#physics" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Speed
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setSpeedX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setSpeedX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">setSpeedY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Gravity
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravityX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setGravityX</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="nx">setGravityY</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Bounds
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>rect</code> : Phaser.Geom.Rectangle, or { x, y, width, height }</li>
 </ul>
 </li>
@@ -5571,76 +5583,76 @@
 <h4 id="time">Time<a class="headerlink" href="#time" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Lifespan
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setLifespan</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// time in ms</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setLifespan</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// time in ms</span>
+</code></pre></div></li>
 <li>Frequency
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setFrequency</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setFrequency</span><span class="p">(</span><span class="nx">frequency</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>frequency</code> : The time interval (&gt;= 0) of each flow cycle, in ms; or -1 to put the emitter in explosion mode.</li>
 <li><code>quantity</code> : The number of particles to release at each flow cycle or explosion.</li>
 </ul>
 </li>
 </ul>
 <h4 id="quantity">Quantity<a class="headerlink" href="#quantity" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">setQuantity</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setQuantity</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
+</code></pre></div>
 
 <h3 id="particles">Particles<a class="headerlink" href="#particles" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Hard limit the amount of particle objects
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">maxParticles</span><span class="p">;</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">maxParticles</span><span class="p">;</span>
+</code></pre></div><ul>
 <li>Whether this emitter is at its limit
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">atLimit</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">atLimit</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">atLimit</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">atLimit</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Alive (active) particles<ul>
 <li>Amount of alive particles
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getAliveParticleCount</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getAliveParticleCount</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Add callback for newly emitted particle
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleEmit</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Clear callback
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleEmit</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleEmit</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>For each alive particle
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">forEachAlive</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Dead (inactive) particles        <ul>
 <li>Amount of dead particles
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getDeadParticleCount</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getDeadParticleCount</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Add callback for each particle death
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleDeath</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Clear callback
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleDeath</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">onParticleDeath</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>For each dead particle
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">,</span> <span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
 <span class="nx">emitter</span><span class="p">.</span><span class="nx">forEachDead</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add dead particles into pool
-    <div class="codehilite"><pre><span></span><span class="nx">emitter</span><span class="p">.</span><span class="nx">reserve</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">reserve</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Total (alive + dead) number of particles
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getParticleCount</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getParticleCount</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Custom particle class
-    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyParticle</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Particles</span><span class="p">.</span><span class="nx">Particle</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyParticle</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Particles</span><span class="p">.</span><span class="nx">Particle</span> <span class="p">{</span>
     <span class="nx">constructor</span> <span class="p">(</span><span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
         <span class="cm">/* ... */</span>
@@ -5651,7 +5663,7 @@
         <span class="cm">/* ... */</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h4 id="properties_1">Properties<a class="headerlink" href="#properties_1" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5670,39 +5682,39 @@
 <h3 id="gravity-well">Gravity well<a class="headerlink" href="#gravity-well" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Create a gravity well
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">//var well = particles.createGravityWell(x, y, power, epsilon, gravity);</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createGravityWell</span><span class="p">({</span>
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
     <span class="c1">// power: 0,</span>
     <span class="c1">// epsilon: 100,</span>
     <span class="c1">// gravity: 50</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Enable<ul>
 <li>Active
-   <div class="codehilite"><pre><span></span><span class="nx">well</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div></li>
+   <div class="codehilite"><pre><span></span><code><span class="nx">well</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Inactive
-   <div class="codehilite"><pre><span></span><span class="nx">well</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</pre></div></li>
+   <div class="codehilite"><pre><span></span><code><span class="nx">well</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Position
-    <div class="codehilite"><pre><span></span><span class="nx">well</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">well</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
 <span class="nx">well</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Gravity
-    <div class="codehilite"><pre><span></span><span class="nx">well</span><span class="p">.</span><span class="nx">gravity</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">well</span><span class="p">.</span><span class="nx">gravity</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Power
-    <div class="codehilite"><pre><span></span><span class="nx">well</span><span class="p">.</span><span class="nx">power</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">well</span><span class="p">.</span><span class="nx">power</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Custom gravity well
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">well</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particle</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// particle.velocityX = </span>
@@ -5710,41 +5722,41 @@
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">particles</span><span class="p">.</span><span class="nx">addGravityWell</span><span class="p">(</span><span class="nx">well</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h3 id="particles-manager">Particles manager<a class="headerlink" href="#particles-manager" title="Permanent link">&para;</a></h3>
 <h4 id="fire-all-emitters">Fire all emitters<a class="headerlink" href="#fire-all-emitters" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitParticleAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitParticleAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// particles.emitParticleAt(x, y, count);</span>
-</pre></div>
+</code></pre></div>
 
 <h4 id="z-index-of-emitters">Z index of emitters<a class="headerlink" href="#z-index-of-emitters" title="Permanent link">&para;</a></h4>
 <p>Z index of emitters is the same as <code>particles.emitters</code> (an array).</p>
 <ul>
 <li>Bring an emitter to top
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Send an emitter to bottom
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Move an emitter up
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Move an emitter down
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Move an emitter to index
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">emitter</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">emitter</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Reverse order
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Shuffle order
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Swap 2 emitters
-    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">emitter0</span><span class="p">,</span> <span class="nx">emitter1</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">emitter0</span><span class="p">,</span> <span class="nx">emitter1</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
                 
                   
@@ -5804,18 +5816,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5825,7 +5837,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

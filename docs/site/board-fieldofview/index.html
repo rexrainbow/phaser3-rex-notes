@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3067,6 +3067,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4884,19 +4896,19 @@
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Add field-of-view object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -4911,25 +4923,25 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add field-of-view object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">FieldOfView</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">FieldOfView</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Add field-of-view object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fieldOfView</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fieldOfView</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// face: 0,</span>
     <span class="c1">// cone: undefined,</span>
     <span class="c1">// coneMode: 0,</span>
@@ -4952,7 +4964,7 @@
     <span class="c1">//     log: false,</span>
     <span class="c1">// }</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>face</code> : Face of chess.<ul>
@@ -4967,26 +4979,26 @@
 <li><code>coneMode</code> : Unit of cone , in direction or angle.<ul>
 <li><code>'direction'</code>, or <code>0</code> : Cone in directions.<br />
     For example, visible directions are between <em>(0 - 2/2)</em> to <em>(0 + 2/2)</em> if set
-    <div class="codehilite"><pre><span></span>face : 0,
+    <div class="codehilite"><pre><span></span><code>face : 0,
 cone : 2,
 coneMode: 0
-</pre></div></li>
+</code></pre></div></li>
 <li><code>'angle'</code>, or <code>1</code> : Cone in angle.
     For example, visible angle is between <em>(0 - 120/2)</em> to <em>(0 + 120/2)</em> if set
-    <div class="codehilite"><pre><span></span>face : 0,
+    <div class="codehilite"><pre><span></span><code>face : 0,
 cone : 120,
 coneMode: 1
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Pre-test : Test tiles on visible path.<ul>
 <li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not.</li>
 <li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a>.</li>
 <li><code>preTestCallback</code>, <code>preTestCallbackScope</code> : Custom pre-test function, return <code>false</code> to discard cost function.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return false;</span>
 <span class="p">}</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>tileXYArray[0]</code> is current tileXY position of chess.</li>
 </ul>
 </li>
@@ -4995,10 +5007,10 @@ coneMode: 1
 <li>Cost function of each tile on visible path<ul>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>
 <li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Cost of blocker : <code>fieldOfView.BLOCKER</code></li>
 <li><code>curTile</code> : Currest testing tileXY.</li>
 <li><code>tileXYArray</code> : A <em>read only</em>  tileXY array of sight path.</li>
@@ -5014,15 +5026,15 @@ coneMode: 1
 </li>
 </ul>
 <h3 id="set-pre-test-function">Set pre-test function<a class="headerlink" href="#set-pre-test-function" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setPreTestFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setPreTestFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
 
 <ul>
 <li><code>callback</code>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>tileXYArray[0]</code> is current tileXY position of chess.</li>
 </ul>
 </li>
@@ -5030,16 +5042,16 @@ coneMode: 1
 <h3 id="set-cost-function">Set cost function<a class="headerlink" href="#set-cost-function" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Constant cost for each non-blocked tile
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">cost</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">cost</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get cost via callback
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>callback</code>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Cost of blocker : <code>fieldOfView.BLOCKER</code></li>
 <li><code>curTile</code> : Currest testing tileXY.</li>
 <li><code>tileXYArray</code> : A <em>read only</em>  tileXY array of sight path.</li>
@@ -5049,10 +5061,10 @@ coneMode: 1
 </li>
 </ul>
 <h3 id="is-tilexychess-visible">Is tileXY/chess visible<a class="headerlink" href="#is-tilexychess-visible" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">isInLOS</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">isInLOS</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 <span class="c1">// var isVisible = fieldOfView.isInLOS(chess, visiblePoints);</span>
 <span class="c1">// var isVisible = fieldOfView.isInLOS(chess, visiblePoints, originTileXY);</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>chess</code> : Chess object or tileXY</li>
@@ -5066,12 +5078,12 @@ coneMode: 1
 </li>
 </ul>
 <h3 id="get-tilexy-array-in-field-of-view">Get tileXY array in field of view<a class="headerlink" href="#get-tilexy-array-in-field-of-view" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">findFOV</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">findFOV</span><span class="p">();</span>
 <span class="c1">// var tileXYArray = fieldOfView.findFOV(visiblePoints);</span>
 <span class="c1">// var tileXYArray = fieldOfView.findFOV(visiblePoints, originTileXY);</span>
 <span class="c1">// var out = fieldOfView.findFOV(visiblePoints, out);</span>
 <span class="c1">// var out = fieldOfView.findFOV(visiblePoints, originTileXY, out);</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>visiblePoints</code><ul>
@@ -5087,11 +5099,11 @@ coneMode: 1
 <h3 id="filter-visible-tilexy-array">Filter visible tileXY array<a class="headerlink" href="#filter-visible-tilexy-array" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Filter visible tileXY array
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, originTileXY);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, out);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, originTileXY, out);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>chessArray</code> : Array of chess object or tileXY</li>
 <li><code>out</code> : Array of visible chess object or tileXY</li>
 <li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
@@ -5101,11 +5113,11 @@ coneMode: 1
 </ul>
 </li>
 <li>Filter visible tileXY array with visible points
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, out);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY, out);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>chessArray</code> : Array of chess object or tileXY</li>
 <li><code>out</code> : Array of visible chess object or tileXY</li>
 <li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
@@ -5119,15 +5131,15 @@ coneMode: 1
 <p>Face direction</p>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">face</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">face</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setFace</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setFace</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">face</span> <span class="o">=</span> <span class="nx">direction</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">face</span> <span class="o">=</span> <span class="nx">direction</span><span class="p">;</span>
 <span class="c1">// fieldOfView.face ++;</span>
-</pre></div></li>
+</code></pre></div></li>
 <li><code>face</code> :<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a>.</li>
 <li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
@@ -5137,11 +5149,11 @@ coneMode: 1
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Clear debug graphics
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">clearDebugGraphics</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">clearDebugGraphics</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Set color of lines
-    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setDebugLineColor</span><span class="p">(</span><span class="nx">visibleLineColor</span><span class="p">,</span> <span class="nx">invisibleLineColor</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setDebugLineColor</span><span class="p">(</span><span class="nx">visibleLineColor</span><span class="p">,</span> <span class="nx">invisibleLineColor</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>visibleLineColor</code>, <code>invisibleLineColor</code> : Set <code>undefined</code> to not draw any line.</li>
 </ul>
 </li>
@@ -5204,18 +5216,18 @@ coneMode: 1
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5225,7 +5237,7 @@ coneMode: 1
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

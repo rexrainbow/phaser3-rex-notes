@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3160,6 +3160,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4768,27 +4780,27 @@
 <h3 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is key-down/is key-up
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
 <span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Key is down after a duration
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
 <span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">checkDown</span><span class="p">(</span><span class="nx">keyObj</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>On key-down/on key-up
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
 <span class="nx">keyObj</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">keyObj</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Any key-down/any key-up
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>event</code> : <a href="https://www.w3schools.com/jsref/obj_keyboardevent.asp">KeyboardEvent</a><ul>
 <li><code>event.code</code> : 'Key' + 'W'</li>
 </ul>
@@ -4799,80 +4811,80 @@
 <h3 id="key-object">Key object<a class="headerlink" href="#key-object" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get key object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// see `Key map` section</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// see `Key map` section</span>
 <span class="c1">// var keyObj = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Get key objects
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">(</span><span class="s1">&#39;W,S,A,D&#39;</span><span class="p">);</span>  <span class="c1">// keys.W, keys.S, keys.A, keys.D</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">(</span><span class="s1">&#39;W,S,A,D&#39;</span><span class="p">);</span>  <span class="c1">// keys.W, keys.S, keys.A, keys.D</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">({</span>
     <span class="nx">up</span><span class="o">:</span> <span class="s1">&#39;up&#39;</span><span class="p">,</span>
     <span class="nx">down</span><span class="o">:</span> <span class="s1">&#39;down&#39;</span><span class="p">,</span>
     <span class="nx">left</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
     <span class="nx">right</span><span class="o">:</span> <span class="s1">&#39;right&#39;</span>
 <span class="p">});</span>  <span class="c1">// keys.up, keys.down, keys.left, keys.right</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Remove key object
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
 <span class="c1">// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Key-down/key-up state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Duration of key-down
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">getDuration</span><span class="p">();</span> <span class="c1">// ms</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">keyObj</span><span class="p">.</span><span class="nx">getDuration</span><span class="p">();</span> <span class="c1">// ms</span>
+</code></pre></div></li>
 <li>Enable/disable
-    <div class="codehilite"><pre><span></span><span class="nx">keyObj</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">enabled</span><span class="p">;</span> <span class="c1">// Set false to disable key event</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">keyObj</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">enabled</span><span class="p">;</span> <span class="c1">// Set false to disable key event</span>
+</code></pre></div></li>
 </ul>
 <h3 id="key-object-of-cursorkeys">Key object of cursorkeys<a class="headerlink" href="#key-object-of-cursorkeys" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Get key state object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Get key state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isUpDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isUpDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isDownDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isLeftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isRightDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isSpaceDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">space</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isShiftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">shift</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ol>
 <h3 id="order-of-key-downkey-up-events">Order of key-down/key-up events<a class="headerlink" href="#order-of-key-downkey-up-events" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Key-down/key-up events of key object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// Get key object</span>
 <span class="nx">keyObj</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">keyObj</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>event.stopImmediatePropagation()</code> : Stop any further listeners from being invoked in the current Scene.</li>
 <li><code>event.stopPropagation()</code> : Stop it reaching any other Scene.</li>
 </ul>
 </li>
 <li>On key-down/on key-up
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>event.stopImmediatePropagation()</code> : Stop any further listeners from being invoked in the current Scene.</li>
 <li><code>event.stopPropagation()</code> : Stop it reaching any other Scene.    </li>
 </ul>
 </li>
 <li>Any key-down/on key-up
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>event.stopImmediatePropagation()</code> : Stop any further listeners from being invoked in the current Scene.</li>
 <li><code>event.stopPropagation()</code> : Stop it reaching any other Scene.</li>
 </ul>
 </li>
 </ol>
 <h3 id="destroy-key-object">Destroy key object<a class="headerlink" href="#destroy-key-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">keyObj</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">keyObj</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="key-map">Key map<a class="headerlink" href="#key-map" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4955,18 +4967,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -4976,7 +4988,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

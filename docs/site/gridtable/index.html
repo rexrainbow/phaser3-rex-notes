@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3317,6 +3317,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5094,19 +5106,19 @@
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexgridtableplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexgridtableplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgridtableplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Add table object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GridTablePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">GridTablePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -5121,26 +5133,26 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add table object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GridTable</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable.js&#39;</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">GridTable</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gridtable.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Add table object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GridTable</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GridTable</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">cellsCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">columns</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
@@ -5160,7 +5172,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>cellsCount</code> : Total cells count.</li>
@@ -5192,7 +5204,7 @@
 </li>
 </ul>
 <p>Add grid table from JSON</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
@@ -5201,12 +5213,12 @@
     <span class="c1">// cellsCount: 0,   // total cells count</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyGridTable</span> <span class="kr">extends</span> <span class="nx">GridTable</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyGridTable</span> <span class="kr">extends</span> <span class="nx">GridTable</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
@@ -5216,7 +5228,7 @@
 
     <span class="c1">// preUpdate(time, delta) {}</span>
 <span class="p">}</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
 <li>If the Game Object renders, it will be added to the Display List.</li>
 <li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
@@ -5225,12 +5237,12 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyGridTable</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyGridTable</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="cell-begins-visible">Cell begins visible<a class="headerlink" href="#cell-begins-visible" title="Permanent link">&para;</a></h3>
 <p>Add <a href="../container/">container</a> of cell when it begins visible in event <code>cellvisible</code>. </p>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">){</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">cellContainer</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// No reusable cell container, create a new one</span>
         <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
         <span class="c1">// cellContainer = scene.add.container();</span>
@@ -5238,44 +5250,44 @@
     <span class="c1">// Set child properties of cell container ...</span>
     <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span> <span class="c1">// Assign cell container</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 <p>It is equal to <code>cellVisibleCallback</code> in configuration.</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span> <span class="c1">// Assign cell container</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>cell</code><ul>
 <li>Scene object of grid table.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Index of cell.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Size of cell.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellWidth</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cellWidth</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">cellHeight</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>Change size of cell : <ul>
 <li>Change cell height in scoll-vertical mode.
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Change cell width in scroll-horizontal mode.
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">newWidth</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">newWidth</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>Assign cell container. Set origin point of this cell container to (0,0).
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li><code>cellContainer</code> : Cell container picked from object pool for reusing. Set <code>reuseCellContainer</code> to <code>true</code> to enable this feature.<ul>
@@ -5292,44 +5304,44 @@
 <li>Set <code>reuseCellContainer</code> to <code>true</code> to put invisible cell container into object pool.</li>
 <li>Or, pop that container by <code>cell.popContainer()</code> in event <code>cellinvisible</code>.</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
     <span class="c1">// var container = cell.popContainer();</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 <p>It is equal to <code>cellInvisibleCallback</code> in configuration.</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span> 
         <span class="c1">// var container = cell.popContainer();</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="scroll-table-content">Scroll table content<a class="headerlink" href="#scroll-table-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOY</span><span class="p">(</span><span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOX</span><span class="p">(</span><span class="nx">dx</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOXY</span><span class="p">(</span><span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>  <span class="c1">// include table.updateTable()</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>  <span class="c1">// include table.updateTable()</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">tableOX</span> <span class="o">=</span> <span class="nx">ox</span><span class="p">;</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</li>
 </ul>
 </li>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">tableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOX</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Use case</p>
@@ -5338,15 +5350,15 @@
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOYByPercentage</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>  <span class="c1">// t: 0~1</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOYByPercentage</span><span class="p">(</span><span class="nx">t</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>  <span class="c1">// t: 0~1</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>  <span class="c1">// include table.updateTable()</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>  <span class="c1">// include table.updateTable()</span>
+</code></pre></div></li>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getTableOYPercentage</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getTableOYPercentage</span><span class="p">();</span>
 <span class="c1">//var t = table.t;</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Use case</p>
@@ -5354,137 +5366,137 @@
 </div>
 <h3 id="refresh-table-content">Refresh table content<a class="headerlink" href="#refresh-table-content" title="Permanent link">&para;</a></h3>
 <p>Refresh all visible cells.</p>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
 
 <h3 id="table-size-in-cells">Table size in cells<a class="headerlink" href="#table-size-in-cells" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set table size
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h4 id="total-cells-count">Total cells count<a class="headerlink" href="#total-cells-count" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cellsCount</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cellsCount</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h4 id="columns-count">Columns count<a class="headerlink" href="#columns-count" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">columnCount</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">columnCount</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setColumnCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setColumnCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h3 id="table-size-in-pixels">Table size in pixels<a class="headerlink" href="#table-size-in-pixels" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Table height in pixels
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableHeight</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableHeight</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tableHeight</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableHeight</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Table width in pixels
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableWidth</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableWidth</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tableWidth</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableWidth</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="bounds-of-tableox-tableoy">Bounds of tableOX, tableOY<a class="headerlink" href="#bounds-of-tableox-tableoy" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Top bound of tableOY
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">topTableOY</span><span class="p">;</span>  <span class="c1">// 0</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">topTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">topTableOY</span><span class="p">;</span>  <span class="c1">// 0</span>
+</code></pre></div></li>
 <li>Bottom bound of tableOY
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottomTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">bottomTableOY</span><span class="p">;</span> <span class="c1">// A negative number</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bottomTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">bottomTableOY</span><span class="p">;</span> <span class="c1">// A negative number</span>
+</code></pre></div></li>
 <li>Left bound of tableOX
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">leftTableOX</span><span class="p">;</span>  <span class="c1">// 0</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">leftTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">leftTableOX</span><span class="p">;</span>  <span class="c1">// 0</span>
+</code></pre></div></li>
 <li>Right bound of tableOX
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rightTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">rightTableOX</span><span class="p">;</span> <span class="c1">// A negative number</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rightTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">rightTableOX</span><span class="p">;</span> <span class="c1">// A negative number</span>
+</code></pre></div></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Use case</p>
 <p>Set bounds of <a href="../scroller/">scroller</a></p>
 </div>
 <h3 id="resize-table">Resize table<a class="headerlink" href="#resize-table" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
 
 <h3 id="cell">Cell<a class="headerlink" href="#cell" title="Permanent link">&para;</a></h3>
 <h4 id="get-cell">Get cell<a class="headerlink" href="#get-cell" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
+</code></pre></div>
 
 <h4 id="cell-height">Cell height<a class="headerlink" href="#cell-height" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Set cell height, only worked in scoll-vertical mode.
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
 <span class="c1">// cell.setHeight(height);</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellHeight</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setCellHeight</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
+</code></pre></div><ul>
 <li>Refresh table after the cell size is changed.
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h4 id="cell-width">Cell width<a class="headerlink" href="#cell-width" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Set cell width, only worked in scoll-horizontal mode.
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
 <span class="c1">// cell.setWidth(width);</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellWidth</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellWidth</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setCellWidth</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellWidth</span><span class="p">);</span>
+</code></pre></div><ul>
 <li>Refresh table after the cell size is changed.
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
 <ul>
 <li>For when you absolutely know this Set won't be modified during the iteration
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">iterateVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">iterateVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>For when you know this Set will be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h4 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Pop (get and remove)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Remove
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+</code></pre></div>
                 
                   
                 
@@ -5543,18 +5555,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5564,7 +5576,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

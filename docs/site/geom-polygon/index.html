@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3067,6 +3067,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4778,8 +4790,8 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+</code></pre></div>
 
 <ul>
 <li><code>points</code> : <ul>
@@ -4790,65 +4802,65 @@
 </li>
 </ul>
 <h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">polygon0</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">polygon0</span><span class="p">);</span>
+</code></pre></div>
 
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fill shape
-    <div class="codehilite"><pre><span></span><span class="c1">// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB</span>
+    <div class="codehilite"><pre><span></span><code><span class="c1">// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPoints</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Stroke shape
-    <div class="codehilite"><pre><span></span><span class="c1">// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB</span>
+    <div class="codehilite"><pre><span></span><code><span class="c1">// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">polygon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">polygon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 <span class="c1">// points = [x0, y0, x1, y1, x2, y2, ...] , or [{x,y}, {x,y}, {x,y}, ...]</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="get-properties">Get properties<a class="headerlink" href="#get-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Points
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">;</span>    <span class="c1">// array of points {x,y}</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">;</span>    <span class="c1">// array of points {x,y}</span>
+</code></pre></div></li>
 <li>Area
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Number array
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetNumberArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetNumberArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 <span class="c1">// var out = Phaser.Geom.Polygon.GetNumberArray(polygon, out);  // modify out</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>arr</code> : [x0, y0, x1, y1, x2, y2, ...]</li>
 </ul>
 </li>
 <li>AABB (A minimum rectangle to cover this polygon)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetAABB</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetAABB</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 <span class="c1">// var out = Phaser.Geom.Polygon.GetAABB(polygon, out);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>out</code> : A <a href="../geom-rectangle/">rectangle object</a></li>
 </ul>
 </li>
 <li>Type:
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span> <span class="c1">// 4</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span> <span class="c1">// 4</span>
+</code></pre></div></li>
 </ul>
 <h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Point is inside shape
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">ContainsPoint</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">ContainsPoint</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Reverse the order of points
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Reverse</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Reverse</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Smooth : Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
-    <div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Smooth</span><span class="p">(</span><span class="nx">polygon</span><span class="p">)</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Smooth</span><span class="p">(</span><span class="nx">polygon</span><span class="p">)</span>
+</code></pre></div></li>
 </ul>
                 
                   
@@ -4908,18 +4920,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -4929,7 +4941,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3067,6 +3067,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4962,20 +4974,20 @@
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load rexBoard plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexboardplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexboardplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">,</span> <span class="s1">&#39;rexBoard&#39;</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;rexbejeweled&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbejeweled.min.js&#39;</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add bejeweled object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexbejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexbejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-template">Import template<a class="headerlink" href="#import-template" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li>Install rexBoard plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
 <span class="kr">import</span> <span class="nx">Bejeweled</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/bejeweled/Bejeweled.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
@@ -4992,13 +5004,13 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add bejeweled object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="create-bejeweled-object">Create bejeweled object<a class="headerlink" href="#create-bejeweled-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// rexBoard: &#39;rexBoard&#39;,</span>
 
     <span class="nx">board</span><span class="o">:</span> <span class="p">{</span>
@@ -5066,7 +5078,7 @@
 
     <span class="c1">// input: true</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 <p>Configurations</p>
 <ul>
@@ -5105,17 +5117,17 @@
 <p>For example, if amount of visible rows is <code>10</code>, <code>board.height</code> should set to <code>20</code>.</p>
 <h4 id="generate-symbol">Generate symbol<a class="headerlink" href="#generate-symbol" title="Permanent link">&para;</a></h4>
 <p>Symbols are declared in property <code>chess.symbols</code> in a symbol array like <code>[0, 1, 2, 3, 4, 5]</code>, or a callback to return a symbol. The callback also use <code>chess.scope</code> as the scope.</p>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">excluded</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">excluded</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">symbol</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>excluded</code> : <code>undefined</code> or a symbol array. Don't return these symbols.</li>
 </ul>
 <h4 id="create-chess-object">Create chess object<a class="headerlink" href="#create-chess-object" title="Permanent link">&para;</a></h4>
 <p>Return a game object from a callback.</p>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Create Game object (Image, Sprite, or Shape)</span>
     <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
@@ -5128,15 +5140,15 @@
     <span class="p">});</span>
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.</p>
 <h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
 <h5 id="on-matched-lines">On matched lines<a class="headerlink" href="#on-matched-lines" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>lines</code> : An array of matched lines, each line is a <a href="../structs-set/">built-in Set object</a>.<ul>
@@ -5147,14 +5159,14 @@
 </li>
 <li><code>board</code> : <a href="../board/">Board object</a>.<ul>
 <li>Get tile position <code>{x,y,z}</code> of a chess game object via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Get chess game object of a tile position <code>{x,y,z}</code> via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get array of neighbor chess of a chess game object via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -5164,10 +5176,10 @@
 <li>Add chess into line(s) to eliminate more chess.</li>
 </ul>
 <h5 id="on-eliminating-chess">On eliminating chess<a class="headerlink" href="#on-eliminating-chess" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>chessArray</code> : An array of chess (Game Object) to be eliminated</li>
@@ -5179,38 +5191,38 @@
 </ul>
 <h5 id="on-falling-chess">On falling chess<a class="headerlink" href="#on-falling-chess" title="Permanent link">&para;</a></h5>
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="input-control">Input control<a class="headerlink" href="#input-control" title="Permanent link">&para;</a></h3>
 <h4 id="default-input">Default input<a class="headerlink" href="#default-input" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Enable default input control
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Enable/disable temporarily.<ul>
 <li>Enable
-    <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Disable
-    <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setInputEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ol>
 <h4 id="custom-input">Custom input<a class="headerlink" href="#custom-input" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Discard default input control
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add custom input logic like
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span>
     <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span><span class="p">)</span> <span class="p">{</span>
@@ -5226,26 +5238,26 @@
             <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">},</span> <span class="nx">scene</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ol>
 <p>Helper methods</p>
 <ul>
 <li>Get chess via worldXY position
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get chess via tileXY position
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">tileXYToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">tileXYToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get neighbor chess via angle
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtAngle</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtAngle</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>chess1</code> : Chess object, or tileXY position <code>{x, y}</code>.</li>
 <li><code>angle</code> : Angle in radius.</li>
 </ul>
 </li>
 <li>Get neighbor chess via direction
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtDirection</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chess2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getNeighborChessAtDirection</span><span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>chess1</code> : Chess object, or tileXY position <code>{x, y}</code>.</li>
 <li><code>direction</code> : Number, or string number.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
@@ -5314,18 +5326,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5335,7 +5347,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

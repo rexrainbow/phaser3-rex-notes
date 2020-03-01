@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3067,6 +3067,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4862,43 +4874,43 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="minimum-size">Minimum size<a class="headerlink" href="#minimum-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="bounds-of-sizer">Bounds of sizer<a class="headerlink" href="#bounds-of-sizer" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">leftBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">rightBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">topBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">bottomBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">leftBound</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">leftBound</span><span class="p">;</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">rightBound</span><span class="p">;</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">topBound</span><span class="p">;</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bottomBound</span><span class="p">;</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">alignLeft</span><span class="p">(</span><span class="nx">leftBound</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">alignLeft</span><span class="p">(</span><span class="nx">leftBound</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">alignRight</span><span class="p">(</span><span class="nx">rightBound</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">alignTop</span><span class="p">(</span><span class="nx">topBound</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">alignBottom</span><span class="p">(</span><span class="nx">bottomBound</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 <h3 id="push-into-bounds">Push into bounds<a class="headerlink" href="#push-into-bounds" title="Permanent link">&para;</a></h3>
 <p>Align sizer to bound if overlapping it.</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">();</span>
+</code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+</code></pre></div>
 
 <ul>
 <li><code>bounds</code> : Bounds in <a href="../geom-rectangle/">rectangle object</a>.</li>
@@ -4907,27 +4919,27 @@
 <ul>
 <li>Pop-up<ul>
 <li>Pop-up width and height
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 <span class="c1">// sizer.popUp(duration, undefined, ease);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
 <li>Pop-up width only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
 <span class="c1">// sizer.popUp(duration, &#39;x&#39;, ease);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Pop-up height only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
 <span class="c1">// sizer.popUp(duration, &#39;y&#39;, ease);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Pop-up via config
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">({</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">})</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>orientation</code> : <code>undefined</code>, <code>x</code>, or <code>y</code></li>
 </ul>
 </li>
@@ -4935,62 +4947,62 @@
 </li>
 <li>Scale-down destroy<ul>
 <li>Scale-down width and height
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 <span class="c1">// sizer.scaleDownDestroy(duration, undefined, ease);</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li>Scale-down width only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
 <span class="c1">// sizer.scaleDownDestroy(duration, &#39;x&#39;, ease);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Scale-down height only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
 <span class="c1">// sizer.scaleDownDestroy(duration, &#39;y&#39;, ease);</span>
-</pre></div></li>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Scale-down without destroy<ul>
 <li>Scale-down width and height
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Scale-down width only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Scale-down height only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Events<ul>
 <li>Pop-up complete
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;popup.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;popup.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
 <li>Scale-down, scale-down destroy complete
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scaledown.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scaledown.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h3 id="fade">Fade<a class="headerlink" href="#fade" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fade-in
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Fade-out destroy
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Fade-out without destroy
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Events<ul>
 <li>Fade-in complete
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fadein.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fadein.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
 <li>Fade-out, fade-out destroy complete
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fadeout.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fadeout.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -4998,35 +5010,35 @@
 <ul>
 <li>Draggable child<ul>
 <li>Enable
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="c1">// sizer.setDraggable(child, true)</span>
-</pre></div>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
 <span class="c1">// sizer.setDraggable(elementName, true)</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Disable
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 <li>Draggable sizer object<ul>
 <li>Enable
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">();</span>
 <span class="c1">// sizer.setDraggable(true);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Disalbe
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
 <h3 id="pin-game-object">Pin game object<a class="headerlink" href="#pin-game-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5035,14 +5047,14 @@
 <h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Draw bounds on a graphics game object
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>color</code> : Default value is <code>0xffffff</code></li>
 </ul>
 </li>
 <li>Draw bounds and display name of child
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// color: 0xffffff,</span>
 
     <span class="c1">// name: false, </span>
@@ -5055,7 +5067,7 @@
     <span class="c1">//     align: &#39;left-top&#39;</span>
     <span class="c1">// }</span>
 <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>color</code> : Default value is <code>0xffffff</code></li>
 <li><code>name</code> :<ul>
@@ -5063,10 +5075,10 @@
 <li><code>true</code> : Display child name with default text game object, aligned at left-top of child bounds.</li>
 <li>Plain object : <ul>
 <li><code>name.createTextCallback</code> : Callback of creating customized text game object for child name
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">childBoundsRect</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">childBoundsRect</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// return scene.add.text(0, 0, &#39;&#39;); </span>
 <span class="p">}</span>
-</pre></div></li>
+</code></pre></div></li>
 <li><code>name.createTextCallbackScope</code> : Callback scope of <code>name.createTextCallback</code>, default is <code>undefined</code></li>
 <li><code>name.align</code> : <ul>
 <li><code>'left-top'</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> : Align text game object at left-top. Default value</li>
@@ -5089,7 +5101,7 @@
 </li>
 </ul>
 <h3 id="anchor">Anchor<a class="headerlink" href="#anchor" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setAnchor</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setAnchor</span><span class="p">({</span>
     <span class="c1">// left: &#39;0%+0&#39;,</span>
     <span class="c1">// right: &#39;0%+0&#39;,</span>
     <span class="c1">// centerX: &#39;0%+0&#39;,</span>
@@ -5100,7 +5112,7 @@
     <span class="c1">// centerY: &#39;0%+0&#39;,</span>
     <span class="c1">// y: &#39;0%+0&#39;</span>
 <span class="p">})</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
@@ -5114,33 +5126,33 @@
 </li>
 </ul>
 <p>For example, anchor game object's left bound to viewport's left+10, and centerY to viewport's center :</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">left</span><span class="o">:</span> <span class="s1">&#39;left+10&#39;</span><span class="p">,</span>
     <span class="nx">centerY</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span>
 <span class="p">}</span>
-</pre></div>
+</code></pre></div>
 
 <h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Add child
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">addChildrenMap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addChildrenMap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Get child
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
 </ol>
 <h3 id="get-parent">Get parent<a class="headerlink" href="#get-parent" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get parent sizer
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">parentSizer</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parentSizer</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Get topmost sizer
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topmostSizer</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">topmostSizer</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h3 id="is-in-touching">Is in touching<a class="headerlink" href="#is-in-touching" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">();</span>
-</pre></div>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTouching</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">();</span>
+</code></pre></div>
 
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>This game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
@@ -5202,18 +5214,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5223,7 +5235,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       

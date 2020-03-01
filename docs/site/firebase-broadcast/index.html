@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.3">
     
     
       
@@ -44,7 +44,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.adb8469c.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
@@ -55,7 +55,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../assets/javascripts/modernizr.86422ebf.js"></script>
     
     
       
@@ -114,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="0" class="md-skip">
         Skip to content
       </a>
     
@@ -123,7 +123,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+        <a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html" title="Notes of Phaser 3" aria-label="Notes of Phaser 3" class="md-header-nav__button md-logo">
           
             <i class="md-icon">memory</i>
           
@@ -154,7 +154,7 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
@@ -3067,6 +3067,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../uniqueitemlist/" title="Unique item list" class="md-nav__link">
+      Unique item list
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4822,19 +4834,19 @@
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
     <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
-</pre></div></li>
+</code></pre></div></li>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4842,27 +4854,27 @@
    <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">})</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add messager object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
     <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
-</pre></div></li>
+</code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -4875,9 +4887,9 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4885,27 +4897,27 @@
    <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">})</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Add messager object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span>npm i phaser3-rex-plugins
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
 <li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
     <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
     <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
     <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
-</pre></div></li>
+</code></pre></div></li>
 <li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
    <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4913,21 +4925,21 @@
    <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">})</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Broadcast</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Broadcast</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
 <li>Add messager object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Broadcast</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="c1">// receiverID: &#39;&#39;,</span>
     <span class="c1">// history: 0</span>
 <span class="p">});</span>
-</pre></div>
+</code></pre></div>
 
 <ul>
 <li><code>root</code> : Path of this messager.</li>
@@ -4942,27 +4954,27 @@
 <h3 id="send-message">Send message<a class="headerlink" href="#send-message" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Set sender in config, or <code>setSender</code> method.
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setSender</span><span class="p">(</span><span class="nx">userID</span><span class="p">,</span> <span class="nx">userName</span><span class="p">);</span>
-</pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">setSender</span><span class="p">(</span><span class="nx">userID</span><span class="p">,</span> <span class="nx">userName</span><span class="p">);</span>
+</code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setSender</span><span class="p">({</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">setSender</span><span class="p">({</span>
     <span class="nx">userID</span><span class="o">:</span> <span class="nx">userID</span><span class="p">,</span>
     <span class="nx">userName</span><span class="o">:</span> <span class="nx">userName</span>
 <span class="p">});</span>
-</pre></div><ul>
+</code></pre></div><ul>
 <li><code>userID</code> : User ID of sender.</li>
 <li><code>userName</code> : Display name of sender.</li>
 </ul>
 </li>
 <li>Set receiver in config, or <code>setReceiver</code> method.
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 </ul>
 </li>
 <li>Send message to receiverID.
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>message</code> : A string message, or a JSON data.</li>
 </ul>
 </li>
@@ -4970,35 +4982,35 @@
 <h3 id="receive-messages">Receive messages<a class="headerlink" href="#receive-messages" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Register receive event
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;receive&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;receive&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
     <span class="c1">// var senderID = data.senderID;</span>
     <span class="c1">// var senderName = data.senderName;</span>
     <span class="c1">// var message = data.message;</span>
 <span class="p">})</span>
-</pre></div></li>
+</code></pre></div></li>
 <li>Set receiver in config, or <code>setReceiver</code> method
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
-</pre></div><ul>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">setReceiver</span><span class="p">(</span><span class="nx">receiverID</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 </ul>
 </li>
 <li>Start receiving
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">startReceiving</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">startReceiving</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Stop receive
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">stopReceiving</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">stopReceiving</span><span class="p">();</span>
+</code></pre></div></li>
 </ol>
 <p>Only receive messages after invoking <code>startReceiving</code> method. Previous messages won't be got anymore.</p>
 <h4 id="received-messages">Received messages<a class="headerlink" href="#received-messages" title="Permanent link">&para;</a></h4>
 <p>Received messages will be saved in client side.</p>
 <ul>
 <li>Get received (history) messages.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">messager</span><span class="p">.</span><span class="nx">getHistory</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messages</span> <span class="o">=</span> <span class="nx">messager</span><span class="p">.</span><span class="nx">getHistory</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Clear history messages.
-    <div class="codehilite"><pre><span></span><span class="nx">messager</span><span class="p">.</span><span class="nx">clearHistory</span><span class="p">();</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">clearHistory</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
                 
                   
@@ -5058,18 +5070,18 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
         and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs</a>
       </div>
       
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
-      <a href="https://twitter.com/rexrainbow" class="md-footer-social__link fa fa-twitter"></a>
+      <a href="https://twitter.com/rexrainbow" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
     
-      <a href="https://github.com/rexrainbow/" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/rexrainbow/" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
     
   </div>
 
@@ -5079,7 +5091,7 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../assets/javascripts/application.c33a9706.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
