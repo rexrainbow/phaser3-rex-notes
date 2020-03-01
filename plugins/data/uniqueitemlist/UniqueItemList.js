@@ -14,10 +14,7 @@ class UniqueItemList {
         }
 
         this.items = [];
-
-        var destroyCallback = GetValue(config, 'destroyCallback', this.remove);
-        var destroyCallbackScope = GetValue(config, 'destroyCallbackScope', this);
-        this.setDestroyCallback(destroyCallback, destroyCallbackScope);
+        this.enableDestroyCallback(GetValue(config, 'enableDestroyCallback', true));
         if (items) {
             this.addMultiple(items);
         }
@@ -40,8 +37,11 @@ class UniqueItemList {
         return (item instanceof UniqueItemList);
     }
 
-    newList() {
-        return new UniqueItemList();
+    newList(items) {
+        var config = {
+            enableDestroyCallback: this._enableDestroyCallback
+        }
+        return new UniqueItemList(items, config);
     }
 
     get length() {
