@@ -11,8 +11,14 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var listA = this.plugins.get('rexUniqueItemList').add([1, 2, 3, 4, 5, 6]);
-        var listB = this.plugins.get('rexUniqueItemList').add([4, 5, 6, 7, 8, 9]);
+        var listA = this.plugins.get('rexUniqueItemList').add({
+            items: [1, 2, 3, 4, 5, 6],
+            destroyCallback: false
+        });
+        var listB = this.plugins.get('rexUniqueItemList').add({
+            items: [4, 5, 6, 7, 8, 9],
+            destroyCallback: false
+        });
 
         console.log('listA', listA.clone().getItems());
         console.log('listB', listB.clone().getItems());

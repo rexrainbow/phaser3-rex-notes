@@ -19,7 +19,7 @@ List of unique items. Support array and set methods.
     ```
 - Add list object
     ```javascript
-    var listA = scene.plugins.get('rexuniqueitemlistplugin').add();
+    var listA = scene.plugins.get('rexuniqueitemlistplugin').add(config);
     ```
 
 #### Import plugin
@@ -48,7 +48,7 @@ List of unique items. Support array and set methods.
     ```
 - Add list object
     ```javascript
-    var listA = scene.plugins.get('rexUniqueItemList').add();
+    var listA = scene.plugins.get('rexUniqueItemList').add(config);
     ```
 
 #### Import class
@@ -70,10 +70,28 @@ List of unique items. Support array and set methods.
 
 ```javascript
 var listA = scene.plugins.get('rexUniqueItemList').add();
-// var listA = scene.plugins.get('rexUniqueItemList').add(items);
 ```
 
+or
+
+```javascript
+var listA = scene.plugins.get('rexUniqueItemList').add(items);
+```
 - `items` : Initial items.
+
+or
+
+```javascript
+var listA = scene.plugins.get('rexUniqueItemList').add({
+    items: undefined,
+    // destroyCallback: listA.remove,
+    // destroyCallbackScope: listA
+});
+```
+
+- `destroyCallback` : Callback for item's destroy event.
+    - `false` : No callback registered to item's destroy event.
+- `destroyCallbackScope` : Scope for item's destroy event.
 
 ### Items
 

@@ -1,8 +1,14 @@
 import IsArray from '../../utils/object/IsArray.js';
 
 export default {
+    setDestroyCallback(callback, scope) {
+        this.destroyCallback = callback;
+        this.destroyCallbackScope = scope;
+        return this;
+    },
+
     addDestroyCallback(gameObject) {
-        if (!gameObject) {
+        if ((!gameObject) || (!this.destroyCallback)) {
             return this;
         }
 
@@ -15,13 +21,13 @@ export default {
         }
 
         if (gameObject.on) {
-            gameObject.on('destroy', this.remove, this);
+            gameObject.on('destroy', this.destroyCallback, this.destroyCallbackScope);
         }
         return this;
     },
 
     removeDestroyCallback(gameObject) {
-        if (!gameObject) {
+        if ((!gameObject) || (!this.destroyCallback)) {
             return this;
         }
 
@@ -34,7 +40,7 @@ export default {
         }
 
         if (gameObject.off) {
-            gameObject.off('destroy', this.remove, this);
+            gameObject.off('destroy', this.destroyCallback, this.destroyCallbackScope);
         }
         return this;
     }
