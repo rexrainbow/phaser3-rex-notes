@@ -218,6 +218,7 @@ class Dialog extends Sizer {
                 buttons: actions,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.action', 0),
+                expand: GetValue(config, 'expand.actions', false),
                 align: GetValue(config, 'align.actions', 'center'),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
@@ -228,8 +229,7 @@ class Dialog extends Sizer {
                 top: (title || toolbar || content || description || choices) ? 0 : paddingTop,
                 bottom: paddingBottom
             }
-            var expand = GetValue(config, 'expand.actions', true);
-            this.add(actionsSizer, 0, 'center', padding, expand);
+            this.add(actionsSizer, 0, 'center', padding, true);
         }
 
         this.addChildrenMap('background', background);

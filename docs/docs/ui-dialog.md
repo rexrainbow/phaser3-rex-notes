@@ -150,7 +150,7 @@ var dialog = scene.rexUI.add.dialog({
         content: true,
         description: true,
         choices: true,
-        actions: true,
+        actions: false,
     },
 
     align: {
@@ -203,20 +203,20 @@ var dialog = scene.rexUI.add.dialog({
     - `space.choice` : Space between each choice-button game objects.
     - `space.action` : Space between each action-button game objects.
 - `expand` : Expand width of element
-    - `expand.title` : Set `true` to expand width of title game object.
-    - `expand.content`
-    - `expand.description`
-    - `expand.choices`
-    - `expand.actions`
+    - `expand.title` : Set `true` to expand width of title game object. Default is `true`.
+    - `expand.content` : Set `true` to expand width of content game object. Default is `true`.
+    - `expand.description` : Set `true` to expand width of description game object. Default is `true`.
+    - `expand.choices` : Set `true` to expand width of choices game object. Default is `true`.
+    - `expand.actions` : Set `true` to expand width of actions game object. Default is `false`.
 - `align` : Align element
     - `align.title`
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
-    - `align.content`
-    - `align.description`
-    - `align.choices`
-    - `align.actions` : Alignment of action-buttons.
+    - `align.content` : Align content game object to `'left'`/`'center'`/`'right'`, if `expand.title` is `false`.
+    - `align.description` : Align description game object to `'left'`/`'center'`/`'right'`, if `expand.description` is `false`.
+    - `align.choices` : Align choices game object to `'left'`/`'center'`/`'right'`, if `expand.choices` is `false`.
+    - `align.actions` : Align action game objects to `'left'`/`'center'`/`'right'`, if `expand.actions` is `false`.
 - `click`: Configuration of [button clicking](button.md).
     - `click.mode` :
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
