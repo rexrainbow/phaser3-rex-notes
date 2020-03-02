@@ -5043,7 +5043,7 @@
         <span class="nx">content</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">description</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">choices</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">actions</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">actions</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
@@ -5105,11 +5105,11 @@
 </ul>
 </li>
 <li><code>expand</code> : Expand width of element<ul>
-<li><code>expand.title</code> : Set <code>true</code> to expand width of title game object.</li>
-<li><code>expand.content</code></li>
-<li><code>expand.description</code></li>
-<li><code>expand.choices</code></li>
-<li><code>expand.actions</code></li>
+<li><code>expand.title</code> : Set <code>true</code> to expand width of title game object. Default is <code>true</code>.</li>
+<li><code>expand.content</code> : Set <code>true</code> to expand width of content game object. Default is <code>true</code>.</li>
+<li><code>expand.description</code> : Set <code>true</code> to expand width of description game object. Default is <code>true</code>.</li>
+<li><code>expand.choices</code> : Set <code>true</code> to expand width of choices game object. Default is <code>true</code>.</li>
+<li><code>expand.actions</code> : Set <code>true</code> to expand width of actions game object. Default is <code>false</code>.</li>
 </ul>
 </li>
 <li><code>align</code> : Align element<ul>
@@ -5119,10 +5119,10 @@
 <li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
 </ul>
 </li>
-<li><code>align.content</code></li>
-<li><code>align.description</code></li>
-<li><code>align.choices</code></li>
-<li><code>align.actions</code> : Alignment of action-buttons.</li>
+<li><code>align.content</code> : Align content game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.title</code> is <code>false</code>.</li>
+<li><code>align.description</code> : Align description game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.description</code> is <code>false</code>.</li>
+<li><code>align.choices</code> : Align choices game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.choices</code> is <code>false</code>.</li>
+<li><code>align.actions</code> : Align action game objects to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.actions</code> is <code>false</code>.</li>
 </ul>
 </li>
 <li><code>click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>
