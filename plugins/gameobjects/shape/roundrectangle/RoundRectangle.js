@@ -46,7 +46,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         if (isArcCorner(radius)) {
             var centerX = geom.width - radius.x;
             var centerY = geom.height - radius.y;
-            ArcTo(centerX, centerY, radius, 0, 90, false, iteration, pathData);
+            ArcTo(centerX, centerY, radius.x, radius.y, 0, 90, false, iteration, pathData);
         } else {
             LineTo(geom.width, geom.height, pathData);
         }
@@ -56,7 +56,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         if (isArcCorner(radius)) {
             var centerX = radius.x;
             var centerY = geom.height - radius.y;
-            ArcTo(centerX, centerY, radius, 90, 180, false, iteration, pathData);
+            ArcTo(centerX, centerY, radius.x, radius.y, 90, 180, false, iteration, pathData);
         } else {
             LineTo(0, geom.height, pathData);
         }
@@ -66,7 +66,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         if (isArcCorner(radius)) {
             var centerX = radius.x;
             var centerY = radius.y;
-            ArcTo(centerX, centerY, radius, 180, 270, false, iteration, pathData);
+            ArcTo(centerX, centerY, radius.x, radius.y, 180, 270, false, iteration, pathData);
         } else {
             LineTo(0, 0, pathData);
         }
@@ -76,7 +76,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         if (isArcCorner(radius)) {
             var centerX = geom.width - radius.x;
             var centerY = radius.y;
-            ArcTo(centerX, centerY, radius, 270, 360, false, iteration, pathData);
+            ArcTo(centerX, centerY, radius.x, radius.y, 270, 360, false, iteration, pathData);
         } else {
             LineTo(geom.width, 0, pathData);
         }
