@@ -5,6 +5,7 @@ import ContainMethods from './ContainMethods.js';
 import ArrayMethods from './ArrayMethods.js';
 import SetMethods from './SetMethods.js';
 import Clone from '../../utils/object/Clone.js';
+import ArrayCopy from '../../utils/array/Copy.js';
 
 class UniqueItemList {
     constructor(items, config) {
@@ -47,7 +48,23 @@ class UniqueItemList {
     get length() {
         return this.items.length;
     }
+
+    call(fnName) {
+        if (this.items.length === 0) {
+            return this;
+        }
+
+        ArrayCopy(ARGS, arguments, 1);
+        var item;
+        for (var i = 0, cnt = this.items.length; i < cnt; i++) {
+            item = this.items[i];
+            item[fnName].apply(item, ARGS);
+        }
+        return this;
+    }
 }
+
+var ARGS = []; // reuse this array
 
 Object.assign(
     UniqueItemList.prototype,

@@ -272,3 +272,17 @@ var listA = scene.plugins.get('rexUniqueItemList').add(items);
     listA.difference(listB, listC);
     ```
     - `listC` : Result unique-item-list. Can be `listA`, or `listB`.
+
+### Call method
+
+Apply method of each item.
+
+```javascript
+listA.call(fnName, arg0, arg1, arg2, ...);
+```
+
+- `fnName` : Method name of item.
+- `arg0`, `arg1`, `arg2` : Arguments of `fnName` method.
+
+!!! note
+    Don't add or remove any item during this method.
