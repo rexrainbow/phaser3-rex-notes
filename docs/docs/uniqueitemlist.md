@@ -284,5 +284,5 @@ listA.call(fnName, arg0, arg1, arg2, ...);
 - `fnName` : Method name of item.
 - `arg0`, `arg1`, `arg2` : Arguments of `fnName` method.
 
-!!! note
+!!! warning
     Don't add or remove any item during this method.
