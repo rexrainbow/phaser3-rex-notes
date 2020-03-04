@@ -4,7 +4,7 @@ import TagText from './tagtext/TagText.js';
 import Container from './container/Container.js';
 import Chart from './chart/Chart.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
-import NinePatch from './ninepatch/.NinePatchjs';
+import NinePatch from './ninepatch/NinePatch.js';
 import YoutubePlayer from './youtubeplayer/YoutubePlayer.js';
 
 import Sizer from './sizer/Sizer.js';
