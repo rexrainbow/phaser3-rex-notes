@@ -49,16 +49,29 @@ class UniqueItemList {
         return this.items.length;
     }
 
-    call(fnName) {
+    call(callback, scope) {
         if (this.items.length === 0) {
             return this;
         }
 
-        ArrayCopy(ARGS, arguments, 1);
-        var item;
-        for (var i = 0, cnt = this.items.length; i < cnt; i++) {
-            item = this.items[i];
-            item[fnName].apply(item, ARGS);
+        if (typeof (callback) === 'string') {
+            var fnName = callback;
+            ArrayCopy(ARGS, arguments, 1);
+            var item;
+            for (var i = 0, cnt = this.items.length; i < cnt; i++) {
+                item = this.items[i];
+                item[fnName].apply(item, ARGS);
+            }
+            ARGS.length = 0;
+
+        } else {
+            for (var i = 0, cnt = this.items.length; i < cnt; i++) {
+                if (scope) {
+                    callback.call(scope, this.items[i], i);
+                } else {
+                    callback(this.items[i], i);
+                }
+            }
         }
         return this;
     }

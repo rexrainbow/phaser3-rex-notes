@@ -286,3 +286,17 @@ listA.call(fnName, arg0, arg1, arg2, ...);
 
 !!! warning
     Don't add or remove any item during this method.
+
+
+```javascript
+listA.call(function(item, i) {
+    // ....
+}, scope);
+```
+
+- `callback` : A function object.
+    ```javascript
+    function(item, i) {
+
+    }
+    ```
