@@ -360,7 +360,7 @@ See [touch event](touchevents.md#quick-start)
     gameObject.setState(state);
     ```
 
-### Private data
+### Data
 
 - Get
     ```javascript

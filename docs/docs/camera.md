@@ -292,3 +292,39 @@ var cameras = scene.cameras.getCamerasBelowPointer(pointer);
 
 - `cameras` : An array of cameras.
 - `pointer` : `{x, y}`
+
+### Render to texture
+
+1. Render to texture and game canvas
+    ```javascript
+    camera.setRenderToTexture();
+    ```
+    - Render to texture but not game canvas
+        ```javascript
+        camera.setRenderToTexture(null, false);
+        ``` 
+1. Store texture reference (WEBGL only)
+    ```javascript
+    scene.textures.addGLTexture(key, camera.glTexture, width, height);
+    ```
+1. Display via game object at another scene
+    ```javascript
+    sceneB.add.image(x, y, key);
+    ```
+
+#### Pause, resume
+
+- Pause
+    ```javascript
+    camera.renderToTexture = false; // Pause
+    ```
+- Resume
+    ```javascript
+    camera.renderToTexture = true; // Resume
+    ```
+
+#### Clear
+
+```javascript
+camera.clearRenderToTexture();
+```
