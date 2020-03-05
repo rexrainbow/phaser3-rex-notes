@@ -2546,6 +2546,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#render-to-texture" class="md-nav__link">
+    Render to texture
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume" class="md-nav__link">
+    Pause, resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4909,6 +4936,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#render-to-texture" class="md-nav__link">
+    Render to texture
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume" class="md-nav__link">
+    Pause, resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5186,6 +5240,35 @@ An invisible camera will not render anything and will skip input tests.</p>
 <li><code>cameras</code> : An array of cameras.</li>
 <li><code>pointer</code> : <code>{x, y}</code></li>
 </ul>
+<h3 id="render-to-texture">Render to texture<a class="headerlink" href="#render-to-texture" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Render to texture and game canvas
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Render to texture but not game canvas
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Store texture reference (WEBGL only)
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">addGLTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">glTexture</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Display via game object at another scene
+    <div class="codehilite"><pre><span></span><code><span class="nx">sceneB</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
+<h4 id="pause-resume">Pause, resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pause
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">renderToTexture</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// Pause</span>
+</code></pre></div></li>
+<li>Resume
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">renderToTexture</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// Resume</span>
+</code></pre></div></li>
+</ul>
+<h4 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
+</code></pre></div>
                 
                   
                 
