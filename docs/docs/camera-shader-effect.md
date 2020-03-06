@@ -9,7 +9,7 @@ Shader effect of camera.
 ### Setup
 
 1. Create filter
-   ```javascript
+    ```javascript
     var config = {
         game: scene.game,
         renderer: scene.game.renderer,
