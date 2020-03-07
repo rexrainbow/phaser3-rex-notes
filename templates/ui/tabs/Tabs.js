@@ -20,21 +20,25 @@ class Tabs extends GridSizer {
         var background = GetValue(config, 'background', undefined);
         var panel = GetValue(config, 'panel', undefined);
         var leftButtons = GetValue(config, 'leftButtons', undefined);
+        var leftButtonsBackground = GetValue(config, 'leftButtonsBackground', undefined);
         if (leftButtons && leftButtons.length === 0) {
             leftButtons = undefined;
         }
         var leftButtonsSizer;
         var rightButtons = GetValue(config, 'rightButtons', undefined);
+        var rightButtonsBackground = GetValue(config, 'rightButtonsBackground', undefined);
         if (rightButtons && rightButtons.length === 0) {
             rightButtons = undefined;
         }
         var rightButtonsSizer;
         var topButtons = GetValue(config, 'topButtons', undefined);
+        var topButtonsBackground = GetValue(config, 'topButtonsBackground', undefined);
         if (topButtons && topButtons.length === 0) {
             topButtons = undefined;
         }
         var topButtonsSizer;
         var bottomButtons = GetValue(config, 'bottomButtons', undefined);
+        var bottomButtonsBackground = GetValue(config, 'bottomButtonsBackground', undefined);
         if (bottomButtons && bottomButtons.length === 0) {
             bottomButtons = undefined;
         }
@@ -66,6 +70,7 @@ class Tabs extends GridSizer {
             var leftButtonSpace = GetValue(config, 'space.leftButton', 0);
             leftButtonsSizer = new Buttons(scene, {
                 groupName: 'left',
+                background: leftButtonsBackground,
                 buttons: leftButtons,
                 orientation: 1, // Top-Bottom
                 space: leftButtonSpace,
@@ -85,6 +90,7 @@ class Tabs extends GridSizer {
             var rightButtonSpace = GetValue(config, 'space.rightButton', 0);
             rightButtonsSizer = new Buttons(scene, {
                 groupName: 'right',
+                background: rightButtonsBackground,
                 buttons: rightButtons,
                 orientation: 1, // Top-Bottom
                 space: rightButtonSpace,
@@ -104,6 +110,7 @@ class Tabs extends GridSizer {
             var topButtonSpace = GetValue(config, 'space.topButton', 0);
             topButtonsSizer = new Buttons(scene, {
                 groupName: 'top',
+                background: topButtonsBackground,
                 buttons: topButtons,
                 orientation: 0, // Left-Right
                 space: topButtonSpace,
@@ -123,6 +130,7 @@ class Tabs extends GridSizer {
             var bottomButtonSpace = GetValue(config, 'space.bottomButton', 0);
             bottomButtonsSizer = new Buttons(scene, {
                 groupName: 'bottom',
+                background: bottomButtonsBackground,
                 buttons: bottomButtons,
                 orientation: 0, // Left-Right
                 space: bottomButtonSpace,

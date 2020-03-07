@@ -129,10 +129,12 @@ module.exports = {
     // rex ui
     'bbcodetext': './templates/ui/bbcodetext/BBCodeText.js',
     'buttons': './templates/ui/buttons/Buttons.js',
-    'chart': './templates/ui/chart/Chart.js',
+    'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
+    'chart': './templates/ui/chart/Chart.js',    
     'dialog': './templates/ui/dialog/Dialog.js',
     'fixwidthsizer': './templates/ui/fixwidthsizer/FixWidthSizer.js',
+    'overlapsizer': './templates/ui/overlapsizer/OverlapSizer.js',
     'flip': './templates/ui/flip/Flip.js',
     'gridsizer': './templates/ui/gridsizer/GridSizer.js',
     'gridtable': './templates/ui/gridtable/GridTable.js',

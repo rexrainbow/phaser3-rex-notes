@@ -2,7 +2,7 @@ var GetChildrenSizers = function (out) {
     if (out === undefined) {
         out = [];
     }
-    var children = this.sizerChildren.entries,
+    var children = this.sizerChildren,
         child;
     for (var key in children) {
         child = children[key];

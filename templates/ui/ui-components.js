@@ -2,14 +2,16 @@ import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import Container from './container/Container.js';
-import Chart from './chart/Chart.js';
+import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
+import Chart from './chart/Chart.js';
 import NinePatch from './ninepatch/NinePatch.js';
 import YoutubePlayer from './youtubeplayer/YoutubePlayer.js';
 
 import Sizer from './sizer/Sizer.js';
 import GridSizer from './gridsizer/GridSizer.js';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer.js';
+import OverlapSizer from './overlapsizer/OverlapSizer.js';
 
 import Label from './label/Label.js';
 import Buttons from './buttons/Buttons.js';
@@ -49,15 +51,17 @@ export {
     RoundRectangle,
     BBCodeText,
     TagText,
-    Container,    
-    Chart,
+    Container,
+    Canvas,
     CircleMaskImage,
+    Chart,    
     NinePatch,
     YoutubePlayer,
 
     Sizer,
     GridSizer,
     FixWidthSizer,
+    OverlapSizer,
 
     Label,
     Buttons,

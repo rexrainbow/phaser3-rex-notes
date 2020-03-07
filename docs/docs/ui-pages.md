@@ -122,7 +122,18 @@ gridSizer.addBackground(child);
 ### Add page
 
 ```javascript
-pages.addPage(child, key, align, paddingConfig, expand);
+pages.addPage(child, key, align, padding, expand);
+```
+
+or 
+
+```javascript
+pages.addPage(child, {
+    key: 0,
+    align: Phaser.Display.Align.TOP_LEFT,
+    padding: 0,
+    expand: true
+});
 ```
 
 - `child` : A game object.
@@ -137,7 +148,7 @@ pages.addPage(child, key, align, paddingConfig, expand);
     - `'right-top'`, or `Phaser.Display.Align.TOP_RIGHT` : Align game object at right-top.
     - `'right-center'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `'right-bottom'`, or `Phaser.Display.Align.RIGHT_BOTTOM` : Align game object at right-bottom.
-- `paddingConfig` : Add space between bounds. Default is 0.
+- `padding` : Add space between bounds. Default is 0.
     - A number for left/right/top/bottom bounds,
     - Or a plain object.
         ```javascript
@@ -148,7 +159,18 @@ pages.addPage(child, key, align, paddingConfig, expand);
             bottom: 0
         }
         ```
-- `expand` : Set `true` to expand width and height.
+- `expand` : Expand width and height of the page.
+    - `true` : Expand width and height.
+    - `false` : Don't expand width or height.
+    - A plain object, to expand width or height
+        ```javascript
+        {
+            width: true,
+            height: true
+        }
+        ```
+        - `expand.width` : Expand width.
+        - `expand.height` : Expand height.
 
 ### Swap to page
 

@@ -6,7 +6,7 @@ var GetChildrenHeight = function () {
     }
 
     var result = 0;
-    var children = this.sizerChildren.entries;
+    var children = this.sizerChildren;
     var child, padding, childHeight;
     for (var key in children) {
         child = children[key];

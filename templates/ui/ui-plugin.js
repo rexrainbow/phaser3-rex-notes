@@ -4,14 +4,16 @@ import RoundRectangleFactory from './roundrectangle/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import ContainerFactory from './container/Factory.js';
-import ChartFactory from './chart/Factory.js';
+import CanvasFactory from './canvas/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import ChartFactory from './chart/Factory.js';
 import NinePatchFactory from './ninepatch/Factory.js';
 import YoutubePlayerFactory from './youtubeplayer/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';
 import GridSizerFactory from './gridsizer/Factory.js';
 import FixWidthSizerFactory from './fixwidthsizer/Factory.js';
+import OverlapSizerFactory from './overlapsizer/Factory.js';
 
 import LabelFactory from './label/Factory.js';
 import ButtonsFactory from './buttons/Factory.js';

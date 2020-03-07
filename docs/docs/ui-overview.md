@@ -119,6 +119,22 @@
 
 ### Canvas objects
 
+1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
+    ```javascript
+    var canvas = scene.rexUI.add.canvas(x, y, width, height);
+    // var canvas = scene.rexUI.add.canvas(x, y, width, height);
+    ```
+    or
+    ```javascript
+    class MyCanvas extends RexPlugins.UI.Canvas {
+        constructor(scene, x, y, width, height) {
+            super(scene, x, y, width, height);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
     ```javascript
     var image = scene.rexUI.add.circleMaskImage(x, y, key, frame);

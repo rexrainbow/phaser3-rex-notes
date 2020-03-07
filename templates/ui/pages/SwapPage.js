@@ -11,7 +11,7 @@ var SwapPage = function (key) {
         }
     }
 
-    if (key && !this.sizerChildren.has(key)) {
+    if (key && !this.sizerChildren.hasOwnProperty(key)) {
         this.emit('createpage', key, this);
     }
 

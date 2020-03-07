@@ -1,4 +1,4 @@
-import Canvas from '../../../plugins/gameobjects/canvas/Canvas.js';
+import Canvas from '../canvas/Canvas.js';
 import SetChart from './SetChart.js';
 import GetChartDataset from './GetChartDataset.js';
 import GetChartData from './GetChartData.js';

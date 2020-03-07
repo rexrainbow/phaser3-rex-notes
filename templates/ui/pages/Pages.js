@@ -1,42 +1,15 @@
-import BaseSizer from '../basesizer/BaseSizer.js';
+import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import Methods from './Methods.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Map = Phaser.Structs.Map;
 
-class Pages extends BaseSizer {
+class Pages extends OverlapSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
-        if (IsPlainObject(x)) {
-            config = x;
-            x = GetValue(config, 'x', 0);
-            y = GetValue(config, 'y', 0);
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        } else if (IsPlainObject(minWidth)) {
-            config = minWidth;
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        }
-
         super(scene, x, y, minWidth, minHeight, config);
-
         this.type = 'rexPages';
         this._previousKey = undefined;
         this._currentKey = undefined;
-        this.sizerChildren = new Map();
         this.setSwapMode(GetValue(config, 'swapMode', 0));
-
-        this.addChildrenMap('pages', this.pages);
-    }
-
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-        this.sizerChildren.clear();
-        super.destroy(fromScene);
     }
 
     setSwapMode(mode) {
@@ -68,11 +41,11 @@ class Pages extends BaseSizer {
     }
 
     get keys() {
-        return this.sizerChildren.keys();
+        return Object.keys(this.sizerChildren);
     }
 
     get pages() {
-        return this.sizerChildren.entries;
+        return this.sizerChildren;
     }
 }
 

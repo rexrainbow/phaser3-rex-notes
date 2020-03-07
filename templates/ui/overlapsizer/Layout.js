@@ -29,9 +29,9 @@ var Layout = function (parent, newWidth, newHeight) {
     var childWidth, childHeight;
 
     // Layout current page
-    var pages = this.pages;
-    for (var key in pages) {
-        child = pages[key];
+    var children = this.sizerChildren;
+    for (var key in children) {
+        child = children[key];
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
@@ -44,9 +44,11 @@ var Layout = function (parent, newWidth, newHeight) {
         } else {
             childWidth = undefined;
             childHeight = undefined;
-            if (childConfig.expand) { // Expand height
-                childHeight = this.height - padding.top - padding.bottom;
+            if (childConfig.expandWidth) { // Expand width
                 childWidth = this.width - padding.left - padding.right;
+            }
+            if (childConfig.expandHeight) { // Expand height
+                childHeight = this.height - padding.top - padding.bottom;
             }
             ResizeGameObject(child, childWidth, childHeight);
         }

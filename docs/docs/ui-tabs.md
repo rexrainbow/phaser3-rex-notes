@@ -105,6 +105,10 @@ var tabs = scene.rexUI.add.tabs({
         buttonGameObject,
         // ...
     ],
+    leftButtonsBackground: leftButtonsBackgroundGameObject,
+    rightButtonsBackground: rightButtonsBackgroundGameObject,
+    topButtonsBackground: topButtonsBackgroundGameObject,
+    bottomButtonsBackground: bottomButtonsBackgroundGameObject,
 
     space: {
         left: 0,
@@ -144,6 +148,7 @@ var tabs = scene.rexUI.add.tabs({
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `panel` : Game object of center panel.
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.
+- `leftButtonsBackground`, `rightButtonsBackground`, `topButtonsBackground`, `bottomButtonsBackground` : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.leftButtonsOffset`, `space.rightButtonsOffset` : Top offset of buttons group.

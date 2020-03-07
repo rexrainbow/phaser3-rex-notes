@@ -6,6 +6,29 @@ Base class of all ui plugins.
 
 ## Usage
 
+### Background
+
+```javascript
+sizer.addBackground(gameObject);
+// sizer.addBackground(gameObject, key);
+```
+
+- `gameObject` : Background game object will be resized after `sizer.layout()` method.
+    - [Round rectangle](shape-roundrectangle.md) game object
+        ```javascript
+        var gameObject = scene.rexUI.add.roundRectangle(x, y, width, height, radius, fillColor);
+        ```    
+    - [Nine-patch](ninepatch.md) game object
+        ```javascript
+        var gameObject = scene.rexUI.add.ninePatch(x, y, width, height, key, columns, rows, config);
+        ```
+    - Custom game object which has `resize(width, height)` method.
+        - *Display width*, *display height* will be changed if this background game object does not have `resize` method.
+- `key` : Get background game object back via
+    ```javascript
+    var child = sizer.getElement(key);
+    ```
+
 ### Minimum size
 
 ```javascript
