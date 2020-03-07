@@ -4138,6 +4138,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#minimum-size" class="md-nav__link">
     Minimum size
   </a>
@@ -4751,6 +4758,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#minimum-size" class="md-nav__link">
     Minimum size
   </a>
@@ -4873,6 +4887,29 @@
 <li>Author: Rex</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// sizer.addBackground(gameObject, key);</span>
+</code></pre></div>
+
+<ul>
+<li><code>gameObject</code> : Background game object will be resized after <code>sizer.layout()</code> method.<ul>
+<li><a href="../shape-roundrectangle/">Round rectangle</a> game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+</code></pre></div></li>
+<li><a href="../ninepatch/">Nine-patch</a> game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Custom game object which has <code>resize(width, height)</code> method.<ul>
+<li><em>Display width</em>, <em>display height</em> will be changed if this background game object does not have <code>resize</code> method.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>key</code> : Get background game object back via
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="minimum-size">Minimum size<a class="headerlink" href="#minimum-size" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>

@@ -5004,7 +5004,16 @@
 </code></pre></div>
 
 <h3 id="add-page">Add page<a class="headerlink" href="#add-page" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
+</code></pre></div>
+
+<p>or </p>
+<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">align</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Align</span><span class="p">.</span><span class="nx">TOP_LEFT</span><span class="p">,</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
@@ -5022,7 +5031,7 @@
 <li><code>'right-bottom'</code>, or <code>Phaser.Display.Align.RIGHT_BOTTOM</code> : Align game object at right-bottom.</li>
 </ul>
 </li>
-<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li><code>padding</code> : Add space between bounds. Default is 0.<ul>
 <li>A number for left/right/top/bottom bounds,</li>
 <li>Or a plain object.
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -5034,7 +5043,21 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li><code>expand</code> : Set <code>true</code> to expand width and height.</li>
+<li><code>expand</code> : Expand width and height of the page.<ul>
+<li><code>true</code> : Expand width and height.</li>
+<li><code>false</code> : Don't expand width or height.</li>
+<li>A plain object, to expand width or height
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>expand.width</code> : Expand width.</li>
+<li><code>expand.height</code> : Expand height.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="swap-to-page">Swap to page<a class="headerlink" href="#swap-to-page" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">swapPage</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
