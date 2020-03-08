@@ -27,13 +27,14 @@ class Demo extends Phaser.Scene {
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
 
-        panel.panel
+        panel.getElement('panel')
             .setInteractive()
             .on('pointerup', function () {
-                panel.leftSide.visible = !panel.leftSide.visible;
+                var leftSide = panel.getElement('leftSide');
+                leftSide.visible = !leftSide.visible;
             })
 
-        panel.leftSide
+        panel.getElement('leftSide')
             .on('button.click', function (button) {
                 print.text += `${button.text}\n`;
             })

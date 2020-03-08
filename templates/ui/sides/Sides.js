@@ -18,6 +18,7 @@ class Sides extends OverlapSizer {
         }
         super(scene, x, y, minWidth, minHeight, config);
         this.type = 'rexSides';
+        this.childrenMap = this.sizerChildren;
 
         // Add elements        
         var background = GetValue(config, 'background', undefined);
@@ -73,26 +74,6 @@ class Sides extends OverlapSizer {
             }
             this.pin(this.childrenMask);
         }
-    }
-
-    get panel() {
-        return this.sizerChildren.panel;
-    }
-
-    get leftSide() {
-        return this.sizerChildren.leftSide;
-    }
-
-    get rightSide() {
-        return this.sizerChildren.rightSide;
-    }
-
-    get topSide() {
-        return this.sizerChildren.topSide;
-    }
-
-    get bottomSide() {
-        return this.sizerChildren.bottomSide;
     }
 }
 
