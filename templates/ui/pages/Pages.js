@@ -19,6 +19,7 @@ class Pages extends OverlapSizer {
         }
         super(scene, x, y, minWidth, minHeight, config);
         this.type = 'rexPages';
+        this.childrenMap = this.sizerChildren;
         this._previousKey = undefined;
         this._currentKey = undefined;
         this.setSwapMode(GetValue(config, 'swapMode', 0));
@@ -54,10 +55,6 @@ class Pages extends OverlapSizer {
 
     get keys() {
         return Object.keys(this.sizerChildren);
-    }
-
-    get pages() {
-        return this.sizerChildren;
     }
 }
 
