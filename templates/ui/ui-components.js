@@ -28,6 +28,7 @@ import TextArea from './textarea/TextArea.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import Toast from './toast/Toast.js';
+import Sides from './sides/Sides.js';
 
 import Tap from './tap/Tap.js';
 import Press from './press/Press.js';
@@ -54,7 +55,7 @@ export {
     Container,
     Canvas,
     CircleMaskImage,
-    Chart,    
+    Chart,
     NinePatch,
     YoutubePlayer,
 
@@ -78,6 +79,7 @@ export {
     ScrollableBlock,
     ScrollablePanel,
     Toast,
+    Sides,
 
     Tap,
     Press,

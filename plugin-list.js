@@ -157,6 +157,7 @@ module.exports = {
     'textarea': './templates/ui/textarea/TextArea.js',
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
+    'sides': './templates/ui/sides/Sides.js',
     'youtubeplayer': './templates/ui/youtubeplayer/YoutubePlayer.js',
     // others
     'firebase': './plugins/firebase.js',

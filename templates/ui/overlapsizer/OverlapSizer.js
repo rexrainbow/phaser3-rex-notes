@@ -4,7 +4,6 @@ import Clear from '../../../plugins/utils/object/Clear.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 
-
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
@@ -43,10 +42,14 @@ class OverlapSizer extends BaseSizer {
 
         if (IsPlainObject(key)) {
             var config = key;
-            key = GetValue(config, 'key', 0);
+            key = GetValue(config, 'key', undefined);
             align = GetValue(config, 'align', ALIGN_LEFTTOP);
             padding = GetValue(config, 'padding', 0);
             expand = GetValue(config, 'expand', true);
+        }
+
+        if (key === undefined) {
+            return this;
         }
 
         if (typeof (align) === 'string') {
@@ -59,16 +62,14 @@ class OverlapSizer extends BaseSizer {
         if (padding === undefined) {
             padding = 0;
         }
-        if (expand === undefined) {
-            expand = true;
-        }
+        var defaultExpand = (typeof (expand) === "boolean") ? expand : false;
 
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
         config.align = align;
         config.padding = GetBoundsConfig(padding);
-        config.expandWidth = GetValue(expand, 'width', expand);
-        config.expandHeight = GetValue(expand, 'height', expand);        
+        config.expandWidth = GetValue(expand, 'width', defaultExpand);
+        config.expandHeight = GetValue(expand, 'height', defaultExpand);
         if (this.sizerChildren.hasOwnProperty(key)) {
             this.sizerChildren[key].destroy();
         }

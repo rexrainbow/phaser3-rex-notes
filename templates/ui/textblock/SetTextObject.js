@@ -26,7 +26,7 @@ var SetTextObject = function (gameObject, maskEnable) {
     if (maskEnable) {
         this.textMask = new DefaultMask(this);
         this.textObject.setMask(this.textMask.createGeometryMask());
-        this.add(this.textMask);
+        this.pin(this.textMask);
     }
     return this;
 }

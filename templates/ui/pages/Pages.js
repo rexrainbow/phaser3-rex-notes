@@ -1,10 +1,22 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import Methods from './Methods.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Pages extends OverlapSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            minWidth = GetValue(config, 'width', undefined);
+            minHeight = GetValue(config, 'height', undefined);
+        } else if (IsPlainObject(minWidth)) {
+            config = minWidth;
+            minWidth = GetValue(config, 'width', undefined);
+            minHeight = GetValue(config, 'height', undefined);
+        }
         super(scene, x, y, minWidth, minHeight, config);
         this.type = 'rexPages';
         this._previousKey = undefined;

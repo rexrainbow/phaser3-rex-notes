@@ -30,6 +30,7 @@ import TextAreaFactory from './textarea/Factory.js';
 import ScrollableBlockFactory from './scrollableblock/Factory.js';
 import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
+import SidesFactory from './sides/Factory.js';
 
 import TapFactory from './tap/Factory.js';
 import PressFactory from './press/Factory.js';
