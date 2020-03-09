@@ -156,6 +156,14 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.fadeIn(duration);
     ```
+    or
+    ```javascript
+    sizer.fadeIn(duration, endAlpha);
+    ```
+    or
+    ```javascript
+    sizer.fadeIn(duration, {start:0, end:1});
+    ```
 - Fade-out destroy
     ```javascript
     sizer.fadeOutDestroy(duration);
