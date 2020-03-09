@@ -22,7 +22,23 @@ class Demo extends Phaser.Scene {
 
             // Side menu is above panel
             panel: CreatePanel(this),
-            left: CreateSideMenu(this, ['A', 'B', 'C']).setVisible(false)
+            left: CreateSideMenu(this, ['A', 'B', 'C']),
+
+            // Callbacks
+            showChildCallback: function (child, key, sides) {
+                if (key === 'panel') {
+
+                } else {
+                    sides.setChildVisible(child, true);
+                }
+            },
+            hideChildCallback: function (child, key, sides) {
+                if (key === 'panel') {
+
+                } else {
+                    sides.setChildVisible(child, false);
+                }
+            }
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
@@ -30,8 +46,7 @@ class Demo extends Phaser.Scene {
         panel.getElement('panel')
             .setInteractive()
             .on('pointerup', function () {
-                var leftSide = panel.getElement('leftSide');
-                leftSide.visible = !leftSide.visible;
+                panel.toggleLeftSide();
             })
 
         panel.getElement('leftSide')
