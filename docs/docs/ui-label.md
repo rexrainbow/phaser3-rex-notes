@@ -119,7 +119,7 @@ var label = scene.rexUI.add.label({
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of label.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
     - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.

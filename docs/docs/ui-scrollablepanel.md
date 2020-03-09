@@ -153,7 +153,7 @@ var panel = scene.rexUI.add.scrollablePanel({
 - `scrollMode` : Scroll panel vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'` : Scroll panel vertically. Default value.
     - `1`, `'horizontal'`, or `'h'` : Scroll panel horizontally.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of scroll-able panel.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of scroll-able panel.
 - `panel` : Configuration of panel game object.
     - `panel.child` : Panel game object.
     - `panel.mask` : Configuration of panel's mask.

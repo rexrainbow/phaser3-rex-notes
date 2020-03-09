@@ -178,7 +178,7 @@ var table = scene.rexUI.add.gridTable({
 - `scrollMode` : Scroll grid table vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'` : Scroll grid table vertically. Default value.
     - `1`, `'horizontal'`, or `'h'` : Scroll grid table horizontally.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `table` : Configuration of grid table core.
     - `table.width` : Width of table, in pixels.
         - Set to `undefined` to expand table width to fit this grid table object.

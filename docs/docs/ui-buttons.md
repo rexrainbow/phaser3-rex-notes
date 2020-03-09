@@ -121,7 +121,7 @@ var buttons = scene.rexUI.add.buttons({
 - `orientation` : Main orientation of button game objects.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange button game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top to bottom.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : Array of button game objects.
 - `expand` : Set `true` to expand width, or height of buton game objects.
 - `align` : Alignment of these button game objects. Only valid when `expand` is `false`.

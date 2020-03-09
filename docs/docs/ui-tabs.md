@@ -145,7 +145,7 @@ var tabs = scene.rexUI.add.tabs({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `panel` : Game object of center panel.
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.
 - `leftButtonsBackground`, `rightButtonsBackground`, `topButtonsBackground`, `bottomButtonsBackground` : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.

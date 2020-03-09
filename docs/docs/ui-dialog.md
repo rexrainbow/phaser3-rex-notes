@@ -179,7 +179,7 @@ var dialog = scene.rexUI.add.dialog({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of dialog.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.
 - `leftToolbar` : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.

@@ -146,7 +146,7 @@ var textArea = scene.rexUI.add.textArea({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of text area.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of text area.
 - `text` : Game object of text.
 - `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.
 - `textHeight` : Fixed height of text game object. Set `undefined` to ignore this feature.
