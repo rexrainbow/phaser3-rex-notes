@@ -1,4 +1,4 @@
-import TweenPromise from '../../plugins/utils/promise/TweenPromise.js';
+import { WaitComplete } from '../../plugins/utils/promise/WaitEvent.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,26 +16,27 @@ class Demo extends Phaser.Scene {
 
         var scene = this;
         gameObject0 = this.add.rectangle(300, 200, 100, 100, 0xffffff);
-        TweenPromise(scene, {
+
+        WaitComplete(scene.tweens.add({
             targets: gameObject0,
             x: 400,
             y: 300,
-            duration: 1000,
-        })
+            duration: 1000
+        }))
             .then(function () {
                 gameObject1 = scene.add.rectangle(500, 200, 80, 80, 0xffffff)
-                return TweenPromise(scene, {
+                return WaitComplete(scene.tweens.add({
                     targets: gameObject1,
                     angle: 135,
                     duration: 1000
-                })
+                }))
             })
             .then(function () {
-                return TweenPromise(scene, {
+                return WaitComplete(scene.tweens.add({
                     targets: gameObject0,
-                    alpha: 0.5,
+                    alpha: 0.1,
                     duration: 1000
-                })
+                }))
             })
             .then(function () {
                 gameObject1.destroy();
