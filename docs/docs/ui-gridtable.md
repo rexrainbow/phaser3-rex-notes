@@ -377,6 +377,8 @@ table.layout();
 table.refresh();
 ```
 
+Which is equal to `table.setItems(table.items)`.
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).

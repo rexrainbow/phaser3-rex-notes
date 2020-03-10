@@ -114,7 +114,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.fadeOutPromise(500)
                     .then(function () {
                         Phaser.Utils.Array.RemoveAt(gridTable.items, cellIndex);
-                        gridTable.setItems(gridTable.items);
+                        gridTable.refresh();
                     })
             }, this)
 
