@@ -5272,7 +5272,31 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setItems</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Get
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#add-item">Add item</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#insert-item-at">Insert item</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">AddAt</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#remove-item">Remove item</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#remove-item-at">Remove item at index</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveAt</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#remove-items-between">Remove items between indexes</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveBetween</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div></li>
+<li><a href="../array-addremove/#remove-random-item">Remove random item</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">items</span><span class="p">);</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
@@ -5351,6 +5375,7 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre></div>
 
+<p>Which is equal to <code>table.setItems(table.items)</code>.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
