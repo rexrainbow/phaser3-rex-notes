@@ -287,9 +287,39 @@ table.layout();
     table.setItems();
     ```
 - Get
-   ```javascript
-   var items = table.items;
-   ```
+    ```javascript
+    var items = table.items;
+    ```
+- [Add item](array-addremove.md#add-item)
+    ```javascript
+    Phaser.Utils.Array.Add(table.items, item);
+    table.refresh();
+    ```
+- [Insert item](array-addremove.md#insert-item-at)
+    ```javascript
+    Phaser.Utils.Array.AddAt(table.items, item, index);
+    table.refresh();
+    ```
+- [Remove item](array-addremove.md#remove-item)
+    ```javascript
+    Phaser.Utils.Array.Remove(table.items, item);
+    table.refresh();
+    ```
+- [Remove item at index](array-addremove.md#remove-item-at)
+    ```javascript
+    Phaser.Utils.Array.RemoveAt(table.items, index);
+    table.refresh();
+    ```
+- [Remove items between indexes](array-addremove.md#remove-items-between)
+    ```javascript
+    Phaser.Utils.Array.RemoveBetween(table.items, startIndex, endIndex);
+    table.refresh();
+    ```
+- [Remove random item](array-addremove.md#remove-random-item)
+    ```javascript
+    Phaser.Utils.Array.RemoveRandomElement(table.items);
+    table.refresh();
+    ```
 
 ### Scroll content
 
