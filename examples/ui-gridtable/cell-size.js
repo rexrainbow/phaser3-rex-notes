@@ -111,6 +111,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('text').setText(item.id); // Set text of text object
                 cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
+                cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
                 return cellContainer;
             },
             items: getItems(100)

@@ -84,6 +84,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('id').setText(item.id);
                 cellContainer.getElement('score').setText(item.score);
+                cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
                 return cellContainer;
             },
             items: getItems(100)

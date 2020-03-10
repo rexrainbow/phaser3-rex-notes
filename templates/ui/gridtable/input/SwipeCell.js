@@ -8,17 +8,20 @@ var SwipeCell = function (table, tableConfig) {
     if (swipeConfig === undefined) {
         swipeConfig = {};
     }
-    swipeConfig.dir = (table.scrollMode === 0) ? 1 : 0;
+    swipeConfig.dir = '4dir';
     table._swipe = new Swipe(table, swipeConfig);
     table._swipe
         .on('swipe', function (swipe) {
-            var cellIndex = table.pointerToCellIndex(swipe.x, swipe.y);
-            var dirName =
-                (swipe.left) ? 'left' :
-                    (swipe.right) ? 'right' :
-                        (swipe.up) ? 'up' : 'down';
-
-            EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, cellIndex);
+            var isValidSwipe = (table.scrollMode === 0) ? (swipe.left || swipe.right) : (swipe.up || swipe.down);
+            if (isValidSwipe) {
+                var cellIndex = table.pointerToCellIndex(swipe.x, swipe.y);
+                var dirName =
+                    (swipe.left) ? 'left' :
+                        (swipe.right) ? 'right' :
+                            (swipe.up) ? 'up' :
+                                'down';
+                EmitCellEvent(this.eventEmitter, `cell.swipe${dirName}`, table, cellIndex);
+            }
         }, this)
 };
 

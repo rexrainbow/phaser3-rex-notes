@@ -50,8 +50,8 @@ class Sides extends OverlapSizer {
         }
         if (panel) {
             this.add(panel, 'panel', 'center', 0, true);
+            this.showChild('panel');
             this.currentChildKey = 'panel';
-            this.showChild('panel');            
         }
         if (leftSide) {
             var expand = GetValue(config, 'expand.left', true);

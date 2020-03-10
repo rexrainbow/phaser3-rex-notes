@@ -90,16 +90,37 @@ sizer.pushIntoBounds(bounds);
         sizer.popUp(duration);
         // sizer.popUp(duration, undefined, ease);
         ```
+        or
+        ```javascript
+        sizer.popUpPromise(duration)
+            .then(function() {
+                // ....
+            })
+        ```
         - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
     - Pop-up width only
         ```javascript
         sizer.popUp(duration, 'x');
         // sizer.popUp(duration, 'x', ease);
         ```
+        or
+        ```javascript
+        sizer.popUpPromise(duration, 'x')
+            .then(function() {
+                // ....
+            })
+        ```
     - Pop-up height only
         ```javascript
         sizer.popUp(duration, 'y');
         // sizer.popUp(duration, 'y', ease);
+        ```
+        or
+        ```javascript
+        sizer.popUpPromise(duration, 'y')
+            .then(function() {
+                // ....
+            })
         ```
     - Pop-up via config
         ```javascript
@@ -109,6 +130,13 @@ sizer.pushIntoBounds(bounds);
             ease: undefined,
         })
         ```
+        or
+        ```javascript
+        sizer.popUpPromise(config)
+            .then(function() {
+                // ....
+            })
+        ```
         - `orientation` : `undefined`, `x`, or `y`
 - Scale-down destroy
     - Scale-down width and height
@@ -116,29 +144,71 @@ sizer.pushIntoBounds(bounds);
         sizer.scaleDownDestroy(duration);
         // sizer.scaleDownDestroy(duration, undefined, ease);
         ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration)
+            .then(function() {
+                // ....
+            })
+        ```
         - `ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
     - Scale-down width only
         ```javascript
         sizer.scaleDownDestroy(duration, 'x');
         // sizer.scaleDownDestroy(duration, 'x', ease);
         ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration, 'x');
+            .then(function() {
+                // ....
+            })
+        ```
     - Scale-down height only
         ```javascript
         sizer.scaleDownDestroy(duration, 'y');
         // sizer.scaleDownDestroy(duration, 'y', ease);
+        ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration, 'y')
+            .then(function() {
+                // ....
+            })
         ```
 - Scale-down without destroy
     - Scale-down width and height
         ```javascript
         sizer.scaleDownDestroy(duration, undefined, ease, false);
         ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration, undefined, ease, false)
+            .then(function() {
+                // ....
+            })
+        ```
     - Scale-down width only
         ```javascript
         sizer.scaleDownDestroy(duration, 'x', ease, false);
         ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration, 'x', ease, false)
+            .then(function() {
+                // ....
+            })
+        ```
     - Scale-down height only
         ```javascript
         sizer.scaleDownDestroy(duration, 'y', ease, false);
+        ```
+        or
+        ```javascript
+        sizer.scaleDownDestroyPromise(duration, 'y', ease, false)
+            .then(function() {
+                // ....
+            })
         ```
 - Events
     - Pop-up complete
@@ -164,13 +234,34 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.fadeIn(duration, {start:0, end:1});
     ```
+    or
+    ```javascript
+    sizer.fadeInPromise(duration)
+        .then(function(){
+            // ...
+        })
+    ```
 - Fade-out destroy
     ```javascript
     sizer.fadeOutDestroy(duration);
     ```
+    or
+    ```javascript
+    sizer.fadeOutDestroyPromise(duration)
+        .then(function(){
+            // ...
+        })
+    ```
 - Fade-out without destroy
     ```javascript
     sizer.fadeOutDestroy(duration, false);
+    ```
+    or
+    ```javascript
+    sizer.fadeOutDestroyPromise(duration)
+        .then(function(){
+            // ...
+        })
     ```
 - Events
     - Fade-in complete

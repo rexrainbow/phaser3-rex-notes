@@ -13,17 +13,15 @@ import PostLayout from './PostLayout.js';
 import _layoutInit from './_layoutInit.js';
 
 import SetAnchor from './SetAnchor.js';
-import PopUp from './PopUp.js';
-import ScaleDownDestroy from './ScaleDownDestroy.js';
-import FadeIn from './FadeIn.js';
-import FadeOutDestroy from './FadeOutDestroy.js';
+import ScaleMethods from './ScaleMethods.js';
+import FadeMethode from './FadeMethods.js';
 import IsInTouching from './IsInTouching.js';
 import GetParentSizer from './GetParentSizer.js';
 import GetTopmostSizer from './GetTopmostSizer.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
 
-export default {
+var methods = {
     getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
@@ -41,12 +39,16 @@ export default {
     postLayout: PostLayout,
 
     setAnchor: SetAnchor,
-    popUp: PopUp,
-    scaleDownDestroy: ScaleDownDestroy,
-    fadeIn: FadeIn,
-    fadeOutDestroy: FadeOutDestroy,
     isInTouching: IsInTouching,
     getParentSizer: GetParentSizer,
     getTopmostSizer: GetTopmostSizer,
     setDraggable: SetDraggable,
 };
+
+Object.assign(
+    methods,
+    FadeMethode,
+    ScaleMethods
+);
+
+export default methods;

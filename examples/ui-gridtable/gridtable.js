@@ -98,6 +98,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('text').setText(item.id); // Set text of text object
                 cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
+                cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
                 return cellContainer;
             },
             items: getItems(100)
@@ -194,10 +195,10 @@ var CreateFooterButton = function (scene, text, orientation) {
         .on('pointerdown', function () {
             console.log(`Pointer down ${text}`)
         })
-        .on('pointerover', function(){
+        .on('pointerover', function () {
             this.getElement('background').setStrokeStyle(1, 0xffffff);
         })
-        .on('pointerout', function(){
+        .on('pointerout', function () {
             this.getElement('background').setStrokeStyle();
         })
 }

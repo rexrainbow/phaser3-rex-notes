@@ -16,22 +16,21 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var scrollMode = 0; // 0:vertical, 1:horizontal
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
             y: 300,
-            width: (scrollMode === 0) ? 300 : 400,
-            height: (scrollMode === 0) ? 400 : 300,
+            width: 200,
+            height: 420,
 
-            scrollMode: scrollMode,
+            scrollMode: 0,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
+            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
 
             table: {
-                cellWidth: (scrollMode === 0) ? undefined : 60,
-                cellHeight: (scrollMode === 0) ? 60 : undefined,
+                cellWidth: undefined,
+                cellHeight: 60,
 
-                columns: 2,
+                columns: 1,
 
                 mask: {
                     padding: 2,
@@ -40,22 +39,15 @@ class Demo extends Phaser.Scene {
                 reuseCellContainer: true,
             },
 
-            slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
-            },
-
             space: {
                 left: 20,
                 right: 20,
                 top: 20,
                 bottom: 20,
 
-                table: {
-                    top: 30,
-                    bottom: 30,
-                    right: 10
-                },
+                table: 10,
+                header: 10,
+                footer: 10,
             },
 
             createCellContainerCallback: function (cell, cellContainer) {
@@ -69,15 +61,14 @@ class Demo extends Phaser.Scene {
                         width: width,
                         height: height,
 
-                        orientation: scrollMode,
+                        orientation: 0,
                         background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
                         icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
                         text: scene.add.text(0, 0, ''),
 
                         space: {
                             icon: 10,
-                            left: (scrollMode === 0) ? 15 : 0,
-                            top: (scrollMode === 0) ? 0 : 15,
+                            left: 15,
                         }
                     });
                     console.log(cell.index + ': create new cell-container');
@@ -85,6 +76,7 @@ class Demo extends Phaser.Scene {
                     console.log(cell.index + ': reuse cell-container');
                 }
 
+                cellContainer.setAlpha(1);  // cellContainer might be faded out
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('text').setText(item.id); // Set text of text object
@@ -95,7 +87,6 @@ class Demo extends Phaser.Scene {
             items: getItems(100)
         })
             .layout()
-            .scrollToTop()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
         this.print = this.add.text(0, 0, '');
@@ -110,21 +101,19 @@ class Demo extends Phaser.Scene {
                     .setStrokeStyle(2, COLOR_DARK)
                     .setDepth(0);
             }, this)
-            // .on('cell.click', function (cellContainer, cellIndex) {
-            //     this.print.text += 'click ' + cellIndex + ': ' + cellContainer.text + '\n';
-            // }, this)
-            .on('cell.1tap', function (cellContainer, cellIndex) {
-                this.print.text += '1 tap (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            .on('cell.swiperight', function (cellContainer, cellIndex) {
+                this.print.text += 'swipe-right (' + cellIndex + ': ' + cellContainer.text + ')\n';
+                // 1. Fade-out cellContainer
+                // 2. Remove item data from item array
+                // 3. Refresh grid table
+                cellContainer.fadeOutDestroyPromise(500, false)
+                    .then(function () {
+                        Phaser.Utils.Array.RemoveAt(gridTable.items, cellIndex);
+                        gridTable.setItems(gridTable.items);
+                    })
             }, this)
-            .on('cell.2tap', function (cellContainer, cellIndex) {
-                this.print.text += '2 taps (' + cellIndex + ': ' + cellContainer.text + ')\n';
-            }, this)
-            .on('cell.pressstart', function (cellContainer, cellIndex) {
-                this.print.text += 'press-start (' + cellIndex + ': ' + cellContainer.text + ')\n';
-            }, this)
-            .on('cell.pressend', function (cellContainer, cellIndex) {
-                this.print.text += 'press-end (' + cellIndex + ': ' + cellContainer.text + ')\n';
-            }, this)
+
+        this.add.text(0, 580, 'Swipe-right cell to destroy it')
     }
 
     update() { }
