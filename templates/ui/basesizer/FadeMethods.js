@@ -40,5 +40,15 @@ export default {
     fadeOutDestroyPromise(duration, destroyMode) {
         this.fadeOutDestroy(duration, destroyMode);
         return WaitComplete(this._fade);
+    },
+
+    fadeOut(duration) {
+        this.fadeOutDestroy(duration, false);
+        return this;
+    },
+
+    fadeOutPromise(duration) {
+        this.fadeOut(duration);
+        return WaitComplete(this._fade);
     }
 }

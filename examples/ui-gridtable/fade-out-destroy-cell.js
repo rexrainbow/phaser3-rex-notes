@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
             y: 300,
-            width: 200,
+            width: 220,
             height: 420,
 
             scrollMode: 0,
@@ -37,6 +37,11 @@ class Demo extends Phaser.Scene {
                 },
 
                 reuseCellContainer: true,
+            },
+
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
             space: {
@@ -106,14 +111,14 @@ class Demo extends Phaser.Scene {
                 // 1. Fade-out cellContainer
                 // 2. Remove item data from item array
                 // 3. Refresh grid table
-                cellContainer.fadeOutDestroyPromise(500, false)
+                cellContainer.fadeOutPromise(500)
                     .then(function () {
                         Phaser.Utils.Array.RemoveAt(gridTable.items, cellIndex);
                         gridTable.setItems(gridTable.items);
                     })
             }, this)
 
-        this.add.text(0, 580, 'Swipe-right cell to destroy it')
+        this.add.text(0, 580, 'Swipe-right cell to remove it')
     }
 
     update() { }

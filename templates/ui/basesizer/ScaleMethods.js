@@ -34,7 +34,7 @@ export default {
             ease = GetValue(config, 'ease', undefined);
             destroyMode = GetValue(config, 'destroy', undefined);
         }
-    
+
         this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
         this._scale.once('complete', function () {
             this.emit('scaledown.complete', this);
@@ -45,5 +45,17 @@ export default {
     scaleDownDestroyPromise(duration, orientation, ease, destroyMode) {
         this.scaleDownDestroy(duration, orientation, ease, destroyMode);
         return WaitComplete(this._scale);
+    },
+
+    scaleDown(duration, orientation, ease) {
+        this.scaleDownDestroy(duration, orientation, ease, false);
+        return this;
+    },
+
+    scaleDownPromise(duration, orientation, ease) {
+        this.scaleDown(duration, orientation, ease);
+        return WaitComplete(this._scale);
     }
+
+
 }

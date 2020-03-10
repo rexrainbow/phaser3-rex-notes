@@ -179,33 +179,36 @@ sizer.pushIntoBounds(bounds);
 - Scale-down without destroy
     - Scale-down width and height
         ```javascript
-        sizer.scaleDownDestroy(duration, undefined, ease, false);
+        sizer.scaleDown(duration);
+        // sizer.scaleDown(duration, undefined, ease);
         ```
         or
         ```javascript
-        sizer.scaleDownDestroyPromise(duration, undefined, ease, false)
+        sizer.scaleDownPromise(duration, undefined, ease)
             .then(function() {
                 // ....
             })
         ```
     - Scale-down width only
         ```javascript
-        sizer.scaleDownDestroy(duration, 'x', ease, false);
+        sizer.scaleDowny(duration, 'x');
+        // sizer.scaleDowny(duration, 'x', ease);
         ```
         or
         ```javascript
-        sizer.scaleDownDestroyPromise(duration, 'x', ease, false)
+        sizer.scaleDownPromise(duration, 'x', ease)
             .then(function() {
                 // ....
             })
         ```
     - Scale-down height only
         ```javascript
-        sizer.scaleDownDestroy(duration, 'y', ease, false);
+        sizer.scaleDown(duration, 'y');
+        // sizer.scaleDown(duration, 'y', ease);
         ```
         or
         ```javascript
-        sizer.scaleDownDestroyPromise(duration, 'y', ease, false)
+        sizer.scaleDownPromise(duration, 'y', ease)
             .then(function() {
                 // ....
             })
@@ -254,11 +257,11 @@ sizer.pushIntoBounds(bounds);
     ```
 - Fade-out without destroy
     ```javascript
-    sizer.fadeOutDestroy(duration, false);
+    sizer.fadeOut(duration);
     ```
     or
     ```javascript
-    sizer.fadeOutDestroyPromise(duration)
+    sizer.fadeOutPromise(duration)
         .then(function(){
             // ...
         })
