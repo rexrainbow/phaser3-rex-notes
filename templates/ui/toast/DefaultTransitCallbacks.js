@@ -4,7 +4,7 @@ export default {
     },
 
     scaleDown: function (gameObject, duration) {
-        gameObject.scaleDownDestroy(duration, undefined, undefined, false);
+        gameObject.scaleDown(duration);
     },
 
     fadeIn: function (gameObject, duration) {
@@ -12,6 +12,6 @@ export default {
     },
 
     fadeOut: function (gameObject, duration) {
-        gameObject.fadeOut(duration, false);
+        gameObject.fadeOut(duration);
     },
 }
