@@ -5,6 +5,10 @@ Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 - Author: Rex
 - Method only
 
+## Live demos
+
+- [Wait complete](https://codepen.io/rexrainbow/pen/jOPZqbr)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/event-promise)
