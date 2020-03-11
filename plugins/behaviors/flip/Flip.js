@@ -1,22 +1,17 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import TweenBase from '../../utils/tween/TweenBase.js';
 import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Flip {
+class Flip extends TweenBase {
     constructor(gameObject, config) {
+        super(gameObject, { eventEmitter: true });
         this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this.scaleStart = {};
         this.scaleEnd = {};
-        this.tween = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -31,22 +26,9 @@ class Flip {
         return this;
     }
 
-    boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
     shutdown() {
-        this.destroyEventEmitter();
-        this.stop();
+        super.shutdown();
         this.gameObject = undefined;
-        this.scene = undefined;
-        return this;
-    }
-
-    destroy() {
-        this.shutdown();
         return this;
     }
 
@@ -74,10 +56,6 @@ class Flip {
         }
         this.ease = ease;
         return this;
-    }
-
-    get isRunning() {
-        return (!!this.tween);
     }
 
     get face() {
@@ -122,13 +100,6 @@ class Flip {
             return this;
         }
 
-        if (this.duration === 0) {
-            this
-                .toggleFace()
-                .complete();
-            return this;
-        }
-
         var config = {
             targets: this.gameObject,
             duration: this.duration / 2,
@@ -137,20 +108,13 @@ class Flip {
             repeat: 0,
 
             onYoyo: this.toggleFace,
-            onYoyoScope: this,
-            onComplete: this.complete,
-            onCompleteScope: this
+            onYoyoScope: this
         }
 
         var propKey = (this.orientation === 0) ? 'scaleX' : 'scaleY';
         config[propKey] = { from: 1, to: 0 };
 
-        this.tween = this.scene.tweens.add(config);
-        return this;
-    }
-
-    restart() {
-        this.stop().start();
+        super.start(config);
         return this;
     }
 
@@ -164,29 +128,7 @@ class Flip {
         this.start();
         return this;
     }
-
-    stop() {
-        if (!this.tween) {
-            return this;
-        }
-
-        this.tween.remove();
-        this.tween = undefined;
-        return this;
-    }
-
-    complete() {
-        this.stop();
-        this.emit('complete', this, this.gameObject);
-        return this;
-    }
-
 }
-
-Object.assign(
-    Flip.prototype,
-    EventEmitterMethods
-);
 
 const ORIENTATIONMODE = {
     x: 0,

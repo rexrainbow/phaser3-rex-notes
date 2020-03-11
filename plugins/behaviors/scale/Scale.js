@@ -1,19 +1,16 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import TweenBase from '../../utils/tween/TweenBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Scale {
+class Scale extends TweenBase{
     constructor(gameObject, config) {
+        super(gameObject);
         this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
 
         this.scaleStart = {};
         this.scaleEnd = {};
-        this.tween = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -36,24 +33,6 @@ class Scale {
             delay: this.delay,
             duration: this.duration
         };
-    }
-
-    boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        this.stop();
-        this.gameObject = undefined;
-        this.scene = undefined;
-        return this;
-    }
-
-    destroy() {
-        this.shutdown();
-        return this;
     }
 
     setMode(m) {
@@ -101,12 +80,12 @@ class Scale {
     }
 
     start() {
-        if (this.tween) {
+        if (this.isRunning) {
             return this;
         }
 
         this.gameObject.setScale(this.scaleStart.x, this.scaleStart.y);
-        this.tween = this.scene.tweens.add({
+        super.start({
             targets: this.gameObject,
             scaleX: this.scaleEnd.x,
             scaleY: this.scaleEnd.y,
@@ -114,32 +93,13 @@ class Scale {
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),
-            repeat: ((this.mode == 2) ? -1 : 0),
-            onComplete: this.complete,
-            onCompleteScope: this
+            repeat: ((this.mode == 2) ? -1 : 0)
         });
-        this.setEventEmitter(this.tween);
-        return this;
-    }
-
-    restart() {
-        this.stop().start();
-        return this;
-    }
-
-    stop() {
-        if (!this.tween) {
-            return this;
-        }
-
-        this.setEventEmitter(false);
-        this.tween.remove();
-        this.tween = undefined;
         return this;
     }
 
     complete() {
-        this.stop();
+        super.complete();
         if (this.mode === 1) {
             this.gameObject.destroy();
         }
@@ -147,11 +107,6 @@ class Scale {
     }
 
 }
-
-Object.assign(
-    Scale.prototype,
-    EventEmitterMethods
-);
 
 const MODE = {
     stop: 0,

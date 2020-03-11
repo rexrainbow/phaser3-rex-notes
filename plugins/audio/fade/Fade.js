@@ -1,15 +1,17 @@
+import TweenBase from '../../utils/tween/TweenBase.js';
+
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Fade {
+class Fade extends TweenBase {
     constructor(scene, sound, config) {
+        super(scene);
         this.sound = sound;
-        this.scene = scene;
+        this.sound.on('destroy', this.destroy, this);
 
         this.volume = {};
-        this.tween = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -32,21 +34,10 @@ class Fade {
         };
     }
 
-    boot() {
-        this.scene.events.once('shutdown', this.destroy, this);
-        this.sound.on('destroy', this.destroy, this);
-    }
-
     shutdown() {
-        this.stop();
-        this.scene.events.off('destroy', this.destroy, this);
         this.sound.off('destroy', this.destroy, this);
         this.sound = undefined;
-        this.scene = undefined;
-    }
-
-    destroy() {
-        this.shutdown();
+        super.shutdown();
     }
 
     setMode(m) {
@@ -56,58 +47,43 @@ class Fade {
         this.mode = m;
         return this;
     }
+
     setVolumeRange(start, end) {
         this.volume.start = start;
         this.volume.end = end;
         return this;
     }
+
     setDelay(time) {
         this.delay = time;
         return this;
     }
+
     setFadeOutTime(time) {
         this.duration = time;
         return this;
     }
 
     start() {
-        if (this.tween) {
-            return;
-        }
-
-        if (this.duration === 0) {
-            this.sound.setVolume(this.volume.end);
-            this.complete();
+        if (this.isRunning) {
             return this;
         }
 
         this.sound.setVolume(this.volume.start);
-        this.tween = this.scene.tweens.add({
+        super.start({
             targets: this.sound,
             volume: this.volume.end,
 
             delay: this.delay,
             duration: this.duration,
-            ease: 'Linear',
-            onComplete: this.complete,
-            onCompleteScope: this
+            ease: 'Linear'
         });
 
         return this;
     }
 
-    stop() {
-        if (!this.tween) {
-            return;
-        }
-
-        this.tween.remove();
-        this.tween = undefined;
-        return this;
-    }
-
     complete() {
-        this.stop();
+        super.complete();
         switch (this.mode) {
             case 1:
                 this.sound.stop();

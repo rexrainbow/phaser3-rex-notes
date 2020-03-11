@@ -176,7 +176,9 @@ flip.setDuration(duration);
 
 - On flipping complete
     ```javascript
-    flip.on('complete', function(flip, gameObject){});
+    flip.on('complete', function(){
+        // ...
+    });
     ```
 
 ### Status

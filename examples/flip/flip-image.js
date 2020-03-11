@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
         for (var i = 0; i < 8; i++) {
             let x = i * 80 + 80;
             let y = 300;
-            let frame = `diamonds-${i+1}`;
+            let frame = `diamonds-${i + 1}`;
             let card = this.add.image(x, y, 'poker', frame);
             let flip = this.plugins.get('rexFlip').add(card, {
                 face: 'back',
@@ -23,12 +23,15 @@ class Demo extends Phaser.Scene {
                 back: { frame: 'bg-2' },
 
                 duration: 500,
-            });
+            })
+                .on('complete', function (flip, gameObject) {
+                    console.log('flip complete')
+                })
 
             card
                 .setInteractive()
                 .on('pointerdown', function () {
-                    flip.flip();
+                    flip.flip()
                 });
         }
     }
