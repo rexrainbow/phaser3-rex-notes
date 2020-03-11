@@ -1,4 +1,4 @@
-import { WaitComplete } from '../../plugins/utils/promise/WaitEvent.js';
+import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,6 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var WaitComplete = this.plugins.get('rexEventPromise').waitComplete;
         var gameObject0, gameObject1;
 
         var scene = this;
@@ -34,7 +35,7 @@ class Demo extends Phaser.Scene {
             .then(function () {
                 return WaitComplete(scene.tweens.add({
                     targets: gameObject0,
-                    alpha: 0.1,
+                    alpha: 0.3,
                     duration: 1000
                 }))
             })
@@ -55,7 +56,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexEventPromise',
+            plugin: EventPromisePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -33,6 +33,7 @@
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
+1. [Event promise](eventpromise.md): Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) of an event.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Firebase/broadcast](firebase-broadcast.md): Broadcast real-time messages, using firebase-database.

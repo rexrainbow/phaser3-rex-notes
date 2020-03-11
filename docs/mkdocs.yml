@@ -163,7 +163,10 @@ nav:
     - Tween task: tween.md
     - Timeline: tween-timeline.md
 - Logic:
-    - Event emitter: eventemitter3.md
+    - Events:
+      - Event emitter: eventemitter3.md
+      - Wait events: waitevents.md
+      - Event promise: eventpromise.md
     - Run commands:
       - Run commands: runcommands.md
       - Sequence: sequence.md
@@ -171,8 +174,7 @@ nav:
       - TCRP:
           - Recoder: tcrp-recoder.md
           - Player: tcrp-player.md
-    - FSM: fsm.md
-    - Wait events: waitevents.md
+    - FSM: fsm.md    
     - CSV table:
         - Conditions table: conditionstable.md
     - Quest: 
