@@ -70,19 +70,19 @@ Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 
 - Scale down width and height
     ```javascript
-    scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration);
-    scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, undefined, ease);
+    var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration);
+    // var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, undefined, ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - Scale down width only
     ```javascript
-    scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'x');
-    // scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'x', ease);
+    var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'x');
+    // var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'x', ease);
     ```
 - Scale down height only
     ```javascript
-    scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'y');
-    // scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'y', ease);
+    var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'y');
+    // var scale = scene.plugins.get('rexScale').scaleDownDestroy(gameObject, duration, 'y', ease);
     ```
 
 ### Events

@@ -4,7 +4,7 @@ class Stack {
     }
 
     destroy() {
-        this.items.length = 0;
+        this.clear();
         this.items = undefined;
     }
 
@@ -20,6 +20,11 @@ class Stack {
     pushMultiple(arr) {
         this.items.push.apply(this.items, arr);
         arr.length = 0;
+        return this;
+    }
+
+    clear() {
+        this.items.length = 0;
         return this;
     }
 }

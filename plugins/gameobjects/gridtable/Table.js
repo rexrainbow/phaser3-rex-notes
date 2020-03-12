@@ -4,11 +4,11 @@ import Pool from '../../pool.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
-var CellPool = new Pool();
 class Table {
     constructor(parent, config) {
         this.parent = parent; // parent: GridTable game object (Container)
         this.cells = [];
+        this.cellPool = new Pool();
         this.resetFromJSON(config);
     }
 
@@ -27,6 +27,7 @@ class Table {
         for (var i = 0, cnt = this.cells.length; i < cnt; i++) {
             this.freeCell(this.cells[i], fromScene);
         }
+        this.cellPool.destroy();
         this.cells = undefined;
         this.parent = undefined;
     }
@@ -289,7 +290,7 @@ class Table {
     }
 
     newCell(cellIdx) {
-        var cell = CellPool.pop();
+        var cell = this.cellPool.pop();
         if (cell === null) {
             cell = new Cell(this);
         } else {
@@ -329,7 +330,9 @@ class Table {
         }
 
         cell.destroy(fromScene);
-        CellPool.push(cell);
+        if (!fromScene) {
+            this.cellPool.push(cell);
+        }
         return this;
     }
 }
