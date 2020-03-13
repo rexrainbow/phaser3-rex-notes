@@ -1,5 +1,4 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -102,7 +101,6 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
 
         var scene = this;
-        var WaitComplete = this.plugins.get('rexEventPromise').waitComplete;
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
@@ -122,7 +120,7 @@ class Demo extends Phaser.Scene {
                 // 4. Reset cell height
                 // 5. Remove item data from item array   
 
-                WaitComplete(scene.tweens.add({
+                scene.rexUI.waitComplete(scene.tweens.add({
                     targets: cellContainer,
                     alpha: 0,
                     x: '+=150',
@@ -131,7 +129,7 @@ class Demo extends Phaser.Scene {
                     .then(function () {
                         gridTable.items[cellIndex].removed = true;
                         var cell = gridTable.getElement('table').getCell(cellIndex);
-                        return WaitComplete(scene.tweens.add({
+                        return scene.rexUI.waitComplete(scene.tweens.add({
                             targets: cell,
                             height: 0,
                             duration: 500,
@@ -176,11 +174,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexEventPromise',
-            plugin: EventPromisePlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

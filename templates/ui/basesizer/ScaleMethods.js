@@ -1,6 +1,6 @@
 import PopUp from '../../../plugins/popup.js';
 import ScaleDownDestroy from '../../../plugins/scale-down-destroy.js';
-import { WaitComplete } from '../../../plugins/utils/promise/WaitEvent.js'
+import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

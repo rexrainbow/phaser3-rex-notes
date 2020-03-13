@@ -1,6 +1,6 @@
 import FadeIn from '../../../plugins/fade-in.js';
 import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
-import { WaitComplete } from '../../../plugins/utils/promise/WaitEvent.js'
+import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

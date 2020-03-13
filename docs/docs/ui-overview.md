@@ -314,6 +314,25 @@ var isInBounds = scene.rexUI.isInTouching(gameObject);
 // var isInBounds = scene.rexUI.isInTouching(gameObject, pointer);
 ```
 
+### [Event promise](eventpromise.md)
+
+- [Get event promise](eventpromise.md#get-event-promise)
+    ```javascript
+    var promise = scene.rexUI.waitEvent(eventEmitter, eventName)
+        .then(function() {
+
+        })
+    ```
+    - `eventEmitter` : Any kind of [event emitter](eventemitter3.md). for example, game object, or [tween task](tween.md#events), or [scene event](scene.md#events)    
+- [Get complete event promise](eventpromise.md#get-complete-event-promise)
+    ```javascript
+    var promise = scene.rexUI.waitComplete(eventEmitter)
+        .then(function() {
+            
+        })
+    ```
+    - `eventEmitter` : [Event emitter](eventemitter3.md) which will fire `'complete'` event, for example, [tween task](tween.md#events).
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)

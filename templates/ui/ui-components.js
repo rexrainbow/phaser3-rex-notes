@@ -47,6 +47,7 @@ import {
     IsShown,
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
+import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 
 export {
     RoundRectangle,
@@ -95,5 +96,7 @@ export {
     Show,
     Hide,
     IsShown,
-    Edit
+    Edit,
+    WaitEvent,
+    WaitComplete
 }

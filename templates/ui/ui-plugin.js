@@ -49,6 +49,7 @@ import {
     IsShown,
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
+import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
@@ -65,7 +66,9 @@ var methods = {
     show: Show,
     isShown: IsShown,
     edit: Edit,
-    isInTouching: IsPointerInBounds
+    isInTouching: IsPointerInBounds,
+    waitEvent: WaitEvent,
+    waitComplete: WaitComplete
 }
 
 Object.assign(
