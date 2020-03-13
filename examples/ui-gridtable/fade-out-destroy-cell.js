@@ -1,4 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -61,6 +62,10 @@ class Demo extends Phaser.Scene {
                     height = cell.height,
                     item = cell.item,
                     index = cell.index;
+
+                if (item.removed) {
+                    return null;
+                }
                 if (cellContainer === null) {
                     cellContainer = scene.rexUI.add.label({
                         width: width,
@@ -76,12 +81,12 @@ class Demo extends Phaser.Scene {
                             left: 15,
                         }
                     });
-                    console.log(cell.index + ': create new cell-container');
+                    // console.log(cell.index + ': create new cell-container');
                 } else {
-                    console.log(cell.index + ': reuse cell-container');
+                    // console.log(cell.index + ': reuse cell-container');
                 }
 
-                cellContainer.setAlpha(1);  // cellContainer might be faded out
+                cellContainer.setAlpha(1);
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('text').setText(item.id); // Set text of text object
@@ -95,6 +100,8 @@ class Demo extends Phaser.Scene {
         //.drawBounds(this.add.graphics(), 0xff0000);
 
         this.print = this.add.text(0, 0, '');
+
+        var scene = this;
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
@@ -109,10 +116,27 @@ class Demo extends Phaser.Scene {
             .on('cell.swiperight', function (cellContainer, cellIndex) {
                 this.print.text += 'swipe-right (' + cellIndex + ': ' + cellContainer.text + ')\n';
                 // 1. Fade-out cellContainer
-                // 2. Remove item data from item array
-                // 3. Refresh grid table
+                // 2. Mark `item.removed` to `true`
+                // 3. Narrow down cell height
+                // 4. Reset cell height
+                // 5. Remove item data from item array                
                 cellContainer.fadeOutPromise(500)
                     .then(function () {
+                        gridTable.items[cellIndex].removed = true;
+                        var cell = gridTable.getElement('table').getCell(cellIndex);
+                        var tween = scene.tweens.add({
+                            targets: cell,
+                            height: 0,
+                            duration: 500,
+                            onUpdate: function () {
+                                gridTable.refresh(); // Invoke *createCellContainerCallback* for each cell again
+                            }
+                        })
+                        return scene.plugins.get('rexEventPromise').waitComplete(tween);
+                    })
+                    .then(function () {
+                        var cell = gridTable.getElement('table').getCell(cellIndex);
+                        cell.setDeltaHeight(0);
                         Phaser.Utils.Array.RemoveAt(gridTable.items, cellIndex);
                         gridTable.refresh();
                     })
@@ -146,6 +170,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
+        global: [{
+            key: 'rexEventPromise',
+            plugin: EventPromisePlugin,
+            start: true
+        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,

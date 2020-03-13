@@ -200,12 +200,34 @@ It is equal to `cellVisibleCallback` in configuration.
         - Change size of cell : 
             - Change cell height in scoll-vertical mode.
                 ```javascript
-                cell.height = newHeight;
+                cell.setHeight(newHeight);
+                // cell.height = newHeight;
+                ```
+                or
+                ```javascript
+                cell.setDeltaHeight(deltaHeight);
+                cell.deltaHeight = deltaHeight;
+                ```
+            - Reset cell height in scoll-vertical mode.
+                ```javascript
+                cell.setDeltaHeight(0);
+                cell.deltaHeight = 0;
                 ```
             - Change cell width in scroll-horizontal mode.
                 ```javascript
-                cell.width = newWidth;
+                cell.setWidth(newWidth);
+                // cell.width = newWidth;
                 ```
+                or
+                ```javascript
+                cell.setDeltaWidth(deltaWidth);
+                cell.deltaWidth = deltaWidth;
+                ```
+            - Reset cell height in scroll-horizontal mode.
+                ```javascript
+                cell.setDeltaWidth(0);
+                cell.deltaWidth = 0;
+                ```            
     - Assign cell container. Set origin point of this cell container to (0,0).
         ```javascript
         cell.setContainer(cellContainer);

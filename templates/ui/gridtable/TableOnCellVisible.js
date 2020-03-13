@@ -9,11 +9,13 @@ var TableOnCellVisible = function (table) {
         } else {
             container = callback(cell, cellContainer);
         }
-        if (container.setOrigin) {
-            container.setOrigin(0);
-        }
-        if (container.isRexSizer) {
-            container.layout(); // Use original size
+        if (container) {
+            if (container.setOrigin) {
+                container.setOrigin(0);
+            }
+            if (container.isRexSizer) {
+                container.layout(); // Use original size
+            }
         }
 
         cell.item = undefined;

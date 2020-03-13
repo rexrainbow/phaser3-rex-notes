@@ -28,7 +28,7 @@ class Cell {
 
         this.deltaHeight = 0;
         this.data = undefined;
-        this.container = null;        
+        this.container = null;
         this.parent = undefined;
         this.parentContainer = undefined;
     }
@@ -111,8 +111,21 @@ class Cell {
         this._deltaHeight = deltaHeight;
     }
 
+    get deltaWidth() {
+        return this.deltaHeight;
+    }
+
+    set deltaWidth(deltaWidth) {
+        this.deltaHeight = deltaWidth;
+    }
+
     setDeltaHeight(deltaHeight) {
         this.deltaHeight = deltaHeight;
+        return this;
+    }
+
+    setDeltaWidth(deltaWidth) {
+        this.deltaHeight = deltaWidth;
         return this;
     }
 

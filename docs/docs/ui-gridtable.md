@@ -152,10 +152,10 @@ var table = scene.rexUI.add.gridTable({
             item = cell.item,
             index = cell.index;
         if (cellContainer === null) { // No reusable cell container, create a new one
-            // cellContainer = scene.add.container();
+            // cellContainer = scene.rexUI.add.label();
         }
         // Set child properties of cell container ...
-        return cellContainer;
+        return cellContainer; // or null
     },
 
     items: [],
@@ -211,7 +211,7 @@ var table = scene.rexUI.add.gridTable({
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
 - `clamplChildOY` : Set `true` to clamp scrolling.
-- `createCellContainerCallback` : Callback to return a container object of each visible cell.
+- `createCellContainerCallback` : Callback to return a container object, or `null` of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.
         - `cell.width` : Width of this cell, in pixels.
@@ -480,11 +480,11 @@ See [base sizer object](ui-basesizer.md).
         ```javascript
         var background = table.getElement('background');
         ```
-    - Grid table
+    - [Grid table](gridtable.md)
         ```javascript
         var table = table.getElement('table');
         ```
-    - Slider
+    - [Slider](ui-slider.md)
         - Track
             ```javascript
             var track = table.getElement('slider.track');
@@ -493,7 +493,7 @@ See [base sizer object](ui-basesizer.md).
             ```javascript
             var thumb = table.getElement('slider.thumb');
             ```
-    - Scroller
+    - [Scroller](scroller.md)
         ```javascript
         var scroller = table.getElement('scroller');
         ```
