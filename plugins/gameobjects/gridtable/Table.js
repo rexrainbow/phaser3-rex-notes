@@ -294,7 +294,7 @@ class Table {
         if (cell === null) {
             cell = new Cell(this);
         } else {
-            cell.setParent(this);
+            // cell.setParent(this);
         }
         cell.index = cellIdx;
 

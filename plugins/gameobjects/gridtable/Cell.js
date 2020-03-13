@@ -3,8 +3,8 @@ import DataMethods from '../../utils/data/DataMethods.js';
 class Cell {
     constructor(parent, config) {
         this.container = null;
-        this.setParent(parent);
         this._deltaHeight = 0;
+        this.setParent(parent);
         // this.resetFromJSON(config);
     }
 
@@ -23,15 +23,12 @@ class Cell {
         }
 
         if (!fromScene) {
-            var table = this.parent;
-            if (this.deltaHeight !== 0) {
-                table.nonZeroDeltaHeightCount--;
-            }
             this.destroyContainer();
         }
 
         this.data = undefined;
         this.container = null;
+        this.deltaHeight = 0;
         this.parent = undefined;
         this.parentContainer = undefined;
     }
