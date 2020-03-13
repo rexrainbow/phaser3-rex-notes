@@ -102,6 +102,7 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
 
         var scene = this;
+        var WaitComplete = this.plugins.get('rexEventPromise').waitComplete;
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
@@ -115,24 +116,29 @@ class Demo extends Phaser.Scene {
             }, this)
             .on('cell.swiperight', function (cellContainer, cellIndex) {
                 this.print.text += 'swipe-right (' + cellIndex + ': ' + cellContainer.text + ')\n';
-                // 1. Fade-out cellContainer
+                // 1. Fade-out, move-right cellContainer
                 // 2. Mark `item.removed` to `true`
                 // 3. Narrow down cell height
                 // 4. Reset cell height
-                // 5. Remove item data from item array                
-                cellContainer.fadeOutPromise(500)
+                // 5. Remove item data from item array   
+
+                WaitComplete(scene.tweens.add({
+                    targets: cellContainer,
+                    alpha: 0,
+                    x: '+=150',
+                    duration: 500
+                }))
                     .then(function () {
                         gridTable.items[cellIndex].removed = true;
                         var cell = gridTable.getElement('table').getCell(cellIndex);
-                        var tween = scene.tweens.add({
+                        return WaitComplete(scene.tweens.add({
                             targets: cell,
                             height: 0,
                             duration: 500,
                             onUpdate: function () {
                                 gridTable.refresh(); // Invoke *createCellContainerCallback* for each cell again
                             }
-                        })
-                        return scene.plugins.get('rexEventPromise').waitComplete(tween);
+                        }));
                     })
                     .then(function () {
                         var cell = gridTable.getElement('table').getCell(cellIndex);
