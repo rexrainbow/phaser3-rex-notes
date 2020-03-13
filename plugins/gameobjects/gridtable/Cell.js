@@ -26,9 +26,9 @@ class Cell {
             this.destroyContainer();
         }
 
-        this.data = undefined;
-        this.container = null;
         this.deltaHeight = 0;
+        this.data = undefined;
+        this.container = null;        
         this.parent = undefined;
         this.parentContainer = undefined;
     }
