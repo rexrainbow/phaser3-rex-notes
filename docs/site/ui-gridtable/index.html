@@ -4994,6 +4994,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/XyJbWX">Grid table</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/vYBdNQy">Varying cell size</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/pooZWme">Sizer cell</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/YzXYemw">Fade-out-destroy cell</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridtable">Sample code</a></p>
@@ -5123,10 +5124,10 @@
             <span class="nx">item</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">item</span><span class="p">,</span>
             <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">cellContainer</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// No reusable cell container, create a new one</span>
-            <span class="c1">// cellContainer = scene.add.container();</span>
+            <span class="c1">// cellContainer = scene.rexUI.add.label();</span>
         <span class="p">}</span>
         <span class="c1">// Set child properties of cell container ...</span>
-        <span class="k">return</span> <span class="nx">cellContainer</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">cellContainer</span><span class="p">;</span> <span class="c1">// or null</span>
     <span class="p">},</span>
 
     <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
@@ -5215,7 +5216,7 @@
 </ul>
 </li>
 <li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
-<li><code>createCellContainerCallback</code> : Callback to return a container object of each visible cell.<ul>
+<li><code>createCellContainerCallback</code> : Callback to return a container object, or <code>null</code> of each visible cell.<ul>
 <li>Properties of <code>cell</code> parameter<ul>
 <li><code>cell.scene</code> : Scene of this grid table object.</li>
 <li><code>cell.width</code> : Width of this cell, in pixels.</li>
@@ -5487,10 +5488,10 @@
 <li>Background game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Grid table
+<li><a href="../gridtable/">Grid table</a>
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Slider<ul>
+<li><a href="../ui-slider/">Slider</a><ul>
 <li>Track
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">track</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
 </code></pre></div></li>
@@ -5499,7 +5500,7 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Scroller
+<li><a href="../scroller/">Scroller</a>
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scroller</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>

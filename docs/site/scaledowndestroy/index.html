@@ -4878,19 +4878,19 @@
 <h3 id="scale-down">Scale down<a class="headerlink" href="#scale-down" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Scale down width and height
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">ease</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// var scale = scene.plugins.get(&#39;rexScale&#39;).scaleDownDestroy(gameObject, duration, undefined, ease);</span>
 </code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li>Scale down width only
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
-<span class="c1">// scene.plugins.get(&#39;rexScale&#39;).scaleDownDestroy(gameObject, duration, &#39;x&#39;, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = scene.plugins.get(&#39;rexScale&#39;).scaleDownDestroy(gameObject, duration, &#39;x&#39;, ease);</span>
 </code></pre></div></li>
 <li>Scale down height only
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
-<span class="c1">// scene.plugins.get(&#39;rexScale&#39;).scaleDownDestroy(gameObject, duration, &#39;y&#39;, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = scene.plugins.get(&#39;rexScale&#39;).scaleDownDestroy(gameObject, duration, &#39;y&#39;, ease);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

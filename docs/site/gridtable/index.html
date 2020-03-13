@@ -5312,10 +5312,28 @@
 </code></pre></div><ul>
 <li>Change size of cell : <ul>
 <li>Change cell height in scoll-vertical mode.
-    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setHeight</span><span class="p">(</span><span class="nx">newHeight</span><span class="p">);</span>
+<span class="c1">// cell.height = newHeight;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setDeltaHeight</span><span class="p">(</span><span class="nx">deltaHeight</span><span class="p">);</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">deltaHeight</span> <span class="o">=</span> <span class="nx">deltaHeight</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Reset cell height in scoll-vertical mode.
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setDeltaHeight</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">deltaHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Change cell width in scroll-horizontal mode.
-    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">newWidth</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setWidth</span><span class="p">(</span><span class="nx">newWidth</span><span class="p">);</span>
+<span class="c1">// cell.width = newWidth;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setDeltaWidth</span><span class="p">(</span><span class="nx">deltaWidth</span><span class="p">);</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">deltaWidth</span> <span class="o">=</span> <span class="nx">deltaWidth</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Reset cell height in scroll-horizontal mode.
+    <div class="codehilite"><pre><span></span><code><span class="nx">cell</span><span class="p">.</span><span class="nx">setDeltaWidth</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">deltaWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 </li>
