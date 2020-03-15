@@ -31,12 +31,12 @@ class Demo extends Phaser.Scene {
 
         var candidates = this.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false })
             .addMultiple(board.tileZToChessArray(0))
+            .reverse()
 
-        var symbol = 0;
         var RunTask = function (board, candidates) {
             var tiles = GetAGroup(board, candidates).getItems();
+            var symbol = Phaser.Math.Between(0, 5);
             FillChess(board, tiles, 'board', `chess${symbol}`);
-            symbol = (symbol + 1) % 6;
             if (candidates.length > 0) {
                 this.time.delayedCall(500, RunTask, [board, candidates], this);
             }
