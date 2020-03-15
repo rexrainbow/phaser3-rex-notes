@@ -26,7 +26,16 @@ class Demo extends Phaser.Scene {
                 //     tileXY.x, tileXY.y, 1, true);
             }, this);
 
-        group4.call(board, board.tileZToChessArray(0));
+        var groups = Group4(board, board.tileZToChessArray(0));
+        for (var i = 0, icnt = groups.length; i < icnt; i++) {
+            var tiles = groups[i].getItems();
+            var symbol = Phaser.Math.Between(0, 5);
+            for (var j = 0, jcnt = tiles.length; j < jcnt; j++) {
+                var tileXY = tiles[j].rexChess.tileXYZ;                
+                var chess = this.add.image(0, 0, 'board', `chess${symbol}`);
+                board.addChess(chess, tileXY.x, tileXY.y, 1, true);
+            }
+        }
     }
 
     update() {
@@ -44,23 +53,50 @@ var getQuadGrid = function (scene) {
     return grid;
 }
 
-var group4 = function (candidates) {
-    Phaser.Utils.Array.Shuffle(candidates);
-    var out = [];
-    var picked = {};
-    var group, candidate, neighbors;
-    for (var i = 0, icnt = candidates.length; i < icnt; i++) {
-        candidate = candidates[i];
-        var tileXYZ = candidate.rexChess.tileXYZ;
-        var key = `${tileXYZ.x},${tileXYZ.y}`;
-        if (picked.hasOwnProperty(key)) {
-            continue;
-        }
+var Group4 = function (board, candidates) {
+    var scene = board.scene;
+    candidates = scene.plugins.get('rexUniqueItemList').add(candidates, { enableDestroyCallback: false })
+        .shuffle();
 
-        group = [candidate];
-        neighbors = this.getNeighborChess(candidate, -1);
-
+    var groups = [];
+    while (!candidates.isEmpty()) {
+        groups.push(
+            GetAGroup(board, candidates)
+        )
     }
+    return groups;
+}
+
+// Pick 4 connected tiles
+var GetAGroup = function (board, candidates) {
+    var scene = board.scene;
+    var group = scene.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false });
+    var tile = candidates.getLast();
+    var neighbors;
+    for (var i = 0; i < 4; i++) {
+        group.add(tile);
+        candidates.remove(tile);
+        neighbors = GetNeighborsGroup(board, tile, neighbors);
+        neighbors.intersect(candidates, neighbors);
+        if (neighbors.length > 0) {
+            tile = neighbors.popRandom();
+        } else {
+            break;
+        }
+    }
+    return group;
+}
+
+// Get all neighbors of tiles
+var GetNeighborsGroup = function (board, tile, out) {
+    var scene = board.scene;
+    if (out === undefined) {
+        out = scene.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false });
+    }
+    out.addMultiple(
+        board.getNeighborChess(tile, null)
+    )
+    return out;
 }
 
 

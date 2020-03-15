@@ -257,19 +257,19 @@ var listA = scene.plugins.get('rexUniqueItemList').add(items);
 - C = A | B
     ```javascript
     var listC = listA.union(listB);
-    listA.union(listB, listC);
+    // listA.union(listB, listC);
     ```
     - `listC` : Result unique-item-list. Can be `listA`, or `listB`.
 - C = A & B
     ```javascript
-    var listC = listA.union(listB);
-    listA.intersect(listB, listC);
+    var listC = listA.intersect(listB);
+    // listA.intersect(listB, listC);
     ```
     - `listC` : Result unique-item-list. Can be `listA`, or `listB`.
 - C = A - B
     ```javascript
-    var listC = listA.union(listB);
-    listA.difference(listB, listC);
+    var listC = listA.difference(listB);
+    // listA.difference(listB, listC);
     ```
     - `listC` : Result unique-item-list. Can be `listA`, or `listB`.
 
