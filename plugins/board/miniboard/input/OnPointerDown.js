@@ -10,8 +10,10 @@ var OnPointerDown = function (pointer) {
         this.input.pointer = pointer;
     }
 
-    OnTouchTileStart.call(this, pointer);
-    OnDragStart.call(this, pointer);
+    var hitChess = OnTouchTileStart.call(this, pointer);
+    if (hitChess) {
+        OnDragStart.call(this, pointer);
+    }
 }
 
 var OnTouchTileStart = function (pointer) {
@@ -27,7 +29,6 @@ var OnTouchTileStart = function (pointer) {
     this.input.tilePosition.y = tileY;
 
     // Get touched chess
-    globChessArray.length = 0;
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
@@ -38,7 +39,10 @@ var OnTouchTileStart = function (pointer) {
         }
         this.emit('gameobjectdown', pointer, gameObject);
     }
+    var hitChess = (gameObjects.length > 0);
     globChessArray.length = 0;
+
+    return hitChess;
 }
 
 var OnDragStart = function (pointer) {

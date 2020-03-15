@@ -14,57 +14,74 @@ class Demo extends Phaser.Scene {
 
     create() {
         var board = this.rexBoard.add.board({
-            grid: getQuadGrid(this),
+            grid: this.rexBoard.add.quadGrid({
+                x: 50,
+                y: 50,
+                cellWidth: 32,
+                cellHeight: 32,
+                type: 0
+            }),
             width: 10,
             height: 10
         })
             .forEachTileXY(function (tileXY, board) {
                 board.addChess(this.add.image(0, 0, 'board', 'tile0').setDisplaySize(34, 34),
                     tileXY.x, tileXY.y, 0, true);
-                // var symbol = Phaser.Math.Between(0, 5);
-                // board.addChess(this.add.image(0, 0, 'board', `chess${symbol}`).setData('symbol', symbol),
-                //     tileXY.x, tileXY.y, 1, true);
             }, this);
 
-        var groups = Group4(board, board.tileZToChessArray(0));
-        for (var i = 0, icnt = groups.length; i < icnt; i++) {
-            var tiles = groups[i].getItems();
-            var symbol = Phaser.Math.Between(0, 5);
-            for (var j = 0, jcnt = tiles.length; j < jcnt; j++) {
-                var tileXY = tiles[j].rexChess.tileXYZ;                
-                var chess = this.add.image(0, 0, 'board', `chess${symbol}`);
-                board.addChess(chess, tileXY.x, tileXY.y, 1, true);
+        var candidates = this.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false })
+            .addMultiple(board.tileZToChessArray(0))
+
+        var symbol = 0;
+        var RunTask = function (board, candidates) {
+            var tiles = GetAGroup(board, candidates).getItems();
+            FillChess(board, tiles, 'board', `chess${symbol}`);
+            symbol = (symbol + 1) % 6;
+            if (candidates.length > 0) {
+                this.time.delayedCall(500, RunTask, [board, candidates], this);
             }
         }
+        RunTask.call(this, board, candidates);
     }
 
     update() {
     }
 }
 
-var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
-        x: 50,
-        y: 50,
-        cellWidth: 32,
-        cellHeight: 32,
-        type: 0
-    });
-    return grid;
-}
-
-var Group4 = function (board, candidates) {
+var FillChess = function (board, tiles, texture, key) {
     var scene = board.scene;
-    candidates = scene.plugins.get('rexUniqueItemList').add(candidates, { enableDestroyCallback: false })
-        .shuffle();
-
-    var groups = [];
-    while (!candidates.isEmpty()) {
-        groups.push(
-            GetAGroup(board, candidates)
-        )
+    var grid = board.grid;
+    var miniBoard = scene.rexBoard.add.miniBoard(grid.x, grid.y, {
+        grid: grid,
+        draggable: true,
+    });
+    for (var i = 0, cnt = tiles.length; i < cnt; i++) {
+        var tileXY = tiles[i].rexChess.tileXYZ;
+        var chess = scene.add.image(0, 0, texture, key);
+        miniBoard.addChess(chess, tileXY.x, tileXY.y, 1);
     }
-    return groups;
+
+    miniBoard
+        .on('dragstart', function (pointer, dragX, dragY) {
+            this.pullOutFromMainBoard();
+            this.setAlpha(0.3);
+        }, miniBoard)
+        .on('drag', function (pointer, dragX, dragY) {
+            this.setPosition(dragX, dragY);
+            if (this.isOverlapping(board)) {
+                this.setAlpha(0.7);
+                this.alignToMainBoard(board);
+            } else {
+                this.setAlpha(0.3);
+            }
+        }, miniBoard)
+        .on('dragend', function (pointer, dragX, dragY) {
+            this.putOnMainBoard(board);
+            if (this.mainBoard) {
+                this.setAlpha(1);
+            }
+        }, miniBoard);
+    return miniBoard;
 }
 
 // Pick 4 connected tiles
@@ -79,7 +96,7 @@ var GetAGroup = function (board, candidates) {
         neighbors = GetNeighborsGroup(board, tile, neighbors);
         neighbors.intersect(candidates, neighbors);
         if (neighbors.length > 0) {
-            tile = neighbors.popRandom();
+            tile = neighbors.getRandom();
         } else {
             break;
         }

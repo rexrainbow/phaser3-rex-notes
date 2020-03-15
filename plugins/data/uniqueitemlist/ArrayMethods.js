@@ -20,6 +20,11 @@ export default {
         return this.items[this.items.length - 1];
     },
 
+    getRandom() {
+        var index = RandomBetween(0, this.items.length - 1);
+        return this.items[index];
+    },
+
     add(item, index, moveToNewPosition) {
         var currentIndex = this.items.indexOf(item);
         if (currentIndex !== -1) {

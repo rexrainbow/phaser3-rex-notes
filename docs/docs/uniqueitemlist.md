@@ -87,17 +87,21 @@ var listA = scene.plugins.get('rexUniqueItemList').add(items);
 ### Items
 
 - Get first item
-   ```javascript
-   var item = listA.getFirst();
-   ```
+    ```javascript
+    var item = listA.getFirst();
+    ```
 - Get last item
-   ```javascript
-   var item = listA.getLast();
-   ```
+    ```javascript
+    var item = listA.getLast();
+    ```
 - Get item at index
-   ```javascript
-   var item = listA.get(index);
-   ```
+    ```javascript
+    var item = listA.get(index);
+    ```
+- Get a random item
+    ```javascript
+    var item = listA.getRandom();
+    ```
 - Get items
     ```javascript
     var items = listA.getItems();
