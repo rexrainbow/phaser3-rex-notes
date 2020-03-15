@@ -5,6 +5,10 @@ Chess [Container](containerlite.md), to rotate/mirror/drag chess together.
 - Author: Rex
 - Container Game object of chess group
 
+## Live demos
+
+- [Group 4](https://codepen.io/rexrainbow/pen/bGdMVzo)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-miniboard)

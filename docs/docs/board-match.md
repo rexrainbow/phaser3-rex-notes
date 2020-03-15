@@ -5,6 +5,11 @@ Get matched chess in lines, or neighbors grouping.
 - Author: Rex
 - Application of Board system
 
+## Live demos
+
+- [Match line](https://codepen.io/rexrainbow/pen/RwPaVvg)
+- [Match neighbors](https://codepen.io/rexrainbow/pen/wvaGdQm)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-match)
