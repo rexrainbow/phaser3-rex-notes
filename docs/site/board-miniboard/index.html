@@ -3103,6 +3103,11 @@
   </li>
 
         
+      </ul>
+    </nav>
+  </li>
+
+        
           
           
           
@@ -3115,11 +3120,6 @@
   </li>
 
         
-      </ul>
-    </nav>
-  </li>
-
-        
           
           
           
@@ -3127,13 +3127,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-4" type="checkbox" id="nav-10-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-5" type="checkbox" id="nav-10-5">
     
-    <label class="md-nav__link" for="nav-10-4">
+    <label class="md-nav__link" for="nav-10-5">
       CSV
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-4">
+      <label class="md-nav__title" for="nav-10-5">
         CSV
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3175,13 +3175,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-5" type="checkbox" id="nav-10-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-6" type="checkbox" id="nav-10-6">
     
-    <label class="md-nav__link" for="nav-10-5">
+    <label class="md-nav__link" for="nav-10-6">
       Database
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-5">
+      <label class="md-nav__title" for="nav-10-6">
         Database
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4591,15 +4591,42 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-events" class="md-nav__link">
-    Drag events
+  <a href="#touch-event" class="md-nav__link">
+    Touch event
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pointer-down" class="md-nav__link">
+    Pointer down
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-event" class="md-nav__link">
-    Touch event
+  <a href="#pointer-up" class="md-nav__link">
+    Pointer up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-move" class="md-nav__link">
+    Pointer move
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-events" class="md-nav__link">
+    Drag events
   </a>
   
 </li>
@@ -5101,15 +5128,42 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-events" class="md-nav__link">
-    Drag events
+  <a href="#touch-event" class="md-nav__link">
+    Touch event
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pointer-down" class="md-nav__link">
+    Pointer down
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-event" class="md-nav__link">
-    Touch event
+  <a href="#pointer-up" class="md-nav__link">
+    Pointer up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-move" class="md-nav__link">
+    Pointer move
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-events" class="md-nav__link">
+    Drag events
   </a>
   
 </li>
@@ -5415,6 +5469,64 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">setDragEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h4 id="touch-event">Touch event<a class="headerlink" href="#touch-event" title="Permanent link">&para;</a></h4>
+<h5 id="pointer-down">Pointer down<a class="headerlink" href="#pointer-down" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Pointer down at any chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">miniBoard</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Pointer down at a chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h5 id="pointer-up">Pointer up<a class="headerlink" href="#pointer-up" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Pointer up
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">miniBoard</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Pointer up at a chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
+</ul>
+</li>
+</ul>
+<h5 id="pointer-move">Pointer move<a class="headerlink" href="#pointer-move" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Pointer move
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">miniBoard</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Pointer move to another chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
 <h4 id="drag-events">Drag events<a class="headerlink" href="#drag-events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Drag-start
@@ -5446,45 +5558,6 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
     Put chess on main-board at nearest grid.</li>
-</ul>
-<h4 id="touch-event">Touch event<a class="headerlink" href="#touch-event" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Pointer down at a chess
-    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div><ul>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
-</ul>
-</li>
-<li>Pointer up at a chess
-    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div><ul>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
-</ul>
-</li>
-<li>Pointer move to another chess
-    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;miniboard.pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</code></pre></div><ul>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
-</ul>
-</li>
 </ul>
                 
                   

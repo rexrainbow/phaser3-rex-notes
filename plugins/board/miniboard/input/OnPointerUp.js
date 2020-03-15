@@ -26,18 +26,22 @@ var OnTouchTileEnd = function (pointer) {
     this.input.tilePosition.y = tileY;
 
     // Get touched chess
-    globChessArray.length = 0;
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
-    // Fire events
-    var gameObject;
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (gameObject.emit) {
-            gameObject.emit('miniboard.pointerup', pointer);
+    var hitChess = (gameObjects.length > 0);
+    if (hitChess) {
+        // Fire events
+        var gameObject;
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            gameObject = gameObjects[i];
+            if (gameObject.emit) {
+                gameObject.emit('miniboard.pointerup', pointer);
+            }
+            this.emit('gameobjectup', pointer, gameObject);
         }
-        this.emit('gameobjectup', pointer, gameObject);
+        this.emit('pointerup', pointer, this);
     }
     globChessArray.length = 0;
+    return hitChess;
 }
 
 var globChessArray = [];

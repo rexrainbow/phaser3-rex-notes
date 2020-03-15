@@ -306,6 +306,68 @@ var isSuccess = miniBoard.lastTransferResult;
     miniBoard.setDragEnable(false);
     ```
 
+#### Touch event
+
+##### Pointer down
+
+- Pointer down at any chess
+    ```javascript
+    miniBoard.on('pointerdown', function(pointer, miniBoard) {
+    })
+    ```
+- Pointer down at a chess
+    ```javascript
+    miniBoard.on('gameobjectdown', function(pointer, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('miniboard.pointerdown', function(pointer) {
+    })
+    ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)
+
+##### Pointer up
+
+- Pointer up
+    ```javascript
+    miniBoard.on('pointerup', function(pointer, miniBoard) {
+    })
+    ```
+- Pointer up at a chess
+    ```javascript
+    miniBoard.on('gameobjectup', function(pointer, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('miniboard.pointerup', function(pointer) {
+    })
+    ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)    
+
+##### Pointer move
+
+- Pointer move
+    ```javascript
+    miniBoard.on('pointermove', function(pointer, miniBoard) {
+    })
+    ```
+- Pointer move to another chess
+    ```javascript
+    miniBoard.on('gameobjectmove', function(pointer, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('miniboard.pointermove', function(pointer) {
+    })
+    ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)
+
 #### Drag events
 
 - Drag-start
@@ -340,42 +402,3 @@ var isSuccess = miniBoard.lastTransferResult;
     }, scope);
     ```
     Put chess on main-board at nearest grid.
-
-#### Touch event
-
-- Pointer down at a chess
-    ```javascript
-    miniBoard.on('gameobjectdown', function(pointer, gameObject) {
-    })
-    ```
-    or
-    ```javascript
-    gameObject.on('miniboard.pointerdown', function(pointer) {
-    })
-    ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)
-- Pointer up at a chess
-    ```javascript
-    miniBoard.on('gameobjectup', function(pointer, gameObject) {
-    })
-    ```
-    or
-    ```javascript
-    gameObject.on('miniboard.pointerup', function(pointer) {
-    })
-    ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)    
-- Pointer move to another chess
-    ```javascript
-    miniBoard.on('gameobjectmove', function(pointer, gameObject) {
-    })
-    ```
-    or
-    ```javascript
-    gameObject.on('miniboard.pointermove', function(pointer) {
-    })
-    ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)

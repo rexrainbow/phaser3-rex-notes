@@ -25,19 +25,20 @@ var OnTouchTileMove = function (pointer) {
     this.input.tilePosition.y = tileY;
 
     // Get touched chess
-    globChessArray.length = 0;
     var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
-    // Fire events
-    var gameObject;
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (gameObject.emit) {
-            gameObject.emit('miniboard.pointermove', pointer);
+    var hitChess = (gameObjects.length > 0);
+    if (hitChess) {
+        // Fire events
+        var gameObject;
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            gameObject = gameObjects[i];
+            if (gameObject.emit) {
+                gameObject.emit('miniboard.pointermove', pointer);
+            }
+            this.emit('gameobjectmove', pointer, gameObject);
         }
-        this.emit('gameobjectmove', pointer, gameObject);
-    }
-    var isOutside = (gameObjects.length === 0);
-    if (gameObjects.length === 0) {
+        this.emit('pointermove', pointer, this);
+    } else {
         // Move outside
         if (this.input.pointer === pointer) { // Release touch pointer
             this.input.pointer = null;
@@ -48,7 +49,7 @@ var OnTouchTileMove = function (pointer) {
     // Not dragging
     if (this.input.drag.state === 0) {
         if (this.input.pointer === pointer) {
-            if (isOutside) {
+            if (!hitChess) {
                 this.input.pointer = null; // Release touch pointer
             }
         } else if (this.input.pointer === null) {
