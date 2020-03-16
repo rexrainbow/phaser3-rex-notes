@@ -403,7 +403,7 @@ scene.input.addPointer(num);  // total points = num + 1
 - Index in `scene.input.manager.pointers` : `pointer.id`
 - Motion
     - Angle: `pointer.angle`
-    - Disatance: `pointer.distance`
+    - Distance: `pointer.distance`
     - Velocity: `pointer.velocity`
         - `pointer.velocity.x`, ``pointer.velocity.y`
 
