@@ -130,6 +130,15 @@ These world properties of chess will be changed with container.
 
 ### Set origin
 
+- Set origin tileXY by offset tileXY of all chess.
+    ```javascript
+    miniBoard.setOrigin(origin);
+    // miniBoard.setOrigin(originX, originY);
+    ```
+    - `originX`, `originY`: 0~1. 
+        - `0` : Left/top.
+        - `0.5` : Center. 
+        - `1` : Right/bottom.
 - Set origin tileXY to center by offset tileXY of all chess.
     ```javascript
     miniBoard.setOrigin();

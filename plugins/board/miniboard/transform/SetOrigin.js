@@ -1,20 +1,30 @@
 import GetMinMaxTileXY from '../utils/GetMinMaxTileXY.js';
+import Linear from '../../../utils/math/Linear.js';
 import OffsetTransfer from './transferfunctions/Offset.js';
 import ResetChessTileXYZ from './ResetChessTileXYZ.js';
 
-var SetOrigin = function (origin) {
-    if (origin === undefined) {
-        origin = 'center';
+var SetOrigin = function (originX, originY) {
+    switch (originX) {
+        case 'center':
+            originX = 0.5;
+            originY = 0.5;
+            break;
+        case 'top-left':
+        case 'left-top':
+            originX = 0;
+            originY = 0;
+            break;
+    }
+    if (originX === undefined) {
+        originX = 0.5;
+    }
+    if (originY === undefined) {
+        originY = originX;
     }
     var minMaxTileXY = GetMinMaxTileXY.call(this, undefined, true);
-    var offsetX, offsetY;
-    if (origin === 'center') {
-        offsetX = -Math.floor((minMaxTileXY.maxX - minMaxTileXY.minX) / 2);
-        offsetY = -Math.floor((minMaxTileXY.maxY - minMaxTileXY.minY) / 2);
-    } else { // top-left
-        offsetX = -minMaxTileXY.minX;
-        offsetY = -minMaxTileXY.minY;
-    }
+    var offsetX = -Math.floor(Linear(minMaxTileXY.minX, minMaxTileXY.maxX, originX));
+    var offsetY = -Math.floor(Linear(minMaxTileXY.minY, minMaxTileXY.maxY, originY));
+
     if ((offsetX !== 0) || (offsetY !== 0)) {
         var newTileXYZMap = OffsetTransfer.call(this, offsetX, offsetY);
         ResetChessTileXYZ.call(this, newTileXYZMap);
