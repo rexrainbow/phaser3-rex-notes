@@ -2,6 +2,10 @@ import RotateTransfer from './transferfunctions/Rotate.js';
 import ResetChessTileXYZ from './ResetChessTileXYZ.js';
 
 var Rotate = function (direction) {
+    if (direction === 0) {
+        return this;
+    }
+
     var isOnMainBoard = (this.mainBoard != null);
     if (isOnMainBoard) {
         this.pullOutFromMainBoard();

@@ -15,8 +15,8 @@ class Demo extends Phaser.Scene {
     create() {
         var board = this.rexBoard.add.board({
             grid: this.rexBoard.add.quadGrid({
-                x: 50,
-                y: 50,
+                x: 100,
+                y: 100,
                 cellWidth: 32,
                 cellHeight: 32,
                 type: 0
@@ -51,16 +51,23 @@ class Demo extends Phaser.Scene {
 var FillChess = function (board, tiles, texture, key) {
     var scene = board.scene;
     var grid = board.grid;
+    // Create mini board
     var miniBoard = scene.rexBoard.add.miniBoard(grid.x, grid.y, {
         grid: grid,
         draggable: true,
     });
+    // Add chess
     for (var i = 0, cnt = tiles.length; i < cnt; i++) {
         var tileXY = tiles[i].rexChess.tileXYZ;
         var chess = scene.add.image(0, 0, texture, key);
         miniBoard.addChess(chess, tileXY.x, tileXY.y, 1);
     }
+    // Set origin, put on main board
+    miniBoard
+        .setOrigin()
+        .putOnMainBoard(board);
 
+    // Add drag behavior
     miniBoard
         .on('dragstart', function (pointer, dragX, dragY) {
             this.pullOutFromMainBoard();

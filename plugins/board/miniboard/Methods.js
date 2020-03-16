@@ -20,6 +20,7 @@ import CanRotate from './transform/CanRotate.js';
 import Rotate from './transform/Rotate.js';
 import CanRotateTo from './transform/CanRotateTo.js';
 import RotateTo from './transform/RotateTo.js';
+import SetOrigin from './transform/SetOrigin.js';
 
 export default {
     addChess: AddChess,
@@ -44,4 +45,5 @@ export default {
     rotate: Rotate,
     canRotateTo: CanRotateTo,
     rotateTo: RotateTo,
+    setOrigin: SetOrigin
 };

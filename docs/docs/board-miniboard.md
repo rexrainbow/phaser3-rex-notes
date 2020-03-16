@@ -128,6 +128,18 @@ These world properties of chess will be changed with container.
     ```
     - `destroy` : Set `true` to desrtoy chess object.
 
+### Set origin
+
+- Set origin tileXY to center by offset tileXY of all chess.
+    ```javascript
+    miniBoard.setOrigin();
+    // miniBoard.setOrigin('center');
+    ```
+- Set origin tileXY to top-left. 
+    ```javascript
+    miniBoard.setOrigin('top-left');
+    ```
+
 ### Main board
 
 Put chess to a main-board ([Board object](board.md)) with the same tile position in mini-board, or pull chess out from main-board.
