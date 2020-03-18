@@ -142,7 +142,7 @@ Create a text editor ([input element](textedit.md)) above text object.
     - Call `editor.close()`
 
 !!! important 'Limitation of text game object'
-    Don't assign *height* style property of text game object.  
+    Don't assign *height* property of text game object.  
     Because that text input element does not have vertical align setting, text will always align to middle/center.
 
 ### Create instance
