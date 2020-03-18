@@ -4467,6 +4467,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-origin" class="md-nav__link">
+    Set origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#main-board" class="md-nav__link">
     Main board
   </a>
@@ -5011,6 +5018,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-origin" class="md-nav__link">
+    Set origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#main-board" class="md-nav__link">
     Main board
   </a>
@@ -5338,6 +5352,28 @@
 <li><code>destroy</code> : Set <code>true</code> to desrtoy chess object.</li>
 </ul>
 </li>
+</ul>
+<h3 id="set-origin">Set origin<a class="headerlink" href="#set-origin" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set origin tileXY by offset tileXY of all chess.
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="nx">origin</span><span class="p">);</span>
+<span class="c1">// miniBoard.setOrigin(originX, originY);</span>
+</code></pre></div><ul>
+<li><code>originX</code>, <code>originY</code>: 0~1. <ul>
+<li><code>0</code> : Left/top.</li>
+<li><code>0.5</code> : Center. </li>
+<li><code>1</code> : Right/bottom.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set origin tileXY to center by offset tileXY of all chess.
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">();</span>
+<span class="c1">// miniBoard.setOrigin(&#39;center&#39;);</span>
+</code></pre></div></li>
+<li>Set origin tileXY to top-left. 
+    <div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="s1">&#39;top-left&#39;</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="main-board">Main board<a class="headerlink" href="#main-board" title="Permanent link">&para;</a></h3>
 <p>Put chess to a main-board (<a href="../board/">Board object</a>) with the same tile position in mini-board, or pull chess out from main-board.</p>
