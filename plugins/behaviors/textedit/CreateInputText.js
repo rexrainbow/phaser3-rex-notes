@@ -19,7 +19,19 @@ var CreateInputText = function (text, config) {
     config.fontSize = GetValue(config, 'fontSize', style.fontSize);
     config.color = GetValue(config, 'color', style.color);
     config.backgroundColor = backgroundColor;
-    config.align = GetValue(config, 'align', GetAlign(style));
+    config.align = GetValue(config, 'align', GetHAlign(style));
+
+    // config.paddingLeft = 0;
+    // config.paddingRight = 0;
+    // config.paddingTop = 0;
+    // config.paddingBottom = 0;
+    // var valign = GetVAlign(style);
+    // switch (valign) {
+    //     case 'top':
+    //         break;
+    //     case 'bottom':
+    //         break;
+    // }
 
     var inputText = new InputText(scene,
         text.x, text.y,
@@ -32,7 +44,7 @@ var CreateInputText = function (text, config) {
     return inputText;
 }
 
-var GetAlign = function (style) {
+var GetHAlign = function (style) {
     if (style.hasOwnProperty('align')) {
         return style.align;
     } else if (style.hasOwnProperty('halign')) {
@@ -41,5 +53,14 @@ var GetAlign = function (style) {
         return 'left';
     }
 }
+
+var GetVAlign = function (style) {
+    if (style.hasOwnProperty('halign')) {
+        return style.halign;
+    } else {
+        return 'top';
+    }
+}
+
 
 export default CreateInputText;
