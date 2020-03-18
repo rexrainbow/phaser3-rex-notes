@@ -148,9 +148,14 @@ Default configuration
 
     // Style properties
     align: undefined,
+    paddingLeft: undefined,
+    paddingRight: undefined,
+    paddingTop: undefined,
+    paddingBottom: undefined,
     fontFamily: undefined,
     fontSize: undefined,
     color: '#ffffff',
+    border: 0,
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     outline: 'none',
@@ -171,11 +176,12 @@ Default configuration
     - `autoComplete` : `autocomplete` element property.
 - Element style properties
     - `align` : `text-align` style property.
+    - `paddingLeft`, `paddingRight`, `paddingTop`, `paddingBottom` : `padding-left`, `padding-right`, `padding-top`, `padding-bottom` style property.
     - `fontFamily` : `font-family` style property.
     - `fontSize` : `font-size` style property.
     - `color` : `color` style property.
-    - `backgroundColor` : `backgroundColor` style property.
-    - `borderColor` : `borderColor` style property.
+    - `backgroundColor` : `backgroundColor` style property.    
+    - `border`, `borderColor` : `border`, `borderColor` style property.
     - `outline` : `outline` style property.
 
 ### Custom class
