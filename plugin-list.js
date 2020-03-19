@@ -42,6 +42,7 @@ module.exports = {
     'fadeplugin': './plugins/fade-plugin.js',
     'scaleplugin': './plugins/scale-plugin.js',
     'flipplugin': './plugins/flip-plugin.js',
+    'easemoveplugin': './plugins/easemove-plugin.js',
     'pathfollowerplugin': './plugins/pathfollower-plugin.js',
     'movetoplugin': './plugins/moveto-plugin.js',
     'rotatetoplugin': './plugins/rotateto-plugin.js',

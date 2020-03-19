@@ -3,7 +3,7 @@ import TweenBase from '../../utils/tween/TweenBase.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Scale extends TweenBase{
+class Scale extends TweenBase {
     constructor(gameObject, config) {
         super(gameObject);
         this.gameObject = gameObject;
@@ -90,6 +90,7 @@ class Scale extends TweenBase{
             scaleX: this.scaleEnd.x,
             scaleY: this.scaleEnd.y,
 
+            delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),

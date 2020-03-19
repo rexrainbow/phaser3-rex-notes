@@ -14,7 +14,8 @@ import _layoutInit from './_layoutInit.js';
 
 import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
-import FadeMethode from './FadeMethods.js';
+import FadeMethods from './FadeMethods.js';
+import EaseMoveMethods from './EaseMoveMethods.js';
 import IsInTouching from './IsInTouching.js';
 import GetParentSizer from './GetParentSizer.js';
 import GetTopmostSizer from './GetTopmostSizer.js';
@@ -47,8 +48,9 @@ var methods = {
 
 Object.assign(
     methods,
-    FadeMethode,
-    ScaleMethods
+    ScaleMethods,
+    FadeMethods,
+    EaseMoveMethods
 );
 
 export default methods;

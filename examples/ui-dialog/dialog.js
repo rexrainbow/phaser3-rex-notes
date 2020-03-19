@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
             leftToolbar: [
                 createLabel(this, 'A'),
                 createLabel(this, 'B')
-            ],            
+            ],
 
             content: createLabel(this, 'Content'),
 
@@ -87,7 +87,8 @@ class Demo extends Phaser.Scene {
             .setDraggable('background')   // Draggable-background
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
-            .popUp(1000);
+            .popUp(1000)
+            // .moveFrom('-=400', undefined, 1000, 'Bounce')
 
         this.print = this.add.text(0, 0, '');
         dialog

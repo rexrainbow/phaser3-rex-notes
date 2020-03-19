@@ -3,13 +3,12 @@ import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 export default {
     fadeIn(duration, alpha) {
         if (IsPlainObject(duration)) {
             var config = duration;
-            duration = GetValue(config, 'duration', undefined);
+            duration = config.duration;
         }
 
         this._fade = FadeIn(this, duration, alpha, this._fade);
@@ -27,8 +26,8 @@ export default {
     fadeOutDestroy(duration, destroyMode) {
         if (IsPlainObject(duration)) {
             var config = duration;
-            duration = GetValue(config, 'duration', undefined);
-            destroyMode = GetValue(config, 'destroy', undefined);
+            duration = config.duration;
+            destroyMode = config.destroy;
         }
         this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
         this._fade.once('complete', function () {

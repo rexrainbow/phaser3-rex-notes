@@ -274,7 +274,49 @@ sizer.pushIntoBounds(bounds);
     - Fade-out, fade-out destroy complete
         ```javascript
         sizer.on('fadeout.complete', function(sizer) { });
-        ```    
+        ```
+
+### Ease move
+
+- Move to
+    ```javascript
+    sizer.moveTo(x, y, duration);
+    // sizer.moveTo(x, y, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.moveToPromise(x, y, duration, ease)
+        .then(function(){
+            // ...
+        })    
+    ```
+    - `x`, `y` : End position.
+        - Number : End position x/y.
+        - String(`+=300`) : Related position of current position x/y.
+        - `undefined` : Current position x/y.
+    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Move from
+    ```javascript
+    sizer.moveFrom(x, y, duration);
+    // sizer.moveFrom(x, y, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.moveFromPromise(x, y, duration, ease)
+        .then(function(){
+            // ...
+        })    
+    ```    
+    - `x`, `y` : Start position.
+        - Number : Start position x/y.
+        - String(`+=300`) : Related position of current position x/y.
+        - `undefined` : Current position x/y.
+    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Events
+    - Move complete
+        ```javascript
+        sizer.on('move.complete', function(sizer) { });
+        ```
 
 ### Drag top-most sizer
 

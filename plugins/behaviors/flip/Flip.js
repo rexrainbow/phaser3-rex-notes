@@ -9,8 +9,6 @@ class Flip extends TweenBase {
         super(gameObject, { eventEmitter: true });
         this.gameObject = gameObject;
 
-        this.scaleStart = {};
-        this.scaleEnd = {};
         this.resetFromJSON(config);
     }
 
@@ -102,6 +100,7 @@ class Flip extends TweenBase {
 
         var config = {
             targets: this.gameObject,
+            delay: this.delay,
             duration: this.duration / 2,
             ease: this.ease,
             yoyo: true,

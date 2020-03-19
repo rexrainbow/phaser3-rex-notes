@@ -94,6 +94,7 @@ nav:
         - Pop up: popup.md
         - Scale down destroy: scaledowndestroy.md
         - Flip: flip.md
+        - Ease-move: easemove.md
         - Path follower: pathfollower.md
         - Anchor: anchor.md
         - Interception: interception.md
