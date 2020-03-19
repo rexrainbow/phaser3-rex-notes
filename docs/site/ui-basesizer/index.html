@@ -1609,6 +1609,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../easemove/" title="Ease-move" class="md-nav__link">
+      Ease-move
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../pathfollower/" title="Path follower" class="md-nav__link">
       Path follower
     </a>
@@ -1646,13 +1658,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-13" type="checkbox" id="nav-4-10-13">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14" type="checkbox" id="nav-4-10-14">
     
-    <label class="md-nav__link" for="nav-4-10-13">
+    <label class="md-nav__link" for="nav-4-10-14">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-13">
+      <label class="md-nav__title" for="nav-4-10-14">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1665,13 +1677,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-13-1" type="checkbox" id="nav-4-10-13-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14-1" type="checkbox" id="nav-4-10-14-1">
     
-    <label class="md-nav__link" for="nav-4-10-13-1">
+    <label class="md-nav__link" for="nav-4-10-14-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-13-1">
+      <label class="md-nav__title" for="nav-4-10-14-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1778,13 +1790,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14" type="checkbox" id="nav-4-10-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15" type="checkbox" id="nav-4-10-15">
     
-    <label class="md-nav__link" for="nav-4-10-14">
+    <label class="md-nav__link" for="nav-4-10-15">
       Matter.js
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-14">
+      <label class="md-nav__title" for="nav-4-10-15">
         Matter.js
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1797,13 +1809,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14-1" type="checkbox" id="nav-4-10-14-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15-1" type="checkbox" id="nav-4-10-15-1">
     
-    <label class="md-nav__link" for="nav-4-10-14-1">
+    <label class="md-nav__link" for="nav-4-10-15-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-14-1">
+      <label class="md-nav__title" for="nav-4-10-15-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4216,6 +4228,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-move" class="md-nav__link">
+    Ease move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -4836,6 +4855,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-move" class="md-nav__link">
+    Ease move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drag-top-most-sizer" class="md-nav__link">
     Drag top-most sizer
   </a>
@@ -5162,6 +5188,73 @@
 </code></pre></div></li>
 <li>Fade-out, fade-out destroy complete
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fadeout.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="ease-move">Ease move<a class="headerlink" href="#ease-move" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Move from
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.moveFrom(x, y, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>    
+</code></pre></div><ul>
+<li><code>x</code>, <code>y</code> : Start position.<ul>
+<li>Number : Start position x/y.</li>
+<li>String(<code>+=300</code>) : Related position of current position x/y.</li>
+<li><code>undefined</code> : Current position x/y.</li>
+</ul>
+</li>
+<li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
+</ul>
+</li>
+<li>Move-from destroy
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroy</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.moveFrom(x, y, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroyPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>    
+</code></pre></div></li>
+<li>Move to
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.moveTo(x, y, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>    
+</code></pre></div><ul>
+<li><code>x</code>, <code>y</code> : End position.<ul>
+<li>Number : End position x/y.</li>
+<li>String(<code>+=300</code>) : Related position of current position x/y.</li>
+<li><code>undefined</code> : Current position x/y.</li>
+</ul>
+</li>
+<li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
+</ul>
+</li>
+<li>Move-to destroy
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroy</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.moveTo(x, y, duration, ease);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroyPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>    
+</code></pre></div></li>
+<li>Events<ul>
+<li>Move complete
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;move.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 </code></pre></div></li>
 </ul>
 </li>
