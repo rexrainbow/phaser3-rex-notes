@@ -1,7 +1,16 @@
 import EaseMove from './behaviors/easemove/EaseMove.js';
 
-var EaseMoveTo = function (gameObject, endX, endY, duration, ease, easeMove) {
-    defaultConfig.mode = 0;
+var EaseMoveTo = function (gameObject, endX, endY, duration, ease, destroyMode, easeMove) {
+    if (destroyMode instanceof EaseMove) {
+        easeMove = destroyMode;
+        destroyMode = undefined;
+    }
+
+    if (destroyMode === undefined) {
+        destroyMode = false;
+    }
+
+    defaultConfig.mode = (destroyMode) ? 1 : 0;
     defaultConfig.startX = gameObject.x;
     defaultConfig.startY = gameObject.y;
     defaultConfig.endX = ParseValue(endX, defaultConfig.startX);
@@ -19,8 +28,21 @@ var EaseMoveTo = function (gameObject, endX, endY, duration, ease, easeMove) {
     return easeMove;
 };
 
-var EaseMoveFrom = function (gameObject, startX, startY, duration, ease, easeMove) {
-    defaultConfig.mode = 0;
+var EaseMoveToDestroy = function (gameObject, startX, startY, duration, ease, easeMove) {
+    return EaseMoveTo(gameObject, startX, startY, duration, ease, true, easeMove);
+}
+
+var EaseMoveFrom = function (gameObject, startX, startY, duration, ease, destroyMode, easeMove) {
+    if (destroyMode instanceof EaseMove) {
+        easeMove = destroyMode;
+        destroyMode = undefined;
+    }
+
+    if (destroyMode === undefined) {
+        destroyMode = false;
+    }
+
+    defaultConfig.mode = (destroyMode) ? 1 : 0;
     defaultConfig.endX = gameObject.x;
     defaultConfig.endY = gameObject.y;
     defaultConfig.startX = ParseValue(startX, defaultConfig.endX);
@@ -36,6 +58,10 @@ var EaseMoveFrom = function (gameObject, startX, startY, duration, ease, easeMov
     easeMove.restart();
 
     return easeMove;
+}
+
+var EaseMoveFromDestroy = function (gameObject, startX, startY, duration, ease, easeMove) {
+    return EaseMoveFrom(gameObject, startX, startY, duration, ease, true, easeMove);
 }
 
 var ParseValue = function (propertyValue, startValue) {
@@ -57,4 +83,4 @@ var ParseValue = function (propertyValue, startValue) {
 
 var defaultConfig = {}; // reuse this config
 
-export { EaseMove, EaseMoveTo, EaseMoveFrom };
+export { EaseMove, EaseMoveTo, EaseMoveToDestroy, EaseMoveFrom, EaseMoveFromDestroy };

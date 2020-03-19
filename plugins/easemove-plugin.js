@@ -1,4 +1,4 @@
-import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove.js';
+import { EaseMove, EaseMoveTo, EaseMoveToDestroy, EaseMoveFrom, EaseMoveFromDestroy } from './easemove.js';
 
 class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -19,7 +19,9 @@ class EaseMovePlugin extends Phaser.Plugins.BasePlugin {
 // mixin
 var methods = {
     moveTo: EaseMoveTo,
-    moveFrom: EaseMoveFrom
+    moveFrom: EaseMoveFrom,
+    moveToDestroy: EaseMoveToDestroy,
+    moveFromDestroy: EaseMoveFromDestroy
 }
 Object.assign(
     EaseMovePlugin.prototype,

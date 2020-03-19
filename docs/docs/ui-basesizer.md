@@ -278,23 +278,6 @@ sizer.pushIntoBounds(bounds);
 
 ### Ease move
 
-- Move to
-    ```javascript
-    sizer.moveTo(x, y, duration);
-    // sizer.moveTo(x, y, duration, ease);
-    ```
-    or
-    ```javascript
-    sizer.moveToPromise(x, y, duration, ease)
-        .then(function(){
-            // ...
-        })    
-    ```
-    - `x`, `y` : End position.
-        - Number : End position x/y.
-        - String(`+=300`) : Related position of current position x/y.
-        - `undefined` : Current position x/y.
-    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - Move from
     ```javascript
     sizer.moveFrom(x, y, duration);
@@ -312,6 +295,47 @@ sizer.pushIntoBounds(bounds);
         - String(`+=300`) : Related position of current position x/y.
         - `undefined` : Current position x/y.
     - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Move-from destroy
+    ```javascript
+    sizer.moveFromDestroy(x, y, duration);
+    // sizer.moveFrom(x, y, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.moveFromDestroyPromise(x, y, duration, ease)
+        .then(function(){
+            // ...
+        })    
+    ```
+- Move to
+    ```javascript
+    sizer.moveTo(x, y, duration);
+    // sizer.moveTo(x, y, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.moveToPromise(x, y, duration, ease)
+        .then(function(){
+            // ...
+        })    
+    ```
+    - `x`, `y` : End position.
+        - Number : End position x/y.
+        - String(`+=300`) : Related position of current position x/y.
+        - `undefined` : Current position x/y.
+    - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
+- Move-to destroy
+    ```javascript
+    sizer.moveToDestroy(x, y, duration);
+    // sizer.moveTo(x, y, duration, ease);
+    ```
+    or
+    ```javascript
+    sizer.moveToDestroyPromise(x, y, duration, ease)
+        .then(function(){
+            // ...
+        })    
+    ```
 - Events
     - Move complete
         ```javascript
