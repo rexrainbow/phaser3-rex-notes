@@ -23,7 +23,7 @@ class ScrollableBlock extends BaseSizer {
 
         this.type = 'rexScrollableBlock';
         this.child = undefined;
-        this.childMask = undefined;
+        this.childrenMask = undefined;
         this._childOY = 0;
         this.execeedTopState = false;
         this.execeedBottomState = false;
@@ -35,9 +35,9 @@ class ScrollableBlock extends BaseSizer {
         // No background object, and child does not have padding
         var child = GetValue(config, 'child', undefined);
         var expand = GetValue(config, 'expand', true);
-        var childMask = GetValue(config, 'mask', undefined);
+        var childrenMask = GetValue(config, 'mask', undefined);
 
-        this.setChild(child, expand, childMask);
+        this.setChild(child, expand, childrenMask);
     }
 
     destroy(fromScene) {
@@ -46,9 +46,9 @@ class ScrollableBlock extends BaseSizer {
             return;
         }
         this.child = undefined;
-        if (this.childMask) {
-            this.childMask.destroy();
-            this.childMask = undefined;
+        if (this.childrenMask) {
+            this.childrenMask.destroy();
+            this.childrenMask = undefined;
         }
         super.destroy(fromScene);
     }

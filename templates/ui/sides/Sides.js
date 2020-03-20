@@ -1,7 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import ShowChildMethods from './ShowChildMethods.js';
 import ChildBehaviorMethods from './ChildBehaviorMethods.js';
-import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -30,7 +30,7 @@ var SetChild = function (gameObject, expand, maskConfig) {
 
     if (maskEnable) {
         var maskGameObject = new DefaultMask(this, 0, maskPadding);
-        this.childMask = maskGameObject.createGeometryMask();
+        this.childrenMask = maskGameObject.createGeometryMask();
         this.pin(maskGameObject);
     }
 

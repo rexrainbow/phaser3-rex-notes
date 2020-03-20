@@ -34,14 +34,15 @@ var Layout = function (parent, newWidth, newHeight) {
             ResizeGameObject(child, childWidth, childHeight);
         }
 
-        this.resetChildPosition();
-
         // Layout child mask
-        if (this.childMask) {
-            var maskGameObject = MaskToGameObject(this.childMask);
+        if (this.childrenMask) {
+            var maskGameObject = MaskToGameObject(this.childrenMask);
             maskGameObject.setPosition().resize();
             this.resetChildPositionState(maskGameObject);
         }
+
+        this.resetChildPosition();
+
     }
 
     return this.postLayout();
