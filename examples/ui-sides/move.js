@@ -20,23 +20,19 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 300, height: 400,
 
-            // Side menu is above panel
-            panel: CreatePanel(this),
+            // Side menu is below panel
             right: CreateSideMenu(this, ['A', 'B', 'C']),
+            panel: CreatePanel(this),
 
             // Callbacks
             showChildCallback: function (child, key, sides) {
                 if (key === 'panel') {
-
-                } else {
-                    sides.setChildVisible(child);
+                    sides.moveChild(child, 500);
                 }
             },
             hideChildCallback: function (child, key, sides) {
                 if (key === 'panel') {
-
-                } else {
-                    sides.setChildVisible(child);
+                    sides.moveChild(child, 500);
                 }
             }
         })
@@ -67,7 +63,7 @@ var CreatePanel = function (scene) {
 
 var CreateSideMenu = function (scene, items) {
     // Background is above buttons
-    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_DARK);
+    var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, COLOR_LIGHT);
     var buttons = [];
     for (var i = 0, cnt = items.length; i < cnt; i++) {
         buttons.push(

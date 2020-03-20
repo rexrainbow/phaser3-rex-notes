@@ -21,10 +21,10 @@ export default {
         if (this.currentChildKey === key) {
             // Do nothing
         } else if ((this.currentChildKey === 'panel') || (key === 'panel')) {
-            var previousKey = this.currentChildKey;
+            this.previousChildKey = this.currentChildKey;
             this.currentChildKey = key;
-            this.hideChild(previousKey);            
-            this.showChild(key);
+            this.hideChild(this.previousChildKey);            
+            this.showChild(this.currentChildKey);
         } else { // Swap from current side to another side
             this.swapChild('panel');
             this.swapChild(key);
