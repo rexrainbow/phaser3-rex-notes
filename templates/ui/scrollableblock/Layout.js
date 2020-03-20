@@ -33,7 +33,7 @@ var Layout = function (parent, newWidth, newHeight) {
             ResizeGameObject(child, childWidth, childHeight);
         }
 
-        // Layout child mask
+        // Layout children-mask
         this.layoutChildrenMask();
 
         this.resetChildPosition();
