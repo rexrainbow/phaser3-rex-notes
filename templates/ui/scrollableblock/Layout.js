@@ -1,5 +1,4 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import MaskToGameObject from '../../../plugins/utils/mask/MaskToGameObject.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
@@ -35,11 +34,7 @@ var Layout = function (parent, newWidth, newHeight) {
         }
 
         // Layout child mask
-        if (this.childrenMask) {
-            var maskGameObject = MaskToGameObject(this.childrenMask);
-            maskGameObject.setPosition().resize();
-            this.resetChildPositionState(maskGameObject);
-        }
+        this.layoutChildrenMask();
 
         this.resetChildPosition();
 

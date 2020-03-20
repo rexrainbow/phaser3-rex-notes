@@ -1,5 +1,3 @@
-import MaskChildren from '../../../plugins/gameobjects/containerlite/MaskChildren.js';
-
 var ResetChildPosition = function () {
     var x = this.left;
     var y = this.top;
@@ -9,7 +7,7 @@ var ResetChildPosition = function () {
         x += this.childOY;
     }
     this.child.setPosition(x, y);
-    MaskChildren(this, this.childrenMask, this.child.getAllChildren());
+    this.maskChildren(this.child.getAllChildren());
     this.resetChildPositionState(this.child);
 };
 

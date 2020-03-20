@@ -14,6 +14,7 @@ import PostLayout from './PostLayout.js';
 import _layoutInit from './_layoutInit.js';
 
 import SetAnchor from './SetAnchor.js';
+import ChildrenMaskMethods from './ChildrenMaskMethods.js';
 import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
@@ -50,6 +51,7 @@ var methods = {
 
 Object.assign(
     methods,
+    ChildrenMaskMethods,
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods

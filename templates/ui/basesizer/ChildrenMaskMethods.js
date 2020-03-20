@@ -1,0 +1,27 @@
+import MaskChildren from '../../../plugins/gameobjects/containerlite/MaskChildren.js';
+import MaskToGameObject from '../../../plugins/utils/mask/MaskToGameObject.js';
+
+export default {
+    enableChildrenMask(maskPadding) {
+        var maskGameObject = this.addChildMask(null, this, 0, maskPadding);
+        this.childrenMask = maskGameObject.createGeometryMask();
+        // this.childrenMask is a mask object, not a (Graphics) game object
+        return this;
+    },
+
+    maskChildren(children) {
+        MaskChildren(this, this.childrenMask, children);
+        return this;
+    },
+
+    layoutChildrenMask() {
+        if (this.childrenMask === undefined) {
+            return this;
+        }
+
+        var maskGameObject = MaskToGameObject(this.childrenMask);
+        maskGameObject.setPosition().resize();
+        this.resetChildPositionState(maskGameObject);
+        return this;
+    }
+}
