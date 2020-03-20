@@ -1,6 +1,6 @@
 import EaseMove from './behaviors/easemove/EaseMove.js';
 
-var EaseMoveTo = function (gameObject, endX, endY, duration, ease, destroyMode, easeMove) {
+var EaseMoveTo = function (gameObject, duration, endX, endY, ease, destroyMode, easeMove) {
     if (destroyMode instanceof EaseMove) {
         easeMove = destroyMode;
         destroyMode = undefined;
@@ -28,11 +28,11 @@ var EaseMoveTo = function (gameObject, endX, endY, duration, ease, destroyMode, 
     return easeMove;
 };
 
-var EaseMoveToDestroy = function (gameObject, startX, startY, duration, ease, easeMove) {
-    return EaseMoveTo(gameObject, startX, startY, duration, ease, true, easeMove);
+var EaseMoveToDestroy = function (gameObject, duration, startX, startY, ease, easeMove) {
+    return EaseMoveTo(gameObject, duration, startX, startY, ease, true, easeMove);
 }
 
-var EaseMoveFrom = function (gameObject, startX, startY, duration, ease, destroyMode, easeMove) {
+var EaseMoveFrom = function (gameObject, duration, startX, startY, ease, destroyMode, easeMove) {
     if (destroyMode instanceof EaseMove) {
         easeMove = destroyMode;
         destroyMode = undefined;
@@ -60,8 +60,8 @@ var EaseMoveFrom = function (gameObject, startX, startY, duration, ease, destroy
     return easeMove;
 }
 
-var EaseMoveFromDestroy = function (gameObject, startX, startY, duration, ease, easeMove) {
-    return EaseMoveFrom(gameObject, startX, startY, duration, ease, true, easeMove);
+var EaseMoveFromDestroy = function (gameObject, duration, startX, startY, ease, easeMove) {
+    return EaseMoveFrom(gameObject, duration, startX, startY, ease, true, easeMove);
 }
 
 var ParseValue = function (propertyValue, startValue) {

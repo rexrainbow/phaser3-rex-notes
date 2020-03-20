@@ -280,12 +280,12 @@ sizer.pushIntoBounds(bounds);
 
 - Move from
     ```javascript
-    sizer.moveFrom(x, y, duration);
-    // sizer.moveFrom(x, y, duration, ease);
+    sizer.moveFrom(duration, x, y);
+    // sizer.moveFrom(duration, x, y, ease);
     ```
     or
     ```javascript
-    sizer.moveFromPromise(x, y, duration, ease)
+    sizer.moveFromPromise(duration, x, y, ease)
         .then(function(){
             // ...
         })    
@@ -297,24 +297,24 @@ sizer.pushIntoBounds(bounds);
     - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - Move-from destroy
     ```javascript
-    sizer.moveFromDestroy(x, y, duration);
-    // sizer.moveFrom(x, y, duration, ease);
+    sizer.moveFromDestroy(duration, x, y);
+    // sizer.moveFrom(duration, x, y, ease);
     ```
     or
     ```javascript
-    sizer.moveFromDestroyPromise(x, y, duration, ease)
+    sizer.moveFromDestroyPromise(duration, x, y, ease)
         .then(function(){
             // ...
         })    
     ```
 - Move to
     ```javascript
-    sizer.moveTo(x, y, duration);
-    // sizer.moveTo(x, y, duration, ease);
+    sizer.moveTo(duration, x, y);
+    // sizer.moveTo(duration, x, y, ease);
     ```
     or
     ```javascript
-    sizer.moveToPromise(x, y, duration, ease)
+    sizer.moveToPromise(duration, x, y, ease)
         .then(function(){
             // ...
         })    
@@ -326,20 +326,24 @@ sizer.pushIntoBounds(bounds);
     - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - Move-to destroy
     ```javascript
-    sizer.moveToDestroy(x, y, duration);
-    // sizer.moveTo(x, y, duration, ease);
+    sizer.moveToDestroy(duration, x, y);
+    // sizer.moveTo(duration, x, y, ease);
     ```
     or
     ```javascript
-    sizer.moveToDestroyPromise(x, y, duration, ease)
+    sizer.moveToDestroyPromise(duration, x, y, ease)
         .then(function(){
             // ...
         })    
     ```
 - Events
-    - Move complete
+    - Move-from complete
         ```javascript
-        sizer.on('move.complete', function(sizer) { });
+        sizer.on('movefrom.complete', function(sizer) { });
+        ```
+    - Move-to complete
+        ```javascript
+        sizer.on('moveto.complete', function(sizer) { });
         ```
 
 ### Drag top-most sizer

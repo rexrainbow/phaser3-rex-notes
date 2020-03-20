@@ -19,16 +19,16 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 580, '');
         var scene = this;
         var dot = this.add.circle(400, 300, 20, 0xffffff);
-        WaitComplete(MoveIn(dot, '-=400', undefined, 1500, 'Bounce'))
+        WaitComplete(MoveIn(dot, 1500, '-=400', undefined, 'Bounce'))
             .then(function () {
                 print.text = 'Click to move-out'
                 return WaitEvent(scene.input, 'pointerdown');
             })
             .then(function () {
-                return WaitComplete(MoveOutDestroy(dot, '+=400', undefined, 1500));
+                return WaitComplete(MoveOutDestroy(dot, 1500, '+=400', undefined));
             })
-            .then(function () {           
-                print.text = 'Click to restart scene'     
+            .then(function () {
+                print.text = 'Click to restart scene'
                 return WaitEvent(scene.input, 'pointerdown');
             })
             .then(function () {

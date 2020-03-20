@@ -19,8 +19,8 @@ Ease-move game object.
     ```
 - Ease-move to/from
     ```javascript
-    var easemove = scene.plugins.get('rexeasemoveplugin').moveTo(gameObject, x, y, duration, ease);
-    var easemove = scene.plugins.get('rexeasemoveplugin').moveFrom(gameObject, x, y, duration, ease);
+    var easemove = scene.plugins.get('rexeasemoveplugin').moveTo(gameObject, duration, x, y, ease);
+    var easemove = scene.plugins.get('rexeasemoveplugin').moveFrom(gameObject, duration, x, y, ease);
     ```
 
 #### Import plugin
@@ -49,8 +49,8 @@ Ease-move game object.
     ```
 - Ease-move to/from
     ```javascript
-    var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, x, y, duration, ease);
-    var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, x, y, duration, ease);
+    var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, duration, x, y, ease);
+    var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, duration, x, y, ease);
     ```
 
 #### Import method
@@ -65,16 +65,16 @@ Ease-move game object.
     ```
 - EaseMove-out-destroy
     ```javascript
-    var easemove = EaseMoveTo(gameObject, x, y, duration, ease);
-    var easemove = EaseMoveFrom(gameObject, x, y, duration, ease);
+    var easemove = EaseMoveTo(gameObject, duration, x, y, ease);
+    var easemove = EaseMoveFrom(gameObject, duration, x, y, ease);
     ```
 
 ### Move to
 
 ```javascript
-var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, x, y, duration);
-// var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, x, y, duration, ease);
-// easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, x, y, duration, ease, easemove);
+var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, duration, x, y);
+// var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, duration, x, y, ease);
+// easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, duration, x, y, ease, easemove);
 ```
 
 - `x`, `y` : End position.
@@ -87,9 +87,9 @@ var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, x, y, duratio
 ### Move from
 
 ```javascript
-var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, x, y, duration);
-// var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, x, y, duration, ease);
-// easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, x, y, duration, ease, easemove);
+var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, duration, x, y);
+// var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, duration, x, y, ease);
+// easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, duration, x, y, ease, easemove);
 ```
 
 - `x`, `y` : Start position.
