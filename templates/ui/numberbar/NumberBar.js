@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import AddChildMask from '../utils/AddChildMask.js';
 import Slider from '../slider/Slider.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -209,4 +210,14 @@ class NumberBar extends Sizer {
         return this;
     }
 }
+
+var methods = {
+    addChildMask: AddChildMask
+}
+
+Object.assign(
+    NumberBar.prototype,
+    methods
+);
+
 export default NumberBar;

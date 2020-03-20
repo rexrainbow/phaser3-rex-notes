@@ -3,11 +3,21 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import ResetChildPosition from './ResetChildPosition.js';
 import Layout from './Layout.js';
+import AddChildMask from '../utils/AddChildMask.js';
+import ChildrenMaskMethods from '../utils/ChildrenMaskMethods.js';
 
-export default {
+var methods = {
     setChild: SetChild,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     resetChildPosition: ResetChildPosition,
     layout: Layout,
+    addChildMask: AddChildMask
 };
+
+Object.assign(
+    methods,
+    ChildrenMaskMethods
+);
+
+export default methods;

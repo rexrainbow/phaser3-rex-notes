@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import AddChildMask from '../utils/AddChildMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -193,5 +194,14 @@ class Label extends Sizer {
         return this;
     }
 }
+
+var methods = {
+    addChildMask: AddChildMask
+}
+
+Object.assign(
+    Label.prototype,
+    methods
+);
 
 export default Label;
