@@ -1,5 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -60,9 +59,7 @@ class Label extends Sizer {
             this.add(icon, 0, 'center', padding);
 
             if (iconMask) {
-                iconMask = new DefaultMask(icon, 1); // Circle mask
-                icon.setMask(iconMask.createGeometryMask());
-                this.pin(iconMask);
+                iconMask = this.addChildMask(icon, icon, 1); // Circle mask
             }
         }
 
@@ -112,9 +109,7 @@ class Label extends Sizer {
             this.add(action, 0, 'center', padding);
 
             if (actionMask) {
-                actionMask = new DefaultMask(action, 1); // Circle mask
-                icon.setMask(actionMask.createGeometryMask());
-                this.pin(actionMask);
+                actionMask = this.addChildMask(action, action, 1); // Circle mask
             }
         }
 

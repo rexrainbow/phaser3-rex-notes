@@ -1,6 +1,5 @@
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsTextGameObject from '../../../plugins/utils/text/IsTextGameObject.js';
-import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
@@ -24,9 +23,7 @@ var SetTextObject = function (gameObject, maskEnable) {
 
     // Create mask of text object
     if (maskEnable) {
-        this.textMask = new DefaultMask(this);
-        this.textObject.setMask(this.textMask.createGeometryMask());
-        this.pin(this.textMask);
+        this.textMask = this.addChildMask(this.textObject, this);
     }
     return this;
 }

@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import Slider from '../slider/Slider.js';
-import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Percent = Phaser.Math.Percent;
@@ -52,9 +51,7 @@ class NumberBar extends Sizer {
             this.add(icon, 0, 'center', padding);
 
             if (iconMask) {
-                iconMask = new DefaultMask(icon, 1); // Circle mask
-                icon.setMask(iconMask.createGeometryMask());
-                this.add(iconMask, null);
+                iconMask = this.addChildMask(icon, icon, 1); // Circle mask
             }
         }
 
@@ -119,6 +116,7 @@ class NumberBar extends Sizer {
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('icon', icon);
+        this.addChildrenMap('iconMask', iconMask);
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('text', text);
 

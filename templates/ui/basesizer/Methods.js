@@ -1,5 +1,6 @@
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
+import AddChildMask from './AddChildMask.js';
 import DrawBounds from './DrawBounds.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
@@ -25,6 +26,7 @@ import SetDraggable from './SetDraggable.js';
 var methods = {
     getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
+    addChildMask: AddChildMask,
     drawBounds: DrawBounds,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
