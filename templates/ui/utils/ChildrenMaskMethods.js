@@ -1,7 +1,10 @@
 import MaskChildren from '../../../plugins/gameobjects/containerlite/MaskChildren.js';
 import MaskToGameObject from '../../../plugins/utils/mask/MaskToGameObject.js';
+import AddChildMask from '../utils/AddChildMask.js';
 
 export default {
+    addChildMask: AddChildMask,
+
     enableChildrenMask(maskPadding) {
         var maskGameObject = this.addChildMask(null, this, 0, maskPadding);
         this.childrenMask = maskGameObject.createGeometryMask();
@@ -24,4 +27,4 @@ export default {
         this.resetChildPositionState(maskGameObject);
         return this;
     }
-}
+};
