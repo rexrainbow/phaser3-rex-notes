@@ -5195,11 +5195,11 @@
 <h3 id="ease-move">Ease move<a class="headerlink" href="#ease-move" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Move from
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// sizer.moveFrom(x, y, duration, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// sizer.moveFrom(duration, x, y, ease);</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
@@ -5214,21 +5214,21 @@
 </ul>
 </li>
 <li>Move-from destroy
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroy</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// sizer.moveFrom(x, y, duration, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// sizer.moveFrom(duration, x, y, ease);</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroyPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
 </code></pre></div></li>
 <li>Move to
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// sizer.moveTo(x, y, duration, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// sizer.moveTo(duration, x, y, ease);</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
@@ -5243,18 +5243,21 @@
 </ul>
 </li>
 <li>Move-to destroy
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroy</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// sizer.moveTo(x, y, duration, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// sizer.moveTo(duration, x, y, ease);</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroyPromise</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
 </code></pre></div></li>
 <li>Events<ul>
-<li>Move complete
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;move.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+<li>Move-from complete
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;movefrom.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Move-to complete
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;moveto.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sizer</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 </code></pre></div></li>
 </ul>
 </li>

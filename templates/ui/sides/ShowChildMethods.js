@@ -23,7 +23,7 @@ export default {
         } else if ((this.currentChildKey === 'panel') || (key === 'panel')) {
             this.previousChildKey = this.currentChildKey;
             this.currentChildKey = key;
-            this.hideChild(this.previousChildKey);            
+            this.hideChild(this.previousChildKey);
             this.showChild(this.currentChildKey);
         } else { // Swap from current side to another side
             this.swapChild('panel');
@@ -54,6 +54,34 @@ export default {
 
     showBottomSide() {
         this.swapChild('bottomSide');
+        return this;
+    },
+
+    hideLeftSide() {
+        if (this.currentChildKey == 'leftSide') {
+            this.showPanel();
+        }
+        return this;
+    },
+
+    hideRightSide() {
+        if (this.currentChildKey == 'rightSide') {
+            this.showPanel();
+        }
+        return this;
+    },
+
+    hideTopSide() {
+        if (this.currentChildKey == 'topSide') {
+            this.showPanel();
+        }
+        return this;
+    },
+
+    hideBottomSide() {
+        if (this.currentChildKey == 'bottomSide') {
+            this.showPanel();
+        }
         return this;
     },
 

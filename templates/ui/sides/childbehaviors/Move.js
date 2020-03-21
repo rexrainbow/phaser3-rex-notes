@@ -1,57 +1,9 @@
-import IndexOf from '../../../plugins/utils/object/IndexOf.js';
-import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import IndexOf from '../../../../plugins/utils/object/IndexOf.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
+import { WaitComplete } from '../../utils/WaitEvent.js';
 
 export default {
-    setChildVisible(child, visible) {
-        // moveChild during constructor
-        if (this.currentChildKey === undefined) {
-            return this;
-        }
-
-        var key;
-        if (typeof (child) === 'string') {
-            var key = child;
-            child = this.sizerChildren[key];
-        } else {
-            key = IndexOf(this.sizerChildren, child);
-        }
-        if (visible === undefined) {
-            visible = (this.currentChildKey === key) ? true : false;
-        }
-        child.setVisible(visible);
-        return this;
-    },
-
-    fadeChild(child, duration, alpha) {
-        // moveChild during constructor
-        if (this.currentChildKey === undefined) {
-            return this;
-        }
-
-        var key;
-        if (typeof (child) === 'string') {
-            key = child;
-            child = this.sizerChildren[key];
-        } else {
-            key = IndexOf(this.sizerChildren, child);
-        }
-        if (duration === undefined) {
-            duration = 500;
-        }
-        if (alpha === undefined) {
-            alpha = (this.currentChildKey === key) ? 1 : 0;
-        }
-
-        child.fadeIn(duration, { start: child.alpha, end: alpha });
-        return this;
-    },
-
     moveChild(child, duration, ease, distance) {
-        // moveChild during constructor
-        if (this.currentChildKey === undefined) {
-            return this;
-        }
-
         var key;
         if (typeof (child) === 'string') {
             key = child;
@@ -181,5 +133,18 @@ export default {
             child.moveTo(duration, undefined, `+=${distance}`, ease);
         }
         return this;
+    },
+
+    moveChildPromise(child, duration, ease, distance) {
+        if (typeof (child) === 'string') {
+            child = this.sizerChildren[key];
+        }
+        this.moveChild(child, duration, ease, distance);
+
+        if (child._easeMove) {
+            return WaitComplete(child._easeMove);
+        } else {
+            return Promise.resolve();
+        }
     }
 }

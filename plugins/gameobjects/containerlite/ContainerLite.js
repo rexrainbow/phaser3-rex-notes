@@ -1,3 +1,4 @@
+import Base from './Base.js';
 import AddChild from './AddChild.js';
 import RemoveChild from './RemoveChild.js';
 import ChildState from './ChildState.js';
@@ -11,10 +12,7 @@ import Mask from './Mask.js';
 import Depth from './Depth.js';
 import Children from './Children.js';
 
-const Zone = Phaser.GameObjects.Zone;
-const Components = Phaser.GameObjects.Components;
-
-class ContainerLite extends Zone {
+class ContainerLite extends Base {
     constructor(scene, x, y, width, height, children) {
         if (Array.isArray(width)) {
             children = width;
@@ -32,9 +30,6 @@ class ContainerLite extends Zone {
         this.isRexContainerLite = true;
         this.syncChildrenEnable = true;
 
-        this._flipX = false;
-        this._flipY = false;
-        this._alpha = 1;
         this._active = true;
         this._mask = null;
         this._scrollFactorX = 1;
@@ -131,28 +126,28 @@ class ContainerLite extends Zone {
 
     // Override
     get flipX() {
-        return this._flipX;
+        return super.flipX;
     }
 
     set flipX(value) {
-        if (this._flipX === value) {
+        if (super.flipX === value) {
             return;
         }
-        this._flipX = value;
+        super.flipX = value;
 
         this.syncPosition();
     }
 
     // Override
     get flipY() {
-        return this._flipY;
+        return super.flipY;
     }
 
     set flipY(value) {
-        if (this._flipY === value) {
+        if (super.flipY === value) {
             return;
         }
-        this._flipY = value;
+        super.flipY = value;
 
         this.syncPosition();
     }
@@ -163,7 +158,7 @@ class ContainerLite extends Zone {
     }
 
     set visible(value) {
-        if (this.visible === value) {
+        if (super.visible === value) {
             return;
         }
         super.visible = value;
@@ -173,14 +168,14 @@ class ContainerLite extends Zone {
 
     // Override
     get alpha() {
-        return this._alpha;
+        return super.alpha;
     }
 
     set alpha(value) {
-        if (this._alpha === value) {
+        if (super.alpha === value) {
             return;
         }
-        this._alpha = value;
+        super.alpha = value;
 
         this.syncAlpha();
     }
@@ -257,10 +252,7 @@ Object.assign(
     Active,
     Mask,
     Depth,
-    Children,
-
-    Components.Alpha,
-    Components.Flip
+    Children
 );
 
 export default ContainerLite;

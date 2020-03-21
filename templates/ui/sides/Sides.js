@@ -1,6 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import ShowChildMethods from './ShowChildMethods.js';
-import ChildBehaviorMethods from './ChildBehaviorMethods.js';
+import ChildBehaviorMethods from './childbehaviors/index.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -39,39 +39,40 @@ class Sides extends OverlapSizer {
         // Add elements        
         var background = GetValue(config, 'background', undefined);
         var panel = GetValue(config, 'panel', undefined);
-        var leftSide = GetValue(config, 'left', undefined);
-        var rightSide = GetValue(config, 'right', undefined);
-        var topSide = GetValue(config, 'top', undefined);
-        var bottomSide = GetValue(config, 'bottom', undefined);
+        var leftSide = GetValue(config, 'leftSide', undefined);
+        var rightSide = GetValue(config, 'rightSide', undefined);
+        var topSide = GetValue(config, 'topSide', undefined);
+        var bottomSide = GetValue(config, 'bottomSide', undefined);
 
         if (background) {
             this.addBackground(background);
         }
         if (panel) {
             this.add(panel, 'panel', 'center', 0, true);
-            this.showChild('panel');
-            this.currentChildKey = 'panel';
         }
         if (leftSide) {
             var expand = GetValue(config, 'expand.left', true);
             this.add(leftSide, 'leftSide', 'left-top', 0, { height: expand });
-            this.hideChild('leftSide');
         }
         if (rightSide) {
             var expand = GetValue(config, 'expand.right', true);
             this.add(rightSide, 'rightSide', 'right-top', 0, { height: expand });
-            this.hideChild('rightSide');
         }
         if (topSide) {
             var expand = GetValue(config, 'expand.top', true);
             this.add(topSide, 'topSide', 'left-top', 0, { width: expand });
-            this.hideChild('topSide');
         }
         if (bottomSide) {
             var expand = GetValue(config, 'expand.bottom', true);
             this.add(bottomSide, 'bottomSide', 'left-bottom', 0, { width: expand });
-            this.hideChild('bottomSide');
         }
+
+        this.currentChildKey = 'panel';
+        this.showChild('panel');        
+        this.hideChild('leftSide');
+        this.hideChild('rightSide');
+        this.hideChild('topSide');
+        this.hideChild('bottomSide');
     }
 }
 

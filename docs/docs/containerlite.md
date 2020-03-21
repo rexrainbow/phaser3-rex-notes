@@ -313,6 +313,11 @@ var localState = child.rexContainer;
     ```javascript
     var depth = container.depth;
     ```
+- Set depth of container
+    ```javascript
+    container.setDepth(value, true);
+    // container.depth = depth;
+    ```
 - Set depth of container and all children
     ```javascript
     container.setDepth(value);

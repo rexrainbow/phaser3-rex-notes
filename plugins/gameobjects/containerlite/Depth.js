@@ -1,7 +1,7 @@
 export default {
-    setDepth(value) {
+    setDepth(value, containerOnly) {
         this.depth = value;
-        if (this.children) {
+        if (!containerOnly && this.children) {
             var children = this.getAllChildren();
             for (var i = 0, cnt = children.length; i < cnt; i++) {
                 children[i].depth = value;

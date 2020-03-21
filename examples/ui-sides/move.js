@@ -21,17 +21,21 @@ class Demo extends Phaser.Scene {
             width: 300, height: 400,
 
             // Side menu is below panel
-            right: CreateSideMenu(this, ['A', 'B', 'C']),
+            rightSide: CreateSideMenu(this, ['A', 'B', 'C']),
             panel: CreatePanel(this),
 
             // Callbacks
             showChildCallback: function (child, key, sides) {
                 if (key === 'panel') {
-                    sides.moveChild(child, 500);
+                    sides.moveChildPromise(child, 500)
+                        .then(function () {
+                            sides.setChildVisible('rightSide');
+                        })
                 }
             },
             hideChildCallback: function (child, key, sides) {
                 if (key === 'panel') {
+                    sides.setChildVisible('rightSide');
                     sides.moveChild(child, 500);
                 }
             }
@@ -39,10 +43,13 @@ class Demo extends Phaser.Scene {
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
 
-        panel.getElement('panel')
-            .setInteractive()
-            .on('pointerup', function () {
-                panel.toggleRightSide();
+        this.rexUI.add.swipe(panel.getElement('panel'))
+            .on('swipe', function (swipe) {
+                if (swipe.left) {
+                    panel.showRightSide()
+                } else if (swipe.right) {
+                    panel.hideRightSide();
+                }
             })
 
         panel.getElement('rightSide')
