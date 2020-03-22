@@ -3,23 +3,23 @@ var TableOnCellVisible = function (table) {
         var callback = this.createCellContainerCallback;
         var scope = this.createCellContainerCallbackScope;
         cell.item = this.items[cell.index];
-        var container;
+        var cellContainer;
         if (scope) {
-            container = callback.call(scope, cell, cellContainer);
+            cellContainer = callback.call(scope, cell, cellContainer);
         } else {
-            container = callback(cell, cellContainer);
+            cellContainer = callback(cell, cellContainer);
         }
-        if (container) {
-            if (container.setOrigin) {
-                container.setOrigin(0);
+        if (cellContainer) {
+            if (cellContainer.setOrigin) {
+                cellContainer.setOrigin(0);
             }
-            if (container.isRexSizer) {
-                container.layout(); // Use original size
+            if (cellContainer.isRexSizer) {
+                cellContainer.layout(); // Use original size
             }
         }
 
         cell.item = undefined;
-        cell.setContainer(container);
+        cell.setContainer(cellContainer);
     }, this);
 }
 export default TableOnCellVisible;
