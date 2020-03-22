@@ -9,7 +9,9 @@ export default {
     },
 
     addMultiple(gameObjects) {
-        gameObjects.forEach(this._add, this);
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            this._add(gameObjects[i]);
+        }
         return this;
     },
 

@@ -1,12 +1,8 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import GetBoundsConfig from '../utils/GetBoundsConfig.js';
-import ALIGNMODE from '../utils/AlignConst.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const RemoveItem = Phaser.Utils.Array.Remove;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class GridSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions) {
@@ -69,58 +65,6 @@ class GridSizer extends BaseSizer {
             return this;
         }
         this.rowProportions[rowIndex] = proportion;
-        return this;
-    }
-
-    add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
-        super.add(gameObject);
-        if (IsPlainObject(columnIndex)) {
-            var config = columnIndex;
-            columnIndex = GetValue(config, 'column', 0);
-            rowIndex = GetValue(config, 'row', 0);
-            align = GetValue(config, 'align', ALIGN_CENTER);
-            paddingConfig = GetValue(config, 'padding', 0);
-            expand = GetValue(config, 'expand', false);
-            childKey = GetValue(config, 'key', undefined);
-        }
-        if (typeof (align) === 'string') {
-            align = ALIGNMODE[align];
-        }
-        if (align === undefined) {
-            align = ALIGN_CENTER;
-        }
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-        if (expand === undefined) {
-            expand = true;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        config.align = align;
-        config.padding = GetBoundsConfig(paddingConfig);
-        config.expand = expand;
-        this.gridChildren[(rowIndex * this.columnCount) + columnIndex] = gameObject;
-
-        if (childKey !== undefined) {
-            this.addChildrenMap(childKey, gameObject)
-        }
-        return this;
-    }
-
-    remove(gameObject) {
-        var config = this.getSizerConfig(gameObject);
-        if (config.parent !== this) {
-            return this;
-        }
-        config.parent = undefined;
-        RemoveItem(this.gridChildren, gameObject);
-
-        if (this.backgroundChildren !== undefined) {
-            RemoveItem(this.backgroundChildren, gameObject);
-        }
-        super.remove(gameObject);
         return this;
     }
 

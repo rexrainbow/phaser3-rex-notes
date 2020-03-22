@@ -17,6 +17,14 @@ export default {
         this._easeMove.once('complete', function () {
             this.emit('movefrom.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._easeMove.on('update', function () {
+                parent.resetChildPositionState(child);
+            })
+        }
         return this;
     },
 
@@ -48,6 +56,14 @@ export default {
         this._easeMove.once('complete', function () {
             this.emit('moveto.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._easeMove.on('update', function () {
+                parent.resetChildPositionState(child);
+            })
+        }
         return this;
     },
 

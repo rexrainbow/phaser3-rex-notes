@@ -1,4 +1,3 @@
-import Base from './Base.js';
 import AddChild from './AddChild.js';
 import RemoveChild from './RemoveChild.js';
 import ChildState from './ChildState.js';
@@ -11,6 +10,18 @@ import ScrollFactor from './ScrollFactor.js';
 import Mask from './Mask.js';
 import Depth from './Depth.js';
 import Children from './Children.js';
+
+// Base class
+const Zone = Phaser.GameObjects.Zone;
+class Base extends Zone { }
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(Base,
+    [
+        Components.Alpha,
+        Components.Flip
+    ]
+);
+// Base class
 
 class ContainerLite extends Base {
     constructor(scene, x, y, width, height, children) {

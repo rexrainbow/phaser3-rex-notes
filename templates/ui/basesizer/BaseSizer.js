@@ -145,28 +145,6 @@ class Base extends Container {
         this.centerY = value;
         return this;
     }
-
-    pin(gameObject) {
-        super.add(gameObject);
-        return this;
-    }
-
-    addBackground(gameObject, childKey) {
-        if (this.backgroundChildren === undefined) {
-            this.backgroundChildren = [];
-        }
-
-        super.add(gameObject);
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        this.backgroundChildren.push(gameObject);
-
-        if (childKey !== undefined) {
-            this.addChildrenMap(childKey, gameObject)
-        }
-        return this;
-    }
 }
 
 Object.assign(

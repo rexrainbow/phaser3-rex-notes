@@ -15,6 +15,14 @@ export default {
         this._fade.once('complete', function () {
             this.emit('fadein.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._fade.on('update', function () {
+                parent.resetChildAlphaState(child);
+            })
+        }
         return this;
     },
 
@@ -33,6 +41,14 @@ export default {
         this._fade.once('complete', function () {
             this.emit('fadeout.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._fade.on('update', function () {
+                parent.resetChildAlphaState(child);
+            })
+        }
         return this;
     },
 

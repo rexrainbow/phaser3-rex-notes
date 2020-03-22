@@ -7,8 +7,6 @@ import GetMaxChildHeight from './GetMaxChildHeight.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const RemoveItem = Phaser.Utils.Array.Remove;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class FixWidthSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, orientation, space) {
@@ -80,71 +78,6 @@ class FixWidthSizer extends BaseSizer {
 
     setLineSpacing(space) {
         this.lineSpacing = space;
-        return this;
-    }
-
-    add(gameObject, paddingConfig, childKey) {
-        if (gameObject === '\n') {
-            this.addNewLine();
-            return this;
-        }
-
-        super.add(gameObject);
-
-        if (IsPlainObject(paddingConfig)) {
-            var config = paddingConfig;
-            paddingConfig = GetValue(config, 'padding', 0);
-            childKey = GetValue(config, 'key', undefined);
-        }
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        config.align = ALIGN_CENTER;
-        config.padding = GetBoundsConfig(paddingConfig);
-        this.sizerChildren.push(gameObject);
-
-        if (childKey !== undefined) {
-            this.addChildrenMap(childKey, gameObject)
-        }
-        return this;
-    }
-
-    addNewLine() {
-        this.sizerChildren.push('\n');
-        return this;
-    }
-
-    insert(index, gameObject, paddingConfig, expand) {
-        this.add(gameObject, paddingConfig, expand);
-        this.moveTo(gameObject, index);
-        return this;
-    }
-
-    remove(gameObject) {
-        var config = this.getSizerConfig(gameObject);
-        if (config.parent !== this) {
-            return this;
-        }
-        config.parent = undefined;
-        RemoveItem(this.sizerChildren, gameObject);
-        super.remove(gameObject);
-        return this;
-    }
-
-    clear(destroyChild) {
-        var children = this.sizerChildren, child;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
-            if (child === '\n') {
-                continue;
-            }
-            this.getSizerConfig(child).parent = undefined;
-        }
-        children.length = 0;
-        super.clear(destroyChild);
         return this;
     }
 

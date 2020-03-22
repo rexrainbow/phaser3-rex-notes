@@ -17,6 +17,14 @@ export default {
         this._scale.once('complete', function () {
             this.emit('popup.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._scale.on('update', function () {
+                parent.resetChildPositionState(child);
+            })
+        }
         return this;
     },
 
@@ -38,6 +46,14 @@ export default {
         this._scale.once('complete', function () {
             this.emit('scaledown.complete', this);
         }, this);
+
+        var parent = this.getParentSizer();
+        if (parent) {
+            var child = this;
+            this._scale.on('update', function () {
+                parent.resetChildPositionState(child);
+            })
+        }
         return this;
     },
 

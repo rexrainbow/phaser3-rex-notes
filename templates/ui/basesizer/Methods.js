@@ -1,6 +1,7 @@
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from './DrawBounds.js';
+import AddChildMethods from './AddChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
@@ -48,6 +49,7 @@ var methods = {
 
 Object.assign(
     methods,
+    AddChildMethods,
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods
