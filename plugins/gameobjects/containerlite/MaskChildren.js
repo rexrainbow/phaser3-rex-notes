@@ -30,27 +30,23 @@ var MaskChildren = function (parent, mask, children) {
             visiblePointsNumber = containsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible
-                    showAll(child, mask);
+                    showAll(parent, child, mask);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        showSome(child, mask);
+                        showSome(parent, child, mask);
                     } else { // Set invisible
-                        showNone(child, mask);
+                        showNone(parent, child, mask);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    showSome(child, mask);
+                    showSome(parent, child, mask);
                     break;
             }
         } else {
-            showSome(child, mask);
+            showSome(parent, child, mask);
         }
-
-        parent
-            .resetChildVisibleState(child) // Reset local visible via child's visible
-            .updateChildVisible(child);  // Set child's visible via parent and local visible
     }
 }
 
@@ -67,22 +63,22 @@ var containsPoints = function (rectA, rectB) {
     return result;
 };
 
-var showAll = function (child, mask) {
-    child.setVisible(true);
+var showAll = function (parent, child, mask) {
+    parent.setChildVisible(child, true);
     if (child.clearMask) {
         child.clearMask();
     }
 }
 
-var showSome = function (child, mask) {
-    child.setVisible(true);
+var showSome = function (parent, child, mask) {
+    parent.setChildVisible(child, true);
     if (child.setMask) {
         child.setMask(mask);
     }
 }
 
-var showNone = function (child, mask) {
-    child.setVisible(false);
+var showNone = function (parent, child, mask) {
+    parent.setChildVisible(child, false);
     if (child.clearMask) {
         child.clearMask();
     }
