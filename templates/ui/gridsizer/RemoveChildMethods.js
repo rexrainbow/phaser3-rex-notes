@@ -1,6 +1,7 @@
 import Container from '../container/Container.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
+const ContainerRemove = Container.prototype.remove;
 
 export default {
     remove(gameObject) {
@@ -14,7 +15,7 @@ export default {
         if (this.backgroundChildren !== undefined) {
             RemoveItem(this.backgroundChildren, gameObject);
         }
-        Container.prototype.remove.call(this, gameObject);
+        ContainerRemove.call(this, gameObject);
         return this;
     }
 

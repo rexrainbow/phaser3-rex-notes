@@ -216,9 +216,17 @@ sizer.layout();
     ```javascript
     sizer.remove(child);
     ```
+- Remove and destroy a child
+    ```javascript
+    sizer.remove(child, true);
+    ```
 - Remove all children
     ```javascript
-    sizer.clear(destroyChild);
+    sizer.clear();
+    ```
+- Remove and destroy all children
+    ```javascript
+    sizer.clear(true);
     ```
 
 ### Other properties

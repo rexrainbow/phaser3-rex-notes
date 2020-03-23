@@ -1,11 +1,13 @@
 import Container from '../container/Container.js';
 
+const ContainerSetChildVisible = Container.prototype.setChildVisible;
+
 var SwapPage = function (key) {
     this._previousKey = this._currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
         if (this.swapMode === 0) { // Invisible
-            Container.prototype.setChildVisible.call(this, prevoiusPage, false);
+            ContainerSetChildVisible.call(this, prevoiusPage, false);
             this.emit('pageinvisible', prevoiusPage, this._previousKey, this);
         } else { // Destroy
             prevoiusPage.destroy();
@@ -19,7 +21,7 @@ var SwapPage = function (key) {
     this._currentKey = key;
     var currentPage = this.currentPage;
     if (currentPage) {
-        Container.prototype.setChildVisible.call(this, currentPage, true);
+        ContainerSetChildVisible.call(this, currentPage, true);
         this.emit('pagevisible', currentPage, this._currentKey, this);
     }
     return this;

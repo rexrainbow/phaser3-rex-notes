@@ -1,8 +1,10 @@
 import Container from '../container/Container.js';
 
+const ContainerAdd = Container.prototype.add;
+
 export default {
     pin(gameObject) {
-        Container.prototype.add.call(this, gameObject);
+        ContainerAdd.call(this, gameObject);
         return this;
     },
 

@@ -1,6 +1,8 @@
 import IndexOf from '../../../../plugins/utils/object/IndexOf.js';
 import Container from '../../container/Container.js';
 
+const ContainerSetChildVisible = Container.prototype.setChildVisible;
+
 export default {
     setChildVisible(child, visible) {
         var key;
@@ -13,7 +15,7 @@ export default {
         if (visible === undefined) {
             visible = (this.currentChildKey === key) ? true : false;
         }
-        Container.prototype.setChildVisible.call(this, child, visible);
+        ContainerSetChildVisible.call(this, child, visible);
         return this;
     }
 }

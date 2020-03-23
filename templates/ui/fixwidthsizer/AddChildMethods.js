@@ -4,6 +4,7 @@ import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+const ContainerMoveTo = Container.prototype.moveTo;
 
 export default {
     add(gameObject, paddingConfig, childKey) {
@@ -42,7 +43,7 @@ export default {
 
     insert(index, gameObject, paddingConfig, expand) {
         this.add(gameObject, paddingConfig, expand);
-        Container.prototype.moveTo.call(this, gameObject, index);
+        ContainerMoveTo.call(this, gameObject, index);
         return this;
     }
 }
