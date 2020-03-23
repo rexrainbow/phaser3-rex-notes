@@ -21,27 +21,15 @@ class Tabs extends GridSizer {
         var panel = GetValue(config, 'panel', undefined);
         var leftButtons = GetValue(config, 'leftButtons', undefined);
         var leftButtonsBackground = GetValue(config, 'leftButtonsBackground', undefined);
-        if (leftButtons && leftButtons.length === 0) {
-            leftButtons = undefined;
-        }
         var leftButtonsSizer;
         var rightButtons = GetValue(config, 'rightButtons', undefined);
         var rightButtonsBackground = GetValue(config, 'rightButtonsBackground', undefined);
-        if (rightButtons && rightButtons.length === 0) {
-            rightButtons = undefined;
-        }
         var rightButtonsSizer;
         var topButtons = GetValue(config, 'topButtons', undefined);
         var topButtonsBackground = GetValue(config, 'topButtonsBackground', undefined);
-        if (topButtons && topButtons.length === 0) {
-            topButtons = undefined;
-        }
         var topButtonsSizer;
         var bottomButtons = GetValue(config, 'bottomButtons', undefined);
         var bottomButtonsBackground = GetValue(config, 'bottomButtonsBackground', undefined);
-        if (bottomButtons && bottomButtons.length === 0) {
-            bottomButtons = undefined;
-        }
         var bottomButtonsSizer;
         var clickConfig = GetValue(config, 'click', undefined);
 

@@ -17,7 +17,7 @@ var SetRadioType = function (config) {
 
             // Update state of button -> Fire `changedata-btnName` event -> setValueCallback
             var dataManager = this._dataManager;
-            this.getElement('buttons').forEach(function (button) {
+            this.buttons.forEach(function (button) {
                 var key = button.name;
                 var state = dataManager.get(key);
                 if (key === value) {

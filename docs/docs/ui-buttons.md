@@ -245,6 +245,35 @@ buttons.emitButtonClick(index);
     var gameObject = buttons.getElement('#' + name);
     ```
 
+### Add button
+
+- Add button
+    ```javascript
+    buttons.addButton(gameObject)
+    ```
+- Add buttons
+    ```javascript
+    buttons.addButtons(gameObjects)
+    ```
+    - `gameObjects` : Array of game object.
+
+### Remove buttton
+
+- Remove a button
+    ```javascript
+    buttons.removeButton(gameObject, destroyChild);
+    ```
+    - `gameObject` : 
+        - Game object : Button game object.
+        - A number : Index of button game object.
+        - A string : Name of button game object.
+    - `destroyChild` : Set `true` to destroy button game object.
+- Remove all buttton
+    ```javascript
+    buttons.clearButtons(destroyChild);
+    ```
+    - `destroyChild` : Set `true` to destroy button game objects.
+
 ### Show/hide button
 
 Hidden elements won't be counted when layouting. 

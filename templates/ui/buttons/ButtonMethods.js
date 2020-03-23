@@ -1,16 +1,24 @@
+import GetGameObjectByName from '../utils/GetGameObjectByName.js';
 import { FireEvent } from './ButtonSetInteractive.js';
 import { Show, Hide, IsShown } from '../utils/Hide.js';
 
 export default {
     getButton(index) {
         var button;
-        if (typeof (index) === 'number') {
-            button = this.childrenMap.buttons[index];
-        } else {
-            button = index;
-            if (this.childrenMap.buttons.indexOf(button) === -1) {
-                button = undefined;
-            }
+        var indexType = typeof (index);
+        switch (indexType) {
+            case 'number':
+                button = this.buttons[index];
+                break;
+            case 'string':
+                button = GetGameObjectByName(this.buttons, index);
+                break;
+            default:
+                button = index;
+                if (this.buttons.indexOf(button) === -1) {
+                    button = undefined;
+                }
+                break;
         }
         return button;
     },
@@ -37,12 +45,11 @@ export default {
     },
 
     forEachButtton(callback, scope) {
-        var buttons = this.childrenMap.buttons;
-        for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        for (var i = 0, cnt = this.buttons.length; i < cnt; i++) {
             if (scope) {
-                callback.call(scope, buttons[i], i, buttons);
+                callback.call(scope, this.buttons[i], i, this.buttons);
             } else {
-                callback(buttons[i], i, buttons);
+                callback(this.buttons[i], i, this.buttons);
             }
         }
         return this;

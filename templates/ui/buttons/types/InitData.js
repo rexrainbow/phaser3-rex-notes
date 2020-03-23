@@ -14,7 +14,7 @@ var InitData = function (config, initialValue) {
         dataManager = this.data;
     }
 
-    this.childrenMap.buttons.forEach(function (button) {
+    this.buttons.forEach(function (button) {
         var key = button.name;
 
         if (setValueCallback) {

@@ -94,12 +94,14 @@ var dialog = scene.rexUI.add.dialog({
         buttonGameObject,
         // ...
     ],
+    toolbarBackground: toolbarBackgroundGameObject,
 
     leftToolbar: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
+    leftToolbarBackground: leftToolbarBackgroundGameObject,
 
     content: contentGameObject,
 
@@ -110,12 +112,14 @@ var dialog = scene.rexUI.add.dialog({
         buttonGameObject,
         // ...
     ],
+    choicesBackground: choicesBackgroundGameObject,
 
     actions: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
+    actionsBackground: actionsBackgroundGameObject,
 
     // Space
     space: {
@@ -182,11 +186,23 @@ var dialog = scene.rexUI.add.dialog({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.
+    - `[]` : Assign an empty array if user will add button later.
+- `toolbarBackground` : [Game object of toolbar buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `leftToolbar` : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.
+    - `[]` : Assign an empty array if user will add button later.
+- `leftToolbarBackground` : [Game object of leftToolbar buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
+    - `[]` : Assign an empty array if user will add button later.
+- `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
+- `choicesType` : Type/behavior of choice buttons.
+    - `undefined` : No extra behavior, default value.
+    - `'checkboxes'` : Set these buttons to checkboxes.
+    - `'radio'` : Set these buttons to radio.
 - `actions` : Array of Game objects for action-buttons group which arranged from left to right, optional.
+    - `[]` : Assign an empty array if user will add button later.
+- `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.title` : Space between title game object and below game object.
@@ -366,6 +382,39 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     var gameObject = dialog.getElement('#' + name);
     ```
 
+### Add button
+
+Add choice/action/toolbar/left-toolbar button
+
+```javascript
+dialog.addChoice(gameObject);
+dialog.addAction(gameObject);
+dialog.addToolbar(gameObject);
+dialog.addLeftToolbar(gameObject);
+```
+
+- `gameObject` : A game object, or an array of game objects.
+
+### Remove button
+
+- Remove a choice/action/toolbar/left-toolbar button
+    ```javascript
+    dialog.removeChoice(index, destroyChild);
+    dialog.removeAction(index, destroyChild);
+    dialog.removeToolbar(index, destroyChild);
+    dialog.removeLeftToolbar(index, destroyChild);
+    ```
+    - `index` : A number index, a string name, or a button game object.
+    - `destroyChild` : Set `true` to destroy button game object.
+- Remove all choice/action/toolbar/left-toolbar buttons
+    ```javascript
+    dialog.clearChoices(destroyChild);
+    dialog.clearActions(destroyChild);
+    dialog.clearToolbar(destroyChild);
+    dialog.clearLeftToolbar(destroyChild);
+    ```
+    - `destroyChild` : Set `true` to destroy button game object.
+
 ### Show/hide button
 
 Hidden elements won't be counted when layouting. 
@@ -378,7 +427,7 @@ Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
     dialog.showToolbar(index);
     dialog.showLeftToolbar(index);
     ```
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 - Hide choice/action/toolbar/left-toolbar button.
     ```javascript
     dialog.hideChoice(index);
@@ -386,7 +435,7 @@ Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
     dialog.hideToolbar(index);
     dialog.hideLeftToolbar(index);
     ```
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 
 ### For each button
 

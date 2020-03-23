@@ -148,6 +148,7 @@ var tabs = scene.rexUI.add.tabs({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `panel` : Game object of center panel.
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.
+    - `[]` : Assign an empty array if user will add button later.
 - `leftButtonsBackground`, `rightButtonsBackground`, `topButtonsBackground`, `bottomButtonsBackground` : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
@@ -309,6 +310,56 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     var gameObject = tabs.getElement('#' + name);
     ```
 
+### Add button
+
+- Add button in a group
+    ```javascript
+    tabs.addButton(groupName, gameObject);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `gameObject` : A game object, or an array of game objects.
+- Add left/right/top/bottom button
+    ```javascript
+    tabs.addLeftButton(gameObject);
+    tabs.addRightButton(gameObject);
+    tabs.addTopButton(gameObject);
+    tabs.addBottomButton(gameObject);
+    ```
+    - `gameObject` : A game object, or an array of game objects.
+
+### Remove button
+
+- Remove a button from a group
+    ```javascript
+    tabls.removeButton(groupName, index, destroyChild);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, a string name, or a button game object.
+    - `destroyChild` : Set `true` to destroy button game object.
+- Remove left/right/top/bottom button
+    ```javascript
+    tabs.removeLeftButton(index, destroyChild);
+    tabs.removeRightButton(index, destroyChild);
+    tabs.removeTopButton(index, destroyChild);
+    tabs.removeBottomButton(index, destroyChild);
+    ```
+    - `index` : A number index, a string name, or a button game object.
+    - `destroyChild` : Set `true` to destroy button game object.
+- Remove all buttons of a group
+    ```javascript
+    tabls.clearButtons(groupName, destroyChild);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `destroyChild` : Set `true` to destroy button game objects.
+- Remove all left/right/top/bottom buttons
+    ```javascript
+    tabs.clearLeftButtons(destroyChild);
+    tabs.clearRightButtons(destroyChild);
+    tabs.clearTopButtons(destroyChild);
+    tabs.clearBottomButtosn(destroyChild);
+    ```
+    - `destroyChild` : Set `true` to destroy button game objects.
+
 ### Show/hide button
 
 Hidden elements won't be counted when layouting. 
@@ -319,7 +370,7 @@ Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
     tabs.showButton(groupName, index);
     ```
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 - Show left/right/top/bottom button
     ```javascript
     tabs.showLeftButton(index);
@@ -327,13 +378,13 @@ Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
     tabs.showTopButton(index);
     tabs.showBottomButton(index);
     ```
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 - Hide button in a group
     ```javascript
     tabs.hideButton(groupName, index);
     ```
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 - Hide left/right/top/bottom button.
     ```javascript
     tabs.hideLeftButton(index);
@@ -341,7 +392,7 @@ Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
     tabs.hideTopButton(index);
     tabs.hideBottomButton(index);
     ```
-    - `index` : A number index, or a button game object.
+    - `index` : A number index, a string name, or a button game object.
 
 ### For each button
 

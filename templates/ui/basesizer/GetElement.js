@@ -1,4 +1,5 @@
-import IsArray from '../../../plugins/utils/object/IsArray.js';
+
+import GetGameObjectByName from '../utils/GetGameObjectByName.js';
 
 var GetElement = function (mapNameList) {
     if (this.childrenMap === undefined) {
@@ -16,7 +17,7 @@ var GetElement = function (mapNameList) {
         element;
     if (name.charAt(0) === '#') {
         name = name.substring(1);
-        element = GetElementByName(this.childrenMap, name);
+        element = GetGameObjectByName(this.childrenMap, name);
     } else if (name.indexOf('[') === (-1)) {
         element = this.childrenMap[name];
     } else { // name[]
@@ -37,35 +38,6 @@ var GetElement = function (mapNameList) {
         return null;
     }
 };
-
-var GetElementByName = function (children, name) {
-    var child;
-    if (IsArray(children)) {
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = TestName(children[i], name);
-            if (child) {
-                return child;
-            }
-        }
-    } else { // Is plain object
-        for (var key in children) {
-            child = TestName(children[key], name);
-            if (child) {
-                return child;
-            }
-        }
-    }
-}
-
-var TestName = function (gameObject, name) {
-    if (!gameObject) {
-        return null;
-    } else if (gameObject.hasOwnProperty('name')) {
-        return (gameObject.name === name) ? gameObject : null;
-    } else { // Array, or plain object
-        return GetElementByName(gameObject, name);
-    }
-}
 
 const RE_OBJ = /(\S+)\[(\d+)\]/i;
 

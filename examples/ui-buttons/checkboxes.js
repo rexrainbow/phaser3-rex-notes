@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var CheckboxesMode = true;  // False = radio mode
+        var CheckboxesMode = true;  // false = radio mode
 
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,

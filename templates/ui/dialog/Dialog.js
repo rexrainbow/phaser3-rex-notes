@@ -19,25 +19,17 @@ class Dialog extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var title = GetValue(config, 'title', undefined);
         var toolbar = GetValue(config, 'toolbar', undefined);
-        if (toolbar && toolbar.length === 0) {
-            toolbar = undefined;
-        }
+        var toolbarBackground = GetValue(config, 'toolbarBackground', undefined);
         var leftToolbar = GetValue(config, 'leftToolbar', undefined);
-        if (leftToolbar && leftToolbar.length === 0) {
-            leftToolbar = undefined;
-        }
+        var leftToolbarBackground = GetValue(config, 'leftToolbarBackground', undefined);
         var content = GetValue(config, 'content', undefined);
         var description = GetValue(config, 'description', undefined);
         var choicesSizer;
         var choices = GetValue(config, 'choices', undefined);
-        if (choices && choices.length === 0) {
-            choices = undefined;
-        }
+        var choicesBackground = GetValue(config, 'choicesBackground', undefined);
         var actionsSizer;
         var actions = GetValue(config, 'actions', undefined);
-        if (actions && actions.length === 0) {
-            actions = undefined;
-        }
+        var actionsBackground = GetValue(config, 'actionsBackground', undefined);
         var clickConfig = GetValue(config, 'click', undefined);
 
         // Space
@@ -54,6 +46,7 @@ class Dialog extends Sizer {
         if (toolbar) {
             toolbarSizer = new Buttons(scene, {
                 groupName: 'toolbar',
+                background: toolbarBackground,
                 buttons: toolbar,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.toolbarItem', 0),
@@ -66,6 +59,7 @@ class Dialog extends Sizer {
         if (leftToolbar) {
             leftToolbarSizer = new Buttons(scene, {
                 groupName: 'leftToolbar',
+                background: leftToolbarBackground,
                 buttons: leftToolbar,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.leftToolbarItem', 0),
@@ -192,6 +186,7 @@ class Dialog extends Sizer {
             var align = GetValue(config, 'align.choices', 'center');
             choicesSizer = new Buttons(scene, {
                 groupName: 'choices',
+                background: choicesBackground,
                 buttons: choices,
                 orientation: 1, // Top-Bottom
                 space: GetValue(config, 'space.choice', 0),
@@ -215,6 +210,7 @@ class Dialog extends Sizer {
         if (actions) {
             actionsSizer = new Buttons(scene, {
                 groupName: 'actions',
+                background: actionsBackground,
                 buttons: actions,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.action', 0),

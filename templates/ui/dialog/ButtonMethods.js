@@ -1,3 +1,5 @@
+import IsArray from '../../../plugins/utils/object/IsArray.js';
+
 export default {
     getChoice(index) {
         return this.childrenMap.choicesSizer.getButton(index);
@@ -72,6 +74,82 @@ export default {
 
     hideLeftToolbar(index) {
         this.childrenMap.leftToolbarSizer.hideButton(index);
+        return this;
+    },
+
+    addChoice(gameObject) {
+        if (!IsArray(gameObject)) {
+            this.childrenMap.choicesSizer.addButton(gameObject);
+        } else {
+            this.childrenMap.choicesSizer.addButtons(gameObject)
+        }
+        return this;
+    },
+
+    addAction(gameObject) {
+        if (!IsArray(gameObject)) {
+            this.childrenMap.actionsSizer.addButton(gameObject);            
+        } else {
+            this.childrenMap.actionsSizer.addButtons(gameObject);
+        }
+        return this;
+    },
+
+    addToolbar(gameObject) {
+        if (!IsArray(gameObject)) {
+            this.childrenMap.toolbarSizer.addButton(gameObject);
+        } else {
+            this.childrenMap.toolbarSizer.addButtons(gameObject);
+        }
+        return this;
+    },
+
+    addLeftToolbar(gameObject) {
+        if (!IsArray(gameObject)) {            
+            this.childrenMap.leftToolbarSizer.addButton(gameObject);
+        } else {            
+            this.childrenMap.leftToolbarSizer.addButtons(gameObject);
+        }
+        return this;
+    },
+
+    removeChoice(index, destroyChild) {
+        this.childrenMap.choicesSizer.removeButton(index, destroyChild);
+        return this;
+    },
+
+    removeAction(index, destroyChild) {
+        this.childrenMap.actionsSizer.removeButton(index, destroyChild);
+        return this;
+    },
+
+    removeToolbar(index, destroyChild) {
+        this.childrenMap.toolbarSizer.removeButton(index, destroyChild);
+        return this;
+    },
+
+    removeLeftToolbar(index, destroyChild) {
+        this.childrenMap.leftToolbarSizer.removeButton(index, destroyChild);
+        return this;
+    },
+
+    clearChoices(destroyChild) {
+        this.childrenMap.choicesSizer.clearButtons(destroyChild);
+        return this;
+    },
+
+    clearActions(destroyChild) {
+        this.childrenMap.actionsSizer.clearButtons(destroyChild);
+        return this;
+    },
+
+    clearToolbar(destroyChild) {
+        this.childrenMap.toolbarSizer.clearButtons(destroyChild);
+        return this;
+    },
+
+    clearLeftToolbar(destroyChild) {
+        this.childrenMap.leftToolbarSizer.clearButtons(destroyChild);
         return this;
     },
 

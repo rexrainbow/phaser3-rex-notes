@@ -5,7 +5,7 @@ import {
 
 export default {
     getButtonsSizer(groupName) {
-        return this.childrenMap[groupName + 'ButtonsSizer'];
+        return this.childrenMap[`${groupName}ButtonsSizer`];
     },
 
     getButton(groupName, index) {
@@ -105,6 +105,81 @@ export default {
 
     hideBottomButton(index) {
         Hide(this.getBottomButton(index));
+        return this;
+    },
+
+    addButton(groupName, gameObject) {
+        var buttonsSizer = this.getButtonsSizer(groupName);
+        if (!IsArray(gameObject)) {
+            buttonsSizer.addButton(gameObject);
+        } else {
+            buttonsSizer.addButtons(gameObject)
+        }
+        return this;
+    },
+
+    addLeftButton(gameObject) {
+        this.addButton('left', gameObject);
+        return this;
+    },
+
+    addRightButton(gameObject) {
+        this.addButton('right', gameObject);
+        return this;
+    },
+
+    addTopButton(gameObject) {
+        this.addButton('top', gameObject);
+        return this;
+    },
+
+    removeButton(groupName, index, destroyChild) {
+        this.getButtonsSizer(groupName).removeButton(index, destroyChild);
+        return this;
+    },
+
+    removeLeftButton(index, destroyChild) {
+        this.removeButton('left', index, destroyChild);
+        return this;
+    },
+
+    removeRightButton(index, destroyChild) {
+        this.removeButton('right', index, destroyChild);
+        return this;
+    },
+
+    removeTopButton(index, destroyChild) {
+        this.removeButton('top', index, destroyChild);
+        return this;
+    },
+
+    removeBottomButton(index, destroyChild) {
+        this.removeButton('bottom', index, destroyChild);
+        return this;
+    },
+
+    clearButtons(groupName, destroyChild) {
+        this.getButtonsSizer(groupName).clearButtons(destroyChild);
+        return this;
+    },
+
+    clearLeftButtons(destroyChild) {
+        this.clearButtons('left', destroyChild);
+        return this;
+    },
+
+    clearRightButtons(destroyChild) {
+        this.clearButtons('right', destroyChild);
+        return this;
+    },
+
+    clearTopButtons(destroyChild) {
+        this.clearButtons('top', destroyChild);
+        return this;
+    },
+
+    clearBottomButtonss(destroyChild) {
+        this.clearButtons('bottom', destroyChild);
         return this;
     },
 
