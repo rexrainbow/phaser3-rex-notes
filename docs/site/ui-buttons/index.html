@@ -4162,6 +4162,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-buttton" class="md-nav__link">
+    Remove buttton
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -4941,6 +4955,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-buttton" class="md-nav__link">
+    Remove buttton
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -5251,6 +5279,39 @@
 <li>Get by name
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add button
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span>
+</code></pre></div></li>
+<li>Add buttons
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">addButtons</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>gameObjects</code> : Array of game object.</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove-buttton">Remove buttton<a class="headerlink" href="#remove-buttton" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove a button
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">removeButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>gameObject</code> : <ul>
+<li>Game object : Button game object.</li>
+<li>A number : Index of button game object.</li>
+<li>A string : Name of button game object.</li>
+</ul>
+</li>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
+</ul>
+</li>
+<li>Remove all buttton
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">clearButtons</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game objects.</li>
+</ul>
+</li>
 </ul>
 <h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
 <p>Hidden elements won't be counted when layouting. 

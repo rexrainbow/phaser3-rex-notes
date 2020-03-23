@@ -4186,6 +4186,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-button" class="md-nav__link">
+    Remove button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -4914,6 +4928,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-button" class="md-nav__link">
+    Remove button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -4965,6 +4993,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes-no dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Single choice dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/gOpddxa">Add button</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-dialog">Sample code</a></p>
@@ -5035,12 +5064,14 @@
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="c1">// ...</span>
     <span class="p">],</span>
+    <span class="nx">toolbarBackground</span><span class="o">:</span> <span class="nx">toolbarBackgroundGameObject</span><span class="p">,</span>
 
     <span class="nx">leftToolbar</span><span class="o">:</span> <span class="p">[</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="c1">// ...</span>
     <span class="p">],</span>
+    <span class="nx">leftToolbarBackground</span><span class="o">:</span> <span class="nx">leftToolbarBackgroundGameObject</span><span class="p">,</span>
 
     <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
 
@@ -5051,12 +5082,14 @@
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="c1">// ...</span>
     <span class="p">],</span>
+    <span class="nx">choicesBackground</span><span class="o">:</span> <span class="nx">choicesBackgroundGameObject</span><span class="p">,</span>
 
     <span class="nx">actions</span><span class="o">:</span> <span class="p">[</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="nx">buttonGameObject</span><span class="p">,</span>
         <span class="c1">// ...</span>
     <span class="p">],</span>
+    <span class="nx">actionsBackground</span><span class="o">:</span> <span class="nx">actionsBackgroundGameObject</span><span class="p">,</span>
 
     <span class="c1">// Space</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
@@ -5129,12 +5162,34 @@
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
 <li><code>title</code> : Game object of title, optional.</li>
-<li><code>toolbar</code> : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.</li>
-<li><code>leftToolbar</code> : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.</li>
+<li><code>toolbar</code> : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.<ul>
+<li><code>[]</code> : Assign an empty array if user will add button later.</li>
+</ul>
+</li>
+<li><code>toolbarBackground</code> : <a href="../ui-basesizer/#background">Game object of toolbar buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
+<li><code>leftToolbar</code> : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.<ul>
+<li><code>[]</code> : Assign an empty array if user will add button later.</li>
+</ul>
+</li>
+<li><code>leftToolbarBackground</code> : <a href="../ui-basesizer/#background">Game object of leftToolbar buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
 <li><code>content</code> : Game object of content, optional.</li>
 <li><code>description</code> : Game object of description, optional.</li>
-<li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.</li>
-<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.</li>
+<li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.<ul>
+<li><code>[]</code> : Assign an empty array if user will add button later.</li>
+</ul>
+</li>
+<li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
+<li><code>choicesType</code> : Type/behavior of choice buttons.<ul>
+<li><code>undefined</code> : No extra behavior, default value.</li>
+<li><code>'checkboxes'</code> : Set these buttons to checkboxes.</li>
+<li><code>'radio'</code> : Set these buttons to radio.</li>
+</ul>
+</li>
+<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.<ul>
+<li><code>[]</code> : Assign an empty array if user will add button later.</li>
+</ul>
+</li>
+<li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.title</code> : Space between title game object and below game object.</li>
@@ -5309,6 +5364,39 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
+<p>Add choice/action/toolbar/left-toolbar button</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">addChoice</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">addAction</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">addToolbar</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">addLeftToolbar</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>gameObject</code> : A game object, or an array of game objects.</li>
+</ul>
+<h3 id="remove-button">Remove button<a class="headerlink" href="#remove-button" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove a choice/action/toolbar/left-toolbar button
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">removeChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeAction</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
+</ul>
+</li>
+<li>Remove all choice/action/toolbar/left-toolbar buttons
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">clearChoices</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearActions</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearToolbar</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearLeftToolbar</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
+</ul>
+</li>
+</ul>
 <h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
 <p>Hidden elements won't be counted when layouting. 
 Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
@@ -5319,7 +5407,7 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">showToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">showLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 <li>Hide choice/action/toolbar/left-toolbar button.
@@ -5328,7 +5416,7 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">hideToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">hideLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 </ul>

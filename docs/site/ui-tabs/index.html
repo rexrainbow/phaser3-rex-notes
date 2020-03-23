@@ -4210,6 +4210,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-button" class="md-nav__link">
+    Remove button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -4914,6 +4928,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-button" class="md-nav__link">
+    Add button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-button" class="md-nav__link">
+    Remove button
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#showhide-button" class="md-nav__link">
     Show/hide button
   </a>
@@ -5095,7 +5123,10 @@
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of grid table.</li>
 <li><code>panel</code> : Game object of center panel.</li>
-<li><code>leftButtons</code>, <code>rightButtons</code>, <code>topButtons</code>, <code>bottomButtons</code> : Array of button game object.</li>
+<li><code>leftButtons</code>, <code>rightButtons</code>, <code>topButtons</code>, <code>bottomButtons</code> : Array of button game object.<ul>
+<li><code>[]</code> : Assign an empty array if user will add button later.</li>
+</ul>
+</li>
 <li><code>leftButtonsBackground</code>, <code>rightButtonsBackground</code>, <code>topButtonsBackground</code>, <code>bottomButtonsBackground</code> : Game object of leftButtons' background, rightButtons' background, topButtons' background, bottomButtons' background, optional.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
@@ -5258,6 +5289,62 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add button in a group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>gameObject</code> : A game object, or an array of game objects.</li>
+</ul>
+</li>
+<li>Add left/right/top/bottom button
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">addLeftButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">addRightButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">addTopButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">addBottomButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>gameObject</code> : A game object, or an array of game objects.</li>
+</ul>
+</li>
+</ul>
+<h3 id="remove-button">Remove button<a class="headerlink" href="#remove-button" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove a button from a group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabls</span><span class="p">.</span><span class="nx">removeButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
+</ul>
+</li>
+<li>Remove left/right/top/bottom button
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">removeLeftButton</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">removeRightButton</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">removeTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">removeBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
+</ul>
+</li>
+<li>Remove all buttons of a group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabls</span><span class="p">.</span><span class="nx">clearButtons</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game objects.</li>
+</ul>
+</li>
+<li>Remove all left/right/top/bottom buttons
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">clearLeftButtons</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">clearRightButtons</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">clearTopButtons</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">clearBottomButtosn</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>destroyChild</code> : Set <code>true</code> to destroy button game objects.</li>
+</ul>
+</li>
+</ul>
 <h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
 <p>Hidden elements won't be counted when layouting. 
 Call <code>tabs.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
@@ -5266,7 +5353,7 @@ Call <code>tabs.layout()</code>, or <code>topSizer.layout()</code> after show/hi
     <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">showButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 <li>Show left/right/top/bottom button
@@ -5275,14 +5362,14 @@ Call <code>tabs.layout()</code>, or <code>topSizer.layout()</code> after show/hi
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">showTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">showBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 <li>Hide button in a group
     <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">hideButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 <li>Hide left/right/top/bottom button.
@@ -5291,7 +5378,7 @@ Call <code>tabs.layout()</code>, or <code>topSizer.layout()</code> after show/hi
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">hideTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">hideBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li><code>index</code> : A number index, a string name, or a button game object.</li>
 </ul>
 </li>
 </ul>
