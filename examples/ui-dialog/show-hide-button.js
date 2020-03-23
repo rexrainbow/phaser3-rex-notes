@@ -6,6 +6,7 @@ const data = {
     title: 'Question 1',
     content: '1 + 1 + 1 + 1 = ',
     choices: [3, 4, 5],
+    actions: ['OK', 'Cancel']
 };
 
 class Demo extends Phaser.Scene {
@@ -77,8 +78,10 @@ var createDialog = function (scene) {
         ], // Support 5 choices
 
         actions: [
-            createLabel(scene, 'Submit', 0x1b0000),
-        ],
+            createLabel(scene, '', 0x1b0000),
+            createLabel(scene, '', 0x1b0000),
+            createLabel(scene, '', 0x1b0000)
+        ], // Support 3 actions
 
         space: {
             title: 25,
@@ -131,6 +134,19 @@ var setDialog = function (dialog, config) {
             choices[i].text = choiceText;
         } else {
             dialog.hideChoice(i);
+        }
+    }
+    // Set actions
+    var actionTextArray = GetValue(config, 'actions', []),
+        actionText;
+    var actions = dialog.getElement('actions');
+    for (var i = 0, cnt = actions.length; i < cnt; i++) {
+        actionText = actionTextArray[i];
+        if (actionText != null) {
+            dialog.showAction(i);
+            actions[i].text = actionText;
+        } else {
+            dialog.hideAction(i);
         }
     }
     return dialog;
