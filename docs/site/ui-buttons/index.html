@@ -5284,23 +5284,20 @@
 <ul>
 <li>Add button
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span>
-</code></pre></div></li>
-<li>Add buttons
-    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">addButtons</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">)</span>
 </code></pre></div><ul>
-<li><code>gameObjects</code> : Array of game object.</li>
+<li><code>gameObject</code> : A game object, or an array of game objects.</li>
 </ul>
 </li>
 </ul>
 <h3 id="remove-buttton">Remove buttton<a class="headerlink" href="#remove-buttton" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Remove a button
+<li>Remove button
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">removeButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : <ul>
-<li>Game object : Button game object.</li>
-<li>A number : Index of button game object.</li>
-<li>A string : Name of button game object.</li>
+<li>Game object, or array of game objects : Button game object.</li>
+<li>A number, or array of numbers : Index of button game object.</li>
+<li>A string, or array of strings : Name of button game object.</li>
 </ul>
 </li>
 <li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
@@ -5377,6 +5374,10 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Checkboxes and radio don't support add, remove, show, or hide methods.</p>
+</div>
 <h4 id="checkboxes">Checkboxes<a class="headerlink" href="#checkboxes" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Read state

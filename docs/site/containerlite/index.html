@@ -1491,6 +1491,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tween-local-state" class="md-nav__link">
+    Tween local state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5048,6 +5055,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#tween-local-state" class="md-nav__link">
+    Tween local state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5116,6 +5130,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="https://codepen.io/rexrainbow/pen/KKpGzvx">Tween child</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NBgpYd">Rotate, alpha</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
@@ -5370,6 +5385,17 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h4 id="tween-local-state">Tween local state<a class="headerlink" href="#tween-local-state" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">tweenChild</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">child</span><span class="p">,</span>
+    <span class="c1">// x: &#39;+=100&#39;,</span>
+    <span class="c1">// y: &#39;+=100&#39;,</span>
+    <span class="c1">// repeat: -1,</span>
+    <span class="c1">// yoyo: true</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<p><a href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task">Paramters of configuration</a> is the same as tween task.</p>
 <h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get depth of container
