@@ -2,6 +2,7 @@ import Methods from './Methods.js';
 
 // Base class
 const Zone = Phaser.GameObjects.Zone;
+const Group = Phaser.GameObjects.Group;
 class Base extends Zone { }
 const Components = Phaser.GameObjects.Components;
 Phaser.Class.mixin(Base,
@@ -25,7 +26,7 @@ class ContainerLite extends Base {
             height = 1;
         }
         super(scene, x, y, width, height);
-        this.children = scene.add.group();
+        this.children = new Group(scene); // Don't add Group into update list, I will destroy it manually
         this.type = 'rexContainerLite';
         this.isRexContainerLite = true;
         this.syncChildrenEnable = true;
