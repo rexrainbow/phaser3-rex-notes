@@ -16,6 +16,7 @@ var CreateScrollableSizer = function (config) {
 
     // Child, slider, scroller
     if (child) {
+        scene.add.existing(child); // Add to display list if not added
         var childSpace = GetValue(config, 'space.child', 0);
         this.childPadding = {};
         if (typeof (childSpace) !== 'number') {

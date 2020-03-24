@@ -73,7 +73,7 @@ Viewer of grid table, to manipulate game object of each visible cell.
 - Add table object
     ```javascript    
     var table = new GridTable(scene, x, y, width, height, config);
-    sscene.add.existing(table);
+    scene.add.existing(table);
     ```
 
 ### Create instance
