@@ -335,6 +335,9 @@ buttons.forEachButtton(callback, scope);
         - `previousValue` : `true`, or `false`.
     - State of a button : Stored in [`buttons.data`](gameobject.md#private-data)
 
+!!! note
+    Checkboxes and radio don't support add, remove, show, or hide methods.
+
 #### Checkboxes
 
 - Read state
