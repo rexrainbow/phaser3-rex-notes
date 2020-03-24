@@ -26,6 +26,7 @@ class TextArea extends Scrollable {
             content: content,
             clamplTextOY: GetValue(config, 'clamplChildOY', false),
         });
+        scene.add.existing(textBlock); // Important: Add to display list for touch detecting
         var proportion = (textWidth === undefined) ? 1 : 0;
         var expand = (textHeight === undefined);
         // Inject properties for scrollable interface
