@@ -9,6 +9,7 @@ It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/ph
 
 ## Live demos
 
+- [Tween child](https://codepen.io/rexrainbow/pen/KKpGzvx)
 - [Rotate, alpha](https://codepen.io/rexrainbow/pen/NBgpYd)
 
 ## Usage
