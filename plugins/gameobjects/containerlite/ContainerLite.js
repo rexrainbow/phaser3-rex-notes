@@ -46,6 +46,7 @@ class ContainerLite extends Base {
             return;
         }
 
+        this.clear();
         this.children.destroy(!fromScene);
         this.children = undefined;
         super.destroy(fromScene);

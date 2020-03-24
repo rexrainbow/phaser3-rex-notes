@@ -38,6 +38,10 @@ class Demo extends Phaser.Scene {
             .show('Hello world')
             .show('Phaser 3 is good')
             .show('See you next time')
+
+        this.time.delayedCall(1200, function(){
+            this.scene.stop();
+        }, [], this)
     }
 
     update() { }
