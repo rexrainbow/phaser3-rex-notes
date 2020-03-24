@@ -307,6 +307,20 @@ var localState = child.rexContainer;
     container.setChildLocalPosition(child, x, y);
     ```
 
+#### Tween local state
+
+```javascript
+container.tweenChild({
+    targets: child,
+    // x: '+=100',
+    // y: '+=100',
+    // repeat: -1,
+    // yoyo: true
+})
+```
+
+[Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task) is the same as tween task.
+
 ### Depth
 
 - Get depth of container

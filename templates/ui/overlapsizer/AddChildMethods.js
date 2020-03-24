@@ -34,7 +34,6 @@ export default {
         var defaultExpand = (typeof (expand) === "boolean") ? expand : false;
 
         var config = this.getSizerConfig(gameObject);
-        config.parent = this;
         config.align = align;
         config.padding = GetBoundsConfig(padding);
         config.expandWidth = GetValue(expand, 'width', defaultExpand);

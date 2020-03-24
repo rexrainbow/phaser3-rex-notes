@@ -11,7 +11,6 @@ var SetTextObject = function (gameObject, maskEnable) {
     this.add(gameObject);
 
     var config = this.getSizerConfig(gameObject);
-    config.parent = this;
     config.align = ALIGN_LEFTTOP;
     config.padding = GetBoundsConfig(0);
     config.expand = true;

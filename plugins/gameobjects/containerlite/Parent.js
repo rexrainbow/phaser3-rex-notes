@@ -1,0 +1,32 @@
+import { GetParent, GetTopmostParent } from './GetParent.js';
+
+export default {
+    setParent(gameObject, parent) {
+        if (parent === undefined) {
+            parent = this;
+        }
+        var localState = this.getLocalState(gameObject);
+        if (parent) { // Add to parent
+            localState.parent = parent;
+            localState.self = gameObject;
+        } else { // Remove from parent
+            localState.parent = null;
+            localState.self = null;
+        }
+        return this;
+    },
+
+    getParent(gameObject) {
+        if (gameObject === undefined) {
+            gameObject = this;
+        }
+        return GetParent(gameObject);
+    },
+
+    getTopmostParent(gameObject) {
+        if (gameObject === undefined) {
+            gameObject = this;
+        }
+        return GetTopmostParent(gameObject);
+    }
+};

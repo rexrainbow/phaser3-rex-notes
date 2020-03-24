@@ -5,11 +5,9 @@ const ContainerRemove = Container.prototype.remove;
 
 export default {
     remove(gameObject) {
-        var config = this.getSizerConfig(gameObject);
-        if (config.parent !== this) {
+        if (this.getParentSizer(gameObject) !== this) {
             return this;
         }
-        config.parent = undefined;
         RemoveItem(this.gridChildren, gameObject);
 
         if (this.backgroundChildren !== undefined) {

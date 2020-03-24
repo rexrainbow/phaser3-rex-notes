@@ -16,7 +16,6 @@ export default {
         this.pin(gameObject);
 
         var config = this.getSizerConfig(gameObject);
-        config.parent = this;
         this.backgroundChildren.push(gameObject);
 
         if (childKey !== undefined) {

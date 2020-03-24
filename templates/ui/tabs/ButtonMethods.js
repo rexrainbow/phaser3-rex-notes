@@ -109,12 +109,7 @@ export default {
     },
 
     addButton(groupName, gameObject) {
-        var buttonsSizer = this.getButtonsSizer(groupName);
-        if (!IsArray(gameObject)) {
-            buttonsSizer.addButton(gameObject);
-        } else {
-            buttonsSizer.addButtons(gameObject)
-        }
+        this.getButtonsSizer(groupName).addButton(gameObject);
         return this;
     },
 

@@ -31,7 +31,6 @@ export default {
         }
 
         var config = this.getSizerConfig(gameObject);
-        config.parent = this;
         config.align = align;
         config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;

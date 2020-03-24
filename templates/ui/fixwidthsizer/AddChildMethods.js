@@ -25,7 +25,6 @@ export default {
         }
 
         var config = this.getSizerConfig(gameObject);
-        config.parent = this;
         config.align = ALIGN_CENTER;
         config.padding = GetBoundsConfig(paddingConfig);
         this.sizerChildren.push(gameObject);

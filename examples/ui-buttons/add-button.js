@@ -28,12 +28,12 @@ class Demo extends Phaser.Scene {
             align: align
         })
             .addButton(createButton(this, 'B')) // Add a button
-            .addButtons([ // Add buttons
+            .addButton([ // Add buttons
                 createButton(this, 'C'),
                 createButton(this, 'D')
             ])
             //.clearButtons(true)
-            //.addButtons([
+            //.addButton([
             //    createButton(this, 'E'),
             //    createButton(this, 'F')
             //])

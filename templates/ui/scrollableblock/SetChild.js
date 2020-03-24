@@ -9,7 +9,6 @@ var SetChild = function (gameObject, expand, maskConfig) {
     this.add(gameObject);
 
     var config = this.getSizerConfig(gameObject);
-    config.parent = this;
     config.align = ALIGN_LEFTTOP;
     config.expand = expand;
     this.child = gameObject;

@@ -6,20 +6,15 @@ const ContainerClear = Container.prototype.clear;
 
 export default {
     remove(gameObject, destroyChild) {
-        var config = this.getSizerConfig(gameObject);
-        if (config.parent !== this) {
+        if (this.getParentSizer(gameObject) !== this) {
             return this;
         }
-        config.parent = undefined;
         RemoveItem(this.sizerChildren, gameObject);
         ContainerRemove.call(this, gameObject, destroyChild);
         return this;
     },
 
     clear(destroyChild) {
-        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
-            this.getSizerConfig(this.sizerChildren[i]).parent = undefined;
-        }
         this.sizerChildren.length = 0;
         ContainerClear.call(this, destroyChild);
         return this;

@@ -35,7 +35,7 @@ class Buttons extends Sizer {
         }
 
         if (buttons) {
-            this.addButtons(buttons);
+            this.add(buttons);
         }
         SetType.call(this, config);
 

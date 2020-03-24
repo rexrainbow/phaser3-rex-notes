@@ -38,8 +38,7 @@ import Pinch from './pinch/Pinch.js';
 import Rotate from './rotate/Rotate.js';
 import Flip from './flip/Flip.js';
 
-import GetParentSizer from './utils/GetParentSizer.js'
-import GetTopmostSizer from './utils/GetTopmostSizer.js';
+import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import {
     Show,

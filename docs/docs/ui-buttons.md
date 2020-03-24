@@ -251,22 +251,18 @@ buttons.emitButtonClick(index);
     ```javascript
     buttons.addButton(gameObject)
     ```
-- Add buttons
-    ```javascript
-    buttons.addButtons(gameObjects)
-    ```
-    - `gameObjects` : Array of game object.
+    - `gameObject` : A game object, or an array of game objects.
 
 ### Remove buttton
 
-- Remove a button
+- Remove button
     ```javascript
     buttons.removeButton(gameObject, destroyChild);
     ```
     - `gameObject` : 
-        - Game object : Button game object.
-        - A number : Index of button game object.
-        - A string : Name of button game object.
+        - Game object, or array of game objects : Button game object.
+        - A number, or array of numbers : Index of button game object.
+        - A string, or array of strings : Name of button game object.
     - `destroyChild` : Set `true` to destroy button game object.
 - Remove all buttton
     ```javascript

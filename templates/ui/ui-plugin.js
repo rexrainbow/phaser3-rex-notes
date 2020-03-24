@@ -40,8 +40,7 @@ import PinchFactory from './pinch/Factory.js';
 import RotateFactory from './rotate/Factory.js';
 import FlipFactory from './flip/Factory.js';
 
-import GetParentSizer from './utils/GetParentSizer.js'
-import GetTopmostSizer from './utils/GetTopmostSizer.js';
+import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
 import {
     Show,

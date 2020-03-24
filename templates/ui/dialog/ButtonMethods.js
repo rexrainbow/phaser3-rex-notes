@@ -1,5 +1,3 @@
-import IsArray from '../../../plugins/utils/object/IsArray.js';
-
 export default {
     getChoice(index) {
         return this.childrenMap.choicesSizer.getButton(index);
@@ -78,38 +76,22 @@ export default {
     },
 
     addChoice(gameObject) {
-        if (!IsArray(gameObject)) {
-            this.childrenMap.choicesSizer.addButton(gameObject);
-        } else {
-            this.childrenMap.choicesSizer.addButtons(gameObject)
-        }
+        this.childrenMap.choicesSizer.addButton(gameObject);
         return this;
     },
 
     addAction(gameObject) {
-        if (!IsArray(gameObject)) {
-            this.childrenMap.actionsSizer.addButton(gameObject);            
-        } else {
-            this.childrenMap.actionsSizer.addButtons(gameObject);
-        }
+        this.childrenMap.actionsSizer.addButton(gameObject);
         return this;
     },
 
     addToolbar(gameObject) {
-        if (!IsArray(gameObject)) {
-            this.childrenMap.toolbarSizer.addButton(gameObject);
-        } else {
-            this.childrenMap.toolbarSizer.addButtons(gameObject);
-        }
+        this.childrenMap.toolbarSizer.addButton(gameObject);
         return this;
     },
 
     addLeftToolbar(gameObject) {
-        if (!IsArray(gameObject)) {            
-            this.childrenMap.leftToolbarSizer.addButton(gameObject);
-        } else {            
-            this.childrenMap.leftToolbarSizer.addButtons(gameObject);
-        }
+        this.childrenMap.leftToolbarSizer.addButton(gameObject);
         return this;
     },
 

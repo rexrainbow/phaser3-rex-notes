@@ -18,8 +18,7 @@ import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
 import IsInTouching from './IsInTouching.js';
-import GetParentSizer from './GetParentSizer.js';
-import GetTopmostSizer from './GetTopmostSizer.js';
+import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
 
@@ -42,14 +41,13 @@ var methods = {
 
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
-    getParentSizer: GetParentSizer,
-    getTopmostSizer: GetTopmostSizer,
-    setDraggable: SetDraggable,
+    setDraggable: SetDraggable
 };
 
 Object.assign(
     methods,
     AddChildMethods,
+    GetParentSizerMethods,
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods

@@ -1,7 +1,6 @@
-import GetSizerConfig from './GetSizerConfig.js';
+import { GetParent, GetTopmostParent } from '../../../plugins/gameobjects/containerlite/GetParent.js';
 
-var GetParentSizer = function (gameObject) {
-    return GetSizerConfig(gameObject).parent;
-}
+const GetParentSizer = GetParent;
+const GetTopmostSizer = GetTopmostParent;
 
-export default GetParentSizer;
+export { GetParentSizer, GetTopmostSizer };
