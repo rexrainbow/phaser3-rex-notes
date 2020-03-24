@@ -146,7 +146,7 @@ class Demo extends Phaser.Scene {
                 this.print.text += 'swipe-down (' + cellIndex + ': ' + cellContainer.text + ')\n';
             }, this)
 
-        this.scene.stop()
+        // this.scene.stop()
     }
 
     update() { }
