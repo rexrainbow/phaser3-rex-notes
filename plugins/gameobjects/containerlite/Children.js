@@ -23,24 +23,15 @@ export default {
         return out;
     },
 
-    contains(gameObject) {
-        if (this.contains(gameObject)) {
+    contains(gameObject) { // Override Base.contains method
+        var parent = this.getParent(gameObject);
+        if (!parent) {
+            return false;
+        } else if (parent === this) {
             return true;
+        } else {
+            return this.contains(parent);
         }
-
-        var myCildren = this.children,
-            myChild;
-        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
-            myChild = myCildren[i];
-
-            if (myChild.hasOwnProperty('isRexContainerLite')) {
-                if (myChild.contains(gameObject)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     },
 
     getByName(name) {
