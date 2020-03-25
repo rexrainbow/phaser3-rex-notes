@@ -1,23 +1,23 @@
+import Base from './Base.js';
+
+const BaseRemove = Base.prototype.remove;
+const BaseClear = Base.prototype.clear;
+
 export default {
     remove(gameObject, destroyChild) {
         if (this.getParent(gameObject) !== this) {
             return this;
         }
-
         this.setParent(gameObject, null);
-        gameObject.off('destroy', this.remove, this);
-        this.children.remove(gameObject, false, destroyChild);
+        BaseRemove.call(this, gameObject, destroyChild);
         return this;
     },
 
     clear(destroyChild) {
-        var children = this.getAllChildren(), child;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
-            this.setParent(child, null);
-            child.off('destroy', this.remove, this);
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            this.setParent(this.children[i], null);
         }
-        this.children.clear(false, destroyChild);
+        BaseClear.call(this, destroyChild);
         return this;
     },
 };

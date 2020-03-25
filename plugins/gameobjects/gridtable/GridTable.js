@@ -5,12 +5,12 @@ import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
 import Methods from './methods/Methods.js';
 
-const Container = ContainerLite;
+const Group = Phaser.GameObjects.Group;
 const Components = Phaser.GameObjects.Components;
 const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class GridTable extends Container {
+class GridTable extends ContainerLite {
     constructor(scene, x, y, width, height, config) {
         if (config === undefined) {
             config = {};
@@ -32,7 +32,9 @@ class GridTable extends Container {
         this.execeedRightState = false;
 
         var reuseCellContainer = GetValue(config, 'reuseCellContainer', false);
-        this.cellContainersPool = (reuseCellContainer) ? scene.add.group() : undefined;
+        if (reuseCellContainer) {
+            this.cellContainersPool = new Group(scene); // Don't add Group into update list, I will destroy it manually
+        }
 
         var callback = GetValue(config, 'cellVisibleCallback', null);
         if (callback !== null) {
@@ -309,16 +311,16 @@ class GridTable extends Container {
         }
     }
 
-    resize (width, height) {
+    resize(width, height) {
         if ((this.width === width) && (this.height === height)) {
             return this;
         }
-    
+
         super.resize(width, height);
         if (this.cellsMask) {
             ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
         }
-    
+
         if (this.expandCellSize) {
             this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }

@@ -1,6 +1,6 @@
 export default {
     contains(item) {
-        return (this.items.indexOf(item) > -1);
+        return (this.items.indexOf(item) !== -1);
     },
 
     any(listB) {

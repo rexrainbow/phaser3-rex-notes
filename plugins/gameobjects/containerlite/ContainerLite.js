@@ -1,32 +1,9 @@
+import Base from './Base.js';
 import Methods from './Methods.js';
-
-// Base class
-const Zone = Phaser.GameObjects.Zone;
-const Group = Phaser.GameObjects.Group;
-class Base extends Zone { }
-const Components = Phaser.GameObjects.Components;
-Phaser.Class.mixin(Base,
-    [
-        Components.Alpha,
-        Components.Flip
-    ]
-);
-// Base class
 
 class ContainerLite extends Base {
     constructor(scene, x, y, width, height, children) {
-        if (Array.isArray(width)) {
-            children = width;
-            width = undefined;
-        }
-        if (width === undefined) {
-            width = 1;
-        }
-        if (height === undefined) {
-            height = 1;
-        }
         super(scene, x, y, width, height);
-        this.children = new Group(scene); // Don't add Group into update list, I will destroy it manually
         this.type = 'rexContainerLite';
         this.isRexContainerLite = true;
         this.syncChildrenEnable = true;
@@ -47,9 +24,7 @@ class ContainerLite extends Base {
             return;
         }
 
-        this.clear();
-        this.children.destroy(!fromScene);
-        this.children = undefined;
+        this.syncChildrenEnable = false; // Don't sync properties changing anymore
         super.destroy(fromScene);
     }
 
@@ -237,7 +212,7 @@ class ContainerLite extends Base {
 
     // Compatiable with container plugin
     get list() {
-        return this.children.getChildren();
+        return this.children;
     }
 }
 

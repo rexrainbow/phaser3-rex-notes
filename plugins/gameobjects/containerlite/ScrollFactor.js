@@ -5,8 +5,8 @@ export default {
     },
 
     syncScrollFactor() {
-        if (this.children && this.syncChildrenEnable) {
-            this.children.getChildren().forEach(this.updateChildScrollFactor, this);
+        if (this.syncChildrenEnable) {
+            this.children.forEach(this.updateChildScrollFactor, this);
         }
         return this;
     },

@@ -3,6 +3,7 @@ import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Group = Phaser.GameObjects.Group;
 
 var DrawBounds = function (graphics, config) {
     var scene = graphics.scene;
@@ -25,9 +26,9 @@ var DrawBounds = function (graphics, config) {
     }
 
     if (createTextCallback && !graphics.children) {
-        graphics.children = scene.add.group();
+        graphics.children = new Group(scene);
         graphics.on('destroy', function () {
-            graphics.children.destroy();
+            graphics.children.destroy(true);
             graphics.children = undefined;
         })
         var graphicsClear = graphics.clear.bind(graphics);

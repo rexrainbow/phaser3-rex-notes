@@ -28,8 +28,8 @@ export default {
     },
 
     syncPosition() {
-        if (this.children && this.syncChildrenEnable) {
-            this.children.getChildren().forEach(this.updateChildPosition, this);
+        if (this.syncChildrenEnable) {
+            this.children.forEach(this.updateChildPosition, this);
         }
         return this;
     },

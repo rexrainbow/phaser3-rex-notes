@@ -7,8 +7,8 @@ export default {
     },
 
     syncAlpha() {
-        if (this.children && this.syncChildrenEnable) {
-            this.children.getChildren().forEach(this.updateChildAlpha, this);
+        if (this.syncChildrenEnable) {
+            this.children.forEach(this.updateChildAlpha, this);
         }
         return this;
     },

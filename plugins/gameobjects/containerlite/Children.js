@@ -2,14 +2,14 @@ const ArrayUtils = Phaser.Utils.Array;
 
 export default {
     getChildren() {
-        return this.children.getChildren();
+        return this.children;
     },
 
     getAllChildren(out) {
         if (out === undefined) {
             out = [];
         }
-        var myCildren = this.children.getChildren(),
+        var myCildren = this.children,
             myChild;
         for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
             myChild = myCildren[i];
@@ -24,16 +24,16 @@ export default {
     },
 
     contains(gameObject) {
-        if (this.children.contains(gameObject)) {
+        if (this.contains(gameObject)) {
             return true;
         }
 
-        var myCildren = this.children.getChildren(),
+        var myCildren = this.children,
             myChild;
         for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
             myChild = myCildren[i];
 
-            if (myChild.isRexContainerLite) {
+            if (myChild.hasOwnProperty('isRexContainerLite')) {
                 if (myChild.contains(gameObject)) {
                     return true;
                 }
@@ -44,37 +44,37 @@ export default {
     },
 
     getByName(name) {
-        return ArrayUtils.GetFirst(this.list, 'name', name);
+        return ArrayUtils.GetFirst(this.children, 'name', name);
     },
 
     getRandom(startIndex, length) {
-        return ArrayUtils.GetRandom(this.list, startIndex, length);
+        return ArrayUtils.GetRandom(this.children, startIndex, length);
     },
 
     getFirst(property, value, startIndex, endIndex) {
-        return ArrayUtils.GetFirstElement(this.list, property, value, startIndex, endIndex);
+        return ArrayUtils.GetFirstElement(this.children, property, value, startIndex, endIndex);
     },
 
     getAll(property, value, startIndex, endIndex) {
-        return ArrayUtils.GetAll(this.list, property, value, startIndex, endIndex);
+        return ArrayUtils.GetAll(this.children, property, value, startIndex, endIndex);
     },
 
     count(property, value, startIndex, endIndex) {
-        return ArrayUtils.CountAllMatching(this.list, property, value, startIndex, endIndex);
+        return ArrayUtils.CountAllMatching(this.children, property, value, startIndex, endIndex);
     },
 
     swap(child1, child2) {
-        ArrayUtils.Swap(this.list, child1, child2);
+        ArrayUtils.Swap(this.children, child1, child2);
         return this;
     },
 
     moveTo(child, index) {
-        ArrayUtils.MoveTo(this.list, child, index);
+        ArrayUtils.MoveTo(this.children, child, index);
         return this;
     },
 
     setAll(property, value, startIndex, endIndex) {
-        ArrayUtils.SetAll(this.list, property, value, startIndex, endIndex);
+        ArrayUtils.SetAll(this.children, property, value, startIndex, endIndex);
         return this;
     },
 };

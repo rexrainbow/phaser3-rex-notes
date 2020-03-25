@@ -146,6 +146,7 @@ class Demo extends Phaser.Scene {
                 this.print.text += 'swipe-down (' + cellIndex + ': ' + cellContainer.text + ')\n';
             }, this)
 
+        // Stop scene testing
         // this.scene.stop()
     }
 
