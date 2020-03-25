@@ -15,7 +15,7 @@ class UniqueItemList {
         }
 
         this.items = [];
-        this.enableDestroyCallback(GetValue(config, 'enableDestroyCallback', true));
+        this.setAutoCleanupEnable(GetValue(config, 'autoCleanup', true));
         if (items) {
             this.addMultiple(items);
         }
@@ -40,7 +40,7 @@ class UniqueItemList {
 
     newList(items) {
         var config = {
-            enableDestroyCallback: this._enableDestroyCallback
+            autoCleanup: this.autoCleanupEnable
         }
         return new UniqueItemList(items, config);
     }

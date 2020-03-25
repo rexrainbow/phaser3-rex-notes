@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
                     tileXY.x, tileXY.y, 0, true);
             }, this);
 
-        var candidates = this.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false })
+        var candidates = this.plugins.get('rexUniqueItemList').add({ autoCleanup: false })
             .addMultiple(board.tileZToChessArray(0))
             .reverse()
 
@@ -94,7 +94,7 @@ var FillChess = function (board, tiles, texture, key) {
 // Pick 4 connected tiles
 var GetAGroup = function (board, candidates) {
     var scene = board.scene;
-    var group = scene.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false });
+    var group = scene.plugins.get('rexUniqueItemList').add({ autoCleanup: false });
     var tile = candidates.getLast();
     var neighbors;
     for (var i = 0; i < 4; i++) {
@@ -115,7 +115,7 @@ var GetAGroup = function (board, candidates) {
 var GetNeighborsGroup = function (board, tile, out) {
     var scene = board.scene;
     if (out === undefined) {
-        out = scene.plugins.get('rexUniqueItemList').add({ enableDestroyCallback: false });
+        out = scene.plugins.get('rexUniqueItemList').add({ autoCleanup: false });
     }
     out.addMultiple(
         board.getNeighborChess(tile, null)

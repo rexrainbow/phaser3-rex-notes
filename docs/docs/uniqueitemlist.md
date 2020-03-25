@@ -71,12 +71,12 @@ List of unique items. Support array and set methods.
 ```javascript
 var listA = scene.plugins.get('rexUniqueItemList').add({
     // items: undefined,
-    // enableDestroyCallback: true
+    // autoCleanup: true
 });
 ```
 
 - `items` : Initial items.
-- `enableDestroyCallback` : Set `true` to remove item when item is destroyed (from item's 'destroy' event)
+- `autoCleanup` : Set `true` to remove item when item is destroyed (from item's 'destroy' event)
 
 or
 

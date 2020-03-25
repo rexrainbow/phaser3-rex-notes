@@ -1,13 +1,16 @@
 import IsArray from '../../utils/object/IsArray.js';
 
 export default {
-    enableDestroyCallback(enable) {
-        this._enableDestroyCallback = enable;
+    setAutoCleanupEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.autoCleanupEnable = enabled;
         return this;
     },
 
     addDestroyCallback(gameObject) {
-        if ((!gameObject) || (!this._enableDestroyCallback)) {
+        if ((!gameObject) || (!this.autoCleanupEnable)) {
             return this;
         }
 
@@ -26,7 +29,7 @@ export default {
     },
 
     removeDestroyCallback(gameObject) {
-        if ((!gameObject) || (!this._enableDestroyCallback)) {
+        if ((!gameObject) || (!this.autoCleanupEnable)) {
             return this;
         }
 
