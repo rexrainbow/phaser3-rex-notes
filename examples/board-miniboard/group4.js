@@ -29,8 +29,16 @@ class Demo extends Phaser.Scene {
                     tileXY.x, tileXY.y, 0, true);
             }, this);
 
+        var tiles = board.tileZToChessArray(0);
+        tiles.sort(function (tileA, tileB) {
+            var tileXYA = tileA.rexChess.tileXYZ;
+            var tileXYB = tileB.rexChess.tileXYZ;
+            var distA = Phaser.Math.Distance.Squared(tileXYA.x, tileXYA.y, 5, 5);
+            var distB = Phaser.Math.Distance.Squared(tileXYB.x, tileXYB.y, 5, 5);
+            return distA - distB;
+        });
         var candidates = this.plugins.get('rexUniqueItemList').add({ autoCleanup: false })
-            .addMultiple(board.tileZToChessArray(0))
+            .addMultiple(tiles)
             .reverse()
 
         var RunTask = function (board, candidates) {
