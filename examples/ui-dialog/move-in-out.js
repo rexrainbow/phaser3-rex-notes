@@ -101,7 +101,6 @@ var SetAlertDialog = function (dialog, title, content) {
     }
     dialog.getElement('title').text = title;
     dialog.getElement('content').text = content;
-    dialog.layout();
     return dialog;
 }
 
@@ -119,7 +118,8 @@ var Alert = function (scene, title, content, x, y) {
     SetAlertDialog(AlertDialog, title, content);
     AlertDialog
         .setPosition(x, y)
-        .setVisible(true);
+        .setVisible(true)
+        .layout();
 
     return AlertDialog
         .moveFromPromise(1000, undefined, '-=400', 'Bounce')
