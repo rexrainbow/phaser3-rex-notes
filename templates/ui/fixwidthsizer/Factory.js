@@ -2,8 +2,8 @@ import FixWidthSizer from './FixWidthSizer.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
-ObjectFactory.register('fixWidthSizer', function (x, y, minWidth, minHeight, orientation, space) {
-    var gameObject = new FixWidthSizer(this.scene, x, y, minWidth, minHeight, orientation, space);
+ObjectFactory.register('fixWidthSizer', function (x, y, minWidth, minHeight, orientation, space, config) {
+    var gameObject = new FixWidthSizer(this.scene, x, y, minWidth, minHeight, orientation, space, config);
     this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
     return gameObject;
 });

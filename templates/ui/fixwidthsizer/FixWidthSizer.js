@@ -9,28 +9,27 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class FixWidthSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, orientation, space) {
-        var config;
+    constructor(scene, x, y, minWidth, minHeight, orientation, space, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
+            orientation = GetValue(config, 'orientation', 0);
+            space = GetValue(config, 'space', config);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
+            orientation = GetValue(config, 'orientation', 0);
+            space = GetValue(config, 'space', config);
         } else if (IsPlainObject(orientation)) {
             config = orientation;
-        } else if (IsPlainObject(space)) {
-            config = space;
-        }
-
-        if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
             space = GetValue(config, 'space', config);
         }
+
         if (orientation === undefined) {
             orientation = 0;
         }
@@ -45,6 +44,8 @@ class FixWidthSizer extends BaseSizer {
         this.setPadding(space);
         this.setItemSpacing(GetValue(space, 'item', 0));
         this.setLineSpacing(GetValue(space, 'line', 0));
+        this.setAlign(GetValue(config, 'align', 0));
+        this.setRTL(GetValue(config, 'rtl', false));
 
         this.addChildrenMap('items', this.sizerChildren);
     }
@@ -81,6 +82,22 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
+    setAlign(align) {
+        if (typeof (align) === 'string') {
+            align = ALIGN[align];
+        }
+        this.align = align;
+        return this;
+    }
+
+    setRTL(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.rtl = enabled;
+        return this;
+    }
+
     get maxChildWidth() {
         if (this._maxChildWidth === undefined) {
             this._maxChildWidth = GetMaxChildWidth.call(this);
@@ -94,6 +111,11 @@ class FixWidthSizer extends BaseSizer {
         }
         return this._maxChildHeight;
     }
+}
+
+const ALIGN = {
+    left: 0,
+    right: 1
 }
 
 Object.assign(

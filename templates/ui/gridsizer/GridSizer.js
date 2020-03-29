@@ -5,8 +5,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class GridSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions) {
-        var config;
+    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {        
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);

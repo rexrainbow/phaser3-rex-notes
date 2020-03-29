@@ -2,8 +2,8 @@ import GridSizer from './GridSizer.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
-ObjectFactory.register('gridSizer', function (x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion) {
-    var gameObject = new GridSizer(this.scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion);
+ObjectFactory.register('gridSizer', function (x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config) {
+    var gameObject = new GridSizer(this.scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportion, config);
     this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
     return gameObject;
 });

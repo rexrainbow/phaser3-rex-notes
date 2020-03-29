@@ -31,7 +31,7 @@ var Layout = function (parent, newWidth, newHeight) {
     if (this.orientation === 0) { // x
         newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
     } else { // y
-        newWidth = Math.max(newWidth, wrapResult.height + left + padding.right);
+        newWidth = Math.max(newWidth, wrapResult.height + padding.left + padding.right);
     }
     this.resize(newWidth, newHeight);
 
@@ -55,6 +55,13 @@ var Layout = function (parent, newWidth, newHeight) {
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
         line = lines[i];
         lineChlidren = line.children;
+
+        if (this.rtl) {
+            lineChlidren.reverse();
+        }
+        if (this.align === 1) {
+            itemX += line.remainder;
+        }
 
         for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
             child = lineChlidren[j];

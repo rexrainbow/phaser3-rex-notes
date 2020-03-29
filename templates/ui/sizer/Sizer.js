@@ -13,17 +13,17 @@ class Sizer extends BaseSizer {
             y = GetValue(config, 'y', 0);
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
+            orientation = GetValue(config, 'orientation', 0);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
+            orientation = GetValue(config, 'orientation', 0);
         } else if (IsPlainObject(orientation)) {
             config = orientation;
-        }
-
-        if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
         }
+
         if (orientation === undefined) {
             orientation = 0;
         }

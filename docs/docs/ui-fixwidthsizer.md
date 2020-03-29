@@ -84,14 +84,16 @@ var sizer = scene.rexUI.add.fixWidthSizer({
 
     orientation: 0,
 
-    space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        item: 0,
-        line: 0
-    },
+    // space: {
+    //     left: 0,
+    //     right: 0,
+    //     top: 0,
+    //     bottom: 0,
+    //     item: 0,
+    //     line: 0
+    // },
+
+    // rtl: false,
 
     // name: '',
     // draggable: false
@@ -162,6 +164,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
     - `space.line` : Space between each line.
+- `rtl`: Place children from right-to-left.
 
 ### Custom class
 
