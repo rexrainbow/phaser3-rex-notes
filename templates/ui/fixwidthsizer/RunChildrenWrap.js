@@ -31,22 +31,21 @@ var RunChildrenWrap = function (lineWidth) {
         // New line
         if (newLine) {
             if (lastLine) {
-                var curLineWidth = lineWidth - (remainder + this.itemSpacing);
-                result.width = Math.max(result.width, curLineWidth);
+                lastLine.width = lineWidth - (remainder + this.itemSpacing);
+                result.width = Math.max(result.width, lastLine.width);
                 result.height += lastLine.height + this.lineSpacing;
             }
 
             lastLine = {
                 children: [],
-                remainder: 0,
+                // width: 0,
                 height: 0
             };
             lines.push(lastLine);
             remainder = lineWidth;
         }
 
-        remainder -= childWidth + this.itemSpacing;
-        lastLine.remainder = remainder;
+        remainder -= (childWidth + this.itemSpacing);
         if (child) {
             lastLine.children.push(child);
             lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
@@ -54,6 +53,8 @@ var RunChildrenWrap = function (lineWidth) {
     }
 
     if (lastLine) {
+        lastLine.width = lineWidth - (remainder + this.itemSpacing);
+        result.width = Math.max(result.width, lastLine.width);
         result.height += lastLine.height;
     }
     return result;

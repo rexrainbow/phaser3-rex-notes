@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('sizer', function (x, y, minWidth, minHeight, orientation, config) {
     var gameObject = new Sizer(this.scene, x, y, minWidth, minHeight, orientation, config);
-    this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

@@ -94,6 +94,7 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     // },
 
     // rtl: false,
+    // align: 0,
 
     // name: '',
     // draggable: false
@@ -137,16 +138,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
 or
 
 ```javascript
-var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
-    {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        item: 0,
-        line: 0
-    }
-);
+var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation, space, config);
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
@@ -164,15 +156,22 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
     - `space.line` : Space between each line.
-- `rtl`: Place children from right-to-left.
+- `rtl` : Place children from right-to-left.
+- `align` : Align children of a line.
+    - `0`, `'left'`, `'top'` : Align children of a line to left/top side.
+    - `1`, `'right'`, `'bottom'` : Align children of a line to right/bottom side.
+    - `2`, `'center'` : Align children of a line to ceter.
+    - `3`, `'justify'`, `'justify-left'`, `'justify-top'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
+    - `4`, `'justify-right'`, `'justify-bottom'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
+    - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
 
 ### Custom class
 
 - Define class
     ```javascript
     class MySizer extends RexPlugins.UI.FixWidthSizer {
-        constructor(scene, x, y, minWidth, minHeight, orientation) {
-            super(scene, x, y, minWidth, minHeight, orientation);
+        constructor(scene, x, y, minWidth, minHeight, orientation, space, config) {
+            super(scene, x, y, minWidth, minHeight, orientation, space, config);
             // ...
         }
         // ...
@@ -180,7 +179,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
     ```
 - Create instance
     ```javascript
-    var sizer = new MySizer(scene, x, y, minWidth, minHeight, orientation);
+    var sizer = new MySizer(scene, x, y, minWidth, minHeight, orientation, space, config);
     ```
 
 ### Add background

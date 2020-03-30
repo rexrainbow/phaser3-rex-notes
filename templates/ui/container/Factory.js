@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('container', function (x, y, width, height, children) {
     var gameObject = new Container(this.scene, x, y, width, height, children);
-    this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

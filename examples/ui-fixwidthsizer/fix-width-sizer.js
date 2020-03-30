@@ -23,6 +23,7 @@ class Demo extends Phaser.Scene {
         var sizer = this.rexUI.add.fixWidthSizer({
             x: x, y: y,
             width: minWidth, height: minHeight,
+            orientation: orientation,
             space: {
                 left: 3,
                 right: 3,
@@ -31,11 +32,11 @@ class Demo extends Phaser.Scene {
                 item: 8,
                 line: 8,
             },
-            // rtl: true,
-            // align: 'right'
+            rtl: true,
+            align: 'justify-right'  // 'left', 'right', 'center', 'justify'/'justify-left', 'justify-right', 'justify-center'
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 22; i++) {
             sizer.add(this.rexUI.add.label({
                 background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_LIGHT),
                 text: this.add.text(0, 0, `${i}`, {

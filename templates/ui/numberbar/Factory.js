@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('numberBar', function (config) {
     var gameObject = new NumberBar(this.scene, config);
-    this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

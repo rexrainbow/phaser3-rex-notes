@@ -20,13 +20,13 @@ var Layout = function (parent, newWidth, newHeight) {
         newHeight = Math.max(this.maxChildHeight + padding.top + padding.bottom, this.minHeight);
     }
 
-    var lineInnerWidth, padding = this.padding;
+    var innerLineWidth, padding = this.padding;
     if (this.orientation === 0) { // x
-        lineInnerWidth = newWidth - padding.left - padding.right;
+        innerLineWidth = newWidth - padding.left - padding.right;
     } else { // y
-        lineInnerWidth = newHeight - padding.top - padding.bottom;
+        innerLineWidth = newHeight - padding.top - padding.bottom;
     }
-    var wrapResult = RunChildrenWrap.call(this, lineInnerWidth);
+    var wrapResult = RunChildrenWrap.call(this, innerLineWidth);
     // Expanded height is less then min-lines-height
     if (this.orientation === 0) { // x
         newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
@@ -36,7 +36,7 @@ var Layout = function (parent, newWidth, newHeight) {
     this.resize(newWidth, newHeight);
 
     // Layout children    
-    var child, childConfig, padding;
+    var child, childConfig, padding, justifySpace = 0;
     var startX = this.left,
         startY = this.top;
     var itemX, itemY;
@@ -44,13 +44,13 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Layout each line
     var lines = wrapResult.lines;
-    var line, lineChlidren;
+    var line, lineChlidren, remainderLineWidth;
     if (this.orientation === 0) { // x
-        itemX = startX
+        itemX = startX;
         itemY = startY + this.padding.top;
     } else {
         itemX = startX + this.padding.left;
-        itemY = startY
+        itemY = startY;
     }
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
         line = lines[i];
@@ -59,9 +59,52 @@ var Layout = function (parent, newWidth, newHeight) {
         if (this.rtl) {
             lineChlidren.reverse();
         }
-        if (this.align === 1) {
-            itemX += line.remainder;
+
+        remainderLineWidth = (innerLineWidth - line.width);
+        switch (this.align) {
+            case 0: // left
+                break;
+            case 1: // right
+                if (this.orientation === 0) { // x
+                    itemX += remainderLineWidth;
+                } else {
+                    itemY += remainderLineWidth;
+                }
+                break;
+            case 2: // center
+                if (this.orientation === 0) { // x
+                    itemX += remainderLineWidth / 2;
+                } else {
+                    itemY += remainderLineWidth / 2;
+                }
+                break;
+            case 3: // justify-left
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                break;
+            case 4: // justify-right
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                if (justifySpace === 0) {
+                    // Align right
+                    if (this.orientation === 0) { // x
+                        itemX += remainderLineWidth;
+                    } else {
+                        itemY += remainderLineWidth;
+                    }
+                }
+                break;
+            case 5: // justify-center
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                if (justifySpace === 0) {
+                    // Align center
+                    if (this.orientation === 0) { // x
+                        itemX += remainderLineWidth / 2;
+                    } else {
+                        itemY += remainderLineWidth / 2;
+                    }
+                }
+                break;
         }
+
 
         for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
             child = lineChlidren[j];
@@ -78,7 +121,7 @@ var Layout = function (parent, newWidth, newHeight) {
                 y = (itemY + padding.top);
                 width = GetDisplayWidth(child);
                 height = GetDisplayHeight(child);
-                itemX = x + width + padding.right;
+                itemX = x + width + padding.right + justifySpace;
             } else { // y
                 x = (itemX + padding.left);
 
@@ -91,7 +134,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
                 width = GetDisplayWidth(child);
                 height = GetDisplayHeight(child);
-                itemY = y + height + padding.bottom;
+                itemY = y + height + padding.bottom + justifySpace;
             }
 
             GlobZone.setPosition(x, y).setSize(width, height);
@@ -112,6 +155,10 @@ var Layout = function (parent, newWidth, newHeight) {
     this.layoutBackgrounds();
 
     return this.postLayout();
+}
+
+var GetJustifySpace = function (total, remainder, childCount) {
+    return ((remainder / total) <= 0.25) ? (remainder / (childCount - 1)) : 0;
 }
 
 export default Layout;

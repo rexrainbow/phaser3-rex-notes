@@ -114,8 +114,13 @@ class FixWidthSizer extends BaseSizer {
 }
 
 const ALIGN = {
-    left: 0,
-    right: 1
+    left: 0, top: 0,
+    right: 1, bottom: 1,
+    center: 2,
+    justify: 3,
+    'justify-left': 3, 'justify-top': 3,
+    'justify-right': 4, 'justify-bottom': 4,
+    'justify-center': 5
 }
 
 Object.assign(
