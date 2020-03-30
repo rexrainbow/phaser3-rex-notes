@@ -5013,14 +5013,17 @@
 
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
-    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">item</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">line</span><span class="o">:</span> <span class="mi">0</span>
-    <span class="p">},</span>
+    <span class="c1">// space: {</span>
+    <span class="c1">//     left: 0,</span>
+    <span class="c1">//     right: 0,</span>
+    <span class="c1">//     top: 0,</span>
+    <span class="c1">//     bottom: 0,</span>
+    <span class="c1">//     item: 0,</span>
+    <span class="c1">//     line: 0</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// rtl: false,</span>
+    <span class="c1">// align: 0,</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false</span>
@@ -5058,16 +5061,7 @@
 </code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span>
-    <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">item</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">line</span><span class="o">:</span> <span class="mi">0</span>
-    <span class="p">}</span>
-<span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
@@ -5096,20 +5090,34 @@
 <li><code>space.line</code> : Space between each line.</li>
 </ul>
 </li>
+<li><code>rtl</code> : Order of children in each line.<ul>
+<li><code>false</code> : Place children from left-to-right/top-to-bottom, default value.</li>
+<li><code>true</code> : Place children from right-to-left/bottom-to-top.</li>
+</ul>
+</li>
+<li><code>align</code> : Align children of a line.<ul>
+<li><code>0</code>, <code>'left'</code>, <code>'top'</code> : Align children of a line to left/top side.</li>
+<li><code>1</code>, <code>'right'</code>, <code>'bottom'</code> : Align children of a line to right/bottom side.</li>
+<li><code>2</code>, <code>'center'</code> : Align children of a line to ceter.</li>
+<li><code>3</code>, <code>'justify'</code>, <code>'justify-left'</code>, <code>'justify-top'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.</li>
+<li><code>4</code>, <code>'justify-right'</code>, <code>'justify-bottom'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.</li>
+<li><code>5</code>, <code>'justify-cneter'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to center.</li>
+</ul>
+</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
     <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MySizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FixWidthSizer</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>

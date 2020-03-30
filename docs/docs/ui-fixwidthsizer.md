@@ -156,7 +156,9 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation, spac
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
     - `space.line` : Space between each line.
-- `rtl` : Place children from right-to-left.
+- `rtl` : Order of children in each line.
+    - `false` : Place children from left-to-right/top-to-bottom, default value.
+    - `true` : Place children from right-to-left/bottom-to-top.
 - `align` : Align children of a line.
     - `0`, `'left'`, `'top'` : Align children of a line to left/top side.
     - `1`, `'right'`, `'bottom'` : Align children of a line to right/bottom side.
