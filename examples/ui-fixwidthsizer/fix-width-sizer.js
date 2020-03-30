@@ -15,6 +15,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var align = 'justify-right'  // 'left', 'right', 'center', 'justify'/'justify-left', 'justify-right', 'justify-center'
+        var rtl = true;
         var orientation = 'x';
         var x = 400,
             y = 300,
@@ -32,8 +34,8 @@ class Demo extends Phaser.Scene {
                 item: 8,
                 line: 8,
             },
-            rtl: true,
-            align: 'justify-right'  // 'left', 'right', 'center', 'justify'/'justify-left', 'justify-right', 'justify-center'
+            rtl: rtl,
+            align: align
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
         for (var i = 0; i < 22; i++) {
