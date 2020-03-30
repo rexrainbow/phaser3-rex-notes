@@ -1,36 +1,51 @@
-import Container from '../container/Container.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
+import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
-const ContainerMoveTo = Container.prototype.moveTo;
+
+var Add = function (gameObject, paddingConfig, childKey, index) {
+    if (gameObject === '\n') {
+        this.addNewLine();
+        return this;
+    }
+
+    this.pin(gameObject);
+
+    if (IsPlainObject(paddingConfig)) {
+        var config = paddingConfig;
+        paddingConfig = GetValue(config, 'padding', 0);
+        childKey = GetValue(config, 'key', undefined);
+    }
+    if (paddingConfig === undefined) {
+        paddingConfig = 0;
+    }
+
+    var config = this.getSizerConfig(gameObject);
+    config.align = ALIGN_CENTER;
+    config.padding = GetBoundsConfig(paddingConfig);
+    if ((index === undefined) || (index >= this.sizerChildren.length)) {
+        this.sizerChildren.push(gameObject);
+    } else {
+        this.sizerChildren.splice(index, 0, gameObject);
+    }
+
+    if (childKey !== undefined) {
+        this.addChildrenMap(childKey, gameObject)
+    }
+    return this;
+};
 
 export default {
     add(gameObject, paddingConfig, childKey) {
-        if (gameObject === '\n') {
-            this.addNewLine();
-            return this;
-        }
-
-        this.pin(gameObject);
-
-        if (IsPlainObject(paddingConfig)) {
-            var config = paddingConfig;
-            paddingConfig = GetValue(config, 'padding', 0);
-            childKey = GetValue(config, 'key', undefined);
-        }
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.align = ALIGN_CENTER;
-        config.padding = GetBoundsConfig(paddingConfig);
-        this.sizerChildren.push(gameObject);
-
-        if (childKey !== undefined) {
-            this.addChildrenMap(childKey, gameObject)
+        if (IsArray(gameObject)) {
+            var gameObjects = gameObject;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                Add.call(this, gameObjects[i], paddingConfig);
+            }
+        } else {
+            Add.call(this, gameObject, paddingConfig, childKey);
         }
         return this;
     },
@@ -40,9 +55,8 @@ export default {
         return this;
     },
 
-    insert(index, gameObject, paddingConfig, expand) {
-        this.add(gameObject, paddingConfig, expand);
-        ContainerMoveTo.call(this, gameObject, index);
+    insert(index, gameObject, paddingConfig, childKey) {
+        Add.call(this, gameObject, paddingConfig, childKey, index);
         return this;
     }
 }
