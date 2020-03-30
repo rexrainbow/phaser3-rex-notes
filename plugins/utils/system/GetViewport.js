@@ -1,9 +1,10 @@
 const Rectangle = Phaser.Geom.Rectangle;
 
-var GetViewport = function (scaleManager, out) {
+var GetViewport = function (scene, out) {
     if (out === undefined) {
         out = new Rectangle();
     }
+    var scaleManager = scene.scale;
     var bounds = scaleManager.canvasBounds;
     var scale = scaleManager.displayScale;
     var autoCenter = scaleManager.autoCenter;
