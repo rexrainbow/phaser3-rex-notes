@@ -101,7 +101,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.getElement('background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
                 return cellContainer;
             },
-            items: getItems(100)
+            items: CreateItems(100)
         })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
@@ -148,12 +148,23 @@ class Demo extends Phaser.Scene {
 
         // Stop scene testing
         // this.scene.stop()
+
+        this.add.text(800, 600, 'Reset item')
+            .setOrigin(1, 1)
+            .setInteractive()
+            .on('pointerdown', function () {
+                var itemCount = Random(10, 50);
+                gridTable
+                    .setItems(CreateItems(itemCount))
+                    .scrollToBottom()
+                console.log(`Create ${itemCount} items`)
+            })
     }
 
     update() { }
 }
 
-var getItems = function (count) {
+var CreateItems = function (count) {
     var data = [];
     for (var i = 0; i < count; i++) {
         data.push({
