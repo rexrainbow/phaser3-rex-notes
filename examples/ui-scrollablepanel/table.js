@@ -11,64 +11,66 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var scrollablePanel = this.rexUI.add.scrollablePanel({
-                x: 400,
-                y: 300,
-                width: 350,
-                height: 460,
+            x: 400,
+            y: 300,
+            width: 350,
+            height: 460,
 
-                scrollMode: 0,
+            scrollMode: 0,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
 
-                panel: {
-                    child: createGrid(this, 3, 20),
-                    mask: {
-                        mask: true,
-                        padding: 1,
-                    }
-                },
-
-                slider: {
-                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-                },
-
-                header: this.rexUI.add.label({
-                    height: 30,
-    
-                    orientation: 0,
-                    background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                    text: this.add.text(0, 0, 'Header'),
-                }),
-    
-                footer: this.rexUI.add.label({
-                    height: 30,
-    
-                    orientation: 0,
-                    background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                    text: this.add.text(0, 0, 'Footer'),
-                }),
-
-                space: {
-                    left: 10,
-                    right: 10,
-                    top: 10,
-                    bottom: 10,
-
-                    panel: 10,
-                    header: 10,
-                    footer: 10,
+            panel: {
+                child: createGrid(this, 3, 20),
+                mask: {
+                    mask: true,
+                    padding: 1,
                 }
-            })
+            },
+
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+            },
+
+            header: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Header'),
+            }),
+
+            footer: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Footer'),
+            }),
+
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+
+                panel: 10,
+                header: 10,
+                footer: 10,
+            }
+        })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+        //.drawBounds(this.add.graphics(), 0xff0000);        
+
+        this.input.topOnly = false;
     }
 
-    update() {}
+    update() { }
 }
 
 var createGrid = function (scene, col, row) {
@@ -90,14 +92,13 @@ var createGrid = function (scene, col, row) {
             )
         }
     }
-
     return sizer;
 }
 
 const Random = Phaser.Math.Between;
 var createItem = function (scene, colIdx, rowIdx) {
     var text = colIdx + ',' + rowIdx;
-    return scene.rexUI.add.label({
+    var item = scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined)
             .setStrokeStyle(2, COLOR_LIGHT, 1),
         text: scene.add.text(0, 0, text, {
@@ -112,7 +113,13 @@ var createItem = function (scene, colIdx, rowIdx) {
 
             icon: 10,
         }
-    });
+    })
+        .setDepth(3)
+    var press = scene.rexUI.add.press(item)
+        .on('pressstart', function () {
+            console.log(`press ${text}`);
+        })
+    return item;
 }
 
 var config = {
