@@ -15,6 +15,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var print = this.add.text(0, 0, '');
+        var OnSelectLevel = function (index) {
+            print.text += `Select ${index}\n`;
+        }
+
         var gridTable = this.rexUI.add.gridTable({
             x: 400, y: 300,
             width: 300, height: 420,
@@ -42,7 +47,9 @@ class Demo extends Phaser.Scene {
                     cellContainer = CreateLevelButton(scene, width, height);
                 }
 
+                // Set name-text of level
                 cellContainer.getElement('name').setText(item.name);
+                // Represent score of level via stars
                 var stars = cellContainer.getElement('stars');
                 for (var i = 0, cnt = stars.length; i < cnt; i++) {
                     var color = (item.stars[i]) ? COLOR_PRIMARY : undefined;
@@ -56,12 +63,13 @@ class Demo extends Phaser.Scene {
         })
             .layout()
 
-        var print = this.add.text(0, 0, '');
+
         gridTable
             .on('cell.1tap', function (cellContainer, cellIndex) {
+                // Test if pointer is under background element
                 var background = cellContainer.getElement('background');
                 if (this.rexUI.isInTouching(background)) {
-                    print.text += `Select ${cellIndex}\n`;
+                    OnSelectLevel(cellIndex);
                 }
             }, this)
     }
