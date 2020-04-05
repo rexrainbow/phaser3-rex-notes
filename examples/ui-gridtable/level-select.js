@@ -78,8 +78,10 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateLevelButton = function (scene, width, height) {
+    // Replace roundRectangle to nine-patch game object
     var background = scene.rexUI.add.roundRectangle(0, 0, 40, 40, 0).setStrokeStyle(2, COLOR_DARK);
     var name = scene.add.text(0, 0, '');
+    // Replace roundRectangle to image game object
     var star0 = scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK)
     var star1 = scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK)
     var star2 = scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK)
