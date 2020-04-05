@@ -4271,6 +4271,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input-events" class="md-nav__link">
+    Input events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4927,6 +4934,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input-events" class="md-nav__link">
+    Input events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5302,6 +5316,13 @@
 <li>Get by name
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">panel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+<h3 id="input-events">Input events<a class="headerlink" href="#input-events" title="Permanent link">&para;</a></h3>
+<p>When <a href="../touchevents/#top-only"><code>scene.input.topOnly</code></a> is <code>true</code> (default value), input events of children elememts will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)</p>
+<ul>
+<li>Set <code>scene.input.topOnly</code> to <code>false</code> to enable drag-scrolling and input events of children elememts both.</li>
+<li>Test if pointer is under panel via <a href="../ui-basesizer/#is-in-touching"><code>panel.isInTouching()</code></a>, during input events' callback.</li>
+<li>To recognize pointer-down and dragging-start, use press's <a href="../gesture-press/#pressing-start"><code>pressstart</code></a> event.</li>
 </ul>
                 
                   

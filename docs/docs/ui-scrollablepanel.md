@@ -339,3 +339,11 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     ```javascript
     var gameObject = panel.getElement('#' + name);
     ```
+
+### Input events
+
+When [`scene.input.topOnly`](touchevents.md#top-only) is `true` (default value), input events of children elememts will block the drag-scrolling of scrollable panel. (Assmue that the children elememts are above scrollable panel)
+
+- Set `scene.input.topOnly` to `false` to enable drag-scrolling and input events of children elememts both.
+- Test if pointer is under panel via [`panel.isInTouching()`](ui-basesizer.md#is-in-touching), during input events' callback.
+- To recognize pointer-down and dragging-start, use press's [`pressstart`](gesture-press.md#pressing-start) event.
