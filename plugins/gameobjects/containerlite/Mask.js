@@ -13,7 +13,7 @@ export default {
     },
 
     syncMask() {
-        if (this.syncChildrenEnable) {
+        if (this.syncChildrenEnable && this.children) {
             this.children.forEach(this.updateChildMask, this);
         }
         return this;
