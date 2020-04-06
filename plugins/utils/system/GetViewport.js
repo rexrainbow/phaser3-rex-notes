@@ -3,7 +3,10 @@ const Rectangle = Phaser.Geom.Rectangle;
 var GetViewport = function (scene, out) {
     if (out === undefined) {
         out = new Rectangle();
+    } else if (out === true) {
+        out = globRect;
     }
+
     var scaleManager = scene.scale;
     var bounds = scaleManager.canvasBounds;
     var scale = scaleManager.displayScale;
@@ -20,5 +23,7 @@ var GetViewport = function (scene, out) {
     }
     return out;
 }
+
+var globRect = new Rectangle();
 
 export default GetViewport;

@@ -1,12 +1,9 @@
 import GetViewport from '../../utils/system/GetViewport.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-
 class Anchor {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = gameObject.scene;
-        this.viewport = new Rectangle();
         this.resetFromJSON(config);
         this.boot();
     }
@@ -97,7 +94,7 @@ class Anchor {
     }
 
     anchor() {
-        GetViewport(this.scene, this.viewport);
+        this.viewport = GetViewport(this.scene, true);
         this.updatePosition();
         return this;
     }

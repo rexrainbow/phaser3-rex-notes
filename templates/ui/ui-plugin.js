@@ -49,12 +49,17 @@ import {
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
+import GetViewport from '../../plugins/utils/system/GetViewport.js'
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
 
         this.add = new ObjectFactory(scene);
+    }
+
+    get viewport() {
+        return GetViewport(this.scene, true);
     }
 }
 

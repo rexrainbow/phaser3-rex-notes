@@ -333,6 +333,28 @@ var isInBounds = scene.rexUI.isInTouching(gameObject);
     ```
     - `eventEmitter` : [Event emitter](eventemitter3.md) which will fire `'complete'` event, for example, [tween task](tween.md#events).
 
+### View port
+
+View port is a [recctangle](geom-rectangle.md) of current visible area.
+
+```javascript
+var viewport = scene.rexUI.viewport;
+```
+
+Which will be changed after [resizing](scalemanager.md#events)
+
+```javascript
+scene.scale.on('resize', function() {
+    var viewport = scene.rexUI.viewport;
+    /*
+    sizer
+        .setPosition(viewport.centerX, viewport.centerY)
+        .setMinSize(viewport.width, viewport.height)
+        .layout();
+    */
+});
+```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
