@@ -335,7 +335,7 @@ var isInBounds = scene.rexUI.isInTouching(gameObject);
 
 ### View port
 
-View port is a [recctangle](geom-rectangle.md) of current visible area.
+View port is a [rectangle](geom-rectangle.md) of current visible area.
 
 ```javascript
 var viewport = scene.rexUI.viewport;
