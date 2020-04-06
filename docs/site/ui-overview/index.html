@@ -4099,6 +4099,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#view-port" class="md-nav__link">
+    View port
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4974,6 +4981,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#view-port" class="md-nav__link">
+    View port
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5308,6 +5322,23 @@
 </ul>
 </li>
 </ul>
+<h3 id="view-port">View port<a class="headerlink" href="#view-port" title="Permanent link">&para;</a></h3>
+<p>View port is a <a href="../geom-rectangle/">recctangle</a> of current visible area.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">viewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Which will be changed after <a href="../scalemanager/#events">resizing</a></p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">viewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
+    <span class="cm">/*</span>
+<span class="cm">    sizer</span>
+<span class="cm">        .setPosition(viewport.centerX, viewport.centerY)</span>
+<span class="cm">        .setMinSize(viewport.width, viewport.height)</span>
+<span class="cm">        .layout();</span>
+<span class="cm">    */</span>
+<span class="p">});</span>
+</code></pre></div>
+
 <h2 id="demos">Demos<a class="headerlink" href="#demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a><ul>

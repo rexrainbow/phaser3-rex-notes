@@ -5,7 +5,7 @@ export default {
     },
 
     syncVisible() {
-        if (this.syncChildrenEnable && this.children) {
+        if (this.syncChildrenEnable) {
             this.children.forEach(this.updateChildVisible, this);
         }
         return this;

@@ -28,7 +28,7 @@ export default {
     },
 
     syncPosition() {
-        if (this.syncChildrenEnable && this.children) {
+        if (this.syncChildrenEnable) {
             this.children.forEach(this.updateChildPosition, this);
         }
         return this;

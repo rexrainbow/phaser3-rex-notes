@@ -25,7 +25,6 @@ class Base extends Zone {
         }
 
         this.clear(!fromScene);
-        this.children = undefined;
         super.destroy(fromScene);
     }
 

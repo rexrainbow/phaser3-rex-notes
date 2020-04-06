@@ -7,7 +7,7 @@ export default {
     },
 
     syncAlpha() {
-        if (this.syncChildrenEnable && this.children) {
+        if (this.syncChildrenEnable) {
             this.children.forEach(this.updateChildAlpha, this);
         }
         return this;

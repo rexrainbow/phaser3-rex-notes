@@ -5,7 +5,7 @@ export default {
     },
 
     syncActive() {
-        if (this.syncChildrenEnable && this.children) {
+        if (this.syncChildrenEnable) {
             this.children.forEach(this.updateChildActive, this);
         }
         return this;

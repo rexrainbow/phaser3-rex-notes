@@ -5,7 +5,7 @@ export default {
     },
 
     syncScrollFactor() {
-        if (this.syncChildrenEnable && this.children) {
+        if (this.syncChildrenEnable) {
             this.children.forEach(this.updateChildScrollFactor, this);
         }
         return this;
