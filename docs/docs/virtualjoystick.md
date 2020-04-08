@@ -76,7 +76,7 @@ Simulate curosr keys according touch events.
 var joystick = scene.plugins.get('rexVirtualJoystick').add(scene, {
     x: x,
     y: y,
-    radius: radius,
+    radius: 100,
     base: baseGameObject,
     thumb: thumbGameObject,
     // dir: '8dir',
