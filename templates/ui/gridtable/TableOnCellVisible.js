@@ -1,13 +1,13 @@
 var TableOnCellVisible = function (table) {
-    table.on('cellvisible', function (cell, cellContainer) {
+    table.on('cellvisible', function (cell, cellContainer, table) {
         var callback = this.createCellContainerCallback;
         var scope = this.createCellContainerCallbackScope;
         cell.item = this.items[cell.index];
         var cellContainer;
         if (scope) {
-            cellContainer = callback.call(scope, cell, cellContainer);
+            cellContainer = callback.call(scope, cell, cellContainer, table);
         } else {
-            cellContainer = callback(cell, cellContainer);
+            cellContainer = callback(cell, cellContainer, table);
         }
         if (cellContainer) {
             if (cellContainer.setOrigin) {

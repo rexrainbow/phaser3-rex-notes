@@ -8,7 +8,7 @@ var ShowCell = function (cell) {
         }
     }
 
-    this.emit('cellvisible', cell, reusedCellContainer);
+    this.emit('cellvisible', cell, reusedCellContainer, this);
 
     if (this.cellContainersPool) {
         var cellContainer = cell.getContainer();
