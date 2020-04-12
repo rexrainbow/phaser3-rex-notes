@@ -92,21 +92,16 @@ class Demo extends Phaser.Scene {
                         }),
 
                         // Callbacks
-                        showChildCallback: function (child, key, sides) {
+                        showChildCallback: function (child, key, sides, reset) {
                             if (key === 'panel') {
-                                sides.moveChild(child, 500)
-                            } else {
-                                if (table.lastSideButton) {
-                                    table.lastSideButton.showPanel();                                    
-                                }
-                                table.lastSideButton = sides;
+                                var duration = (reset) ? 0 : 500;
+                                sides.moveChild(child, duration)
                             }
                         },
-                        hideChildCallback: function (child, key, sides) {
+                        hideChildCallback: function (child, key, sides, reset) {
                             if (key === 'panel') {
-                                sides.moveChild(child, 500);
-                            } else if (table.lastSideButton) {
-                                table.lastSideButton = undefined;
+                                var duration = (reset) ? 0 : 500;
+                                sides.moveChild(child, duration);
                             }
                         }
                     })
@@ -115,7 +110,7 @@ class Demo extends Phaser.Scene {
                     // console.log(cell.index + ': reuse cell-container');
                 }
 
-                cellContainer.showPanel();
+                cellContainer.showPanel(true);
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('panel.text').setText(item.id); // Set text of text object
@@ -130,22 +125,28 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 0, '');
 
-        var scene = this;
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_LIGHT);
                 cellContainer.setDepth(1);
-            }, this)
+            })
             .on('cell.out', function (cellContainer, cellIndex) {
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_DARK);
                 cellContainer.setDepth(0);
-            }, this)
+            })
             .on('cell.swipeleft', function (cellContainer, cellIndex) {
-                cellContainer.showRightSide()
-            }, this)
+                cellContainer.showRightSide();
+                if (gridTable.lastSideButton && (gridTable.lastSideButton !== cellContainer)) {
+                    gridTable.lastSideButton.showPanel();
+                }
+                gridTable.lastSideButton = cellContainer;
+            })
             .on('cell.swiperight', function (cellContainer, cellIndex) {
-                cellContainer.hideRightSide();
-            }, this)
+                if (cellContainer === gridTable.lastSideButton) {
+                    cellContainer.hideRightSide();
+                    gridTable.lastSideButton = undefined;
+                }
+            })
 
         this.add.text(0, 580, 'Swipe-right cell to show side button')
     }

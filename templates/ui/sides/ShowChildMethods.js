@@ -1,39 +1,39 @@
 export default {
-    showChild(key) {
+    showChild(key, reset) {
         var child = this.sizerChildren[key];
         if (child) {
-            this.emit('showchild', child, key, this);
+            this.emit('showchild', child, key, this, reset);
             this.resetChildState(child);
         }
         return this;
     },
 
-    hideChild(key) {
+    hideChild(key, reset) {
         var child = this.sizerChildren[key];
         if (child) {
-            this.emit('hidechild', child, key, this);
+            this.emit('hidechild', child, key, this, reset);
             this.resetChildState(child);
         }
         return this;
     },
 
-    swapChild(key) {
+    swapChild(key, reset) {
         if (this.currentChildKey === key) {
             // Do nothing
         } else if ((this.currentChildKey === 'panel') || (key === 'panel')) {
             this.previousChildKey = this.currentChildKey;
             this.currentChildKey = key;
-            this.hideChild(this.previousChildKey);
-            this.showChild(this.currentChildKey);
+            this.hideChild(this.previousChildKey, reset);
+            this.showChild(this.currentChildKey, reset);
         } else { // Swap from current side to another side
-            this.swapChild('panel');
-            this.swapChild(key);
+            this.swapChild('panel', reset);
+            this.swapChild(key, reset);
         }
         return this;
     },
 
-    showPanel() {
-        this.swapChild('panel');
+    showPanel(reset) {
+        this.swapChild('panel', reset);
         return this;
     },
 

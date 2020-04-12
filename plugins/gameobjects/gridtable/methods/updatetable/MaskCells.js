@@ -5,7 +5,7 @@ var MaskCells = function () {
         return this;
     }
 
-    // Don't mask cell is maskUpdateMode is everytick and grid table is not visible
+    // Don't mask cell is maskUpdateMode is 1('everytick') and grid table is not visible
     if ((this.maskUpdateMode === 1) &&
         ((this.alpha === 0) || (!this.visible))) {
         return this;
