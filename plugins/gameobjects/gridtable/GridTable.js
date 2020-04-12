@@ -356,7 +356,7 @@ const SCROLLMODE = {
 
 const MASKUPDATEMODE = {
     update: 0,
-    everytick: 1
+    everyTick: 1
 };
 
 export default GridTable;

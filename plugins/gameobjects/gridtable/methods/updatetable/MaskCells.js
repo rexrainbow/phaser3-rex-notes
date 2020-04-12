@@ -4,6 +4,13 @@ var MaskCells = function () {
     if (!this.cellsMask) {
         return this;
     }
+
+    // Don't mask cell is maskUpdateMode is everytick and grid table is not visible
+    if ((this.maskUpdateMode === 1) &&
+        ((this.alpha === 0) || (!this.visible))) {
+        return this;
+    }
+
     var children = [];
     var cells = this.visibleCells.entries, container;
     for (var i = 0, cnt = cells.length; i < cnt; i++) {

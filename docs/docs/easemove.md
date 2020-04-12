@@ -80,7 +80,7 @@ var easemove = scene.plugins.get('rexEaseMove').moveTo(gameObject, duration, x, 
 - `x`, `y` : End position.
     - Number : End position x/y.
     - String(`+=300`) : Related position of current position x/y.
-    - `undefined` : Current position x/y.
+    - `undefined` : Don't move along x/y axis.
 - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - `easemove` : Ease-move behavior.
 
@@ -95,7 +95,7 @@ var easemove = scene.plugins.get('rexEaseMove').moveFrom(gameObject, duration, x
 - `x`, `y` : Start position.
     - Number : Start position x/y.
     - String(`-=300`) : Related position of current position x/y.
-    - `undefined` : Current position x/y.
+    - `undefined` : Don't move along x/y axis.
 - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - `easemove` : Ease-move behavior.
 

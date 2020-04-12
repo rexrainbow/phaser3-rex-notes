@@ -95,7 +95,8 @@ var config = {
     clamplTableOXY: true,
     scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
     mask: {
-        padding: 0
+        padding: 0,
+        updateMode: 0
     }
 }
 var table = scene.add.rexGridTable(x, y, width, height, config);
@@ -117,6 +118,9 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
     - `1`, or `'h'`, or `'horizontal'` : Scroll table horizontally.
 - `mask` : A rectangle mask of cells
     - `mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+    - `mask.updateMode` : When to update cells mask
+        - `0`, or `update` : Apply mask to cell container only when `table.updateTable()` is invoked. Default behavior.
+        - `1`, or `everyTick` : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after `table.updateTable()` and still been masked.
     - `false` : No mask.
 
 Add grid table from JSON
@@ -161,7 +165,7 @@ var table = scene.make.rexGridTable({
 Add [container](container.md) of cell when it begins visible in event `cellvisible`. 
 
 ```javascript
-table.on('cellvisible', function(cell, cellContainer){
+table.on('cellvisible', function(cell, cellContainer, table){
     if (cellContainer === null) { // No reusable cell container, create a new one
         var scene = cell.scene;
         // cellContainer = scene.add.container();
@@ -176,7 +180,7 @@ It is equal to `cellVisibleCallback` in configuration.
 ```javascript
 {
     // ...
-    cellVisibleCallback: function(cell, cellContainer) {
+    cellVisibleCallback: function(cell, cellContainer, table) {
         cell.setContainer(cellContainer); // Assign cell container
     },
     // ...
@@ -235,6 +239,7 @@ It is equal to `cellVisibleCallback` in configuration.
 - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.
     - `null` : No cell container available.
     - Game object : Reusable cell container.
+- `table` : Grid table.
 
 Each cell only has **one** container gameObject, old container will be destroyed when assigning a new container.
 

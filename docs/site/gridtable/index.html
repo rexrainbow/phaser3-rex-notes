@@ -5216,7 +5216,8 @@
     <span class="nx">clamplTableOXY</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
     <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">updateMode</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -5247,6 +5248,11 @@
 </li>
 <li><code>mask</code> : A rectangle mask of cells<ul>
 <li><code>mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
+<li><code>mask.updateMode</code> : When to update cells mask<ul>
+<li><code>0</code>, or <code>update</code> : Apply mask to cell container only when <code>table.updateTable()</code> is invoked. Default behavior.</li>
+<li><code>1</code>, or <code>everyTick</code> : Apply mask to cell container every tick. Use this mode if game objects of cell are moved after <code>table.updateTable()</code> and still been masked.</li>
+</ul>
+</li>
 <li><code>false</code> : No mask.</li>
 </ul>
 </li>
@@ -5290,7 +5296,7 @@
 </ul>
 <h3 id="cell-begins-visible">Cell begins visible<a class="headerlink" href="#cell-begins-visible" title="Permanent link">&para;</a></h3>
 <p>Add <a href="../container/">container</a> of cell when it begins visible in event <code>cellvisible</code>. </p>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">table</span><span class="p">){</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">cellContainer</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// No reusable cell container, create a new one</span>
         <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
         <span class="c1">// cellContainer = scene.add.container();</span>
@@ -5303,7 +5309,7 @@
 <p>It is equal to <code>cellVisibleCallback</code> in configuration.</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="c1">// ...</span>
-    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">table</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span> <span class="c1">// Assign cell container</span>
     <span class="p">},</span>
     <span class="c1">// ...</span>
@@ -5361,6 +5367,7 @@
 <li>Game object : Reusable cell container.</li>
 </ul>
 </li>
+<li><code>table</code> : Grid table.</li>
 </ul>
 <p>Each cell only has <strong>one</strong> container gameObject, old container will be destroyed when assigning a new container.</p>
 <h3 id="cell-begins-invisible">Cell begins invisible<a class="headerlink" href="#cell-begins-invisible" title="Permanent link">&para;</a></h3>
