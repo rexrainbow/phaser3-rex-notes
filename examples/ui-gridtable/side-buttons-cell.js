@@ -56,7 +56,7 @@ class Demo extends Phaser.Scene {
                 footer: 10,
             },
 
-            createCellContainerCallback: function (cell, cellContainer, table) {
+            createCellContainerCallback: function (cell, cellContainer) {
                 var scene = cell.scene,
                     width = cell.width,
                     height = cell.height,
@@ -148,7 +148,7 @@ class Demo extends Phaser.Scene {
                 }
             })
 
-        this.add.text(0, 580, 'Swipe-right cell to show side button')
+        this.add.text(0, 580, 'Swipe-left cell to show side button')
     }
 
     update() { }
