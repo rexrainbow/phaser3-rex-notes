@@ -1,6 +1,5 @@
 import HideCells from './HideCells.js';
 import ShowCells from './ShowCells.js';
-import MaskCells from './MaskCells.js';
 
 var UpdateTable = function (refresh) {
     if (refresh === undefined) {
@@ -13,7 +12,10 @@ var UpdateTable = function (refresh) {
     ClearVisibleCellIndexes.call(this);
     ShowCells.call(this);
     HideCells.call(this);
-    MaskCells.call(this);
+
+    if (this.maskUpdateMode === 0) {
+        this.maskCells();
+    }
     return this;
 }
 

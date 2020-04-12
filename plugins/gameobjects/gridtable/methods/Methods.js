@@ -1,5 +1,6 @@
 import SetTableOY from './SetTableOY.js';
 import SetTableOX from './SetTableOX.js';
+import MaskCells from './updatetable/MaskCells.js';
 import UpdateTable from './updatetable/UpdateTable.js';
 import IsCellVisible from './IsCellVisible.js';
 import { PointerToCellIndex, PointerToCellContainer } from './PointerToCell.js';
@@ -14,6 +15,7 @@ import SetGridSize from './SetGridSize.js';
 export default {
     setTableOY: SetTableOY,
     setTableOX: SetTableOX,
+    maskCells: MaskCells,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
     pointerToCellIndex: PointerToCellIndex,

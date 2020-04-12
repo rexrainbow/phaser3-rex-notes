@@ -47,7 +47,6 @@ class GridTable extends ContainerLite {
             this.on('cellinvisible', callback, scope);
         }
 
-        this.cellsMask = undefined;
         this.setCellsMask(GetValue(config, 'mask', true));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
@@ -85,6 +84,9 @@ class GridTable extends ContainerLite {
         if (this.cellContainersPool) {
             this.cellContainersPool.destroy(true);
             this.cellContainersPool = undefined;
+        }
+        if (this.maskUpdateMode === 1) {
+            this.scene.game.events.off('poststep', this.maskCells, this);
         }
         super.destroy(fromScene);
     }
@@ -202,21 +204,30 @@ class GridTable extends ContainerLite {
         return this;
     }
 
-    setCellsMask(maskConfig) {
-        var maskEnable, maskPadding;
-        if (maskConfig === true) {
+    setCellsMask(config) {
+        var maskEnable, maskPadding, maskUpdateMode;
+        if (config === true) {
             maskEnable = true;
             maskPadding = 0;
-        } else if (maskConfig === false) {
+            maskeUpdateMode = 0;
+        } else if (config === false) {
             maskEnable = false;
         } else {
-            maskEnable = GetValue(maskConfig, 'mask', true);
-            maskPadding = GetValue(maskConfig, 'padding', 0);
+            maskEnable = GetValue(config, 'mask', true);
+            maskPadding = GetValue(config, 'padding', 0);
+            maskUpdateMode = GetValue(config, 'updateMode', 0);
         }
         if (maskEnable) {
             var maskGameObject = new DefaultMask(this, 0, maskPadding);
             this.cellsMask = maskGameObject.createGeometryMask();
             this.add(maskGameObject);
+            if (typeof (maskUpdateMode) === 'string') {
+                maskUpdateMode = MASKUPDATEMODE[maskUpdateMode];
+            }
+            this.maskUpdateMode = maskUpdateMode;
+            if (maskUpdateMode === 1) {
+                this.scene.game.events.on('poststep', this.maskCells, this);
+            }
         }
 
         return this;
@@ -341,6 +352,11 @@ const SCROLLMODE = {
     vertical: 0,
     h: 1,
     horizontal: 1
+};
+
+const MASKUPDATEMODE = {
+    update: 0,
+    everytick: 1
 };
 
 export default GridTable;
