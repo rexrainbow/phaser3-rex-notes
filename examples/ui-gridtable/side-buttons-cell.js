@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             x: 400,
             y: 300,
             width: 300,
-            height: 100,
+            height: 400,
 
             scrollMode: 0,
 
@@ -34,6 +34,7 @@ class Demo extends Phaser.Scene {
 
                 mask: {
                     padding: 2,
+                    updateMode: 'everytick'
                 },
 
                 reuseCellContainer: true,
@@ -55,7 +56,7 @@ class Demo extends Phaser.Scene {
                 footer: 10,
             },
 
-            createCellContainerCallback: function (cell, cellContainer) {
+            createCellContainerCallback: function (cell, cellContainer, table) {
                 var scene = cell.scene,
                     width = cell.width,
                     height = cell.height,
@@ -67,17 +68,6 @@ class Demo extends Phaser.Scene {
                 }
                 if (cellContainer === null) {
                     cellContainer = scene.rexUI.add.sides({
-                        panel: scene.rexUI.add.label({
-                            orientation: 0,
-                            background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
-                            icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
-                            text: scene.add.text(0, 0, ''),
-
-                            space: {
-                                icon: 10,
-                                left: 15,
-                            }
-                        }),
                         rightSide: scene.rexUI.add.buttons({
                             width: 80,
                             orientation: 'x',
@@ -89,17 +79,34 @@ class Demo extends Phaser.Scene {
                             ]
                         }),
 
+                        panel: scene.rexUI.add.label({
+                            orientation: 0,
+                            background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_PRIMARY).setStrokeStyle(2, COLOR_DARK),
+                            icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
+                            text: scene.add.text(0, 0, ''),
+
+                            space: {
+                                icon: 10,
+                                left: 15,
+                            }
+                        }),
+
                         // Callbacks
                         showChildCallback: function (child, key, sides) {
                             if (key === 'panel') {
+                                sides.moveChild(child, 500)
                             } else {
-                                sides.setChildVisible(child);
+                                if (table.lastSideButton) {
+                                    table.lastSideButton.showPanel();                                    
+                                }
+                                table.lastSideButton = sides;
                             }
                         },
                         hideChildCallback: function (child, key, sides) {
                             if (key === 'panel') {
-                            } else {
-                                sides.setChildVisible(child);
+                                sides.moveChild(child, 500);
+                            } else if (table.lastSideButton) {
+                                table.lastSideButton = undefined;
                             }
                         }
                     })
@@ -108,7 +115,6 @@ class Demo extends Phaser.Scene {
                     // console.log(cell.index + ': reuse cell-container');
                 }
 
-                console.log(cellContainer.getElement('rightSide.background').visible);
                 cellContainer.showPanel();
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
@@ -122,22 +128,17 @@ class Demo extends Phaser.Scene {
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
-        // Bug, this value should be `fasle`
-        console.log(gridTable.getElement('table').getCell(0).getContainer().getElement('rightSide.background').visible);
-
         this.print = this.add.text(0, 0, '');
 
         var scene = this;
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
-                cellContainer.getElement('panel.background')
-                    .setStrokeStyle(2, COLOR_LIGHT)
-                    .setDepth(1);
+                cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_LIGHT);
+                cellContainer.setDepth(1);
             }, this)
             .on('cell.out', function (cellContainer, cellIndex) {
-                cellContainer.getElement('panel.background')
-                    .setStrokeStyle(2, COLOR_DARK)
-                    .setDepth(0);
+                cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_DARK);
+                cellContainer.setDepth(0);
             }, this)
             .on('cell.swipeleft', function (cellContainer, cellIndex) {
                 cellContainer.showRightSide()
@@ -146,7 +147,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.hideRightSide();
             }, this)
 
-        this.add.text(0, 580, 'Swipe-right cell to remove it')
+        this.add.text(0, 580, 'Swipe-right cell to show side button')
     }
 
     update() { }

@@ -34,6 +34,7 @@ class Demo extends Phaser.Scene {
 
                 mask: {
                     padding: 2,
+                    // updateMode: 'everytick'
                 },
 
                 reuseCellContainer: true,
