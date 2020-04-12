@@ -50,16 +50,17 @@ class EaseMove extends TweenBase {
 
     setTargetPosition(x, y) {
         if ((typeof (x) === 'number') || (typeof (y) === 'number')) {
+            // x,y : a number, or undefined
             this.startX = this.gameObject.x;
             this.startY = this.gameObject.y;
-            this.endX = (x !== undefined) ? x : this.startX;
-            this.endY = (y !== undefined) ? y : this.startY;
+            this.endX = x;
+            this.endY = y;
         } else {
             var config = x;
             this.startX = GetAdvancedValue(config, 'startX', this.gameObject.x);
             this.startY = GetAdvancedValue(config, 'startY', this.gameObject.y);
-            this.endX = GetAdvancedValue(config, 'endX', this.startX);
-            this.endY = GetAdvancedValue(config, 'endY', this.startY);
+            this.endX = GetAdvancedValue(config, 'endX', undefined);
+            this.endY = GetAdvancedValue(config, 'endY', undefined);
         }
         return this;
     }
@@ -87,18 +88,23 @@ class EaseMove extends TweenBase {
             return this;
         }
 
-        this.gameObject.setPosition(this.startX, this.startY);
-        super.start({
+        var config = {
             targets: this.gameObject,
-            x: this.endX,
-            y: this.endY,
-
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0)
-        });
+        };
+        if (this.endX !== undefined) {
+            this.gameObject.setX(this.startX);
+            config.x = this.endX;
+        }
+        if (this.endY !== undefined) {
+            this.gameObject.setY(this.startY);
+            config.y = this.endY;
+        }
+        super.start(config);
         return this;
     }
 

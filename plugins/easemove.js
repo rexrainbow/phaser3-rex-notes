@@ -66,7 +66,7 @@ var EaseMoveFromDestroy = function (gameObject, duration, startX, startY, ease, 
 
 var ParseValue = function (propertyValue, startValue) {
     if (propertyValue === undefined) {
-        return startValue;
+        return undefined;
     } else if (typeof (propertyValue) === 'number') {
         return propertyValue;
     } else {
