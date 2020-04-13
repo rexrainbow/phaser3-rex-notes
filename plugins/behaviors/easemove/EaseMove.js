@@ -58,8 +58,8 @@ class EaseMove extends TweenBase {
             this.endY = y;
         } else {
             var config = x;
-            this.startX = GetAdvancedValue(config, 'startX', this.gameObject.x);
-            this.startY = GetAdvancedValue(config, 'startY', this.gameObject.y);
+            this.startX = GetAdvancedValue(config, 'startX', undefined);
+            this.startY = GetAdvancedValue(config, 'startY', undefined);
             this.endX = GetAdvancedValue(config, 'endX', undefined);
             this.endY = GetAdvancedValue(config, 'endY', undefined);
         }
@@ -97,11 +97,11 @@ class EaseMove extends TweenBase {
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0)
         };
-        if (this.endX !== undefined) {
+        if ((this.startX !== undefined) && (this.endX !== undefined)) {
             this.gameObject.setX(this.startX);
             config.x = this.endX;
         }
-        if (this.endY !== undefined) {
+        if ((this.startY !== undefined) && (this.endY !== undefined)) {
             this.gameObject.setY(this.startY);
             config.y = this.endY;
         }
