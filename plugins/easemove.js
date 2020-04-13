@@ -10,22 +10,23 @@ var EaseMoveTo = function (gameObject, duration, endX, endY, ease, destroyMode, 
         destroyMode = false;
     }
 
-    defaultConfig.mode = (destroyMode) ? 1 : 0;
+    var config = {};
+    config.mode = (destroyMode) ? 1 : 0;
     if (endX !== undefined) {
-        defaultConfig.startX = gameObject.x;
-        defaultConfig.endX = ParseValue(endX, gameObject.x);
+        config.startX = gameObject.x;
+        config.endX = ParseValue(endX, gameObject.x);
     }
     if (endY !== undefined) {
-        defaultConfig.startY = gameObject.y;
-        defaultConfig.endY = ParseValue(endY, gameObject.y);
+        config.startY = gameObject.y;
+        config.endY = ParseValue(endY, gameObject.y);
     }
-    defaultConfig.duration = duration;
-    defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
+    config.duration = duration;
+    config.ease = (ease === undefined) ? 'Linear' : ease;
 
     if (easeMove === undefined) {
-        easeMove = new EaseMove(gameObject, defaultConfig);
+        easeMove = new EaseMove(gameObject, config);
     } else {
-        easeMove.resetFromJSON(defaultConfig);
+        easeMove.resetFromJSON(config);
     }
     easeMove.restart();
 
@@ -46,22 +47,23 @@ var EaseMoveFrom = function (gameObject, duration, startX, startY, ease, destroy
         destroyMode = false;
     }
 
-    defaultConfig.mode = (destroyMode) ? 1 : 0;
+    var config = {};
+    config.mode = (destroyMode) ? 1 : 0;
     if (startX !== undefined) {
-        defaultConfig.startX = ParseValue(startX, gameObject.x);
-        defaultConfig.endX = gameObject.x;
+        config.startX = ParseValue(startX, gameObject.x);
+        config.endX = gameObject.x;
     }
     if (startY !== undefined) {
-        defaultConfig.startY = ParseValue(startY, gameObject.y);
-        defaultConfig.endY = gameObject.y;
+        config.startY = ParseValue(startY, gameObject.y);
+        config.endY = gameObject.y;
     }
-    defaultConfig.duration = duration;
-    defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
+    config.duration = duration;
+    config.ease = (ease === undefined) ? 'Linear' : ease;
 
     if (easeMove === undefined) {
-        easeMove = new EaseMove(gameObject, defaultConfig);
+        easeMove = new EaseMove(gameObject, config);
     } else {
-        easeMove.resetFromJSON(defaultConfig);
+        easeMove.resetFromJSON(config);
     }
     easeMove.restart();
 
@@ -73,9 +75,8 @@ var EaseMoveFromDestroy = function (gameObject, duration, startX, startY, ease, 
 }
 
 var ParseValue = function (propertyValue, startValue) {
-    if (propertyValue === undefined) {
-        return undefined;
-    } else if (typeof (propertyValue) === 'number') {
+    // propertyValue : number or string
+    if (typeof (propertyValue) === 'number') {
         return propertyValue;
     } else {
         var op = propertyValue[0];
@@ -88,7 +89,5 @@ var ParseValue = function (propertyValue, startValue) {
         }
     }
 }
-
-var defaultConfig = {}; // reuse this config
 
 export { EaseMove, EaseMoveTo, EaseMoveToDestroy, EaseMoveFrom, EaseMoveFromDestroy };
