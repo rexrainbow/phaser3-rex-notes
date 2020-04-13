@@ -45,6 +45,11 @@ class ScrollableBlock extends BaseSizer {
         if (!this.scene) {
             return;
         }
+
+        if (this.maskUpdateMode === 1) {
+            this.scene.game.events.off('poststep', this.maskChildren, this);
+        }
+
         this.child = undefined;
         if (this.childrenMask) {
             this.childrenMask.destroy();

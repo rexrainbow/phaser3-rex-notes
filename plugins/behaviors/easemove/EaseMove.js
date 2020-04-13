@@ -50,6 +50,7 @@ class EaseMove extends TweenBase {
 
     setTargetPosition(x, y) {
         if ((typeof (x) === 'number') || (typeof (y) === 'number')) {
+            // endX, endY
             // x,y : a number, or undefined
             this.startX = this.gameObject.x;
             this.startY = this.gameObject.y;

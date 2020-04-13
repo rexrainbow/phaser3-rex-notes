@@ -79,14 +79,15 @@ class GridTable extends ContainerLite {
             return;
         }
 
+        if (this.maskUpdateMode === 1) {
+            this.scene.game.events.off('poststep', this.maskCells, this);
+        }
+
         this.table.destroy(fromScene);
         this.table = undefined;
         if (this.cellContainersPool) {
             this.cellContainersPool.destroy(true);
             this.cellContainersPool = undefined;
-        }
-        if (this.maskUpdateMode === 1) {
-            this.scene.game.events.off('poststep', this.maskCells, this);
         }
         super.destroy(fromScene);
     }
@@ -209,7 +210,7 @@ class GridTable extends ContainerLite {
         if (config === true) {
             maskEnable = true;
             maskPadding = 0;
-            maskeUpdateMode = 0;
+            maskUpdateMode = 0;
         } else if (config === false) {
             maskEnable = false;
         } else {
@@ -217,6 +218,8 @@ class GridTable extends ContainerLite {
             maskPadding = GetValue(config, 'padding', 0);
             maskUpdateMode = GetValue(config, 'updateMode', 0);
         }
+
+        this.maskUpdateMode = maskUpdateMode; // 0,1,undefined
         if (maskEnable) {
             var maskGameObject = new DefaultMask(this, 0, maskPadding);
             this.cellsMask = maskGameObject.createGeometryMask();
@@ -224,7 +227,6 @@ class GridTable extends ContainerLite {
             if (typeof (maskUpdateMode) === 'string') {
                 maskUpdateMode = MASKUPDATEMODE[maskUpdateMode];
             }
-            this.maskUpdateMode = maskUpdateMode;
             if (maskUpdateMode === 1) {
                 this.scene.game.events.on('poststep', this.maskCells, this);
             }

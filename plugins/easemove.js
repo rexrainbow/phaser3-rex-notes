@@ -11,10 +11,14 @@ var EaseMoveTo = function (gameObject, duration, endX, endY, ease, destroyMode, 
     }
 
     defaultConfig.mode = (destroyMode) ? 1 : 0;
-    defaultConfig.startX = gameObject.x;
-    defaultConfig.startY = gameObject.y;
-    defaultConfig.endX = ParseValue(endX, defaultConfig.startX);
-    defaultConfig.endY = ParseValue(endY, defaultConfig.startY);
+    if (endX !== undefined) {
+        defaultConfig.startX = gameObject.x;
+        defaultConfig.endX = ParseValue(endX, gameObject.x);
+    }
+    if (endY !== undefined) {
+        defaultConfig.startY = gameObject.y;
+        defaultConfig.endY = ParseValue(endY, gameObject.y);
+    }
     defaultConfig.duration = duration;
     defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
 
@@ -43,10 +47,14 @@ var EaseMoveFrom = function (gameObject, duration, startX, startY, ease, destroy
     }
 
     defaultConfig.mode = (destroyMode) ? 1 : 0;
-    defaultConfig.endX = gameObject.x;
-    defaultConfig.endY = gameObject.y;
-    defaultConfig.startX = ParseValue(startX, defaultConfig.endX);
-    defaultConfig.startY = ParseValue(startY, defaultConfig.endY);
+    if (startX !== undefined) {
+        defaultConfig.startX = ParseValue(startX, gameObject.x);
+        defaultConfig.endX = gameObject.x;
+    }
+    if (startY !== undefined) {
+        defaultConfig.startY = ParseValue(startY, gameObject.y);
+        defaultConfig.endY = gameObject.y;
+    }
     defaultConfig.duration = duration;
     defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
 

@@ -13,6 +13,9 @@ export default {
     },
 
     maskChildren(children) {
+        if (children === undefined) {
+            children = this.getAllChildren();
+        }
         MaskChildren(this, this.childrenMask, children);
         return this;
     },
