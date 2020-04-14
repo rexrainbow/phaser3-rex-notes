@@ -307,15 +307,70 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
+- Enable button's input
+    ```javascript
+    dialog.on('button.enable', function(button, groupName, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
+    - `index` : Index of triggered button game object.
+- Disable button's input
+    ```javascript
+    dialog.on('button.disalbe', function(button, groupName, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `groupName` : `'choices'`, `'actions'`, `'toolbar'`, or `'leftToolbar'`
+    - `index` : Index of triggered button game object.
 
 #### Emit button click event
 
-- Emit action/choice button click event
+- Emit choice/action/toolbar/left-toolbar button's click event
     ```javascript
     dialog.emitChoiceClick(index);
     dialog.emitActionClick(index);
+    dialog.emitToolbarClick(index);
+    dialog.emitLeftToolbarClick(index);
     ```
-    - `index` : Index of triggered button game object, or a button game object.
+    - `index` : A number index, or a button game object.
+
+#### Enable/disable input of button
+
+- Enable choice/action/toolbar/left-toolbar button
+    ```javascript
+    dialog.setChoiceEnable(index);
+    dialog.setActionEnable(index);
+    dialog.setToolbarEnable(index);
+    dialog.setLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Disable choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.setChoiceEnable(index, false);
+    dialog.setActionEnable(index, false);
+    dialog.setToolbarEnable(index, false);
+    dialog.setLeftToolbarEnable(index, false);
+    ```
+    - `index` : A number index, or a button game object.
+- Toggle choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    dialog.toggleChoiceEnable(index);
+    dialog.toggleActionEnable(index);
+    dialog.toggleToolbarEnable(index);
+    dialog.toggleLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Get choice/action/toolbar/left-toolbar button's input enable
+    ```javascript
+    var enabled = dialog.getChoiceEnable(index);
+    var enabled = dialog.getActionEnable(index);
+    var enabled = dialog.getToolbarEnable(index);
+    var enabled = dialog.getLeftToolbarEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
 
 ### Get element
 
@@ -332,6 +387,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         ```javascript
         var content = dialog.getElement('content');
         ```
+    - Description game object
+        ```javascript
+        var description = dialog.getElement('description');
+        ```    
     - Choice button game object
         ```javascript
         var buttons = dialog.getElement('choices');

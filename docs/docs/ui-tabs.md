@@ -223,6 +223,24 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+- Enable button's input
+    ```javascript
+    tabs.on('button.enable', function(button, groupName, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : Index of triggered button game object.
+- Disable button's input
+    ```javascript
+    tabs.on('button.disalbe', function(button, groupName, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : Index of triggered button game object.
 
 #### Emit button click event
 
@@ -238,6 +256,66 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     tabs.emitRightButtonClick(index);
     tabs.emitTopButtonClick(index);
     tabs.emitBottomButtonClick(index);
+    ```
+    - `index` : A number index, or a button game object.
+
+#### Enable/disable input of button
+
+- Enable button input in a given group
+    ```javascript
+    tabs.setButtonEnable(groupName, index);
+    // tabs.setButtonEnable(groupName, index, true);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.
+- Enable left/right/top/bottom button
+    ```javascript
+    tabs.setLeftEnable(index);
+    tabs.setRightEnable(index);
+    tabs.setTopEnable(index);
+    tabs.setBottomEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Disable button input in a given group
+    ```javascript
+    tabs.setButtonEnable(groupName, index, false);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.
+- Disable choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    tabs.setLeftEnable(index, false);
+    tabs.setRightEnable(index, false);
+    tabs.setTopEnable(index, false);
+    tabs.setBottomEnable(index, false);
+    ```
+    - `index` : A number index, or a button game object.
+- Toggle button input in a given group
+    ```javascript
+    tabs.toggleButtonEnable(groupName, index);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.    
+- Toggle choice/action/toolbar/left-toolbar button's input
+    ```javascript
+    tabs.toggleLeftEnable(index);
+    tabs.toggleRightEnable(index);
+    tabs.toggleTopEnable(index);
+    tabs.toggleBottomEnable(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Get button input enable in a given group
+    ```javascript
+    var enabled = tabs.getButtonEnable(groupName, index);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.  
+- Get choice/action/toolbar/left-toolbar button's input enable
+    ```javascript
+    var enabled = tabs.getLeftEnable(index);
+    var enabled = tabs.getRightEnable(index);
+    var enabled = tabs.getTopEnable(index);
+    var enabled = tabs.getBottomEnable(index);
     ```
     - `index` : A number index, or a button game object.
 

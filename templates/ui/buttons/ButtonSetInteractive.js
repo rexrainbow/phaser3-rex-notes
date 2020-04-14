@@ -4,9 +4,16 @@ var ButtonSetInteractive = function (button, clickConfig) {
     //Default: Fire 'click' event when touch released after pressed.
     button._buttonBehavior = new ButtonBehavior(button, clickConfig);
 
-    button._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer, event) {
-        FireEvent.call(this, 'button.click', button, pointer, event);
-    }, this);
+    button._buttonBehavior
+        .on('click', function (buttonBehavior, gameObject, pointer, event) {
+            FireEvent.call(this, 'button.click', gameObject, pointer, event);
+        }, this)
+        .on('enable', function(buttonBehavior, gameObject){
+            FireEvent.call(this, 'button.enable', gameObject);
+        }, this)
+        .on('disable', function(buttonBehavior, gameObject){
+            FireEvent.call(this, 'button.disable', gameObject);
+        }, this)
 
     button
         .on('pointerover', function (pointer, localX, localY, event) {

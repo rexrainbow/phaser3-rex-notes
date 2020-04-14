@@ -15,6 +15,62 @@ export default {
         return this.childrenMap.leftToolbarSizer.getButton(index);
     },
 
+    setChoiceEnable(index, enabled) {
+        this.childrenMap.choicesSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setActionEnable(index, enabled) {
+        this.childrenMap.actionsSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setToolbarEnable(index, enabled) {
+        this.childrenMap.toolbarSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setLeftToolbarEnable(index, enabled) {
+        this.childrenMap.leftToolbarSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    toggleChoiceEnable(index) {
+        this.childrenMap.choicesSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleActionEnable(index) {
+        this.childrenMap.actionsSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleToolbarEnable(index) {
+        this.childrenMap.toolbarSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleLeftToolbarEnable(index) {
+        this.childrenMap.leftToolbarSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    getChoiceEnable(index) {
+        return this.childrenMap.choicesSizer.getButtonEnable(index);
+    },
+
+    getActionEnable(index) {
+        return this.childrenMap.actionsSizer.getButtonEnable(index);
+    },
+
+    getToolbarEnable(index) {
+        return this.childrenMap.toolbarSizer.getButtonEnable(index);
+    },
+
+    getLeftToolbarEnable(index) {
+        return this.childrenMap.leftToolbarSizer.getButtonEnable(index);
+    },
+
     emitChoiceClick(index) {
         this.childrenMap.choicesSizer.emitButtonClick(index);
         return this;

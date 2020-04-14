@@ -10,6 +10,7 @@ class Button {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -45,20 +46,36 @@ class Button {
         this.shutdown();
     }
 
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
+    get enable() {
+        return this._enable;
+    }
 
-        if (this.enable === e) {
+    set enable(e) {
+        if (this._enable === e) {
             return this;
         }
 
         if (!e) {
             this.cancel();
         }
-        this.enable = e;
+        this._enable = e;
         this.gameObject.input.enabled = e;
+
+        var eventName = (e) ? 'enable' : 'disable';
+        this.emit(eventName, this, this.gameObject);
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 

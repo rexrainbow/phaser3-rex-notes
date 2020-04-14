@@ -84,23 +84,40 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
 
 ### Events
 
-```javascript
-button.on('click', function (button, gameObject, pointer, event) {
-    // ...
-}, scope);
-```
-
-- Cancel remaining touched events : `event.stopPropagation()`
+- Click
+    ```javascript
+    button.on('click', function (button, gameObject, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - Cancel remaining touched events : `event.stopPropagation()`
+- Enable
+    ```javascript
+    button.on('enable', function (button, gameObject) {
+        // ...
+    }, scope);
+    ```
+- Disable
+    ```javascript
+    button.on('disable', function (button, gameObject) {
+        // ...
+    }, scope);
+    ```
 
 ### Enable
 
 - Get
     ```javascript
-    var enable = drag.enable;  // enable: true, or false
+    var enabled = button.enable;  // enabled: true, or false
     ```
 - Set
     ```javascript
-    drag.setEnable(enable);  // enable: true, or false
+    button.setEnable(enabled);  // enabled: true, or false
+    // button.enable = enabled;
+    ```
+- Toggle
+    ```javascript
+    button.toggleEnable();
     ```
 
 ### Set mode

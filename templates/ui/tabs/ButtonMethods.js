@@ -13,6 +13,76 @@ export default {
         return (buttonsSizer) ? buttonsSizer.getButton(index) : undefined;
     },
 
+    setButtonEnable(groupName, index, enabled) {
+        this.getButtonsSizer(groupName).setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setLeftButtonEnable(index, enabled) {
+        this.childrenMap.leftButtonsSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setRightButtonEnable(index, enabled) {
+        this.childrenMap.rightButtonsSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setTopButtonEnable(index, enabled) {
+        this.childrenMap.topButtonsSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    setBottomButtonEnable(index, enabled) {
+        this.childrenMap.bottomButtonsSizer.setButtonEnable(index, enabled);
+        return this;
+    },
+
+    toggleButtonEnable(groupName, index) {
+        this.getButtonsSizer(groupName).toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleLeftButtonEnable(index) {
+        this.childrenMap.leftButtonsSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleRightButtonEnable(index) {
+        this.childrenMap.rightButtonsSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleTopButtonEnable(index) {
+        this.childrenMap.topButtonsSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    toggleBottomButtonEnable(index) {
+        this.childrenMap.bottomButtonsSizer.toggleButtonEnable(index);
+        return this;
+    },
+
+    getButtonEnable(groupName, index) {
+        return this.getButtonsSizer(groupName).getButtonEnable(index);
+    },
+
+    getLeftButtonEnable(index) {
+        return this.childrenMap.leftButtonsSizer.getButtonEnable(index);
+    },
+
+    getRightButtonEnable(index) {
+        return this.childrenMap.rightButtonsSizer.getButtonEnable(index);
+    },
+
+    getTopButtonEnable(index) {
+        return this.childrenMap.topButtonsSizer.getButtonEnable(index);
+    },
+
+    getBottomButtonEnable(index) {
+        return this.childrenMap.bottomButtonsSizer.getButtonEnable(index);
+    },
+
     emitButtonClick(groupName, index) {
         var buttonsSizer = this.getButtonsSizer(groupName);
         if (!buttonsSizer) {

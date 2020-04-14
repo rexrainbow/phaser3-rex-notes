@@ -212,6 +212,22 @@ See [sizer object](ui-sizer.md)
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
+- Enable button's input
+    ```javascript
+    buttons.on('button.enable', function(button, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `index` : Index of triggered button game object.
+- Disable button's input
+    ```javascript
+    buttons.on('button.disalbe', function(button, index) {
+        // ...
+    }, scope);
+    ```
+    - `button` : Triggered button game object.
+    - `index` : Index of triggered button game object.
 
 #### Emit button click event
 
@@ -220,6 +236,41 @@ buttons.emitButtonClick(index);
 ```
 
 - `index` : Index of triggered button game object, or a button game object.
+
+#### Enable/disable input of button 
+
+- Enable a button's input
+    ```javascript
+    buttons.setButtonEnable(index);
+    // buttons.setButtonEnable(index, true);
+    ```
+    - `index` : Index of triggered button game object, or a button game object.
+- Enable all buttons' input
+    ```javascript
+    buttons.setButtonEnable();
+    // buttons.setButtonEnable(true);
+    ```
+- Disable
+    ```javascript
+    buttons.setButtonEnable(index, true);
+    ```
+    - `index` : Index of triggered button game object, or a button game object.
+- Disable all buttons' input
+    ```javascript
+    buttons.setButtonEnable(false);
+    ```
+- Toggle
+    ```javascript
+    buttons.toggleButtonEnable(index);
+    ```
+- Toggle all buttons's input
+    ```javascript
+    buttons.toggleButtonEnable();
+    ```
+- Get button's input enable
+    ```javascript
+    var enabled = bottons.getButtonEnable(index);
+    ```
 
 ### Get element
 

@@ -35,6 +35,13 @@ class Demo extends Phaser.Scene {
         buttons
             .on('button.click', function (button, index, pointer, event) {
                 console.log(`Click button-${button.text}`);
+                // buttons.setButtonEnable(index, false);
+            })
+            .on('button.enable', function(button, index){
+                button.getElement('background').setFillStyle(COLOR_LIGHT);
+            })
+            .on('button.disable', function(button, index){
+                button.getElement('background').setFillStyle(COLOR_DARK);
             })
 
     }

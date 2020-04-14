@@ -23,6 +23,36 @@ export default {
         return button;
     },
 
+    setButtonEnable(index, enabled) {
+        if ((index === undefined) || (typeof (index) === 'boolean')) {
+            enabled = index;
+            for (var i = 0, cnt = this.buttons.length; i < cnt; i++) {
+                this.buttons[index]._buttonBehavior.setEnable(enabled);
+            }
+        } else {
+            this.getButton(index)._buttonBehavior.setEnable(enabled);
+        }
+        return this;
+    },
+
+    toggleButtonEnable(index) {
+        if ((index === undefined) || (typeof (index) === 'boolean')) {
+            for (var i = 0, cnt = this.buttons.length; i < cnt; i++) {
+                this.buttons[index]._buttonBehavior.toggleEnable();
+            }
+        } else {
+            this.getButton(index)._buttonBehavior.toggleEnable();
+        }
+        return this;
+    },
+
+    getButtonEnable(index) {
+        if (index === undefined) {
+            index = 0;
+        }
+        return this.getButton(index)._buttonBehavior.enable;
+    },
+
     emitButtonClick(index) {
         // index or button game object
         FireEvent.call(this, 'button.click', index);
