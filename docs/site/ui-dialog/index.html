@@ -4173,6 +4173,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4915,6 +4922,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5301,14 +5315,75 @@
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
 </ul>
 </li>
+<li>Enable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
+<li>Disable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
 </ul>
 <h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Emit action/choice button click event
+<li>Emit choice/action/toolbar/left-toolbar button's click event
     <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">emitChoiceClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">dialog</span><span class="p">.</span><span class="nx">emitActionClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitToolbarClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitLeftToolbarClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+</ul>
+<h4 id="enabledisable-input-of-button">Enable/disable input of button<a class="headerlink" href="#enabledisable-input-of-button" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enable choice/action/toolbar/left-toolbar button
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Disable choice/action/toolbar/left-toolbar button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">setLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Toggle choice/action/toolbar/left-toolbar button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Get choice/action/toolbar/left-toolbar button's input enable
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
 </ul>
 </li>
 </ul>
@@ -5323,6 +5398,9 @@
 </code></pre></div></li>
 <li>Content game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Description game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">description</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Choice button game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">);</span>

@@ -4149,6 +4149,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4942,6 +4949,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5251,6 +5265,24 @@
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
 </ul>
 </li>
+<li>Enable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
+<li>Disable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
 </ul>
 <h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
@@ -5258,6 +5290,38 @@
 
 <ul>
 <li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+</ul>
+<h4 id="enabledisable-input-of-button">Enable/disable input of button<a class="headerlink" href="#enabledisable-input-of-button" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enable a button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// buttons.setButtonEnable(index, true);</span>
+</code></pre></div><ul>
+<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+</ul>
+</li>
+<li>Enable all buttons' input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">();</span>
+<span class="c1">// buttons.setButtonEnable(true);</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+</ul>
+</li>
+<li>Disable all buttons' input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Toggle
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">toggleButtonEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Toggle all buttons's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">toggleButtonEnable</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get button's input enable
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">bottons</span><span class="p">.</span><span class="nx">getButtonEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>

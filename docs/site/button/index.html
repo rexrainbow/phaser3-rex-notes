@@ -4947,21 +4947,37 @@
 <li><code>clickInterval</code> : Interval between 2 'click' events, in ms.</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+<ul>
+<li>Click
+    <div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-
-<ul>
+</code></pre></div><ul>
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
+<li>Enable
+    <div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enable&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;disable&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">drag</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>  <span class="c1">// enable: true, or false</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">button</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>  <span class="c1">// enabled: true, or false</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">drag</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>  <span class="c1">// enable: true, or false</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>  <span class="c1">// enabled: true, or false</span>
+<span class="c1">// button.enable = enabled;</span>
+</code></pre></div></li>
+<li>Toggle
+    <div class="codehilite"><pre><span></span><code><span class="nx">button</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="set-mode">Set mode<a class="headerlink" href="#set-mode" title="Permanent link">&para;</a></h3>

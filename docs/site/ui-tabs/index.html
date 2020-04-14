@@ -4197,6 +4197,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4915,6 +4922,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#enabledisable-input-of-button" class="md-nav__link">
+    Enable/disable input of button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5203,6 +5217,26 @@
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
 </ul>
 </li>
+<li>Enable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
+<li>Disable button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
+</ul>
+</li>
 </ul>
 <h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5218,6 +5252,74 @@
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">emitRightButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">emitTopButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">tabs</span><span class="p">.</span><span class="nx">emitBottomButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+</ul>
+<h4 id="enabledisable-input-of-button">Enable/disable input of button<a class="headerlink" href="#enabledisable-input-of-button" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enable button input in a given group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="c1">// tabs.setButtonEnable(groupName, index, true);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Enable left/right/top/bottom button
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">setLeftEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setRightEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setTopEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setBottomEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Disable button input in a given group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">setButtonEnable</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Disable choice/action/toolbar/left-toolbar button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">setLeftEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setRightEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setTopEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">setBottomEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Toggle button input in a given group
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">toggleButtonEnable</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.    </li>
+</ul>
+</li>
+<li>Toggle choice/action/toolbar/left-toolbar button's input
+    <div class="codehilite"><pre><span></span><code><span class="nx">tabs</span><span class="p">.</span><span class="nx">toggleLeftEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">toggleRightEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">toggleTopEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">toggleBottomEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Get button input enable in a given group
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getButtonEnable</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.  </li>
+</ul>
+</li>
+<li>Get choice/action/toolbar/left-toolbar button's input enable
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getLeftEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getRightEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getTopEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getBottomEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>index</code> : A number index, or a button game object.</li>
 </ul>
