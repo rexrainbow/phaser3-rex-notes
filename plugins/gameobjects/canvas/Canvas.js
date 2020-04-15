@@ -90,6 +90,8 @@ class Canvas extends GameObject {
         this.canvas.width = width;
         this.canvas.height = height;
 
+        this.frame.setSize(width, height);
+
         this.dirty = true;
         return this;
     }
