@@ -27,7 +27,7 @@ export default {
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             enabled = index;
             for (var i = 0, cnt = this.buttons.length; i < cnt; i++) {
-                this.buttons[index]._buttonBehavior.setEnable(enabled);
+                this.buttons[i]._buttonBehavior.setEnable(enabled);
             }
         } else {
             this.getButton(index)._buttonBehavior.setEnable(enabled);
@@ -38,7 +38,7 @@ export default {
     toggleButtonEnable(index) {
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             for (var i = 0, cnt = this.buttons.length; i < cnt; i++) {
-                this.buttons[index]._buttonBehavior.toggleEnable();
+                this.buttons[i]._buttonBehavior.toggleEnable();
             }
         } else {
             this.getButton(index)._buttonBehavior.toggleEnable();
