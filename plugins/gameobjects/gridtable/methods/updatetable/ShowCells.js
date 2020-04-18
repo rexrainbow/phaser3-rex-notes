@@ -5,15 +5,18 @@ var ShowCells = function () {
         return;
     }
     var table = this.table;
-    var rowIdx = table.heightToRowIndex(-this.tableOY);
-    if (rowIdx < 0) {
-        rowIdx = 0;
-    }
 
-    var colIdx = table.widthToColIndex(-this.tableOX);
-    if (colIdx < 0) {
-        colIdx = 0;
+    var startRowIdx = table.heightToRowIndex(-this.tableOY);
+    if (startRowIdx < 0) {
+        startRowIdx = 0;
     }
+    var rowIdx = startRowIdx;
+
+    var startColIdx = table.widthToColIndex(-this.tableOX);
+    if (startColIdx < 0) {
+        startColIdx = 0;
+    }
+    var colIdx = startColIdx;
 
     var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
     var bottomBound = this.bottomBound;
@@ -45,7 +48,7 @@ var ShowCells = function () {
             cellTLX = cellTLX0;
             cellTLY += table.getRowHeight(rowIdx);
 
-            colIdx = 0;
+            colIdx = startColIdx;
             rowIdx += 1;
         }
 
