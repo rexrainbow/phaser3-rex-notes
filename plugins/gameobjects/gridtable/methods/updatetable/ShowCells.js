@@ -24,8 +24,8 @@ var ShowCells = function () {
     var lastIdx = table.cellsCount - 1;
     var lastColIdx = table.colCount - 1;
 
-    var cellTLX0 = GetCellTLX.call(this, colIdx),
-        cellTLX = cellTLX0;
+    var startCellTLX = GetCellTLX.call(this, colIdx),
+        cellTLX = startCellTLX;
     var cellTLY = GetCellTLY.call(this, rowIdx);
     while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
         if (this.table.isValidCellIdx(cellIdx)) {
@@ -45,7 +45,7 @@ var ShowCells = function () {
             cellTLX += table.getColWidth(colIdx);
             colIdx += 1;
         } else {
-            cellTLX = cellTLX0;
+            cellTLX = startCellTLX;
             cellTLY += table.getRowHeight(rowIdx);
 
             colIdx = startColIdx;
