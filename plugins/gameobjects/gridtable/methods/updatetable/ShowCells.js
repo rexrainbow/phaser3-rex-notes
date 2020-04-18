@@ -24,38 +24,8 @@ var ShowCells = function () {
     var cellTLX0 = GetCellTLX.call(this, colIdx),
         cellTLX = cellTLX0;
     var cellTLY = GetCellTLY.call(this, rowIdx);
-    this.visibleStartY = null;
-    this.visibleEndY = null;
-    this.visibleStartX = null;
-    this.visibleEndX = null;
-    this.lastVisibleCellIdx = null;
     while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
         if (this.table.isValidCellIdx(cellIdx)) {
-            if (this.visibleStartY === null) {
-                this.visibleStartY = rowIdx;
-                this.visibleEndY = rowIdx;
-            }
-            if (this.visibleStartX === null) {
-                this.visibleStartX = colIdx;
-                this.visibleEndX = colIdx;
-            }
-
-            if (this.lastVisibleCellIdx === null) {
-                this.lastVisibleCellIdx = cellIdx;
-            }
-
-            if (this.visibleEndY < rowIdx) {
-                this.visibleEndY = rowIdx;
-            }
-
-            if (this.visibleEndX < colIdx) {
-                this.visibleEndX = colIdx;
-            }
-
-            if (this.lastVisibleCellIdx < cellIdx) {
-                this.lastVisibleCellIdx = cellIdx;
-            }
-
             var cell = table.getCell(cellIdx, true);
             this.visibleCells.set(cell);
             if (!this.preVisibleCells.contains(cell)) {
@@ -75,7 +45,7 @@ var ShowCells = function () {
             cellTLX = cellTLX0;
             cellTLY += table.getRowHeight(rowIdx);
 
-            colIdx = this.visibleStartX;
+            colIdx = 0;
             rowIdx += 1;
         }
 

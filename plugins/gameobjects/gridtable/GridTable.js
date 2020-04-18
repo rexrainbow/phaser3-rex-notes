@@ -21,11 +21,6 @@ class GridTable extends ContainerLite {
         this._tableOY = 0;
         this.visibleCells = new Set();
         this.preVisibleCells = new Set();
-        this.visibleStartX = null;
-        this.visibleEndX = null;
-        this.visibleStartY = null;
-        this.visibleEndY = null;
-        this.lastVisibleCellIdx = null;
         this.execeedTopState = false;
         this.execeedBottomState = false;
         this.execeedLeftState = false;

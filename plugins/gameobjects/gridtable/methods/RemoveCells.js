@@ -19,19 +19,15 @@ var RemoveCells = function (cellIdx, count) {
         return this;
     }
 
-    if (cellIdx <= this.lastVisibleCellIdx) {
-        var preList = this.preVisibleCells;
-        var curList = this.visibleCells;
-        var cell;
-        for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
-            cell = this.getCell(i, false);
-            if (cell) {
-                if (curList.contains(cell)) {
-                    HideCell.call(this, cell);
-                    curList.delete(cell);
-                }
-                preList.delete(cell);
+    var cell;
+    for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
+        cell = this.getCell(i, false);
+        if (cell) {
+            if (this.visibleCells.contains(cell)) {
+                HideCell.call(this, cell);
+                this.visibleCells.delete(cell);
             }
+            this.preVisibleCells.delete(cell);
         }
     }
 
