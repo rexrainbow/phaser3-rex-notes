@@ -8,15 +8,15 @@ var GetStartPoint = function (out) {
         out = tmpPoint;
     }
     if (this.childrenMap.thumb) {
-        var align = (this.orientation === 0) ? AlignTop : AlignLeft;
+        var align = (this.orientation === 0) ? AlignLeft : AlignTop;
         GetThumbAlignPoint.call(this, align, out);
     } else {
         if (this.orientation === 0) {
-            out.x = this.centerX;
-            out.y = this.top + 1; // Add 1 pixel margin
-        } else {
             out.x = this.left + 1; // Add 1 pixel margin
             out.y = this.centerY;
+        } else {
+            out.x = this.centerX;
+            out.y = this.top + 1; // Add 1 pixel margin
         }
     }
     return out;

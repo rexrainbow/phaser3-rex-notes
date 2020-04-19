@@ -15,7 +15,7 @@ var CreateScrollableSizer = function (config) {
     var scrollerConfig = GetValue(config, 'scroller', true), scroller;
 
     // Child, slider, scroller
-    if (child) {        
+    if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
         this.childPadding = {};
         if (typeof (childSpace) !== 'number') {
@@ -52,7 +52,9 @@ var CreateScrollableSizer = function (config) {
             if (sliderConfig === true) {
                 sliderConfig = {};
             }
-            sliderConfig.orientation = scrollableSizer.orientation;
+            // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
+            // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
+            sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
             slider = new Slider(scene, sliderConfig);
             scrollableSizer.add(slider, 0, 'center', 0, true);
         }

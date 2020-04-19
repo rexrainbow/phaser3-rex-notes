@@ -18,24 +18,24 @@ var UpdateIndicator = function (t) {
     var newWidth, newHeight;
     var thumb = this.childrenMap.thumb;
     if (thumb) {
-        if (this.orientation === 0) { // x, extend height
-            var thumbHeight = GetDisplayHeight(thumb);
-            var thumbBottom = (thumb.y - (thumbHeight * thumb.originY)) + thumbHeight;
-            newHeight = thumbBottom - this.top;
-        } else { // y, extend width
+        if (this.orientation === 0) { // x, extend width
             var thumbWidth = GetDisplayWidth(thumb);
             var thumbRight = (thumb.x - (thumbWidth * thumb.originX)) + thumbWidth;
             newWidth = thumbRight - this.left;
+        } else { // y, extend height
+            var thumbHeight = GetDisplayHeight(thumb);
+            var thumbBottom = (thumb.y - (thumbHeight * thumb.originY)) + thumbHeight;
+            newHeight = thumbBottom - this.top;
         }
     } else {
-        if (this.orientation === 0) { // x, extend height
-            newHeight = this.height * t;
-        } else { // y, extend width
+        if (this.orientation === 0) { // x, extend width
             newWidth = this.width * t;
+        } else { // y, extend eight
+            newHeight = this.height * t;
         }
     }
     ResizeGameObject(indicator, newWidth, newHeight);
-    var align = (this.orientation === 1) ? AlignLeft : AlignTop;
+    var align = (this.orientation === 0) ? AlignLeft : AlignTop;
     AlignIn(indicator, this, align);
     this.resetChildPositionState(indicator);
 }

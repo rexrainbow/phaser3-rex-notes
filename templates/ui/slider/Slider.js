@@ -42,15 +42,15 @@ class Slider extends Sizer {
                 top: paddingTop,
                 bottom: paddingBottom
             }
-            this.add(track, 0, undefined, padding, true);
+            this.add(track, 1, undefined, padding, true);
         }
 
         if (indicator) {
-            this.add(indicator, null); // Put into container but not layout it
+            this.pin(indicator); // Put into container but not layout it
         }
 
         if (thumb) {
-            this.add(thumb, null); // Put into container but not layout it
+            this.pin(thumb); // Put into container but not layout it
 
         }
 

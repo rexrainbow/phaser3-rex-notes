@@ -4,9 +4,19 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.preLayout()
+    this.preLayout(parent);
 
-    // ...
+    // Set size
+    if (newWidth === undefined) {
+        newWidth = Math.max(this.childrenWidth, this.minWidth);
+    }
+    if (newHeight === undefined) {
+        newHeight = Math.max(this.childrenHeight, this.minHeight);
+    }
+    this.resize(this.minWidth, this.minHeight);
+
+    // Layout background children
+    this.layoutBackgrounds();
 
     return this.postLayout();
 }

@@ -121,7 +121,7 @@ var slider = scene.rexUI.add.slider({
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Horizontal slider.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Vertical slider.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of slider.
-- `track` : Game object of track, optional.
+- `track` : Game object of track, optional. This track game object will be resized to fit the size of slider, with *space*.
 - `indicator` : Game object of indicator, optional.
 - `thumb` : Game object of thumb, optional.
 - `input` :
