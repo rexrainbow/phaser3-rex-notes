@@ -4952,6 +4952,7 @@
 <h3 id="background">Background<a class="headerlink" href="#background" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// sizer.addBackground(gameObject, key);</span>
+<span class="c1">// sizer.addBackground(gameObject, paddingConfig, key);</span>
 </code></pre></div>
 
 <ul>
@@ -4968,7 +4969,19 @@
 </li>
 </ul>
 </li>
-<li><code>key</code> : Get background game object back via
+<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li>A number for left/right/top/bottom bounds,</li>
+<li>Or a plain object.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li><code>key</code> : A string key. Get background game object back via
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>

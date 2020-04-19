@@ -11,6 +11,7 @@ Base class of all ui plugins.
 ```javascript
 sizer.addBackground(gameObject);
 // sizer.addBackground(gameObject, key);
+// sizer.addBackground(gameObject, paddingConfig, key);
 ```
 
 - `gameObject` : Background game object will be resized after `sizer.layout()` method.
@@ -24,7 +25,18 @@ sizer.addBackground(gameObject);
         ```
     - Custom game object which has `resize(width, height)` method.
         - *Display width*, *display height* will be changed if this background game object does not have `resize` method.
-- `key` : Get background game object back via
+- `paddingConfig` : Add space between bounds. Default is 0.
+    - A number for left/right/top/bottom bounds,
+    - Or a plain object.
+        ```javascript
+        {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        }
+        ```
+- `key` : A string key. Get background game object back via
     ```javascript
     var child = sizer.getElement(key);
     ```

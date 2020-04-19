@@ -10,19 +10,26 @@ var LayoutBackgrounds = function () {
     }
     var backgrounds = this.backgroundChildren;
 
-    var child;
     var x = this.left,
         y = this.top,
         width = this.width,
         height = this.height;
-
+    var child, childConfig, padding,
+        childTLX, childTLY, childWidth, childHeight;
     for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
         child = backgrounds[i];
-        if (child.rexSizer.hidden) {
+        childConfig = child.rexSizer;
+        if (childConfig.hidden) {
             continue;
         }
-        ResizeGameObject(child, width, height);
-        GlobZone.setPosition(x, y).setSize(width, height);
+
+        padding = childConfig.padding;
+        childTLX = x + padding.left;
+        childTLY = y + padding.top;
+        childWidth = width - padding.left - padding.right;
+        childHeight = height - padding.top - padding.bottom;
+        ResizeGameObject(child, childWidth, childHeight);
+        GlobZone.setPosition(childTLX, childTLY).setSize(childWidth, childHeight);
         AlignIn(child, GlobZone, ALIGN_CENTER);
         this.resetChildPositionState(child);
     }
