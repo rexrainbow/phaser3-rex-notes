@@ -7,21 +7,27 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
+        var print = this.add.text(0, 0, 'Click any tile');
+
         var staggeraxis = 'y';
         var staggerindex = 'odd';
         var board = this.rexBoard.add.board({
             grid: {
                 gridType: 'hexagonGrid',
-                x: 40,
-                y: 40,
+                x: 60,
+                y: 60,
                 size: 30,
                 staggeraxis: staggeraxis,
                 staggerindex: staggerindex
             }
-        });
+        })
+            .setInteractive()
+            .on('tiledown', function (pointer, tileXY) {
+                print.text = `${tileXY.x},${tileXY.y}`;
+            })
 
         var tileXYArray = board.fit(this.rexBoard.hexagonMap.hexagon(board, 4));
 
@@ -32,39 +38,18 @@ class Demo extends Phaser.Scene {
                 alpha: 1
             }
         });
-        var tileXY;
+        var tileXY, worldXY;
         for (var i in tileXYArray) {
             tileXY = tileXYArray[i];
             graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
+
+            worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y);
+            this.add.text(worldXY.x, worldXY.y, `${tileXY.x},${tileXY.y}`).setOrigin(0.5);
         }
     }
 
-    update() {}
+    update() { }
 }
-
-var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
-        y: 100,
-        cellWidth: 100,
-        cellHeight: 50,
-        type: 1
-    });
-    return grid;
-}
-
-var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    var grid = scene.rexBoard.add.hexagonGrid({
-        x: 100,
-        y: 100,
-        size: 30,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    })
-    return grid;
-};
 
 var config = {
     type: Phaser.AUTO,

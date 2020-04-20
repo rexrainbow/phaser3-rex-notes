@@ -5,6 +5,10 @@ Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid
 - Author: Rex
 - Help method of board
 
+## Live demos
+
+- [Hexagon](https://codepen.io/rexrainbow/pen/xxwEGZG)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-hexagonmap)
