@@ -2,4 +2,4 @@
 set main=./examples/avg-stage/background.js
 cd ..
 cd ..
-webpack --config webpack.config.js
+npm run preview

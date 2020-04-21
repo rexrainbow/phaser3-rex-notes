@@ -2,4 +2,4 @@
 set main=./examples/xor/xor-compress.js
 cd ..
 cd ..
-webpack --config webpack.config.js
+npm run preview

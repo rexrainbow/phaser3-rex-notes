@@ -2,4 +2,4 @@
 set main=./examples/board-moveto/wander.js
 cd ..
 cd ..
-webpack --config webpack.config.js
+npm run preview

@@ -2,4 +2,4 @@
 set main=./examples/parse-leaderboard/get-score.js
 cd ..
 cd ..
-webpack --config webpack.config.js
+npm run preview
