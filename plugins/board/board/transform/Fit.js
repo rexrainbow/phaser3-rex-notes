@@ -26,8 +26,8 @@ var Fit = function (tileXYArray) {
         maxY = Math.max(maxY, tileXY.y);
     }
     // Set board size
-    this.setBoardWidth(maxX);
-    this.setBoardHeight(maxY);
+    this.setBoardWidth(maxX + 1);
+    this.setBoardHeight(maxY + 1);
     return tileXYArray;
 }
 export default Fit;
