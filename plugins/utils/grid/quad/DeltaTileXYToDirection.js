@@ -2,8 +2,7 @@
 // Delta tileXY to direction
 
 import {
-    OrthogonalMap,
-    StaggeredMap
+    OrthogonalMap
 } from './DistanceToDeltaTileXY.js';
 
 var ReverseDirMap = function (dirMap) {
