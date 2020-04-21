@@ -22,7 +22,7 @@ var InitData = function (config, initialValue) {
                 if (setValueCallbackScope) {
                     setValueCallback.call(setValueCallbackScope, button, value, previousValue);
                 } else {
-                    setValueCallback(button, value);
+                    setValueCallback(button, value, previousValue);
                 }
             }, this)
         }
