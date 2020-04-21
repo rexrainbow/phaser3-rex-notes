@@ -14,18 +14,18 @@
 
 ### Prepare
 
-1. Install [node.js](https://nodejs.org/en/)
+1. Install [node.js](https://nodejs.org/en/) (ver 10+, for rollup)
 2. Click `install.bat`
     - `npm install`
-3. If you don't have wepback in global:
-    ```
-    npm install --global webpack
-    npm install --global webpack-cli
-    ```
 
 ### Run examples
 
 1. Click `*.bat` in folder `examples`, it will open application on browser
+
+### Export minify file of plugins
+
+1. Click `export-plugins.bat`
+    - `npm run build`
 
 ## File structure
 
