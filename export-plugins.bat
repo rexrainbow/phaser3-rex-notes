@@ -1,2 +1,3 @@
 @echo off
-webpack --config webpack.plugins.config.js
+rem webpack --config webpack.plugins.config.js
+rollup --config rollup.config.js

@@ -11,7 +11,7 @@ const pluginList = require('./plugin-list.js');
 let outputs = [];
 for (var key in pluginList) {
     let inputFile = pluginList[key];
-    let outFile = `./rollup/rex${key}.min.js`;
+    let outFile = `./dist/rex${key}.min.js`;
     let libName = `rex${key}`;
     // console.log(inputFile)
     // console.log(outFile)
