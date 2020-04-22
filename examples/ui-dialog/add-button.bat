@@ -2,4 +2,4 @@
 set main=./examples/ui-dialog/add-button.js
 cd ..
 cd ..
-npm run preview
+npm run watch

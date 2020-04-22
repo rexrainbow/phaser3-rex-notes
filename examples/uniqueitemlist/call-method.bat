@@ -2,4 +2,4 @@
 set main=./examples/uniqueitemlist/call-method.js
 cd ..
 cd ..
-npm run preview
+npm run watch

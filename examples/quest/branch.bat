@@ -2,4 +2,4 @@
 set main=./examples/quest/branch.js
 cd ..
 cd ..
-npm run preview
+npm run watch

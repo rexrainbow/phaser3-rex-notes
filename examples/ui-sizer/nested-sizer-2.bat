@@ -2,4 +2,4 @@
 set main=./examples/ui-sizer/nested-sizer-2.js
 cd ..
 cd ..
-npm run preview
+npm run watch

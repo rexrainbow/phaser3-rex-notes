@@ -2,4 +2,4 @@
 set main=./examples/ui-label/depth.js
 cd ..
 cd ..
-npm run preview
+npm run watch

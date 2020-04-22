@@ -2,4 +2,4 @@
 set main=./examples/canvas-data/texture-to-color-map.js
 cd ..
 cd ..
-npm run preview
+npm run watch

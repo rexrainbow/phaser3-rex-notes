@@ -2,4 +2,4 @@
 set main=./examples/lzstring/lzstring.js
 cd ..
 cd ..
-npm run preview
+npm run watch

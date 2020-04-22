@@ -2,4 +2,4 @@
 set main=./examples/tcrp/player.js
 cd ..
 cd ..
-npm run preview
+npm run watch

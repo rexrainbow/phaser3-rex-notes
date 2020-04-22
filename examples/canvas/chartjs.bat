@@ -2,4 +2,4 @@
 set main=./examples/canvas/chartjs.js
 cd ..
 cd ..
-npm run preview
+npm run watch

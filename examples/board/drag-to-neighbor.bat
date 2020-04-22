@@ -2,4 +2,4 @@
 set main=./examples/board/drag-to-neighbor.js
 cd ..
 cd ..
-npm run preview
+npm run watch

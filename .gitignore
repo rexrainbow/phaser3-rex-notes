@@ -1,4 +1,4 @@
 /node_modules/*
-/preview-dist/*
+/watch-dist/*
 /index.html
 package-lock.json

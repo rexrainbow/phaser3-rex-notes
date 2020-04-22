@@ -2,4 +2,4 @@
 set main=./examples/gridtable/reuse-cell-container.js
 cd ..
 cd ..
-npm run preview
+npm run watch

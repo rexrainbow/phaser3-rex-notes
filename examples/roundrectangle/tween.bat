@@ -1,4 +1,4 @@
 set main=./examples/roundrectangle/tween.js
 cd ..
 cd ..
-npm run preview
+npm run watch

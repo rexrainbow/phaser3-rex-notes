@@ -2,4 +2,4 @@
 set main=./examples/board-monopoly/move-forward.js
 cd ..
 cd ..
-npm run preview
+npm run watch

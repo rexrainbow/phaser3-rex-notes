@@ -2,4 +2,4 @@
 set main=./examples/gridtable/vary-cell-width.js
 cd ..
 cd ..
-npm run preview
+npm run watch

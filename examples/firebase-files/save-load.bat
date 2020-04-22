@@ -2,4 +2,4 @@
 set main=./examples/firebase-files/save-load.js
 cd ..
 cd ..
-npm run preview
+npm run watch

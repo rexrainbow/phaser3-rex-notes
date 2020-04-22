@@ -2,4 +2,4 @@
 set main=./examples/shader-swirl/swirl.js
 cd ..
 cd ..
-npm run preview
+npm run watch

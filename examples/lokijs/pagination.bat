@@ -2,4 +2,4 @@
 set main=./examples/lokijs/pagination.js
 cd ..
 cd ..
-npm run preview
+npm run watch

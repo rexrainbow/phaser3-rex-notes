@@ -2,4 +2,4 @@
 set main=./examples/ui-scrollablepanel/fix-width-sizer.js
 cd ..
 cd ..
-npm run preview
+npm run watch

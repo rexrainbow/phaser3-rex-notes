@@ -2,4 +2,4 @@
 set main=./examples/blitter/blitter.js
 cd ..
 cd ..
-npm run preview
+npm run watch

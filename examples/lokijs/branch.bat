@@ -2,4 +2,4 @@
 set main=./examples/lokijs/branch.js
 cd ..
 cd ..
-npm run preview
+npm run watch

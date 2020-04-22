@@ -2,4 +2,4 @@
 set main=./examples/board-bejeweled/default.js
 cd ..
 cd ..
-npm run preview
+npm run watch

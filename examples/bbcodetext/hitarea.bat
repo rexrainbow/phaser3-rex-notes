@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/hitarea.js
 cd ..
 cd ..
-npm run preview
+npm run watch

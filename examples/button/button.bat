@@ -2,4 +2,4 @@
 set main=./examples/button/button.js
 cd ..
 cd ..
-npm run preview
+npm run watch

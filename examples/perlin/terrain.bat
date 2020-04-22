@@ -2,4 +2,4 @@
 set main=./examples/perlin/terrain.js
 cd ..
 cd ..
-npm run preview
+npm run watch

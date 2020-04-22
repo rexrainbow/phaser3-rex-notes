@@ -2,4 +2,4 @@
 set main=./examples/board-pathfinder/find-path.js
 cd ..
 cd ..
-npm run preview
+npm run watch

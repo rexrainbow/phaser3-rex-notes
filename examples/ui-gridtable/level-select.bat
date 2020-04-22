@@ -2,4 +2,4 @@
 set main=./examples/ui-gridtable/level-select.js
 cd ..
 cd ..
-npm run preview
+npm run watch

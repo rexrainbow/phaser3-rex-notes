@@ -2,4 +2,4 @@
 set main=./examples/tagtext/hitarea.js
 cd ..
 cd ..
-npm run preview
+npm run watch

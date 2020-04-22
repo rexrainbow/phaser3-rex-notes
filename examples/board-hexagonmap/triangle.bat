@@ -2,4 +2,4 @@
 set main=./examples/board-hexagonmap/triangle.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/gridtable/gridtable.js
 cd ..
 cd ..
-npm run preview
+npm run watch

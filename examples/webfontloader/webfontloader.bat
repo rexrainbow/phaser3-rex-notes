@@ -2,4 +2,4 @@
 set main=./examples/webfontloader/webfontloader.js
 cd ..
 cd ..
-npm run preview
+npm run watch

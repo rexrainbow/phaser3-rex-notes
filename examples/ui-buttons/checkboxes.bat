@@ -2,4 +2,4 @@
 set main=./examples/ui-buttons/checkboxes.js
 cd ..
 cd ..
-npm run preview
+npm run watch

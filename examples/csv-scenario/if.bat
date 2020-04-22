@@ -2,4 +2,4 @@
 set main=./examples/csv-scenario/if.js
 cd ..
 cd ..
-npm run preview
+npm run watch

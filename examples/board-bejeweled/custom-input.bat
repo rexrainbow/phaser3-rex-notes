@@ -2,4 +2,4 @@
 set main=./examples/board-bejeweled/custom-input.js
 cd ..
 cd ..
-npm run preview
+npm run watch

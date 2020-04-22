@@ -2,4 +2,4 @@
 set main=./examples/scroller/scroller.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/fsm/enter-next.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/board-fieldofview/pathfinder-los.js
 cd ..
 cd ..
-npm run preview
+npm run watch

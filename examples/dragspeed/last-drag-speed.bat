@@ -2,4 +2,4 @@
 set main=./examples/dragspeed/last-drag-speed.js
 cd ..
 cd ..
-npm run preview
+npm run watch

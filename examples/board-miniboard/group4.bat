@@ -2,4 +2,4 @@
 set main=./examples/board-miniboard/group4.js
 cd ..
 cd ..
-npm run preview
+npm run watch

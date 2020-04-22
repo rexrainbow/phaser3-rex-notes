@@ -2,4 +2,4 @@
 set main=./examples/firebase-singleroom/join.js
 cd ..
 cd ..
-npm run preview
+npm run watch

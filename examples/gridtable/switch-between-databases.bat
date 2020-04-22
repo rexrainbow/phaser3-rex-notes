@@ -2,4 +2,4 @@
 set main=./examples/gridtable/switch-between-databases.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/event-promise/tween-complete.js
 cd ..
 cd ..
-npm run preview
+npm run watch

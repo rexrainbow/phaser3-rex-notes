@@ -2,4 +2,4 @@
 set main=./examples/inputtext/inputtext.js
 cd ..
 cd ..
-npm run preview
+npm run watch

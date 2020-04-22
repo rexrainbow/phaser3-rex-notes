@@ -2,4 +2,4 @@
 set main=./examples/firebase-idalias/add.js
 cd ..
 cd ..
-npm run preview
+npm run watch

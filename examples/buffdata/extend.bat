@@ -2,4 +2,4 @@
 set main=./examples/buffdata/extend.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/ui-ninepatch/3x3.js
 cd ..
 cd ..
-npm run preview
+npm run watch

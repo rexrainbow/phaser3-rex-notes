@@ -2,4 +2,4 @@
 set main=./examples/papaparser/parse-csv.js
 cd ..
 cd ..
-npm run preview
+npm run watch

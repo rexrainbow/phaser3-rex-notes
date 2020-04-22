@@ -2,4 +2,4 @@
 set main=./examples/virtualjoystick/virtualjoystick.js
 cd ..
 cd ..
-npm run preview
+npm run watch

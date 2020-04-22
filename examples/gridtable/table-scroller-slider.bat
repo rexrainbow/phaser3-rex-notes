@@ -2,4 +2,4 @@
 set main=./examples/gridtable/table-scroller-slider.js
 cd ..
 cd ..
-npm run preview
+npm run watch

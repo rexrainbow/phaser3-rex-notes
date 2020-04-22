@@ -10,7 +10,7 @@
     ],
     "main": "./plugins/index.js",
     "scripts": {
-        "preview": "webpack --config webpack.config.js",
+        "watch": "webpack --config webpack.config.js",
         "build": "rollup -c rollup.config.js"
     },
     "repository": {

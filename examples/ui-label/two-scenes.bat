@@ -1,4 +1,4 @@
 set main=./examples/ui-label/two-scenes.js
 cd ..
 cd ..
-npm run preview
+npm run watch

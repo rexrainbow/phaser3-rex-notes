@@ -2,4 +2,4 @@
 set main=./examples/awaitloader/awaitloader.js
 cd ..
 cd ..
-npm run preview
+npm run watch

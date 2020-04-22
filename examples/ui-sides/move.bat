@@ -2,4 +2,4 @@
 set main=./examples/ui-sides/move.js
 cd ..
 cd ..
-npm run preview
+npm run watch

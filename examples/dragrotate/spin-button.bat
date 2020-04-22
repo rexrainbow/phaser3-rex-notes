@@ -1,4 +1,4 @@
 set main=./examples/dragrotate/spin-button.js
 cd ..
 cd ..
-npm run preview
+npm run watch

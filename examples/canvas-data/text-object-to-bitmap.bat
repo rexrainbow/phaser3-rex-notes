@@ -2,4 +2,4 @@
 set main=./examples/canvas-data/text-object-to-bitmap.js
 cd ..
 cd ..
-npm run preview
+npm run watch

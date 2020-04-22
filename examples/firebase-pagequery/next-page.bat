@@ -2,4 +2,4 @@
 set main=./examples/firebase-pagequery/next-page.js
 cd ..
 cd ..
-npm run preview
+npm run watch

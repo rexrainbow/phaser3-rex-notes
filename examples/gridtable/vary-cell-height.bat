@@ -2,4 +2,4 @@
 set main=./examples/gridtable/vary-cell-height.js
 cd ..
 cd ..
-npm run preview
+npm run watch

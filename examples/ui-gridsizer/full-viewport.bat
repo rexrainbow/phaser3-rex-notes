@@ -2,4 +2,4 @@
 set main=./examples/ui-gridsizer/full-viewport.js
 cd ..
 cd ..
-npm run preview
+npm run watch

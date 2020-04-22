@@ -2,4 +2,4 @@
 set main=./examples/csv-scenario/wait.js
 cd ..
 cd ..
-npm run preview
+npm run watch

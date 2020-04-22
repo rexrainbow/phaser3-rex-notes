@@ -2,4 +2,4 @@
 set main=./examples/csv-to-array/csv-to-array.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/board/filled-ring-tileXY-array.js
 cd ..
 cd ..
-npm run preview
+npm run watch

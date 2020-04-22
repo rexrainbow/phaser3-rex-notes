@@ -2,4 +2,4 @@
 set main=./examples/run-sequence/run-sequence.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/container-lite/tween.js
 cd ..
 cd ..
-npm run preview
+npm run watch

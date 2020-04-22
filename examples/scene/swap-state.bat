@@ -1,4 +1,4 @@
 set main=./examples/scene/swap-state.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/persistence-effect/drag-footprint.js
 cd ..
 cd ..
-npm run preview
+npm run watch

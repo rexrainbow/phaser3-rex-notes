@@ -2,4 +2,4 @@
 set main=./examples/ui-dialog/single-choice-dialog.js
 cd ..
 cd ..
-npm run preview
+npm run watch

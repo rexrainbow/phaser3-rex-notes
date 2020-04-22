@@ -2,4 +2,4 @@
 set main=./examples/board-hexagonmap/parallelogram.js
 cd ..
 cd ..
-npm run preview
+npm run watch

@@ -2,4 +2,4 @@
 set main=./examples/firebase-leaderboard/post-debug.js
 cd ..
 cd ..
-npm run preview
+npm run watch
