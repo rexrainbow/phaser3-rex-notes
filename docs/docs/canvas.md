@@ -169,6 +169,26 @@ var canvas = scene.make.rexCanvas({
     canvas.loadTexture(key, resize);
     ```
 
+### Load image from URL
+
+```javascript
+canvas.loadFromURL(url);
+// canvas.loadFromURL(url, callback);
+```
+
+- `url` : Image url/uri(base64 string)
+- `callback` : Load complete callback.
+
+or
+
+```javascript
+canvas.loadFromURLPromise(url)
+    .then(function() {
+        
+    })
+```
+
+
 ### Pixel color
 
 - Get color
