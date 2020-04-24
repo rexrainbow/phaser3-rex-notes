@@ -14,6 +14,29 @@ export default {
         return this;
     },
 
+    loadFromURL(url, callback) {
+        var self = this;
+        var img = new Image();
+        img.onload = function () {
+            self.resize(img.width, img.height);
+            self.context.drawImage(img, 0, 0);
+            self.updateTexture();
+
+            if (callback) {
+                callback();
+            }
+        }
+        img.src = url;
+        return this;
+    },
+
+    loadFromURLPromise(url) {
+        var self = this;
+        return new Promise(function (resolve, reject) {
+            self.loadFromURL(url, resolve);
+        });
+    },
+
     getPixel(x, y, out) {
         if (out === undefined) {
             out = new Color();
