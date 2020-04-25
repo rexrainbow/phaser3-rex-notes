@@ -1,4 +1,7 @@
-import StopPropagationTouchEvents from '../../utils/input/StopPropagationTouchEvents.js';
+import Resize from '../utils/Resize.js';
+import SetPrpoerties from '../utils/SetProperties.js';
+import RouteEvents from '../utils/RouteEvents.js';
+import StopPropagationTouchEvents from '../../../utils/input/StopPropagationTouchEvents.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -10,29 +13,16 @@ class InputText extends DOMElement {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
+            width = GetValue(config, 'width', 1);
+            height = GetValue(config, 'height', 1);
         } else if (IsPlainObject(width)) {
             config = width;
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
+            width = GetValue(config, 'width', 1);
+            height = GetValue(config, 'height', 1);
         }
 
         if (config === undefined) {
             config = {};
-        }
-        var autoRound = scene.scale.autoRound;
-        if (width !== undefined) {
-            if (autoRound) {
-                width = Math.floor(width);
-            }
-            config.width = width + 'px';
-        }
-        if (height !== undefined) {
-            if (autoRound) {
-                height = Math.floor(height);
-            }
-            config.height = height + 'px';
         }
 
         var element;
@@ -45,29 +35,10 @@ class InputText extends DOMElement {
             element.type = textType;
         }
 
-        // Apply registed style properties
-        var elemProp, elemPropValue;
-        for (var key in ElementProperties) {
-            elemProp = ElementProperties[key];
-            elemPropValue = GetValue(config, key, elemProp[1]);
-            if (elemPropValue !== undefined) {
-                element[elemProp[0]] = elemPropValue;
-            }
-        }
+        SetPrpoerties(ElementProperties, config, element);
 
         var style = GetValue(config, 'style', undefined);
-        if (style === undefined) {
-            style = {};
-        }
-        // Apply registed style properties
-        var styleProp, stylePropValue;
-        for (var key in StyleProperties) {
-            styleProp = StyleProperties[key];
-            stylePropValue = GetValue(config, key, styleProp[1]);
-            if (stylePropValue !== undefined) {
-                style[styleProp[0]] = stylePropValue;
-            }
-        }
+        style = SetPrpoerties(StyleProperties, config, style);
         // Apply other style properties
         var elementStyle = element.style;
         for (var key in config) {
@@ -80,24 +51,13 @@ class InputText extends DOMElement {
         style['box-sizing'] = 'border-box';
         super(scene, x, y, element, style);
         this.type = 'rexInputText';
+        this.resize(width, height);
 
         // Apply events
-        for (let eventName in ElementEvents) { // Note: Don't use `var` here
-            this.node[ElementEvents[eventName]] = (function () {
-                this.emit(eventName, this);
-            }).bind(this);
-        }
+        RouteEvents(this, this.node, ElementEvents);
 
         // Don't propagate touch/mouse events to parent(game canvas)
         StopPropagationTouchEvents(this.node);
-    }
-
-    resize(width, height) {
-        var style = this.node.style;
-        style.width = width + 'px';
-        style.height = height + 'px';
-        this.updateSize();
-        return this;
     }
 
     get text() {
@@ -211,6 +171,15 @@ class InputText extends DOMElement {
     }
 }
 
+var methods = {
+    resize: Resize
+}
+
+Object.assign(
+    InputText.prototype,
+    methods
+);
+
 const ElementProperties = {
     id: ['id', undefined],
     text: ['value', undefined],
@@ -223,8 +192,6 @@ const ElementProperties = {
 
 const StyleProperties = {
     align: ['textAlign', undefined],
-    width: ['width', undefined],
-    height: ['height', undefined],
     paddingLeft: ['padding-left', undefined],
     paddingRight: ['padding-right', undefined],
     paddingTop: ['padding-top', undefined],

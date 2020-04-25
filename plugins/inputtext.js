@@ -1,6 +1,6 @@
-import Factory from './gameobjects/inputtext/Factory.js';
-import Creator from './gameobjects/inputtext/Creator.js';
-import InputText from './gameobjects/inputtext/InputText.js';
+import Factory from './gameobjects/dom/inputtext/Factory.js';
+import Creator from './gameobjects/dom/inputtext/Creator.js';
+import InputText from './gameobjects/dom/inputtext/InputText.js';
 
 Phaser.GameObjects.GameObjectFactory.register('rexInputText', Factory);
 Phaser.GameObjects.GameObjectCreator.register('rexInputText', Creator);

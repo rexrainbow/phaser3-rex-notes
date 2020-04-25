@@ -1,3 +1,4 @@
+import Resize from '../utils/Resize.js';
 import LoadAPI from './LoadAPI.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
@@ -11,29 +12,16 @@ class YoutubePlayer extends DOMElement {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
+            width = GetValue(config, 'width', 1);
+            height = GetValue(config, 'height', 1);
         } else if (IsPlainObject(width)) {
             config = width;
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
+            width = GetValue(config, 'width', 1);
+            height = GetValue(config, 'height', 1);
         }
 
         if (config === undefined) {
             config = {};
-        }
-        var autoRound = scene.scale.autoRound;
-        if (width !== undefined) {
-            if (autoRound) {
-                width = Math.floor(width);
-            }
-            config.width = width + 'px';
-        }
-        if (height !== undefined) {
-            if (autoRound) {
-                height = Math.floor(height);
-            }
-            config.height = height + 'px';
         }
 
         super(scene, x, y);
@@ -48,9 +36,8 @@ class YoutubePlayer extends DOMElement {
         var elementId = 'YT' + Date.now();
         var element = document.createElement('div');
         element.id = elementId;
-        element.style.width = config.width;
-        element.style.height = config.height;
         this.setElement(element);
+        this.resize(width, height);
 
         // Create youtube player iframe when API ready
         var playerVars = {
@@ -255,18 +242,15 @@ class YoutubePlayer extends DOMElement {
         this.loop = value;
         return this;
     }
-
-    resize(width, height) {
-        if ((this.width === width) && (this.height === height)) {
-            return this;
-        }
-
-        var style = this.node.style;
-        style.width = width + 'px';
-        style.height = height + 'px';
-        this.updateSize();
-        return this;
-    }
 }
+
+var methods = {
+    resize: Resize
+}
+
+Object.assign(
+    YoutubePlayer.prototype,
+    methods
+);
 
 export default YoutubePlayer;

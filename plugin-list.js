@@ -161,7 +161,6 @@ module.exports = {
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
     'sides': './templates/ui/sides/Sides.js',
-    'youtubeplayer': './templates/ui/youtubeplayer/YoutubePlayer.js',
     // others
     'firebase': './plugins/firebase.js',
     'parse': './plugins/parse.js'

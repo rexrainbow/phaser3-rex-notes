@@ -8,7 +8,6 @@ import CanvasFactory from './canvas/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
 import ChartFactory from './chart/Factory.js';
 import NinePatchFactory from './ninepatch/Factory.js';
-import YoutubePlayerFactory from './youtubeplayer/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';
 import GridSizerFactory from './gridsizer/Factory.js';

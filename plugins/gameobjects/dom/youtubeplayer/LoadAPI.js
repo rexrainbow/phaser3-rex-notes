@@ -1,4 +1,4 @@
-import LoadScript from '../../utils/loader/LoadScript.js';
+import LoadScript from '../../../utils/loader/LoadScript.js';
 
 var IsAPIReady = false;
 var LoadAPI = function (onLoaded) {

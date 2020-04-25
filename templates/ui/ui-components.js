@@ -6,7 +6,6 @@ import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import Chart from './chart/Chart.js';
 import NinePatch from './ninepatch/NinePatch.js';
-import YoutubePlayer from './youtubeplayer/YoutubePlayer.js';
 
 import Sizer from './sizer/Sizer.js';
 import GridSizer from './gridsizer/GridSizer.js';
@@ -57,7 +56,6 @@ export {
     CircleMaskImage,
     Chart,
     NinePatch,
-    YoutubePlayer,
 
     Sizer,
     GridSizer,
