@@ -57,6 +57,7 @@
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon geometry object.
+1. [Image URI loader](imageuriloader.md): Load image by uri in preload stage.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.

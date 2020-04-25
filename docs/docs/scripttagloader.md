@@ -21,7 +21,7 @@ Load script tag in preload stage.
             files: [{
                 type: 'plugin',
                 key: 'rexscripttagloaderplugin',
-                url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/    rexscripttagloaderplugin.min.js',
+                url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexscripttagloaderplugin.min.js',
                 start: true
             }]
         }

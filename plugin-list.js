@@ -17,6 +17,7 @@ module.exports = {
     'webfontloaderplugin': './plugins/webfontloader-plugin.js',
     'awaitloaderplugin': './plugins/awaitloader-plugin.js',
     'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
+    'imageuriloaderplugin': './plugins/imageuriloader-plugin.js',
 
     // actions                    
     'gridalignplugin': './plugins/gridalign-plugin.js',

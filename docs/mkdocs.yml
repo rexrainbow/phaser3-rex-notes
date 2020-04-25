@@ -19,6 +19,7 @@ nav:
     - Webfont loader: webfontloader.md
     - Await loader: awaitloader.md
     - Script tag loader: scripttagloader.md
+    - Image URI loader: imageuriloader.md
 - Game object:
     - Game object: gameobject.md
     - Sprite:
