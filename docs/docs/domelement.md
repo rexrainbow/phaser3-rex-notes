@@ -46,6 +46,18 @@ var game = new Phaser.Game(config);
         var domElement = scene.add.dom(x, y).createFromHTML(htmlString);  // elementType = 'div'
         // var domElement = scene.add.dom(x, y).createFromHTML(htmlString, elementType);
         ```
+        - `elementType : The tag name of the element into which all of the html will be inserted. Defaults to a plain div tag.
+
+#### Create element
+
+```javascript
+scene.add.dom(x, y).createElement(tagName);
+// scene.add.dom(x, y).createElement(tagName, style, innerText);
+```
+
+- `tagName` : A string that specifies the type of element to be created. For example, `'div'`
+- `style` : Either a DOMString that holds the CSS styles to be applied to the created element, or an object the styles will be readyfrom. Optional.
+- `innerText` : A DOMString that holds the text that will be set as the innerText of the created element. Optional.
 
 #### Add existing DOM
 
@@ -157,6 +169,15 @@ Each DOM element object has 1 DOM element.
 
 ```javascript
 domElement.setDepth(value);
+```
+
+### Set size
+
+```javascript
+var style = domElement.node.style;
+style.width = width + 'px';
+style.height = height + 'px';
+domElement.updateSize();
 ```
 
 ### Skew

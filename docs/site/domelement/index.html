@@ -1469,6 +1469,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-element" class="md-nav__link">
+    Create element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-existing-dom" class="md-nav__link">
     Add existing DOM
   </a>
@@ -1518,6 +1525,13 @@
           <li class="md-nav__item">
   <a href="#depth" class="md-nav__link">
     Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-size" class="md-nav__link">
+    Set size
   </a>
   
 </li>
@@ -4841,6 +4855,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-element" class="md-nav__link">
+    Create element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-existing-dom" class="md-nav__link">
     Add existing DOM
   </a>
@@ -4890,6 +4911,13 @@
           <li class="md-nav__item">
   <a href="#depth" class="md-nav__link">
     Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-size" class="md-nav__link">
+    Set size
   </a>
   
 </li>
@@ -4981,10 +5009,23 @@
 <li>Add DOM element object with html string
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">domElement</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">).</span><span class="nx">createFromHTML</span><span class="p">(</span><span class="nx">htmlString</span><span class="p">);</span>  <span class="c1">// elementType = &#39;div&#39;</span>
 <span class="c1">// var domElement = scene.add.dom(x, y).createFromHTML(htmlString, elementType);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>`elementType : The tag name of the element into which all of the html will be inserted. Defaults to a plain div tag.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
+<h4 id="create-element">Create element<a class="headerlink" href="#create-element" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dom</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">).</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">tagName</span><span class="p">);</span>
+<span class="c1">// scene.add.dom(x, y).createElement(tagName, style, innerText);</span>
+</code></pre></div>
+
+<ul>
+<li><code>tagName</code> : A string that specifies the type of element to be created. For example, <code>'div'</code></li>
+<li><code>style</code> : Either a DOMString that holds the CSS styles to be applied to the created element, or an object the styles will be readyfrom. Optional.</li>
+<li><code>innerText</code> : A DOMString that holds the text that will be set as the innerText of the created element. Optional.</li>
+</ul>
 <h4 id="add-existing-dom">Add existing DOM<a class="headerlink" href="#add-existing-dom" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create DOM element
@@ -5088,6 +5129,13 @@
 </ul>
 <h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">domElement</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">domElement</span><span class="p">.</span><span class="nx">node</span><span class="p">.</span><span class="nx">style</span><span class="p">;</span>
+<span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+<span class="nx">style</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">;</span>
+<span class="nx">domElement</span><span class="p">.</span><span class="nx">updateSize</span><span class="p">();</span>
 </code></pre></div>
 
 <h3 id="skew">Skew<a class="headerlink" href="#skew" title="Permanent link">&para;</a></h3>
