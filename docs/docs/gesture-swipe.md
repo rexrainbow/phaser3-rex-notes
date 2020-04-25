@@ -121,7 +121,7 @@ Get swipe events of a game object.
 #### Swipe
 
 ```javascript
-swipe.on('swipe', function(swipe){
+swipe.on('swipe', function(swipe, gameObject, lastPointer){
 }, scope);
 ```
 
@@ -129,3 +129,5 @@ swipe.on('swipe', function(swipe){
 - `swipe.worldX`, `swipe.worldY` : World position of swiping start.
 - `swipe.x`, `swipe.y` : Scene position of swiping start.
 - `swipe.dragVelocity` : Velocity of dragging.
+- `gameObject`, `swipe.gameObject` : Parent gameobject of this pan behavior.
+- `lastPointer` : Last touch pointer.

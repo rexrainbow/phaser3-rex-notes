@@ -113,17 +113,19 @@ Get press events of a game object.
 #### Pressing start
 
 ```javascript
-press.on('pressstart', function(press){
+press.on('pressstart', function(press, gameObject, lastPointer){
 }, scope);
 ```
 
 - `press.gameObject` : Parent gameobject of this press behavior.
 - `press.worldX`, `press.worldY` : World position of pressing start.
 - `press.x`, `press.y` : Scene position of pressing start.
+- `gameObject`, `press.gameObject` : Parent gameobject of this press behavior.
+- `lastPointer` : Last touch pointer.
 
 #### Pressing end
 
 ```javascript
-press.on('pressend', function(press){
+press.on('pressend', function(press, gameObject, lastPointer){
 }, scope);
 ```

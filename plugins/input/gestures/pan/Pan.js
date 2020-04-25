@@ -75,7 +75,7 @@ class Pan extends OnePointerTracer {
                 self.y = pointer.y;
                 self.worldX = pointer.worldX;
                 self.worldY = pointer.worldY;
-                this.emit('pan', this);
+                this.emit('pan', this, this.gameObject, this.lastPointer);
                 break;
         }
     }

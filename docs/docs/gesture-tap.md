@@ -133,18 +133,19 @@ Get tap/multi-taps events of a game object.
 #### Tap
 
 ```javascript
-tap.on('tap', function(tap){
+tap.on('tap', function(tap, gameObject, lastPointer){
 }, scope);
 ```
 
 - `tap.tapsCount` : Taps count.
-- `tap.gameObject` : Parent gameobject of this tap behavior.
+- `gameObject`, `tap.gameObject` : Parent gameobject of this tap behavior.
 - `tap.worldX`, `tap.worldY` : World position of first tapping.
 - `tap.x`, `tap.y` : Scene position of first tapping.
+- `lastPointer` : Last touch pointer.
 
 
 ```javascript
-tap.on(tapsCount + 'tap', function(tap){
+tap.on(tapsCount + 'tap', function(tap, gameObject, lastPointer){
 }, scope);
 ```
 

@@ -110,30 +110,36 @@ Get pan events of a game object.
 #### Pan
 
 ```javascript
-pan.on('pan', function(pan){
+pan.on('pan', function(pan, gameObject, lastPointer){
 }, scope);
 ```
 
 - `pan.dx`, `pan.dy` : Vector from previous pointer to current pointer.
 - `pan.worldX`, `pan.worldY` : World position of current pointer.
 - `pan.x`, `pan.y` : Scene position of current pointer.
+- `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.
+- `lastPointer` : Last touch pointer.
 
 #### Pan start
 
 ```javascript
-pan.on('panstart', function(pan){
+pan.on('panstart', function(pan, gameObject, lastPointer){
 }, scope);
 ```
 
 - `pan.startWorldX`, `pan.startWorldY` : World position of pan-start pointer.
 - `pan.startX`, `pan.startY` : Scene position of pan-start pointer.
+- `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.
+- `lastPointer` : Last touch pointer.
 
 #### Pan end
 
 ```javascript
-pan.on('panend', function(pan){
+pan.on('panend', function(pan, gameObject, lastPointer){
 }, scope);
 ```
 
 - `pan.endWorldX`, `pan.endWorldY` : World position of pan-end pointer.
 - `pan.endX`, `pan.endY` : Scene position of pan-end pointer.
+- `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.
+- `lastPointer` : Last touch pointer.

@@ -5009,7 +5009,7 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="swipe">Swipe<a class="headerlink" href="#swipe" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swipe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">swipe</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swipe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">swipe</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
@@ -5018,6 +5018,8 @@
 <li><code>swipe.worldX</code>, <code>swipe.worldY</code> : World position of swiping start.</li>
 <li><code>swipe.x</code>, <code>swipe.y</code> : Scene position of swiping start.</li>
 <li><code>swipe.dragVelocity</code> : Velocity of dragging.</li>
+<li><code>gameObject</code>, <code>swipe.gameObject</code> : Parent gameobject of this pan behavior.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
                 
                   

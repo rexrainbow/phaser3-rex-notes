@@ -38,10 +38,10 @@ class InputText extends DOMElement {
         var element;
         var textType = GetValue(config, 'type', 'text');
         if (textType === 'textarea') {
-            element = document.createElement("textarea");
+            element = document.createElement('textarea');
             element.style.resize = 'none';
         } else {
-            element = document.createElement("input");
+            element = document.createElement('input');
             element.type = textType;
         }
 

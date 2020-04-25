@@ -5053,17 +5053,18 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="tap">Tap<a class="headerlink" href="#tap" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>tap.tapsCount</code> : Taps count.</li>
-<li><code>tap.gameObject</code> : Parent gameobject of this tap behavior.</li>
+<li><code>gameObject</code>, <code>tap.gameObject</code> : Parent gameobject of this tap behavior.</li>
 <li><code>tap.worldX</code>, <code>tap.worldY</code> : World position of first tapping.</li>
 <li><code>tap.x</code>, <code>tap.y</code> : Scene position of first tapping.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
-<div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 

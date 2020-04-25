@@ -5013,7 +5013,7 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="pressing-start">Pressing start<a class="headerlink" href="#pressing-start" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
@@ -5021,9 +5021,11 @@
 <li><code>press.gameObject</code> : Parent gameobject of this press behavior.</li>
 <li><code>press.worldX</code>, <code>press.worldY</code> : World position of pressing start.</li>
 <li><code>press.x</code>, <code>press.y</code> : Scene position of pressing start.</li>
+<li><code>gameObject</code>, <code>press.gameObject</code> : Parent gameobject of this press behavior.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
 <h4 id="pressing-end">Pressing end<a class="headerlink" href="#pressing-end" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
                 

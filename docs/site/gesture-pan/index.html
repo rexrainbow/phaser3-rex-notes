@@ -5024,7 +5024,7 @@
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="pan">Pan<a class="headerlink" href="#pan" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pan&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pan&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
@@ -5032,24 +5032,30 @@
 <li><code>pan.dx</code>, <code>pan.dy</code> : Vector from previous pointer to current pointer.</li>
 <li><code>pan.worldX</code>, <code>pan.worldY</code> : World position of current pointer.</li>
 <li><code>pan.x</code>, <code>pan.y</code> : Scene position of current pointer.</li>
+<li><code>gameObject</code>, <code>pan.gameObject</code> : Parent gameobject of this pan behavior.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
 <h4 id="pan-start">Pan start<a class="headerlink" href="#pan-start" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;panstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;panstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>pan.startWorldX</code>, <code>pan.startWorldY</code> : World position of pan-start pointer.</li>
 <li><code>pan.startX</code>, <code>pan.startY</code> : Scene position of pan-start pointer.</li>
+<li><code>gameObject</code>, <code>pan.gameObject</code> : Parent gameobject of this pan behavior.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
 <h4 id="pan-end">Pan end<a class="headerlink" href="#pan-end" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;panend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">){</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;panend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pan</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>pan.endWorldX</code>, <code>pan.endWorldY</code> : World position of pan-end pointer.</li>
 <li><code>pan.endX</code>, <code>pan.endY</code> : Scene position of pan-end pointer.</li>
+<li><code>gameObject</code>, <code>pan.gameObject</code> : Parent gameobject of this pan behavior.</li>
+<li><code>lastPointer</code> : Last touch pointer.</li>
 </ul>
                 
                   
