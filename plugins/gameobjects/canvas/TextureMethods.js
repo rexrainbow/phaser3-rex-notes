@@ -85,7 +85,7 @@ export default {
         if ((this.width !== textureFrame.cutWidth) || (this.height !== textureFrame.cutHeight)) {
             this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
         } else {
-            this.context.clearRect(0, 0, textureFrame.cutWidth, textureFrame.cutHeight);
+            this.clear();
         }
         this.context.drawImage(textureFrame.source.image,
             textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,

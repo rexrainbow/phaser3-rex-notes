@@ -2,7 +2,7 @@
 
 Load image by uri (base64 string) in preload stage.
 
-Built-in image loader (`scene.load.image(key, url)`) dosen't support loading local image uri.
+Built-in [image loader](loader.md#image) dosen't support loading local image uri.
 
 - Author: Rex
 - Custom File of loader

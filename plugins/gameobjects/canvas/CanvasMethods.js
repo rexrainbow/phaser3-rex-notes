@@ -18,7 +18,11 @@ export default {
         var self = this;
         var img = new Image();
         img.onload = function () {
-            self.resize(img.width, img.height);
+            if ((self.width !== img.width) || (self.height !== img.height)) {
+                self.resize(img.width, img.height);
+            } else {
+                self.clear();
+            }
             self.context.drawImage(img, 0, 0);
             self.updateTexture();
 
