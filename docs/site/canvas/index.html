@@ -1326,6 +1326,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-image-from-url" class="md-nav__link">
+    Load image from URL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pixel-color" class="md-nav__link">
     Pixel color
   </a>
@@ -4890,6 +4897,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-image-from-url" class="md-nav__link">
+    Load image from URL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pixel-color" class="md-nav__link">
     Pixel color
   </a>
@@ -5077,6 +5091,22 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="load-image-from-url">Load image from URL<a class="headerlink" href="#load-image-from-url" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadFromURL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+<span class="c1">// canvas.loadFromURL(url, callback);</span>
+</code></pre></div>
+
+<ul>
+<li><code>url</code> : Image url/uri(base64 string)</li>
+<li><code>callback</code> : Load complete callback.</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadFromURLPromise</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">})</span>
+</code></pre></div>
+
 <h3 id="pixel-color">Pixel color<a class="headerlink" href="#pixel-color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get color
