@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
         domElement.node.addEventListener('change', function (e) {
             var reader = new FileReader();
             reader.onload = function (event) {
-                canvas.clear().loadFromURL(event.target.result);
+                canvas.loadFromURL(event.target.result);
             }
             reader.readAsDataURL(e.target.files[0]);
         }, false);
