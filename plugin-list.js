@@ -9,6 +9,7 @@ module.exports = {
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
+    'filechooserplugin': './plugins/filechooser-plugin.js',
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
