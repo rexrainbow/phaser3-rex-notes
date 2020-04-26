@@ -7,10 +7,11 @@ var CreateHiddenFileInput = function (config) {
     style.width = '0px';
     style.height = '0px';
 
-    // config.accept
-    fileInput.setAttribute('accept', GetValue(config, 'accept', ''));
-    // config.multiple
-    if (GetValue(config, 'multiple', false)) {
+    var accept = GetValue(config, 'accept', '');
+    var multiple = GetValue(config, 'multiple', false);
+
+    fileInput.setAttribute('accept', accept);
+    if (multiple) {
         fileInput.setAttribute('multiple', '');
     } else {
         fileInput.removeAttribute('multiple');
