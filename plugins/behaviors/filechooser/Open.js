@@ -7,7 +7,7 @@ var Open = function (scene, config) {
     fileInput.click();
     return WaitEvent(scene.game.events, 'focus')
         .then(function () {
-            return Delay(60); // ??
+            return Delay(100); // ??
         })
         .then(function () {
             var result = {
