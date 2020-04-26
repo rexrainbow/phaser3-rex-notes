@@ -9,8 +9,8 @@ var Resize = function (width, height) {
     }
 
     var style = this.node.style;
-    style.width = width + 'px';
-    style.height = height + 'px';
+    style.width = `${width}px`;
+    style.height = `${height}px`;
     this.updateSize();
     return this;
 }
