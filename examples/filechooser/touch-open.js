@@ -1,4 +1,4 @@
-import FileChooserPlugin from '../../plugins/filechooser-plugin.js'
+import Open from '../../plugins/behaviors/filechooser/Open.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -10,20 +10,22 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        // Create a 0x0 file chooser, and it won't place in dom actually
-        var fileChooser = this.add.rexFileChooser({
-            accept: '.png'
-        })
-            .on('change', function (gameObject) {
-                console.log(gameObject.files);
-            })
+        var print = this.add.text(0, 0, 'Click rectangle to select a file');
 
+        var scene = this;
         this.add.rectangle(400, 300, 30, 30, 0x0000ff)
             .setInteractive()
             .on('pointerdown', function () {
-                fileChooser.open();
+                Open(scene, { accept: '.png' })
+                    .then(function (result) {
+                        var files = result.files;
+                        if (files.length) {
+                            print.text = files[0].name;
+                        } else {
+                            print.text = 'Mo file selected'
+                        }
+                    })
             })
-
     }
 
     update() { }
@@ -38,14 +40,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexFileChooser',
-            plugin: FileChooserPlugin,
-            start: true
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
