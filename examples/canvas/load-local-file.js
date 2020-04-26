@@ -14,15 +14,16 @@ class Demo extends Phaser.Scene {
     create() {
         var htmlString = '<input type="file"/>';
         var domElement = this.add.dom(0, 0).setOrigin(0).createFromHTML(htmlString);
-        var canvas = this.add.rexCanvas(400, 300);
+        var fileInputElement = domElement.node;
 
-        domElement.node.addEventListener('change', function (e) {
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                canvas.loadFromURL(event.target.result);
-            }
-            reader.readAsDataURL(e.target.files[0]);
-        }, false);
+        var canvas = this.add.rexCanvas(400, 300);
+        fileInputElement.addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            canvas.loadFromURLPromise(URL.createObjectURL(file))
+                .then(function () {
+                    URL.revokeObjectURL(file);
+                })
+        });
     }
 
     update() {
