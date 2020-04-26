@@ -18,9 +18,11 @@ class Demo extends Phaser.Scene {
                 console.log(gameObject.files);
             })
 
-        this.input.on('pointerup', function () {
-            fileChooser.open();
-        })
+        this.add.rectangle(400, 300, 30, 30, 0x0000ff)
+            .setInteractive()
+            .on('pointerdown', function () {
+                fileChooser.open();
+            })
 
     }
 
