@@ -1,7 +1,7 @@
 var RouteEvents = function (gameObject, element, elementEvents) {
     for (let eventName in elementEvents) { // Note: Don't use `var` here
-        element[elementEvents[eventName]] = function () {
-            gameObject.emit(eventName, gameObject);
+        element[elementEvents[eventName]] = function (e) {
+            gameObject.emit(eventName, gameObject, e);
         };
     }
 }

@@ -243,21 +243,21 @@ inputText.resize(width, height);
 
 - On text changed
     ```javascript
-    inputText.on('textchange', function(inputText){ }, scope);
+    inputText.on('textchange', function(inputText, e){ }, scope);
     ```
 - On focus
     ```javascript
-    inputText.on('focus', function(inputText){ }, scope);
+    inputText.on('focus', function(inputText, e){ }, scope);
     ```
 - On blur
     ```javascript
-    inputText.on('blur', function(inputText){ }, scope);
+    inputText.on('blur', function(inputText, e){ }, scope);
     ```
 - On click, double click
     ```javascript
-    inputText.on('click', function(inputText){ }, scope);
+    inputText.on('click', function(inputText, e){ }, scope);
     ```
     ```javascript
-    inputText.on('dblclick', function(inputText){ }, scope);
+    inputText.on('dblclick', function(inputText, e){ }, scope);
     ```
     Touch/mouse events on input text object won't be propagated to game canvas.

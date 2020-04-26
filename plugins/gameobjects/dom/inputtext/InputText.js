@@ -54,10 +54,10 @@ class InputText extends DOMElement {
         this.resize(width, height);
 
         // Apply events
-        RouteEvents(this, this.node, ElementEvents);
+        RouteEvents(this, element, ElementEvents);
 
         // Don't propagate touch/mouse events to parent(game canvas)
-        StopPropagationTouchEvents(this.node);
+        StopPropagationTouchEvents(element);
     }
 
     get text() {
