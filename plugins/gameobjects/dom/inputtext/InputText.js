@@ -13,12 +13,12 @@ class InputText extends DOMElement {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 0);
+            height = GetValue(config, 'height', 0);
         } else if (IsPlainObject(width)) {
             config = width;
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 0);
+            height = GetValue(config, 'height', 0);
         }
 
         if (config === undefined) {

@@ -12,12 +12,12 @@ class FileChooser extends DOMElement {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 0);
+            height = GetValue(config, 'height', 0);
         } else if (IsPlainObject(width)) {
             config = width;
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            width = GetValue(config, 'width', 0);
+            height = GetValue(config, 'height', 0);
         }
 
         // Create a hidden file input
@@ -41,8 +41,17 @@ class FileChooser extends DOMElement {
         RouteEvents(this, inputElement, InputElementEvents);
     }
 
+    get fileInput() {
+        return this.node.children[0];
+    }
+
+    open() { // Only work under any touch event
+        this.fileInput.click();
+        return this;
+    }
+
     get files() {
-        return this.node.children[0].files;
+        return this.fileInput.files;
     }
 }
 
