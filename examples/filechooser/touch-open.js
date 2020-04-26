@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
                         if (files.length) {
                             print.text = files[0].name;
                         } else {
-                            print.text = 'Mo file selected'
+                            print.text = 'No file selected'
                         }
                     })
             })
