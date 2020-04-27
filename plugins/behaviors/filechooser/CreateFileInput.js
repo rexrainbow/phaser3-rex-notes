@@ -1,11 +1,8 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CreateHiddenFileInput = function (config) {
+var CreateFileInput = function (config) {
     var fileInput = document.createElement('input');
     fileInput.type = 'file';
-    var style = fileInput.style;
-    style.width = '0px';
-    style.height = '0px';
 
     var accept = GetValue(config, 'accept', '');
     var multiple = GetValue(config, 'multiple', false);
@@ -20,4 +17,4 @@ var CreateHiddenFileInput = function (config) {
     return fileInput;
 }
 
-export default CreateHiddenFileInput;
+export default CreateFileInput;
