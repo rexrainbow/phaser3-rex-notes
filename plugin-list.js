@@ -62,6 +62,9 @@ module.exports = {
     'textpageplugin': './plugins/textpage-plugin.js',
     'texteditplugin': './plugins/textedit-plugin.js',
 
+    // file chooser
+    'filechooserplugin': './plugins/filechooser-plugin.js',
+
     // member of scene
     // sound
     'soundfadeplugin': './plugins/soundfade-plugin.js',

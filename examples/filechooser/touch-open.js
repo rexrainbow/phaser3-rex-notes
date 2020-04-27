@@ -1,4 +1,4 @@
-import Open from '../../plugins/behaviors/filechooser/Open.js'
+import FileChooserPlugin from '../../plugins/filechooser-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         this.add.rectangle(400, 300, 30, 30, 0x0000ff)
             .setInteractive()
             .on('pointerdown', function () {
-                Open(scene, { accept: '.png' })
+                scene.plugins.get('rexFileChooser').open({ accept: 'image/*' })
                     .then(function (result) {
                         var files = result.files;
                         if (files.length) {
@@ -40,7 +40,16 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [
+            {
+                key: 'rexFileChooser',
+                plugin: FileChooserPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

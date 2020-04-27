@@ -45,6 +45,7 @@ import {
     IsShown,
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
+import OpenFileChooser from '../../plugins/behaviors/filechooser/Open.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 
 export {
@@ -94,6 +95,7 @@ export {
     Hide,
     IsShown,
     Edit,
+    OpenFileChooser,
     WaitEvent,
     WaitComplete
 }

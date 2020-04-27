@@ -47,6 +47,7 @@ import {
     IsShown,
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
+import OpenFileChooser from '../../plugins/behaviors/filechooser/Open.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js'
 
@@ -55,6 +56,10 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         super(scene, pluginManager);
 
         this.add = new ObjectFactory(scene);
+    }
+
+    openFileChooser(config) {
+        return OpenFileChooser(this.game, config);
     }
 
     get viewport() {
