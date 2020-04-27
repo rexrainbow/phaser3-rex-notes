@@ -169,20 +169,8 @@ game.destroy();
 // game.destroy(removeCanvas, noReturn);
 ```
 
-- Also fires game.events `destroy` event.
 - `removeCanvas` : Set to `true` if you would like the parent canvas element removed from the DOM, or `false` to leave it in place.
 - `noReturn` : If `true` all the core Phaser plugins are destroyed. You cannot create another instance of Phaser on the same web page if you do this.
-
-## Pause / Resume events
-
-- Pause (window is invisible)
-    ```javascript
-    game.events.on('pause', function() {});
-    ```
-- Resume (window is visible)
-    ```javascript
-    game.events.on('resume', function() {});
-    ```
 
 ## Global members
 
@@ -223,4 +211,25 @@ Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registr
     ```javascript
     var height = game.config.height;
     // var height = scene.game.config.height;
+    ```
+
+## Events
+
+- Pause(window is invisible)/Resume(window is visible)
+    ```javascript
+    game.events.on('pause', function() {});
+    ```
+    ```javascript
+    game.events.on('resume', function() {});
+    ```
+- Destroy event, triggered by `game.destroy()`
+    ```javascript
+    game.events.on('destroy', function() {})
+    ```
+- On window focused/blurred
+    ```javascript
+    game.events.on('focus', function() {})
+    ```
+    ```javascript
+    game.events.on('blur', function(){ })
     ```
