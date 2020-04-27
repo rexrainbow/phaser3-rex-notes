@@ -82,6 +82,7 @@ nav:
         - DOM element: domelement.md
         - Input text: inputtext.md
         - Youtube player: youtubeplayer.md
+        - File chooser: filechooser.md
     - Behaviors:
         - Actions:
             - Group actions: groupactions.md

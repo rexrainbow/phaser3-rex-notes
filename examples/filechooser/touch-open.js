@@ -20,6 +20,7 @@ class Demo extends Phaser.Scene {
                     .then(function (result) {
                         var files = result.files;
                         if (files.length) {
+                            console.log(files[0])
                             print.text = files[0].name;
                         } else {
                             print.text = 'No file selected'

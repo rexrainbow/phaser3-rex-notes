@@ -19,9 +19,10 @@ class Demo extends Phaser.Scene {
         var canvas = this.add.rexCanvas(400, 300);
         fileInputElement.addEventListener('change', function (e) {
             var file = e.target.files[0];
-            canvas.loadFromURLPromise(URL.createObjectURL(file))
+            var url = URL.createObjectURL(file);
+            canvas.loadFromURLPromise(url)
                 .then(function () {
-                    URL.revokeObjectURL(file);
+                    URL.revokeObjectURL(url);
                 })
         });
     }
