@@ -8,6 +8,7 @@ Drag thumb on a slider bar.
 ## Live demos
 
 - [Slider](https://codepen.io/rexrainbow/pen/eKJGZB)
+- [Color picker](https://codepen.io/rexrainbow/pen/XWmgMaX)
 
 ## Usage
 
