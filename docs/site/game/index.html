@@ -355,13 +355,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pause-resume-events" class="md-nav__link">
-    Pause / Resume events
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#global-members" class="md-nav__link">
     Global members
   </a>
@@ -398,6 +391,13 @@
         <li class="md-nav__item">
   <a href="#window-size" class="md-nav__link">
     Window size
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -1537,18 +1537,6 @@
   <li class="md-nav__item">
     <a href="../youtubeplayer/" title="Youtube player" class="md-nav__link">
       Youtube player
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../filechooser/" title="File chooser" class="md-nav__link">
-      File chooser
     </a>
   </li>
 
@@ -4801,13 +4789,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pause-resume-events" class="md-nav__link">
-    Pause / Resume events
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#global-members" class="md-nav__link">
     Global members
   </a>
@@ -4844,6 +4825,13 @@
         <li class="md-nav__item">
   <a href="#window-size" class="md-nav__link">
     Window size
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -5032,18 +5020,8 @@
 </code></pre></div>
 
 <ul>
-<li>Also fires game.events <code>destroy</code> event.</li>
 <li><code>removeCanvas</code> : Set to <code>true</code> if you would like the parent canvas element removed from the DOM, or <code>false</code> to leave it in place.</li>
 <li><code>noReturn</code> : If <code>true</code> all the core Phaser plugins are destroyed. You cannot create another instance of Phaser on the same web page if you do this.</li>
-</ul>
-<h2 id="pause-resume-events">Pause / Resume events<a class="headerlink" href="#pause-resume-events" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Pause (window is invisible)
-    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
-</code></pre></div></li>
-<li>Resume (window is visible)
-    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
-</code></pre></div></li>
 </ul>
 <h2 id="global-members">Global members<a class="headerlink" href="#global-members" title="Permanent link">&para;</a></h2>
 <h3 id="scene-manager">Scene manager<a class="headerlink" href="#scene-manager" title="Permanent link">&para;</a></h3>
@@ -5074,6 +5052,22 @@
 <li>Height
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 <span class="c1">// var height = scene.game.config.height;</span>
+</code></pre></div></li>
+</ul>
+<h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pause(window is invisible)/Resume(window is visible)
+    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</code></pre></div></li>
+<li>Destroy event, triggered by <code>game.destroy()</code>
+    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{})</span>
+</code></pre></div></li>
+<li>On window focused/blurred
+    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{})</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="p">})</span>
 </code></pre></div></li>
 </ul>
                 
