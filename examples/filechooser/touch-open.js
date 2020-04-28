@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, 'Click rectangle to select a file');
 
         var scene = this;
-        this.add.rectangle(400, 300, 30, 30, 0x0000ff)
+        this.add.rectangle(400, 300, 200, 200, 0x0000ff)
             .setInteractive()
             .on('pointerdown', function () {
                 scene.plugins.get('rexFileChooser').open({ accept: 'image/*' })
@@ -40,6 +40,9 @@ var config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    dom: {
+        createContainer: true
     },
     scene: Demo,
     plugins: {

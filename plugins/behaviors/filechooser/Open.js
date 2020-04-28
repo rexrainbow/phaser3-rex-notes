@@ -4,11 +4,12 @@ import { WaitEvent } from '../../utils/promise/WaitEvent.js'
 import Delay from '../../utils/promise/Delay.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 
 var Open = function (game, config) {
     // game: game, scene, or game object
     var delayTime = GetValue(config, 'delay', 200);
-    var fileInput = CreateFileInput(config);
+    var fileInput = CreateFileInput(game, config);
     fileInput.click();
     return WaitEvent(GetGame(game).events, 'focus')
         .then(function () {
@@ -18,8 +19,9 @@ var Open = function (game, config) {
             var result = {
                 files: fileInput.files
             }
+
+            RemoveFromDOM(fileInput);
             fileInput.remove();
-            fileInput = null;
             return Promise.resolve(result);
         })
 }
