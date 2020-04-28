@@ -194,17 +194,6 @@
     // scene.rexUI.add.edit(textObject, config, onClose);
     ```
 
-### Open file chooser dialog
-
-Open a [file chooser](filechooser.md) dialog **under any touch event**
-
-```javascript
-scene.rexUI.openFileChooser(config)
-    .then(function(result) {
-        // var files = result.files;
-    })
-```
-
 ### Gestures
 
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
