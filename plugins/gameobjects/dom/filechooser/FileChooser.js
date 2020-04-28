@@ -1,6 +1,5 @@
 import Resize from '../utils/Resize.js';
-import SetPrpoerties from '../utils/SetProperties.js';
-import RouteEvents from '../utils/RouteEvents.js';
+import ClickPromose from './ClickPromise.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -23,10 +22,8 @@ class FileChooser extends DOMElement {
         // Create a hidden file input
         var inputElement = document.createElement('input');
         inputElement.type = 'file';
-        SetPrpoerties(InputElementProperties, config, inputElement);
         var inputStyle = inputElement.style;
-        inputStyle.width = '0px';
-        inputStyle.height = '0px';
+        inputStyle.display = 'none';
 
         // Create a label parent
         var labelElement = document.createElement('label');
@@ -35,10 +32,56 @@ class FileChooser extends DOMElement {
         var style = GetValue(config, 'style', undefined);
         super(scene, x, y, labelElement, style);
         this.type = 'rexFileChooser';
+        this.resetFromJSON(config);
         this.resize(width, height);
 
-        // Apply events
-        RouteEvents(this, inputElement, InputElementEvents);
+        // Register events
+        this.setCloseDelay(GetValue(config, 'closeDelay', 200));
+        var self = this;
+        inputElement.onclick = function () {
+            ClickPromose({
+                game: scene,
+                fileInput: inputElement,
+                closeDelay: self.closeDelay
+            })
+                .then(function (result) {
+                    self.emit('select', self, result.files);
+                })
+        }
+    }
+
+    resetFromJSON(config) {
+        this.setAccept(GetValue(config, 'accept', undefined));
+        this.setMultiple(GetValue(config, 'multiple', false));
+        return this;
+    }
+
+    setAccept(accept) {
+        if (accept === undefined) {
+            accept = '';
+        }
+        this.fileInput.setAttribute('accept', accept);
+        return this;
+    }
+
+    setMultiple(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        if (enabled) {
+            this.fileInput.setAttribute('multiple', '');
+        } else {
+            this.fileInput.removeAttribute('multiple');
+        }
+        return this;
+    }
+
+    setCloseDelay(delay) {
+        if (delay === undefined) {
+            delay = 200;
+        }
+        this.closeDelay = delay;
+        return this;
     }
 
     get fileInput() {
@@ -53,6 +96,13 @@ class FileChooser extends DOMElement {
     get files() {
         return this.fileInput.files;
     }
+
+    syncToGameObject(gameObject) {
+        this.setOrigin(gameObject.originX, gameObject.originY);
+        this.setPosition(gameObject.x, gameObject.y);
+        this.resize(gameObject.displayWidth, gameObject.displayHeight);
+        return this;
+    }
 }
 
 var methods = {
@@ -63,15 +113,5 @@ Object.assign(
     FileChooser.prototype,
     methods
 );
-
-const InputElementProperties = {
-    id: ['id', undefined],
-    accept: ['accept', undefined],
-    multiple: ['multiple', undefined]
-};
-
-const InputElementEvents = {
-    change: 'onchange'
-};
 
 export default FileChooser;
