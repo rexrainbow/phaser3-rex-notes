@@ -46,9 +46,10 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var recorder = this.plugins.get('rexTCRP').addRecorder(this);
-        var player = this.plugins.get('rexTCRP').addPlayer(this);
-        var RunCommands = this.plugins.get('rexTCRP').runCommands;
+        var TCRPplugin = this.plugins.get('rexTCRP');
+        var recorder = TCRPplugin.addRecorder(this);
+        var player = TCRPplugin.addPlayer(this);
+        var RunCommands = TCRPplugin.runCommands;
 
         var panel = CreatePanel(this)
             .setPosition(400, 300)
@@ -60,6 +61,10 @@ class Demo extends Phaser.Scene {
 
         panel
             .on('canvas.pan', function (pan, canvas, lastPointer) {
+                if (player.isPlaying) {
+                    player.stop();
+                }
+
                 if (!recorder.isRecording) {
                     drawer.clear();
                     recorder.start();
