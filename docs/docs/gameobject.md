@@ -469,7 +469,7 @@ See [data manager](datamanager.md)
     ```javascript
     class MyClass extends BaseClass {
         constructor(scene, x, y) {
-            super(scene, x, y;
+            super(scene, x, y);
             // ...
             scene.add.existing(this);
         }
