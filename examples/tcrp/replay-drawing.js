@@ -129,8 +129,7 @@ var CreatePanel = function (scene) {
             0, // proportion
             'center', // align
             { left: 20, top: 20, bottom: 20, right: 10 }, // padding
-            false, // expand
-            'canvas' // childKey
+            false // expand
         )
         .add(
             buttons, // child
@@ -139,6 +138,8 @@ var CreatePanel = function (scene) {
             { top: 20, bottom: 20, right: 20 }, // padding
             true // expand
         )
+
+    panel.addChildrenMap('canvas', canvas);
 
     // Button display when pointer-over/pointer-out
     panel
