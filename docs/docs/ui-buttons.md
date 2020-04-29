@@ -103,6 +103,8 @@ var buttons = scene.rexUI.add.buttons({
 
     // name: '',
     // draggable: false,
+    // eventEmitter: this,
+    // groupName: undefined,
 
     // type: undefined,
     // setValueCallback: undefined,
@@ -135,6 +137,8 @@ var buttons = scene.rexUI.add.buttons({
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `space` : Spaces between 2 button game objects.
 - `name` : Set name of this button game objects.
+- `eventEmitter` : Dispatch buttons' touch events to other game obhect, default is this buttons game object.
+- `groupName` : Optional group name for argument of touch events.
 - `type` : Type/behavior of these buttons.
     - `undefined` : No extra behavior, default value.
     - `'checkboxes'` : Set these buttons to checkboxes.
@@ -188,6 +192,13 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    buttons.on('button.click', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
     - `button` : Triggered button game object.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
@@ -198,6 +209,13 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    buttons.on('button.over', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
     - `button` : Triggered button game object
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
@@ -208,6 +226,13 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    buttons.on('button.out', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
     - `button` : Triggered button game object.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
@@ -218,6 +243,13 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    buttons.on('button.enable', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
     - `button` : Triggered button game object.
     - `index` : Index of triggered button game object.
 - Disable button's input
@@ -226,6 +258,13 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
+    or
+    ```javascript
+    buttons.on('button.disalbe', function(button, groupName, index, pointer, event) {
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
     - `button` : Triggered button game object.
     - `index` : Index of triggered button game object.
 

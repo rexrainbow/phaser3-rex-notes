@@ -44,8 +44,8 @@ class FileChooser extends DOMElement {
                 fileInput: inputElement,
                 closeDelay: self.closeDelay
             })
-                .then(function (result) {
-                    self.emit('select', self, result.files);
+                .then(function () {
+                    self.emit('select', self);
                 })
         }
     }
@@ -97,7 +97,7 @@ class FileChooser extends DOMElement {
         return this.fileInput.files;
     }
 
-    syncToGameObject(gameObject) {
+    sync(gameObject) {
         this.setOrigin(gameObject.originX, gameObject.originY);
         this.setPosition(gameObject.x, gameObject.y);
         this.resize(gameObject.displayWidth, gameObject.displayHeight);

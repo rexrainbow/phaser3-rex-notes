@@ -19,8 +19,9 @@ class Demo extends Phaser.Scene {
         this.add.rexFileChooser({
             accept: 'image/*'
         })
-            .syncToGameObject(cover)
-            .on('select', function (gameObject, files) {
+            .sync(cover)
+            .on('select', function (gameObject) {
+                var files = gameObject.files;
                 if (files.length) {
                     console.log(files[0])
                     print.text = files[0].name;

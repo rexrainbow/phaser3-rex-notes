@@ -1,3 +1,4 @@
+import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
 import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';

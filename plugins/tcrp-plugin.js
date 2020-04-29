@@ -19,7 +19,16 @@ class TCRPPlugin extends Phaser.Plugins.BasePlugin {
 
     addPlayer(parent, config) {
         return new Player(parent, config);
-    }    
+    }
 }
+
+var methods = {
+    runCommands: TCRP.RunCommands
+}
+
+Object.assign(
+    TCRPPlugin.prototype,
+    methods
+);
 
 export default TCRPPlugin;

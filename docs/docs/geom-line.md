@@ -207,6 +207,15 @@ graphics.strokeLineShape(line);
     var points = Phaser.Geom.Line.BresenhamPoints(line, step);
     // var points = Phaser.Geom.Line.BresenhamPoints(line, step, points);  // push points
     ```
+- Get points using easing function
+    ```javascript
+    var points = Phaser.Geom.Line.GetEasedPoints(line, ease, quantity);
+    // var points = Phaser.Geom.Line.GetEasedPoints(line, ease, quantity, collinearThreshold, easeParams);
+    ```
+    - `ease` : String of [ease function](tween.md#ease-equations), or a custom function (`function (t) { return value}`).
+    - `quantity` : The number of points to return.
+    - `collinearThreshold` : Each point is spaced out at least this distance apart. This helps reduce clustering in noisey eases.
+    - `easeParams` : Array of ease parameters to go with the ease.
 - Get the nearest point on a line perpendicular to the given point.
     ```javascript
     var point = Phaser.Geom.Line.GetNearestPoint(line, pointIn);

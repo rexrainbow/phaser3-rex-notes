@@ -43,7 +43,7 @@ var config = {
 - `physics` : The physics configuration object for the Scene.
     ```javascript
     {
-        default: 'arcade', // 'impact', or 'matter'
+        default: 'arcade', // 'arcade', or 'matter'
         arcade: {...},
         matter: {...}
     }
@@ -236,7 +236,6 @@ See also
 - `scene` : [scenePlugin](scenemanager.md)
 - `anims`
 - `physics` : [ArcadePhysics](arcade-world.md)
-- `impact` : ImpactPhysics
 - `matter` :　MatterPhysics
 - `registry` : Global [data manager](datamanager.md)
 - `data` : Local [data manager](datamanager.md)

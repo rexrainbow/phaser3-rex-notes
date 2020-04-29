@@ -71,6 +71,7 @@ scene.loader.setPath(path)
 - Image
     ```javascript
     scene.load.image(key, url);
+    // scene.load.image(key, url, xhrSettings);
     ```
 - SVG
     ```javascript

@@ -69,7 +69,7 @@ class Demo extends Phaser.Scene {
 
         var canvas = this.canvas;
         var ctx = canvas.getCanvas().getContext('2d');
-        var color = "hsl( " + this.hue + " , 50%, 50%)";
+        var color = `hsl(${this.hue},50%,50%)`;
         drawCircle(ctx, localX, localY, 3, color);
         this.hue = (this.hue + 3) % 360;
     }
