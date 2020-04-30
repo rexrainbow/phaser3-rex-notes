@@ -72,8 +72,8 @@ class Demo extends Phaser.Scene {
 
                 var command = [
                     'circle', // function name
-                    (pan.x - canvas.x), // x
-                    (pan.y - canvas.y), // y
+                    Math.floor(pan.x - canvas.x), // x
+                    Math.floor(pan.y - canvas.y), // y
                     5, // r
                     `hsl(${hue},50%,50%)` // color
                 ]
