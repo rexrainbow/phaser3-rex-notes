@@ -53,7 +53,7 @@ var Add = function (gameObject) {
 };
 
 export default {
-    add(gameObject) {
+    addButton(gameObject) {
         if (IsArray(gameObject)) {
             var gameObjects = gameObject;
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -65,13 +65,10 @@ export default {
         return this;
     },
 
-    addButton(gameObject) {
-        this.add(gameObject);
-        return this;
-    },
-
     addButtons(gameObjects) {
-        this.add(gameObjects);
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            Add.call(this, gameObjects[i]);
+        }
         return this;
     }
 }

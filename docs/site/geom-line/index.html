@@ -5141,6 +5141,16 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">BresenhamPoints</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
 <span class="c1">// var points = Phaser.Geom.Line.BresenhamPoints(line, step, points);  // push points</span>
 </code></pre></div></li>
+<li>Get points using easing function
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">GetEasedPoints</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">ease</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">);</span>
+<span class="c1">// var points = Phaser.Geom.Line.GetEasedPoints(line, ease, quantity, collinearThreshold, easeParams);</span>
+</code></pre></div><ul>
+<li><code>ease</code> : String of <a href="../tween/#ease-equations">ease function</a>, or a custom function (<code>function (t) { return value}</code>).</li>
+<li><code>quantity</code> : The number of points to return.</li>
+<li><code>collinearThreshold</code> : Each point is spaced out at least this distance apart. This helps reduce clustering in noisey eases.</li>
+<li><code>easeParams</code> : Array of ease parameters to go with the ease.</li>
+</ul>
+</li>
 <li>Get the nearest point on a line perpendicular to the given point.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">GetNearestPoint</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">pointIn</span><span class="p">);</span>
 <span class="c1">// var point = Phaser.Geom.Line.GetNearestPoint(line, pointIn, point);</span>

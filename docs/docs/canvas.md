@@ -169,25 +169,30 @@ var canvas = scene.make.rexCanvas({
     canvas.loadTexture(key, resize);
     ```
 
-### Load image from URL
+### Data URL
 
-```javascript
-canvas.loadFromURL(url);
-// canvas.loadFromURL(url, callback);
-```
-
-- `url` : Image url/uri(base64 string)
-- `callback` : Load complete callback.
-
-or
-
-```javascript
-canvas.loadFromURLPromise(url)
-    .then(function() {
-        
-    })
-```
-
+- Load image from URL
+    ```javascript
+    canvas.loadFromURL(url);
+    // canvas.loadFromURL(url, callback);
+    ```
+    or
+    ```javascript
+    canvas.loadFromURLPromise(url)
+        .then(function() {
+            
+        })
+    ```
+    - `url` : Image url/uri(base64 string)
+    - `callback` : Load complete callback.
+- Get data URL of image
+    ```javascript
+    var dataURL = canvas.getDataURL();
+    // var dataURL = canvas.getDataURL(type, encoderOptions);
+    ```
+    - `dataURL` : A base64 string.
+    - `type` : A DOMString indicating the image format. The default format type is image/png.
+    - `encoderOptions` : A Number between 0 and 1 indicating the image quality to use for image formats that use lossy compression such as image/jpeg and image/webp.
 
 ### Pixel color
 

@@ -92,6 +92,6 @@ export default {
             0, 0, this.canvas.width, this.canvas.height);
         this.dirty = true;
         return this;
-    },
+    }
 
 }

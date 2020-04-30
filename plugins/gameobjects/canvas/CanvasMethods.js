@@ -41,6 +41,10 @@ export default {
         });
     },
 
+    getDataURL(type, encoderOptions) {
+        return this.canvas.toDataURL(type, encoderOptions);
+    },
+
     getPixel(x, y, out) {
         if (out === undefined) {
             out = new Color();

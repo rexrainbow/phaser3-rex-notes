@@ -5,6 +5,10 @@ Restorable data manager, extends from [built-in data manager](datamanager.md).
 - Author: Rex
 - Member of scene
 
+## Live demos
+
+- [Restorable canvas](https://codepen.io/rexrainbow/pen/ZEbJMKZ)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/restorabledata)
