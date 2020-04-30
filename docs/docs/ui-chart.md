@@ -72,7 +72,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.
     ```
 - Import class
     ```javascript
-    import { FixWidthSizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { Chart } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add chart object
     ```javascript    
