@@ -14,6 +14,8 @@ Store data in key-value pairs, built-inobject of phaser.
 parent.data.set(key, value);
 ```
 
+- `key` : Key string.
+
 #### Set values
 
 ```javascript
