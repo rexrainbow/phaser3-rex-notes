@@ -13,7 +13,7 @@ var GetChildrenHeight = function () {
     for (var i = 0; i < this.rowCount; i++) {
         proportion = this.rowProportions[i];
         rowHeight = 0;
-        if ((proportion === undefined) || (proportion === 0)) {
+        if (proportion === 0) {
             for (var j = 0; j < this.columnCount; j++) {
                 child = children[(i * this.columnCount) + j];
                 if (!child) {
