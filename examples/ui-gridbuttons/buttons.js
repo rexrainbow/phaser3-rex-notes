@@ -26,13 +26,14 @@ class Demo extends Phaser.Scene {
         this.rexUI.add.gridButtons({
             x: 400, y: 300,
             width: 195, height: 260,
+
             buttons: [
                 [btns['7'], btns['8'], btns['9']],
                 [btns['4'], btns['5'], btns['6']],
                 [btns['1'], btns['2'], btns['3']],
                 [btns['<'], btns['0'], btns['.']]
             ],
-            expand: true
+            space: 10
         })
             .layout()
             //.drawBounds(this.add.graphics(), 0xff0000)

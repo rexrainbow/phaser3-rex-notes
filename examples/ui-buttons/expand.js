@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
         var expand = true;
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,
-            width: 300,
+            width: 400,
             orientation: 'x',
 
             buttons: [
@@ -27,10 +27,13 @@ class Demo extends Phaser.Scene {
                 createButton(this, 'c'),
             ],
 
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10, item: 3
+            },
             expand: expand
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000)
+            .drawBounds(this.add.graphics(), 0xff0000)
 
         buttons
             .on('button.click', function (button, index, pointer, event) {

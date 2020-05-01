@@ -14,6 +14,17 @@ var Remove = function (gameObject, destroyChild) {
     if (this.buttons.length === 1) {
         this.clear(destroyChild);
     } else {
+        // Remove last button, change the last 2 child's padding config
+        if (this.buttons.indexOf(gameObject) === (this.buttons.length - 1)) {            
+            var last2Button = this.buttons[this.buttons.length - 2];
+            var config = this.getSizerConfig(last2Button);
+            if (this.orientation === 0) { // x
+                config.padding.right = this.buttonSpace.right;
+            } else {  // y
+                config.padding.bottom = this.buttonSpace.bottom;
+            }
+        }
+
         RemoveItem(this.buttons, gameObject);
         SizerRmove.call(this, gameObject, destroyChild);
     }

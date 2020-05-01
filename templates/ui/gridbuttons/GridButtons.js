@@ -14,7 +14,7 @@ class GridButtons extends GridSizer {
         var row = GetValue(config, 'row', 0);
         var col = GetValue(config, 'col', 0);
         var buttons = GetValue(config, 'buttons', undefined);
-        var buttonsExpand = GetValue(config, 'expand', false);
+        var buttonsExpand = GetValue(config, 'expand', true);
         var buttonProportion = (buttonsExpand) ? 1 : 0;
 
         if (buttons !== undefined) {
@@ -44,14 +44,6 @@ class GridButtons extends GridSizer {
         if (typeof (space) === 'number') {
             space = { itemX: space, itemY: space };
         }
-        this.buttonSpace = {
-            itemX: GetValue(space, 'itemX', 0),
-            itemY: GetValue(space, 'itemY', 0),
-            left: GetValue(space, 'left', 0),
-            right: GetValue(space, 'right', 0),
-            top: GetValue(space, 'top', 0),
-            bottom: GetValue(space, 'bottom', 0),
-        };
         this.clickConfig = GetValue(config, 'click', undefined);
 
         if (background) {
