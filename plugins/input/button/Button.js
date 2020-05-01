@@ -59,7 +59,6 @@ class Button {
             this.cancel();
         }
         this._enable = e;
-        this.gameObject.input.enabled = e;
 
         var eventName = (e) ? 'enable' : 'disable';
         this.emit(eventName, this, this.gameObject);
@@ -140,6 +139,10 @@ class Button {
     }
 
     click(nowTime, pointer, event) {
+        if (!this.enable) {
+            return this;
+        }
+
         if (nowTime === undefined) {
             // fires 'click' event manually
             this.emit('click', this, this.gameObject, pointer, event);
@@ -169,10 +172,10 @@ Object.assign(
 );
 
 const CLICKMODE = {
-    'press': 0,
-    'pointerdown': 0,
-    'release': 1,
-    'pointerup': 1,
+    press: 0,
+    pointerdown: 0,
+    release: 1,
+    pointerup: 1,
 };
 
 export default Button;

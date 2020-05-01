@@ -33,5 +33,12 @@ export default {
             this.addChildrenMap(childKey, gameObject)
         }
         return this;
+    },
+
+    isBackground(gameObject) {
+        if (this.backgroundChildren === undefined) {
+            return false;
+        }
+        return (this.backgroundChildren.indexOf(gameObject) !== -1);
     }
 }

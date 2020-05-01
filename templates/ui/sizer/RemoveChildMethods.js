@@ -16,6 +16,9 @@ export default {
 
     clear(destroyChild) {
         this.sizerChildren.length = 0;
+        if (this.backgroundChildren) {
+            this.backgroundChildren.length = 0;
+        }
         ContainerClear.call(this, destroyChild);
         return this;
     }

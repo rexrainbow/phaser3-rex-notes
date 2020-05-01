@@ -67,7 +67,7 @@ var Layout = function (parent, newWidth, newHeight) {
             colProportion = this.columnProportions[columnIndex] || 0;
             colWidth = (colProportion === 0) ? this.columnWidth[columnIndex] : (colProportion * proportionWidthLength);
 
-            child = this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
+            child = this.getChildAt(columnIndex, rowIndex);
             if ((!child) || (child.rexSizer.hidden)) {
                 itemX += colWidth;
                 continue;

@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import { ButtonSetInteractive } from './ButtonSetInteractive.js';
+import { ButtonSetInteractive } from '../utils/buttons/ButtonSetInteractive.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const SizerAdd = Sizer.prototype.add;
@@ -20,7 +20,21 @@ var Add = function (gameObject) {
             }
         }
 
-        SizerAdd.call(this, gameObject, this.buttonProportion, 'center', 0, true);
+        var padding;
+        if (this.orientation === 0) { // x
+            padding = {
+                top: this.buttonSpace.top,
+                bottom: this.buttonSpace.bottom,
+                left: this.buttonSpace.left
+            };
+        } else { // y
+            padding = {
+                left: this.buttonSpace.left,
+                right: this.buttonSpace.right,
+                top: this.buttonSpace.top
+            };
+        }
+        SizerAdd.call(this, gameObject, this.buttonProportion, 'center', padding, true);
 
         // Add space
         if (!this.buttonsExpand) {
@@ -30,12 +44,18 @@ var Add = function (gameObject) {
         }
     } else {
         var padding;
-        if (this.buttonSpace === 0) {
-            padding = 0;
-        } else if (this.orientation === 0) {
-            padding = { left: this.buttonSpace };
-        } else {
-            padding = { top: this.buttonSpace };
+        if (this.orientation === 0) { // x
+            padding = {
+                top: this.buttonSpace.top,
+                bottom: this.buttonSpace.bottom,
+                left: this.buttonSpace.item
+            };
+        } else { // y
+            padding = {
+                left: this.buttonSpace.left,
+                right: this.buttonSpace.right,
+                top: this.buttonSpace.item
+            };
         }
 
         var lastIndex = childrenCount - 1;

@@ -100,6 +100,13 @@ var buttons = scene.rexUI.add.buttons({
     }
 
     space: 0,
+    // space: {
+    //    top: 0,
+    //    bottom: 0,
+    //    left: 0,
+    //    right: 0,
+    //    item: 0
+    //},    
 
     // name: '',
     // draggable: false,
@@ -135,7 +142,11 @@ var buttons = scene.rexUI.add.buttons({
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
         - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
-- `space` : Spaces between 2 button game objects.
+- `space` :
+    - A number: Space between 2 button game objects.
+    - An object: Padding of button game objects.
+        - `space.item` : Space between 2 button game objects.
+        - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottoms.        
 - `name` : Set name of this button game objects.
 - `eventEmitter` : Dispatch buttons' touch events to other game obhect, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.

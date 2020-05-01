@@ -1,20 +1,43 @@
 import Container from '../container/Container.js';
+import ArrayFill from '../../../plugins/utils/array/Fill.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 const ContainerRemove = Container.prototype.remove;
+const ContainerClear = Container.prototype.clear;
 
 export default {
-    remove(gameObject) {
+    remove(gameObject, destroyChild) {
         if (this.getParentSizer(gameObject) !== this) {
             return this;
         }
-        RemoveItem(this.gridChildren, gameObject);
 
-        if (this.backgroundChildren !== undefined) {
+        if (this.isBackground(gameObject)) {
             RemoveItem(this.backgroundChildren, gameObject);
+        } else {
+            var idx = this.gridChildren.indexOf(gameObject);
+            if (idx !== -1) {
+                this.gridChildren[idx] = null;
+            }
         }
-        ContainerRemove.call(this, gameObject);
+
+        ContainerRemove.call(this, gameObject, destroyChild);
+        return this;
+    },
+
+    removeAt(columnIndex, rowIndex, destroyChild) {
+        var child = this.getChildAt(columnIndex, rowIndex);
+        if (child) {
+            this.remove(child, destroyChild);
+        }
+        return this;
+    },
+
+    clear(destroyChild) {
+        ArrayFill(this.gridChildren, null);
+        if (this.backgroundChildren) {
+            this.backgroundChildren.length = 0;
+        }
+        ContainerClear.call(this, destroyChild);
         return this;
     }
-
 }

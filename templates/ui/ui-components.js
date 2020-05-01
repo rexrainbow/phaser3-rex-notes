@@ -14,6 +14,7 @@ import OverlapSizer from './overlapsizer/OverlapSizer.js';
 
 import Label from './label/Label.js';
 import Buttons from './buttons/Buttons.js';
+import GridButtons from './gridbuttons/GridButtons.js';
 import Dialog from './dialog/Dialog.js';
 import Tabs from './tabs/Tabs.js';
 import Slider from './slider/Slider.js';
@@ -64,6 +65,7 @@ export {
 
     Label,
     Buttons,
+    GridButtons,
     Dialog,
     Tabs,
     Slider,

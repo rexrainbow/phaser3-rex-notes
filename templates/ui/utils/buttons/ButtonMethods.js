@@ -1,6 +1,6 @@
-import GetGameObjectByName from '../utils/GetGameObjectByName.js';
+import GetGameObjectByName from '../GetGameObjectByName.js';
 import { FireEvent } from './ButtonSetInteractive.js';
-import { Show, Hide, IsShown } from '../utils/Hide.js';
+import { Show, Hide, IsShown } from '../Hide.js';
 
 export default {
     getButton(index) {

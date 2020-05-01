@@ -1,4 +1,4 @@
-import ButtonBehavior from '../../../plugins/input/button/Button.js';
+import ButtonBehavior from '../../../../plugins/input/button/Button.js';
 
 var ButtonSetInteractive = function (button, clickConfig) {
     //Default: Fire 'click' event when touch released after pressed.
@@ -28,12 +28,12 @@ var FireEvent = function (eventName, button, pointer, event) {
     var index;
     if (typeof (button) === 'number') {
         index = button;
-        button = this.childrenMap.buttons[index];
+        button = this.buttons[index];
         if (!button) {
             return;
         }
     } else {
-        index = this.childrenMap.buttons.indexOf(button);
+        index = this.buttons.indexOf(button);
         if (index === -1) {
             return;
         }

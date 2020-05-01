@@ -1,11 +1,12 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
+import ArrayFill from '../../../plugins/utils/array/Fill.js';
 import Methods from './Methods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class GridSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {        
+    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
@@ -96,6 +97,7 @@ class GridSizer extends BaseSizer {
         this.rowCount = rowCount;
         this.gridChildren = [];
         this.gridChildren.length = columnCount * rowCount;
+        ArrayFill(this.gridChildren, null);
         this.columnProportions = [];
         this.columnProportions.length = columnCount;
         this.columnWidth = [];
@@ -133,6 +135,10 @@ class GridSizer extends BaseSizer {
         }
 
         return this;
+    }
+
+    getChildAt(columnIndex, rowIndex) {
+        return this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
     }
 }
 

@@ -32,16 +32,20 @@ class Demo extends Phaser.Scene {
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
 
+        var print = this.add.text(400, 0, '');
         buttons
             .on('button.click', function (button, index, pointer, event) {
-                console.log(`Click button-${button.text}`);
-                // buttons.setButtonEnable(index, false);
+                print.text += `Click button-${button.text}\n`;
+                buttons.setButtonEnable(false)
+                setTimeout(() => {
+                    buttons.setButtonEnable(true)
+                }, 1000);
             })
-            .on('button.enable', function(button, index){
-                button.getElement('background').setFillStyle(COLOR_LIGHT);
+            .on('button.out', function () {
+                print.text += 'Pointer-out\n';
             })
-            .on('button.disable', function(button, index){
-                button.getElement('background').setFillStyle(COLOR_DARK);
+            .on('button.over', function () {
+                print.text += 'Pointer-over\n';
             })
 
     }
@@ -70,7 +74,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.ENVELOP,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,

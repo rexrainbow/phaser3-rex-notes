@@ -1,4 +1,4 @@
-import Sizer from '../sizer/Sizer.js';
+import GridSizer from '../gridsizer/GridSizer.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import ButtonMethods from '../utils/buttons/ButtonMethods.js';
@@ -6,33 +6,47 @@ import SetType from '../utils/buttons/types/SetType.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Buttons extends Sizer {
+class GridButtons extends GridSizer {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
         }
-        // Create
+        var row = GetValue(config, 'row', 0);
+        var col = GetValue(config, 'col', 0);
+        var buttons = GetValue(config, 'buttons', undefined);
+        var buttonsExpand = GetValue(config, 'expand', false);
+        var buttonProportion = (buttonsExpand) ? 1 : 0;
+
+        if (buttons !== undefined) {
+            row = Math.max(row, buttons.length);
+            for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+                col = Math.max(col, buttons[i].length);
+            }
+        }
+        config.row = row;
+        config.column = col;
+        config.columnProportions = buttonProportion;
+        config.rowProportions = buttonProportion;
+
+        // Create        
         super(scene, config);
-        this.type = 'rexButtons';
+        this.type = 'rexGridButtons';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
         this.groupName = GetValue(config, 'groupName', undefined);
         this.buttons = [];
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
-        var buttons = GetValue(config, 'buttons', undefined);
 
         // Buttons properties
-        this.buttonsExpand = GetValue(config, 'expand', false);
-        this.buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
-        // Button properties
-        this.buttonProportion = (this.buttonsExpand) ? 1 : 0;
+        this.buttonsExpand = buttonsExpand;
         var space = GetValue(config, 'space', undefined);
         if (typeof (space) === 'number') {
-            space = { item: space };
+            space = { itemX: space, itemY: space };
         }
         this.buttonSpace = {
-            item: GetValue(space, 'item', 0),
+            itemX: GetValue(space, 'itemX', 0),
+            itemY: GetValue(space, 'itemY', 0),
             left: GetValue(space, 'left', 0),
             right: GetValue(space, 'right', 0),
             top: GetValue(space, 'top', 0),
@@ -45,7 +59,15 @@ class Buttons extends Sizer {
         }
 
         if (buttons) {
-            this.addButtons(buttons);
+            var button;
+            for (var r = 0, rcnt = buttons.length; r < rcnt; r++) { // row
+                for (var c = 0, ccnt = buttons.length; c < ccnt; c++) { // col
+                    button = buttons[r][c];
+                    if (button) {
+                        this.addButton(button, c, r);
+                    }
+                }
+            }
         }
         SetType.call(this, config);
 
@@ -55,10 +77,10 @@ class Buttons extends Sizer {
 }
 
 Object.assign(
-    Buttons.prototype,
+    GridButtons.prototype,
     AddChildMethods,
     RemoveChildMethods,
     ButtonMethods
 );
 
-export default Buttons;
+export default GridButtons;

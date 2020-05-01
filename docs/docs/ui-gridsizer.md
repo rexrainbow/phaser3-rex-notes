@@ -214,6 +214,50 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
+### Get child
+
+```javascript
+var child = gridSizer.getChildAt(columnIndex, rowIndex);
+```
+
+### Remove child
+
+- Remove a child
+    ```javascript
+    gridSizer.remove(child);    
+    ```
+    or
+    ```javascript
+    gridSizer.removeAt(columnIndex, rowIndex);    
+    ```
+- Remove and destroy a child
+    ```javascript
+    gridSizer.remove(child, true);
+    ```
+    or
+    ```javascript
+    gridSizer.removeAt(columnIndex, rowIndex, true);    
+    ```    
+- Remove all children
+    ```javascript
+    gridSizer.clear();
+    ```
+- Remove and destroy all children
+    ```javascript
+    gridSizer.clear(true);
+    ```
+
+### Grid size
+
+- Amount of column
+    ```javascript
+    var columnCount = gridSizer.columnCount;
+    ```
+- Amount of row
+    ```javascript
+    var rowCount = gridSizer.rowCount;
+    ```
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).
