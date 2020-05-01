@@ -15,26 +15,26 @@ class GridSizer extends BaseSizer {
             minHeight = GetValue(config, 'height', undefined);
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
-            columnProportions = GetValue(config, 'columnProportions', undefined);
-            rowProportions = GetValue(config, 'rowProportions', undefined);
+            columnProportions = GetValue(config, 'columnProportions', 0);
+            rowProportions = GetValue(config, 'rowProportions', 0);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
-            columnProportions = GetValue(config, 'columnProportions', undefined);
-            rowProportions = GetValue(config, 'rowProportions', undefined);
+            columnProportions = GetValue(config, 'columnProportions', 0);
+            rowProportions = GetValue(config, 'rowProportions', 0);
         } else if (IsPlainObject(columnCount)) {
             config = columnCount;
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
-            columnProportions = GetValue(config, 'columnProportions', undefined);
-            rowProportions = GetValue(config, 'rowProportions', undefined);
+            columnProportions = GetValue(config, 'columnProportions', 0);
+            rowProportions = GetValue(config, 'rowProportions', 0);
         } else if (IsPlainObject(columnProportions)) {
             config = columnProportions;
-            columnProportions = GetValue(config, 'columnProportions', undefined);
-            rowProportions = GetValue(config, 'rowProportions', undefined);
+            columnProportions = GetValue(config, 'columnProportions', 0);
+            rowProportions = GetValue(config, 'rowProportions', 0);
         }
         super(scene, x, y, minWidth, minHeight, config);
 
@@ -107,30 +107,18 @@ class GridSizer extends BaseSizer {
         this.rowHeight = [];
         this.rowHeight.length = rowCount;
 
-        if (columnProportions) {
-            var columnProportionsIsNumber = (typeof (columnProportions) === 'number');
+        if (typeof (columnProportions) === 'number') {
+            ArrayFill(this.columnProportions, columnProportions);
+        } else {
             for (var i = 0; i < columnCount; i++) {
-                if (columnProportionsIsNumber) {
-                    this.setColumnProportion(i, columnProportions);
-                } else {
-                    var columnProportion = columnProportions[i];
-                    if (columnProportion > 0) {
-                        this.setColumnProportion(i, columnProportion);
-                    }
-                }
+                this.columnProportions[i] = columnProportions[i] || 0;
             }
         }
-        if (rowProportions) {
-            var rowProportionsIsNumber = (typeof (rowProportions) === 'number');
+        if (typeof (rowProportions) === 'number') {
+            ArrayFill(this.rowProportions, rowProportions);
+        } else {
             for (var i = 0; i < rowCount; i++) {
-                if (rowProportionsIsNumber) {
-                    this.setRowProportion(i, rowProportions);
-                } else {
-                    var rowProportion = rowProportions[i];
-                    if (rowProportion > 0) {
-                        this.setRowProportion(i, rowProportion);
-                    }
-                }
+                this.rowProportions[i] = rowProportions[i] || 0;
             }
         }
 

@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
             }
         }
         sizer.layout();
-        // sizer.drawBounds(this.add.graphics(), 0xff0000);
+        sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() {}

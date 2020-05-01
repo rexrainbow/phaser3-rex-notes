@@ -28,7 +28,8 @@ class Demo extends Phaser.Scene {
             ],
 
             space: {
-                left: 10, right: 10, top: 10, bottom: 10, item: 3
+                left: 10, right: 10, top: 10, bottom: 10, 
+                item: 3
             },
             expand: expand
         })

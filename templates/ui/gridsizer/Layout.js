@@ -59,12 +59,12 @@ var Layout = function (parent, newWidth, newHeight) {
     var colProportion, rowProportion,
         colWidth, rowHeight;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
-        rowProportion = this.rowProportions[rowIndex] || 0;
+        rowProportion = this.rowProportions[rowIndex];
         rowHeight = (rowProportion === 0) ? this.rowHeight[rowIndex] : (rowProportion * proportionHeightLength);
 
         itemX = startX;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
-            colProportion = this.columnProportions[columnIndex] || 0;
+            colProportion = this.columnProportions[columnIndex];
             colWidth = (colProportion === 0) ? this.columnWidth[columnIndex] : (colProportion * proportionWidthLength);
 
             child = this.getChildAt(columnIndex, rowIndex);

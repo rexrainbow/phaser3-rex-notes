@@ -33,7 +33,10 @@ class Demo extends Phaser.Scene {
                 [btns['1'], btns['2'], btns['3']],
                 [btns['<'], btns['0'], btns['.']]
             ],
-            space: 10
+            space: {
+                left: 10, right: 10, top: 10, bottom: 10,
+                itemX: 5, itemY: 5
+            }
         })
             .layout()
             //.drawBounds(this.add.graphics(), 0xff0000)
