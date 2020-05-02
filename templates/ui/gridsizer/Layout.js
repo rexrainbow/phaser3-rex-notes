@@ -3,6 +3,7 @@ import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import Sum from '../../../plugins/utils/array/Sum.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
@@ -36,26 +37,30 @@ var Layout = function (parent, newWidth, newHeight) {
 
     var proportionWidthLength;
     if (totalColumnProportions > 0) {
-        proportionWidthLength = (this.width - this.childrenWidth) / totalColumnProportions;
+        var remainder = this.width - this.space.left - this.space.right - Sum(this.space.column) - this.childrenWidth;
+        proportionWidthLength = remainder / totalColumnProportions;
     } else {
         proportionWidthLength = 0;
     }
     var proportionHeightLength;
     if (totalRowProportions > 0) {
-        proportionHeightLength = (this.height - this.childrenHeight) / totalRowProportions;
+        var remainder = this.height - this.space.top - this.space.bottom - Sum(this.space.row) - this.childrenHeight;
+        proportionHeightLength = remainder / totalRowProportions;
     } else {
         proportionHeightLength = 0;
     }
 
     // Layout children
     var child, childConfig, padding;
-    var startX = this.left,
-        startY = this.top;
+    var startX = this.left + this.space.left,
+        startY = this.top + this.space.top;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
     // Layout grid children
+    var columnSpace = this.space.column;
+    var rowSpace = this.space.row;
     var colProportion, rowProportion,
         colWidth, rowHeight;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
@@ -69,7 +74,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
             child = this.getChildAt(columnIndex, rowIndex);
             if ((!child) || (child.rexSizer.hidden)) {
-                itemX += colWidth;
+                itemX += (colWidth + columnSpace[columnIndex]);
                 continue;
             }
 
@@ -92,10 +97,10 @@ var Layout = function (parent, newWidth, newHeight) {
             AlignIn(child, GlobZone, childConfig.align);
             this.resetChildPositionState(child);
 
-            itemX += colWidth;
+            itemX += (colWidth + columnSpace[columnIndex]);
         }
 
-        itemY += rowHeight;
+        itemY += (rowHeight + rowSpace[rowIndex]);
     }
 
 

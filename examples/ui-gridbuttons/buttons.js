@@ -15,7 +15,9 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var btns = [];
+        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+
+        var btns = {};
         var keys = '0123456789.<', key;
         for (var i = 0, cnt = keys.length; i < cnt; i++) {
             key = keys[i];
@@ -25,7 +27,9 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '');
         this.rexUI.add.gridButtons({
             x: 400, y: 300,
-            width: 195, height: 260,
+            width: 300, height: 400,
+
+            background: background,
 
             buttons: [
                 [btns['7'], btns['8'], btns['9']],
@@ -34,8 +38,8 @@ class Demo extends Phaser.Scene {
                 [btns['<'], btns['0'], btns['.']]
             ],
             space: {
-                left: 10, right: 10, top: 10, bottom: 10,
-                itemX: 5, itemY: 5
+                left: 10, right: 10, top: 20, bottom: 20,
+                row: 20, column: 10
             }
         })
             .layout()
