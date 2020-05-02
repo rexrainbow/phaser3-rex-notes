@@ -9,18 +9,18 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var sizer = this.rexUI.add.gridSizer({
-            x: 400,
-            y: 300,
-            width: 300,
-            height: 300,
-            column: 3,
-            row: 3,
-            columnProportions: 1,
-            rowProportions: 1
+            x: 400, y: 300,
+            width: 400, height: 400,
+            column: 3, row: 3,
+            columnProportions: 1, rowProportions: 1,
+            space: {
+                top: 20, bottom: 20, left: 10, right: 10,
+                column: 20, row: 10
+            }
         })
         for (var i = 0; i < 3; i++) {
             for (var j = 0; j < 3; j++) {
@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
                     i, // columnIndex
                     j, // rowIndex
                     'center', // align
-                    5, // paddingConfig
+                    0, // paddingConfig
                     true, // expand
                 )
             }
@@ -38,7 +38,7 @@ class Demo extends Phaser.Scene {
         sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
