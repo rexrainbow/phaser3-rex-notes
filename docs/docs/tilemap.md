@@ -51,17 +51,17 @@ scene.load.tilemapCSV(key, url);          // CSV
     - Static
         ```javascript
         var layer = map.createStaticLayer(layerID, tileset);
-        // var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pxiels
+        // var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pixels
         ```
     - Dynamic
         ```javascript
         var layer = map.createDynamicLayer(layerID, tileset);
-        // var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels
+        // var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pixels
         ```
     - Blank dynamic
         ```javascript
         var layer = map.createBlankDynamicLayer(layerID, tileset);
-        // var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels
+        // var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pixels
         ```
 4. Create sprite objects with tile ID (optional)
     ```javascript
