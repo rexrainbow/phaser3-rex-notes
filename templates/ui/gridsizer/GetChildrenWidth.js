@@ -1,4 +1,5 @@
 import { GetDisplayWidth } from '../../../plugins/utils/size/GetDisplaySize.js';
+import Sum from '../../../plugins/utils/array/Sum.js';
 
 var GetChildrenWidth = function () {
     if (this.rexSizer.hidden) {
@@ -34,7 +35,7 @@ var GetChildrenWidth = function () {
         }
         this.columnWidth[i] = columnWidth;
     }
-    return result;
+    return result + this.space.left + this.space.right + Sum(this.space.column);
 }
 
 export default GetChildrenWidth;

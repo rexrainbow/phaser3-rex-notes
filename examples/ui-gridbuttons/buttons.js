@@ -47,15 +47,12 @@ class Demo extends Phaser.Scene {
             .on('button.click', function (button, index, pointer, event) {
                 var key = button.text;
                 var word = print.text;
-                switch (key) {
-                    case '<':
-                        if (word.length > 0) {
-                            word = word.substring(0, word.length - 1);
-                        }
-                        break;
-                    default:
-                        word += key;
-                        break;
+                if (key === '<') {
+                    if (word.length > 0) {
+                        word = word.substring(0, word.length - 1);
+                    }
+                } else {
+                    word += key;
                 }
                 print.text = word;
             })
@@ -71,10 +68,6 @@ var createButton = function (scene, text) {
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),
-        space: {
-            left: 10,
-            right: 10,
-        },
         align: 'center'
     });
 }

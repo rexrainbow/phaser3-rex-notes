@@ -3,7 +3,6 @@ import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
-import Sum from '../../../plugins/utils/array/Sum.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
@@ -37,15 +36,13 @@ var Layout = function (parent, newWidth, newHeight) {
 
     var proportionWidthLength;
     if (totalColumnProportions > 0) {
-        var remainder = this.width - this.space.left - this.space.right - Sum(this.space.column) - this.childrenWidth;
-        proportionWidthLength = remainder / totalColumnProportions;
+        proportionWidthLength = (this.width - this.childrenWidth) / totalColumnProportions;
     } else {
         proportionWidthLength = 0;
     }
     var proportionHeightLength;
     if (totalRowProportions > 0) {
-        var remainder = this.height - this.space.top - this.space.bottom - Sum(this.space.row) - this.childrenHeight;
-        proportionHeightLength = remainder / totalRowProportions;
+        proportionHeightLength = (this.height - this.childrenHeight) / totalRowProportions;
     } else {
         proportionHeightLength = 0;
     }
