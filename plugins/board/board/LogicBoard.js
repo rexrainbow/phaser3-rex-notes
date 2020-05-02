@@ -4,11 +4,13 @@ import BoardData from './boarddata/BoardData.js';
 import DefaultGrids from '../grid/index.js';
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
+import ShallowCopy from '../../utils/object/ShallowCopy.js';
 
 class Board extends EE {
     constructor(scene, config) {
         super();
 
+        ShallowCopy(LogicMethods, this);
         this.scene = scene;
         this.boardData = new BoardData();
         this.resetFromJSON(config);
@@ -97,10 +99,5 @@ class Board extends EE {
         return this;
     }
 }
-
-Object.assign(
-    Board.prototype,
-    LogicMethods
-);
 
 export default Board;
