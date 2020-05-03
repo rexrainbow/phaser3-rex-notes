@@ -259,6 +259,7 @@ nav:
     - Text area: ui-textarea.md
     - Toast: ui-toast.md
     - Buttons: ui-buttons.md
+    - Grid buttons: ui-gridbuttons.md
     - Slider: ui-slider.md
     - Dialog: ui-dialog.md
     - Grid table: ui-gridtable.md

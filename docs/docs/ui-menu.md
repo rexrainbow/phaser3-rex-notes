@@ -158,6 +158,7 @@ var menu = scene.rexUI.add.menu({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            sscene.add.existing(this);
         }
         // ...
     }

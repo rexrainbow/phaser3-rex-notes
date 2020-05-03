@@ -86,6 +86,11 @@ var gridSizer = scene.rexUI.add.gridSizer({
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom:0,
+    //     column: 0, // [0, 0, 0]
+    //     row: 0     // [0, 0, 0]
+    // },
 
     // name: '',
     // draggable: false
@@ -100,6 +105,13 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, {
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
+
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom:0,
+    //     column: 0, // [0, 0, 0]
+    //     row: 0     // [0, 0, 0]
+    // },
+
     // width: undefined,
     // height: undefined
 });
@@ -113,13 +125,28 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
     row: 0,
     // columnProportions: undefined,
     // rowProportions: undefined,
+
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom:0,
+    //     column: 0, // [0, 0, 0]
+    //     row: 0     // [0, 0, 0]
+    // },    
 });
 ```
 
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
+var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom:0,
+    //     column: 0, // [0, 0, 0]
+    //     row: 0     // [0, 0, 0]
+    // },
+
+    // name: '',
+    // draggable: false
+});
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
@@ -136,6 +163,14 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 - `columnProportions`, `rowProportions` : Proportion of each column/row.
     - Number : Apply this number proportion to each column/row
     - Number array : Apply proportion of column/row through elements of this number array.
+- `space` : Space around this sizer, and space between columns/rows
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space around this sizer.
+    - `space.column` : Space between 2 columns
+        - A number
+        - A number array
+    - `space.row` : Space between 2 rows
+        - A number
+        - A number array
 
 ### Custom class
 
@@ -143,8 +178,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
     ```javascript
     class MyGridSizer extends RexPlugins.UI.GridSizer {
         constructor(scene, x, y, minWidth, minHeight, column, row) {
-            super(scene, x, y, minWidth, minHeight, column, ro);
+            super(scene, x, y, minWidth, minHeight, column, row);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

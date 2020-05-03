@@ -168,6 +168,7 @@ Toast object will be invisible at beginning.
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

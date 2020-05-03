@@ -85,7 +85,7 @@ var buttons = scene.rexUI.add.buttons({
     orientation: 0,
 
     // Elements
-    background: backgroundGameObject,
+    // background: backgroundGameObject,
 
     buttons: [
         buttonGameObject,
@@ -97,9 +97,8 @@ var buttons = scene.rexUI.add.buttons({
     click: {
         mode: 'pointerup',
         clickInterval: 100
-    }
+    },
 
-    space: 0,
     // space: {
     //    top: 0,
     //    bottom: 0,
@@ -174,6 +173,7 @@ var buttons = scene.rexUI.add.buttons({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

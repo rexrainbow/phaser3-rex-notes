@@ -99,6 +99,7 @@ var chart = scene.rexUI.add.chart(x, y, width, height, config);
         constructor(scene, x, y, width, height, config) {
             super(scene, x, y, width, height, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

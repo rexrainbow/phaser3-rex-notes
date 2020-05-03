@@ -215,6 +215,7 @@ var panel = scene.rexUI.add.scrollablePanel({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

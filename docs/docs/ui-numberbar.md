@@ -154,6 +154,7 @@ var numberBar = scene.rexUI.add.numberBar({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

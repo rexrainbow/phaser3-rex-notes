@@ -251,6 +251,7 @@ var dialog = scene.rexUI.add.dialog({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }
