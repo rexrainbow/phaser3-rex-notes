@@ -1,5 +1,5 @@
 import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-import Sum from '../../../plugins/utils/array/Sum.js';
+import Sum from '../../../plugins/utils/math/Sum.js';
 
 var GetChildrenHeight = function () {
     if (this.rexSizer.hidden) {
@@ -35,7 +35,7 @@ var GetChildrenHeight = function () {
         }
         this.rowHeight[i] = rowHeight;
     }
-    return result + this.space.top + this.space.bottom + Sum(this.space.row);
+    return result + Sum(this.space.top, ...this.space.row, this.space.bottom);
 }
 
 export default GetChildrenHeight;
