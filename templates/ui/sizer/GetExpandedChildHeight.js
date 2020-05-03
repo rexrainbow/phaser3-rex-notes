@@ -4,7 +4,7 @@ var GetExpandedChildHeight = function (parent, child) {
     var padding = childConfig.padding;
     if (parent.orientation === 0) { // x
         if (childConfig.expand) {
-            newHeight = parent.height - padding.top - padding.bottom;
+            newHeight = parent.innerHeight - padding.top - padding.bottom;
         }
     } else { // y
         if ((childConfig.proportion > 0) && (parent.proportionLength > 0)) {

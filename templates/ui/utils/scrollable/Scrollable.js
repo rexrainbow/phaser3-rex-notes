@@ -24,12 +24,6 @@ class Scrollable extends Sizer {
         var header = GetValue(config, 'header', undefined);
         var footer = GetValue(config, 'footer', undefined);
 
-        // Space
-        var paddingLeft = GetValue(config, 'space.left', 0);
-        var paddingRight = GetValue(config, 'space.right', 0);
-        var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
-
         // Background
         if (background) {
             this.addBackground(background);
@@ -40,42 +34,16 @@ class Scrollable extends Sizer {
             var headerSpace = GetValue(config, 'space.header', 0);
             var padding;
             if (scrollMode === 0) {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: headerSpace,
-                };
+                padding = { bottom: headerSpace };
             } else {
-                padding = {
-                    left: paddingLeft,
-                    right: headerSpace,
-                    top: paddingTop,
-                    bottom: paddingBottom,
-                };
+                padding = { right: headerSpace };
             }
             var expand = GetValue(config, 'expand.header', true);
             this.add(header, 0, align, padding, expand);
         }
 
         if (scrollableSizer) {
-            var padding;
-            if (scrollMode === 0) {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (header) ? 0 : paddingTop,
-                    bottom: (footer) ? 0 : paddingBottom,
-                };
-            } else {
-                padding = {
-                    left: (header) ? 0 : paddingLeft,
-                    right: (footer) ? 0 : paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom,
-                };
-            }
-            this.add(scrollableSizer, 1, 'center', padding, true);
+            this.add(scrollableSizer, 1, 'center', 0, true);
         }
 
         if (footer) {
@@ -83,19 +51,9 @@ class Scrollable extends Sizer {
             var footerSpace = GetValue(config, 'space.footer', 0);
             var padding;
             if (scrollMode === 0) {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: footerSpace,
-                    bottom: paddingBottom,
-                };
+                padding = { top: footerSpace };
             } else {
-                padding = {
-                    left: footerSpace,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom,
-                };
+                padding = { left: footerSpace };
             }
             var expand = GetValue(config, 'expand.footer', true);
             this.add(footer, 0, align, padding, expand);

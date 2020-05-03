@@ -78,13 +78,14 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 
 ```javascript
 var sizer = scene.rexUI.add.sizer({
+    orientation: 0,
+
     // x: 0,
     // y: 0,
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
-
-    orientation: 0,
+    // space: { left: 0, right:0, top:0, bottom:0 }
 });
 ```
 
@@ -93,9 +94,11 @@ or
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, {
     orientation: 0,
+
     // width: undefined,
     // height: undefined,
     // anchor: undefined,
+    // space: { left: 0, right:0, top:0, bottom:0 }
 });
 ```
 
@@ -104,7 +107,8 @@ or
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, width, height, {
     orientation: 0,
-    // anchor: undefined
+    // anchor: undefined,
+    // space: { left: 0, right:0, top:0, bottom:0 }
 });
 ```
 
@@ -112,7 +116,8 @@ or
 
 ```javascript
 var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
-    // anchor: undefined
+    // anchor: undefined,
+    // space: { left: 0, right:0, top:0, bottom:0 }
 });
 ```
 
@@ -127,6 +132,8 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
 - `orientation` : Main orientation of the sizer.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
+- `space` : Pads spaces.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 
 ### Custom class
 
@@ -177,7 +184,7 @@ sizer.add(child, proportion, align, paddingConfig, expand, childKey, index);
     - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
     - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
-- `paddingConfig` : Add space between bounds. Default is 0.
+- `paddingConfig` : Extra padded space. Default is 0.
     - A number for left/right/top/bottom bounds,
     - Or a plain object.
         ```javascript

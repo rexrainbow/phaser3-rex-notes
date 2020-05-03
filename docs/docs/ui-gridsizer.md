@@ -163,8 +163,8 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
 - `columnProportions`, `rowProportions` : Proportion of each column/row.
     - Number : Apply this number proportion to each column/row
     - Number array : Apply proportion of column/row through elements of this number array.
-- `space` : Space around this sizer, and space between columns/rows
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space around this sizer.
+- `space` : Pads spaces.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.column` : Space between 2 columns
         - A number
         - A number array

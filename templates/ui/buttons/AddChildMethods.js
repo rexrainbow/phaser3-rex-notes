@@ -8,12 +8,6 @@ const SizerInsert = Sizer.prototype.insert;
 
 var Add = function (gameObject) {
     var buttonCount = this.buttons.length;
-    var padding = {
-        top: this.buttonSpace.top,
-        bottom: this.buttonSpace.bottom,
-        left: this.buttonSpace.left,
-        right: this.buttonSpace.right
-    };
     if (buttonCount === 0) { // 1st button
         // Add space
         if (!this.buttonsExpand) {
@@ -26,7 +20,7 @@ var Add = function (gameObject) {
             }
         }
 
-        SizerAdd.call(this, gameObject, this.buttonProportion, 'center', padding, true);
+        SizerAdd.call(this, gameObject, this.buttonProportion, 'center', 0, true);
 
         // Add space
         if (!this.buttonsExpand) {
@@ -35,10 +29,11 @@ var Add = function (gameObject) {
             }
         }
     } else {
+        var padding;
         if (this.orientation === 0) { // x
-            padding.left = this.buttonSpace.item;            
+            padding = { left: this.space.item };
         } else { // y
-            padding.top = this.buttonSpace.item;
+            padding = { top: this.space.item };
         }
 
         var lastIndex = this.sizerChildren.length - 1;
@@ -50,15 +45,6 @@ var Add = function (gameObject) {
         }
     }
 
-    if (buttonCount > 0) {
-        var lastButton = this.buttons[this.buttons.length - 1];
-        var config = this.getSizerConfig(lastButton);
-        if (this.orientation === 0) { // x
-            config.padding.right = 0;
-        } else {  // y
-            config.padding.bottom = 0;
-        }
-    }
     this.buttons.push(gameObject);
     ButtonSetInteractive.call(this, gameObject, this.clickConfig);
     return this;

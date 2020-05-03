@@ -36,27 +36,24 @@ var CreateScrollableSizer = function (config) {
 
         var proportion = GetValue(config, 'child.proportion', 1);
         var expand = GetValue(config, 'child.expand', true);
-        var padding;
-        if (scrollMode === 0) {
-            padding = {
-                right: (sliderConfig) ? childSpace : 0,
-            };
-        } else {
-            padding = {
-                bottom: (sliderConfig) ? childSpace : 0
-            };
-        }
-        scrollableSizer.add(child, proportion, 'center', padding, expand);
+        scrollableSizer.add(child, proportion, 'center', 0, expand);
 
         if (sliderConfig) {
             if (sliderConfig === true) {
                 sliderConfig = {};
             }
+            var padding;
+            if (scrollMode === 0) {
+                padding = { left: childSpace };
+            } else {
+                padding = { top: childSpace };
+            }
+
             // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
             // Horizontal slider(orientation=0) for top-bottom scrollableSizer(orientation=1)
             sliderConfig.orientation = (scrollableSizer.orientation === 0) ? 1 : 0;
             slider = new Slider(scene, sliderConfig);
-            scrollableSizer.add(slider, 0, 'center', 0, true);
+            scrollableSizer.add(slider, 0, 'center', padding, true);
         }
 
 

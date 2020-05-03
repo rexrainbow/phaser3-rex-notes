@@ -133,7 +133,7 @@ var label = scene.rexUI.add.label({
     - `undefined`, or `'left'`, or `'top'` : Align game objects at left, or top.
     - `'center'` : Align game objects at center.
     - `'right'`, or `'bottom'` : Align game objects at right, or bottom.
-- `space` : Pads spaces
+- `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.

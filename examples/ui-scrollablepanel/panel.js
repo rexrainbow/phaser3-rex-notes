@@ -46,7 +46,7 @@ class Demo extends Phaser.Scene {
             x: 400,
             y: 300,
             width: 400,
-            height: 220,
+            // height: 220,
 
             scrollMode: 1,
 
@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
             }
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+        // .drawBounds(this.add.graphics(), 0xff0000);
 
         this.input.topOnly = false;
     }
