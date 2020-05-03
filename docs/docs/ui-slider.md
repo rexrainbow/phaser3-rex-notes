@@ -145,6 +145,7 @@ var slider = scene.rexUI.add.slider({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

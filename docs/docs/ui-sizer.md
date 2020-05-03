@@ -136,6 +136,7 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
         constructor(scene, x, y, minWidth, minHeight, orientation) {
             super(scene, x, y, minWidth, minHeight, orientation);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

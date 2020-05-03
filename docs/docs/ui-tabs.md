@@ -170,6 +170,7 @@ var tabs = scene.rexUI.add.tabs({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

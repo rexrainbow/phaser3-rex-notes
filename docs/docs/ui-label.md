@@ -169,6 +169,7 @@ Or uses [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md)
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

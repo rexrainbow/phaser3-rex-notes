@@ -175,6 +175,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation, spac
         constructor(scene, x, y, minWidth, minHeight, orientation, space, config) {
             super(scene, x, y, minWidth, minHeight, orientation, space, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

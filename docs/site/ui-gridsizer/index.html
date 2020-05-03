@@ -4089,6 +4089,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-child" class="md-nav__link">
+    Get child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-child" class="md-nav__link">
+    Remove child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-size" class="md-nav__link">
+    Grid size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -4179,6 +4200,18 @@
   <li class="md-nav__item">
     <a href="../ui-buttons/" title="Buttons" class="md-nav__link">
       Buttons
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-gridbuttons/" title="Grid buttons" class="md-nav__link">
+      Grid buttons
     </a>
   </li>
 
@@ -4893,6 +4926,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-child" class="md-nav__link">
+    Get child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-child" class="md-nav__link">
+    Remove child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-size" class="md-nav__link">
+    Grid size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -4999,6 +5053,11 @@
     <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
+    <span class="c1">// space: {</span>
+    <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
+    <span class="c1">//     column: 0, // [0, 0, 0]</span>
+    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">// },</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false</span>
@@ -5011,6 +5070,13 @@
     <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
+
+    <span class="c1">// space: {</span>
+    <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
+    <span class="c1">//     column: 0, // [0, 0, 0]</span>
+    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">// },</span>
+
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined</span>
 <span class="p">});</span>
@@ -5022,11 +5088,26 @@
     <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// columnProportions: undefined,</span>
     <span class="c1">// rowProportions: undefined,</span>
+
+    <span class="c1">// space: {</span>
+    <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
+    <span class="c1">//     column: 0, // [0, 0, 0]</span>
+    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">// },    </span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// space: {</span>
+    <span class="c1">//     left: 0, right: 0, top: 0, bottom:0,</span>
+    <span class="c1">//     column: 0, // [0, 0, 0]</span>
+    <span class="c1">//     row: 0     // [0, 0, 0]</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
@@ -5052,14 +5133,29 @@
 <li>Number array : Apply proportion of column/row through elements of this number array.</li>
 </ul>
 </li>
+<li><code>space</code> : Space around this sizer, and space between columns/rows<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space around this sizer.</li>
+<li><code>space.column</code> : Space between 2 columns<ul>
+<li>A number</li>
+<li>A number array</li>
+</ul>
+</li>
+<li><code>space.row</code> : Space between 2 rows<ul>
+<li>A number</li>
+<li>A number array</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
     <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyGridSizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">GridSizer</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">ro</span><span class="p">);</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">);</span>
         <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -5121,6 +5217,40 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 
+<h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">getChildAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove a child
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>    
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">);</span>    
+</code></pre></div></li>
+<li>Remove and destroy a child
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>    
+</code></pre></div></li>
+<li>Remove all children
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Remove and destroy all children
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="grid-size">Grid size<a class="headerlink" href="#grid-size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Amount of column
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">columnCount</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Amount of row
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rowCount</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">rowCount</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
                 

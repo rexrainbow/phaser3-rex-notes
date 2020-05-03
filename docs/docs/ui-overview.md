@@ -46,6 +46,7 @@
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Fix-width-sizer](ui-fixwidthsizer.md): Layout children game objects into lines.
+1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [Grid-table](ui-gridtable.md): A container with a [grid table](gridtable.md), slider, and scroller.
 1. [Label](ui-label.md): A container with an icon, text, and background.

@@ -258,6 +258,7 @@ var table = scene.rexUI.add.gridTable({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

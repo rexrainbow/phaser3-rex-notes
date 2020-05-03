@@ -202,6 +202,7 @@ var textArea = scene.rexUI.add.textArea({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

@@ -145,6 +145,7 @@ var textBox = scene.rexUI.add.textBox({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }

@@ -104,6 +104,7 @@ var pages = scene.rexUI.add.pages({
         constructor(scene, config) {
             super(scene, config);
             // ...
+            scene.add.existing(this);
         }
         // ...
     }
