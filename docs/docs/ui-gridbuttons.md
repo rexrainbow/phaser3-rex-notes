@@ -8,6 +8,7 @@ A container with a group of buttons in grids.
 ## Live demos
 
 - [Number pad](https://codepen.io/rexrainbow/pen/MWaExGE)
+- [Checkboxes/radio](https://codepen.io/rexrainbow/pen/MWaObEW)
 
 ## Usage
 
