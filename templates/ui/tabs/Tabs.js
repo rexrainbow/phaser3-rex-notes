@@ -49,7 +49,7 @@ class Tabs extends GridSizer {
                 background: leftButtonsBackground,
                 buttons: leftButtons,
                 orientation: 1, // Top-Bottom
-                space: leftButtonSpace,
+                space: { item: leftButtonSpace },
                 align: GetValue(config, 'align.leftButtons', undefined),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
@@ -68,7 +68,7 @@ class Tabs extends GridSizer {
                 background: rightButtonsBackground,
                 buttons: rightButtons,
                 orientation: 1, // Top-Bottom
-                space: rightButtonSpace,
+                space: { item: rightButtonSpace },
                 align: GetValue(config, 'align.rightButtons', undefined),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
@@ -87,7 +87,7 @@ class Tabs extends GridSizer {
                 background: topButtonsBackground,
                 buttons: topButtons,
                 orientation: 0, // Left-Right
-                space: topButtonSpace,
+                space: { item: topButtonSpace },
                 align: GetValue(config, 'align.topButtons', undefined),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,
@@ -106,7 +106,7 @@ class Tabs extends GridSizer {
                 background: bottomButtonsBackground,
                 buttons: bottomButtons,
                 orientation: 0, // Left-Right
-                space: bottomButtonSpace,
+                space: { item: bottomButtonSpace },
                 align: GetValue(config, 'align.bottomButtons', undefined),
                 click: clickConfig,
                 eventEmitter: this.eventEmitter,

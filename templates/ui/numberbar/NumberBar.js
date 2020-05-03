@@ -20,10 +20,6 @@ class NumberBar extends Sizer {
         var text = GetValue(config, 'text', undefined);
 
         // Space
-        var paddingLeft = GetValue(config, 'space.left', 0);
-        var paddingRight = GetValue(config, 'space.right', 0);
-        var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
         var iconSpace = GetValue(config, 'space.icon', 0);
         var sliderSpace = GetValue(config, 'space.slider', 0);
 
@@ -34,18 +30,12 @@ class NumberBar extends Sizer {
         if (icon) {
             var padding;
             if (this.orientation === 0) {
-                padding = {
-                    left: paddingLeft,
-                    right: (sliderConfig || text) ? iconSpace : paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
+                if (sliderConfig || text) {
+                    padding = { right: iconSpace };
                 }
             } else {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: (sliderConfig || text) ? iconSpace : paddingBottom
+                if (sliderConfig || text) {
+                    padding = { bottom: iconSpace };
                 }
             }
 
@@ -68,18 +58,12 @@ class NumberBar extends Sizer {
 
             var padding;
             if (this.orientation === 0) {
-                padding = {
-                    left: (icon) ? 0 : paddingLeft,
-                    right: (text) ? sliderSpace : paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
+                if (text) {
+                    padding = { right: sliderSpace };
                 }
             } else {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (icon) ? 0 : paddingTop,
-                    bottom: (text) ? sliderSpace : paddingBottom
+                if (text) {
+                    padding = { bottom: sliderSpace };
                 }
             }
 
@@ -96,23 +80,7 @@ class NumberBar extends Sizer {
 
 
         if (text) {
-            var padding;
-            if (this.orientation === 0) {
-                padding = {
-                    left: (icon || sliderConfig) ? 0 : paddingLeft,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
-                }
-            } else {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (icon || sliderConfig) ? 0 : paddingTop,
-                    bottom: paddingBottom
-                }
-            }
-            this.add(text, 0, 'center', padding);
+            this.add(text);
         }
 
         this.addChildrenMap('background', background);

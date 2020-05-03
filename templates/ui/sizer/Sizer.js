@@ -1,6 +1,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
+import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,6 +33,7 @@ class Sizer extends BaseSizer {
         this.type = 'rexSizer';
         this.sizerChildren = [];
         this.setOrientation(orientation);
+        this.space = GetBoundsConfig(GetValue(config, 'space', 0));
     }
 
     destroy(fromScene) {
@@ -56,6 +58,30 @@ class Sizer extends BaseSizer {
             this._childrenProportion = this.getChildrenProportion();
         }
         return this._childrenProportion;
+    }
+
+    get innerLeft() {
+        return this.left + this.space.left;
+    }
+
+    get innerRight() {
+        return this.right - this.space.right;
+    }
+
+    get innerTop() {
+        return this.top + this.space.top;
+    }
+
+    get innerBottom() {
+        return this.bottom - this.space.bottom;
+    }
+
+    get innerWidth() {
+        return this.width - this.space.left - this.space.right;
+    }
+
+    get innerHeight() {
+        return this.height - this.space.top - this.space.bottom;
     }
 }
 

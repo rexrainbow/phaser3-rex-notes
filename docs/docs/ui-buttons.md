@@ -99,6 +99,7 @@ var buttons = scene.rexUI.add.buttons({
         clickInterval: 100
     },
 
+    // space: 0,
     // space: {
     //    top: 0,
     //    bottom: 0,

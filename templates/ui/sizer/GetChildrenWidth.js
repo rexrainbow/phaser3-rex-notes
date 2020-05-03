@@ -54,7 +54,7 @@ var GetChildrenWidth = function (minimumMode) {
             result = Math.max(childWidth, result);
         }
     }
-    return result;
+    return result + this.space.left + this.space.right;
 }
 
 export default GetChildrenWidth;

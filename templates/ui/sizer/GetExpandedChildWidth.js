@@ -8,7 +8,7 @@ var GetExpandedChildWidth = function (parent, child) {
         }
     } else { // y
         if (childConfig.expand) {
-            newWidth = parent.width - padding.left - padding.right;
+            newWidth = parent.innerWidth - padding.left - padding.right;
         }
     }
     return newWidth;

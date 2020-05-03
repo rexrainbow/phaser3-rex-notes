@@ -135,6 +135,7 @@ module.exports = {
     // rex ui
     'bbcodetext': './templates/ui/bbcodetext/BBCodeText.js',
     'buttons': './templates/ui/buttons/Buttons.js',
+    'gridbuttons': './templates/ui/gridbuttons/GridButtons.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
     'chart': './templates/ui/chart/Chart.js',

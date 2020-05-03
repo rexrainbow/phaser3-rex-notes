@@ -11,6 +11,12 @@ class Buttons extends Sizer {
         if (config === undefined) {
             config = {};
         }
+
+        var buttonSpace = config.space;
+        if (typeof (buttonSpace) === 'number') {
+            config.space = { item: buttonSpace };
+        }
+
         // Create
         super(scene, config);
         this.type = 'rexButtons';
@@ -27,17 +33,7 @@ class Buttons extends Sizer {
         this.buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
         // Button properties
         this.buttonProportion = (this.buttonsExpand) ? 1 : 0;
-        var space = GetValue(config, 'space', undefined);
-        if (typeof (space) === 'number') {
-            space = { item: space };
-        }
-        this.buttonSpace = {
-            item: GetValue(space, 'item', 0),
-            left: GetValue(space, 'left', 0),
-            right: GetValue(space, 'right', 0),
-            top: GetValue(space, 'top', 0),
-            bottom: GetValue(space, 'bottom', 0),
-        };
+        this.space.item = GetValue(config, 'space.item', 0);
         this.clickConfig = GetValue(config, 'click', undefined);
 
         if (background) {

@@ -44,8 +44,10 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout children    
     var children = this.sizerChildren;
     var child, childConfig, padding;
-    var startX = this.left,
-        startY = this.top;
+    var startX = this.innerLeft,
+        startY = this.innerTop;
+    var innerWidth = this.innerWidth;
+    var innerHeight = this.innerHeight;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
@@ -85,10 +87,10 @@ var Layout = function (parent, newWidth, newHeight) {
             }
 
             y = (itemY + padding.top);
-            height = (this.height - padding.top - padding.bottom);
+            height = (innerHeight - padding.top - padding.bottom);
         } else { // y
             x = (itemX + padding.left);
-            width = (this.width - padding.left - padding.right);
+            width = (innerWidth - padding.left - padding.right);
 
             y = (itemY + padding.top);
             if ((childConfig.proportion === 0) || (proportionLength === 0)) {

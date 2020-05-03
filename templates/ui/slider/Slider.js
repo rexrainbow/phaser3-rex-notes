@@ -25,24 +25,12 @@ class Slider extends Sizer {
         var indicator = GetValue(config, 'indicator', undefined);
         var thumb = GetValue(config, 'thumb', undefined);
 
-        // Space
-        var paddingLeft = GetValue(config, 'space.left', 0);
-        var paddingRight = GetValue(config, 'space.right', 0);
-        var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
-
         if (background) {
             this.addBackground(background);
         }
 
         if (track) {
-            var padding = {
-                left: paddingLeft,
-                right: paddingRight,
-                top: paddingTop,
-                bottom: paddingBottom
-            }
-            this.add(track, 1, undefined, padding, true);
+            this.add(track, 1, 'center', 0, true);
         }
 
         if (indicator) {

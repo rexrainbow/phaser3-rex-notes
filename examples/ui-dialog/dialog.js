@@ -59,7 +59,8 @@ class Demo extends Phaser.Scene {
                 // descriptionRight: 20,
                 choices: 25,
 
-                // toolbarItem: 5,
+                leftToolbarItem: 5,
+                toolbarItem: 5,
                 choice: 15,
                 action: 15,
             },

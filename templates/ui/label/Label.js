@@ -19,10 +19,6 @@ class Label extends Sizer {
         // Align
         var align = GetValue(config, 'align', undefined); // undefined/left/top: no space
         // Space
-        var paddingLeft = GetValue(config, 'space.left', 0);
-        var paddingRight = GetValue(config, 'space.right', 0);
-        var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
         var iconSpace = GetValue(config, 'space.icon', 0);
         var textSpace = GetValue(config, 'space.text', 0);
 
@@ -42,18 +38,12 @@ class Label extends Sizer {
         if (icon) {
             var padding;
             if (this.orientation === 0) {
-                padding = {
-                    left: paddingLeft,
-                    right: (text || action) ? iconSpace : paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
+                if (text || action) {
+                    padding = { right: iconSpace };
                 }
             } else {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: (text || action) ? iconSpace : paddingBottom
+                if (text || action) {
+                    padding = { bottom: iconSpace };
                 }
             }
 
@@ -70,20 +60,14 @@ class Label extends Sizer {
             var proportion, padding, expand;
             if (this.orientation === 0) {
                 proportion = (expandTextWidth) ? 1 : 0;
-                padding = {
-                    left: (icon) ? 0 : paddingLeft,
-                    right: (action) ? textSpace : paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
-                };
+                if (action) {
+                    padding = { right: textSpace };
+                }
                 expand = expandTextHeight;
             } else {
                 proportion = (expandTextHeight) ? 1 : 0;
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (icon) ? 0 : paddingTop,
-                    bottom: (action) ? textSpace : paddingBottom
+                if (action) {
+                    padding = { bottom: textSpace };
                 }
                 expand = expandTextWidth;
             }
@@ -91,23 +75,7 @@ class Label extends Sizer {
         }
 
         if (action) {
-            var padding;
-            if (this.orientation === 0) {
-                padding = {
-                    left: (icon || text) ? 0 : paddingLeft,
-                    right: paddingRight,
-                    top: paddingTop,
-                    bottom: paddingBottom
-                }
-            } else {
-                padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (icon || text) ? 0 : paddingTop,
-                    bottom: paddingBottom
-                }
-            }
-            this.add(action, 0, 'center', padding);
+            this.add(action);
 
             if (actionMask) {
                 actionMask = this.addChildMask(action, action, 1); // Circle mask

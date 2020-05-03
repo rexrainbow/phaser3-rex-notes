@@ -5016,35 +5016,40 @@
 </ul>
 <h3 id="add-sizer-object">Add sizer object<a class="headerlink" href="#add-sizer-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
     <span class="c1">// anchor: undefined,</span>
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
-
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
     <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="c1">// anchor: undefined</span>
+    <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// anchor: undefined</span>
+    <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5066,6 +5071,10 @@
 <li><code>orientation</code> : Main orientation of the sizer.<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces.<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 </ul>
 </li>
 </ul>
@@ -5114,7 +5123,7 @@
 <li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
 </ul>
 </li>
-<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li><code>paddingConfig</code> : Extra padded space. Default is 0.<ul>
 <li>A number for left/right/top/bottom bounds,</li>
 <li>Or a plain object.
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>

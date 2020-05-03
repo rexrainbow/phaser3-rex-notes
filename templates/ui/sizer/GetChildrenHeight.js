@@ -54,7 +54,7 @@ var GetChildrenHeight = function (minimumMode) {
             result += childHeight;
         }
     }
-    return result;
+    return result + this.space.top + this.space.bottom;
 }
 
 export default GetChildrenHeight;
