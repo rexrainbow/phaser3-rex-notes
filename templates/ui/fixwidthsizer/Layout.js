@@ -12,26 +12,24 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Set size
     if (newWidth === undefined) {
-        var padding = this.padding;
-        newWidth = Math.max(this.maxChildWidth + padding.left + padding.right, this.minWidth);
+        newWidth = Math.max(this.maxChildWidth + this.space.left + this.space.right, this.minWidth);
     }
     if (newHeight === undefined) {
-        var padding = this.padding;
-        newHeight = Math.max(this.maxChildHeight + padding.top + padding.bottom, this.minHeight);
+        newHeight = Math.max(this.maxChildHeight + this.space.top + this.space.bottom, this.minHeight);
     }
 
-    var innerLineWidth, padding = this.padding;
+    var innerLineWidth;
     if (this.orientation === 0) { // x
-        innerLineWidth = newWidth - padding.left - padding.right;
+        innerLineWidth = newWidth - this.space.left - this.space.right;
     } else { // y
-        innerLineWidth = newHeight - padding.top - padding.bottom;
+        innerLineWidth = newHeight - this.space.top - this.space.bottom;
     }
     var wrapResult = RunChildrenWrap.call(this, innerLineWidth);
     // Expanded height is less then min-lines-height
     if (this.orientation === 0) { // x
-        newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
+        newHeight = Math.max(newHeight, wrapResult.height + this.space.top + this.space.bottom);
     } else { // y
-        newWidth = Math.max(newWidth, wrapResult.height + padding.left + padding.right);
+        newWidth = Math.max(newWidth, wrapResult.height + this.space.left + this.space.right);
     }
     this.resize(newWidth, newHeight);
 
@@ -47,9 +45,9 @@ var Layout = function (parent, newWidth, newHeight) {
     var line, lineChlidren, remainderLineWidth;
     if (this.orientation === 0) { // x
         itemX = startX;
-        itemY = startY + this.padding.top;
+        itemY = startY + this.space.top;
     } else {
-        itemX = startX + this.padding.left;
+        itemX = startX + this.space.left;
         itemY = startY;
     }
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -113,9 +111,9 @@ var Layout = function (parent, newWidth, newHeight) {
             if (this.orientation === 0) { // x
                 x = (itemX + padding.left);
                 if (j === 0) {
-                    x += this.padding.left;
+                    x += this.space.left;
                 } else {
-                    x += this.itemSpacing;
+                    x += this.space.item;
                 }
 
                 y = (itemY + padding.top);
@@ -127,9 +125,9 @@ var Layout = function (parent, newWidth, newHeight) {
 
                 y = (itemY + padding.top);
                 if (j === 0) {
-                    y += this.padding.top;
+                    y += this.space.top;
                 } else {
-                    y += this.itemSpacing;
+                    y += this.space.item;
                 }
 
                 width = GetDisplayWidth(child);
@@ -144,9 +142,9 @@ var Layout = function (parent, newWidth, newHeight) {
 
         if (this.orientation === 0) { // x
             itemX = startX;
-            itemY += line.height + this.lineSpacing;
+            itemY += line.height + this.space.line;
         } else { // y
-            itemX += line.height + this.lineSpacing;
+            itemX += line.height + this.space.line;
             itemY = startY;
         }
     }
