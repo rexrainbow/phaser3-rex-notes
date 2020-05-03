@@ -31,9 +31,9 @@ var RunChildrenWrap = function (lineWidth) {
         // New line
         if (newLine) {
             if (lastLine) {
-                lastLine.width = lineWidth - (remainder + this.itemSpacing);
+                lastLine.width = lineWidth - (remainder + this.space.item);
                 result.width = Math.max(result.width, lastLine.width);
-                result.height += lastLine.height + this.lineSpacing;
+                result.height += lastLine.height + this.space.line;
             }
 
             lastLine = {
@@ -45,7 +45,7 @@ var RunChildrenWrap = function (lineWidth) {
             remainder = lineWidth;
         }
 
-        remainder -= (childWidth + this.itemSpacing);
+        remainder -= (childWidth + this.space.item);
         if (child) {
             lastLine.children.push(child);
             lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
@@ -53,7 +53,7 @@ var RunChildrenWrap = function (lineWidth) {
     }
 
     if (lastLine) {
-        lastLine.width = lineWidth - (remainder + this.itemSpacing);
+        lastLine.width = lineWidth - (remainder + this.space.item);
         result.width = Math.max(result.width, lastLine.width);
         result.height += lastLine.height;
     }

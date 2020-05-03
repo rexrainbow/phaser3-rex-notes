@@ -41,7 +41,7 @@ class FixWidthSizer extends BaseSizer {
         this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
         this.setOrientation(orientation);
-        this.setPadding(space);
+        this.space = GetBoundsConfig(space);
         this.setItemSpacing(GetValue(space, 'item', 0));
         this.setLineSpacing(GetValue(space, 'line', 0));
         this.setAlign(GetValue(config, 'align', 0));
@@ -67,18 +67,13 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
-    setPadding(paddingConfig) {
-        this.padding = GetBoundsConfig(paddingConfig, this.padding);
-        return this;
-    }
-
     setItemSpacing(space) {
-        this.itemSpacing = space;
+        this.space.item = space;
         return this;
     }
 
     setLineSpacing(space) {
-        this.lineSpacing = space;
+        this.space.line = space;
         return this;
     }
 
