@@ -33,24 +33,12 @@ class Tabs extends GridSizer {
         var bottomButtonsSizer;
         var clickConfig = GetValue(config, 'click', undefined);
 
-        // Space
-        var paddingLeft = GetValue(config, 'space.left', 0);
-        var paddingRight = GetValue(config, 'space.right', 0);
-        var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
-
         if (background) {
             this.addBackground(background);
         }
 
         if (panel) {
-            var padding = {
-                left: (leftButtons) ? 0 : paddingLeft,
-                right: (rightButtons) ? 0 : paddingRight,
-                top: (topButtons) ? 0 : paddingTop,
-                bottom: (bottomButtons) ? 0 : paddingBottom
-            };
-            this.add(panel, 1, 1, 'center', padding, true);
+            this.add(panel, 1, 1, 'center', 0, true);
         }
 
         if (leftButtons) {
@@ -67,7 +55,6 @@ class Tabs extends GridSizer {
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
-                left: paddingLeft,
                 top: leftButtonsOffset,
             };
             this.add(leftButtonsSizer, 0, 1, 'top', padding, false);
@@ -87,7 +74,6 @@ class Tabs extends GridSizer {
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
-                right: paddingRight,
                 top: rightButtonsOffset,
             };
             this.add(rightButtonsSizer, 2, 1, 'top', padding, false);
@@ -107,7 +93,6 @@ class Tabs extends GridSizer {
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
-                top: paddingTop,
                 left: toptButtonsOffset,
             };
             this.add(topButtonsSizer, 1, 0, 'left', padding, false);
@@ -127,7 +112,6 @@ class Tabs extends GridSizer {
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
-                bottom: paddingBottom,
                 left: bottomButtonsOffset,
             };
             this.add(bottomButtonsSizer, 1, 2, 'left', padding, false);
