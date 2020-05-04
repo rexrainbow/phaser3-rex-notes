@@ -80,6 +80,7 @@ var pages = scene.rexUI.add.pages({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
+    // space: { left: 0, right:0, top:0, bottom:0 },
 
     // name: '',
     // draggable: false
@@ -94,6 +95,8 @@ var pages = scene.rexUI.add.pages({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
+- `space` : Pads spaces.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `name` : Set name of this pages.
 
 ### Custom class

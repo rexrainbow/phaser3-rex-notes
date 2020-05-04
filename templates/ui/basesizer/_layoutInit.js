@@ -1,3 +1,6 @@
-// Override
-var _layoutInit = function () {}
-export default _layoutInit;
+// Default method
+var LayoutInitChild = function () {
+    this._childrenWidth = undefined;
+    this._childrenHeight = undefined;
+}
+export default LayoutInitChild;

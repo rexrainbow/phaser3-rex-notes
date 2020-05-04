@@ -2,8 +2,8 @@ import Pages from './Pages.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
-ObjectFactory.register('pages', function (x, y, minWidth, minHeight, config) {
-    var gameObject = new Pages(this.scene, x, y, minWidth, minHeight, config);
+ObjectFactory.register('pages', function (config) {
+    var gameObject = new Pages(this.scene, config);
     this.scene.add.existing(gameObject);
     return gameObject;
 });

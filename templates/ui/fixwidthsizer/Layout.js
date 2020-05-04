@@ -12,10 +12,10 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Set size
     if (newWidth === undefined) {
-        newWidth = Math.max(this.maxChildWidth + this.space.left + this.space.right, this.minWidth);
+        newWidth = Math.max((this.maxChildWidth + this.space.left + this.space.right), this.minWidth);
     }
     if (newHeight === undefined) {
-        newHeight = Math.max(this.maxChildHeight + this.space.top + this.space.bottom, this.minHeight);
+        newHeight = Math.max((this.maxChildHeight + this.space.top + this.space.bottom), this.minHeight);
     }
 
     var innerLineWidth;
@@ -27,29 +27,23 @@ var Layout = function (parent, newWidth, newHeight) {
     var wrapResult = RunChildrenWrap.call(this, innerLineWidth);
     // Expanded height is less then min-lines-height
     if (this.orientation === 0) { // x
-        newHeight = Math.max(newHeight, wrapResult.height + this.space.top + this.space.bottom);
+        newHeight = Math.max(newHeight, (wrapResult.height + this.space.top + this.space.bottom));
     } else { // y
-        newWidth = Math.max(newWidth, wrapResult.height + this.space.left + this.space.right);
+        newWidth = Math.max(newWidth, (wrapResult.height + this.space.left + this.space.right));
     }
     this.resize(newWidth, newHeight);
 
     // Layout children    
     var child, childConfig, padding, justifySpace = 0;
-    var startX = this.left,
-        startY = this.top;
-    var itemX, itemY;
+    var startX = this.innerLeft,
+        startY = this.innerTop;
+    var itemX = startX,
+        itemY = startY;
     var x, y, width, height; // Align zone
 
     // Layout each line
     var lines = wrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
-    if (this.orientation === 0) { // x
-        itemX = startX;
-        itemY = startY + this.space.top;
-    } else {
-        itemX = startX + this.space.left;
-        itemY = startY;
-    }
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
         line = lines[i];
         lineChlidren = line.children;
@@ -110,9 +104,7 @@ var Layout = function (parent, newWidth, newHeight) {
             padding = childConfig.padding;
             if (this.orientation === 0) { // x
                 x = (itemX + padding.left);
-                if (j === 0) {
-                    x += this.space.left;
-                } else {
+                if (j > 0) {
                     x += this.space.item;
                 }
 
@@ -124,9 +116,7 @@ var Layout = function (parent, newWidth, newHeight) {
                 x = (itemX + padding.left);
 
                 y = (itemY + padding.top);
-                if (j === 0) {
-                    y += this.space.top;
-                } else {
+                if (j > 0) {
                     y += this.space.item;
                 }
 

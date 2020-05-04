@@ -3,7 +3,7 @@ var GetExpandedChildWidth = function (parent, child) {
     var childConfig = child.rexSizer;
     var padding = childConfig.padding;
     if (childConfig.expandWidth) {
-        newWidth = parent.width - padding.left - padding.right;
+        newWidth = parent.innerWidth - padding.left - padding.right;
     }
     return newWidth;
 }

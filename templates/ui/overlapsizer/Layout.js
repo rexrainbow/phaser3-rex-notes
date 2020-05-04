@@ -23,8 +23,10 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Layout children
     var child, childConfig, padding;
-    var startX = this.left,
-        startY = this.top;
+    var startX = this.innerLeft,
+        startY = this.innerTop;
+    var innerWidth = this.innerWidth,
+        innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
 
@@ -45,19 +47,19 @@ var Layout = function (parent, newWidth, newHeight) {
             childWidth = undefined;
             childHeight = undefined;
             if (childConfig.expandWidth) { // Expand width
-                childWidth = this.width - padding.left - padding.right;
+                childWidth = innerWidth - padding.left - padding.right;
             }
             if (childConfig.expandHeight) { // Expand height
-                childHeight = this.height - padding.top - padding.bottom;
+                childHeight = innerHeight - padding.top - padding.bottom;
             }
             ResizeGameObject(child, childWidth, childHeight);
         }
 
         // Set position
         x = (startX + padding.left);
-        width = this.width - padding.left - padding.right;
+        width = innerWidth - padding.left - padding.right;
         y = (startY + padding.top);
-        height = this.height - padding.top - padding.bottom;
+        height = innerHeight - padding.top - padding.bottom;
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, childConfig.align);
         this.resetChildPositionState(child);

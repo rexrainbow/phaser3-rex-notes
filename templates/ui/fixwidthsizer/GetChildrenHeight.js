@@ -9,8 +9,7 @@ var GetChildrenHeight = function () {
     } else { // y
         result = this.maxChildHeight;
     }
-    result = Math.max(result, this.minHeight);
-    return result;
+    return result + this.space.top + this.space.bottom;
 }
 
 export default GetChildrenHeight;

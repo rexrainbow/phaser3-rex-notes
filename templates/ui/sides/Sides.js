@@ -2,23 +2,11 @@ import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import ShowChildMethods from './ShowChildMethods.js';
 import ChildBehaviorMethods from './childbehaviors/index.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Sides extends OverlapSizer {
-    constructor(scene, x, y, minWidth, minHeight, config) {
-        if (IsPlainObject(x)) {
-            config = x;
-            x = GetValue(config, 'x', 0);
-            y = GetValue(config, 'y', 0);
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        } else if (IsPlainObject(minWidth)) {
-            config = minWidth;
-            minWidth = GetValue(config, 'width', undefined);
-            minHeight = GetValue(config, 'height', undefined);
-        }
-        super(scene, x, y, minWidth, minHeight, config);
+    constructor(scene, config) {
+        super(scene, config);
         this.type = 'rexSides';
         this.childrenMap = this.sizerChildren;
         this.previousChildKey = undefined;

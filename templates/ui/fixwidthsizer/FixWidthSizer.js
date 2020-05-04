@@ -1,6 +1,5 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
 import GetMaxChildHeight from './GetMaxChildHeight.js';
@@ -9,41 +8,26 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class FixWidthSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, orientation, space, config) {
+    constructor(scene, x, y, minWidth, minHeight, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            orientation = GetValue(config, 'orientation', 0);
-            space = GetValue(config, 'space', config);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            orientation = GetValue(config, 'orientation', 0);
-            space = GetValue(config, 'space', config);
-        } else if (IsPlainObject(orientation)) {
-            config = orientation;
-            orientation = GetValue(config, 'orientation', 0);
-            space = GetValue(config, 'space', config);
         }
 
-        if (orientation === undefined) {
-            orientation = 0;
-        }
-        if (space === undefined) {
-            space = 0;
-        }
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
-        this.setOrientation(orientation);
-        this.space = GetBoundsConfig(space);
-        this.setItemSpacing(GetValue(space, 'item', 0));
-        this.setLineSpacing(GetValue(space, 'line', 0));
+        this.setOrientation(GetValue(config, 'orientation', 0));
+        this.setItemSpacing(GetValue(config, 'space.item', 0));
+        this.setLineSpacing(GetValue(config, 'space.line', 0));
         this.setAlign(GetValue(config, 'align', 0));
         this.setRTL(GetValue(config, 'rtl', false));
 
