@@ -3,16 +3,16 @@ import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
+const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
-export default {    
+export default {
     add(gameObject, key, align, padding, expand) {
         this.pin(gameObject);
 
         if (IsPlainObject(key)) {
             var config = key;
             key = GetValue(config, 'key', undefined);
-            align = GetValue(config, 'align', ALIGN_LEFTTOP);
+            align = GetValue(config, 'align', ALIGN_CENTER);
             padding = GetValue(config, 'padding', 0);
             expand = GetValue(config, 'expand', true);
         }
@@ -31,13 +31,22 @@ export default {
         if (padding === undefined) {
             padding = 0;
         }
-        var defaultExpand = (typeof (expand) === "boolean") ? expand : false;
+        if (expand === undefined) {
+            expand = true;
+        }
 
         var config = this.getSizerConfig(gameObject);
         config.align = align;
         config.padding = GetBoundsConfig(padding);
-        config.expandWidth = GetValue(expand, 'width', defaultExpand);
-        config.expandHeight = GetValue(expand, 'height', defaultExpand);
+
+        if (IsPlainObject(expand)) {
+            config.expandWidth = GetValue(expand, 'width', false);
+            config.expandHeight = GetValue(expand, 'height', false);
+        } else {
+            config.expandWidth = expand;
+            config.expandHeight = expand;
+        }
+
         if (this.sizerChildren.hasOwnProperty(key)) {
             this.sizerChildren[key].destroy();
         }

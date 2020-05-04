@@ -107,7 +107,9 @@ var CreateButtons = function (scene, keys) {
 }
 
 var CreatePages = function (scene, keys) {
-    var pages = scene.rexUI.add.pages()
+    var pages = scene.rexUI.add.pages({
+        space: { left: 20, right: 20, top: 20, bottom: 20 }
+    })
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_PRIMARY)
         );
@@ -122,10 +124,7 @@ var CreatePages = function (scene, keys) {
         key = keys[i];
         pages.addPage(
             createPageCallback[key](scene), // game object
-            key, // key
-            'left-top', // align
-            20, // padding
-            true, // extend
+            key // key
         )
     }
     return pages;
