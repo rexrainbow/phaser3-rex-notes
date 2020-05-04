@@ -4,13 +4,8 @@ var LayoutInit = function (parent) {
     }
 
     var children = this.getAllChildrenSizers([this]);
-    var child, parent;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
-        if (!child.rexSizer) {
-            continue;
-        }
-        child._layoutInit();
+        children[i]._layoutInit();
     }
 }
 export default LayoutInit;

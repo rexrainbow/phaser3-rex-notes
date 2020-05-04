@@ -69,7 +69,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
     import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add sizer object
-    ```javascript    
+    ```javascript
     var sizer = new Sizer(scene, config);
     sscene.add.existing(sizer);
     ```

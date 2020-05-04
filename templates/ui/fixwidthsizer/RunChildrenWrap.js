@@ -1,5 +1,4 @@
-import GetWidth from './GetChildWidth.js';
-import GetHeight from './GetChildHeight.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var RunChildrenWrap = function (lineWidth) {
     var result = {
@@ -8,7 +7,7 @@ var RunChildrenWrap = function (lineWidth) {
         height: 0
     };
     var children = this.sizerChildren;
-    var child, childWidth, remainder = 0;
+    var child, childWidth, childHeight, remainder = 0;
     var lastLine, lines = result.lines, newLine;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
@@ -25,7 +24,7 @@ var RunChildrenWrap = function (lineWidth) {
                 child.layout(); // Use original size
             }
 
-            childWidth = GetChildWidth(child, this.orientation);
+            childWidth = (this.orientation === 0) ? GetChildWidth(child) : GeChildHeight(child);
             newLine = (remainder < childWidth);
         }
         // New line
@@ -48,7 +47,8 @@ var RunChildrenWrap = function (lineWidth) {
         remainder -= (childWidth + this.space.item);
         if (child) {
             lastLine.children.push(child);
-            lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
+            childHeight = (this.orientation === 0) ? GeChildHeight(child) : GetChildWidth(child);
+            lastLine.height = Math.max(lastLine.height, childHeight);
         }
     }
 
@@ -60,12 +60,14 @@ var RunChildrenWrap = function (lineWidth) {
     return result;
 }
 
-var GetChildWidth = function (child, orientation) {
-    return (orientation === 0) ? GetWidth(child) : GetHeight(child);
+var GetChildWidth = function (child) {
+    var padding = child.rexSizer.padding;
+    return GetDisplayWidth(child) + padding.left + padding.right;
 }
 
-var GeChildHeight = function (child, orientation) {
-    return (orientation === 0) ? GetHeight(child) : GetWidth(child);
+var GeChildHeight = function (child) {
+    var padding = child.rexSizer.padding;
+    return GetDisplayHeight(child) + padding.top + padding.bottom;
 }
 
 export default RunChildrenWrap;

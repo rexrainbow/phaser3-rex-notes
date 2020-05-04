@@ -1,6 +1,5 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import ArrayFill from '../../../plugins/utils/array/Fill.js';
-import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import Methods from './Methods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -40,8 +39,7 @@ class GridSizer extends BaseSizer {
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexGridSizer';
-        var space = GetValue(config, 'space', 0);
-        this.initialGrid(columnCount, rowCount, columnProportions, rowProportions, space);
+        this.setupGrid(columnCount, rowCount, columnProportions, rowProportions, config);
 
     }
 
@@ -94,7 +92,7 @@ class GridSizer extends BaseSizer {
         return result;
     }
 
-    initialGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
+    setupGrid(columnCount, rowCount, columnProportions, rowProportions, config) {
         this.columnCount = columnCount;
         this.rowCount = rowCount;
 
@@ -130,10 +128,9 @@ class GridSizer extends BaseSizer {
         this.rowHeight.length = rowCount;
 
         // space
-        this.space = GetBoundsConfig(space);
         this.space.column = [];
         this.space.column.length = columnCount - 1;
-        var columnSpace = GetValue(space, 'column', 0);
+        var columnSpace = GetValue(config, 'space.column', 0);
         if (typeof (columnSpace) === 'number') {
             ArrayFill(this.space.column, columnSpace);
         } else {
@@ -143,7 +140,7 @@ class GridSizer extends BaseSizer {
         }
         this.space.row = [];
         this.space.row.length = rowCount - 1;
-        var rowSpace = GetValue(space, 'row', 0);
+        var rowSpace = GetValue(config, 'space.row', 0);
         if (typeof (rowSpace) === 'number') {
             ArrayFill(this.space.row, rowSpace);
         } else {

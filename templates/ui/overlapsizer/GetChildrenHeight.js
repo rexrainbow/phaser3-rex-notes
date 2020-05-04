@@ -18,7 +18,7 @@ var GetChildrenHeight = function () {
         childHeight += (padding.top + padding.bottom);
         result = Math.max(childHeight, result);
     }
-    return result;
+    return result + this.space.top + this.space.bottom;
 }
 
 export default GetChildrenHeight;

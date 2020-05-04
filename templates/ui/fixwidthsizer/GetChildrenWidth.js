@@ -9,8 +9,7 @@ var GetChildrenWidth = function () {
     } else { // y
         result = 0;
     }
-    result = Math.max(result, this.minWidth);
-    return result;
+    return result + this.space.left + this.space.right;
 }
 
 export default GetChildrenWidth;

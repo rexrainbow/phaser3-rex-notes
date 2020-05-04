@@ -85,12 +85,8 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     orientation: 0,
 
     // space: {
-    //     left: 0,
-    //     right: 0,
-    //     top: 0,
-    //     bottom: 0,
-    //     item: 0,
-    //     line: 0
+    //     left: 0, right: 0, top: 0, bottom: 0,
+    //     item: 0, line: 0
     // },
 
     // rtl: false,
@@ -105,17 +101,13 @@ or
 
 ```javascript
 var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
-    width: 2,
-    height: 2
+    // width: 2,
+    // height: 2
     orientation: 0,
-    space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        item: 0,
-        line: 0
-    }
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom: 0,
+    //     item: 0, line: 0
+    // }
 });
 ```
 
@@ -124,21 +116,11 @@ or
 ```javascript
 var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     orientation: 0,
-    space: {
-        left: 0,
-        right: 0,
-        top: 0,
-        bottom: 0,
-        item: 0,
-        line: 0
-    }
+    // space: {
+    //     left: 0, right: 0, top: 0, bottom: 0,
+    //     item: 0, line: 0
+    // }
 });
-```
-
-or
-
-```javascript
-var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation, space, config);
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.

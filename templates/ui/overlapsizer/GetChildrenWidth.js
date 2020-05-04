@@ -18,7 +18,7 @@ var GetChildrenWidth = function () {
         childWidth += (padding.left + padding.right);
         result = Math.max(childWidth, result);
     }
-    return result;
+    return result + this.space.left + this.space.right;
 }
 
 export default GetChildrenWidth;
