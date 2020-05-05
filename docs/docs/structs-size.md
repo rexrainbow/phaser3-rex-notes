@@ -44,7 +44,7 @@ var size = new Phaser.Structs.Size(width, height, aspectMode, parent);
     size.aspectRatio = ratio;
     ```
     - `ratio` : `width/height`
-1. Set size
+1. Set width/height
     ```javascript
     size.setSize(width, height);
     ```
@@ -58,7 +58,7 @@ var size = new Phaser.Structs.Size(width, height, aspectMode, parent);
     size.width = width;
     size.height = height;
     ```
-1. Get actual size
+1. Get result width/height
     ```javascript
     var newWidth = size.width;
     var newHeight = size.height;
