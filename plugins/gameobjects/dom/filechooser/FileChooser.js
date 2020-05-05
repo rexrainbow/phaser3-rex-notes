@@ -36,8 +36,12 @@ class FileChooser extends DOMElement {
         this.resize(width, height);
 
         // Register events
-        this.setCloseDelay(GetValue(config, 'closeDelay', 200));
         var self = this;
+        inputElement.onchange = function () {
+            self.emit('change', self);
+        }
+
+        this.setCloseDelay(GetValue(config, 'closeDelay', 200));
         inputElement.onclick = function () {
             ClickPromose({
                 game: scene,
