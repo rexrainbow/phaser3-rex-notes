@@ -1,4 +1,9 @@
 import FileChooserPlugin from '../../plugins/filechooser-plugin.js'
+import CanvasPlugin from '../../plugins/canvas-plugin.js'
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -10,24 +15,34 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var print = this.add.text(0, 0, 'Click rectangle to select a file');
-
         // Create cover
-        var cover = this.add.rectangle(400, 300, 100, 40).setStrokeStyle(2, 0xff0000);
-        this.add.text(400, 300, 'Open').setOrigin(0.5);
+        var cover = this.add.rectangle(400, 300, 500, 500, COLOR_PRIMARY).setStrokeStyle(2, COLOR_LIGHT);
+        // Create canvas
+        var canvas = this.add.rexCanvas(400, 300, 300, 300).fill('black');
+        canvas.fitTo = (function (parent) {
+            var size = new Phaser.Structs.Size(this.width, this.height, Phaser.Structs.Size.FIT, parent)
+                .setSize(this.width, this.height)
+            this.setDisplaySize(size.width, size.height);
+            size.destroy();
+        }).bind(canvas)
+
         // Create a transparent file chooser
         this.add.rexFileChooser({
             accept: 'image/*'
         })
             .sync(cover)
-            .on('select', function (gameObject) {
+            .on('change', function (gameObject) {
                 var files = gameObject.files;
-                if (files.length) {
-                    console.log(files[0])
-                    print.text = files[0].name;
-                } else {
-                    print.text = 'No file selected'
+                if (files.length === 0) {
+                    return;
                 }
+
+                var url = URL.createObjectURL(files[0]);
+                canvas.loadFromURLPromise(url)
+                    .then(function () {
+                        URL.revokeObjectURL(url);
+                        canvas.fitTo(cover);
+                    })
             })
     }
 
@@ -48,11 +63,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexFileChooser',
-            plugin: FileChooserPlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexFileChooser',
+                plugin: FileChooserPlugin,
+                start: true
+            },
+            {
+                key: 'rexCanvas',
+                plugin: CanvasPlugin,
+                start: true
+            }
+        ]
     }
 };
 
