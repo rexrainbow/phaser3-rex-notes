@@ -17,7 +17,7 @@ var FitTo = function (child, parent, out) {
     var ratio = out.width / out.height;
 
     if (ratio < childRatio) {
-        out.height = out.width * childRatio;
+        out.height = out.width / childRatio;
     } else if (ratio > childRatio) {
         out.width = out.height * childRatio;
     }
