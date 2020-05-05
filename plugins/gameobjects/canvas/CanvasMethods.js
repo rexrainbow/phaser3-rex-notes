@@ -29,6 +29,10 @@ export default {
             if (callback) {
                 callback();
             }
+
+            img.onload = null;
+            img.src = '';
+            img.remove();
         }
         img.src = url;
         return this;
