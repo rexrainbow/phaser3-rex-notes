@@ -1,5 +1,6 @@
 import FileChooserPlugin from '../../plugins/filechooser-plugin.js'
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
+import FitTo from '../../plugins/utils/size/FitTo.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -20,10 +21,8 @@ class Demo extends Phaser.Scene {
         // Create canvas
         var canvas = this.add.rexCanvas(400, 300, 300, 300).fill('black');
         canvas.fitTo = (function (parent) {
-            var size = new Phaser.Structs.Size(this.width, this.height, Phaser.Structs.Size.FIT, parent)
-                .setSize(this.width, this.height)
-            this.setDisplaySize(size.width, size.height);
-            size.destroy();
+            var newSize = FitTo(this, parent, true);
+            this.setDisplaySize(newSize.width, newSize.height);
         }).bind(canvas)
 
         // Create a transparent file chooser
