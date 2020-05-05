@@ -218,7 +218,6 @@ nav:
         - Gashapon: gashapon.md
         - Perlin: perlin.md
     - Color: color.md
-    - Size: struct-size.md
     - Vector:
         - Vector2: vector2.md
     - Geometry:
