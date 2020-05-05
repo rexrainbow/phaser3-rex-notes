@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
         this.add.rexFileChooser({
             accept: 'image/*'
         })
-            .sync(cover)
+            .syncTo(cover)
             .on('change', function (gameObject) {
                 var files = gameObject.files;
                 if (files.length === 0) {

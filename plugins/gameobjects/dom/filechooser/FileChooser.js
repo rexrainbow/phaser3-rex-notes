@@ -101,7 +101,7 @@ class FileChooser extends DOMElement {
         return this.fileInput.files;
     }
 
-    sync(gameObject) {
+    syncTo(gameObject) {
         this.setOrigin(gameObject.originX, gameObject.originY);
         this.setPosition(gameObject.x, gameObject.y);
         this.resize(gameObject.displayWidth, gameObject.displayHeight);
