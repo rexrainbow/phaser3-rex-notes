@@ -22,7 +22,7 @@ var tween = scene.tweens.add({
 });
 ```
 
-- `key: { from: value1, to: value2 }` : Set the property to `1` when tween started after delay, then tween to `value2`.
+- `key: { from: value1, to: value2 }` : Set the property to `value11` when tween started after delay, then tween to `value2`.
 - `key: { start: value0, to: value2 }` : Set the property to `value0` immediately, then tween to `value2`.
 - `key: { start: value0, from: value1, to: value2 }` : Set the property to `value0` immediately, then set to `value1` when tween started after delay, then tween to `value2`.
 - `key: value2` : Tween to `value2`.
@@ -134,7 +134,12 @@ var tween = scene.tweens.add({
 - `targets` : The targets the tween is updating.
 - `delay` : The time the tween will wait before it first starts
     - A number, for all targets
-    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function : 
+        ```javascript
+        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
+            return delay;
+        }
+        ```
     - A callback function, built via stagger builder :
         - From `0` to `endValue` : 
             - `scene.tweens.stagger(endValue)`
@@ -166,21 +171,41 @@ var tween = scene.tweens.add({
             - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], from: 'center', ease: 'cubic.inout'})`
 - `duration` : The duration of the tween
     - A number, for all targets
-    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function : 
+        ```javascript
+        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
+            return duration;
+        }
+        ```
     - A callback function, built via stagger builder
 - `ease` : The ease function used by the tween
 - `easeParams` : The parameters to go with the ease function (if any)
 - `hold` : The time the tween will pause before running a yoyo
     - A number, for all targets
-    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function : 
+        ```javascript
+        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
+            return hold;
+        }
+        ```
     - A callback function, built via stagger builder
 - `repeat` : The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)
     - A number, for all targets
-    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function : 
+        ```javascript
+        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
+            return duration;
+        }
+        ```
     - A callback function, built via stagger builder
 - `repeatDelay` : The time the tween will pause for before starting a repeat. The tween holds in the start state.
     - A number, for all targets
-    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function : 
+        ```javascript
+        function(target, targetKey, value, targetIndex, totalTargets, tween) { 
+            return duration;
+        }
+        ```
     - A callback function, built via stagger builder
 - `yoyo` : boolean - Does the tween reverse itself (yoyo) when it reaches the end?
 - `flipX` : flip X the GameObject on tween end

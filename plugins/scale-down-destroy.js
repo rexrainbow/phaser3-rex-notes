@@ -10,37 +10,36 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destro
         destroyMode = true;
     }
 
-    defaultConfig.mode = (destroyMode) ? 1 : 0;
+    var config = {};
+    config.mode = (destroyMode) ? 1 : 0;
     switch (orientation) {
         case 0:
         case 'x':
-            defaultConfig.end = {
+            config.end = {
                 x: 0
             };
             break;
         case 1:
         case 'y':
-            defaultConfig.end = {
+            config.end = {
                 y: 0
             };
             break;
         default:
-            defaultConfig.end = 0;
+            config.end = 0;
             break;
     }
-    defaultConfig.duration = duration;
-    defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
+    config.duration = duration;
+    config.ease = (ease === undefined) ? 'Linear' : ease;
 
     if (scale === undefined) {
-        scale = new Scale(gameObject, defaultConfig);
+        scale = new Scale(gameObject, config);
     } else {
-        scale.resetFromJSON(defaultConfig);
+        scale.resetFromJSON(config);
     }
     scale.restart();
 
     return scale;
 };
-
-var defaultConfig = {}; // reuse this config
 
 export default ScaleDownDestroy;
