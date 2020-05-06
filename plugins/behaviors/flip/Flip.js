@@ -111,7 +111,7 @@ class Flip extends TweenBase {
         }
 
         var propKey = (this.orientation === 0) ? 'scaleX' : 'scaleY';
-        config[propKey] = { from: 1, to: 0 };
+        config[propKey] = { start: 1, to: 0 };
 
         super.start(config);
         return this;

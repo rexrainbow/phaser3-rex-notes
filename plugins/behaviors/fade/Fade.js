@@ -69,10 +69,9 @@ class Fade extends TweenBase {
             return this;
         }
 
-        this.gameObject.setAlpha(this.alphaStart);
         super.start({
             targets: this.gameObject,
-            alpha: this.alphaEnd,
+            alpha: { start: this.alphaStart, to: this.alphaEnd },
 
             delay: this.delay,
             duration: this.duration,

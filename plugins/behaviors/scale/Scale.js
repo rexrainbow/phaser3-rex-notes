@@ -28,8 +28,10 @@ class Scale extends TweenBase {
     toJSON() {
         return {
             mode: this.mode,
-            start: this.scaleStart,
-            end: this.scaleEnd,
+            startX: this.startX,
+            startY: this.startY,
+            endX: this.endX,
+            endY: this.endY,
             delay: this.delay,
             duration: this.duration
         };
@@ -45,18 +47,18 @@ class Scale extends TweenBase {
 
     setScaleRange(start, end) {
         if (typeof (start) === 'number') {
-            this.scaleStart.x = start;
-            this.scaleStart.y = start;
+            this.startX = start;
+            this.startY = start;
         } else {
-            this.scaleStart.x = GetValue(start, 'x', this.gameObject.scaleX);
-            this.scaleStart.y = GetValue(start, 'y', this.gameObject.scaleY);
+            this.startX = GetAdvancedValue(start, 'x', this.gameObject.scaleX);
+            this.startY = GetAdvancedValue(start, 'y', this.gameObject.scaleY);
         }
         if (typeof (end) === 'number') {
-            this.scaleEnd.x = end;
-            this.scaleEnd.y = end;
+            this.endX = end;
+            this.endY = end;
         } else {
-            this.scaleEnd.x = GetValue(end, 'x', this.scaleStart.x);
-            this.scaleEnd.y = GetValue(end, 'y', this.scaleStart.y);
+            this.endX = GetAdvancedValue(end, 'x', undefined);
+            this.endY = GetAdvancedValue(end, 'y', undefined);
         }
         return this;
     }
@@ -84,18 +86,22 @@ class Scale extends TweenBase {
             return this;
         }
 
-        this.gameObject.setScale(this.scaleStart.x, this.scaleStart.y);
-        super.start({
+        var config = {
             targets: this.gameObject,
-            scaleX: this.scaleEnd.x,
-            scaleY: this.scaleEnd.y,
 
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0)
-        });
+        }
+        if ((this.startX !== undefined) && (this.endX !== undefined)) {
+            config.scaleX = { start: this.startX, to: this.endX };
+        }
+        if ((this.startY !== undefined) && (this.endY !== undefined)) {
+            config.scaleY = { start: this.startY, to: this.endY };
+        }
+        super.start(config);
         return this;
     }
 

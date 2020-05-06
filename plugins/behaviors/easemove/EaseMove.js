@@ -98,12 +98,10 @@ class EaseMove extends TweenBase {
             repeat: ((this.mode == 2) ? -1 : 0)
         };
         if ((this.startX !== undefined) && (this.endX !== undefined)) {
-            this.gameObject.setX(this.startX);
-            config.x = this.endX;
+            config.x = { start: this.startX, to: this.endX };
         }
         if ((this.startY !== undefined) && (this.endY !== undefined)) {
-            this.gameObject.setY(this.startY);
-            config.y = this.endY;
+            config.y = { start: this.startY, to: this.endY };
         }
         super.start(config);
         return this;
