@@ -5012,7 +5012,7 @@
 </code></pre></div>
 
 <ul>
-<li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>1</code> when tween started after delay, then tween to <code>value2</code>.</li>
+<li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>value11</code> when tween started after delay, then tween to <code>value2</code>.</li>
 <li><code>key: { start: value0, to: value2 }</code> : Set the property to <code>value0</code> immediately, then tween to <code>value2</code>.</li>
 <li><code>key: { start: value0, from: value1, to: value2 }</code> : Set the property to <code>value0</code> immediately, then set to <code>value1</code> when tween started after delay, then tween to <code>value2</code>.</li>
 <li><code>key: value2</code> : Tween to <code>value2</code>.</li>
@@ -5123,7 +5123,11 @@
 <li><code>targets</code> : The targets the tween is updating.</li>
 <li><code>delay</code> : The time the tween will wait before it first starts<ul>
 <li>A number, for all targets</li>
-<li>A callback function : <code>function(target, targetKey, value, targetIndex, totalTargets, tween) { }</code></li>
+<li>A callback function : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">targetKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">delay</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>A callback function, built via stagger builder :<ul>
 <li>From <code>0</code> to <code>endValue</code> : <ul>
 <li><code>scene.tweens.stagger(endValue)</code></li>
@@ -5179,7 +5183,11 @@
 </li>
 <li><code>duration</code> : The duration of the tween<ul>
 <li>A number, for all targets</li>
-<li>A callback function : <code>function(target, targetKey, value, targetIndex, totalTargets, tween) { }</code></li>
+<li>A callback function : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">targetKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">duration</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>A callback function, built via stagger builder</li>
 </ul>
 </li>
@@ -5187,19 +5195,31 @@
 <li><code>easeParams</code> : The parameters to go with the ease function (if any)</li>
 <li><code>hold</code> : The time the tween will pause before running a yoyo<ul>
 <li>A number, for all targets</li>
-<li>A callback function : <code>function(target, targetKey, value, targetIndex, totalTargets, tween) { }</code></li>
+<li>A callback function : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">targetKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">hold</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>A callback function, built via stagger builder</li>
 </ul>
 </li>
 <li><code>repeat</code> : The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)<ul>
 <li>A number, for all targets</li>
-<li>A callback function : <code>function(target, targetKey, value, targetIndex, totalTargets, tween) { }</code></li>
+<li>A callback function : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">targetKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">duration</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>A callback function, built via stagger builder</li>
 </ul>
 </li>
 <li><code>repeatDelay</code> : The time the tween will pause for before starting a repeat. The tween holds in the start state.<ul>
 <li>A number, for all targets</li>
-<li>A callback function : <code>function(target, targetKey, value, targetIndex, totalTargets, tween) { }</code></li>
+<li>A callback function : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">targetKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="nx">duration</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li>A callback function, built via stagger builder</li>
 </ul>
 </li>
