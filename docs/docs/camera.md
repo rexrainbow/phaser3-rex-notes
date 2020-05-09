@@ -312,6 +312,16 @@ var cameras = scene.cameras.getCamerasBelowPointer(pointer);
     sceneB.add.image(x, y, key);
     ```
 
+```mermaid
+graph TB
+
+Camera --> Game
+
+Camera --> Texture
+Texture --> GO["Image Game object"]
+GO --> Game
+```
+
 #### Pause, resume
 
 - Pause

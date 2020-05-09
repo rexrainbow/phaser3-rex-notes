@@ -3603,6 +3603,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#create-from-points" class="md-nav__link">
+    Create from points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#clone-shape" class="md-nav__link">
     Clone shape
   </a>
@@ -4852,6 +4859,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#create-from-points" class="md-nav__link">
+    Create from points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#clone-shape" class="md-nav__link">
     Clone shape
   </a>
@@ -4989,7 +5003,8 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
 
-<p>or create from 4 points</p>
+<h4 id="create-from-points">Create from points<a class="headerlink" href="#create-from-points" title="Permanent link">&para;</a></h4>
+<p>All of the given points are on or within its bounds.</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">FromPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 <span class="c1">// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // push rect</span>
 </code></pre></div>
@@ -4997,6 +5012,11 @@
 <ul>
 <li><code>points</code> : an array with 4 points. <code>[x, y]</code>, or <code>{x:0, y:0}</code></li>
 </ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">FromXY</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+<span class="c1">// var rect = Phaser.Geom.Rectangle.FromXY(x1, y1, x2, y2, rect);  // push rect</span>
+</code></pre></div>
+
 <h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">rect0</span><span class="p">);</span>
 </code></pre></div>

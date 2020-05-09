@@ -63,3 +63,14 @@ Convert angle value, built-in methods of phaser.
     ```javascript
     var out = Phaser.Math.RotateAroundDistance(point, x, y, angle, distance);
     ```
+
+### Random angle
+
+- Returns a random angle in the range [-pi, pi].
+   ```javascript
+   var angle = Phaser.Math.Angle.Random();
+   ```
+- Returns a random angle in the range [-180, 180].
+   ```javascript
+   var angle = Phaser.Math.Angle.RandomDegrees();
+   ```

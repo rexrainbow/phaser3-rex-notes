@@ -4921,10 +4921,26 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">copy</span><span class="p">({</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">});</span>
 <span class="c1">// vector.setFromObject({x, y});</span>
 </code></pre></div></li>
+<li>Set angle
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle</code> : Angle in radians.</li>
+</ul>
+</li>
+<li>Rotate
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>delta</code> : The angle to rotate by, in radians.</li>
+</ul>
+</li>
+<li>Set length
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">setLength</span><span class="p">(</span><span class="nx">length</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Set from polar coordinate
     <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">setToPolar</span><span class="p">(</span><span class="nx">azimuth</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>azimuth</code> : The angular coordinate, in radians.</li>
+<li><code>radius</code> : The radial coordinate (length). Default is <code>1</code>.</li>
 </ul>
 </li>
 <li>Reset to (0, 0)
@@ -4952,12 +4968,34 @@
 <li>Scale
     <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Limit the length
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">limit</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Normalize
     <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">normalize</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Negate
     <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">negate</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Rotate perpendicular
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">normalizeRightHand</span><span class="p">();</span>
+<span class="nx">vector</span><span class="p">.</span><span class="nx">normalizeLeftHand</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Reflect<ul>
+<li>Reflect this Vector off a line defined by a normal.
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">reflect</span><span class="p">(</span><span class="nx">normal</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>normal</code> : A vector perpendicular to the line.</li>
+</ul>
+</li>
+<li>Reflect this Vector across another.
+    <div class="codehilite"><pre><span></span><code><span class="nx">vector</span><span class="p">.</span><span class="nx">mirror</span><span class="p">(</span><span class="nx">axis</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>axis</code> : A vector to reflect across.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="vector-methods">Vector methods<a class="headerlink" href="#vector-methods" title="Permanent link">&para;</a></h4>
 <ul>
@@ -4978,6 +5016,10 @@
 </code></pre></div></li>
 <li>Cross
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">cross</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span> <span class="c1">// src: {x, y}</span>
+</code></pre></div></li>
+<li>Fuzzy Equal
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">equal</span> <span class="o">=</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">fuzzyEquals</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span> <span class="c1">// src: {x, y}</span>
+<span class="c1">// var equal = vector.fuzzyEquals(src, epsilon);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="points-method">Points method<a class="headerlink" href="#points-method" title="Permanent link">&para;</a></h4>

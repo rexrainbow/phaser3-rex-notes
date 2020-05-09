@@ -12,7 +12,9 @@ Rectangle shape and methods, built-in methods of phaser.
 var rect = new Phaser.Geom.Rectangle(x, y, width, height);
 ```
 
-or create from 4 points
+#### Create from points
+
+All of the given points are on or within its bounds.
 
 ```javascript
 var rect = Phaser.Geom.Rectangle.FromPoints(points);
@@ -20,6 +22,13 @@ var rect = Phaser.Geom.Rectangle.FromPoints(points);
 ```
 
 - `points` : an array with 4 points. `[x, y]`, or `{x:0, y:0}`
+
+or
+
+```javascript
+var rect = Phaser.Geom.Rectangle.FromXY(x1, y1, x2, y2);
+// var rect = Phaser.Geom.Rectangle.FromXY(x1, y1, x2, y2, rect);  // push rect
+```
 
 #### Clone shape
 

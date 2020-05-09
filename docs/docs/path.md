@@ -313,10 +313,14 @@ path.draw(graphics);
     Path object does **NOT** support this feature yet.
 - Get tangent
     ```javascript
+    var out = path.getTangent(t);  // t: 0~1
+    // var out = path.getTangent(t, out);  // modify out
+    ```
+    or
+    ```javascript
     var out = curve.getTangent(t);  // t: 0~1
     // var out = curve.getTangent(t, out);  // modify out
     ```
-    Path object does **NOT** support this feature yet.
 
 ### Length of path
 

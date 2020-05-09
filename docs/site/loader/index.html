@@ -756,6 +756,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#xhr-settings-object" class="md-nav__link">
+    XHR Settings Object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5217,6 +5224,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#xhr-settings-object" class="md-nav__link">
+    XHR Settings Object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5302,11 +5316,15 @@
 </code></pre></div></li>
 <li>SVG
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">svg</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.svg(key, url, {width, height});</span>
-<span class="c1">// scene.load.svg(key, url, {scale});</span>
-</code></pre></div></li>
+<span class="c1">// scene.load.svg(key, url, svgConfig);</span>
+<span class="c1">// scene.load.svg(key, url, svgConfig, xhrSettings);</span>
+</code></pre></div><ul>
+<li><code>svgConfig</code> : <code>{width, height}</code>, or <code>{scale}</code></li>
+</ul>
+</li>
 <li>Html texture
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">htmlTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// scene.load.htmlTexture(key, url, width, height, xhrSettings);</span>
 </code></pre></div></li>
 </ul>
 <p>Get data from texture cache</p>
@@ -5323,6 +5341,7 @@
     <span class="c1">// margin: margin,</span>
     <span class="c1">// spacing: spacing</span>
 <span class="p">});</span>
+<span class="c1">// scene.load.spritesheet(key, url, frameConfig, xhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from texture cache</p>
@@ -5332,6 +5351,7 @@
 
 <h4 id="texture-atlas">Texture atlas<a class="headerlink" href="#texture-atlas" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">atlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
+<span class="c1">// scene.load.atlas(key, textureURL, atlasURL, textureXhrSettings, atlasXhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from texture cache</p>
@@ -5340,35 +5360,56 @@
 </code></pre></div>
 
 <h4 id="multi-file-texture-atlas">Multi file texture atlas<a class="headerlink" href="#multi-file-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">multiatlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURLs</span><span class="p">,</span> <span class="nx">atlasURLs</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">multiatlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
+<span class="c1">// scene.load.multiatlas(key, atlasURL, path, baseURL, atlasXhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>atlasURL</code> : The absolute or relative URL to load the texture atlas json data file from.</li>
+<li><code>path</code> : Optional path to use when loading the textures defined in the atlas data.</li>
+<li><code>baseURL</code> : Optional Base URL to use when loading the textures defined in the atlas data.</li>
+</ul>
 <h4 id="unity-texture-atlas">Unity texture atlas<a class="headerlink" href="#unity-texture-atlas" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">unityAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
+<span class="c1">// scene.load.unityAtlas(key, textureURL, atlasURL, textureXhrSettings, atlasXhrSettings);</span>
 </code></pre></div>
 
 <h4 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.animation(key, url, dataKey, xhrSettings);</span>
 </code></pre></div>
 
 <h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
+<span class="c1">// scene.load.audio(key, urls, config, xhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>urls</code> : The absolute or relative URL to load the audio files from, or a blob.</li>
+<li><code>config</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">audio</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 
 <h4 id="audio-sprite">Audio sprite<a class="headerlink" href="#audio-sprite" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">jsonURL</span><span class="p">,</span> <span class="nx">audioURL</span><span class="p">,</span> <span class="nx">audioConfig</span><span class="p">);</span>
+<span class="c1">// scene.load.audioSprite(key, jsonURL, audioURL, audioConfig, audioXhrSettings, jsonXhrSettings);</span>
 </code></pre></div>
 
 <ul>
+<li><code>jsonURL</code> : The absolute or relative URL to load the json file from.</li>
+<li><code>audioURL</code> : The absolute or relative URL to load the audio file from.</li>
+<li><code>audioConfig</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
+</ul>
+<h4 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
+<span class="c1">// scene.load.video(key, url, loadEvent, asBlob, noAudio, xhrSettings);</span>
+</code></pre></div>
+
+<ul>
+<li><code>url</code> : The absolute or relative URL to load the video files from, or a blob.</li>
 <li><code>loadEvent</code> : The load event to listen for when <em>not</em> loading as a blob.<ul>
 <li><code>'loadeddata'</code> : Data for the current frame is available. Default value.</li>
 <li><code>'canplay'</code> : The video is ready to start playing.</li>
@@ -5379,19 +5420,30 @@
 <li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it. Default value is <code>false</code>.</li>
 </ul>
 <h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">xmlURL</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">fontDataURL</span><span class="p">);</span>
+<span class="c1">// scene.load.bitmapFont(key, textureURL, fontDataURL, textureXhrSettings, fontDataXhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>textureURL</code> : The absolute or relative URL to load the font image file from.</li>
+<li><code>fontDataURL</code> : The absolute or relative URL to load the font xml data file from.</li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 
 <h4 id="tile-map">Tile map<a class="headerlink" href="#tile-map" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapWeltmeister</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// JSON</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>          <span class="c1">// CSV</span>
-</code></pre></div>
-
+<ul>
+<li>JSON : Created using the Tiled Map Editor and selecting JSON as the export format
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapTiledJSON</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.tilemapTiledJSON(key, url, xhrSettings);</span>
+</code></pre></div></li>
+<li>CSV : Created in a text editor, or a 3<sup>rd</sup> party app that exports as CSV.
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.tilemapCSV(key, url, xhrSettings);</span>
+</code></pre></div></li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -5399,6 +5451,7 @@
 
 <h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.text(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from cache</p>
@@ -5408,8 +5461,12 @@
 
 <h4 id="json">JSON<a class="headerlink" href="#json" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.json(key, url, dataKey, xhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>dataKey</code> : When the JSON file loads only this property will be stored in the Cache.</li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">json</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -5417,6 +5474,7 @@
 
 <h4 id="xml">XML<a class="headerlink" href="#xml" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">xml</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.xml(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from cache</p>
@@ -5426,6 +5484,7 @@
 
 <h4 id="html">HTML<a class="headerlink" href="#html" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.html(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from cache</p>
@@ -5435,6 +5494,7 @@
 
 <h4 id="css">CSS<a class="headerlink" href="#css" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.css(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <p>Get data from cache</p>
@@ -5444,22 +5504,33 @@
 
 <h4 id="scene">Scene<a class="headerlink" href="#scene" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">sceneFile</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.sceneFile(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <p>The <code>key</code> matches the <strong>class name</strong> in the JavaScript file.</p>
 <h4 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.script(key, url, xhrSettings);</span>
 </code></pre></div>
 
 <h5 id="scripts">Scripts<a class="headerlink" href="#scripts" title="Permanent link">&para;</a></h5>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scripts</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urlArray</span><span class="p">);</span>
+<span class="c1">// scene.load.scripts(key, urlArray, xhrSettings);</span>
 </code></pre></div>
 
 <p>Add scripts in the exact order of <code>urlArray</code>.</p>
 <h4 id="glsl">GLSL<a class="headerlink" href="#glsl" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">glsl</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.glsl(key, url, shaderType, xhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>shaderType</code> : The type of shader.<ul>
+<li><code>'fragment'</code> : Fragment shader. Default value.</li>
+<li><code>'vertex'</code> : Vertex shader.</li>
+</ul>
+</li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">shader</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -5478,9 +5549,18 @@
 
 <h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>
-<span class="c1">// scene.load.binary(config); // config: {key, url, dataType}</span>
+<span class="c1">// scene.load.binary(key, url, dataType, xhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>dataType</code> : Optional type to cast the binary file to once loaded. <ul>
+<li><code>Uint8Array</code>, <code>Uint8ClampedArray</code>, <code>Uint16Array</code> <code>Uint32Array</code></li>
+<li><code>Int8Array</code>, <code>Int16Array</code>, <code>Int32Array</code></li>
+<li><code>Float32Array</code>, <code>Float64Array</code></li>
+<li><code>BigInt64Array</code>, <code>BigUint64Array</code></li>
+</ul>
+</li>
+</ul>
 <p>Get data from cache</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">binary</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -5488,6 +5568,7 @@
 
 <h4 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// start plugin when loaded</span>
+<span class="c1">// scene.load.plugin(key, url, true, undefined, xhrSettings);</span>
 </code></pre></div>
 
 <ul>
@@ -5495,6 +5576,7 @@
 </ul>
 <h4 id="scene-plugin">Scene plugin<a class="headerlink" href="#scene-plugin" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">systemKey</span><span class="p">,</span> <span class="nx">sceneKey</span><span class="p">);</span>
+<span class="c1">// scene.load.scenePlugin(key, url, systemKey, sceneKey, xhrSettings);</span>
 </code></pre></div>
 
 <ul>
@@ -5502,9 +5584,13 @@
 </ul>
 <h4 id="file-pack">File pack<a class="headerlink" href="#file-pack" title="Permanent link">&para;</a></h4>
 <p>Load files in JSON format.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">pack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataKey</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">pack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<span class="c1">// scene.load.pack(key, url, dataKey, xhrSettings);</span>
 </code></pre></div>
 
+<ul>
+<li><code>dataKey</code> : When the JSON file loads only this property will be stored in the Cache.</li>
+</ul>
 <p>JSON pack file:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="s1">&#39;dataKey&#39;</span><span class="o">:</span> <span class="p">{</span>
@@ -5572,6 +5658,30 @@
 <li><a href="./#release-data">Remove key</a>.</li>
 <li>Load file again.</li>
 </ol>
+<h3 id="xhr-settings-object">XHR Settings Object<a class="headerlink" href="#xhr-settings-object" title="Permanent link">&para;</a></h3>
+<p>Parameter <code>xhrSettings</code> </p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">headers</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">header</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">headerValue</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">requestedWith</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">overrideMimeType</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li><code>user</code> : Optional username for the XHR request.</li>
+<li><code>password</code> : Optional password for the XHR request.</li>
+<li><code>timeout</code> : Optional XHR timeout value.</li>
+<li><code>headers</code>, <code>header</code>, <code>headerValue</code>, <code>requestedWith</code> : This value is used to populate the XHR <code>setRequestHeader</code></li>
+<li><code>overrideMimeType</code> : Provide a custom mime-type to use instead of the default.</li>
+<li><code>withCredentials</code> : Whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates. <em>Setting <code>withCredentials</code> has no effect on same-site requests.</em></li>
+</ul>
                 
                   
                 

@@ -5329,6 +5329,14 @@ An invisible camera will not render anything and will skip input tests.</p>
     <div class="codehilite"><pre><span></span><code><span class="nx">sceneB</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
+<pre class="mermaid"><code>graph TB
+
+Camera --&gt; Game
+
+Camera --&gt; Texture
+Texture --&gt; GO["Image Game object"]
+GO --&gt; Game</code></pre>
+
 <h4 id="pause-resume">Pause, resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pause
