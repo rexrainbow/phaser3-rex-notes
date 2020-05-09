@@ -122,6 +122,28 @@ camera.on('camerazoomstart', camera, zoom, duration, zoomValue);
 camera.on('camerazoomcomplete', camera, zoom);
 ```
 
+### Rotate to
+
+```javascript
+camera.rotateTo(radians, shortestPath, duration);   // duration in ms
+// camera.rotateTo(radians, shortestPath, duration, ease, force, callback, context);
+```
+
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress, angle) {}
+    ```
+
+#### Events
+
+```javascript
+camera.on('camerarotatestart', camera, rotateTo, duration, angle);
+```
+
+```javascript
+camera.on('camerarotatecomplete', camera, rorotateTotate);
+```
+
 ### Mask
 
 - Add mask

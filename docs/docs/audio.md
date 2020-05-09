@@ -390,9 +390,7 @@ music.play(markerName, config);
 
 ### Sound manager
 
-#### Methods
-
-##### Mute
+#### Mute
 
 - Set
     ```javascript
@@ -404,7 +402,7 @@ music.play(markerName, config);
     var mute = scene.sound.mute;
     ```
 
-##### Volume
+#### Volume
 
 - Set
     ```javascript
@@ -416,7 +414,7 @@ music.play(markerName, config);
     var volume = scene.sound.volume;
     ```
 
-##### Detune
+#### Detune
 
 - Set
     ```javascript
@@ -428,7 +426,7 @@ music.play(markerName, config);
     var detune = scene.sound.detune;
     ```
 
-##### Play-rate
+#### Play-rate
 
 - Set
     ```javascript
@@ -438,6 +436,41 @@ music.play(markerName, config);
 - Get
     ```javascript
     var rate = scene.sound.rate;
+    ```
+
+#### Get music instance
+
+- Get first
+    ```javascript
+    var music = scene.sound.get(key); // music instance, or null
+    ```
+- Get all
+    ```javascript
+    var musicArray = scene.sound.getAll(key); // music instance, or null
+    ```
+
+#### Remove music instance
+
+- Remove by key
+    ```javascript
+    var removed = scene.sound.removeByKey(key);
+    ```
+    - `removed` : The number of matching sound objects that were removed.
+- Remove all
+    ```javascript
+    scene.sound.removeAll();
+    ```
+
+#### Stop music instance
+
+- Stop by key
+    ```javascript
+    var stopped = scene.sound.stopByKey(key);
+    ```
+    - `stopped` : How many sounds were stopped.
+- Stop all
+    ```javascript
+    scene.sound.stopAll();
     ```
 
 ### Analyser

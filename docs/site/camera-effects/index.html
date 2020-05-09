@@ -2558,6 +2558,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotate-to" class="md-nav__link">
+    Rotate to
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events_5" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mask" class="md-nav__link">
     Mask
   </a>
@@ -4939,6 +4959,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotate-to" class="md-nav__link">
+    Rotate to
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events_5" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mask" class="md-nav__link">
     Mask
   </a>
@@ -5065,6 +5105,23 @@
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="rotate-to">Rotate to<a class="headerlink" href="#rotate-to" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">rotateTo</span><span class="p">(</span><span class="nx">radians</span><span class="p">,</span> <span class="nx">shortestPath</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
+<span class="c1">// camera.rotateTo(radians, shortestPath, duration, ease, force, callback, context);</span>
+</code></pre></div>
+
+<ul>
+<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">angle</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="events_5">Events<a class="headerlink" href="#events_5" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerarotatestart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">rotateTo</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerarotatecomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">rorotateTotate</span><span class="p">);</span>
 </code></pre></div>
 
 <h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>

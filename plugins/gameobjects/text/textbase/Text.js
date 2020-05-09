@@ -82,7 +82,7 @@ class Text extends GameObject {
         //  Set the resolution
         this.frame.source.resolution = this.style.resolution;
 
-        if (this.renderer && this.renderer.gl) {
+        if (this.renderer.gl) {
             //  Clear the default 1x1 glTexture, as we override it later
 
             this.renderer.deleteTexture(this.frame.source.glTexture);

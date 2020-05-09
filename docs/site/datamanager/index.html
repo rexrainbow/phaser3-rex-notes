@@ -5083,11 +5083,22 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="write">Write<a class="headerlink" href="#write" title="Permanent link">&para;</a></h3>
 <h4 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-</code></pre></div>
-
 <ul>
+<li>Set value
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>key</code> : Key string.</li>
+</ul>
+</li>
+<li>Increase number value. If the key doesn't already exist in the Data Manager then it is increased from 0.
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">inc</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>data</code> : The value to increase. </li>
+</ul>
+</li>
+<li>Toggle boolean value. If the key doesn't already exist in the Data Manager then it is toggled from false.
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h4 id="set-values">Set values<a class="headerlink" href="#set-values" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>    <span class="c1">// data: {key:value, ...}</span>

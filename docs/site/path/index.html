@@ -5336,10 +5336,13 @@ or
 </code></pre></div>
     Path object does <strong>NOT</strong> support this feature yet.</li>
 <li>Get tangent
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getTangent</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
+<span class="c1">// var out = path.getTangent(t, out);  // modify out</span>
+</code></pre></div>
+    or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getTangent</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
 <span class="c1">// var out = curve.getTangent(t, out);  // modify out</span>
-</code></pre></div>
-    Path object does <strong>NOT</strong> support this feature yet.</li>
+</code></pre></div></li>
 </ul>
 <h3 id="length-of-path">Length of path<a class="headerlink" href="#length-of-path" title="Permanent link">&para;</a></h3>
 <p><div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
