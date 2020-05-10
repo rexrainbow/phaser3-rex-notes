@@ -13,7 +13,7 @@ var TableOnCellVisible = function (table) {
             if (cellContainer.setOrigin) {
                 cellContainer.setOrigin(0);
             }
-            if (cellContainer.isRexSizer) {
+            if (cellContainer.isRexSizer && this.runChildLayout) {
                 cellContainer.layout(); // Use original size
             }
         }
