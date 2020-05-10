@@ -40,7 +40,7 @@
     
     
       
-        <title>Filechooser - Notes of Phaser 3</title>
+        <title>File chooser - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Filechooser
+                File chooser
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -634,18 +636,6 @@
   <li class="md-nav__item">
     <a href="../animation/" title="Animation" class="md-nav__link">
       Animation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../quad/" title="Quad" class="md-nav__link">
-      Quad
     </a>
   </li>
 
@@ -766,6 +756,54 @@
   <li class="md-nav__item">
     <a href="../line/" title="Line" class="md-nav__link">
       Line
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3">
+    
+    <label class="md-nav__link" for="nav-4-2-3">
+      Mesh
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-3">
+        Mesh
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../quad/" title="Quad" class="md-nav__link">
+      Quad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rope/" title="Rope" class="md-nav__link">
+      Rope
     </a>
   </li>
 
@@ -1384,10 +1422,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9" checked>
     
     <label class="md-nav__link" for="nav-4-9">
       DOM element
@@ -1420,6 +1460,169 @@
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        File chooser
+      </label>
+    
+    <a href="./" title="File chooser" class="md-nav__link md-nav__link--active">
+      File chooser
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-file-chooser-object" class="md-nav__link">
+    Add file chooser object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    Sync
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selected-files" class="md-nav__link">
+    Selected files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-accept-filter" class="md-nav__link">
+    Set accept filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-files" class="md-nav__link">
+    Multiple files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-object-url" class="md-nav__link">
+    Create object URL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-file-chooser" class="md-nav__link">
+    Open file chooser
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4724,8 +4927,50 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#open-file-chooser" class="md-nav__link">
-    Open file chooser
+  <a href="#add-file-chooser-object" class="md-nav__link">
+    Add file chooser object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sync" class="md-nav__link">
+    Sync
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selected-files" class="md-nav__link">
+    Selected files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-accept-filter" class="md-nav__link">
+    Set accept filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-files" class="md-nav__link">
+    Multiple files
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4733,6 +4978,13 @@
           <li class="md-nav__item">
   <a href="#create-object-url" class="md-nav__link">
     Create object URL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#open-file-chooser" class="md-nav__link">
+    Open file chooser
   </a>
   
 </li>
@@ -4761,31 +5013,43 @@
                   <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/filechooser.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Filechooser</h1>
+                  <h1>File chooser</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Open a file chooser dialog (<code>&lt;input type="file"&gt;</code>) to select a local file.</p>
+<p>Create a transparent file chooser button (<code>&lt;input type="file"&gt;</code>).</p>
 <ul>
 <li>Author: Rex</li>
-<li>Method</li>
+<li><a href="../domelement/">DOM Game object</a></li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/qBOmyVd">File chooser</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/LYpeLQm">File chooser button</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/qBOmyVd">Open file chooser dialog</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/filechooser">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>        
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
 <li>Load plugin (minify file) in preload stage
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfilechooserplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfilechooserplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Open a file chooser dialog <strong>under any touch event</strong>
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfilechooserplugin&#39;</span><span class="p">).</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// var files = result.files;</span>
-    <span class="p">})</span>
+<li>Add file chooser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileChooser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexFileChooser</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -4796,6 +5060,10 @@
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">FileChooserPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/filechooser-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>    
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>        
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
@@ -4810,11 +5078,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Open a file chooser dialog <strong>under any touch event</strong>
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFileChooser&#39;</span><span class="p">).</span><span class="nx">open</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// var files = result.files;</span>
-    <span class="p">})</span>
+<li>Add file chooser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileChooser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexFileChooser</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -4822,17 +5087,134 @@
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
+<li>Enable dom element in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>        
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">OpenFileChooser</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/filechooser.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">FileChooser</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/filechooser.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Open a file chooser dialog <strong>under any touch event</strong>
-    <div class="codehilite"><pre><span></span><code><span class="nx">OpenFileChooser</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// var files = result.files;</span>
-    <span class="p">})</span>
+<li>Add file chooser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileChooser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileChooser</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">fileChooser</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="add-file-chooser-object">Add file chooser object<a class="headerlink" href="#add-file-chooser-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileChooser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexFileChooser</span><span class="p">({</span>
+    <span class="nx">accept</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">multiple</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+<span class="c1">// var fileChooser = scene.add.rexFileChooser(x, y, width, height, config);</span>
+</code></pre></div>
+
+<ul>
+<li><code>accept</code> : A filter for what file types the user can pick from the file input dialog box.<ul>
+<li><code>'image/*'</code> : The user can pick all image files.</li>
+<li><code>'audio/*'</code> : The user can pick all sound files.</li>
+<li><code>'video/*'</code> : The user can pick all video files.</li>
+<li><code>file_extension</code> : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from.</li>
+</ul>
+</li>
+<li><code>multiple</code> : Set <code>true</code> to select multiple files.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyFlieChooser</span> <span class="kr">extends</span> <span class="nx">FileChooser</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileChooser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyFlieChooser</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="sync">Sync<a class="headerlink" href="#sync" title="Permanent link">&para;</a></h3>
+<p>Sync position, size and origin to another game object.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">syncTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="selected-files">Selected files<a class="headerlink" href="#selected-files" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">fileChooser</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+</code></pre></div>
+
+<ul>
+<li><code>files</code> : Array of file object.</li>
+</ul>
+<h3 id="set-accept-filter">Set accept filter<a class="headerlink" href="#set-accept-filter" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">setAccept</span><span class="p">(</span><span class="nx">accept</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>accept</code> : A filter for what file types the user can pick from the file input dialog box.<ul>
+<li><code>'image/*'</code> : The user can pick all image files.</li>
+<li><code>'audio/*'</code> : The user can pick all sound files.</li>
+<li><code>'video/*'</code> : The user can pick all video files.</li>
+<li><code>file_extension</code> : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from.</li>
+</ul>
+</li>
+</ul>
+<h3 id="multiple-files">Multiple files<a class="headerlink" href="#multiple-files" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable
+    <div class="codehilite"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">setMultiple</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">setMultiple</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Selected file(s) changed
+    <div class="codehilite"><pre><span></span><code><span class="nx">fileChooser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileChooser</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">files</span> <span class="o">=</span> <span class="nx">fileChooser</span><span class="p">.</span><span class="nx">files</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">files</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// No selected file</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">files</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-object-url">Create object URL<a class="headerlink" href="#create-object-url" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL">Create object url</a>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">objectURL</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+</code></pre></div></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL">Release object url</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">objectURL</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="open-file-chooser">Open file chooser<a class="headerlink" href="#open-file-chooser" title="Permanent link">&para;</a></h3>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>This method can't run at ipad.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Open a file chooser dialog <strong>under any touch event</strong>. i.e. User can't open file chooser dialog directly.</p>
@@ -4852,7 +5234,7 @@
 <li><code>'image/*'</code> : The user can pick all image files.</li>
 <li><code>'audio/*'</code> : The user can pick all sound files.</li>
 <li><code>'video/*'</code> : The user can pick all video files.</li>
-<li><code>file_extension</code> : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from</li>
+<li><code>file_extension</code> : Specify the file extension(s) (e.g: .gif, .jpg, .png, .doc) the user can pick from.</li>
 </ul>
 </li>
 <li><code>multiple</code> : Set <code>true</code> to select multiple files.</li>
@@ -4876,15 +5258,6 @@
 </ul>
 </li>
 </ul>
-<h3 id="create-object-url">Create object URL<a class="headerlink" href="#create-object-url" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL">Create object url</a>
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">objectURL</span> <span class="o">=</span> <span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
-</code></pre></div></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL">Release object url</a>
-    <div class="codehilite"><pre><span></span><code><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">objectURL</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
                 
                   
                 
@@ -4902,6 +5275,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../inputtext/" title="Input text" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Input text
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../youtubeplayer/" title="Youtube player" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Youtube player
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

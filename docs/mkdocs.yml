@@ -27,16 +27,18 @@ nav:
             - Image: image.md
             - Sprite: sprite.md
             - Animation: animation.md
-            - Quad: quad.md
             - Video: video.md
             - Circle mask image: circlemaskimage.md            
             - Shader: shader.md
         - Multiple images: 
             - Blitter: blitter.md
-            - Particles: particles.md        
+            - Particles: particles.md
             - Tile sprite: tilesprite.md
             - Nine patch: ninepatch.md
-            - Line: line.md            
+            - Line: line.md
+        - Mesh:
+            - Quad: quad.md
+            - Rope: rope.md
         - Texture: texture.md        
     - Text:
         - Canvas text:
@@ -81,6 +83,7 @@ nav:
     - DOM element:
         - DOM element: domelement.md
         - Input text: inputtext.md
+        - File chooser: filechooser.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
         - Actions:

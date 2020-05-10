@@ -99,7 +99,7 @@
 - Add input-text object
     ```javascript    
     var inputText = new InputText(scene, x, y, width, height, config);
-    sscene.add.existing(inputText);
+    scene.add.existing(inputText);
     ```
 
 ### Add input text object

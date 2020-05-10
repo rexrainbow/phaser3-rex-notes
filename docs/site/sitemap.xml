@@ -101,11 +101,6 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/quad/</loc>
-     <lastmod>2020-05-10</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/video/</loc>
      <lastmod>2020-05-10</lastmod>
      <changefreq>daily</changefreq>
@@ -142,6 +137,16 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/line/</loc>
+     <lastmod>2020-05-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/quad/</loc>
+     <lastmod>2020-05-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/rope/</loc>
      <lastmod>2020-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -312,6 +317,11 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/inputtext/</loc>
+     <lastmod>2020-05-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/filechooser/</loc>
      <lastmod>2020-05-10</lastmod>
      <changefreq>daily</changefreq>
     </url>

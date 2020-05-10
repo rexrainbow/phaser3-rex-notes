@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/base64/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/rope/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Base64 - Notes of Phaser 3</title>
+        <title>Rope - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Base64
+                Rope
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -568,10 +570,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" checked>
     
     <label class="md-nav__link" for="nav-4-2">
       Sprite
@@ -767,10 +771,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3" checked>
     
     <label class="md-nav__link" for="nav-4-2-3">
       Mesh
@@ -798,11 +804,141 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../rope/" title="Rope" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Rope
+      </label>
+    
+    <a href="./" title="Rope" class="md-nav__link md-nav__link--active">
       Rope
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-texture" class="md-nav__link">
+    Load texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-object" class="md-nav__link">
+    Add object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-rope-class" class="md-nav__link">
+    Custom rope class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-vertices" class="md-nav__link">
+    Set vertices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha" class="md-nav__link">
+    Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-tint" class="md-nav__link">
+    Color tint
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tint-fill-mode" class="md-nav__link">
+    Tint fill mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flip" class="md-nav__link">
+    Flip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    Debug
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3717,12 +3853,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       String
@@ -3858,72 +3992,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Base64
-      </label>
-    
-    <a href="./" title="Base64" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
       Base64
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#base64-array-buffer" class="md-nav__link">
-    Base64 -&gt; Array buffer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#array-buffer-base64" class="md-nav__link">
-    Array buffer -&gt; Base64
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4794,15 +4867,84 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base64-array-buffer" class="md-nav__link">
-    Base64 -&gt; Array buffer
+  <a href="#load-texture" class="md-nav__link">
+    Load texture
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#array-buffer-base64" class="md-nav__link">
-    Array buffer -&gt; Base64
+  <a href="#add-object" class="md-nav__link">
+    Add object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-rope-class" class="md-nav__link">
+    Custom rope class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#origin" class="md-nav__link">
+    Origin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-vertices" class="md-nav__link">
+    Set vertices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha" class="md-nav__link">
+    Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-tint" class="md-nav__link">
+    Color tint
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tint-fill-mode" class="md-nav__link">
+    Tint fill mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flip" class="md-nav__link">
+    Flip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    Debug
   </a>
   
 </li>
@@ -4828,27 +4970,209 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/base64.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/rope.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Base64</h1>
+                  <h1>Rope</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Decode a base64 string to an array buffer, or create a base64 string from an array buffer, built-in method of phaser.</p>
+<p>Manipulate the vertices of images, built-in game object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">WebGL only</p>
+<p>It only works in WebGL render mode.</p>
+</div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="base64-array-buffer">Base64 -&gt; Array buffer<a class="headerlink" href="#base64-array-buffer" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">arrayBuffer</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Base64</span><span class="p">.</span><span class="nx">Base64ToArrayBuffer</span><span class="p">(</span><span class="nx">base64</span><span class="p">);</span>
+<h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </code></pre></div>
 
-<h3 id="array-buffer-base64">Array buffer -&gt; Base64<a class="headerlink" href="#array-buffer-base64" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">base64</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Base64</span><span class="p">.</span><span class="nx">ArrayBufferToBase64</span><span class="p">(</span><span class="nx">arrayBuffer</span><span class="p">,</span> <span class="nx">mediaType</span><span class="p">);</span>
+<p>Reference: <a href="../loader/#image">load image</a></p>
+<h3 id="add-object">Add object<a class="headerlink" href="#add-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rope</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">);</span>
+<span class="c1">// var rope = scene.add.rope(x, y, texture, frame, points, horizontal, colors, alphas);</span>
 </code></pre></div>
 
 <ul>
-<li><code>mediaType</code> : An optional media type, i.e. <code>audio/ogg</code> or <code>image/jpeg</code></li>
+<li><code>points</code> : <ul>
+<li>A number : Segments to split the texture frame into.</li>
+<li><code>2</code> : <a href="../quad/">Rope</a></li>
+<li>An number array : An array containing the vertices data.</li>
+</ul>
+</li>
+<li><code>horizontal</code> : <ul>
+<li><code>true</code> : Vertices of this Rope be aligned horizontally.</li>
+<li><code>false</code> : Vertices of this Rope be aligned vertically.</li>
+</ul>
+</li>
+<li><code>colors</code> : An optional array containing the color data for this Rope. One color value per pair of vertices.</li>
+<li><code>alphas</code> : An optional array containing the alpha data for this Rope. One alpha value per pair of vertices.</li>
+</ul>
+<p>Add rope from JSON</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rope</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">horizontal</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">points</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">colors</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">alphas</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="c1">// angle: 0,</span>
+    <span class="c1">// alpha: 1</span>
+    <span class="c1">// flipX: true,</span>
+    <span class="c1">// flipY: true,</span>
+
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3 id="custom-rope-class">Custom rope class<a class="headerlink" href="#custom-rope-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyRope</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Rope</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyRope</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h3>
+<p>A Ropes origin is always 0.5 x 0.5 and cannot be changed.</p>
+<h3 id="set-vertices">Set vertices<a class="headerlink" href="#set-vertices" title="Permanent link">&para;</a></h3>
+<p>Set vertices via </p>
+<div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="c1">// rope.setPoints(points, colors, alphas);</span>
+</code></pre></div>
+
+<ul>
+<li><code>points</code> : <ul>
+<li>A number : Segments to split the texture frame into.</li>
+<li><code>2</code> : <a href="../quad/">Rope</a></li>
+<li>An number array : An array containing the vertices data.</li>
+</ul>
+</li>
+<li><code>colors</code> : An optional array containing the color data for this Rope. One color value per pair of vertices.</li>
+<li><code>alphas</code> : An optional array containing the alpha data for this Rope. One alpha value per pair of vertices.</li>
+</ul>
+<p>Also change horizontal mode : </p>
+<ul>
+<li>Change vertical rope to horizontal rope, do nothing if rope is horizontal mode already
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setHorizontal</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="c1">// rope.setHorizontal(points, colors, alphas);</span>
+</code></pre></div></li>
+<li>Change horizontal rope to vertical rope, do nothing if rope is vertical mode already
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setVertical</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="c1">// rope.setVertical(points, colors, alphas);</span>
+</code></pre></div></li>
+</ul>
+<p>Or set <code>rope.points</code> directly :</p>
+<ol>
+<li>Change <code>rope.points</code><ul>
+<li>Horizontal rope : <code>rope.points[i].y = newY</code></li>
+<li>Vertical rope :  <code>rope.points[i].x = newX</code></li>
+</ul>
+</li>
+<li>Call <code>rope.setDirty()</code>, or <code>rope.updateVertices()</code></li>
+</ol>
+<p>Each point is relative to position of rope object, get points of world via</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div>
+
+<h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// rope.play(key, ignoreIfPlaying, startFrame);</span>
+</code></pre></div>
+
+<ul>
+<li><code>ignoreIfPlaying</code> : If an animation is already playing then ignore this call. Default value is <code>false</code>.</li>
+<li><code>startFrame</code> : Optionally start the animation playing from this frame index. Default value is <code>0</code>.</li>
+</ul>
+<h3 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single alpha
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setAlphas</span><span class="p">(</span><span class="nx">alpha</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Top - bottom alpha
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setAlphas</span><span class="p">(</span><span class="nx">topAlpha</span><span class="p">,</span> <span class="nx">bottomAlpha</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Alpha array for each point
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setAlphas</span><span class="p">(</span><span class="nx">alphaArray</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>alphaArray</code> : Array of alpha value.</li>
+</ul>
+</li>
+</ul>
+<h3 id="color-tint">Color tint<a class="headerlink" href="#color-tint" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Single color tint
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setColors</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Color tint array for each point
+    <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setAlphas</span><span class="p">(</span><span class="nx">colorArray</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>colorArray</code> : Array of color tint value.</li>
+</ul>
+</li>
+</ul>
+<h4 id="tint-fill-mode">Tint fill mode<a class="headerlink" href="#tint-fill-mode" title="Permanent link">&para;</a></h4>
+<p>Sets the tint fill mode.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setTintFill</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>mode</code> : <ul>
+<li><code>0</code> : Additive tint, blends the vertices colors with the texture. Default behavior.</li>
+<li><code>1</code> : Fill tint with alpha.</li>
+<li><code>2</code> : Fill tint without alpha.</li>
+</ul>
+</li>
+</ul>
+<h3 id="flip">Flip<a class="headerlink" href="#flip" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">flipX</span> <span class="o">=</span> <span class="nx">flip</span><span class="p">;</span>
+<span class="nx">rope</span><span class="p">.</span><span class="nx">flipY</span> <span class="o">=</span> <span class="nx">flip</span><span class="p">;</span>
+</code></pre></div>
+
+<p>If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.</p>
+<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setDebug</span><span class="p">(</span><span class="nx">graphic</span><span class="p">);</span>
+<span class="c1">// rope.setDebug(graphic, callback);</span>
+</code></pre></div>
+
+<ul>
+<li><code>graphic</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>callback</code> : Callback of rendering debug graphics (<a href="https://github.com/photonstorm/phaser/blob/master/src/gameobjects/rope/Rope.js#L996-L1024">default callback</a>)
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">rope</span><span class="p">,</span> <span class="nx">meshLength</span><span class="p">,</span> <span class="nx">verts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var graphic = rope.debugGraphic;</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>rope</code> : Rope instance.<ul>
+<li><code>rope.debugGraphic</code> : <a href="../graphics/">Graphics game object</a></li>
+</ul>
+</li>
+<li><code>meshLength</code> : The number of mesh vertices in total.</li>
+<li><code>verts</code> : An array of the translated vertex coordinates.</li>
+</ul>
+</li>
 </ul>
                 
                   
@@ -4871,7 +5195,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../uuid/" title="UUID" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../quad/" title="Quad" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4880,19 +5204,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                UUID
+                Quad
               </span>
             </div>
           </a>
         
         
-          <a href="../date/" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../texture/" title="Texture" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Date
+                Texture
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

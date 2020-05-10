@@ -55,7 +55,7 @@ class FileChooser extends DOMElement {
     }
 
     resetFromJSON(config) {
-        this.setAccept(GetValue(config, 'accept', undefined));
+        this.setAccept(GetValue(config, 'accept', ''));
         this.setMultiple(GetValue(config, 'multiple', false));
         return this;
     }
