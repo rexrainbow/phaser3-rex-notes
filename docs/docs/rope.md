@@ -189,6 +189,8 @@ If this Game Object has a physics body, it will not change the body. This is a r
 
 ### Debug
 
+Draw debug mesh each render tick.
+
 ```javascript
 rope.setDebug(graphic);
 // rope.setDebug(graphic, callback);
@@ -205,3 +207,6 @@ rope.setDebug(graphic);
         - `rope.debugGraphic` : [Graphics game object](graphics.md)
     - `meshLength` : The number of mesh vertices in total.
     - `verts` : An array of the translated vertex coordinates.
+
+!!! note
+    Clear Debug graphics (`rope.debugGraphic.clear()`) during scene's update stage (`scene.update() { }`)

@@ -5154,6 +5154,7 @@
 
 <p>If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.</p>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
+<p>Draw debug mesh each render tick.</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setDebug</span><span class="p">(</span><span class="nx">graphic</span><span class="p">);</span>
 <span class="c1">// rope.setDebug(graphic, callback);</span>
 </code></pre></div>
@@ -5174,6 +5175,10 @@
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Clear Debug graphics (<code>rope.debugGraphic.clear()</code>) during scene's update stage (<code>scene.update() { }</code>)</p>
+</div>
                 
                   
                 
