@@ -1,11 +1,18 @@
-var LayoutInit = function (parent) {
+var PreLayout = function (parent) {
+    // Only run PreLayout in topMostSizer.layout()
     if (parent) {
         return;
     }
 
-    var children = this.getAllChildrenSizers([this]);
+    this._layoutInit();
+    var children = this.getChildrenSizers(),
+        child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        children[i]._layoutInit();
+        child = children[i];
+        if (child.rexSizer.hidden || (!child.dirty)) {
+            continue;
+        }
+        children[i].preLayout();
     }
 }
-export default LayoutInit;
+export default PreLayout;
