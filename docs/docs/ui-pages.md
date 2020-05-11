@@ -132,12 +132,14 @@ pages.addPage(child, key, align, padding, expand);
 or 
 
 ```javascript
-pages.addPage(child, {
-    key: 0,
-    align: Phaser.Display.Align.TOP_LEFT,
-    padding: 0,
-    expand: true
-});
+pages.addPage(child, 
+    {
+        key: 0,
+        align: Phaser.Display.Align.TOP_LEFT,
+        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
+        expand: true
+    }
+);
 ```
 
 - `child` : A game object.

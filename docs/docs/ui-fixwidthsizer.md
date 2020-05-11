@@ -196,11 +196,23 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, paddingConfig, childKey);
+sizer.add(child, padding, key, index);
+```
+
+or
+
+```javascript
+sizer.add(child, 
+    {
+        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
+        key: undefined, 
+        index: undefined
+    }
+);
 ```
 
 - `child` : A game object
-- `paddingConfig` : Add space between bounds. Default is 0.
+- `padding` : Add space between bounds. Default is 0.
     - A number for left/right/top/bottom bounds
     - Or a plain object
         ```javascript
@@ -211,9 +223,11 @@ sizer.add(child, paddingConfig, childKey);
             bottom: 0
         }
         ```
-- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+- `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
     - `items` : Reserved key, for all children item.
+- `index` : Insert child to.
+    - `undefined` : Insert child at last.
 
 ### Add new line
 

@@ -5199,12 +5199,22 @@
 </code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">childKey</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> 
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
+        <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="p">}</span>
+<span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>child</code> : A game object</li>
-<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li><code>padding</code> : Add space between bounds. Default is 0.<ul>
 <li>A number for left/right/top/bottom bounds</li>
 <li>Or a plain object
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -5216,9 +5226,13 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li><code>childKey</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
+<li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Don't add this child. Default value.</li>
 <li><code>items</code> : Reserved key, for all children item.</li>
+</ul>
+</li>
+<li><code>index</code> : Insert child to.<ul>
+<li><code>undefined</code> : Insert child at last.</li>
 </ul>
 </li>
 </ul>

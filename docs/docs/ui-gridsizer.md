@@ -201,24 +201,39 @@ gridSizer.addBackground(child);
 Add a game obejct to grid sizer
 
 ```javascript
-gridSizer.add(child, columnIndex, rowIndex);
+gridSizer.add(child, column, row);
 ```
 
 or
 
 ```javascript
-gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand, childKey);
+gridSizer.add(child, column, row, align, padding, expand, key);
+```
+
+or
+
+```javascript
+gridSizer.add(child, 
+    {
+        column: 0, 
+        row: 0, 
+        align: 'center', 
+        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
+        expand: false, 
+        key: undefined
+    }
+);
 ```
 
 - `child` : A game object
-- `columnIndex`, `rowIndex` : Index of grid to add.
+- `column`, `row` : Index of grid to add.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
     - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
     - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
-- `paddingConfig` : Add space between bounds. Default is 0.
+- `padding` : Add space between bounds. Default is 0.
     - A number for left/right/top/bottom bounds
     - Or a plain object
         ```javascript
@@ -230,7 +245,7 @@ gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand, childK
         }
         ```
 - `expand` : Set `true` to height and width.
-- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+- `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
 ### Proportion

@@ -17,6 +17,7 @@ var Add = function (gameObject, paddingConfig, childKey, index) {
         var config = paddingConfig;
         paddingConfig = GetValue(config, 'padding', 0);
         childKey = GetValue(config, 'key', undefined);
+        index = GetValue(config, 'index', undefined);
     }
     if (paddingConfig === undefined) {
         paddingConfig = 0;
