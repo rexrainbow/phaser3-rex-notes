@@ -131,6 +131,11 @@ class Label extends Sizer {
     }
 
     layout(parent, newWidth, newHeight) {
+        // Skip hidden or !dirty sizer
+        if (this.rexSizer.hidden || (!this.dirty)) {
+            return this;
+        }
+
         super.layout(parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;

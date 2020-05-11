@@ -22,6 +22,7 @@ class Base extends Container {
 
         this.space = GetBoundsConfig(GetValue(config, 'space', 0));
         this.setDraggable(GetValue(config, 'draggable', false));
+        this.setDirty(true);
     }
 
     destroy(fromScene) {
@@ -53,6 +54,14 @@ class Base extends Container {
             minHeight = 0;
         }
         this.minHeight = minHeight;
+        return this;
+    }
+
+    setDirty(dirty) {
+        if (dirty === undefined) {
+            dirty = true;
+        }
+        this.dirty = dirty;
         return this;
     }
 
@@ -147,7 +156,7 @@ class Base extends Container {
         this.centerY = value;
         return this;
     }
-    
+
     get innerLeft() {
         return this.left + this.space.left;
     }

@@ -137,6 +137,10 @@ class Slider extends Sizer {
     }
 
     layout(parent, newWidth, newHeight) {
+        // Skip hidden or !dirty sizer
+        if (this.rexSizer.hidden || (!this.dirty)) {
+            return this;
+        }
         super.layout(parent, newWidth, newHeight);
         this.updateThumb();
         this.updateIndicator();

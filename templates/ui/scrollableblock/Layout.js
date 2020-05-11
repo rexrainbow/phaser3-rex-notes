@@ -1,8 +1,8 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 
 var Layout = function (parent, newWidth, newHeight) {
-    // Skip invisible sizer
-    if (this.rexSizer.hidden) {
+    // Skip hidden or !dirty sizer
+    if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 

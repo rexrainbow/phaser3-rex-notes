@@ -6,8 +6,8 @@ import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 var Layout = function (parent, newWidth, newHeight) {
-    // Skip invisible sizer
-    if (this.rexSizer.hidden) {
+    // Skip hidden or !dirty sizer
+    if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 
