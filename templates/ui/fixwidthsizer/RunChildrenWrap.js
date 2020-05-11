@@ -20,7 +20,7 @@ var RunChildrenWrap = function (lineWidth) {
                 continue;
             }
 
-            if (child.isRexSizer && this.runChildLayout) {
+            if (child.isRexSizer) {
                 child.layout(); // Use original size
             }
 

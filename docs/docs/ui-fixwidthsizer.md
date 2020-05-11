@@ -91,7 +91,6 @@ var sizer = scene.rexUI.add.fixWidthSizer({
 
     // rtl: false,
     // align: 0,
-    // runChildLayout: true,
 
     // name: '',
     // draggable: false
@@ -112,7 +111,6 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
 
     // rtl: false,
     // align: 0,
-    // runChildLayout: true,
 
     // name: '',
     // draggable: false
@@ -131,7 +129,6 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
 
     // rtl: false,
     // align: 0,
-    // runChildLayout: true,
 
     // name: '',
     // draggable: false
@@ -163,7 +160,6 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     - `3`, `'justify'`, `'justify-left'`, `'justify-top'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
     - `4`, `'justify-right'`, `'justify-bottom'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
     - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
-- `runChildLayout` : Set `true` to run `child.layout()` when layout this fixWidthSizer. Default is `true`.
 
 ### Custom class
 
