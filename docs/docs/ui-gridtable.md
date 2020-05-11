@@ -146,8 +146,6 @@ var table = scene.rexUI.add.gridTable({
         footer: 'center',
     },
 
-    runChildLayout: true,
-
     createCellContainerCallback: function(cell, cellContainer) {
         var scene = cell.scene,
             width = cell.width,
@@ -249,7 +247,6 @@ var table = scene.rexUI.add.gridTable({
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `align.footer`
-- `runChildLayout` : Set `true` to run `cellContainer.layout()` when adding cell container. Default is `true`.
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.
 

@@ -22,7 +22,6 @@ class Base extends Container {
 
         this.space = GetBoundsConfig(GetValue(config, 'space', 0));
         this.setDraggable(GetValue(config, 'draggable', false));
-        this.runChildLayout = GetValue(config, 'runChildLayout', true);
     }
 
     destroy(fromScene) {
