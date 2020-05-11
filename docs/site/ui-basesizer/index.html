@@ -4272,6 +4272,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dirty" class="md-nav__link">
+    Dirty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds-of-sizer" class="md-nav__link">
     Bounds of sizer
   </a>
@@ -4899,6 +4906,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dirty" class="md-nav__link">
+    Dirty
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bounds-of-sizer" class="md-nav__link">
     Bounds of sizer
   </a>
@@ -5058,14 +5072,40 @@
 </code></pre></div></li>
 </ul>
 <h3 id="minimum-size">Minimum size<a class="headerlink" href="#minimum-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">minWidth</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">minWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">minHeight</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">minHeight</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="dirty">Dirty<a class="headerlink" href="#dirty" title="Permanent link">&para;</a></h3>
+<p>Don't layout this sizer if <code>sizer.dirty</code> is <code>false</code>. i.e. Size of this sizer won't be changed, but won't layout children neither.</p>
+<p>Default value is <code>true</code>.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dirty</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">dirty</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDirty</span><span class="p">();</span>
+<span class="c1">// izer.setDirty(true);</span>
 </code></pre></div>
-
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">dirty</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Clear
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDirty</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">dirty</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="bounds-of-sizer">Bounds of sizer<a class="headerlink" href="#bounds-of-sizer" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
