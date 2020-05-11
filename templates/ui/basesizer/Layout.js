@@ -1,6 +1,7 @@
 // Override
 var Layout = function (parent, newWidth, newHeight) {
-    if (this.rexSizer.hidden) {
+    // Skip hidden or !dirty sizer
+    if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 

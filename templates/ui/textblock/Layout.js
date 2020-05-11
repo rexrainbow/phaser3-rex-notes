@@ -4,8 +4,8 @@ import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 
 var Layout = function (parent, newWidth, newHeight) {
-    // Skip invisible sizer
-    if (this.rexSizer.hidden) {
+    // Skip hidden or !dirty sizer
+    if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 

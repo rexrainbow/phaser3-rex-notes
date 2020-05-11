@@ -43,16 +43,48 @@ sizer.addBackground(gameObject);
 
 ### Minimum size
 
-```javascript
-sizer.setMinSize(width, height);
-```
+- Get
+    ```javascript
+    var minWidth = sizer.minWidth;
+    var minHeight = sizer.minHeight;
+    ```
+- Set
+    ```javascript
+    sizer.setMinSize(width, height);
+    ```
+    or
+    ```javascript
+    sizer.setMinWidth(width);
+    sizer.setMinHeight(height);
+    ```
 
-or
+### Dirty
 
-```javascript
-sizer.setMinWidth(width);
-sizer.setMinHeight(height);
-```
+Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.
+
+Default value is `true`.
+
+- Get
+    ```javascript
+    var dirty = sizer.dirty;
+    ```
+- Set
+    ```javascript
+    sizer.setDirty();
+    // izer.setDirty(true);
+    ```
+    or
+    ```javascript
+    sizer.dirty = true;
+    ```
+- Clear
+    ```javascript
+    sizer.setDirty(false);
+    ```
+    or
+    ```javascript
+    sizer.dirty = false;
+    ```
 
 ### Bounds of sizer
 
