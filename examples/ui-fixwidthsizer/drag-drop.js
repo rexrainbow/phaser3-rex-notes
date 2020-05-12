@@ -35,28 +35,20 @@ class Demo extends Phaser.Scene {
 
 const MOVE_SPEED = 300;
 var MoveTo = function (item, endX, endY, ease) {
-    var distance = Phaser.Math.Distance.Between(item.x, item.y, endX, endY);
-    if (distance === 0) {
+    if ((item.x === endX) && (item.y === endY)) {
         return;
     }
+    var distance = Phaser.Math.Distance.Between(item.x, item.y, endX, endY);
     var duration = (distance / MOVE_SPEED) * 1000;
-    item.input.draggable = false;
-    item.moveToPromise(duration, endX, endY, ease)
-        .then(function () {
-            item.input.draggable = true;
-        })
+    item.moveTo(duration, endX, endY, ease)
 };
 var MoveFrom = function (item, startX, startY, ease) {
-    var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
-    if (distance === 0) {
+    if ((item.x === startX) && (item.y === startY)) {
         return;
     }
+    var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
     var duration = (distance / MOVE_SPEED) * 1000;
-    item.input.draggable = false;
-    item.moveFromPromise(duration, startX, startY, ease)
-        .then(function () {
-            item.input.draggable = true;
-        })
+    item.moveFrom(duration, startX, startY, ease)
 }
 
 var SetDragable = function (items) {
@@ -132,9 +124,7 @@ var ArrangeItems = function (panel) {
 
 var CreatePanel = function (scene, words) {
     var panel0 = CreateSizer(scene, words)
-        .layout()
     var panel1 = CreateSizer(scene)
-        .setMinSize(panel0.width, panel0.height);
 
     return scene.rexUI.add.sizer({
         orientation: 'y'
