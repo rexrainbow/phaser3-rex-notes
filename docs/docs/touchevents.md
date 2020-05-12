@@ -259,6 +259,8 @@ scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ })
 scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ });
 ```
 
+- `dropped` : `'dragend'` and also `'drop'`.
+
 #### Dragging properties
 
 ```javascript

@@ -2,10 +2,6 @@
 import GetGameObjectByName from '../utils/GetGameObjectByName.js';
 
 var GetElement = function (mapNameList) {
-    if (this.childrenMap === undefined) {
-        return undefined;
-    }
-
     if (typeof (mapNameList) === 'string') {
         mapNameList = mapNameList.split('.');
     }
@@ -14,18 +10,25 @@ var GetElement = function (mapNameList) {
     }
 
     var name = mapNameList.shift(),
-        element;
+        element = null;
     if (name.charAt(0) === '#') {
         name = name.substring(1);
-        element = GetGameObjectByName(this.childrenMap, name);
-    } else if (name.indexOf('[') === (-1)) {
-        element = this.childrenMap[name];
-    } else { // name[]
+        element = GetGameObjectByName(this.childrenMap, name);  // Find in childrenMap (BaseSizer)
+        if (!element) {
+            element = GetGameObjectByName(this.children, name); // Find in children (ContainerLite)
+        }
+    } else if (name.indexOf('[') === (-1)) { // Get element by key
+        if (this.childrenMap) {
+            element = this.childrenMap[name];
+        }
+    } else { // Get element by key[]
         var innerMatch = name.match(RE_OBJ);
         if (innerMatch != null) {
-            var elements = this.childrenMap[innerMatch[1]];
-            if (elements) {
-                element = elements[innerMatch[2]];
+            if (this.childrenMap) {
+                var elements = this.childrenMap[innerMatch[1]];
+                if (elements) {
+                    element = elements[innerMatch[2]];
+                }
             }
         }
     }

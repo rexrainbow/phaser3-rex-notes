@@ -22,28 +22,120 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 300)
             .layout()
 
-
-        var items = panel.getElement('panel0.items');
-        this.rexUI.waitComplete(PopupItems(items))
+        var items = panel.getElement('panels[0].items');
+        this.rexUI.waitComplete(Popup(items))
             .then(function () {
                 SetDragable(items);
+                SetDropZone(panel.getElement('panels'))
             })
     }
 
     update() { }
 }
 
+const MOVE_SPEED = 300;
+var SetDragable = function (items) {
+    items.forEach(function (item) {
+        item
+            .setInteractive({ draggable: true })
+            .on('dragstart', function (pointer, dragX, dragY) {
+                item.setData({ startX: item.x, startY: item.y });
+            })
+            .on('drag', function (pointer, dragX, dragY) {
+                item.setPosition(dragX, dragY);
+            })
+            .on('dragend', function (pointer, dragX, dragY, dropped) {
+                if (dropped) { // Process 'drop' event
+                    return;
+                }
+
+                item.input.draggable = false;
+
+                var startX = item.getData('startX'), startY = item.getData('startY');
+                var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
+                var duration = (distance / MOVE_SPEED) * 1000;
+                item.moveToPromise(duration, startX, startY)
+                    .then(function () {
+                        item.input.draggable = true;
+                    })
+            })
+            .on('drop', function (pointer, target) {
+                var parent = item.getParentSizer();
+                var parentItems = parent.getElement('items');
+                var isLastItem = (parentItems[parentItems.length - 1] === item);
+                parent.remove(item);
+                if (!isLastItem) {
+                    ArrangeItems(parent);
+                }
+
+                var startX = item.x, startY = item.y; // Save current position
+                target.add(item).layout(); // Item is placed to new position in fixWidthSizer
+                // Move item from start position to new position
+                item.input.draggable = false;
+                var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
+                var duration = (distance / MOVE_SPEED) * 1000;
+                item.moveFromPromise(duration, startX, startY)
+                    .then(function () {
+                        item.input.draggable = true;
+                    })
+            })
+    });
+}
+
+var SetDropZone = function (zones) {
+    zones.forEach(function (zone) {
+        zone
+            .setInteractive({ dropZone: true })
+    })
+}
+
+var Popup = function (items) {
+    var scene = items[0].scene;
+    return scene.tweens.add({
+        targets: items,
+        scaleX: { start: 0, to: 1 },
+        scaleY: { start: 0, to: 1 },
+        ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+        duration: 1000,
+        delay: scene.tweens.stagger(100),
+        repeat: 0,            // -1: infinity
+        yoyo: false
+    })
+}
+
+var ArrangeItems = function (panel) {
+    var items = panel.getElement('items');
+    // Save current position
+    items.forEach(function (item) {
+        item.setData({ startX: item.x, startY: item.y });
+    })
+    // Item is placed to new position in fixWidthSizer
+    panel.layout();
+    // Move item from start position to new position
+    items.forEach(function (item) {
+        item.input.draggable = false;
+        var startX = item.getData('startX'), startY = item.getData('startY');
+        var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
+        var duration = (distance / MOVE_SPEED) * 1000;
+        item.moveFromPromise(duration, startX, startY)
+            .then(function () {
+                item.input.draggable = true;
+            })
+    })
+}
+
 var CreatePanel = function (scene, words) {
-    var sizer0 = CreateSizer(scene, words)
+    var panel0 = CreateSizer(scene, words)
         .layout()
-    var sizer1 = CreateSizer(scene)
-        .setMinSize(sizer0.width, sizer0.height);
+    var panel1 = CreateSizer(scene)
+        .setMinSize(panel0.width, panel0.height);
 
     return scene.rexUI.add.sizer({
         orientation: 'y'
     })
-        .add(sizer0, { key: 'panel0' })
-        .add(sizer1, { padding: { top: 40 }, key: 'panel1' });
+        .add(panel0)
+        .add(panel1, { padding: { top: 40 } })
+        .addChildrenMap('panels', [panel0, panel1])
 }
 
 var CreateSizer = function (scene, words) {
@@ -86,41 +178,6 @@ var CreateLabel = function (scene, text) {
     })
         .setDepth(1)
     return label;
-}
-
-var PopupItems = function (items) {
-    var scene = items[0].scene;
-    return scene.tweens.add({
-        targets: items,
-        scaleX: { start: 0, to: 1 },
-        scaleY: { start: 0, to: 1 },
-        ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-        duration: 1000,
-        delay: scene.tweens.stagger(100),
-        repeat: 0,            // -1: infinity
-        yoyo: false
-    })
-}
-
-var SetDragable = function (items) {
-    items.forEach(function (item) {
-        item.setInteractive();
-        item.scene.input.setDraggable(item);
-        item
-            .on('dragstart', function (pointer, dragX, dragY) {
-                item.setData({ startX: item.x, startY: item.y });
-            })
-            .on('drag', function (pointer, dragX, dragY) {
-                item.setPosition(dragX, dragY);
-            })
-            .on('dragend', function (pointer, dragX, dragY, dropped) {
-                item.input.draggable = false;
-                item.moveToPromise(1000, item.getData('startX'), item.getData('startY'))
-                    .then(function () {
-                        item.input.draggable = true;
-                    })
-            })
-    });
 }
 
 var config = {
