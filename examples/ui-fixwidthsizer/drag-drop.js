@@ -112,15 +112,17 @@ var ArrangeItems = function (panel) {
     // Item is placed to new position in fixWidthSizer
     panel.layout();
     // Move item from start position to new position
-    items.forEach(function (item) {
-        item.input.draggable = false;
+    items.forEach(function (item) {        
         var startX = item.getData('startX'), startY = item.getData('startY');
         var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
-        var duration = (distance / MOVE_SPEED) * 1000;
-        item.moveFromPromise(duration, startX, startY)
-            .then(function () {
-                item.input.draggable = true;
-            })
+        if (distance > 0) {
+            item.input.draggable = false;
+            var duration = (distance / MOVE_SPEED) * 1000;
+            item.moveFromPromise(duration, startX, startY)
+                .then(function () {
+                    item.input.draggable = true;
+                })
+        }
     })
 }
 
@@ -150,13 +152,12 @@ var CreateSizer = function (scene, words) {
         .addBackground(scene.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK))
 
     if (words) {
-        var label;
-        for (var i = 0, cnt = words.length; i < cnt; i++) {
-            label = CreateLabel(scene, words[i])
+        words.forEach(function (word) {
+            var label = CreateLabel(scene, word)
                 .layout()
-                .setDirty(false)
-            sizer.add(label);
-        }
+                .setDirty(false)  // Don't layout me again
+            sizer.add(label)
+        })
     }
 
     return sizer;
