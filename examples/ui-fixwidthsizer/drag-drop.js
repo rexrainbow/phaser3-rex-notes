@@ -34,6 +34,31 @@ class Demo extends Phaser.Scene {
 }
 
 const MOVE_SPEED = 300;
+var MoveTo = function (item, endX, endY, ease) {
+    var distance = Phaser.Math.Distance.Between(item.x, item.y, endX, endY);
+    if (distance === 0) {
+        return;
+    }
+    var duration = (distance / MOVE_SPEED) * 1000;
+    item.input.draggable = false;
+    item.moveToPromise(duration, endX, endY, ease)
+        .then(function () {
+            item.input.draggable = true;
+        })
+};
+var MoveFrom = function (item, startX, startY, ease) {
+    var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
+    if (distance === 0) {
+        return;
+    }
+    var duration = (distance / MOVE_SPEED) * 1000;
+    item.input.draggable = false;
+    item.moveFromPromise(duration, startX, startY, ease)
+        .then(function () {
+            item.input.draggable = true;
+        })
+}
+
 var SetDragable = function (items) {
     items.forEach(function (item) {
         item
@@ -49,15 +74,8 @@ var SetDragable = function (items) {
                     return;
                 }
 
-                item.input.draggable = false;
-
                 var startX = item.getData('startX'), startY = item.getData('startY');
-                var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
-                var duration = (distance / MOVE_SPEED) * 1000;
-                item.moveToPromise(duration, startX, startY)
-                    .then(function () {
-                        item.input.draggable = true;
-                    })
+                MoveTo(item, startX, startY);
             })
             .on('drop', function (pointer, target) {
                 var parent = item.getParentSizer();
@@ -71,13 +89,7 @@ var SetDragable = function (items) {
                 var startX = item.x, startY = item.y; // Save current position
                 target.add(item).layout(); // Item is placed to new position in fixWidthSizer
                 // Move item from start position to new position
-                item.input.draggable = false;
-                var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
-                var duration = (distance / MOVE_SPEED) * 1000;
-                item.moveFromPromise(duration, startX, startY)
-                    .then(function () {
-                        item.input.draggable = true;
-                    })
+                MoveFrom(item, startX, startY);
             })
     });
 }
@@ -112,17 +124,9 @@ var ArrangeItems = function (panel) {
     // Item is placed to new position in fixWidthSizer
     panel.layout();
     // Move item from start position to new position
-    items.forEach(function (item) {        
+    items.forEach(function (item) {
         var startX = item.getData('startX'), startY = item.getData('startY');
-        var distance = Phaser.Math.Distance.Between(startX, startY, item.x, item.y);
-        if (distance > 0) {
-            item.input.draggable = false;
-            var duration = (distance / MOVE_SPEED) * 1000;
-            item.moveFromPromise(duration, startX, startY)
-                .then(function () {
-                    item.input.draggable = true;
-                })
-        }
+        MoveFrom(item, startX, startY);
     })
 }
 
