@@ -11,6 +11,7 @@ class TouchState {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this._enable = undefined;
         this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -56,21 +57,34 @@ class TouchState {
         this.shutdown();
     }
 
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
+    get enable() {
+        return this._enable;
+    }
 
-        if (this.enable === e) {
-            return this;
+    set enable(e) {
+        if (this._enable === e) {
+            return;
         }
 
         if (!e) {
             this.isInTouched = false;
             this.pointer = undefined;
         }
+        this._enable = e;
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
         this.enable = e;
-        this.gameObject.input.enabled = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 
@@ -115,7 +129,8 @@ class TouchState {
 
     // internal
     onPointIn(pointer, localX, localY) {
-        if (!pointer.isDown ||
+        if ((!this.enable) ||
+            (!pointer.isDown) ||
             (this.pointer !== undefined)) {
             return;
         }
@@ -131,7 +146,8 @@ class TouchState {
     }
 
     onPointOut(pointer) {
-        if (this.pointer !== pointer) {
+        if ((!this.enable) ||
+            (this.pointer !== pointer)) {
             return;
         }
         this.pointer = undefined;
@@ -140,7 +156,8 @@ class TouchState {
     }
 
     onPointerMove(pointer, localX, localY) {
-        if (!pointer.isDown ||
+        if ((!this.enable) ||
+            (!pointer.isDown) ||
             (this.pointer !== pointer)) {
             return;
         }

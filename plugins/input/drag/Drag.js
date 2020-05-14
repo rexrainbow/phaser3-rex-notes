@@ -10,6 +10,7 @@ class Drag {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 
+        this._enable = undefined;
         this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -50,20 +51,34 @@ class Drag {
         this.shutdown();
     }
 
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
-
-        if (this.enable === e) {
-            return this;
+    get enable() {
+        return this._enable;
+    }
+    
+    set enable(e) {
+        if (this._enable === e) {
+            return;
         }
 
         if (!e) {
             this.pointer = undefined;
         }
-        this.enable = e;
+        this._enable = e;
         this.scene.input.setDraggable(this.gameObject, e);
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 

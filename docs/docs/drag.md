@@ -106,6 +106,11 @@ gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /*...*/ });
 - Set
     ```javascript
     drag.setEnable(enable);  // enable: true, or false
+    // drag.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    drag.toggleEnable();
     ```
 
 ### Get dragging state

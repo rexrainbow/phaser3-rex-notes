@@ -8,27 +8,21 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {
-        this.load.image('bg', 'assets/images/white-dot.png');
-    }
+    preload() { }
 
     create() {
-        var star;
-        var bg = this.add.image(400, 300, 'bg')
-            .setDisplaySize(300, 300)
-            .setTint(0xcccccc);
-        bg.touchState = this.plugins.get('rexTouchState').add(bg)
-            .on('touchmove', function (pointer) {
-                star.x += this.dx;
-                star.y += this.dy;
-            });
+        var bg = this.add.rectangle(400, 300, 300, 300, 0xcccccc);
+        var star = this.add.rectangle(400, 300, 10, 10, 0xff0000);
 
-        star = this.add.image(400, 300, 'bg')
-            .setDisplaySize(10, 10)
-            .setTint(0xff0000);
+        var touchState = this.plugins.get('rexTouchState').add(bg);
+        touchState
+            .on('touchmove', function (pointer) {
+                star.x += touchState.dx;
+                star.y += touchState.dy;
+            });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

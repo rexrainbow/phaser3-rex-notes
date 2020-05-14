@@ -12,6 +12,7 @@ class DragRotate {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this._enable = undefined;
         this._deltaRotation = undefined;
         this.resetFromJSON(config);
         this.boot();
@@ -40,11 +41,26 @@ class DragRotate {
             this.scene.input.off('pointermove', this.onPointerMove, this);
             this.scene.events.off('destroy', this.destroy, this);
         }
-        this.scene = undefined;    
+        this.scene = undefined;
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+
+        if (!e) {
+            this.dragCancel();
+        }
+        this._enable = e;
     }
 
     setEnable(e) {
@@ -52,14 +68,12 @@ class DragRotate {
             e = true;
         }
 
-        if (this.enable === e) {
-            return this;
-        }
-
-        if (!e) {
-            this.dragCancel();
-        }
         this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 
@@ -89,11 +103,8 @@ class DragRotate {
     }
 
     onPointerDown(pointer) {
-        if (!this.enable) {
-            return;
-        }
-
-        if (this.pointer) {
+        if ((!this.enable) ||
+            this.pointer) {
             return;
         }
 
@@ -107,10 +118,8 @@ class DragRotate {
     }
 
     onPointerUp(pointer) {
-        if (!this.enable) {
-            return;
-        }
-        if (this.pointer !== pointer) {
+        if ((!this.enable) ||
+            (this.pointer !== pointer)) {
             return;
         }
 
@@ -120,11 +129,8 @@ class DragRotate {
     }
 
     onPointerMove(pointer) {
-        if (!this.enable) {
-            return;
-        }
-
-        if (!pointer.isDown) {
+        if ((!this.enable) ||
+            (!pointer.isDown)) {
             return;
         }
 

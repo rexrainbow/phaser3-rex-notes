@@ -141,21 +141,25 @@ class VirtualJoyStick {
         this.thumb.visible = visible;
     }
 
-    setEnable(value) {
-        this.enable = value;
-        return this;
-    }
-
-    toggleEnabl() {
-        this.enable = !this.enable;
-    }
-
     get enable() {
         return this.touchCursor.enable;
     }
 
     set enable(value) {
         this.touchCursor.setEnable(value);
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
     }
 
     setRadius(radius) {

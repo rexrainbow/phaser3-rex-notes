@@ -27,6 +27,7 @@ class Scroller {
         };
         this.dragState = new DrapSpeed(gameObject, drapSpeedConfig);
 
+        this._enable = undefined;
         this._value = undefined;
         this._slowDown = new SlowDown();
 
@@ -86,6 +87,35 @@ class Scroller {
 
     destroy() {
         this.shutdown();
+    }
+
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+
+        this._enable = e;
+        this._state.setEnable(e);
+        this.dragState.setEnable(e);
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
     }
 
     setOrientationMode(m) {
@@ -160,12 +190,6 @@ class Scroller {
 
     setValue(value) {
         this.value = value;
-    }
-
-    setEnable(e) {
-        this._state.setEnable(e);
-        this.dragState.setEnable(e);
-        return this;
     }
 
     get state() {

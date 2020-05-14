@@ -95,6 +95,11 @@ var dragRotate = scene.plugins.get('rexDragRotate').add(scene, {
 - Set
     ```javascript
     dragRotate.setEnable(enable);  // enable: true, or false
+    // dragRotate.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    dragRotate.toggleEnable();
     ```
 
 ### Origin point

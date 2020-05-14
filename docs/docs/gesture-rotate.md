@@ -94,6 +94,11 @@ var rotate = scene.rexGestures.add.rotate({
 - Set
     ```javascript
     rotate.setEnable(enable);  // enable: true, or false
+    // rotate.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    rotate.toggleEnable();
     ```
 
 ### Events

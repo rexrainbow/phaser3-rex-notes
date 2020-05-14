@@ -16,6 +16,7 @@ class Slider {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this._enable = undefined;
         this._value = undefined;
         this.endPoints = [{
             x: 0,
@@ -72,17 +73,31 @@ class Slider {
         this.shutdown();
     }
 
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
+        }
+
+        this._enable = e;
+        this.scene.input.setDraggable(this.gameObject, e);
+        return this;
+    }
+
     setEnable(e) {
         if (e === undefined) {
             e = true;
         }
 
-        if (this.enable === e) {
-            return this;
-        }
-
         this.enable = e;
-        this.scene.input.setDraggable(this.gameObject, e);
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 

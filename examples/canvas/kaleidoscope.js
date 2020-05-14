@@ -17,8 +17,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.bg = this.add.rexCanvas(300, 350, 600, 600)
-            .fill('#050505');
+        this.bg = this.add.rectangle(300, 350, 600, 600, 0x050505);
         this.canvas = this.add.rexCanvas(300, 350, 600, 600)
             .generateTexture('canvas');
         this.canvas.touchState = this.plugins.get('rexTouchState').add(this.canvas);

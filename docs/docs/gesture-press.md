@@ -106,6 +106,11 @@ Get press events of a game object.
 - Set
     ```javascript
     press.setEnable(enable);  // enable: true, or false
+    // press.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    press.toggleEnable();
     ```
 
 ### Events

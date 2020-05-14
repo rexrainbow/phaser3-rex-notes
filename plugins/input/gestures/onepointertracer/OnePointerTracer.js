@@ -16,6 +16,7 @@ class OnePointerTracer extends TickTask {
         if (gameObject) {
             gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         }
+        this._enable = undefined;
         this.resetFromJSON(config);
         this.boot();
     }
@@ -76,19 +77,33 @@ class OnePointerTracer extends TickTask {
         this.shutdown();
     }
 
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
+    get enable() {
+        return this._enable;
+    }
 
-        if (this.enable === e) {
-            return this;
+    set enable(e) {
+        if (this._enable === e) {
+            return;
         }
 
         if (!e) {
             this.dragCancel();
         }
+        this._enable = e;
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
         this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 

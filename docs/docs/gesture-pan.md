@@ -103,6 +103,11 @@ Get pan events of a game object.
 - Set
     ```javascript
     pan.setEnable(enable);  // enable: true, or false
+    // pan.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    pan.toggleEnable();
     ```
 
 ### Events

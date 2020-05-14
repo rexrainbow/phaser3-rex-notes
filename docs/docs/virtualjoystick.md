@@ -160,8 +160,11 @@ Visible of base game object.
     ```
 - Set
     ```javascript
-    joystick.enable = enable;
-    joystick.setEnable(enable);
+    joystick.setEnable(enable);  // enable: true, or false
+    //joystick.enable = enable;
+    ```
+- Toggle
+    ```javascript
     joystick.toggleEnable();
     ```
 

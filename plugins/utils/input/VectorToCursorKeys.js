@@ -20,6 +20,7 @@ class VectorToCursorKeys extends CursorKeys {
         if (this.end == undefined) {
             this.end = {};
         }
+        this._enable = undefined;
         this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'dir', '8dir'));
         this.setDistanceThreshold(GetValue(o, 'forceMin', 16));
@@ -57,19 +58,32 @@ class VectorToCursorKeys extends CursorKeys {
         return this;
     }
 
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        } else {
-            e = !!e;
-        }
-        if (e === this.enable) {
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
             return;
         }
-        if (e === false) {
+        if (!e) {
             this.clearVector();
         }
+        this._enable = e;
+        return this;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
         this.enable = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 

@@ -114,6 +114,11 @@ Get swipe events of a game object.
 - Set
     ```javascript
     swipe.setEnable(enable);  // enable: true, or false
+    // swipe.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    swipe.toggleEnable();
     ```
 
 ### Events

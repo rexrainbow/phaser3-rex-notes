@@ -52,7 +52,7 @@ class Button {
 
     set enable(e) {
         if (this._enable === e) {
-            return this;
+            return;
         }
 
         if (!e) {

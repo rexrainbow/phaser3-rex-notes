@@ -126,6 +126,11 @@ Get tap/multi-taps events of a game object.
 - Set
     ```javascript
     tap.setEnable(enable);  // enable: true, or false
+    // tap.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    tap.toggleEnable();
     ```
 
 ### Events

@@ -136,10 +136,19 @@ Fires `valuechange` event if new value is not equal to current value.
 
 #### Drag enable
 
-```javascript
-slider.setEnable();
-// slider.setEnable(false);  // disable
-```
+- Get
+    ```javascript
+    var enable = slider.enable;
+    ```
+- Set
+    ```javascript
+    slider.setEnable(enable);  // enable: true, or false
+    slider.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    slider.toggleEnable();
+    ```
 
 #### Is dragging
 

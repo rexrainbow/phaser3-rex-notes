@@ -172,10 +172,19 @@ Fires `valuechange` event if new value is not equal to current value.
 
 #### Drag enable
 
-```javascript
-scroller.setEnable();
-// scroller.setEnable(false);  // disable
-```
+- Get
+    ```javascript
+    var enable = scroller.enable;
+    ```
+- Set
+    ```javascript
+    scroller.setEnable();
+    // scroller.setEnable(enable);  // enable: true, or false
+    ```
+    or
+    ```javascript
+    scroller.enable = enable; // enable: true, or false
+    ```
 
 #### Is dragging
 

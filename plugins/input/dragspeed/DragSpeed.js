@@ -11,6 +11,7 @@ class DragSpeed {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
+        this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -57,21 +58,33 @@ class DragSpeed {
         this.shutdown();
     }
 
-    setEnable(e) {
-        if (e === undefined) {
-            e = true;
-        }
+    get enable() {
+        return this._enable;
+    }
 
-        if (this.enable === e) {
-            return this;
+    set enable(e) {
+        if (this._enable === e) {
+            return;
         }
 
         if (!e) {
             this.isInTouched = false;
             this.pointer = undefined;
         }
+        this._enable = e;
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
         this.enable = e;
-        this.gameObject.input.enabled = e;
+        return this;
+    }
+
+    toggleEnable() {
+        this.setEnable(!this.enable);
         return this;
     }
 
@@ -116,7 +129,8 @@ class DragSpeed {
 
     // internal
     onPointIn(pointer, localX, localY) {
-        if (!pointer.isDown ||
+        if ((!this.enable) ||
+            (!pointer.isDown) ||
             (this.pointer !== undefined)) {
             return;
         }
@@ -126,14 +140,16 @@ class DragSpeed {
     }
 
     onPointOut(pointer) {
-        if (this.pointer !== pointer) {
+        if ((!this.enable) ||
+            (this.pointer !== pointer)) {
             return;
         }
         this.pointer = undefined;
     }
 
     onPointerMove(pointer, localX, localY) {
-        if (!pointer.isDown ||
+        if ((!this.enable) ||
+            (!pointer.isDown) ||
             (this.pointer !== pointer)) {
             return;
         }
@@ -142,6 +158,10 @@ class DragSpeed {
     }
 
     preupdate(time, delta) {
+        if (!this.enable) {
+            return;
+        }
+
         var pointer = this.pointer;
         this.justMoved = false;
         if (pointer && (!this.isInTouched)) {

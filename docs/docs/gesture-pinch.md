@@ -94,6 +94,11 @@ var pinch = scene.rexGestures.add.pinch({
 - Set
     ```javascript
     pinch.setEnable(enable);  // enable: true, or false
+    // pinch.enable = enable;
+    ```
+- Toggle
+    ```javascript
+    pinch.toggleEnable();
     ```
 
 ### Events

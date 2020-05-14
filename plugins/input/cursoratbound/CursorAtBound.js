@@ -40,11 +40,12 @@ class CursorAtBound extends CursorKeys {
         var left = this.bounds.left,
             right = this.bounds.right,
             top = this.bounds.top,
-            bottom = this.bounds.bottom;
-        var atLeftBound = (cursorX >= left) && (cursorX <= (left + this.sensitiveDistance)),
-            atRightBound = (cursorX <= right) && (cursorX >= (right - this.sensitiveDistance)),
-            atTopBound = (cursorY >= top) && (cursorY <= (top + this.sensitiveDistance)),
-            atBottomBound = (cursorY <= bottom) && (cursorY >= (bottom - this.sensitiveDistance))
+            bottom = this.bounds.bottom,
+            sensitiveDistance = this.sensitiveDistance;
+        var atLeftBound = (cursorX >= left) && (cursorX <= (left + sensitiveDistance)),
+            atRightBound = (cursorX <= right) && (cursorX >= (right - sensitiveDistance)),
+            atTopBound = (cursorY >= top) && (cursorY <= (top + sensitiveDistance)),
+            atBottomBound = (cursorY <= bottom) && (cursorY >= (bottom - sensitiveDistance))
 
         this.clearAllKeysState();
         this.setKeyState('left', atLeftBound);

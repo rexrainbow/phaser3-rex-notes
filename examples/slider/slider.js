@@ -7,21 +7,19 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');
-    }
+    preload() { }
 
     create() {
-        this.img = this.add.image(400, 300, 'dot').setScale(10, 10);
+        this.img = this.add.rectangle(400, 300, 10, 10, 0xffffff);
         this.img.slider = this.plugins.get('rexSlider').add(this.img, {
             endPoints: [{
-                    x: this.img.x - 200,
-                    y: this.img.y - 200
-                },
-                {
-                    x: this.img.x + 200,
-                    y: this.img.y + 200
-                }
+                x: this.img.x - 200,
+                y: this.img.y - 200
+            },
+            {
+                x: this.img.x + 200,
+                y: this.img.y + 200
+            }
             ],
             value: 0.25
         });
