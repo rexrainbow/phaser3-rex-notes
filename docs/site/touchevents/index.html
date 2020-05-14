@@ -5231,6 +5231,19 @@
     <span class="c1">// ...</span>
 <span class="p">})</span>
 </code></pre></div></li>
+<li>Drag game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span>
+    <span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span> <span class="nx">draggable</span><span class="o">:</span> <span class="kc">true</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+    <span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span>
+        <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span>
+        <span class="c1">// ...</span>
+    <span class="p">})</span>
+</code></pre></div></li>
 </ul>
 <p>Reference : <a href="./#properties-of-point">Properties of point</a></p>
 <h3 id="register-interactive">Register interactive<a class="headerlink" href="#register-interactive" title="Permanent link">&para;</a></h3>

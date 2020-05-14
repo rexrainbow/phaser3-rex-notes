@@ -45,6 +45,20 @@ Built-in touch/mouse events of phaser.
         // ...
     })
     ```
+- Drag game object
+    ```javascript
+    gameObject
+        .setInteractive({ draggable: true })
+        .on('dragstart', function(pointer, dragX, dragY){
+            // ...
+        })
+        on('drag', function(pointer, dragX, dragY){
+            gameObject.setPosition(dragX, dragY);
+        })
+        .on('dragend', function(pointer, dragX, dragY, dropped){
+            // ...
+        })
+    ```
 
 Reference : [Properties of point](touchevents.md#properties-of-point)
 
