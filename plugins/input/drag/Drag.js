@@ -1,5 +1,5 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import IsPointerInHitArea from '../../utils/input/IsPointerInHitArea.js';
+import DragStart from '../../utils/input/DragStart.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -54,7 +54,7 @@ class Drag {
     get enable() {
         return this._enable;
     }
-    
+
     set enable(e) {
         if (this._enable === e) {
             return;
@@ -96,35 +96,8 @@ class Drag {
     }
 
     drag() {
-        var inputPlugin = this.scene.input;
-        var inputManager = inputPlugin.manager;
-        var pointersTotal = inputManager.pointersTotal;
-        var pointers = inputManager.pointers,
-            pointer;
-        for (var i = 0; i < pointersTotal; i++) {
-            pointer = pointers[i];
-            if (
-                (!pointer.primaryDown) ||
-                (inputPlugin.getDragState(pointer) !== 0) ||
-                (!IsPointerInHitArea(this.gameObject, pointer))
-            ) {
-                continue;
-            }
-
-            // For 3.18.0
-            inputPlugin.setDragState(pointer, 1);
-            inputPlugin._drag[pointer.id] = [this.gameObject];
-            if ((inputPlugin.dragDistanceThreshold === 0) || (inputPlugin.dragTimeThreshold === 0)) {
-                //  No drag criteria, so snap immediately to mode 3
-                inputPlugin.setDragState(pointer, 3);
-                inputPlugin.processDragStartList(pointer);
-            } else {
-                //  Check the distance / time on the next event
-                inputPlugin.setDragState(pointer, 2);
-            }
-            break;
-            // For 3.18.0
-        }
+        DragStart(this.gameObject);
+        return this;
     }
 
     dragend() {
