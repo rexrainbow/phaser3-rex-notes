@@ -82,8 +82,8 @@ class Demo extends Phaser.Scene {
 
         panel
             .on('canvas.pan', function (pan, canvas, lastPointer) {
-                var x = Math.floor(pan.x - canvas.x),
-                    y = Math.floor(pan.y - canvas.y);
+                var x = Math.floor(canvas.input.localX),
+                    y = Math.floor(canvas.input.localY);
                 drawer.circle(
                     x, // x
                     y, // y
