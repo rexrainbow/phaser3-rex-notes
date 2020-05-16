@@ -41,6 +41,7 @@ class GridSizer extends BaseSizer {
         this.type = 'rexGridSizer';
         this.setupGrid(columnCount, rowCount, columnProportions, rowProportions, config);
 
+        this.addChildrenMap('items', this.sizerChildren);
     }
 
     destroy(fromScene) {
@@ -93,6 +94,13 @@ class GridSizer extends BaseSizer {
     }
 
     setupGrid(columnCount, rowCount, columnProportions, rowProportions, config) {
+        if (columnProportions === undefined) {
+            columnProportions = 0;
+        }
+        if (rowProportions === undefined) {
+            rowProportions = 0;
+        }
+
         this.columnCount = columnCount;
         this.rowCount = rowCount;
 
