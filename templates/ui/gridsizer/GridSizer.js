@@ -48,7 +48,7 @@ class GridSizer extends BaseSizer {
         if (!this.scene) {
             return;
         }
-        this.gridChildren.length = 0;
+        this.sizerChildren.length = 0;
         super.destroy(fromScene);
     }
 
@@ -97,9 +97,9 @@ class GridSizer extends BaseSizer {
         this.rowCount = rowCount;
 
         // children
-        this.gridChildren = [];
-        this.gridChildren.length = columnCount * rowCount;
-        ArrayFill(this.gridChildren, null);
+        this.sizerChildren = [];
+        this.sizerChildren.length = columnCount * rowCount;
+        ArrayFill(this.sizerChildren, null);
 
         // proportions
         this.columnProportions = [];
@@ -153,7 +153,7 @@ class GridSizer extends BaseSizer {
     }
 
     getChildAt(columnIndex, rowIndex) {
-        return this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
+        return this.sizerChildren[(rowIndex * this.columnCount) + columnIndex];
     }
 }
 

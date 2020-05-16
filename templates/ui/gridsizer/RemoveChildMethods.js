@@ -14,9 +14,9 @@ export default {
         if (this.isBackground(gameObject)) {
             RemoveItem(this.backgroundChildren, gameObject);
         } else {
-            var idx = this.gridChildren.indexOf(gameObject);
+            var idx = this.sizerChildren.indexOf(gameObject);
             if (idx !== -1) {
-                this.gridChildren[idx] = null;
+                this.sizerChildren[idx] = null;
             }
         }
 
@@ -33,7 +33,7 @@ export default {
     },
 
     clear(destroyChild) {
-        ArrayFill(this.gridChildren, null);
+        ArrayFill(this.sizerChildren, null);
         if (this.backgroundChildren) {
             this.backgroundChildren.length = 0;
         }

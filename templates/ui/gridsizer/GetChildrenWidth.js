@@ -8,7 +8,7 @@ var GetChildrenWidth = function () {
 
     var result = 0,
         columnWidth;
-    var children = this.gridChildren;
+    var children = this.sizerChildren;
     var child, padding, childWidth, proportion;
 
     for (var i = 0; i < this.columnCount; i++) {

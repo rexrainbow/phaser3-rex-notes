@@ -13,7 +13,7 @@ var OnMove = function (pointer) {
         return;
     }
     var table = this.childrenMap.child;
-    var cellIndex = table.pointerToCellIndex(pointer.x, pointer.y);
+    var cellIndex = table.pointToCellIndex(pointer.x, pointer.y);
     if (cellIndex === this._lastOverCellIndex) {
         return;
     }

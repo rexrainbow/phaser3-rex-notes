@@ -1,4 +1,4 @@
-var PointerToCellIndex = function (x, y) {
+var PointToCellIndex = function (x, y) {
     y -= (this.y + this.topLeftY);
     x -= (this.x + this.topLeftX);
     var offsetTableOY = this.tableOY - ((this.scrollMode === 0) ? y : x);
@@ -17,12 +17,12 @@ var PointerToCellIndex = function (x, y) {
     return cellIdx;
 }
 
-var PointerToCellContainer = function (x, y) {
-    var cellIdx = PointerToCellIndex.call(this, x, y);
+var PointToCellContainer = function (x, y) {
+    var cellIdx = PointToCellIndex.call(this, x, y);
     if (cellIdx === null) {
         return undefined;
     }
     return this.getCellContainer(cellIdx);
 }
 
-export { PointerToCellIndex, PointerToCellContainer };
+export { PointToCellIndex, PointToCellContainer };

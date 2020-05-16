@@ -14,6 +14,7 @@ class Base extends Container {
         this.setName(GetValue(config, 'name', ''));
         this.rexSizer = {};
         this.backgroundChildren = undefined;
+        this.sizerChildren = undefined; // [] or {}
 
         var anchorConfig = GetValue(config, 'anchor', undefined);
         if (anchorConfig) {

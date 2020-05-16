@@ -3,7 +3,7 @@ import SetTableOX from './SetTableOX.js';
 import MaskCells from './updatetable/MaskCells.js';
 import UpdateTable from './updatetable/UpdateTable.js';
 import IsCellVisible from './IsCellVisible.js';
-import { PointerToCellIndex, PointerToCellContainer } from './PointerToCell.js';
+import { PointToCellIndex, PointToCellContainer } from './PointToCell.js';
 import { EachVisibleCell, IterateVisibleCell, EachCell, IterateCell } from './EachCell.js';
 
 import SetCellsCount from './SetCellsCount.js';
@@ -18,8 +18,8 @@ export default {
     maskCells: MaskCells,
     updateTable: UpdateTable,
     isCellVisible: IsCellVisible,
-    pointerToCellIndex: PointerToCellIndex,
-    pointerToCellContainer: PointerToCellContainer,
+    pointToCellIndex: PointToCellIndex,
+    pointToCellContainer: PointToCellContainer,
     eachVisibleCell: EachVisibleCell,
     iterateVisibleCell: IterateVisibleCell,
     eachCell: EachCell,

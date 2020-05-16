@@ -34,7 +34,7 @@ export default {
         config.align = align;
         config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;
-        this.gridChildren[(rowIndex * this.columnCount) + columnIndex] = gameObject;
+        this.sizerChildren[(rowIndex * this.columnCount) + columnIndex] = gameObject;
 
         if (childKey !== undefined) {
             this.addChildrenMap(childKey, gameObject)

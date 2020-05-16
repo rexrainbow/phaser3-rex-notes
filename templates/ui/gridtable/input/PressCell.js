@@ -8,7 +8,7 @@ var PressCell = function (table, tableConfig) {
     table._press = new Press(table, pressConfig);
     table._press
         .on('pressstart', function (press) {
-            var cellIndex = table.pointerToCellIndex(press.x, press.y);
+            var cellIndex = table.pointToCellIndex(press.x, press.y);
             press._cellIndex = cellIndex;
             EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, cellIndex);
         }, this)

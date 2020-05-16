@@ -13,7 +13,7 @@ var methods = {
     getChildrenProportion: GetChildrenProportion,
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
-    _layoutInit: _layoutInit,
+    _layoutInit: _layoutInit
 };
 
 Object.assign(

@@ -14,7 +14,7 @@ var SwipeCell = function (table, tableConfig) {
         .on('swipe', function (swipe) {
             var isValidSwipe = (table.scrollMode === 0) ? (swipe.left || swipe.right) : (swipe.up || swipe.down);
             if (isValidSwipe) {
-                var cellIndex = table.pointerToCellIndex(swipe.x, swipe.y);
+                var cellIndex = table.pointToCellIndex(swipe.x, swipe.y);
                 var dirName =
                     (swipe.left) ? 'left' :
                         (swipe.right) ? 'right' :

@@ -8,7 +8,7 @@ var GetChildrenHeight = function () {
 
     var result = 0,
         rowHeight;
-    var children = this.gridChildren;
+    var children = this.sizerChildren;
     var child, padding, childHeight, proportion;
 
     for (var i = 0; i < this.rowCount; i++) {

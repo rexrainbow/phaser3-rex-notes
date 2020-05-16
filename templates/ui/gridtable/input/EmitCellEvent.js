@@ -3,7 +3,7 @@ var EmitCellEvent = function (eventEmitter, eventName, table, x, y) {
     if (y === undefined) {
         cellIndex = x;
     } else {
-        cellIndex = table.pointerToCellIndex(x, y);
+        cellIndex = table.pointToCellIndex(x, y);
     }
     if ((cellIndex === null) || (cellIndex === undefined)) {
         return;

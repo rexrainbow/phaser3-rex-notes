@@ -18,6 +18,7 @@ import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
 import IsInTouching from './IsInTouching.js';
+import PointToChild from './PointToChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
@@ -41,6 +42,7 @@ var methods = {
 
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
+    pointToChild: PointToChild,
     setDraggable: SetDraggable
 };
 
