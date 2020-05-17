@@ -12,7 +12,7 @@ var methods = {
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
 
-    setChildrenInteractive: SetChildrenInteractive,
+    setChildrenInteractive: SetChildrenInteractive
 };
 
 Object.assign(
