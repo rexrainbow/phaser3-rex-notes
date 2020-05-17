@@ -9,10 +9,11 @@ var SetInteractive = function () {
 }
 
 var FireEvent = function (eventName, pointer, localX, localY) {
-    var key = this.hitAreaManager.contains(localX, localY);
-    if (key === false) {
+    var area = this.hitAreaManager.getFirstHitArea(localX, localY);
+    if (area === null) {
         return;
     }
+    var key = area.key;
     this.parent.emit(`${eventName}-${key}`, pointer, localX, localY)
     this.parent.emit(eventName, key, pointer, localX, localY)
 }

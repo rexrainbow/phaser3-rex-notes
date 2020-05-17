@@ -136,7 +136,7 @@ class parser {
 
             if (prop.hasOwnProperty('color') || prop.hasOwnProperty('font-color')) {
                 var color = (prop.hasOwnProperty('color')) ? prop.color : prop['font-color'];
-                result.color = prop.color;
+                result.color = color;
             } else {
                 result.color = defaultStyle.color;
             }

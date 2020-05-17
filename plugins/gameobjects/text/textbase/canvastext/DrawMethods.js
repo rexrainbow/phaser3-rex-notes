@@ -1,5 +1,3 @@
-import CONST from '../const.js';
-
 export default {
     draw(startX, startY, boxWidth, boxHeight) {
         var penManager = this.penManager;
@@ -106,9 +104,12 @@ export default {
 
         if (pen.hasAreaMarker && (pen.width > 0)) {
             this.hitAreaManager.add(
-                pen.prop.area,
-                offsetX, (offsetY - this.startYOffset),
-                pen.width, this.defatultStyle.lineHeight);
+                pen.prop.area, // key
+                offsetX, // x
+                (offsetY - this.startYOffset), // y
+                pen.width, // width
+                this.defatultStyle.lineHeight // height
+            );
         }
     },
 

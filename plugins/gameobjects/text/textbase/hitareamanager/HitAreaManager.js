@@ -29,15 +29,15 @@ class HitAreaManager {
         return this;
     }
 
-    contains(x, y) {
+    getFirstHitArea(x, y) {
         var hitAreas = this.hitAreas, hitArea;
         for (var i = 0, cnt = hitAreas.length; i < cnt; i++) {
             hitArea = hitAreas[i];
             if (hitArea.contains(x, y)) {
-                return hitArea.key;
+                return hitArea;
             }
         }
-        return false;
+        return null;
     }
 
     drawBounds(graphics, color, parent) {
