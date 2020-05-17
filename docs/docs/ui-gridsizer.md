@@ -293,20 +293,18 @@ Default value is `true`.
     sizer.dirty = false;
     ```
 
-### Get child
+### Grid index <-> child
 
-```javascript
-var child = gridSizer.getChildAt(columnIndex, rowIndex);
-```
-
-### Get grid index
-
-```javascript
-var gridIndex = gridSizer.childToGridIndex(child);
-// var gridIndex = gridSizer.childToGridIndex(child, out);
-```
-
-- `gridIndex` : `{x, y}`, or `null` if child is not belong this sizer.
+- Grid index -> child
+    ```javascript
+    var child = gridSizer.getChildAt(columnIndex, rowIndex);
+    ```
+- Child -> g0rid index
+    ```javascript
+    var gridIndex = gridSizer.childToGridIndex(child);
+    // var gridIndex = gridSizer.childToGridIndex(child, out);
+    ```
+    - `gridIndex` : `{x, y}`, or `null` if child is not belong this sizer.
 
 ### Remove child
 

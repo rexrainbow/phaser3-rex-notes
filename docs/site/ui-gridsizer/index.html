@@ -4150,15 +4150,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-child" class="md-nav__link">
-    Get child
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-grid-index" class="md-nav__link">
-    Get grid index
+  <a href="#grid-index-child" class="md-nav__link">
+    Grid index &lt;-&gt; child
   </a>
   
 </li>
@@ -5027,15 +5020,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-child" class="md-nav__link">
-    Get child
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-grid-index" class="md-nav__link">
-    Get grid index
+  <a href="#grid-index-child" class="md-nav__link">
+    Grid index &lt;-&gt; child
   </a>
   
 </li>
@@ -5379,17 +5365,18 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">dirty</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">getChildAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">);</span>
-</code></pre></div>
-
-<h3 id="get-grid-index">Get grid index<a class="headerlink" href="#get-grid-index" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridIndex</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">childToGridIndex</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
-<span class="c1">// var gridIndex = gridSizer.childToGridIndex(child, out);</span>
-</code></pre></div>
-
+<h3 id="grid-index-child">Grid index &lt;-&gt; child<a class="headerlink" href="#grid-index-child" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Grid index -&gt; child
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">getChildAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Child -&gt; g0rid index
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridIndex</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">childToGridIndex</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="c1">// var gridIndex = gridSizer.childToGridIndex(child, out);</span>
+</code></pre></div><ul>
 <li><code>gridIndex</code> : <code>{x, y}</code>, or <code>null</code> if child is not belong this sizer.</li>
+</ul>
+</li>
 </ul>
 <h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
 <ul>
