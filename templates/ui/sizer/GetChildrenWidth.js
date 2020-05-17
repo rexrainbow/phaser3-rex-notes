@@ -32,6 +32,9 @@ var GetChildrenWidth = function (minimumMode) {
             }
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
+            if (i > 0) {
+                childWidth += this.space.item;
+            }
             result += childWidth;
         }
     } else {

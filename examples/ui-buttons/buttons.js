@@ -28,6 +28,8 @@ class Demo extends Phaser.Scene {
                 createButton(this, 'B'),
             ],
 
+            space: { item: 8 }
+
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)

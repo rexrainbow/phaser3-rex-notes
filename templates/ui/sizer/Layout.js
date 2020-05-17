@@ -105,9 +105,9 @@ var Layout = function (parent, newWidth, newHeight) {
         this.resetChildPositionState(child);
 
         if (this.orientation === 0) { // x
-            itemX += (width + padding.left + padding.right);
+            itemX += (width + padding.left + padding.right + this.space.item);
         } else { // y
-            itemY += (height + padding.top + padding.bottom);
+            itemY += (height + padding.top + padding.bottom + this.space.item);
         }
     }
 

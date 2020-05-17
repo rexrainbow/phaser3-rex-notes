@@ -14,17 +14,14 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var sizer = this.rexUI.add.fixWidthSizer({
+        var sizer = this.rexUI.add.sizer({
             x: 400, y: 300,
-            width: 400, height: 400,
             orientation: 'x',
-            space: {
-                item: 8, line: 8,
-            }
+            space: { item: 5 }
         })
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 8; i++) {
             sizer.add(this.rexUI.add.label({
-                width: 60, height: 60,
+                width: 40, height: 40,
                 background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_PRIMARY),
                 text: this.add.text(0, 0, `${i}`),
                 space: {

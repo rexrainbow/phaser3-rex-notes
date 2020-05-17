@@ -1,6 +1,8 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const RandomInt = Phaser.Math.Between;
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -24,7 +26,17 @@ class Demo extends Phaser.Scene {
         for (var i = 0; i < sizer.rowCount; i++) {
             for (var j = 0; j < sizer.columnCount; j++) {
                 sizer.add(
-                    this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, RandomInt(0, 0x1000000)), // child
+                    this.rexUI.add.label({
+                        background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_PRIMARY),
+                        text: this.add.text(0, 0, `${i},${j}`),
+                        space: {
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10,
+                        },
+                        align: 'center'
+                    }), // child
                     i, // columnIndex
                     j, // rowIndex
                     'center', // align
@@ -43,10 +55,10 @@ class Demo extends Phaser.Scene {
                 print.text += `click ${gridIndex.x},${gridIndex.y}\n`;
             })
             .on('child.over', function (child) {
-                child.setStrokeStyle(4, 0xff0000);
+                child.getElement('background').setStrokeStyle(4, 0xff0000);
             })
             .on('child.out', function (child) {
-                child.setStrokeStyle();
+                child.getElement('background').setStrokeStyle();
             })
             .on('child.pressstart', function (child) {
                 child.setScale(0.8);
@@ -62,22 +74,22 @@ class Demo extends Phaser.Scene {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `2-tap ${gridIndex.x},${gridIndex.y}\n`;
             })
-            .on('child.swipeleft', function(child) {
+            .on('child.swipeleft', function (child) {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `swipe-left ${gridIndex.x},${gridIndex.y}\n`;
             })
-            .on('child.swiperight', function(child) {
+            .on('child.swiperight', function (child) {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `swipe-right ${gridIndex.x},${gridIndex.y}\n`;
             })
-            .on('child.swipeup', function(child) {
+            .on('child.swipeup', function (child) {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `swipe-up ${gridIndex.x},${gridIndex.y}\n`;
             })
-            .on('child.swipedown', function(child) {
+            .on('child.swipedown', function (child) {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `swipe-down ${gridIndex.x},${gridIndex.y}\n`;
-            })    
+            })
     }
 
     update() { }

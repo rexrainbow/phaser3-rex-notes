@@ -32,6 +32,9 @@ class Sizer extends BaseSizer {
         this.type = 'rexSizer';
         this.sizerChildren = [];
         this.setOrientation(orientation);
+        this.setItemSpacing(GetValue(config, 'space.item', 0));
+
+        this.addChildrenMap('items', this.sizerChildren);
     }
 
     destroy(fromScene) {
@@ -48,6 +51,11 @@ class Sizer extends BaseSizer {
             orientation = ORIENTATIONMODE[orientation];
         }
         this.orientation = orientation;
+        return this;
+    }
+
+    setItemSpacing(space) {
+        this.space.item = space;
         return this;
     }
 

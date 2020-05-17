@@ -29,19 +29,12 @@ var Add = function (gameObject) {
             }
         }
     } else {
-        var padding;
-        if (this.orientation === 0) { // x
-            padding = { left: this.space.item };
-        } else { // y
-            padding = { top: this.space.item };
-        }
-
         var lastIndex = this.sizerChildren.length - 1;
         var lastChild = this.sizerChildren[lastIndex];
         if (lastChild.isRexSpace) { // Last child is Space, insert new button in front of Space.
-            SizerInsert.call(this, lastIndex, gameObject, this.buttonProportion, 'center', padding, true);
+            SizerInsert.call(this, lastIndex, gameObject, this.buttonProportion, 'center', 0, true);
         } else {  // Last child is not Space, append new button directly.
-            SizerAdd.call(this, gameObject, this.buttonProportion, 'center', padding, true);
+            SizerAdd.call(this, gameObject, this.buttonProportion, 'center', 0, true);
         }
     }
 

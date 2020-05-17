@@ -14,20 +14,8 @@ var Remove = function (gameObject, destroyChild) {
     if (this.buttons.length === 1) {
         this.clear(destroyChild);
     } else {
-        var removeFirstButton = (this.buttons.indexOf(gameObject) === 0);
-
         RemoveItem(this.buttons, gameObject);
         SizerRmove.call(this, gameObject, destroyChild);
-
-        if (removeFirstButton) {
-            var firstButton = this.buttons[0];
-            var config = this.getSizerConfig(firstButton);
-            if (this.orientation === 0) { // x
-                config.padding.left = 0;
-            } else {  // y
-                config.padding.top = 0;
-            }
-        }
     }
     return this;
 };
