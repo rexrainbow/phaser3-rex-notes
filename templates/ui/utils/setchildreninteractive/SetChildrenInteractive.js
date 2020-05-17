@@ -9,7 +9,6 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var SetChildrenInteractive = function (config) {
     this.eventEmitter = GetValue(config, 'eventEmitter', this);
     this.inputEventPrefix = GetValue(config, 'inputEventPrefix', 'child.');
-    this.groupName = GetValue(config, 'groupName', undefined);
 
     this.setInteractive();
 

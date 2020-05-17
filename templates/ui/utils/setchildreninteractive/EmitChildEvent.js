@@ -1,22 +1,16 @@
 var EmitChildEvent = function (eventEmitter, eventName, sizer, x, y, pointer) {
-    var child, index;
+    var child;
     if (y === undefined) {
-        index = x;
-        child = sizer.sizerChildren[index];
+        child = sizer.sizerChildren[x];
     } else {
         child = sizer.pointToChild(x, y);
-        index = sizer.sizerChildren.indexOf(child);
     }
 
     if (!child) {
         return;
     }
 
-    if (sizer.groupName !== undefined) {
-        eventEmitter.emit(eventName, child, sizer.groupName, index, pointer);
-    } else {
-        eventEmitter.emit(eventName, child, index, pointer);
-    }
+    eventEmitter.emit(eventName, child, pointer);
 }
 
 export default EmitChildEvent;
