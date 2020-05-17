@@ -299,7 +299,7 @@ Default value is `true`.
     ```javascript
     var child = gridSizer.getChildAt(columnIndex, rowIndex);
     ```
-- Child -> g0rid index
+- Child -> grid index
     ```javascript
     var gridIndex = gridSizer.childToGridIndex(child);
     // var gridIndex = gridSizer.childToGridIndex(child, out);
