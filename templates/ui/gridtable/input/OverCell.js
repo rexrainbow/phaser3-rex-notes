@@ -4,7 +4,6 @@ var OverCell = function (table, tableConfig) {
     table
         .on('pointermove', OnMove, this)
         .on('pointerover', OnMove, this)
-        .on('pointerup', OnOut, this)
         .on('pointerout', OnOut, this);
 }
 
@@ -20,15 +19,15 @@ var OnMove = function (pointer) {
 
     var preCellIndex = this._lastOverCellIndex;
     this._lastOverCellIndex = cellIndex;
-    EmitCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex);
-    EmitCellEvent(this.eventEmitter, 'cell.over', table, cellIndex);
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex, undefined, pointer);
+    EmitCellEvent(this.eventEmitter, 'cell.over', table, cellIndex, undefined, pointer);
 }
 
-var OnOut = function () {
+var OnOut = function (pointer) {
     var table = this.childrenMap.child;
-    var cellIndxe = this._lastOverCellIndex;
+    var cellIndex = this._lastOverCellIndex;
     this._lastOverCellIndex = undefined;
-    EmitCellEvent(this.eventEmitter, 'cell.out', table, cellIndxe);
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, cellIndex, undefined, pointer);
 }
 
 export default OverCell;

@@ -7,9 +7,9 @@ var TapCell = function (table, tableConfig) {
     var tapConfig = GetValue(tableConfig, 'press', undefined);
     table._tap = new Tap(table, tapConfig);
     table._tap
-        .on('tap', function (tap) {
+        .on('tap', function (tap, gameObject, lastPointer) {
             var eventName = `cell.${tap.tapsCount}tap`
-            EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.x, tap.y);
+            EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.x, tap.y, lastPointer);
         }, this)
 };
 

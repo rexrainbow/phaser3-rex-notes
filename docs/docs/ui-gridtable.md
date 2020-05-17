@@ -445,9 +445,7 @@ See [base sizer object](ui-basesizer.md).
         // ...
     }, scope);
     ```
-    - `swipeEventName` : 
-        - `'cell.swipeleft'`, `'cell.swiperight'`, for vertical scrolling mode.
-        - `'cell.swipeup'`, `'cell.swipedown'`, for horizontal scrolling mode.
+    - `swipeEventName` : `'cell.swipeleft'`, `'cell.swiperight'`, `'cell.swipeup'`, `'cell.swipedown'`.
     - `cellContainer` : Container game object of triggered cell.
     - `cellIndex` : Index of triggered cell.
 - Pointer-over cell
