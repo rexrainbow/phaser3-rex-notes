@@ -381,6 +381,10 @@ sizer.setChildrenInteractive({
 - `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
 - `eventEmitter` : Fire event through specific game object.
 
+!!! note
+    Input behaviors are installed to this Sizer game object, not each child.  
+    Use [Grid-Button](ui-buttons.md) if user needs to enable/disable input behaviors of each child individually.
+
 #### Events
 
 - Click

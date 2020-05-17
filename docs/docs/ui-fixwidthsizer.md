@@ -336,6 +336,9 @@ sizer.setChildrenInteractive({
 - `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
 - `eventEmitter` : Fire event through specific game object.
 
+!!! note
+    Input behaviors are installed to this Sizer game object, not each child.  
+
 #### Events
 
 - Click
