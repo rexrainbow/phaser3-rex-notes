@@ -316,8 +316,6 @@ sizer.setChildrenInteractive({
 
     // swipe: {threshold: 10, velocityThreshold: 1000, dir: '8dir'},
 
-    // groupName: undefined,
-
     // inputEventPrefix: 'child.',
     // eventEmitter: undefined
 })
@@ -337,98 +335,55 @@ sizer.setChildrenInteractive({
 - `eventEmitter` : Fire event through specific game object.
 
 !!! note
-    Input behaviors are installed to this Sizer game object, not each child.  
+    Input behaviors are installed to this Sizer game object, not each child. And it assumes that all children are not overlapped.
     Use [Button](ui-buttons.md) if user needs to enable/disable input behaviors of each child individually.
 
 #### Events
 
 - Click
     ```javascript
-    sizer.on('child.click', function(child, index, pointer) { 
+    sizer.on('child.click', function(child, pointer) { 
         // ...
     }, scope);
     ```
-    or
-    ```javascript
-    sizer.on('child.click', function(child, groupName, index, pointer) { 
-        // ...
-    }, scope);
-    ```
-    - `groupName` : Optional group name.
     - `child` : Triggered child game object.
-    - `index` : Index of triggered child game object in sizer.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
 - Pointer-over
     ```javascript
-    sizer.on('child.over', function(child, index, pointer) { 
-        // ...
-    }, scope);
-    ```
-    or
-    ```javascript
-    sizer.on('child.over', function(child, groupName, index, pointer) { 
+    sizer.on('child.over', function(child, pointer) { 
         // ...
     }, scope);
     ```
 - Pointer-out
     ```javascript
-    sizer.on('child.out', function(child, index, pointer) { 
+    sizer.on('child.out', function(child, pointer) { 
         // ...
     }, scope);
     ```
-    or
-    ```javascript
-    sizer.on('child.out', function(child, groupName, index, pointer) { 
-        // ...
-    }, scope);
-    ```  
 - Press
     ```javascript
-    sizer.on('child.pressstart', function(child, index, pointer) { 
+    sizer.on('child.pressstart', function(child, pointer) { 
         // ...
     }, scope);
     ```
     ```javascript
-    sizer.on('child.pressend', function(child, index, pointer) { 
-        // ...
-    }, scope);
-    ```
-    or
-    ```javascript
-    sizer.on('child.pressstart', function(child, groupName, index, pointer) { 
-        // ...
-    }, scope);
-    ```
-    ```javascript
-    sizer.on('child.pressend', function(child, groupName, index, pointer) { 
+    sizer.on('child.pressend', function(child, pointer) { 
         // ...
     }, scope);
     ```
 - Tap
     ```javascript
-    sizer.on(tapEventName, function(child, index, pointer) { 
+    sizer.on(tapEventName, function(child, pointer) { 
         // ...
     }, scope);
     ```
-    or
-    ```javascript
-    sizer.on(tapEventName, function(child, groupName, index, pointer) { 
-        // ...
-    }, scope);
-    ``` 
     - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
 - Swipe
     ```javascript
-    sizer.on(swipeEventName, function(child, index, pointer) { 
+    sizer.on(swipeEventName, function(child, pointer) { 
         // ...
     }, scope);
     ```
-    or
-    ```javascript
-    sizer.on(swipeEventName, function(child, groupName, index, pointer) { 
-        // ...
-    }, scope);
-    ``` 
     - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
 
 ### Other properties

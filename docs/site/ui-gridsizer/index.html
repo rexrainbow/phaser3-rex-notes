@@ -5434,8 +5434,6 @@
 
     <span class="c1">// swipe: {threshold: 10, velocityThreshold: 1000, dir: &#39;8dir&#39;},</span>
 
-    <span class="c1">// groupName: undefined,</span>
-
     <span class="c1">// inputEventPrefix: &#39;child.&#39;,</span>
     <span class="c1">// eventEmitter: undefined</span>
 <span class="p">})</span>
@@ -5467,72 +5465,41 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Input behaviors are installed to this Sizer game object, not each child.<br />
-Use <a href="../ui-buttons/">Grid-Button</a> if user want to enable/disable input behaviors of each child individually.</p>
+<p>Input behaviors are installed to this Sizer game object, not each child. And it assumes that all children are not overlapped.
+Use <a href="../ui-buttons/">Grid-Button</a> if user needs to enable/disable input behaviors of each child individually.</p>
 </div>
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Click
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>groupName</code> : Optional group name.</li>
 <li><code>child</code> : Triggered child game object.</li>
-<li><code>index</code> : Index of triggered child game object in sizer.</li>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.    </li>
 </ul>
 </li>
 <li>Pointer-over
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Pointer-out
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Press
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;child.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Tap
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
@@ -5540,12 +5507,7 @@ Use <a href="../ui-buttons/">Grid-Button</a> if user want to enable/disable inpu
 </ul>
 </li>
 <li>Swipe
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span> 
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
