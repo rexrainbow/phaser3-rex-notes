@@ -5209,13 +5209,7 @@
     <span class="p">},</span>
 
     <span class="c1">// space: 0,</span>
-    <span class="c1">// space: {</span>
-    <span class="c1">//    top: 0,</span>
-    <span class="c1">//    bottom: 0,</span>
-    <span class="c1">//    left: 0,</span>
-    <span class="c1">//    right: 0,</span>
-    <span class="c1">//    item: 0</span>
-    <span class="c1">//},    </span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0, item:0 },</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false,</span>
@@ -5269,8 +5263,8 @@
 <li><code>space</code> :<ul>
 <li>A number: Space between 2 button game objects.</li>
 <li>An object: Padding of button game objects.<ul>
-<li><code>space.item</code> : Space between 2 button game objects.</li>
-<li><code>space.top</code>, <code>space.bottom</code>, <code>space.left</code>, <code>space.right</code> : Padding around bottoms.        </li>
+<li><code>space.top</code>, <code>space.bottom</code>, <code>space.left</code>, <code>space.right</code> : Padding around bottons.</li>
+<li><code>space.item</code> : Space between 2 button game objects.       </li>
 </ul>
 </li>
 </ul>
@@ -5350,14 +5344,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>groupName</code> : Optional group name.</li>
-<li><code>button</code> : Triggered button game object</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
-<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
-</ul>
-</li>
+</code></pre></div></li>
 <li>Pointer-out button
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -5367,14 +5354,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>groupName</code> : Optional group name.</li>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
-<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
-</ul>
-</li>
+</code></pre></div></li>
 <li>Enable button's input
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -5384,12 +5364,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>groupName</code> : Optional group name.</li>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-</ul>
-</li>
+</code></pre></div></li>
 <li>Disable button's input
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -5399,12 +5374,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>groupName</code> : Optional group name.</li>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-</ul>
-</li>
+</code></pre></div></li>
 </ul>
 <h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>

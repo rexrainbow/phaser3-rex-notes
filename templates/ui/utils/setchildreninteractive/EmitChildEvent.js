@@ -13,9 +13,9 @@ var EmitChildEvent = function (eventEmitter, eventName, sizer, x, y, pointer) {
     }
 
     if (sizer.groupName !== undefined) {
-        eventEmitter.emit(eventName, child, sizer.groupName, index, pointer, event);
+        eventEmitter.emit(eventName, child, sizer.groupName, index, pointer);
     } else {
-        eventEmitter.emit(eventName, child, index, pointer, event);
+        eventEmitter.emit(eventName, child, index, pointer);
     }
 }
 

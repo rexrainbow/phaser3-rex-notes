@@ -6,7 +6,7 @@ import SwipeChild from './SwipeChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var SetInteractive = function (config) {
+var SetChildrenInteractive = function (config) {
     this.eventEmitter = GetValue(config, 'eventEmitter', this);
     this.inputEventPrefix = GetValue(config, 'inputEventPrefix', 'child.');
     this.groupName = GetValue(config, 'groupName', undefined);
@@ -22,4 +22,4 @@ var SetInteractive = function (config) {
     return this;
 }
 
-export default SetInteractive;
+export default SetChildrenInteractive;

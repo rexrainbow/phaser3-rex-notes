@@ -4,12 +4,16 @@ import EmitChildEvent from './EmitChildEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ClickChild = function (config) {
-    var buttonConfig = GetValue(config, 'button', undefined);
-    if (buttonConfig === undefined) {
-        buttonConfig = {};
+    var clickConfig = GetValue(config, 'click', undefined);
+    if (clickConfig === false) {
+        return;
     }
-    buttonConfig.threshold = 10;
-    this._click = new Button(this, buttonConfig);
+
+    if (clickConfig === undefined) {
+        clickConfig = {};
+    }
+    clickConfig.threshold = 10;
+    this._click = new Button(this, clickConfig);
     this._click.on('click', function (button, gameObject, pointer) {
         EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}click`, gameObject, pointer.x, pointer.y, pointer);
     }, this);

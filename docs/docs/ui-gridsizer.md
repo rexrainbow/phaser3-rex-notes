@@ -265,11 +265,48 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
+#### Dirty
+
+Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.
+
+Default value is `true`.
+
+- Get
+    ```javascript
+    var dirty = sizer.dirty;
+    ```
+- Set
+    ```javascript
+    sizer.setDirty();
+    // izer.setDirty(true);
+    ```
+    or
+    ```javascript
+    sizer.dirty = true;
+    ```
+- Clear
+    ```javascript
+    sizer.setDirty(false);
+    ```
+    or
+    ```javascript
+    sizer.dirty = false;
+    ```
+
 ### Get child
 
 ```javascript
 var child = gridSizer.getChildAt(columnIndex, rowIndex);
 ```
+
+### Get grid index
+
+```javascript
+var gridIndex = gridSizer.childToGridIndex(child);
+// var gridIndex = gridSizer.childToGridIndex(child, out);
+```
+
+- `gridIndex` : `{x, y}`, or `null` if child is not belong this sizer.
 
 ### Remove child
 
@@ -308,6 +345,132 @@ var child = gridSizer.getChildAt(columnIndex, rowIndex);
     ```javascript
     var rowCount = gridSizer.rowCount;
     ```
+
+### Set children interactive
+
+```javascript
+sizer.setChildrenInteractive({
+    // click: {mode: 'release', clickInterval: 100},
+
+    // over: undefined,
+    
+    // press: {time: 251, threshold: 9},
+
+    // tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, 
+    //       taps: undefined, minTaps: undefined, maxTaps: undefined,},
+
+    // swipe: {threshold: 10, velocityThreshold: 1000, dir: '8dir'},
+
+    // groupName: undefined,
+
+    // inputEventPrefix: 'child.',
+    // eventEmitter: undefined
+})
+```
+
+- `click` : [Configuration](button.md#create-instance) of Button behavior.
+    - `false` : Don't install Button behavior.
+- `over` :
+    - `false` : Don't fire over/out events
+- `press` : [Configuration](gesture-press.md#create-instance) of Press behavior.
+    - `false` : Don't install Press behavior.
+- `tap` : [Configuration](gesture-tap.md#create-instance) of Tap behavior.
+    - `false` : Don't install Tap behavior.
+- `swipe` : [Configuration](gesture-swipe.md#create-instance) of Swipe behavior.
+    - `false` : Don't install Swipe behavior.
+- `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
+- `eventEmitter` : Fire event through specific game object.
+
+#### Events
+
+- Click
+    ```javascript
+    sizer.on('child.click', function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on('child.click', function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    - `groupName` : Optional group name.
+    - `child` : Triggered child game object.
+    - `index` : Index of triggered child game object in sizer.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
+- Pointer-over
+    ```javascript
+    sizer.on('child.over', function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on('child.over', function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+- Pointer-out
+    ```javascript
+    sizer.on('child.out', function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on('child.out', function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ```  
+- Press
+    ```javascript
+    sizer.on('child.pressstart', function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    sizer.on('child.pressend', function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on('child.pressstart', function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    sizer.on('child.pressend', function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+- Tap
+    ```javascript
+    sizer.on(tapEventName, function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on(tapEventName, function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ``` 
+    - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
+- Swipe
+    ```javascript
+    sizer.on(swipeEventName, function(child, index, pointer) { 
+        // ...
+    }, scope);
+    ```
+    or
+    ```javascript
+    sizer.on(swipeEventName, function(child, groupName, index, pointer) { 
+        // ...
+    }, scope);
+    ``` 
+    - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
 
 ### Other properties
 

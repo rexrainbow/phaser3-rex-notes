@@ -5,6 +5,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SwipeChild = function (config) {
     var swipeConfig = GetValue(config, 'swipe', undefined);
+    if (swipeConfig === false) {
+        return;
+    }
+    
     if (swipeConfig === undefined) {
         swipeConfig = {};
     }

@@ -437,8 +437,6 @@ See [base sizer object](ui-basesizer.md).
         // ...
     }, scope);
     ```
-    - `cellContainer` : Container game object of triggered cell.
-    - `cellIndex` : Index of triggered cell.
 - [Swipe](gesture-swipe.md) cell
     ```javascript
     table.on(swipeEventName, function(cellContainer, cellIndex) {
@@ -446,32 +444,24 @@ See [base sizer object](ui-basesizer.md).
     }, scope);
     ```
     - `swipeEventName` : `'cell.swipeleft'`, `'cell.swiperight'`, `'cell.swipeup'`, `'cell.swipedown'`.
-    - `cellContainer` : Container game object of triggered cell.
-    - `cellIndex` : Index of triggered cell.
 - Pointer-over cell
     ```javascript
     table.on('cell.over', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
-    - `cellContainer` : Container game object of triggered cell.
-    - `cellIndex` : Index of triggered cell.
 - Pointer-out cell
     ```javascript
     table.on('cell.out', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
-    - `cellContainer` : Container game object of triggered cell.
-    - `cellIndex` : Index of triggered cell.
 - Click cell
     ```javascript
     table.on('cell.click', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
-    - `cellContainer` : Container game object of triggered cell.
-    - `cellIndex` : Index of triggered cell.
 
 ### Get element
 

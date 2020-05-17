@@ -100,13 +100,7 @@ var buttons = scene.rexUI.add.buttons({
     },
 
     // space: 0,
-    // space: {
-    //    top: 0,
-    //    bottom: 0,
-    //    left: 0,
-    //    right: 0,
-    //    item: 0
-    //},    
+    // space: { left: 0, right:0, top:0, bottom:0, item:0 },
 
     // name: '',
     // draggable: false,
@@ -145,8 +139,8 @@ var buttons = scene.rexUI.add.buttons({
 - `space` :
     - A number: Space between 2 button game objects.
     - An object: Padding of button game objects.
-        - `space.item` : Space between 2 button game objects.
-        - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottoms.        
+        - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
+        - `space.item` : Space between 2 button game objects.       
 - `name` : Set name of this button game objects.
 - `eventEmitter` : Dispatch buttons' touch events to other game obhect, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
@@ -227,11 +221,6 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
-    - `groupName` : Optional group name.
-    - `button` : Triggered button game object
-    - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
-    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
     buttons.on('button.out', function(button, index, pointer, event) {
@@ -244,11 +233,6 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
-    - `groupName` : Optional group name.
-    - `button` : Triggered button game object.
-    - `index` : Index of triggered button game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
-    - Cancel remaining touched events : `event.stopPropagation()`
 - Enable button's input
     ```javascript
     buttons.on('button.enable', function(button, index) {
@@ -261,9 +245,6 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
-    - `groupName` : Optional group name.
-    - `button` : Triggered button game object.
-    - `index` : Index of triggered button game object.
 - Disable button's input
     ```javascript
     buttons.on('button.disalbe', function(button, index) {
@@ -276,9 +257,6 @@ See [sizer object](ui-sizer.md)
         // ...
     }, scope);
     ```
-    - `groupName` : Optional group name.
-    - `button` : Triggered button game object.
-    - `index` : Index of triggered button game object.
 
 #### Emit button click event
 

@@ -1,6 +1,13 @@
 import EmitChildEvent from './EmitChildEvent.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 var OverChild = function (config) {
+    var overConfig = GetValue(config, 'over', undefined);
+    if (overConfig === false) {
+        return;
+    }
+
     this
         .on('pointermove', OnMove, this)
         .on('pointerover', OnMove, this)

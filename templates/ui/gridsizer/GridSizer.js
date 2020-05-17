@@ -165,19 +165,20 @@ class GridSizer extends BaseSizer {
     }
 
     childToGridIndex(child, out) {
+        if (!child) {
+            return null;
+        }
+
+        var index = this.sizerChildren.indexOf(child);
+        if (index === -1) {
+            return null;
+        }
+
         if (out === undefined) {
             out = {};
         }
-        var x, y;
-        if (child) {
-            var index = this.sizerChildren.indexOf(child);
-            if (index !== -1) {
-                x = index % this.columnCount;
-                y = Math.floor(index / this.columnCount);
-            }
-        }
-        out.x = x;
-        out.y = y;
+        out.x = index % this.columnCount;
+        out.y = Math.floor(index / this.columnCount);
         return out;
     }
 }
