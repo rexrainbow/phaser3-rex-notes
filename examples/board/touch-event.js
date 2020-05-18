@@ -51,6 +51,9 @@ class Demo extends Phaser.Scene {
             .on('tilepressend', function (press, tileXY) {
                 console.log('press end ' + tileXY.x + ',' + tileXY.y);
             })
+            .on('tileswipe', function (swipe, tileXY) {
+                console.log(`swipe-${swipe.direction} ` + tileXY.x + ',' + tileXY.y);
+            })
 
         this.board = board;
         this.print = this.add.text(0, 0, '').setScrollFactor(0);

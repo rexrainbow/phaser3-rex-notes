@@ -912,6 +912,39 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     - `press` : [Press behavior](gesture-tap.md).
     - `gameObject` : Game object at touched (tileX, tileY)
 
+#### [Swipe](gesture-swipe.md)
+
+- Swipe at any tile
+    ```javascript
+    board.on('tileswipe', function(swipe, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+        // var direction = swipe.direction;
+    });
+    ```
+    - `swipe` : [Swipe behavior](gesture-swipe.md).
+        - `swipe.direction` : Integer number.
+            - [Quad grid](board-quadgrid.md#directions) : 0, 1, 2, 3, 4, 5, 6, 7.
+            - [Hexagon grid](board-hexagongrid.md#directions) : 0, 1, 2, 3, 4, 5.
+    - `tileXY` : `{x, y}`
+- Swipe at chess
+    ```javascript
+    board.on('gameobjectswipe', function(swipe, gameObject) {
+        // var direction = swipe.direction;
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.swipe', function(swipe) {
+        // var direction = swipe.direction;
+    })
+    ```
+    - `swipe` : [Swipe behavior](gesture-swipe.md).
+        - `swipe.direction` : Integer number.
+            - [Quad grid](board-quadgrid.md#directions) : 0, 1, 2, 3, 4, 5, 6, 7.
+            - [Hexagon grid](board-hexagongrid.md#directions) : 0, 1, 2, 3, 4, 5.
+    - `gameObject` : Game object at touched (tileX, tileY)
+
 ### Grid points
 
 - Get an array of grid points at tile position (tileX, tileY).

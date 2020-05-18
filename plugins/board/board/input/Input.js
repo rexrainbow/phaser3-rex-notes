@@ -2,17 +2,14 @@ import OnPointerDown from './OnPointerDown.js';
 import OnPointerUp from './OnPointerUp.js';
 import OnPointerMove from './OnPointerMove.js';
 
-import Tap from '../../../input/gestures/tap/Tap.js';
-import OnTap from './OnTap.js';
-
-import Press from '../../../input/gestures/press/Press.js';
-import OnPressStart from './OnPressStart.js';
-import OnPressEnd from './OnPressEnd.js';
+import InstallTap from './InstallTap.js';
+import InstallPress from './InstallPress.js';
+import InstallSwipe from './InstallSwipe.js';
 
 class Input {
     constructor(board) {
         this.board = board;
-        this.enable = true;
+        this._enable = true;
         this.pointer = null;
         this.tilePosition = {
             x: undefined,
@@ -24,13 +21,9 @@ class Input {
         scene.input.on('pointerup', OnPointerUp, this);
         scene.input.on('pointermove', OnPointerMove, this);
 
-        this._tap = new Tap(scene);
-        this._tap.on('tap', OnTap, this);
-
-        this._press = new Press(scene);
-        this._press
-            .on('pressstart', OnPressStart, this)
-            .on('pressend', OnPressEnd, this);
+        this.tap = InstallTap.call(this);
+        this.press = InstallPress.call(this);
+        this.swipe = InstallSwipe.call(this);
 
         board.on('destroy', this.destroy, this);
     }
@@ -43,18 +36,35 @@ class Input {
             scene.input.off('pointermove', OnPointerMove, this);
         }
 
-        this._tap.destroy();
-        this._press.destroy();
+        this.tap.destroy();
+        this.press.destroy();
+        this.swipe.destroy();
     }
 
-    setEnable(enable) {
-        this.enable = enable;
-        if (!enable) {
-            this.pointer = null;
+    get enable() {
+        return this._enable;
+    }
+
+    set enable(e) {
+        if (this._enable === e) {
+            return;
         }
 
-        this._tap.setEnable(enable);
-        this._press.setEnable(enable);
+        if (!e) {
+            this.pointer = null;
+        }
+        this._enable = e;
+        this.tap.setEnable(e);
+        this.press.setEnable(e);
+        this.swipe.setEnable(e)
+    }
+
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        this.enable = e;
         return this;
     }
 }

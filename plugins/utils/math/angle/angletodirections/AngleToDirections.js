@@ -2,7 +2,7 @@ var AngleToDirections = function (angle, dirMode, out) {
     if (out === undefined) {
         out = {}
     } else if (out === true) {
-        out = tmpOut;
+        out = globOut;
     }
 
     out.left = false;
@@ -68,6 +68,6 @@ var AngleToDirections = function (angle, dirMode, out) {
     return out;
 };
 
-var tmpOut = {};
+var globOut = {};
 
 export default AngleToDirections;
