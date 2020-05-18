@@ -8,14 +8,10 @@ var PressCell = function (table, tableConfig) {
     table._press = new Press(table, pressConfig);
     table._press
         .on('pressstart', function (press, gameObject, lastPointer) {
-            var cellIndex = table.pointToCellIndex(press.x, press.y);
-            press._cellIndex = cellIndex;
-            EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, cellIndex, undefined, lastPointer);
+            EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, press.x, press.y, lastPointer);
         }, this)
         .on('pressend', function (press, gameObject, lastPointer) {
-            var cellIndex = press._cellIndex;
-            press._cellIndex = undefined;
-            EmitCellEvent(this.eventEmitter, 'cell.pressend', table, cellIndex, undefined, lastPointer);
+            EmitCellEvent(this.eventEmitter, 'cell.pressend', table, press.x, press.y, lastPointer);
         }, this)
 };
 

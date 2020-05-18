@@ -12,18 +12,10 @@ var PressChild = function (config) {
     this._press = new Press(this, pressConfig);
     this._press
         .on('pressstart', function (press, gameObject, lastPointer) {
-            var child = this.pointToChild(press.x, press.y);
-            if (!child) {
-                return;
-            }
-            var childIndex = this.sizerChildren.indexOf(child);
-            press._childIndex = childIndex;
-            EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}pressstart`, this, childIndex, undefined, lastPointer);
+            EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}pressstart`, this, press.x, press.y, lastPointer);
         }, this)
         .on('pressend', function (press, gameObject, lastPointer) {
-            var childIndex = press._childIndex;
-            press._childIndex = undefined;
-            EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}pressend`, this, childIndex, undefined, lastPointer);
+            EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}pressend`, this, press.x, press.y, lastPointer);
         }, this)
 };
 

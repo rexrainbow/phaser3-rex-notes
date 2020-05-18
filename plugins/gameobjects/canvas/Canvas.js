@@ -65,6 +65,13 @@ class Canvas extends GameObject {
         return this.canvas;
     }
 
+    getContext(readOnly) {
+        if (!readOnly) {
+            this.dirty = true;
+        }
+        return this.context;
+    }
+
     needRedraw() {
         this.dirty = true;
         return this;

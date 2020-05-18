@@ -132,7 +132,7 @@ var canvas = scene.make.rexCanvas({
 1. Get canvas elemet
     ```javascript
     var canvasElem = canvas.getCanvas();
-    var context = canvasElem.getContext('2d');
+    var context = canvas.getContext();
     ```
     or
     ```javascript
