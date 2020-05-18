@@ -7,10 +7,11 @@ import SwipeChild from './SwipeChild.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SetChildrenInteractive = function (config) {
-    this.eventEmitter = GetValue(config, 'eventEmitter', this);
-    this.inputEventPrefix = GetValue(config, 'inputEventPrefix', 'child.');
-
     this.setInteractive();
+
+    this.eventEmitter = GetValue(config, 'eventEmitter', this);
+    this.input.parentSizers = GetValue(config, 'parents', [this]);
+    this.input.eventNamePrefix = GetValue(config, 'inputEventPrefix', 'child.');    
 
     ClickChild.call(this, config);
     OverChild.call(this, config);

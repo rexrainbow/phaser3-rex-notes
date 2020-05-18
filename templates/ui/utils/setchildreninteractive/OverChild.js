@@ -1,3 +1,4 @@
+import PointToChild from './PointToChild.js';
 import EmitChildEvent from './EmitChildEvent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -15,25 +16,41 @@ var OverChild = function (config) {
 }
 
 var OnMove = function (pointer) {
-    var child = this.pointToChild(pointer.x, pointer.y);
-    var childIndex;
-    if (child) {
-        childIndex = this.sizerChildren.indexOf(child);
-    }
-    if (childIndex === this.input.lastOverChildIndex) {
+    debugger
+    var child = PointToChild(this.input.parentSizers, pointer.x, pointer.y);
+    var preChild = this.input.lastOverChild;
+    if (child && preChild &&
+        (child === preChild)) {
         return;
     }
 
-    var preChildIndex = this.input.lastOverChildIndex;
-    this.input.lastOverChildIndex = childIndex;
-    EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}out`, this, preChildIndex, undefined, pointer);
-    EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}over`, this, childIndex, undefined, pointer);
+    this.input.lastOverChild = child;
+    EmitChildEvent(
+        this.eventEmitter,
+        `${this.input.eventNamePrefix}out`,
+        this.input.parentSizers,
+        preChild, undefined,
+        pointer
+    );
+    EmitChildEvent(
+        this.eventEmitter,
+        `${this.input.eventNamePrefix}over`,
+        this.input.parentSizers,
+        child, undefined,
+        pointer
+    );
 }
 
 var OnOut = function (pointer) {
-    var childIndxe = this.input.lastOverChildIndex;
-    this.input.lastOverChildIndex = undefined;
-    EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}out`, this, childIndxe, undefined, pointer);
+    var child = this.input.lastOverChild;
+    this.input.lastOverChild = null;
+    EmitChildEvent(
+        this.eventEmitter,
+        `${this.input.eventNamePrefix}out`,
+        this.input.parentSizers,
+        child, undefined,
+        pointer
+    );
 }
 
 export default OverChild;

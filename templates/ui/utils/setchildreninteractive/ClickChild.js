@@ -15,7 +15,13 @@ var ClickChild = function (config) {
     clickConfig.threshold = 10;
     this._click = new Button(this, clickConfig);
     this._click.on('click', function (button, gameObject, pointer) {
-        EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}click`, gameObject, pointer.x, pointer.y, pointer);
+        EmitChildEvent(
+            this.eventEmitter,
+            `${this.input.eventNamePrefix}click`,
+            this.input.parentSizers,
+            pointer.x, pointer.y,
+            pointer
+        );
     }, this);
 };
 

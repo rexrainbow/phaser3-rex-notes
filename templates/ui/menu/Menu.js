@@ -2,7 +2,7 @@ import Buttons from '../buttons/Buttons.js';
 import Methods from './Methods.js';
 import CreateBackground from './CreateBackground.js';
 import CreateButtons from './CreateButtons.js';
-import GetDefaultBounds from '../../../plugins/utils/defaultbounds/GetDefaultBounds.js';
+import GetDefaultBounds from '../../../plugins/utils/bounds/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
 import GetEaseConfig from './GetEaseConfig.js';
 

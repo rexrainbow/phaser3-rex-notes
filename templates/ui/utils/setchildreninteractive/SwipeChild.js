@@ -8,7 +8,7 @@ var SwipeChild = function (config) {
     if (swipeConfig === false) {
         return;
     }
-    
+
     if (swipeConfig === undefined) {
         swipeConfig = {};
     }
@@ -21,7 +21,13 @@ var SwipeChild = function (config) {
                     (swipe.right) ? 'right' :
                         (swipe.up) ? 'up' :
                             'down';
-            EmitChildEvent(this.eventEmitter, `${this.inputEventPrefix}swipe${dirName}`, this, swipe.x, swipe.y, lastPointer);
+            EmitChildEvent(
+                this.eventEmitter,
+                `${this.input.eventNamePrefix}swipe${dirName}`,
+                this.input.parentSizers,
+                swipe.x, swipe.y,
+                lastPointer
+            );
         }, this)
 };
 

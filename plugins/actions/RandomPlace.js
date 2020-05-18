@@ -1,4 +1,4 @@
-import GetDefaultBounds from '../utils/defaultbounds/GetDefaultBounds.js';
+import GetDefaultBounds from '../utils/bounds/GetDefaultBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

@@ -1,5 +1,5 @@
 import CursorKeys from '../../utils/input/CursorKeys.js'
-import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
+import GetDefaultBounds from '../../utils/bounds/GetDefaultBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

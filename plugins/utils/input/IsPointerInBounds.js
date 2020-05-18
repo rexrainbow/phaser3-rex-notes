@@ -1,20 +1,8 @@
-var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
-    if (globRect === undefined) {
-        globRect = new Phaser.Geom.Rectangle();
-    }
-    gameObject.getBounds(globRect);
+import IsPointInBounds from '../bounds/IsPointInBounds.js';
 
+var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
     if (pointer) {
-        if (preTest && !preTest(gameObject, pointer)) {
-            return false;
-        }
-        if (!globRect.contains(pointer.x, pointer.y)) {
-            return false;
-        }
-        if (postTest && !postTest(gameObject, pointer)) {
-            return false;
-        }
-        return true;
+        return IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest);
 
     } else {
         var inputManager = gameObject.scene.input.manager;
@@ -22,23 +10,14 @@ var IsPointerInBounds = function (gameObject, pointer, preTest, postTest) {
         var pointers = inputManager.pointers;
         for (var i = 0; i < pointersTotal; i++) {
             pointer = pointers[i];
-            if (preTest && !preTest(gameObject, pointer)) {
-                continue;
+            if (IsPointInBounds(gameObject, pointer.x, pointer.y, preTest, postTest)) {
+                return true;
             }
-            if (!globRect.contains(pointer.x, pointer.y)) {
-                continue;
-            }
-            if (postTest && !postTest(gameObject, pointer)) {
-                continue;
-            }
-            return true;
         }
         return false;
 
     }
 
 }
-
-var globRect = undefined;
 
 export default IsPointerInBounds;
