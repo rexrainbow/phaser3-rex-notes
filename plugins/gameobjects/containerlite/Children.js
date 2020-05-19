@@ -35,25 +35,29 @@ export default {
     },
 
     getByName(name, recursive) {
-        var child = ArrayUtils.GetFirst(this.children, 'name', name); // object, or null if not found
-        if (child || !recursive) {
-            return child;
+        if (!recursive) {
+            return ArrayUtils.GetFirst(this.children, 'name', name); // object, or null if not found
+
+        } else { // recursive
+            // Breadth-first search
+            var queue = [this];
+            var parent, child;
+            while (queue.length) {
+                parent = queue.pop();
+
+                for (var i = 0, cnt = parent.children.length; i < cnt; i++) {
+                    child = parent.children[i];
+                    if (child.name === name) {
+                        return child;
+                    } else if (child.isRexContainerLite) {
+                        queue.push(child);
+                    }
+                }
+            }
+            return null;
+
         }
 
-        // recursive
-        var parent;
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            parent = this.children[i];
-            if (!parent.isRexContainerLite) {
-                continue;
-            }
-            // parent is a container
-            child = parent.getByName(name, true);
-            if (child) {
-                return child;
-            }
-        }
-        return null; // Not found
     },
 
     getRandom(startIndex, length) {
