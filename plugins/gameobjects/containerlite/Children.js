@@ -43,7 +43,7 @@ export default {
             var queue = [this];
             var parent, child;
             while (queue.length) {
-                parent = queue.pop();
+                parent = queue.shift();
 
                 for (var i = 0, cnt = parent.children.length; i < cnt; i++) {
                     child = parent.children[i];
