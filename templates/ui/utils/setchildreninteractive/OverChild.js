@@ -17,7 +17,7 @@ var OverChild = function (config) {
 
 var OnMove = function (pointer) {
     debugger
-    var child = PointToChild(this.input.parentSizers, pointer.x, pointer.y);
+    var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
     var preChild = this.input.lastOverChild;
     if (child && preChild &&
         (child === preChild)) {
@@ -28,14 +28,14 @@ var OnMove = function (pointer) {
     EmitChildEvent(
         this.eventEmitter,
         `${this.input.eventNamePrefix}out`,
-        this.input.parentSizers,
+        this.input.targetSizers,
         preChild, undefined,
         pointer
     );
     EmitChildEvent(
         this.eventEmitter,
         `${this.input.eventNamePrefix}over`,
-        this.input.parentSizers,
+        this.input.targetSizers,
         child, undefined,
         pointer
     );
@@ -47,7 +47,7 @@ var OnOut = function (pointer) {
     EmitChildEvent(
         this.eventEmitter,
         `${this.input.eventNamePrefix}out`,
-        this.input.parentSizers,
+        this.input.targetSizers,
         child, undefined,
         pointer
     );

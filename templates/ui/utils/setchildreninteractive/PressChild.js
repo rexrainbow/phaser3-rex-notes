@@ -15,7 +15,7 @@ var PressChild = function (config) {
             EmitChildEvent(
                 this.eventEmitter,
                 `${this.input.eventNamePrefix}pressstart`,
-                this.input.parentSizers,
+                this.input.targetSizers,
                 press.x, press.y,
                 lastPointer
             );
@@ -24,7 +24,7 @@ var PressChild = function (config) {
             EmitChildEvent(
                 this.eventEmitter,
                 `${this.input.eventNamePrefix}pressend`,
-                this.input.parentSizers,
+                this.input.targetSizers,
                 press.x, press.y,
                 lastPointer
             );

@@ -18,7 +18,7 @@ var ClickChild = function (config) {
         EmitChildEvent(
             this.eventEmitter,
             `${this.input.eventNamePrefix}click`,
-            this.input.parentSizers,
+            this.input.targetSizers,
             pointer.x, pointer.y,
             pointer
         );

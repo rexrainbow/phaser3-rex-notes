@@ -15,7 +15,7 @@ var TapChild = function (config) {
             EmitChildEvent(
                 this.eventEmitter,
                 `${this.input.eventNamePrefix}${tap.tapsCount}tap`,
-                this.input.parentSizers,
+                this.input.targetSizers,
                 tap.x, tap.y,
                 lastPointer
             );

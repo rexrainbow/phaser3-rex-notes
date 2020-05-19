@@ -10,7 +10,7 @@ var SetChildrenInteractive = function (config) {
     this.setInteractive();
 
     this.eventEmitter = GetValue(config, 'eventEmitter', this);
-    this.input.parentSizers = GetValue(config, 'parents', [this]);
+    this.input.targetSizers = GetValue(config, 'targets', [this]);
     this.input.eventNamePrefix = GetValue(config, 'inputEventPrefix', 'child.');    
 
     ClickChild.call(this, config);

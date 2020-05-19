@@ -24,7 +24,7 @@ var SwipeChild = function (config) {
             EmitChildEvent(
                 this.eventEmitter,
                 `${this.input.eventNamePrefix}swipe${dirName}`,
-                this.input.parentSizers,
+                this.input.targetSizers,
                 swipe.x, swipe.y,
                 lastPointer
             );
