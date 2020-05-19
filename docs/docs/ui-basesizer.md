@@ -513,14 +513,21 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 
 ### Get child
 
-1. Add child
+- Get child by specific key
+    1. Add child
+        ```javascript
+        sizer.addChildrenMap(key, child);
+        ```
+    1. Get child
+        ```javascript
+        var child = sizer.getElement(key);
+        ```
+- Get child by name
     ```javascript
-    sizer.addChildrenMap(key, child);
+    var child = sizer.getByName(name);
+    // var child = sizer.getByName(name, recursive);
     ```
-1. Get child
-    ```javascript
-    var child = sizer.getElement(key);
-    ```
+    - `recursive` : Set `true` to search all children recursively.    
 
 ### Get parent
 

@@ -265,33 +265,7 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
-#### Dirty
-
-Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.
-
-Default value is `true`.
-
-- Get
-    ```javascript
-    var dirty = sizer.dirty;
-    ```
-- Set
-    ```javascript
-    sizer.setDirty();
-    // izer.setDirty(true);
-    ```
-    or
-    ```javascript
-    sizer.dirty = true;
-    ```
-- Clear
-    ```javascript
-    sizer.setDirty(false);
-    ```
-    or
-    ```javascript
-    sizer.dirty = false;
-    ```
+See also - [dirty](ui-basesizer.md#dirty)
 
 ### Grid index <-> child
 
@@ -343,6 +317,25 @@ Default value is `true`.
     ```javascript
     var rowCount = gridSizer.rowCount;
     ```
+
+### Get element
+
+- Get element
+    - All children items
+        ```javascript
+        var items = gridSizer.getElement('items');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = gridSizer.getElement('#' + name);
+    // var gameObject = gridSizer.getElement('#' + name, recursive);
+    ```
+    or
+    ```javascript
+    var gameObject = gridSizer.getByName('#' + name);
+    // var gameObject = gridSizer.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Set children interactive
 

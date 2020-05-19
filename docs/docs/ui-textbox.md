@@ -155,16 +155,6 @@ var textBox = scene.rexUI.add.textBox({
     var textBox = new MyTextBox(scene, config);
     ```
 
-### Layout children
-
-Arrange position of all elements.
-
-```javascript
-textBox.layout();
-```
-
-This method will be invoked when size of text has been changed automatically.
-
 ### Typing
 
 - Start

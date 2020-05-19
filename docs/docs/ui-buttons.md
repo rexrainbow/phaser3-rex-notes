@@ -186,6 +186,8 @@ Arrange position of all elements.
 buttons.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Other properties
 
 See [sizer object](ui-sizer.md)
@@ -323,7 +325,14 @@ buttons.emitButtonClick(index);
 - Get by name
     ```javascript
     var gameObject = buttons.getElement('#' + name);
+    // var gameObject = buttons.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = buttons.getByName('#' + name);
+    // var gameObject = buttons.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Add button
 

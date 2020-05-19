@@ -276,6 +276,8 @@ Arrange position of all elements.
 table.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Items
 
 - Set
@@ -490,4 +492,11 @@ See [base sizer object](ui-basesizer.md).
 - Get by name
     ```javascript
     var gameObject = table.getElement('#' + name);
+    // var gameObject = table.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = table.getByName('#' + name);
+    // var gameObject = table.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.

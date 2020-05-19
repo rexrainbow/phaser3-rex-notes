@@ -163,6 +163,8 @@ Arrange position of all elements.
 slider.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Get element
 
 - Get element
@@ -185,7 +187,14 @@ slider.layout();
 - Get by name
     ```javascript
     var gameObject = slider.getElement('#' + name);
+    // var gameObject = slider.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = slider.getByName('#' + name);
+    // var gameObject = slider.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Value
 

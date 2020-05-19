@@ -179,15 +179,6 @@ var menu = scene.rexUI.add.menu({
     menu.collapseSubMenu();
     ```
 
-### Layout children
-
-Arrange position of all children. 
-*This will be called when menu object created, user does not need call it again generally.*
-
-```javascript
-menu.layout();
-```
-
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

@@ -172,6 +172,8 @@ Arrange position of all elements.
 numberBar.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Get element
 
 - Get element
@@ -207,7 +209,15 @@ numberBar.layout();
 - Get by name
     ```javascript
     var gameObject = numberBar.getElement('#' + name);
+    // var gameObject = numberBar.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = numberBar.getByName('#' + name);
+    // var gameObject = numberBar.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
+
 
 ### Value
 

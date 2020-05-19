@@ -269,6 +269,8 @@ Arrange position of all elements.
 dialog.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
@@ -443,7 +445,14 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 - Get by name
     ```javascript
     var gameObject = dialog.getElement('#' + name);
+    // var gameObject = dialog.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = dialog.getByName('#' + name);
+    // var gameObject = dialog.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Add button
 

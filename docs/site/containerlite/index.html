@@ -1470,8 +1470,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-children" class="md-nav__link">
-    Get children
+  <a href="#get-child" class="md-nav__link">
+    Get child
   </a>
   
 </li>
@@ -5058,8 +5058,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-children" class="md-nav__link">
-    Get children
+  <a href="#get-child" class="md-nav__link">
+    Get child
   </a>
   
 </li>
@@ -5362,12 +5362,24 @@
 <span class="c1">// container.clear(destroyChild);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-children">Get children<a class="headerlink" href="#get-children" title="Permanent link">&para;</a></h3>
+<h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Get first child by name
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = container.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>gameObject</code> : A child, or <code>null</code> if not found.</li>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
+<li>Get a random child
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getRandom</span><span class="p">();</span>
+<span class="c1">// var gameObject = container.getRandom(startIndex, length);</span>
+</code></pre></div></li>
 <li>Get children in this container-lite
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Get all children under this container-lite (nested)
+<li>Get all children under this container-lite recursively
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">();</span>
 </code></pre></div><ul>
 <li>Draw on <a href="../rendertexture/#paste-texture">render texture</a>

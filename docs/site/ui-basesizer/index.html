@@ -5514,7 +5514,8 @@
 </code></pre></div>
 
 <h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
-<ol>
+<ul>
+<li>Get child by specific key<ol>
 <li>Add child
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addChildrenMap</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span>
 </code></pre></div></li>
@@ -5522,6 +5523,15 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
+</li>
+<li>Get child by name
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var child = sizer.getByName(name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.    </li>
+</ul>
+</li>
+</ul>
 <h3 id="get-parent">Get parent<a class="headerlink" href="#get-parent" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get parent sizer

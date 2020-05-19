@@ -187,13 +187,25 @@ These world properties of children will be changed with container.
     // container.clear(destroyChild);
     ```
 
-### Get children
+### Get child
 
+- Get first child by name
+    ```javascript
+    var gameObject = container.getByName(name);
+    // var gameObject = container.getByName(name, recursive);
+    ```
+    - `gameObject` : A child, or `null` if not found.
+    - `recursive` : Set `true` to search all children recursively.
+- Get a random child
+    ```javascript
+    var gameObject = container.getRandom();
+    // var gameObject = container.getRandom(startIndex, length);
+    ```
 - Get children in this container-lite
     ```javascript
     var gameObjects = container.getChildren();
     ```
-- Get all children under this container-lite (nested)
+- Get all children under this container-lite recursively
     ```javascript
     var gameObjects = container.getAllChildren();
     ```

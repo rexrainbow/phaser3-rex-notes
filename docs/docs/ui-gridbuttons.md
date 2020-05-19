@@ -154,6 +154,8 @@ Arrange position of all children.
 buttons.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Other properties
 
 See [grid sizer object](ui-gridsizer.md).
@@ -184,7 +186,14 @@ The same as [events of buttons](ui-buttons.md#events).
 - Get by name
     ```javascript
     var gameObject = buttons.getElement('#' + name);
+    // var gameObject = buttons.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = buttons.getByName('#' + name);
+    // var gameObject = buttons.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### For each button
 

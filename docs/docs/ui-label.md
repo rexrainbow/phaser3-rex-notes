@@ -187,6 +187,8 @@ Arrange position of all elements.
 label.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Get element
 
 - Get element
@@ -209,7 +211,14 @@ label.layout();
 - Get by name
     ```javascript
     var gameObject = label.getElement('#' + name);
+    // var gameObject = label.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = label.getByName('#' + name);
+    // var gameObject = label.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Text
 

@@ -188,6 +188,8 @@ Arrange position of all elements.
 tabs.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Other properties
 
 See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
@@ -387,7 +389,14 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
 - Get by name
     ```javascript
     var gameObject = tabs.getElement('#' + name);
+    // var gameObject = tabs.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = tabs.getByName('#' + name);
+    // var gameObject = tabs.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Add button
 

@@ -178,15 +178,6 @@ Toast object will be invisible at beginning.
     var toast = new MyToast(scene, config);
     ```
 
-### Layout children
-
-Arrange position of all children. 
-*This will be called when showing new message, user does not need call it again generally.*
-
-```javascript
-toast.layout();
-```
-
 ### Show message
 
 ```javascript

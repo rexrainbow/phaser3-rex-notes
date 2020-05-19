@@ -4312,6 +4312,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -4974,6 +4981,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5228,6 +5242,26 @@
 <li>Previous page object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">previousPage</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>All page game objects
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = pages.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = pages.getByName(&#39;#&#39; + name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>

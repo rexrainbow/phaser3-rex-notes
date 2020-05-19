@@ -23,6 +23,8 @@ class OverlapSizer extends BaseSizer {
 
         this.type = 'rexOverlapSizer';
         this.sizerChildren = {};
+
+        this.addChildrenMap('items', this.sizerChildren);
     }
 
     destroy(fromScene) {

@@ -1,7 +1,4 @@
-
-import GetGameObjectByName from '../utils/GetGameObjectByName.js';
-
-var GetElement = function (mapNameList) {
+var GetElement = function (mapNameList, recursive) {
     if (typeof (mapNameList) === 'string') {
         mapNameList = mapNameList.split('.');
     }
@@ -11,12 +8,9 @@ var GetElement = function (mapNameList) {
 
     var name = mapNameList.shift(),
         element = null;
-    if (name.charAt(0) === '#') {
+    if (name.charAt(0) === '#') { // Get element by name
         name = name.substring(1);
-        element = GetGameObjectByName(this.childrenMap, name);  // Find in childrenMap (BaseSizer)
-        if (!element) {
-            element = GetGameObjectByName(this.children, name); // Find in children (ContainerLite)
-        }
+        element = this.getByName(name, recursive);
     } else if (name.indexOf('[') === (-1)) { // Get element by key
         if (this.childrenMap) {
             element = this.childrenMap[name];

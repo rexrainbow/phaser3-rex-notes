@@ -5289,6 +5289,7 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 
+<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
@@ -5404,7 +5405,15 @@
 </li>
 <li>Get by name
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-</code></pre></div></li>
+<span class="c1">// var gameObject = textArea.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = textArea.getByName(&#39;#&#39; + name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
 </ul>
                 
                   

@@ -250,33 +250,7 @@ Arrange position of all children.
 sizer.layout();
 ```
 
-#### Dirty
-
-Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.
-
-Default value is `true`.
-
-- Get
-    ```javascript
-    var dirty = sizer.dirty;
-    ```
-- Set
-    ```javascript
-    sizer.setDirty();
-    // izer.setDirty(true);
-    ```
-    or
-    ```javascript
-    sizer.dirty = true;
-    ```
-- Clear
-    ```javascript
-    sizer.setDirty(false);
-    ```
-    or
-    ```javascript
-    sizer.dirty = false;
-    ```
+See also - [dirty](ui-basesizer.md#dirty)
 
 ### Remove child
 
@@ -294,12 +268,19 @@ Default value is `true`.
 - Get element
     - All children items
         ```javascript
-        var items = label.getElement('items');
+        var items = sizer.getElement('items');
         ```
 - Get by name
     ```javascript
-    var gameObject = label.getElement('#' + name);
+    var gameObject = sizer.getElement('#' + name);
+    // var gameObject = sizer.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = sizer.getByName('#' + name);
+    // var gameObject = sizer.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Set children interactive
 

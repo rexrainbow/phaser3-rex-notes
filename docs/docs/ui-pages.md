@@ -221,6 +221,25 @@ pages.swapPage(key);
     var pageObject = pages.previousPage;
     ```
 
+### Get element
+
+- Get element
+    - All page game objects
+        ```javascript
+        var gameObjects = pages.getElement('items');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = pages.getElement('#' + name);
+    // var gameObject = pages.getElement('#' + name, recursive);
+    ```
+    or
+    ```javascript
+    var gameObject = pages.getByName('#' + name);
+    // var gameObject = pages.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).

@@ -4700,6 +4700,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#swipe" class="md-nav__link">
+    Swipe
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5584,6 +5591,13 @@
           <li class="md-nav__item">
   <a href="#press" class="md-nav__link">
     Press
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swipe" class="md-nav__link">
+    Swipe
   </a>
   
 </li>
@@ -6540,6 +6554,48 @@
 <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>press</code> : <a href="../gesture-tap/">Press behavior</a>.</li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="swipe"><a href="../gesture-swipe/">Swipe</a><a class="headerlink" href="#swipe" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Swipe at any tile
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tileswipe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">swipe</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+    <span class="c1">// var direction = swipe.direction;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>swipe</code> : <a href="../gesture-swipe/">Swipe behavior</a>.<ul>
+<li><code>swipe.direction</code> : Integer number.<ul>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : 0, 1, 2, 3, 4, 5, 6, 7.</li>
+<li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : 0, 1, 2, 3, 4, 5.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>Swipe at chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectswipe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">swipe</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var direction = swipe.direction;</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.swipe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">swipe</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var direction = swipe.direction;</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>swipe</code> : <a href="../gesture-swipe/">Swipe behavior</a>.<ul>
+<li><code>swipe.direction</code> : Integer number.<ul>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : 0, 1, 2, 3, 4, 5, 6, 7.</li>
+<li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : 0, 1, 2, 3, 4, 5.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
 </ul>
 </li>

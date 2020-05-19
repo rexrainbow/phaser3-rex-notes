@@ -233,6 +233,8 @@ Arrange position of all elements.
 panel.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Scroll content
 
 - Set
@@ -344,7 +346,14 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 - Get by name
     ```javascript
     var gameObject = panel.getElement('#' + name);
+    // var gameObject = panel.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = panel.getByName('#' + name);
+    // var gameObject = panel.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.
 
 ### Input events
 

@@ -34,8 +34,26 @@ export default {
         }
     },
 
-    getByName(name) {
-        return ArrayUtils.GetFirst(this.children, 'name', name);
+    getByName(name, recursive) {
+        var child = ArrayUtils.GetFirst(this.children, 'name', name); // object, or null if not found
+        if (child || !recursive) {
+            return child;
+        }
+
+        // recursive
+        var parent;
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            parent = this.children[i];
+            if (!parent.isRexContainerLite) {
+                continue;
+            }
+            // parent is a container
+            child = parent.getByName(name, true);
+            if (child) {
+                return child;
+            }
+        }
+        return null; // Not found
     },
 
     getRandom(startIndex, length) {

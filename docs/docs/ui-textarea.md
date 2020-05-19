@@ -220,6 +220,8 @@ Arrange position of all elements.
 textArea.layout();
 ```
 
+See also - [dirty](ui-basesizer.md#dirty)
+
 ### Content
 
 - Set
@@ -352,4 +354,11 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 - Get by name
     ```javascript
     var gameObject = textArea.getElement('#' + name);
+    // var gameObject = textArea.getElement('#' + name, recursive);
     ```
+    or
+    ```javascript
+    var gameObject = textArea.getByName('#' + name);
+    // var gameObject = textArea.getByName('#' + name, recursive);
+    ```
+    - `recursive` : Set `true` to search all children recursively.

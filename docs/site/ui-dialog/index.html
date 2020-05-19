@@ -5348,6 +5348,7 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 
+<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
@@ -5515,7 +5516,15 @@
 </li>
 <li>Get by name
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-</code></pre></div></li>
+<span class="c1">// var gameObject = dialog.getElement(&#39;#&#39; + name, recursive);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var gameObject = dialog.getByName(&#39;#&#39; + name, recursive);</span>
+</code></pre></div><ul>
+<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+</ul>
+</li>
 </ul>
 <h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
 <p>Add choice/action/toolbar/left-toolbar button</p>
