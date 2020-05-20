@@ -4687,6 +4687,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pointer-over" class="md-nav__link">
+    Pointer over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-out" class="md-nav__link">
+    Pointer out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tap" class="md-nav__link">
     Tap
   </a>
@@ -5582,6 +5596,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pointer-over" class="md-nav__link">
+    Pointer over
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-out" class="md-nav__link">
+    Pointer out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tap" class="md-nav__link">
     Tap
   </a>
@@ -6449,6 +6477,56 @@
 </code></pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
 <li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="pointer-over">Pointer over<a class="headerlink" href="#pointer-over" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer over to another tile
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tileover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+<li>Only triggered when <code>tileXY</code> is changed.</li>
+</ul>
+</li>
+<li>Pointer over to another chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="pointer-out">Pointer out<a class="headerlink" href="#pointer-out" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer out tile
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tileout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+<li>Only triggered when <code>tileXY</code> is changed.</li>
+</ul>
+</li>
+<li>Pointer out chess
+    <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at pointer-out (tileX, tileY)</li>
 </ul>
 </li>
 </ul>
