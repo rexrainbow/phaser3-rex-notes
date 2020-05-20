@@ -10,15 +10,28 @@ var OnPointerUp = function (pointer) {
     var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
     var tileX = out.x,
         tileY = out.y;
+    this.prevTilePosition.x = this.tilePosition.x;
+    this.prevTilePosition.y = this.tilePosition.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
         return;
     }
     board.emit('tileup', pointer, this.tilePosition);
+    board.emit('tileout', pointer, this.prevTilePosition);
+
+    var boardEventCallback = function (gameObject) {
+        board.emit('gameobjectup', pointer, gameObject);
+        board.emit('gameobjectout', pointer, gameObject);
+    }
+    var chessEventCallback = function (gameObject) {
+        gameObject.emit('board.pointerup', pointer);
+        gameObject.emit('board.pointerout', pointer);
+    }
 
     EmitChessEvent(
-        'gameobjectup', 'board.pointerup',
+        boardEventCallback,
+        chessEventCallback,
         board, tileX, tileY,
         pointer
     );

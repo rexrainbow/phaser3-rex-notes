@@ -11,10 +11,8 @@ class Input {
         this.board = board;
         this._enable = true;
         this.pointer = null;
-        this.tilePosition = {
-            x: undefined,
-            y: undefined
-        };
+        this.tilePosition = { x: undefined, y: undefined };
+        this.prevTilePosition = { x: undefined, y: undefined };
 
         var scene = board.scene;
         scene.input.on('pointerdown', OnPointerDown, this);

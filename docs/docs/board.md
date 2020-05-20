@@ -814,6 +814,54 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
     - `gameObject` : Game object at touched (tileX, tileY)
 
+#### Pointer over
+
+- Pointer over to another tile
+    ```javascript
+    board.on('tileover', function(pointer, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `tileXY` : `{x, y}`
+    - Only triggered when `tileXY` is changed.
+- Pointer over to another chess
+    ```javascript
+    board.on('gameobjectover', function(pointer, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.pointerover', function(pointer) {
+    })
+    ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)
+
+#### Pointer out
+
+- Pointer out tile
+    ```javascript
+    board.on('tileout', function(pointer, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `tileXY` : `{x, y}`
+    - Only triggered when `tileXY` is changed.
+- Pointer out chess
+    ```javascript
+    board.on('gameobjectout', function(pointer, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.pointerout', function(pointer) {
+    })
+    ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at pointer-out (tileX, tileY)
+
 #### [Tap](gesture-tap.md)
 
 - Tap at any tile

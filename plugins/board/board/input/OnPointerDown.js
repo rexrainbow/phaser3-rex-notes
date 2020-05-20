@@ -16,15 +16,28 @@ var OnPointerDown = function (pointer) {
     var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
     var tileX = out.x,
         tileY = out.y;
+    this.prevTilePosition.x = this.tilePosition.x;
+    this.prevTilePosition.y = this.tilePosition.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
         return;
     }
     board.emit('tiledown', pointer, this.tilePosition);
+    board.emit('tileover', pointer, this.tilePosition);
+
+    var boardEventCallback = function (gameObject) {
+        board.emit('gameobjectdown', pointer, gameObject);
+        board.emit('gameobjectover', pointer, gameObject);
+    }
+    var chessEventCallback = function (gameObject) {
+        gameObject.emit('board.pointerdown', pointer);
+        gameObject.emit('board.pointerover', pointer);
+    }
 
     EmitChessEvent(
-        'gameobjectdown', 'board.pointerdown',
+        boardEventCallback,
+        chessEventCallback,
         board, tileX, tileY,
         pointer
     );

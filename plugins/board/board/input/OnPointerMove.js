@@ -16,6 +16,8 @@ var OnPointerMove = function (pointer) {
 
     var tileX = out.x,
         tileY = out.y;
+    this.prevTilePosition.x = this.tilePosition.x;
+    this.prevTilePosition.y = this.tilePosition.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
@@ -28,10 +30,29 @@ var OnPointerMove = function (pointer) {
     if (this.pointer === null) { // Catch new touch pointer
         this.pointer = pointer;
     }
+    board.emit('tileout', pointer, this.prevTilePosition);
     board.emit('tilemove', pointer, this.tilePosition);
+    board.emit('tileover', pointer, this.tilePosition);
 
     EmitChessEvent(
-        'gameobjectmove', 'board.pointermove',
+        'gameobjectout',
+        'board.pointerout',
+        board, tileX, tileY,
+        pointer
+    );
+
+    var boardEventCallback = function (gameObject) {
+        board.emit('gameobjectmove', pointer, gameObject);
+        board.emit('gameobjectover', pointer, gameObject);
+    }
+    var chessEventCallback = function (gameObject) {
+        gameObject.emit('board.pointermove', pointer);
+        gameObject.emit('board.pointerover', pointer);
+    }
+
+    EmitChessEvent(
+        boardEventCallback,
+        chessEventCallback,
         board, tileX, tileY,
         pointer
     );

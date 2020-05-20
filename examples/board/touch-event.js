@@ -36,6 +36,12 @@ class Demo extends Phaser.Scene {
             .on('tilemove', function (pointer, tileXY) {
                 console.log('move ' + tileXY.x + ',' + tileXY.y);
             })
+            .on('tileover', function (pointer, tileXY) {
+                console.log('over ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tileout', function (pointer, tileXY) {
+                console.log('out ' + tileXY.x + ',' + tileXY.y);
+            })            
             .on('gameobjectdown', function (pointer, gameObject) {
                 gameObject.setFillStyle(Random(0, 0xffffff), 0.7);
             })
