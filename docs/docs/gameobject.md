@@ -283,6 +283,14 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     var pipelineName = gameObject.getPipelineName();
     ```
 
+Some shader effects
+
+- [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
+- [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
+- [Inverse](shader-inverse.md): Inverse color post processing filter.
+- [Pixelation](shader-pixelation.md): Pixelation post processing filter.
+- [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post 
+
 ### Size
 
 - Native (un-scaled) size
