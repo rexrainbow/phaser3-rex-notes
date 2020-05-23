@@ -41,7 +41,6 @@ class Demo extends Phaser.Scene {
 
         };
 
-        this.print = this.add.text(0, 0, '');
         var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400,
             y: 300,
@@ -77,26 +76,22 @@ class Demo extends Phaser.Scene {
             .layout()
         // .drawBounds(this.add.graphics(), 0xff0000);
 
-        // Set icon interactive
-        var print = this.add.text(0, 0, '');
-        this.input.topOnly = false;
-        var labels = scrollablePanel.getElement('#skills.items', true);
-        labels.push(...scrollablePanel.getElement('#items.items', true));
-        var scene = this;
-        labels.forEach(function (label) {
-            if (!label) {
-                return;
-            }
 
-            var click = scene.rexUI.add.click(label.getElement('icon'))
-                .on('click', function () {
-                    if (!label.getTopmostSizer().isInTouching()) {
-                        return;
-                    }
-                    var category = label.getParentSizer().name;
-                    print.text += `${category}:${label.text}\n`;
-                });
-        })
+        // Add children-interactive
+        this.input.topOnly = false;
+        var panel = scrollablePanel.getElement('panel');
+        var print = this.add.text(0, 0, '');
+        scrollablePanel
+            .setChildrenInteractive({
+                targets: [
+                    panel.getByName('skills', true),
+                    panel.getByName('items', true)
+                ]
+            })
+            .on('child.click', function (child) {
+                var category = child.getParentSizer().name;
+                print.text += `${category}:${child.text}\n`;
+            })
     }
 
     update() { }
@@ -215,7 +210,6 @@ var createIcon = function (scene, item, iconWidth, iconHeight) {
 
         space: { icon: 3 }
     });
-
     return label;
 };
 

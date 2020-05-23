@@ -1,8 +1,8 @@
-import ButtonBehavior from '../../../../plugins/input/button/Button.js';
+import Click from '../../click/Click.js';
 
 var ButtonSetInteractive = function (button, clickConfig) {
     //Default: Fire 'click' event when touch released after pressed.
-    button._buttonBehavior = new ButtonBehavior(button, clickConfig);
+    button._buttonBehavior = new Click(button, clickConfig);
 
     button._buttonBehavior
         .on('click', function (buttonBehavior, gameObject, pointer, event) {

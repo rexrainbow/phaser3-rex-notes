@@ -197,6 +197,14 @@
 
 ### Gestures
 
+1. [Click](button.md): Fires 'click' event when touch releasd after pressed.
+    ```javascript
+    var click = scene.rexUI.add.click(gameObject, config);
+    ```
+    or
+    ```javascript
+    var click = new RexPlugins.UI.Click(gameObject, config);
+    ```
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
     ```javascript
     var tap = scene.rexUI.add.tap(gameObject, config);

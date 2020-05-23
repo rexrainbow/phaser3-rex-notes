@@ -16,7 +16,6 @@ var OverChild = function (config) {
 }
 
 var OnMove = function (pointer) {
-    debugger
     var child = PointToChild(this.input.targetSizers, pointer.x, pointer.y);
     var preChild = this.input.lastOverChild;
     if (child && preChild &&

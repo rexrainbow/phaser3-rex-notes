@@ -30,6 +30,7 @@ import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import Toast from './toast/Toast.js';
 import Sides from './sides/Sides.js';
 
+import Click from './click/Click.js';
 import Tap from './tap/Tap.js';
 import Press from './press/Press.js';
 import Swipe from './swipe/Swipe.js';
@@ -81,6 +82,7 @@ export {
     Toast,
     Sides,
 
+    Click,
     Tap,
     Press,
     Swipe,

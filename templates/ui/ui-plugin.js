@@ -32,6 +32,7 @@ import ScrollablePanelFactory from './scrollablepanel/Factory.js';
 import ToastFactory from './toast/Factory.js';
 import SidesFactory from './sides/Factory.js';
 
+import ClickFactory from './click/Factory.js';
 import TapFactory from './tap/Factory.js';
 import PressFactory from './press/Factory.js';
 import SwipeFactory from './swipe/Factory.js';
