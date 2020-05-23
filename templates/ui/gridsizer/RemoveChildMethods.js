@@ -34,7 +34,9 @@ export default {
 
     removeAll(destroyChild) {
         for (var i = 0, cnt = this.sizerChildren; i < cnt; i++) {
-            this.remove(this.sizerChildren[i], destroyChild);
+            if (this.sizerChildren[i]) {
+                this.remove(this.sizerChildren[i], destroyChild);
+            }
         }
         return this;
     },

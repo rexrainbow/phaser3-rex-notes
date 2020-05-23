@@ -4,6 +4,7 @@ import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
+import ResetGrid from './ResetGrid.js';
 import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
 
 var methods = {
@@ -12,6 +13,7 @@ var methods = {
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
 
+    resetGrid: ResetGrid,
     setChildrenInteractive: SetChildrenInteractive
 };
 
