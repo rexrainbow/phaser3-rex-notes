@@ -227,11 +227,11 @@ gridSizer.add(child,
 
 - `child` : A game object
 - `column`, `row` : Index of grid to add.
-    - `column` and `row` are numbers : Insert game object to cell (`column`, `row`).
-    - `column` and `row` are `undefined` : Search each column, each row to find an empty cell for inserting.
-    - `column` is `undefined`, and `row` is `true` : Search each row, each column to find an empty cell for inserting.
-    - `column` is a number, and `row` is `undefined` : Search each row of column `column` to find an empty cell for inserting.
-    - `column` is `undefined` and `row` is a number : Search each column of row `row` to find an empty cell for inserting.
+    - `column` and `row` are numbers : Insert game object to cell (`column`, `row`). Do nothing if that cell has item already.
+    - `column` and `row` are `undefined` : Search each column, each row to find an empty cell for inserting. Do nothing if it can't find any empty cell.
+    - `column` is `undefined`, and `row` is `true` : Search each row, each column to find an empty cell for inserting. Do nothing if it can't find any empty cell.
+    - `column` is a number, and `row` is `undefined` : Search each row of column `column` to find an empty cell for inserting. Do nothing if it can't find any empty cell.
+    - `column` is `undefined` and `row` is a number : Search each column of row `row` to find an empty cell for inserting. Do nothing if it can't find any empty cell.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.

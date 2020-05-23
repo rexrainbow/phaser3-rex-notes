@@ -25,7 +25,10 @@ var GetEmptyItemIndex = function (columnIndex, rowIndex, items, columnCount, row
                 }
             }
         } else {
-            return (rowIndex * columnCount) + columnIndex
+            var idx = (rowIndex * columnCount) + columnIndex;
+            if (!items[idx]) {
+                return idx;
+            }
         }
 
     } else if (rowIndex === true) {

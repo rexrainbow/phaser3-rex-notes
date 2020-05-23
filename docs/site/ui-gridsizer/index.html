@@ -5309,11 +5309,11 @@
 <ul>
 <li><code>child</code> : A game object</li>
 <li><code>column</code>, <code>row</code> : Index of grid to add.<ul>
-<li><code>column</code> and <code>row</code> are numbers : Insert game object to cell (<code>column</code>, <code>row</code>).</li>
-<li><code>column</code> and <code>row</code> are <code>undefined</code> : Search each column, each row to find an empty cell for inserting.</li>
-<li><code>column</code> is <code>undefined</code>, and <code>row</code> is <code>true</code> : Search each row, each column to find an empty cell for inserting.</li>
-<li><code>column</code> is a number, and <code>row</code> is <code>undefined</code> : Search each row of column <code>column</code> to find an empty cell for inserting.</li>
-<li><code>column</code> is <code>undefined</code> and <code>row</code> is a number : Search each column of row <code>row</code> to find an empty cell for inserting.</li>
+<li><code>column</code> and <code>row</code> are numbers : Insert game object to cell (<code>column</code>, <code>row</code>). Do nothing if that cell has item already.</li>
+<li><code>column</code> and <code>row</code> are <code>undefined</code> : Search each column, each row to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
+<li><code>column</code> is <code>undefined</code>, and <code>row</code> is <code>true</code> : Search each row, each column to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
+<li><code>column</code> is a number, and <code>row</code> is <code>undefined</code> : Search each row of column <code>column</code> to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
+<li><code>column</code> is <code>undefined</code> and <code>row</code> is a number : Search each column of row <code>row</code> to find an empty cell for inserting. Do nothing if it can't find any empty cell.</li>
 </ul>
 </li>
 <li><code>align</code> :<ul>
