@@ -227,6 +227,11 @@ gridSizer.add(child,
 
 - `child` : A game object
 - `column`, `row` : Index of grid to add.
+    - `column` and `row` are numbers : Insert game object to cell (`column`, `row`).
+    - `column` and `row` are `undefined` : Search each column, each row to find an empty cell for inserting.
+    - `column` is `undefined`, and `row` is `true` : Search each row, each column to find an empty cell for inserting.
+    - `column` is a number, and `row` is `undefined` : Search each row of column `column` to find an empty cell for inserting.
+    - `column` is `undefined` and `row` is a number : Search each column of row `row` to find an empty cell for inserting.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
@@ -297,12 +302,20 @@ See also - [dirty](ui-basesizer.md#dirty)
     or
     ```javascript
     gridSizer.removeAt(columnIndex, rowIndex, true);    
-    ```    
+    ``` 
 - Remove all children
+    ```javascript
+    gridSizer.removeAll();
+    ```
+- Remove and destroy all children
+    ```javascript
+    gridSizer.removeAll(true);
+    ```   
+- Remove all children and backgrounds
     ```javascript
     gridSizer.clear();
     ```
-- Remove and destroy all children
+- Remove and destroy all children and backgrounds
     ```javascript
     gridSizer.clear(true);
     ```
@@ -421,6 +434,28 @@ sizer.setChildrenInteractive({
     }, scope);
     ```
     - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
+
+### Reset grid
+
+```javascript
+sizer.setupGrid(column, row, columnProportions, rowProportions, space);
+```
+
+- `column` : Amount of column grids.
+- `row` : Amount of row grids.
+- `columnProportions`, `rowProportions` : Proportion of each column/row.
+    - Number : Apply this number proportion to each column/row
+    - Number array : Apply proportion of column/row through elements of this number array.
+- `space` :
+    - `space.column` : Space between 2 columns
+        - A number
+        - A number array
+    - `space.row` : Space between 2 rows
+        - A number
+        - A number array
+
+!!! note
+    Children game objects will be removed without destroyed.
 
 ### Other properties
 

@@ -12,7 +12,10 @@ var ClickChild = function (config) {
     if (clickConfig === undefined) {
         clickConfig = {};
     }
-    clickConfig.threshold = 10;
+    if (!clickConfig.hasOwnProperty('threshold')) {
+        clickConfig.threshold = 10;
+    }
+
     this._click = new Button(this, clickConfig);
     this._click.on('click', function (button, gameObject, pointer) {
         EmitChildEvent(

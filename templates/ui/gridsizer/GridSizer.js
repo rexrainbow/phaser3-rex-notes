@@ -39,7 +39,11 @@ class GridSizer extends BaseSizer {
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexGridSizer';
-        this.setupGrid(columnCount, rowCount, columnProportions, rowProportions, config);
+        this.setupGrid(
+            columnCount, rowCount,
+            columnProportions, rowProportions,
+            GetValue(config, 'space', undefined)
+        );
 
         this.addChildrenMap('items', this.sizerChildren);
     }
@@ -93,7 +97,7 @@ class GridSizer extends BaseSizer {
         return result;
     }
 
-    setupGrid(columnCount, rowCount, columnProportions, rowProportions, config) {
+    setupGrid(columnCount, rowCount, columnProportions, rowProportions, space) {
         if (columnProportions === undefined) {
             columnProportions = 0;
         }
@@ -105,7 +109,9 @@ class GridSizer extends BaseSizer {
         this.rowCount = rowCount;
 
         // children
-        this.sizerChildren = [];
+        if (this.sizerChildren === undefined) {
+            this.sizerChildren = [];
+        }
         this.sizerChildren.length = columnCount * rowCount;
         ArrayFill(this.sizerChildren, null);
 
@@ -138,7 +144,7 @@ class GridSizer extends BaseSizer {
         // space
         this.space.column = [];
         this.space.column.length = columnCount - 1;
-        var columnSpace = GetValue(config, 'space.column', 0);
+        var columnSpace = GetValue(space, 'column', 0);
         if (typeof (columnSpace) === 'number') {
             ArrayFill(this.space.column, columnSpace);
         } else {
@@ -148,7 +154,7 @@ class GridSizer extends BaseSizer {
         }
         this.space.row = [];
         this.space.row.length = rowCount - 1;
-        var rowSpace = GetValue(config, 'space.row', 0);
+        var rowSpace = GetValue(space, 'row', 0);
         if (typeof (rowSpace) === 'number') {
             ArrayFill(this.space.row, rowSpace);
         } else {

@@ -8,10 +8,10 @@ var ButtonSetInteractive = function (button, clickConfig) {
         .on('click', function (buttonBehavior, gameObject, pointer, event) {
             FireEvent.call(this, 'button.click', gameObject, pointer, event);
         }, this)
-        .on('enable', function(buttonBehavior, gameObject){
+        .on('enable', function (buttonBehavior, gameObject) {
             FireEvent.call(this, 'button.enable', gameObject);
         }, this)
-        .on('disable', function(buttonBehavior, gameObject){
+        .on('disable', function (buttonBehavior, gameObject) {
             FireEvent.call(this, 'button.disable', gameObject);
         }, this)
 

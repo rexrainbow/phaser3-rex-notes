@@ -80,7 +80,8 @@ class Demo extends Phaser.Scene {
         // Set icon interactive
         var print = this.add.text(0, 0, '');
         this.input.topOnly = false;
-        var labels = scrollablePanel.getElement('#skills.items', true);
+        var labels = [];
+        labels.push(...scrollablePanel.getElement('#skills.items', true));
         labels.push(...scrollablePanel.getElement('#items.items', true));
         var scene = this;
         labels.forEach(function (label) {
@@ -88,7 +89,7 @@ class Demo extends Phaser.Scene {
                 return;
             }
 
-            var click = scene.rexUI.add.click(label.getElement('icon'))
+            var click = scene.rexUI.add.click(label.getElement('icon'), { threshold: 10 })
                 .on('click', function () {
                     if (!label.getTopmostSizer().isInTouching()) {
                         return;
@@ -169,16 +170,14 @@ var createTable = function (scene, data, key, rows) {
         name: key  // Search this name to get table back
     });
 
-    var item, r, c;
+    var item;
     var iconSize = (rows === 1) ? 80 : 40;
     for (var i = 0, cnt = items.length; i < cnt; i++) {
         item = items[i];
-        r = i % rows;
-        c = (i - r) / rows;
         table.add(
             createIcon(scene, item, iconSize, iconSize),
-            c,
-            r,
+            undefined,
+            true,
             'top',
             0,
             true

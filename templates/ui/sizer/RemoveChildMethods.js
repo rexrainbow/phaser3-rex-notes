@@ -14,6 +14,14 @@ export default {
         return this;
     },
 
+    removeAll(destroyChild) {
+        for (var i = 0, cnt = this.sizerChildren; i < cnt; i++) {
+            this.remove(this.sizerChildren[i], destroyChild);
+        }
+        this.sizerChildren.length = 0;
+        return this;
+    },
+
     clear(destroyChild) {
         this.sizerChildren.length = 0;
         if (this.backgroundChildren) {

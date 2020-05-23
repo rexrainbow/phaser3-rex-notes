@@ -4185,6 +4185,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-grid" class="md-nav__link">
+    Reset grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5049,6 +5056,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-grid" class="md-nav__link">
+    Reset grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5294,7 +5308,14 @@
 
 <ul>
 <li><code>child</code> : A game object</li>
-<li><code>column</code>, <code>row</code> : Index of grid to add.</li>
+<li><code>column</code>, <code>row</code> : Index of grid to add.<ul>
+<li><code>column</code> and <code>row</code> are numbers : Insert game object to cell (<code>column</code>, <code>row</code>).</li>
+<li><code>column</code> and <code>row</code> are <code>undefined</code> : Search each column, each row to find an empty cell for inserting.</li>
+<li><code>column</code> is <code>undefined</code>, and <code>row</code> is <code>true</code> : Search each row, each column to find an empty cell for inserting.</li>
+<li><code>column</code> is a number, and <code>row</code> is <code>undefined</code> : Search each row of column <code>column</code> to find an empty cell for inserting.</li>
+<li><code>column</code> is <code>undefined</code> and <code>row</code> is a number : Search each column of row <code>row</code> to find an empty cell for inserting.</li>
+</ul>
+</li>
 <li><code>align</code> :<ul>
 <li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
 <li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
@@ -5361,9 +5382,15 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>    
 </code></pre></div></li>
 <li>Remove all children
-    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Remove and destroy all children
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove all children and backgrounds
+    <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Remove and destroy all children and backgrounds
     <div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -5490,6 +5517,36 @@ Use <a href="../ui-buttons/">Grid-Button</a> if user needs to enable/disable inp
 </ul>
 </li>
 </ul>
+<h3 id="reset-grid">Reset grid<a class="headerlink" href="#reset-grid" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setupGrid</span><span class="p">(</span><span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">,</span> <span class="nx">columnProportions</span><span class="p">,</span> <span class="nx">rowProportions</span><span class="p">,</span> <span class="nx">space</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>column</code> : Amount of column grids.</li>
+<li><code>row</code> : Amount of row grids.</li>
+<li><code>columnProportions</code>, <code>rowProportions</code> : Proportion of each column/row.<ul>
+<li>Number : Apply this number proportion to each column/row</li>
+<li>Number array : Apply proportion of column/row through elements of this number array.</li>
+</ul>
+</li>
+<li><code>space</code> :<ul>
+<li><code>space.column</code> : Space between 2 columns<ul>
+<li>A number</li>
+<li>A number array</li>
+</ul>
+</li>
+<li><code>space.row</code> : Space between 2 rows<ul>
+<li>A number</li>
+<li>A number array</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Children game objects will be removed without destroyed.</p>
+</div>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
                 

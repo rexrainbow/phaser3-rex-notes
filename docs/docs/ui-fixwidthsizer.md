@@ -258,9 +258,25 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     sizer.remove(child);
     ```
+- Remove and destroy a child
+    ```javascript
+    sizer.remove(child, true);
+    ```    
 - Remove all children
     ```javascript
-    sizer.clear(destroyChild);
+    sizer.removeAll();
+    ```
+- Remove and destroy all children
+    ```javascript
+    sizer.removeAll(true);
+    ```   
+- Remove all children and backgrounds
+    ```javascript
+    sizer.clear();
+    ```
+- Remove and destroy all children and backgrounds
+    ```javascript
+    sizer.clear(true);
     ```
 
 ### Get element
