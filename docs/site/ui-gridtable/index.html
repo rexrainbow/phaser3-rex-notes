@@ -4112,6 +4112,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-fixwidthbuttons/" title="Fix-width buttons" class="md-nav__link">
+      Fix-width buttons
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-slider/" title="Slider" class="md-nav__link">
       Slider
     </a>
@@ -5503,8 +5515,33 @@
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Pointer-down cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Pointer-up cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Pointer-over cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Pointer-out cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Click cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li><a href="../gesture-tap/">Tap</a> cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
@@ -5514,37 +5551,22 @@
 </ul>
 </li>
 <li><a href="../gesture-press/">Press</a> cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressstart`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressstart`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressend`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressend`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-swipe/">Swipe</a> cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">swipeEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>swipeEventName</code> : <code>'cell.swipeleft'</code>, <code>'cell.swiperight'</code>, <code>'cell.swipeup'</code>, <code>'cell.swipedown'</code>.</li>
 </ul>
 </li>
-<li>Pointer-over cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Pointer-out cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Click cell
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
