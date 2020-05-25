@@ -289,11 +289,11 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Remove a child
     ```javascript
-    gridSizer.remove(child);    
+    gridSizer.remove(child);
     ```
     or
     ```javascript
-    gridSizer.removeAt(columnIndex, rowIndex);    
+    gridSizer.removeAt(columnIndex, rowIndex);
     ```
 - Remove and destroy a child
     ```javascript
@@ -301,7 +301,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     or
     ```javascript
-    gridSizer.removeAt(columnIndex, rowIndex, true);    
+    gridSizer.removeAt(columnIndex, rowIndex, true);
     ``` 
 - Remove all children
     ```javascript
@@ -349,91 +349,6 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = gridSizer.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
-
-### Set children interactive
-
-```javascript
-sizer.setChildrenInteractive({
-    // click: {mode: 'release', clickInterval: 100},
-
-    // over: undefined,
-    
-    // press: {time: 251, threshold: 9},
-
-    // tap: {time: 250, tapInterval: 200, threshold: 9, tapOffset: 10, 
-    //       taps: undefined, minTaps: undefined, maxTaps: undefined,},
-
-    // swipe: {threshold: 10, velocityThreshold: 1000, dir: '8dir'},
-
-    // inputEventPrefix: 'child.',
-    // eventEmitter: undefined
-})
-```
-
-- `click` : [Configuration](button.md#create-instance) of Button behavior.
-    - `false` : Don't install Button behavior.
-- `over` :
-    - `false` : Don't fire over/out events
-- `press` : [Configuration](gesture-press.md#create-instance) of Press behavior.
-    - `false` : Don't install Press behavior.
-- `tap` : [Configuration](gesture-tap.md#create-instance) of Tap behavior.
-    - `false` : Don't install Tap behavior.
-- `swipe` : [Configuration](gesture-swipe.md#create-instance) of Swipe behavior.
-    - `false` : Don't install Swipe behavior.
-- `inputEventPrefix` : Prefix string of each event, default is `'child.'`.
-- `eventEmitter` : Fire event through specific game object.
-
-!!! note
-    Input behaviors are installed to this Sizer game object, not each child. And it assumes that all children are not overlapped.
-    Use [Grid-Button](ui-buttons.md) if user needs to enable/disable input behaviors of each child individually.
-
-#### Events
-
-- Click
-    ```javascript
-    sizer.on('child.click', function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-    - `child` : Triggered child game object.
-    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.    
-- Pointer-over
-    ```javascript
-    sizer.on('child.over', function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-- Pointer-out
-    ```javascript
-    sizer.on('child.out', function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-- Press
-    ```javascript
-    sizer.on('child.pressstart', function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-    ```javascript
-    sizer.on('child.pressend', function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-- Tap
-    ```javascript
-    sizer.on(tapEventName, function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-    - `tapEventName` :  `'child.1tap'`, `'child.2tap'`, `'child.3tap'`, etc ...
-- Swipe
-    ```javascript
-    sizer.on(swipeEventName, function(child, pointer) { 
-        // ...
-    }, scope);
-    ```
-    - `swipeEventName` :  `'child.swipeleft'`, `'child.swiperight'`, `'child.swipeup'`, `'child.swipedown'`.
 
 ### Reset grid
 

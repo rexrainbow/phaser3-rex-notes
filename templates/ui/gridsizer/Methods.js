@@ -5,7 +5,6 @@ import Layout from './Layout.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 import ResetGrid from './ResetGrid.js';
-import SetChildrenInteractive from '../utils/setchildreninteractive/SetChildrenInteractive.js';
 
 var methods = {
     getChildrenWidth: GetChildrenWidth,
@@ -13,8 +12,7 @@ var methods = {
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
 
-    resetGrid: ResetGrid,
-    setChildrenInteractive: SetChildrenInteractive
+    resetGrid: ResetGrid
 };
 
 Object.assign(

@@ -48,8 +48,7 @@ class Demo extends Phaser.Scene {
         sizer.layout();
 
         var print = this.add.text(0, 0, '');
-        sizer
-            .setChildrenInteractive()
+        this.rexUI.setChildrenInteractive(sizer)
             .on('child.click', function (child) {
                 var gridIndex = sizer.childToGridIndex(child);
                 print.text += `click ${gridIndex.x},${gridIndex.y}\n`;

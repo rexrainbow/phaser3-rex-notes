@@ -81,13 +81,12 @@ class Demo extends Phaser.Scene {
         this.input.topOnly = false;
         var panel = scrollablePanel.getElement('panel');
         var print = this.add.text(0, 0, '');
-        scrollablePanel
-            .setChildrenInteractive({
-                targets: [
-                    panel.getByName('skills', true),
-                    panel.getByName('items', true)
-                ]
-            })
+        this.rexUI.setChildrenInteractive(scrollablePanel, {
+            targets: [
+                panel.getByName('skills', true),
+                panel.getByName('items', true)
+            ]
+        })
             .on('child.click', function (child) {
                 var category = child.getParentSizer().name;
                 print.text += `${category}:${child.text}\n`;

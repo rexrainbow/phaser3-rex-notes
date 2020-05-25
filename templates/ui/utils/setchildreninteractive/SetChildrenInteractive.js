@@ -6,20 +6,20 @@ import SwipeChild from './SwipeChild.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var SetChildrenInteractive = function (config) {
-    this.setInteractive();
+var SetChildrenInteractive = function (gameObject, config) {
+    gameObject.setInteractive();
 
-    this.eventEmitter = GetValue(config, 'eventEmitter', this);
-    this.input.targetSizers = GetValue(config, 'targets', [this]);
-    this.input.eventNamePrefix = GetValue(config, 'inputEventPrefix', 'child.');    
+    gameObject.eventEmitter = GetValue(config, 'eventEmitter', gameObject);
+    gameObject.input.targetSizers = GetValue(config, 'targets', [gameObject]);
+    gameObject.input.eventNamePrefix = GetValue(config, 'inputEventPrefix', 'child.');
 
-    ClickChild.call(this, config);
-    OverChild.call(this, config);
-    TapChild.call(this, config);
-    PressChild.call(this, config);
-    SwipeChild.call(this, config);
+    ClickChild.call(gameObject, config);
+    OverChild.call(gameObject, config);
+    TapChild.call(gameObject, config);
+    PressChild.call(gameObject, config);
+    SwipeChild.call(gameObject, config);
 
-    return this;
+    return gameObject;
 }
 
 export default SetChildrenInteractive;

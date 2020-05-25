@@ -51,7 +51,9 @@ import {
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
-import GetViewport from '../../plugins/utils/system/GetViewport.js'
+import GetViewport from '../../plugins/utils/system/GetViewport.js';
+import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
+
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
@@ -74,7 +76,8 @@ var methods = {
     edit: Edit,
     isInTouching: IsPointerInBounds,
     waitEvent: WaitEvent,
-    waitComplete: WaitComplete
+    waitComplete: WaitComplete,
+    setChildrenInteractive: SetChildrenInteractive,
 }
 
 Object.assign(
