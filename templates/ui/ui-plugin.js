@@ -16,8 +16,8 @@ import OverlapSizerFactory from './overlapsizer/Factory.js';
 
 import LabelFactory from './label/Factory.js';
 import ButtonsFactory from './buttons/Factory.js';
-import FixWidthButtons from './fixwidthbuttons/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory.js';
+import FixWidthButtons from './fixwidthbuttons/Factory.js';
 import DialogFactory from './dialog/Factory.js';
 import TabsFactory from './tabs/Factory.js';
 import SliderFactory from './slider/Factory.js';

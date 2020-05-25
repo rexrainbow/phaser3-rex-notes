@@ -45,6 +45,7 @@
 
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
+1. [Fix-width-buttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 1. [Fix-width-sizer](ui-fixwidthsizer.md): Layout children game objects into lines.
 1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
@@ -256,7 +257,8 @@
 
 #### Set children interactive
 
-Helper method to 
+Helper method, which applies [click]((button.md)), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaiovrs on a game object, to detect input events of children.
+
 ```javascript
 sizer.setChildrenInteractive({
     // click: {mode: 'release', clickInterval: 100},

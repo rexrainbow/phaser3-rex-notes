@@ -263,6 +263,7 @@ nav:
     - Toast: ui-toast.md
     - Buttons: ui-buttons.md
     - Grid buttons: ui-gridbuttons.md
+    - Fix-width buttons: ui-fixwidthbuttons.md
     - Slider: ui-slider.md
     - Dialog: ui-dialog.md
     - Grid table: ui-gridtable.md

@@ -99,6 +99,7 @@
 1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI/chart](ui-chart.md): Draw chart on canvas.
 1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
+1. [UI/fixwidthbuttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
 1. [UI/fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
 1. [UI/grid buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [UI/grid sizer](ui-gridsizer.md): Layout children game objects in grids.
