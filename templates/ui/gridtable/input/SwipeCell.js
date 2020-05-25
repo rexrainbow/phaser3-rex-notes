@@ -5,7 +5,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var SwipeCell = function (table, tableConfig) {
     var swipeConfig = GetValue(tableConfig, 'swipe', undefined);
-    if (swipeConfig === undefined) {
+    if (swipeConfig === false) {
+        return;
+    } else if (swipeConfig === undefined) {
         swipeConfig = {};
     }
     swipeConfig.dir = '4dir';

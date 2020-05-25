@@ -5,7 +5,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ClickCell = function (table, tableConfig) {
     var buttonConfig = GetValue(tableConfig, 'button', undefined);
-    if (buttonConfig === undefined) {
+    if (buttonConfig === false) {
+        return;
+    } else if (buttonConfig === undefined) {
         buttonConfig = {};
     }
     buttonConfig.threshold = 10;

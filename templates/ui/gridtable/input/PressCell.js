@@ -5,6 +5,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var PressCell = function (table, tableConfig) {
     var pressConfig = GetValue(tableConfig, 'press', undefined);
+    if (pressConfig === false) {
+        return;
+    }
+
     table._press = new Press(table, pressConfig);
     table._press
         .on('pressstart', function (press, gameObject, lastPointer) {

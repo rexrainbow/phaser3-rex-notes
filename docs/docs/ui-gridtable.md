@@ -419,6 +419,36 @@ See [base sizer object](ui-basesizer.md).
 
 ### Events
 
+- Pointer-down cell
+    ```javascript
+    table.on('cell.down', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+- Pointer-up cell
+    ```javascript
+    table.on('cell.up', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+- Pointer-over cell
+    ```javascript
+    table.on('cell.over', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+- Pointer-out cell
+    ```javascript
+    table.on('cell.out', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+- Click cell
+    ```javascript
+    table.on('cell.click', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
 - [Tap](gesture-tap.md) cell
     ```javascript
     table.on(tapEventName, function(cellContainer, cellIndex) {
@@ -446,24 +476,6 @@ See [base sizer object](ui-basesizer.md).
     }, scope);
     ```
     - `swipeEventName` : `'cell.swipeleft'`, `'cell.swiperight'`, `'cell.swipeup'`, `'cell.swipedown'`.
-- Pointer-over cell
-    ```javascript
-    table.on('cell.over', function(cellContainer, cellIndex) {
-        // ...
-    }, scope);
-    ```
-- Pointer-out cell
-    ```javascript
-    table.on('cell.out', function(cellContainer, cellIndex) {
-        // ...
-    }, scope);
-    ```
-- Click cell
-    ```javascript
-    table.on('cell.click', function(cellContainer, cellIndex) {
-        // ...
-    }, scope);
-    ```
 
 ### Get element
 

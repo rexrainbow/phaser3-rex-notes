@@ -108,6 +108,12 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 0, '');
         gridTable
+            .on('cell.down', function (cellContainer, cellIndex) {
+                this.print.text += 'pointer-down ' + cellIndex + ': ' + cellContainer.text + '\n';
+            }, this)
+            .on('cell.up', function (cellContainer, cellIndex) {
+                this.print.text += 'pointer-up ' + cellIndex + ': ' + cellContainer.text + '\n';
+            }, this)
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
                     .setStrokeStyle(2, COLOR_LIGHT)
@@ -118,9 +124,9 @@ class Demo extends Phaser.Scene {
                     .setStrokeStyle(2, COLOR_DARK)
                     .setDepth(0);
             }, this)
-            // .on('cell.click', function (cellContainer, cellIndex) {
-            //     this.print.text += 'click ' + cellIndex + ': ' + cellContainer.text + '\n';
-            // }, this)
+            .on('cell.click', function (cellContainer, cellIndex) {
+                this.print.text += 'click ' + cellIndex + ': ' + cellContainer.text + '\n';
+            }, this)
             .on('cell.1tap', function (cellContainer, cellIndex) {
                 this.print.text += '1 tap (' + cellIndex + ': ' + cellContainer.text + ')\n';
             }, this)

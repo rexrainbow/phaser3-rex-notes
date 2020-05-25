@@ -195,7 +195,7 @@
     // scene.rexUI.add.edit(textObject, config, onClose);
     ```
 
-### Gestures
+### Touch input
 
 1. [Click](button.md): Fires 'click' event when touch releasd after pressed.
     ```javascript

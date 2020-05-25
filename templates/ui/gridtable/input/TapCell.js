@@ -5,6 +5,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var TapCell = function (table, tableConfig) {
     var tapConfig = GetValue(tableConfig, 'press', undefined);
+    if (tapConfig === false) {
+        return;
+    }
+
     table._tap = new Tap(table, tapConfig);
     table._tap
         .on('tap', function (tap, gameObject, lastPointer) {
