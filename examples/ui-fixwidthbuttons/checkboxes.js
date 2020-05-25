@@ -1,4 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import { ColorNames, ColorNameToInteger } from '../../plugins/utils/color/ColorNameToInteger.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -17,27 +18,20 @@ class Demo extends Phaser.Scene {
     create() {
         var CheckboxesMode = true;  // false = radio mode
 
-        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20).setStrokeStyle(2, COLOR_PRIMARY);
 
-        var btns = {};
-        var keys = 'ABCDEFGHIJKL', key;
-        for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            key = keys[i];
-            btns[key] = createButton(this, key);
+        var btns = [];
+        for (var i = 0, cnt = ColorNames.length; i < cnt; i++) {
+            btns.push(createButton(this, ColorNames[i]));
         }
 
         var buttons = this.rexUI.add.fixWidthButtons({
             x: 400, y: 300,
-            width: 300,
+            width: 480,
 
             background: background,
 
-            buttons: [
-                [btns['A'], btns['B'], btns['C']],
-                [btns['D'], btns['E'], btns['F']],
-                [btns['G'], btns['H'], btns['I']],
-                [btns['J'], btns['K'], btns['L']]
-            ],
+            buttons: btns,
             space: {
                 left: 10, right: 10, top: 20, bottom: 20,
                 line: 10, item: 10
@@ -46,8 +40,7 @@ class Demo extends Phaser.Scene {
 
             type: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
             setValueCallback: function (button, value) {
-                button.getElement('icon')
-                    .setFillStyle((value) ? COLOR_LIGHT : undefined);
+                button.getElement('background').setAlpha((value) ? 1 : 0.5)
             }
         })
             .layout()
@@ -58,7 +51,9 @@ class Demo extends Phaser.Scene {
             if (CheckboxesMode) { // checkboxes
                 var s = '';
                 buttons.data.each(function (buttons, key, value) {
-                    s += `${key}:${value}\n`
+                    if (value) {
+                        s += `${key}:${value}\n`
+                    }
                 })
                 print.setText(s);
             } else { // radio
@@ -73,19 +68,16 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, text) {
+var createButton = function (scene, colorName) {
+    var colorValue = ColorNameToInteger(colorName);
     return scene.rexUI.add.label({
-        width: 80, height: 80,
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10).setStrokeStyle(2, COLOR_LIGHT),
-        icon: scene.add.circle(0, 0, 10).setStrokeStyle(1, COLOR_DARK),
-        text: scene.add.text(0, 0, text, {
-            fontSize: 18
-        }),
+        width: 30, height: 24,
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, colorValue),
         space: {
             icon: 10
         },
         align: 'center',
-        name: text
+        name: colorName
     });
 }
 
