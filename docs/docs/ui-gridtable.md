@@ -421,37 +421,37 @@ See [base sizer object](ui-basesizer.md).
 
 - Pointer-down cell
     ```javascript
-    table.on('cell.down', function(cellContainer, cellIndex) {
+    table.on('cell.down', function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - Pointer-up cell
     ```javascript
-    table.on('cell.up', function(cellContainer, cellIndex) {
+    table.on('cell.up', function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - Pointer-over cell
     ```javascript
-    table.on('cell.over', function(cellContainer, cellIndex) {
+    table.on('cell.over', function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - Pointer-out cell
     ```javascript
-    table.on('cell.out', function(cellContainer, cellIndex) {
+    table.on('cell.out', function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - Click cell
     ```javascript
-    table.on('cell.click', function(cellContainer, cellIndex) {
+    table.on('cell.click', function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - [Tap](gesture-tap.md) cell
     ```javascript
-    table.on(tapEventName, function(cellContainer, cellIndex) {
+    table.on(tapEventName, function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
@@ -460,18 +460,18 @@ See [base sizer object](ui-basesizer.md).
     - `cellIndex` : Index of triggered cell.
 - [Press](gesture-press.md) cell
     ```javascript
-    table.on(`cell.pressstart`, function(cellContainer, cellIndex) {
+    table.on(`cell.pressstart`, function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
     ```javascript
-    table.on(`cell.pressend`, function(cellContainer, cellIndex) {
+    table.on(`cell.pressend`, function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```
 - [Swipe](gesture-swipe.md) cell
     ```javascript
-    table.on(swipeEventName, function(cellContainer, cellIndex) {
+    table.on(swipeEventName, function(cellContainer, cellIndex, pointer) {
         // ...
     }, scope);
     ```

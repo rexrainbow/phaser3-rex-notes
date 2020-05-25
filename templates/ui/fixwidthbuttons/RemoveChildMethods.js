@@ -1,9 +1,9 @@
-import GridSizer from '../gridsizer/GridSizer.js';
+import FixWidthSizer from '../fixwidthsizer/FixWidthSizer.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
-const SizerRmove = GridSizer.prototype.remove;
-const SizerClear = GridSizer.prototype.clear;
+const SizerRmove = FixWidthSizer.prototype.remove;
+const SizerClear = FixWidthSizer.prototype.clear;
 
 var Remove = function (gameObject, destroyChild) {
     var gameObject = this.getButton(gameObject);
@@ -11,8 +11,12 @@ var Remove = function (gameObject, destroyChild) {
         return this;
     }
 
-    RemoveItem(this.buttons, gameObject);
-    SizerRmove.call(this, gameObject, destroyChild);
+    if (this.buttons.length === 1) {
+        this.clear(destroyChild);
+    } else {
+        RemoveItem(this.buttons, gameObject);
+        SizerRmove.call(this, gameObject, destroyChild);
+    }
     return this;
 };
 
