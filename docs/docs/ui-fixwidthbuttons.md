@@ -7,6 +7,8 @@ A container with a group of fix-width buttons.
 
 ## Live demos
 
+- [Checkboxes/radio](https://codepen.io/rexrainbow/pen/rNObKbP)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-fixwidthbuttons)

@@ -1,5 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import { ColorNames, ColorNameToInteger } from '../../plugins/utils/color/ColorNameToInteger.js';
+import GetRandomWord from '../../plugins/utils/string/GetRandomWord.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -18,11 +18,11 @@ class Demo extends Phaser.Scene {
     create() {
         var CheckboxesMode = true;  // false = radio mode
 
-        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20).setStrokeStyle(2, COLOR_PRIMARY);
+        var background = this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
 
         var btns = [];
-        for (var i = 0, cnt = ColorNames.length; i < cnt; i++) {
-            btns.push(createButton(this, ColorNames[i]));
+        for (var i = 0; i < 20; i++) {
+            btns.push(createButton(this, GetRandomWord(3, 6)));
         }
 
         var buttons = this.rexUI.add.fixWidthButtons({
@@ -36,11 +36,11 @@ class Demo extends Phaser.Scene {
                 left: 10, right: 10, top: 20, bottom: 20,
                 line: 10, item: 10
             },
-            align: 'center',
 
             type: ((CheckboxesMode) ? 'checkboxes' : 'radio'),
             setValueCallback: function (button, value) {
-                button.getElement('background').setAlpha((value) ? 1 : 0.5)
+                button.getElement('icon')
+                    .setFillStyle((value) ? COLOR_LIGHT : undefined);
             }
         })
             .layout()
@@ -68,16 +68,19 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createButton = function (scene, colorName) {
-    var colorValue = ColorNameToInteger(colorName);
+var createButton = function (scene, text) {
     return scene.rexUI.add.label({
-        width: 30, height: 24,
-        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, colorValue),
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10).setStrokeStyle(2, COLOR_LIGHT),
+        icon: scene.add.circle(0, 0, 10).setStrokeStyle(1, COLOR_DARK),
+        text: scene.add.text(0, 0, text, {
+            fontSize: 18
+        }),
         space: {
+            left: 10, right: 10, top: 10, bottom: 10,
             icon: 10
         },
         align: 'center',
-        name: colorName
+        name: text
     });
 }
 
