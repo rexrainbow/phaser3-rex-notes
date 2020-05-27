@@ -71,17 +71,17 @@ var SetDragable = function (items) {
             })
             .on('drop', function (pointer, target) {
                 var parent = item.getParentSizer();
-                var parentItems = parent.getElement('items');
-                var isLastItem = (parentItems[parentItems.length - 1] === item);
                 parent.remove(item);
-                if (!isLastItem) {
-                    ArrangeItems(parent);
-                }
+                ArrangeItems(parent);
 
-                var startX = item.x, startY = item.y; // Save current position
-                target.add(item).layout(); // Item is placed to new position in fixWidthSizer
+                var insertIndex = GetInsertIndex(target, pointer);
+                // Item is placed to new position in fixWidthSizer
+                target
+                    .add(item, {
+                        index: (insertIndex >= 0) ? insertIndex : undefined
+                    })
                 // Move item from start position to new position
-                MoveFrom(item, startX, startY);
+                ArrangeItems(target);
             })
     });
 }
@@ -120,6 +120,27 @@ var ArrangeItems = function (panel) {
         var startX = item.getData('startX'), startY = item.getData('startY');
         MoveFrom(item, startX, startY);
     })
+}
+
+var GetInsertIndex = function (panel, pointer) {
+    var items = panel.getElement('items');
+    if (items.length === 0) {
+        return -1;
+    }
+
+    var candidators = items.filter(function (item) {
+        return Math.abs(item.y - pointer.y) <= (item.height / 2);
+    })
+    if (candidators.length === 0) {
+        return -1;
+    }
+    candidators.sort(function (itemA, itemB) {
+        var dA = Math.abs(itemA.x - pointer.x), dB = Math.abs(itemB.x - pointer.x);
+        return (dA > dB) ? 1 :
+            (dA < dB) ? -1 : 0;
+    })
+    var nearestItem = candidators[0];
+    return items.indexOf(nearestItem);
 }
 
 var CreatePanel = function (scene, words) {

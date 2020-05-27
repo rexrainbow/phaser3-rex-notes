@@ -94,6 +94,8 @@ Default value is `true`.
     var rightBound = sizer.right;
     var topBound = sizer.top;
     var bottomBound = sizer.bottom;
+    var centerX = sizer.centerX;
+    var centerY = sizer.centerY;
     ```
 - Set
     ```javascript
@@ -101,6 +103,8 @@ Default value is `true`.
     sizer.right = rightBound;
     sizer.top = topBound;
     sizer.bottom = bottomBound;
+    sizer.centerX = centerXBound;
+    sizer.centerY = centerYBound;
     ```
     or
     ```javascript
@@ -108,6 +112,8 @@ Default value is `true`.
     sizer.alignRight(rightBound);
     sizer.alignTop(topBound);
     sizer.alignBottom(bottomBound);
+    sizer.alignCenterX(centerXBound);
+    sizer.alignCenterY(centerYBound);
     ```
 
 ### Push into bounds
