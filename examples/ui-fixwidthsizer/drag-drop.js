@@ -122,25 +122,44 @@ var ArrangeItems = function (panel) {
     })
 }
 
+var DistanceBetween = Phaser.Math.Distance.Between;
 var GetInsertIndex = function (panel, pointer) {
     var items = panel.getElement('items');
     if (items.length === 0) {
         return -1;
     }
 
-    var candidators = items.filter(function (item) {
-        return Math.abs(item.y - pointer.y) <= (item.height / 2);
+    var candidators = [];
+    items.forEach(function (item, index, arr) {
+        if (Math.abs(item.centerY - pointer.y) > (item.height / 2)) {
+            return;
+        }
+
+        candidators.push({
+            index: index,
+            distance: DistanceBetween(item.left, item.centerY, pointer.x, pointer.y)
+        })
+
+        var nextItem = arr[index + 1];
+        if (!nextItem || (nextItem.y === item.y)) {
+            return;
+        }
+
+        // nextItem is at next line
+        candidators.push({
+            index: (index + 1),
+            distance: DistanceBetween(item.right, item.centrtY, pointer.x, pointer.y)
+        })
     })
     if (candidators.length === 0) {
         return -1;
     }
-    candidators.sort(function (itemA, itemB) {
-        var dA = Math.abs(itemA.x - pointer.x), dB = Math.abs(itemB.x - pointer.x);
-        return (dA > dB) ? 1 :
-            (dA < dB) ? -1 : 0;
+    candidators.sort(function (data0, data1) {
+        var d0 = data0.distance, d1 = data1.distance;
+        return (d0 > d1) ? 1 :
+            (d0 < d1) ? -1 : 0;
     })
-    var nearestItem = candidators[0];
-    return items.indexOf(nearestItem);
+    return candidators[0].index;
 }
 
 var CreatePanel = function (scene, words) {
