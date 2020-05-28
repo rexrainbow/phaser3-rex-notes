@@ -80,7 +80,7 @@ class TouchCursor extends VectorToCursorKeys {
 
         var p0 = this.gameObject,
             p1 = pointer;
-        this.setVector(p0.x, p0.y, p1.x, p1.y);
+        this.setVector(p0.x, p0.y, p1.worldX, p1.worldY);
         this.emit('update');
     }
 
