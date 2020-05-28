@@ -7,7 +7,7 @@ Simulate curosr keys according touch events.
 
 ## Live demos
 
-- [Virtual joysticj](https://codepen.io/rexrainbow/pen/oyqvQY)
+- [Virtual joystick](https://codepen.io/rexrainbow/pen/oyqvQY)
 
 ## Usage
 
