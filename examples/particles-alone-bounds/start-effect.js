@@ -31,17 +31,16 @@ var CreateGO = function (scene, color, x, y, angle) {
         .setDepth(depthIdx++)
         .setInteractive()
         .on('pointerup', function () {
-            gameObject._particlesEffect = scene.plugins.get('rexParticlesAloneBounds')
+            scene.plugins.get('rexParticlesAloneBounds')
                 .startEffect(
                     gameObject,
                     {
                         textureKey: 'flares',
                         scale: { start: 0.3, end: 0.5 },
-                        lifespan: 1000,
-                        quantity: 80,
+                        // lifespan: 1000,
+                        // stepRate: 10,
                         spread: 20
-                    },
-                    gameObject._particlesEffect
+                    }
                 )
                 .on('complete', function () {
                     console.log('complete')

@@ -8,11 +8,11 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
         h = gameObject.height;
     globRect.setTo((-w / 2), (-h / 2), w, h);
 
-    if (particles === undefined) {
+    if ((particles === undefined) || (!particles.scene)) {
         particles = CreateParticles(gameObject);
     }
     particles.setTexture(config.textureKey);
-    var reuse = GetValue(config, 'reuse', true);
+    var reuse = GetValue(config, 'reuse', false);
 
     var quantity = GetValue(config, 'quantity', 0);
     var stepRate = (quantity > 0) ? 0 : GetValue(config, 'stepRate', 10);
@@ -26,7 +26,7 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
             stepRate: stepRate,
             yoyo: GetValue(config, 'yoyo', false)
         },
-        speed: GetValue(config, 'spread', 0)
+        speed: GetValue(config, 'spread', 10)
     };
     var textureFrames = GetValue(config, 'textureFrames');
     if (textureFrames) {
@@ -57,6 +57,7 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
 
                 if (!reuse) {
                     particles.destroy();
+                    particles = undefined;
                 }
             }
         })
@@ -86,8 +87,8 @@ var SyncTo = function (gameObject) {
     }
     gameObject.getCenter(globPoint);
     this
-        .setScale(gameObject.scaleX, gameObject.scaleY)
         .setPosition(globPoint.x, globPoint.y)
+        .setScale(gameObject.scaleX, gameObject.scaleY)
         .setAngle(gameObject.angle)
 
     if (this.depth !== gameObject.depth) {
