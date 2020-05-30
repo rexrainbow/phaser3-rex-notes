@@ -51,6 +51,7 @@ module.exports = {
     'shakepositionplugin': './plugins/shakeposition-plugin.js',
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',
+    'particlesaloneboundsplugin': './plugins/particlesalonebounds-plugin.js',
     // member of game object, arcade behavior
     'eightdirectionplugin': './plugins/eightdirection-plugin.js',
     'bulletplugin': './plugins/bullet-plugin.js',
