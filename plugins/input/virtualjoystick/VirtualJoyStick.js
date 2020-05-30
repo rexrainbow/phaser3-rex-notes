@@ -212,22 +212,23 @@ class VirtualJoyStick {
 
     update() {
         var touchCursor = this.touchCursor;
+        // Start from (0,0)
+        var x = this.base.x;
+        var y = this.base.y;
         if (touchCursor.anyKeyDown) {
-            if (touchCursor.force > this.radius) {
+            if (touchCursor.force > this.radius) { // Exceed radius
                 var rad = touchCursor.rotation;
-                this.thumb.x = touchCursor.start.x + (Math.cos(rad) * this.radius);
-                this.thumb.y = touchCursor.start.y + (Math.sin(rad) * this.radius);
+                x += Math.cos(rad) * this.radius;
+                y += Math.sin(rad) * this.radius;
             } else {
-                this.thumb.x = touchCursor.end.x;
-                this.thumb.y = touchCursor.end.y;
+                x += touchCursor.forceX;
+                y += touchCursor.forceY;
             }
-        } else {
-            this.thumb.x = this.base.x;
-            this.thumb.y = this.base.y;
         }
+        this.thumb.x = x;
+        this.thumb.y = y
         return this;
     }
-
 
 }
 

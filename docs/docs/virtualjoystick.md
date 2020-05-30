@@ -99,7 +99,7 @@ var joystick = scene.plugins.get('rexVirtualJoystick').add(scene, {
     - `'8dir'`, or `3` : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
 - `forceMin` : Cursor keys will be pressed when *force* is larger then this value.
     - `force` : Distance between position of base game object to touch pointer
-- `fixed` : Set `true` to fix to camera, i.e set `scrollFactor` to `0` for base and thumb game object.
+- `fixed` : Set `true` to fix to camera, i.e set `scrollFactor` to `0` for base and thumb game object. Default value is `true`.
 - `enable` : Set `false` to disable cursor keys simulation
 
 ### State of cursor keys

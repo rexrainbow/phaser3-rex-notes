@@ -136,6 +136,7 @@ module.exports = {
     'bbcodetext': './templates/ui/bbcodetext/BBCodeText.js',
     'buttons': './templates/ui/buttons/Buttons.js',
     'gridbuttons': './templates/ui/gridbuttons/GridButtons.js',
+    'fixwidthbuttons': './templates/ui/fixwidthbuttons/FixWidthButtons.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
     'chart': './templates/ui/chart/Chart.js',
