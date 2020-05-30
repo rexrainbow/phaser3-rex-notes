@@ -38,7 +38,8 @@ var CreateGO = function (scene, color, x, y, angle) {
                         textureKey: 'flares',
                         scale: { start: 0.3, end: 0.5 },
                         lifespan: 1000,
-                        quantity: 80
+                        quantity: 80,
+                        spread: 20
                     },
                     gameObject._particlesEffect
                 )

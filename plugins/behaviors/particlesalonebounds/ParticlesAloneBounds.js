@@ -25,7 +25,8 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
             quantity: quantity,
             stepRate: stepRate,
             yoyo: GetValue(config, 'yoyo', false)
-        }
+        },
+        speed: GetValue(config, 'spread', 0)
     };
     var textureFrames = GetValue(config, 'textureFrames');
     if (textureFrames) {
