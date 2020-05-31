@@ -37,6 +37,8 @@ var CreateGO = function (scene, color, x, y, angle) {
                     {
                         textureKey: 'flares',
                         scale: { start: 0.3, end: 0.5 },
+                        // alpha: { start: 1, end: 0.1 },
+                        // duration: 3000,
                         // lifespan: 1000,
                         // stepRate: 10,
                         spread: 20

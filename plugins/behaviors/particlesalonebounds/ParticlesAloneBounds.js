@@ -1,33 +1,46 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
+const TickTime = (1000 / 60);
 
 var ParticlesAloneBounds = function (gameObject, config, particles) {
-    if (globRect === undefined) {
-        globRect = new Phaser.Geom.Rectangle();
-    }
-    var w = gameObject.width,
-        h = gameObject.height;
-    globRect.setTo((-w / 2), (-h / 2), w, h);
-
     if ((particles === undefined) || (!particles.scene)) {
         particles = CreateParticles(gameObject);
     }
     particles.setTexture(config.textureKey);
     var reuse = GetValue(config, 'reuse', false);
-
-    var quantity = GetValue(config, 'quantity', 0);
-    var stepRate = (quantity > 0) ? 0 : GetValue(config, 'stepRate', 10);
+    var points = BoundsToPoints(gameObject, config);
+    var lifespan = GetValue(config, 'lifespan', 1000);
     var emitterConfig = {
         blendMode: GetValue(config, 'blendMode', 'ADD'),
-        lifespan: GetValue(config, 'lifespan', 1000),
+        lifespan: lifespan,
         emitZone: {
             type: 'edge',
-            source: globRect,
-            quantity: quantity,
-            stepRate: stepRate,
+            source: {
+                getPoints: function () {
+                    return points;
+                }
+            },
             yoyo: GetValue(config, 'yoyo', false)
         },
         speed: GetValue(config, 'spread', 10)
     };
+
+    // Set quantity or frequency of emitterConfig
+    var duration = GetValue(config, 'duration', undefined);
+    if (duration !== undefined) {
+        var lastDelay = duration - lifespan;
+        if (lastDelay <= 0) { // Fire all particles at beginning
+            emitterConfig.quantity = points.length;
+        } else {
+            var delayPerParticle = lastDelay / points.length;
+            if (delayPerParticle <= TickTime) { // Fire more then 1 particle per tick
+                emitterConfig.quantity = Math.ceil(TickTime / delayPerParticle);
+            } else { // Not fire 1 particle per tick, set frequency
+                emitterConfig.frequency = delayPerParticle;
+            }
+        }
+    }
+
+    // Set texture frame of emitterConfig
     var textureFrames = GetValue(config, 'textureFrames');
     if (textureFrames) {
         emitterConfig.frame = {
@@ -35,10 +48,17 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
             cycle: GetValue(config, 'textureFrameCycle', true)
         }
     }
-    var scale = GetValue(config, 'scale');
-    if (scale) {
+    // Set scale of emitterConfig
+    var scale = GetValue(config, 'scale', undefined);
+    if (scale !== undefined) {
         emitterConfig.scale = scale;
     }
+    // Set alpha of emitterConfig
+    var alpha = GetValue(config, 'alpha', undefined);
+    if (alpha !== undefined) {
+        emitterConfig.alpha = alpha;
+    }
+
     var repeatCount = GetValue(config, 'repeat', 1);
     var emitter = particles.createEmitter(emitterConfig)
         .onParticleEmit(function () {
@@ -94,6 +114,19 @@ var SyncTo = function (gameObject) {
     if (this.depth !== gameObject.depth) {
         this.setDepth(gameObject.depth);
     }
+}
+
+var BoundsToPoints = function (gameObject, config) {
+    if (globRect === undefined) {
+        globRect = new Phaser.Geom.Rectangle();
+    }
+    var w = gameObject.width,
+        h = gameObject.height;
+    globRect.setTo((-w / 2), (-h / 2), w, h);
+    var quantity = GetValue(config, 'quantity', 0);
+    var stepRate = (quantity > 0) ? 0 : GetValue(config, 'stepRate', 10);
+    var points = globRect.getPoints(quantity, stepRate);
+    return points;
 }
 
 var globRect;
