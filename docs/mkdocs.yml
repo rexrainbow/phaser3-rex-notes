@@ -154,8 +154,10 @@ nav:
     - Effects: camera-effects.md
     - Controllor: camera-controllor.md    
     - Shader effects:
+        - Render pipeline: render-pipeline.md
         - Shader effect: camera-shader-effect.md
         - Color:
+            - Glow: shader-glowfilter.md
             - Gray scale: shader-grayscale.md
             - Inverse: shader-inverse.md
             - HSL adjust: shader-hsladjust.md

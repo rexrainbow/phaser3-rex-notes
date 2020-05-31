@@ -23,7 +23,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexswirlpipelineplugin').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(scene, key, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexSwirlPipeline').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(scene, key, config);
     ```
 
 #### Import class
@@ -67,14 +67,14 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = new SwirlPipeline(scene, key, config);
+    var pipelineInstance = new SwirlPipeline(scene, key, config);
     ```
 
 ### Apply filter
 
 1. Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexSwirlPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(scene, key, {
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -83,46 +83,56 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
         // rotation: 0,  // or angle: 0
     });
     ```
-2. Add pipeline to camera
+1. Add to render pipeline
     ```javascript
-    // var camera = scene.cameras.main;
-    camera.setRenderToTexture(customPipeline);
+    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
     ```
+1. Apply filter
+    - To camera
+        ```javascript
+        // var camera = scene.cameras.main;
+        camera.setRenderToTexture(pipelineName);
+        ```
+    - To game object
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
 
 ### Radius
 
 - Get
     ```javascript
-    var radius = customPipeline.radius;
+    var radius = pipelineInstance.radius;
     ```
 - Set
     ```javascript
-    customPipeline.radius = radius;
-    // customPipeline.radius += value;
+    pipelineInstance.radius = radius;
+    // pipelineInstance.radius += value;
     ```
     or
     ```javascript
-    customPipeline.setRadius(radius);
+    pipelineInstance.setRadius(radius);
     ```
 
 ### Rotation
 
 - Get
     ```javascript
-    var rotation = customPipeline.rotation;  // radians
-    // var angle = customPipeline.angle;     // degrees
+    var rotation = pipelineInstance.rotation;  // radians
+    // var angle = pipelineInstance.angle;     // degrees
     ```
 - Set
     ```javascript
-    customPipeline.rotation = rotation;
-    customPipeline.rotation += value;
-    // customPipeline.angle = angle;
-    // customPipeline.angle += value;   
+    pipelineInstance.rotation = rotation;
+    pipelineInstance.rotation += value;
+    // pipelineInstance.angle = angle;
+    // pipelineInstance.angle += value;   
     ```
     or
     ```javascript
-    customPipeline.setRotation(rotation);
-    // customPipeline.setAngle(angle);
+    pipelineInstance.setRotation(rotation);
+    // pipelineInstance.setAngle(angle);
     ```
 
 ### Center position
@@ -131,16 +141,16 @@ Default value is center of window.
 
 - Get
     ```javascript
-    var x = customPipeline.centerX;
-    var y = customPipeline.centerY;
+    var x = pipelineInstance.centerX;
+    var y = pipelineInstance.centerY;
     ```
 - Set
     ```javascript
-    customPipeline.centerX = x;
-    customPipeline.centerY = y;
+    pipelineInstance.centerX = x;
+    pipelineInstance.centerY = y;
     ```
     or
     ```javascript
-    customPipeline.setCenter(x, y);
-    // customPipeline.setCenter();   // set to center of window
+    pipelineInstance.setCenter(x, y);
+    // pipelineInstance.setCenter();   // set to center of window
     ```

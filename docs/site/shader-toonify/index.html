@@ -2513,6 +2513,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../render-pipeline/" title="Render pipeline" class="md-nav__link">
+      Render pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../camera-shader-effect/" title="Shader effect" class="md-nav__link">
       Shader effect
     </a>
@@ -2526,17 +2538,29 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-4-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-glowfilter/" title="Glow" class="md-nav__link">
+      Glow
+    </a>
+  </li>
+
         
           
           
@@ -2588,13 +2612,13 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4" checked>
     
-    <label class="md-nav__link" for="nav-7-4-3">
+    <label class="md-nav__link" for="nav-7-4-4">
       Outline
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-3">
+      <label class="md-nav__title" for="nav-7-4-4">
         Outline
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2754,13 +2778,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-5" type="checkbox" id="nav-7-4-5">
     
-    <label class="md-nav__link" for="nav-7-4-4">
+    <label class="md-nav__link" for="nav-7-4-5">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-4">
+      <label class="md-nav__title" for="nav-7-4-5">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -5006,7 +5030,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextoonifypipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifypipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextoonifypipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextoonifypipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5032,7 +5056,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5044,13 +5068,13 @@
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ToonifyPipeline</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/toonifypipeline.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ToonifyPipeline</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ToonifyPipeline</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// edgeThreshold: 0.2,</span>
     <span class="c1">// hueLevels: 0,</span>
     <span class="c1">// sLevels: 0,</span>
@@ -5065,21 +5089,33 @@
 <li><code>edgeColor</code> : Color of edge, could be a number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
 </ul>
 </li>
-<li>Add pipeline to camera
-    <div class="codehilite"><pre><span></span><code><span class="c1">// var camera = scene.cameras.main;</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
+<li>Add to render pipeline
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">pipelineInstance</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Apply filter<ul>
+<li>To camera
+    <div class="codehilite"><pre><span></span><code><span class="c1">// var camera = scene.cameras.main;</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 <h3 id="edge-threshold">Edge threshold<a class="headerlink" href="#edge-threshold" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeThreshold</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeThreshold</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">edgeThreshold</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">edgeThreshold</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setEdgeThreshold</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setEdgeThreshold</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
 </ul>
@@ -5088,13 +5124,13 @@
 <h3 id="hue-levels">Hue levels<a class="headerlink" href="#hue-levels" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">hueLevels</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">hueLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">hueLevels</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setHueLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setHueLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Set <code>0</code> to disable this feature.</li>
 </ul>
@@ -5103,13 +5139,13 @@
 <h3 id="saturation-levels">Saturation levels<a class="headerlink" href="#saturation-levels" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">satLevels</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">satLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">satLevels</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setSatLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSatLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Set <code>0</code> to disable this feature.</li>
 </ul>
@@ -5118,13 +5154,13 @@
 <h3 id="value-levels">Value levels<a class="headerlink" href="#value-levels" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">valLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">valLevels</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">valLevels</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">valLevels</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setValLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setValLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Set <code>0</code> to disable this feature.</li>
 </ul>
@@ -5133,7 +5169,7 @@
 <h3 id="edge-color">Edge color<a class="headerlink" href="#edge-color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeColor</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeColor</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>color</code> : <a href="../color/">Color</a> object.<ul>
 <li>Red: <code>color.red</code>, 0~255.</li>
@@ -5144,7 +5180,7 @@
 </ul>
 </li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
 </ul>

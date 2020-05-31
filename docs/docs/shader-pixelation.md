@@ -23,7 +23,7 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexpixelationpipelineplugin').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexpixelationpipelineplugin').add(scene, key, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexPixelationPipeline').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(scene, key, config);
     ```
 
 #### Import class
@@ -67,41 +67,51 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = new PixelationPipeline(scene, key, config);
+    var pipelineInstance = new PixelationPipeline(scene, key, config);
     ```
 
 ### Apply filter
 
 1. Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexPixelationPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(scene, key, {
         // pixelWidth: 0,
         // pixelHeight: 0
     });
     ```
-2. Add pipeline to camera
+1. Add to render pipeline
     ```javascript
-    // var camera = scene.cameras.main;
-    camera.setRenderToTexture(customPipeline);
+    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
     ```
+1. Apply filter
+    - To camera
+        ```javascript
+        // var camera = scene.cameras.main;
+        camera.setRenderToTexture(pipelineName);
+        ```
+    - To game object
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
 
 ### Pixel size
 
 - Get
     ```javascript
-    var pixelWidth = customPipeline.pixelWidth;
-    var pixelHeight = customPipeline.pixelHeight;
+    var pixelWidth = pipelineInstance.pixelWidth;
+    var pixelHeight = pipelineInstance.pixelHeight;
     ```
 - Set
     ```javascript
-    customPipeline.pixelWidth = pixelWidth;
-    customPipeline.pixelHeight = pixelHeight;
-    // customPipeline.pixelWidth += value;
-    // customPipeline.pixelHeight += value;
+    pipelineInstance.pixelWidth = pixelWidth;
+    pipelineInstance.pixelHeight = pixelHeight;
+    // pipelineInstance.pixelWidth += value;
+    // pipelineInstance.pixelHeight += value;
     ```
     or
     ```javascript
-    customPipeline.setPixelWidth(pixelWidth);
-    customPipeline.setPixelHeight(pixelHeight);
-    customPipeline.setPixelSize(pixelWidth, pixelHeight);
+    pipelineInstance.setPixelWidth(pixelWidth);
+    pipelineInstance.setPixelHeight(pixelHeight);
+    pipelineInstance.setPixelSize(pixelWidth, pixelHeight);
     ```

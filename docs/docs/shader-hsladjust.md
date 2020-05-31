@@ -23,7 +23,7 @@ Adjust color in HSL domain, post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexhsladjustpipelineplugin').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(scene, key, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Adjust color in HSL domain, post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexHSLAdjustPipeline').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(scene, key, config);
     ```
 
 #### Import class
@@ -67,14 +67,14 @@ Adjust color in HSL domain, post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = new HSLAdjustPipeline(scene, key, config);
+    var pipelineInstance = new HSLAdjustPipeline(scene, key, config);
     ```
 
 ### Apply filter
 
 1. Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexHslAdjustPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(scene, key, {
         // hueRotate: 0,
         // satAdjust: 1,
         // lumAdjust: 0.5,
@@ -92,26 +92,36 @@ Adjust color in HSL domain, post processing filter.
         - `0` : Dark
         - `0.5` : Original color (Default value)
         - `1` : White
-2. Add pipeline to camera
+1. Add to render pipeline
     ```javascript
-    // var camera = scene.cameras.main;
-    camera.setRenderToTexture(customPipeline);
+    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
     ```
+1. Apply filter
+    - To camera
+        ```javascript
+        // var camera = scene.cameras.main;
+        camera.setRenderToTexture(pipelineName);
+        ```
+    - To game object
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
 
 ### Hue rotation
 
 - Get
     ```javascript
-    var hueRotate = customPipeline.hueRotate;
+    var hueRotate = pipelineInstance.hueRotate;
     ```
 - Set
     ```javascript
-    customPipeline.hueRotate = hueRotate;
-    // customPipeline.hueRotate += value;
+    pipelineInstance.hueRotate = hueRotate;
+    // pipelineInstance.hueRotate += value;
     ```
     or
     ```javascript
-    customPipeline.setHueRotate(value);
+    pipelineInstance.setHueRotate(value);
     ```
     - `0` : Rotate 0 degrees, original color
     - `0.5` : Rotate 180 degrees
@@ -121,16 +131,16 @@ Adjust color in HSL domain, post processing filter.
 
 - Get
     ```javascript
-    var satAdjust = customPipeline.satAdjust;
+    var satAdjust = pipelineInstance.satAdjust;
     ```
 - Set
     ```javascript
-    customPipeline.satAdjust = satAdjust;
-    // customPipeline.satAdjust += value;
+    pipelineInstance.satAdjust = satAdjust;
+    // pipelineInstance.satAdjust += value;
     ```
     or
     ```javascript
-    customPipeline.setSatAdjust(value);
+    pipelineInstance.setSatAdjust(value);
     ```
     - `0` : Gray
     - `1` : Original color
@@ -140,16 +150,16 @@ Adjust color in HSL domain, post processing filter.
 
 - Get
     ```javascript
-    var lumAdjust = customPipeline.lumAdjust;
+    var lumAdjust = pipelineInstance.lumAdjust;
     ```
 - Set
     ```javascript
-    customPipeline.lumAdjust = lumAdjust;
-    // customPipeline.lumAdjust += value;
+    pipelineInstance.lumAdjust = lumAdjust;
+    // pipelineInstance.lumAdjust += value;
     ```
     or
     ```javascript
-    customPipeline.setLumAdjust(value);
+    pipelineInstance.setLumAdjust(value);
     ```
     - `0` : Dark
     - `0.5` : Original color

@@ -2511,6 +2511,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../render-pipeline/" title="Render pipeline" class="md-nav__link">
+      Render pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -2587,17 +2599,29 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-4-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-glowfilter/" title="Glow" class="md-nav__link">
+      Glow
+    </a>
+  </li>
+
         
           
           
@@ -2647,13 +2671,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
     
-    <label class="md-nav__link" for="nav-7-4-3">
+    <label class="md-nav__link" for="nav-7-4-4">
       Outline
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-3">
+      <label class="md-nav__title" for="nav-7-4-4">
         Outline
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2683,13 +2707,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-5" type="checkbox" id="nav-7-4-5">
     
-    <label class="md-nav__link" for="nav-7-4-4">
+    <label class="md-nav__link" for="nav-7-4-5">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-4">
+      <label class="md-nav__title" for="nav-7-4-5">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4855,72 +4879,18 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Create filter
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
-    <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
-    <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
-</ul>
-</li>
+<li><a href="../render-pipeline/#add-pipeline-instance">Add render pipeline instance</a></li>
 <li>Add filter
-    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Set/change properties of filter<ul>
-<li>Property with 1 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform1fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 2 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform2fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 3 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform3fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 4 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform4fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>pipelineName</code> :<ul>
+<li>A string : Name of this render pipeline</li>
+<li>A pipeline instance</li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a href="../render-pipeline/#set-properties-of-filter">Set properties of piepline instance</a></li>
 </ol>
 <h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4958,7 +4928,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../camera-controllor/" title="Controllor" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../render-pipeline/" title="Render pipeline" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4967,19 +4937,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Controllor
+                Render pipeline
               </span>
             </div>
           </a>
         
         
-          <a href="../shader-grayscale/" title="Gray scale" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-glowfilter/" title="Glow" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Gray scale
+                Glow
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

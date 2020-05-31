@@ -23,7 +23,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rextoonifypipelineplugin').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(scene, key, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexToonifyPipeline').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(scene, key, config);
     ```
 
 #### Import class
@@ -67,14 +67,14 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = new ToonifyPipeline(scene, key, config);
+    var pipelineInstance = new ToonifyPipeline(scene, key, config);
     ```
 
 ### Apply filter
 
 1. Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexToonifyPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(scene, key, {
         // edgeThreshold: 0.2,
         // hueLevels: 0,
         // sLevels: 0,
@@ -87,25 +87,35 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     - `sLevels` : Amount of saturation levels. Set `0` to disable this feature.
     - `vLevels` : Amount of value levels. Set `0` to disable this feature.
     - `edgeColor` : Color of edge, could be a number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
-2. Add pipeline to camera
+1. Add to render pipeline
     ```javascript
-    // var camera = scene.cameras.main;
-    camera.setRenderToTexture(customPipeline);
+    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
     ```
+1. Apply filter
+    - To camera
+        ```javascript
+        // var camera = scene.cameras.main;
+        camera.setRenderToTexture(pipelineName);
+        ```
+    - To game object
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
 
 ### Edge threshold
 
 - Get
     ```javascript
-    var edgeThreshold = customPipeline.edgeThreshold;
+    var edgeThreshold = pipelineInstance.edgeThreshold;
     ```
 - Set
     ```javascript
-    customPipeline.edgeThreshold = edgeThreshold;
+    pipelineInstance.edgeThreshold = edgeThreshold;
     ```
     or
     ```javascript
-    customPipeline.setEdgeThreshold(value);
+    pipelineInstance.setEdgeThreshold(value);
     ```
     - Set `1.1` (or any number larger then `1`) to disable this feature.
 
@@ -113,15 +123,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var hueLevels = customPipeline.hueLevels;
+    var hueLevels = pipelineInstance.hueLevels;
     ```
 - Set
     ```javascript
-    customPipeline.hueLevels = hueLevels;
+    pipelineInstance.hueLevels = hueLevels;
     ```
     or
     ```javascript
-    customPipeline.setHueLevels(value);
+    pipelineInstance.setHueLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -129,15 +139,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var satLevels = customPipeline.satLevels;
+    var satLevels = pipelineInstance.satLevels;
     ```
 - Set
     ```javascript
-    customPipeline.satLevels = satLevels;
+    pipelineInstance.satLevels = satLevels;
     ```
     or
     ```javascript
-    customPipeline.setSatLevels(value);
+    pipelineInstance.setSatLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -145,15 +155,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var valLevels = customPipeline.valLevels;
+    var valLevels = pipelineInstance.valLevels;
     ```
 - Set
     ```javascript
-    customPipeline.valLevels = valLevels;
+    pipelineInstance.valLevels = valLevels;
     ```
     or
     ```javascript
-    customPipeline.setValLevels(value);
+    pipelineInstance.setValLevels(value);
     ```
     - Set `0` to disable this feature.
 
@@ -161,7 +171,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get
     ```javascript
-    var color = customPipeline.edgeColor;
+    var color = pipelineInstance.edgeColor;
     ```
     - `color` : [Color](color.md) object.
         - Red: `color.red`, 0~255.
@@ -169,6 +179,6 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
         - Blue: `color.blue`, 0~255.
 - Set
     ```javascript
-    customPipeline.edgeColor = value;
+    pipelineInstance.edgeColor = value;
     ```
     - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`

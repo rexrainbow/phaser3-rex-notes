@@ -241,39 +241,13 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 
 ### Render pipeline
 
-- Defaule name of render pipeline : 'TextureTintPipeline'
+- Defaule name of render pipeline : `'TextureTintPipeline'`
+- [Add render pipeline instance](render-pipeline.md#add-pipeline-instance)
 - Set custom render pipeline
-    1. Create filter
-        ```javascript
-        var config = {
-            game: scene.game,
-            renderer: scene.game.renderer,
-            fragShader: '...'  // GLSL shader
-        };
-        var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
-        var filter = scene.game.renderer.addPipeline(pipelineName, customPipeline);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
-    1. Set filter
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
-    1. Set/change properties of filter
-        ```javascript
-        filter.setFloat1(name, value0);
-        filter.setFloat1v(name, value0);
-        filter.setInt1(name, value0);
-        filter.setFloat2(name, value0, value1);
-        filter.setFloat2v(name, value0, value1);
-        filter.setInt2(name, value0, value1);
-        filter.setFloat3(name, value0, value1, value2);
-        filter.setFloat3v(name, value0, value1, value2);
-        filter.setInt3(name, value0, value1, value2);
-        filter.setFloat4(name, value0, value1, value2, value3);
-        filter.setFloat4v(name, value0, value1, value2, value3);
-        filter.setInt4(name, value0, value1, value2, value3);
-        ```
+    ```javascript
+    gameObject.setPipeline(pipelineName);
+    ```
+    - `pipelineName` : Name of this render pipeline, a string.
 - Reset custom render pipeline to defaule render pipeline
     ```javascript
     gameObject.resetPipeline();
@@ -282,14 +256,16 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     ```javascript
     var pipelineName = gameObject.getPipelineName();
     ```
+- [Set properties of piepline instance](render-pipeline.md#set-properties-of-filter)
 
 Some shader effects
 
+- [Glow-filter](shader-glowfilter): Glow post processing filter.
 - [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 - [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 - [Inverse](shader-inverse.md): Inverse color post processing filter.
 - [Pixelation](shader-pixelation.md): Pixelation post processing filter.
-- [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post 
+- [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 
 ### Size
 

@@ -19,7 +19,7 @@ Inverse color post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexinversepipelineplugin').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexinversepipelineplugin').add(scene, key, config);
     ```
 
 #### Import plugin
@@ -48,7 +48,7 @@ Inverse color post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexInversePipeline').add(scene, key, config);
+    var pipelineInstance = scene.plugins.get('rexInversePipeline').add(scene, key, config);
     ```
 
 #### Import class
@@ -63,37 +63,47 @@ Inverse color post processing filter.
     ```
 - Create pipeline instance
     ```javascript
-    var customPipeline = new InversePipeline(scene, key, config);
+    var pipelineInstance = new InversePipeline(scene, key, config);
     ```
 
 ### Apply filter
 
 1. Create pipeline instance
     ```javascript
-    var customPipeline = scene.plugins.get('rexInversePipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexInversePipeline').add(scene, key, {
         // intensity: 0
     });
     ```
     - `intensity` : 0(original color) ~ 1(gray scale)
-2. Add pipeline to camera
+1. Add to render pipeline
     ```javascript
-    // var camera = scene.cameras.main;
-    camera.setRenderToTexture(customPipeline);
+    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
     ```
+1. Apply filter
+    - To camera
+        ```javascript
+        // var camera = scene.cameras.main;
+        camera.setRenderToTexture(pipelineName);
+        ```
+    - To game object
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
 
 ### Intensity
 
 - Get
     ```javascript
-    var intensity = customPipeline.intensity;
+    var intensity = pipelineInstance.intensity;
     ```
 - Set
     ```javascript
-    customPipeline.intensity = intensity;
-    // customPipeline.intensity += value;
+    pipelineInstance.intensity = intensity;
+    // pipelineInstance.intensity += value;
     ```
     or
     ```javascript
-    customPipeline.setIntensity(radius);
+    pipelineInstance.setIntensity(radius);
     ```
     - `intensity` : 0(original color) ~ 1(inverse color)

@@ -2705,6 +2705,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../render-pipeline/" title="Render pipeline" class="md-nav__link">
+      Render pipeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../camera-shader-effect/" title="Shader effect" class="md-nav__link">
       Shader effect
     </a>
@@ -2718,17 +2730,29 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-4-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-glowfilter/" title="Glow" class="md-nav__link">
+      Glow
+    </a>
+  </li>
+
         
           
           
@@ -2778,13 +2802,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
     
-    <label class="md-nav__link" for="nav-7-4-3">
+    <label class="md-nav__link" for="nav-7-4-4">
       Outline
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-3">
+      <label class="md-nav__title" for="nav-7-4-4">
         Outline
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2814,13 +2838,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-5" type="checkbox" id="nav-7-4-5">
     
-    <label class="md-nav__link" for="nav-7-4-4">
+    <label class="md-nav__link" for="nav-7-4-5">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-4-4">
+      <label class="md-nav__title" for="nav-7-4-5">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -5350,41 +5374,13 @@
 </ul>
 <h3 id="render-pipeline">Render pipeline<a class="headerlink" href="#render-pipeline" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Defaule name of render pipeline : 'TextureTintPipeline'</li>
-<li>Set custom render pipeline<ol>
-<li>Create filter
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
-    <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
-    <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
-</ul>
-</li>
-<li>Set filter
+<li>Defaule name of render pipeline : <code>'TextureTintPipeline'</code></li>
+<li><a href="../render-pipeline/#add-pipeline-instance">Add render pipeline instance</a></li>
+<li>Set custom render pipeline
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
 </ul>
-</li>
-<li>Set/change properties of filter
-    <div class="codehilite"><pre><span></span><code><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
-</ol>
 </li>
 <li>Reset custom render pipeline to defaule render pipeline
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">resetPipeline</span><span class="p">();</span>
@@ -5392,14 +5388,16 @@
 <li>Get current name of render pipeline:
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineName</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getPipelineName</span><span class="p">();</span>
 </code></pre></div></li>
+<li><a href="../render-pipeline/#set-properties-of-filter">Set properties of piepline instance</a></li>
 </ul>
 <p>Some shader effects</p>
 <ul>
+<li><a href="shader-glowfilter">Glow-filter</a>: Glow post processing filter.</li>
 <li><a href="../shader-grayscale/">Gray-scale</a>: Gray scale post processing filter.</li>
 <li><a href="../shader-hsladjust/">Hsl-adjust</a>: Adjust color in HSL domain, post processing filter.</li>
 <li><a href="../shader-inverse/">Inverse</a>: Inverse color post processing filter.</li>
 <li><a href="../shader-pixelation/">Pixelation</a>: Pixelation post processing filter.</li>
-<li><a href="../shader-toonify/">Toonify</a>: Draw outlines and quantize color in HSV domain, post </li>
+<li><a href="../shader-toonify/">Toonify</a>: Draw outlines and quantize color in HSV domain, post processing filter.</li>
 </ul>
 <h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
 <ul>
