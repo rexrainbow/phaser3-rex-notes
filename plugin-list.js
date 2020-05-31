@@ -113,6 +113,7 @@ module.exports = {
     'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
     'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
     'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
+    'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
 
     // board

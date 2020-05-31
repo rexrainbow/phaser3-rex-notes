@@ -25,7 +25,7 @@ uniform vec3 edgeColor; // (0, 0, 0);
 + RGBToHSV + IsEdge + HSVToRGB +
 `
 void main()
-{  
+{
   vec4 front = texture2D(uMainSampler, outTexCoord);  
   vec3 colorLevel;
   if ((hStep > 0.0) || (sStep > 0.0) || (vStep > 0.0)) {
