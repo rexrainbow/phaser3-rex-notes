@@ -4960,7 +4960,7 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="add-pipeline-instance">Add pipeline instance<a class="headerlink" href="#add-pipeline-instance" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
     <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
     <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
@@ -4968,7 +4968,10 @@
 <span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">pipelineInstance</span><span class="p">);</span>
 </code></pre></div>
-- <code>pipelineName</code> : Name of this render pipeline, a string.</p>
+
+<ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
 <h4 id="camera-effect">Camera effect<a class="headerlink" href="#camera-effect" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add filter
@@ -5056,9 +5059,12 @@
 </code></pre></div>
 
 <h3 id="get-pipeline-instance">Get pipeline instance<a class="headerlink" href="#get-pipeline-instance" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">getPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">getPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
 </code></pre></div>
-- <code>pipelineInstance</code> : Pipeline instance, or <code>null</code> if not found.</p>
+
+<ul>
+<li><code>pipelineInstance</code> : Pipeline instance, or <code>null</code> if not found.</li>
+</ul>
 <h3 id="has-pipeline-instance">Has pipeline instance<a class="headerlink" href="#has-pipeline-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasPipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">hasPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
 </code></pre></div>

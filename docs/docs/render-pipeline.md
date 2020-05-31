@@ -17,6 +17,7 @@ var config = {
 var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
 scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
 ```
+
 - `pipelineName` : Name of this render pipeline, a string.
 
 #### Camera effect
@@ -115,6 +116,7 @@ scene.game.renderer.removePipeline(pipelineName);
 ```javascript
 var pipelineInstance = scene.game.renderer.getPipeline(pipelineName);
 ```
+
 - `pipelineInstance` : Pipeline instance, or `null` if not found.
 
 ### Has pipeline instance
