@@ -188,7 +188,13 @@ Reference: [load image](loader.md#image)
             source: geom
         }
         ```
-    - Immortal particle : Set `lifespan` to `Infinity`.
+    - `lifespan` : The lifespan of emitted particles, in ms.
+        - `Infinity` : Immortal particle.
+    - `name` : The name of this Particle Emitter.
+        - Get emitter by name
+            ```javascript
+            var emitter = particles.emitters.getByName(name);
+            ```
 
 ### Emit zone
 
@@ -252,6 +258,11 @@ emitter.setEmitZone({
 - `stepRate` : The distance between each particle. When set, `quantity` is implied and should be set to 0.
 - `yoyo` : Whether particles are placed from start to end and then end to start. Default is `false`.
 - `seamless` : Whether one endpoint will be removed if it's identical to the other. Default is `true`.
+
+!!! note "quantity or stepRate"
+    - Any geometry like [circle](geom-circle.md), [ellipse](geom-ellipse.md), [kine](geom-line.md), [polygon](geom-polygon.md), [rectangle](geom-rectangle.md), [triangle](geom-triangle.md) source has *quantity*, or *stepRate*
+    - [Curve](path.md) source has *quantity*, or *stepRate*
+    - [Path](path.md) source only has *quantity*
 
 #### Curve surce
 

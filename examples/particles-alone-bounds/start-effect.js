@@ -42,11 +42,11 @@ var CreateGO = function (scene, color, x, y, angle) {
                         spread: 20
                     }
                 )
-                .on('complete', function () {
+                .once('complete', function () {
                     console.log('complete')
                 })
 
-            gameObject.scene.tweens.add({
+            scene.tweens.add({
                 targets: gameObject,
                 duration: 1000,
                 angle: '+=30',

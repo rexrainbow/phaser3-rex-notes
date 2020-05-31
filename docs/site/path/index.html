@@ -5358,12 +5358,32 @@ or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">();</span>
 <span class="c1">// var out = curve.getRandomPoint(out);  // modify out</span>
 </code></pre></div></li>
-<li>Get n points
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<li>Get n points<ul>
+<li>Path
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">divisions</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>divisions</code> : The number of divisions per resolution <strong>per curve</strong>.</li>
+</ul>
+</li>
+<li>Curve
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">divisions</span><span class="p">);</span>
+<span class="c1">// var points = curve.getPoints(divisions, undefined, out);</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
-</code></pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">);</span>
+<span class="c1">// var points = curve.getPoints(undefined, stepRate, out);</span>
+</code></pre></div><ul>
+<li><code>divisions</code> : The number of divisions in this curve.<ol>
+<li><code>divisions</code>, if <code>divisions &gt; 0</code>, else</li>
+<li><code>this.getLength / stepRate</code>, if <code>stepRate &gt; 0</code>, else</li>
+<li><code>defaultDivisions</code></li>
+</ol>
+</li>
+<li><code>points</code> : Return <code>1 + divisions</code> points.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Get n points equally spaced out along the curve
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getSpacedPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </code></pre></div>

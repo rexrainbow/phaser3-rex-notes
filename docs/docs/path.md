@@ -265,13 +265,26 @@ path.draw(graphics);
     // var out = curve.getRandomPoint(out);  // modify out
     ```    
 - Get n points
-    ```javascript
-    var points = path.getPoints(n);
-    ```
-    or
-    ```javascript
-    var points = curve.getPoints(n);
-    ```    
+    - Path
+        ```javascript
+        var points = path.getPoints(divisions);
+        ```
+        - `divisions` : The number of divisions per resolution **per curve**.
+    - Curve
+        ```javascript
+        var points = curve.getPoints(divisions);
+        // var points = curve.getPoints(divisions, undefined, out);
+        ```
+        or
+        ```javascript
+        var points = curve.getPoints(undefined, stepRate);
+        // var points = curve.getPoints(undefined, stepRate, out);
+        ```
+        - `divisions` : The number of divisions in this curve.
+            1. `divisions`, if `divisions > 0`, else
+            1. `this.getLength / stepRate`, if `stepRate > 0`, else
+            1. `defaultDivisions`
+        - `points` : Return `1 + divisions` points.
 - Get n points equally spaced out along the curve
     ```javascript
     var points = path.getSpacedPoints(n);

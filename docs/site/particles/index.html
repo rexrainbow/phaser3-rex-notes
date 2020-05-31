@@ -5450,7 +5450,16 @@
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li>Immortal particle : Set <code>lifespan</code> to <code>Infinity</code>.</li>
+<li><code>lifespan</code> : The lifespan of emitted particles, in ms.<ul>
+<li><code>Infinity</code> : Immortal particle.</li>
+</ul>
+</li>
+<li><code>name</code> : The name of this Particle Emitter.<ul>
+<li>Get emitter by name
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -5514,6 +5523,14 @@
 <li><code>yoyo</code> : Whether particles are placed from start to end and then end to start. Default is <code>false</code>.</li>
 <li><code>seamless</code> : Whether one endpoint will be removed if it's identical to the other. Default is <code>true</code>.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">quantity or stepRate</p>
+<ul>
+<li>Any geometry like <a href="../geom-circle/">circle</a>, <a href="../geom-ellipse/">ellipse</a>, <a href="../geom-line/">kine</a>, <a href="../geom-polygon/">polygon</a>, <a href="../geom-rectangle/">rectangle</a>, <a href="../geom-triangle/">triangle</a> source has <em>quantity</em>, or <em>stepRate</em></li>
+<li><a href="../path/">Curve</a> source has <em>quantity</em>, or <em>stepRate</em></li>
+<li><a href="../path/">Path</a> source only has <em>quantity</em></li>
+</ul>
+</div>
 <h4 id="curve-surce">Curve surce<a class="headerlink" href="#curve-surce" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get curve source
