@@ -9,7 +9,7 @@ Render pipelines for camera of game objects (with texture).
 ### Add pipeline instance
 
 ```javascript
-    var config = {
+var config = {
     game: scene.game,
     renderer: scene.game.renderer,
     fragShader: '...'  // GLSL shader
