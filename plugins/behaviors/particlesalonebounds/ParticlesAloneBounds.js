@@ -123,9 +123,8 @@ var BoundsToPoints = function (gameObject, config) {
     var w = gameObject.width,
         h = gameObject.height;
     globRect.setTo((-w / 2), (-h / 2), w, h);
-    var quantity = GetValue(config, 'quantity', 0);
-    var stepRate = (quantity > 0) ? 0 : GetValue(config, 'stepRate', 10);
-    var points = globRect.getPoints(quantity, stepRate);
+    var stepRate = GetValue(config, 'stepRate', 10);
+    var points = globRect.getPoints(0, stepRate);
     return points;
 }
 
