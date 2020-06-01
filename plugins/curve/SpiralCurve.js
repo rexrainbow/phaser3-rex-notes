@@ -8,7 +8,7 @@ const Linear = Phaser.Math.Linear;
 
 class SpiralCurve extends Base {
     constructor(config) {
-        var startX, endX, easeX;
+        var startX, endX, easeX, easeXFunction;
         if (config.hasOwnProperty('x')) {
             startX = config.x;
             endX = startX;
@@ -16,9 +16,10 @@ class SpiralCurve extends Base {
             startX = GetValue(config, 'startX', 0);
             endX = GetValue(config, 'endX', startX);
         }
-        easeX = GetEaseFunction(GetValue(config, 'easeX', 'Linear'));
+        easeX = GetValue(config, 'easeX', 'Linear');
+        easeXFunction = GetEaseFunction(easeX);
 
-        var startY, endY, easeY;
+        var startY, endY, easeY, easeYFunction;
         if (config.hasOwnProperty('y')) {
             startY = config.y;
             endY = startY;
@@ -26,9 +27,10 @@ class SpiralCurve extends Base {
             startY = GetValue(config, 'startY', 0);
             endY = GetValue(config, 'endY', startY);
         }
-        easeY = GetEaseFunction(GetValue(config, 'easeY', 'Linear'));
+        easeY = GetValue(config, 'easeY', 'Linear');
+        easeYFunction = GetEaseFunction(easeY);
 
-        var startXRadius, endXRadius, easeXRadius;
+        var startXRadius, endXRadius, easeXRadius, easeXRadiusFunction;
         if (config.hasOwnProperty('xRadius')) {
             startXRadius = config.xRadius;
             endXRadius = startXRadius;
@@ -36,9 +38,10 @@ class SpiralCurve extends Base {
             startXRadius = GetValue(config, 'startXRadius', 0);
             endXRadius = GetValue(config, 'endXRadius', startXRadius);
         }
-        easeXRadius = GetEaseFunction(GetValue(config, 'easeXRadius', 'Linear'));
+        easeXRadius = GetValue(config, 'easeXRadius', 'Linear');
+        easeXRadiusFunction = GetEaseFunction(easeXRadius);
 
-        var startYRadius, endYRadius, easeYRadius;
+        var startYRadius, endYRadius, easeYRadius, easeYRadiusFunction;
         if (config.hasOwnProperty('yRadius')) {
             startYRadius = config.yRadius;
             endYRadius = startYRadius;
@@ -46,11 +49,13 @@ class SpiralCurve extends Base {
             startYRadius = GetValue(config, 'startYRadius', startXRadius);
             endYRadius = GetValue(config, 'endYRadius', endXRadius);
         }
-        easeYRadius = GetEaseFunction(GetValue(config, 'easeXRadius', easeXRadius));
+        easeYRadius = GetValue(config, 'easeXRadius', easeXRadius);
+        easeYRadiusFunction = GetEaseFunction(easeYRadius);
 
         var startAngle = GetValue(config, 'startAngle', 0);
         var endAngle = GetValue(config, 'endAngle', 360);
-        var easeAngle = GetEaseFunction(GetValue(config, 'easeAngle', 'Linear'));
+        var easeAngle = GetValue(config, 'easeAngle', 'Linear');
+        var easeAngleFunction = GetEaseFunction(easeAngle);
 
         var rotation = GetValue(config, 'rotation', 0);
 
@@ -60,18 +65,23 @@ class SpiralCurve extends Base {
         // The center point of the spiral. Used for calculating rotation.
         this.p0 = new Vector2(startX, startY);
         this._easeX = easeX;
+        this._easeXFunction = easeXFunction;
         this.p1 = new Vector2(endX, endY);
         this._easeY = easeY;
+        this._easeYFunction = easeYFunction;
 
         this._startXRadius = startXRadius;
         this._endXRadius = endXRadius;
         this._easeXRadius = easeXRadius;
+        this._easeXRadiusFunction = easeXRadiusFunction;
         this._startYRadius = startYRadius;
         this._endYRadius = endYRadius;
         this._easeYRadius = easeYRadius;
+        this._easeYRadiusFunction = easeYRadiusFunction;
         this._startAngle = DegToRad(startAngle);
         this._endAngle = DegToRad(endAngle);
         this._easeAngle = easeAngle;
+        this._easeAngleFunction = easeAngleFunction;
         this._rotation = DegToRad(rotation);
     }
 
@@ -89,11 +99,11 @@ class SpiralCurve extends Base {
             out = new Vector2();
         }
 
-        var ox = Linear(this.p0.x, this.p1.x, this._easeX(t));
-        var oy = Linear(this.p0.y, this.p1.y, this._easeY(t));
-        var angle = Linear(this._startAngle, this._endAngle, this._easeAngle(t));
-        var xRadius = Linear(this._startXRadius, this._endXRadius, this._easeXRadius(t));
-        var yRadius = Linear(this._startYRadius, this._endYRadius, this._easeYRadius(t));
+        var ox = Linear(this.p0.x, this.p1.x, this._easeXFunction(t));
+        var oy = Linear(this.p0.y, this.p1.y, this._easeYFunction(t));
+        var angle = Linear(this._startAngle, this._endAngle, this._easeAngleFunction(t));
+        var xRadius = Linear(this._startXRadius, this._endXRadius, this._easeXRadiusFunction(t));
+        var yRadius = Linear(this._startYRadius, this._endYRadius, this._easeYRadiusFunction(t));
         var x = ox + xRadius * Math.cos(angle);
         var y = oy + yRadius * Math.sin(angle);
 
