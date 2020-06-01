@@ -1,6 +1,6 @@
-import ParticlesAloneBounds from './particlesalonebounds.js'
+import ParticlesAlongBounds from './particlesalongbounds.js'
 
-class ParticlesAloneBoundsPlugin extends Phaser.Plugins.BasePlugin {
+class ParticlesAlongBoundsPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
     }
@@ -11,8 +11,8 @@ class ParticlesAloneBoundsPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     startEffect(gamObject, config, particles) {
-        return ParticlesAloneBounds(gamObject, config, particles);
+        return ParticlesAlongBounds(gamObject, config, particles);
     }
 }
 
-export default ParticlesAloneBoundsPlugin;
+export default ParticlesAlongBoundsPlugin;

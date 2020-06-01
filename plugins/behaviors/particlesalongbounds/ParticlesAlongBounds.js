@@ -1,7 +1,7 @@
 import CreateParticles from './CreateParticles.js';
 import CreateEmitter from './CreateEmitter.js';
 
-var ParticlesAloneBounds = function (gameObject, config, particles) {
+var ParticlesAlongBounds = function (gameObject, config, particles) {
     if (config === undefined) {
         config = {};
     }
@@ -19,4 +19,4 @@ var ParticlesAloneBounds = function (gameObject, config, particles) {
     return particles;
 }
 
-export default ParticlesAloneBounds;
+export default ParticlesAlongBounds;

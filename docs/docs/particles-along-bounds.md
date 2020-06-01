@@ -1,6 +1,6 @@
 ## Introduction
 
-Emit [particles](particles.md) alone bounds of game object.
+Emit [particles](particles.md) along bounds of game object.
 
 - Author: Rex
 - Behavior of game object
@@ -11,7 +11,7 @@ Emit [particles](particles.md) alone bounds of game object.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/particles-alone-bounds)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/particles-along-bounds)
 
 ### Install plugin
 
@@ -19,11 +19,11 @@ Emit [particles](particles.md) alone bounds of game object.
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexparticlesaloneboundsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexparticlesaloneboundsplugin.min.js', true);
+    scene.load.plugin('rexparticlesalongboundsplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexparticlesalongboundsplugin.min.js', true);
     ```
-- Start emit particles alone bounds of game object
+- Start emit particles along bounds of game object
     ```javascript
-    var particles = scene.plugins.get('rexparticlesaloneboundsplugin').startEffect(gameObject, config);
+    var particles = scene.plugins.get('rexparticlesalongboundsplugin').startEffect(gameObject, config);
     ```
 
 #### Import plugin
@@ -34,13 +34,13 @@ Emit [particles](particles.md) alone bounds of game object.
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import DragPlugin from 'phaser3-rex-plugins/plugins/particlesalonebounds-plugin.js';
+    import DragPlugin from 'phaser3-rex-plugins/plugins/particlesalongbounds-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexParticlesAloneBounds',
-                plugin: ParticlesAloneBoundsPlugin,
+                key: 'rexParticlesAlongBounds',
+                plugin: ParticlesAlongBoundsPlugin,
                 start: true
             },
             // ...
@@ -50,9 +50,9 @@ Emit [particles](particles.md) alone bounds of game object.
     };
     var game = new Phaser.Game(config);
     ```
-- Start emit particles alone bounds of game object
+- Start emit particles along bounds of game object
     ```javascript
-    var particles = scene.plugins.get('rexParticlesAloneBounds').startEffect(gameObject, config);
+    var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, config);
     ```
 
 #### Import class
@@ -63,17 +63,17 @@ Emit [particles](particles.md) alone bounds of game object.
     ```
 - Import class
     ```javascript
-    import ParticlesAloneBounds from 'phaser3-rex-plugins/plugins/particlesalonebounds.js';
+    import ParticlesAlongBounds from 'phaser3-rex-plugins/plugins/particlesalongbounds.js';
     ```
-- Start emit particles alone bounds of game object
+- Start emit particles along bounds of game object
     ```javascript
-    var particles = ParticlesAloneBounds(gameObject, config);
+    var particles = ParticlesAlongBounds(gameObject, config);
     ```
 
 ### Create instance
 
 ```javascript
-var particles = scene.plugins.get('rexParticlesAloneBounds').startEffect(gameObject, {
+var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, {
     textureKey: key,
     // textureFrames: undefined,
     // blendMode: 'ADD',
@@ -107,7 +107,7 @@ var particles = scene.plugins.get('rexParticlesAloneBounds').startEffect(gameObj
         ```
 - `blendMode` : Blend mode (Phaser.BlendModes) of particles. Default value is `ADD`.
 - `lifespan` : Lifespan of particle.
-- `stepRate` : Step length between each particle's initial position alone bounds of game object.
+- `stepRate` : Step length between each particle's initial position along bounds of game object.
 - `spread` : Moving speed of particle.
 - `scale` : Scale changing of particle.
 - `alpha` : Alpha changing of particle.
@@ -118,7 +118,7 @@ var particles = scene.plugins.get('rexParticlesAloneBounds').startEffect(gameObj
     - `false` : Destroy particles when fire completed. Default value.
     - `true` : Don't destroy particles when fire completed. To reuse this particles, start firing via
         ```javascript
-        scene.plugins.get('rexParticlesAloneBounds').startEffect(gameObject, config, particles);
+        scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, config, particles);
         ```
 - `gravityX`, `gravityY` : Gravity vector of world axis. This vector will rotate back if game object is rotated.
 - `duration` : Total duration from firing of 1st particle to destroy last particle.

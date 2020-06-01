@@ -1,4 +1,4 @@
-import ParticlesAloneBoundsPlugin from '../../plugins/particlesalonebounds-plugin.js';
+import ParticlesAlongBoundsPlugin from '../../plugins/particlesalongbounds-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -31,7 +31,7 @@ var CreateGO = function (scene, color, x, y, angle) {
         .setDepth(depthIdx++)
         .setInteractive()
         .on('pointerup', function () {
-            scene.plugins.get('rexParticlesAloneBounds')
+            scene.plugins.get('rexParticlesAlongBounds')
                 .startEffect(
                     gameObject,
                     {
@@ -72,8 +72,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexParticlesAloneBounds',
-            plugin: ParticlesAloneBoundsPlugin,
+            key: 'rexParticlesAlongBounds',
+            plugin: ParticlesAlongBoundsPlugin,
             start: true
         }]
     }
