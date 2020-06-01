@@ -102,6 +102,7 @@ nav:
         - Path follower: pathfollower.md
         - Anchor: anchor.md
         - Interception: interception.md
+        - Particles alone bounds: particles-alone-bounds.md
         - Arcade:
             - Engine:
                 - World: arcade-world.md

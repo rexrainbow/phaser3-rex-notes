@@ -479,7 +479,7 @@ emitter.fromJSON(config);
     or
     ```javascript
     emitter.setGravityX(value);
-    setGravityY(value);
+    emitter.setGravityY(value);
     ```
 - Bounds
     ```javascript

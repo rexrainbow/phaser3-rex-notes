@@ -41,7 +41,8 @@ var CreateGO = function (scene, color, x, y, angle) {
                         // duration: 3000,
                         // lifespan: 1000,
                         // stepRate: 10,
-                        spread: 20
+                        spread: 20,
+                        //gravityY: -50
                     }
                 )
                 .once('complete', function () {
