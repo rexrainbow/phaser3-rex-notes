@@ -239,7 +239,19 @@ var curves = path.curves;
 
 ```javascript
 path.draw(graphics);
+// path.draw(graphics, pointsTotal);
 ```
+
+- `pointsTotal` : The number of points to draw for each Curve.
+
+or
+
+```javascript
+curve.draw(graphics);
+// curve.draw(graphics, pointsTotal);
+```
+
+- `pointsTotal` : The resolution of the curve.
 
 ### Point
 

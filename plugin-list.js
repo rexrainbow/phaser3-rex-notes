@@ -102,6 +102,8 @@ module.exports = {
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',
+    // curve
+    'spiralcurveplugin': './plugins/spiralcurve-plugin.js',
 
     // string
     'xorplugin': './plugins/xor-plugin.js',
