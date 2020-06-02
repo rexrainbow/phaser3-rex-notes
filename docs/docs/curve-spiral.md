@@ -5,6 +5,11 @@ Spiral curve.
 - Author: Rex
 - Curve object
 
+## Live demos
+
+- [Spiral curve](https://codepen.io/rexrainbow/pen/bGEbeLg)
+- [Particles along spiral curve](https://codepen.io/rexrainbow/pen/VweZGev)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/curve-spiral)
