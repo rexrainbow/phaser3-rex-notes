@@ -4,7 +4,7 @@ import EmitCellEvent from './EmitCellEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var TapCell = function (table, tableConfig) {
-    var tapConfig = GetValue(tableConfig, 'press', undefined);
+    var tapConfig = GetValue(tableConfig, 'tap', undefined);
     if (tapConfig === false) {
         return;
     }
