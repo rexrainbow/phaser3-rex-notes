@@ -31,26 +31,36 @@ class SpiralCurve extends Base {
         easeYFunction = GetEaseFunction(easeY);
 
         var startXRadius, endXRadius, easeXRadius, easeXRadiusFunction;
-        if (config.hasOwnProperty('xRadius')) {
-            startXRadius = config.xRadius;
-            endXRadius = startXRadius;
+        var startYRadius, endYRadius, easeYRadius, easeYRadiusFunction;
+
+        if (config.hasOwnProperty('startRadius')) {
+            startXRadius = config.startRadius;
+            startYRadius = startXRadius;
+            endXRadius = GetValue(config, 'endRadius', startXRadius);
+            endYRadius = endXRadius;
         } else {
-            startXRadius = GetValue(config, 'startXRadius', 0);
-            endXRadius = GetValue(config, 'endXRadius', startXRadius);
+            if (config.hasOwnProperty('xRadius')) {
+                startXRadius = config.xRadius;
+                endXRadius = startXRadius;
+            } else {
+                startXRadius = GetValue(config, 'startXRadius', 0);
+                endXRadius = GetValue(config, 'endXRadius', startXRadius);
+            }
+            if (config.hasOwnProperty('yRadius')) {
+                startYRadius = config.yRadius;
+                endYRadius = startYRadius;
+            } else {
+                startYRadius = GetValue(config, 'startYRadius', startXRadius);
+                endYRadius = GetValue(config, 'endYRadius', endXRadius);
+            }
         }
         easeXRadius = GetValue(config, 'easeXRadius', 'Linear');
         easeXRadiusFunction = GetEaseFunction(easeXRadius);
-
-        var startYRadius, endYRadius, easeYRadius, easeYRadiusFunction;
-        if (config.hasOwnProperty('yRadius')) {
-            startYRadius = config.yRadius;
-            endYRadius = startYRadius;
-        } else {
-            startYRadius = GetValue(config, 'startYRadius', startXRadius);
-            endYRadius = GetValue(config, 'endYRadius', endXRadius);
-        }
         easeYRadius = GetValue(config, 'easeXRadius', easeXRadius);
         easeYRadiusFunction = GetEaseFunction(easeYRadius);
+        
+
+
 
         var startAngle = GetValue(config, 'startAngle', 0);
         var endAngle = GetValue(config, 'endAngle', 360);
