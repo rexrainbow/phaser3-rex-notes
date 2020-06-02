@@ -1716,15 +1716,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../particles-along-bounds/" title="Particles along bounds" class="md-nav__link">
+      Particles along bounds
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14" type="checkbox" id="nav-4-10-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15" type="checkbox" id="nav-4-10-15">
     
-    <label class="md-nav__link" for="nav-4-10-14">
+    <label class="md-nav__link" for="nav-4-10-15">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-14">
+      <label class="md-nav__title" for="nav-4-10-15">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1737,13 +1749,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-14-1" type="checkbox" id="nav-4-10-14-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15-1" type="checkbox" id="nav-4-10-15-1">
     
-    <label class="md-nav__link" for="nav-4-10-14-1">
+    <label class="md-nav__link" for="nav-4-10-15-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-14-1">
+      <label class="md-nav__title" for="nav-4-10-15-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1850,13 +1862,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15" type="checkbox" id="nav-4-10-15">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-16" type="checkbox" id="nav-4-10-16">
     
-    <label class="md-nav__link" for="nav-4-10-15">
+    <label class="md-nav__link" for="nav-4-10-16">
       Matter.js
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-15">
+      <label class="md-nav__title" for="nav-4-10-16">
         Matter.js
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1869,13 +1881,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15-1" type="checkbox" id="nav-4-10-15-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-16-1" type="checkbox" id="nav-4-10-16-1">
     
-    <label class="md-nav__link" for="nav-4-10-15-1">
+    <label class="md-nav__link" for="nav-4-10-16-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-15-1">
+      <label class="md-nav__title" for="nav-4-10-16-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3729,6 +3741,27 @@
   
 
 
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-9" type="checkbox" id="nav-11-9" checked>
+    
+    <label class="md-nav__link" for="nav-11-9">
+      Curve
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-11-9">
+        Curve
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -3935,6 +3968,23 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../curve-spiral/" title="Spiral curve" class="md-nav__link">
+      Spiral curve
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -5361,8 +5411,20 @@ or
 
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
+<span class="c1">// path.draw(graphics, pointsTotal);</span>
 </code></pre></div>
 
+<ul>
+<li><code>pointsTotal</code> : The number of points to draw for each Curve.</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">curve</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
+<span class="c1">// curve.draw(graphics, pointsTotal);</span>
+</code></pre></div>
+
+<ul>
+<li><code>pointsTotal</code> : The resolution of the curve.</li>
+</ul>
 <h3 id="point">Point<a class="headerlink" href="#point" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get point
@@ -5408,13 +5470,15 @@ or
 </li>
 </ul>
 </li>
-<li>Get n points equally spaced out along the curve
+<li>Get (n+1) points equally spaced out along the curve
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getSpacedPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </code></pre></div>
     or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getSpacedPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="c1">// var points = curve.getSpacedPoints(undefined, stepRate);</span>
+<span class="c1">// var points = curve.getSpacedPoints(divisions, stepRate, out);</span>
 </code></pre></div></li>
-<li>Get points spaced out n distance pixels apart  <br />
+<li>Get points spaced out n distance pixels apart
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getDistancePoints</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
 </code></pre></div>
     The smaller the distance, the larger the array will be.<br />
@@ -5520,13 +5584,13 @@ or
           </a>
         
         
-          <a href="../format/" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../curve-spiral/" title="Spiral curve" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Format
+                Spiral curve
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

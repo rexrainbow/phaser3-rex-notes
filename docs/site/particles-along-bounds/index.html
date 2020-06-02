@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-toonify/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/particles-along-bounds/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Toonify - Notes of Phaser 3</title>
+        <title>Particles along bounds - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Toonify
+                Particles along bounds
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1492,10 +1494,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" checked>
     
     <label class="md-nav__link" for="nav-4-10">
       Behaviors
@@ -1715,11 +1719,113 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../particles-along-bounds/" title="Particles along bounds" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Particles along bounds
+      </label>
+    
+    <a href="./" title="Particles along bounds" class="md-nav__link md-nav__link--active">
       Particles along bounds
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2445,12 +2551,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -2502,12 +2606,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
     <label class="md-nav__link" for="nav-7-4">
       Shader effects
@@ -2619,12 +2721,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
     
     <label class="md-nav__link" for="nav-7-4-4">
       Outline
@@ -2640,141 +2740,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Toonify
-      </label>
-    
-    <a href="./" title="Toonify" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../shader-toonify/" title="Toonify" class="md-nav__link">
       Toonify
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-filter" class="md-nav__link">
-    Apply filter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#edge-threshold" class="md-nav__link">
-    Edge threshold
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hue-levels" class="md-nav__link">
-    Hue levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saturation-levels" class="md-nav__link">
-    Saturation levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#value-levels" class="md-nav__link">
-    Value levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#edge-color" class="md-nav__link">
-    Edge color
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4992,43 +4962,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-filter" class="md-nav__link">
-    Apply filter
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#edge-threshold" class="md-nav__link">
-    Edge threshold
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hue-levels" class="md-nav__link">
-    Hue levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saturation-levels" class="md-nav__link">
-    Saturation levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#value-levels" class="md-nav__link">
-    Value levels
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#edge-color" class="md-nav__link">
-    Edge color
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -5054,31 +4996,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-toonify.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/particles-along-bounds.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Toonify</h1>
+                  <h1>Particles along bounds</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Draw outlines and quantize color in HSV domain, post processing filter. <a href="https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/">Reference</a></p>
+<p>Emit <a href="../particles/">particles</a> along bounds of game object.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A camera filter</li>
+<li>Behavior of game object</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/ErWNXa">Toonify</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/gOaVRmP">Particles-aline-bounds</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-toonify">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/particles-along-bounds">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextoonifypipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifypipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexparticlesalongboundsplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexparticlesalongboundsplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextoonifypipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Start emit particles along bounds of game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexparticlesalongboundsplugin&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5087,13 +5029,13 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ToonifyPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/toonifypipeline-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">DragPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/particlesalongbounds-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ToonifyPipelinePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ParticlesAlongBoundsPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -5103,8 +5045,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Start emit particles along bounds of game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5113,126 +5055,94 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ToonifyPipeline</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/toonifypipeline.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ParticlesAlongBounds</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/particlesalongbounds.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ToonifyPipeline</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Start emit particles along bounds of game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">ParticlesAlongBounds</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// edgeThreshold: 0.2,</span>
-    <span class="c1">// hueLevels: 0,</span>
-    <span class="c1">// sLevels: 0,</span>
-    <span class="c1">// vLevels: 0,</span>
-    <span class="c1">// edgeColor: 0</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">textureKey</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
+    <span class="c1">// textureFrames: undefined,</span>
+    <span class="c1">// blendMode: &#39;ADD&#39;,</span>
+    <span class="c1">// lifespan: 1000,</span>
+    <span class="c1">// stepRate: 10,</span>
+    <span class="c1">// spread: 10,</span>
+
+    <span class="c1">// scale: undefined,</span>
+    <span class="c1">// alpha: undefined,</span>
+    <span class="c1">// tint: undefined,</span>
+
+    <span class="c1">// repeat: 0,</span>
+    <span class="c1">// reuse: false,</span>
+    <span class="c1">// gravityX: 0,</span>
+    <span class="c1">// gravityY: 0,</span>
+    <span class="c1">// duration: undefined</span>
 <span class="p">});</span>
-</code></pre></div><ul>
-<li><code>edgeThreshold</code> : Threshold of edge. Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
-<li><code>hueLevels</code> : Amount of hue levels. Set <code>0</code> to disable this feature.</li>
-<li><code>sLevels</code> : Amount of saturation levels. Set <code>0</code> to disable this feature.</li>
-<li><code>vLevels</code> : Amount of value levels. Set <code>0</code> to disable this feature.</li>
-<li><code>edgeColor</code> : Color of edge, could be a number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
-</ul>
-</li>
-<li>Add to render pipeline
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">pipelineInstance</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Apply filter<ul>
-<li>To camera
-    <div class="codehilite"><pre><span></span><code><span class="c1">// var camera = scene.cameras.main;</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
-</code></pre></div></li>
-<li>To game object
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="edge-threshold">Edge threshold<a class="headerlink" href="#edge-threshold" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeThreshold</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">edgeThreshold</span><span class="p">;</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setEdgeThreshold</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
-</ul>
-</li>
-</ul>
-<h3 id="hue-levels">Hue levels<a class="headerlink" href="#hue-levels" title="Permanent link">&para;</a></h3>
+
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">hueLevels</span><span class="p">;</span>
+<li><code>textureKey</code> : Texture key of particles.</li>
+<li><code>textureFrames</code> : : One or more texture frames, or a configuration object.<ul>
+<li>String or number value.</li>
+<li>Array of string or number value.</li>
+<li>Configuration object :
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
 </code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">hueLevels</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setHueLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Set <code>0</code> to disable this feature.</li>
 </ul>
 </li>
+<li><code>blendMode</code> : Blend mode (Phaser.BlendModes) of particles. Default value is <code>ADD</code>.</li>
+<li><code>lifespan</code> : Lifespan of particle.</li>
+<li><code>stepRate</code> : Step length between each particle's initial position along bounds of game object.</li>
+<li><code>spread</code> : Moving speed of particle.</li>
+<li><code>scale</code> : Scale changing of particle.</li>
+<li><code>alpha</code> : Alpha changing of particle.</li>
+<li><code>tint</code> : Tint changing of particle.</li>
+<li><code>repeat</code> : Fire particles around bounds repeatly.<ul>
+<li><code>0</code> : Fire particles around bounds one time, default value.</li>
 </ul>
-<h3 id="saturation-levels">Saturation levels<a class="headerlink" href="#saturation-levels" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">satLevels</span><span class="p">;</span>
+</li>
+<li><code>reuse</code> : Reuse this particles.<ul>
+<li><code>false</code> : Destroy particles when fire completed. Default value.</li>
+<li><code>true</code> : Don't destroy particles when fire completed. To reuse this particles, start firing via
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">particles</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">satLevels</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSatLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+<li><code>gravityX</code>, <code>gravityY</code> : Gravity vector of world axis. This vector will rotate back if game object is rotated.</li>
+<li><code>duration</code> : Total duration from firing of 1<sup>st</sup> particle to destroy last particle.<ul>
+<li><code>undefined</code> : Use default behavior of particles</li>
+<li>Less or equal to <code>lifespan</code> : Fires all particles at begining.</li>
 </ul>
 </li>
 </ul>
-<h3 id="value-levels">Value levels<a class="headerlink" href="#value-levels" title="Permanent link">&para;</a></h3>
+<p>Format of <code>spread</code>, <code>scale</code>, <code>alpha</code>, <code>tint</code> parameters :</p>
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">valLevels</span><span class="p">;</span>
+<li><code>{min, max}</code> : Pick a random value between min and max</li>
+<li><code>{start, end}</code> : Pick values incremented continuously across a range. (<code>ease</code>=<code>'Linear'</code>)<ul>
+<li><code>{start, end, ease}</code></li>
+</ul>
+</li>
+<li><code>{start, end, steps}</code> : Pick values incremented by steps across a range.</li>
+<li><code>{start, end, random}</code><ul>
+<li><code>random</code>: <code>true</code> or <code>false</code></li>
+</ul>
+</li>
+<li><code>{min, max, steps}</code> : Pick values between min to max, with steps.</li>
+<li><code>{onEmit: function(particle, key, t, value) {return value}}</code> : Get return value from a function invoking.</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On fire completed, i.e. last particle is dead
+    <div class="codehilite"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">particles</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">valLevels</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setValLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</code></pre></div><ul>
-<li>Set <code>0</code> to disable this feature.</li>
-</ul>
-</li>
-</ul>
-<h3 id="edge-color">Edge color<a class="headerlink" href="#edge-color" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeColor</span><span class="p">;</span>
-</code></pre></div><ul>
-<li><code>color</code> : <a href="../color/">Color</a> object.<ul>
-<li>Red: <code>color.red</code>, 0~255.</li>
-<li>Green: <code>color.green</code>, 0~255.</li>
-<li>Blue: <code>color.blue</code>, 0~255.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">edgeColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-</code></pre></div><ul>
-<li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
-</ul>
-</li>
 </ul>
                 
                   
@@ -5255,7 +5165,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../shader-hsladjust/" title="HSL adjust" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../interception/" title="Interception" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5264,19 +5174,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                HSL adjust
+                Interception
               </span>
             </div>
           </a>
         
         
-          <a href="../shader-swirl/" title="Swirl" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../arcade-world/" title="World" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Swirl
+                World
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
