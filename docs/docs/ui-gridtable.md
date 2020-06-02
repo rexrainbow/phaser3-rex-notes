@@ -486,7 +486,7 @@ See [base sizer object](ui-basesizer.md).
         ```
     - [Grid table](gridtable.md)
         ```javascript
-        var table = table.getElement('table');
+        var tableBody = table.getElement('table');
         ```
     - [Slider](ui-slider.md)
         - Track

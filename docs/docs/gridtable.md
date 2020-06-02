@@ -403,6 +403,13 @@ table.resize(width, height);
 var cell = table.getCell(cellIndex);
 ```
 
+#### Get cell from position
+
+```javascript
+var cellIndex = table.pointToCellIndex(x, y);
+var cell = table.getCell(cellIndex);
+```
+
 #### Cell height
 
 - Get
