@@ -8,20 +8,18 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() { }
+    preload() {        
+    }
 
     create() {
         var cycle = 5;
         var curve = this.plugins.get('rexSpiralCurve').add({
-            // Origin position
-            // x: 400, y: 300,
+            // Origin
             startX: 350, startY: 400,
             endX: 450, endY: 100,
-            // xRadius
-            startXRadius: 200, endXRadius: 20,
-            // yRadius
-            // startYRadius: 20, endYRadius: 200,
-            // angle
+            // Radius
+            startRadius: 200, endRadius: 20,
+            // Angle
             startAngle: 0, endAngle: (360 * cycle)
         });
 
@@ -31,7 +29,26 @@ class Demo extends Phaser.Scene {
                 color: 0xffffff
             }
         })
-        curve.draw(graphics, (32 * cycle));
+        var DrawCurve = function (curve, graphics) {
+            graphics.clear();
+            curve.draw(graphics, (32 * cycle));
+        }
+        DrawCurve(curve, graphics);
+
+        var startPoint = this.add.circle(curve.startX, curve.startY, 10, 0x6f74dd)
+            .setInteractive({ draggable: true })
+            .on('drag', function (pointer, dragX, dragY) {
+                startPoint.setPosition(dragX, dragY);
+                curve.setStartX(dragX).setStartY(dragY);
+                DrawCurve(curve, graphics);
+            })
+        var endPoint = this.add.circle(curve.endX, curve.endY, 10, 0x3949ab)
+            .setInteractive({ draggable: true })
+            .on('drag', function (pointer, dragX, dragY) {
+                endPoint.setPosition(dragX, dragY);
+                curve.setEndX(dragX).setEndY(dragY);
+                DrawCurve(curve, graphics);
+            })
     }
 }
 

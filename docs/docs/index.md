@@ -30,6 +30,7 @@
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
+1. [Curve/Spiral](curve-spiral.md): Spiral curve.
 1. [Drag](drag.md): Drag game object.
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 1. [Ease-move](easemove.md): Ease-move game object.

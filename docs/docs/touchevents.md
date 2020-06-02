@@ -52,7 +52,7 @@ Built-in touch/mouse events of phaser.
         .on('dragstart', function(pointer, dragX, dragY){
             // ...
         })
-        on('drag', function(pointer, dragX, dragY){
+        .on('drag', function(pointer, dragX, dragY){
             gameObject.setPosition(dragX, dragY);
         })
         .on('dragend', function(pointer, dragX, dragY, dropped){

@@ -297,15 +297,17 @@ curve.draw(graphics);
             1. `this.getLength / stepRate`, if `stepRate > 0`, else
             1. `defaultDivisions`
         - `points` : Return `1 + divisions` points.
-- Get n points equally spaced out along the curve
+- Get (n+1) points equally spaced out along the curve
     ```javascript
     var points = path.getSpacedPoints(n);
     ```
     or
     ```javascript
     var points = curve.getSpacedPoints(n);
+    // var points = curve.getSpacedPoints(undefined, stepRate);
+    // var points = curve.getSpacedPoints(divisions, stepRate, out);
     ```
-- Get points spaced out n distance pixels apart    
+- Get points spaced out n distance pixels apart
     ```javascript
     var points = curve.getDistancePoints(n)
     ```
