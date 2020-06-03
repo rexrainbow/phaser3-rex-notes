@@ -14,8 +14,8 @@ class SpiralCurve extends Base {
         var startYRadius, endYRadius, easeYRadius;
         var easeAngle;
 
-        if (typeof x === 'object') {
-
+        if (typeof(x) === 'object') {
+            var config = x;
             if (config.hasOwnProperty('x')) {
                 startX = config.x;
                 endX = startX;
