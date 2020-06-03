@@ -73,45 +73,54 @@ Spiral curve.
 
 ### Create shape
 
-```javascript
-var spiral = scene.plugins.get('rexSpiralCurve').add({
-    // Origin point
-    // Ease origin point
-    // startX:0, endX: 0, easeX: 'Linear',
-    // startY:0, endY: 0, easeY: 'Linear',
-    // Fixed point
-    // x, y,
-
-    // x-radius
-    // startXRadius: 0, endXRadius, easeXRadius: 'Linear',
-    // y-radius
-    // startYRadius: 0, endYRadius, easeYRadius: 'Linear',
-    // start-end radius
-    // startRadius, endRadiux
-
-    // angle
-    // startAngle: 0, endAngle: 360, easeAngle: 'Linear',
-
-    // rotation: 0
-});
-```
-
-- Origin point
-    - `startX`, `endX`, `easeX`, `startY`, `endY`, `easeY` : Ease origin point.
-        - `easeX`, `easeY` : [Ease equation](tween.md#ease-equations)
-    - `x`, `y` : Fixed origin point, i.e. start point is equal to end point.
-- Radius
-    - `startXRadius`, `endXRadius`, `easeXRadius` : Ease x-radius.
-        - `easeXRadius` : [Ease equation](tween.md#ease-equations)
-    - `startYRadius`, `endYRadius`, `easeYRadius` : Ease y-radius.
-        - `easeYRadius` : [Ease equation](tween.md#ease-equations)
-    - `startRadius`, `endRadiux` : 
-        - Set `startXRadius`, and `startYRadius` to `startRadius`.
-        - Set `endXRadius`, and `endYRadius` to `endRadius`.
-- Angle
-    - `startAngle`, `endAngle`, `easeAngle` : Ease angle.
-        - `easeAngle` : [Ease equation](tween.md#ease-equations)
-- `rotation` : Rotate curve.
+- All properties
+    ```javascript
+    var spiral = scene.plugins.get('rexSpiralCurve').add({
+        // Origin point
+        // Ease origin point
+        // startX:0, endX: 0, easeX: 'Linear',
+        // startY:0, endY: 0, easeY: 'Linear',
+        // Fixed point
+        // x, y,
+    
+        // x-radius
+        // startXRadius: 0, endXRadius, easeXRadius: 'Linear',
+        // y-radius
+        // startYRadius: 0, endYRadius, easeYRadius: 'Linear',
+        // start-end radius
+        // startRadius, endRadiux
+    
+        // angle
+        // startAngle: 0, endAngle: 360, easeAngle: 'Linear',
+    
+        // rotation: 0
+    });
+    ```
+    - Origin point
+        - `startX`, `endX`, `easeX`, `startY`, `endY`, `easeY` : Ease origin point.
+            - `easeX`, `easeY` : [Ease equation](tween.md#ease-equations), default value is `'Linear'`.
+        - `x`, `y` : Fixed origin point, i.e. start point is equal to end point.
+    - Radius
+        - `startXRadius`, `endXRadius`, `easeXRadius` : Ease x-radius.
+            - `easeXRadius` : [Ease equation](tween.md#ease-equations), default value is `'Linear'`.
+        - `startYRadius`, `endYRadius`, `easeYRadius` : Ease y-radius.
+            - `easeYRadius` : [Ease equation](tween.md#ease-equations), default value is `'Linear'`.
+        - `startRadius`, `endRadiux` : 
+            - Set `startXRadius`, and `startYRadius` to `startRadius`.
+            - Set `endXRadius`, and `endYRadius` to `endRadius`.
+    - Angle
+        - `startAngle`, `endAngle`, `easeAngle` : Ease angle.
+            - `easeAngle` : [Ease equation](tween.md#ease-equations), default value is `'Linear'`.
+    - `rotation` : Rotate curve.
+- Simple spiral curve
+    ```javascript
+    var spiral = scene.plugins.get('rexSpiralCurve').add(x, y, startRadius, endRadius, startAngle, endAngle, rotation);
+    ```
+    - `x` : Set `startX`, `endX` to `x`, and `easeX` to `'Linear'`.
+    - `y` : Set `startY`, `endY` to `y`, and `easeY` to `'Linear'`.
+    - `startRadius` : Set `startXRadius`, `startYRadius` to `startRadius`
+    - `endRadius` : Set `endXRadius`, `endYRadius` to `endRadius`, and `easeXRadius`, `easeYRadius` to `Linear`.
+    - Set `easeAngle` to `'Linear'`
 
 ### Properties
 

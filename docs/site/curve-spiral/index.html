@@ -5077,7 +5077,9 @@
 </code></pre></div></li>
 </ul>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">spiral</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSpiralCurve&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<ul>
+<li>All properties
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">spiral</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSpiralCurve&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="c1">// Origin point</span>
     <span class="c1">// Ease origin point</span>
     <span class="c1">// startX:0, endX: 0, easeX: &#39;Linear&#39;,</span>
@@ -5097,12 +5099,10 @@
 
     <span class="c1">// rotation: 0</span>
 <span class="p">});</span>
-</code></pre></div>
-
-<ul>
+</code></pre></div><ul>
 <li>Origin point<ul>
 <li><code>startX</code>, <code>endX</code>, <code>easeX</code>, <code>startY</code>, <code>endY</code>, <code>easeY</code> : Ease origin point.<ul>
-<li><code>easeX</code>, <code>easeY</code> : <a href="../tween/#ease-equations">Ease equation</a></li>
+<li><code>easeX</code>, <code>easeY</code> : <a href="../tween/#ease-equations">Ease equation</a>, default value is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li><code>x</code>, <code>y</code> : Fixed origin point, i.e. start point is equal to end point.</li>
@@ -5110,11 +5110,11 @@
 </li>
 <li>Radius<ul>
 <li><code>startXRadius</code>, <code>endXRadius</code>, <code>easeXRadius</code> : Ease x-radius.<ul>
-<li><code>easeXRadius</code> : <a href="../tween/#ease-equations">Ease equation</a></li>
+<li><code>easeXRadius</code> : <a href="../tween/#ease-equations">Ease equation</a>, default value is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li><code>startYRadius</code>, <code>endYRadius</code>, <code>easeYRadius</code> : Ease y-radius.<ul>
-<li><code>easeYRadius</code> : <a href="../tween/#ease-equations">Ease equation</a></li>
+<li><code>easeYRadius</code> : <a href="../tween/#ease-equations">Ease equation</a>, default value is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li><code>startRadius</code>, <code>endRadiux</code> : <ul>
@@ -5126,12 +5126,24 @@
 </li>
 <li>Angle<ul>
 <li><code>startAngle</code>, <code>endAngle</code>, <code>easeAngle</code> : Ease angle.<ul>
-<li><code>easeAngle</code> : <a href="../tween/#ease-equations">Ease equation</a></li>
+<li><code>easeAngle</code> : <a href="../tween/#ease-equations">Ease equation</a>, default value is <code>'Linear'</code>.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><code>rotation</code> : Rotate curve.</li>
+</ul>
+</li>
+<li>Simple spiral curve
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">spiral</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSpiralCurve&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">startRadius</span><span class="p">,</span> <span class="nx">endRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">rotation</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>x</code> : Set <code>startX</code>, <code>endX</code> to <code>x</code>, and <code>easeX</code> to <code>'Linear'</code>.</li>
+<li><code>y</code> : Set <code>startY</code>, <code>endY</code> to <code>y</code>, and <code>easeY</code> to <code>'Linear'</code>.</li>
+<li><code>startRadius</code> : Set <code>startXRadius</code>, <code>startYRadius</code> to <code>startRadius</code></li>
+<li><code>endRadius</code> : Set <code>endXRadius</code>, <code>endYRadius</code> to <code>endRadius</code>, and <code>easeXRadius</code>, <code>easeYRadius</code> to <code>Linear</code>.</li>
+<li>Set <code>easeAngle</code> to <code>'Linear'</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
 <ul>

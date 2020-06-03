@@ -7,91 +7,108 @@ const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 const Linear = Phaser.Math.Linear;
 
 class SpiralCurve extends Base {
-    constructor(config) {
-        var startX, endX, easeX, easeXFunction;
-        if (config.hasOwnProperty('x')) {
-            startX = config.x;
-            endX = startX;
-        } else {
-            startX = GetValue(config, 'startX', 0);
-            endX = GetValue(config, 'endX', startX);
-        }
-        easeX = GetValue(config, 'easeX', 'Linear');
-        easeXFunction = GetEaseFunction(easeX);
+    constructor(x, y, startRadius, endRadius, startAngle, endAngle, rotation) {
+        var startX, endX, easeX;
+        var startY, endY, easeY;
+        var startXRadius, endXRadius, easeXRadius;
+        var startYRadius, endYRadius, easeYRadius;
+        var easeAngle;
 
-        var startY, endY, easeY, easeYFunction;
-        if (config.hasOwnProperty('y')) {
-            startY = config.y;
-            endY = startY;
-        } else {
-            startY = GetValue(config, 'startY', 0);
-            endY = GetValue(config, 'endY', startY);
-        }
-        easeY = GetValue(config, 'easeY', 'Linear');
-        easeYFunction = GetEaseFunction(easeY);
+        if (typeof x === 'object') {
 
-        var startXRadius, endXRadius, easeXRadius, easeXRadiusFunction;
-        var startYRadius, endYRadius, easeYRadius, easeYRadiusFunction;
-
-        if (config.hasOwnProperty('startRadius')) {
-            startXRadius = config.startRadius;
-            startYRadius = startXRadius;
-            endXRadius = GetValue(config, 'endRadius', startXRadius);
-            endYRadius = endXRadius;
-        } else {
-            if (config.hasOwnProperty('xRadius')) {
-                startXRadius = config.xRadius;
-                endXRadius = startXRadius;
+            if (config.hasOwnProperty('x')) {
+                startX = config.x;
+                endX = startX;
             } else {
-                startXRadius = GetValue(config, 'startXRadius', 0);
-                endXRadius = GetValue(config, 'endXRadius', startXRadius);
+                startX = GetValue(config, 'startX', 0);
+                endX = GetValue(config, 'endX', startX);
             }
-            if (config.hasOwnProperty('yRadius')) {
-                startYRadius = config.yRadius;
-                endYRadius = startYRadius;
+            easeX = GetValue(config, 'easeX', 'Linear');
+
+            if (config.hasOwnProperty('y')) {
+                startY = config.y;
+                endY = startY;
             } else {
-                startYRadius = GetValue(config, 'startYRadius', startXRadius);
-                endYRadius = GetValue(config, 'endYRadius', endXRadius);
+                startY = GetValue(config, 'startY', 0);
+                endY = GetValue(config, 'endY', startY);
             }
+            easeY = GetValue(config, 'easeY', 'Linear');
+
+            if (config.hasOwnProperty('startRadius')) {
+                startXRadius = config.startRadius;
+                startYRadius = startXRadius;
+                endXRadius = GetValue(config, 'endRadius', startXRadius);
+                endYRadius = endXRadius;
+            } else {
+                if (config.hasOwnProperty('xRadius')) {
+                    startXRadius = config.xRadius;
+                    endXRadius = startXRadius;
+                } else {
+                    startXRadius = GetValue(config, 'startXRadius', 0);
+                    endXRadius = GetValue(config, 'endXRadius', startXRadius);
+                }
+                if (config.hasOwnProperty('yRadius')) {
+                    startYRadius = config.yRadius;
+                    endYRadius = startYRadius;
+                } else {
+                    startYRadius = GetValue(config, 'startYRadius', startXRadius);
+                    endYRadius = GetValue(config, 'endYRadius', endXRadius);
+                }
+            }
+            easeXRadius = GetValue(config, 'easeXRadius', 'Linear');
+            easeYRadius = GetValue(config, 'easeXRadius', easeXRadius);
+
+            startAngle = GetValue(config, 'startAngle', 0);
+            endAngle = GetValue(config, 'endAngle', 360);
+            easeAngle = GetValue(config, 'easeAngle', 'Linear');
+            rotation = GetValue(config, 'rotation', 0);
+
+        } else {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (startRadius === undefined) { startRadius = 0; }
+            if (endRadius === undefined) { endRadius = 0; }
+            if (startAngle === undefined) { startAngle = 0; }
+            if (endAngle === undefined) { endAngle = 360; }
+            if (rotation === undefined) { rotation = 0; }
+
+            startX = x;
+            endX = x;
+            easeX = 'Linear';
+            startY = y;
+            endY = y;
+            easeY = 'Linear';
+            startXRadius = startRadius;
+            endXRadius = endRadius;
+            easeXRadius = 'Linear';
+            startYRadius = startRadius;
+            endYRadius = endRadius;
+            easeYRadius = 'Linear';
+            easeAngle = 'Linear';
         }
-        easeXRadius = GetValue(config, 'easeXRadius', 'Linear');
-        easeXRadiusFunction = GetEaseFunction(easeXRadius);
-        easeYRadius = GetValue(config, 'easeXRadius', easeXRadius);
-        easeYRadiusFunction = GetEaseFunction(easeYRadius);
-        
-
-
-
-        var startAngle = GetValue(config, 'startAngle', 0);
-        var endAngle = GetValue(config, 'endAngle', 360);
-        var easeAngle = GetValue(config, 'easeAngle', 'Linear');
-        var easeAngleFunction = GetEaseFunction(easeAngle);
-
-        var rotation = GetValue(config, 'rotation', 0);
-
 
         super('SpiralCurve');
 
         // The center point of the spiral. Used for calculating rotation.
         this.p0 = new Vector2(startX, startY);
         this._easeX = easeX;
-        this._easeXFunction = easeXFunction;
+        this._easeXFunction = GetEaseFunction(easeX);
         this.p1 = new Vector2(endX, endY);
         this._easeY = easeY;
-        this._easeYFunction = easeYFunction;
+        this._easeYFunction = GetEaseFunction(easeY);
 
         this._startXRadius = startXRadius;
         this._endXRadius = endXRadius;
         this._easeXRadius = easeXRadius;
-        this._easeXRadiusFunction = easeXRadiusFunction;
+        this._easeXRadiusFunction = GetEaseFunction(easeXRadius);
         this._startYRadius = startYRadius;
         this._endYRadius = endYRadius;
         this._easeYRadius = easeYRadius;
-        this._easeYRadiusFunction = easeYRadiusFunction;
+        this._easeYRadiusFunction = GetEaseFunction(easeYRadius);
         this._startAngle = DegToRad(startAngle);
         this._endAngle = DegToRad(endAngle);
         this._easeAngle = easeAngle;
-        this._easeAngleFunction = easeAngleFunction;
+        this._easeAngleFunction = GetEaseFunction(easeAngle);
         this._rotation = DegToRad(rotation);
     }
 

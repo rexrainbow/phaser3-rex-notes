@@ -12,8 +12,8 @@ class SpiralCurvePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(config) {
-        return new SpiralCurve(config);
+    add(x, y, startRadius, endRadius, startAngle, endAngle, rotation) {
+        return new SpiralCurve(x, y, startRadius, endRadius, startAngle, endAngle, rotation);
     }
 }
 
