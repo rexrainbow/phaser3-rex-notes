@@ -22,23 +22,10 @@ class Demo extends Phaser.Scene {
 
             // Side menu is above panel
             panel: CreatePanel(this),
-            rightSide: CreateSideMenu(this, ['A', 'B', 'C']).setAlpha(0),
+            rightSide: CreateSideMenu(this, ['A', 'B', 'C']),
 
             // Callbacks
-            showChildCallback: function (child, key, sides) {
-                if (key === 'panel') {
-
-                } else {
-                    sides.fadeChild(child, 500);
-                }
-            },
-            hideChildCallback: function (child, key, sides) {
-                if (key === 'panel') {
-
-                } else {
-                    sides.fadeChild(child, 500);
-                }
-            }
+            showChildCallback: 'fade'
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);

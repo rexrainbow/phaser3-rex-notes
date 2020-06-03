@@ -25,20 +25,7 @@ class Demo extends Phaser.Scene {
             rightSide: CreateSideMenu(this, ['A', 'B', 'C']),
 
             // Callbacks
-            showChildCallback: function (child, key, sides) {
-                if (key === 'panel') {
-
-                } else {
-                    sides.setChildVisible(child);
-                }
-            },
-            hideChildCallback: function (child, key, sides) {
-                if (key === 'panel') {
-
-                } else {
-                    sides.setChildVisible(child);
-                }
-            }
+            showChildCallback: 'visible'
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);

@@ -1,4 +1,6 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
+import IsFunction from '../../../plugins/utils/object/IsFunction.js';
+import GetDefaultCallbacks from './defaultcallbacks/GetDefaultCallbacks.js';
 import ShowChildMethods from './ShowChildMethods.js';
 import ChildBehaviorMethods from './childbehaviors/index.js';
 
@@ -14,14 +16,19 @@ class Sides extends OverlapSizer {
 
         // Callbacks
         var showChildCallback = GetValue(config, 'showChildCallback', undefined);
-        var showChildCallbackScope = GetValue(config, 'showChildCallbackScope', undefined);
-        var hideChildCallback = GetValue(config, 'hideChildCallback', undefined);
-        var hideChildCallbackScope = GetValue(config, 'hideChildCallbackScope', undefined);
-        if (showChildCallback) {
-            this.on('showchild', showChildCallback, showChildCallbackScope);
-        }
-        if (hideChildCallback) {
-            this.on('hidechild', hideChildCallback, hideChildCallbackScope);
+        if (showChildCallback) { // Has showChildCallback, and hideChildCallback
+            if (IsFunction(showChildCallback)) { // Custom callbacks
+                var showChildCallbackScope = GetValue(config, 'showChildCallbackScope', undefined);
+                this.on('showchild', showChildCallback, showChildCallbackScope);
+
+                var hideChildCallback = GetValue(config, 'hideChildCallback', undefined);
+                var hideChildCallbackScope = GetValue(config, 'hideChildCallbackScope', undefined);
+                this.on('hidechild', hideChildCallback, hideChildCallbackScope);
+            } else { // Default callbacks
+                var defaultCallbacks = GetDefaultCallbacks(showChildCallback);
+                this.on('showchild', defaultCallbacks.show);
+                this.on('hidechild', defaultCallbacks.hide);
+            }
         }
 
         // Add elements        
@@ -56,11 +63,11 @@ class Sides extends OverlapSizer {
         }
 
         this.currentChildKey = 'panel';
-        this.showChild('panel');        
-        this.hideChild('leftSide');
-        this.hideChild('rightSide');
-        this.hideChild('topSide');
-        this.hideChild('bottomSide');
+        this.showChild('panel', true);
+        this.hideChild('leftSide', true);
+        this.hideChild('rightSide', true);
+        this.hideChild('topSide', true);
+        this.hideChild('bottomSide', true);
     }
 }
 
