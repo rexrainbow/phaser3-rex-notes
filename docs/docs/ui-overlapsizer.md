@@ -144,7 +144,7 @@ sizer.addBackground(child);
 Add a game obejct to sizer
 
 ```javascript
-sizer.add(child, key);
+sizer.add(child);
 ```
 
 or
@@ -168,7 +168,7 @@ sizer.add(child,
 
 - `child` : A game object.
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
-   - `undefined` : Use current timestamp as key.
+    - `undefined` : Use current timestamp as key.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
