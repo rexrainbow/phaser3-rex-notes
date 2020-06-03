@@ -110,6 +110,7 @@
 1. [UI/label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI/menu](ui-menu.md): A container with buttons and sub-menu.
 1. [UI/number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
+1. [UI/overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.
 1. [UI/pages](ui-pages.md): A container with pages, only current page is visible.
 1. [UI/scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
 1. [UI/sizer](ui-sizer.md): Layout children game objects.

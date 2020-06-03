@@ -4263,6 +4263,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-overlapsizer/" title="Overlap sizer" class="md-nav__link">
+      Overlap sizer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-label/" title="Label" class="md-nav__link">
       Label
     </a>
@@ -5229,8 +5241,8 @@
 <ul>
 <li>Define class
     <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MySizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Sizer</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -5255,13 +5267,13 @@
 </code></pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> 
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span>
     <span class="p">{</span>
-        <span class="nx">proportion</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
-        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span> 
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> 
-        <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> 
-        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
+        <span class="nx">proportion</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
+        <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span>
     <span class="p">}</span>
 <span class="p">);</span>
@@ -5308,22 +5320,6 @@
 <li><code>undefined</code> : Insert child at last.</li>
 </ul>
 </li>
-</ul>
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div>
-
-<ul>
-<li><code>config</code> : A plain object.
-    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">proportion</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-    <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span>
-<span class="p">}</span>
-</code></pre></div></li>
 </ul>
 <h3 id="add-space">Add space<a class="headerlink" href="#add-space" title="Permanent link">&para;</a></h3>
 <p>Add a stretchable space.</p>

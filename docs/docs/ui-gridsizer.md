@@ -213,13 +213,13 @@ gridSizer.add(child, column, row, align, padding, expand, key);
 or
 
 ```javascript
-gridSizer.add(child, 
+gridSizer.add(child,
     {
-        column: 0, 
-        row: 0, 
-        align: 'center', 
-        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
-        expand: false, 
+        column: 0,
+        row: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
         key: undefined
     }
 );

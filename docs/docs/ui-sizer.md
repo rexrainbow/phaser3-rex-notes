@@ -141,8 +141,8 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
 - Define class
     ```javascript
     class MySizer extends RexPlugins.UI.Sizer {
-        constructor(scene, x, y, minWidth, minHeight, orientation) {
-            super(scene, x, y, minWidth, minHeight, orientation);
+        constructor(scene, x, y, minWidth, minHeight, orientation, config) {
+            super(scene, x, y, minWidth, minHeight, orientation, config);
             // ...
             scene.add.existing(this);
         }
@@ -177,13 +177,13 @@ sizer.add(child, proportion, align, padding, expand, key, index);
 or
 
 ```javascript
-sizer.add(child, 
+sizer.add(child,
     {
-        proportion: 0, 
-        align: 'center', 
-        padding: {left: 0, right: 0, top: 0, bottom: 0}, 
-        expand: false, 
-        key: undefined, 
+        proportion: 0,
+        align: 'center',
+        padding: {left: 0, right: 0, top: 0, bottom: 0},
+        expand: false,
+        key: undefined,
         index: undefined
     }
 );
@@ -218,24 +218,6 @@ sizer.add(child,
     - `undefined` : Don't add this child. Default value.
 - `index` : Insert child to.
     - `undefined` : Insert child at last.
-
-or
-
-```javascript
-sizer.add(child, config);
-```
-
-- `config` : A plain object.
-    ```javascript
-    {
-        proportion: 0,
-        align: 'center',
-        padding: 0,
-        expand: false,
-        key: undefined,
-        index: undefined
-    }
-    ```
 
 ### Add space
 

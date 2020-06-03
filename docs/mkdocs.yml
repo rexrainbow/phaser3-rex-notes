@@ -262,6 +262,7 @@ nav:
     - Sizer: ui-sizer.md
     - Grid sizer: ui-gridsizer.md
     - Fix-width sizer: ui-fixwidthsizer.md
+    - Overlap sizer: ui-overlapsizer.md
     - Label: ui-label.md
     - Text box: ui-textbox.md
     - Text area: ui-textarea.md
@@ -275,7 +276,7 @@ nav:
     - Tabs: ui-tabs.md
     - Menu: ui-menu.md
     - Number bar: ui-numberbar.md
-    - Pages: ui-pages.md
+    - Pages: ui-pages.md    
     - Scroll-able panel: ui-scrollablepanel.md
     - Chart: ui-chart.md
     - Base sizer: ui-basesizer.md

@@ -18,7 +18,7 @@ export default {
         }
 
         if (key === undefined) {
-            return this;
+            key = Date.now();
         }
 
         if (typeof (align) === 'string') {
