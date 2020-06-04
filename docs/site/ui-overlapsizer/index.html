@@ -5225,7 +5225,7 @@
 
 <h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <p>Add a game obejct to sizer</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
 
 <p>or</p>
@@ -5245,8 +5245,10 @@
 
 <ul>
 <li><code>child</code> : A game object.</li>
-<li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.</li>
+<li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Use current timestamp as key.</li>
+</ul>
+</li>
 <li><code>align</code> :<ul>
 <li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
 <li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
