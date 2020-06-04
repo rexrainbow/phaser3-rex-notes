@@ -74,6 +74,8 @@ Emit [particles](particles.md) along bounds of game object.
 
 ```javascript
 var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, {
+    // padding: 0,
+
     textureKey: key,
     // textureFrames: undefined,
     // blendMode: 'ADD',
@@ -93,6 +95,17 @@ var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObj
 });
 ```
 
+- `padding` : Extra padded space around bounds of game object. Default is 0.
+    - A number for left/right/top/bottom bounds,
+    - Or a plain object.
+        ```javascript
+        {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        }
+        ```
 - `textureKey` : Texture key of particles.
 - `textureFrames` : : One or more texture frames, or a configuration object.
     - String or number value.

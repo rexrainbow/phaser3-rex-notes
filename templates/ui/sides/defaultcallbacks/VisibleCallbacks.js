@@ -1,12 +1,20 @@
-var GetCallback = function () {
+var GetShowCallback = function () {
     return function (child, key, sides, reset) {
         if (key !== 'panel') {
-            sides.setChildVisible(child);
+            sides.setChildVisible(child, true);
+        }
+    }
+}
+
+var GetHideCallback = function () {
+    return function (child, key, sides, reset) {
+        if (key !== 'panel') {
+            sides.setChildVisible(child, false);
         }
     }
 }
 
 export default {
-    show: GetCallback,
-    hide: GetCallback
+    show: GetShowCallback,
+    hide: GetHideCallback
 }
