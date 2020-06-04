@@ -9,7 +9,9 @@ var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer) {
         return;
     }
     var cellContainer = table.getCellContainer(cellIndex);
-    eventEmitter.emit(eventName, cellContainer, cellIndex, pointer);
+    if (cellContainer) {
+        eventEmitter.emit(eventName, cellContainer, cellIndex, pointer);
+    }
 }
 
 export default EmitCellEvent;
