@@ -363,7 +363,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     var t = table.t;
     ```
 
-### Scroll to top/bottom
+#### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
@@ -376,7 +376,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - Equal to `table.t = 1;`
 
-### Enable/disable scrolling
+#### Enable/disable scrolling
 
 - Slider
     - Set enable state
@@ -476,6 +476,12 @@ See [base sizer object](ui-basesizer.md).
     }, scope);
     ```
     - `swipeEventName` : `'cell.swipeleft'`, `'cell.swiperight'`, `'cell.swipeup'`, `'cell.swipedown'`.
+- Scroll table
+    ```javascript
+    table.on('scroll', function(panel) {
+        // ...
+    })
+    ```
 
 ### Get element
 

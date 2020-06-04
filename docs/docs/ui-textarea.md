@@ -275,7 +275,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     var t = textArea.t;
     ```
 
-### Scroll to top/bottom
+#### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
@@ -288,7 +288,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - Equal to `textArea.t = 1;`
 
-### Enable/disable scrolling
+#### Enable/disable scrolling
 
 - Slider
     - Set enable state
@@ -316,6 +316,15 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var enable = textArea.scrollerEnable;
         ```
+
+### Event
+
+- On scroll
+    ```javascript
+    textArea.on('scroll', function(panel) {
+        // ...
+    })
+    ```
 
 ### Lines count
 

@@ -273,7 +273,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     var bottomOY = panel.bottomChildOY;
     ```
 
-### Scroll to top/bottom
+#### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
@@ -286,7 +286,7 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```
     - Equal to `panel.t = 1;`
 
-### Enable/disable scrolling
+#### Enable/disable scrolling
 
 - Slider
     - Set enable state
@@ -314,6 +314,15 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var enable = panel.scrollerEnable;
         ```
+
+### Event
+
+- On scroll
+    ```javascript
+    panel.on('scroll', function(panel) {
+        // ...
+    })
+    ```
 
 ### Other properties
 

@@ -89,11 +89,10 @@ class SpiralCurve extends Base {
 
         super('SpiralCurve');
 
-        // The center point of the spiral. Used for calculating rotation.
         this.p0 = new Vector2(startX, startY);
+        this.p1 = new Vector2(endX, endY);        
         this._easeX = easeX;
         this._easeXFunction = GetEaseFunction(easeX);
-        this.p1 = new Vector2(endX, endY);
         this._easeY = easeY;
         this._easeYFunction = GetEaseFunction(easeY);
 
@@ -111,7 +110,6 @@ class SpiralCurve extends Base {
         this._easeAngleFunction = GetEaseFunction(easeAngle);
         this._rotation = DegToRad(rotation);
     }
-
 
     getResolution(divisions) {
         return divisions * 2;
@@ -159,6 +157,16 @@ class SpiralCurve extends Base {
         this.p1.x += dx;
     }
 
+    get y() {
+        return this.p0.y;
+    }
+
+    set y(value) {
+        var dy = value - this.p0.y;
+        this.p0.y += dy;
+        this.p1.y += dy;
+    }
+
     setStartX(value) {
         this.startX = value;
         return this;
@@ -195,7 +203,8 @@ class SpiralCurve extends Base {
     }
 
     set easeX(value) {
-        this._easeX = GetEaseFunction(value);
+        this._easeX = value;
+        this._easeXFunction = GetEaseFunction(value);
     }
 
     get y() {
@@ -244,7 +253,8 @@ class SpiralCurve extends Base {
     }
 
     set easeY(value) {
-        this._easeY = GetEaseFunction(value);
+        this._easeY = value;
+        this._easeYFunction = GetEaseFunction(value);
     }
 
     setXRadius(value) {
@@ -297,7 +307,8 @@ class SpiralCurve extends Base {
     }
 
     set easeXRadius(value) {
-        this._easeXRadius = GetEaseFunction(value);
+        this._easeXRadius = value;
+        this._easeXRadiusFunction = GetEaseFunction(value);
     }
 
     setYRadius(value) {
@@ -351,7 +362,8 @@ class SpiralCurve extends Base {
     }
 
     set easeYRadius(value) {
-        this._easeYRadius = GetEaseFunction(value);
+        this._easeYRadius = value;
+        this._easeYRadiusFunction = GetEaseFunction(value);
     }
 
     setWidth(value) {
@@ -404,7 +416,8 @@ class SpiralCurve extends Base {
     }
 
     set easeAngle(value) {
-        this._easeAngle = GetEaseFunction(value);
+        this._easeAngle = value;
+        this._easeAngleFunction = GetEaseFunction(value);
     }
 
     setRotation(value) {

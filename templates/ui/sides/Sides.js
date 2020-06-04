@@ -31,7 +31,7 @@ class Sides extends OverlapSizer {
             }
         }
 
-        // Add elements        
+        // Add elements
         var background = GetValue(config, 'background', undefined);
         var panel = GetValue(config, 'panel', undefined);
         var leftSide = GetValue(config, 'leftSide', undefined);
@@ -61,13 +61,16 @@ class Sides extends OverlapSizer {
             var expand = GetValue(config, 'expand.bottom', true);
             this.add(bottomSide, 'bottomSide', 'left-bottom', 0, { width: expand });
         }
+    }
 
+    reset() {
         this.currentChildKey = 'panel';
         this.showChild('panel', true);
         this.hideChild('leftSide', true);
         this.hideChild('rightSide', true);
         this.hideChild('topSide', true);
         this.hideChild('bottomSide', true);
+        return this;
     }
 }
 

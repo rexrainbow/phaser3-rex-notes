@@ -1,6 +1,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import Clear from '../../../plugins/utils/object/Clear.js';
+import IndexOf from '../../../plugins/utils/object/IndexOf.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -43,11 +44,7 @@ class OverlapSizer extends BaseSizer {
                 return key;
             }
         } else {
-            for (var key in this.sizerChildren) {
-                if (this.sizerChildren[key] === gameObject) {
-                    return key;
-                }
-            }
+            return IndexOf(this.sizerChildren, gameObject);
         }
         return null;
     }

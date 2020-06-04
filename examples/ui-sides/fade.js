@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
             showChildCallback: 'fade'
         })
             .layout()
+            .reset()
             .drawBounds(this.add.graphics(), 0xff0000);
 
         panel.getElement('panel')

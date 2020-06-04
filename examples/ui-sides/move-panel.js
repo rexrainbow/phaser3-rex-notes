@@ -21,11 +21,12 @@ class Demo extends Phaser.Scene {
             width: 300, height: 400,
 
             // Side menu is below panel
-            panel: CreatePanel(this),
             rightSide: CreateSideMenu(this, ['A', 'B', 'C']),
+            panel: CreatePanel(this),
+            
 
             // Callbacks
-            showChildCallback: 'move'
+            showChildCallback: 'move-panel'
         })
             .layout()
             .reset()

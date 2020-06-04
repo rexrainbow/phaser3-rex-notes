@@ -92,30 +92,23 @@ class Demo extends Phaser.Scene {
                         }),
 
                         // Callbacks
-                        showChildCallback: function (child, key, sides, reset) {
-                            if (key === 'panel') {
-                                var duration = (reset) ? 0 : 500;
-                                sides.moveChild(child, duration)
-                            }
-                        },
-                        hideChildCallback: function (child, key, sides, reset) {
-                            if (key === 'panel') {
-                                var duration = (reset) ? 0 : 500;
-                                sides.moveChild(child, duration);
-                            }
-                        }
+                        showChildCallback: 'move-panel'
                     })
                     // console.log(cell.index + ': create new cell-container');
                 } else {
                     // console.log(cell.index + ': reuse cell-container');
                 }
 
-                cellContainer.showPanel(true);
                 // Set properties from item value
                 cellContainer.setMinSize(width, height); // Size might changed in this demo
                 cellContainer.getElement('panel.text').setText(item.id); // Set text of text object
                 cellContainer.getElement('panel.icon').setFillStyle(item.color); // Set fill color of round rectangle object
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
+
+                cellContainer
+                    .layout()
+                    .reset()
+                    .setDirty(true);
                 return cellContainer;
             },
             items: getItems(100)
@@ -144,6 +137,12 @@ class Demo extends Phaser.Scene {
             .on('cell.swiperight', function (cellContainer, cellIndex) {
                 if (cellContainer === gridTable.lastSideButton) {
                     cellContainer.hideRightSide();
+                    gridTable.lastSideButton = undefined;
+                }
+            })
+            .on('scroll', function(){
+                if (gridTable.lastSideButton) {
+                    gridTable.lastSideButton.showPanel();
                     gridTable.lastSideButton = undefined;
                 }
             })

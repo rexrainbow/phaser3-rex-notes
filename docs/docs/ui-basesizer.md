@@ -71,7 +71,7 @@ Default value is `true`.
 - Set
     ```javascript
     sizer.setDirty();
-    // izer.setDirty(true);
+    // sizer.setDirty(true);
     ```
     or
     ```javascript

@@ -69,12 +69,14 @@ var CreateScrollableSizer = function (config) {
     // Control
     if (slider) {
         slider.on('valuechange', function (newValue) {
-            this.t = newValue;
+            this.t = newValue;            
+            this.emit('scroll', this);
         }, this);
     }
     if (scroller) {
         scroller.on('valuechange', function (newValue) {
             this.childOY = newValue;
+            this.emit('scroll', this);
         }, this);
     }
 
