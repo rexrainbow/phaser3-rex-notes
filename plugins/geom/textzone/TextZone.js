@@ -4,7 +4,9 @@ const GetRandom = Phaser.Utils.Array.GetRandom;
 
 class TextZone {
     constructor(textObject) {
-        this.bitMapList = [];
+        this.width = 0;
+        this.height = 0;
+        this.data = [];
         this.setTextObject(textObject);
     }
 
@@ -19,11 +21,15 @@ class TextZone {
     }
 
     update() {
-        var bitMapList = this.bitMapList;
-        bitMapList.length = 0;
-        globBitMap = TextObjectToBitMap(this.textObject, globBitMap);
-        globBitMap.forEachNonZero(function (value, x, y) {
-            bitMapList.push(`${x},${y}`);
+        var textBitMap = TextObjectToBitMap(this.textObject);
+        this.width = textBitMap.width;
+        this.height = textBitMap.height;
+
+        var width = this.width;
+        var data = this.data;
+        data.length = 0;
+        textBitMap.forEachNonZero(function (value, x, y) {
+            data.push((y * width) + x);
         });
         return this;
     }
@@ -31,17 +37,19 @@ class TextZone {
     contains(x, y) {
         x = Math.floor(x + this.textObject.originX);
         y = Math.floor(y + this.textObject.originY);
-        return (this.bitMapList.indexOf(`${x},${y}`) !== -1)
+        return (this.data.indexOf((y * this.width) + x) !== -1)
     }
 
     getRandomPoint(out) {
         if (out === undefined) {
             out = {};
         }
-        if (this.bitMapList.length > 0) {
-            var p = GetRandom(this.bitMapList).split(',');
-            out.x = p[0] - this.textObject.displayOriginX;
-            out.y = p[1] - this.textObject.displayOriginY;
+        if (this.data.length > 0) {
+            var index = GetRandom(this.data);
+            var x = index % this.width;
+            var y = (index - x) / this.width;
+            out.x = x - this.textObject.displayOriginX;
+            out.y = y - this.textObject.displayOriginY;
         } else {
             out.x = 0;
             out.y = 0;
@@ -49,7 +57,5 @@ class TextZone {
         return out;
     }
 }
-
-var globBitMap;
 
 export default TextZone;
