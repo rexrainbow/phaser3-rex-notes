@@ -12,11 +12,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var fizzyText = new FizzyText(this, 400, 300, 'Hello', {
-            style: {
-                fontSize: '80px',
+        var fizzyText = new FizzyText(this, 400, 300, 'LOVE', {
+            textStyle: {
+                fontSize: '160px',
             },
-            textureKey: 'flares'
+            particles: {
+                key: 'flares',
+                blendMode: 'ADD',
+                scale: 0.1,
+                quantity: 10,
+                speed: 5
+            }
         });
         this.add.existing(fizzyText);
     }

@@ -1,5 +1,5 @@
 import Container from '../../plugins/gameobjects/containerlite/ContainerLite.js';
-import GetBitmapList from './GetBitmapList.js';
+import TextZone from '../../plugins/geom/textzone/TextZone.js';
 import CreateParticles from './CreateParticles.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,11 +8,14 @@ class FizzyText extends Container {
     constructor(scene, x, y, text, config) {
         super(scene, x, y);
 
-        this.textObject = scene.add.text(x, y, text, GetValue(config, 'style'))
+        this.textObject = scene.add.text(x, y, text, GetValue(config, 'textStyle'))
             .setOrigin(0.5)
-            .setVisible(false);
-        this.textBitmapList = GetBitmapList(this.textObject);
-        this.particles = CreateParticles(this, config).setPosition(x, y);
+            .setVisible(false)
+        this.textObject.textZone = new TextZone(this.textObject);
+
+        var particlesConfig = GetValue(config, 'particles');
+        particlesConfig.source = this.textObject.textZone;
+        this.particles = CreateParticles(this, particlesConfig).setPosition(x, y);
 
         this.add(this.textObject);
         this.add(this.particles);
@@ -23,25 +26,28 @@ class FizzyText extends Container {
     }
 
     set text(value) {
-        this.textObject.setText(text);
-        this.textBitmapList.length = 0;
-        GetBitmapList(this.textObject, this.textBitmapList);
+        this.textObject.setText(value);
+        this.textObject.textZone.update();
     }
 
-    setText(text) {
-        this.text = text;
+    setText(value) {
+        this.text = value;
         return this;
     }
 
     showText(color, strokeColor, strokThickness) {
-        this.textObject.setFill(color);
-        this.textObject.setStroke(strokeColor, strokThickness);
-        this.setChildVisible(this.textObject, true);
+        if (arguments.length === 0) {
+            this.setChildVisible(this.textObject, false);
+        } else {
+            this.textObject.setFill(color);
+            this.textObject.setStroke(strokeColor, strokThickness);
+            this.setChildVisible(this.textObject, true);
+        }
         return this;
     }
 
     hideText() {
-        this.setChildVisible(this.textObject, false);
+        this.showText();
         return this;
     }
 }
