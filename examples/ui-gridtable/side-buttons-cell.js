@@ -89,7 +89,7 @@ class Demo extends Phaser.Scene {
                                 icon: 10,
                                 left: 15,
                             }
-                        }),
+                        }).setDepth(1),
 
                         // Callbacks
                         showChildCallback: 'move-panel'
@@ -106,6 +106,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_DARK).setDepth(0);
 
                 cellContainer
+                    .setDirty(false)
                     .layout()
                     .reset()
                     .setDirty(true);
@@ -121,11 +122,11 @@ class Demo extends Phaser.Scene {
         gridTable
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_LIGHT);
-                cellContainer.setDepth(1);
+                cellContainer.getElement('panel').setDepth(1.1);
             })
             .on('cell.out', function (cellContainer, cellIndex) {
                 cellContainer.getElement('panel.background').setStrokeStyle(2, COLOR_DARK);
-                cellContainer.setDepth(0);
+                cellContainer.getElement('panel').setDepth(1);
             })
             .on('cell.swipeleft', function (cellContainer, cellIndex) {
                 cellContainer.showRightSide();
@@ -140,7 +141,7 @@ class Demo extends Phaser.Scene {
                     gridTable.lastSideButton = undefined;
                 }
             })
-            .on('scroll', function(){
+            .on('scroll', function () {
                 if (gridTable.lastSideButton) {
                     gridTable.lastSideButton.showPanel();
                     gridTable.lastSideButton = undefined;

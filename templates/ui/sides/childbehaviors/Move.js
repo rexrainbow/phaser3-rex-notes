@@ -29,28 +29,32 @@ export default {
                     distance = GetDisplayHeight(child);
                     break;
                 default: // 'panel'
-                    if (isShownChild) {
-                        var previousChild = this.sizerChildren[this.previousChildKey];
+                    if (isShownChild) { // Show panel
                         switch (this.previousChildKey) {
                             case 'leftSide':
                             case 'rightSide':
-                                distance = GetDisplayWidth(previousChild);
+                                distance = GetDisplayWidth(this.sizerChildren[this.previousChildKey]);
                                 break;
                             case 'topSide':
                             case 'bottomSide':
-                                distance = GetDisplayHeight(previousChild);
+                                distance = GetDisplayHeight(this.sizerChildren[this.previousChildKey]);
+                                break;
+                            default:
+                                distance = 0;
                                 break;
                         }
-                    } else {
-                        var currentChild = this.sizerChildren[this.currentChildKey];
+                    } else { // Hide panel
                         switch (this.currentChildKey) {
                             case 'leftSide':
                             case 'rightSide':
-                                distance = GetDisplayWidth(currentChild);
+                                distance = GetDisplayWidth(this.sizerChildren[this.currentChildKey]);
                                 break;
                             case 'topSide':
                             case 'bottomSide':
-                                distance = GetDisplayHeight(currentChild);
+                                distance = GetDisplayHeight(this.sizerChildren[this.currentChildKey]);
+                                break;
+                            default:
+                                distance = 0;
                                 break;
                         }
                     }
@@ -131,6 +135,8 @@ export default {
             child.moveTo(duration, undefined, `-=${distance}`, ease);
         } else if (moveDown) {
             child.moveTo(duration, undefined, `+=${distance}`, ease);
+        } else {
+            child.moveTo(0);
         }
         return this;
     },

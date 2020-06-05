@@ -64,6 +64,7 @@ class Sides extends OverlapSizer {
     }
 
     reset() {
+        this.previousChildKey = undefined;
         this.currentChildKey = 'panel';
         this.showChild('panel', true);
         this.hideChild('leftSide', true);
