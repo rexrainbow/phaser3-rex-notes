@@ -3830,8 +3830,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-bitmap" class="md-nav__link">
-    Update bitmap
+  <a href="#update-text" class="md-nav__link">
+    Update text
   </a>
   
 </li>
@@ -5007,8 +5007,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-bitmap" class="md-nav__link">
-    Update bitmap
+  <a href="#update-text" class="md-nav__link">
+    Update text
   </a>
   
 </li>
@@ -5058,7 +5058,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rextextzoneplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextextzoneplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add text-zone geometry object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextextzoneplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextextzoneplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5084,7 +5084,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add text-zone geometry object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextZone&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextZone&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5096,20 +5096,23 @@
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">TextZone</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textzone.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add text-zone geometry object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextZone</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextZone</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextZone&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textZone</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextZone&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// offsetX: undefined,</span>
+    <span class="c1">// OffsetY: undefined</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
 <li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>. </li>
+<li><code>offsetX</code>, <code>offsetY</code> : Offset of bitmap data.<ul>
+<li><code>undefined</code> : Set <code>offsetX</code> to <code>textObject.displayOriginX</code>, and <code>offsetY</code> to <code>textObject.displayOriginY</code></li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Don't destroy textObject</p>
-<p>Position and display origin point of <code>textObject</code> are used for getting random point (<em>getRandomPoint</em>)</p>
-</div>
+</li>
+</ul>
 <h3 id="emit-zone"><a href="../particles/#emit-zone">Emit zone</a><a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span>
 <span class="p">[</span>
@@ -5128,9 +5131,11 @@
 </code></pre></div>
 
 <p><code>textZone</code> provides <em>getRandomPoint</em> method.</p>
-<h3 id="update-bitmap">Update bitmap<a class="headerlink" href="#update-bitmap" title="Permanent link">&para;</a></h3>
-<p>Call this method when text content is changed.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">textZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
+<h3 id="update-text">Update text<a class="headerlink" href="#update-text" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">textZone</span><span class="p">.</span><span class="nx">setTextObject</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// offsetX: undefined,</span>
+    <span class="c1">// OffsetY: undefined</span>
+<span class="p">});</span>
 </code></pre></div>
                 
                   

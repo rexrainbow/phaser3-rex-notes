@@ -23,7 +23,7 @@ Bitmap of a text game object' canvas. Designed for emitting particles from text.
     ```
 - Add text-zone geometry object
     ```javascript
-    var textZone = scene.plugins.get('rextextzoneplugin').add(textObject);
+    var textZone = scene.plugins.get('rextextzoneplugin').add(textObject, config);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Bitmap of a text game object' canvas. Designed for emitting particles from text.
     ```
 - Add text-zone geometry object
     ```javascript
-    var textZone = scene.plugins.get('rexTextZone').add(textObject);
+    var textZone = scene.plugins.get('rexTextZone').add(textObject, config);
     ```
 
 #### Import class
@@ -67,19 +67,21 @@ Bitmap of a text game object' canvas. Designed for emitting particles from text.
     ```
 - Add text-zone geometry object
     ```javascript
-    var textZone = new TextZone(textObject);
+    var textZone = new TextZone(textObject, config);
     ```
 
 ### Create shape
 
 ```javascript
-var textZone = scene.plugins.get('rexTextZone').add(textObject);
+var textZone = scene.plugins.get('rexTextZone').add(textObject, {
+    // offsetX: undefined,
+    // OffsetY: undefined
+});
 ```
 
 - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md). 
-
-!!! warning "Don't destroy textObject"
-    Position and display origin point of `textObject` are used for getting random point (*getRandomPoint*)
+- `offsetX`, `offsetY` : Offset of bitmap data.
+    - `undefined` : Set `offsetX` to `textObject.displayOriginX`, and `offsetY` to `textObject.displayOriginY`
 
 ### [Emit zone](particles.md#emit-zone)
 
@@ -102,10 +104,11 @@ var particles = scene.add.particles(key,
 
 `textZone` provides *getRandomPoint* method.
 
-### Update bitmap
-
-Call this method when text content is changed.
+### Update text
 
 ```javascript
-textZone.updateSource();
+textZone.setTextObject(textObject, {
+    // offsetX: undefined,
+    // OffsetY: undefined
+});
 ```
