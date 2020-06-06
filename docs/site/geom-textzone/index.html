@@ -3829,6 +3829,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update-bitmap" class="md-nav__link">
+    Update bitmap
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4999,6 +5006,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update-bitmap" class="md-nav__link">
+    Update bitmap
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5090,8 +5104,12 @@
 </code></pre></div>
 
 <ul>
-<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
+<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>. </li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Don't destroy textObject</p>
+<p>Position and display origin point of <code>textObject</code> are used for getting random point (<em>getRandomPoint</em>)</p>
+</div>
 <h3 id="emit-zone"><a href="../particles/#emit-zone">Emit zone</a><a class="headerlink" href="#emit-zone" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span>
 <span class="p">[</span>
@@ -5110,6 +5128,10 @@
 </code></pre></div>
 
 <p><code>textZone</code> provides <em>getRandomPoint</em> method.</p>
+<h3 id="update-bitmap">Update bitmap<a class="headerlink" href="#update-bitmap" title="Permanent link">&para;</a></h3>
+<p>Call this method when text content is changed.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">textZone</span><span class="p">.</span><span class="nx">updateSource</span><span class="p">();</span>
+</code></pre></div>
                 
                   
                 

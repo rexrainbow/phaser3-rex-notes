@@ -27,7 +27,7 @@ class FizzyText extends Container {
 
     set text(value) {
         this.textObject.setText(value);
-        this.textObject.textZone.update();
+        this.textObject.textZone.updateSource();
     }
 
     setText(value) {

@@ -76,7 +76,10 @@ Bitmap of a text game object' canvas. Designed for emitting particles from text.
 var textZone = scene.plugins.get('rexTextZone').add(textObject);
 ```
 
-- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md). 
+
+!!! warning "Don't destroy textObject"
+    Position and display origin point of `textObject` are used for getting random point (*getRandomPoint*)
 
 ### [Emit zone](particles.md#emit-zone)
 
@@ -98,3 +101,11 @@ var particles = scene.add.particles(key,
 ```
 
 `textZone` provides *getRandomPoint* method.
+
+### Update bitmap
+
+Call this method when text content is changed.
+
+```javascript
+textZone.updateSource();
+```

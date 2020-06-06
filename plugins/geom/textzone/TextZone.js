@@ -20,7 +20,7 @@ class TextZone {
         return this;
     }
 
-    update() {
+    updateSource() {
         var textBitMap = TextObjectToBitMap(this.textObject);
         this.width = textBitMap.width;
         this.height = textBitMap.height;
