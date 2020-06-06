@@ -3833,6 +3833,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-textzone/" title="TextZone" class="md-nav__link">
+      TextZone
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5075,6 +5087,8 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// padding: 0,</span>
+
     <span class="nx">textureKey</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
     <span class="c1">// textureFrames: undefined,</span>
     <span class="c1">// blendMode: &#39;ADD&#39;,</span>
@@ -5095,6 +5109,18 @@
 </code></pre></div>
 
 <ul>
+<li><code>padding</code> : Extra padded space around bounds of game object. Default is 0.<ul>
+<li>A number for left/right/top/bottom bounds,</li>
+<li>Or a plain object.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>textureKey</code> : Texture key of particles.</li>
 <li><code>textureFrames</code> : : One or more texture frames, or a configuration object.<ul>
 <li>String or number value.</li>

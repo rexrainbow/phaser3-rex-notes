@@ -236,6 +236,7 @@ nav:
         - Polygon: geom-polygon.md
         - Rhombus: geom-rhombus.md
         - Hexagon: geom-hexagon.md
+        - TextZone: geom-textzone.md
     - Curve: 
         - Path : path.md
         - Spiral curve: curve-spiral.md

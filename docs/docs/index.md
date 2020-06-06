@@ -50,6 +50,9 @@
 1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
+1. [Geom/Hexagon](geom-hexagon.md): Hexagon geometry object.
+1. [Geom/Rhombus](geom-rhombus.md): Rhombus shape and methods.
+1. [Geom/TextZone](geom-textzone.md): Bitmap of a text game object' canvas. Designed for emitting particles from text.
 1. [Gesture/Pan](gesture-pan.md): Get pan events of a game object.
 1. [Gesture/Pinch](gesture-pinch.md): Get scale factor from 2 dragging touch pointers.
 1. [Gesture/Press](gesture-press.md): Get press events of a game object.
@@ -58,7 +61,6 @@
 1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
-1. [Hexagon](geom-hexagon.md): Hexagon geometry object.
 1. [Image URI loader](imageuriloader.md): Load image by uri in preload stage.
 1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
@@ -75,7 +77,6 @@
 1. [Quest](quest.md): Question manager.
 1. [Random place](randomplace.md): Place objects randomly inside an area without overlapping.
 1. [Restorable data](restorabledata.md): Restorable data manager.
-1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Run-commands](runcommands.md): Run commands in array.
