@@ -1,6 +1,6 @@
-import TextZone from './textzone.js';
+import BitmapZone from './bitmapzone.js';
 
-class TextZonePlugin extends Phaser.Plugins.BasePlugin {
+class BitmapZonePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -11,9 +11,9 @@ class TextZonePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(textObject) {
-        return new TextZone(textObject);
+    add(source) {
+        return new BitmapZone(source);
     }
 }
 
-export default TextZonePlugin;
+export default BitmapZonePlugin;

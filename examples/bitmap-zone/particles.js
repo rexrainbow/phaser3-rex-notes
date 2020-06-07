@@ -1,4 +1,4 @@
-import TextZonePlugin from '../../plugins/textzone-plugin.js';
+import BitmapZonePlugin from '../../plugins/bitmapzone-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5)
             .setVisible(false);
 
-        var textZone = this.plugins.get('rexTextZone').add(textObject);
+        var textZone = this.plugins.get('rexBitmapZone').add(textObject);
         var particles = this.add.particles('flares').setPosition(textObject.x, textObject.y);
         var emitter = particles.createEmitter({
             blendMode: 'ADD',
@@ -49,8 +49,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexTextZone',
-            plugin: TextZonePlugin,
+            key: 'rexBitmapZone',
+            plugin: BitmapZonePlugin,
             start: true
         }]
     }

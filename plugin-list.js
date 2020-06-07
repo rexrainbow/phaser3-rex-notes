@@ -102,7 +102,7 @@ module.exports = {
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',
-    'textzoneplugin': './plugins/textzone-plugin.js',
+    'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
     // curve
     'spiralcurveplugin': './plugins/spiralcurve-plugin.js',
 

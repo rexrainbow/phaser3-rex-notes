@@ -50,9 +50,9 @@
 1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
+1. [Geom/Bitmap-zone](geom-bitmapzone.md): Bitmap of a text/canvas game object. Designed for emitting particles from text.
 1. [Geom/Hexagon](geom-hexagon.md): Hexagon geometry object.
 1. [Geom/Rhombus](geom-rhombus.md): Rhombus shape and methods.
-1. [Geom/TextZone](geom-textzone.md): Bitmap of a text game object' canvas. Designed for emitting particles from text.
 1. [Gesture/Pan](gesture-pan.md): Get pan events of a game object.
 1. [Gesture/Pinch](gesture-pinch.md): Get scale factor from 2 dragging touch pointers.
 1. [Gesture/Press](gesture-press.md): Get press events of a game object.

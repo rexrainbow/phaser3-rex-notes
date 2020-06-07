@@ -1,33 +1,33 @@
-import TextObjectToBitMap from '../../data/canvasdata/TextObjectToBitMap.js';
+import CanvasObjectToBitmap from '../../data/canvasdata/CanvasObjectToBitmap.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextZone {
-    constructor(textObject, config) {
+class BitmapZone {
+    constructor(canvasObject, config) {
         this.data = [];
-        this.setTextObject(textObject, config);
+        this.setSource(canvasObject, config);
     }
 
     get pointsCount() {
         return this.bitMapList.length;
     }
 
-    setTextObject(textObject, config) {
-        var textBitMap = TextObjectToBitMap(textObject);
-        this.width = textBitMap.width;
-        this.height = textBitMap.height;
+    setSource(canvasObject, config) {
+        var textBitmap = CanvasObjectToBitmap(canvasObject);
+        this.width = textBitmap.width;
+        this.height = textBitmap.height;
 
         var width = this.width;
         var data = this.data;
         data.length = 0;
-        textBitMap.forEachNonZero(function (value, x, y) {
+        textBitmap.forEachNonZero(function (value, x, y) {
             data.push((y * width) + x);
         });
 
-        var offsetX = GetValue(config, 'offsetX', textObject.displayOriginX);
-        var offsetY = GetValue(config, 'offsetY', textObject.displayOriginY);
+        var offsetX = GetValue(config, 'offsetX', canvasObject.displayOriginX);
+        var offsetY = GetValue(config, 'offsetY', canvasObject.displayOriginY);
         this.setOffset(offsetX, offsetY);
 
         return this;
@@ -35,9 +35,9 @@ class TextZone {
 
     setOffset(offsetX, offsetY) {
         if (typeof (offsetX) !== 'number') {
-            var textObject = offsetX;
-            offsetX = textObject.displayOriginX;
-            offsetY = textObject.displayOriginY;
+            var canvasObject = offsetX;
+            offsetX = canvasObject.displayOriginX;
+            offsetY = canvasObject.displayOriginY;
         }
         this.offsetX = offsetX;
         this.offsetY = offsetY;
@@ -68,4 +68,4 @@ class TextZone {
     }
 }
 
-export default TextZone;
+export default BitmapZone;

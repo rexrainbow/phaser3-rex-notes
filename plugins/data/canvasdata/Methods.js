@@ -1,7 +1,8 @@
-import TextObjectToBitMap from './TextObjectToBitMap.js';
-import TextureTColorMap from './TextureToColorMap.js';
+import CanvasObjectToBitmap from './CanvasObjectToBitmap.js';
+import TextureTColorMap from './TextureToColormap.js';
 
 export default {
-    textObjectToBitMap: TextObjectToBitMap,
+    textObjectToBitmap: CanvasObjectToBitmap,
+    canvasObjectToBitmap: CanvasObjectToBitmap,
     textureTColorMap: TextureTColorMap,
 }
