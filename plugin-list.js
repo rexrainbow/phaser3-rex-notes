@@ -63,6 +63,10 @@ module.exports = {
     'textpageplugin': './plugins/textpage-plugin.js',
     'texteditplugin': './plugins/textedit-plugin.js',
 
+    // extend of particles
+    'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
+    'perlingrivatywellplugin': './plugins/perlingrivatywell-plugin.js',
+
     // file chooser
     'filechooserplugin': './plugins/filechooser-plugin.js',
 
@@ -101,8 +105,7 @@ module.exports = {
     'perlinplugin': './plugins/perlin-plugin.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
-    'hexagonplugin': './plugins/hexagon-plugin.js',
-    'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
+    'hexagonplugin': './plugins/hexagon-plugin.js',    
     // curve
     'spiralcurveplugin': './plugins/spiralcurve-plugin.js',
 
