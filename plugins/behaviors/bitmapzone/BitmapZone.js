@@ -27,8 +27,13 @@ class BitmapZone {
 
         this.width = width;
         this.height = height;
-        var offsetX = GetValue(config, 'offsetX', -canvasObject.displayOriginX);
-        var offsetY = GetValue(config, 'offsetY', -canvasObject.displayOriginY);
+
+        var scaleX = GetValue(config, 'scaleX', canvasObject);
+        var scaleY = GetValue(config, 'scaleY', undefined);
+        this.setScale(scaleX, scaleY);
+
+        var offsetX = GetValue(config, 'offsetX', canvasObject);
+        var offsetY = GetValue(config, 'offsetY', undefined);
         this.setOffset(offsetX, offsetY);
 
         return this;
@@ -37,18 +42,26 @@ class BitmapZone {
     setOffset(offsetX, offsetY) {
         if (typeof (offsetX) !== 'number') {
             var canvasObject = offsetX;
-            offsetX = -canvasObject.displayOriginX;
-            offsetY = -canvasObject.displayOriginY;
+            offsetX = -(canvasObject.originX * canvasObject.displayWidth);
+            offsetY = -(canvasObject.originY * canvasObject.displayHeight);
         }
         this.offsetX = offsetX;
         this.offsetY = offsetY;
         return this;
     }
 
-    contains(x, y) {
-        x = Math.floor(x - this.offsetX);
-        y = Math.floor(y - this.offsetY);
-        return (this.data.indexOf((y * this.width) + x) !== -1)
+    setScale(scaleX, scaleY) {
+        if (typeof (scaleX) !== 'number') {
+            var canvasObject = scaleX;
+            scaleX = canvasObject.scaleX;
+            scaleY = canvasObject.scaleY;
+        }
+        if (scaleY === undefined) {
+            scaleY = scaleX;
+        }
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        return this;
     }
 
     getRandomPoint(out) {
@@ -59,8 +72,8 @@ class BitmapZone {
             var index = GetRandom(this.data);
             var x = index % this.width;
             var y = (index - x) / this.width;
-            out.x = x;
-            out.y = y;
+            out.x = x * this.scaleX;
+            out.y = y * this.scaleY;
         } else {
             out.x = 0;
             out.y = 0;
