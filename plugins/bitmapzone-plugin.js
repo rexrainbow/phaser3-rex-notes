@@ -11,8 +11,8 @@ class BitmapZonePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(source) {
-        return new BitmapZone(source);
+    add(source, config) {
+        return new BitmapZone(source, config);
     }
 }
 

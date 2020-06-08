@@ -32,7 +32,9 @@ nav:
             - Shader: shader.md
         - Multiple images: 
             - Blitter: blitter.md
-            - Particles: particles.md
+            - Particles:
+                - Particles: particles.md
+                - Bitmap zone: bitmapzone.md
             - Tile sprite: tilesprite.md
             - Nine patch: ninepatch.md
             - Line: line.md
@@ -235,8 +237,7 @@ nav:
         - Triangle: geom-triangle.md        
         - Polygon: geom-polygon.md
         - Rhombus: geom-rhombus.md
-        - Hexagon: geom-hexagon.md
-        - Bitmap zone: geom-bitmapzone.md
+        - Hexagon: geom-hexagon.md        
     - Curve: 
         - Path : path.md
         - Spiral curve: curve-spiral.md

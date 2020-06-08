@@ -1,2 +1,2 @@
-import BitmapZone from './geom/bitmapzone/BitmapZone.js';
+import BitmapZone from './behaviors/bitmapzone/BitmapZone.js';
 export default BitmapZone;

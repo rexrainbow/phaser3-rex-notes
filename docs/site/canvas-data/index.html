@@ -715,10 +715,46 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-2-2" type="checkbox" id="nav-4-2-2-2">
+    
+    <label class="md-nav__link" for="nav-4-2-2-2">
+      Particles
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-2-2-2">
+        Particles
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../particles/" title="Particles" class="md-nav__link">
       Particles
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bitmapzone/" title="Bitmap zone" class="md-nav__link">
+      Bitmap zone
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3411,8 +3447,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#text-object-bit-map" class="md-nav__link">
-    Text object -&gt; Bit map
+  <a href="#textcanvas-object-bitmap" class="md-nav__link">
+    Text/canvas object -&gt; Bitmap
   </a>
   
 </li>
@@ -3854,18 +3890,6 @@
   <li class="md-nav__item">
     <a href="../geom-hexagon/" title="Hexagon" class="md-nav__link">
       Hexagon
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../geom-bitmapzone/" title="Bitmap zone" class="md-nav__link">
-      Bitmap zone
     </a>
   </li>
 
@@ -5011,8 +5035,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#text-object-bit-map" class="md-nav__link">
-    Text object -&gt; Bit map
+  <a href="#textcanvas-object-bitmap" class="md-nav__link">
+    Text/canvas object -&gt; Bitmap
   </a>
   
 </li>
@@ -5097,7 +5121,7 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcanvasdataplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcanvasdataplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add canvas-data object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcanvasdataplugin&#39;</span><span class="p">).</span><span class="nx">textObjectToBitMap</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcanvasdataplugin&#39;</span><span class="p">).</span><span class="nx">canvasObjectToBitmap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcanvasdataplugin&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -5124,7 +5148,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add canvas-data object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textObjectToBitMap</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">canvasObjectToBitmap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -5137,17 +5161,21 @@
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CanvasData</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/canvasdata.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add canvas-data object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasdata</span> <span class="o">=</span> <span class="nx">CanvasData</span><span class="p">.</span><span class="nx">textObjectToBitMap</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasdata</span> <span class="o">=</span> <span class="nx">CanvasData</span><span class="p">.</span><span class="nx">canvasObjectToBitmap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">canvasdata</span> <span class="o">=</span> <span class="nx">CanvasData</span><span class="p">.</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="text-object-bit-map">Text object -&gt; Bit map<a class="headerlink" href="#text-object-bit-map" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textObjectToBitMap</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
-<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(textObject, out);</span>
+<h3 id="textcanvas-object-bitmap">Text/canvas object -&gt; Bitmap<a class="headerlink" href="#textcanvas-object-bitmap" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">canvasObjectToBitmap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).canvasObjectToBitmap(gameObject, out);</span>
 </code></pre></div>
 
 <ul>
-<li><code>textObject</code> : <a href="../text/">text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a></li>
+<li><code>gameObject</code> : <ul>
+<li>Any kind of text object : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>. </li>
+<li><a href="../canvas/">Canvas</a> object</li>
+</ul>
+</li>
 <li>For each pixel data
     <div class="codehilite"><pre><span></span><code><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">canvasData</span><span class="p">){</span>
 
@@ -5161,11 +5189,11 @@
 <ul>
 <li>Texture -&gt; Color map
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
-<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(textureKey, frameName, out);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).canvasObjectToBitmap(textureKey, frameName, out);</span>
 </code></pre></div></li>
 <li>Texture of game object -&gt; Color map
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(gameObject, out);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).canvasObjectToBitmap(gameObject, out);</span>
 </code></pre></div></li>
 <li>For each pixel data
     <div class="codehilite"><pre><span></span><code><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">canvasData</span><span class="p">){</span>
@@ -5212,7 +5240,7 @@
 
 <ul>
 <li><code>data</code> :<ul>
-<li><code>true</code>, or <code>false</code> in result of <code>textObjectToBitMap</code> method</li>
+<li><code>true</code>, or <code>false</code> in result of <code>canvasObjectToBitmap</code> method</li>
 <li>Color32 in result of <code>textureTColorMap</code> method</li>
 </ul>
 </li>

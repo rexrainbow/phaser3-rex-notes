@@ -24,7 +24,7 @@ Get image data from texture, or text object.
     ```
 - Add canvas-data object
     ```javascript
-    var canvasData = scene.plugins.get('rexcanvasdataplugin').textObjectToBitMap(textObject);
+    var canvasData = scene.plugins.get('rexcanvasdataplugin').canvasObjectToBitmap(gameObject);
     var canvasData = scene.plugins.get('rexcanvasdataplugin').textureTColorMap(textureKey, frameName);
     ```
 
@@ -54,7 +54,7 @@ Get image data from texture, or text object.
     ```
 - Add canvas-data object
     ```javascript
-    var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject);
+    var canvasData = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObject);
     var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
     ```
 
@@ -70,18 +70,20 @@ Get image data from texture, or text object.
     ```
 - Add canvas-data object
     ```javascript
-    var canvasdata = CanvasData.textObjectToBitMap(textObject);
+    var canvasdata = CanvasData.canvasObjectToBitmap(gameObject);
     var canvasdata = CanvasData.textureTColorMap(textureKey, frameName);
     ```
 
-### Text object -> Bit map
+### Text/canvas object -> Bitmap
 
 ```javascript
-var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject);
-// var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject, out);
+var canvasData = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObject);
+// var out = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObject, out);
 ```
 
-- `textObject` : [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md)
+- `gameObject` : 
+    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md). 
+    - [Canvas](canvas.md) object
 - For each pixel data
     ```javascript
     canvasData.forEach(function(value, x, y, canvasData){
@@ -95,12 +97,12 @@ var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObjec
 - Texture -> Color map
     ```javascript
     var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
-    // var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textureKey, frameName, out);
+    // var out = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(textureKey, frameName, out);
     ```
 - Texture of game object -> Color map
     ```javascript
     var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(gameObject);
-    // var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(gameObject, out);
+    // var out = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObject, out);
     ```
 - For each pixel data
     ```javascript
@@ -151,5 +153,5 @@ var data = canvasData.get(x, y);
 ```
 
 - `data` :
-    - `true`, or `false` in result of `textObjectToBitMap` method
+    - `true`, or `false` in result of `canvasObjectToBitmap` method
     - Color32 in result of `textureTColorMap` method

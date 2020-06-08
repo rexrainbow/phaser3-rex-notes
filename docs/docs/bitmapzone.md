@@ -1,6 +1,6 @@
 ## Introduction
 
-Bitmap of a text/canvas game object. Designed for emitting particles from text.
+Particles' emitter zone from canvas bitmap of text/canvas game object.
 
 - Author: Rex
 - Geometry object
@@ -21,7 +21,7 @@ Bitmap of a text/canvas game object. Designed for emitting particles from text.
     ```javascript
     scene.load.plugin('rexbitmapzoneplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbitmapzoneplugin.min.js', true);
     ```
-- Add bitmap-zone geometry object
+- Add bitmap-zone object
     ```javascript
     var bitmapZone = scene.plugins.get('rexbitmapzoneplugin').add(gameObject, config);
     ```
@@ -50,7 +50,7 @@ Bitmap of a text/canvas game object. Designed for emitting particles from text.
     };
     var game = new Phaser.Game(config);
     ```
-- Add bitmap-zone geometry object
+- Add bitmap-zone object
     ```javascript
     var bitmapZone = scene.plugins.get('rexBitmapZone').add(gameObject, config);
     ```
@@ -65,7 +65,7 @@ Bitmap of a text/canvas game object. Designed for emitting particles from text.
     ```javascript
     import BitmapZone from 'phaser3-rex-plugins/plugins/bitmapzone.js';
     ```
-- Add bitmap-zone geometry object
+- Add bitmap-zone object
     ```javascript
     var bitmapZone = new BitmapZone(gameObject, config);
     ```
@@ -73,17 +73,12 @@ Bitmap of a text/canvas game object. Designed for emitting particles from text.
 ### Create shape
 
 ```javascript
-var bitmapZone = scene.plugins.get('rexBitmapZone').add(gameObject, {
-    // offsetX: undefined,
-    // OffsetY: undefined
-});
+var bitmapZone = scene.plugins.get('rexBitmapZone').add(gameObject);
 ```
 
-- `gameObject` : 
-    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md). 
+- `gameObject` :
+    - Any kind of text object : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
     - [Canvas](canvas.md) object
-- `offsetX`, `offsetY` : Offset of bitmap data.
-    - `undefined` : Set `offsetX` to `gameObject.displayOriginX`, and `offsetY` to `gameObject.displayOriginY`
 
 ### [Emit zone](particles.md#emit-zone)
 
@@ -109,8 +104,5 @@ var particles = scene.add.particles(key,
 ### Update content
 
 ```javascript
-bitmapZone.setSource(gameObject, {
-    // offsetX: undefined,
-    // OffsetY: undefined
-});
+bitmapZone.setSource(gameObject);
 ```

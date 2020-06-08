@@ -1,7 +1,4 @@
-import CanvasObjectToBitmap from '../../data/canvasdata/CanvasObjectToBitmap.js';
-
 const GetRandom = Phaser.Utils.Array.GetRandom;
-
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class BitmapZone {
@@ -10,22 +7,26 @@ class BitmapZone {
         this.setSource(canvasObject, config);
     }
 
-    get pointsCount() {
-        return this.bitMapList.length;
-    }
-
     setSource(canvasObject, config) {
-        var textBitmap = CanvasObjectToBitmap(canvasObject);
-        this.width = textBitmap.width;
-        this.height = textBitmap.height;
+        var canvas = canvasObject.canvas;
 
-        var width = this.width;
+        var x = GetValue(config, 'x', 0);
+        var y = GetValue(config, 'y', 0);
+        var width = GetValue(config, 'width', canvas.width);
+        var height = GetValue(config, 'height', canvas.height);
+
+        var context = canvas.getContext('2d');
+        var imgData = context.getImageData(x, y, (x + width), (y + height)).data;
         var data = this.data;
         data.length = 0;
-        textBitmap.forEachNonZero(function (value, x, y) {
-            data.push((y * width) + x);
-        });
+        for (var i = 0, cnt = (imgData.length / 4); i < cnt; i++) {
+            if (imgData[(i * 4) + 3] > 0) {
+                data.push(i);
+            }
+        }
 
+        this.width = width;
+        this.height = height;
         var offsetX = GetValue(config, 'offsetX', canvasObject.displayOriginX);
         var offsetY = GetValue(config, 'offsetY', canvasObject.displayOriginY);
         this.setOffset(offsetX, offsetY);

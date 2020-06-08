@@ -50,7 +50,6 @@
 1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
-1. [Geom/Bitmap-zone](geom-bitmapzone.md): Bitmap of a text/canvas game object. Designed for emitting particles from text.
 1. [Geom/Hexagon](geom-hexagon.md): Hexagon geometry object.
 1. [Geom/Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [Gesture/Pan](gesture-pan.md): Get pan events of a game object.
@@ -71,6 +70,7 @@
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Nine patch](ninepatch.md): Stretchable image.
 1. [Particles-along-bounds](particles-along-bounds.md): Emit particles along bounds of game object.
+1. [Particles/Bitmap-zone](geom-bitmapzone.md): Particles' emitter zone from canvas bitmap of text/canvas game object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Perlin](perlin.md): Perlin2/Perlin3 noise and simplex2/simplex3 noise.
 1. [Pop up](popup.md): Scale up game object.
