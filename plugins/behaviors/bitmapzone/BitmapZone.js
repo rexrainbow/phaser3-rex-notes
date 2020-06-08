@@ -27,8 +27,8 @@ class BitmapZone {
 
         this.width = width;
         this.height = height;
-        var offsetX = GetValue(config, 'offsetX', canvasObject.displayOriginX);
-        var offsetY = GetValue(config, 'offsetY', canvasObject.displayOriginY);
+        var offsetX = GetValue(config, 'offsetX', -canvasObject.displayOriginX);
+        var offsetY = GetValue(config, 'offsetY', -canvasObject.displayOriginY);
         this.setOffset(offsetX, offsetY);
 
         return this;
@@ -37,8 +37,8 @@ class BitmapZone {
     setOffset(offsetX, offsetY) {
         if (typeof (offsetX) !== 'number') {
             var canvasObject = offsetX;
-            offsetX = canvasObject.displayOriginX;
-            offsetY = canvasObject.displayOriginY;
+            offsetX = -canvasObject.displayOriginX;
+            offsetY = -canvasObject.displayOriginY;
         }
         this.offsetX = offsetX;
         this.offsetY = offsetY;
@@ -46,8 +46,8 @@ class BitmapZone {
     }
 
     contains(x, y) {
-        x = Math.floor(x + this.offsetX);
-        y = Math.floor(y + this.offsetY);
+        x = Math.floor(x - this.offsetX);
+        y = Math.floor(y - this.offsetY);
         return (this.data.indexOf((y * this.width) + x) !== -1)
     }
 
@@ -59,12 +59,14 @@ class BitmapZone {
             var index = GetRandom(this.data);
             var x = index % this.width;
             var y = (index - x) / this.width;
-            out.x = x - this.offsetX;
-            out.y = y - this.offsetY;
+            out.x = x;
+            out.y = y;
         } else {
             out.x = 0;
             out.y = 0;
         }
+        out.x += this.offsetX;
+        out.y += this.offsetY;
         return out;
     }
 }
