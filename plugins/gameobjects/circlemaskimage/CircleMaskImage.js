@@ -90,12 +90,6 @@ class CircleMaskImage extends Canvas {
     }
 }
 
-const DrawMethods = [
-    DrawCircle,
-    DrawEllipse,
-    DrawRoundRectangle
-];
-
 const MASKTYPE = {
     circle: 0,
     ellipse: 1,
