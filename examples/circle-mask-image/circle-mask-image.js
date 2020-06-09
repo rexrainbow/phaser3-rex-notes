@@ -13,7 +13,17 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, 'image').setOrigin(0);
-        this.add.rexCircleMaskImage(400, 300, 'image');
+        
+        this.add.rexCircleMaskImage(200, 300, 'image');
+
+        this.add.rexCircleMaskImage(400, 300, 'image', {
+            maskType: 'ellipse'
+        });
+
+        this.add.rexCircleMaskImage(600, 300, 'image', {
+            maskType: 'roundRectangle',
+            radius: 20
+        });
     }
 
     update() { }

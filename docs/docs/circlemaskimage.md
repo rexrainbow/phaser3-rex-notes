@@ -96,14 +96,54 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var image = scene.add.rexCircleMaskImage(x, y, key, frame, {
-    maskType: 0
+    maskType: 0,
+    // radius: undefined
+});
+```
+
+or 
+
+```javascript
+var image = scene.add.rexCircleMaskImage(x, y, key, {
+    maskType: 0,
+    // radius: undefined
 });
 ```
 
 - `maskType` : Type of mask.
     - `null` : No mask.
-    - `0`, or `'circle'` : Circle mask.
-    - `1`, or `'ellipse'` : Ellipse mask.
+    - `'circle'`, or `0` : Circle mask.
+    - `'ellipse'`, or `1` : Ellipse mask.
+    - `'roundRectangle'`, or `2` : Round rectangle mask.
+- `radius` : Radius of round rectangle mask.
+    - `0` : Disable round corner.
+    - Number: 4 corners with the same radius.
+    - JSON
+        - 4 corners with the same radius X/Y
+            ```javascript
+            {
+                x: radiusX,
+                y: radiusY
+            }
+            ```
+        - Eeach radius of corner
+            ```javascript
+            {
+                tl: radius,
+                tr: radius,
+                bl: radius,
+                br: radius
+            }
+            ```
+            or
+            ```javascript
+            {
+                tl: {x : radiusX, y: radiusY},
+                tr: {x : radiusX, y: radiusY},
+                bl: {x : radiusX, y: radiusY},
+                br: {x : radiusX, y: radiusY},
+            }
+            ```
 
 
 Add image from JSON
@@ -114,6 +154,8 @@ var image = scene.make.rexCircleMaskImage({
     y: 0,
     key: key,
     frame: name,
+    maskType: 0,
+    // radius: undefined
     
     add: true
 });
@@ -149,7 +191,45 @@ image.setTexture(key, frame);
 // image.setTexture(key, frame, maskType);
 ```
 
+or
+
+```javascript
+image.setTexture(key, frame, {
+    maskType: 0,
+    // radius: undefined
+});
+```
+
 - `maskType` : Type of mask
     - `null` : No mask.
     - `0`, or `'circle'` : Circle mask. Default value.
     - `1`, or `'ellipse'` : Ellipse mask.
+- `radius` : Radius of round rectangle mask.
+    - `0` : Disable round corner.
+    - Number: 4 corners with the same radius.
+    - JSON
+        - 4 corners with the same radius X/Y
+            ```javascript
+            {
+                x: radiusX,
+                y: radiusY
+            }
+            ```
+        - Eeach radius of corner
+            ```javascript
+            {
+                tl: radius,
+                tr: radius,
+                bl: radius,
+                br: radius
+            }
+            ```
+            or
+            ```javascript
+            {
+                tl: {x : radiusX, y: radiusY},
+                tr: {x : radiusX, y: radiusY},
+                bl: {x : radiusX, y: radiusY},
+                br: {x : radiusX, y: radiusY},
+            }
+            ```
