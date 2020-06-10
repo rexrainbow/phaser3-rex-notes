@@ -1,7 +1,7 @@
 import Canvas from '../canvas/Canvas.js';
-import DrawCircle from './DrawCircle.js';
-import DrawEllipse from './DrawEllipse.js';
-import DrawRoundRectangle from './DrawRoundRectangle.js';
+import DrawCircle from './drawmethods/DrawCircle.js';
+import DrawEllipse from './drawmethods/DrawEllipse.js';
+import DrawRoundRectangle from './drawmethods/DrawRoundRectangle.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
