@@ -37,7 +37,7 @@ var OnPointerMove = function (pointer) {
     EmitChessEvent(
         'gameobjectout',
         'board.pointerout',
-        board, tileX, tileY,
+        board, this.prevTilePosition.x, this.prevTilePosition.y,
         pointer
     );
 
