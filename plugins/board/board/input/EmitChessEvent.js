@@ -1,6 +1,10 @@
 import InputCandidate from './../../../utils/input/InputCandidate.js';
 
 var EmitChessEvent = function (boardEventName, chessEventName, board, tileX, tileY, pointer) {
+    if ((tileX == null) || (tileY == null)) {
+        return;
+    }
+
     var boardEventCallback = (typeof (boardEventName) !== 'string') ? boardEventName : undefined;
     var chessEventCallback = (typeof (chessEventName) !== 'string') ? chessEventName : undefined;
 

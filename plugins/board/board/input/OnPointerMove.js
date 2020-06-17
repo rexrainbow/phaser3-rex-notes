@@ -30,7 +30,12 @@ var OnPointerMove = function (pointer) {
     if (this.pointer === null) { // Catch new touch pointer
         this.pointer = pointer;
     }
-    board.emit('tileout', pointer, this.prevTilePosition);
+
+    // prevTilePosition might be undefined at beginning
+    if ((this.prevTilePosition.x != null) && (this.prevTilePosition.y != null)) {
+        board.emit('tileout', pointer, this.prevTilePosition);
+    }
+
     board.emit('tilemove', pointer, this.tilePosition);
     board.emit('tileover', pointer, this.tilePosition);
 
