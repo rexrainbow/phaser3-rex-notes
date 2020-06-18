@@ -205,7 +205,7 @@ emitter.setEmitZone({
 });
 ```
 
-- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md), [BitmapZone](geom-bitmapzone.md), or [Path or Curve](path.md), which has `getRandomPoint(point)` method
+- `source` : Geom like [Circle](geom-circle.md), [Ellipse](geom-ellipse.md), [Rectangle](geom-rectangle.md),[Triangle](geom-triangle.md), [Polygon](geom-polygon.md), [BitmapZone](bitmapzone.md), or [Path or Curve](path.md), which has `getRandomPoint(point)` method
     - Custom zone
         ```javascript
         {

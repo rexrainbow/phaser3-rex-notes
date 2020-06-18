@@ -5263,7 +5263,7 @@ coneMode: 1
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li>Cost of blocker : <code>fieldOfView.BLOCKER</code></li>
+<li>Cost of blocker : <code>fieldOfView.BLOCKER</code>.</li>
 <li><code>curTile</code> : Currest testing tileXY.</li>
 <li><code>tileXYArray</code> : A <em>read only</em>  tileXY array of sight path.</li>
 </ul>
@@ -5277,6 +5277,10 @@ coneMode: 1
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Blocker is visible, but tiles after blocker are invisible.</p>
+</div>
 <h3 id="set-pre-test-function">Set pre-test function<a class="headerlink" href="#set-pre-test-function" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setPreTestFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>

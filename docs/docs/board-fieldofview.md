@@ -137,13 +137,16 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
             return cost;
         }
         ```
-        - Cost of blocker : `fieldOfView.BLOCKER`
+        - Cost of blocker : `fieldOfView.BLOCKER`.
         - `curTile` : Currest testing tileXY.
         - `tileXYArray` : A *read only*  tileXY array of sight path.
 - `debug` :
     - `debug.graphics` : A [graphics](graphics.md) object for showing debug messages.
     - `debug.visibleLineColor` : Color of visible line. Set `undefined` to not draw any line.
     - `debug.invisibleLineColor` : Color of invisible line. Set `undefined` to not draw any line.
+
+!!! note
+    Blocker is visible, but tiles after blocker are invisible.
 
 ### Set pre-test function
 
