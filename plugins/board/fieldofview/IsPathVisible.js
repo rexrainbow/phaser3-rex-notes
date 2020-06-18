@@ -13,20 +13,20 @@ var IsPathVisible = function (tileXYArray, visiblePoints) {
         return true;
     }
     var myTileXYZ = this.chessData.tileXYZ;
-    var tileXY, cost, afterBlocker = false;
+    var tileXY, cost, behindBlocker = false;
     for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {
         tileXY = tileXYArray[i];
         if (AreTileXYEqual(myTileXYZ, tileXY)) {
             continue;
         }
 
-        if (afterBlocker) {
+        if (behindBlocker) {
             return false;
         }
 
         cost = this.getCost(tileXY, tileXYArray);
         if (cost === BLOCKER) {
-            afterBlocker = true;
+            behindBlocker = true;
             continue;
         }
 

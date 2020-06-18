@@ -146,7 +146,7 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
     - `debug.invisibleLineColor` : Color of invisible line. Set `undefined` to not draw any line.
 
 !!! note
-    Blocker is visible, but tiles after blocker are invisible.
+    Blocker is visible, but tiles behind blocker are invisible.
 
 ### Set pre-test function
 
