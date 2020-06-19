@@ -16,7 +16,8 @@ Each scene has one or more cameras.
     ```
 - Add new camera
     ```javascript
-    var camera = scene.cameras.add(x, y, width, height);
+    var camera = scene.cameras.add();
+    // var camera = scene.cameras.add(x, y, width, height);
     ```
 - Add existed camera
     ```javascript

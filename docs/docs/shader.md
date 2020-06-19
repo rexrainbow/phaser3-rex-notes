@@ -89,6 +89,19 @@ var shader = scene.make.shader({
 
 ### Sampler2D uniform
 
+- Default uniform mappings :
+    - `resolution` (2f) - Set to the size of this shader.
+        - `uniform vec2 resolution;` in GLSL.
+    - `time` (1f) - The elapsed game time, in seconds.
+        - `uniform float time;` in GLSL.
+    - `mouse` (2f) - If a pointer has been bound (with `setPointer`), this uniform contains its position each frame.
+        - `uniform vec2 mouse;` in GLSL.
+    - `date` (4fv) - A vec4 containing the year, month, day and time in seconds.
+        - `uniform vec4 date;` in GLSL.
+    - `sampleRate` (1f) - Sound sample rate. 44100 by default.
+        - `uniform float sampleRate;` in GLSL.
+    - `iChannel0...3` (sampler2D) - Input channels 0 to 3. `null` by default.
+        `uniform sampler2D iChannel0;` in GLSL.
 - Get uniform object
     ```javascript
     var uniform = shader.getUniform(key);
@@ -104,6 +117,11 @@ var shader = scene.make.shader({
         var textureKey = shader.getUniform('iChannel2').textureKey;
         var textureKey = shader.getUniform('iChannel3').textureKey;
         ```
+- Sets a property of a uniform already present on this shader.
+    ```javascript
+    shader.setUniform(key, value);
+    ```
+    - `key` : The key of the uniform to modify. Use dots for deep properties, i.e. `resolution.value.x`.
 - Sets a sampler2D uniform from texture manager.
     ```javascript
     shader.setChannel0(textureKey);
