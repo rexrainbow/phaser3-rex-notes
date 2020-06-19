@@ -1,3 +1,5 @@
+// Reference: https://github.com/pixijs/pixi-filters/blob/master/filters/outline/src/outline.frag
+
 const frag = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp

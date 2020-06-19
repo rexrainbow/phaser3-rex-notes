@@ -1,4 +1,4 @@
-import OutlineEffectLayer from '../../plugins/gameobjects/effectlayer/outline/OutlineEffectLayer.js';
+import OutlineEffectLayerPlugin from '../../plugins/outlineeffectlayer-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,12 +12,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var effectLayer = new OutlineEffectLayer(this, {
+        var effectLayer = this.add.rexOutlineEffectLayer({
             outlineColor: 0xff0000,
             thickness: 3
-        });
-        this.add.existing(effectLayer);
-        effectLayer.setDepth(1);
+        })
+            .setDepth(1);
 
         var circle = new Phaser.Geom.Circle(400, 300, 200);
         var pos = { x: 0, y: 0 };
@@ -52,7 +51,14 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     backgroundColor: 0x333333,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexOutlineEffectLayer',
+            plugin: OutlineEffectLayerPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -12,6 +12,9 @@ module.exports = {
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
+    // effect layer (shader)
+    'effectlayerplugin': './plugins/effectlayer-plugin.js',
+    'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',
 
     // custom file loader      
     'webfontloaderplugin': './plugins/webfontloader-plugin.js',
