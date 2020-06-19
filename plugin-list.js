@@ -105,7 +105,7 @@ module.exports = {
     'perlinplugin': './plugins/perlin-plugin.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
-    'hexagonplugin': './plugins/hexagon-plugin.js',    
+    'hexagonplugin': './plugins/hexagon-plugin.js',
     // curve
     'spiralcurveplugin': './plugins/spiralcurve-plugin.js',
 
@@ -120,6 +120,7 @@ module.exports = {
     'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
     'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
     'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
+    'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
 
     // board
