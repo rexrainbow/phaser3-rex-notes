@@ -1,5 +1,4 @@
 var Proxy = {
-    cascadeMode: false,
     setParent: function(gameObject) {
         this.gameObject = gameObject;
         this.scene = gameObject.scene;
