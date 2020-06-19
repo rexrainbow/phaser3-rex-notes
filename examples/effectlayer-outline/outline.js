@@ -12,8 +12,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var effectLayer = new OutlineEffectLayer(this);
+        var effectLayer = new OutlineEffectLayer(this, {
+            outlineColor: 0xff0000,
+            thickness: 3
+        });
         this.add.existing(effectLayer);
+        effectLayer.setDepth(1);
 
         var circle = new Phaser.Geom.Circle(400, 300, 200);
         var pos = { x: 0, y: 0 };

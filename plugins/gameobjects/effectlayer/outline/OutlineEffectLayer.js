@@ -13,7 +13,11 @@ class OutlineEffectLayer extends EffectLayer {
         }
         // Note: quality can't be changed during runtime
         var frag = GetFrag(config) // GLSL shader
-        var baseShader = new BaseShader('Outline', frag);
+        var uniforms = {
+            thickness: { type: '2f', value: { x: 0, y: 0 } },
+            outlineColor: { type: '3f', value: { x: 0, y: 0, z: 0 } }
+        }
+        var baseShader = new BaseShader('Outline', frag, undefined, uniforms);
         super(scene, baseShader);
         this.type = 'rexOutlineEffectLayer';
 

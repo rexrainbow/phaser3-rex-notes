@@ -18,27 +18,26 @@ uniform vec3 outlineColor; // (0, 0, 0);
 const float DOUBLE_PI = 3.14159265358979323846264 * 2.;
 
 void main() {
+  vec2 uv = fragCoord / resolution;
   if ((thickness.x > 0.0) || (thickness.y > 0.0)) {
-    vec4 front = texture2D(iChannel0, fragCoord);
-    vec2 dxy = thickness/resolution;
+    vec4 front = texture2D(iChannel0, uv);
+    vec2 mag = thickness/resolution;
     vec4 curColor;
     float maxAlpha = 0.;
-    vec2 displaced;
+    vec2 offset;
     for (float angle = 0.; angle <= DOUBLE_PI; angle += #{angleStep}) {
-        displaced.x = fragCoord.x + dxy.x * cos(angle);
-        displaced.y = fragCoord.y + dxy.y * sin(angle);
-        curColor = texture2D(iChannel0, displaced);
+        offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
+        curColor = texture2D(iChannel0, uv + offset);
         maxAlpha = max(maxAlpha, curColor.a);
     }
     float resultAlpha = max(maxAlpha, front.a);
     
     gl_FragColor = vec4((front.rgb + (outlineColor.rgb * (1. - front.a)) * resultAlpha), resultAlpha);
   } else {
-    gl_FragColor = texture2D(iChannel0, fragCoord);
+    gl_FragColor = texture2D(iChannel0, uv);
   }
 
-}
-`;
+}`;
 
 
 const MAX_SAMPLES = 100;

@@ -1,3 +1,5 @@
+import RoundUpPowerOf2 from '../../utils/math/RoundUpPowerOf2.js';
+
 const Image = Phaser.GameObjects.Image;
 const AddItem = Phaser.Utils.Array.Add;
 const RemoveItem = Phaser.Utils.Array.Remove;
@@ -7,8 +9,8 @@ class EffectLayer extends Image {
         // gameObjects -> render-texture -> shader -> image
 
         // render-texture -> shader
-        var w = scene.sys.scale.width,
-            h = scene.sys.scale.height;
+        var w = RoundUpPowerOf2(scene.sys.scale.width),
+            h = RoundUpPowerOf2(scene.sys.scale.height);
         var rt = scene.make.renderTexture({ width: w, height: h, add: false });
         var shader = scene.add.shader(key, 0, 0, w, h);
         shader.setSampler2DBuffer('iChannel0', rt.glTexture, w, h, 0);
@@ -72,7 +74,7 @@ class EffectLayer extends Image {
         this.shader.setUniform(`${key}.value.z`, z);
         this.shader.setUniform(`${key}.value.w`, w);
         return this;
-    }    
+    }
 
     contains(gameObject) {
         return (this.children.indexOf(gameObject) !== -1);
