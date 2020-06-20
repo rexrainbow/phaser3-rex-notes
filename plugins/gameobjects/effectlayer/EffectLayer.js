@@ -26,7 +26,7 @@ class EffectLayer extends Image {
         shader.setSampler2DBuffer('iChannel0', rt.glTexture, width, height, 0);
 
         // shader -> image
-        var textureKey = `el${Date.now()}`;
+        var textureKey = `el${Date.now()}`; // Private texture
         shader.setRenderToTexture(textureKey, true);
 
         super(scene, x, y, textureKey);
@@ -53,6 +53,7 @@ class EffectLayer extends Image {
         }
 
         this.scene.events.off('postupdate', this.postUpdate, this);
+        this.scene.sys.textures.remove(this.texture); // Remove private texture
         this.clear(!fromScene);
         super.destroy(fromScene);
     }
