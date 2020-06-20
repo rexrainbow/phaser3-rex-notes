@@ -5,15 +5,25 @@ const AddItem = Phaser.Utils.Array.Add;
 const RemoveItem = Phaser.Utils.Array.Remove;
 
 class EffectLayer extends Image {
-    constructor(scene, key) {
+    constructor(scene, key, x, y, width, height) {
         // gameObjects -> render-texture -> shader -> image
 
+        if (typeof (x) === 'object') {
+            var config = x;
+            ({ x, y, width, height } = config)
+        }
+
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = scene.sys.scale.width; }
+        if (height === undefined) { height = scene.sys.scale.height; }
+
         // render-texture -> shader
-        var w = RoundUpPowerOf2(scene.sys.scale.width),
-            h = RoundUpPowerOf2(scene.sys.scale.height);
-        var rt = scene.make.renderTexture({ width: w, height: h, add: false });
-        var shader = scene.add.shader(key, 0, 0, w, h);
-        shader.setSampler2DBuffer('iChannel0', rt.glTexture, w, h, 0);
+        width = RoundUpPowerOf2(width);
+        height = RoundUpPowerOf2(height);
+        var rt = scene.make.renderTexture({ x: x, y: y, width: width, height: height, add: false });
+        var shader = scene.add.shader(key, x, y, width, height);
+        shader.setSampler2DBuffer('iChannel0', rt.glTexture, width, height, 0);
 
         // shader -> image
         var textureKey = `el${Date.now()}`;
@@ -28,6 +38,12 @@ class EffectLayer extends Image {
         this.rt = rt;
 
         this.children = [];
+
+        this.boot();
+    }
+
+    boot() {
+        this.scene.events.on('postupdate', this.postUpdate, this);
     }
 
     destroy(fromScene) {
@@ -36,17 +52,15 @@ class EffectLayer extends Image {
             return;
         }
 
+        this.scene.events.off('postupdate', this.postUpdate, this);
         this.clear(!fromScene);
         super.destroy(fromScene);
     }
 
-    preUpdate(time, delta) {
+    postUpdate(time, delta) {
         this.rt.clear();
-
         this.children.forEach((gameObject) => {
-
             this.rt.draw(gameObject, gameObject.x, gameObject.y);
-
         });
     }
 

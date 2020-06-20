@@ -12,11 +12,14 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        // Test camera scroll and zoom
+        // this.cameras.main.centerOn(0, 0).setZoom(0.5);
+
         var effectLayer = this.add.rexOutlineEffectLayer({
             outlineColor: 0xff0000,
             thickness: 3
         })
-            .setDepth(1);
+            .setDepth(1); // Place this effect layer in front of all target game objects
 
         var circle = new Phaser.Geom.Circle(400, 300, 200);
         var pos = { x: 0, y: 0 };
