@@ -662,18 +662,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shader/" title="Shader" class="md-nav__link">
-      Shader
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -809,10 +797,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3">
     
     <label class="md-nav__link" for="nav-4-2-3">
-      Mesh
+      Shader
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
       <label class="md-nav__title" for="nav-4-2-3">
+        Shader
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader/" title="Shader" class="md-nav__link">
+      Shader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4" type="checkbox" id="nav-4-2-4">
+    
+    <label class="md-nav__link" for="nav-4-2-4">
+      Mesh
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-4">
         Mesh
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -5254,7 +5278,8 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">main</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add new camera
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">();</span>
+<span class="c1">// var camera = scene.cameras.add(x, y, width, height);</span>
 </code></pre></div></li>
 <li>Add existed camera
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">addExisting</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>

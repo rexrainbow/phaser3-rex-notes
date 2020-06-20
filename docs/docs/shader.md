@@ -20,7 +20,7 @@ Reference: [load glsl](loader.md#glsl)
 var shader = scene.add.shader(key, x, y, width, height, textures);
 ```
 
-- `key` : The key of the shader to use from the *shader cache*, or a BaseShader instance.
+- `key` : The key of the shader to use from the *shader cache*, or a [BaseShader instance](shader.md#baseshader).
 - `x`, `y` : Position.
 - `width`, `height` : Size.
 - `textures` : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms. Lots of shaders expect textures to be **power-of-two sized**.
@@ -230,3 +230,30 @@ end
 ### Other properties
 
 See [game object](gameobject.md)
+
+### BaseShader
+
+```javascript
+var baseShader = new Phaser.Display.BaseShader(key, fragmentSrc, vertexSrc, uniforms);
+```
+
+- `key` : The key of this shader
+- `fragmentSrc` : The fragment source for the shader.
+- `vertexSrc` : The vertex source for the shader.
+    - `undefined`, or `''` : Use default vertex source.
+- `uniforms` : Optional object defining the uniforms the shader uses.
+    ```javascript
+    {
+        uniformName : {type: uniformType, value: initValue},
+        ...
+    }
+    ```
+    - `uniformName` : Uniform name in fragment source.
+    - `uniformType`, `initValue` : Type and initial value of uniform.
+        - `'1f'` : `initValue` is a single float value. 
+            - Example : `time: { type: '1f', value: 0 }`
+        - `'2f'` : `initValue` is float numbers `{x, y}`.
+            - Example : `resolution: { type: '2f', value: { x: this.width, y: this.height } }`
+        - `'3f'` : `initValue` is float numbers `{x, y, z}`.
+            - Example : `color: { type: '3f', value: {x: 0, y: 0, z: 0}}`
+        - `'4f'` : `initValue` is float numbers `{x, y, z, w}`.
