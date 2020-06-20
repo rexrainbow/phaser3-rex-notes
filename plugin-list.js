@@ -124,6 +124,7 @@ module.exports = {
     'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
     'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
+    'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',
