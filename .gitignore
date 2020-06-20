@@ -1,4 +1,3 @@
 /node_modules/*
 /watch-dist/*
 /index.html
-package-lock.json

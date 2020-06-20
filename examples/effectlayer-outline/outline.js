@@ -32,10 +32,10 @@ class Demo extends Phaser.Scene {
             )
                 .setInteractive()
                 .on('pointerover', function () {
-                    effectLayer.add(this)
+                    effectLayer.add(this);
                 })
                 .on('pointerout', function () {
-                    effectLayer.remove(this)
+                    effectLayer.remove(this);
                 })
         }
     }

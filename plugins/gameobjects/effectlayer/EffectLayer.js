@@ -29,7 +29,7 @@ class EffectLayer extends Image {
         var textureKey = `el${Date.now()}`;
         shader.setRenderToTexture(textureKey, true);
 
-        super(scene, 0, 0, textureKey);
+        super(scene, x, y, textureKey);
         this.type = 'rexEffectLayer';
 
         this.setOrigin(0);
@@ -58,9 +58,12 @@ class EffectLayer extends Image {
     }
 
     postUpdate(time, delta) {
-        this.rt.clear();
-        this.children.forEach((gameObject) => {
-            this.rt.draw(gameObject, gameObject.x, gameObject.y);
+        var rt = this.rt;
+        rt.clear();
+        this.children.forEach(function (gameObject) {
+            rt
+                .setScrollFactor(gameObject.scrollFactorX, gameObject.scrollFactorY)
+                .draw(gameObject, gameObject.x, gameObject.y)
         });
     }
 
