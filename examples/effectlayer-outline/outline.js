@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
         // this.cameras.main.centerOn(0, 0).setZoom(0.5);
 
         var effectLayer = this.add.rexOutlineEffectLayer({
+            knockout: true,
             outlineColor: 0xff0000,
             thickness: 3
         })

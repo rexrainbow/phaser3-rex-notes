@@ -14,6 +14,7 @@ varying vec2 fragCoord;
 uniform vec2 resolution;
 
 // Effect parameters
+uniform bool knockout;
 uniform vec2 thickness;
 uniform vec3 outlineColor; // (0, 0, 0);
 
@@ -33,10 +34,21 @@ void main() {
         maxAlpha = max(maxAlpha, curColor.a);
     }
     float resultAlpha = max(maxAlpha, front.a);
-    
-    gl_FragColor = vec4((front.rgb + (outlineColor.rgb * (1. - front.a)) * resultAlpha), resultAlpha);
+    vec4 resultColor = vec4((front.rgb + (outlineColor.rgb * (1. - front.a) * resultAlpha)), resultAlpha);
+
+    if (knockout && (resultColor == front)) {
+      gl_FragColor = vec4(0);
+    } else {
+      gl_FragColor = resultColor;
+    }
+
   } else {
-    gl_FragColor = texture2D(iChannel0, uv);
+    if (knockout) {
+      gl_FragColor = vec4(0);
+    } else {
+      gl_FragColor = texture2D(iChannel0, uv);
+    }
+
   }
 
 }`;

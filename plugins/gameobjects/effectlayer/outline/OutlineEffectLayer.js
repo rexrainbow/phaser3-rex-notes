@@ -15,6 +15,7 @@ class OutlineEffectLayer extends EffectLayer {
         // Note: quality can't be changed during runtime
         var frag = GetFrag(config) // GLSL shader
         var uniforms = {
+            knockout: { type: '1f', value: true },
             thickness: { type: '2f', value: { x: 0, y: 0 } },
             outlineColor: { type: '3f', value: { x: 0, y: 0, z: 0 } }
         }
@@ -22,6 +23,7 @@ class OutlineEffectLayer extends EffectLayer {
         super(scene, baseShader, config);
         this.type = 'rexOutlineEffectLayer';
 
+        this._knockout = 0;
         this._thickness = 0;
         this._outlineColor = new Color();
 
@@ -29,8 +31,29 @@ class OutlineEffectLayer extends EffectLayer {
     }
 
     resetFromJSON(o) {
+        this.setKnockout(GetValue(o, 'knockout', false));
         this.setThickness(GetValue(o, 'thickness', 3));
         this.setOutlineColor(GetValue(o, 'outlineColor', 0x000000));
+        return this;
+    }
+
+    // knockout
+    get knockout() {
+        return this._knockout;
+    }
+
+    set knockout(value) {
+        value = !!value;
+        if (this._knockout === value) {
+            return;
+        }
+
+        this._knockout = value;
+        this.setFloat1('knockout', value);
+    }
+
+    setKnockout(value) {
+        this.knockout = value;
         return this;
     }
 
