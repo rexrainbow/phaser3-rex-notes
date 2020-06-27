@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         // Test camera scroll
         // Bug: Don't support zoom < 1
-        this.cameras.main.centerOn(0, 0).setZoom(1.5);
+        this.cameras.main.centerOn(0, 0);
 
         var effectLayer = this.add.rexOutlineEffectLayer({
             knockout: true,

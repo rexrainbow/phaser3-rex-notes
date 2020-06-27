@@ -63,8 +63,8 @@ class EffectLayer extends Image {
     postUpdate(time, delta) {
         // Assume that game objects are displayed on main camera.
         var camera = this.scene.cameras.main;
-        var scrollX = camera.scrollX;
-        var scrollY = camera.scrollY;
+        var offsetX = camera.scrollX + this.x;
+        var offsetY = camera.scrollY + this.y;
 
         var rt = this.rt;
         rt.clear();
@@ -72,8 +72,8 @@ class EffectLayer extends Image {
             rt
                 .draw(
                     gameObject,
-                    gameObject.x - scrollX,
-                    gameObject.y - scrollY
+                    gameObject.x - offsetX,
+                    gameObject.y - offsetY
                 )
         });
     }
