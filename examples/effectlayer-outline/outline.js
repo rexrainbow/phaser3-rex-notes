@@ -12,8 +12,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        // Test camera scroll and zoom
-        // this.cameras.main.centerOn(0, 0).setZoom(0.5);
+        // Test camera scroll
+        // Bug: Don't support zoom < 1
+        this.cameras.main.centerOn(0, 0).setZoom(1.5);
 
         var effectLayer = this.add.rexOutlineEffectLayer({
             knockout: true,
@@ -22,7 +23,8 @@ class Demo extends Phaser.Scene {
         })
             .setDepth(1); // Place this effect layer in front of all target game objects
 
-        var circle = new Phaser.Geom.Circle(400, 300, 200);
+        // effectLayer.add(this.add.image(0, 0, 'mushroom'));
+        var circle = new Phaser.Geom.Circle(0, 0, 200);
         var pos = { x: 0, y: 0 };
         for (var i = 0; i < 10; i++) {
             circle.getRandomPoint(pos);

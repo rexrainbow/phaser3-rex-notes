@@ -32,7 +32,9 @@ class EffectLayer extends Image {
         super(scene, x, y, textureKey);
         this.type = 'rexEffectLayer';
 
-        this.setOrigin(0);
+        this
+            .setScrollFactor(0)
+            .setOrigin(0);
 
         this.shader = shader;
         this.rt = rt;
@@ -59,12 +61,20 @@ class EffectLayer extends Image {
     }
 
     postUpdate(time, delta) {
+        // Assume that game objects are displayed on main camera.
+        var camera = this.scene.cameras.main;
+        var scrollX = camera.scrollX;
+        var scrollY = camera.scrollY;
+
         var rt = this.rt;
         rt.clear();
         this.children.forEach(function (gameObject) {
             rt
-                .setScrollFactor(gameObject.scrollFactorX, gameObject.scrollFactorY)
-                .draw(gameObject, gameObject.x, gameObject.y)
+                .draw(
+                    gameObject,
+                    gameObject.x - scrollX,
+                    gameObject.y - scrollY
+                )
         });
     }
 
