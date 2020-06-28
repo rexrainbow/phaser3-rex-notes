@@ -110,10 +110,12 @@ class VirtualJoyStick {
 
     set x(x) {
         this.base.x = x;
+        this.thumb.x = x;
     }
 
     set y(y) {
         this.base.y = y;
+        this.thumb.y = y;
     }
 
     get x() {
