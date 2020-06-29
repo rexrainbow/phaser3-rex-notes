@@ -66,7 +66,7 @@ Draw a line with start/end/body textures.
     import Line from 'phaser3-rex-plugins/plugins/line.js';
     ```
 - Add line object
-    ```javascript    
+    ```javascript
     var line = new Line(scene, config);
     sscene.add.existing(line);
     ```

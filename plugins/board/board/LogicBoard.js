@@ -19,7 +19,7 @@ class Board extends EE {
         this.isBoard = GetValue(o, 'isBoard', true);
         this.setGrid(GetValue(o, 'grid', undefined));
         this.setWrapMode(GetValue(o, 'wrap', false));
-        this.setInfinityBoard(GetValue(o, 'inifinity', false));
+        this.setInfinityMode(GetValue(o, 'inifinity', false));
         this.setBoardWidth(GetValue(o, 'width', 0));
         this.setBoardHeight(GetValue(o, 'height', 0));
         return this;
@@ -65,7 +65,7 @@ class Board extends EE {
         return this;
     }
 
-    setInfinityBoard(mode) {
+    setInfinityMode(mode) {
         if (mode === undefined) {
             mode = true;
         }

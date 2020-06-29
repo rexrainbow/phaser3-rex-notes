@@ -39,6 +39,7 @@ nav:
             - Line: line.md
         - Shader:
             - Shader: shader.md
+            - Outline effect layer: effectlayer-outline.md
         - Mesh:
             - Quad: quad.md
             - Rope: rope.md
@@ -166,6 +167,7 @@ nav:
             - Inverse: shader-inverse.md
             - HSL adjust: shader-hsladjust.md
         - Outline:
+            - Outline: shader-outline.md
             - Toonify: shader-toonify.md
         - Position:
             - Swirl: shader-swirl.md

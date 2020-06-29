@@ -35,6 +35,7 @@
 1. [Drag-rotate](dragrotate.md): Get dragging angle around a specific point.
 1. [Ease-move](easemove.md): Ease-move game object.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
+1. [Effect layer/outline](effectlayer-outline.md): Draw outline of target game objects.
 1. [Event promise](eventpromise.md): Return a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) of an event.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
@@ -88,6 +89,7 @@
 1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.
 1. [Shader/hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 1. [Shader/inverse](shader-inverse.md): Inverse color post processing filter.
+1. [Shader/outline](shader-outline.md): Outline post processing filter.
 1. [Shader/pixelation](shader-pixelation.md): Pixelation post processing filter.
 1. [Shader/swirl](shader-swirl.md): Swirl post processing filter.
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.

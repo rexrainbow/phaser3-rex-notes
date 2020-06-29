@@ -179,6 +179,10 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
         - Blue: `color.blue`, 0~255.
 - Set
     ```javascript
+    pipelineInstance.setEdgeColor(value);
+    ```
+    or
+    ```javascript
     pipelineInstance.edgeColor = value;
     ```
     - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
