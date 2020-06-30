@@ -45,9 +45,16 @@ Built-in keyboard events of phaser.
     var keyObj = scene.input.keyboard.addKey('W');  // see `Key map` section
     // var keyObj = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     ```
+    or
+    ```javascript
+    var keyObj = scene.input.keyboard.addKey('W', enableCapture, emitOnRepeat);
+    ```
+    - `enableCapture` : Automatically call `preventDefault` on the native DOM browser event for the key codes being added.
+    - `emitOnRepeat` : Controls if the Key will continuously emit a 'down' event while being held down (true), or emit the event just once (false, the default).
 - Get key objects
     ```javascript
     var keys = scene.input.keyboard.addKeys('W,S,A,D');  // keys.W, keys.S, keys.A, keys.D
+    // var keys = scene.input.keyboard.addKeys('W,S,A,D', enableCapture, emitOnRepeat);
     ```
     or
     ```javascript
