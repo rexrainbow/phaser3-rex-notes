@@ -53,17 +53,10 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
     start.h = start.heuristic(end, astarHeuristicMode);
 
     // NEAREST NODE
-    var closestNode = start;
-    // helper function to update closerH
-    var updateCloserH = function (node, baseNode) {
-        if (astarHeuristicEnable) {
-            node.closerH = node.h;
-        } else {
-            node.closerH = node.closerH || node.heuristic(end, astarHeuristicMode, baseNode);
-        }
-    };
+    var closestNode;
     if (isPathSearch) {
-        updateCloserH(closestNode);
+        closestNode = start;
+        closestNode.closerH = closestNode.h || closestNode.heuristic(end, 0);
     }
     // NEAREST NODE
 
@@ -117,7 +110,7 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
 
                 // NEAREST NODE
                 if (isPathSearch) {
-                    updateCloserH(neighbor, start);
+                    neighbor.closerH = neighbor.h || neighbor.heuristic(end, 0);
                     isNeighborMoreCloser = (neighbor.closerH < closestNode.closerH) ||
                         ((neighbor.closerH === closestNode.closerH) && (neighbor.g < closestNode.g));
 
