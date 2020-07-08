@@ -1,11 +1,6 @@
-import IsArray from '../../../utils/object/IsArray.js';
 import Clamp from '../../../utils/math/Clamp.js';
 
-var ShapeToTileXYArray = function (shape, containsCallback, searchRectangle, out) {
-    if (IsArray(searchRectangle)) {
-        out = searchRectangle;
-    }
-
+var ShapeToTileXYArray = function (shape, containsCallback, out) {
     if (out === undefined) {
         out = [];
     }
