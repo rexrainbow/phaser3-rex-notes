@@ -56,7 +56,7 @@ var JoinRoom = function () {
             return Delay(300)
         })
         .then(function () {
-            return room.send('Hello world');
+            return room.broadcast.send('Hello world');
         })
 }
 
