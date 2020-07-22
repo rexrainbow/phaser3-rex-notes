@@ -48,16 +48,10 @@ class EffectLayer extends Image {
         this.scene.events.on('postupdate', this.postUpdate, this);
     }
 
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-
+    preDestroy() {
         this.scene.events.off('postupdate', this.postUpdate, this);
-        this.scene.sys.textures.remove(this.texture); // Remove private texture
-        this.clear(!fromScene);
-        super.destroy(fromScene);
+        // Private texture will be removed by shader game object
+        this.clear();
     }
 
     postUpdate(time, delta) {
