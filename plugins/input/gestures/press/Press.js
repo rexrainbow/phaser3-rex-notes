@@ -58,7 +58,10 @@ class Press extends OnePointerTracer {
     }
 
     onDragStart() {
-        this.state = (this.holdTime === 0) ? RECOGNIZED : BEGIN;
+        this.state = BEGIN;
+        if (this.holdTime === 0) {
+            this.state = RECOGNIZED;
+        }
     }
 
     onDragEnd() {

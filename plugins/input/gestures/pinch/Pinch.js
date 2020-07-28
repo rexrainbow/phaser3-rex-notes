@@ -44,7 +44,10 @@ class Pinch extends TwoPointersTracer {
     onDrag2Start() {
         this.scaleFactor = 1;
         this.prevDistance = this.distanceBetween;
-        this.state = (this.dragThreshold === 0) ? RECOGNIZED : BEGIN;
+        this.state = BEGIN;
+        if (this.dragThreshold === 0) {
+            this.state = RECOGNIZED;
+        }
     }
 
     onDrag2End() {

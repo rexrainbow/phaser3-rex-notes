@@ -50,7 +50,10 @@ class Pan extends OnePointerTracer {
     }
 
     onDragStart() {
-        this.state = (this.dragThreshold === 0) ? RECOGNIZED : BEGIN;
+        this.state = BEGIN;
+        if (this.dragThreshold === 0) {
+            this.state = RECOGNIZED;
+        }
     }
 
     onDragEnd() {
