@@ -6,7 +6,7 @@ class DefaultMask extends Graphics {
             shape = 0;
         }
         if (typeof (shape) === 'string') {
-            shaep = SHAPEMODE[shape];
+            shape = SHAPEMODE[shape];
         }
         if (padding === undefined) {
             padding = 0;
