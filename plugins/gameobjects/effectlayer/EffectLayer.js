@@ -46,10 +46,12 @@ class EffectLayer extends Image {
 
     boot() {
         this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.scale.on('resize', this.onWindowResize, this);
     }
 
     preDestroy() {
         this.scene.events.off('postupdate', this.postUpdate, this);
+        this.scene.scale.off('resize', this.onWindowResize, this);
         // Private texture will be removed by shader game object
         this.clear();
     }
@@ -62,14 +64,16 @@ class EffectLayer extends Image {
 
         var rt = this.rt;
         rt.clear();
-        this.children.forEach(function (gameObject) {
+        var child;
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            child = this.children[i];
             rt
                 .draw(
-                    gameObject,
-                    gameObject.x - offsetX,
-                    gameObject.y - offsetY
+                    child,
+                    child.x - offsetX,
+                    child.y - offsetY
                 )
-        });
+        }
     }
 
     setFloat1(key, value) {
@@ -135,6 +139,46 @@ class EffectLayer extends Image {
         }
         this.children.length = 0;
         return this;
+    }
+
+    resize(width, height) {
+        width = RoundUpPowerOf2(width);
+        height = RoundUpPowerOf2(height);
+
+        var shader = this.shader;
+        var rt = this.rt;
+
+        // Free texture
+        this.setTexture();
+
+        // Set size of render texture
+        rt.setSize(width, height);
+        shader.setSampler2DBuffer('iChannel0', rt.glTexture, width, height, 0);
+
+        // Set size of shader
+        shader.setSize(width, height);
+        // Free old texture
+        shader.renderer.deleteFramebuffer(shader.framebuffer);
+        shader.texture.destroy();
+        shader.framebuffer = null;
+        shader.glTexture = null;
+        shader.texture = null;
+        // call shader.setRenderToTexture again
+        shader.renderToTexture = false;
+        var textureKey = `el${Date.now()}`; // Create new gl texture
+        shader.setRenderToTexture(textureKey, true);
+
+        // Set new texture to image
+        this.setTexture(textureKey);
+        return this;
+    }
+
+    onWindowResize() {
+
+        // Get new window size
+        var width = this.scene.sys.scale.width;
+        var height = this.scene.sys.scale.height;
+        this.resize(width, height);
     }
 }
 
