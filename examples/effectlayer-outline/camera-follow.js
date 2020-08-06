@@ -12,6 +12,13 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.cameraFollowTo;
+        this.game.events.on('prerender', function () {
+            if (this.cameraFollowTo) {
+                this.cameras.main.centerOn(this.cameraFollowTo.x, this.cameraFollowTo.y);
+            }
+        }, this);
+
         var effectLayer = this.add.rexOutlineEffectLayer({
             knockout: true,
             outlineColor: 0xff0000,
@@ -21,7 +28,9 @@ class Demo extends Phaser.Scene {
 
         this.gameObject = this.physics.add.image(0, 300, 'mushroom');
         effectLayer.add(this.gameObject);
-        this.cameras.main.startFollow(this.gameObject);
+        this.cameraFollowTo = this.gameObject;
+
+        this.add.circle(400, 300, 10, 0x00ff00).setScrollFactor(0);
     }
 
     update() {
