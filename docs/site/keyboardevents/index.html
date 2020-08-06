@@ -5113,9 +5113,17 @@
 <li>Get key object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// see `Key map` section</span>
 <span class="c1">// var keyObj = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
-</code></pre></div></li>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keyObj</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="nx">enableCapture</span><span class="p">,</span> <span class="nx">emitOnRepeat</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>enableCapture</code> : Automatically call <code>preventDefault</code> on the native DOM browser event for the key codes being added.</li>
+<li><code>emitOnRepeat</code> : Controls if the Key will continuously emit a 'down' event while being held down (true), or emit the event just once (false, the default).</li>
+</ul>
+</li>
 <li>Get key objects
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">(</span><span class="s1">&#39;W,S,A,D&#39;</span><span class="p">);</span>  <span class="c1">// keys.W, keys.S, keys.A, keys.D</span>
+<span class="c1">// var keys = scene.input.keyboard.addKeys(&#39;W,S,A,D&#39;, enableCapture, emitOnRepeat);</span>
 </code></pre></div>
     or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKeys</span><span class="p">({</span>

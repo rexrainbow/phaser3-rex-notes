@@ -45,18 +45,18 @@ class EffectLayer extends Image {
     }
 
     boot() {
-        this.scene.events.on('postupdate', this.postUpdate, this);
+        this.scene.game.events.on('prerender', this.drawTargets, this);
         this.scene.scale.on('resize', this.onWindowResize, this);
     }
 
     preDestroy() {
-        this.scene.events.off('postupdate', this.postUpdate, this);
+        this.scene.game.events.off('prerender', this.drawTargets, this);
         this.scene.scale.off('resize', this.onWindowResize, this);
         // Private texture will be removed by shader game object
         this.clear();
     }
 
-    postUpdate(time, delta) {
+    drawTargets() {
         // Assume that game objects are displayed on main camera.
         var camera = this.scene.cameras.main;
         var offsetX = camera.scrollX + this.x;
