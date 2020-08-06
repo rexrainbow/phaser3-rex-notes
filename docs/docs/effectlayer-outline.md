@@ -165,3 +165,10 @@ Draw outline of added target game objects.
     ```javascript
     var hasGameObject = effectLayer.contains(gameObject);
     ```
+
+### Limitation
+
+* Can't support if `camera.zoom` is less then 1
+
+* Can't support if `camera.startFollow(gameObject)`, i.e. 
+  please scroll camera before target game objects draw on effect layer game object.
