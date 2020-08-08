@@ -1,4 +1,6 @@
+// TODO
 import { GetFrag } from './outline-frag.js';
+import FragCodeReplacer from '../utils/FragCodeReplacer';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -12,14 +14,15 @@ class OutlinePipeline extends TextureTintPipeline {
         }
 
         // Note: quality can't be changed during runtime
-        var frag = GetFrag(config) // GLSL shader
-
         var game = scene.game;
+        var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures);
         super({
             game: game,
             renderer: game.renderer,
             fragShader: frag // GLSL shader
         });
+        this._width = 0; // width wo resolution
+        this._height = 0; // height wo resolution
         this._thickness = 0;
         this._outlineColor = new Color();
 

@@ -1,4 +1,5 @@
-import frag from './pixelation-frag.js';
+import FragSrc from './pixelation-frag.js';
+import FragCodeReplacer from '../utils/FragCodeReplacer';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -6,6 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class PixelationPipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
         var game = scene.game;
+        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
             renderer: game.renderer,
@@ -32,7 +34,7 @@ class PixelationPipeline extends TextureTintPipeline {
 
     set pixelWidth(value) {
         this._pixelWidth = value;
-        this._setPixelSize();
+        this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelWidth(value) {
@@ -47,7 +49,7 @@ class PixelationPipeline extends TextureTintPipeline {
 
     set pixelHeight(value) {
         this._pixelHeight = value;
-        this._setPixelSize();
+        this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelHeight(value) {
@@ -61,12 +63,8 @@ class PixelationPipeline extends TextureTintPipeline {
         }
         this._pixelWidth = width;
         this._pixelHeight = height;
-        this._setPixelSize();
-        return this;
-    }
-
-    _setPixelSize() {
         this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
+        return this;
     }
 
     // size

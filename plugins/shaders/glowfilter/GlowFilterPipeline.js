@@ -1,4 +1,6 @@
-import frag from './glowfilter-frag.js';
+// TODO: This is Not Camera shader
+import FragSrc from './glowfilter-frag.js';
+import FragCodeReplacer from '../utils/FragCodeReplacer';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -7,6 +9,7 @@ const Clamp = Phaser.Math.Clamp;
 class GlowFilterPipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
         var game = scene.game;
+        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
             renderer: game.renderer,

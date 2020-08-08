@@ -1,4 +1,5 @@
-import frag from './swirl-frag.js';
+import FragSrc from './swirl-frag.js';
+import FragCodeReplacer from '../utils/FragCodeReplacer';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
@@ -8,6 +9,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class SwirlPipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
         var game = scene.game;
+        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
             renderer: game.renderer,

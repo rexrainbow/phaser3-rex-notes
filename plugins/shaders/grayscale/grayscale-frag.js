@@ -7,14 +7,13 @@ const frag = `
 precision highmedp float;
 
 // Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
+%MyTexture2D%
 
 // Effect parameters
 uniform float intensity;
 
 void main (void) {
-  vec4 front = texture2D(uMainSampler, outTexCoord);
+  vec4 front = MyTexture2D(outTexCoord);
   float gray = dot(front.rgb, vec3(0.299, 0.587, 0.114));
   gl_FragColor = mix(front, vec4(gray, gray, gray, front.a), intensity);
 }

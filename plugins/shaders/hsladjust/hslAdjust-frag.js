@@ -9,8 +9,7 @@ const frag = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highmedp float;
 
 // Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
+%MyTexture2D%
 
 // Effect parameters
 uniform float hueRotate;
@@ -20,7 +19,7 @@ uniform float lumAdjust;
 + RGBToHSL + HSLToRGB + 
 `
 void main(void) {
-	vec4 front = texture2D(uMainSampler, outTexCoord);
+	vec4 front = MyTexture2D(outTexCoord);
 	vec3 hsl = RGBToHSL(front.rgb);
 	hsl.x -= hueRotate;
 	hsl.y *= satAdjust;

@@ -11,8 +11,7 @@ const frag = `
 precision highmedp float;
 
 // Scene buffer
-uniform sampler2D uMainSampler; 
-varying vec2 outTexCoord;
+%MyTexture2D%
 uniform vec2 texSize;
 
 // Effect parameters
@@ -26,7 +25,7 @@ uniform vec3 edgeColor; // (0, 0, 0);
 `
 void main()
 {
-  vec4 front = texture2D(uMainSampler, outTexCoord);  
+  vec4 front = MyTexture2D(outTexCoord);  
   vec3 colorLevel;
   if ((hStep > 0.0) || (sStep > 0.0) || (vStep > 0.0)) {
     vec3 colorHsv = RGBToHSV(front.rgb);  
