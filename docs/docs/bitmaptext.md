@@ -176,6 +176,38 @@ txt.setFont(key);
 // txt.setFont(key, size, align);
 ```
 
+### Color of characters
+
+- By character
+    ```javascript
+    txt.setCharacterTint(start, length, tintFill);
+    // txt.setCharacterTint(start, length, tintFill, topLeft, topRight, bottomLeft, bottomRight);
+    ```
+    - `start` : Index starting character. 
+        - `< 0` : Counts back from the end of the text.
+    - `length` : Number of characters to tint.
+        - `-1` : All characters from `start`
+- By word
+    ```javascript
+    txt.setWordTint(word, count, tintFill);
+    // txt.setWordTint(word, count, tintFill, topLeft, topRight, bottomLeft, bottomRight);
+    ```
+    - `word` : The word to search for. 
+        - A string
+        - An index of the word in the words array.
+    - `count` : Number of matching words to tint.
+        - `-1` : All matching words
+
+### Drop shadow effect
+
+```javascript
+txt.setDropShadow(x, y, color, alpha);
+```
+
+- `x`, `y` : The horizontal/vertical offset of the drop shadow.
+- `color` : The color of the drop shadow.
+- `alpha` : The alpha of the drop shadow.
+
 ### Wrap
 
 - Wrap
