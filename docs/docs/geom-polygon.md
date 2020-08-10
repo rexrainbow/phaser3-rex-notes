@@ -80,11 +80,15 @@ polygon.setTo(points);
     ```javascript
     var isInside = Phaser.Geom.Polygon.ContainsPoint(polygon, point);
     ```
-- Reverse the order of points
+- Reverse the order of points.
     ```javascript
     var polygon = Phaser.Geom.Polygon.Reverse(polygon);
     ```
 - Smooth : Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
     ```javascript
     Phaser.Geom.Polygon.Smooth(polygon)
+    ```
+- Translate : Shift points.
+    ```javascript
+    Phaser.Geom.Polygon.Translate(polygon, x, y);
     ```

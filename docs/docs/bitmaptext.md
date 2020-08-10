@@ -249,8 +249,14 @@ var bounds = txt.getTextBounds(round);
 //     lines: {
 //         shortest: 0,
 //         longest: 0,
-//         lengths: null
-//     }
+//         lengths: null,
+//         height: 0
+//     },
+//     wrappedText: '',
+//     words: [],
+//     characters: [],
+//     scaleX: 0,
+//     scaleY: 0
 // };
 ```
 
@@ -258,6 +264,58 @@ var bounds = txt.getTextBounds(round);
 - `local` : The BitmapText based on fontSize and 0x0 coords.
 - `global` : The BitmapText, taking into account scale and world position.
 - `lines` : The BitmapText line data.
+- `wrappedText` : Wrapped content joined with `'\n'`.
+- `characters` : Information of each character.
+    ```javascript
+    {
+        char, code, i, x, y, w, h, t, b, r, line
+    }
+    ```
+    - `char` : Character (string).
+    - `code`: Character code (number)
+    - `i` : Index of character
+    - `x` , `y` : World position of this character
+    - `w`, `h` : Width/height of this character
+    - `t`, `b` : The top/bottom of the line this character is on.
+    - `r` : The right-most point of this character, including xAdvance.
+    - `line` : The line number the character appears on.
+- `words` : Information of each word.
+    ```javascript
+    {
+        word, i, x, y, w, h, cr
+
+    }
+    ```
+    - `word` : Word string.
+    - `i` : Index of start character
+    - `x`, `y` : World position of start character
+    - `w` , `h` : Width/height of word
+    - `cr` : Is last word of current line
+- `scaleX`, `scaleY` : Scale of width and height.
+
+#### Get information of character
+
+```javascript
+var data = txt.getCharacterAt(x, y);
+// var data = txt.getCharacterAt(x, y, camera);
+```
+
+- `x`, `y` : World position.
+- `camera` : The Camera which is being tested against.
+- `data` : Information of character at world position.
+    ```javascript
+    {
+        char, code, i, x, y, w, h, t, b, r, line
+    }
+    ```
+    - `char` : Character (string).
+    - `code`: Character code (number)
+    - `i` : Index of character
+    - `x` , `y` : World position of this character
+    - `w`, `h` : Width/height of this character
+    - `t`, `b` : The top/bottom of the line this character is on.
+    - `r` : The right-most point of this character, including xAdvance.
+    - `line` : The line number the character appears on.
 
 ### Other properties
 
