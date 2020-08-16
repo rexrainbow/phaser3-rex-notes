@@ -276,7 +276,7 @@ Whether this Body's rotation is affected by its angular acceleration and velocit
 
 - Rectangle
     ```javascript
-    gameObject.setSize(width, height, center);
+    gameObject.setBodySize(width, height, center);
     ```
     - `center` : `false` to set body's offset to (0, 0)
 - Circle

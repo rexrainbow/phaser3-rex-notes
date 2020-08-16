@@ -152,9 +152,9 @@ sprite.anims.load(key);
     ```javascript
     sprite.anims.chain(key);
     ```
-    - Reset
+    - Chain next and next animation
         ```javascript
-        sprite.anims.chain();
+        sprite.anims.chain().anims.chain();
         ```
 - Set to next frame
     ```javascript

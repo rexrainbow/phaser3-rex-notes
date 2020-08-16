@@ -245,6 +245,10 @@ var tween = scene.tweens.add({
     ```javascript
     function(tween, targets) { }
     ```
+- `onStop` : A tween property stopped.
+    ```javascript
+    function(tween, targets) { }
+    ```
 
 #### Ease equations
 
@@ -390,6 +394,12 @@ scene.tweens.timeScale = timescale;
 - A tween property yoyos.
     ```javascript
     tween.on('yoyo', function(tween, key, targets){
+
+    }, scope);
+    ```
+- A tween stopped.
+    ```javascript
+    tween.on('stop', function(tween, targets){
 
     }, scope);
     ```

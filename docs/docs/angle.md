@@ -64,6 +64,16 @@ Convert angle value, built-in methods of phaser.
     var out = Phaser.Math.RotateAroundDistance(point, x, y, angle, distance);
     ```
 
+### Rotate to angle
+
+```javascript
+var rad = Phaser.Math.Angle.RotateTo(currentAngle, targetAngle, lerp)
+```
+
+- `currentAngle`, : The current angle, in radians.
+- `targetAngle` : The target angle to rotate to, in radians.
+- `lerp` : The lerp value to add to the current angle.
+
 ### Random angle
 
 - Returns a random angle in the range [-pi, pi].

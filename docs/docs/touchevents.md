@@ -431,6 +431,13 @@ scene.input.addPointer(num);  // total points = num + 1
     ```javascript
     gameObject.input.alwaysEnabled = true;
     ```
+- `gameObject.input.dragStartX`, `gameObject.input.dragStartY` : The x/y coordinate of the Game Object 
+  that owns this Interactive Object when the drag started.
+- `gameObject.input.dragStartXGlobal`, `gameObject.input.dragStartYGlobal` : The x/y coordinate that 
+  the Pointer started dragging this Interactive Object from.
+- `gameObject.input.dragX`, `gameObject.input.dragY` : The x/y coordinate that this Interactive Object 
+  is currently being dragged to.
+
 
 ### Smooth
 
