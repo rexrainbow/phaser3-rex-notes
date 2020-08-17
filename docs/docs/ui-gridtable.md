@@ -325,6 +325,13 @@ See also - [dirty](ui-basesizer.md#dirty)
     table.refresh();
     ```
 
+### Cell container
+
+- Get
+    ```javascript
+    var container = table.getCellContainer(cellIndex);
+    ```
+
 ### Scroll content
 
 - Set
@@ -407,11 +414,15 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Refresh table cells
 
-```javascript
-table.refresh();
-```
-
-Which is equal to `table.setItems(table.items)`.
+- Refresh all visible cells
+    ```javascript
+    table.refresh();
+    ```
+    - Equal to `table.setItems(table.items)`.
+- Update a visible cell
+    ```javascript
+    table.updateVisibleCell(cellIndex);
+    ```
 
 ### Other properties
 

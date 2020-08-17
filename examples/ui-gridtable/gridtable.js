@@ -126,6 +126,15 @@ class Demo extends Phaser.Scene {
             }, this)
             .on('cell.click', function (cellContainer, cellIndex) {
                 this.print.text += 'click ' + cellIndex + ': ' + cellContainer.text + '\n';
+
+                var nextCellIndex = cellIndex + 1;
+                var nextItem = gridTable.items[nextCellIndex];
+                if (!nextItem) {
+                    return;
+                }
+                nextItem.color = 0xffffff - nextItem.color;
+                gridTable.updateVisibleCell(nextCellIndex);
+
             }, this)
             .on('cell.1tap', function (cellContainer, cellIndex) {
                 this.print.text += '1 tap (' + cellIndex + ': ' + cellContainer.text + ')\n';

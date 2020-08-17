@@ -11,6 +11,7 @@ import InsertNewCells from './InsertNewCells.js';
 import RemoveCells from './RemoveCells.js';
 import SetColumnCount from './SetColumnCount.js';
 import SetGridSize from './SetGridSize.js';
+import UpdateVisibleCell from './UpdateVisibleCell';
 
 export default {
     setTableOY: SetTableOY,
@@ -29,5 +30,6 @@ export default {
     insertNewCells: InsertNewCells,
     removeCells: RemoveCells,
     setColumnCount: SetColumnCount,
-    setGridSize: SetGridSize
+    setGridSize: SetGridSize,
+    updateVisibleCell: UpdateVisibleCell
 }
