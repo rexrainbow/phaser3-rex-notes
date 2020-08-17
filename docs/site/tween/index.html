@@ -5482,6 +5482,9 @@
 <li><code>onRepeat</code> : A tween property repeats, after any repeat delay expires.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
+<li><code>onStop</code> : A tween property stopped.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5603,6 +5606,11 @@
 </code></pre></div></li>
 <li>A tween property yoyos.
     <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>A tween stopped.
+    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

@@ -5808,6 +5808,12 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <li>Always receive input events, even if it's invisible or won't render :
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">alwaysEnabled</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </code></pre></div></li>
+<li><code>gameObject.input.dragStartX</code>, <code>gameObject.input.dragStartY</code> : The x/y coordinate of the Game Object 
+  that owns this Interactive Object when the drag started.</li>
+<li><code>gameObject.input.dragStartXGlobal</code>, <code>gameObject.input.dragStartYGlobal</code> : The x/y coordinate that 
+  the Pointer started dragging this Interactive Object from.</li>
+<li><code>gameObject.input.dragX</code>, <code>gameObject.input.dragY</code> : The x/y coordinate that this Interactive Object 
+  is currently being dragged to.</li>
 </ul>
 <h3 id="smooth">Smooth<a class="headerlink" href="#smooth" title="Permanent link">&para;</a></h3>
 <p>Get touch position from interpolation of previous touch position and current touch position.</p>

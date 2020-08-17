@@ -5134,6 +5134,13 @@
 <span class="p">});</span>  <span class="c1">// keys.up, keys.down, keys.left, keys.right</span>
 </code></pre></div></li>
 <li>Remove key object
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeAllKeys</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="c1">// scene.input.keyboard.removeAllKeys(destroy);</span>
+</code></pre></div><ul>
+<li><code>destroy</code> : Call <code>Key.destroy</code> on each removed Key object</li>
+</ul>
+</li>
+<li>Remove all key objects
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
 <span class="c1">// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
 </code></pre></div></li>
