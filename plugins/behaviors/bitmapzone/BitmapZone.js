@@ -12,11 +12,11 @@ class BitmapZone {
 
         var x = GetValue(config, 'x', 0);
         var y = GetValue(config, 'y', 0);
-        var width = GetValue(config, 'width', canvas.width);
-        var height = GetValue(config, 'height', canvas.height);
+        var width = GetValue(config, 'width', canvas.width - x);
+        var height = GetValue(config, 'height', canvas.height - y);
 
         var context = canvas.getContext('2d');
-        var imgData = context.getImageData(x, y, (x + width), (y + height)).data;
+        var imgData = context.getImageData(x, y, width, height).data;
         var data = this.data;
         data.length = 0;
         for (var i = 0, cnt = (imgData.length / 4); i < cnt; i++) {
