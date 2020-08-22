@@ -1,18 +1,17 @@
 import FragSrc from './toonify-frag.js';
 import FragCodeReplacer from '../utils/FragCodeReplacer';
 
-const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
+const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-class ToonifyPipeline extends TextureTintPipeline {
+class ToonifyPipeline extends MultiPipeline {
     constructor(scene, key, config) {
         var game = scene.game;
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            renderer: game.renderer,
             fragShader: frag // GLSL shader
         });
         this._width = 0; // width wo resolution

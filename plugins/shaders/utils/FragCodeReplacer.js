@@ -27,7 +27,6 @@ var GetMyTexture2DCode = function(maxTextures) {
 
 var FragCodeReplacer = function (frag, maxTextures) {
     frag = frag.replace(/%MyTexture2D%/gi, GetMyTexture2DCode(maxTextures));
-    console.log(frag)
     return frag;
 }
 

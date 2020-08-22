@@ -1,13 +1,12 @@
-// TODO
 import { GetFrag } from './outline-frag.js';
 import FragCodeReplacer from '../utils/FragCodeReplacer';
 
-const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
+const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-class OutlinePipeline extends TextureTintPipeline {
+class OutlinePipeline extends MultiPipeline {
     constructor(scene, key, config) {
         if (config === undefined) {
             config = {};
@@ -18,7 +17,6 @@ class OutlinePipeline extends TextureTintPipeline {
         var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures);
         super({
             game: game,
-            renderer: game.renderer,
             fragShader: frag // GLSL shader
         });
         this._width = 0; // width wo resolution

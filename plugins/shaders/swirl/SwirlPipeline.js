@@ -3,16 +3,15 @@ import FragCodeReplacer from '../utils/FragCodeReplacer';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
-const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
+const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class SwirlPipeline extends TextureTintPipeline {
+class SwirlPipeline extends MultiPipeline {
     constructor(scene, key, config) {
         var game = scene.game;
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            renderer: game.renderer,
             fragShader: frag // GLSL shader
         });
         this._width = 0; // width wo resolution
