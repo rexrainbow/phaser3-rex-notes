@@ -203,6 +203,9 @@ var table = scene.rexUI.add.gridTable({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
+    - `slider.position` : Position of this sldier.
+        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Sldier at left/top side.       
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
