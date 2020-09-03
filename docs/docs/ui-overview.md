@@ -258,7 +258,7 @@
 
 #### Set children interactive
 
-Helper method, which applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaiovrs on a game object, to detect input events of children.
+Helper method, which applies [click](button.md), [tap](gesture-tap.md), [press](gesture-press.md), [swipe](gesture-swipe.md) behaviors on a game object, to detect input events of children.
 
 ```javascript
 scene.rexUI.SetChildrenInteractive(sizer, {
