@@ -239,38 +239,16 @@ Reference [Group](group.md)
 #### Position
 
 ```javascript
-// child.x = x;
-// child.y = y;
-container.resetChildPositionState(child);
-```
-
-or
-
-```javascript
 container.setChildPosition(child, x, y);
 ```
 
 #### Visible
 
 ```javascript
-// child.visible = visible;
-container.resetChildVisibleState(child);
-```
-
-or
-
-```javascript
 container.setChildVisible(child, visible);
 ```
 
 #### Alpha
-
-```javascript
-// child.child = child;
-container.resetChildAlphaState(child);
-```
-
-or
 
 ```javascript
 container.setChildAlpha(child, alpha);
