@@ -14,7 +14,7 @@ var Layout = function (parent, newWidth, newHeight) {
     if (newHeight === undefined) {
         newHeight = Math.max(this.childrenHeight, this.minHeight);
     }
-    this.resize(this.minWidth, this.minHeight);
+    this.resize(newWidth, newHeight);
 
     // Layout background children
     this.layoutBackgrounds();
