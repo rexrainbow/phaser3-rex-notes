@@ -86,38 +86,8 @@ var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', {tags:tags})
 // var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
 ```
 
-Properties of a tag
+- `tags` : `{tagName:tag}`, see [Properties of tag](tagtext.md#properties-of-tag).
 
-```javascript
-{
-    fontFamily: 'Courier',   // or 'family', 'font-family'
-    fontSize: '16px',        // or 'size', 'font-size'
-    fontStyle: 'bold italic',// or 'style', 'font-style'
-    color: 'red',            // or 'font-color'
-    stroke: {
-        color: 'blue',
-        thinkness: 1
-    },
-    shadow: {
-        color: 'black',
-        offsetX: 2,
-        offsetY: 2,
-        blur: 2
-    },
-    underline: {            // or 'u'
-        color: 'blue',
-        thinkness: 3,
-        offset: -1
-    },
-    metrics: false
-    // metrics: {
-    //     ascent: 0,
-    //     descent: 0,
-    //     fontSize: 0
-    // }    
-    // area: key,
-}
-```
 
 Default style
 
@@ -161,7 +131,14 @@ Default style
     wrap: {
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
         width: null
-    }
+    },
+    metrics: false
+    // metrics: {
+    //     ascent: 0,
+    //     descent: 0,
+    //     fontSize: 0
+    // }    
+    // resolution: 1,
 
     tags: {
         //tag0: {
@@ -208,6 +185,35 @@ var txt = scene.make.rexTagText({
         - `left`, `center`, `right`
     - `valign` : Vertical alignment.
         - `top`, `center`, `bottom`
+
+
+#### Properties of tag
+
+```javascript
+{
+    fontFamily: 'Courier',   // or 'family', 'font-family'
+    fontSize: '16px',        // or 'size', 'font-size'
+    fontStyle: 'bold italic',// or 'style', 'font-style'
+    color: 'red',            // or 'font-color'
+    stroke: {
+        color: 'blue',
+        thinkness: 1
+    },
+    shadow: {
+        color: 'black',
+        offsetX: 2,
+        offsetY: 2,
+        blur: 2
+    },
+    underline: {            // or 'u'
+        color: 'blue',
+        thinkness: 3,
+        offset: -1
+    },
+    img: textureKey,
+    area: areaKey,
+}
+```
 
 ### Custom class
 
