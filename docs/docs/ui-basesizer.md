@@ -58,6 +58,11 @@ sizer.addBackground(gameObject);
     sizer.setMinHeight(height);
     ```
 
+!!! note "Resize top-most sizer"
+    ```javascript
+    sizer.setMinSize(width, height).layout()
+    ```
+
 ### Dirty
 
 Don't layout this sizer if `sizer.dirty` is `false`. i.e. Size of this sizer won't be changed, but won't layout children neither.
