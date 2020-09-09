@@ -39,7 +39,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
         // Set size
         if (child.isRexSizer) {
-            child.layout(
+            child._layout(
                 this,
                 GetExpandedChildWidth(this, child),
                 GetExpandedChildHeight(this, child));
