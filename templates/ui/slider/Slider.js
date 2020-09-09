@@ -5,6 +5,7 @@ import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -140,6 +141,13 @@ class Slider extends Sizer {
         // Skip hidden or !dirty sizer
         if (this.rexSizer.hidden || (!this.dirty)) {
             return this;
+        }
+
+        var track = this.getElement('track');;
+        if (this.orientation === 1) { // Vertical slider, set height of track to 0
+            ResizeGameObject(track, undefined, 0);
+        } else { // Horizontal slider, set width of track to 0
+            ResizeGameObject(track, 0, undefined);
         }
         super._layout(parent, newWidth, newHeight);
         this.updateThumb();

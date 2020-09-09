@@ -63,9 +63,12 @@ class Demo extends Phaser.Scene {
         updatePanel(scrollablePanel, content);
 
         // Shrink top-most sizer
-        scrollablePanel
-            .setMinSize(250, 220)
-            .layout();
+        this.input.once('pointerup', function () {
+            scrollablePanel
+                .setMinSize(250, 220)
+                .layout();
+        })
+
     }
 
     update() { }
