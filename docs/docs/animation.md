@@ -50,7 +50,7 @@ scene.anims.create({
     - Frame sequence indexing from start to end
         ```javascript
         var config = ;
-        scene.anims.generateFrameNames(key, 
+        scene.anims.generateFrameNames(key,
         {
             prefix: '',
             start: 0,
@@ -64,13 +64,13 @@ scene.anims.create({
     - Custom frame sequence
         ```javascript
         var config = ;
-        scene.anims.generateFrameNames(key, 
+        scene.anims.generateFrameNames(key,
         {
             prefix: '',
             suffix: '',
             zeroPad: 0,
             frames: [ ... ]
-            // outputArray: [], // Append frames into this array            
+            // outputArray: [], // Append frames into this array
         });
         ```
         - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
@@ -89,10 +89,11 @@ scene.anims.remove(key);
     ```
 - Stagger play (delay play)
     ```javascript
-    scene.anims.staggerPlay(key, children, stagger);
+    scene.anims.staggerPlay(key, children, stagger, staggerFirst);
     ```
     - `children` : An array of Game Objects to play the animation on
     - `stagger` : The amount of time, in milliseconds, to offset each play time by
+    - `staggerFirst` : Set `true` to apply delay on 1st child
 
 #### Pause all animations
 
@@ -104,12 +105,6 @@ scene.anims.pauseAll();
 
 ```javascript
 scene.anims.resumeAll();
-```
-
-#### Reverse animation
-
-```javascript
-scene.anims.reverse(key);
 ```
 
 #### Has animation
