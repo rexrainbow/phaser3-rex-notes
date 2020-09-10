@@ -724,6 +724,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    Name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#will-render" class="md-nav__link">
     Will render
   </a>
@@ -731,9 +738,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#name" class="md-nav__link">
-    Name
+  <a href="#add-to-scenecontainer" class="md-nav__link">
+    Add to scene/container
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    Add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    Remove
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5233,6 +5260,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#name" class="md-nav__link">
+    Name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#will-render" class="md-nav__link">
     Will render
   </a>
@@ -5240,9 +5274,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#name" class="md-nav__link">
-    Name
+  <a href="#add-to-scenecontainer" class="md-nav__link">
+    Add to scene/container
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add" class="md-nav__link">
+    Add
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove" class="md-nav__link">
+    Remove
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5684,6 +5738,16 @@
 <span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="name">Name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="will-render">Will render<a class="headerlink" href="#will-render" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Test render flag and camera filter.
@@ -5696,14 +5760,37 @@
 </ul>
 </li>
 </ul>
-<h3 id="name">Name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h3>
+<h3 id="add-to-scenecontainer">Add to scene/container<a class="headerlink" href="#add-to-scenecontainer" title="Permanent link">&para;</a></h3>
+<h4 id="add">Add<a class="headerlink" href="#add" title="Permanent link">&para;</a></h4>
+<p>Trigger <code>'addedtoscene'</code> event, which invoke <code>gameObject.addedToScene()</code></p>
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<li>Register <code>'addedtoscene'</code> event
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addedtoscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){});</span>
 </code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<li>Or, override <code>addedToScene</code> method
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyClass</span> <span class="kr">extends</span> <span class="nx">BaseClass</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">addedtoscene</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">.</span><span class="nx">addedtoscene</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h4 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
+<p>Trigger <code>'removedfromscene'</code> event, which invoke <code>gameObject.removedFromScene()</code></p>
+<ul>
+<li>Register <code>'removedfromscene'</code> event
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedfromscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){});</span>
+</code></pre></div></li>
+<li>Or, override <code>removedFromScene</code> method
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyClass</span> <span class="kr">extends</span> <span class="nx">BaseClass</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">removedFromScene</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">.</span><span class="nx">removedFromScene</span><span class="p">();</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>

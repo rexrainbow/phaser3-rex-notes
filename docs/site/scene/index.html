@@ -5363,6 +5363,15 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li>Boot
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
 </code></pre></div></li>
+<li>Game object added to scene<ul>
+<li>Add
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addedtoscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){})</span>
+</code></pre></div></li>
+<li>Remove
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedfromscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){})</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   

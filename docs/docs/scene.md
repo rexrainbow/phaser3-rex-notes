@@ -308,3 +308,12 @@ Preserve word in a scene.
     ```javascript
     scene.events.on('boot', function(){});
     ```
+- Game object added to scene
+    - Add
+        ```javascript
+        scene.events.on('addedtoscene', function(gameObject, scene){})
+        ```
+    - Remove
+        ```javascript
+        scene.events.on('removedfromscene', function(gameObject, scene){})
+        ```

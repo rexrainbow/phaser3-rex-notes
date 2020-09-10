@@ -374,7 +374,7 @@ See [touch event](touchevents.md#quick-start)
         ```
         ```javascript
         gameObject.data.events.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
-        ```           
+        ```
 
 See [data manager](datamanager.md)
 
@@ -423,6 +423,18 @@ See [data manager](datamanager.md)
     var frameName = gameObject.frame.name;
     ```
 
+### Name
+
+- Get
+    ```javascript
+    var name = gameObject.name;
+    ```
+- Set
+    ```javascript
+    gameObject.setName(name);
+    gameObject.name = name;
+    ```
+
 ### Will render
 
 - Test render flag and camera filter.
@@ -435,16 +447,44 @@ See [data manager](datamanager.md)
     ```
     - `Phaser.GameObjects.GameObject.RENDER_MASK` : 15 (Visible, Alpha, Transform and Texture)
 
-### Name
+### Add to scene/container
 
-- Get
+#### Add
+
+Trigger `'addedtoscene'` event, which invoke `gameObject.addedToScene()`
+
+- Register `'addedtoscene'` event
     ```javascript
-    var name = gameObject.name;
+    gameObject.on('addedtoscene', function(gameObject, scene){});
     ```
-- Set
+- Or, override `addedToScene` method
     ```javascript
-    gameObject.setName(name);
-    gameObject.name = name;
+    class MyClass extends BaseClass {
+        // ...
+        addedtoscene() {
+            super.addedtoscene();
+            // ...
+        }
+    }
+    ```
+
+#### Remove
+
+Trigger `'removedfromscene'` event, which invoke `gameObject.removedFromScene()`
+
+- Register `'removedfromscene'` event
+    ```javascript
+    gameObject.on('removedfromscene', function(gameObject, scene){});
+    ```
+- Or, override `removedFromScene` method
+    ```javascript
+    class MyClass extends BaseClass {
+        // ...
+        removedFromScene() {
+            super.removedFromScene();
+            // ...
+        }
+    }
     ```
 
 ### Custom class
