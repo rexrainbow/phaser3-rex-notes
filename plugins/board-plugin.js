@@ -23,7 +23,12 @@ class BoardPlugin extends Phaser.Plugins.ScenePlugin {
 
         // Helper functions
         this.hexagonMap = HexagonMap;
-    }        
+    }
+
+    start() {
+        var eventEmitter = this.scene.events;
+        eventEmitter.on('destroy', this.destroy, this);
+    }
 }
 
 export default BoardPlugin;

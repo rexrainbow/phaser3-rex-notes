@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('buttons', function (config) {
     var gameObject = new Buttons(this.scene, config);
-    this.scene.add.existing(gameObject);
+    this.displayList.add(gameObject);
     return gameObject;
 });
 

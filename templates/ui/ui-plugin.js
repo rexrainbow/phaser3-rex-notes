@@ -62,6 +62,11 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         this.add = new ObjectFactory(scene);
     }
 
+    start() {
+        var eventEmitter = this.scene.events;
+        eventEmitter.on('destroy', this.destroy, this);
+    }
+
     get viewport() {
         return GetViewport(this.scene, true);
     }
