@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('scrollableBlock', function (config) {
     var gameObject = new ScrollableBlock(this.scene, config);
-    this.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

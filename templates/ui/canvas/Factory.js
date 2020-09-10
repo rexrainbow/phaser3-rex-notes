@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('canvas', function (x, y, width, height) {
     var gameObject = new Canvas(this.scene, x, y, width, height);
-    this.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

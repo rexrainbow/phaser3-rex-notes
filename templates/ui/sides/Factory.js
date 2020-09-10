@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('sides', function (config) {
     var gameObject = new Sides(this.scene, config);
-    this.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

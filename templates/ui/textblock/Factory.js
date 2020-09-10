@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('textBlock', function (x, y, minWidth, minHeight, textGameObject, config) {
     var gameObject = new TextBlock(this.scene, x, y, minWidth, minHeight, textGameObject, config);
-    this.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

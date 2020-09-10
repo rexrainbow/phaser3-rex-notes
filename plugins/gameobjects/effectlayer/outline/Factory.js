@@ -2,6 +2,6 @@ import OutlineEffectLayer from './OutlineEffectLayer.js';
 
 export default function (config) {
     var gameObject = new OutlineEffectLayer(this.scene, config);
-    this.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 };
