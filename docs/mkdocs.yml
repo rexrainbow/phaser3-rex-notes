@@ -317,6 +317,7 @@ nav:
 - Storage:
     - LocalStorage: localstorage.md
     - LocalForage: localforage.md
+- Plugin list: plugin-list.md
 - Tools: tools.md
 
 

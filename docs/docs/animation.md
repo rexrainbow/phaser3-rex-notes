@@ -14,13 +14,15 @@ Animation and animations manager.
 scene.anims.create({
     key: '',
     frames: [],
+    skipMissedFrames: true,
     defaultTextureKey: null,
+    startFrame: 0,
 
     // time
     delay: 0,
     frameRate: null,
     duration: null,
-    skipMissedFrames: true,
+    timeScale: 1,
 
     // repeat
     repeat: 0,              // set to (-1) to repeat forever
@@ -75,11 +77,42 @@ scene.anims.create({
         ```
         - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
 
+##### Add from Aseprite
+
+[Aseprite](tool.md#aseprite)
+
+```javascript
+scene.anims.createFromAseprite(key);
+// scene.anims.createFromAseprite(key, tags);
+```
+
+- `key` : The key of the loaded Aseprite atlas.
+- `tags` :
+    - `undefined` : Load all tags.
+    - Array of string tag : Load these tags.
+
 #### Remove animation
 
 ```javascript
 scene.anims.remove(key);
 ```
+
+#### Delay between two animations
+
+- Add
+    ```javascript
+    scene.anims.addMix(animA, animB, delay);
+    ```
+    - `animA`, `animB` : String key of an animation, or an instance of animation.
+- Remove
+    ```javascript
+    scene.anims.removeMix(animA, animB);
+    // scene.anims.removeMix(animA);
+    ```
+- Get
+    ```javascript
+    var delay = scene.anims.getMix(animA, animB);
+    ```
 
 #### Play animation
 
@@ -110,7 +143,7 @@ scene.anims.resumeAll();
 #### Has animation
 
 ```javascript
-var exists = scene.anims.exists(key);
+var hasAnim = scene.anims.exists(key);
 ```
 
 #### Export/load
@@ -122,6 +155,7 @@ var exists = scene.anims.exists(key);
 - Load from JSON
     ```javascript
     scene.anims.fromJSON(json);
+    // scene.anims.fromJSON(json, clearCurrentAnimations);
     ```
     - Load JSON in preload stage
         ```javascript
@@ -205,23 +239,4 @@ var anim = scene.anims.get(key);
     or
     ```javascript
     var jsonString = JSON.stringify(anim);
-    ```
-
-#### Events
-
-- On start
-    ```javascript
-    anim.on('start', function(currentAnim, currentFrame, sprite){});
-    ```
-- On restart
-    ```javascript
-    anim.on('restart', function(currentAnim, currentFrame, sprite){});
-    ```
-- On complete
-    ```javascript
-    anim.on('complete', function(currentAnim, currentFrame, sprite){});
-    ```
-- On repeat
-    ```javascript
-    anim.on('repeat', function(currentAnim, currentFrame, sprite){});
     ```

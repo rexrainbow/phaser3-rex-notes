@@ -110,121 +110,146 @@ See [game object](gameobject.md)
 
 #### Create animation
 
-See [Add animation section](animation.md#add-animation).
+- Global animation for all sprites
+    ```javascript
+    scene.anims.create(config)
+    ```
+- Private animation for this sprite
+    ```javascript
+    sprite.anims.create(config);
+    ```
 
-#### Load animation
+`config` : See [Add animation section](animation.md#add-animation).
 
-```javascript
-sprite.anims.load(key);
-// sprite.anims.load(key, startFrame);
-```
+##### Remove animation
+
+- Remove from global animation manager
+    ```javascript
+    scene.anims.remove(key);
+    ```
+    or
+    ```javascript
+    sprite.anims.globalRemove(key);
+    ```
+- Remove from private animation state
+    ```javascript
+    sprite.anims.remove(key);
+    ```
+
+##### Get animation
+
+- Get global [animation object](animation.md#animation-object)
+    ```javascript
+    var anim = scene.anims.get(key);
+    ```
+- Get private [animation object](animation.md#animation-object)
+    ```javascript
+    var anim = sprite.anims.get(key);
+    ```
+
+##### Has animation
+
+- Has global animation object
+    ```javascript
+    var hasAnim = scene.anims.exists(key);
+    ```
+- Get private animation object
+    ```javascript
+    var hasAnim = sprite.anims.exists(key);
+    ```
 
 #### Play animation
 
 - Play
     ```javascript
     sprite.play(key);
-    // sprite.play(key, ignoreIfPlaying, startFrame);
+    // sprite.play(key, ignoreIfPlaying);
     ```
-    or
-    ```javascript
-    sprite.anims.play(key);
-    // sprite.anims.play(key, ignoreIfPlaying, startFrame);
-    ```
-    - Set current frame
-        ```javascript
-        sprite.anims.setCurrentFrame(frame);
-        ```
-    - Set playback progress
-        ```javascript
-        sprite.anims.setProgress(t); // t: 0~1
-        ```
+    - `key` : Animation key string, or animation config
+        - String key of animation
+        - Animation config, to override default config
+            ```javascript
+            {
+                key,
+                frameRate,
+                duration,
+                delay,
+                repeat,
+                repeatDelay,
+                yoyo,
+                showOnStart,
+                hideOnComplete,
+                startFrame,
+                timeScale
+            }
+            ```
 - Play in reverse
     ```javascript
-    sprite.anims.playReverse(key);
-    // sprite.playReverse(key, ignoreIfPlaying, startFrame);
+    sprite.playReverse(key);
+    // sprite.playReverse(key, ignoreIfPlaying);
     ```
-    - Reverse the Animation that is already playing
-        ```javascript
-        sprite.anims.reverse(key);
-        ```
+    - `key` : Animation key string, or animation config
+- Play after delay
+    ```javascript
+    sprite.playAfterDelay(key, delay);
+    ```
+    - `key` : Animation key string, or animation config
+- Play after repeat
+    ```javascript
+    sprite.playAfterRepeat(key, repeatCount);
+    ```
+    - `key` : Animation key string, or animation config
+
+#### Chain
+
 - Chain next animation
     ```javascript
-    sprite.anims.chain(key);
+    sprite.chain(key);
     ```
-    - Chain next and next animation
-        ```javascript
-        sprite.anims.chain().anims.chain();
-        ```
-- Set to next frame
+    - `key` : Animation key string, or animation config
+- Chain next and next animation
     ```javascript
-    sprite.anims.nextFrame();
+    sprite.chain(key0).chain(key1);
     ```
-- Set to previous frame
-    ```javascript
-    sprite.anims.previousFrame();
-    ```
-- Time scale
-    ```javascript
-    sprite.anims.setTimeScale(value);
-    ```
-
-#### Pause
-
-```javascript
-sprite.anims.pause();
-// sprite.anims.pause(atFrame);
-```
-
-#### Resume
-
-```javascript
-sprite.anims.resume();
-// sprite.anims.resume(fromFrame);
-```
+    - `key0`, `key1` : Animation key string, or animation config
 
 #### Stop
 
-```javascript
-sprite.anims.stop();
-```
-or
-```javascript
-sprite.anims.stopAfterDelay(delay);
-```
-or
-```javascript
-sprite.anims.stopOnFrame(frame);
-```
+- Immediately stop
+    ```javascript
+    sprite.stop();
+    ```
+- Stop after delay
+    ```javascript
+    sprite.stopAfterDelay(delay);
+    ```
+- Stop at frame
+    ```javascript
+    sprite.stopOnFrame(frame);
+    ```
+    - `frame` : Frame object in current animation.
+        ```javascript
+        var currentAnim = sprite.anims.currentAnim;
+        var frame = currentAnim.getFrameAt(index);
+        ```
+- Stop after repeat
+    ```javascript
+    sprite.stopAfterRepeat(repeatCount);
+    ```
 
 #### Restart
 
 ```javascript
 sprite.anims.restart();
-// sprite.anims.restart(includeDelay);
+// sprite.anims.restart(includeDelay, resetRepeats);
 ```
-
-#### Repeat
-
-- Set repeat
-    ```javascript
-    sprite.anims.setRepeat(value);
-    ```
-- Set yoyo
-    ```javascript
-    sprite.anims.setYoyo(value);
-    ```
-- Stop repeat
-    ```javascript
-    sprite.anims.stopOnRepeat();
-    ```
-- Set repeat delay
-    ```javascript
-    sprite.anims.setRepeatDelay();
-    ```
 
 #### Properties
 
+- Has started
+    ```javascript
+    var hasStarted = sprite.anims.hasStarted;
+    ```
 - Is playing
     ```javascript
     var isPlaying = sprite.anims.isPlaying;
@@ -237,35 +262,44 @@ sprite.anims.restart();
     ```javascript
     var frameCount = sprite.anims.getTotalFrames();
     ```
-- Time scale
+- Delay
     ```javascript
-    var timescale = sprite.anims.getTimeScale();
+    var delay = sprite.anims.delay;
     ```
-- Progress
-    - Progress ignoring repeats and yoyos
-        ```javascript
-        var progress = sprite.anims.getProgress();
-        ```
 - Repeat
-    - Repeat count
+    - Total repeat count
         ```javascript
-        var repeatCount = sprite.anims.getRepeat();
+        var repeatCount = sprite.anims.repeat;
         ```
-    - Yoyo
+    - Repeat counter
         ```javascript
-        var repeatDelay = sprite.anims.getYoyo();
+        var repeatCount = sprite.anims.repeatCounter;
         ```
     - Repeat delay
         ```javascript
-        var repeatDelay = sprite.anims.getRepeatDelay();
+        var repeatDelay = sprite.anims.repeatDelay;
         ```
+    - Yoyo
+        ```javascript
+        var repeatDelay = sprite.anims.yoyo;
+        ```
+- Current animation key
+    ```javascript
+    var key = sprite.anims.getName();
+    ```
+    - `key` : Return `''` if not playing any animation.
+- Current frame name
+    ```javascript
+    var frameName = sprite.anims.getFrameName();
+    ```
+    - `frameName` : Return `''` if not playing any animation.
 - Current animation
     ```javascript
     var currentAnim = sprite.anims.currentAnim;
     ```
 - Current frame
     ```javascript
-    var currentAnim = sprite.anims.currentFrame;
+    var currentFrame = sprite.anims.currentFrame;
     ```
 
 #### Events
@@ -290,6 +324,13 @@ sprite.anims.restart();
     ```
     ```javascript
     sprite.on('animationcomplete-' + key, function(currentAnim, currentFramee, sprite){});
+    ```
+- On stop
+    ```javascript
+    sprite.on('animationstop', function(currentAnim, currentFrame, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationstop-' + key, function(currentAnim, currentFrame, sprite){});
     ```
 - On update
     ```javascript
