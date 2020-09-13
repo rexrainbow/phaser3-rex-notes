@@ -1,10 +1,10 @@
 import GeomRoundRectangle from './geom/RoundRectangle.js';
 import LineTo from '../utils/LineTo.js';
 import ArcTo from '../utils/ArcTo.js';
-import Earcut from '../../../utils/geom/polygon/Earcut.js';
 import Render from './render/Render.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Earcut = Phaser.Geom.Polygon.Earcut;
 
 class RoundRectangle extends Phaser.GameObjects.Shape {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
