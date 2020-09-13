@@ -278,30 +278,12 @@ x1, y2, x2, y2 are equal.
 
 - Is intersection
     ```javascript
-    var result = Phaser.Geom.Intersects.LineToLine(line1, line2);
+    var isIntersection = Phaser.Geom.Intersects.LineToLine(line1, line2);
     ```
-    - `out` : intersected point
+    - `isIntersection` : Return `true` if line1 and line2 are intersectioned
 - Get intersection point
     ```javascript
-    var result = Phaser.Geom.Intersects.LineToLine(line1, line2, out);
+    var isIntersection = Phaser.Geom.Intersects.LineToLine(line1, line2, out);
     ```
-- Get intersection point and intersection distance
-    ```javascript
-    var result = Phaser.Geom.Intersects.GetLineToLine(line1, line2, out);
-    ```
-    - `out` :
-        - `out.x`, `out.y` : Intersection point
-        - `out.z` : Intersection distance
-
-#### Line to [polygon](geom-polygon.md)
-
-- Get closest point of intersection between a line segment and an array of polygons
-    ```javascript
-    var result = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, out);
-    ```
-    - `line` : Line segment
-    - `polygons` : A single polygon, or array of polygons
-    - `out` :
-        - `out.x`, `out.y` : Intersection point
-        - `out.z` : Closest intersection distance
-        - `out.w` : Index of the polygon
+    - `isIntersection` : Return `true` if line1 and line2 are intersectioned
+    - `out` : intersected point

@@ -11,10 +11,9 @@ Render pipelines for camera of game objects (with texture).
 ```javascript
 var config = {
     game: scene.game,
-    renderer: scene.game.renderer,
     fragShader: '...'  // GLSL shader
 };
-var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
+var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.MultiPipeline(config);
 scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
 ```
 

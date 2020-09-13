@@ -14,6 +14,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
+        //    customUpdate: false,
         //    x: 0,
         //    y: 0,
         //    width: scene.sys.scale.width,
@@ -50,6 +51,29 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
+### Update
+
+- Default updating : World updating every tick
+- Custom updating : 
+    1. Set `customUpdate` of arcade config to `false`.
+        - Enable world updating : `scene.physics.enableUpdate()`
+        - Disable world updating : `scene.physics.disableUpdate()`
+    1. Run world updating manually
+        ```javascript
+        scene.physics.world.update(time, delta);
+        ```
+    1. Enable/disable world updating
+        - Enable : `scene.physics.enableUpdate()`
+        - Disable : `scene.physics.disableUpdate()`
+
+#### Step
+
+Advances the simulation by one step.
+
+```javascript
+scene.physics.world.step(delta);
+```
+
 ### Control
 
 #### Pause
@@ -77,14 +101,6 @@ scene.physics.resume();
     ```javascript
     scene.physics.world.setFPS(framerate);
     ```
-
-#### Step
-
-Advances the simulation by one step.
-
-```javascript
-scene.physics.world.step(delta);
-```
 
 ### Collision
 

@@ -241,6 +241,7 @@ See also
 - `data` : Local [data manager](datamanager.md)
 - `sys`
 - `game`
+- `render`
 - `cache`
 - `sound`
 - `textures`

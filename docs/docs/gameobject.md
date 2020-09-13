@@ -41,6 +41,19 @@ Base class of all game object in phaser.
         // gameObject.setRandomPosition(); // x=0, y=0, width=game.width, height=game.height
         ```
 
+#### Local point
+
+Transfer world point to local point
+
+```javascript
+var point = gameObject.getLocalPoint(x, y);  // point : {x, y}
+// var out = gameObject.getLocalPoint(x, y, out);
+```
+or
+```javascript
+var out = gameObject.getLocalPoint(x, y, out, camera);
+```
+
 ### Angle
 
 - Get
@@ -241,7 +254,7 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 
 ### Render pipeline
 
-- Defaule name of render pipeline : `'TextureTintPipeline'`
+- Defaule name of render pipeline : `'MultiPipeline'`
 - [Add render pipeline instance](render-pipeline.md#add-pipeline-instance)
 - Set custom render pipeline
     ```javascript

@@ -82,6 +82,11 @@ group.clear();
     ```javascript
     var gameObjects = group.getChildren();  // array of game objects
     ```
+- Get all matching game objects
+    ```javascript
+    var gameObjects = group.getMatching(property, value);
+    // var gameObjects = group.getMatching(property, value, startIndex, endIndex);
+    ```
 - Amount of game objects.
     ```javascript
     var len = group.getLength();
@@ -354,6 +359,13 @@ var gameObjects = group.createMultiple(config);    // config in array
             step:
         },
         // Actions.SetAlpha(gameObjects, value, step)
+
+        setOrigin: {
+            x:0,
+            y:0,
+            stepX:0, 
+            stepY:0
+        },
 
         // Input
         hitArea: null,
