@@ -28,6 +28,8 @@ var config = {
         //        left: true,
         //        right: true
         //    },
+        //    customUpdate: false,
+        //    fixedStep: true,
         //    fps: 60,
         //    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed
         //    fixedStep: true,
