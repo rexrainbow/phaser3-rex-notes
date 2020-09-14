@@ -14,7 +14,6 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-        //    customUpdate: false,
         //    x: 0,
         //    y: 0,
         //    width: scene.sys.scale.width,
@@ -29,6 +28,8 @@ var config = {
         //        left: true,
         //        right: true
         //    },
+        //    customUpdate: false,
+        //    fixedStep: true,
         //    fps: 60,
         //    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed
         //    overlapBias: 4,
