@@ -153,6 +153,12 @@ var isDrag = dragRotate.isDrag;
 
 Return `true` if `(dragRotate.state === 1)` and catched touch pointer just moved.
 
+### Drag cancel
+
+```javascript
+dragRotate.dragCancel();
+```
+
 ### Events
 
 #### On dragging
