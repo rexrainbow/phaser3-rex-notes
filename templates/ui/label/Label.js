@@ -128,6 +128,7 @@ class Label extends Sizer {
 
     appendText(value) {
         this.text += value;
+        return this;
     }
 
     _layout(parent, newWidth, newHeight) {
