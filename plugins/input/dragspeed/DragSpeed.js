@@ -34,8 +34,10 @@ class DragSpeed {
     }
 
     boot() {
-        this.gameObject.on('pointerdown', this.onPointIn, this);
-        this.gameObject.on('pointerover', this.onPointIn, this);
+        // Drag start only when pointer down
+        this.gameObject.on('pointerdown', this.onPointIn, this); 
+        // this.gameObject.on('pointerover', this.onPointIn, this);
+
         this.gameObject.on('pointerup', this.onPointOut, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
