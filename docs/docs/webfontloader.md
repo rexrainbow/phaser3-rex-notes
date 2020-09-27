@@ -54,13 +54,13 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import WebfontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
+    import WebFontLoaderPlugin from 'phaser3-rex-plugins/plugins/webfontloader-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexWebfontLoader',
-                plugin: WebfontLoaderPlugin,
+                key: 'rexWebFontLoader',
+                plugin: WebFontLoaderPlugin,
                 start: true
             },
             // ...
