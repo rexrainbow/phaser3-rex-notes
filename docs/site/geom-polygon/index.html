@@ -3868,6 +3868,19 @@
     Point(s) &amp; shape
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-to-polygon" class="md-nav__link">
+    Vector to polygon
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -4970,6 +4983,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5054,6 +5079,19 @@
   <a href="#points-shape" class="md-nav__link">
     Point(s) &amp; shape
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vector-to-polygon" class="md-nav__link">
+    Vector to polygon
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5155,15 +5193,52 @@
     or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">ContainsPoint</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Translate : Shift points.
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Translate</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
 <li>Reverse the order of points.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Reverse</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Smooth : Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
     <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Smooth</span><span class="p">(</span><span class="nx">polygon</span><span class="p">)</span>
 </code></pre></div></li>
-<li>Translate : Shift points.
-    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Translate</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<li>Simplify : Simplifies the points by running them through a combination of 
+  Douglas-Peucker and Radial Distance algorithms. Simplification dramatically 
+  reduces the number of points in a polygon while retaining its shape, giving 
+  a huge performance boost when processing it and also reducing visual noise.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Simplify</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+<span class="c1">// var polygon = Phaser.Geom.Polygon.Simplify(polygon, tolerance, highestQuality);</span>
 </code></pre></div></li>
+</ul>
+<h4 id="vector-to-polygon">Vector to polygon<a class="headerlink" href="#vector-to-polygon" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get closest point of intersection between a vector and an array of polygons
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">GetLineToPolygon</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">polygons</span><span class="p">);</span>
+<span class="c1">// var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, out);</span>
+</code></pre></div><ul>
+<li><code>line</code> : Vector of <a href="../geom-line/">line</a> object</li>
+<li><code>polygons</code> : A single polygon, or array of polygons</li>
+<li><code>out</code> :<ul>
+<li><code>out.x</code>, <code>out.y</code> : Intersection point</li>
+<li><code>out.z</code> : Closest intersection distance</li>
+<li><code>out.w</code> : Index of the polygon</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Projects rays out from the given point to each line segment of the polygons.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">GetRaysFromPointToPolygon</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">polygons</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>x</code>, <code>y</code> : The point to project the rays from.</li>
+<li><code>polygons</code> : A single polygon, or array of polygons</li>
+<li><code>out</code> : An array containing all intersections<ul>
+<li><code>out[i].x</code>, <code>out[i].y</code> : Intersection point</li>
+<li><code>out[i].z</code> : Angle of intersection</li>
+<li><code>out[i].w</code> : Index of the polygon</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
                 
                   

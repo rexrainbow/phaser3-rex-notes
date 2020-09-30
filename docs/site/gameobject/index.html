@@ -609,6 +609,19 @@
     Position
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-point" class="md-nav__link">
+    Local point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5094,6 +5107,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5144,6 +5169,19 @@
   <a href="#position" class="md-nav__link">
     Position
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-point" class="md-nav__link">
+    Local point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5371,6 +5409,14 @@
 </ul>
 </li>
 </ul>
+<h4 id="local-point">Local point<a class="headerlink" href="#local-point" title="Permanent link">&para;</a></h4>
+<p>Transfer world point to local point</p>
+<p><div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getLocalPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>  <span class="c1">// point : {x, y}</span>
+<span class="c1">// var out = gameObject.getLocalPoint(x, y, out);</span>
+</code></pre></div>
+or
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getLocalPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">out</span><span class="p">,</span> <span class="nx">camera</span><span class="p">);</span>
+</code></pre></div></p>
 <h3 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -5572,7 +5618,7 @@
 </ul>
 <h3 id="render-pipeline">Render pipeline<a class="headerlink" href="#render-pipeline" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Defaule name of render pipeline : <code>'TextureTintPipeline'</code></li>
+<li>Defaule name of render pipeline : <code>'MultiPipeline'</code></li>
 <li><a href="../render-pipeline/#add-pipeline-instance">Add render pipeline instance</a></li>
 <li>Set custom render pipeline
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>

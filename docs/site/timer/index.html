@@ -4109,15 +4109,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#status-of-timer" class="md-nav__link">
-    Status of timer
+  <a href="#pauseresume" class="md-nav__link">
+    Pause/resume
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods-of-timer" class="md-nav__link">
-    Methods of timer
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-scale" class="md-nav__link">
+    Time scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -4941,6 +4955,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -4988,15 +5014,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#status-of-timer" class="md-nav__link">
-    Status of timer
+  <a href="#pauseresume" class="md-nav__link">
+    Pause/resume
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods-of-timer" class="md-nav__link">
-    Methods of timer
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#time-scale" class="md-nav__link">
+    Time scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -5035,39 +5075,29 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="start-timer">Start timer<a class="headerlink" href="#start-timer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Looped timer</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+<li>Looped timer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
     <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
     <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
     <span class="c1">//args: [],</span>
     <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
     <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Repeat timer</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+</code></pre></div></li>
+<li>Repeat timer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
     <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
     <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
     <span class="c1">//args: [],</span>
     <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mi">4</span>
 <span class="p">});</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Oneshot timer</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>  <span class="c1">// delay in ms</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>All properties of timer</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+</code></pre></div></li>
+<li>Oneshot timer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>  <span class="c1">// delay in ms</span>
+</code></pre></div></li>
+<li>All properties of timer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
     <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
     <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
     <span class="nx">args</span><span class="o">:</span> <span class="p">[],</span>
@@ -5078,57 +5108,12 @@
     <span class="nx">timeScale</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
-</code></pre></div>
-
-</li>
+</code></pre></div></li>
+<li>Reuse timer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
-<h3 id="status-of-timer">Status of timer<a class="headerlink" href="#status-of-timer" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Get elapsed time</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsed</span><span class="p">();</span>   <span class="c1">// ms</span>
-<span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsedSeconds</span><span class="p">();</span> <span class="c1">// sec</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Get repeat count</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">repeat</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRepeatCount</span><span class="p">();</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Gets the progress of the current iteration</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getProgress</span><span class="p">();</span>  <span class="c1">// elapsed / delay</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Gets the progress of the timer overall, factoring in repeats.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getOverallProgress</span><span class="p">();</span>  <span class="c1">// totalElapsed / totalDuration</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Get delay time</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>   <span class="c1">// ms</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Is paused</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span>
-</code></pre></div>
-
-</li>
-<li>
-<p>Get time-scale</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-</code></pre></div>
-
-</li>
-</ul>
-<h3 id="methods-of-timer">Methods of timer<a class="headerlink" href="#methods-of-timer" title="Permanent link">&para;</a></h3>
+<h3 id="pauseresume">Pause/resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Pause timer
     <div class="codehilite"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
@@ -5136,11 +5121,45 @@
 <li>Resume timer
     <div class="codehilite"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Remove timer from timeline
+<li>Is paused
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stop a running timer
     <div class="codehilite"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
 </code></pre></div></li>
-<li>Set time-scale
+<li>Remove from timeline's all internal lists, for timer re-using
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">removeEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="time-scale">Time scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get elapsed time
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsed</span><span class="p">();</span>   <span class="c1">// ms</span>
+<span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsedSeconds</span><span class="p">();</span> <span class="c1">// sec</span>
+</code></pre></div></li>
+<li>Get repeat count
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">repeat</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRepeatCount</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Gets the progress of the current iteration
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getProgress</span><span class="p">();</span>  <span class="c1">// elapsed / delay</span>
+</code></pre></div></li>
+<li>Gets the progress of the timer overall, factoring in repeats.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getOverallProgress</span><span class="p">();</span>  <span class="c1">// totalElapsed / totalDuration</span>
+</code></pre></div></li>
+<li>Get delay time
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>   <span class="c1">// ms</span>
 </code></pre></div></li>
 </ul>
                 

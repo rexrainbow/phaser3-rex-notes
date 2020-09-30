@@ -3871,13 +3871,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#line-to-polygon" class="md-nav__link">
-    Line to polygon
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5031,6 +5024,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5163,13 +5168,6 @@
           <li class="md-nav__item">
   <a href="#line-to-line" class="md-nav__link">
     Line to line
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#line-to-polygon" class="md-nav__link">
-    Line to polygon
   </a>
   
 </li>
@@ -5456,38 +5454,16 @@
 <h4 id="line-to-line">Line to <a href="./">line</a><a class="headerlink" href="#line-to-line" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Is intersection
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isIntersection</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>out</code> : intersected point</li>
+<li><code>isIntersection</code> : Return <code>true</code> if line1 and line2 are intersectioned</li>
 </ul>
 </li>
 <li>Get intersection point
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get intersection point and intersection distance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">GetLineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isIntersection</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>out</code> :<ul>
-<li><code>out.x</code>, <code>out.y</code> : Intersection point</li>
-<li><code>out.z</code> : Intersection distance</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="line-to-polygon">Line to <a href="../geom-polygon/">polygon</a><a class="headerlink" href="#line-to-polygon" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get closest point of intersection between a line segment and an array of polygons
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">GetLineToPolygon</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">polygons</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>line</code> : Line segment</li>
-<li><code>polygons</code> : A single polygon, or array of polygons</li>
-<li><code>out</code> :<ul>
-<li><code>out.x</code>, <code>out.y</code> : Intersection point</li>
-<li><code>out.z</code> : Closest intersection distance</li>
-<li><code>out.w</code> : Index of the polygon</li>
-</ul>
-</li>
+<li><code>isIntersection</code> : Return <code>true</code> if line1 and line2 are intersectioned</li>
+<li><code>out</code> : intersected point</li>
 </ul>
 </li>
 </ul>

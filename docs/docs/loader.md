@@ -448,7 +448,6 @@ JSON pack file:
 
 File type:
 
-- `animationJSON`
 - `audio`
 - `binary`
 - `glsl`
