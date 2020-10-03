@@ -76,18 +76,18 @@ class EffectLayer extends Image {
         }
     }
 
-    setFloat1(key, value) {
+    set1f(key, value) {
         this.shader.setUniform(`${key}.value`, value);
         return this;
     }
 
-    setFloat2(key, x, y) {
+    set2f(key, x, y) {
         this.shader.setUniform(`${key}.value.x`, x);
         this.shader.setUniform(`${key}.value.y`, y);
         return this;
     }
 
-    setFloat3(key, x, y, z) {
+    set3f(key, x, y, z) {
         this.shader.setUniform(`${key}.value.x`, x);
         this.shader.setUniform(`${key}.value.y`, y);
         this.shader.setUniform(`${key}.value.z`, z);

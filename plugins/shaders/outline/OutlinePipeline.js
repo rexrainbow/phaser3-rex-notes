@@ -17,14 +17,16 @@ class OutlinePipeline extends MultiPipeline {
         var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
+            fragShader: frag, // GLSL shader
+            name: 'Outline',
+            uniforms: ['thickness', 'outlineColor', 'texSize']
         });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
         this._thickness = 0;
         this._outlineColor = new Color();
 
-        game.renderer.addPipeline(key, this);
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -45,7 +47,7 @@ class OutlinePipeline extends MultiPipeline {
         }
 
         this._thickness = value;
-        this.setFloat2('thickness', value, value);
+        this.set2f('thickness', value, value);
     }
 
     setThickness(value) {
@@ -65,20 +67,20 @@ class OutlinePipeline extends MultiPipeline {
         // value: {r, g, b}
         var color = this._outlineColor;
         color.setFromRGB(value);
-        this.setFloat3('outlineColor', color.redGL, color.greenGL, color.blueGL);
+        this.set3f('outlineColor', color.redGL, color.greenGL, color.blueGL);
     }
 
     setOutlineColor(value) {
         this.outlineColor = value;
         return this;
     }
-    
+
     // size
     resize(width, height, resolution) {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat2('texSize', width, height);
+        this.set2f('texSize', width, height);
         return this;
     }
 }

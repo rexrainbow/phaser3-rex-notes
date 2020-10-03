@@ -10,14 +10,16 @@ class PixelationPipeline extends MultiPipeline {
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
+            fragShader: frag, // GLSL shader
+            name: 'Pixelation',
+            uniforms: ['pixelSize', 'texSize']
         });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
         this._pixelWidth = 0; // width of pixel wo resolution
         this._pixelHeight = 0; // height of pixel wo resolution
-       
-        game.renderer.addPipeline(key, this);
+
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -33,7 +35,7 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelWidth(value) {
         this._pixelWidth = value;
-        this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
+        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelWidth(value) {
@@ -48,7 +50,7 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelHeight(value) {
         this._pixelHeight = value;
-        this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
+        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelHeight(value) {
@@ -62,7 +64,7 @@ class PixelationPipeline extends MultiPipeline {
         }
         this._pixelWidth = width;
         this._pixelHeight = height;
-        this.setFloat2('pixelSize', this._pixelWidth, this._pixelHeight);
+        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
         return this;
     }
 
@@ -71,7 +73,7 @@ class PixelationPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat2('texSize', width, height);
+        this.set2f('texSize', width, height);
         return this;
     }
 }

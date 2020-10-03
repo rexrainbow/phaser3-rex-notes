@@ -49,7 +49,7 @@ class OutlineEffectLayer extends EffectLayer {
         }
 
         this._knockout = value;
-        this.setFloat1('knockout', value);
+        this.set1f('knockout', value);
     }
 
     setKnockout(value) {
@@ -68,7 +68,7 @@ class OutlineEffectLayer extends EffectLayer {
         }
 
         this._thickness = value;
-        this.setFloat2('thickness', value, value);
+        this.set2f('thickness', value, value);
     }
 
     setThickness(value) {
@@ -88,7 +88,7 @@ class OutlineEffectLayer extends EffectLayer {
         // value: {r, g, b}
         var color = this._outlineColor;
         color.setFromRGB(value);
-        this.setFloat3('outlineColor', color.redGL, color.greenGL, color.blueGL);
+        this.set3f('outlineColor', color.redGL, color.greenGL, color.blueGL);
     }
 
     setOutlineColor(value) {

@@ -12,7 +12,9 @@ class ToonifyPipeline extends MultiPipeline {
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
+            fragShader: frag, // GLSL shader
+            name: 'Toonify',
+            uniforms: ['edgeThreshold', 'hStep', 'sStep', 'vStep', 'edgeColor', 'texSize']
         });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
@@ -23,7 +25,7 @@ class ToonifyPipeline extends MultiPipeline {
         this._valLevels = 0;
         this._edgeColor = new Color();
 
-        game.renderer.addPipeline(key, this);
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -43,7 +45,7 @@ class ToonifyPipeline extends MultiPipeline {
 
     set edgeThreshold(value) {
         this._edgeThreshold = value;
-        this.setFloat1('edgeThreshold', value);
+        this.set1f('edgeThreshold', value);
     }
 
     setEdgeThreshold(value) {
@@ -59,7 +61,7 @@ class ToonifyPipeline extends MultiPipeline {
     set hueLevels(value) {
         this._hueLevels = value;
         value = (value > 0) ? 360 / value : 0;
-        this.setFloat1('hStep', value);
+        this.set1f('hStep', value);
     }
 
     setHueLevels(value) {
@@ -75,7 +77,7 @@ class ToonifyPipeline extends MultiPipeline {
     set satLevels(value) {
         this._satLevels = value;
         value = (value > 0) ? 1 / value : 0;
-        this.setFloat1('sStep', value);
+        this.set1f('sStep', value);
     }
 
     setSatLevels(value) {
@@ -91,7 +93,7 @@ class ToonifyPipeline extends MultiPipeline {
     set valLevels(value) {
         this._valLevels = value;
         value = (value > 0) ? 1 / value : 0;
-        this.setFloat1('vStep', value);
+        this.set1f('vStep', value);
     }
 
     setValLevels(value) {
@@ -111,7 +113,7 @@ class ToonifyPipeline extends MultiPipeline {
         // value: {r, g, b}
         var color = this._edgeColor;
         color.setFromRGB(value);
-        this.setFloat3('edgeColor', color.redGL, color.greenGL, color.blueGL);
+        this.set3f('edgeColor', color.redGL, color.greenGL, color.blueGL);
     }
 
     setEdgeColor(value) {
@@ -124,7 +126,7 @@ class ToonifyPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat2('texSize', width, height);
+        this.set2f('texSize', width, height);
         return this;
     }
 }

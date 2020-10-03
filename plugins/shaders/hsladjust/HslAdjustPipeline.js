@@ -11,13 +11,15 @@ class HslAdjustPipeline extends MultiPipeline {
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
-        });   
+            fragShader: frag, // GLSL shader
+            name: 'HslAdjust',
+            uniforms: ['hueRotate', 'satAdjust', 'lumAdjust']
+        });
         this._hueRotate = 0;
         this._satAdjust = 0;
         this._lumAdjust = 0;
 
-        game.renderer.addPipeline(key, this);
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -35,7 +37,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set hueRotate(value) {
         this._hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
-        this.setFloat1('hueRotate', value % 1);
+        this.set1f('hueRotate', value % 1);
     }
 
     setHueRotate(value) {
@@ -50,7 +52,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set satAdjust(value) {
         this._satAdjust = value; // 0: gray, 1: original color, > 1: 
-        this.setFloat1('satAdjust', value);
+        this.set1f('satAdjust', value);
     }
 
     setSatAdjust(value) {
@@ -65,7 +67,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set lumAdjust(value) {
         this._lumAdjust = value; // 0: dark, 0.5: original color, 1: white
-        this.setFloat1('lumAdjust', value);
+        this.set1f('lumAdjust', value);
     }
 
     setLumAdjust(value) {

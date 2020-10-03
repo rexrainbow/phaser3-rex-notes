@@ -12,7 +12,9 @@ class SwirlPipeline extends MultiPipeline {
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
+            fragShader: frag, // GLSL shader
+            name: 'Swirl',
+            uniforms: ['radius', 'angle', 'center', 'texSize']
         });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
@@ -21,7 +23,7 @@ class SwirlPipeline extends MultiPipeline {
         this._radius = 0;
         this._rotation = 0;
 
-        game.renderer.addPipeline(key, this);
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -44,7 +46,7 @@ class SwirlPipeline extends MultiPipeline {
 
     set radius(value) {
         this._radius = value;
-        this.setFloat1('radius', value);
+        this.set1f('radius', value);
     }
 
     setRadius(value) {
@@ -59,7 +61,7 @@ class SwirlPipeline extends MultiPipeline {
 
     set rotation(value) {
         this._rotation = value;
-        this.setFloat1('angle', value);
+        this.set1f('angle', value);
     }
 
     setRotation(value) {
@@ -111,7 +113,7 @@ class SwirlPipeline extends MultiPipeline {
     }
 
     _setCenter() {
-        this.setFloat2('center', this._centerX, this._centerY);
+        this.set2f('center', this._centerX, this._centerY);
     }
 
     // size
@@ -119,7 +121,7 @@ class SwirlPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat2('texSize', width, height);
+        this.set2f('texSize', width, height);
         return this;
     }
 }

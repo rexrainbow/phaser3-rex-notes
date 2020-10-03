@@ -11,11 +11,13 @@ class GlowFilterPipeline extends MultiPipeline {
         var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
         super({
             game: game,
-            fragShader: frag // GLSL shader
+            fragShader: frag, // GLSL shader
+            name: 'GlowFilter',
+            uniforms: ['intensity']
         });
         this._intensity = 0;
 
-        game.renderer.addPipeline(key, this);
+        game.renderer.pipelines.add(key, this);
         this.resetFromJSON(config);
     }
 
@@ -36,7 +38,7 @@ class GlowFilterPipeline extends MultiPipeline {
         }
 
         this._intensity = value;
-        this.setFloat1('intensity', value);
+        this.set1f('intensity', value);
     }
 
     setIntensity(value) {
