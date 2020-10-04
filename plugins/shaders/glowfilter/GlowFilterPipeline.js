@@ -38,6 +38,9 @@ class GlowFilterPipeline extends MultiPipeline {
         }
 
         this._intensity = value;
+
+        // This shader pipeline applies on game object
+        this.game.renderer.pipelines.set(this);
         this.set1f('intensity', value);
     }
 
