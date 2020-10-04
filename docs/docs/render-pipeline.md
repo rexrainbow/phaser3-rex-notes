@@ -16,7 +16,7 @@ var config = {
     uniforms: []
 };
 var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.MultiPipeline(config);
-scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
+scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
 ```
 
 - `name` : Name of the pipeline. Used for identification.

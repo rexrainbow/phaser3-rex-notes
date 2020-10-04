@@ -85,7 +85,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
 1. Add to render pipeline
     ```javascript
-    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
+    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
     ```
 1. Apply filter
     - To camera

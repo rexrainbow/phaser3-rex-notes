@@ -82,7 +82,7 @@ Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/0
         - Suggestion value : 0 ~ 0.02
 1. Add to render pipeline
     ```javascript
-    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
+    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
     ```
 1. Apply filter
     - To camera
