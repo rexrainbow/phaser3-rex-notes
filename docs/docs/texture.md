@@ -13,6 +13,10 @@ Textures cache, built-in object of phaser.
     scene.load.image(key, url);
     ```
     Reference: [Loader](loader.md#image)
+- Load image texture via base64 string
+    ```javascript
+    scene.textures.addBase64(key, data)
+    ```
 - Get image texture
     ```javascript
     var texture = scene.textures.get(key);
@@ -118,6 +122,12 @@ var frame = texture.add(frameName, sourceIndex, x, y, width, height);
 ```javascript
 var removed = texture.remove(frameName);
 ```
+
+#### Default textures
+
+- Default : `'__DEFAULT'`
+- Missing : `'__MISSING'`
+- 4x4 white : `'__WHITE'`
 
 ### Frame object
 
