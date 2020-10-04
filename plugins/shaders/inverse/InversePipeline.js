@@ -38,7 +38,7 @@ class InversePipeline extends MultiPipeline {
         }
 
         this._intensity = value;
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set1f('intensity', value);
     }
 

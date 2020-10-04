@@ -47,7 +47,7 @@ class OutlinePipeline extends MultiPipeline {
         }
 
         this._thickness = value;
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set2f('thickness', value, value);
     }
 
@@ -68,7 +68,7 @@ class OutlinePipeline extends MultiPipeline {
         // value: {r, g, b}
         var color = this._outlineColor;
         color.setFromRGB(value);
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set3f('outlineColor', color.redGL, color.greenGL, color.blueGL);
     }
 
@@ -82,7 +82,7 @@ class OutlinePipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set2f('texSize', width, height);
         return this;
     }

@@ -37,7 +37,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set hueRotate(value) {
         this._hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set1f('hueRotate', value % 1);
     }
 
@@ -53,7 +53,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set satAdjust(value) {
         this._satAdjust = value; // 0: gray, 1: original color, > 1: 
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set1f('satAdjust', value);
     }
 
@@ -69,7 +69,7 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set lumAdjust(value) {
         this._lumAdjust = value; // 0: dark, 0.5: original color, 1: white
-        this.game.renderer.pipelines.set(this);
+        this.renderer.pipelines.set(this);
         this.set1f('lumAdjust', value);
     }
 
