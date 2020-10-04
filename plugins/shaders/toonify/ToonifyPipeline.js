@@ -45,6 +45,7 @@ class ToonifyPipeline extends MultiPipeline {
 
     set edgeThreshold(value) {
         this._edgeThreshold = value;
+        this.game.renderer.pipelines.set(this);
         this.set1f('edgeThreshold', value);
     }
 
@@ -61,6 +62,7 @@ class ToonifyPipeline extends MultiPipeline {
     set hueLevels(value) {
         this._hueLevels = value;
         value = (value > 0) ? 360 / value : 0;
+        this.game.renderer.pipelines.set(this);
         this.set1f('hStep', value);
     }
 
@@ -77,6 +79,7 @@ class ToonifyPipeline extends MultiPipeline {
     set satLevels(value) {
         this._satLevels = value;
         value = (value > 0) ? 1 / value : 0;
+        this.game.renderer.pipelines.set(this);
         this.set1f('sStep', value);
     }
 
@@ -93,6 +96,7 @@ class ToonifyPipeline extends MultiPipeline {
     set valLevels(value) {
         this._valLevels = value;
         value = (value > 0) ? 1 / value : 0;
+        this.game.renderer.pipelines.set(this);
         this.set1f('vStep', value);
     }
 
@@ -113,6 +117,7 @@ class ToonifyPipeline extends MultiPipeline {
         // value: {r, g, b}
         var color = this._edgeColor;
         color.setFromRGB(value);
+        this.game.renderer.pipelines.set(this);
         this.set3f('edgeColor', color.redGL, color.greenGL, color.blueGL);
     }
 
@@ -126,6 +131,7 @@ class ToonifyPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
+        this.game.renderer.pipelines.set(this);
         this.set2f('texSize', width, height);
         return this;
     }

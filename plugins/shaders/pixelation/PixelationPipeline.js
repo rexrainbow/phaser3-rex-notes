@@ -35,6 +35,7 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelWidth(value) {
         this._pixelWidth = value;
+        this.game.renderer.pipelines.set(this);
         this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
@@ -50,6 +51,7 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelHeight(value) {
         this._pixelHeight = value;
+        this.game.renderer.pipelines.set(this);
         this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
@@ -64,6 +66,7 @@ class PixelationPipeline extends MultiPipeline {
         }
         this._pixelWidth = width;
         this._pixelHeight = height;
+        this.game.renderer.pipelines.set(this);
         this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
         return this;
     }
@@ -73,6 +76,7 @@ class PixelationPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
+        this.game.renderer.pipelines.set(this);
         this.set2f('texSize', width, height);
         return this;
     }

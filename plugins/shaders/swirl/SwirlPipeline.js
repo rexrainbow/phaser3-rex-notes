@@ -46,6 +46,7 @@ class SwirlPipeline extends MultiPipeline {
 
     set radius(value) {
         this._radius = value;
+        this.game.renderer.pipelines.set(this);
         this.set1f('radius', value);
     }
 
@@ -61,6 +62,7 @@ class SwirlPipeline extends MultiPipeline {
 
     set rotation(value) {
         this._rotation = value;
+        this.game.renderer.pipelines.set(this);
         this.set1f('angle', value);
     }
 
@@ -113,6 +115,7 @@ class SwirlPipeline extends MultiPipeline {
     }
 
     _setCenter() {
+        this.game.renderer.pipelines.set(this);
         this.set2f('center', this._centerX, this._centerY);
     }
 
@@ -121,6 +124,7 @@ class SwirlPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
+        this.game.renderer.pipelines.set(this);
         this.set2f('texSize', width, height);
         return this;
     }
