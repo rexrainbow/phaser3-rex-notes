@@ -12,17 +12,17 @@ Arcade physics body.
 1. Add existing game object(s) to physics world
     - Add a game object
         ```javascript
-        var gameObject = scene.physics.add.existing(gameObject, isStatic);
+        var gameObject = scene.physics.add.existing(gameObject, bodyType);
         ```
-        - `isStatic` :
+        - `bodyType` :
             - `0` : Dynamic body
             - `1` : Static body
     - Add game objects
         ```javascript
-        scene.physics.world.enable(gameObjects, isStatic);
+        scene.physics.world.enable(gameObjects, bodyType);
         ```
         - `gameObjects` : An array of game objects, or a group object
-        - `isStatic` :
+        - `bodyType` :
             - `0` : Dynamic body
             - `1` : Static body
 1. Get physics body
@@ -50,10 +50,44 @@ Whether this Body is updated by the physics simulation.
     ```javascript
     body.enable = false;
     ```
+
+### Immovable
+
+Whether this Body can be moved by collisions with another Body.
+
+- Enable
+    ```javascript
+    body.setImmovable();
+    // body.immovable = true;
+    ```
+- Disable (defalut)
+    ```javascript
+    body.setImmovable(false);
+    // body.immovable = false;
+    ```
 - Get
     ```javascript
-    var enable = body.moves;
+    var immovable = body.immovable;
     ```
+
+### Pushable
+
+Sets if this Body can be pushed by another Body.
+
+- Enable (default value of dynamic body)
+    ```javascript
+    body.pushable = true;
+    ```
+- Disable, reflect back all of the velocity it is given to the colliding body.
+    ```javascript
+    body.pushable = false;
+    ```
+- Get
+    ```javascript
+    var pushable = body.pushable;
+    ```
+
+### Moveable
 
 Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
 
@@ -112,6 +146,11 @@ Physics body will be destroyed automatically when game object is destroyed.
 - Set
     ```javascript
     body.setMaxVelocity(x, y);
+    ```
+    or
+    ```javascript
+    body.setMaxVelocityX(x);
+    body.setMaxVelocityY(y);
     ```
 - Get 
     ```javascript
@@ -205,21 +244,6 @@ Sets acceleration, velocity, and speed to zero.
 ```javascript
 body.stop();
 ```
-
-#### Immovable
-
-- Enable
-    ```javascript
-    body.setImmovable();
-    ```
-- Disable (defalut)
-    ```javascript
-    body.setImmovable(false);
-    ```
-- Get
-    ```javascript
-    var immovable = body.immovable;
-    ```
 
 ##### Friction
 
