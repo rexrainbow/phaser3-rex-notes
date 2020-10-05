@@ -14,13 +14,15 @@ Animation and animations manager.
 scene.anims.create({
     key: '',
     frames: [],
+    skipMissedFrames: true,
     defaultTextureKey: null,
+    startFrame: 0,
 
     // time
     delay: 0,
     frameRate: null,
     duration: null,
-    skipMissedFrames: true,
+    timeScale: 1,
 
     // repeat
     repeat: 0,              // set to (-1) to repeat forever
@@ -50,7 +52,7 @@ scene.anims.create({
     - Frame sequence indexing from start to end
         ```javascript
         var config = ;
-        scene.anims.generateFrameNames(key, 
+        scene.anims.generateFrameNames(key,
         {
             prefix: '',
             start: 0,
@@ -64,22 +66,53 @@ scene.anims.create({
     - Custom frame sequence
         ```javascript
         var config = ;
-        scene.anims.generateFrameNames(key, 
+        scene.anims.generateFrameNames(key,
         {
             prefix: '',
             suffix: '',
             zeroPad: 0,
             frames: [ ... ]
-            // outputArray: [], // Append frames into this array            
+            // outputArray: [], // Append frames into this array
         });
         ```
         - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
+
+##### Add from Aseprite
+
+[Aseprite](tool.md#aseprite)
+
+```javascript
+scene.anims.createFromAseprite(key);
+// scene.anims.createFromAseprite(key, tags);
+```
+
+- `key` : The key of the loaded Aseprite atlas.
+- `tags` :
+    - `undefined` : Load all tags.
+    - Array of string tag : Load these tags.
 
 #### Remove animation
 
 ```javascript
 scene.anims.remove(key);
 ```
+
+#### Delay between two animations
+
+- Add
+    ```javascript
+    scene.anims.addMix(animA, animB, delay);
+    ```
+    - `animA`, `animB` : String key of an animation, or an instance of animation.
+- Remove
+    ```javascript
+    scene.anims.removeMix(animA, animB);
+    // scene.anims.removeMix(animA);
+    ```
+- Get
+    ```javascript
+    var delay = scene.anims.getMix(animA, animB);
+    ```
 
 #### Play animation
 
@@ -89,10 +122,11 @@ scene.anims.remove(key);
     ```
 - Stagger play (delay play)
     ```javascript
-    scene.anims.staggerPlay(key, children, stagger);
+    scene.anims.staggerPlay(key, children, stagger, staggerFirst);
     ```
     - `children` : An array of Game Objects to play the animation on
     - `stagger` : The amount of time, in milliseconds, to offset each play time by
+    - `staggerFirst` : Set `true` to apply delay on 1st child
 
 #### Pause all animations
 
@@ -106,16 +140,10 @@ scene.anims.pauseAll();
 scene.anims.resumeAll();
 ```
 
-#### Reverse animation
-
-```javascript
-scene.anims.reverse(key);
-```
-
 #### Has animation
 
 ```javascript
-var exists = scene.anims.exists(key);
+var hasAnim = scene.anims.exists(key);
 ```
 
 #### Export/load
@@ -127,6 +155,7 @@ var exists = scene.anims.exists(key);
 - Load from JSON
     ```javascript
     scene.anims.fromJSON(json);
+    // scene.anims.fromJSON(json, clearCurrentAnimations);
     ```
     - Load JSON in preload stage
         ```javascript
@@ -210,23 +239,4 @@ var anim = scene.anims.get(key);
     or
     ```javascript
     var jsonString = JSON.stringify(anim);
-    ```
-
-#### Events
-
-- On start
-    ```javascript
-    anim.on('start', function(currentAnim, currentFrame, sprite){});
-    ```
-- On restart
-    ```javascript
-    anim.on('restart', function(currentAnim, currentFrame, sprite){});
-    ```
-- On complete
-    ```javascript
-    anim.on('complete', function(currentAnim, currentFrame, sprite){});
-    ```
-- On repeat
-    ```javascript
-    anim.on('repeat', function(currentAnim, currentFrame, sprite){});
     ```

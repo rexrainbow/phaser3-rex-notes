@@ -1,6 +1,21 @@
+/*
+
+Visible in localState:
+
+  - visible: original visible of child
+  - maskVisible: invisible by parent mask, see MaskChildren.js
+      - undefined (not in masking) : Equal to mask visible
+      - true (mask visible) : Inside, or across parent's visible area
+      - false (maske invisible) : Out of parent's visible area
+
+Visible result of child = (parent visible) && (child visible) && (mask visible)
+*/
+
 export default {
     updateChildVisible(child) {
-        child.visible = this.visible && this.getLocalState(child).visible;
+        var localState = this.getLocalState(child);
+        var maskVisible = (localState.hasOwnProperty('maskVisible')) ? localState.maskVisible : true;
+        child.visible = this.visible && localState.visible && maskVisible;
         return this;
     },
 
@@ -11,23 +26,39 @@ export default {
         return this;
     },
 
-    resetChildVisibleState(gameObject) {
-        this.getLocalState(gameObject).visible = gameObject.visible;
+    resetChildVisibleState(child) {
+        var localState = this.getLocalState(child);
+        // Delete maskVisible property
+        if (localState.hasOwnProperty('maskVisible')) {
+            delete localState.maskVisible;
+        }
+        localState.visible = child.visible;
         return this;
     },
 
-    setChildVisible(gameObject, visible) {
-        gameObject.visible = visible;
-        this.resetChildVisibleState(gameObject);
+    setChildVisible(child, visible) {
+        // Visible of child will be affect by parent's visible, and mask visible
+        this.setChildLocalVisible(child, visible);
         return this;
     },
-    
-    setChildLocalVisible(gameObject, visible) {
+
+    // Internal method
+    setChildLocalVisible(child, visible) {
         if (visible === undefined) {
             visible = true;
         }
-        this.getLocalState(gameObject).visible = visible;
-        this.updateChildVisible(gameObject);
+        this.getLocalState(child).visible = visible;
+        this.updateChildVisible(child);
         return this;
     },
+
+    // Internal method
+    setChildMaskVisible(child, visible) {
+        if (visible === undefined) {
+            visible = true;
+        }
+        this.getLocalState(child).maskVisible = visible;
+        this.updateChildVisible(child);
+        return this;
+    }
 };

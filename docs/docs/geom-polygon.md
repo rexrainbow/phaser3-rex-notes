@@ -80,7 +80,11 @@ polygon.setTo(points);
     ```javascript
     var isInside = Phaser.Geom.Polygon.ContainsPoint(polygon, point);
     ```
-- Reverse the order of points
+- Translate : Shift points.
+    ```javascript
+    Phaser.Geom.Polygon.Translate(polygon, x, y);
+    ```
+- Reverse the order of points.
     ```javascript
     var polygon = Phaser.Geom.Polygon.Reverse(polygon);
     ```
@@ -88,3 +92,36 @@ polygon.setTo(points);
     ```javascript
     Phaser.Geom.Polygon.Smooth(polygon)
     ```
+- Simplify : Simplifies the points by running them through a combination of 
+  Douglas-Peucker and Radial Distance algorithms. Simplification dramatically 
+  reduces the number of points in a polygon while retaining its shape, giving 
+  a huge performance boost when processing it and also reducing visual noise.
+    ```javascript
+    var polygon = Phaser.Geom.Polygon.Simplify(polygon);
+    // var polygon = Phaser.Geom.Polygon.Simplify(polygon, tolerance, highestQuality);
+    ```
+
+#### Vector to polygon
+
+- Get closest point of intersection between a vector and an array of polygons
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons);
+    // var out = Phaser.Geom.Intersects.GetLineToPolygon(line, polygons, out);
+    ```
+    - `line` : Vector of [line](geom-line.md) object
+    - `polygons` : A single polygon, or array of polygons
+    - `out` :
+        - `out.x`, `out.y` : Intersection point
+        - `out.z` : Closest intersection distance
+        - `out.w` : Index of the polygon
+- Projects rays out from the given point to each line segment of the polygons.
+    ```javascript
+    var out = Phaser.Geom.Intersects.GetRaysFromPointToPolygon(x, y, polygons);
+    ```
+    - `x`, `y` : The point to project the rays from.
+    - `polygons` : A single polygon, or array of polygons
+    - `out` : An array containing all intersections
+        - `out[i].x`, `out[i].y` : Intersection point
+        - `out[i].z` : Angle of intersection
+        - `out[i].w` : Index of the polygon
+

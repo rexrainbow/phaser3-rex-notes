@@ -688,11 +688,31 @@
     Add animation
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-from-aseprite" class="md-nav__link">
+    Add from Aseprite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#remove-animation" class="md-nav__link">
     Remove animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delay-between-two-animations" class="md-nav__link">
+    Delay between two animations
   </a>
   
 </li>
@@ -714,13 +734,6 @@
           <li class="md-nav__item">
   <a href="#resume-all-animations" class="md-nav__link">
     Resume all animations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reverse-animation" class="md-nav__link">
-    Reverse animation
   </a>
   
 </li>
@@ -783,13 +796,6 @@
           <li class="md-nav__item">
   <a href="#export" class="md-nav__link">
     Export
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events_1" class="md-nav__link">
-    Events
   </a>
   
 </li>
@@ -5048,6 +5054,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5100,11 +5118,31 @@
     Add animation
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-from-aseprite" class="md-nav__link">
+    Add from Aseprite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#remove-animation" class="md-nav__link">
     Remove animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delay-between-two-animations" class="md-nav__link">
+    Delay between two animations
   </a>
   
 </li>
@@ -5126,13 +5164,6 @@
           <li class="md-nav__item">
   <a href="#resume-all-animations" class="md-nav__link">
     Resume all animations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reverse-animation" class="md-nav__link">
-    Reverse animation
   </a>
   
 </li>
@@ -5199,13 +5230,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#events_1" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5248,13 +5272,15 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">skipMissedFrames</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">defaultTextureKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">startFrame</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="c1">// time</span>
     <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">frameRate</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">skipMissedFrames</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">timeScale</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
 
     <span class="c1">// repeat</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>              <span class="c1">// set to (-1) to repeat forever</span>
@@ -5282,7 +5308,7 @@
 </code></pre></div></li>
 <li>Frame sequence indexing from start to end
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span>
 <span class="p">{</span>
     <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5297,13 +5323,13 @@
 </li>
 <li>Custom frame sequence
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span>
 <span class="p">{</span>
     <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span> <span class="p">...</span> <span class="p">]</span>
-    <span class="c1">// outputArray: [], // Append frames into this array            </span>
+    <span class="c1">// outputArray: [], // Append frames into this array</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>prefix + Pad(frames[i], zeroPad, '0', 1) + suffix</code></li>
@@ -5312,20 +5338,51 @@
 </ul>
 </li>
 </ul>
+<h5 id="add-from-aseprite">Add from Aseprite<a class="headerlink" href="#add-from-aseprite" title="Permanent link">&para;</a></h5>
+<p><a href="tool.md#aseprite">Aseprite</a></p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">createFromAseprite</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.anims.createFromAseprite(key, tags);</span>
+</code></pre></div>
+
+<ul>
+<li><code>key</code> : The key of the loaded Aseprite atlas.</li>
+<li><code>tags</code> :<ul>
+<li><code>undefined</code> : Load all tags.</li>
+<li>Array of string tag : Load these tags.</li>
+</ul>
+</li>
+</ul>
 <h4 id="remove-animation">Remove animation<a class="headerlink" href="#remove-animation" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 
+<h4 id="delay-between-two-animations">Delay between two animations<a class="headerlink" href="#delay-between-two-animations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">addMix</span><span class="p">(</span><span class="nx">animA</span><span class="p">,</span> <span class="nx">animB</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>animA</code>, <code>animB</code> : String key of an animation, or an instance of animation.</li>
+</ul>
+</li>
+<li>Remove
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">removeMix</span><span class="p">(</span><span class="nx">animA</span><span class="p">,</span> <span class="nx">animB</span><span class="p">);</span>
+<span class="c1">// scene.anims.removeMix(animA);</span>
+</code></pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">getMix</span><span class="p">(</span><span class="nx">animA</span><span class="p">,</span> <span class="nx">animB</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h4 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Play
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Stagger play (delay play)
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">staggerPlay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">stagger</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">staggerPlay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">stagger</span><span class="p">,</span> <span class="nx">staggerFirst</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>children</code> : An array of Game Objects to play the animation on</li>
 <li><code>stagger</code> : The amount of time, in milliseconds, to offset each play time by</li>
+<li><code>staggerFirst</code> : Set <code>true</code> to apply delay on 1<sup>st</sup> child</li>
 </ul>
 </li>
 </ul>
@@ -5337,12 +5394,8 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">resumeAll</span><span class="p">();</span>
 </code></pre></div>
 
-<h4 id="reverse-animation">Reverse animation<a class="headerlink" href="#reverse-animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
 <h4 id="has-animation">Has animation<a class="headerlink" href="#has-animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">exists</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasAnim</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 
 <h4 id="exportload">Export/load<a class="headerlink" href="#exportload" title="Permanent link">&para;</a></h4>
@@ -5352,6 +5405,7 @@
 </code></pre></div></li>
 <li>Load from JSON
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<span class="c1">// scene.anims.fromJSON(json, clearCurrentAnimations);</span>
 </code></pre></div><ul>
 <li>Load JSON in preload stage
     <code>javascript
@@ -5424,21 +5478,6 @@
 </code></pre></div>
     or
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">anim</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
-<ul>
-<li>On start
-    <div class="codehilite"><pre><span></span><code><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>On restart
-    <div class="codehilite"><pre><span></span><code><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;restart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>On complete
-    <div class="codehilite"><pre><span></span><code><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>On repeat
-    <div class="codehilite"><pre><span></span><code><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;repeat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
 </code></pre></div></li>
 </ul>
                 

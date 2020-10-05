@@ -77,7 +77,7 @@ Inverse color post processing filter.
     - `intensity` : 0(original color) ~ 1(gray scale)
 1. Add to render pipeline
     ```javascript
-    scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
+    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
     ```
 1. Apply filter
     - To camera

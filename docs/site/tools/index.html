@@ -4869,6 +4869,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -4897,6 +4909,40 @@
   <a href="#texture-altas" class="md-nav__link">
     Texture altas
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#texture-packer" class="md-nav__link">
+    Texture-packer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free-texture-packer" class="md-nav__link">
+    Free texture packer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leshy-spritesheet-tool" class="md-nav__link">
+    Leshy SpriteSheet Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aseprite" class="md-nav__link">
+    Aseprite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4934,6 +4980,40 @@
     Texture altas
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#texture-packer" class="md-nav__link">
+    Texture-packer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#free-texture-packer" class="md-nav__link">
+    Free texture packer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#leshy-spritesheet-tool" class="md-nav__link">
+    Leshy SpriteSheet Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aseprite" class="md-nav__link">
+    Aseprite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -4958,17 +5038,42 @@
                   <h1>Tools</h1>
                 
                 <h2 id="texture-altas">Texture altas<a class="headerlink" href="#texture-altas" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.codeandweb.com/texturepacker">Texture-packer</a></li>
-<li><a href="https://www.leshylabs.com/apps/sstool/">Leshy SpriteSheet Tool</a><ul>
-<li>Export to <a href="https://www.leshylabs.com/blog/posts/2013-12-03-Leshy_SpriteSheet_Tool.html#json-tp-hash">JSON-TP-Hash</a></li>
-</ul>
+<h3 id="texture-packer">Texture-packer<a class="headerlink" href="#texture-packer" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.codeandweb.com/texturepacker">Texture-packer</a></p>
+<h3 id="free-texture-packer">Free texture packer<a class="headerlink" href="#free-texture-packer" title="Permanent link">&para;</a></h3>
+<p><a href="http://free-tex-packer.com/">Free texture packer</a>, <a href="http://free-tex-packer.com/app/">Web app</a></p>
+<h3 id="leshy-spritesheet-tool">Leshy SpriteSheet Tool<a class="headerlink" href="#leshy-spritesheet-tool" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.leshylabs.com/apps/sstool/">Leshy SpriteSheet Tool</a></p>
+<p>Export to <a href="https://www.leshylabs.com/blog/posts/2013-12-03-Leshy_SpriteSheet_Tool.html#json-tp-hash">JSON-TP-Hash</a></p>
+<h3 id="aseprite">Aseprite<a class="headerlink" href="#aseprite" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.aseprite.org/">Aseprite</a></p>
+<ol>
+<li>Go to "File - Export Sprite Sheet"</li>
+<li>On the <strong>Layout</strong> tab:</li>
+<li>Set the "Sheet type" to "Packed"</li>
+<li>Set the "Constraints" to "None"</li>
+<li>Check the "Merge Duplicates" checkbox</li>
+<li>On the <strong>Sprite</strong> tab:<ol>
+<li>Set "Layers" to "Visible layers"</li>
+<li>Set "Frames" to "All frames", unless you only wish to export a sub-set of tags</li>
+</ol>
 </li>
-<li><a href="http://free-tex-packer.com/">Free texture packer</a><ul>
-<li><a href="http://free-tex-packer.com/app/">Web app</a></li>
-</ul>
+<li>On the <strong>Borders</strong> tab:<ol>
+<li>Check the "Trim Sprite" and "Trim Cells" options</li>
+<li>Ensure "Border Padding", "Spacing" and "Inner Padding" are all &gt; 0 (1 is usually enough)    </li>
+</ol>
 </li>
-</ul>
+<li>On the <strong>Output</strong> tab:<ol>
+<li>Check "Output File", give your image a name and make sure you choose "png files" as the file type</li>
+<li>Check "JSON Data" and give your json file a name</li>
+<li>The JSON Data type can be either a Hash or Array, Phaser doesn't mind.</li>
+<li>Make sure "Tags" is checked in the Meta options</li>
+<li>In the "Item Filename" input box, make sure it says just "{frame}" and nothing more.</li>
+</ol>
+</li>
+<li>Click export</li>
+</ol>
+<p>Tested with Aseprite 1.2.25</p>
                 
                   
                 
@@ -4990,7 +5095,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../localforage/" title="LocalForage" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../plugin-list/" title="Plugin list" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4999,7 +5104,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                LocalForage
+                Plugin list
               </span>
             </div>
           </a>

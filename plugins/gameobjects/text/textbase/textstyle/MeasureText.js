@@ -9,7 +9,7 @@ const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 /**
  * Calculates the ascent, descent and fontSize of a given font style.
  *
- * @function Phaser.GameObjects.Text.MeasureText
+ * @function Phaser.GameObjects.MeasureText
  * @since 3.0.0
  *
  * @param {Phaser.GameObjects.Text.TextStyle} textStyle - The TextStyle object to measure.
@@ -25,7 +25,24 @@ var MeasureText = function (textStyle) {
 
     textStyle.syncFont(canvas, context);
 
-    var width = Math.ceil(context.measureText(textStyle.testString).width * textStyle.baselineX);
+    var metrics = context.measureText(textStyle.testString);
+
+    if (metrics.hasOwnProperty('actualBoundingBoxAscent') && metrics.hasOwnProperty('actualBoundingBoxDescent')) {
+        var ascent = metrics.actualBoundingBoxAscent;
+        var descent = metrics.actualBoundingBoxDescent;
+
+        var output = {
+            ascent: ascent,
+            descent: descent,
+            fontSize: (ascent + descent)
+        };
+
+        CanvasPool.remove(canvas);
+
+        return output;
+    }
+
+    var width = Math.ceil(metrics.width * textStyle.baselineX);
     var baseline = width;
     var height = 2 * baseline;
 
@@ -78,7 +95,8 @@ var MeasureText = function (textStyle) {
 
         if (!stop) {
             idx += line;
-        } else {
+        }
+        else {
             break;
         }
     }
@@ -99,7 +117,8 @@ var MeasureText = function (textStyle) {
 
         if (!stop) {
             idx -= line;
-        } else {
+        }
+        else {
             break;
         }
     }

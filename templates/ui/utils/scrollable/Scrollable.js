@@ -67,12 +67,12 @@ class Scrollable extends Sizer {
         // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
     }
 
-    layout(parent, newWidth, newHeight) {
+    _layout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
         if (this.rexSizer.hidden || (!this.dirty)) {
             return this;
         }
-        super.layout(parent, newWidth, newHeight);
+        super._layout(parent, newWidth, newHeight);
         this.resizeController();
         return this;
     }

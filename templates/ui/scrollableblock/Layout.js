@@ -28,7 +28,7 @@ var Layout = function (parent, newWidth, newHeight) {
             childHeight = this.height;
         }
         if (child.isRexSizer) {
-            child.layout(this, childWidth, childHeight);
+            child._layout(this, childWidth, childHeight);
         } else {
             ResizeGameObject(child, childWidth, childHeight);
         }

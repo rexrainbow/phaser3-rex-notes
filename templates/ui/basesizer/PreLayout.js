@@ -12,7 +12,7 @@ var PreLayout = function (parent) {
         if (child.rexSizer.hidden || (!child.dirty)) {
             continue;
         }
-        children[i].preLayout();
+        child.preLayout();
     }
 }
 export default PreLayout;

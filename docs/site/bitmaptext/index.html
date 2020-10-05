@@ -1104,6 +1104,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#color-of-characters" class="md-nav__link">
+    Color of characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop-shadow-effect" class="md-nav__link">
+    Drop shadow effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrap" class="md-nav__link">
     Wrap
   </a>
@@ -1114,6 +1128,19 @@
   <a href="#get-bound" class="md-nav__link">
     Get bound
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-information-of-character" class="md-nav__link">
+    Get information of character
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5021,6 +5048,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5117,6 +5156,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#color-of-characters" class="md-nav__link">
+    Color of characters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop-shadow-effect" class="md-nav__link">
+    Drop shadow effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrap" class="md-nav__link">
     Wrap
   </a>
@@ -5127,6 +5180,19 @@
   <a href="#get-bound" class="md-nav__link">
     Get bound
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-information-of-character" class="md-nav__link">
+    Get information of character
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5352,6 +5418,47 @@
 <span class="c1">// txt.setFont(key, size, align);</span>
 </code></pre></div>
 
+<h3 id="color-of-characters">Color of characters<a class="headerlink" href="#color-of-characters" title="Permanent link">&para;</a></h3>
+<ul>
+<li>By character
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setCharacterTint</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">);</span>
+<span class="c1">// txt.setCharacterTint(start, length, tintFill, topLeft, topRight, bottomLeft, bottomRight);</span>
+</code></pre></div><ul>
+<li><code>start</code> : Index starting character. <ul>
+<li><code>&lt; 0</code> : Counts back from the end of the text.</li>
+</ul>
+</li>
+<li><code>length</code> : Number of characters to tint.<ul>
+<li><code>-1</code> : All characters from <code>start</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>By word
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWordTint</span><span class="p">(</span><span class="nx">word</span><span class="p">,</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">);</span>
+<span class="c1">// txt.setWordTint(word, count, tintFill, topLeft, topRight, bottomLeft, bottomRight);</span>
+</code></pre></div><ul>
+<li><code>word</code> : The word to search for. <ul>
+<li>A string</li>
+<li>An index of the word in the words array.</li>
+</ul>
+</li>
+<li><code>count</code> : Number of matching words to tint.<ul>
+<li><code>-1</code> : All matching words</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="drop-shadow-effect">Drop shadow effect<a class="headerlink" href="#drop-shadow-effect" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDropShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>x</code>, <code>y</code> : The horizontal/vertical offset of the drop shadow.</li>
+<li><code>color</code> : The color of the drop shadow.</li>
+<li><code>alpha</code> : The alpha of the drop shadow.</li>
+</ul>
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Wrap
@@ -5389,8 +5496,14 @@
 <span class="c1">//     lines: {</span>
 <span class="c1">//         shortest: 0,</span>
 <span class="c1">//         longest: 0,</span>
-<span class="c1">//         lengths: null</span>
-<span class="c1">//     }</span>
+<span class="c1">//         lengths: null,</span>
+<span class="c1">//         height: 0</span>
+<span class="c1">//     },</span>
+<span class="c1">//     wrappedText: &#39;&#39;,</span>
+<span class="c1">//     words: [],</span>
+<span class="c1">//     characters: [],</span>
+<span class="c1">//     scaleX: 0,</span>
+<span class="c1">//     scaleY: 0</span>
 <span class="c1">// };</span>
 </code></pre></div>
 
@@ -5399,6 +5512,60 @@
 <li><code>local</code> : The BitmapText based on fontSize and 0x0 coords.</li>
 <li><code>global</code> : The BitmapText, taking into account scale and world position.</li>
 <li><code>lines</code> : The BitmapText line data.</li>
+<li><code>wrappedText</code> : Wrapped content joined with <code>'\n'</code>.</li>
+<li><code>characters</code> : Information of each character.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="kr">char</span><span class="p">,</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">line</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>char</code> : Character (string).</li>
+<li><code>code</code>: Character code (number)</li>
+<li><code>i</code> : Index of character</li>
+<li><code>x</code> , <code>y</code> : World position of this character</li>
+<li><code>w</code>, <code>h</code> : Width/height of this character</li>
+<li><code>t</code>, <code>b</code> : The top/bottom of the line this character is on.</li>
+<li><code>r</code> : The right-most point of this character, including xAdvance.</li>
+<li><code>line</code> : The line number the character appears on.</li>
+</ul>
+</li>
+<li><code>words</code> : Information of each word.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">word</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">cr</span>
+
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>word</code> : Word string.</li>
+<li><code>i</code> : Index of start character</li>
+<li><code>x</code>, <code>y</code> : World position of start character</li>
+<li><code>w</code> , <code>h</code> : Width/height of word</li>
+<li><code>cr</code> : Is last word of current line</li>
+</ul>
+</li>
+<li><code>scaleX</code>, <code>scaleY</code> : Scale of width and height.</li>
+</ul>
+<h4 id="get-information-of-character">Get information of character<a class="headerlink" href="#get-information-of-character" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharacterAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// var data = txt.getCharacterAt(x, y, camera);</span>
+</code></pre></div>
+
+<ul>
+<li><code>x</code>, <code>y</code> : World position.</li>
+<li><code>camera</code> : The Camera which is being tested against.</li>
+<li><code>data</code> : Information of character at world position.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="kr">char</span><span class="p">,</span> <span class="nx">code</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">w</span><span class="p">,</span> <span class="nx">h</span><span class="p">,</span> <span class="nx">t</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">line</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>char</code> : Character (string).</li>
+<li><code>code</code>: Character code (number)</li>
+<li><code>i</code> : Index of character</li>
+<li><code>x</code> , <code>y</code> : World position of this character</li>
+<li><code>w</code>, <code>h</code> : Width/height of this character</li>
+<li><code>t</code>, <code>b</code> : The top/bottom of the line this character is on.</li>
+<li><code>r</code> : The right-most point of this character, including xAdvance.</li>
+<li><code>line</code> : The line number the character appears on.</li>
+</ul>
+</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>

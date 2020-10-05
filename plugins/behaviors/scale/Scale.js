@@ -95,11 +95,14 @@ class Scale extends TweenBase {
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0)
         }
+        // Set scale to start value now
         if ((this.startX !== undefined) && (this.endX !== undefined)) {
-            config.scaleX = { start: this.startX, to: this.endX };
+            this.gameObject.scaleX = this.startX;
+            config.scaleX = this.endX
         }
         if ((this.startY !== undefined) && (this.endY !== undefined)) {
-            config.scaleY = { start: this.startY, to: this.endY };
+            this.gameObject.scaleY = this.startY;
+            config.scaleY = this.endY;
         }
         super.start(config);
         return this;

@@ -176,6 +176,38 @@ txt.setFont(key);
 // txt.setFont(key, size, align);
 ```
 
+### Color of characters
+
+- By character
+    ```javascript
+    txt.setCharacterTint(start, length, tintFill);
+    // txt.setCharacterTint(start, length, tintFill, topLeft, topRight, bottomLeft, bottomRight);
+    ```
+    - `start` : Index starting character. 
+        - `< 0` : Counts back from the end of the text.
+    - `length` : Number of characters to tint.
+        - `-1` : All characters from `start`
+- By word
+    ```javascript
+    txt.setWordTint(word, count, tintFill);
+    // txt.setWordTint(word, count, tintFill, topLeft, topRight, bottomLeft, bottomRight);
+    ```
+    - `word` : The word to search for. 
+        - A string
+        - An index of the word in the words array.
+    - `count` : Number of matching words to tint.
+        - `-1` : All matching words
+
+### Drop shadow effect
+
+```javascript
+txt.setDropShadow(x, y, color, alpha);
+```
+
+- `x`, `y` : The horizontal/vertical offset of the drop shadow.
+- `color` : The color of the drop shadow.
+- `alpha` : The alpha of the drop shadow.
+
 ### Wrap
 
 - Wrap
@@ -217,8 +249,14 @@ var bounds = txt.getTextBounds(round);
 //     lines: {
 //         shortest: 0,
 //         longest: 0,
-//         lengths: null
-//     }
+//         lengths: null,
+//         height: 0
+//     },
+//     wrappedText: '',
+//     words: [],
+//     characters: [],
+//     scaleX: 0,
+//     scaleY: 0
 // };
 ```
 
@@ -226,6 +264,58 @@ var bounds = txt.getTextBounds(round);
 - `local` : The BitmapText based on fontSize and 0x0 coords.
 - `global` : The BitmapText, taking into account scale and world position.
 - `lines` : The BitmapText line data.
+- `wrappedText` : Wrapped content joined with `'\n'`.
+- `characters` : Information of each character.
+    ```javascript
+    {
+        char, code, i, x, y, w, h, t, b, r, line
+    }
+    ```
+    - `char` : Character (string).
+    - `code`: Character code (number)
+    - `i` : Index of character
+    - `x` , `y` : World position of this character
+    - `w`, `h` : Width/height of this character
+    - `t`, `b` : The top/bottom of the line this character is on.
+    - `r` : The right-most point of this character, including xAdvance.
+    - `line` : The line number the character appears on.
+- `words` : Information of each word.
+    ```javascript
+    {
+        word, i, x, y, w, h, cr
+
+    }
+    ```
+    - `word` : Word string.
+    - `i` : Index of start character
+    - `x`, `y` : World position of start character
+    - `w` , `h` : Width/height of word
+    - `cr` : Is last word of current line
+- `scaleX`, `scaleY` : Scale of width and height.
+
+#### Get information of character
+
+```javascript
+var data = txt.getCharacterAt(x, y);
+// var data = txt.getCharacterAt(x, y, camera);
+```
+
+- `x`, `y` : World position.
+- `camera` : The Camera which is being tested against.
+- `data` : Information of character at world position.
+    ```javascript
+    {
+        char, code, i, x, y, w, h, t, b, r, line
+    }
+    ```
+    - `char` : Character (string).
+    - `code`: Character code (number)
+    - `i` : Index of character
+    - `x` , `y` : World position of this character
+    - `w`, `h` : Width/height of this character
+    - `t`, `b` : The top/bottom of the line this character is on.
+    - `r` : The right-most point of this character, including xAdvance.
+    - `line` : The line number the character appears on.
 
 ### Other properties
 

@@ -10,6 +10,7 @@ import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
+import _layout from './_Layout.js';
 import PostLayout from './PostLayout.js';
 import _layoutInit from './_layoutInit.js';
 
@@ -37,6 +38,7 @@ var methods = {
     preLayout: PreLayout,
     _layoutInit: _layoutInit,
     layout: Layout,
+    _layout: _layout, // Override this method
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
 

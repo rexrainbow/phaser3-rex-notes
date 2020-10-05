@@ -102,6 +102,7 @@ or
         powerPreference: 'default', // 'high-performance', 'low-power' or 'default'
         batchSize: 2000,
         desynchronized: false,
+        maxTextures: -1
     },
 
     physics: {

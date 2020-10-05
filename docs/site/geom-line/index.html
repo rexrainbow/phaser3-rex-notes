@@ -5024,6 +5024,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5442,14 +5454,18 @@
 <h4 id="line-to-line">Line to <a href="./">line</a><a class="headerlink" href="#line-to-line" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Is intersection
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isIntersection</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">);</span>
 </code></pre></div><ul>
+<li><code>isIntersection</code> : Return <code>true</code> if line1 and line2 are intersectioned</li>
+</ul>
+</li>
+<li>Get intersection point
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isIntersection</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>isIntersection</code> : Return <code>true</code> if line1 and line2 are intersectioned</li>
 <li><code>out</code> : intersected point</li>
 </ul>
 </li>
-<li>Get intersection points
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToLine</span><span class="p">(</span><span class="nx">line1</span><span class="p">,</span> <span class="nx">line2</span><span class="p">,</span> <span class="nx">out</span><span class="p">);</span>
-</code></pre></div></li>
 </ul>
                 
                   

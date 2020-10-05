@@ -24,6 +24,9 @@ var MaskChildren = function (parent, mask, children) {
         if (child === maskGameObject) {
             continue;
         }
+        if (!parent.getLocalState(child).visible) { // Child is invisible before masking
+            continue;
+        }
 
         if (child.getBounds) {
             childBounds = child.getBounds(childBounds);
@@ -64,21 +67,21 @@ var containsPoints = function (rectA, rectB) {
 };
 
 var showAll = function (parent, child, mask) {
-    parent.setChildLocalVisible(child, true);
+    parent.setChildMaskVisible(child, true);
     if (child.clearMask) {
         child.clearMask();
     }
 }
 
 var showSome = function (parent, child, mask) {
-    parent.setChildLocalVisible(child, true);
+    parent.setChildMaskVisible(child, true);
     if (child.setMask) {
         child.setMask(mask);
     }
 }
 
 var showNone = function (parent, child, mask) {
-    parent.setChildLocalVisible(child, false);
+    parent.setChildMaskVisible(child, false);
     if (child.clearMask) {
         child.clearMask();
     }

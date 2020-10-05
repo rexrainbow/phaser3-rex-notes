@@ -5128,6 +5128,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5704,10 +5716,14 @@
 <p>Scroll table by <a href="../slider/">slider</a> behavior.</p>
 </div>
 <h3 id="refresh-table-content">Refresh table content<a class="headerlink" href="#refresh-table-content" title="Permanent link">&para;</a></h3>
-<p>Refresh all visible cells.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</code></pre></div>
-
+<ul>
+<li>Refresh all visible cells.
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Update a visible cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateVisibleCell</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="table-size-in-cells">Table size in cells<a class="headerlink" href="#table-size-in-cells" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set table size

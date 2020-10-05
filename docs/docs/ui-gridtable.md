@@ -203,6 +203,9 @@ var table = scene.rexUI.add.gridTable({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
+    - `slider.position` : Position of this sldier.
+        - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
+        - `1`, `'left'`, `'top'` : Sldier at left/top side.       
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
@@ -325,6 +328,13 @@ See also - [dirty](ui-basesizer.md#dirty)
     table.refresh();
     ```
 
+### Cell container
+
+- Get
+    ```javascript
+    var container = table.getCellContainer(cellIndex);
+    ```
+
 ### Scroll content
 
 - Set
@@ -407,11 +417,15 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Refresh table cells
 
-```javascript
-table.refresh();
-```
-
-Which is equal to `table.setItems(table.items)`.
+- Refresh all visible cells
+    ```javascript
+    table.refresh();
+    ```
+    - Equal to `table.setItems(table.items)`.
+- Update a visible cell
+    ```javascript
+    table.updateVisibleCell(cellIndex);
+    ```
 
 ### Other properties
 

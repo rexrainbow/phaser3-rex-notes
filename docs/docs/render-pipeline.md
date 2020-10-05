@@ -11,13 +11,16 @@ Render pipelines for camera of game objects (with texture).
 ```javascript
 var config = {
     game: scene.game,
-    renderer: scene.game.renderer,
-    fragShader: '...'  // GLSL shader
+    fragShader: '...',  // GLSL shader
+    name: 'WebGLPipeline',
+    uniforms: []
 };
-var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
-scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
+var pipelineInstance = new Phaser.Renderer.WebGL.Pipelines.MultiPipeline(config);
+scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
 ```
 
+- `name` : Name of the pipeline. Used for identification.
+- `uniforms` : String array of the shader uniforms.
 - `pipelineName` : Name of this render pipeline, a string.
 
 #### Camera effect
@@ -55,54 +58,54 @@ scene.game.renderer.addPipeline(pipelineName, pipelineInstance);
 - Property with 1 value
     - Float
         ```javascript
-        pipelineInstance.setFloat1(name, value0);
+        pipelineInstance.set1f(name, value0);
         ```
     - uniform1fv
         ```javascript
-        pipelineInstance.setFloat1v(name, value0);
+        pipelineInstance.set1fv(name, value0);
         ```
     - Int
         ```javascript
-        pipelineInstance.setInt1(name, value0);
+        pipelineInstance.set1i(name, value0);
         ```
 - Property with 2 values
     - Float
         ```javascript
-        pipelineInstance.setFloat2(name, value0, value1);
+        pipelineInstance.set2f(name, value0, value1);
         ```
     - uniform2fv
         ```javascript
-        pipelineInstance.setFloat2v(name, value0, value1);
+        pipelineInstance.set2fv(name, value0, value1);
         ```
     - Int
         ```javascript
-        pipelineInstance.setInt2(name, value0, value1);
+        pipelineInstance.set2i(name, value0, value1);
         ``` 
 - Property with 3 value
     - Float
         ```javascript
-        pipelineInstance.setFloat3(name, value0, value1, value2);
+        pipelineInstance.set3f(name, value0, value1, value2);
         ```
     - uniform3fv
         ```javascript
-        pipelineInstance.setFloat3v(name, value0, value1, value2);
+        pipelineInstance.set3fv(name, value0, value1, value2);
         ```
     - Int
         ```javascript
-        pipelineInstance.setInt3(name, value0, value1, value2);
+        pipelineInstance.set3i(name, value0, value1, value2);
         ```
 - Property with 4 values
     - Float
         ```javascript
-        pipelineInstance.setFloat4(name, value0, value1, value2, value3);
+        pipelineInstance.set4f(name, value0, value1, value2, value3);
         ```
     - uniform4fv
         ```javascript
-        pipelineInstance.setFloat4v(name, value0, value1, value2, value3);
+        pipelineInstance.set4fv(name, value0, value1, value2, value3);
         ```
     - Int
         ```javascript
-        pipelineInstance.setInt4(name, value0, value1, value2, value3);
+        pipelineInstance.set4i(name, value0, value1, value2, value3);
         ```
 
 ### Remove pipeline instance

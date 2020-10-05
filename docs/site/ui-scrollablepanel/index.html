@@ -5044,6 +5044,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5319,6 +5331,7 @@
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+        <span class="nx">position</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
@@ -5408,6 +5421,11 @@
 <li><code>'drag'</code> : Control slider by dragging thumb game object. Default setting.</li>
 <li><code>'click'</code> : Control slider by touching track game object.</li>
 <li><code>'none'</code> : Disable sider controlling.</li>
+</ul>
+</li>
+<li><code>slider.position</code> : Position of this sldier.<ul>
+<li><code>0</code>, <code>'right'</code>, <code>'bottom'</code> : Sldier at right/bottom side. Default value.</li>
+<li><code>1</code>, <code>'left'</code>, <code>'top'</code> : Sldier at left/top side.</li>
 </ul>
 </li>
 <li>Set to <code>false</code> to skip creating slider.</li>

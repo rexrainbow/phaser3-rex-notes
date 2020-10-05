@@ -1892,6 +1892,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step" class="md-nav__link">
+    Step
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" class="md-nav__link">
     Control
   </a>
@@ -1916,13 +1936,6 @@
           <li class="md-nav__item">
   <a href="#duration-per-frame" class="md-nav__link">
     Duration per frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step" class="md-nav__link">
-    Step
   </a>
   
 </li>
@@ -5130,6 +5143,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5177,6 +5202,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    Update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step" class="md-nav__link">
+    Step
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" class="md-nav__link">
     Control
   </a>
@@ -5201,13 +5246,6 @@
           <li class="md-nav__item">
   <a href="#duration-per-frame" class="md-nav__link">
     Duration per frame
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#step" class="md-nav__link">
-    Step
   </a>
   
 </li>
@@ -5425,8 +5463,12 @@
         <span class="c1">//        left: true,</span>
         <span class="c1">//        right: true</span>
         <span class="c1">//    },</span>
+        <span class="c1">//    customUpdate: false,</span>
+        <span class="c1">//    fixedStep: true,</span>
         <span class="c1">//    fps: 60,</span>
         <span class="c1">//    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed</span>
+        <span class="c1">//    fixedStep: true,</span>
+        <span class="c1">//    customUpdate: false,</span>
         <span class="c1">//    overlapBias: 4,</span>
         <span class="c1">//    tileBias: 16,</span>
         <span class="c1">//    forceX: false,</span>
@@ -5445,6 +5487,31 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Default updating : World updating every tick</li>
+<li>Custom updating : <ol>
+<li>Set <code>customUpdate</code> of arcade config to <code>false</code>.<ul>
+<li>Enable world updating : <code>scene.physics.enableUpdate()</code></li>
+<li>Disable world updating : <code>scene.physics.disableUpdate()</code></li>
+</ul>
+</li>
+<li>Run world updating manually
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Enable/disable world updating<ul>
+<li>Enable : <code>scene.physics.enableUpdate()</code></li>
+<li>Disable : <code>scene.physics.disableUpdate()</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="step">Step<a class="headerlink" href="#step" title="Permanent link">&para;</a></h4>
+<p>Advances the simulation by one step.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
 </code></pre></div>
 
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
@@ -5470,11 +5537,6 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setFPS</span><span class="p">(</span><span class="nx">framerate</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="step">Step<a class="headerlink" href="#step" title="Permanent link">&para;</a></h4>
-<p>Advances the simulation by one step.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
-</code></pre></div>
-
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
 <h4 id="set-bound">Set bound<a class="headerlink" href="#set-bound" title="Permanent link">&para;</a></h4>
 <p>See bound in <a href="../arcade-body/#collision-bound">body object</a>, or <a href="../arcade-gameobject/#collision-bound">game object</a>.</p>

@@ -321,11 +321,14 @@ It is equal to `cellInvisibleCallback` in configuration.
 
 ### Refresh table content
 
-Refresh all visible cells.
-
-```javascript
-table.updateTable(true);
-```
+- Refresh all visible cells.
+    ```javascript
+    table.updateTable(true);
+    ```
+- Update a visible cell
+    ```javascript
+    table.updateVisibleCell(cellIndex);
+    ```
 
 ### Table size in cells
 

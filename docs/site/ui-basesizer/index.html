@@ -5032,6 +5032,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5265,6 +5277,12 @@
 <span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Resize top-most sizer</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setMinSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">).</span><span class="nx">layout</span><span class="p">()</span>
+</code></pre></div>
+
+</div>
 <h3 id="dirty">Dirty<a class="headerlink" href="#dirty" title="Permanent link">&para;</a></h3>
 <p>Don't layout this sizer if <code>sizer.dirty</code> is <code>false</code>. i.e. Size of this sizer won't be changed, but won't layout children neither.</p>
 <p>Default value is <code>true</code>.</p>

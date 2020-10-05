@@ -4423,6 +4423,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cell-container" class="md-nav__link">
+    Cell container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#scroll-content" class="md-nav__link">
     Scroll content
   </a>
@@ -5051,6 +5058,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5155,6 +5174,13 @@
           <li class="md-nav__item">
   <a href="#items" class="md-nav__link">
     Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-container" class="md-nav__link">
+    Cell container
   </a>
   
 </li>
@@ -5463,6 +5489,11 @@
 <li><code>'none'</code> : Disable sider controlling.</li>
 </ul>
 </li>
+<li><code>slider.position</code> : Position of this sldier.<ul>
+<li><code>0</code>, <code>'right'</code>, <code>'bottom'</code> : Sldier at right/bottom side. Default value.</li>
+<li><code>1</code>, <code>'left'</code>, <code>'top'</code> : Sldier at left/top side.       </li>
+</ul>
+</li>
 <li>Set to <code>false</code> to skip creating slider.</li>
 </ul>
 </li>
@@ -5602,6 +5633,12 @@
 <span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
+<h3 id="cell-container">Cell container<a class="headerlink" href="#cell-container" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCellContainer</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
@@ -5675,10 +5712,17 @@
 </li>
 </ul>
 <h3 id="refresh-table-cells">Refresh table cells<a class="headerlink" href="#refresh-table-cells" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
-</code></pre></div>
-
-<p>Which is equal to <code>table.setItems(table.items)</code>.</p>
+<ul>
+<li>Refresh all visible cells
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Equal to <code>table.setItems(table.items)</code>.</li>
+</ul>
+</li>
+<li>Update a visible cell
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">updateVisibleCell</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

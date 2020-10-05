@@ -1057,6 +1057,19 @@
     Add text object
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-tag" class="md-nav__link">
+    Properties of tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5076,6 +5089,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../plugin-list/" title="Plugin list" class="md-nav__link">
+      Plugin list
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../tools/" title="Tools" class="md-nav__link">
       Tools
     </a>
@@ -5160,6 +5185,19 @@
   <a href="#add-text-object" class="md-nav__link">
     Add text object
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-tag" class="md-nav__link">
+    Properties of tag
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5367,37 +5405,9 @@
 <span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
 </code></pre></div>
 
-<p>Properties of a tag</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>   <span class="c1">// or &#39;family&#39;, &#39;font-family&#39;</span>
-    <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>        <span class="c1">// or &#39;size&#39;, &#39;font-size&#39;</span>
-    <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;bold italic&#39;</span><span class="p">,</span><span class="c1">// or &#39;style&#39;, &#39;font-style&#39;</span>
-    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>            <span class="c1">// or &#39;font-color&#39;</span>
-    <span class="nx">stroke</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">1</span>
-    <span class="p">},</span>
-    <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="nx">blur</span><span class="o">:</span> <span class="mi">2</span>
-    <span class="p">},</span>
-    <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>            <span class="c1">// or &#39;u&#39;</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="p">},</span>
-    <span class="nx">metrics</span><span class="o">:</span> <span class="kc">false</span>
-    <span class="c1">// metrics: {</span>
-    <span class="c1">//     ascent: 0,</span>
-    <span class="c1">//     descent: 0,</span>
-    <span class="c1">//     fontSize: 0</span>
-    <span class="c1">// }    </span>
-    <span class="c1">// area: key,</span>
-<span class="p">}</span>
-</code></pre></div>
-
+<ul>
+<li><code>tags</code> : <code>{tagName:tag}</code>, see <a href="./#properties-of-tag">Properties of tag</a>.</li>
+</ul>
 <p>Default style</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
@@ -5438,7 +5448,14 @@
     <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>     <span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
         <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">metrics</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="c1">// metrics: {</span>
+    <span class="c1">//     ascent: 0,</span>
+    <span class="c1">//     descent: 0,</span>
+    <span class="c1">//     fontSize: 0</span>
+    <span class="c1">// }    </span>
+    <span class="c1">// resolution: 1,</span>
 
     <span class="nx">tags</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">//tag0: {</span>
@@ -5491,6 +5508,32 @@
 </ul>
 </li>
 </ul>
+<h4 id="properties-of-tag">Properties of tag<a class="headerlink" href="#properties-of-tag" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>   <span class="c1">// or &#39;family&#39;, &#39;font-family&#39;</span>
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>        <span class="c1">// or &#39;size&#39;, &#39;font-size&#39;</span>
+    <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;bold italic&#39;</span><span class="p">,</span><span class="c1">// or &#39;style&#39;, &#39;font-style&#39;</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>            <span class="c1">// or &#39;font-color&#39;</span>
+    <span class="nx">stroke</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">blur</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="p">},</span>
+    <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>            <span class="c1">// or &#39;u&#39;</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nx">img</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+    <span class="nx">area</span><span class="o">:</span> <span class="nx">areaKey</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class

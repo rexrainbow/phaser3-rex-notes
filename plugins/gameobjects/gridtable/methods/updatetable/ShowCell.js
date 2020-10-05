@@ -1,7 +1,11 @@
 var ShowCell = function (cell) {
     // Attach container to cell by cell.setContainer(container) under this event
     var reusedCellContainer = null;
-    if (this.cellContainersPool) {
+    var cellContainer = cell.getContainer();
+    if (cellContainer) {
+        reusedCellContainer = cellContainer;
+        cell.popContainer();
+    } else if (this.cellContainersPool) {
         reusedCellContainer = this.cellContainersPool.getFirstDead();
         if (reusedCellContainer !== null) { // Reuse this game object
             reusedCellContainer.setActive(true).setVisible(true);

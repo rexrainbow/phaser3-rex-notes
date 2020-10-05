@@ -1,10 +1,14 @@
-import DefaultConfig from './DefaultConfig.js';
+import GetDefaultUrl from './GetDefaultUrl.js';
 import MergeRight from '../../utils/object/MergeRight.js';
 import LoadScriptPromise from '../../utils/loader/LoadScriptPromise.js';
 import AvailableTest from './AvailableTest.js';
 
 var Preload = function (urlConfig, firebaseConfig) {
-    urlConfig = MergeRight(DefaultConfig, urlConfig);
+    if (typeof (urlConfig) === 'string') {  // Get specific version
+        urlConfig = GetDefaultUrl(urlConfig);
+    } else { // Get default version
+        urlConfig = MergeRight(GetDefaultUrl(), urlConfig);
+    }
 
     return LoadScriptPromise(urlConfig.app)  // Load firebase-app
         .then(function () { // Load other SDK

@@ -278,10 +278,12 @@ x1, y2, x2, y2 are equal.
 
 - Is intersection
     ```javascript
-    var result = Phaser.Geom.Intersects.LineToLine(line1, line2);
+    var isIntersection = Phaser.Geom.Intersects.LineToLine(line1, line2);
     ```
-    - `out` : intersected point
-- Get intersection points
+    - `isIntersection` : Return `true` if line1 and line2 are intersectioned
+- Get intersection point
     ```javascript
-    var result = Phaser.Geom.Intersects.LineToLine(line1, line2, out);
+    var isIntersection = Phaser.Geom.Intersects.LineToLine(line1, line2, out);
     ```
+    - `isIntersection` : Return `true` if line1 and line2 are intersectioned
+    - `out` : intersected point

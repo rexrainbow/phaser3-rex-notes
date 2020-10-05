@@ -104,7 +104,7 @@ class Drag {
         if (!this.isDragging) {
             return;
         }
-        this.pointer.dragState = 5;
+        this.scene.input.setDragState(this.pointer, 5);
         return this;
     }
 
