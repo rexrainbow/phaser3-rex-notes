@@ -58,7 +58,7 @@ It should only be used if you're looking to change the base size of your game an
 ### Events
 
 ```javascript
-scene.scale.on('resize', function(gameSize, baseSize, displaySize, resolution, previousWidth, previousHeight) {});
+scene.scale.on('resize', function(gameSize, baseSize, displaySize, previousWidth, previousHeight) {});
 ```
 
 - `gameSize`

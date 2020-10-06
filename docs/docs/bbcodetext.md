@@ -143,8 +143,7 @@ Default style
     //     ascent: 0,
     //     descent: 0,
     //     fontSize: 0
-    // }    
-    // resolution: 1
+    // }
 }
 ```
 

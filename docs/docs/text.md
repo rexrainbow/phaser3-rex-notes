@@ -57,7 +57,6 @@ Default style
     //     descent: 0,
     //     fontSize: 0
     // }
-    // resolution: 1
 }
 ```
 
