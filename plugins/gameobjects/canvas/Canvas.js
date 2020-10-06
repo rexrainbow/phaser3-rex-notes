@@ -24,7 +24,7 @@ class Canvas extends GameObject {
 
         this.renderer = scene.sys.game.renderer;
 
-        this.resolution = scene.sys.game.config.resolution;
+        this.resolution = 1;
         this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
         this.context = this.canvas.getContext('2d');
         this.dirty = false;
@@ -45,7 +45,7 @@ class Canvas extends GameObject {
         //  Set the resolution
         this.frame.source.resolution = this.resolution;
 
-        if (this.renderer.gl) {
+        if (this.renderer && this.renderer.gl) {
             //  Clear the default 1x1 glTexture, as we override it later
             this.renderer.deleteTexture(this.frame.source.glTexture);
             this.frame.source.glTexture = null;

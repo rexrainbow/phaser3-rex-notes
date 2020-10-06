@@ -157,14 +157,14 @@ class Line extends RenderTexture {
         return this.scene.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
     }
 
-    renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix) {
+    renderWebGL(renderer, src,  camera, parentMatrix) {
         this.updateTexture();
-        super.renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix);
+        super.renderWebGL(renderer, src,  camera, parentMatrix);
     }
 
-    renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
+    renderCanvas(renderer, src,  camera, parentMatrix) {
         this.updateTexture();
-        super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
+        super.renderCanvas(renderer, src,  camera, parentMatrix);
     }
 }
 

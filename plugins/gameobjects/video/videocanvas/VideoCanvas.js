@@ -42,7 +42,7 @@ class VideoCanvas extends VideoBase(Canvas) {
         this.load(GetValue(config, 'src', ''));
     }
 
-    renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix) {
+    renderWebGL(renderer, src,  camera, parentMatrix) {
         if (this.readyState > 0) {
             this.renderer.canvasToTexture(this.video, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
@@ -53,16 +53,16 @@ class VideoCanvas extends VideoBase(Canvas) {
             gl.clear(gl.COLOR_BUFFER_BIT);
             renderer.setFramebuffer(null, true);
         }
-        super.renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix);
+        super.renderWebGL(renderer, src,  camera, parentMatrix);
     }
 
-    renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
+    renderCanvas(renderer, src,  camera, parentMatrix) {
         if (this.readyState > 0) {
             this.context.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
         } else {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }
-        super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
+        super.renderCanvas(renderer, src,  camera, parentMatrix);
     }
 
     resize(width, height) {

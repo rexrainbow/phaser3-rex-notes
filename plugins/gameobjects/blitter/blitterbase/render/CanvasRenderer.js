@@ -1,4 +1,4 @@
-var BlitterCanvasRenderer = function (renderer, blitter, interpolationPercentage, camera, parentMatrix) {
+var BlitterCanvasRenderer = function (renderer, blitter, camera, parentMatrix) {
     var list = blitter.getRenderList();
 
     if (list.length === 0) {

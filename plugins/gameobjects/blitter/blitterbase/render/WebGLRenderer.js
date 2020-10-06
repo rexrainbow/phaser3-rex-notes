@@ -1,6 +1,6 @@
 const GetTint = Phaser.Renderer.WebGL.Utils.getTintAppendFloatAlpha
 
-var BlitterWebGLRenderer = function (renderer, blitter, interpolationPercentage, camera, parentMatrix) {
+var BlitterWebGLRenderer = function (renderer, blitter, camera, parentMatrix) {
     var list = blitter.getRenderList();
 
     if (list.length === 0) {

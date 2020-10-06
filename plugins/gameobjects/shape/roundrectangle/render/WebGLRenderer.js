@@ -22,7 +22,7 @@ var StrokePathWebGL = require('../../utils/StrokePathWebGL');
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var PolygonWebGLRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
+var PolygonWebGLRenderer = function (renderer, src,  camera, parentMatrix)
 {
     var pipeline = this.pipeline;
 

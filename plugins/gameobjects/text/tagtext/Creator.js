@@ -47,7 +47,6 @@ export default function (config, addToScene) {
     //  Text specific config options:
 
     gameObject.autoRound = GetAdvancedValue(config, 'autoRound', true);
-    gameObject.resolution = GetAdvancedValue(config, 'resolution', 1);
 
     return gameObject;
 };

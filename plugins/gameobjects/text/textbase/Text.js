@@ -66,9 +66,9 @@ class Text extends GameObject {
 
         this.dirty = false;
 
-        //  If resolution wasn't set, then we get it from the game config
+        //  If resolution wasn't set, force it to 1
         if (this.style.resolution === 0) {
-            this.style.resolution = scene.sys.game.config.resolution;
+            this.style.resolution = 1;
         }
 
         this._crop = this.resetCropObject();
