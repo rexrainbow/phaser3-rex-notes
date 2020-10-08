@@ -18,6 +18,7 @@ class ScrollablePanel extends Scrollable {
         }
         panelConfig.scrollMode = scrollMode;
         panelConfig.clamplChildOY = GetValue(config, 'clamplChildOY', false);
+        panelConfig.roundChildOY = GetValue(config, 'roundChildOY', true);
         var scrollableBlock = new ScrollableBlock(scene, panelConfig);
         scene.add.existing(scrollableBlock); // Important: Add to display list for touch detecting
         var panelWidth = GetValue(panelConfig, 'width', undefined);

@@ -1,10 +1,13 @@
 var SetTableOX = function (ox) {
+    if (this.roundTableOXY) {
+        ox = Math.round(ox);
+    }
     var table = this.table;
     var leftTableOX = this.leftTableOX;
     var rightTableOX = this.rightTableOX;
     var tableOXExeceedLeft = (ox > this.leftTableOX);
     var tableOXExeceedRight = (ox < this.rightTableOX);
-    if (this.clampTableOXYMode) {
+    if (this.clampTableOXY) {
         var colCount = table.colCount;
         var visibleColCount = table.widthToColIndex(this.instWidth, true);
 

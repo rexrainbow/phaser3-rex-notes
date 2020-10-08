@@ -25,6 +25,7 @@ class TextArea extends Scrollable {
             textMask: textMask,
             content: content,
             clamplTextOY: GetValue(config, 'clamplChildOY', false),
+            roundTextOY: GetValue(config, 'roundTextOY', true)
         });
         scene.add.existing(textBlock); // Important: Add to display list for touch detecting
         var proportion = (textWidth === undefined) ? 1 : 0;

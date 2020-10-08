@@ -331,6 +331,18 @@ tween.restart();
 tween.remove();
 ```
 
+### Get tweens
+
+Returns an array of all Tweens or Timelines in the Tween Manager which affect the given target or array of targets.
+
+```javascript
+var tweens = scene.tweens.getTweensOf(target);
+// var tweens = scene.tweens.getTweensOf(target, includePending);
+```
+
+- `tweens` : Array of tweens, or timelines.
+- `includePending` : Set `true` to search pending tweens.
+
 ### Time-scale
 
 ```javascript

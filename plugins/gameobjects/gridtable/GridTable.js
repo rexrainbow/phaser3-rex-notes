@@ -46,6 +46,7 @@ class GridTable extends ContainerLite {
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
+        this.setRoundOXYMode(GetValue(config, 'roundTableOXY', true));
 
         // Pre-process cell size
         if (this.scrollMode === 0) { // scroll y
@@ -96,7 +97,18 @@ class GridTable extends ContainerLite {
     }
 
     setClampMode(mode) {
-        this.clampTableOXYMode = mode;
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.clampTableOXY = mode;
+        return this;
+    }
+
+    setRoundOXYMode(mode) {
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.roundTableOXY = mode;
         return this;
     }
 
