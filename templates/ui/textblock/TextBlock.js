@@ -70,7 +70,10 @@ class TextBlock extends BaseSizer {
     }
 
     setClampMode(mode) {
-        this.clampTextOYMode = mode;
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.clampTextOY = mode;
         return this;
     }
 
@@ -152,7 +155,7 @@ class TextBlock extends BaseSizer {
         var textOYExceedTop = this.textOYExceedTop(oy);
         var textOYExeceedBottom = this.textOYExeceedBottom(oy);
 
-        if (this.clampTextOYMode) {
+        if (this.clampTextOY) {
             if (this.visibleLinesCount > this.linesCount) {
                 oy = 0;
             } else if (textOYExceedTop) {

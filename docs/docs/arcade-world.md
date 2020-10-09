@@ -105,6 +105,47 @@ scene.physics.resume();
     scene.physics.world.setFPS(framerate);
     ```
 
+### Body
+
+#### Enable
+
+```javascript
+scene.physics.world.enable(gameObject);
+// scene.physics.world.enable(gameObject, bodyType);
+```
+
+- `gameObject` : A game object, or array of game objects, or game objects in a [Group](group.md)
+- `bodyType` :
+    - `0` : Dynamic body. Default value.
+    - `1` : Static body.
+
+Or
+
+```javascript
+scene.physics.add.existing(gameObject, bodyType);
+```
+
+See [arcade-body](arcade-body.md#get-physics-body)
+
+#### Disable
+
+```javascript
+scene.physics.world.disable(gameObject);
+```
+
+- `gameObject` : A game object, or array of game objects, or game objects in a [Group](group.md)
+
+#### Add/remove body
+
+- Add body to the local search trees.
+    ```javascript
+    scene.physics.world.add(body);
+    ```
+- Remove body from the local search trees.
+    ```javascript
+    scene.physics.world.disableBody(body);
+    ```
+
 ### Collision
 
 #### Set bound

@@ -4,7 +4,7 @@ var SetTableOY = function (oy) {
     var bottomTableOY = this.bottomTableOY;
     var tableOYExceedTop = (oy > this.topTableOY);
     var tableOYExeceedBottom = (oy < this.bottomTableOY);
-    if (this.clampTableOXYMode) {
+    if (this.clampTableOXY) {
         var rowCount = table.rowCount;
         var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
 

@@ -4,7 +4,7 @@ var SetTableOX = function (ox) {
     var rightTableOX = this.rightTableOX;
     var tableOXExeceedLeft = (ox > this.leftTableOX);
     var tableOXExeceedRight = (ox < this.rightTableOX);
-    if (this.clampTableOXYMode) {
+    if (this.clampTableOXY) {
         var colCount = table.colCount;
         var visibleColCount = table.widthToColIndex(this.instWidth, true);
 

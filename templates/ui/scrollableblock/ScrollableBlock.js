@@ -67,7 +67,10 @@ class ScrollableBlock extends BaseSizer {
     }
 
     setClampMode(mode) {
-        this.clampChildOYMode = mode;
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.clampChildOY = mode;
         return this;
     }
 
@@ -132,7 +135,7 @@ class ScrollableBlock extends BaseSizer {
         var childOYExceedTop = this.childOYExceedTop(oy);
         var childOYExeceedBottom = this.childOYExeceedBottom(oy);
 
-        if (this.clampChildOYMode) {
+        if (this.clampChildOY) {
             if (this.instHeight > this.childHeight) {
                 oy = 0;
             } else if (childOYExceedTop) {

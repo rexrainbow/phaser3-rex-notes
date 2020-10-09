@@ -96,7 +96,10 @@ class GridTable extends ContainerLite {
     }
 
     setClampMode(mode) {
-        this.clampTableOXYMode = mode;
+        if (mode === undefined) {
+            mode = true;
+        }
+        this.clampTableOXY = mode;
         return this;
     }
 

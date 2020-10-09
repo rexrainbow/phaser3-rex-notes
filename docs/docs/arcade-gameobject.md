@@ -66,6 +66,8 @@ Arcade physics Image/Sprite/Group object.
             setFrictionY: 0,
             setVelocityX: 0,
             setVelocityY: 0,
+            maxVelocityX: 10000,
+            maxVelocityY: 10000,
             setAngularVelocity: 0,
             setAngularAcceleration: 0,
             setAngularDrag: 0,
@@ -197,6 +199,21 @@ Arcade physics Image/Sprite/Group object.
 - Get
     ```javascript
     var immovable = gameObject.body.immovable;
+    ```
+
+#### Pushable
+
+- Enable
+    ```javascript
+    gameObject.setPushable();
+    ```
+- Disable
+    ```javascript
+    gameObject.setPushable(false);
+    ```
+- Get
+    ```javascript
+    var pushable = gameObject.body.pushable;
     ```
 
 ##### Friction
