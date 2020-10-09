@@ -91,7 +91,6 @@ Reference: [load image](loader.md#image)
         // delay: 0,
         // lifespan: 1000,       // { min, max }, or { min, max, steps }
 
-
         // **physics**
         // speed:                // { min, max }, or { min, max, steps }
         // speedX:               // { min, max }, or { min, max, steps }
@@ -127,7 +126,8 @@ Reference: [load image](loader.md#image)
         // frequency: 0,      // -1 for exploding emitter
         // quantity: 1,       // { min, max }
         // maxParticles: 0,
-        // rotate: 0,         // { start, end }, or { start, end, ease },
+        // reserve: 0,
+        // rotate: 0,         // { start, end }, or { start, end, ease }
         // timeScale: 1,
 
     });
@@ -136,6 +136,7 @@ Reference: [load image](loader.md#image)
         - `{min, max}` : Pick a random value between min and max
         - `{start, end}` : Pick values incremented continuously across a range. (`ease`=`'Linear'`)
             - `{start, end, ease}`
+            - `{start, end, ease, easeParams}`
         - `{start, end, steps}` : Pick values incremented by steps across a range.
         - `{start, end, random}`
             - `random`: `true` or `false`
@@ -190,6 +191,7 @@ Reference: [load image](loader.md#image)
         ```
     - `lifespan` : The lifespan of emitted particles, in ms.
         - `Infinity` : Immortal particle.
+    - `reserve` : Creates specified number of inactive particles and adds them to this emitter's pool.
     - `name` : The name of this Particle Emitter.
         - Get emitter by name
             ```javascript
