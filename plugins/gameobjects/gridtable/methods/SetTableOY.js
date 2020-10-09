@@ -1,7 +1,4 @@
 var SetTableOY = function (oy) {
-    if (this.roundTableOXY) {
-        oy = Math.round(oy);
-    }
     var table = this.table;
     var topTableOY = this.topTableOY;
     var bottomTableOY = this.bottomTableOY;

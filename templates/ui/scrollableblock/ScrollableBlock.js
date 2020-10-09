@@ -30,7 +30,6 @@ class ScrollableBlock extends BaseSizer {
 
         this.setScrollMode(GetValue(config, 'scrollMode', true))
         this.setClampMode(GetValue(config, 'clamplChildOY', true));
-        this.setRoundOYMode(GetValue(config, 'roundChildOY', true));
 
         // Add elements
         // No background object, and child does not have padding
@@ -72,14 +71,6 @@ class ScrollableBlock extends BaseSizer {
             mode = true;
         }
         this.clampChildOY = mode;
-        return this;
-    }
-
-    setRoundOYMode(mode) {
-        if (mode === undefined) {
-            mode = true;
-        }
-        this.roundChildOY = mode;
         return this;
     }
 
@@ -139,9 +130,6 @@ class ScrollableBlock extends BaseSizer {
     }
 
     set childOY(oy) {
-        if (this.roundChildOY) {
-            oy = Math.round(oy);
-        }
         var topChildOY = this.topChildOY;
         var bottomChildOY = this.bottomChildOY;
         var childOYExceedTop = this.childOYExceedTop(oy);

@@ -1,7 +1,4 @@
 var SetTableOX = function (ox) {
-    if (this.roundTableOXY) {
-        ox = Math.round(ox);
-    }
     var table = this.table;
     var leftTableOX = this.leftTableOX;
     var rightTableOX = this.rightTableOX;

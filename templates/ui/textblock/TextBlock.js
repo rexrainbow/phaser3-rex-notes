@@ -33,7 +33,6 @@ class TextBlock extends BaseSizer {
         this.execeedBottomState = false;
 
         this.setClampMode(GetValue(config, 'clamplTextOY', true));
-        this.setRoundOYMode(GetValue(config, 'roundTextOY', true));
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -75,14 +74,6 @@ class TextBlock extends BaseSizer {
             mode = true;
         }
         this.clampTextOY = mode;
-        return this;
-    }
-
-    setRoundOYMode(mode) {
-        if (mode === undefined) {
-            mode = true;
-        }
-        this.roundTextOY = mode;
         return this;
     }
 
@@ -159,9 +150,6 @@ class TextBlock extends BaseSizer {
     }
 
     set textOY(oy) {
-        if (this.roundTextOY) {
-            oy = Math.round(oy);
-        }
         var topTextOY = this.topTextOY;
         var bottomTextOY = this.bottomTextOY;
         var textOYExceedTop = this.textOYExceedTop(oy);
