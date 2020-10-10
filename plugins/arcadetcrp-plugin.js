@@ -2,6 +2,7 @@ import TCRP from './arcadetcrp.js';
 
 const Recorder = TCRP.Recorder;
 const Player = TCRP.Player;
+const StepRunner = TCRP.StepRunner;
 
 class ArcadeTCRPPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -19,6 +20,10 @@ class ArcadeTCRPPlugin extends Phaser.Plugins.BasePlugin {
 
     addPlayer(parent, config) {
         return new Player(parent, config);
+    }
+
+    addStepRunner(parent) {
+        return new StepRunner(parent);
     }
 }
 

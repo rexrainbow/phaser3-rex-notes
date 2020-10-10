@@ -71,7 +71,7 @@ class Demo extends Phaser.Scene {
         var TCRPplugin = this.plugins.get('rexTCRP');
         var recorder = TCRPplugin.addRecorder(this);
         var player = TCRPplugin.addPlayer(this);
-        var RunCommands = TCRPplugin.runCommands;
+        var stepRunner = TCRPplugin.addStepRunner(this);
 
         // Loop player
         player.on('complete', function () { player.start() });
@@ -93,7 +93,7 @@ class Demo extends Phaser.Scene {
                     'reset'
                 ];
                 recorder.addCommand(command);
-                RunCommands(command, spriteA);
+                stepRunner.add(command, spriteA);
 
                 // spriteB
                 player.stop();
@@ -105,7 +105,7 @@ class Demo extends Phaser.Scene {
                         'stop',  // function name
                     ]
                     recorder.addCommand(command);
-                    RunCommands(command, spriteA);
+                    stepRunner.add(command, spriteA);
                 }
                 recorder.stop();
 
@@ -130,7 +130,7 @@ class Demo extends Phaser.Scene {
                         100, // speed
                     ]
                     recorder.addCommand(command);
-                    RunCommands(command, spriteA);
+                    stepRunner.add(command, spriteA);
                 }
             })
             .on('up', function () {
@@ -139,7 +139,7 @@ class Demo extends Phaser.Scene {
                         'stop',  // function name
                     ]
                     recorder.addCommand(command);
-                    RunCommands(command, spriteA);
+                    stepRunner.add(command, spriteA);
                 }
             });
 
@@ -152,7 +152,7 @@ class Demo extends Phaser.Scene {
                         100, // speed
                     ]
                     recorder.addCommand(command);
-                    RunCommands(command, spriteA);
+                    stepRunner.add(command, spriteA);
                 }
             })
             .on('up', function () {
@@ -161,7 +161,7 @@ class Demo extends Phaser.Scene {
                         'stop',  // function name
                     ]
                     recorder.addCommand(command);
-                    RunCommands(command, spriteA);
+                    stepRunner.add(command, spriteA);
                 }
             });
 
