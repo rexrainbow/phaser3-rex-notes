@@ -100,7 +100,13 @@ class Demo extends Phaser.Scene {
                 spriteB.stop();
             } else {
                 // spriteA
-                spriteA.stop();
+                if (recorder.isRecording) {
+                    var command = [
+                        'stop',  // function name
+                    ]
+                    recorder.addCommand(command);
+                    RunCommands(command, spriteA);
+                }
                 recorder.stop();
 
                 // spriteB
