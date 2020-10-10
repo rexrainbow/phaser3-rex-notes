@@ -1,27 +1,28 @@
 import BaseClock from './BaseClock.js';
 
-class Clock extends BaseClock {
+class ArcadeStepClock extends BaseClock {
     startTicking() {
         super.startTicking();
-        this.scene.events.on('update', this.update, this);
+        this.scene.physics.world.on('worldstep', this.update, this);
+        //  'worldstep' event is emitted *after* the bodies and colliders have been updated.
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
+            this.scene.physics.world.off('worldstep', this.update, this);
         }
     }
 
-    update(time, delta) {
+    update() {
         if ((!this.isRunning) || (this.timeScale === 0)) {
             return this;
         }
-        delta *= this.timeScale;
+        var delta = this.timeScale;
         this.now += delta;
         this.emit('update', this.now, delta);
         return this;
     }
 }
 
-export default Clock;
+export default ArcadeStepClock;

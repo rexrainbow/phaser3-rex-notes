@@ -1,55 +1,54 @@
-import TickTask from '../../../utils/ticktask/TickTask.js';
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../../utils/system/GetSceneObject.js';
-import GetValue from '../../../utils/object/GetValue.js';
+import Clock from '../../../clock.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
 import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 import IsArray from '../../../utils/object/IsArray.js';
 
-class Player extends TickTask {
-    constructor(parent, config) {
-        super(parent, config);
+const GetValue = Phaser.Utils.Objects.GetValue;
 
+class Player {
+    constructor(parent, config) {
         this.parent = parent;
         this.scene = GetSceneObject(parent);
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+
+        var clockClass = GetValue(config, 'clockClass', Clock);
+        this.clock = new clockClass(parent, { eventEmitter: this.getEventEmitter() });
+        this.clock.on('update', this.update, this);
+
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
     }
 
     resetFromJSON(o) {
-        this.isRunning = GetValue(o, 'isRunning', false);
+        this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
         this.state = GetValue(o, 'state', 0); // 0=idle, 1=run, 2=completed
         this.commands = GetValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
         this.scope = GetValue(o, 'scope', undefined);
         this.setTimeUnit(GetValue(o, 'timeUnit', 0));
         this.setDtMode(GetValue(o, 'dtMode', 0));
-        this.setTimeScale(GetValue(o, 'timeScale', 1));
         this.index = GetValue(o, 'index', 0);
         this.nextDt = GetValue(o, 'nextDt', 0);
-        this.seek(GetValue(o, 'now', 0));
-        this.timeScale = GetValue(o, 'timeScale', 1);
         return this;
     }
 
     toJSON() {
         return {
-            isRunning: this.isRunning,
+            clock: this.clock.toJSON(),
             state: this.state,
             commands: this.commands,
             scope: this.scope,
             timeUnit: this.timeUnit,
             dtMode: this.dtMode,
             index: this.index,
-            nextDt: this.nextDt,
-            now: this.now,
-            timeScale: this.timeScale,
-            tickingMode: this.tickingMode
+            nextDt: this.nextDt
         };
     }
 
     boot() {
-        super.boot();
-
         var parentEE = GetEventEmitter(this.parent);
         if (parentEE) {
             parentEE.on('destroy', this.destroy, this);
@@ -57,8 +56,7 @@ class Player extends TickTask {
     }
 
     shutdown() {
-        super.shutdown();
-
+        this.clock.shutdown();
         this.parent = undefined;
         this.scene = undefined;
         this.commands = undefined;
@@ -66,18 +64,6 @@ class Player extends TickTask {
 
     destroy() {
         this.shutdown();
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     load(commands, scope, config) {
@@ -123,38 +109,39 @@ class Player extends TickTask {
         }
 
         this.stop();
+
         this.index = 0;
-        this.isRunning = true;
         this.state = 1;
         this.nextDt = this.getNextDt(0);
-        this.seek(startAt);
-        this.update();
+
+        this.clock.start(startAt);
+        this.update(startAt);
         return this;
     }
 
     pause() {
-        this.isRunning = false;
+        this.clock.pause();
         return this;
     }
 
     resume() {
-        this.isRunning = true;
+        this.clock.resume();
         return this;
     }
 
     stop() {
-        this.isRunning = false;
+        this.clock.stop();
         this.state = 0;
         return this;
     }
 
     seek(time) {
-        this.now = time;
+        this.clock.seek(time);
         return this;
     }
 
     get isPlaying() {
-        return this.isRunning;
+        return this.clock.isRunning;
     }
 
     get completed() {
@@ -162,27 +149,17 @@ class Player extends TickTask {
     }
 
     setTimeScale(value) {
-        this.timeScale = value;
+        this.clock.timeScale = value;
+        return this;
     }
 
-    update(time, delta) {
-        if (!this.isRunning) {
+    update(now) {
+        if (this.nextDt > now) {
             return this;
         }
-
-        if (time !== undefined) {
-            if ((this.timeScale === 0) || (delta === 0)) {
-                return this;
-            }
-
-            this.now += (delta * this.timeScale);
-        }
-
-        if (this.nextDt > this.now) {
-            return this;
-        }
+        var lastCommandIndex = this.commands.length - 1;
         while (1) {
-            // run a row
+            // Run a row
             var item = this.commands[this.index];
             var command = item[1];
             if (!IsArray(command)) { // [dt, fnName, param0, param1, ...]
@@ -190,26 +167,26 @@ class Player extends TickTask {
             }
             RunCommands(command, this.scope);
             this.emit('runcommand', command, this.scope);
-            // run a row
+            // Run a row
 
-            if (this.index === (this.commands.length - 1)) {
+            if (this.index === lastCommandIndex) {
                 this.complete();
                 return this;
             } else {
-                // next dt
-                this.index++; // point to next item
+                // Next dt
+                this.index++; // Point to next item
                 this.nextDt = this.getNextDt(this.nextDt);
-                if (this.nextDt > this.now) {
+                if (this.nextDt > now) {
                     return this;
                 }
-                // next dt
+                // Next dt
             }
 
         }
     }
 
     complete() {
-        super.complete();
+        this.clock.complete();
         this.state = 2;
     }
 
@@ -242,6 +219,11 @@ class Player extends TickTask {
         return this;
     }
 }
+
+Object.assign(
+    Player.prototype,
+    EventEmitterMethods
+);
 
 var CMD = []; // reuse this array
 
