@@ -1,4 +1,4 @@
-import TCRP from './tcrp.js';
+import TCRP from './arcadetcrp.js';
 
 const Recorder = TCRP.Recorder;
 const Player = TCRP.Player;

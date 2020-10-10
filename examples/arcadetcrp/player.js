@@ -1,4 +1,4 @@
-import TCRPPlugin from '../../plugins/tcrp-plugin.js'
+import TCRPPlugin from '../../plugins/arcadetcrp-plugin.js'
 
 class PlayerSprite extends Phaser.GameObjects.Line {
     constructor(scene, x, y, fillColor) {
@@ -81,8 +81,10 @@ class Demo extends Phaser.Scene {
         var blocker = new ObstacleSprite(this, 600, 300, 100, 400, 0x333333);
         blocker.pushOut([spriteA, spriteB]);
 
-        var print = this.add.text(0, 0, 'Press Space to start recording/playing');
-        this.input.keyboard.on('keydown-SPACE', function (event) {
+        var print = this.add.text(0, 0, 'Press Space to start recording/playing\nLeft/right key to move sprite');
+
+        var spaceKey = this.input.keyboard.addKey('SPACE')
+        spaceKey.on('down', function (event) {
             if (!recorder.isRecording) {
                 // spriteA
                 recorder.start();
@@ -102,52 +104,60 @@ class Demo extends Phaser.Scene {
                 recorder.stop();
 
                 // spriteB
+                var commands = recorder.getCommands();
+                for (var i = 0, cnt = commands.length; i < cnt; i++) {
+                    console.log(commands[i].toString());
+                }
                 player
-                    .load(recorder.getCommands(), spriteB)
+                    .load(commands, spriteB)
                     .start();
                 print.setText('Playing');
             }
         });
 
-        this.input.keyboard.on('keydown-LEFT', function () {
-            if (recorder.isRecording) {
-                var command = [
-                    'moveLeft',  // function name
-                    100, // speed
-                ]
-                recorder.addCommand(command);
-                RunCommands(command, spriteA);
-            }
-        });
-        this.input.keyboard.on('keyup-LEFT', function () {
-            if (recorder.isRecording) {
-                var command = [
-                    'stop',  // function name
-                ]
-                recorder.addCommand(command);
-                RunCommands(command, spriteA);
-            }
-        });
+        var leftKey = this.input.keyboard.addKey('LEFT');
+        leftKey
+            .on('down', function () {
+                if (recorder.isRecording) {
+                    var command = [
+                        'moveLeft',  // function name
+                        100, // speed
+                    ]
+                    recorder.addCommand(command);
+                    RunCommands(command, spriteA);
+                }
+            })
+            .on('up', function () {
+                if (recorder.isRecording) {
+                    var command = [
+                        'stop',  // function name
+                    ]
+                    recorder.addCommand(command);
+                    RunCommands(command, spriteA);
+                }
+            });
 
-        this.input.keyboard.on('keydown-RIGHT', function () {
-            if (recorder.isRecording) {
-                var command = [
-                    'moveRight',  // function name
-                    100, // speed
-                ]
-                recorder.addCommand(command);
-                RunCommands(command, spriteA);
-            }
-        });
-        this.input.keyboard.on('keyup-RIGHT', function () {
-            if (recorder.isRecording) {
-                var command = [
-                    'stop',  // function name
-                ]
-                recorder.addCommand(command);
-                RunCommands(command, spriteA);
-            }
-        });
+        var rightKey = this.input.keyboard.addKey('RIGHT');
+        rightKey
+            .on('down', function () {
+                if (recorder.isRecording) {
+                    var command = [
+                        'moveRight',  // function name
+                        100, // speed
+                    ]
+                    recorder.addCommand(command);
+                    RunCommands(command, spriteA);
+                }
+            })
+            .on('up', function () {
+                if (recorder.isRecording) {
+                    var command = [
+                        'stop',  // function name
+                    ]
+                    recorder.addCommand(command);
+                    RunCommands(command, spriteA);
+                }
+            });
 
     }
 
