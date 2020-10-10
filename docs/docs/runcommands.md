@@ -61,7 +61,7 @@ Run commands in array.
     ```javascript
     import RunCommands from 'phaser3-rex-plugins/plugins/runcommands.js';
     ```
-- Add rotate-to behavior
+- Run commands
     ```javascript
     RunCommands(commands, scope);
     ```

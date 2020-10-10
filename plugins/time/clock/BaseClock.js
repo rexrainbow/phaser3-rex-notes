@@ -68,6 +68,12 @@ class BaseClock extends TickTask {
         this.now = time;
         return this;
     }
+
+    addDt(delta) {
+        delta *= this.timeScale;
+        this.now += delta;
+        return this;
+    }
 }
 
 export default BaseClock;
