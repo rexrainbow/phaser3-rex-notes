@@ -26,12 +26,12 @@ class Player {
     resetFromJSON(o) {
         this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
         this.state = GetValue(o, 'state', 0); // 0=idle, 1=run, 2=completed
-        this.commands = GetValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
+        this.commands = GetValue(o, 'commands', []); // [[time, cmds], [time, cmds], ...]
         this.scope = GetValue(o, 'scope', undefined);
         this.setTimeUnit(GetValue(o, 'timeUnit', 0));
         this.setDtMode(GetValue(o, 'dtMode', 0));
         this.index = GetValue(o, 'index', 0);
-        this.nextDt = GetValue(o, 'nextDt', 0);
+        this.nextTime = GetValue(o, 'nextTime', 0);
         return this;
     }
 
@@ -44,7 +44,7 @@ class Player {
             timeUnit: this.timeUnit,
             dtMode: this.dtMode,
             index: this.index,
-            nextDt: this.nextDt
+            nextTime: this.nextTime
         };
     }
 
@@ -112,7 +112,7 @@ class Player {
 
         this.index = 0;
         this.state = 1;
-        this.nextDt = this.getNextDt(0);
+        this.nextTime = this.getNextDt(0);
 
         this.clock.start(startAt);
         this.update(startAt);
@@ -154,12 +154,12 @@ class Player {
     }
 
     update(now) {
-        if (this.nextDt > now) {
+        if (this.nextTime > now) {
             return this;
         }
         var lastCommandIndex = this.commands.length - 1;
         while (1) {
-            // Run a row
+            // Execute a command
             var item = this.commands[this.index];
             var command = item[1];
             if (!IsArray(command)) { // [dt, fnName, param0, param1, ...]
@@ -167,19 +167,19 @@ class Player {
             }
             RunCommands(command, this.scope);
             this.emit('runcommand', command, this.scope);
-            // Run a row
+            // Execute a command
 
             if (this.index === lastCommandIndex) {
                 this.complete();
                 return this;
             } else {
-                // Next dt
-                this.index++; // Point to next item
-                this.nextDt = this.getNextDt(this.nextDt);
-                if (this.nextDt > now) {
+                // Get next time
+                this.index++; // Point to next command
+                this.nextTime = this.getNextDt(this.nextTime);
+                if (this.nextTime > now) {
                     return this;
                 }
-                // Next dt
+                // Get next time
             }
 
         }
@@ -191,16 +191,16 @@ class Player {
     }
 
     getNextDt(currentDt) {
-        var dt = this.commands[this.index][0];
-        if (this.timeUnit === 1) { // sec mode
-            dt = dt * 1000;
+        var time = this.commands[this.index][0];
+        if (this.timeUnit === 1) { // Second mode
+            time = time * 1000;
         }
 
         if (this.dtMode === 1) {
-            dt += currentDt;
+            time += currentDt;
         }
 
-        return dt;
+        return time;
     }
 
     setDtMode(dtMode) {
@@ -230,7 +230,7 @@ var CMD = []; // reuse this array
 const TIMEUNITMODE = {
     ms: 0,
     s: 1,
-    sec: 1
+    sec: 1,
 };
 
 const DTMODE = {

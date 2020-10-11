@@ -76,7 +76,7 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 var player = scene.plugins.get('rexTCRP').addPlayer(scene, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // dtMode: 0,          // 'abs'|'absolute'|0|'inc'|'increment'|1
-    // commands: [],       // [[dt, command], [dt, command], ...]
+    // commands: [],       // [[time, command], [time, command], ...]
     // timeScale: 1,       // 0~1
     // scope: undefined
 });
@@ -99,29 +99,29 @@ player.load(commands, scope, {
 - Commands : see also [Run commands](runcommands.md)
     ```javascript
     [
-        [dt, command],
-        [dt, command],
+        [time, command],
+        [time, command],
         ...
     ]
     ```
     - Format of each row :
         ```javascript
-        [dt, fnName, param0, param1, ...]
-        // [dt, callback, param0, param1, ...]
+        [time, fnName, param0, param1, ...]
+        // [time, callback, param0, param1, ...]
         ```
         ```javascript
-        [dt, [fnName, param0, param1, ...]]
-        // [dt, [callback, param0, param1, ...]]
+        [time, [fnName, param0, param1, ...]]
+        // [time, [callback, param0, param1, ...]]
         ```
         ```javascript
-        [dt, [command0, command1, ...]]
+        [time, [command0, command1, ...]]
         ```
-- timeUnit: time-unit of dt
-    - `'ms'`, or `0` : dt in millisecond
-    - `'s'`, `'sec'`, or 1 : dt in second
-- dtMode: mode of counting dt
-    - `'abs'`, `'absolute'`, or `0` : timeout = dt
-    - `'inc'`, `'increment'`, `1` : timeout = dt + previous-timeout
+- timeUnit: time-unit of *time*
+    - `'ms'`, or `0` : *time* in millisecond
+    - `'s'`, `'sec'`, or 1 : *time* in second
+- dtMode: mode of counting time
+    - `'abs'`, `'absolute'`, or `0` : timeout = *time*
+    - `'inc'`, `'increment'`, `1` : timeout = *time* + previous-*time*
 
 ### Start playing
 

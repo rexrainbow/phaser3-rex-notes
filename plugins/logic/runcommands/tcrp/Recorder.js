@@ -19,7 +19,7 @@ class Recorder {
 
     resetFromJSON(o) {
         this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
-        this.commands = GetValue(o, 'commands', []); // [[dt, cmd], [dt, cmd], ...]
+        this.commands = GetValue(o, 'commands', []); // [[time, cmd], [time, cmd], ...]
         return this;
     }
 
@@ -97,8 +97,8 @@ class Recorder {
         if (offset === undefined) {
             offset = 0;
         }
-        var dt = this.clock.now + offset;
-        this.commands.push([dt, command]);
+        var time = this.clock.now + offset;
+        this.commands.push([time, command]);
         return this;
     }
 

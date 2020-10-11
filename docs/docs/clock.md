@@ -86,14 +86,23 @@ clock.start();
 ### Get elapsed time
 
 ```javascript
-var now = clock.now;  // elapsed time in ms
+var now = clock.now;  // Elapsed time in ms
 ```
 
-### Pause, Resume, stop counting
+### Pause counting
+
+- Pause
+    ```javascript
+    clock.pause();
+    ```
+- Resume
+    ```javascript
+    clock.resume();
+    ```
+
+### Stop counting
 
 ```javascript
-clock.pause();
-clock.resume();
 clock.stop();
 ```
 
@@ -115,3 +124,12 @@ var isRunning = clock.isRunning;
 var timeScale = clock.timeScale;
 clock.timeScale = 0.5;
 ```
+
+### Events
+
+- On ticking
+    ```javascript
+    clock.on('update', function(now, delta){ })
+    ```
+    - `now` : Elapsed time in ms.
+    - `delta` : Delta time in ms.

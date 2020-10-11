@@ -104,8 +104,8 @@ Format of return commands:
 
 ```javascript
 [
-    [dt, [command]],
-    [dt, [command0,command1]],
+    [time, [command]],
+    [time, [command0,command1]],
     ...
 ]
 ```
