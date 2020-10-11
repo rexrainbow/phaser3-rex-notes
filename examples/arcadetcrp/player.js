@@ -87,7 +87,7 @@ class Demo extends Phaser.Scene {
         spaceKey.on('down', function (event) {
             if (!recorder.isRecording) {
                 // spriteA
-                recorder.start();
+                recorder.start(1);
                 print.setText('Recording');
                 var command = [
                     'reset'
