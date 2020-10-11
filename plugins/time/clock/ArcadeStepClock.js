@@ -18,8 +18,7 @@ class ArcadeStepClock extends BaseClock {
         if ((!this.isRunning) || (this.timeScale === 0)) {
             return this;
         }
-        this.addDt(1);
-        this.emit('update', this.now, delta);
+        this.tick(1);
         return this;
     }
 }

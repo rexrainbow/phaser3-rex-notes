@@ -17,8 +17,7 @@ class Clock extends BaseClock {
         if ((!this.isRunning) || (this.timeScale === 0)) {
             return this;
         }
-        this.addDt(delta);
-        this.emit('update', this.now, delta);
+        this.tick(delta);
         return this;
     }
 }

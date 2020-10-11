@@ -7,9 +7,16 @@ class Player extends BasePlayer {
             config = {};
         }
         config.clockClass = ArcadeStepClock;
+        config.timeUnit = 0; // Force timeUnit to 0
+        config.dtMode = 0;   // Force dtMode to 0
         super(parent, config);
     }
 
+    load(commands, scope) {
+        // No config argument
+        super.load(commands, scope);
+        return this;
+    }
 }
 
 export default Player;
