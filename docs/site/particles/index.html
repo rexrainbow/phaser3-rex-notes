@@ -3292,6 +3292,66 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5525,7 +5585,6 @@
     <span class="c1">// delay: 0,</span>
     <span class="c1">// lifespan: 1000,       // { min, max }, or { min, max, steps }</span>
 
-
     <span class="c1">// **physics**</span>
     <span class="c1">// speed:                // { min, max }, or { min, max, steps }</span>
     <span class="c1">// speedX:               // { min, max }, or { min, max, steps }</span>
@@ -5561,7 +5620,8 @@
     <span class="c1">// frequency: 0,      // -1 for exploding emitter</span>
     <span class="c1">// quantity: 1,       // { min, max }</span>
     <span class="c1">// maxParticles: 0,</span>
-    <span class="c1">// rotate: 0,         // { start, end }, or { start, end, ease },</span>
+    <span class="c1">// reserve: 0,</span>
+    <span class="c1">// rotate: 0,         // { start, end }, or { start, end, ease }</span>
     <span class="c1">// timeScale: 1,</span>
 
 <span class="p">});</span>
@@ -5570,6 +5630,7 @@
 <li><code>{min, max}</code> : Pick a random value between min and max</li>
 <li><code>{start, end}</code> : Pick values incremented continuously across a range. (<code>ease</code>=<code>'Linear'</code>)<ul>
 <li><code>{start, end, ease}</code></li>
+<li><code>{start, end, ease, easeParams}</code></li>
 </ul>
 </li>
 <li><code>{start, end, steps}</code> : Pick values incremented by steps across a range.</li>
@@ -5636,6 +5697,7 @@
 <li><code>Infinity</code> : Immortal particle.</li>
 </ul>
 </li>
+<li><code>reserve</code> : Creates specified number of inactive particles and adds them to this emitter's pool.</li>
 <li><code>name</code> : The name of this Particle Emitter.<ul>
 <li>Get emitter by name
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>

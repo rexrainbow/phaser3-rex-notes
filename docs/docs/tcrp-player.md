@@ -77,7 +77,7 @@ var player = scene.plugins.get('rexTCRP').addPlayer(scene, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // dtMode: 0,          // 'abs'|'absolute'|0|'inc'|'increment'|1
     // commands: [],       // [[time, command], [time, command], ...]
-    // timeScale: 1,       // 0~1
+    // timeScale: 1,
     // scope: undefined
 });
 ```
@@ -127,7 +127,7 @@ player.load(commands, scope, {
 
 ```javascript
 player.start();
-// player.start(startAt);  // start-at time in ms
+// player.start(startAt);  // Start-at time in ms
 ```
 
 ### Events
@@ -152,7 +152,7 @@ player.stop();
 ### Seek elapsed time
 
 ```javascript
-player.seek(time);   // elapsed time in ms
+player.seek(time);   // Elapsed time in ms
 ```
 
 ### State of player
@@ -167,7 +167,7 @@ var now = player.now;
 
 - Set
     ```javascript
-    player.setTimeScale(value);  // 0~1
+    player.setTimeScale(value);
     // player.timeScale = value;
     ```
 - Get

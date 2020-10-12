@@ -12,7 +12,7 @@ class Player extends BasePlayer {
         super(parent, config);
     }
 
-    load(commands, scope) {
+    load(commands, scope, config) {
         // No config argument
         super.load(commands, scope);
         return this;

@@ -187,6 +187,10 @@ nav:
       - TCRP:
           - Recoder: tcrp-recoder.md
           - Player: tcrp-player.md
+      - Arcade-TCRP:
+          - Recoder: arcade-tcrp-recoder.md
+          - Step runner: arcade-tcrp-step-runner.md
+          - Player: arcade-tcrp-player.md          
     - FSM: fsm.md    
     - CSV table:
         - Conditions table: conditionstable.md

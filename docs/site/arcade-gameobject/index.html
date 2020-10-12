@@ -2009,6 +2009,13 @@
     Immovable
   </a>
   
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushable" class="md-nav__link">
+    Pushable
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
@@ -3334,6 +3341,66 @@
 
   <li class="md-nav__item">
     <a href="../tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
       Player
     </a>
   </li>
@@ -5348,6 +5415,13 @@
     Immovable
   </a>
   
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushable" class="md-nav__link">
+    Pushable
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
@@ -5600,6 +5674,8 @@
     <span class="nx">setFrictionY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setVelocityX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setVelocityY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">maxVelocityX</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="nx">maxVelocityY</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span>
     <span class="nx">setAngularVelocity</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setAngularAcceleration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setAngularDrag</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5715,6 +5791,18 @@
 </code></pre></div></li>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">immovable</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">immovable</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h4 id="pushable">Pushable<a class="headerlink" href="#pushable" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enable
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPushable</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPushable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pushable</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">pushable</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h5 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h5>

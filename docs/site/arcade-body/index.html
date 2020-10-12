@@ -1911,6 +1911,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushable" class="md-nav__link">
+    Pushable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moveable" class="md-nav__link">
+    Moveable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -1989,13 +2010,6 @@
           <li class="md-nav__item">
   <a href="#stop" class="md-nav__link">
     Stop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#immovable" class="md-nav__link">
-    Immovable
   </a>
   
     <nav class="md-nav">
@@ -3356,6 +3370,66 @@
 
   <li class="md-nav__item">
     <a href="../tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
       Player
     </a>
   </li>
@@ -5284,6 +5358,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pushable" class="md-nav__link">
+    Pushable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moveable" class="md-nav__link">
+    Moveable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -5362,13 +5457,6 @@
           <li class="md-nav__item">
   <a href="#stop" class="md-nav__link">
     Stop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#immovable" class="md-nav__link">
-    Immovable
   </a>
   
     <nav class="md-nav">
@@ -5598,9 +5686,9 @@
 <li><a href="../arcade-world/#configuration">Enable physics world</a></li>
 <li>Add existing game object(s) to physics world<ul>
 <li>Add a game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">isStatic</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">bodyType</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>isStatic</code> :<ul>
+<li><code>bodyType</code> :<ul>
 <li><code>0</code> : Dynamic body</li>
 <li><code>1</code> : Static body</li>
 </ul>
@@ -5608,10 +5696,10 @@
 </ul>
 </li>
 <li>Add game objects
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">isStatic</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">bodyType</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>gameObjects</code> : An array of game objects, or a group object</li>
-<li><code>isStatic</code> :<ul>
+<li><code>bodyType</code> :<ul>
 <li><code>0</code> : Dynamic body</li>
 <li><code>1</code> : Static body</li>
 </ul>
@@ -5639,10 +5727,36 @@
     or
     <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<h3 id="immovable">Immovable<a class="headerlink" href="#immovable" title="Permanent link">&para;</a></h3>
+<p>Whether this Body can be moved by collisions with another Body.</p>
+<ul>
+<li>Enable
+    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setImmovable</span><span class="p">();</span>
+<span class="c1">// body.immovable = true;</span>
+</code></pre></div></li>
+<li>Disable (defalut)
+    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setImmovable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="c1">// body.immovable = false;</span>
+</code></pre></div></li>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">moves</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">immovable</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">immovable</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="pushable">Pushable<a class="headerlink" href="#pushable" title="Permanent link">&para;</a></h3>
+<p>Sets if this Body can be pushed by another Body.</p>
+<ul>
+<li>Enable (default value of dynamic body)
+    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">pushable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Disable, reflect back all of the velocity it is given to the colliding body.
+    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">pushable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pushable</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">pushable</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="moveable">Moveable<a class="headerlink" href="#moveable" title="Permanent link">&para;</a></h3>
 <p>Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.</p>
 <ul>
 <li>Enable (default)
@@ -5689,6 +5803,10 @@
 <ul>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setMaxVelocity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setMaxVelocityX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="nx">body</span><span class="p">.</span><span class="nx">setMaxVelocityY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get 
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">vx</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">maxVelocity</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
@@ -5762,18 +5880,6 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
 
-<h4 id="immovable">Immovable<a class="headerlink" href="#immovable" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Enable
-    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setImmovable</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Disable (defalut)
-    <div class="codehilite"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setImmovable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">immovable</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">immovable</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
 <h5 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h5>
 <p>If this Body is <code>immovable</code> and in motion, this the proportion of this Body's movement received by the riding body on each axis.</p>
 <ul>

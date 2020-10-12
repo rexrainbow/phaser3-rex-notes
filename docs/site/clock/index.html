@@ -3019,6 +3019,66 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4208,6 +4268,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5137,6 +5204,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5234,7 +5308,7 @@
 </code></pre></div>
 
 <h3 id="get-elapsed-time">Get elapsed time<a class="headerlink" href="#get-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>  <span class="c1">// elapsed time in ms</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>  <span class="c1">// Elapsed time in ms</span>
 </code></pre></div>
 
 <h3 id="pause-resume-stop-counting">Pause, Resume, stop counting<a class="headerlink" href="#pause-resume-stop-counting" title="Permanent link">&para;</a></h3>
@@ -5255,6 +5329,17 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
 <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
 </code></pre></div>
+
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On ticking
+    <div class="codehilite"><pre><span></span><code><span class="nx">clock</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">now</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span> <span class="p">})</span>
+</code></pre></div><ul>
+<li><code>now</code> : Elapsed time in ms.</li>
+<li><code>delta</code> : Delta time in ms.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 

@@ -442,6 +442,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update-bounds" class="md-nav__link">
+    Update bounds
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3098,6 +3105,66 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5029,6 +5096,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update-bounds" class="md-nav__link">
+    Update bounds
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5107,7 +5181,7 @@
 
 <p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">resolution</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>
 
 <ul>
@@ -5124,6 +5198,10 @@
 </ul>
 </li>
 </ul>
+<h3 id="update-bounds">Update bounds<a class="headerlink" href="#update-bounds" title="Permanent link">&para;</a></h3>
+<p>This method dose not have to be invoked, unless the canvas position, or visibility is changed via any other method (i.e. via an Angular route).</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">updateBounds</span><span class="p">();</span>
+</code></pre></div>
                 
                   
                 

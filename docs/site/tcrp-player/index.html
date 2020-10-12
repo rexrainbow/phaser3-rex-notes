@@ -3169,6 +3169,66 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5259,8 +5319,8 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTCRP&#39;</span><span class="p">).</span><span class="nx">addPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
     <span class="c1">// dtMode: 0,          // &#39;abs&#39;|&#39;absolute&#39;|0|&#39;inc&#39;|&#39;increment&#39;|1</span>
-    <span class="c1">// commands: [],       // [[dt, command], [dt, command], ...]</span>
-    <span class="c1">// timeScale: 1,       // 0~1</span>
+    <span class="c1">// commands: [],       // [[time, command], [time, command], ...]</span>
+    <span class="c1">// timeScale: 1,</span>
     <span class="c1">// scope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -5281,36 +5341,36 @@
 <ul>
 <li>Commands : see also <a href="../runcommands/">Run commands</a>
     <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
+    <span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
+    <span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
     <span class="p">...</span>
 <span class="p">]</span>
 </code></pre></div><ul>
 <li>Format of each row :
-    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]</span>
-<span class="c1">// [dt, callback, param0, param1, ...]</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]</span>
+<span class="c1">// [time, callback, param0, param1, ...]</span>
 </code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]]</span>
-<span class="c1">// [dt, [callback, param0, param1, ...]]</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="p">[</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]]</span>
+<span class="c1">// [time, [callback, param0, param1, ...]]</span>
 </code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span> <span class="nx">command1</span><span class="p">,</span> <span class="p">...]]</span>
+    <div class="codehilite"><pre><span></span><code><span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span> <span class="nx">command1</span><span class="p">,</span> <span class="p">...]]</span>
 </code></pre></div></li>
 </ul>
 </li>
-<li>timeUnit: time-unit of dt<ul>
-<li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
-<li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
+<li>timeUnit: time-unit of <em>time</em><ul>
+<li><code>'ms'</code>, or <code>0</code> : <em>time</em> in millisecond</li>
+<li><code>'s'</code>, <code>'sec'</code>, or 1 : <em>time</em> in second</li>
 </ul>
 </li>
-<li>dtMode: mode of counting dt<ul>
-<li><code>'abs'</code>, <code>'absolute'</code>, or <code>0</code> : timeout = dt</li>
-<li><code>'inc'</code>, <code>'increment'</code>, <code>1</code> : timeout = dt + previous-timeout</li>
+<li>dtMode: mode of counting time<ul>
+<li><code>'abs'</code>, <code>'absolute'</code>, or <code>0</code> : timeout = <em>time</em></li>
+<li><code>'inc'</code>, <code>'increment'</code>, <code>1</code> : timeout = <em>time</em> + previous-<em>time</em></li>
 </ul>
 </li>
 </ul>
 <h3 id="start-playing">Start playing<a class="headerlink" href="#start-playing" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-<span class="c1">// player.start(startAt);  // start-at time in ms</span>
+<span class="c1">// player.start(startAt);  // Start-at time in ms</span>
 </code></pre></div>
 
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
@@ -5329,7 +5389,7 @@
 </code></pre></div>
 
 <h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// Elapsed time in ms</span>
 </code></pre></div>
 
 <h3 id="state-of-player">State of player<a class="headerlink" href="#state-of-player" title="Permanent link">&para;</a></h3>
@@ -5341,7 +5401,7 @@
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// 0~1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// player.timeScale = value;</span>
 </code></pre></div></li>
 <li>Get
@@ -5384,13 +5444,13 @@
           </a>
         
         
-          <a href="../fsm/" title="FSM" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                FSM
+                Recoder
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

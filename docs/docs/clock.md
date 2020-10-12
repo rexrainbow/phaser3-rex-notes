@@ -89,20 +89,11 @@ clock.start();
 var now = clock.now;  // Elapsed time in ms
 ```
 
-### Pause counting
-
-- Pause
-    ```javascript
-    clock.pause();
-    ```
-- Resume
-    ```javascript
-    clock.resume();
-    ```
-
-### Stop counting
+### Pause, Resume, stop counting
 
 ```javascript
+clock.pause();
+clock.resume();
 clock.stop();
 ```
 

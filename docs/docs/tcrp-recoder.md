@@ -67,7 +67,7 @@ Recorder of **T** ime-**C** ommand-**R** ecorder-**P** layer, to store commands 
     ```
 - Create instance
     ```javascript
-    var recorder = new TCRP.Recorder(scene, config);
+    var recorder = new TCRP.Recorder(scene);
     ```
 
 ### Create instance
@@ -96,8 +96,8 @@ See also [Run commands](runcommands.md)
 ### Get commands
 
 ```javascript
-var commands = recorder.getCommands();        // get a shallow copy of commands
-// var commands = recorder.getCommands(true); // get reference of commands
+var commands = recorder.getCommands();        // Get a shallow copy of commands
+// var commands = recorder.getCommands(true); // Get reference of commands
 ```
 
 Format of return commands:
@@ -133,7 +133,12 @@ var now = recorder.now;
 
 ### Time-scale
 
-```javascript
-var timeScale = recorder.timeScale;
-recorder.timeScale = 0.5;
-```
+- Set
+    ```javascript
+    recorder.setTimeScale(value);
+    // recorder.timeScale = value;
+    ```
+- Get
+    ```javascript
+    var timeScale = recorder.timeScale;
+    ```
