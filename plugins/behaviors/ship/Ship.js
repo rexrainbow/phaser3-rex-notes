@@ -1,7 +1,10 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Helpers from '../../utils/arcade/Helpers.js';
+import {
+    SetAcceleration,
+    SetAngularVelocity
+} from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -9,16 +12,17 @@ class Ship extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
 
-        this.setParent(gameObject);
+        this.gameObject = gameObject;
+        this.scene = gameObject.scene;
+
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        if (!this.body) {
+        if (!this.gameObject.body) {
             this.scene.physics.add.existing(this.gameObject, false);
         }
-        this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setEnable(GetValue(o, 'enable', true));
         this.setMaxSpeed(GetValue(o, 'maxSpeed', 200));
         this.setAcceleration(GetValue(o, 'acceleration', 200));
@@ -54,13 +58,13 @@ class Ship extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.events.on('update', this.update, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preupdate, this);
+            this.scene.events.off('update', this.update, this);
         }
     }
 
@@ -71,8 +75,8 @@ class Ship extends TickTask {
     set enable(value) {
         this.isRunning = value;
         if (!value) {
-            this.bodySetAcceleration(0);
-            this.bodySetAngularVelocity(0);
+            SetAcceleration(this.gameObject, 0, 0);
+            SetAngularVelocity(this.gameObject, 0);
         }
     }
 
@@ -123,43 +127,47 @@ class Ship extends TickTask {
         return this;
     }
 
-    preupdate(time, delta) {
+    get isLeft() {
+        return (this.enable) ? this.cursorKeys.left.isDown : false;
+    }
+
+    get isRight() {
+        return (this.enable) ? this.cursorKeys.right.isDown : false;
+    }
+
+    get isUp() {
+        return (this.enable) ? this.cursorKeys.up.isDown : false;
+    }
+
+    get isDown() {
+        return (this.enable) ? this.cursorKeys.down.isDown : false;
+    }
+
+    update(time, delta) {
         if (!this.enable) {
-            this.bodySetAcceleration(0);
-            this.bodySetAngularVelocity(0);
+            SetAcceleration(this.gameObject, 0, 0);
+            SetAngularVelocity(this.gameObject, 0);
             return this;
         }
 
-        var cursorKeys = this.cursorKeys;
-        var isUpDown = cursorKeys.up.isDown;
-        var isLeftDown = cursorKeys.left.isDown;
-        var isRightDown = cursorKeys.right.isDown;
-        var body = this.gameObject.body;
-
         // speed up
-        if (isUpDown) {
+        if (this.isUp) {
             var rotation = this.gameObject.rotation;
             var ax = Math.cos(rotation) * this.acceleration;
             var ay = Math.sin(rotation) * this.acceleration;
-            this.bodySetAcceleration(ax, ay);
+            SetAcceleration(this.gameObject, ax, ay);
         } else {
-            this.bodySetAcceleration(0);
+            SetAcceleration(this.gameObject, 0, 0);
         }
 
         // turn left/right
-        var dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
-        this.bodySetAngularVelocity(this.angularVelocity * dx);
+        var dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
+        SetAngularVelocity(this.gameObject, this.angularVelocity * dx);
 
         if (this.wrap) {
-            body.world.wrap(this.gameObject, this.padding);
+            this.gameObject.body.world.wrap(this.gameObject, this.padding);
         }
     }
 }
-
-// mixin
-Object.assign(
-    Ship.prototype,
-    Helpers
-);
 
 export default Ship;

@@ -1946,6 +1946,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    Body
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable" class="md-nav__link">
+    Disable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addremove-body" class="md-nav__link">
+    Add/remove body
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#collision" class="md-nav__link">
     Collision
   </a>
@@ -1988,7 +2022,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enable" class="md-nav__link">
+  <a href="#enable_1" class="md-nav__link">
     Enable
   </a>
   
@@ -3281,6 +3315,66 @@
 
   <li class="md-nav__item">
     <a href="../tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
       Player
     </a>
   </li>
@@ -5256,6 +5350,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#body" class="md-nav__link">
+    Body
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable" class="md-nav__link">
+    Disable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addremove-body" class="md-nav__link">
+    Add/remove body
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#collision" class="md-nav__link">
     Collision
   </a>
@@ -5298,7 +5426,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enable" class="md-nav__link">
+  <a href="#enable_1" class="md-nav__link">
     Enable
   </a>
   
@@ -5467,7 +5595,6 @@
         <span class="c1">//    fixedStep: true,</span>
         <span class="c1">//    fps: 60,</span>
         <span class="c1">//    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed</span>
-        <span class="c1">//    fixedStep: true,</span>
         <span class="c1">//    customUpdate: false,</span>
         <span class="c1">//    overlapBias: 4,</span>
         <span class="c1">//    tileBias: 16,</span>
@@ -5537,6 +5664,41 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setFPS</span><span class="p">(</span><span class="nx">framerate</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="body">Body<a class="headerlink" href="#body" title="Permanent link">&para;</a></h3>
+<h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// scene.physics.world.enable(gameObject, bodyType);</span>
+</code></pre></div>
+
+<ul>
+<li><code>gameObject</code> : A game object, or array of game objects, or game objects in a <a href="../group/">Group</a></li>
+<li><code>bodyType</code> :<ul>
+<li><code>0</code> : Dynamic body. Default value.</li>
+<li><code>1</code> : Static body.</li>
+</ul>
+</li>
+</ul>
+<p>Or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">bodyType</span><span class="p">);</span>
+</code></pre></div>
+
+<p>See <a href="../arcade-body/#get-physics-body">arcade-body</a></p>
+<h4 id="disable">Disable<a class="headerlink" href="#disable" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>gameObject</code> : A game object, or array of game objects, or game objects in a <a href="../group/">Group</a></li>
+</ul>
+<h4 id="addremove-body">Add/remove body<a class="headerlink" href="#addremove-body" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add body to the local search trees.
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove body from the local search trees.
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">disableBody</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
 <h4 id="set-bound">Set bound<a class="headerlink" href="#set-bound" title="Permanent link">&para;</a></h4>
 <p>See bound in <a href="../arcade-body/#collision-bound">body object</a>, or <a href="../arcade-gameobject/#collision-bound">game object</a>.</p>
@@ -5604,7 +5766,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="world-bounds">World bounds<a class="headerlink" href="#world-bounds" title="Permanent link">&para;</a></h3>
-<h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
+<h4 id="enable_1">Enable<a class="headerlink" href="#enable_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li><a href="../arcade-body/">Body</a> : Set <code>body.setCollideWorldBounds()</code> to enable worldBounds property.</li>
 <li>World :<ul>

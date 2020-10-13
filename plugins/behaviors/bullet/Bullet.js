@@ -1,5 +1,7 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Helpers from '../../utils/arcade/Helpers.js';
+import {
+    SetVelocity
+} from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -7,16 +9,17 @@ class Bullet extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
 
-        this.setParent(gameObject);
+        this.gameObject = gameObject;
+        this.scene = gameObject.scene;
+
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        if (!this.body) {
+        if (!this.gameObject.body) {
             this.scene.physics.add.existing(this.gameObject, false);
         }
-        this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setEnable(GetValue(o, 'enable', true));
         this.setSpeed(GetValue(o, 'speed', 200));
         return this;
@@ -47,13 +50,13 @@ class Bullet extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.events.on('update', this.update, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preupdate, this);
+            this.scene.events.off('update', this.update, this);
         }
     }
 
@@ -64,7 +67,7 @@ class Bullet extends TickTask {
     set enable(value) {
         this.isRunning = value;
         if (!value) {
-            this.bodySetVelocity(0, 0);
+            SetVelocity(this.gameObject, 0, 0);
         }
     }
 
@@ -81,23 +84,17 @@ class Bullet extends TickTask {
         return this;
     }
 
-    preupdate(time, delta) {
+    update(time, delta) {
         if (!this.enable) {
-            this.bodySetVelocity(0, 0);
+            SetVelocity(this.gameObject, 0, 0);
             return this;
         }
         var rotation = this.gameObject.rotation;
         var vx = this.speed * Math.cos(rotation);
         var vy = this.speed * Math.sin(rotation);
-        this.bodySetVelocity(vx, vy);
+        SetVelocity(this.gameObject, vx, vy);
         return this;
     }
 }
-
-// mixin
-Object.assign(
-    Bullet.prototype,
-    Helpers
-);
 
 export default Bullet;

@@ -1,6 +1,8 @@
 ## List of my plugins
 
 1. [Anchor](anchor.md): Set position based on visible window.
+1. [Arcade-TCRP/Player](arcade-tcrp-player.md): Run commands on step of Arcade.
+1. [Arcade-TCRP/Recorder](arcade-tcrp-recorder.md): Store commands with step of Arcade.
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [Away time](awaytime.md): Get time from previous closing application to now.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.

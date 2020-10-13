@@ -9,15 +9,17 @@ class Recorder {
     constructor(parent, config) {
         this.parent = parent;
         this.scene = GetSceneObject(parent);
-        this.clock = new Clock(parent);
-        this.resetFromJSON(config); // this function had been called in super(config)
+
+        var clockClass = GetValue(config, 'clockClass', Clock);
+        this.clock = new clockClass(parent);
+
+        this.resetFromJSON(config); // This function had been called in super(config)
         this.boot();
     }
 
     resetFromJSON(o) {
-        var clockConfig = GetValue(o, 'clock', undefined);
-        this.clock.resetFromJSON(clockConfig);
-        this.commands = GetValue(o, 'commands', []); // [[dt, cmd], [dt, cmd], ...]
+        this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
+        this.commands = GetValue(o, 'commands', []); // [[time, cmd], [time, cmd], ...]
         return this;
     }
 
@@ -37,7 +39,6 @@ class Recorder {
 
     shutdown() {
         this.clock.shutdown();
-
         this.parent = undefined;
         this.scene = undefined;
         this.commands = undefined;
@@ -96,8 +97,8 @@ class Recorder {
         if (offset === undefined) {
             offset = 0;
         }
-        var dt = this.clock.now + offset;
-        this.commands.push([dt, command]);
+        var time = this.clock.now + offset;
+        this.commands.push([time, command]);
         return this;
     }
 

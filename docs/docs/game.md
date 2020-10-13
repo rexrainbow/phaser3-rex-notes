@@ -100,7 +100,7 @@ or
         preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
         powerPreference: 'default', // 'high-performance', 'low-power' or 'default'
-        batchSize: 2000,
+        batchSize: 4096,
         desynchronized: false,
         maxTextures: -1
     },

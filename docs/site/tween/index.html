@@ -2909,6 +2909,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-tweens" class="md-nav__link">
+    Get tweens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -3175,6 +3182,66 @@
 
   <li class="md-nav__item">
     <a href="../tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
       Player
     </a>
   </li>
@@ -5144,6 +5211,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-tweens" class="md-nav__link">
+    Get tweens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -5568,6 +5642,16 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
 </code></pre></div>
 
+<h3 id="get-tweens">Get tweens<a class="headerlink" href="#get-tweens" title="Permanent link">&para;</a></h3>
+<p>Returns an array of all Tweens or Timelines in the Tween Manager which affect the given target or array of targets.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweens</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">getTweensOf</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
+<span class="c1">// var tweens = scene.tweens.getTweensOf(target, includePending);</span>
+</code></pre></div>
+
+<ul>
+<li><code>tweens</code> : Array of tweens, or timelines.</li>
+<li><code>includePending</code> : Set <code>true</code> to search pending tweens.</li>
+</ul>
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 <span class="c1">// tween.timeScale = timescale;</span>
