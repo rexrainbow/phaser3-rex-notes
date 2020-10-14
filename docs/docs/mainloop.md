@@ -27,6 +27,7 @@
         - TweenManager.update(), to run active tweens
         - UpdateList.update
             - gameObject.preUpdate
+        - Update arcade world
     1. scene.update()
     1. scene.events `postupdate` event
         - Register event

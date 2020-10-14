@@ -3169,6 +3169,66 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2-5" type="checkbox" id="nav-9-2-5">
+    
+    <label class="md-nav__link" for="nav-9-2-5">
+      Arcade-TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-9-2-5">
+        Arcade-TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-step-runner/" title="Step runner" class="md-nav__link">
+      Step runner
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-tcrp-player/" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5252,7 +5312,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">TCRP</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tcrp.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TCRP</span><span class="p">.</span><span class="nx">Recorder</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TCRP</span><span class="p">.</span><span class="nx">Recorder</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
@@ -5272,14 +5332,14 @@
 
 <p>See also <a href="../runcommands/">Run commands</a></p>
 <h3 id="get-commands">Get commands<a class="headerlink" href="#get-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">commands</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">getCommands</span><span class="p">();</span>        <span class="c1">// get a shallow copy of commands</span>
-<span class="c1">// var commands = recorder.getCommands(true); // get reference of commands</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">commands</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">getCommands</span><span class="p">();</span>        <span class="c1">// Get a shallow copy of commands</span>
+<span class="c1">// var commands = recorder.getCommands(true); // Get reference of commands</span>
 </code></pre></div>
 
 <p>Format of return commands:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">[</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command</span><span class="p">]],</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span><span class="nx">command1</span><span class="p">]],</span>
+    <span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="p">[</span><span class="nx">command</span><span class="p">]],</span>
+    <span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span><span class="nx">command1</span><span class="p">]],</span>
     <span class="p">...</span>
 <span class="p">]</span>
 </code></pre></div>
@@ -5300,9 +5360,15 @@
 </code></pre></div>
 
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</code></pre></div>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">recorder</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="c1">// recorder.timeScale = value;</span>
+</code></pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
                 
                   
                 

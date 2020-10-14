@@ -67,3 +67,11 @@ scene.scale.on('resize', function(gameSize, baseSize, displaySize, previousWidth
     - `baseSize.width`, `baseSize.height`
 - `displaySize`
     - `displaySize.width`, `displaySize.height`
+
+### Update bounds
+
+This method dose not have to be invoked, unless the canvas position, or visibility is changed via any other method (i.e. via an Angular route).
+
+```javascript
+scene.scale.updateBounds();
+```

@@ -1,71 +1,56 @@
-var Proxy = {
-    setParent: function(gameObject) {
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
-        return this;
-    },
-    setCascadeMode: function (m) {
-        this.cascadeMode = m;
-        return this;
-    },
+var SetVelocity = function (gameObject, vx, vy, onChange) {
+    var body = gameObject.body;
+    var preVx = body.velocity.x,
+        preVy = body.velocity.y;
+    if ((vx === preVx) && (vy === preVy)) {
+        return
+    }
+    body.setVelocity(vx, vy);
+    if (onChange) {
+        onChange(vx, vy, preVx, preVy);
+    }
+}
 
-    // internal
-    bodySetVelocity(newVx, newVy) {
-        var body = this.gameObject.body;
-        var oldVx = body.velocity.x;
-        var oldVy = body.velocity.y;
-        if (this.cascaseMode) {
-            newVx += oldVx;
-            newVy += oldVy;
-        }
-        if ((newVx !== oldVx) || (newVy !== oldVy)) {
-            body.setVelocity(newVx, newVy);
-        }
-    },
-    bodySetAcceleration(newAx, newAy) {
-        var body = this.gameObject.body;
-        var oldAx = body.acceleration.x;
-        var oldAy = body.acceleration.y;
-        if (this.cascaseMode) {
-            newAx += oldAx;
-            newAy += oldAy;
-        }
-        if ((newAx !== oldAx) || (newAy !== oldAy)) {
-            body.setAcceleration(newAx, newAy);
-        }
-    },
-    bodySetGravity(newGx, newGy) {
-        var body = this.gameObject.body;
-        var oldGx = body.gravity.x;
-        var oldGy = body.gravity.y;
-        if (this.cascaseMode) {
-            newGx += oldGx;
-            newGy += oldGy;
-        }
-        if ((newGx !== oldGx) || (newGy !== oldGy)) {
-            body.setAcceleration(newGx, newGy);
-        }
-    },
-    bodySetAngularVelocity(newAV) {
-        var body = this.gameObject.body;
-        var oldAV = body.angularVelocity;
-        if (this.cascaseMode) {
-            newAV += oldAV;
-        }
-        if (newAV !== oldAV) {
-            body.setAngularVelocity(newAV);
-        }
-    },
-    bodySetAngularAcceleration(newAA) {
-        var body = this.gameObject.body;
-        var oldAA = body.angularAcceleration;
-        if (this.cascaseMode) {
-            newAA += oldAA;
-        }
-        if (newAA !== oldAA) {
-            body.setAngularAcceleration(newAA);
-        }
-    },
-};
+var SetAcceleration = function (gameObject, ax, ay, onChange) {
+    var body = gameObject.body;
+    var preAx = body.acceleration.x,
+        preAy = body.acceleration.y;
+    if ((ax === prevAx) && (ay === prevAy)) {
+        return;
+    }
+    body.setAcceleration(ax, ay);
+    if (onChange) {
+        onChange(ax, ay, preAx, preAy);
+    }
+}
 
-export default Proxy;
+var SetAngularVelocity = function (gameObject, av, onChange) {
+    var body = gameObject.body;
+    var preAv = body.angularVelocity;
+    if (av === prevAv) {
+        return;
+    }
+    body.setAngularVelocity(av);
+    if (onChange) {
+        onChange(av, preAv);
+    }
+}
+
+var SetAngularAcceleration = function (gameObject, aa, onChange) {
+    var body = gameObject.body;
+    var preAa = body.angularAcceleration
+    if (aa === preAa) {
+        return;
+    }
+    body.setAngularAcceleration(aa);
+    if (onChange) {
+        onChange(aa, preAa);
+    }
+}
+
+export {
+    SetVelocity,
+    SetAcceleration,
+    SetAngularVelocity,
+    SetAngularAcceleration
+}

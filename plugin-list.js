@@ -82,6 +82,7 @@ module.exports = {
     'sequenceplugin': './plugins/sequence-plugin.js',
     'fsmplugin': './plugins/fsm-plugin.js',
     'tcrpplugin': './plugins/tcrp-plugin.js',
+    'arcadetcrpplugin': './plugins/arcadetcrp-plugin.js',
     'csvscenarioplugin': './plugins/csvscenario-plugin.js',
     'waiteventsplugin': './plugins/waitevents-plugin.js',
     'eventpromiseplugin': './plugins/eventpromise-plugin.js',

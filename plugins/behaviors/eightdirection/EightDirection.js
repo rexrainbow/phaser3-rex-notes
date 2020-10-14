@@ -1,5 +1,7 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Helpers from '../../utils/arcade/Helpers.js';
+import {
+    SetVelocity
+} from '../../utils/arcade/Helpers.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,16 +10,17 @@ class EightDirection extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
 
-        this.setParent(gameObject);
+        this.gameObject = gameObject;
+        this.scene = gameObject.scene;
+        
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        if (!this.body) {
+        if (!this.gameObject.body) {
             this.scene.physics.add.existing(this.gameObject, false);
         }
-        this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setEnable(GetValue(o, 'enable', true));
         this.setDirMode(GetValue(o, 'dir', '8dir'));
         this.setSpeed(GetValue(o, 'speed', 200));
@@ -51,13 +54,13 @@ class EightDirection extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.preupdate, this);
+        this.scene.events.on('update', this.update, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preupdate, this);
+            this.scene.events.off('update', this.update, this);
         }
     }
 
@@ -68,7 +71,7 @@ class EightDirection extends TickTask {
     set enable(value) {
         this.isRunning = value;
         if (!value) {
-            this.bodySetVelocity(0, 0);
+            SetVelocity(this, 0, 0);
         }
     }
 
@@ -109,30 +112,42 @@ class EightDirection extends TickTask {
         return this;
     }
 
-    preupdate(time, delta) {
+    get isLeft() {
+        return (this.enable) ? this.cursorKeys.left.isDown : false;
+    }
+
+    get isRight() {
+        return (this.enable) ? this.cursorKeys.right.isDown : false;
+    }
+
+    get isUp() {
+        return (this.enable) ? this.cursorKeys.up.isDown : false;
+    }
+
+    get isDown() {
+        return (this.enable) ? this.cursorKeys.down.isDown : false;
+    }
+
+    update(time, delta) {
         if (!this.enable) {
-            this.bodySetVelocity(0, 0);
+            SetVelocity(this.gameObject, 0, 0);
             return this;
         }
-        var cursorKeys = this.cursorKeys;
-        var isUpDown = cursorKeys.up.isDown;
-        var isDownDown = cursorKeys.down.isDown;
-        var isLeftDown = cursorKeys.left.isDown;
-        var isRightDown = cursorKeys.right.isDown;
-        var dy = ((isUpDown) ? -1 : 0) + ((isDownDown) ? 1 : 0),
-            dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
+
+        var dy = ((this.isUp) ? -1 : 0) + ((this.isDown) ? 1 : 0),
+            dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
         if ((dx === 0) && (dy === 0)) {
-            this.bodySetVelocity(0, 0);
+            SetVelocity(this.gameObject, 0, 0);
             return this;
         }
         switch (this.dirMode) {
-            case 0:
+            case 0: // up&down
                 dx = 0;
                 break;
-            case 1:
+            case 1: // left&right
                 dy = 0;
                 break;
-            case 2:
+            case 2: // 4dir
                 if (dy !== 0) {
                     dx = 0;
                 }
@@ -153,19 +168,13 @@ class EightDirection extends TickTask {
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }
-        this.bodySetVelocity(vx, vy);
+        SetVelocity(this.gameObject, vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
             this.gameObject.rotation = rotation;
         }
         return this;
     }
 }
-
-// mixin
-Object.assign(
-    EightDirection.prototype,
-    Helpers
-);
 
 /** @private */
 const DIRMODE = {
