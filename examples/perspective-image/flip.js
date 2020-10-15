@@ -15,6 +15,7 @@ class Demo extends Phaser.Scene {
     create() {
         this.add.image(300, 300, 'poker', 'diamonds-1');
         var image = this.add.rexPerspectiveImage(400, 300, 'poker', 'diamonds-1');
+        console.log(image.width, image.height);
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);

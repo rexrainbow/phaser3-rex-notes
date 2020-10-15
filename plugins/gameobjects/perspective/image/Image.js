@@ -8,10 +8,12 @@ class Image extends Phaser.GameObjects.Mesh {
     constructor(scene, x, y, texture, frame, config) {
         super(scene, x, y, texture, frame);
         this.type = 'rexPerspectiveImage';
-        this.hideCCW = GetValue(config, 'hideCCW', false);
-
+        // this.setSizeToFrame(); // TODO: Set object size to frame size
 
         var renderer = scene.sys.renderer;
+        this.setPerspective(renderer.width, renderer.height, 90);
+        this.hideCCW = GetValue(config, 'hideCCW', false);
+
         var textureFrame = this.texture.get(frame);
         var frameWidth = textureFrame.cutWidth,
             frameHeight = textureFrame.cutHeight;
@@ -28,7 +30,6 @@ class Image extends Phaser.GameObjects.Mesh {
             heightSegments: Math.ceil(frameHeight / girdHeight)
         })
 
-        this.setPerspective(renderer.width, renderer.height, 90);
         this.panZ(1);
     }
 
@@ -82,14 +83,30 @@ class Image extends Phaser.GameObjects.Mesh {
 
     get isFlippedY() {
         var angleY = WrapDegrees(this.angleY); // -180 to 180 
-        return ((angleY >= 90) && (angleY < 180)) ||
-            ((angleY <= -90) && (angleY > -180));
+        return ((angleY > 90) && (angleY <= 180)) ||
+            ((angleY < -90) && (angleY >= -180));
     }
 
     get isFlippedX() {
         var angleX = WrapDegrees(this.angleX); // -180 to 180 
-        return ((angleX >= 90) && (angleX < 180)) ||
-            ((angleX <= -90) && (angleX > -180));
+        return ((angleX > 90) && (angleX <= 180)) ||
+            ((angleX < -90) && (angleX >= -180));
+    }
+
+    setFlipY(flipY) {
+        if (flipY === undefined) {
+            flipY = true;
+        }
+        this.angleY = (flipY) ? 180 : 0;
+        return this;
+    }
+
+    setFlipX(flipX) {
+        if (flipX === undefined) {
+            flipX = true;
+        }
+        this.angleX = (flipX) ? 180 : 0;
+        return this;
     }
 }
 

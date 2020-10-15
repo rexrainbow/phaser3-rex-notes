@@ -10,7 +10,7 @@ export default function (config, addToScene) {
     }
     var key = GetAdvancedValue(config, 'key', null);
     var frame = GetAdvancedValue(config, 'frame', null);
-    var gameObject = new Image(this.scene, 0, 0, key, frame);
+    var gameObject = new Image(this.scene, 0, 0, key, frame, config);
     BuildGameObject(this.scene, gameObject, config);
 
     return gameObject;
