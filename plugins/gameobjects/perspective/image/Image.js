@@ -12,6 +12,7 @@ class Image extends Phaser.GameObjects.Mesh {
 
         var renderer = scene.sys.renderer;
         this.setPerspective(renderer.width, renderer.height, 90);
+        this.panZ(1);
         this.hideCCW = GetValue(config, 'hideCCW', false);
 
         var textureFrame = this.texture.get(frame);
@@ -28,9 +29,7 @@ class Image extends Phaser.GameObjects.Mesh {
 
             widthSegments: Math.ceil(frameWidth / girdWidth),
             heightSegments: Math.ceil(frameHeight / girdHeight)
-        })
-
-        this.panZ(1);
+        });
     }
 
     get rotationX() {
