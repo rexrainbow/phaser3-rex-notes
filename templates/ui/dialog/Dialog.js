@@ -213,6 +213,7 @@ class Dialog extends Sizer {
         this.addChildrenMap('toolbar', toolbar);
         this.addChildrenMap('leftToolbar', leftToolbar);
         this.addChildrenMap('content', content);
+        this.addChildrenMap('description', description);
         this.addChildrenMap('choices', choices);
         this.addChildrenMap('actions', actions);
         this.addChildrenMap('choicesSizer', choicesSizer);
