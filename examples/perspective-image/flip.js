@@ -9,30 +9,36 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-        this.load.image('road', 'assets/images/backgrounds/road.png');
+        this.load.atlas('poker', 'assets/images/poker/poker.png', 'assets/images/poker/poker.json');
     }
 
     create() {
-        var image = this.add.rexPerspectiveImage(400, 300, 'classroom');
+        this.add.image(300, 300, 'poker', 'diamonds-1');
+        var image = this.add.rexPerspectiveImage(400, 300, 'poker', 'diamonds-1');
 
-        this.debug = this.add.graphics();        
+        this.debug = this.add.graphics();
         image.setDebug(this.debug);
 
+        var GetStateString = function (image) {
+            return `angleY=${Math.floor(image.angleY)}\nisFlippedY=${image.isFlippedY}`
+        }
 
+
+        var print = this.add.text(0, 0, GetStateString(image));
         this.input.on('pointermove', function (pointer) {
 
             if (!pointer.isDown) {
                 return;
             }
-            
-            image.modelRotation.y += pointer.velocity.x * (1 / 800);
+
+            image.rotationY += pointer.velocity.x * (1 / 800);
+            print.setText(GetStateString(image));
         });
     }
 
     update() {
         this.debug.clear();
-        this.debug.lineStyle(1, 0x00ff00); 
+        this.debug.lineStyle(1, 0x00ff00);
     }
 }
 
