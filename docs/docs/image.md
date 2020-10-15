@@ -18,6 +18,7 @@ Reference: [load image](loader.md#image)
 
 ```javascript
 var image = scene.add.image(x, y, key);
+// var image = scene.add.image(x, y, key, frame);
 ```
 
 Add image from JSON
@@ -27,6 +28,7 @@ var image = scene.make.image({
     x: 0,
     y: 0,
     key: '',
+    // frame: '',
 
     // angle: 0,
     // alpha: 1

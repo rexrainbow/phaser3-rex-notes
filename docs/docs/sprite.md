@@ -30,6 +30,7 @@ Reference: [load atlas](loader.md#texture-atlas)
 
 ```javascript
 var sprite = scene.add.sprite(x, y, key);
+// var sprite = scene.add.sprite(x, y, key, frame);
 ```
 
 Add sprite from JSON
@@ -39,6 +40,7 @@ var sprite = scene.make.sprite({
     x: 0,
     y: 0,
     key: '',
+    // frame: '',
 
     // angle: 0,
     // alpha: 1

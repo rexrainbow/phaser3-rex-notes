@@ -1,4 +1,4 @@
-import EffectLayer from '../EffectLayer.js';
+import EffectLayer from '../../effectlayer/EffectLayer.js';
 import { GetFrag } from './outline-frag.js';
 
 const BaseShader = Phaser.Display.BaseShader;

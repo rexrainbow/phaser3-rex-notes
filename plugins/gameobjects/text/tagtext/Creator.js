@@ -4,6 +4,11 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 export default function (config, addToScene) {
+    if (config === undefined) { config = {}; }
+    if (addToScene !== undefined) {
+        config.add = addToScene;
+    }
+
     // style Object = {
     //     font: [ 'font', '16px Courier' ],
     //     backgroundColor: [ 'backgroundColor', null ],
@@ -35,10 +40,6 @@ export default function (config, addToScene) {
 
     if (padding !== null) {
         style.padding = padding;
-    }
-
-    if (addToScene !== undefined) {
-        config.add = addToScene;
     }
 
     var gameObject = new TagText(this.scene, 0, 0, content, style);

@@ -4,7 +4,11 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
-export default function (config) {
+export default function (config, addToScene) {
+    if (config === undefined) { config = {}; }
+    if (addToScene !== undefined) {
+        config.add = addToScene;
+    }
     var width = GetAdvancedValue(config, 'width', 1);
     var height = GetAdvancedValue(config, 'height', width);
     var children = GetValue(config, 'children', undefined);
