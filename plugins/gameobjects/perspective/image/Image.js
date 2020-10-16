@@ -8,24 +8,23 @@ class Image extends Phaser.GameObjects.Mesh {
     constructor(scene, x, y, texture, frame, config) {
         super(scene, x, y, texture, frame);
         this.type = 'rexPerspectiveImage';
-        // this.setSizeToFrame(); // TODO: Set object size to frame size
+        this.setSizeToFrame();
 
-        var renderer = scene.sys.renderer;
-        this.setPerspective(renderer.width, renderer.height, 90);
-        this.panZ(1);
+        this.setPerspective(this.width, this.height, 45);
+        this.panZ(2.4);
         this.hideCCW = GetValue(config, 'hideCCW', false);
 
+        var girdWidth = GetValue(config, 'gridWidth', 32);
+        var girdHeight = GetValue(config, 'girdHeight', girdWidth);
         var textureFrame = this.texture.get(frame);
         var frameWidth = textureFrame.cutWidth,
             frameHeight = textureFrame.cutHeight;
-        var girdWidth = GetValue(config, 'gridWidth', 32);
-        var girdHeight = GetValue(config, 'girdHeight', girdWidth);
         GenerateGridVerts({
             mesh: this,
-            texture: this.texture, frame: frame,
+            texture: texture, frame: frame,
 
-            width: frameWidth / renderer.height,
-            height: frameHeight / renderer.height,
+            width: frameWidth / this.height,
+            height: frameHeight / this.height,
 
             widthSegments: Math.ceil(frameWidth / girdWidth),
             heightSegments: Math.ceil(frameHeight / girdHeight)

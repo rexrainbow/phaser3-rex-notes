@@ -10,17 +10,24 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.atlas('poker', 'assets/images/poker/poker.png', 'assets/images/poker/poker.json');
+
+        this.load.image('card', 'assets/images/card.jpg');
+        this.load.image('card2', 'assets/images/card2.png');
     }
 
     create() {
-        this.add.image(300, 300, 'poker', 'diamonds-1');
-        var image = this.add.rexPerspectiveImage(400, 300, 'poker', 'diamonds-1');
-        var image2 = this.add.rexPerspectiveImage(200, 300, 'poker', 'diamonds-1');
+        this.add.image(100, 300, 'poker', 'diamonds-1');
+        var image = this.add.rexPerspectiveImage(100, 300, 'poker', 'diamonds-1').setAlpha(0.8);
         console.log(image.width, image.height);
+
+        this.add.image(300, 300, 'card').setScale(0.5);
+        var image2 = this.add.rexPerspectiveImage(300, 300, 'card').setAlpha(0.8).setScale(0.5);
+
+        this.add.image(500, 300, 'card2').setScale(0.5);
+        var image3 = this.add.rexPerspectiveImage(500, 300, 'card2').setAlpha(0.8).setScale(0.5);
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
-        image2.setDebug(this.debug);
 
         var GetStateString = function (image) {
             return `angleY=${Math.floor(image.angleY)}\nisFlippedY=${image.isFlippedY}`
@@ -36,6 +43,9 @@ class Demo extends Phaser.Scene {
 
             image.rotationY += pointer.velocity.x * (1 / 800);
             print.setText(GetStateString(image));
+
+            image2.rotationY = image.rotationY;
+            image3.rotationY = image.rotationY;
         });
     }
 
