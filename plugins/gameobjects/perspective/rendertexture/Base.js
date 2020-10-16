@@ -10,6 +10,13 @@ class RenderTexture extends PerspectiveImage {
         this.type = 'rexPerspectiveRenderTexture';
         this.rt = rt;
     }
+
+    destroy(fromScene) {
+        super.destroy(fromScene);
+
+        this.rt.destroy(fromScene);
+        this.rt = null;
+    }
 }
 
 export default RenderTexture;

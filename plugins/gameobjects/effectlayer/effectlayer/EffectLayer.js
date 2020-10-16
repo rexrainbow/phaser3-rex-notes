@@ -1,4 +1,4 @@
-import RoundUpPowerOf2 from '../../utils/math/RoundUpPowerOf2.js';
+import RoundUpPowerOf2 from '../../../utils/math/RoundUpPowerOf2.js';
 
 const Image = Phaser.GameObjects.Image;
 const AddItem = Phaser.Utils.Array.Add;
@@ -49,11 +49,18 @@ class EffectLayer extends Image {
         this.scene.scale.on('resize', this.onWindowResize, this);
     }
 
-    preDestroy() {
+    destroy(fromScene) {
         this.scene.game.events.off('prerender', this.drawTargets, this);
         this.scene.scale.off('resize', this.onWindowResize, this);
         // Private texture will be removed by shader game object
         this.clear();
+
+        super.destroy(fromScene);
+
+        this.shader.destroy(fromScene);
+        this.rt.destroy(fromScene);
+        this.shader = null;
+        this.rt = null;
     }
 
     drawTargets() {
