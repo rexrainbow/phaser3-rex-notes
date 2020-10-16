@@ -9,11 +9,15 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        var image = this.add.rexPerspectiveRenderTexture(400, 300, 150, 200);
-        image.fill(0xffffff);
+        var mushroom = this.add.image(0, 0, 'mushroom').setOrigin(0);
+        var image = this.add.rexPerspectiveRenderTexture(200, 300, 150, 200);
+        image
+            .fill(0xffffff)
+            .draw(mushroom, 10, 10)
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
@@ -27,9 +31,7 @@ class Demo extends Phaser.Scene {
             image.rotationY += pointer.velocity.x * (1 / 800);
         });
 
-        var rt = this.make.renderTexture({ x: 0, y: 0, width: 150, height: 200, add: true });
-        rt.fill(0xffffff);
-        this.add.image(500, 300, rt.texture.key);
+        this.add.image(400, 300, image.texture.key);
     }
 
     update() {
