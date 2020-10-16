@@ -1,6 +1,9 @@
-import Factory from './gameobjects/perspective/image/Factory.js';
-import Creator from './gameobjects/perspective/image/Creator.js';
+import PerspectiveImageFactory from './gameobjects/perspective/image/Factory.js';
+import PerspectiveImageCreator from './gameobjects/perspective/image/Creator.js';
 import PerspectiveImage from './gameobjects/perspective/image/Image.js';
+import PerspectiveRenderTextureFactory from './gameobjects/perspective/rendertexture/Factory.js';
+import PerspectiveRenderTextureCreator from './gameobjects/perspective/rendertexture/Creator.js';
+import PerspectiveRenderTexture from './gameobjects/perspective/rendertexture/RenderTexture.js';
 import SetValue from './utils/object/SetValue.js';
 
 class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
@@ -9,7 +12,8 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexPerspectiveImage', Factory, Creator);
+        pluginManager.registerGameObject('rexPerspectiveImage', PerspectiveImageFactory, PerspectiveImageCreator);
+        pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);
     }
 
     start() {
@@ -19,5 +23,6 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
 }
 
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', PerspectiveImage);
+SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', PerspectiveRenderTexture);
 
 export default PerspectiveImagePlugin;
