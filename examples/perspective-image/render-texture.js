@@ -13,14 +13,21 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var mushroom = this.add.image(0, 0, 'mushroom').setOrigin(0);
-        var image = this.add.rexPerspectiveRenderTexture(200, 300, 150, 200);
-        image
-            .fill(0xffffff)
-            .draw(mushroom, 10, 10)
+        var mushroom = this.make.image({ key: 'mushroom', add: false });
+        var numberText = this.make.text({
+            text: '7',
+            style: { color: 'red', fontSize: '36px', fontFamily: 'serif' },
+            add: false
+        }).setOrigin(1);
 
-        this.debug = this.add.graphics();
-        image.setDebug(this.debug);
+        var image = this.add.rexPerspectiveRenderTexture(400, 300, 150, 200);
+        image
+            .fill(0x888888)
+            .draw(numberText, 150, 200)
+            .draw(mushroom, 75, 100)
+
+        //this.debug = this.add.graphics();
+        //image.setDebug(this.debug);
 
         this.input.on('pointermove', function (pointer) {
 
@@ -31,12 +38,12 @@ class Demo extends Phaser.Scene {
             image.rotationY += pointer.velocity.x * (1 / 800);
         });
 
-        this.add.image(400, 300, image.texture.key);
+        this.add.image(600, 300, image.texture.key);
     }
 
     update() {
-        this.debug.clear();
-        this.debug.lineStyle(1, 0x00ff00);
+        // this.debug.clear();
+        // this.debug.lineStyle(1, 0x00ff00);
     }
 }
 
