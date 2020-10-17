@@ -1,6 +1,6 @@
-import Factory from './gameobjects/canvas/Factory.js';
-import Creator from './gameobjects/canvas/Creator.js';
-import Canvas from './gameobjects/canvas/Canvas.js';
+import Factory from './gameobjects/canvas/canvas/Factory.js';
+import Creator from './gameobjects/canvas/canvas/Creator.js';
+import Canvas from './gameobjects/canvas/canvas/Canvas.js';
 import SetValue from './utils/object/SetValue.js';
 
 class CanvasPlugin extends Phaser.Plugins.BasePlugin {

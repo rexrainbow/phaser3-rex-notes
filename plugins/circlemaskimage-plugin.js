@@ -1,6 +1,6 @@
-import Factory from './gameobjects/circlemaskimage/Factory.js';
-import Creator from './gameobjects/circlemaskimage/Creator.js';
-import CircleMaskImage from './gameobjects/circlemaskimage/CircleMaskImage.js';
+import Factory from './gameobjects/canvas/circlemaskimage/Factory.js';
+import Creator from './gameobjects/canvas/circlemaskimage/Creator.js';
+import CircleMaskImage from './gameobjects/canvas/circlemaskimage/CircleMaskImage.js';
 import SetValue from './utils/object/SetValue.js';
 
 class CircleMaskImagePlugin extends Phaser.Plugins.BasePlugin {

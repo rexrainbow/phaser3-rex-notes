@@ -1,4 +1,4 @@
-import GeomRoundRectangle from '../../shape/roundrectangle/geom/RoundRectangle.js';
+import GeomRoundRectangle from '../../../shape/roundrectangle/geom/RoundRectangle.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 const Rad0 = DegToRad(0);
