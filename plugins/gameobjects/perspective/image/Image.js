@@ -79,34 +79,6 @@ class Image extends Phaser.GameObjects.Mesh {
         this.rotationZ = DegToRad(value);
     }
 
-    get isFlippedY() {
-        var angleY = WrapDegrees(this.angleY); // -180 to 180 
-        return ((angleY > 90) && (angleY <= 180)) ||
-            ((angleY < -90) && (angleY >= -180));
-    }
-
-    get isFlippedX() {
-        var angleX = WrapDegrees(this.angleX); // -180 to 180 
-        return ((angleX > 90) && (angleX <= 180)) ||
-            ((angleX < -90) && (angleX >= -180));
-    }
-
-    setFlipX(flip) {
-        if (flip === undefined) {
-            flip = true;
-        }
-        this.angleY = (flip) ? 180 : 0;
-        return this;
-    }
-
-    setFlipY(flip) {
-        if (flip === undefined) {
-            flip = true;
-        }
-        this.angleX = (flip) ? 180 : 0;
-        return this;
-    }
-
     forceUpdate() {
         this.dirtyCache[10] = 1;
         return this;

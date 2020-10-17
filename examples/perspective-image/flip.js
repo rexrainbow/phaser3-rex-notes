@@ -5,7 +5,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.txt;
     }
 
     preload() {
@@ -30,7 +29,7 @@ class Demo extends Phaser.Scene {
         image.setDebug(this.debug);
 
         var GetStateString = function (image) {
-            return `angleY=${Math.floor(image.angleY)}\nisFlippedY=${image.isFlippedY}`
+            return `angleY=${Math.floor(image.angleY)}`
         }
 
 

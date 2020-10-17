@@ -5,7 +5,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.txt;
     }
 
     preload() {
@@ -14,25 +13,35 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var card = this.add.rexPerspectiveImageCard(400, 300, {
-            front: { key: 'card' },
-            back: { key: 'card-back' }
-        })
-            .setScale(0.5)
-            .setFace('back')
-
-        this.input.on('pointermove', function (pointer) {
-
-            if (!pointer.isDown) {
-                return;
-            }
-
-            card.rotationY += pointer.velocity.x * (1 / 800);
-        });
+        var card0 = CreateCard(this, 200, 300, 'card');
+        var card1 = CreateCard(this, 400, 300, 'card');
+        var card2 = CreateCard(this, 600, 300, 'card');
     }
 
     update() {
     }
+}
+
+var CreateCard = function (scene, x, y, frontFace) {
+    return scene.add.rexPerspectiveImageCard(x, y, {
+        front: { key: frontFace },
+        back: { key: 'card-back' },
+        face: 'back',
+
+        flip: {            
+            direction: {
+                frontToBack: 'right',
+                backToFront: 'left'
+            },
+            duration: 1000,
+            ease: 'Cubic'
+        }
+    })
+        .setScale(0.5)
+        .setInteractive()
+        .on('pointerdown', function () {
+            this.flip.flip();
+        })
 }
 
 var config = {

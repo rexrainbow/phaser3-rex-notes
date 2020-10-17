@@ -1,5 +1,6 @@
 import Container from '../../containerlite/ContainerLite.js';
 import PerspectiveImage from '../image/Image.js';
+import Flip from './Flip.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -16,14 +17,8 @@ class ImageCard extends Container {
         var backFace = GetValue(config, 'back', DefaultFrameConfig);
 
         if ((width === undefined) || (height === undefined)) {
-            var frontFaceFrame;
-            if (frontFace) {
-                frontFaceFrame = scene.textures.getFrame(frontFace.key, frontFace.frame);
-            }
-            var backFaceFrame;
-            if (backFace) {
-                backFaceFrame = scene.textures.getFrame(backFace.key, backFace.frame);
-            }
+            var frontFaceFrame = scene.textures.getFrame(frontFace.key, frontFace.frame);
+            var backFaceFrame = scene.textures.getFrame(backFace.key, backFace.frame);
 
             if (width === undefined) {
                 width = Math.max(frontFaceFrame.cutWidth, backFaceFrame.cutWidth);
@@ -45,7 +40,6 @@ class ImageCard extends Container {
             { hideCCW: true }
         );
         scene.add.existing(this.backImage);
-        this.backImage.forceUpdate();
 
         this.frontImage = new PerspectiveImage(scene,
             x, y,
@@ -53,13 +47,16 @@ class ImageCard extends Container {
             { hideCCW: true }
         );
         scene.add.existing(this.frontImage);
+
+        this
+            .add(this.frontImage)
+            .add(this.backImage);
+
+        this.setFace(GetValue(config, 'face', 0))
+        this.backImage.forceUpdate();
         this.frontImage.forceUpdate();
 
-        this.rotationX = 0;
-        this.rotationY = 0;
-        this.rotationZ = 0;
-
-        this.add(this.frontImage).add(this.backImage);
+        this.flip = new Flip(this, GetValue(config, 'flip', undefined));
     }
 
     get rotationX() {
@@ -118,21 +115,6 @@ class ImageCard extends Container {
         this.rotationZ = DegToRad(value);
     }
 
-    setFlip(flip) {
-        if (flip === undefined) {
-            flip = true;
-        }
-
-        var angle = (flip) ? 180 : 0;
-        if (this.orientation === 0) {
-            this.angleY = angle;
-        } else {
-            this.angleY = angle;
-        }
-
-        return this;
-    }
-
     setDebug(graphic, callback) {
         this.frontImage.setDebug(graphic, callback);
         this.backImage.setDebug(graphic, callback);
@@ -156,7 +138,13 @@ class ImageCard extends Container {
             face = FACEMODE[face];
         }
         this._face = face;
-        this.setFlip(face === 1);
+
+        var angle = (face) ? 180 : 0;
+        if (this.orientation === 0) {
+            this.angleY = angle;
+        } else {
+            this.angleY = angle;
+        }
     }
 
     setFace(face) {
