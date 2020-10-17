@@ -1,73 +1,56 @@
 import Container from '../../containerlite/ContainerLite.js';
-import PerspectiveImage from '../image/Image.js';
+import CreateFace from './CreateFace.js';
 import Flip from './Flip.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
-const DefaultFrameConfig = { key: '__WHITE' };
 const RAD180 = DegToRad(180);
 
-class ImageCard extends Container {
+class Card extends Container {
     constructor(scene, x, y, config) {
+        var backFace = CreateFace(scene, GetValue(config, 'back'))
+            .setPosition(x, y);
+        var frontFace = CreateFace(scene, GetValue(config, 'front'))
+            .setPosition(x, y);
+
         var width = GetValue(config, 'width');
         var height = GetValue(config, 'height');
-        var frontFace = GetValue(config, 'front', DefaultFrameConfig);
-        var backFace = GetValue(config, 'back', DefaultFrameConfig);
-
         if ((width === undefined) || (height === undefined)) {
-            var frontFaceFrame = scene.textures.getFrame(frontFace.key, frontFace.frame);
-            var backFaceFrame = scene.textures.getFrame(backFace.key, backFace.frame);
-
             if (width === undefined) {
-                width = Math.max(frontFaceFrame.cutWidth, backFaceFrame.cutWidth);
+                width = Math.max(frontFace.width, backFace.width);
             }
 
             if (height === undefined) {
-                height = Math.max(frontFaceFrame.cutHeight, backFaceFrame.cutHeight);
+                height = Math.max(frontFace.height, backFace.height);
             }
         }
 
         super(scene, x, y, width, height);
-        this.type = 'rexPerspectiveImageCard';
+        this.type = 'rexPerspectiveCard';
+
+        this.add(backFace).add(frontFace);
+        this.backFace = backFace;
+        this.frontFace = frontFace;
 
         this.setOrientation(GetValue(config, 'orientation', 0));
-
-        this.backImage = new PerspectiveImage(scene,
-            x, y,
-            backFace.key, backFace.frame,
-            { hideCCW: true }
-        );
-        scene.add.existing(this.backImage);
-
-        this.frontImage = new PerspectiveImage(scene,
-            x, y,
-            frontFace.key, frontFace.frame,
-            { hideCCW: true }
-        );
-        scene.add.existing(this.frontImage);
-
-        this
-            .add(this.frontImage)
-            .add(this.backImage);
-
         this.setFace(GetValue(config, 'face', 0))
-        this.backImage.forceUpdate();
-        this.frontImage.forceUpdate();
+        this.backFace.forceUpdate();
+        this.frontFace.forceUpdate();
 
         this.flip = new Flip(this, GetValue(config, 'flip', undefined));
     }
 
     get rotationX() {
-        return this.frontImage.rotationX;
+        return this.frontFace.rotationX;
     }
 
     set rotationX(value) {
-        this.frontImage.rotationX = value;
+        this.frontFace.rotationX = value;
 
         if (this.orientation === 1) {
-            this.backImage.rotationX = value - RAD180;
+            this.backFace.rotationX = value - RAD180;
         }
     }
 
@@ -80,13 +63,13 @@ class ImageCard extends Container {
     }
 
     get rotationY() {
-        return this.frontImage.rotationY;
+        return this.frontFace.rotationY;
     }
 
     set rotationY(value) {
-        this.frontImage.rotationY = value;
+        this.frontFace.rotationY = value;
         if (this.orientation === 0) {
-            this.backImage.rotationY = value - RAD180;
+            this.backFace.rotationY = value - RAD180;
         }
     }
 
@@ -99,12 +82,12 @@ class ImageCard extends Container {
     }
 
     get rotationZ() {
-        return this.frontImage.rotationZ;
+        return this.frontFace.rotationZ;
     }
 
     set rotationZ(value) {
-        this.frontImage.rotationZ = value;
-        this.backImage.rotationZ = value;
+        this.frontFace.rotationZ = value;
+        this.backFace.rotationZ = value;
     }
 
     get angleZ() {
@@ -116,8 +99,8 @@ class ImageCard extends Container {
     }
 
     setDebug(graphic, callback) {
-        this.frontImage.setDebug(graphic, callback);
-        this.backImage.setDebug(graphic, callback);
+        this.frontFace.setDebug(graphic, callback);
+        this.backFace.setDebug(graphic, callback);
         return this;
     }
 
@@ -171,4 +154,4 @@ const FACEMODE = {
     back: 1,
 }
 
-export default ImageCard;
+export default Card;

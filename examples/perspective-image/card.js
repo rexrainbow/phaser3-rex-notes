@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene, x, y, frontFace) {
-    return scene.add.rexPerspectiveImageCard(x, y, {
+    return scene.add.rexPerspectiveCard(x, y, {
         front: { key: frontFace },
         back: { key: 'card-back' },
         face: 'back',

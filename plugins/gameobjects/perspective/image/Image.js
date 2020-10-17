@@ -2,7 +2,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
-const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
+
+const FOV = 45;
+const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
 class Image extends Phaser.GameObjects.Mesh {
     constructor(scene, x, y, texture, frame, config) {
@@ -10,8 +12,8 @@ class Image extends Phaser.GameObjects.Mesh {
         this.type = 'rexPerspectiveImage';
         this.setSizeToFrame();
 
-        this.setPerspective(this.width, this.height, 45);
-        this.panZ(2.4);
+        this.setPerspective(this.width, this.height, FOV);
+        this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', false);
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
