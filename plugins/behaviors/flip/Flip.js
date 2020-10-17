@@ -1,5 +1,5 @@
 import TweenBase from '../../utils/tween/TweenBase.js';
-import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
+import GetFrameUpdatingCallback from '../../utils/texture/GetFrameUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -84,12 +84,12 @@ class Flip extends TweenBase {
     }
 
     setFrontFace(key, frame) {
-        this.frontFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
+        this.frontFaceCallback = GetFrameUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
 
     setBackFace(key, frame) {
-        this.backFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
+        this.backFaceCallback = GetFrameUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
 

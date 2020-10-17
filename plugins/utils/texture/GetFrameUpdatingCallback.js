@@ -1,7 +1,7 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var GetFaceUpdatingCallback = function (key, frame, gameObject) {
+var GetFrameUpdatingCallback = function (key, frame, gameObject) {
     var callback;
     if (key === undefined) {
         key = gameObject.texture.key;
@@ -23,4 +23,4 @@ var GetFaceUpdatingCallback = function (key, frame, gameObject) {
     return callback;
 }
 
-export default GetFaceUpdatingCallback;
+export default GetFrameUpdatingCallback;
