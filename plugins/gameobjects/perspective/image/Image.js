@@ -91,19 +91,24 @@ class Image extends Phaser.GameObjects.Mesh {
             ((angleX < -90) && (angleX >= -180));
     }
 
-    setFlipY(flipY) {
-        if (flipY === undefined) {
-            flipY = true;
+    setFlipX(flip) {
+        if (flip === undefined) {
+            flip = true;
         }
-        this.angleY = (flipY) ? 180 : 0;
+        this.angleY = (flip) ? 180 : 0;
         return this;
     }
 
-    setFlipX(flipX) {
-        if (flipX === undefined) {
-            flipX = true;
+    setFlipY(flip) {
+        if (flip === undefined) {
+            flip = true;
         }
-        this.angleX = (flipX) ? 180 : 0;
+        this.angleX = (flip) ? 180 : 0;
+        return this;
+    }
+
+    forceUpdate() {
+        this.dirtyCache[10] = 1;
         return this;
     }
 }
