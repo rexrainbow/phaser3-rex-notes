@@ -2,6 +2,7 @@ import Container from '../../containerlite/ContainerLite.js';
 import CreateFace from './CreateFace.js';
 import Flip from './Flip.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
@@ -10,6 +11,12 @@ const RAD180 = DegToRad(180);
 
 class Card extends Container {
     constructor(scene, x, y, config) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+        }
+
         var backFace = CreateFace(scene, GetValue(config, 'back'))
             .setPosition(x, y);
         var frontFace = CreateFace(scene, GetValue(config, 'front'))
@@ -39,7 +46,10 @@ class Card extends Container {
         this.backFace.forceUpdate();
         this.frontFace.forceUpdate();
 
-        this.flip = new Flip(this, GetValue(config, 'flip', undefined));
+        var flipConfig = GetValue(config, 'flip', undefined);
+        if (flipConfig !== false) {
+            this.flip = new Flip(this, flipConfig);
+        }
     }
 
     get rotationX() {
