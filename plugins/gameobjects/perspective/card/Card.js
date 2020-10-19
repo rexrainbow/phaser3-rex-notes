@@ -43,8 +43,8 @@ class Card extends Container {
 
         this.setOrientation(GetValue(config, 'orientation', 0));
         this.setFace(GetValue(config, 'face', 0))
-        this.backFace.forceUpdate();
-        this.frontFace.forceUpdate();
+        backFace.forceUpdate();
+        frontFace.forceUpdate();
 
         var flipConfig = GetValue(config, 'flip', undefined);
         if (flipConfig !== false) {
