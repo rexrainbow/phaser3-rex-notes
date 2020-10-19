@@ -40,10 +40,11 @@ nav:
         - Shader:
             - Shader: shader.md
             - Outline effect layer: effectlayer-outline.md
-        - Mesh:
-            - Quad: quad.md
-            - Rope: rope.md
         - Texture: texture.md
+    - Mesh:
+        - Mesh: mesh.md
+        - Perspective image: perspective-image.md
+        - Rope: rope.md        
     - Text:
         - Canvas text:
             - Text: text.md

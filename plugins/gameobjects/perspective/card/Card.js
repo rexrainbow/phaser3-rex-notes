@@ -1,5 +1,5 @@
 import Container from '../../containerlite/ContainerLite.js';
-import CreateFace from './CreateFace.js';
+import CreatePerspectiveObject from '../utils/CreatePerspectiveObject.js';
 import Flip from './Flip.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -17,9 +17,9 @@ class Card extends Container {
             y = GetValue(config, 'y', 0);
         }
 
-        var backFace = CreateFace(scene, GetValue(config, 'back'))
+        var backFace = CreatePerspectiveObject(scene, GetValue(config, 'back'))
             .setPosition(x, y);
-        var frontFace = CreateFace(scene, GetValue(config, 'front'))
+        var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
             .setPosition(x, y);
 
         var width = GetValue(config, 'width');
