@@ -18,10 +18,12 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 200, height: 200,
 
-            back: CreateRenderTexture(this, 200, 200, 0x00ff00, 0.5).setName('back'),
-            front: CreateRenderTexture(this, 200, 200, 0xff0000, 0.5).setName('front'),
-            left: CreateRenderTexture(this, 200, 200, 0x0000ff, 0.5).setName('left'),
-            right: CreateRenderTexture(this, 200, 200, 0xC4C400, 0.5).setName('right'),
+            front: CreateRenderTexture(this, 200, 200, 0xff0000, '1'),
+            back: CreateRenderTexture(this, 200, 200, 0x00ff00, '2'),
+            //left: CreateRenderTexture(this, 200, 200, 0x0000ff, '3'),
+            //right: CreateRenderTexture(this, 200, 200, 0xC4C400, '4'),
+            //top: CreateRenderTexture(this, 200, 200, 0x888888, '5'),
+            //bottom: CreateRenderTexture(this, 200, 200, 0x888888, '6'),
         })
 
         this.input.on('pointermove', function (pointer) {
@@ -31,6 +33,7 @@ class Demo extends Phaser.Scene {
             }
 
             cube.rotationY += pointer.velocity.x * (1 / 800);
+            // cube.rotationX += pointer.velocity.y * (1 / 800);
         });
     }
 
@@ -38,9 +41,16 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateRenderTexture = function (scene, width, height, color, alpha) {
-    return scene.add.rexPerspectiveRenderTexture(0, 0, width, height)
-        .fill(color, alpha);
+var text;
+var CreateRenderTexture = function (scene, width, height, color, name) {
+    if (text === undefined) {
+        text = scene.make.text({ text: '', style: { fontSize: '32px' }, add: false })
+            .setOrigin(0.5);
+    }
+    text.text = name;
+    return scene.add.rexPerspectiveRenderTexture(0, 0, width, height, { hideCCW: true })
+        .fill(color, 1)
+        .draw(text, width / 2, height / 2)
 }
 
 var config = {
@@ -53,7 +63,6 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    backgroundColor: 0x33333,
     plugins: {
         global: [{
             key: 'rexPerspectiveImage',

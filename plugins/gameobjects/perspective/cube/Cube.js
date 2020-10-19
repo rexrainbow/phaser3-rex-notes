@@ -1,12 +1,11 @@
 import Container from '../../containerlite/ContainerLite.js';
 import CreatePerspectiveObject from '../utils/CreatePerspectiveObject.js';
+import CreateFaceConfig from './CreateFaceConfig.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
-
-const RAD90 = DegToRad(90);
 
 class Card extends Container {
     constructor(scene, x, y, config) {
@@ -16,39 +15,45 @@ class Card extends Container {
             y = GetValue(config, 'y', 0);
         }
 
-        var backFace = CreatePerspectiveObject(scene, GetValue(config, 'back'))
-            .setPosition(x, y);
-        var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
-            .setPosition(x, y);
-        var leftFace = CreatePerspectiveObject(scene, GetValue(config, 'left'))
-            .setPosition(x, y);
-        var rightFace = CreatePerspectiveObject(scene, GetValue(config, 'right'))
-            .setPosition(x, y);
+        var faces = [];
+        var face, createFaceConfig, faceConfig;
+        for (var i = 0, cnt = CreateFaceConfig.length; i < cnt; i++) {
+            createFaceConfig = CreateFaceConfig[i];
+            faceConfig = GetValue(config, createFaceConfig.name);
+            if (faceConfig) {
+                face = CreatePerspectiveObject(scene, faceConfig)
+                    .transformVerts(
+                        createFaceConfig.translateX,
+                        createFaceConfig.translateY,
+                        createFaceConfig.translateZ,
+
+                        createFaceConfig.rotateX,
+                        createFaceConfig.rotateY,
+                        0
+                    )
+                    .panZ(0.5)
+                    .setPosition(x, y)
+            } else {
+                face = null;
+            }
+            faces.push(face);
+        }
 
         var width = GetValue(config, 'width');
         var height = GetValue(config, 'height');
         super(scene, x, y, width, height);
         this.type = 'rexPerspectiveCube';
 
-        this.faces = [frontFace, leftFace, backFace, rightFace];
-        this.addMultiple(this.faces);
-        this.frontFace = frontFace;
-        this.leftFace = leftFace;
-        this.backFace = backFace;
-        this.rightFace = rightFace;
-
-        frontFace.modelRotation.y = 0;
-        leftFace.modelRotation.y = RAD90;
-        backFace.modelRotation.y = RAD90 * 2;
-        rightFace.modelRotation.y = -RAD90;
-
-        var face;
-        for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
-            face = this.faces[i];
-            face.modelPosition.z = 1;
-            face.panZ(1);
-            // face.forceUpdate();
-        }
+        this.faces = faces;
+        this.forEahcFace(function (face) {
+            this.add(face);
+        }, this);
+        this.frontFace = faces[0];
+        this.backFace = faces[1];
+        this.leftFace = faces[2];
+        this.rightFace = faces[3];
+        this.topFace = faces[4];
+        this.bottomFace = faces[5];
     }
 
     get rotationX() {
@@ -56,10 +61,9 @@ class Card extends Container {
     }
 
     set rotationX(value) {
-        var delta = value - this.frontFace.rotationX;
-        for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
-            this.faces[i].rotationX += delta;
-        }
+        this.forEahcFace(function (face) {
+            face.rotationX = value;
+        });
     }
 
     get angleX() {
@@ -75,10 +79,9 @@ class Card extends Container {
     }
 
     set rotationY(value) {
-        var delta = value - this.frontFace.rotationY;
-        for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
-            this.faces[i].rotationY += delta;
-        }
+        this.forEahcFace(function (face) {
+            face.rotationY = value;
+        });
     }
 
     get angleY() {
@@ -94,10 +97,9 @@ class Card extends Container {
     }
 
     set rotationZ(value) {
-        var delta = value - this.frontFace.rotationZ;
-        for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
-            this.faces[i].rotationZ += delta;
-        }
+        this.forEahcFace(function (face) {
+            face.rotationZ = value;
+        });
     }
 
     get angleZ() {
@@ -108,6 +110,22 @@ class Card extends Container {
         this.rotationZ = DegToRad(value);
     }
 
+    forEahcFace(callback, scope) {
+        for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
+            var face = this.faces[i];
+            if (!face) {
+                continue;
+            }
+
+            if (scope) {
+                callback.call(scope, face);
+            } else {
+                callback(face);
+            }
+        }
+        return this;
+    }
+
     setDebug(graphic, callback) {
         for (var i = 0, cnt = this.faces.length; i < cnt; i++) {
             this.faces[i].setDebug(graphic, callback);
@@ -115,5 +133,7 @@ class Card extends Container {
         return this;
     }
 }
+
+const RAD90 = DegToRad(90);
 
 export default Card;

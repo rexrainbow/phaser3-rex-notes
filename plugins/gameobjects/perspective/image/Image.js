@@ -1,3 +1,5 @@
+import TransformVerts from '../utils/TransformVerts';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -79,6 +81,11 @@ class Image extends Phaser.GameObjects.Mesh {
 
     set angleZ(value) {
         this.rotationZ = DegToRad(value);
+    }
+
+    transformVerts(x, y, z, rotateX, rotateY, rotateZ) {
+        TransformVerts(this, x, y, z, rotateX, rotateY, rotateZ);
+        return this;
     }
 
     forceUpdate() {
