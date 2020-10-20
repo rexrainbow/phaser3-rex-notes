@@ -29,7 +29,7 @@ class Card extends Container {
 
                         createFaceConfig.rotateX,
                         createFaceConfig.rotateY,
-                        0
+                        createFaceConfig.rotateZ
                     )
                     .panZ(0.5)
                     .setPosition(x, y)

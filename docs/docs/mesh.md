@@ -161,6 +161,12 @@ Render a group of textured vertices and manipulate the view of those vertices, s
     mesh.modelPosition.z = z;
     ```
     - `x`, `y`, `z` : Offset position.
+        - `z+` : Near
+        - `z-` : Far
+        - `x-` : Left
+        - `x+` : Right
+        - `y+` : Up
+        - `y-` : Down
 - Rotation
     ```javascript
     mesh.modelRotation.x = rotationX;

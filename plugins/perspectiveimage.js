@@ -10,6 +10,10 @@ import PerspectiveCardFactory from './gameobjects/perspective/card/Factory.js';
 import PerspectiveCardCreator from './gameobjects/perspective/card/Creator.js';
 import PerspectiveCard from './gameobjects/perspective/card/Card.js';
 
+import PerspectiveCubeFactory from './gameobjects/perspective/cube/Factory.js';
+import PerspectiveCubeCreator from './gameobjects/perspective/cube/Creator.js';
+import PerspectiveCube from './gameobjects/perspective/cube/Cube.js';
+
 
 Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveImage', PerspectiveImageFactory);
 Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveImage', PerspectiveImageCreator);
@@ -20,9 +24,13 @@ Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveRenderTexture', Per
 Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveCard', PerspectiveCardFactory);
 Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveCard', PerspectiveCardCreator);
 
+Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveCube', PerspectiveCubeFactory);
+Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveCube', PerspectiveCubeCreator);
+
 
 export default {
     PerspectiveImage: PerspectiveImage,
     PerspectiveRenderTexture: PerspectiveRenderTexture,
-    PerspectiveCard: PerspectiveCard
+    PerspectiveCard: PerspectiveCard,
+    PerspectiveCube: PerspectiveCube
 }

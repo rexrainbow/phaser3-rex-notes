@@ -1,4 +1,3 @@
-import Cube from '../../plugins/gameobjects/perspective/cube/Cube';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -14,16 +13,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var cube = new Cube(this, {
+        var cube = this.add.rexPerspectiveCube({
             x: 400, y: 300,
             width: 200, height: 200,
 
-            front: CreateRenderTexture(this, 200, 200, 0xff0000, '1'),
-            back: CreateRenderTexture(this, 200, 200, 0x00ff00, '2'),
-            //left: CreateRenderTexture(this, 200, 200, 0x0000ff, '3'),
-            //right: CreateRenderTexture(this, 200, 200, 0xC4C400, '4'),
-            //top: CreateRenderTexture(this, 200, 200, 0x888888, '5'),
-            //bottom: CreateRenderTexture(this, 200, 200, 0x888888, '6'),
+            front: CreateRenderTexture(this, 200, 200, 0xC40000, '1'),
+            back: CreateRenderTexture(this, 200, 200, 0x00C400, '2'),
+            left: CreateRenderTexture(this, 200, 200, 0x0000C4, '3'),
+            right: CreateRenderTexture(this, 200, 200, 0xC4C400, '4'),
+            top: CreateRenderTexture(this, 200, 200, 0xC4C4C4, '5'),
+            bottom: CreateRenderTexture(this, 200, 200, 0x545454, '6'),
         })
 
         this.input.on('pointermove', function (pointer) {
@@ -33,8 +32,17 @@ class Demo extends Phaser.Scene {
             }
 
             cube.rotationY += pointer.velocity.x * (1 / 800);
-            // cube.rotationX += pointer.velocity.y * (1 / 800);
+            cube.rotationX += pointer.velocity.y * (1 / 800);
         });
+
+        this.add.graphics({
+            lineStyle: {
+                width: 3,
+                color: 0xffffff,
+                alpha: 1
+            }
+        })
+            .strokeRect(300, 200, 200, 200)
     }
 
     update() {
@@ -49,7 +57,7 @@ var CreateRenderTexture = function (scene, width, height, color, name) {
     }
     text.text = name;
     return scene.add.rexPerspectiveRenderTexture(0, 0, width, height, { hideCCW: true })
-        .fill(color, 1)
+        .fill(color)
         .draw(text, width / 2, height / 2)
 }
 
