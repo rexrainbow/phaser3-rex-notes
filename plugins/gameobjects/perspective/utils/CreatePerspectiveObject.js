@@ -24,16 +24,14 @@ var CreatePerspectiveObject = function (scene, config) {
             case 'image':
                 perspectiveObject = new Image(scene,
                     0, 0,
-                    config.key, config.frame,
-                    { hideCCW: true }
+                    config.key, config.frame
                 );
                 break;
 
             case 'rendertexture':
                 perspectiveObject = new RenderTexture(scene,
                     0, 0,
-                    config.width, config.height,
-                    { hideCCW: true }
+                    config.width, config.height
                 );
                 break;
         }

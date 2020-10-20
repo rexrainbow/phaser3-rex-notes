@@ -14,7 +14,7 @@ class Flip extends TweenBase {
     resetFromJSON(o) {
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 500));
-        this.setEase(GetValue(o, 'ease', 'Sine'));
+        this.setEase(GetValue(o, 'ease', 'Cubic'));
         this.setFrontToBackDirection(GetValue(o, 'direction.frontToBack', 0));
         this.setBackToFrontDirection(GetValue(o, 'direction.backToFront', 1));
         return this;

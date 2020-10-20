@@ -16,7 +16,7 @@ class Image extends Phaser.GameObjects.Mesh {
 
         this.setPerspective(this.width, this.height, FOV);
         this.panZ(PanZ);
-        this.hideCCW = GetValue(config, 'hideCCW', false);
+        this.hideCCW = GetValue(config, 'hideCCW', true);
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
         var girdHeight = GetValue(config, 'girdHeight', girdWidth);

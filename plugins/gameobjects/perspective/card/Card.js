@@ -17,10 +17,18 @@ class Card extends Container {
             y = GetValue(config, 'y', 0);
         }
 
+        var orientation = GetValue(config, 'orientation', 0)
+
         var backFace = CreatePerspectiveObject(scene, GetValue(config, 'back'))
             .setPosition(x, y);
         var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
             .setPosition(x, y);
+
+        if (orientation === 0) { // Flip around Y
+            backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
+        } else { // Flip around X
+            backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
+        }
 
         var width = GetValue(config, 'width');
         var height = GetValue(config, 'height');
@@ -37,14 +45,12 @@ class Card extends Container {
         super(scene, x, y, width, height);
         this.type = 'rexPerspectiveCard';
 
-        this.add(backFace).add(frontFace);
+        this.addMultiple([backFace, frontFace]);
         this.backFace = backFace;
         this.frontFace = frontFace;
 
-        this.setOrientation(GetValue(config, 'orientation', 0));
-        this.setFace(GetValue(config, 'face', 0))
-        backFace.forceUpdate();
-        frontFace.forceUpdate();
+        this.setOrientation(orientation);
+        this.setFace(GetValue(config, 'face', 0));
 
         var flipConfig = GetValue(config, 'flip', undefined);
         if (flipConfig !== false) {
@@ -58,10 +64,7 @@ class Card extends Container {
 
     set rotationX(value) {
         this.frontFace.rotationX = value;
-
-        if (this.orientation === 1) {
-            this.backFace.rotationX = value - RAD180;
-        }
+        this.backFace.rotationX = value;
     }
 
     get angleX() {
@@ -78,9 +81,7 @@ class Card extends Container {
 
     set rotationY(value) {
         this.frontFace.rotationY = value;
-        if (this.orientation === 0) {
-            this.backFace.rotationY = value - RAD180;
-        }
+        this.backFace.rotationY = value;
     }
 
     get angleY() {
@@ -132,11 +133,12 @@ class Card extends Container {
         }
         this._face = face;
 
-        var angle = (face) ? 180 : 0;
-        if (this.orientation === 0) {
+        var isBackFace = (face === 1);
+        var angle = (isBackFace) ? 180 : 0;
+        if (this.orientation === 0) {  // Flip around Y
             this.angleY = angle;
-        } else {
-            this.angleY = angle;
+        } else {  // Flip around X
+            this.angleX = angle;
         }
     }
 

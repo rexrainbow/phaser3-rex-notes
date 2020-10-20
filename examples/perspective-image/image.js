@@ -16,14 +16,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(100, 300, 'poker', 'diamonds-1');
-        var image = this.add.rexPerspectiveImage(100, 300, 'poker', 'diamonds-1').setAlpha(0.8);
+        var image = this.add.rexPerspectiveImage(100, 300, 'poker', 'diamonds-1', { hideCCW: false }).setAlpha(0.8);
         console.log(image.width, image.height);
 
         this.add.image(300, 300, 'card').setScale(0.5);
-        var image2 = this.add.rexPerspectiveImage(300, 300, 'card').setAlpha(0.8).setScale(0.5);
+        var image2 = this.add.rexPerspectiveImage(300, 300, 'card', null, { hideCCW: false }).setAlpha(0.8).setScale(0.5);
 
         this.add.image(500, 300, 'card2').setScale(0.5);
-        var image3 = this.add.rexPerspectiveImage(500, 300, 'card2').setAlpha(0.8).setScale(0.5);
+        var image3 = this.add.rexPerspectiveImage(500, 300, 'card2', null, { hideCCW: false }).setAlpha(0.8).setScale(0.5);
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
