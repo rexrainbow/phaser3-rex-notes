@@ -1,7 +1,7 @@
 /**
  * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2019 Photon Storm Ltd.
- * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+ * @copyright    2020 Photon Storm Ltd.
+ * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
 var Utils = Phaser.Renderer.WebGL.Utils;
@@ -22,7 +22,7 @@ var Utils = Phaser.Renderer.WebGL.Utils;
  */
 var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
 {
-    var fillTintColor = Utils.getTintAppendFloatAlphaAndSwap(src.fillColor, src.fillAlpha * alpha);
+    var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
 
     var path = src.pathData;
     var pathIndexes = src.pathIndexes;
@@ -48,7 +48,7 @@ var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
 
         var tx2 = calcMatrix.getX(x2, y2);
         var ty2 = calcMatrix.getY(x2, y2);
-    
+
         pipeline.setTexture2D();
 
         pipeline.batchTri(tx0, ty0, tx1, ty1, tx2, ty2, 0, 0, 1, 1, fillTintColor, fillTintColor, fillTintColor, pipeline.tintEffect);

@@ -5,6 +5,7 @@
  */
 
 var FillPathWebGL = require('../../utils/FillPathWebGL');
+var GetCalcMatrix = require('../../../utils/GetCalcMatrix');
 var StrokePathWebGL = require('../../utils/StrokePathWebGL');
 
 /**
@@ -22,36 +23,13 @@ var StrokePathWebGL = require('../../utils/StrokePathWebGL');
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var PolygonWebGLRenderer = function (renderer, src,  camera, parentMatrix)
+var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix)
 {
-    var pipeline = this.pipeline;
+    var pipeline = renderer.pipelines.set(this.pipeline);
 
-    var camMatrix = pipeline._tempMatrix1;
-    var shapeMatrix = pipeline._tempMatrix2;
-    var calcMatrix = pipeline._tempMatrix3;
+    var result = GetCalcMatrix(src, camera, parentMatrix);
 
-    renderer.setPipeline(pipeline);
-
-    shapeMatrix.applyITRS(src.x, src.y, src.rotation, src.scaleX, src.scaleY);
-
-    camMatrix.copyFrom(camera.matrix);
-
-    if (parentMatrix)
-    {
-        //  Multiply the camera by the parent matrix
-        camMatrix.multiplyWithOffset(parentMatrix, -camera.scrollX * src.scrollFactorX, -camera.scrollY * src.scrollFactorY);
-
-        //  Undo the camera scroll
-        shapeMatrix.e = src.x;
-        shapeMatrix.f = src.y;
-    }
-    else
-    {
-        shapeMatrix.e -= camera.scrollX * src.scrollFactorX;
-        shapeMatrix.f -= camera.scrollY * src.scrollFactorY;
-    }
-
-    camMatrix.multiply(shapeMatrix, calcMatrix);
+    var calcMatrix = pipeline._tempMatrix3.copyFrom(result.calc);
 
     var dx = src._displayOriginX;
     var dy = src._displayOriginY;

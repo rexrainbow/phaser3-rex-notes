@@ -15,14 +15,15 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
             y = 0;
         }
 
-        var iteration = GetValue(radiusConfig, 'iteration', undefined);
-        radiusConfig = GetValue(radiusConfig, 'radius', radiusConfig);
-        var geom = new GeomRoundRectangle(0, 0, width, height, radiusConfig);
+        var geom = new GeomRoundRectangle();  // Configurate it later
         super(scene, 'RoundRectangle', geom);
 
+        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+        geom.setTo(0, 0, width, height, radius);
+
+        var iteration = GetValue(radiusConfig, 'iteration', undefined);
         this.setIteration(iteration);
         this.setPosition(x, y);
-        // this.setSize(this.geom.width, this.geom.height);
 
         if (fillColor !== undefined) {
             this.setFillStyle(fillColor, fillAlpha);
