@@ -123,6 +123,23 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
     var image = new MyPerspectiveImage(scene, x, y, texture, frame, config);
     ```
 
+### Transform vertices
+
+Offset then rotate all vertices.
+
+```javascript
+image.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
+```
+
+- `x`, `y`, `z` : Offset vertices
+    - `z+` : Near
+    - `z-` : Far
+    - `x-` : Left
+    - `x+` : Right
+    - `y+` : Up
+    - `y-` : Down
+- `rotateX`, `rotateY`, `rotateZ` : Rotate vertices
+
 ### Rotation
 
 - Get rotation angle
