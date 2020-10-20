@@ -17,12 +17,12 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
             width: 200, height: 200,
 
-            front: CreateRenderTexture(this, 200, 200, 0xC40000, '1'),
-            back: CreateRenderTexture(this, 200, 200, 0x00C400, '2'),
-            left: CreateRenderTexture(this, 200, 200, 0x0000C4, '3'),
-            right: CreateRenderTexture(this, 200, 200, 0xC4C400, '4'),
-            top: CreateRenderTexture(this, 200, 200, 0xC4C4C4, '5'),
-            bottom: CreateRenderTexture(this, 200, 200, 0x545454, '6'),
+            front: CreateRenderTexture(this, 200, 200, 0xFF4C4C, '1'),
+            back: CreateRenderTexture(this, 200, 200, 0x4CFF4C, '2'),
+            left: CreateRenderTexture(this, 200, 200, 0x4CFFFF, '3'),
+            right: CreateRenderTexture(this, 200, 200, 0xFFFFC4, '4'),
+            top: CreateRenderTexture(this, 200, 200, 0x4C4CFF, '5'),
+            bottom: CreateRenderTexture(this, 200, 200, 0xFF76FF, '6'),
         })
 
         this.input.on('pointermove', function (pointer) {
