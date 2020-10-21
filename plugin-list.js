@@ -12,6 +12,7 @@ module.exports = {
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
+    'perspectiveimage': './plugins/perspectiveimage-plugin.js',
     // effect layer (shader)
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',
