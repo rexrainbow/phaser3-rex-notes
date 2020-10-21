@@ -8,8 +8,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('card', 'assets/images/card2.png');
-        this.load.image('card-back', 'assets/images/card2-back.png');
     }
 
     create() {
