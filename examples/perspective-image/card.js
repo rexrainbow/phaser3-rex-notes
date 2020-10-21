@@ -29,10 +29,8 @@ var CreateCard = function (scene, x, y, frontFace) {
         face: 'back',
 
         flip: {            
-            direction: {
-                frontToBack: 'right',
-                backToFront: 'left'
-            },
+            frontToBack: 'right',
+            backToFront: 'left',
             duration: 1000,
             ease: 'Cubic'
         }

@@ -1,6 +1,6 @@
 ## Introduction
 
-Image with perspective rotation.
+Render texture with perspective rotation.
 
 - Author: Rex
 - Game object
@@ -21,9 +21,9 @@ Image with perspective rotation.
     ```javascript
     scene.load.plugin('rexperspectiveimageplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexperspectiveimageplugin.min.js', true);
     ```
-- Add image object
+- Add render texture object
     ```javascript
-    var image = scene.add.rexPerspectiveImage(x, y, texture, frame, config);
+    var rt = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
     ```
 
 #### Import plugin
@@ -50,9 +50,9 @@ Image with perspective rotation.
     };
     var game = new Phaser.Game(config);
     ```
-- Add image object
+- Add render texture object
     ```javascript
-    var image = scene.add.rexPerspectiveImage(x, y, texture, frame, config);
+    var rt = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
     ```
 
 #### Import class
@@ -65,30 +65,30 @@ Image with perspective rotation.
     ```javascript
     import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
-- Add image object
-    ```javascript    
-    var image = new Perspective.PerspectiveImage(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+- Add render texture object
+    ```javascript
+    var rt = new Perspective.PerspectiveRenderTexturege(scene, x, y, width, height, config);
+    sscene.add.existing(rt);
     ```
 
 ### Create instance
 
 ```javascript
-var image = scene.add.rexPerspectiveImage(x, y, texture, frame, {
+var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, {
     // hideCCW: true,
     // gridWidth: 32,
     // girdHeight: 32
 });
 ```
 
-Add perspectiveimage from JSON
+Add prespective render texture from JSON
 
 ```javascript
-var perspectiveimage = scene.make.rexPerspectiveImage({
+var rt = scene.make.rexPerspectiveRenderTexturege({
     x: 0,
     y: 0,
-    key: null,
-    frame: null,
+    width: 32,
+    height: 32,
 
     // hideCCW: false,
     // gridWidth: 32,
@@ -102,9 +102,9 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
 
 - Define class
     ```javascript
-    class MyPerspectiveImage extends PerspectiveImage {
-        constructor(scene, x, y, texture, frame, config) {
-            super(scene, x, y, texture, frame, config);
+    class MyPerspectiveRenderTexturege extends PerspectiveRenderTexturege {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
             // ...
             scene.add.existing(this);
         }
@@ -120,62 +120,60 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var image = new MyPerspectiveImage(scene, x, y, texture, frame, config);
+    var image = new MyPerspectiveRenderTexturege(scene, x, y, width, height, config);
     ```
 
-### Transform vertices
+### Paste texture
 
-Offset then rotate all vertices.
+- Paste game object
+    ```javascript
+    rt.draw(gameObject, x, y);
+    // rt.draw(gameObject, x, y, alpha, tint);
+    ```
+   - `gameObject` : a game object, or an array of game objects
+- Paste game objects in a [group](group.md)
+    ```javascript
+    rt.draw(group, x, y);
+    // rt.draw(group, x, y, alpha, tint);
+    ```
+- Paste game objects in a scene
+    ```javascript
+    rt.draw(scene.children, x, y);
+    // rt.draw(scene.children, x, y, alpha, tint);
+    ```
+- Paste texture
+    ```javascript
+    rt.draw(key, x, y);
+    // rt.draw(key, x, y, alpha, tint);
+    ```
+    or
+    ```javascript
+    rt.drawFrame(key, frame, x, y);
+    // rt.drawFrame(key, frame, x, y, alpha, tint);
+    ```
+    - `key` : The key of the texture to be used, as stored in the Texture Manager.
+
+### Erase
 
 ```javascript
-image.transformVerts(x, y, z, rotateX, rotateY, rotateZ);
+rt.erase(gameObject, x, y);
 ```
 
-- `x`, `y`, `z` : Offset vertices
-    - `z+` : Near
-    - `z-` : Far
-    - `x-` : Left
-    - `x+` : Right
-    - `y+` : Up
-    - `y-` : Down
-- `rotateX`, `rotateY`, `rotateZ` : Rotate vertices
+- `gameObject` : a game object, or an array of game objects
 
-### Rotation
-
-- Get rotation angle
-    ```javascript
-    var angleX = image.angleX; // Angle in degrees
-    var angleY = image.angleY; // Angle in degrees
-    var angleZ = image.angleZ; // Angle in degrees
-    ```
-    or
-    ```javascript
-    var rotationX = image.rotationX; // Angle in radians
-    var rotationY = image.rotationY; // Angle in radians
-    var rotationZ = image.rotationZ; // Angle in radians
-    ```
-- Set rotation angle
-    ```javascript
-    image.angleX = angleX; // Angle in degrees
-    image.angleY = angleY; // Angle in degrees
-    image.angleZ = angleZ; // Angle in degrees
-    ```
-    or
-    ```javascript
-    image.rotationX = rotationX; // Angle in radians
-    image.rotationY = rotationY; // Angle in radians
-    image.rotationZ = rotationZ; // Angle in radians
-    ```
-
-#### Flip
+### Clear
 
 ```javascript
-scene.tweens.add({
-    targets: image,
-    angleY: { start: 0, to: -180}
-})
+rt.clear();
+```
+
+### Fill
+
+```javascript
+rt.fill(rgb, alpha);
+// rt.fill(rgb, alpha, x, y, width, height);
 ```
 
 ### Other properties
 
-See [Mesh](mesh.md) game object.
+See [Perspective image](perspective-image.md) game object.

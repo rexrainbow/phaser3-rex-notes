@@ -17,13 +17,12 @@ class Card extends Container {
             y = GetValue(config, 'y', 0);
         }
 
-        var orientation = GetValue(config, 'orientation', 0)
-
         var backFace = CreatePerspectiveObject(scene, GetValue(config, 'back'))
             .setPosition(x, y);
         var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
             .setPosition(x, y);
 
+        var orientation = GetValue(config, 'orientation', 0);
         if (orientation === 0) { // Flip around Y
             backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
         } else { // Flip around X
@@ -157,8 +156,11 @@ class Card extends Container {
 const ORIENTATIONMODE = {
     x: 0,
     horizontal: 0,
+    h: 0,
+
     y: 1,
     vertical: 1,
+    v: 1
 }
 
 const FACEMODE = {

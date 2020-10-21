@@ -120,6 +120,13 @@ flip.setDuration(duration);
 // flip.duration = duration;
 ```
 
+### Set ease
+
+```javascript
+flip.setEase(ease);
+// flip.ease = ease;
+```
+
 ### Faces
 
 #### Current face
@@ -154,7 +161,7 @@ flip.setDuration(duration);
     - `callback` : 
         ```javascript
         function(gameObject) {
-            // ...            
+            // ...
         }
         ```
 - Back face
@@ -168,7 +175,7 @@ flip.setDuration(duration);
     - `callback` : 
         ```javascript
         function(gameObject) {
-            // ...            
+            // ...
         }
         ```
 

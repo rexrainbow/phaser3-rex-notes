@@ -43,7 +43,10 @@ nav:
         - Texture: texture.md
     - Mesh:
         - Mesh: mesh.md
-        - Perspective image: perspective-image.md
+        - Perspective:
+            - Image: perspective-image.md
+            - Render texture: perspective-rendertexture.md
+            - Card: perspective-card.md
         - Rope: rope.md        
     - Text:
         - Canvas text:
