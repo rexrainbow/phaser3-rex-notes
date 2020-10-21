@@ -22,13 +22,6 @@ class Card extends Container {
         var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
             .setPosition(x, y);
 
-        var orientation = GetValue(config, 'orientation', 0);
-        if (orientation === 0) { // Flip around Y
-            backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
-        } else { // Flip around X
-            backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
-        }
-
         var width = GetValue(config, 'width');
         var height = GetValue(config, 'height');
         if ((width === undefined) || (height === undefined)) {
@@ -48,13 +41,20 @@ class Card extends Container {
         this.backFace = backFace;
         this.frontFace = frontFace;
 
-        this.setOrientation(orientation);
-        this.setFace(GetValue(config, 'face', 0));
-
         var flipConfig = GetValue(config, 'flip', undefined);
         if (flipConfig !== false) {
             this.flip = new Flip(this, flipConfig);
         }
+
+        this.setOrientation(GetValue(config, 'orientation', 0));
+        this.setFace(GetValue(config, 'face', 0));
+
+        if (this.orientation === 0) { // Flip around Y
+            backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
+        } else { // Flip around X
+            backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
+        }
+
     }
 
     get rotationX() {
