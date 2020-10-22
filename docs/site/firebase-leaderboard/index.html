@@ -5368,7 +5368,8 @@
     <span class="nx">day</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">week</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">month</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">year</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="nx">year</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">all</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -5378,6 +5379,7 @@
 <li><code>'week'</code>, or <code>'w'</code> : Filter scores by current week. </li>
 <li><code>'month'</code>, <code>'m'</code> : Filter scores by current month.</li>
 <li><code>'year'</code>, <code>'y'</code> : Filter scores by current year. Default value.</li>
+<li><code>'all'</code>, <code>'a'</code> : No time filter to track all scores.</li>
 </ul>
 </li>
 <li><code>pageItemCount</code> : Item count of a page, default value is <code>100</code></li>
@@ -5390,7 +5392,8 @@
 - <code>tagD</code>(ascending), <code>scoreD</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
 - <code>tagW</code>(ascending), <code>scoreW</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
 - <code>tagM</code>(ascending), <code>scoreM</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)<br />
-- <code>tagY</code>(ascending), <code>scoreY</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)</p>
+- <code>tagY</code>(ascending), <code>scoreY</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)
+- <code>tagA</code>(ascending), <code>scoreA</code>(descending), <code>boardID</code>(ascending), <code>tag</code>(ascending)</p>
 </div>
 <h3 id="post-score">Post score<a class="headerlink" href="#post-score" title="Permanent link">&para;</a></h3>
 <ol>
@@ -5427,7 +5430,7 @@
 <li><code>extraData</code> : Extra data in JSON format.</li>
 <li><code>timestamp</code> : Timestamp of posting.<ul>
 <li><code>undefined</code> : Current time.</li>
-<li>A number : For debug usage</li>
+<li>A number : For debug usage.</li>
 </ul>
 </li>
 </ul>
