@@ -5427,7 +5427,7 @@
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>score</code> : A number, scores will be sorted descend.</li>
-<li><code>extraData</code> : Extra data in JSON format.</li>
+<li><code>extraData</code> : Extra data in <em>JSON</em> format.</li>
 <li><code>timestamp</code> : Timestamp of posting.<ul>
 <li><code>undefined</code> : Current time.</li>
 <li>A number : For debug usage.</li>
@@ -5449,9 +5449,9 @@
 </ul>
 </li>
 <li><code>score</code> : Score object.<ul>
-<li>Time filter enabled :  <code>{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY}</code><ul>
-<li><code>scoreD</code>, <code>scoreW</code>, <code>scoreM</code>, <code>scoreY</code> : Score of day/week/month/year.</li>
-<li><code>tagD</code>, <code>tagW</code>, <code>tagM</code>, <code>tagY</code> : Time tag of day/week/month/year.</li>
+<li>Time filter enabled :  <code>{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY, tagA}</code><ul>
+<li><code>scoreD</code>, <code>scoreW</code>, <code>scoreM</code>, <code>scoreY</code>, <code>scoreA</code> : Score of day/week/month/year/all-time.</li>
+<li><code>tagD</code>, <code>tagW</code>, <code>tagM</code>, <code>tagY</code>, <code>tagA</code> : Time tag of day/week/month/year/all-time.</li>
 </ul>
 </li>
 <li>Time filter disabled : <code>{userID, score}</code></li>
@@ -5484,13 +5484,14 @@
 </ul>
 </li>
 <li>Set time filter, optional.
-    <div class="codehilite"><pre><span></span><code><span class="nx">leaderBoard</span><span class="p">.</span><span class="nx">setTimeFilterType</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>    
+    <div class="codehilite"><pre><span></span><code><span class="nx">leaderBoard</span><span class="p">.</span><span class="nx">setTimeFilterType</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>type</code> : <ul>
 <li><code>'day'</code>, or <code>'d'</code> : Filter scores by current day.</li>
-<li><code>'week'</code>, or <code>'w'</code> : Filter scores by current week. </li>
+<li><code>'week'</code>, or <code>'w'</code> : Filter scores by current week.</li>
 <li><code>'month'</code>, <code>'m'</code> : Filter scores by current month.</li>
 <li><code>'year'</code>, <code>'y'</code> : Filter scores by current year.</li>
+<li><code>'all'</code>, <code>'a'</code> : No time filter to track all scores.</li>
 </ul>
 </li>
 </ul>
@@ -5553,7 +5554,7 @@
 <li>Delete board
     <div class="codehilite"><pre><span></span><code><span class="nx">leaderBoard</span><span class="p">.</span><span class="nx">deleteBoard</span><span class="p">(</span><span class="nx">boardID</span><span class="p">,</span> <span class="nx">tag</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="p">})</span>    
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> <span class="p">})</span>
 </code></pre></div></li>
 </ul>
                 

@@ -204,7 +204,7 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
         .catch(function(error) { })
     ```
     - `score` : A number, scores will be sorted descend.
-    - `extraData` : Extra data in JSON format.
+    - `extraData` : Extra data in *JSON* format.
     - `timestamp` : Timestamp of posting.
         - `undefined` : Current time.
         - A number : For debug usage.
@@ -221,9 +221,9 @@ leaderBoard.getScore()
 - `userID` : User ID, optional.
     - `undefined` : Current user ID.
 - `score` : Score object.
-    - Time filter enabled :  `{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY}`
-        - `scoreD`, `scoreW`, `scoreM`, `scoreY` : Score of day/week/month/year.
-        - `tagD`, `tagW`, `tagM`, `tagY` : Time tag of day/week/month/year.
+    - Time filter enabled :  `{userID, scoreD, scoreW, scoreM, scoreY, tagD, tagW, tagM, tagY, tagA}`
+        - `scoreD`, `scoreW`, `scoreM`, `scoreY`, `scoreA` : Score of day/week/month/year/all-time.
+        - `tagD`, `tagW`, `tagM`, `tagY`, `tagA` : Time tag of day/week/month/year/all-time.
     - Time filter disabled : `{userID, score}`
 
 ### Get my rank
@@ -252,13 +252,14 @@ leaderBoard.getRank()
         ```
 1. Set time filter, optional.
     ```javascript
-    leaderBoard.setTimeFilterType(type);    
+    leaderBoard.setTimeFilterType(type);
     ```
     - `type` : 
         - `'day'`, or `'d'` : Filter scores by current day.
-        - `'week'`, or `'w'` : Filter scores by current week. 
+        - `'week'`, or `'w'` : Filter scores by current week.
         - `'month'`, `'m'` : Filter scores by current month.
         - `'year'`, `'y'` : Filter scores by current year.
+        - `'all'`, `'a'` : No time filter to track all scores.
 1. Load scores page by page.
     - Load first page.
         ```javascript
@@ -316,5 +317,5 @@ leaderBoard.getRank()
     ```javascript
     leaderBoard.deleteBoard(boardID, tag)
         .then(function(){ })
-        .catch(function(){ })    
+        .catch(function(){ })
     ```
