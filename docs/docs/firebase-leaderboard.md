@@ -168,8 +168,8 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     - `tagD`(ascending), `scoreD`(descending), `boardID`(ascending), `tag`(ascending)  
     - `tagW`(ascending), `scoreW`(descending), `boardID`(ascending), `tag`(ascending)  
     - `tagM`(ascending), `scoreM`(descending), `boardID`(ascending), `tag`(ascending)  
-    - `tagY`(ascending), `scoreY`(descending), `boardID`(ascending), `tag`(ascending)
-    - `tagA`(ascending), `scoreA`(descending), `boardID`(ascending), `tag`(ascending)
+    - `tagY`(ascending), `scoreY`(descending), `boardID`(ascending), `tag`(ascending)  
+    - `tagA`(ascending), `scoreA`(descending), `boardID`(ascending), `tag`(ascending)  
 
 ### Post score
 
