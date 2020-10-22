@@ -1,7 +1,4 @@
-import { TimeTagKeys, ScoreKeys, FullTimeName } from './Const.js';
-
 var GetScore = function (userID) {
-    var self = this;
     return this.getMyRecordQuery(userID).get()
         .then(function (querySnapshot) {
             var item;

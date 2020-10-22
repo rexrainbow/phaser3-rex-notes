@@ -29,7 +29,7 @@ var Post = function (score, extraData, timeStamp) {
     if (extraData) {
         Object.assign(newRecord, extraData);
     }
-    var curTimeData = GetTime();
+
     var self = this;
     return this.getMyRecordQuery().get()
         .then(function (querySnapshot) {

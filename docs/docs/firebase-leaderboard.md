@@ -149,7 +149,8 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
             day: true,
             week: true,
             month: true,
-            year: true
+            year: true,
+            all: true
         }
         ```
 - `timeFilterType` : Type of time filter.
@@ -157,6 +158,7 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     - `'week'`, or `'w'` : Filter scores by current week. 
     - `'month'`, `'m'` : Filter scores by current month.
     - `'year'`, `'y'` : Filter scores by current year. Default value.
+    - `'all'`, `'a'` : No time filter to track all scores.
 - `pageItemCount` : Item count of a page, default value is `100`
 - `boardID` : Board ID, optional.
 - `tag` : Custom tag, optional.
@@ -167,6 +169,7 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     - `tagW`(ascending), `scoreW`(descending), `boardID`(ascending), `tag`(ascending)  
     - `tagM`(ascending), `scoreM`(descending), `boardID`(ascending), `tag`(ascending)  
     - `tagY`(ascending), `scoreY`(descending), `boardID`(ascending), `tag`(ascending)
+    - `tagA`(ascending), `scoreA`(descending), `boardID`(ascending), `tag`(ascending)
 
 ### Post score
 
@@ -204,7 +207,7 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     - `extraData` : Extra data in JSON format.
     - `timestamp` : Timestamp of posting.
         - `undefined` : Current time.
-        - A number : For debug usage
+        - A number : For debug usage.
 
 ### Get my score
 

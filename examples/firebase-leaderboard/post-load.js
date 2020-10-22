@@ -24,7 +24,9 @@ class Demo extends Phaser.Scene {
         var promises = [];
         for (var i = 0; i < 10; i++) {
             promises.push(
-                leaderBoard.setUser(`${i}`).post(i)
+                leaderBoard.setUser(`${i}`)
+                    .post(i)                      // Post score
+                //.post(i, { country: 'uk' })    // Post score with extra data
             );
         }
         Promise.all(promises)

@@ -87,7 +87,8 @@ class LeaderBoard {
                 d: GetValue(filters, 'day', true),
                 w: GetValue(filters, 'week', true),
                 m: GetValue(filters, 'month', true),
-                y: GetValue(filters, 'year', true)
+                y: GetValue(filters, 'year', true),
+                a: GetValue(filters, 'all', true)
             }
         }
         return this;
