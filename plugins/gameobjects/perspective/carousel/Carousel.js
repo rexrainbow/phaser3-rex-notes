@@ -37,8 +37,9 @@ class Carousel extends FaceContainer {
 
         this.face0RotationY = 0;
 
+        var faceCount = faces.length;
         // Face angle
-        this.faceAngle = DegToRad(360 / faces.length);
+        this.faceAngle = (faceCount > 0) ? DegToRad(360 / faces.length) : 0;
 
         // Face width, face radius
         var faceWidth = GetValue(config, 'faceWidth', undefined);
@@ -46,9 +47,14 @@ class Carousel extends FaceContainer {
             faceWidth = (firstFace) ? firstFace.width : 0;
         }
         this.faceWidth = faceWidth;
-        this.faceRadius = (this.faceWidth / 2) / Math.tan(this.faceAngle / 2);
+        if (faceCount > 2) {
+            this.faceRadius = (faceWidth / 2) / Math.tan(this.faceAngle / 2);
+        } else {
+            this.faceRadius = faceWidth / 2;
+        }
 
         LayoutFaces(this, faces);
+        this.rotationY = 0;
     }
 
     get rotationY() {

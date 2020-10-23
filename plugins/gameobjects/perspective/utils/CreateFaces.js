@@ -1,12 +1,12 @@
 import CreatePerspectiveObject from './CreatePerspectiveObject.js';
 
-var CreateFaces = function (scene, faceConfig, faceNames) {
+var CreateFaces = function (scene, config, faceNames) {
     var faces;
     if (faceNames === undefined) { // Return an array of faces
         faces = [];
         var face, faceConfig;
-        for (var i = 0, cnt = faceConfig.length; i < cnt; i++) {
-            faceConfig = faceConfig[i];
+        for (var i = 0, cnt = config.length; i < cnt; i++) {
+            faceConfig = config[i];
             if (faceConfig) {
                 face = CreatePerspectiveObject(scene, faceConfig);
             } else {
@@ -19,8 +19,8 @@ var CreateFaces = function (scene, faceConfig, faceNames) {
         var face, name;
         for (var i = 0, cnt = faceNames.length; i < cnt; i++) {
             name = faceNames[i];
-            if (faceConfig.hasOwnProperty(name)) {
-                face = CreatePerspectiveObject(scene, faceConfig[name]);
+            if (config.hasOwnProperty(name)) {
+                face = CreatePerspectiveObject(scene, config[name]);
             } else {
                 face = null;
             }

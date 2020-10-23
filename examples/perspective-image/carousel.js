@@ -43,7 +43,7 @@ const RandInt = Phaser.Math.Between;
 const Pad = Phaser.Utils.String.Pad;
 var GetCardName = function (index) {
     if (index === undefined) {
-        index = RandInt(0, 52);
+        index = RandInt(0, 51);
     }
     return Pad(index.toString(), 3, '0', 1);
 }
