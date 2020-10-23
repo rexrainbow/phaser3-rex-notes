@@ -14,6 +14,10 @@ import PerspectiveCubeFactory from './gameobjects/perspective/cube/Factory.js';
 import PerspectiveCubeCreator from './gameobjects/perspective/cube/Creator.js';
 import PerspectiveCube from './gameobjects/perspective/cube/Cube.js';
 
+import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Factory.js';
+import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
+import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
+
 import SetValue from './utils/object/SetValue.js';
 
 class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
@@ -26,6 +30,7 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);
         pluginManager.registerGameObject('rexPerspectiveCard', PerspectiveCardFactory, PerspectiveCardCreator);
         pluginManager.registerGameObject('rexPerspectiveCube', PerspectiveCubeFactory, PerspectiveCubeCreator);
+        pluginManager.registerGameObject('rexPerspectiveCarousel', PerspectiveCarouselFactory, PerspectiveCarouselCreator);
     }
 
     start() {
@@ -38,5 +43,6 @@ SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', PerspectiveImage);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', PerspectiveRenderTexture);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', PerspectiveCard);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCube', PerspectiveCube);
+SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', PerspectiveCarousel);
 
 export default PerspectiveImagePlugin;

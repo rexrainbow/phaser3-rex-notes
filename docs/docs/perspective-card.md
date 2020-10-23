@@ -193,10 +193,12 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
 - Front face
     ```javascript
     var frontFace = card.frontFace;
+    // var frontFace = card.faces.front;
     ```
 - Back face
     ```javascript
     var backFace = card.backFace;
+    // var backFace = card.faces.back;
     ```
 
 ### Flip behavior

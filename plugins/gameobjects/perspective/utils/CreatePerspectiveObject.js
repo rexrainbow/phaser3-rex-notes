@@ -1,6 +1,7 @@
 import Image from '../image/Image.js';
 import RenderTexture from '../rendertexture/RenderTexture.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DefaultImageConfig = { key: '__WHITE' };
 
 var CreatePerspectiveObject = function (scene, config) {
@@ -9,9 +10,7 @@ var CreatePerspectiveObject = function (scene, config) {
     }
 
     var perspectiveObject;
-    if (config instanceof Image) {
-        perspectiveObject = config;
-    } else {
+    if (IsPlainObject(config)) {
         if (!config.hasOwnProperty('type')) {
             if (config.hasOwnProperty('key')) {
                 config.type = 'image';
@@ -37,6 +36,8 @@ var CreatePerspectiveObject = function (scene, config) {
         }
 
         scene.add.existing(perspectiveObject);
+    } else {
+        perspectiveObject = config;
     }
 
     return perspectiveObject;

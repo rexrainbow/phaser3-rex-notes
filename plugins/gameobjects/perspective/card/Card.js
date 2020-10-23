@@ -1,15 +1,15 @@
-import Container from '../../containerlite/ContainerLite.js';
-import CreatePerspectiveObject from '../utils/CreatePerspectiveObject.js';
+import FaceContainer from '../utils/FaceContainer.js';
+import CreateFaces from '../utils/CreateFaces.js';
+import ForEachFace from '../utils/ForEachFace.js';
+import LayoutFaces from './LayoutFaces.js';
 import Flip from './Flip.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
 
-const RAD180 = DegToRad(180);
+const FaceNames = ['back', 'front'];
 
-class Card extends Container {
+class Card extends FaceContainer {
     constructor(scene, x, y, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -17,29 +17,36 @@ class Card extends Container {
             y = GetValue(config, 'y', 0);
         }
 
-        var backFace = CreatePerspectiveObject(scene, GetValue(config, 'back'))
-            .setPosition(x, y);
-        var frontFace = CreatePerspectiveObject(scene, GetValue(config, 'front'))
-            .setPosition(x, y);
+        var faces = CreateFaces(scene, config, FaceNames);
+        var backFace = faces.back;
+        var frontFace = faces.front;
 
         var width = GetValue(config, 'width');
         var height = GetValue(config, 'height');
         if ((width === undefined) || (height === undefined)) {
             if (width === undefined) {
-                width = Math.max(frontFace.width, backFace.width);
+                var frontFaceWidth = (frontFace) ? frontFace.width : 0;
+                var backFaceWidth = (backFace) ? backFace.width : 0;
+                width = Math.max(frontFaceWidth, backFaceWidth);
             }
 
             if (height === undefined) {
-                height = Math.max(frontFace.height, backFace.height);
+                var frontFaceHeight = (frontFace) ? frontFace.height : 0;
+                var backFaceHeight = (backFace) ? backFace.height : 0;
+                height = Math.max(frontFaceHeight, backFaceHeight);
             }
         }
 
-        super(scene, x, y, width, height);
+        super(scene, x, y, width, height, faces);
         this.type = 'rexPerspectiveCard';
 
-        this.addMultiple([backFace, frontFace]);
-        this.backFace = backFace;
-        this.frontFace = frontFace;
+        this.frontFaceRotationX = 0;
+        this.frontFaceRotationY = 0;
+        this.frontFaceRotationZ = 0;
+
+        ForEachFace(faces, function (face, name) {
+            this[`${name}Face`] = face;
+        }, this);
 
         var flipConfig = GetValue(config, 'flip', undefined);
         if (flipConfig !== false) {
@@ -47,71 +54,42 @@ class Card extends Container {
         }
 
         this.setOrientation(GetValue(config, 'orientation', 0));
+        LayoutFaces(this, faces);
+
         this.setFace(GetValue(config, 'face', 0));
-
-        if (this.orientation === 0) { // Flip around Y
-            backFace.transformVerts(0, 0, 0, 0, RAD180, 0);
-        } else { // Flip around X
-            backFace.transformVerts(0, 0, 0, RAD180, 0, 0);
-        }
-
     }
 
     get rotationX() {
-        return this.frontFace.rotationX;
+        return this.frontFaceRotationX;
     }
 
     set rotationX(value) {
-        this.frontFace.rotationX = value;
-        this.backFace.rotationX = value;
-    }
-
-    get angleX() {
-        return RadToDeg(this.rotationX);
-    }
-
-    set angleX(value) {
-        this.rotationX = DegToRad(value);
+        this.frontFaceRotationX = value;
+        ForEachFace(this.faces, function (face) {
+            face.rotationX = value;
+        }, null, true);
     }
 
     get rotationY() {
-        return this.frontFace.rotationY;
+        return this.frontFaceRotationY;
     }
 
     set rotationY(value) {
-        this.frontFace.rotationY = value;
-        this.backFace.rotationY = value;
-    }
-
-    get angleY() {
-        return RadToDeg(this.rotationY);
-    }
-
-    set angleY(value) {
-        this.rotationY = DegToRad(value);
+        this.frontFaceRotationY = value;
+        ForEachFace(this.faces, function (face) {
+            face.rotationY = value;
+        }, null, true);
     }
 
     get rotationZ() {
-        return this.frontFace.rotationZ;
+        return this.frontFaceRotationZ;
     }
 
     set rotationZ(value) {
-        this.frontFace.rotationZ = value;
-        this.backFace.rotationZ = value;
-    }
-
-    get angleZ() {
-        return RadToDeg(this.rotationZ);
-    }
-
-    set angleZ(value) {
-        this.rotationZ = DegToRad(value);
-    }
-
-    setDebug(graphic, callback) {
-        this.frontFace.setDebug(graphic, callback);
-        this.backFace.setDebug(graphic, callback);
-        return this;
+        this.frontFaceRotationZ = value;
+        ForEachFace(this.faces, function (face) {
+            face.rotationZ = value;
+        }, null, true);
     }
 
     setOrientation(orientation) {

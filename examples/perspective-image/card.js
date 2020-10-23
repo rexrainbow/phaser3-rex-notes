@@ -23,12 +23,13 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateCard = function (scene, x, y, frontFace) {
-    return scene.add.rexPerspectiveCard(x, y, {
+    return scene.add.rexPerspectiveCard({
+        x: x, y: y,
         front: { key: frontFace },
         back: { key: 'card-back' },
         face: 'back',
 
-        flip: {            
+        flip: {
             frontToBack: 'right',
             backToFront: 'left',
             duration: 1000,
