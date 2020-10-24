@@ -47,7 +47,8 @@ class Carousel extends FaceContainer {
         // Face width, face radius
         var faceWidth = GetValue(config, 'faceWidth', undefined);
         if (faceWidth === undefined) {
-            faceWidth = (firstFace) ? firstFace.width : 0;
+            var faceSpace = GetValue(config, 'faceSpace', 0);
+            faceWidth = (firstFace) ? (firstFace.width + faceSpace) : 0;
         }
         this.faceWidth = faceWidth;
         if (faceCount > 2) {
@@ -58,7 +59,7 @@ class Carousel extends FaceContainer {
 
         LayoutFaces(this, faces);
 
-        // Z sort
+        // z-index
         this.zStart = GetValue(config, 'z', 1);
         this.zEnd = GetValue(config, 'zEnd', this.zStart - 1);
 

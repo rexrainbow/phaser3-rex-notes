@@ -21,7 +21,8 @@ class Demo extends Phaser.Scene {
         var carousel = this.add.rexPerspectiveCarousel({
             x: 400, y: 300,
 
-            faces: faces
+            faces: faces,
+            faceSpace: 60
         })
 
         this.input.on('pointermove', function (pointer) {
@@ -33,7 +34,7 @@ class Demo extends Phaser.Scene {
             carousel.rotationY += pointer.velocity.x * (1 / 800);
         });
 
-        
+
         this.add.graphics({
             lineStyle: {
                 width: 3,
