@@ -32,6 +32,22 @@ class Demo extends Phaser.Scene {
 
             carousel.rotationY += pointer.velocity.x * (1 / 800);
         });
+
+        
+        this.add.graphics({
+            lineStyle: {
+                width: 3,
+                color: 0xff0000,
+                alpha: 1
+            }
+        })
+            .strokeRect(
+                400 - (carousel.width / 2),
+                300 - (carousel.height / 2),
+                carousel.width,
+                carousel.height
+            )
+            .setDepth(1)
     }
 
     update() {

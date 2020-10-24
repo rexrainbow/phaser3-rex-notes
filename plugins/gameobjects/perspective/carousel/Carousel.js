@@ -7,6 +7,9 @@ import LayoutFaces from './LayoutFaces.js';
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
+const RadToDeg = Phaser.Math.RadToDeg;
+const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
+const Linear = Phaser.Math.Linear;
 
 class Carousel extends FaceContainer {
     constructor(scene, x, y, config) {
@@ -54,6 +57,11 @@ class Carousel extends FaceContainer {
         }
 
         LayoutFaces(this, faces);
+
+        // Z sort
+        this.zStart = GetValue(config, 'z', 1);
+        this.zEnd = GetValue(config, 'zEnd', this.zStart - 1);
+
         this.rotationY = 0;
     }
 
@@ -64,8 +72,17 @@ class Carousel extends FaceContainer {
     set rotationY(value) {
         this.face0RotationY = value;
         var deltaAngle = this.faceAngle;
+        var zStart = this.zStart;
+        var zEnd = this.zEnd;
         ForEachFace(this.faces, function (face, i) {
-            face.rotationY = value + (deltaAngle * i);
+            // Set rotationY
+            var rotationY = value + (deltaAngle * i);
+            face.rotationY = rotationY;
+
+            // Set depth
+            var angle = Math.abs(WrapDegrees(RadToDeg(rotationY))); // 0~180
+            var z = Linear(zStart, zEnd, angle / 180);
+            face.setDepth(z);
         }, null, true);
     }
 }
