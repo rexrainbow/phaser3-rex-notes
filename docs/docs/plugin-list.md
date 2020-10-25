@@ -73,6 +73,7 @@
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Perlin](perlin.md): Perlin2/Perlin3 noise and simplex2/simplex3 noise.
 1. [Perspective/Card](perspective-card.md): A container with two perspective-images.
+1. [Perspective/Carousel](perspective-carousel.md): A container with cards.
 1. [Perspective/Image](perspective-image.md): Image with perspective rotation.
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 1. [Pop up](popup.md): Scale up game object.

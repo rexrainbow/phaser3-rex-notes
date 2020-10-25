@@ -11,7 +11,7 @@ A [container](containerlite.md) with two [perspective-images](perspective-card.m
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-card)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-image)
 
 ### Install plugin
 

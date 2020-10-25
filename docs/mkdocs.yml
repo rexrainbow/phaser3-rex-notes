@@ -47,6 +47,7 @@ nav:
             - Image: perspective-image.md
             - Render texture: perspective-rendertexture.md
             - Card: perspective-card.md
+            - Carousel: perspective-carousel.md
         - Rope: rope.md        
     - Text:
         - Canvas text:
