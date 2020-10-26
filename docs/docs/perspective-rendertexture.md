@@ -11,7 +11,7 @@ Render texture with perspective rotation.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-image)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-render-texture)
 
 ### Install plugin
 

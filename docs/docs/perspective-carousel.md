@@ -11,7 +11,7 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-image)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-carousel)
 
 ### Install plugin
 
