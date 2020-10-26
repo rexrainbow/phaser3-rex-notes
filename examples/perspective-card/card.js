@@ -38,8 +38,13 @@ var CreateCard = function (scene, x, y, frontFace) {
     })
         .setScale(0.5)
         .setInteractive()
-        .on('pointerdown', function () {
-            this.flip.flip();
+        .on('pointerdown', function (pointer, localX, localY) {
+            if (localX <= (this.width / 2)) {
+                this.flip.flipLeft();
+            } else {
+                this.flip.flipRight();
+            }
+            // this.flip.flip();
         })
 }
 

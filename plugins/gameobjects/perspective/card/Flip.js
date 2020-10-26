@@ -48,7 +48,7 @@ class Flip extends TweenBase {
         if (typeof (direction) === 'string') {
             direction = DIRMODE[direction];
         }
-        this.endAngleFB = (direction === 0) ? -180 : 180;
+        this.endAngleFB = (direction === 0) ? 180 : -180;
         return this;
     }
 
@@ -56,7 +56,7 @@ class Flip extends TweenBase {
         if (typeof (direction) === 'string') {
             direction = DIRMODE[direction];
         }
-        this.endAngleBF = (direction === 0) ? 180 : -180;
+        this.endAngleBF = (direction === 0) ? -180 : 180;
         return this;
     }
 
@@ -76,8 +76,8 @@ class Flip extends TweenBase {
         var propKey = (this.gameObject.orientation === 0) ? 'angleY' : 'angleX';
         var isFrontToBack = (this.gameObject.face === 0);
         config[propKey] = {
-            start: (isFrontToBack) ? 0 : this.endAngleFB,
-            to: (isFrontToBack) ? this.endAngleBF : 0
+            start: (isFrontToBack) ? 0 : this.endAngleBF,
+            to: (isFrontToBack) ? this.endAngleFB : 0
         };
 
         super.start(config);
@@ -94,10 +94,31 @@ class Flip extends TweenBase {
         this.start();
 
         // Set face index
-        var faceIndex = this.gameObject.currentFaceIndex
+        var faceIndex = this.gameObject.currentFaceIndex;
         this.gameObject.currentFaceIndex = (faceIndex === 0) ? 1 : 0;
         return this;
     }
+
+    flipRight(duration) {
+        if (this.gameObject.currentFaceIndex === 0) { // Front to back
+            this.setFrontToBackDirection(0);
+        } else {  // Back to front
+            this.setBackToFrontDirection(0);
+        }
+        this.flip(duration);
+        return this;
+    }
+
+    flipLeft(duration) {
+        if (this.gameObject.currentFaceIndex === 0) { // Front to back
+            this.setFrontToBackDirection(1);
+        } else {  // Back to front
+            this.setBackToFrontDirection(1);
+        }
+        this.flip(duration);
+        return this;
+    }
+
 }
 
 const DIRMODE = {
