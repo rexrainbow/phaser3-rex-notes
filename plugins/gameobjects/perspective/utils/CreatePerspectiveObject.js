@@ -3,6 +3,10 @@ import RenderTexture from '../rendertexture/RenderTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DefaultImageConfig = { key: '__WHITE' };
+const ClassMap = {
+    image: Image,
+    rendertexture: RenderTexture
+}
 
 var CreatePerspectiveObject = function (scene, config) {
     if (config === undefined) {
@@ -19,22 +23,7 @@ var CreatePerspectiveObject = function (scene, config) {
             }
         }
 
-        switch (config.type) {
-            case 'image':
-                perspectiveObject = new Image(scene,
-                    0, 0,
-                    config.key, config.frame
-                );
-                break;
-
-            case 'rendertexture':
-                perspectiveObject = new RenderTexture(scene,
-                    0, 0,
-                    config.width, config.height
-                );
-                break;
-        }
-
+        perspectiveObject = new (ClassMap[config.type])(scene, config);
         scene.add.existing(perspectiveObject);
     } else {
         perspectiveObject = config;

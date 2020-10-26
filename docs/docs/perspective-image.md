@@ -81,6 +81,20 @@ var image = scene.add.rexPerspectiveImage(x, y, texture, frame, {
 });
 ```
 
+or 
+
+```javascript
+var image = scene.add.rexPerspectiveImage({
+    // x: 0,
+    // y: 0,
+    key,
+    // frame: null,
+    // hideCCW: true,
+    // gridWidth: 32,
+    // girdHeight: 32
+});
+```
+
 Add perspectiveimage from JSON
 
 ```javascript

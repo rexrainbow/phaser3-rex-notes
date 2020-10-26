@@ -1,5 +1,6 @@
 import TransformVerts from '../utils/TransformVerts';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -9,8 +10,16 @@ const FOV = 45;
 const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
 class Image extends Phaser.GameObjects.Mesh {
-    constructor(scene, x, y, texture, frame, config) {
-        super(scene, x, y, texture, frame);
+    constructor(scene, x, y, key, frame, config) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            key = GetValue(config, 'key', null);
+            frame = GetValue(config, 'frame', null);
+        }
+
+        super(scene, x, y, key, frame);
         this.type = 'rexPerspectiveImage';
         this.setSizeToFrame();
 
@@ -25,7 +34,7 @@ class Image extends Phaser.GameObjects.Mesh {
             frameHeight = textureFrame.cutHeight;
         GenerateGridVerts({
             mesh: this,
-            texture: texture, frame: frame,
+            texture: key, frame: frame,
 
             width: frameWidth / this.height,
             height: frameHeight / this.height,

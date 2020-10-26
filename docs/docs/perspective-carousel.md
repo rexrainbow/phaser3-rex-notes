@@ -78,6 +78,7 @@ var carousel = scene.add.rexPerspectiveImage({
     x: 0, y: 0,
 
     faces: [],
+    // face: 0,
 
     // width,
     // height,
@@ -92,13 +93,13 @@ var carousel = scene.add.rexPerspectiveImage({
 
 - `faces` : Array of [perspective-card](perspective-card.md), [perspective-rendertexture](perspective-rendertexture.md), [perspective-image](perspective-image.md), or `null`.
     - *Assume that all faces have the same size*
+- `face` : Index or name of current face (face at angle `0`).
 - `width`, `height` : Specific width and height of this card container.
     - `undefined` : Use width and height of first face.
 - `faceWidth` : Width of face. 
     - `undefined` : Use width of face. Assume that all faces have the same size.
 - `faceSpace` : Extra space of face width. Used when `faceWidth` is `undefined`.
 - `z`, `zEnd` : Range of faces' z-index. Default value is `1`/`0`.
-
 
 Add perspectiveimage from JSON
 
@@ -154,6 +155,19 @@ var faces = carousel.faces;
 ```
 
 - `faces` : Array of face instances.
+
+### Face
+
+- Get
+    ```javascript
+    var face = carousel.face;
+    ```
+    - `face`: Index of `carousel.faces`.
+- Set
+    ```javascript
+    carousel.setFace(face)
+    ```
+    - `face` : Index or name of current face (face at angle `0`).
 
 ### Rotation
 

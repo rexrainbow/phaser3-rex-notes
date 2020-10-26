@@ -1,7 +1,17 @@
 import PerspectiveImage from '../image/Image.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
 class RenderTexture extends PerspectiveImage {
     constructor(scene, x, y, width, height, config) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            width = GetValue(config, 'width', 32);
+            height = GetValue(config, 'height', 32);
+        }
+
         // render-texture -> perspective-image
         var rt = scene.make.renderTexture({ x: x, y: y, width: width, height: height, add: false })
             .setOrigin(0.5);

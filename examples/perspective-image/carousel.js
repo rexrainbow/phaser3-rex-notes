@@ -1,7 +1,5 @@
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 
-
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -34,6 +32,15 @@ class Demo extends Phaser.Scene {
             carousel.rotationY += pointer.velocity.x * (1 / 800);
         });
 
+
+        this.input.on('pointerdown', function (pointer) {
+
+            if (!pointer.isDown) {
+                return;
+            }
+
+            carousel.roll.toNext();
+        });
 
         this.add.graphics({
             lineStyle: {

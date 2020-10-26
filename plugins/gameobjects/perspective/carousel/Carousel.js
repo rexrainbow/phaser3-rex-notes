@@ -3,6 +3,8 @@ import CreateFaces from '../utils/CreateFaces.js';
 import ForEachFace from '../utils/ForEachFace.js';
 import GetFirstFace from './GetFirstFace.js';
 import LayoutFaces from './LayoutFaces.js';
+import FaceNameToIndex from './FaceNameToIndex.js';
+import Roll from './Roll.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -10,6 +12,7 @@ const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const Linear = Phaser.Math.Linear;
+const Wrap = Phaser.Math.Wrap;
 
 class Carousel extends FaceContainer {
     constructor(scene, x, y, config) {
@@ -38,7 +41,7 @@ class Carousel extends FaceContainer {
         super(scene, x, y, width, height, faces);
         this.type = 'rexPerspectiveCarousel';
 
-        this.face0RotationY = 0;
+        this.face0RotationY = undefined;
 
         var faceCount = faces.length;
         // Face angle
@@ -59,11 +62,16 @@ class Carousel extends FaceContainer {
 
         LayoutFaces(this, faces);
 
+        var rollConfig = GetValue(config, 'roll', undefined);
+        if (rollConfig !== false) {
+            this.roll = new Roll(this, rollConfig);
+        }
+
         // z-index
         this.zStart = GetValue(config, 'z', 1);
         this.zEnd = GetValue(config, 'zEnd', this.zStart - 1);
 
-        this.rotationY = 0;
+        this.setFace(GetValue(config, 'currentFace', 0));
     }
 
     get rotationY() {
@@ -71,6 +79,10 @@ class Carousel extends FaceContainer {
     }
 
     set rotationY(value) {
+        if (this.face0RotationY === value) {
+            return;
+        }
+
         this.face0RotationY = value;
         var deltaAngle = this.faceAngle;
         var zStart = this.zStart;
@@ -85,6 +97,28 @@ class Carousel extends FaceContainer {
             var z = Linear(zStart, zEnd, angle / 180);
             face.setDepth(z);
         }, null, true);
+    }
+
+    get face() {
+        return this.currentFaceIndex;
+    }
+
+    set face(index) {
+        if (typeof (index) === 'string') {
+            index = FaceNameToIndex(this.faces, index);
+            if (index === -1) {
+                index = 0;
+            }
+        }
+
+        index = Wrap(index, 0, this.faces.length);
+        this.currentFaceIndex = index;
+        this.rotationY = this.faceAngle * index;
+    }
+
+    setFace(index) {
+        this.face = index;
+        return this;
     }
 }
 

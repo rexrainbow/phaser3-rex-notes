@@ -40,9 +40,9 @@ class Card extends FaceContainer {
         super(scene, x, y, width, height, faces);
         this.type = 'rexPerspectiveCard';
 
-        this.frontFaceRotationX = 0;
-        this.frontFaceRotationY = 0;
-        this.frontFaceRotationZ = 0;
+        this.frontFaceRotationX = undefined;
+        this.frontFaceRotationY = undefined;
+        this.frontFaceRotationZ = undefined;
 
         ForEachFace(faces, function (face, name) {
             this[`${name}Face`] = face;
@@ -64,6 +64,10 @@ class Card extends FaceContainer {
     }
 
     set rotationX(value) {
+        if (this.frontFaceRotationX === value) {
+            return;
+        }
+
         this.frontFaceRotationX = value;
         ForEachFace(this.faces, function (face) {
             face.rotationX = value;
@@ -75,6 +79,10 @@ class Card extends FaceContainer {
     }
 
     set rotationY(value) {
+        if (this.frontFaceRotationY === value) {
+            return;
+        }
+
         this.frontFaceRotationY = value;
         ForEachFace(this.faces, function (face) {
             face.rotationY = value;
@@ -86,6 +94,10 @@ class Card extends FaceContainer {
     }
 
     set rotationZ(value) {
+        if (this.frontFaceRotationZ === value) {
+            return;
+        }
+
         this.frontFaceRotationZ = value;
         ForEachFace(this.faces, function (face) {
             face.rotationZ = value;
@@ -101,16 +113,16 @@ class Card extends FaceContainer {
     }
 
     get face() {
-        return this._face;
+        return this.currentFaceIndex;
     }
 
-    set face(face) {
-        if (typeof (face) === 'string') {
-            face = FACEMODE[face];
+    set face(index) {
+        if (typeof (index) === 'string') {
+            index = FACEMODE[index];
         }
-        this._face = face;
+        this.currentFaceIndex = index;
 
-        var isBackFace = (face === 1);
+        var isBackFace = (index === 1);
         var angle = (isBackFace) ? 180 : 0;
         if (this.orientation === 0) {  // Flip around Y
             this.angleY = angle;

@@ -1,5 +1,5 @@
 @echo off
-set testmode=2
+set testmode=1
 set main=./examples/perspective-image/card.js
 cd ..
 cd ..

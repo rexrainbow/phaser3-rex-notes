@@ -1,9 +1,15 @@
 import TweenBase from '../../../utils/tween/TweenBase.js';
+import FaceNameToIndex from './FaceNameToIndex.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const RadToDeg = Phaser.Math.RadToDeg;
+const DegToRad = Phaser.Math.DegToRad;
+const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
+const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
+const Wrap = Phaser.Math.Wrap;
 
-class Flip extends TweenBase {
+class Roll extends TweenBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: true });
         this.gameObject = gameObject;
@@ -15,8 +21,6 @@ class Flip extends TweenBase {
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Cubic'));
-        this.setFrontToBackDirection(GetValue(o, 'frontToBack', 0));
-        this.setBackToFrontDirection(GetValue(o, 'backToFront', 1));
         return this;
     }
 
@@ -44,58 +48,65 @@ class Flip extends TweenBase {
         return this;
     }
 
-    setFrontToBackDirection(direction) {
-        if (typeof (direction) === 'string') {
-            direction = DIRMODE[direction];
-        }
-        this.endAngleFB = (direction === 0) ? -180 : 180;
-        return this;
-    }
-
-    setBackToFrontDirection(direction) {
-        if (typeof (direction) === 'string') {
-            direction = DIRMODE[direction];
-        }
-        this.endAngleBF = (direction === 0) ? 180 : -180;
-        return this;
-    }
-
-    start() {
+    start(deltaRotation) {
         if (this.isRunning) {
             return this;
         }
 
+        if (deltaRotation >= 0) {
+            deltaRotation = `+=${deltaRotation}`
+        } else {
+            deltaRotation = `-=${deltaRotation}`;
+        }
+
         var config = {
             targets: this.gameObject,
+            rotationY: deltaRotation,
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             repeat: 0
         }
 
-        var propKey = (this.gameObject.orientation === 0) ? 'angleY' : 'angleX';
-        var isFrontToBack = (this.gameObject.face === 0);
-        config[propKey] = {
-            start: (isFrontToBack) ? 0 : this.endAngleFB,
-            to: (isFrontToBack) ? this.endAngleBF : 0
-        };
-
         super.start(config);
         return this;
     }
 
-    flip(duration) {
+    to(index, duration) {
         if (this.isRunning) {
             return this;
         }
+
+        if (typeof (index) === 'string') {
+            index = FaceNameToIndex(this.gameObject.faces, index);
+            if (index === -1) {
+                index = 0;
+            }
+        }
+        index = Wrap(index, 0, this.gameObject.faces.length);
+
         if (duration !== undefined) {
             this.setDuration(duration);
         }
-        this.start();
 
-        // Set face index
-        var faceIndex = this.gameObject.currentFaceIndex
-        this.gameObject.currentFaceIndex = (faceIndex === 0) ? 1 : 0;
+        var start = WrapDegrees(RadToDeg(this.gameObject.rotationY));
+        var end = WrapDegrees(RadToDeg(this.gameObject.faceAngle * index));
+        var delta = ShortestBetween(start, end); // Degrees
+        this.start(DegToRad(delta));
+
+        this.gameObject.currentFaceIndex = index;
+        return this;
+    }
+
+    toNext(duration) {
+        var index = this.gameObject.currentFaceIndex + 1;
+        this.to(index, duration);
+        return this;
+    }
+
+    toPrevious(duration) {
+        var index = this.gameObject.currentFaceIndex - 1;
+        this.to(index, duration);
         return this;
     }
 }
@@ -107,4 +118,4 @@ const DIRMODE = {
     'right-to-left': 1
 }
 
-export default Flip;
+export default Roll;

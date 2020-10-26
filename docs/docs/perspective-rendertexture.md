@@ -81,6 +81,20 @@ var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, {
 });
 ```
 
+or
+
+```javascript
+var image = scene.add.rexPerspectiveRenderTexturege({
+    // x: 0,
+    // y: 0,
+    // width: 32,
+    // height: 32,
+    // hideCCW: true,
+    // gridWidth: 32,
+    // girdHeight: 32
+});
+```
+
 Add prespective render texture from JSON
 
 ```javascript
