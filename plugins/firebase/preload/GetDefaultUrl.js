@@ -1,6 +1,9 @@
 const VERSION = '7.19.0';
 
-var GetDefaultUrl = function(version = VERSION) {
+var GetDefaultUrl = function (version) {
+    if (version === undefined) {
+        version = VERSION
+    }
     return {
         app: `https://www.gstatic.com/firebasejs/${version}/firebase-app.js`,
 
@@ -8,7 +11,7 @@ var GetDefaultUrl = function(version = VERSION) {
         database: `https://www.gstatic.com/firebasejs/${version}/firebase-database.js`,
         firestore: `https://www.gstatic.com/firebasejs/${version}/firebase-firestore.js`,
         // storage: `https://www.gstatic.com/firebasejs/${version}/firebase-storage.js`,
-    
+
         // analytics: `https://www.gstatic.com/firebasejs/${version}/firebase-analytics.js`,
         // functions: `https://www.gstatic.com/firebasejs${version}/firebase-functions.js`,
         // messaging: `https://www.gstatic.com/firebasejs/${version}/firebase-messaging.js`,
