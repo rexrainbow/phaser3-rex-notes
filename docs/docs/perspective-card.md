@@ -206,8 +206,21 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
 #### Start flipping
 
 ```javascript
-card.flip.flip();
+card.flip.flip(duration);
 ```
+
+- `duration` : Overwrite default duration value.
+
+or
+
+- Flip-right
+    ```javascript
+    card.flip.flipRight(duration);
+    ```
+- Flip-left
+    ```javascript
+    card.flip.flipLeft(duration);
+    ```
 
 #### Stop flipping
 

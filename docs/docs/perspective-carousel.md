@@ -87,19 +87,31 @@ var carousel = scene.add.rexPerspectiveImage({
     // faceSpace: 0,
 
     // z: 1,
-    // zEnd: 0
+    // zEnd: 0,
+
+    // roll : {
+    //     duration: 1000,
+    //     ease: 'Cubic',
+    //     delay: 0,
+    // }
+    // roll: false
 });
 ```
 
 - `faces` : Array of [perspective-card](perspective-card.md), [perspective-rendertexture](perspective-rendertexture.md), [perspective-image](perspective-image.md), or `null`.
     - *Assume that all faces have the same size*
 - `face` : Index or name of current face (face at angle `0`).
-- `width`, `height` : Specific width and height of this card container.
+- `width`, `height` : Specific width and height of this carousel container.
     - `undefined` : Use width and height of first face.
 - `faceWidth` : Width of face. 
     - `undefined` : Use width of face. Assume that all faces have the same size.
 - `faceSpace` : Extra space of face width. Used when `faceWidth` is `undefined`.
 - `z`, `zEnd` : Range of faces' z-index. Default value is `1`/`0`.
+- `roll` : Configuration of rolling behavior.
+    - `roll.duration` : Duration of rolling, in millisecond.
+    - `roll.delay` : Initial delay.
+    - `roll.ease` : Ease function. Default value is `'Cubic'`.
+    - `false` : Don't add rolling behavior.
 
 Add perspectiveimage from JSON
 
@@ -169,21 +181,80 @@ var faces = carousel.faces;
     ```
     - `face` : Index or name of current face (face at angle `0`).
 
+### Roll behavior
+
+#### Start rolling
+
+- Roll to next face
+    ```javascript
+    carousel.roll.toNext(duration);
+    ```
+    - `duration` : Overwrite default duration value.
+- Roll to previous face
+    ```javascript
+    carousel.roll.toPrevious(duration);
+    ```
+    - `duration` : Overwrite default duration value.
+- Roll to face
+    ```javascript
+    carousel.roll.to(faceIndex, duration);
+    ```
+    - `faceIndex` : 
+        - A number : Index of face in `carousel.faces`
+        - A string : Name of face  (`face.setName(name)`)
+    - `duration` : Overwrite default duration value.
+
+#### Stop flipping
+
+```javascript
+carousel.roll.stop();
+```
+
+#### Set duration
+
+```javascript
+carousel.roll.setDuration(duration);
+// carousel.roll.duration = duration;
+```
+
+### Set ease
+
+```javascript
+carousel.roll.setEase(ease);
+// carousel.roll.ease = ease;
+```
+
+#### Events
+
+- On rolling complete
+    ```javascript
+    carousel.roll.on('complete', function(){
+        // ...
+    });
+    ```
+
+#### Status
+
+- Is rolling
+    ```javascript
+    var isRunning = carousel.roll.isRunning;
+    ```
+
 ### Rotation
 
 - Get rotation angle
     ```javascript
-    var angleY = card.angleY; // Angle in degrees
+    var angleY = carousel.angleY; // Angle in degrees
     ```
     or
     ```javascript
-    var rotationY = card.rotationY; // Angle in radians
+    var rotationY = carousel.rotationY; // Angle in radians
     ```
 - Set rotation angle
     ```javascript
-    card.angleY = angleY; // Angle in degrees
+    carousel.angleY = angleY; // Angle in degrees
     ```
     or
     ```javascript
-    card.rotationY = rotationY; // Angle in radians
+    carousel.rotationY = rotationY; // Angle in radians
     ```
