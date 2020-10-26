@@ -53,15 +53,9 @@ class Roll extends TweenBase {
             return this;
         }
 
-        if (deltaRotation >= 0) {
-            deltaRotation = `+=${deltaRotation}`
-        } else {
-            deltaRotation = `-=${deltaRotation}`;
-        }
-
         var config = {
             targets: this.gameObject,
-            rotationY: deltaRotation,
+            rotationY: `+=${deltaRotation}`,
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
@@ -109,13 +103,6 @@ class Roll extends TweenBase {
         this.to(index, duration);
         return this;
     }
-}
-
-const DIRMODE = {
-    'right': 0,
-    'left-to-right': 0,
-    'left': 1,
-    'right-to-left': 1
 }
 
 export default Roll;
