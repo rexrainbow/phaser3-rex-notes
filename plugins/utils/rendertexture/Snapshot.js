@@ -13,12 +13,10 @@ var Snapshot = function (gameObjects, renderTexture, ox, oy) {
     var isCenterOrigin = (ox !== undefined) && (oy !== undefined);
     var x, y, width, height, origin;
     if (isCenterOrigin) {
-        var halfWidth = Math.max((ox - bounds.left), (bounds.right - ox));
-        var halfHeight = Math.max((oy - bounds.top), (bounds.bottom - oy));
-        x = ox - halfWidth;
-        y = oy - halfHeight;
-        width = halfWidth * 2;
-        height = halfHeight * 2;
+        x = ox;
+        y = oy;
+        width = Math.max((ox - bounds.left), (bounds.right - ox)) * 2;
+        height = Math.max((oy - bounds.top), (bounds.bottom - oy)) * 2;
         origin = 0.5;
     } else {
         x = bounds.x;
@@ -35,7 +33,7 @@ var Snapshot = function (gameObjects, renderTexture, ox, oy) {
     }
     renderTexture.setOrigin(origin);
 
-    renderTexture.camera.setPosition(-bounds.x, -bounds.y);
+    renderTexture.camera.setScroll(bounds.x, bounds.y);
     gameObjects = SortGameObjectsByDepth(Clone(gameObjects));
     renderTexture.draw(gameObjects);
 

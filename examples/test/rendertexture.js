@@ -1,3 +1,5 @@
+import Snapshot from '../../plugins/utils/rendertexture/Snapshot.js';
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -15,17 +17,14 @@ class Demo extends Phaser.Scene {
             this.add.rectangle(300, 400, 200, 200, 0x00C4C4),
         ]
 
-        var rt = this.add.renderTexture(0, 0, 500, 500)
-            .setOrigin(0)
-        rt.camera.setPosition(-200, 0)
-        rt.draw(gameObjects);
+        var rt = Snapshot(gameObjects, null, 400, 300);
 
         gameObjects.forEach(function (gameObject) {
-            gameObject.setAlpha(0.3);
+            gameObject.destroy();
         });
 
         this.add.graphics()
-            .lineStyle(3, 0x0000ff)
+            .lineStyle(3, 0xffffff)
             .strokeRectShape(rt.getBounds())
     }
 
