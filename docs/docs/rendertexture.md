@@ -157,7 +157,7 @@ Internal camera `rt.camera`
 
 - Scroll (offset)
     ```javascript
-    rt.camera.setPosition(x, y);
+    rt.camera.setScroll(x, y);
     ```
 - Zoom (scale)
     ```javascript
