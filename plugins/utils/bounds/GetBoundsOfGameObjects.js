@@ -5,6 +5,9 @@ var GetBoundsOfGameObjects = function (gameObjects, out) {
     if (out === undefined) {
         out = new Rectangle();
     } else if (out === true) {
+        if (globBounds === undefined) {
+            globBounds = new Rectangle();
+        }
         out = globBounds;
     }
 

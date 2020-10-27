@@ -13,7 +13,12 @@ class RenderTexture extends PerspectiveImage {
         }
 
         // render-texture -> perspective-image
-        var rt = scene.make.renderTexture({ x: x, y: y, width: width, height: height, add: false })
+        var rt = GetValue(config, 'renderTexture', undefined);
+        if (!rt) {
+            rt = scene.make.renderTexture({ width: width, height: height, add: false })
+        }
+        rt
+            .setPosition(x, y)
             .setOrigin(0.5);
 
         super(scene, x, y, rt.texture.key, null, config);
