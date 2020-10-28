@@ -23,6 +23,27 @@ export default {
         return out;
     },
 
+    getAllVisibleChildren(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var myCildren = this.children,
+            myChild;
+        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
+            myChild = myCildren[i];
+            if (!myChild.visible) {
+                continue;
+            }
+            out.push(myChild);
+
+            if (myChild.hasOwnProperty('isRexContainerLite')) {
+                out.push(...myChild.getAllVisibleChildren());
+            }
+        }
+
+        return out;
+    },
+
     contains(gameObject) { // Override Base.contains method
         var parent = this.getParent(gameObject);
         if (!parent) {
