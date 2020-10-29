@@ -29,19 +29,36 @@ class Image extends Phaser.GameObjects.Mesh {
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
         var girdHeight = GetValue(config, 'girdHeight', girdWidth);
-        var textureFrame = this.texture.get(frame);
-        var frameWidth = textureFrame.cutWidth,
-            frameHeight = textureFrame.cutHeight;
+        this.resetVerts(girdWidth, girdHeight)
+    }
+
+    resetVerts(girdWidth, girdHeight) {
+        if (girdWidth !== undefined) {
+            this.girdWidth = girdWidth;
+        }
+        if (girdHeight !== undefined) {
+            this.girdHeight = girdHeight;
+        }
+
+        // Clear faces and vertices
+        this.faces.length = 0;
+        this.vertices.length = 0;
+
+        // Generate faces and vertices
+        var frameWidth = this.frame.cutWidth,
+            frameHeight = this.frame.cutHeight;
         GenerateGridVerts({
             mesh: this,
-            texture: key, frame: frame,
+            texture: this.texture.key, frame: this.frame.name,
 
             width: frameWidth / this.height,
             height: frameHeight / this.height,
 
-            widthSegments: Math.ceil(frameWidth / girdWidth),
-            heightSegments: Math.ceil(frameHeight / girdHeight)
+            widthSegments: Math.ceil(frameWidth / this.girdWidth),
+            heightSegments: Math.ceil(frameHeight / this.girdHeight)
         });
+
+        return this;
     }
 
     get rotationX() {
