@@ -21,9 +21,9 @@ class FaceContainer extends Container {
     }
 
     // Override
-    set rotationX(value) { 
+    set rotationX(value) {
         // rad
-    } 
+    }
 
     get angleX() {
         return RadToDeg(this.rotationX);
@@ -34,12 +34,14 @@ class FaceContainer extends Container {
     }
 
     // Override
-    get rotationY() { return 0; }
+    get rotationY() {
+        return 0;
+    }
 
     // Override
-    set rotationY(value) { 
+    set rotationY(value) {
         // rad
-    } 
+    }
 
     get angleY() {
         return RadToDeg(this.rotationY);
@@ -50,12 +52,14 @@ class FaceContainer extends Container {
     }
 
     // Override
-    get rotationZ() { return 0; }
+    get rotationZ() {
+        return 0;
+    }
 
     // Override
-    set rotationZ(value) { 
+    set rotationZ(value) {
         // rad
-    } 
+    }
 
     get angleZ() {
         return RadToDeg(this.rotationZ);
