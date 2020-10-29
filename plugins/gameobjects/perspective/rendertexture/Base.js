@@ -1,6 +1,7 @@
 import PerspectiveImage from '../image/Image.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class RenderTexture extends PerspectiveImage {
     constructor(scene, x, y, width, height, config) {

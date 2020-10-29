@@ -19,7 +19,7 @@ var GetBoundsOfGameObjects = function (gameObjects, out) {
             continue;
         }
 
-        GOBounds = gameObjects[i].getBounds(GOBounds);
+        GOBounds = gameObject.getBounds(GOBounds);
 
         if (firstClone) {
             out.setTo(GOBounds.x, GOBounds.y, GOBounds.width, GOBounds.height);
