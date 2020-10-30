@@ -9,17 +9,12 @@ class RenderTexture extends PerspectiveImage {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 32);
-            height = GetValue(config, 'height', 32);
+            width = GetValue(config, 'width', 0);
+            height = GetValue(config, 'height', 0);
         }
 
         // render-texture -> perspective-image
-        var rt = GetValue(config, 'renderTexture', undefined);
-        if (!rt) {
-            rt = scene.make.renderTexture({ width: width, height: height, add: false })
-        }
-        rt
-            .setPosition(x, y)
+        var rt = scene.make.renderTexture({ x: x, y: y, width: width, height: height, add: false })
             .setOrigin(0.5);
 
         super(scene, x, y, rt.texture.key, null, config);
