@@ -30,6 +30,13 @@ class HslAdjustPipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set1f('hueRotate', (this._hueRotate) % 1);
+        this.set1f('satAdjust', this._satAdjust);
+        this.set1f('lumAdjust', this._lumAdjust);
+    }
+
     // hueRotate
     get hueRotate() {
         return this._hueRotate;
@@ -37,8 +44,6 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set hueRotate(value) {
         this._hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
-        this.renderer.pipelines.set(this);
-        this.set1f('hueRotate', value % 1);
     }
 
     setHueRotate(value) {
@@ -53,8 +58,6 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set satAdjust(value) {
         this._satAdjust = value; // 0: gray, 1: original color, > 1: 
-        this.renderer.pipelines.set(this);
-        this.set1f('satAdjust', value);
     }
 
     setSatAdjust(value) {
@@ -69,8 +72,6 @@ class HslAdjustPipeline extends MultiPipeline {
 
     set lumAdjust(value) {
         this._lumAdjust = value; // 0: dark, 0.5: original color, 1: white
-        this.renderer.pipelines.set(this);
-        this.set1f('lumAdjust', value);
     }
 
     setLumAdjust(value) {

@@ -39,6 +39,14 @@ class SwirlPipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set1f('radius', this._radius);
+        this.set1f('angle', this._rotation);
+        this.set2f('center', this._centerX, this._centerY);
+        this.set2f('texSize', this._width, this._height);
+    }
+
     // radius
     get radius() {
         return this._radius;
@@ -46,8 +54,6 @@ class SwirlPipeline extends MultiPipeline {
 
     set radius(value) {
         this._radius = value;
-        this.renderer.pipelines.set(this);
-        this.set1f('radius', value);
     }
 
     setRadius(value) {
@@ -62,8 +68,6 @@ class SwirlPipeline extends MultiPipeline {
 
     set rotation(value) {
         this._rotation = value;
-        this.renderer.pipelines.set(this);
-        this.set1f('angle', value);
     }
 
     setRotation(value) {
@@ -91,7 +95,6 @@ class SwirlPipeline extends MultiPipeline {
 
     set centerX(x) {
         this._centerX = x;
-        this._setCenter();
     }
 
     get centerY() {
@@ -100,7 +103,6 @@ class SwirlPipeline extends MultiPipeline {
 
     set centerY(y) {
         this._centerY = y;
-        this._setCenter();
     }
 
     setCenter(x, y) {
@@ -110,13 +112,7 @@ class SwirlPipeline extends MultiPipeline {
         }
         this._centerX = x;
         this._centerY = y;
-        this._setCenter();
         return this;
-    }
-
-    _setCenter() {
-        this.renderer.pipelines.set(this);
-        this.set2f('center', this._centerX, this._centerY);
     }
 
     // size
@@ -124,8 +120,6 @@ class SwirlPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.renderer.pipelines.set(this);
-        this.set2f('texSize', width, height);
         return this;
     }
 }

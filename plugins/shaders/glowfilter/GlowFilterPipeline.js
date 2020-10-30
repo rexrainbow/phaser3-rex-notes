@@ -26,20 +26,18 @@ class GlowFilterPipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set1f('intensity', this._intensity);
+    }
+
     // intensity
     get intensity() {
         return this._intensity;
     }
 
     set intensity(value) {
-        value = Clamp(value, 0, 1);
-        if (this._intensity === value) {
-            return;
-        }
-
-        this._intensity = value;
-        this.renderer.pipelines.set(this);
-        this.set1f('intensity', value);
+        this._intensity = Clamp(value, 0, 1);
     }
 
     setIntensity(value) {

@@ -28,6 +28,12 @@ class PixelationPipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
+        this.set2f('texSize', this._width, this._height);
+    }
+
     // pixelWidth
     get pixelWidth() {
         return this._pixelWidth;
@@ -35,8 +41,6 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelWidth(value) {
         this._pixelWidth = value;
-        this.renderer.pipelines.set(this);
-        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelWidth(value) {
@@ -51,8 +55,6 @@ class PixelationPipeline extends MultiPipeline {
 
     set pixelHeight(value) {
         this._pixelHeight = value;
-        this.renderer.pipelines.set(this);
-        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
     }
 
     setPixelHeight(value) {
@@ -66,8 +68,6 @@ class PixelationPipeline extends MultiPipeline {
         }
         this._pixelWidth = width;
         this._pixelHeight = height;
-        this.renderer.pipelines.set(this);
-        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
         return this;
     }
 
@@ -76,8 +76,6 @@ class PixelationPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.renderer.pipelines.set(this);
-        this.set2f('texSize', width, height);
         return this;
     }
 }

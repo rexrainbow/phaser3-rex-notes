@@ -38,6 +38,16 @@ class ToonifyPipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set1f('edgeThreshold', this._edgeThreshold);
+        this.set1f('hStep', this.hueStep);
+        this.set1f('sStep', this.satStep);
+        this.set1f('vStep', this.valStep);
+        this.set3f('edgeColor', this._edgeColor.redGL, this._edgeColor.greenGL, this._edgeColor.blueGL);
+        this.set2f('texSize', this._width, this._height);
+    }
+
     // edgeThreshold
     get edgeThreshold() {
         return this._edgeThreshold;
@@ -45,8 +55,6 @@ class ToonifyPipeline extends MultiPipeline {
 
     set edgeThreshold(value) {
         this._edgeThreshold = value;
-        this.renderer.pipelines.set(this);
-        this.set1f('edgeThreshold', value);
     }
 
     setEdgeThreshold(value) {
@@ -61,14 +69,19 @@ class ToonifyPipeline extends MultiPipeline {
 
     set hueLevels(value) {
         this._hueLevels = value;
-        value = (value > 0) ? 360 / value : 0;
-        this.renderer.pipelines.set(this);
-        this.set1f('hStep', value);
     }
 
     setHueLevels(value) {
         this.hueLevels = value;
         return this;
+    }
+
+    get hueStep() {
+        if (this._hueLevels > 0) {
+            return 360 / this._hueLevels;
+        } else {
+            return 0;
+        }
     }
 
     // satLevels
@@ -78,14 +91,19 @@ class ToonifyPipeline extends MultiPipeline {
 
     set satLevels(value) {
         this._satLevels = value;
-        value = (value > 0) ? 1 / value : 0;
-        this.renderer.pipelines.set(this);
-        this.set1f('sStep', value);
     }
 
     setSatLevels(value) {
         this.satLevels = value;
         return this;
+    }
+
+    get satStep() {
+        if (this._satLevels > 0) {
+            return 1 / this._satLevels;
+        } else {
+            return 0;
+        }
     }
 
     // valLevels
@@ -95,14 +113,19 @@ class ToonifyPipeline extends MultiPipeline {
 
     set valLevels(value) {
         this._valLevels = value;
-        value = (value > 0) ? 1 / value : 0;
-        this.renderer.pipelines.set(this);
-        this.set1f('vStep', value);
     }
 
     setValLevels(value) {
         this.valLevels = value;
         return this;
+    }
+
+    get valStep() {
+        if (this._valLevels > 0) {
+            return 1 / this._valLevels;
+        } else {
+            return 0;
+        }
     }
 
     // edgeColor
@@ -114,11 +137,7 @@ class ToonifyPipeline extends MultiPipeline {
         if (typeof (value) === 'number') {
             value = IntegerToRGB(value);
         }
-        // value: {r, g, b}
-        var color = this._edgeColor;
-        color.setFromRGB(value);
-        this.renderer.pipelines.set(this);
-        this.set3f('edgeColor', color.redGL, color.greenGL, color.blueGL);
+        this._edgeColor.setFromRGB(value);
     }
 
     setEdgeColor(value) {
@@ -131,8 +150,6 @@ class ToonifyPipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.renderer.pipelines.set(this);
-        this.set2f('texSize', width, height);
         return this;
     }
 }

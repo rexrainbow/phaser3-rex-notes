@@ -36,19 +36,20 @@ class OutlinePipeline extends MultiPipeline {
         return this;
     }
 
+    bind() {
+        super.bind();
+        this.set2f('thickness', this._thickness, this._thickness);
+        this.set3f('outlineColor', this._outlineColor.redGL, this._outlineColor.greenGL, this._outlineColor.blueGL);
+        this.set2f('texSize', this._width, this._height);
+    }
+
     // thickness
     get thickness() {
         return this._thickness;
     }
 
     set thickness(value) {
-        if (this._thickness === value) {
-            return;
-        }
-
         this._thickness = value;
-        this.renderer.pipelines.set(this);
-        this.set2f('thickness', value, value);
     }
 
     setThickness(value) {
@@ -65,11 +66,7 @@ class OutlinePipeline extends MultiPipeline {
         if (typeof (value) === 'number') {
             value = IntegerToRGB(value);
         }
-        // value: {r, g, b}
-        var color = this._outlineColor;
-        color.setFromRGB(value);
-        this.renderer.pipelines.set(this);
-        this.set3f('outlineColor', color.redGL, color.greenGL, color.blueGL);
+        this._outlineColor.setFromRGB(value);
     }
 
     setOutlineColor(value) {
@@ -82,8 +79,6 @@ class OutlinePipeline extends MultiPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.renderer.pipelines.set(this);
-        this.set2f('texSize', width, height);
         return this;
     }
 }
