@@ -19,20 +19,28 @@ class Demo extends Phaser.Scene {
         var card = CreateCard(this).setPosition(200, 300);
 
         card.perspective = new ContainerPerspective(card);
-        card.perspective.start();
+
+        card.perspective.start();  // Shapshot before tween
+        this.tweens.add({
+            targets: card.perspective,
+            angleY: { start: 60, to: 0 },
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 1000,
+            repeat: 0,            // -1: infinity
+            yoyo: false,
+
+            onStart: function () {
+                // card.perspective.start();
+            },
+            onComplete: function () {
+                card.perspective.stop();
+            }
+        });
 
         this.tweens.add({
             targets: card,
             x: '+=200',
             alpha: { start: 0, to: 1 },
-            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
-            repeat: 0,            // -1: infinity
-            yoyo: false
-        });
-        this.tweens.add({
-            targets: card.perspective,
-            angleY: { start: 60, to: 0 },
             ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 1000,
             repeat: 0,            // -1: infinity
