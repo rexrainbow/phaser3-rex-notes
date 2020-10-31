@@ -9,8 +9,8 @@ class RenderTexture extends PerspectiveImage {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 0);
-            height = GetValue(config, 'height', 0);
+            width = GetValue(config, 'width', 32);
+            height = GetValue(config, 'height', 32);
         }
 
         // render-texture -> perspective-image

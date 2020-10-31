@@ -8,6 +8,9 @@ var Snapshot = function (config) {
     var gameObjects = config.gameObjects;
     var renderTexture = config.renderTexture;
     if (gameObjects.length === 0) {
+        if (renderTexture) {
+            renderTexture.setSize(1, 1).clear();
+        }
         return renderTexture;
     }
 

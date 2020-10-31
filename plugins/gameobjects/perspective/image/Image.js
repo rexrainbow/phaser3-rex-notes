@@ -23,13 +23,18 @@ class Image extends Phaser.GameObjects.Mesh {
         this.type = 'rexPerspectiveImage';
         this.setSizeToFrame();
 
-        this.setPerspective(this.width, this.height, FOV);
+        this.resetPerspective();
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
         var girdHeight = GetValue(config, 'girdHeight', girdWidth);
         this.resetVerts(girdWidth, girdHeight)
+    }
+
+    resetPerspective() {
+        this.setPerspective(this.width, this.height, FOV);
+        return this;
     }
 
     resetVerts(girdWidth, girdHeight) {
@@ -62,6 +67,13 @@ class Image extends Phaser.GameObjects.Mesh {
             heightSegments: Math.ceil(frameHeight / this.girdHeight)
         });
 
+        return this;
+    }
+
+    syncSize() {
+        this.setSizeToFrame();  // Reset size
+        this.resetPerspective();  // Reset perspective
+        this.resetVerts();  // Reset verts
         return this;
     }
 

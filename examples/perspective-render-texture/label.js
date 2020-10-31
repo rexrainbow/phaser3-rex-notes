@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var card = CreateCard(this).setPosition(600, 300);
-        var image = this.add.rexPerspectiveRenderTexture(200, 300, card.width, card.height);
+        var image = this.add.rexPerspectiveRenderTexture(200, 300);
 
         Snapshot({
             gameObjects: card.getAllVisibleChildren(),
@@ -30,6 +30,7 @@ class Demo extends Phaser.Scene {
             originX: card.originX,
             originY: card.originY
         })
+        image.syncSize();
 
         this.input.on('pointermove', function (pointer) {
 
