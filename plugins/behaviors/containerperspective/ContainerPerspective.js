@@ -15,8 +15,8 @@ class ContainerPerspective extends Base {
         this.visibleSibling = [];
     }
 
-    start() {
-        this.stop();
+    enter() {
+        this.exit();
 
         var parentContainer = this.rexContainer.parent;
 
@@ -44,7 +44,7 @@ class ContainerPerspective extends Base {
         return this;
     }
 
-    stop() {
+    exit() {
         var parentContainer = this.rexContainer.parent;
 
         // Set all visible children to be visible back
