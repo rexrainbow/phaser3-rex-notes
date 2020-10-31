@@ -18,6 +18,8 @@ import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Facto
 import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
 import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
 
+import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
+
 import SetValue from './utils/object/SetValue.js';
 
 class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
@@ -37,6 +39,10 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
+
+    addContainerPerspective(parentContainer, config) {
+        return new ContainerPerspective(parentContainer, config);
+    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', PerspectiveImage);
@@ -44,5 +50,7 @@ SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', PerspectiveR
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', PerspectiveCard);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCube', PerspectiveCube);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', PerspectiveCarousel);
+
+SetValue(window, 'RexPlugins.GameObjects.ContainerPerspective', ContainerPerspective);
 
 export default PerspectiveImagePlugin;

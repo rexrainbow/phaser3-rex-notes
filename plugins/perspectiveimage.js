@@ -18,6 +18,8 @@ import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Facto
 import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
 import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
 
+import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
+
 
 Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveImage', PerspectiveImageFactory);
 Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveImage', PerspectiveImageCreator);
@@ -40,5 +42,7 @@ export default {
     PerspectiveRenderTexture: PerspectiveRenderTexture,
     PerspectiveCard: PerspectiveCard,
     PerspectiveCube: PerspectiveCube,
-    PerspectiveCarousel: PerspectiveCarousel
+    PerspectiveCarousel: PerspectiveCarousel,
+
+    ContainerPerspective: ContainerPerspective
 }
