@@ -1,4 +1,3 @@
-import ContainerPerspective from '../../plugins/behaviors/containerperspective/ContainerPerspective.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -17,12 +16,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var card = CreateCard(this).setPosition(200, 300);
+        var perspective = this.rexUI.add.perspective(card);
 
-        card.perspective = new ContainerPerspective(card);
-
-        card.perspective.start();  // Shapshot before tween
+        perspective.start();  // Shapshot before tween
         this.tweens.add({
-            targets: card.perspective,
+            targets: perspective,
             angleY: { start: 60, to: 0 },
             ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 1000,
@@ -30,10 +28,10 @@ class Demo extends Phaser.Scene {
             yoyo: false,
 
             onStart: function () {
-                // card.perspective.start();
+                // perspective.start();
             },
             onComplete: function () {
-                card.perspective.stop();
+                perspective.stop();
             }
         });
 

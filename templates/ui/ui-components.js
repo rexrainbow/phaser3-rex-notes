@@ -39,6 +39,7 @@ import Pan from './pan/Pan.js';
 import Pinch from './pinch/Pinch.js';
 import Rotate from './rotate/Rotate.js';
 import Flip from './flip/Flip.js';
+import Perspective from './perspective/Perspective.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -95,6 +96,7 @@ export {
     Pinch,
     Rotate,
     Flip,
+    Perspective,
 
     GetParentSizer,
     GetTopmostSizer,
