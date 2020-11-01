@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var card = CreateCard(this).setPosition(200, 300);
-        var perspective = this.rexUI.add.perspective(card, { useContainerBounds: true });
+        var perspective = this.rexUI.add.perspective(card, { useParentBounds: true });
 
         perspective.enter();  // Snapshot before tween
         this.tweens.add({

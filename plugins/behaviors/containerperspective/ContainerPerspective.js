@@ -14,7 +14,7 @@ class ContainerPerspective extends Base {
 
         ContainerAdd.call(parentContainer, this);
         this.visibleSibling = [];
-        this.useContainerBounds = GetValue(config, 'useContainerBounds', false);
+        this.useParentBounds = GetValue(config, 'useParentBounds', false);
     }
 
     enter() {
@@ -28,10 +28,10 @@ class ContainerPerspective extends Base {
             renderTexture: this.rt,
             x: this.x,
             y: this.y,
-            width: ((this.useContainerBounds) ? parentContainer.displayWidth : undefined),
-            height: ((this.useContainerBounds) ? parentContainer.displayHeighth : undefined),
-            originX: ((this.useContainerBounds) ? parentContainer.originX : undefined),
-            originY: ((this.useContainerBounds) ? parentContainer.originY : undefined),
+            width: ((this.useParentBounds) ? parentContainer.displayWidth : undefined),
+            height: ((this.useParentBounds) ? parentContainer.displayHeighth : undefined),
+            originX: ((this.useParentBounds) ? parentContainer.originX : undefined),
+            originY: ((this.useParentBounds) ? parentContainer.originY : undefined),
         });
         this.syncSize();
 
