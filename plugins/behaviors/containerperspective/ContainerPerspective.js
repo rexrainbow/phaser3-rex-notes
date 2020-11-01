@@ -3,6 +3,7 @@ import Container from '../../gameobjects/containerlite/ContainerLite.js';
 import Snapshot from '../../utils/rendertexture/Snapshot.js';
 
 const ContainerAdd = Container.prototype.add;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ContainerPerspective extends Base {
     constructor(parentContainer, config) {
@@ -13,6 +14,7 @@ class ContainerPerspective extends Base {
 
         ContainerAdd.call(parentContainer, this);
         this.visibleSibling = [];
+        this.useContainerBounds = GetValue(config, 'useContainerBounds', false);
     }
 
     enter() {
@@ -25,7 +27,11 @@ class ContainerPerspective extends Base {
             gameObjects: parentContainer.getAllVisibleChildren(),
             renderTexture: this.rt,
             x: this.x,
-            y: this.y
+            y: this.y,
+            width: ((this.useContainerBounds) ? parentContainer.displayWidth : undefined),
+            height: ((this.useContainerBounds) ? parentContainer.displayHeighth : undefined),
+            originX: ((this.useContainerBounds) ? parentContainer.originX : undefined),
+            originY: ((this.useContainerBounds) ? parentContainer.originY : undefined),
         });
         this.syncSize();
 
