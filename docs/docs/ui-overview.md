@@ -353,6 +353,14 @@ scene.rexUI.setChildrenInteractive(sizer, {
     ```javascript
     var flip = new RexPlugins.UI.Flip(gameObject, config);
     ```
+1. [Perspective](containerlite-perspective.md): Snapshot children of [containerlite](containerlite.md), to a [perspective render texture](perspective-rendertexture.md).
+    ```javascript
+    var perspective = scene.rexUI.add.perspective(gameObject, config);
+    ```
+    or
+    ```javascript
+    var perspective = new RexPlugins.UI.Perspective(gameObject, config);
+    ```
 
 ### Helper methods
 

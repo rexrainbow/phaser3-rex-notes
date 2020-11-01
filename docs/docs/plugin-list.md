@@ -25,6 +25,7 @@
 1. [Clock](clock.md): A clock to count elapsed time.
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
+1. [Containerlite-perspective](containerlite-perspective.md): Snapshot children of containerlite, to a perspective render texture.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.

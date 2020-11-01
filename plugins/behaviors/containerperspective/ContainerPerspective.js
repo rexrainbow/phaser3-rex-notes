@@ -14,7 +14,20 @@ class ContainerPerspective extends Base {
 
         ContainerAdd.call(parentContainer, this);
         this.visibleSibling = [];
+        this.perspectiveState = false;
         this.useParentBounds = GetValue(config, 'useParentBounds', false);
+
+        this.boot();
+    }
+
+    boot() {
+        var parentContainer = this.rexContainer.parent;
+        parentContainer.on('destroy', this.destroy, this);
+    }
+
+    destroy(fromScene) {
+        this.exit();
+        super.destroy(fromScene);
     }
 
     enter() {
@@ -46,7 +59,7 @@ class ContainerPerspective extends Base {
             }
         }, this);
 
-        this.started = true;
+        this.perspectiveState = true;
         return this;
     }
 
@@ -61,6 +74,7 @@ class ContainerPerspective extends Base {
 
         // Set this renderTexture to be invisible        
         parentContainer.setChildVisible(this, false);
+        this.perspectiveState = false;
         return this;
     }
 }
