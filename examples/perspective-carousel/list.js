@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var faces = [];
         for (var i = 0; i < 10; i++) {
-            faces.push(CreateCard(this, GetCardName()))
+            faces.push(CreateCard(this, GetCardName(i)))
         }
         var carousel = this.add.rexPerspectiveCarousel({
             x: 400, y: 300,
@@ -34,11 +34,11 @@ class Demo extends Phaser.Scene {
 
         carousel
             .setInteractive()
-            .on('pointerdown', function (pointer, localX, localY, event) {;
+            .on('pointerdown', function (pointer, localX, localY, event) {
                 if (localX <= (carousel.width / 2)) {
-                    carousel.roll.toNext();
-                } else {
                     carousel.roll.toPrevious();
+                } else {
+                    carousel.roll.toNext();
                 }
             });
 

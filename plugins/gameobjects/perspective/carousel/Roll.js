@@ -84,7 +84,7 @@ class Roll extends TweenBase {
         }
 
         var start = WrapDegrees(RadToDeg(this.gameObject.rotationY));
-        var end = WrapDegrees(RadToDeg(this.gameObject.faceAngle * index));
+        var end = WrapDegrees(RadToDeg(-this.gameObject.faceAngle * index));
         var delta = ShortestBetween(start, end); // Degrees
         this.start(DegToRad(delta));
 

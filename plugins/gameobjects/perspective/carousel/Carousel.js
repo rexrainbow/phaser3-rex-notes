@@ -113,7 +113,7 @@ class Carousel extends FaceContainer {
 
         index = Wrap(index, 0, this.faces.length);
         this.currentFaceIndex = index;
-        this.rotationY = this.faceAngle * index;
+        this.rotationY = -this.faceAngle * index;
     }
 
     setFace(index) {
