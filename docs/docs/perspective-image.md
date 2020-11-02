@@ -190,6 +190,12 @@ scene.tweens.add({
 })
 ```
 
+### Change texture
+
+```javascript
+image.setTexture(key, frame).resetVerts();
+```
+
 ### Other properties
 
 See [Mesh](mesh.md) game object.

@@ -26,23 +26,27 @@ class Demo extends Phaser.Scene {
             images: images
         })
 
-        //this.input.on('pointermove', function (pointer) {
-        //
-        //    if (!pointer.isDown) {
-        //        return;
-        //    }
-        //
-        //    carousel.rotationY += pointer.velocity.x * (1 / 800);
-        //});
+        var faces = carousel.faces;
+        for (var i = 0, cnt = faces.length; i < cnt; i++) {
+            console.log(faces[i].frame.name);
+        }
+
+        // this.input.on('pointermove', function (pointer) {
+        // 
+        //     if (!pointer.isDown) {
+        //         return;
+        //     }
+        // 
+        //     carousel.rotationY += pointer.velocity.x * (1 / 800);
+        // });
 
         carousel
             .setInteractive()
             .on('pointerdown', function (pointer, localX, localY, event) {
-                ;
                 if (localX <= (carousel.width / 2)) {
-                    carousel.toNext();
-                } else {
                     carousel.toPrevious();
+                } else {
+                    carousel.toNext();
                 }
             });
     }

@@ -1,5 +1,6 @@
 import Carousel from '../carousel/Carousel.js';
 import Image from '../image/Image.js';
+import LayoutFaces from '../carousel/LayoutFaces.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -41,52 +42,54 @@ class FourFacesImageCarousel extends Carousel {
     }
 
     setIndex(index) {
-        var totalKeys = this.textureKeys.length
+        var totalKeys = this.textureKeys.length;
+        var totalFaces = this.faces.length;
         index = Wrap(index, 0, totalKeys);
         this.currentIndex = index;
-        this.currentFaceIndex = index % 4;
+        this.currentFaceIndex = index % totalFaces;
 
         var textureKey, textureIndex, faceIndex;
         // Front face
         textureIndex = index;
         textureKey = this.textureKeys[textureIndex];
         faceIndex = this.currentFaceIndex;
-        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame);
+        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame).resetVerts();
         // Back face, equal tp fron face
-        faceIndex = Wrap(this.currentFaceIndex + 2, 0, 4);
-        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame);
+        faceIndex = Wrap(this.currentFaceIndex + 2, 0, totalFaces);
+        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame).resetVerts();
 
         // Right face (next)
         textureIndex = Wrap(index + 1, 0, totalKeys);
         textureKey = this.textureKeys[textureIndex];
-        faceIndex = Wrap(this.currentFaceIndex - 1, 0, 4);
-        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame);
+        faceIndex = Wrap(this.currentFaceIndex + 1, 0, totalFaces);
+        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame).resetVerts();
 
         // Left face (previous)
         textureIndex = Wrap(index - 1, 0, totalKeys);
         textureKey = this.textureKeys[textureIndex];
-        faceIndex = Wrap(this.currentFaceIndex + 1, 0, 4);
-        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame);
+        faceIndex = Wrap(this.currentFaceIndex - 1, 0, totalFaces);
+        this.faces[faceIndex].setTexture(textureKey.key, textureKey.frame).resetVerts();
 
+        // LayoutFaces(this, this.faces);
         return this;
     }
 
     toNext(duration) {
         this.roll
+            .toNext(duration)
             .once('complete', function () {
                 this.setIndex(this.currentIndex + 1)
             }, this)
-            .toPrevious(duration);
 
         return this;
     }
 
     toPrevious(duration) {
         this.roll
+            .toPrevious(duration)
             .once('complete', function () {
                 this.setIndex(this.currentIndex - 1)
             }, this)
-            .toNext(duration);
 
         return this;
     }
