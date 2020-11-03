@@ -20,16 +20,11 @@ class Demo extends Phaser.Scene {
             })
         }
 
-        var carousel = this.add.rexPerspectiveFourFacesImageCarousel({
+        var carousel = this.add.rexPerspectiveImageCarousel({
             x: 400, y: 300,
 
             images: images
         })
-
-        var faces = carousel.faces;
-        for (var i = 0, cnt = faces.length; i < cnt; i++) {
-            console.log(faces[i].frame.name);
-        }
 
         // this.input.on('pointermove', function (pointer) {
         // 

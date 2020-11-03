@@ -18,9 +18,9 @@ import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Facto
 import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
 import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
 
-import PerspectiveFourFacesImageCarouselFactory from './gameobjects/perspective/fourfacesimagecarousel/Factory';
-import PerspectiveFourFacesImageCarouselCreator from './gameobjects/perspective/fourfacesimagecarousel/Creator.js';
-import PerspectiveFourFacesImageCarousel from './gameobjects/perspective/fourfacesimagecarousel/FourFacesImageCarousel.js';
+import PerspectiveImageCarouselFactory from './gameobjects/perspective/imagecarousel/Factory';
+import PerspectiveImageCarouselCreator from './gameobjects/perspective/imagecarousel/Creator.js';
+import PerspectiveImageCarousel from './gameobjects/perspective/imagecarousel/ImageCarousel.js';
 
 import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
 
@@ -37,7 +37,7 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexPerspectiveCard', PerspectiveCardFactory, PerspectiveCardCreator);
         pluginManager.registerGameObject('rexPerspectiveCube', PerspectiveCubeFactory, PerspectiveCubeCreator);
         pluginManager.registerGameObject('rexPerspectiveCarousel', PerspectiveCarouselFactory, PerspectiveCarouselCreator);
-        pluginManager.registerGameObject('rexPerspectiveFourFacesImageCarousel', PerspectiveFourFacesImageCarouselFactory, PerspectiveFourFacesImageCarouselCreator);
+        pluginManager.registerGameObject('rexPerspectiveImageCarousel', PerspectiveImageCarouselFactory, PerspectiveImageCarouselCreator);
     }
 
     start() {
@@ -55,7 +55,7 @@ SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', PerspectiveR
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', PerspectiveCard);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCube', PerspectiveCube);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', PerspectiveCarousel);
-SetValue(window, 'RexPlugins.GameObjects.PerspectiveFourFacesImageCarousel', PerspectiveFourFacesImageCarousel);
+SetValue(window, 'RexPlugins.GameObjects.PerspectiveImageCarousel', PerspectiveImageCarousel);
 
 SetValue(window, 'RexPlugins.GameObjects.ContainerPerspective', ContainerPerspective);
 

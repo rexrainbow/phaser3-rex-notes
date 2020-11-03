@@ -18,9 +18,9 @@ import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Facto
 import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
 import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
 
-import PerspectiveFourFacesImageCarouselFactory from './gameobjects/perspective/fourfacesimagecarousel/Factory';
-import PerspectiveFourFacesImageCarouselCreator from './gameobjects/perspective/fourfacesimagecarousel/Creator.js';
-import PerspectiveFourFacesImageCarousel from './gameobjects/perspective/fourfacesimagecarousel/FourFacesImageCarousel.js';
+import PerspectiveImageCarouselFactory from './gameobjects/perspective/imagecarousel/Factory';
+import PerspectiveImageCarouselCreator from './gameobjects/perspective/imagecarousel/Creator.js';
+import PerspectiveImageCarousel from './gameobjects/perspective/imagecarousel/ImageCarousel.js';
 
 import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
 
@@ -40,8 +40,8 @@ Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveCube', PerspectiveC
 Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveCarousel', PerspectiveCarouselFactory);
 Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveCarousel', PerspectiveCarouselCreator);
 
-Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveFourFacesImageCarousel', PerspectiveFourFacesImageCarouselFactory);
-Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveFourFacesImageCarousel', PerspectiveFourFacesImageCarouselCreator);
+Phaser.GameObjects.GameObjectFactory.register('rexPerspectiveImageCarousel', PerspectiveImageCarouselFactory);
+Phaser.GameObjects.GameObjectCreator.register('rexPerspectiveImageCarousel', PerspectiveImageCarouselCreator);
 
 export default {
     PerspectiveImage: PerspectiveImage,
@@ -49,7 +49,7 @@ export default {
     PerspectiveCard: PerspectiveCard,
     PerspectiveCube: PerspectiveCube,
     PerspectiveCarousel: PerspectiveCarousel,
-    PerspectiveFourFacesImageCarousel: PerspectiveFourFacesImageCarousel,
+    PerspectiveImageCarousel: PerspectiveImageCarousel,
 
     ContainerPerspective: ContainerPerspective
 }
