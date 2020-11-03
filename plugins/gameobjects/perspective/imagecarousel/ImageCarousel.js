@@ -53,6 +53,14 @@ class ImageCarousel extends Carousel {
         return this;
     }
 
+    get isFirstImage() {
+        return (this.currentImageIndex === 0);
+    }
+
+    get isLastImage() {
+        return (this.currentImageIndex === (this.images.length - 1));
+    }
+
     updateTexture() {
         var totalKeys = this.images.length;
         var totalFaces = this.faces.length;
@@ -69,6 +77,10 @@ class ImageCarousel extends Carousel {
     }
 
     toNext(duration) {
+        if (!this.repeat && this.isLastImage) {
+            return this;
+        }
+
         if (this.roll.isRunning) {
             return this;
         }
@@ -82,6 +94,10 @@ class ImageCarousel extends Carousel {
     }
 
     toPrevious(duration) {
+        if (!this.repeat && this.isFirstImage) {
+            return this;
+        }
+
         if (this.roll.isRunning) {
             return this;
         }

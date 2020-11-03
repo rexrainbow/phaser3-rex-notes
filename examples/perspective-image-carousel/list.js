@@ -23,7 +23,8 @@ class Demo extends Phaser.Scene {
         var carousel = this.add.rexPerspectiveImageCarousel({
             x: 400, y: 300,
 
-            images: images
+            images: images,
+            // repeat: false
         })
 
         // this.input.on('pointermove', function (pointer) {
