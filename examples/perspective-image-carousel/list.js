@@ -24,17 +24,9 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
 
             images: images,
-            // repeat: false
+            // repeat: false,
+            // faceCount: 6
         })
-
-        // this.input.on('pointermove', function (pointer) {
-        // 
-        //     if (!pointer.isDown) {
-        //         return;
-        //     }
-        // 
-        //     carousel.rotationY += pointer.velocity.x * (1 / 800);
-        // });
 
         carousel
             .setInteractive()

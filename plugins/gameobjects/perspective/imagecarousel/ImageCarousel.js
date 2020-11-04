@@ -1,6 +1,7 @@
 import Carousel from '../carousel/Carousel.js';
 import RenderTexture from '../rendertexture/Base.js';
 import GetFaceSize from './GetFaceSize.js';
+import GetIndexOffsetMap from './GetIndexOffsetMap.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -30,8 +31,9 @@ class ImageCarousel extends Carousel {
         }
 
         // Create 4 render-texture faces
+        var faceCount = GetValue(config, 'faceCount', 4);
         var face, faces = [];
-        for (var i = 0; i < 4; i++) {
+        for (var i = 0; i < faceCount; i++) {
             face = new RenderTexture(scene, 0, 0, faceWidth, faceHeight, config);
             scene.add.existing(face);
             faces.push(face);
@@ -42,6 +44,7 @@ class ImageCarousel extends Carousel {
         this.type = 'rexPerspectiveImageCarousel';
 
         this.images = images;
+        this.indexOffsetMap = GetIndexOffsetMap(faceCount);
         this.repeat = GetValue(config, 'repeat', true);
         this
             .setImageIndex(GetValue(config, 'index', 0))
@@ -65,7 +68,7 @@ class ImageCarousel extends Carousel {
         var totalKeys = this.images.length;
         var totalFaces = this.faces.length;
 
-        IndexOffsetMap.forEach(function (indexOffset) {
+        this.indexOffsetMap.forEach(function (indexOffset) {
             var textureIndex = Wrap(this.currentImageIndex + indexOffset, 0, totalKeys);
             var faceIndex = Wrap(this.currentFaceIndex + indexOffset, 0, totalFaces);
 
@@ -111,7 +114,5 @@ class ImageCarousel extends Carousel {
     }
 
 }
-
-const IndexOffsetMap = [0, 1, -1];
 
 export default ImageCarousel;
