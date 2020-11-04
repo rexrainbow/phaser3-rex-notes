@@ -77,7 +77,7 @@ class Quad {
         return this.height;
     }
 
-    set cellHieght(value) {
+    set cellHeight(value) {
         this.height = value;
     }
 }
