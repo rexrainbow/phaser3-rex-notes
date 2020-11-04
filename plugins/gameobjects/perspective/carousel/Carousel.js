@@ -67,6 +67,9 @@ class Carousel extends FaceContainer {
             this.roll = new Roll(this, rollConfig);
         }
 
+        // Left-To-Right, or Right-To-Left
+        this.rtl = GetValue(config, 'rtl', false);
+
         // z-index
         this.zStart = GetValue(config, 'z', 1);
         this.zEnd = GetValue(config, 'zEnd', this.zStart - 1);
@@ -87,9 +90,10 @@ class Carousel extends FaceContainer {
         var deltaAngle = this.faceAngle;
         var zStart = this.zStart;
         var zEnd = this.zEnd;
+        var sign = (this.rtl) ? -1 : 1;
         ForEachFace(this.faces, function (face, i) {
             // Set rotationY
-            var rotationY = value + (deltaAngle * i);
+            var rotationY = value + (sign * deltaAngle * i);
             face.rotationY = rotationY;
 
             // Set depth
@@ -113,7 +117,7 @@ class Carousel extends FaceContainer {
 
         index = Wrap(index, 0, this.faces.length);
         this.currentFaceIndex = index;
-        this.rotationY = -this.faceAngle * index;
+        this.rotationY = ((this.rtl) ? 1 : -1) * this.faceAngle * index;
     }
 
     setFace(index) {

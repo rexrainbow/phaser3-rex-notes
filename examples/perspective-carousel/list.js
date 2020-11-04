@@ -20,7 +20,8 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
 
             faces: faces,
-            faceSpace: 60
+            faceSpace: 60,
+            // rtl: true
         })
 
         //this.input.on('pointermove', function (pointer) {
@@ -36,9 +37,9 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function (pointer, localX, localY, event) {
                 if (localX <= (carousel.width / 2)) {
-                    carousel.roll.toPrevious();
+                    carousel.roll.toLeft();
                 } else {
-                    carousel.roll.toNext();
+                    carousel.roll.toRight();
                 }
             });
 

@@ -71,24 +71,26 @@ class Roll extends TweenBase {
             return this;
         }
 
+        var carousel = this.gameObject;
+
         if (typeof (index) === 'string') {
-            index = FaceNameToIndex(this.gameObject.faces, index);
+            index = FaceNameToIndex(carousel.faces, index);
             if (index === -1) {
                 index = 0;
             }
         }
-        index = Wrap(index, 0, this.gameObject.faces.length);
+        index = Wrap(index, 0, carousel.faces.length);
 
         if (duration !== undefined) {
             this.setDuration(duration);
         }
 
-        var start = WrapDegrees(RadToDeg(this.gameObject.rotationY));
-        var end = WrapDegrees(RadToDeg(-this.gameObject.faceAngle * index));
+        var start = WrapDegrees(RadToDeg(carousel.rotationY));
+        var end = WrapDegrees(RadToDeg(((carousel.rtl) ? 1 : -1) * carousel.faceAngle * index));
         var delta = ShortestBetween(start, end); // Degrees
         this.start(DegToRad(delta));
 
-        this.gameObject.currentFaceIndex = index;
+        carousel.currentFaceIndex = index;
         return this;
     }
 
@@ -101,6 +103,24 @@ class Roll extends TweenBase {
     toPrevious(duration) {
         var index = this.gameObject.currentFaceIndex - 1;
         this.to(index, duration);
+        return this;
+    }
+
+    toRight(duration) {
+        if (!this.gameObject.rtl) {
+            this.toNext(duration);
+        } else {
+            this.toPrevious(duration);
+        }
+        return this;
+    }
+
+    toLeft(duration) {
+        if (!this.gameObject.rtl) {
+            this.toPrevious(duration);
+        } else {
+            this.toNext(duration);
+        }
         return this;
     }
 }
