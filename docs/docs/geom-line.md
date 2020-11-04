@@ -250,7 +250,7 @@ x1, y2, x2, y2 are equal.
     // var out = Phaser.Geom.Intersects.GetLineToCircle(line, circle, out);
     ```
 
-### Line to [rectangle](geom-rectangle.md)
+#### Line to [rectangle](geom-rectangle.md)
 
 - Is intersection
     ```javascript
