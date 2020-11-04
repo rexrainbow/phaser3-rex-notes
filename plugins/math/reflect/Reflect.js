@@ -1,16 +1,18 @@
 import IsGameObject from '../../utils/system/IsGameObject.js';
 import GetLineToPolygon from './GetLineToPolygon.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const Polygon = Phaser.Geom.Polygon;
 const Line = Phaser.Geom.Line;
 const SetToAngle = Phaser.Geom.Line.SetToAngle;
 const ReflectAngle = Phaser.Geom.Line.ReflectAngle;
 
 class Reflect {
-    constructor() {
+    constructor(config) {
         this.gameObjects = [];
         this.polygons = [];
         this.ray = new Line();
+        this.setMaxRayLength(GetValue(config, 'maxRayLength', 999999));
         this.hitSegment = new Line();
         this.result = {
             hit: false,
@@ -18,6 +20,12 @@ class Reflect {
             hitGO: null,
             reflectAngle: 0
         };
+
+    }
+
+    setMaxRayLength(length) {
+        this.maxRayLength = length;
+        return this;
     }
 
     addObstacle(gameObject, polygon) {
@@ -45,15 +53,22 @@ class Reflect {
         return this;
     }
 
-    trace() {
+    hitTest() {
         var result = GetLineToPolygon(this.ray, this.polygons, true);
         if (result) {
             this.result.hit = true;
             this.result.hitX = result.x;
             this.result.hitY = result.y;
-            this.result.hitGO = this.gameObjects[result.polygonIndex];
+            this.ray.x2 = result.x;
+            this.ray.y2 = result.y;
 
-            this.hitSegment.setTo(result.segX1, result.segY1, result.segX2, result.segY2);
+            var shapeIndex = result.shapeIndex;
+            this.result.hitGO = this.gameObjects[shapeIndex];
+
+            var points = this.polygons[shapeIndex].points;
+            var segIndex = result.segIndex,
+                p0 = points[segIndex], p1 = points[segIndex + 1];
+            this.hitSegment.setTo(p0.x, p0.y, p1.x, p1.y);
             this.result.reflectAngle = ReflectAngle(this.ray, this.hitSegment);
         } else {
             this.result.hit = false;
@@ -65,17 +80,10 @@ class Reflect {
         return (result) ? this.result : false;
     }
 
-    rayTo(x1, y1, x2, y2) {
-        this.ray.setTo(x1, y1, x2, y2);
-        return this.trace();
+    rayToward(x, y, angle) {
+        SetToAngle(this.ray, x, y, angle, this.maxRayLength);
+        return this.hitTest();
     }
-
-    rayPolar(x, y, angle, length) {
-        SetToAngle(this.ray, x, y, angle, length);
-        return this.trace();
-    }
-
-
 }
 
 export default Reflect;

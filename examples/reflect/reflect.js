@@ -19,8 +19,10 @@ class Demo extends Phaser.Scene {
         var debugGraphics = this.add.graphics();
         var x = 200, y = 300, angle = Phaser.Math.DegToRad(-80),
             result;
-        do {
-            result = reflect.rayPolar(x, y, angle, 800);
+
+        for (var i = 0; i < 1000; i++) {
+            console.log(i, x, y, Phaser.Math.RadToDeg(angle));
+            result = reflect.rayToward(x, y, angle);
             debugGraphics
                 .lineStyle(2, 0x840000)
                 .strokeLineShape(reflect.ray);
@@ -33,8 +35,10 @@ class Demo extends Phaser.Scene {
                 x = result.hitX;
                 y = result.hitY;
                 angle = result.reflectAngle;
+            } else {
+                break;
             }
-        } while (result);
+        }
     }
 
     update() {

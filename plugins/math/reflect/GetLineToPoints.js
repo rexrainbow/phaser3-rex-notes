@@ -8,14 +8,15 @@ var GetLineToPoints = function (line, points, out) {
     }
     /* 
     out: {
-        x,y,                     // intersection point
-        d,                       // intersection distance
-        segX1,segY1,segX2,segY2  // intersection segment
+        x,y,      // intersection point
+        d,        // intersection distance
+        segIndex  // intersection segment
     }
     */
 
     var closestIntersect = false;
 
+    out.d = Infinity;
     tempIntersect.set();
 
     var prev = points[0];
@@ -29,14 +30,11 @@ var GetLineToPoints = function (line, points, out) {
 
         if (GetLineToLine(line, segment, tempIntersect)) {
             // Ignore case: intersection distance is 0
-            if ((!closestIntersect || (tempIntersect.z < out.d)) && (tempIntersect.z > 0)) {
+            if ((tempIntersect.z > 0) && (tempIntersect.z < out.d)) {
                 out.x = tempIntersect.x;
                 out.y = tempIntersect.y;
                 out.d = tempIntersect.z;
-                out.segX1 = segment.x1;
-                out.segY1 = segment.y1;
-                out.segX2 = segment.x2;
-                out.segY2 = segment.y2;
+                out.segIndex = i - 1;
 
                 closestIntersect = true;
             }
