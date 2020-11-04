@@ -190,10 +190,12 @@ scene.tweens.add({
 })
 ```
 
-### Change texture
+### Change frame
+
+Frame is bound with vertices. Use [perspective renderTexture](perspective-rendertexture.md) to change frame without recreate vertices again (assume that size of frame won't changed).
 
 ```javascript
-image.setTexture(key, frame).resetVerts();
+rt.drawFrame(key, frame);
 ```
 
 ### Other properties
