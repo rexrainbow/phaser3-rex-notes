@@ -57,11 +57,11 @@ class ImageCarousel extends Carousel {
     }
 
     get isFirstImage() {
-        return (this.currentImageIndex === 0);
+        return (this.images.length === 0) || (this.currentImageIndex === 0);
     }
 
     get isLastImage() {
-        return (this.currentImageIndex === (this.images.length - 1));
+        return (this.images.length === 0) || (this.currentImageIndex === (this.images.length - 1));
     }
 
     updateTexture() {
@@ -113,6 +113,23 @@ class ImageCarousel extends Carousel {
         return this;
     }
 
+    toRight(duration) {
+        if (!this.rtl) {
+            this.toNext(duration);
+        } else {
+            this.toPrevious(duration);
+        }
+        return this;
+    }
+
+    toLeft(duration) {
+        if (!this.rtl) {
+            this.toPrevious(duration);
+        } else {
+            this.toNext(duration);
+        }
+        return this;
+    }
 }
 
 export default ImageCarousel;

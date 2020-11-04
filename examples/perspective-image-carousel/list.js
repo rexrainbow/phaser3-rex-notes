@@ -24,6 +24,7 @@ class Demo extends Phaser.Scene {
             x: 400, y: 300,
 
             images: images,
+            // rtl: true,
             // repeat: false,
             // faceCount: 6
         })
@@ -32,9 +33,9 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function (pointer, localX, localY, event) {
                 if (localX <= (carousel.width / 2)) {
-                    carousel.toPrevious();
+                    carousel.toLeft();
                 } else {
-                    carousel.toNext();
+                    carousel.toRight();
                 }
             });
     }
