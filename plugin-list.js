@@ -108,7 +108,7 @@ module.exports = {
     // math
     'gashaponplugin': './plugins/gashapon-plugin.js',
     'perlinplugin': './plugins/perlin-plugin.js',
-    'reflectionplugin': './plugins/reflection-plugin.js',
+    'raycasterplugin': './plugins/raycaster-plugin.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',

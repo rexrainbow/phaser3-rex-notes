@@ -1,4 +1,4 @@
-import ReflectionPlugin from '../../plugins/reflection-plugin.js';
+import RaycasterPlugin from '../../plugins/raycaster-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,8 +11,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var reflection = this.plugins.get('rexReflection').add();
-        reflection
+        var raycaster = this.plugins.get('rexRaycaster').add();
+        raycaster
             .addObstacle(this.add.rectangle(100, 100, 600, 30, 0x848484).setOrigin(0, 1))
             .addObstacle(this.add.rectangle(100, 500, 600, 30, 0x848484).setOrigin(0, 0))
             .addObstacle(this.add.rectangle(600, 300, 100, 30, 0x848484).setAngle(45))
@@ -20,14 +20,14 @@ class Demo extends Phaser.Scene {
         var startX = 200, startY = 300;
         var debugGraphics = this.add.graphics();
 
-        RunReflection(reflection,
+        RunRaycaster(raycaster,
             startX, startY,
             Phaser.Math.DegToRad(-80),
             debugGraphics);
 
         this.input.on('pointermove', function (pointer) {
 
-            RunReflection(reflection,
+            RunRaycaster(raycaster,
                 startX, startY,
                 Phaser.Math.Angle.Between(startX, startY, pointer.x, pointer.y),
                 debugGraphics
@@ -40,18 +40,18 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var RunReflection = function (reflection, x, y, angle, debugGraphics) {
+var RunRaycaster = function (raycaster, x, y, angle, debugGraphics) {
     debugGraphics
         .clear()
         .fillStyle(0xC4C400)
         .fillCircle(x, y, 10);
 
-    const MaxReflectionCount = 1000;
-    for (var i = 0; i < MaxReflectionCount; i++) {
-        var result = reflection.rayToward(x, y, angle);
+    const MaxRaycasterCount = 1000;
+    for (var i = 0; i < MaxRaycasterCount; i++) {
+        var result = raycaster.rayToward(x, y, angle);
         debugGraphics
             .lineStyle(2, 0x840000)
-            .strokeLineShape(reflection.ray);
+            .strokeLineShape(raycaster.ray);
 
         if (result) {
             debugGraphics
@@ -78,8 +78,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexReflection',
-            plugin: ReflectionPlugin,
+            key: 'rexRaycaster',
+            plugin: RaycasterPlugin,
             start: true
         }]
     }

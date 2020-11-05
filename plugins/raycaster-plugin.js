@@ -1,6 +1,6 @@
-import Reflection from './reflection.js';
+import Raycaster from './raycaster.js';
 
-class ReflectionPlugin extends Phaser.Plugins.BasePlugin {
+class RaycasterPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -12,8 +12,8 @@ class ReflectionPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new Reflection(config);
+        return new Raycaster(config);
     }
 }
 
-export default ReflectionPlugin;
+export default RaycasterPlugin;
