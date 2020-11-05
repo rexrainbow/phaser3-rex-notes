@@ -12,7 +12,7 @@ class Reflection {
         this.gameObjects = [];
         this.polygons = [];
         this.ray = new Line();
-        this.setMaxRayLength(GetValue(config, 'maxRayLength', 999999));
+        this.setMaxRayLength(GetValue(config, 'maxRayLength', 10000));
         this.result = {
             hit: false,
             hitX: 0, hitY: 0,
