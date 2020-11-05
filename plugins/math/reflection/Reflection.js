@@ -7,17 +7,18 @@ const Line = Phaser.Geom.Line;
 const SetToAngle = Phaser.Geom.Line.SetToAngle;
 const ReflectAngle = Phaser.Geom.Line.ReflectAngle;
 
-class Reflect {
+class Reflection {
     constructor(config) {
         this.gameObjects = [];
         this.polygons = [];
         this.ray = new Line();
         this.setMaxRayLength(GetValue(config, 'maxRayLength', 999999));
-        this.hitSegment = new Line();
         this.result = {
             hit: false,
             hitX: 0, hitY: 0,
-            hitGO: null,
+            hitSegment: new Line(),
+            hitShape: null,
+            hitGameObject: null,
             reflectAngle: 0
         };
 
@@ -31,12 +32,11 @@ class Reflect {
     addObstacle(gameObject, polygon) {
         if (IsGameObject(gameObject)) {
             if (polygon === undefined) {
-                polygon = new Polygon([
-                    gameObject.getTopLeft(),
-                    gameObject.getTopRight(),
-                    gameObject.getBottomRight(),
-                    gameObject.getBottomLeft()
-                ])
+                var p0 = gameObject.getTopLeft(),
+                    p1 = gameObject.getTopRight(),
+                    p2 = gameObject.getBottomRight(),
+                    p3 = gameObject.getBottomLeft();
+                polygon = new Polygon([p0, p1, p2, p3, p0]);
             }
         } else if (gameObject instanceof (Polygon)) {
             polygon = gameObject;
@@ -56,25 +56,29 @@ class Reflect {
     hitTest() {
         var result = GetLineToPolygon(this.ray, this.polygons, true);
         if (result) {
-            this.result.hit = true;
-            this.result.hitX = result.x;
-            this.result.hitY = result.y;
             this.ray.x2 = result.x;
             this.ray.y2 = result.y;
 
-            var shapeIndex = result.shapeIndex;
-            this.result.hitGO = this.gameObjects[shapeIndex];
+            this.result.hit = true;
+            this.result.hitX = result.x;
+            this.result.hitY = result.y;
 
-            var points = this.polygons[shapeIndex].points;
-            var segIndex = result.segIndex,
-                p0 = points[segIndex], p1 = points[segIndex + 1];
-            this.hitSegment.setTo(p0.x, p0.y, p1.x, p1.y);
-            this.result.reflectAngle = ReflectAngle(this.ray, this.hitSegment);
+            var shapeIndex = result.shapeIndex;
+            this.result.hitShape = this.polygons[shapeIndex];
+            this.result.hitGameObject = this.gameObjects[shapeIndex];
+
+            var points = this.result.hitShape.points,
+                segIndex = result.segIndex,
+                p0 = points[segIndex],
+                p1 = points[segIndex + 1];
+            var hitSegment = this.result.hitSegment;
+            hitSegment.setTo(p0.x, p0.y, p1.x, p1.y);
+            this.result.reflectAngle = ReflectAngle(this.ray, hitSegment);
         } else {
             this.result.hit = false;
             this.result.hitX = 0;
             this.result.hitY = 0;
-            this.result.hitGO = null;
+            this.result.hitGameObject = null;
             this.result.reflectAngle = 0;
         }
         return (result) ? this.result : false;
@@ -86,4 +90,4 @@ class Reflect {
     }
 }
 
-export default Reflect;
+export default Reflection;

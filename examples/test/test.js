@@ -9,20 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var baseLine = new Phaser.Geom.Line(100, 300, 700, 300);
-        var rayIn = new Phaser.Geom.Line(388, 200, 400, 300);
-        var reflactAngle = Phaser.Geom.Line.ReflectAngle(rayIn, baseLine);
-        console.log(Phaser.Math.RadToDeg(reflactAngle))
-        var rayReflect = new Phaser.Geom.Line();
-        Phaser.Geom.Line.SetToAngle(rayReflect, 400, 300, reflactAngle, 200);
-
-        this.add.graphics()
-            .lineStyle(2, 0x848484)
-            .strokeLineShape(baseLine)
-            .lineStyle(2, 0xC40000)
-            .strokeLineShape(rayIn)
-            .lineStyle(2, 0x00C400)
-            .strokeLineShape(rayReflect)
     }
 
     update() {

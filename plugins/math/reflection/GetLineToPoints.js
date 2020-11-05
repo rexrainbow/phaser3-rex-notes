@@ -1,4 +1,5 @@
 const GetLineToLine = Phaser.Geom.Intersects.GetLineToLine;
+const PointToLine = Phaser.Geom.Intersects.PointToLine
 
 var GetLineToPoints = function (line, points, out) {
     if (out === undefined) {
@@ -16,6 +17,7 @@ var GetLineToPoints = function (line, points, out) {
 
     var closestIntersect = false;
 
+    startPoint.setTo(line.x1, line.y1);
     out.d = Infinity;
     tempIntersect.set();
 
@@ -25,12 +27,15 @@ var GetLineToPoints = function (line, points, out) {
         var current = points[i];
 
         segment.setTo(prev.x, prev.y, current.x, current.y);
-
         prev = current;
 
+        // Ignore case: start point of line is at segment
+        if (PointToLine(startPoint, segment)) {
+            continue;
+        }
+
         if (GetLineToLine(line, segment, tempIntersect)) {
-            // Ignore case: intersection distance is 0
-            if ((tempIntersect.z > 0) && (tempIntersect.z < out.d)) {
+            if (tempIntersect.z < out.d) {
                 out.x = tempIntersect.x;
                 out.y = tempIntersect.y;
                 out.d = tempIntersect.z;
@@ -45,6 +50,7 @@ var GetLineToPoints = function (line, points, out) {
 };
 
 var globResult = {};
+var startPoint = new Phaser.Geom.Point();
 var segment = new Phaser.Geom.Line();
 var tempIntersect = new Phaser.Math.Vector3();
 
