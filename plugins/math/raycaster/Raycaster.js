@@ -63,6 +63,18 @@ class Reflection {
         return this;
     }
 
+    updateObstacle(gameObject, polygon) {
+        if (Array.isArray(gameObject)) {
+            var gameObjects = gameObject;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.obstacles.update(gameObjects[i]);
+            }
+        } else {
+            this.obstacles.update(gameObject, polygon);
+        }
+        return this;
+    }
+
     hitTest() {
         var result = GetLineToPolygon(this.ray, this.obstacles.polygons, true);
         if (result) {

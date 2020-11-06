@@ -104,6 +104,22 @@ raycaster.removeObstacle(gameObject);
 
 - `gameObject` : A game object, or an array of game objects.
 
+#### Clear
+
+```javascript
+raycaster.clearObstacle();
+```
+
+#### Update shape
+
+```javascript
+raycaster.updateObstacle(gameObject);
+// raycaster.updateObstacle(gameObject, polygon);
+```
+
+- `polygon` : A [polygon](geom-polygon.md). 
+    - `undefined` : Created polygon from 4 vertics of game object.
+
 ### Raycaster
 
 ```javascript
