@@ -1,4 +1,4 @@
-import Obstacles from './obstacles/Obstacles.js';
+import Obstacles from './Obstacles.js';
 import GetLineToPolygon from './GetLineToPolygon.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

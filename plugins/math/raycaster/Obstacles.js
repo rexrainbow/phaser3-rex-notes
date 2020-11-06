@@ -1,4 +1,4 @@
-import IsGameObject from '../../../utils/system/IsGameObject.js';
+import IsGameObject from '../../utils/system/IsGameObject.js';
 
 const Polygon = Phaser.Geom.Polygon;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
