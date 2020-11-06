@@ -1,6 +1,9 @@
 import GetLineToPoints from './GetLineToPoints.js';
 import Clone from '../../utils/object/Clone.js';
 
+const GetAABB = Phaser.Geom.Polygon.GetAABB;
+const LineToRectangle = Phaser.Geom.Intersects.LineToRectangle;
+
 var GetLineToPolygon = function (line, polygons, out) {
     if (out === undefined) {
         out = {};
@@ -26,7 +29,15 @@ var GetLineToPolygon = function (line, polygons, out) {
     //  Reset our vec4s
 
     for (var i = 0; i < polygons.length; i++) {
-        var intersectionResult = GetLineToPoints(line, polygons[i].points, true);
+        var polygon = polygons[i];
+
+        // Run AABBTest when polygon is more than 8 edges
+        if ((polygon.points.length > 9) &&
+            !LineToRectangle(line, GetAABB(polygon, AABBRect))) {
+            continue;
+        }
+
+        var intersectionResult = GetLineToPoints(line, polygon.points, true);
         if (intersectionResult) {
             if (intersectionResult.d < out.d) {
                 Clone(intersectionResult, out);  // x,y,d,segIndex
@@ -41,5 +52,6 @@ var GetLineToPolygon = function (line, polygons, out) {
 };
 
 var globResult = {};
+var AABBRect = new Phaser.Geom.Rectangle();
 
 export default GetLineToPolygon;
