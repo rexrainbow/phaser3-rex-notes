@@ -1,4 +1,3 @@
-import DestroyCallbackMethods from './DestroyCallbackMethods.js';
 import IsGameObject from '../../../utils/system/IsGameObject.js';
 
 const Polygon = Phaser.Geom.Polygon;
@@ -12,6 +11,42 @@ class Obstacles {
 
     contains(gameObject) {
         return (this.gameObjects.indexOf(gameObject) !== (-1));
+    }
+
+    get(index) {
+        Obstacle.gameObject = this.gameObjects[index];
+        Obstacle.polygon = this.polygons[index];
+        return Obstacle;
+    }
+
+    addDestroyCallback(gameObject) {
+        if (Array.isArray(gameObject)) {
+            var gameObjects = gameObject;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.addDestroyCallback(gameObjects[i]);
+            }
+            return this;
+        }
+
+        if (gameObject.on) {
+            gameObject.on('destroy', this.remove, this);
+        }
+        return this;
+    }
+
+    removeDestroyCallback(gameObject) {
+        if (Array.isArray(gameObject)) {
+            var gameObjects = gameObject;
+            for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+                this.removeDestroyCallback(gameObjects[i]);
+            }
+            return this;
+        }
+
+        if (gameObject.off) {
+            gameObject.off('destroy', this.remove, this);
+        }
+        return this;
     }
 
     clear() {
@@ -45,12 +80,6 @@ class Obstacles {
         return this;
     }
 
-    get(index) {
-        Obstacle.gameObject = this.gameObjects[index];
-        Obstacle.polygon = this.polygons[index];
-        return Obstacle;
-    }
-
     remove(gameObject) {
         var index = this.gameObjects.indexOf(gameObject);
         if (index === (-1)) {
@@ -66,10 +95,5 @@ class Obstacles {
 }
 
 var Obstacle = {};
-
-Object.assign(
-    Obstacles.prototype,
-    DestroyCallbackMethods
-)
 
 export default Obstacles;
