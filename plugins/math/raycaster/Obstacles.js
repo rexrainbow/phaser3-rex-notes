@@ -1,4 +1,5 @@
 import IsGameObject from '../../utils/system/IsGameObject.js';
+import BoundsToPolygon from '../../utils/bounds/BoundsToPolygon.js';
 
 const Polygon = Phaser.Geom.Polygon;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
@@ -63,11 +64,7 @@ class Obstacles {
 
         if (IsGameObject(gameObject)) {
             if (polygon === undefined) {
-                var p0 = gameObject.getTopLeft(),
-                    p1 = gameObject.getTopRight(),
-                    p2 = gameObject.getBottomRight(),
-                    p3 = gameObject.getBottomLeft();
-                polygon = new Polygon([p0, p1, p2, p3, p0]);
+                polygon = BoundsToPolygon(gameObject);
             }
         } else if (gameObject instanceof (Polygon)) {
             polygon = gameObject;
@@ -90,6 +87,18 @@ class Obstacles {
         SpliceOne(this.polygon, index);
 
         this.removeDestroyCallback(gameObject);
+        return this;
+    }
+
+    update(gameObject, polygon) {
+        var index = this.gameObjects.indexOf(gameObject);
+        if (index === (-1)) {
+            return this;
+        }
+        if (polygon === undefined) {
+            polygon = BoundsToPolygon(gameObject, this.polygons[index]);
+        }
+        this.polygons[index] = polygon;
         return this;
     }
 }

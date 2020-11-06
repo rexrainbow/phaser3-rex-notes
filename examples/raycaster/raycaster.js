@@ -56,10 +56,10 @@ var RunRaycaster = function (raycaster, x, y, angle, debugGraphics) {
         if (result) {
             debugGraphics
                 .fillStyle(0xff0000)
-                .fillPoint(result.hitX, result.hitY, 4)
+                .fillPoint(result.x, result.y, 4)
 
-            x = result.hitX;
-            y = result.hitY;
+            x = result.x;
+            y = result.y;
             angle = result.reflectAngle;
         } else {
             break;
