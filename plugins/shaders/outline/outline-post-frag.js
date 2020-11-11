@@ -1,6 +1,6 @@
 // Reference: https://github.com/pixijs/pixi-filters/blob/master/filters/outline/src/outline.frag
 
-const frag = `
+const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -37,7 +37,8 @@ void main() {
     gl_FragColor = front;
   }
 
-}`;
+}\
+`;
 
 const MAX_SAMPLES = 100;
 const MIN_SAMPLES = 1;

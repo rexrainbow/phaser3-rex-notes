@@ -257,18 +257,50 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 - Defaule name of render pipeline : `'MultiPipeline'`
 - [Add render pipeline instance](render-pipeline.md#add-pipeline-instance)
 - Set custom render pipeline
-    ```javascript
-    gameObject.setPipeline(pipelineName);
-    ```
-    - `pipelineName` : Name of this render pipeline, a string.
+    - Pipeline
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : 
+            - A string name of this render pipeline
+            - A pipeline instance
+    - Post pipeline
+        ```javascript
+        gameObject.setPostPipeline(pipelineName);
+        ```
+        - `pipelineName` : 
+            - A string name of this render pipeline
+            - A pipeline instance
 - Reset custom render pipeline to defaule render pipeline
-    ```javascript
-    gameObject.resetPipeline();
-    ```
+    - Reset pipeline and remove post-pipeline
+        ```javascript
+        gameObject.resetPipeline(true);
+        ```
+    - Reset pipeline only
+        ```javascript
+        gameObject.resetPipeline();
+        ```
+        or
+        ```javascript
+        gameObject.pipeline = gameObject.defaultPipeline;
+        ```
+    - Remove post-pipeline
+        ```javascript
+        gameObject.setPostPipeline();
+        ```
+        or
+        ```javascript
+        gameObject.postPipeline = null;
+        ```
 - Get current name of render pipeline:
-    ```javascript
-    var pipelineName = gameObject.getPipelineName();
-    ```
+    - Pipeline
+        ```javascript
+        var pipelineName = gameObject.getPipelineName();
+        ```
+    - Post-pipeline
+        ```javascript
+        var pipelineName = gameObject.getPostPipelineName();
+        ```
 - [Set properties of piepline instance](render-pipeline.md#set-properties-of-filter)
 
 Some shader effects

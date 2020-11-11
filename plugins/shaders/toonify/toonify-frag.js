@@ -2,7 +2,7 @@ import RGBToHSV from '../utils/RGBToHSV.js';
 import HSVToRGB from '../utils/HSVToRGB.js';
 import IsEdge from '../utils/IsEdge.js';
 
-const frag = `
+const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -19,10 +19,10 @@ uniform float edgeThreshold; // 0.2;
 uniform float hStep;  // 60
 uniform float sStep;  // 0.15
 uniform float vStep;  // 0.33
-uniform vec3 edgeColor; // (0, 0, 0);
+uniform vec3 edgeColor; // (0, 0, 0);\
 `
 + RGBToHSV + IsEdge + HSVToRGB +
-`
+`\
 void main()
 {
   vec4 front = MyTexture2D(outTexCoord);  
@@ -45,7 +45,7 @@ void main()
 
   vec3 outColor = (IsEdge(outTexCoord, texSize, edgeThreshold))? edgeColor : colorLevel;
   gl_FragColor = vec4(outColor, front.a);
-}
+}\
 `;
 
 export default frag;

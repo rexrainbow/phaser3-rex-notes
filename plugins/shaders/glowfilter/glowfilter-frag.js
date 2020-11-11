@@ -1,4 +1,4 @@
-const frag = `
+const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -29,7 +29,7 @@ void main() {
   }
   
   gl_FragColor = mix(front, sum, intensity);
-}
+}\
 `;
 
 export default frag;

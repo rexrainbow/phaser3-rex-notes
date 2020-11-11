@@ -13,7 +13,7 @@ class ToonifyPipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'Toonify',
+            name: key,
             uniforms: ['edgeThreshold', 'hStep', 'sStep', 'vStep', 'edgeColor', 'texSize']
         });
         this._width = 0; // width wo resolution

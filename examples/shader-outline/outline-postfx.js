@@ -16,11 +16,18 @@ class Demo extends Phaser.Scene {
             thickness: 3,
             outlineColor: 0xff0000
         });
-        this.cameras.main.setRenderToTexture(customPipeline);
 
-        this.add.image(400, 300, 'mushroom');
-        this.add.image(300, 300, 'mushroom');
-        this.add.image(400, 250, 'mushroom');
+        for (var i = 0; i < 10; i++) {
+            this.add.image(0, 0, 'mushroom')
+                .setRandomPosition(100, 100, 600, 400)
+                .setInteractive()
+                .on('pointerover', function () {
+                    this.setPostPipeline('Outline');
+                })
+                .on('pointerout', function () {
+                    this.setPostPipeline();
+                })
+        }
     }
 
     update() {

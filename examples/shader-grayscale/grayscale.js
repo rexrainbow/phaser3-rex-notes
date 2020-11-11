@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
         drawSomething(this);
 
         var customPipeline = this.plugins.get('rexGrayScalePipeline').add(this, 'GrayScale');
-        this.cameras.main.setRenderToTexture(customPipeline);
+        this.cameras.main.setPipeline(customPipeline);
         this.cameraFilter = customPipeline;
 
         var scene = this;

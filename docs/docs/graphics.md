@@ -209,23 +209,6 @@ Fill this shape
 graphics.fillPath();
 ```
 
-#### Fill pattern
-
-1. Load texture pattern
-    ```javascript
-    graphics.setTexture(key, frame, mode);
-    ```
-    - `mode` :
-        - `0` : Multiply
-        - `1` : Alpha only
-        - `2` : Texture only
-1. Fill pattern
-    ```javascript
-    graphics.fillRect(x, y, width, height);
-    ```
-
-WebGL only
-
 ##### Clear pattern
 
 ```javascript

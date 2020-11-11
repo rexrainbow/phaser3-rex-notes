@@ -156,5 +156,3 @@ camera.on('camerarotatecomplete', camera, rorotateTotate);
     ```
 
 More detail about [mask](mask.md)
-
-

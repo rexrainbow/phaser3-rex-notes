@@ -12,7 +12,7 @@ class HslAdjustPipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'HslAdjust',
+            name: key,
             uniforms: ['hueRotate', 'satAdjust', 'lumAdjust']
         });
         this._hueRotate = 0;

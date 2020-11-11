@@ -1,4 +1,4 @@
-import OutlinePipeline from './outlinepipeline.js';
+import { OutlinePostPipeline } from './OutlinePipeline.js';
 
 class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -12,7 +12,7 @@ class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, key, config) {
-        return new OutlinePipeline(scene, key, config);
+        return new OutlinePostPipeline(scene, key, config);
     }
 
 }

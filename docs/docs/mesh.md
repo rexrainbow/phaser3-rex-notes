@@ -47,7 +47,7 @@ Render a group of textured vertices and manipulate the view of those vertices, s
         - `near`, `far` : The near/far value of the view. Default value are `0.01`/`1000`.
 1. Creates a grid of vertices
     ```javascript
-    Phaser.Geom.Mesh.GeneraterGridVerts({
+    Phaser.Geom.Mesh.GenerateGridVerts({
         mesh: mesh,
         texture: textureKey,
         frame: frameName,
@@ -181,6 +181,17 @@ Render a group of textured vertices and manipulate the view of those vertices, s
     mesh.modelScale.z = scaleZ;
     ```
     - `scaleX`, `scaleY`, `scaleZ` : Scale value, `1` is origin size.
+
+### Backward facing Faces
+
+- Hide backward facing Faces. Default behavior.
+    ```javascript
+    mesh.hideCCW = true;
+    ```
+- Show backward facing Faces
+    ```javascript
+    mesh.hideCCW = false;
+    ```
 
 ### Debug
 

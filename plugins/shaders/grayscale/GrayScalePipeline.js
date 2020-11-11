@@ -12,7 +12,7 @@ class GrayScalePipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'GrayScale',
+            name: key,
             uniforms: ['intensity']
         });
         this._intensity = 0;
@@ -26,8 +26,7 @@ class GrayScalePipeline extends MultiPipeline {
         return this;
     }
 
-    bind() {
-        super.bind();
+    onPreRender() {
         this.set1f('intensity', this._intensity);
     }
 

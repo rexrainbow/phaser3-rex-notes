@@ -1,6 +1,6 @@
 // reference : https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/
 
-const frag = `
+const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -27,7 +27,7 @@ void main (void) {
   } else {        
     gl_FragColor = MyTexture2D(outTexCoord);
   }
-}
+}\
 `;
 
 export default frag;

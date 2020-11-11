@@ -1,12 +1,12 @@
-import { GetFrag } from './outline-frag.js';
+import { GetFrag } from './outline-post-frag.js';
 import FragCodeReplacer from '../utils/FragCodeReplacer';
 
-const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
+const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-class OutlinePipeline extends MultiPipeline {
+class OutlinePostPipeline extends PostFXPipeline {
     constructor(scene, key, config) {
         if (config === undefined) {
             config = {};
@@ -14,11 +14,12 @@ class OutlinePipeline extends MultiPipeline {
 
         // Note: quality can't be changed during runtime
         var game = scene.game;
-        var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures);
+        var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures, true);
+        console.log(frag)
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'Outline',
+            name: key,
             uniforms: ['thickness', 'outlineColor', 'texSize']
         });
         this._width = 0; // width wo resolution
@@ -36,8 +37,7 @@ class OutlinePipeline extends MultiPipeline {
         return this;
     }
 
-    bind() {
-        super.bind();
+    onPreRender() {
         this.set2f('thickness', this._thickness, this._thickness);
         this.set3f('outlineColor', this._outlineColor.redGL, this._outlineColor.greenGL, this._outlineColor.blueGL);
         this.set2f('texSize', this._width, this._height);
@@ -83,4 +83,4 @@ class OutlinePipeline extends MultiPipeline {
     }
 }
 
-export default OutlinePipeline;
+export default OutlinePostPipeline;

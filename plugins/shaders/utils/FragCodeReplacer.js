@@ -1,14 +1,21 @@
 const CoordsName = 'coords';
-const template = `
+const MultipleTextureTemplate = `\
 uniform sampler2D uMainSampler[%count%];
 varying vec2 outTexCoord;
 varying float outTexId;
 vec4 MyTexture2D(vec2 ${CoordsName}) {
   %forloop%
-}
+}\
+`;
+const PostPipelineTemplate = `\
+uniform sampler2D uMainSampler;
+varying vec2 outTexCoord;
+vec4 MyTexture2D(vec2 ${CoordsName}) {
+    return texture2D(uMainSampler, ${CoordsName});
+}\
 `;
 
-var GetMyTexture2DCode = function(maxTextures) {
+var GetMyTexture2DCode = function (maxTextures) {
     var loopCode = '';
     for (var i = 0; i < maxTextures; i++) {
         if (i > 0) {
@@ -20,13 +27,17 @@ var GetMyTexture2DCode = function(maxTextures) {
         }
         loopCode += `{return texture2D(uMainSampler[${i}], ${CoordsName});}\n`;
     }
-    var content = template.replace(/%count%/gi, maxTextures.toString());
+    var content = MultipleTextureTemplate.replace(/%count%/gi, maxTextures.toString());
     content = content.replace(/%forloop%/gi, loopCode);
     return content;
 }
 
-var FragCodeReplacer = function (frag, maxTextures) {
-    frag = frag.replace(/%MyTexture2D%/gi, GetMyTexture2DCode(maxTextures));
+var FragCodeReplacer = function (frag, maxTextures, isPostFX) {
+    if (isPostFX === undefined) {
+        isPostFX = false;
+    }
+    var replaceBy = (isPostFX) ? PostPipelineTemplate : GetMyTexture2DCode(maxTextures);
+    frag = frag.replace(/%MyTexture2D%/gi, replaceBy);
     return frag;
 }
 

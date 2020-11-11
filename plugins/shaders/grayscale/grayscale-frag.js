@@ -1,4 +1,4 @@
-const frag = `
+const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp
 #else
@@ -16,7 +16,7 @@ void main (void) {
   vec4 front = MyTexture2D(outTexCoord);
   float gray = dot(front.rgb, vec3(0.299, 0.587, 0.114));
   gl_FragColor = mix(front, vec4(gray, gray, gray, front.a), intensity);
-}
+}\
 `;
 
 export default frag;

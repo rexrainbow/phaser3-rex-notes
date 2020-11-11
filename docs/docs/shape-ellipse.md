@@ -81,6 +81,7 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
         ```javascript
         ellipse.setSize(width, height);
         ```
+
 ### Smoothness
 
 The number of points used when rendering it. Increase this value for smoother curves, at the cost of more polygons being rendered.

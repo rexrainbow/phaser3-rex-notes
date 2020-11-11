@@ -186,7 +186,7 @@ camera.centerToSize();
     camera.startFollow(gameObject);
     // camera.startFollow(gameObject, roundPx, lerpX, lerpY, offsetX, offsetY);  // 
     ```
-    roundPx : set true to round the camera position to integers
+    - `roundPx` : set true to round the camera position to integers
 - Stop following
     ```javascript
     camera.stopFollow();
@@ -217,6 +217,13 @@ camera.centerToSize();
         ```javascript
         camera.setDeadzone();
         ```
+
+##### Events
+
+- Follower Update
+    ```javascript
+    camera.on('followupdate', function(camera, gameObject){ })
+    ```
 
 #### Scroll factor
 

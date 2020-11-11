@@ -13,7 +13,7 @@ class SwirlPipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'Swirl',
+            name: key,
             uniforms: ['radius', 'angle', 'center', 'texSize']
         });
         this._width = 0; // width wo resolution

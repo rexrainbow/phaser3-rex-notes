@@ -76,6 +76,14 @@ Advances the simulation by one step.
 scene.physics.world.step(delta);
 ```
 
+##### Events
+
+- World step
+    ```javascript
+    scene.physics.world.on('worldstep', function(delta) { /* ... */ });
+    ```
+    - `delta` : The delta time amount of this step, in seconds.
+
 ### Control
 
 #### Pause
@@ -89,6 +97,17 @@ scene.physics.pause();
 ```javascript
 scene.physics.resume();
 ```
+
+#### Events
+
+- Pause world
+    ```javascript
+    scene.physics.world.on('pause', function() { /* ... */ });
+    ```
+- Resume world
+    ```javascript
+    scene.physics.world.on('resume', function() { /* ... */ });
+    ```
 
 #### Duration per frame
 
@@ -220,6 +239,25 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
     // var isCollided = scene.physics.world.collide(object1, object2, collideCallback, processCallback, callbackContext);
     ```
 
+#### Events
+
+- Two bodies overlap and at least one of them has their `onOverlap` property set to `true`.
+    ```javascript
+    scene.physics.world.on('overlap', function(gameObject1, gameObject2, body1, body2) { /* ... */ });
+    ```
+- Two bodies overlap and at least one of them has their `onCollide` property set to `true`.
+    ```javascript
+    scene.physics.world.on('collide', function(gameObject1, gameObject2, body1, body2) { /* ... */ });
+    ```
+- A body overlaps with a Tile and has its `onOverlap` property set to `true`.
+    ```javascript
+    scene.physics.world.on('tileoverlap', function(gameObject, tile, body) { /* ... */ });
+    ```
+- A body overlaps with a Tile and has its `onCollide` property set to `true`.
+    ```javascript
+    scene.physics.world.on('tilecollide', function(gameObject, tile, body) { /* ... */ });
+    ```
+
 ### World bounds
 
 #### Enable
@@ -281,8 +319,7 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
 
 - World bounds
     ```javascript
-    var callback = function(body, blockedUp, blockedDown, blockedLeft, blockedRight) { /* ... */ };
-    scene.physics.world.on('worldbounds', callback);
+    scene.physics.world.on('worldbounds', function(body, blockedUp, blockedDown, blockedLeft, blockedRight) { /* ... */ });
     ```
 
 ### Wrap

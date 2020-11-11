@@ -9,27 +9,53 @@ Shader effect of camera.
 ### Setup
 
 1. [Add render pipeline instance](render-pipeline.md#add-pipeline-instance)
-1. Add filter
-    ```javascript
-    camera.setRenderToTexture(pipelineName);
-    ```
-    - `pipelineName` :
-        - A string : Name of this render pipeline
-        - A pipeline instance
+1. Add custom pipeline
+    - Pipeline
+        ```javascript
+        camera.setPipeline(pipelineName);
+        ```
+        - `pipelineName` :
+            - A string name of this render pipeline
+            - A pipeline instance
+    - Post-pipeline
+        ```javascript
+        camera.setPostPipeline(pipelineName);
+        ```
+        - `pipelineName` : 
+            - A string name of this render pipeline
+            - A pipeline instance
 1. [Set properties of piepline instance](render-pipeline.md#set-properties-of-filter)
 
-### Other methods
+### Reset
 
-- Change filter
+- Reset pipeline and remove post-pipeline
     ```javascript
-    camera.setPipeline(pipelineName);
+    camera.resetPipeline(true);
+    ```
+- Reset pipeline only
+    ```javascript
+    camera.resetPipeline();
     ```
     or
     ```javascript
-    camera.setPipeline(filter);
+    camera.pipeline = camera.defaultPipeline;
     ```
-    - `pipelineName` : Name of this render pipeline, a string.
-- Clear filter
+- Remove post-pipeline
     ```javascript
-    camera.clearRenderToTexture();
+    camera.setPostPipeline();
+    ```
+    or
+    ```javascript
+    camera.postPipeline = null;
+    ```
+
+### Get name
+
+- Pipeline
+    ```javascript
+    var pipelineName = camera.getPipelineName();
+    ```
+- Post-pipeline
+    ```javascript
+    var pipelineName = camera.getPostPipelineName();
     ```

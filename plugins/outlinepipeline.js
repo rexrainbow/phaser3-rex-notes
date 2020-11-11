@@ -1,2 +1,2 @@
-import OutlinePipeline from './shaders/outline/OutlinePipeline.js';
-export default OutlinePipeline;
+import OutlinePostPipeline from './shaders/outline/OutlinePostPipeline.js';
+export { OutlinePostPipeline };

@@ -12,7 +12,7 @@ class GlowFilterPipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'GlowFilter',
+            name: key,
             uniforms: ['intensity']
         });
         this._intensity = 0;

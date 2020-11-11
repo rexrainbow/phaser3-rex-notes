@@ -12,7 +12,7 @@ class InversePipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'Inverse',
+            name: key,
             uniforms: ['intensity']
         });
         this._intensity = 0;

@@ -11,7 +11,7 @@ class PixelationPipeline extends MultiPipeline {
         super({
             game: game,
             fragShader: frag, // GLSL shader
-            name: 'Pixelation',
+            name: key,
             uniforms: ['pixelSize', 'texSize']
         });
         this._width = 0; // width wo resolution
