@@ -85,13 +85,17 @@ var graphics = scene.add.graphics({
         ```
     - Fill gradient color (WebGL only)
         ```javascript
-        graphics.fillStyle(topLeft, topRight, bottomLeft, bottomRight);  // alpha= 1
-        // graphics.fillStyle(topLeft, topRight, bottomLeft, bottomRight, alpha);
+        graphics.fillGradientStyle(topLeft, topRight, bottomLeft, bottomRight, alpha);  // alpha= 1
+        // graphics.fillGradientStyle(topLeft, topRight, bottomLeft, bottomRight, alphaTopLeft, alphaTopRight, alphaBottomLeft, alphaBottomRight);
         ```
         - `topLeft` : The tint being applied to the top-left of the Game Object.
         - `topRight` : The tint being applied to the top-right of the Game Object.
         - `bottomLeft` : The tint being applied to the bottom-left of the Game Object.
         - `bottomRight` : The tint being applied to the bottom-right of the Game Object.
+        - `alphaTopLeft` : The top left alpha value.
+        - `alphaTopRight` : The top right alpha value.
+        - `alphaBottomLeft` : The bottom left alpha value.
+        - `alphaBottomRight` : The bottom right alpha value.
 
 #### Clear
 

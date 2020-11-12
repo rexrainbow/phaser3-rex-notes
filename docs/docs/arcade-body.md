@@ -226,9 +226,10 @@ Reduces speed per second.
     ```javascript
     body.setAllowDrag(false);
     ```
-- Enable damping (default: false)
+- Enable Damping (default: disable)
     ```javascript
-    body.useDamping = true;
+    body.setDamping(true);
+    // body.useDamping = true;
     ```
 
 #### Reset position

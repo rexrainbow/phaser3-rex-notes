@@ -345,3 +345,18 @@ GO --> Game
 ```javascript
 camera.clearRenderToTexture();
 ```
+
+### Children
+
+#### Visible children
+
+- Filter visible children
+    ```javascript
+    var visible = scene.cameras.getVisibleChildren(children, camera);
+    ```
+- Get all visible children
+    ```javascript
+    var visible = scene.cameras.getVisibleChildren(scene.sys.displayList.list, camera);
+    ```
+
+See also: [gameObject.willRender(camera)](gameobject.md/#will-render)

@@ -261,7 +261,7 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         ```javascript
         gameObject.setPipeline(pipelineName);
         ```
-        - `pipelineName` : 
+        - `pipelineName` :
             - A string name of this render pipeline
             - A pipeline instance
     - Post pipeline

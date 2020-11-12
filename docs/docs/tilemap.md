@@ -9,7 +9,7 @@ Display of tiles map, built-in game object of phaser.
 ### Load tile map
 
 ```javascript
-scene.load.tilemapWeltmeister(key, url);  // JSON
+scene.load.tilemapTiledJSON(key, url);  // JSON
 scene.load.tilemapCSV(key, url);          // CSV
 ```
 
@@ -23,23 +23,21 @@ scene.load.tilemapCSV(key, url);          // CSV
         ```
     - Create map from 2d array
         ```javascript
-        var config = {
+        var map = this.make.tilemap({
             data: tileIdxArray,  // [ [], [], ... ]
             tileWidth: 32,
             tileHeight: 32,
             width: 10,
             height: 10
-        }
-        var map = this.make.tilemap(config);
+        });
         ```
     - Create map from csv
         ```javascript
-        var config = {
+        var map = this.make.tilemap({
             key: 'map',     // csv file
             tileWidth: 32,
             tileHeight: 32
-        }
-        var map = this.make.tilemap(config);
+        });
         ```
 2. Add tile set image
     ```javascript

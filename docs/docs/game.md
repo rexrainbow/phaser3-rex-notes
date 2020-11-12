@@ -18,7 +18,7 @@ var game = new Phaser.Game(config);
 
 ### Configuration
 
-[Reference](https://photonstorm.github.io/phaser3-docs/global.html?fbclid=IwAR2qMGrPGJwu2t_ijZy64Kg6pEoDpofRYkuvwa6QxtwyVe-g9l0kG6DRhKM#GameConfig)
+[Reference](https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig)
 
 ```javascript
 {
@@ -140,6 +140,8 @@ or
             // ...
         ]
     },
+
+    pipeline: { key:PipelineClass },
 
     fps: {
         min: 10,
