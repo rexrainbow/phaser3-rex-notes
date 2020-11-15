@@ -19,12 +19,12 @@ scene.load.tilemapCSV(key, url);          // CSV
     - Create map from tiled
         ```javascript
         var map = scene.add.tilemap(key);
-        // var map = this.make.tilemap({ key: 'map' });
+        // var map = this.make.tilemap({ key: 'map', tileWidth: 16, tileHeight: 16 });
         ```
     - Create map from 2d array
         ```javascript
         var map = this.make.tilemap({
-            data: tileIdxArray,  // [ [], [], ... ]
+            // data: tileIdxArray,  // [ [], [], ... ]
             tileWidth: 32,
             tileHeight: 32,
             width: 10,
@@ -45,22 +45,53 @@ scene.load.tilemapCSV(key, url);          // CSV
     // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName
     // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);
     ```
-3. Create layer object to render tile image, a tile map object could have many layers. Layer object is a kind of game object.
+3. Create layer
+    - Create existed layer
+        ```javascript
+        var layer = map.createLayer(layerID, tileset);
+        // var layer = map.createLayer(layerID, tileset, x, y);
+        ```
+        - `tileset` : The tileset, or an array of tilesets.
+            - A string, or an array of string.
+            - A tileset object, or an array of tileset objects.
+        - `x`, `y` : Offset in pixels.
+    - Create a new and empty layer
+        ```javascript
+        var layer = map.createBlankLayer(layerID, tileset);
+        // var layer = map.createBlankLayer(layerID, tileset, x, y, width, height, tileWidth, tileHeight); // x, y : offset in pixels
+        ```
+        - `tileset` : The tileset, or an array of tilesets.
+            - A string, or an array of string.
+            - A tileset object, or an array of tileset objects.
+        - `x`, `y` : Offset in pixels.
+        - `width`, `height` : The width/height of the layer in tiles. Default is map's width/height.
+        - `tileWidth`, `tileHeight` : The width/height of the tiles the layer uses for calculations. Default is map's tileWidth/tileHeight.
+4. Create game objects with Object-ID/Object-GID/Object-Name (optional)
     ```javascript
-    var layer = map.createLayer(layerID, tileset);
-    // var layer = map.createLayer(layerID, tileset, x, y); // x, y : offset in pixels
+    var sprites = map.createFromObjects(layerName, {
+        // gid: 26,
+        // name: 'bonus',
+        // id: 9,
+
+        // classType: Sprite,
+        // scene,
+        // container: null,
+        // key: null,
+        // frame: null
+    });
     ```
-    - `tileset` : The tileset, or an array of tilesets.
-        - A string, or an array of string.
-        - A tileset object, or an array of tileset objects.
-4. Create sprite objects with tile ID (optional)
+    or
     ```javascript
-    var sprites = map.createFromObjects(name, id, spriteConfig);
-    // var sprites = map.createFromObjects(name, id, spriteConfig, scene);
+    var sprites = map.createFromObjects(layerName, configArray);
     ```
-    - name: name of the object layer
-    - id: gid (number), or id (number), or name (string)
-    - spriteConfig: The config object to pass into the Sprite creator (i.e. `scene.make.sprite`). Extend spriteConfig with properties of object (`type`, `x`, `y`, `rotation`, `visible`, `width`, `height`, ... etc)
+    - One of filter
+        - `gid` : Object GID.
+        - `id` : Object ID.
+        - `name` : Object Name.
+    - `classType` : Class of game object, default is [Sprite](sprite.md).
+    - `scene` : A Scene reference, passed to the Game Objects constructors. Default is map's scene.
+    - `container` : Optional Container to which the Game Objects are added.
+    - `key`, `frame` : Optional key of a Texture to be used.
 
 ### Map
 
@@ -76,11 +107,17 @@ or
 map.layer = layer;
 ```
 
-#### Set tile size
+#### Tile size
 
-```javascript
-map.setBaseTileSize(tileWidth, tileHeight);
-```
+- Set
+    ```javascript
+    map.setBaseTileSize(tileWidth, tileHeight);
+    ```
+- Get
+    ```javascript
+    var tileWidth = map.tileWidth;
+    var tileHeight = map.tileHeight;
+    ```
 
 #### Draw on graphics
 
