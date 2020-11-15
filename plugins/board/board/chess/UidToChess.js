@@ -4,11 +4,15 @@ var UidToChess = function (uid) {
     if (uid == null) {
         return null;
     } else {
-        // single uid
         if (!this.boardData.exists(uid)) {
             return null;
         }
-        return ChessBank.get(uid).parent;
+        var chessData = ChessBank.get(uid);
+        if (chessData) {
+            return chessData.parent;
+        } else {
+            return null;
+        }
     }
 }
 export default UidToChess;
