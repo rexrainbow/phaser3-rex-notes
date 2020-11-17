@@ -365,6 +365,12 @@ var gridWorldXY = board.worldXYSnapToGrid(worldX, worldY);
 // var out = board.worldXYSnapToGrid(worldX, worldY, out);
 ```
 
+### Grid distance
+
+```javascript
+var distance = board.getDistance(tileA, tileB);
+```
+
 ### Ring -> tile position
 
 - Get array of tile position around a ring.
