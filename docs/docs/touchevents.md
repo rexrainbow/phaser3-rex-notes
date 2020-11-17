@@ -375,10 +375,10 @@ scene.input.addPointer(num);  // total points = num + 1
     - Current touching
         - Position in screen : `pointer.x` , `pointer.y`
         - Position in camera : `pointer.worldX` , `pointer.worldY`
-            - Get world position in a camera (`pointer.camera`)
+            - Get world position in a camera
                 ```javascript
-                var out = camera.getWorldPoint(pointer.x, pointer.y);
-                // var out = camera.getWorldPoint(pointer.x, pointer.y, out);
+                var out = pointer.positionToCamera(camera);  // out: {x, y}
+                // var out = pointer.positionToCamera(camera, out);
                 ```
         - Position of previous moving : `pointer.prevPosition.x` , `pointer.prevPosition.y`
             - Updating when pointer-down, potiner-move, or pointer-up.

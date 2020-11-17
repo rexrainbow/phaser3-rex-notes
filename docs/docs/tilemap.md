@@ -134,6 +134,19 @@ var mapHeight = map.height;
     var tileHeight = map.tileHeight;
     ```
 
+#### Tile/world position
+
+- World position -> Tile position
+    ```javascript
+    var tileXY = map.worldToTileXY(worldX, worldY);
+    // var out = map.worldToTileXY(worldX, worldY, snapToFloor, out, camera, layer);
+    ```
+- Tile position -> World position
+    ```javascript
+    var worldXY = map.tileToWorldXY(tileX, tileY);
+    // var out = map.tileToWorldXY(tileX, tileY, out, camera, layer);
+    ```
+
 #### Draw on graphics
 
 ```javascript
@@ -359,23 +372,6 @@ layer.setRenderOrder(renderOrder);
 
 ### Tile
 
-#### Tile/world position
-
-- World position -> Tile position
-    ```javascript
-    var tileX = map.worldToTileX(worldX);
-    // var tileX = map.worldToTileX(worldX, snapToFloor, camera, layer);
-    var tileY = map.worldToTileY(worldY);
-    // var tileY = map.worldToTileY(worldY, snapToFloor, camera, layer);
-    ```
-- Tile position -> World position
-    ```javascript
-    var worldX = map.tileToWorldX(tileX);
-    // var worldX = map.tileToWorldX(tileX, camera, layer);
-    var worldY = map.tileToWorldY(tileY);
-    // var worldX = map.tileToWorldY(tileY, camera, layer);
-    ```
-
 #### Get tile
 
 ```javascript
@@ -574,6 +570,58 @@ map.forEachTile(callback, context,
     var flipX = tile.flipX;
     var flipY = tile.flipY;
     ```
+
+#### Bounds
+
+- Bounds [rectangle](geom-rectangle.md)
+    ```javascript
+    var bounds = tile.getBounds();
+    // var out = tile.getBounds(camera, out);
+    ```
+- Left
+    ```javascript
+    var left = tile.getLeft();
+    // var left = tile.getLeft(camera);
+    ```
+- Right
+    ```javascript
+    var right = tile.getRight();
+    // var right = tile.getRight(camera);
+    ```
+- CenterX
+    ```javascript
+    var centerX = tile.getCenterX();
+    // var centerX = tile.getCenterX(camera);
+    ```
+- Top
+    ```javascript
+    var top = tile.getTop();
+    // var top = tile.getTop(camera);
+    ```
+- Bottom
+    ```javascript
+    var bottom = tile.getBottom();
+    // var bottom = tile.getBottom(camera);
+    ```
+- CenterY
+    ```javascript
+    var centerY = tile.getCenterY();
+    // var centerY = tile.getCenterY(camera);
+    ```
+
+#### Intersection
+
+- Contains point
+    ```javascript
+    var contains = tile.containsPoint(x, y);
+    ```
+    - `x`, `y` : The x/y axis in pixels.
+- Rectangle area intersection
+    ```javascript
+    var isIntersection = tile.intersects(x, y, right, bottom);
+    ```
+    - `x`, `y` : The x/y axis in pixels.
+    - `right`, `bottom` : The right/bottom point.
 
 #### Properties
 
