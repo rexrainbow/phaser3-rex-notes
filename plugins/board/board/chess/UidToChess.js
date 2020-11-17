@@ -7,12 +7,7 @@ var UidToChess = function (uid) {
         if (!this.boardData.exists(uid)) {
             return null;
         }
-        var chessData = ChessBank.get(uid);
-        if (chessData) {
-            return chessData.parent;
-        } else {
-            return null;
-        }
+        return ChessBank.get(uid).parent;
     }
 }
 export default UidToChess;
