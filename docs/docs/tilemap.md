@@ -112,6 +112,19 @@ scene.load.tilemapCSV(key, url);          // CSV
         - `scene` : A Scene reference, passed to the Game Objects constructors. Default is map's scene.
         - `container` : Optional Container to which the Game Objects are added.
         - `key`, `frame` : Optional key of a Texture to be used.
+    - Create game objects by tile
+        ```javascript
+        var sprites = map.createFromTiles(indexes, replacements, spriteConfig);
+        // var sprites = map.createFromTiles(indexes, replacements, spriteConfig, scene, camera, layer);
+        ```
+        - `indexes` : The tile index, or array of indexes
+        - `replacements` :
+            - `null` : Leave the tiles unchanged
+            - Array of indexes : One-to-one mapping `indexes` to `replacements`.
+        - `spriteConfig` : The config object to pass into the Sprite creator (i.e. `scene.make.sprite`).
+        - `scene` : The Scene to create the Sprites within.
+        - `camera` : The Camera to use when determining the world XY.
+        - `layer` : The Tilemap Layer to act upon.
 
 ### Map
 
@@ -147,6 +160,18 @@ var mapHeight = map.height;
     // var out = map.tileToWorldXY(tileX, tileY, out, camera, layer);
     ```
 
+#### Tile at world XY
+
+```javascript
+var hasTile = map.hasTileAtWorldXY(worldX, worldY);
+```
+
+or
+
+```javascript
+var hasTile = map.hasTileAtWorldXY(worldX, worldY, camera, layer);
+```
+
 #### Draw on graphics
 
 ```javascript
@@ -173,6 +198,8 @@ map.renderDebug(graphics, styleConfig, layer);
 
 ### Layer
 
+A [Game Object](gameobject.md) that renders LayerData from a map when used in combination with one or more [tileset](tilemap.md#tileset).
+
 #### Get layer
 
 - Get layer instance
@@ -187,6 +214,18 @@ map.renderDebug(graphics, styleConfig, layer);
     ```javascript
     map.layer = layer;
     ```
+
+#### Render pipeline
+
+```javascript
+layer.setPipeline(pipelineName);
+```
+
+```javascript
+layer.setPostPipeline(pipelineName);
+```
+
+See [Render pipeline section](gameobject.md#render-pipeline) of Game object.
 
 #### Render order
 
@@ -472,7 +511,7 @@ map.forEachTile(function(tile, index, tileArray) { /* ... */ }, context);
 or
 
 ```javascript
-map.forEachTile(callback, context,
+map.forEachTile(function(tile, index, tileArray) { /* ... */ }, context,
     tileX, tileY, width, height, {
         // isNotEmpty: false,
         // isColliding: false,
@@ -503,6 +542,13 @@ map.forEachTile(callback, context,
    tile.copy(tileSrc);
    ```
    Copies the tile data & properties from the given tile to this tile. This copies everything except for *position* and *interesting faces*.
+
+#### Tile position
+
+```javascript
+var x = tile.x;
+var y = tile.y;
+```
 
 #### Alpha
 
@@ -634,74 +680,167 @@ var value = properties[key];
 tile.properties[key] = value;
 ```
 
-#### Tile at world XY
+### Collision
+
+#### Enable collision
+
+- Enable collision by tile index
+    ```javascript
+    map.setCollision(index);
+    // map.setCollision(index, true, recalculateFaces, updateLayer);
+    ```
+    - `index` : Tile index, or an array of tile indexes.
+- Enable collision by tile index in a range
+    ```javascript
+    map.setCollisionBetween(start, stop);
+    // map.setCollisionBetween(start, stop, true, recalculateFaces, layer);
+    ```
+    - `start` , `stop` :  The first/last index of the tile.
+- Enable collision excluded tile indexes
+    ```javascript
+    map.setCollisionByExclusion(indexes);
+    // map.setCollisionByExclusion(indexes, true, recalculateFaces, layer);
+    ```
+    - `index` : An array of tile indexes.
+- Enable collision by properties matching
+    - Enable collision if value of tile property 'key' is equal to 'value'
+        ```javascript
+        map.setCollisionByProperty({key:value});
+        // map.setCollisionByProperty({key:value}, true, recalculateFaces, layer);
+        ```
+    - Enable collision if value of tile property 'key' is equal to 'value0', or 'value1'
+        ```javascript
+        map.setCollisionByProperty({key:[value0, value1]});
+        // map.setCollisionByProperty({key:[value0, value1]}, true, recalculateFaces, layer);
+        ```
+- Enable collision by [collision group](http://docs.mapeditor.org/en/stable/manual/editing-tilesets/#tile-collision-editor)
+    ```javascript
+    map.setCollisionFromCollisionGroup();
+    // map.setCollisionFromCollisionGroup(true, recalculateFaces, layer);
+    ```
+
+#### Disable collision
+
+- Disable collision by tile index
+    ```javascript
+    map.setCollision(index, false);
+    // map.setCollision(index, false, recalculateFaces, layer);
+    ```
+    - `index` : Tile index, or an array of tile indexes.
+- Disable collision by tile index in a range
+    ```javascript
+    map.setCollisionBetween(start, stop, false);
+    // map.setCollisionBetween(start, stop, false, recalculateFaces, layer);
+    ```
+    - `start` , `stop` :  The first/last index of the tile.
+- Disable collision by properties matching
+    - Disable collision if value of tile property 'key' is equal to 'value'
+        ```javascript
+        map.setCollisionByProperty({key:value}, false);
+        // map.setCollisionByProperty({key:value}, false, recalculateFaces, layer);
+        ```
+    - Disable collision if value of tile property 'key' is equal to 'value0', or 'value1'
+        ```javascript
+        map.setCollisionByProperty({key:[value0, value1]}, false);
+        // map.setCollisionByProperty({key:[value0, value1]}, false, recalculateFaces, layer);
+        ```
+- Disable collision by [collision group](http://docs.mapeditor.org/en/stable/manual/editing-tilesets/#tile-collision-editor)
+    ```javascript
+    map.setCollisionFromCollisionGroup(false);
+    // map.setCollisionFromCollisionGroup(false, recalculateFaces, layer);
+    ```
+
+#### Get collision group
 
 ```javascript
-var hasTile = map.hasTileAtWorldXY(worldX, worldY);
+var collisionGroup = tile.getCollisionGroup();
 ```
 
 or
 
 ```javascript
-var hasTile = map.hasTileAtWorldXY(worldX, worldY, camera, layer);
+var collisionGroup = tileset.getTileCollisionGroup(tile.index); // array of collision shapes, or null
 ```
 
-### Collision
+Types of collision shape (`collisionGroup.objects[i]`)
 
-#### Enable collision
+- `object.rectangle` :
+    ```javascript
+    {
+        rectangle: true,
+        x, y,
+        width, height
+    }
+    ```
+    - `x`, `y` : Offset position related top-left of tile.
+        ```javascript
+        var worldX = tile.getLeft() + object.x;
+        var worldY = tile.getTop() + object.y;
+        ```
+    - `width`, `height` : Width/height of rectangle area in pixels.
+- `object.ellipse` :
+    ```javascript
+    {
+        ellipse: true,
+        x, y,
+        width, height
+    }
+    ```
+    - `x`, `y` : Offset position related top-left of tile.
+        ```javascript
+        var centerX = tile.getLeft() + object.x + (object.width / 2);
+        var centerY = tile.getTop() + object.y + (object.height / 2);
+        ```
+    - `width`, `height` : Width/height of ellipse area in pixels.
+- `object.polygon` :
+    ```javascript
+    {
+        x, y,
+        polygon: [{x,y}, {x,y}, ...]
+    }
+    ```
+    - Each point :
+        ```javascript
+        {
+            x: tile.getLeft() + object.x + polygon[i].x,
+            y: tile.getTop() + object.y + polygon[i].y
+        }
+        ```
+- `object.polyline` :
+    ```javascript
+    {
+        x, y,
+        polyline: [{x,y}, {x,y}, ...]
+    }
+    ```
+    - Each point :
+        ```javascript
+        {
+            x: tile.getLeft() + object.x + polyline[i].x,
+            y: tile.getTop() + object.y + polyline[i].y
+        }
+        ```
+
+#### Arcade collision
 
 ```javascript
-map.setCollision(index);
-// map.setCollision(index, true, recalculateFaces, updateLayer);
+scene.physics.add.collider(arcadeGO, layer);
 ```
 
-- `index` : Tile index, or an array of tile indexes.
+or, in update stage:
 
 ```javascript
-map.setCollisionBetween(start, stop);
+scene.physics.world.collide(arcadeGO, layer);
 ```
 
-- `start` , `stop` :  The first/last index of the tile.
+See [Collision section](arcade-world.md#collision) of Arcade-world.
 
-```javascript
-map.setCollisionByExclusion(indexes);
-// map.setCollisionByExclusion(indexes, true, recalculateFaces, layer);
-```
+#### Matter collision
 
-- `index` : An array of tile indexes.
-
-```javascript
-map.setCollisionByProperty({key:value});  // Enable collision if value of tile property 'key' is equal to 'value'
-```
-
-```javascript
-map.setCollisionFromCollisionGroup();  // Set by collision group data in tileset collision editor
-```
-
-[Collision editor](http://docs.mapeditor.org/en/stable/manual/editing-tilesets/#tile-collision-editor)
-
-#### Disable collision
-
-```javascript
-map.setCollision(index, false);
-```
-
-- `index` : Tile index, or an array of tile indexes.
-
-
-```javascript
-map.setCollisionBetween(start, stop, false);
-```
-
-- `start` , `stop` :  The first/last index of the tile.
-
-```javascript
-map.setCollisionByProperty({key:value}, false);
-```
-
-```javascript
-map.setCollisionFromCollisionGroup(false);
-```
+- Any colliding tiles will be given a Matter body.
+    ```javascript
+    scene.matter.world.convertTilemapLayer(layer);
+    ```
 
 ### Tileset
 
@@ -710,41 +849,6 @@ map.setCollisionFromCollisionGroup(false);
 ```javascript
 var tileset = map.getTileset(name);
 ```
-
-#### Get collision group
-
-```javascript
-var collisionGroup = tileset.getTileCollisionGroup(tile.index); // array of collision shapes, or null
-```
-
-Types of collision shape (`collisionGroup.objects`)
-
-- `object.rectangle` :
-    ```javascript
-    {
-        x, y, width, height
-    }
-    ```
-- `object.ellipse` :
-    ```javascript
-    {
-        x, y, width, height
-    }
-    ```
-- `object.polygon` :
-    ```javascript
-    {
-        x, y,
-        points: [{x,y}, {x,y}, ...]
-    }
-    ```
-- `object.polyline` :
-    ```javascript
-    {
-        x, y,
-        points: [{x,y}, {x,y}, ...]
-    }
-    ```
 
 #### Change texture of tileset
 

@@ -24,7 +24,7 @@ Get distance, built-in methods of phaser.
     ```javascript
     var d = Phaser.Math.Distance.Chebyshev(x1, y1, x2, y2);
     ```
-- Get snake distance/rectilinear distance/Manhattan distance (the sum of the horizontal and vertical distance)
+- Get snake distance(i.e. rectilinear distance, Manhattan distance, the sum of the horizontal and vertical distance)
     ```javascript
     var d = Phaser.Math.Distance.Snake(x1, y1, x2, y2);
     ```
