@@ -10,13 +10,6 @@ Shader effect of camera.
 
 1. [Add render pipeline instance](render-pipeline.md#add-pipeline-instance)
 1. Add custom pipeline
-    - Pipeline
-        ```javascript
-        camera.setPipeline(pipelineName);
-        ```
-        - `pipelineName` :
-            - A string name of this render pipeline
-            - A pipeline instance
     - Post-pipeline
         ```javascript
         camera.setPostPipeline(pipelineName);

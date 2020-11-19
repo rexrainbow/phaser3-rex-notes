@@ -224,6 +224,7 @@ nav:
         - LokiJs: lokijs.md
     - Configuration data: config-data.md
     - Canvas image data: canvas-data.md
+    - Tiled map data: tiledmapdata.md
 - Math:
     - Max, min:
         - Interpolation: interpolation.md
