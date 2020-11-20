@@ -28,7 +28,7 @@ var SpinObject = function (gameObject, camera) {
     } else {
         gameObject.x += movementX;
         gameObject.y += movementY;
-        RotateObjectAround(gameObject, x, y, angle);
+        RotateObjectAround(gameObject, centerWorldX, centerWorldY, angle);
     }
     return this;
 }
