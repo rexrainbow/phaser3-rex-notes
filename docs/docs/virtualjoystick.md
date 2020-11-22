@@ -217,3 +217,14 @@ joystick.destroy();
    ```javascript
    joystick.on('update', function(){});
    ```
+
+### Elements
+
+- Base Game object: 
+    ```javascript
+    var baseGO = joystick.base;
+    ```
+- Thumb Game object: 
+    ```javascript
+    var thumb = joystick.thumb;
+    ```
