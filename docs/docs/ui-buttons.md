@@ -142,7 +142,7 @@ var buttons = scene.rexUI.add.buttons({
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
         - `space.item` : Space between 2 button game objects.       
 - `name` : Set name of this button game objects.
-- `eventEmitter` : Dispatch buttons' touch events to other game obhect, default is this buttons game object.
+- `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
 - `type` : Type/behavior of these buttons.
     - `undefined` : No extra behavior, default value.
