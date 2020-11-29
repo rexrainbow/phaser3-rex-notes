@@ -1,4 +1,4 @@
-import GrayScalePipeline from './grayscalepipeline.js';
+import { GrayScalePipeline, GrayScalePostPipeline } from './grayscalepipeline.js';
 
 class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
 

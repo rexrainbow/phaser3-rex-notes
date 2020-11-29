@@ -29,7 +29,9 @@ class Image extends Phaser.GameObjects.Mesh {
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
         var girdHeight = GetValue(config, 'girdHeight', girdWidth);
-        this.resetVerts(girdWidth, girdHeight)
+        var flipX = GetValue(config, 'flipX', false);
+        var flipY = GetValue(config, 'flipY', false);
+        this.resetVerts(girdWidth, girdHeight);
     }
 
     resetPerspective() {
@@ -64,7 +66,8 @@ class Image extends Phaser.GameObjects.Mesh {
             height: frameHeight / this.height,
 
             widthSegments: Math.ceil(frameWidth / this.girdWidth),
-            heightSegments: Math.ceil(frameHeight / this.girdHeight)
+            heightSegments: Math.ceil(frameHeight / this.girdHeight),
+            flipY: this.frame.source.isRenderTexture
         });
 
         return this;
