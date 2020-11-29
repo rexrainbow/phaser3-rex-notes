@@ -74,10 +74,10 @@ class Swipe extends OnePointerTracer {
 
     onDrag() {
         if (this.state === BEGIN) {
-            if (!this.vaildDrag) {
-                this.vaildDrag = (this.dragThreshold === 0) || (this.pointer.getDistance() >= this.dragThreshold);
+            if (!this.validDrag) {
+                this.validDrag = (this.dragThreshold === 0) || (this.pointer.getDistance() >= this.dragThreshold);
             }
-            if (this.vaildDrag && (this.dragVelocity > this.minDragVelocity)) {
+            if (this.validDrag && (this.dragVelocity > this.minDragVelocity)) {
                 this.state = RECOGNIZED;
             }
         }
