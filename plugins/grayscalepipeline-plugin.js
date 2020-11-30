@@ -1,4 +1,7 @@
-import { GrayScalePipeline, GrayScalePostPipeline } from './grayscalepipeline.js';
+import {
+    GrayScalePipeline,
+    GrayScalePostFxPipeline
+} from './grayscalepipeline.js';
 
 class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -9,6 +12,8 @@ class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
     start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
+
+        this.game.renderer.pipelines.addPostPipeline('rexGrayScalePostFx', GrayScalePostFxPipeline);
     }
 
     add(scene, key, config) {
