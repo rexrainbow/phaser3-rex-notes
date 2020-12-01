@@ -1,4 +1,4 @@
-import { GrayScalePostFxPipeline } from '../../plugins/grayscalepipeline'
+import GrayScalePipelinePlugin from '../../plugins/grayscalepipeline-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -7,7 +7,9 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() { 
+        this.load.plugin('rexGrayScalePipeline', GrayScalePipelinePlugin, true);
+    }
 
     create() {
         const Between = Phaser.Math.Between;
@@ -17,9 +19,8 @@ class Demo extends Phaser.Scene {
                 .setAlpha(Math.random());
         }
 
-        var camera = this.cameras.main;
-        camera.setPostPipeline(GrayScalePostFxPipeline);
-        this.cameraFilter = camera.getPostPipeline(GrayScalePostFxPipeline);
+        var postFxPlugin = this.plugins.get('rexGrayScalePipeline');
+        this.cameraFilter = postFxPlugin.add(this.cameras.main, {intensity:0});
 
         var scene = this;
         this.input.on('pointerup', function (pointer, currentlyOver) {
@@ -51,8 +52,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    pipeline: { GrayScalePostFxPipeline }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

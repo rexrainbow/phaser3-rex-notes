@@ -1,6 +1,7 @@
 import FragSrc from './grayscale-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
+const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
 class GrayScalePostFxPipeline extends PostFXPipeline {
@@ -16,6 +17,11 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
         });
 
         this._intensity = 1;
+    }
+
+    resetFromJSON(o) {
+        this.setIntensity(GetValue(o, 'intensity', 1));
+        return this;
     }
 
     onPreRender() {
