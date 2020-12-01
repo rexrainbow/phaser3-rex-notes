@@ -1,2 +1,2 @@
-import GlowFilterPipeline from './shaders/glowfilter/GlowFilterPipeline.js';
-export default GlowFilterPipeline;
+import GlowFilterPostFxPipeline from './shaders/glowfilter/GlowFilterPostFxPipeline.js';
+export default GlowFilterPostFxPipeline;

@@ -7,13 +7,14 @@ const frag = `\
 precision highmedp float;
 
 // Scene buffer
-%MyTexture2D%
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
 
 // Effect parameters
 uniform float intensity;
 
 void main() {
-  vec4 front = MyTexture2D(outTexCoord);
+  vec4 front = texture2D(uMainSampler, outTexCoord);
   vec4 sum = vec4(0);
   for(int xx = -4; xx <= 4; xx++) {
     for(int yy = -3; yy <= 3; yy++) {
@@ -24,7 +25,7 @@ void main() {
       } else {
         factor = 2.0/abs(float(dist));
       }
-      sum += MyTexture2D(outTexCoord + (vec2(xx, yy)* 0.002))*factor;
+      sum += texture2D(uMainSampler, outTexCoord + vec2(xx, yy) * 0.002) * factor;
     }
   }
   
