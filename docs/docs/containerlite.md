@@ -143,7 +143,9 @@ Also destroy all children.
 
 This container game object inherits from [Zone](zone.md).
 
-### Pin child
+### Add child
+
+#### Pin
 
 Add(pin) a game obejct to container
 
@@ -172,7 +174,7 @@ These world properties of children will be changed with container.
     - This behavior is different from [official container](container.md), which using related position of child when adding to container.
         - For example, official container is at (100, 100), and child is at **(10, 10)**, then child will be placed at (110, 110) after adding to official container.
 
-### Add child with local properties
+#### Add local
 
 ```javascript
 container.addLocal(child);
