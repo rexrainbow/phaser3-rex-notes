@@ -1,4 +1,4 @@
-import GrayScalePipelinePlugin from '../../plugins/grayscalepipeline-plugin.js'
+import InversePipelinePlugin from '../../plugins/inversepipeline-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.plugin('rexGrayScalePipeline', GrayScalePipelinePlugin, true);
+        this.load.plugin('rexInversePipeline', InversePipelinePlugin, true);
     }
 
     create() {
@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
                 .setAlpha(Math.random());
         }
 
-        var postFxPlugin = this.plugins.get('rexGrayScalePipeline');
+        var postFxPlugin = this.plugins.get('rexInversePipeline');
         this.cameraFilter = postFxPlugin.add(this.cameras.main, { intensity: 0 });
 
         var scene = this;

@@ -7,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { 
+    preload() {
         this.load.plugin('rexGlowFilterPipeline', GlowFilterPipelinePlugin, true);
         this.load.image('mushroom', 'assets/images/mushroom.png');
     }
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
 
             gameObject
                 .setInteractive()
-                .on('pointerover', function () {                    
+                .on('pointerover', function () {
                     // Add postfx pipeline
                     var pipeline = postFxPlugin.add(gameObject);
 

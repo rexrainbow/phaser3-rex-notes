@@ -1,4 +1,6 @@
-import InversePipeline from './inversepipeline.js';
+import InversePostFxPipeline from './inversepipeline.js';
+import AddPostFxPipeline from './utils/renderer/AddPostFxPipeline.js'
+import SetValue from './utils/object/SetValue.js';
 
 class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -9,12 +11,22 @@ class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
     start() {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
+
+        this.game.renderer.pipelines.addPostPipeline('rexInversePostFx', InversePostFxPipeline);
     }
 
-    add(scene, key, config) {
-        return new InversePipeline(scene, key, config);
+    add(gameObject, config) {
+        var pipeline = AddPostFxPipeline(InversePostFxPipeline, gameObject);
+        pipeline.resetFromJSON(config);
+        return pipeline;
+    }
+
+    remove(gameObject) {
+        gameObject.removePostPipeline(InversePostFxPipeline);        
     }
 
 }
+
+SetValue(window, 'RexPlugins.Pipelines.InversePostFx', InversePostFxPipeline);
 
 export default InversePipelinePlugin;

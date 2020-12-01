@@ -7,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { 
+    preload() {
         this.load.plugin('rexGrayScalePipeline', GrayScalePipelinePlugin, true);
     }
 
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
 
             gameObject
                 .setInteractive()
-                .on('pointerover', function () {                    
+                .on('pointerover', function () {
                     // Add postfx pipeline
                     postFxPlugin.add(gameObject);
                 })

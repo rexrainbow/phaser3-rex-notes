@@ -8,23 +8,23 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.plugin('rexInversePipeline', InversePipelinePlugin, true);
         this.load.video('test', './assets/video/test.mp4', 'canplaythrough', false, true);
     }
 
     create() {
-        var customPipeline = this.plugins.get('rexInversePipeline').add(this, 'Inverse');
-
-        this.add.video(400, 300, 'test')
+        var postFxPlugin = this.plugins.get('rexInversePipeline');
+        var gameObject = this.add.video(400, 300, 'test')
             .setOrigin(0.5)
-            .play()
-            .setPipeline('Inverse')
+            .play();
+        var pipeline = postFxPlugin.add(gameObject, { intensity: 0 })
 
         this.input
             .on('pointerdown', function () {
-                customPipeline.intensity = 1;
+                pipeline.intensity = 1;
             })
             .on('pointerup', function () {
-                customPipeline.intensity = 0;
+                pipeline.intensity = 0;
             })
     }
 
@@ -41,14 +41,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexInversePipeline',
-            plugin: InversePipelinePlugin,
-            start: true
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

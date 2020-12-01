@@ -1,2 +1,2 @@
-import InversePipeline from './shaders/inverse/InversePipeline.js';
-export default InversePipeline;
+import InversePostFxPipeline from './shaders/inverse/InversePostFxPipeline';
+export default InversePostFxPipeline;
