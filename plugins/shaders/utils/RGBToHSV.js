@@ -1,4 +1,4 @@
-const frag = `
+const frag = `\
 vec3 RGBToHSV(vec3 color) 
 {
   float minv, maxv, delta;
@@ -31,7 +31,7 @@ vec3 RGBToHSV(vec3 color)
   }
    
   return res;
-}
+}\
 `;
 
 export default frag;

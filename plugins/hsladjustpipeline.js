@@ -1,2 +1,2 @@
-import HslAdjustPipeline from './shaders/hsladjust/HslAdjustPipeline.js';
-export default HslAdjustPipeline;
+import HslAdjustPostFxPipeline from './shaders/hsladjust/HslAdjustPostFxPipeline.js';
+export default HslAdjustPostFxPipeline;

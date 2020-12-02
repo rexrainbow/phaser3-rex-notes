@@ -1,26 +1,25 @@
-import FragSrc from './hslAdjust-frag.js';
-import FragCodeReplacer from '../utils/FragCodeReplacer';
+import FragSrc from './hslAdjust-postfxfrag.js';
 
-const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
+const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
-class HslAdjustPipeline extends MultiPipeline {
-    constructor(scene, key, config) {
-        var game = scene.game;
-        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
+class HslAdjustPostFxPipeline extends PostFXPipeline {
+    constructor(game) {
         super({
             game: game,
-            fragShader: frag, // GLSL shader
-            name: key,
-            uniforms: ['hueRotate', 'satAdjust', 'lumAdjust']
+            renderTarget: true,
+            fragShader: FragSrc,
+            uniforms: [
+                'uMainSampler',
+                'hueRotate',
+                'satAdjust',
+                'lumAdjust'
+            ]
         });
-        this._hueRotate = 0;
-        this._satAdjust = 0;
-        this._lumAdjust = 0;
 
-        game.renderer.pipelines.add(key, this);
-        this.resetFromJSON(config);
+        this._hueRotate = 0;
+        this._satAdjust = 1;
+        this._lumAdjust = 0.5;
     }
 
     resetFromJSON(o) {
@@ -30,8 +29,7 @@ class HslAdjustPipeline extends MultiPipeline {
         return this;
     }
 
-    bind() {
-        super.bind();
+    onPreRender() {
         this.set1f('hueRotate', (this._hueRotate) % 1);
         this.set1f('satAdjust', this._satAdjust);
         this.set1f('lumAdjust', this._lumAdjust);
@@ -80,4 +78,4 @@ class HslAdjustPipeline extends MultiPipeline {
     }
 }
 
-export default HslAdjustPipeline;
+export default HslAdjustPostFxPipeline;

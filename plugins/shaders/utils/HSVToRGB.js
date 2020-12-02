@@ -1,4 +1,4 @@
-const frag = `
+const frag = `\
 vec3 HSVToRGB(float h, float s, float v) {
   int i;
   float f, p, q, t;

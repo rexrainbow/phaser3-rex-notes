@@ -1,20 +1,14 @@
-import HslAdjustPipeline from './hsladjustpipeline.js';
+import HslAdjustPostFxPipeline from './hsladjustpipeline.js';
+import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import SetValue from './utils/object/SetValue.js';
 
-class HslAdjustPipelinePlugin extends Phaser.Plugins.BasePlugin {
-
+class HslAdjustPipelinePlugin extends BasePostFxPipelinePlugin {
     constructor(pluginManager) {
         super(pluginManager);
+        this.setPostPipelineClass(HslAdjustPostFxPipeline, 'rexHslAdjustPostFx');
     }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-
-    add(scene, key, config) {
-        return new HslAdjustPipeline(scene, key, config);
-    }
-
 }
+
+SetValue(window, 'RexPlugins.Pipelines.HslAdjustPostFx', HslAdjustPostFxPipeline);
 
 export default HslAdjustPipelinePlugin;

@@ -1,30 +1,12 @@
 import GrayScalePostFxPipeline from './grayscalepipeline.js';
-import AddPostFxPipeline from './utils/renderer/AddPostFxPipeline.js'
+import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
-class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
-
+class GrayScalePipelinePlugin extends BasePostFxPipelinePlugin {
     constructor(pluginManager) {
         super(pluginManager);
+        this.setPostPipelineClass(GrayScalePostFxPipeline, 'rexGrayScalePostFx');
     }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-
-        this.game.renderer.pipelines.addPostPipeline('rexGrayScalePostFx', GrayScalePostFxPipeline);
-    }
-
-    add(gameObject, config) {
-        var pipeline = AddPostFxPipeline(GrayScalePostFxPipeline, gameObject);
-        pipeline.resetFromJSON(config);
-        return pipeline;
-    }
-
-    remove(gameObject) {
-        gameObject.removePostPipeline(GrayScalePostFxPipeline);        
-    }
-
 }
 
 SetValue(window, 'RexPlugins.Pipelines.GrayScalePostFx', GrayScalePostFxPipeline);

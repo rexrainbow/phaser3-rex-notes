@@ -39,6 +39,7 @@ class Demo extends Phaser.Scene {
                     gameObject.resetPostPipeline();
                     // postFxPlugin.remove(gameObject);
                     gameObject.glowTask.stop();
+                    gameObject.glowTask = null;
                 })
         }
     }
