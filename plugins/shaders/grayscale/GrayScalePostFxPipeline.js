@@ -3,6 +3,10 @@ import FragSrc from './grayscale-postfxfrag.js';
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
+const Uniforms = [
+    'uMainSampler',
+    'intensity'
+];
 
 class GrayScalePostFxPipeline extends PostFXPipeline {
     constructor(game) {
@@ -10,10 +14,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
             game: game,
             renderTarget: true,
             fragShader: FragSrc,
-            uniforms: [
-                'uMainSampler',
-                'intensity'
-            ]
+            uniforms: Uniforms
         });
 
         this._intensity = 1;

@@ -1,20 +1,14 @@
-import PixelationPipeline from './pixelationpipeline.js';
+import PixelationPostFxPipeline from './pixelationpipeline.js';
+import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import SetValue from './utils/object/SetValue.js';
 
-class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {
-
+class PixelationPipelinePlugin extends BasePostFxPipelinePlugin {
     constructor(pluginManager) {
         super(pluginManager);
+        this.setPostPipelineClass(PixelationPostFxPipeline, 'rexPixelationPostFx');
     }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-
-    add(scene, key, config) {
-        return new PixelationPipeline(scene, key, config);
-    }
-
 }
+
+SetValue(window, 'RexPlugins.Pipelines.PixelationPostFx', PixelationPostFxPipeline);
 
 export default PixelationPipelinePlugin;

@@ -1,2 +1,2 @@
-import PixelationPipeline from './shaders/pixelation/PixelationPipeline.js';
-export default PixelationPipeline;
+import PixelationPostFxPipeline from './shaders/pixelation/PixelationPostFxPipeline.js';
+export default PixelationPostFxPipeline;
