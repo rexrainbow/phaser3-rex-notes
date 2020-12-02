@@ -1,30 +1,24 @@
-import FragSrc from './swirl-frag.js';
-import FragCodeReplacer from '../utils/FragCodeReplacer';
+import FragSrc from './swirl-postfxfrag.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
-const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
+const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Uniforms = ['uMainSampler', 'radius', 'angle', 'center', 'texSize'];
 
-class SwirlPipeline extends MultiPipeline {
-    constructor(scene, key, config) {
-        var game = scene.game;
-        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
+class SwirlPostFxPipeline extends PostFXPipeline {
+    constructor(game) {
         super({
             game: game,
-            fragShader: frag, // GLSL shader
-            name: key,
-            uniforms: ['radius', 'angle', 'center', 'texSize']
+            renderTarget: true,
+            fragShader: FragSrc,
+            uniforms: Uniforms
         });
-        this._width = 0; // width wo resolution
-        this._height = 0; // height wo resolution
+
         this._centerX = 0; // position wo resolution
         this._centerY = 0; // position wo resolution
         this._radius = 0;
         this._rotation = 0;
-
-        game.renderer.pipelines.add(key, this);
-        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -39,12 +33,14 @@ class SwirlPipeline extends MultiPipeline {
         return this;
     }
 
-    bind() {
-        super.bind();
+    onPreRender() {
         this.set1f('radius', this._radius);
         this.set1f('angle', this._rotation);
-        this.set2f('center', this._centerX, this._centerY);
-        this.set2f('texSize', this._width, this._height);
+
+        var texWidth = this.renderer.width,
+            textHeight = this.renderer.height;
+        this.set2f('center', this._centerX, (textHeight - this._centerY));
+        this.set2f('texSize', texWidth, textHeight);
     }
 
     // radius
@@ -107,21 +103,13 @@ class SwirlPipeline extends MultiPipeline {
 
     setCenter(x, y) {
         if (x === undefined) {
-            x = this._width / 2;
-            y = this._height / 2;
+            x = this.renderer.width / 2;
+            y = this.renderer.height / 2;
         }
         this._centerX = x;
         this._centerY = y;
         return this;
     }
-
-    // size
-    resize(width, height, resolution) {
-        this._width = width;
-        this._height = height;
-        super.resize(width, height, resolution);
-        return this;
-    }
 }
 
-export default SwirlPipeline;
+export default SwirlPostFxPipeline;

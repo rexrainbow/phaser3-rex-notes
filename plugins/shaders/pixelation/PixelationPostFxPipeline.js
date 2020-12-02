@@ -2,11 +2,7 @@ import FragSrc from './pixelation-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Uniforms = [
-    'uMainSampler',
-    'pixelSize',
-    'texSize'
-];
+const Uniforms = ['uMainSampler', 'pixelSize', 'texSize'];
 
 
 class PixelationPostFxPipeline extends PostFXPipeline {

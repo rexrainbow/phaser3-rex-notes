@@ -1,20 +1,14 @@
-import SwirlPipeline from './swirlpipeline.js';
+import SwirlPostFxPipeline from './swirlpipeline.js';
+import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import SetValue from './utils/object/SetValue.js';
 
-class SwirlPipelinePlugin extends Phaser.Plugins.BasePlugin {
-
+class SwirlPipelinePlugin extends BasePostFxPipelinePlugin {
     constructor(pluginManager) {
         super(pluginManager);
+        this.setPostPipelineClass(SwirlPostFxPipeline, 'rexSwirlPostFx');
     }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-
-    add(scene, key, config) {
-        return new SwirlPipeline(scene, key, config);
-    }
-
 }
+
+SetValue(window, 'RexPlugins.Pipelines.SwirlPostFx', SwirlPostFxPipeline);
 
 export default SwirlPipelinePlugin;

@@ -1,2 +1,2 @@
-import SwirlPipeline from './shaders/swirl/SwirlPipeline.js';
-export default SwirlPipeline;
+import SwirlPostFxPipeline from './shaders/swirl/SwirlPostFxPipeline.js';
+export default SwirlPostFxPipeline;

@@ -9,7 +9,8 @@ const frag = `\
 precision highmedp float;
 
 // Scene buffer
-%MyTexture2D%
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
 uniform vec2 texSize;
 
 // Effect parameters
@@ -29,7 +30,7 @@ void main (void) {
     tc = vec2(dot(tc, vec2(c, -s)), dot(tc, vec2(s, c)));
   }
   tc += center;
-  gl_FragColor = MyTexture2D(tc / texSize);
+  gl_FragColor = texture2D(uMainSampler, tc / texSize);
 }\
 `;
 
