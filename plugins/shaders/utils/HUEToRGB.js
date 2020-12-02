@@ -19,6 +19,6 @@ float HUEToRGB(float f1, float f2, float hue) {
   }
 	
   return ret;
-}\
+}
 `;
 export default frag;

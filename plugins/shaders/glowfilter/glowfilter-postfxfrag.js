@@ -30,7 +30,7 @@ void main() {
   }
   
   gl_FragColor = mix(front, sum, intensity);
-}\
+}
 `;
 
 export default frag;

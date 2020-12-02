@@ -1,6 +1,5 @@
 const frag = `\
-vec3 RGBToHSV(vec3 color) 
-{
+vec3 RGBToHSV(vec3 color) {
   float minv, maxv, delta;
   vec3 res;
   minv = min(min(color.r, color.g), color.b);
@@ -31,7 +30,7 @@ vec3 RGBToHSV(vec3 color)
   }
    
   return res;
-}\
+}
 `;
 
 export default frag;

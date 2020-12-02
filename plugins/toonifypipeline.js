@@ -1,2 +1,2 @@
-import ToonifyPipeline from './shaders/toonify/ToonifyPipeline.js';
-export default ToonifyPipeline;
+import ToonifyPostFxPipeline from './shaders/toonify/ToonifyPostFxPipeline.js';
+export default ToonifyPostFxPipeline;

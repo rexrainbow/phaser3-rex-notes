@@ -16,7 +16,7 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform float hueRotate;
 uniform float satAdjust;
-uniform float lumAdjust;\
+uniform float lumAdjust;
 `
 + RGBToHSL + HSLToRGB + 
 `\
@@ -28,7 +28,7 @@ void main(void) {
 	hsl.z += (lumAdjust - 0.5) * front.a;
 	vec3 rgb = HSLToRGB(hsl);
 	gl_FragColor = vec4(rgb, front.a);
-}\
+}
 `;
 
 export default frag;

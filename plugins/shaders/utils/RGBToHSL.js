@@ -38,6 +38,6 @@ vec3 RGBToHSL(vec3 color) {
 	}
 
 	return hsl;
-}\
+}
 `;
 export default frag;

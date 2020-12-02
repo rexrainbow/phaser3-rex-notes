@@ -28,7 +28,7 @@ void main (void) {
   } else {        
     gl_FragColor = texture2D(uMainSampler, outTexCoord);
   }
-}\
+}
 `;
 
 export default frag;

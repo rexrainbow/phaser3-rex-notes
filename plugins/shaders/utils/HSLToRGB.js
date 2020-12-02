@@ -22,6 +22,6 @@ vec3 HSLToRGB(vec3 hsl) {
   }
   
   return rgb;
-}\
+}
 `;
 export default frag;

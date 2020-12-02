@@ -31,7 +31,7 @@ void main (void) {
   }
   tc += center;
   gl_FragColor = texture2D(uMainSampler, tc / texSize);
-}\
+}
 `;
 
 export default frag;

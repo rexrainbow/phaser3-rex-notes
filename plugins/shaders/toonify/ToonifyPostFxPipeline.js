@@ -1,32 +1,26 @@
-import FragSrc from './toonify-frag.js';
-import FragCodeReplacer from '../utils/FragCodeReplacer';
+import FragSrc from './toonify-postfxfrag.js';
 
-const MultiPipeline = Phaser.Renderer.WebGL.Pipelines.MultiPipeline;
+const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
+const Uniforms = ['uMainSampler', 'edgeThreshold', 'hStep', 'sStep', 'vStep', 'edgeColor', 'texSize'];
 
-class ToonifyPipeline extends MultiPipeline {
-    constructor(scene, key, config) {
-        var game = scene.game;
-        var frag = FragCodeReplacer(FragSrc, game.renderer.maxTextures);
+class ToonifyPostFxPipeline extends PostFXPipeline {
+    constructor(game) {
         super({
             game: game,
-            fragShader: frag, // GLSL shader
-            name: key,
-            uniforms: ['edgeThreshold', 'hStep', 'sStep', 'vStep', 'edgeColor', 'texSize']
+            renderTarget: true,
+            fragShader: FragSrc,
+            uniforms: Uniforms
         });
-        this._width = 0; // width wo resolution
-        this._height = 0; // height wo resolution
+
         this._edgeGain = 0;
         this._edgeThreshold = 0;
         this._hueLevels = 0;
         this._satLevels = 0;
         this._valLevels = 0;
         this._edgeColor = new Color();
-
-        game.renderer.pipelines.add(key, this);
-        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -38,14 +32,13 @@ class ToonifyPipeline extends MultiPipeline {
         return this;
     }
 
-    bind() {
-        super.bind();
+    onPreRender() {
         this.set1f('edgeThreshold', this._edgeThreshold);
         this.set1f('hStep', this.hueStep);
         this.set1f('sStep', this.satStep);
         this.set1f('vStep', this.valStep);
         this.set3f('edgeColor', this._edgeColor.redGL, this._edgeColor.greenGL, this._edgeColor.blueGL);
-        this.set2f('texSize', this._width, this._height);
+        this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
     // edgeThreshold
@@ -144,14 +137,6 @@ class ToonifyPipeline extends MultiPipeline {
         this.edgeColor = value;
         return this;
     }
-
-    // size
-    resize(width, height, resolution) {
-        this._width = width;
-        this._height = height;
-        super.resize(width, height, resolution);
-        return this;
-    }
 }
 
-export default ToonifyPipeline;
+export default ToonifyPostFxPipeline;

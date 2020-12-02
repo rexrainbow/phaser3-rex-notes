@@ -11,7 +11,8 @@ const frag = `\
 precision highmedp float;
 
 // Scene buffer
-%MyTexture2D%
+uniform sampler2D uMainSampler; 
+varying vec2 outTexCoord;
 uniform vec2 texSize;
 
 // Effect parameters
@@ -19,13 +20,12 @@ uniform float edgeThreshold; // 0.2;
 uniform float hStep;  // 60
 uniform float sStep;  // 0.15
 uniform float vStep;  // 0.33
-uniform vec3 edgeColor; // (0, 0, 0);\
+uniform vec3 edgeColor; // (0, 0, 0);
 `
 + RGBToHSV + IsEdge + HSVToRGB +
-`\
-void main()
-{
-  vec4 front = MyTexture2D(outTexCoord);  
+`
+void main() {
+  vec4 front = texture2D(uMainSampler, outTexCoord);  
   vec3 colorLevel;
   if ((hStep > 0.0) || (sStep > 0.0) || (vStep > 0.0)) {
     vec3 colorHsv = RGBToHSV(front.rgb);  
@@ -45,7 +45,7 @@ void main()
 
   vec3 outColor = (IsEdge(outTexCoord, texSize, edgeThreshold))? edgeColor : colorLevel;
   gl_FragColor = vec4(outColor, front.a);
-}\
+}
 `;
 
 export default frag;
