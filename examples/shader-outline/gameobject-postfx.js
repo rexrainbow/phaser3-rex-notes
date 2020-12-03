@@ -1,4 +1,4 @@
-import OutlinePipelinePlugin from '../../plugins/outlinepipeline-plugin.js'
+import OutlinePipelinePlugin from '../../plugins/outlinepipeline-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -8,24 +8,29 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.plugin('rexOutlinePipeline', OutlinePipelinePlugin, true);
         this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
     create() {
-        var customPipeline = this.plugins.get('rexOutlinePipeline').add(this, 'Outline', {
-            thickness: 3,
-            outlineColor: 0xff0000
-        });
-
-        for (var i = 0; i < 10; i++) {
-            this.add.image(0, 0, 'mushroom')
+        var postFxPlugin = this.plugins.get('rexOutlinePipeline');
+        for (var i = 0; i < 20; i++) {
+            let gameObject = this.add.image(0, 0, 'mushroom')
                 .setRandomPosition(100, 100, 600, 400)
+
+            gameObject
                 .setInteractive()
                 .on('pointerover', function () {
-                    this.setPostPipeline('Outline');
+                    // Add postfx pipeline
+                    postFxPlugin.add(gameObject, {
+                        thickness: 3,
+                        outlineColor: 0xff0000
+                    });
                 })
                 .on('pointerout', function () {
-                    this.setPostPipeline();
+                    // Remove postfx pipeline
+                    gameObject.resetPostPipeline();
+                    // postFxPlugin.remove(gameObject);
                 })
         }
     }
@@ -43,15 +48,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    backgroundColor: 0x333333,
-    plugins: {
-        global: [{
-            key: 'rexOutlinePipeline',
-            plugin: OutlinePipelinePlugin,
-            start: true
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

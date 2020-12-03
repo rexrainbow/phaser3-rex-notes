@@ -1,34 +1,22 @@
-import { GetFrag } from './outline-post-frag.js';
-import FragCodeReplacer from '../utils/FragCodeReplacer';
+import FragSrc from './outline-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
+const Uniforms = ['uMainSampler', 'thickness', 'outlineColor', 'texSize'];
 
-class OutlinePostPipeline extends PostFXPipeline {
-    constructor(scene, key, config) {
-        if (config === undefined) {
-            config = {};
-        }
-
-        // Note: quality can't be changed during runtime
-        var game = scene.game;
-        var frag = FragCodeReplacer(GetFrag(config), game.renderer.maxTextures, true);
-        console.log(frag)
+class OutlinePostFxPipeline extends PostFXPipeline {
+    constructor(game) {
         super({
             game: game,
-            fragShader: frag, // GLSL shader
-            name: key,
-            uniforms: ['thickness', 'outlineColor', 'texSize']
+            renderTarget: true,
+            fragShader: FragSrc,
+            uniforms: Uniforms
         });
-        this._width = 0; // width wo resolution
-        this._height = 0; // height wo resolution
+
         this._thickness = 0;
         this._outlineColor = new Color();
-
-        game.renderer.pipelines.add(key, this);
-        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
@@ -40,7 +28,7 @@ class OutlinePostPipeline extends PostFXPipeline {
     onPreRender() {
         this.set2f('thickness', this._thickness, this._thickness);
         this.set3f('outlineColor', this._outlineColor.redGL, this._outlineColor.greenGL, this._outlineColor.blueGL);
-        this.set2f('texSize', this._width, this._height);
+        this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
     // thickness
@@ -73,14 +61,6 @@ class OutlinePostPipeline extends PostFXPipeline {
         this.outlineColor = value;
         return this;
     }
-
-    // size
-    resize(width, height, resolution) {
-        this._width = width;
-        this._height = height;
-        super.resize(width, height, resolution);
-        return this;
-    }
 }
 
-export default OutlinePostPipeline;
+export default OutlinePostFxPipeline;

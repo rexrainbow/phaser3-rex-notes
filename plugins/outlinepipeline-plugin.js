@@ -1,20 +1,14 @@
-import { OutlinePostPipeline } from './OutlinePipeline.js';
+import OutlinePostFxPipeline from './OutlinePipeline.js';
+import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
+import SetValue from './utils/object/SetValue.js';
 
-class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
-
+class OutlinePipelinePlugin extends BasePostFxPipelinePlugin {
     constructor(pluginManager) {
         super(pluginManager);
+        this.setPostPipelineClass(OutlinePostFxPipeline, 'rexOutlinePostFx');
     }
-
-    start() {
-        var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
-    }
-
-    add(scene, key, config) {
-        return new OutlinePostPipeline(scene, key, config);
-    }
-
 }
+
+SetValue(window, 'RexPlugins.Pipelines.OutlinePostFx', OutlinePostFxPipeline);
 
 export default OutlinePipelinePlugin;
