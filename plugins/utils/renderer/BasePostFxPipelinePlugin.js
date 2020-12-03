@@ -15,7 +15,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
-        var pipeline = AddPostFxPipeline(this.PostFxPipelineClass, gameObject);
+        var pipeline = this.get(gameObject);
         pipeline.resetFromJSON(config);
         return pipeline;
     }

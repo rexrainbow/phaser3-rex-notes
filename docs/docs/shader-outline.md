@@ -21,10 +21,15 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     ```javascript
     scene.load.plugin('rexoutlinepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexoutlinepipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexoutlinepipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexoutlinepipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexoutlinepipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,41 +71,63 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import OutlinePipeline from 'phaser3-rex-plugins/plugins/outlinepipeline.js';
+    import OutlinePostFx from 'phaser3-rex-plugins/plugins/outlinepipeline.js';
+    var config = {
+        // ...
+        pipeline: [OutlinePostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new OutlinePipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(OutlinePostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(OutlinePostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 outline effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(gameObject, {
         // thickness: 3,
         // outlineColor: 0x000000
     });
     ```
     - `thickness` : Thickness of outline.
     - `outlineColor` : Color of outline.
-1. Add to render pipeline
+- Apply effect to camera. A camera only can add 1 outline effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexOutlinePipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexOutlinePipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(camera);
+    ```
 
 ### Thickness
 

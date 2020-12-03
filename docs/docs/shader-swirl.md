@@ -21,10 +21,15 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```javascript
     scene.load.plugin('rexswirlpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexswirlpipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexswirlpipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,20 +71,31 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import SwirlPipeline from 'phaser3-rex-plugins/plugins/swirlpipeline.js';
+    import SwirlPostFx from 'phaser3-rex-plugins/plugins/swirlpipeline.js';
+    var config = {
+        // ...
+        pipeline: [SwirlPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new SwirlPipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(SwirlPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(SwirlPostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 swirl effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(gameObject, {
         // center: {
         //    x: windowWidth / 2,
         //    y: windowHeight / 2
@@ -83,21 +104,35 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
         // rotation: 0,  // or angle: 0
     });
     ```
-1. Add to render pipeline
+    - `center.x`, `center.y` : Local position of swirl center.
+    - `radius` : Swirl radius.
+    - `rotation` (`angle`) : Swirl angle.
+- Apply effect to camera. A camera only can add 1 swirl effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexSwirlPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexSwirlPipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(camera);
+    ```
 
 ### Radius
 
@@ -127,7 +162,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
     pipelineInstance.rotation = rotation;
     pipelineInstance.rotation += value;
     // pipelineInstance.angle = angle;
-    // pipelineInstance.angle += value;   
+    // pipelineInstance.angle += value;
     ```
     or
     ```javascript

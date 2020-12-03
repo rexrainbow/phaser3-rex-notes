@@ -21,10 +21,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```javascript
     scene.load.plugin('rextoonifypipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rextoonifypipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rextoonifypipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,20 +71,31 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import ToonifyPipeline from 'phaser3-rex-plugins/plugins/toonifypipeline.js';
+    import ToonifyPostFx from 'phaser3-rex-plugins/plugins/toonifypipeline.js';
+    var config = {
+        // ...
+        pipeline: [ToonifyPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new ToonifyPipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(ToonifyPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(ToonifyPostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 toonify effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(gameObject, {
         // edgeThreshold: 0.2,
         // hueLevels: 0,
         // sLevels: 0,
@@ -87,21 +108,32 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
     - `sLevels` : Amount of saturation levels. Set `0` to disable this feature.
     - `vLevels` : Amount of value levels. Set `0` to disable this feature.
     - `edgeColor` : Color of edge, could be a number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
-1. Add to render pipeline
+- Apply effect to camera. A camera only can add 1 toonify effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexToonifyPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexToonifyPipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(camera);
+    ```
 
 ### Edge threshold
 

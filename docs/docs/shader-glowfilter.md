@@ -21,10 +21,15 @@ Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/0
     ```javascript
     scene.load.plugin('rexglowfilterpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilterpipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexglowfilterpipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexglowfilterpipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexglowfilterpipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/0
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,40 +71,62 @@ Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/0
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import GlowFilterPipeline from 'phaser3-rex-plugins/plugins/glowfilterpipeline.js';
+    import GlowFilterPostFx from 'phaser3-rex-plugins/plugins/glowfilterpipeline.js';
+    var config = {
+        // ...
+        pipeline: [GlowFilterPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new GlowFilterPipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(GlowFilterPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(GlowFilterPostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 glow effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(gameObject, {
         // intensity: 0
     });
     ```
     - `intensity` : 0(original color) ~ 1(white color)
         - Suggestion value : 0 ~ 0.02
-1. Add to render pipeline
+- Apply effect to camera. A camera only can add 1 glow effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexGlowFilterPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexGlowFilterPipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(camera);
+    ```
 
 ### Intensity
 

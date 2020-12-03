@@ -21,10 +21,15 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```javascript
     scene.load.plugin('rexpixelationpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexpixelationpipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexpixelationpipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexpixelationpipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexpixelationpipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,39 +71,62 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import PixelationPipeline from 'phaser3-rex-plugins/plugins/pixelationpipeline.js';
+    import PixelationPostFx from 'phaser3-rex-plugins/plugins/pixelationpipeline.js';
+    var config = {
+        // ...
+        pipeline: [PixelationPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new PixelationPipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(PixelationPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(PixelationPostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 pixelation effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(gameObject, {
         // pixelWidth: 0,
         // pixelHeight: 0
     });
     ```
-1. Add to render pipeline
+    - `pixelWidth`, `pixelHeight` : Pixel size.
+- Apply effect to camera. A camera only can add 1 pixelation effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexPixelationPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexPixelationPipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(camera);
+    ```
 
 ### Pixel size
 

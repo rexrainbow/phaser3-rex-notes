@@ -37,9 +37,7 @@ nav:
             - Tile sprite: tilesprite.md
             - Nine patch: ninepatch.md
             - Line: line.md
-        - Shader:
-            - Shader: shader.md
-            - Outline effect layer: effectlayer-outline.md
+        - Shader: shader.md
         - Texture: texture.md
     - Mesh:
         - Mesh: mesh.md
@@ -166,7 +164,7 @@ nav:
     - Effects: camera-effects.md
     - Controllor: camera-controllor.md    
     - Shader effects:
-        - Render pipeline: render-pipeline.md
+        - Post fx pipeline: postfx-pipeline.md
         - Shader effect: camera-shader-effect.md
         - Color:
             - Glow: shader-glowfilter.md

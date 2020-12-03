@@ -21,10 +21,15 @@ Gray scale post processing filter.
     ```javascript
     scene.load.plugin('rexgrayscalepipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexgrayscalepipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexgrayscalepipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexgrayscalepipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexgrayscalepipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Gray scale post processing filter.
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,39 +71,61 @@ Gray scale post processing filter.
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import GrayScalePipeline from 'phaser3-rex-plugins/plugins/grayscalepipeline.js';
+    import GrayScalePostFx from 'phaser3-rex-plugins/plugins/grayscalepipeline.js';
+    var config = {
+        // ...
+        pipeline: [GrayScalePostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new GrayScalePipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(GrayScalePostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(GrayScalePostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 gray-scale effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(scene, key, {
-        // intensity: 0
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(gameObject, {
+        // intensity: 1
     });
     ```
-    - `intensity` : 0(original color) ~ 1(gray scale)
-1. Add to render pipeline
+    - `intensity` : 0(original color) ~ 1(gray scale). Default value is `1`.
+- Apply effect to camera. A camera only can add 1 gray-scale effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexGrayScalePipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexGrayScalePipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(camera);
+    ```
 
 ### Intensity
 

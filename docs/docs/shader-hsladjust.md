@@ -21,10 +21,15 @@ Adjust color in HSL domain, post processing filter.
     ```javascript
     scene.load.plugin('rexhsladjustpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexhsladjustpipelineplugin.min.js', true);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexhsladjustpipelineplugin').add(camera, config);
+        ```
 
 #### Import plugin
 
@@ -50,10 +55,15 @@ Adjust color in HSL domain, post processing filter.
     };
     var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(gameObject, config);
+        ```
+    - Apply effect to camera
+        ```javascript
+        var pipelineInstance = scene.plugins.get('rexHSLAdjustPipeline').add(camera, config);
+        ```
 
 #### Import class
 
@@ -61,20 +71,31 @@ Adjust color in HSL domain, post processing filter.
     ```
     npm i phaser3-rex-plugins
     ```
-- Import class
+- Add to game config
     ```javascript
-    import HSLAdjustPipeline from 'phaser3-rex-plugins/plugins/hsladjustpipeline.js';
+    import HSLAdjustPostFx from 'phaser3-rex-plugins/plugins/hsladjustpipeline.js';
+    var config = {
+        // ...
+        pipeline: [HSLAdjustPostFx]
+        // ...
+    };
+    var game = new Phaser.Game(config);
     ```
-- Create pipeline instance
-    ```javascript
-    var pipelineInstance = new HSLAdjustPipeline(scene, key, config);
-    ```
+- Apply effect
+    - Apply effect to game object
+        ```javascript
+        gameObject.setPostPipeline(HSLAdjustPostFx);
+        ```
+    - Apply effect to camera
+        ```javascript
+        camera.setPostPipeline(HSLAdjustPostFx);
+        ```
 
-### Apply filter
+### Apply effect
 
-1. Create pipeline instance
+- Apply effect to game object. A game object only can add 1 hsl-adjust effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(scene, key, {
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(gameObject, {
         // hueRotate: 0,
         // satAdjust: 1,
         // lumAdjust: 0.5,
@@ -92,21 +113,32 @@ Adjust color in HSL domain, post processing filter.
         - `0` : Dark
         - `0.5` : Original color (Default value)
         - `1` : White
-1. Add to render pipeline
+- Apply effect to camera. A camera only can add 1 hsl-adjust effect.
     ```javascript
-    scene.game.renderer.pipelines.add(pipelineName, pipelineInstance);
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').add(camera, config);
     ```
-1. Apply filter
-    - To camera
-        ```javascript
-        // var camera = scene.cameras.main;
-        camera.setRenderToTexture(pipelineName);
-        ```
-    - To game object
-        ```javascript
-        gameObject.setPipeline(pipelineName);
-        ```
-        - `pipelineName` : Name of this render pipeline, a string.
+
+### Remove effect
+
+- Remove effect from game object
+    ```javascript
+    scene.plugins.get('rexHslAdjustPipeline').remove(gameObject);
+    ```
+- Remove effect from camera
+    ```javascript
+    scene.plugins.get('rexHslAdjustPipeline').remove(camera);
+    ```
+
+### Get effect
+
+- Get effect from game object
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(gameObject);
+    ```
+- Get effect from camera
+    ```javascript
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(camera);
+    ```
 
 ### Hue rotation
 
