@@ -4,15 +4,13 @@ const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
-const Uniforms = ['uMainSampler', 'thickness', 'outlineColor', 'texSize'];
 
 class OutlinePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             game: game,
             renderTarget: true,
-            fragShader: FragSrc,
-            uniforms: Uniforms
+            fragShader: FragSrc
         });
 
         this._thickness = 0;

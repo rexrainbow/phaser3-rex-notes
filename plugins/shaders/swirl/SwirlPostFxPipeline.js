@@ -4,15 +4,13 @@ import RadToDeg from '../../utils/math/RadToDeg.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Uniforms = ['uMainSampler', 'radius', 'angle', 'center', 'texSize'];
 
 class SwirlPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             game: game,
             renderTarget: true,
-            fragShader: FragSrc,
-            uniforms: Uniforms
+            fragShader: FragSrc
         });
 
         this._centerX = 0; // position wo resolution

@@ -3,15 +3,13 @@ import FragSrc from './glowfilter-postfxfrag';
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
-const Uniforms = ['uMainSampler', 'intensity'];
 
 class GlowFilterPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             game: game,
             renderTarget: true,
-            fragShader: FragSrc,
-            uniforms: Uniforms
+            fragShader: FragSrc
         });
 
         this._intensity = 0;

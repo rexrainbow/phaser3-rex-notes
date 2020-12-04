@@ -4,15 +4,13 @@ const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
-const Uniforms = ['uMainSampler', 'edgeThreshold', 'hStep', 'sStep', 'vStep', 'edgeColor', 'texSize'];
 
 class ToonifyPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             game: game,
             renderTarget: true,
-            fragShader: FragSrc,
-            uniforms: Uniforms
+            fragShader: FragSrc
         });
 
         this._edgeGain = 0;

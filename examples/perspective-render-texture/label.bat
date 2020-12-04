@@ -1,4 +1,4 @@
-set testmode=1
+@echo off
 set main=./examples/perspective-render-texture/label.js
 cd ..
 cd ..

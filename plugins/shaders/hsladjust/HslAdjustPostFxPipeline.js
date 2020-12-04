@@ -2,15 +2,13 @@ import FragSrc from './hslAdjust-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Uniforms = ['uMainSampler', 'hueRotate', 'satAdjust', 'lumAdjust'];
 
 class HslAdjustPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             game: game,
             renderTarget: true,
-            fragShader: FragSrc,
-            uniforms: Uniforms
+            fragShader: FragSrc
         });
 
         this._hueRotate = 0;
