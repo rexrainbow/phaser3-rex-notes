@@ -661,12 +661,12 @@ var y = tile.y;
     ```javascript
     var contains = tile.containsPoint(x, y);
     ```
-    - `x`, `y` : The x/y axis in pixels.
+    - `x`, `y` : The x/y axis in pixels. This does not factor in camera scroll, layer scale or layer position.
 - Rectangle area intersection
     ```javascript
     var isIntersection = tile.intersects(x, y, right, bottom);
     ```
-    - `x`, `y` : The x/y axis in pixels.
+    - `x`, `y` : The x/y axis in pixels. This does not factor in camera scroll, layer scale or layer position.
     - `right`, `bottom` : The right/bottom point.
 
 #### Properties
