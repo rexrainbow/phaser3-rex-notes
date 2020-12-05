@@ -85,8 +85,9 @@ nav:
         - Container Lite:
             - Container Lite: containerlite.md
             - Perspective: containerlite-perspective.md
-        - Grid table: gridtable.md        
+        - Grid table: gridtable.md
     - Zone: zone.md
+    - Layer: layer.md
     - Object pool:
         - Group: group.md
     - DOM element:
