@@ -73,6 +73,14 @@ scene.loader.setPath(path)
     scene.load.image(key, url);
     // scene.load.image(key, url, xhrSettings);
     ```
+    - `url` : Url of texture.
+- Image and normal map
+    ```javascript
+    scene.load.image(key, [url, normalMapUrl]);
+    // scene.load.image(key, [url, normalMapUrl], xhrSettings);
+    ```
+    - `url` : Url of texture.
+    - `normalMapUrl` : Url of normal map.
 - SVG
     ```javascript
     scene.load.svg(key, url);
