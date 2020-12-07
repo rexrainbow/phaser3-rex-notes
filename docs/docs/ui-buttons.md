@@ -249,13 +249,13 @@ See [sizer object](ui-sizer.md)
     ```
 - Disable button's input
     ```javascript
-    buttons.on('button.disalbe', function(button, index) {
+    buttons.on('button.disable', function(button, index) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.disalbe', function(button, groupName, index, pointer, event) {
+    buttons.on('button.disable', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
