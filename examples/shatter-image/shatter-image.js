@@ -18,9 +18,24 @@ class Demo extends Phaser.Scene {
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
 
-        this.input.on('pointerdown', function (pointer) {
-            image.shatter(pointer);
-        });
+        this.input
+            .on('pointerdown', function (pointer) {
+                if (image.task) {
+                    image.task.stop();
+                }
+                image.shatter(pointer);
+            })
+            .on('pointerup', function () {
+                image.task = this.tweens.add({
+                    targets: image.faces,
+                    alpha: 0,
+                    ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                    duration: 1000,
+                    delay: this.tweens.stagger(100),
+                    repeat: 0,            // -1: infinity
+                    yoyo: false
+                });
+            }, this)
     }
 
     update() {

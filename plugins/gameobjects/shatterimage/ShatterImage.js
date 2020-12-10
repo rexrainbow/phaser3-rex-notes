@@ -6,6 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
 const Face = Phaser.Geom.Mesh.Face;
+const PowerDistance = Phaser.Math.Distance.Power;
 
 class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {
@@ -26,12 +27,6 @@ class ShatterImage extends Mesh {
         GenerateGridVerts({
             mesh: this,
             texture: this.texture.key, frame: this.frame.name,
-
-            width: this.width / this.height,
-            height: 1,
-
-            widthSegments: 1,
-            heightSegments: 1,
             flipY: this.frame.source.isRenderTexture
         });
     }
@@ -72,6 +67,8 @@ class ShatterImage extends Mesh {
         // Generate faces and vertices
         var vertices = result.vertices;
         var indices = result.indices;
+        var centerX = center.x,
+            centerY = center.y;
         for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
             var p0 = vertices[indices[i + 0]];
             var p1 = vertices[indices[i + 1]];
@@ -84,7 +81,19 @@ class ShatterImage extends Mesh {
 
             this.vertices.push(vert1, vert2, vert3);
             this.faces.push(face);
+
+            // Sort faces from center
+            face.g = Math.min(
+                PowerDistance(centerX, centerY, p0[0], p0[1]),
+                PowerDistance(centerX, centerY, p1[0], p1[1]),
+                PowerDistance(centerX, centerY, p2[0], p2[1])
+            )
         }
+
+        // Sort faces from center
+        this.faces.sort(function (faceA, faceB) {
+            return faceA.g - faceB.g;
+        })
 
         return this;
     }
