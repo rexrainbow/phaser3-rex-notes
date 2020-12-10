@@ -3,6 +3,7 @@ import ShatterRectangleToTriangles from '../../utils/math/triangulate/ShatterRec
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
 const Face = Phaser.Geom.Mesh.Face;
 
@@ -21,8 +22,18 @@ class ShatterImage extends Mesh {
         this.setOrtho();
         this.hideCCW = false;
 
-        var center = GetValue(config, 'center', undefined);
-        this.shatter(center);
+        // Generate faces and vertices
+        GenerateGridVerts({
+            mesh: this,
+            texture: this.texture.key, frame: this.frame.name,
+
+            width: this.width / this.height,
+            height: 1,
+
+            widthSegments: 1,
+            heightSegments: 1,
+            flipY: this.frame.source.isRenderTexture
+        });
     }
 
     shatter(center) {
