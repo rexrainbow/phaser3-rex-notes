@@ -1,10 +1,11 @@
 import Triangulate from './Triangulate.js';
 
-const TWO_PI = Math.PI * 2;
-const SampleCount = 12;
+const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-var ShatterRectangleToTriangles = function (rectangle, startPoint) {
+var ShatterRectangleToTriangles = function (config) {
+    var rectangle = config.rectangle;
+
     var left = rectangle.x,
         top = rectangle.y,
         width = rectangle.width,
@@ -12,36 +13,69 @@ var ShatterRectangleToTriangles = function (rectangle, startPoint) {
         right = left + width,
         bottom = top + height;
 
-    var startX, startY;
-    if (startPoint === undefined) {
-        startX = (left + right) / 2;
-        startY = (top + bottom) / 2;
+    var center = config.center;
+    var centerX, centerY;
+    if (center === undefined) {
+        centerX = (left + right) / 2;
+        centerY = (top + bottom) / 2;
     } else {
-        startX = startPoint.x;
-        startY = startPoint.y;
+        centerX = Clamp(center.x, left, right);
+        centerY = Clamp(center.y, top, bottom);
     }
 
     var vertices = [];
-    vertices.push([startX, startY]);
+    vertices.push([centerX, centerY]);
 
-    var radius = Math.max(width, height) * 1.5;
-    for (var i = 0; i < 4; i++) {
-        var r = radius * (3 ** i) / 27; // 1, 3, 9, 27
-        for (var c = 0; c < SampleCount; c++) {
-            var rad = (c / SampleCount) * TWO_PI;
-            var x = startX + Math.cos(rad) * r * RandomRange(0.75, 1.25);
-            var y = startY + Math.sin(rad) * r * RandomRange(0.75, 1.25);
-            x = Clamp(x, left, right);
-            y = Clamp(y, top, bottom);
-            vertices.push([x, y]);
-        }
+    var ringSamples = GetValue(config, 'samples', 12);
+    var variation = GetValue(config, 'variation', 0.25);
+    var radius = Math.min(width, height);
+    var randMin = 1 - variation,
+        randMax = 1 + variation;
+    for (var i = 0; i < 3; i++) {
+        // r = 1/27, 3/27, 9/27
+        AddRingVertices(
+            vertices,
+            centerX, centerY, (radius * (3 ** i) / 27), ringSamples,
+            randMin, randMax,
+            left, right, top, bottom
+        )
     }
+
+    // r = 27/27
+    AddRingVertices(
+        vertices,
+        centerX, centerY, Math.max(width, height), ringSamples,
+        1, 1,
+        left, right, top, bottom
+    )
 
     return Triangulate(vertices);
 }
 
+const TWO_PI = Math.PI * 2;
+var AddRingVertices = function (
+    vertices,
+    centerX, centerY, radius, amount,
+    randMin, randMax,
+    leftBound, rightBound, topBound, bottomBound
+) {
+    for (var i = 0; i < amount; i++) {
+        var rad = (i / amount) * TWO_PI;
+        var x = centerX + Math.cos(rad) * radius * RandomRange(randMin, randMax);
+        var y = centerY + Math.sin(rad) * radius * RandomRange(randMin, randMax);
+        x = Clamp(x, leftBound, rightBound);
+        y = Clamp(y, topBound, bottomBound);
+        vertices.push([x, y]);
+    }
+    return vertices;
+}
+
 var RandomRange = function (min, max) {
-    return min + (max - min) * Math.random();
+    if (min === max) {
+        return min;
+    } else {
+        return min + (max - min) * Math.random();
+    }
 }
 
 export default ShatterRectangleToTriangles;

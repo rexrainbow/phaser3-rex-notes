@@ -15,7 +15,10 @@ class Demo extends Phaser.Scene {
         var rectangle = new Phaser.Geom.Rectangle(0, 0, 800, 600);
 
         this.input.on('pointerdown', function (pointer) {
-            var triangles = ShatterRectangleToTriangles(rectangle, pointer);
+            var triangles = ShatterRectangleToTriangles({
+                rectangle: rectangle,
+                center: pointer
+            });
             graphics.clear();
             for (var i = 0, cnt = triangles.length; i < cnt; i++) {
                 graphics
