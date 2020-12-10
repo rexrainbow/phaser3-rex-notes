@@ -1,5 +1,6 @@
 import TransformVerts from '../utils/TransformVerts';
 
+const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
@@ -9,7 +10,7 @@ const DegToRad = Phaser.Math.DegToRad;
 const FOV = 45;
 const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
-class Image extends Phaser.GameObjects.Mesh {
+class Image extends Mesh {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -29,8 +30,6 @@ class Image extends Phaser.GameObjects.Mesh {
 
         var girdWidth = GetValue(config, 'gridWidth', 32);
         var girdHeight = GetValue(config, 'girdHeight', girdWidth);
-        var flipX = GetValue(config, 'flipX', false);
-        var flipY = GetValue(config, 'flipY', false);
         this.resetVerts(girdWidth, girdHeight);
     }
 

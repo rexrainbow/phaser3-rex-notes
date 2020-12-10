@@ -4,14 +4,21 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
 var ShatterRectangleToTriangles = function (config) {
+    var left, right, top, bottom, width, height;
     var rectangle = config.rectangle;
-
-    var left = rectangle.x,
-        top = rectangle.y,
-        width = rectangle.width,
-        height = rectangle.height,
-        right = left + width,
-        bottom = top + height;
+    if (rectangle) {
+        left = rectangle.x;
+        top = rectangle.y;
+        width = rectangle.width;
+        height = rectangle.height;
+    } else {
+        left = 0;
+        top = 0;
+        width = config.width;
+        height = config.height;
+    }
+    right = left + width;
+    bottom = top + height;
 
     var center = config.center;
     var centerX, centerY;
@@ -42,14 +49,16 @@ var ShatterRectangleToTriangles = function (config) {
     }
 
     // r = 27/27
+    var radius = Math.min(width, height) * 2;
     AddRingVertices(
         vertices,
-        centerX, centerY, Math.max(width, height), ringSamples,
-        1, 1,
+        centerX, centerY, radius, ringSamples,
+        randMin, randMax,
         left, right, top, bottom
     )
 
-    return Triangulate(vertices);
+    var triangleOutput = GetValue(config, 'triangleOutput', true);
+    return Triangulate(vertices, triangleOutput);
 }
 
 const TWO_PI = Math.PI * 2;

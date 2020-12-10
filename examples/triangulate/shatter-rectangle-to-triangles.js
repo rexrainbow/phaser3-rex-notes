@@ -12,11 +12,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var graphics = this.add.graphics();
-        var rectangle = new Phaser.Geom.Rectangle(0, 0, 800, 600);
 
         this.input.on('pointerdown', function (pointer) {
             var triangles = ShatterRectangleToTriangles({
-                rectangle: rectangle,
+                width: 800,
+                height: 600,
                 center: pointer
             });
             graphics.clear();
