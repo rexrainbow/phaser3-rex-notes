@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var image = this.add.rexShatterImage(400, 300, 'classroom')
-            .shatter()
+            //.shatter()
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
                 if (image.task) {
                     image.task.stop();
                 }
-                image.shatter(pointer);
+                image.shatter(pointer.x, pointer.y);
             })
             .on('pointerup', function () {
                 image.task = this.tweens.add({
@@ -50,10 +50,11 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.FIT,
+        // mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    backgroundColor: 0x555555,
     plugins: {
         global: [{
             key: 'rexShatterImage',

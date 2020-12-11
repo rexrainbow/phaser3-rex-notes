@@ -6,7 +6,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
 const Face = Phaser.Geom.Mesh.Face;
-const PowerDistance = Phaser.Math.Distance.Power;
+const DistanceSquared = Phaser.Math.Distance.Squared;
+const DegToRad = Phaser.Math.DegToRad;
+
+const FOV = 45;
+const PanZ = 1 + (1 / Math.sin(DegToRad(FOV)));
 
 class ShatterImage extends Mesh {
     constructor(scene, x, y, key, frame, config) {
@@ -20,63 +24,93 @@ class ShatterImage extends Mesh {
 
         super(scene, x, y, key, frame);
         this.type = 'rexShatterImage';
-        this.setOrtho();
-        this.hideCCW = false;
+        this.setSizeToFrame();
+        this.setPerspective(this.width, this.height, FOV);
+        this.panZ(PanZ);
+        this.resetImage();
 
-        // Generate faces and vertices
+        this.shatterCenter = { x: null, y: null };
+    }
+
+    resetImage() {
         GenerateGridVerts({
             mesh: this,
             texture: this.texture.key, frame: this.frame.name,
+            width: this.frame.cutWidth / this.height,
+            height: this.frame.cutHeight / this.height,
             flipY: this.frame.source.isRenderTexture
         });
+        return this
     }
 
-    shatter(center) {
+    shatter(centerX, centerY) {
+        if (centerX === undefined) {
+            centerX = this.width / 2;
+            centerY = this.height / 2;
+        }
+        this.shatterCenter.x = centerX;
+        this.shatterCenter.y = centerY;
+
         // Clear faces and vertices
         this.vertices.length = 0;
         this.faces.length = 0;
         this.dirtyCache[9] = -1;
-
-        var width = this.width,
-            height = this.height;
-        if ((width === 0) || (height === 0)) {
+        if ((this.width === 0) || (this.height === 0)) {
             return this;
         }
 
-        if (center === undefined) {
-            center = {
-                x: width / 2,
-                y: height / 2
-            };
-        }
-
         var result = ShatterRectangleToTriangles({
-            width: width,
-            height: height,
-            center: center,
+            width: this.width,
+            height: this.height,
+            center: this.shatterCenter,
             triangleOutput: false
         })
+        var vertices = result.vertices;
+        var indices = result.indices;
+
+        // Calculate vertex data
+        var verticesData = [];
+        var srcWidth = this.width;
+        var srcHeight = this.height;
+        var vWidth = this.frame.cutWidth / srcHeight;
+        var vHeight = this.frame.cutHeight / srcHeight;
+        var vHalfWidth = vWidth / 2;
+        var vHalfHeight = vHeight / 2;
 
         var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
         var frameU1 = this.frame.u1;
         var frameV0 = (!flipY) ? this.frame.v0 : this.frame.v1;
         var frameV1 = (!flipY) ? this.frame.v1 : this.frame.v0;
+        var frameU = frameU1 - frameU0;
+        var frameV = frameV1 - frameV0;
 
+        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
+            var p = vertices[i];
+            var px = p[0];
+            var py = p[1];
 
-        // Generate faces and vertices
-        var vertices = result.vertices;
-        var indices = result.indices;
-        var centerX = center.x,
-            centerY = center.y;
+            var vx = (px / srcHeight) - vHalfWidth;
+            var vy = (py / srcHeight) - vHalfHeight;
+
+            var u = frameU0 + (frameU * (px / srcWidth));
+            var v = frameV0 + (frameV * (py / srcHeight));
+            verticesData.push({
+                x: px, y: py,
+                vx: vx, vy: -vy,
+                u: u, v: v
+            })
+        }
+
+        // Build face
         for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
-            var p0 = vertices[indices[i + 0]];
-            var p1 = vertices[indices[i + 1]];
-            var p2 = vertices[indices[i + 2]];
+            var v0 = verticesData[indices[i + 0]];
+            var v1 = verticesData[indices[i + 1]];
+            var v2 = verticesData[indices[i + 2]];
 
-            var vert1 = CreateVertex(p0[0], p0[1], width, height, frameU0, frameU1, frameV0, frameV1);
-            var vert2 = CreateVertex(p1[0], p1[1], width, height, frameU0, frameU1, frameV0, frameV1);
-            var vert3 = CreateVertex(p2[0], p2[1], width, height, frameU0, frameU1, frameV0, frameV1);
+            var vert1 = new Vertex(v0.vx, v0.vy, 0, v0.u, v0.v);
+            var vert2 = new Vertex(v1.vx, v1.vy, 0, v1.u, v1.v);
+            var vert3 = new Vertex(v2.vx, v2.vy, 0, v2.u, v2.v);
             var face = new Face(vert1, vert2, vert3);
 
             this.vertices.push(vert1, vert2, vert3);
@@ -84,10 +118,10 @@ class ShatterImage extends Mesh {
 
             // Sort faces from center
             face.g = Math.min(
-                PowerDistance(centerX, centerY, p0[0], p0[1]),
-                PowerDistance(centerX, centerY, p1[0], p1[1]),
-                PowerDistance(centerX, centerY, p2[0], p2[1])
-            )
+                DistanceSquared(centerX, centerY, v0.x, v0.y),
+                DistanceSquared(centerX, centerY, v1.x, v1.y),
+                DistanceSquared(centerX, centerY, v2.x, v2.y)
+            );
         }
 
         // Sort faces from center
@@ -97,23 +131,6 @@ class ShatterImage extends Mesh {
 
         return this;
     }
-}
-
-const Linear = Phaser.Math.Linear;
-var CreateVertex = function (x, y, width, height, u0, u1, v0, v1) {
-    x /= height;
-    y /= height;
-    width /= height;
-    height = 1;
-
-    var tu = x / width;
-    var tv = y / height;
-    var u = Linear(u0, u1, tu);
-    var v = Linear(v0, v1, tv);
-    x = x - (width / 2);
-    y = y - (height / 2);
-    var vert = new Vertex(x, -y, 0, u, v);
-    return vert;
 }
 
 export default ShatterImage;
