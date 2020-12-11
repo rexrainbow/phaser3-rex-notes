@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var image = this.add.rexShatterImage(400, 300, 'classroom')
-            //.shatter()
+        //.shatter()
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
@@ -22,6 +22,7 @@ class Demo extends Phaser.Scene {
             .on('pointerdown', function (pointer) {
                 if (image.task) {
                     image.task.stop();
+                    image.task = null;
                 }
                 image.shatter(pointer.x, pointer.y);
             })

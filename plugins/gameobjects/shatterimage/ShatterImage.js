@@ -33,6 +33,8 @@ class ShatterImage extends Mesh {
     }
 
     resetImage() {
+        this.clear();
+        this.dirtyCache[9] = -1;
         GenerateGridVerts({
             mesh: this,
             texture: this.texture.key, frame: this.frame.name,
@@ -52,8 +54,7 @@ class ShatterImage extends Mesh {
         this.shatterCenter.y = centerY;
 
         // Clear faces and vertices
-        this.vertices.length = 0;
-        this.faces.length = 0;
+        this.clear();
         this.dirtyCache[9] = -1;
         if ((this.width === 0) || (this.height === 0)) {
             return this;

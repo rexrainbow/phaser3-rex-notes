@@ -47,9 +47,8 @@ class Image extends Mesh {
         }
 
         // Clear faces and vertices
-        this.faces.length = 0;
-        this.vertices.length = 0;
-
+        this.clear();
+        this.dirtyCache[9] = -1;
         if ((this.width === 0) || (this.height === 0)) {
             return this;
         }
