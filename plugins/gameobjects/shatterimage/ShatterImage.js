@@ -1,11 +1,11 @@
 import ShatterRectangleToTriangles from '../../utils/math/triangulate/ShatterRectangleToTriangles.js';
+import Face from './Face.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
 const Vertex = Phaser.Geom.Mesh.Vertex;
-const Face = Phaser.Geom.Mesh.Face;
 const DistanceSquared = Phaser.Math.Distance.Squared;
 const DegToRad = Phaser.Math.DegToRad;
 
@@ -130,6 +130,16 @@ class ShatterImage extends Mesh {
             return faceA.g - faceB.g;
         })
 
+        return this;
+    }
+
+    startUpdate() {
+        this.ignoreDirtyCache = true;
+        return this;
+    }
+
+    stopUpdate() {
+        this.ignoreDirtyCache = false;
         return this;
     }
 }

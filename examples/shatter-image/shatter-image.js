@@ -15,8 +15,8 @@ class Demo extends Phaser.Scene {
         var image = this.add.rexShatterImage(400, 300, 'classroom')
         //.shatter()
 
-        this.debug = this.add.graphics();
-        image.setDebug(this.debug);
+        // this.debug = this.add.graphics();
+        // image.setDebug(this.debug);
 
         this.input
             .on('pointerdown', function (pointer) {
@@ -30,18 +30,23 @@ class Demo extends Phaser.Scene {
                 image.task = this.tweens.add({
                     targets: image.faces,
                     alpha: 0,
+                    angle: function () { return -90 + Math.random() * 180; },
+                    y: '-=0.5',
                     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
                     duration: 1000,
-                    delay: this.tweens.stagger(100),
+                    delay: this.tweens.stagger(20),
                     repeat: 0,            // -1: infinity
-                    yoyo: false
+                    yoyo: false,
+                    onComplete: image.stopUpdate,
+                    onCompleteScope: image
                 });
+                image.startUpdate();
             }, this)
     }
 
     update() {
-        this.debug.clear();
-        this.debug.lineStyle(1, 0x00ff00);
+        //this.debug.clear();
+        //this.debug.lineStyle(1, 0x00ff00);
     }
 }
 
@@ -51,11 +56,11 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        // mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    backgroundColor: 0x555555,
+    backgroundColor: 0x333333,
     plugins: {
         global: [{
             key: 'rexShatterImage',
