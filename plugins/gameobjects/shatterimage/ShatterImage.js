@@ -73,10 +73,8 @@ class ShatterImage extends Mesh {
         var verticesData = [];
         var srcWidth = this.width;
         var srcHeight = this.height;
-        var vWidth = this.frame.cutWidth / srcHeight;
-        var vHeight = this.frame.cutHeight / srcHeight;
-        var vHalfWidth = vWidth / 2;
-        var vHalfHeight = vHeight / 2;
+        var vHalfWidth = (this.frame.cutWidth / srcHeight) / 2;
+        var vHalfHeight = (this.frame.cutHeight / srcHeight) / 2;
 
         var flipY = this.frame.source.isRenderTexture;
         var frameU0 = this.frame.u0;
@@ -91,15 +89,12 @@ class ShatterImage extends Mesh {
             var px = p[0];
             var py = p[1];
 
-            var vx = (px / srcHeight) - vHalfWidth;
-            var vy = (py / srcHeight) - vHalfHeight;
-
-            var u = frameU0 + (frameU * (px / srcWidth));
-            var v = frameV0 + (frameV * (py / srcHeight));
             verticesData.push({
-                x: px, y: py,
-                vx: vx, vy: -vy,
-                u: u, v: v
+                g: DistanceSquared(centerX, centerY, px, py),
+                x: (px / srcHeight) - vHalfWidth,
+                y: (py / srcHeight) - vHalfHeight,
+                u: frameU0 + (frameU * (px / srcWidth)),
+                v: frameV0 + (frameV * (py / srcHeight))
             })
         }
 
@@ -109,20 +104,16 @@ class ShatterImage extends Mesh {
             var v1 = verticesData[indices[i + 1]];
             var v2 = verticesData[indices[i + 2]];
 
-            var vert1 = new Vertex(v0.vx, v0.vy, 0, v0.u, v0.v);
-            var vert2 = new Vertex(v1.vx, v1.vy, 0, v1.u, v1.v);
-            var vert3 = new Vertex(v2.vx, v2.vy, 0, v2.u, v2.v);
+            var vert1 = new Vertex(v0.x, -v0.y, 0, v0.u, v0.v);
+            var vert2 = new Vertex(v1.x, -v1.y, 0, v1.u, v1.v);
+            var vert3 = new Vertex(v2.x, -v2.y, 0, v2.u, v2.v);
             var face = new Face(vert1, vert2, vert3);
 
             this.vertices.push(vert1, vert2, vert3);
             this.faces.push(face);
 
             // Sort faces from center
-            face.g = Math.min(
-                DistanceSquared(centerX, centerY, v0.x, v0.y),
-                DistanceSquared(centerX, centerY, v1.x, v1.y),
-                DistanceSquared(centerX, centerY, v2.x, v2.y)
-            );
+            face.g = Math.min(v0.g, v1.g, v2.g);
         }
 
         // Sort faces from center

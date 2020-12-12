@@ -14,9 +14,14 @@ class Face extends Base {
         return this._rotation;
     }
 
-    set rotation(value) {        
+    set rotation(value) {
         RotateFace(this, (value - this._rotation));
         this._rotation = value;
+    }
+
+    setRotation(value) {
+        this.rotation = value;
+        return this;
     }
 
     get angle() {
@@ -25,6 +30,11 @@ class Face extends Base {
 
     set angle(value) {
         this.rotation = DegToRad(value);
+    }
+
+    setAngle(value) {
+        this.angle = value;
+        return this;
     }
 }
 
