@@ -5,6 +5,9 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
 - Author: Rex
 - Game object
 
+!!! warning "WebGL only"
+    It only works in WebGL render mode.
+
 ## Live demos
 
 -

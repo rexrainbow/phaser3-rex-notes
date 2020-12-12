@@ -30,6 +30,19 @@ class ShatterImage extends Mesh {
         this.resetImage();
 
         this.shatterCenter = { x: null, y: null };
+
+        this.setVariation(GetValue(config, 'variation', 0.25));
+        this.setSamplesPerRing(GetValue(config, 'samplesPerRing', 12));
+    }
+
+    setVariation(variation) {
+        this.variation = variation;
+        return this;
+    }
+
+    setSamplesPerRing(samples) {
+        this.samplesPerRing = samples;
+        return this;
     }
 
     resetImage() {
@@ -64,7 +77,9 @@ class ShatterImage extends Mesh {
             width: this.width,
             height: this.height,
             center: this.shatterCenter,
-            triangleOutput: false
+            triangleOutput: false,
+            variation: this.variation,
+            samplesPerRing: this.samplesPerRing
         })
         var vertices = result.vertices;
         var indices = result.indices;

@@ -27,6 +27,7 @@ class Demo extends Phaser.Scene {
                 image.shatter(pointer.x, pointer.y);
             })
             .on('pointerup', function () {
+                image.startUpdate();
                 image.task = this.tweens.add({
                     targets: image.faces,
                     alpha: 0,
@@ -40,7 +41,6 @@ class Demo extends Phaser.Scene {
                     onComplete: image.stopUpdate,
                     onCompleteScope: image
                 });
-                image.startUpdate();
             }, this)
     }
 

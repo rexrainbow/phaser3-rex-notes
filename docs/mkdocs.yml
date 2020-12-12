@@ -46,7 +46,8 @@ nav:
             - Render texture: perspective-rendertexture.md
             - Card: perspective-card.md
             - Carousel: perspective-carousel.md
-        - Rope: rope.md        
+        - Shatter image: shatter-image.md
+        - Rope: rope.md
     - Text:
         - Canvas text:
             - Text: text.md

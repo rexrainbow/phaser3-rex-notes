@@ -36,6 +36,11 @@ class Face extends Base {
         this.angle = value;
         return this;
     }
+
+    setAlpha(alpha) {
+        this.alpha = alpha;
+        return this;
+    }
 }
 
 export default Face;

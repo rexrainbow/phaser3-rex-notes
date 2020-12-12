@@ -33,7 +33,7 @@ var ShatterRectangleToTriangles = function (config) {
     var vertices = [];
     vertices.push([centerX, centerY]);
 
-    var ringSamples = GetValue(config, 'samples', 12);
+    var ringSamples = GetValue(config, 'samplesPerRing', 12);
     var variation = GetValue(config, 'variation', 0.25);
     var radius = Math.min(width, height);
     var randMin = 1 - variation,

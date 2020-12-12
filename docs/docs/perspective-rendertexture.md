@@ -5,6 +5,9 @@ Render texture with perspective rotation.
 - Author: Rex
 - Game object
 
+!!! warning "WebGL only"
+    It only works in WebGL render mode.
+
 ## Live demos
 
 -
