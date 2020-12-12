@@ -38,8 +38,9 @@ class Demo extends Phaser.Scene {
                     delay: this.tweens.stagger(20),
                     repeat: 0,            // -1: infinity
                     yoyo: false,
-                    onComplete: image.stopUpdate,
-                    onCompleteScope: image
+                    onComplete: function () {
+                        image.stopUpdate()
+                    }
                 });
             }, this)
     }

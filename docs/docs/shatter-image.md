@@ -151,6 +151,12 @@ image.shatter(centerX, centerY);
 
 Shatter image into triangle faces.
 
+#### Position of Shatter center
+
+```javascript
+var shatterCenter = image.shatterCenter; // {x, y}
+```
+
 ### Faces 
 
 ```javascript
@@ -243,7 +249,8 @@ scene.tweens.add({
     delay: scene.tweens.stagger(20),
     repeat: 0,            // -1: infinity
     yoyo: false,
-    onComplete: image.stopUpdate,
-    onCompleteScope: image
+    onComplete: function () {
+        image.stopUpdate()
+    }
 });
 ```
