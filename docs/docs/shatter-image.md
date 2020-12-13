@@ -257,7 +257,7 @@ scene.tweens.add({
 
 ### Reset image
 
-Reset image to original 2 faces.
+Display original image with 2 faces.
 
 ```javascript
 image.resetImage();
