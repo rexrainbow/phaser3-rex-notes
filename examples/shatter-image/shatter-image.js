@@ -39,7 +39,9 @@ class Demo extends Phaser.Scene {
                     repeat: 0,            // -1: infinity
                     yoyo: false,
                     onComplete: function () {
-                        image.stopUpdate()
+                        image
+                            .stopUpdate()
+                            .resetImage()
                     }
                 });
             }, this)
