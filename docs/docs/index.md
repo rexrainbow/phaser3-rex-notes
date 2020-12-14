@@ -5,5 +5,6 @@
 ## Links
 
 - [Plugin list](plugin-list.md)
-- [Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)
+- [Bug report](https://github.com/rexrainbow/phaser3-rex-notes/issues)
+- [Feature suggestion & discussion](https://github.com/rexrainbow/phaser3-rex-notes/discussions)
 - [Discord channel](https://discord.gg/kWkuFZK)
