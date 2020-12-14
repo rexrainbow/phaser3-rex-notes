@@ -193,6 +193,61 @@ Render a group of textured vertices and manipulate the view of those vertices, s
     mesh.hideCCW = false;
     ```
 
+### Faces
+
+Mesh is composed of triangle faces.
+
+```javascript
+var faces = mesh.faces;
+```
+
+#### Properties
+
+- Alpha
+    - Get
+        ```javascript
+        var alpha = face.alpha;
+        ```
+    - Set
+        ```javascript
+        face.alpha = alpha;
+        ```
+- Angle
+    - Rotate
+        ```javascript
+        Phaser.Geom.Mesh.RotateFace(face, radians);
+        ```
+- Center position
+    - Get
+        ```javascript
+        var x = face.x;
+        var y = face.y;
+        ```
+        - `x` : 0(left) ~ 1(right)
+        - `y` : 1(top) ~ 0(bottom)
+    - Set
+        ```javascript
+        face.x = x;
+        face.y = y;
+        ```
+        or
+        ```javascript
+        face.translate(x, y);
+        ```
+        - `x` : 0(left) ~ 1(right)
+        - `y` : 1(top) ~ 0(bottom)
+
+##### Update properties
+
+- Start updating
+    ```javascript
+    mesh.ignoreDirtyCache = true;
+    ```
+- Stop updating
+    ```javascript
+    mesh.ignoreDirtyCache = false;
+    ```
+
 ### Debug
 
 1. Set debug [Graphics](graphics.md)
