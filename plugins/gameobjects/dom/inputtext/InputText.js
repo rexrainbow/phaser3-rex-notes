@@ -185,7 +185,7 @@ const ElementProperties = {
     text: ['value', undefined],
     placeholder: ['placeholder', undefined],
     tooltip: ['title', undefined],
-    readOnly: ['readonly', false],
+    readOnly: ['readOnly', false],
     spellCheck: ['spellcheck', false],
     autoComplete: ['autocomplete', 'off'],
 };
