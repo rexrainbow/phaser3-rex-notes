@@ -492,7 +492,7 @@ See [base sizer object](ui-basesizer.md).
     - `swipeEventName` : `'cell.swipeleft'`, `'cell.swiperight'`, `'cell.swipeup'`, `'cell.swipedown'`.
 - Scroll table
     ```javascript
-    table.on('scroll', function(panel) {
+    table.on('scroll', function(table) {
         // ...
     })
     ```

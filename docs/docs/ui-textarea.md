@@ -324,7 +324,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - On scroll
     ```javascript
-    textArea.on('scroll', function(panel) {
+    textArea.on('scroll', function(textArea) {
         // ...
     })
     ```
