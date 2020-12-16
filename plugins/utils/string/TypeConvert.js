@@ -9,7 +9,7 @@ var convert = function (s) {
     } else if (FLOAT.test(s)) {
         s = parseFloat(s);
     } else {        
-        if (screen === 'false') {
+        if (s === 'false') {
             s = false;
         } else if (s === 'true') {
             s = true;
