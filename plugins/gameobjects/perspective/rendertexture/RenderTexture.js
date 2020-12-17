@@ -1,29 +1,33 @@
-import Base from './Base.js';
+import PerspectiveImage from '../image/Image.js';
 
-class RenderTexture extends Base {
-    fill(rgb, alpha, x, y, width, height) {
-        this.rt.fill(rgb, alpha, x, y, width, height);
-        return this;
+const RT = Phaser.GameObjects.RenderTexture;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+class RenderTexture extends PerspectiveImage {
+    constructor(scene, x, y, width, height, config) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            width = GetValue(config, 'width', 32);
+            height = GetValue(config, 'height', 32);
+        }
+
+        // render-texture -> perspective-image
+        var rt = (new RT(scene, x, y, width, height))
+            .setOrigin(0.5);
+
+        super(scene, x, y, rt.texture.key, null, config);
+        this.type = 'rexPerspectiveRenderTexture';
+        this.rt = rt;
     }
 
-    clear() {
-        this.rt.clear();
-        return this;
-    }
+    destroy(fromScene) {
+        super.destroy(fromScene);
 
-    erase(entries, x, y) {
-        this.rt.erase(entries, x, y);
-        return this;
-    }
-
-    draw(entries, x, y, alpha, tint) {
-        this.rt.draw(entries, x, y, alpha, tint);
-        return this;
-    }
-
-    drawFrame(key, frame, x, y, alpha, tint) {
-        this.rt.drawFrame(key, frame, x, y, alpha, tint);
-        return this;
+        this.rt.destroy(fromScene);
+        this.rt = null;
     }
 }
 

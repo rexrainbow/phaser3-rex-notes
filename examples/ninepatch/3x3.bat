@@ -1,4 +1,4 @@
-set testmode=0
+@echo off
 set main=./examples/ninepatch/3x3.js
 cd ..
 cd ..

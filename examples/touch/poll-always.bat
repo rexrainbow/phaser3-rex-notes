@@ -1,4 +1,4 @@
-set testmode=0
+@echo off
 set main=./examples/touch/poll-always.js
 cd ..
 cd ..

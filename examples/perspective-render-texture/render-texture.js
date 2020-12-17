@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         }).setOrigin(1);
 
         var image = this.add.rexPerspectiveRenderTexture(400, 300, 150, 200);
-        image
+        image.rt
             .fill(0x888888)
             .draw(numberText, 150, 200)
             .draw(mushroom, 75, 100)

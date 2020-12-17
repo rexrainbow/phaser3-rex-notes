@@ -1,5 +1,5 @@
 import Carousel from '../carousel/Carousel.js';
-import RenderTexture from '../rendertexture/Base.js';
+import RenderTexture from '../rendertexture/RenderTexture.js';
 import GetFaceSize from './GetFaceSize.js';
 import GetIndexOffsetMap from './GetIndexOffsetMap.js';
 

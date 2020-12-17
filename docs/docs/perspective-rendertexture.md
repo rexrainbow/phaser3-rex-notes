@@ -26,7 +26,7 @@ Render texture with perspective rotation.
     ```
 - Add render texture object
     ```javascript
-    var rt = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
+    var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
     ```
 
 #### Import plugin
@@ -55,7 +55,7 @@ Render texture with perspective rotation.
     ```
 - Add render texture object
     ```javascript
-    var rt = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
+    var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
     ```
 
 #### Import class
@@ -70,8 +70,8 @@ Render texture with perspective rotation.
     ```
 - Add render texture object
     ```javascript
-    var rt = new Perspective.PerspectiveRenderTexturege(scene, x, y, width, height, config);
-    sscene.add.existing(rt);
+    var image = new Perspective.PerspectiveRenderTexturege(scene, x, y, width, height, config);
+    sscene.add.existing(image);
     ```
 
 ### Create instance
@@ -101,7 +101,7 @@ var image = scene.add.rexPerspectiveRenderTexturege({
 Add prespective render texture from JSON
 
 ```javascript
-var rt = scene.make.rexPerspectiveRenderTexturege({
+var image = scene.make.rexPerspectiveRenderTexturege({
     x: 0,
     y: 0,
     width: 32,
@@ -140,55 +140,63 @@ var rt = scene.make.rexPerspectiveRenderTexturege({
     var image = new MyPerspectiveRenderTexturege(scene, x, y, width, height, config);
     ```
 
-### Paste texture
+### Internal render texture
+
+```javascript
+var rt = image.rt;
+```
+
+- `rt` : [Render texture](rendertexture.md)
+
+#### Paste texture
 
 - Paste game object
     ```javascript
-    rt.draw(gameObject, x, y);
-    // rt.draw(gameObject, x, y, alpha, tint);
+    image.rt.draw(gameObject, x, y);
+    // image.rt.draw(gameObject, x, y, alpha, tint);
     ```
    - `gameObject` : a game object, or an array of game objects
 - Paste game objects in a [group](group.md)
     ```javascript
-    rt.draw(group, x, y);
-    // rt.draw(group, x, y, alpha, tint);
+    image.rt.draw(group, x, y);
+    // image.rt.draw(group, x, y, alpha, tint);
     ```
 - Paste game objects in a scene
     ```javascript
-    rt.draw(scene.children, x, y);
-    // rt.draw(scene.children, x, y, alpha, tint);
+    image.rt.draw(scene.children, x, y);
+    // image.rt.draw(scene.children, x, y, alpha, tint);
     ```
 - Paste texture
     ```javascript
-    rt.draw(key, x, y);
-    // rt.draw(key, x, y, alpha, tint);
+    image.rt.draw(key, x, y);
+    // image.rt.draw(key, x, y, alpha, tint);
     ```
     or
     ```javascript
-    rt.drawFrame(key, frame, x, y);
-    // rt.drawFrame(key, frame, x, y, alpha, tint);
+    image.rt.drawFrame(key, frame, x, y);
+    // image.rt.drawFrame(key, frame, x, y, alpha, tint);
     ```
     - `key` : The key of the texture to be used, as stored in the Texture Manager.
 
-### Erase
+#### Erase
 
 ```javascript
-rt.erase(gameObject, x, y);
+image.rt.erase(gameObject, x, y);
 ```
 
 - `gameObject` : a game object, or an array of game objects
 
-### Clear
+#### Clear
 
 ```javascript
-rt.clear();
+image.rt.clear();
 ```
 
-### Fill
+#### Fill
 
 ```javascript
-rt.fill(rgb, alpha);
-// rt.fill(rgb, alpha, x, y, width, height);
+image.rt.fill(rgb, alpha);
+// image.rt.fill(rgb, alpha, x, y, width, height);
 ```
 
 ### Other properties

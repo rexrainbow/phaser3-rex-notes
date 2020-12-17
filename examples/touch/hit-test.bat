@@ -1,4 +1,4 @@
-set testmode=0
+@echo off
 set main=./examples/touch/hit-test.js
 cd ..
 cd ..

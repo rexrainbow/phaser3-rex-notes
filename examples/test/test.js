@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.pointlight(400, 300, 0xff0000, 128, 0.25, 0.1);
     }
 
     update() {

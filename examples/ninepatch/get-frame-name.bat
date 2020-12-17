@@ -1,4 +1,4 @@
-set testmode=0
+@echo off
 set main=./examples/ninepatch/get-frame-name.js
 cd ..
 cd ..

@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/render-pipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mesh/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Render pipeline - Notes of Phaser 3</title>
+        <title>Mesh - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Render pipeline
+                Mesh
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -792,25 +794,6 @@
           
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-3" type="checkbox" id="nav-4-2-3">
-    
-    <label class="md-nav__link" for="nav-4-2-3">
-      Shader
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-2-3">
-        Shader
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
   <li class="md-nav__item">
     <a href="../shader/" title="Shader" class="md-nav__link">
       Shader
@@ -824,8 +807,255 @@
 
 
   <li class="md-nav__item">
-    <a href="../effectlayer-outline/" title="Outline effect layer" class="md-nav__link">
-      Outline effect layer
+    <a href="../texture/" title="Texture" class="md-nav__link">
+      Texture
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+    
+    <label class="md-nav__link" for="nav-4-3">
+      Mesh
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        Mesh
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Mesh
+      </label>
+    
+    <a href="./" title="Mesh" class="md-nav__link md-nav__link--active">
+      Mesh
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quad" class="md-nav__link">
+    Quad
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-mesh-class" class="md-nav__link">
+    Custom mesh class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    Control
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#view" class="md-nav__link">
+    View
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model_1" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-facing-faces" class="md-nav__link">
+    Backward facing Faces
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#faces" class="md-nav__link">
+    Faces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-properties" class="md-nav__link">
+    Update properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" class="md-nav__link">
+    Debug
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Perspective
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Perspective
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../perspective-image/" title="Image" class="md-nav__link">
+      Image
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../perspective-rendertexture/" title="Render texture" class="md-nav__link">
+      Render texture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../perspective-card/" title="Card" class="md-nav__link">
+      Card
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../perspective-carousel/" title="Carousel" class="md-nav__link">
+      Carousel
     </a>
   </li>
 
@@ -840,28 +1070,9 @@
           
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4" type="checkbox" id="nav-4-2-4">
-    
-    <label class="md-nav__link" for="nav-4-2-4">
-      Mesh
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-2-4">
-        Mesh
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
   <li class="md-nav__item">
-    <a href="../quad/" title="Quad" class="md-nav__link">
-      Quad
+    <a href="../shatter-image/" title="Shatter image" class="md-nav__link">
+      Shatter image
     </a>
   </li>
 
@@ -888,32 +1099,15 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="../texture/" title="Texture" class="md-nav__link">
-      Texture
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
     
-    <label class="md-nav__link" for="nav-4-3">
+    <label class="md-nav__link" for="nav-4-4">
       Text
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-3">
+      <label class="md-nav__title" for="nav-4-4">
         Text
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -926,13 +1120,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-1" type="checkbox" id="nav-4-3-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-1" type="checkbox" id="nav-4-4-1">
     
-    <label class="md-nav__link" for="nav-4-3-1">
+    <label class="md-nav__link" for="nav-4-4-1">
       Canvas text
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-3-1">
+      <label class="md-nav__title" for="nav-4-4-1">
         Canvas text
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -986,13 +1180,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-2" type="checkbox" id="nav-4-4-2">
     
-    <label class="md-nav__link" for="nav-4-3-2">
+    <label class="md-nav__link" for="nav-4-4-2">
       Bitmap text
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-3-2">
+      <label class="md-nav__title" for="nav-4-4-2">
         Bitmap text
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1034,13 +1228,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3">
     
-    <label class="md-nav__link" for="nav-4-3-3">
+    <label class="md-nav__link" for="nav-4-4-3">
       Behaviors
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-3-3">
+      <label class="md-nav__title" for="nav-4-4-3">
         Behaviors
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1099,13 +1293,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
     
-    <label class="md-nav__link" for="nav-4-4">
+    <label class="md-nav__link" for="nav-4-5">
       Graphics
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-4">
+      <label class="md-nav__title" for="nav-4-5">
         Graphics
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1142,13 +1336,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3">
     
-    <label class="md-nav__link" for="nav-4-4-3">
+    <label class="md-nav__link" for="nav-4-5-3">
       Shape
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-4-3">
+      <label class="md-nav__title" for="nav-4-5-3">
         Shape
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1351,13 +1545,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
     
-    <label class="md-nav__link" for="nav-4-5">
+    <label class="md-nav__link" for="nav-4-6">
       Tile map
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-5">
+      <label class="md-nav__title" for="nav-4-6">
         Tile map
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1387,13 +1581,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
     
-    <label class="md-nav__link" for="nav-4-6">
+    <label class="md-nav__link" for="nav-4-7">
       Container
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-6">
+      <label class="md-nav__title" for="nav-4-7">
         Container
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1416,10 +1610,46 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7-2" type="checkbox" id="nav-4-7-2">
+    
+    <label class="md-nav__link" for="nav-4-7-2">
+      Container Lite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-7-2">
+        Container Lite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../containerlite/" title="Container Lite" class="md-nav__link">
       Container Lite
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../containerlite-perspective/" title="Perspective" class="md-nav__link">
+      Perspective
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1457,15 +1687,75 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../layer/" title="Layer" class="md-nav__link">
+      Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-8" type="checkbox" id="nav-4-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
     
-    <label class="md-nav__link" for="nav-4-8">
+    <label class="md-nav__link" for="nav-4-10">
+      Light
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-10">
+        Light
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../light/" title="Light" class="md-nav__link">
+      Light
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../point-light/" title="Point light" class="md-nav__link">
+      Point light
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-11" type="checkbox" id="nav-4-11">
+    
+    <label class="md-nav__link" for="nav-4-11">
       Object pool
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-8">
+      <label class="md-nav__title" for="nav-4-11">
         Object pool
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1495,13 +1785,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-12" type="checkbox" id="nav-4-12">
     
-    <label class="md-nav__link" for="nav-4-9">
+    <label class="md-nav__link" for="nav-4-12">
       DOM element
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-9">
+      <label class="md-nav__title" for="nav-4-12">
         DOM element
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1567,13 +1857,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13" type="checkbox" id="nav-4-13">
     
-    <label class="md-nav__link" for="nav-4-10">
+    <label class="md-nav__link" for="nav-4-13">
       Behaviors
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-10">
+      <label class="md-nav__title" for="nav-4-13">
         Behaviors
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1586,13 +1876,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-1" type="checkbox" id="nav-4-10-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13-1" type="checkbox" id="nav-4-13-1">
     
-    <label class="md-nav__link" for="nav-4-10-1">
+    <label class="md-nav__link" for="nav-4-13-1">
       Actions
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-1">
+      <label class="md-nav__title" for="nav-4-13-1">
         Actions
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1802,13 +2092,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15" type="checkbox" id="nav-4-10-15">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13-15" type="checkbox" id="nav-4-13-15">
     
-    <label class="md-nav__link" for="nav-4-10-15">
+    <label class="md-nav__link" for="nav-4-13-15">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-15">
+      <label class="md-nav__title" for="nav-4-13-15">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1821,13 +2111,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-15-1" type="checkbox" id="nav-4-10-15-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13-15-1" type="checkbox" id="nav-4-13-15-1">
     
-    <label class="md-nav__link" for="nav-4-10-15-1">
+    <label class="md-nav__link" for="nav-4-13-15-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-15-1">
+      <label class="md-nav__title" for="nav-4-13-15-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1934,13 +2224,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-16" type="checkbox" id="nav-4-10-16">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13-16" type="checkbox" id="nav-4-13-16">
     
-    <label class="md-nav__link" for="nav-4-10-16">
+    <label class="md-nav__link" for="nav-4-13-16">
       Matter.js
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-10-16">
+      <label class="md-nav__title" for="nav-4-13-16">
         Matter.js
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1953,13 +2243,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-16-1" type="checkbox" id="nav-4-10-16-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-13-16-1" type="checkbox" id="nav-4-13-16-1">
     
-    <label class="md-nav__link" for="nav-4-10-16-1">
+    <label class="md-nav__link" for="nav-4-13-16-1">
       Engine
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-10-16-1">
+      <label class="md-nav__title" for="nav-4-13-16-1">
         Engine
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2035,13 +2325,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-11" type="checkbox" id="nav-4-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-14" type="checkbox" id="nav-4-14">
     
-    <label class="md-nav__link" for="nav-4-11">
+    <label class="md-nav__link" for="nav-4-14">
       Display
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-4-11">
+      <label class="md-nav__title" for="nav-4-14">
         Display
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2517,12 +2807,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -2574,12 +2862,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
     <label class="md-nav__link" for="nav-7-4">
       Shader effects
@@ -2595,113 +2881,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Render pipeline
-      </label>
-    
-    <a href="./" title="Render pipeline" class="md-nav__link md-nav__link--active">
-      Render pipeline
+  <li class="md-nav__item">
+    <a href="../postfx-pipeline/" title="Post fx pipeline" class="md-nav__link">
+      Post fx pipeline
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#add-pipeline-instance" class="md-nav__link">
-    Add pipeline instance
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#camera-effect" class="md-nav__link">
-    Camera effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#game-object-effect" class="md-nav__link">
-    Game object effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-properties-of-filter" class="md-nav__link">
-    Set properties of filter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-pipeline-instance" class="md-nav__link">
-    Remove pipeline instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-pipeline-instance" class="md-nav__link">
-    Get pipeline instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-pipeline-instance" class="md-nav__link">
-    Has pipeline instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3586,6 +3770,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tiledmapdata/" title="Tiled map data" class="md-nav__link">
+      Tiled map data
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4027,6 +4223,18 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../raycaster/" title="Raycaster" class="md-nav__link">
+      Raycaster
+    </a>
   </li>
 
         
@@ -5089,30 +5297,44 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#add-pipeline-instance" class="md-nav__link">
-    Add pipeline instance
+  <a href="#quad" class="md-nav__link">
+    Quad
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-mesh-class" class="md-nav__link">
+    Custom mesh class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" class="md-nav__link">
+    Control
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#camera-effect" class="md-nav__link">
-    Camera effect
+  <a href="#view" class="md-nav__link">
+    View
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#game-object-effect" class="md-nav__link">
-    Game object effect
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-properties-of-filter" class="md-nav__link">
-    Set properties of filter
+  <a href="#model_1" class="md-nav__link">
+    Model
   </a>
   
 </li>
@@ -5123,22 +5345,48 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-pipeline-instance" class="md-nav__link">
-    Remove pipeline instance
+  <a href="#backward-facing-faces" class="md-nav__link">
+    Backward facing Faces
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-pipeline-instance" class="md-nav__link">
-    Get pipeline instance
+  <a href="#faces" class="md-nav__link">
+    Faces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update-properties" class="md-nav__link">
+    Update properties
   </a>
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#has-pipeline-instance" class="md-nav__link">
-    Has pipeline instance
+  <a href="#debug" class="md-nav__link">
+    Debug
   </a>
   
 </li>
@@ -5164,129 +5412,277 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/render-pipeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/mesh.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Render pipeline</h1>
+                  <h1>Mesh</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Render pipelines for camera of game objects (with texture).</p>
+<p>Render a group of textured vertices and manipulate the view of those vertices, such as rotation, translation or scaling.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">WebGL only</p>
+<p>It only works in WebGL render mode.</p>
+</div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="add-pipeline-instance">Add pipeline instance<a class="headerlink" href="#add-pipeline-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
-    <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>  <span class="c1">// GLSL shader</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;WebGLPipeline&#39;</span><span class="p">,</span>
-    <span class="nx">uniforms</span><span class="o">:</span> <span class="p">[]</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">MultiPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">pipelines</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">pipelineInstance</span><span class="p">);</span>
+<h3 id="quad">Quad<a class="headerlink" href="#quad" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Load texture
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add mesh object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">mesh</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 </code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">mesh</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
-<ul>
-<li><code>name</code> : Name of the pipeline. Used for identification.</li>
-<li><code>uniforms</code> : String array of the shader uniforms.</li>
-<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
-</ul>
-<h4 id="camera-effect">Camera effect<a class="headerlink" href="#camera-effect" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Add filter
-    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">pipelineInstance</span><span class="p">);</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Set perspective or orthographic projection<ul>
+<li>Perspective projection
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">setPerspective</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">fov</span><span class="p">);</span>
+<span class="c1">// mesh.setPerspective(width, height, fov, near, far);</span>
 </code></pre></div><ul>
-<li><code>pipelineName</code> :<ul>
-<li>A string : Name of this render pipeline</li>
-<li>A pipeline instance</li>
+<li><code>width</code>, <code>height</code> : The width/height of the projection matrix. Typically the same as the Mesh and/or Renderer.</li>
+<li><code>fov</code> : The field of view, in degrees.</li>
+<li><code>near</code>, <code>far</code> : The near/far value of the view. Default value are <code>0.01</code>/<code>1000</code>.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Clear filter
-    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
-<h4 id="game-object-effect">Game object effect<a class="headerlink" href="#game-object-effect" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Add filter
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+<li>Orthographic projection
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">setOrtho</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">,</span> <span class="nx">near</span><span class="p">,</span> <span class="nx">far</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+<li><code>scaleX</code>, <code>scaleY</code> : The default horizontal/vertical scale in relation to the Mesh / Renderer dimensions.</li>
+<li><code>near</code>, <code>far</code> : The near/far value of the view. Default value are <code>0.01</code>/<code>1000</code>.</li>
 </ul>
 </li>
-<li>Reset custom render pipeline to defaule render pipeline
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">resetPipeline</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Get current name of render pipeline:
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineName</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getPipelineName</span><span class="p">();</span>
-</code></pre></div></li>
 </ul>
-<h4 id="set-properties-of-filter">Set properties of filter<a class="headerlink" href="#set-properties-of-filter" title="Permanent link">&para;</a></h4>
+</li>
+<li>Creates a grid of vertices
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">.</span><span class="nx">GenerateGridVerts</span><span class="p">({</span>
+    <span class="nx">mesh</span><span class="o">:</span> <span class="nx">mesh</span><span class="p">,</span>
+    <span class="nx">texture</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="nx">frameName</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">widthSegments</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">heightSegments</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// colors: 0xffffff,</span>
+    <span class="c1">// alphas: 1,</span>
+    <span class="c1">// tile: false,</span>
+    <span class="c1">// isOrtho: false</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>mesh</code> : The vertices of the generated grid will be added to this Mesh Game Object.</li>
+<li><code>texture</code> : The texture to be used for this Grid.</li>
+<li><code>frame</code> : The name or index of the frame within the Texture.</li>
+<li><code>width</code> , <code>height</code> : The width/height of the grid in 3D units.
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="p">(</span><span class="nx">frameWidth</span><span class="o">/</span><span class="nx">frameHeight</span><span class="p">),</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="p">(</span><span class="nx">frameHeight</span><span class="o">/</span><span class="nx">frameHeight</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>widthSegments</code>, <code>heightSegments</code> : The number of segments to split the grid horizontally/vertically in to.</li>
+<li><code>colors</code> : An array of colors, one per vertex, or a single color value applied to all vertices.</li>
+<li><code>alphas</code> An array of alpha values, one per vertex, or a single alpha value applied to all vertices.</li>
+<li><code>tile</code> :<ul>
+<li><code>false</code> : Display as a single texture. Default value.</li>
+<li><code>true</code> : Texture tile (repeat) across the grid segments.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="model">Model<a class="headerlink" href="#model" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Load model
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">obj</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">objURL</span><span class="p">,</span> <span class="nx">matURL</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>objURL</code> : URL to load the obj file.</li>
+<li><code>matURL</code> : URL to load the material file.</li>
+</ul>
+</li>
+<li>Add mesh object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">mesh</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">mesh</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Add model
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">addVerticesFromObj</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">scale</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">,</span> <span class="nx">rotateX</span><span class="p">,</span> <span class="nx">rotateY</span><span class="p">,</span> <span class="nx">rotateZ</span><span class="p">,</span> <span class="nx">zIsUp</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : The key of the model data in the OBJ Cache to add to this Mesh.</li>
+<li><code>scale</code> : An amount to scale the model data by. Default is <code>1</code>.</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> : Translate the model x/y/z position by this amount.</li>
+<li><code>rotateX</code>, <code>rotateY</code>, <code>rotateZ</code> : Rotate the model on the x/y/z axis by this amount, in radians.</li>
+<li><code>zIsUp</code> : <ul>
+<li><code>true</code> : Z axis is up.</li>
+<li><code>false</code> : Y axis is up.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="custom-mesh-class">Custom mesh class<a class="headerlink" href="#custom-mesh-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Property with 1 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform1fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 2 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform2fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 3 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform3fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Property with 4 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
-<li>uniform4fv
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</code></pre></div></li>
+<li>Define class
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyMesh</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">mesh</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {</span>
+    <span class="c1">//     super.preUpdate(time, delta);</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
 </ul>
 </li>
 </ul>
-<h3 id="remove-pipeline-instance">Remove pipeline instance<a class="headerlink" href="#remove-pipeline-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">removePipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMesh</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
+<h4 id="view">View<a class="headerlink" href="#view" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Translates the view position of this Mesh on the x/y/z axis by the given amount.
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">panX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">panY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">panZ</span><span class="p">(</span><span class="nx">z</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="model_1">Model<a class="headerlink" href="#model_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Position
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">modelPosition</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelPosition</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelPosition</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="nx">z</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>x</code>, <code>y</code>, <code>z</code> : Offset position.<ul>
+<li><code>z+</code> : Near</li>
+<li><code>z-</code> : Far</li>
+<li><code>x-</code> : Left</li>
+<li><code>x+</code> : Right</li>
+<li><code>y+</code> : Up</li>
+<li><code>y-</code> : Down</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Rotation
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">rotationX</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">rotationY</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelRotation</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="nx">rotationZ</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>rotationX</code>, <code>rotationY</code>, <code>rotationZ</code> : Rotation angle in radians.</li>
+</ul>
+</li>
+<li>Scale
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">modelScale</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">scaleX</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelScale</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">modelScale</span><span class="p">.</span><span class="nx">z</span> <span class="o">=</span> <span class="nx">scaleZ</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>scaleX</code>, <code>scaleY</code>, <code>scaleZ</code> : Scale value, <code>1</code> is origin size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="backward-facing-faces">Backward facing Faces<a class="headerlink" href="#backward-facing-faces" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hide backward facing Faces. Default behavior.
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">hideCCW</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Show backward facing Faces
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">hideCCW</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="faces">Faces<a class="headerlink" href="#faces" title="Permanent link">&para;</a></h3>
+<p>Mesh is composed of triangle faces.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">faces</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">faces</span><span class="p">;</span>
 </code></pre></div>
 
-<h3 id="get-pipeline-instance">Get pipeline instance<a class="headerlink" href="#get-pipeline-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">getPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
-</code></pre></div>
-
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
-<li><code>pipelineInstance</code> : Pipeline instance, or <code>null</code> if not found.</li>
+<li>Alpha<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">face</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">face</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
-<h3 id="has-pipeline-instance">Has pipeline instance<a class="headerlink" href="#has-pipeline-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasPipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">hasPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</li>
+<li>Angle<ul>
+<li>Rotate
+    <div class="codehilite"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Mesh</span><span class="p">.</span><span class="nx">RotateFace</span><span class="p">(</span><span class="nx">face</span><span class="p">,</span> <span class="nx">radians</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Center position<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">face</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">face</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>x</code> : 0(left) ~ 1(right)</li>
+<li><code>y</code> : 1(top) ~ 0(bottom)</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">face</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">face</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
 </code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">face</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>x</code> : 0(left) ~ 1(right)</li>
+<li><code>y</code> : 1(top) ~ 0(bottom)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="update-properties">Update properties<a class="headerlink" href="#update-properties" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Start updating
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">ignoreDirtyCache</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Stop updating
+    <div class="codehilite"><pre><span></span><code><span class="nx">mesh</span><span class="p">.</span><span class="nx">ignoreDirtyCache</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Set debug <a href="../graphics/">Graphics</a>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">debugGraphics</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">graphics</span><span class="p">();</span>
+<span class="nx">mesh</span><span class="p">.</span><span class="nx">setDebug</span><span class="p">(</span><span class="nx">debugGraphics</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Update <a href="../graphics/">Graphics</a> in <code>scene.update()</code> method.
+    <div class="codehilite"><pre><span></span><code><span class="nx">debugGraphics</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="nx">debugGraphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0x00ff00</span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
                 
                   
                 
@@ -5308,7 +5704,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../camera-controllor/" title="Controllor" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../texture/" title="Texture" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5317,19 +5713,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Controllor
+                Texture
               </span>
             </div>
           </a>
         
         
-          <a href="../camera-shader-effect/" title="Shader effect" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../perspective-image/" title="Image" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Shader effect
+                Image
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
