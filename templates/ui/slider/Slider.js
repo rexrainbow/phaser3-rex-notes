@@ -137,18 +137,24 @@ class Slider extends Sizer {
         return value;
     }
 
+    _layoutInit() {
+        var track = this.getElement('track');
+        if (track) {
+            if (this.orientation === 1) { // Vertical slider, set height of track to 0
+                ResizeGameObject(track, undefined, 0);
+            } else { // Horizontal slider, set width of track to 0
+                ResizeGameObject(track, 0, undefined);
+            }
+        }
+        super._layoutInit();
+    }
+
     _layout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
         if (this.rexSizer.hidden || (!this.dirty)) {
             return this;
         }
 
-        var track = this.getElement('track');;
-        if (this.orientation === 1) { // Vertical slider, set height of track to 0
-            ResizeGameObject(track, undefined, 0);
-        } else { // Horizontal slider, set width of track to 0
-            ResizeGameObject(track, 0, undefined);
-        }
         super._layout(parent, newWidth, newHeight);
         this.updateThumb();
         this.updateIndicator();
