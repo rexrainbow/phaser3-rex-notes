@@ -124,6 +124,8 @@ Default configuration
     // Element properties
     id: undefined,
     text: undefined,
+    maxLength: undefined,
+    minLength: undefined,    
     placeholder: undefined,
     tooltip: undefined,
     readOnly: false,
@@ -153,6 +155,8 @@ Default configuration
 - Element properties
     - `id` : `id` element property.
     - `text` : `value` element property.
+    - `maxLength` : `maxLength` element property.
+    - `minLength` : `minLength` element property.
     - `placeholder` : `placeholder` element property.
     - `tooltip` : `title` element property.
     - `readOnly` : `readonly` element property.
@@ -231,6 +235,66 @@ Default configuration
 - Blur
     ```javascript
     inputText.setBlur();
+    ```
+
+### Max length
+
+- Get
+    ```javascript
+    var value = inputText.maxLength;
+    ```
+- Set
+    ```javascript
+    inputText.maxLength = value;
+    ```
+    or
+    ```javascript
+    inputText.setMaxLength(value);
+    ```
+
+### Max length
+
+- Get
+    ```javascript
+    var value = inputText.minLength;
+    ```
+- Set
+    ```javascript
+    inputText.minLength = value;
+    ```
+    or
+    ```javascript
+    inputText.setMinLength(value);
+    ```
+
+### Placeholder
+
+- Get
+    ```javascript
+    var value = inputText.placeholder;
+    ```
+- Set
+    ```javascript
+    inputText.placeholder = value;
+    ```
+    or
+    ```javascript
+    inputText.setPlaceholder(value);
+    ```
+
+### Tooltip
+
+- Get
+    ```javascript
+    var value = inputText.tooltip;
+    ```
+- Set
+    ```javascript
+    inputText.tooltip = value;
+    ```
+    or
+    ```javascript
+    inputText.setTooltip(value);
     ```
 
 ### Resize

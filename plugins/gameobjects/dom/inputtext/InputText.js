@@ -73,8 +73,29 @@ class InputText extends DOMElement {
         return this;
     }
 
-    selectText() {
-        this.node.select();
+    get maxLength() {
+        return this.node.maxLength;
+    }
+
+    set maxLength(value) {
+        this.node.maxLength = value;
+    }
+
+    setMaxLength(value) {
+        this.maxLength = value;
+        return this;
+    }
+
+    get minLength() {
+        return this.node.minLength;
+    }
+
+    set minLength(value) {
+        this.node.minLength = value;
+    }
+
+    setMinLength(value) {
+        this.minLength = value;
         return this;
     }
 
@@ -88,6 +109,11 @@ class InputText extends DOMElement {
 
     setPlaceholder(value) {
         this.placeholder = value;
+        return this;
+    }
+
+    selectText() {
+        this.node.select();
         return this;
     }
 
@@ -183,6 +209,8 @@ Object.assign(
 const ElementProperties = {
     id: ['id', undefined],
     text: ['value', undefined],
+    maxLength: ['maxLength', undefined],
+    minLength: ['minLength', undefined],
     placeholder: ['placeholder', undefined],
     tooltip: ['title', undefined],
     readOnly: ['readOnly', false],

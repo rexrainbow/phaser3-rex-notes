@@ -1787,6 +1787,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#max-length" class="md-nav__link">
+    Max length
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#max-length_1" class="md-nav__link">
+    Max length
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholder" class="md-nav__link">
+    Placeholder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooltip" class="md-nav__link">
+    Tooltip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#resize" class="md-nav__link">
     Resize
   </a>
@@ -5368,6 +5396,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#max-length" class="md-nav__link">
+    Max length
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#max-length_1" class="md-nav__link">
+    Max length
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#placeholder" class="md-nav__link">
+    Placeholder
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tooltip" class="md-nav__link">
+    Tooltip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#resize" class="md-nav__link">
     Resize
   </a>
@@ -5519,6 +5575,8 @@
     <span class="c1">// Element properties</span>
     <span class="nx">id</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">maxLength</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">minLength</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>    
     <span class="nx">placeholder</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">tooltip</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -5551,6 +5609,8 @@
 <li>Element properties<ul>
 <li><code>id</code> : <code>id</code> element property.</li>
 <li><code>text</code> : <code>value</code> element property.</li>
+<li><code>maxLength</code> : <code>maxLength</code> element property.</li>
+<li><code>minLength</code> : <code>minLength</code> element property.</li>
 <li><code>placeholder</code> : <code>placeholder</code> element property.</li>
 <li><code>tooltip</code> : <code>title</code> element property.</li>
 <li><code>readOnly</code> : <code>readonly</code> element property.</li>
@@ -5627,6 +5687,54 @@
 </code></pre></div></li>
 <li>Blur
     <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setBlur</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<h3 id="max-length">Max length<a class="headerlink" href="#max-length" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">maxLength</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">maxLength</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setMaxLength</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="max-length_1">Max length<a class="headerlink" href="#max-length_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">minLength</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">minLength</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setMinLength</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="placeholder">Placeholder<a class="headerlink" href="#placeholder" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">placeholder</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">placeholder</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setPlaceholder</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="tooltip">Tooltip<a class="headerlink" href="#tooltip" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">inputText</span><span class="p">.</span><span class="nx">tooltip</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">tooltip</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">setTooltip</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
