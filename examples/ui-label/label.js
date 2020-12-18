@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
             text: this.add.text(0, 0, 'Left-to-right', {
                 fontSize: '24px'
             }),
-            icon: this.add.rectangle(0, 0, 4, 4, COLOR_DARK).setDisplaySize(40, 40).setName('iconH'),
+            icon: this.add.rectangle(0, 0, 40, 40, COLOR_DARK).setName('iconH'),
             action: this.add.image(0, 0, 'close').setTint(COLOR_LIGHT),
             space: {
                 left: 20,

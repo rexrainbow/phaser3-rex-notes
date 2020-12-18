@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.plugin('rexToonifyPipeline', ToonifyPipelinePlugin, true);
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
     }
 
@@ -39,7 +38,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexToonifyPipeline',
+            plugin: ToonifyPipelinePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
             count = 0;
         CreateRectangleTexture(this, 'dot', width, height, COLOR_LIGHT);
         var blitter = this.add.blitter(0, 0, 'dot');
-        this.plugins.get('rexCanvasData').textObjectToBitMap(txt)
+        this.plugins.get('rexCanvasData').textObjectToBitmap(txt)
             .forEachNonZero(function (value, x, y, bitMap) {
                 var destinationX = startX + (x * width),
                     destinationY = startY + (y * height);

@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
             },
 
             slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK).setName('track'),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 

@@ -8,7 +8,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.plugin('rexGrayScalePipeline', GrayScalePipelinePlugin, true);
     }
 
     create() {
@@ -52,7 +51,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexGrayScalePipeline',
+            plugin: GrayScalePipelinePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

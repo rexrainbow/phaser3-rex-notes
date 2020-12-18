@@ -8,7 +8,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.plugin('rexInversePipeline', InversePipelinePlugin, true);
         this.load.video('test', './assets/video/test.mp4', 'canplaythrough', false, true);
     }
 
@@ -41,7 +40,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexInversePipeline',
+            plugin: InversePipelinePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

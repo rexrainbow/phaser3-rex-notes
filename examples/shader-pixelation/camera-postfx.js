@@ -7,8 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.plugin('rexPixelationPipeline', PixelationPipelinePlugin, true);
+    preload() {        
     }
 
     create() {
@@ -54,7 +53,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexPixelationPipeline',
+            plugin: PixelationPipelinePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

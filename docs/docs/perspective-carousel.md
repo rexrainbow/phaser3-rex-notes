@@ -10,7 +10,8 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
 
 ## Live demos
 
--
+- [Carousel](https://codepen.io/rexrainbow/pen/gOMggrj)
+- [List](https://codepen.io/rexrainbow/pen/NWrppPK)
 
 ## Usage
 

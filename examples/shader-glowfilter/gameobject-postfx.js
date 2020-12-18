@@ -8,7 +8,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.plugin('rexGlowFilterPipeline', GlowFilterPipelinePlugin, true);
         this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
@@ -36,8 +35,7 @@ class Demo extends Phaser.Scene {
                 })
                 .on('pointerout', function () {
                     // Remove postfx pipeline
-                    gameObject.resetPostPipeline();
-                    // postFxPlugin.remove(gameObject);
+                    postFxPlugin.remove(gameObject);
                     gameObject.glowTask.stop();
                     gameObject.glowTask = null;
                 })
@@ -57,7 +55,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexGlowFilterPipeline',
+            plugin: GlowFilterPipelinePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
