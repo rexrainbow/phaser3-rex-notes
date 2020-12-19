@@ -241,17 +241,17 @@ Default configuration
 
 - Get
     ```javascript
-    var color = inputText.color;
+    var color = inputText.fontColor;
     // var color = inputText.node.style.color;
     ```
 - Set
     ```javascript
-    inputText.color = color;
+    inputText.fontColor = color;  // CSS color string
     // inputText.node.style.color = color;
     ```
     or
     ```javascript
-    inputText.setColor(color);
+    inputText.setFontColor(color);  // CSS color string
     ```
 
 ### Max length
