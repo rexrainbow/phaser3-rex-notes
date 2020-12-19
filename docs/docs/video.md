@@ -42,8 +42,11 @@ var video = scene.add.video(x, y, key);
     - `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
 
 !!! note "Control multiple video game objects independently"
-    Each `scene.load.video(key, ...)` will create a video element in cache. Video game object with the same *key* will reference the same video element and will be controlled at the same time.  
-    To control multiple video game objects independently :  
+    Each `scene.load.video(key, ...)` will create a video element in cache. 
+    Video game object with the same *key* will reference the same video element and will be controlled at the same time. See this [demo](https://codepen.io/rexrainbow/pen/yLNYJdz)
+
+    To control multiple video game objects independently :
+
     - Load video with different key for each video game object, or  
     - `video.loadURL(url)`
 

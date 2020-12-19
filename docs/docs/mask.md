@@ -10,7 +10,7 @@ Apply mask on game object. Built-in render of phaser.
 
 1. Create mask object
     - Create mask from texture
-        1. Create image ([image](image.md), [sprite](sprite.md), [quad](quad.md), bitmap text, [particles](particles.md), [text](text.md))
+        1. Create image ([image](image.md), [sprite](sprite.md), bitmap text, [particles](particles.md), [text](text.md))
             ```javascript
             var shape = scene.add.image(x, y, key).setVisible(false);
             ```

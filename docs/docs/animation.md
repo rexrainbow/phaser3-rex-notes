@@ -79,7 +79,7 @@ scene.anims.create({
 
 ##### Add from Aseprite
 
-[Aseprite](tool.md#aseprite)
+[Aseprite](tools.md#aseprite)
 
 ```javascript
 scene.anims.createFromAseprite(key);

@@ -1,6 +1,6 @@
 ## Introduction
 
-Execute command in next WORLD_STEP(`worldstep`) event, to synchronize command execution with step-counter of [Arcade-TCRP stepRunner](arcade-tcrp-recoder.md).
+Execute command in next WORLD_STEP(`worldstep`) event, to synchronize command execution with step-counter of [Arcade-TCRP stepRunner](arcade-tcrp-recorder.md).
 
 - Author: Rex
 - Member of scene
@@ -93,11 +93,11 @@ See also [Run commands](runcommands.md)
 
 Since commands will be executed in next WORLD_STEP(`worldstep`) event, recorder have to add `1` step-count offset.
 
-- Offset at [recording start](arcade-tcrp-recoder.md/#start-recording)
+- Offset at [recording start](arcade-tcrp-recorder.md/#start-recording)
     ```javascript
     recorder.start(1);
     ```
-- Add offset when [pushing commands](arcade-tcrp-recoder.md/#push-commands)
+- Add offset when [pushing commands](arcade-tcrp-recorder.md/#push-commands)
     ```javascript
     recorder.addCommand([fnName, param0, param1, ...], 1);
     ```
