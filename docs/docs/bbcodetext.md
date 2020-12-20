@@ -116,7 +116,7 @@ Default style
     },
     underline: {
         color: '#000',
-        thinkness: 0,
+        thickness: 0,
         offset: 0
     },
     // align: 'left',  // Equal to halign
@@ -307,9 +307,9 @@ txt.setFontStyle(style);
         ```
     - Set
         ```javascript
-        txt.setUnderline(color, thinkness, ofset);
+        txt.setUnderline(color, thickness, ofset);
         txt.setUnderlineColor(color);
-        txt.setUnderlineThinkness(thinkness);
+        txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
         ```
 - Background color

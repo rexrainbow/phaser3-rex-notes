@@ -11,6 +11,7 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 
 - [Nested sizer](https://codepen.io/rexrainbow/pen/NOzorp)
 - [Proportion](https://codepen.io/rexrainbow/pen/GRJNKPo)
+- [DOM child](https://codepen.io/rexrainbow/pen/xxELGJb)
 
 ## Usage
 
