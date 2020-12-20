@@ -134,6 +134,7 @@ class Demo extends Phaser.Scene {
                     gridTable.lastSideButton.showPanel();
                 }
                 gridTable.lastSideButton = cellContainer;
+                // Bug: task of showing right side & show panel by 'scroll' event
             })
             .on('cell.swiperight', function (cellContainer, cellIndex) {
                 if (cellContainer === gridTable.lastSideButton) {
