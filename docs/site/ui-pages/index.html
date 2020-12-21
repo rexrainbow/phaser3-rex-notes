@@ -5560,9 +5560,20 @@
 </code></pre></div></li>
 </ul>
 <h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
 
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> : Extra padded space. Default is 0.</li>
+<li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
+<li><code>undefined</code> : Don't add this child. Default value.</li>
+</ul>
+</li>
+</ul>
 <h3 id="add-page">Add page<a class="headerlink" href="#add-page" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
 </code></pre></div>

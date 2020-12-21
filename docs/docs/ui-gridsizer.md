@@ -196,6 +196,16 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
 gridSizer.addBackground(child);
 ```
 
+or
+
+```javascript
+gridSizer.addBackground(child, {left: 0, right: 0, top: 0, bottom: 0}, key);
+```
+
+- `left`, `right`, `top`, `bottom` : Extra padded space. Default is 0.
+- `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
 ### Add child
 
 Add a game obejct to grid sizer
