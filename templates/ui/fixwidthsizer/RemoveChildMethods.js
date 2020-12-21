@@ -15,8 +15,8 @@ export default {
     },
 
     removeAll(destroyChild) {
-        for (var i = 0, cnt = this.sizerChildren; i < cnt; i++) {
-            this.remove(this.sizerChildren[i], destroyChild);
+        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
+            ContainerRemove.call(this, this.sizerChildren[i], destroyChild);
         }
         this.sizerChildren.length = 0;
         return this;
