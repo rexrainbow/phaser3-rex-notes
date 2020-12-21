@@ -237,6 +237,23 @@ Default configuration
     inputText.setBlur();
     ```
 
+### Font color
+
+- Get
+    ```javascript
+    var color = inputText.fontColor;
+    // var color = inputText.node.style.color;
+    ```
+- Set
+    ```javascript
+    inputText.fontColor = color;  // CSS color string
+    // inputText.node.style.color = color;
+    ```
+    or
+    ```javascript
+    inputText.setFontColor(color);  // CSS color string
+    ```
+
 ### Max length
 
 - Get

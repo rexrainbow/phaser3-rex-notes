@@ -164,6 +164,19 @@ class InputText extends DOMElement {
         return this;
     }
 
+    get fontColor() {
+        return this.node.style.color;
+    }
+
+    set fontColor(value) {
+        this.node.style.color = value;
+    }
+
+    setFontColor(value) {
+        this.fontColor = value;
+        return this;
+    }
+
     setStyle(key, value) {
         this.node.style[key] = value;
         return this;

@@ -3380,7 +3380,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../arcade-tcrp-recoder/" title="Recoder" class="md-nav__link">
+    <a href="../arcade-tcrp-recorder/" title="Recoder" class="md-nav__link">
       Recoder
     </a>
   </li>
@@ -5547,10 +5547,13 @@
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Control multiple video game objects independently</p>
-<p>Each <code>scene.load.video(key, ...)</code> will create a video element in cache. Video game object with the same <em>key</em> will reference the same video element and will be controlled at the same time.<br />
-To control multiple video game objects independently :<br />
-- Load video with different key for each video game object, or<br />
-- <code>video.loadURL(url)</code></p>
+<p>Each <code>scene.load.video(key, ...)</code> will create a video element in cache. 
+Video game object with the same <em>key</em> will reference the same video element and will be controlled at the same time. See this <a href="https://codepen.io/rexrainbow/pen/yLNYJdz">demo</a></p>
+<p>To control multiple video game objects independently :</p>
+<ul>
+<li>Load video with different key for each video game object, or  </li>
+<li><code>video.loadURL(url)</code></li>
+</ul>
 </div>
 <h3 id="play">Play<a class="headerlink" href="#play" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
