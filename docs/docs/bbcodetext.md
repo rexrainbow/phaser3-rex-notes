@@ -372,6 +372,8 @@ txt.setFontStyle(style);
 
 ### Hit area of words
 
+Size of hit-area is word-width x line-height, or image-width x line-height.
+
 #### Hitting events
 
 - Pointer down

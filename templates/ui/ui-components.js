@@ -62,7 +62,6 @@ export {
     CircleMaskImage,
     Chart,
     NinePatch,
-    PerspectiveCard,
 
     Sizer,
     GridSizer,
