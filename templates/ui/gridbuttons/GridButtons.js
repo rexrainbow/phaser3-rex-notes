@@ -51,10 +51,11 @@ class GridButtons extends GridSizer {
         }
 
         if (buttons) {
-            var button;
+            var rowButtons, button;
             for (var r = 0, rcnt = buttons.length; r < rcnt; r++) { // row
-                for (var c = 0, ccnt = buttons.length; c < ccnt; c++) { // col
-                    button = buttons[r][c];
+                rowButtons = buttons[r];
+                for (var c = 0, ccnt = rowButtons.length; c < ccnt; c++) { // col
+                    button = rowButtons[c];
                     if (button) {
                         this.addButton(button, c, r);
                     }
