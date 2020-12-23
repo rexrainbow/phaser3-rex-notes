@@ -74,11 +74,11 @@ class BracketParser {
             }
 
             if (this.reTagOff.test(match)) {
-                this.onTagOff(match);
+                this.onTagEnd(match);
             } else if (this.reTagOn.test(match)) {
-                this.onTagOn(match);
+                this.onTagStart(match);
             } else {
-                this.onTagOnWithValue(match);
+                this.onTagStartWithValue(match);
             }
 
             this.progressIndex = this.reSplit.lastIndex;
@@ -95,24 +95,24 @@ class BracketParser {
         this.emit('content', content);
     }
 
-    onTagOn(tagContent) {
+    onTagStart(tagContent) {
         var tag = tagContent.match(this.reTagOn)[1];
-        this.emit('on-*', tag);
-        this.emit(`on-${tag}`);
+        this.emit('+', tag);
+        this.emit(`+${tag}`);
     }
 
-    onTagOnWithValue(tagContent) {
+    onTagStartWithValue(tagContent) {
         var regexResult = tagContent.match(this.reTagOnWithValue);
         var tag = regexResult[1];
         var value = regexResult[2];
-        this.emit('on-*', tag, value);
-        this.emit(`on-${tag}`, value);
+        this.emit('+', tag, value);
+        this.emit(`+${tag}`, value);
     }
 
-    onTagOff(tagContent) {
+    onTagEnd(tagContent) {
         var tag = tagContent.match(this.reTagOff)[1];
-        this.emit('off-*', tag);
-        this.emit(`off-${tag}`);
+        this.emit('-', tag);
+        this.emit(`-${tag}`);
     }
 
     onComplete() {
