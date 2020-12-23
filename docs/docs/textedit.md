@@ -123,6 +123,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
             textObject.text = text;
         }
         ```
+    - `config.selectAll` : Set `true` to select all text.
     - [More configuration parameters](textedit.md#add-text-object)...
 - `onClose` : Callback invoked when text editor is closed.
     ```javascript

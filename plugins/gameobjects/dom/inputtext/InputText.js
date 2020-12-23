@@ -58,6 +58,10 @@ class InputText extends DOMElement {
 
         // Don't propagate touch/mouse events to parent(game canvas)
         StopPropagationTouchEvents(element);
+
+        if (GetValue(config, 'selectAll', false)) {
+            this.selectAll();
+        }
     }
 
     get text() {
@@ -206,6 +210,11 @@ class InputText extends DOMElement {
 
     setFocus() {
         this.node.focus();
+        return this;
+    }
+
+    selectAll() {
+        this.node.select();
         return this;
     }
 }

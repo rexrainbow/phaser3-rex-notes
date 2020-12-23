@@ -23,9 +23,10 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function () {
                 var config = {
-                    onTextChanged: function(textObject, text) {
+                    onTextChanged: function (textObject, text) {
                         textObject.text = text;
-                    }
+                    },
+                    selectAll: true
                 }
                 this.plugins.get('rexTextEdit').edit(printText, config);
             }, this);

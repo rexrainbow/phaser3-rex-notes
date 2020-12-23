@@ -1829,6 +1829,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-text" class="md-nav__link">
+    Select text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5445,6 +5452,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#select-text" class="md-nav__link">
+    Select text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5610,6 +5624,8 @@
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;transparent&#39;</span><span class="p">,</span>
     <span class="nx">borderColor</span><span class="o">:</span> <span class="s1">&#39;transparent&#39;</span><span class="p">,</span>
     <span class="nx">outline</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+
+    <span class="nx">selectAll</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -5638,11 +5654,12 @@
 <li><code>fontFamily</code> : <code>font-family</code> style property.</li>
 <li><code>fontSize</code> : <code>font-size</code> style property.</li>
 <li><code>color</code> : <code>color</code> style property.</li>
-<li><code>backgroundColor</code> : <code>backgroundColor</code> style property.    </li>
+<li><code>backgroundColor</code> : <code>backgroundColor</code> style property.</li>
 <li><code>border</code>, <code>borderColor</code> : <code>border</code>, <code>borderColor</code> style property.</li>
 <li><code>outline</code> : <code>outline</code> style property.</li>
 </ul>
 </li>
+<li><code>selectAll</code> : Set <code>true</code> to select all text.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -5769,6 +5786,12 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
 
+<h3 id="select-text">Select text<a class="headerlink" href="#select-text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Select all text
+    <div class="codehilite"><pre><span></span><code><span class="nx">inputText</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On text changed

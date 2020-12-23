@@ -145,6 +145,8 @@ Default configuration
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     outline: 'none',
+
+    selectAll: false
 }
 ```
 
@@ -168,9 +170,10 @@ Default configuration
     - `fontFamily` : `font-family` style property.
     - `fontSize` : `font-size` style property.
     - `color` : `color` style property.
-    - `backgroundColor` : `backgroundColor` style property.    
+    - `backgroundColor` : `backgroundColor` style property.
     - `border`, `borderColor` : `border`, `borderColor` style property.
     - `outline` : `outline` style property.
+- `selectAll` : Set `true` to select all text.
 
 ### Custom class
 
@@ -319,6 +322,13 @@ Default configuration
 ```javascript
 inputText.resize(width, height);
 ```
+
+### Select text
+
+- Select all text
+    ```javascript
+    inputText.selectAll();
+    ```
 
 ### Events
 
