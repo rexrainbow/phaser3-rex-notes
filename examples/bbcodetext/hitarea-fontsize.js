@@ -14,11 +14,11 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, '');
 
-        var s1 = `\
+        var s1 = `
 [area=a0][size=10]ipq[/size][/area]
 [area=a1][size=24]ipq[/size][/area]
 [area=a2][size=38]ipq[/size][/area]
-[area=a3][img=key][/area]\
+[area=a3][img=key][/area]
 `;
         var text = this.add.rexBBCodeText(400, 300, s1, {
             backgroundColor: '#555',

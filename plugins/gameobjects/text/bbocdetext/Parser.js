@@ -11,34 +11,30 @@ var EMPTYPROP = {};
 var parser = {
     splitText: function (text, mode) {
         var result = [];
-        var arr, m, charIdx = 0,
-            totalLen = text.length,
-            matchStart = totalLen;
-
+        var charIdx = 0;
         while (true) {
-            arr = RE_SPLITTEXT.exec(text);
-            if (!arr) {
-                break;
+            var regexResult = RE_SPLITTEXT.exec(text);
+            if (!regexResult) {
+                var totalLen = text.length;
+                if (charIdx < totalLen) { // Push remainder string
+                    result.push(text.substring(charIdx, totalLen));
+                }
+                return result; // [text,...]
             }
 
-            m = arr[0];
-            matchStart = RE_SPLITTEXT.lastIndex - m.length;
+            var match = regexResult[0];
+            var matchStart = RE_SPLITTEXT.lastIndex - match.length;
 
             if (charIdx < matchStart) {
                 result.push(text.substring(charIdx, matchStart));
             }
 
             if (mode === undefined) {
-                result.push(m);
+                result.push(match);
             }
 
             charIdx = RE_SPLITTEXT.lastIndex;
         }
-
-        if (charIdx < totalLen) {
-            result.push(text.substring(charIdx, totalLen));
-        }
-        return result; // [text,...]
     },
 
     tagTextToProp: function (text, prevProp) {
@@ -119,7 +115,7 @@ var parser = {
             plainText = '';
         } else if (RE_AREA_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, 'area');
-            plainText = '';            
+            plainText = '';
         } else {
             plainText = text
         }

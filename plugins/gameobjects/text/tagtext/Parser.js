@@ -22,42 +22,37 @@ class parser {
 
     splitText(text, mode) {
         var result = [];
-        var arr, m, charIdx = 0,
-            totalLen = text.length,
-            matchStart = totalLen;
-        var innerMatch;
+        var charIdx = 0;
         while (true) {
-            arr = RE_SPLITTEXT.exec(text);
-            if (!arr) {
-                break;
+            var regexResult = RE_SPLITTEXT.exec(text);
+            if (!regexResult) {
+                var totalLen = text.length;
+                if (charIdx < totalLen) {  // Push remainder string
+                    result.push(text.substring(charIdx, totalLen));
+                }
+                return result; // [text,...]
             }
 
-            m = arr[0];
-            matchStart = RE_SPLITTEXT.lastIndex - m.length;
+            var match = regexResult[0];
+            var matchStart = RE_SPLITTEXT.lastIndex - match.length;
 
             if (charIdx < matchStart) {
                 result.push(text.substring(charIdx, matchStart));
             }
             if (mode === undefined) {
-                result.push(m);
+                result.push(match);
             } else if (mode === 1) { // RAWTEXTONLY_MODE
-                if (RE_CLASS_HEADER.test(m)) {
-                    innerMatch = m.match(RE_CLASS);
+                if (RE_CLASS_HEADER.test(match)) {
+                    var innerMatch = match.match(RE_CLASS);
                     result.push(innerMatch[2]);
-                } else if (RE_STYLE_HEADER.test(m)) {
-                    innerMatch = m.match(RE_STYLE);
+                } else if (RE_STYLE_HEADER.test(match)) {
+                    var innerMatch = match.match(RE_STYLE);
                     result.push(innerMatch[2]);
                 }
             }
 
             charIdx = RE_SPLITTEXT.lastIndex;
         }
-
-
-        if (charIdx < totalLen) {
-            result.push(text.substring(charIdx, totalLen));
-        }
-        return result; // [text,...]
     }
 
     tagTextToProp(text, prevProp) {
@@ -107,7 +102,7 @@ class parser {
             if (prop.hasOwnProperty('family') || prop.hasOwnProperty('fontFamily') || prop.hasOwnProperty('font-family')) {
                 var family = (prop.hasOwnProperty('family')) ? prop.family :
                     (prop.hasOwnProperty('fontFamily')) ? prop.fontFamily :
-                    prop['font-family'];
+                        prop['font-family'];
                 result.fontFamily = family;
             } else {
                 result.fontFamily = defaultStyle.fontFamily;
@@ -116,7 +111,7 @@ class parser {
             if (prop.hasOwnProperty('size') || prop.hasOwnProperty('fontSize') || prop.hasOwnProperty('font-size')) {
                 var size = (prop.hasOwnProperty('size')) ? prop.size :
                     (prop.hasOwnProperty('fontSize')) ? prop.fontSize :
-                    prop['font-size'];
+                        prop['font-size'];
                 if (typeof (size) === 'number') {
                     size = size.toString() + 'px';
                 }
@@ -128,7 +123,7 @@ class parser {
             if (prop.hasOwnProperty('style') || prop.hasOwnProperty('fontStyle') || prop.hasOwnProperty('font-style')) {
                 var fontStyle = (prop.hasOwnProperty('style')) ? prop.style :
                     (prop.hasOwnProperty('fontStyle')) ? prop.fontStyle :
-                    prop['font-style'];
+                        prop['font-style'];
                 result.fontStyle = fontStyle;
             } else {
                 result.fontStyle = defaultStyle.fontStyle;
