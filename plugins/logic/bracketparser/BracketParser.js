@@ -1,6 +1,6 @@
-import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
-import GetValue from '../object/GetValue.js';
-import EscapeRegex from '../string/EscapeRegex.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../utils/object/GetValue.js';
+import EscapeRegex from '../../utils/string/EscapeRegex.js';
 
 class BracketParser {
     constructor(config) {

@@ -92,6 +92,7 @@ module.exports = {
     'conditionstableplugin': './plugins/conditionstable-plugin.js',
     'questplugin': './plugins/quest-plugin.js',
     'loopinticksplugin': './plugins/loopinticks-plugin.js',
+    'bracketparserplugin': './plugins/bracketparser-plugin.js',
 
     // time
     'clockplugin': './plugins/clock-plugin.js',

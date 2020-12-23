@@ -1,17 +1,18 @@
-import BracketParser from '../../plugins/utils/bracketparser/BracketParser.js'
+import BracketParserPlugin from '../../plugins/bracketparser-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'examples'
         })
+        this.print;
     }
 
-    preload() {
-    }
+    preload() { }
 
     create() {
-        var parser = new BracketParser({
+        var source = '<aa>bb</aa>cc<pause><dd=red>ee</dd>';
+        var parser = this.plugins.get('rexBracketParserPlugin').add({
             brackets: '<>'
         });
         parser
@@ -30,7 +31,7 @@ class Demo extends Phaser.Scene {
             .on('+pause', function () {
                 parser.pause();
             })
-            .start('<aa>bb</aa>cc<pause><dd=red>ee</dd>');
+            .start(source);
 
         this.input.on('pointerdown', function () {
             console.log('=== Continue ===')
@@ -38,19 +39,26 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    update() {
-    }
+    update() { }
 }
 
 var config = {
     type: Phaser.AUTO,
+    parent: 'phaser-example',
     width: 800,
     height: 600,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexBracketParserPlugin',
+            plugin: BracketParserPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
