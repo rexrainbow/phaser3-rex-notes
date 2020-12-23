@@ -10,6 +10,9 @@ class BracketParser {
         this.setBrackets(brackets[0], brackets[1]);
 
         this.isPaused = false;
+        this.lastTagStart = null;
+        this.lastTagEnd = null;
+        this.lastContent = null;
     }
 
     setBrackets(bracketLeft, bracketRight) {
@@ -38,6 +41,18 @@ class BracketParser {
         return this;
     }
 
+    resetIndex(index) {
+        if (index === undefined) {
+            index = 0;
+        }
+        this.progressIndex = index;
+        this.reSplit.lastIndex = index;
+        this.lastTagStart = null;
+        this.lastTagEnd = null;
+        this.lastContent = null;
+        return this;
+    }
+
     start(source) {
         this
             .setSource(source)
@@ -46,9 +61,9 @@ class BracketParser {
     }
 
     restart() {
-        this.progressIndex = 0;
-        this.reSplit.lastIndex = 0;
-        this.next();
+        this
+            .resetIndex()
+            .next();
     }
 
     next() {
@@ -93,12 +108,14 @@ class BracketParser {
 
     onContent(content) {
         this.emit('content', content);
+        this.lastContent = content;
     }
 
     onTagStart(tagContent) {
         var tag = tagContent.match(this.reTagOn)[1];
         this.emit('+', tag);
         this.emit(`+${tag}`);
+        this.lastTagStart = tag;
     }
 
     onTagStartWithValue(tagContent) {
@@ -107,17 +124,19 @@ class BracketParser {
         var value = regexResult[2];
         this.emit('+', tag, value);
         this.emit(`+${tag}`, value);
+        this.lastTagStart = tag;
     }
 
     onTagEnd(tagContent) {
         var tag = tagContent.match(this.reTagOff)[1];
         this.emit('-', tag);
         this.emit(`-${tag}`);
+        this.lastTagEnd = tag;
     }
 
     onComplete() {
         this.emit('complete');
-        this.progressIndex = 0;
+        this.resetIndex();
     }
 }
 
