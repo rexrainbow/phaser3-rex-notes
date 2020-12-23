@@ -11,12 +11,14 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var printText = this.add.rexBBCodeText(400, 300, '30', {
+        var printText = this.add.rexBBCodeText(400, 300, '0', {
             color: 'yellow',
             fontSize: '24px',
             fixedWidth: 200,
             fixedHeight: 50,
             backgroundColor: '#333333',
+            halign: 'right',
+            valign: 'center'
         })
             .setOrigin(0.5)
             .setInteractive()

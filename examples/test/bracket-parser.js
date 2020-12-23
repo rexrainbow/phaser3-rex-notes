@@ -18,16 +18,16 @@ class Demo extends Phaser.Scene {
             .on('content', function (content) {
                 console.log('content:', content);
             })
-            .on('on-*', function (tag, value) {
-                console.log('tag-on:', tag, value);
+            .on('+', function (tag, value) {
+                console.log('tag-start:', tag, value);
             })
-            .on('off-*', function (tag) {
-                console.log('tag-off:', tag);
+            .on('-', function (tag) {
+                console.log('tag-end:', tag);
             })
             .on('complete', function () {
                 console.log('complete');
             })
-            .on('on-pause', function () {
+            .on('+pause', function () {
                 parser.pause();
             })
             .start('<aa>bb</aa>cc<pause><dd=red>ee</dd>');
