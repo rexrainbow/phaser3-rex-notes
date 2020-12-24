@@ -1,4 +1,5 @@
 import Carousel from '../carousel/Carousel.js';
+import Roll from './Roll.js';
 import RenderTexture from '../rendertexture/RenderTexture.js';
 import GetFaceSize from './GetFaceSize.js';
 import GetIndexOffsetMap from './GetIndexOffsetMap.js';
@@ -40,6 +41,7 @@ class ImageCarousel extends Carousel {
         }
 
         config.faces = faces;
+        config.rollClass = Roll;
         super(scene, x, y, config);
         this.type = 'rexPerspectiveImageCarousel';
 
@@ -79,57 +81,6 @@ class ImageCarousel extends Carousel {
         return this;
     }
 
-    toNext(duration) {
-        if (!this.repeat && this.isLastImage) {
-            return this;
-        }
-
-        if (this.roll.isRunning) {
-            return this;
-        }
-
-        this.setImageIndex(this.currentImageIndex + 1);
-        this.roll
-            .toNext(duration)
-            .once('complete', this.updateTexture, this)
-
-        return this;
-    }
-
-    toPrevious(duration) {
-        if (!this.repeat && this.isFirstImage) {
-            return this;
-        }
-
-        if (this.roll.isRunning) {
-            return this;
-        }
-
-        this.setImageIndex(this.currentImageIndex - 1);
-        this.roll
-            .toPrevious(duration)
-            .once('complete', this.updateTexture, this)
-
-        return this;
-    }
-
-    toRight(duration) {
-        if (!this.rtl) {
-            this.toNext(duration);
-        } else {
-            this.toPrevious(duration);
-        }
-        return this;
-    }
-
-    toLeft(duration) {
-        if (!this.rtl) {
-            this.toPrevious(duration);
-        } else {
-            this.toNext(duration);
-        }
-        return this;
-    }
 }
 
 export default ImageCarousel;

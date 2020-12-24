@@ -78,6 +78,7 @@
 1. [Perspective/Card](perspective-card.md): A container with two perspective-images.
 1. [Perspective/Carousel](perspective-carousel.md): A container with cards.
 1. [Perspective/Image](perspective-image.md): Image with perspective rotation.
+1. [Perspective/ImageCarousel](perspective-imagecarousel.md): Display list of images.
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
 1. [Pop up](popup.md): Scale up game object.
 1. [Quest](quest.md): Question manager.

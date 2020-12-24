@@ -1,10 +1,10 @@
 import FaceContainer from '../utils/FaceContainer.js';
+import Roll from './Roll.js';
 import CreateFaces from '../utils/CreateFaces.js';
 import ForEachFace from '../utils/ForEachFace.js';
 import GetFirstFace from './GetFirstFace.js';
 import LayoutFaces from './LayoutFaces.js';
 import FaceNameToIndex from './FaceNameToIndex.js';
-import Roll from './Roll.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -61,10 +61,11 @@ class Carousel extends FaceContainer {
         }
 
         LayoutFaces(this, faces);
-
+        
         var rollConfig = GetValue(config, 'roll', undefined);
         if (rollConfig !== false) {
-            this.roll = new Roll(this, rollConfig);
+            var RollClass = GetValue(config, 'rollClass', Roll);
+            this.roll = new RollClass(this, rollConfig);
         }
 
         // Left-To-Right, or Right-To-Left
@@ -74,7 +75,7 @@ class Carousel extends FaceContainer {
         this.zStart = GetValue(config, 'z', 1);
         this.zEnd = GetValue(config, 'zEnd', this.zStart - 1);
 
-        this.setFace(GetValue(config, 'currentFace', 0));
+        this.setFace(GetValue(config, 'face', 0));
     }
 
     get rotationY() {

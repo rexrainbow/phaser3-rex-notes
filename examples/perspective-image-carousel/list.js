@@ -33,9 +33,9 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function (pointer, localX, localY, event) {
                 if (localX <= (carousel.width / 2)) {
-                    carousel.toLeft();
+                    carousel.roll.toLeft();
                 } else {
-                    carousel.toRight();
+                    carousel.roll.toRight();
                 }
             });
     }

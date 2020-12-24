@@ -1104,6 +1104,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../perspective-imagecarousel/" title="Image carousel" class="md-nav__link">
+      Image carousel
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5570,11 +5582,12 @@
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">carousel</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">carousel</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveCarousel</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="nx">faces</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// face: 0,</span>
+    <span class="c1">// rtl: false,</span>
 
     <span class="c1">// width,</span>
     <span class="c1">// height,</span>
@@ -5590,7 +5603,6 @@
     <span class="c1">//     ease: &#39;Cubic&#39;,</span>
     <span class="c1">//     delay: 0,</span>
     <span class="c1">// }</span>
-    <span class="c1">// roll: false</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5600,6 +5612,11 @@
 </ul>
 </li>
 <li><code>face</code> : Index or name of current face (face at angle <code>0</code>).</li>
+<li><code>rtl</code><ul>
+<li><code>false</code> : Place faces from left to right. Default behavior.</li>
+<li><code>true</code> : Place faces from right to left.</li>
+</ul>
+</li>
 <li><code>width</code>, <code>height</code> : Specific width and height of this carousel container.<ul>
 <li><code>undefined</code> : Use width and height of first face.</li>
 </ul>
@@ -5619,7 +5636,7 @@
 </li>
 </ul>
 <p>Add perspectiveimage from JSON</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspectiveimage</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspectiveimage</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexPerspectiveCarousel</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
@@ -5698,6 +5715,18 @@
 </li>
 <li>Roll to previous face
     <div class="codehilite"><pre><span></span><code><span class="nx">carousel</span><span class="p">.</span><span class="nx">roll</span><span class="p">.</span><span class="nx">toPrevious</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>duration</code> : Overwrite default duration value.</li>
+</ul>
+</li>
+<li>Roll to right face
+    <div class="codehilite"><pre><span></span><code><span class="nx">carousel</span><span class="p">.</span><span class="nx">roll</span><span class="p">.</span><span class="nx">toRight</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>duration</code> : Overwrite default duration value.</li>
+</ul>
+</li>
+<li>Roll to left face
+    <div class="codehilite"><pre><span></span><code><span class="nx">carousel</span><span class="p">.</span><span class="nx">roll</span><span class="p">.</span><span class="nx">toLeft</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>duration</code> : Overwrite default duration value.</li>
 </ul>
@@ -5793,13 +5822,13 @@
           </a>
         
         
-          <a href="../shatter-image/" title="Shatter image" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../perspective-imagecarousel/" title="Image carousel" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Shatter image
+                Image carousel
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

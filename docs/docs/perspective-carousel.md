@@ -78,11 +78,12 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
 ### Create instance
 
 ```javascript
-var carousel = scene.add.rexPerspectiveImage({
+var carousel = scene.add.rexPerspectiveCarousel({
     x: 0, y: 0,
 
     faces: [],
     // face: 0,
+    // rtl: false,
 
     // width,
     // height,
@@ -98,13 +99,15 @@ var carousel = scene.add.rexPerspectiveImage({
     //     ease: 'Cubic',
     //     delay: 0,
     // }
-    // roll: false
 });
 ```
 
 - `faces` : Array of [perspective-card](perspective-card.md), [perspective-rendertexture](perspective-rendertexture.md), [perspective-image](perspective-image.md), or `null`.
     - *Assume that all faces have the same size*
 - `face` : Index or name of current face (face at angle `0`).
+- `rtl`
+    - `false` : Place faces from left to right. Default behavior.
+    - `true` : Place faces from right to left.
 - `width`, `height` : Specific width and height of this carousel container.
     - `undefined` : Use width and height of first face.
 - `faceWidth` : Width of face. 
@@ -120,7 +123,7 @@ var carousel = scene.add.rexPerspectiveImage({
 Add perspectiveimage from JSON
 
 ```javascript
-var perspectiveimage = scene.make.rexPerspectiveImage({
+var perspectiveimage = scene.make.rexPerspectiveCarousel({
     x: 0,
     y: 0,
 
@@ -197,6 +200,16 @@ var faces = carousel.faces;
 - Roll to previous face
     ```javascript
     carousel.roll.toPrevious(duration);
+    ```
+    - `duration` : Overwrite default duration value.
+- Roll to right face
+    ```javascript
+    carousel.roll.toRight(duration);
+    ```
+    - `duration` : Overwrite default duration value.
+- Roll to left face
+    ```javascript
+    carousel.roll.toLeft(duration);
     ```
     - `duration` : Overwrite default duration value.
 - Roll to face
