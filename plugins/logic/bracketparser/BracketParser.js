@@ -17,6 +17,7 @@ class BracketParser {
         this.setBrackets(brackets[0], brackets[1]);
 
         this.isPaused = false;
+        this.ignoreNextEventFlag = false;
         this.lastTagStart = null;
         this.lastTagEnd = null;
         this.lastContent = null;
@@ -126,6 +127,11 @@ class BracketParser {
 
     }
 
+    ignoreNextEvent() {
+        this.ignoreNextEventFlag = true;
+        return this;
+    }
+
     pause() {
         this.isPaused = true;
         return this;
@@ -138,8 +144,8 @@ class BracketParser {
 
     onTagStart(tagContent) {
         var tag = tagContent.match(this.reTagOn)[1];
-        this.emit('+', tag);
         this.emit(`+${tag}`);
+        this.emit('+', tag);
         this.lastTagStart = tag;
     }
 
@@ -150,15 +156,25 @@ class BracketParser {
         if (this.valueConverter) {
             value = ValueConverter(value);
         }
-        this.emit('+', tag, value);
+
+        this.ignoreNextEventFlag = false;
         this.emit(`+${tag}`, value);
+        if (!this.ignoreNextEventFlag) {
+            this.emit('+', tag, value);
+        }
+
         this.lastTagStart = tag;
     }
 
     onTagEnd(tagContent) {
         var tag = tagContent.match(this.reTagOff)[1];
+
+        this.ignoreNextEventFlag = false;
         this.emit('-', tag);
-        this.emit(`-${tag}`);
+        if (!this.ignoreNextEventFlag) {
+            this.emit(`-${tag}`);
+        }
+
         this.lastTagEnd = tag;
     }
 
