@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var source = '<aa>bb</aa>cc<pause><dd=red>ee</dd>';
+        var source = '<aa>bb</aa>cc<pause><dd=abcd, -3.2, 1.5>ee</dd>';
         var parser = this.plugins.get('rexBracketParserPlugin').add({
             brackets: '<>'
         });
