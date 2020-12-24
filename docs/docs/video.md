@@ -215,32 +215,29 @@ var duration = video.getDuration();  // time in seconds
 
 ### Snapshot
 
-```javascript
-var canvasTexture = video.saveSnapshotTexture(key);
-```
-
-or
-
-```javascript
-var canvasTexture = video.snapshot();
-// var canvasTexture = video.snapshot(width, height);
-```
-
-or
-
-```javascript
-var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight);
-// var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight, destWidth, destHeight);
-```
-
-- `x`, `y` : The horizontal/vertical location of the top-left of the area to grab from.
-- `srcWidth`, `srcHeight` : The width/height of area to grab from the video.
-- `destWidth`, `destHeight` : The destination width/height of the grab, allowing you to resize it.
-- `canvasTexture` : [Canvas texture object](canvas-texture.md).
-    - Get key of texture
-        ```javascript
-        var key = canvasTexture.key;
-        ```
+1. Allocate a canvas texrure
+    ```javascript
+    video.saveSnapshotTexture(key);
+    ```
+    - `key` : Texture key.
+2. Take a snapshot
+    ```javascript
+    var canvasTexture = video.video.snapshot();
+    // var canvasTexture = video.snapshot(width, height);
+    ```
+    or
+    ```javascript
+    var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight);
+    // var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight, destWidth, destHeight);
+    ```
+    - `x`, `y` : The horizontal/vertical location of the top-left of the area to grab from.
+    - `srcWidth`, `srcHeight` : The width/height of area to grab from the video.
+    - `destWidth`, `destHeight` : The destination width/height of the grab, allowing you to resize it.
+    - `canvasTexture` : [Canvas texture object](canvas-texture.md).
+        - Get key of texture
+            ```javascript
+            var key = canvasTexture.key;
+            ```
 
 ### Save texture
 

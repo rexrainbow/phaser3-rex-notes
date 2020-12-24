@@ -5699,20 +5699,21 @@ Video game object with the same <em>key</em> will reference the same video eleme
 </code></pre></div></li>
 </ul>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">saveSnapshotTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">();</span>
+<ol>
+<li>Allocate a canvas texrure
+    <div class="codehilite"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">saveSnapshotTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Texture key.</li>
+</ul>
+</li>
+<li>Take a snapshot
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">video</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">();</span>
 <span class="c1">// var canvasTexture = video.snapshot(width, height);</span>
 </code></pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">snapshotArea</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">srcWidth</span><span class="p">,</span> <span class="nx">srcHeight</span><span class="p">);</span>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">snapshotArea</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">srcWidth</span><span class="p">,</span> <span class="nx">srcHeight</span><span class="p">);</span>
 <span class="c1">// var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight, destWidth, destHeight);</span>
-</code></pre></div>
-
-<ul>
+</code></pre></div><ul>
 <li><code>x</code>, <code>y</code> : The horizontal/vertical location of the top-left of the area to grab from.</li>
 <li><code>srcWidth</code>, <code>srcHeight</code> : The width/height of area to grab from the video.</li>
 <li><code>destWidth</code>, <code>destHeight</code> : The destination width/height of the grab, allowing you to resize it.</li>
@@ -5723,6 +5724,8 @@ Video game object with the same <em>key</em> will reference the same video eleme
 </ul>
 </li>
 </ul>
+</li>
+</ol>
 <h3 id="save-texture">Save texture<a class="headerlink" href="#save-texture" title="Permanent link">&para;</a></h3>
 <p>The saved texture is automatically updated as the video plays. If you pause this video, or change its source, then the saved texture updates instantly.</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">saveTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
