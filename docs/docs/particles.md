@@ -267,7 +267,7 @@ emitter.setEmitZone({
     - [Curve](path.md) source has *quantity*, or *stepRate*
     - [Path](path.md) source only has *quantity*
 
-#### Curve surce
+#### Curve source
 
 - Get curve source
     ```javascript
