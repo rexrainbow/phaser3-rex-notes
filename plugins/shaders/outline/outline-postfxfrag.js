@@ -14,12 +14,8 @@ varying vec2 outTexCoord;
 
 // Effect parameters
 uniform vec2 texSize;
-// Color0
 uniform float thickness;
 uniform vec3 outlineColor; // (0, 0, 0);
-// Color1
-uniform float thickness1;
-uniform vec3 outlineColor1; // (0, 0, 0);
 
 const float DOUBLE_PI = 3.14159265358979323846264 * 2.;
 
@@ -43,9 +39,7 @@ vec4 GetOutlineColor(vec4 front, float width, vec3 color) {
 
 void main() {
   vec4 front = texture2D(uMainSampler, outTexCoord);
-  vec4 color0 = GetOutlineColor(front, thickness, outlineColor);
-  vec4 color1 = GetOutlineColor(color0, thickness1, outlineColor1);
-  gl_FragColor = color1;
+  gl_FragColor = GetOutlineColor(front, thickness, outlineColor);
 }
 `;
 

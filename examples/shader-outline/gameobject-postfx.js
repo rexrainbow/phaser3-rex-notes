@@ -23,13 +23,17 @@ class Demo extends Phaser.Scene {
                     // Add postfx pipeline
                     postFxPlugin.add(gameObject, {
                         thickness: 3,
-                        outlineColor: 0xff8a50,
-                        thickness1: 8,
-                        outlineColor1: 0xc41c00
+                        outlineColor: 0xff8a50
+                    });
+
+                    // Cascade 2nd outline
+                    postFxPlugin.add(gameObject, {
+                        thickness: 5,
+                        outlineColor: 0xc41c00
                     });
                 })
                 .on('pointerout', function () {
-                    // Remove postfx pipeline
+                    // Remove all outline post-fx pipelines
                     postFxPlugin.remove(gameObject);
                 })
         }

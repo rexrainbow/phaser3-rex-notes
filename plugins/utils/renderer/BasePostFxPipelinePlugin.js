@@ -1,4 +1,4 @@
-import AddPostFxPipeline from './AddPostFxPipeline.js';
+const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
 class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     setPostPipelineClass(PostFxPipelineClass, postFxPipelineName) {
@@ -15,17 +15,56 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
-        var pipeline = this.get(gameObject);
+        gameObject.setPostPipeline(this.PostFxPipelineClass);
+        var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
         pipeline.resetFromJSON(config);
         return pipeline;
     }
 
-    remove(gameObject) {
-        gameObject.removePostPipeline(this.PostFxPipelineClass);
+    remove(gameObject, name) {
+        if (name === undefined) {
+            var result = [];
+            var pipelines = gameObject.postPipelines;
+            for (var cnt = pipelines.length, i = (cnt - 1); i >= 0; i--) {
+                var instance = pipelines[i];
+                if (instance instanceof this.PostFxPipelineClass) {
+                    instance.destroy();
+                    SpliceOne(pipelines, i);
+                }
+            }
+            return result;
+        } else {
+            var pipelines = gameObject.postPipelines;
+            for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+                var instance = pipelines[i];
+                if (instance.name === name) {
+                    instance.destroy();
+                    SpliceOne(pipelines, i);
+                }
+            }
+        }
     }
 
-    get(gameObject) {
-        return AddPostFxPipeline(this.PostFxPipelineClass, gameObject);
+    get(gameObject, name) {
+        if (name === undefined) {
+            var result = [];
+            var pipelines = gameObject.postPipelines;
+            for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+                var instance = pipelines[i];
+                if (instance instanceof this.PostFxPipelineClass) {
+                    result.push(instance)
+                }
+            }
+            return result;
+        } else {
+            var pipelines = gameObject.postPipelines;
+            for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
+                var instance = pipelines[i];
+                if (instance.name === name) {
+                    return instance;
+                }
+            }
+        }
     }
 }
 
