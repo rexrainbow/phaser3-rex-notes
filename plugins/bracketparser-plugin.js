@@ -1,4 +1,4 @@
-import BracketParser from './bracketparser.js'
+import BracketParser from './bracketparser.js';
 
 class BracketParserPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
