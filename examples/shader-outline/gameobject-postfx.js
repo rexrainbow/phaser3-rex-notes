@@ -22,10 +22,10 @@ class Demo extends Phaser.Scene {
                 .on('pointerover', function () {
                     // Add postfx pipeline
                     postFxPlugin.add(gameObject, {
-                        thickness: 8,
-                        outlineColor: 0xc41c00,
-                        //thickness1: 3,
-                        //outlineColor1: 0xff8a50
+                        thickness: 3,
+                        outlineColor: 0xff8a50,
+                        thickness1: 8,
+                        outlineColor1: 0xc41c00
                     });
                 })
                 .on('pointerout', function () {

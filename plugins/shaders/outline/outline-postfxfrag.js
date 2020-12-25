@@ -44,10 +44,8 @@ vec4 GetOutlineColor(vec4 front, float width, vec3 color) {
 void main() {
   vec4 front = texture2D(uMainSampler, outTexCoord);
   vec4 color0 = GetOutlineColor(front, thickness, outlineColor);
-  vec4 color1 = GetOutlineColor(front, thickness1, outlineColor1);
-
-  // TODO: blend color0 and color1
-  gl_FragColor = color0;
+  vec4 color1 = GetOutlineColor(color0, thickness1, outlineColor1);
+  gl_FragColor = color1;
 }
 `;
 
