@@ -22,8 +22,10 @@ class Demo extends Phaser.Scene {
                 .on('pointerover', function () {
                     // Add postfx pipeline
                     postFxPlugin.add(gameObject, {
-                        thickness: 3,
-                        outlineColor: 0xff0000
+                        thickness: 8,
+                        outlineColor: 0xc41c00,
+                        //thickness1: 3,
+                        //outlineColor1: 0xff8a50
                     });
                 })
                 .on('pointerout', function () {
@@ -46,6 +48,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
+    backgroundColor: 0x555555,
     scene: Demo,
     plugins: {
         global: [{

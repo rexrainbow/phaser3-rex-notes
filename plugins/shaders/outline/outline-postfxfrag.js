@@ -14,30 +14,40 @@ varying vec2 outTexCoord;
 
 // Effect parameters
 uniform vec2 texSize;
-uniform vec2 thickness;
+// Color0
+uniform float thickness;
 uniform vec3 outlineColor; // (0, 0, 0);
+// Color1
+uniform float thickness1;
+uniform vec3 outlineColor1; // (0, 0, 0);
 
 const float DOUBLE_PI = 3.14159265358979323846264 * 2.;
 
-void main() {
-  if ((thickness.x > 0.0) || (thickness.y > 0.0)) {
-    vec4 front = texture2D(uMainSampler, outTexCoord);
-    vec2 mag = thickness/texSize;
+vec4 GetOutlineColor(vec4 front, float width, vec3 color) {
+  if (width > 0.0) {
+    vec2 mag = vec2(width/texSize.x, width/texSize.y);
     vec4 curColor;
-    float maxAlpha = 0.;
+    float maxAlpha = front.a;
     vec2 offset;
     for (float angle = 0.; angle <= DOUBLE_PI; angle += 0.6283185) {
         offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
         curColor = texture2D(uMainSampler, outTexCoord + offset);
         maxAlpha = max(maxAlpha, curColor.a);
     }
-    float resultAlpha = max(maxAlpha, front.a);
-    
-    gl_FragColor = vec4((front.rgb + (outlineColor.rgb * (1. - front.a)) * resultAlpha), resultAlpha);
+    vec3 resultColor = front.rgb + (color.rgb * (1. - front.a)) * maxAlpha;
+    return vec4(resultColor, maxAlpha);
   } else {
-    gl_FragColor = texture2D(uMainSampler, outTexCoord);
+    return front;
   }
+}
 
+void main() {
+  vec4 front = texture2D(uMainSampler, outTexCoord);
+  vec4 color0 = GetOutlineColor(front, thickness, outlineColor);
+  vec4 color1 = GetOutlineColor(front, thickness1, outlineColor1);
+
+  // TODO: blend color0 and color1
+  gl_FragColor = color0;
 }
 `;
 
