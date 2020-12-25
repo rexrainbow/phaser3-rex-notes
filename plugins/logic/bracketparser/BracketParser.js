@@ -1,7 +1,7 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../utils/object/GetValue.js';
 import EscapeRegex from '../../utils/string/EscapeRegex.js';
-import ValueConverter from './ValueConverter.js';
+import DefaultValueConverter from './ValueConverter.js';
 
 const DefaultTagExpression = `[a-zA-Z0-9]+`;
 const DefaultValueExpression = `[ #a-zA-Z-0-9.,]+`;
@@ -10,14 +10,14 @@ class BracketParser {
     constructor(config) {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-        var brackets = GetValue(config, 'brackets', '[]');
+        var brackets = GetValue(config, 'brackets', '<>');
         this.setTagExpression(GetValue(config, 'regex.tag', DefaultTagExpression));
         this.setValueExpression(GetValue(config, 'regex.value', DefaultValueExpression));
         this.setValueConverter(GetValue(config, 'valueConvert', true));
         this.setBrackets(brackets[0], brackets[1]);
 
         this.isPaused = false;
-        this.ignoreNextEventFlag = false;
+        this.skipEventFlag = false;
         this.lastTagStart = null;
         this.lastTagEnd = null;
         this.lastContent = null;
@@ -35,7 +35,7 @@ class BracketParser {
 
     setValueConverter(converter) {
         if (converter === true) {
-            converter = ValueConverter;
+            converter = DefaultValueConverter;
         }
         this.valueConverter = converter;
         return this;
@@ -128,7 +128,7 @@ class BracketParser {
     }
 
     ignoreNextEvent() {
-        this.ignoreNextEventFlag = true;
+        this.skipEventFlag = true;
         return this;
     }
 
@@ -154,12 +154,12 @@ class BracketParser {
         var tag = regexResult[1];
         var value = regexResult[2];
         if (this.valueConverter) {
-            value = ValueConverter(value);
+            value = this.valueConverter(value);
         }
 
-        this.ignoreNextEventFlag = false;
+        this.skipEventFlag = false;
         this.emit(`+${tag}`, value);
-        if (!this.ignoreNextEventFlag) {
+        if (!this.skipEventFlag) {
             this.emit('+', tag, value);
         }
 
@@ -169,9 +169,9 @@ class BracketParser {
     onTagEnd(tagContent) {
         var tag = tagContent.match(this.reTagOff)[1];
 
-        this.ignoreNextEventFlag = false;
+        this.skipEventFlag = false;
         this.emit('-', tag);
-        if (!this.ignoreNextEventFlag) {
+        if (!this.skipEventFlag) {
             this.emit(`-${tag}`);
         }
 
@@ -183,6 +183,7 @@ class BracketParser {
         this.resetIndex();
     }
 }
+
 
 Object.assign(
     BracketParser.prototype,
