@@ -3,17 +3,21 @@ import GetValue from '../../utils/object/GetValue.js';
 import EscapeRegex from '../../utils/string/EscapeRegex.js';
 import DefaultValueConverter from './ValueConverter.js';
 
-const DefaultTagExpression = `[a-zA-Z0-9]+`;
-const DefaultValueExpression = `[ #a-zA-Z-0-9.,]+`;
+const DefaultTagExpression = `[a-zA-Z0-9-_.]+`;
+const DefaultValueExpression = `[ #a-zA-Z-_.0-9,]+`;
 
 class BracketParser {
     constructor(config) {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-        var brackets = GetValue(config, 'brackets', '<>');
+
+        // Parameters for regex
         this.setTagExpression(GetValue(config, 'regex.tag', DefaultTagExpression));
         this.setValueExpression(GetValue(config, 'regex.value', DefaultValueExpression));
+        // Value convert
         this.setValueConverter(GetValue(config, 'valueConvert', true));
+        // Brackets and generate regex
+        var brackets = GetValue(config, 'brackets', '<>');
         this.setBrackets(brackets[0], brackets[1]);
 
         this.isPaused = false;
@@ -127,7 +131,7 @@ class BracketParser {
 
     }
 
-    ignoreNextEvent() {
+    skipEvent() {
         this.skipEventFlag = true;
         return this;
     }
@@ -144,8 +148,13 @@ class BracketParser {
 
     onTagStart(tagContent) {
         var tag = tagContent.match(this.reTagOn)[1];
+
+        this.skipEventFlag = false;
         this.emit(`+${tag}`);
-        this.emit('+', tag);
+        if (!this.skipEventFlag) {
+            this.emit('+', tag);
+        }
+
         this.lastTagStart = tag;
     }
 

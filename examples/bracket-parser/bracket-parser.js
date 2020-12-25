@@ -11,13 +11,30 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var source = '<aa>bb</aa>cc<pause><dd=abcd, -3.2, 1.5>ee</dd>';
+        var source = '<fn0>Hello<fn1=0>World<pause><fn2=abcd, -3.2, 1.5><aa>Phaser3</aa>End';
         var parser = this.plugins.get('rexBracketParserPlugin').add({
             // brackets: '<>'
         });
         parser
             .on('content', function (content) {
                 console.log('content:', content);
+            })
+            .on('+fn0', function (value) {
+                console.log('Run fn0');
+                // parser.skipEvent();  // Don't fire '+' event
+            })
+            .on('+fn1', function (value) {
+                console.log(`Run fn1(${value})`);
+                // parser.skipEvent();  // Don't fire '+' event
+            })
+            .on('+fn2', function (values) {
+                console.log(`Run fn2(${JSON.stringify(values)})`);
+                // parser.skipEvent();  // Don't fire '+' event
+            })
+            .on('+pause', function () {
+                console.log('--- Pause ---');
+                parser.pause(); // Pause parsing
+                // parser.skipEvent();  // Don't fire '+' event
             })
             .on('+', function (tag, value) {
                 console.log('tag-start:', tag, value);
@@ -27,9 +44,6 @@ class Demo extends Phaser.Scene {
             })
             .on('complete', function () {
                 console.log('complete');
-            })
-            .on('+pause', function () {
-                parser.pause();
             })
             .start(source);
 

@@ -5567,7 +5567,10 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">content</span><span class="p">,</span> <span class="nx">typingSpeed</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>content</code> : Content string.</li>
-<li><code>speed</code> : Typing speed in ms.</li>
+<li><code>speed</code> : Typing speed in ms.<ul>
+<li><code>undefined</code> : Use previous typing speed.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Stop
@@ -5585,6 +5588,12 @@
 <li>Is typing
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">textBox</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
 </code></pre></div></li>
+<li>Change typing speed
+    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>speed</code> : Typing speed in ms.</li>
+</ul>
+</li>
 </ul>
 <h3 id="page">Page<a class="headerlink" href="#page" title="Permanent link">&para;</a></h3>
 <ul>
