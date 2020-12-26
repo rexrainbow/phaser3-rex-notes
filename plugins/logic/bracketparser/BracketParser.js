@@ -27,6 +27,14 @@ class BracketParser {
         this.lastContent = null;
     }
 
+    shutdown() {
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+
     setTagExpression(express) {
         this.tagExpression = express;
         return this;
