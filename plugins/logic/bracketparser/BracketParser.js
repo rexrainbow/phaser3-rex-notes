@@ -101,6 +101,9 @@ class BracketParser {
         var text = this.source,
             lastIndex = text.length;
 
+        if (this.reSplit.lastIndex === 0) {
+            this.onStart();
+        }
         while (!this.isPaused) {
             var regexResult = this.reSplit.exec(text);
             if (!regexResult) {
@@ -185,6 +188,10 @@ class BracketParser {
         }
 
         this.lastTagEnd = tag;
+    }
+
+    onStart() {
+        this.emit('start');
     }
 
     onComplete() {

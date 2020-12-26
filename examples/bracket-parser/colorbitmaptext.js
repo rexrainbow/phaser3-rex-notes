@@ -1,44 +1,5 @@
 import BracketParserPlugin from '../../plugins/bracketparser-plugin.js';
 
-class ColorBitmapText extends Phaser.GameObjects.BitmapText {
-    constructor(scene, x, y, key, text, size, align) {
-        super(scene, x, y, key, text, size, align);
-        scene.add.existing(this);
-    }
-
-    setText(text) {
-        var plainText = '';
-        var colorMarks = [];
-
-        var colorFlag = null;
-        var parser = this.scene.plugins.get('rexBracketParserPlugin').add({
-            brackets: '[]'
-        })
-            .on('+color', function (color) {
-                colorFlag = parseInt(color, 16);
-            })
-            .on('-color', function () {
-                colorFlag = null;
-            })
-            .on('content', function (content) {
-                var startIndex = plainText.length;
-                plainText += content;
-                if (colorFlag !== null) {
-                    colorMarks.push([startIndex, content.length, true, colorFlag]);
-                } else {
-                    colorMarks.push([startIndex, content.length, false, 0xffffff])
-                }
-            })
-            .start(text);
-
-        super.setText(plainText);
-        for(var i=0, cnt = colorMarks.length ; i<cnt; i++) {
-            this.setCharacterTint.apply(this, colorMarks[i]);
-        }
-        return this;
-    }
-}
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -65,11 +26,46 @@ class Demo extends Phaser.Scene {
         };
         this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
 
-        var s = '[color=ff0000]HEL[color=00ff00]LO WOR[color=0000ff]LD [/color]PHASER';
-        var txt = new ColorBitmapText(this, 100, 100, 'knighthawks', s);
+        var txt = this.add.bitmapText(100, 100, 'knighthawks');
+        var s = '[color=#ff0000]HEL[color=#00ff00]LO WOR[color=#0000ff]LD [/color]PHASER';
+        SetColorText(txt, s);
     }
 
     update(time) {
+    }
+}
+
+var SetColorText = function (bitmapText, text) {
+    var plainText = '';
+    var colorMarks = [];
+
+    var colorFlag = null;
+    var parser = bitmapText.scene.plugins.get('rexBracketParserPlugin').add({
+        brackets: '[]'
+    })
+        .on('+color', function (color) {
+            if (typeof (color) === 'string') {
+                color = parseInt(color.replace(/#|0x/, ''), 16);
+            }
+            colorFlag = color;
+        })
+        .on('-color', function () {
+            colorFlag = null;
+        })
+        .on('content', function (content) {
+            var startIndex = plainText.length;
+            plainText += content;
+            if (colorFlag !== null) {
+                colorMarks.push([startIndex, content.length, true, colorFlag]);
+            } else {
+                colorMarks.push([startIndex, content.length, false, 0xffffff])
+            }
+        })
+        .start(text);
+
+    bitmapText.setText(plainText);
+    for (var i = 0, cnt = colorMarks.length; i < cnt; i++) {
+        bitmapText.setCharacterTint.apply(bitmapText, colorMarks[i]);
     }
 }
 

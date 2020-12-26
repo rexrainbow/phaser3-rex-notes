@@ -42,6 +42,9 @@ class Demo extends Phaser.Scene {
             .on('-', function (tag) {
                 console.log('tag-end:', tag);
             })
+            .on('start', function(){
+                console.log('start');
+            })
             .on('complete', function () {
                 console.log('complete');
             })
