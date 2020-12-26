@@ -7,7 +7,8 @@ class ColorBitmapText extends Phaser.GameObjects.BitmapText {
     }
 
     setText(text) {
-        this.charColors.length = 0;
+        var plainText = '';
+        var colorMarks = [];
 
         var colorFlag = null;
         var parser = this.scene.plugins.get('rexBracketParserPlugin').add({
@@ -20,17 +21,20 @@ class ColorBitmapText extends Phaser.GameObjects.BitmapText {
                 colorFlag = null;
             }, this)
             .on('content', function (content) {
-                var startIndex = this.text.length;
-                this.appendText(content);
+                var startIndex = plainText.length;
+                plainText += content;
                 if (colorFlag !== null) {
-                    this.setCharacterTint(startIndex, content.length, true, colorFlag);
+                    colorMarks.push([startIndex, content.length, true, colorFlag]);
+                } else {
+                    colorMarks.push([startIndex, content.length, false, 0xffffff])
                 }
             }, this)
             .start(text);
-    }
 
-    appendText(text) {
-        super.setText(this.text + text);
+        super.setText(plainText);
+        for(var i=0, cnt = colorMarks.length ; i<cnt; i++) {
+            this.setCharacterTint.apply(this, colorMarks[i]);
+        }
         return this;
     }
 }

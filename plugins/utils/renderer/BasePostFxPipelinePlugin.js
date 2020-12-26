@@ -25,7 +25,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
         if (name === undefined) {
             var result = [];
             var pipelines = gameObject.postPipelines;
-            for (var cnt = pipelines.length, i = (cnt - 1); i >= 0; i--) {
+            for (var i = (pipelines.length - 1); i >= 0; i--) {
                 var instance = pipelines[i];
                 if (instance instanceof this.PostFxPipelineClass) {
                     instance.destroy();
