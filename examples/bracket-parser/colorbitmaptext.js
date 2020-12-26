@@ -16,10 +16,10 @@ class ColorBitmapText extends Phaser.GameObjects.BitmapText {
         })
             .on('+color', function (color) {
                 colorFlag = parseInt(color, 16);
-            }, this)
+            })
             .on('-color', function () {
                 colorFlag = null;
-            }, this)
+            })
             .on('content', function (content) {
                 var startIndex = plainText.length;
                 plainText += content;
@@ -28,7 +28,7 @@ class ColorBitmapText extends Phaser.GameObjects.BitmapText {
                 } else {
                     colorMarks.push([startIndex, content.length, false, 0xffffff])
                 }
-            }, this)
+            })
             .start(text);
 
         super.setText(plainText);
