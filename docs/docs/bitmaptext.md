@@ -184,16 +184,20 @@ txt.setFont(key);
 
 - By character
     ```javascript
-    txt.setCharacterTint(start, length, tintFill);
+    txt.setCharacterTint(start, length, tintFill, color);
     // txt.setCharacterTint(start, length, tintFill, topLeft, topRight, bottomLeft, bottomRight);
     ```
     - `start` : Index starting character. 
         - `< 0` : Counts back from the end of the text.
     - `length` : Number of characters to tint.
         - `-1` : All characters from `start`
+    - `tintFill` : 
+        - `true` : Fill-based tint
+        - `false` : Additive tint
+    - `color`, or `topLeft, topRight, bottomLeft, bottomRight` : Color integer.
 - By word
     ```javascript
-    txt.setWordTint(word, count, tintFill);
+    txt.setWordTint(word, count, tintFill, color);
     // txt.setWordTint(word, count, tintFill, topLeft, topRight, bottomLeft, bottomRight);
     ```
     - `word` : The word to search for. 
@@ -201,6 +205,10 @@ txt.setFont(key);
         - An index of the word in the words array.
     - `count` : Number of matching words to tint.
         - `-1` : All matching words
+    - `tintFill` : 
+        - `true` : Fill-based tint
+        - `false` : Additive tint
+    - `color`, or `topLeft, topRight, bottomLeft, bottomRight` : Color integer.
 
 ### Drop shadow effect
 

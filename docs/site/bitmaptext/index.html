@@ -5666,7 +5666,7 @@
 <h3 id="color-of-characters">Color of characters<a class="headerlink" href="#color-of-characters" title="Permanent link">&para;</a></h3>
 <ul>
 <li>By character
-    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setCharacterTint</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setCharacterTint</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 <span class="c1">// txt.setCharacterTint(start, length, tintFill, topLeft, topRight, bottomLeft, bottomRight);</span>
 </code></pre></div><ul>
 <li><code>start</code> : Index starting character. <ul>
@@ -5677,10 +5677,16 @@
 <li><code>-1</code> : All characters from <code>start</code></li>
 </ul>
 </li>
+<li><code>tintFill</code> : <ul>
+<li><code>true</code> : Fill-based tint</li>
+<li><code>false</code> : Additive tint</li>
+</ul>
+</li>
+<li><code>color</code>, or <code>topLeft, topRight, bottomLeft, bottomRight</code> : Color integer.</li>
 </ul>
 </li>
 <li>By word
-    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWordTint</span><span class="p">(</span><span class="nx">word</span><span class="p">,</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWordTint</span><span class="p">(</span><span class="nx">word</span><span class="p">,</span> <span class="nx">count</span><span class="p">,</span> <span class="nx">tintFill</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 <span class="c1">// txt.setWordTint(word, count, tintFill, topLeft, topRight, bottomLeft, bottomRight);</span>
 </code></pre></div><ul>
 <li><code>word</code> : The word to search for. <ul>
@@ -5692,6 +5698,12 @@
 <li><code>-1</code> : All matching words</li>
 </ul>
 </li>
+<li><code>tintFill</code> : <ul>
+<li><code>true</code> : Fill-based tint</li>
+<li><code>false</code> : Additive tint</li>
+</ul>
+</li>
+<li><code>color</code>, or <code>topLeft, topRight, bottomLeft, bottomRight</code> : Color integer.</li>
 </ul>
 </li>
 </ul>
