@@ -5525,8 +5525,22 @@
 <p>Assume that left-bracket and right-bracket is <code>'&lt;&gt;'</code></p>
 <ul>
 <li>Tag-start : <code>'&lt;TAG&gt;'</code><ul>
-<li>Tag-start with value : <code>'&lt;TAG=value&gt;'</code></li>
-<li>Tag-start with array values : <code>'&lt;TAG=v0,v1,v2&gt;'</code></li>
+<li>Tag-start with value : <code>'&lt;TAG=value&gt;'</code><ul>
+<li><code>value</code> : If <code>valueConvert</code> is <code>true</code>,<ul>
+<li>Number</li>
+<li>Boolean</li>
+<li>null</li>
+<li>String: <ul>
+<li><code>'a'-'z'</code>, <code>'A'-'Z'</code>,</li>
+<li>String mixin <code>0-9</code></li>
+<li><code>'#'</code>, <code>'-'</code>, <code>'.'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tag-start with array values, separated via <code>','</code> : <code>'&lt;TAG=value0,value1,value2&gt;'</code></li>
 </ul>
 </li>
 <li>Tag-end : <code>'&lt;\TAG&gt;'</code></li>
@@ -5575,10 +5589,10 @@
 
 <p>When getting a tag-start, or a tag-end event, parser will emitts </p>
 <ul>
-<li>Tag-start : <code>'+Tag'</code>, then <code>'+'</code></li>
-<li>Tag-end : <code>'-Tag'</code>, then <code>'-'</code></li>
+<li>Tag-start : <code>'+TAG'</code>, then <code>'+'</code></li>
+<li>Tag-end : <code>'-TAG'</code>, then <code>'-'</code></li>
 </ul>
-<p>Invoke this medthod under <code>'+Tag'</code>, or <code>'-Tag'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
+<p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
                 
                   
                 

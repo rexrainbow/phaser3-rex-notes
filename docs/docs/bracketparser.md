@@ -106,7 +106,15 @@ Assume that left-bracket and right-bracket is `'<>'`
 
 - Tag-start : `'<TAG>'`
     - Tag-start with value : `'<TAG=value>'`
-    - Tag-start with array values : `'<TAG=v0,v1,v2>'`
+        - `value` : If `valueConvert` is `true`,
+            - Number
+            - Boolean
+            - null
+            - String: 
+                - `'a'-'z'`, `'A'-'Z'`,
+                - String mixin `0-9`
+                - `'#'`, `'-'`, `'.'`
+    - Tag-start with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
 - Tag-end : `'<\TAG>'`
 - Content : Any string outside of tag-start, or tag-end.
 
@@ -169,7 +177,7 @@ parser.skipEvent();
 
 When getting a tag-start, or a tag-end event, parser will emitts 
 
-- Tag-start : `'+Tag'`, then `'+'`
-- Tag-end : `'-Tag'`, then `'-'`
+- Tag-start : `'+TAG'`, then `'+'`
+- Tag-end : `'-TAG'`, then `'-'`
 
-Invoke this medthod under `'+Tag'`, or `'-Tag'` event to skip `'+'`, or `'-'` event.
+Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` event.
