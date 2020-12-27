@@ -4,8 +4,8 @@ import EscapeRegex from '../../utils/string/EscapeRegex.js';
 import DefaultValueConverter from '../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
-const DefaultTagExpression = `[a-zA-Z0-9-_.]+`;
-const DefaultValueExpression = `[ #a-zA-Z-_.0-9,]+`;
+const DefaultTagExpression = `[a-z0-9-_.]+`;
+const DefaultValueExpression = `[ #a-z-_.0-9,]+`;
 const BypassValueConverter = function (s) { return s; }
 
 class BracketParser {
@@ -67,14 +67,12 @@ class BracketParser {
 
         bracketLeft = EscapeRegex(bracketLeft);
         bracketRight = EscapeRegex(bracketRight);
-        var tagOn = `${bracketLeft}(${this.tagExpression})${bracketRight}`;
-        var tagOnWithValue = `${bracketLeft}(${this.tagExpression})=(${this.valueExpression})${bracketRight}`;
+        var tagOn = `${bracketLeft}(${this.tagExpression})(=(${this.valueExpression}))?${bracketRight}`;
         var tagOff = `${bracketLeft}\/(${this.tagExpression})${bracketRight}`;
 
         this.reTagOn = RegExp(tagOn, 'i');
-        this.reTagOnWithValue = RegExp(tagOnWithValue, 'i');
         this.reTagOff = RegExp(tagOff, 'i');
-        this.reSplit = RegExp(`${tagOn}|${tagOnWithValue}|${tagOff}`, 'gi');
+        this.reSplit = RegExp(`${tagOn}|${tagOff}`, 'gi');
         return this;
     }
 
@@ -135,10 +133,8 @@ class BracketParser {
 
             if (this.reTagOff.test(match)) {
                 this.onTagEnd(match);
-            } else if (this.reTagOn.test(match)) {
-                this.onTagStart(match);
             } else {
-                this.onTagStartWithValue(match);
+                this.onTagStart(match);
             }
 
             this.progressIndex = this.reSplit.lastIndex;
@@ -162,22 +158,12 @@ class BracketParser {
     }
 
     onTagStart(tagContent) {
-        var tag = tagContent.match(this.reTagOn)[1];
-
-        this.skipEventFlag = false;
-        this.emit(`+${tag}`);
-        if (!this.skipEventFlag) {
-            this.emit('+', tag);
-        }
-
-        this.lastTagStart = tag;
-    }
-
-    onTagStartWithValue(tagContent) {
-        var regexResult = tagContent.match(this.reTagOnWithValue);
+        var regexResult = tagContent.match(this.reTagOn);
         var tag = regexResult[1];
-        var value = regexResult[2];
-        value = ParseValue(value, this.valueConverter);
+        var value = regexResult[3];
+        if (value !== undefined) { // Tag with value(s)
+            value = ParseValue(value, this.valueConverter);
+        }
 
         this.skipEventFlag = false;
         this.emit(`+${tag}`, value);
