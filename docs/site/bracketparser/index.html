@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-chart/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/bracketparser/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Chart - Notes of Phaser 3</title>
+        <title>Bracket parser - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Chart
+                Bracket parser
               
             </span>
           
@@ -2997,10 +2997,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Logic
@@ -3340,11 +3342,147 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../bracketparser/" title="Bracket parser" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Bracket parser
+      </label>
+    
+    <a href="./" title="Bracket parser" class="md-nav__link md-nav__link--active">
       Bracket parser
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demoes" class="md-nav__link">
+    Live demoes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-and-content" class="md-nav__link">
+    Tag and content
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-parsing" class="md-nav__link">
+    Start parsing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skip-any-tag-startany-tag-end-event" class="md-nav__link">
+    Skip any-tag-start/any-tag-end event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4377,12 +4515,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       UI
@@ -4638,141 +4774,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Chart
-      </label>
-    
-    <a href="./" title="Chart" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ui-chart/" title="Chart" class="md-nav__link">
       Chart
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-chartjs" class="md-nav__link">
-    Install chart.js
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-chart-object" class="md-nav__link">
-    Add chart object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-chart" class="md-nav__link">
-    Create chart
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#chart-data" class="md-nav__link">
-    Chart data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#manipulate-chart-object" class="md-nav__link">
-    Manipulate chart object
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5299,8 +5305,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
+  <a href="#live-demoes" class="md-nav__link">
+    Live demoes
   </a>
   
 </li>
@@ -5320,13 +5326,6 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-chartjs" class="md-nav__link">
-    Install chart.js
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#load-minify-file" class="md-nav__link">
@@ -5355,36 +5354,49 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-chart-object" class="md-nav__link">
-    Add chart object
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tag-and-content" class="md-nav__link">
+    Tag and content
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-parsing" class="md-nav__link">
+    Start parsing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
+  <a href="#pause" class="md-nav__link">
+    Pause
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-chart" class="md-nav__link">
-    Create chart
+  <a href="#resume" class="md-nav__link">
+    Resume
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chart-data" class="md-nav__link">
-    Chart data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#manipulate-chart-object" class="md-nav__link">
-    Manipulate chart object
+  <a href="#skip-any-tag-startany-tag-end-event" class="md-nav__link">
+    Skip any-tag-start/any-tag-end event
   </a>
   
 </li>
@@ -5410,37 +5422,32 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-chart.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/bracketparser.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Chart</h1>
+                  <h1>Bracket parser</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Draw <a href="https://www.chartjs.org/">chart</a> on <a href="../canvas/">canvas</a>.</p>
+<p>A lite-weight bracket parser.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Game object</li>
+<li>Object</li>
 </ul>
-<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<h2 id="live-demoes">Live demoes<a class="headerlink" href="#live-demoes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/qwVBNy">Radar chart</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/bGwYNoX">Basic</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/vYXWmMN">Color Bitmaptext</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-chart">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bracket-parser">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
-<h4 id="install-chartjs">Install chart.js<a class="headerlink" href="#install-chartjs" title="Permanent link">&para;</a></h4>
-<p><a href="https://www.chartjs.org/">Chart.js</a> is not included in rexUI, installs it before creating any chart.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js&#39;</span><span class="p">);</span>
-</code></pre></div>
-
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;chartjs&#39;</span><span class="p">,</span> <span class="s1">&#39;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js&#39;</span><span class="p">);</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexbracketparserplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbracketparserplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add parser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexbracketparserplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5449,14 +5456,14 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">BracketParserPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/bracketparser-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexBracketParser&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">BracketParserPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -5465,8 +5472,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add parser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBracketParser&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5475,98 +5482,103 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Chart</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">BracketParser</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/bracketparser.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add chart object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Chart</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+<li>Add parser object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BracketParser</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-chart-object">Add chart object<a class="headerlink" href="#add-chart-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chart</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBracketParser&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+    <span class="c1">// brackets: &#39;&lt;&gt;&#39;, // or [&#39;&lt;&#39;, &#39;&gt;&#39;]</span>
+    <span class="c1">// valueConvert: true,</span>
+    <span class="c1">// regex : {</span>
+    <span class="c1">//     tag: &#39;[a-z0-9-_.]+&#39;,</span>
+    <span class="c1">//     value: &#39;[ #a-z-_.0-9,]+&#39;</span>
+    <span class="c1">// }</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object.</li>
-<li><code>width</code>, <code>height</code> : Canvas size.</li>
-<li><code>config</code> : <a href="https://www.chartjs.org/docs/latest/configuration/">Configuration</a> for creating chart.<ul>
-<li>Set <code>undefined</code> to not create chart at beginning.</li>
+<li><code>brackets</code>: String of left-bracket and right-bracket.<ul>
+<li>A single string with 2 characters. Default value is <code>'&lt;&gt;'</code>.</li>
+<li>A array with 2 strings</li>
 </ul>
 </li>
-</ul>
-<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyChart</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Chart</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-        <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
+<li><code>valueConvert</code> : A callback to convert values.<ul>
+<li><code>true</code> : Defaule value converter</li>
+<li><code>false</code>, or <code>null</code> : Bypass string value.</li>
+<li>Function object:
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">s</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyChart</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
 </ul>
-<h3 id="create-chart">Create chart<a class="headerlink" href="#create-chart" title="Permanent link">&para;</a></h3>
-<p>Create chart (if not creating at beginning).</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">setChart</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</li>
+<li><code>regex</code> :<ul>
+<li><code>regex.tag</code> : Expression of parse tag. Default value is <code>'[a-z0-9-_.]+'</code>.</li>
+<li><code>regex.value</code> : Expression of parse value. Default value is <code>'[ #a-z-_.0-9,]+'</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="tag-and-content">Tag and content<a class="headerlink" href="#tag-and-content" title="Permanent link">&para;</a></h4>
+<p>Assume that left-bracket and right-bracket is <code>'&lt;&gt;'</code></p>
+<ul>
+<li>Tag-start : <code>'&lt;TAG&gt;'</code><ul>
+<li>Tag-start with value : <code>'&lt;TAG=value&gt;'</code></li>
+<li>Tag-start with array values : <code>'&lt;TAG=v0,v1,v2&gt;'</code></li>
+</ul>
+</li>
+<li>Tag-end : <code>'&lt;\TAG&gt;'</code></li>
+<li>Content : Any string outside of tag-start, or tag-end.</li>
+</ul>
+<h3 id="start-parsing">Start parsing<a class="headerlink" href="#start-parsing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
 
+<p>These events will be emitted under this method</p>
 <ul>
-<li><code>config</code> : <a href="https://www.chartjs.org/docs/latest/configuration/">Configuration</a> for creating chart.</li>
+<li>Parsing start
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Get a specific tag-start
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Get any-tag-start
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Get a specific tag-end
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Get any-tag-end
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Get a content
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Parsing end
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
 </ul>
-<h3 id="chart-data">Chart data<a class="headerlink" href="#chart-data" title="Permanent link">&para;</a></h3>
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div>
+
+<p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
+<h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="skip-any-tag-startany-tag-end-event">Skip any-tag-start/any-tag-end event<a class="headerlink" href="#skip-any-tag-startany-tag-end-event" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">skipEvent</span><span class="p">();</span>
+</code></pre></div>
+
+<p>When getting a tag-start, or a tag-end event, parser will emitts </p>
 <ul>
-<li>Get dataset
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">getChartDataset</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
+<li>Tag-start : <code>'+Tag'</code>, then <code>'+'</code></li>
+<li>Tag-end : <code>'-Tag'</code>, then <code>'-'</code></li>
 </ul>
-</li>
-<li>Get data
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">getChartData</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
-<li><code>dataIndex</code> : Index number or label string.</li>
-</ul>
-</li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">setChartData</span><span class="p">(</span><span class="nx">datasetIndex</span><span class="p">,</span> <span class="nx">dataIndex</span><span class="p">,</span> <span class="nx">value</span><span class="p">).</span><span class="nx">updateChart</span><span class="p">();</span>
-</code></pre></div><ul>
-<li><code>datasetIndex</code> : Index number or label string.</li>
-<li><code>dataIndex</code> : Index number or label string.</li>
-</ul>
-</li>
-</ul>
-<h3 id="manipulate-chart-object">Manipulate chart object<a class="headerlink" href="#manipulate-chart-object" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Get chart object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chart</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">chart</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set properties of chart<ul>
-<li>Array of dataset
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">datasets</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">;</span>
-</code></pre></div><ul>
-<li>Label of dataset
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">label</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Labels
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">labels</span> <span class="o">=</span> <span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">labels</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set chart data
-    <div class="codehilite"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">datasets</span><span class="p">[</span><span class="nx">datasetIndex</span><span class="p">].</span><span class="nx">data</span><span class="p">[</span><span class="nx">dataIndex</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Update chart
-    <div class="codehilite"><pre><span></span><code><span class="nx">chart</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
-</code></pre></div></li>
-</ol>
+<p>Invoke this medthod under <code>'+Tag'</code>, or <code>'-Tag'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
                 
                   
                 
@@ -5588,7 +5600,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ui-scrollablepanel/" title="Scroll-able panel" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../dialog-quest/" title="Dialog-quest" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5597,19 +5609,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Scroll-able panel
+                Dialog-quest
               </span>
             </div>
           </a>
         
         
-          <a href="../ui-basesizer/" title="Base sizer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../datamanager/" title="Built-in data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Base sizer
+                Built-in data
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
