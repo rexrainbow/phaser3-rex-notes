@@ -155,29 +155,37 @@ Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` ev
 
 ### Events
 
-- Parsing start
-    ```javascript
-    parser.on('start', function(){ /* ... */ });
-    ```
+#### Tags/Content
+
 - Get a specific tag-start
     ```javascript
     parser.on('+' + TagName, function(value){ /* ... */ });
     ```
 - Get any-tag-start
     ```javascript
-    parser.on('+', function(tag, value){ /* ... */ });
+    parser.on('+', function(tagName, value){ /* ... */ });
     ```
 - Get a specific tag-end
     ```javascript
     parser.on('-' + TagName, function(){ /* ... */ });
     ```
-- Get any-tag-end
-    ```javascript
-    parser.on('-', function(tag){ /* ... */ });
-    ```
 - Get a content
     ```javascript
     parser.on('content', function(content){ /* ... */ });
+    ```
+    - Previous tag-start : `parser.lastTagStart`
+- Get any-tag-end
+    ```javascript
+    parser.on('-', function(tagName){ /* ... */ });
+    ```
+    - Previous tag-start : `parser.lastTagStart`
+    - Previous Content : `parser.lastContent`
+
+#### Control flow
+
+- Parsing start
+    ```javascript
+    parser.on('start', function(){ /* ... */ });
     ```
 - Parsing end
     ```javascript

@@ -3475,6 +3475,26 @@
     Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tagscontent" class="md-nav__link">
+    Tags/Content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow" class="md-nav__link">
+    Control flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -5413,6 +5433,26 @@
     Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tagscontent" class="md-nav__link">
+    Tags/Content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-flow" class="md-nav__link">
+    Control flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -5585,24 +5625,35 @@
 </ul>
 <p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h4 id="tagscontent">Tags/Content<a class="headerlink" href="#tagscontent" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Parsing start
-    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</code></pre></div></li>
 <li>Get a specific tag-start
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
 <li>Get any-tag-start
-    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
 <li>Get a specific tag-end
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
-<li>Get any-tag-end
-    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</code></pre></div></li>
 <li>Get a content
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">content</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div><ul>
+<li>Previous tag-start : <code>parser.lastTagStart</code></li>
+</ul>
+</li>
+<li>Get any-tag-end
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div><ul>
+<li>Previous tag-start : <code>parser.lastTagStart</code></li>
+<li>Previous Content : <code>parser.lastContent</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="control-flow">Control flow<a class="headerlink" href="#control-flow" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Parsing start
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
 <li>Parsing end
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
