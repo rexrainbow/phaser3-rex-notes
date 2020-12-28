@@ -8,7 +8,7 @@ A lite-weight bracket parser.
 ## Live demoes
 
 - [Basic](https://codepen.io/rexrainbow/pen/bGwYNoX)
-- [Color Bitmaptext](https://codepen.io/rexrainbow/pen/vYXWmMN)
+- [Markup text](https://codepen.io/rexrainbow/pen/vYXWmMN)
 
 ## Usage
 
@@ -105,14 +105,14 @@ var parser = scene.plugins.get('rexBracketParser').add({
 Assume that left-bracket and right-bracket is `'<>'`
 
 - Tag-start : `'<TAG>'`
-    - Tag-start with value : `'<TAG=value>'`
+    - Tag-start with a single value : `'<TAG=value>'`
         - `value` : If `valueConvert` is `true`,
             - Number
             - Boolean
             - null
             - String: 
                 - `'a'-'z'`, `'A'-'Z'`,
-                - String mixin `0-9`
+                - String mix with `0-9`
                 - `'#'`, `'-'`, `'.'`
     - Tag-start with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
 - Tag-end : `'<\TAG>'`
@@ -124,7 +124,36 @@ Assume that left-bracket and right-bracket is `'<>'`
 parser.start(text);
 ```
 
-These events will be emitted under this method
+These [events](bracketparser.md#events) will be emitted under this method.
+
+### Pause
+
+```javascript
+parser.pause();
+```
+
+Invoke this method during tag-start,tag-end, or content events to suspend parsing.
+
+### Resume
+
+```javascript
+parser.next();
+```
+
+### Skip any-tag-start/any-tag-end event
+
+```javascript
+parser.skipEvent();
+```
+
+When getting a tag-start, or a tag-end event, parser will emitts 
+
+- Tag-start : `'+TAG'`, then `'+'`
+- Tag-end : `'-TAG'`, then `'-'`
+
+Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` event.
+
+### Events
 
 - Parsing start
     ```javascript
@@ -154,30 +183,11 @@ These events will be emitted under this method
     ```javascript
     parser.on('complete', function(){ /* ... */ });
     ```
-
-### Pause
-
-```javascript
-parser.pause();
-```
-
-Invoke this method during tag-start,tag-end, or content events to suspend parsing.
-
-### Resume
-
-```javascript
-parser.next();
-```
-
-### Skip any-tag-start/any-tag-end event
-
-```javascript
-parser.skipEvent();
-```
-
-When getting a tag-start, or a tag-end event, parser will emitts 
-
-- Tag-start : `'+TAG'`, then `'+'`
-- Tag-end : `'-TAG'`, then `'-'`
-
-Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` event.
+- On pause
+    ```javascript
+    parser.on('pause', function(){ /* ... */ });
+    ```
+- On resume
+    ```javascript
+    parser.on('resume', function(){ /* ... */ });
+    ```

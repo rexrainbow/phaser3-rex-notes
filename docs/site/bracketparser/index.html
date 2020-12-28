@@ -3470,6 +3470,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5401,6 +5408,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5436,7 +5450,7 @@
 <h2 id="live-demoes">Live demoes<a class="headerlink" href="#live-demoes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/bGwYNoX">Basic</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/vYXWmMN">Color Bitmaptext</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/vYXWmMN">Markup text</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bracket-parser">Sample code</a></p>
@@ -5525,14 +5539,14 @@
 <p>Assume that left-bracket and right-bracket is <code>'&lt;&gt;'</code></p>
 <ul>
 <li>Tag-start : <code>'&lt;TAG&gt;'</code><ul>
-<li>Tag-start with value : <code>'&lt;TAG=value&gt;'</code><ul>
+<li>Tag-start with a single value : <code>'&lt;TAG=value&gt;'</code><ul>
 <li><code>value</code> : If <code>valueConvert</code> is <code>true</code>,<ul>
 <li>Number</li>
 <li>Boolean</li>
 <li>null</li>
 <li>String: <ul>
 <li><code>'a'-'z'</code>, <code>'A'-'Z'</code>,</li>
-<li>String mixin <code>0-9</code></li>
+<li>String mix with <code>0-9</code></li>
 <li><code>'#'</code>, <code>'-'</code>, <code>'.'</code></li>
 </ul>
 </li>
@@ -5550,7 +5564,27 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
 
-<p>These events will be emitted under this method</p>
+<p>These <a href="./#events">events</a> will be emitted under this method.</p>
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</code></pre></div>
+
+<p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
+<h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="skip-any-tag-startany-tag-end-event">Skip any-tag-start/any-tag-end event<a class="headerlink" href="#skip-any-tag-startany-tag-end-event" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">skipEvent</span><span class="p">();</span>
+</code></pre></div>
+
+<p>When getting a tag-start, or a tag-end event, parser will emitts </p>
+<ul>
+<li>Tag-start : <code>'+TAG'</code>, then <code>'+'</code></li>
+<li>Tag-end : <code>'-TAG'</code>, then <code>'-'</code></li>
+</ul>
+<p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Parsing start
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
@@ -5573,26 +5607,13 @@
 <li>Parsing end
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
+<li>On pause
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>On resume
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
 </ul>
-<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</code></pre></div>
-
-<p>Invoke this method during tag-start,tag-end, or content events to suspend parsing.</p>
-<h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
-</code></pre></div>
-
-<h3 id="skip-any-tag-startany-tag-end-event">Skip any-tag-start/any-tag-end event<a class="headerlink" href="#skip-any-tag-startany-tag-end-event" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">skipEvent</span><span class="p">();</span>
-</code></pre></div>
-
-<p>When getting a tag-start, or a tag-end event, parser will emitts </p>
-<ul>
-<li>Tag-start : <code>'+TAG'</code>, then <code>'+'</code></li>
-<li>Tag-end : <code>'-TAG'</code>, then <code>'-'</code></li>
-</ul>
-<p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
                 
                   
                 

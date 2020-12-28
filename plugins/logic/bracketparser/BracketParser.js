@@ -107,7 +107,11 @@ class BracketParser {
     }
 
     next() {
-        this.isPaused = false;
+        if (this.isPaused) {
+            this.isPaused = false;
+            this.onResume();
+        }
+
         var text = this.source,
             lastIndex = text.length;
 
@@ -148,7 +152,10 @@ class BracketParser {
     }
 
     pause() {
-        this.isPaused = true;
+        if (!this.isPaused) {
+            this.isPaused = true;
+            this.onPause();
+        }
         return this;
     }
 
@@ -193,6 +200,14 @@ class BracketParser {
     onComplete() {
         this.emit('complete');
         this.resetIndex();
+    }
+
+    onPause() {
+        this.emit('pause');
+    }
+
+    onResume() {
+        this.emit('resume');
     }
 }
 
