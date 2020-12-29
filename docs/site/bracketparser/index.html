@@ -3471,6 +3471,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5429,6 +5436,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5624,6 +5638,19 @@
 <li>Tag-end : <code>'-TAG'</code>, then <code>'-'</code></li>
 </ul>
 <p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is parsing
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>true</code> : Has remainder characters</li>
+<li><code>false</code> : After parsing last character</li>
+</ul>
+</li>
+<li>Is paused
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="tagscontent">Tags/Content<a class="headerlink" href="#tagscontent" title="Permanent link">&para;</a></h4>
 <ul>

@@ -22,6 +22,7 @@ class BracketParser {
         var brackets = GetValue(config, 'brackets', '<>');
         this.setBrackets(brackets[0], brackets[1]);
 
+        this.isRunning = false;
         this.isPaused = false;
         this.skipEventFlag = false;
         this.lastTagStart = null;
@@ -108,7 +109,6 @@ class BracketParser {
 
     next() {
         if (this.isPaused) {
-            this.isPaused = false;
             this.onResume();
         }
 
@@ -153,7 +153,6 @@ class BracketParser {
 
     pause() {
         if (!this.isPaused) {
-            this.isPaused = true;
             this.onPause();
         }
         return this;
@@ -194,19 +193,23 @@ class BracketParser {
     }
 
     onStart() {
+        this.isRunning = true;
         this.emit('start');
     }
 
     onComplete() {
+        this.isRunning = false;
         this.emit('complete');
         this.resetIndex();
     }
 
     onPause() {
+        this.isPaused = true;
         this.emit('pause');
     }
 
     onResume() {
+        this.isPaused = false;
         this.emit('resume');
     }
 }

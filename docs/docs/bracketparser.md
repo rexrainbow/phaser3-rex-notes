@@ -153,6 +153,19 @@ When getting a tag-start, or a tag-end event, parser will emitts
 
 Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` event.
 
+### Status
+
+- Is parsing
+    ```javascript
+    var isRunning = parser.isRunning;
+    ```
+    - `true` : Has remainder characters
+    - `false` : After parsing last character
+- Is paused
+    ```javascript
+    var isPaused = parser.isPaused;
+    ```
+
 ### Events
 
 #### Tags/Content
