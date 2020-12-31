@@ -147,7 +147,24 @@ Default style
 }
 ```
 
-Add text from JSON
+or
+
+```javascript
+var txt = scene.add.rexBBCodeText({
+    x: 0,
+    y: 0,
+    text: '',
+    style: {
+        fontSize: '64px',
+        fontFamily: 'Arial',
+        color: '#ffffff',
+        align: 'center',
+        backgroundColor: '#ff00ff'
+    }
+})
+```
+
+or
 
 ```javascript
 var txt = scene.make.rexBBCodeText({

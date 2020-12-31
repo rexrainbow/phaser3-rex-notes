@@ -150,7 +150,23 @@ Default style
 }
 ```
 
-Add text from JSON
+```javascript
+var txt = scene.add.rexTagText({
+    x: 0,
+    y: 0,
+    text: '',
+    style: {
+        fontSize: '64px',
+        fontFamily: 'Arial',
+        color: '#ffffff',
+        align: 'center',
+        backgroundColor: '#ff00ff',
+        tags: {}
+    }
+})
+```
+
+or
 
 ```javascript
 var txt = scene.make.rexTagText({

@@ -5,6 +5,7 @@ import Pool from '../../../pool.js';
 import CONST from './const.js';
 import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const GameObject = Phaser.GameObjects.GameObject;
@@ -16,6 +17,13 @@ var PensPools = {};
 
 class Text extends GameObject {
     constructor(scene, x, y, text, style, type, parser) {
+        if (IsPlainObject(x)) {
+            var config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            text = GetValue(config, 'text', '');
+            style = GetValue(config, 'style', '');
+        }
         if (x === undefined) {
             x = 0;
         }
