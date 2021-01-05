@@ -7,6 +7,7 @@ const Clamp = Phaser.Math.Clamp;
 class GlowFilterPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexGlowFilterPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

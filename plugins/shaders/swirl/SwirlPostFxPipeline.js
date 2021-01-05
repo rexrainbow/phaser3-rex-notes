@@ -8,6 +8,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class SwirlPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexSwirlPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

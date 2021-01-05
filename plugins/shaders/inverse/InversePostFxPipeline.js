@@ -7,6 +7,7 @@ const Clamp = Phaser.Math.Clamp;
 class InversePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexInversePostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

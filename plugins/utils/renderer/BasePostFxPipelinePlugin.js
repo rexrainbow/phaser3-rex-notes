@@ -15,9 +15,18 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
+        if (config === undefined) {
+            config = {};
+        }
+
         gameObject.setPostPipeline(this.PostFxPipelineClass);
         var pipeline = gameObject.postPipelines[gameObject.postPipelines.length - 1];
         pipeline.resetFromJSON(config);
+
+        if (config.name) {
+            pipeline.name = config.name;
+        }
+
         return pipeline;
     }
 
@@ -37,7 +46,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
                 var instance = pipelines[i];
-                if (instance.name === name) {
+                if ((instance instanceof this.PostFxPipelineClass) && (instance.name === name)) {
                     instance.destroy();
                     SpliceOne(pipelines, i);
                 }
@@ -60,7 +69,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
                 var instance = pipelines[i];
-                if (instance.name === name) {
+                if ((instance instanceof this.PostFxPipelineClass) && (instance.name === name)) {
                     return instance;
                 }
             }

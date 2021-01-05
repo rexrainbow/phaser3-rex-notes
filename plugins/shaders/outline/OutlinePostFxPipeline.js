@@ -8,6 +8,7 @@ const Color = Phaser.Display.Color;
 class OutlinePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexOutlinePostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

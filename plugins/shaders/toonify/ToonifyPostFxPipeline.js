@@ -8,6 +8,7 @@ const Color = Phaser.Display.Color;
 class ToonifyPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexToonifyPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

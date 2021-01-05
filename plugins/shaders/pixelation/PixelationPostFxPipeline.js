@@ -7,6 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class PixelationPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexPixelationPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

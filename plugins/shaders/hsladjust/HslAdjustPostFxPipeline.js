@@ -6,6 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class HslAdjustPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexHslAdjustPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc

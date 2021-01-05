@@ -7,6 +7,7 @@ const Clamp = Phaser.Math.Clamp;
 class GrayScalePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
+            name: 'rexGrayScalePostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc
