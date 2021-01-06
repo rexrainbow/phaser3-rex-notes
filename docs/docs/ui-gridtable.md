@@ -9,7 +9,9 @@ A container with a [grid table](gridtable.md), slider, and scroller.
 
 - [Grid table](https://codepen.io/rexrainbow/pen/XyJbWX)
 - [Varying cell size](https://codepen.io/rexrainbow/pen/vYBdNQy)
-- [Sizer cell](https://codepen.io/rexrainbow/pen/pooZWme)
+- Sizer cell: 
+    - [Demo 1](https://codepen.io/rexrainbow/pen/pooZWme)
+    - [Demo 2](https://codepen.io/rexrainbow/pen/abOgyPo)
 - [Fade-out-destroy cell](https://codepen.io/rexrainbow/pen/YzXYemw)
 
 ## Usage
