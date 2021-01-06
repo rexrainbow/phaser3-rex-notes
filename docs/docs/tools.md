@@ -1,4 +1,4 @@
-## Texture altas
+## Texture atlas
 
 ### Texture-packer
 

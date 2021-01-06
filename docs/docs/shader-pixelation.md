@@ -97,7 +97,9 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
     ```javascript
     var pipelineInstance = scene.plugins.get('rexPixelationPipeline').add(gameObject, {
         // pixelWidth: 0,
-        // pixelHeight: 0
+        // pixelHeight: 0,
+
+        // nane: 'rexPixelationPostFx'
     });
     ```
     - `pixelWidth`, `pixelHeight` : Pixel size.

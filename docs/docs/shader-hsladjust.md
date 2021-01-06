@@ -99,6 +99,8 @@ Adjust color in HSL domain, post processing filter.
         // hueRotate: 0,
         // satAdjust: 1,
         // lumAdjust: 0.5,
+
+        // nane: 'rexHslAdjustPostFx'
     });
     ```
     - `hueRotate` : Hue rotation

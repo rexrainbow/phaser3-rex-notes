@@ -92,7 +92,9 @@ Inverse color post processing filter.
 - Apply effect to game object. A game object only can add 1 inverse effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexInversePipeline').add(gameObject, {
-        // intensity: 1
+        // intensity: 1,
+
+        // nane: 'rexInversePostFx'
     });
     ```
     - `intensity` : 0(original color) ~ 1(inverse scale). Default value is `1`.

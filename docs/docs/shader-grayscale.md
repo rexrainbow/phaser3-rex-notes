@@ -96,7 +96,8 @@ Gray scale post processing filter.
 - Apply effect to game object. A game object only can add 1 gray-scale effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(gameObject, {
-        // intensity: 1
+        // intensity: 1,
+        // nane: 'rexGrayScalePostFx'
     });
     ```
     - `intensity` : 0(original color) ~ 1(gray scale). Default value is `1`.

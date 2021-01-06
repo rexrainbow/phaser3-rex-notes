@@ -97,7 +97,9 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     ```javascript
     var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(gameObject, {
         // thickness: 3,
-        // outlineColor: 0x000000
+        // outlineColor: 0x000000,
+
+        // nane: 'rexOutlinePostFx'
     });
     ```
     - `thickness` : Thickness of outline.
