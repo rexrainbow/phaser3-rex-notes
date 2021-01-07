@@ -49,11 +49,9 @@ var CanMoveToTile = function (tileX, tileY, direction) {
         }
     }
 
-    // Sneak mode
-    if (this.sneakMode) {
-        // Sneak tileZ in MoveToTile method
-        return true;
-    }
+    // Sneak mode, change tileZ in MoveToTile method
+    // if (this.sneakMode) {
+    // }
 
     // Occupied test
     if (this.occupiedTest && !this.sneakMode) {
