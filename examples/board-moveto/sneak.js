@@ -7,14 +7,14 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
-            width: 8,
-            height: 8,
+            width: 6,
+            height: 6,
             // wrap: true
         }
         var board = new Board(this, config);
@@ -25,8 +25,15 @@ class Demo extends Phaser.Scene {
         }
 
         // add chess
-        var chessA = new ChessA(board);
-        chessA.wander();
+        for (var i = 0; i < 20; i++) {
+            var chessA = new ChessA(board);
+            chessA.wander();
+        }
+
+        board.on('kickout', function () {
+            debugger
+            console.log('kickout')
+        })
     }
 }
 

@@ -1,12 +1,9 @@
-var GetSneakTileZ = function (originTileZ) {
-    var board = this.chessData.board;
-    var myTileXYZ = this.chessData.tileXYZ;
-    var myTileX = myTileXYZ.x,
-        myTileY = myTileXYZ.y;
-    var sneakTileZ = originTileZ.toString();
+var GetSneakTileZ = function (moveTo, tileX, tileY, tileZ) {
+    var board = moveTo.chessData.board;
+    var sneakTileZ = tileZ.toString();
     do {
         sneakTileZ += '.';
-    } while (board.contains(myTileX, myTileY, sneakTileZ))
+    } while (board.contains(tileX, tileY, sneakTileZ))
     return sneakTileZ;
 }
 

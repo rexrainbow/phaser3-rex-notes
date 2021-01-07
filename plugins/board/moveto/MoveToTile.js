@@ -1,4 +1,5 @@
 import GetValue from '../../utils/object/GetValue.js';
+import GetSneakTileZ from './GetSneakTileZ.js';
 
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
@@ -81,7 +82,27 @@ var MoveToTile = function (tileX, tileY, direction) {
         var out = board.tileXYToWorldXY(tileX, tileY, true);
         this.moveAlongLine(undefined, undefined, out.x, out.y);
     }
-    board.moveChess(this.gameObject, tileX, tileY, undefined, false);
+
+    var tileZ = myTileXYZ.z;
+    if (this.sneakMode) {
+        if (this.tileZSave === undefined) {
+            if (board.contains(tileX, tileY, tileZ)) {
+                // Sneak
+                this.tileZSave = tileZ;
+                tileZ = GetSneakTileZ(this, tileX, tileY, this.tileZSave);
+            }
+        } else {
+            if (board.contains(tileX, tileY, this.tileZSave)) {
+                // Sneak
+                tileZ = GetSneakTileZ(this, tileX, tileY, this.tileZSave);
+            } else {
+                // Go back
+                tileZ = this.tileZSave;
+                this.tileZSave = undefined;
+            }
+        }
+    }
+    board.moveChess(this.gameObject, tileX, tileY, tileZ, false);
 
     this.isRunning = true;
     this.lastMoveResult = true;
