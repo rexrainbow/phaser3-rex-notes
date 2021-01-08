@@ -1,4 +1,4 @@
-import OutlinePostFxPipeline from './OutlinePipeline.js';
+import OutlinePostFxPipeline from './outlinepipeline.js';
 import BasePostFxPipelinePlugin from './utils/renderer/BasePostFxPipelinePlugin.js';
 import SetValue from './utils/object/SetValue.js';
 
