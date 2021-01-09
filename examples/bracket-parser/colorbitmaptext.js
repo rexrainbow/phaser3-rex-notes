@@ -41,7 +41,7 @@ var SetColorText = function (bitmapText, text) {
 
     var colorFlag = null;
     var parser = bitmapText.scene.plugins.get('rexBracketParserPlugin').add({
-        brackets: '[]'
+        delimiters: '[]'
     })
         .on('+color', function (color) {
             if (typeof (color) === 'string') {

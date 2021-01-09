@@ -1,6 +1,6 @@
 ## Introduction
 
-A lite-weight bracket parser.
+A lite-weight delimiter parser.
 
 - Author: Rex
 - Object
@@ -12,7 +12,7 @@ A lite-weight bracket parser.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bracket-parser)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/delimiter-parser)
 
 ### Install plugin
 
@@ -75,7 +75,7 @@ A lite-weight bracket parser.
 
 ```javascript
 var parser = scene.plugins.get('rexBracketParser').add({
-    // brackets: '<>', // or ['<', '>']
+    // delimiters: '<>', // or ['<', '>']
     // valueConvert: true,
     // regex : {
     //     tag: '[a-z0-9-_.]+',
@@ -84,7 +84,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
 });
 ```
 
-- `brackets`: String of left-bracket and right-bracket.
+- `delimiters`: String of left-delimiter and right-delimiter.
     - A single string with 2 characters. Default value is `'<>'`.
     - A array with 2 strings
 - `valueConvert` : A callback to convert values.
@@ -102,7 +102,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
 
 #### Tag and content
 
-Assume that left-bracket and right-bracket is `'<>'`
+Assume that left-delimiter and right-delimiter is `'<>'`
 
 - Tag-start : `'<TAG>'`
     - Tag-start with a single value : `'<TAG=value>'`

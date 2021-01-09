@@ -5496,7 +5496,7 @@
                   <h1>Bracket parser</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A lite-weight bracket parser.</p>
+<p>A lite-weight delimiter parser.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Object</li>
@@ -5507,7 +5507,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/vYXWmMN">Markup text</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bracket-parser">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/delimiter-parser">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5558,7 +5558,7 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBracketParser&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
-    <span class="c1">// brackets: &#39;&lt;&gt;&#39;, // or [&#39;&lt;&#39;, &#39;&gt;&#39;]</span>
+    <span class="c1">// delimiters: &#39;&lt;&gt;&#39;, // or [&#39;&lt;&#39;, &#39;&gt;&#39;]</span>
     <span class="c1">// valueConvert: true,</span>
     <span class="c1">// regex : {</span>
     <span class="c1">//     tag: &#39;[a-z0-9-_.]+&#39;,</span>
@@ -5568,7 +5568,7 @@
 </code></pre></div>
 
 <ul>
-<li><code>brackets</code>: String of left-bracket and right-bracket.<ul>
+<li><code>delimiters</code>: String of left-delimiter and right-delimiter.<ul>
 <li>A single string with 2 characters. Default value is <code>'&lt;&gt;'</code>.</li>
 <li>A array with 2 strings</li>
 </ul>
@@ -5590,7 +5590,7 @@
 </li>
 </ul>
 <h4 id="tag-and-content">Tag and content<a class="headerlink" href="#tag-and-content" title="Permanent link">&para;</a></h4>
-<p>Assume that left-bracket and right-bracket is <code>'&lt;&gt;'</code></p>
+<p>Assume that left-delimiter and right-delimiter is <code>'&lt;&gt;'</code></p>
 <ul>
 <li>Tag-start : <code>'&lt;TAG&gt;'</code><ul>
 <li>Tag-start with a single value : <code>'&lt;TAG=value&gt;'</code><ul>

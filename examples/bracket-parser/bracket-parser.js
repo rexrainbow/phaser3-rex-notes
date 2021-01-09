@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     create() {
         var source = '<fn0>Hello<fn1=0>World<pause><fn2=abcd, -3.2, 1.5><aa>Phaser3</aa>End';
         var parser = this.plugins.get('rexBracketParserPlugin').add({
-            // brackets: '<>'
+            // delimiters: '<>'
         });
         parser
             .on('content', function (content) {

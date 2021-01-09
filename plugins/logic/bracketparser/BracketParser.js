@@ -19,8 +19,8 @@ class BracketParser {
         // Value convert
         this.setValueConverter(GetValue(config, 'valueConvert', true));
         // Brackets and generate regex
-        var brackets = GetValue(config, 'brackets', '<>');
-        this.setBrackets(brackets[0], brackets[1]);
+        var delimiters = GetValue(config, 'delimiters', '<>');
+        this.setDelimiters(delimiters[0], delimiters[1]);
 
         this.isRunning = false;
         this.isPaused = false;
@@ -58,18 +58,18 @@ class BracketParser {
         return this;
     }
 
-    setBrackets(bracketLeft, bracketRight) {
-        if (bracketRight === undefined) {
-            bracketRight = bracketLeft[1];
-            bracketLeft = bracketLeft[0];
+    setDelimiters(delimiterLeft, delimiterRight) {
+        if (delimiterRight === undefined) {
+            delimiterRight = delimiterLeft[1];
+            delimiterLeft = delimiterLeft[0];
         }
-        this.bracketLeft = bracketLeft;
-        this.bracketRight = bracketRight;
+        this.delimiterLeft = delimiterLeft;
+        this.delimiterRight = delimiterRight;
 
-        bracketLeft = EscapeRegex(bracketLeft);
-        bracketRight = EscapeRegex(bracketRight);
-        var tagOn = `${bracketLeft}(${this.tagExpression})(=(${this.valueExpression}))?${bracketRight}`;
-        var tagOff = `${bracketLeft}\/(${this.tagExpression})${bracketRight}`;
+        delimiterLeft = EscapeRegex(delimiterLeft);
+        delimiterRight = EscapeRegex(delimiterRight);
+        var tagOn = `${delimiterLeft}(${this.tagExpression})(=(${this.valueExpression}))?${delimiterRight}`;
+        var tagOff = `${delimiterLeft}\/(${this.tagExpression})${delimiterRight}`;
 
         this.reTagOn = RegExp(tagOn, 'i');
         this.reTagOff = RegExp(tagOff, 'i');
