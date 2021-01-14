@@ -23,8 +23,9 @@ var StrokePathWebGL = require('../../utils/StrokePathWebGL');
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix)
-{
+var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+    camera.addToRenderList(src);
+
     var pipeline = renderer.pipelines.set(this.pipeline);
 
     var result = GetCalcMatrix(src, camera, parentMatrix);
@@ -36,13 +37,11 @@ var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix)
 
     var alpha = camera.alpha * src.alpha;
 
-    if (src.isFilled)
-    {
+    if (src.isFilled) {
         FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
     }
 
-    if (src.isStroked)
-    {
+    if (src.isStroked) {
         StrokePathWebGL(pipeline, src, alpha, dx, dy);
     }
 };

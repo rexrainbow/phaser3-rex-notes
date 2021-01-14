@@ -12,6 +12,8 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
         return;
     }
 
+    camera.addToRenderList(src);
+
     var frame = src.frame;
     var width = frame.width;
     var height = frame.height;
