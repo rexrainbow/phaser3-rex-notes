@@ -272,10 +272,12 @@ layer.setRenderOrder(renderOrder);
         - `-1` : Empty tile.
 - Weight randomize current layer
     ```javascript
-    map.weightedRandomize(tileX, tileY, width, height, {
-        { index: 0, weight: 4 },
-        { index: [0, 1], weight: 4 }
-    });
+    map.weightedRandomize(
+        {
+            { index: 0, weight: 4 },
+            { index: [0, 1], weight: 4 }
+        },
+        tileX, tileY, width, height);
     ```
 - Randomize layer
     ```javascript
@@ -288,10 +290,12 @@ layer.setRenderOrder(renderOrder);
     - `indexes` An array of tile indexes.
 - Weight randomize layer
     ```javascript
-    layer.weightedRandomize(tileX, tileY, width, height, {
-        { index: 0, weight: 4 },
-        { index: [0, 1], weight: 4 }
-    });
+    layer.weightedRandomize(
+        {
+            { index: 0, weight: 4 },
+            { index: [0, 1], weight: 4 }
+        },
+        tileX, tileY, width, height);
     ```
 
 #### Copy tiles

@@ -360,3 +360,11 @@ camera.clearRenderToTexture();
     ```
 
 See also: [gameObject.willRender(camera)](gameobject.md/#will-render)
+
+#### Render children
+
+```javascript
+var children = camera.renderList;
+```
+
+Read only.

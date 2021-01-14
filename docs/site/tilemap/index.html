@@ -6169,10 +6169,12 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 </ul>
 </li>
 <li>Weight randomize current layer
-    <div class="codehilite"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
-<span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Randomize layer
     <div class="codehilite"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">randomize</span><span class="p">();</span>  <span class="c1">// Randomize all grids</span>
@@ -6184,10 +6186,12 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 </ul>
 </li>
 <li>Weight randomize layer
-    <div class="codehilite"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
-    <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
-<span class="p">});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="copy-tiles">Copy tiles<a class="headerlink" href="#copy-tiles" title="Permanent link">&para;</a></h4>

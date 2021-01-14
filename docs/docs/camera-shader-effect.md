@@ -40,7 +40,7 @@ camera.setPostPipeline(PostFxClass);
 
 ### Remove post-fx pipeline
 
-- Remove a post-fx pipeline
+- Remove a kind of post-fx pipeline
     ```javascript
     camera.removePostPipeline(PostFxClass);
     ```
@@ -59,3 +59,7 @@ camera.setPostPipeline(PostFxClass);
 ```javascript
 var pipelineInstance = camera.getPostPipeline(PostFxClass);
 ```
+
+- `pipelineInstance` : 
+    - A pipeline instance
+    - An array of pipeline instances
