@@ -215,3 +215,35 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `index` : Index of triggered button.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
+- Expand(Pop-up start) sub-menu
+    ```javascript
+    menu.on('expand', function(subMenu, parentButton) {
+        // ....
+    }, scope)
+    ```
+    - `subMenu` : Sub-menu.
+    - `parentButton` : Game object of triggered button.
+    - `rootMenu` : Root-menu
+- Pop-up root-menu, or sub-menu completely
+    ```javascript
+    menu.on('popup.complete', function(menu) {
+        // ....
+    }, scope)
+    ```
+    - `menu` : Root-menu, or sub-menu
+- Collapse(Scale-down starting) root-menu, or sub-menu
+    ```javascript
+    menu.on('collapse', function(subMenu, parentButton, rootMenu) {
+        // ....
+    }, scope)
+    ```
+    - `subMenu` : Sub-menu.
+    - `parentButton` : Game object of triggered button.
+    - `rootMenu` : Root-menu
+- Scale-down root-menu completely
+    ```javascript
+    menu.on('scaledown.complete', function(rootMenu) {
+        // ....
+    }, scope)
+    ```
+    - `rootMenu` : Root-menu

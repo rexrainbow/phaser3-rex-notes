@@ -70,30 +70,29 @@ class Fade extends TweenBase {
         }
 
         this.sound.setVolume(this.volume.start);
-        super.start({
+        var config = {
             targets: this.sound,
             volume: this.volume.end,
 
             delay: this.delay,
             duration: this.duration,
-            ease: 'Linear'
-        });
+            ease: 'Linear',
+            onComplete: function () {
+                switch (this.mode) {
+                    case 1:
+                        this.sound.stop();
+                        break;
+                    case 2:
+                        this.sound.destroy();
+                        break;
+                }
+            },
+            onCompleteScope: this
+        }
+        super.start(config);
 
         return this;
     }
-
-    complete() {
-        super.complete();
-        switch (this.mode) {
-            case 1:
-                this.sound.stop();
-                break;
-            case 2:
-                this.sound.destroy();
-                break;
-        }
-    }
-
 }
 
 const MODE = {

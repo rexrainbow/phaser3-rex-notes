@@ -71,7 +71,7 @@ class Fade extends TweenBase {
 
         // Set alpha to start value now
         this.gameObject.setAlpha(this.alphaStart);
-        super.start({
+        var config = {
             targets: this.gameObject,
             alpha: this.alphaEnd,
 
@@ -79,19 +79,17 @@ class Fade extends TweenBase {
             duration: this.duration,
             ease: 'Linear',
             yoyo: (this.mode == 2),
-            repeat: ((this.mode == 2) ? -1 : 0)
-        });
-        return this;
-    }
-
-    complete() {
-        super.complete();
-        if (this.mode === 1) {
-            this.gameObject.destroy();
+            repeat: ((this.mode == 2) ? -1 : 0),
+            onComplete: function () {
+                if (this.mode === 1) {
+                    this.gameObject.destroy();
+                }
+            },
+            onCompleteScope: this
         }
+        super.start(config);
         return this;
     }
-
 }
 
 const MODE = {

@@ -5630,6 +5630,42 @@
 <li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
 </ul>
 </li>
+<li>Expand(Pop-up start) sub-menu
+    <div class="codehilite"><pre><span></span><code><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;expand&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">subMenu</span><span class="p">,</span> <span class="nx">parentButton</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>subMenu</code> : Sub-menu.</li>
+<li><code>parentButton</code> : Game object of triggered button.</li>
+<li><code>rootMenu</code> : Root-menu</li>
+</ul>
+</li>
+<li>Pop-up root-menu, or sub-menu completely
+    <div class="codehilite"><pre><span></span><code><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;popup.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">menu</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>menu</code> : Root-menu, or sub-menu</li>
+</ul>
+</li>
+<li>Collapse(Scale-down starting) root-menu, or sub-menu
+    <div class="codehilite"><pre><span></span><code><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;collapse&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">subMenu</span><span class="p">,</span> <span class="nx">parentButton</span><span class="p">,</span> <span class="nx">rootMenu</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>subMenu</code> : Sub-menu.</li>
+<li><code>parentButton</code> : Game object of triggered button.</li>
+<li><code>rootMenu</code> : Root-menu</li>
+</ul>
+</li>
+<li>Scale-down root-menu completely
+    <div class="codehilite"><pre><span></span><code><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;scaledown.complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rootMenu</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</code></pre></div><ul>
+<li><code>rootMenu</code> : Root-menu</li>
+</ul>
+</li>
 </ul>
                 
                   

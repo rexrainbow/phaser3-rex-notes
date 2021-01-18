@@ -93,7 +93,13 @@ class Scale extends TweenBase {
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),
-            repeat: ((this.mode == 2) ? -1 : 0)
+            repeat: ((this.mode == 2) ? -1 : 0),
+            onComplete: function () {
+                if (this.mode === 1) {
+                    this.gameObject.destroy();
+                }
+            },
+            onCompleteScope: this
         }
         // Set scale to start value now
         if ((this.startX !== undefined) && (this.endX !== undefined)) {
@@ -107,15 +113,6 @@ class Scale extends TweenBase {
         super.start(config);
         return this;
     }
-
-    complete() {
-        super.complete();
-        if (this.mode === 1) {
-            this.gameObject.destroy();
-        }
-        return this;
-    }
-
 }
 
 const MODE = {
