@@ -23,6 +23,7 @@ var ExpandSubMenu = function (parentButton, items) {
         _parentMenu: this,
         _parentButton: parentButton
     });
+
     this.pin(subMenu);
     this.childrenMap.subMenu = subMenu;
     this.root.emit('expand', subMenu, parentButton, this);

@@ -119,6 +119,12 @@ var createMenu = function (scene, x, y, items, onClick) {
         .on('button.click', function (button) {
             onClick(button);
         })
+        .on('popup.complete', function (subMenu) {
+            console.log('popup.complete')
+        })
+        .on('scaledown.complete', function () {
+            console.log('scaledown.complete')
+        })
 
     return menu;
 }

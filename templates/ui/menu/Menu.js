@@ -37,7 +37,7 @@ class Menu extends Buttons {
         super(scene, config);
         this.type = 'rexMenu';
 
-        this.items = items;        
+        this.items = items;
         this.root = (rootMenu === undefined) ? this : rootMenu;
         this.parentMenu = parentMenu;
         this.parentButton = parentButton;
@@ -107,6 +107,12 @@ class Menu extends Buttons {
 
         // Ease in menu
         this.popUp(GetEaseConfig(this, this.root.easeIn));
+        this.once('popup.complete', function () {
+             // Pass event to root menu object
+            if (this !== this.root) {
+                this.root.emit('popup.complete', this);
+            }
+        }, this);
     }
 
     isInTouching(pointer) {
