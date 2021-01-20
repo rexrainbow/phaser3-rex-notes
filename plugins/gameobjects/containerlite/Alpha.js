@@ -1,4 +1,4 @@
-import Scale from './Scale.js';
+import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildAlpha(child) {
@@ -14,14 +14,14 @@ export default {
     },
 
     resetChildAlphaState(gameObject) {
-        this.getLocalState(gameObject).alpha = Scale(gameObject.alpha, this.alpha);
+        this.getLocalState(gameObject).alpha = GetScale(gameObject.alpha, this.alpha);
         return this;
     },
     
     setChildAlpha(gameObject, alpha) {
         gameObject.alpha = alpha;
         this.resetChildAlphaState(gameObject);
-        return this._add;
+        return this;
     },
     
     setChildLocalAlpha(gameObject, alpha) {

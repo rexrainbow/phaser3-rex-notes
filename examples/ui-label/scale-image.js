@@ -34,7 +34,15 @@ class Demo extends Phaser.Scene {
             }
         })
             .layout()
-            .setPosition(400, 300)
+            .setPosition(200, 300)
+
+        this.input.once('pointerup', function () {
+            label.getElement('icon').setDisplaySize(36, 36);
+            label.layout().setPosition(400, 300);
+
+            //label.resetChildScaleState(label.getElement('icon').setDisplaySize(36, 36))
+            //label.setPosition(400, 300).layout()
+        })
     }
 
     update() { }

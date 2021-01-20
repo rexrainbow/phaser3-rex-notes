@@ -1,4 +1,4 @@
-import Scale from './Scale.js';
+import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildPosition(child) {
@@ -40,8 +40,8 @@ export default {
         state.y = gameObject.y;
         this.worldToLocal(state);
 
-        state.scaleX = Scale(gameObject.scaleX, this.scaleX);
-        state.scaleY = Scale(gameObject.scaleY, this.scaleY);
+        state.scaleX = GetScale(gameObject.scaleX, this.scaleX);
+        state.scaleY = GetScale(gameObject.scaleY, this.scaleY);
 
         if (gameObject.flipX !== undefined) {
             state.flipX = gameObject.flipX;

@@ -259,6 +259,12 @@ Reference [Group](group.md)
 container.setChildPosition(child, x, y);
 ```
 
+#### Scale
+
+```javascript
+container.setChildScale(child, scaleX, scaleY);
+```
+
 #### Visible
 
 ```javascript
@@ -297,6 +303,10 @@ var localState = child.rexContainer;
 - Local position
     ```javascript
     container.setChildLocalPosition(child, x, y);
+    ```
+- Local scale
+    ```javascript
+    container.setChildLocalScale(child, scaleX, scaleY);
     ```
 
 #### Tween local state
