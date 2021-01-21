@@ -151,7 +151,7 @@ var menu = scene.rexUI.add.menu({
     - An object :
         - `easeOut.duration` : Duration of ease, in milliseconds.
         - `easeOut.ease` : Ease function, default is `'Linear'`
-        - `easeIn.orientation` : Orientation of ease.
+        - `easeOut.orientation` : Orientation of ease.
             - `undefined` : The same orientation with menu's orientation.
             -  `'h'`, `'x'`, or `0` : Scale-down menu horizontally.
             -  `'v'`, `'y'`, or `1` : Scale-down menu vertically.
