@@ -5490,12 +5490,14 @@
     <span class="nx">easeIn</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// easeIn: {</span>
     <span class="c1">//     duration: 500,</span>
+    <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Cubic&#39;</span>
     <span class="c1">// },</span>
 
     <span class="nx">easeOut</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// easeOut: {</span>
     <span class="c1">//     duration: 100,</span>
+    <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Linear&#39;</span>
     <span class="c1">// },</span>
     <span class="c1">// expandEvent: &#39;button.click&#39;</span>
@@ -5548,6 +5550,12 @@
 <li>An object :<ul>
 <li><code>easeIn.duration</code> : Duration of ease, in milliseconds.</li>
 <li><code>easeIn.ease</code> : Ease function, default is <code>'Cubic'</code></li>
+<li><code>easeIn.orientation</code> : Orientation of ease.<ul>
+<li><code>undefined</code> : The same orientation with menu's orientation.</li>
+<li><code>'h'</code>, <code>'x'</code>, or <code>0</code> : Pop-up menu horizontally.</li>
+<li><code>'v'</code>, <code>'y'</code>, or <code>1</code> : Pop-up menu vertically.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -5557,6 +5565,12 @@
 <li>An object :<ul>
 <li><code>easeOut.duration</code> : Duration of ease, in milliseconds.</li>
 <li><code>easeOut.ease</code> : Ease function, default is <code>'Linear'</code></li>
+<li><code>easeIn.orientation</code> : Orientation of ease.<ul>
+<li><code>undefined</code> : The same orientation with menu's orientation.</li>
+<li><code>'h'</code>, <code>'x'</code>, or <code>0</code> : Scale-down menu horizontally.</li>
+<li><code>'v'</code>, <code>'y'</code>, or <code>1</code> : Scale-down menu vertically.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

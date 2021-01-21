@@ -82,9 +82,13 @@ class Demo extends Phaser.Scene {
 }
 
 var createMenu = function (scene, x, y, items, onClick) {
+    var exapndOrientation = 'y';
+    var easeOrientation = 'y';
+
     var menu = scene.rexUI.add.menu({
         x: x,
         y: y,
+        orientation: exapndOrientation,
 
         items: items,
         createButtonCallback: function (item, i, items) {
@@ -104,8 +108,18 @@ var createMenu = function (scene, x, y, items, onClick) {
             })
         },
 
-        easeIn: 500,
-        easeOut: 100,
+        // easeIn: 500,
+        easeIn: {
+            duration: 500,
+            orientation: easeOrientation
+        },
+
+        // easeOut: 100,
+        easeOut: {
+            duration: 100,
+            orientation: easeOrientation
+        }
+
         // expandEvent: 'button.over'
     });
 

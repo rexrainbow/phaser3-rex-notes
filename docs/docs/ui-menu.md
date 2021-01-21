@@ -101,12 +101,14 @@ var menu = scene.rexUI.add.menu({
     easeIn: 0,
     // easeIn: {
     //     duration: 500,
+    //     orientation: undefined,
     //     ease: 'Cubic'
     // },
 
     easeOut: 0,
     // easeOut: {
     //     duration: 100,
+    //     orientation: undefined,
     //     ease: 'Linear'
     // },
     // expandEvent: 'button.click'
@@ -140,11 +142,19 @@ var menu = scene.rexUI.add.menu({
     - An object :
         - `easeIn.duration` : Duration of ease, in milliseconds.
         - `easeIn.ease` : Ease function, default is `'Cubic'`
+        - `easeIn.orientation` : Orientation of ease.
+            - `undefined` : The same orientation with menu's orientation.
+            -  `'h'`, `'x'`, or `0` : Pop-up menu horizontally.
+            -  `'v'`, `'y'`, or `1` : Pop-up menu vertically.
 - `easeOut` : Scale down size when extend menu.
     - A number : Duration of ease, in milliseconds.
     - An object :
         - `easeOut.duration` : Duration of ease, in milliseconds.
         - `easeOut.ease` : Ease function, default is `'Linear'`
+        - `easeIn.orientation` : Orientation of ease.
+            - `undefined` : The same orientation with menu's orientation.
+            -  `'h'`, `'x'`, or `0` : Scale-down menu horizontally.
+            -  `'v'`, `'y'`, or `1` : Scale-down menu vertically.
 - `expandEvent` : Event name of expanding sub-menu.
     - `'button.click'` : Default value
     - `'button.over'`

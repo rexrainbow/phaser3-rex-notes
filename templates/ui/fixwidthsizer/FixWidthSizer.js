@@ -1,6 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import ORIENTATIONMODE from '../utils/OrientationConst.js';
+import GetOrientationMode from '../utils/GetOrientationMode.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
 import GetMaxChildHeight from './GetMaxChildHeight.js';
 
@@ -44,10 +44,7 @@ class FixWidthSizer extends BaseSizer {
     }
 
     setOrientation(orientation) {
-        if (typeof (orientation) === 'string') {
-            orientation = ORIENTATIONMODE[orientation];
-        }
-        this.orientation = orientation;
+        this.orientation = GetOrientationMode(orientation);
         return this;
     }
 

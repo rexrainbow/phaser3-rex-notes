@@ -1,6 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import ORIENTATIONMODE from '../utils/OrientationConst.js';
+import GetOrientationMode from '../utils/GetOrientationMode.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -46,11 +46,8 @@ class Sizer extends BaseSizer {
         super.destroy(fromScene);
     }
 
-    setOrientation(orientation) {
-        if (typeof (orientation) === 'string') {
-            orientation = ORIENTATIONMODE[orientation];
-        }
-        this.orientation = orientation;
+    setOrientation(orientation) {        
+        this.orientation = GetOrientationMode(orientation);
         return this;
     }
 

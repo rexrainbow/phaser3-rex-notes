@@ -4,9 +4,14 @@ import CreateBackground from './CreateBackground.js';
 import CreateButtons from './CreateButtons.js';
 import GetDefaultBounds from '../../../plugins/utils/bounds/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
+import GetOrientationMode from '../utils/GetOrientationMode.js';
 import GetEaseConfig from './GetEaseConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const EXPAND_LEFT = 2;
+const EXPAND_RIGHT = 0;
+const EXPAND_UP = 3;
+const EXPAND_DOWN = 1;
 
 class Menu extends Buttons {
     constructor(scene, config) {
@@ -41,8 +46,9 @@ class Menu extends Buttons {
         this.root = (rootMenu === undefined) ? this : rootMenu;
         this.parentMenu = parentMenu;
         this.parentButton = parentButton;
+
         var isRootMenu = (this.root === this);
-        if (isRootMenu) {
+        if (isRootMenu) { // Root menu
             // Bounds
             var bounds = config.bounds;
             if (bounds === undefined) {
@@ -52,17 +58,16 @@ class Menu extends Buttons {
 
             // Expand mode
             this.expandEventName = GetValue(config, 'expandEvent', 'button.click');
+            // Expand orientation
+            this.expandOrientation = [
+                ((this.y < bounds.centerY) ? EXPAND_DOWN : EXPAND_UP),
+                ((this.x < bounds.centerX) ? EXPAND_RIGHT : EXPAND_LEFT)
+            ];
             // toggleOrientation mode
             this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
             // Transition
-            this.easeIn = GetValue(config, 'easeIn', 0);
-            if (typeof (this.easeIn) === 'number') {
-                this.easeIn = { duration: this.easeIn };
-            }
-            this.easeOut = GetValue(config, 'easeOut', 0);
-            if (typeof (this.easeOut) === 'number') {
-                this.easeOut = { duration: this.easeOut };
-            }
+            this.easeIn = ParseEaseConfig(this, GetValue(config, 'easeIn', 0));
+            this.easeOut = ParseEaseConfig(this, GetValue(config, 'easeOut', 0));
             // Callbacks
             this.createBackgroundCallback = createBackgroundCallback;
             this.createBackgroundCallbackScope = createBackgroundCallbackScope;
@@ -71,44 +76,56 @@ class Menu extends Buttons {
 
             // Event flag
             this._isPassedEvent = false;
+        } else {  // Sub-menu
+
         }
+
+        var originX = 0, originY = 0;
+        if (!this.root.easeIn.sameOrientation) {
+            var easeOrientation = GetEaseConfig(this.root.easeIn, this).orientation;
+            var menuOrientation = (parentMenu) ? parentMenu.orientation : this.orientation;
+            var expandOrientation = this.root.expandOrientation[menuOrientation];
+            if ((easeOrientation === 0) && (expandOrientation === EXPAND_LEFT)) {
+                originX = 1;
+            }
+            if ((easeOrientation === 1) && (expandOrientation === EXPAND_UP)) {
+                originY = 1;
+            }
+        }
+
         this
-            .setOrigin(0)
+            .setOrigin(originX, originY)
             .layout();
 
-        var bounds = this.root.bounds;
-        // Align to parentButton
-        if (isRootMenu) {
-            this.expandOrientation = [
-                ((this.y < bounds.centerY) ? 1 : 3), // Expand down(1)/up(3)
-                ((this.x < bounds.centerX) ? 0 : 2)  // Expand right(0)/left(2)
-            ];
-
-        } else { // Sub-menu, align to parent button
+        // Sub-menu, align to parent button
+        if (!isRootMenu) {
             var expandOrientation = this.root.expandOrientation[parentMenu.orientation];
             switch (expandOrientation) {
-                case 0: //Expand right
-                    this.alignTop(parentButton.top).alignLeft(parentButton.right);
-                    break;
-                case 1: //Expand down
-                    this.alignLeft(parentButton.left).alignTop(parentButton.bottom);
-                    break;
-                case 2: //Expand left
+                case EXPAND_LEFT: //Expand left
                     this.alignTop(parentButton.top).alignRight(parentButton.left);
                     break;
-                case 3: //Expand up
+
+                case EXPAND_RIGHT: //Expand right
+                    this.alignTop(parentButton.top).alignLeft(parentButton.right);
+                    break;
+
+                case EXPAND_UP: //Expand up
                     this.alignLeft(parentButton.left).alignBottom(parentButton.top);
+                    break;
+
+                case EXPAND_DOWN: //Expand down
+                    this.alignLeft(parentButton.left).alignTop(parentButton.bottom);
                     break;
             }
         }
-        this.pushIntoBounds(bounds);
+        this.pushIntoBounds(this.root.bounds);
 
         MenuSetInteractive(this);
 
         // Ease in menu
-        this.popUp(GetEaseConfig(this, this.root.easeIn));
+        this.popUp(GetEaseConfig(this.root.easeIn, this));
         this.once('popup.complete', function () {
-             // Pass event to root menu object
+            // Pass event to root menu object
             if (this !== this.root) {
                 this.root.emit('popup.complete', this);
             }
@@ -125,6 +142,22 @@ class Menu extends Buttons {
         }
     }
 }
+
+var ParseEaseConfig = function (menu, easeConfig) {
+    if (typeof (easeConfig) === 'number') {
+        easeConfig = {
+            duration: easeConfig
+        };
+    }
+
+    if (easeConfig.hasOwnProperty('orientation') && (easeConfig.orientation !== undefined)) {
+        easeConfig.sameOrientation = GetOrientationMode(easeConfig.orientation) === menu.orientation;
+    } else {
+        easeConfig.sameOrientation = true;
+    }
+    return easeConfig;
+}
+
 
 Object.assign(
     Menu.prototype,
