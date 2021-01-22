@@ -66,7 +66,7 @@ A container with buttons and sub-menu.
     import { Menu } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
     ```
 - Add menu object
-    ```javascript    
+    ```javascript
     var menu = new Menu(scene, config);
     sscene.add.existing(menu);
     ```
@@ -80,6 +80,7 @@ var menu = scene.rexUI.add.menu({
     // anchor: undefined,
 
     // orientation: 1,
+    // subMenuSide: undefined,
     items: [],
 
     createBackgroundCallback: function(items) {
@@ -111,7 +112,7 @@ var menu = scene.rexUI.add.menu({
     //     orientation: undefined,
     //     ease: 'Linear'
     // },
-    // expandEvent: 'button.click'
+    // expandEvent: 'button.click',
 
     name: ''
 });
@@ -158,6 +159,12 @@ var menu = scene.rexUI.add.menu({
 - `expandEvent` : Event name of expanding sub-menu.
     - `'button.click'` : Default value
     - `'button.over'`
+- `subMenuSide` : Side of sub-menu
+    - `undefined` : Determine side of sub-menu automatically.
+    - `right`, or `0` : Put sub-menu at right side. Used with `orientation` is set to `y`.
+    - `left`, or `2` : Put sub-menu at left side. Used with `orientation` is set to `y`.
+    - `up`, or `3` : Put sub-menu at up side. Used with `orientation` is set to `x`.
+    - `down`, or `1` : Put sub-menu at down side. Used with `orientation` is set to `x`.
 - `name` : Set name of this menu.
 
 ### Custom class

@@ -8,10 +8,6 @@ import GetOrientationMode from '../utils/GetOrientationMode.js';
 import GetEaseConfig from './GetEaseConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const EXPAND_LEFT = 2;
-const EXPAND_RIGHT = 0;
-const EXPAND_UP = 3;
-const EXPAND_DOWN = 1;
 
 class Menu extends Buttons {
     constructor(scene, config) {
@@ -56,15 +52,23 @@ class Menu extends Buttons {
             }
             this.bounds = bounds;
 
+            // Side of submenu
+            this.subMenuSide = [
+                ((this.y < bounds.centerY) ? SUBMENU_DOWN : SUBMENU_UP),
+                ((this.x < bounds.centerX) ? SUBMENU_RIGHT : SUBMENU_LEFT)
+            ];
+            // Overwrite subMenuSide value if given
+            var subMenuSide = GetValue(config, 'subMenuSide', undefined);
+            if (subMenuSide !== undefined) {
+                if (typeof (subMenuSide) === 'string') {
+                    subMenuSide = SubMenuSideMode[subMenuSide];
+                }
+                this.subMenuSide[this.orientation] = subMenuSide;
+            }
+            // ToggleOrientation mode
+            this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
             // Expand mode
             this.expandEventName = GetValue(config, 'expandEvent', 'button.click');
-            // Expand orientation
-            this.expandOrientation = [
-                ((this.y < bounds.centerY) ? EXPAND_DOWN : EXPAND_UP),
-                ((this.x < bounds.centerX) ? EXPAND_RIGHT : EXPAND_LEFT)
-            ];
-            // toggleOrientation mode
-            this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
             // Transition
             this.easeIn = ParseEaseConfig(this, GetValue(config, 'easeIn', 0));
             this.easeOut = ParseEaseConfig(this, GetValue(config, 'easeOut', 0));
@@ -84,11 +88,11 @@ class Menu extends Buttons {
         if (!this.root.easeIn.sameOrientation) {
             var easeOrientation = GetEaseConfig(this.root.easeIn, this).orientation;
             var menuOrientation = (parentMenu) ? parentMenu.orientation : this.orientation;
-            var expandOrientation = this.root.expandOrientation[menuOrientation];
-            if ((easeOrientation === 0) && (expandOrientation === EXPAND_LEFT)) {
+            var subMenuSide = this.root.subMenuSide[menuOrientation];
+            if ((easeOrientation === 0) && (subMenuSide === SUBMENU_LEFT)) {
                 originX = 1;
             }
-            if ((easeOrientation === 1) && (expandOrientation === EXPAND_UP)) {
+            if ((easeOrientation === 1) && (subMenuSide === SUBMENU_UP)) {
                 originY = 1;
             }
         }
@@ -99,21 +103,21 @@ class Menu extends Buttons {
 
         // Sub-menu, align to parent button
         if (!isRootMenu) {
-            var expandOrientation = this.root.expandOrientation[parentMenu.orientation];
-            switch (expandOrientation) {
-                case EXPAND_LEFT: //Expand left
+            var subMenuSide = this.root.subMenuSide[parentMenu.orientation];
+            switch (subMenuSide) {
+                case SUBMENU_LEFT: //Put submene at left side
                     this.alignTop(parentButton.top).alignRight(parentButton.left);
                     break;
 
-                case EXPAND_RIGHT: //Expand right
+                case SUBMENU_RIGHT: //Put submene at right side
                     this.alignTop(parentButton.top).alignLeft(parentButton.right);
                     break;
 
-                case EXPAND_UP: //Expand up
+                case SUBMENU_UP: //Put submene at up side
                     this.alignLeft(parentButton.left).alignBottom(parentButton.top);
                     break;
 
-                case EXPAND_DOWN: //Expand down
+                case SUBMENU_DOWN: //Put submene at down side
                     this.alignLeft(parentButton.left).alignTop(parentButton.bottom);
                     break;
             }
@@ -158,6 +162,16 @@ var ParseEaseConfig = function (menu, easeConfig) {
     return easeConfig;
 }
 
+const SUBMENU_LEFT = 2;
+const SUBMENU_RIGHT = 0;
+const SUBMENU_UP = 3;
+const SUBMENU_DOWN = 1;
+const SubMenuSideMode = {
+    up: SUBMENU_UP,
+    down: SUBMENU_DOWN,
+    left: SUBMENU_LEFT,
+    right: SUBMENU_RIGHT
+}
 
 Object.assign(
     Menu.prototype,

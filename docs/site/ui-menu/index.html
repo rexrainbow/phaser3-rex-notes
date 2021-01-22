@@ -5469,6 +5469,7 @@
     <span class="c1">// anchor: undefined,</span>
 
     <span class="c1">// orientation: 1,</span>
+    <span class="c1">// subMenuSide: undefined,</span>
     <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="nx">createBackgroundCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
@@ -5500,7 +5501,7 @@
     <span class="c1">//     orientation: undefined,</span>
     <span class="c1">//     ease: &#39;Linear&#39;</span>
     <span class="c1">// },</span>
-    <span class="c1">// expandEvent: &#39;button.click&#39;</span>
+    <span class="c1">// expandEvent: &#39;button.click&#39;,</span>
 
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
 <span class="p">});</span>
@@ -5578,6 +5579,14 @@
 <li><code>expandEvent</code> : Event name of expanding sub-menu.<ul>
 <li><code>'button.click'</code> : Default value</li>
 <li><code>'button.over'</code></li>
+</ul>
+</li>
+<li><code>subMenuSide</code> : Side of sub-menu<ul>
+<li><code>undefined</code> : Determine side of sub-menu automatically.</li>
+<li><code>right</code>, or <code>0</code> : Put sub-menu at right side. Used with <code>orientation</code> is set to <code>y</code>.</li>
+<li><code>left</code>, or <code>2</code> : Put sub-menu at left side. Used with <code>orientation</code> is set to <code>y</code>.</li>
+<li><code>up</code>, or <code>3</code> : Put sub-menu at up side. Used with <code>orientation</code> is set to <code>x</code>.</li>
+<li><code>down</code>, or <code>1</code> : Put sub-menu at down side. Used with <code>orientation</code> is set to <code>x</code>.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this menu.</li>

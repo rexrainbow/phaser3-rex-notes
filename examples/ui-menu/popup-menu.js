@@ -89,6 +89,7 @@ var createMenu = function (scene, x, y, items, onClick) {
         x: x,
         y: y,
         orientation: exapndOrientation,
+        // subMenuSide: 'right',
 
         items: items,
         createButtonCallback: function (item, i, items) {
