@@ -239,7 +239,7 @@ var tween = scene.tweens.add({
 - `props` : The properties being tweened by the tween
 - `onActive` : Tween becomes active within the Tween Manager.
     ```javascript
-    function(tween, targets) { }
+    function(tween, target) { }
     ```
 - `onStart` : A tween starts.
     ```javascript
@@ -247,7 +247,7 @@ var tween = scene.tweens.add({
     ```
 - `onUpdate` : Callback which fired when tween task updated
     ```javascript
-    function(tween, targets) { }
+    function(tween, target) { }
     ```
 - `onComplete` : Tween completes or is stopped.
     ```javascript
@@ -255,7 +255,7 @@ var tween = scene.tweens.add({
     ```
 - `onYoyo` : A tween property yoyos.
     ```javascript
-    function(tween, key, targets) { }
+    function(tween, key, target) { }
     ```
 - `onLoop` : A tween loops, after any loop delay expires.
     ```javascript
@@ -263,7 +263,7 @@ var tween = scene.tweens.add({
     ```
 - `onRepeat` : A tween property repeats, after any repeat delay expires.
     ```javascript
-    function(tween, targets) { }
+    function(tween, target) { }
     ```
 - `onStop` : A tween property stopped.
     ```javascript
@@ -407,7 +407,7 @@ scene.tweens.timeScale = timescale;
     ```
 - A tween property repeats, after any repeat delay expires.
     ```javascript
-    tween.on('repeat', function(tween, key, targets){
+    tween.on('repeat', function(tween, key, target){
 
     }, scope);
     ```
@@ -419,13 +419,18 @@ scene.tweens.timeScale = timescale;
     ```
 - A tween property updates.
     ```javascript
-    tween.on('update', function(tween, key, targets){
+    tween.on('update', function(tween, key, target, current, previous){
 
     }, scope);
     ```
+    - `tween` : A reference to the Tween instance that emitted the event.
+    - `key` : The property that was updated, i.e. `x` or `scale`.
+    - `target` : The target object that was updated. Usually a Game Object, but can be of any type.
+    - `current` : The current value of the property that was tweened.
+    - `previous` : The previous value of the property that was tweened, prior to this update.
 - A tween property yoyos.
     ```javascript
-    tween.on('yoyo', function(tween, key, targets){
+    tween.on('yoyo', function(tween, key, target){
 
     }, scope);
     ```

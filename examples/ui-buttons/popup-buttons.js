@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5, 1)
             .layout()
 
-        this.tweens.add({
+        buttons.tweenChild({
             targets: buttons.getElement('buttons'),
             scaleX: { start: 0, to: 1 },
             scaleY: { start: 0, to: 1 },

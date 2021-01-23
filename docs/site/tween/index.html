@@ -5770,25 +5770,25 @@
 <li><code>useFrames</code> : Use frames or milliseconds?</li>
 <li><code>props</code> : The properties being tweened by the tween</li>
 <li><code>onActive</code> : Tween becomes active within the Tween Manager.
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onStart</code> : A tween starts.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onUpdate</code> : Callback which fired when tween task updated
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onComplete</code> : Tween completes or is stopped.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onYoyo</code> : A tween property yoyos.
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onLoop</code> : A tween loops, after any loop delay expires.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onRepeat</code> : A tween property repeats, after any repeat delay expires.
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 </code></pre></div></li>
 <li><code>onStop</code> : A tween property stopped.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
@@ -5908,7 +5908,7 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>A tween property repeats, after any repeat delay expires.
-    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;repeat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;repeat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
@@ -5918,12 +5918,19 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>A tween property updates.
-    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">current</span><span class="p">,</span> <span class="nx">previous</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>tween</code> : A reference to the Tween instance that emitted the event.</li>
+<li><code>key</code> : The property that was updated, i.e. <code>x</code> or <code>scale</code>.</li>
+<li><code>target</code> : The target object that was updated. Usually a Game Object, but can be of any type.</li>
+<li><code>current</code> : The current value of the property that was tweened.</li>
+<li><code>previous</code> : The previous value of the property that was tweened, prior to this update.</li>
+</ul>
+</li>
 <li>A tween property yoyos.
-    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

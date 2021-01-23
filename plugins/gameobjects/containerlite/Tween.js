@@ -24,27 +24,25 @@ export default {
 
         tweenConfig.targets = localTargets;
         var tween = scene.tweens.add(tweenConfig);
-        tween.on('update', function (tween, key, targets) {
-            var parent, child;
-            for (var i = 0, cnt = targets.length; i < cnt; i++) {
-                parent = targets.parent;
-                child = targets.self;
-                switch (key) {
-                    case 'x':
-                    case 'y':
-                    case 'angle':
-                    case 'rotation':
-                    case 'scaleX':
-                    case 'scaleY':
-                    case 'flipX':
-                    case 'flipY':
-                        parent.updateChildPosition(child);
-                        break;
-                    case 'alpha':
-                        parent.updateChildAlpha(child);
-                        break;
-                }
+        tween.on('update', function (tween, key, target) {
+            var parent = target.parent;
+            var child = target.self;
+            switch (key) {
+                case 'x':
+                case 'y':
+                case 'angle':
+                case 'rotation':
+                case 'scaleX':
+                case 'scaleY':
+                case 'flipX':
+                case 'flipY':
+                    parent.updateChildPosition(child);
+                    break;
+                case 'alpha':
+                    parent.updateChildAlpha(child);
+                    break;
             }
+
         })
 
         return tween;
