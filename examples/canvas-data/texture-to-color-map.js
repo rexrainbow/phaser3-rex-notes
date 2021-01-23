@@ -22,37 +22,50 @@ class Demo extends Phaser.Scene {
     create() {
         var img = this.add.image(0, 0, 'mushroom').setOrigin(0);
 
-        var startX = 250, startY = 100, width = 6, height = 6,
-            offsetXY = { x: 0, y: 0 },
-            count = 0;
+        var dotSprites = [],
+            angles = [];
+        var startX = 250, startY = 100, width = 6, height = 6;
         CreateRectangleTexture(this, 'dot', width, height);
         this.plugins.get('rexCanvasData').textureTColorMap(img)
             .forEachNonZero(function (value, x, y, colorMap) {
-                var destinationX = startX + (x * width);
-                var destinationY = startY + (y * height);
-                offsetXY = RandomXY(offsetXY, 300);
-                var gameObject = createImage(
-                    this,
-                    (destinationX + offsetXY.x),
-                    (destinationY + offsetXY.y),
-                    width, height,
-                    (value & 0xffffff),
-                    ((value >>> 24) / 255)
-                );
+                dotSprites.push(
+                    createImage(
+                        this,
+                        (startX + (x * width)),
+                        (startY + (y * height)),
+                        width, height,
+                        (value & 0xffffff),
+                        ((value >>> 24) / 255)
+                    )
+                )
+                angles.push(Phaser.Math.DegToRad(Math.random() * 360));
+            }, this);
 
-                this.tweens.add({
-                    targets: gameObject,
-                    x: destinationX,
-                    y: destinationY,
-                    ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-                    duration: 1000,
-                    repeat: 0,            // -1: infinity
-                    yoyo: false
-                });
-                count++;
-            }, this)
+        this.tweens.add({
+            targets: dotSprites,
+            x: {
+                getStart: function (target, key, value, targetIndex, totalTargets, tween) {
+                    return target.x + (300 * Math.cos(angles[targetIndex]));
+                },
+                getEnd: function (target, key, value) {
+                    return target.x;
+                }
+            },
+            y: {
+                getStart: function (target, key, value, targetIndex, totalTargets, tween) {
+                    return target.y + (300 * Math.sin(angles[targetIndex]));
+                },
+                getEnd: function (target, key, value) {
+                    return target.y;
+                }
+            },
+            ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 1000,
+            repeat: 0,            // -1: infinity
+            yoyo: false
+        });
 
-        console.log(count);
+        console.log(dotSprites.length);
     }
 
     update(time) {
@@ -65,10 +78,6 @@ var createImage = function (scene, x, y, width, height, color, alpha) {
         .setDisplaySize(width, height)
         .setTintFill(color)
         .setAlpha(alpha)
-}
-
-var createRectangle = function (scene, x, y, width, height, color, alpha) {
-    return scene.add.rectangle(x, y, width, height, color, alpha)
 }
 
 var config = {
