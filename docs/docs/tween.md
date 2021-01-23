@@ -45,7 +45,7 @@ var tween = scene.tweens.add({
     - `targetIndex` : The index of the target within the Tween.
     - `totalTargets` : The total number of targets in this Tween.
     - `tween` : The Tween that invoked this callback.
-- `key: { getActive:callback, getStart:callback, getStart:getEnd}`
+- `key: { getActive:callback, getStart:callback, getEnd:callback}`
     - `callback` : `function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`
 
 or
