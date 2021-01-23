@@ -9,6 +9,7 @@ A container with a group of buttons.
 
 - [Expand](https://codepen.io/rexrainbow/pen/XWbRZLR)
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
+- [Popup each button](https://codepen.io/rexrainbow/pen/dypEePL)
 
 ## Usage
 
