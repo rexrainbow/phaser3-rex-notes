@@ -5506,10 +5506,17 @@
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="nx">alpha</span><span class="o">:</span> <span class="p">{</span> <span class="nx">from</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">to</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span>
-    <span class="c1">// alpha: { start: 0, to: 1 },</span>
-    <span class="c1">// alpha: 1,</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="c1">// alpha: &#39;+=1&#39;,</span>
+    <span class="c1">// alpha: { from: 0, to: 1 },</span>
+    <span class="c1">// alpha: { start: 0, to: 1 },  </span>
+    <span class="c1">// alpha: { start: value0, from: value1, to: value2 },  </span>
+    <span class="c1">// alpha: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; },</span>
+    <span class="c1">// alpha: {</span>
+    <span class="c1">//      getActive: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },</span>
+    <span class="c1">//      getStart: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },</span>
+    <span class="c1">//      getEnd: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; }</span>
+    <span class="c1">// },</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
@@ -5518,11 +5525,34 @@
 </code></pre></div>
 
 <ul>
-<li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>value11</code> when tween started after delay, then tween to <code>value2</code>.</li>
-<li><code>key: { start: value0, to: value2 }</code> : Set the property to <code>value0</code> immediately, then tween to <code>value2</code>.</li>
-<li><code>key: { start: value0, from: value1, to: value2 }</code> : Set the property to <code>value0</code> immediately, then set to <code>value1</code> when tween started after delay, then tween to <code>value2</code>.</li>
 <li><code>key: value2</code> : Tween to <code>value2</code>.</li>
-<li><code>key: '+=deltaValue'</code> : Tween to current value + deltaValue</li>
+<li><code>key: '+=deltaValue'</code> : Tween to current value + deltaValue<ul>
+<li>Support these expressions : <code>key: '+=deltaValue'</code>, <code>key: '-=deltaValue'</code>, <code>key: '*=deltaValue'</code>, <code>key: '/=deltaValue'</code></li>
+</ul>
+</li>
+<li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>value11</code> when tween started after delay, then tween to <code>value2</code>.</li>
+<li><code>value1</code>, <code>value2</code> : A number, string, or callback(<code>function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code>)   </li>
+<li><code>key: { start: value0, to: value2 }</code> : Set the property to <code>value0</code> immediately, then tween to <code>value2</code>.<ul>
+<li><code>value1</code>, <code>value2</code> : A number, string, or callback(<code>function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code>)  </li>
+</ul>
+</li>
+<li><code>key: { start: value0, from: value1, to: value2 }</code> : Set the property to <code>value0</code> immediately, then set to <code>value1</code> when tween started after delay, then tween to <code>value2</code>.<ul>
+<li><code>value0</code>, <code>value1</code>, <code>value2</code> : A number, string, or callback(<code>function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code>)  </li>
+</ul>
+</li>
+<li><code>key: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code><ul>
+<li><code>target</code> :　The tween target.</li>
+<li><code>key</code> : The target property.</li>
+<li><code>value</code> : The current value of the target property.</li>
+<li><code>targetIndex</code> : The index of the target within the Tween.</li>
+<li><code>totalTargets</code> : The total number of targets in this Tween.</li>
+<li><code>tween</code> : The Tween that invoked this callback.</li>
+</ul>
+</li>
+<li><code>key: { getActive:callback, getStart:callback, getStart:getEnd}</code><ul>
+<li><code>callback</code> : <code>function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }</code></li>
+</ul>
+</li>
 </ul>
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>

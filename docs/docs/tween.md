@@ -11,10 +11,17 @@ Change properties by tween equations, built-in object of phaser.
 ```javascript
 var tween = scene.tweens.add({
     targets: gameObject,
-    alpha: { from: 0, to: 1 },
-    // alpha: { start: 0, to: 1 },
-    // alpha: 1,
+    alpha: 1,
     // alpha: '+=1',
+    // alpha: { from: 0, to: 1 },
+    // alpha: { start: 0, to: 1 },  
+    // alpha: { start: value0, from: value1, to: value2 },  
+    // alpha: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; },
+    // alpha: {
+    //      getActive: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },
+    //      getStart: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; },
+    //      getEnd: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; }
+    // },
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
     repeat: 0,            // -1: infinity
@@ -22,11 +29,24 @@ var tween = scene.tweens.add({
 });
 ```
 
-- `key: { from: value1, to: value2 }` : Set the property to `value11` when tween started after delay, then tween to `value2`.
-- `key: { start: value0, to: value2 }` : Set the property to `value0` immediately, then tween to `value2`.
-- `key: { start: value0, from: value1, to: value2 }` : Set the property to `value0` immediately, then set to `value1` when tween started after delay, then tween to `value2`.
 - `key: value2` : Tween to `value2`.
 - `key: '+=deltaValue'` : Tween to current value + deltaValue
+    - Support these expressions : `key: '+=deltaValue'`, `key: '-=deltaValue'`, `key: '*=deltaValue'`, `key: '/=deltaValue'`
+- `key: { from: value1, to: value2 }` : Set the property to `value11` when tween started after delay, then tween to `value2`.
+   - `value1`, `value2` : A number, string, or callback(`function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`)   
+- `key: { start: value0, to: value2 }` : Set the property to `value0` immediately, then tween to `value2`.
+    - `value1`, `value2` : A number, string, or callback(`function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`)  
+- `key: { start: value0, from: value1, to: value2 }` : Set the property to `value0` immediately, then set to `value1` when tween started after delay, then tween to `value2`.
+    - `value0`, `value1`, `value2` : A number, string, or callback(`function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`)  
+- `key: function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`
+    - `target` :　The tween target.
+    - `key` : The target property.
+    - `value` : The current value of the target property.
+    - `targetIndex` : The index of the target within the Tween.
+    - `totalTargets` : The total number of targets in this Tween.
+    - `tween` : The Tween that invoked this callback.
+- `key: { getActive:callback, getStart:callback, getStart:getEnd}`
+    - `callback` : `function(target, key, value, targetIndex, totalTargets, tween)  { return newValue; }`
 
 or
 
