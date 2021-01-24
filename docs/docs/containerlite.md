@@ -259,6 +259,14 @@ Reference [Group](group.md)
 container.setChildPosition(child, x, y);
 ```
 
+#### Rotation
+
+```javascript
+container.setChildRotation(child, rotation);
+```
+
+- `rotation` : Angle in radians.
+
 #### Scale
 
 ```javascript
