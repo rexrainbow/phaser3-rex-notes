@@ -37,10 +37,13 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5, 1)
             .layout()
 
+        buttons.getElement('buttons').forEach(function (button) {
+            buttons.setChildScale(button, 0, 0);
+        })
         buttons.tweenChild({
             targets: buttons.getElement('buttons'),
-            scaleX: { start: 0, to: 1 },
-            scaleY: { start: 0, to: 1 },
+            scaleX: 1,
+            scaleY: 1,
             ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
             duration: 1000,
             repeat: 0,            // -1: infinity

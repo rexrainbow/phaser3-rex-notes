@@ -30,13 +30,15 @@ export default {
             switch (key) {
                 case 'x':
                 case 'y':
+                    parent.updateChildPosition(child);
+                    break;
                 case 'angle':
                 case 'rotation':
+                    parent.updateChildRotation(child);
+                    break;
                 case 'scaleX':
                 case 'scaleY':
-                case 'flipX':
-                case 'flipY':
-                    parent.updateChildPosition(child);
+                    parent.updateChildScale(child);
                     break;
                 case 'alpha':
                     parent.updateChildAlpha(child);
