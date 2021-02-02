@@ -217,7 +217,7 @@ var music = scene.sound.add(key, config);
 
 - Duration : duration of this sound
     ```javascript
-    var duratuin = music.duration;
+    var duration = music.duration;
     ```
 - Is playing
     ```javascript
