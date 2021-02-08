@@ -79,16 +79,18 @@ scenario.load(csvString, scope, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // prefix: /^#([a-zA-Z]+)/
     // argsConvert: true,
-    // argsConvertScope: undefined
+    // argsConvertScope: undefined,
+    // delimiter: ','
 })
 ```
 
-- timeUnit: time-unit of dt, for [delay-execution](csvscenario.md#delay-execution)
+- `timeUnit`: time-unit of dt, for [delay-execution](csvscenario.md#delay-execution)
     - `'ms'`, or `0` : dt in millisecond
     - `'s'`, `'sec'`, or 1 : dt in second
-- prefix: regex of picking control instructions
-- argsConvert: a callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function), or `true` to use default convert function
-- argsConvertScope: scope of argsConvert
+- `prefix`: regex of picking control instructions
+- `argsConvert`: a callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function), or `true` to use default convert function
+- `argsConvertScope`: scope of argsConvert
+- `delimiter` : Delimiter of CSV string.
 
 ### Start running instructions
 

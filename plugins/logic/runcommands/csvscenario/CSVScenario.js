@@ -30,6 +30,7 @@ class CSVScenario {
         this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
         this.cmdHandlers.resetFromJSON(GetValue(o, 'handlers', undefined));
         this.instMem.resetFromJSON(GetValue(o, 'instMem', undefined));
+        this.delimiter = GetValue(o, 'delimiter', ',');
         return this;
     }
 
@@ -44,7 +45,8 @@ class CSVScenario {
             argsConvert: this.argsConvert,
             argsConvertScope: this.argsConvertScope,
             handlers: this.cmdHandlers.toJSON(),
-            instMem: this.instMem.toJSON()
+            instMem: this.instMem.toJSON(),
+            delimiter: this.delimiter
         };
     }
 
@@ -55,7 +57,7 @@ class CSVScenario {
     shutdown() {
         this.destroyEventEmitter();
         this.clear();
-        this.scene = undefined;        
+        this.scene = undefined;
     }
 
     destroy() {
@@ -77,6 +79,7 @@ class CSVScenario {
         this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
 
+        this.delimiter = GetValue(config, 'delimiter', this.delimiter);
         this.append(strCmd);
         return this;
     }
@@ -163,12 +166,9 @@ class CSVScenario {
         return this;
     }
 
-    append(csvString, delimiter) {
-        if (delimiter === undefined) {
-            delimiter = ',';
-        }
+    append(csvString) {
         var arr = CSVParser.parse(csvString, {
-            delimiter: delimiter
+            delimiter: this.delimiter
         }).data;
         this.parse(arr);
         return this;

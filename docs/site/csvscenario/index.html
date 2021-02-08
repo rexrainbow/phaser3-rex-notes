@@ -5658,19 +5658,21 @@
     <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
     <span class="c1">// prefix: /^#([a-zA-Z]+)/</span>
     <span class="c1">// argsConvert: true,</span>
-    <span class="c1">// argsConvertScope: undefined</span>
+    <span class="c1">// argsConvertScope: undefined,</span>
+    <span class="c1">// delimiter: &#39;,&#39;</span>
 <span class="p">})</span>
 </code></pre></div>
 
 <ul>
-<li>timeUnit: time-unit of dt, for <a href="./#delay-execution">delay-execution</a><ul>
+<li><code>timeUnit</code>: time-unit of dt, for <a href="./#delay-execution">delay-execution</a><ul>
 <li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
 <li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
 </ul>
 </li>
-<li>prefix: regex of picking control instructions</li>
-<li>argsConvert: a callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
-<li>argsConvertScope: scope of argsConvert</li>
+<li><code>prefix</code>: regex of picking control instructions</li>
+<li><code>argsConvert</code>: a callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
+<li><code>argsConvertScope</code>: scope of argsConvert</li>
+<li><code>delimiter</code> : Delimiter of CSV string.</li>
 </ul>
 <h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
