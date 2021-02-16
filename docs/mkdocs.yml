@@ -183,6 +183,8 @@ nav:
         - Position:
             - Swirl: shader-swirl.md
             - Pixelation: shader-pixelation.md
+        - Transition:
+            - Dissolve: shader-dissolve.md
 - Tween:
     - Tween task: tween.md
     - Timeline: tween-timeline.md

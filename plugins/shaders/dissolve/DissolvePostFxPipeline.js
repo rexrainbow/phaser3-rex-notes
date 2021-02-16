@@ -29,8 +29,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
-        this.setTexture(GetValue(o, 'toTexture', '__DEFAULT'));
-        this.setResizeMode(GetValue(o, 'resizeMode', 1));
+        this.setTransitionTargetTexture(GetValue(o, 'toTexture', '__DEFAULT'), GetValue(o, 'toFrame', undefined), GetValue(o, 'resizeMode', 1));
         this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
         this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));
         this.setToEdge(GetValue(o, 'toEdgeStart', 0.01), GetValue(o, 'toEdgeWidth', 0.05));
@@ -38,7 +37,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
     }
 
     onBoot() {
-        this.setTexture();
+        this.setTransitionTargetTexture();
     }
 
     onPreRender() {
@@ -75,11 +74,11 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    setTexture(texture, resizeMode) {
-        if (texture === undefined) {
-            texture = '__DEFAULT';
+    setTransitionTargetTexture(key, frame, resizeMode) {
+        if (key === undefined) {
+            key = '__DEFAULT';
         }
-        var phaserTexture = this.game.textures.getFrame(texture);
+        var phaserTexture = this.game.textures.getFrame(key, frame);
 
         if (!phaserTexture) {
             phaserTexture = this.game.textures.getFrame('__DEFAULT');
@@ -87,7 +86,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
 
         this.toRatio = phaserTexture.width / phaserTexture.height;
 
-        this.toTexture = phaserTexture;
+        this.toFrame = phaserTexture;
         this.targetTexture = phaserTexture.glTexture;
 
         if (resizeMode !== undefined) {

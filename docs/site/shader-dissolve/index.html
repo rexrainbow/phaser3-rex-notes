@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-dialog/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-dissolve/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Dialog - Notes of Phaser 3</title>
+        <title>Dissolve - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Dialog
+                Dissolve
               
             </span>
           
@@ -2673,10 +2673,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -2728,10 +2730,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
     
     <label class="md-nav__link" for="nav-7-4">
       Shader effects
@@ -2939,10 +2943,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-6" type="checkbox" id="nav-7-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-6" type="checkbox" id="nav-7-4-6" checked>
     
     <label class="md-nav__link" for="nav-7-4-6">
       Transition
@@ -2958,11 +2964,154 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shader-dissolve/" title="Dissolve" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Dissolve
+      </label>
+    
+    <a href="./" title="Dissolve" class="md-nav__link md-nav__link--active">
       Dissolve
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transition-target-texture" class="md-nav__link">
+    Transition target texture
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resize-mode" class="md-nav__link">
+    Resize mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    Noise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edge" class="md-nav__link">
+    Edge
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4413,12 +4562,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       UI
@@ -4590,189 +4737,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Dialog
-      </label>
-    
-    <a href="./" title="Dialog" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ui-dialog/" title="Dialog" class="md-nav__link">
       Dialog
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-dialog-object" class="md-nav__link">
-    Add dialog object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    Layout children
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#emit-button-click-event" class="md-nav__link">
-    Emit button click event
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enabledisable-input-of-button" class="md-nav__link">
-    Enable/disable input of button
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-button" class="md-nav__link">
-    Add button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-button" class="md-nav__link">
-    Remove button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#showhide-button" class="md-nav__link">
-    Show/hide button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-each-button" class="md-nav__link">
-    For each button
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5432,51 +5401,37 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-dialog-object" class="md-nav__link">
-    Add dialog object
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#layout-children" class="md-nav__link">
-    Layout children
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
+  <a href="#transition-target-texture" class="md-nav__link">
+    Transition target texture
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#emit-button-click-event" class="md-nav__link">
-    Emit button click event
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enabledisable-input-of-button" class="md-nav__link">
-    Enable/disable input of button
+  <a href="#resize-mode" class="md-nav__link">
+    Resize mode
   </a>
   
 </li>
@@ -5487,36 +5442,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
+  <a href="#noise" class="md-nav__link">
+    Noise
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-button" class="md-nav__link">
-    Add button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-button" class="md-nav__link">
-    Remove button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#showhide-button" class="md-nav__link">
-    Show/hide button
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-each-button" class="md-nav__link">
-    For each button
+  <a href="#edge" class="md-nav__link">
+    Edge
   </a>
   
 </li>
@@ -5542,38 +5476,38 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-dialog.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-dissolve.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Dialog</h1>
+                  <h1>Dissolve</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A container with a title, content, buttons and background.</p>
+<p>Dissolve transition post processing filter. (<a href="https://github.com/ykob/glsl-dissolve/">Reference</a>)</p>
 <ul>
 <li>Author: Rex</li>
-<li>Game object</li>
+<li>A camera filter</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes-no dialog</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Single choice dialog</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up dialog</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/qBdQRmq">Ease-in, ease-out</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/MWwPabw">Show/hide buttons</a></li>
-<li><a href="https://codepen.io/rexrainbow/pen/gOpddxa">Add button</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/BaQWqyX">Dissolve</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-dialog">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-dissolve">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexdissolvepipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdissolvepipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add dialog object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dialog</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexdissolvepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexdissolvepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5581,14 +5515,14 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">DissolvePipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/dissolvepipeline-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">DissolvePipelinePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -5597,484 +5531,181 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add dialog object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dialog</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Dialog</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+<li>Add to game config
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">DissolvePostFx</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/dissolvepipeline.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="nx">DissolvePostFx</span><span class="p">]</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add dialog object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dialog</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">dialog</span><span class="p">);</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">DissolvePostFx</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">DissolvePostFx</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-dialog-object">Add dialog object<a class="headerlink" href="#add-dialog-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dialog</span><span class="p">({</span>
-    <span class="c1">// x: 0,</span>
-    <span class="c1">// y: 0,</span>
-    <span class="c1">// anchor: undefined,</span>
-    <span class="c1">// width: undefined,</span>
-    <span class="c1">// height: undefined,</span>
+</li>
+</ul>
+<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Apply effect to game object. A game object only can add 1 gray-scale effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// toTexture: textureKey,</span>
+    <span class="c1">// toFrame: frameName,</span>
+    <span class="c1">// resizeMode: 1,</span>
 
-    <span class="c1">// Elements</span>
-    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+    <span class="c1">// noiseX: undefined,</span>
+    <span class="c1">// noiseY: undefined,</span>
+    <span class="c1">// noiseZ: undefined,</span>
+    <span class="c1">// fromEdgeStart: 0.01,</span>
+    <span class="c1">// fromEdgeWidth: 0.05,</span>
+    <span class="c1">// toEdgeStart: 0.01,</span>
+    <span class="c1">// toEdgeWidth: 0.05,</span>
 
-    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
+    <span class="c1">// progress: 0,</span>
 
-    <span class="nx">toolbar</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-    <span class="nx">toolbarBackground</span><span class="o">:</span> <span class="nx">toolbarBackgroundGameObject</span><span class="p">,</span>
-
-    <span class="nx">leftToolbar</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-    <span class="nx">leftToolbarBackground</span><span class="o">:</span> <span class="nx">leftToolbarBackgroundGameObject</span><span class="p">,</span>
-
-    <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
-
-    <span class="nx">description</span><span class="o">:</span> <span class="nx">descriptionGameObject</span><span class="p">,</span>
-
-    <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-    <span class="nx">choicesBackground</span><span class="o">:</span> <span class="nx">choicesBackgroundGameObject</span><span class="p">,</span>
-
-    <span class="nx">actions</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-    <span class="nx">actionsBackground</span><span class="o">:</span> <span class="nx">actionsBackgroundGameObject</span><span class="p">,</span>
-
-    <span class="c1">// Space</span>
-    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
-        <span class="nx">title</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">titleLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">titleRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">content</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">contentLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">contentRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">description</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">descriptionLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">descriptionRight</span><span class="o">:</span> <span class="mi">0</span>
-        <span class="nx">choices</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">choicesLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">choicesRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">actionsLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">actionsRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
-        <span class="nx">toolbarItem</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">leftToolbarItem</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">choice</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">action</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">},</span>
-
-    <span class="nx">expand</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">content</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">description</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">choices</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">actions</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="p">},</span>
-
-    <span class="nx">align</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-        <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-        <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-        <span class="nx">choices</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-        <span class="nx">actions</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-    <span class="p">},</span>
-
-    <span class="nx">click</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
-        <span class="nx">clickInterval</span><span class="o">:</span> <span class="mi">100</span>
-    <span class="p">}</span>
-
-    <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false</span>
+    <span class="c1">// nane: &#39;rexDissolvePostFx&#39;</span>
 <span class="p">});</span>
-</code></pre></div>
-
-<ul>
-<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
-<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
-<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
-<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
-<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
-<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+</code></pre></div><ul>
+<li><code>toTexture</code>, <code>toFrame</code> : Texture key and frame name of transition target texture.</li>
+<li><code>resizeMode</code> : Resize mode of transition target texture.<ul>
+<li><code>0</code>, or <code>'stretch'</code> : The target texture is stretched to the size of the source texture.</li>
+<li><code>1</code>, or <code>'contain'</code> : The target texture is resized to fit the source texture.</li>
+<li><code>2</code>, or <code>'cover'</code> : The target texture is resized to cover the source texture.</li>
 </ul>
 </li>
-<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+<li><code>noiseX</code>, <code>noiseY</code>, <code>noiseZ</code> : Parameter of Perline noise.<ul>
+<li><code>undefined</code> : A random value.</li>
 </ul>
 </li>
+<li><code>fromEdgeStart</code>, <code>fromEdgeWidth</code> : Dissolve edge start, edge width of from-texture (texture of game object, or render result of camera).</li>
+<li><code>toEdgeStart</code>, <code>toEdgeWidth</code> : Reveal edge start, edge width of to-texture.</li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>title</code> : Game object of title, optional.</li>
-<li><code>toolbar</code> : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.<ul>
-<li><code>[]</code> : Assign an empty array if user will add button later.</li>
-</ul>
-</li>
-<li><code>toolbarBackground</code> : <a href="../ui-basesizer/#background">Game object of toolbar buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>leftToolbar</code> : Array of Game objects for left-toolbar-buttons group which arranged from left to right, optional.<ul>
-<li><code>[]</code> : Assign an empty array if user will add button later.</li>
-</ul>
-</li>
-<li><code>leftToolbarBackground</code> : <a href="../ui-basesizer/#background">Game object of leftToolbar buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>content</code> : Game object of content, optional.</li>
-<li><code>description</code> : Game object of description, optional.</li>
-<li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.<ul>
-<li><code>[]</code> : Assign an empty array if user will add button later.</li>
-</ul>
-</li>
-<li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>choicesType</code> : Type/behavior of choice buttons.<ul>
-<li><code>undefined</code> : No extra behavior, default value.</li>
-<li><code>'checkboxes'</code> : Set these buttons to checkboxes.</li>
-<li><code>'radio'</code> : Set these buttons to radio.</li>
-</ul>
-</li>
-<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.<ul>
-<li><code>[]</code> : Assign an empty array if user will add button later.</li>
-</ul>
-</li>
-<li><code>choicesBackground</code> : <a href="../ui-basesizer/#background">Game object of choices buttons background</a>, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>space</code> : Pads spaces<ul>
-<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
-<li><code>space.title</code> : Space between title game object and below game object.</li>
-<li><code>space.titleLeft</code>, <code>space.titleRight</code> : Extra left/right padding of title game object.</li>
-<li><code>space.content</code> : Space between content game object and below game object.</li>
-<li><code>space.contentLeft</code>, <code>space.contentRight</code> : Extra left/right padding of content game object.</li>
-<li><code>space.description</code> : Space between description game object and below game object.</li>
-<li><code>space.descriptionLeft</code>, <code>space.descriptionRight</code> : Extra left/right padding of description game object.</li>
-<li><code>space.choices</code> : Space between last choice-button and below game object.</li>
-<li><code>space.choicesLeft</code>, <code>space.choicesRight</code> : Extra left/right padding of choice buttons.</li>
-<li><code>space.actionsLeft</code>, <code>space.actionsRight</code> : Extra left/right padding of actions buttons.</li>
-<li><code>space.toolbarItem</code> : Space between each toolbar item game objects.</li>
-<li><code>space.leftToolbarItem</code> : Space between each left-toolbar item game objects.</li>
-<li><code>space.choice</code> : Space between each choice-button game objects.</li>
-<li><code>space.action</code> : Space between each action-button game objects.</li>
-</ul>
-</li>
-<li><code>expand</code> : Expand width of element<ul>
-<li><code>expand.title</code> : Set <code>true</code> to expand width of title game object. Default is <code>true</code>.</li>
-<li><code>expand.content</code> : Set <code>true</code> to expand width of content game object. Default is <code>true</code>.</li>
-<li><code>expand.description</code> : Set <code>true</code> to expand width of description game object. Default is <code>true</code>.</li>
-<li><code>expand.choices</code> : Set <code>true</code> to expand width of choices game object. Default is <code>true</code>.</li>
-<li><code>expand.actions</code> : Set <code>true</code> to expand width of actions game object. Default is <code>false</code>.</li>
-</ul>
-</li>
-<li><code>align</code> : Align element<ul>
-<li><code>align.title</code><ul>
-<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
-<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
-<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
-</ul>
-</li>
-<li><code>align.content</code> : Align content game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.title</code> is <code>false</code>.</li>
-<li><code>align.description</code> : Align description game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.description</code> is <code>false</code>.</li>
-<li><code>align.choices</code> : Align choices game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.choices</code> is <code>false</code>.</li>
-<li><code>align.actions</code> : Align action game objects to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.actions</code> is <code>false</code>.</li>
-</ul>
-</li>
-<li><code>click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>
-<li><code>click.mode</code> :<ul>
-<li><code>'pointerdown'</code>, <code>'press'</code>, or <code>0</code> : Fire 'click' event when touch pressed.</li>
-<li><code>'pointerup'</code>, <code>'release'</code>, or <code>1</code> : Fire 'click' event when touch released after pressed.</li>
-</ul>
-</li>
-<li><code>click.clickInterval</code> : Interval between 2 'click' events, in ms.</li>
-</ul>
-</li>
-<li><code>name</code> : Set name of this dialog.</li>
-</ul>
-<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyDialog</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Dialog</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-        <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</code></pre></div></li>
-<li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyDialog</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Apply effect to camera. A camera only can add 1 gray-scale effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
-<p>Arrange position of all elements.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
-</code></pre></div>
-
-<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Click button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, or <code>'toolbar'</code>.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
-<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+<li>Remove effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
-</li>
-<li>Pointer-over button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>button</code> : Triggered button game object</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code>.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
-<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
-</ul>
-</li>
-<li>Pointer-out button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
-<li><code>index</code> : Index of triggered button game object.</li>
-<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Pointer</a> object.</li>
-<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
-</ul>
-</li>
-<li>Enable button's input
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.enable&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
-<li><code>index</code> : Index of triggered button game object.</li>
-</ul>
-</li>
-<li>Disable button's input
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.disalbe&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code>, <code>'actions'</code>, <code>'toolbar'</code>, or <code>'leftToolbar'</code></li>
-<li><code>index</code> : Index of triggered button game object.</li>
-</ul>
-</li>
-</ul>
-<h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
+<h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Emit choice/action/toolbar/left-toolbar button's click event
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">emitChoiceClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitActionClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitToolbarClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitLeftToolbarClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li>Get effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Get effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDissolvePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
-</li>
-</ul>
-<h4 id="enabledisable-input-of-button">Enable/disable input of button<a class="headerlink" href="#enabledisable-input-of-button" title="Permanent link">&para;</a></h4>
+<h3 id="transition-target-texture">Transition target texture<a class="headerlink" href="#transition-target-texture" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Enable choice/action/toolbar/left-toolbar button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">textureKey</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toFrame</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toFrame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setTransitionTargetTexture</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.setTransitionTargetTexture(textureKey, frameName, resizeMode);</span>
+</code></pre></div></li>
 </ul>
-</li>
-<li>Disable choice/action/toolbar/left-toolbar button's input
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">setChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">setLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
-</ul>
-</li>
-<li>Toggle choice/action/toolbar/left-toolbar button's input
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">toggleLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
-</ul>
-</li>
-<li>Get choice/action/toolbar/left-toolbar button's input enable
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getChoiceEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getActionEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getLeftToolbarEnable</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, or a button game object.</li>
-</ul>
-</li>
-</ul>
-<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<h4 id="resize-mode">Resize mode<a class="headerlink" href="#resize-mode" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get element<ul>
-<li>Background game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mode</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">resizeMode</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Title game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setResizeMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>mode</code> : <ul>
+<li><code>0</code>, or <code>'stretch'</code> : The target texture is stretched to the size of the source texture.</li>
+<li><code>1</code>, or <code>'contain'</code> : The target texture is resized to fit the source texture.</li>
+<li><code>2</code>, or <code>'cover'</code> : The target texture is resized to cover the source texture.    </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="noise">Noise<a class="headerlink" href="#noise" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">noiseX</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">noiseY</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">noiseZ</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseZ</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Content game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Description game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">description</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Choice button game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">);</span>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseX</span> <span class="o">=</span> <span class="nx">noiseX</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseY</span> <span class="o">=</span> <span class="nx">noiseY</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">noiseZ</span> <span class="o">=</span> <span class="nx">noiseZ</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Acrion button game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions&#39;</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Toolbar button game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;toolbar&#39;</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;toolbar[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Left-toolbar button game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftToolbar&#39;</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftToolbar[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setNoise</span><span class="p">(</span><span class="nx">noiseX</span><span class="p">,</span> <span class="nx">noiseY</span><span class="p">,</span> <span class="nx">noiseZ</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.setNoise(); // Passing 3 random float numbers</span>
 </code></pre></div></li>
 </ul>
-</li>
-<li>Get by name
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = dialog.getElement(&#39;#&#39; + name, recursive);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = dialog.getByName(&#39;#&#39; + name, recursive);</span>
-</code></pre></div><ul>
-<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
-</ul>
-</li>
-</ul>
-<h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
-<p>Add choice/action/toolbar/left-toolbar button</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">addChoice</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">addAction</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">addToolbar</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">addLeftToolbar</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</code></pre></div>
-
+<h3 id="edge">Edge<a class="headerlink" href="#edge" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>gameObject</code> : A game object, or an array of game objects.</li>
-</ul>
-<h3 id="remove-button">Remove button<a class="headerlink" href="#remove-button" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Remove a choice/action/toolbar/left-toolbar button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">removeChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeAction</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">removeLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, a string name, or a button game object.</li>
-<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
-</ul>
-</li>
-<li>Remove all choice/action/toolbar/left-toolbar buttons
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">clearChoices</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearActions</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearToolbar</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">clearLeftToolbar</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
-</ul>
-</li>
-</ul>
-<h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
-<p>Hidden elements won't be counted when layouting. 
-Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
-<ul>
-<li>Show choice/action/toolbar/left-toolbar button
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">showChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">showAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">showToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">showLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, a string name, or a button game object.</li>
-</ul>
-</li>
-<li>Hide choice/action/toolbar/left-toolbar button.
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">hideChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideLeftToolbar</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>index</code> : A number index, a string name, or a button game object.</li>
-</ul>
-</li>
-</ul>
-<h3 id="for-each-button">For each button<a class="headerlink" href="#for-each-button" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachChoice</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachAction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachToolbar</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-<span class="nx">dialog</span><span class="p">.</span><span class="nx">forEachLeftToolbar</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-
-<ul>
-<li><code>callback</code> : 
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">buttons</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
+<li>Get<ul>
+<li>From texture (texture of game object, or render result of camera)
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">edgeStart</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">fromEdgeStart</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">edgeWidth</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">fromEdgeWidth</span><span class="p">;</span>
 </code></pre></div></li>
+<li>To texture (transition target texture)
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">edgeStart</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toEdgeStart</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">edgeWidth</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toEdgeWidth</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Set<ul>
+<li>From texture (texture of game object, or render result of camera)
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">fromEdgeStart</span> <span class="o">=</span> <span class="nx">edgeStart</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">fromEdgeWidth</span> <span class="o">=</span> <span class="nx">edgeWidth</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setFromEdge</span><span class="p">(</span><span class="nx">edgeStart</span><span class="p">,</span> <span class="nx">edgeWidth</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>edgeStart</code> : <code>0</code>~<code>1</code>, default value is <code>0.01</code></li>
+<li><code>edgeWidth</code> : <code>0</code>~<code>1</code>, default value is <code>0.05</code></li>
+</ul>
+</li>
+<li>To texture (transition target texture)
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toEdgeStart</span> <span class="o">=</span> <span class="nx">edgeStart</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">toEdgeWidth</span> <span class="o">=</span> <span class="nx">edgeWidth</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setToEdge</span><span class="p">(</span><span class="nx">edgeStart</span><span class="p">,</span> <span class="nx">edgeWidth</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>edgeStart</code> : <code>0</code>~<code>1</code>, default value is <code>0.01</code></li>
+<li><code>edgeWidth</code> : <code>0</code>~<code>1</code>, default value is <code>0.05</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
                 
                   
@@ -6097,7 +5728,7 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ui-slider/" title="Slider" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-pixelation/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -6106,19 +5737,19 @@ Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Slider
+                Pixelation
               </span>
             </div>
           </a>
         
         
-          <a href="../ui-gridtable/" title="Grid table" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tween/" title="Tween task" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Grid table
+                Tween task
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
