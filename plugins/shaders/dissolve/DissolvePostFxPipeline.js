@@ -19,9 +19,9 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
         this.resizeMode = 1;
         this.toRatio = 1;
 
-        this.noiseX = 8;
-        this.noiseY = 6;
-        this.noiseZ = 4;
+        this.noiseX = 0;
+        this.noiseY = 0;
+        this.noiseZ = 0;
         this.fromEdgeStart = 0.01;
         this.fromEdgeWidth = 0.05;
         this.toEdgeStart = 0.01;
@@ -31,7 +31,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
     resetFromJSON(o) {
         this.setTexture(GetValue(o, 'toTexture', '__DEFAULT'));
         this.setResizeMode(GetValue(o, 'resizeMode', 1));
-        this.setNoise(GetValue(o, 'noiseX', 8), GetValue(o, 'noiseY', 6), GetValue(o, 'noiseZ', 4));
+        this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
         this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));
         this.setToEdge(GetValue(o, 'toEdgeStart', 0.01), GetValue(o, 'toEdgeWidth', 0.05));
         return this;
@@ -109,6 +109,15 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
     }
 
     setNoise(x, y, z) {
+        if (x === undefined) {
+            x = Math.random() * 10;
+        }
+        if (y === undefined) {
+            y = Math.random() * 10;
+        }
+        if (z === undefined) {
+            z = Math.random() * 10;
+        }
         this.noiseX = x;
         this.noiseY = y;
         this.noiseZ = z;
