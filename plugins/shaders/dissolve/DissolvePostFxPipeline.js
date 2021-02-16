@@ -110,10 +110,10 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
 
     setNoise(x, y, z) {
         if (x === undefined) {
-            x = Math.random() * 10;
+            x = 4 + Math.random() * 6;
         }
         if (y === undefined) {
-            y = Math.random() * 10;
+            y = 4 + Math.random() * 6;
         }
         if (z === undefined) {
             z = Math.random() * 10;

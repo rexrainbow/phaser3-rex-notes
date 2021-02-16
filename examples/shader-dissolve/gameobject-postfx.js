@@ -13,7 +13,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        const Between = Phaser.Math.Between;
         var postFxPlugin = this.plugins.get('rexDissolvePipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
         var postFxPipeline = postFxPlugin.add(gameObject, {
@@ -27,6 +26,10 @@ class Demo extends Phaser.Scene {
             repeat: 0,            // -1: infinity
             yoyo: false
         });
+
+        this.input.on('pointerdown', function () {
+            this.scene.restart();
+        }, this)
     }
 
     update() {

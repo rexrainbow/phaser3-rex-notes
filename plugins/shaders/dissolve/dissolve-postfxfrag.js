@@ -1,3 +1,5 @@
+// https://github.com/ykob/glsl-dissolve/blob/master/src/glsl/dissolve.fs
+
 import Perlin from '../utils/noise/Perlin.js';
 
 const frag = `\
