@@ -168,13 +168,13 @@ nav:
 - Camera:
     - Camera: camera.md
     - Effects: camera-effects.md
+    - Shader effect: camera-shader-effect.md
     - Controllor: camera-controllor.md
 - Tween:
     - Tween task: tween.md
     - Timeline: tween-timeline.md
 - Shader effects:
-    - Post fx pipeline: postfx-pipeline.md
-    - Shader effect: camera-shader-effect.md
+    - Post fx pipeline: postfx-pipeline.md    
     - Color:
         - Glow: shader-glowfilter.md
         - Gray scale: shader-grayscale.md

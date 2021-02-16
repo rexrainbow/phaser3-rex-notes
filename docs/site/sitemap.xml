@@ -651,6 +651,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera-shader-effect/</loc>
+     <lastmod>2021-02-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera-controllor/</loc>
      <lastmod>2021-02-16</lastmod>
      <changefreq>daily</changefreq>
@@ -667,11 +672,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/postfx-pipeline/</loc>
-     <lastmod>2021-02-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera-shader-effect/</loc>
      <lastmod>2021-02-16</lastmod>
      <changefreq>daily</changefreq>
     </url>

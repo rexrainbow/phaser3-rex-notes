@@ -29,6 +29,7 @@ Some post-fx pipelines:
 - [Pixelation](shader-pixelation.md): Pixelation post processing filter.
 - [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 - [Swirl](shader-swirl.md): Swirl post processing filter.
+- [Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 
 ### Add post-fx pipeline
 
