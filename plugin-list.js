@@ -130,6 +130,7 @@ module.exports = {
     'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
     'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
+    'dissolvepipelineplugin': './plugins/dissolvepipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',
