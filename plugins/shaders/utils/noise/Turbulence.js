@@ -4,7 +4,7 @@ import PerlinNoiseFrag from './Perlin.js';
 
 const frag = `\
 ${PerlinNoiseFrag}
-float turbulence(vec3 P) {
+float Turbulence(vec3 P) {
     float f = 0., s = 1.;
     for (int i = 0 ; i < 9 ; i++) {
         f += abs(Perlin(s * P)) / s;
