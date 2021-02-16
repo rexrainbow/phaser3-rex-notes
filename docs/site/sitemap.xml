@@ -656,6 +656,16 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/</loc>
+     <lastmod>2021-02-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween-timeline/</loc>
+     <lastmod>2021-02-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/postfx-pipeline/</loc>
      <lastmod>2021-02-16</lastmod>
      <changefreq>daily</changefreq>
@@ -707,16 +717,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-dissolve/</loc>
-     <lastmod>2021-02-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/</loc>
-     <lastmod>2021-02-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween-timeline/</loc>
      <lastmod>2021-02-16</lastmod>
      <changefreq>daily</changefreq>
     </url>

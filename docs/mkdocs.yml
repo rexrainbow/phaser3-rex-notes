@@ -168,26 +168,26 @@ nav:
 - Camera:
     - Camera: camera.md
     - Effects: camera-effects.md
-    - Controllor: camera-controllor.md    
-    - Shader effects:
-        - Post fx pipeline: postfx-pipeline.md
-        - Shader effect: camera-shader-effect.md
-        - Color:
-            - Glow: shader-glowfilter.md
-            - Gray scale: shader-grayscale.md
-            - Inverse: shader-inverse.md
-            - HSL adjust: shader-hsladjust.md
-        - Outline:
-            - Outline: shader-outline.md
-            - Toonify: shader-toonify.md
-        - Position:
-            - Swirl: shader-swirl.md
-            - Pixelation: shader-pixelation.md
-        - Transition:
-            - Dissolve: shader-dissolve.md
+    - Controllor: camera-controllor.md
 - Tween:
     - Tween task: tween.md
     - Timeline: tween-timeline.md
+- Shader effects:
+    - Post fx pipeline: postfx-pipeline.md
+    - Shader effect: camera-shader-effect.md
+    - Color:
+        - Glow: shader-glowfilter.md
+        - Gray scale: shader-grayscale.md
+        - Inverse: shader-inverse.md
+        - HSL adjust: shader-hsladjust.md
+    - Outline:
+        - Outline: shader-outline.md
+        - Toonify: shader-toonify.md
+    - Position:
+        - Swirl: shader-swirl.md
+        - Pixelation: shader-pixelation.md
+    - Transition:
+        - Dissolve: shader-dissolve.md
 - Logic:
     - Events:
       - Event emitter: eventemitter3.md
