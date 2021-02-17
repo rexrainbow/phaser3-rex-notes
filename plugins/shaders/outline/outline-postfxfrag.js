@@ -25,7 +25,7 @@ vec4 GetOutlineColor(vec4 front, float width, vec3 color) {
     vec4 curColor;
     float maxAlpha = front.a;
     vec2 offset;
-    for (float angle = 0.; angle <= DOUBLE_PI; angle += 0.6283185) {
+    for (float angle = 0.; angle < DOUBLE_PI; angle += 0.785398) {
         offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
         curColor = texture2D(uMainSampler, outTexCoord + offset);
         maxAlpha = max(maxAlpha, curColor.a);
