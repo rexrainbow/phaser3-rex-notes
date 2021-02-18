@@ -165,3 +165,22 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
     pipelineInstance.outlineColor = value;
     ```
     - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
+
+### Quality
+
+- Get
+    ```javascript
+    var quality = pipelineInstance.quality;
+    ```
+- Set
+    ```javascript
+    pipelineInstance.setQuality(quality);
+    ```
+    or
+    ```javascript
+    pipelineInstance.quality = quality;
+    ```
+    - `quality` : `0` ~ `1`, default is `0.1`.
+        - `0.1` : 10 sample points.
+        - `0.08` : 8 sample points.
+        - `1` : 100 sample points.

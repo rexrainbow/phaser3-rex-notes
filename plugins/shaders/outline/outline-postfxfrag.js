@@ -25,7 +25,7 @@ vec4 GetOutlineColor(vec4 front, float width, vec3 color) {
     vec4 curColor;
     float maxAlpha = front.a;
     vec2 offset;
-    for (float angle = 0.; angle <= DOUBLE_PI; angle += 0.6283185) {
+    for (float angle = 0.; angle < DOUBLE_PI; angle += #{angleStep}) {
         offset = vec2(mag.x * cos(angle), mag.y * sin(angle));        
         curColor = texture2D(uMainSampler, outTexCoord + offset);
         maxAlpha = max(maxAlpha, curColor.a);
@@ -43,12 +43,12 @@ void main() {
 }
 `;
 
-export default frag;
+const MAX_SAMPLES = 100;
+const MIN_SAMPLES = 1;
+var GetFrag = function ({ quality = 0.1 }) {
+  var samples = Math.max((quality * MAX_SAMPLES), MIN_SAMPLES);
+  var angleStep = (Math.PI * 2 / samples).toFixed(7);
+  return frag.replace(/\#\{angleStep\}/, angleStep);
+}
 
-// const MAX_SAMPLES = 100;
-// const MIN_SAMPLES = 1;
-// var GetFrag = function ({ quality = 0.1 }) {
-//   var samples = Math.max((quality * MAX_SAMPLES), MIN_SAMPLES);
-//   var angleStep = (Math.PI * 2 / samples).toFixed(7);
-//   return frag.replace(/\#\{angleStep\}/, angleStep);
-// }
+export default GetFrag;

@@ -1,17 +1,18 @@
-import FragSrc from './outline-postfxfrag.js';
+import GetFrag from './outline-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
+var StaticQuality = 0.1;
 class OutlinePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             name: 'rexOutlinePostFx',
             game: game,
             renderTarget: true,
-            fragShader: FragSrc
+            fragShader: GetFrag({ quality: StaticQuality })
         });
 
         this._thickness = 0;
@@ -59,6 +60,14 @@ class OutlinePostFxPipeline extends PostFXPipeline {
     setOutlineColor(value) {
         this.outlineColor = value;
         return this;
+    }
+
+    static setQuality(quality) {
+        StaticQuality = quality;
+    }
+
+    static getQuality() {
+        return StaticQuality;
     }
 }
 

@@ -3034,6 +3034,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#quality" class="md-nav__link">
+    Quality
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5413,6 +5420,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#quality" class="md-nav__link">
+    Quality
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5591,6 +5605,26 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">outlineColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="quality">Quality<a class="headerlink" href="#quality" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">quality</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setQuality</span><span class="p">(</span><span class="nx">quality</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span> <span class="o">=</span> <span class="nx">quality</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>quality</code> : <code>0</code> ~ <code>1</code>, default is <code>0.1</code>.<ul>
+<li><code>0.1</code> : 10 sample points.</li>
+<li><code>0.08</code> : 8 sample points.</li>
+<li><code>1</code> : 100 sample points.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
