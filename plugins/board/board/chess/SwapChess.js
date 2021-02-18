@@ -12,6 +12,7 @@ var SwapChess = function (gameObjectA, gameObjectB, align) {
     this.removeChess(gameObjectB);
     this.addChess(gameObjectA, tileXYZB.x, tileXYZB.y, tileXYZB.z, align);
     this.addChess(gameObjectB, tileXYZA.x, tileXYZA.y, tileXYZA.z, align);
+    return this;
 };
 
 export default SwapChess;
