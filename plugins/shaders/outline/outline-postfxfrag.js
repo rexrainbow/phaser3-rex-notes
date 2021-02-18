@@ -45,7 +45,10 @@ void main() {
 
 const MAX_SAMPLES = 100;
 const MIN_SAMPLES = 1;
-var GetFrag = function ({ quality = 0.1 }) {
+var GetFrag = function (quality) {
+  if (quality === undefined) {
+    quality = 0.1;
+  }
   var samples = Math.max((quality * MAX_SAMPLES), MIN_SAMPLES);
   var angleStep = (Math.PI * 2 / samples).toFixed(7);
   return frag.replace(/\#\{angleStep\}/, angleStep);

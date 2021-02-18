@@ -5,14 +5,15 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
 const Color = Phaser.Display.Color;
 
-var StaticQuality = 0.1;
+var Quality = 0.1;
+var FragSrc = GetFrag(Quality);
 class OutlinePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             name: 'rexOutlinePostFx',
             game: game,
             renderTarget: true,
-            fragShader: GetFrag({ quality: StaticQuality })
+            fragShader: FragSrc
         });
 
         this._thickness = 0;
@@ -63,11 +64,12 @@ class OutlinePostFxPipeline extends PostFXPipeline {
     }
 
     static setQuality(quality) {
-        StaticQuality = quality;
+        Quality = quality;
+        FragSrc = GetFrag(quality);
     }
 
     static getQuality() {
-        return StaticQuality;
+        return Quality;
     }
 }
 
