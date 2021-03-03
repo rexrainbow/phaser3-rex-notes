@@ -103,7 +103,7 @@ Add prespective render texture from JSON
 ```javascript
 var image = scene.make.rexPerspectiveRenderTexturege({
     x: 0,
-    y: 0,
+    y: 0,    
     width: 32,
     height: 32,
 

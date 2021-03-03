@@ -123,7 +123,7 @@ Add perspectiveimage from JSON
 var perspectiveimage = scene.make.rexPerspectiveImageCarousel({
     x: 0,
     y: 0,
-
+    
     images: [],  // Array of {key, frame}
     // index: 0,
     // rtl: false,

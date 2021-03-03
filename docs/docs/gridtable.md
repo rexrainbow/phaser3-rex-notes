@@ -134,6 +134,7 @@ var table = scene.make.rexGridTable({
 
     // cellsCount: 0,   // total cells count
     // ...
+    // origin: {x: 0.5, y: 0.5},
 });
 ```
 

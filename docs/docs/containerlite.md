@@ -104,7 +104,8 @@ var container = scene.make.rexContainerLite({
     // scale : {
     //    x: 1,
     //    y: 1
-    //}
+    //},
+    // origin: {x: 0.5, y: 0.5},
 });
 ```
 

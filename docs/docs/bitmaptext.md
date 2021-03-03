@@ -82,6 +82,7 @@ var txt = scene.make.bitmapText({
     font: '',
     size: false,
     align: 0,
+    // origin: {x: 0.5, y: 0.5},
     add: true
 });
 ```
