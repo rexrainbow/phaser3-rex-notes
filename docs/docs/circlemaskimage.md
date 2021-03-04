@@ -156,6 +156,7 @@ var image = scene.make.rexCircleMaskImage({
     frame: name,
     maskType: 0,
     // radius: undefined
+    // origin: {x: 0.5, y: 0.5},
     
     add: true
 });

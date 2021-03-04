@@ -82,6 +82,7 @@ var txt = scene.make.text({
         align: 'center',  // 'left'|'center'|'right'|'justify'
         backgroundColor: '#ff00ff'
     },
+    // origin: {x: 0.5, y: 0.5},
     add: true
 });
 ```
@@ -122,7 +123,8 @@ var txt = scene.make.text({
             font: 'bold 25px Arial',
             fill: 'white',
             wordWrap: { width: 300 }
-        }
+        },
+        // origin: {x: 0.5, y: 0.5},
     });
     ```
 - Wrap by callback
@@ -136,7 +138,8 @@ var txt = scene.make.text({
             font: 'bold 30px Arial',
             fill: 'white',
             wordWrap: { callback: wordWrap, scope: this }
-        }
+        },
+        // origin: {x: 0.5, y: 0.5},
     });
     
     function wordWrap (text, textObject)

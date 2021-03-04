@@ -87,7 +87,8 @@ var canvas = scene.make.rexCanvas({
     width: 256,
     height: 256,
 
-    //fill: null,
+    // origin: {x: 0.5, y: 0.5},
+    // fill: null,
     
     add: true
 });

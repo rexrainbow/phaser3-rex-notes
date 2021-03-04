@@ -108,7 +108,7 @@ var perspectiveimage = scene.make.rexShatterImage({
     frame: null,
 
     // variation: 0.25,
-    // samplesPerRing: 12
+    // samplesPerRing: 12,
 
     add: true
 });

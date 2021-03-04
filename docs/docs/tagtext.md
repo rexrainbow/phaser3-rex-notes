@@ -189,7 +189,7 @@ var txt = scene.make.rexTagText({
         backgroundColor: '#ff00ff',
         tags: {}
     },
-
+    // origin: {x: 0.5, y: 0.5},
     add: true
 });
 ```

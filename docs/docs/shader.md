@@ -41,6 +41,7 @@ var shader = scene.make.shader({
     //    x: 1,
     //    y: 1
     //},
+    // origin: {x: 0.5, y: 0.5},
 
     add: true
 });

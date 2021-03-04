@@ -38,6 +38,7 @@ var image = scene.make.tileSprite({
     //    x: 1,
     //    y: 1
     //},
+    // origin: {x: 0.5, y: 0.5},
 
     add: true
 });

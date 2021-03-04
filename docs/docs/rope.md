@@ -50,7 +50,8 @@ var rope = scene.make.rope({
     // alpha: 1
     // flipX: true,
     // flipY: true,
-
+    // origin: {x: 0.5, y: 0.5},
+    
     add: true
 });
 ```

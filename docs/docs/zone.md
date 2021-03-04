@@ -19,7 +19,8 @@ var zone = scene.make.zone({
     x: 0,
     y: 0,
     //width: 1,
-    //height: 1
+    //height: 1,
+    // origin: {x: 0.5, y: 0.5},
 });
 ```
 

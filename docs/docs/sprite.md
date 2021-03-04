@@ -56,7 +56,8 @@ var sprite = scene.make.sprite({
         // repeat: ,
         // ...
     // },
-
+    // origin: {x: 0.5, y: 0.5},
+    
     add: true
 });
 ```

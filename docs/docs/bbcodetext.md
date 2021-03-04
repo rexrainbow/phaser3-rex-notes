@@ -186,6 +186,7 @@ var txt = scene.make.rexBBCodeText({
         align: 'center',
         backgroundColor: '#ff00ff'
     },
+    // origin: {x: 0.5, y: 0.5},
     add: true
 });
 ```
@@ -223,7 +224,7 @@ var txt = scene.make.rexBBCodeText({
 
 - Wrap by word or character.
     ```javascript
-    var txt = scene.make.text({
+    var txt = scene.make.rexBBCodeText({
         x: 400,
         y: 100,
         text: 'The sky above the port was the color of television, tuned to a dead channel.',

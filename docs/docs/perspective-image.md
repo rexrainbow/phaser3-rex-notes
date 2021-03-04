@@ -104,6 +104,7 @@ Add perspectiveimage from JSON
 var perspectiveimage = scene.make.rexPerspectiveImage({
     x: 0,
     y: 0,
+    
     key: null,
     frame: null,
 
