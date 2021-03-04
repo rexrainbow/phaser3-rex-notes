@@ -77,6 +77,10 @@ class TouchCursor extends VectorToCursorKeys {
         if (this.pointer !== pointer) {
             return;
         }
+        if (!pointer.camera) {
+            // Pointer is outside of any camera, no worldX/worldY available
+            return;
+        }
 
         // Vector of world position
         this.setVector(
