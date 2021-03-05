@@ -272,7 +272,7 @@ Default configuration
     inputText.setMaxLength(value);
     ```
 
-### Max length
+### Min length
 
 - Get
     ```javascript
