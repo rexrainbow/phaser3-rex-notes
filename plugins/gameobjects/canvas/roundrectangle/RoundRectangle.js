@@ -36,7 +36,7 @@ class RoundRectangle extends Canvas {
     }
 
     get fillColor2() {
-        return this._fillStyle;
+        return this._fillColor2;
     }
 
     set fillColor2(value) {
