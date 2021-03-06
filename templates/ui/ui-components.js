@@ -1,4 +1,5 @@
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
+import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
 import TagText from './tagtext/TagText.js';
 import Container from './container/Container.js';
@@ -55,6 +56,7 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 
 export {
     RoundRectangle,
+    RoundRectangleCanvas,
     BBCodeText,
     TagText,
     Container,

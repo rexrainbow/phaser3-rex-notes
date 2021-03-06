@@ -1,6 +1,7 @@
 import ObjectFactory from './ObjectFactory.js';
 
 import RoundRectangleFactory from './roundrectangle/Factory.js';
+import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import ContainerFactory from './container/Factory.js';
