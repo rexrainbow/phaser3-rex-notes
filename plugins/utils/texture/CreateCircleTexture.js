@@ -1,4 +1,5 @@
-import GetStyle from './GetStyle.js';
+import GetStyle from '../canvas/GetStyle.js';
+import DrawCircle from '../canvas/DrawCircle.js';
 
 var CreateCircleTexture = function (scene, key, width, fillStyle, strokeStyle, lineWidth) {
 
@@ -12,26 +13,18 @@ var CreateCircleTexture = function (scene, key, width, fillStyle, strokeStyle, l
     }
 
     var texture = scene.textures.createCanvas(key, width, width);
+    var canvas = texture.getCanvas();
     var context = texture.getContext();
 
-    // Draw canvas
     var r = width / 2;
     var x = r;
     r -= (lineWidth / 2);
-    context.beginPath();
-    context.ellipse(x, x, r, r, 0, 0, (2 * Math.PI));
-    if (fillStyle !== undefined) {
-        fillStyle = GetStyle(fillStyle);
-        context.fillStyle = fillStyle;
-        context.fill();
-    }
-
-    if (strokeStyle !== undefined) {
-        strokeStyle = GetStyle(strokeStyle);
-        context.strokeStyle = strokeStyle;
-        context.lineWidth = lineWidth;
-        context.stroke();
-    }
+    DrawCircle(
+        canvas, context,
+        x, x, r, r,
+        GetStyle(fillStyle),
+        GetStyle(strokeStyle), lineWidth
+    );
 
     texture.refresh();
 }
