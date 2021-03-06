@@ -4,6 +4,7 @@ module.exports = {
     'tagtextplugin': './plugins/tagtext-plugin.js',
     'canvasplugin': './plugins/canvas-plugin.js',
     'circlemaskimageplugin': './plugins/circlemaskimage-plugin.js',
+    'roundrectanglecanvasplugin': './plugins/roundrectanglecanvas-plugin.js',
     'containerliteplugin': './plugins/containerlite-plugin.js',
     'gridtableplugin': './plugins/gridtable-plugin.js',
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',

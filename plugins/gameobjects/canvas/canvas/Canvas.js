@@ -25,12 +25,15 @@ class Canvas extends GameObject {
         this.renderer = scene.sys.game.renderer;
 
         this.resolution = 1;
-        this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
+        this._width = width;
+        this._height = height;
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas = CanvasPool.create(this, width, height);
         this.context = this.canvas.getContext('2d');
         this.dirty = false;
 
         this.setPosition(x, y);
-        this.setSize(width, height);
         this.setOrigin(0.5, 0.5);
         this.initPipeline();
 
@@ -58,6 +61,65 @@ class Canvas extends GameObject {
         }, this);
     }
 
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this.setSize(value, this._height);
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this.setSize(this._width, value);
+    }
+
+    setSize(width, height) {
+        if ((this._width === width) && (this._height === height)) {
+            return this;
+        }
+
+        this._width = width;
+        this._height = height;
+
+        this.updateDisplayOrigin();
+
+        width = Math.max(Math.ceil(width * this.resolution), 1);
+        height = Math.max(Math.ceil(height * this.resolution), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
+
+        this.frame.setSize(width, height);
+
+        this.dirty = true;
+        return this;
+    }
+
+    get displayWidth() {
+        return this.scaleX * this._width;
+    }
+
+    set displayWidth(value) {
+        this.scaleX = value / this._width;
+    }
+
+    get displayHeight() {
+        return this.scaleY * this._height;
+    }
+
+    set displayHeight(value) {
+        this.scaleY = value / this._height;
+    }
+
+    setDisplaySize(width, height) {
+        this.displayWidth = width;
+        this.displayHeight = height;
+        return this;
+    }
+
     getCanvas(readOnly) {
         if (!readOnly) {
             this.dirty = true;
@@ -82,24 +144,7 @@ class Canvas extends GameObject {
     }
 
     resize(width, height) {
-        if ((this.width === width) && (this.height === height)) {
-            return this;
-        }
-
-        this
-            .setSize(width, height)
-            .updateDisplayOrigin();
-
-        width *= this.resolution;
-        height *= this.resolution;
-        width = Math.max(Math.ceil(width), 1);
-        height = Math.max(Math.ceil(height), 1);
-        this.canvas.width = width;
-        this.canvas.height = height;
-
-        this.frame.setSize(width, height);
-
-        this.dirty = true;
+        this.setSize(width, height);
         return this;
     }
 }
@@ -109,7 +154,6 @@ Phaser.Class.mixin(Canvas,
     [
         Components.Alpha,
         Components.BlendMode,
-        Components.ComputedSize,
         Components.Crop,
         Components.Depth,
         Components.Flip,

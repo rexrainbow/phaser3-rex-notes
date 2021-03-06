@@ -16,7 +16,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         }
 
         var geom = new GeomRoundRectangle();  // Configurate it later
-        super(scene, 'RoundRectangle', geom);
+        super(scene, 'rexRoundRectangleShape', geom);
 
         var radius = GetValue(radiusConfig, 'radius', radiusConfig);
         geom.setTo(0, 0, width, height, radius);

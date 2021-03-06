@@ -24,14 +24,14 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     radius = cornerRadius.br;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
-    centerX = geom.width - radiusX;
-    centerY = geom.height - radiusY;
+    centerX = width - radiusX;
+    centerY = height - radiusY;
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
         context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad0, Rad90);
     } else {
-        context.moveTo(geom.width, centerY);
-        context.lineTo(geom.width, geom.height);
-        context.lineTo(centerX, geom.height);
+        context.moveTo(width, centerY);
+        context.lineTo(width, height);
+        context.lineTo(centerX, height);
     }
 
     // Bottom-left
@@ -39,12 +39,12 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
     centerX = radiusX;
-    centerY = geom.height - radiusY;
-    context.lineTo(radiusX, geom.height);
+    centerY = height - radiusY;
+    context.lineTo(radiusX, height);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
         context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad90, Rad180);
     } else {
-        context.lineTo(0, geom.height);
+        context.lineTo(0, height);
         context.lineTo(0, centerY);
     }
 
@@ -66,14 +66,14 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     radius = cornerRadius.tr;
     radiusX = radius.x * scaleRX;
     radiusY = radius.y * scaleRY;
-    centerX = geom.width - radiusX;
+    centerX = width - radiusX;
     centerY = radiusY;
     context.lineTo(centerX, 0);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
         context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad270, Rad0);
     } else {
-        context.lineTo(geom.width, 0);
-        context.lineTo(geom.width, centerY);
+        context.lineTo(width, 0);
+        context.lineTo(width, centerY);
     }
 
     context.closePath();
