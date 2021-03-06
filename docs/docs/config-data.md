@@ -73,5 +73,6 @@ var isPlainObject = Phaser.Utils.Objects.IsPlainObject(object);
 ```
 
 Plain object:
+
 - `var obj = {};`
 - `var obj = new Object();`
