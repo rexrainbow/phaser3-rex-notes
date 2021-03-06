@@ -1,4 +1,4 @@
-import GeomRoundRectangle from './geom/RoundRectangle.js';
+import GeomRoundRectangle from '../../../geom/roundrectangle/RoundRectangle.js';
 import LineTo from '../utils/LineTo.js';
 import ArcTo from '../utils/ArcTo.js';
 import Render from './render/Render.js';
