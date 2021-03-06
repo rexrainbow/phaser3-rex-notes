@@ -1,7 +1,7 @@
 import Canvas from '../canvas/Canvas.js';
 import DrawCircle from './drawmethods/DrawCircle.js';
 import DrawEllipse from './drawmethods/DrawEllipse.js';
-import DrawRoundRectangle from './drawmethods/DrawRoundRectangle.js';
+import DrawRoundRectangle from '../../../utils/canvas/AddRoundRectanglePath.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -68,7 +68,7 @@ class CircleMaskImage extends Canvas {
                 break;
             case 2:
                 var radiusConfig = GetValue(config, 'radius', undefined);
-                DrawRoundRectangle(ctx, width, height, radiusConfig);
+                DrawRoundRectangle(ctx, 0, 0, width, height, radiusConfig);
                 break;
         }
 
