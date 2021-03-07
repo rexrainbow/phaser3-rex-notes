@@ -4,8 +4,8 @@ var DrawRectangle = function (canvas, context, x, y, width, height, fillStyle, s
 
     context.rect(x, y, width, height);
 
-    if (fillStyle !== undefined) {
-        if (fillColor2 !== undefined) {
+    if (fillStyle != null) {
+        if (fillColor2 != null) {
             let grd;
             if (isHorizontalGradient) {
                 grd = context.createLinearGradient(0, 0, width, 0);
@@ -21,7 +21,7 @@ var DrawRectangle = function (canvas, context, x, y, width, height, fillStyle, s
         context.fill();
     }
 
-    if (strokeStyle !== undefined) {
+    if (strokeStyle != null) {
         context.strokeStyle = strokeStyle;
         context.lineWidth = lineWidth;
         context.stroke();

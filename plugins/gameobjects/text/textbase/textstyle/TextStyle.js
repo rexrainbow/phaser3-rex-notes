@@ -26,6 +26,12 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var propertyMap = {
     // background
     backgroundColor: ['backgroundColor', null],
+    backgroundColor2: ['backgroundColor2', null],
+    backgroundHorizontalGradient: ['backgroundHorizontalGradient', true],
+    backgroundCornerRadius: ['backgroundCornerRadius', 0],
+    backgroundStrokeColor: ['backgroundStrokeColor', null],
+    backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2],
+    backgroundCornerIteration: ['backgroundCornerIteration', null],
 
     // font
     fontFamily: ['fontFamily', 'Courier'],
@@ -74,6 +80,12 @@ class TextStyle {
         this.parent = text;
 
         this.backgroundColor;
+        this.backgroundColor2;
+        this.backgroundHorizontalGradient;
+        this.backgroundStrokeColor;
+        this.backgroundStrokeLineWidth;
+        this.backgroundCornerRadius;
+        this.backgroundCornerIteration;
 
         this.fontFamily;
         this.fontSize;
@@ -301,8 +313,28 @@ class TextStyle {
         return this.update(false);
     }
 
-    setBackgroundColor(color) {
+    setBackgroundColor(color, color2, isHorizontalGradient) {
+        if (isHorizontalGradient === undefined) {
+            isHorizontalGradient = true;
+        }
+
         this.backgroundColor = color;
+        this.backgroundColor2 = color2;
+        this.backgroundHorizontalGradient = isHorizontalGradient;
+
+        return this.update(false);
+    }
+
+    setBackgroundStrokeColor(color, lineWidth) {
+        this.backgroundStrokeColor = color;
+        this.backgroundStrokeLineWidth = lineWidth;
+
+        return this.update(false);
+    }
+
+    setBackgroundCornerRadius(radius, iteration) {
+        this.backgroundCornerRadius = radius;
+        this.backgroundCornerIteration = iteration;
 
         return this.update(false);
     }

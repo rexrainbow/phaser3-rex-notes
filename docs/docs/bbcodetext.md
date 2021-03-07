@@ -103,6 +103,12 @@ Default style
     fontSize: '16px',
     fontStyle: '',
     backgroundColor: null,
+    backgroundColor2: null,
+    backgroundHorizontalGradient: true,
+    backgroundStrokeColor: null,
+    backgroundStrokeLineWidth: 2,
+    backgroundCornerRadius: 0,
+    backgroundCornerIteration: null,    
     color: '#fff',
     stroke: '#fff',
     strokeThickness: 0,
@@ -330,15 +336,43 @@ txt.setFontStyle(style);
         txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
         ```
-- Background color
-    - Get
-        ```javascript
-        var color = txt.style.backgroundColor;
-        ```
-    - Set
-        ```javascript
-        txt.setBackgroundColor(color);
-        ```
+- Background
+    - Color, or gradient color
+        - Get
+            ```javascript
+            var color = txt.style.backgroundColor;
+            var color2 = txt.style.backgroundColor2;
+            var isHorizontalGradient = txt.style.backgroundHorizontalGradient;
+            ```
+        - Set
+            ```javascript
+            txt.setBackgroundColor(color);
+            // txt.setBackgroundColor(color, color2, isHorizontalGradient);
+            ```
+    - Stroke color
+        - Get
+           ```javascript
+           var color = txt.style.backgroundStrokeColor;
+           var lineWidth = txt.style.backgroundStrokeLineWidth;
+           ```
+        - Set
+            ```javascript
+            txt.setBackgroundStrokeColor(color, lineWidth);
+            ```
+    - Round rectangle
+        - Get
+            ```javascript
+            var radius = txt.style.backgroundCornerRadius;
+            var iteration = txt.style.backgroundCornerIteration;
+            ```
+        - Set
+            ```javascript
+            txt.setBackgroundCornerRadius(radius);
+            // txt.setBackgroundCornerRadius(radius, iteration);
+            ```
+            - `iteration` : 
+                - `undefined` : Round rectangle
+                - `0` : Octagon
 - Shadow
     - Get
         ```javascript

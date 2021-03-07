@@ -52,8 +52,15 @@ Last line`;
 Last line`;
 
         this.add.rexBBCodeText(400, 30, s2, {
-            backgroundColor: '#555',
             fontSize: '30px',
+            backgroundColor: '#888',
+            backgroundColor2: '#222',
+            backgroundHorizontalGradient: false,
+            backgroundStrokeColor: 'red',
+            backgroundStrokeLineWidth: 2,
+            backgroundCornerRadius: 20,
+            // backgroundCornerIteration: 0,
+            padding: 20
         })
 
     }

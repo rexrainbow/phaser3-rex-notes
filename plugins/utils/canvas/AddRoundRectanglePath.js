@@ -80,7 +80,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
 }
 
 var ArcTo = function (context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
-    if (iteration === undefined) {
+    if (iteration == null) {  // undefined, or null
         context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
     } else {
         iteration += 1;

@@ -4,12 +4,12 @@ var DrawCircle = function (canvas, context, x, y, rx, ry, fillStyle, strokeStyle
 
     context.ellipse(x, y, rx, ry, 0, 0, (2 * Math.PI));
 
-    if (fillStyle !== undefined) {
+    if (fillStyle != null) {
         context.fillStyle = fillStyle;
         context.fill();
     }
 
-    if (strokeStyle !== undefined) {
+    if (strokeStyle != null) {
         context.strokeStyle = strokeStyle;
         context.lineWidth = lineWidth;
         context.stroke();

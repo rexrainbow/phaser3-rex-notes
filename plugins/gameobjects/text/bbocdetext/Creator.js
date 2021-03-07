@@ -12,6 +12,12 @@ export default function (config, addToScene) {
     // style Object = {
     //     font: [ 'font', '16px Courier' ],
     //     backgroundColor: [ 'backgroundColor', null ],
+    //     backgroundColor2: [ 'backgroundColor2', null ],
+    //     backgroundHorizontalGradient: ['backgroundHorizontalGradient', true],
+    //     backgroundStrokeColor: ['backgroundStrokeColor', null],
+    //     backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2],
+    //     backgroundCornerRadius: ['backgroundCornerRadius', 0],
+    //     backgroundCornerIteration: ['backgroundCornerIteration', null],    
     //     fill: [ 'fill', '#fff' ],
     //     stroke: [ 'stroke', '#fff' ],
     //     strokeThickness: [ 'strokeThickness', 0 ],

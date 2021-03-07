@@ -16,7 +16,7 @@ class CanvasText {
         this.context = GetValue(config, 'context', null);
         this.canvas = this.context.canvas;
         this.parser = GetValue(config, 'parser', null);
-        this.defatultStyle = GetValue(config, 'style', null);
+        this.defaultStyle = GetValue(config, 'style', null);
         this.autoRound = true;
 
         this.pensPool = GetValue(config, 'pensPool', null);
@@ -35,7 +35,7 @@ class CanvasText {
         this.context = undefined;
         this.canvas = undefined;
         this.parser = undefined;
-        this.defatultStyle = undefined;
+        this.defaultStyle = undefined;
 
         if (this.penManager) {
             this.penManager.destroy();
@@ -91,7 +91,7 @@ class CanvasText {
                 // Save the current context.
                 this.context.save();
                 curStyle = this.parser.propToContextStyle(
-                    this.defatultStyle,
+                    this.defaultStyle,
                     curProp
                 );
                 curStyle.buildFont();
@@ -123,13 +123,13 @@ class CanvasText {
     }
 
     get startXOffset() {
-        var defatultStyle = this.defatultStyle;
-        return (defatultStyle.strokeThickness / 2);
+        var defaultStyle = this.defaultStyle;
+        return (defaultStyle.strokeThickness / 2);
     }
 
     get startYOffset() {
-        var defatultStyle = this.defatultStyle;
-        return (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
+        var defaultStyle = this.defaultStyle;
+        return (defaultStyle.strokeThickness / 2) + defaultStyle.metrics.ascent;
     }
 
     get lines() {
@@ -138,7 +138,7 @@ class CanvasText {
 
     get desplayLinesCount() {
         var linesCount = this.penManager.linesCount,
-            maxLines = this.defatultStyle.maxLines;
+            maxLines = this.defaultStyle.maxLines;
         if ((maxLines > 0) && (linesCount > maxLines)) {
             linesCount = maxLines;
         }
@@ -151,9 +151,9 @@ class CanvasText {
 
     get linesHeight() {
         var linesCount = this.desplayLinesCount;
-        var linesHeight = (this.defatultStyle.lineHeight * linesCount);
+        var linesHeight = (this.defaultStyle.lineHeight * linesCount);
         if (linesCount > 0) {
-            linesHeight -= this.defatultStyle.lineSpacing;
+            linesHeight -= this.defaultStyle.lineSpacing;
         }
         return linesHeight;
     }
@@ -211,12 +211,12 @@ class CanvasText {
             retPenManager = this.newPenManager();
         }
 
-        var defatultStyle = this.defatultStyle;
+        var defaultStyle = this.defaultStyle;
         this.updatePenManager(
             text,
-            defatultStyle.wrapMode,
-            defatultStyle.wrapWidth,
-            defatultStyle.lineHeight,
+            defaultStyle.wrapMode,
+            defaultStyle.wrapWidth,
+            defaultStyle.lineHeight,
             retPenManager
         );
         return retPenManager;
@@ -228,12 +228,12 @@ class CanvasText {
         }
 
         var penManager = this.tmpPenManager;
-        var defatultStyle = this.defatultStyle;
+        var defaultStyle = this.defaultStyle;
         this.updatePenManager(
             text,
-            defatultStyle.wrapMode,
-            defatultStyle.wrapWidth,
-            defatultStyle.lineHeight,
+            defaultStyle.wrapMode,
+            defaultStyle.wrapWidth,
+            defaultStyle.lineHeight,
             penManager
         );
 

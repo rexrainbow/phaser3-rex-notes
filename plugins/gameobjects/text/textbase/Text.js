@@ -195,8 +195,16 @@ class Text extends GameObject {
         return this.style.setFixedSize(width, height);
     }
 
-    setBackgroundColor(color) {
-        return this.style.setBackgroundColor(color);
+    setBackgroundColor(color, color2, isHorizontalGradient) {
+        return this.style.setBackgroundColor(color, color2, isHorizontalGradient);
+    }
+
+    setBackgroundStrokeColor(color, lineWidth) {
+        return this.style.setBackgroundStrokeColor(color, lineWidth);
+    }
+
+    setBackgroundCornerRadius(radius, iteration) {
+        return this.style.setBackgroundCornerRadius(radius, iteration);
     }
 
     setFill(color) {

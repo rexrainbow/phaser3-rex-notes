@@ -5686,6 +5686,12 @@
     <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
     <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundColor2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundHorizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">backgroundStrokeColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundStrokeLineWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">backgroundCornerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">backgroundCornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>    
     <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
     <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
     <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5912,13 +5918,47 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Background color<ul>
+<li>Background<ul>
+<li>Color, or gradient color<ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isHorizontalGradient</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundHorizontalGradient</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// txt.setBackgroundColor(color, color2, isHorizontalGradient);</span>
 </code></pre></div></li>
+</ul>
+</li>
+<li>Stroke color<ul>
+<li>Get
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundStrokeColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundStrokeLineWidth</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundStrokeColor</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Round rectangle<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundCornerRadius</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">iteration</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundCornerIteration</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundCornerRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// txt.setBackgroundCornerRadius(radius, iteration);</span>
+</code></pre></div><ul>
+<li><code>iteration</code> : <ul>
+<li><code>undefined</code> : Round rectangle</li>
+<li><code>0</code> : Octagon</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Shadow<ul>
