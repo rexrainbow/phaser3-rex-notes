@@ -20,6 +20,17 @@ class Demo extends Phaser.Scene {
         this.add.rexRoundRectangleCanvas(550, 150, 100, 100, 30, 0x008888, 0x880000, 4);
         // Round-rectangle with stroke
         this.add.rexRoundRectangleCanvas(700, 150, 100, 100, 30, 0x008888, 0x880000, 4, 0x001111);
+
+        // Rhombus
+        this.add.rexRoundRectangleCanvas(100, 300, 100, 100, {
+            radius: 50,
+            iteration: 0
+        }, 0x008888, 0x880000, 4, 0x001111);
+        // Octagon
+        this.add.rexRoundRectangleCanvas(250, 300, 100, 100, {
+            radius: 30,
+            iteration: 0
+        }, 0x008888, 0x880000, 4, 0x001111);
     }
 
     update() { }

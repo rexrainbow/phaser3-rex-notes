@@ -1,5 +1,6 @@
 import RoundRectangle from '../../geom/roundrectangle/RoundRectangle.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 const Rad0 = DegToRad(0);
 const Rad90 = DegToRad(90);
@@ -7,7 +8,9 @@ const Rad180 = DegToRad(180);
 const Rad270 = DegToRad(270);
 
 var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig) {
-    var geom = new RoundRectangle(x, y, width, height, radiusConfig),
+    var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+    var iteration = GetValue(radiusConfig, 'iteration', undefined);
+    var geom = new RoundRectangle(x, y, width, height, radius),
         minWidth = geom.minWidth,
         minHeight = geom.minHeight,
         scaleRX = (width >= minWidth) ? 1 : (width / minWidth),
@@ -27,7 +30,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerX = width - radiusX;
     centerY = height - radiusY;
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
-        context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad0, Rad90);
+        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
     } else {
         context.moveTo(width, centerY);
         context.lineTo(width, height);
@@ -42,7 +45,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerY = height - radiusY;
     context.lineTo(radiusX, height);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
-        context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad90, Rad180);
+        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
     } else {
         context.lineTo(0, height);
         context.lineTo(0, centerY);
@@ -56,7 +59,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerY = radiusY;
     context.lineTo(0, centerY);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
-        context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad180, Rad270);
+        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
     } else {
         context.lineTo(0, 0);
         context.lineTo(centerX, 0);
@@ -70,13 +73,29 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerY = radiusY;
     context.lineTo(centerX, 0);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
-        context.ellipse(centerX, centerY, radiusX, radiusY, 0, Rad270, Rad0);
+        ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
     } else {
         context.lineTo(width, 0);
         context.lineTo(width, centerY);
     }
 
     context.closePath();
+}
+
+var ArcTo = function (context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {
+    if (iteration === undefined) {
+        context.ellipse(centerX, centerY, radiusX, radiusY, 0, startAngle, endAngle);
+    } else {
+        iteration += 1;
+        var x, y, angle;
+        var step = (endAngle - startAngle) / iteration;
+        for (var i = 0; i <= iteration; i++) {
+            angle = startAngle + (step * i);
+            x = centerX + (radiusX * Math.cos(angle));
+            y = centerY + (radiusY * Math.sin(angle));
+            context.lineTo(x, y);
+        }
+    }
 }
 
 var IsArcCorner = function (radius) {
