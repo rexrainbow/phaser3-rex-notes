@@ -30,6 +30,7 @@ var CreateRectangleTexture = function (scene, key, width, height, radiusConfig, 
         x, x,
         width, height,
         radiusConfig,
+        undefined,
         GetStyle(fillStyle),
         GetStyle(strokeStyle), lineWidth,
         GetStyle(fillColor2), isHorizontalGradient

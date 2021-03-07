@@ -2,12 +2,17 @@ import Canvas from '../canvas/Canvas.js';
 import DrawRoundRectangle from '../../../utils/canvas/DrawRoundRectangle.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class RoundRectangle extends Canvas {
-    constructor(scene, x, y, width, height, radius, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+    constructor(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
         super(scene, x, y, width, height);
         this.type = 'rexRoundRectangleCanvas';
 
+        var radius = GetValue(radiusConfig, 'radius', radiusConfig);
+        var iteration = GetValue(radiusConfig, 'iteration', undefined);
         this.setRadius(radius);
+        this.setIteration(iteration);
         this.setFillStyle(fillStyle, fillColor2, isHorizontalGradient);
         this.setStrokeStyle(strokeStyle, lineWidth);
     }
@@ -23,6 +28,20 @@ class RoundRectangle extends Canvas {
 
     setRadius(radius) {
         this.radius = radius;
+        return this;
+    }
+
+    get iteration() {
+        return this._iteration;
+    }
+
+    set iteration(value) {
+        this.dirty |= (this._iteration != value);
+        this._iteration = value;
+    }
+
+    setIteration(iteration) {
+        this.iteration = iteration;
         return this;
     }
 
@@ -102,6 +121,7 @@ class RoundRectangle extends Canvas {
             x, x,
             width, height,
             this.radius,
+            this.iteration,
             GetStyle(this.fillStyle, this.canvas, this.context),
             GetStyle(this.strokeStyle, this.canvas, this.context),
             lineWidth,

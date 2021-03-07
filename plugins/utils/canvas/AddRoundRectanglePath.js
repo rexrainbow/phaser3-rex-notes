@@ -1,16 +1,13 @@
 import RoundRectangle from '../../geom/roundrectangle/RoundRectangle.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 const Rad0 = DegToRad(0);
 const Rad90 = DegToRad(90);
 const Rad180 = DegToRad(180);
 const Rad270 = DegToRad(270);
 
-var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig) {
-    var radius = GetValue(radiusConfig, 'radius', radiusConfig);
-    var iteration = GetValue(radiusConfig, 'iteration', undefined);
-    var geom = new RoundRectangle(x, y, width, height, radius),
+var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig, iteration) {
+    var geom = new RoundRectangle(x, y, width, height, radiusConfig),
         minWidth = geom.minWidth,
         minHeight = geom.minHeight,
         scaleRX = (width >= minWidth) ? 1 : (width / minWidth),
