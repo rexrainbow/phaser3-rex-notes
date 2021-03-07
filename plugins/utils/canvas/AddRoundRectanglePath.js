@@ -27,7 +27,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerX = width - radiusX;
     centerY = height - radiusY;
     context.moveTo(width, centerY);
-    if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
+    if ((radiusX > 0) && (radiusY > 0)) {
         ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
     } else {
         context.lineTo(width, height);
@@ -41,7 +41,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerX = radiusX;
     centerY = height - radiusY;
     context.lineTo(radiusX, height);
-    if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
+    if ((radiusX > 0) && (radiusY > 0)) {
         ArcTo(context, centerX, centerY, radiusX, radiusY, Rad90, Rad180, iteration);
     } else {
         context.lineTo(0, height);
@@ -55,7 +55,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerX = radiusX;
     centerY = radiusY;
     context.lineTo(0, centerY);
-    if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
+    if ((radiusX > 0) && (radiusY > 0)) {
         ArcTo(context, centerX, centerY, radiusX, radiusY, Rad180, Rad270, iteration);
     } else {
         context.lineTo(0, 0);
@@ -69,7 +69,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     centerX = width - radiusX;
     centerY = radiusY;
     context.lineTo(centerX, 0);
-    if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
+    if ((radiusX > 0) && (radiusY > 0)) {
         ArcTo(context, centerX, centerY, radiusX, radiusY, Rad270, Rad0, iteration);
     } else {
         context.lineTo(width, 0);
@@ -93,10 +93,6 @@ var ArcTo = function (context, centerX, centerY, radiusX, radiusY, startAngle, e
             context.lineTo(x, y);
         }
     }
-}
-
-var IsArcCorner = function (radius) {
-    return ((radius.x !== 0) && (radius.y !== 0));
 }
 
 export default AddRoundRectanglePath;
