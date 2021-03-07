@@ -26,10 +26,10 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     radiusY = radius.y * scaleRY;
     centerX = width - radiusX;
     centerY = height - radiusY;
+    context.moveTo(width, centerY);
     if (IsArcCorner(radius) && (radiusX >= 0) && (radiusY >= 0)) {
         ArcTo(context, centerX, centerY, radiusX, radiusY, Rad0, Rad90, iteration);
     } else {
-        context.moveTo(width, centerY);
         context.lineTo(width, height);
         context.lineTo(centerX, height);
     }
