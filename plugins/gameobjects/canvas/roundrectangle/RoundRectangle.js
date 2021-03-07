@@ -121,12 +121,12 @@ class RoundRectangle extends Canvas {
             x, x,
             width, height,
             this.radius,
-            this.iteration,
             GetStyle(this.fillStyle, this.canvas, this.context),
             GetStyle(this.strokeStyle, this.canvas, this.context),
             lineWidth,
             GetStyle(this.fillColor2, this.canvas, this.context),
-            this.isHorizontalGradient
+            this.isHorizontalGradient,
+            this.iteration,
         );
         super.updateTexture();
         return this;

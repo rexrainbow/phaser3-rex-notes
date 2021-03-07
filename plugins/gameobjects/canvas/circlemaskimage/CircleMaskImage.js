@@ -1,7 +1,5 @@
 import Canvas from '../canvas/Canvas.js';
-import DrawCircle from './drawmethods/DrawCircle.js';
-import DrawEllipse from './drawmethods/DrawEllipse.js';
-import DrawRoundRectangle from '../../../utils/canvas/AddRoundRectanglePath.js';
+import AddRoundRectanglePath from '../../../utils/canvas/AddRoundRectanglePath.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -60,15 +58,20 @@ class CircleMaskImage extends Canvas {
 
         // Draw circle, ellipse, or roundRectangle
         switch (maskType) {
-            case 0:
-                DrawCircle(ctx, width, height);
-                break;
-            case 1:
-                DrawEllipse(ctx, width, height);
-                break;
             case 2:
-                var radiusConfig = GetValue(config, 'radius', undefined);
-                DrawRoundRectangle(ctx, 0, 0, width, height, radiusConfig);
+                var radiusConfig = GetValue(config, 'radius', 0);
+                var iteration = GetValue(config, 'iteration', undefined);
+                AddRoundRectanglePath(ctx, 0, 0, width, height, radiusConfig, iteration);
+                break;
+
+            default: // circle, ellipse
+                var centerX = Math.floor(width / 2);
+                var centerY = Math.floor(height / 2);
+                if (maskType === 0) {
+                    ctx.arc(centerX, centerY, Math.min(centerX, centerY), 0, (2 * Math.PI));
+                } else {
+                    ctx.ellipse(centerX, centerY, centerX, centerY, 0, 0, (2 * Math.PI));
+                }
                 break;
         }
 

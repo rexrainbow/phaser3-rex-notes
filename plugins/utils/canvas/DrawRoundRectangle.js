@@ -1,6 +1,6 @@
 import AddRoundRectanglePath from './AddRoundRectanglePath.js'
 
-var DrawRoundRectangle = function (canvas, context, x, y, width, height, radiusConfig, iteration, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+var DrawRoundRectangle = function (canvas, context, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, iteration) {
     AddRoundRectanglePath(context, x, y, width, height, radiusConfig, iteration);
 
     if (fillStyle !== undefined) {

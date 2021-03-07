@@ -1,7 +1,7 @@
 import GetStyle from '../canvas/GetStyle.js';
 import DrawRoundRectangle from '../canvas/DrawRoundRectangle.js';
 
-var CreateRectangleTexture = function (scene, key, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+var CreateRectangleTexture = function (scene, key, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient, iteration) {
     if (height === undefined) {
         height = width;
     }
@@ -30,10 +30,10 @@ var CreateRectangleTexture = function (scene, key, width, height, radiusConfig, 
         x, x,
         width, height,
         radiusConfig,
-        undefined,
         GetStyle(fillStyle),
         GetStyle(strokeStyle), lineWidth,
-        GetStyle(fillColor2), isHorizontalGradient
+        GetStyle(fillColor2), isHorizontalGradient,
+        iteration
     );
 
     texture.refresh();
