@@ -5625,13 +5625,15 @@
 <ul>
 <li>Update texture when rendering
     <div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">needRedraw</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">dirty</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Update texture now
     <div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </code></pre></div>
     or update canvas and texture
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">canvasElem</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>
-<span class="nx">canvas</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">canvas</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">canvasElem</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span> <span class="p">});</span>
 <span class="c1">// canvas.updateTexture(callback, scope);</span>
 </code></pre></div></li>
 </ul>

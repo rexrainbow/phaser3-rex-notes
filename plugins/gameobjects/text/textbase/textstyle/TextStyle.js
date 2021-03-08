@@ -6,6 +6,7 @@
 
 import MeasureText from './MeasureText.js';
 import CONST from '../const.js';
+import GetStyle from '../../../../utils/canvas/GetStyle.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -138,6 +139,14 @@ class TextStyle {
         } else {
             this.metrics = MeasureText(this);
         }
+    }
+
+    get canvas() {
+        return this.parent.canvasText.canvas;
+    }
+
+    get context() {
+        return this.parent.canvasText.context;
     }
 
     setStyle(style, updateText) {
@@ -318,15 +327,15 @@ class TextStyle {
             isHorizontalGradient = true;
         }
 
-        this.backgroundColor = color;
-        this.backgroundColor2 = color2;
+        this.backgroundColor = GetStyle(color, this.canvas, this.context);
+        this.backgroundColor2 = GetStyle(color2, this.canvas, this.context);
         this.backgroundHorizontalGradient = isHorizontalGradient;
 
         return this.update(false);
     }
 
     setBackgroundStrokeColor(color, lineWidth) {
-        this.backgroundStrokeColor = color;
+        this.backgroundStrokeColor = GetStyle(color, this.canvas, this.context);
         this.backgroundStrokeLineWidth = lineWidth;
 
         return this.update(false);
@@ -340,13 +349,13 @@ class TextStyle {
     }
 
     setFill(color) {
-        this.color = color;
+        this.color = GetStyle(color, this.canvas, this.context);
 
         return this.update(false);
     }
 
     setColor(color) {
-        this.color = color;
+        this.color = GetStyle(color, this.canvas, this.context);
 
         return this.update(false);
     }
@@ -360,7 +369,7 @@ class TextStyle {
                 thickness = this.strokeThickness;
             }
 
-            this.stroke = color;
+            this.stroke = GetStyle(color, this.canvas, this.context);
             this.strokeThickness = thickness;
         }
 
@@ -389,7 +398,7 @@ class TextStyle {
 
         this.shadowOffsetX = x;
         this.shadowOffsetY = y;
-        this.shadowColor = color;
+        this.shadowColor = GetStyle(color, this.canvas, this.context);
         this.shadowBlur = blur;
         this.shadowStroke = shadowStroke;
         this.shadowFill = shadowFill;
@@ -416,7 +425,7 @@ class TextStyle {
             color = '#000';
         }
 
-        this.shadowColor = color;
+        this.shadowColor = GetStyle(color, this.canvas, this.context);
 
         return this.update(false);
     }
@@ -454,7 +463,7 @@ class TextStyle {
             offset = 0;
         }
 
-        this.underlineColor = color;
+        this.underlineColor = GetStyle(color, this.canvas, this.context);
         this.underlineThickness = thickness;
         this.underlineOffset = offset;
 
@@ -466,7 +475,7 @@ class TextStyle {
             color = '#000';
         }
 
-        this.underlineColor = color;
+        this.underlineColor = GetStyle(color, this.canvas, this.context);
         return this.update(false);
     }
 

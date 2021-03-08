@@ -148,14 +148,17 @@ var canvas = scene.make.rexCanvas({
     ```javascript
     canvas.needRedraw();
     ```
+    or
+    ```javascript
+    canvas.dirty = true;
+    ```
 - Update texture now
     ```javascript
     canvas.updateTexture();
     ```
     or update canvas and texture
     ```javascript
-    var callback = function(canvasElem, context) { };
-    canvas.updateTexture(callback);
+    canvas.updateTexture(function(canvasElem, context) { });
     // canvas.updateTexture(callback, scope);
     ```
 
