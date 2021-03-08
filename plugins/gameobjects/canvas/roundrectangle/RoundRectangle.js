@@ -50,6 +50,7 @@ class RoundRectangle extends Canvas {
     }
 
     set fillStyle(value) {
+        value = GetStyle(value, this.canvas, this.context);
         this.dirty |= (this._fillStyle != value);
         this._fillStyle = value;
     }
@@ -59,6 +60,7 @@ class RoundRectangle extends Canvas {
     }
 
     set fillColor2(value) {
+        value = GetStyle(value, this.canvas, this.context);
         this.dirty |= (this._fillColor2 != value);
         this._fillColor2 = value;
     }
@@ -76,8 +78,8 @@ class RoundRectangle extends Canvas {
         if (isHorizontalGradient === undefined) {
             isHorizontalGradient = true;
         }
-        this.fillStyle = GetStyle(fillStyle, this.canvas, this.context);
-        this.fillColor2 = GetStyle(fillColor2, this.canvas, this.context);
+        this.fillStyle = fillStyle;
+        this.fillColor2 = fillColor2;
         this.isHorizontalGradient = isHorizontalGradient;
         return this;
     }
@@ -87,6 +89,7 @@ class RoundRectangle extends Canvas {
     }
 
     set strokeStyle(value) {
+        value = GetStyle(value, this.canvas, this.context);
         this.dirty |= (this._strokeStyle != value);
         this._strokeStyle = value;
     }
@@ -101,7 +104,7 @@ class RoundRectangle extends Canvas {
     }
 
     setStrokeStyle(strokeStyle, lineWidth) {
-        this.strokeStyle = GetStyle(strokeStyle, this.canvas, this.context);
+        this.strokeStyle = strokeStyle;
         this.lineWidth = lineWidth;
         return this;
     }
