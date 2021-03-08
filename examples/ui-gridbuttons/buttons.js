@@ -65,6 +65,7 @@ class Demo extends Phaser.Scene {
 var createButton = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10).setStrokeStyle(2, COLOR_LIGHT),
+        // background: scene.rexUI.add.roundRectangleCanvas(0, 0, 0, 0, 10, COLOR_PRIMARY, null, 0, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),

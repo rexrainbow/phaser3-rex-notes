@@ -119,6 +119,21 @@
         // ...
     }
     ```
+1. [Canvas-round-rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
+    ```javascript
+    var shape = scene.rexUI.add.roundRectangleCanvas(x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+    ```
+    or
+    ```javascript
+    class MyRoundRectangleCanvas extends RexPlugins.UI.RoundRectangleCanvas {
+        constructor(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+            super(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Canvas objects
 

@@ -78,7 +78,9 @@ nav:
             - Iso box: shape-isobox.md
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
-        - Canvas: canvas.md
+        - Canvas:
+            - Canvas: canvas.md
+            - Round rectangle: canvas-roundrectangle.md
         - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md

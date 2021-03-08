@@ -174,6 +174,7 @@ module.exports = {
     'press': './templates/ui/press/Press.js',
     'rotate': './templates/ui/rotate/Rotate.js',
     'roundrectangle': './templates/ui/roundrectangle/RoundRectangle.js',
+    'roundrectanglecanvas': './templates/ui/roundrectanglecanvas/RoundRectangleCanvas.js',
     'scrollablepanel': './templates/ui/scrollablepanel/ScrollablePanel.js',
     'sizer': './templates/ui/sizer/Sizer.js',
     'slider': './templates/ui/slider/Slider.js',
