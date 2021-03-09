@@ -68,21 +68,8 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
 !!! warning "No tint methods"
     Uses `arc.setFillStyle(color, alpha)` to change color.
 
-### Properties
+### Angle
 
-- Radius
-    - Get
-        ```javascript
-        var radius = arc.radius;
-        ```
-    - Set
-        ```javascript
-        arc.setRadius(radius);
-        ```
-        or
-        ```javascript
-        arc.radius = radius;
-        ```
 - Start angle, in degrees.
     - Get
         ```javascript
@@ -119,6 +106,22 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
         ```javascript
         arc.anticlockwise = anticlockwise;
         ```
+
+### Radius
+
+- Radius
+    - Get
+        ```javascript
+        var radius = arc.radius;
+        ```
+    - Set
+        ```javascript
+        arc.setRadius(radius);
+        ```
+        or
+        ```javascript
+        arc.radius = radius;
+        ```
 - Iterations: Increase this value for smoother arcs, at the cost of more polygons being rendered. Default is `0.01`
     - Get
         ```javascript
@@ -128,6 +131,23 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
         ```javascript
         arc.iterations = iterations;
         ```
+
+### Display size
+
+- Get
+    ```javascript
+    var width = arc.displayWidth;
+    var height = arc.displayHeight;
+    ```
+- Set
+    ```javascript
+    arc.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    arc.displayWidth = width;
+    arc.displayHeight = height;
+    ```
 
 ### Other properties
 

@@ -53,11 +53,18 @@
         ```
 1. SceneManager.render()
     1. Sort display list
+    1. scene.events `prerender` event
+        - Register event
+            ```javascript
+            scene.events.on('prerender', function(renderer){
+                //
+            }, scope);
+            ```
     1. Render cameras
     1. scene.events `render` event
         - Register event
             ```javascript
-            scene.game.events.on('render', function(renderer){
+            scene.events.on('render', function(renderer){
                 //
             }, scope);
             ```
@@ -113,6 +120,8 @@ GameEventPostRender --> GameEventPreStep
 graph TB
 
 subgraph Render
+SceneEventPreRender>"scene.events: prerender"]
+SceneCameraRender["scene.cameras.render()"]
 SceneEventRender>"scene.events: render"]
 end
 
@@ -128,5 +137,7 @@ SceneEventPreUpdate --> SceneEventUpdate
 SceneEventUpdate --> SceneUpdate
 SceneUpdate --> SceneEventPostUpdate
 
-SceneEventPostUpdate -.-> SceneEventRender
+SceneEventPostUpdate -.-> SceneEventPreRender
+SceneEventPreRender --> SceneCameraRender
+SceneCameraRender --> SceneEventRender
 ```

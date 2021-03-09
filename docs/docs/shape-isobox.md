@@ -65,6 +65,23 @@ var isoBox = scene.add.isobox(x, y, size, height, fillTop, fillLeft, fillRight);
    isoBox.projection = value;
    ```
 
+### Display size
+
+- Get
+    ```javascript
+    var width = isoBox.displayWidth;
+    var height = isoBox.displayHeight;
+    ```
+- Set
+    ```javascript
+    isoBox.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    isoBox.displayWidth = width;
+    isoBox.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

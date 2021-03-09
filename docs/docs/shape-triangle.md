@@ -82,6 +82,23 @@ triangle.setLineWidth(startWidth, endWidth);
 
 - `endWidth` : The end width of the triangle. Only used in WebGL.
 
+### Display size
+
+- Get
+    ```javascript
+    var width = triangle.displayWidth;
+    var height = triangle.displayHeight;
+    ```
+- Set
+    ```javascript
+    triangle.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    triangle.displayWidth = width;
+    triangle.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

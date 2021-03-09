@@ -1309,8 +1309,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radius" class="md-nav__link">
+    Radius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-size" class="md-nav__link">
+    Display size
   </a>
   
 </li>
@@ -5356,8 +5370,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#angle" class="md-nav__link">
+    Angle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radius" class="md-nav__link">
+    Radius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-size" class="md-nav__link">
+    Display size
   </a>
   
 </li>
@@ -5462,20 +5490,8 @@
 <p class="admonition-title">No tint methods</p>
 <p>Uses <code>arc.setFillStyle(color, alpha)</code> to change color.</p>
 </div>
-<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
+<h3 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Radius<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-</li>
 <li>Start angle, in degrees.<ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span><span class="p">;</span>
@@ -5510,6 +5526,21 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="radius">Radius<a class="headerlink" href="#radius" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Iterations: Increase this value for smoother arcs, at the cost of more polygons being rendered. Default is <code>0.01</code><ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">iterations</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">iterations</span><span class="p">;</span>
@@ -5519,6 +5550,20 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="display-size">Display size<a class="headerlink" href="#display-size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">displayWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">displayHeight</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setDisplaySize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">displayWidth</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">displayHeight</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>

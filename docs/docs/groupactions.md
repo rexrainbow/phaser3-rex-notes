@@ -315,7 +315,7 @@ Phaser.Actions.SetBlendMode(gameObjects, blendMode, index, direction);
 ### Play animation
 
 ```javascript
-Phaser.Actions.PlayAnimation(gameObjects, key, startFrame);
+Phaser.Actions.PlayAnimation(gameObjects, key, ignoreIfPlaying);
 ```
 
 ### Shuffle

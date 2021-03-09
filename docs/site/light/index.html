@@ -1663,13 +1663,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-texture" class="md-nav__link">
-    Load texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#light-system" class="md-nav__link">
     Light system
   </a>
@@ -1691,20 +1684,13 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#light" class="md-nav__link">
-    Light
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#light_1" class="md-nav__link">
+  <a href="#light" class="md-nav__link">
     Light
   </a>
   
@@ -1735,6 +1721,33 @@
           <li class="md-nav__item">
   <a href="#intensity" class="md-nav__link">
     Intensity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#game-object" class="md-nav__link">
+    Game object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-texture-with-normal-map" class="md-nav__link">
+    Load texture with normal map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-light-pipeline" class="md-nav__link">
+    Apply light pipeline
   </a>
   
 </li>
@@ -5380,13 +5393,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-texture" class="md-nav__link">
-    Load texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#light-system" class="md-nav__link">
     Light system
   </a>
@@ -5408,20 +5414,13 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#light" class="md-nav__link">
-    Light
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#light_1" class="md-nav__link">
+  <a href="#light" class="md-nav__link">
     Light
   </a>
   
@@ -5452,6 +5451,33 @@
           <li class="md-nav__item">
   <a href="#intensity" class="md-nav__link">
     Intensity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#game-object" class="md-nav__link">
+    Game object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-texture-with-normal-map" class="md-nav__link">
+    Load texture with normal map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-light-pipeline" class="md-nav__link">
+    Apply light pipeline
   </a>
   
 </li>
@@ -5497,15 +5523,6 @@
 <p>It only works in WebGL render mode.</p>
 </div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[</span><span class="nx">url</span><span class="p">,</span> <span class="nx">normalMapUrl</span><span class="p">]);</span>
-</code></pre></div>
-
-<ul>
-<li><code>url</code> : Url of texture.</li>
-<li><code>url</code> : Url of texture.</li>
-<li><code>normalMapUrl</code> : Url of normal map.</li>
-</ul>
 <h3 id="light-system">Light system<a class="headerlink" href="#light-system" title="Permanent link">&para;</a></h3>
 <h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5520,10 +5537,13 @@
 </code></pre></div></li>
 </ul>
 <h4 id="ambient-color">Ambient color<a class="headerlink" href="#ambient-color" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">lights</span><span class="p">.</span><span class="nx">setAmbientColor</span><span class="p">(</span><span class="nx">colorInteger</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">lights</span><span class="p">.</span><span class="nx">setAmbientColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </code></pre></div>
 
-<h4 id="light">Light<a class="headerlink" href="#light" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>color</code> : Integer color value.</li>
+</ul>
+<h3 id="light">Light<a class="headerlink" href="#light" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">light</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">lights</span><span class="p">.</span><span class="nx">addLight</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
@@ -5539,7 +5559,6 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">lights</span><span class="p">.</span><span class="nx">removeLight</span><span class="p">(</span><span class="nx">light</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="light_1">Light<a class="headerlink" href="#light_1" title="Permanent link">&para;</a></h3>
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
@@ -5603,6 +5622,19 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">intensity</span> <span class="o">=</span> <span class="nx">light</span><span class="p">.</span><span class="nx">intensity</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
+<h3 id="game-object">Game object<a class="headerlink" href="#game-object" title="Permanent link">&para;</a></h3>
+<h4 id="load-texture-with-normal-map">Load texture with normal map<a class="headerlink" href="#load-texture-with-normal-map" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[</span><span class="nx">url</span><span class="p">,</span> <span class="nx">normalMapUrl</span><span class="p">]);</span>
+</code></pre></div>
+
+<ul>
+<li><code>url</code> : Url of texture.</li>
+<li><code>url</code> : Url of texture.</li>
+<li><code>normalMapUrl</code> : Url of normal map.</li>
+</ul>
+<h4 id="apply-light-pipeline">Apply light pipeline<a class="headerlink" href="#apply-light-pipeline" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="s1">&#39;Light2D&#39;</span><span class="p">);</span>
+</code></pre></div>
                 
                   
                 

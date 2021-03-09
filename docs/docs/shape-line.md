@@ -82,6 +82,23 @@ line.setLineWidth(startWidth, endWidth);
 
 - `endWidth` : The end width of the line. Only used in WebGL.
 
+### Display size
+
+- Get
+    ```javascript
+    var width = line.displayWidth;
+    var height = line.displayHeight;
+    ```
+- Set
+    ```javascript
+    line.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    line.displayWidth = width;
+    line.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

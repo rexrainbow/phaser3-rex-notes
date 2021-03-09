@@ -91,18 +91,20 @@ or
     render: {
         antialias: true,
         antialiasGL: true,
-        mipmapFilter: 'LINEAR', // 'NEAREST', 'LINEAR', 'NEAREST_MIPMAP_NEAREST', 'LINEAR_MIPMAP_NEAREST', 'NEAREST_MIPMAP_LINEAR', 'LINEAR_MIPMAP_LINEAR'
+        desynchronized: false,
         pixelArt: false,
         roundPixels: false,
         transparent: false,
         clearBeforeRender: true,
-        premultipliedAlpha: true,
         preserveDrawingBuffer: false,
+        premultipliedAlpha: true,
         failIfMajorPerformanceCaveat: false,
         powerPreference: 'default', // 'high-performance', 'low-power' or 'default'
         batchSize: 4096,
-        desynchronized: false,
-        maxTextures: -1
+        maxLights: 10,
+        maxTextures: -1,
+        mipmapFilter: 'LINEAR', // 'NEAREST', 'LINEAR', 'NEAREST_MIPMAP_NEAREST', 'LINEAR_MIPMAP_NEAREST', 'NEAREST_MIPMAP_LINEAR', 'LINEAR_MIPMAP_LINEAR'
+        pipeline:[]
     },
 
     physics: {

@@ -9,16 +9,6 @@ lighting system from normal map.
 
 ## Usage
 
-### Load texture
-
-```javascript
-scene.load.image(key, [url, normalMapUrl]);
-```
-
-- `url` : Url of texture.
-- `url` : Url of texture.
-- `normalMapUrl` : Url of normal map.
-
 ### Light system
 
 #### Enable
@@ -39,10 +29,12 @@ scene.load.image(key, [url, normalMapUrl]);
 #### Ambient color
 
 ```javascript
-scene.lights.setAmbientColor(colorInteger);
+scene.lights.setAmbientColor(color);
 ```
 
-#### Light
+- `color` : Integer color value.
+
+### Light
 
 - Add
     ```javascript
@@ -57,8 +49,6 @@ scene.lights.setAmbientColor(colorInteger);
     ```javascript
     scene.lights.removeLight(light);
     ```
-
-### Light
 
 #### Position
 
@@ -131,3 +121,21 @@ scene.lights.setAmbientColor(colorInteger);
     ```javascript
     var intensity = light.intensity;
     ```
+
+### Game object
+
+#### Load texture with normal map
+
+```javascript
+scene.load.image(key, [url, normalMapUrl]);
+```
+
+- `url` : Url of texture.
+- `url` : Url of texture.
+- `normalMapUrl` : Url of normal map.
+
+#### Apply light pipeline
+
+```javascript
+gameObject.setPipeline('Light2D');
+```

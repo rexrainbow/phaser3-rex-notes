@@ -82,6 +82,23 @@ or
 curve.smoothness = smoothness;
 ```
 
+### Display size
+
+- Get
+    ```javascript
+    var width = curve.displayWidth;
+    var height = curve.displayHeight;
+    ```
+- Set
+    ```javascript
+    curve.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    curve.displayWidth = width;
+    curve.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

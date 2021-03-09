@@ -84,6 +84,23 @@ Smooths the polygon over the number of iterations specified.
 polygon.smooth(iterations);
 ```
 
+### Display size
+
+- Get
+    ```javascript
+    var width = polygon.displayWidth;
+    var height = polygon.displayHeight;
+    ```
+- Set
+    ```javascript
+    polygon.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    polygon.displayWidth = width;
+    polygon.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

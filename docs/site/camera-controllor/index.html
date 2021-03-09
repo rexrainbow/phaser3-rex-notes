@@ -5359,7 +5359,7 @@
 <ol>
 <li>Create controllor
     <div class="codehilite"><pre><span></span><code><span class="c1">// var cursors = scene.input.keyboard.createCursorKeys();</span>
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">SmoothedKeyControl</span><span class="p">({</span>
     <span class="nx">camera</span><span class="o">:</span> <span class="nx">camera</span><span class="p">,</span>
 
     <span class="nx">left</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>    <span class="c1">// { isDown, isUp }</span>
@@ -5370,6 +5370,8 @@
     <span class="nx">zoomOut</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>         <span class="c1">// { isDown, isUp }</span>
 
     <span class="nx">zoomSpeed</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="nx">minZoom</span><span class="o">:</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="nx">maxZoom</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 
     <span class="nx">acceleration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="c1">// acceleration: {</span>
@@ -5388,9 +5390,10 @@
     <span class="c1">//    x: 0,</span>
     <span class="c1">//    y: 0</span>
     <span class="c1">// }</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">SmoothedKeyControl</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">// var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);</span>
+<span class="p">});</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">FixedKeyControl</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Update
     <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{</span>

@@ -93,6 +93,23 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
 !!! warning "No tint methods"
     Uses `grid.setFillStyle(color, alpha)` to change color.
 
+### Display size
+
+- Get
+    ```javascript
+    var width = grid.displayWidth;
+    var height = grid.displayHeight;
+    ```
+- Set
+    ```javascript
+    grid.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    grid.displayWidth = width;
+    grid.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

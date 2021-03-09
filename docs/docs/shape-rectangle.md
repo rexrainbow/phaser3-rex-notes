@@ -68,6 +68,40 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
 !!! warning "No tint methods"
     Uses `rect.setFillStyle(color, alpha)` to change color.
 
+### Size
+
+- Get
+    ```javascript
+    var width = rect.width;
+    var height = rect.height;
+    ```
+- Set
+    ```javascript
+    rect.setSize(width, height);
+    ```
+    or
+    ```javascript
+    rect.width = width;
+    rect.height = height;
+    ```
+
+### Display size
+
+- Get
+    ```javascript
+    var width = rect.displayWidth;
+    var height = rect.displayHeight;
+    ```
+- Set
+    ```javascript
+    rect.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    rect.displayWidth = width;
+    rect.displayHeight = height;
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

@@ -68,7 +68,7 @@ var circle = scene.add.circle(x, y, radius, fillColor);
 !!! warning "No tint methods"
     Uses `circle.setFillStyle(color, alpha)` to change color.
 
-### Properties
+### Radius
 
 - Radius
     - Get
@@ -92,6 +92,23 @@ var circle = scene.add.circle(x, y, radius, fillColor);
         ```javascript
         circle.iterations = iterations;
         ```
+
+### Display size
+
+- Get
+    ```javascript
+    var width = circle.displayWidth;
+    var height = circle.displayHeight;
+    ```
+- Set
+    ```javascript
+    circle.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    circle.displayWidth = width;
+    circle.displayHeight = height;
+    ```
 
 ### Other properties
 

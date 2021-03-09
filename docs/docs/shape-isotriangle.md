@@ -77,9 +77,26 @@ var isoTriangle = scene.add.isotriangle(x, y, size, height, reversed, fillTop, f
    ```
    or
    ```javascript
-   isotrianhle.reversed = reversed;
+   isoTriangle.reversed = reversed;
    ```
    - Set `true` to render upside down.
+
+### Display size
+
+- Get
+    ```javascript
+    var width = isoTriangle.displayWidth;
+    var height = isoTriangle.displayHeight;
+    ```
+- Set
+    ```javascript
+    isoTriangle.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    isoTriangle.displayWidth = width;
+    isoTriangle.displayHeight = height;
+    ```
 
 ### Other properties
 

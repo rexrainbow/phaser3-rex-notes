@@ -239,6 +239,23 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
     rect.height = height;
     ```
 
+### Display size
+
+- Get
+    ```javascript
+    var width = rect.displayWidth;
+    var height = rect.displayHeight;
+    ```
+- Set
+    ```javascript
+    rect.setDisplaySize(width, height);
+    ```
+    or
+    ```javascript
+    rect.displayWidth = width;
+    rect.displayHeight = height;
+    ```
+
 ### Radius
 
 - Get

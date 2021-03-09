@@ -5405,10 +5405,18 @@
 </li>
 <li>SceneManager.render()<ol>
 <li>Sort display list</li>
+<li>scene.events <code>prerender</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prerender&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Render cameras</li>
 <li>scene.events <code>render</code> event<ul>
 <li>Register event
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">){</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">){</span>
     <span class="c1">//</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
@@ -5464,6 +5472,8 @@ GameEventPostRender --&gt; GameEventPreStep</code></pre>
 <pre class="mermaid"><code>graph TB
 
 subgraph Render
+SceneEventPreRender&gt;"scene.events: prerender"]
+SceneCameraRender["scene.cameras.render()"]
 SceneEventRender&gt;"scene.events: render"]
 end
 
@@ -5479,7 +5489,9 @@ SceneEventPreUpdate --&gt; SceneEventUpdate
 SceneEventUpdate --&gt; SceneUpdate
 SceneUpdate --&gt; SceneEventPostUpdate
 
-SceneEventPostUpdate -.-&gt; SceneEventRender</code></pre>
+SceneEventPostUpdate -.-&gt; SceneEventPreRender
+SceneEventPreRender --&gt; SceneCameraRender
+SceneCameraRender --&gt; SceneEventRender</code></pre>
                 
                   
                 

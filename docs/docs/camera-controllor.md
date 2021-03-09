@@ -11,7 +11,7 @@ Scroll/zoom camera.
 1. Create controllor
     ```javascript
     // var cursors = scene.input.keyboard.createCursorKeys();
-    var config = {
+    var controls = new Phaser.Cameras.Controls.SmoothedKeyControl({
         camera: camera,
     
         left: cursors.left,    // { isDown, isUp }
@@ -22,6 +22,8 @@ Scroll/zoom camera.
         zoomOut: null,         // { isDown, isUp }
     
         zoomSpeed: 0.01,
+        minZoom: 0.001,
+        maxZoom: 1000,
     
         acceleration: null,
         // acceleration: {
@@ -40,9 +42,11 @@ Scroll/zoom camera.
         //    x: 0,
         //    y: 0
         // }
-    };
-    var controls = new Phaser.Cameras.Controls.SmoothedKeyControl(config);
-    // var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);
+    });
+    ```
+    or
+    ```javascript
+    var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);
     ```
 1. Update
     ```javascript
