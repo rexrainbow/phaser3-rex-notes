@@ -1,50 +1,60 @@
+/* description: Parses end executes mathematical expressions. */
+
 /* lexical grammar */
 %lex
 %%
 
 \s+                   /* skip whitespace */
-"+"                   return "PLUS"
-"-"                   return "MINUS"
-"*"                   return "MULTIPLE"
-"/"                   return "DIVIDE"
-"("                   return "LP"
-")"                   return "RP"
-"="                   return "EQU"
-[0-9]+("."[0-9]+)?    return 'NUMBER'
-[a-zA-Z]+("_"[0-9a-zA-Z]+)? return 'WORD'
+[0-9]+("."[0-9]+)?\b  return 'NUMBER'
+"*"                   return '*'
+"/"                   return '/'
+"-"                   return '-'
+"+"                   return '+'
+"^"                   return '^'
+"("                   return '('
+")"                   return ')'
+"PI"                  return 'PI'
+"E"                   return 'E'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
 
 /lex
 
-%start file
+/* operator associations and precedence */
+
+%left '+' '-'
+%left '*' '/'
+%left '^'
+%left UMINUS
+
+%start expressions
 
 %% /* language grammar */
 
-file: 
-    statement EOF { return $1; }
+expressions
+    : e EOF
+        {return $1;}
     ;
 
-statement:
-  term PLUS term {$$ = $1 + $3}
-  |
-  term MINUS term {$$ = $1 - $3}
-  |
-  term {$$ = $1}
-  ;
-
-term:
-  factor MULTIPLE factor {$$ = $1 * $3}
-  |
-  factor DIVIDE factor {$$ = $1 / $3}
-  |
-  factor {$$ = $1}
-  ;
-
-factor:
-  NUMBER {$$ = parseFloat($1)}
-  |
-  WORD {$$ = $1}
-  |
-  LP statement RP {$$ = $2}
-  ;
+e
+    : e '+' e
+        {$$ = $1+$3;}
+    | e '-' e
+        {$$ = $1-$3;}
+    | e '*' e
+        {$$ = $1*$3;}
+    | e '/' e
+        {$$ = $1/$3;}
+    | e '^' e
+        {$$ = Math.pow($1, $3);}
+    | '-' e %prec UMINUS
+        {$$ = -$2;}
+    | '(' e ')'
+        {$$ = $2;}
+    | NUMBER
+        {$$ = Number(yytext);}
+    | E
+        {$$ = Math.E;}
+    | PI
+        {$$ = Math.PI;}
+    ;
