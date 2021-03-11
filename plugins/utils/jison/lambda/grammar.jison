@@ -15,10 +15,17 @@
 ")"                   return ')'
 "PI"                  return 'PI'
 "E"                   return 'E'
+"random"              return 'RANDOM'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
 
 /lex
+
+%{
+    function runFn(arg) {
+        return (typeof(arg) === 'function')? arg() : arg;
+    }
+%}
 
 /* operator associations and precedence */
 
@@ -38,13 +45,21 @@ expressions
 
 e
     : e '+' e
-        {$$ = $1+$3;}
+        {
+            $$ = function() { return runFn($1) + runFn($3); };
+        }
     | e '-' e
-        {$$ = $1-$3;}
+        {
+            $$ = function() { return runFn($1) - runFn($3); };
+        }
     | e '*' e
-        {$$ = $1*$3;}
+        {
+            $$ = function() { return runFn($1) * runFn($3); };
+        }
     | e '/' e
-        {$$ = $1/$3;}
+        {
+            $$ = function() { return runFn($1) / runFn($3); };
+        }
     | e '^' e
         {$$ = Math.pow($1, $3);}
     | '-' e %prec UMINUS
@@ -57,4 +72,8 @@ e
         {$$ = Math.E;}
     | PI
         {$$ = Math.PI;}
+    | RANDOM
+        {
+            $$ = function() { return Math.random(); }
+        }
     ;
