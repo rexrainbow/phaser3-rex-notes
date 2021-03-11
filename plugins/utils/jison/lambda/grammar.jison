@@ -13,9 +13,11 @@
 "^"                   return '^'
 "("                   return '('
 ")"                   return ')'
+","                   return ','
+"random"              return 'RANDOM'
+"randomInt"           return 'RANDOM_INT'
 "PI"                  return 'PI'
 "E"                   return 'E'
-"random"              return 'RANDOM'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
 
@@ -43,6 +45,13 @@ expressions
         {return $1;}
     ;
 
+expression_list
+    : expression_list ',' e
+        { $$ = $1.concat([$3]); }
+    | e
+        { $$ = [$1]; }
+    ;
+
 e
     : e '+' e
         {
@@ -61,19 +70,30 @@ e
             $$ = function() { return runFn($1) / runFn($3); };
         }
     | e '^' e
-        {$$ = Math.pow($1, $3);}
+        {
+            $$ = function() { Math.pow(runFn($1), runFn($3)); };
+        }
     | '-' e %prec UMINUS
-        {$$ = -$2;}
+        {
+            $$ = function() { return -runFn($2); };
+        }
     | '(' e ')'
         {$$ = $2;}
+    | RANDOM
+        {
+            $$ = function() { return Math.random(); }
+        }
+    | RANDOM_INT '(' expression_list ')'
+        {
+            $$ = function() { 
+                var a = runFn($expression_list[0]), b = runFn($expression_list[1]);
+                return Math.floor(Math.random()*(b-a) + a);
+            }
+        }
     | NUMBER
         {$$ = Number(yytext);}
     | E
         {$$ = Math.E;}
     | PI
         {$$ = Math.PI;}
-    | RANDOM
-        {
-            $$ = function() { return Math.random(); }
-        }
     ;

@@ -1,7 +1,6 @@
 var parser = require('./parser.js');
 
-var s = 'random * 10 + 5';
-var result = parser.parse(s);
-console.log(result());
-console.log(result());
-console.log(result());
+var s0 = parser.parse('randomInt(4+1, 5+5)');
+for (var i = 0; i < 10; i++) {
+    console.log(s0());
+}
