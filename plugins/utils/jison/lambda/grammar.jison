@@ -24,6 +24,19 @@
     function runFn(arg) {
         return (typeof(arg) === 'function')? arg() : arg;
     }
+
+    function runMethod(self, name, args) {
+        if (self[name]) {
+            if (args) {
+                args = args.map(runFn);
+                return self[name].apply(self, args);
+            } else {
+                return self[name]();
+            }
+        } else {
+            return 0;
+        }
+    }
 %}
 
 /* operator associations and precedence */
@@ -52,23 +65,23 @@ expression_list
 e
     : e '+' e
         {
-            $$ = function() { return runFn($1) + runFn($3); };
+            $$ = function() { return runMethod(yy.parser, 'add', [$1, $3]); };
         }
     | e '-' e
         {
-            $$ = function() { return runFn($1) - runFn($3); };
+            $$ = function() { return runMethod(yy.parser, 'subtract', [$1, $3]); };
         }
     | e '*' e
         {
-            $$ = function() { return runFn($1) * runFn($3); };
+            $$ = function() { return runMethod(yy.parser, 'multiply', [$1, $3]); };
         }
     | e '/' e
         {
-            $$ = function() { return runFn($1) / runFn($3); };
+            $$ = function() { return runMethod(yy.parser, 'divide', [$1, $3]); };
         }
     | e '^' e
         {
-            $$ = function() { Math.pow(runFn($1), runFn($3)); };
+            $$ = function() { return runMethod(yy.parser, 'pow', [$1, $3]); };
         }
     | '-' e %prec UMINUS
         {
@@ -85,22 +98,11 @@ e
         }
     | NAME '(' ')'
         {
-            $$ = function() {
-                var self = yy.parser;
-                return (self[$NAME])? self[$NAME]() : 0;
-            }
+            $$ = function() { return runMethod(yy.parser, $NAME); }
         }        
     | NAME '(' expression_list ')'
         {
-            $$ = function() {
-                var self = yy.parser;
-                if (self[$NAME]) {
-                    var args = $expression_list.map(runFn);
-                    return self[$NAME].apply(self, args);
-                } else {
-                    return 0;
-                }
-            }
+            $$ = function() { return runMethod(yy.parser, $NAME, $expression_list); }
         }
     | NUMBER
         {$$ = Number(yytext);}
