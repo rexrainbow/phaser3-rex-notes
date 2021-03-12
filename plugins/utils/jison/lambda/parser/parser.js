@@ -100,67 +100,67 @@ case 5:
 break;
 case 6:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'add', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_add', [$$[$0-2], $$[$0]]); };
         
 break;
 case 7:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'subtract', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_subtract', [$$[$0-2], $$[$0]]); };
         
 break;
 case 8:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'multiply', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_multiply', [$$[$0-2], $$[$0]]); };
         
 break;
 case 9:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'divide', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_divide', [$$[$0-2], $$[$0]]); };
         
 break;
 case 10:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'pow', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_pow', [$$[$0-2], $$[$0]]); };
         
 break;
 case 11:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'greaterThen', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_greaterThen', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 12:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_lessThen', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 13:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_equalTo', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 14:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_equalTo', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 15:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_lessThen', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 16:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, 'greaterThen', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, '_greaterThen', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 17:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'or', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_or', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 18:
 
-            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'and', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, '_and', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 19:

@@ -20,43 +20,43 @@ class Parser extends parser.Parser {
         return GetValue(this, name, defaultValue);
     }
 
-    add(a, b) {
+    _add(a, b) {
         return a + b;
     }
 
-    subtract(a, b) {
+    _subtract(a, b) {
         return a - b;
     }
 
-    multiply(a, b) {
+    _multiply(a, b) {
         return a * b;
     }
 
-    divide(a, b) {
+    _divide(a, b) {
         return a / b;
     }
 
-    pow(a, b) {
+    _pow(a, b) {
         return Math.pow(a, b);
     }
 
-    greaterThen(a, b) {
+    _greaterThen(a, b) {
         return a > b;
     }
 
-    lessThen(a, b) {
+    _lessThen(a, b) {
         return a < b;
     }
 
-    equalTo(a, b) {
+    _equalTo(a, b) {
         return a == b;
     }
 
-    or(a, b) {
+    _or(a, b) {
         return a || b;
     }
 
-    and(a, b) {
+    _and(a, b) {
         return a && b;
     }
 

@@ -90,55 +90,55 @@ dot_name
 e
     : e '+' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'add', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_add', [$1, $3]); };
         }
     | e '-' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'subtract', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_subtract', [$1, $3]); };
         }
     | e '*' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'multiply', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_multiply', [$1, $3]); };
         }
     | e '/' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'divide', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_divide', [$1, $3]); };
         }
     | e '^' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'pow', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_pow', [$1, $3]); };
         }
     | e '>' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'greaterThen', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_greaterThen', [$1, $3]) == true; };
         }
     | e '<' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_lessThen', [$1, $3]) == true; };
         }
     | e '==' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_equalTo', [$1, $3]) == true; };
         }
     | e '!=' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_equalTo', [$1, $3]) == false; };
         }
     | e '>=' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_lessThen', [$1, $3]) == false; };
         }
     | e '<=' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, '_greaterThen', [$1, $3]) == false; };
         }
     | e '||' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'or', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_or', [$1, $3]) == true; };
         }
     | e '&&' e
         {
-            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'and', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_and', [$1, $3]) == true; };
         }        
     | '-' e %prec UMINUS
         {
