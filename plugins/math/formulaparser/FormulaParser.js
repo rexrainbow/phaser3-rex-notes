@@ -1,7 +1,7 @@
 import parser from './parser/parser.js';
 import GetProperty from './GetProperty.js';
 
-class Parser extends parser.Parser {
+class FormulaParser extends parser.Parser {
     getProperty(context, name, defaultValue) {
         var value = GetProperty(context, name, undefined, false);
         if (value !== undefined) {
@@ -78,4 +78,4 @@ class Parser extends parser.Parser {
     }
 }
 
-export default Parser;
+export default FormulaParser;
