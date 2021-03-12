@@ -1,4 +1,4 @@
-var Base = require('./parser.js').Parser;
+var Base = require('./index.js');
 
 const DegToRad = function (deg) { return deg * (Math.PI / 180); }
 class Parser extends Base {
@@ -16,14 +16,9 @@ class Parser extends Base {
     }
 }
 
-var parser = new Parser();
+var parser = new Parser({ a: 10, b: 20 });
 
-//var s0 = parser.parse("random()*10");
-//for (var i = 0; i < 10; i++) {
-//    console.log(s0());
-//}
-
-console.log(parser.parse('cos(0)')());
-console.log(parser.parse('cos(90)')());
-console.log(parser.parse('cos(180)')());
-console.log(parser.parse('cos(270)')());
+var s0 = parser.parse("randomInt(a,b)");
+for (var i = 0; i < 10; i++) {
+    console.log(s0());
+}

@@ -76,17 +76,30 @@ e
         }
     | '(' e ')'
         {$$ = $2;}
+    | NAME 
+        {
+            $$ = function() {
+                var data = yy.parser.data;
+                return (data.hasOwnProperty($NAME))? data[$NAME] : 0;
+            }
+        }
     | NAME '(' ')'
         {
             $$ = function() {
-                return yy.parser[$NAME]();
+                var self = yy.parser;
+                return (self[$NAME])? self[$NAME]() : 0;
             }
         }        
     | NAME '(' expression_list ')'
         {
-            $$ = function() { 
-                var self = yy.parser, args = $expression_list.map(runFn);
-                return self[$NAME].apply(self, args);
+            $$ = function() {
+                var self = yy.parser;
+                if (self[$NAME]) {
+                    var args = $expression_list.map(runFn);
+                    return self[$NAME].apply(self, args);
+                } else {
+                    return 0;
+                }
             }
         }
     | NUMBER
