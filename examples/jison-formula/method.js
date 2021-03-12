@@ -1,4 +1,4 @@
-import Parser from '../../plugins/utils/jison/lambda/index.js';
+import Parser from '../../plugins/utils/jison/formula/index.js';
 
 var parser = new Parser();
 var f = parser.compile("randomInt(a, b)");
