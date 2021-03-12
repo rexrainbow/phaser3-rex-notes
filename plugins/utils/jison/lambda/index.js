@@ -1,6 +1,6 @@
-var Base = require('./parser.js').Parser;
+import parser from './parser/parser.js';
 
-class Parser extends Base {
+class Parser extends parser.Parser {
     constructor(data) {
         if (data === undefined) {
             data = {};
@@ -70,4 +70,4 @@ class Parser extends Base {
     }
 }
 
-module.exports = Parser;
+export default Parser;
