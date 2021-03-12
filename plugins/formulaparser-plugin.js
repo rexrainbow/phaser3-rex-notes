@@ -1,7 +1,7 @@
-import FSM from './fsm.js';
+import FormulaParser from './formulaparser.js';
 import SetValue from './utils/object/SetValue.js';
 
-class FSMPlugin extends Phaser.Plugins.BasePlugin {
+class FormulaParserPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -13,11 +13,10 @@ class FSMPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new FSM(config);
+        return new FormulaParser();
     }
-
 }
 
-SetValue(window, 'RexPlugins.FSM', FSM);
+SetValue(window, 'RexPlugins.FormulaParser', FormulaParser);
 
-export default FSMPlugin;
+export default FormulaParserPlugin;
