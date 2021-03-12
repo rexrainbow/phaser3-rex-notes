@@ -72,10 +72,10 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,8],$V1=[1,3],$V2=[1,4],$V3=[1,5],$V4=[1,6],$V5=[1,9],$V6=[1,11],$V7=[1,12],$V8=[1,13],$V9=[1,14],$Va=[1,15],$Vb=[1,16],$Vc=[1,17],$Vd=[1,18],$Ve=[1,19],$Vf=[1,20],$Vg=[1,21],$Vh=[1,22],$Vi=[1,23],$Vj=[5,7,11,12,13,14,15,16,17,18,19,20,21,22,23,25,27],$Vk=[5,7,9,11,12,13,14,15,16,17,18,19,20,21,22,23,25,27],$Vl=[5,7,11,12,16,17,18,19,20,21,22,23,25,27],$Vm=[5,7,11,12,13,14,16,17,18,19,20,21,22,23,25,27],$Vn=[5,7,16,17,18,19,20,21,22,23,25,27],$Vo=[5,7,22,23,25,27],$Vp=[7,25];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,9],$V1=[1,3],$V2=[1,4],$V3=[1,5],$V4=[1,6],$V5=[1,8],$V6=[1,11],$V7=[1,12],$V8=[1,13],$V9=[1,14],$Va=[1,15],$Vb=[1,16],$Vc=[1,17],$Vd=[1,18],$Ve=[1,19],$Vf=[1,20],$Vg=[1,21],$Vh=[1,22],$Vi=[1,23],$Vj=[5,7,11,12,13,14,15,16,17,18,19,20,21,22,23,25,27],$Vk=[5,7,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27],$Vl=[5,7,11,12,16,17,18,19,20,21,22,23,25,27],$Vm=[5,7,11,12,13,14,16,17,18,19,20,21,22,23,25,27],$Vn=[5,7,16,17,18,19,20,21,22,23,25,27],$Vo=[5,7,22,23,25,27],$Vp=[7,25];
 var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"expression_list":6,",":7,"name_list":8,".":9,"NAME":10,"+":11,"-":12,"*":13,"/":14,"^":15,">":16,"<":17,"==":18,"!=":19,">=":20,"<=":21,"||":22,"&&":23,"(":24,")":25,"?":26,":":27,"true":28,"false":29,"NUMBER":30,"$accept":0,"$end":1},
+symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"expression_list":6,",":7,"dot_name":8,".":9,"NAME":10,"+":11,"-":12,"*":13,"/":14,"^":15,">":16,"<":17,"==":18,"!=":19,">=":20,"<=":21,"||":22,"&&":23,"(":24,")":25,"?":26,":":27,"true":28,"false":29,"NUMBER":30,"$accept":0,"$end":1},
 terminals_: {2:"error",5:"EOF",7:",",9:".",10:"NAME",11:"+",12:"-",13:"*",14:"/",15:"^",16:">",17:"<",18:"==",19:"!=",20:">=",21:"<=",22:"||",23:"&&",24:"(",25:")",26:"?",27:":",28:"true",29:"false",30:"NUMBER"},
 productions_: [0,[3,2],[6,3],[6,1],[8,3],[8,1],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,2],[4,3],[4,7],[4,1],[4,1],[4,1],[4,3],[4,4],[4,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
@@ -100,80 +100,82 @@ case 5:
 break;
 case 6:
 
-            this.$ = function() { return runMethod(yy.parser, 'add', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'add', [$$[$0-2], $$[$0]]); };
         
 break;
 case 7:
 
-            this.$ = function() { return runMethod(yy.parser, 'subtract', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'subtract', [$$[$0-2], $$[$0]]); };
         
 break;
 case 8:
 
-            this.$ = function() { return runMethod(yy.parser, 'multiply', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'multiply', [$$[$0-2], $$[$0]]); };
         
 break;
 case 9:
 
-            this.$ = function() { return runMethod(yy.parser, 'divide', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'divide', [$$[$0-2], $$[$0]]); };
         
 break;
 case 10:
 
-            this.$ = function() { return runMethod(yy.parser, 'pow', [$$[$0-2], $$[$0]]); };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'pow', [$$[$0-2], $$[$0]]); };
         
 break;
 case 11:
 
-            this.$ = function() { return runMethod(yy.parser, 'greaterThen', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'greaterThen', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 12:
 
-            this.$ = function() { return runMethod(yy.parser, 'lessThen', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 13:
 
-            this.$ = function() { return runMethod(yy.parser, 'equalTo', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 14:
 
-            this.$ = function() { return runMethod(yy.parser, 'equalTo', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 15:
 
-            this.$ = function() { return runMethod(yy.parser, 'lessThen', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 16:
 
-            this.$ = function() { return runMethod(yy.parser, 'greaterThen', [$$[$0-2], $$[$0]]) == false; };
+            this.$ = function(ctx) { return runMethod(yy.parser, 'greaterThen', [$$[$0-2], $$[$0]]) == false; };
         
 break;
 case 17:
 
-            this.$ = function() { return runMethod(yy.parser, 'or', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'or', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 18:
 
-            this.$ = function() { return runMethod(yy.parser, 'and', [$$[$0-2], $$[$0]]) == true; };
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, 'and', [$$[$0-2], $$[$0]]) == true; };
         
 break;
 case 19:
 
-            this.$ = function() { return -runFn($$[$0]); };
+            this.$ = function(ctx) { return -runFn($$[$0], ctx); };
         
 break;
 case 20:
-this.$ = $$[$0-1];
+
+            this.$ = function(ctx) { return runFn($$[$0-1], ctx); };
+        
 break;
 case 21:
 
-            this.$ = function() { return runFn($$[$0-5])? runFn($$[$0-2]) : runFn($$[$0]); };
+            this.$ = function(ctx) { return runFn($$[$0-5], ctx)? runFn($$[$0-2], ctx) : runFn($$[$0], ctx); };
         
 break;
 case 22:
@@ -184,17 +186,17 @@ case 23:
 break;
 case 24:
 
-            this.$ = function() { return yy.parser.getData($$[$0], 0); }
+            this.$ = function(ctx) { return yy.parser.getDotProperty(ctx, $$[$0], 0); }
         
 break;
 case 25:
 
-            this.$ = function() { return runMethod(yy.parser, $$[$0-2]); }
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, $$[$0-2], undefined, true); }
         
 break;
 case 26:
 
-            this.$ = function() { return runMethod(yy.parser, $$[$0-3], $$[$0-1]); }
+            this.$ = function(ctx) { return runMethod(yy.parser, ctx, $$[$0-3], $$[$0-1], true); }
         
 break;
 case 27:
@@ -202,7 +204,7 @@ case 27:
 break;
 }
 },
-table: [{3:1,4:2,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{1:[3]},{5:[1,10],11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi},{4:24,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:25,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,22]),o($Vj,[2,23]),o($Vj,[2,24],{9:[1,26]}),o($Vk,[2,5],{24:[1,27]}),o($Vj,[2,27]),{1:[2,1]},{4:28,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:29,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:30,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:31,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:32,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:33,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:34,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:35,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:36,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:37,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:38,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:39,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:40,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,19]),{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,25:[1,41]},{10:[1,42]},{4:45,6:44,8:7,10:$V0,12:$V1,24:$V2,25:[1,43],28:$V3,29:$V4,30:$V5},o($Vl,[2,6],{13:$V8,14:$V9,15:$Va}),o($Vl,[2,7],{13:$V8,14:$V9,15:$Va}),o($Vm,[2,8],{15:$Va}),o($Vm,[2,9],{15:$Va}),o($Vj,[2,10]),o($Vn,[2,11],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,12],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,13],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,14],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,15],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,16],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vo,[2,17],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg}),o($Vo,[2,18],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg}),o($Vj,[2,20],{26:[1,46]}),o($Vk,[2,4]),o($Vj,[2,25]),{7:[1,48],25:[1,47]},o($Vp,[2,3],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi}),{4:49,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,26]),{4:50,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,27:[1,51]},o($Vp,[2,2],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi}),{4:52,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o([5,7,25,27],[2,21],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi})],
+table: [{3:1,4:2,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{1:[3]},{5:[1,10],11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi},{4:24,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:25,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,22]),o($Vj,[2,23]),o($Vj,[2,24],{9:[1,27],24:[1,26]}),o($Vj,[2,27]),o($Vk,[2,5]),{1:[2,1]},{4:28,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:29,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:30,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:31,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:32,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:33,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:34,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:35,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:36,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:37,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:38,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:39,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{4:40,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,19]),{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,25:[1,41]},{4:44,6:43,8:7,10:$V0,12:$V1,24:$V2,25:[1,42],28:$V3,29:$V4,30:$V5},{10:[1,45]},o($Vl,[2,6],{13:$V8,14:$V9,15:$Va}),o($Vl,[2,7],{13:$V8,14:$V9,15:$Va}),o($Vm,[2,8],{15:$Va}),o($Vm,[2,9],{15:$Va}),o($Vj,[2,10]),o($Vn,[2,11],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,12],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,13],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,14],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,15],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vn,[2,16],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va}),o($Vo,[2,17],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg}),o($Vo,[2,18],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg}),o($Vj,[2,20],{26:[1,46]}),o($Vj,[2,25]),{7:[1,48],25:[1,47]},o($Vp,[2,3],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi}),o($Vk,[2,4]),{4:49,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o($Vj,[2,26]),{4:50,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi,27:[1,51]},o($Vp,[2,2],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi}),{4:52,8:7,10:$V0,12:$V1,24:$V2,28:$V3,29:$V4,30:$V5},o([5,7,25,27],[2,21],{11:$V6,12:$V7,13:$V8,14:$V9,15:$Va,16:$Vb,17:$Vc,18:$Vd,19:$Ve,20:$Vf,21:$Vg,22:$Vh,23:$Vi})],
 defaultActions: {10:[2,1]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
@@ -351,21 +353,23 @@ parse: function parse(input) {
     return true;
 }};
 
-    function runFn(arg) {
-        return (typeof(arg) === 'function')? arg() : arg;
+    function runFn(arg, ctx) {
+        return (typeof(arg) === 'function')? arg(ctx) : arg;
     }
 
-    function runMethod(self, name, args) {
-        if (self[name]) {
-            if (args) {
-                args = args.map(runFn);
-                return self[name].apply(self, args);
-            } else {
-                return self[name]();
-            }
-        } else {
-            return self.defaultHandler(name, args);
+    function runMethod(self, ctx, name, args, dotMode) {
+        if (dotMode === undefined) {
+            dotMode = false;
         }
+        var method = self[(dotMode)? "getDotProperty" : "getProperty"](ctx, name);
+        if (method === undefined) {
+            method = self.getProperty(ctx, 'defaultHandler');
+        }
+
+        if (args) {
+            args = args.map(function(arg){ return runFn(arg, ctx); });
+        }
+        return method.apply(self, args);
     }
 /* generated by jison-lex 0.3.4 */
 var lexer = (function(){

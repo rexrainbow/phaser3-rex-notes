@@ -34,21 +34,23 @@
 /lex
 
 %{
-    function runFn(arg) {
-        return (typeof(arg) === 'function')? arg() : arg;
+    function runFn(arg, ctx) {
+        return (typeof(arg) === 'function')? arg(ctx) : arg;
     }
 
-    function runMethod(self, name, args) {
-        if (self[name]) {
-            if (args) {
-                args = args.map(runFn);
-                return self[name].apply(self, args);
-            } else {
-                return self[name]();
-            }
-        } else {
-            return self.defaultHandler(name, args);
+    function runMethod(self, ctx, name, args, dotMode) {
+        if (dotMode === undefined) {
+            dotMode = false;
         }
+        var method = self[(dotMode)? "getDotProperty" : "getProperty"](ctx, name);
+        if (method === undefined) {
+            method = self.getProperty(ctx, 'defaultHandler');
+        }
+
+        if (args) {
+            args = args.map(function(arg){ return runFn(arg, ctx); });
+        }
+        return method.apply(self, args);
     }
 %}
 
@@ -78,8 +80,8 @@ expression_list
         { $$ = [$1]; }
     ;
 
-name_list
-    : name_list '.' NAME
+dot_name
+    : dot_name '.' NAME
         { $$ = `${$1}.${$3}`}
     | NAME
         { $$ = $1; }
@@ -88,81 +90,83 @@ name_list
 e
     : e '+' e
         {
-            $$ = function() { return runMethod(yy.parser, 'add', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'add', [$1, $3]); };
         }
     | e '-' e
         {
-            $$ = function() { return runMethod(yy.parser, 'subtract', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'subtract', [$1, $3]); };
         }
     | e '*' e
         {
-            $$ = function() { return runMethod(yy.parser, 'multiply', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'multiply', [$1, $3]); };
         }
     | e '/' e
         {
-            $$ = function() { return runMethod(yy.parser, 'divide', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'divide', [$1, $3]); };
         }
     | e '^' e
         {
-            $$ = function() { return runMethod(yy.parser, 'pow', [$1, $3]); };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'pow', [$1, $3]); };
         }
     | e '>' e
         {
-            $$ = function() { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'greaterThen', [$1, $3]) == true; };
         }
     | e '<' e
         {
-            $$ = function() { return runMethod(yy.parser, 'lessThen', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$1, $3]) == true; };
         }
     | e '==' e
         {
-            $$ = function() { return runMethod(yy.parser, 'equalTo', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$1, $3]) == true; };
         }
     | e '!=' e
         {
-            $$ = function() { return runMethod(yy.parser, 'equalTo', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'equalTo', [$1, $3]) == false; };
         }
     | e '>=' e
         {
-            $$ = function() { return runMethod(yy.parser, 'lessThen', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'lessThen', [$1, $3]) == false; };
         }
     | e '<=' e
         {
-            $$ = function() { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == false; };
+            $$ = function(ctx) { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == false; };
         }
     | e '||' e
         {
-            $$ = function() { return runMethod(yy.parser, 'or', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'or', [$1, $3]) == true; };
         }
     | e '&&' e
         {
-            $$ = function() { return runMethod(yy.parser, 'and', [$1, $3]) == true; };
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, 'and', [$1, $3]) == true; };
         }        
     | '-' e %prec UMINUS
         {
-            $$ = function() { return -runFn($2); };
+            $$ = function(ctx) { return -runFn($2, ctx); };
         }
     | '(' e ')'
-        {$$ = $2;}
+        {
+            $$ = function(ctx) { return runFn($2, ctx); };
+        }
     | '(' e ')' '?' e ':' e
         {
-            $$ = function() { return runFn($2)? runFn($5) : runFn($7); };
+            $$ = function(ctx) { return runFn($2, ctx)? runFn($5, ctx) : runFn($7, ctx); };
         }
     | 'true'
         { $$ = true; }
     | 'false'
         { $$ = false; }
-    | name_list 
+    | dot_name 
         {
-            $$ = function() { return yy.parser.getData($name_list, 0); }
+            $$ = function(ctx) { return yy.parser.getDotProperty(ctx, $dot_name, 0); }
         }        
-    | NAME '(' ')'
+    | dot_name '(' ')'
         {
-            $$ = function() { return runMethod(yy.parser, $NAME); }
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, $dot_name, undefined, true); }
         }        
-    | NAME '(' expression_list ')'
+    | dot_name '(' expression_list ')'
         {
-            $$ = function() { return runMethod(yy.parser, $NAME, $expression_list); }
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, $dot_name, $expression_list, true); }
         }
     | NUMBER
         { $$ = Number(yytext); }

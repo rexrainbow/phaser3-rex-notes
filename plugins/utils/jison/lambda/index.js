@@ -2,35 +2,22 @@ import parser from './parser/parser.js';
 import GetValue from '../../object/GetValue.js';
 
 class Parser extends parser.Parser {
-    constructor(data) {
-        if (data === undefined) {
-            data = {};
-        }
-        super();
-        this.data = data
-    }
-
-    setData(key, value) {
-        if (typeof (key) === 'string') {
-            this.data[key] = value;
+    getProperty(context, name, defaultValue) {
+        if (context && context[name]) {
+            return context[name];
+        } else if (this[name]) {
+            return this[name];
         } else {
-            var data = key;
-            for (var key in data) {
-                this.data[key] = data[key];
-            }
+            return defaultValue;
         }
-        return this;
     }
 
-    getData(key, defaultValue) {
-        return GetValue(this.data, key, defaultValue);
-    }
-
-    clearData() {
-        for (var key in this.data) {
-            delete this.data[key];
+    getDotProperty(context, name, defaultValue) {
+        var value = GetValue(context, name);
+        if (value !== undefined) {
+            return value;
         }
-        return this;
+        return GetValue(this, name, defaultValue);
     }
 
     add(a, b) {
@@ -77,21 +64,15 @@ class Parser extends parser.Parser {
         return 0;
     }
 
-    compile(input, data) {
-        if (data) {
-            this.setData(data);
-        }
+    compile(input) {
         return this.parse(input);
     }
 
     exec(input, data) {
-        if (data) {
-            this.setData(data);
-        }
         if (typeof (input) === 'string') {
             input = this.compile(input);
         }
-        return input();
+        return input(data);
     }
 }
 
