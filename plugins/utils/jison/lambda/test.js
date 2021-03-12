@@ -18,7 +18,7 @@ class Parser extends Base {
 
 var parser = new Parser({ a: 10, b: 20 });
 
-var s0 = parser.compile("randomInt(a,b)-10");
+var s0 = parser.compile("a >= 10");
 for (var i = 0; i < 10; i++) {
     console.log(s0());
 }

@@ -29,6 +29,30 @@ class Parser extends Base {
         return Math.pow(a, b);
     }
 
+    greaterThen(a, b) {
+        return a > b;
+    }
+
+    lessThen(a, b) {
+        return a < b;
+    }
+
+    equalTo(a, b) {
+        return a == b;
+    }
+
+    or(a, b) {
+        return a || b;
+    }
+
+    and(a, b) {
+        return a && b;
+    }
+
+    defaultHandler(name, args) {
+        return 0;
+    }
+
     compile(input) {
         return this.parse(input);
     }

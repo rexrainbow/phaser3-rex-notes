@@ -11,6 +11,14 @@
 "-"                          return '-'
 "+"                          return '+'
 "^"                          return '^'
+">"                          return '>'
+"<"                          return '<'
+"=="                         return "=="
+"!="                         return "!="
+">="                         return ">="
+"<="                         return "<="
+"||"                         return "||"
+"&&"                         return "&&"
 "("                          return '('
 ")"                          return ')'
 ","                          return ','
@@ -34,13 +42,15 @@
                 return self[name]();
             }
         } else {
-            return 0;
+            return self.defaultHandler(name, args);
         }
     }
 %}
 
 /* operator associations and precedence */
 
+%left '||' '&&'
+%left '>' '<' '==' '!=' '>=' '<='
 %left '+' '-'
 %left '*' '/'
 %left '^'
@@ -83,6 +93,38 @@ e
         {
             $$ = function() { return runMethod(yy.parser, 'pow', [$1, $3]); };
         }
+    | e '>' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == true; };
+        }
+    | e '<' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'lessThen', [$1, $3]) == true; };
+        }
+    | e '==' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'equalTo', [$1, $3]) == true; };
+        }
+    | e '!=' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'equalTo', [$1, $3]) == false; };
+        }
+    | e '>=' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'lessThen', [$1, $3]) == false; };
+        }
+    | e '<=' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'greaterThen', [$1, $3]) == false; };
+        }
+    | e '||' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'or', [$1, $3]) == true; };
+        }
+    | e '&&' e
+        {
+            $$ = function() { return runMethod(yy.parser, 'and', [$1, $3]) == true; };
+        }        
     | '-' e %prec UMINUS
         {
             $$ = function() { return -runFn($2); };
