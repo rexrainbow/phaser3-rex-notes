@@ -34,6 +34,10 @@ class Parser extends parser.Parser {
         return a / b;
     }
 
+    _mod(a, b) {
+        return a % b;
+    }
+
     _pow(a, b) {
         return Math.pow(a, b);
     }

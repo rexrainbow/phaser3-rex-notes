@@ -11,6 +11,7 @@
 "-"                          return '-'
 "+"                          return '+'
 "^"                          return '^'
+"%"                          return '%'
 ">="                         return ">="
 "<="                         return "<="
 ">"                          return '>'
@@ -60,6 +61,7 @@
 %left '||' '&&'
 %left '>' '<' '==' '!=' '>=' '<='
 %left '+' '-'
+%left '%'
 %left '*' '/'
 %left '^'
 %left UMINUS
@@ -104,6 +106,10 @@ e
         {
             $$ = function(ctx) { return runMethod(yy.parser, ctx, '_divide', [$1, $3]); };
         }
+    | e '%' e
+        {
+            $$ = function(ctx) { return runMethod(yy.parser, ctx, '_mod', [$1, $3]); };
+        }        
     | e '^' e
         {
             $$ = function(ctx) { return runMethod(yy.parser, ctx, '_pow', [$1, $3]); };
