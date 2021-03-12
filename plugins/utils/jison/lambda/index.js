@@ -9,6 +9,29 @@ class Parser extends parser.Parser {
         this.data = data
     }
 
+    setData(key, value) {
+        if (typeof (key) === 'string') {
+            this.data[key] = value;
+        } else {
+            var data = key;
+            for (var key in data) {
+                this.data[key] = data[key];
+            }
+        }
+        return this;
+    }
+
+    getData(key) {
+        return this.data[key];
+    }
+
+    clearData() {
+        for (var key in this.data) {
+            delete this.data[key];
+        }
+        return this;
+    }
+
     add(a, b) {
         return a + b;
     }
@@ -53,15 +76,16 @@ class Parser extends parser.Parser {
         return 0;
     }
 
-    compile(input) {
+    compile(input, data) {
+        if (data) {
+            this.setData(data);
+        }
         return this.parse(input);
     }
 
     exec(input, data) {
         if (data) {
-            for (var k in data) {
-                this.data[k] = data[k];
-            }
+            this.setData(data);
         }
         if (typeof (input) === 'string') {
             input = this.compile(input);
