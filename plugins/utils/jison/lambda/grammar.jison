@@ -5,21 +5,18 @@
 %%
 
 \s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b  return 'NUMBER'
-"*"                   return '*'
-"/"                   return '/'
-"-"                   return '-'
-"+"                   return '+'
-"^"                   return '^'
-"("                   return '('
-")"                   return ')'
-","                   return ','
-"random"              return 'RANDOM'
-"randomInt"           return 'RANDOM_INT'
-"PI"                  return 'PI'
-"E"                   return 'E'
-<<EOF>>               return 'EOF'
-.                     return 'INVALID'
+[0-9]+("."[0-9]+)?\b         return 'NUMBER'
+"*"                          return '*'
+"/"                          return '/'
+"-"                          return '-'
+"+"                          return '+'
+"^"                          return '^'
+"("                          return '('
+")"                          return ')'
+","                          return ','
+[a-zA-Z]+("_"[0-9a-zA-Z]+)?  return 'NAME'
+<<EOF>>                      return 'EOF'
+.                            return 'INVALID'
 
 /lex
 
@@ -79,21 +76,19 @@ e
         }
     | '(' e ')'
         {$$ = $2;}
-    | RANDOM
+    | NAME '(' ')'
         {
-            $$ = function() { return Math.random(); }
-        }
-    | RANDOM_INT '(' expression_list ')'
+            $$ = function() {
+                return yy.parser[$NAME]();
+            }
+        }        
+    | NAME '(' expression_list ')'
         {
             $$ = function() { 
-                var a = runFn($expression_list[0]), b = runFn($expression_list[1]);
-                return Math.floor(Math.random()*(b-a) + a);
+                var self = yy.parser, args = $expression_list.map(runFn);
+                return self[$NAME].apply(self, args);
             }
         }
     | NUMBER
         {$$ = Number(yytext);}
-    | E
-        {$$ = Math.E;}
-    | PI
-        {$$ = Math.PI;}
     ;
