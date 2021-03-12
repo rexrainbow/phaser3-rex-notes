@@ -1,4 +1,5 @@
 import parser from './parser/parser.js';
+import GetValue from '../../object/GetValue.js';
 
 class Parser extends parser.Parser {
     constructor(data) {
@@ -21,8 +22,8 @@ class Parser extends parser.Parser {
         return this;
     }
 
-    getData(key) {
-        return this.data[key];
+    getData(key, defaultValue) {
+        return GetValue(this.data, key, defaultValue);
     }
 
     clearData() {

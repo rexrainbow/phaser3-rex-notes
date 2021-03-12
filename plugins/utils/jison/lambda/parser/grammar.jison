@@ -24,6 +24,7 @@
 "("                          return '('
 ")"                          return ')'
 ","                          return ','
+"."                          return '.'
 'true'                       return 'true'
 'false'                      return 'false'
 [a-zA-Z]+("_"[0-9a-zA-Z]+)?  return 'NAME'
@@ -75,6 +76,13 @@ expression_list
         { $$ = $1.concat([$3]); }
     | e
         { $$ = [$1]; }
+    ;
+
+name_list
+    : name_list '.' NAME
+        { $$ = `${$1}.${$3}`}
+    | NAME
+        { $$ = $1; }
     ;
 
 e
@@ -141,16 +149,13 @@ e
             $$ = function() { return runFn($2)? runFn($5) : runFn($7); };
         }
     | 'true'
-        { $$ = true }
+        { $$ = true; }
     | 'false'
-        { $$ = false }        
-    | NAME 
+        { $$ = false; }
+    | name_list 
         {
-            $$ = function() {
-                var data = yy.parser.data;
-                return (data.hasOwnProperty($NAME))? data[$NAME] : 0;
-            }
-        }
+            $$ = function() { return yy.parser.getData($name_list, 0); }
+        }        
     | NAME '(' ')'
         {
             $$ = function() { return runMethod(yy.parser, $NAME); }
@@ -160,5 +165,5 @@ e
             $$ = function() { return runMethod(yy.parser, $NAME, $expression_list); }
         }
     | NUMBER
-        {$$ = Number(yytext);}
+        { $$ = Number(yytext); }
     ;
