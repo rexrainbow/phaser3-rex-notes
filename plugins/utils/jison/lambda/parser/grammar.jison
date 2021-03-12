@@ -19,9 +19,13 @@
 "!="                         return "!="
 "||"                         return "||"
 "&&"                         return "&&"
+"?"                          return "?"
+":"                          return ":"
 "("                          return '('
 ")"                          return ')'
 ","                          return ','
+'true'                       return 'true'
+'false'                      return 'false'
 [a-zA-Z]+("_"[0-9a-zA-Z]+)?  return 'NAME'
 <<EOF>>                      return 'EOF'
 .                            return 'INVALID'
@@ -49,6 +53,7 @@
 
 /* operator associations and precedence */
 
+%left '?' ':'
 %left '||' '&&'
 %left '>' '<' '==' '!=' '>=' '<='
 %left '+' '-'
@@ -131,6 +136,14 @@ e
         }
     | '(' e ')'
         {$$ = $2;}
+    | '(' e ')' '?' e ':' e
+        {
+            $$ = function() { return runFn($2)? runFn($5) : runFn($7); };
+        }
+    | 'true'
+        { $$ = true }
+    | 'false'
+        { $$ = false }        
     | NAME 
         {
             $$ = function() {
