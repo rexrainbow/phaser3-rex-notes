@@ -1,7 +1,7 @@
 import Parser from '../../plugins/utils/jison/lambda/index.js';
 
 var parser = new Parser();
-var lambda = parser.compile("randomInt(a, b)");
+var f = parser.compile("randomInt(a, b)");
 var context = {
     randomInt(a, b) {
         return Math.floor(Math.random() * (b - a) + a);
@@ -9,6 +9,20 @@ var context = {
     a: 10,
     b: 20
 }
-for (var i = 0; i < 10; i++) {
-    console.log(lambda(context));
+for (var i = 0; i < 5; i++) {
+    console.log(i, f(context));
+}
+
+// Another solution
+class MyParser extends Parser {
+    randomInt(a, b) {
+        return Math.floor(Math.random() * (b - a) + a);
+    }
+}
+
+var parser = new MyParser();
+var f = parser.compile("randomInt(a, b)");
+var context = { a: 10, b: 20 };
+for (var i = 0; i < 5; i++) {
+    console.log(i, f(context));
 }

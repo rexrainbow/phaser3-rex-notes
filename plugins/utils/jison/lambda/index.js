@@ -1,23 +1,21 @@
 import parser from './parser/parser.js';
-import GetValue from '../../object/GetValue.js';
+import GetProperty from './GetProperty.js';
 
 class Parser extends parser.Parser {
     getProperty(context, name, defaultValue) {
-        if (context && context[name]) {
-            return context[name];
-        } else if (this[name]) {
-            return this[name];
-        } else {
-            return defaultValue;
-        }
-    }
-
-    getDotProperty(context, name, defaultValue) {
-        var value = GetValue(context, name);
+        var value = GetProperty(context, name, undefined, false);
         if (value !== undefined) {
             return value;
         }
-        return GetValue(this, name, defaultValue);
+        return GetProperty(this, name, defaultValue, false);
+    }
+
+    getDotProperty(context, name, defaultValue) {
+        var value = GetProperty(context, name, undefined, true);
+        if (value !== undefined) {
+            return value;
+        }
+        return GetProperty(this, name, defaultValue, true);
     }
 
     _add(a, b) {
