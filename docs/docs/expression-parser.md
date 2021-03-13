@@ -1,11 +1,15 @@
 ## Introduction
 
-Parse expression string into function.
+Parse expression string into function.  
+Parser is generated from [jison](https://github.com/zaach/jison)
 
 - Author: Rex
 - Member of scene
 
 ## Live demos
+
+- [Dot-notation](https://codepen.io/rexrainbow/pen/eYBxabb)
+- [Custom method](https://codepen.io/rexrainbow/pen/bGBzyZY)
 
 ## Usage
 
