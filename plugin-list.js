@@ -112,7 +112,7 @@ module.exports = {
     'gashaponplugin': './plugins/gashapon-plugin.js',
     'perlinplugin': './plugins/perlin-plugin.js',
     'raycasterplugin': './plugins/raycaster-plugin.js',
-    'formulaparserplugin': './plugins/formulaparser-plugin.js',
+    'expressionparserplugin': './plugins/expressionparser-plugin.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',

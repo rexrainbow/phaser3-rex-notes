@@ -1,4 +1,4 @@
-import Parser from '../../plugins/math/formulaparser/FormulaParser.js';
+import Parser from '../../plugins/expressionparser.js';
 
 var parser = new Parser();
 console.log(parser.exec("(a > 5) && (a < b)", { a: 10, b: 20 }));

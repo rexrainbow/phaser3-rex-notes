@@ -1,4 +1,4 @@
-import Parser from '../../plugins/math/formulaparser/FormulaParser.js';
+import Parser from '../../plugins/expressionparser.js';
 
 // Solution 1:
 var parser = new Parser();

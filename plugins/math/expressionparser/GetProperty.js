@@ -1,21 +1,18 @@
 var GetProperty = function (context, key, defaultValue, dotMode) {
-    if (!context) {
+    if (!context || typeof (context) === 'number' || typeof (context) === 'string') {
         return defaultValue;
-    } else if (context.hasOwnProperty(key) || context[key]) {
+    } else if (HasProperty(context, key)) {
         return context[key];
     } else if (dotMode && key.indexOf('.') !== -1) {
         var keys = key.split('.');
-        var parent = context;
+        var value = context;
         //  Use for loop here so we can break early
         for (var i = 0; i < keys.length; i++) {
             var key = keys[i];
-            if (parent.hasOwnProperty(key) || parent[key]) {
-                //  Yes it has a key property, let's carry on down
-                value = parent[key];
-                parent = value;
+            if (HasProperty(value, key)) {
+                value = value[key];
             }
             else {
-                //  Can't go any further, so reset to default
                 value = defaultValue;
                 break;
             }
@@ -25,6 +22,10 @@ var GetProperty = function (context, key, defaultValue, dotMode) {
     } else {
         return defaultValue;
     }
+}
+
+var HasProperty = function (obj, name) {
+    return obj.hasOwnProperty(name) || obj[name];
 }
 
 export default GetProperty;
