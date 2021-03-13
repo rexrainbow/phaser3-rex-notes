@@ -266,6 +266,7 @@ nav:
         - Path : path.md
         - Spiral curve: curve-spiral.md
     - Raycaster: raycaster.md
+    - Expression parser: expression-parser.md
 - String:
     - Format:
         - Format: format.md
