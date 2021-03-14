@@ -87,7 +87,7 @@ var parser = scene.plugins.get('rexExpressionParserPlugin').add();
     var f = parser.compile(expressionString);
     ```
     - `expressionString` :
-        - Varaible : `a`, `a.b.c`.
+        - Variable : `a`, `a.b.c`.
         - Arithmetic : `+`, `-`, `*`, `\`, `%`, `(`, `)`, ex : `'(a + b.c) * 3 + (2 % 3)'`
         - Boolean : `>`, `<`, `>=`, `<=`, `==`, `!=`, `&&`, `||`, ex `'(a > 10) && (a < 30) || (b.c > c)'`    
         - Condition : `(cond)? v0:v1`, ex`'(a > b.c)? a:b.c'`
