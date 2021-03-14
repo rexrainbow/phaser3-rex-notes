@@ -5570,9 +5570,10 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>expressionString</code> :<ul>
-<li>Arithmetic : <code>'(a + b.c) * 3 + (2 % 3)'</code></li>
-<li>Boolean : <code>'(a &gt; 10) &amp;&amp; (a &lt; 30) || (b.c &gt; c)'</code>    </li>
-<li>Condition : <code>'(a &gt; b.c)? a:b.c'</code></li>
+<li>Varaible : <code>a</code>, <code>a.b.c</code>.</li>
+<li>Arithmetic : <code>+</code>, <code>-</code>, <code>*</code>, <code>\</code>, <code>%</code>, <code>(</code>, <code>)</code>, ex : <code>'(a + b.c) * 3 + (2 % 3)'</code></li>
+<li>Boolean : <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&amp;&amp;</code>, <code>||</code>, ex <code>'(a &gt; 10) &amp;&amp; (a &lt; 30) || (b.c &gt; c)'</code>    </li>
+<li>Condition : <code>(cond)? v0:v1</code>, ex<code>'(a &gt; b.c)? a:b.c'</code></li>
 <li><a href="./#custom-method">Custom method</a> : <code>randomInt(a, b.c)</code></li>
 </ul>
 </li>
