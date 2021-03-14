@@ -6,6 +6,7 @@
 
 \s+                   /* skip whitespace */
 [0-9]+("."[0-9]+)?\b         return 'NUMBER'
+\b0x[0-9A-Fa-f]+\b           return 'HEXNUMBER'
 "*"                          return '*'
 "/"                          return '/'
 "-"                          return '-'
@@ -176,4 +177,6 @@ e
         }
     | NUMBER
         { $$ = Number(yytext); }
+    | HEXNUMBER
+        { $$ = parseInt(yytext, 16); }
     ;

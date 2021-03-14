@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     create() {
         var parser = this.plugins.get('rexExpressionParser').add();
         console.log(parser.exec("(a > 5) && (a < b)", { a: 10, b: 20 }));
-        console.log(parser.exec("(a > 5)? ((b < 10)? (1-1):(10%3)):(4/2)", { a: 10, b: 20 }));
+        console.log(parser.exec("(a > 5)? ((b < 10)? (0xf-0xf):(10%3)):(4/2)", { a: 10, b: 20 }));
     }
 
     update() {
