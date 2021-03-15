@@ -21,6 +21,10 @@ class Demo extends Phaser.Scene {
             trackColor: COLOR_DARK,
             color: COLOR_LIGHT,
             centerColor: COLOR_PRIMARY,
+
+            textColor: 0xffffff,
+            textFont: '20px',
+
             value: 0
         })
 

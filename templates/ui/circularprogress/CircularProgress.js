@@ -1,6 +1,7 @@
 import Canvas from '../canvas/Canvas.js';
 import GetStyle from '../../../plugins/utils/canvas/GetStyle.js';
 import DrawCicle from '../../../plugins/utils/canvas/DrawCircle.js';
+import DrawText from '../../../plugins/utils/canvas/DrawText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -23,6 +24,11 @@ class CircularProgress extends Canvas {
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setReverse(GetValue(config, 'reverse', false));
+
+        this.setTextColor(GetValue(config, 'textColor', undefined));
+        this.setTextStrokeColor(GetValue(config, 'textStrokeColor', undefined), GetValue(config, 'textStrokeThickness', undefined));
+        this.setTextFont(GetValue(config, 'textSize', '16px'), GetValue(config, 'textFamily', 'Courier'), GetValue(config, 'textStyle', ''));
+
         this.setValue(GetValue(config, 'value', 0));
     }
 
@@ -169,6 +175,64 @@ class CircularProgress extends Canvas {
         return this;
     }
 
+    get textColor() {
+        return this._textColor;
+    }
+
+    set textColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty |= (this._textColor != value);
+        this._textColor = value;
+    }
+
+    setTextColor(color) {
+        this.textColor = color;
+        return this;
+    }
+
+    get textStrokeColor() {
+        return this._textStrokeColor;
+    }
+
+    set textStrokeColor(value) {
+        value = GetStyle(value, this.canvas, this.context);
+        this.dirty |= (this._textStrokeColor != value);
+        this._textStrokeColor = value;
+    }
+
+    get textStrokeThickness() {
+        return this._textStrokeThickness;
+    }
+
+    set textStrokeThickness(value) {
+        this.dirty |= (this._textStrokeThickness != value);
+        this._textStrokeThickness = value;
+    }
+
+    setTextStrokeColor(color, thickness) {
+        if (thickness === undefined) {
+            thickness = 2;
+        }
+        this.textStrokeColor = color;
+        this.textStrokeThickness = thickness;
+        return this;
+    }
+
+    get textFont() {
+        return this._textFont;
+    }
+
+    set textFont(value) {
+        this.dirty |= (this._textFont != value);
+        this._textFont = value;
+    }
+
+    setTextFont(fontSize, fontFamily, fontStyle) {
+        var font = fontStyle + ' ' + fontSize + ' ' + fontFamily;
+        this.textFont = font;
+        return this;
+    }
+
     updateTexture() {
         this.clear();
 
@@ -221,6 +285,18 @@ class CircularProgress extends Canvas {
                 radius, radius,
                 fillStyle
             );
+        }
+
+        if (this.textColor || this.textStrokeColor) {
+            DrawText(
+                this.canvas, this.context,
+                x, x,
+                `${Math.floor(this.value * 100)}%`, // TODO
+                'center',
+                this.textFont,
+                this.textColor,
+                this.textStrokeColor, this.textStrokeThickness
+            )
         }
 
         super.updateTexture();
