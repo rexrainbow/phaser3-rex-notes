@@ -6,7 +6,7 @@ var DrawRectangle = function (canvas, context, x, y, width, height, fillStyle, s
 
     if (fillStyle != null) {
         if (fillColor2 != null) {
-            let grd;
+            var grd;
             if (isHorizontalGradient) {
                 grd = context.createLinearGradient(0, 0, width, 0);
             } else {

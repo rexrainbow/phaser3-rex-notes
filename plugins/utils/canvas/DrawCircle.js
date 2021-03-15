@@ -5,7 +5,7 @@ var DrawCircle = function (canvas, context, x, y, rx, ry, fillStyle, strokeStyle
     if (endAngle === undefined) {
         endAngle = 2 * Math.PI;
     }
-    if (anticlockwise === false) {
+    if (anticlockwise === undefined) {
         anticlockwise = false;
     }
 
