@@ -1,4 +1,4 @@
-import UIPlugin from '../../templates/ui/ui-plugin.js';
+import CircularProgressPlugin from '../../plugins/circularprogress-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var circularProgress = this.rexUI.add.circularProgress({
+        var circularProgress = this.add.rexCircularProgress({
             x: 400, y: 300,
             radius: 50,
 
@@ -24,6 +24,9 @@ class Demo extends Phaser.Scene {
 
             textColor: 0xffffff,
             textFont: '20px',
+            textFormatCallback: function (value) {
+                return Math.floor(value * 100).toString();
+            },
 
             value: 0
         })
@@ -50,10 +53,10 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
+        global: [{
+            key: 'rexCircularProgress',
+            plugin: CircularProgressPlugin,
+            start: true
         }]
     }
 };
