@@ -1,8 +1,17 @@
-var DrawCircle = function (canvas, context, x, y, rx, ry, fillStyle, strokeStyle, lineWidth) {
+var DrawCircle = function (canvas, context, x, y, rx, ry, fillStyle, strokeStyle, lineWidth, startAngle, endAngle, anticlockwise) {
+    if (startAngle === undefined) {
+        startAngle = 0;
+    }
+    if (endAngle === undefined) {
+        endAngle = 2 * Math.PI;
+    }
+    if (anticlockwise === false) {
+        anticlockwise = false;
+    }
 
     context.beginPath();
 
-    context.ellipse(x, y, rx, ry, 0, 0, (2 * Math.PI));
+    context.ellipse(x, y, rx, ry, 0, startAngle, endAngle, anticlockwise);
 
     if (fillStyle != null) {
         context.fillStyle = fillStyle;
