@@ -169,6 +169,21 @@
         // ...
     }
     ```
+1. [Circular progress](circularprogress.md): Circular progress bar.
+    ```javascript
+    var circularProgress = scene.rexUI.add.circularProgress(x, y, radius, barColor, value, config);
+    ```
+    or
+    ```javascript
+    class MyCircularProgress extends RexPlugins.UI.CircularProgress {
+        constructor(scene, x, y, radius, barColor, value, config) {
+            super(scene, x, y, radius, barColor, value, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects
