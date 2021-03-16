@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
             radius: 50,
 
             trackColor: COLOR_DARK,
-            color: COLOR_LIGHT,
+            barColor: COLOR_LIGHT,
             centerColor: COLOR_PRIMARY,
 
             textColor: 0xffffff,

@@ -10,13 +10,13 @@ const Clamp = Phaser.Math.Clamp;
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 
 class CircularProgress extends Canvas {
-    constructor(scene, x, y, radius, color, value, config) {
+    constructor(scene, x, y, radius, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             radius = GetValue(config, 'radius', 1);
-            color = GetValue(config, 'color', undefined);
+            barColor = GetValue(config, 'barColor', undefined);
             value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
@@ -24,12 +24,12 @@ class CircularProgress extends Canvas {
 
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
-        this.setColor(color);
+        this.setBarColor(barColor);
         this.setCenterColor(GetValue(config, 'centerColor', undefined));
 
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
-        this.setReverse(GetValue(config, 'reverse', false));
+        this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
         this.setTextColor(GetValue(config, 'textColor', undefined));
         this.setTextStrokeColor(GetValue(config, 'textStrokeColor', undefined), GetValue(config, 'textStrokeThickness', undefined));
@@ -40,10 +40,7 @@ class CircularProgress extends Canvas {
     }
 
     resize(width, height) {
-        if (height !== undefined) {
-            width = Math.min(width, height);
-        }
-        width = Math.floor(width);
+        width = Math.floor(Math.min(width, height));
         if (width === this.width) {
             return this;
         }
@@ -75,7 +72,8 @@ class CircularProgress extends Canvas {
     set radius(value) {
         this.dirty |= (this._radius != value);
         this._radius = value;
-        this.resize(value * 2);
+        var width = value * 2;
+        this.resize(width, width);
     }
 
     setRadius(radius) {
@@ -98,18 +96,18 @@ class CircularProgress extends Canvas {
         return this;
     }
 
-    get color() {
-        return this._color;
+    get barColor() {
+        return this._barColor;
     }
 
-    set color(value) {
+    set barColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._color != value);
-        this._color = value;
+        this.dirty |= (this._barColor != value);
+        this._barColor = value;
     }
 
-    setColor(color) {
-        this.color = color;
+    setBarColor(color) {
+        this.barColor = color;
         return this;
     }
 
@@ -127,17 +125,20 @@ class CircularProgress extends Canvas {
         return this;
     }
 
-    get reverse() {
-        return this._reverse;
+    get anticlockwise() {
+        return this._anticlockwise;
     }
 
-    set reverse(value) {
-        this.dirty |= (this._reverse != value);
-        this._reverse = value;
+    set anticlockwise(value) {
+        this.dirty |= (this._anticlockwise != value);
+        this._anticlockwise = value;
     }
 
-    setReverse(reverse) {
-        this.reverse = reverse;
+    setAnticlockwise(anticlockwise) {
+        if (anticlockwise === undefined) {
+            anticlockwise = true;
+        }
+        this.anticlockwise = anticlockwise;
         return this;
     }
 
@@ -251,41 +252,40 @@ class CircularProgress extends Canvas {
 
         var x = this.radius;
         var lineWidth = this.thickness * this.radius;
+        var barRadius = this.radius - (lineWidth / 2);
+        var centerRadius = this.radius - lineWidth;
 
-        if (this.trackColor) {
-            var radius = this.radius - (lineWidth / 2);
-            // Draw track
+        // Draw track
+        if (this.trackColor && (lineWidth > 0)) {            
             DrawCicle(
                 this.canvas, this.context,
                 x, x,
-                radius, radius,
+                barRadius, barRadius,
                 undefined,
                 this.trackColor,
                 lineWidth
             );
         }
 
-        // Draw main CircularProgress
-        if (this.color) {
-            var radius = this.radius - (lineWidth / 2);
+        // Draw bar
+        if ((this.barColor) && (barRadius > 0)) {
             var endAngle = (2 * Math.PI * this.value) + this.startAngle;
             DrawCicle(
                 this.canvas, this.context,
                 x, x,
-                radius, radius,
+                barRadius, barRadius,
                 undefined,
-                this.color,
+                this.barColor,
                 lineWidth,
-                this.startAngle, endAngle, this.reverse
+                this.startAngle, endAngle, this.anticlockwise
             );
         }
 
-        // Draw center CircularProgress
-        if (this.centerColor) {
-            var radius = (1 - this.thickness) * this.radius;
+        // Draw center
+        if (this.centerColor && (centerRadius > 0)) {
             var fillStyle;
             if (this.centerColor2) {
-                fillStyle = this.context.createRadialGradient(x, x, 0, x, x, radius);
+                fillStyle = this.context.createRadialGradient(x, x, 0, x, x, centerRadius);
                 fillStyle.addColorStop(0, this.centerColor);
                 fillStyle.addColorStop(1, this.centerColor2);
             } else {
@@ -295,7 +295,7 @@ class CircularProgress extends Canvas {
             DrawCicle(
                 this.canvas, this.context,
                 x, x,
-                radius, radius,
+                centerRadius, centerRadius,
                 fillStyle
             );
         }
