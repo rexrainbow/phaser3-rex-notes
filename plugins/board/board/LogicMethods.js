@@ -76,6 +76,7 @@ import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
 
 import GetGridPoints from './gridpoints/GetGridPoints.js';
+import CreateTileTexture from './gridpoints/CreateTileTexture.js';
 
 export default {
     getChessData: GetChessData,
@@ -156,4 +157,5 @@ export default {
     hasEdgeBlocker: HasEdgeBlocker,
 
     getGridPoints: GetGridPoints,
+    createTileTexture: CreateTileTexture,
 };

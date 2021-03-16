@@ -16,11 +16,10 @@ class Demo extends Phaser.Scene {
             // grid: getQuadGrid(this),
             width: 8,
             height: 8
-        });
+        })
+            .createTileTexture('tile', undefined, 0xffffff, 1)
 
-        CreatePolygonTexture(this, 'tile', board.getGridPoints(), undefined, 0xffffff, 2);
         var blitter = this.add.blitter(0, 0, 'tile');
-
         board
             .forEachTileXY(function (tileXY, board) {
                 var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y);
