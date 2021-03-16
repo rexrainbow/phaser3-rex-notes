@@ -10,13 +10,14 @@ const Clamp = Phaser.Math.Clamp;
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 
 class CircularProgress extends Canvas {
-    constructor(scene, x, y, radius, color, config) {
+    constructor(scene, x, y, radius, color, value, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             radius = GetValue(config, 'radius', 1);
             color = GetValue(config, 'color', undefined);
+            value = GetValue(config, 'value', 0);
         }
         var width = radius * 2;
         super(scene, x, y, width, width);
@@ -33,9 +34,9 @@ class CircularProgress extends Canvas {
         this.setTextColor(GetValue(config, 'textColor', undefined));
         this.setTextStrokeColor(GetValue(config, 'textStrokeColor', undefined), GetValue(config, 'textStrokeThickness', undefined));
         this.setTextFont(GetValue(config, 'textSize', '16px'), GetValue(config, 'textFamily', 'Courier'), GetValue(config, 'textStyle', ''));
-        this.setTextFormatCallback(GetValue(config, 'textFormatCallback', DefaultTextFormatCallback), GetValue(config, 'textFormatCallbackScope', undefined));
+        this.setTextFormatCallback(GetValue(config, 'textFormatCallback', undefined), GetValue(config, 'textFormatCallbackScope', undefined));
 
-        this.setValue(GetValue(config, 'value', 0));
+        this.setValue(value);
     }
 
     resize(width, height) {
@@ -300,7 +301,7 @@ class CircularProgress extends Canvas {
         }
 
         // Draw text
-        if (this.textColor || this.textStrokeColor) {
+        if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
             var text;
             if (this.textFormatCallbackScope) {
                 text = this.textFormatCallback(this.value);
@@ -321,10 +322,6 @@ class CircularProgress extends Canvas {
         super.updateTexture();
         return this;
     }
-}
-
-var DefaultTextFormatCallback = function (value) {
-    return `${Math.floor(value * 100)}%`;
 }
 
 export default CircularProgress;
