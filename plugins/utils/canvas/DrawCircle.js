@@ -1,4 +1,11 @@
-var DrawCircle = function (canvas, context, x, y, rx, ry, fillStyle, strokeStyle, lineWidth, startAngle, endAngle, anticlockwise) {
+var DrawCircle = function (
+    canvas, context,
+    x, y,
+    rx, ry,
+    fillStyle, strokeStyle, lineWidth,
+    startAngle, endAngle, anticlockwise
+) {
+
     if (startAngle === undefined) {
         startAngle = 0;
     }

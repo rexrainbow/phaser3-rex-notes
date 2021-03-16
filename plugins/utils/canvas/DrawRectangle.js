@@ -1,4 +1,9 @@
-var DrawRectangle = function (canvas, context, x, y, width, height, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient) {
+var DrawRectangle = function (
+    canvas, context,
+    x, y,
+    width, height,
+    fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient
+) {
 
     context.beginPath();
 

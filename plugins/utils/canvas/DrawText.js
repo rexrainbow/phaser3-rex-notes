@@ -1,4 +1,11 @@
-var DrawText = function (canvas, context, x, y, text, textAlign, font, fillStyle, strokeStyle, lineWidth) {
+var DrawText = function (
+    canvas, context,
+    x, y,
+    text,
+    textAlign, font,
+    fillStyle, strokeStyle, lineWidth
+) {
+
     if ((lineWidth === undefined) && (strokeStyle != null)) {
         lineWidth = 2;
     }
