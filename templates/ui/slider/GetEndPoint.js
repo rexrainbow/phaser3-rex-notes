@@ -12,7 +12,7 @@ var GetEndoint = function (out) {
         GetThumbAlignPoint.call(this, align, out);
     } else {
         if (this.orientation === 0) {
-            out.x = this.innteRight - 1; // Add 1 pixel margin
+            out.x = this.innerRight - 1; // Add 1 pixel margin
             out.y = this.centerY;
         } else {
             out.x = this.centerX;
