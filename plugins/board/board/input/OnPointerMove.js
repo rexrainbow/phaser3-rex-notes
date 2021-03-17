@@ -14,10 +14,15 @@ var OnPointerMove = function (pointer) {
         return;
     }
 
-    var tileX = out.x,
-        tileY = out.y;
     this.prevTilePosition.x = this.tilePosition.x;
     this.prevTilePosition.y = this.tilePosition.y;
+    // prevTilePosition might be undefined at beginning
+    if ((this.prevTilePosition.x != null) && (this.prevTilePosition.y != null)) {
+        board.emit('tileout', pointer, this.prevTilePosition);
+    }
+
+    var tileX = out.x,
+        tileY = out.y;
     this.tilePosition.x = tileX;
     this.tilePosition.y = tileY;
     if (!board.contains(tileX, tileY)) {
@@ -29,11 +34,6 @@ var OnPointerMove = function (pointer) {
     }
     if (this.pointer === null) { // Catch new touch pointer
         this.pointer = pointer;
-    }
-
-    // prevTilePosition might be undefined at beginning
-    if ((this.prevTilePosition.x != null) && (this.prevTilePosition.y != null)) {
-        board.emit('tileout', pointer, this.prevTilePosition);
     }
 
     board.emit('tilemove', pointer, this.tilePosition);

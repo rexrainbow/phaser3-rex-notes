@@ -1011,6 +1011,19 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     graphics.strokePoints(points, true);
     ```
 
+### Create tile texture
+
+```javascript
+board.createTileTexture(key, fillStyle, strokeStyle, lineWidth, lineJoin);
+```
+
+- `key` : Texture key.
+- `fillStyle` : Fill color of tile texture.
+    - `undefined` : Don't fill tile texture.
+- `strokeStyle`, `lineWidth` : Stroke color, stroke line width of tile texture.
+    - `undefined` : Don't stroke tile texture.
+- `lineJoin` : Join style of stroke lines. `'round'`, `'bevel'` and `'miter'`. Default is `'miter'`.
+
 ### Other properties
 
 - Scene

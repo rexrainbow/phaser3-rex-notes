@@ -1,5 +1,4 @@
 import BoardPlugin from '../../plugins/board-plugin.js';
-import CreatePolygonTexture from '../../plugins/utils/texture/CreatePolygonTexture.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -17,14 +16,26 @@ class Demo extends Phaser.Scene {
             width: 8,
             height: 8
         })
-            .createTileTexture('tile', undefined, 0xffffff, 1)
-
-        var blitter = this.add.blitter(0, 0, 'tile');
-        board
+            .createTileTexture('tile', 0xffffff)
             .forEachTileXY(function (tileXY, board) {
-                var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y);
-                blitter.create(worldXY.x, worldXY.y);
-            }, this);
+                board.addChess(
+                    this.add.image(0, 0, 'tile').setAlpha(0.5),
+                    tileXY.x, tileXY.y, 0
+                );
+            }, this)
+            .setInteractive()
+            .on('tileover', function (pointer, tileXY) {
+                var tile = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+                if (tile) {
+                    tile.setAlpha(1)
+                }
+            })
+            .on('tileout', function (pointer, tileXY) {
+                var tile = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+                if (tile) {
+                    tile.setAlpha(0.5)
+                }
+            })
     }
 
     update() { }
