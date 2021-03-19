@@ -23,11 +23,15 @@ class Demo extends Phaser.Scene {
 
         var knob = this.rexUI.add.knob({
             x: 400, y: 300,
-            width: 150, height: 150,
+            width: 200, height: 200,
+
+            space: { left: 20, right: 20, top: 20, bottom: 20 },
+
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
 
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
-            centerColor: COLOR_PRIMARY,
+            // centerColor: COLOR_PRIMARY,
 
             text: this.rexUI.add.label({
                 text: this.add.text(0, 0, '', {

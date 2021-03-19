@@ -305,6 +305,7 @@ nav:
     - Tabs: ui-tabs.md
     - Menu: ui-menu.md
     - Number bar: ui-numberbar.md
+    - Knob: ui-knob.md
     - Pages: ui-pages.md    
     - Scroll-able panel: ui-scrollablepanel.md
     - Chart: ui-chart.md

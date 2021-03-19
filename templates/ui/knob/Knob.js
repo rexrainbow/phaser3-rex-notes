@@ -19,8 +19,14 @@ class Knob extends OverlapSizer {
         this.type = 'rexKnob';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
-        // Get text object
+        // Add elements
+        var background = GetValue(config, 'background', undefined);
         var textObject = GetValue(config, 'text', undefined);
+
+        if (background) {
+            this.addBackground(background);
+        }
+        // Get text object
         if (textObject) {
             // Don't draw text on knob directly
             config.textColor = undefined;

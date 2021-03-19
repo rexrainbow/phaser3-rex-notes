@@ -50,6 +50,7 @@
 1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [Grid-table](ui-gridtable.md): A container with a [grid table](gridtable.md), slider, and scroller.
+1. [Knob](ui-knob.md): A knob button based on [circular progress](circularprogress.md).
 1. [Label](ui-label.md): A container with an icon, text, and background.
 1. [Menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Number-bar](ui-numberbar.md): A container with an icon, slider, text, and background.
