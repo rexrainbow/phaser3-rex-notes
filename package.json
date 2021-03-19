@@ -40,9 +40,10 @@
         "eslint-plugin-import": "^2.22.1",
         "expose-loader": "^0.7.5",
         "html-webpack-plugin": "^3.2.0",
+        "jison": "*",
         "phaser": "3.53.1",
         "raw-loader": "^0.5.1",
-        "rollup": "^2.40.0",
+        "rollup": "^2.42.0",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-commonjs": "^10.1.0",
         "rollup-plugin-node-builtins": "^2.1.2",
@@ -51,8 +52,7 @@
         "rollup-plugin-terser": "^5.3.1",
         "rollup-plugin-uglify": "^6.0.4",
         "webpack": "^4.46.0",
-        "webpack-cli": "^3.3.12",
-        "jison": "*"
+        "webpack-cli": "^3.3.12"
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",

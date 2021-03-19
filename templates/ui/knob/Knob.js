@@ -19,11 +19,20 @@ class Knob extends OverlapSizer {
         this.type = 'rexKnob';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
-        var text = GetTextObject(scene, config);
-        var knob = CreateCircularProgress(scene, config);
+        // Get text object
+        var textObject = GetValue(config, 'text', undefined);
+        if (textObject) {
+            // Don't draw text on knob directly
+            config.textColor = undefined;
+            config.textStrokeColor = undefined;
+        }
+        // Create circular progress object
+        var knob = new CircularProgress(scene, config);
+        knob._value = -1; // To trigger text updating
+        scene.add.existing(knob);
 
         this.add(knob, 'knob');
-        this.setTextObject(text);
+        this.setTextObject(textObject);
 
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {
@@ -37,9 +46,12 @@ class Knob extends OverlapSizer {
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
         // Input
-        this.setInteractive()
-            .on('pointerdown', OnTouchPad, this)
-            .on('pointermove', OnTouchPad, this);
+        var inputMode = GetValue(config, 'input', true);
+        if (inputMode) {
+            knob.setInteractive()
+                .on('pointerdown', OnTouchPad, this)
+                .on('pointermove', OnTouchPad, this);
+        }
     }
 
     setTextObject(textObject) {
@@ -116,23 +128,6 @@ class Knob extends OverlapSizer {
         }
         return value;
     }
-}
-
-var GetTextObject = function (scene, config) {
-    var textObject = GetValue(config, 'text', undefined);
-    if (textObject) {
-        // Don't draw text on knob directly
-        config.textColor = undefined;
-        config.textStrokeColor = undefined;
-    }
-    return textObject;
-}
-
-var CreateCircularProgress = function (scene, config) {
-    var circularProgress = new CircularProgress(scene, config);
-    circularProgress._value = -1; // To trigger text updating
-    scene.add.existing(circularProgress);
-    return circularProgress;
 }
 
 Object.assign(
