@@ -304,16 +304,10 @@ class CircularProgress extends Canvas {
 
         // Draw text
         if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
-            var text;
-            if (this.textFormatCallbackScope) {
-                text = this.textFormatCallback(this.value);
-            } else {
-                text = this.textFormatCallback.call(this.textFormatCallbackScope, this.value);
-            }
             DrawText(
                 this.canvas, this.context,
                 x, x,
-                text,
+                this.getFormatText(),
                 'center',
                 this.textFont,
                 this.textColor,
@@ -323,6 +317,20 @@ class CircularProgress extends Canvas {
 
         super.updateTexture();
         return this;
+    }
+
+    getFormatText(value) {
+        if (value === undefined) {
+            value = this.value;
+        }
+
+        var text;
+        if (this.textFormatCallbackScope) {
+            text = this.textFormatCallback(value);
+        } else {
+            text = this.textFormatCallback.call(this.textFormatCallbackScope, value);
+        }
+        return text;
     }
 }
 

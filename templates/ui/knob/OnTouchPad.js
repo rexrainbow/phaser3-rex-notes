@@ -10,12 +10,15 @@ var OnTouchPad = function (pointer, localX, localY) {
         return;
     }
     var centerX = this.width / 2;
-    if (GetDistance(centerX, centerX, localX, localY) > centerX) {
+    var centerY = this.height / 2;
+    var radius = Math.min(centerX, centerY);
+    if (GetDistance(centerX, centerY, localX, localY) > radius) {
         return;
     }
 
+    var knob = this.sizerChildren.knob;
     var endAngle = GetAngle(centerX, centerX, localX, localY);
-    var deltaAngle = (this.anticlockwise) ? (this.startAngle - endAngle) : (endAngle - this.startAngle);
+    var deltaAngle = (knob.anticlockwise) ? (knob.startAngle - endAngle) : (endAngle - knob.startAngle);
     var value = NormalizeAngle(deltaAngle) / (2 * Math.PI);
 
     if (this.easeValueDuration === 0) {

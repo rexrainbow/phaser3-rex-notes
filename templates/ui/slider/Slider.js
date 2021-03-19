@@ -76,7 +76,7 @@ class Slider extends Sizer {
         }
         this.setEnable(GetValue(config, 'enable', undefined));
         this.setGap(GetValue(config, 'gap', undefined));
-        this.setValue(GetValue(config, 'value', 0));
+        this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
         this.setEaseValueDuration(GetValue(config, 'easeValue.duration', 0));
         this.setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'));
