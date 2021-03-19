@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 
         this.rexUI.add.slider({
             x: 200,
-            y: 300,
+            y: 200,
             width: 200,
             height: 20,
             orientation: 'x',
@@ -37,6 +37,7 @@ class Demo extends Phaser.Scene {
         })
             .layout();
 
+
         var print1 = this.add.text(400, 0, '');
         this.rexUI.add.slider({
             x: 600,
@@ -52,6 +53,29 @@ class Demo extends Phaser.Scene {
             input: 'click', // 'drag'|'click'
             valuechangeCallback: function (value) {
                 print1.text = value;
+            },
+
+        })
+            .layout();
+
+
+        var print2 = this.add.text(0, 400, '');
+        this.rexUI.add.slider({
+            x: 200,
+            y: 500,
+            width: 300,
+            height: 30,
+            orientation: 'x',
+
+            track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
+            indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+
+            input: 'click', // 'drag'|'click'
+            easeValue: { duration: 250 },
+
+            valuechangeCallback: function (value) {
+                print2.text = value;
             },
 
         })

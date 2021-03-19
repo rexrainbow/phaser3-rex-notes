@@ -6,6 +6,7 @@ import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
+import EaseValueMethods from './EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -76,6 +77,9 @@ class Slider extends Sizer {
         this.setEnable(GetValue(config, 'enable', undefined));
         this.setGap(GetValue(config, 'gap', undefined));
         this.setValue(GetValue(config, 'value', 0));
+
+        this.setEaseValueDuration(GetValue(config, 'easeValue.duration', 0));
+        this.setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'));
     }
 
     setEnable(enable) {
@@ -176,7 +180,8 @@ var methods = {
 }
 Object.assign(
     Slider.prototype,
-    methods
+    methods,
+    EaseValueMethods
 );
 
 export default Slider;

@@ -4754,6 +4754,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-value" class="md-nav__link">
+    Ease value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5498,6 +5505,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-value" class="md-nav__link">
+    Ease value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5617,6 +5631,10 @@
 
     <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>    
     <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">slider</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
 
@@ -5667,6 +5685,11 @@
 <li><code>value</code> : Initial value (0 ~ 1).</li>
 <li><code>gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
 <li><code>undefined</code> : Disalbe this feature.</li>
+</ul>
+</li>
+<li><code>easeValue</code> : Easing value when <code>input</code> is <code>'click'</code>.<ul>
+<li><code>easeValue.duration</code> : Duration of value easing, default is <code>0</code>. i.e. no easing.</li>
+<li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
@@ -5732,32 +5755,50 @@
 <p>Change value will also change the position of slider thumb and width of slider indicator.</p>
 <ul>
 <li>Get value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
 <li>Set value
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
 <li>Increase value
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
 </code></pre></div></li>
+</ul>
+<h3 id="ease-value">Ease value<a class="headerlink" href="#ease-value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Ease value to
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Set ease duration
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set ease function
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>

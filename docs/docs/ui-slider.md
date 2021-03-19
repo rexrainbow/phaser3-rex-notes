@@ -92,6 +92,10 @@ var slider = scene.rexUI.add.slider({
 
     value: 0,
     gap: undefined,
+    easeValue: {
+        duration: 0,
+        ease: 'Linear'
+    },    
     valuechangeCallback: function(newValue, oldValue, slider) {
     },
 
@@ -131,6 +135,9 @@ var slider = scene.rexUI.add.slider({
 - `value` : Initial value (0 ~ 1).
 - `gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disalbe this feature.
+- `easeValue` : Easing value when `input` is `'click'`.
+    - `easeValue.duration` : Duration of value easing, default is `0`. i.e. no easing.
+    - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - `valuechangeCallback` : callback function when value changed.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
@@ -202,40 +209,60 @@ Change value will also change the position of slider thumb and width of slider i
 
 - Get value
     ```javascript
-    var value = numberBar.getValue(min, max); // value : min ~ max
+    var value = slider.getValue(min, max); // value : min ~ max
     ```
     or
     ```javascript
-    var value = numberBar.getValue(); // value: 0 ~ 1
+    var value = slider.getValue(); // value: 0 ~ 1
     ```
     or
     ```javascript
-    var value = numberBar.value; // value: 0 ~ 1
+    var value = slider.value; // value: 0 ~ 1
     ```
 - Set value
     ```javascript
-    numberBar.setValue(value, min, max); // value: min ~ max
+    slider.setValue(value, min, max); // value: min ~ max
     ```
     or
     ```javascript
-    numberBar.setValue(value); // value: 0 ~ 1
+    slider.setValue(value); // value: 0 ~ 1
     ```
     or
     ```javascript
-    numberBar.value = value; // value: 0 ~ 1
+    slider.value = value; // value: 0 ~ 1
     ```
 - Increase value
     ```javascript
-    numberBar.addValue(inc, min, max); // inc: min ~ max
+    slider.addValue(inc, min, max); // inc: min ~ max
     ```
     or
     ```javascript
-    numberBar.addValue(inc); // inc: 0 ~ 1
+    slider.addValue(inc); // inc: 0 ~ 1
     ```
     or
     ```javascript
-    numberBar.value += inc; // inc: 0 ~ 1
+    slider.value += inc; // inc: 0 ~ 1
     ```
+
+### Ease value
+
+- Ease value to
+    ```javascript
+    slider.easeValueTo(value, min, max);  // value: min ~ max
+    ```
+    or
+    ```javascript
+    slider.easeValueTo(value);  // value: 0 ~ 1
+    ```
+- Set ease duration
+    ```javascript
+    slider.setEaseValueDuration(duration);
+    ```
+- Set ease function
+    ```javascript
+    slider.setEaseValueFunction(ease);
+    ```
+    - `ease` : [Ease function](tween.md/#ease-equations).
 
 ### Other properties
 

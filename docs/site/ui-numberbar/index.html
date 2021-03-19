@@ -4814,6 +4814,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-value" class="md-nav__link">
+    Ease value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -5505,6 +5512,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-value" class="md-nav__link">
+    Ease value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#text" class="md-nav__link">
     Text
   </a>
@@ -5569,48 +5583,54 @@
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span>
+  <span class="s2">&quot;rexuiplugin&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;rexUI&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;rexUI&quot;</span>
+<span class="p">);</span>
 </code></pre></div></li>
 <li>Add number bar object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">numberBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">numberBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+  <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+  <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s2">&quot;phaser3-rex-plugins/templates/ui/ui-plugin.js&quot;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
+  <span class="c1">// ...</span>
+  <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="s2">&quot;rexUI&quot;</span><span class="p">,</span>
+        <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+        <span class="nx">mapping</span><span class="o">:</span> <span class="s2">&quot;rexUI&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="c1">// ...</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add number bar object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">numberBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">numberBar</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+  <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">NumberBar</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+  <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">NumberBar</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;phaser3-rex-plugins/templates/ui/ui-components.js&quot;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add number bar object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NumberBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NumberBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">sizer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -5631,7 +5651,11 @@
         <span class="nx">indicator</span><span class="o">:</span> <span class="nx">sliderIndicatorGameObject</span><span class="p">,</span>
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">sliderThumbGameObject</span><span class="p">,</span>
         <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
-        <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>        
+        <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+        <span class="p">},</span>
     <span class="p">}</span>
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
 
@@ -5656,23 +5680,19 @@
 
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
-<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.</li>
 <li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
-<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.</li>
 <li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
 <li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
-</ul>
-</li>
 <li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
-</ul>
-</li>
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of numberBar.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
-<li><code>slider</code> : Slider game object which composed of<ul>
+<li><code>slider</code> : Slider game object which composed of</li>
 <li><code>slider.width</code> : Fixed width of slider, optional. Width of slider will be extended if this value is not set.</li>
 <li><code>slider.background</code> : Game object of slider background, optional.</li>
 <li><code>slider.track</code> : Game object of slider track.</li>
@@ -5688,32 +5708,33 @@
 <li><code>undefined</code> : Disable this feature.</li>
 </ul>
 </li>
+<li><code>slider.easeValue</code> : Easing value when <code>input</code> is <code>'click'</code>.<ul>
+<li><code>slider.easeValue.duration</code> : Duration of value easing, default is <code>0</code>. i.e. no easing.</li>
+<li><code>slider.easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
 <li><code>text</code> : Game object of text, optional.</li>
-<li><code>space</code> : Pads spaces<ul>
+<li><code>space</code> : Pads spaces</li>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
 <li><code>space.slider</code> : Space between slider game object and text game object.</li>
-</ul>
-</li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>name</code> : Set name of this numberBar.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyNumberBar</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NumberBar</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-        <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
+  <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyNumberBar</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NumberBar</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
     <span class="c1">// ...</span>
+    <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNumberBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNumberBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
@@ -5724,86 +5745,100 @@
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get element<ul>
+<li>Get element</li>
 <li>Background game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;background&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Icon game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;icon&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Slider game object<ul>
 <li>Slider background
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderBackground</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.background&#39;</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderBackground</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;slider.background&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Slider track
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderTrack</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderTrack</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;slider.track&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Slider indicator
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderIndicator</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.indicator&#39;</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderIndicator</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;slider.indicator&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Slider thumb
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderThumb</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.thumb&#39;</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sliderThumb</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;slider.thumb&quot;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Text game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">);</span>
 </code></pre></div></li>
-</ul>
-</li>
 <li>Get by name
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 <span class="c1">// var gameObject = numberBar.getElement(&#39;#&#39; + name, recursive);</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 <span class="c1">// var gameObject = numberBar.getByName(&#39;#&#39; + name, recursive);</span>
-</code></pre></div><ul>
+</code></pre></div></li>
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
-</ul>
-</li>
 </ul>
 <h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
 <p>Change value will also change the position of slider thumb and width of slider indicator.</p>
 <ul>
 <li>Get value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
 <li>Set value
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
 <li>Increase value
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
 </code></pre></div></li>
+</ul>
+<h3 id="ease-value">Ease value<a class="headerlink" href="#ease-value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Ease value to
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Set ease duration
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set ease function
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get text string
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set text string
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
 </code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+  or
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
@@ -5811,9 +5846,13 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On value changed
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">numberBar</span><span class="p">){</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span>
+  <span class="s2">&quot;valuechange&quot;</span><span class="p">,</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">numberBar</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+  <span class="p">},</span>
+  <span class="nx">scope</span>
+<span class="p">);</span>
 </code></pre></div></li>
 </ul>
                 

@@ -3,8 +3,6 @@ import AddChildMask from '../utils/AddChildMask.js';
 import Slider from '../slider/Slider.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Percent = Phaser.Math.Percent;
-const Linear = Phaser.Math.Linear;
 
 class NumberBar extends Sizer {
     constructor(scene, config) {
@@ -100,20 +98,17 @@ class NumberBar extends Sizer {
 
     setEnable(enable) {
         if (this.childrenMap.slider) {
-            return this;
+            this.childrenMap.slider.setEnable(enable);
         }
-        if (enable === undefined) {
-            enable = true;
-        }
-        this.childrenMap.slider.enable = enable;
         return this;
     }
 
     get value() {
         if (this.childrenMap.slider) {
             return this.childrenMap.slider.value;
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     set value(value) {
@@ -124,27 +119,32 @@ class NumberBar extends Sizer {
     }
 
     setValue(value, min, max) {
-        if (min !== undefined) {
-            value = Percent(value, min, max);
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.setValue(value, min, max);
         }
-        this.value = value;
         return this;
     }
 
     addValue(inc, min, max) {
-        if (min !== undefined) {
-            inc = Percent(inc, min, max);
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.addValue(inc, min, max);
         }
-        this.value += inc;
         return this;
     }
 
     getValue(min, max) {
-        var value = this.value;
-        if (min !== undefined) {
-            value = Linear(min, max, value);
+        if (this.childrenMap.slider) {
+            return this.childrenMap.slider.getValue(min, max);
+        } else {
+            return 0;
         }
-        return value;
+    }
+
+    easeValueTo(value, min, max) {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.easeValueTo(value, min, max);
+        }
+        return this;
     }
 
     get text() {
