@@ -6,7 +6,7 @@ import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import EaseValueMethods from './EaseValueMethods.js';
+import EaseValueMethods from '../utils/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -178,6 +178,7 @@ var methods = {
     updateThumb: UpdateThumb,
     updateIndicator: UpdateIndicator,
 }
+
 Object.assign(
     Slider.prototype,
     methods,
