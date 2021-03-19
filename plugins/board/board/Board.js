@@ -1,10 +1,8 @@
 import LogicBoard from './LogicBoard.js';
 import SetInteractive from './input/SetInteractive.js';
-import CreateTileTexture from './texture/CreateTileTexture.js';
 
 var methods = {
-    setInteractive: SetInteractive,
-    createTileTexture: CreateTileTexture,
+    setInteractive: SetInteractive
 }
 Object.assign(
     LogicBoard.prototype,

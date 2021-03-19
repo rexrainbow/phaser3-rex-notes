@@ -16,7 +16,10 @@ class Demo extends Phaser.Scene {
             width: 8,
             height: 8
         })
-            .createTileTexture('tile', 0xffffff)
+
+        this.rexBoard.createTileTexture(board, 'tile', 0xffffff);
+
+        board
             .forEachTileXY(function (tileXY, board) {
                 board.addChess(
                     this.add.image(0, 0, 'tile').setAlpha(0.5),

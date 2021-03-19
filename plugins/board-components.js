@@ -9,6 +9,7 @@ import FieldOfView from './board/fieldofview/FieldOfView.js';
 import Monopoly from './board/monopoly/Monopoly.js';
 import MiniBoard from './board/miniboard/MiniBoard.js';
 import HexagonMap from './board/hexagonmap/index.js';
+import CreateTileTexture from './board/texture/CreateTileTexture.js'
 
 export {
     Board,
@@ -21,5 +22,6 @@ export {
     FieldOfView,
     Monopoly,
     MiniBoard,
-    HexagonMap
+    HexagonMap,
+    CreateTileTexture
 };

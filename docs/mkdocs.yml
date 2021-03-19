@@ -323,6 +323,7 @@ nav:
     - Field of view: board-fieldofview.md
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
+    - Tile texture: board-texture.md
     - Mini board:
         - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md

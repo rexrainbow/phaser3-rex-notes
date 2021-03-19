@@ -15,6 +15,8 @@ import MiniBoardFactory from './board/miniboard/Factory.js';
 
 import HexagonMap from './board/hexagonmap/index.js';
 
+import CreateTileTexture from './board/texture/CreateTileTexture.js'
+
 class BoardPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
@@ -23,6 +25,7 @@ class BoardPlugin extends Phaser.Plugins.ScenePlugin {
 
         // Helper functions
         this.hexagonMap = HexagonMap;
+        this.createTileTexture = CreateTileTexture;
     }
 
     start() {

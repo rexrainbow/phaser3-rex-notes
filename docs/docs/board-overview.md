@@ -54,6 +54,7 @@
 ### Shapes
 
 - [Shape](board-shape.md)
+- [Tile texture](board-texture.md)
 
 ### Behaviors
 
