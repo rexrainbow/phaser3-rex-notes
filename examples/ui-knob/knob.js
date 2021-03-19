@@ -46,14 +46,13 @@ class Demo extends Phaser.Scene {
                 return Math.floor(value * 100).toString();
             },
 
-            value: 1,
+            value: 0.5,
             easeValue: { duration: 250 },
             valuechangeCallback: function (value) {
                 print.text = value;
             }
         })        
             .layout()
-            .setValue(0.5)
             //.drawBounds(this.add.graphics(), 0xff0000)
     }
 
