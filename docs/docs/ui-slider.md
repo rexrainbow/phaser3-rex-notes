@@ -136,7 +136,7 @@ var slider = scene.rexUI.add.slider({
 - `gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disalbe this feature.
 - `easeValue` : Easing value when `input` is `'click'`.
-    - `easeValue.duration` : Duration of value easing, default is `0`. i.e. no easing.
+    - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - `valuechangeCallback` : callback function when value changed.
 - `space` : Pads spaces

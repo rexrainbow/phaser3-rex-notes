@@ -149,7 +149,7 @@ var numberBar = scene.rexUI.add.numberBar({
   - `slider.gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disable this feature.
   - `slider.easeValue` : Easing value when `input` is `'click'`.
-      - `slider.easeValue.duration` : Duration of value easing, default is `0`. i.e. no easing.
+      - `slider.easeValue.duration` : Duration of value easing, default is `0` (no easing).
       - `slider.easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - `text` : Game object of text, optional.
 - `space` : Pads spaces
