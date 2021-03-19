@@ -161,6 +161,7 @@ module.exports = {
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
     'circularprogress': './templates/ui/circularprogress/CircularProgress.js',
+    'knob': './templates/ui/knob/Knob.js',
     'chart': './templates/ui/chart/Chart.js',
     'dialog': './templates/ui/dialog/Dialog.js',
     'fixwidthsizer': './templates/ui/fixwidthsizer/FixWidthSizer.js',
