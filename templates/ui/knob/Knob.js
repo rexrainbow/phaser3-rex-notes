@@ -28,6 +28,7 @@ class Knob extends OverlapSizer {
         }
         // Create circular progress object
         var knob = new CircularProgress(scene, config);
+        knob.setDepth(GetValue(config, 'knobDepth', 0));
         knob._value = -1; // To trigger text updating
         scene.add.existing(knob);
 
