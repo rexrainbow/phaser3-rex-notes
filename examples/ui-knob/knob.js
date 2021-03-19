@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
 
             text: this.rexUI.add.label({
                 text: this.add.text(0, 0, '', {
-                    fontSize: '30px'
+                    fontSize: '30px',
                 }),
                 icon: this.add.image(0, 0, 'volume'),
                 space: {
@@ -46,13 +46,15 @@ class Demo extends Phaser.Scene {
                 return Math.floor(value * 100).toString();
             },
 
-            value: 0.1,
+            value: 1,
             easeValue: { duration: 250 },
             valuechangeCallback: function (value) {
                 print.text = value;
             }
-        })
-            .layout();
+        })        
+            .layout()
+            .setValue(0.5)
+            //.drawBounds(this.add.graphics(), 0xff0000)
     }
 
     update() { }

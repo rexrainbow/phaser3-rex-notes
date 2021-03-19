@@ -155,7 +155,7 @@ var knob = scene.rexUI.add.knob({
     Default value is `undefined`.
 - `input` :
     - `true` : Touchable. Default value.
-    - `false` : Not touchable.
+    - `false` : Don't register any touch event, only for displaying.
 - `value` : Initial value (0 ~ 1).
 - `gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disalbe this feature.
