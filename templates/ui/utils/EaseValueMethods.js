@@ -10,6 +10,13 @@ var SetEaseValueFunction = function (mode) {
     return this;
 }
 
+var StopEaseValue = function () {
+    if (this.tweenValueTask) {
+        this.tweenValueTask.stop();
+    }
+    return this;
+}
+
 var EaseValueTo = function (value, min, max) {
     if ((value === undefined) || (value === null)) {
         return this;
@@ -38,5 +45,6 @@ var EaseValueTo = function (value, min, max) {
 export default {
     setEaseValueDuration: SetEaseValueDuration,
     setEaseValueFunction: SetEaseValueFunction,
+    stopEaseValue: StopEaseValue,
     easeValueTo: EaseValueTo
 }

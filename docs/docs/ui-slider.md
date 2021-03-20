@@ -254,6 +254,10 @@ Change value will also change the position of slider thumb and width of slider i
     ```javascript
     slider.easeValueTo(value);  // value: 0 ~ 1
     ```
+- Stop ease
+    ```javascript
+    slider.stopEaseValue();
+    ```
 - Set ease duration
     ```javascript
     slider.setEaseValueDuration(duration);

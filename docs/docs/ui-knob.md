@@ -274,6 +274,10 @@ Change value will also change the position of knob thumb and width of knob indic
     ```javascript
     knob.easeValueTo(value);  // value: 0 ~ 1
     ```
+- Stop ease
+    ```javascript
+    knob.stopEaseValue();
+    ```
 - Set ease duration
     ```javascript
     knob.setEaseValueDuration(duration);
