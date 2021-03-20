@@ -3,7 +3,7 @@ var WorldXYToChess = function (worldX, worldY, tileZ) {
     if (tileZ !== undefined) {
         return this.tileXYZToChess(tileXY.x, tileXY.y, tileZ)
     } else {
-        var tileZToUIDs = this.boardData.getUID(tileX, tileY);
+        var tileZToUIDs = this.boardData.getUID(tileXY.x, tileXY.y);
         if (tileZToUIDs == null) {
             return null;
         }
