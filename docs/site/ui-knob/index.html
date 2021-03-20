@@ -5640,6 +5640,7 @@
     <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="nx">startAngle</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mi">270</span><span class="p">),</span>
     <span class="nx">anticlockwise</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">knobDepth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">textColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -5698,8 +5699,10 @@
 <li><code>thickness</code> : <code>0</code> ~ <code>1</code>, thickness of circular bar. Default value is <code>0.2</code> (<code>0.2*radius</code>)</li>
 <li><code>startAngle</code> : Start angle of circular bar, in radians. Default value is 270 degrees.</li>
 <li><code>anticlockwise</code> : Set <code>true</code> to put anticlockwise circular bar. Default value is <code>false</code>.</li>
+<li><code>knobDepth</code> : Depth of knob (circular progress). Default value is <code>0</code>.</li>
 <li><code>text</code> : <a href="../ui-label/">Label</a>, <a href="../text/">Text</a>, <a href="bbcodeText.md">BBCodeText</a>, or <a href="../tagtext/">TagText</a>, which has <code>setText(text)</code> method, optional.<ul>
-<li><strong>No display text</strong> if <code>text</code> parameter is assigned.</li>
+<li>No display text if <code>text</code> parameter is assigned.</li>
+<li>Depth of text object ought to larger than knob (circular progress), to put text object in front of knob.</li>
 </ul>
 </li>
 <li>Display text : <ul>

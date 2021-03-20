@@ -89,6 +89,7 @@ var knob = scene.rexUI.add.knob({
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
+    knobDepth: 0,
 
     text: undefined,
     textColor: undefined,
@@ -140,8 +141,10 @@ var knob = scene.rexUI.add.knob({
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
+- `knobDepth` : Depth of knob (circular progress). Default value is `0`.
 - `text` : [Label](ui-label.md), [Text](text.md), [BBCodeText](bbcodeText.md), or [TagText](tagtext.md), which has `setText(text)` method, optional.
-    - **No display text** if `text` parameter is assigned.
+    - No display text if `text` parameter is assigned.
+    - Depth of text object ought to larger than knob (circular progress), to put text object in front of knob.
 - Display text : 
     - `textColor` : Color of display text. Default is `undefined`.
     - `textStrokeColor`, `textStrokeThickness` : Stroke color, stroke line width of display text. Default is `undefined`.
