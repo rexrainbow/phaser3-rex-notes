@@ -1,6 +1,7 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import CircularProgress from '../circularprogress/CircularProgress.js';
-import OnTouchPad from './OnTouchPad.js';
+import InstallTouchPadEvents from './input/OnTouchPad.js';
+import InstallPanPadEvents from './input/OnPanPad.js';
 import EaseValueMethods from '../utils/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -53,11 +54,17 @@ class Knob extends OverlapSizer {
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
         // Input
-        var inputMode = GetValue(config, 'input', true);
-        if (inputMode) {
-            knob.setInteractive()
-                .on('pointerdown', OnTouchPad, this)
-                .on('pointermove', OnTouchPad, this);
+        var inputMode = GetValue(config, 'input', 1);
+        if (typeof (inputMode) === 'string') {
+            inputMode = INPUTMODE[inputMode];
+        }
+        switch (inputMode) {
+            case 0: // 'pan'
+                InstallPanPadEvents.call(this);
+                break;
+            case 1: // 'click'
+                InstallTouchPadEvents.call(this);
+                break;
         }
     }
 
@@ -109,7 +116,7 @@ class Knob extends OverlapSizer {
         this.sizerChildren.knob.value = value;
 
         var newValue = this.value;
-        if (oldValue !== newValue) {          
+        if (oldValue !== newValue) {
             this.updateText();
             this.eventEmitter.emit('valuechange', newValue, oldValue, this.eventEmitter);
         }
@@ -142,6 +149,12 @@ class Knob extends OverlapSizer {
         }
         return value;
     }
+}
+
+const INPUTMODE = {
+    pan: 0,
+    click: 1,
+    none: -1,
 }
 
 Object.assign(

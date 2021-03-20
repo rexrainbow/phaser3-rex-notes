@@ -32,6 +32,7 @@ class Demo extends Phaser.Scene {
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
             // centerColor: COLOR_PRIMARY,
+            // anticlockwise: true,
 
             text: this.rexUI.add.label({
                 text: this.add.text(0, 0, '', {
@@ -50,10 +51,12 @@ class Demo extends Phaser.Scene {
             easeValue: { duration: 250 },
             valuechangeCallback: function (value) {
                 print.text = value;
-            }
-        })        
+            },
+
+            input: 'pan'
+        })
             .layout()
-            //.drawBounds(this.add.graphics(), 0xff0000)
+        //.drawBounds(this.add.graphics(), 0xff0000)
     }
 
     update() { }

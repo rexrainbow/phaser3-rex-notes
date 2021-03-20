@@ -269,9 +269,17 @@ class CircularProgress extends Canvas {
 
         // Draw bar
         if ((this.barColor) && (barRadius > 0)) {
-            var barAngle = 2 * Math.PI * (
-                (this.anticlockwise) ? (1 - this.value) : this.value
-            );
+            var anticlockwise, startAngle, endAngle;
+            if (this.value === 1) {
+                anticlockwise = false;
+                startAngle = 0;
+                endAngle = 2 * Math.PI;
+            } else {
+                anticlockwise = this.anticlockwise;
+                startAngle = this.startAngle;
+                var deltaAngle = 2 * Math.PI * ((this.anticlockwise) ? (1 - this.value) : this.value);
+                endAngle = deltaAngle + startAngle;
+            }
             DrawCicle(
                 this.canvas, this.context,
                 x, x,
@@ -279,7 +287,7 @@ class CircularProgress extends Canvas {
                 undefined,
                 this.barColor,
                 lineWidth,
-                this.startAngle, (barAngle + this.startAngle), this.anticlockwise
+                startAngle, endAngle, anticlockwise
             );
         }
 

@@ -1,6 +1,7 @@
-var GetDistance = Phaser.Math.Distance.Between;
-var GetAngle = Phaser.Math.Angle.Between;
-var NormalizeAngle = Phaser.Math.Angle.Normalize;
+import IsLocalPointInKnob from './IsLocalPointInKnob.js';
+
+const GetAngle = Phaser.Math.Angle.Between;
+const NormalizeAngle = Phaser.Math.Angle.Normalize;
 
 var OnTouchPad = function (pointer, localX, localY) {
     if (!this.enable) {
@@ -10,11 +11,11 @@ var OnTouchPad = function (pointer, localX, localY) {
         return;
     }
     var knob = this.sizerChildren.knob;
-    var centerX = knob.width / 2;
-    if (GetDistance(centerX, centerX, localX, localY) > centerX) {
+    if (!IsLocalPointInKnob(knob, localX, localY)) {
         return;
     }
 
+    var centerX = knob.width / 2;
     var startAngle = knob.startAngle;
     var endAngle = GetAngle(centerX, centerX, localX, localY);
     var deltaAngle = (knob.anticlockwise) ? (startAngle - endAngle) : (endAngle - startAngle);
@@ -28,4 +29,11 @@ var OnTouchPad = function (pointer, localX, localY) {
     }
 }
 
-export default OnTouchPad;
+var InstallEvents = function () {
+    var knob = this.sizerChildren.knob;
+    knob.setInteractive()
+        .on('pointerdown', OnTouchPad, this)
+        .on('pointermove', OnTouchPad, this);
+}
+
+export default InstallEvents;

@@ -2,8 +2,8 @@ import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
-const AngleBetween = Phaser.Math.Angle.Between;
-const WrapRadians = Phaser.Math.Angle.Wrap;
+const GetAngle = Phaser.Math.Angle.Between;
+const WrapAngle = Phaser.Math.Angle.Wrap;
 const RadToDeg = Phaser.Math.RadToDeg;
 
 class DragRotate {
@@ -112,8 +112,6 @@ class DragRotate {
             return;
         }
 
-        this.pointer = pointer;
-        this.state = TOUCH1;
         this.onDragStart(pointer);
     }
 
@@ -123,8 +121,6 @@ class DragRotate {
             return;
         }
 
-        this.pointer = undefined;
-        this.state = TOUCH0;
         this.onDragEnd();
     }
 
@@ -187,9 +183,9 @@ class DragRotate {
         if (this._deltaRotation === undefined) {
             var p0 = this.pointer.prevPosition,
                 p1 = this.pointer.position;
-            var a0 = AngleBetween(this.x, this.y, p0.x, p0.y),
-                a1 = AngleBetween(this.x, this.y, p1.x, p1.y);
-            this._deltaRotation = WrapRadians(a1 - a0);
+            var a0 = GetAngle(this.x, this.y, p0.x, p0.y),
+                a1 = GetAngle(this.x, this.y, p1.x, p1.y);
+            this._deltaRotation = WrapAngle(a1 - a0);
         }
 
         return this._deltaRotation;
