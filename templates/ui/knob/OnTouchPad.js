@@ -20,7 +20,7 @@ var OnTouchPad = function (pointer, localX, localY) {
     var deltaAngle = (knob.anticlockwise) ? (startAngle - endAngle) : (endAngle - startAngle);
     var value = NormalizeAngle(deltaAngle) / (2 * Math.PI);
 
-    if (this.easeValueDuration === 0) {
+    if ((this.easeValueDuration === 0) || (Math.abs(this.value - value) < 0.1)) {
         this.value = value;
     } else {
         this.easeValueTo(value);

@@ -72,6 +72,18 @@ class Knob extends OverlapSizer {
         return this;
     }
 
+    updateText() {
+        var textObject = this.sizerChildren.text;
+        if (textObject) {
+            var knob = this.sizerChildren.knob;
+            textObject.setText(knob.getFormatText());
+            if (textObject.layout) {
+                textObject.layout();
+            }
+        }
+        return this;
+    }
+
     setEnable(enable) {
         if (enable === undefined) {
             enable = true;
@@ -97,13 +109,8 @@ class Knob extends OverlapSizer {
         this.sizerChildren.knob.value = value;
 
         var newValue = this.value;
-        if (oldValue !== newValue) {
-            // Update text/label element            
-            var textObject = this.sizerChildren.text;
-            if (textObject) {
-                var text = this.sizerChildren.knob.getFormatText();
-                textObject.setText(text);
-            }
+        if (oldValue !== newValue) {          
+            this.updateText();
             this.eventEmitter.emit('valuechange', newValue, oldValue, this.eventEmitter);
         }
     }
