@@ -1,5 +1,4 @@
 import IsLocalPointInKnob from './IsLocalPointInKnob.js';
-import EaseValueTo from './EaseValueTo.js';
 
 const GetAngle = Phaser.Math.Angle.Between;
 const WrapAngle = Phaser.Math.Angle.Wrap;
@@ -69,7 +68,8 @@ var OnPan = function () {
     var deltaAngle = (knob.anticlockwise) ? (startAngle - endAngle) : (endAngle - startAngle);
     var deltaValue = WrapAngle(deltaAngle) / (Math.PI * 2);
 
-    EaseValueTo.call(this, this.value + deltaValue);
+    this.stopEaseValue();
+    this.value += deltaValue;
 }
 
 const TOUCH0 = 0;
