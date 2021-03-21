@@ -24,10 +24,10 @@
 1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
+1. [Canvas/Circular progress](canvas-circularprogress.md): Circular progress bar on canvas.
 1. [Canvas/Round rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
 1. [Canvas image data](canvas-data.md): Get image data from texture, or text object.
 1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
-1. [Circular progress](circularprogress.md): Circular progress bar.
 1. [Clock](clock.md): A clock to count elapsed time.
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
@@ -123,7 +123,7 @@
 1. [UI/grid buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [UI/grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [UI/gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
-1. [UI/Knob](ui-knob.md): A knob button based on [circular progress](circularprogress.md).
+1. [UI/Knob](ui-knob.md): A knob button based on circular progress.
 1. [UI/label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI/menu](ui-menu.md): A container with buttons and sub-menu.
 1. [UI/number bar](ui-numberbar.md): A container with an icon, slider, text, and background.

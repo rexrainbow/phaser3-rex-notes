@@ -5,7 +5,7 @@ import TagText from './tagtext/TagText.js';
 import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
-import CircularProgress from './circularprogress/CircularProgress.js';
+import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import Knob from './knob/Knob.js';
 import Chart from './chart/Chart.js';
 import NinePatch from './ninepatch/NinePatch.js';
@@ -65,7 +65,7 @@ export {
     Canvas,
     CircleMaskImage,
     Chart,
-    CircularProgress,
+    CircularProgressCanvas,
     Knob,
     NinePatch,
 

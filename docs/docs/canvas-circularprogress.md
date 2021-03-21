@@ -1,6 +1,6 @@
 ## Introduction
 
-Circular progress bar. Extended from [canvas plugin](canvas.md).
+Circular progress bar on canvas.
 
 - Author: Rex
 - Game object
@@ -11,7 +11,7 @@ Circular progress bar. Extended from [canvas plugin](canvas.md).
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circular-progress)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circularprogresscanvas)
 
 ### Install plugin
 
@@ -19,11 +19,11 @@ Circular progress bar. Extended from [canvas plugin](canvas.md).
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexcircularprogressplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogressplugin.min.js', true);
+    scene.load.plugin('rexcircularprogresscanvasplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogresscanvasplugin.min.js', true);
     ```
 - Add circular-progress object
     ```javascript
-    var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, config);
+    var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, config);
     ```
 
 #### Import plugin
@@ -34,13 +34,13 @@ Circular progress bar. Extended from [canvas plugin](canvas.md).
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CircularProgressPlugin from 'phaser3-rex-plugins/plugins/circularprogress-plugin.js';
+    import CircularProgressCanvasPlugin from 'phaser3-rex-plugins/plugins/circularprogresscanvas-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexCircularProgressPlugin',
-                plugin: CircularProgressPlugin,
+                key: 'rexCircularProgressCanvasPlugin',
+                plugin: CircularProgressCanvasPlugin,
                 start: true
             },
             // ...
@@ -52,7 +52,7 @@ Circular progress bar. Extended from [canvas plugin](canvas.md).
     ```
 - Add circular-progress object
     ```javascript
-    var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, config);
+    var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, config);
     ```
 
 #### Import class
@@ -63,11 +63,11 @@ Circular progress bar. Extended from [canvas plugin](canvas.md).
     ```
 - Import class
     ```javascript
-    import CircularProgress from 'phaser3-rex-plugins/plugins/circularprogress.js';
+    import CircularProgressCanvas from 'phaser3-rex-plugins/plugins/circularprogresscanvas.js';
     ```
 - Add circular-progress object
     ```javascript    
-    var circularProgress = new CircularProgress(scene, x, y, radius, color, value, config);
+    var circularProgress = new CircularProgressCanvas(scene, x, y, radius, color, value, config);
     sscene.add.existing(image);
     ```
 
@@ -80,8 +80,8 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'rexCircularProgressPlugin',
-            plugin: CircularProgressPlugin,
+            key: 'rexCircularProgressCanvasPlugin',
+            plugin: CircularProgressCanvasPlugin,
             start: true
         },
         // ...
@@ -95,7 +95,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, {
+var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, {
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -116,7 +116,7 @@ var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value,
 or 
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgress({
+var circularProgress = scene.add.rexCircularProgressCanvas({
     x: 0,
     y: 0,
     radius: 1,
@@ -165,7 +165,7 @@ var circularProgress = scene.add.rexCircularProgress({
 Add circular-progress from JSON
 
 ```javascript
-var circularProgress = scene.make.rexCircularProgress({
+var circularProgress = scene.make.rexCircularProgressCanvas({
     x: 0,
     y: 0,
     radius: 1,
@@ -196,7 +196,7 @@ var circularProgress = scene.make.rexCircularProgress({
 
 - Define class
     ```javascript
-    class MyCircularProgress extends CircularProgress {
+    class MyCircularProgressCanvas extends CircularProgressCanvas {
         constructor(scene, x, y, radius, color, value, config) {
             super(scene, x, y, radius, color, value, config);
             // ...
@@ -212,7 +212,7 @@ var circularProgress = scene.make.rexCircularProgress({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var circularProgress = new MyCircularProgress(scene, x, y, radius, color, value, config);
+    var circularProgress = new MyCircularProgressCanvas(scene, x, y, radius, color, value, config);
     ```
 
 ### Progress value

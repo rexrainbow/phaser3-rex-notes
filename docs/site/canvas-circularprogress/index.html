@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/circularprogress/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/canvas-circularprogress/">
       
       
         <meta name="author" content="rexrainbow">
@@ -5576,13 +5576,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/circularprogress.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/canvas-circularprogress.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                   <h1>Circular progres</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Circular progress bar. Extended from <a href="../canvas/">canvas plugin</a>.</p>
+<p>Circular progress bar on canvas.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -5592,15 +5592,15 @@
 <li><a href="https://codepen.io/rexrainbow/pen/BaQbPbO">Circular-progress</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circular-progress">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circularprogresscanvas">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcircularprogressplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogressplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcircularprogresscanvasplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogresscanvasplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add circular-progress object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5609,13 +5609,13 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CircularProgressPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/circularprogress-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CircularProgressCanvasPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/circularprogresscanvas-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCircularProgressPlugin&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CircularProgressPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCircularProgressCanvasPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CircularProgressCanvasPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -5626,7 +5626,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add circular-progress object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5635,10 +5635,10 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CircularProgress</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/circularprogress.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CircularProgressCanvas</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/circularprogresscanvas.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add circular-progress object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircularProgress</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CircularProgressCanvas</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">image</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -5648,8 +5648,8 @@
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCircularProgressPlugin&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CircularProgressPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCircularProgressCanvasPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CircularProgressCanvasPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -5661,7 +5661,7 @@
 </code></pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">trackColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">centerColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">thickness</span><span class="o">:</span> <span class="mf">0.2</span><span class="p">,</span>
@@ -5680,7 +5680,7 @@
 </code></pre></div>
 
 <p>or </p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgress</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">radius</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -5726,7 +5726,7 @@
 <li><code>value</code> : <code>0</code> ~ <code>1</code>, progress value. Default is <code>0</code>.</li>
 </ul>
 <p>Add circular-progress from JSON</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCircularProgress</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">radius</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
@@ -5756,7 +5756,7 @@
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCircularProgress</span> <span class="kr">extends</span> <span class="nx">CircularProgress</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCircularProgressCanvas</span> <span class="kr">extends</span> <span class="nx">CircularProgressCanvas</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
@@ -5775,7 +5775,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCircularProgress</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyCircularProgressCanvas</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="progress-value">Progress value<a class="headerlink" href="#progress-value" title="Permanent link">&para;</a></h3>

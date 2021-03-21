@@ -81,7 +81,7 @@ nav:
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
-            - Circular progres: circularprogress.md
+            - Circular progres: canvas-circularprogress.md
         - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md

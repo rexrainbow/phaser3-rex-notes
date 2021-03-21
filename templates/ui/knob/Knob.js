@@ -1,5 +1,5 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
-import CircularProgress from '../circularprogress/CircularProgress.js';
+import CircularProgressCanvas from '../circularprogresscanvas/CircularProgressCanvas.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
 import EaseValueMethods from '../utils/EaseValueMethods.js';
@@ -34,7 +34,7 @@ class Knob extends OverlapSizer {
             config.textStrokeColor = undefined;
         }
         // Create circular progress object
-        var knob = new CircularProgress(scene, config);
+        var knob = new CircularProgressCanvas(scene, config);
         knob.setDepth(GetValue(config, 'knobDepth', 0));
         knob._value = -1; // To trigger text updating
         scene.add.existing(knob);

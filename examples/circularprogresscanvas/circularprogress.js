@@ -1,4 +1,4 @@
-import CircularProgressPlugin from '../../plugins/circularprogress-plugin.js';
+import CircularProgressCanvasPlugin from '../../plugins/circularprogresscanvas-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var circularProgress = this.add.rexCircularProgress({
+        var circularProgress = this.add.rexCircularProgressCanvas({
             x: 400, y: 300,
             radius: 50,
 
@@ -54,8 +54,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCircularProgress',
-            plugin: CircularProgressPlugin,
+            key: 'rexCircularProgressCanvas',
+            plugin: CircularProgressCanvasPlugin,
             start: true
         }]
     }

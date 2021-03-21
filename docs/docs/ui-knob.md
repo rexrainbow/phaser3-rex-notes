@@ -1,6 +1,6 @@
 ## Introduction
 
-A knob button based on [circular progress](circularprogress.md).
+A knob button based on [circular progress](canvas-circularprogress.md).
 
 - Author: Rex
 - Game object

@@ -7,7 +7,7 @@ import TagTextFactory from './tagtext/Factory.js';
 import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
-import CircularProgressFactory from './circularprogress/Factory.js';
+import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import KnobFactory from './knob/Factory.js';
 import ChartFactory from './chart/Factory.js';
 import NinePatchFactory from './ninepatch/Factory.js';

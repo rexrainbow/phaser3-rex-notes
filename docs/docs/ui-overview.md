@@ -50,7 +50,7 @@
 1. [Grid-buttons](ui-gridbuttons.md): A container with a group of buttons in grids.
 1. [Grid-sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [Grid-table](ui-gridtable.md): A container with a [grid table](gridtable.md), slider, and scroller.
-1. [Knob](ui-knob.md): A knob button based on [circular progress](circularprogress.md).
+1. [Knob](ui-knob.md): A knob button based on circular progress.
 1. [Label](ui-label.md): A container with an icon, text, and background.
 1. [Menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Number-bar](ui-numberbar.md): A container with an icon, slider, text, and background.
@@ -170,13 +170,13 @@
         // ...
     }
     ```
-1. [Circular progress](circularprogress.md): Circular progress bar.
+1. [Circular progress](canvas-circularprogress.md): Circular progress bar.
     ```javascript
-    var circularProgress = scene.rexUI.add.circularProgress(x, y, radius, barColor, value, config);
+    var circularProgress = scene.rexUI.add.circularProgressCanvas(x, y, radius, barColor, value, config);
     ```
     or
     ```javascript
-    class MyCircularProgress extends RexPlugins.UI.CircularProgress {
+    class MyCircularProgress extends RexPlugins.UI.CircularProgressCanvas {
         constructor(scene, x, y, radius, barColor, value, config) {
             super(scene, x, y, radius, barColor, value, config);
             // ...
