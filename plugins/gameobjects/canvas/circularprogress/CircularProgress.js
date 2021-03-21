@@ -277,7 +277,7 @@ class CircularProgress extends Canvas {
             } else {
                 anticlockwise = this.anticlockwise;
                 startAngle = this.startAngle;
-                var deltaAngle = 2 * Math.PI * ((this.anticlockwise) ? (1 - this.value) : this.value);
+                var deltaAngle = 2 * Math.PI * ((anticlockwise) ? (1 - this.value) : this.value);
                 endAngle = deltaAngle + startAngle;
             }
             DrawCicle(

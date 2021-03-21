@@ -54,7 +54,7 @@ class Knob extends OverlapSizer {
         this.setValue(GetValue(config, 'value', 0), GetValue(config, 'min', undefined), GetValue(config, 'max', undefined));
 
         // Input
-        var inputMode = GetValue(config, 'input', 1);
+        var inputMode = GetValue(config, 'input', 0);
         if (typeof (inputMode) === 'string') {
             inputMode = INPUTMODE[inputMode];
         }

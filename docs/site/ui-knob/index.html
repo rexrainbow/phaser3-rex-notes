@@ -5652,7 +5652,7 @@
     <span class="nx">textFormatCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">input</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;pan&#39;</span><span class="p">,</span>
 
     <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -5718,8 +5718,9 @@
 </code></pre></div>
     Default value is <code>undefined</code>.</li>
 <li><code>input</code> :<ul>
-<li><code>true</code> : Touchable. Default value.</li>
-<li><code>false</code> : Don't register any touch event, only for displaying.</li>
+<li><code>'pan'</code>, or <code>0</code> : Control knob by panning circular progress. Default setting.</li>
+<li><code>'click'</code>, or <code>1</code> : Control knob by touching circular progress.</li>
+<li><code>'none'</code>, or <code>-1</code> : Disable knob controlling.</li>
 </ul>
 </li>
 <li><code>value</code> : Initial value (0 ~ 1).</li>

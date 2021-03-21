@@ -101,7 +101,7 @@ var knob = scene.rexUI.add.knob({
     textFormatCallback: undefined,
     textFormatCallbackScope: undefined,
 
-    input: true,
+    input: 'pan',
 
     value: 0,
     gap: undefined,
@@ -157,8 +157,9 @@ var knob = scene.rexUI.add.knob({
     ```
     Default value is `undefined`.
 - `input` :
-    - `true` : Touchable. Default value.
-    - `false` : Don't register any touch event, only for displaying.
+    - `'pan'`, or `0` : Control knob by panning circular progress. Default setting.
+    - `'click'`, or `1` : Control knob by touching circular progress.
+    - `'none'`, or `-1` : Disable knob controlling.
 - `value` : Initial value (0 ~ 1).
 - `gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disalbe this feature.
