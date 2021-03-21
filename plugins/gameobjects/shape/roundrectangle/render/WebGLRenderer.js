@@ -3,6 +3,11 @@ import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
 import GetCalcMatrix from '../../../utils/GetCalcMatrix.js';
 
 var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+        src.updateData();
+        src.dirty = false;
+    }
+
     camera.addToRenderList(src);
 
     var pipeline = renderer.pipelines.set(this.pipeline);

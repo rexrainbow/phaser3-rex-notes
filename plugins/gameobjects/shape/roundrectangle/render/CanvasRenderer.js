@@ -4,6 +4,11 @@ import LineStyleCanvas from '../../utils/render/LineStyleCanvas';
 const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
 var PolygonCanvasRenderer = function (renderer, src, camera, parentMatrix) {
+    if (src.dirty) {
+        src.updateData();
+        src.dirty = false;
+    }
+
     camera.addToRenderList(src);
 
     var ctx = renderer.currentContext;
