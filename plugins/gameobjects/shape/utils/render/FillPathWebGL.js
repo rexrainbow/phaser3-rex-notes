@@ -1,25 +1,14 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2020 Photon Storm Ltd.
- * @license      {@link https://opensource.org/licenses/MIT|MIT License}
- */
+/*
+src: {
+    fillColor, 
+    fillAlpha, 
+    pathData, 
+    pathIndexes  // Earcut(pathData)
+}
+*/
 
 var Utils = Phaser.Renderer.WebGL.Utils;
 
-/**
- * Renders a filled path for the given Shape.
- *
- * @method Phaser.GameObjects.Shape#FillPathWebGL
- * @since 3.13.0
- * @private
- *
- * @param {Phaser.Renderer.WebGL.WebGLPipeline} pipeline - The WebGL Pipeline used to render this Shape.
- * @param {Phaser.GameObjects.Components.TransformMatrix} calcMatrix - The transform matrix used to get the position values.
- * @param {Phaser.GameObjects.Shape} src - The Game Object shape being rendered in this call.
- * @param {number} alpha - The base alpha value.
- * @param {number} dx - The source displayOriginX.
- * @param {number} dy - The source displayOriginY.
- */
 var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
 {
     var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);

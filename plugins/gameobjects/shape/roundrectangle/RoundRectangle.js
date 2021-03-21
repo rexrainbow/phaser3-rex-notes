@@ -1,6 +1,6 @@
 import GeomRoundRectangle from '../../../geom/roundrectangle/RoundRectangle.js';
-import LineTo from '../utils/LineTo.js';
-import ArcTo from '../utils/ArcTo.js';
+import LineTo from '../utils/pathData/LineTo.js';
+import ArcTo from '../utils/pathData/ArcTo.js';
 import Render from './render/Render.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
