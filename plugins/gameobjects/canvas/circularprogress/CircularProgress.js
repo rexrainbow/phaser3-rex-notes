@@ -32,9 +32,19 @@ class CircularProgress extends Canvas {
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
         this.setTextColor(GetValue(config, 'textColor', undefined));
-        this.setTextStrokeColor(GetValue(config, 'textStrokeColor', undefined), GetValue(config, 'textStrokeThickness', undefined));
-        this.setTextFont(GetValue(config, 'textSize', '16px'), GetValue(config, 'textFamily', 'Courier'), GetValue(config, 'textStyle', ''));
-        this.setTextFormatCallback(GetValue(config, 'textFormatCallback', undefined), GetValue(config, 'textFormatCallbackScope', undefined));
+        this.setTextStrokeColor(
+            GetValue(config, 'textStrokeColor', undefined),
+            GetValue(config, 'textStrokeThickness', undefined)
+        );
+        this.setTextFont(
+            GetValue(config, 'textSize', '16px'),
+            GetValue(config, 'textFamily', 'Courier'),
+            GetValue(config, 'textStyle', '')
+        );
+        this.setTextFormatCallback(
+            GetValue(config, 'textFormatCallback', undefined),
+            GetValue(config, 'textFormatCallbackScope', undefined)
+        );
 
         this.setValue(value);
     }
