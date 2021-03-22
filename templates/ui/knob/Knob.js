@@ -2,6 +2,7 @@ import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 import CircularProgressCanvas from '../circularprogresscanvas/CircularProgressCanvas.js';
 import InstallTouchPadEvents from './input/OnTouchPad.js';
 import InstallPanPadEvents from './input/OnPanPad.js';
+import TextObjectMethods from './TextObjectMethods.js';
 import EaseValueMethods from '../utils/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,6 +33,10 @@ class Knob extends OverlapSizer {
             // Don't draw text on knob directly
             config.textColor = undefined;
             config.textStrokeColor = undefined;
+            this.setTextFormatCallback(
+                GetValue(config, 'textFormatCallback', undefined),
+                GetValue(config, 'textFormatCallbackScope', undefined)
+            );
         }
         // Create circular progress object
         var knob = new CircularProgressCanvas(scene, config);
@@ -66,29 +71,6 @@ class Knob extends OverlapSizer {
                 InstallTouchPadEvents.call(this);
                 break;
         }
-    }
-
-    setTextObject(textObject) {
-        if (textObject === this.sizerChildren.text) {
-            return this;
-        }
-        this.remove('text', true);
-        if (textObject) {
-            this.add(textObject, 'text', 'center', 0, false);
-        }
-        return this;
-    }
-
-    updateText() {
-        var textObject = this.sizerChildren.text;
-        if (textObject) {
-            var knob = this.sizerChildren.knob;
-            textObject.setText(knob.getFormatText());
-            if (textObject.layout) {
-                textObject.layout();
-            }
-        }
-        return this;
     }
 
     setEnable(enable) {
@@ -159,6 +141,7 @@ const INPUTMODE = {
 
 Object.assign(
     Knob.prototype,
+    TextObjectMethods,
     EaseValueMethods
 );
 
