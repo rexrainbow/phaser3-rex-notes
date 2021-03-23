@@ -10,7 +10,7 @@ var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     camera.addToRenderList(src);
 
-    var pipeline = renderer.pipelines.set(this.pipeline);
+    var pipeline = renderer.pipelines.set(src.pipeline);
 
     var result = GetCalcMatrix(src, camera, parentMatrix);
 
@@ -21,6 +21,8 @@ var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var alpha = camera.alpha * src.alpha;
 
+    renderer.pipelines.preBatch(src);
+
     if (src.isFilled) {
         FillPathWebGL(pipeline, calcMatrix, src, alpha, dx, dy);
     }
@@ -28,6 +30,8 @@ var PolygonWebGLRenderer = function (renderer, src, camera, parentMatrix) {
     if (src.isStroked) {
         StrokePathWebGL(pipeline, src, alpha, dx, dy);
     }
+
+    renderer.pipelines.postBatch(src);
 };
 
 export default PolygonWebGLRenderer;
