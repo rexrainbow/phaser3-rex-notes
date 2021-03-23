@@ -32,8 +32,10 @@ var TextWebGLRenderer = function (renderer, src, camera, parentMatrix) {
     var width = frame.width;
     var height = frame.height;
     var getTint = Utils.getTintAppendFloatAlpha;
-    var pipeline = renderer.pipelines.set(this.pipeline, src);
+    var pipeline = renderer.pipelines.set(src.pipeline, src);
     var textureUnit = pipeline.setTexture2D(frame.glTexture, src);
+
+    renderer.pipelines.preBatch(src);
 
     pipeline.batchTexture(
         src,
@@ -58,6 +60,8 @@ var TextWebGLRenderer = function (renderer, src, camera, parentMatrix) {
         false,
         textureUnit
     );
+
+    renderer.pipelines.postBatch(src);
 };
 
 module.exports = TextWebGLRenderer;
