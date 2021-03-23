@@ -8,7 +8,7 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     camera.addToRenderList(src);
 
-    var pipeline = renderer.pipelines.set(this.pipeline);
+    var pipeline = renderer.pipelines.set(src.pipeline);
 
     var result = GetCalcMatrix(src, camera, parentMatrix);
 
@@ -19,11 +19,14 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var alpha = camera.alpha * src.alpha;
 
+    renderer.pipelines.preBatch(src);
+
     var shapes = src.geom;
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-        shapes[i].webglRender(renderer, calcMatrix, dx, dy, alpha);
+        shapes[i].webglRender(pipeline, calcMatrix, dx, dy, alpha);
     }
 
+    renderer.pipelines.postBatch(src);
 };
 
 export default WebGLRenderer;

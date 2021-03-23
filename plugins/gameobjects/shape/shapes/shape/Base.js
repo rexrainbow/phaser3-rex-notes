@@ -1,11 +1,20 @@
 class Base {
     constructor() {
+        this.name = undefined;
+
+        this.isFilled = false;
         this.fillColor = undefined;
         this.fillAlpha = 1;
 
+        this.isStroked = false;
         this.lineWidth = 1;
         this.strokeColor = undefined;
         this.strokeAlpha = 1;
+    }
+
+    setName(name) {
+        this.name = name;
+        return this;
     }
 
     reset() {
@@ -15,29 +24,39 @@ class Base {
     }
 
     fillStyle(color, alpha) {
-        if (alpha === undefined) {
-            alpha = 1;
+        if (color === undefined) {
+            this.isFilled = false;
+        } else {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+            this.isFilled = true;
+            this.fillColor = color;
+            this.fillAlpha = alpha;
         }
-        this.fillColor = color;
-        this.fillAlpha = alpha;
         return this;
     }
 
     lineStyle(lineWidth, color, alpha) {
-        if (alpha === undefined) {
-            alpha = 1;
+        if (lineWidth === undefined) {
+            this.isStroked = false;
+        } else {
+            if (alpha === undefined) {
+                alpha = 1;
+            }
+            this.isStroked = true;
+            this.lineWidth = lineWidth;
+            this.strokeColor = color;
+            this.strokeAlpha = alpha;
         }
-        this.lineWidth = lineWidth;
-        this.strokeColor = color;
-        this.strokeAlpha = alpha;
         return this;
     }
 
-    canvasRender(context, dx, dy) {
+    webglRender(pipeline, calcMatrix, alpha, dx, dy) {
 
     }
 
-    webglRender(renderer, calcMatrix, dx, dy, alpha) {
+    canvasRender(ctx, dx, dy) {
 
     }
 

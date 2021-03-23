@@ -18,6 +18,9 @@ var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             shapes[i].canvasRender(ctx, dx, dy);
         }
+
+        //  Restore the context saved in SetTransform
+        ctx.restore();
     }
 };
 

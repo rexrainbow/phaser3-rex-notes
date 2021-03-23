@@ -31,10 +31,8 @@ var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
 
         var tx0 = calcMatrix.getX(x0, y0);
         var ty0 = calcMatrix.getY(x0, y0);
-
         var tx1 = calcMatrix.getX(x1, y1);
         var ty1 = calcMatrix.getY(x1, y1);
-
         var tx2 = calcMatrix.getX(x2, y2);
         var ty2 = calcMatrix.getY(x2, y2);
 

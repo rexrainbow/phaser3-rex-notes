@@ -1,4 +1,6 @@
 import Render from './render/Render.js';
+import Clear from '../../../utils/object/Clear.js';
+import Rectangle from './shape/Rectangle.js';
 
 const Shape = Phaser.GameObjects.Shape;
 
@@ -18,17 +20,73 @@ class Shapes extends Shape {
         }
 
         super(scene, 'rexShapes', []);
+
+        this._width = -1;
+        this._height = -1;
+        this.shapes = {};
+
         this.setPosition(x, y);
+        this.setSize(width, height);
 
         this.updateDisplayOrigin();
         this.dirty = true;
     }
 
-    updateData() {
-        var shapes = this.geom;
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this.setSize(value, this._height);
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this.setSize(this._width, value);
+    }
+
+    setSize(width, height) {
+        this._width = width;
+        this._height = height;
+        this.dirty = true;
         return this;
     }
 
+    resize(width, height) {
+        this.setSize(width, height);
+        return this;
+    }
+
+    updateData() {
+        var shapes = this.geom;
+        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+            shapes[i].updateData();
+        }
+        return this;
+    }
+
+    clear() {
+        this.geom.length = 0;
+        Clear(this.shapes);
+        return this;
+    }
+
+    getShape(name) {
+        return this.shapes[name];
+    }
+
+    addShape(shape) {
+        this.geom.push(shape);
+        var name = shape.name;
+        if (name) {
+            this.shapes[name] = shape;
+        }
+        this.dirty = true;
+        return this;
+    }
 }
 
 Object.assign(
