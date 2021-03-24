@@ -4,8 +4,8 @@ class Orbit extends RexPlugins.GameObjects.Shapes {
     constructor(scene, x, y, width, height, color) {
         super(scene, x, y, width, height);
 
-        this.addCircle('track').lineStyle(1, color, 0.7);
-        this.addCircle('thumb').fillStyle(color);
+        this.addCircle('track');
+        this.addCircle('thumb');
         this.setColor(color);
         this.setValue(0);
     }
