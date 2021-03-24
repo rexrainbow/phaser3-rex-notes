@@ -1,4 +1,4 @@
-import Shapes from '../shapes/Shapes.js';
+import ShapesBase from '../shapes/ShapesBase.js';
 import Circle from '../shapes/shape/Circle.js';
 import Arc from '../shapes/shape/Arc.js';
 
@@ -9,7 +9,7 @@ const Clamp = Phaser.Math.Clamp;
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class CircularProgress extends Shapes {
+class CircularProgress extends ShapesBase {
     constructor(scene, x, y, radius, barColor, value, config) {
         if (IsPlainObject(x)) {
             config = x;

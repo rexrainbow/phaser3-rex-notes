@@ -1,115 +1,56 @@
-import Render from './render/Render.js';
-import Clear from '../../../utils/object/Clear.js';
+import ShapesBase from './ShapesBase.js';
+import {
+    Arc,
+    Circle,
+    Curve,
+    Ellipse,
+    Lines,
+    Rectangle,
+    Triangle
+} from './shape';
 
-const Shape = Phaser.GameObjects.Shape;
-const RemoveItem = Phaser.Utils.Array.Remove;
-
-class Shapes extends Shape {
-    constructor(scene, x, y, width, height) {
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = 0;
-        }
-        if (width === undefined) {
-            width = 0;
-        }
-        if (height === undefined) {
-            height = width;
-        }
-
-        super(scene, 'rexShapes', []);
-
-        this._width = -1;
-        this._height = -1;
-        this.shapes = {};
-
-        this.setPosition(x, y);
-        this.setSize(width, height);
-
-        this.updateDisplayOrigin();
-        this.dirty = true;
+class Shapes extends ShapesBase {
+    addArc(name) {
+        var shape = (new Arc()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    get width() {
-        return this._width;
+    addCircle(name) {
+        var shape = (new Circle()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    set width(value) {
-        this.setSize(value, this._height);
+    addCurve(name) {
+        var shape = (new Curve()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    get height() {
-        return this._height;
+    addEllipse(name) {
+        var shape = (new Ellipse()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    set height(value) {
-        this.setSize(this._width, value);
+    addLines(name) {
+        var shape = (new Lines()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    setSize(width, height) {
-        this.dirty = this.dirty || (this._width !== width) || (this._height !== height);
-        this._width = width;
-        this._height = height;
-        this.updateDisplayOrigin();
-        var input = this.input;
-        if (input && !input.customHitArea) {
-            input.hitArea.width = width;
-            input.hitArea.height = height;
-        }
-        return this;
+    addRectangle(name) {
+        var shape = (new Rectangle()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 
-    resize(width, height) {
-        this.setSize(width, height);
-        return this;
-    }
-
-    updateData() {
-        var shapes = this.geom;
-        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-            var shape = shapes[i];
-            if (shape.dirty) {
-                shape.updateData();
-            }
-        }
-        return this;
-    }
-
-    clear() {
-        this.geom.length = 0;
-        Clear(this.shapes);
-        return this;
-    }
-
-    getShape(name) {
-        return this.shapes[name];
-    }
-
-    addShape(shape) {
-        this.geom.push(shape);
-        var name = shape.name;
-        if (name) {
-            this.shapes[name] = shape;
-        }
-        this.dirty = true;
-        return this;
-    }
-
-    deleteShape(name) {
-        var shape = this.getShape(name);
-        if (shape) {
-            delete this.shapes[name];
-            RemoveItem(this.geom, shape);
-        }
-        return this;
+    addTriangle(name) {
+        var shape = (new Triangle()).setName(name);
+        this.addShape(shape);
+        return shape;
     }
 }
-
-Object.assign(
-    Shapes.prototype,
-    Render
-);
 
 export default Shapes;

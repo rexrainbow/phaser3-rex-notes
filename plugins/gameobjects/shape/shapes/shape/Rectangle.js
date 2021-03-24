@@ -29,15 +29,49 @@ class Rectangle extends Base {
         this.setSize(width, height);
     }
 
+    get x() {
+        return this._x;
+    }
+
+    set x(value) {
+        this.dirty = this.dirty || (this._x !== value);
+        this._x = value;
+    }
+
+    get y() {
+        return this._y;
+    }
+
+    set y(value) {
+        this.dirty = this.dirty || (this._y !== value);
+        this._y = value;
+    }
+
     setTopLeftPosition(x, y) {
-        this.dirty = this.dirty || (this.x !== x) || (this.y !== y);
         this.x = x;
         this.y = y;
         return this;
     }
 
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this.dirty = this.dirty || (this._width !== value);
+        this._width = value;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this.dirty = this.dirty || (this._height !== value);
+        this._height = value;
+    }
+
     setSize(width, height) {
-        this.dirty = this.dirty || (this.width !== width) || (this.height !== height);
         this.width = width;
         this.height = height;
         return this;
