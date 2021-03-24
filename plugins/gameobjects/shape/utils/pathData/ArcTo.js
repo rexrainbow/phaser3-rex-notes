@@ -5,17 +5,16 @@ const DegToRad = Phaser.Math.DegToRad;
 var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, out) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise) {
-        endAngle += 360;
+        endAngle -= 360;
     }
 
+    var deltaAngle = endAngle - startAngle;
+    var step = DegToRad(deltaAngle) / iteration;
     startAngle = DegToRad(startAngle);
-    endAngle = DegToRad(endAngle);
-    var x, y, angle;
-    var step = (endAngle - startAngle) / iteration;
     for (var i = 0; i <= iteration; i++) {
-        angle = startAngle + (step * i);
-        x = centerX + (radiusX * Math.cos(angle));
-        y = centerY + (radiusY * Math.sin(angle));
+        var angle = startAngle + (step * i);
+        var x = centerX + (radiusX * Math.cos(angle));
+        var y = centerY + (radiusY * Math.sin(angle));
         LineTo(x, y, out);
     }
     return out;
