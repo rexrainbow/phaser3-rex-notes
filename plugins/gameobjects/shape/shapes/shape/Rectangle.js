@@ -30,14 +30,14 @@ class Rectangle extends Base {
     }
 
     setTopLeftPosition(x, y) {
-        this.isDirty |= (this.x !== x) || (this.y !== y);
+        this.dirty = this.dirty || (this.x !== x) || (this.y !== y);
         this.x = x;
         this.y = y;
         return this;
     }
 
     setSize(width, height) {
-        this.isDirty |= (this.width !== width) || (this.height !== height);
+        this.dirty = this.dirty || (this.width !== width) || (this.height !== height);
         this.width = width;
         this.height = height;
         return this;

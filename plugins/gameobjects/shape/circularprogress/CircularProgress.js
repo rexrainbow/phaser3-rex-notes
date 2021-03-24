@@ -56,7 +56,7 @@ class CircularProgress extends Shapes {
 
     set value(value) {
         value = Clamp(value, 0, 1);
-        this.dirty |= (this._value != value);
+        this.dirty = this.dirty || (this._value != value);
         this._value = value;
     }
 
@@ -70,7 +70,7 @@ class CircularProgress extends Shapes {
     }
 
     set radius(value) {
-        this.dirty |= (this._radius != value);
+        this.dirty = this.dirty || (this._radius != value);
         this._radius = value;
         var width = value * 2;
         this.resize(width, width);
@@ -86,7 +86,7 @@ class CircularProgress extends Shapes {
     }
 
     set trackColor(value) {
-        this.dirty |= (this._trackColor != value);
+        this.dirty = this.dirty || (this._trackColor != value);
         this._trackColor = value;
     }
 
@@ -100,7 +100,7 @@ class CircularProgress extends Shapes {
     }
 
     set barColor(value) {
-        this.dirty |= (this._barColor != value);
+        this.dirty = this.dirty || (this._barColor != value);
         this._barColor = value;
     }
 
@@ -114,7 +114,7 @@ class CircularProgress extends Shapes {
     }
 
     set startAngle(value) {
-        this.dirty |= (this._startAngle != value);
+        this.dirty = this.dirty || (this._startAngle != value);
         this._startAngle = value;
     }
 
@@ -128,7 +128,7 @@ class CircularProgress extends Shapes {
     }
 
     set anticlockwise(value) {
-        this.dirty |= (this._anticlockwise != value);
+        this.dirty = this.dirty || (this._anticlockwise != value);
         this._anticlockwise = value;
     }
 
@@ -146,7 +146,7 @@ class CircularProgress extends Shapes {
 
     set thickness(value) {
         value = Clamp(value, 0, 1);
-        this.dirty |= (this._thickness != value);
+        this.dirty = this.dirty || (this._thickness != value);
         this._thickness = value;
     }
 
@@ -160,7 +160,7 @@ class CircularProgress extends Shapes {
     }
 
     set centerColor(value) {
-        this.dirty |= (this._centerColor != value);
+        this.dirty = this.dirty || (this._centerColor != value);
         this._centerColor = value;
     }
 

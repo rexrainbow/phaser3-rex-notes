@@ -1,14 +1,3 @@
-var SetTextObject = function (textObject) {
-    if (textObject === this.sizerChildren.text) {
-        return this;
-    }
-    this.remove('text', true);
-    if (textObject) {
-        this.add(textObject, 'text', 'center', 0, false);
-    }
-    return this;
-}
-
 var SetTextFormatCallback = function (callback, scope) {
     this.textFormatCallback = callback;
     this.textFormatCallbackScope = scope;
@@ -41,7 +30,6 @@ var UpdateText = function () {
 }
 
 export default {
-    setTextObject: SetTextObject,
     setTextFormatCallback: SetTextFormatCallback,
     getFormatText: GetFormatText,
     updateText: UpdateText

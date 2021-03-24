@@ -11,7 +11,7 @@ class Base {
         this.strokeColor = undefined;
         this.strokeAlpha = 1;
 
-        this.isDirty = true;
+        this.dirty = true;
     }
 
     setName(name) {

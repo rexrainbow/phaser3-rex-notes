@@ -18,21 +18,21 @@ class Triangle extends Base {
     }
 
     setP0(x, y) {
-        this.dirty |= (this.x0 !== x) || (this.y0 !== y);
+        this.dirty = this.dirty || (this.x0 !== x) || (this.y0 !== y);
         this.x0 = x;
         this.y0 = y;
         return this;
     }
 
     setP1(x, y) {
-        this.dirty |= (this.x1 !== x) || (this.y1 !== y);
+        this.dirty = this.dirty || (this.x1 !== x) || (this.y1 !== y);
         this.x1 = x;
         this.y1 = y;
         return this;
     }
 
     setP2(x, y) {
-        this.dirty |= (this.x2 !== x) || (this.y2 !== y);
+        this.dirty = this.dirty || (this.x2 !== x) || (this.y2 !== y);
         this.x2 = x;
         this.y2 = y;
         return this;

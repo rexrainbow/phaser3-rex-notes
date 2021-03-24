@@ -8,7 +8,7 @@ class Curve extends PathBase {
     }
 
     setCurve(curve) {
-        this.dirty |= (this.curve !== curve);
+        this.dirty = this.dirty || (this.curve !== curve);
         this.curve = curve;
         return this;
     }

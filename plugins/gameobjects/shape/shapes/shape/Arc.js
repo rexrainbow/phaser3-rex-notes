@@ -20,7 +20,7 @@ class Arc extends PathBase {
     }
 
     setCenterPosition(x, y) {
-        this.isDirty |= (this.x !== x) || (this.y !== y);
+        this.dirty = this.dirty || (this.x !== x) || (this.y !== y);
         this.x = x;
         this.y = y;
         return this;
@@ -30,7 +30,7 @@ class Arc extends PathBase {
         if (radiusY === undefined) {
             radiusY = radiusX;
         }
-        this.isDirty |= (this.radiusX !== radiusX) || (this.radiusY !== radiusY);
+        this.dirty = this.dirty || (this.radiusX !== radiusX) || (this.radiusY !== radiusY);
         this.radiusX = radiusX;
         this.radiusY = radiusY;
         return this;
@@ -41,7 +41,7 @@ class Arc extends PathBase {
             anticlockwise = false;
         }
 
-        this.isDirty |= (this.startAngle !== startAngle) || (this.endAngle !== endAngle) || (this.anticlockwise !== anticlockwise);
+        this.dirty = this.dirty || (this.startAngle !== startAngle) || (this.endAngle !== endAngle) || (this.anticlockwise !== anticlockwise);
         this.startAngle = startAngle;
         this.endAngle = endAngle;
         this.anticlockwise = anticlockwise;

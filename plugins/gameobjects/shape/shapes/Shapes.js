@@ -49,9 +49,15 @@ class Shapes extends Shape {
     }
 
     setSize(width, height) {
+        this.dirty = this.dirty || (this._width !== width) || (this._height !== height);
         this._width = width;
         this._height = height;
-        this.dirty = true;
+        this.updateDisplayOrigin();
+        var input = this.input;
+        if (input && !input.customHitArea) {
+            input.hitArea.width = width;
+            input.hitArea.height = height;
+        }
         return this;
     }
 
@@ -64,7 +70,7 @@ class Shapes extends Shape {
         var shapes = this.geom;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var shape = shapes[i];
-            if (shape.isDirty) {
+            if (shape.dirty) {
                 shape.updateData();
             }
         }

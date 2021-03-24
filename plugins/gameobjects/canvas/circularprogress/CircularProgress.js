@@ -66,7 +66,7 @@ class CircularProgress extends Canvas {
 
     set value(value) {
         value = Clamp(value, 0, 1);
-        this.dirty |= (this._value != value);
+        this.dirty = this.dirty || (this._value != value);
         this._value = value;
     }
 
@@ -80,7 +80,7 @@ class CircularProgress extends Canvas {
     }
 
     set radius(value) {
-        this.dirty |= (this._radius != value);
+        this.dirty = this.dirty || (this._radius != value);
         this._radius = value;
         var width = value * 2;
         this.resize(width, width);
@@ -97,7 +97,7 @@ class CircularProgress extends Canvas {
 
     set trackColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._trackColor != value);
+        this.dirty = this.dirty || (this._trackColor != value);
         this._trackColor = value;
     }
 
@@ -112,7 +112,7 @@ class CircularProgress extends Canvas {
 
     set barColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._barColor != value);
+        this.dirty = this.dirty || (this._barColor != value);
         this._barColor = value;
     }
 
@@ -126,7 +126,7 @@ class CircularProgress extends Canvas {
     }
 
     set startAngle(value) {
-        this.dirty |= (this._startAngle != value);
+        this.dirty = this.dirty || (this._startAngle != value);
         this._startAngle = value;
     }
 
@@ -140,7 +140,7 @@ class CircularProgress extends Canvas {
     }
 
     set anticlockwise(value) {
-        this.dirty |= (this._anticlockwise != value);
+        this.dirty = this.dirty || (this._anticlockwise != value);
         this._anticlockwise = value;
     }
 
@@ -158,7 +158,7 @@ class CircularProgress extends Canvas {
 
     set thickness(value) {
         value = Clamp(value, 0, 1);
-        this.dirty |= (this._thickness != value);
+        this.dirty = this.dirty || (this._thickness != value);
         this._thickness = value;
     }
 
@@ -173,7 +173,7 @@ class CircularProgress extends Canvas {
 
     set centerColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._centerColor != value);
+        this.dirty = this.dirty || (this._centerColor != value);
         this._centerColor = value;
     }
 
@@ -183,7 +183,7 @@ class CircularProgress extends Canvas {
 
     set centerColor2(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._centerColor2 != value);
+        this.dirty = this.dirty || (this._centerColor2 != value);
         this._centerColor2 = value;
     }
 
@@ -199,7 +199,7 @@ class CircularProgress extends Canvas {
 
     set textColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._textColor != value);
+        this.dirty = this.dirty || (this._textColor != value);
         this._textColor = value;
     }
 
@@ -214,7 +214,7 @@ class CircularProgress extends Canvas {
 
     set textStrokeColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.dirty |= (this._textStrokeColor != value);
+        this.dirty = this.dirty || (this._textStrokeColor != value);
         this._textStrokeColor = value;
     }
 
@@ -223,7 +223,7 @@ class CircularProgress extends Canvas {
     }
 
     set textStrokeThickness(value) {
-        this.dirty |= (this._textStrokeThickness != value);
+        this.dirty = this.dirty || (this._textStrokeThickness != value);
         this._textStrokeThickness = value;
     }
 
@@ -241,7 +241,7 @@ class CircularProgress extends Canvas {
     }
 
     set textFont(value) {
-        this.dirty |= (this._textFont != value);
+        this.dirty = this.dirty || (this._textFont != value);
         this._textFont = value;
     }
 

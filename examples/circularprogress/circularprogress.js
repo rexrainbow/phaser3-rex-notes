@@ -21,6 +21,7 @@ class Demo extends Phaser.Scene {
             trackColor: COLOR_DARK,
             barColor: COLOR_LIGHT,
             centerColor: COLOR_PRIMARY,
+            // anticlockwise: true,
 
             value: 0
         })

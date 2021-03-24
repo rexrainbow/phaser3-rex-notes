@@ -17,7 +17,7 @@ class PathBase extends Base {
 
     updateData() {
         this.pathIndexes = Earcut(this.pathData);
-        this.isDirty = false;
+        this.dirty = false;
         return this;
     }
 
