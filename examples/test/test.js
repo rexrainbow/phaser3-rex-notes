@@ -1,5 +1,10 @@
 import Shapes from '../../plugins/gameobjects/shape/shapes/Shapes.js';
-import RectangleShape from '../../plugins/gameobjects/shape/shapes/shape/Rectangle.js';
+import {
+    Arc as ArcShape,
+    Circle as CircleShape,
+    Rectangle as RectangleShape,
+    Triangle as TriangleShape
+} from '../../plugins/gameobjects/shape/shapes/shape';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -17,17 +22,23 @@ class Demo extends Phaser.Scene {
 
         gameObject
             .addShape(
-                (new RectangleShape(0, 0, 50, 50)).fillStyle(0xff0000)
+                (new CircleShape(25, 25, 25)).fillStyle(0xff0000)
             )
             .addShape(
                 (new RectangleShape(50, 0, 50, 50)).fillStyle(0x00ff00)
             )
             .addShape(
-                (new RectangleShape(50, 50, 50, 50)).fillStyle(0x0000ff)
+                (new TriangleShape(50, 50, 100, 50, 50, 100)).fillStyle(0x0000ff)
             )
             .addShape(
-                (new RectangleShape(0, 50, 50, 50)).fillStyle(0xffffff)
+                (new ArcShape(50, 50, 50, 50, 90, 180)).lineStyle(2, 0xffffff)
             )
+            .setOrigin(0)
+            .setAngle(45)
+
+        this.add.rectangle(400, 300, 100, 100).setStrokeStyle(2, 0xff0000)
+            .setOrigin(0)
+            .setAngle(45)
     }
 
     update() {

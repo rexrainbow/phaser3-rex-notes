@@ -23,7 +23,7 @@ var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
 
     var shapes = src.geom;
     for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-        shapes[i].webglRender(pipeline, calcMatrix, dx, dy, alpha);
+        shapes[i].webglRender(pipeline, calcMatrix, alpha, dx, dy);
     }
 
     renderer.pipelines.postBatch(src);

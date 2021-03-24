@@ -1,8 +1,8 @@
 import Render from './render/Render.js';
 import Clear from '../../../utils/object/Clear.js';
-import Rectangle from './shape/Rectangle.js';
 
 const Shape = Phaser.GameObjects.Shape;
+const RemoveItem = Phaser.Utils.Array.Remove;
 
 class Shapes extends Shape {
     constructor(scene, x, y, width, height,) {
@@ -85,6 +85,15 @@ class Shapes extends Shape {
             this.shapes[name] = shape;
         }
         this.dirty = true;
+        return this;
+    }
+
+    deleteShape(name) {
+        var shape = this.getShape(name);
+        if (shape) {
+            delete this.shapes[name];
+            RemoveItem(this.geom, shape);
+        }
         return this;
     }
 }

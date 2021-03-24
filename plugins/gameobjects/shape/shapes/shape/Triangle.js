@@ -30,8 +30,8 @@ class Triangle extends Base {
     }
 
     webglRender(pipeline, calcMatrix, alpha, dx, dy) {
-        if (src.isFilled) {
-            var fillTintColor = Utils.getTintAppendFloatAlpha(src.fillColor, src.fillAlpha * alpha);
+        if (this.isFilled) {
+            var fillTintColor = Utils.getTintAppendFloatAlpha(this.fillColor, this.fillAlpha * alpha);
 
             var x0 = this.x0 - dx;
             var y0 = this.y0 - dy;
@@ -50,8 +50,8 @@ class Triangle extends Base {
             pipeline.batchTri(tx0, ty0, tx1, ty1, tx2, ty2, fillTintColor, fillTintColor, fillTintColor);
         }
 
-        if (src.isStroked) {
-            StrokePathWebGL(pipeline, src, alpha, dx, dy);
+        if (this.isStroked) {
+            StrokePathWebGL(pipeline, this, alpha, dx, dy);
         }
     }
 
@@ -71,13 +71,13 @@ class Triangle extends Base {
 
         ctx.closePath();
 
-        if (src.isFilled) {
-            FillStyleCanvas(ctx, src);
+        if (this.isFilled) {
+            FillStyleCanvas(ctx, this);
             ctx.fill();
         }
 
-        if (src.isStroked) {
-            LineStyleCanvas(ctx, src);
+        if (this.isStroked) {
+            LineStyleCanvas(ctx, this);
             ctx.stroke();
         }
     }

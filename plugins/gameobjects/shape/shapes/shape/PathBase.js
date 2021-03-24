@@ -4,14 +4,20 @@ import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../utils/render/LineStyleCanvas.js';
 
+const Earcut = Phaser.Geom.Polygon.Earcut;
 
-class Path extends Base {
+class PathBase extends Base {
     constructor() {
         super();
 
         this.pathData = [];
         this.pathIndexes = [];
         this.closePath = false;
+    }
+
+    updateData() {
+        this.pathIndexes = Earcut(this.pathData);
+        return this;
     }
 
     webglRender(pipeline, calcMatrix, alpha, dx, dy) {
@@ -60,4 +66,4 @@ class Path extends Base {
 
 }
 
-export default Path;
+export default PathBase;
