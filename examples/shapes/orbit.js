@@ -30,7 +30,7 @@ class Orbit extends RexPlugins.GameObjects.Shapes {
         return this;
     }
 
-    updateData() {
+    updateShapes() {
         var centerX = this.width / 2;
         var centerY = this.height / 2;
         var radius = Math.min(centerX, centerY);
@@ -50,9 +50,6 @@ class Orbit extends RexPlugins.GameObjects.Shapes {
                 centerX + Math.cos(thumbAngle) * trackRadius,
                 centerY + Math.sin(thumbAngle) * trackRadius
             );
-
-        super.updateData();
-        return this;
     }
 }
 

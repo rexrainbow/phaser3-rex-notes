@@ -170,7 +170,7 @@ class CircularProgress extends ShapesBase {
         return this;
     }
 
-    updateData() {
+    updateShapes() {
         var x = this.radius;
         var lineWidth = this.thickness * this.radius;
         var barRadius = this.radius - (lineWidth / 2);
@@ -220,9 +220,6 @@ class CircularProgress extends ShapesBase {
         } else {
             centerShape.reset();
         }
-
-        super.updateData();
-        return this;
     }
 }
 

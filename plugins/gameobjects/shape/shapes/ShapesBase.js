@@ -66,7 +66,12 @@ class ShapesBase extends Shape {
         return this;
     }
 
+    updateShapes() {
+
+    }
+
     updateData() {
+        this.updateShapes();
         var shapes = this.geom;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var shape = shapes[i];
