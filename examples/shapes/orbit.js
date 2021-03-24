@@ -26,7 +26,8 @@ class Orbit extends RexPlugins.GameObjects.Shapes {
     }
 
     setColor(color) {
-        this.color = color;
+        this.getShape('track').lineStyle(1, color, 0.7);
+        this.getShape('thumb').fillStyle(color);
         return this;
     }
 
@@ -39,12 +40,10 @@ class Orbit extends RexPlugins.GameObjects.Shapes {
         var thumbAngle = Math.PI * 2 * this.value;
 
         this.getShape('track')
-            .lineStyle(1, this.color, 0.7)
             .setRadius(trackRadius)
             .setCenterPosition(centerX, centerY);
 
         this.getShape('thumb')
-            .fillStyle(this.color)
             .setRadius(thumbRadius)
             .setCenterPosition(
                 centerX + Math.cos(thumbAngle) * trackRadius,
