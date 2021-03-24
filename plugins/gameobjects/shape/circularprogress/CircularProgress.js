@@ -21,6 +21,7 @@ class CircularProgress extends Shapes {
         }
         var width = radius * 2;
         super(scene, x, y, width, width);
+        this.type = 'rexCircularProgress';
 
         this
             .addShape((new Circle()).setName('track'))

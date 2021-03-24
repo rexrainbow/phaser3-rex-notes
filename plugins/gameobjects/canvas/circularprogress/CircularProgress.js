@@ -21,6 +21,7 @@ class CircularProgress extends Canvas {
         }
         var width = radius * 2;
         super(scene, x, y, width, width);
+        this.type = 'rexCircularProgressCanvas';
 
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
