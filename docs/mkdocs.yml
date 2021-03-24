@@ -78,6 +78,7 @@ nav:
             - Iso box: shape-isobox.md
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
+            - Circular progres: shape-circularprogress.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md

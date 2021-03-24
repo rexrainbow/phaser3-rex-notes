@@ -1370,6 +1370,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-circularprogress/" title="Circular progres" class="md-nav__link">
+      Circular progres
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4575,8 +4587,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#canvas-objects" class="md-nav__link">
-    Canvas objects
+  <a href="#canvasshape-objects" class="md-nav__link">
+    Canvas/Shape objects
   </a>
   
 </li>
@@ -5548,8 +5560,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#canvas-objects" class="md-nav__link">
-    Canvas objects
+  <a href="#canvasshape-objects" class="md-nav__link">
+    Canvas/Shape objects
   </a>
   
 </li>
@@ -5824,7 +5836,7 @@
 <span class="p">}</span>
 </code></pre></div></li>
 </ol>
-<h3 id="canvas-objects">Canvas objects<a class="headerlink" href="#canvas-objects" title="Permanent link">&para;</a></h3>
+<h3 id="canvasshape-objects">Canvas/Shape objects<a class="headerlink" href="#canvasshape-objects" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="../canvas/">Canvas</a>: Drawing on <a href="https://www.w3schools.com/html/html5_canvas.asp">canvas</a>.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">canvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
@@ -5854,7 +5866,20 @@
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><a href="../canvas-circularprogress/">Circular progress</a>: Circular progress bar.
+<li><a href="../shape-circularprogress/">Circular progress shape</a>: Circular progress bar shape.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCircularProgress</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgress</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><a href="../canvas-circularprogress/">Circular progress canvas</a>: Circular progress bar on canvas
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or

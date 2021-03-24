@@ -136,7 +136,7 @@
     }
     ```
 
-### Canvas objects
+### Canvas/Shape objects
 
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
     ```javascript
@@ -170,7 +170,22 @@
         // ...
     }
     ```
-1. [Circular progress](canvas-circularprogress.md): Circular progress bar.
+1. [Circular progress shape](shape-circularprogress.md): Circular progress bar shape.
+    ```javascript
+    var circularProgress = scene.rexUI.add.circularProgress(x, y, radius, barColor, value, config);
+    ```
+    or
+    ```javascript
+    class MyCircularProgress extends RexPlugins.UI.CircularProgress {
+        constructor(scene, x, y, radius, barColor, value, config) {
+            super(scene, x, y, radius, barColor, value, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [Circular progress canvas](canvas-circularprogress.md): Circular progress bar on canvas
     ```javascript
     var circularProgress = scene.rexUI.add.circularProgressCanvas(x, y, radius, barColor, value, config);
     ```

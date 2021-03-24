@@ -90,7 +90,6 @@
 1. [Random place](randomplace.md): Place objects randomly inside an area without overlapping.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
-1. [Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
 1. [Script-tag loader](scripttagloader.md): Load script tag in preload stage.
@@ -106,6 +105,8 @@
 1. [Shader/swirl](shader-swirl.md): Swirl post processing filter.
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
+1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
+1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shatter image](shatter-image.md): Shatter image to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [Slider](slider.md): Drag thumb on a slider bar.

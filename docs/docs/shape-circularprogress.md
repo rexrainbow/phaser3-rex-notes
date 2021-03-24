@@ -1,17 +1,17 @@
 ## Introduction
 
-Circular progress bar on canvas.
+Circular progress bar shape.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Circular-progress](https://codepen.io/rexrainbow/pen/BaQbPbO)
+- [Circular-progress](https://codepen.io/rexrainbow/pen/ZELGmrE)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circularprogresscanvas)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/circularprogress)
 
 ### Install plugin
 
@@ -19,11 +19,11 @@ Circular progress bar on canvas.
 
 - Load plugin (minify file) in preload stage
     ```javascript
-    scene.load.plugin('rexcircularprogresscanvasplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogresscanvasplugin.min.js', true);
+    scene.load.plugin('rexcircularprogressplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcircularprogressplugin.min.js', true);
     ```
 - Add circular-progress object
     ```javascript
-    var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, config);
+    var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, config);
     ```
 
 #### Import plugin
@@ -34,13 +34,13 @@ Circular progress bar on canvas.
     ```
 - Install plugin in [configuration of game](game.md#configuration)
     ```javascript
-    import CircularProgressCanvasPlugin from 'phaser3-rex-plugins/plugins/circularprogresscanvas-plugin.js';
+    import CircularProgressPlugin from 'phaser3-rex-plugins/plugins/circularprogress-plugin.js';
     var config = {
         // ...
         plugins: {
             global: [{
-                key: 'rexCircularProgressCanvasPlugin',
-                plugin: CircularProgressCanvasPlugin,
+                key: 'rexCircularProgressPlugin',
+                plugin: CircularProgressPlugin,
                 start: true
             },
             // ...
@@ -52,7 +52,7 @@ Circular progress bar on canvas.
     ```
 - Add circular-progress object
     ```javascript
-    var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, config);
+    var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, config);
     ```
 
 #### Import class
@@ -63,11 +63,11 @@ Circular progress bar on canvas.
     ```
 - Import class
     ```javascript
-    import CircularProgressCanvas from 'phaser3-rex-plugins/plugins/circularprogresscanvas.js';
+    import CircularProgress from 'phaser3-rex-plugins/plugins/circularprogress.js';
     ```
 - Add circular-progress object
     ```javascript    
-    var circularProgress = new CircularProgressCanvas(scene, x, y, radius, color, value, config);
+    var circularProgress = new CircularProgress(scene, x, y, radius, color, value, config);
     sscene.add.existing(image);
     ```
 
@@ -80,8 +80,8 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'rexCircularProgressCanvasPlugin',
-            plugin: CircularProgressCanvasPlugin,
+            key: 'rexCircularProgressPlugin',
+            plugin: CircularProgressPlugin,
             start: true
         },
         // ...
@@ -95,28 +95,19 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, {
+var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, {
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
-
-    textColor: undefined,
-    textStrokeColor: undefined,
-    textStrokeThickness: undefined,
-    textSize: '16px',
-    textFamily: 'Courier',
-    textStyle: '',
-    textFormatCallback: undefined,
-    textFormatCallbackScope: undefined
 });
 ```
 
 or 
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgressCanvas({
+var circularProgress = scene.add.rexCircularProgress({
     x: 0,
     y: 0,
     radius: 1,
@@ -127,15 +118,6 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
-
-    textColor: undefined,
-    textStrokeColor: undefined,
-    textStrokeThickness: undefined,
-    textSize: '16px',
-    textFamily: 'Courier',
-    textStyle: '',
-    textFormatCallback: undefined,
-    textFormatCallbackScope: undefined,
 
     value: 0
 });
@@ -149,23 +131,13 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
-- `textColor` : Color of display text. Default is `undefined`.
-- `textStrokeColor`, `textStrokeThickness` : Stroke color, stroke line width of display text. Default is `undefined`.
-- `textSize`, `textFamily`, `textStyle` : Size, family, style of display text.
-- `textFormatCallback`, `textFormatCallbackScope` : Formating callback of display text. ex:
-    ```javascript
-    function(value) {
-        return Math.floor(value * 100).toString();
-    }
-    ```
-    Default value is `undefined`.
 - `value` : `0` ~ `1`, progress value. Default is `0`.
 
 
 Add circular-progress from JSON
 
 ```javascript
-var circularProgress = scene.make.rexCircularProgressCanvas({
+var circularProgress = scene.make.rexCircularProgress({
     x: 0,
     y: 0,
     radius: 1,
@@ -177,15 +149,6 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
 
-    textColor: undefined,
-    textStrokeColor: undefined,
-    textStrokeThickness: undefined,
-    textSize: '16px',
-    textFamily: 'Courier',
-    textStyle: '',
-    textFormatCallback: undefined,
-    textFormatCallbackScope: undefined,
-
     value: 0,
     
     add: true
@@ -196,7 +159,7 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
 
 - Define class
     ```javascript
-    class MyCircularProgressCanvas extends CircularProgressCanvas {
+    class MyCircularProgress extends CircularProgress {
         constructor(scene, x, y, radius, color, value, config) {
             super(scene, x, y, radius, color, value, config);
             // ...
@@ -212,7 +175,7 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var circularProgress = new MyCircularProgressCanvas(scene, x, y, radius, color, value, config);
+    var circularProgress = new MyCircularProgress(scene, x, y, radius, color, value, config);
     ```
 
 ### Progress value
@@ -311,31 +274,7 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
         // circularProgress.centerColor = centerColor;
         ```
 
-### Display text
+### Compare with Circular-progress canvas
 
-- Fill color
-    ```javascript
-    circularProgress.setTextColor(color);
-    ```
-- Stroke color
-    ```javascript
-    circularProgress.setTextStrokeColor(color, thickness);
-    ```
-- Font
-    ```javascript
-    circularProgress.setTextFont(fontSize, fontFamily, fontStyle)
-    ```
-- Format callback
-    ```javascript
-    circularProgress.setTextFormatCallback(callback, scope);
-    ```
-    - `callback` : 
-        ```javascript
-        function(value) {
-            return Math.floor(value * 100).toString(); 
-        }
-        ```
-### Compare with Circular-progress shape
-
-- Circular-progress canvas creates a canvas then draw on that canvas, [circular progress shape](shape-circularprogress.md) draw on GRAPHICS pipeline like Shape or Graphics game object.
-- Circular-progress canvas) can draw text directly, [circular progress shape](shape-circularprogress.md) can't draw any text.
+- [Circular-progress canvas](canvas-circularprogress.md) creates a canvas then draw on that canvas, circular progress shape draw on GRAPHICS pipeline like Shape or Graphics game object.
+- [Circular-progress canvas](canvas-circularprogress.md) can draw text directly, circular progress shape can't draw any text.
