@@ -7,15 +7,40 @@ const Utils = Phaser.Renderer.WebGL.Utils;
 
 class Rectangle extends Base {
     constructor(x, y, width, height) {
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+        if (width === undefined) {
+            width = 0;
+        }
+        if (height === undefined) {
+            height = width;
+        }
+
         super();
 
         this.pathData = [];
         this.closePath = true;
 
+        this.setTopLeftPosition(x, y);
+        this.setSize(width, height);
+    }
+
+    setTopLeftPosition(x, y) {
+        this.isDirty |= (this.x !== x) || (this.y !== y);
         this.x = x;
         this.y = y;
+        return this;
+    }
+
+    setSize(width, height) {
+        this.isDirty |= (this.width !== width) || (this.height !== height);
         this.width = width;
         this.height = height;
+        return this;
     }
 
     updateData() {

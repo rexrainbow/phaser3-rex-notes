@@ -10,6 +10,8 @@ class Base {
         this.lineWidth = 1;
         this.strokeColor = undefined;
         this.strokeAlpha = 1;
+
+        this.isDirty = true;
     }
 
     setName(name) {

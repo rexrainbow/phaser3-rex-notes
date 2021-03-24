@@ -12,12 +12,30 @@ class Triangle extends Base {
         this.pathData = [];
         this.closePath = true;
 
-        this.x0 = x0;
-        this.y0 = y0;
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
+        this.setP0(x0, y0);
+        this.setP1(x1, y1);
+        this.setP2(x2, y2);
+    }
+
+    setP0(x, y) {
+        this.dirty |= (this.x0 !== x) || (this.y0 !== y);
+        this.x0 = x;
+        this.y0 = y;
+        return this;
+    }
+
+    setP1(x, y) {
+        this.dirty |= (this.x1 !== x) || (this.y1 !== y);
+        this.x1 = x;
+        this.y1 = y;
+        return this;
+    }
+
+    setP2(x, y) {
+        this.dirty |= (this.x2 !== x) || (this.y2 !== y);
+        this.x2 = x;
+        this.y2 = y;
+        return this;
     }
 
     updateData() {

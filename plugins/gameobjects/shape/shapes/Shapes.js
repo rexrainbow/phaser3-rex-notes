@@ -5,7 +5,7 @@ const Shape = Phaser.GameObjects.Shape;
 const RemoveItem = Phaser.Utils.Array.Remove;
 
 class Shapes extends Shape {
-    constructor(scene, x, y, width, height,) {
+    constructor(scene, x, y, width, height) {
         if (x === undefined) {
             x = 0;
         }
@@ -63,7 +63,10 @@ class Shapes extends Shape {
     updateData() {
         var shapes = this.geom;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
-            shapes[i].updateData();
+            var shape = shapes[i];
+            if (shape.isDirty) {
+                shape.updateData();
+            }
         }
         return this;
     }

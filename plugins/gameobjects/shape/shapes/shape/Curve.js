@@ -3,8 +3,14 @@ import PathBase from './PathBase.js';
 class Curve extends PathBase {
     constructor(curve) {
         super();
-        this.curve = curve;
+        this.setCurve(curve);
         this.iterations = 32;
+    }
+
+    setCurve(curve) {
+        this.dirty |= (this.curve !== curve);
+        this.curve = curve;
+        return this;
     }
 
     updateData() {
