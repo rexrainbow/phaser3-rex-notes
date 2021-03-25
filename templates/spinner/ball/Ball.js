@@ -3,7 +3,6 @@ import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
 
 const Linear = Phaser.Math.Linear;
 
-
 class Ball extends Base {
     constructor(scene, config) {
         super(scene, config);
