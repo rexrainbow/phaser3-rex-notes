@@ -20,8 +20,7 @@ class Puff extends Base {
         var lineWidth = Math.ceil(radius / 25);
         var alpha = 1 - (Math.abs(0.5 - this.value) * 2);
 
-        var puff = this.getShapes()[0];
-        puff
+        this.getShapes()[0]
             .lineStyle(lineWidth, this.color, alpha)
             .setRadius(puffRadius)
             .setCenterPosition(centerX, centerY)
