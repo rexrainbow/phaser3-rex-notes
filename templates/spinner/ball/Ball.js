@@ -1,5 +1,6 @@
 import Base from '../base/Base.js';
 import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
+import Fold from '../utils/Fold.js';
 
 const Linear = Phaser.Math.Linear;
 
@@ -21,7 +22,7 @@ class Ball extends Base {
         var radius = this.radius;
         var ballRadius = radius * 0.1;
         var lineWidth = Math.ceil(ballRadius * 0.25);
-        var trackRadius = Linear(0.3, 0.9, Math.abs(0.5 - this.value) * 2) * radius;
+        var trackRadius = Linear(0.3, 0.9, Fold(this.value, true)) * radius;
 
         var shapes = this.getShapes();
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {

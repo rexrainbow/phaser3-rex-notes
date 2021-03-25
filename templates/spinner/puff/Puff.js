@@ -1,5 +1,6 @@
 import Base from '../base/Base.js';
-import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
+import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape';
+import Fold from '../utils/Fold.js';
 
 
 class Puff extends Base {
@@ -18,7 +19,7 @@ class Puff extends Base {
         var radius = this.radius;
         var puffRadius = radius * this.value;
         var lineWidth = Math.ceil(radius / 25);
-        var alpha = 1 - (Math.abs(0.5 - this.value) * 2);
+        var alpha = Fold(this.value);
 
         this.getShapes()[0]
             .lineStyle(lineWidth, this.color, alpha)

@@ -1,5 +1,6 @@
 import Base from '../base/Base.js';
 import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
+import Fold from '../utils/Fold.js';
 
 
 class Puff extends Base {
@@ -25,7 +26,7 @@ class Puff extends Base {
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var ring = shapes[i];
             var t = (this.value + (i / cnt)) % 1;
-            var alpha = 1 - (Math.abs(0.5 - t) * 2);
+            var alpha = Fold(t);
             ring
                 .lineStyle(lineWidth, this.color, alpha)
                 .setRadius(t * maxRingRadius)

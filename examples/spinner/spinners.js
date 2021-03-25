@@ -12,13 +12,14 @@ class Demo extends Phaser.Scene {
     create() {
         var ball = this.rexSpinner.add.ball({ width: 80, height: 80 });
         var clock = this.rexSpinner.add.clock({ width: 80, height: 80 });
+        var dots = this.rexSpinner.add.dots({ width: 80, height: 80 });
         var los = this.rexSpinner.add.los({ width: 80, height: 80 });
         var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
         var puff = this.rexSpinner.add.puff({ width: 80, height: 80 });
         var rings = this.rexSpinner.add.rings({ width: 80, height: 80 });
 
         Phaser.Actions.GridAlign(
-            [ball, clock, los, orbit, puff, rings],
+            [ball, clock, dots, los, orbit, puff, rings],
             {
                 width: 700,
                 height: 500,
