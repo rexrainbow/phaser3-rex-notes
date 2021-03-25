@@ -4,7 +4,7 @@ import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
 class Orbit extends Base {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexOrbitSpinner';
+        this.type = 'rexSpinnerOrbit';
     }
 
     buildShapes() {

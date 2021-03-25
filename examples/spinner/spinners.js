@@ -10,11 +10,13 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
+        var ball = this.rexSpinner.add.ball({ width: 80, height: 80 });
         var los = this.rexSpinner.add.los({ width: 80, height: 80 });
+        var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
+
 
         Phaser.Actions.GridAlign(
-            [orbit, los],
+            [ball, los, orbit],
             {
                 width: 700,
                 height: 500,

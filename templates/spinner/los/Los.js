@@ -1,10 +1,12 @@
 import Base from '../base/Base.js';
 import { Line } from '../../../plugins/gameobjects/shape/shapes/shape'
 
+const Linear = Phaser.Math.Linear;
+
 class Orbit extends Base {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexLosSpinner';
+        this.type = 'rexSpinnerLos';
     }
 
     buildShapes() {
@@ -23,8 +25,8 @@ class Orbit extends Base {
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var line = shapes[i];
             var t = i / cnt;
-            var angle = Math.PI * 2 * (1 - t);
-            var alpha = Phaser.Math.Linear(0.25, 1, (this.value + t) % 1);
+            var angle = Math.PI * 2 * t;
+            var alpha = Linear(0.25, 1, (1 - this.value + t) % 1);
             line
                 .lineStyle(lineWidth, this.color, alpha)
                 .setP0(

@@ -1,7 +1,8 @@
 import ObjectFactory from './ObjectFactory.js';
 
-import OrbitFactory from './orbit/Factory.js';
+import BallFactory from './ball/Factory.js';
 import LosFactory from './los/Factory.js';
+import OrbitFactory from './orbit/Factory.js';
 
 class SpinnerPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
