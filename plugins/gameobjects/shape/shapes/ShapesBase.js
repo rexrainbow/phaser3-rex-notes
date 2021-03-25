@@ -92,6 +92,10 @@ class ShapesBase extends Shape {
         return this.shapes[name];
     }
 
+    getShapes() {
+        return this.geom;
+    }
+
     addShape(shape) {
         this.geom.push(shape);
         var name = shape.name;

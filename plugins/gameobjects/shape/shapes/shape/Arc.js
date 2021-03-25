@@ -11,14 +11,6 @@ class Arc extends PathBase {
         this.setIterations(32);
     }
 
-    updateData() {
-        this.pathData.length = 0;
-        ArcTo(this.x, this.y, this.radiusX, this.radiusY, this.startAngle, this.endAngle, this.anticlockwise, this.iterations, this.pathData);
-        this.pathData.push(this.pathData[0], this.pathData[1]);
-        super.updateData();
-        return this;
-    }
-
     get x() {
         return this._x;
     }
@@ -119,6 +111,14 @@ class Arc extends PathBase {
 
     setIterations(iterations) {
         this.iterations = iterations;
+        return this;
+    }
+
+    updateData() {
+        this.pathData.length = 0;
+        ArcTo(this.x, this.y, this.radiusX, this.radiusY, this.startAngle, this.endAngle, this.anticlockwise, this.iterations, this.pathData);
+        this.pathData.push(this.pathData[0], this.pathData[1]);
+        super.updateData();
         return this;
     }
 }

@@ -4,6 +4,7 @@ import {
     Circle,
     Curve,
     Ellipse,
+    Line,
     Lines,
     Rectangle,
     Triangle
@@ -30,6 +31,12 @@ class Shapes extends ShapesBase {
 
     addEllipse(name) {
         var shape = (new Ellipse()).setName(name);
+        this.addShape(shape);
+        return shape;
+    }
+
+    addLine(name) {
+        var shape = (new Line()).setName(name);
         this.addShape(shape);
         return shape;
     }

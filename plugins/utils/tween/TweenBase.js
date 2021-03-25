@@ -83,6 +83,22 @@ class TweenBase {
         return this;
     }
 
+    pause() {
+        if (!this.tween) {
+            return this;
+        }
+        this.tween.pause();
+        return this;
+    }
+
+    resume() {
+        if (!this.tween) {
+            return this;
+        }
+        this.tween.resume();
+        return this;
+    }
+
     complete() {
         this.stop();
         if (this.getEventEmitter()) {

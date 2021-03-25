@@ -153,6 +153,7 @@ module.exports = {
     'bejeweled': './templates/bejeweled/Bejeweled.js',
     'uiplugin': './templates/ui/ui-plugin.js',
     'dialogquest': './templates/dialog-quest/DialogQuest.js',
+    'spinnerplugin': './templates/spinner/spinner-plugin.js',
 
     // Plain class
     // rex ui
