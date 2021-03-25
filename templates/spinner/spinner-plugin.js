@@ -5,6 +5,7 @@ import ClockFactory from './clock/Factory.js';
 import LosFactory from './los/Factory.js';
 import OrbitFactory from './orbit/Factory.js';
 import PuffFactory from './puff/Factory.js';
+import RingsFactory from './rings/Factory.js';
 
 class SpinnerPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {

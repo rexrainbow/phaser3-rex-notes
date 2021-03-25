@@ -12,7 +12,7 @@ class SpinnerBase extends ShapesBase {
 
         super(scene, x, y, width, height);
 
-        this.duration = GetValue(config, 'duration', 1000);
+        this.duration = GetValue(config, 'duration', 1500);
         this.ease = GetValue(config, 'ease', 'Linear');
         var color = GetValue(config, 'color', 0xffffff);
         var start = GetValue(config, 'start', true);

@@ -1,3 +1,5 @@
+import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -5,25 +7,35 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-    }
+    preload() { }
 
     create() {
+        var rings = this.rexSpinner.add.rings({
+            x: 400, y: 300,
+            width: 80, height: 80
+        });
     }
 
-    update() {
-    }
+    update() { }
 }
 
 var config = {
     type: Phaser.AUTO,
+    parent: 'phaser-example',
     width: 800,
     height: 600,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexSpinner',
+            plugin: SpinnerPlugin,
+            mapping: 'rexSpinner'
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
