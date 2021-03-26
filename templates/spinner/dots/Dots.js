@@ -12,29 +12,39 @@ class Puff extends BaseSpinner {
     }
 
     buildShapes() {
-        for (var i = 0; i < 3; i++) {
+        var dotCnt = 3;
+        for (var i = 0; i < dotCnt; i++) {
             var dot = new Circle();
             this.addShape(dot);
+
+            var valueOffset = Fold(i / (dotCnt - 1)) / 2;
+            dot.setData('valueOffset', valueOffset);
         }
     }
 
     updateShapes() {
+        var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
-        var cellWidth = (radius * 2) / 3;
-        var dotRadiuse = cellWidth / 2;
+        var leftBound = centerX - radius;
 
-        var shapes = this.getShapes();
-        for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+        var shapes = this.getShapes(),
+            cnt = shapes.length;
+        var cellWidth = (radius * 2) / cnt;
+        var maxDotRadius = cellWidth / 2;
+
+        for (var i = 0; i < cnt; i++) {
             var dot = shapes[i];
-            var t = Fold(i / (cnt - 1)) / 2;
-            t = (this.value + t) % 1;
+            var t = (this.value + dot.getData('valueOffset')) % 1;
             t = Fold(t);
+
+            var dotAlpha = Linear(0.25, 1, t);
+            var dotRadius = Linear(0.5, 1, t) * maxDotRadius;
             dot
-                .fillStyle(this.color, Linear(0.25, 1, t))
-                .setRadius(dotRadiuse * Linear(0.5, 1, t))
+                .fillStyle(this.color, dotAlpha)
+                .setRadius(dotRadius)
                 .setCenterPosition(
-                    cellWidth * (i + 0.5),
+                    leftBound + (cellWidth * (i + 0.5)),
                     centerY
                 )
         }

@@ -3,7 +3,7 @@ import { Line } from '../../../plugins/gameobjects/shape/shapes/shape'
 
 const Linear = Phaser.Math.Linear;
 
-class Orbit extends BaseSpinner {
+class Los extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerLos';
@@ -41,4 +41,4 @@ class Orbit extends BaseSpinner {
     }
 }
 
-export default Orbit;
+export default Los;

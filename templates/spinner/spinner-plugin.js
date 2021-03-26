@@ -1,10 +1,12 @@
 import ObjectFactory from './ObjectFactory.js';
 
+import AudioFactory from './audio/Factory.js';
 import BallFactory from './ball/Factory.js';
 import ClockFactory from './clock/Factory.js';
 import DotsFactory from './dots/Factory.js';
 import LosFactory from './los/Factory.js';
 import OrbitFactory from './orbit/Factory.js';
+import OvalFactory from './oval/Factory.js';
 import PuffFactory from './puff/Factory.js';
 import RingsFactory from './rings/Factory.js';
 

@@ -90,6 +90,7 @@ class Arc extends PathBase {
     }
 
     setAngle(startAngle, endAngle, anticlockwise) {
+        // startAngle, endAngle in degrees
         if (anticlockwise === undefined) {
             anticlockwise = false;
         }

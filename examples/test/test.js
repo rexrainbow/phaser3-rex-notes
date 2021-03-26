@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = this.rexSpinner.add.dots({
+        var spinner = this.rexSpinner.add.audio({
             x: 400, y: 300,
             width: 80, height: 80
         });
