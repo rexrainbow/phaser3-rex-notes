@@ -12,6 +12,7 @@ class Demo extends Phaser.Scene {
     create() {
         var audio = this.rexSpinner.add.audio({ width: 80, height: 80 });
         var ball = this.rexSpinner.add.ball({ width: 80, height: 80 });
+        var bars = this.rexSpinner.add.bars({ width: 80, height: 80 });
         var clock = this.rexSpinner.add.clock({ width: 80, height: 80 });
         var dots = this.rexSpinner.add.dots({ width: 80, height: 80 });
         var facebook = this.rexSpinner.add.facebook({ width: 80, height: 80 });
@@ -20,10 +21,11 @@ class Demo extends Phaser.Scene {
         var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
         var oval = this.rexSpinner.add.oval({ width: 80, height: 80 });
         var puff = this.rexSpinner.add.puff({ width: 80, height: 80 });
+        var radio = this.rexSpinner.add.radio({ width: 80, height: 80 });
         var rings = this.rexSpinner.add.rings({ width: 80, height: 80 });
 
         Phaser.Actions.GridAlign(
-            [audio, ball, clock, dots, facebook, grid, los, orbit, oval, puff, rings],
+            [audio, ball, bars, clock, dots, facebook, grid, los, orbit, oval, puff, radio, rings],
             {
                 width: 7,
                 height: 5,

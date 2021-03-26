@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
+import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape';
 import Fold from '../utils/Fold.js';
 
 
@@ -12,12 +12,12 @@ class Dots extends BaseSpinner {
     }
 
     buildShapes() {
-        var dotCnt = 3;
-        for (var i = 0; i < dotCnt; i++) {
+        var cnt = 3;
+        for (var i = 0; i < cnt; i++) {
             var dot = new Circle();
             this.addShape(dot);
 
-            var offset = Fold(i / (dotCnt - 1)) / 2;
+            var offset = Fold(i / (cnt - 1)) / 2;
             dot.setData('offset', offset);
         }
     }
