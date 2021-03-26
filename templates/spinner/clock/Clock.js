@@ -5,6 +5,7 @@ const RadToDeg = Phaser.Math.RadToDeg;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const DegToRad = Phaser.Math.DegToRad;
+const Rad270 = Phaser.Math.DegToRad(270);
 
 class Clock extends BaseSpinner {
     constructor(scene, config) {
@@ -41,20 +42,22 @@ class Clock extends BaseSpinner {
             .setRadius(radius)
             .setCenterPosition(centerX, centerY);
 
+        var angle = this.minuteHandAngle + Rad270;
         this.getShape('minuteHand')
             .lineStyle(lineWidth, this.color)
             .setP0(centerX, centerY)
             .setP1(
-                centerX + (Math.cos(this.minuteHandAngle) * minuteHandLength),
-                centerY + (Math.sin(this.minuteHandAngle) * minuteHandLength)
+                centerX + (Math.cos(angle) * minuteHandLength),
+                centerY + (Math.sin(angle) * minuteHandLength)
             )
 
+        var angle = this.hourHandAngle + Rad270;
         this.getShape('hourHand')
             .lineStyle(lineWidth, this.color)
             .setP0(centerX, centerY)
             .setP1(
-                centerX + (Math.cos(this.hourHandAngle) * hourHandLength),
-                centerY + (Math.sin(this.hourHandAngle) * hourHandLength)
+                centerX + (Math.cos(angle) * hourHandLength),
+                centerY + (Math.sin(angle) * hourHandLength)
             )
     }
 }

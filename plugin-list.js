@@ -194,6 +194,22 @@ module.exports = {
     'textbox': './templates/ui/textbox/TextBox.js',
     'toast': './templates/ui/toast/Toast.js',
     'sides': './templates/ui/sides/Sides.js',
+    // spinner
+    'audiospinner': './templates/spinner/audio/Audio.js',
+    'ballspinner': './templates/spinner/ball/Ball.js',
+    'barsspinner': './templates/spinner/bars/Bars.js',
+    'boxspinner': './templates/spinner/box/Box.js',
+    'clockspinner': './templates/spinner/clock/Clock.js',
+    'cubespinner': './templates/spinner/cube/Cube.js',
+    'dotsspinner': './templates/spinner/dots/Dots.js',
+    'facebookspinner': './templates/spinner/facebook/Facebook.js',
+    'gridspinner': './templates/spinner/grid/Grid.js',
+    'losspinner': './templates/spinner/los/Los.js',
+    'orbitspinner': './templates/spinner/orbit/Orbit.js',
+    'ovalspinner': './templates/spinner/oval/Oval.js',
+    'puffspinner': './templates/spinner/puff/Puff.js',
+    'radiospinner': './templates/spinner/radio/Radio.js',
+    'ringsspinner': './templates/spinner/rings/Rings.js',
     // others
     'firebase': './plugins/firebase.js',
     'parse': './plugins/parse.js'
