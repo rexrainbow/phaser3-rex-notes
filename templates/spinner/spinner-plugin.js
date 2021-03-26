@@ -4,6 +4,8 @@ import AudioFactory from './audio/Factory.js';
 import BallFactory from './ball/Factory.js';
 import ClockFactory from './clock/Factory.js';
 import DotsFactory from './dots/Factory.js';
+import FacebookFactory from './facebook/Factory.js';
+import GridFactory from './grid/Factory.js';
 import LosFactory from './los/Factory.js';
 import OrbitFactory from './orbit/Factory.js';
 import OvalFactory from './oval/Factory.js';

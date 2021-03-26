@@ -2,6 +2,8 @@ import Audio from './audio/Audio.js';
 import Ball from './ball/Ball.js';
 import Clock from './clock/Clock.js';
 import Dots from './dots/Dots.js';
+import Facebook from './facebook/Facebook.js';
+import Grid from './grid/Grid.js';
 import Los from './los/Los.js';
 import Orbit from './orbit/Orbit.js';
 import Oval from './oval/Oval.js';
@@ -13,6 +15,8 @@ export {
     Ball,
     Clock,
     Dots,
+    Facebook,
+    Grid,
     Los,
     Orbit,
     Oval,

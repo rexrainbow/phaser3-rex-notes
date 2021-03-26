@@ -17,7 +17,7 @@ class BaseSpinner extends BaseShapes {
         var color = GetValue(config, 'color', 0xffffff);
         var start = GetValue(config, 'start', true);
 
-        this.buildShapes();
+        this.buildShapes(config);
         this.setColor(color);
         this.setValue(0);
 

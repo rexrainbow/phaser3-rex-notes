@@ -3,10 +3,10 @@ import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
 import Fold from '../utils/Fold.js';
 
 
-class Puff extends BaseSpinner {
+class Rings extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerPuff';
+        this.type = 'rexSpinnerRings';
     }
 
     buildShapes() {
@@ -35,4 +35,4 @@ class Puff extends BaseSpinner {
     }
 }
 
-export default Puff;
+export default Rings;

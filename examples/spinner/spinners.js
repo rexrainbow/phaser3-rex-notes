@@ -14,6 +14,8 @@ class Demo extends Phaser.Scene {
         var ball = this.rexSpinner.add.ball({ width: 80, height: 80 });
         var clock = this.rexSpinner.add.clock({ width: 80, height: 80 });
         var dots = this.rexSpinner.add.dots({ width: 80, height: 80 });
+        var facebook = this.rexSpinner.add.facebook({ width: 80, height: 80 });
+        var grid = this.rexSpinner.add.grid({ width: 80, height: 80 });
         var los = this.rexSpinner.add.los({ width: 80, height: 80 });
         var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
         var oval = this.rexSpinner.add.oval({ width: 80, height: 80 });
@@ -21,10 +23,10 @@ class Demo extends Phaser.Scene {
         var rings = this.rexSpinner.add.rings({ width: 80, height: 80 });
 
         Phaser.Actions.GridAlign(
-            [audio, ball, clock, dots, los, orbit, oval, puff, rings],
+            [audio, ball, clock, dots, facebook, grid, los, orbit, oval, puff, rings],
             {
-                width: 700,
-                height: 500,
+                width: 7,
+                height: 5,
                 cellWidth: 100,
                 cellHeight: 100,
                 position: Phaser.Display.Align.TOP_LEFT,

@@ -22,13 +22,15 @@ class Ball extends BaseSpinner {
         var radius = this.radius;
         var ballRadius = radius * 0.1;
         var lineWidth = Math.ceil(ballRadius * 0.25);
-        var trackRadius = Linear(0.3, 0.9, Fold(this.value, true)) * radius;
+
+        var t = Fold(this.value, true);
+        var trackRadius = Linear(0.3, 0.9, t) * radius;
 
         var shapes = this.getShapes();
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var ball = shapes[i];
-            var t = i / cnt;
-            var angle = Math.PI * 2 * (this.value + t);
+            var t = (this.value + (i / cnt)) % 1;
+            var angle = Math.PI * 2 * t;
             ball
                 .lineStyle(lineWidth, this.color)
                 .setRadius(ballRadius)

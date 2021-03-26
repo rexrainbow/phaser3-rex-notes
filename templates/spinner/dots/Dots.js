@@ -5,10 +5,10 @@ import Fold from '../utils/Fold.js';
 
 const Linear = Phaser.Math.Linear;
 
-class Puff extends BaseSpinner {
+class Dots extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerPuff';
+        this.type = 'rexSpinnerDots';
     }
 
     buildShapes() {
@@ -17,8 +17,8 @@ class Puff extends BaseSpinner {
             var dot = new Circle();
             this.addShape(dot);
 
-            var valueOffset = Fold(i / (dotCnt - 1)) / 2;
-            dot.setData('valueOffset', valueOffset);
+            var offset = Fold(i / (dotCnt - 1)) / 2;
+            dot.setData('offset', offset);
         }
     }
 
@@ -35,7 +35,7 @@ class Puff extends BaseSpinner {
 
         for (var i = 0; i < cnt; i++) {
             var dot = shapes[i];
-            var t = (this.value + dot.getData('valueOffset')) % 1;
+            var t = (this.value + dot.getData('offset')) % 1;
             t = Fold(t);
 
             var dotAlpha = Linear(0.25, 1, t);
@@ -51,4 +51,4 @@ class Puff extends BaseSpinner {
     }
 }
 
-export default Puff;
+export default Dots;

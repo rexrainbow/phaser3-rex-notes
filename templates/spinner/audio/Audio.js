@@ -1,19 +1,19 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Line } from '../../../plugins/gameobjects/shape/shapes/shape'
+import { Line } from '../../../plugins/gameobjects/shape/shapes/shape';
 
 const Linear = Phaser.Math.Linear;
 
 class Audio extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerLos';
+        this.type = 'rexSpinnerAudio';
         this.prevValue = undefined;
     }
 
     buildShapes() {
         for (var i = 0; i < 4; i++) {
-            var shape = new Line();
-            this.addShape(shape);
+            var line = new Line();
+            this.addShape(line);
         }
     }
 
@@ -33,9 +33,9 @@ class Audio extends BaseSpinner {
         // Reset range of value
         if ((this.prevValue === undefined) || (this.prevValue > this.value)) {
             for (var i = 0; i < cnt; i++) {
-                var shape = shapes[i];
-                var from = (this.prevValue === undefined) ? Math.random() : shape.getData('to');
-                shape
+                var line = shapes[i];
+                var from = (this.prevValue === undefined) ? Math.random() : line.getData('to');
+                line
                     .setData('from', from)
                     .setData('to', Math.random())
             }
@@ -43,14 +43,14 @@ class Audio extends BaseSpinner {
         this.prevValue = this.value;
 
         for (var i = 0; i < cnt; i++) {
-            var shape = shapes[i];
-            var from = shape.getData('from'),
-                to = shape.getData('to'),
+            var line = shapes[i];
+            var from = line.getData('from'),
+                to = line.getData('to'),
                 current = Linear(from, to, this.value);
             var lineHeight = current * maxLineHeight;
             var x = leftBound + (cellWidth * (i + 0.5));
 
-            shape
+            line
                 .lineStyle(lineWidth, this.color, 1)
                 .setP0(x, bottomBound)
                 .setP1(x, (bottomBound - lineHeight));
