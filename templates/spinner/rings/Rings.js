@@ -1,9 +1,9 @@
-import Base from '../base/Base.js';
+import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
 import Fold from '../utils/Fold.js';
 
 
-class Puff extends Base {
+class Puff extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerPuff';

@@ -1,4 +1,4 @@
-import ShapesBase from './ShapesBase.js';
+import BaseShapes from './BaseShapes.js';
 import {
     Arc,
     Circle,
@@ -10,7 +10,7 @@ import {
     Triangle
 } from './shape';
 
-class Shapes extends ShapesBase {
+class Shapes extends BaseShapes {
     addArc(name) {
         var shape = (new Arc()).setName(name);
         this.addShape(shape);

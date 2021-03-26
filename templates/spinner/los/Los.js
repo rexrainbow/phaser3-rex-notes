@@ -1,9 +1,9 @@
-import Base from '../base/Base.js';
+import BaseSpinner from '../base/BaseSpinner.js';
 import { Line } from '../../../plugins/gameobjects/shape/shapes/shape'
 
 const Linear = Phaser.Math.Linear;
 
-class Orbit extends Base {
+class Orbit extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerLos';

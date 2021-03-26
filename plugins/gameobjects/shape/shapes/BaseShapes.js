@@ -4,7 +4,7 @@ import Clear from '../../../utils/object/Clear.js';
 const Shape = Phaser.GameObjects.Shape;
 const RemoveItem = Phaser.Utils.Array.Remove;
 
-class ShapesBase extends Shape {
+class BaseShapes extends Shape {
     constructor(scene, x, y, width, height) {
         if (x === undefined) {
             x = 0;
@@ -117,8 +117,8 @@ class ShapesBase extends Shape {
 }
 
 Object.assign(
-    ShapesBase.prototype,
+    BaseShapes.prototype,
     Render
 );
 
-export default ShapesBase;
+export default BaseShapes;

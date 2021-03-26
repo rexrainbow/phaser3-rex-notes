@@ -1,12 +1,12 @@
-import Base from './Base.js';
-import FillPathWebGL from '../../utils/render/FillPathWebGL.js';
-import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
-import FillStyleCanvas from '../../utils/render/FillStyleCanvas.js';
-import LineStyleCanvas from '../../utils/render/LineStyleCanvas.js';
+import BaseShape from '../base/BaseShape.js';
+import FillPathWebGL from '../../../utils/render/FillPathWebGL.js';
+import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
+import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
+import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
 
 const Earcut = Phaser.Geom.Polygon.Earcut;
 
-class PathBase extends Base {
+class PathBase extends BaseShape {
     constructor() {
         super();
 

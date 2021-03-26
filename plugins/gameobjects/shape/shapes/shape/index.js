@@ -1,11 +1,11 @@
-import Arc from './Arc.js';
-import Circle from './Circle.js';
-import Curve from './Curve.js';
-import Ellipse from './Ellipse.js';
-import Line from './Line.js';
-import Lines from './Lines.js';
-import Rectangle from './Rectangle.js';
-import Triangle from './Triangle.js';
+import Arc from './lines/arc/Arc.js';
+import Circle from './lines/arc/Circle.js';
+import Curve from './lines/Curve.js';
+import Ellipse from './lines/arc/Ellipse.js';
+import Line from './lines/Line.js';
+import Lines from './lines/Lines.js';
+import Rectangle from './rectangle/Rectangle.js';
+import Triangle from './triangle/Triangle.js';
 
 export {
     Arc,

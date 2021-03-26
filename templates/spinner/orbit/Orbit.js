@@ -1,7 +1,7 @@
-import Base from '../base/Base.js';
+import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape'
 
-class Orbit extends Base {
+class Orbit extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerOrbit';

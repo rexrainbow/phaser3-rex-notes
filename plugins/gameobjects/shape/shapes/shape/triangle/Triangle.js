@@ -1,11 +1,11 @@
-import Base from './Base.js';
-import StrokePathWebGL from '../../utils/render/StrokePathWebGL.js';
-import FillStyleCanvas from '../../utils/render/FillStyleCanvas.js';
-import LineStyleCanvas from '../../utils/render/LineStyleCanvas.js';
+import BaseShape from '../base/BaseShape.js';
+import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
+import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
+import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
 
 const Utils = Phaser.Renderer.WebGL.Utils;
 
-class Triangle extends Base {
+class Triangle extends BaseShape {
     constructor(x0, y0, x1, y1, x2, y2) {
         super();
 

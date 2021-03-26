@@ -1,5 +1,5 @@
-import PathBase from './PathBase.js';
-import ArcTo from '../../utils/pathData/ArcTo.js';
+import PathBase from '../PathBase.js';
+import ArcTo from '../../../../utils/pathData/ArcTo.js';
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise) {

@@ -1,4 +1,4 @@
-import Base from '../base/Base.js';
+import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle, Line } from '../../../plugins/gameobjects/shape/shapes/shape'
 
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -6,7 +6,7 @@ const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const DegToRad = Phaser.Math.DegToRad;
 
-class Clock extends Base {
+class Clock extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerClock';

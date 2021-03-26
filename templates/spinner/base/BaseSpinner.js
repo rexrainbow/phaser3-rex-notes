@@ -1,9 +1,9 @@
-import ShapesBase from '../../../plugins/gameobjects/shape/shapes/ShapesBase.js';
+import BaseShapes from '../../../plugins/gameobjects/shape/shapes/BaseShapes.js';
 import TweenMethods from './TweenMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class SpinnerBase extends ShapesBase {
+class BaseSpinner extends BaseShapes {
     constructor(scene, config) {
         var x = GetValue(config, 'x', 0);
         var y = GetValue(config, 'y', 0);
@@ -78,8 +78,8 @@ class SpinnerBase extends ShapesBase {
 }
 
 Object.assign(
-    SpinnerBase.prototype,
+    BaseSpinner.prototype,
     TweenMethods
 );
 
-export default SpinnerBase;
+export default BaseSpinner;
