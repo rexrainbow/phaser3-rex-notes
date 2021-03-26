@@ -3,6 +3,7 @@ import { Circle, Line } from '../../../plugins/gameobjects/shape/shapes/shape'
 
 const RadToDeg = Phaser.Math.RadToDeg;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
+const WrapRad = Phaser.Math.Angle.Wrap;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const DegToRad = Phaser.Math.DegToRad;
 const Rad270 = Phaser.Math.DegToRad(270);
@@ -35,7 +36,7 @@ class Clock extends BaseSpinner {
         var angle0 = WrapDegrees(RadToDeg(prevMinuteHandAngle));
         var angle1 = WrapDegrees(RadToDeg(this.minuteHandAngle));
         var deltaAngle = ShortestBetween(angle0, angle1);
-        this.hourHandAngle += DegToRad(deltaAngle) / 60;
+        this.hourHandAngle = WrapRad(this.hourHandAngle + (DegToRad(deltaAngle) / 12))
 
         this.getShape('border')
             .lineStyle(lineWidth, this.color)
