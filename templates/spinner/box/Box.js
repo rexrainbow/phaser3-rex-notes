@@ -1,0 +1,53 @@
+import BaseSpinner from '../base/BaseSpinner.js';
+import { Lines } from '../../../plugins/gameobjects/shape/shapes/shape';
+
+const Linear = Phaser.Math.Linear;
+
+class Box extends BaseSpinner {
+    constructor(scene, config) {
+        super(scene, config);
+        this.type = 'rexSpinnerCube';
+    }
+
+    buildShapes() {
+        this.addShape((new Lines()).setName('border'));
+        this.addShape((new Lines()).setName('fill'));
+    }
+
+    updateShapes() {
+        var centerX = this.centerX;
+        var centerY = this.centerY;
+        var radius = this.radius;
+
+        var halfWidth = radius * 0.7;
+        var left = centerX - halfWidth,
+            right = centerX + halfWidth,
+            top = centerY - halfWidth,
+            bottom = centerY + halfWidth;
+
+        this.getShape('border')
+            .lineStyle(2, this.color, 1)
+            .startAt(left, top).lineTo(right, top)
+            .lineTo(right, bottom).lineTo(left, bottom)
+            .lineTo(left, top).close();
+
+        if (this.value < 0.5) {
+            var t = Math.abs(0.5 - this.value) * 2;
+            var fillBottom = top + t * halfWidth * 2;
+            this.getShape('fill')
+                .fillStyle(this.color, 1)
+                .startAt(left, top).lineTo(right, top)
+                .lineTo(right, fillBottom).lineTo(left, fillBottom)
+                .lineTo(left, top).close();
+
+        } else { // Rotate
+            var t = Math.abs(0.5 - this.value) * 2;
+            var angle = Math.PI * t;
+
+            this.getShape('border').rotateAround(centerX, centerY, angle);
+            this.getShape('fill').reset();
+        }
+    }
+}
+
+export default Box;

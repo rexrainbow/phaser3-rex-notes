@@ -4,17 +4,20 @@ import Fold from '../utils/Fold.js';
 
 const Linear = Phaser.Math.Linear;
 const ExpoIn = Phaser.Math.Easing.Expo.In;
+const RowNum = 2;
+const ColNum = 2;
 
-class Facebook extends BaseSpinner {
+class Cube extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
-        this.type = 'rexSpinnerFacebook';
+        this.type = 'rexSpinnerCube';
     }
 
     buildShapes() {
-        for (var i = 0; i < 3; i++) {
-            var shape = new Line();
-            this.addShape(shape);
+        var cnt = RowNum * ColNum;
+        for (var i = 0; i < cnt; i++) {
+            var line = new Line();
+            this.addShape(line);
         }
     }
 
@@ -23,29 +26,33 @@ class Facebook extends BaseSpinner {
         var centerY = this.centerY;
         var radius = this.radius;
         var leftBound = centerX - radius;
+        var topBound = centerY - radius;
+        var cellWidth = (radius * 2) / ColNum;
+        var cellHeight = (radius * 2) / RowNum;
 
         var shapes = this.getShapes(),
             cnt = shapes.length;
-        var cellWidth = (radius * 2) / cnt;
-        var cellHeight = radius * 2;
-
         for (var i = 0; i < cnt; i++) {
+            var colIdx = (i % ColNum);
+            var rowIdx = Math.floor(i / RowNum);
+            var x = leftBound + (cellWidth * (colIdx + 0.5));
+            var y = topBound + (cellHeight * (rowIdx + 0.5));
+
             var line = shapes[i];
             var t = (this.value + ((cnt - i) * 0.1)) % 1;
             t = Fold(t);
             t = ExpoIn(t);
 
-            var lineAlpha = Linear(0.25, 1, (i / (cnt - 1)));
+            var lineAlpha = Linear(0.25, 1, 1 - (i / (cnt - 1)));
             var lineHeight = Linear(0.7, 1, t) * cellHeight;
             var lineWidth = Linear(0.7, 1, t) * cellWidth;
-            var x = leftBound + (cellWidth * (i + 0.5));
 
             line
                 .lineStyle(lineWidth, this.color, lineAlpha)
-                .setP0(x, centerY - (lineHeight / 2))
-                .setP1(x, centerY + (lineHeight / 2));
+                .setP0(x - (lineHeight / 2), y)
+                .setP1(x + (lineHeight / 2), y);
         }
     }
 }
 
-export default Facebook;
+export default Cube;

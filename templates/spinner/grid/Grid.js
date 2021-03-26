@@ -38,8 +38,8 @@ class Grid extends BaseSpinner {
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var colIdx = (i % ColNum);
             var rowIdx = Math.floor(i / RowNum);
-            var x = leftBound + (cellWidth * (colIdx + 0.5));
-            var y = topBound + (cellHeight * (rowIdx + 0.5));
+            var x = leftBound + cellWidth * (colIdx + 0.5);
+            var y = topBound + cellHeight * (rowIdx + 0.5);
 
             var dot = shapes[i];
             var t = (this.value + dot.getData('offset')) % 1;

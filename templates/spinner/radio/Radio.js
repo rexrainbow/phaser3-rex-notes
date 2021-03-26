@@ -9,7 +9,6 @@ class Radio extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerRadio';
-        this.prevValue = undefined;
     }
 
     buildShapes() {
