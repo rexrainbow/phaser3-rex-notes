@@ -28,6 +28,7 @@ class Clock extends BaseSpinner {
         var centerY = this.centerY;
         var radius = this.radius;
         var lineWidth = Math.ceil(radius / 25);
+        var borderRadius = radius - (lineWidth / 2);
         var minuteHandLength = radius * 0.8;
         var hourHandLength = radius * 0.5;
 
@@ -40,7 +41,7 @@ class Clock extends BaseSpinner {
 
         this.getShape('border')
             .lineStyle(lineWidth, this.color)
-            .setRadius(radius)
+            .setRadius(borderRadius)
             .setCenterPosition(centerX, centerY);
 
         var angle = this.minuteHandAngle + Rad270;

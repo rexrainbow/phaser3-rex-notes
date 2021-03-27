@@ -10,9 +10,10 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = this.rexSpinner.add.clock({
+        var spinner = this.rexSpinner.add.spinner({
             x: 400, y: 300,
-            width: 80, height: 80
+            width: 80, height: 80,
+            duration: 4000
         });
         this.add.rectangle(400, 300, 80, 80).setStrokeStyle(2, 0xff0000)
     }

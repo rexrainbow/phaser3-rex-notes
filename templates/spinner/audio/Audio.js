@@ -7,14 +7,13 @@ class Audio extends BaseSpinner {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerAudio';
-        this.prevValue = undefined;
     }
 
     buildShapes() {
         for (var i = 0; i < 4; i++) {
-            var line = new Line();
-            this.addShape(line);
+            this.addShape(new Line());
         }
+        this.prevValue = undefined;
     }
 
     updateShapes() {

@@ -201,6 +201,7 @@ module.exports = {
     'boxspinner': './templates/spinner/box/Box.js',
     'clockspinner': './templates/spinner/clock/Clock.js',
     'cubespinner': './templates/spinner/cube/Cube.js',
+    'customspinner': './templates/spinner/custom/Custom.js',
     'dotsspinner': './templates/spinner/dots/Dots.js',
     'facebookspinner': './templates/spinner/facebook/Facebook.js',
     'gridspinner': './templates/spinner/grid/Grid.js',
@@ -210,6 +211,7 @@ module.exports = {
     'puffspinner': './templates/spinner/puff/Puff.js',
     'radiospinner': './templates/spinner/radio/Radio.js',
     'ringsspinner': './templates/spinner/rings/Rings.js',
+    'spinner': './templates/spinner/spinner/Spinner.js',    
     // others
     'firebase': './plugins/firebase.js',
     'parse': './plugins/parse.js'

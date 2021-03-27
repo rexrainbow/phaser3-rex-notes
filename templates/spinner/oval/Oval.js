@@ -18,7 +18,7 @@ class Oval extends BaseSpinner {
         var centerY = this.centerY;
         var radius = this.radius;
         var lineWidth = Math.ceil(radius / 25);
-        var maxRadius = radius - lineWidth;
+        var maxRadius = radius - (lineWidth / 2);
 
         this.getShape('track')
             .lineStyle(lineWidth, this.color, 0.5)

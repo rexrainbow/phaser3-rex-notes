@@ -4,6 +4,7 @@ import Bars from './bars/Bars.js';
 import Box from './box/Box.js';
 import Clock from './clock/Clock.js';
 import Cube from './cube/Cube.js';
+import Custom from './custom/Custom.js';
 import Dots from './dots/Dots.js';
 import Facebook from './facebook/Facebook.js';
 import Grid from './grid/Grid.js';
@@ -13,6 +14,7 @@ import Oval from './oval/Oval.js';
 import Puff from './puff/Puff.js';
 import Radio from './radio/Radio.js';
 import Rings from './rings/Rings.js';
+import Spinner from './spinner/Spinner.js';
 
 export {
     Audio,
@@ -21,6 +23,7 @@ export {
     Box,
     Clock,
     Cube,
+    Custom,
     Dots,
     Facebook,
     Grid,
@@ -29,5 +32,6 @@ export {
     Oval,
     Puff,
     Radio,
-    Rings
+    Rings,
+    Spinner
 }
