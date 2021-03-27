@@ -107,6 +107,7 @@
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
+1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
 1. [Shatter image](shatter-image.md): Shatter image to triangle faces.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [Slider](slider.md): Drag thumb on a slider bar.

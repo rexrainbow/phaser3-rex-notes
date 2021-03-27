@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvscenario/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-spinner/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>CSV scenario - Notes of Phaser 3</title>
+        <title>Spinner - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                CSV scenario
+                Spinner
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1156,10 +1158,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" checked>
     
     <label class="md-nav__link" for="nav-4-5">
       Graphics
@@ -1199,10 +1203,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3" checked>
     
     <label class="md-nav__link" for="nav-4-5-3">
       Shape
@@ -1386,11 +1392,229 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shape-spinner/" title="Spinner" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Spinner
+      </label>
+    
+    <a href="./" title="Spinner" class="md-nav__link md-nav__link--active">
       Spinner
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-spinner-object" class="md-nav__link">
+    Add spinner object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation-manually" class="md-nav__link">
+    Play animation manually
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-spinner" class="md-nav__link">
+    Custom spinner
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-properties" class="md-nav__link">
+    Common properties
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#line" class="md-nav__link">
+    Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines" class="md-nav__link">
+    Lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle" class="md-nav__link">
+    Triangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arc" class="md-nav__link">
+    Arc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse" class="md-nav__link">
+    Ellipse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3105,12 +3329,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Logic
@@ -3186,12 +3408,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
     
     <label class="md-nav__link" for="nav-10-2">
       Run commands
@@ -3231,229 +3451,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        CSV scenario
-      </label>
-    
-    <a href="./" title="CSV scenario" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../csvscenario/" title="CSV scenario" class="md-nav__link">
       CSV scenario
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-csv-script" class="md-nav__link">
-    Load csv script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-running-instructions" class="md-nav__link">
-    Start running instructions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#types-of-instructions" class="md-nav__link">
-    Types of instructions
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-custom-function" class="md-nav__link">
-    Run custom function
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delay-execution" class="md-nav__link">
-    Delay execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait-then-execution" class="md-nav__link">
-    Wait then execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task" class="md-nav__link">
-    Task
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
-    Label
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exit" class="md-nav__link">
-    Exit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#goto" class="md-nav__link">
-    Goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-goto" class="md-nav__link">
-    If-goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait" class="md-nav__link">
-    Wait
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pause" class="md-nav__link">
-    Pause
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#resume" class="md-nav__link">
-    Resume
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5533,6 +5535,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -5575,118 +5584,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
+  <a href="#add-spinner-object" class="md-nav__link">
+    Add spinner object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-csv-script" class="md-nav__link">
-    Load csv script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-running-instructions" class="md-nav__link">
-    Start running instructions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#types-of-instructions" class="md-nav__link">
-    Types of instructions
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-custom-function" class="md-nav__link">
-    Run custom function
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delay-execution" class="md-nav__link">
-    Delay execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait-then-execution" class="md-nav__link">
-    Wait then execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task" class="md-nav__link">
-    Task
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label" class="md-nav__link">
-    Label
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exit" class="md-nav__link">
-    Exit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#goto" class="md-nav__link">
-    Goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-goto" class="md-nav__link">
-    If-goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait" class="md-nav__link">
-    Wait
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" class="md-nav__link">
-    Other methods
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
   </a>
   
     <nav class="md-nav">
@@ -5703,6 +5609,102 @@
   <a href="#resume" class="md-nav__link">
     Resume
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation-manually" class="md-nav__link">
+    Play animation manually
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-spinner" class="md-nav__link">
+    Custom spinner
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-properties" class="md-nav__link">
+    Common properties
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#line" class="md-nav__link">
+    Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines" class="md-nav__link">
+    Lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle" class="md-nav__link">
+    Triangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arc" class="md-nav__link">
+    Arc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse" class="md-nav__link">
+    Ellipse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5732,257 +5734,462 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/csvscenario.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-spinner.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>CSV scenario</h1>
+                  <h1>Spinner</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Run script in csv format. Csv could be edited by excel or google document.</p>
+<p>Loading animations on shape.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>Game object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/vYgNRMp">Spinners</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/YzNqJEd">Custom spinner</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/spinner">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcsvscenarioplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcsvscenarioplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+  <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span>
+  <span class="s2">&quot;rexspinnerplugin&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexspinnerplugin.min.js&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;rexSpinner&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;rexSpinner&quot;</span>
+<span class="p">);</span>
 </code></pre></div></li>
-<li>Add csv-scenario object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcsvscenarioplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<li>Add spinner object
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">audio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ball</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ball</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bars</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bars</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">box</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">clock</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">cube</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">dots</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dots</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">facebook</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">facebook</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">grid</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">los</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">los</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">orbit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">oval</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">puff</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">puff</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">radio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+  <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CsvScenarioPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario-plugin.js&#39;</span><span class="p">;</span>
+  <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">SpinnerPlugin</span> <span class="nx">from</span> <span class="s2">&quot;phaser3-rex-plugins/templates/spinner/spinner-plugin.js&quot;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCsvScenario&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CsvScenarioPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
+  <span class="c1">// ...</span>
+  <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="s2">&quot;rexSpinner&quot;</span><span class="p">,</span>
+        <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SpinnerPlugin</span><span class="p">,</span>
+        <span class="nx">mapping</span><span class="o">:</span> <span class="s2">&quot;rexSpinner&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="c1">// ...</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add csv-scenario object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCsvScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<li>Add spinner object
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">audio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ball</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ball</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">bars</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">bars</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">box</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">clock</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">cube</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">dots</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dots</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">facebook</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">facebook</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">grid</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">los</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">los</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">orbit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">oval</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">puff</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">puff</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">radio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spinner</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
-    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+  <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CsvScenario</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario.js&#39;</span><span class="p">;</span>
+  <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> 
+  <span class="nx">Audio</span><span class="p">,</span> <span class="nx">Ball</span><span class="p">,</span> <span class="nx">Bars</span><span class="p">,</span> <span class="nx">Box</span><span class="p">,</span> <span class="nx">Clock</span><span class="p">,</span> <span class="nx">Cube</span><span class="p">,</span> <span class="nx">Custom</span><span class="p">,</span> <span class="nx">Dots</span><span class="p">,</span> <span class="nx">Facebook</span><span class="p">,</span> <span class="nx">Grid</span><span class="p">,</span> 
+  <span class="nx">Los</span><span class="p">,</span> <span class="nx">Orbit</span><span class="p">,</span> <span class="nx">Oval</span><span class="p">,</span> <span class="nx">Puff</span><span class="p">,</span> <span class="nx">Radio</span><span class="p">,</span> <span class="nx">Rings</span><span class="p">,</span> <span class="nx">Spinner</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;phaser3-rex-plugins/templates/spinner/spinner-components.js&quot;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add csv-scenario object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CsvScenario</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
-</code></pre></div>
-
-<h3 id="load-csv-script">Load csv script<a class="headerlink" href="#load-csv-script" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
-    <span class="c1">// prefix: /^#([a-zA-Z]+)/</span>
-    <span class="c1">// argsConvert: true,</span>
-    <span class="c1">// argsConvertScope: undefined,</span>
-    <span class="c1">// delimiter: &#39;,&#39;</span>
-<span class="p">})</span>
-</code></pre></div>
-
-<ul>
-<li><code>timeUnit</code>: time-unit of dt, for <a href="./#delay-execution">delay-execution</a><ul>
-<li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
-<li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
-</ul>
-</li>
-<li><code>prefix</code>: regex of picking control instructions</li>
-<li><code>argsConvert</code>: a callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
-<li><code>argsConvertScope</code>: scope of argsConvert</li>
-<li><code>delimiter</code> : Delimiter of CSV string.</li>
-</ul>
-<h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
-    <span class="c1">// label: &#39;&#39;,</span>
-    <span class="c1">// offset: 0</span>
-<span class="p">})</span>
-</code></pre></div>
-
-<ul>
-<li><code>label</code> : Go to the label and execute. '' label is starting from 1<sup>st</sup> instruction</li>
-<li><code>offset</code> : Offset time</li>
-</ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Complete
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scenario</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>Label has changed
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;labelchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</code></pre></div></li>
-<li>Dump execution log
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</code></pre></div></li>
-<li>Notify error
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+<li>Add spinner object
+  <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Audio</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">spinner</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="types-of-instructions">Types of instructions<a class="headerlink" href="#types-of-instructions" title="Permanent link">&para;</a></h3>
-<p>Each row in csv table is an instruction.</p>
-<h4 id="run-custom-function">Run custom function<a class="headerlink" href="#run-custom-function" title="Permanent link">&para;</a></h4>
-<p>Run custom function of <code>scope</code>, which passed from <code>scenario.load(...)</code></p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">-,fnName,param0,param1,...</span>
+<h3 id="add-spinner-object">Add spinner object<a class="headerlink" href="#add-spinner-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">spinner</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">audio</span><span class="p">({</span>
+  <span class="c1">// x: 0,</span>
+  <span class="c1">// y: 0,</span>
+  <span class="c1">// width: 64,</span>
+  <span class="c1">// height: 64,</span>
+  <span class="c1">// color: 0xffffff,</span>
+
+  <span class="c1">// duration: 1000,</span>
+  <span class="c1">// start: true</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li>1<sup>st</sup> column of instruction: <code>-</code></li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
+<li><code>x</code>, <code>y</code> : Position of this object.</li>
+<li><code>width</code>, <code>height</code> : Size of this object.</li>
+<li><code>color</code> : Fill color, or stroke color. Default value is <code>0xffffff</code></li>
+<li><code>duration</code> : Duration of animation.</li>
+<li><code>start</code> : Start animation when object created.</li>
+<li><code>false</code> : Don't play animation at beginning.</li>
 </ul>
-<h5 id="delay-execution">Delay execution<a class="headerlink" href="#delay-execution" title="Permanent link">&para;</a></h5>
-<p>Run custom function after a delay.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">time,fnName,param0,param1,...</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: a number</li>
-<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
-</ul>
-<h5 id="wait-then-execution">Wait then execution<a class="headerlink" href="#wait-then-execution" title="Permanent link">&para;</a></h5>
-<p>Run custom function until <code>scenario.continue(eventName)</code></p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">eventName,fnName,param0,param1,...</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: not a number, not a string start from <code>#</code></li>
-<li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
-</ul>
-<h5 id="task">Task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h5>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js">Sample code</a></p>
-<p>Scenario will be paused if custom function return an <a href="../eventemitter3/">event emitter</a>, resumed when that evnt emitter fires <code>complete</code> event.</p>
-<p>See also: <a href="../sequence/#action-of-commands">Sequence</a></p>
-<h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/label-exit.js">Sample code</a></p>
-<p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#LABEL,label</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#LABEL</code>, case insensitive.</li>
-<li>Label <code>''</code> is reserved, don't use <code>''</code> for label name.</li>
-</ul>
-<p>Example: A label named 'AA'</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#LABEL,AA</span>
-</code></pre></div>
-
-<h4 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h4>
-<p>Exit current execution.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#EXIT</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#EXIT</code>, case insensitive.</li>
-</ul>
-<h4 id="goto">Goto<a class="headerlink" href="#goto" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/goto.js">Sample code</a></p>
-<p>Go to <em>label</em> and execute.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#GOTO,label</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#GOTO</code>, case insensitive.</li>
-<li>An <code>error</code> event will be fired if label is not found.</li>
-</ul>
-<p>Example: Goto label 'AA'</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#GOTO,AA</span>
-</code></pre></div>
-
-<h4 id="if-goto">If-goto<a class="headerlink" href="#if-goto" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/if.js">Sample code</a></p>
-<p>Go to <em>trueLabel</em> if condition is true, otherwise go to <em>falseLabel</em>.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#IF,condition,trueLabel,falseLabel</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#IF</code>, case insensitive.</li>
-<li>conditon: boolean equation<ul>
-<li><em>this</em> is the <code>scope</code> passed from <code>scenario.load(...)</code></li>
-</ul>
-</li>
-<li>trueLabel/falseLabel: go to this label if condition is true/false<ul>
-<li>run next instruction if label is <code>''</code></li>
-<li>An <code>error</code> event will be fired if label is not found.</li>
-</ul>
-</li>
-</ul>
-<p>Example: Goto label 'AA' if (this.coin &gt; 100), else run next instruction</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#IF,this.coin &gt; 100,AA</span>
-</code></pre></div>
-
-<h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
-<p>Run next instruction after a delay time, or <code>scenario.continue(eventName)</code>.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">#WAIT,time</span>
-</code></pre></div>
-
-<div class="codehilite"><pre><span></span><code><span class="err">#WAIT,eventName</span>
-</code></pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#WAIT</code>, case insensitive.</li>
-<li>2<sup>nd</sup> colume of instruction:<ul>
-<li>a number: a delay time<ul>
-<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
-</ul>
-</li>
-<li>a string: an event name for <code>scenario.continue(eventName)</code></li>
-</ul>
-</li>
-</ul>
-<p>Example: </p>
-<ul>
-<li>Wait 1 time-unit
-    <div class="codehilite"><pre><span></span><code><span class="err">#WAIT,1</span>
-</code></pre></div></li>
-<li>Wait until 'click'
-    <div class="codehilite"><pre><span></span><code><span class="err">#WAIT,click</span>
-</code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">)</span>
-</code></pre></div></li>
-</ul>
-<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
+<h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
 
 <h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
+
+<h4 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div>
+
+<h4 id="play-animation-manually">Play animation manually<a class="headerlink" href="#play-animation-manually" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Set <code>start</code> to <code>false</code> in config</li>
+<li>Set progress manually
+    <div class="codehilite"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">spinner</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>t</code> : <code>0</code> ~ <code>1</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="custom-spinner">Custom spinner<a class="headerlink" href="#custom-spinner" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create custom spinner
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customSpinner</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">custom</span><span class="p">({</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// width: 64,</span>
+    <span class="c1">// height: 64,</span>
+    <span class="c1">// color: 0xffffff,</span>
+
+    <span class="c1">// duration: 1000,</span>
+    <span class="c1">// start: true,</span>
+
+    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">shapeType</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+        <span class="c1">// shapeType: number</span>
+    <span class="p">},</span>
+
+    <span class="c1">// create: function() {</span>
+    <span class="c1">// </span>
+    <span class="c1">// },</span>
+
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>create</code> : Callback to create shapes<ul>
+<li>A plain object with <code>shapeType: name</code>, or <code>shapeType: number</code><ul>
+<li><code>shapeType</code> : <ul>
+<li><code>'arc'</code> : Create Arc shape.</li>
+<li><code>'circle'</code> : Create Circle shape.</li>
+<li><code>'curve'</code> : Create Curve shape.</li>
+<li><code>'ellipse'</code> : Create Ellipse shape.</li>
+<li><code>'line'</code> : Create Line shape.</li>
+<li><code>'lines'</code> : Create Lines shape.</li>
+<li><code>'rectangle'</code> : Create Rectangle shape.</li>
+<li><code>'triangle'</code> : Create Triangle shape.</li>
+</ul>
+</li>
+<li><code>name</code> : An unique string name of this shape.</li>
+<li><code>number</code> : Amount of shapes to create.</li>
+</ul>
+</li>
+<li>A callback
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This spinner game object</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="nx">shapeType</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>this.createShape(shapeType, name)</code> : Crate a shape instance</li>
+<li><code>this.addShape(shape)</code> : Add this shape instance to this custom spinner.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>update</code> : Callback when porgressing
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This spinner game object</span>
+    <span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+
+    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>Position : <ul>
+<li><code>this.centerX</code>, <code>this.centerY</code> : Center position of this spinner. The coordinate of top-left point is <code>(0,0)</code></li>
+<li><code>this.radius</code> : Minimun value of <code>this.centerX</code>, <code>this.centerY</code>, to draw shape at square.</li>
+</ul>
+</li>
+<li>Color :<ul>
+<li><code>this.color</code> : Color property of this spinner.</li>
+</ul>
+</li>
+<li>Shape instances : Change properties of shape instances.<ul>
+<li><code>this.getShapes()</code> : Return all shapes.</li>
+<li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
+<h4 id="common-properties">Common properties<a class="headerlink" href="#common-properties" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Style<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fillAlpha</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">fillAlpha</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">strokeAlpha</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeAlpha</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Private data<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var data = shape.getData(key, defaultValue);</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Name<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h5>
+<ul>
+<li>End points<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y1</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">setP0</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">setP1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">x0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y0</span> <span class="o">=</span> <span class="nx">y0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x1</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="nx">y1</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="lines">Lines<a class="headerlink" href="#lines" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Start position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">startAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Line to position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Close path
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Rotation all points
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h5 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Top-left<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">setTopLeftPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
+<span class="nx">rectangle</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">top</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Size<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">rectangle</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Vertices<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x0</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y0</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y1</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x2</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y2</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">triangle</span><span class="p">.</span><span class="nx">setP0</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">setP1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">setP2</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">x0</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">y0</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x1</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">y1</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">x2</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">y2</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="arc">Arc<a class="headerlink" href="#arc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Center position<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
+<span class="c1">// arc.setRadius(radius);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Angles<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">);</span>  <span class="c1">// anticlockwise = false</span>
+<span class="c1">// arc.setAngle(startAngle, endAngle, anticlockwise);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">startAngle</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">endAngle</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">anticlockwise</span><span class="p">;</span> <span class="c1">// boolean</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start/end angle in degrees.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="circle">Circle<a class="headerlink" href="#circle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Center position<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
+<span class="c1">// arc.setRadius(radius);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="ellipse">Ellipse<a class="headerlink" href="#ellipse" title="Permanent link">&para;</a></h5>
+<p>The same as Circle.</p>
                 
                   
                 
@@ -6004,7 +6211,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../sequence/" title="Sequence" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shape-circularprogress/" title="Circular progres" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -6013,19 +6220,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Sequence
+                Circular progres
               </span>
             </div>
           </a>
         
         
-          <a href="../tcrp-recoder/" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../canvas/" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Recoder
+                Canvas
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

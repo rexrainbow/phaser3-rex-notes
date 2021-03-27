@@ -79,6 +79,7 @@ nav:
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
             - Circular progres: shape-circularprogress.md
+            - Spinner: shape-spinner.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md
