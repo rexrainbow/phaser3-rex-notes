@@ -228,8 +228,11 @@ spinner.stop();
 
             var shapes = this.getShapes();
             var shape = this.getShape(name);
+
+            var t = this.value;
         }
         ```
+        - `this.value` : Progress, `0`~`1`.
         - Position : 
             - `this.centerX`, `this.centerY` : Center position of this spinner. The coordinate of top-left point is `(0,0)`
             - `this.radius` : Minimun value of `this.centerX`, `this.centerY`, to draw shape at square.
