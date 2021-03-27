@@ -236,7 +236,7 @@ spinner.stop();
         - Color :
             - `this.color` : Color property of this spinner.
         - Shape instances : Change properties of shape instances.
-            - `this.getShapes()` : Return all shapes.
+            - `this.getShapes()` : Return all shapes in an array.
             - `this.getShape(name)` : Return a shape by the unique string name.
 
 #### Shape class
