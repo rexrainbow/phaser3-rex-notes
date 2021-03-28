@@ -197,14 +197,13 @@ spinner.stop();
     - `create` : Callback to create shapes
         - A plain object with `shapeType: name`, or `shapeType: number`
             - `shapeType` : 
-                - `'arc'` : Create Arc shape.
-                - `'circle'` : Create Circle shape.
-                - `'curve'` : Create Curve shape.
-                - `'ellipse'` : Create Ellipse shape.
-                - `'line'` : Create Line shape.
-                - `'lines'` : Create Lines shape.
-                - `'rectangle'` : Create Rectangle shape.
-                - `'triangle'` : Create Triangle shape.
+                - `'arc'` : Create [Arc shape](shape-spinner.md#arc).
+                - `'circle'` : Create [Circle shape](shape-spinner.md#circle).
+                - `'ellipse'` : Create [Ellipse shape](shape-spinner.md#ellipse).
+                - `'line'` : Create [Line shape](shape-spinner.md#line).
+                - `'lines'` : Create [Lines shape](shape-spinner.md#lines).
+                - `'rectangle'` : Create [Rectangle shape](shape-spinner.md#rectangle).
+                - `'triangle'` : Create [Triangle shape](shape-spinner.md#triangle).
             - `name` : An unique string name of this shape.
             - `number` : Amount of shapes to create.
         - A callback
@@ -259,6 +258,10 @@ spinner.stop();
         ```javascript
         shape.fillStyle(color, alpha);
         shape.lineStyle(lineWidth, color, alpha);
+        ```
+    - Clear
+        ```javascript
+        shape.fillStyle().lineStyle();
         ```
 - Private data
     - Get

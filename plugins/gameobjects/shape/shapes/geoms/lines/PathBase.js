@@ -52,7 +52,10 @@ class PathBase extends BaseGeom {
             ctx.lineTo(px2, py2);
         }
 
-        ctx.closePath();
+        if (this.closePath) {
+            ctx.closePath();
+        }
+
 
         if (this.isFilled) {
             FillStyleCanvas(ctx, this);

@@ -1,5 +1,9 @@
 import PathBase from '../PathBase.js';
 import ArcTo from '../../../../utils/pathData/ArcTo.js';
+import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
+import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
+
+const DegToRad = Phaser.Math.DegToRad;
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
@@ -128,6 +132,24 @@ class Arc extends PathBase {
         super.updateData();
         return this;
     }
+
+    // canvasRender(ctx, dx, dy) {
+    //     ctx.beginPath();
+    //     ctx.ellipse(
+    //         (this.x - dx), (this.y - dy),
+    //         this.radiusX, this.radiusY,
+    //         0,
+    //         DegToRad(this.startAngle), DegToRad(this.endAngle), this.anticlockwise
+    //     );
+    //     if (this.isFilled) {
+    //         FillStyleCanvas(ctx, this);
+    //         ctx.fill();
+    //     }
+    //     if (this.isStroked) {
+    //         LineStyleCanvas(ctx, this);
+    //         ctx.stroke();
+    //     }
+    // }
 }
 
 export default Arc;
