@@ -8,7 +8,7 @@ import {
     Lines,
     Rectangle,
     Triangle
-} from './shape';
+} from './geoms';
 
 class Shapes extends BaseShapes {
     addArc(name) {

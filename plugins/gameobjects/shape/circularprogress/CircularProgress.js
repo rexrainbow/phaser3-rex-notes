@@ -1,5 +1,5 @@
 import BaseShapes from '../shapes/BaseShapes.js';
-import { Arc, Circle } from '../shapes/shape';
+import { Arc, Circle } from '../shapes/geoms';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Lines } from '../../../plugins/gameobjects/shape/shapes/shape';
+import { Lines } from '../utils/Geoms.js';
 
 const Linear = Phaser.Math.Linear;
 

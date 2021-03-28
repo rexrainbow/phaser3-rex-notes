@@ -8,7 +8,7 @@ import {
     Lines,
     Rectangle,
     Triangle
-} from '../../../plugins/gameobjects/shape/shapes/shape';
+} from '../utils/Geoms.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

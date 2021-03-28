@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Arc } from '../../../plugins/gameobjects/shape/shapes/shape'
+import { Arc } from '../utils/Geoms.js'
 import Fold from '../utils/Fold.js';
 
 class Spinner extends BaseSpinner {

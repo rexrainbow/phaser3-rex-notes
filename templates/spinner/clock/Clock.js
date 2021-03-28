@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Circle, Line } from '../../../plugins/gameobjects/shape/shapes/shape'
+import { Circle, Line } from '../utils/Geoms.js'
 
 const RadToDeg = Phaser.Math.RadToDeg;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;

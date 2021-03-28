@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Circle } from '../../../plugins/gameobjects/shape/shapes/shape';
+import { Circle } from '../utils/Geoms.js';
 import Fold from '../utils/Fold.js';
 
 

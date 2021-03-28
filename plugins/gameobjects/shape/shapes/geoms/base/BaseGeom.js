@@ -1,7 +1,7 @@
 import StyleMethods from './StyleMethods.js';
 import DataMethods from './DataMethods.js';
 
-class BaseShape {
+class BaseGeom {
     constructor() {
         this.name = undefined;
         this.dirty = true;
@@ -42,10 +42,10 @@ class BaseShape {
 }
 
 Object.assign(
-    BaseShape.prototype,
+    BaseGeom.prototype,
     StyleMethods,
     DataMethods
 );
 
 
-export default BaseShape;
+export default BaseGeom;

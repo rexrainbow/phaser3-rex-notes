@@ -1,11 +1,11 @@
-import BaseShape from '../base/BaseShape.js';
+import BaseGeom from '../base/BaseGeom.js';
 import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
 
 const Utils = Phaser.Renderer.WebGL.Utils;
 
-class Rectangle extends BaseShape {
+class Rectangle extends BaseGeom {
     constructor(x, y, width, height) {
         if (x === undefined) {
             x = 0;
