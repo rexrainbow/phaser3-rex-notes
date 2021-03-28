@@ -6,7 +6,7 @@ import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
-import CircularProgress from './circularprogresscanvas/CircularProgress.js';
+import CircularProgress from './circularprogress/CircularProgress.js';
 import Knob from './knob/Knob.js';
 import Chart from './chart/Chart.js';
 import NinePatch from './ninepatch/NinePatch.js';
