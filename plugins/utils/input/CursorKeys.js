@@ -26,11 +26,11 @@ class CursorKeys {
         }
 
         if (key.isDown !== isDown) {
-            fakeEvent.timeDown = Date.now();
+            FakeEvent.timeStamp = Date.now();
             if (isDown) {
-                key.onDown(fakeEvent);
+                key.onDown(FakeEvent);
             } else {
-                key.onUp(fakeEvent);
+                key.onUp(FakeEvent);
             }
         }
 
@@ -70,7 +70,7 @@ class CursorKeys {
     }
 }
 
-var fakeEvent = {
+var FakeEvent = {
     altKey: false,
     ctrlKey: false,
     shiftKey: false,
