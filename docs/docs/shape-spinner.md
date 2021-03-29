@@ -12,7 +12,7 @@ Loading animations on shape.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shape-spinner)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/spinner)
 
 ### Install plugin
 
@@ -41,6 +41,7 @@ Loading animations on shape.
   var los = this.rexSpinner.add.los(config);
   var orbit = this.rexSpinner.add.orbit(config);
   var oval = this.rexSpinner.add.oval(config);
+  var pie = this.rexSpinner.add.pie(config);
   var puff = this.rexSpinner.add.puff(config);
   var radio = this.rexSpinner.add.radio(config);
   var rings = this.rexSpinner.add.rings(config);
@@ -86,6 +87,7 @@ Loading animations on shape.
   var los = this.rexSpinner.add.los(config);
   var orbit = this.rexSpinner.add.orbit(config);
   var oval = this.rexSpinner.add.oval(config);
+  var pie = this.rexSpinner.add.pie(config);
   var puff = this.rexSpinner.add.puff(config);
   var radio = this.rexSpinner.add.radio(config);
   var rings = this.rexSpinner.add.rings(config);

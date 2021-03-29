@@ -5776,6 +5776,7 @@
 <span class="kd">var</span> <span class="nx">los</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">los</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">orbit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oval</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pie</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pie</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">puff</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">puff</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">radio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">rings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -5818,6 +5819,7 @@
 <span class="kd">var</span> <span class="nx">los</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">los</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">orbit</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">orbit</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oval</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">oval</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pie</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pie</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">puff</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">puff</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">radio</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">radio</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">rings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexSpinner</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rings</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -5900,9 +5902,10 @@
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// start: true,</span>
 
-    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">shapeType</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-        <span class="c1">// shapeType: number</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>            
+        <span class="c1">// shapeType: [name0, name1, ...],</span>
+        <span class="c1">// shapeType: number,</span>
+        <span class="c1">// shapeType: name,</span>
     <span class="p">},</span>
 
     <span class="c1">// create: function() {</span>
@@ -5926,6 +5929,7 @@
 <li><code>'triangle'</code> : Create <a href="./#triangle">Triangle shape</a>.</li>
 </ul>
 </li>
+<li><code>nameArray</code> : An array of unique string name for each shape.</li>
 <li><code>name</code> : An unique string name of this shape.</li>
 <li><code>number</code> : Amount of shapes to create.</li>
 </ul>
@@ -6144,7 +6148,7 @@
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span><span class="p">;</span> <span class="c1">// boolean        </span>
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">);</span>  <span class="c1">// anticlockwise = false</span>
@@ -6158,6 +6162,18 @@
 <li><code>startAngle</code>, <code>endAngle</code> : Start/end angle in degrees.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>Pie<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pie</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">pie</span><span class="p">;</span> <span class="c1">// boolean</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setPie</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">pie</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
