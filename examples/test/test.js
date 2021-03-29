@@ -10,19 +10,17 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = this.rexSpinner.add.spinner({
+        var spinner = this.rexSpinner.add.pie({
             x: 400, y: 300,
-            width: 80, height: 80,
-            duration: 4000
+            width: 80, height: 80
         });
-        this.add.rectangle(400, 300, 80, 80).setStrokeStyle(2, 0xff0000)
     }
 
     update() { }
 }
 
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     parent: 'phaser-example',
     width: 800,
     height: 600,

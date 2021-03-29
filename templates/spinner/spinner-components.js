@@ -11,6 +11,7 @@ import Grid from './grid/Grid.js';
 import Los from './los/Los.js';
 import Orbit from './orbit/Orbit.js';
 import Oval from './oval/Oval.js';
+import Pie from './pie/Pie.js';
 import Puff from './puff/Puff.js';
 import Radio from './radio/Radio.js';
 import Rings from './rings/Rings.js';
@@ -30,6 +31,7 @@ export {
     Los,
     Orbit,
     Oval,
+    Pie,
     Puff,
     Radio,
     Rings,

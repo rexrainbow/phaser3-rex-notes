@@ -35,7 +35,7 @@ class Facebook extends BaseSpinner {
             t = Fold(t);
             t = ExpoIn(t);
 
-            var lineAlpha = Linear(0.25, 1, (i / (cnt - 1)));
+            var lineAlpha = (i + 1) / cnt;
             var lineHeight = Linear(0.7, 1, t) * cellHeight;
             var lineWidth = Linear(0.7, 1, t) * cellWidth;
             var x = leftBound + (cellWidth * (i + 0.5));

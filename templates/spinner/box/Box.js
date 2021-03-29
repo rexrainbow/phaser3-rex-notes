@@ -32,7 +32,7 @@ class Box extends BaseSpinner {
             .lineTo(left, top).close();
 
         if (this.value < 0.5) {
-            var t = Math.abs(0.5 - this.value) * 2;
+            var t = (0.5 - this.value) * 2;
             var fillBottom = top + t * halfWidth * 2;
             this.getShape('fill')
                 .fillStyle(this.color, 1)
@@ -41,7 +41,7 @@ class Box extends BaseSpinner {
                 .lineTo(left, top).close();
 
         } else { // Rotate
-            var t = Math.abs(0.5 - this.value) * 2;
+            var t = (this.value - 0.5) * 2;
             var angle = Math.PI * t;
 
             this.getShape('border').rotateAround(centerX, centerY, angle);

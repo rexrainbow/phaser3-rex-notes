@@ -22,6 +22,7 @@ class Demo extends Phaser.Scene {
         var los = this.rexSpinner.add.los({ width: 80, height: 80 });
         var orbit = this.rexSpinner.add.orbit({ width: 80, height: 80 });
         var oval = this.rexSpinner.add.oval({ width: 80, height: 80 });
+        var pie = this.rexSpinner.add.pie({ width: 80, height: 80 });
         var puff = this.rexSpinner.add.puff({ width: 80, height: 80 });
         var radio = this.rexSpinner.add.radio({ width: 80, height: 80 });
         var rings = this.rexSpinner.add.rings({ width: 80, height: 80 });
@@ -31,8 +32,8 @@ class Demo extends Phaser.Scene {
             [
                 audio, ball, bars, box, clock,
                 cube, dots, facebook, grid, los,
-                orbit, oval, puff, radio, rings,
-                spinner
+                orbit, oval, pie, puff, radio,
+                rings, spinner
             ],
             {
                 width: 7,

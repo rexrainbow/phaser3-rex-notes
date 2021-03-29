@@ -13,6 +13,7 @@ import GridFactory from './grid/Factory.js';
 import LosFactory from './los/Factory.js';
 import OrbitFactory from './orbit/Factory.js';
 import OvalFactory from './oval/Factory.js';
+import PieFactory from './pie/Factory.js';
 import PuffFactory from './puff/Factory.js';
 import RadioFactory from './radio/Factory.js';
 import RingsFactory from './rings/Factory.js';

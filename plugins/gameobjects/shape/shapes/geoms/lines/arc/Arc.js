@@ -1,17 +1,22 @@
 import PathBase from '../PathBase.js';
 import ArcTo from '../../../../utils/pathData/ArcTo.js';
-import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
-import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
+// import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
+// import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 
 class Arc extends PathBase {
-    constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
+    constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
+        if (pie === undefined) {
+            pie = false;
+        }
+
         super();
 
         this.setCenterPosition(x, y);
         this.setRadius(radiusX, radiusY);
         this.setAngle(startAngle, endAngle, anticlockwise);
+        this.setPie(pie);
         this.setIterations(32);
     }
 
@@ -93,15 +98,36 @@ class Arc extends PathBase {
         this._anticlockwise = value;
     }
 
-    setAngle(startAngle, endAngle, anticlockwise) {
+    setAngle(startAngle, endAngle, anticlockwise, pie) {
         // startAngle, endAngle in degrees
         if (anticlockwise === undefined) {
             anticlockwise = false;
+        }
+        if (pie === undefined) {
+            pie = false;
         }
 
         this.startAngle = startAngle;
         this.endAngle = endAngle;
         this.anticlockwise = anticlockwise;
+        this.pie = pie;
+        return this;
+    }
+
+    get pie() {
+        return this._pie;
+    }
+
+    set pie(value) {
+        this.dirty = this.dirty || (this._pie !== value);
+        this._pie = value;
+    }
+
+    setPie(pie) {
+        if (pie === undefined) {
+            pie = true;
+        }
+        this.pie = enable;
         return this;
     }
 
@@ -121,6 +147,9 @@ class Arc extends PathBase {
 
     updateData() {
         this.pathData.length = 0;
+        if (this.pie) {
+            this.pathData.push(this.x, this.y);
+        }
         ArcTo(
             this.x, this.y,
             this.radiusX, this.radiusY,
@@ -128,6 +157,9 @@ class Arc extends PathBase {
             this.iterations,
             this.pathData
         );
+        if (this.pie) {
+            this.pathData.push(this.x, this.y);
+        }
         this.pathData.push(this.pathData[0], this.pathData[1]);
         super.updateData();
         return this;
@@ -135,12 +167,26 @@ class Arc extends PathBase {
 
     // canvasRender(ctx, dx, dy) {
     //     ctx.beginPath();
+    //     var x = this.x - dx,
+    //         y = this.y - dy,
+    //         startAngle = DegToRad(this.startAngle),
+    //         endAngle = DegToRad(this.endAngle);
+    //     if (this.pie) {
+    //         ctx.moveTo(x, y);
+    //         ctx.lineTo(
+    //             x + Math.cos(startAngle) * this.radiusX,
+    //             y + Math.sin(startAngle) * this.radiusY
+    //         );
+    //     }
     //     ctx.ellipse(
-    //         (this.x - dx), (this.y - dy),
+    //         x, y,
     //         this.radiusX, this.radiusY,
     //         0,
-    //         DegToRad(this.startAngle), DegToRad(this.endAngle), this.anticlockwise
+    //         startAngle, endAngle, this.anticlockwise
     //     );
+    //     if (this.pie) {
+    //         ctx.lineTo(x, y);
+    //     }
     //     if (this.isFilled) {
     //         FillStyleCanvas(ctx, this);
     //         ctx.fill();

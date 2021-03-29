@@ -12,7 +12,7 @@ Loading animations on shape.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/spinner)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shape-spinner)
 
 ### Install plugin
 
@@ -180,9 +180,10 @@ spinner.stop();
         // duration: 1000,
         // start: true,
 
-        create: {
-            shapeType: name,
-            // shapeType: number
+        create: {            
+            // shapeType: [name0, name1, ...],
+            // shapeType: number,
+            // shapeType: name,
         },
 
         // create: function() {
@@ -204,6 +205,7 @@ spinner.stop();
                 - `'lines'` : Create [Lines shape](shape-spinner.md#lines).
                 - `'rectangle'` : Create [Rectangle shape](shape-spinner.md#rectangle).
                 - `'triangle'` : Create [Triangle shape](shape-spinner.md#triangle).
+            - `nameArray` : An array of unique string name for each shape.
             - `name` : An unique string name of this shape.
             - `number` : Amount of shapes to create.
         - A callback
@@ -420,7 +422,7 @@ spinner.stop();
         ```javascript
         var startAngle = arc.startAngle;
         var endAngle = arc.endAngle;
-        var anticlockwise = arc.anticlockwise;
+        var anticlockwise = arc.anticlockwise; // boolean        
         ```
     - Set
         ```javascript
@@ -434,6 +436,19 @@ spinner.stop();
         arc.anticlockwise = anticlockwise; // boolean
         ```
         - `startAngle`, `endAngle` : Start/end angle in degrees.
+- Pie
+    - Get
+        ```javascript
+        var pie = arc.pie; // boolean
+        ```
+    - Set
+        ```javascript
+        arc.setPie();
+        ```
+        or
+        ```javascript
+        arc.pie = true;
+        ```
 
 ##### Circle
 

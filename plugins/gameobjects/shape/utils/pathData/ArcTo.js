@@ -5,7 +5,9 @@ const DegToRad = Phaser.Math.DegToRad;
 var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, out) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise) {
-        endAngle -= 360;
+        if (endAngle > startAngle) {
+            endAngle -= 360;
+        }
     }
 
     var deltaAngle = endAngle - startAngle;

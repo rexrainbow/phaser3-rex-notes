@@ -36,12 +36,23 @@ class Custom extends BaseSpinner {
             var shapes = createCallback;
             for (var shapeType in shapes) {
                 var name = shapes[shapeType];
-                if (typeof (name) === 'number') {
-                    for (var i = 0; i < name; i++) {
-                        this.addShape(this.createShape(shapeType));
-                    }
-                } else {
-                    this.addShape(this.createShape(shapeType, name));
+                switch (typeof (name)) {
+                    case 'number':
+                        for (var i = 0; i < name; i++) {
+                            this.addShape(this.createShape(shapeType));
+                        }
+                        break;
+
+                    case 'string':
+                        this.addShape(this.createShape(shapeType, name));
+                        break;
+
+                    default: //Array
+                        var names = name;
+                        for (var i = 0, cnt = names.length; i < cnt; i++) {
+                            this.addShape(this.createShape(shapeType, names[i]));
+                        }
+                        break;
                 }
             }
         }

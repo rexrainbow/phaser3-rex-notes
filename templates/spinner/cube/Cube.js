@@ -43,7 +43,7 @@ class Cube extends BaseSpinner {
             t = Fold(t);
             t = ExpoIn(t);
 
-            var lineAlpha = Linear(0.25, 1, 1 - (i / (cnt - 1)));
+            var lineAlpha = (cnt - i) / cnt;
             var lineHeight = Linear(0.7, 1, t) * cellHeight;
             var lineWidth = Linear(0.7, 1, t) * cellWidth;
 
