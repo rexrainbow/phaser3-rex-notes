@@ -127,7 +127,7 @@ class Arc extends PathBase {
         if (pie === undefined) {
             pie = true;
         }
-        this.pie = enable;
+        this.pie = pie;
         return this;
     }
 
