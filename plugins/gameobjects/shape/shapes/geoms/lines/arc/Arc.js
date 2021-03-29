@@ -2,8 +2,7 @@ import PathBase from '../PathBase.js';
 import ArcTo from '../../../../utils/pathData/ArcTo.js';
 // import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
 // import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
-
-const DegToRad = Phaser.Math.DegToRad;
+// const DegToRad = Phaser.Math.DegToRad;
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
@@ -98,19 +97,15 @@ class Arc extends PathBase {
         this._anticlockwise = value;
     }
 
-    setAngle(startAngle, endAngle, anticlockwise, pie) {
+    setAngle(startAngle, endAngle, anticlockwise) {
         // startAngle, endAngle in degrees
         if (anticlockwise === undefined) {
             anticlockwise = false;
-        }
-        if (pie === undefined) {
-            pie = false;
         }
 
         this.startAngle = startAngle;
         this.endAngle = endAngle;
         this.anticlockwise = anticlockwise;
-        this.pie = pie;
         return this;
     }
 
