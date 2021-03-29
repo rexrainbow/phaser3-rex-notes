@@ -1,3 +1,5 @@
+import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -8,13 +10,17 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var spinner = this.rexSpinner.add.los({
+            x: 400, y: 300,
+            width: 80, height: 80
+        });
     }
 
     update() { }
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,

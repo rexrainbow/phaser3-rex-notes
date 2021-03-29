@@ -18,6 +18,8 @@ class Los extends BaseSpinner {
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
+        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
+
         var radius = this.radius;
         var startRadius = radius / 2;
         var lineWidth = Math.ceil(radius / 20);
@@ -27,17 +29,23 @@ class Los extends BaseSpinner {
             var t = i / cnt;
             var angle = Math.PI * 2 * t;
             var alpha = Linear(0.25, 1, (1 - this.value + t) % 1);
-            line
-                .lineStyle(lineWidth, this.color, alpha)
-                .setP0(
-                    centerX + Math.cos(angle) * startRadius,
-                    centerY + Math.sin(angle) * startRadius
-                )
-                .setP1(
-                    centerX + Math.cos(angle) * radius,
-                    centerY + Math.sin(angle) * radius
-                )
+            line.lineStyle(lineWidth, this.color, alpha);
+
+            if (isSizeChanged) {
+                line
+                    .setP0(
+                        centerX + Math.cos(angle) * startRadius,
+                        centerY + Math.sin(angle) * startRadius
+                    )
+                    .setP1(
+                        centerX + Math.cos(angle) * radius,
+                        centerY + Math.sin(angle) * radius
+                    )
+            }
         }
+
+        this.prevCenterX = centerX;
+        this.prevCenterY = centerY;
     }
 }
 

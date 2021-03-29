@@ -1,4 +1,5 @@
 import PathBase from './PathBase.js';
+import ArcTo from '../../../utils/pathData/ArcTo.js';
 
 const RotateAround = Phaser.Math.RotateAround;
 const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
@@ -38,6 +39,26 @@ class Lines extends PathBase {
         this.pathData.push(x, y);
         this.lastPointX = x;
         this.lastPointY = y;
+        return this;
+    }
+
+    arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+        if (anticlockwise === undefined) {
+            anticlockwise = false;
+        }
+
+        this.dirty = true;
+        ArcTo(
+            centerX, centerY,
+            radius, radius,
+            startAngle, endAngle, anticlockwise,
+            this.iterations,
+            this.pathData
+        );
+
+        var pathDataCnt = this.pathData.length;
+        this.lastPointX = this.pathData[pathDataCnt - 2];
+        this.lastPointY = this.pathData[pathDataCnt - 1];
         return this;
     }
 

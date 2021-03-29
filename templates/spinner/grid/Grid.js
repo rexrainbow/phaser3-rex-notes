@@ -27,6 +27,8 @@ class Grid extends BaseSpinner {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
+        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
+
         var leftBound = centerX - radius;
         var topBound = centerY - radius;
         var cellWidth = (radius * 2) / ColNum;
@@ -44,12 +46,17 @@ class Grid extends BaseSpinner {
             var dot = shapes[i];
             var t = (this.value + dot.getData('offset')) % 1;
             t = Fold(t);
-            var dotAlpha = Linear(0.25, 1, t);
-            dot
-                .fillStyle(this.color, dotAlpha)
-                .setRadius(maxDotRadius)
-                .setCenterPosition(x, y)
+            dot.fillStyle(this.color, Linear(0.25, 1, t));
+
+            if (isSizeChanged) {
+                dot
+                    .setRadius(maxDotRadius)
+                    .setCenterPosition(x, y)
+            }
         }
+
+        this.prevCenterX = centerX;
+        this.prevCenterY = centerY;
     }
 }
 

@@ -1,5 +1,5 @@
 import BaseSpinner from '../base/BaseSpinner.js';
-import { Arc, Circle } from '../utils/Geoms.js';
+import { Circle, Lines } from '../utils/Geoms.js';
 import Fold from '../utils/Fold.js';
 
 const Linear = Phaser.Math.Linear;
@@ -13,17 +13,17 @@ class Radio extends BaseSpinner {
 
     buildShapes() {
         this.addShape((new Circle()).setName('center'));
-        this.addShape((new Arc()).setName('arc0'));
-        this.addShape((new Arc()).setName('arc1'));
+        this.addShape((new Lines()).setName('arc0'));
+        this.addShape((new Lines()).setName('arc1'));
     }
 
     updateShapes() {
         var centerX = this.centerX;
         var centerY = this.centerY;
         var radius = this.radius;
+        var isSizeChanged = (this.prevCenterX !== centerX) || (this.prevCenterY !== centerY);
 
         var centerRadius = (radius * 2) / 6;
-        var arcWidth = centerRadius;
         var x = centerX - radius + centerRadius;
         var y = centerY + radius - centerRadius;
 
@@ -37,28 +37,49 @@ class Radio extends BaseSpinner {
 
             switch (shape.name) {
                 case 'center':
-                    shape
-                        .fillStyle(this.color, Linear(0.25, 1, t))
-                        .setRadius(centerRadius)
-                        .setCenterPosition(x, y);
+                    shape.fillStyle(this.color, Linear(0.25, 1, t))
+
+                    if (isSizeChanged) {
+                        shape
+                            .setRadius(centerRadius)
+                            .setCenterPosition(x, y);
+                    }
                     break;
                 case 'arc0':
-                    shape
-                        .lineStyle(arcWidth, this.color, Linear(0.25, 1, t))
-                        .setRadius(centerRadius * 2.5)
-                        .setCenterPosition(x, y)
-                        .setAngle(270, 360);
+                    shape.fillStyle(this.color, Linear(0.25, 1, t));
+
+                    if (isSizeChanged) {
+                        var radius0 = centerRadius * 2,
+                            radius1 = centerRadius * 3;
+                        shape
+                            .startAt(x, y - radius0)
+                            .lineTo(x, y - radius1)
+                            .setIterations(8).arc(x, y, radius1, 270, 360)
+                            .lineTo(x + radius0, y)
+                            .setIterations(6).arc(x, y, radius0, 360, 270, true)
+                            .close();
+                    }
                     break;
                 case 'arc1':
-                    shape
-                        .lineStyle(arcWidth, this.color, Linear(0.25, 1, t))
-                        .setRadius(centerRadius * 4.5)
-                        .setCenterPosition(x, y)
-                        .setAngle(270, 360);
+                    shape.fillStyle(this.color, Linear(0.25, 1, t));
+
+                    if (isSizeChanged) {
+                        var radius0 = centerRadius * 4,
+                            radius1 = centerRadius * 5;
+                        shape
+                            .startAt(x, y - radius0)
+                            .lineTo(x, y - radius1)
+                            .setIterations(8).arc(x, y, radius1, 270, 360)
+                            .lineTo(x + radius0, y)
+                            .setIterations(6).arc(x, y, radius0, 360, 270, true)
+                            .close();
+                    }
                     break;
             }
         }
 
+        this.prevCenterX = centerX;
+        this.prevCenterY = centerY;
     }
 }
 
