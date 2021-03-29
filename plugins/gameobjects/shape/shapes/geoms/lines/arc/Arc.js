@@ -1,8 +1,8 @@
 import PathBase from '../PathBase.js';
 import ArcTo from '../../../../utils/pathData/ArcTo.js';
-// import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
-// import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
-// const DegToRad = Phaser.Math.DegToRad;
+import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
+import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
+const DegToRad = Phaser.Math.DegToRad;
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
@@ -160,37 +160,37 @@ class Arc extends PathBase {
         return this;
     }
 
-    // canvasRender(ctx, dx, dy) {
-    //     ctx.beginPath();
-    //     var x = this.x - dx,
-    //         y = this.y - dy,
-    //         startAngle = DegToRad(this.startAngle),
-    //         endAngle = DegToRad(this.endAngle);
-    //     if (this.pie) {
-    //         ctx.moveTo(x, y);
-    //         ctx.lineTo(
-    //             x + Math.cos(startAngle) * this.radiusX,
-    //             y + Math.sin(startAngle) * this.radiusY
-    //         );
-    //     }
-    //     ctx.ellipse(
-    //         x, y,
-    //         this.radiusX, this.radiusY,
-    //         0,
-    //         startAngle, endAngle, this.anticlockwise
-    //     );
-    //     if (this.pie) {
-    //         ctx.lineTo(x, y);
-    //     }
-    //     if (this.isFilled) {
-    //         FillStyleCanvas(ctx, this);
-    //         ctx.fill();
-    //     }
-    //     if (this.isStroked) {
-    //         LineStyleCanvas(ctx, this);
-    //         ctx.stroke();
-    //     }
-    // }
+    canvasRender(ctx, dx, dy) {
+        ctx.beginPath();
+        var x = this.x - dx,
+            y = this.y - dy,
+            startAngle = DegToRad(this.startAngle),
+            endAngle = DegToRad(this.endAngle);
+        if (this.pie) {
+            ctx.moveTo(x, y);
+            ctx.lineTo(
+                x + Math.cos(startAngle) * this.radiusX,
+                y + Math.sin(startAngle) * this.radiusY
+            );
+        }
+        ctx.ellipse(
+            x, y,
+            this.radiusX, this.radiusY,
+            0,
+            startAngle, endAngle, this.anticlockwise
+        );
+        if (this.pie) {
+            ctx.lineTo(x, y);
+        }
+        if (this.isFilled) {
+            FillStyleCanvas(ctx, this);
+            ctx.fill();
+        }
+        if (this.isStroked) {
+            LineStyleCanvas(ctx, this);
+            ctx.stroke();
+        }
+    }
 }
 
 export default Arc;

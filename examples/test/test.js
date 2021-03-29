@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,

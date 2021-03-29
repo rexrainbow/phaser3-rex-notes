@@ -47,6 +47,7 @@ class Pie extends BaseSpinner {
                     .setData('angle', startAngle);
             } else {
                 var startAngle = pie.getData('angle') + pie.getData('speed') * deltaValue;
+                startAngle = startAngle % 360;
                 var endAngle = startAngle + 90;
                 pie
                     .fillStyle(this.color, pieAlpha)
