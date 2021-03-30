@@ -312,13 +312,39 @@ spinner.stop();
     ```javascript
     lines.startAt(x, y);
     ```
-- Line to position
-    ```javascript
-    lines.lineTo(x, y);
-    ```
+- Line to
+    - To position
+        ```javascript
+        lines.lineTo(x, y);
+        ```
+    - To relative position
+        ```javascript
+        lines.lineTo(x, y, true);
+        ```
+    - To vertical position
+        ```javascript
+        lines.verticalLineTo(x);
+        ```
+    - To relative vertical position
+        ```javascript
+        lines.verticalLineTo(x, true);
+        ```
+    - To horizontal position
+        ```javascript
+        lines.horizontalLineTo(y);
+        ```
+    - To relative horizontal position
+        ```javascript
+        lines.horizontalLineTo(y, true);
+        ```
 - Add arc composed of lines
     ```javascript
     lines.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+    ```
+    - `startAngle`, `endAngle` : Start and end angle in degrees.
+- Add elliptical arc composed of lines
+    ```javascript
+    lines.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
     ```
     - `startAngle`, `endAngle` : Start and end angle in degrees.
 - Close path

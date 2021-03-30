@@ -6045,11 +6045,35 @@
 <li>Start position
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">startAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Line to position
+<li>Line to<ul>
+<li>To position
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
+<li>To relative position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To vertical position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">verticalLineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To relative vertical position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">verticalLineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To horizontal position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">horizontalLineTo</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To relative horizontal position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">horizontalLineTo</span><span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Add arc composed of lines
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
+</ul>
+</li>
+<li>Add elliptical arc composed of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">ellipticalArc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
 </ul>

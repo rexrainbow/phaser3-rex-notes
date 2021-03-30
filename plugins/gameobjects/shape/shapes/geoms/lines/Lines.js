@@ -35,7 +35,15 @@ class Lines extends PathBase {
         return this;
     }
 
-    lineTo(x, y) {
+    lineTo(x, y, relative) {
+        if (relative === undefined) {
+            relative = false;
+        }
+        if (relative) {
+            x += this.lastPointX;
+            y += this.lastPointY;
+        }
+
         this.dirty = true;
         this.pathData.push(x, y);
         this.lastPointX = x;
@@ -43,7 +51,17 @@ class Lines extends PathBase {
         return this;
     }
 
-    arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+    verticalLineTo(x, relative) {
+        this.lineTo(x, this.lastPointY, relative);
+        return this;
+    }
+
+    horizontalLineTo(y, relative) {
+        this.lineTo(this.lastPointX, y, relative);
+        return this;
+    }
+
+    ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
         if (anticlockwise === undefined) {
             anticlockwise = false;
         }
@@ -51,7 +69,7 @@ class Lines extends PathBase {
         this.dirty = true;
         ArcTo(
             centerX, centerY,
-            radius, radius,
+            radiusX, radiusY,
             startAngle, endAngle, anticlockwise,
             this.iterations,
             this.pathData
@@ -60,6 +78,11 @@ class Lines extends PathBase {
         var pathDataCnt = this.pathData.length;
         this.lastPointX = this.pathData[pathDataCnt - 2];
         this.lastPointY = this.pathData[pathDataCnt - 1];
+        return this;
+    }
+
+    arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
+        this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise)
         return this;
     }
 
