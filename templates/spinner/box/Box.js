@@ -42,7 +42,7 @@ class Box extends BaseSpinner {
 
         } else { // Rotate
             var t = (this.value - 0.5) * 2;
-            var angle = Math.PI * t;
+            var angle = 180 * t;
 
             this.getShape('border').rotateAround(centerX, centerY, angle);
             this.getShape('fill').fillStyle().lineStyle();

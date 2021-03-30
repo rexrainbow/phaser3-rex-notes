@@ -218,7 +218,7 @@ spinner.stop();
                 this.addShape(shape);
             }
             ```
-            - `this.createShape(shapeType, name)` : Crate a shape instance
+            - `this.createShape(shapeType, name)` : Crate a shape instance, with an unique name.
             - `this.addShape(shape)` : Add this shape instance to this custom spinner.
     - `update` : Callback when porgressing
         ```javascript
@@ -316,14 +316,20 @@ spinner.stop();
     ```javascript
     lines.lineTo(x, y);
     ```
+- Add arc composed of lines
+    ```javascript
+    lines.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+    ```
+    - `startAngle`, `endAngle` : Start and end angle in degrees.
 - Close path
     ```javascript
     lines.close();
     ```
 - Rotation all points
     ```javascript
-    lines.rotateAround(x, y, angle);
+    lines.rotateAround(centerX, centerY, angle);
     ```
+    - `angle` : Rotate angle in degrees.
 
 ##### Rectangle
 

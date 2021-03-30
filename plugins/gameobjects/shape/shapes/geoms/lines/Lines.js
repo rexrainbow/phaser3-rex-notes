@@ -1,6 +1,7 @@
 import PathBase from './PathBase.js';
 import ArcTo from '../../../utils/pathData/ArcTo.js';
 
+const DegToRad = Phaser.Math.DegToRad;
 const RotateAround = Phaser.Math.RotateAround;
 const QuadraticBezierInterpolation = Phaser.Math.Interpolation.QuadraticBezier;
 const CubicBezierInterpolation = Phaser.Math.Interpolation.CubicBezier;
@@ -120,16 +121,18 @@ class Lines extends PathBase {
         return this;
     }
 
-    rotateAround(x, y, angle) {
+    rotateAround(centerX, centerY, angle) {
         if (this.pathData.length === 0) {
             return this;
         }
+
+        angle = DegToRad(angle);
 
         var point = { x: 0, y: 0 };
         for (var i = 0, cnt = this.pathData.length - 1; i < cnt; i += 2) {
             point.x = this.pathData[i];
             point.y = this.pathData[i + 1];
-            RotateAround(point, x, y, angle);
+            RotateAround(point, centerX, centerY, angle);
             this.pathData[i] = point.x;
             this.pathData[i + 1] = point.y;
         }
@@ -140,7 +143,7 @@ class Lines extends PathBase {
         if (this.lastCX !== undefined) {
             point.x = this.lastCX;
             point.y = this.lastCY;
-            RotateAround(point, x, y, angle);
+            RotateAround(point, centerX, centerY, angle);
             this.lastCX = point.x;
             this.lastCY = point.y;
         }

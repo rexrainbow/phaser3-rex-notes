@@ -5941,7 +5941,7 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">addShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>this.createShape(shapeType, name)</code> : Crate a shape instance</li>
+<li><code>this.createShape(shapeType, name)</code> : Crate a shape instance, with an unique name.</li>
 <li><code>this.addShape(shape)</code> : Add this shape instance to this custom spinner.</li>
 </ul>
 </li>
@@ -6048,12 +6048,21 @@
 <li>Line to position
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
+<li>Add arc composed of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
+</ul>
+</li>
 <li>Close path
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Rotation all points
-    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
-</code></pre></div></li>
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle</code> : Rotate angle in degrees.</li>
+</ul>
+</li>
 </ul>
 <h5 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h5>
 <ul>

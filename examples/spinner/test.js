@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var spinner = this.rexSpinner.add.los({
+        var spinner = this.rexSpinner.add.box({
             x: 400, y: 300,
             width: 80, height: 80
         });
