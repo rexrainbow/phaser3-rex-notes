@@ -24,7 +24,7 @@ var MaskChildren = function (parent, mask, children) {
         if (child === maskGameObject) {
             continue;
         }
-        if (!parent.getLocalState(child).visible) { // Child is invisible before masking
+        if (!isChildVisible(child)) {  // Child is invisible before masking
             continue;
         }
 
@@ -50,6 +50,19 @@ var MaskChildren = function (parent, mask, children) {
         } else {
             showSome(parent, child, mask);
         }
+    }
+}
+
+// Child is invisible before masking
+var isChildVisible = function (child) {
+    var localState = child.rexContainer;
+    if (!localState) {
+        return child.visible;
+    } else if (localState.visible) {
+        var parent = localState.parent;
+        return (parent) ? isChildVisible(parent) : true;
+    } else {
+        return false;
     }
 }
 
