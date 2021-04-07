@@ -102,26 +102,26 @@ Default style
     fontFamily: 'Courier',
     fontSize: '16px',
     fontStyle: '',
-    backgroundColor: null,
-    backgroundColor2: null,
+    backgroundColor: null,  // null, css string, or number
+    backgroundColor2: null,  // null, css string, or number
     backgroundHorizontalGradient: true,
-    backgroundStrokeColor: null,
+    backgroundStrokeColor: null,  // null, css string, or number
     backgroundStrokeLineWidth: 2,
     backgroundCornerRadius: 0,
     backgroundCornerIteration: null,    
-    color: '#fff',
-    stroke: '#fff',
+    color: '#fff',  // null, css string, or number
+    stroke: '#fff',  // null, css string, or number
     strokeThickness: 0,
     shadow: {
         offsetX: 0,
         offsetY: 0,
-        color: '#000',
+        color: '#000',  // css string, or number
         blur: 0,
         stroke: false,
         fill: false
     },
     underline: {
-        color: '#000',
+        color: '#000',  // css string, or number
         thickness: 0,
         offset: 0
     },
@@ -239,12 +239,18 @@ var txt = scene.make.rexBBCodeText({
             font: 'bold 25px Arial',
             fill: 'white',
             wrap: {
-                mode: 'word'     // 0|'none'|1|'word'|2|'char'|'character'
-                width: 300
+                mode: 0     // 0|'none'|1|'word'|2|'char'|'character'
+                width: 0
             }
         }
     });
     ```
+    - `wrap.mode` : 
+        - `0`, or `'none'` : No wrapping, default behavior.
+        - `1`, or `'word'` : Word wrapping.
+        - `2`, or `'char'`, or `'character'` : Character wrapping.
+    - `wrap.width` : Maximun wrapping width of a line.
+        - Wrap-fit : Set wrapping width to `fixedWidth - padding.left - padding.right` if `fixedWidth > 0`
 - Wrap mode
     - Get
         ```javascript
@@ -254,9 +260,9 @@ var txt = scene.make.rexBBCodeText({
         ```javascript
         txt.setWrapMode(mode);
         ```
-        - `'none'`, or `0` : No wrap
-        - `'word'`, or `1` : Word wrap
-        - `'character'`, or `2` : Character wrap
+        - `0`, or `'none'` : No wrapping.
+        - `1`, or `'word'` : Word wrapping.
+        - `2`, or `'char'`, or `'character'` : Character wrapping.
 - Wrap width
     - Get
         ```javascript
@@ -266,6 +272,8 @@ var txt = scene.make.rexBBCodeText({
         ```javascript
         txt.setWrapWidth(width);
         ```
+        - `width` : Maximun wrapping width of a line.
+            - Wrap-fit : Set wrapping width to `fixedWidth - padding.left - padding.right` if `fixedWidth > 0`
 
 ### Content
 
@@ -308,6 +316,7 @@ txt.setFontStyle(style);
         ```javascript
         txt.setFill(color);
         ```
+        - `color` : `null`, css string, or number.
 - Stroke color, thickness
     - Get
         ```javascript
@@ -318,6 +327,7 @@ txt.setFontStyle(style);
         ```javascript
         txt.setStroke(color, thickness);
         ```
+        - `color` : `null`, css string, or number.
     - Clear
         ```javascript
         txt.setStroke();
@@ -336,6 +346,7 @@ txt.setFontStyle(style);
         txt.setUnderlineThinkness(thickness);
         txt.setUnderlineOffset(ofset);
         ```
+        - `color` : `null`, css string, or number.
 - Background
     - Color, or gradient color
         - Get
@@ -349,6 +360,7 @@ txt.setFontStyle(style);
             txt.setBackgroundColor(color);
             // txt.setBackgroundColor(color, color2, isHorizontalGradient);
             ```
+            - `color`, `color2` : `null`, css string, or number.
     - Stroke color
         - Get
            ```javascript
@@ -359,6 +371,7 @@ txt.setFontStyle(style);
             ```javascript
             txt.setBackgroundStrokeColor(color, lineWidth);
             ```
+            - `color` : `null`, css string, or number.
     - Round rectangle
         - Get
             ```javascript
@@ -392,6 +405,7 @@ txt.setFontStyle(style);
         txt.setShadowStroke(enabled);
         txt.setShadowFill(enabled);
         ```
+        - `color` : `null`, css string, or number.
 
 ### Image
 

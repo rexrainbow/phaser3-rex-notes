@@ -1,9 +1,3 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2018 Photon Storm Ltd.
- * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
- */
-
 import MeasureText from './MeasureText.js';
 import CONST from '../const.js';
 import GetStyle from '../../../../utils/canvas/GetStyle.js';
@@ -11,69 +5,56 @@ import GetStyle from '../../../../utils/canvas/GetStyle.js';
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-//  Key: [ Object Key, Default Value ]
-
-/**
- * A custom function that will be responsible for wrapping the text.
- * @callback TextStyleWordWrapCallback
- *
- * @param {string} text - The string to wrap.
- * @param {Phaser.GameObjects.Text} textObject - The Text instance.
- *
- * @return {(string|string[])} Should return the wrapped lines either as an array of lines or as a string with
- * newline characters in place to indicate where breaks should happen.
- */
+//  Key: [ Object Key, Default Value, postCallback ]
 
 var propertyMap = {
     // background
-    backgroundColor: ['backgroundColor', null],
-    backgroundColor2: ['backgroundColor2', null],
-    backgroundHorizontalGradient: ['backgroundHorizontalGradient', true],
-    backgroundCornerRadius: ['backgroundCornerRadius', 0],
-    backgroundStrokeColor: ['backgroundStrokeColor', null],
-    backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2],
-    backgroundCornerIteration: ['backgroundCornerIteration', null],
+    backgroundColor: ['backgroundColor', null, GetStyle],
+    backgroundColor2: ['backgroundColor2', null, GetStyle],
+    backgroundHorizontalGradient: ['backgroundHorizontalGradient', true, null],
+    backgroundCornerRadius: ['backgroundCornerRadius', 0, null],
+    backgroundStrokeColor: ['backgroundStrokeColor', null, GetStyle],
+    backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2, null],
+    backgroundCornerIteration: ['backgroundCornerIteration', null, null],
 
     // font
-    fontFamily: ['fontFamily', 'Courier'],
-    fontSize: ['fontSize', '16px'],
-    fontStyle: ['fontStyle', ''],
-    color: ['color', '#fff'],
-    stroke: ['stroke', '#fff'],
-    strokeThickness: ['strokeThickness', 0],
-    shadowOffsetX: ['shadow.offsetX', 0],
-    shadowOffsetY: ['shadow.offsetY', 0],
-    shadowColor: ['shadow.color', '#000'],
-    shadowBlur: ['shadow.blur', 0],
-    shadowStroke: ['shadow.stroke', false],
-    shadowFill: ['shadow.fill', false],
+    fontFamily: ['fontFamily', 'Courier', null],
+    fontSize: ['fontSize', '16px', null],
+    fontStyle: ['fontStyle', '', null],
+    color: ['color', '#fff', GetStyle],
+    stroke: ['stroke', '#fff', GetStyle],
+    strokeThickness: ['strokeThickness', 0, null],
+    shadowOffsetX: ['shadow.offsetX', 0, null],
+    shadowOffsetY: ['shadow.offsetY', 0, null],
+    shadowColor: ['shadow.color', '#000', GetStyle],
+    shadowBlur: ['shadow.blur', 0, null],
+    shadowStroke: ['shadow.stroke', false, null],
+    shadowFill: ['shadow.fill', false, null],
 
     // underline
-    underlineColor: ['underline.color', '#000'],
-    underlineThickness: ['underline.thickness', 0],
-    underlineOffset: ['underline.offset', 0],
+    underlineColor: ['underline.color', '#000', GetStyle],
+    underlineThickness: ['underline.thickness', 0, null],
+    underlineOffset: ['underline.offset', 0, null],
 
     // align
-    halign: ['halign', 'left'],
-    valign: ['valign', 'top'],
+    halign: ['halign', 'left', null],
+    valign: ['valign', 'top', null],
 
     // size
-    maxLines: ['maxLines', 0],
-    fixedWidth: ['fixedWidth', 0],
-    fixedHeight: ['fixedHeight', 0],
-    resolution: ['resolution', 0],
-    lineSpacing: ['lineSpacing', 0],
+    maxLines: ['maxLines', 0, null],
+    fixedWidth: ['fixedWidth', 0, null],
+    fixedHeight: ['fixedHeight', 0, null],
+    resolution: ['resolution', 0, null],
+    lineSpacing: ['lineSpacing', 0, null],
 
-    rtl: ['rtl', false],
-    testString: ['testString', '|MÃ‰qgy'],
-    baselineX: ['baselineX', 1.2],
-    baselineY: ['baselineY', 1.4],
+    rtl: ['rtl', false, null],
+    testString: ['testString', '|MÃ‰qgy', null],
+    baselineX: ['baselineX', 1.2, null],
+    baselineY: ['baselineY', 1.4, null],
 
     // wrap
-    wrapMode: ['wrap.mode', 1],
-    wrapWidth: ['wrap.width', 0]
-    //wrapCallback: ['wrap.callback', null],
-    //wrapCallbackScope: ['wrap.callbackScope', null]
+    wrapMode: ['wrap.mode', 0, null],
+    wrapWidth: ['wrap.width', 0, null]
 };
 
 class TextStyle {
@@ -149,6 +130,10 @@ class TextStyle {
         return this.parent.canvasText.context;
     }
 
+    get isWrapFitMode() {
+        return (this.fixedWidth > 0) && (this.wrapMode !== CONST.NO_WRAP) && (this.wrapWidth === 0);
+    }
+
     setStyle(style, updateText) {
         if (updateText === undefined) {
             updateText = true;
@@ -174,12 +159,16 @@ class TextStyle {
         }
 
         for (var key in propertyMap) {
-            if (key === 'wrapCallback' || key === 'wrapCallbackScope') {
-                // Callback & scope should be set without processing the values
-                this[key] = GetValue(style, propertyMap[key][0], propertyMap[key][1]);
-            } else {
-                this[key] = GetAdvancedValue(style, propertyMap[key][0], propertyMap[key][1]);
+            var prop = propertyMap[key];  // [ Object Key, Default Value, preCallback ]
+            var objKey = prop[0];
+            var defaultValue = prop[1];
+            var postCallback = prop[2];
+
+            var value = GetAdvancedValue(style, objKey, defaultValue);
+            if (postCallback) {
+                value = postCallback(value);
             }
+            this[key] = value;
         }
 
         //  Allow for 'font' override
@@ -307,7 +296,7 @@ class TextStyle {
             this.parent.height = height;
         }
 
-        return this.update(false);
+        return this.update(this.isWrapFitMode);
     }
 
     setResolution(value) {
