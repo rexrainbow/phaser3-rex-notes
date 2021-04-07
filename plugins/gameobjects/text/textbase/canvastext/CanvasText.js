@@ -59,6 +59,10 @@ class CanvasText {
         if (text === "") {
             return penManager;
         }
+        if (this.parent.style.isWrapFitMode) {
+            var padding = this.parent.padding;
+            wrapWidth = this.parent.style.fixedWidth - padding.left - padding.right;
+        }
 
         var canvas = this.canvas;
         var context = this.context;
