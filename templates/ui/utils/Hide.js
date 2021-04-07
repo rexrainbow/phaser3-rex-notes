@@ -8,7 +8,7 @@ var Hide = function (gameObject) {
     _hide(gameObject, true);
 };
 
-var IsShown = function(gameObject) {
+var IsShown = function (gameObject) {
     if (!gameObject) {
         return false;
     }
@@ -22,7 +22,7 @@ var _hide = function (gameObject, hidden) {
     }
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
-    gameObject.setVisible(!hidden);
+    gameObject.rexContainer.parent.setChildVisible(gameObject, !hidden);
 };
 
 export {
