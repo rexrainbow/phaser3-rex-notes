@@ -4,7 +4,7 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import ResetChildPosition from './ResetChildPosition.js';
 import _layout from './Layout.js';
-import ChildrenMaskMethods from '../utils/ChildrenMaskMethods.js';
+import ChildrenMaskMethods from '../../utils/ChildrenMaskMethods.js';
 
 var methods = {
     setChild: SetChild,

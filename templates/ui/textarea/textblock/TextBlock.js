@@ -1,4 +1,4 @@
-import BaseSizer from '../basesizer/BaseSizer.js';
+import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';

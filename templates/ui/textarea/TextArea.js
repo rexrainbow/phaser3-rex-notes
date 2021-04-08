@@ -1,5 +1,5 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
-import TextBlock from '../textblock/TextBlock.js';
+import TextBlock from './textblock/TextBlock.js';
 import InjectProperties from './InjectProperties.js';
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';

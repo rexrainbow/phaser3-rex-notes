@@ -1,4 +1,4 @@
-import { GetDisplayWidth } from '../../../plugins/utils/size/GetDisplaySize.js';
+import { GetDisplayWidth } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
 var GetChildrenWidth = function () {
     if (this.rexSizer.hidden) {

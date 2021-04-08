@@ -1,4 +1,4 @@
-import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
+import ResizeGameObject from '../../../../plugins/utils/size/ResizeGameObject.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip hidden or !dirty sizer

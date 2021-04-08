@@ -1,5 +1,5 @@
-import GetBoundsConfig from '../utils/GetBoundsConfig.js';
-import IsTextGameObject from '../../../plugins/utils/text/IsTextGameObject.js';
+import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
+import IsTextGameObject from '../../../../plugins/utils/text/IsTextGameObject.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 

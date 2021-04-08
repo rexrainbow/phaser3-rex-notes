@@ -1,7 +1,7 @@
-import BaseSizer from '../basesizer/BaseSizer.js';
+import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import SCROLLMODE from '../utils/ScrollModeConst.js';
-import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import SCROLLMODE from '../../utils/ScrollModeConst.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

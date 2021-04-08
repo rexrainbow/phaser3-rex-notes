@@ -1,4 +1,4 @@
-import AddChildMask from '../utils/AddChildMask.js';
+import AddChildMask from '../../utils/AddChildMask.js';
 import SetTextObject from './SetTextObject.js';
 import SetText from './SetText.js';
 import UpdateTextObject from './UpdateTextObject.js';

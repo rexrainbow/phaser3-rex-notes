@@ -1,6 +1,6 @@
 import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
-import ScrollableBlock from '../scrollableblock/ScrollableBlock.js';
+import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

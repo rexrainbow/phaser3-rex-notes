@@ -28,9 +28,7 @@ import Menu from './menu/Menu.js';
 import TextBox from './textbox/TextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import Pages from './pages/Pages.js';
-import TextBlock from './textblock/TextBlock.js';
 import TextArea from './textarea/TextArea.js';
-import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import Toast from './toast/Toast.js';
 import Sides from './sides/Sides.js';
@@ -88,9 +86,7 @@ export {
     TextBox,
     NumberBar,
     Pages,
-    TextBlock,
     TextArea,
-    ScrollableBlock,
     ScrollablePanel,
     Toast,
     Sides,

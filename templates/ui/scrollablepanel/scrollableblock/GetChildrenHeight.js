@@ -1,4 +1,4 @@
-import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import { GetDisplayHeight } from '../../../../plugins/utils/size/GetDisplaySize.js';
 
 var GetChildrenHeight = function () {
     if (this.rexSizer.hidden) {
