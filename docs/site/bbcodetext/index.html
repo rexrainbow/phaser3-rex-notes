@@ -5793,26 +5793,26 @@
     <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
     <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
     <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">backgroundColor2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// null, css string, or number</span>
+    <span class="nx">backgroundColor2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// null, css string, or number</span>
     <span class="nx">backgroundHorizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">backgroundStrokeColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundStrokeColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// null, css string, or number</span>
     <span class="nx">backgroundStrokeLineWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="nx">backgroundCornerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">backgroundCornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>    
-    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-    <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>  <span class="c1">// null, css string, or number</span>
+    <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>  <span class="c1">// null, css string, or number</span>
     <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>  <span class="c1">// css string, or number</span>
         <span class="nx">blur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
     <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>  <span class="c1">// css string, or number</span>
         <span class="nx">thickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">offset</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">},</span>
@@ -5934,12 +5934,24 @@
         <span class="nx">font</span><span class="o">:</span> <span class="s1">&#39;bold 25px Arial&#39;</span><span class="p">,</span>
         <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
         <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;word&#39;</span>     <span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
-            <span class="nx">width</span><span class="o">:</span> <span class="mi">300</span>
+            <span class="nx">mode</span><span class="o">:</span> <span class="mi">0</span>     <span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>wrap.mode</code> : <ul>
+<li><code>0</code>, or <code>'none'</code> : No wrapping, default behavior.</li>
+<li><code>1</code>, or <code>'word'</code> : Word wrapping.</li>
+<li><code>2</code>, or <code>'char'</code>, or <code>'character'</code> : Character wrapping.</li>
+</ul>
+</li>
+<li><code>wrap.width</code> : Maximun wrapping width of a line.<ul>
+<li>Wrap-fit : Set wrapping width to <code>fixedWidth - padding.left - padding.right</code> if <code>fixedWidth &gt; 0</code></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Wrap mode<ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mode</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">wrapMode</span><span class="p">;</span>
@@ -5947,9 +5959,9 @@
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWrapMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>'none'</code>, or <code>0</code> : No wrap</li>
-<li><code>'word'</code>, or <code>1</code> : Word wrap</li>
-<li><code>'character'</code>, or <code>2</code> : Character wrap</li>
+<li><code>0</code>, or <code>'none'</code> : No wrapping.</li>
+<li><code>1</code>, or <code>'word'</code> : Word wrapping.</li>
+<li><code>2</code>, or <code>'char'</code>, or <code>'character'</code> : Character wrapping.</li>
 </ul>
 </li>
 </ul>
@@ -5960,7 +5972,13 @@
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWrapWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>width</code> : Maximun wrapping width of a line.<ul>
+<li>Wrap-fit : Set wrapping width to <code>fixedWidth - padding.left - padding.right</code> if <code>fixedWidth &gt; 0</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -5996,7 +6014,10 @@
 </code></pre></div>
     or
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Stroke color, thickness<ul>
@@ -6006,7 +6027,10 @@
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 <li>Clear
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">();</span>
 </code></pre></div></li>
@@ -6023,7 +6047,10 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineThinkness</span><span class="p">(</span><span class="nx">thickness</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setUnderlineOffset</span><span class="p">(</span><span class="nx">ofset</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Background<ul>
@@ -6036,7 +6063,10 @@
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 <span class="c1">// txt.setBackgroundColor(color, color2, isHorizontalGradient);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code>, <code>color2</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Stroke color<ul>
@@ -6046,7 +6076,10 @@
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundStrokeColor</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Round rectangle<ul>
@@ -6085,7 +6118,10 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowBlur</span><span class="p">(</span><span class="nx">blur</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowStroke</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowFill</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>color</code> : <code>null</code>, css string, or number.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
