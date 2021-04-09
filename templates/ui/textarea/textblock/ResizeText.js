@@ -13,10 +13,13 @@ var ResizeText = function (textObject, width, height) {
 
     var maxLines = Math.ceil(TextHeightToLinesCount.call(this, height)) + 1;
 
-    if (this.textObjectType === 0) {
+    if (this.textObjectType === 0) {  // Built-in text
         style.wordWrapWidth = wrapWidth;
         style.maxLines = maxLines;
-    } else {
+    } else {  // BBCode text, Tag text
+        if (style.wrapMode === 0) { // Turn no-wrap to word-wrap
+            style.wrapMode = 1;
+        }
         style.wrapWidth = wrapWidth;
         style.maxLines = maxLines;
     }
