@@ -15,7 +15,7 @@ var GetChildrenHeight = function () {
     } else { // scroll x
         result = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
-            GetDisplayHeight(child);
+            (child.hasOwnProperty('minHeight')) ? child.minHeight : GetDisplayHeight(child);
     }
 
     return result;

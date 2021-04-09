@@ -13,7 +13,7 @@ var GetChildrenWidth = function () {
     } else if (this.scrollMode === 0) { // scroll y
         result = (child.isRexSizer) ?
             Math.max(child.minWidth, child.childrenWidth) :
-            GetDisplayWidth(child);
+            (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
     } else { // scroll x
         result = 0;
     }

@@ -14,7 +14,7 @@ var GetMaxChildWidth = function (children) {
 
         childWidth = (child.isRexSizer) ?
             Math.max(child.minWidth, child.childrenWidth) :
-            GetDisplayWidth(child);
+            (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
         result = Math.max(childWidth, result);
     }
     return result;

@@ -14,7 +14,7 @@ var GetMaxChildHeight = function (children) {
 
         childHeight = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
-            GetDisplayHeight(child);
+            (child.hasOwnProperty('minHeight')) ? child.minHeight : GetDisplayHeight(child);
         result = Math.max(childHeight, result);
     }
     return result;

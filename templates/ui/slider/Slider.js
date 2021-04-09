@@ -32,6 +32,11 @@ class Slider extends Sizer {
         }
 
         if (track) {
+            if (this.orientation === 1) { // Vertical slider, set minHeight of track to 0
+                track.minHeight = 0;
+            } else { // Horizontal slider, set minWidth of track to 0
+                track.minWidth = 0;
+            }
             this.add(track, 1, 'center', 0, true);
         }
 
@@ -139,18 +144,6 @@ class Slider extends Sizer {
             value = Linear(min, max, value);
         }
         return value;
-    }
-
-    _layoutInit() {
-        var track = this.getElement('track');
-        if (track) {
-            if (this.orientation === 1) { // Vertical slider, set height of track to 0
-                ResizeGameObject(track, undefined, 0);
-            } else { // Horizontal slider, set width of track to 0
-                ResizeGameObject(track, 0, undefined);
-            }
-        }
-        super._layoutInit();
     }
 
     _layout(parent, newWidth, newHeight) {

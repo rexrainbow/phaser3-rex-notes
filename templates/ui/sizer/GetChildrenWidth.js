@@ -26,7 +26,7 @@ var GetChildrenWidth = function (minimumMode) {
             ) {
                 childWidth = (child.isRexSizer) ?
                     Math.max(child.minWidth, child.childrenWidth) :
-                    GetDisplayWidth(child);
+                    (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
             } else {
                 childWidth = 0;
             }
@@ -50,7 +50,7 @@ var GetChildrenWidth = function (minimumMode) {
 
             childWidth = (child.isRexSizer) ?
                 Math.max(child.minWidth, child.childrenWidth) :
-                GetDisplayWidth(child);
+                (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
 
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
