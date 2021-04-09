@@ -1,9 +1,8 @@
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     getLocalState(gameObject) {
-        if (!gameObject.hasOwnProperty('rexContainer')) {
-            gameObject.rexContainer = {};
-        }
-        return gameObject.rexContainer;
+        return GetLocalState(gameObject);
     },
 
     resetChildState(gameObject) {
