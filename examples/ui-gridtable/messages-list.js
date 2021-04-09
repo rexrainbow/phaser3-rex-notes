@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
                     item = cell.item,
                     index = cell.index;
                 if (cellContainer === null) {
-                    cellContainer = CreateRowItem(scene);
+                    cellContainer = CreateRowItem(scene).setOrigin(0);
                     console.log(cell.index + ': create new cell-container');
                 } else {
                     console.log(cell.index + ': reuse cell-container');
@@ -87,10 +87,10 @@ class Demo extends Phaser.Scene {
                 return cellContainer;
             },
 
-            items: GetMessages(1)
+            items: GetMessages(20)
         })
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+            .drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() { }
@@ -119,8 +119,7 @@ var CreateNameLabel = function (scene) {
         orientation: 'y',
         icon: scene.rexUI.add.roundRectangle(0, 0, 40, 40, 10, COLOR_LIGHT),
         text: scene.rexUI.add.BBCodeText(0, 0, '', {
-            backgroundColor: COLOR_DARK,
-            backgroundCornerRadius: 10
+            backgroundColor: COLOR_DARK
         })
     })
 }
