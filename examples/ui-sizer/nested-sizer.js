@@ -84,7 +84,7 @@ var getTable = function (scene, x, y, width, height, table) {
     }
     var data = table.data;
     for (var i = 0, cnt = data.length; i < cnt; i++) {
-        sizer.add(getRow(scene, data[i]), 0, 'left', padding, true);
+        sizer.add(getRow(scene, data[i]), 0, 'left', padding);
     }
     sizer.layout();
     return sizer;

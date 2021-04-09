@@ -1,5 +1,3 @@
-import { GetDisplayWidth } from '../../../plugins/utils/size/GetDisplaySize.js';
-
 var GetChildrenWidth = function () {
     if (this.rexSizer.hidden) {
         return 0;
@@ -10,12 +8,9 @@ var GetChildrenWidth = function () {
     var child, padding, childWidth;
     for (var key in children) {
         child = children[key];
-        childWidth = (child.isRexSizer) ?
-            Math.max(child.minWidth, child.childrenWidth) :
-            (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
 
         padding = child.rexSizer.padding;
-        childWidth += (padding.left + padding.right);
+        childWidth = this.getChildWidth(child) + padding.left + padding.right;
         result = Math.max(childWidth, result);
     }
     return result + this.space.left + this.space.right;

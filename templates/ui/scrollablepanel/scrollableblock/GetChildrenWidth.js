@@ -1,5 +1,3 @@
-import { GetDisplayWidth } from '../../../../plugins/utils/size/GetDisplaySize.js';
-
 var GetChildrenWidth = function () {
     if (this.rexSizer.hidden) {
         return 0;
@@ -11,9 +9,7 @@ var GetChildrenWidth = function () {
     if (childConfig.hidden) {
         result = 0;
     } else if (this.scrollMode === 0) { // scroll y
-        result = (child.isRexSizer) ?
-            Math.max(child.minWidth, child.childrenWidth) :
-            (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
+        result = this.getChildWidth(child);
     } else { // scroll x
         result = 0;
     }

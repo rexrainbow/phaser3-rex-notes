@@ -1,5 +1,3 @@
-import { GetDisplayWidth } from '../../../plugins/utils/size/GetDisplaySize.js';
-
 var GetMaxChildWidth = function (children) {
     if (children === undefined) {
         children = this.sizerChildren;
@@ -12,9 +10,7 @@ var GetMaxChildWidth = function (children) {
             continue;
         }
 
-        childWidth = (child.isRexSizer) ?
-            Math.max(child.minWidth, child.childrenWidth) :
-            (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
+        childWidth = this.getChildWidth(child);
         result = Math.max(childWidth, result);
     }
     return result;

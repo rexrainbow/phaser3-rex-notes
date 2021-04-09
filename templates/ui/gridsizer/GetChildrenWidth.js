@@ -1,4 +1,3 @@
-import { GetDisplayWidth } from '../../../plugins/utils/size/GetDisplaySize.js';
 import Sum from '../../../plugins/utils/math/Sum.js';
 
 var GetChildrenWidth = function () {
@@ -24,11 +23,8 @@ var GetChildrenWidth = function () {
                     continue;
                 }
 
-                childWidth = (child.isRexSizer) ?
-                    Math.max(child.minWidth, child.childrenWidth) :
-                    (child.hasOwnProperty('minWidth')) ? child.minWidth : GetDisplayWidth(child);
                 padding = child.rexSizer.padding;
-                childWidth += (padding.left + padding.right);
+                childWidth = this.getChildWidth(child) + padding.left + padding.right;
                 columnWidth = Math.max(columnWidth, childWidth);
             }
             result += columnWidth;

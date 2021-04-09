@@ -4,6 +4,8 @@ import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
+import GetChildWidth from './GetChildWidth.js';
+import GetChildHeight from './GetChildHeight.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
@@ -28,6 +30,8 @@ var methods = {
     getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
+    getChildWidth: GetChildWidth,
+    getChildHeight: GetChildHeight,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     addChildrenMap: AddChildrenMap,

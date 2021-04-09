@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var options = ['A', 'BB', 'CCC', 'DDD'];
+        var options = ['A', 'BB', 'CCC', 'DDDD'];
 
         var dropDownList = CreateDropDownList(this, 400, 300, options)
             .layout()
@@ -122,12 +122,6 @@ var CreatePopupList = function (scene, x, y, options, onClick) {
         })
         .on('button.click', function (button) {
             onClick(button);
-        })
-        .on('popup.complete', function (subMenu) {
-            console.log('popup.complete')
-        })
-        .on('scaledown.complete', function () {
-            console.log('scaledown.complete')
         })
 
     return menu;
