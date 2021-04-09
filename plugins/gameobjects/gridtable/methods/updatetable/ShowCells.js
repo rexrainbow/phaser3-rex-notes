@@ -7,14 +7,14 @@ var ShowCells = function () {
     var table = this.table;
 
     var startRowIdx = table.heightToRowIndex(-this.tableOY);
-    if (startRowIdx < 0) {
-        startRowIdx = 0;
+    if (startRowIdx <= 0) {
+        startRowIdx = 0;  //Turn -0 to 0
     }
     var rowIdx = startRowIdx;
 
     var startColIdx = table.widthToColIndex(-this.tableOX);
-    if (startColIdx < 0) {
-        startColIdx = 0;
+    if (startColIdx <= 0) {
+        startColIdx = 0;  //Turn -0 to 0
     }
     var colIdx = startColIdx;
 
