@@ -17,7 +17,6 @@ class Demo extends Phaser.Scene {
         var sizer = this.rexUI.add.fixWidthSizer({
             x: 400, y: 300,
             width: 400, height: 400,
-            orientation: 'x',
             space: {
                 item: 8, line: 8,
             }

@@ -83,8 +83,6 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     // width: undefined,
     // height: undefined,
 
-    orientation: 0,
-
     // space: {
     //     left: 0, right: 0, top: 0, bottom: 0,
     //     item: 0, line: 0
@@ -104,7 +102,6 @@ or
 var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
     // width: 2,
     // height: 2
-    orientation: 0,
     // space: {
     //     left: 0, right: 0, top: 0, bottom: 0,
     //     item: 0, line: 0
@@ -122,7 +119,6 @@ or
 
 ```javascript
 var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
-    orientation: 0,
     // space: {
     //     left: 0, right: 0, top: 0, bottom: 0,
     //     item: 0, line: 0
@@ -144,9 +140,6 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `orientation` : Main orientation of the sizer.
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.

@@ -17,15 +17,11 @@ class Demo extends Phaser.Scene {
     create() {
         var align = 'justify-right'  // 'left', 'right', 'center', 'justify'/'justify-left', 'justify-right', 'justify-center'
         var rtl = true;
-        var orientation = 'x';
         var x = 400,
             y = 300,
-            minWidth = (orientation === 'x') ? 250 : undefined,
-            minHeight = (orientation === 'y') ? 250 : undefined;
         var sizer = this.rexUI.add.fixWidthSizer({
             x: x, y: y,
-            width: minWidth, height: minHeight,
-            orientation: orientation,
+            width: 250, height: undefined,
             space: {
                 left: 3,
                 right: 3,

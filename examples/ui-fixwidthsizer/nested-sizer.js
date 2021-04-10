@@ -75,7 +75,6 @@ var createTitle = function (scene) {
 
 var createItems = function (scene) {
     var sizer = scene.rexUI.add.fixWidthSizer({
-        orientation: 'x',
         space: {
             left: 3,
             right: 3,

@@ -177,7 +177,6 @@ var CreatePanel = function (scene, words) {
 var CreateSizer = function (scene, words) {
     var sizer = scene.rexUI.add.fixWidthSizer({
         width: 400, height: 250,
-        orientation: 'x',
         space: {
             left: 10, right: 10, top: 10, bottom: 10,
             item: 5, line: 5
