@@ -8,7 +8,10 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.preLayout(parent);
+    var isTopmostParent = !parent;
+    if (isTopmostParent) {
+        this.preLayout();
+    }
 
     var totalColumnProportions = this.totalColumnProportions;
     var totalRowProportions = this.totalRowProportions;

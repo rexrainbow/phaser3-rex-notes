@@ -9,12 +9,20 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.preLayout(parent);
+    var isTopmostParent = !parent;
+    if (isTopmostParent) {
+        this.preLayout();
+    }
 
-    // Set size
+    // Calculate parent width
     if (newWidth === undefined) {
         newWidth = Math.max((this.maxChildWidth + this.space.left + this.space.right), this.minWidth);
     }
+    // Width-wrap children
+    this.width = newWidth;
+    this.runWidthWrap(newWidth);
+
+    // Calculate parent height
     if (newHeight === undefined) {
         newHeight = Math.max((this.maxChildHeight + this.space.top + this.space.bottom), this.minHeight);
     }
@@ -32,6 +40,8 @@ var Layout = function (parent, newWidth, newHeight) {
     } else { // y
         newWidth = Math.max(newWidth, (wrapResult.height + this.space.left + this.space.right));
     }
+
+    // Resize parent
     this.resize(newWidth, newHeight);
 
     // Layout children    

@@ -70,9 +70,17 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
+    isInTouching(gameObject, pointer, preTest, postTest) {
+        if (!gameObject.visible) {
+            return false;
+        }
+        return IsPointerInBounds(gameObject, pointer, preTest, postTest);
+    }
+
     get viewport() {
         return GetViewport(this.scene, true);
     }
+
 }
 
 var methods = {
@@ -82,7 +90,6 @@ var methods = {
     show: Show,
     isShown: IsShown,
     edit: Edit,
-    isInTouching: IsPointerInBounds,
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
     setChildrenInteractive: SetChildrenInteractive,

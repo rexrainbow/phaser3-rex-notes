@@ -9,7 +9,10 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.preLayout(parent);
+    var isTopmostParent = !parent;
+    if (isTopmostParent) {
+        this.preLayout();
+    }
 
     // Set size
     if (newWidth === undefined) {

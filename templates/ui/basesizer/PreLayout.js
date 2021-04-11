@@ -1,10 +1,7 @@
-var PreLayout = function (parent) {
-    // Only run PreLayout in topMostSizer.layout()
-    if (parent) {
-        return;
-    }
+var PreLayout = function () {
+    this._childrenWidth = undefined;
+    this._childrenHeight = undefined;
 
-    this._layoutInit();
     var children = this.getChildrenSizers(),
         child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {

@@ -16,7 +16,6 @@ import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
 import _layout from './_Layout.js';
 import PostLayout from './PostLayout.js';
-import _layoutInit from './_layoutInit.js';
 import RunWidthWrap from './RunWidthWrap.js';
 
 import SetAnchor from './SetAnchor.js';
@@ -46,7 +45,6 @@ var methods = {
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
-    _layoutInit: _layoutInit,
     layout: Layout,
     _layout: _layout, // Override this method
     runWidthWrap: RunWidthWrap,

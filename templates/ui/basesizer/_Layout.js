@@ -14,12 +14,15 @@ Steps of layout:
 
 // Override
 var _layout = function (parent, newWidth, newHeight) {
+    var isTopmostParent = !parent;
     // Skip hidden or !dirty sizer
     if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 
-    this.preLayout(parent);
+    if (isTopmostParent) {
+        this.preLayout();
+    }
 
     // Calculate parent width
     if (newWidth === undefined) {

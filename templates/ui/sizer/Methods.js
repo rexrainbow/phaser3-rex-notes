@@ -4,8 +4,8 @@ import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
+import PreLayout from './PreLayout.js';
 import _layout from './Layout.js';
-import _layoutInit from './_layoutInit.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
 
@@ -16,8 +16,8 @@ var methods = {
     getExpandedChildHeight: GetExpandedChildHeight,
     getChildrenProportion: GetChildrenProportion,
     getChildrenSizers: GetChildrenSizers,
+    preLayout: PreLayout,
     _layout: _layout,
-    _layoutInit: _layoutInit
 };
 
 Object.assign(

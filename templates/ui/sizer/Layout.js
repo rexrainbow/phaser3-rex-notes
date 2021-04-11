@@ -9,7 +9,10 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.preLayout(parent);
+    var isTopmostParent = !parent;
+    if (isTopmostParent) {
+        this.preLayout();
+    }
 
     // Calculate parent width
     if (newWidth === undefined) {
@@ -27,6 +30,11 @@ var Layout = function (parent, newWidth, newHeight) {
                 // Layout warning
             }
         }
+    }
+    // Width-wrap children, top parent only
+    if (!parent) {
+        this.width = newWidth;
+        this.runWidthWrap(newWidth);
     }
 
     // Calculate parent height
@@ -47,7 +55,7 @@ var Layout = function (parent, newWidth, newHeight) {
         }
     }
 
-    // Resize parent
+    // Resize parent    
     this.resize(newWidth, newHeight);
 
     // Layout children    
