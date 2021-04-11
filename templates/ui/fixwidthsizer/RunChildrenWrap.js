@@ -1,14 +1,21 @@
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
-var RunChildrenWrap = function (lineWidth) {
-    var result = {
-        lines: [],
-        width: 0,
-        height: 0
-    };
+var RunChildrenWrap = function (lineWidth, out) {
+    if (out === undefined) {
+        out = {
+            lines: [],
+            width: 0,
+            height: 0
+        }
+    } else {
+        out.lines.length = 0;
+        out.width = 0;
+        out.height = 0;
+    }
+
     var children = this.sizerChildren;
     var child, childWidth, childHeight, remainder = 0;
-    var lastLine, lines = result.lines, newLine;
+    var lastLine, lines = out.lines, newLine;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child === '\n') {
@@ -24,15 +31,15 @@ var RunChildrenWrap = function (lineWidth) {
                 child.layout(); // Use original size
             }
 
-            childWidth = (this.orientation === 0) ? GetChildWidth(child) : GeChildHeight(child);
+            childWidth = GetChildWidth(child);
             newLine = (remainder < childWidth);
         }
         // New line
         if (newLine) {
             if (lastLine) {
                 lastLine.width = lineWidth - (remainder + this.space.item);
-                result.width = Math.max(result.width, lastLine.width);
-                result.height += lastLine.height + this.space.line;
+                out.width = Math.max(out.width, lastLine.width);
+                out.height += lastLine.height + this.space.line;
             }
 
             lastLine = {
@@ -47,17 +54,17 @@ var RunChildrenWrap = function (lineWidth) {
         remainder -= (childWidth + this.space.item);
         if (child) {
             lastLine.children.push(child);
-            childHeight = (this.orientation === 0) ? GeChildHeight(child) : GetChildWidth(child);
+            childHeight = GeChildHeight(child);
             lastLine.height = Math.max(lastLine.height, childHeight);
         }
     }
 
     if (lastLine) {
         lastLine.width = lineWidth - (remainder + this.space.item);
-        result.width = Math.max(result.width, lastLine.width);
-        result.height += lastLine.height;
+        out.width = Math.max(out.width, lastLine.width);
+        out.height += lastLine.height;
     }
-    return result;
+    return out;
 }
 
 var GetChildWidth = function (child) {

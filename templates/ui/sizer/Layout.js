@@ -10,6 +10,7 @@ var Layout = function (parent, newWidth, newHeight) {
     }
 
     var isTopmostParent = !parent;
+    // Preprocessor, top parent only
     if (isTopmostParent) {
         this.preLayout();
     }
@@ -18,6 +19,7 @@ var Layout = function (parent, newWidth, newHeight) {
     if (newWidth === undefined) {
         newWidth = Math.max(this.childrenWidth, this.minWidth);
     }
+    this.width = newWidth;
     // Get proportionLength
     if (this.orientation === 0) {
         var remainder = this.width - this.childrenWidth;
@@ -32,9 +34,8 @@ var Layout = function (parent, newWidth, newHeight) {
         }
     }
     // Width-wrap children, top parent only
-    if (!parent) {
-        this.width = newWidth;
-        this.runWidthWrap(newWidth);
+    if (isTopmostParent) {
+        this.runWidthWrap(this.width);
     }
 
     // Calculate parent height
@@ -55,7 +56,7 @@ var Layout = function (parent, newWidth, newHeight) {
         }
     }
 
-    // Resize parent    
+    // Resize parent
     this.resize(newWidth, newHeight);
 
     // Layout children    
@@ -97,10 +98,10 @@ var Layout = function (parent, newWidth, newHeight) {
         // Set position
         if (this.orientation === 0) { // x
             x = (itemX + padding.left);
-            if ((childConfig.proportion === 0) || (proportionLength === 0)) {
+            if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
                 width = childWidth;
             } else {
-                width = (childConfig.proportion * proportionLength);
+                width = (childConfig.proportion * this.proportionLength);
             }
 
             y = (itemY + padding.top);
@@ -110,10 +111,10 @@ var Layout = function (parent, newWidth, newHeight) {
             width = (innerWidth - padding.left - padding.right);
 
             y = (itemY + padding.top);
-            if ((childConfig.proportion === 0) || (proportionLength === 0)) {
+            if ((childConfig.proportion === 0) || (this.proportionLength === 0)) {
                 height = childHeight;
             } else {
-                height = (childConfig.proportion * proportionLength);
+                height = (childConfig.proportion * this.proportionLength);
             }
         }
 

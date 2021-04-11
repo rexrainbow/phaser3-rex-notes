@@ -9,17 +9,27 @@ var Layout = function (parent, newWidth, newHeight) {
     }
 
     var isTopmostParent = !parent;
+    // Preprocessor, top parent only
     if (isTopmostParent) {
         this.preLayout();
     }
 
-    // Set size
+    // Calculate parent width
     if (newWidth === undefined) {
         newWidth = Math.max(this.childrenWidth, this.minWidth);
     }
+    // Width-wrap children, top parent only
+    if (isTopmostParent) {
+        this.width = newWidth;
+        this.runWidthWrap(newWidth);
+    }
+
+    // Calculate parent height
     if (newHeight === undefined) {
         newHeight = Math.max(this.childrenHeight, this.minHeight);
     }
+
+    // Resize parent
     this.resize(newWidth, newHeight);
 
     // Layout children

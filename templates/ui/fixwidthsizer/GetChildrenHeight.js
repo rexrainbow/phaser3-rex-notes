@@ -3,13 +3,8 @@ var GetChildrenHeight = function () {
         return 0;
     }
 
-    var result;
-    if (this.orientation === 0) { // x
-        result = 0;
-    } else { // y
-        result = this.maxChildHeight;
-    }
-    return result + this.space.top + this.space.bottom;
+    // After RunChildrenWrap
+    return this.widthWrapResult.height + this.space.top + this.space.bottom;
 }
 
 export default GetChildrenHeight;

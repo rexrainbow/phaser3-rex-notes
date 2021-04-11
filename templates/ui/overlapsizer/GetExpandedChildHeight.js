@@ -4,6 +4,8 @@ var GetExpandedChildHeight = function (child) {
     var padding = childConfig.padding;
     if (childConfig.expandHeight) {
         childHeight = this.innerHeight - padding.top - padding.bottom;
+    } else {
+        childHeight = child.height;
     }
     return childHeight;
 }
