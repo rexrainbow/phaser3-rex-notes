@@ -1,5 +1,3 @@
-import GetExpandedChildWidth from './GetExpandedChildWidth.js';
-import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
@@ -75,8 +73,8 @@ var Layout = function (parent, newWidth, newHeight) {
                 continue;
             }
 
-            childWidth = GetExpandedChildWidth(child, colWidth);
-            childHeight = GetExpandedChildHeight(child, rowHeight);
+            childWidth = this.getExpandedChildWidth(child, colWidth);
+            childHeight = this.getExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
                 child._layout(this, childWidth, childHeight);
             } else {

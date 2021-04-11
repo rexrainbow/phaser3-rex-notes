@@ -1,17 +1,17 @@
-var GetExpandedChildWidth = function (parent, child) {
-    var newWidth;
+var GetExpandedChildWidth = function (child) {
+    var childWidth;
     var childConfig = child.rexSizer;
     var padding = childConfig.padding;
-    if (parent.orientation === 0) { // x
-        if ((childConfig.proportion > 0) && (parent.proportionLength > 0)) {
-            newWidth = (childConfig.proportion * parent.proportionLength);
+    if (this.orientation === 0) { // x
+        if ((childConfig.proportion > 0) && (this.proportionLength > 0)) {
+            childWidth = (childConfig.proportion * this.proportionLength);
         }
     } else { // y
         if (childConfig.expand) {
-            newWidth = parent.innerWidth - padding.left - padding.right;
+            childWidth = this.innerWidth - padding.left - padding.right;
         }
     }
-    return newWidth;
+    return childWidth;
 }
 
 export default GetExpandedChildWidth;

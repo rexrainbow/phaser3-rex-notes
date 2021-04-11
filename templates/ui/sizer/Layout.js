@@ -1,5 +1,3 @@
-import GetExpandedChildWidth from './GetExpandedChildWidth.js';
-import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
@@ -13,33 +11,44 @@ var Layout = function (parent, newWidth, newHeight) {
 
     this.preLayout(parent);
 
-    // Set size
+    // Calculate parent width
     if (newWidth === undefined) {
         newWidth = Math.max(this.childrenWidth, this.minWidth);
     }
+    // Get proportionLength
+    if (this.orientation === 0) {
+        var remainder = this.width - this.childrenWidth;
+        if (remainder > 0) {
+            remainder = this.width - this.getChildrenWidth(false);
+            this.proportionLength = remainder / this.childrenProportion;
+        } else {
+            this.proportionLength = 0;
+            if (remainder < 0) {
+                // Layout warning
+            }
+        }
+    }
+
+    // Calculate parent height
     if (newHeight === undefined) {
         newHeight = Math.max(this.childrenHeight, this.minHeight);
     }
-    this.resize(newWidth, newHeight);
-
-    var proportionLength;
-    if (this.childrenProportion > 0) {
-        var remainder = (this.orientation === 0) ?
-            (this.width - this.childrenWidth) :
-            (this.height - this.childrenHeight);
-
+    // Get proportionLength
+    if (this.orientation === 1) {
+        var remainder = this.height - this.childrenHeight;
         if (remainder > 0) {
-            remainder = (this.orientation === 0) ?
-                (this.width - this.getChildrenWidth(false)) :
-                (this.height - this.getChildrenHeight(false));
-            proportionLength = remainder / this.childrenProportion;
+            remainder = this.height - this.getChildrenHeight(false);
+            this.proportionLength = remainder / this.childrenProportion;
         } else {
-            proportionLength = 0;
+            this.proportionLength = 0;
+            if (remainder < 0) {
+                // Layout warning
+            }
         }
-    } else {
-        proportionLength = 0;
     }
-    this.proportionLength = proportionLength;
+
+    // Resize parent
+    this.resize(newWidth, newHeight);
 
     // Layout children    
     var children = this.sizerChildren;
@@ -62,8 +71,8 @@ var Layout = function (parent, newWidth, newHeight) {
         padding = childConfig.padding;
 
         // Set size
-        childWidth = GetExpandedChildWidth(this, child);
-        childHeight = GetExpandedChildHeight(this, child);
+        childWidth = this.getExpandedChildWidth(child);
+        childHeight = this.getExpandedChildHeight(child);
         if (child.isRexSizer) {
             child._layout(this, childWidth, childHeight);
         } else {

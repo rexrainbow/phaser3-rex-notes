@@ -6,6 +6,8 @@ import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
@@ -15,6 +17,7 @@ import Layout from './Layout.js';
 import _layout from './_Layout.js';
 import PostLayout from './PostLayout.js';
 import _layoutInit from './_layoutInit.js';
+import RunWidthWrap from './RunWidthWrap.js';
 
 import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
@@ -32,6 +35,9 @@ var methods = {
     drawBounds: DrawBounds,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
+    getExpandedChildWidth: GetExpandedChildWidth,
+    getExpandedChildHeight: GetExpandedChildHeight,
+
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     addChildrenMap: AddChildrenMap,
@@ -43,6 +49,7 @@ var methods = {
     _layoutInit: _layoutInit,
     layout: Layout,
     _layout: _layout, // Override this method
+    runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,
 
