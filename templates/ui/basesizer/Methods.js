@@ -4,6 +4,9 @@ import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
+import ResolveWidth from './ResolveWidth.js';
+import ResolveChildrenWidth from './ResolveChildrenWidth.js';
+import ResolveHeight from './ResolveHeight.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
@@ -32,6 +35,9 @@ var methods = {
     getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
+    resolveWidth: ResolveWidth,
+    resolveChildrenWidth: ResolveChildrenWidth,
+    resolveHeight: ResolveHeight,
     getChildWidth: GetChildWidth,
     getChildHeight: GetChildHeight,
     getExpandedChildWidth: GetExpandedChildWidth,

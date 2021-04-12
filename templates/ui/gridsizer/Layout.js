@@ -8,45 +8,16 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    var isTopmostParent = !parent;
-    if (isTopmostParent) {
+    if (!parent) {
         this.preLayout();
     }
 
-    var totalColumnProportions = this.totalColumnProportions;
-    var totalRowProportions = this.totalRowProportions;
-
-    // Set size
-    if (newWidth === undefined) {
-        if (parent && (totalColumnProportions > 0)) { // Expand to parent width
-            var padding = this.rexSizer.padding;
-            newWidth = parent.width - padding.left - padding.right;
-        } else {
-            newWidth = Math.max(this.childrenWidth, this.minWidth);
-        }
-    }
-    if (newHeight === undefined) {
-        if (parent && (totalRowProportions > 0)) { // Expand to parent height
-            var padding = this.rexSizer.padding;
-            newHeight = parent.height - padding.top - padding.bottom;
-        } else {
-            newHeight = Math.max(this.childrenHeight, this.minHeight);
-        }
-    }
+    // Calculate parent width
+    newWidth = this.resolveWidth(parent, newWidth);
+    // Calculate parent height
+    newHeight = this.resolveHeight(parent, newHeight);
+    // Resize parent
     this.resize(newWidth, newHeight);
-
-    var proportionWidthLength;
-    if (totalColumnProportions > 0) {
-        proportionWidthLength = (this.width - this.childrenWidth) / totalColumnProportions;
-    } else {
-        proportionWidthLength = 0;
-    }
-    var proportionHeightLength;
-    if (totalRowProportions > 0) {
-        proportionHeightLength = (this.height - this.childrenHeight) / totalRowProportions;
-    } else {
-        proportionHeightLength = 0;
-    }
 
     // Layout children
     var child, childConfig, padding;
@@ -59,16 +30,13 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout grid children
     var columnSpace = this.space.column;
     var rowSpace = this.space.row;
-    var colProportion, rowProportion,
-        colWidth, rowHeight;
+    var colWidth, rowHeight;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
-        rowProportion = this.rowProportions[rowIndex];
-        rowHeight = (rowProportion === 0) ? this.rowHeight[rowIndex] : (rowProportion * proportionHeightLength);
+        rowHeight = this.getRowHeight(rowIndex);
 
         itemX = startX;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
-            colProportion = this.columnProportions[columnIndex];
-            colWidth = (colProportion === 0) ? this.columnWidth[columnIndex] : (colProportion * proportionWidthLength);
+            colWidth = this.getColumnWidth(columnIndex);
 
             child = this.getChildAt(columnIndex, rowIndex);
             if ((!child) || (child.rexSizer.hidden)) {

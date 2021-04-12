@@ -8,35 +8,23 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    var isTopmostParent = !parent;
-    var space = this.space;
     // Preprocessor, top parent only
-    if (isTopmostParent) {
+    if (!parent) {
         this.preLayout();
     }
 
     // Calculate parent width
-    if (newWidth === undefined) {
-        newWidth = Math.max((this.maxChildWidth + space.left + space.right), this.minWidth);
-    }
-    // Width-wrap children, top parent only
-    if (isTopmostParent) {
-        this.width = newWidth;
-        this.runWidthWrap(newWidth);
-    }
-
+    newWidth = this.resolveWidth(parent, newWidth);
     // Calculate parent height
-    if (newHeight === undefined) {
-        newHeight = Math.max((this.maxChildHeight + space.top + space.bottom), this.minHeight);
-    }
+    newHeight = this.resolveHeight(parent, newHeight);
     // Expanded height is less then min-lines-height
-    newHeight = Math.max(newHeight, (this.widthWrapResult.height + space.top + space.bottom));
+    newHeight = Math.max(newHeight, (this.widthWrapResult.height + this.space.top + this.space.bottom));
 
     // Resize parent
     this.resize(newWidth, newHeight);
 
     // Layout children
-    var innerLineWidth = this.width - space.left - space.right;
+    var innerLineWidth = this.innerWidth;
     var child, childConfig, padding, justifySpace = 0;
     var startX = this.innerLeft,
         startY = this.innerTop;
@@ -91,7 +79,7 @@ var Layout = function (parent, newWidth, newHeight) {
             padding = childConfig.padding;
             x = (itemX + padding.left);
             if (j > 0) {
-                x += space.item;
+                x += this.space.item;
             }
 
             y = (itemY + padding.top);
@@ -105,7 +93,7 @@ var Layout = function (parent, newWidth, newHeight) {
         }
 
         itemX = startX;
-        itemY += line.height + space.line;
+        itemY += line.height + this.space.line;
     }
 
     // Layout background children

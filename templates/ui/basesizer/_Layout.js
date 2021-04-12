@@ -2,10 +2,10 @@
 Steps of layout:
 
 1. Calculate parent width
-2. Width wrapping
-3. Calculate parent height
-4. Resize parent
-5. Layout children
+    1. Width wrapping
+2. Calculate parent height
+3. Resize parent
+4. Layout children
     1. Get expand child width
     2. Get expand child height
     3. Layout/resize child

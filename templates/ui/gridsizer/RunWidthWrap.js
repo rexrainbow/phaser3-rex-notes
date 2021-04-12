@@ -1,9 +1,16 @@
 // Default method
 var RunWidthWrap = function (width) {
     var child, childWidth;
+    var colWidth;
     for (var i in this.sizerChildren) {
         child = this.sizerChildren[i];
-        childWidth = this.getExpandedChildWidth(child, width);
+        if (!child) {
+            continue;
+        }
+
+        i = parseInt(i);
+        colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
+        childWidth = this.getExpandedChildWidth(child, colWidth);
         if (childWidth === undefined) {
             childWidth = this.resolveWidth(this);
         }

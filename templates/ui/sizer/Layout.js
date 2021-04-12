@@ -9,53 +9,15 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    var isTopmostParent = !parent;
     // Preprocessor, top parent only
-    if (isTopmostParent) {
+    if (!parent) {
         this.preLayout();
     }
 
     // Calculate parent width
-    if (newWidth === undefined) {
-        newWidth = Math.max(this.childrenWidth, this.minWidth);
-    }
-    this.width = newWidth;
-    // Get proportionLength
-    if (this.orientation === 0) {
-        var remainder = this.width - this.childrenWidth;
-        if (remainder > 0) {
-            remainder = this.width - this.getChildrenWidth(false);
-            this.proportionLength = remainder / this.childrenProportion;
-        } else {
-            this.proportionLength = 0;
-            if (remainder < 0) {
-                // Layout warning
-            }
-        }
-    }
-    // Width-wrap children, top parent only
-    if (isTopmostParent) {
-        this.runWidthWrap(this.width);
-    }
-
+    newWidth = this.resolveWidth(parent, newWidth);
     // Calculate parent height
-    if (newHeight === undefined) {
-        newHeight = Math.max(this.childrenHeight, this.minHeight);
-    }
-    // Get proportionLength
-    if (this.orientation === 1) {
-        var remainder = this.height - this.childrenHeight;
-        if (remainder > 0) {
-            remainder = this.height - this.getChildrenHeight(false);
-            this.proportionLength = remainder / this.childrenProportion;
-        } else {
-            this.proportionLength = 0;
-            if (remainder < 0) {
-                // Layout warning
-            }
-        }
-    }
-
+    newHeight = this.resolveHeight(parent, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
 

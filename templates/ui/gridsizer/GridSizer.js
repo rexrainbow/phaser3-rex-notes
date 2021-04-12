@@ -1,5 +1,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
+import GetTotalColumnProportions from './GetTotalColumnProportions.js';
+import GetTotalRowProportions from './GetTotalRowProportions.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -73,27 +75,17 @@ class GridSizer extends BaseSizer {
     }
 
     get totalColumnProportions() {
-        var result = 0,
-            proportion;
-        for (var i = 0; i < this.columnCount; i++) {
-            proportion = this.columnProportions[i];
-            if (proportion > 0) {
-                result += proportion;
-            }
+        if (this._totalColumnProportions === undefined) {
+            this._totalColumnProportions = GetTotalColumnProportions.call(this);
         }
-        return result;
+        return this._totalColumnProportions;
     }
 
     get totalRowProportions() {
-        var result = 0,
-            proportion;
-        for (var i = 0; i < this.rowCount; i++) {
-            proportion = this.rowProportions[i];
-            if (proportion > 0) {
-                result += proportion;
-            }
+        if (this._totalRowProportions) {
+            this._totalRowProportions = GetTotalRowProportions.call(this);
         }
-        return result;
+        return this._totalRowProportions;
     }
 
     getChildAt(columnIndex, rowIndex) {
@@ -116,6 +108,18 @@ class GridSizer extends BaseSizer {
         out.x = index % this.columnCount;
         out.y = Math.floor(index / this.columnCount);
         return out;
+    }
+
+    getColumnWidth(columnIndex) {
+        var colProportion = this.columnProportions[columnIndex];
+        var colWidth = (colProportion === 0) ? this.columnWidth[columnIndex] : (colProportion * this.proportionWidthLength);
+        return colWidth;
+    }
+
+    getRowHeight(rowIndex) {
+        var rowProportion = this.rowProportions[rowIndex];
+        var rowHeight = (rowProportion === 0) ? this.rowHeight[rowIndex] : (rowProportion * this.proportionHeightLength);
+        return rowHeight;
     }
 }
 
