@@ -82,7 +82,7 @@ class GridSizer extends BaseSizer {
     }
 
     get totalRowProportions() {
-        if (this._totalRowProportions) {
+        if (this._totalRowProportions === undefined) {
             this._totalRowProportions = GetTotalRowProportions.call(this);
         }
         return this._totalRowProportions;
