@@ -2,12 +2,13 @@ import MaskChildren from '../../../containerlite/MaskChildren.js';
 
 var MaskCells = function () {
     if (!this.cellsMask) {
+        // No cellsMask
         return this;
-    }
-
-    // Don't mask cell is maskUpdateMode is 1('everytick') and grid table is not visible
-    if ((this.maskUpdateMode === 1) &&
-        ((this.alpha === 0) || (!this.visible))) {
+    } else if (!this.maskCellsFlag) {
+        // No maskCells flag
+        return this;
+    } else if  ((this.alpha === 0) || (!this.visible)) {
+        // Grid table is not visible
         return this;
     }
 
@@ -24,6 +25,10 @@ var MaskCells = function () {
         }
     }
     MaskChildren(this, this.cellsMask, children);
+
+    if (this.maskUpdateMode === 0) {
+        this.maskCellsFlag = false;
+    }
     return this;
 }
 

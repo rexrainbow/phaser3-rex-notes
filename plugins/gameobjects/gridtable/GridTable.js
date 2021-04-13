@@ -74,7 +74,7 @@ class GridTable extends ContainerLite {
             return;
         }
 
-        if (this.maskUpdateMode === 1) {
+        if (this.cellsMask) {
             this.scene.game.events.off('poststep', this.maskCells, this);
         }
 
@@ -217,6 +217,7 @@ class GridTable extends ContainerLite {
             maskUpdateMode = GetValue(config, 'updateMode', 0);
         }
 
+        this.maskCellsFlag = true;
         this.maskUpdateMode = maskUpdateMode; // 0,1,undefined
         if (maskEnable) {
             var maskGameObject = new DefaultMask(this, 0, maskPadding);
@@ -225,9 +226,7 @@ class GridTable extends ContainerLite {
             if (typeof (maskUpdateMode) === 'string') {
                 maskUpdateMode = MASKUPDATEMODE[maskUpdateMode];
             }
-            if (maskUpdateMode === 1) {
-                this.scene.game.events.on('poststep', this.maskCells, this);
-            }
+            this.scene.game.events.on('poststep', this.maskCells, this);
         }
 
         return this;

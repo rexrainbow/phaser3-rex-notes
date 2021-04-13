@@ -13,9 +13,7 @@ var UpdateTable = function (refresh) {
     ShowCells.call(this);
     HideCells.call(this);
 
-    if (this.maskUpdateMode === 0) {
-        this.maskCells();
-    }
+    this.maskCellsFlag = true;
     return this;
 }
 
