@@ -6,7 +6,7 @@ var PreLayout = function () {
         child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (child.rexSizer.hidden || (!child.dirty)) {
+        if (child.ignoreLayout) {
             continue;
         }
         child.preLayout();

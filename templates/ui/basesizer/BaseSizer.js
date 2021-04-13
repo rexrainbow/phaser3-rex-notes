@@ -66,6 +66,11 @@ class Base extends Container {
         return this;
     }
 
+    get ignoreLayout() {
+        // Skip hidden or !dirty sizer
+        return this.rexSizer.hidden || (!this.dirty);
+    }
+
     get childrenWidth() {
         if (this._childrenWidth === undefined) {
             this._childrenWidth = this.getChildrenWidth();

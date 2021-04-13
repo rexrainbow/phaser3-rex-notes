@@ -69,7 +69,7 @@ class Scrollable extends Sizer {
 
     runLayout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
-        if (this.rexSizer.hidden || (!this.dirty)) {
+        if (this.ignoreLayout) {
             return this;
         }
         super.runLayout(parent, newWidth, newHeight);
