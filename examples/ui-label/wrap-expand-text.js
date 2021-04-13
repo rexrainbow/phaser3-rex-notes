@@ -1,5 +1,4 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import WrapExpandText from '../../templates/ui/utils/WrapExpandText.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -25,7 +24,7 @@ class Demo extends Phaser.Scene {
             orientation: 'x',
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-            text: WrapExpandText(this.add.text(0, 0, 'aabb')),
+            text: this.rexUI.wrapExpandText(this.add.text(0, 0, 'aabb')),
             expandTextWidth: true,
             icon: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
             space: {
@@ -37,7 +36,6 @@ class Demo extends Phaser.Scene {
             }
         })
             .setText(content)
-            .layout()
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
     }

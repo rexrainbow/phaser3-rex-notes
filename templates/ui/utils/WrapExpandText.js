@@ -7,7 +7,7 @@ var WrapExpandText = function (textObject, minWidth) {
 
     textObject.minWidth = minWidth;
 
-    textObject.resize = (function (width, height) {
+    textObject.runWidthWrap = (function (width) {
         var padding = this.padding;
         var wrapWidth = width - padding.left - padding.right;
         var style = textObject.style;
