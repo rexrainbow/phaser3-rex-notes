@@ -3,7 +3,7 @@ import ResolveWidthBase from '../basesizer/ResolveWidth.js';
 var ResolveWidth = function (width) {
     var width = ResolveWidthBase.call(this, width);
 
-    // Get proportionLength    
+    // Get proportionLength
     if (this.proportionWidthLength === undefined) {
         var totalColumnProportions = this.totalColumnProportions;
         if (totalColumnProportions > 0) {

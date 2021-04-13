@@ -43,6 +43,7 @@ class ScrollableBlock extends BaseSizer {
         }
 
         this.add(child);
+        this.sizerChildren = [child];
 
         var sizerConfig = this.getSizerConfig(child);
         sizerConfig.align = ALIGN_LEFTTOP;

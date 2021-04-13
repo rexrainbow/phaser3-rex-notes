@@ -1,10 +1,13 @@
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
+import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
+import IsTextGameObject from '../../../../plugins/utils/text/IsTextGameObject.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
 class TextBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -46,7 +49,23 @@ class TextBlock extends BaseSizer {
             this.addBackground(background);
         }
 
-        this.setTextObject(textObject, textMaskEnable);
+        this.add(textObject);
+        this.sizerChildren = [textObject];
+
+        var sizerConfig = this.getSizerConfig(textObject);
+        sizerConfig.align = ALIGN_LEFTTOP;
+        sizerConfig.padding = GetBoundsConfig(0);
+        sizerConfig.expand = true;
+        this.textObject = textObject;
+        this.textObjectType = (IsTextGameObject(textObject)) ? 0 : 1;
+        // Add more variables
+        sizerConfig.preOffsetY = 0;
+        sizerConfig.offsetY = 0;
+
+        // Create mask of text object
+        if (textMaskEnable) {
+            this.textMask = this.addChildMask(this.textObject, this);
+        }
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('text', textObject);
