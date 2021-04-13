@@ -5,6 +5,7 @@ import { GetDisplayWidth, GetDisplayHeight } from '../../../../plugins/utils/siz
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
 class ScrollableBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -35,9 +36,39 @@ class ScrollableBlock extends BaseSizer {
         // No background object, and child does not have padding
         var child = GetValue(config, 'child', undefined);
         var expand = GetValue(config, 'expand', true);
-        var childrenMask = GetValue(config, 'mask', undefined);
+        var maskConfig = GetValue(config, 'mask', undefined);
 
-        this.setChild(child, expand, childrenMask);
+        if (child.setOrigin) {
+            child.setOrigin(0);
+        }
+
+        this.add(child);
+
+        var sizerConfig = this.getSizerConfig(child);
+        sizerConfig.align = ALIGN_LEFTTOP;
+        sizerConfig.expand = expand;
+        this.child = child;
+
+        // Create mask of child object
+        var maskEnable, maskPadding, maskUpdateMode;
+        if (maskConfig === true) {
+            maskEnable = true;
+            maskPadding = 0;
+            maskUpdateMode = 0;
+        } else if (maskConfig === false) {
+            maskEnable = false;
+        } else {
+            maskEnable = GetValue(maskConfig, 'mask', true);
+            maskPadding = GetValue(maskConfig, 'padding', 0);
+            maskUpdateMode = GetValue(config, 'updateMode', 0);
+        }
+
+        this.setMaskChildrenFlag();
+        if (maskEnable) {
+            this.setMaskUpdateMode(maskUpdateMode);
+            this.enableChildrenMask(maskPadding);
+            this.startMaskUpdate();
+        }
     }
 
     destroy(fromScene) {
@@ -46,8 +77,8 @@ class ScrollableBlock extends BaseSizer {
             return;
         }
 
-        if (this.maskUpdateMode === 1) {
-            this.scene.game.events.off('poststep', this.maskChildren, this);
+        if (this.childrenMask) {
+            this.stopMaskUpdate();
         }
 
         this.child = undefined;
