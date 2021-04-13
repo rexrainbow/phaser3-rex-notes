@@ -3,17 +3,19 @@ import ResolveWidthBase from '../basesizer/ResolveWidth.js';
 var ResolveWidth = function (width) {
     var width = ResolveWidthBase.call(this, width);
 
-    // Get proportionLength
-    var totalColumnProportions = this.totalColumnProportions;
-    if (totalColumnProportions > 0) {
-        var remainder = width - this.childrenWidth;
-        if (remainder >= 0) {
-            this.proportionWidthLength = remainder / totalColumnProportions;
+    // Get proportionLength    
+    if (this.proportionWidthLength === undefined) {
+        var totalColumnProportions = this.totalColumnProportions;
+        if (totalColumnProportions > 0) {
+            var remainder = width - this.childrenWidth;
+            if (remainder >= 0) {
+                this.proportionWidthLength = remainder / totalColumnProportions;
+            } else {
+                // Warning
+            }
         } else {
-            // Warning
+            this.proportionWidthLength = 0;
         }
-    } else {
-        this.proportionWidthLength = 0;
     }
 
     return width;
