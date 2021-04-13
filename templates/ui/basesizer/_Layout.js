@@ -1,43 +1,24 @@
-/*
-Steps of layout:
-
-1. Calculate parent width
-    1. Width wrapping
-2. Calculate parent height
-3. Resize parent
-4. Layout children
-    1. Get expand child width
-    2. Get expand child height
-    3. Layout/resize child
-    4. Place child
-*/
-
 // Override
 var _layout = function (parent, newWidth, newHeight) {
-    var isTopmostParent = !parent;
     // Skip hidden or !dirty sizer
     if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
     }
 
-    if (isTopmostParent) {
+    // Preprocessor, top parent only
+    if (!parent) {
         this.preLayout();
     }
 
     // Calculate parent width
-    if (newWidth === undefined) {
-        newWidth = Math.max(this.childrenWidth, this.minWidth);
-    }
-    // Width wrapping
-
+    newWidth = this.resolveWidth(parent, newWidth);
     // Calculate parent height
-    if (newHeight === undefined) {
-        newHeight = Math.max(this.childrenHeight, this.minHeight);
-    }
+    newHeight = this.resolveHeight(parent, newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
 
-    // Layout children
+    // Layout children    
+    this.layoutChildren();
 
     // Layout background children
     this.layoutBackgrounds();

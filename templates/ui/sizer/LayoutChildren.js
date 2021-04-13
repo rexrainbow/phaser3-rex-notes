@@ -3,25 +3,7 @@ import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
-var Layout = function (parent, newWidth, newHeight) {
-    // Skip hidden or !dirty sizer
-    if (this.rexSizer.hidden || (!this.dirty)) {
-        return this;
-    }
-
-    // Preprocessor, top parent only
-    if (!parent) {
-        this.preLayout();
-    }
-
-    // Calculate parent width
-    newWidth = this.resolveWidth(parent, newWidth);
-    // Calculate parent height
-    newHeight = this.resolveHeight(parent, newHeight);
-    // Resize parent
-    this.resize(newWidth, newHeight);
-
-    // Layout children    
+var LayoutChildren = function () {    
     var children = this.sizerChildren;
     var child, childConfig, padding;
     var startX = this.innerLeft,
@@ -90,11 +72,6 @@ var Layout = function (parent, newWidth, newHeight) {
             itemY += (height + padding.top + padding.bottom + this.space.item);
         }
     }
-
-    // Layout background children
-    this.layoutBackgrounds();
-
-    return this.postLayout();
 }
 
-export default Layout;
+export default LayoutChildren;

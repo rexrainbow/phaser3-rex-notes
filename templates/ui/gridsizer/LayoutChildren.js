@@ -2,24 +2,7 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 
-var Layout = function (parent, newWidth, newHeight) {
-    // Skip hidden or !dirty sizer
-    if (this.rexSizer.hidden || (!this.dirty)) {
-        return this;
-    }
-
-    if (!parent) {
-        this.preLayout();
-    }
-
-    // Calculate parent width
-    newWidth = this.resolveWidth(parent, newWidth);
-    // Calculate parent height
-    newHeight = this.resolveHeight(parent, newHeight);
-    // Resize parent
-    this.resize(newWidth, newHeight);
-
-    // Layout children
+var LayoutChildren = function () {
     var child, childConfig, padding;
     var startX = this.innerLeft,
         startY = this.innerTop;
@@ -68,12 +51,6 @@ var Layout = function (parent, newWidth, newHeight) {
 
         itemY += (rowHeight + rowSpace[rowIndex]);
     }
-
-
-    // Layout background children
-    this.layoutBackgrounds();
-
-    return this.postLayout();
 }
 
-export default Layout;
+export default LayoutChildren;

@@ -4,7 +4,7 @@ import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
-import _layout from './Layout.js';
+import LayoutChildren from './LayoutChildren.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveHeight from './ResolveHeight.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
@@ -20,7 +20,7 @@ var methods = {
     getExpandedChildHeight: GetExpandedChildHeight,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
-    _layout: _layout,
+    layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     resolveHeight: ResolveHeight,
     resolveChildrenWidth: ResolveChildrenWidth,

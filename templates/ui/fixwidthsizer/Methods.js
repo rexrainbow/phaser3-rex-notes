@@ -2,7 +2,7 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
-import _layout from './Layout.js';
+import LayoutChildren from './LayoutChildren.js';
 import ResolveWidth from './ResolveWidth.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import AddChildMethods from './AddChildMethods.js';
@@ -13,7 +13,7 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
-    _layout: _layout,
+    layoutChildren: LayoutChildren,
     resolveWidth: ResolveWidth,
     runWidthWrap: RunWidthWrap,
 };

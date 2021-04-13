@@ -2,28 +2,7 @@ import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
-var Layout = function (parent, newWidth, newHeight) {
-    // Skip hidden or !dirty sizer
-    if (this.rexSizer.hidden || (!this.dirty)) {
-        return this;
-    }
-
-    // Preprocessor, top parent only
-    if (!parent) {
-        this.preLayout();
-    }
-
-    // Calculate parent width
-    newWidth = this.resolveWidth(parent, newWidth);
-    // Calculate parent height
-    newHeight = this.resolveHeight(parent, newHeight);
-    // Expanded height is less then min-lines-height
-    newHeight = Math.max(newHeight, (this.widthWrapResult.height + this.space.top + this.space.bottom));
-
-    // Resize parent
-    this.resize(newWidth, newHeight);
-
-    // Layout children
+var LayoutChildren = function () {
     var innerLineWidth = this.innerWidth;
     var child, childConfig, padding, justifySpace = 0;
     var startX = this.innerLeft,
@@ -32,7 +11,6 @@ var Layout = function (parent, newWidth, newHeight) {
         itemY = startY;
     var x, y, width, height; // Align zone
 
-    // Layout each line
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -95,15 +73,10 @@ var Layout = function (parent, newWidth, newHeight) {
         itemX = startX;
         itemY += line.height + this.space.line;
     }
-
-    // Layout background children
-    this.layoutBackgrounds();
-
-    return this.postLayout();
 }
 
 var GetJustifySpace = function (total, remainder, childCount) {
     return ((remainder / total) <= 0.25) ? (remainder / (childCount - 1)) : 0;
 }
 
-export default Layout;
+export default LayoutChildren;
