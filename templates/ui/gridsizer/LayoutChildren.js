@@ -30,7 +30,7 @@ var LayoutChildren = function () {
             childWidth = this.getExpandedChildWidth(child, colWidth);
             childHeight = this.getExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
-                child._layout(this, childWidth, childHeight);
+                child.runLayout(this, childWidth, childHeight);
             } else {
                 ResizeGameObject(child, childWidth, childHeight);
             }

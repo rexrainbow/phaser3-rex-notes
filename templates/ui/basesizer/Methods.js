@@ -17,7 +17,8 @@ import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
-import _layout from './_Layout.js';
+import RunLayout from './RunLayout.js';
+import LayoutChildren from './LayoutChildren.js';
 import PostLayout from './PostLayout.js';
 import RunWidthWrap from './RunWidthWrap.js';
 
@@ -52,7 +53,8 @@ var methods = {
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
     layout: Layout,
-    _layout: _layout, // Override this method
+    runLayout: RunLayout,
+    layoutChildren: LayoutChildren,
     runWidthWrap: RunWidthWrap,
     layoutBackgrounds: LayoutBackgrounds,
     postLayout: PostLayout,

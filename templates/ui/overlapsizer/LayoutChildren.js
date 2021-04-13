@@ -20,7 +20,7 @@ var LayoutChildren = function() {
 
         // Set size
         if (child.isRexSizer) {
-            child._layout(
+            child.runLayout(
                 this,
                 this.getExpandedChildWidth(child),
                 this.getExpandedChildHeight(child));

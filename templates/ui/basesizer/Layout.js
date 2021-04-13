@@ -1,5 +1,5 @@
 var Layout = function () {
-    this._layout();
+    this.runLayout();
     return this;
 }
 export default Layout;

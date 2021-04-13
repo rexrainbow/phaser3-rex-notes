@@ -1,5 +1,5 @@
 // Override
-var _layout = function (parent, newWidth, newHeight) {
+var RunLayout = function (parent, newWidth, newHeight) {
     // Skip hidden or !dirty sizer
     if (this.rexSizer.hidden || (!this.dirty)) {
         return this;
@@ -25,4 +25,4 @@ var _layout = function (parent, newWidth, newHeight) {
 
     return this.postLayout();
 }
-export default _layout;
+export default RunLayout;

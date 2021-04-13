@@ -2,7 +2,7 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import ResetChildPosition from './ResetChildPosition.js';
-import _layout from './Layout.js';
+import LayoutChildren from './LayoutChildren.js';
 import ChildrenMaskMethods from '../../utils/ChildrenMaskMethods.js';
 
 var methods = {
@@ -10,7 +10,7 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     resetChildPosition: ResetChildPosition,
-    _layout: _layout
+    layoutChildren: LayoutChildren
 };
 
 Object.assign(

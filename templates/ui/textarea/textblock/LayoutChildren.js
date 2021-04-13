@@ -3,33 +3,13 @@ import ResetTextObjectPosition from './ResetTextObjectPosition.js';
 import GlobZone from '../../../../plugins/utils/actions/GlobZone.js';
 import AlignIn from '../../../../plugins/utils/align/align/in/QuickSet.js';
 
-var Layout = function (parent, newWidth, newHeight) {
-    // Skip hidden or !dirty sizer
-    if (this.rexSizer.hidden || (!this.dirty)) {
-        return this;
-    }
-
-    var isTopmostParent = !parent;
-    if (isTopmostParent) {
-        this.preLayout();
-    }
-
-    // Set size
-    if (newWidth === undefined) {
-        newWidth = this.minWidth;
-    }
-    if (newHeight === undefined) {
-        newHeight = this.minHeight;
-    }
-    this.resize(newWidth, newHeight);
-
-    // Layout children
+var LayoutChildren = function () {
     var child, childConfig, padding;
     var startX = this.left,
         startY = this.top;
     var x, y, width, height; // Align zone
 
-    // Layout text child
+    // LayoutChildren text child
     // Skip invisible child
     child = this.textObject;
     if (!child.rexSizer.hidden) {
@@ -52,11 +32,6 @@ var Layout = function (parent, newWidth, newHeight) {
         }
 
     }
-
-    // Layout background children
-    this.layoutBackgrounds();
-
-    return this.postLayout();
 }
 
-export default Layout;
+export default LayoutChildren;

@@ -146,13 +146,13 @@ class Slider extends Sizer {
         return value;
     }
 
-    _layout(parent, newWidth, newHeight) {
+    runLayout(parent, newWidth, newHeight) {
         // Skip hidden or !dirty sizer
         if (this.rexSizer.hidden || (!this.dirty)) {
             return this;
         }
 
-        super._layout(parent, newWidth, newHeight);
+        super.runLayout(parent, newWidth, newHeight);
         this.updateThumb();
         this.updateIndicator();
         return this;
