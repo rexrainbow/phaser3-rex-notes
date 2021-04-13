@@ -142,7 +142,7 @@ var knob = scene.rexUI.add.knob({
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
 - `knobDepth` : Depth of knob (circular progress). Default value is `0`.
-- `text` : [Label](ui-label.md), [Text](text.md), [BBCodeText](bbcodeText.md), or [TagText](tagtext.md), which has `setText(text)` method, optional.
+- `text` : [Label](ui-label.md), [Text](text.md), [BBCodeText](bbcodetext.md), or [TagText](tagtext.md), which has `setText(text)` method, optional.
     - Don't set `textColor`, `textStrokeColor` if `text` parameter is provided.
     - Depth of text object ought to larger than knob (circular progress), to put text object in front of knob.
 - Display text : 

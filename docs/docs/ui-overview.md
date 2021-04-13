@@ -242,6 +242,11 @@
     scene.rexUI.add.edit(textObject, config);
     // scene.rexUI.add.edit(textObject, config, onClose);
     ```
+1. Wrap-expand text
+    ```javascript
+    var textObject = scene.rexUI.wrapExpandText(textObject);
+    // var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);
+    ```
 
 ### Touch input
 
