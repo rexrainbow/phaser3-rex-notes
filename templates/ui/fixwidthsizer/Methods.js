@@ -3,7 +3,6 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import PreLayout from './PreLayout.js';
 import LayoutChildren from './LayoutChildren.js';
-import ResolveWidth from './ResolveWidth.js';
 import RunWidthWrap from './RunWidthWrap.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
@@ -14,7 +13,6 @@ var methods = {
     getChildrenSizers: GetChildrenSizers,
     preLayout: PreLayout,
     layoutChildren: LayoutChildren,
-    resolveWidth: ResolveWidth,
     runWidthWrap: RunWidthWrap,
 };
 

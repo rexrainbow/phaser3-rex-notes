@@ -1,7 +1,7 @@
 import ResolveWidthBase from '../basesizer/ResolveWidth.js';
 
-var ResolveWidth = function (parent, width) {
-    var width = ResolveWidthBase.call(this, parent, width);
+var ResolveWidth = function (width) {
+    var width = ResolveWidthBase.call(this, width);
 
     // Calculate proportionLength
     if (this.orientation === 0) {
@@ -15,12 +15,6 @@ var ResolveWidth = function (parent, width) {
                 // Warning
             }
         }
-    }
-
-
-    if (!parent) {
-        // Resolve width of sizer children
-        this.resolveChildrenWidth(width);
     }
 
     return width;

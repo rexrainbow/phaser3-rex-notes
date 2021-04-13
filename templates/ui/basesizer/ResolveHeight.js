@@ -1,4 +1,4 @@
-var ResolveHeight = function (parent, height) {
+var ResolveHeight = function (height) {
     var minHeight = Math.max(this.childrenHeight, this.minHeight);
     if (height === undefined) {
         height = minHeight;

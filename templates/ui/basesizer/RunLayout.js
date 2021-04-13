@@ -12,13 +12,14 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     // Calculate parent width
-    newWidth = this.resolveWidth(parent, newWidth);
+    newWidth = this.resolveWidth(newWidth);
     // Run width wrap
     if (isTopmostParent) {
+        this.resolveChildrenWidth(newWidth);
         this.runWidthWrap(newWidth);
     }
     // Calculate parent height
-    newHeight = this.resolveHeight(parent, newHeight);
+    newHeight = this.resolveHeight(newHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
 
