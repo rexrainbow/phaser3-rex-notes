@@ -1,8 +1,6 @@
-import { GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-
 // Override
 var GetExpandedChildHeight = function (child, parentHeight) {
-    return GetDisplayHeight(child);
+    return parentHeight;
 }
 
 export default GetExpandedChildHeight;

@@ -13,7 +13,7 @@ var RunLayout = function (parent, newWidth, newHeight) {
 
     // Calculate parent width
     newWidth = this.resolveWidth(newWidth);
-    // Run width wrap
+    // Calculate all children width, run width wrap
     if (isTopmostParent) {
         this.resolveChildrenWidth(newWidth);
         this.runWidthWrap(newWidth);
