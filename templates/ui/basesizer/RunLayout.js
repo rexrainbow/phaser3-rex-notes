@@ -5,13 +5,18 @@ var RunLayout = function (parent, newWidth, newHeight) {
         return this;
     }
 
+    var isTopmostParent = !parent;
     // Preprocessor, top parent only
-    if (!parent) {
+    if (isTopmostParent) {
         this.preLayout();
     }
 
     // Calculate parent width
     newWidth = this.resolveWidth(parent, newWidth);
+    // Run width wrap
+    if (isTopmostParent) {
+        this.runWidthWrap(newWidth);
+    }
     // Calculate parent height
     newHeight = this.resolveHeight(parent, newHeight);
     // Resize parent

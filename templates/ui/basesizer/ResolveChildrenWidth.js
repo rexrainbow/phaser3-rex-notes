@@ -5,7 +5,7 @@ var ResolveChildrenWidth = function (width) {
         child = this.sizerChildren[i];
         if (child.isRexSizer) {
             childWidth = this.getExpandedChildWidth(child, width);
-            child.resolveWidth(this, childWidth);
+            child.resolveWidth(undefined, childWidth);
         }
     }
 }
