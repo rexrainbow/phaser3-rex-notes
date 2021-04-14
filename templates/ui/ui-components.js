@@ -8,6 +8,7 @@ import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
 import Knob from './knob/Knob.js';
+import CustomShapes from './customshapes/CustomShapes.js';
 import Chart from './chart/Chart.js';
 import NinePatch from './ninepatch/NinePatch.js';
 
@@ -68,6 +69,7 @@ export {
     CircularProgressCanvas,
     CircularProgress,
     Knob,
+    CustomShapes,
     NinePatch,
 
     Sizer,

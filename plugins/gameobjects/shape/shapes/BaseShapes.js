@@ -48,6 +48,14 @@ class BaseShapes extends Shape {
         this.setSize(this._width, value);
     }
 
+    setDirty(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.dirty = value;
+        return this;
+    }
+
     setSize(width, height) {
         this.dirty = this.dirty || (this._width !== width) || (this._height !== height);
         this._width = width;

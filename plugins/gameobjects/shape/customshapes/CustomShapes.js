@@ -1,4 +1,4 @@
-import BaseShapes from './BaseShapes.js';
+import BaseShapes from '../shapes/BaseShapes.js';
 import {
     Arc,
     Circle,
@@ -8,7 +8,7 @@ import {
     Lines,
     Rectangle,
     Triangle
-} from './geoms';
+} from '../shapes/geoms';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

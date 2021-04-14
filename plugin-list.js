@@ -9,7 +9,7 @@ module.exports = {
     'containerliteplugin': './plugins/containerlite-plugin.js',
     'gridtableplugin': './plugins/gridtable-plugin.js',
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
-    'shapesplugin': './plugins/shapes-plugin.js',
+    'customshapesplugin': './plugins/customshapes-plugin.js',
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',

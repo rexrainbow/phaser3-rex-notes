@@ -1,4 +1,4 @@
-import ShapesPlugin from '../../plugins/shapes-plugin.js';
+import CustomShapesPlugin from '../../plugins/customshapes-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateSpeechBubbleShape = function (scene) {
-    return scene.add.rexShapes({
+    return scene.add.rexCustomShapes({
         type: 'SpeechBubble',
         create: { lines: 1 },
         update: function () {
@@ -64,8 +64,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'ShapesPlugin',
-            plugin: ShapesPlugin,
+            key: 'CustomShapesPlugin',
+            plugin: CustomShapesPlugin,
             start: true
         }]
     }

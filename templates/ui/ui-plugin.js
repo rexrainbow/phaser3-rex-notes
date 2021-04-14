@@ -10,6 +10,7 @@ import CircleMaskImageFactory from './circlemaskimage/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
 import KnobFactory from './knob/Factory.js';
+import CustomShapesFactory from './customshapes/Factory.js';
 import ChartFactory from './chart/Factory.js';
 import NinePatchFactory from './ninepatch/Factory.js';
 
