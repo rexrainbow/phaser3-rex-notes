@@ -18,12 +18,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        createTextBox(this, 100, 100, {
+        createTextBox(this, 100, 200, {
             wrapWidth: 500,
         })
             .start(content, 50);
 
-        createTextBox(this, 100, 400, {
+        createTextBox(this, 100, 500, {
             wrapWidth: 500,
             fixedWidth: 500,
             fixedHeight: 65,
@@ -59,7 +59,7 @@ var createTextBox = function (scene, x, y, config) {
             text: 10,
         }
     })
-        .setOrigin(0)
+        .setOrigin(0, 1)
         .layout();
 
     textBox
