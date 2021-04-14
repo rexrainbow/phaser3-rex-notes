@@ -10,7 +10,7 @@ export default function (config, addToScene) {
     }
     var width = GetAdvancedValue(config, 'width', undefined);
     var height = GetAdvancedValue(config, 'height', width);
-    var gameObject = new Shapes(this.scene, 0, 0, width, height);
+    var gameObject = new Shapes(this.scene, 0, 0, width, height, config);
 
     BuildGameObject(this.scene, gameObject, config);
 
