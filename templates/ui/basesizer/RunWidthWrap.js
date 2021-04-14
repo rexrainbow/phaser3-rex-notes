@@ -1,10 +1,12 @@
 // Default method
 var RunWidthWrap = function (width) {
-    var children = this.getChildrenSizers(),
-        child, childWidth;
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
-        if (!child || child.ignoreLayout) {
+    var child, childWidth;
+    for (var i in this.sizerChildren) {
+        child = this.sizerChildren[i];
+        if (
+            (!child) ||
+            (child.isRexSizer && child.ignoreLayout)
+        ) {
             continue;
         }
 
