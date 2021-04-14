@@ -4,8 +4,6 @@ var GetExpandedChildWidth = function (child, colWidth) {
     if (childConfig.expand) {
         var padding = childConfig.padding;
         childWidth = colWidth - padding.left - padding.right;
-    } else {
-        childWidth = child.width;
     }
     return childWidth;
 }

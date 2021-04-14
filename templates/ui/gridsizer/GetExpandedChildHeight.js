@@ -4,8 +4,6 @@ var GetExpandedChildHeight = function (child, rowHeight) {
     if (childConfig.expand) {
         var padding = childConfig.padding;
         childHeight = rowHeight - padding.top - padding.bottom;
-    } else {
-        childHeight = child.height;
     }
     return childHeight;
 }
