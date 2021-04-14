@@ -16,6 +16,13 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 300)
             .setSize(200, 100)
 
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 2, color: 0xff0000, alpha: 1
+            }
+        })
+            .strokeRectShape(speechBubble.getBounds())
+
     }
 
     update() { }
