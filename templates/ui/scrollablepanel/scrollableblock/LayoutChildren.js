@@ -17,11 +17,12 @@ var LayoutChildren = function () {
             ResizeGameObject(child, childWidth, childHeight);
         }
 
-        // LayoutChildren children-mask
+        // Layout children-mask
         this.layoutChildrenMask();
-
+        // Update local state
         this.resetChildPosition();
-
+        // Re-mask children
+        this.maskChildren();
     }
 }
 

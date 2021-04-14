@@ -64,7 +64,6 @@ class ScrollableBlock extends BaseSizer {
             maskUpdateMode = GetValue(config, 'updateMode', 0);
         }
 
-        this.setMaskChildrenFlag();
         if (maskEnable) {
             this.setMaskUpdateMode(maskUpdateMode);
             this.enableChildrenMask(maskPadding);

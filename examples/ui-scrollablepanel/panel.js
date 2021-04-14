@@ -76,6 +76,7 @@ class Demo extends Phaser.Scene {
         })
             .layout()
         // .drawBounds(this.add.graphics(), 0xff0000);
+        // .popUp(300)
 
         // Set icon interactive
         var print = this.add.text(0, 0, '');
