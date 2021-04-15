@@ -1500,6 +1500,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-update-shape-callback" class="md-nav__link">
+    Set update shape callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-class" class="md-nav__link">
     Shape class
   </a>
@@ -5570,6 +5577,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-update-shape-callback" class="md-nav__link">
+    Set update shape callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-class" class="md-nav__link">
     Shape class
   </a>
@@ -5828,6 +5842,20 @@
 <ul>
 <li>Resize: <code>customShapes.resize(width, height)</code></li>
 <li>Set dirty: <code>customShapes.setDirty()</code></li>
+</ul>
+<h4 id="set-update-shape-callback">Set update shape callback<a class="headerlink" href="#set-update-shape-callback" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">setUpdateShapesCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>callback</code> :
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object     </span>
+    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
 <h5 id="common-properties">Common properties<a class="headerlink" href="#common-properties" title="Permanent link">&para;</a></h5>

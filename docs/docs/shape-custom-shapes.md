@@ -164,6 +164,22 @@ Redraw shapes when
 - Resize: `customShapes.resize(width, height)`
 - Set dirty: `customShapes.setDirty()`
 
+#### Set update shape callback
+
+```javascript
+customShapes.setUpdateShapesCallback(callback);
+```
+
+- `callback` :
+    ```javascript
+    function() {
+        // this : This custom shapes game object     
+        var shapes = this.getShapes();
+        var shape = this.getShape(name);
+        // ...
+    }
+    ```
+
 #### Shape class
 
 ##### Common properties

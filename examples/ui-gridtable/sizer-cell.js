@@ -120,7 +120,7 @@ var createRowItem = function (scene, config) {
             background
         )
         .add(
-            id,    // child
+            id,                          // child
             0,                           // proportion, fixed width
             'center',                    // align vertically
             { left: 10 },                // padding
@@ -129,7 +129,7 @@ var createRowItem = function (scene, config) {
         )
         .addSpace()
         .add(
-            score, // child
+            score,                       // child
             0,                           // proportion, fixed width
             'center',                    // align vertically
             { right: 10 },               // padding

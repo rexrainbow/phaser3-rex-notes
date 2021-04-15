@@ -23,6 +23,13 @@ const ShapeClasses = {
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
+const ClearAll = function () {
+    var shapes = this.getShapes();
+    for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+        shapes[i].lineStyle().fillStyle();
+    }
+};
+
 export default {
     createShape(shapeType, name) {
         var ShapeClass = ShapeClasses[shapeType];
@@ -62,13 +69,19 @@ export default {
             }
         }
 
-        var updateCallback = GetValue(config, 'update', undefined);
-        this.updateCallback = updateCallback;
+        this.setUpdateShapesCallback(GetValue(config, 'update'));
+    },
+
+    setUpdateShapesCallback(callback) {
+        if (callback === undefined) {
+            callback = ClearAll;
+        }
+        this.dirty = this.dirty || (this.updateCallback !== callback);
+        this.updateCallback = callback;
+        return this;
     },
 
     updateShapes() {
-        if (this.updateCallback) {
-            this.updateCallback.call(this);
-        }
+        this.updateCallback.call(this);
     }
 }
