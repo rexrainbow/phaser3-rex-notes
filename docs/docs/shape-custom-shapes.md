@@ -1,185 +1,81 @@
 ## Introduction
 
-Loading animations on shape.
+Custom shapes on shape.
 
 - Author: Rex
 - Game object
 
 ## Live demos
 
-- [Spinners](https://codepen.io/rexrainbow/pen/vYgNRMp)
-- [Custom spinner](https://codepen.io/rexrainbow/pen/YzNqJEd)
+- [Speech bubble](https://codepen.io/rexrainbow/pen/vYgjyPJ)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/spinner)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/custom-shapes)
 
 ### Install plugin
 
 #### Load minify file
 
 - Load plugin (minify file) in preload stage
-  ```javascript
-  scene.load.scenePlugin(
-    "rexspinnerplugin",
-    "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexspinnerplugin.min.js",
-    "rexSpinner",
-    "rexSpinner"
-  );
-  ```
-- Add spinner object
-  ```javascript
-  var audio = this.rexSpinner.add.audio(config);
-  var ball = this.rexSpinner.add.ball(config);
-  var bars = this.rexSpinner.add.bars(config);
-  var box = this.rexSpinner.add.box(config);
-  var clock = this.rexSpinner.add.clock(config);
-  var cube = this.rexSpinner.add.cube(config);
-  var dots = this.rexSpinner.add.dots(config);
-  var facebook = this.rexSpinner.add.facebook(config);
-  var grid = this.rexSpinner.add.grid(config);
-  var los = this.rexSpinner.add.los(config);
-  var orbit = this.rexSpinner.add.orbit(config);
-  var oval = this.rexSpinner.add.oval(config);
-  var pie = this.rexSpinner.add.pie(config);
-  var puff = this.rexSpinner.add.puff(config);
-  var radio = this.rexSpinner.add.radio(config);
-  var rings = this.rexSpinner.add.rings(config);
-  var spinner = this.rexSpinner.add.spinner(config);
-  ```
+    ```javascript
+    scene.load.plugin('rexcustomshapesplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcustomshapesplugin.min.js', true);
+    ```
+- Add custom shapes object
+    ```javascript
+    var customShapes = scene.add.rexCustomShapes(x, y, width, height, config);
+    ```
 
 #### Import plugin
 
 - Install rex plugins from npm
-  ```
-  npm i phaser3-rex-plugins
-  ```
+    ```
+    npm i phaser3-rex-plugins
+    ```
 - Install plugin in [configuration of game](game.md#configuration)
-  ```javascript
-  import SpinnerPlugin from "phaser3-rex-plugins/templates/spinner/spinner-plugin.js";
-  var config = {
-    // ...
-    plugins: {
-      scene: [
-        {
-          key: "rexSpinner",
-          plugin: SpinnerPlugin,
-          mapping: "rexSpinner",
-        },
+    ```javascript
+    import CustomShapesPlugin from 'phaser3-rex-plugins/plugins/customshapes-plugin.js';
+    var config = {
         // ...
-      ],
-    },
-    // ...
-  };
-  var game = new Phaser.Game(config);
-  ```
-- Add spinner object
-  ```javascript
-  var audio = this.rexSpinner.add.audio(config);
-  var ball = this.rexSpinner.add.ball(config);
-  var bars = this.rexSpinner.add.bars(config);
-  var box = this.rexSpinner.add.box(config);
-  var clock = this.rexSpinner.add.clock(config);
-  var cube = this.rexSpinner.add.cube(config);
-  var dots = this.rexSpinner.add.dots(config);
-  var facebook = this.rexSpinner.add.facebook(config);
-  var grid = this.rexSpinner.add.grid(config);
-  var los = this.rexSpinner.add.los(config);
-  var orbit = this.rexSpinner.add.orbit(config);
-  var oval = this.rexSpinner.add.oval(config);
-  var pie = this.rexSpinner.add.pie(config);
-  var puff = this.rexSpinner.add.puff(config);
-  var radio = this.rexSpinner.add.radio(config);
-  var rings = this.rexSpinner.add.rings(config);
-  var spinner = this.rexSpinner.add.spinner(config);
-  ```
+        plugins: {
+            global: [{
+                key: 'rexCustomShapesPlugin',
+                plugin: CustomShapesPlugin,
+                start: true
+            },
+            // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+- Add custom shapes object
+    ```javascript
+    var customShapes = scene.add.rexCustomShapes(x, y, width, height, config);
+    ```
 
 #### Import class
 
 - Install rex plugins from npm
-  ```
-  npm i phaser3-rex-plugins
-  ```
+    ```
+    npm i phaser3-rex-plugins
+    ```
 - Import class
-  ```javascript
-  import { 
-    Audio, Ball, Bars, Box, Clock, Cube, Custom, Dots, Facebook, Grid, 
-    Los, Orbit, Oval, Puff, Radio, Rings, Spinner
-  } from "phaser3-rex-plugins/templates/spinner/spinner-components.js";
-  ```
-- Add spinner object
-  ```javascript
-  var spinner = new Audio(scene, config);
-  sscene.add.existing(spinner);
-  ```
-
-### Add spinner object
-
-```javascript
-var spinner = scene.rexSpinner.add.audio({
-  // x: 0,
-  // y: 0,
-  // width: 64,
-  // height: 64,
-  // color: 0xffffff,
-
-  // duration: 1000,
-  // start: true
-});
-```
-
-- `x`, `y` : Position of this object.
-- `width`, `height` : Size of this object.
-- `color` : Fill color, or stroke color. Default value is `0xffffff`
-- `duration` : Duration of animation.
-- `start` : Start animation when object created.
-   - `false` : Don't play animation at beginning.
-
-### Play animation
-
-#### Pause
-
-```javascript
-spinner.pause();
-```
-
-#### Resume
-
-```javascript
-spinner.resume();
-```
-
-#### Stop
-
-```javascript
-spinner.stop();
-```
-
-#### Play animation manually
-
-1. Set `start` to `false` in config
-1. Set progress manually
     ```javascript
-    spinner.setValue(t);
+    import CustomShapes from 'phaser3-rex-plugins/plugins/bbcodetext.js';
     ```
-    or
-    ```javascript
-    spinner.value = t;
+- Add custom shapes object
+    ```javascript    
+    var customShapes = new CustomShapes(scene, x, y, width, height, config);
+    sscene.add.existing(customShapes);
     ```
-    - `t` : `0` ~ `1`
 
-### Custom spinner
+### Add custom shapes object
 
 ```javascript
-var customSpinner = this.rexSpinner.add.custom({
-    // x: 0,
-    // y: 0,
-    // width: 64,
-    // height: 64,
-    // color: 0xffffff,
-
-    // duration: 1000,
-    // start: true,
+var customShapes = scene.add.rexCustomShapes(x, y, width, height, {
+    // type: 'rexCustomShapes',
 
     create: {
         // shapeType: [name0, name1, ...],
@@ -194,54 +90,79 @@ var customSpinner = this.rexSpinner.add.custom({
     update: function() {
 
     },
-})
+});
 ```
+
+or
+
+```javascript
+var customShapes = scene.add.rexCustomShapes({
+    // x: 0,
+    // y: 0,
+    // width: 64,
+    // height: 64,
+    // type: 'rexCustomShapes',
+
+    create: {
+        // shapeType: [name0, name1, ...],
+        // shapeType: number,
+        // shapeType: name,
+    },
+
+    // create: function() {
+    // 
+    // },
+
+    update: function() {
+
+    },
+});
+```
+
+- `x`, `y` : Position of this object.
+- `width`, `height` : Size of this object.
 - `create` : Callback to create shapes
     - A plain object with `shapeType: name`, or `shapeType: number`
         - `shapeType` : 
-            - `'arc'` : Create [Arc shape](shape-spinner.md#arc).
-            - `'circle'` : Create [Circle shape](shape-spinner.md#circle).
-            - `'ellipse'` : Create [Ellipse shape](shape-spinner.md#ellipse).
-            - `'line'` : Create [Line shape](shape-spinner.md#line).
-            - `'lines'` : Create [Lines shape](shape-spinner.md#lines).
-            - `'rectangle'` : Create [Rectangle shape](shape-spinner.md#rectangle).
-            - `'triangle'` : Create [Triangle shape](shape-spinner.md#triangle).
+            - `'arc'` : Create [Arc shape](shape-custom-shapes.md#arc).
+            - `'circle'` : Create [Circle shape](shape-custom-shapes.md#circle).
+            - `'ellipse'` : Create [Ellipse shape](shape-custom-shapes.md#ellipse).
+            - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
+            - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
+            - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
+            - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
         - `nameArray` : An array of unique string name for each shape.
         - `name` : An unique string name of this shape.
         - `number` : Amount of shapes to create.
     - A callback
         ```javascript
         function() {
-            // this : This spinner game object
+            // this : This custom shapes game object
             var shape = this.createShape(shapeType, name);
             this.addShape(shape);
         }
         ```
         - `this.createShape(shapeType, name)` : Crate a shape instance, with an unique name.
-        - `this.addShape(shape)` : Add this shape instance to this custom spinner.
-- `update` : Callback when porgressing
+        - `this.addShape(shape)` : Add this shape instance to this custom custom shapes.
+- `update` : Callback when refresh
     ```javascript
     function() {
-        // this : This spinner game object
-        var centerX = this.centerX;
-        var centerY = this.centerY;
-        var radius = this.radius;
-        var color = this.color;
+        // this : This custom shapes game object     
         var shapes = this.getShapes();
         var shape = this.getShape(name);
-        var t = this.value;
         // ...
     }
     ```
-    - `this.value` : Progress, `0`~`1`.
-    - Position : 
-        - `this.centerX`, `this.centerY` : Center position of this spinner. The coordinate of top-left point is `(0,0)`
-        - `this.radius` : Minimun value of `this.centerX`, `this.centerY`, to draw shape at square.
-    - Color :
-        - `this.color` : Color property of this spinner.
     - Shape instances : Change properties of shape instances.
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
+
+#### Refresh
+
+Redraw shapes when
+
+- Resize: `customShapes.resize(width, height)`
+- Set dirty: `customShapes.setDirty()`
 
 #### Shape class
 

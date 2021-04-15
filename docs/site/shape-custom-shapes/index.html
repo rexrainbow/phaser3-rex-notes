@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/lokijs/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-custom-shapes/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>LokiJs - Notes of Phaser 3</title>
+        <title>Custom shapes - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                LokiJs
+                Custom shapes
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1156,10 +1158,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" checked>
     
     <label class="md-nav__link" for="nav-4-5">
       Graphics
@@ -1199,10 +1203,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3" checked>
     
     <label class="md-nav__link" for="nav-4-5-3">
       Shape
@@ -1398,11 +1404,188 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shape-custom-shapes/" title="Custom shapes" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Custom shapes
+      </label>
+    
+    <a href="./" title="Custom shapes" class="md-nav__link md-nav__link--active">
       Custom shapes
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-custom-shapes-object" class="md-nav__link">
+    Add custom shapes object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refresh" class="md-nav__link">
+    Refresh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-properties" class="md-nav__link">
+    Common properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line" class="md-nav__link">
+    Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines" class="md-nav__link">
+    Lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle" class="md-nav__link">
+    Triangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arc" class="md-nav__link">
+    Arc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse" class="md-nav__link">
+    Ellipse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3477,12 +3660,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Data
@@ -3714,12 +3895,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
     
     <label class="md-nav__link" for="nav-11-6">
       Database
@@ -3735,230 +3914,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        LokiJs
-      </label>
-    
-    <a href="./" title="LokiJs" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../lokijs/" title="LokiJs" class="md-nav__link">
       LokiJs
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-database" class="md-nav__link">
-    Create database
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-collection" class="md-nav__link">
-    Create collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#insert-document" class="md-nav__link">
-    Insert document
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#insert-documents" class="md-nav__link">
-    Insert documents
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#query" class="md-nav__link">
-    Query
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-document-by-id" class="md-nav__link">
-    Get document by id
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-documents" class="md-nav__link">
-    Filter documents
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#find-one-document" class="md-nav__link">
-    Find one document
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-by-function" class="md-nav__link">
-    Filter by function
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sort" class="md-nav__link">
-    Sort
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pagination" class="md-nav__link">
-    Pagination
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
-    Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove" class="md-nav__link">
-    Remove
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map" class="md-nav__link">
-    Map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map-reduce" class="md-nav__link">
-    Map-reduce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-result-set" class="md-nav__link">
-    Clone result set
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dynamic-view" class="md-nav__link">
-    Dynamic view
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#speed-up-quering" class="md-nav__link">
-    Speed-up quering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-unique-index" class="md-nav__link">
-    Custom unique index
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary-indices" class="md-nav__link">
-    Binary indices
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods-of-collection" class="md-nav__link">
-    Methods of collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize-deserialize" class="md-nav__link">
-    Serialize &amp; Deserialize
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5546,6 +5506,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -5554,30 +5521,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-database" class="md-nav__link">
-    Create database
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-collection" class="md-nav__link">
-    Create collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#insert-document" class="md-nav__link">
-    Insert document
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#insert-documents" class="md-nav__link">
-    Insert documents
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -5588,86 +5555,80 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#query" class="md-nav__link">
-    Query
+  <a href="#add-custom-shapes-object" class="md-nav__link">
+    Add custom shapes object
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-document-by-id" class="md-nav__link">
-    Get document by id
+  <a href="#refresh" class="md-nav__link">
+    Refresh
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-documents" class="md-nav__link">
-    Filter documents
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-properties" class="md-nav__link">
+    Common properties
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#find-one-document" class="md-nav__link">
-    Find one document
+  <a href="#line" class="md-nav__link">
+    Line
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-by-function" class="md-nav__link">
-    Filter by function
+  <a href="#lines" class="md-nav__link">
+    Lines
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sort" class="md-nav__link">
-    Sort
+  <a href="#rectangle" class="md-nav__link">
+    Rectangle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pagination" class="md-nav__link">
-    Pagination
+  <a href="#triangle" class="md-nav__link">
+    Triangle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update" class="md-nav__link">
-    Update
+  <a href="#arc" class="md-nav__link">
+    Arc
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove" class="md-nav__link">
-    Remove
+  <a href="#circle" class="md-nav__link">
+    Circle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map" class="md-nav__link">
-    Map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map-reduce" class="md-nav__link">
-    Map-reduce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-result-set" class="md-nav__link">
-    Clone result set
+  <a href="#ellipse" class="md-nav__link">
+    Ellipse
   </a>
   
 </li>
@@ -5677,51 +5638,8 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#dynamic-view" class="md-nav__link">
-    Dynamic view
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#speed-up-quering" class="md-nav__link">
-    Speed-up quering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-unique-index" class="md-nav__link">
-    Custom unique index
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary-indices" class="md-nav__link">
-    Binary indices
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods-of-collection" class="md-nav__link">
-    Methods of collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize-deserialize" class="md-nav__link">
-    Serialize &amp; Deserialize
-  </a>
   
 </li>
         
@@ -5746,300 +5664,434 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/lokijs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-custom-shapes.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>LokiJs</h1>
+                  <h1>Custom shapes</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>In-memory JavaScript Datastore with Persistence.</p>
+<p>Custom shapes on shape.</p>
 <ul>
-<li><a href="https://www.npmjs.com/package/lokijs">Reference</a></li>
-<li><a href="https://rawgit.com/techfort/LokiJS/master/jsdoc/index.html">API</a></li>
+<li>Author: Rex</li>
+<li>Game object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/vYgjyPJ">Speech bubble</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs">Sample code</a></p>
-<h3 id="create-database">Create database<a class="headerlink" href="#create-database" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">loki</span><span class="p">();</span>
-<span class="c1">// var db = new loki(&#39;loki.json&#39;);  // load database from file</span>
-</code></pre></div>
-
-<h3 id="create-collection">Create collection<a class="headerlink" href="#create-collection" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-
-<h3 id="insert-document">Insert document<a class="headerlink" href="#insert-document" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docInColl</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>  <span class="c1">// doc: an object</span>
-</code></pre></div>
-
-<p>Get Id</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">docInColl</span><span class="p">.</span><span class="nx">$loki</span><span class="p">;</span>
-</code></pre></div>
-
-<h4 id="insert-documents">Insert documents<a class="headerlink" href="#insert-documents" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">docArray</span><span class="p">);</span>  <span class="c1">// documents in array</span>
-</code></pre></div>
-
-<h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
-<h4 id="get-document-by-id">Get document by id<a class="headerlink" href="#get-document-by-id" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>  <span class="c1">// id: `$loki`</span>
-</code></pre></div>
-
-<h4 id="filter-documents">Filter documents<a class="headerlink" href="#filter-documents" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/custom-shapes">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li><strong>$eq</strong> : filter for document(s) with property of (strict) equality
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-<span class="c1">// var docArray = collection.find({key: {&#39;$eq&#39;: value});</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcustomshapesplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcustomshapesplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li><strong>$aeq</strong> : filter for document(s) with property of abstract (loose) equality
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div>
-    For example
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">coll</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="mi">20</span><span class="p">}});</span>  <span class="c1">// age == &#39;20&#39; or age == 20</span>
-</code></pre></div></li>
-<li><strong>$ne</strong> : filter for document(s) with property not equal to provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$ne&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$gt</strong> : filter for document(s) with property greater than provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$gte</strong> : filter for document(s) with property greater or equal to provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gte&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$lt</strong> : filter for document(s) with property less than provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$lte</strong> : filter for document(s) with property less than or equal to provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lte&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$between</strong> : filter for documents(s) with property between provided values
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$between&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">]});</span>
-</code></pre></div></li>
-<li><strong>$in</strong> : filter for document(s) with property matching any of the provided array values
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$in&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</code></pre></div>
-    Your property should not be an array but your compare values should be.</li>
-<li><strong>$nin</strong> : filter for document(s) with property not matching any of the provided array values
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$nin&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</code></pre></div></li>
-<li><strong>$contains</strong> : filter for document(s) with property containing the provided value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$contains&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div>
-    Use this when your property contains an array but your compare value is not an array</li>
-<li><strong>$containsAny</strong> : filter for document(s) with property containing any of the provided values
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$containsAny&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</code></pre></div></li>
-<li><strong>$containsNone</strong> : filter for documents(s) with property containing none of the provided values
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$containsNone&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</code></pre></div></li>
-<li><strong>$regex</strong> : filter for document(s) with property matching provided regular expression
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="nx">pattern</span><span class="p">});</span>
-<span class="c1">// var docArray = collection.find({key: {&#39;$regex&#39;: [pattern, options]});</span>
-</code></pre></div>
-    For example
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="s1">&#39;din&#39;</span> <span class="p">}});</span>
-<span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;din&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="p">}});</span>
-</code></pre></div></li>
-<li><strong>$dteq</strong>: filter for document(s) with date property equal to provided date value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$dteq&#39;</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;1/1/2017&#39;</span><span class="p">)});</span>
-</code></pre></div></li>
-<li><strong>$type</strong> : filter for documents which have a property of a specified type
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$type&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span> <span class="c1">// &#39;string&#39;, or &#39;number&#39;, ...</span>
-</code></pre></div></li>
-<li><strong>$size</strong> : filter for documents which have array property of specified size
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$size&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div>
-    <em>(does not work for strings)</em></li>
-<li><strong>$len</strong> : filter for documents which have string property of specified length
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$len&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</code></pre></div></li>
-<li><strong>$or</strong> : filter for documents which meet any of the nested subexpressions
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s1">&#39;$or&#39;</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="nx">key0</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lt&#39;</span><span class="o">:</span> <span class="nx">value0</span><span class="p">},</span>
-    <span class="p">{</span><span class="nx">key1</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gte&#39;</span><span class="o">:</span> <span class="nx">value1</span><span class="p">},</span>
-    <span class="c1">// ...</span>
-<span class="p">]});</span>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h4 id="find-one-document">Find one document<a class="headerlink" href="#find-one-document" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({});</span>
-</code></pre></div>
-
-<h4 id="filter-by-function">Filter by function<a class="headerlink" href="#filter-by-function" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">isPicked</span><span class="p">;</span>  <span class="c1">// true to pick this document</span>
-<span class="p">})</span>
-</code></pre></div>
-
-<h4 id="sort">Sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h4>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Sort with a key
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">simplesort</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">data</span><span class="p">();</span>  <span class="c1">// ascending</span>
-<span class="c1">// var docArray = collection.chain().find({}).simplesort(key, {desc: true}).data();  // descending</span>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Sort with mutiple keys
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">compoundsort</span><span class="p">([</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">key1</span><span class="p">]).</span><span class="nx">data</span><span class="p">();</span>  <span class="c1">// key0, key1: ascending</span>
-<span class="c1">// var docArray = collection.chain().find({}).compoundsort([key0, [key1, true]]).data(); // key0: ascending, key1: descending</span>
-</code></pre></div></li>
-<li>Sort with function
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">sort</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc1</span><span class="p">,</span> <span class="nx">doc2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">data</span><span class="p">();</span>
-</code></pre></div>
-    result:<ul>
-<li><code>0</code>: equal</li>
-<li><code>1</code>: greater</li>
-<li><code>-1</code>: less</li>
-</ul>
-</li>
-</ul>
-<h4 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h4>
-<p>Get documents from <code>start</code> to <code>start+count-1</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">offset</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">data</span><span class="p">();</span>
-</code></pre></div>
-
-<h4 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h4>
-<p>Update each filtered documents.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">update</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> 
-        <span class="c1">//</span>
-        <span class="k">return</span> <span class="nx">doc</span><span class="p">;</span>
-    <span class="p">});</span>
-</code></pre></div>
-
-<h4 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
-<p>Remove filtered documents.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">remove</span><span class="p">();</span>
-</code></pre></div>
-
-<h4 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h4>
-<p>Map document into a new anonymous collection, won't affect original collection.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">map</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CustomShapesPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/customshapes-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCustomShapesPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CustomShapesPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
-        <span class="k">return</span> <span class="nx">doc</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">data</span><span class="p">();</span>
-</code></pre></div>
-
-<h4 id="map-reduce">Map-reduce<a class="headerlink" href="#map-reduce" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Map document into a new anonymous collection</li>
-<li>Run reduceFn to get final result value from result set of step 1.</li>
-</ol>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mapFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
     <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">doc</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">reduceFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">docArray</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CustomShapes</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/bbcodetext.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomShapes</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">customShapes</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="add-custom-shapes-object">Add custom shapes object<a class="headerlink" href="#add-custom-shapes-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// type: &#39;rexCustomShapes&#39;,</span>
+
+    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// shapeType: [name0, name1, ...],</span>
+        <span class="c1">// shapeType: number,</span>
+        <span class="c1">// shapeType: name,</span>
+    <span class="p">},</span>
+
+    <span class="c1">// create: function() {</span>
+    <span class="c1">// </span>
+    <span class="c1">// },</span>
+
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomShapes</span><span class="p">({</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// width: 64,</span>
+    <span class="c1">// height: 64,</span>
+    <span class="c1">// type: &#39;rexCustomShapes&#39;,</span>
+
+    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// shapeType: [name0, name1, ...],</span>
+        <span class="c1">// shapeType: number,</span>
+        <span class="c1">// shapeType: name,</span>
+    <span class="p">},</span>
+
+    <span class="c1">// create: function() {</span>
+    <span class="c1">// </span>
+    <span class="c1">// },</span>
+
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<ul>
+<li><code>x</code>, <code>y</code> : Position of this object.</li>
+<li><code>width</code>, <code>height</code> : Size of this object.</li>
+<li><code>create</code> : Callback to create shapes<ul>
+<li>A plain object with <code>shapeType: name</code>, or <code>shapeType: number</code><ul>
+<li><code>shapeType</code> : <ul>
+<li><code>'arc'</code> : Create <a href="./#arc">Arc shape</a>.</li>
+<li><code>'circle'</code> : Create <a href="./#circle">Circle shape</a>.</li>
+<li><code>'ellipse'</code> : Create <a href="./#ellipse">Ellipse shape</a>.</li>
+<li><code>'line'</code> : Create <a href="./#line">Line shape</a>.</li>
+<li><code>'lines'</code> : Create <a href="./#lines">Lines shape</a>.</li>
+<li><code>'rectangle'</code> : Create <a href="./#rectangle">Rectangle shape</a>.</li>
+<li><code>'triangle'</code> : Create <a href="./#triangle">Triangle shape</a>.</li>
+</ul>
+</li>
+<li><code>nameArray</code> : An array of unique string name for each shape.</li>
+<li><code>name</code> : An unique string name of this shape.</li>
+<li><code>number</code> : Amount of shapes to create.</li>
+</ul>
+</li>
+<li>A callback
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="nx">shapeType</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">mapReduce</span><span class="p">(</span><span class="nx">mapFn</span><span class="p">,</span> <span class="nx">reduceFn</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="clone-result-set">Clone result set<a class="headerlink" href="#clone-result-set" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">resultSet</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({});</span>
-<span class="kd">var</span> <span class="nx">resultSetClone</span> <span class="o">=</span> <span class="nx">resultSet</span><span class="p">.</span><span class="nx">branch</span><span class="p">();</span>
-
-<span class="c1">// resultSetClone.find({}).data();</span>
-</code></pre></div>
-
-<h3 id="dynamic-view">Dynamic view<a class="headerlink" href="#dynamic-view" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create dynamic view
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">addDynamicView</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Add filters<ul>
-<li>find
-    <div class="codehilite"><pre><span></span><code><span class="nx">view</span><span class="p">.</span><span class="nx">applyFind</span><span class="p">({});</span>
-</code></pre></div></li>
-<li>where
-    <div class="codehilite"><pre><span></span><code><span class="nx">view</span><span class="p">.</span><span class="nx">applyWhere</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">});</span>
-</code></pre></div></li>
-<li>simple sort
-    <div class="codehilite"><pre><span></span><code><span class="nx">view</span><span class="p">.</span><span class="nx">applySimpleSort</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>sort by multiple keys
-    <div class="codehilite"><pre><span></span><code><span class="nx">view</span><span class="p">.</span><span class="nx">applySortCriteria</span><span class="p">([</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">key1</span><span class="p">]);</span>
-<span class="c1">// view.applySortCriteria([key0, [key1, true]]);</span>
-</code></pre></div></li>
-<li>sort function
-    <div class="codehilite"><pre><span></span><code><span class="nx">view</span><span class="p">.</span><span class="nx">applySort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc1</span><span class="p">,</span> <span class="nx">doc2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
-<span class="p">});</span>
-</code></pre></div>
-    result:<ul>
-<li><code>0</code>: equal</li>
-<li><code>1</code>: greater</li>
-<li><code>-1</code>: less</li>
+</code></pre></div><ul>
+<li><code>this.createShape(shapeType, name)</code> : Crate a shape instance, with an unique name.</li>
+<li><code>this.addShape(shape)</code> : Add this shape instance to this custom custom shapes.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Get result data
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
+<li><code>update</code> : Callback when refresh
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object     </span>
+    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>Shape instances : Change properties of shape instances.<ul>
+<li><code>this.getShapes()</code> : Return all shapes in an array.</li>
+<li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="refresh">Refresh<a class="headerlink" href="#refresh" title="Permanent link">&para;</a></h4>
+<p>Redraw shapes when</p>
+<ul>
+<li>Resize: <code>customShapes.resize(width, height)</code></li>
+<li>Set dirty: <code>customShapes.setDirty()</code></li>
+</ul>
+<h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
+<h5 id="common-properties">Common properties<a class="headerlink" href="#common-properties" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Style<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fillAlpha</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">fillAlpha</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">lineWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">strokeAlpha</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeAlpha</span><span class="p">;</span>
 </code></pre></div></li>
-</ol>
-<p>Add new filters
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">branchResultset</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">data</span><span class="p">();</span>
-</code></pre></div></p>
-<h3 id="speed-up-quering">Speed-up quering<a class="headerlink" href="#speed-up-quering" title="Permanent link">&para;</a></h3>
-<h4 id="custom-unique-index">Custom unique index<a class="headerlink" href="#custom-unique-index" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Define custom unique index
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">unique</span><span class="o">:</span> <span class="p">[</span><span class="nx">key0</span><span class="p">]</span>
-<span class="p">});</span>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Get document by custom unique index
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<li>Clear
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">().</span><span class="nx">lineStyle</span><span class="p">();</span>
 </code></pre></div></li>
-</ol>
-<h4 id="binary-indices">Binary indices<a class="headerlink" href="#binary-indices" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Define binary index
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">indices</span><span class="o">:</span> <span class="p">[</span><span class="nx">key0</span><span class="p">]</span>
-<span class="p">});</span>
+</ul>
+</li>
+<li>Private data<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var data = shape.getData(key, defaultValue);</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Name<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h5>
+<ul>
+<li>End points<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y1</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">setP0</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">setP1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-    Or
-    <div class="codehilite"><pre><span></span><code><span class="nx">collection</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Get documents by normal filters
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key0</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">}});</span>
-</code></pre></div></li>
-</ol>
-<h3 id="methods-of-collection">Methods of collection<a class="headerlink" href="#methods-of-collection" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Average value of a property
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">avgValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">avg</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Maximum value of a property
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">maxValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Minimum value of a property
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">minValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Median value of a property
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">medianValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">median</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Amount of documents
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>  <span class="c1">// {key: {&#39;$gt&#39;: value}}</span>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">x0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y0</span> <span class="o">=</span> <span class="nx">y0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x1</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="nx">y1</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
-<h3 id="serialize-deserialize">Serialize &amp; Deserialize<a class="headerlink" href="#serialize-deserialize" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h5 id="lines">Lines<a class="headerlink" href="#lines" title="Permanent link">&para;</a></h5>
 <ul>
-<li>Database as string
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">serialize</span><span class="p">();</span>
+<li>Start position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">startAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Load database from string
-    <div class="codehilite"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">loadJSON</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+<li>Line to<ul>
+<li>To position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To relative position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To vertical position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">verticalLineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To relative vertical position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">verticalLineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To horizontal position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">horizontalLineTo</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</code></pre></div></li>
+<li>To relative horizontal position
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">horizontalLineTo</span><span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+</li>
+<li>Add arc composed of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
+</ul>
+</li>
+<li>Add elliptical arc composed of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">ellipticalArc</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
+</ul>
+</li>
+<li>Close path
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Rotation all points
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>angle</code> : Rotate angle in degrees.</li>
+</ul>
+</li>
+</ul>
+<h5 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Top-left<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">setTopLeftPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
+<span class="nx">rectangle</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">top</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Size<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">rectangle</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">rectangle</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">rectangle</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Vertices<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x0</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y0</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y1</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x2</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y2</span> <span class="o">=</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">triangle</span><span class="p">.</span><span class="nx">setP0</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">setP1</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">setP2</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">x0</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">y0</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x1</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">y1</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">x2</span><span class="p">;</span>
+<span class="nx">triangle</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">y2</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="arc">Arc<a class="headerlink" href="#arc" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Center position<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
+<span class="c1">// arc.setRadius(radius);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Angles<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span><span class="p">;</span> <span class="c1">// boolean        </span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">);</span>  <span class="c1">// anticlockwise = false</span>
+<span class="c1">// arc.setAngle(startAngle, endAngle, anticlockwise);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">startAngle</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">endAngle</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">anticlockwise</span><span class="p">;</span> <span class="c1">// boolean</span>
+</code></pre></div><ul>
+<li><code>startAngle</code>, <code>endAngle</code> : Start/end angle in degrees.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pie<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pie</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">pie</span><span class="p">;</span> <span class="c1">// boolean</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setPie</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">pie</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="circle">Circle<a class="headerlink" href="#circle" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Center position<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setCenterPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radiusX</span><span class="p">,</span> <span class="nx">radiusY</span><span class="p">);</span>
+<span class="c1">// arc.setRadius(radius);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">arc</span><span class="p">.</span><span class="nx">radiusX</span> <span class="o">=</span> <span class="nx">radiusX</span><span class="p">;</span>
+<span class="nx">arc</span><span class="p">.</span><span class="nx">radiusY</span> <span class="o">=</span> <span class="nx">radiusY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h5 id="ellipse">Ellipse<a class="headerlink" href="#ellipse" title="Permanent link">&para;</a></h5>
+<p>The same as Circle.</p>
                 
                   
                 
@@ -6061,7 +6113,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../csvtohashtable/" title="CSV to hash table" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shape-spinner/" title="Spinner" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -6070,19 +6122,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                CSV to hash table
+                Spinner
               </span>
             </div>
           </a>
         
         
-          <a href="../config-data/" title="Configuration data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../canvas/" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Configuration data
+                Canvas
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

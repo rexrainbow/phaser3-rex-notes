@@ -106,6 +106,7 @@
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Shape/Circular progress](shape-circularprogress.md): Circular progress bar shape.
+1. [Shape/Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
 1. [Shape/Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Shape/Spinner](shape-spinner.md): Loading animations on shape.
 1. [Shatter image](shatter-image.md): Shatter image to triangle faces.

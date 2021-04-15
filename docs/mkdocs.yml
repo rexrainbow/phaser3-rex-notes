@@ -80,6 +80,7 @@ nav:
             - Round Rectangle: shape-roundrectangle.md
             - Circular progres: shape-circularprogress.md
             - Spinner: shape-spinner.md
+            - Custom shapes: shape-custom-shapes.md
         - Canvas:
             - Canvas: canvas.md
             - Round rectangle: canvas-roundrectangle.md

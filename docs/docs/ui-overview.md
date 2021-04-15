@@ -120,6 +120,21 @@
         // ...
     }
     ```
+1. [Custom shapes](shape-custom-shapes.md): Custom shapes on shape.
+    ```javascript
+    var customShapes = scene.rexUI.add.customShapes(x, y, width, height, config);
+    ```
+    or
+    ```javascript
+    class MyCustomShapes extends RexPlugins.UI.CustomShapes {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }    
+    ```
 1. [Canvas-round-rectangle](canvas-roundrectangle.md): Round rectangle on canvas.
     ```javascript
     var shape = scene.rexUI.add.roundRectangleCanvas(x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
