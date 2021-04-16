@@ -74,16 +74,8 @@ class Demo extends Phaser.Scene {
                     scene.rexUI.hide(cellContainer.getElement('left'))
                 }
 
-                // Set left,right padding
-                if (item.isLeft) {
-                    cellContainer.setInnerPadding('left', 25).setInnerPadding('right', 10);
-                } else {
-                    cellContainer.setInnerPadding('right', 25).setInnerPadding('left', 10);
-                }
-
                 // Set content
                 cellContainer.getElement('content')
-                    .setAlign((item.isLeft) ? 'left' : 'right')
                     .setText(item.content);
 
                 // Set bubble shape
@@ -96,7 +88,7 @@ class Demo extends Phaser.Scene {
                     .setDirty(true).layout()  // Run layout manually
                     .setDirty(false)          // Don't run layout again
 
-                cell.height = cellContainer.height + 5;
+                cell.height = cellContainer.height + 10;
 
                 return cellContainer;
             },
@@ -113,7 +105,7 @@ class Demo extends Phaser.Scene {
 var CreateCellContainer = function (scene) {
     return scene.rexUI.add.sizer({
         orientation: 'x',
-        space: { left: 10, right: 10, top: 10, bottom: 10, item: 10 }
+        space: { left: 25, right: 25, top: 10, bottom: 10, item: 10 }
     })
         .addBackground(
             CreateSpeechBubbleShape(scene, COLOR_PRIMARY, 0xffffff),
@@ -151,7 +143,7 @@ var LeftTailBubble = function () {
     var radius = 20;
     var indent = 15;
 
-    var left = 0 + indent, right = this.width,
+    var left = 0 + indent, right = this.width - indent,
         top = 0, bottom = this.height;
     this.getShapes()[0]
         .lineStyle(2, strokeColor, 1)
@@ -174,7 +166,7 @@ var RightTailBubble = function () {
     var radius = 20;
     var indent = 15;
 
-    var left = 0, right = this.width - indent,
+    var left = 0 + indent, right = this.width - indent,
         top = 0, bottom = this.height;
     this.getShapes()[0]
         .lineStyle(2, strokeColor, 1)
