@@ -4,6 +4,7 @@ import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
+import PaddingMethods from './PaddingMethods.js';
 import ResolveWidth from './ResolveWidth.js';
 import ResolveChildrenWidth from './ResolveChildrenWidth.js';
 import ResolveHeight from './ResolveHeight.js';
@@ -26,6 +27,7 @@ import SetAnchor from './SetAnchor.js';
 import ScaleMethods from './ScaleMethods.js';
 import FadeMethods from './FadeMethods.js';
 import EaseMoveMethods from './EaseMoveMethods.js';
+import HideMethods from './HideMethods.js';
 import IsInTouching from './IsInTouching.js';
 import PointToChild from './PointToChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
@@ -67,11 +69,13 @@ var methods = {
 
 Object.assign(
     methods,
+    PaddingMethods,
     AddChildMethods,
     GetParentSizerMethods,
     ScaleMethods,
     FadeMethods,
-    EaseMoveMethods
+    EaseMoveMethods,
+    HideMethods
 );
 
 export default methods;

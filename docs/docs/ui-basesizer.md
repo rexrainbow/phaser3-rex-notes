@@ -491,6 +491,86 @@ sizer.pin(gameObject);
                 - `'right-bottom'`, or `Phaser.Display.Align.BOTTOM_RIGHT` : Align text game object at right-bottom
     - Text game objects of these children's name will be attached on graphics game object, `graphics.clear()`, or `graphics.destroy()` will also destroy these text game objects
 
+### Hide
+
+- Set invisible, won't layout it
+    ```javascript
+    sizer.hide();
+    ```
+    or
+    ```javascript
+    sizer.hide(gameObject);
+    ```
+- Set visible, will layout it
+    ```javascript
+    sizer.show();
+    ```
+    or
+    ```javascript
+    sizer.show(gameObject);
+    ```
+
+### Padding
+
+- Set inner padding
+    - Set inner padding via config
+        ```javascript
+        sizer.setInnerPadding({
+            left: leftPadding, 
+            right: rightPadding,
+            top: topPadding,
+            bottom: bottomPadding
+        });
+        ```
+    - Set inner padding via single number
+        ```javascript
+        sizer.setInnerPadding(value);
+        ```
+    - Set specific inner padding
+        ```javascript
+        sizer.setInnerPadding(key, value);
+        ```
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+- Get inner padding
+    - Get inner padding values
+        ```javascript
+        var innerPadding = sizer.getInnerPadding();
+        ```
+    - Get specific inner padding
+        ```javascript
+        var value = sizer.getInnerPadding(key);
+        ```
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+- Set outter padding
+    - Set outter padding via config
+        ```javascript
+        sizer.setOutterPadding({
+            left: leftPadding, 
+            right: rightPadding,
+            top: topPadding,
+            bottom: bottomPadding
+        });
+        ```
+    - Set outter padding via single number
+        ```javascript
+        sizer.setOutterPadding(value);
+        ```
+    - Set specific outter padding
+        ```javascript
+        sizer.setOutterPadding(key, value);
+        ```
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+- Get outter padding
+    - Get outter padding values
+        ```javascript
+        var innerPadding = sizer.getOutterrPadding();
+        ```
+    - Get specific outter padding
+        ```javascript
+        var value = sizer.getOutterPadding(key);
+        ```
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+
 ### Anchor
 
 ```javascript

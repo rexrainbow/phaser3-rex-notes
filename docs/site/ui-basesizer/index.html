@@ -4911,6 +4911,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hide" class="md-nav__link">
+    Hide
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    Padding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#anchor" class="md-nav__link">
     Anchor
   </a>
@@ -5569,6 +5583,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hide" class="md-nav__link">
+    Hide
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padding" class="md-nav__link">
+    Padding
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#anchor" class="md-nav__link">
     Anchor
   </a>
@@ -6090,6 +6118,88 @@
 </ul>
 </li>
 <li>Text game objects of these children's name will be attached on graphics game object, <code>graphics.clear()</code>, or <code>graphics.destroy()</code> will also destroy these text game objects</li>
+</ul>
+</li>
+</ul>
+<h3 id="hide">Hide<a class="headerlink" href="#hide" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set invisible, won't layout it
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">hide</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set visible, will layout it
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set inner padding<ul>
+<li>Set inner padding via config
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setInnerPadding</span><span class="p">({</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="nx">leftPadding</span><span class="p">,</span> 
+    <span class="nx">right</span><span class="o">:</span> <span class="nx">rightPadding</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="nx">topPadding</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="nx">bottomPadding</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Set inner padding via single number
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setInnerPadding</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set specific inner padding
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setInnerPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Get inner padding<ul>
+<li>Get inner padding values
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerPadding</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getInnerPadding</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get specific inner padding
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getInnerPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set outter padding<ul>
+<li>Set outter padding via config
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setOutterPadding</span><span class="p">({</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="nx">leftPadding</span><span class="p">,</span> 
+    <span class="nx">right</span><span class="o">:</span> <span class="nx">rightPadding</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="nx">topPadding</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="nx">bottomPadding</span>
+<span class="p">});</span>
+</code></pre></div></li>
+<li>Set outter padding via single number
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setOutterPadding</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set specific outter padding
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">setOutterPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Get outter padding<ul>
+<li>Get outter padding values
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerPadding</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getOutterrPadding</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get specific outter padding
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getOutterPadding</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, <code>'bottom'</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

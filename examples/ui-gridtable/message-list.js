@@ -61,7 +61,11 @@ class Demo extends Phaser.Scene {
                 }
 
                 // Set properties from item value
+
+                // Set mini width
                 cellContainer.setMinWidth(width);
+
+                // Hide icon according to item.isLeft
                 if (item.isLeft) {
                     scene.rexUI.show(cellContainer.getElement('left'))
                     scene.rexUI.hide(cellContainer.getElement('right'))
@@ -70,14 +74,24 @@ class Demo extends Phaser.Scene {
                     scene.rexUI.hide(cellContainer.getElement('left'))
                 }
 
+                // Set left,right padding
+                if (item.isLeft) {
+                    cellContainer.setInnerPadding('left', 25).setInnerPadding('right', 10);
+                } else {
+                    cellContainer.setInnerPadding('right', 25).setInnerPadding('left', 10);
+                }
+
+                // Set content
                 cellContainer.getElement('content')
                     .setAlign((item.isLeft) ? 'left' : 'right')
                     .setText(item.content);
 
+                // Set bubble shape
                 cellContainer.getElement('bubble').setUpdateShapesCallback(
                     (item.isLeft) ? LeftTailBubble : RightTailBubble
                 );
 
+                // Layout manually, to get cell height
                 cellContainer
                     .setDirty(true).layout()  // Run layout manually
                     .setDirty(false)          // Don't run layout again
@@ -99,7 +113,7 @@ class Demo extends Phaser.Scene {
 var CreateCellContainer = function (scene) {
     return scene.rexUI.add.sizer({
         orientation: 'x',
-        space: { left: 25, right: 25, top: 10, bottom: 10, item: 10 }
+        space: { left: 10, right: 10, top: 10, bottom: 10, item: 10 }
     })
         .addBackground(
             CreateSpeechBubbleShape(scene, COLOR_PRIMARY, 0xffffff),

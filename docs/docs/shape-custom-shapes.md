@@ -157,13 +157,6 @@ var customShapes = scene.add.rexCustomShapes({
         - `this.getShapes()` : Return all shapes in an array.
         - `this.getShape(name)` : Return a shape by the unique string name.
 
-#### Refresh
-
-Redraw shapes when
-
-- Resize: `customShapes.resize(width, height)`
-- Set dirty: `customShapes.setDirty()`
-
 #### Set update shape callback
 
 ```javascript
@@ -179,6 +172,14 @@ customShapes.setUpdateShapesCallback(callback);
         // ...
     }
     ```
+
+#### Refresh
+
+Redraw shapes when
+
+- Resize : `customShapes.resize(width, height)`
+- Set dirty : `customShapes.setDirty()`
+- Set update shape callback : `customShapes.setUpdateShapesCallback(callback)`
 
 #### Shape class
 

@@ -1,7 +1,6 @@
 import Container from '../container/Container.js';
 import Methods from './Methods.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,6 +12,7 @@ class Base extends Container {
         this.setMinSize(minWidth, minHeight);
         this.setName(GetValue(config, 'name', ''));
         this.rexSizer = {};
+        this.space = {};
         this.backgroundChildren = undefined;
         this.sizerChildren = undefined; // [] or {}
 
@@ -21,7 +21,7 @@ class Base extends Container {
             this.setAnchor(anchorConfig);
         }
 
-        this.space = GetBoundsConfig(GetValue(config, 'space', 0));
+        this.setInnerPadding(GetValue(config, 'space', 0));
         this.setDraggable(GetValue(config, 'draggable', false));
         this.setDirty(true);
     }
