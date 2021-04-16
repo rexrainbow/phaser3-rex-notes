@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         var onCellVisible = function (cell) {
             var scene = cell.scene;
             var cellIdx = cell.index;
-            // cell.height = (cellIdx % 2) ? 40 : 80;  // Set height of visible cell
+            cell.height = (cellIdx % 2) ? 40 : 80;  // Set height of visible cell
 
             var color = (cellIdx % 2) ? COLOR_PRIMARY : COLOR_DARK;
             var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color)
@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
         };
         var table = this.add.rexGridTable(400, 300, 250, 400, {
             cellWidth: 240,
-            cellHeight: 60,
+            cellHeight: 1,
             cellsCount: 20,
             columns: 1,
             cellVisibleCallback: onCellVisible.bind(this),
@@ -39,13 +39,6 @@ class Demo extends Phaser.Scene {
                 padding: 2,
             }
         });
-
-        // Set height of all cells
-        for (var i = 0, cnt = table.cellsCount; i < cnt; i++) {
-            var cellHeight = (i % 2) ? 40 : 80;
-            table.setCellHeight(i, cellHeight);
-        }
-        table.updateTable(true); // Refresh visible cells
 
         // Draw bound
         this.add.graphics()
@@ -63,9 +56,16 @@ class Demo extends Phaser.Scene {
             var dy = pointer.y - pointer.prevPosition.y;
             table.addTableOXY(dx, dy).updateTable();
         });
+
+        var print = this.add.text(0, 0, '');
+        table.on('tableheightchange', function () {
+            print.text = table.tableHeight;
+        })
+        table.emit('tableheightchange');
     }
 
-    update() { }
+    update() {
+    }
 }
 
 var config = {

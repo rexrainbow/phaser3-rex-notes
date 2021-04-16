@@ -232,7 +232,7 @@ It is equal to `cellVisibleCallback` in configuration.
                 ```javascript
                 cell.setDeltaWidth(0);
                 // cell.deltaWidth = 0;
-                ```            
+                ```
     - Assign cell container. Set origin point of this cell container to (0,0).
         ```javascript
         cell.setContainer(cellContainer);
@@ -433,6 +433,11 @@ var cell = table.getCell(cellIndex);
         ```javascript
         table.updateTable(true);
         ```
+    - Emit `'tableheightchange'` event.
+        ```javascript
+        table.on('tableheightchange', function () {
+        });
+        ```
 
 #### Cell width
 
@@ -452,6 +457,11 @@ var cell = table.getCell(cellIndex);
     - Refresh table after the cell size is changed.
         ```javascript
         table.updateTable(true);
+        ```
+    - Emit `'tableheightchange'` event.
+        ```javascript
+        table.on('tableheightchange', function () {
+        });
         ```
 
 #### Fore each visible cell
