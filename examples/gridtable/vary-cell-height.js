@@ -58,10 +58,10 @@ class Demo extends Phaser.Scene {
         });
 
         var print = this.add.text(0, 0, '');
-        table.on('tableheightchange', function () {
+        table.on('cellheightchange', function () {
             print.text = table.tableHeight;
         })
-        table.emit('tableheightchange');
+        table.emit('cellheightchange');
     }
 
     update() {

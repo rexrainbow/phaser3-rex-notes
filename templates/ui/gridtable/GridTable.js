@@ -57,8 +57,10 @@ class GridTable extends Scrollable {
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);
         var scope = GetValue(config, 'createCellContainerCallbackScope', undefined);
         this.setCreateCellContainerCallback(callback, scope);
-
         TableOnCellVisible.call(this, table);
+
+        var eventName = (scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
+        table.on(eventName, this.resizeController, this);
 
         if (GetValue(tableConfig, 'interactive', true)) {
             TableSetInteractive.call(this, table, tableConfig);

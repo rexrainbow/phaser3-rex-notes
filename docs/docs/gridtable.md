@@ -433,9 +433,9 @@ var cell = table.getCell(cellIndex);
         ```javascript
         table.updateTable(true);
         ```
-    - Emit `'tableheightchange'` event.
+    - Emit `'cellheightchange'` event.
         ```javascript
-        table.on('tableheightchange', function () {
+        table.on('cellheightchange', function () {
         });
         ```
 
@@ -458,9 +458,9 @@ var cell = table.getCell(cellIndex);
         ```javascript
         table.updateTable(true);
         ```
-    - Emit `'tableheightchange'` event.
+    - Emit `'cellwidthchange'` event.
         ```javascript
-        table.on('tableheightchange', function () {
+        table.on('cellwidthchange', function () {
         });
         ```
 

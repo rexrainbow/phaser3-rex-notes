@@ -113,7 +113,8 @@ class Cell {
         this._deltaHeight = deltaHeight;
 
         if (tableHeightChanged) {
-            this.parentContainer.emit('tableheightchange');
+            var eventName = (this.scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
+            this.parentContainer.emit(eventName);
         }
     }
 
