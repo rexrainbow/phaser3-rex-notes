@@ -59,13 +59,29 @@ class GridTable extends Scrollable {
         this.setCreateCellContainerCallback(callback, scope);
         TableOnCellVisible.call(this, table);
 
+        this.resizeControllerFlag = false;
         var eventName = (scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
-        table.on(eventName, this.resizeController, this);
+        table.on(eventName, function () {
+            this.resizeControllerFlag = true;
+        }, this);        
 
         if (GetValue(tableConfig, 'interactive', true)) {
             TableSetInteractive.call(this, table, tableConfig);
         }
         this.setItems(GetValue(config, 'items', []));
+
+        scene.game.events.on('poststep', this.onPostStep, this);
+    }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+
+        this.scene.game.events.off('poststep', this.onPostStep, this);
+
+        super.destroy(fromScene);
     }
 
     setCreateCellContainerCallback(callback, scope) {
@@ -87,6 +103,13 @@ class GridTable extends Scrollable {
     updateVisibleCell(cellIdx) {
         var table = this.childrenMap.child;
         return table.updateVisibleCell(cellIdx);
+    }
+
+    onPostStep() {
+        if (this.resizeControllerFlag) {
+            this.resizeController();
+            this.resizeControllerFlag = false;
+        }
     }
 }
 
