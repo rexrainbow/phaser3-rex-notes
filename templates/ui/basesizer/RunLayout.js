@@ -1,5 +1,5 @@
 // Override
-var RunLayout = function (parent, newWidth, newHeight) {
+var RunLayout = function (parent, minWidth, minHeight) {
     // Skip hidden or !dirty sizer
     if (this.ignoreLayout) {
         return this;
@@ -12,14 +12,14 @@ var RunLayout = function (parent, newWidth, newHeight) {
     }
 
     // Calculate parent width
-    newWidth = this.resolveWidth(newWidth);
+    var newWidth = this.resolveWidth(minWidth);
     // Calculate all children width, run width wrap
     if (isTopmostParent) {
         this.resolveChildrenWidth(newWidth);
         this.runWidthWrap(newWidth);
     }
     // Calculate parent height
-    newHeight = this.resolveHeight(newHeight);
+    var newHeight = this.resolveHeight(minHeight);
     // Resize parent
     this.resize(newWidth, newHeight);
 

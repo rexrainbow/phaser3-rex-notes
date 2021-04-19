@@ -8,7 +8,6 @@ var RunWidthWrap = function (width) {
             continue;
         }
 
-        i = parseInt(i);
         colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
         childWidth = this.getExpandedChildWidth(child, colWidth);
         if (childWidth === undefined) {
