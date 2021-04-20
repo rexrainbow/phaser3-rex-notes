@@ -6064,6 +6064,9 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 <li>Get all children under this container-lite recursively
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">();</span>
 </code></pre></div><ul>
+<li>Put container itself and all children into <a href="../layer/">Layer</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">([</span><span class="nx">container</span><span class="p">]));</span>
+</code></pre></div></li>
 <li>Draw on <a href="../rendertexture/#paste-texture">render texture</a>
     <div class="codehilite"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">());</span>
 </code></pre></div></li>

@@ -227,6 +227,10 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
     ```javascript
     var gameObjects = container.getAllChildren();
     ```
+    - Put container itself and all children into [Layer](layer.md)
+        ```javascript
+        layer.add(container.getAllChildren([container]));
+        ```
     - Draw on [render texture](rendertexture.md#paste-texture)
         ```javascript
         rt.draw(container.getAllChildren());

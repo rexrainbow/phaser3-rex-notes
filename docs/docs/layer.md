@@ -20,7 +20,10 @@ A local display list, built-in game object of phaser.
 
 ```javascript
 var layer = scene.add.layer();
+// var layer = scene.add.layer(children);
 ```
+
+- `children` : Array of game objects added to this layer.
 
 ### Custom class
 
