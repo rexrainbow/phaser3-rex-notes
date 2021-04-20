@@ -14,7 +14,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
         });
 
         this._progress = 0;
-        this.toTexture = null;
+        this.toFrame = null;
         this.targetTexture = null;
         this.resizeMode = 1;
         this.toRatio = 1;
