@@ -9,8 +9,6 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
-
-        this.load.image('knighthawks', 'assets/fonts/knighthawks-font-filled.png');
     }
 
     create() {
