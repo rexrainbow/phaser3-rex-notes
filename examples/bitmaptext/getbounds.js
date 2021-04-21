@@ -6,26 +6,13 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('knighthawks', 'assets/fonts/knighthawks-font-filled.png');
+        this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
     }
 
     create() {
         polyfills();
 
-        var config = {
-            image: 'knighthawks',
-            width: 31,
-            height: 24,
-            chars: Phaser.GameObjects.RetroFont.TEXT_SET2,
-            charsPerRow: 10,
-            spacing: {
-                x: 1,
-                y: 1
-            }
-        };
-        this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
-        var txt = this.add.bitmapText(100, 100, 'knighthawks', 'HELLO');
-
+        var txt = this.add.bitmapText(100, 100, 'gothic', 'HELLO');
         this.add.graphics({
             lineStyle: {
                 color: 0xff0000,

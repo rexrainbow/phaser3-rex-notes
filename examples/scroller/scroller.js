@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('knighthawks', 'assets/fonts/knighthawks-font-filled.png');
+        this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
     }
 
     create() {
@@ -31,27 +31,14 @@ class Demo extends Phaser.Scene {
 
 
         var s = '';
-        for (var i = 0, cnt = 1000; i < cnt; i++) {
+        for (var i = 0, cnt = 300; i < cnt; i++) {
             s += pad(i.toString(), 4, '0', 1);
             if (i < (cnt - 1)) {
                 s += '\n';
             }
         }
 
-        var config = {
-            image: 'knighthawks',
-            width: 31,
-            height: 24,
-            chars: Phaser.GameObjects.RetroFont.TEXT_SET2,
-            charsPerRow: 10,
-            spacing: {
-                x: 1,
-                y: 1
-            }
-        };
-
-        this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
-        var txt = this.add.bitmapText(leftX, topY, 'knighthawks', s).setScale(2);
+        var txt = this.add.bitmapText(leftX, topY, 'gothic', s);
         txt.setMask(bg.createGeometryMask());
 
         var topBound = topY,
