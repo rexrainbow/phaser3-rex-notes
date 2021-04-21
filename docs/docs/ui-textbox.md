@@ -9,6 +9,7 @@ A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) te
 
 - [Text box](https://codepen.io/rexrainbow/pen/MzGoJv)
 - [Speech bubble background](https://codepen.io/rexrainbow/pen/ExZLoWL)
+- [Bitmap text](https://codepen.io/rexrainbow/pen/oNBaKOo)
 
 ## Usage
 
@@ -124,11 +125,12 @@ var textBox = scene.rexUI.add.textBox({
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of textBox.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
-- `text` : Game object of text.
+- `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
     - Max lines and wrapped width
         - [Built-in text object](text.md) : `maxLines` and wrap width (`wordWrap.width`).
         - [BBcode text object](bbcodetext.md) : `maxLines` and wrap width (`wrap.width`).
         - [Tag text object](tagtext.md) : `maxLines` and wrap width (`wrap.width`).
+        - [Bitmap text object](bitmaptext.md) : Set maxLines at `page.maxLines` in configuration of page behavior, and wrap width at `text.setMaxWidth(width)`.
     - Fixed width and fixed height
         - [Built-in text object](text.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
         - [BBcode text object](bbcodetext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
