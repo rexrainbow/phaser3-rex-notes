@@ -102,7 +102,11 @@ var textBox = scene.rexUI.add.textBox({
     },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+
+    // page: { maxLines: undefined },
+    // type: { speed: 333 }
+
 });
 ```
 
@@ -137,6 +141,10 @@ var textBox = scene.rexUI.add.textBox({
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this textBox.
 - `draggable` : Set `true` to drag to-most sizer.
+- `page` : Configuration of [page behavior](textpage.md#create-instance)
+    - `page.maxLines` : Max lines of a page.
+- `type` : Configuration of [type behavior](texttyping.md#create-instance)
+    - `type.speed` : Typing speed in ms, default value is `333`.
 
 ### Custom class
 

@@ -5623,13 +5623,19 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextPage&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">//text: &#39;&#39;,       // content in string or array</span>
+    <span class="c1">// text: &#39;&#39;,              // content in string or array</span>
+    <span class="c1">// maxLines: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
+<li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text boject</a>, or <a href="../bitmaptext/">bitmap text object</a></li>
 <li><code>text</code> : content in string or array, optional</li>
+<li><code>maxLines</code> : Max lines of a page.<ul>
+<li><code>undefined</code> : Use style property <code>maxLines</code>, for <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text boject</a>. Default value.</li>
+<li>A number : Max lines of a page, for <a href="../bitmaptext/">bitmap text object</a></li>
+</ul>
+</li>
 </ul>
 <h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
 <ul>

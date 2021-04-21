@@ -80,8 +80,8 @@ var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
 });
 ```
 
-- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
-- `speed` : Typing speed in ms.
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
+- `speed` : Typing speed in ms, default value is `333`.
 - `typeMode` :
     - `'left-to-right'`, or `0` : Typing characters from left to right.
     - `'right-to-left'`, or `1` : Typing characters from right to left.

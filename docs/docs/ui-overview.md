@@ -262,7 +262,7 @@
     var textObject = scene.rexUI.wrapExpandText(textObject);
     // var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);
     ```
-    - `textObject` : Built-in text game object, BBCode text game object, Tag text game object, or built-in bitmap text game object.
+    - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [Bitmap text object](bitmaptext.md)
 
 ### Touch input
 

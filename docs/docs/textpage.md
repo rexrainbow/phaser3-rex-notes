@@ -74,12 +74,16 @@ Display text page by page on [text object](text.md), [bbcode text object](bbcode
 
 ```javascript
 var page = scene.plugins.get('rexTextPage').add(textGameObject, {
-    //text: '',       // content in string or array
+    // text: '',              // content in string or array
+    // maxLines: undefined
 });
 ```
 
-- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+- `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
 - `text` : content in string or array, optional
+- `maxLines` : Max lines of a page.
+    - `undefined` : Use style property `maxLines`, for [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md). Default value.
+    - A number : Max lines of a page, for [bitmap text object](bitmaptext.md)
 
 ### Set content
 

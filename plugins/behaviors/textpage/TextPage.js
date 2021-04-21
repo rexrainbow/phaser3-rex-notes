@@ -1,8 +1,12 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import IsTextGameObject from '../../utils/text/IsTextGameObject.js';
+import IsBitmapTextGameObject from '../../utils/bitmaptext/IsBitmapTextGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
+const TextType = 0;
+const TagTextType = 1;
+const BitmapTextType = 2;
 
 class TextPagePlugin {
     constructor(gameObject, config) {
@@ -10,12 +14,17 @@ class TextPagePlugin {
         this.scene = GetSceneObject(gameObject);
         this.setTextObjectType();
 
-        this.lines = undefined; // Array (default text object), or pens-manager (tag text object)
+        this.lines = undefined;
+        // Text object : array of string
+        // Tag text object : pens-manager
+        // Bitmap text object : array of string
+
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
+        this.setMaxLines(GetValue(o, 'maxLines', undefined));
         this.setText(GetValue(o, 'text', ''));
         this.setStartIdx(GetValue(o, 'start', 0));
         this.setPageIdx(GetValue(o, 'page', -1));
@@ -24,6 +33,7 @@ class TextPagePlugin {
 
     toJSON() {
         return {
+            maxLines: this.maxLines,
             text: this.text,
             start: this.startLineIdx,
             page: this.pageIndex,
@@ -40,10 +50,18 @@ class TextPagePlugin {
     shutdown() {
         if (this.lines === undefined) {
             // Do nothing
-        } else if (this.textObjectType === 0) {
-            this.lines.length = 0;
         } else {
-            this.lines.destroy();
+            switch (this.textObjectType) {
+                case TextType:
+                    this.lines.length = 0;
+                    break;
+                case TagTextType:
+                    this.lines.destroy();
+                    break;
+                case BitmapTextType:
+                    this.lines.length = 0;
+                    break;
+            }
         }
 
         this.gameObject = undefined;
@@ -57,7 +75,11 @@ class TextPagePlugin {
     }
 
     setTextObjectType() {
-        this.textObjectType = IsTextGameObject(this.gameObject) ? 0 : 1;
+        this.textObjectType =
+            (IsBitmapTextGameObject(this.gameObject)) ? BitmapTextType :
+                (IsTextGameObject(this.gameObject)) ? TextType :
+                    TagTextType;
+
         return this;
     }
 
@@ -76,16 +98,29 @@ class TextPagePlugin {
         this.text = transferText(text);
 
         // Wrap content in lines
-        if (this.textObjectType === 0) {
-            this.lines = this.gameObject.getWrappedText(this.text); // lines in array
-        } else {
-            this.lines = this.gameObject.getPenManager(this.text, this.lines); // pen manager
+        switch (this.textObjectType) {
+            case TextType:
+                this.lines = this.gameObject.getWrappedText(this.text); // Array of string
+                break;
+            case TagTextType:
+                this.lines = this.gameObject.getPenManager(this.text, this.lines); // Pens-manager
+                break;
+            case BitmapTextType:
+                this.lines = this.gameObject
+                    .setText(text)
+                    .getTextBounds().wrappedText.split('\n');
+                break;
         }
 
         this.pageCount = Math.ceil(this.totalLinesCount / this.pageLinesCount);
         if (resetPageIdx) {
             this.resetPageIdx();
         }
+        return this;
+    }
+
+    setMaxLines(maxLines) {
+        this.maxLines = maxLines;
         return this;
     }
 
@@ -158,23 +193,51 @@ class TextPagePlugin {
 
     get totalLinesCount() {
         var count;
-        if (this.textObjectType === 0) {
-            count = this.lines.length;
-        } else {
-            count = this.lines.linesCount;
+        switch (this.textObjectType) {
+            case TextType:
+                count = this.lines.length;
+                break;
+            case TagTextType:
+                count = this.lines.linesCount;
+                break;
+            case BitmapTextType:
+                count = this.lines.length;
+                break;
         }
+
         return count;
     }
 
     get pageLinesCount() {
-        var count;
-        var maxLines = this.gameObject.style.maxLines;
-        if (maxLines > 0) {
-            count = maxLines;
+        if (this.maxLines !== undefined) {
+            switch (this.textObjectType) {
+                case TextType:
+                case TagTextType:
+                    this.gameObject.style.maxLines = this.maxLines;
+                    break;
+            }
+
+            return this.maxLines;
+
         } else {
-            count = this.totalLinesCount;
+            var count;
+            switch (this.textObjectType) {
+                case TextType:
+                case TagTextType:
+                    var maxLines = this.gameObject.style.maxLines;
+                    if (maxLines > 0) {
+                        count = maxLines;
+                    } else {
+                        count = this.totalLinesCount;
+                    }
+                    break;
+                case BitmapTextType:
+                    count = this.totalLinesCount;
+                    break;
+            }
+            return count;
+
         }
-        return count;
     }
 
     getLines(startLineIdx) {
@@ -183,13 +246,20 @@ class TextPagePlugin {
         }
         var endLineIdx = startLineIdx + this.pageLinesCount;
         var text;
-        if (this.textObjectType === 0) {
-            text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
-        } else {
-            var startIdx = this.lines.getLineStartIndex(startLineIdx);
-            var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
-            text = this.lines.getSliceTagText(startIdx, endIdx, true);
+        switch (this.textObjectType) {
+            case TextType:
+                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+                break;
+            case TagTextType:
+                var startIdx = this.lines.getLineStartIndex(startLineIdx);
+                var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
+                text = this.lines.getSliceTagText(startIdx, endIdx, true);
+                break;
+            case BitmapTextType:
+                text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+                break;
         }
+
         return text;
     }
 
