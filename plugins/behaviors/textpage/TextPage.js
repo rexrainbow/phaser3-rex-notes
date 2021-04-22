@@ -193,16 +193,20 @@ class TextPagePlugin {
 
     get totalLinesCount() {
         var count;
-        switch (this.textObjectType) {
-            case TextType:
-                count = this.lines.length;
-                break;
-            case TagTextType:
-                count = this.lines.linesCount;
-                break;
-            case BitmapTextType:
-                count = this.lines.length;
-                break;
+        if (this.lines === undefined) {
+            count = 0;
+        } else {
+            switch (this.textObjectType) {
+                case TextType:
+                    count = this.lines.length;
+                    break;
+                case TagTextType:
+                    count = this.lines.linesCount;
+                    break;
+                case BitmapTextType:
+                    count = this.lines.length;
+                    break;
+            }
         }
 
         return count;
@@ -210,13 +214,6 @@ class TextPagePlugin {
 
     get pageLinesCount() {
         if (this.maxLines !== undefined) {
-            switch (this.textObjectType) {
-                case TextType:
-                case TagTextType:
-                    this.gameObject.style.maxLines = this.maxLines;
-                    break;
-            }
-
             return this.maxLines;
 
         } else {
