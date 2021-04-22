@@ -18,6 +18,7 @@ class TextPagePlugin {
         // Text object : array of string
         // Tag text object : pens-manager
         // Bitmap text object : array of string
+        this.totalLinesCount = 0;
 
         this.resetFromJSON(config);
         this.boot();
@@ -101,14 +102,17 @@ class TextPagePlugin {
         switch (this.textObjectType) {
             case TextType:
                 this.lines = this.gameObject.getWrappedText(this.text); // Array of string
+                this.totalLinesCount = this.lines.length;
                 break;
             case TagTextType:
                 this.lines = this.gameObject.getPenManager(this.text, this.lines); // Pens-manager
+                this.totalLinesCount = this.lines.linesCount;
                 break;
             case BitmapTextType:
                 this.lines = this.gameObject
                     .setText(text)
                     .getTextBounds().wrappedText.split('\n');
+                this.totalLinesCount = this.lines.length;
                 break;
         }
 
@@ -189,27 +193,6 @@ class TextPagePlugin {
         this.pageIndex = idx;
         this.setStartIdx(this.pageIndex * this.pageLinesCount);
         return this;
-    }
-
-    get totalLinesCount() {
-        var count;
-        if (this.lines === undefined) {
-            count = 0;
-        } else {
-            switch (this.textObjectType) {
-                case TextType:
-                    count = this.lines.length;
-                    break;
-                case TagTextType:
-                    count = this.lines.linesCount;
-                    break;
-                case BitmapTextType:
-                    count = this.lines.length;
-                    break;
-            }
-        }
-
-        return count;
     }
 
     get pageLinesCount() {
