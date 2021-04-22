@@ -278,6 +278,13 @@ container.setChildRotation(child, rotation);
 container.setChildScale(child, scaleX, scaleY);
 ```
 
+or 
+
+```javascript
+container.setChildDisplaySize(child, width, height);
+```
+
+
 #### Visible
 
 ```javascript

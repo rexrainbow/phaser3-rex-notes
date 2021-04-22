@@ -39,4 +39,10 @@ export default {
         this.updateChildScale(gameObject);
         return this;
     },
+
+    setChildDisplaySize(gameObject, width, height) {
+        gameObject.setDisplaySize(width, height);
+        this.resetChildScaleState(gameObject);
+        return this;
+    }
 }
