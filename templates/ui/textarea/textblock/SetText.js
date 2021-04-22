@@ -22,6 +22,9 @@ var SetText = function (text) {
             this.linesCount = this.lines.length;
             break;
     }
+    // Re-calculate these values later
+    this._textHeight = undefined;
+    this._textVisibleHeight = undefined;
 
     this.updateTextObject();
     return this;

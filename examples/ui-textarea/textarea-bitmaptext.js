@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
 
                 orientation: 0,
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                text: this.add.text(0, 0, 'Header'),
+                text: this.add.bitmapText(0, 0, 'gothic', 'Header').setFontSize(16),
             }),
 
             footer: this.rexUI.add.label({
@@ -45,7 +45,7 @@ class Demo extends Phaser.Scene {
 
                 orientation: 0,
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                text: this.add.text(0, 0, 'Footer'),
+                text: this.add.bitmapText(0, 0, 'gothic', 'Footer').setFontSize(16),
             }),
 
             content: CreateContent(10000),

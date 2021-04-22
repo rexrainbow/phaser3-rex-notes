@@ -32,6 +32,11 @@ class TextBlock extends BaseSizer {
         this.linesCount = 0;
         this.textMask = undefined;
         this.textObjectType = undefined;
+        this._textLineHeight = undefined;
+        this._textLineSpacing = undefined;
+        this._visibleLinesCount = undefined;
+        this._textHeight = undefined;
+        this._textVisibleHeight = undefined;
 
         this.lines = undefined;
         // Text object : array of string
@@ -118,38 +123,47 @@ class TextBlock extends BaseSizer {
     }
 
     get textLineHeight() {
-        var lineHeight;
-        switch (this.textObjectType) {
-            case TextType:
-            case TagTextType:
-                var style = this.textObject.style;
-                lineHeight = style.metrics.fontSize + style.strokeThickness;
-                break;
-            case BitmapTextType:
-                var scale = (this.textObject.fontSize / this.textObject.fontData.size);
-                lineHeight = this.textObject.fontData.lineHeight * scale;
-                break;
+        if (this._textLineHeight === undefined) {
+            var lineHeight;
+            switch (this.textObjectType) {
+                case TextType:
+                case TagTextType:
+                    var style = this.textObject.style;
+                    lineHeight = style.metrics.fontSize + style.strokeThickness;
+                    break;
+                case BitmapTextType:
+                    var scale = (this.textObject.fontSize / this.textObject.fontData.size);
+                    lineHeight = this.textObject.fontData.lineHeight * scale;
+                    break;
 
+            }
+            this._textLineHeight = lineHeight;
         }
-        return lineHeight;
+        return this._textLineHeight;
     }
 
     get textLineSpacing() {
-        var lineSpacing;
-        switch (this.textObjectType) {
-            case TextType:
-            case TagTextType:
-                lineSpacing = this.textObject.lineSpacing;
-                break;
-            case BitmapTextType:
-                lineSpacing = 0;
-                break;
+        if (this._textLineSpacing === undefined) {
+            var lineSpacing;
+            switch (this.textObjectType) {
+                case TextType:
+                case TagTextType:
+                    lineSpacing = this.textObject.lineSpacing;
+                    break;
+                case BitmapTextType:
+                    lineSpacing = 0;
+                    break;
+            }
+            this._textLineSpacing = lineSpacing;
         }
-        return lineSpacing;
+        return this._textLineSpacing;
     }
 
     get visibleLinesCount() {
-        return Math.floor(TextHeightToLinesCount.call(this, this.textObjectHeight));
+        if (this._visibleLinesCount === undefined) {
+            this._visibleLinesCount = Math.floor(TextHeightToLinesCount.call(this, this.textObjectHeight));
+        }
+        return this._visibleLinesCount;
     }
 
     get topTextOY() {
@@ -161,20 +175,25 @@ class TextBlock extends BaseSizer {
     }
 
     get textHeight() {
-        return LinesCountToTextHeight.call(this, this.linesCount);
+        if (this._textHeight === undefined) {
+            this._textHeight = LinesCountToTextHeight.call(this, this.linesCount);
+        }
+        return this._textHeight;
     }
 
     get textVisibleHeight() {
-        var h;
-        var textHeight = this.textHeight;
-        var textObjectHeight = this.textObjectHeight - this.textLineHeight - this.textLineSpacing;  // // Remove 1 text line
-        if (textHeight > textObjectHeight) {
-            h = textHeight - textObjectHeight;
-        } else {
-            h = 0;
+        if (this._textVisibleHeight === undefined) {
+            var h;
+            var textHeight = this.textHeight;
+            var textObjectHeight = this.textObjectHeight - this.textLineHeight - this.textLineSpacing;  // // Remove 1 text line
+            if (textHeight > textObjectHeight) {
+                h = textHeight - textObjectHeight;
+            } else {
+                h = 0;
+            }
+            this._textVisibleHeight = h;
         }
-
-        return h;
+        return this._textVisibleHeight;
     }
 
     textOYExceedTop(oy) {
