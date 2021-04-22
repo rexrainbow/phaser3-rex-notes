@@ -1,7 +1,9 @@
+import { TextType, TagTextType, BitmapTextType } from './TextObjectTypes.js';
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
 import IsTextGameObject from '../../../../plugins/utils/text/IsTextGameObject.js';
+import IsBitmapTextGameObject from '../../../../plugins/utils/bitmaptext/IsBitmapTextGameObject.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 
@@ -27,9 +29,15 @@ class TextBlock extends BaseSizer {
 
         this.type = 'rexTextBlock';
         this.textObject = undefined;
+        this.linesCount = 0;
         this.textMask = undefined;
         this.textObjectType = undefined;
-        this.lines = undefined; // array (default text object), or pens-manager (tag text object)
+
+        this.lines = undefined;
+        // Text object : array of string
+        // Tag text object : pens-manager
+        // Bitmap text object : array of string
+
         this.text = GetValue(config, 'content', '');
         this._textOY = 0;
         this.execeedTopState = false;
@@ -41,7 +49,7 @@ class TextBlock extends BaseSizer {
         var background = GetValue(config, 'background', undefined);
         var textObject = GetValue(config, 'text', undefined);
         if (textObject === undefined) {
-            textObject = createDefaultTextObject(scene);
+            textObject = CreateDefaultTextObject(scene);
         }
         var textMaskEnable = GetValue(config, 'textMask', true);
 
@@ -57,7 +65,12 @@ class TextBlock extends BaseSizer {
         sizerConfig.padding = GetBoundsConfig(0);
         sizerConfig.expand = true;
         this.textObject = textObject;
-        this.textObjectType = (IsTextGameObject(textObject)) ? 0 : 1;
+
+        this.textObjectType =
+            (IsBitmapTextGameObject(textObject)) ? BitmapTextType :
+                (IsTextGameObject(textObject)) ? TextType :
+                    TagTextType;
+
         // Add more variables
         sizerConfig.preOffsetY = 0;
         sizerConfig.offsetY = 0;
@@ -80,10 +93,18 @@ class TextBlock extends BaseSizer {
         this.textMask = undefined;
         if (this.lines === undefined) {
             // Do nothing
-        } else if (this.textObjectType === 0) {
-            this.lines.length = 0;
         } else {
-            this.lines.destroy();
+            switch (this.textObjectType) {
+                case TextType:
+                    this.lines.length = 0;
+                    break;
+                case TagTextType:
+                    this.lines.destroy();
+                    break;
+                case BitmapTextType:
+                    this.lines.length = 0;
+                    break;
+            }
         }
         super.destroy(fromScene);
     }
@@ -97,28 +118,38 @@ class TextBlock extends BaseSizer {
     }
 
     get textLineHeight() {
-        var style = this.textObject.style;
-        return style.metrics.fontSize + style.strokeThickness;
+        var lineHeight;
+        switch (this.textObjectType) {
+            case TextType:
+            case TagTextType:
+                var style = this.textObject.style;
+                lineHeight = style.metrics.fontSize + style.strokeThickness;
+                break;
+            case BitmapTextType:
+                var scale = (this.textObject.fontSize / this.textObject.fontData.size);
+                lineHeight = this.textObject.fontData.lineHeight * scale;
+                break;
+
+        }
+        return lineHeight;
     }
 
     get textLineSpacing() {
-        return this.textObject.lineSpacing;
-    }
-
-    get linesCount() {
-        var count;
-        if (this.lines === undefined) {
-            count = 0;
-        } else if (this.textObjectType === 0) {
-            count = this.lines.length;
-        } else {
-            count = this.lines.linesCount;
+        var lineSpacing;
+        switch (this.textObjectType) {
+            case TextType:
+            case TagTextType:
+                lineSpacing = this.textObject.lineSpacing;
+                break;
+            case BitmapTextType:
+                lineSpacing = 0;
+                break;
         }
-        return count;
+        return lineSpacing;
     }
 
     get visibleLinesCount() {
-        return Math.floor(TextHeightToLinesCount.call(this, this.textObject.height));
+        return Math.floor(TextHeightToLinesCount.call(this, this.textObjectHeight));
     }
 
     get topTextOY() {
@@ -133,14 +164,10 @@ class TextBlock extends BaseSizer {
         return LinesCountToTextHeight.call(this, this.linesCount);
     }
 
-    get textObjectHeight() {
-        return this.textObject.height - this.textLineHeight - this.textLineSpacing; // Remove 1 text line
-    }
-
     get textVisibleHeight() {
         var h;
         var textHeight = this.textHeight;
-        var textObjectHeight = this.textObjectHeight;
+        var textObjectHeight = this.textObjectHeight - this.textLineHeight - this.textLineSpacing;  // // Remove 1 text line
         if (textHeight > textObjectHeight) {
             h = textHeight - textObjectHeight;
         } else {
@@ -227,7 +254,7 @@ class TextBlock extends BaseSizer {
     }
 }
 
-var createDefaultTextObject = function (scene) {
+var CreateDefaultTextObject = function (scene) {
     return scene.add.text(0, 0, '');
 };
 
