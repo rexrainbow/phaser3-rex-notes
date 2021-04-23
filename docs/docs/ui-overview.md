@@ -329,6 +329,8 @@ Helper method, which applies [click](button.md), [tap](gesture-tap.md), [press](
 
 ```javascript
 scene.rexUI.setChildrenInteractive(sizer, {
+    targets: targetSizers,
+
     // click: {mode: 'release', clickInterval: 100},
 
     // over: undefined,
@@ -345,6 +347,7 @@ scene.rexUI.setChildrenInteractive(sizer, {
 })
 ```
 
+- `targetSizers` : Array of target children-sizer.
 - `click` : [Configuration](button.md#create-instance) of Button behavior.
     - `false` : Don't install Button behavior.
 - `over` :

@@ -59,9 +59,11 @@ class Demo extends Phaser.Scene {
                 },
             },
 
+            // Children-interactive is registered at scrollablePanel, which is create last.
+            // Set depth of track, thum game object above scrollablePanel, otherwise slider won't receive input at all.
             slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK).setDepth(1),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT).setDepth(1),
             },
 
             space: {
@@ -78,7 +80,6 @@ class Demo extends Phaser.Scene {
 
 
         // Add children-interactive
-        this.input.topOnly = false;
         var panel = scrollablePanel.getElement('panel');
         var print = this.add.text(0, 0, '');
         this.rexUI.setChildrenInteractive(scrollablePanel, {
