@@ -1,6 +1,10 @@
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     updateChildActive(child) {
-        child.active = this.active && this.getLocalState(child).active;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        child.active = parent.active && localState.active;
         return this;
     },
 
@@ -11,23 +15,25 @@ export default {
         return this;
     },
     
-    resetChildActiveState(gameObject) {
-        this.getLocalState(gameObject).active = gameObject.active;
+    resetChildActiveState(child) {
+        var localState = GetLocalState(child);
+        localState.active = child.active;
         return this;
     },
 
-    setChildActive(gameObject, active) {
-        gameObject.active = active;
-        this.resetChildActiveState(gameObject);
+    setChildActive(child, active) {
+        child.active = active;
+        this.resetChildActiveState(child);
         return this;
     },
 
-    setChildLocalActive(gameObject, active) {
+    setChildLocalActive(child, active) {
         if (active === undefined) {
             active = true;
         }
-        this.getLocalState(gameObject).active = active;
-        this.updateChildActive(gameObject);
+        var localState = GetLocalState(child);
+        localState.active = active;
+        this.updateChildActive(child);
         return this;
     },
 };

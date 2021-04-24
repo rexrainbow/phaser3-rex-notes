@@ -1,11 +1,12 @@
 import Base from './Base.js';
+import { GetParent } from './GetParent.js';
 
 const BaseRemove = Base.prototype.remove;
 const BaseClear = Base.prototype.clear;
 
 export default {
     remove(gameObject, destroyChild) {
-        if (this.getParent(gameObject) !== this) {
+        if (GetParent(gameObject) !== this) {
             return this;
         }
         this.setParent(gameObject, null);

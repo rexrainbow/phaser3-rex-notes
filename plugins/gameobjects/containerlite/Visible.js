@@ -11,11 +11,14 @@ Visible in localState:
 Visible result of child = (parent visible) && (child visible) && (mask visible)
 */
 
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     updateChildVisible(child) {
-        var localState = this.getLocalState(child);
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
         var maskVisible = (localState.hasOwnProperty('maskVisible')) ? localState.maskVisible : true;
-        child.visible = this.visible && localState.visible && maskVisible;
+        child.visible = parent.visible && localState.visible && maskVisible;
         return this;
     },
 
@@ -27,7 +30,7 @@ export default {
     },
 
     resetChildVisibleState(child) {
-        var localState = this.getLocalState(child);
+        var localState = GetLocalState(child);
         // Delete maskVisible property
         if (localState.hasOwnProperty('maskVisible')) {
             delete localState.maskVisible;
@@ -47,7 +50,8 @@ export default {
         if (visible === undefined) {
             visible = true;
         }
-        this.getLocalState(child).visible = visible;
+        var localState = GetLocalState(child);
+        localState.visible = visible;
         this.updateChildVisible(child);
         return this;
     },
@@ -57,7 +61,8 @@ export default {
         if (visible === undefined) {
             visible = true;
         }
-        this.getLocalState(child).maskVisible = visible;
+        var localState = GetLocalState(child);
+        localState.maskVisible = visible;
         this.updateChildVisible(child);
         return this;
     }

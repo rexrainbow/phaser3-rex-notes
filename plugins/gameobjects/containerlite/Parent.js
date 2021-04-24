@@ -1,11 +1,12 @@
 import { GetParent, GetTopmostParent } from './GetParent.js';
+import GetLocalState from './utils/GetLocalState.js';
 
 export default {
     setParent(gameObject, parent) {
         if (parent === undefined) {
             parent = this;
         }
-        var localState = this.getLocalState(gameObject);
+        var localState = GetLocalState(gameObject);
         if (parent) { // Add to parent
             localState.parent = parent;
             localState.self = gameObject;

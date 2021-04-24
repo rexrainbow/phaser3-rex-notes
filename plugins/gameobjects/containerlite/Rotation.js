@@ -1,6 +1,10 @@
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     updateChildRotation(child) {
-        child.rotation = this.rotation + this.getLocalState(child).rotation;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        child.rotation = parent.rotation + localState.rotation;
         return this;
     },
 
@@ -11,20 +15,23 @@ export default {
         return this;
     },
 
-    resetChildRotationState(gameObject) {
-        this.getLocalState(gameObject).rotation = gameObject.rotation - this.rotation;
+    resetChildRotationState(child) {
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        localState.rotation = child.rotation - parent.rotation;
         return this;
     },
 
-    setChildRotation(gameObject, rotation) {
-        gameObject.rotation = rotation;
-        this.resetChildRotationState(gameObject);
+    setChildRotation(child, rotation) {
+        child.rotation = rotation;
+        this.resetChildRotationState(child);
         return this;
     },
 
-    setChildLocalRotation(gameObject, rotation) {
-        this.getLocalState(gameObject).rotation = rotation;
-        this.updateChildRotation(gameObject);
+    setChildLocalRotation(child, rotation) {
+        var localState = GetLocalState(child);
+        localState.rotation = rotation;
+        this.updateChildRotation(child);
         return this;
     },
 }

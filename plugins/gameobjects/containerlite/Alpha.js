@@ -1,8 +1,11 @@
+import GetLocalState from './utils/GetLocalState.js';
 import GetScale from './utils/GetScale.js';
 
 export default {
     updateChildAlpha(child) {
-        child.alpha = this.alpha * this.getLocalState(child).alpha;
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        child.alpha = parent.alpha * localState.alpha;
         return this;
     },
 
@@ -13,20 +16,23 @@ export default {
         return this;
     },
 
-    resetChildAlphaState(gameObject) {
-        this.getLocalState(gameObject).alpha = GetScale(gameObject.alpha, this.alpha);
+    resetChildAlphaState(child) {
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        localState.alpha = GetScale(child.alpha, parent.alpha);
         return this;
     },
-    
-    setChildAlpha(gameObject, alpha) {
-        gameObject.alpha = alpha;
-        this.resetChildAlphaState(gameObject);
+
+    setChildAlpha(child, alpha) {
+        child.alpha = alpha;
+        this.resetChildAlphaState(child);
         return this;
     },
-    
-    setChildLocalAlpha(gameObject, alpha) {
-        this.getLocalState(gameObject).alpha = alpha;
-        this.updateChildAlpha(gameObject);
+
+    setChildLocalAlpha(child, alpha) {
+        var localState = GetLocalState(child);
+        localState.alpha = alpha;
+        this.updateChildAlpha(child);
         return this;
     },
 };

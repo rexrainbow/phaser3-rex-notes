@@ -1,3 +1,5 @@
+import { GetParent } from './GetParent.js';
+
 const ArrayUtils = Phaser.Utils.Array;
 
 export default {
@@ -45,7 +47,7 @@ export default {
     },
 
     contains(gameObject) { // Override Base.contains method
-        var parent = this.getParent(gameObject);
+        var parent = GetParent(gameObject);
         if (!parent) {
             return false;
         } else if (parent === this) {

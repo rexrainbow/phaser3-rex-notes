@@ -1,6 +1,10 @@
+import GetLocalState from './utils/GetLocalState.js';
+
 export default {
     updateChildScrollFactor(child) {
-        child.setScrollFactor(this.scrollFactorX, this.scrollFactorY);
+        var localState = GetLocalState(child);
+        var parent = localState.parent;
+        child.setScrollFactor(parent.scrollFactorX, parent.scrollFactorY);
         return this;
     },
 

@@ -1,4 +1,5 @@
 import Base from './Base.js';
+import GetLocalState from './utils/GetLocalState.js';
 
 const BaseAdd = Base.prototype.add;
 
@@ -19,7 +20,7 @@ var AddLocal = function (gameObject) {
     this.setParent(gameObject);
 
     // Set local state from child directly
-    var state = this.getLocalState(gameObject);
+    var state = GetLocalState(gameObject);
     // Position
     state.x = gameObject.x;
     state.y = gameObject.y;

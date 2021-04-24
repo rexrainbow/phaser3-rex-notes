@@ -26,9 +26,9 @@
     },
     "homepage": "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html",
     "devDependencies": {
-        "@babel/core": "^7.13.13",
+        "@babel/core": "^7.13.16",
         "@babel/polyfill": "^7.12.1",
-        "@babel/preset-env": "^7.13.12",
+        "@babel/preset-env": "^7.13.15",
         "babel-eslint": "^9.0.0",
         "babel-loader": "^8.2.2",
         "browser-sync": "^2.26.14",
@@ -56,7 +56,7 @@
     },
     "dependencies": {
         "eventemitter3": "^3.1.2",
-        "lokijs": "^1.5.11",
+        "lokijs": "^1.5.12",
         "papaparse": "^5.3.0",
         "webfontloader": "^1.6.28"
     }
