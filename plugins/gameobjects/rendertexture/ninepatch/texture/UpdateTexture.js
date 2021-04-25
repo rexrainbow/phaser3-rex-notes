@@ -1,4 +1,4 @@
-import MakeChildImageGameObject from '../../../utils/rendertexture/MakeChildImageGameObject.js';
+import MakeChildImageGameObject from '../../../../utils/rendertexture/MakeChildImageGameObject.js';
 
 var UpdateTexture = function () {
     this.clear();

@@ -1,6 +1,5 @@
 import TextureMethods from './texture/TextureMethods.js';
 import DefaultGetFrameNameCallback from './utils/DefaultGetFrameNameCallback.js';
-import IsArray from '../../utils/object/IsArray.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -37,7 +36,7 @@ class NinePatch extends RenderTexture {
             baseFrame = GetValue(config, 'baseFrame', undefined);
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
-        } else if (IsArray(baseFrame)) {
+        } else if (Array.isArray(baseFrame)) {
             config = rows;
             rows = columns;
             columns = baseFrame;

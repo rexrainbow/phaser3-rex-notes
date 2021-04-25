@@ -1,7 +1,5 @@
-import IsArray from '../../../utils/object/IsArray.js';
-
 var SetTexture = function (key, baseFrameName, columns, rows) {
-    if (IsArray(baseFrameName)) {
+    if (Array.isArray(baseFrameName)) {
         rows = columns;
         columns = baseFrameName;
         baseFrameName = undefined;

@@ -1,6 +1,6 @@
-import Factory from './gameobjects/ninepatch/Factory.js';
-import Creator from './gameobjects/ninepatch/Creator.js';
-import NinePatch from './gameobjects/ninepatch/NinePatch.js';
+import Factory from './gameobjects/rendertexture/ninepatch/Factory.js';
+import Creator from './gameobjects/rendertexture/ninepatch/Creator.js';
+import NinePatch from './gameobjects/rendertexture/ninepatch/NinePatch.js';
 import SetValue from './utils/object/SetValue.js';
 
 class NinePatchPlugin extends Phaser.Plugins.BasePlugin {

@@ -1,4 +1,4 @@
-import MakeChildImageGameObject from '../../utils/rendertexture/MakeChildImageGameObject.js';
+import MakeChildImageGameObject from '../../../utils/rendertexture/MakeChildImageGameObject.js';
 
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
