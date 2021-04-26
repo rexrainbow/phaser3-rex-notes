@@ -12,7 +12,7 @@ var RunWidthWrap = function (width) {
 
         childWidth = this.getExpandedChildWidth(child, width);
         if (childWidth === undefined) {
-            childWidth = this.resolveWidth(this);
+            childWidth = this.resolveWidth(childWidth);
         }
         if (child.runWidthWrap) {
             child.runWidthWrap(childWidth);

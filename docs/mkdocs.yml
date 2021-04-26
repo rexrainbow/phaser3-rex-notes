@@ -223,6 +223,7 @@ nav:
         - Restorable data: restorabledata.md
         - Buff data: buffdata.md
     - Set: structs-set.md
+    - List: structs-list.md
     - Array:
         - Add/remove: array-addremove.md
         - Sort: array-sort.md

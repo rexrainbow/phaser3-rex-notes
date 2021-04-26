@@ -120,7 +120,9 @@ var out = gameObject.getLocalPoint(x, y, out, camera);
     gameObject.resetFlip();  // equal to gameObject.setFlip(false, false);
     ```
 
-### Depth (z-index)
+### Order of rendering
+
+#### Depth (z-index)
 
 The depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.
 
@@ -133,6 +135,22 @@ The depth starts from zero (the default value) and increases from that point. A 
     gameObject.depth = value;
     gameObject.setDepth(value);
     ```
+
+#### Display list
+
+```javascript
+scene.children.bringToTop(child);
+scene.children.sendToBack(child);
+scene.children.moveUp(child);
+scene.children.moveDown(child);
+scene.children.moveUp(child);
+scene.children.moveTo(child, index);
+scene.children.swap(child1, child2);
+```
+
+#### Layer game object
+
+Place game object into [Layer game object](layer.md#move-child)
 
 ### Scroll factor
 

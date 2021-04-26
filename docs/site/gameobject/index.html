@@ -653,9 +653,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#order-of-rendering" class="md-nav__link">
+    Order of rendering
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#depth-z-index" class="md-nav__link">
     Depth (z-index)
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-list" class="md-nav__link">
+    Display list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-game-object" class="md-nav__link">
+    Layer game object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3839,15 +3866,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../structs-list/" title="List" class="md-nav__link">
+      List
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-3" type="checkbox" id="nav-11-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-4" type="checkbox" id="nav-11-4">
     
-    <label class="md-nav__link" for="nav-11-3">
+    <label class="md-nav__link" for="nav-11-4">
       Array
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-3">
+      <label class="md-nav__title" for="nav-11-4">
         Array
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3937,13 +3976,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-5" type="checkbox" id="nav-11-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
     
-    <label class="md-nav__link" for="nav-11-5">
+    <label class="md-nav__link" for="nav-11-6">
       CSV
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-5">
+      <label class="md-nav__title" for="nav-11-6">
         CSV
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3985,13 +4024,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-7" type="checkbox" id="nav-11-7">
     
-    <label class="md-nav__link" for="nav-11-6">
+    <label class="md-nav__link" for="nav-11-7">
       Database
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-6">
+      <label class="md-nav__title" for="nav-11-7">
         Database
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -5656,9 +5695,36 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#order-of-rendering" class="md-nav__link">
+    Order of rendering
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#depth-z-index" class="md-nav__link">
     Depth (z-index)
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-list" class="md-nav__link">
+    Display list
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layer-game-object" class="md-nav__link">
+    Layer game object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5950,7 +6016,8 @@ or
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">resetFlip</span><span class="p">();</span>  <span class="c1">// equal to gameObject.setFlip(false, false);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="depth-z-index">Depth (z-index)<a class="headerlink" href="#depth-z-index" title="Permanent link">&para;</a></h3>
+<h3 id="order-of-rendering">Order of rendering<a class="headerlink" href="#order-of-rendering" title="Permanent link">&para;</a></h3>
+<h4 id="depth-z-index">Depth (z-index)<a class="headerlink" href="#depth-z-index" title="Permanent link">&para;</a></h4>
 <p>The depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.</p>
 <ul>
 <li>Get
@@ -5961,6 +6028,18 @@ or
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h4 id="display-list">Display list<a class="headerlink" href="#display-list" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>
+</code></pre></div>
+
+<h4 id="layer-game-object">Layer game object<a class="headerlink" href="#layer-game-object" title="Permanent link">&para;</a></h4>
+<p>Place game object into <a href="../layer/#move-child">Layer game object</a></p>
 <h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get

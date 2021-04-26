@@ -247,7 +247,16 @@ See also
 - `textures`
 - `add`
 - `make`
-- `children` : displayList
+- `children` : [DisplayList](structs-list.md)
+    ```javascript
+    scene.children.bringToTop(child);
+    scene.children.sendToBack(child);
+    scene.children.moveUp(child);
+    scene.children.moveDown(child);
+    scene.children.moveUp(child);
+    scene.children.moveTo(child, index);
+    scene.children.swap(child1, child2);
+    ```
 - `lights`
 
 Preserve word in a scene.
