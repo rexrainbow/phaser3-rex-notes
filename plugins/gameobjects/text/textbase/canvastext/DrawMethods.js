@@ -1,4 +1,4 @@
-import DrawRoundRectangle from '../../../../utils/canvas/DrawRoundRectangle.js';
+import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
 export default {
     draw(startX, startY, boxWidth, boxHeight) {
@@ -11,7 +11,8 @@ export default {
         var defaultStyle = this.defaultStyle;
 
         // this.clear();
-        this.drawBackground(
+        DrawRoundRectangleBackground(
+            this,
             defaultStyle.backgroundColor,
             defaultStyle.backgroundStrokeColor,
             defaultStyle.backgroundStrokeLineWidth,
@@ -127,38 +128,6 @@ export default {
     clear() {
         var canvas = this.canvas;
         this.context.clearRect(0, 0, canvas.width, canvas.height);
-    },
-
-    drawBackground(color, strokeColor, strokeLineWidth, radius, color2, isHorizontalGradient, iteration) {
-        if ((color == null) && (strokeColor == null)) {
-            return;
-        }
-        var width = this.canvas.width,
-            height = this.canvas.height;
-
-        if ((color != null) && (strokeColor == null) && (radius === 0)) {
-            // Fill color
-            this.context.fillStyle = color;
-            this.context.fillRect(0, 0, width, height);
-        } else {
-            this.context.clearRect(0, 0, width, height);
-
-            if (strokeColor == null) {
-                strokeLineWidth = 0;
-            }
-            var x = strokeLineWidth / 2;
-            width -= strokeLineWidth;
-            height -= strokeLineWidth;
-            DrawRoundRectangle(this.canvas, this.context,
-                x, x,
-                width, height,
-                radius,
-                color,
-                strokeColor, strokeLineWidth,
-                color2, isHorizontalGradient,
-                iteration
-            );
-        }
     },
 
     drawUnderline(x, y, width, style) {

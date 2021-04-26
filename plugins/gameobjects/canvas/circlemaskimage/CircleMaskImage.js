@@ -41,8 +41,8 @@ class CircleMaskImage extends Canvas {
             return this;
         }
 
-        var HasBackgroundColor = (backgroundColor != null);
-        if (!HasBackgroundColor) { // No background color -- draw image first
+        var hasBackgroundColor = (backgroundColor != null);
+        if (!hasBackgroundColor) { // No background color -- draw image first
             this.loadTexture(key, frame);
         }
 
@@ -53,7 +53,7 @@ class CircleMaskImage extends Canvas {
             height = canvas.height;
 
         ctx.save();
-        ctx.globalCompositeOperation = (HasBackgroundColor) ? 'source-over' : 'destination-in';
+        ctx.globalCompositeOperation = (hasBackgroundColor) ? 'source-over' : 'destination-in';
         ctx.beginPath();
 
         // Draw circle, ellipse, or roundRectangle
@@ -75,13 +75,13 @@ class CircleMaskImage extends Canvas {
                 break;
         }
 
-        if (HasBackgroundColor) {
+        if (hasBackgroundColor) {
             ctx.fillStyle = backgroundColor;
         }
         ctx.fill();
         ctx.restore();
 
-        if (HasBackgroundColor) {  // Has background color -- draw image last
+        if (hasBackgroundColor) {  // Has background color -- draw image last
             ctx.save();
             ctx.globalCompositeOperation = 'destination-atop';
             this.loadTexture(key, frame);

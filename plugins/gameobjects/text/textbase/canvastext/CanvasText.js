@@ -93,7 +93,7 @@ class CanvasText {
             } else if (plainText !== '') {
                 // wrap text to lines
                 // Save the current context.
-                this.context.save();
+                context.save();
                 curStyle = this.parser.propToContextStyle(
                     this.defaultStyle,
                     curProp
@@ -101,7 +101,16 @@ class CanvasText {
                 curStyle.buildFont();
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
-                wrapLines = WrapText(plainText, this.getTextWidth, wrapMode, wrapWidth, cursorX);
+
+                var getTextWidth = function (text) { 
+                    return context.measureText(text).width; 
+                }
+                wrapLines = WrapText(
+                    plainText,
+                    getTextWidth,
+                    wrapMode, wrapWidth,
+                    cursorX
+                );
 
                 // add pens
                 var n;
@@ -117,7 +126,7 @@ class CanvasText {
                     }
 
                 }
-                this.context.restore();
+                context.restore();
 
             }
 
