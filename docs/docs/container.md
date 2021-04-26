@@ -171,13 +171,6 @@ container.removeAll();
 // container.removeAll(true);  // remove all children objects and destroy them
 ```
 
-#### Replace child
-
-```javascript
-container.replace(oldChild, newChild);
-// container.replace(oldChild, newChild, true);  // destroy oldChild
-```
-
 #### Order of child
 
 ```javascript
@@ -212,6 +205,13 @@ container.reverse();
 container.shuffle();
 ```
 
+#### Replace child
+
+```javascript
+container.replace(oldChild, newChild);
+// container.replace(oldChild, newChild, true);  // destroy oldChild
+```
+
 #### Set properties
 
 ```javascript
@@ -225,15 +225,25 @@ container.setAll(property, value, startIndex, endIndex);
     container.iterate(callback);
     // container.iterate(callback, context);
     // container.iterate(callback, context, arg0, arg1, ...);
-    // var callback = function(child, arg0, arg1, ...) {};
     ```
+    - `callback` : 
+        ```javascript
+        function(child, arg0, arg1, ...) {
+
+        }
+        ```    
 - Iterate a copy of current children list
     ```javascript
     container.each(callback);
     // container.each(callback, context);
     // container.each(callback, context, arg0, arg1, ...);
-    // var callback = function(child, arg0, arg1, ...) {};
     ```
+    - `callback` : 
+        ```javascript
+        function(child, arg0, arg1, ...) {
+
+        }
+        ```
 
 ## Compare with [group object](group.md)
 
