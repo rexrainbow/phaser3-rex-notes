@@ -11,7 +11,7 @@ var RunWidthWrap = function (width) {
         colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
         childWidth = this.getExpandedChildWidth(child, colWidth);
         if (childWidth === undefined) {
-            childWidth = this.resolveWidth(this);
+            childWidth = this.resolveWidth(childWidth);
         }
         if (child.runWidthWrap) {
             child.runWidthWrap(childWidth);

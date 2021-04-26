@@ -11,7 +11,7 @@ var ResolveChildrenWidth = function (width) {
         colWidth = this.getColumnWidth(parseInt(i) % this.columnCount);
         if (child.isRexSizer) {
             childWidth = this.getExpandedChildWidth(child, colWidth);
-            childWidth = child.resolveWidth(this, childWidth);
+            childWidth = child.resolveWidth(childWidth);
             child.resolveChildrenWidth(childWidth);
         }
     }
