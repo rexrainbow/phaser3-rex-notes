@@ -11,7 +11,7 @@ class MiniBoard extends Container {
         var boardConfig = {
             isBoard: false,
             grid: GetValue(config, 'grid', undefined),
-            inifinity: true,
+            infinity: true,
             wrap: false
         }
         this.board = new Board(scene, boardConfig);
