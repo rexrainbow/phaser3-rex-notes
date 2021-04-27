@@ -2,25 +2,63 @@ import Canvas from '../canvas/Canvas.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import { GetPadding, SetPadding } from '../../../utils/padding/PaddingMethods.js'
 import DrawRoundRectangleBackground from '../utils/DrawRoundRectangleBackground.js';
+import TextStyle from './TextStyle.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class DynamicText extends Canvas {
-    constructor(scene, x, y, width, height, config) {
+    constructor(scene, x, y, fixedWidth, fixedHeight, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', 1);
-            height = GetValue(config, 'height', 1);
+            fixedWidth = GetValue(config, 'width', 0);
+            fixedHeight = GetValue(config, 'height', 0);
+        } else if (IsPlainObject(width)) {
+            config = width;
+            fixedWidth = GetValue(config, 'width', 0);
+            fixedHeight = GetValue(config, 'height', 0);
         }
+
+        var width = (fixedWidth === 0) ? 1 : fixedWidth;
+        var height = (fixedHeight === 0) ? 1 : fixedHeight;
         super(scene, x, y, width, height);
         this.type = 'rexDynamicCanvasText';
         this.autoRound = true;
-
         this.padding = {};
-        this.setPadding(GetValue(config, 'padding', 0));
+        this.defaultTextStyle = new TextStyle(config);
+        this.currentTextStyle = new TextStyle(config);
+
+
+        this.setFixedSize(fixedWidth, fixedHeight);
+        this.setBackgroundColor(
+            GetValue(config, 'backgroundColor', null),
+            GetValue(config, 'backgroundColor2', null),
+            GetValue(config, 'backgroundHorizontalGradient', true)
+        );
+        this.setBackgroundStrokeColor(
+            GetValue(config, 'backgroundStrokeColor', null),
+            GetValue(config, 'backgroundStrokeLineWidth', 2)
+        );
+        this.setBackgroundCornerRadius(
+            GetValue(config, 'backgroundCornerRadius', 0),
+            GetValue(config, 'backgroundCornerIteration', null)
+        );
+        this.setPadding(
+            GetValue(config, 'padding', 0)
+        );
+    }
+
+    setFixedSize(width, height) {
+        this.fixedWidth = width;
+        this.fixedHeight = height;
+
+        if ((width > 0) && (height > 0)) {
+            this.setSize(width, height);
+        }
+
+        return this;
     }
 
     set backgroundColor(value) {
@@ -39,8 +77,8 @@ class DynamicText extends Canvas {
         this._backgroundColor2 = value;
     }
 
-    get backgroundColor() {
-        return this._backgroundColor;
+    get backgroundColor2() {
+        return this._backgroundColor2;
     }
 
     set backgroundHorizontalGradient(value) {
@@ -50,6 +88,17 @@ class DynamicText extends Canvas {
 
     get backgroundHorizontalGradient() {
         return this._backgroundHorizontalGradient;
+    }
+
+    setBackgroundColor(color, color2, isHorizontalGradient) {
+        if (isHorizontalGradient === undefined) {
+            isHorizontalGradient = true;
+        }
+
+        this.backgroundColor = color;
+        this.backgroundColor2 = color2;
+        this.backgroundHorizontalGradient = isHorizontalGradient;
+        return this;
     }
 
     set backgroundStrokeColor(value) {
@@ -71,6 +120,12 @@ class DynamicText extends Canvas {
         return this._backgroundStrokeLineWidth;
     }
 
+    setBackgroundStrokeColor(color, lineWidth) {
+        this.backgroundStrokeColor = color;
+        this.backgroundStrokeLineWidth = lineWidth;
+        return this;
+    }
+
     set backgroundCornerRadius(value) {
         this.dirty = this.dirty || (this._backgroundCornerRadius != value);
         this._backgroundCornerRadius = value;
@@ -89,6 +144,12 @@ class DynamicText extends Canvas {
         return this._backgroundCornerIteration;
     }
 
+    setBackgroundCornerRadius(radius, iteration) {
+        this.backgroundCornerRadius = radius;
+        this.backgroundCornerIteration = iteration;
+        return this;
+    }
+
     setPadding(key, value) {
         var padding = this.padding;
         var paddingLeft = padding.left,
@@ -104,6 +165,25 @@ class DynamicText extends Canvas {
             (paddingTop != this.padding.top) ||
             (paddingBottom != this.padding.bottom)
             ;
+        return this;
+    }
+
+    getPadding(key) {
+        return GetPadding(this.padding, key);
+    }
+
+    setDefaultTextStyle(style) {
+        this.defaultTextStyle.rest(style);
+        return this;
+    }
+
+    restoreToDefaultTextStyle() {
+        this.currentTextStyle.reset(this.defaultTextStyle.toJSON());
+        return this;
+    }
+
+    modifyTextStyle(style) {
+        this.currentTextStyle.modify(style);
         return this;
     }
 

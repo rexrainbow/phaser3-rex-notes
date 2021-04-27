@@ -12,9 +12,9 @@ var propertyMap = {
     backgroundColor: ['backgroundColor', null, GetStyle],
     backgroundColor2: ['backgroundColor2', null, GetStyle],
     backgroundHorizontalGradient: ['backgroundHorizontalGradient', true, null],
-    backgroundCornerRadius: ['backgroundCornerRadius', 0, null],
     backgroundStrokeColor: ['backgroundStrokeColor', null, GetStyle],
     backgroundStrokeLineWidth: ['backgroundStrokeLineWidth', 2, null],
+    backgroundCornerRadius: ['backgroundCornerRadius', 0, null],
     backgroundCornerIteration: ['backgroundCornerIteration', null, null],
 
     // font
