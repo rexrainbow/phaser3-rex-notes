@@ -1,26 +1,20 @@
-import TextStyle from './TextStyle.js';
+import Base from './Base.js';
+import TextStyle from '../TextStyle.js';
 
-class CharData {
+class CharData extends Base {
     constructor(
         parent,
         styleJSON,
         text,
         x, y, rotation
     ) {
-        this.parent = parent;
+        super(parent);
+
         this.style = new TextStyle(styleJSON);
         this.setText(text);
 
         this.setPosition(x, y);
         this.setRotation(rotation);
-    }
-
-    get canvas() {
-        return this.parent.canvas;
-    }
-
-    get context() {
-        return this.parent.context;
     }
 
     setStyle(styleJSON) {

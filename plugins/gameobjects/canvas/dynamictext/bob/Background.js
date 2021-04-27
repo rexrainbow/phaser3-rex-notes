@@ -1,11 +1,12 @@
-import GetStyle from '../../../utils/canvas/GetStyle.js';
-import DrawRoundRectangleBackground from '../utils/DrawRoundRectangleBackground.js';
+import Base from './Base.js';
+import GetStyle from '../../../../utils/canvas/GetStyle.js';
+import DrawRoundRectangleBackground from '../../utils/DrawRoundRectangleBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Background {
+class Background extends Base{
     constructor(parent, config) {
-        this.parent = parent;
+        super(parent);
 
         this.setColor(
             GetValue(config, 'backgroundColor', null),
@@ -22,14 +23,6 @@ class Background {
             GetValue(config, 'backgroundCornerRadius', 0),
             GetValue(config, 'backgroundCornerIteration', null)
         );
-    }
-
-    get canvas() {
-        return this.parent.canvas;
-    }
-
-    get context() {
-        return this.parent.context;
     }
 
     set color(value) {
