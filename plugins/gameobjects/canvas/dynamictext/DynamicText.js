@@ -1,7 +1,6 @@
 import Canvas from '../canvas/Canvas.js';
-import GetStyle from '../../../utils/canvas/GetStyle.js';
 import { GetPadding, SetPadding } from '../../../utils/padding/PaddingMethods.js'
-import DrawRoundRectangleBackground from '../utils/DrawRoundRectangleBackground.js';
+import Background from './Background.js';
 import TextStyle from './TextStyle.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -27,24 +26,10 @@ class DynamicText extends Canvas {
         this.type = 'rexDynamicCanvasText';
         this.autoRound = true;
         this.padding = {};
-        this.defaultTextStyle = new TextStyle(config);
-        this.currentTextStyle = new TextStyle(config);
-
+        this.background = new Background(parent, config);
+        this.textStyle = new TextStyle(config);
 
         this.setFixedSize(fixedWidth, fixedHeight);
-        this.setBackgroundColor(
-            GetValue(config, 'backgroundColor', null),
-            GetValue(config, 'backgroundColor2', null),
-            GetValue(config, 'backgroundHorizontalGradient', true)
-        );
-        this.setBackgroundStrokeColor(
-            GetValue(config, 'backgroundStrokeColor', null),
-            GetValue(config, 'backgroundStrokeLineWidth', 2)
-        );
-        this.setBackgroundCornerRadius(
-            GetValue(config, 'backgroundCornerRadius', 0),
-            GetValue(config, 'backgroundCornerIteration', null)
-        );
         this.setPadding(
             GetValue(config, 'padding', 0)
         );
@@ -58,95 +43,6 @@ class DynamicText extends Canvas {
             this.setSize(width, height);
         }
 
-        return this;
-    }
-
-    set backgroundColor(value) {
-        value = GetStyle(value, this.canvas, this.context);
-        this.dirty = this.dirty || (this._backgroundColor != value);
-        this._backgroundColor = value;
-    }
-
-    get backgroundColor() {
-        return this._backgroundColor;
-    }
-
-    set backgroundColor2(value) {
-        value = GetStyle(value, this.canvas, this.context);
-        this.dirty = this.dirty || (this._backgroundColor2 != value);
-        this._backgroundColor2 = value;
-    }
-
-    get backgroundColor2() {
-        return this._backgroundColor2;
-    }
-
-    set backgroundHorizontalGradient(value) {
-        this.dirty = this.dirty || (this._backgroundHorizontalGradient != value);
-        this._backgroundHorizontalGradient = value;
-    }
-
-    get backgroundHorizontalGradient() {
-        return this._backgroundHorizontalGradient;
-    }
-
-    setBackgroundColor(color, color2, isHorizontalGradient) {
-        if (isHorizontalGradient === undefined) {
-            isHorizontalGradient = true;
-        }
-
-        this.backgroundColor = color;
-        this.backgroundColor2 = color2;
-        this.backgroundHorizontalGradient = isHorizontalGradient;
-        return this;
-    }
-
-    set backgroundStrokeColor(value) {
-        value = GetStyle(value, this.canvas, this.context);
-        this.dirty = this.dirty || (this._backgroundStrokeColor != value);
-        this._backgroundStrokeColor = value;
-    }
-
-    get backgroundStrokeColor() {
-        return this._backgroundStrokeColor;
-    }
-
-    set backgroundStrokeLineWidth(value) {
-        this.dirty = this.dirty || (this._backgroundStrokeLineWidth != value);
-        this._backgroundStrokeLineWidth = value;
-    }
-
-    get backgroundStrokeLineWidth() {
-        return this._backgroundStrokeLineWidth;
-    }
-
-    setBackgroundStrokeColor(color, lineWidth) {
-        this.backgroundStrokeColor = color;
-        this.backgroundStrokeLineWidth = lineWidth;
-        return this;
-    }
-
-    set backgroundCornerRadius(value) {
-        this.dirty = this.dirty || (this._backgroundCornerRadius != value);
-        this._backgroundCornerRadius = value;
-    }
-
-    get backgroundCornerRadius() {
-        return this._backgroundCornerRadius;
-    }
-
-    set backgroundCornerIteration(value) {
-        this.dirty = this.dirty || (this._backgroundCornerIteration != value);
-        this._backgroundCornerIteration = value;
-    }
-
-    get backgroundCornerIteration() {
-        return this._backgroundCornerIteration;
-    }
-
-    setBackgroundCornerRadius(radius, iteration) {
-        this.backgroundCornerRadius = radius;
-        this.backgroundCornerIteration = iteration;
         return this;
     }
 
@@ -172,18 +68,8 @@ class DynamicText extends Canvas {
         return GetPadding(this.padding, key);
     }
 
-    setDefaultTextStyle(style) {
-        this.defaultTextStyle.rest(style);
-        return this;
-    }
-
-    restoreToDefaultTextStyle() {
-        this.currentTextStyle.reset(this.defaultTextStyle.toJSON());
-        return this;
-    }
-
     modifyTextStyle(style) {
-        this.currentTextStyle.modify(style);
+        this.textStyle.modify(style);
         return this;
     }
 
@@ -192,16 +78,7 @@ class DynamicText extends Canvas {
 
         this.clear();
 
-        DrawRoundRectangleBackground(
-            this,
-            this.backgroundColor,
-            this.backgroundStrokeColor,
-            this.backgroundStrokeLineWidth,
-            this.backgroundCornerRadius,
-            this.backgroundColor2,
-            this.backgroundHorizontalGradient,
-            this.backgroundCornerIteration
-        );
+        this.background.draw();
 
         var padding = this.padding;
         var paddingLeft = padding.left,

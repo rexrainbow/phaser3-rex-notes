@@ -11,14 +11,6 @@ class TextStyle {
         this.setStrokeStyle(GetValue(config, 'stroke', null), GetValue(config, 'strokeThickness', 0));
     }
 
-    reset(o) {
-        this.setBold(GetValue(o, 'bold', false));
-        this.setItalic(GetValue(o, 'italic', false));
-        this.setFontFamily(GetValue(o, 'fontFamily', 'Courier'));
-        this.setFillStyle(GetValue(o, 'color', null));
-        this.setStrokeStyle(GetValue(o, 'stroke', null), GetValue(o, 'strokeThickness', 0));
-    }
-
     toJSON() {
         return {
             bold: this.bold,
