@@ -18,11 +18,13 @@ class CharData extends Base {
     }
 
     setStyle(styleJSON) {
+        this.setDirty(true);
         this.style.reset(styleJSON);
         return this;
     }
 
     setText(text) {
+        this.setDirty(this.text != text);
         this.text = text;
         return this;
     }
@@ -34,6 +36,8 @@ class CharData extends Base {
         if (y === undefined) {
             y = 0;
         }
+
+        this.setDirty((this.x != x) || (this.y != y));
         this.x = x;
         this.y = y;
         return this;
@@ -43,6 +47,8 @@ class CharData extends Base {
         if (rotation === undefined) {
             rotation = 0;
         }
+
+        this.setDirty(this.rotation != rotation);
         this.rotation = rotation;
         return this;
     }
