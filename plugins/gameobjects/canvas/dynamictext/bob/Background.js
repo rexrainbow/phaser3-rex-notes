@@ -6,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Background extends Base {
     constructor(parent, config) {
-        super(parent);
+        super(parent, 'background');
 
         this.setColor(
             GetValue(config, 'color', null),

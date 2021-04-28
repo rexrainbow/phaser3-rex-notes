@@ -12,14 +12,17 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = new DynamicText(this, 400, 300, 200, 100, {
+        var text = new DynamicText(this, 400, 300, 400, 200, {
             background: {
-                strokeColor: 0xff0000,
+                strokeColor: 'white',
                 cornerRadius: 20
             },
             padding: 20,
-            text: 'aabb'
+            text: 'aabb ccdd eeff gghh iijj kkll mmnn oopp qqrr xxyy'
         })
+            .runWordWrap({
+                maxLines: 4
+            })
         this.add.existing(text);
 
     }

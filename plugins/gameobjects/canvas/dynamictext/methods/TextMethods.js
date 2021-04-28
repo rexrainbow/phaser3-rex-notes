@@ -1,10 +1,7 @@
 import CharData from '../bob/CharData.js';
+import RunWordWrap from './RunWordWrap.js';
 
 export default {
-    resetCursor(x, y) {
-
-    },
-
     modifyTextStyle(style) {
         this.textStyle.modify(style);
         return this;
@@ -30,4 +27,9 @@ export default {
         }
         return this;
     },
+
+    runWordWrap(config) {
+        RunWordWrap.call(this, config);
+        return this;
+    }
 };

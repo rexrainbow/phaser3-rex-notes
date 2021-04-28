@@ -8,7 +8,7 @@ class CharData extends Base {
         text,
         x, y, rotation
     ) {
-        super(parent);
+        super(parent, 'text');
 
         this.style = new TextStyle(styleJSON);
         this.setText(text);
@@ -21,39 +21,16 @@ class CharData extends Base {
         return this.parent.autoRound;
     }
 
-    setStyle(styleJSON) {
+    modifyStyle(style) {
         this.setDirty(true);
-        this.style.reset(styleJSON);
+        this.style.modify(style);
         return this;
     }
 
     setText(text) {
         this.setDirty(this.text != text);
         this.text = text;
-        return this;
-    }
-
-    setPosition(x, y) {
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = 0;
-        }
-
-        this.setDirty((this.x != x) || (this.y != y));
-        this.x = x;
-        this.y = y;
-        return this;
-    }
-
-    setRotation(rotation) {
-        if (rotation === undefined) {
-            rotation = 0;
-        }
-
-        this.setDirty(this.rotation != rotation);
-        this.rotation = rotation;
+        this.width = this.style.getTextWidth(this.context, text);
         return this;
     }
 
@@ -68,9 +45,8 @@ class CharData extends Base {
         var textStyle = this.style;
         textStyle.syncFont(context).syncStyle(context);
 
-        var padding = this.parent.padding;
-        var x = this.x + padding.left,
-            y = this.y + padding.top;
+        var x = this.x,
+            y = this.y;
         if (this.autoRound) {
             x = Math.round(x);
             y = Math.round(y);
