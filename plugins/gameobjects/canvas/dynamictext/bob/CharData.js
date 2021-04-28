@@ -17,6 +17,10 @@ class CharData extends Base {
         this.setRotation(rotation);
     }
 
+    get autoRound() {
+        return this.parent.autoRound;
+    }
+
     setStyle(styleJSON) {
         this.setDirty(true);
         this.style.reset(styleJSON);
@@ -51,6 +55,36 @@ class CharData extends Base {
         this.setDirty(this.rotation != rotation);
         this.rotation = rotation;
         return this;
+    }
+
+    draw() {
+        if (!this.visible || (this.text === '')) {
+            return this;
+        }
+
+        var context = this.context;
+        context.save();
+
+        var textStyle = this.style;
+        textStyle.syncFont(context).syncStyle(context);
+
+        var padding = this.parent.padding;
+        var x = this.x + padding.left,
+            y = this.y + padding.top;
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+
+        if (textStyle.stroke && textStyle.strokeThickness) {
+            context.strokeText(this.text, x, y);
+        }
+
+        if (textStyle.color) {
+            context.fillText(this.text, x, y);
+        }
+
+        context.restore();
     }
 }
 

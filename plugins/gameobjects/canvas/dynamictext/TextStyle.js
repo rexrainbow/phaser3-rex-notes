@@ -6,18 +6,20 @@ class TextStyle {
     constructor(config) {
         this.setBold(GetValue(config, 'bold', false));
         this.setItalic(GetValue(config, 'italic', false));
+        this.setFontSize(GetValue(config, 'fontSize', '16px'));
         this.setFontFamily(GetValue(config, 'fontFamily', 'Courier'));
-        this.setFillStyle(GetValue(config, 'color', null));
-        this.setStrokeStyle(GetValue(config, 'stroke', null), GetValue(config, 'strokeThickness', 0));
+        this.setColor(GetValue(config, 'color', '#fff'));
+        this.setStrokeStyle(GetValue(config, 'stroke', '#fff'), GetValue(config, 'strokeThickness', 0));
     }
 
     toJSON() {
         return {
             bold: this.bold,
             italic: this.italic,
+            fontSize: this.fontSize,
             fontFamily: this.fontFamily,
-            color: this.fillStyle,
-            stroke: this.strokeStyle,
+            color: this.color,
+            stroke: this.stroke,
             strokeThickness: this.strokeThickness
         }
     }
@@ -33,10 +35,10 @@ class TextStyle {
             this.setFontFamily(o.fontFamily);
         }
         if (o.hasOwnProperty('color')) {
-            this.setFillStyle(o.color);
+            this.setColor(o.color);
         }
         if (o.hasOwnProperty('stroke') || o.hasOwnProperty('strokeThickness')) {
-            var stroke = o.hasOwnProperty('stroke') ? o.stroke : this.strokeStyle;
+            var stroke = o.hasOwnProperty('stroke') ? o.stroke : this.stroke;
             var strokeThickness = o.hasOwnProperty('strokeThickness') ? o.strokeThickness : this.strokeThickness;
             this.setStrokeStyle(stroke, strokeThickness);
         }
@@ -71,6 +73,22 @@ class TextStyle {
         }
     }
 
+    get fontSize() {
+        return this._fontSize;
+    }
+
+    set fontSize(value) {
+        if (typeof (value) === 'number') {
+            value = `${value}px`;
+        }
+        this._fontSize = value;
+    }
+
+    setFontSize(fontSize) {
+        this.fontSize = fontSize;
+        return this;
+    }
+
     setFontFamily(fontFamily) {
         this.fontFamily = fontFamily;
         return this;
@@ -80,16 +98,16 @@ class TextStyle {
         return `${this.fontStyle} ${this.fontSize} ${this.fontFamily}`;
     }
 
-    setFillStyle(fillStyle) {
-        this.fillStyle = GetStyle(fillStyle);
+    setColor(color) {
+        this.color = GetStyle(color);
         return this;
     }
 
-    setStrokeStyle(strokeStyle, strokeThickness) {
-        if (strokeStyle == null) {
+    setStrokeStyle(stroke, strokeThickness) {
+        if (stroke == null) {
             strokeThickness = 0;
         }
-        this.strokeStyle = GetStyle(strokeStyle);
+        this.stroke = GetStyle(stroke);
         this.strokeThickness = strokeThickness;
         return this;
     }
@@ -102,8 +120,8 @@ class TextStyle {
     syncStyle(context) {
         context.textBaseline = 'alphabetic';
 
-        context.fillStyle = this.fillStyle;
-        context.strokeStyle = this.strokeStyle;
+        context.fillStyle = this.color;
+        context.strokeStyle = this.stroke;
 
         context.lineWidth = this.strokeThickness;
         context.lineCap = 'round';

@@ -4,24 +4,24 @@ import DrawRoundRectangleBackground from '../../utils/DrawRoundRectangleBackgrou
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Background extends Base{
+class Background extends Base {
     constructor(parent, config) {
         super(parent);
 
         this.setColor(
-            GetValue(config, 'backgroundColor', null),
-            GetValue(config, 'backgroundColor2', null),
-            GetValue(config, 'backgroundHorizontalGradient', true)
+            GetValue(config, 'color', null),
+            GetValue(config, 'color2', null),
+            GetValue(config, 'horizontalGradient', true)
         );
 
         this.setStrokeColor(
-            GetValue(config, 'backgroundStrokeColor', null),
-            GetValue(config, 'backgroundStrokeThickness', 2)
+            GetValue(config, 'strokeColor', null),
+            GetValue(config, 'strokeThickness', 2)
         );
 
         this.setCornerRadius(
-            GetValue(config, 'backgroundCornerRadius', 0),
-            GetValue(config, 'backgroundCornerIteration', null)
+            GetValue(config, 'cornerRadius', 0),
+            GetValue(config, 'cornerIteration', null)
         );
     }
 
@@ -115,6 +115,10 @@ class Background extends Base{
     }
 
     draw() {
+        if (!this.visible) {
+            return this;
+        }
+
         DrawRoundRectangleBackground(
             this.parent,
             this.color,
@@ -125,6 +129,8 @@ class Background extends Base{
             this.horizontalGradient,
             this.cornerIteration
         );
+
+        return this;
     }
 }
 

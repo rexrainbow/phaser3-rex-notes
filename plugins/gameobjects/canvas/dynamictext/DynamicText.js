@@ -1,7 +1,9 @@
 import Canvas from '../canvas/Canvas.js';
-import { GetPadding, SetPadding } from '../../../utils/padding/PaddingMethods.js'
-import Background from './Background.js';
+import Background from './bob/Background.js';
 import TextStyle from './TextStyle.js';
+import DrawContent from './DrawContent.js';
+import PaddingMethods from './PaddingMethods.js';
+import TextMethods from './TextMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -26,13 +28,16 @@ class DynamicText extends Canvas {
         this.type = 'rexDynamicCanvasText';
         this.autoRound = true;
         this.padding = {};
-        this.background = new Background(parent, config);
+        this.background = new Background(this, GetValue(config, 'background', undefined));
+        this.children = [];
         this.textStyle = new TextStyle(config);
 
         this.setFixedSize(fixedWidth, fixedHeight);
         this.setPadding(
             GetValue(config, 'padding', 0)
         );
+
+        this.setText(GetValue(config, 'text', ''));
     }
 
     setFixedSize(width, height) {
@@ -46,63 +51,19 @@ class DynamicText extends Canvas {
         return this;
     }
 
-    setPadding(key, value) {
-        var padding = this.padding;
-        var paddingLeft = padding.left,
-            paddingRight = padding.right,
-            paddingTop = padding.top,
-            paddingBottom = padding.bottom;
-
-        SetPadding(this.padding, key, value);
-
-        this.dirty = this.dirty ||
-            (paddingLeft != this.padding.left) ||
-            (paddingRight != this.padding.right) ||
-            (paddingTop != this.padding.top) ||
-            (paddingBottom != this.padding.bottom)
-            ;
-        return this;
-    }
-
-    getPadding(key) {
-        return GetPadding(this.padding, key);
-    }
-
-    modifyTextStyle(style) {
-        this.textStyle.modify(style);
-        return this;
-    }
-
     updateTexture() {
-        var ctx = this.context;
-
         this.clear();
-
-        this.background.draw();
-
-        var padding = this.padding;
-        var paddingLeft = padding.left,
-            paddingRight = padding.right,
-            paddingTop = padding.top,
-            paddingBottom = padding.bottom;
-
-        ctx.save();
-        ctx.beginPath();
-
-        if ((paddingLeft > 0) || (paddingRight > 0) || (paddingTop > 0) || (paddingBottom > 0)) {
-            ctx.rect(paddingLeft, padding.top, paddingRight - paddingLeft, paddingBottom - paddingTop);
-            ctx.clip();
-        }
-
-        ctx.translate(paddingLeft, paddingTop);
-
-        // Draw text & images
-
-        ctx.restore();
-
+        DrawContent.call(this);
         super.updateTexture();
         return this;
     }
 }
+
+Object.assign(
+    DynamicText.prototype,
+    PaddingMethods,
+    TextMethods
+);
+
 
 export default DynamicText;
