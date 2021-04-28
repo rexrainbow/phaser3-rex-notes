@@ -1,5 +1,5 @@
 import Base from './Base.js';
-import TextStyle from '../TextStyle.js';
+import TextStyle from './TextStyle.js';
 
 class CharData extends Base {
     constructor(

@@ -1,9 +1,9 @@
 import Canvas from '../canvas/Canvas.js';
 import Background from './bob/Background.js';
-import TextStyle from './TextStyle.js';
-import DrawContent from './DrawContent.js';
-import PaddingMethods from './PaddingMethods.js';
-import TextMethods from './TextMethods.js';
+import TextStyle from './bob/TextStyle.js';
+import DrawContent from './methods/DrawContent.js';
+import PaddingMethods from './methods/PaddingMethods.js';
+import TextMethods from './methods/TextMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -30,7 +30,7 @@ class DynamicText extends Canvas {
         this.padding = {};
         this.background = new Background(this, GetValue(config, 'background', undefined));
         this.children = [];
-        this.textStyle = new TextStyle(config);
+        this.textStyle = new TextStyle(GetValue(config, 'style', undefined));
 
         this.setFixedSize(fixedWidth, fixedHeight);
         this.setPadding(

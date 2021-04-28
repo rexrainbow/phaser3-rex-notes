@@ -1,4 +1,4 @@
-import { GetPadding, SetPadding } from '../../../utils/padding/PaddingMethods.js';
+import { GetPadding, SetPadding } from '../../../../utils/padding/PaddingMethods.js';
 
 export default {
     setPadding(key, value) {

@@ -1,6 +1,10 @@
-import CharData from './bob/CharData.js';
+import CharData from '../bob/CharData.js';
 
 export default {
+    resetCursor(x, y) {
+
+    },
+
     modifyTextStyle(style) {
         this.textStyle.modify(style);
         return this;
