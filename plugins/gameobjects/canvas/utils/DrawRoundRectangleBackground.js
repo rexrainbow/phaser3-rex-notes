@@ -21,8 +21,6 @@ var DrawRoundRectangleBackground = function (
         canvasObject.context.fillStyle = color;
         canvasObject.context.fillRect(0, 0, width, height);
     } else {
-        canvasObject.context.clearRect(0, 0, width, height);
-
         if (strokeColor == null) {
             strokeLineWidth = 0;
         }

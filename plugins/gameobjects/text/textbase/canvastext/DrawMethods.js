@@ -10,7 +10,7 @@ export default {
 
         var defaultStyle = this.defaultStyle;
 
-        // this.clear();
+        this.clear();
         DrawRoundRectangleBackground(
             this,
             defaultStyle.backgroundColor,

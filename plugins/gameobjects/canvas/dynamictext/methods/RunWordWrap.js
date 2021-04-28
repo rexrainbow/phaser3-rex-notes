@@ -12,14 +12,14 @@ var RunWordWrap = function (config) {
         wrapWidth = this.width - this.padding.left - this.padding.right;
     }
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
-    var baseLineOffset = GetValue(config, 'baseLineOffset', lineHeight * 0.8);
+    var baselineOffset = GetValue(config, 'baselineOffset', lineHeight * 0.8);
 
     // Tokenize children
     var words = Tokenize(this.children);
 
     // Layout children
     var startX = this.padding.left,
-        startY = this.padding.top + baseLineOffset;
+        startY = this.padding.top + baselineOffset;
     var x = startX,
         y = startY,
         remainderWidth = wrapWidth;
