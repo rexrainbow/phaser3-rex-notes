@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = new DynamicText(this, 400, 300, 400, 100, {
+        var text = new DynamicText(this, 400, 300, 400, 200, {
             background: {
                 strokeColor: 'white',
                 cornerRadius: 20
@@ -21,17 +21,28 @@ class Demo extends Phaser.Scene {
             style: {
                 fontSize: '20px'
             },
-            text: 'Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.'
         })
-            .runWordWrap({
-                baselineOffset: 20,
-                maxLines: 2
-            })
         this.add.existing(text);
 
-        var children = text.getValidChildren();
+        var content = [
+            'Phaser is a fast, free, and fun open source HTML5 game framework\n',
+            'that offers WebGL and Canvas rendering across desktop and mobile web browsers.\n',
+            'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
+            'You can use JavaScript or TypeScript for development.'
+        ];
+        var result = text
+            .appendText(content[0], { color: '#FFF8DC' })
+            .appendText(content[1], { color: '#008B8B' })
+            .appendText(content[2], { color: '#696969' })
+            .appendText(content[3], { color: '#F8F8FF' })
+            .runWordWrap({
+                baselineOffset: 20,
+                maxLines: 5
+            })
+
+
         var tween = this.tweens.add({
-            targets: children,
+            targets: result.children,
             delay: this.tweens.stagger(200),
             duration: 500,
             onStart: function (tween, targets) {

@@ -8,7 +8,7 @@ export default {
     },
 
     setText(text, style) {
-        this.children.length = 0; // TODO: Recycle children
+        this.freeChildren();
         this.appendText(text, style);
         return this;
     },
@@ -29,7 +29,6 @@ export default {
     },
 
     runWordWrap(config) {
-        RunWordWrap.call(this, config);
-        return this;
+        return RunWordWrap.call(this, config);
     }
 };

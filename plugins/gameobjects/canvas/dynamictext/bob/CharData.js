@@ -30,7 +30,7 @@ class CharData extends Base {
     setText(text) {
         this.setDirty(this.text != text);
         this.text = text;
-        this.width = this.style.getTextWidth(this.context, text);
+        this.width = (text !== '\n') ? this.style.getTextWidth(this.context, text) : 0;
         return this;
     }
 

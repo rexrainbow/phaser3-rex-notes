@@ -52,6 +52,14 @@ class DynamicText extends Canvas {
         return this;
     }
 
+    get innerWidth() {
+        return this.width - this.padding.left - this.padding.right;
+    }
+
+    get innerHeight() {
+        return this.height - this.padding.top - this.padding.bottom;
+    }
+
     updateTexture() {
         this.clear();
         DrawContent.call(this);

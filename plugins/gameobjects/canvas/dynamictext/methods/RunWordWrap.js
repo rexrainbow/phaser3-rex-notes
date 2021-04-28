@@ -2,52 +2,75 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RunWordWrap = function (config) {
     // Parse parameters
+    var startIndex = GetValue(config, 'start', 0);
+
+    var innerWidth = this.innerWidth,
+        innerHeight = this.innerHeight;
+
     var lineHeight = GetValue(config, 'lineHeight', undefined);
     if (lineHeight === undefined) {
         // Calculate lineHeight via maxLines
         var maxLines = GetValue(config, 'maxLines', 1);
-        lineHeight = (this.height - this.padding.top - this.padding.bottom) / maxLines;
+        lineHeight = innerHeight / maxLines;
     } else {
         // Calculate maxLines if not defined
         var maxLines = GetValue(config, 'maxLines', undefined);
         if (maxLines === undefined) {
-            var innerHeight = this.height - this.padding.top - this.padding.bottom;
             maxLines = Math.floor(innerHeight / lineHeight);
         }
     }
 
     var wrapWidth = GetValue(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
-        wrapWidth = this.width - this.padding.left - this.padding.right;
+        wrapWidth = innerWidth;
     }
 
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
 
     var baselineOffset = GetValue(config, 'baselineOffset', lineHeight * 0.8);
+    if (baselineOffset === undefined) {
+        if (maxLines === 1) {
+            baselineOffset = innerHeight / 2;
+        } else {
+            baselineOffset = lineHeight * 0.8; // TODO
+        }
+    }
+
+    var result = {
+        start: startIndex,
+        lineHeight: lineHeight,
+        maxLines: maxLines,
+        wrapWidth: wrapWidth,
+        letterSpacing: letterSpacing,
+        baselineOffset: baselineOffset,
+        children: []
+    }
 
     // Set all children to valid
     var children = this.children;
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
+    for (var i = startIndex, cnt = children.length; i < cnt; i++) {
         children[i].setValid(false);
     }
 
-    // Tokenize children
-    var words = Tokenize(this.children);
-
     // Layout children
     var startX = this.padding.left,
-        startY = this.padding.top + baselineOffset;
-    var x = startX,
-        y = startY,
-        remainderWidth = wrapWidth,
+        startY = this.padding.top + baselineOffset,
+        x = startX,
+        y = startY;
+    var remainderWidth = wrapWidth,
         lineCnt = 1,
-        char;
-    for (var wi = 0, wcnt = words.length; wi < wcnt; wi++) {
-        var word = words[wi];
-        var wordWidth = GetWordWidth(word);
+        childIndex = startIndex,
+        lastChildIndex = children.length;
+    var resultChildren = result.children;
+    var wordResult;
+    while (childIndex < lastChildIndex) {
+        wordResult = GetNextWord(children, childIndex, wordResult);
+        var word = wordResult.word;
+        var wordWidth = wordResult.width;
 
+        childIndex += word.length;
         // Next line
-        if (remainderWidth < wordWidth) {
+        if ((remainderWidth < wordWidth) || (IsNewLine(word))) {
             x = startX;
             y += lineHeight;
             remainderWidth = wrapWidth;
@@ -58,55 +81,54 @@ var RunWordWrap = function (config) {
         }
         remainderWidth -= wordWidth;
 
-        if (Array.isArray(word)) {
-            for (var ci = 0, ccnt = word.length; ci < ccnt; ci++) {
-                char = word[ci];
-                char
-                    .setValid()
-                    .setPosition(x, y);
-
-                x += char.width + letterSpacing;
-            }
-        } else {
-            char = word;
+        for (var i = 0, cnt = word.length; i < cnt; i++) {
+            var char = word[i];
             char
                 .setValid()
                 .setPosition(x, y);
-            x += wordWidth + letterSpacing;
+            resultChildren.push(char);
+            x += char.width + letterSpacing;
         }
     }
+
+    result.start += resultChildren.length;
+    return result;
 };
 
-var Tokenize = function (children) {
-    var words = [], lastWord = [];
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-        var child = children[i];
-        if ((child.type === 'text') && (child.text !== ' ')) {
-            lastWord.push(child);
-        } else { // is a space, or not-a-text
-            if (lastWord.length > 0) {
-                words.push(lastWord);
-                lastWord = [];
+var GetNextWord = function (children, startIndex, result) {
+    if (result === undefined) {
+        result = { word: [], width: 0 };
+    }
+
+    result.word.length = 0;
+
+    var endIndex = children.length;
+    var currentIndex = startIndex;
+    var word = result.word, wordWidth = 0;
+    while (currentIndex < endIndex) {
+        var child = children[currentIndex];
+        if ((child.type === 'text') && (child.text !== ' ') && (child.text !== '\n')) {
+            word.push(child);
+            wordWidth += child.width;
+            currentIndex++;
+            // Continue
+        } else {  // Get non-text child, a space, or a new-line
+            if (currentIndex === startIndex) { // Single child
+                word.push(child);
+                wordWidth += child.width;
             }
-            words.push(child);
+            break;
         }
+
     }
-    if (lastWord.length > 0) {
-        words.push(lastWord);
-    }
-    return words;
+
+    result.width = wordWidth;
+    return result;
 }
 
-var GetWordWidth = function (word) {
-    var width = 0;
-    if (Array.isArray(word)) {
-        for (var i = 0, cnt = word.length; i < cnt; i++) {
-            width += word[i].width;
-        }
-    } else {
-        width += word.width;
-    }
-    return width;
+var IsNewLine = function (word) {
+    var child = word[0];
+    return (child.type === 'text') && (child.text === '\n');
 }
 
 export default RunWordWrap;
