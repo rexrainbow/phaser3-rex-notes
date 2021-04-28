@@ -27,7 +27,7 @@ class Background extends Base{
 
     set color(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.parent.dirty = this.parent.dirty || (this._color != value);
+        this.setDirty(this._color != value);
         this._color = value;
     }
 
@@ -37,7 +37,7 @@ class Background extends Base{
 
     set color2(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.parent.dirty = this.parent.dirty || (this._color2 != value);
+        this.setDirty(this._color2 != value);
         this._color2 = value;
     }
 
@@ -46,7 +46,7 @@ class Background extends Base{
     }
 
     set horizontalGradient(value) {
-        this.parent.dirty = this.parent.dirty || (this._horizontalGradient != value);
+        this.setDirty(this._horizontalGradient != value);
         this._horizontalGradient = value;
     }
 
@@ -67,7 +67,7 @@ class Background extends Base{
 
     set strokeColor(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.parent.dirty = this.parent.dirty || (this._strokeColor != value);
+        this.setDirty(this._strokeColor != value);
         this._strokeColor = value;
     }
 
@@ -76,7 +76,7 @@ class Background extends Base{
     }
 
     set strokeThickness(value) {
-        this.parent.dirty = this.parent.dirty || (this._strokeThickness != value);
+        this.setDirty(this._strokeThickness != value);
         this._strokeThickness = value;
     }
 
@@ -91,7 +91,7 @@ class Background extends Base{
     }
 
     set cornerRadius(value) {
-        this.parent.dirty = this.parent.dirty || (this._cornerRadius != value);
+        this.setDirty(this._cornerRadius != value);
         this._cornerRadius = value;
     }
 
@@ -100,7 +100,7 @@ class Background extends Base{
     }
 
     set cornerIteration(value) {
-        this.parent.dirty = this.parent.dirty || (this._cornerIteration != value);
+        this.setDirty(this._cornerIteration != value);
         this._cornerIteration = value;
     }
 

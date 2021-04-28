@@ -11,6 +11,13 @@ class Base {
         return this.parent.context;
     }
 
+    setDirty(dirty) {
+        if (dirty) {
+            this.parent.dirty = true;
+        }
+        return this;
+    }
+
     // Override
     draw() {
 
