@@ -3,6 +3,7 @@ import Background from './bob/Background.js';
 import TextStyle from './bob/TextStyle.js';
 import DrawContent from './methods/DrawContent.js';
 import PaddingMethods from './methods/PaddingMethods.js';
+import ChildrenMethods from './methods/ChildrenMethods.js';
 import TextMethods from './methods/TextMethods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -62,6 +63,7 @@ class DynamicText extends Canvas {
 Object.assign(
     DynamicText.prototype,
     PaddingMethods,
+    ChildrenMethods,
     TextMethods
 );
 

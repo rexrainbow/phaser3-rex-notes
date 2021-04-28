@@ -4,15 +4,32 @@ var RunWordWrap = function (config) {
     // Parse parameters
     var lineHeight = GetValue(config, 'lineHeight', undefined);
     if (lineHeight === undefined) {
+        // Calculate lineHeight via maxLines
         var maxLines = GetValue(config, 'maxLines', 1);
         lineHeight = (this.height - this.padding.top - this.padding.bottom) / maxLines;
+    } else {
+        // Calculate maxLines if not defined
+        var maxLines = GetValue(config, 'maxLines', undefined);
+        if (maxLines === undefined) {
+            var innerHeight = this.height - this.padding.top - this.padding.bottom;
+            maxLines = Math.floor(innerHeight / lineHeight);
+        }
     }
+
     var wrapWidth = GetValue(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
         wrapWidth = this.width - this.padding.left - this.padding.right;
     }
+
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
+
     var baselineOffset = GetValue(config, 'baselineOffset', lineHeight * 0.8);
+
+    // Set all children to valid
+    var children = this.children;
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        children[i].setValid(false);
+    }
 
     // Tokenize children
     var words = Tokenize(this.children);
@@ -22,7 +39,9 @@ var RunWordWrap = function (config) {
         startY = this.padding.top + baselineOffset;
     var x = startX,
         y = startY,
-        remainderWidth = wrapWidth;
+        remainderWidth = wrapWidth,
+        lineCnt = 1,
+        char;
     for (var wi = 0, wcnt = words.length; wi < wcnt; wi++) {
         var word = words[wi];
         var wordWidth = GetWordWidth(word);
@@ -32,17 +51,27 @@ var RunWordWrap = function (config) {
             x = startX;
             y += lineHeight;
             remainderWidth = wrapWidth;
+            lineCnt++;
+            if (lineCnt > maxLines) {
+                break;
+            }
         }
         remainderWidth -= wordWidth;
 
         if (Array.isArray(word)) {
             for (var ci = 0, ccnt = word.length; ci < ccnt; ci++) {
-                var char = word[ci];
-                char.setPosition(x, y);
+                char = word[ci];
+                char
+                    .setValid()
+                    .setPosition(x, y);
+
                 x += char.width + letterSpacing;
             }
         } else {
-            word.setPosition(x, y);
+            char = word;
+            char
+                .setValid()
+                .setPosition(x, y);
             x += wordWidth + letterSpacing;
         }
     }

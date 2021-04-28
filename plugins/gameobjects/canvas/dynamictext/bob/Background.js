@@ -14,8 +14,8 @@ class Background extends Base {
             GetValue(config, 'horizontalGradient', true)
         );
 
-        this.setStrokeColor(
-            GetValue(config, 'strokeColor', null),
+        this.setStroke(
+            GetValue(config, 'stroke', null),
             GetValue(config, 'strokeThickness', 2)
         );
 
@@ -65,14 +65,14 @@ class Background extends Base {
         return this;
     }
 
-    set strokeColor(value) {
+    set stroke(value) {
         value = GetStyle(value, this.canvas, this.context);
-        this.setDirty(this._strokeColor != value);
-        this._strokeColor = value;
+        this.setDirty(this._stroke != value);
+        this._stroke = value;
     }
 
-    get strokeColor() {
-        return this._strokeColor;
+    get stroke() {
+        return this._stroke;
     }
 
     set strokeThickness(value) {
@@ -84,8 +84,8 @@ class Background extends Base {
         return this._strokeThickness;
     }
 
-    setStrokeColor(color, lineWidth) {
-        this.strokeColor = color;
+    setStroke(color, lineWidth) {
+        this.stroke = color;
         this.strokeThickness = lineWidth;
         return this;
     }
@@ -122,7 +122,7 @@ class Background extends Base {
         DrawRoundRectangleBackground(
             this.parent,
             this.color,
-            this.strokeColor,
+            this.stroke,
             this.strokeThickness,
             this.cornerRadius,
             this.color2,

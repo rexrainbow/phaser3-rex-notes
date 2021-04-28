@@ -12,54 +12,42 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = new DynamicText(this, 400, 300, 400, 200, {
+        var text = new DynamicText(this, 400, 300, 400, 100, {
             background: {
                 strokeColor: 'white',
                 cornerRadius: 20
             },
             padding: 20,
-            text: 'aabb ccdd eeff gghh iijj kkll mmnn oopp qqrr xxyy'
+            style: {
+                fontSize: '20px'
+            },
+            text: 'Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.'
         })
             .runWordWrap({
-                maxLines: 4
+                baselineOffset: 20,
+                maxLines: 2
             })
         this.add.existing(text);
 
-        var startX = text.width / 2,
-            startY = text.height / 2;
+        var children = text.getValidChildren();
         var tween = this.tweens.add({
-            targets: text.children,
-            delay: this.tweens.stagger(100),
-            // onStart: function (tween, targets) {
-            //     for (var i = 0, cnt = targets.length; i < cnt; i++) {
-            //         targets[i].setVisible(false);
-            //     }
-            // },
-            props: {
-                x: {
-                    value: {
-                        getStart: function (target) {
-                            return startX;
-                        },
-
-                        getEnd: function (target) {
-                            return target.x;
-                        }
-                    }
-                },
-
-                y: {
-                    value: {
-                        getStart: function (target) {
-                            return startY;
-                        },
-
-                        getEnd: function (target) {
-                            return target.y;
-                        }
-                    }
+            targets: children,
+            delay: this.tweens.stagger(200),
+            duration: 500,
+            onStart: function (tween, targets) {
+                for (var i = 0, cnt = targets.length; i < cnt; i++) {
+                    targets[i].setVisible(false);
                 }
-            }
+                text.background.stroke = 'green';
+            },
+            onUpdate: function (tween, target) {
+                target.setVisible(true);
+            },
+            onComplete: function (tween, targets) {
+                text.background.stroke = 'white';
+            },
+            y: '-=20',
+            yoyo: true,
         });
 
     }

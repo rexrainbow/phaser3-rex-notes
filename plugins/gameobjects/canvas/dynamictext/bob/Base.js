@@ -2,7 +2,11 @@ class Base {
     constructor(parent, type) {
         this.parent = parent;
         this.type = type;
-        this.setVisible();
+
+        this
+            .setValid()
+            .setVisible();
+
         this.width = 0;
         this.height = 0;
     }
@@ -19,6 +23,28 @@ class Base {
         if (dirty) {
             this.parent.dirty = true;
         }
+        return this;
+    }
+
+    get valid() {
+        return this._valid;
+    }
+
+    set valid(value) {
+        this.setDirty(this._valid != value);
+        this._valid = value;
+    }
+
+    setValid(valid) {
+        if (valid === undefined) {
+            valid = true;
+        }
+        this.valid = valid;
+        return this;
+    }
+
+    setInvalid() {
+        this.valid = false;
         return this;
     }
 

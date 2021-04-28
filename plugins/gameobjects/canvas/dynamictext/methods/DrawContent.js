@@ -1,9 +1,15 @@
 var DrawContent = function () {
 
-    this.background.draw();
+    if (this.background.valid) {
+        this.background.draw();
+    }
 
+    var child;
     for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-        this.children[i].draw();
+        child = this.children[i];
+        if (child.valid) {
+            child.draw();
+        }
     }
 
     // Debug
