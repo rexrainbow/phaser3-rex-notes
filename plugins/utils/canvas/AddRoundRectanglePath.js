@@ -16,6 +16,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     var cornerRadius = geom.cornerRadius;
     var radius, radiusX, radiusY, centerX, centerY;
 
+    context.save();
     context.beginPath();
 
     context.translate(x, y);
@@ -77,6 +78,7 @@ var AddRoundRectanglePath = function (context, x, y, width, height, radiusConfig
     }
 
     context.closePath();
+    context.restore();
 }
 
 var ArcTo = function (context, centerX, centerY, radiusX, radiusY, startAngle, endAngle, iteration) {

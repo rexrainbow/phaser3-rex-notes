@@ -25,15 +25,21 @@ class Demo extends Phaser.Scene {
             })
         this.add.existing(text);
 
-        var centerX = text.width / 2,
-            centerY = text.height / 2;
+        var startX = text.width / 2,
+            startY = text.height / 2;
         var tween = this.tweens.add({
             targets: text.children,
+            delay: this.tweens.stagger(100),
+            // onStart: function (tween, targets) {
+            //     for (var i = 0, cnt = targets.length; i < cnt; i++) {
+            //         targets[i].setVisible(false);
+            //     }
+            // },
             props: {
                 x: {
                     value: {
                         getStart: function (target) {
-                            return centerX;
+                            return startX;
                         },
 
                         getEnd: function (target) {
@@ -45,7 +51,7 @@ class Demo extends Phaser.Scene {
                 y: {
                     value: {
                         getStart: function (target) {
-                            return centerY;
+                            return startY;
                         },
 
                         getEnd: function (target) {
