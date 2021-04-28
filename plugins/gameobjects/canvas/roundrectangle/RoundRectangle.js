@@ -1,6 +1,6 @@
 import Canvas from '../canvas/Canvas.js';
-import DrawRoundRectangle from '../../../utils/canvas/DrawRoundRectangle.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
+import DrawContent from './DrawContent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -111,26 +111,7 @@ class RoundRectangle extends Canvas {
 
     updateTexture() {
         this.clear();
-        var lineWidth = this.lineWidth;
-        if (!this.strokeStyle) {
-            lineWidth = 0;
-        }
-        var x = lineWidth / 2;
-        var width = this.width - lineWidth;
-        var height = this.height - lineWidth;
-
-        DrawRoundRectangle(
-            this.canvas, this.context,
-            x, x,
-            width, height,
-            this.radius,
-            this.fillStyle,
-            this.strokeStyle,
-            lineWidth,
-            this.fillColor2,
-            this.isHorizontalGradient,
-            this.iteration,
-        );
+        DrawContent.call(this);
         super.updateTexture();
         return this;
     }
