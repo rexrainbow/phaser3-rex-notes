@@ -12,16 +12,9 @@ var DrawContent = function () {
         }
     }
 
-    // Debug
-    var context = this.context;
-    context.beginPath();
-    context.rect(
-        this.padding.left,
-        this.padding.top,
-        this.width - this.padding.left - this.padding.right,
-        this.height - this.padding.top - this.padding.bottom);
-    context.strokeStyle = 'red';
-    context.stroke();
+    if (this.innerBounds.valid) {
+        this.innerBounds.draw();
+    }
 }
 
 export default DrawContent;

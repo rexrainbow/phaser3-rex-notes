@@ -27,7 +27,7 @@ var DrawRoundRectangle = function (
         context.fill();
     }
 
-    if (strokeStyle != null) {
+    if ((strokeStyle != null) && (lineWidth > 0)) {
         context.strokeStyle = strokeStyle;
         context.lineWidth = lineWidth;
         context.stroke();

@@ -16,27 +16,21 @@ var DrawRoundRectangleBackground = function (
     var width = canvasObject.canvas.width,
         height = canvasObject.canvas.height;
 
-    if ((color != null) && (strokeColor == null) && (radius === 0)) {
-        // Fill color
-        canvasObject.context.fillStyle = color;
-        canvasObject.context.fillRect(0, 0, width, height);
-    } else {
-        if (strokeColor == null) {
-            strokeLineWidth = 0;
-        }
-        var x = strokeLineWidth / 2;
-        width -= strokeLineWidth;
-        height -= strokeLineWidth;
-        DrawRoundRectangle(canvasObject.canvas, canvasObject.context,
-            x, x,
-            width, height,
-            radius,
-            color,
-            strokeColor, strokeLineWidth,
-            color2, isHorizontalGradient,
-            iteration
-        );
+    if (strokeColor == null) {
+        strokeLineWidth = 0;
     }
+    var x = strokeLineWidth / 2;
+    width -= strokeLineWidth;
+    height -= strokeLineWidth;
+    DrawRoundRectangle(canvasObject.canvas, canvasObject.context,
+        x, x,
+        width, height,
+        radius,
+        color,
+        strokeColor, strokeLineWidth,
+        color2, isHorizontalGradient,
+        iteration
+    );
 }
 
 export default DrawRoundRectangleBackground;

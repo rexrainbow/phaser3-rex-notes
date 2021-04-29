@@ -64,7 +64,7 @@ var RunWordWrap = function (config) {
     var resultChildren = result.children;
     var wordResult;
     while (childIndex < lastChildIndex) {
-        wordResult = GetNextWord(children, childIndex, wordResult);
+        wordResult = GetWord(children, childIndex, wordResult);
         var word = wordResult.word;
         var wordWidth = wordResult.width;
 
@@ -95,7 +95,7 @@ var RunWordWrap = function (config) {
     return result;
 };
 
-var GetNextWord = function (children, startIndex, result) {
+var GetWord = function (children, startIndex, result) {
     if (result === undefined) {
         result = { word: [], width: 0 };
     }

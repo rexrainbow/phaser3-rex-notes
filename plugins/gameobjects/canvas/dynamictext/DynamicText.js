@@ -1,5 +1,6 @@
 import Canvas from '../canvas/Canvas.js';
 import Background from './bob/Background.js';
+import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/TextStyle.js';
 import DrawContent from './methods/DrawContent.js';
 import PaddingMethods from './methods/PaddingMethods.js';
@@ -29,14 +30,13 @@ class DynamicText extends Canvas {
         this.type = 'rexDynamicCanvasText';
         this.autoRound = true;
         this.padding = {};
-        this.background = new Background(this, GetValue(config, 'background', undefined));
-        this.children = [];
         this.textStyle = new TextStyle(GetValue(config, 'style', undefined));
+        this.background = new Background(this, GetValue(config, 'background', undefined));
+        this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));
+        this.children = [];
 
         this.setFixedSize(fixedWidth, fixedHeight);
-        this.setPadding(
-            GetValue(config, 'padding', 0)
-        );
+        this.setPadding(GetValue(config, 'padding', 0));
 
         this.setText(GetValue(config, 'text', ''));
     }

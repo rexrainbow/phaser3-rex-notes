@@ -1,4 +1,4 @@
-import DynamicText from '../../plugins/gameobjects/canvas/dynamictext/DynamicText.js';
+import DynamicTextPlugin from '../../plugins/dynamictext-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,21 +12,25 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = new DynamicText(this, 400, 300, 400, 200, {
-            background: {
-                strokeColor: 'white',
-                cornerRadius: 20
-            },
-            padding: 20,
-            style: {
-                fontSize: '20px'
-            },
-        })
-        this.add.existing(text);
+        var text = this.add.rexDynamicText(400, 300, 400, 200,
+            {
+                background: {
+                    stroke: 'white',
+                    cornerRadius: 20
+                },
+                innerBounds: {
+                    stroke:'#A52A2A'
+                },
+                padding: 20,
+                style: {
+                    fontSize: '20px'
+                },
+            }
+        )
 
         var content = [
             'Phaser is a fast, free, and fun open source HTML5 game framework\n',
-            'that offers WebGL and Canvas rendering across desktop and mobile web browsers.\n',
+            'that offers WebGL and DynamicText rendering across desktop and mobile web browsers.\n',
             'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
             'You can use JavaScript or TypeScript for development.'
         ];
@@ -75,7 +79,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexDynamicText',
+            plugin: DynamicTextPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
