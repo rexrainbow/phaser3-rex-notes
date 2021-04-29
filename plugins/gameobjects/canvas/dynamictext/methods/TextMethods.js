@@ -36,6 +36,7 @@ export default {
             } else {
                 bob
                     .setParent(this)
+                    .setActive()
                     .modifyStyle(this.textStyle)
                     .setText(char);
             }

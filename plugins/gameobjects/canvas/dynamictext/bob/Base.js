@@ -17,15 +17,15 @@ class Base {
     }
 
     get canvas() {
-        return this.parent.canvas;
+        return (this.parent) ? this.parent.canvas : null;
     }
 
     get context() {
-        return this.parent.context;
+        return (this.parent) ? this.parent.context : null;
     }
 
     setDirty(dirty) {
-        if (dirty) {
+        if (dirty && this.parent) {
             this.parent.dirty = true;
         }
         return this;
@@ -117,7 +117,10 @@ class Base {
 
     // Override
     onFree() {
-        this.setParent();
+        this
+            .setParent()
+            .setPosition(0, 0)
+            .setRotation(0);
     }
 
     // Override

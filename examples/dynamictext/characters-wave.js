@@ -34,40 +34,56 @@ class Demo extends Phaser.Scene {
             'Games can be compiled to iOS, Android and native apps by using 3rd party tools.\n',
             'You can use JavaScript or TypeScript for development.'
         ];
-        var result = text
+        text
             .appendText(content[0], { color: '#FFF8DC' })
             .appendText(content[1], { color: '#008B8B' })
-            .appendText(content[2], { color: '#696969' })
-            .appendText(content[3], { color: '#F8F8FF' })
-            .runWordWrap({
-                baselineOffset: 20,
-                maxLines: 5
-            })
+            .appendText(content[2], { color: '#FF7F50' })
+            .appendText(content[3], { color: '#F8F8FF' });
 
+        TypingNextPage(text, {
+            baselineOffset: 20,
+            maxLines: 5
+        })
 
-        var tween = this.tweens.add({
-            targets: result.children,
-            delay: this.tweens.stagger(200),
-            duration: 500,
-            onStart: function (tween, targets) {
-                for (var i = 0, cnt = targets.length; i < cnt; i++) {
-                    targets[i].setVisible(false);
-                }
-                text.background.stroke = 'green';
-            },
-            onUpdate: function (tween, target) {
-                target.setVisible(true);
-            },
-            onComplete: function (tween, targets) {
-                text.background.stroke = 'white';
-            },
-            y: '-=20',
-            yoyo: true,
-        });
-
+        this.print = this.add.text(0, 580, '');
     }
 
     update() { }
+}
+
+var TypingNextPage = function (text, config) {
+    var result = text.runWordWrap(config);
+
+    var scene = text.scene;
+    var tween = scene.tweens.add({
+        targets: result.children,
+        delay: scene.tweens.stagger(200),
+        duration: 500,
+        onStart: function (tween, targets) {
+            for (var i = 0, cnt = targets.length; i < cnt; i++) {
+                targets[i].setVisible(false);
+            }
+            text.background.stroke = 'green';
+        },
+        onUpdate: function (tween, target) {
+            target.setVisible(true);
+        },
+        onComplete: function (tween, targets) {
+            text.background.stroke = 'white';
+            if (!result.isLastPage) {
+                scene.print.setText('Click to continue');
+                scene.input.once('pointerdown', function () {
+                    scene.print.setText('');
+                    TypingNextPage(text, result);
+                })
+            } else {
+                // On typing complete
+                scene.print.setText('Typing complete');
+            }
+        },
+        y: '-=20',
+        yoyo: true,
+    });
 }
 
 var config = {

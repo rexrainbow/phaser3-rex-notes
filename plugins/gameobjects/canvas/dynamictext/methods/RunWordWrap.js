@@ -38,6 +38,7 @@ var RunWordWrap = function (config) {
 
     var result = {
         start: startIndex,
+        isLastPage: false,
         lineHeight: lineHeight,
         maxLines: maxLines,
         wrapWidth: wrapWidth,
@@ -48,7 +49,7 @@ var RunWordWrap = function (config) {
 
     // Set all children to active
     var children = this.children;
-    for (var i = startIndex, cnt = children.length; i < cnt; i++) {
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
         children[i].setActive(false);
     }
 
@@ -70,13 +71,27 @@ var RunWordWrap = function (config) {
 
         childIndex += word.length;
         // Next line
-        if ((remainderWidth < wordWidth) || (IsNewLine(word))) {
+        var isNewLineChar = IsNewLine(word);
+        if ((remainderWidth < wordWidth) || isNewLineChar) {
+            // Add to result
+            if (isNewLineChar) {
+                var char = word[0];
+                char
+                    .setActive()
+                    .setPosition(x, y);
+                resultChildren.push(char);
+            }
+
+            // Move cursor
             x = startX;
             y += lineHeight;
             remainderWidth = wrapWidth;
             lineCnt++;
-            if (lineCnt > maxLines) {
+            
+            if (lineCnt > maxLines) {  // Exceed maxLines
                 break;
+            } else if (isNewLineChar) {  // Already add to result                
+                continue;
             }
         }
         remainderWidth -= wordWidth;
@@ -92,6 +107,7 @@ var RunWordWrap = function (config) {
     }
 
     result.start += resultChildren.length;
+    result.isLastPage = (result.start === lastChildIndex);
     return result;
 };
 

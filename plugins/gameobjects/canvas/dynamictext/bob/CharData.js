@@ -35,7 +35,7 @@ class CharData extends Base {
     }
 
     draw() {
-        if (!this.visible || (this.text === '')) {
+        if (!this.visible || (this.text === '') || (this.text === '\n')) {
             return this;
         }
 
