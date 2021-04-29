@@ -45,8 +45,8 @@ class CharData extends Base {
         var textStyle = this.style;
         textStyle.syncFont(context).syncStyle(context);
 
-        var x = this.x,
-            y = this.y;
+        var x = this.x + this.style.x,
+            y = this.y + this.style.y;
         if (this.autoRound) {
             x = Math.round(x);
             y = Math.round(y);

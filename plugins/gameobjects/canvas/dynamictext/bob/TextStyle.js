@@ -10,6 +10,7 @@ class TextStyle {
         this.setFontFamily(GetValue(config, 'fontFamily', 'Courier'));
         this.setColor(GetValue(config, 'color', '#fff'));
         this.setStrokeStyle(GetValue(config, 'stroke', '#fff'), GetValue(config, 'strokeThickness', 0));
+        this.setOffset(GetValue(config, 'x', 0), GetValue(config, 'y', 0));
     }
 
     toJSON() {
@@ -41,6 +42,12 @@ class TextStyle {
             var stroke = o.hasOwnProperty('stroke') ? o.stroke : this.stroke;
             var strokeThickness = o.hasOwnProperty('strokeThickness') ? o.strokeThickness : this.strokeThickness;
             this.setStrokeStyle(stroke, strokeThickness);
+        }
+
+        if (o.hasOwnProperty('x') || o.hasOwnProperty('y')) {
+            var x = o.hasOwnProperty('x') ? o.x : 0;
+            var y = o.hasOwnProperty('y') ? o.y : 0;
+            this.setOffset(x, y);
         }
         return this;
     }
@@ -132,6 +139,12 @@ class TextStyle {
     getTextWidth(context, text) {
         this.syncFont(context).syncStyle(context);
         return context.measureText(text).width;
+    }
+
+    setOffset(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
     }
 }
 

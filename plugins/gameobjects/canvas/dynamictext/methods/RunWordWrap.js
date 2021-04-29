@@ -7,17 +7,24 @@ var RunWordWrap = function (config) {
     var innerWidth = this.innerWidth,
         innerHeight = this.innerHeight;
 
+    var bottomExpend = GetValue(config, 'bottomExpend', 0);
+
     var lineHeight = GetValue(config, 'lineHeight', undefined);
     if (lineHeight === undefined) {
         // Calculate lineHeight via maxLines
         var maxLines = GetValue(config, 'maxLines', 1);
-        lineHeight = innerHeight / maxLines;
+        lineHeight = (innerHeight - bottomExpend) / maxLines;
     } else {
-        // Calculate maxLines if not defined
-        var maxLines = GetValue(config, 'maxLines', undefined);
-        if (maxLines === undefined) {
-            maxLines = Math.floor(innerHeight / lineHeight);
+        if (this.fixedHeight > 0) {
+            // Calculate maxLines if not defined
+            var maxLines = GetValue(config, 'maxLines', undefined);
+            if (maxLines === undefined) {
+                maxLines = Math.floor((innerHeight - bottomExpend) / lineHeight);
+            }
+        } else {
+            var maxLines = GetValue(config, 'maxLines', 0); // TODO
         }
+
     }
 
     var wrapWidth = GetValue(config, 'wrapWidth', undefined);
@@ -27,24 +34,15 @@ var RunWordWrap = function (config) {
 
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
 
-    var baselineOffset = GetValue(config, 'baselineOffset', lineHeight * 0.8);
-    if (baselineOffset === undefined) {
-        if (maxLines === 1) {
-            baselineOffset = innerHeight / 2;
-        } else {
-            baselineOffset = lineHeight * 0.8; // TODO
-        }
-    }
-
     var result = {
-        start: startIndex,
-        isLastPage: false,
+        start: startIndex,  // Next start index
+        isLastPage: false,  // Is last page
         lineHeight: lineHeight,
         maxLines: maxLines,
         wrapWidth: wrapWidth,
         letterSpacing: letterSpacing,
-        baselineOffset: baselineOffset,
-        children: []
+        children: [],       // Word-wrap result
+        lines: []           // Word-wrap result in lines
     }
 
     // Set all children to active
@@ -55,7 +53,7 @@ var RunWordWrap = function (config) {
 
     // Layout children
     var startX = this.padding.left,
-        startY = this.padding.top + baselineOffset,
+        startY = this.padding.top + lineHeight,
         x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
@@ -63,6 +61,7 @@ var RunWordWrap = function (config) {
         childIndex = startIndex,
         lastChildIndex = children.length;
     var resultChildren = result.children;
+    var resultLines = result.lines, lastLine = [];
     var wordResult;
     while (childIndex < lastChildIndex) {
         wordResult = GetWord(children, childIndex, wordResult);
@@ -80,6 +79,7 @@ var RunWordWrap = function (config) {
                     .setActive()
                     .setPosition(x, y);
                 resultChildren.push(char);
+                lastLine.push(char);
             }
 
             // Move cursor
@@ -87,7 +87,9 @@ var RunWordWrap = function (config) {
             y += lineHeight;
             remainderWidth = wrapWidth;
             lineCnt++;
-            
+            resultLines.push(lastLine);
+            lastLine = [];
+
             if (lineCnt > maxLines) {  // Exceed maxLines
                 break;
             } else if (isNewLineChar) {  // Already add to result                
@@ -102,8 +104,13 @@ var RunWordWrap = function (config) {
                 .setActive()
                 .setPosition(x, y);
             resultChildren.push(char);
+            lastLine.push(char);
             x += char.width + letterSpacing;
         }
+    }
+
+    if (lastLine.length > 0) {
+        resultLines.push(lastLine);
     }
 
     result.start += resultChildren.length;

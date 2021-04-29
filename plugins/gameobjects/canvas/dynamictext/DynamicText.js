@@ -44,6 +44,13 @@ class DynamicText extends Canvas {
     }
 
     setFixedSize(width, height) {
+        if (width === undefined) {
+            width = 0;
+        }
+        if (height === undefined) {
+            height = 0;
+        }
+
         this.fixedWidth = width;
         this.fixedHeight = height;
 

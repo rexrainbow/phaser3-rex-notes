@@ -41,8 +41,8 @@ class Demo extends Phaser.Scene {
             .appendText(content[3], { color: '#F8F8FF' });
 
         TypingNextPage(text, {
-            baselineOffset: 20,
-            maxLines: 5
+            maxLines: 5,
+            bottomExpend: 10
         })
 
         this.print = this.add.text(0, 580, '');
@@ -83,6 +83,7 @@ var TypingNextPage = function (text, config) {
         },
         y: '-=20',
         yoyo: true,
+        ease: 'Cubic'
     });
 }
 
