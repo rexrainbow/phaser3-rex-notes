@@ -6,6 +6,7 @@ import DrawContent from './methods/DrawContent.js';
 import PaddingMethods from './methods/PaddingMethods.js';
 import ChildrenMethods from './methods/ChildrenMethods.js';
 import TextMethods from './methods/TextMethods.js';
+import PoolManager from './methods/PoolManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -34,6 +35,7 @@ class DynamicText extends Canvas {
         this.background = new Background(this, GetValue(config, 'background', undefined));
         this.innerBounds = new InnerBounds(this, GetValue(config, 'innerBounds', undefined));
         this.children = [];
+        this.poolManager = new PoolManager(config);
 
         this.setFixedSize(fixedWidth, fixedHeight);
         this.setPadding(GetValue(config, 'padding', 0));

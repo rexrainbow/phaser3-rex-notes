@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
                     cornerRadius: 20
                 },
                 innerBounds: {
-                    stroke:'#A52A2A'
+                    stroke: '#A52A2A'
                 },
                 padding: 20,
                 style: {

@@ -46,10 +46,10 @@ var RunWordWrap = function (config) {
         children: []
     }
 
-    // Set all children to valid
+    // Set all children to active
     var children = this.children;
     for (var i = startIndex, cnt = children.length; i < cnt; i++) {
-        children[i].setValid(false);
+        children[i].setActive(false);
     }
 
     // Layout children
@@ -84,7 +84,7 @@ var RunWordWrap = function (config) {
         for (var i = 0, cnt = word.length; i < cnt; i++) {
             var char = word[i];
             char
-                .setValid()
+                .setActive()
                 .setPosition(x, y);
             resultChildren.push(char);
             x += char.width + letterSpacing;

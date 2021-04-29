@@ -5,12 +5,7 @@ export default {
         return this.children;
     },
 
-    getValidChildren() {
-        return GetAll(this.children, 'valid', true);
+    getActiveChildren() {
+        return GetAll(this.children, 'active', true);
     },
-
-    freeChildren() {
-        this.children.length = 0; // TODO: Recycle children
-        return this;
-    }
 };

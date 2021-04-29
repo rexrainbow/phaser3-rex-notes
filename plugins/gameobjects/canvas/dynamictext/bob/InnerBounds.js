@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class InnerBounds extends Base {
     constructor(parent, config) {
-        super(parent, 'background');
+        super(parent, 'innerbounds');
 
         this.setColor(
             GetValue(config, 'color', null),

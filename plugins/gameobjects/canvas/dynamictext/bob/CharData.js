@@ -4,13 +4,13 @@ import TextStyle from './TextStyle.js';
 class CharData extends Base {
     constructor(
         parent,
-        styleJSON,
+        style,
         text,
         x, y, rotation
     ) {
         super(parent, 'text');
 
-        this.style = new TextStyle(styleJSON);
+        this.style = new TextStyle(style);
         this.setText(text);
 
         this.setPosition(x, y);

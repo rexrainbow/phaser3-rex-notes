@@ -1,14 +1,19 @@
 class Base {
     constructor(parent, type) {
-        this.parent = parent;
+        this.setParent(parent);
         this.type = type;
 
         this
-            .setValid()
+            .setActive()
             .setVisible();
 
         this.width = 0;
         this.height = 0;
+    }
+
+    setParent(parent) {
+        this.parent = parent;
+        return this;
     }
 
     get canvas() {
@@ -26,25 +31,20 @@ class Base {
         return this;
     }
 
-    get valid() {
-        return this._valid;
+    get active() {
+        return this._active;
     }
 
-    set valid(value) {
-        this.setDirty(this._valid != value);
-        this._valid = value;
+    set active(value) {
+        this.setDirty(this._active != value);
+        this._active = value;
     }
 
-    setValid(valid) {
-        if (valid === undefined) {
-            valid = true;
+    setActive(active) {
+        if (active === undefined) {
+            active = true;
         }
-        this.valid = valid;
-        return this;
-    }
-
-    setInvalid() {
-        this.valid = false;
+        this.active = active;
         return this;
     }
 
@@ -113,6 +113,11 @@ class Base {
 
         this.rotation = rotation;
         return this;
+    }
+
+    // Override
+    onFree() {
+        this.setParent();
     }
 
     // Override

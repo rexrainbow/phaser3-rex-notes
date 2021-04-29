@@ -8,8 +8,15 @@ export default {
     },
 
     setText(text, style) {
-        this.freeChildren();
+        var childrenLengthSave = this.children.length;
+
+        this.poolManager.freeMultiple(this.children);
+        this.children.length = 0;
         this.appendText(text, style);
+
+        if (this.children.length !== childrenLengthSave) {
+            this.dirty = true;
+        }
         return this;
     },
 
@@ -18,11 +25,20 @@ export default {
             this.modifyTextStyle(style);
         }
         for (var i = 0, cnt = text.length; i < cnt; i++) {
-            var bob = new CharData(
-                this,               // parent
-                this.textStyle,     // style
-                text.charAt(i)      // text
-            ); // TODO: Reuse CharData
+            var char = text.charAt(i);
+            var bob = this.poolManager.allocate('text');
+            if (bob === null) {
+                bob = new CharData(
+                    this,               // parent
+                    this.textStyle,     // style
+                    char               // text
+                );
+            } else {
+                bob
+                    .setParent(this)
+                    .modifyStyle(this.textStyle)
+                    .setText(char);
+            }
             this.children.push(bob);
         }
         return this;
