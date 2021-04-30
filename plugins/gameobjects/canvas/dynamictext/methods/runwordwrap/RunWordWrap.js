@@ -1,45 +1,56 @@
+import GetWord from './GetWord.js';
+import AlignLines from './AlignLines.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var RunWordWrap = function (config) {
     // Parse parameters
     var startIndex = GetValue(config, 'start', 0);
 
-    var showAllLines = false;
     var topMargin = GetValue(config, 'topMargin', 0);
     var bottomMargin = GetValue(config, 'bottomMargin', 0);  // Add extra space below last line
 
-    var width = (this.fixedWidth > 0) ? this.fixedWidth : this.width;
-    var height = (this.fixedHeight > 0) ? this.fixedHeight : this.height;
-    var padding = this.padding;
-    var innerWidth = width - padding.left - padding.right,
-        innerHeight = height - padding.top - padding.bottom - topMargin - bottomMargin;
     // Get lineHeight, maxLines
     var lineHeight = GetValue(config, 'lineHeight', undefined);
+    var maxLines;
     if (lineHeight === undefined) {
         // Calculate lineHeight via maxLines, in fixedHeight mode
-        var maxLines = GetValue(config, 'maxLines', 1);
-        lineHeight = innerHeight / maxLines;
+        maxLines = GetValue(config, 'maxLines', 1);
+        if (this.fixedHeight > 0) {
+            var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - topMargin - bottomMargin;
+            lineHeight = innerHeight / maxLines;
+        } else {
+            lineHeight = 0;
+        }
     } else {
         if (this.fixedHeight > 0) {
-            // Calculate maxLines if not defined, in fixedHeight mode
-            var maxLines = GetValue(config, 'maxLines', undefined);
+            // Calculate maxLines via lineHeight, in fixedHeight mode
+            maxLines = GetValue(config, 'maxLines', undefined);
             if (maxLines === undefined) {
+                var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - topMargin - bottomMargin;
                 maxLines = Math.floor(innerHeight / lineHeight);
             }
         } else {
-            var maxLines = GetValue(config, 'maxLines', 0); // TODO
-            showAllLines = (maxLines === 0);
+            maxLines = GetValue(config, 'maxLines', 0); // Default is show all lines
         }
 
     }
+    var showAllLines = (maxLines === 0);
 
     // Get wrapWidth
-    var wrapWidth = GetValue(config, 'wrapWidth', undefined);
-    if (wrapWidth === undefined) {
-        wrapWidth = innerWidth;
+    var wrapWidth = GetValue(config, 'wrapWidth', null);
+    if (wrapWidth === null) {
+        if (this.fixedWidth > 0) {
+            wrapWidth = this.fixedWidth - this.padding.left - this.padding.right;
+        } else {
+            wrapWidth = Infinity; // No word-wrap
+        }
     }
 
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
+
+    var hAlign = GetValue(config, 'hAlign', 0);
+    var vAlign = GetValue(config, 'vAlign', 0);
 
     var result = {
         start: startIndex,  // Next start index
@@ -48,8 +59,12 @@ var RunWordWrap = function (config) {
         maxLines: maxLines,
         wrapWidth: wrapWidth,
         letterSpacing: letterSpacing,
+        hAlign: hAlign,
+        vAlign: vAlign,
         children: [],       // Word-wrap result
-        lines: []           // Word-wrap result in lines
+        lines: [],          // Word-wrap result in lines
+        maxLineWidth: 0,
+        linesHeight: 0
     }
 
     // Set all children to active
@@ -59,15 +74,16 @@ var RunWordWrap = function (config) {
     }
 
     // Layout children
-    var startX = padding.left,
-        startY = padding.top + lineHeight + topMargin,  // Start(baseline) from 1st lineHeight, not 0
+    var startX = this.padding.left,
+        startY = this.padding.top + lineHeight + topMargin,  // Start(baseline) from 1st lineHeight, not 0
         x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
         childIndex = startIndex,
         lastChildIndex = children.length;
     var resultChildren = result.children;
-    var resultLines = result.lines, lastLine = [];
+    var resultLines = result.lines,
+        lastLine = [], lastLineWidth = 0, maxLineWidth = 0;
     var wordResult;
     while (childIndex < lastChildIndex) {
         wordResult = GetWord(children, childIndex, wordResult);
@@ -90,7 +106,10 @@ var RunWordWrap = function (config) {
             x = startX;
             y += lineHeight;
             remainderWidth = wrapWidth;
-            resultLines.push(lastLine);
+            resultLines.push({ children: lastLine, width: lastLineWidth });
+            maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
+
+            lastLineWidth = 0;
             lastLine = [];
 
             if (!showAllLines && (resultLines.length === maxLines)) {  // Exceed maxLines
@@ -100,6 +119,7 @@ var RunWordWrap = function (config) {
             }
         }
         remainderWidth -= wordWidth;
+        lastLineWidth += wordWidth;
 
         for (var i = 0, cnt = word.length; i < cnt; i++) {
             var char = word[i];
@@ -111,51 +131,29 @@ var RunWordWrap = function (config) {
     }
 
     if (lastLine.length > 0) {
-        resultLines.push(lastLine);
+        resultLines.push({ children: lastLine, width: lastLineWidth });
+        maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
     }
 
     result.start += resultChildren.length;
     result.isLastPage = (result.start === lastChildIndex);
+    result.maxLineWidth = maxLineWidth;
+    result.linesHeight = (resultLines.length * lineHeight) + topMargin + bottomMargin;
 
-    if (showAllLines) {
-        // Expand height to show all lines
-        var height = (resultLines.length * lineHeight) + topMargin + bottomMargin + padding.top + padding.bottom;
-        this.setSize(width, height);
-    }
+    // Calculate size of game object
+    var width = (this.fixedWidth > 0) ? this.fixedWidth : (result.maxLineWidth + this.padding.left + this.padding.right);
+    var height = (this.fixedHeight > 0) ? this.fixedHeight : (result.linesHeight + this.padding.top + this.padding.bottom);
+
+    // Size might be changed after word-wrapping
+    var innerWidth = width - this.padding.left - this.padding.right;
+    var innerHeight = height - this.padding.top - this.padding.bottom - topMargin - bottomMargin;
+    AlignLines(result, innerWidth, innerHeight);
+
+    // Resize
+    this.setSize(width, height);
 
     return result;
 };
-
-var GetWord = function (children, startIndex, result) {
-    if (result === undefined) {
-        result = { word: [], width: 0 };
-    }
-
-    result.word.length = 0;
-
-    var endIndex = children.length;
-    var currentIndex = startIndex;
-    var word = result.word, wordWidth = 0;
-    while (currentIndex < endIndex) {
-        var child = children[currentIndex];
-        if ((child.type === 'text') && (child.text !== ' ') && (child.text !== '\n')) {
-            word.push(child);
-            wordWidth += child.width;
-            currentIndex++;
-            // Continue
-        } else {  // Get non-text child, a space, or a new-line
-            if (currentIndex === startIndex) { // Single child
-                word.push(child);
-                wordWidth += child.width;
-            }
-            break;
-        }
-
-    }
-
-    result.width = wordWidth;
-    return result;
-}
 
 var IsNewLine = function (word) {
     var child = word[0];

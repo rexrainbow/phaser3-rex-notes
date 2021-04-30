@@ -1,5 +1,5 @@
 import CharData from '../bob/CharData.js';
-import RunWordWrap from './RunWordWrap.js';
+import RunWordWrap from './runwordwrap/RunWordWrap.js';
 
 export default {
     modifyTextStyle(style) {
