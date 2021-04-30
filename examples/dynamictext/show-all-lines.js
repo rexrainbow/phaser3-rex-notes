@@ -47,7 +47,7 @@ class Demo extends Phaser.Scene {
         TypingNextPage(text, {
             lineHeight: 30,
             maxLines: 0,       // Set maxLines to 0
-            bottomMargin: 10
+            padding: { bottom: 10 },
         });
 
         this.print = this.add.text(0, 580, '');

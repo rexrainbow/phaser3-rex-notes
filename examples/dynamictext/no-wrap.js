@@ -45,7 +45,7 @@ class Demo extends Phaser.Scene {
         var result = text.runWordWrap({
             lineHeight: 30,
             maxLines: 0,       // Set maxLines to 0
-            bottomMargin: 10,
+            padding: { bottom: 10 },
 
             hAlign: 'right',
             vAlign: 'bottom'
