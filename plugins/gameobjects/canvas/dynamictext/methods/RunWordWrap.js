@@ -4,29 +4,36 @@ var RunWordWrap = function (config) {
     // Parse parameters
     var startIndex = GetValue(config, 'start', 0);
 
-    var innerWidth = this.innerWidth,
-        innerHeight = this.innerHeight;
+    var showAllLines = false;
+    var topMargin = GetValue(config, 'topMargin', 0);
+    var bottomMargin = GetValue(config, 'bottomMargin', 0);  // Add extra space below last line
 
-    var bottomExpend = GetValue(config, 'bottomExpend', 0);
-
+    var width = (this.fixedWidth > 0) ? this.fixedWidth : this.width;
+    var height = (this.fixedHeight > 0) ? this.fixedHeight : this.height;
+    var padding = this.padding;
+    var innerWidth = width - padding.left - padding.right,
+        innerHeight = height - padding.top - padding.bottom - topMargin - bottomMargin;
+    // Get lineHeight, maxLines
     var lineHeight = GetValue(config, 'lineHeight', undefined);
     if (lineHeight === undefined) {
-        // Calculate lineHeight via maxLines
+        // Calculate lineHeight via maxLines, in fixedHeight mode
         var maxLines = GetValue(config, 'maxLines', 1);
-        lineHeight = (innerHeight - bottomExpend) / maxLines;
+        lineHeight = innerHeight / maxLines;
     } else {
         if (this.fixedHeight > 0) {
-            // Calculate maxLines if not defined
+            // Calculate maxLines if not defined, in fixedHeight mode
             var maxLines = GetValue(config, 'maxLines', undefined);
             if (maxLines === undefined) {
-                maxLines = Math.floor((innerHeight - bottomExpend) / lineHeight);
+                maxLines = Math.floor(innerHeight / lineHeight);
             }
         } else {
             var maxLines = GetValue(config, 'maxLines', 0); // TODO
+            showAllLines = (maxLines === 0);
         }
 
     }
 
+    // Get wrapWidth
     var wrapWidth = GetValue(config, 'wrapWidth', undefined);
     if (wrapWidth === undefined) {
         wrapWidth = innerWidth;
@@ -52,12 +59,11 @@ var RunWordWrap = function (config) {
     }
 
     // Layout children
-    var startX = this.padding.left,
-        startY = this.padding.top + lineHeight,
+    var startX = padding.left,
+        startY = padding.top + lineHeight + topMargin,  // Start(baseline) from 1st lineHeight, not 0
         x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
-        lineCnt = 1,
         childIndex = startIndex,
         lastChildIndex = children.length;
     var resultChildren = result.children;
@@ -75,9 +81,7 @@ var RunWordWrap = function (config) {
             // Add to result
             if (isNewLineChar) {
                 var char = word[0];
-                char
-                    .setActive()
-                    .setPosition(x, y);
+                char.setActive().setPosition(x, y);
                 resultChildren.push(char);
                 lastLine.push(char);
             }
@@ -86,11 +90,10 @@ var RunWordWrap = function (config) {
             x = startX;
             y += lineHeight;
             remainderWidth = wrapWidth;
-            lineCnt++;
             resultLines.push(lastLine);
             lastLine = [];
 
-            if (lineCnt > maxLines) {  // Exceed maxLines
+            if (!showAllLines && (resultLines.length === maxLines)) {  // Exceed maxLines
                 break;
             } else if (isNewLineChar) {  // Already add to result                
                 continue;
@@ -100,9 +103,7 @@ var RunWordWrap = function (config) {
 
         for (var i = 0, cnt = word.length; i < cnt; i++) {
             var char = word[i];
-            char
-                .setActive()
-                .setPosition(x, y);
+            char.setActive().setPosition(x, y);
             resultChildren.push(char);
             lastLine.push(char);
             x += char.width + letterSpacing;
@@ -115,6 +116,13 @@ var RunWordWrap = function (config) {
 
     result.start += resultChildren.length;
     result.isLastPage = (result.start === lastChildIndex);
+
+    if (showAllLines) {
+        // Expand height to show all lines
+        var height = (resultLines.length * lineHeight) + topMargin + bottomMargin + padding.top + padding.bottom;
+        this.setSize(width, height);
+    }
+
     return result;
 };
 

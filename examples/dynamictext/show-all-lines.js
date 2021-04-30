@@ -12,8 +12,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var text = this.add.rexDynamicText(400, 300, 400, 200,
+        var text = this.add.rexDynamicText(
             {
+                x: 400, y: 300,
+                width: 400, 
+                // height: undefined,  // Don't assign height
+
                 background: {
                     stroke: 'white',
                     cornerRadius: 20
@@ -41,9 +45,10 @@ class Demo extends Phaser.Scene {
             .appendText(content[3], { color: '#F8F8FF' });
 
         TypingNextPage(text, {
-            maxLines: 5,
-            bottomExpend: 10
-        })
+            lineHeight: 30,
+            maxLines: 0,       // Set maxLines to 0
+            bottomMargin: 10
+        });
 
         this.print = this.add.text(0, 580, '');
     }

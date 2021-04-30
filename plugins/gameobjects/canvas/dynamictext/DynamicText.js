@@ -54,19 +54,7 @@ class DynamicText extends Canvas {
         this.fixedWidth = width;
         this.fixedHeight = height;
 
-        if ((width > 0) && (height > 0)) {
-            this.setSize(width, height);
-        }
-
         return this;
-    }
-
-    get innerWidth() {
-        return this.width - this.padding.left - this.padding.right;
-    }
-
-    get innerHeight() {
-        return this.height - this.padding.top - this.padding.bottom;
     }
 
     updateTexture() {
