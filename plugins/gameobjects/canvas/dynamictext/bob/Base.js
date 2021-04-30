@@ -1,3 +1,6 @@
+const DegToRad = Phaser.Math.DegToRad;
+const RadToDeg = Phaser.Math.RadToDeg;
+
 class Base {
     constructor(parent, type) {
         this.setParent(parent);
@@ -5,7 +8,9 @@ class Base {
 
         this
             .setActive()
-            .setVisible();
+            .setVisible()
+            .setPosition(0, 0)
+            .setRotation(0)
 
         this.width = 0;
         this.height = 0;
@@ -85,13 +90,6 @@ class Base {
     }
 
     setPosition(x, y) {
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = 0;
-        }
-
         this.x = x;
         this.y = y;
         return this;
@@ -107,11 +105,20 @@ class Base {
     }
 
     setRotation(rotation) {
-        if (rotation === undefined) {
-            rotation = 0;
-        }
-
         this.rotation = rotation;
+        return this;
+    }
+
+    get angle() {
+        return RadToDeg(this._rotation);
+    }
+
+    set angle(value) {
+        this.rotation = DegToRad(value);
+    }
+
+    setAngle(angle) {
+        this.angle = angle;
         return this;
     }
 

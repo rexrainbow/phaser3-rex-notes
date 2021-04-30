@@ -52,12 +52,15 @@ class CharData extends Base {
             y = Math.round(y);
         }
 
+        context.translate(x, y);
+        context.rotate(this.rotation);
+
         if (textStyle.stroke && textStyle.strokeThickness) {
-            context.strokeText(this.text, x, y);
+            context.strokeText(this.text, 0, 0);
         }
 
         if (textStyle.color) {
-            context.fillText(this.text, x, y);
+            context.fillText(this.text, 0, 0);
         }
 
         context.restore();

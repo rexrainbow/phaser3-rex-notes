@@ -46,6 +46,7 @@ class Demo extends Phaser.Scene {
 
         var result = text.runWordWrap({
             lineHeight: 30,
+            letterSpacing: 3,
             maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
 
@@ -53,7 +54,10 @@ class Demo extends Phaser.Scene {
             vAlign: 'bottom'
         });
 
-        this.print = this.add.text(0, 580, '');
+        var children = result.children;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            children[i].setAngle(Math.random() * 30 - 15)
+        }
     }
 
     update() { }

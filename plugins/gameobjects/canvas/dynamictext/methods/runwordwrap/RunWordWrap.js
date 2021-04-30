@@ -78,6 +78,7 @@ var RunWordWrap = function (config) {
     }
 
     // Layout children
+    wrapWidth += letterSpacing;
     var startX = this.padding.left,
         startY = this.padding.top + lineHeight + topPadding,  // Start(baseline) from 1st lineHeight, not 0
         x = startX,
@@ -92,9 +93,10 @@ var RunWordWrap = function (config) {
     while (childIndex < lastChildIndex) {
         wordResult = GetWord(children, childIndex, wordResult);
         var word = wordResult.word;
-        var wordWidth = wordResult.width;
+        var charCnt = word.length;
+        var wordWidth = wordResult.width + (charCnt * letterSpacing);
 
-        childIndex += word.length;
+        childIndex += charCnt;
         // Next line
         var isNewLineChar = IsNewLine(word);
         if ((remainderWidth < wordWidth) || isNewLineChar) {
@@ -130,7 +132,7 @@ var RunWordWrap = function (config) {
             char.setActive().setPosition(x, y);
             resultChildren.push(char);
             lastLine.push(char);
-            x += char.width + letterSpacing;
+            x += (char.width + letterSpacing);
         }
     }
 

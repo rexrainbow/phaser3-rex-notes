@@ -92,8 +92,8 @@ class InnerBounds extends Base {
         var padding = this.parent.padding;
         var x = padding.left,
             y = padding.top,
-            width = this.parent.innerWidth,
-            height = this.parent.innerHeight;
+            width = this.parent.width - padding.left - padding.right,
+            height = this.parent.height - padding.top - padding.bottom;
         var context = this.context;
         if (this.color != null) {
             var fillStyle;
