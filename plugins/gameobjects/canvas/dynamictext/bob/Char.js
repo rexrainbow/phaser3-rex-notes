@@ -1,20 +1,15 @@
 import Base from './Base.js';
 import TextStyle from './TextStyle.js';
 
-class CharData extends Base {
+class Char extends Base {
     constructor(
         parent,
-        style,
         text,
-        x, y, rotation
+        style
     ) {
         super(parent, 'text');
-
         this.style = new TextStyle(style);
         this.setText(text);
-
-        this.setPosition(x, y);
-        this.setRotation(rotation);
     }
 
     get autoRound() {
@@ -45,8 +40,8 @@ class CharData extends Base {
         var textStyle = this.style;
         textStyle.syncFont(context).syncStyle(context);
 
-        var x = this.x + this.style.x,
-            y = this.y + this.style.y;
+        var x = this.x + textStyle.x,
+            y = this.y + textStyle.y;
         if (this.autoRound) {
             x = Math.round(x);
             y = Math.round(y);
@@ -67,4 +62,4 @@ class CharData extends Base {
     }
 }
 
-export default CharData;
+export default Char;

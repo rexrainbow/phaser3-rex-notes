@@ -9,6 +9,10 @@ class PoolManager {
     }
 
     free(bob) {
+        if (!this.pools) {
+            return this;
+        }
+
         var bobType = bob.type;
         if (!this.pools.hasOwnProperty(bobType)) {
             this.pools[bobType] = new Pool();
@@ -19,6 +23,10 @@ class PoolManager {
     }
 
     freeMultiple(arr) {
+        if (!this.pools) {
+            return this;
+        }
+
         for (var i = 0, cnt = arr.length; i < cnt; i++) {
             this.free(arr[i]);
         }
@@ -26,7 +34,7 @@ class PoolManager {
     }
 
     allocate(bobType) {
-        if (!this.pools.hasOwnProperty(bobType)) {
+        if (!this.pools || !this.pools.hasOwnProperty(bobType)) {
             return null;
         }
         return this.pools[bobType].pop();

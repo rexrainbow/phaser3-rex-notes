@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('dude', 'assets/images/phaser-dude.png');
     }
 
     create() {
@@ -38,6 +38,8 @@ class Demo extends Phaser.Scene {
             'You can use JavaScript or TypeScript for development.'
         ];
         text
+            .appendText('Dynamic text: Page-typing')
+            .appendFrame('dude')
             .appendText(content[0], { color: '#FFF8DC' })
             .appendText(content[1], { color: '#008B8B' })
             .appendText(content[2], { color: '#FF7F50' })

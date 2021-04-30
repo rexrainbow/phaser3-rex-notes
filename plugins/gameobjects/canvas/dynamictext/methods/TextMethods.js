@@ -1,5 +1,6 @@
-import CharData from '../bob/CharData.js';
+import Char from '../bob/Char.js';
 import RunWordWrap from './runwordwrap/RunWordWrap.js';
+import Frame from '../bob/Frame.js';
 
 export default {
     modifyTextStyle(style) {
@@ -28,10 +29,10 @@ export default {
             var char = text.charAt(i);
             var bob = this.poolManager.allocate('text');
             if (bob === null) {
-                bob = new CharData(
+                bob = new Char(
                     this,               // parent
+                    char,               // text
                     this.textStyle,     // style
-                    char               // text
                 );
             } else {
                 bob
@@ -47,5 +48,23 @@ export default {
 
     runWordWrap(config) {
         return RunWordWrap.call(this, config);
+    },
+
+    appendFrame(key, frame) {
+        var bob = this.poolManager.allocate('frame');
+        if (bob === null) {
+            bob = new Frame(
+                this,               // parent
+                key,
+                frame,
+            );
+        } else {
+            bob
+                .setParent(this)
+                .setActive()
+                .setTexture(key, frame);
+        }
+        this.children.push(bob);
+        return this;
     }
 };
