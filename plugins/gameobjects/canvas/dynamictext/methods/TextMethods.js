@@ -1,6 +1,6 @@
-import Char from '../bob/Char.js';
+import Char from '../bob/char/Char.js';
 import RunWordWrap from './runwordwrap/RunWordWrap.js';
-import Frame from '../bob/Frame.js';
+import Frame from '../bob/image/Image.js';
 
 export default {
     modifyTextStyle(style) {
@@ -50,19 +50,21 @@ export default {
         return RunWordWrap.call(this, config);
     },
 
-    appendFrame(key, frame) {
+    appendImage(key, frame, style) {
         var bob = this.poolManager.allocate('frame');
         if (bob === null) {
             bob = new Frame(
                 this,               // parent
                 key,
                 frame,
+                style
             );
         } else {
             bob
                 .setParent(this)
                 .setActive()
-                .setTexture(key, frame);
+                .setTexture(key, frame)
+                .setStyle(style)
         }
         this.children.push(bob);
         return this;

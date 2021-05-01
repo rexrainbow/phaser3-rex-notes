@@ -1,16 +1,10 @@
-import GetStyle from '../../../../utils/canvas/GetStyle.js';
+import GetStyle from '../../../../../utils/canvas/GetStyle.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TextStyle {
     constructor(config) {
-        this.setBold(GetValue(config, 'bold', false));
-        this.setItalic(GetValue(config, 'italic', false));
-        this.setFontSize(GetValue(config, 'fontSize', '16px'));
-        this.setFontFamily(GetValue(config, 'fontFamily', 'Courier'));
-        this.setColor(GetValue(config, 'color', '#fff'));
-        this.setStrokeStyle(GetValue(config, 'stroke', '#fff'), GetValue(config, 'strokeThickness', 0));
-        this.setOffset(GetValue(config, 'x', 0), GetValue(config, 'y', 0));
+        this.set(config);
     }
 
     toJSON() {
@@ -23,6 +17,16 @@ class TextStyle {
             stroke: this.stroke,
             strokeThickness: this.strokeThickness
         }
+    }
+
+    set(o) {
+        this.setBold(GetValue(o, 'bold', false));
+        this.setItalic(GetValue(o, 'italic', false));
+        this.setFontSize(GetValue(o, 'fontSize', '16px'));
+        this.setFontFamily(GetValue(o, 'fontFamily', 'Courier'));
+        this.setColor(GetValue(o, 'color', '#fff'));
+        this.setStrokeStyle(GetValue(o, 'stroke', '#fff'), GetValue(o, 'strokeThickness', 0));
+        this.setOffset(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
     }
 
     modify(o) {

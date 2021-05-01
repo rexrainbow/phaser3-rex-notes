@@ -1,4 +1,4 @@
-import Base from './Base.js';
+import Base from '../Base.js';
 import TextStyle from './TextStyle.js';
 
 class Char extends Base {
