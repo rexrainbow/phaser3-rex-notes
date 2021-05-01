@@ -9,6 +9,10 @@ export default {
     },
 
     setText(text, style) {
+        if (text === undefined) {
+            text = '';
+        }
+
         var childrenLengthSave = this.children.length;
 
         this.poolManager.freeMultiple(this.children);

@@ -38,9 +38,9 @@ class Demo extends Phaser.Scene {
             'You can use JavaScript or TypeScript for development.'
         ];
         text
-            .appendText('Dynamic text: Page-typing')
+            .appendText('Dynamic text: Page-typing ')
             .appendImage('dude', undefined, { height: 20 })
-            .appendText(content[0], { color: '#FFF8DC' })
+            .appendText(' ' + content[0], { color: '#FFF8DC' })
             .appendText(content[1], { color: '#008B8B' })
             .appendText(content[2], { color: '#FF7F50' })
             .appendText(content[3], { color: '#F8F8FF' });

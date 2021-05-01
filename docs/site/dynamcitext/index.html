@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/loader/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/dynamcitext/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Loader - Notes of Phaser 3</title>
+        <title>Dynamcitext - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Loader
+                Dynamcitext
               
             </span>
           
@@ -453,12 +453,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Loader
@@ -474,308 +472,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Loader
-      </label>
-    
-    <a href="./" title="Loader" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../loader/" title="Loader" class="md-nav__link">
       Loader
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" class="md-nav__link">
-    Loading in preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" class="md-nav__link">
-    Loading after preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-path" class="md-nav__link">
-    Set path
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status-of-loader" class="md-nav__link">
-    Status of loader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-types" class="md-nav__link">
-    File types
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
-    Image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite-sheet" class="md-nav__link">
-    Sprite sheet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture-atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#video" class="md-nav__link">
-    Video
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#html" class="md-nav__link">
-    HTML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#css" class="md-nav__link">
-    CSS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scene" class="md-nav__link">
-    Scene
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    Script
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scripts" class="md-nav__link">
-    Scripts
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glsl" class="md-nav__link">
-    GLSL
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary" class="md-nav__link">
-    Binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plugin" class="md-nav__link">
-    Plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scene-plugin" class="md-nav__link">
-    Scene plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-pack" class="md-nav__link">
-    File pack
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#release-data" class="md-nav__link">
-    Release data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-in-cache" class="md-nav__link">
-    Data in cache
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#replace" class="md-nav__link">
-    Replace
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xhr-settings-object" class="md-nav__link">
-    XHR Settings Object
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5646,6 +5347,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -5654,178 +5362,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" class="md-nav__link">
-    Loading in preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" class="md-nav__link">
-    Loading after preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-path" class="md-nav__link">
-    Set path
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status-of-loader" class="md-nav__link">
-    Status of loader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-types" class="md-nav__link">
-    File types
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#image" class="md-nav__link">
-    Image
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite-sheet" class="md-nav__link">
-    Sprite sheet
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#texture-atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#video" class="md-nav__link">
-    Video
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#html" class="md-nav__link">
-    HTML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#css" class="md-nav__link">
-    CSS
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scene" class="md-nav__link">
-    Scene
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" class="md-nav__link">
-    Script
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#scripts" class="md-nav__link">
-    Scripts
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -5836,36 +5396,58 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#glsl" class="md-nav__link">
-    GLSL
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary" class="md-nav__link">
-    Binary
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#plugin" class="md-nav__link">
-    Plugin
+  <a href="#clear-content" class="md-nav__link">
+    Clear content
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#scene-plugin" class="md-nav__link">
-    Scene plugin
+  <a href="#append-text" class="md-nav__link">
+    Append text
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#file-pack" class="md-nav__link">
-    File pack
+  <a href="#append-image" class="md-nav__link">
+    Append image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#word-wrap" class="md-nav__link">
+    Word-wrap
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    Result
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrap-next-page" class="md-nav__link">
+    Wrap next page
   </a>
   
 </li>
@@ -5876,29 +5458,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#release-data" class="md-nav__link">
-    Release data
+  <a href="#character-data" class="md-nav__link">
+    Character data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#data-in-cache" class="md-nav__link">
-    Data in cache
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#replace" class="md-nav__link">
-    Replace
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xhr-settings-object" class="md-nav__link">
-    XHR Settings Object
+  <a href="#image-data" class="md-nav__link">
+    Image data
   </a>
   
 </li>
@@ -5924,445 +5505,485 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/loader.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/dynamcitext.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Loader</h1>
+                  <h1>Dynamcitext</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Load assets, built-in object of phaser.</p>
+<p>Control position, angle of each character drawn on a <a href="../canvas/">canvas</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Game object</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/LYxoRWJ">Page typing</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/JjEQXqj">Align, rotation</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="loading-in-preload-stage">Loading in preload stage<a class="headerlink" href="#loading-in-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
-</code></pre></div>
-
-<p>Loader in preload stage will start loading automatically by scene.</p>
-<h3 id="loading-after-preload-stage">Loading after preload stage<a class="headerlink" href="#loading-after-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>   <span class="c1">// add task</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>
-</code></pre></div>
-
-<h3 id="set-path">Set path<a class="headerlink" href="#set-path" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">setPath</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span>
-</code></pre></div>
-
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dynamictext">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Start loading
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexdynamictextplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdynamictextplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Loading progressing
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>Loading a file object successful
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>Loading a file object failed
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</code></pre></div></li>
-<li>All loading completed
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+<li>Add dynamic-text object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="status-of-loader">Status of loader<a class="headerlink" href="#status-of-loader" title="Permanent link">&para;</a></h3>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Ready to start loading
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isReady</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isReady</span><span class="p">();</span>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Is loading
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isLoading</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isLoading</span><span class="p">();</span>
-</code></pre></div></li>
-</ul>
-<h3 id="file-types">File types<a class="headerlink" href="#file-types" title="Permanent link">&para;</a></h3>
-<h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Image
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.image(key, url, xhrSettings);</span>
-</code></pre></div><ul>
-<li><code>url</code> : Url of texture.</li>
-</ul>
-</li>
-<li>Image and normal map
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[</span><span class="nx">url</span><span class="p">,</span> <span class="nx">normalMapUrl</span><span class="p">]);</span>
-<span class="c1">// scene.load.image(key, [url, normalMapUrl], xhrSettings);</span>
-</code></pre></div><ul>
-<li><code>url</code> : Url of texture.</li>
-<li><code>normalMapUrl</code> : Url of normal map.</li>
-</ul>
-</li>
-<li>SVG
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">svg</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.svg(key, url, svgConfig);</span>
-<span class="c1">// scene.load.svg(key, url, svgConfig, xhrSettings);</span>
-</code></pre></div><ul>
-<li><code>svgConfig</code> : <code>{width, height}</code>, or <code>{scale}</code></li>
-</ul>
-</li>
-<li>Html texture
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">htmlTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-<span class="c1">// scene.load.htmlTexture(key, url, width, height, xhrSettings);</span>
-</code></pre></div></li>
-</ul>
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="sprite-sheet">Sprite sheet<a class="headerlink" href="#sprite-sheet" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// frameWidth: frameWidth,</span>
-    <span class="c1">// frameHeight: frameHeight,</span>
-    <span class="c1">// startFrame: startFrame,</span>
-    <span class="c1">// endFrame: endFrame,</span>
-    <span class="c1">// margin: margin,</span>
-    <span class="c1">// spacing: spacing</span>
-<span class="p">});</span>
-<span class="c1">// scene.load.spritesheet(key, url, frameConfig, xhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="texture-atlas">Texture atlas<a class="headerlink" href="#texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">atlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-<span class="c1">// scene.load.atlas(key, textureURL, atlasURL, textureXhrSettings, atlasXhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="multi-file-texture-atlas">Multi file texture atlas<a class="headerlink" href="#multi-file-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">multiatlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-<span class="c1">// scene.load.multiatlas(key, atlasURL, path, baseURL, atlasXhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>atlasURL</code> : The absolute or relative URL to load the texture atlas json data file from.</li>
-<li><code>path</code> : Optional path to use when loading the textures defined in the atlas data.</li>
-<li><code>baseURL</code> : Optional Base URL to use when loading the textures defined in the atlas data.</li>
-</ul>
-<h4 id="unity-texture-atlas">Unity texture atlas<a class="headerlink" href="#unity-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">unityAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-<span class="c1">// scene.load.unityAtlas(key, textureURL, atlasURL, textureXhrSettings, atlasXhrSettings);</span>
-</code></pre></div>
-
-<h4 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.animation(key, url, dataKey, xhrSettings);</span>
-</code></pre></div>
-
-<h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
-<span class="c1">// scene.load.audio(key, urls, config, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>urls</code> : The absolute or relative URL to load the audio files from, or a blob.</li>
-<li><code>config</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">audio</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="audio-sprite">Audio sprite<a class="headerlink" href="#audio-sprite" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">jsonURL</span><span class="p">,</span> <span class="nx">audioURL</span><span class="p">,</span> <span class="nx">audioConfig</span><span class="p">);</span>
-<span class="c1">// scene.load.audioSprite(key, jsonURL, audioURL, audioConfig, audioXhrSettings, jsonXhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>jsonURL</code> : The absolute or relative URL to load the json file from.</li>
-<li><code>audioURL</code> : The absolute or relative URL to load the audio file from.</li>
-<li><code>audioConfig</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
-</ul>
-<h4 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
-<span class="c1">// scene.load.video(key, url, loadEvent, asBlob, noAudio, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>url</code> : The absolute or relative URL to load the video files from, or a blob.</li>
-<li><code>loadEvent</code> : The load event to listen for when <em>not</em> loading as a blob.<ul>
-<li><code>'loadeddata'</code> : Data for the current frame is available. Default value.</li>
-<li><code>'canplay'</code> : The video is ready to start playing.</li>
-<li><code>'canplaythrough'</code> : The video can be played all the way through, without stopping.</li>
-</ul>
-</li>
-<li><code>asBlob</code> : Load the video as a data blob, or via the Video element? Default value is <code>false</code>.</li>
-<li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it. Default value is <code>false</code>.</li>
-</ul>
-<h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">fontDataURL</span><span class="p">);</span>
-<span class="c1">// scene.load.bitmapFont(key, textureURL, fontDataURL, textureXhrSettings, fontDataXhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>textureURL</code> : The absolute or relative URL to load the font image file from.</li>
-<li><code>fontDataURL</code> : The absolute or relative URL to load the font xml data file from.</li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="tile-map">Tile map<a class="headerlink" href="#tile-map" title="Permanent link">&para;</a></h4>
-<ul>
-<li>JSON : Created using the Tiled Map Editor and selecting JSON as the export format
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapTiledJSON</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.tilemapTiledJSON(key, url, xhrSettings);</span>
-</code></pre></div></li>
-<li>CSV : Created in a text editor, or a 3<sup>rd</sup> party app that exports as CSV.
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.tilemapCSV(key, url, xhrSettings);</span>
-</code></pre></div></li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.text(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="json">JSON<a class="headerlink" href="#json" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.json(key, url, dataKey, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>dataKey</code> : When the JSON file loads only this property will be stored in the Cache.</li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">json</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="xml">XML<a class="headerlink" href="#xml" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">xml</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.xml(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">xml</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="html">HTML<a class="headerlink" href="#html" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.html(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">html</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="css">CSS<a class="headerlink" href="#css" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.css(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">css</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="scene">Scene<a class="headerlink" href="#scene" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">sceneFile</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.sceneFile(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<p>The <code>key</code> matches the <strong>class name</strong> in the JavaScript file.</p>
-<h4 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.script(key, url, xhrSettings);</span>
-</code></pre></div>
-
-<h5 id="scripts">Scripts<a class="headerlink" href="#scripts" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scripts</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urlArray</span><span class="p">);</span>
-<span class="c1">// scene.load.scripts(key, urlArray, xhrSettings);</span>
-</code></pre></div>
-
-<p>Add scripts in the exact order of <code>urlArray</code>.</p>
-<h4 id="glsl">GLSL<a class="headerlink" href="#glsl" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">glsl</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.glsl(key, url, shaderType, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>shaderType</code> : The type of shader.<ul>
-<li><code>'fragment'</code> : Fragment shader. Default value.</li>
-<li><code>'vertex'</code> : Vertex shader.</li>
-</ul>
-</li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">shader</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<p>A glsl file can contain multiple shaders, all separated by a frontmatter block.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">---</span>
-<span class="n">name</span><span class="o">:</span> 
-<span class="n">type</span><span class="o">:</span> 
-<span class="o">---</span>
-
-<span class="kt">void</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-<span class="p">}</span>
-</code></pre></div>
-
-<h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>
-<span class="c1">// scene.load.binary(key, url, dataType, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>dataType</code> : Optional type to cast the binary file to once loaded. <ul>
-<li><code>Uint8Array</code>, <code>Uint8ClampedArray</code>, <code>Uint16Array</code> <code>Uint32Array</code></li>
-<li><code>Int8Array</code>, <code>Int16Array</code>, <code>Int32Array</code></li>
-<li><code>Float32Array</code>, <code>Float64Array</code></li>
-<li><code>BigInt64Array</code>, <code>BigUint64Array</code></li>
-</ul>
-</li>
-</ul>
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">binary</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// start plugin when loaded</span>
-<span class="c1">// scene.load.plugin(key, url, true, undefined, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>url</code> : File url or class instance.</li>
-</ul>
-<h4 id="scene-plugin">Scene plugin<a class="headerlink" href="#scene-plugin" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">systemKey</span><span class="p">,</span> <span class="nx">sceneKey</span><span class="p">);</span>
-<span class="c1">// scene.load.scenePlugin(key, url, systemKey, sceneKey, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>url</code> : File url or class instance.</li>
-</ul>
-<h4 id="file-pack">File pack<a class="headerlink" href="#file-pack" title="Permanent link">&para;</a></h4>
-<p>Load files in JSON format.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">pack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.pack(key, url, dataKey, xhrSettings);</span>
-</code></pre></div>
-
-<ul>
-<li><code>dataKey</code> : When the JSON file loads only this property will be stored in the Cache.</li>
-</ul>
-<p>JSON pack file:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="s1">&#39;dataKey&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// &quot;prefix&quot;: &quot;...&quot;,          // optional, extend key by prefix</span>
-        <span class="c1">// &quot;path&quot;: &quot;...&quot;,            // optional, extend url by path</span>
-        <span class="c1">// &quot;defaultType&quot;: &quot;image&quot;,   // optional, default file type</span>
-        <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">}</span>
-            <span class="c1">// ...</span>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">DynamicTextPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/dynamictext-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexDynamicTextPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">DynamicTextPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
         <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add dynamic-text object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Import class
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">DynamicText</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/dynamictext.js&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Add dynamic-text object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DynamicText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">txt</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// {left: 0, right: 0, top: 0, bottom: 0}</span>
+
+    <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+        <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+
+        <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span>
     <span class="p">},</span>
 
-    <span class="s1">&#39;node0&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">&#39;node1&#39;</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s1">&#39;node2&#39;</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span>
-                    <span class="c1">// ....</span>
-                <span class="p">]</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="c1">// dataKey: &#39;node0.node1.node2&#39;</span>
-<span class="p">}</span>
+    <span class="nx">innerBounds</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">color2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+
+        <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="p">},</span>
+
+    <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">bold</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">italic</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+        <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+        <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+
+    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+<span class="p">});</span>
 </code></pre></div>
 
-<p>File type:</p>
 <ul>
-<li><code>audio</code></li>
-<li><code>binary</code></li>
-<li><code>glsl</code></li>
-<li><code>html</code></li>
-<li><code>htmlTexture</code></li>
-<li><code>image</code></li>
-<li><code>json</code></li>
-<li><code>script</code></li>
-<li><code>spritesheet</code></li>
-<li><code>svg</code></li>
-<li><code>text</code></li>
-<li><code>tilemapCSV</code></li>
-<li><code>tilemapJSON</code></li>
-<li><code>xml</code></li>
+<li><code>x</code>, <code>y</code> : Position of this dynamic-text game object.</li>
+<li><code>width</code> : Fixed width.<ul>
+<li>A number : Width of this dynamic-text game object. <ul>
+<li>Wrap-width is <code>width - padding.left - padding.right</code>.</li>
 </ul>
-<h3 id="release-data">Release data<a class="headerlink" href="#release-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="nx">cache</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</li>
+<li><code>undefined</code> : Width of this dynamic-text game object will be set after invoked <code>runWordWrap</code> method.</li>
+</ul>
+</li>
+<li><code>height</code> : Fixed height.<ul>
+<li>A number : Height of this dynamic-text game object. </li>
+<li><code>undefined</code> : Height of this dynamic-text game object will be set after invoked <code>runWordWrap</code> method.</li>
+</ul>
+</li>
+<li><code>padding</code> : Padding of bounds.<ul>
+<li>A number </li>
+<li><code>padding.left</code>, <code>padding.right</code>, <code>padding.top</code>, <code>padding.bottom</code></li>
+</ul>
+</li>
+<li><code>background</code> : Properties of background round-rectangle.<ul>
+<li><code>background.color</code> : Fill color.<ul>
+<li><code>null</code> : No filling.</li>
+</ul>
+</li>
+<li><code>background.color2</code> : Gradient fill color.<ul>
+<li><code>null</code> : No gradient filling.</li>
+</ul>
+</li>
+<li><code>background.horizontalGradient</code> : Horizontal or vertical gradient filling.<ul>
+<li><code>true</code> : Horizontal gradient filling.</li>
+<li><code>false</code> : Vertical gradient filling.</li>
+</ul>
+</li>
+<li><code>background.stroke</code> : Stroke color.<ul>
+<li><code>null</code> : No stroke.</li>
+</ul>
+</li>
+<li><code>background.strokeThickness</code> : Line width of stroke.</li>
+<li><code>background.cornerRadius</code> : Corner-radius of round rectangle.</li>
+<li><code>background.cornerIteration</code> : Iteration of corner-radius.<ul>
+<li><code>null</code> : Draw corner-radius via arc directly.</li>
+<li>A number : Draw corner-radius via lines</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>innerBounds</code> : Properties of inner-bounds.<ul>
+<li><code>innerBounds.color</code> : Fill color.<ul>
+<li><code>null</code> : No filling.</li>
+</ul>
+</li>
+<li><code>innerBounds.color2</code> : Gradient fill color.<ul>
+<li><code>null</code> : No gradient filling.</li>
+</ul>
+</li>
+<li><code>innerBounds.horizontalGradient</code> : Horizontal or vertical gradient filling.<ul>
+<li><code>true</code> : Horizontal gradient filling.</li>
+<li><code>false</code> : Vertical gradient filling.</li>
+</ul>
+</li>
+<li><code>innerBounds.stroke</code> : Stroke color.<ul>
+<li><code>null</code> : No stroke.</li>
+</ul>
+</li>
+<li><code>innerBounds.strokeThickness</code> : Line width of stroke.</li>
+</ul>
+</li>
+<li><code>style</code> : Initial text-style.<ul>
+<li><code>style.bold</code> : Bold</li>
+<li><code>style.italic</code> : Italic</li>
+<li><code>style.fontSize</code> : Font size</li>
+<li><code>style.fontFamily</code> : Font family</li>
+<li><code>style.color</code> : Fill color</li>
+<li><code>style.stroke</code> : Stroke color</li>
+<li><code>style.strokeThickness</code> : Line width of stroke.</li>
+<li><code>style.x</code> : x-offset.</li>
+<li><code>style.y</code> : y-offset.</li>
+</ul>
+</li>
+<li><code>text</code> : Content of text.</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 
-<h3 id="data-in-cache">Data in cache<a class="headerlink" href="#data-in-cache" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">hasData</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
 
-<h3 id="replace">Replace<a class="headerlink" href="#replace" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="./#release-data">Remove key</a>.</li>
-<li>Load file again.</li>
-</ol>
-<h3 id="xhr-settings-object">XHR Settings Object<a class="headerlink" href="#xhr-settings-object" title="Permanent link">&para;</a></h3>
-<p>Parameter <code>xhrSettings</code> </p>
+<p>Add dynamictext from JSON</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+    <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
+    <span class="c1">// fill: null,</span>
+
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyDynamicText</span> <span class="kr">extends</span> <span class="nx">DynamicText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyDynamicText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="clear-content">Clear content<a class="headerlink" href="#clear-content" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="append-text">Append text<a class="headerlink" href="#append-text" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> 
+    <span class="p">{</span>
+        <span class="c1">// bold: false,</span>
+        <span class="c1">// italic: false,</span>
+        <span class="c1">// fontSize: &#39;16px&#39;,</span>
+        <span class="c1">// fontFamily: &#39;Courier&#39;,</span>
+        <span class="c1">// color: &#39;#fff&#39;,</span>
+        <span class="c1">// stroke: &#39;#fff&#39;,</span>
+        <span class="c1">// strokeThickness: 0,</span>
+        <span class="c1">// x: 0,</span>
+        <span class="c1">// y: 0</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+</code></pre></div>
+
+<p>To overwrite some properties of text-style.</p>
+<p>Each <a href="./#character-data">character</a> will be placed at position (0,0), without rotation. 
+Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
+<h3 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+    <span class="c1">// scaleX: undefined,</span>
+    <span class="c1">// scaleY: undefined</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<ul>
+<li><code>width</code> : Scaled-width. Aspect-ratio will be keep if no <code>height</code>, or <code>scaleY</code> is set.</li>
+<li><code>height</code> : Scaled-height. Aspect-ratio will be keep if no <code>width</code>, or <code>scaleX</code> is set.</li>
+</ul>
+<h3 id="word-wrap">Word-wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runWordWrap</span><span class="p">({</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="nx">lineHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">wrapWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">hAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">vAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<ul>
+<li><code>padding.top</code> : Extra space above first line.</li>
+<li><code>padding.bottom</code> : Extra space below last line.</li>
+<li><code>lineHeight</code> : Line height. <ul>
+<li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedHeight</code> is given.</li>
+</ul>
+</li>
+<li><code>maxLines</code> : Lines number of this page. <ul>
+<li><code>0</code> : Wrapping whole content.</li>
+<li><code>undefined</code> : It will be set if <code>lineHeight</code> and <code>fixedHeight</code> is given.</li>
+</ul>
+</li>
+<li><code>wrapWidth</code> : Width of wrapping</li>
+<li><code>letterSpacing</code> : Space between each character.</li>
+<li><code>hAlign</code> : Horizontal alignment.<ul>
+<li><code>0</code>, or <code>'left'</code> : Align to left bound.</li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'right'</code> : Align to right bound.</li>
+</ul>
+</li>
+<li><code>vAlign</code> : Vertical alignment.<ul>
+<li><code>0</code>, or <code>'top'</code> : Align to top bound.</li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.</li>
+</ul>
+</li>
+</ul>
+<h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">headers</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">header</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">headerValue</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">requestedWith</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">overrideMimeType</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">withCredentials</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">isLastPage</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <ul>
-<li><code>user</code> : Optional username for the XHR request.</li>
-<li><code>password</code> : Optional password for the XHR request.</li>
-<li><code>timeout</code> : Optional XHR timeout value.</li>
-<li><code>headers</code>, <code>header</code>, <code>headerValue</code>, <code>requestedWith</code> : This value is used to populate the XHR <code>setRequestHeader</code></li>
-<li><code>overrideMimeType</code> : Provide a custom mime-type to use instead of the default.</li>
-<li><code>withCredentials</code> : Whether or not cross-site Access-Control requests should be made using credentials such as cookies, authorization headers or TLS client certificates. <em>Setting <code>withCredentials</code> has no effect on same-site requests.</em></li>
+<li><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</li>
+<li><code>isLastPage</code> : <ul>
+<li><code>false</code> : Run <code>txt.runWordWrap(result)</code> to get next page of word-wrapping result.</li>
+<li><code>true</code> : No remainder of characters.</li>
+</ul>
+</li>
+</ul>
+<h4 id="wrap-next-page">Wrap next page<a class="headerlink" href="#wrap-next-page" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runWordWrap</span><span class="p">(</span><span class="nx">prevResult</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>prevResult</code> : Result of previous word-wraping.</li>
+<li><code>result</code> : Current result of word-wraping.</li>
+</ul>
+<h3 id="character-data">Character data<a class="headerlink" href="#character-data" title="Permanent link">&para;</a></h3>
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Visible :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
+<span class="c1">// char.visible = true;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// Set to invisible</span>
+<span class="c1">// char.visible = false;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Position :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// char.x = x;</span>
+<span class="c1">// char.y = y;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Angle :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">degrees</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
+<span class="c1">// var radians = char.rotation;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
+<span class="kr">char</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
+<span class="c1">// char.angle = degrees;</span>
+<span class="c1">// char.rotation = radians;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Text-style : <ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bold</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">bold</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">italic</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">italic</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fontSize</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">fontFamily</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontFamily</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">stroke</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">stroke</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">strokeThickness</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strokeThickness</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">xOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">yOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">modifyStyle</span><span class="p">({</span>
+    <span class="c1">// bold: false,</span>
+    <span class="c1">// italic: false,</span>
+    <span class="c1">// fontSize: &#39;16px&#39;,</span>
+    <span class="c1">// fontFamily: &#39;Courier&#39;,</span>
+    <span class="c1">// color: &#39;#fff&#39;,</span>
+    <span class="c1">// stroke: &#39;#fff&#39;,</span>
+    <span class="c1">// strokeThickness: 0,</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0</span>
+<span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="image-data">Image data<a class="headerlink" href="#image-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Visible :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
+<span class="c1">// image.visible = true;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// Set to invisible</span>
+<span class="c1">// image.visible = false;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Position :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// image.x = x;</span>
+<span class="c1">// image.y = y;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Angle :<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">degrees</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
+<span class="c1">// var radians = image.rotation;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
+<span class="nx">image</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
+<span class="c1">// image.angle = degrees;</span>
+<span class="c1">// image.rotation = radians;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Texture : <ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">frame</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Size<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
+<span class="c1">// image.setWidth(width, true);  // Resize and keep aspect- ratio</span>
+<span class="nx">image</span><span class="p">.</span><span class="nx">setHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+<span class="c1">// image.setHeight(height, true);  // Resize and keep aspect- ratio</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   
@@ -6381,41 +6002,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../pluginsystem/" title="Plugin system" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Plugin system
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../webfontloader/" title="Webfont loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Webfont loader
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

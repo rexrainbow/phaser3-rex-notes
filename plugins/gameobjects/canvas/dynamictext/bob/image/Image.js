@@ -28,31 +28,36 @@ class Image extends Base {
     }
 
     setStyle(style) {
-        // width, or scaleX
+        // Initialize
+        this._scaleX = 1;
+        this._scaleY = 1;
+
         var width = GetValue(style, 'width', undefined);
-        if (width === undefined) {
-            var scaleX = GetValue(style, 'scaleX', undefined);
-            if (scaleX !== undefined) {
-                this.setScaleX(scaleX);
+        var height = GetValue(style, 'height', undefined);
+        var scaleX = GetValue(style, 'scaleX', undefined);
+        var scaleY = GetValue(style, 'scaleY', undefined);
+
+        if (width !== undefined) {
+            if ((height === undefined) && (scaleY === undefined)) {
+                this.setWidth(width, true);
             } else {
-                this.setScaleX(1);
+                this.setWidth(width);
             }
-        } else {
-            this.setWidth(width, true);
+        }
+        if (height !== undefined) {
+            if ((width === undefined) && (scaleX === undefined)) {
+                this.setHeight(height, true);
+            } else {
+                this.setHeight(height);
+            }
+        }
+        if ((scaleX !== undefined) && (width === undefined)) {
+            this.setScaleX(scaleX);
+        }
+        if ((scaleY !== undefined) && (height === undefined)) {
+            this.setScaleY(scaleY);
         }
 
-        // height, or scaleY
-        var height = GetValue(style, 'height', undefined);
-        if (height === undefined) {
-            var scaleY = GetValue(style, 'scaleY', undefined);
-            if (scaleY !== undefined) {
-                this.setScaleY(scaleY);
-            } else {
-                this.setScaleY(1);
-            }
-        } else {
-            this.setHeight(height, true);
-        }
         return this;
     }
 

@@ -38,8 +38,8 @@ var RunWordWrap = function (config) {
     var showAllLines = (maxLines === 0);
 
     // Get wrapWidth
-    var wrapWidth = GetValue(config, 'wrapWidth', null);
-    if (wrapWidth === null) {
+    var wrapWidth = GetValue(config, 'wrapWidth', undefined);
+    if (wrapWidth === undefined) {
         if (this.fixedWidth > 0) {
             wrapWidth = this.fixedWidth - this.padding.left - this.padding.right;
         } else {
