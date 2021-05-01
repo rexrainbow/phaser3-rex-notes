@@ -8,7 +8,7 @@ class Image extends Base {
         key, frame,
         style
     ) {
-        super(parent, 'frame');
+        super(parent, 'image');
         this._scaleX = 1;
         this._scaleY = 1;
         this.setTexture(key, frame);
