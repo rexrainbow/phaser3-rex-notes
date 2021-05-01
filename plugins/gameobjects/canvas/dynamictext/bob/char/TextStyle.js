@@ -47,6 +47,9 @@ class TextStyle {
             var strokeThickness = o.hasOwnProperty('strokeThickness') ? o.strokeThickness : this.strokeThickness;
             this.setStrokeStyle(stroke, strokeThickness);
         }
+        if (o.hasOwnProperty('fontSize')) {
+            this.setFontSize(o.fontSize);
+        }
 
         if (o.hasOwnProperty('x') || o.hasOwnProperty('y')) {
             var x = o.hasOwnProperty('x') ? o.x : 0;
