@@ -325,62 +325,71 @@ var result = txt.runWordWrap(prevResult);
 - `prevResult` : Result of previous word-wraping.
 - `result` : Current result of word-wraping.
 
-### Character data
+### Child
 
-#### Properties
+#### General properties
 
 - Visible :
     - Get
         ```javascript
-        var visible = char.visible;
+        var visible = child.visible;
         ```
     - Set
         ```javascript
-        char.setVisible();
-        // char.visible = true;
+        child.setVisible();
+        // child.visible = true;
         ```
         or
         ```javascript
-        char.setVisible(false);  // Set to invisible
-        // char.visible = false;
+        child.setVisible(false);  // Set to invisible
+        // child.visible = false;
         ```
 - Position :
     - Get
         ```javascript
-        var x = char.x;
-        var y = char.y;
+        var x = child.x;
+        var y = child.y;
         ```
     - Set
         ```javascript
-        char.setPosition(x, y);
-        // char.x = x;
-        // char.y = y;
+        child.setPosition(x, y);
+        // child.x = x;
+        // child.y = y;
         ```
 - Angle :
     - Get
         ```javascript
-        var degrees = char.angle;
-        // var radians = char.rotation;
+        var degrees = child.angle;
+        // var radians = child.rotation;
         ```
     - Set
         ```javascript
-        char.setAngle(degrees);
-        char.setRotation(radians);
-        // char.angle = degrees;
-        // char.rotation = radians;
+        child.setAngle(degrees);
+        child.setRotation(radians);
+        // child.angle = degrees;
+        // child.rotation = radians;
         ```
 - Scale
     - Get
         ```javascript
-        var scaleX = char.scaleX;
-        var scaleY = char.scaleY;
+        var scaleX = child.scaleX;
+        var scaleY = child.scaleY;
         ```
     - Set
         ```javascript
-        char.setScale(scaleX, scaleY);
-        // char.scaleX = scaleX;
-        // char.scaleY = scaleY;
+        child.setScale(scaleX, scaleY);
+        // child.scaleX = scaleX;
+        // child.scaleY = scaleY;
         ```
+- Draw callbacks
+    - Set
+        ```javascript
+        child.setDrawBelowCallback(callback);
+        child.setDrawAboveCallback(callback);
+        ```        
+
+#### Character
+
 - Text-style : 
     - Get
         ```javascript
@@ -409,70 +418,8 @@ var result = txt.runWordWrap(prevResult);
         })
         ```
 
-### Image data
+#### Image
 
-- Visible :
-    - Get
-        ```javascript
-        var visible = image.visible;
-        ```
-    - Set
-        ```javascript
-        image.setVisible();
-        // image.visible = true;
-        ```
-        or
-        ```javascript
-        image.setVisible(false);  // Set to invisible
-        // image.visible = false;
-        ```
-- Position :
-    - Get
-        ```javascript
-        var x = image.x;
-        var y = image.y;
-        ```
-    - Set
-        ```javascript
-        image.setPosition(x, y);
-        // image.x = x;
-        // image.y = y;
-        ```
-- Angle :
-    - Get
-        ```javascript
-        var degrees = image.angle;
-        // var radians = image.rotation;
-        ```
-    - Set
-        ```javascript
-        image.setAngle(degrees);
-        image.setRotation(radians);
-        // image.angle = degrees;
-        // image.rotation = radians;
-        ```
-- Scale
-    - Get
-        ```javascript
-        var scaleX = image.scaleX;
-        var scaleY = image.scaleY;
-        ```
-    - Set
-        ```javascript
-        image.setScale(scaleX, scaleY);
-        // image.scaleX = scaleX;
-        // image.scaleY = scaleY;
-        ```
-- Texture : 
-    - Get
-        ```javascript
-        var key = image.key;
-        var frameName = image.frame;
-        ```
-    - Set
-        ```javascript
-        image.setTexture(key, frame);
-        ```
 - Size
     - Get
         ```javascript

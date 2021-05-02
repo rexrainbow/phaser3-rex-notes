@@ -16,6 +16,18 @@ class Char extends Base {
         return this.parent.autoRound;
     }
 
+    get xOffset() {
+        return this.style.x;
+    }
+
+    set xOffset(value) { }
+
+    get yOffset() {
+        return this.style.y;
+    }
+
+    set yOffset(value) { }
+
     modifyStyle(style) {
         this.setDirty(true);
         this.style.modify(style);
@@ -29,27 +41,11 @@ class Char extends Base {
         return this;
     }
 
-    draw() {
-        if (!this.visible || (this.text === '') || (this.text === '\n')) {
-            return this;
-        }
-
+    drawContent() {
         var context = this.context;
-        context.save();
-
         var textStyle = this.style;
+
         textStyle.syncFont(context).syncStyle(context);
-
-        var x = this.x + textStyle.x,
-            y = this.y + textStyle.y;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        context.translate(x, y);
-        context.scale(this.scaleX, this.scaleY);
-        context.rotate(this.rotation);
 
         if (textStyle.stroke && textStyle.strokeThickness) {
             context.strokeText(this.text, 0, 0);
@@ -58,8 +54,14 @@ class Char extends Base {
         if (textStyle.color) {
             context.fillText(this.text, 0, 0);
         }
+    }
 
-        context.restore();
+    draw() {
+        if (!this.visible || (this.text === '') || (this.text === '\n')) {
+            return this;
+        }
+
+        super.draw();
     }
 }
 

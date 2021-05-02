@@ -11,7 +11,11 @@ class Base {
             .setVisible()
             .setPosition(0, 0)
             .setRotation(0)
+            .setDrawBelowCallback()
+            .setDrawAboveCallback()
 
+        this.xOffset = 0;
+        this.yOffset = 0;
         this.width = 0;
         this.height = 0;
     }
@@ -160,17 +164,59 @@ class Base {
         return this;
     }
 
+    setDrawBelowCallback(callback) {
+        this.drawBelowCallback = callback;
+        return this;
+    }
+
+    setDrawAboveCallback(callback) {
+        this.drawAboveCallback = callback;
+        return this;
+    }
+
     // Override
     onFree() {
         this
             .setParent()
             .setPosition(0, 0)
             .setRotation(0)
-            .setScale(1, 1);
+            .setScale(1, 1)
+            .setDrawBelowCallback()
+            .setDrawAboveCallback()
+    }
+
+    // Override
+    drawContent() {
+
     }
 
     // Override
     draw() {
+        var context = this.context;
+        context.save();
+
+        var x = this.x + this.xOffset,
+            y = this.y + this.yOffset;
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+
+        context.translate(x, y);
+        context.scale(this.scaleX, this.scaleY);
+        context.rotate(this.rotation);
+
+        if (this.drawBelowCallback) {
+            this.drawBelowCallback.call(this);
+        }
+
+        this.drawContent();
+
+        if (this.drawAboveCallback) {
+            this.drawAboveCallback.call(this);
+        }
+
+        context.restore();
 
     }
 }

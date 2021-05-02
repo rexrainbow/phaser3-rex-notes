@@ -140,9 +140,9 @@ export default {
         var context = this.context;
         var savedLineCap = context.lineCap;
         context.lineCap = 'butt';
-        context.beginPath();
         context.strokeStyle = style.underlineColor;
         context.lineWidth = style.underlineThickness;
+        context.beginPath();
         context.moveTo(x, y);
         context.lineTo((x + width), y);
         context.stroke();

@@ -27,6 +27,12 @@ class Image extends Base {
         return (this.frameObj) ? this.frameObj.cutHeight : 0;
     }
 
+    get yOffset() {
+        return -this.height;
+    }
+
+    set yOffset(value) { }
+
     setStyle(style) {
         // Initialize
         this._scaleX = 1;
@@ -111,36 +117,23 @@ class Image extends Base {
         return this;
     }
 
-    draw() {
-        if (!this.visible) {
-            return this;
-        }
-
-        var frame = this.frameObj;
-        var width = this.width,
-            height = this.height;
-
+    drawContent() {
         var context = this.context;
-        context.save();
-
-        var x = this.x,
-            y = this.y - height;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        context.translate(x, y);
-        context.scale(this.scaleX, this.scaleY);
-        context.rotate(this.rotation);
+        var frame = this.frameObj;
 
         context.drawImage(
             frame.source.image,              // image
             frame.cutX, frame.cutY,          // sx, sy
             frame.cutWidth, frame.cutHeight, // sWidth, sHeight
         );
+    }
 
-        context.restore();
+    draw() {
+        if (!this.visible) {
+            return this;
+        }
+
+        super.draw();
     }
 
 }

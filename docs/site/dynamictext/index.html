@@ -1187,29 +1187,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#character-data" class="md-nav__link">
-    Character data
+  <a href="#child" class="md-nav__link">
+    Child
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#general-properties" class="md-nav__link">
+    General properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character" class="md-nav__link">
+    Character
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    Image
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#image-data" class="md-nav__link">
-    Image data
-  </a>
   
 </li>
         
@@ -5641,29 +5648,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#character-data" class="md-nav__link">
-    Character data
+  <a href="#child" class="md-nav__link">
+    Child
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#general-properties" class="md-nav__link">
+    General properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character" class="md-nav__link">
+    Character
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image" class="md-nav__link">
+    Image
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#image-data" class="md-nav__link">
-    Image data
-  </a>
   
 </li>
         
@@ -6033,60 +6047,70 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
 <li><code>prevResult</code> : Result of previous word-wraping.</li>
 <li><code>result</code> : Current result of word-wraping.</li>
 </ul>
-<h3 id="character-data">Character data<a class="headerlink" href="#character-data" title="Permanent link">&para;</a></h3>
-<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<h3 id="child">Child<a class="headerlink" href="#child" title="Permanent link">&para;</a></h3>
+<h4 id="general-properties">General properties<a class="headerlink" href="#general-properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Visible :<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
-<span class="c1">// char.visible = true;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
+<span class="c1">// child.visible = true;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// Set to invisible</span>
-<span class="c1">// char.visible = false;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// Set to invisible</span>
+<span class="c1">// child.visible = false;</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Position :<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="c1">// char.x = x;</span>
-<span class="c1">// char.y = y;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// child.x = x;</span>
+<span class="c1">// child.y = y;</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Angle :<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">degrees</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
-<span class="c1">// var radians = char.rotation;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">degrees</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
+<span class="c1">// var radians = child.rotation;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
-<span class="kr">char</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
-<span class="c1">// char.angle = degrees;</span>
-<span class="c1">// char.rotation = radians;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
+<span class="nx">child</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
+<span class="c1">// child.angle = degrees;</span>
+<span class="c1">// child.rotation = radians;</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Scale<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scaleX</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">scaleY</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">child</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
-<span class="c1">// char.scaleX = scaleX;</span>
-<span class="c1">// char.scaleY = scaleY;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
+<span class="c1">// child.scaleX = scaleX;</span>
+<span class="c1">// child.scaleY = scaleY;</span>
 </code></pre></div></li>
 </ul>
 </li>
+<li>Draw callbacks<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">setDrawBelowCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="nx">child</span><span class="p">.</span><span class="nx">setDrawAboveCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="character">Character<a class="headerlink" href="#character" title="Permanent link">&para;</a></h4>
+<ul>
 <li>Text-style : <ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bold</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">bold</span><span class="p">;</span>
@@ -6115,69 +6139,8 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
 </ul>
 </li>
 </ul>
-<h3 id="image-data">Image data<a class="headerlink" href="#image-data" title="Permanent link">&para;</a></h3>
+<h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Visible :<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
-<span class="c1">// image.visible = true;</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// Set to invisible</span>
-<span class="c1">// image.visible = false;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Position :<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="c1">// image.x = x;</span>
-<span class="c1">// image.y = y;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Angle :<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">degrees</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
-<span class="c1">// var radians = image.rotation;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">degrees</span><span class="p">);</span>
-<span class="nx">image</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
-<span class="c1">// image.angle = degrees;</span>
-<span class="c1">// image.rotation = radians;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Scale<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
-<span class="c1">// image.scaleX = scaleX;</span>
-<span class="c1">// image.scaleY = scaleY;</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Texture : <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">frame</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
 <li>Size<ul>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>

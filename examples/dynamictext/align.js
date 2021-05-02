@@ -54,14 +54,34 @@ class Demo extends Phaser.Scene {
             vAlign: 'bottom'
         });
 
+        var drawUnderline = function () {
+            var text = this.text;
+            if ((text === ' ') || (text === '\n')) {
+                return;
+            }
+
+            var context = this.context;
+
+            var savedLineCap = context.lineCap;
+            context.lineCap = 'butt';
+
+            context.strokeStyle = '#FA8072';
+            context.lineWidth = 1;
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.lineTo(this.width, 0);
+            context.stroke();
+
+            context.lineCap = savedLineCap;
+        }
+
         var children = result.children;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
-            var child = children[i]
-            child
+            children[i]
                 .setAngle(Math.random() * 30 - 15)
                 .modifyStyle({ fontSize: Phaser.Math.Between(16, 24) })
+                .setDrawBelowCallback(drawUnderline)
         }
-        debugger
     }
 
     update() { }
