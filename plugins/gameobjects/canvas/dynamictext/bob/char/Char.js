@@ -48,6 +48,7 @@ class Char extends Base {
         }
 
         context.translate(x, y);
+        context.scale(this.scaleX, this.scaleY);
         context.rotate(this.rotation);
 
         if (textStyle.stroke && textStyle.strokeThickness) {

@@ -69,20 +69,6 @@ class Image extends Base {
         return this;
     }
 
-    get scaleX() {
-        return this._scaleX;
-    }
-
-    set scaleX(value) {
-        this.setDirty(this._scaleX !== value);
-        this._scaleX = value;
-    }
-
-    setScaleX(scaleX) {
-        this.scaleX = scaleX;
-        return this;
-    }
-
     get width() {
         return this.frameWidth * this.scaleX;
     }
@@ -101,20 +87,6 @@ class Image extends Base {
         if (keepAspectRatio) {
             this.scaleY = this.scaleX;
         }
-        return this;
-    }
-
-    get scaleY() {
-        return this._scaleY;
-    }
-
-    set scaleY(value) {
-        this.setDirty(this._scaleY !== value);
-        this._scaleY = value;
-    }
-
-    setScaleY(scaleY) {
-        this.scaleY = scaleY;
         return this;
     }
 
@@ -139,7 +111,6 @@ class Image extends Base {
         return this;
     }
 
-
     draw() {
         if (!this.visible) {
             return this;
@@ -160,14 +131,13 @@ class Image extends Base {
         }
 
         context.translate(x, y);
+        context.scale(this.scaleX, this.scaleY);
         context.rotate(this.rotation);
 
         context.drawImage(
             frame.source.image,              // image
             frame.cutX, frame.cutY,          // sx, sy
             frame.cutWidth, frame.cutHeight, // sWidth, sHeight
-            0, 0,                            // dx, dy
-            width, height                    // dWidth, dHeight
         );
 
         context.restore();

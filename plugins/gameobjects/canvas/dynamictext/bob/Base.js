@@ -122,12 +122,51 @@ class Base {
         return this;
     }
 
+    get scaleX() {
+        return this._scaleX;
+    }
+
+    set scaleX(value) {
+        this.setDirty(this._scaleX !== value);
+        this._scaleX = value;
+    }
+
+    setScaleX(scaleX) {
+        this.scaleX = scaleX;
+        return this;
+    }
+
+    get scaleY() {
+        return this._scaleY;
+    }
+
+    set scaleY(value) {
+        this.setDirty(this._scaleY !== value);
+        this._scaleY = value;
+    }
+
+    setScaleY(scaleY) {
+        this.scaleY = scaleY;
+        return this;
+    }
+
+    setScale(scaleX, scaleY) {
+        if (scaleY === undefined) {
+            scaleY = scaleX;
+        }
+
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        return this;
+    }
+
     // Override
     onFree() {
         this
             .setParent()
             .setPosition(0, 0)
-            .setRotation(0);
+            .setRotation(0)
+            .setScale(1, 1);
     }
 
     // Override

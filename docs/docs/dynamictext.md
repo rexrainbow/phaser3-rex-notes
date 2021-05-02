@@ -369,6 +369,18 @@ var result = txt.runWordWrap(prevResult);
         // char.angle = degrees;
         // char.rotation = radians;
         ```
+- Scale
+    - Get
+        ```javascript
+        var scaleX = char.scaleX;
+        var scaleY = char.scaleY;
+        ```
+    - Set
+        ```javascript
+        char.setScale(scaleX, scaleY);
+        // char.scaleX = scaleX;
+        // char.scaleY = scaleY;
+        ```
 - Text-style : 
     - Get
         ```javascript
@@ -438,6 +450,18 @@ var result = txt.runWordWrap(prevResult);
         image.setRotation(radians);
         // image.angle = degrees;
         // image.rotation = radians;
+        ```
+- Scale
+    - Get
+        ```javascript
+        var scaleX = image.scaleX;
+        var scaleY = image.scaleY;
+        ```
+    - Set
+        ```javascript
+        image.setScale(scaleX, scaleY);
+        // image.scaleX = scaleX;
+        // image.scaleY = scaleY;
         ```
 - Texture : 
     - Get
