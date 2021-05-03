@@ -38,15 +38,17 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 580, '');
 
         ShowNextPage(text, {
-            lineWidth: 40,
+            lineWidth: 45,
             letterSpacing: 0,
             fixedChildHeight: 20,
             padding: {
                 top: 15,
-                right: -5
+                right: 4,
+                left: 8
             },
-            hAlign: 'right',
-            vAlign: 'top'
+            // rtl: false
+            // hAlign: 'right',
+            // vAlign: 'top'
         })
 
     }

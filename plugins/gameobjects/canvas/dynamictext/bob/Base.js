@@ -11,9 +11,11 @@ class Base {
             .setVisible()
             .setPosition(0, 0)
             .setRotation(0)
+            .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
 
+        this.originX = 0;
         this.xOffset = 0;
         this.yOffset = 0;
         this.width = 0;
@@ -164,6 +166,11 @@ class Base {
         return this;
     }
 
+    setOrigin(x) {
+        this.originX = x;
+        return this;
+    }
+
     setDrawBelowCallback(callback) {
         this.drawBelowCallback = callback;
         return this;
@@ -181,6 +188,7 @@ class Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
+            .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
     }
@@ -195,7 +203,7 @@ class Base {
         var context = this.context;
         context.save();
 
-        var x = this.x + this.xOffset,
+        var x = this.x + this.xOffset - (this.originX * this.width),
             y = this.y + this.yOffset;
         if (this.autoRound) {
             x = Math.round(x);

@@ -306,6 +306,51 @@ var result = txt.runWordWrap({
     - `false` : Word wrap. Default behavior.
     - `true` : Character wrap.
 
+#### Vertical wrap
+
+```javascript
+var result = txt.runVerticalWrap({
+    padding: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    },
+    lineWidth: undefined,
+    maxLines: undefined,
+    fixedChildHeight: undefined,
+    charPerLine: undefined,
+    wrapHeight: undefined,
+    letterSpacing: 0,
+    rtl: true,
+    hAlign: 0,
+    vAlign: 0,
+});
+```
+
+- `padding.left` : Extra space of left line.
+- `padding.right` : Extra space of right line.
+- `padding.top` : Extra space of first character.
+- `lineWidth` : Line width. 
+    - `undefined` : It will be set if `maxLines` and `fixedWidth` is given.
+- `maxLines` : Lines number of this page. 
+    - `0` : Wrapping whole content.
+    - `undefined` : It will be set if `lineWidth` and `fixedWidth` is given.
+- `wrapHeight` : Height of wrapping
+- `letterSpacing` : Space between each character.
+- `rtl` : 
+    - `true` : Place lines from right to left.
+    - `false` : Place lines from left to right.
+- `hAlign` : Horizontal alignment.
+    - `0`, or `'left'` : Align to left bound. Default value if `rtl` is set to `false`. 
+    - `1`, or `'center'` : Align to center.
+    - `2`, or `'right'` : Align to right bound. Default value if `rtl` is set to `true`.
+- `vAlign` : Vertical alignment.
+    - `0`, or `'top'` : Align to top bound.
+    - `1`, or `'center'` : Align to center.
+    - `2`, or `'bottom'` : Align to bottom bound.
+```
+
 #### Result
 
 ```javascript
@@ -317,7 +362,7 @@ var result = txt.runWordWrap({
 
 - `children` : Active [character](dynamictext.md#character-data)/[image](dynamictext.md#image-data) data in this page.
 - `isLastPage` : 
-    - `false` : Run `txt.runWordWrap(result)` to get next page of word-wrapping result.
+    - `false` : Run `txt.runWordWrap(result)`/`txt.runVerticalWrap(result)` to get next page of word-wrapping result.
     - `true` : No remainder of characters.
 
 #### Wrap next page

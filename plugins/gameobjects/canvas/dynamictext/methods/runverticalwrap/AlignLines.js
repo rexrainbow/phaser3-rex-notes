@@ -29,6 +29,9 @@ var AlignLines = function (result, width, height) {
             xOffset = width - linesWidth;
             break;
     }
+    if (rtl) {
+        xOffset += lineWidth;
+    }
     for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
         var line = lines[(rtl) ? (lcnt - li - 1) : li];
         var children = line.children;

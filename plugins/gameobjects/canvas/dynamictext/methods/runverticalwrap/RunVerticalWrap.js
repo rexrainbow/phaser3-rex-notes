@@ -27,7 +27,7 @@ var RunVerticalWrap = function (config) {
             // Calculate maxLines via lineWidth, in fixedWidth mode
             maxLines = GetValue(config, 'maxLines', undefined);
             if (maxLines === undefined) {
-                var innerWidth = this.fixedWidth - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
+                var innerWidth = this.fixedWidth - this.padding.left - this.padding.right;
                 maxLines = Math.floor(innerWidth / lineWidth);
             }
         } else {
@@ -61,9 +61,9 @@ var RunVerticalWrap = function (config) {
 
     var letterSpacing = GetValue(config, 'letterSpacing', 0);
 
-    var hAlign = GetValue(config, 'hAlign', 0);
-    var vAlign = GetValue(config, 'vAlign', 0);
     var rtl = GetValue(config, 'rtl', true);
+    var hAlign = GetValue(config, 'hAlign', rtl ? 2 : 0);
+    var vAlign = GetValue(config, 'vAlign', 0);
 
     var result = {
         start: startIndex,  // Next start index
@@ -116,7 +116,7 @@ var RunVerticalWrap = function (config) {
         if ((remainderHeight < childHeight) || isNewLineChar) {
             // Add to result
             if (isNewLineChar) {
-                char.setActive().setPosition(x, y);
+                char.setActive().setPosition(x, y).setOrigin(0.5);
                 resultChildren.push(char);
                 lastLine.push(char);
             }
@@ -140,7 +140,7 @@ var RunVerticalWrap = function (config) {
         remainderHeight -= childHeight;
         lastLineHeight += childHeight;
 
-        char.setActive().setPosition(x, y);
+        char.setActive().setPosition(x, y).setOrigin(0.5);
         resultChildren.push(char);
         lastLine.push(char);
         y += childHeight;
