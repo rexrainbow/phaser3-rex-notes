@@ -1168,8 +1168,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#result" class="md-nav__link">
-    Result
+  <a href="#vertical-wrap" class="md-nav__link">
+    Vertical wrap
   </a>
   
 </li>
@@ -5636,8 +5636,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#result" class="md-nav__link">
-    Result
+  <a href="#vertical-wrap" class="md-nav__link">
+    Vertical wrap
   </a>
   
 </li>
@@ -6044,17 +6044,73 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 </ul>
 </li>
 </ul>
-<h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
-    <span class="nx">isLastPage</span><span class="o">:</span> <span class="kc">false</span>
-<span class="p">}</span>
+<h4 id="vertical-wrap">Vertical wrap<a class="headerlink" href="#vertical-wrap" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runVerticalWrap</span><span class="p">({</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="nx">lineWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">maxLines</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">fixedChildHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">charPerLine</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">wrapHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">rtl</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">hAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">vAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</li>
+<li><code>padding.left</code> : Extra space of left line.</li>
+<li><code>padding.right</code> : Extra space of right line.</li>
+<li><code>padding.top</code> : Extra space of first character.</li>
+<li><code>lineWidth</code> : Line width. <ul>
+<li><code>undefined</code> : It will be set if <code>maxLines</code> and <code>fixedWidth</code> is given.</li>
+</ul>
+</li>
+<li><code>maxLines</code> : Lines number of this page. <ul>
+<li><code>0</code> : Wrapping whole content.</li>
+<li><code>undefined</code> : It will be set if <code>lineWidth</code> and <code>fixedWidth</code> is given.</li>
+</ul>
+</li>
+<li><code>wrapHeight</code> : Height of wrapping</li>
+<li><code>letterSpacing</code> : Space between each character.</li>
+<li><code>rtl</code> : <ul>
+<li><code>true</code> : Place lines from right to left.</li>
+<li><code>false</code> : Place lines from left to right.</li>
+</ul>
+</li>
+<li><code>hAlign</code> : Horizontal alignment.<ul>
+<li><code>0</code>, or <code>'left'</code> : Align to left bound. Default value if <code>rtl</code> is set to <code>false</code>. </li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'right'</code> : Align to right bound. Default value if <code>rtl</code> is set to <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>vAlign</code> : Vertical alignment.</p>
+<ul>
+<li><code>0</code>, or <code>'top'</code> : Align to top bound.</li>
+<li><code>1</code>, or <code>'center'</code> : Align to center.</li>
+<li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.
+<div class="codehilite"><pre><span></span><code>#### Result
+
+```javascript
+{
+    children: [],
+    isLastPage: false
+}
+</code></pre></div></li>
+</ul>
+</li>
+<li>
+<p><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</p>
+</li>
 <li><code>isLastPage</code> : <ul>
-<li><code>false</code> : Run <code>txt.runWordWrap(result)</code> to get next page of word-wrapping result.</li>
+<li><code>false</code> : Run <code>txt.runWordWrap(result)</code>/<code>txt.runVerticalWrap(result)</code> to get next page of word-wrapping result.</li>
 <li><code>true</code> : No remainder of characters.</li>
 </ul>
 </li>
