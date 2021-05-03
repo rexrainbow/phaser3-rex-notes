@@ -1160,16 +1160,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#word-wrap" class="md-nav__link">
-    Word-wrap
+  <a href="#wrap" class="md-nav__link">
+    Wrap
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#horizontal-wrap" class="md-nav__link">
+    Horizontal wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#vertical-wrap" class="md-nav__link">
     Vertical wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    Result
   </a>
   
 </li>
@@ -5628,16 +5642,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#word-wrap" class="md-nav__link">
-    Word-wrap
+  <a href="#wrap" class="md-nav__link">
+    Wrap
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#horizontal-wrap" class="md-nav__link">
+    Horizontal wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#vertical-wrap" class="md-nav__link">
     Vertical wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#result" class="md-nav__link">
+    Result
   </a>
   
 </li>
@@ -5997,7 +6025,8 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <li><code>width</code> : Scaled-width. Aspect-ratio will be keep if no <code>height</code>, or <code>scaleY</code> is set.</li>
 <li><code>height</code> : Scaled-height. Aspect-ratio will be keep if no <code>width</code>, or <code>scaleX</code> is set.</li>
 </ul>
-<h3 id="word-wrap">Word-wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
+<h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
+<h4 id="horizontal-wrap">Horizontal wrap<a class="headerlink" href="#horizontal-wrap" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">runWordWrap</span><span class="p">({</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -6091,25 +6120,22 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <li><code>2</code>, or <code>'right'</code> : Align to right bound. Default value if <code>rtl</code> is set to <code>true</code>.</li>
 </ul>
 </li>
-<li>
-<p><code>vAlign</code> : Vertical alignment.</p>
-<ul>
+<li><code>vAlign</code> : Vertical alignment.<ul>
 <li><code>0</code>, or <code>'top'</code> : Align to top bound.</li>
 <li><code>1</code>, or <code>'center'</code> : Align to center.</li>
-<li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.
-<div class="codehilite"><pre><span></span><code>#### Result
-
-```javascript
-{
-    children: [],
-    isLastPage: false
-}
-</code></pre></div></li>
+<li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.</li>
 </ul>
 </li>
-<li>
-<p><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</p>
-</li>
+</ul>
+<h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">isLastPage</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</li>
 <li><code>isLastPage</code> : <ul>
 <li><code>false</code> : Run <code>txt.runWordWrap(result)</code>/<code>txt.runVerticalWrap(result)</code> to get next page of word-wrapping result.</li>
 <li><code>true</code> : No remainder of characters.</li>

@@ -268,7 +268,9 @@ txt.appendImage(key, frame, {
 - `width` : Scaled-width. Aspect-ratio will be keep if no `height`, or `scaleY` is set.
 - `height` : Scaled-height. Aspect-ratio will be keep if no `width`, or `scaleX` is set.
 
-### Word-wrap
+### Wrap
+
+#### Horizontal wrap
 
 ```javascript
 var result = txt.runWordWrap({
@@ -350,7 +352,6 @@ var result = txt.runVerticalWrap({
     - `0`, or `'top'` : Align to top bound.
     - `1`, or `'center'` : Align to center.
     - `2`, or `'bottom'` : Align to bottom bound.
-```
 
 #### Result
 
