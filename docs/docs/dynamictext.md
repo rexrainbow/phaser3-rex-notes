@@ -8,7 +8,8 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
 ## Live demos
 
 - [Page typing](https://codepen.io/rexrainbow/pen/LYxoRWJ)
-- [Align, rotation](https://codepen.io/rexrainbow/pen/JjEQXqj)
+- [Align, rotation, drawBelowCallback](https://codepen.io/rexrainbow/pen/JjEQXqj)
+- [Vertical wrap](https://codepen.io/rexrainbow/pen/oNBKpYG)
 
 ## Usage
 
