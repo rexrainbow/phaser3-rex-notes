@@ -394,6 +394,16 @@ var result = txt.runWordWrap(prevResult);
         child.setVisible(false);  // Set to invisible
         // child.visible = false;
         ```
+- Alpha
+    - Get
+        ```javascript
+        var alpha = child.alpha;
+        ```
+    - Set
+        ```javascript
+        child.setAlpha(alpha);
+        // child.alpha = alpha;
+        ```
 - Position :
     - Get
         ```javascript

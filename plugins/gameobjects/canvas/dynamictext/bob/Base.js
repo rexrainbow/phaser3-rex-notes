@@ -9,6 +9,7 @@ class Base {
         this
             .setActive()
             .setVisible()
+            .setAlpha(1)
             .setPosition(0, 0)
             .setRotation(0)
             .setOrigin(0)
@@ -74,6 +75,20 @@ class Base {
         }
 
         this.visible = visible;
+        return this;
+    }
+
+    get alpha() {
+        return this._alpha;
+    }
+
+    set alpha(value) {
+        this.setDirty(this._alpha != value);
+        this._alpha = value;
+    }
+
+    setAlpha(alpha) {
+        this.alpha = alpha;
         return this;
     }
 
@@ -185,6 +200,8 @@ class Base {
     onFree() {
         this
             .setParent()
+            .setVisible()
+            .setAlpha(1)
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
@@ -211,6 +228,7 @@ class Base {
         }
 
         context.translate(x, y);
+        context.globalAlpha = this.alpha;
         context.scale(this.scaleX, this.scaleY);
         context.rotate(this.rotation);
 
