@@ -1,4 +1,4 @@
-var GetWord = function (children, startIndex, result) {
+var GetWord = function (children, startIndex, charMode, result) {
     if (result === undefined) {
         result = { word: [], width: 0 };
     }
@@ -23,6 +23,9 @@ var GetWord = function (children, startIndex, result) {
             break;
         }
 
+        if (charMode) {  // Word only contains 1 character
+            break;
+        }
     }
 
     result.width = wordWidth;

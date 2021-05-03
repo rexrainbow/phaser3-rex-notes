@@ -249,6 +249,21 @@
         // ...
     }
     ```
+1. [Dynamic text](dynamictext.md): Control position, angle of each character drawn on a canvas.
+    ```javascript
+    var txt = scene.rexUI.add.dynamicText(config);
+    ```
+    or
+    ```javascript
+    class MyText extends RexPlugins.UI.DynamicText {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 #### Behaviors of text
 

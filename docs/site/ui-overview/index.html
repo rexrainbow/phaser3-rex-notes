@@ -5983,6 +5983,19 @@
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><a href="../dynamictext/">Dynamic text</a>: Control position, angle of each character drawn on a canvas.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dynamicText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">DynamicText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ol>
 <h4 id="behaviors-of-text">Behaviors of text<a class="headerlink" href="#behaviors-of-text" title="Permanent link">&para;</a></h4>
 <ol>

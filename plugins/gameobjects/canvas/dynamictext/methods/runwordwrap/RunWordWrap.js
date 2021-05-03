@@ -52,6 +52,8 @@ var RunWordWrap = function (config) {
     var hAlign = GetValue(config, 'hAlign', 0);
     var vAlign = GetValue(config, 'vAlign', 0);
 
+    var charWrap = GetValue(config, 'charWrap', false);
+
     var result = {
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
@@ -91,7 +93,7 @@ var RunWordWrap = function (config) {
         lastLine = [], lastLineWidth = 0, maxLineWidth = 0;
     var wordResult;
     while (childIndex < lastChildIndex) {
-        wordResult = GetWord(children, childIndex, wordResult);
+        wordResult = GetWord(children, childIndex, charWrap, wordResult);
         var word = wordResult.word;
         var charCnt = word.length;
         var wordWidth = wordResult.width + (charCnt * letterSpacing);

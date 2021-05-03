@@ -37,8 +37,50 @@ class Char extends Base {
     setText(text) {
         this.setDirty(this.text != text);
         this.text = text;
-        this.width = (text !== '\n') ? this.style.getTextWidth(this.context, text) : 0;
+
+        if (text === '\n') {
+            this.textWidth = 0;
+            this.textHeight = 0;
+        } else {
+            var metrics = this.style.getTextMetrics(this.context, this.text);
+            this.textWidth = metrics.width;
+
+            var ascent, descent;
+            if (metrics.hasOwnProperty('actualBoundingBoxAscent')) {
+                ascent = metrics.actualBoundingBoxAscent;
+                descent = metrics.actualBoundingBoxDescent;
+            } else {
+                ascent = 0;
+                descent = 0;
+            }
+            this.textHeight = ascent + descent;
+        }
+
         return this;
+    }
+
+    get width() {
+        return this.textWidth * this.scaleX;
+    }
+
+    set width(value) {
+        if (this.textWidth > 0) {
+            this.scaleX = value / this.textWidth;
+        } else {
+            this.scaleX = 1;
+        }
+    }
+
+    get height() {
+        return this.textHeight * this.scaleY;
+    }
+
+    set height(value) {
+        if (this.textHeight > 0) {
+            this.scaleY = value / this.textHeight;
+        } else {
+            this.scaleY = 1;
+        }
     }
 
     drawContent() {

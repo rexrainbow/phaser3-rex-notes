@@ -67,7 +67,7 @@ Control position, angle of each character drawn on a [canvas](canvas.md).
     import DynamicText from 'phaser3-rex-plugins/plugins/dynamictext.js';
     ```
 - Add dynamic-text object
-    ```javascript    
+    ```javascript
     var txt = new DynamicText(scene, x, y, config);
     sscene.add.existing(txt);
     ```
@@ -250,8 +250,8 @@ txt.appendText(text,
 
 To overwrite some properties of text-style.
 
-Each [character](dynamcitext.md#character-data) will be placed at position (0,0), without rotation. 
-Uses [word-wrap](dynamcitext.md#word-wrap) method to rearrange position of characters. 
+Each [character](dynamictext.md#character-data) will be placed at position (0,0), without rotation. 
+Uses [word-wrap](dynamictext.md#word-wrap) method to rearrange position of characters. 
 
 ### Append image
 
@@ -281,6 +281,7 @@ var result = txt.runWordWrap({
     letterSpacing: 0,
     hAlign: 0,
     vAlign: 0,
+    charWrap: false
 });
 ```
 
@@ -301,6 +302,9 @@ var result = txt.runWordWrap({
     - `0`, or `'top'` : Align to top bound.
     - `1`, or `'center'` : Align to center.
     - `2`, or `'bottom'` : Align to bottom bound.
+- `charWrap`
+    - `false` : Word wrap. Default behavior.
+    - `true` : Character wrap.
 
 #### Result
 
@@ -311,7 +315,7 @@ var result = txt.runWordWrap({
 }
 ```
 
-- `children` : Active [character](dynamcitext.md#character-data)/[image](dynamcitext.md#image-data) data in this page.
+- `children` : Active [character](dynamictext.md#character-data)/[image](dynamictext.md#image-data) data in this page.
 - `isLastPage` : 
     - `false` : Run `txt.runWordWrap(result)` to get next page of word-wrapping result.
     - `true` : No remainder of characters.
@@ -386,7 +390,7 @@ var result = txt.runWordWrap(prevResult);
         ```javascript
         child.setDrawBelowCallback(callback);
         child.setDrawAboveCallback(callback);
-        ```        
+        ```
 
 #### Character
 
@@ -433,3 +437,18 @@ var result = txt.runWordWrap(prevResult);
         image.setHeight(height);
         // image.setHeight(height, true);  // Resize and keep aspect- ratio
         ```
+
+### Compare with other kinds of text game object
+
+- [Built-in text](text.md): 
+    - Single color per game object.
+    - Draw content line by line.
+    - Best render performance.
+- [BBCode text](bbcodetext.md): 
+    - Multiple colors, multiple font size per gaem object.
+    - Draw content segment by segment.
+    - Slower than built-in text game object.
+- [Dynamic text](dynamictext.md):
+    - Multiple colors, multiple font size per gaem object.
+    - Draw content character by character.
+    - Slower than bbcode text game object.

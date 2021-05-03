@@ -164,6 +164,7 @@ module.exports = {
     'fixwidthbuttons': './templates/ui/fixwidthbuttons/FixWidthButtons.js',
     'canvas': './templates/ui/canvas/Canvas.js',
     'circlemaskimage': './templates/ui/circlemaskimage/CircleMaskImage.js',
+    'dynamictext': './templates/ui/dynamictext/DynamicText.js',
     'circularprogresscanvas': './templates/ui/circularprogresscanvas/CircularProgressCanvas.js',
     'circularprogress': './templates/ui/circularprogress/CircularProgress.js',
     'knob': './templates/ui/knob/Knob.js',

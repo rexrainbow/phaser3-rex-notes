@@ -1220,6 +1220,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
+    Compare with other kinds of text game object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5681,6 +5688,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
+    Compare with other kinds of text game object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5967,8 +5981,8 @@
 </code></pre></div>
 
 <p>To overwrite some properties of text-style.</p>
-<p>Each <a href="dynamcitext.md#character-data">character</a> will be placed at position (0,0), without rotation. 
-Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
+<p>Each <a href="./#character-data">character</a> will be placed at position (0,0), without rotation. 
+Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
 <h3 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// width: undefined,</span>
@@ -5994,6 +6008,7 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
     <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">hAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">vAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6023,6 +6038,11 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
 <li><code>2</code>, or <code>'bottom'</code> : Align to bottom bound.</li>
 </ul>
 </li>
+<li><code>charWrap</code><ul>
+<li><code>false</code> : Word wrap. Default behavior.</li>
+<li><code>true</code> : Character wrap.</li>
+</ul>
+</li>
 </ul>
 <h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -6032,7 +6052,7 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
 </code></pre></div>
 
 <ul>
-<li><code>children</code> : Active <a href="dynamcitext.md#character-data">character</a>/<a href="dynamcitext.md#image-data">image</a> data in this page.</li>
+<li><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</li>
 <li><code>isLastPage</code> : <ul>
 <li><code>false</code> : Run <code>txt.runWordWrap(result)</code> to get next page of word-wrapping result.</li>
 <li><code>true</code> : No remainder of characters.</li>
@@ -6152,6 +6172,27 @@ Uses <a href="dynamcitext.md#word-wrap">word-wrap</a> method to rearrange positi
 <span class="nx">image</span><span class="p">.</span><span class="nx">setHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
 <span class="c1">// image.setHeight(height, true);  // Resize and keep aspect- ratio</span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="compare-with-other-kinds-of-text-game-object">Compare with other kinds of text game object<a class="headerlink" href="#compare-with-other-kinds-of-text-game-object" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../text/">Built-in text</a>: <ul>
+<li>Single color per game object.</li>
+<li>Draw content line by line.</li>
+<li>Best render performance.</li>
+</ul>
+</li>
+<li><a href="../bbcodetext/">BBCode text</a>: <ul>
+<li>Multiple colors, multiple font size per gaem object.</li>
+<li>Draw content segment by segment.</li>
+<li>Slower than built-in text game object.</li>
+</ul>
+</li>
+<li><a href="./">Dynamic text</a>:<ul>
+<li>Multiple colors, multiple font size per gaem object.</li>
+<li>Draw content character by character.</li>
+<li>Slower than bbcode text game object.</li>
 </ul>
 </li>
 </ul>

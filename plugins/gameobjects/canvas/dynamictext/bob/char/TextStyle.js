@@ -143,9 +143,9 @@ class TextStyle {
         return this;
     }
 
-    getTextWidth(context, text) {
+    getTextMetrics(context, text) {
         this.syncFont(context).syncStyle(context);
-        return context.measureText(text).width;
+        return context.measureText(text);
     }
 
     setOffset(x, y) {
