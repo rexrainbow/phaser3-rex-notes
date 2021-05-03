@@ -45,12 +45,12 @@ class Demo extends Phaser.Scene {
             .appendText(content[2], { color: '#FF7F50' })
             .appendText(content[3], { color: '#F8F8FF' });
 
+        this.print = this.add.text(0, 580, '');
+
         TypingNextPage(text, {
             maxLines: 5,         // Show 5 lines per page
             padding: { bottom: 10 },
         });
-
-        this.print = this.add.text(0, 580, '');
     }
 
     update() { }

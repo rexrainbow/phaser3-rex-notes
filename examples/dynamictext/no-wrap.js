@@ -50,8 +50,6 @@ class Demo extends Phaser.Scene {
             hAlign: 'right',
             vAlign: 'bottom'
         });
-
-        this.print = this.add.text(0, 580, '');
     }
 
     update() { }

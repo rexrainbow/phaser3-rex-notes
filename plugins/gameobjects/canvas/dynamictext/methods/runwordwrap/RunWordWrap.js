@@ -7,8 +7,8 @@ var RunWordWrap = function (config) {
     // Parse parameters
     var startIndex = GetValue(config, 'start', 0);
 
-    var topPadding = GetValue(config, 'padding.top', 0);
-    var bottomPadding = GetValue(config, 'padding.bottom', 0);  // Add extra space below last line
+    var extraTopPadding = GetValue(config, 'padding.top', 0);
+    var extraBottomPadding = GetValue(config, 'padding.bottom', 0);  // Add extra space below last line
 
     // Get lineHeight, maxLines
     var lineHeight = GetValue(config, 'lineHeight', undefined);
@@ -17,7 +17,7 @@ var RunWordWrap = function (config) {
         // Calculate lineHeight via maxLines, in fixedHeight mode
         maxLines = GetValue(config, 'maxLines', 1);
         if (this.fixedHeight > 0) {
-            var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - topPadding - bottomPadding;
+            var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
             lineHeight = innerHeight / maxLines;
         } else {
             lineHeight = 0;
@@ -27,7 +27,7 @@ var RunWordWrap = function (config) {
             // Calculate maxLines via lineHeight, in fixedHeight mode
             maxLines = GetValue(config, 'maxLines', undefined);
             if (maxLines === undefined) {
-                var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - topPadding - bottomPadding;
+                var innerHeight = this.fixedHeight - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
                 maxLines = Math.floor(innerHeight / lineHeight);
             }
         } else {
@@ -58,8 +58,8 @@ var RunWordWrap = function (config) {
         start: startIndex,  // Next start index
         isLastPage: false,  // Is last page
         padding: {
-            top: topPadding,
-            bottom: bottomPadding
+            top: extraTopPadding,
+            bottom: extraBottomPadding
         },
         lineHeight: lineHeight,
         maxLines: maxLines,
@@ -67,6 +67,7 @@ var RunWordWrap = function (config) {
         letterSpacing: letterSpacing,
         hAlign: hAlign,
         vAlign: vAlign,
+        charWrap: charWrap,
         children: [],       // Word-wrap result
         lines: [],          // Word-wrap result in lines
         maxLineWidth: 0,
@@ -82,7 +83,7 @@ var RunWordWrap = function (config) {
     // Layout children
     wrapWidth += letterSpacing;
     var startX = this.padding.left,
-        startY = this.padding.top + lineHeight + topPadding,  // Start(baseline) from 1st lineHeight, not 0
+        startY = this.padding.top + lineHeight + extraTopPadding,  // Start(baseline) from 1st lineHeight, not 0
         x = startX,
         y = startY;
     var remainderWidth = wrapWidth,
@@ -146,15 +147,15 @@ var RunWordWrap = function (config) {
     result.start += resultChildren.length;
     result.isLastPage = (result.start === lastChildIndex);
     result.maxLineWidth = maxLineWidth;
-    result.linesHeight = (resultLines.length * lineHeight) + topPadding + bottomPadding;
+    result.linesHeight = (resultLines.length * lineHeight) + extraTopPadding + extraBottomPadding;
 
     // Calculate size of game object
     var width = (this.fixedWidth > 0) ? this.fixedWidth : (result.maxLineWidth + this.padding.left + this.padding.right);
     var height = (this.fixedHeight > 0) ? this.fixedHeight : (result.linesHeight + this.padding.top + this.padding.bottom);
 
-    // Size might be changed after word-wrapping
+    // Size might be changed after wrapping
     var innerWidth = width - this.padding.left - this.padding.right;
-    var innerHeight = height - this.padding.top - this.padding.bottom - topPadding - bottomPadding;
+    var innerHeight = height - this.padding.top - this.padding.bottom - extraTopPadding - extraBottomPadding;
     AlignLines(result, innerWidth, innerHeight);
 
     // Resize

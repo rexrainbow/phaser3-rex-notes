@@ -1,3 +1,5 @@
+import { HAlign, VAlign } from '../utils/AlignConst.js';
+
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,
         vAlign = result.vAlign;
@@ -53,18 +55,6 @@ var AlignLines = function (result, width, height) {
             child.y += yOffset;
         }
     }
-}
-
-const HAlign = {
-    left: 0,
-    center: 1,
-    right: 2
-}
-
-const VAlign = {
-    top: 0,
-    center: 1,
-    bottom: 2
 }
 
 export default AlignLines;

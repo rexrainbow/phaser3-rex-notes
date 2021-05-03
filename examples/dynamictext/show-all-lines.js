@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexDynamicText(
             {
                 x: 400, y: 300,
-                width: 400, 
+                width: 400,
                 // height: undefined,  // Don't assign height
 
                 background: {
@@ -44,13 +44,13 @@ class Demo extends Phaser.Scene {
             .appendText(content[2], { color: '#FF7F50' })
             .appendText(content[3], { color: '#F8F8FF' });
 
+        this.print = this.add.text(0, 580, '');
+
         TypingNextPage(text, {
             lineHeight: 30,
             maxLines: 0,       // Set maxLines to 0
             padding: { bottom: 10 },
         });
-
-        this.print = this.add.text(0, 580, '');
     }
 
     update() { }
