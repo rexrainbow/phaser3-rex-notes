@@ -339,6 +339,9 @@ var result = txt.runVerticalWrap({
 - `maxLines` : Lines number of this page. 
     - `0` : Wrapping whole content.
     - `undefined` : It will be set if `lineWidth` and `fixedWidth` is given.
+- `fixedChildHeight` : Each character has the same fixed height.
+    - `undefined` : Get `fixedChildHeight` according to `charPerLine` parameter. Or use height of each character if `fixedChildHeight` and `charPerLine` parameters are `undefined`.
+- `charPerLine` : Amount of characters in each line, to get `fixedChildHeight`.
 - `wrapHeight` : Height of wrapping
 - `letterSpacing` : Space between each character.
 - `rtl` : 

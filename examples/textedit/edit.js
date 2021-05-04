@@ -23,8 +23,15 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function () {
                 var config = {
+                    onOpen: function (textObject) {
+                        console.log('Open text editor');
+                    },
                     onTextChanged: function (textObject, text) {
                         textObject.text = text;
+                        console.log(`Text: ${text}`);
+                    },
+                    onClose: function (textObject) {
+                        console.log('Close text editor');
                     },
                     selectAll: true
                 }

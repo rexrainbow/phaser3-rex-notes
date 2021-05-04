@@ -5720,16 +5720,24 @@
 </ul>
 </li>
 <li><code>config.text</code> : Initial string content.</li>
+<li><code>config.onOpen</code> : Callback invoked when input text is created.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><code>config.onTextChanged</code> : Callback invoked when input text changed.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">textObject</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>config.onClose</code> : Callback invoked when input text is closed. This parameter is valid only when <code>onClose</code> parameter is not given.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>config.selectAll</code> : Set <code>true</code> to select all text.</li>
 <li><a href="./#add-text-object">More configuration parameters</a>...</li>
 </ul>
 </li>
-<li><code>onClose</code> : Callback invoked when text editor is closed.
+<li><code>onClose</code> : Callback invoked when input text is closed.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>

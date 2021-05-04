@@ -64,6 +64,11 @@ class TextEdit {
             .setFocus();
         this.gameObject.setVisible(false); // Set parent text invisible
 
+        var onOpenCallback = GetValue(config, 'onOpen', undefined);
+        if (onOpenCallback) {
+            onOpenCallback(this.gameObject)
+        }
+
         // Attach close event
         this.onClose = onCloseCallback;
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);

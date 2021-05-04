@@ -117,15 +117,25 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
         - `password`
         - `number`
     - `config.text` : Initial string content.
+    - `config.onOpen` : Callback invoked when input text is created.
+        ```javascript
+        function (textObject) {
+        }
+        ```
     - `config.onTextChanged` : Callback invoked when input text changed.
         ```javascript
         function (textObject, text) {
             textObject.text = text;
         }
         ```
+    - `config.onClose` : Callback invoked when input text is closed. This parameter is valid only when `onClose` parameter is not given.
+        ```javascript
+        function (textObject) {
+        }
+        ```
     - `config.selectAll` : Set `true` to select all text.
     - [More configuration parameters](textedit.md#add-text-object)...
-- `onClose` : Callback invoked when text editor is closed.
+- `onClose` : Callback invoked when input text is closed.
     ```javascript
     var callback = function(textObject) {
     }

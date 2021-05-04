@@ -6107,6 +6107,11 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <li><code>undefined</code> : It will be set if <code>lineWidth</code> and <code>fixedWidth</code> is given.</li>
 </ul>
 </li>
+<li><code>fixedChildHeight</code> : Each character has the same fixed height.<ul>
+<li><code>undefined</code> : Get <code>fixedChildHeight</code> according to <code>charPerLine</code> parameter. Or use height of each character if <code>fixedChildHeight</code> and <code>charPerLine</code> parameters are <code>undefined</code>.</li>
+</ul>
+</li>
+<li><code>charPerLine</code> : Amount of characters in each line, to get <code>fixedChildHeight</code>.</li>
 <li><code>wrapHeight</code> : Height of wrapping</li>
 <li><code>letterSpacing</code> : Space between each character.</li>
 <li><code>rtl</code> : <ul>
