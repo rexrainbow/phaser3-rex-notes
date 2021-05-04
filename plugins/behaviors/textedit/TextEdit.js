@@ -50,6 +50,7 @@ class TextEdit {
             onCloseCallback = GetValue(config, 'onClose', undefined);
         }
 
+        var onOpenCallback = GetValue(config, 'onOpen', undefined);
         var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
 
         this.inputText = CreateInputTextFromText(this.gameObject, config)
@@ -64,18 +65,22 @@ class TextEdit {
             .setFocus();
         this.gameObject.setVisible(false); // Set parent text invisible
 
-        var onOpenCallback = GetValue(config, 'onOpen', undefined);
-        if (onOpenCallback) {
-            onOpenCallback(this.gameObject)
-        }
-
         // Attach close event
         this.onClose = onCloseCallback;
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
         // Attach pointerdown (outside of input-text) event, at next tick
         this.delayCall = this.scene.time.delayedCall(0, function () {
             this.scene.input.once('pointerdown', this.close, this);
+
+            // Open editor completly, invoke onOpenCallback
+            if (onOpenCallback) {
+                onOpenCallback(this.gameObject)
+            }
+
         }, [], this);
+
+
+
         return this;
     }
 
