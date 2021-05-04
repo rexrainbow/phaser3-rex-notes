@@ -277,7 +277,16 @@
     var textObject = scene.rexUI.wrapExpandText(textObject);
     // var textObject = scene.rexUI.wrapExpandText(textObject, minWidth);
     ```
-    - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [Bitmap text object](bitmaptext.md)
+    - `textObject` : 
+        - [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), 
+        - [Bitmap text object](bitmaptext.md)
+        - [Dynamic text object](dynamictext.md), With default wrap configuration, ex:
+            ```javascript
+            {
+                lineHeight: 24, 
+                padding: {bottom: 12}
+            }
+            ```
 
 ### Touch input
 

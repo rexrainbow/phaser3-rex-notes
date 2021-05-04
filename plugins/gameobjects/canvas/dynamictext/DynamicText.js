@@ -20,8 +20,8 @@ class DynamicText extends Canvas {
             y = GetValue(config, 'y', 0);
             fixedWidth = GetValue(config, 'width', 0);
             fixedHeight = GetValue(config, 'height', 0);
-        } else if (IsPlainObject(width)) {
-            config = width;
+        } else if (IsPlainObject(fixedWidth)) {
+            config = fixedWidth;
             fixedWidth = GetValue(config, 'width', 0);
             fixedHeight = GetValue(config, 'height', 0);
         }
@@ -51,6 +51,14 @@ class DynamicText extends Canvas {
         }
         if (height === undefined) {
             height = 0;
+        }
+
+        if ((width > 0) && (height > 0)) {
+            if ((this.fixedWidth !== width) || (this.fixedHeight !== height)) {
+                this.dirty = true;
+            }
+        } else {
+            this.dirty = true;
         }
 
         this.fixedWidth = width;
