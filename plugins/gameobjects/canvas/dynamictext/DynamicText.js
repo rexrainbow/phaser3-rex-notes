@@ -4,8 +4,9 @@ import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
 import DrawContent from './methods/DrawContent.js';
 import PaddingMethods from './methods/PaddingMethods.js';
-import ChildrenMethods from './methods/ChildrenMethods.js';
-import TextMethods from './methods/TextMethods.js';
+import AddChildMethods from './methods/AddChildMethods';
+import WrapMethods from './methods/WrapMethods.js';
+import GetChildrenMethods from './methods/GetChildrenMethods.js';
 import PoolManager from './methods/PoolManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -39,6 +40,7 @@ class DynamicText extends Canvas {
 
         this.setFixedSize(fixedWidth, fixedHeight);
         this.setPadding(GetValue(config, 'padding', 0));
+        this.setWrapConfig(GetValue(config, 'wrap', undefined));
 
         this.setText(GetValue(config, 'text', ''));
     }
@@ -68,8 +70,9 @@ class DynamicText extends Canvas {
 Object.assign(
     DynamicText.prototype,
     PaddingMethods,
-    ChildrenMethods,
-    TextMethods
+    AddChildMethods,
+    WrapMethods,
+    GetChildrenMethods
 );
 
 

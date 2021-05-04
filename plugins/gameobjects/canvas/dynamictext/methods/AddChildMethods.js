@@ -1,7 +1,5 @@
 import CharData from '../bob/char/Char.js';
 import ImageData from '../bob/image/Image.js';
-import RunWordWrap from './runwordwrap/RunWordWrap.js';
-import RunVerticalWrap from './runverticalwrap/RunVerticalWrap.js';
 
 export default {
     modifyTextStyle(style) {
@@ -69,13 +67,5 @@ export default {
         }
         this.children.push(bob);
         return this;
-    },
-
-    runWordWrap(config) {
-        return RunWordWrap.call(this, config);
-    },
-
-    runVerticalWrap(config) {
-        return RunVerticalWrap.call(this, config);
     },
 };

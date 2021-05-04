@@ -117,7 +117,9 @@ var txt = scene.add.rexDynamicText({
         y: 0
     },
 
-    text: ''
+    text: '',
+
+    wrap: undefined
 });
 ```
 
@@ -169,6 +171,7 @@ var txt = scene.add.rexDynamicText({
     - `style.x` : x-offset.
     - `style.y` : y-offset.
 - `text` : Content of text.
+- `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
 
 or
 
@@ -378,6 +381,14 @@ var result = txt.runWordWrap(prevResult);
 
 - `prevResult` : Result of previous word-wraping.
 - `result` : Current result of word-wraping.
+
+#### Default configuration of wrapping
+
+```javascript
+txt.setWrapConfig(config);
+```
+
+- `config` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
 
 ### Child
 

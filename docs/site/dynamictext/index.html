@@ -1195,6 +1195,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#default-configuration-of-wrapping" class="md-nav__link">
+    Default configuration of wrapping
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5677,6 +5684,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#default-configuration-of-wrapping" class="md-nav__link">
+    Default configuration of wrapping
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5854,7 +5868,9 @@
         <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">},</span>
 
-    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="nx">wrap</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5939,6 +5955,7 @@
 </ul>
 </li>
 <li><code>text</code> : Content of text.</li>
+<li><code>wrap</code> : Default configuration <a href="./#horizontal-wrap">Horizontal</a>/<a href="./#vertical-wrap">Vertical</a> wrapping.</li>
 </ul>
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexDynamicText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -6154,6 +6171,13 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <ul>
 <li><code>prevResult</code> : Result of previous word-wraping.</li>
 <li><code>result</code> : Current result of word-wraping.</li>
+</ul>
+<h4 id="default-configuration-of-wrapping">Default configuration of wrapping<a class="headerlink" href="#default-configuration-of-wrapping" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setWrapConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>config</code> : Default configuration <a href="./#horizontal-wrap">Horizontal</a>/<a href="./#vertical-wrap">Vertical</a> wrapping.</li>
 </ul>
 <h3 id="child">Child<a class="headerlink" href="#child" title="Permanent link">&para;</a></h3>
 <h4 id="general-properties">General properties<a class="headerlink" href="#general-properties" title="Permanent link">&para;</a></h4>
