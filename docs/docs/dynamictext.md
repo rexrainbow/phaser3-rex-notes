@@ -364,11 +364,23 @@ var result = txt.runVerticalWrap({
 ```javascript
 {
     children: [],
+    lines: [],
     isLastPage: false
 }
 ```
 
-- `children` : Active [character](dynamictext.md#character-data)/[image](dynamictext.md#image-data) data in this page.
+- `children` : [Character](dynamictext.md#character-data)/[Image](dynamictext.md#image-data) data in this page.
+- `lines` : Array of line data. A line data contains
+    ```javascript
+    {
+        children: [],
+        width: 0,     // Horizontal-wrapping
+        height: 0,    // Vertical-wrapping.        
+    }
+    ```
+    - `children` : [Character](dynamictext.md#character-data)/[Image](dynamictext.md#image-data) data in this line.
+    - `width` : Width of this line, in result of horizontal-wrapping.
+    - `height` : Height of this line, in result of vertical-wrapping.
 - `isLastPage` : 
     - `false` : Run `txt.runWordWrap(result)`/`txt.runVerticalWrap(result)` to get next page of word-wrapping result.
     - `true` : No remainder of characters.

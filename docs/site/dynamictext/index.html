@@ -6152,12 +6152,25 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <h4 id="result">Result<a class="headerlink" href="#result" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">lines</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">isLastPage</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <ul>
-<li><code>children</code> : Active <a href="./#character-data">character</a>/<a href="./#image-data">image</a> data in this page.</li>
+<li><code>children</code> : <a href="./#character-data">Character</a>/<a href="./#image-data">Image</a> data in this page.</li>
+<li><code>lines</code> : Array of line data. A line data contains
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>     <span class="c1">// Horizontal-wrapping</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1">// Vertical-wrapping.        </span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>children</code> : <a href="./#character-data">Character</a>/<a href="./#image-data">Image</a> data in this line.</li>
+<li><code>width</code> : Width of this line, in result of horizontal-wrapping.</li>
+<li><code>height</code> : Height of this line, in result of vertical-wrapping.</li>
+</ul>
+</li>
 <li><code>isLastPage</code> : <ul>
 <li><code>false</code> : Run <code>txt.runWordWrap(result)</code>/<code>txt.runVerticalWrap(result)</code> to get next page of word-wrapping result.</li>
 <li><code>true</code> : No remainder of characters.</li>
