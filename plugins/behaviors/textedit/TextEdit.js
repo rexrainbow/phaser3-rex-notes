@@ -67,7 +67,9 @@ class TextEdit {
 
         // Attach close event
         this.onClose = onCloseCallback;
-        this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+        if (GetValue(config, 'enterClose', true)) {
+            this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+        }
         // Attach pointerdown (outside of input-text) event, at next tick
         this.delayCall = this.scene.time.delayedCall(0, function () {
             this.scene.input.once('pointerdown', this.close, this);

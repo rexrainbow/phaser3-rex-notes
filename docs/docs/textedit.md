@@ -133,6 +133,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
         function (textObject) {
         }
         ```
+    - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
     - `config.selectAll` : Set `true` to select all text.
     - [More configuration parameters](textedit.md#add-text-object)...
 - `onClose` : Callback invoked when input text is closed.
@@ -147,7 +148,7 @@ Create a text editor ([input element](textedit.md)) above text object.
 - Text object will be invisible when text editor is opened.
 - Store reference of text editor at `textObject._editor`.
 - Text editor will be closed when 
-    - Press enter key, or
+    - Press enter key and `enterClose` is set, or
     - Touch outside of editor, or
     - Open another text editor, or
     - Call `editor.close()`

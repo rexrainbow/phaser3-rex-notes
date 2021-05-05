@@ -33,7 +33,8 @@ class Demo extends Phaser.Scene {
                     onClose: function (textObject) {
                         console.log('Close text editor');
                     },
-                    selectAll: true
+                    selectAll: true,
+                    // enterClose: false
                 }
                 this.plugins.get('rexTextEdit').edit(printText, config);
             }, this);

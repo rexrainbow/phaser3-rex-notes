@@ -5733,6 +5733,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
 <li><code>config.selectAll</code> : Set <code>true</code> to select all text.</li>
 <li><a href="./#add-text-object">More configuration parameters</a>...</li>
 </ul>
@@ -5748,7 +5749,7 @@
 <li>Text object will be invisible when text editor is opened.</li>
 <li>Store reference of text editor at <code>textObject._editor</code>.</li>
 <li>Text editor will be closed when <ul>
-<li>Press enter key, or</li>
+<li>Press enter key and <code>enterClose</code> is set, or</li>
 <li>Touch outside of editor, or</li>
 <li>Open another text editor, or</li>
 <li>Call <code>editor.close()</code></li>
