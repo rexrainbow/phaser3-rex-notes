@@ -9,7 +9,7 @@ Iso-triangle shape, built-in game object of phaser.
 ### Create shape object
 
 ```javascript
-var isoTriangle = scene.add.isotriangle(x, y, size, height, reversed, fillTop, fillLeft, fillRight);
+var isoTriangle = scene.add.isotriangle(x, y, width, height, reversed, fillTop, fillLeft, fillRight);
 ```
 
 ### Custom class
@@ -17,8 +17,8 @@ var isoTriangle = scene.add.isotriangle(x, y, size, height, reversed, fillTop, f
 - Define class
     ```javascript
     class MyIsoTriangle extends Phaser.GameObjects.IsoTriangle {
-        constructor(scene, x, y, size, height, reversed, fillTop, fillLeft, fillRight) {
-            super(scene, x, y, size, height, reversed, fillTop, fillLeft, fillRight);
+        constructor(scene, x, y, width, height, reversed, fillTop, fillLeft, fillRight) {
+            super(scene, x, y, width, height, reversed, fillTop, fillLeft, fillRight);
             // ...
             scene.add.existing(this);
         }
@@ -32,7 +32,7 @@ var isoTriangle = scene.add.isotriangle(x, y, size, height, reversed, fillTop, f
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var isoTriangle = new MyIsoTriangle(scene, x, y, size, height, reversed, fillTop, fillLeft, fillRight);
+    var isoTriangle = new MyIsoTriangle(scene, x, y, width, height, reversed, fillTop, fillLeft, fillRight);
     ```
 
 ### Set color

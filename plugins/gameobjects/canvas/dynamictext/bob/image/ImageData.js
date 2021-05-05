@@ -2,7 +2,7 @@ import Base from '../Base.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Image extends Base {
+class ImageData extends Base {
     constructor(
         parent,
         key, frame,
@@ -138,4 +138,4 @@ class Image extends Base {
 
 }
 
-export default Image
+export default ImageData;

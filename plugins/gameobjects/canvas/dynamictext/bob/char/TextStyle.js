@@ -15,7 +15,13 @@ class TextStyle {
             fontFamily: this.fontFamily,
             color: this.color,
             stroke: this.stroke,
-            strokeThickness: this.strokeThickness
+            strokeThickness: this.strokeThickness,
+            shaodwColor: this.shadowColor,
+            shadowBlur: this.shadowBlur,
+            shadowOffsetX: this.shadowOffsetX,
+            shadowOffsetY: this.shadowOffsetY,
+            x: this.x,
+            y: this.y,
         }
     }
 
@@ -25,8 +31,20 @@ class TextStyle {
         this.setFontSize(GetValue(o, 'fontSize', '16px'));
         this.setFontFamily(GetValue(o, 'fontFamily', 'Courier'));
         this.setColor(GetValue(o, 'color', '#fff'));
-        this.setStrokeStyle(GetValue(o, 'stroke', '#fff'), GetValue(o, 'strokeThickness', 0));
-        this.setOffset(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
+        this.setStrokeStyle(
+            GetValue(o, 'stroke', '#fff'),
+            GetValue(o, 'strokeThickness', 0)
+        );
+        this.setShadow(
+            GetValue(o, 'shadowColor', null),
+            GetValue(o, 'shadowOffsetX', 0),
+            GetValue(o, 'shadowOffsetY', 0),
+            GetValue(o, 'shadowBlur', 0)
+        );
+        this.setOffset(
+            GetValue(o, 'x', 0),
+            GetValue(o, 'y', 0)
+        );
     }
 
     modify(o) {
@@ -36,6 +54,9 @@ class TextStyle {
         if (o.hasOwnProperty('italic')) {
             this.setItalic(o.italic);
         }
+        if (o.hasOwnProperty('fontSize')) {
+            this.setFontSize(o.fontSize);
+        }
         if (o.hasOwnProperty('fontFamily')) {
             this.setFontFamily(o.fontFamily);
         }
@@ -43,18 +64,26 @@ class TextStyle {
             this.setColor(o.color);
         }
         if (o.hasOwnProperty('stroke') || o.hasOwnProperty('strokeThickness')) {
-            var stroke = o.hasOwnProperty('stroke') ? o.stroke : this.stroke;
-            var strokeThickness = o.hasOwnProperty('strokeThickness') ? o.strokeThickness : this.strokeThickness;
-            this.setStrokeStyle(stroke, strokeThickness);
+            this.setStrokeStyle(
+                GetProperty('stroke', o, this),
+                GetProperty('strokeThickness', o, this)
+            );
         }
-        if (o.hasOwnProperty('fontSize')) {
-            this.setFontSize(o.fontSize);
+
+        if (o.hasOwnProperty('shadowColor') || o.hasOwnProperty('shadowBlur') || o.hasOwnProperty('shadowOffsetX') || o.hasOwnProperty('shadowOffsetY')) {
+            this.setShadow(
+                GetProperty('shadowColor', o, this),
+                GetProperty('shadowOffsetX', o, this),
+                GetProperty('shadowOffsetY', o, this),
+                GetProperty('shadowBlur', o, this),
+            );
         }
 
         if (o.hasOwnProperty('x') || o.hasOwnProperty('y')) {
-            var x = o.hasOwnProperty('x') ? o.x : 0;
-            var y = o.hasOwnProperty('y') ? o.y : 0;
-            this.setOffset(x, y);
+            this.setOffset(
+                GetProperty('x', o, this),
+                GetProperty('y', o, this)
+            );
         }
         return this;
     }
@@ -126,6 +155,20 @@ class TextStyle {
         return this;
     }
 
+    setShadow(color, offsetX, offsetY, blur) {
+        this.shadowColor = GetStyle(color);
+        this.shadowOffsetX = offsetX;
+        this.shadowOffsetY = offsetY;
+        this.shaodwBlur = blur;
+        return this;
+    }
+
+    setOffset(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
     syncFont(context) {
         context.font = this.font;
         return this;
@@ -143,15 +186,32 @@ class TextStyle {
         return this;
     }
 
+    syncShadow(context) {
+        if (context.shadowColor != null) {
+            context.shadowColor = this.shadowColor;
+            context.shadowOffsetX = this.shadowOffsetX;
+            context.shadowOffsetY = this.shadowOffsetY;
+            context.shadowBlur = this.shadowBlur;
+        } else {
+            context.shadowColor = 0;
+            context.shadowOffsetX = 0;
+            context.shadowOffsetY = 0;
+            context.shadowBlur = 0;
+        }
+    }
+
     getTextMetrics(context, text) {
         this.syncFont(context).syncStyle(context);
         return context.measureText(text);
     }
 
-    setOffset(x, y) {
-        this.x = x;
-        this.y = y;
-        return this;
+}
+
+var GetProperty = function (name, config, defaultConfig) {
+    if (config.hasOwnProperty(name)) {
+        return config[name];
+    } else {
+        return defaultConfig[name];
     }
 }
 

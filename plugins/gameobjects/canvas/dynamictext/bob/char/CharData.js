@@ -1,7 +1,7 @@
 import Base from '../Base.js';
 import TextStyle from './TextStyle.js';
 
-class Char extends Base {
+class CharData extends Base {
     constructor(
         parent,
         text,
@@ -84,16 +84,21 @@ class Char extends Base {
     }
 
     drawContent() {
-        var context = this.context;
         var textStyle = this.style;
+        if ((textStyle.color == null) && (textStyle.stroke == null)) {
+            return;
+        }
 
+        var context = this.context;
         textStyle.syncFont(context).syncStyle(context);
 
         if (textStyle.stroke && textStyle.strokeThickness) {
+            textStyle.syncShadow(context);
             context.strokeText(this.text, 0, 0);
         }
 
         if (textStyle.color) {
+            textStyle.syncShadow(context);
             context.fillText(this.text, 0, 0);
         }
     }
@@ -107,4 +112,4 @@ class Char extends Base {
     }
 }
 
-export default Char;
+export default CharData;

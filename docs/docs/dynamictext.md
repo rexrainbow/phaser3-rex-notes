@@ -168,6 +168,11 @@ var txt = scene.add.rexDynamicText({
     - `style.color` : Fill color
     - `style.stroke` : Stroke color
     - `style.strokeThickness` : Line width of stroke.
+    - `style.shadowColor` : Shadow color.
+        - `null` : No shadow.
+    - `style.shadowOffsetX` : OffsetX of shadow.
+    - `style.shadowOffsetY` : OffsetY of shadow.
+    - `style.shadowBlur` : Blur of shadow.
     - `style.x` : x-offset.
     - `style.y` : y-offset.
 - `text` : Content of text.
@@ -246,6 +251,10 @@ txt.appendText(text,
         // color: '#fff',
         // stroke: '#fff',
         // strokeThickness: 0,
+        // shadowColor: null,
+        // shadowOffsetX: 0,
+        // shadowOffsetY: 0,
+        // shadowBlur: 0,
         // x: 0,
         // y: 0
     }

@@ -1,5 +1,5 @@
-import CharData from '../bob/char/Char.js';
-import ImageData from '../bob/image/Image.js';
+import CharData from '../bob/char/CharData.js';
+import ImageData from '../bob/image/ImageData.js';
 
 export default {
     modifyTextStyle(style) {
