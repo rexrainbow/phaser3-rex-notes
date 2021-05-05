@@ -15,7 +15,7 @@ var RunVerticalWrap = function (config) {
     var maxLines;
     if (lineWidth === undefined) {
         // Calculate lineWidth via maxLines, in fixedWidth mode
-        maxLines = GetValue(config, 'maxLines', 1);
+        maxLines = GetValue(config, 'maxLines', 0);
         if (this.fixedWidth > 0) {
             var innerWidth = this.fixedWidth - this.padding.left - this.padding.right - extraLeftPadding - extraRightPadding;
             lineWidth = innerWidth / maxLines;
