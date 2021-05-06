@@ -185,6 +185,26 @@ class Base {
         return this;
     }
 
+    // TODO: Also set text-setyle/image-style in CharData/ImageData
+    // TODO: Accept function to return vary value per bob
+    modifyPorperties(o) {
+        if (o.hasOwnProperty('alpha')) {
+            this.setAlpha(o.alpha);
+        }
+        if (o.hasOwnProperty('rotation')) {
+            this.setRotation(o.rotation);
+        } else if (o.hasOwnProperty('angle')) {
+            this.setAngle(o.angle);
+        }
+        if (o.hasOwnProperty('scaleX')) {
+            this.setScaleX(o.scaleX);
+        }
+        if (o.hasOwnProperty('scaleY')) {
+            this.setScaleY(o.scaleY);
+        }
+        return this;
+    }
+
     setOrigin(x) {
         this.originX = x;
         return this;

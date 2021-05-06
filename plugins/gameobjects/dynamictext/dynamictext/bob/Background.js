@@ -1,6 +1,6 @@
 import Base from './Base.js';
 import GetStyle from '../../../../utils/canvas/GetStyle.js';
-import DrawRoundRectangleBackground from '../../utils/DrawRoundRectangleBackground.js';
+import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

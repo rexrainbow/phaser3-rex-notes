@@ -1,6 +1,6 @@
-import Factory from './gameobjects/canvas/dynamictext/Factory';
-import Creator from './gameobjects/canvas/dynamictext/Creator.js';
-import DynamicText from './gameobjects/canvas/dynamictext/DynamicText.js';
+import Factory from './gameobjects/dynamictext/dynamictext/Factory';
+import Creator from './gameobjects/dynamictext/dynamictext/Creator.js';
+import DynamicText from './gameobjects/dynamictext/dynamictext/DynamicText.js';
 import SetValue from './utils/object/SetValue.js';
 
 class DynamicTextPlugin extends Phaser.Plugins.BasePlugin {

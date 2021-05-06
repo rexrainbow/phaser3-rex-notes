@@ -24,9 +24,9 @@ export default {
         return this;
     },
 
-    appendText(text, style) {
-        if (style) {
-            this.modifyTextStyle(style);
+    appendText(text, properties) {
+        if (properties) {
+            this.modifyTextStyle(properties);
         }
         for (var i = 0, cnt = text.length; i < cnt; i++) {
             var char = text.charAt(i);
@@ -44,6 +44,7 @@ export default {
                     .modifyStyle(this.textStyle)
                     .setText(char);
             }
+            bob.modifyPorperties(properties);
             this.children.push(bob);
         }
         return this;

@@ -1,4 +1,4 @@
-import Canvas from '../canvas/Canvas.js';
+import Canvas from '../../canvas/canvas/Canvas.js';
 import Background from './bob/Background.js';
 import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';

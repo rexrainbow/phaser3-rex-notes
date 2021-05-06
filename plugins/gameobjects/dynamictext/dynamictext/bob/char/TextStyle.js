@@ -1,4 +1,5 @@
 import GetStyle from '../../../../../utils/canvas/GetStyle.js';
+import GetProperty from '../utils/GetProperty.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -205,14 +206,6 @@ class TextStyle {
         return context.measureText(text);
     }
 
-}
-
-var GetProperty = function (name, config, defaultConfig) {
-    if (config.hasOwnProperty(name)) {
-        return config[name];
-    } else {
-        return defaultConfig[name];
-    }
 }
 
 export default TextStyle;
