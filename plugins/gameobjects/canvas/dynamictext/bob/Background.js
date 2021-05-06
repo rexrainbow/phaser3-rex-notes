@@ -114,11 +114,7 @@ class Background extends Base {
         return this;
     }
 
-    draw() {
-        if (!this.visible) {
-            return this;
-        }
-
+    drawContent() {
         DrawRoundRectangleBackground(
             this.parent,
             this.color,
@@ -129,8 +125,6 @@ class Background extends Base {
             this.horizontalGradient,
             this.cornerIteration
         );
-
-        return this;
     }
 }
 

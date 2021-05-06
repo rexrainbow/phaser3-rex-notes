@@ -15,10 +15,6 @@ class ImageData extends Base {
         this.setStyle(style);
     }
 
-    get scene() {
-        return this.parent.scene;
-    }
-
     get frameWidth() {
         return (this.frameObj) ? this.frameObj.cutWidth : 0;
     }

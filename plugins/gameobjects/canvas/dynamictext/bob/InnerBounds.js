@@ -84,11 +84,7 @@ class InnerBounds extends Base {
         return this;
     }
 
-    draw() {
-        if (!this.visible) {
-            return this;
-        }
-
+    drawContent() {
         var padding = this.parent.padding;
         var x = padding.left,
             y = padding.top,
@@ -120,8 +116,6 @@ class InnerBounds extends Base {
             context.lineWidth = this.strokeThickness;
             context.strokeRect(x, y, width, height);
         }
-
-        return this;
     }
 }
 

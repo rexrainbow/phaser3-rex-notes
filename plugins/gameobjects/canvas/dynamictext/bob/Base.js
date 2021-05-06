@@ -28,6 +28,10 @@ class Base {
         return this;
     }
 
+    get scene() {
+        return this.parent.scene;
+    }
+
     get canvas() {
         return (this.parent) ? this.parent.canvas : null;
     }
