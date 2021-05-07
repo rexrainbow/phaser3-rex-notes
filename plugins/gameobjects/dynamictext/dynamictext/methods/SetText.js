@@ -5,14 +5,10 @@ var SetText = function (text, style) {
         text = '';
     }
 
-    var childrenLengthSave = this.children.length;
-
     this.removeChildren();
     AppendText.call(this, text, style);  // this.appendText might be override
 
-    if (this.children.length !== childrenLengthSave) {
-        this.dirty = true;
-    }
+    this.dirty = true;
     return this;
 };
 

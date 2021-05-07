@@ -1,10 +1,13 @@
 var OnParseBoldTag = function (dynamicText, parser) {
     parser
+        .on('start', function () {
+            dynamicText.textStyle.setBold(false);
+        })
         .on('+b', function () {
-            dynamicText.modifyTextStyle({ bold: true });
+            dynamicText.textStyle.setBold(true);
         })
         .on('-b', function () {
-            dynamicText.modifyTextStyle({ bold: false });
+            dynamicText.textStyle.setBold(false);
         })
 }
 

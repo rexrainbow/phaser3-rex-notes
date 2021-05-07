@@ -80,12 +80,13 @@ class TextStyle {
             );
         }
 
-        if (o.hasOwnProperty('offsetX') || o.hasOwnProperty('offsetY')) {
-            this.setOffset(
-                GetProperty('offsetX', o, this),
-                GetProperty('offsetY', o, this)
-            );
+        if (o.hasOwnProperty('offsetX')) {
+            this.setOffsetX(o.offsetX);
         }
+        if (o.hasOwnProperty('offsetY')) {
+            this.setOffsetY(o.offsetY);
+        }
+
         return this;
     }
 
@@ -145,7 +146,9 @@ class TextStyle {
 
     setStrokeStyle(stroke, strokeThickness) {
         this.stroke = GetStyle(stroke);
-        this.strokeThickness = strokeThickness;
+        if (strokeThickness !== undefined) {
+            this.strokeThickness = strokeThickness;
+        }
         return this;
     }
 
@@ -158,6 +161,16 @@ class TextStyle {
         this.shadowOffsetX = offsetX;
         this.shadowOffsetY = offsetY;
         this.shaodwBlur = blur;
+        return this;
+    }
+
+    setOffsetX(offsetX) {
+        this.offsetX = offsetX;
+        return this;
+    }
+
+    setOffsetY(offsetY) {
+        this.offsetY = offsetY;
         return this;
     }
 

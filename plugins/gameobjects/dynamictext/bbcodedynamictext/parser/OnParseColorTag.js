@@ -1,11 +1,11 @@
 var OnParseColorTag = function (dynamicText, parser) {
     parser
         .on('+color', function (color) {
-            dynamicText.modifyTextStyle({ color: color });
+            dynamicText.textStyle.setColor(color);
         })
         .on('-color', function () {
             var color = dynamicText.defaultTextStyle.color;
-            dynamicText.modifyTextStyle({ color: color });
+            dynamicText.textStyle.setColor(color);
         })
 }
 

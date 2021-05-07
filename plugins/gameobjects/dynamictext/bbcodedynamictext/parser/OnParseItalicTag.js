@@ -1,10 +1,13 @@
 var OnParseItalicTag = function (dynamicText, parser) {
     parser
+        .on('start', function () {
+            dynamicText.textStyle.setItalic(false);
+        })
         .on('+i', function () {
-            dynamicText.modifyTextStyle({ italic: true });
+            dynamicText.textStyle.setItalic(true);
         })
         .on('-i', function () {
-            dynamicText.modifyTextStyle({ italic: false });
+            dynamicText.textStyle.setItalic(false);
         })
 }
 

@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Phaser[/b] is a [i][stroke=red]fast[/stroke][/i], [size=24]free[/size], and fun open source HTML5 game framework
+[color=#FFF8DC][b]Phaser[/b] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [size=24]free[/size], a[y=-8]n[y=-16]d[/y] fun open source HTML5 game framework
 [color=#008B8B]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
 [color=#FF7F50]Games can be compiled to iOS, Android and native apps by using 3rd party tools
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
@@ -37,6 +37,7 @@ class Demo extends Phaser.Scene {
 
                 style: {
                     fontSize: '16px',
+                    stroke: 'green',
                     strokeThickness: 3
                 },
 
