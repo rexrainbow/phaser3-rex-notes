@@ -104,8 +104,8 @@ var parser = scene.plugins.get('rexBracketParser').add({
 
 Assume that left-delimiter and right-delimiter is `'<>'`
 
-- Tag-start : `'<TAG>'`
-    - Tag-start with a single value : `'<TAG=value>'`
+- Start-tag : `'<TAG>'`
+    - Start-tag with a single value : `'<TAG=value>'`
         - `value` : If `valueConvert` is `true`,
             - Number
             - Boolean
@@ -114,8 +114,8 @@ Assume that left-delimiter and right-delimiter is `'<>'`
                 - `'a'-'z'`, `'A'-'Z'`,
                 - String mix with `0-9`
                 - `'#'`, `'-'`, `'.'`
-    - Tag-start with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
-- Tag-end : `'<\TAG>'`
+    - Start-tag with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
+- End-tag : `'<\TAG>'`
 - Content : Any string outside of tag-start, or tag-end.
 
 ### Start parsing
@@ -148,8 +148,8 @@ parser.skipEvent();
 
 When getting a tag-start, or a tag-end event, parser will emitts 
 
-- Tag-start : `'+TAG'`, then `'+'`
-- Tag-end : `'-TAG'`, then `'-'`
+- Start-tag : `'+TAG'`, then `'+'`
+- End-tag : `'-TAG'`, then `'-'`
 
 Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` event.
 

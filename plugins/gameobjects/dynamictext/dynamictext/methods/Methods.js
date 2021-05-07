@@ -16,7 +16,7 @@ import GetActiveChildren from './GetActiveChildren.js';
 export default {
     setPadding: SetPadding,
     getPadding: GetPadding,
-    sodifyTextStyle: ModifyTextStyle,
+    modifyTextStyle: ModifyTextStyle,
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,

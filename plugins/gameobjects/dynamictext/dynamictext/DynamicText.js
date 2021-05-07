@@ -3,7 +3,7 @@ import Background from './bob/Background.js';
 import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
 import Methods from './methods/Methods';
-import PoolManager from './methods/utils/PoolManager.js';
+import PoolManager from './PoolManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -25,7 +25,7 @@ class DynamicText extends Canvas {
         var width = (fixedWidth === 0) ? 1 : fixedWidth;
         var height = (fixedHeight === 0) ? 1 : fixedHeight;
         super(scene, x, y, width, height);
-        this.type = 'rexDynamicCanvasText';
+        this.type = 'rexDynamicText';
         this.autoRound = true;
         this.padding = {};
         this.textStyle = new TextStyle(GetValue(config, 'style', undefined));
@@ -39,7 +39,10 @@ class DynamicText extends Canvas {
         this.setPadding(GetValue(config, 'padding', 0));
         this.setWrapConfig(GetValue(config, 'wrap', undefined));
 
-        this.setText(GetValue(config, 'text', ''));
+        var text = GetValue(config, 'text', undefined);
+        if (text) {
+            this.setText(text);
+        }
     }
 
     setFixedSize(width, height) {
