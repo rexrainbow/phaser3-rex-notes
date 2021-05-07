@@ -1,16 +1,21 @@
 var OnParseStrokeColorTag = function (dynamicText, parser) {
+    var defaultStroke;
     parser
         .on('start', function () {
-            dynamicText.textStyle.setStrokeStyle(false);
+            defaultStroke = dynamicText.textStyle.stroke;
+            dynamicText.textStyle.setStrokeStyle(null);
         })
         .on('+stroke', function (color) {
             if (color === undefined) {
-                color = dynamicText.defaultTextStyle.stroke;
+                color = defaultStroke;
             }
             dynamicText.textStyle.setStrokeStyle(color);
         })
         .on('-stroke', function () {
             dynamicText.textStyle.setStrokeStyle(null);
+        })
+        .on('complete', function () {
+            dynamicText.textStyle.setStrokeStyle(defaultStroke);
         })
 }
 

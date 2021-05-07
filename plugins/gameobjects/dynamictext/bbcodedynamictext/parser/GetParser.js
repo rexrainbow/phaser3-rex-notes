@@ -5,13 +5,14 @@ import ParseBoldTag from './OnParseBoldTag.js';
 import ParseItalicTag from './OnParseItalicTag.js';
 import ParseFontSizeTag from './OnParseFontSizeTag.js';
 import ParseOffsetYTag from './OnParseOffsetYTag.js';
+import ParseShadowColorTag from './OnParseShadowColorTag.js';
 import ParseContent from './OnParseContent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ParseCallbacks = [
     ParseColorTag, ParseStrokeColorTag,
     ParseBoldTag, ParseItalicTag,
-    ParseFontSizeTag, ParseOffsetYTag,
+    ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag,
     ParseContent
 ];
 var GetParser = function (dynamicText, config) {

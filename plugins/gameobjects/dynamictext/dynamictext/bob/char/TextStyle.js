@@ -71,13 +71,19 @@ class TextStyle {
             );
         }
 
-        if (o.hasOwnProperty('shadowColor') || o.hasOwnProperty('shadowBlur') || o.hasOwnProperty('shadowOffsetX') || o.hasOwnProperty('shadowOffsetY')) {
-            this.setShadow(
-                GetProperty('shadowColor', o, this),
+        if (o.hasOwnProperty('shadowColor')) {
+            this.setShadowColor(o.shadowColor);
+        }
+
+        if (o.hasOwnProperty('shadowOffsetX') || o.hasOwnProperty('shadowOffsetY')) {
+            this.setShadowOffset(
                 GetProperty('shadowOffsetX', o, this),
                 GetProperty('shadowOffsetY', o, this),
-                GetProperty('shadowBlur', o, this),
             );
+        }
+
+        if (o.hasOwnProperty('shadowBlur')) {
+            this.setShadowBlur(o.shaodwBlur);
         }
 
         if (o.hasOwnProperty('offsetX')) {
@@ -152,8 +158,29 @@ class TextStyle {
         return this;
     }
 
+    setStrokeThickness(strokeThickness) {
+        this.strokeThickness = strokeThickness;
+        return this;
+    }
+
     get hasStroke() {
         return (this.stroke != null) && (this.strokeThickness > 0);
+    }
+
+    setShadowColor(color) {
+        this.shadowColor = GetStyle(color);
+        return this;
+    }
+
+    setShadowOffset(offsetX, offsetY) {
+        this.shadowOffsetX = offsetX;
+        this.shadowOffsetY = offsetY;
+        return this;
+    }
+
+    setShadowBlur(blur) {
+        this.shaodwBlur = blur;
+        return this;
     }
 
     setShadow(color, offsetX, offsetY, blur) {
@@ -163,6 +190,7 @@ class TextStyle {
         this.shaodwBlur = blur;
         return this;
     }
+
 
     setOffsetX(offsetX) {
         this.offsetX = offsetX;
