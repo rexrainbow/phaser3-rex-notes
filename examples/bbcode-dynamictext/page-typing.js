@@ -28,13 +28,21 @@ class Demo extends Phaser.Scene {
                     stroke: 'white',
                     cornerRadius: 20
                 },
+
                 innerBounds: {
                     stroke: '#A52A2A'
                 },
+
                 padding: 20,
+
                 style: {
                     fontSize: '16px',
                     strokeThickness: 3
+                },
+
+                wrap: {
+                    maxLines: 5,
+                    padding: { bottom: 10 },
                 },
 
                 text: content
@@ -43,10 +51,8 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 580, '');
 
-        TypingNextPage(text, {
-            maxLines: 5,         // Show 5 lines per page
-            padding: { bottom: 10 },
-        });
+        // TODO: Don't use tween to type characters
+        TypingNextPage(text);
     }
 
     update() { }
