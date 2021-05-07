@@ -1,5 +1,5 @@
-import SetContent from './SetContent.js';
+import SetText from './SetText.js';
 
 export default {
-    setContent: SetContent
+    setText: SetText
 }

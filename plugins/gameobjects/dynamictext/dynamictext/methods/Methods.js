@@ -1,6 +1,7 @@
 import SetPadding from './SetPadding.js';
 import GetPadding from './GetPadding.js';
 import ModifyTextStyle from './ModifyTextStyle.js';
+import RemoveChildren from './RemoveChildren.js'
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import AppendImage from './AppendImage.js';
@@ -17,6 +18,7 @@ export default {
     setPadding: SetPadding,
     getPadding: GetPadding,
     modifyTextStyle: ModifyTextStyle,
+    removeChildren: RemoveChildren,
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,

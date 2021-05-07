@@ -1,3 +1,5 @@
+import AppendText from './AppendText.js';
+
 var SetText = function (text, style) {
     if (text === undefined) {
         text = '';
@@ -5,10 +7,8 @@ var SetText = function (text, style) {
 
     var childrenLengthSave = this.children.length;
 
-    this.poolManager.freeMultiple(this.children);
-    this.children.length = 0;
-    this.lastAppendedChildren.length = 0;
-    this.appendText(text, style);
+    this.removeChildren();
+    AppendText.call(this, text, style);  // this.appendText might be override
 
     if (this.children.length !== childrenLengthSave) {
         this.dirty = true;

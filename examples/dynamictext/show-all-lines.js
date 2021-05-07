@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
                 },
                 padding: 20,
                 style: {
-                    fontSize: '20px'
+                    fontSize: '16px',
                 },
             }
         )

@@ -24,7 +24,7 @@ class BBCodeDynamicText extends DynamicText {
         this.parser = GetParser(this, config);
 
         if (content) {
-            this.setContent(content);
+            this.setText(content);
         }
     }
 }

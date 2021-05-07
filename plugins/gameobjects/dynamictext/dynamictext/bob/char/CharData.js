@@ -100,19 +100,22 @@ class CharData extends Base {
 
     drawContent() {
         var textStyle = this.style;
-        if ((textStyle.color == null) && (textStyle.stroke == null)) {
+        var hasFill = textStyle.hasFill,
+            hasStroke = textStyle.hasStroke;
+
+        if (!hasFill && !hasStroke) {
             return;
         }
 
         var context = this.context;
         textStyle.syncFont(context).syncStyle(context);
 
-        if (textStyle.stroke && textStyle.strokeThickness) {
+        if (hasStroke) {
             textStyle.syncShadow(context);
             context.strokeText(this.text, 0, 0);
         }
 
-        if (textStyle.color) {
+        if (hasFill) {
             textStyle.syncShadow(context);
             context.fillText(this.text, 0, 0);
         }

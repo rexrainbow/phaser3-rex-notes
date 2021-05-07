@@ -33,7 +33,7 @@ class TextStyle {
         this.setFontFamily(GetValue(o, 'fontFamily', 'Courier'));
         this.setColor(GetValue(o, 'color', '#fff'));
         this.setStrokeStyle(
-            GetValue(o, 'stroke', '#fff'),
+            GetValue(o, 'stroke', null),
             GetValue(o, 'strokeThickness', 0)
         );
         this.setShadow(
@@ -117,18 +117,10 @@ class TextStyle {
         }
     }
 
-    get fontSize() {
-        return this._fontSize;
-    }
-
-    set fontSize(value) {
-        if (typeof (value) === 'number') {
-            value = `${value}px`;
-        }
-        this._fontSize = value;
-    }
-
     setFontSize(fontSize) {
+        if (typeof (fontSize) === 'number') {
+            fontSize = `${fontSize}px`;
+        }
         this.fontSize = fontSize;
         return this;
     }
@@ -147,13 +139,18 @@ class TextStyle {
         return this;
     }
 
+    get hasFill() {
+        return this.color != null;
+    }
+
     setStrokeStyle(stroke, strokeThickness) {
-        if (stroke == null) {
-            strokeThickness = 0;
-        }
         this.stroke = GetStyle(stroke);
         this.strokeThickness = strokeThickness;
         return this;
+    }
+
+    get hasStroke() {
+        return (this.stroke != null) && (this.strokeThickness > 0);
     }
 
     setShadow(color, offsetX, offsetY, blur) {
@@ -178,12 +175,15 @@ class TextStyle {
     syncStyle(context) {
         context.textBaseline = 'alphabetic';
 
-        context.fillStyle = this.color;
-        context.strokeStyle = this.stroke;
+        var hasFill = this.hasFill;
+        var hasStroke = this.hasStroke;
+        context.fillStyle = (hasFill) ? this.color : '#000';
 
-        context.lineWidth = this.strokeThickness;
+        context.strokeStyle = (hasStroke) ? this.stroke : '#000';
+        context.lineWidth = (hasStroke) ? this.strokeThickness : 0;
         context.lineCap = 'round';
         context.lineJoin = 'round';
+
         return this;
     }
 

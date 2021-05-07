@@ -1,8 +1,8 @@
 import CharData from '../bob/char/CharData.js';
 
-var AppendText = function (text, properties) {
-    if (properties) {
-        this.textStyle.modify(properties);
+var AppendText = function (text, style) {
+    if (style) {
+        this.textStyle.modify(style);
     }
 
     this.lastAppendedChildren.length = 0;
