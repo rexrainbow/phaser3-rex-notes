@@ -1,5 +1,6 @@
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base {
     constructor(parent, type) {
@@ -12,15 +13,14 @@ class Base {
             .setAlpha(1)
             .setPosition(0, 0)
             .setRotation(0)
+            .setScale(1, 1)
             .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
 
         this.originX = 0;
-        this.xOffset = 0;
-        this.yOffset = 0;
-        this.width = 0;
-        this.height = 0;
+        this.offsetX = 0;
+        this.offsetY = 0;
     }
 
     setParent(parent) {
@@ -105,6 +105,11 @@ class Base {
         this._x = value;
     }
 
+    setX(x) {
+        this.x = x;
+        return this;
+    }
+
     get y() {
         return this._y;
     }
@@ -112,6 +117,11 @@ class Base {
     set y(value) {
         this.setDirty(this._y != value);
         this._y = value;
+    }
+
+    setY(y) {
+        this.y = y;
+        return this;
     }
 
     setPosition(x, y) {
@@ -161,6 +171,26 @@ class Base {
         return this;
     }
 
+    // Override
+    get width() {
+        return 0;
+    }
+
+    // Override
+    set width(value) { }
+
+    setWidth(width, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+            keepAspectRatio = false;
+        }
+        this.width = width;
+
+        if (keepAspectRatio) {
+            this.scaleY = this.scaleX;
+        }
+        return this;
+    }
+
     get scaleY() {
         return this._scaleY;
     }
@@ -175,6 +205,26 @@ class Base {
         return this;
     }
 
+    // Override
+    get height() {
+        return 0;
+    }
+
+    // Override
+    set height(value) { }
+
+    setHeight(height, keepAspectRatio) {
+        if (keepAspectRatio === undefined) {
+            keepAspectRatio = false;
+        }
+        this.height = height;
+
+        if (keepAspectRatio) {
+            this.scaleX = this.scaleY;
+        }
+        return this;
+    }
+
     setScale(scaleX, scaleY) {
         if (scaleY === undefined) {
             scaleY = scaleX;
@@ -185,22 +235,53 @@ class Base {
         return this;
     }
 
-    // TODO: Also set text-setyle/image-style in CharData/ImageData
-    // TODO: Accept function to return vary value per bob
     modifyPorperties(o) {
-        if (o.hasOwnProperty('alpha')) {
-            this.setAlpha(o.alpha);
+        if (!o) {
+            return this;
         }
+
+        if (o.hasOwnProperty('x')) {
+            this.setX(o.x);
+        }
+        if (o.hasOwnProperty('y')) {
+            this.setY(o.y);
+        }
+
         if (o.hasOwnProperty('rotation')) {
             this.setRotation(o.rotation);
         } else if (o.hasOwnProperty('angle')) {
             this.setAngle(o.angle);
         }
-        if (o.hasOwnProperty('scaleX')) {
-            this.setScaleX(o.scaleX);
+
+        if (o.hasOwnProperty('alpha')) {
+            this.setAlpha(o.alpha);
         }
-        if (o.hasOwnProperty('scaleY')) {
-            this.setScaleY(o.scaleY);
+
+        // ScaleX, ScaleY
+        var width = GetValue(o, 'width', undefined);
+        var height = GetValue(o, 'height', undefined);
+        var scaleX = GetValue(o, 'scaleX', undefined);
+        var scaleY = GetValue(o, 'scaleY', undefined);
+
+        if (width !== undefined) {
+            if ((height === undefined) && (scaleY === undefined)) {
+                this.setWidth(width, true);
+            } else {
+                this.setWidth(width);
+            }
+        }
+        if (height !== undefined) {
+            if ((width === undefined) && (scaleX === undefined)) {
+                this.setHeight(height, true);
+            } else {
+                this.setHeight(height);
+            }
+        }
+        if ((scaleX !== undefined) && (width === undefined)) {
+            this.setScaleX(scaleX);
+        }
+        if ((scaleY !== undefined) && (height === undefined)) {
+            this.setScaleY(scaleY);
         }
         return this;
     }
@@ -244,8 +325,8 @@ class Base {
         var context = this.context;
         context.save();
 
-        var x = this.x + this.xOffset - (this.originX * this.width),
-            y = this.y + this.yOffset;
+        var x = this.x + this.offsetX - (this.originX * this.width),
+            y = this.y + this.offsetY;
         if (this.autoRound) {
             x = Math.round(x);
             y = Math.round(y);

@@ -113,8 +113,8 @@ var txt = scene.add.rexDynamicText({
         color: '#fff',
         stroke: '#fff',
         strokeThickness: 0,
-        x: 0,
-        y: 0
+        offsetX: 0,
+        offsetY: 0
     },
 
     text: '',
@@ -173,8 +173,8 @@ var txt = scene.add.rexDynamicText({
     - `style.shadowOffsetX` : OffsetX of shadow.
     - `style.shadowOffsetY` : OffsetY of shadow.
     - `style.shadowBlur` : Blur of shadow.
-    - `style.x` : x-offset.
-    - `style.y` : y-offset.
+    - `style.offsetX` : OffsetX.
+    - `style.offsetY` : OffsetY.
 - `text` : Content of text.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
 
@@ -255,8 +255,8 @@ txt.appendText(text,
         // shadowOffsetX: 0,
         // shadowOffsetY: 0,
         // shadowBlur: 0,
-        // x: 0,
-        // y: 0
+        // offsetY: 0,
+        // offsetY: 0
     }
 );
 ```
@@ -270,10 +270,10 @@ Uses [word-wrap](dynamictext.md#word-wrap) method to rearrange position of chara
 
 ```javascript
 txt.appendImage(key, frame, {
-    // width: undefined,
-    // height: undefined,
-    // scaleX: undefined,
-    // scaleY: undefined
+    // width
+    // height
+    // scaleX
+    // scaleY
 })
 ```
 
@@ -509,8 +509,8 @@ txt.setWrapConfig(config);
             // color: '#fff',
             // stroke: '#fff',
             // strokeThickness: 0,
-            // x: 0,
-            // y: 0
+            // offsetX: 0,
+            // offsetY: 0
         })
         ```
 
@@ -529,6 +529,21 @@ txt.setWrapConfig(config);
         image.setHeight(height);
         // image.setHeight(height, true);  // Resize and keep aspect- ratio
         ```
+
+### Get children
+
+- Get all children
+    ```javascript
+    var children = txt.getChildren();
+    ```
+- Get last appended children
+    ```javascript
+    var children = txt.getLastAppendedChildren();
+    ```
+- Get active children, after wrapping
+    ```javascript
+    var children = txt.getActiveChildren();
+    ```
 
 ### Compare with other kinds of text game object
 

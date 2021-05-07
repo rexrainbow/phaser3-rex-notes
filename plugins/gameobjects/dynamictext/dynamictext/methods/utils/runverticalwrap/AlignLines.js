@@ -1,4 +1,4 @@
-import { HAlign, VAlign } from '../utils/AlignConst.js';
+import { HAlign, VAlign } from '../AlignConst.js';
 
 var AlignLines = function (result, width, height) {
     var hAlign = result.hAlign,

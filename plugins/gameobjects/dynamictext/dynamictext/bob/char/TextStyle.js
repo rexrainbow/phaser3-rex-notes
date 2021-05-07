@@ -21,8 +21,8 @@ class TextStyle {
             shadowBlur: this.shadowBlur,
             shadowOffsetX: this.shadowOffsetX,
             shadowOffsetY: this.shadowOffsetY,
-            x: this.x,
-            y: this.y,
+            offsetX: this.offsetX,
+            offsetY: this.offsetY,
         }
     }
 
@@ -43,8 +43,8 @@ class TextStyle {
             GetValue(o, 'shadowBlur', 0)
         );
         this.setOffset(
-            GetValue(o, 'x', 0),
-            GetValue(o, 'y', 0)
+            GetValue(o, 'offsetX', 0),
+            GetValue(o, 'offsetY', 0)
         );
     }
 
@@ -80,10 +80,10 @@ class TextStyle {
             );
         }
 
-        if (o.hasOwnProperty('x') || o.hasOwnProperty('y')) {
+        if (o.hasOwnProperty('offsetX') || o.hasOwnProperty('offsetY')) {
             this.setOffset(
-                GetProperty('x', o, this),
-                GetProperty('y', o, this)
+                GetProperty('offsetX', o, this),
+                GetProperty('offsetY', o, this)
             );
         }
         return this;
@@ -164,9 +164,9 @@ class TextStyle {
         return this;
     }
 
-    setOffset(x, y) {
-        this.x = x;
-        this.y = y;
+    setOffset(offsetX, offsetY) {
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
         return this;
     }
 

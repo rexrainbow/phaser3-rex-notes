@@ -1242,6 +1242,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-children" class="md-nav__link">
+    Get children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -5731,6 +5738,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-children" class="md-nav__link">
+    Get children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-other-kinds-of-text-game-object" class="md-nav__link">
     Compare with other kinds of text game object
   </a>
@@ -5864,8 +5878,8 @@
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
         <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
         <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">},</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -5957,8 +5971,8 @@
 <li><code>style.shadowOffsetX</code> : OffsetX of shadow.</li>
 <li><code>style.shadowOffsetY</code> : OffsetY of shadow.</li>
 <li><code>style.shadowBlur</code> : Blur of shadow.</li>
-<li><code>style.x</code> : x-offset.</li>
-<li><code>style.y</code> : y-offset.</li>
+<li><code>style.offsetX</code> : OffsetX.</li>
+<li><code>style.offsetY</code> : OffsetY.</li>
 </ul>
 </li>
 <li><code>text</code> : Content of text.</li>
@@ -6031,8 +6045,8 @@
         <span class="c1">// shadowOffsetX: 0,</span>
         <span class="c1">// shadowOffsetY: 0,</span>
         <span class="c1">// shadowBlur: 0,</span>
-        <span class="c1">// x: 0,</span>
-        <span class="c1">// y: 0</span>
+        <span class="c1">// offsetY: 0,</span>
+        <span class="c1">// offsetY: 0</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -6042,10 +6056,10 @@
 Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of characters. </p>
 <h3 id="append-image">Append image<a class="headerlink" href="#append-image" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">appendImage</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// width: undefined,</span>
-    <span class="c1">// height: undefined,</span>
-    <span class="c1">// scaleX: undefined,</span>
-    <span class="c1">// scaleY: undefined</span>
+    <span class="c1">// width</span>
+    <span class="c1">// height</span>
+    <span class="c1">// scaleX</span>
+    <span class="c1">// scaleY</span>
 <span class="p">})</span>
 </code></pre></div>
 
@@ -6298,8 +6312,8 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
     <span class="c1">// color: &#39;#fff&#39;,</span>
     <span class="c1">// stroke: &#39;#fff&#39;,</span>
     <span class="c1">// strokeThickness: 0,</span>
-    <span class="c1">// x: 0,</span>
-    <span class="c1">// y: 0</span>
+    <span class="c1">// offsetX: 0,</span>
+    <span class="c1">// offsetY: 0</span>
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
@@ -6320,6 +6334,18 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="get-children">Get children<a class="headerlink" href="#get-children" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get all children
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get last appended children
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getLastAppendedChildren</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Get active children, after wrapping
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getActiveChildren</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 <h3 id="compare-with-other-kinds-of-text-game-object">Compare with other kinds of text game object<a class="headerlink" href="#compare-with-other-kinds-of-text-game-object" title="Permanent link">&para;</a></h3>
 <ul>

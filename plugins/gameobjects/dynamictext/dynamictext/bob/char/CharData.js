@@ -16,17 +16,17 @@ class CharData extends Base {
         return this.parent.autoRound;
     }
 
-    get xOffset() {
-        return this.style.x;
+    get offsetX() {
+        return this.style.offsetX;
     }
 
-    set xOffset(value) { }
+    set offsetX(value) { }
 
-    get yOffset() {
-        return this.style.y;
+    get offsetY() {
+        return this.style.offsetY;
     }
 
-    set yOffset(value) { }
+    set offsetY(value) { }
 
     modifyStyle(style) {
         this.setDirty(true);
@@ -34,11 +34,27 @@ class CharData extends Base {
         return this;
     }
 
+    modifyPorperties(o) {
+        if (!o) {
+            return this;
+        }
+
+        this.modifyStyle(o);
+        super.modifyPorperties(o);
+        return this;
+    }
+
     setText(text) {
         this.setDirty(this.text != text);
         this.text = text;
 
-        if (text === '\n') {
+        this.updateTextSize();
+
+        return this;
+    }
+
+    updateTextSize() {
+        if ((this.text === '\n') || (this.text === '')) {
             this.textWidth = 0;
             this.textHeight = 0;
         } else {
@@ -55,7 +71,6 @@ class CharData extends Base {
             }
             this.textHeight = ascent + descent;
         }
-
         return this;
     }
 
