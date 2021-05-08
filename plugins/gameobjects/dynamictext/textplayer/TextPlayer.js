@@ -28,7 +28,7 @@ class TextPlayer extends DynamicText {
         this.setDefaultTypingSpeed(GetValue(config, 'type.speed', 250));
 
         if (content) {
-            this.setText(content);
+            this.play(content);
         }
     }
 

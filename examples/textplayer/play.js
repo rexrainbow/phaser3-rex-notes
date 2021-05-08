@@ -50,12 +50,11 @@ class Demo extends Phaser.Scene {
                     maxLines: 5,
                     padding: { bottom: 10 },
                 },
-
-                text: content
+            
             }
         )
+            .play(content);
 
-        text.play();
     }
 
     update() { }

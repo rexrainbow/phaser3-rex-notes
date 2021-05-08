@@ -1,4 +1,5 @@
 import CharData from '../bob/char/CharData.js';
+import { CharTypeName } from '../bob/Types.js';
 
 var AppendText = function (text, style) {
     if (style) {
@@ -8,7 +9,7 @@ var AppendText = function (text, style) {
     this.lastAppendedChildren.length = 0;
     for (var i = 0, cnt = text.length; i < cnt; i++) {
         var char = text.charAt(i);
-        var bob = this.poolManager.allocate('text');
+        var bob = this.poolManager.allocate(CharTypeName);
         if (bob === null) {
             bob = new CharData(
                 this,               // parent

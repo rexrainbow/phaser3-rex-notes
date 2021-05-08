@@ -1,6 +1,10 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var Play = function () {
+var Play = function (content) {
+    this.removeChildren();
+    this.content = text;
+    this.parser.start(text); // Parse bbcode-content
+
     var wrapCallback = GetValue(this.wrapConfig, 'callback', this.runWordWrap);
     if (typeof (wrapCallback) === 'string') {
         wrapCallback = this[wrapCallback];

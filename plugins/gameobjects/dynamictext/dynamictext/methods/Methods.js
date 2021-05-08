@@ -5,6 +5,7 @@ import RemoveChildren from './RemoveChildren.js'
 import SetText from './SetText.js';
 import AppendText from './AppendText.js';
 import AppendImage from './AppendImage.js';
+import AppendCommand from './AppendCommand.js';
 import SetWrapConfig from './SetWrapConfig.js';
 import RunWordWrap from './RunWordWrap.js';
 import RunVerticalWrap from './RunVerticalWrap.js';
@@ -22,6 +23,7 @@ export default {
     setText: SetText,
     appendText: AppendText,
     appendImage: AppendImage,
+    appendCommand: AppendCommand,
     setWrapConfig: SetWrapConfig,
     runWordWrap: RunWordWrap,
     runVerticalWrap: RunVerticalWrap,

@@ -17,7 +17,14 @@ export default {
 
     setData(key, value) {
         this.enableData();
-        this.data[key] = value;
+        if (arguments.length === 1) {
+            var data = key;
+            for (key in data) {
+                this.data[key] = data[key];
+            }
+        } else {
+            this.data[key] = value;
+        }
         return this;
     },
 

@@ -1,11 +1,12 @@
 import Base from '../Base.js';
+import { ImageTypeName } from '../Types.js';
 
 class ImageData extends Base {
     constructor(
         parent,
         key, frame
     ) {
-        super(parent, 'image');
+        super(parent, ImageTypeName);
         this.setTexture(key, frame);
     }
 

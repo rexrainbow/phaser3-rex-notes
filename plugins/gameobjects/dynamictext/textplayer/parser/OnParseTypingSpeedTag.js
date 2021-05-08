@@ -1,20 +1,17 @@
+import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
+
 var OnParseTypingSpeedTag = function (dynamicText, parser) {
-    var typingSpeed;
     parser
         .on('start', function () {
-            typingSpeed = dynamicText.defaultTypingSpeed;
+            var speed = dynamicText.defaultTypingSpeed;
+            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
         })
         .on('+speed', function (speed) {
-            typingSpeed = speed;
+            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
         })
         .on('-speed', function () {
-            typingSpeed = dynamicText.defaultTypingSpeed;
-        })
-        .on('post-content', function () {
-            var children = dynamicText.getLastAppendedChildren();
-            for (var i = 0, cnt = children.length; i < cnt; i++) {
-                children[i].setData('speed', typingSpeed);
-            }
+            var speed = dynamicText.defaultTypingSpeed;
+            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
         })
 }
 

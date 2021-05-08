@@ -1,4 +1,5 @@
 import Base from '../Base.js';
+import { CharTypeName } from '../Types.js';
 import TextStyle from './TextStyle.js';
 
 class CharData extends Base {
@@ -7,7 +8,7 @@ class CharData extends Base {
         text,
         style
     ) {
-        super(parent, 'text');
+        super(parent, CharTypeName);
         this.style = new TextStyle(style);
         this.setText(text);
     }
