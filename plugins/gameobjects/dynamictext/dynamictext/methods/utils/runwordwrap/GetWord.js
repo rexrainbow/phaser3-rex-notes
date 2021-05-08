@@ -1,3 +1,5 @@
+import { CharTypeName } from '../../../bob/Types.js';
+
 var GetWord = function (children, startIndex, charMode, result) {
     if (result === undefined) {
         result = { word: [], width: 0 };
@@ -10,7 +12,7 @@ var GetWord = function (children, startIndex, charMode, result) {
     var word = result.word, wordWidth = 0;
     while (currentIndex < endIndex) {
         var child = children[currentIndex];
-        if ((child.type === 'text') && (child.text !== ' ') && (child.text !== '\n')) {
+        if ((child.type === CharTypeName) && (child.text !== ' ') && (child.text !== '\n')) {
             word.push(child);
             wordWidth += child.width;
             currentIndex++;
