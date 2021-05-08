@@ -1,4 +1,4 @@
-import BBCodeDynamicTextPlugin from '../../plugins/bbcodedynamictext-plugin.js';
+import TextPlayerPlugin from '../../plugins/textplayer-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
 
 
-        var text = this.add.rexBBCodeDynamicText(
+        var text = this.add.rexTextPlayer(
             {
                 x: 400, y: 300,
                 width: 400, height: 200,  // Set width and height
@@ -55,49 +55,10 @@ class Demo extends Phaser.Scene {
             }
         )
 
-        this.print = this.add.text(0, 580, '');
-
-        // TODO: Don't use tween to type characters
-        TypingNextPage(text);
+        text.play();
     }
 
     update() { }
-}
-
-var TypingNextPage = function (text, config) {
-    var result = text.runWordWrap(config);
-
-    var scene = text.scene;
-    var tween = scene.tweens.add({
-        targets: result.children,
-        delay: scene.tweens.stagger(200),
-        duration: 500,
-        onStart: function (tween, targets) {
-            for (var i = 0, cnt = targets.length; i < cnt; i++) {
-                targets[i].setVisible(false);
-            }
-            text.background.stroke = 'green';
-        },
-        onUpdate: function (tween, target) {
-            target.setVisible(true);
-        },
-        onComplete: function (tween, targets) {
-            text.background.stroke = 'white';
-            if (!result.isLastPage) {
-                scene.print.setText('Click to continue');
-                scene.input.once('pointerdown', function () {
-                    scene.print.setText('');
-                    TypingNextPage(text, result);
-                })
-            } else {
-                // On typing complete
-                scene.print.setText('Typing complete');
-            }
-        },
-        y: '-=20',
-        yoyo: true,
-        ease: 'Cubic'
-    });
 }
 
 var config = {
@@ -112,8 +73,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexBBCodeDynamicText',
-            plugin: BBCodeDynamicTextPlugin,
+            key: 'rexTextPlayer',
+            plugin: TextPlayerPlugin,
             start: true
         }]
     }

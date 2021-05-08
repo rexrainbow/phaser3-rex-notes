@@ -1,3 +1,5 @@
+import DataMethods from '../../../../utils/data/DataMethods.js'
+
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -19,8 +21,8 @@ class Base {
             .setDrawAboveCallback()
 
         this.originX = 0;
-        this.offsetX = 0;
-        this.offsetY = 0;
+        this.offsetX = 0;  // Override
+        this.offsetY = 0;  // Override
     }
 
     setParent(parent) {
@@ -316,9 +318,7 @@ class Base {
     }
 
     // Override
-    drawContent() {
-
-    }
+    drawContent() { }
 
     // Override
     draw() {
@@ -348,8 +348,12 @@ class Base {
         }
 
         context.restore();
-
     }
 }
+
+Object.assign(
+    Base.prototype,
+    DataMethods
+);
 
 export default Base;

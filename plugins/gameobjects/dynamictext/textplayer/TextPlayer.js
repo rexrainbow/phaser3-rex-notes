@@ -1,10 +1,12 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import GetParser from './parser/GetParser.js';
+import TypeWriter from './typewriter/TypeWriter.js';
 import Methods from './methods/Methods.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
-class BBCodeDynamicText extends DynamicText {
+class TextPlayer extends DynamicText {
     constructor(scene, x, y, fixedWidth, fixedHeight, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -22,16 +24,23 @@ class BBCodeDynamicText extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
         this.parser = GetParser(this, config);
+        this.typeWriter = new TypeWriter(this, GetValue(config, 'type', undefined));
+        this.setDefaultTypingSpeed(GetValue(config, 'type.speed', 250));
 
         if (content) {
             this.setText(content);
         }
     }
+
+    setDefaultTypingSpeed(speed) {
+        this.defaultTypingSpeed = speed;  // ms
+        return this;
+    }
 }
 
 Object.assign(
-    BBCodeDynamicText.prototype,
+    TextPlayer.prototype,
     Methods
 );
 
-export default BBCodeDynamicText;
+export default TextPlayer;
