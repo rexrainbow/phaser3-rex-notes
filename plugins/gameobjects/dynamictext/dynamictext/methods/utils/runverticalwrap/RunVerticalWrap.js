@@ -1,5 +1,5 @@
 import AlignLines from './AlignLines.js';
-import { CharTypeName, CmdTypeName } from '../../../bob/Types.js';
+import { IsTypeable, IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -108,21 +108,19 @@ var RunVerticalWrap = function (config) {
     var resultLines = result.lines,
         lastLine = [], lastLineHeight = 0, maxLineHeight = 0;
     while (childIndex < lastChildIndex) {
-        // Append command bob directly
-        var child = children[childIndex];
-        if (child.type === CmdTypeName) {
-            child.setActive();
-            resultChildren.push(child);
-            lastLine.push(child);
+        // Append non-typeable child directly
+        var char = children[childIndex];
+        childIndex++;
+        if (!IsTypeable(char)) {
+            char.setActive();
+            resultChildren.push(char);
+            lastLine.push(char);
             continue;
         }
 
-        var char = children[childIndex];
         var childHeight = ((fixedChildHeight !== undefined) ? fixedChildHeight : char.height) + letterSpacing;
-
-        childIndex++;
         // Next line
-        var isNewLineChar = IsNewLine(char);
+        var isNewLineChar = IsNewLineChar(char);
         if ((remainderHeight < childHeight) || isNewLineChar) {
             // Add to result
             if (isNewLineChar) {
@@ -179,10 +177,6 @@ var RunVerticalWrap = function (config) {
     this.setSize(width, height);
 
     return result;
-}
-
-var IsNewLine = function (char) {
-    return (char.type === CharTypeName) && (char.text === '\n');
 }
 
 export default RunVerticalWrap;

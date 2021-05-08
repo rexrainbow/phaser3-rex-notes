@@ -12,6 +12,12 @@ class TypeWriter {
         this.dynamicText = dynamicText;
         this.clock = new Clock(dynamicText);
         this.onTypeStart = GetValue(config, 'onTypeStart', SetAllInvisible);
+        this.setTypingSpeed(0);
+    }
+
+    setTypingSpeed(speed) {
+        this.typingSpeed = speed;
+        return this;
     }
 
     get nextChild() {

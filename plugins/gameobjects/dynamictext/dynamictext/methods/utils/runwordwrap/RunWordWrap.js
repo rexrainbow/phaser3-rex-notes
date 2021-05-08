@@ -1,6 +1,6 @@
 import GetWord from './GetWord.js';
 import AlignLines from './AlignLines.js';
-import { CharTypeName, CmdTypeName } from '../../../bob/Types.js';
+import { IsTypeable, IsNewLineChar } from '../../../bob/Types.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -95,9 +95,10 @@ var RunWordWrap = function (config) {
         lastLine = [], lastLineWidth = 0, maxLineWidth = 0;
     var wordResult;
     while (childIndex < lastChildIndex) {
-        // Append command bob directly
+        // Append non-typeable child directly
         var child = children[childIndex];
-        if (child.type === CmdTypeName) {
+        if (!IsTypeable(child)) {
+            childIndex++;
             child.setActive();
             resultChildren.push(child);
             lastLine.push(child);
@@ -111,7 +112,7 @@ var RunWordWrap = function (config) {
 
         childIndex += charCnt;
         // Next line
-        var isNewLineChar = IsNewLine(word);
+        var isNewLineChar = IsNewLineChar(word[0]);
         if ((remainderWidth < wordWidth) || isNewLineChar) {
             // Add to result
             if (isNewLineChar) {
@@ -173,10 +174,5 @@ var RunWordWrap = function (config) {
 
     return result;
 };
-
-var IsNewLine = function (word) {
-    var child = word[0];
-    return (child.type === CharTypeName) && (child.text === '\n');
-}
 
 export default RunWordWrap;

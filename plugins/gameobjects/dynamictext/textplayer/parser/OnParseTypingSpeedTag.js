@@ -4,15 +4,25 @@ var OnParseTypingSpeedTag = function (dynamicText, parser) {
     parser
         .on('start', function () {
             var speed = dynamicText.defaultTypingSpeed;
-            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
+            AppendCommand(dynamicText, speed);
         })
         .on('+speed', function (speed) {
-            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
+            AppendCommand(dynamicText, speed);
         })
         .on('-speed', function () {
             var speed = dynamicText.defaultTypingSpeed;
-            AppendCommandBase.call(dynamicText, 'speed', { speed: speed });
+            AppendCommand(dynamicText, speed);
         })
+}
+
+var AppendCommand = function(dynamicText, speed) {
+    var typeWriter = dynamicText.typeWriter;
+    AppendCommandBase.call(dynamicText,
+        'speed',                    // name
+        typeWriter.setTypingSpeed,  // callback
+        typeWriter,                 // scope
+        speed,                      // params
+    );
 }
 
 export default OnParseTypingSpeedTag;
