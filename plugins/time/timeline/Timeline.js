@@ -14,6 +14,18 @@ class Timeline extends Clock {
         this.timerPool = GetValue(config, 'pool', TimerPool);
     }
 
+    shutdown() {
+        this.timerPool
+            .freeMultiple(this.addedTimers)
+            .freeMultiple(this.timers);
+
+        this.timerPool = undefined;
+        this.addedTimers = undefined;
+        this.timers = undefined;
+
+        super.shutdown();
+    }
+
     addTimer(config) {
         var timer = this.timerPool.allocate();
         if (!timer) {
