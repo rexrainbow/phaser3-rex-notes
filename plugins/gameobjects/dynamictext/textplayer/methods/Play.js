@@ -1,28 +1,30 @@
+import { WaitComplete } from '../../../../utils/promise/WaitEvent.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var Play = function (content) {
     this.removeChildren();
-    this.content = text;
-    this.parser.start(text); // Parse bbcode-content
+    this.content = content;
+    this.parser.start(content); // Parse bbcode-content
 
     var wrapCallback = GetValue(this.wrapConfig, 'callback', this.runWordWrap);
     if (typeof (wrapCallback) === 'string') {
         wrapCallback = this[wrapCallback];
     }
-    TypingNextPage.call(this, wrapCallback);
-    return this;
+    TypingNextPage(this, wrapCallback);
+    return WaitComplete(this);  // Promise
 }
 
-var TypingNextPage = function (wrapCallback) {
-    var result = wrapCallback.call(this);
-    this.typeWriter
+var TypingNextPage = function (textPlayer, wrapCallback, result) {
+    result = wrapCallback.call(textPlayer, result);
+    textPlayer.typeWriter
         .start(result.children)
         .then(function () {
             if (result.isLastPage) {
-                this.emit('complete');
+                textPlayer.emit('complete');
             } else {
                 // TODO: wait click -- continue
-                TypingNextPage(wrapCallback);
+                TypingNextPage(textPlayer, wrapCallback, result);
             }
         })
 }

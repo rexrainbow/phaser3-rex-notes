@@ -2,7 +2,7 @@ import Base from '../Base.js';
 import { CmdTypeName } from '../Types.js';
 
 class Command extends Base {
-    constructor(parent, name, callback, scope, param) {
+    constructor(parent, name, callback, param, scope) {
         super(parent, CmdTypeName);
 
         this

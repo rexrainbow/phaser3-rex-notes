@@ -1,8 +1,8 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
-import Clock from '../../../../time/clock/Clock.js';
-import { WaitComplete } from '../../../../utils/promise/WaitEvent.js';
+import Timeline from '../../../../time/timeline/Timeline.js';
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 // Events: start, char.start, char.progress, char.complete, complete
@@ -10,9 +10,18 @@ class TypeWriter {
     constructor(dynamicText, config) {
         this.setEventEmitter();
         this.dynamicText = dynamicText;
-        this.clock = new Clock(dynamicText);
+        this.typingAnimation = {};
+
+        this.timeline = new Timeline(dynamicText);
+
         this.onTypeStart = GetValue(config, 'onTypeStart', SetAllInvisible);
-        this.setTypingSpeed(0);
+        this.setTypingSpeed(GetValue(config, 'speed', 250));
+        this.setTypingAnimation(
+            GetValue(config, 'animation.duration', 1000),
+            GetValue(config, 'animation.onStart', SetVisible),
+            GetValue(config, 'animation.onProgress', undefined),
+            GetValue(config, 'animation.onComplete', undefined)
+        )
     }
 
     setTypingSpeed(speed) {
@@ -20,19 +29,29 @@ class TypeWriter {
         return this;
     }
 
-    get nextChild() {
-        var child = this.children[this.index];
-        this.index++;
-        return child;
+    setTypingAnimation(duration, onStart, onProgress, onComplete) {
+        var animation = this.typingAnimation;
+        animation.duration = duration;
+        animation.onStart = onStart;
+        animation.onProgress = onProgress;
+        animation.onComplete = onComplete;
+        return this;
     }
 
-    start(children) {
-        this.children = children;
-        this.index = 0;
-        this.onTypeStart(children);
-        this.typing();
-        return WaitComplete(this);  // Promise
+    setTypingAnimationDuration(duration) {
+        this.typingAnimationDuration = duration;
+        return this;
     }
+
+    getNextChild() {
+        var child = this.children[this.index];
+        this.index++; // Point to next child
+        return child;
+    }
+}
+
+var SetVisible = function (child) {
+    child.setVisible();
 }
 
 var SetAllInvisible = function (children) {

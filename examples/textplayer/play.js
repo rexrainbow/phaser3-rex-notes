@@ -15,9 +15,37 @@ class Demo extends Phaser.Scene {
         var content = `\
 [color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun [color=green]open[/color] source HTML5 game framework
 [color=#008B8B]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
-[color=#FF7F50]Games can be compiled to iOS, Android and native apps by using 3rd party tools
+[color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
 
+        var Cubic = Phaser.Math.Easing.Cubic.Out;
+        var Linear = Phaser.Math.Linear;
+        var JumpAnimationConfig = {
+            duration: 1000,
+            onStart: function (char) {
+                char
+                    .setVisible()
+                    .setData('y', char.y);
+            },
+            onProgress: function (char, t) {
+                t = 1 - Math.abs(0.5 - t) * 2;
+                t = Cubic(t);
+                var p0 = char.getData('y');
+                var p1 = p0 - 20;
+                var value = Linear(p0, p1, t);
+                char.setY(value);
+            }
+        }
+
+        var FadeInAnimationConfig = {
+            duration: 1000,
+            onStart: function (char) {
+                char.setVisible().setAlpha(0)
+            },
+            onProgress: function (char, t) {
+                char.setAlpha(t)
+            }
+        }
 
         var text = this.add.rexTextPlayer(
             {
@@ -50,10 +78,19 @@ class Demo extends Phaser.Scene {
                     maxLines: 5,
                     padding: { bottom: 10 },
                 },
-            
+
+                typing: {
+                    speed: 200,  // 0: no-typing
+                    animation: JumpAnimationConfig
+                    // animation: FadeInAnimationConfig                    
+                }
+
             }
         )
-            .play(content);
+            .play(content)
+            .then(function () {
+                console.log('Play complete');
+            })
 
     }
 

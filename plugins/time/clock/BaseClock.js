@@ -59,6 +59,7 @@ class BaseClock extends TickTask {
         if (startAt === undefined) {
             startAt = 0;
         }
+        this.delta = 0;
         this.now = startAt;
         super.start();
         return this;
@@ -72,7 +73,8 @@ class BaseClock extends TickTask {
     tick(delta) {
         delta *= this.timeScale;
         this.now += delta;
-        this.emit('update', this.now, delta);
+        this.delta = delta;
+        this.emit('update', this.now, this.delta);
         return this;
     }
 }

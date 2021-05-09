@@ -1,12 +1,13 @@
 import { CmdTypeName } from '../bob/Types.js';
+import Command from '../bob/command/Command.js';
 
-var AppendCommand = function (name, callback, scope, param) {
+var AppendCommand = function (name, callback, param, scope) {
     var bob = this.poolManager.allocate(CmdTypeName);
     if (bob === null) {
-        bob = new ImageData(
+        bob = new Command(
             this,               // parent
             name,
-            callback, scope, param
+            callback, param, scope, 
         );
     } else {
         bob

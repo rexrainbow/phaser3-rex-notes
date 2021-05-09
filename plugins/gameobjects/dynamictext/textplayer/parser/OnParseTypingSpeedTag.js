@@ -1,27 +1,29 @@
 import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
 var OnParseTypingSpeedTag = function (dynamicText, parser) {
+    var defaultTypingSpeed;
     parser
         .on('start', function () {
-            var speed = dynamicText.defaultTypingSpeed;
-            AppendCommand(dynamicText, speed);
+            defaultTypingSpeed = dynamicText.typeWriter.typingSpeed;
         })
         .on('+speed', function (speed) {
             AppendCommand(dynamicText, speed);
         })
         .on('-speed', function () {
-            var speed = dynamicText.defaultTypingSpeed;
-            AppendCommand(dynamicText, speed);
+            AppendCommand(dynamicText, defaultTypingSpeed);
+        })
+        .on('complete', function () {
+            dynamicText.typeWriter.typingSpeed = defaultTypingSpeed;
         })
 }
 
-var AppendCommand = function(dynamicText, speed) {
+var AppendCommand = function (dynamicText, speed) {
     var typeWriter = dynamicText.typeWriter;
     AppendCommandBase.call(dynamicText,
         'speed',                    // name
         typeWriter.setTypingSpeed,  // callback
-        typeWriter,                 // scope
         speed,                      // params
+        typeWriter,                 // scope        
     );
 }
 

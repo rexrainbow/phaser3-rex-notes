@@ -1,5 +1,5 @@
-import Typing from './Typing.js';
+import Start from './Start.js';
 
 export default {
-    typing: Typing,
+    start: Start,
 }

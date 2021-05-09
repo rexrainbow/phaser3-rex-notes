@@ -24,17 +24,10 @@ class TextPlayer extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
         this.parser = GetParser(this, config);
-        this.typeWriter = new TypeWriter(this, GetValue(config, 'type', undefined));
-        this.setDefaultTypingSpeed(GetValue(config, 'type.speed', 250));
-
+        this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
         if (content) {
             this.play(content);
         }
-    }
-
-    setDefaultTypingSpeed(speed) {
-        this.defaultTypingSpeed = speed;  // ms
-        return this;
     }
 }
 

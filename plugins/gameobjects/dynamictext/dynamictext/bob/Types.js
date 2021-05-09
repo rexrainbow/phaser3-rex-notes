@@ -11,10 +11,15 @@ var IsNewLineChar = function (bob) {
     return (bob.type === CharTypeName) && (bob.text === '\n');
 }
 
+var IsCommand = function (bob) {
+    return bob.type === CmdTypeName;
+}
+
 export {
     CharTypeName,
     ImageTypeName,
     CmdTypeName,
     IsTypeable,
-    IsNewLineChar
+    IsNewLineChar,
+    IsCommand
 }
