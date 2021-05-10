@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun [color=green]open[/color] source HTML5 game framework
+[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun[wait] [color=green]open[/color] source HTML5 game framework
 [color=#008B8B]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
 [color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`

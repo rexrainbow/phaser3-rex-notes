@@ -1,5 +1,5 @@
 var Pause = function () {
-    this.timeline.pause();
+    this.timeline.pause();  // Also pause typing animation
     return this;
 }
 

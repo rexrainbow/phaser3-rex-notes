@@ -28,11 +28,13 @@ class Command extends Base {
     }
 
     exec() {
+        var result;
         if (this.scope) {
-            this.callback.call(this.scope, this.param, this.name);
+            result = this.callback.call(this.scope, this.param, this.name);
         } else {
-            this.callback(this.param, this.name);
+            result = this.callback(this.param, this.name);
         }
+        return result;
     }
 
     draw() { }

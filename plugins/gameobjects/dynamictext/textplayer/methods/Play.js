@@ -12,9 +12,9 @@ var Play = function (content) {
         wrapCallback = this[wrapCallback];
     }
 
-    this.isTyping = true;
+    this.isPlaying = true;
     this.once('complete', function () {
-        this.isTyping = false;
+        this.isPlaying = false;
     }, this);
 
     TypingNextPage(this, wrapCallback);

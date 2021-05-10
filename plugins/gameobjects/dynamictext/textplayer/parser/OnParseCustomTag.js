@@ -18,8 +18,8 @@ var OnParseCustomTag = function (dynamicText, parser) {
         })
 }
 
-var FireEvent = function (param, name) {
-    this.emit(`command.${name}`, param);
+var FireEvent = function (param, tagName) {
+    this.emit(`tag.${tagName}`, param);
 }
 
 var AppendCommand = function (dynamicText, name, param) {

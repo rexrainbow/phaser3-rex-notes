@@ -19,13 +19,17 @@ var OnParseTypingSpeedTag = function (dynamicText, parser) {
         })
 }
 
+var SetSpeed = function(speed) {
+    this.setSpeed(speed);
+}
+
 var AppendCommand = function (dynamicText, speed) {
     var typeWriter = dynamicText.typeWriter;
     AppendCommandBase.call(dynamicText,
-        'speed',              // name
-        typeWriter.setSpeed,  // callback
-        speed,                // params
-        typeWriter,           // scope
+        'speed',     // name
+        SetSpeed,    // callback
+        speed,       // params
+        typeWriter,  // scope
     );
 }
 
