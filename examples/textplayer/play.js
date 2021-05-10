@@ -9,11 +9,12 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('dude', 'assets/images/phaser-dude.png');
+        this.load.audio('explosion', ['assets/audio/soundeffect/explosion.mp3']);
     }
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun [color=green]open[/color] source HTML5 game framework
+[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun [color=green]open[/color] source HTML5 game framework
 [color=#008B8B]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
 [color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
@@ -73,10 +74,16 @@ class Demo extends Phaser.Scene {
 
             }
         )
-            .play(content)
-            .then(function () {
-                console.log('Play complete');
-            })
+
+        this.add.text(0, 580, 'Click to start');
+        this.input.once('pointerdown', function () {
+            text
+                .play(content)
+                .then(function () {
+                    console.log('Play complete');
+                })
+        })
+
 
     }
 

@@ -7,6 +7,7 @@ import ParseFontSizeTag from './OnParseFontSizeTag.js';
 import ParseOffsetYTag from './OnParseOffsetYTag.js';
 import ParseShadowColorTag from './OnParseShadowColorTag.js';
 import ParseTypingSpeedTag from './OnParseTypingSpeedTag.js';
+import ParseSoundEffectTag from './OnParseSoundEffectTag.js';
 import ParseCustomTag from './OnParseCustomTag.js';
 import ParseContent from './OnParseContent.js';
 
@@ -15,7 +16,7 @@ const ParseCallbacks = [
     ParseColorTag, ParseStrokeColorTag,
     ParseBoldTag, ParseItalicTag,
     ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag,
-    ParseTypingSpeedTag, ParseCustomTag,
+    ParseTypingSpeedTag, ParseSoundEffectTag, ParseCustomTag,
     ParseContent
 ];
 

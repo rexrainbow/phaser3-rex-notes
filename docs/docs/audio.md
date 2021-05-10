@@ -83,11 +83,11 @@ scene.sound.decodeAudio(audioFiles);
 
 ### Play sound
 
-Sound instance will be destroyed when playback ends.
-
 ```javascript
 scene.sound.play(key);
 ```
+
+Sound instance will be destroyed when playback ends.
 
 ### Sound instance
 

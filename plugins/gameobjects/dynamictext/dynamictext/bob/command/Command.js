@@ -29,9 +29,9 @@ class Command extends Base {
 
     exec() {
         if (this.scope) {
-            this.callback.call(this.scope, this.param);
+            this.callback.call(this.scope, this.param, this.name);
         } else {
-            this.callback(this.param);
+            this.callback(this.param, this.name);
         }
     }
 
