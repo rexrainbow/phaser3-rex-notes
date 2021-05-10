@@ -4,41 +4,39 @@ import Timeline from '../../../../time/progresses/Timeline.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-// Events: start, char.start, char.progress, char.complete, complete
 class TypeWriter {
     constructor(dynamicText, config) {
         this.setEventEmitter();
         this.dynamicText = dynamicText;
-        this.typingAnimation = {};
-
         this.timeline = new Timeline(dynamicText);
 
-        this.onTypeStart = GetValue(config, 'onTypeStart', SetAllInvisible);
-        this.setTypingSpeed(GetValue(config, 'speed', 250));
-        this.setTypingAnimation(
-            GetValue(config, 'animation.duration', 1000),
-            GetValue(config, 'animation.onStart', SetVisible),
-            GetValue(config, 'animation.onProgress', undefined),
-            GetValue(config, 'animation.onComplete', undefined)
-        )
+        this.onTypeStart = GetValue(config, 'onTypeStart', SetChildrenInvisible);
+        this.setSpeed(GetValue(config, 'speed', 250));
+        this.setAnimationConfig(GetValue(config, 'animation', undefined));
     }
 
-    setTypingSpeed(speed) {
-        this.typingSpeed = speed;
+    setSpeed(speed) {
+        this.speed = speed;
         return this;
     }
 
-    setTypingAnimation(duration, onStart, onProgress, onComplete) {
-        var animation = this.typingAnimation;
-        animation.duration = duration;
-        animation.onStart = onStart;
-        animation.onProgress = onProgress;
-        animation.onComplete = onComplete;
-        return this;
-    }
-
-    setTypingAnimationDuration(duration) {
-        this.typingAnimationDuration = duration;
+    setAnimationConfig(config) {
+        if (config === undefined) {
+            config = {};
+        } else if (config === false) {
+            config = {
+                duration: 0
+            }
+        }
+        if (!config.hasOwnProperty('duration')) {
+            // Apply default duration
+            config.duration = 1000;
+        }
+        if (!config.hasOwnProperty('onStart')) {
+            // Apply default onStart callback
+            config.onStart = SetChildVisible;
+        }
+        this.animationConfig = config;
         return this;
     }
 
@@ -49,11 +47,11 @@ class TypeWriter {
     }
 }
 
-var SetVisible = function (child) {
+var SetChildVisible = function (child) {
     child.setVisible();
 }
 
-var SetAllInvisible = function (children) {
+var SetChildrenInvisible = function (children) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         children[i].setVisible(false);
     }

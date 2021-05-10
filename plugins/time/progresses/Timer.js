@@ -1,4 +1,7 @@
+import Yoyo from '../../utils/math/Yoyo.js';
+
 const Clamp = Phaser.Math.Clamp;
+
 class Timer {
     constructor(timeline, config) {
         this
@@ -19,16 +22,20 @@ class Timer {
         return this;
     }
 
-    setDuration(duration) {
+    setDuration(duration, yoyo) {
+        if (yoyo === undefined) {
+            yoyo = false;
+        }
         this.duration = duration;
         this.remainder = duration;
         this.t = 0;
+        this.yoyo = yoyo;
         return this;
     }
 
     reset(o) {
         this
-            .setDuration(o.duration)
+            .setDuration(o.duration, o.yoyo)
             .setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete)
         return this;
     }
@@ -41,7 +48,11 @@ class Timer {
 
     getProgress() {
         var value = 1 - (this.remainder / this.duration);
-        return Clamp(value, 0, 1);
+        value = Clamp(value, 0, 1);
+        if (this.yoyo) {
+            value = Yoyo(value);
+        }
+        return value;
     }
 
     setProgress(value) {
@@ -61,7 +72,7 @@ class Timer {
         this.t = this.getProgress();
         this.runCallback(this.onProgress);
 
-        var isCompleted = (this.t === 1)
+        var isCompleted = (this.remainder <= 0);
         if (isCompleted) {
             this.runCallback(this.onComplete);
         }

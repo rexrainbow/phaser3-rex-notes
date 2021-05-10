@@ -4,6 +4,7 @@ import { IsTypeable, IsCommand } from '../../dynamictext/bob/Types.js';
 var Start = function (children) {
     this.children = children;
     this.index = 0;
+    this.emit('start');
     this.onTypeStart(children);
     Typing.call(this);
     return WaitComplete(this);  // Promise
@@ -13,12 +14,12 @@ var Typing = function (offsetTime) {
     if (offsetTime === undefined) {
         offsetTime = 0;
     }
-    var delay = this.typingSpeed + offsetTime;
+
     var child = this.getNextChild();
     while (true) {
         if (!child) {
             if (this.timeline.isRunning) {
-                // Wait until last animation is end
+                // Wait until last animationConfig is end
                 this.timeline.once('complete', function () {
                     this.emit('complete');
                 }, this);
@@ -28,19 +29,23 @@ var Typing = function (offsetTime) {
             break;
         } else if (IsTypeable(child)) {
             // Typing this child
-            var animation = this.typingAnimation;
-            if (animation.duration > 0) {
+            var animationConfig = this.animationConfig;
+            if (animationConfig.duration > 0) {
                 this.timeline.addTimer({
                     target: child,
-                    duration: animation.duration,
-                    onStart: animation.onStart,
-                    onProgress: animation.onProgress,
-                    onComplete: animation.onComplete,
+                    duration: animationConfig.duration,
+                    yoyo: animationConfig.yoyo,
+                    onStart: animationConfig.onStart,
+                    onProgress: animationConfig.onProgress,
+                    onComplete: animationConfig.onComplete,
                 })
-            } else {  // No animation, only invoke onStart callback
-                animation.onStart(child, 0);
+            } else {  // No animationConfig, only invoke onStart callback
+                if (animationConfig.onStart) {
+                    animationConfig.onStart(child, 0);
+                }
             }
 
+            var delay = this.speed + offsetTime;
             if (delay > 0) {
                 // Typing next character later
                 this.timeline.addTimer({
@@ -52,7 +57,7 @@ var Typing = function (offsetTime) {
                 })
                 break;
             } else {
-                delay += this.typingSpeed;
+                delay += this.speed;
             }
         } else if (IsCommand(child)) {
             child.exec();

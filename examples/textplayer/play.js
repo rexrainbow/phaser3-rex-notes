@@ -20,33 +20,6 @@ class Demo extends Phaser.Scene {
 
         var Cubic = Phaser.Math.Easing.Cubic.Out;
         var Linear = Phaser.Math.Linear;
-        var JumpAnimationConfig = {
-            duration: 1000,
-            onStart: function (char) {
-                char
-                    .setVisible()
-                    .setData('y', char.y);
-            },
-            onProgress: function (char, t) {
-                t = 1 - Math.abs(0.5 - t) * 2;
-                t = Cubic(t);
-                var p0 = char.getData('y');
-                var p1 = p0 - 20;
-                var value = Linear(p0, p1, t);
-                char.setY(value);
-            }
-        }
-
-        var FadeInAnimationConfig = {
-            duration: 1000,
-            onStart: function (char) {
-                char.setVisible().setAlpha(0)
-            },
-            onProgress: function (char, t) {
-                char.setAlpha(t)
-            }
-        }
-
         var text = this.add.rexTextPlayer(
             {
                 x: 400, y: 300,
@@ -81,8 +54,21 @@ class Demo extends Phaser.Scene {
 
                 typing: {
                     speed: 200,  // 0: no-typing
-                    animation: JumpAnimationConfig
-                    // animation: FadeInAnimationConfig                    
+                    animation: {
+                        duration: 1000,
+                        yoyo: true,
+                        onStart: function (char) {
+                            char
+                                .setVisible()
+                                .setData('y', char.y);
+                        },
+                        onProgress: function (char, t) {
+                            var p0 = char.getData('y');
+                            var p1 = p0 - 20;
+                            var value = Linear(p0, p1, Cubic(t));
+                            char.setY(value);
+                        }
+                    }
                 }
 
             }
