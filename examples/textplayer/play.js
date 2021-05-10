@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
         var text = this.add.rexTextPlayer(
             {
                 x: 400, y: 300,
-                width: 400, height: 200,  // Set width and height
+                width: 400, height: 200,  // Fixed width and height
 
                 background: {
                     stroke: 'white',

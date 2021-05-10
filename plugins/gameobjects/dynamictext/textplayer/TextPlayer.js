@@ -28,6 +28,7 @@ class TextPlayer extends DynamicText {
         if (content) {
             this.play(content);
         }
+        this.isTyping = false;
     }
 }
 

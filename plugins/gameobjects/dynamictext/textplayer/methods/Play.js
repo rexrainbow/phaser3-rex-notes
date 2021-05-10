@@ -11,6 +11,12 @@ var Play = function (content) {
     if (typeof (wrapCallback) === 'string') {
         wrapCallback = this[wrapCallback];
     }
+
+    this.isTyping = true;
+    this.once('complete', function () {
+        this.isTyping = false;
+    }, this);
+
     TypingNextPage(this, wrapCallback);
     return WaitComplete(this);  // Promise
 }

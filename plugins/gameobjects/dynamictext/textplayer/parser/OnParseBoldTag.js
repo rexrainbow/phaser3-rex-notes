@@ -5,9 +5,11 @@ var OnParseBoldTag = function (dynamicText, parser) {
         })
         .on('+b', function () {
             dynamicText.textStyle.setBold(true);
+            parser.skipEvent();
         })
         .on('-b', function () {
             dynamicText.textStyle.setBold(false);
+            parser.skipEvent();
         })
 }
 

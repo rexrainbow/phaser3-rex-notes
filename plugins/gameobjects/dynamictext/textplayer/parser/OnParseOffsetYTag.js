@@ -10,9 +10,11 @@ var OnParseOffsetYTag = function (dynamicText, parser) {
                 y = defaultOffsetY;
             }
             dynamicText.textStyle.setOffsetY(y);
+            parser.skipEvent();
         })
         .on('-y', function () {
             dynamicText.textStyle.setOffsetY(0);
+            parser.skipEvent();
         })
         .on('complete', function () {
             dynamicText.textStyle.setOffsetY(0);

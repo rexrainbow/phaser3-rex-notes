@@ -10,9 +10,11 @@ var OnParseShadowColorTag = function (dynamicText, parser) {
                 color = defaultShadowColor;
             }
             dynamicText.textStyle.setShadowColor(color);
+            parser.skipEvent();
         })
         .on('-shadow', function () {
             dynamicText.textStyle.setShadowColor(null);
+            parser.skipEvent();
         })
         .on('complete', function () {
             dynamicText.textStyle.setShadowColor(defaultShadowColor);

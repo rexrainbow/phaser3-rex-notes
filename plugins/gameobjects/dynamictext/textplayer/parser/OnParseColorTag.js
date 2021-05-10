@@ -6,9 +6,11 @@ var OnParseColorTag = function (dynamicText, parser) {
         })
         .on('+color', function (color) {
             dynamicText.textStyle.setColor(color);
+            parser.skipEvent();
         })
         .on('-color', function () {
             dynamicText.textStyle.setColor(defaultColor);
+            parser.skipEvent();
         })
         .on('complete', function () {
             dynamicText.textStyle.setColor(defaultColor);

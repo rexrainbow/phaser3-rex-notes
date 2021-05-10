@@ -5,9 +5,11 @@ var OnParseItalicTag = function (dynamicText, parser) {
         })
         .on('+i', function () {
             dynamicText.textStyle.setItalic(true);
+            parser.skipEvent();
         })
         .on('-i', function () {
             dynamicText.textStyle.setItalic(false);
+            parser.skipEvent();
         })
 }
 

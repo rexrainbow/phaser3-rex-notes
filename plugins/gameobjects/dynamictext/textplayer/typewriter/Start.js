@@ -4,7 +4,6 @@ import { IsTypeable, IsCommand } from '../../dynamictext/bob/Types.js';
 var Start = function (children) {
     this.children = children;
     this.index = 0;
-    this.emit('start');
     this.onTypeStart(children);
     Typing.call(this);
     return WaitComplete(this);  // Promise

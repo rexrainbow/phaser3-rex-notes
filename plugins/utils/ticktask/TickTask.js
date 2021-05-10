@@ -6,6 +6,7 @@ class TickTask {
     constructor(parent, config) {
         this.parent = parent;
         this._isRunning = false;
+        this.isPaused = false;
         this.tickingState = false;
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
@@ -24,7 +25,7 @@ class TickTask {
         this.destroyEventEmitter();
         if (this.tickingState) {
             this.stopTicking();
-        }        
+        }
     }
 
     setTickingMode(mode) {
@@ -64,26 +65,36 @@ class TickTask {
     }
 
     start() {
+        this.isPaused = false;
         this.isRunning = true;
         return this;
     }
 
     pause() {
-        this.isRunning = false;
+        // Only can ba paused in running state
+        if (this.isRunning) {
+            this.isPaused = true;
+            this.isRunning = false;
+        }
         return this;
     }
 
     resume() {
-        this.isRunning = true;
+        // Only can ba resumed in paused state (paused from running state)
+        if (this.isPaused) {
+            this.isRunning = true;
+        }
         return this;
     }
 
     stop() {
-        this.isRunning = false;
+        this.isPaused = false;
+        this.isRunning = false;        
         return this;
     }
 
     complete() {
+        this.isPaused = false;
         this.isRunning = false;
         this.emit('complete', this.parent, this);
     }

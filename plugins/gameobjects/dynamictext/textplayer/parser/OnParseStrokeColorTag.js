@@ -10,9 +10,11 @@ var OnParseStrokeColorTag = function (dynamicText, parser) {
                 color = defaultStroke;
             }
             dynamicText.textStyle.setStrokeStyle(color);
+            parser.skipEvent();
         })
         .on('-stroke', function () {
             dynamicText.textStyle.setStrokeStyle(null);
+            parser.skipEvent();
         })
         .on('complete', function () {
             dynamicText.textStyle.setStrokeStyle(defaultStroke);
