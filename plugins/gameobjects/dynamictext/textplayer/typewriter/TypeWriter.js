@@ -1,8 +1,7 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
-import Timeline from '../../../../time/timeline/Timeline.js';
+import Timeline from '../../../../time/progresses/Timeline.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 // Events: start, char.start, char.progress, char.complete, complete
