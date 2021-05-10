@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../utils/Geoms.js'
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 
@@ -23,7 +23,7 @@ class Ball extends BaseSpinner {
         var ballRadius = radius * 0.1;
         var lineWidth = Math.ceil(ballRadius * 0.25);
 
-        var t = Fold(this.value, true);
+        var t = 1 - Yoyo(this.value);
         var trackRadius = Linear(0.3, 0.9, t) * radius;
 
         var shapes = this.getShapes();

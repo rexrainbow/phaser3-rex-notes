@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Arc } from '../utils/Geoms.js'
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 class Spinner extends BaseSpinner {
     constructor(scene, config) {
@@ -20,7 +20,7 @@ class Spinner extends BaseSpinner {
         var maxRadius = radius - lineWidth;
 
         var endAngle = this.value * 720;
-        var arcAngle = Fold(this.value) * 180;
+        var arcAngle = Yoyo(this.value) * 180;
         var startAngle = endAngle - arcAngle;
         this.getShape('arc')
             .lineStyle(lineWidth, this.color, 1)

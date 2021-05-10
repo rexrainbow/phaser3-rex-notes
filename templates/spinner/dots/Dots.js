@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 
 const Linear = Phaser.Math.Linear;
@@ -17,7 +17,7 @@ class Dots extends BaseSpinner {
             var dot = new Circle();
             this.addShape(dot);
 
-            var offset = Fold(i / (cnt - 1)) / 2;
+            var offset = Yoyo(i / (cnt - 1)) / 2;
             dot.setData('offset', offset);
         }
     }
@@ -36,7 +36,7 @@ class Dots extends BaseSpinner {
         for (var i = 0; i < cnt; i++) {
             var dot = shapes[i];
             var t = (this.value + dot.getData('offset')) % 1;
-            t = Fold(t);
+            t = Yoyo(t);
 
             var dotAlpha = Linear(0.25, 1, t);
             var dotRadius = Linear(0.5, 1, t) * maxDotRadius;

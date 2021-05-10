@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 
 const Linear = Phaser.Math.Linear;
@@ -45,7 +45,7 @@ class Grid extends BaseSpinner {
 
             var dot = shapes[i];
             var t = (this.value + dot.getData('offset')) % 1;
-            t = Fold(t);
+            t = Yoyo(t);
             dot.fillStyle(this.color, Linear(0.25, 1, t));
 
             if (isSizeChanged) {

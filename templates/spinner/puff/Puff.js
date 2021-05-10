@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 
 class Puff extends BaseSpinner {
@@ -19,7 +19,7 @@ class Puff extends BaseSpinner {
         var radius = this.radius;
         var puffRadius = radius * this.value;
         var lineWidth = Math.ceil(radius / 25);
-        var alpha = Fold(this.value);
+        var alpha = Yoyo(this.value);
 
         this.getShapes()[0]
             .lineStyle(lineWidth, this.color, alpha)

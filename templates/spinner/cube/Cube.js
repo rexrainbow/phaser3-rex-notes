@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Line } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 const ExpoIn = Phaser.Math.Easing.Expo.In;
@@ -40,8 +40,7 @@ class Cube extends BaseSpinner {
 
             var line = shapes[i];
             var t = (this.value + ((cnt - i) * 0.1)) % 1;
-            t = Fold(t);
-            t = ExpoIn(t);
+            t = ExpoIn(Yoyo(t));
 
             var lineAlpha = (cnt - i) / cnt;
             var lineHeight = Linear(0.7, 1, t) * cellHeight;

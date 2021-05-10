@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Line } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 const ExpoIn = Phaser.Math.Easing.Expo.In;
@@ -16,7 +16,7 @@ class Bars extends BaseSpinner {
         for (var i = 0; i < cnt; i++) {
             var line = new Line();
             this.addShape(line);
-            var offset = Fold(i / (cnt - 1)) / 2;
+            var offset = Yoyo(i / (cnt - 1)) / 2;
             line.setData('offset', offset);
         }
     }
@@ -37,8 +37,7 @@ class Bars extends BaseSpinner {
         for (var i = 0; i < cnt; i++) {
             var line = shapes[i];
             var t = (this.value + line.getData('offset')) % 1;
-            t = Fold(t);
-            t = ExpoIn(t);
+            t = ExpoIn(Yoyo(t));
 
             var lineHeight = Linear(0.4, 1, t) * maxLineHeight;
             var x = leftBound + (cellWidth * (i + 0.5))

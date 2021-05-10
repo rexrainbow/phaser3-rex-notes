@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle, Lines } from '../utils/Geoms.js';
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 const ExpoIn = Phaser.Math.Easing.Expo.In;
@@ -32,8 +32,7 @@ class Radio extends BaseSpinner {
             var shape = shapes[i];
 
             var t = (this.value + ((cnt - i) * 0.1)) % 1;
-            t = Fold(t);
-            t = ExpoIn(t);
+            t = ExpoIn(Yoyo(t));
 
             switch (shape.name) {
                 case 'center':

@@ -1,6 +1,6 @@
 import BaseSpinner from '../base/BaseSpinner.js';
 import { Circle } from '../utils/Geoms.js'
-import Fold from '../utils/Fold.js';
+import Yoyo from '../utils/Yoyo.js';
 
 
 class Rings extends BaseSpinner {
@@ -26,7 +26,7 @@ class Rings extends BaseSpinner {
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
             var ring = shapes[i];
             var t = (this.value + (i / cnt)) % 1;
-            var alpha = Fold(t);
+            var alpha = Yoyo(t);
             ring
                 .lineStyle(lineWidth, this.color, alpha)
                 .setRadius(t * maxRingRadius)
