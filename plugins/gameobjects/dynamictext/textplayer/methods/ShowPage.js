@@ -1,10 +1,7 @@
-var ShowPage = function (speed) {
+var ShowPage = function () {
     // Only can work after playing, and before processing last child
     if (!this.isPlaying || this.typeWriter.isLastChild()) {
         return this;
-    }
-    if (speed === undefined) {
-        speed = 0;
     }
 
     // Save parameters
@@ -21,10 +18,10 @@ var ShowPage = function (speed) {
                 .setSkipTypingAnimation(skipTypingAnimationSave)
 
         }, this)
-        .setSpeed(speed)
+        .setSpeed(0)
         .skipCurrentTypingDelay()
         .setIgnoreWait(true)
-        .setSkipTypingAnimation(true, true)
+        .setSkipTypingAnimation(true)
 
     return this;
 }

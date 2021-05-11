@@ -70,6 +70,11 @@ class BaseClock extends TickTask {
         return this;
     }
 
+    setTimeScale(value) {
+        this.timeScale = value;
+        return this;
+    }
+
     tick(delta) {
         delta *= this.timeScale;
         this.now += delta;
