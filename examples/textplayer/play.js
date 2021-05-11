@@ -101,6 +101,12 @@ class Demo extends Phaser.Scene {
             .on('wait.time', function (time) {
                 print.setText(`Wait time ${time}`);
             })
+            .on('page.start', function(){
+                console.log('page.start')
+            })
+            .on('page.complete', function(){
+                console.log('page.complete')
+            })
     }
 
     update() { }

@@ -27,6 +27,7 @@ var Play = function (content) {
 
 var TypingNextPage = function (textPlayer, wrapCallback, result) {
     result = wrapCallback.call(textPlayer, result);
+    textPlayer.emit('page.start');
     textPlayer.typeWriter
         .start(result.children)
         .then(function () {
@@ -34,6 +35,7 @@ var TypingNextPage = function (textPlayer, wrapCallback, result) {
                 textPlayer.emit('complete');
             } else {
                 // TODO: wait click -- continue
+                textPlayer.emit('page.complete')
                 TypingNextPage(textPlayer, wrapCallback, result);
             }
         })

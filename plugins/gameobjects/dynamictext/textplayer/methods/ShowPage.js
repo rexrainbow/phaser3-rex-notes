@@ -24,7 +24,7 @@ var ShowPage = function (speed) {
         .setSpeed(speed)
         .skipCurrentTypingDelay()
         .setIgnoreWait(true)
-        .setSkipTypingAnimation(true)
+        .setSkipTypingAnimation(true, true)
 
     return this;
 }
