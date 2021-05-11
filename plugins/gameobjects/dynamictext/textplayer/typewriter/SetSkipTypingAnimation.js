@@ -1,3 +1,5 @@
+import { TypingAnimationTimerType, } from './TimerTypes.js';
+
 var SetSkipTypingAnimation = function (value) {
     if (value === undefined) {
         value = true;
@@ -5,7 +7,7 @@ var SetSkipTypingAnimation = function (value) {
     this.skipTypingAnimation = value;
 
     // Skip current playing typing-animation
-    var timers = this.timeline.getTimers('anim');
+    var timers = this.timeline.getTimers(TypingAnimationTimerType);
     for (var i = 0, cnt = timers.length; i < cnt; i++) {
         timers[i].seek(1);
     }

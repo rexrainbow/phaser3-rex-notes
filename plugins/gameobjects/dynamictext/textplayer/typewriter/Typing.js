@@ -1,4 +1,5 @@
 import { IsTypeable, IsCommand } from '../../dynamictext/bob/Types.js';
+import { TypingDelayTimerType, TypingAnimationTimerType, } from './TimerTypes.js';
 
 var Typing = function (offsetTime) {
     if (offsetTime === undefined) {
@@ -24,7 +25,7 @@ var Typing = function (offsetTime) {
             var animationConfig = this.animationConfig;
             if (animationConfig.duration > 0) {
                 var animationTimer = this.timeline.addTimer({
-                    name: 'anim',
+                    name: TypingAnimationTimerType,
                     target: child,
                     duration: animationConfig.duration,
                     yoyo: animationConfig.yoyo,
@@ -47,7 +48,7 @@ var Typing = function (offsetTime) {
             if ((delay > 0) && !this.isLastChild()) {
                 // Process next character later
                 this.typingTimer = this.timeline.addTimer({
-                    name: 'delay',
+                    name: TypingDelayTimerType,
                     target: this,
                     duration: delay,
                     onComplete: function (target, t, timer) {
