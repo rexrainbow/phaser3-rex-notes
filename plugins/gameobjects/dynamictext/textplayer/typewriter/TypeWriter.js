@@ -9,11 +9,12 @@ class TypeWriter {
         this.setEventEmitter();
         this.dynamicText = dynamicText;
         this.timeline = new Timeline(dynamicText);
-        this.typingTimer = undefined;
-        this.pauseTypingTimer = undefined;
-        this.inTypingProcessLoop = false;
-        this.isTypingPaused = false;
+        this.typingTimer = undefined;  // Typing delay
+        this.pauseTypingTimer = undefined;  // Wait time
+        this.inTypingProcessLoop = false;  // Used in this.typing()
+        this.isTypingPaused = false;  // Used in this.wait(), this.pauseTyping(), this.resumeTyping()
         this.setIgnoreWait(false);
+        this.setSkipTypingAnimation(false);
 
         this.onTypeStart = GetValue(config, 'onTypeStart', SetChildrenInvisible);
         this.setSpeed(GetValue(config, 'speed', 250));

@@ -6,6 +6,8 @@ import PauseTyping from './PauseTyping.js';
 import ResumeTyping from './ResumeTyping.js';
 import Wait from './Wait.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
+import SetSkipTypingAnimation from './SetSkipTypingAnimation.js';
+import SkipCurrentTypingDelay from './SkipCurrentTypingDelay.js';
 
 export default {
     start: Start,
@@ -16,4 +18,6 @@ export default {
     resumeTyping: ResumeTyping,
     wait: Wait,
     setIgnoreWait: SetIgnoreWait,
+    setSkipTypingAnimation: SetSkipTypingAnimation,
+    skipCurrentTypingDelay: SkipCurrentTypingDelay,
 }

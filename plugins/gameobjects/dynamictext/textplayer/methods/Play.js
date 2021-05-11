@@ -3,6 +3,10 @@ import { WaitComplete } from '../../../../utils/promise/WaitEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var Play = function (content) {
+    if (this.isPlaying) {
+        return Promise.resolve();
+    }
+
     this.removeChildren();
     this.content = content;
     this.parser.start(content); // Parse bbcode-content

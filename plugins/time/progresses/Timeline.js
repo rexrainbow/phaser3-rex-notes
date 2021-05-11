@@ -44,6 +44,22 @@ class Timeline extends Clock {
         return timer;
     }
 
+    getTimers(name) {
+        var timers = [];
+
+        var timerQueues = [this.addedTimers, this.timers];
+        for (var ti = 0, tcnt = timerQueues.length; ti < tcnt; ti++) {
+            var timerQueue = timerQueues[ti];
+            for (var i = 0, cnt = timerQueue.length; i < cnt; i++) {
+                var timer = timerQueue[i];
+                if (timer.name === name) {
+                    timers.push(timer);
+                }
+            }
+        }
+        return timers;
+    }
+
     update(time, delta) {
         super.update(time, delta);
 

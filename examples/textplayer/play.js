@@ -84,6 +84,8 @@ class Demo extends Phaser.Scene {
                 .then(function () {
                     console.log('Play complete');
                 })
+
+            // text.showPage();
         })
 
         text

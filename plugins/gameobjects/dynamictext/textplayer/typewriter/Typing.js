@@ -23,7 +23,8 @@ var Typing = function (offsetTime) {
             // Typing this char
             var animationConfig = this.animationConfig;
             if (animationConfig.duration > 0) {
-                this.timeline.addTimer({
+                var animationTimer = this.timeline.addTimer({
+                    name: 'anim',
                     target: child,
                     duration: animationConfig.duration,
                     yoyo: animationConfig.yoyo,
@@ -31,18 +32,22 @@ var Typing = function (offsetTime) {
                     onProgress: animationConfig.onProgress,
                     onComplete: animationConfig.onComplete,
                 })
+                if (this.skipTypingAnimation) {
+                    animationTimer.seekToEnd();
+                }
             } else {  // No animationConfig, only invoke onStart callback
                 if (animationConfig.onStart) {
                     animationConfig.onStart(child, 0);
                 }
             }
             this.dynamicText.emit('typing', child);
-            
+
             delay += (this.speed + offsetTime);
             offsetTime = 0;
             if ((delay > 0) && !this.isLastChild()) {
                 // Process next character later
                 this.typingTimer = this.timeline.addTimer({
+                    name: 'delay',
                     target: this,
                     duration: delay,
                     onComplete: function (target, t, timer) {

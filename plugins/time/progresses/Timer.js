@@ -14,6 +14,11 @@ class Timer {
         return this;
     }
 
+    setName(name) {
+        this.name = name;
+        return this;
+    }
+
     setCallbacks(target, onStart, onProgress, onComplete) {
         this.target = target;
         this.onStart = onStart;
@@ -58,8 +63,14 @@ class Timer {
         return this;
     }
 
+    seekToEnd() {
+        this.remainder = 0;
+        return this;
+    }
+
     reset(o) {
         this
+            .setName(o.name)
             .setDuration(o.duration, o.yoyo)
             .setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete)
             .setPaused(false)
