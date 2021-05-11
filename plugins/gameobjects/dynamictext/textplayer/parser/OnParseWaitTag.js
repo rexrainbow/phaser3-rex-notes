@@ -19,7 +19,7 @@ var OnParseWaitTag = function (dynamicText, parser) {
 }
 
 var Wait = function (name) {
-    this.wait(name);
+    this.wait(name);  // typeWriter.wait(name)
 }
 
 var AppendCommand = function (dynamicText, name) {

@@ -5,6 +5,7 @@ import Resume from './Resume.js';
 import PauseTyping from './PauseTyping.js';
 import ResumeTyping from './ResumeTyping.js';
 import Wait from './Wait.js';
+import SetIgnoreWait from './SetIgnoreWait.js';
 
 export default {
     start: Start,
@@ -14,4 +15,5 @@ export default {
     pauseTyping: PauseTyping,
     resumeTyping: ResumeTyping,
     wait: Wait,
+    setIgnoreWait: SetIgnoreWait,
 }

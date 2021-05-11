@@ -7,8 +7,6 @@ class Timer {
         this
             .setTimeline(timeline)
             .reset(config)
-            .setPaused(false)
-            .setRemoved(false)
     }
 
     setTimeline(timeline) {
@@ -64,6 +62,8 @@ class Timer {
         this
             .setDuration(o.duration, o.yoyo)
             .setCallbacks(o.target, o.onStart, o.onProgress, o.onComplete)
+            .setPaused(false)
+            .setRemoved(false)
         return this;
     }
 
@@ -71,8 +71,6 @@ class Timer {
         this
             .setTimeline()
             .setCallbacks()
-            .setPaused(false)
-            .setRemoved(false)
     }
 
     getProgress() {

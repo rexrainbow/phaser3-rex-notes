@@ -12,7 +12,7 @@ var OnParseSoundEffectTag = function (dynamicText, parser) {
 }
 
 var PlaySoundEffect = function(name) {
-    this.play(name); // Don't pass more parameters
+    this.play(name); // scene.sound.play(name)
 }
 
 var AppendCommand = function (dynamicText, name) {

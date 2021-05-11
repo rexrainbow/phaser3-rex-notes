@@ -13,6 +13,7 @@ class TypeWriter {
         this.pauseTypingTimer = undefined;
         this.inTypingProcessLoop = false;
         this.isTypingPaused = false;
+        this.setIgnoreWait(false);
 
         this.onTypeStart = GetValue(config, 'onTypeStart', SetChildrenInvisible);
         this.setSpeed(GetValue(config, 'speed', 250));

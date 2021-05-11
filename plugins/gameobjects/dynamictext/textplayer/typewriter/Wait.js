@@ -1,6 +1,6 @@
 var Wait = function (name) {
-    // Already in typingPaused state
-    if (this.isTypingPaused) {
+    // Already in typingPaused state, or ignore any wait
+    if (this.isTypingPaused || this.ignoreWait) {
         return this;
     }
 

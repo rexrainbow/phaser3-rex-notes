@@ -20,7 +20,7 @@ var OnParseTypingSpeedTag = function (dynamicText, parser) {
 }
 
 var SetSpeed = function(speed) {
-    this.setSpeed(speed);
+    this.setSpeed(speed);  // typeWriter.setSpeed(speed)
 }
 
 var AppendCommand = function (dynamicText, speed) {
