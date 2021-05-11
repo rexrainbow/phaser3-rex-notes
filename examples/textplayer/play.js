@@ -72,7 +72,7 @@ class Demo extends Phaser.Scene {
                     }
                 },
 
-                clickTarget: null
+                clickTarget: this
 
             }
         )

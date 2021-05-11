@@ -87,7 +87,7 @@ var sizer = scene.rexUI.add.overlapSizer({
 or
 
 ```javascript
-var sizer = scene.rexUI.add.sizer(x, y, {
+var sizer = scene.rexUI.add.overlapSizer(x, y, {
     // width: undefined,
     // height: undefined,
     // anchor: undefined,
@@ -98,7 +98,7 @@ var sizer = scene.rexUI.add.sizer(x, y, {
 or
 
 ```javascript
-var sizer = scene.rexUI.add.sizer(x, y, width, height, {
+var sizer = scene.rexUI.add.overlapSizer(x, y, width, height, {
     // anchor: undefined,
     // space: { left: 0, right:0, top:0, bottom:0 }
 });

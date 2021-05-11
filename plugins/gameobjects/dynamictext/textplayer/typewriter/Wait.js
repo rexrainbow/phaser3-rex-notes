@@ -49,17 +49,12 @@ var WaitTime = function (time) {
 }
 
 var WaitClick = function () {
-    var touchEE;
-    if (this.dynamicText.clickTarget) {
-        touchEE = this.dynamicText.clickTarget.setInteractive();
-    } else {
-        touchEE = this.dynamicText.scene.input;
-    }
-    touchEE.once('pointerdown', ResumeTyping, this);
+    var clickEE = this.dynamicText.clickEE;
+    clickEE.once('pointerdown', ResumeTyping, this);
 
     // Canceled by other event
     this.once('resume-typing', function () {
-        touchEE.off('pointerdown', ResumeTyping, this);
+        clickEE.off('pointerdown', ResumeTyping, this);
     }, this);
 
     this.dynamicText.emit('wait.click');

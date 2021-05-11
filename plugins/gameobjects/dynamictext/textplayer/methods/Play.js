@@ -35,7 +35,7 @@ var TypingNextPage = function (textPlayer, wrapCallback, result) {
                 textPlayer.emit('complete');
             } else {
                 // TODO: wait click -- continue
-                textPlayer.emit('page.complete')
+                textPlayer.emit('page.complete');
                 TypingNextPage(textPlayer, wrapCallback, result);
             }
         })

@@ -2,6 +2,7 @@ import DynamicText from '../dynamictext/DynamicText.js';
 import GetParser from './parser/GetParser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import Methods from './methods/Methods.js';
+import IsSceneObject from '../../../utils/system/IsSceneObject.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -34,7 +35,11 @@ class TextPlayer extends DynamicText {
     }
 
     setClickTarget(target) {
-        this.clickTarget = target;
+        if (IsSceneObject(target)) {
+            this.clickEE = target.input;
+        } else {  // Assume that target is a game object
+            this.clickEE = target.setInteractive();
+        }
         return this;
     }
 }
