@@ -6,7 +6,9 @@ class Timer {
     constructor(timeline, config) {
         this
             .setTimeline(timeline)
-            .reset(config);
+            .reset(config)
+            .setPaused(false)
+            .setRemoved(false)
     }
 
     setTimeline(timeline) {
@@ -33,6 +35,31 @@ class Timer {
         return this;
     }
 
+    setPaused(state) {
+        this.isPaused = state;
+        return this;
+    }
+
+    pause() {
+        this.isPaused = true;
+        return this;
+    }
+
+    resume() {
+        this.isPaused = false;
+        return this;
+    }
+
+    setRemoved(state) {
+        this.removed = state;
+        return this;
+    }
+
+    remove() {
+        this.removed = true;
+        return this;
+    }
+
     reset(o) {
         this
             .setDuration(o.duration, o.yoyo)
@@ -43,7 +70,9 @@ class Timer {
     onFree() {
         this
             .setTimeline()
-            .setCallbacks();
+            .setCallbacks()
+            .setPaused(false)
+            .setRemoved(false)
     }
 
     getProgress() {
@@ -68,6 +97,12 @@ class Timer {
     }
 
     update(time, delta) {
+        if (this.removed) {
+            return true;
+        } else if (this.isPaused) {
+            return false;
+        }
+
         this.remainder -= delta;
         this.t = this.getProgress();
         this.runCallback(this.onProgress);

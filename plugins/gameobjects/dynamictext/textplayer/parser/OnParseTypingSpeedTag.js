@@ -24,12 +24,11 @@ var SetSpeed = function(speed) {
 }
 
 var AppendCommand = function (dynamicText, speed) {
-    var typeWriter = dynamicText.typeWriter;
     AppendCommandBase.call(dynamicText,
-        'speed',     // name
-        SetSpeed,    // callback
-        speed,       // params
-        typeWriter,  // scope
+        'speed',                 // name
+        SetSpeed,                // callback
+        speed,                   // params
+        dynamicText.typeWriter,  // scope
     );
 }
 

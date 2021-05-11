@@ -9,6 +9,10 @@ class TypeWriter {
         this.setEventEmitter();
         this.dynamicText = dynamicText;
         this.timeline = new Timeline(dynamicText);
+        this.typingTimer = undefined;
+        this.pauseTypingTimer = undefined;
+        this.inTypingProcessLoop = false;
+        this.isTypingPaused = false;
 
         this.onTypeStart = GetValue(config, 'onTypeStart', SetChildrenInvisible);
         this.setSpeed(GetValue(config, 'speed', 250));
@@ -44,6 +48,10 @@ class TypeWriter {
         var child = this.children[this.index];
         this.index++; // Point to next child
         return child;
+    }
+
+    isLastChild() {
+        return this.index === (this.children.length - 1);
     }
 }
 

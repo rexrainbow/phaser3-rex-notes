@@ -5,7 +5,9 @@ var Typing = function (offsetTime) {
         offsetTime = 0;
     }
 
-    while (true) {
+    var delay = 0;
+    this.inTypingProcessLoop = true;
+    while (this.inTypingProcessLoop) {
         var child = this.getNextChild();
         if (!child) {
             if (this.timeline.isRunning) {
@@ -16,9 +18,9 @@ var Typing = function (offsetTime) {
             } else {
                 this.emit('complete');
             }
-            break;
+            break;  // Leave this typing loop
         } else if (IsTypeable(child)) {
-            // Typing this child
+            // Typing this char
             var animationConfig = this.animationConfig;
             if (animationConfig.duration > 0) {
                 this.timeline.addTimer({
@@ -34,26 +36,31 @@ var Typing = function (offsetTime) {
                     animationConfig.onStart(child, 0);
                 }
             }
-
-            var delay = this.speed + offsetTime;
-            if (delay > 0) {
+            this.dynamicText.emit('typing', child);
+            
+            delay += (this.speed + offsetTime);
+            offsetTime = 0;
+            if ((delay > 0) && !this.isLastChild()) {
                 // Process next character later
-                this.timeline.addTimer({
+                this.typingTimer = this.timeline.addTimer({
                     target: this,
                     duration: delay,
                     onComplete: function (target, t, timer) {
+                        target.typingTimer = undefined;
                         Typing.call(target, timer.remainder);
                     }
                 })
-                break;
-            } else {
-                delay += this.speed;
+                break;  // Leave this typing loop                
             }
+            // Process next child
         } else if (IsCommand(child)) {
             child.exec();
+            // Process next child
         }
 
     }
+
+    this.inTypingProcessLoop = false;
 }
 
 export default Typing;

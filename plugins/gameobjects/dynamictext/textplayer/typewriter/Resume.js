@@ -1,5 +1,6 @@
 var Resume = function () {
-    this.timeline.resume();  // Also resume typing animation
+    // Resume typing timer and animation progresses
+    this.timeline.resume();
     return this;
 }
 

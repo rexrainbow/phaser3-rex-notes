@@ -5,7 +5,7 @@ import DefaultValueConverter from '../../utils/string/TypeConvert.js';
 import ParseValue from './ParseValue.js';
 
 const DefaultTagExpression = `[a-z0-9-_.]+`;
-const DefaultValueExpression = `[ #a-z-_.0-9,]+`;
+const DefaultValueExpression = `[ #a-z-_.0-9,|&]+`;
 const BypassValueConverter = function (s) { return s; }
 
 class BracketParser {

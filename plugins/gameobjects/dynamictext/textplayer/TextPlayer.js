@@ -25,10 +25,17 @@ class TextPlayer extends DynamicText {
         this.type = 'rexBBCodeDynamicText'
         this.parser = GetParser(this, config);
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
+        this.setClickTarget(GetValue(config, 'clickTarget', this));
+        this.isPlaying = false;
+
         if (content) {
             this.play(content);
         }
-        this.isPlaying = false;
+    }
+
+    setClickTarget(target) {
+        this.clickTarget = target;
+        return this;
     }
 }
 

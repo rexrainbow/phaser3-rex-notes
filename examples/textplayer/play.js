@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] fun[wait] [color=green]open[/color] source HTML5 game framework
-[color=#008B8B]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
+[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un [click][color=green]open[/color] source HTML5 game framework
+[color=#008B8B][wait=enter|click]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
 [color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
 
@@ -70,12 +70,14 @@ class Demo extends Phaser.Scene {
                             char.setY(value);
                         }
                     }
-                }
+                },
+
+                clickTarget: null
 
             }
         )
 
-        this.add.text(0, 580, 'Click to start');
+        var print = this.add.text(0, 580, 'Click to start');
         this.input.once('pointerdown', function () {
             text
                 .play(content)
@@ -84,7 +86,19 @@ class Demo extends Phaser.Scene {
                 })
         })
 
-
+        text
+            .on('typing', function (child) {
+                print.setText(`Typing ${child.text}`);
+            })
+            .on('wait.click', function () {
+                print.setText('Wait click');
+            })
+            .on('wait.keydown', function (keyName) {
+                print.setText(`Wait ${keyName} keydown`);
+            })
+            .on('wait.time', function (time) {
+                print.setText(`Wait time ${time}`);
+            })
     }
 
     update() { }
