@@ -13,7 +13,7 @@ A container with a panel, slider, and scroller.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-scollablepanel)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-scrollablepanel)
 
 ### Install plugin
 
