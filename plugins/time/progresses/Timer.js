@@ -63,8 +63,8 @@ class Timer {
         return this;
     }
 
-    seekToEnd() {
-        this.remainder = 0;
+    seek(t) {
+        this.remainder = this.duration * (1 - t);
         return this;
     }
 

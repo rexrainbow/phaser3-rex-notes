@@ -7,7 +7,7 @@ var SetSkipTypingAnimation = function (value) {
     // Skip current playing typing-animation
     var timers = this.timeline.getTimers('anim');
     for (var i = 0, cnt = timers.length; i < cnt; i++) {
-        timers[i].seekToEnd();
+        timers[i].seek(1);
     }
     return this;
 }

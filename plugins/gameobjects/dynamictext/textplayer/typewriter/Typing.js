@@ -33,7 +33,7 @@ var Typing = function (offsetTime) {
                     onComplete: animationConfig.onComplete,
                 })
                 if (this.skipTypingAnimation) {
-                    animationTimer.seekToEnd();
+                    animationTimer.seek(1);
                 }
             } else {  // No animationConfig, only invoke onStart callback
                 if (animationConfig.onStart) {

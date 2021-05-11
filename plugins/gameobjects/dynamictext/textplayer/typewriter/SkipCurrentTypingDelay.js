@@ -1,6 +1,6 @@
 var SkipCurrentTypingDelay = function () {
     if (this.typingTimer) {
-        this.typingTimer.seekToEnd();
+        this.typingTimer.seek(1);
     }
     return this;
 }
