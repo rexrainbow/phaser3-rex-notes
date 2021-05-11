@@ -5772,8 +5772,8 @@
 <h4 id="tag-and-content">Tag and content<a class="headerlink" href="#tag-and-content" title="Permanent link">&para;</a></h4>
 <p>Assume that left-delimiter and right-delimiter is <code>'&lt;&gt;'</code></p>
 <ul>
-<li>Tag-start : <code>'&lt;TAG&gt;'</code><ul>
-<li>Tag-start with a single value : <code>'&lt;TAG=value&gt;'</code><ul>
+<li>Start-tag : <code>'&lt;TAG&gt;'</code><ul>
+<li>Start-tag with a single value : <code>'&lt;TAG=value&gt;'</code><ul>
 <li><code>value</code> : If <code>valueConvert</code> is <code>true</code>,<ul>
 <li>Number</li>
 <li>Boolean</li>
@@ -5788,10 +5788,10 @@
 </li>
 </ul>
 </li>
-<li>Tag-start with array values, separated via <code>','</code> : <code>'&lt;TAG=value0,value1,value2&gt;'</code></li>
+<li>Start-tag with array values, separated via <code>','</code> : <code>'&lt;TAG=value0,value1,value2&gt;'</code></li>
 </ul>
 </li>
-<li>Tag-end : <code>'&lt;\TAG&gt;'</code></li>
+<li>End-tag : <code>'&lt;\TAG&gt;'</code></li>
 <li>Content : Any string outside of tag-start, or tag-end.</li>
 </ul>
 <h3 id="start-parsing">Start parsing<a class="headerlink" href="#start-parsing" title="Permanent link">&para;</a></h3>
@@ -5814,8 +5814,8 @@
 
 <p>When getting a tag-start, or a tag-end event, parser will emitts </p>
 <ul>
-<li>Tag-start : <code>'+TAG'</code>, then <code>'+'</code></li>
-<li>Tag-end : <code>'-TAG'</code>, then <code>'-'</code></li>
+<li>Start-tag : <code>'+TAG'</code>, then <code>'+'</code></li>
+<li>End-tag : <code>'-TAG'</code>, then <code>'-'</code></li>
 </ul>
 <p>Invoke this medthod under <code>'+TAG'</code>, or <code>'-TAG'</code> event to skip <code>'+'</code>, or <code>'-'</code> event.</p>
 <h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
