@@ -1,6 +1,7 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
 import Timeline from '../../../../time/progresses/Timeline.js';
+import { ClearEvents } from './Events.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -22,12 +23,23 @@ class TypeWriter {
     }
 
     destroy() {
+        for (var i = 0, cnt = ClearEvents.length; i < cnt; i++) {
+            this.emit(ClearEvents[i]);
+        }
+
         this.destroyEventEmitter();
+
         this.dynamicText = undefined;
+
         this.timeline.destroy();
+        this.timeline = undefined;
+
         this.typingTimer = undefined;
+
         this.pauseTypingTimer = undefined;
+
         this.onTypeStart = undefined;
+
         this.animationConfig = undefined;
     }
 

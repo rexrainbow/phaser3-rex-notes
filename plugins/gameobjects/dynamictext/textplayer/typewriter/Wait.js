@@ -1,3 +1,5 @@
+import { RemoveWaitEvents } from './Events.js';
+
 var Wait = function (name) {
     // Already in typingPaused state, or ignore any wait
     if (this.isTypingPaused || this.ignoreWait) {
@@ -26,6 +28,7 @@ var ResumeTyping = function () {
 
 var WaitEvent = function () {
     this.dynamicText.emit('wait', ResumeTyping);
+    // Don't have to remove any event when destroyed
 }
 
 var WaitTime = function (time) {
@@ -39,11 +42,12 @@ var WaitTime = function (time) {
     })
 
     // Resumed by other event
-    this.once('resume-typing', function () {
+    this.once(RemoveWaitEvents, function () {
         if (this.pauseTypingTimer) {
             this.pauseTypingTimer.remove();
         }
     }, this);
+    // Don't have to remove any event when destroyed
 
     this.dynamicText.emit('wait.time', time);
 }
@@ -52,8 +56,8 @@ var WaitClick = function () {
     var clickEE = this.dynamicText.clickEE;
     clickEE.once('pointerdown', ResumeTyping, this);
 
-    // Resumed by other event
-    this.once('resume-typing', function () {
+    // Resumed by other event, or object destroyed 
+    this.once(RemoveWaitEvents, function () {
         clickEE.off('pointerdown', ResumeTyping, this);
     }, this);
 
@@ -66,8 +70,8 @@ var WaitKey = function (keyName) {
     keyboard
         .once(eventName, ResumeTyping, this);
 
-    // Resumed by other event
-    this.once('resume-typing', function () {
+    // Resumed by other event, or object destroyed 
+    this.once(RemoveWaitEvents, function () {
         keyboard.off(eventName, ResumeTyping, this);
     }, this);
 
