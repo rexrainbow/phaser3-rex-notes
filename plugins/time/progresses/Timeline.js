@@ -44,6 +44,17 @@ class Timeline extends Clock {
         return timer;
     }
 
+    delayCall(delay, callback, args, scope) {
+        var timer = this.addTimer({
+            duration: delay,
+            onComplete: function (target, t, timer) {
+                args.push(timer);
+                callback.apply(scope, args);
+            }
+        })
+        return timer;
+    }
+
     getTimers(name) {
         var timers = [];
 
