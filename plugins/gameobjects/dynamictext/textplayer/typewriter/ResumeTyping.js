@@ -17,10 +17,6 @@ var ResumeTyping = function (offsetTime) {
         this.isTypingPaused = false;
         this.typing(offsetTime);
     }
-
-    if (!this.isTypingPaused) {
-        this.emit(RemoveWaitEvents);
-    }
     return this;
 }
 

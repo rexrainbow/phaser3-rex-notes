@@ -2,7 +2,7 @@ import { RemoveWaitEvents } from './Events.js';
 
 var Wait = function (name) {
     // Already in typingPaused state, or ignore any wait
-    if (this.isTypingPaused || this.ignoreWait) {
+    if (this.ignoreWait) {
         return this;
     }
 
@@ -22,8 +22,10 @@ var Wait = function (name) {
     return this;
 }
 
+// Used in WaitClick, WaitKey
 var ResumeTyping = function () {
     this.resumeTyping();
+    this.emit(RemoveWaitEvents);
 }
 
 var WaitEvent = function () {
@@ -38,6 +40,7 @@ var WaitTime = function (time) {
         onComplete: function (target, t, timer) {
             target.pauseTypingTimer = undefined;
             target.resumeTyping(timer.remainder);
+            target.emit(RemoveWaitEvents);
         }
     })
 
