@@ -1,13 +1,16 @@
-var OnParseBoldTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseBoldTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.b', 'b');
     parser
         .on('start', function () {
             dynamicText.textStyle.setBold(false);
         })
-        .on('+b', function () {
+        .on(`+${tagName}`, function () {
             dynamicText.textStyle.setBold(true);
             parser.skipEvent();
         })
-        .on('-b', function () {
+        .on(`-${tagName}`, function () {
             dynamicText.textStyle.setBold(false);
             parser.skipEvent();
         })

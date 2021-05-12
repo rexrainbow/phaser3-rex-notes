@@ -1,13 +1,16 @@
-var OnParseItalicTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseItalicTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.i', 'i');
     parser
         .on('start', function () {
             dynamicText.textStyle.setItalic(false);
         })
-        .on('+i', function () {
+        .on(`+${tagName}`, function () {
             dynamicText.textStyle.setItalic(true);
             parser.skipEvent();
         })
-        .on('-i', function () {
+        .on(`-${tagName}`, function () {
             dynamicText.textStyle.setItalic(false);
             parser.skipEvent();
         })

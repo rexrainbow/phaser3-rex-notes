@@ -24,7 +24,7 @@ class TextPlayer extends DynamicText {
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
-        this.parser = GetParser(this, config);
+        this.parser = GetParser(this, GetValue(config, 'parser', undefined));
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));

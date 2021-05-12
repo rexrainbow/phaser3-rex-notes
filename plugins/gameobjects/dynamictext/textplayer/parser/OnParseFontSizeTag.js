@@ -1,14 +1,17 @@
-var OnParseFontSizeTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseFontSizeTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.size', 'size');
     var defaultFontSize;
     parser
         .on('start', function () {
             defaultFontSize = dynamicText.textStyle.fontSize;
         })
-        .on('+size', function (fontSize) {
+        .on(`+${tagName}`, function (fontSize) {
             dynamicText.textStyle.setFontSize(fontSize);
             parser.skipEvent();
         })
-        .on('-size', function () {
+        .on(`-${tagName}`, function () {
             dynamicText.textStyle.setFontSize(defaultFontSize);
             parser.skipEvent();
         })

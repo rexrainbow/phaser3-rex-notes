@@ -1,18 +1,21 @@
-var OnParseStrokeColorTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseStrokeColorTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.stroke', 'stroke');
     var defaultStroke;
     parser
         .on('start', function () {
             defaultStroke = dynamicText.textStyle.stroke;
             dynamicText.textStyle.setStrokeStyle(null);
         })
-        .on('+stroke', function (color) {
+        .on(`+${tagName}`, function (color) {
             if (color === undefined) {
                 color = defaultStroke;
             }
             dynamicText.textStyle.setStrokeStyle(color);
             parser.skipEvent();
         })
-        .on('-stroke', function () {
+        .on(`-${tagName}`, function () {
             dynamicText.textStyle.setStrokeStyle(null);
             parser.skipEvent();
         })

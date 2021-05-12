@@ -1,12 +1,15 @@
 import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
-var OnParseSoundEffectTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseSoundEffectTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.se', 'se');
     parser
-        .on('+se', function (name) {
+        .on(`+${tagName}`, function (name) {
             AppendCommand(dynamicText, name);
             parser.skipEvent();
         })
-        .on('-se', function () {
+        .on(`-${tagName}`, function () {
             parser.skipEvent();
         })
 }

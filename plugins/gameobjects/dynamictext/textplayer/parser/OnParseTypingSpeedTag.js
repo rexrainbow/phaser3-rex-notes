@@ -1,16 +1,19 @@
 import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
-var OnParseTypingSpeedTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseTypingSpeedTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.speed', 'speed');
     var defaultSpeed;
     parser
         .on('start', function () {
             defaultSpeed = dynamicText.typeWriter.speed;
         })
-        .on('+speed', function (speed) {
+        .on(`+${tagName}`, function (speed) {
             AppendCommand(dynamicText, speed);
             parser.skipEvent();
         })
-        .on('-speed', function () {
+        .on(`-${tagName}`, function () {
             AppendCommand(dynamicText, defaultSpeed);
             parser.skipEvent();
         })

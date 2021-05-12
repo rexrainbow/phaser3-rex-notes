@@ -1,6 +1,6 @@
 import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
-var OnParseCustomTag = function (dynamicText, parser) {
+var OnParseCustomTag = function (dynamicText, parser, config) {
     parser
         .on('start', function () {
             dynamicText.emit('parser.start', parser);

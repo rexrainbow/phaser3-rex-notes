@@ -1,18 +1,21 @@
-var OnParseOffsetYTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseOffsetYTag = function (dynamicText, parser, config) {
+    var tagName = GetValue(config, 'tags.y', 'y');
     var defaultOffsetY;
     parser
         .on('start', function () {
             defaultOffsetY = dynamicText.textStyle.offsetY;
             dynamicText.textStyle.setOffsetY(0);
         })
-        .on('+y', function (y) {
+        .on(`+${tagName}`, function (y) {
             if (y === undefined) {
                 y = defaultOffsetY;
             }
             dynamicText.textStyle.setOffsetY(y);
             parser.skipEvent();
         })
-        .on('-y', function () {
+        .on(`-${tagName}`, function () {
             dynamicText.textStyle.setOffsetY(0);
             parser.skipEvent();
         })

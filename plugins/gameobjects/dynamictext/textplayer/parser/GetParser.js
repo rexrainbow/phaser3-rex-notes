@@ -28,7 +28,7 @@ var GetParser = function (dynamicText, config) {
     });
 
     for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
-        ParseCallbacks[i](dynamicText, parser);
+        ParseCallbacks[i](dynamicText, parser, config);
     }
 
     return parser;

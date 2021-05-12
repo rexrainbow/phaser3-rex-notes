@@ -1,19 +1,23 @@
 import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
-var OnParseWaitTag = function (dynamicText, parser) {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+var OnParseWaitTag = function (dynamicText, parser, config) {
+    var tagWait = GetValue(config, 'tags.wait', 'wait');
+    var tagClick = GetValue(config, 'tags.click', 'click');
     parser
-        .on('+wait', function (name) {
+        .on(`+${tagWait}`, function (name) {
             AppendCommand(dynamicText, name);
             parser.skipEvent();
         })
-        .on('-wait', function () {
+        .on(`-${tagWait}`, function () {
             parser.skipEvent();
         })
-        .on('+click', function () {  // Equal to +wait
+        .on(`+${tagClick}`, function () {  // Equal to [wait=click]
             AppendCommand(dynamicText, 'click');
             parser.skipEvent();
         })
-        .on('-click', function () {  // Equal to -wait
+        .on(`-${tagClick}`, function () {  // Equal to [/wait]
             parser.skipEvent();
         })
 }
