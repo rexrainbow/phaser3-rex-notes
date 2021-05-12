@@ -7,6 +7,7 @@ module.exports = {
     'circularprogresscanvasplugin': './plugins/circularprogresscanvas-plugin.js',    
     'roundrectanglecanvasplugin': './plugins/roundrectanglecanvas-plugin.js',
     'dynamictextplugin': './plugins/dynamictext-plugin.js',
+    'textplayerplugin': './plugins/textplayer-plugin.js',
     'containerliteplugin': './plugins/containerlite-plugin.js',
     'gridtableplugin': './plugins/gridtable-plugin.js',
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
