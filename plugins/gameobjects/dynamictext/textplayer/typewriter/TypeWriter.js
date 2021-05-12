@@ -1,15 +1,14 @@
 import EventEmitterMethods from '../../../../utils/eventemitter/EventEmitterMethods.js';
 import Methods from './Methods.js';
 import Timeline from '../../../../time/progresses/Timeline.js';
-import { ClearEvents } from './Events.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TypeWriter {
-    constructor(dynamicText, config) {
+    constructor(textPlayer, config) {
         this.setEventEmitter();
-        this.dynamicText = dynamicText;
-        this.timeline = new Timeline(dynamicText);
+        this.textPlayer = textPlayer;
+        this.timeline = new Timeline(textPlayer);
         this.typingTimer = undefined;  // Typing delay
         this.pauseTypingTimer = undefined;  // Wait time
         this.inTypingProcessLoop = false;  // Used in this.typing()
@@ -23,13 +22,9 @@ class TypeWriter {
     }
 
     destroy() {
-        for (var i = 0, cnt = ClearEvents.length; i < cnt; i++) {
-            this.emit(ClearEvents[i]);
-        }
-
         this.destroyEventEmitter();
 
-        this.dynamicText = undefined;
+        this.textPlayer = undefined;
 
         this.timeline.destroy();
         this.timeline = undefined;

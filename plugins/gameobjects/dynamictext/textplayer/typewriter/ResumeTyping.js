@@ -1,5 +1,3 @@
-import { RemoveWaitEvents } from './Events.js';
-
 var ResumeTyping = function (offsetTime) {
     // Already not in typingPaused state
     if (!this.isTypingPaused) {

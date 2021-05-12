@@ -41,7 +41,7 @@ var Typing = function (offsetTime) {
                     animationConfig.onStart(child, 0);
                 }
             }
-            this.dynamicText.emit('typing', child);
+            this.textPlayer.emit('typing', child);
 
             delay += (this.speed + offsetTime);
             offsetTime = 0;
