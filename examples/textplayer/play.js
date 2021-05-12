@@ -72,7 +72,12 @@ class Demo extends Phaser.Scene {
                     }
                 },
 
-                clickTarget: this
+                clickTarget: this,
+                nextPageInput: 'click|2000'
+                // nextPageInput: function(callback) {
+                //     console.log('Custom next-page-input')
+                //     callback();
+                // }
 
             }
         )
@@ -85,7 +90,7 @@ class Demo extends Phaser.Scene {
                     console.log('Play complete');
                 })
 
-            // text.showPage();
+            // text.showPage();  // Show all characters in this page
         })
 
         text
