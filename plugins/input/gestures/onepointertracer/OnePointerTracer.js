@@ -73,10 +73,6 @@ class OnePointerTracer extends TickTask {
         super.shutdown();
     }
 
-    destroy() {
-        this.shutdown();
-    }
-
     get enable() {
         return this._enable;
     }

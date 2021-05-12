@@ -28,6 +28,10 @@ class TickTask {
         }
     }
 
+    destroy() {
+        this.shutdown();
+    }
+
     setTickingMode(mode) {
         if (typeof (mode) === 'string') {
             mode = TICKINGMODE[mode];

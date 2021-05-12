@@ -45,10 +45,6 @@ class BaseClock extends TickTask {
         this.scene = undefined;
     }
 
-    destroy() {
-        this.shutdown();
-    }
-
     // Override
     // startTicking() { }
 

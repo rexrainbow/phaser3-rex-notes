@@ -34,6 +34,23 @@ class TextPlayer extends DynamicText {
         }
     }
 
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+
+        this.parser.destroy();
+        this.parser = undefined;
+
+        this.typeWriter.destroy();
+        this.typeWriter = undefined;
+
+        this.clickEE = undefined;
+
+        super.destroy(fromScene);
+    }
+
     setClickTarget(target) {
         if (IsSceneObject(target)) {
             this.clickEE = target.input;

@@ -56,10 +56,6 @@ class ShakePosition extends TickTask {
         this.scene = undefined;
     }
 
-    destroy() {
-        this.shutdown();
-    }
-
     startTicking() {
         super.startTicking();
 

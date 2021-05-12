@@ -16,13 +16,28 @@ class TypeWriter {
         this.setIgnoreWait(false);
         this.setSkipTypingAnimation(false);
 
-        this.onTypeStart = GetValue(config, 'onTypeStart', SetChildrenInvisible);
+        this.setTypingStartCallback(GetValue(config, 'onTypeStart', SetChildrenInvisible));
         this.setSpeed(GetValue(config, 'speed', 250));
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
     }
 
+    destroy() {
+        this.destroyEventEmitter();
+        this.dynamicText = undefined;
+        this.timeline.destroy();
+        this.typingTimer = undefined;
+        this.pauseTypingTimer = undefined;
+        this.onTypeStart = undefined;
+        this.animationConfig = undefined;
+    }
+
     setSpeed(speed) {
         this.speed = speed;
+        return this;
+    }
+
+    setTypingStartCallback(callback) {
+        this.onTypeStart = callback;
         return this;
     }
 

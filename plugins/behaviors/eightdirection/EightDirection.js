@@ -48,10 +48,6 @@ class EightDirection extends TickTask {
         this.scene = undefined;
     }
 
-    destroy() {
-        this.shutdown();
-    }
-
     startTicking() {
         super.startTicking();
         this.scene.events.on('update', this.update, this);

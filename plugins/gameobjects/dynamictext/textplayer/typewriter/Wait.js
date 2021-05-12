@@ -38,7 +38,7 @@ var WaitTime = function (time) {
         }
     })
 
-    // Canceled by other event
+    // Resumed by other event
     this.once('resume-typing', function () {
         if (this.pauseTypingTimer) {
             this.pauseTypingTimer.remove();
@@ -52,7 +52,7 @@ var WaitClick = function () {
     var clickEE = this.dynamicText.clickEE;
     clickEE.once('pointerdown', ResumeTyping, this);
 
-    // Canceled by other event
+    // Resumed by other event
     this.once('resume-typing', function () {
         clickEE.off('pointerdown', ResumeTyping, this);
     }, this);
@@ -66,7 +66,7 @@ var WaitKey = function (keyName) {
     keyboard
         .once(eventName, ResumeTyping, this);
 
-    // Canceled by other event
+    // Resumed by other event
     this.once('resume-typing', function () {
         keyboard.off(eventName, ResumeTyping, this);
     }, this);
