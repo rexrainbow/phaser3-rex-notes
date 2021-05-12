@@ -84,13 +84,12 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 580, 'Click to start');
         this.input.once('pointerdown', function () {
-            text
-                .play(content)
+            text.playPromise(content)
                 .then(function () {
                     console.log('Play complete');
                 })
 
-            // text.showPage();  // Show all characters in this page
+            text.showPage();  // Show all characters in this page
         })
 
         text

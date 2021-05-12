@@ -1,4 +1,4 @@
-import { WaitComplete } from '../../../../utils/promise/WaitEvent.js';
+import { StopPlayEvent } from './utils/Events.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -22,7 +22,7 @@ var Play = function (content) {
     }, this);
 
     TypingNextPage(this, wrapCallback);
-    return WaitComplete(this);  // Promise
+    return this;
 }
 
 var TypingNextPage = function (textPlayer, wrapCallback, result) {
@@ -30,20 +30,27 @@ var TypingNextPage = function (textPlayer, wrapCallback, result) {
 
     textPlayer.emit('page.start');
 
-    textPlayer.typeWriter
-        .once('complete', function () {
-            if (result.isLastPage) {
-                textPlayer.emit('complete');
-            } else {
-                textPlayer.emit('page.complete');
-                if (textPlayer.nextPageInput) {
-                    textPlayer.nextPageInput(TypingNextPage, [textPlayer, wrapCallback, result]);
-                }
-
+    var OnTypingPageComplete = function () {
+        textPlayer.emit(StopPlayEvent);  // Clear registed StopPlayEvent
+        if (result.isLastPage) {
+            textPlayer.emit('complete');
+        } else {
+            textPlayer.emit('page.complete');
+            if (textPlayer.nextPageInput) {
+                textPlayer.nextPageInput(TypingNextPage, [textPlayer, wrapCallback, result]);
             }
-        })
-        .start(result.children)
-        // TODO: If page typing is canceled?
+
+        }
+    }
+
+    // Remove event when typing pages has been canceled
+    textPlayer.once(StopPlayEvent, function () {
+        textPlayer.typeWriter.off('complete', OnTypingPageComplete, textPlayer);
+    })
+
+    textPlayer.typeWriter
+        .once('complete', OnTypingPageComplete, textPlayer)
+        .start(result.children);
 }
 
 export default Play;

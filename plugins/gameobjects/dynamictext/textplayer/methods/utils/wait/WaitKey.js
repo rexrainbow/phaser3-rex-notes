@@ -6,12 +6,13 @@ var WaitKey = function (textPlayer, keyName, callback, args, scope) {
 
     var eventName = `keydown-${keyName.toUpperCase()}`;
     var keyboard = textPlayer.scene.input.keyboard;
-    keyboard.once(eventName, wrapCallback, textPlayer);
 
     // Remove all wait events
     textPlayer.once(RemoveWaitEvents, function () {
         keyboard.off(eventName, wrapCallback, textPlayer);
     });
+
+    keyboard.once(eventName, wrapCallback, textPlayer);
 
     textPlayer.emit('wait.keydown', keyName);
 }
