@@ -1,26 +1,26 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseShadowColorTag = function (dynamicText, parser, config) {
+var OnParseShadowColorTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.shadow', 'shadow');
     var defaultShadowColor;
     parser
         .on('start', function () {
-            defaultShadowColor = dynamicText.textStyle.shadowColor;
-            dynamicText.textStyle.setShadowColor(null);
+            defaultShadowColor = textPlayer.textStyle.shadowColor;
+            textPlayer.textStyle.setShadowColor(null);
         })
         .on(`+${tagName}`, function (color) {
             if (color === undefined) {
                 color = defaultShadowColor;
             }
-            dynamicText.textStyle.setShadowColor(color);
+            textPlayer.textStyle.setShadowColor(color);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-            dynamicText.textStyle.setShadowColor(null);
+            textPlayer.textStyle.setShadowColor(null);
             parser.skipEvent();
         })
         .on('complete', function () {
-            dynamicText.textStyle.setShadowColor(defaultShadowColor);
+            textPlayer.textStyle.setShadowColor(defaultShadowColor);
         })
 }
 

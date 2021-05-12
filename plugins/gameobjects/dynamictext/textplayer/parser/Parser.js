@@ -10,6 +10,7 @@ import ParseTypingSpeedTag from './OnParseTypingSpeedTag.js';
 import ParseSoundEffectTag from './OnParseSoundEffectTag.js';
 import ParseWaitTag from './OnParseWaitTag.js';
 import ParseCustomTag from './OnParseCustomTag.js';
+import ParseNewLineTag from './OnParseNewLineTag.js';
 import ParseContent from './OnParseContent.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -18,20 +19,28 @@ const ParseCallbacks = [
     ParseBoldTag, ParseItalicTag,
     ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag,
     ParseTypingSpeedTag, ParseSoundEffectTag, ParseWaitTag, ParseCustomTag,
-    ParseContent
+    ParseNewLineTag, ParseContent
 ];
 
-var GetParser = function (dynamicText, config) {
-    var delimiters = GetValue(config, 'delimiters', '[]');
-    var parser = new BracketParser({
-        delimiters: delimiters
-    });
+class Parser extends BracketParser {
+    constructor(textPlayer, config) {
+        var delimiters = GetValue(config, 'delimiters', '[]');
+        super({
+            delimiters: delimiters
+        });
 
-    for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
-        ParseCallbacks[i](dynamicText, parser, config);
+        for (var i = 0, cnt = ParseCallbacks.length; i < cnt; i++) {
+            ParseCallbacks[i](textPlayer, this, config);
+        }
     }
 
-    return parser;
+    start(source) {        
+        // Replace \n to ''
+        source = source.replace(/\n/g, '');
+        // Use [r] to put \n
+        super.start(source);
+        return this;
+    }
 }
 
-export default GetParser;
+export default Parser;

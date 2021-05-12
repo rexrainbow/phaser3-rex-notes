@@ -1,17 +1,17 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseBoldTag = function (dynamicText, parser, config) {
+var OnParseBoldTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.b', 'b');
     parser
         .on('start', function () {
-            dynamicText.textStyle.setBold(false);
+            textPlayer.textStyle.setBold(false);
         })
         .on(`+${tagName}`, function () {
-            dynamicText.textStyle.setBold(true);
+            textPlayer.textStyle.setBold(true);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-            dynamicText.textStyle.setBold(false);
+            textPlayer.textStyle.setBold(false);
             parser.skipEvent();
         })
 }

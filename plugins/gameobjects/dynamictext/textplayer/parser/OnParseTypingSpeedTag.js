@@ -2,23 +2,23 @@ import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseTypingSpeedTag = function (dynamicText, parser, config) {
+var OnParseTypingSpeedTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.speed', 'speed');
     var defaultSpeed;
     parser
         .on('start', function () {
-            defaultSpeed = dynamicText.typeWriter.speed;
+            defaultSpeed = textPlayer.typeWriter.speed;
         })
         .on(`+${tagName}`, function (speed) {
-            AppendCommand(dynamicText, speed);
+            AppendCommand(textPlayer, speed);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-            AppendCommand(dynamicText, defaultSpeed);
+            AppendCommand(textPlayer, defaultSpeed);
             parser.skipEvent();
         })
         .on('complete', function () {
-            dynamicText.typeWriter.speed = defaultSpeed;
+            textPlayer.typeWriter.speed = defaultSpeed;
         })
 }
 
@@ -26,12 +26,12 @@ var SetSpeed = function(speed) {
     this.setSpeed(speed);  // typeWriter.setSpeed(speed)
 }
 
-var AppendCommand = function (dynamicText, speed) {
-    AppendCommandBase.call(dynamicText,
+var AppendCommand = function (textPlayer, speed) {
+    AppendCommandBase.call(textPlayer,
         'speed',                 // name
         SetSpeed,                // callback
         speed,                   // params
-        dynamicText.typeWriter,  // scope
+        textPlayer.typeWriter,  // scope
     );
 }
 

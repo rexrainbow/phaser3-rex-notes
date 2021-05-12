@@ -1,17 +1,17 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseItalicTag = function (dynamicText, parser, config) {
+var OnParseItalicTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.i', 'i');
     parser
         .on('start', function () {
-            dynamicText.textStyle.setItalic(false);
+            textPlayer.textStyle.setItalic(false);
         })
         .on(`+${tagName}`, function () {
-            dynamicText.textStyle.setItalic(true);
+            textPlayer.textStyle.setItalic(true);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-            dynamicText.textStyle.setItalic(false);
+            textPlayer.textStyle.setItalic(false);
             parser.skipEvent();
         })
 }

@@ -1,5 +1,5 @@
 import DynamicText from '../dynamictext/DynamicText.js';
-import GetParser from './parser/GetParser.js';
+import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
@@ -24,7 +24,7 @@ class TextPlayer extends DynamicText {
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
-        this.parser = GetParser(this, GetValue(config, 'parser', undefined));
+        this.parser = new Parser(this, GetValue(config, 'parser', undefined));
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));

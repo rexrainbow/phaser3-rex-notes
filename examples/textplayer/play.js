@@ -14,9 +14,12 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], [se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un [click][color=green]open[/color] source HTML5 game framework
-[color=#008B8B][wait=enter|click]that offers WebGL and DynamicText rendering across desktop and mobile web browsers
-[color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools
+[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[se=explosion][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
+[click][color=green]open[/color] source HTML5 game framework[r]
+
+[color=#008B8B][wait=enter|click]that offers WebGL and DynamicText rendering across desktop and mobile web browsers[r]
+[color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
 
         var Cubic = Phaser.Math.Easing.Cubic.Out;
@@ -89,7 +92,7 @@ class Demo extends Phaser.Scene {
                     console.log('Play complete');
                 })
 
-            text.showPage();  // Show all characters in this page
+            // text.showPage();  // Show all characters in this page
         })
 
         text

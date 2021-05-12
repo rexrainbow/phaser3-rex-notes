@@ -1,26 +1,26 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseStrokeColorTag = function (dynamicText, parser, config) {
+var OnParseStrokeColorTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.stroke', 'stroke');
     var defaultStroke;
     parser
         .on('start', function () {
-            defaultStroke = dynamicText.textStyle.stroke;
-            dynamicText.textStyle.setStrokeStyle(null);
+            defaultStroke = textPlayer.textStyle.stroke;
+            textPlayer.textStyle.setStrokeStyle(null);
         })
         .on(`+${tagName}`, function (color) {
             if (color === undefined) {
                 color = defaultStroke;
             }
-            dynamicText.textStyle.setStrokeStyle(color);
+            textPlayer.textStyle.setStrokeStyle(color);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
-            dynamicText.textStyle.setStrokeStyle(null);
+            textPlayer.textStyle.setStrokeStyle(null);
             parser.skipEvent();
         })
         .on('complete', function () {
-            dynamicText.textStyle.setStrokeStyle(defaultStroke);
+            textPlayer.textStyle.setStrokeStyle(defaultStroke);
         })
 }
 

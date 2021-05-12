@@ -2,11 +2,11 @@ import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var OnParseSoundEffectTag = function (dynamicText, parser, config) {
+var OnParseSoundEffectTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.se', 'se');
     parser
         .on(`+${tagName}`, function (name) {
-            AppendCommand(dynamicText, name);
+            AppendCommand(textPlayer, name);
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
@@ -18,12 +18,12 @@ var PlaySoundEffect = function(name) {
     this.play(name); // scene.sound.play(name)
 }
 
-var AppendCommand = function (dynamicText, name) {
-    AppendCommandBase.call(dynamicText,
+var AppendCommand = function (textPlayer, name) {
+    AppendCommandBase.call(textPlayer,
         'se',                     // name
         PlaySoundEffect,          // callback
         name,                     // params
-        dynamicText.scene.sound,  // scope
+        textPlayer.scene.sound,  // scope
     );
 }
 
