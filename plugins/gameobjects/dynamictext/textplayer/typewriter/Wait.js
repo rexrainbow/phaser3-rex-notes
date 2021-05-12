@@ -1,8 +1,8 @@
-import WaitCallback from '../utils/wait/WaitCallback.js';
-import WaitTime from '../utils/wait/WaitTime.js';
-import WaitClick from '../utils/wait/WaitClick.js';
-import WaitKey from '../utils/wait/WaitKey.js';
-import WaitMultiple from '../utils/wait/WaitMultiple.js';
+import WaitCallback from '../methods/utils/wait/WaitCallback.js';
+import WaitTime from '../methods/utils/wait/WaitTime.js';
+import WaitClick from '../methods/utils/wait/WaitClick.js';
+import WaitKey from '../methods/utils/wait/WaitKey.js';
+import WaitMultiple from '../methods/utils/wait/WaitMultiple.js';
 
 var Wait = function (name) {
     // Already in typingPaused state, or ignore any wait

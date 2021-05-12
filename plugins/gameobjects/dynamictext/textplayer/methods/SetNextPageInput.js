@@ -1,8 +1,8 @@
-import GetWrapCallback from '../utils/wait/GetWrapCallback.js';
-import WaitTime from '../utils/wait/WaitTime.js';
-import WaitClick from '../utils/wait/WaitClick.js';
-import WaitKey from '../utils/wait/WaitKey.js';
-import WaitMultiple from '../utils/wait/WaitMultiple.js';
+import GetWrapCallback from './utils/wait/GetWrapCallback.js';
+import WaitTime from './utils/wait/WaitTime.js';
+import WaitClick from './utils/wait/WaitClick.js';
+import WaitKey from './utils/wait/WaitKey.js';
+import WaitMultiple from './utils/wait/WaitMultiple.js';
 
 var SetNextPageInput = function (input) {
     var textPlayer = this;
