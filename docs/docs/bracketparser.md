@@ -79,7 +79,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
     // valueConvert: true,
     // regex : {
     //     tag: '[a-z0-9-_.]+',
-    //     value: '[ #a-z-_.0-9,]+'
+    //     value: '[ #a-z-_.0-9,|&]+'
     // }
 });
 ```
@@ -98,7 +98,7 @@ var parser = scene.plugins.get('rexBracketParser').add({
         ```
 - `regex` :
     - `regex.tag` : Expression of parse tag. Default value is `'[a-z0-9-_.]+'`.
-    - `regex.value` : Expression of parse value. Default value is `'[ #a-z-_.0-9,]+'`.
+    - `regex.value` : Expression of parse value. Default value is `'[ #a-z-_.0-9,|&]+'`.
 
 #### Tag and content
 
