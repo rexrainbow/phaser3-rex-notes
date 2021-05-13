@@ -146,7 +146,7 @@ var RunWordWrap = function (config) {
             char.setActive().setPosition(x, y);
             resultChildren.push(char);
             lastLine.push(char);
-            x += (char.width + letterSpacing);
+            x += (char.outerWidth + letterSpacing);
         }
     }
 

@@ -83,8 +83,8 @@ class Scrollable extends Sizer {
         if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
             var child = this.childrenMap.child
             var innerHeight = (child.topChildOY - child.bottomChildOY);
-            var outterHeight = innerHeight + childPadding.top + childPadding.bottom;
-            var innerChildOY = (outterHeight * t) - childPadding.top;
+            var outerHeight = innerHeight + childPadding.top + childPadding.bottom;
+            var innerChildOY = (outerHeight * t) - childPadding.top;
             t = innerChildOY / innerHeight;
         }
 
@@ -95,14 +95,14 @@ class Scrollable extends Sizer {
     get t() {
         var t = this.childrenMap.child.t;
 
-        // Get outter childT
+        // Get outer childT
         var childPadding = this.childPadding;
         if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
             var child = this.childrenMap.child
             var innerHeight = (child.topChildOY - child.bottomChildOY);
-            var outterHeight = innerHeight + childPadding.top + childPadding.bottom;
-            var outterChildOY = (innerHeight * t) + childPadding.top;
-            t = outterChildOY / outterHeight;
+            var outerHeight = innerHeight + childPadding.top + childPadding.bottom;
+            var outerChildOY = (innerHeight * t) + childPadding.top;
+            t = outerChildOY / outerHeight;
         }
         return t;
     }

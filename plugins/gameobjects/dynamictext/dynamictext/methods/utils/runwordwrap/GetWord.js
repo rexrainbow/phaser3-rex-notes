@@ -14,13 +14,13 @@ var GetWord = function (children, startIndex, charMode, result) {
         var child = children[currentIndex];
         if ((child.type === CharTypeName) && (child.text !== ' ') && (child.text !== '\n')) {
             word.push(child);
-            wordWidth += child.width;
+            wordWidth += child.outerWidth;
             currentIndex++;
             // Continue
         } else {  // Get non-text child, a space, or a new-line
             if (currentIndex === startIndex) { // Single child
                 word.push(child);
-                wordWidth += child.width;
+                wordWidth += child.outerWidth;
             }
             break;
         }

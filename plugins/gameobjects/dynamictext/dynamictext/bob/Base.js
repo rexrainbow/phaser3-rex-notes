@@ -16,6 +16,8 @@ class Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
+            .setLeftSpace(0)
+            .setRightSpace(0)
             .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
@@ -193,6 +195,38 @@ class Base {
         return this;
     }
 
+    get leftSpace() {
+        return this._leftSpace;
+    }
+
+    set leftSpace(value) {
+        this.setDirty(this._leftSpace !== value);
+        this._leftSpace = value;
+    }
+
+    setLeftSpace(value) {
+        this.leftSpace = value;
+        return this;
+    }
+
+    get rightSpace() {
+        return this._rightSpace;
+    }
+
+    set rightSpace(value) {
+        this.setDirty(this._rightSpace !== value);
+        this._rightSpace = value;
+    }
+
+    setRightSpace(value) {
+        this.rightSpace = value;
+        return this;
+    }
+
+    get outerWidth() {
+        return this.width + this.leftSpace + this.rightSpace;
+    }
+
     get scaleY() {
         return this._scaleY;
     }
@@ -285,6 +319,13 @@ class Base {
         if ((scaleY !== undefined) && (height === undefined)) {
             this.setScaleY(scaleY);
         }
+
+        if (o.hasOwnProperty('leftSpace')) {
+            this.setLeftSpace(o.leftSpace);
+        }
+        if (o.hasOwnProperty('rightSpace')) {
+            this.setLeftSpace(o.rightSpace);
+        }
         return this;
     }
 
@@ -312,6 +353,8 @@ class Base {
             .setPosition(0, 0)
             .setRotation(0)
             .setScale(1, 1)
+            .setLeftSpace(0)
+            .setRightSpace(0)
             .setOrigin(0)
             .setDrawBelowCallback()
             .setDrawAboveCallback()
@@ -325,7 +368,7 @@ class Base {
         var context = this.context;
         context.save();
 
-        var x = this.x + this.offsetX - (this.originX * this.width),
+        var x = this.x + this.leftSpace + this.offsetX - (this.originX * this.width),
             y = this.y + this.offsetY;
         if (this.autoRound) {
             x = Math.round(x);
