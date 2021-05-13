@@ -1,4 +1,4 @@
-import AppendImageBase from '../../dynamictext/methods/AppendImage.js';
+import AppendImageBase from '../../../dynamictext/methods/AppendImage.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

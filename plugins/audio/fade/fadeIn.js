@@ -1,16 +1,21 @@
 import Fade from './Fade.js';
 
-var fadeIn = function (scene, sound, duration, endVolume, startVolume) {
+var FadeIn = function (scene, sound, duration, endVolume, startVolume) {
     if (endVolume === undefined) {
         endVolume = 1;
     }
     if (startVolume === undefined) {
         startVolume = 0;
     }
-    CONFIG.mode = 0;
-    CONFIG.volume.start = startVolume;
-    CONFIG.volume.end = endVolume;
-    CONFIG.duration = duration;
+
+    var config = {
+        mode: 0,
+        volume: {
+            start: startVolume,
+            end: endVolume
+        },
+        duration: duration
+    }
 
     // create sound instance by key
     if (typeof (sound) === 'string') {
@@ -20,9 +25,9 @@ var fadeIn = function (scene, sound, duration, endVolume, startVolume) {
     var fade;
     if (sound.hasOwnProperty('_fade')) {
         fade = sound._fade;
-        fade.stop().resetFromJSON(CONFIG);
+        fade.stop().resetFromJSON(config);
     } else {
-        fade = new Fade(scene, sound, CONFIG);
+        fade = new Fade(scene, sound, config);
         sound._fade = fade;
     }
 
@@ -33,8 +38,4 @@ var fadeIn = function (scene, sound, duration, endVolume, startVolume) {
     return sound;
 };
 
-var CONFIG = {
-    volume: {}
-}; // reuse this config
-
-export default fadeIn;
+export default FadeIn;

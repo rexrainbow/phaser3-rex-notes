@@ -1,4 +1,4 @@
-import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
+import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
 var OnParseCustomTag = function (textPlayer, parser, config) {
     parser

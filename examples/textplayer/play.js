@@ -103,7 +103,11 @@ class Demo extends Phaser.Scene {
 
         text
             .on('typing', function (child) {
-                print.setText(`Typing ${child.text}`);
+                if (child.type === 'text') {
+                    print.setText(`Typing ${child.text}`);
+                } else {
+                    print.setText(`Typing image ${child.key}`);
+                }
             })
             .on('wait.click', function () {
                 print.setText('Wait click');
@@ -113,6 +117,9 @@ class Demo extends Phaser.Scene {
             })
             .on('wait.time', function (time) {
                 print.setText(`Wait time ${time}`);
+            })
+            .on('wait.music', function (music) {
+                print.setText(`Wait music ${music.key}`);
             })
             .on('page.start', function () {
                 console.log('page.start')

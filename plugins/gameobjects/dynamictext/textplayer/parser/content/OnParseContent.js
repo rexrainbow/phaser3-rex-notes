@@ -1,4 +1,4 @@
-import AppendTextBase from '../../dynamictext/methods/AppendText.js';
+import AppendTextBase from '../../../dynamictext/methods/AppendText.js';
 
 var OnParseContent = function (textPlayer, parser, config) {
     parser

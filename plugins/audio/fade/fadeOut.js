@@ -1,20 +1,25 @@
 import Fade from './Fade.js';
 
-var fadeOut = function (scene, sound, duration, destroy) {
+var FadeOut = function (scene, sound, duration, destroy) {
     if (destroy === undefined) {
         destroy = true;
     }
-    CONFIG.mode = (destroy) ? 2 : 1; // 1: stop, 2: destroy
-    CONFIG.volume.start = sound.volume;
-    CONFIG.volume.end = 0;
-    CONFIG.duration = duration;
+
+    var config = {
+        mode: ((destroy) ? 2 : 1), // 1: stop, 2: destroy
+        volume: {
+            start: sound.volume,
+            end: 0
+        },
+        duration: duration
+    }
 
     var fade;
     if (sound.hasOwnProperty('_fade')) {
         fade = sound._fade;
-        fade.stop().resetFromJSON(CONFIG);
+        fade.stop().resetFromJSON(config);
     } else {
-        fade = new Fade(scene, sound, CONFIG);
+        fade = new Fade(scene, sound, config);
         sound._fade = fade;
     }
 
@@ -25,8 +30,4 @@ var fadeOut = function (scene, sound, duration, destroy) {
     return sound;
 };
 
-var CONFIG = {
-    volume: {}
-}; // reuse this config
-
-export default fadeOut;
+export default FadeOut;

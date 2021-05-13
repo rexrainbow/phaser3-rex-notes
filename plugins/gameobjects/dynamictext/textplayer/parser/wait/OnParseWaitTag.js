@@ -1,4 +1,4 @@
-import AppendCommandBase from '../../dynamictext/methods/AppendCommand.js';
+import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
