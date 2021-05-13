@@ -114,6 +114,7 @@ class Demo extends Phaser.Scene {
             .on('page.complete', function () {
                 console.log('page.complete')
             })
+
     }
 
     update() { }
