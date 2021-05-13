@@ -37,7 +37,12 @@ class TextPlayer extends DynamicText {
         }
 
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
+
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));
+
+        this.soundEffect = undefined;
+        this.backgroundMusic = undefined;
+
         this.isPlaying = false;
 
         if (content) {

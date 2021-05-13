@@ -19,7 +19,7 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
 }
 
 var FireEvent = function (param, tagName) {
-    this.emit(`tag.${tagName}`, param);  // textPlayer.emit(...)
+    this.emit(`tag.${tagName}`, param);  // this: textPlayer
 }
 
 var AppendCommand = function (textPlayer, name, param) {
@@ -27,7 +27,7 @@ var AppendCommand = function (textPlayer, name, param) {
         name,         // name
         FireEvent,    // callback
         param,        // params
-        textPlayer,  // scope
+        textPlayer,   // scope
     );
 }
 

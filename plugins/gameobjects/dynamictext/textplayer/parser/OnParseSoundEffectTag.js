@@ -14,8 +14,13 @@ var OnParseSoundEffectTag = function (textPlayer, parser, config) {
         })
 }
 
-var PlaySoundEffect = function(name) {
-    this.play(name); // scene.sound.play(name)
+var PlaySoundEffect = function (name) {
+    this.soundEffect = this.scene.sound.add(name);  // this: textPlayer
+    this.soundEffect.once('complete', function () {
+        this.soundEffect.destroy();
+        this.soundEffect = undefined;
+    }, this)
+        .play();
 }
 
 var AppendCommand = function (textPlayer, name) {
@@ -23,7 +28,7 @@ var AppendCommand = function (textPlayer, name) {
         'se',                     // name
         PlaySoundEffect,          // callback
         name,                     // params
-        textPlayer.scene.sound,  // scope
+        textPlayer,               // scope
     );
 }
 

@@ -23,15 +23,15 @@ var OnParseWaitTag = function (textPlayer, parser, config) {
 }
 
 var Wait = function (name) {
-    this.wait(name);  // typeWriter.wait(name)
+    this.typeWriter.wait(name);  // this: textPlayer
 }
 
 var AppendCommand = function (textPlayer, name) {
     AppendCommandBase.call(textPlayer,
-        'wait',                  // name
-        Wait,                    // callback
-        name,                    // params
-        textPlayer.typeWriter,  // scope
+        'wait',       // name
+        Wait,         // callback
+        name,         // params
+        textPlayer,   // scope
     );
 }
 

@@ -23,15 +23,15 @@ var OnParseTypingSpeedTag = function (textPlayer, parser, config) {
 }
 
 var SetSpeed = function(speed) {
-    this.setSpeed(speed);  // typeWriter.setSpeed(speed)
+    this.typeWriter.setSpeed(speed);  // this: textPlayer
 }
 
 var AppendCommand = function (textPlayer, speed) {
     AppendCommandBase.call(textPlayer,
-        'speed',                 // name
-        SetSpeed,                // callback
-        speed,                   // params
-        textPlayer.typeWriter,  // scope
+        'speed',      // name
+        SetSpeed,     // callback
+        speed,        // params
+        textPlayer,   // scope
     );
 }
 
