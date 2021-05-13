@@ -150,16 +150,6 @@ Default style
     //     descent: 0,
     //     fontSize: 0
     // },
-
-    // image:{
-    //     key: {
-    //         width,
-    //         height
-    //         left:
-    //         right:
-    //         y:
-    //     },
-    // }
 }
 ```
 

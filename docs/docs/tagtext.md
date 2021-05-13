@@ -145,16 +145,6 @@ Default style
     //     fontSize: 0
     // },
 
-    // image:{
-    //     key: {
-    //         width,
-    //         height
-    //         left:
-    //         right:
-    //         y:
-    //     },
-    // },
-
     tags: {
         //tag0: {
         //  color: 'red'
