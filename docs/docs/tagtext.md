@@ -138,12 +138,22 @@ Default style
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
         width: null
     },
-    metrics: false
+    metrics: false,
     // metrics: {
     //     ascent: 0,
     //     descent: 0,
     //     fontSize: 0
-    // }
+    // },
+
+    // image:{
+    //     key: {
+    //         width,
+    //         height
+    //         left:
+    //         right:
+    //         y:
+    //     },
+    // },
 
     tags: {
         //tag0: {

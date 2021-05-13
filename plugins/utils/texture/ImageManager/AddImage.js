@@ -7,6 +7,10 @@ var AddImage = function (key, config) {
         }
     }
 
+    if (!config.hasOwnProperty('key')) {
+        config.key = key;
+    }
+
     var textureKey = config.key, frameKey = config.frame;
     var width = config.width, height = config.height;
 

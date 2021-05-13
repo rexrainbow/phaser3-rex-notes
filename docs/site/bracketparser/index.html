@@ -5742,7 +5742,7 @@
     <span class="c1">// valueConvert: true,</span>
     <span class="c1">// regex : {</span>
     <span class="c1">//     tag: &#39;[a-z0-9-_.]+&#39;,</span>
-    <span class="c1">//     value: &#39;[ #a-z-_.0-9,]+&#39;</span>
+    <span class="c1">//     value: &#39;[ #a-z-_.0-9,|&amp;]+&#39;</span>
     <span class="c1">// }</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -5765,7 +5765,7 @@
 </li>
 <li><code>regex</code> :<ul>
 <li><code>regex.tag</code> : Expression of parse tag. Default value is <code>'[a-z0-9-_.]+'</code>.</li>
-<li><code>regex.value</code> : Expression of parse value. Default value is <code>'[ #a-z-_.0-9,]+'</code>.</li>
+<li><code>regex.value</code> : Expression of parse value. Default value is <code>'[ #a-z-_.0-9,|&amp;]+'</code>.</li>
 </ul>
 </li>
 </ul>

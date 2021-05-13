@@ -7,6 +7,11 @@ class ImageManager {
         this.images = {};
     }
 
+    destroy() {
+        this.textureManager = undefined;
+        this.images = undefined;
+    }
+
     add(key, config) {
         if (typeof (key) === 'string') {
             AddImage.call(this, key, config);

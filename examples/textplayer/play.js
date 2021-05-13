@@ -75,6 +75,12 @@ class Demo extends Phaser.Scene {
                     }
                 },
 
+                images: {
+                    'dude': {
+                        height: 24
+                    }
+                },
+
                 clickTarget: this,
                 nextPageInput: 'click|2000'
                 // nextPageInput: function(callback) {

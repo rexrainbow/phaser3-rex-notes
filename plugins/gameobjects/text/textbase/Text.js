@@ -117,6 +117,11 @@ class Text extends GameObject {
 
         this._imageManager = undefined;
 
+        var imageData = GetValue(config, 'images', undefined);
+        if (imageData) {
+            this.addImage(imageData);
+        }
+
         this.setText(text);
 
         scene.sys.game.events.on('contextrestored', function () {

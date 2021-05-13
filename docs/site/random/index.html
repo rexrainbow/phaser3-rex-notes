@@ -4015,8 +4015,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-random-integer-between-min-max" class="md-nav__link">
-    Get random integer between (min, max)
+  <a href="#get-random-value-between-min-max" class="md-nav__link">
+    Get random value between (min, max)
   </a>
   
 </li>
@@ -5420,8 +5420,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-random-integer-between-min-max" class="md-nav__link">
-    Get random integer between (min, max)
+  <a href="#get-random-value-between-min-max" class="md-nav__link">
+    Get random value between (min, max)
   </a>
   
 </li>
@@ -5465,14 +5465,30 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="get-random-integer-between-min-max">Get random integer between (min, max)<a class="headerlink" href="#get-random-integer-between-min-max" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</code></pre></div>
-
+<h3 id="get-random-value-between-min-max">Get random value between (min, max)<a class="headerlink" href="#get-random-value-between-min-max" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Random integer
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Random floating point number
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">FloatBetween</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="get-random-vector">Get random vector<a class="headerlink" href="#get-random-vector" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXY</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y}</span>
+<ul>
+<li>2D vector
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXY</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y}</span>
 <span class="c1">// var vec = Phaser.Math.RandomXY(vec, scale);</span>
-</code></pre></div>
+</code></pre></div></li>
+<li>3D vector
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXYZ</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y, z}</span>
+<span class="c1">// var vec = Phaser.Math.RandomXYZ(vec, scale);</span>
+</code></pre></div></li>
+<li>4D vector
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXYZW</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y, z, w}</span>
+<span class="c1">// var vec = Phaser.Math.RandomXYZW(vec, scale);</span>
+</code></pre></div></li>
+</ul>
                 
                   
                 

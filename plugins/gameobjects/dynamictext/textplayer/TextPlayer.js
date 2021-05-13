@@ -25,9 +25,17 @@ class TextPlayer extends DynamicText {
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
+
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
-        this._imageManager = undefined;
+
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
+
+        this._imageManager = undefined;
+        var imageData = GetValue(config, 'images', undefined);
+        if (imageData) {
+            this.addImage(imageData);
+        }
+
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));
         this.isPlaying = false;
@@ -57,6 +65,11 @@ class TextPlayer extends DynamicText {
 
         this.typeWriter.destroy();
         this.typeWriter = undefined;
+
+        if (this._imageManager) {
+            this._imageManager.destroy();
+        }
+        this._imageManager = undefined;
 
         this.clickEE = undefined;
 
