@@ -3,7 +3,7 @@ import Background from './bob/Background.js';
 import InnerBounds from './bob/InnerBounds.js';
 import TextStyle from './bob/char/TextStyle.js';
 import Methods from './methods/Methods';
-import PoolManager from './PoolManager.js';
+import PoolManager from './poolmanager/PoolManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,7 +1,8 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
-import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
 import TypeWriter from './typewriter/TypeWriter.js';
+import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
+import SoundManager from './soundmanager/SoundManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
@@ -36,12 +37,11 @@ class TextPlayer extends DynamicText {
             this.addImage(imageData);
         }
 
+        this._soundManager = undefined;
+
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
 
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));
-
-        this.soundEffect = undefined;
-        this.backgroundMusic = undefined;
 
         this.isPlaying = false;
 
@@ -55,6 +55,13 @@ class TextPlayer extends DynamicText {
             this._imageManager = new ImageManager(this.scene);
         }
         return this._imageManager;
+    }
+
+    get soundManager() {
+        if (this._soundManager === undefined) {
+            this._soundManager = new SoundManager(this.scene);
+        }
+        return this._soundManager;
     }
 
     destroy(fromScene) {
@@ -75,6 +82,11 @@ class TextPlayer extends DynamicText {
             this._imageManager.destroy();
         }
         this._imageManager = undefined;
+
+        if (this._soundManager) {
+            this._soundManager.destroy();
+        }
+        this._soundManager = undefined;
 
         this.clickEE = undefined;
 

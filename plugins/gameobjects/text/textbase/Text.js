@@ -445,6 +445,12 @@ class Text extends GameObject {
 
         CanvasPool.remove(this.canvas);
         this.canvasText.destroy();
+        this.canvasText = undefined;
+
+        if (this._imageManager) {
+            this._imageManager.destroy();
+            this._imageManager = undefined;
+        }
     }
 
     setInteractive(shape, callback, dropZone) {

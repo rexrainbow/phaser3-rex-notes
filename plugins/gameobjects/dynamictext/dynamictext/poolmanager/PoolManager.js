@@ -1,4 +1,4 @@
-import Pool from '../../../pool.js';
+import Pool from '../../../../pool.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 

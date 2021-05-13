@@ -15,12 +15,7 @@ var OnParseSoundEffectTag = function (textPlayer, parser, config) {
 }
 
 var PlaySoundEffect = function (name) {
-    this.soundEffect = this.scene.sound.add(name);  // this: textPlayer
-    this.soundEffect.once('complete', function () {
-        this.soundEffect.destroy();
-        this.soundEffect = undefined;
-    }, this)
-        .play();
+    this.soundManager.playSoundEffect(name);  // this: textPlayer
 }
 
 var AppendCommand = function (textPlayer, name) {
