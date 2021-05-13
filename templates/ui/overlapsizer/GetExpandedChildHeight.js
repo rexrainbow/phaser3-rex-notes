@@ -5,12 +5,10 @@ var GetExpandedChildHeight = function (child, parentHeight) {
 
     var childHeight;
     var childConfig = child.rexSizer;
-    var padding = childConfig.padding;
     if (childConfig.expandHeight) {
         var innerHeight = parentHeight - this.space.top - this.space.bottom;
+        var padding = childConfig.padding;
         childHeight = innerHeight - padding.top - padding.bottom;
-    } else {
-        childHeight = child.height;
     }
     return childHeight;
 }

@@ -4,13 +4,11 @@ var GetExpandedChildWidth = function (child, parentWidth) {
     }
 
     var childWidth;
-    var childConfig = child.rexSizer;
-    var padding = childConfig.padding;
-    if (childConfig.expandWidth) {
+    var childConfig = child.rexSizer;    
+    if (childConfig.expandWidth) {        
         var innerWidth = parentWidth - this.space.left - this.space.right;
+        var padding = childConfig.padding;
         childWidth = innerWidth - padding.left - padding.right;
-    } else {
-        childWidth = child.width;
     }
     return childWidth;
 }

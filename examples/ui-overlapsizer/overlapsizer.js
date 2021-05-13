@@ -33,7 +33,22 @@ class Demo extends Phaser.Scene {
                 'center-bottom', // align
                 0, // padding
                 false // expand
-            )            
+            )
+            .add(
+                this.rexUI.add.label({
+                    background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK),
+                    icon: this.rexUI.add.roundRectangle(0, 0, 24, 24, 10, COLOR_LIGHT),
+                    text: this.add.text(0, 0, 'Start'),
+                    space: {
+                        left: 20, right: 20, top: 20, bottom: 20,
+                        icon: 10
+                    }
+                }), // child
+                'center', // key
+                'center', // align
+                0, // padding
+                false // expand
+            )
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
     }
