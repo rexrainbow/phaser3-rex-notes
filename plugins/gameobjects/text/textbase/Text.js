@@ -3,7 +3,7 @@ import TextStyle from './textstyle/TextStyle.js'; // extended
 import CanvasTextKlass from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import CONST from './const.js';
-import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
+import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
@@ -114,6 +114,8 @@ class Text extends GameObject {
         if (style && style.padding) {
             this.setPadding(style.padding);
         }
+
+        this._imageManager = undefined;
 
         this.setText(text);
 
@@ -492,7 +494,10 @@ class Text extends GameObject {
     }
 
     get imageManager() {
-        return GetGlobImageManager(this.scene.textures);
+        if (!this._imageManager) {
+            this._imageManager = new ImageManager(this.scene);
+        }
+        return this._imageManager;
     }
 
     addImage(key, config) {

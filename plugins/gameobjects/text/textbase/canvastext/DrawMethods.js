@@ -168,23 +168,8 @@ export default {
     },
 
     drawImage(x, y, imgKey, style) {
-        var imageManager = this.parent.imageManager;
-        var imgData = imageManager.get(imgKey);
-        var frame = imageManager.getFrame(imgKey);
-
-        x += imgData.left;
-        y += - this.startYOffset + imgData.y;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        var context = this.context;
-        context.drawImage(
-            frame.source.image,
-            frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
-            x, y, imgData.width, imgData.height
-        );
+        y -= this.startYOffset;
+        this.parent.imageManager.draw(imgKey, this.context, x, y, this.autoRound);
     }
 
 }
