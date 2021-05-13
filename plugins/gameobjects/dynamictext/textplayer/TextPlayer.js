@@ -1,5 +1,6 @@
 import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
+import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
@@ -25,6 +26,7 @@ class TextPlayer extends DynamicText {
         super(scene, x, y, fixedWidth, fixedHeight, config);
         this.type = 'rexBBCodeDynamicText'
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
+        this._imageManager = undefined;
         this.typeWriter = new TypeWriter(this, GetValue(config, 'typing', undefined));
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
         this.setNextPageInput(GetValue(config, 'nextPageInput', 'click'));
@@ -33,6 +35,13 @@ class TextPlayer extends DynamicText {
         if (content) {
             this.play(content);
         }
+    }
+
+    get imageManager() {
+        if (this._imageManager === undefined) {
+            this._imageManager = new ImageManager(this.scene);
+        }
+        return this._imageManager;
     }
 
     destroy(fromScene) {
