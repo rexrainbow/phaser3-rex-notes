@@ -3943,8 +3943,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-ease-function" class="md-nav__link">
-    Get ease function
+  <a href="#ease-functions" class="md-nav__link">
+    Ease functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-ease-function-via-string" class="md-nav__link">
+    Get ease function via string
   </a>
   
 </li>
@@ -5420,8 +5427,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-ease-function" class="md-nav__link">
-    Get ease function
+  <a href="#ease-functions" class="md-nav__link">
+    Ease functions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-ease-function-via-string" class="md-nav__link">
+    Get ease function via string
   </a>
   
 </li>
@@ -5460,12 +5474,77 @@
                   <h1>Ease</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get ease function, built-in method of phaser.</p>
+<p>Ease functions, built-in method of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="get-ease-function">Get ease function<a class="headerlink" href="#get-ease-function" title="Permanent link">&para;</a></h3>
+<h3 id="ease-functions">Ease functions<a class="headerlink" href="#ease-functions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Linear : <code>Phaser.Math.Easing.Linear</code></li>
+<li>Quadratic, Power1<ul>
+<li>Quadratic ease-out : <code>Phaser.Math.Easing.Quadratic.Out</code></li>
+<li>Quadratic ease-in : <code>Phaser.Math.Easing.Quadratic.In</code></li>
+<li>Quadratic ease-in/out : <code>Phaser.Math.Easing.Quadratic.InOut</code></li>
+</ul>
+</li>
+<li>Cubic, Power2<ul>
+<li>Cubic ease-out : <code>Phaser.Math.Easing.Cubic.Out</code></li>
+<li>Cubic ease-in : <code>Phaser.Math.Easing.Cubic.In</code></li>
+<li>Cubic ease-in/out : <code>Phaser.Math.Easing.Cubic.InOut</code></li>
+</ul>
+</li>
+<li>Quartic, Power3<ul>
+<li>Quartic ease-out : <code>Phaser.Math.Easing.Quartic.Out</code></li>
+<li>Quartic ease-in : <code>Phaser.Math.Easing.Quartic.In</code></li>
+<li>Quartic ease-in/out : <code>Phaser.Math.Easing.Quartic.InOut</code></li>
+</ul>
+</li>
+<li>Quintic, Power4<ul>
+<li>Quintic ease-out : <code>Phaser.Math.Easing.Quintic.Out</code></li>
+<li>Quintic ease-in : <code>Phaser.Math.Easing.Quintic.In</code></li>
+<li>Quintic ease-in/out : <code>Phaser.Math.Easing.Quintic.InOut</code></li>
+</ul>
+</li>
+<li>Sinusoidal<ul>
+<li>Sinusoidal ease-out : <code>Phaser.Math.Easing.Sine.Out</code></li>
+<li>Sinusoidal ease-in : <code>Phaser.Math.Easing.Sine.in</code></li>
+<li>Sinusoidal ease-in/out : <code>Phaser.Math.Easing.Sine.InOut</code></li>
+</ul>
+</li>
+<li>Exponential<ul>
+<li>Exponential ease-out : <code>Phaser.Math.Easing.Expo.Out</code></li>
+<li>Exponential ease-in : <code>Phaser.Math.Easing.Expo.In</code></li>
+<li>Exponential ease-in/out : <code>Phaser.Math.Easing.Expo.InOut</code></li>
+</ul>
+</li>
+<li>Circular<ul>
+<li>Circular ease-out : <code>Phaser.Math.Easing.Circular.Out</code></li>
+<li>Circular ease-in : <code>Phaser.Math.Easing.Circular.In</code></li>
+<li>Circular ease-in/out : <code>Phaser.Math.Easing.Circular.InOut</code></li>
+</ul>
+</li>
+<li>Elastic<ul>
+<li>Elastic ease-out : <code>Phaser.Math.Easing.Elastic.Out</code></li>
+<li>Elastic ease-in : <code>Phaser.Math.Easing.Elastic.In</code></li>
+<li>Elastic ease-in/out : <code>Phaser.Math.Easing.Elastic.InOut</code></li>
+</ul>
+</li>
+<li>Bounce<ul>
+<li>Bounce ease-out : <code>Phaser.Math.Easing.Bounce.Out</code></li>
+<li>Bounce ease-in : <code>Phaser.Math.Easing.Bounce.In</code></li>
+<li>Bounce ease-in/out : <code>Phaser.Math.Easing.Bounce.InOut</code></li>
+</ul>
+</li>
+<li>Back<ul>
+<li>Back ease-out : <code>Phaser.Math.Easing.Back.Out</code></li>
+<li>Back ease-in : <code>Phaser.Math.Easing.Back.In</code></li>
+<li>Back ease-in/out : <code>Phaser.Math.Easing.Back.InOut</code></li>
+</ul>
+</li>
+<li>Stepped : <code>Phaser.Math.Easing.Stepped(v, step)</code></li>
+</ul>
+<h3 id="get-ease-function-via-string">Get ease function via string<a class="headerlink" href="#get-ease-function-via-string" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">easeFunction</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Tweens</span><span class="p">.</span><span class="nx">Builders</span><span class="p">.</span><span class="nx">GetEaseFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
 <span class="c1">// var easeFunction = Phaser.Tweens.Builders.GetEaseFunction(ease, easeParams);</span>
 </code></pre></div>

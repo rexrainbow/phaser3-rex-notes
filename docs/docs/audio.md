@@ -227,6 +227,10 @@ var music = scene.sound.add(key, config);
     ```javascript
     var isPaused = music.isPaused;
     ```
+- Asset key
+    ```javascript
+    var key = music.key;
+    ```
 
 #### Events
 
