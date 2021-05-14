@@ -6,7 +6,6 @@ var GETPROP_RESULT = {
 };
 
 var STYLE_RESULT = new TextStyle();
-var PROPLIST = [];
 
 class parser {
     constructor(tags) {
@@ -74,7 +73,7 @@ class parser {
             var innerMatch = text.match(RE_STYLE);
             if (innerMatch != null) {
                 var style = innerMatch[1];
-                propOut = styleToProp(style);
+                propOut = StyleToProp(style);
                 propOut._style = style;
                 plainText = innerMatch[2];
             }
@@ -113,7 +112,7 @@ class parser {
                     (prop.hasOwnProperty('fontSize')) ? prop.fontSize :
                         prop['font-size'];
                 if (typeof (size) === 'number') {
-                    size = size.toString() + 'px';
+                    size = `${size}px`;
                 }
                 result.fontSize = size;
             } else {
@@ -186,9 +185,11 @@ class parser {
                     return '';
                 }
             }
-            return "<class='" + prop._class + "'>" + text + "</class>";
+            return `<class='${prop._class}'>${text}</class>`;
         } else if (prop.hasOwnProperty('_style')) { // class mode
-            return "<style='" + prop._style + "'>" + text + "</style>";
+            return `<style='${prop._style}'>${text}</style>`;
+        } else {
+            return text;
         }
     }
 
@@ -206,7 +207,7 @@ class parser {
     }
 };
 
-var styleToProp = function (s) {
+var StyleToProp = function (s) {
     s = s.split(";");
 
     var result = {},
@@ -230,6 +231,7 @@ var styleToProp = function (s) {
                     v.thinkness = parseInt(stroke[1].replace('px', ''));
                 }
                 break;
+
             case 'shadow':
                 var shadow = v.split(' '); // shadow:blue 2px 2px 2px
                 var len = shadow.length;
@@ -247,6 +249,7 @@ var styleToProp = function (s) {
                     v.blur = parseInt(shadow[3].replace('px', ''));
                 }
                 break;
+
             case 'u':
             case 'underline': // underline:blue 3px -1px
                 var u = v.split(' ');
@@ -261,6 +264,10 @@ var styleToProp = function (s) {
                 if (len >= 3) {
                     v.offset = parseInt(u[2].replace('px', ''));
                 }
+                break;
+
+            case 'y':
+                v = parseFloat(v);
                 break;
         }
         result[k] = v;

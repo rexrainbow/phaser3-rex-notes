@@ -230,6 +230,7 @@ var txt = scene.make.rexTagText({
         thinkness: 3,
         offset: -1
     },
+    y: 0,
     img: textureKey,
     area: areaKey,
 }
@@ -549,6 +550,7 @@ Define style inline text.
 
 - `<style='color:red'>Some text</style>`
 - `<style='size:30px'>Some text</style>`
+- `<style='y:-12;size:20px'>Some text</style>`
 - `<style='stroke:blue 1px'>Some text</style>` (color thinkness)
 - `<style='shadow:blue 2px 2px 2px'>Some text</style>` (color offsetX offsetY blur)
 - `<style='underline:blue 3px -1px'>Some text</style>` (color thinkness offset)

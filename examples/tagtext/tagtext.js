@@ -17,6 +17,10 @@ class Demo extends Phaser.Scene {
                 color: 'red',
                 fontStyle: 'bold italic'
             },
+            superscript : {
+                y: -16,
+                size: 20
+            },
             marker: {
                 underline: {
                     color: 'blue',
@@ -36,7 +40,7 @@ class Demo extends Phaser.Scene {
         };
         var s1 = `<class='cap'>H</class><class='marker'>ell</class><class='tail'>o</class>
 <style='color:red;size:30px'>W</style><style='size:40px'>o</style><style='size:50px'>r</style><style='u:green 30px'>ld</style>
-<style='color:white;size:30px'>This is a </style><class='key'></class>`;
+<style='color:white;size:30px'>Th</style><style='y:4;size:20px'>is</style> <class='superscript'>is</class> a <class='key'></class>`;
         var text = this.add.rexTagText(100, 100, s1, {
             backgroundColor: '#555',
             fontSize: '60px',

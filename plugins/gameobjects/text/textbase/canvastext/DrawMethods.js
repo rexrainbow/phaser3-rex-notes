@@ -83,7 +83,7 @@ export default {
 
     drawPen(pen, offsetX, offsetY) {
         offsetX += pen.x;
-        offsetY += pen.y;
+        offsetY += pen.y + (pen.prop.y || 0);
 
         var canvas = this.canvas;
         var context = this.context;

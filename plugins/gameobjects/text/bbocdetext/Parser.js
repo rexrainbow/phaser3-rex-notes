@@ -46,75 +46,82 @@ var parser = {
 
         // close image tag
         if (prevProp.img) {
-            updateProp(prevProp, PROP_REMOVE, 'img');
+            UpdateProp(prevProp, PROP_REMOVE, 'img');
         }
         // Check if current fragment is a class tag
         if (RE_BLOD_OPEN.test(text)) {
-            updateProp(prevProp, PROP_ADD, 'b', true);
+            UpdateProp(prevProp, PROP_ADD, 'b', true);
             plainText = '';
         } else if (RE_BLOD_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'b');
+            UpdateProp(prevProp, PROP_REMOVE, 'b');
             plainText = '';
         } else if (RE_ITALICS_OPEN.test(text)) {
-            updateProp(prevProp, PROP_ADD, 'i', true);
+            UpdateProp(prevProp, PROP_ADD, 'i', true);
             plainText = '';
         } else if (RE_ITALICS_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'i');
+            UpdateProp(prevProp, PROP_REMOVE, 'i');
             plainText = '';
         } else if (RE_SIZE_OPEN.test(text)) {
             innerMatch = text.match(RE_SIZE_OPEN);
-            updateProp(prevProp, PROP_ADD, 'size', innerMatch[1] + 'px');
+            UpdateProp(prevProp, PROP_ADD, 'size', `${innerMatch[1]}px`);
             plainText = '';
         } else if (RE_SIZE_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'size');
+            UpdateProp(prevProp, PROP_REMOVE, 'size');
             plainText = '';
         } else if (RE_COLOR_OPEN.test(text)) {
             innerMatch = text.match(RE_COLOR_OPEN);
-            updateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, 'color', innerMatch[1]);
             plainText = '';
         } else if (RE_COLOR_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'color');
+            UpdateProp(prevProp, PROP_REMOVE, 'color');
             plainText = '';
         } else if (RE_UNDERLINE_OPEN.test(text)) {
             innerMatch = text.match(RE_UNDERLINE_OPEN);
-            updateProp(prevProp, PROP_ADD, 'u', true);
+            UpdateProp(prevProp, PROP_ADD, 'u', true);
             plainText = '';
         } else if (RE_UNDERLINE_OPENC.test(text)) {
             innerMatch = text.match(RE_UNDERLINE_OPENC);
-            updateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, 'u', innerMatch[1]);
             plainText = '';
         } else if (RE_UNDERLINE_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'u');
+            UpdateProp(prevProp, PROP_REMOVE, 'u');
             plainText = '';
         } else if (RE_SHADOW_OPEN.test(text)) {
-            updateProp(prevProp, PROP_ADD, 'shadow', true);
+            UpdateProp(prevProp, PROP_ADD, 'shadow', true);
             plainText = '';
         } else if (RE_SHADOW_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'shadow');
+            UpdateProp(prevProp, PROP_REMOVE, 'shadow');
             plainText = '';
         } else if (RE_STROKE_OPEN.test(text)) {
-            updateProp(prevProp, PROP_ADD, 'stroke', true);
+            UpdateProp(prevProp, PROP_ADD, 'stroke', true);
             plainText = '';
         } else if (RE_STROKE_OPENC.test(text)) {
             innerMatch = text.match(RE_STROKE_OPENC);
-            updateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, 'stroke', innerMatch[1]);
             plainText = '';
         } else if (RE_STROKE_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'stroke');
+            UpdateProp(prevProp, PROP_REMOVE, 'stroke');
+            plainText = '';
+        } else if (RE_OFFSETY_OPEN.test(text)) {
+            innerMatch = text.match(RE_OFFSETY_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'y', parseFloat(innerMatch[1]));
+            plainText = '';
+        } else if (RE_OFFSETY_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'y');
             plainText = '';
         } else if (RE_IMAGE_OPEN.test(text)) {
             innerMatch = text.match(RE_IMAGE_OPEN);
-            updateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, 'img', innerMatch[1]);
             plainText = '';
         } else if (RE_IMAGE_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'img');
+            UpdateProp(prevProp, PROP_REMOVE, 'img');
             plainText = '';
         } else if (RE_AREA_OPEN.test(text)) {
             innerMatch = text.match(RE_AREA_OPEN);
-            updateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
+            UpdateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
             plainText = '';
         } else if (RE_AREA_CLOSE.test(text)) {
-            updateProp(prevProp, PROP_REMOVE, 'area');
+            UpdateProp(prevProp, PROP_REMOVE, 'area');
             plainText = '';
         } else {
             plainText = text
@@ -140,13 +147,13 @@ var parser = {
             if (prop.hasOwnProperty('size')) {
                 var size = prop.size;
                 if (typeof (size) === 'number') {
-                    size = size.toString() + 'px';
+                    size = `${size}px`;
                 }
                 result.fontSize = size;
             } else {
                 result.fontSize = defaultStyle.fontSize;
             }
-            result.fontStyle = getFontStyle(prop.b, prop.i);
+            result.fontStyle = GetFontStyle(prop.b, prop.i);
 
             if (prop.hasOwnProperty('color')) {
                 result.color = prop.color;
@@ -219,41 +226,55 @@ var parser = {
             prevProp = EMPTYPROP;
         }
 
+        var headers = [];
+
         for (var k in prevProp) {
-            if (prop.hasOwnProperty(k)) {
-                continue;
+            if (!prop.hasOwnProperty(k)) {
+                headers.push(`[/${k}]`);
             }
-
-            text = '[/' + k + ']' + text;
         }
 
-        var header = '';
+
         for (var k in prop) {
-            if (prevProp[k] === prop[k]) {
+            var value = prop[k];
+
+            if (prevProp[k] === value) {
                 continue;
             }
 
-            if (k === 'size') {
-                header += ('[size=' + prop[k].replace('px', '') + ']');
-            } else if ((k === 'color') || (k === 'stroke') || (k === 'img')) {
-                header += ('[' + k + '=' + prop[k] + ']');
-            } else if (k === 'u') {
-                if (prop[k] === true) {
-                    header += '[u]';
-                } else {
-                    header += ('[u=' + prop[k] + ']');
-                }
-            } else {
-                header += ('[' + k + ']');
+            switch (k) {
+                case 'size':
+                    headers.push(`[size=${value.replace('px', '')}]`);
+                    break;
+
+                case 'color':
+                case 'stroke':
+                case 'img':
+                case 'y':
+                    headers.push(`[${k}=${value}]`);
+                    break;
+
+                case 'u':
+                    if (value === true) {
+                        headers.push('[u]');
+                    } else {
+                        headers.push(`[u=${value}]`)
+                    }
+                    break;
+
+                default:
+                    headers.push(`[${k}]`);
+                    break;
             }
         }
-        text = header + text;
 
-        return text;
+        headers.push(text);
+
+        return headers.join('');
     }
 };
 
-var updateProp = function (prop, op, key, value) {
+var UpdateProp = function (prop, op, key, value) {
     if (op === PROP_ADD) {
         // PROP_ADD     
         prop[key] = value;
@@ -267,7 +288,7 @@ var updateProp = function (prop, op, key, value) {
     return prop;
 };
 
-var getFontStyle = function (isBold, isItalic) {
+var GetFontStyle = function (isBold, isItalic) {
     if (isBold && isItalic) {
         return 'bold italic';
     } else if (isBold) {
@@ -279,7 +300,7 @@ var getFontStyle = function (isBold, isItalic) {
     }
 };
 
-var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]/ig;
+var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[y=([-.0-9]+)\]|\[\/y\]/ig;
 
 var RE_BLOD_OPEN = /\[b\]/i;
 var RE_BLOD_CLOSE = /\[\/b\]/i;
@@ -297,6 +318,8 @@ var RE_SHADOW_CLOSE = /\[\/shadow\]/i;
 var RE_STROKE_OPEN = /\[stroke\]/i;
 var RE_STROKE_OPENC = /\[stroke=([a-z]+|#[0-9abcdef]+)\]/i;
 var RE_STROKE_CLOSE = /\[\/stroke\]/i;
+var RE_OFFSETY_OPEN = /\[y=([-.0-9]+)\]/i;
+var RE_OFFSETY_CLOSE = /\[\/y\]/i;
 var RE_IMAGE_OPEN = /\[img=([^\]]+)\]/i;
 var RE_IMAGE_CLOSE = /\[\/img\]/i;
 var RE_AREA_OPEN = /\[area=([^\]]+)\]/i;

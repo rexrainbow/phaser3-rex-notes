@@ -85,6 +85,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Shadow : `[shadow]text[/shadow]`
 - Underline : `[u]text[/u]`
     - Underline with color setting : `[u=red]text[/u]`
+- Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
 
