@@ -40,7 +40,7 @@ class TextPlayer extends DynamicText {
         this._soundManager = undefined;
         var soundConfig = GetValue(config, 'sounds', undefined);
         if (soundConfig) {
-            this._imageManager = new ImageManager(this.scene, soundConfig);
+            this._soundManager = new SoundManager(this.scene,  soundConfig);
         }
 
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
