@@ -9,14 +9,24 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('dude', 'assets/images/phaser-dude.png');
-        this.load.audio('explosion', ['assets/audio/soundeffect/explosion.mp3']);
+        this.load.audio('explosion', [
+            'assets/audio/soundeffect/explosion.mp3'
+        ]);
+        this.load.audio('theme0', [
+            'assets/audio/oedipus_wizball_highscore.ogg',
+            'assets/audio/oedipus_wizball_highscore.mp3'
+        ]);
+        this.load.audio('theme1', [
+            'assets/audio/jungle.ogg',
+            'assets/audio/jungle.mp3'
+        ]);
     }
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[bgm=theme0,1000][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [se=explosion][wait=se][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
-[click][color=green]open[/color] source HTML5 game framework[r]
+[bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm.cross=theme1,1000]
 
 [color=#008B8B][wait=enter|click]that offers WebGL and DynamicText rendering across desktop and mobile web browsers[r]
 [color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]

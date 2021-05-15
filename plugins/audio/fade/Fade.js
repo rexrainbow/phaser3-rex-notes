@@ -69,10 +69,16 @@ class Fade extends TweenBase {
             return this;
         }
 
-        this.sound.setVolume(this.volume.start);
+        var v0 = this.volume.start;
+        var v1 = this.volume.end;
+        this.sound.setVolume(v0);
         var config = {
             targets: this.sound,
-            volume: this.volume.end,
+            volume: {
+                start: v0,
+                from: v0,
+                to: v1
+            },
 
             delay: this.delay,
             duration: this.duration,

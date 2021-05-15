@@ -2,7 +2,7 @@ import DynamicText from '../dynamictext/DynamicText.js';
 import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
-import SoundManager from './soundmanager/SoundManager.js';
+import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 

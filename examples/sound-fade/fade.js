@@ -12,14 +12,14 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('fate', [
-            'assets/audio/fate.ogg',
-            'assets/audio/fate.mp3',
+        this.load.audio('theme', [
+            'assets/audio/oedipus_wizball_highscore.ogg',
+            'assets/audio/oedipus_wizball_highscore.mp3'
         ]);
     }
 
     create() {
-        this.txt = this.add.text(0, 0, '');
+        this.print = this.add.text(0, 0, 'Click to start');
         this.input.on('pointerdown', this.runTest, this);
     }
 
@@ -29,34 +29,28 @@ class Demo extends Phaser.Scene {
             return;
         }
 
-        this.music = this.sound.add('fate');
+        this.music = this.sound.add('theme')
+            .on('destroy', function () {
+                this.music = undefined;
+                this.print.text = '--'
+            }, this)
+            .on('volume', function (music, volume) {
+                this.print.text = `${music.volume}, ${volume}`;
+            }, this)
+
         var soundFadeIn = this.plugins.get('rexSoundFade').fadeIn;
         soundFadeIn(this, this.music, 3000);
 
         // or
-        //this.music = soundFadeIn(this, 'fate', 2000);        
-
-        this.music.on('destroy', function () {
-            this.music = undefined;
-        }, this);
+        //this.music = soundFadeIn(this, 'theme', 3000);        
 
         // fade-out volume then destroy sound instance
-        var soundFadeOut = this.plugins.get('rexSoundFade').fadeOut;
-        this.time.delayedCall(4000, soundFadeOut, [this, this.music, 3000]);
+        var SoundFadeOut = this.plugins.get('rexSoundFade').fadeOut;
+        this.time.delayedCall(4000, SoundFadeOut, [this, this.music, 3000]);
     }
 
     update() {
-        var volume, state, playbackTime
-        if (this.music) {
-            volume = this.music.volume;
-            state = (this.music.isPlaying) ? 'playing' : 'end';
-            playbackTime = this.music.seek;
-        } else {
-            volume = '--';
-            state = '--';
-            playbackTime = '--';
-        }
-        this.txt.text = `Volume: ${volume} (${state}, ${playbackTime})`;
+        ;
     }
 }
 

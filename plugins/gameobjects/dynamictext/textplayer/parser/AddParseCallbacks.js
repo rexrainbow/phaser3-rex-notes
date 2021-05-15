@@ -9,7 +9,13 @@ import ParseImageTag from './image/OnParseImageTag.js';
 import ParseTypingSpeedTag from './typing/OnParseTypingSpeedTag.js';
 import ParsePlaySoundEffectTag from './soundeffect/OnParsePlaySoundEffectTag.js';
 import ParseFadeInSoundEffectTag from './soundeffect/OnParseFadeInSoundEffectTag.js';
+import ParseFadeOutSoundEffectTag from './soundeffect/OnParseFadeOutSoundEffectTag.js';
 import ParseSetSoundEffectVolumeTag from './soundeffect/OnParseSetSoundEffectVolumeTag.js';
+import ParsePlayBackgroundMusicTag from './backgroundmusic/OnParsePlayBackgroundMusicTag.js';
+import ParseFadeInBackgroundMusicTag from './backgroundmusic/OnParseFadeInBackgroundMusicTag.js';
+import ParseFadeOutBackgroundMusicTag from './backgroundmusic/OnParseFadeOutBackgroundMusicTag.js';
+import ParseCrossFadeBackgroundMusicTag from './backgroundmusic/OnParseCrossFadeBackgroundMusicTag.js';
+import ParsePauseBackgroundMusicTag from './backgroundmusic/OnParsePauseBackgroundMusicTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
@@ -20,7 +26,8 @@ const ParseCallbacks = [
     ParseBoldTag, ParseItalicTag,
     ParseFontSizeTag, ParseOffsetYTag, ParseShadowColorTag, ParseImageTag,
     ParseTypingSpeedTag,
-    ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseSetSoundEffectVolumeTag,
+    ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
+    ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
     ParseWaitTag,
     ParseCustomTag,
     ParseNewLineTag, ParseContent
