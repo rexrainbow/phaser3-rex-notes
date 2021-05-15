@@ -27,6 +27,10 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
             var music = textPlayer.soundManager.getSoundEffect();
             WaitMusic(textPlayer, music, callback, args, scope);
 
+        } else if (name === 'bgm') {
+            var music = textPlayer.soundManager.getBackgroundMusic();
+            WaitMusic(textPlayer, music, callback, args, scope);
+
         } else {  // Any key
             WaitKey(textPlayer, name, callback, args, scope);
         }

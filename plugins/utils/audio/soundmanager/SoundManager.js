@@ -1,11 +1,16 @@
 import FadeIn from '../../../audio/fade/fadeIn.js';
 import FadeOut from '../../../audio/fade/fadeOut.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class SoundManager {
-    constructor(scene) {
+    constructor(scene, config) {
         this.scene = scene;
         this.soundEffect = undefined;
         this.backgroundMusic = undefined;
+
+        this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
+        this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 0));
     }
 
     destroy() {
@@ -22,8 +27,22 @@ class SoundManager {
         }
     }
 
+    setBackgroundMusicLoopValue(value) {
+        this.backgroundMusicLoopValue = value;
+        return this;
+    }
+
+    setBackgroundMusicFadeTime(time) {
+        this.backgroundMusicFadeTime = time;
+        return this;
+    }
+
     getSoundEffect() {
         return this.soundEffect;
+    }
+
+    getBackgroundMusic() {
+        return this.backgroundMusic;
     }
 
     playSoundEffect(key) {
@@ -37,6 +56,7 @@ class SoundManager {
                 this.soundEffect = undefined;
             }, this)
             .play();
+
         return this;
     }
 
@@ -66,7 +86,7 @@ class SoundManager {
 
     playBackgroundMusic(key) {
         this.backgroundMusic = this.scene.sound.add(key);
-        this.backgroundMusic.setLoop(true);
+        this.backgroundMusic.setLoop(this.backgroundMusicLoopValue);
         this.backgroundMusic
             .once('complete', function () {
                 this.backgroundMusic.destroy();
@@ -76,6 +96,11 @@ class SoundManager {
                 this.backgroundMusic = undefined;
             }, this)
             .play();
+
+
+        if (this.backgroundMusicFadeTime > 0) {
+            this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
+        }
         return this;
     }
 
@@ -95,9 +120,14 @@ class SoundManager {
 
     stopBackgroundMusic() {
         if (this.backgroundMusic) {
-            this.backgroundMusic.stop();
-            this.backgroundMusic.destroy();
-            this.backgroundMusic = undefined;
+            if (this.backgroundMusicFadeTime > 0) {
+                this.fadeOutBackgroundMusic(this.backgroundMusicFadeTime, true);
+
+            } else {
+                this.backgroundMusic.stop();
+                this.backgroundMusic.destroy();
+                this.backgroundMusic = undefined;
+            }
         }
         return this;
     }
