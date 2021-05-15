@@ -3,7 +3,7 @@ import TextStyle from './textstyle/TextStyle.js'; // extended
 import CanvasTextKlass from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import CONST from './const.js';
-import ImageManager from '../../../utils/texture/ImageManager/ImageManager.js';
+import ImageManager from '../../../utils/texture/imagemanager_/ImageManager.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
