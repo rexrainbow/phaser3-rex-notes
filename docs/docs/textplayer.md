@@ -416,7 +416,7 @@ txt.playPromise(content)
     ```
 - Use origin render size by default
 
-### Typing speed
+#### Typing speed
 
 - No typing : `[speed=0]`
 - Set speed : `[speed=1000]`
