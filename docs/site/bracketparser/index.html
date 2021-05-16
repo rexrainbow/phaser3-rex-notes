@@ -5778,7 +5778,7 @@
 <li>Number</li>
 <li>Boolean</li>
 <li>null</li>
-<li>String: <ul>
+<li>String<ul>
 <li><code>'a'-'z'</code>, <code>'A'-'Z'</code>,</li>
 <li>String mix with <code>0-9</code></li>
 <li><code>'#'</code>, <code>'-'</code>, <code>'.'</code></li>
@@ -5834,12 +5834,24 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="tagscontent">Tags/Content<a class="headerlink" href="#tagscontent" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get a specific tag-start
+<li>Get a specific tag-start<ul>
+<li>Start-tag with a single value : <code>'&lt;TAG=value&gt;'</code>
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
-<li>Get any-tag-start
+<li>Start-tag with array values, separated via <code>','</code> : <code>'&lt;TAG=value0,value1,value2&gt;'</code>
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Get any-tag-start<ul>
+<li>Start-tag with a single value : <code>'&lt;TAG=value&gt;'</code>
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
+<li>Start-tag with array values, separated via <code>','</code> : <code>'&lt;TAG=value0,value1,value2&gt;'</code>
+    <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tagName</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Get a specific tag-end
     <div class="codehilite"><pre><span></span><code><span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">TagName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>

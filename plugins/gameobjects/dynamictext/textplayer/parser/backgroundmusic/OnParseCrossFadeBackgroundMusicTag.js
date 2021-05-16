@@ -5,11 +5,11 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParseCrossFadeBackgroundMusicTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.bgm.cross', 'bgm.cross');
     parser
-        .on(`+${tagName}`, function (params) {
+        .on(`+${tagName}`, function (name, fadeTime) {
             AppendCommandBase.call(textPlayer,
                 'bgm.cross',               // name
                 CrossFadeBackgroundMusic,  // callback
-                params,                    // params
+                [name, fadeTime],          // params
                 textPlayer,                // scope
             );
             parser.skipEvent();

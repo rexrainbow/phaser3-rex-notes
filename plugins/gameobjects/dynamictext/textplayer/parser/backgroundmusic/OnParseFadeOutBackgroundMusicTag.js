@@ -5,15 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParseFadeOutBackgroundMusicTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.bgm.fadeout', 'bgm.fadeout');
     parser
-        .on(`+${tagName}`, function (params) {
-            var time, isStopped;
-            if (Array.isArray(params)) {
-                time = params[0];
-                isStopped = (params[1] === 'stop');
-            } else {
-                time = params;
-                isStopped = false;
-            }
+        .on(`+${tagName}`, function (time, isStopped) {
             AppendCommand(textPlayer, time, isStopped);
             parser.skipEvent();
         })

@@ -110,7 +110,7 @@ Assume that left-delimiter and right-delimiter is `'<>'`
             - Number
             - Boolean
             - null
-            - String: 
+            - String
                 - `'a'-'z'`, `'A'-'Z'`,
                 - String mix with `0-9`
                 - `'#'`, `'-'`, `'.'`
@@ -171,13 +171,23 @@ Invoke this medthod under `'+TAG'`, or `'-TAG'` event to skip `'+'`, or `'-'` ev
 #### Tags/Content
 
 - Get a specific tag-start
-    ```javascript
-    parser.on('+' + TagName, function(value){ /* ... */ });
-    ```
+    - Start-tag with a single value : `'<TAG=value>'`
+        ```javascript
+        parser.on('+' + TagName, function(value){ /* ... */ });
+        ```
+    - Start-tag with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
+        ```javascript
+        parser.on('+' + TagName, function(value0, value1, value2){ /* ... */ });
+        ```
 - Get any-tag-start
-    ```javascript
-    parser.on('+', function(tagName, value){ /* ... */ });
-    ```
+    - Start-tag with a single value : `'<TAG=value>'`
+        ```javascript
+        parser.on('+', function(tagName, value){ /* ... */ });
+        ```
+    - Start-tag with array values, separated via `','` : `'<TAG=value0,value1,value2>'`
+        ```javascript
+        parser.on('+', function(tagName, value0, value1, value2){ /* ... */ });
+        ```
 - Get a specific tag-end
     ```javascript
     parser.on('-' + TagName, function(){ /* ... */ });

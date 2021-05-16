@@ -5,14 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParsePlayBackgroundMusicTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.bgm', 'bgm');
     parser
-        .on(`+${tagName}`, function (params) {
-            var name, fadeInTime;
-            if (Array.isArray(params)) {
-                name = params[0];
-                fadeInTime = params[1];
-            } else {
-                name = params;
-            }
+        .on(`+${tagName}`, function (name, fadeInTime) {
             AppendCommandBase.call(textPlayer,
                 'bgm',                // name
                 PlayBackgroundMusic,  // callback

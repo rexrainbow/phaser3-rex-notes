@@ -166,15 +166,12 @@ class BracketParser {
     onTagStart(tagContent) {
         var regexResult = tagContent.match(this.reTagOn);
         var tag = regexResult[1];
-        var value = regexResult[3];
-        if (value !== undefined) { // Tag with value(s)
-            value = ParseValue(value, this.valueConverter);
-        }
+        var values = ParseValue(regexResult[3], this.valueConverter);
 
         this.skipEventFlag = false;
-        this.emit(`+${tag}`, value);
+        this.emit(`+${tag}`, ...values);
         if (!this.skipEventFlag) {
-            this.emit('+', tag, value);
+            this.emit('+', tag, ...values);
         }
 
         this.lastTagStart = tag;
@@ -184,9 +181,9 @@ class BracketParser {
         var tag = tagContent.match(this.reTagOff)[1];
 
         this.skipEventFlag = false;
-        this.emit('-', tag);
+        this.emit(`-${tag}`);
         if (!this.skipEventFlag) {
-            this.emit(`-${tag}`);
+            this.emit('-', tag);
         }
 
         this.lastTagEnd = tag;
