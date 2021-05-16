@@ -1205,6 +1205,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#sound-effect" class="md-nav__link">
     Sound effect
@@ -5672,6 +5685,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typing-speed" class="md-nav__link">
+    Typing speed
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#sound-effect" class="md-nav__link">
     Sound effect
@@ -5983,6 +6009,39 @@
 </ul>
 </li>
 <li><code>wrap</code> : Default configuration <a href="../dynamictext/#horizontal-wrap">Horizontal</a>/<a href="../dynamictext/#vertical-wrap">Vertical</a> wrapping.</li>
+<li><code>typing</code> :<ul>
+<li><code>typing.speed</code> : Default typing speed of each character.</li>
+<li><code>typing.onTypingStart</code> : Callback when typing start. Default is to set all children to invisible.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div></li>
+<li><code>typing.animation</code> : Configuration of typing animation<ul>
+<li><code>undefined</code> : No typing animation, default behavior</li>
+</ul>
+</li>
+<li><code>typing.animation.duration</code> : Duration of typing animation.</li>
+<li><code>typing.animation.yoyo</code> :<ul>
+<li><code>false</code> : Mapping progress <code>t</code> to <code>0</code> - <code>1</code>. Default behavior.</li>
+<li><code>true</code> : Mapping progress <code>t</code> to <code>0</code> - <code>1</code> - <code>0</code>.</li>
+</ul>
+</li>
+<li><code>typing.animation.onStart</code> : Callback when typing start of a character. Default is to set this child to visible.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="nx">child</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span> 
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>typing.animation.onProgress</code> : Callback when progress typing animation. 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li><code>typing.animation.onComplete</code> : Callback when typing animation complete. 
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>sounds</code> : Configuration of sound effect, or background music<ul>
 <li><code>sounds.bgm.loop</code> :<ul>
 <li><code>true</code> : Loop background music, default behavior.</li>
@@ -6136,6 +6195,12 @@
 <span class="p">})</span>
 </code></pre></div></li>
 <li>Use origin render size by default</li>
+</ul>
+<h3 id="typing-speed">Typing speed<a class="headerlink" href="#typing-speed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>No typing : <code>[speed=0]</code></li>
+<li>Set speed : <code>[speed=1000]</code></li>
+<li>Back to default speed : <code>[/speed]</code></li>
 </ul>
 <h4 id="sound-effect">Sound effect<a class="headerlink" href="#sound-effect" title="Permanent link">&para;</a></h4>
 <ul>

@@ -229,6 +229,37 @@ var txt = scene.add.rexTextPlayer({
     - `style.offsetX` : OffsetX.
     - `style.offsetY` : OffsetY.
 - `wrap` : Default configuration [Horizontal](dynamictext.md#horizontal-wrap)/[Vertical](dynamictext.md#vertical-wrap) wrapping.
+- `typing` :
+    - `typing.speed` : Default typing speed of each character.
+    - `typing.onTypingStart` : Callback when typing start. Default is to set all children to invisible.
+        ```javascript
+        function (children) {
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                children[i].setVisible(false);
+            }
+        ```
+    - `typing.animation` : Configuration of typing animation
+        - `undefined` : No typing animation, default behavior
+    - `typing.animation.duration` : Duration of typing animation.
+    - `typing.animation.yoyo` :
+        - `false` : Mapping progress `t` to `0` - `1`. Default behavior.
+        - `true` : Mapping progress `t` to `0` - `1` - `0`.
+    - `typing.animation.onStart` : Callback when typing start of a character. Default is to set this child to visible.
+        ```javascript
+        function(child) { 
+            child.setVisible(); 
+        }
+        ```
+    - `typing.animation.onProgress` : Callback when progress typing animation. 
+        ```javascript
+        function(child, t) {
+        }
+        ```
+    - `typing.animation.onComplete` : Callback when typing animation complete. 
+        ```javascript
+        function(child) {
+        }
+        ```
 - `sounds` : Configuration of sound effect, or background music
     - `sounds.bgm.loop` :
         - `true` : Loop background music, default behavior.
@@ -384,6 +415,12 @@ txt.playPromise(content)
     })
     ```
 - Use origin render size by default
+
+### Typing speed
+
+- No typing : `[speed=0]`
+- Set speed : `[speed=1000]`
+- Back to default speed : `[/speed]`
 
 #### Sound effect
 
