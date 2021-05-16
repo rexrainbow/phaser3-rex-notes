@@ -38,6 +38,8 @@ var TypingNextPage = function (textPlayer, wrapCallback, result) {
             textPlayer.emit('page.complete');
             if (textPlayer.nextPageInput) {
                 textPlayer.nextPageInput(TypingNextPage, [textPlayer, wrapCallback, result]);
+            } else {
+                TypingNextPage(textPlayer, wrapCallback, result);
             }
 
         }

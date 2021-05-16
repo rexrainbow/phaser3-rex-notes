@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[custom=10,20][bgm=theme0,1000][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[custom=10,20][/custom][bgm=theme0,1000][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [se=explosion][wait=se][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
 [bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm.cross=theme1,1000]
 
@@ -114,10 +114,16 @@ class Demo extends Phaser.Scene {
         // Parse custom tag, execute custom tag
         text
             .on('parser.+custom', function (parser, a, b) {
-                console.log('Parse custom tag:', a, b)
+                console.log('Parse +custom tag:', a, b)
             })
-            .on('tag.custom', function (a, b) {
-                console.log('Execute custom tag:', a, b)
+            .on('parser.-custom', function () {
+                console.log('Parse -custom tag')
+            })
+            .on('tag.+custom', function (a, b) {
+                console.log('Execute +custom tag:', a, b)
+            })
+            .on('tag.-custom', function () {
+                console.log('Execute -custom tag')
             })
 
         // Events

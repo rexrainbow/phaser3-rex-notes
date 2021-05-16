@@ -55,6 +55,7 @@ nav:
             - BBCode Text: bbcodetext.md
             - Tag Text: tagtext.md
             - Dynamic text: dynamictext.md
+            - Text player: textplayer.md
         - Bitmap text:
             - Static bitmap text: bitmaptext.md
             - Dynamic bitmap text: dynamicbitmaptext.md

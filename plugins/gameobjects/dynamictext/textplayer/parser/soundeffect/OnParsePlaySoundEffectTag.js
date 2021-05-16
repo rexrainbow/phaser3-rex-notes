@@ -5,8 +5,13 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParsePlaySoundEffectTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.se', 'se');
     parser
-        .on(`+${tagName}`, function (name) {
-            AppendCommand(textPlayer, name);
+        .on(`+${tagName}`, function (name, fadeInTime) {
+            AppendCommandBase.call(textPlayer,
+                'se',                 // name
+                PlaySoundEffect,      // callback
+                [name, fadeInTime],   // params
+                textPlayer,           // scope
+            );
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
@@ -14,17 +19,14 @@ var OnParsePlaySoundEffectTag = function (textPlayer, parser, config) {
         })
 }
 
-var PlaySoundEffect = function (name) {
-    this.soundManager.playSoundEffect(name);  // this: textPlayer
-}
+var PlaySoundEffect = function (params) {
+    var name = params[0];
+    var fadeInTime = params[1];
 
-var AppendCommand = function (textPlayer, name) {
-    AppendCommandBase.call(textPlayer,
-        'se',             // name
-        PlaySoundEffect,  // callback
-        name,             // params
-        textPlayer,       // scope
-    );
+    this.soundManager.playSoundEffect(name);  // this: textPlayer
+    if (fadeInTime) {
+        this.soundManager.fadeInSoundEffect(fadeInTime);
+    }
 }
 
 export default OnParsePlaySoundEffectTag;

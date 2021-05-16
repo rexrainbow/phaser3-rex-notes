@@ -113,6 +113,10 @@ var txt = scene.add.rexDynamicText({
         color: '#fff',
         stroke: '#fff',
         strokeThickness: 0,
+        shadowColor: null,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowBlur: 0,
         offsetX: 0,
         offsetY: 0
     },

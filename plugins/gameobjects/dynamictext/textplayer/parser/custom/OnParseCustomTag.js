@@ -6,12 +6,14 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
             textPlayer.emit('parser.start', parser);
         })
         .on('+', function (tagName, ...value) {
-            textPlayer.emit(`parser.+${tagName}`, parser, ...value);
-            AppendCommand(textPlayer, tagName, value);
+            var startTag = `+${tagName}`;
+            textPlayer.emit(`parser.${startTag}`, parser, ...value);
+            AppendCommand(textPlayer, startTag, value);
         })
         .on('-', function (tagName) {
-            textPlayer.emit(`parser.-${tagName}`, parser);
-            AppendCommand(textPlayer, tagName);
+            var endTag = `-${tagName}`;
+            textPlayer.emit(`parser.${endTag}`, parser);
+            AppendCommand(textPlayer, endTag);
         })
         .on('complete', function () {
             textPlayer.emit('parser.complete', parser);
@@ -19,7 +21,13 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
 }
 
 var FireEvent = function (param, tagName) {
-    this.emit(`tag.${tagName}`, ...param);  // this: textPlayer
+    var eventName = `tag.${tagName}`;
+    if (param == null) {
+        this.emit(eventName);  // this: textPlayer
+    } else {
+        this.emit(eventName, ...param);  // this: textPlayer
+    }
+
 }
 
 var AppendCommand = function (textPlayer, name, param) {

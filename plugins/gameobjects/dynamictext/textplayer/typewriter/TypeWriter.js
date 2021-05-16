@@ -16,7 +16,7 @@ class TypeWriter {
         this.setIgnoreWait(false);
         this.setSkipTypingAnimation(false);
 
-        this.setTypingStartCallback(GetValue(config, 'onTypeStart', SetChildrenInvisible));
+        this.setTypingStartCallback(GetValue(config, 'onTypingStart', SetChildrenInvisible));
         this.setSpeed(GetValue(config, 'speed', 250));
         this.setAnimationConfig(GetValue(config, 'animation', undefined));
     }
