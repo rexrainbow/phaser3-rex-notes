@@ -30,7 +30,7 @@ var EaseProperty = function (params) {
     var value = params[2];
     var duration = params[3];
     var ease = params[4]
-    this.spriteManager.tweenProperty(name, property, value, duration, ease);  // this: textPlayer
+    this.spriteManager.easeProperty(name, property, value, duration, ease);  // this: textPlayer
 }
 
 export default OnParseEaseSpritePropertyTag;

@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var OnParseAddSpriteTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
     parser
-        .on(`+`, function (tag, textureKey, frameKey) {
+        .on('+', function (tag, textureKey, frameKey) {
             // [sprite.name=key,frame]
             var tags = tag.split('.');
             var name;
@@ -21,6 +21,22 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
                 textPlayer,                     // scope
             );
         })
+        .on('-', function (tag) {
+            // [/sprite.name]
+            var tags = tag.split('.');
+            var name;
+            if ((tags.length === 2) && (tags[0] === prefix)) {
+                name = tags[1];
+            } else {
+                return;
+            }
+            AppendCommandBase.call(textPlayer,
+                'sprite.remove',   // name
+                RemoveSprite,      // callback
+                name,              // params
+                textPlayer,        // scope
+            );
+        })
 }
 
 var AddSprite = function (params) {
@@ -28,6 +44,10 @@ var AddSprite = function (params) {
     var textureKey = params[1];
     var frameKey = params[2];
     this.spriteManager.add(name, textureKey, frameKey);  // this: textPlayer
+}
+
+var RemoveSprite = function (name) {
+    this.spriteManager.remove(name);
 }
 
 export default OnParseAddSpriteTag;

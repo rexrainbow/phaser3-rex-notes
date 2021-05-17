@@ -13,11 +13,15 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `
-[sprite.char0=dude]
-[sprite.char0.x=100][sprite.char0.x.to=700,2000,Cubic]
-[sprite.char0.y=200]
+[color=red][size=24]H[/color]ello 
 
-Hello
+[sprite.dude=dude]
+[sprite.dude.x=100][sprite.dude.x.to=700,1000,Cubic]
+[sprite.dude.y=200]
+
+[color=yellow]phaser3[/color]
+
+[/sprite.dude]
 `
 
         var text = this.add.rexTextPlayer(
@@ -55,6 +59,10 @@ Hello
                 typing: {
                     speed: 200,
                 },
+
+                sprites: {
+                    fade: 500
+                }
 
             }
         )

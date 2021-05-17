@@ -1,3 +1,5 @@
+import SpriteData from './SpriteData.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class SpriteManager {
@@ -5,43 +7,15 @@ class SpriteManager {
         this.scene = scene;
 
         this.setCreateCallback(GetValue(config, 'createCallback', 'sprite'));
+        this.setSpriteFadeTime(GetValue(config, 'fade', 500));
 
         this.sprites = {};
-    }
-
-    has(name) {
-        return this.sprites.hasOwnProperty(name);
     }
 
     destroy() {
         this.clear();
         this.createCallback = undefined;
         this.scene = undefined;
-    }
-
-    clear() {
-        for (var name in this.sprites) {
-            this.removeSprite(name);
-        }
-        return this;
-    }
-
-    removeSprite(name) {
-        if (!this.has(name)) {
-            return this;
-        }
-
-        var spriteData = this.sprites[name];
-
-        var tweenTasks = spriteData.tweens;
-        for (var propName in tweenTasks) {
-            tweenTasks[propName].remove();
-        }
-
-        spriteData.sprite.destroy();
-
-        delete this.sprites[name];
-        return this;
     }
 
     setCreateCallback(callback) {
@@ -59,14 +33,39 @@ class SpriteManager {
         return this;
     }
 
+    setSpriteFadeTime(time) {
+        this.fadeTime = time;
+        return this;
+    }
+
+    has(name) {
+        return this.sprites.hasOwnProperty(name);
+    }
+
+    get(name) {
+        return this.sprites[name];
+    }
+
+    clear() {
+        for (var name in this.sprites) {
+            this.sprites[name].destroy();
+            delete this.sprites[name];
+        }
+        return this;
+    }
+
     add(name, textureKey, frameName) {
-        this.removeSprite(name);
+        this.remove(name);
         var sprite = this.createCallback(this.scene, textureKey, frameName);
 
-        this.sprites[name] = {
-            sprite: sprite,
-            tweens: {}
-        };
+        var spriteData = new SpriteData(this, sprite);
+        this.sprites[name] = spriteData;
+
+        if (this.fadeTime > 0) {
+            spriteData
+                .setProperty('alpha', 0)
+                .easeProperty('alpha', 1, this.fadeTime)
+        }
         return this;
     }
 
@@ -74,12 +73,11 @@ class SpriteManager {
         if (!this.has(name)) {
             return this;
         }
-        var sprite = this.sprites[name].sprite;
-        sprite[property] = value;
+        this.get(name).setProperty(property, value);
         return this;
     }
 
-    tweenProperty(name, property, value, duration, ease) {
+    easeProperty(name, property, value, duration, ease, onComplete) {
         if (!this.has(name)) {
             return this;
         }
@@ -91,18 +89,25 @@ class SpriteManager {
             ease = 'Linear';
         }
 
-        var spriteData = this.sprites[name];
-        var tweenTasks = spriteData.tweens;
-        if (tweenTasks.hasOwnProperty(property)) {
-            tweenTasks[property].remove();
+        this.get(name).easeProperty(property, value, duration, ease, onComplete);
+        return this;
+    }
+
+    remove(name) {
+        if (!this.has(name)) {
+            return this;
         }
-        var config = {
-            targets: spriteData.sprite,
-            duration: duration,
-            ease: ease
+
+        var spriteData = this.get(name);
+        if (this.fadeTime > 0) {
+            this.easeProperty(name, 'alpha', 0, this.fadeTime, 'Linear', function () {
+                spriteData.destroy();
+            })
+            delete this.sprites[name];
+        } else {
+            spriteData.destroy();
+            delete this.sprites[name];
         }
-        config[property] = value;
-        tweenTasks[property] = this.scene.tweens.add(config);
         return this;
     }
 }
