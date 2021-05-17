@@ -1186,6 +1186,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#new-line" class="md-nav__link">
+    New line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image" class="md-nav__link">
     Image
   </a>
@@ -5660,6 +5667,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#new-line" class="md-nav__link">
+    New line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#image" class="md-nav__link">
     Image
   </a>
@@ -5896,8 +5910,9 @@
 
     <span class="nx">sounds</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">bgm</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">initial</span><span class="o">:</span> <span class="nx">undefinied</span><span class="p">,</span>
             <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="nx">fade</span><span class="o">:</span> <span class="mi">0</span>
+            <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
         <span class="p">}</span>
     <span class="p">}</span>
 
@@ -6004,7 +6019,10 @@
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
     <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>children</code> : Array of <a href="../dynamictext/#child">child</a>.</li>
+</ul>
+</li>
 <li><code>typing.animation</code> : Configuration of typing animation<ul>
 <li><code>undefined</code> : No typing animation, default behavior</li>
 </ul>
@@ -6019,18 +6037,31 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span> 
     <span class="nx">child</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span> 
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><a href="../dynamictext/#child">child</a></li>
+</ul>
+</li>
 <li><code>typing.animation.onProgress</code> : Callback when progress typing animation. 
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><a href="../dynamictext/#child">child</a></li>
+</ul>
+</li>
 <li><code>typing.animation.onComplete</code> : Callback when typing animation complete. 
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><a href="../dynamictext/#child">child</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>sounds</code> : Configuration of sound effect, or background music<ul>
+<li><code>sounds.bgm.initial</code> : Initial music instance created by <code>scene.sound.add(key)</code> before starting playing content.<ul>
+<li><code>undefined</code> : No initial music instance, default value.</li>
+</ul>
+</li>
 <li><code>sounds.bgm.loop</code> :<ul>
 <li><code>true</code> : Loop background music, default behavior.</li>
 <li><code>false</code> : Play background music once.</li>
@@ -6038,7 +6069,7 @@
 </li>
 <li><code>sounds.bgm.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when starting or stopping a background music.</li>
-<li>A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music.</li>
+<li>A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is <code>500</code>.</li>
 </ul>
 </li>
 </ul>
@@ -6162,6 +6193,13 @@
 </li>
 <li>Character offset Y : <code>[y=-8]content[/y]</code></li>
 </ul>
+<h4 id="new-line">New line<a class="headerlink" href="#new-line" title="Permanent link">&para;</a></h4>
+<ul>
+<li>New line : <code>[r]</code><ul>
+<li>New line via <code>\n</code> will be ignored.</li>
+</ul>
+</li>
+</ul>
 <h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Image : <code>[img=key]</code></li>
@@ -6192,7 +6230,10 @@
 </ul>
 <h4 id="sound-effect">Sound effect<a class="headerlink" href="#sound-effect" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Play : <code>[se=key]</code></li>
+<li>Play : <code>[se=key]</code><ul>
+<li>Sound effect will be destroyed when complete</li>
+</ul>
+</li>
 <li>Play with fade in volume : <code>[se=key,1000]</code></li>
 <li>Fade in volume : <code>[se.fadein=1000]</code></li>
 <li>Fade out volume : <code>[se.fadeout=1000]</code></li>
@@ -6201,16 +6242,17 @@
 </ul>
 <h4 id="background-music">Background music<a class="headerlink" href="#background-music" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Play, stop : <code>[bgm=key]</code>, <code>[/bgm]</code></li>
+<li>Play, stop : <code>[bgm=key]</code>, <code>[/bgm]</code><ul>
+<li>Previous background music will be stopped and destroyed.</li>
+<li>Cross fade to next background music if <code>sounds.bgm.fade</code> is not <code>0</code></li>
+</ul>
+</li>
 <li>Play with fade in volume : <code>[bgm=key,1000]</code></li>
 <li>Pause, resume : <code>[bgm.pause]</code>, <code>[/bgm.pause]</code></li>
 <li>Fade in volume : <code>[bgm.fadein=1000]</code></li>
 <li>Fade out volume : <code>[bgm.fadeout=1000]</code></li>
 <li>Fade out volume then stop : <code>[bgm.fadeout=1000,stop]</code></li>
-<li>Cross fade to another background music : <code>[bgm.cross=key,10000]</code><ul>
-<li>Or set <code>sounds.bgm.fade</code> in config</li>
-</ul>
-</li>
+<li>Cross fade to another background music : <code>[bgm.cross=key,10000]</code></li>
 <li>Set volume : <code>[bgm.volume=1]</code></li>
 </ul>
 <h4 id="wait-conditions">Wait conditions<a class="headerlink" href="#wait-conditions" title="Permanent link">&para;</a></h4>
@@ -6252,9 +6294,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Wait callback : <code>[wait]</code><ul>
+<li>Wait callback : <code>[wait]</code>, or <code>[wait=xxx]</code> (<code>xxx</code> is any string excluded 'click', 'se', 'bgm', or any valid key name)<ul>
 <li>Fire event <code>'wait'</code>
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Invoke `callback()` to continue typing</span>
+<span class="p">})</span>
+</code></pre></div></li>
+<li>Fire event <code>'wait.xxx'</code>
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.xxx&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Invoke `callback()` to continue typing</span>
 <span class="p">})</span>
 </code></pre></div></li>

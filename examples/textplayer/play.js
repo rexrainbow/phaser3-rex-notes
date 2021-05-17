@@ -24,11 +24,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var content = `\
-[custom=10,20][/custom][bgm=theme0,1000][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[custom=10,20][/custom][bgm=theme0][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [se=explosion][wait=se][size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
-[bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm.cross=theme1,1000]
+[bgm.pause][click][/bgm.pause][color=green]open[/color] source HTML5 game framework[r][bgm=theme1]
 
-[color=#008B8B][wait=enter|click]that offers WebGL and DynamicText rendering across desktop and mobile web browsers[r]
+[color=#008B8B][wait=enter|click]that offers WebGL and Canvas [wait=custom]rendering across desktop and mobile web browsers[r]
 [color=#FF7F50][speed=0]Games can be compiled to iOS, Android and native apps by using 3rd party tools[r]
 [color=#F8F8FF]You can use JavaScript or TypeScript for development.`
 
@@ -91,6 +91,13 @@ class Demo extends Phaser.Scene {
                     }
                 },
 
+                sounds: {
+                    bgm: {
+                        loop: true,
+                        fade: 1000
+                    }
+                },
+
                 clickTarget: this,
                 nextPageInput: 'click|2000'
                 // nextPageInput: function(callback) {
@@ -146,6 +153,10 @@ class Demo extends Phaser.Scene {
             })
             .on('wait.music', function (music) {
                 print.setText(`Wait music ${music.key}`);
+            })
+            .on('wait.custom', function(callback){
+                print.setText(`Wait custom`);
+                callback();
             })
             .on('page.start', function () {
                 console.log('page.start')

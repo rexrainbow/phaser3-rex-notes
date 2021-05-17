@@ -4,6 +4,8 @@ import WaitClick from './WaitClick.js';
 import WaitMusic from './WaitMusic.js';
 import WaitKey from './WaitKey.js';
 
+const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
+
 var WaitMultiple = function (textPlayer, names, callback, args, scope) {
     if ((typeof (names) === 'string') && (names.length > 1) && (names.indexOf('|') !== -1)) {
         names = names.split('|');
@@ -15,7 +17,7 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
         var name = names[i];
 
         if ((name == null) || (name === 'wait')) {  // Wait event
-            WaitCallback(textPlayer, callback, args, scope);
+            WaitCallback(textPlayer, undefined, callback, args, scope);
 
         } else if ((typeof (name) === 'number') || !isNaN(name)) { // A number, or a number string
             WaitTime(textPlayer, parseFloat(name), callback, args, scope);
@@ -31,8 +33,12 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
             var music = textPlayer.soundManager.getBackgroundMusic();
             WaitMusic(textPlayer, music, callback, args, scope);
 
-        } else {  // Any key
+        } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
             WaitKey(textPlayer, name, callback, args, scope);
+
+        } else {
+            WaitCallback(textPlayer, name, callback, args, scope);
+
         }
     }
 }

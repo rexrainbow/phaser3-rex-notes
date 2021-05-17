@@ -1,9 +1,10 @@
 import GetWrapCallback from './GetWrapCallback.js';
 
-var WaitCallback = function (textPlayer, callback, args, scope) {
+var WaitCallback = function (textPlayer, postfixName, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
 
-    textPlayer.emit('wait', wrapCallback);
+    var eventName = (postfixName) ? `wait.${postfixName}` : 'wait';
+    textPlayer.emit(eventName, wrapCallback);
 }
 
 export default WaitCallback;

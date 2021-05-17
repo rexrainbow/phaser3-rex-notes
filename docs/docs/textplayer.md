@@ -163,8 +163,9 @@ var txt = scene.add.rexTextPlayer({
 
     sounds: {
         bgm: {
+            initial: undefinied,
             loop: true,
-            fade: 0
+            fade: 500
         }
     }
 
@@ -238,6 +239,7 @@ var txt = scene.add.rexTextPlayer({
                 children[i].setVisible(false);
             }
         ```
+        - `children` : Array of [child](dynamictext.md#child).
     - `typing.animation` : Configuration of typing animation
         - `undefined` : No typing animation, default behavior
     - `typing.animation.duration` : Duration of typing animation.
@@ -250,23 +252,28 @@ var txt = scene.add.rexTextPlayer({
             child.setVisible(); 
         }
         ```
+        - [child](dynamictext.md#child)
     - `typing.animation.onProgress` : Callback when progress typing animation. 
         ```javascript
         function(child, t) {
         }
         ```
+        - [child](dynamictext.md#child)
     - `typing.animation.onComplete` : Callback when typing animation complete. 
         ```javascript
         function(child) {
         }
         ```
+        - [child](dynamictext.md#child)
 - `sounds` : Configuration of sound effect, or background music
+    - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
+        - `undefined` : No initial music instance, default value.
     - `sounds.bgm.loop` :
         - `true` : Loop background music, default behavior.
         - `false` : Play background music once.
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
-        - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music.
+        - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
 - `nextPageInput` : Wait condition to type next page
     - `'click'` : Wait click, default behavior.
     - `'click|2000'` : Wait one of condition: click, or 2000ms.
@@ -392,6 +399,11 @@ txt.playPromise(content)
     - `shadowOffsetX`, `shadowOffsetY`, `shadowBlur` are set in config
 - Character offset Y : `[y=-8]content[/y]`
 
+#### New line
+
+- New line : `[r]`
+    - New line via `\n` will be ignored.
+
 #### Image
 
 - Image : `[img=key]`
@@ -425,6 +437,7 @@ txt.playPromise(content)
 #### Sound effect
 
 - Play : `[se=key]`
+    - Sound effect will be destroyed when complete
 - Play with fade in volume : `[se=key,1000]`
 - Fade in volume : `[se.fadein=1000]`
 - Fade out volume : `[se.fadeout=1000]`
@@ -434,13 +447,14 @@ txt.playPromise(content)
 #### Background music
 
 - Play, stop : `[bgm=key]`, `[/bgm]`
+    - Previous background music will be stopped and destroyed.
+    - Cross fade to next background music if `sounds.bgm.fade` is not `0`
 - Play with fade in volume : `[bgm=key,1000]`
 - Pause, resume : `[bgm.pause]`, `[/bgm.pause]`
 - Fade in volume : `[bgm.fadein=1000]`
 - Fade out volume : `[bgm.fadeout=1000]`
 - Fade out volume then stop : `[bgm.fadeout=1000,stop]`
 - Cross fade to another background music : `[bgm.cross=key,10000]`
-    - Or set `sounds.bgm.fade` in config
 - Set volume : `[bgm.volume=1]`
 
 #### Wait conditions
@@ -477,13 +491,19 @@ txt.playPromise(content)
             /// var key = music.key;
         })
        ```
-- Wait callback : `[wait]`
+- Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string excluded 'click', 'se', 'bgm', or any valid key name)
     - Fire event `'wait'`
         ```javascript
         txt.on('wait', function(callback) {
             // Invoke `callback()` to continue typing
         })
         ```
+    - Fire event `'wait.xxx'`
+        ```javascript
+        txt.on('wait.xxx', function(callback) {
+            // Invoke `callback()` to continue typing
+        })
+        ```    
 - Combine conditions : `[wait=cond0|cond1|...]`
     - Wait click, or enter key down : `[wait=click|enter]`
     - Wait click, enter key down, or 100ms : `[wait=click|enter|1000]`

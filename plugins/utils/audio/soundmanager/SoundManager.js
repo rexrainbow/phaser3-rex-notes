@@ -6,16 +6,23 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class SoundManager {
     constructor(scene, config) {
         this.scene = scene;
+
+        // Sound effect will be destroyed when completed
         this.soundEffect = undefined;
+
+        // Background music will be (fade out)destroyed when play next one.
         this.backgroundMusic = undefined;
 
         this.setBackgroundMusicLoopValue(GetValue(config, 'bgm.loop', true));
-        this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 0));
+        this.setBackgroundMusicFadeTime(GetValue(config, 'bgm.fade', 500));
+
+        var initialBackgroundMusic = GetValue(config, 'bgm.initial', undefined);
+        if (initialBackgroundMusic) {
+            this.setCurrentBackgroundMusic(initialBackgroundMusic);
+        }
     }
 
     destroy() {
-        this.scene = undefined;
-
         if (this.soundEffect) {
             this.soundEffect.destroy();
             this.soundEffect = undefined;
@@ -25,6 +32,8 @@ class SoundManager {
             this.backgroundMusic.destroy();
             this.backgroundMusic = undefined;
         }
+
+        this.scene = undefined;
     }
 
     setBackgroundMusicLoopValue(value) {
@@ -84,19 +93,35 @@ class SoundManager {
         return this;
     }
 
-    playBackgroundMusic(key) {
-        this.backgroundMusic = this.scene.sound.add(key);
-        this.backgroundMusic.setLoop(this.backgroundMusicLoopValue);
-        this.backgroundMusic
-            .once('complete', function () {
-                this.backgroundMusic.destroy();
-                this.backgroundMusic = undefined;
-            }, this)
-            .once('destroy', function () {
-                this.backgroundMusic = undefined;
-            }, this)
-            .play();
+    setCurrentBackgroundMusic(music) {
+        this.backgroundMusic = music;
 
+        if (music) {
+            music.setLoop(this.backgroundMusicLoopValue);
+            music
+                .once('complete', function () {
+                    this.backgroundMusic.destroy();
+                    this.backgroundMusic = undefined;
+                }, this)
+                .once('destroy', function () {
+                    this.backgroundMusic = undefined;
+                }, this)
+
+            if (!music.isPlaying) {
+                music.play();
+            }
+        }
+    }
+
+    playBackgroundMusic(key) {
+        // Don't re-play the same background music
+        if (this.backgroundMusic && (this.backgroundMusic.key === key)) {
+            return this;
+        }
+
+        this.stopBackgroundMusic(); // Stop previous background music
+
+        this.setCurrentBackgroundMusic(this.scene.sound.add(key));
 
         if (this.backgroundMusicFadeTime > 0) {
             this.fadeInBackgroundMusic(this.backgroundMusicFadeTime);
@@ -149,10 +174,15 @@ class SoundManager {
     }
 
     crossFadeBackgroundMusic(key, time) {
+        var backgroundMusicFadeTimeSave = this.backgroundMusicFadeTime;
+        this.backgroundMusicFadeTime = 0;
+
         this
             .fadeOutBackgroundMusic(time, true)
             .playBackgroundMusic(key)
             .fadeInBackgroundMusic(time);
+
+        this.backgroundMusicFadeTime = backgroundMusicFadeTimeSave;
 
         return this;
     }
