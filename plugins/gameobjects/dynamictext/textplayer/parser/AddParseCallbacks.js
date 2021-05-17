@@ -17,6 +17,9 @@ import ParseFadeOutBackgroundMusicTag from './backgroundmusic/OnParseFadeOutBack
 import ParseCrossFadeBackgroundMusicTag from './backgroundmusic/OnParseCrossFadeBackgroundMusicTag.js';
 import ParsePauseBackgroundMusicTag from './backgroundmusic/OnParsePauseBackgroundMusicTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
+import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
+import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
+import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContent from './content/OnParseContent.js';
@@ -29,6 +32,7 @@ const ParseCallbacks = [
     ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
     ParseWaitTag,
+    ParseAddSpriteTag, ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag,
     ParseCustomTag,
     ParseNewLineTag, ParseContent
 ];

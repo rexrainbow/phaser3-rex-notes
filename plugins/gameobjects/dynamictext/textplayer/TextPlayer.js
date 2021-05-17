@@ -3,6 +3,7 @@ import Parser from './parser/Parser.js';
 import TypeWriter from './typewriter/TypeWriter.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
 import SoundManager from '../../../utils/audio/soundmanager/SoundManager.js';
+import SpriteManager from '../../../utils/sprite/spritemanager/SpriteManager.js';
 import Methods from './methods/Methods.js';
 import ClearEvents from './methods/utils/ClearEvents.js';
 
@@ -38,9 +39,15 @@ class TextPlayer extends DynamicText {
         }
 
         this._soundManager = undefined;
-        var soundConfig = GetValue(config, 'sounds', undefined);
-        if (soundConfig) {
-            this._soundManager = new SoundManager(this.scene,  soundConfig);
+        var soundManagerConfig = GetValue(config, 'sounds', undefined);
+        if (soundManagerConfig) {
+            this._soundManager = new SoundManager(this.scene, soundManagerConfig);
+        }
+
+        this._spriteManager = undefined;
+        var spriteManagerConfig = GetValue(config, 'sprites', undefined);
+        if (spriteManagerConfig) {
+            this._spriteManager = new SpriteManager(this.scene, spriteManagerConfig);
         }
 
         this.setClickTarget(GetValue(config, 'clickTarget', this));  // this.clickEE
@@ -68,6 +75,13 @@ class TextPlayer extends DynamicText {
         return this._soundManager;
     }
 
+    get spriteManager() {
+        if (this._spriteManager === undefined) {
+            this._spriteManager = new SpriteManager(this.scene);
+        }
+        return this._spriteManager;
+    }
+
     destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
@@ -91,6 +105,11 @@ class TextPlayer extends DynamicText {
             this._soundManager.destroy();
         }
         this._soundManager = undefined;
+
+        if (this._spriteManager) {
+            this._spriteManager.destroy();
+        }
+        this._spriteManager = undefined;
 
         this.clickEE = undefined;
 
