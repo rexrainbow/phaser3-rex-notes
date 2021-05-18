@@ -1,4 +1,5 @@
 import SpriteData from './SpriteData.js';
+import AddTintRGBProperties from '../../../behaviors/tintrgb/AddTintRGBProperties.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -57,14 +58,17 @@ class SpriteManager {
     add(name, textureKey, frameName) {
         this.remove(name);
         var sprite = this.createCallback(this.scene, textureKey, frameName);
+        if (this.fadeTime > 0) {
+            AddTintRGBProperties(sprite);
+        }
 
         var spriteData = new SpriteData(this, sprite);
         this.sprites[name] = spriteData;
 
         if (this.fadeTime > 0) {
             spriteData
-                .setProperty('alpha', 0)
-                .easeProperty('alpha', 1, this.fadeTime)
+                .setProperty('tintGray', 0)
+                .easeProperty('tintGray', 255, this.fadeTime)
         }
         return this;
     }
@@ -100,7 +104,7 @@ class SpriteManager {
 
         var spriteData = this.get(name);
         if (this.fadeTime > 0) {
-            this.easeProperty(name, 'alpha', 0, this.fadeTime, 'Linear', function () {
+            this.easeProperty(name, 'tintGray', 0, this.fadeTime, 'Linear', function () {
                 spriteData.destroy();
             })
             delete this.sprites[name];
