@@ -29,6 +29,7 @@
 1. [Canvas image data](canvas-data.md): Get image data from texture, or text object.
 1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
 1. [Clock](clock.md): A clock to count elapsed time.
+1. [Color/TintRGB](tintrgb.md): Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
 1. [Containerlite-perspective](containerlite-perspective.md): Snapshot children of containerlite, to a perspective render texture.

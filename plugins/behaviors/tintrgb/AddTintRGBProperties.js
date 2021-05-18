@@ -1,10 +1,15 @@
 import { GetR, GetG, GetB } from '../../utils/color/GetRGB.js';
 import { SetR, SetG, SetB, SetRGB } from '../../utils/color/SetColor.js';
 
-var AddTintRGBProperties = function (gameObject) {
+var AddTintRGBProperties = function (gameObject, tintRGB) {
+    if (tintRGB === undefined) {
+        tintRGB = 0xffffff;
+    }
+    gameObject._tintRGB = tintRGB;
+
     Object.defineProperty(gameObject, 'tintRGB', {
         get: function () {
-            return gameObject._tintRGB || 0;
+            return gameObject._tintRGB;
         },
         set: function (value) {
             value = Math.floor(value);

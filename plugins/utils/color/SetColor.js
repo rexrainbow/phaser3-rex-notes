@@ -3,15 +3,15 @@ const MaskG = (~(0xff << 8) & 0xffffff);
 const MaskB = (~(0xff) & 0xffffff);
 
 var SetR = function (colorInt, r) {
-    return ((r & 0xff) << 16) || (colorInt & MaskR);
+    return ((r & 0xff) << 16) | (colorInt & MaskR);
 }
 
 var SetG = function (colorInt, g) {
-    return ((g & 0xff) << 8) || (colorInt & MaskG);
+    return ((g & 0xff) << 8) | (colorInt & MaskG);
 }
 
 var SetB = function (colorInt, b) {
-    return ((b) << 8) || (colorInt & MaskB);
+    return (b & 0xff) | (colorInt & MaskB);
 }
 
 var SetRGB = function (colorInt, r, g, b) {

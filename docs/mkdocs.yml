@@ -116,6 +116,8 @@ nav:
         - Move to: moveto.md
         - Rotate to: rotateto.md
         - Flash: flash.md
+        - Color:
+            - TintRGB: tintrgb.md
         - Shake position: shake-position.md
         - Fade out destroy: fadeoutdestroy.md
         - Pop up: popup.md

@@ -4,7 +4,7 @@ module.exports = {
     'tagtextplugin': './plugins/tagtext-plugin.js',
     'canvasplugin': './plugins/canvas-plugin.js',
     'circlemaskimageplugin': './plugins/circlemaskimage-plugin.js',
-    'circularprogresscanvasplugin': './plugins/circularprogresscanvas-plugin.js',    
+    'circularprogresscanvasplugin': './plugins/circularprogresscanvas-plugin.js',
     'roundrectanglecanvasplugin': './plugins/roundrectanglecanvas-plugin.js',
     'dynamictextplugin': './plugins/dynamictext-plugin.js',
     'textplayerplugin': './plugins/textplayer-plugin.js',
@@ -59,6 +59,7 @@ module.exports = {
     'movetoplugin': './plugins/moveto-plugin.js',
     'rotatetoplugin': './plugins/rotateto-plugin.js',
     'flashplugin': './plugins/flash-plugin.js',
+    'tintrgbplugin': './plugins/tintrgb-plugin.js',
     'shakepositionplugin': './plugins/shakeposition-plugin.js',
     'interceptionplugin': './plugins/interception-plugin.js',
     'anchorplugin': './plugins/anchor-plugin.js',
@@ -215,7 +216,7 @@ module.exports = {
     'puffspinner': './templates/spinner/puff/Puff.js',
     'radiospinner': './templates/spinner/radio/Radio.js',
     'ringsspinner': './templates/spinner/rings/Rings.js',
-    'spinner': './templates/spinner/spinner/Spinner.js',    
+    'spinner': './templates/spinner/spinner/Spinner.js',
     // others
     'firebase': './plugins/firebase.js',
     'parse': './plugins/parse.js'
