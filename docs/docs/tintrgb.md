@@ -5,6 +5,10 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 - Author: Rex
 - Method only
 
+## Live demos
+
+- [Fade](https://codepen.io/rexrainbow/pen/OJpRvwQ)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/tintrgb)

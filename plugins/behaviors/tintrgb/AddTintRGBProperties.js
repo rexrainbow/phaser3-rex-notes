@@ -2,6 +2,11 @@ import { GetR, GetG, GetB } from '../../utils/color/GetRGB.js';
 import { SetR, SetG, SetB, SetRGB } from '../../utils/color/SetColor.js';
 
 var AddTintRGBProperties = function (gameObject, tintRGB) {
+    // Don't attach properties again
+    if (gameObject.hasOwnProperty('_tintRGB')) {
+        return gameObject;
+    }
+
     if (tintRGB === undefined) {
         tintRGB = 0xffffff;
     }
