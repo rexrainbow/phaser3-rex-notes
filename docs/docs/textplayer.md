@@ -508,6 +508,14 @@ txt.playPromise(content)
     - Wait click, or enter key down : `[wait=click|enter]`
     - Wait click, enter key down, or 100ms : `[wait=click|enter|1000]`
 
+#### Sprite
+
+- Add sprite : `[sprite.name=textureKey,frameKey]`
+- Remove sprite : `[/sprite.name]`
+- Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
+- Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
+    - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
+
 #### Custom tag
 
 Assume that adding a custom tag : `[custom=10,20][/custom]`
