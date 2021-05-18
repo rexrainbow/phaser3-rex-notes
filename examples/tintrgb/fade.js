@@ -18,10 +18,10 @@ class Demo extends Phaser.Scene {
         this.plugins.get('rexTintRGB').add(sprite);
         this.tweens.add({
             targets: sprite,
-            tintR: 0,
-            tintG: 0,
-            tintB: 0,
-            // tintGray: 0,
+            // tintR: 0,
+            // tintG: 0,
+            // tintB: 0,
+            tintGray: 0,
             duration: 3000
         })
     }
