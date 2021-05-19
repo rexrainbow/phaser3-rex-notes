@@ -186,6 +186,16 @@ class Base extends Container {
     get innerHeight() {
         return this.height - this.space.top - this.space.bottom;
     }
+
+    get minInnerWidth() {
+        var result = this.minWidth - this.space.left - this.space.right;
+        return Math.max(result, 0);
+    }
+
+    get minInnerHeigt() {
+        var result = this.minHeight - this.space.top - this.space.bottom;
+        return Math.max(result, 0);
+    }
 }
 
 Object.assign(
