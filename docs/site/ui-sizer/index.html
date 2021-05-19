@@ -5852,6 +5852,7 @@
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="c1">// sizer.add(child, proportion, align, padding, expand, key, index);</span>
 </code></pre></div>
 
 <p>or</p>
@@ -5862,7 +5863,9 @@
         <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
         <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-        <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span>
+        <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -5908,6 +5911,8 @@
 <li><code>undefined</code> : Insert child at last.</li>
 </ul>
 </li>
+<li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when <code>orientation</code> is <code>x</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display width.</li>
+<li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when <code>orientation</code> is <code>y</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display height.</li>
 </ul>
 <h3 id="add-space">Add space<a class="headerlink" href="#add-space" title="Permanent link">&para;</a></h3>
 <p>Add a stretchable space.</p>

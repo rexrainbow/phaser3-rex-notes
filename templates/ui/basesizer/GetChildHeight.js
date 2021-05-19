@@ -5,7 +5,7 @@ var GetChildHeight = function (child) {
     if (child.isRexSizer) {  // Sizer game object
         childHeight = Math.max(child.minHeight, child.childrenHeight);
     } else {  // Normal game object
-        if (child.hasOwnProperty('minHeight')) {  // Force minHeight
+        if (child.minHeight !== undefined) {  // Force minHeight
             childHeight = child.minHeight;
         } else {
             childHeight = GetDisplayHeight(child);

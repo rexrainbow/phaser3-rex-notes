@@ -5,7 +5,7 @@ var GetChildWidth = function (child) {
     if (child.isRexSizer) { // Sizer game object
         childWidth = Math.max(child.minWidth, child.childrenWidth);
     } else {  // Normal game object
-        if (child.hasOwnProperty('minWidth')) {  // Force minWidth
+        if (child.minWidth !== undefined) {  // Force minWidth
             childWidth = child.minWidth;
         } else {
             childWidth = GetDisplayWidth(child);

@@ -183,6 +183,7 @@ or
 
 ```javascript
 sizer.add(child, proportion, align, padding, expand, key, index);
+// sizer.add(child, proportion, align, padding, expand, key, index);
 ```
 
 or
@@ -195,7 +196,9 @@ sizer.add(child,
         padding: {left: 0, right: 0, top: 0, bottom: 0},
         expand: false,
         key: undefined,
-        index: undefined
+        index: undefined,
+        minWidth: undefined,
+        minHeight: undefined
     }
 );
 ```
@@ -229,6 +232,8 @@ sizer.add(child,
     - `undefined` : Don't add this child. Default value.
 - `index` : Insert child to.
     - `undefined` : Insert child at last.
+- `minWidth` : Minimum width of normal (non-sizer) game object, used when `orientation` is `x`, and `proportion` is not `0`. Default value is current display width.
+- `minHeight` : Minimum height of normal (non-sizer) game object, used when `orientation` is `y`, and `proportion` is not `0`. Default value is current display height.
 
 ### Add space
 

@@ -5825,7 +5825,9 @@
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
-        <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>        
+        <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
@@ -5879,6 +5881,8 @@
 </li>
 </ul>
 </li>
+<li><code>minWidth</code> : Minimum width of normal (non-sizer) game object, used when expand width mode. Default value is current display width.</li>
+<li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when expand height mode. Default value is current display height.</li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>

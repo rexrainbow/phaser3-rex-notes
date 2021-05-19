@@ -171,7 +171,9 @@ sizer.add(child,
         key: undefined,
         align: 'center',
         padding: {left: 0, right: 0, top: 0, bottom: 0},
-        expand: true
+        expand: true,        
+        minWidth: undefined,
+        minHeight: undefined
     }
 );
 ```
@@ -213,6 +215,8 @@ sizer.add(child,
         - `{width: true}` : Only expand width of child.
         - `{height: true}` : only expand height of child.
         - `{width: true, height: true}` : Expand width and height of child.
+- `minWidth` : Minimum width of normal (non-sizer) game object, used when expand width mode. Default value is current display width.
+- `minHeight` : Minimum height of normal (non-sizer) game object, used when expand height mode. Default value is current display height.
 
 ### Layout children
 

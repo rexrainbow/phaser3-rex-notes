@@ -1,12 +1,13 @@
 import ALIGNMODE from '../utils/AlignConst.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 export default {
-    add(gameObject, key, align, padding, expand) {
+    add(gameObject, key, align, padding, expand, minWidth, minHeight) {
         this.pin(gameObject);
 
         if (IsPlainObject(key)) {
@@ -15,6 +16,11 @@ export default {
             align = GetValue(config, 'align', ALIGN_CENTER);
             padding = GetValue(config, 'padding', 0);
             expand = GetValue(config, 'expand', true);
+
+            if (!gameObject.isRexSizer) {
+                minWidth = GetValue(config, 'minWidth', undefined);
+                minHeight = GetValue(config, 'minHeight', undefined);
+            }
         }
 
         if (key === undefined) {
@@ -45,6 +51,19 @@ export default {
         } else {
             config.expandWidth = expand;
             config.expandHeight = expand;
+        }
+
+        if (!gameObject.isRexSizer) {  // Expand normal game object
+            if (config.expandWidth) {
+                gameObject.minWidth = (minWidth === undefined) ? GetDisplayWidth(gameObject) : minWidth;
+            } else {
+                gameObject.minWidth = undefined;
+            }
+            if (config.expandHeight) {
+                gameObject.minHeight = (minHeight === undefined) ? GetDisplayHeight(gameObject) : minHeight;
+            } else {
+                gameObject.minHeight = undefined;
+            }
         }
 
         if (this.sizerChildren.hasOwnProperty(key)) {

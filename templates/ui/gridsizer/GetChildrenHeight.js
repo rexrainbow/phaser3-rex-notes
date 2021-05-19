@@ -33,6 +33,7 @@ var GetChildrenHeight = function () {
             }
             result += rowHeight;
         }
+        // else,(proportion > 0) : rowHeight is 0
         this.rowHeight[i] = rowHeight;
     }
     return result + Sum(this.space.top, ...this.space.row, this.space.bottom);

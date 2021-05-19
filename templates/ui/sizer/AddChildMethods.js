@@ -1,6 +1,7 @@
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import Space from '../utils/Space.js';
+import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -10,7 +11,7 @@ const PROPORTIONMODE = {
     full: -1,
 }
 
-var Add = function (gameObject, proportion, align, paddingConfig, expand, childKey, index) {
+var Add = function (gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
     this.pin(gameObject);
 
     var proportionType = typeof (proportion);
@@ -28,6 +29,15 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
         expand = GetValue(config, 'expand', false);
         childKey = GetValue(config, 'key', undefined);
         index = GetValue(config, 'index', undefined);
+
+        if (!gameObject.isRexSizer) {
+            minSize = GetValue(config, 'minWidth', undefined);
+            if (this.orientation === 0) { // x
+                minSize = GetValue(config, 'minWidth', undefined);
+            } else {  // y
+                minSize = GetValue(config, 'minHeight', undefined);
+            }
+        }
     }
 
     if (typeof (align) === 'string') {
@@ -58,6 +68,16 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
         this.sizerChildren.splice(index, 0, gameObject);
     }
 
+    if (!gameObject.isRexSizer && (proportion > 0)) { // Expand normal game object
+        if (this.orientation === 0) { // x
+            gameObject.minWidth = (minSize === undefined) ? GetDisplayWidth(gameObject) : minSize;
+            gameObject.minHeight = undefined;
+        } else {
+            gameObject.minWidth = undefined;
+            gameObject.minHeight = (minSize === undefined) ? GetDisplayHeight(gameObject) : minSize;
+        }
+    }
+
     if (childKey !== undefined) {
         this.addChildrenMap(childKey, gameObject)
     }
@@ -71,7 +91,13 @@ export default {
         if (proportion === undefined) {
             proportion = 1;
         }
-        Add.call(this, Space(this.scene), proportion);
+        Add.call(this, Space(this.scene),
+            {
+                proportion: proportion,
+                minWidth: 0,
+                minHeight: 0
+            }
+        );
         // No problem if sizer.add is override
         return this;
     },

@@ -29,6 +29,7 @@ var GetChildrenWidth = function () {
             }
             result += columnWidth;
         }
+        // else,(proportion > 0) : columnWidth is 0
         this.columnWidth[i] = columnWidth;
     }
     return result + Sum(this.space.left, ...this.space.column, this.space.right);

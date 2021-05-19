@@ -32,12 +32,13 @@ class Slider extends Sizer {
         }
 
         if (track) {
-            if (this.orientation === 1) { // Vertical slider, set minHeight of track to 0
-                track.minHeight = 0;
-            } else { // Horizontal slider, set minWidth of track to 0
-                track.minWidth = 0;
-            }
-            this.add(track, 1, 'center', 0, true);
+            this.add(track,
+                {
+                    proportion: 1,
+                    expand: true,
+                    minWidth: 0,
+                    minHeight: 0
+                })
         }
 
         if (indicator) {

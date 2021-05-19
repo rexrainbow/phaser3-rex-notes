@@ -36,7 +36,7 @@ var GetChildrenHeight = function (minimumMode) {
             padding = child.rexSizer.padding;
             if (
                 (child.rexSizer.proportion === 0) ||
-                (minimumMode && (!child.isRexSpace) && (child.rexSizer.proportion > 0))
+                (minimumMode && (child.rexSizer.proportion > 0))
             ) {
                 childHeight = this.getChildHeight(child);
             } else {
