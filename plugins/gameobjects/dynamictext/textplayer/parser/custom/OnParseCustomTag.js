@@ -6,11 +6,19 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
             textPlayer.emit('parser.start', parser);
         })
         .on('+', function (tagName, ...value) {
+            if (parser.skipEventFlag) {  // Has been processed before
+                return;
+            }
+
             var startTag = `+${tagName}`;
             textPlayer.emit(`parser.${startTag}`, parser, ...value);
             AppendCommand(textPlayer, startTag, value);
         })
         .on('-', function (tagName) {
+            if (parser.skipEventFlag) {
+                return;
+            }
+
             var endTag = `-${tagName}`;
             textPlayer.emit(`parser.${endTag}`, parser);
             AppendCommand(textPlayer, endTag);

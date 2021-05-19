@@ -11,8 +11,6 @@ var AddTintRGBProperties = function (gameObject, colorRGB) {
         colorRGB = 0xffffff;
     }
 
-    var proto = Object.getPrototypeOf(gameObject);
-
     // Override tint property
     Object.defineProperty(gameObject, 'tint', {
         get: function () {
@@ -20,7 +18,7 @@ var AddTintRGBProperties = function (gameObject, colorRGB) {
         },
         set: function (value) {
             value = Math.floor(value) & 0xffffff;
-            proto.tint = value;
+            gameObject.setTint(value);
             if (gameObject._tintRGB !== value) {
                 gameObject._tintRGB = value;
                 gameObject._tintR = GetR(value);

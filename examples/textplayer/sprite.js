@@ -9,9 +9,36 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('dude', 'assets/images/phaser-dude.png');
+        this.load.atlas('knight', 'assets/animations/knight.png', 'assets/animations/knight.json');
     }
 
     create() {
+        this.anims.create({
+            key: 'guardStart',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_start/frame', start: 0, end: 3, zeroPad: 4 }),
+            frameRate: 8
+        });
+
+        this.anims.create({
+            key: 'guard',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard/frame', start: 0, end: 5, zeroPad: 4 }),
+            frameRate: 8,
+            repeat: 2
+        });
+
+        this.anims.create({
+            key: 'guardEnd',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'guard_end/frame', start: 0, end: 3, zeroPad: 4 }),
+            frameRate: 8
+        });
+
+        this.anims.create({
+            key: 'idle',
+            frames: this.anims.generateFrameNames('knight', { prefix: 'idle/frame', start: 0, end: 5, zeroPad: 4 }),
+            frameRate: 8,
+            repeat: -1
+        });
+
         var content = `
 [color=red][size=24]H[/color]ello 
 
@@ -19,9 +46,13 @@ class Demo extends Phaser.Scene {
 [sprite.dude.x=100][sprite.dude.x.to=700,1000,Cubic]
 [sprite.dude.y=200]
 
+[sprite.knight.play=idle,guard]
+[sprite.knight.x=400][sprite.knight.y=300]
+
 [color=yellow]phaser3[/color]
 
 [/sprite.dude]
+[sprite.knight.stop]
 `
 
         var text = this.add.rexTextPlayer(

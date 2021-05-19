@@ -515,6 +515,9 @@ txt.playPromise(content)
 - Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
 - Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
     - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
+- Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
+    - Can play animation without adding sprite first.
+- Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
 
 #### Custom tag
 

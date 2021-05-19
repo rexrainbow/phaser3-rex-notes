@@ -2,6 +2,9 @@
 
 Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 
+!!! note Override tint property
+    This behavior will override default `tint` property
+
 - Author: Rex
 - Method only
 

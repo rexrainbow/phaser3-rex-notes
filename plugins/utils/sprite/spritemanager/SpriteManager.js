@@ -22,11 +22,11 @@ class SpriteManager {
     setCreateCallback(callback) {
         if (callback === 'sprite') {
             this.createCallback = function (scene, textureKey, frameName) {
-                return scene.add.sprite(0, 0, textureKey, frameName)
+                return scene.add.sprite(0, 0, textureKey, frameName);
             }
         } else if (callback === 'image') {
             this.createCallback = function (scene, textureKey, frameName) {
-                return scene.add.image(0, 0, textureKey, frameName)
+                return scene.add.image(0, 0, textureKey, frameName);
             }
         } else {
             this.createCallback = callback;
@@ -62,7 +62,7 @@ class SpriteManager {
             AddTintRGBProperties(sprite);
         }
 
-        var spriteData = new SpriteData(this, sprite);
+        var spriteData = new SpriteData(this, sprite, name);
         this.sprites[name] = spriteData;
 
         if (this.fadeTime > 0) {
@@ -112,6 +112,33 @@ class SpriteManager {
             spriteData.destroy();
             delete this.sprites[name];
         }
+        return this;
+    }
+
+    playAnimation(name, key) {
+        if (!this.has(name)) {
+            this.add(name);
+        }
+
+        this.get(name).playAnimation(key);
+        return this;
+    }
+
+    stopAnimation(name) {
+        if (!this.has(name)) {
+            return this;
+        }
+
+        this.get(name).stopAnimation();
+        return this;
+    }
+
+    chainAnimation(name, keys) {
+        if (!this.has(name)) {
+            return this;
+        }
+
+        this.get(name).chainAnimation(keys);
         return this;
     }
 }

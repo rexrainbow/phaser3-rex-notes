@@ -1,8 +1,9 @@
 class SpriteData {
-    constructor(spriteManager, sprite) {
+    constructor(spriteManager, sprite, name) {
         this.spriteManager = spriteManager;
-        this.sprite = sprite;
+        this.sprite = sprite.setName(name);
         this.tweens = {};
+        this.name = name;
     }
 
     get scene() {
@@ -58,6 +59,21 @@ class SpriteData {
         }
         config[property] = value;
         tweenTasks[property] = this.scene.tweens.add(config);
+        return this;
+    }
+
+    playAnimation(key) {
+        this.sprite.play(key);
+        return this;
+    }
+
+    stopAnimation() {
+        this.sprite.stop();
+        return this;
+    }
+
+    chainAnimation(keys) {
+        this.sprite.chain(keys);
         return this;
     }
 }

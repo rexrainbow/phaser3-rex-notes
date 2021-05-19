@@ -2,14 +2,23 @@ import AppendCommandBase from '../../../dynamictext/methods/AppendCommand.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+var IsAddSpriteTag = function (tags, prefix) {
+    // sprite.name
+    return (tags.length === 2) && (tags[0] === prefix)
+}
+
 var OnParseAddSpriteTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
     parser
         .on('+', function (tag, textureKey, frameKey) {
-            // [sprite.name=key,frame]
+            if (parser.skipEventFlag) {  // Has been processed before
+                return;
+            }
+
+            // [sprite.name=key,frame], or [sprite.name]
             var tags = tag.split('.');
             var name;
-            if ((tags.length === 2) && (tags[0] === prefix)) {
+            if (IsAddSpriteTag(tags, prefix)) {
                 name = tags[1];
             } else {
                 return;
@@ -20,12 +29,17 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
                 [name, textureKey, frameKey],   // params
                 textPlayer,                     // scope
             );
+            parser.skipEvent();
         })
         .on('-', function (tag) {
+            if (parser.skipEventFlag) {  // Has been processed before
+                return;
+            }
+
             // [/sprite.name]
             var tags = tag.split('.');
             var name;
-            if ((tags.length === 2) && (tags[0] === prefix)) {
+            if (IsAddSpriteTag(tags, prefix)) {
                 name = tags[1];
             } else {
                 return;
@@ -36,6 +50,7 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
                 name,              // params
                 textPlayer,        // scope
             );
+            parser.skipEvent();
         })
 }
 
