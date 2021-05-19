@@ -5818,6 +5818,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oNZbbJv">Play</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/jOBroeY">Sprite control</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textplaayer">Sample code</a></p>
@@ -6331,7 +6332,7 @@
 <li>Wait sound effect : <code>[wait=se]</code><ul>
 <li>Also fire event <code>'wait.music'</code>
    <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.music&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">music</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">/// var key = music.key;</span>
+     <span class="c1">// var key = music.key;</span>
  <span class="p">})</span>
 </code></pre></div></li>
 </ul>
@@ -6339,7 +6340,14 @@
 <li>Wait background music : <code>[wait=bgm]</code><ul>
 <li>Also fire event <code>'wait.music'</code>
    <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.music&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">music</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">/// var key = music.key;</span>
+     <span class="c1">// var key = music.key;</span>
+ <span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait ease task of sprite's property : <code>[wait=sprite.name.prop]</code><ul>
+<li>Also fire event <code>'wait.sprite'</code>
+   <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
  <span class="p">})</span>
 </code></pre></div></li>
 </ul>
@@ -6372,6 +6380,7 @@
 <li><code>[sprite.name.x.to=value]</code> : Default duration is <code>1000</code>, default easeFunction is <code>Linear</code>.</li>
 </ul>
 </li>
+<li>Yoyo ease property : <code>[sprite.name.y.yoyo=value,duration,easeFunction]</code></li>
 <li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
 <li>Can play animation without adding sprite first.</li>
 </ul>

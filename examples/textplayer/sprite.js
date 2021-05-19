@@ -43,15 +43,15 @@ class Demo extends Phaser.Scene {
 [color=red][size=24]H[/color]ello 
 
 [sprite.dude=dude]
-[sprite.dude.x=100][sprite.dude.x.to=700,1000,Cubic]
-[sprite.dude.y=200]
+[sprite.dude.x=100][sprite.dude.x.to=700,5000,Cubic]
+[sprite.dude.y=300][sprite.dude.y.yoyo=100,1000]
 
 [sprite.knight.play=idle,guard]
 [sprite.knight.x=400][sprite.knight.y=300]
 
 [color=yellow]phaser3[/color]
 
-[/sprite.dude]
+[wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
 `
 

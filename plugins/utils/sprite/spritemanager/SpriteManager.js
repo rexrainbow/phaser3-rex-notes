@@ -81,7 +81,7 @@ class SpriteManager {
         return this;
     }
 
-    easeProperty(name, property, value, duration, ease, onComplete) {
+    easeProperty(name, property, value, duration, ease, isYoyo, onComplete) {
         if (!this.has(name)) {
             return this;
         }
@@ -93,7 +93,7 @@ class SpriteManager {
             ease = 'Linear';
         }
 
-        this.get(name).easeProperty(property, value, duration, ease, onComplete);
+        this.get(name).easeProperty(property, value, duration, ease, isYoyo, onComplete);
         return this;
     }
 
@@ -104,9 +104,11 @@ class SpriteManager {
 
         var spriteData = this.get(name);
         if (this.fadeTime > 0) {
-            this.easeProperty(name, 'tintGray', 0, this.fadeTime, 'Linear', function () {
-                spriteData.destroy();
-            })
+            this.easeProperty(name, 'tintGray', 0, this.fadeTime,
+                'Linear',                              // ease 
+                false,                                 // yoyo
+                function () { priteData.destroy(); }   // onComplete
+            )
             delete this.sprites[name];
         } else {
             spriteData.destroy();

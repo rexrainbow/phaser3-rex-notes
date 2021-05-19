@@ -3,6 +3,7 @@ import WaitTime from './WaitTime.js';
 import WaitClick from './WaitClick.js';
 import WaitMusic from './WaitMusic.js';
 import WaitKey from './WaitKey.js';
+import { IsWaitSprite, WaitSprite } from './WaitSprite.js'
 
 const KeyCodes = Phaser.Input.Keyboard.KeyCodes;
 
@@ -35,6 +36,9 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
 
         } else if (KeyCodes.hasOwnProperty(name.toUpperCase())) {
             WaitKey(textPlayer, name, callback, args, scope);
+
+        } else if (IsWaitSprite(name)) {
+            WaitSprite(textPlayer, name, callback, args, scope);
 
         } else {
             WaitCallback(textPlayer, name, callback, args, scope);

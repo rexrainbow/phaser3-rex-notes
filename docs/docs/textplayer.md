@@ -8,6 +8,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 ## Live demos
 
 - [Play](https://codepen.io/rexrainbow/pen/oNZbbJv)
+- [Sprite control](https://codepen.io/rexrainbow/pen/jOBroeY)
 
 ## Usage
 
@@ -481,14 +482,20 @@ txt.playPromise(content)
     - Also fire event `'wait.music'`
        ```javascript
         txt.on('wait.music', function(music) {
-            /// var key = music.key;
+            // var key = music.key;
         })
        ```
 - Wait background music : `[wait=bgm]`
     - Also fire event `'wait.music'`
        ```javascript
         txt.on('wait.music', function(music) {
-            /// var key = music.key;
+            // var key = music.key;
+        })
+       ```
+- Wait ease task of sprite's property : `[wait=sprite.name.prop]`
+    - Also fire event `'wait.sprite'`
+       ```javascript
+        txt.on('wait.sprite', function(name, prop) {
         })
        ```
 - Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string excluded 'click', 'se', 'bgm', or any valid key name)
@@ -515,6 +522,7 @@ txt.playPromise(content)
 - Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
 - Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
     - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
+- Yoyo ease property : `[sprite.name.y.yoyo=value,duration,easeFunction]`
 - Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
     - Can play animation without adding sprite first.
 - Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`

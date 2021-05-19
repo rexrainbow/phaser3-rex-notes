@@ -38,7 +38,7 @@ class SpriteData {
         return this;
     }
 
-    easeProperty(property, value, duration, ease, onComplete) {
+    easeProperty(property, value, duration, ease, isYoyo, onComplete) {
         var tweenTasks = this.tweens;
         if (tweenTasks.hasOwnProperty(property)) {
             tweenTasks[property].remove();
@@ -48,6 +48,7 @@ class SpriteData {
             targets: this.sprite,
             duration: duration,
             ease: ease,
+            yoyo: isYoyo,
             onComplete: function () {
                 tweenTasks[property].remove();
                 delete tweenTasks[property];
