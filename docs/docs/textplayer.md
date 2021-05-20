@@ -412,6 +412,7 @@ txt.playPromise(content)
 
 - New line : `[r]`
     - New line via `\n` will be ignored.
+    - A line only has 0 or many spaces will be ignored.
 
 #### Image
 

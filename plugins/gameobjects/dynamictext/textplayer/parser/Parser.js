@@ -16,7 +16,13 @@ class Parser extends BracketParser {
 
     start(source) {
         // Replace \n to ''
-        source = source.replace(/\n/g, '');
+        var lines = source.split('\n');
+        for (var i = 0, cnt = lines.length; i < cnt; i++) {
+            lines[i] = lines[i].replace(/^ */g, '');
+            // Replace line only has space to empty line
+        }
+        source = lines.join('');
+        
         // Use [r] to put \n
         super.start(source);
         return this;
