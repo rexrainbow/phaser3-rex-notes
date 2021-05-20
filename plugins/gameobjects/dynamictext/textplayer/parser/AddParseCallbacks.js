@@ -23,6 +23,8 @@ import ParsePlayAnimationTag from './sprites/OnParsePlayAnimationTag.js';
 import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
+import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
+import ParseFlasheCameraTag from './camera/OnParseFlashCameraTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContent from './content/OnParseContent.js';
@@ -38,6 +40,7 @@ const ParseCallbacks = [
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParsePlayAnimationTag, ParseChainAnimationTag,
     ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later
+    ParseShakeCameraTag, ParseFlasheCameraTag,
     ParseCustomTag,
     ParseNewLineTag, ParseContent
 ];

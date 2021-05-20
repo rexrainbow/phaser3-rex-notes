@@ -82,6 +82,10 @@ class TextPlayer extends DynamicText {
         return this._spriteManager;
     }
 
+    get camera() {
+        return this.scene.cameras.main;
+    }
+
     destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
