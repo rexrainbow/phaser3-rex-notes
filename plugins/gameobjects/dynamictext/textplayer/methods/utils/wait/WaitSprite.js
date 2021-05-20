@@ -9,12 +9,22 @@ var IsWaitSprite = function (name) {
 
 var WaitSprite = function (textPlayer, tag, callback, args, scope) {
     var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
-
     var tags = tag.split('.');
     var spriteManager = textPlayer.spriteManager;
     switch (tags.length) {
         case 1:  // sprite: wait all sprites has beeen destroyed
-            // TODO
+            // Remove all wait events
+            textPlayer.once(RemoveWaitEvents, function (removeFrom) {
+                spriteManager.off('empty', wrapCallback, textPlayer);
+            });
+
+            if (spriteManager.isEmpty) {
+                wrapCallback();
+                textPlayer.emit('wait.sprite');
+            } else {
+                spriteManager.once('empty', wrapCallback, textPlayer);
+                textPlayer.emit('wait.sprite');
+            }
             break;
 
         case 2:  // sprite.name: wait sprite.name has been destroyed
@@ -37,24 +47,18 @@ var WaitSprite = function (textPlayer, tag, callback, args, scope) {
 
         case 3:  // sprite.name.prop: wait ease sprite.name.prop has been completed
             var name = tags[1];
-            var propName = tags[2];
-            if (spriteManager.has(name)) {
-                var spriteData = textPlayer.spriteManager.get(name);
-                var easeTask = spriteData.tweens[propName];
-                if (easeTask) {
-                    // Remove all wait events
-                    textPlayer.once(RemoveWaitEvents, function () {
-                        easeTask.off('complete', wrapCallback, textPlayer);
-                    });
+            var prop = tags[2];
+            var task = textPlayer.spriteManager.getTweenTask(name, prop);
+            if (task) {
+                // Remove all wait events
+                textPlayer.once(RemoveWaitEvents, function () {
+                    task.off('complete', wrapCallback, textPlayer);
+                });
 
-                    easeTask.once('complete', wrapCallback, textPlayer);
-                    textPlayer.emit('wait.sprite', name, propName);
-                } else {
-                    textPlayer.emit('wait.sprite', name, propName);
-                    wrapCallback();
-                }
+                task.once('complete', wrapCallback, textPlayer);
+                textPlayer.emit('wait.sprite', name, prop);
             } else {
-                textPlayer.emit('wait.sprite', name, propName);
+                textPlayer.emit('wait.sprite', name, prop);
                 wrapCallback();
             }
             break;

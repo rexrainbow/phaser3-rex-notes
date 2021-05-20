@@ -53,6 +53,8 @@ class Demo extends Phaser.Scene {
 
 [wait=sprite.dude.x][/sprite.dude]
 [sprite.knight.stop]
+
+[/sprite][wait=sprite]
 `
 
         var text = this.add.rexTextPlayer(
@@ -107,6 +109,18 @@ class Demo extends Phaser.Scene {
 
             // text.showPage();  // Show all characters in this page
         })
+
+        //text
+        //    .on('wait.sprite', function (name, prop) {
+        //        if ((name === undefined) && (prop === undefined)) {
+        //            console.log('wait.sprite');
+        //        } else if (prop === undefined) {
+        //            console.log(`wait.sprite.${name}`)
+        //        } else {
+        //            console.log(`wait.sprite.${name}.${prop}`)
+        //        }
+        //
+        //    })
 
     }
 

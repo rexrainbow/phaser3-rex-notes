@@ -168,7 +168,11 @@ var txt = scene.add.rexTextPlayer({
             loop: true,
             fade: 500
         }
-    }
+    },
+
+    sprite: {
+        fade: 500
+    }, 
 
     clickTarget: this,  // This text player
     
@@ -266,7 +270,7 @@ var txt = scene.add.rexTextPlayer({
         }
         ```
         - [child](dynamictext.md#child)
-- `sounds` : Configuration of sound effect, or background music
+- `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
     - `sounds.bgm.loop` :
@@ -275,6 +279,10 @@ var txt = scene.add.rexTextPlayer({
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
+- `sprite` : Configuration of sprites.
+    - `sprite.fade` :
+        - `0` : No fade-in or fade-out when adding or removing a sprite.
+        - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
 - `nextPageInput` : Wait condition to type next page
     - `'click'` : Wait click, default behavior.
     - `'click|2000'` : Wait one of condition: click, or 2000ms.
@@ -458,6 +466,22 @@ txt.playPromise(content)
 - Cross fade to another background music : `[bgm.cross=key,10000]`
 - Set volume : `[bgm.volume=1]`
 
+#### Sprite
+
+- Add sprite : `[sprite.name=textureKey,frameKey]`
+    - Tint-fade-in if `sprite.fade` is not `0`
+- Remove sprite : `[/sprite.name]`
+    - Tint-fade-out if `sprite.fade` is not `0`
+- Remove all sprites : `[/sprite]`
+    - Tint-fade-out if `sprite.fade` is not `0`
+- Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
+- Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
+    - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
+- Yoyo ease property : `[sprite.name.y.yoyo=value,duration,easeFunction]`
+- Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
+    - Can play animation without adding sprite first.
+- Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
+
 #### Wait conditions
 
 - Wait click : `[wait=click]`, `[click]`
@@ -498,6 +522,13 @@ txt.playPromise(content)
         txt.on('wait.sprite', function(name, prop) {
         })
        ```
+- Wait all sprites are destroyed : `[wait=sprite]`
+    - Also fire event `'wait.sprite'`
+       ```javascript
+        txt.on('wait.sprite', function(name, prop) {
+            // name and prop parameter are `undefined` here
+        })
+       ```       
 - Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string excluded 'click', 'se', 'bgm', or any valid key name)
     - Fire event `'wait'`
         ```javascript
@@ -514,18 +545,6 @@ txt.playPromise(content)
 - Combine conditions : `[wait=cond0|cond1|...]`
     - Wait click, or enter key down : `[wait=click|enter]`
     - Wait click, enter key down, or 100ms : `[wait=click|enter|1000]`
-
-#### Sprite
-
-- Add sprite : `[sprite.name=textureKey,frameKey]`
-- Remove sprite : `[/sprite.name]`
-- Set property : `[sprite.name.x=value]`, `[sprite.name.alpha=value]`, ....
-- Ease property : `[sprite.name.x.to=value,duration,easeFunction]`, 
-    - `[sprite.name.x.to=value]` : Default duration is `1000`, default easeFunction is `Linear`.
-- Yoyo ease property : `[sprite.name.y.yoyo=value,duration,easeFunction]`
-- Play animation : `[sprite.name.play=animationKey]`, or `[sprite.name.play=animationKey0,animationKey1,...]`
-    - Can play animation without adding sprite first.
-- Stop animation : `[/sprite.name.play]`, or `[sprite.name.stop]`
 
 #### Custom tag
 

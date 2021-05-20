@@ -1,16 +1,21 @@
+import EventEmitterMethods from '../../eventemitter/EventEmitterMethods.js';
 import SpriteData from './SpriteData.js';
 import AddTintRGBProperties from '../../../behaviors/tintrgb/AddTintRGBProperties.js';
+import IsEmpty from '../../../utils/object/IsEmpty.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const RemoveItem = Phaser.Utils.Array.Remove;
 
 class SpriteManager {
     constructor(scene, config) {
         this.scene = scene;
 
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.setCreateCallback(GetValue(config, 'createCallback', 'sprite'));
         this.setSpriteFadeTime(GetValue(config, 'fade', 500));
 
         this.sprites = {};
+        this.removedSprites = [];
     }
 
     destroy() {
@@ -47,11 +52,26 @@ class SpriteManager {
         return this.sprites[name];
     }
 
+    getTweenTask(name, prop) {
+        if (this.has(name)) {
+            var tweenTasks = this.get(name).tweens;
+            if (tweenTasks.hasOwnProperty(prop)) {
+                return tweenTasks[prop];
+            }
+        }
+        return null;
+    }
+
+    get isEmpty() {
+        return IsEmpty(this.sprites) && (this.removedSprites.length === 0);
+    }
+
     clear() {
         for (var name in this.sprites) {
             this.sprites[name].destroy();
             delete this.sprites[name];
         }
+        this.removedSprites.length = 0;
         return this;
     }
 
@@ -61,6 +81,12 @@ class SpriteManager {
         if (this.fadeTime > 0) {
             AddTintRGBProperties(sprite);
         }
+        sprite.once('destroy', function () {
+            RemoveItem(this.removedSprites, sprite);
+            if (this.isEmpty) {
+                this.emit('empty');
+            }
+        }, this);
 
         var spriteData = new SpriteData(this, sprite, name);
         this.sprites[name] = spriteData;
@@ -103,16 +129,31 @@ class SpriteManager {
         }
 
         var spriteData = this.get(name);
+        delete this.sprites[name];
+
+        this.removedSprites.push(spriteData.sprite);
         if (this.fadeTime > 0) {
-            this.easeProperty(name, 'tintGray', 0, this.fadeTime,
-                'Linear',                              // ease 
-                false,                                 // yoyo
-                function () { priteData.destroy(); }   // onComplete
+            spriteData.easeProperty(
+                'tintGray',                 // property
+                0,                          // to value
+                this.fadeTime,              // duration
+                'Linear',                   // ease 
+                false,                      // yoyo
+                function () {               // onComplete
+                    spriteData.destroy();
+                }
             )
-            delete this.sprites[name];
+
         } else {
             spriteData.destroy();
-            delete this.sprites[name];
+
+        }
+        return this;
+    }
+
+    removeAll() {
+        for (var name in this.sprites) {
+            this.remove(name);
         }
         return this;
     }
@@ -145,5 +186,9 @@ class SpriteManager {
     }
 }
 
+Object.assign(
+    SpriteManager.prototype,
+    EventEmitterMethods
+);
 
 export default SpriteManager;

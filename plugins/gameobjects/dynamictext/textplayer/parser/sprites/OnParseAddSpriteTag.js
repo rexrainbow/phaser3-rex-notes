@@ -17,18 +17,18 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
 
             // [sprite.name=key,frame], or [sprite.name]
             var tags = tag.split('.');
-            var name;
             if (IsAddSpriteTag(tags, prefix)) {
-                name = tags[1];
+                var name = tags[1];
+                AppendCommandBase.call(textPlayer,
+                    'sprite.add',                   // name
+                    AddSprite,                      // callback
+                    [name, textureKey, frameKey],   // params
+                    textPlayer,                     // scope
+                );
             } else {
                 return;
             }
-            AppendCommandBase.call(textPlayer,
-                'sprite.add',                   // name
-                AddSprite,                      // callback
-                [name, textureKey, frameKey],   // params
-                textPlayer,                     // scope
-            );
+
             parser.skipEvent();
         })
         .on('-', function (tag) {
@@ -38,18 +38,18 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
 
             // [/sprite.name]
             var tags = tag.split('.');
-            var name;
             if (IsAddSpriteTag(tags, prefix)) {
-                name = tags[1];
+                var name = tags[1];
+                AppendCommandBase.call(textPlayer,
+                    'sprite.remove',   // name
+                    RemoveSprite,      // callback
+                    name,              // params
+                    textPlayer,        // scope
+                );
             } else {
                 return;
             }
-            AppendCommandBase.call(textPlayer,
-                'sprite.remove',   // name
-                RemoveSprite,      // callback
-                name,              // params
-                textPlayer,        // scope
-            );
+
             parser.skipEvent();
         })
 }

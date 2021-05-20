@@ -1234,15 +1234,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wait-conditions" class="md-nav__link">
-    Wait conditions
+  <a href="#sprite" class="md-nav__link">
+    Sprite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
+  <a href="#wait-conditions" class="md-nav__link">
+    Wait conditions
   </a>
   
 </li>
@@ -5758,15 +5758,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wait-conditions" class="md-nav__link">
-    Wait conditions
+  <a href="#sprite" class="md-nav__link">
+    Sprite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite" class="md-nav__link">
-    Sprite
+  <a href="#wait-conditions" class="md-nav__link">
+    Wait conditions
   </a>
   
 </li>
@@ -5965,7 +5965,11 @@
             <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
         <span class="p">}</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">sprite</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
+    <span class="p">},</span> 
 
     <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player</span>
 
@@ -6108,7 +6112,7 @@
 </li>
 </ul>
 </li>
-<li><code>sounds</code> : Configuration of sound effect, or background music<ul>
+<li><code>sounds</code> : Configuration of sound effect, or background music.<ul>
 <li><code>sounds.bgm.initial</code> : Initial music instance created by <code>scene.sound.add(key)</code> before starting playing content.<ul>
 <li><code>undefined</code> : No initial music instance, default value.</li>
 </ul>
@@ -6121,6 +6125,14 @@
 <li><code>sounds.bgm.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when starting or stopping a background music.</li>
 <li>A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is <code>500</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>sprite</code> : Configuration of sprites.<ul>
+<li><code>sprite.fade</code> :<ul>
+<li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
+<li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>
 </ul>
 </li>
 </ul>
@@ -6306,6 +6318,32 @@
 <li>Cross fade to another background music : <code>[bgm.cross=key,10000]</code></li>
 <li>Set volume : <code>[bgm.volume=1]</code></li>
 </ul>
+<h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code><ul>
+<li>Tint-fade-in if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove sprite : <code>[/sprite.name]</code><ul>
+<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Remove all sprites : <code>[/sprite]</code><ul>
+<li>Tint-fade-out if <code>sprite.fade</code> is not <code>0</code></li>
+</ul>
+</li>
+<li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
+<li>Ease property : <code>[sprite.name.x.to=value,duration,easeFunction]</code>, <ul>
+<li><code>[sprite.name.x.to=value]</code> : Default duration is <code>1000</code>, default easeFunction is <code>Linear</code>.</li>
+</ul>
+</li>
+<li>Yoyo ease property : <code>[sprite.name.y.yoyo=value,duration,easeFunction]</code></li>
+<li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
+<li>Can play animation without adding sprite first.</li>
+</ul>
+</li>
+<li>Stop animation : <code>[/sprite.name.play]</code>, or <code>[sprite.name.stop]</code></li>
+</ul>
 <h4 id="wait-conditions">Wait conditions<a class="headerlink" href="#wait-conditions" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Wait click : <code>[wait=click]</code>, <code>[click]</code><ul>
@@ -6352,6 +6390,14 @@
 </code></pre></div></li>
 </ul>
 </li>
+<li>Wait all sprites are destroyed : <code>[wait=sprite]</code><ul>
+<li>Also fire event <code>'wait.sprite'</code>
+   <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.sprite&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// name and prop parameter are `undefined` here</span>
+ <span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Wait callback : <code>[wait]</code>, or <code>[wait=xxx]</code> (<code>xxx</code> is any string excluded 'click', 'se', 'bgm', or any valid key name)<ul>
 <li>Fire event <code>'wait'</code>
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
@@ -6370,22 +6416,6 @@
 <li>Wait click, enter key down, or 100ms : <code>[wait=click|enter|1000]</code></li>
 </ul>
 </li>
-</ul>
-<h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code></li>
-<li>Remove sprite : <code>[/sprite.name]</code></li>
-<li>Set property : <code>[sprite.name.x=value]</code>, <code>[sprite.name.alpha=value]</code>, ....</li>
-<li>Ease property : <code>[sprite.name.x.to=value,duration,easeFunction]</code>, <ul>
-<li><code>[sprite.name.x.to=value]</code> : Default duration is <code>1000</code>, default easeFunction is <code>Linear</code>.</li>
-</ul>
-</li>
-<li>Yoyo ease property : <code>[sprite.name.y.yoyo=value,duration,easeFunction]</code></li>
-<li>Play animation : <code>[sprite.name.play=animationKey]</code>, or <code>[sprite.name.play=animationKey0,animationKey1,...]</code><ul>
-<li>Can play animation without adding sprite first.</li>
-</ul>
-</li>
-<li>Stop animation : <code>[/sprite.name.play]</code>, or <code>[sprite.name.stop]</code></li>
 </ul>
 <h4 id="custom-tag">Custom tag<a class="headerlink" href="#custom-tag" title="Permanent link">&para;</a></h4>
 <p>Assume that adding a custom tag : <code>[custom=10,20][/custom]</code></p>

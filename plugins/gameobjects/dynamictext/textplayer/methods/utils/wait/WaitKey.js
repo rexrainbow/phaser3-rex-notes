@@ -2,7 +2,7 @@ import GetWrapCallback from './GetWrapCallback.js';
 import { RemoveWaitEvents } from '../Events.js';
 
 var WaitKey = function (textPlayer, keyName, callback, args, scope) {
-    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope);
+    var wrapCallback = GetWrapCallback(textPlayer, callback, args, scope, 'keydown');
 
     var eventName = `keydown-${keyName.toUpperCase()}`;
     var keyboard = textPlayer.scene.input.keyboard;
