@@ -5932,7 +5932,8 @@
     <span class="p">},</span>
 
     <span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
-
+        <span class="nx">delimiters</span><span class="o">:</span> <span class="s1">&#39;[]&#39;</span><span class="p">,</span>
+        <span class="nx">comment</span><span class="o">:</span> <span class="s1">&#39;//&#39;</span>
     <span class="p">}</span>
 
     <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
@@ -6122,6 +6123,14 @@
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><a href="../dynamictext/#child">child</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>parser</code> : Configuration of parser.<ul>
+<li><code>parser.delimiters</code> : Delimiters of tag. Default value is <code>'[]'</code>.</li>
+<li><code>parser.comment</code> : Start word of a comment line. Default value is <code>'//'</code>.<ul>
+<li><code>null</code>, or <code>false</code> : No comment line.</li>
 </ul>
 </li>
 </ul>

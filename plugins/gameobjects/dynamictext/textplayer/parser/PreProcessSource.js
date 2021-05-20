@@ -12,7 +12,7 @@ var PreProcess = function (parser, source) {
         if (line === '') {
             // Do nothing
 
-        } else if (!line.trim().length) {
+        } else if (line.trim().length === 0) {
             // An empty line, only has space
             lines[i] = '';
 

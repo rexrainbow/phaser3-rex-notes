@@ -121,7 +121,8 @@ var txt = scene.add.rexTextPlayer({
     },
 
     parser: {
-
+        delimiters: '[]',
+        comment: '//'
     }
 
     wrap: {
@@ -270,6 +271,10 @@ var txt = scene.add.rexTextPlayer({
         }
         ```
         - [child](dynamictext.md#child)
+- `parser` : Configuration of parser.
+    - `parser.delimiters` : Delimiters of tag. Default value is `'[]'`.
+    - `parser.comment` : Start word of a comment line. Default value is `'//'`.
+        - `null`, or `false` : No comment line.
 - `sounds` : Configuration of sound effect, or background music.
     - `sounds.bgm.initial` : Initial music instance created by `scene.sound.add(key)` before starting playing content.
         - `undefined` : No initial music instance, default value.
