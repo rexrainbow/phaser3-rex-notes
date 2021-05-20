@@ -396,6 +396,15 @@ txt.playPromise(content)
 
 ### Tags of content
 
+#### Content
+
+These lines will be skipped :
+
+- Empty line, which only has space characters.
+- Comment line, start with `'//'`.
+
+New line symbol `'\n'` will be removed, use `[r]` to insert a new line character.
+
 #### Text style
 
 - Font color : `[color=red]content[/color]`, `[color=#FF0000]content[/color]`
@@ -412,7 +421,6 @@ txt.playPromise(content)
 
 - New line : `[r]`
     - New line via `\n` will be ignored.
-    - A line only has 0 or many spaces will be ignored.
 
 #### Image
 

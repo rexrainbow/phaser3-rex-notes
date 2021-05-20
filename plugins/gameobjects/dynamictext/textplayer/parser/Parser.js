@@ -1,5 +1,8 @@
 import BracketParser from '../../../../logic/bracketparser/BracketParser.js';
 import AddParseCallbacks from './AddParseCallbacks.js';
+import PreProcessSource from './PreProcessSource.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Parser extends BracketParser {
     constructor(textPlayer, config) {
@@ -12,19 +15,17 @@ class Parser extends BracketParser {
         super(config);
 
         AddParseCallbacks(textPlayer, this, config);
+
+        this.setCommentLineStartSymbol(GetValue(config,'comment', '//'))
+    }
+
+    setCommentLineStartSymbol(symbol) {
+        this.commentLineStart = symbol;
+        return this;
     }
 
     start(source) {
-        // Replace \n to ''
-        var lines = source.split('\n');
-        for (var i = 0, cnt = lines.length; i < cnt; i++) {
-            lines[i] = lines[i].replace(/^ */g, '');
-            // Replace line only has space to empty line
-        }
-        source = lines.join('');
-        
-        // Use [r] to put \n
-        super.start(source);
+        super.start(PreProcessSource(this, source));
         return this;
     }
 }
