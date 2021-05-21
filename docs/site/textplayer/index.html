@@ -1241,6 +1241,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    Camera
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sprite" class="md-nav__link">
     Sprite
   </a>
@@ -5772,6 +5779,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#camera" class="md-nav__link">
+    Camera
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sprite" class="md-nav__link">
     Sprite
   </a>
@@ -6348,6 +6362,13 @@
 <li>Cross fade to another background music : <code>[bgm.cross=key,10000]</code></li>
 <li>Set volume : <code>[bgm.volume=1]</code></li>
 </ul>
+<h4 id="camera">Camera<a class="headerlink" href="#camera" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Fade-in effect : <code>[fadein]</code>, <code>[fadein=1000]</code>, or <code>[fadein=duration,red,green,blue]</code></li>
+<li>Fade-out effect : <code>[fadeout]</code>, <code>[fadeout=1000]</code>, or <code>[fadeout=duration,red,green,blue]</code></li>
+<li>Flash effect : <code>[flash]</code>, <code>[flash=1000]</code>, or <code>[flash=duration,red,green,blue]</code></li>
+<li>Shake effect : <code>[shake]</code>, <code>[shake=1000]</code>, or <code>[shake=duration,intensity]</code></li>
+</ul>
 <h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add sprite : <code>[sprite.name=textureKey,frameKey]</code><ul>
@@ -6409,6 +6430,14 @@
 <li>Also fire event <code>'wait.music'</code>
    <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.music&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">music</span><span class="p">)</span> <span class="p">{</span>
      <span class="c1">// var key = music.key;</span>
+ <span class="p">})</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Wait camera effect : <code>[wait=fadein]</code>, <code>[wait=fadeout]</code>, <code>[wait=flash]</code>, <code>[wait=shake]</code><ul>
+<li>Also fire event <code>'wait.camera'</code>
+   <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.camera&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">effectName</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">// effectName : &#39;fadein&#39;, &#39;fadeout&#39;, &#39;flash&#39;, &#39;shake&#39;</span>
  <span class="p">})</span>
 </code></pre></div></li>
 </ul>

@@ -16,6 +16,10 @@ import ParseFadeInBackgroundMusicTag from './backgroundmusic/OnParseFadeInBackgr
 import ParseFadeOutBackgroundMusicTag from './backgroundmusic/OnParseFadeOutBackgroundMusicTag.js';
 import ParseCrossFadeBackgroundMusicTag from './backgroundmusic/OnParseCrossFadeBackgroundMusicTag.js';
 import ParsePauseBackgroundMusicTag from './backgroundmusic/OnParsePauseBackgroundMusicTag.js';
+import ParseFadeInCameraTag from './camera/OnParseFadeInCameraTag.js';
+import ParseFadeOutCameraTag from './camera/OnParseFadeOutCameraTag.js';
+import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
+import ParseFlashCameraTag from './camera/OnParseFlashCameraTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
 import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
@@ -23,8 +27,6 @@ import ParsePlayAnimationTag from './sprites/OnParsePlayAnimationTag.js';
 import ParseChainAnimationTag from './sprites/OnParseChainAnimationTag.js';
 import ParseSetSpritePropertyTag from './sprites/OnParseSetSpritePropertyTag.js';
 import ParseEaseSpritePropertyTag from './sprites/OnParseEaseSpritePropertyTag.js';
-import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
-import ParseFlasheCameraTag from './camera/OnParseFlashCameraTag.js';
 import ParseCustomTag from './custom/OnParseCustomTag.js';
 import ParseNewLineTag from './content/OnParseNewLineTag.js';
 import ParseContent from './content/OnParseContent.js';
@@ -36,11 +38,11 @@ const ParseCallbacks = [
     ParseTypingSpeedTag,
     ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
+    ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag,
     ParseWaitTag,
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParsePlayAnimationTag, ParseChainAnimationTag,
-    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later
-    ParseShakeCameraTag, ParseFlasheCameraTag,
+    ParseSetSpritePropertyTag, ParseEaseSpritePropertyTag, // Add ParseSetSpritePropertyTag later    
     ParseCustomTag,
     ParseNewLineTag, ParseContent
 ];

@@ -13,15 +13,14 @@ var WaitSprite = function (textPlayer, tag, callback, args, scope) {
     var spriteManager = textPlayer.spriteManager;
     switch (tags.length) {
         case 1:  // sprite: wait all sprites has beeen destroyed
-            // Remove all wait events
-            textPlayer.once(RemoveWaitEvents, function (removeFrom) {
-                spriteManager.off('empty', wrapCallback, textPlayer);
-            });
-
             if (spriteManager.isEmpty) {
-                wrapCallback();
                 textPlayer.emit('wait.sprite');
+                wrapCallback();
             } else {
+                // Remove all wait events
+                textPlayer.once(RemoveWaitEvents, function (removeFrom) {
+                    spriteManager.off('empty', wrapCallback, textPlayer);
+                });
                 spriteManager.once('empty', wrapCallback, textPlayer);
                 textPlayer.emit('wait.sprite');
             }
@@ -40,8 +39,8 @@ var WaitSprite = function (textPlayer, tag, callback, args, scope) {
                 sprite.once('destroy', wrapCallback, textPlayer);
                 textPlayer.emit('wait.sprite', name);
             } else {
-                wrapCallback();
                 textPlayer.emit('wait.sprite', name);
+                wrapCallback();
             }
             break;
 

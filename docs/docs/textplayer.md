@@ -480,6 +480,13 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Cross fade to another background music : `[bgm.cross=key,10000]`
 - Set volume : `[bgm.volume=1]`
 
+#### Camera
+
+- Fade-in effect : `[fadein]`, `[fadein=1000]`, or `[fadein=duration,red,green,blue]`
+- Fade-out effect : `[fadeout]`, `[fadeout=1000]`, or `[fadeout=duration,red,green,blue]`
+- Flash effect : `[flash]`, `[flash=1000]`, or `[flash=duration,red,green,blue]`
+- Shake effect : `[shake]`, `[shake=1000]`, or `[shake=duration,intensity]`
+
 #### Sprite
 
 - Add sprite : `[sprite.name=textureKey,frameKey]`
@@ -528,6 +535,13 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
        ```javascript
         txt.on('wait.music', function(music) {
             // var key = music.key;
+        })
+       ```
+- Wait camera effect : `[wait=fadein]`, `[wait=fadeout]`, `[wait=flash]`, `[wait=shake]`
+    - Also fire event `'wait.camera'`
+       ```javascript
+        txt.on('wait.camera', function(effectName) {
+            // effectName : 'fadein', 'fadeout', 'flash', 'shake'
         })
        ```
 - Wait ease task of sprite's property : `[wait=sprite.name.prop]`
