@@ -124,18 +124,6 @@ class Demo extends Phaser.Scene {
             // text.showPage();  // Show all characters in this page
         })
 
-        //text
-        //    .on('wait.sprite', function (name, prop) {
-        //        if ((name === undefined) && (prop === undefined)) {
-        //            console.log('wait.sprite');
-        //        } else if (prop === undefined) {
-        //            console.log(`wait.sprite.${name}`)
-        //        } else {
-        //            console.log(`wait.sprite.${name}.${prop}`)
-        //        }
-        //
-        //    })
-
     }
 
     update() { }

@@ -566,7 +566,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
             // name and prop parameter are `undefined` here
         })
        ```       
-- Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string excluded 'click', 'se', 'bgm', or any valid key name)
+- Wait callback : `[wait]`, or `[wait=xxx]` (`xxx` is any string which not been used in above case)
     - Fire event `'wait'`
         ```javascript
         txt.on('wait', function(callback) {

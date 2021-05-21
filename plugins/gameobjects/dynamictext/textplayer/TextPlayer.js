@@ -44,6 +44,8 @@ class TextPlayer extends DynamicText {
             this._soundManager = new SoundManager(this.scene, soundManagerConfig);
         }
 
+        this.setTargetCamera(GetValue(config, 'camera', undefined));
+
         this._spriteManager = undefined;
         var spriteManagerConfig = GetValue(config, 'sprites', undefined);
         if (spriteManagerConfig) {
@@ -82,8 +84,12 @@ class TextPlayer extends DynamicText {
         return this._spriteManager;
     }
 
-    get camera() {
-        return this.scene.cameras.main;
+    setTargetCamera(camera) {
+        if (camera === undefined) {
+            camera = this.scene.cameras.main;
+        }
+        this.camera = camera;
+        return this;
     }
 
     destroy(fromScene) {
