@@ -6,6 +6,7 @@ import Container from './container/Container.js';
 import Canvas from './canvas/Canvas.js';
 import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
 import DynamicText from './dynamictext/DynamicText.js';
+import TextPlayer from './textplayer/TextPlayer.js';
 import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCanvas.js';
 import CircularProgress from './circularprogress/CircularProgress.js';
 import Knob from './knob/Knob.js';
@@ -67,6 +68,7 @@ export {
     Canvas,
     CircleMaskImage,
     DynamicText,
+    TextPlayer,
     Chart,
     CircularProgressCanvas,
     CircularProgress,

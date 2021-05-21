@@ -8,6 +8,7 @@ import ContainerFactory from './container/Factory.js';
 import CanvasFactory from './canvas/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
 import DynamicTextFactory from './dynamictext/Factory.js';
+import TextPlayerFactory from './textplayer/Factory.js';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory.js';
 import CircularProgressFactory from './circularprogress/Factory.js';
 import KnobFactory from './knob/Factory.js';
