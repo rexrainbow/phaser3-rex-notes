@@ -26,7 +26,7 @@ class TextPlayer extends DynamicText {
         delete config.text;
 
         super(scene, x, y, fixedWidth, fixedHeight, config);
-        this.type = 'rexBBCodeDynamicText'
+        this.type = 'rexTextPlayer'
 
         this.parser = new Parser(this, GetValue(config, 'parser', undefined));
 
@@ -44,7 +44,7 @@ class TextPlayer extends DynamicText {
             this._soundManager = new SoundManager(this.scene, soundManagerConfig);
         }
 
-        this.setTargetCamera(GetValue(config, 'camera', undefined));
+        this.setTargetCamera(GetValue(config, 'camera', this.scene.cameras.main));
 
         this._spriteManager = undefined;
         var spriteManagerConfig = GetValue(config, 'sprites', undefined);
@@ -84,14 +84,6 @@ class TextPlayer extends DynamicText {
         return this._spriteManager;
     }
 
-    setTargetCamera(camera) {
-        if (camera === undefined) {
-            camera = this.scene.cameras.main;
-        }
-        this.camera = camera;
-        return this;
-    }
-
     destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
@@ -115,6 +107,8 @@ class TextPlayer extends DynamicText {
             this._soundManager.destroy();
         }
         this._soundManager = undefined;
+
+        this.camera = undefined;
 
         if (this._spriteManager) {
             this._spriteManager.destroy();
