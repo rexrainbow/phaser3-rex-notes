@@ -482,13 +482,16 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 
 #### Camera
 
-- Fade-in effect : `[fadein]`, `[fadein=1000]`, or `[fadein=duration,red,green,blue]`
-- Fade-out effect : `[fadeout]`, `[fadeout=1000]`, or `[fadeout=duration,red,green,blue]`
-- Flash effect : `[flash]`, `[flash=1000]`, or `[flash=duration,red,green,blue]`
-- Shake effect : `[shake]`, `[shake=1000]`, or `[shake=duration,intensity]`
+- Fade-in effect : `[camera.fadein]`, `[camera.fadein=1000]`, or `[camera.fadein=duration,red,green,blue]`
+- Fade-out effect : `[camera.fadeout]`, `[camera.fadeout=1000]`, or `[camera.fadeout=duration,red,green,blue]`
+- Flash effect : `[camera.flash]`, `[camera.flash=1000]`, or `[camera.flash=duration,red,green,blue]`
+- Shake effect : `[camera.shake]`, `[camera.shake=1000]`, or `[camera.shake=duration,intensity]`
 - Zoom
-    - Set zoom : `[zoom=2]`
-    - Zoom to : `[zoom.to=1,1000]`, or `[zoom.to=1,1000,Cubic]`
+    - Set zoom : `[camera.zoom=2]`
+    - Zoom to : `[camera.zoom.to=1,1000]`, or `[camera.zoom.to=1,1000,Cubic]`
+- Rotate
+    - Set angle : `[camera.rotate=90]`, angle in degrees
+    - Rotate to : `[camera.rotate.to=0,1000]`, or `[camera.rotate.to=0,1000,Cubic]`, angle in degrees
 
 #### Sprite
 
@@ -540,11 +543,11 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
             // var key = music.key;
         })
        ```
-- Wait camera effect : `[wait=fadein]`, `[wait=fadeout]`, `[wait=flash]`, `[wait=shake]`, `[wait=zoom]`
+- Wait camera effect : `[wait=camera.fadein]`, `[wait=camera.fadeout]`, `[wait=camera.flash]`, `[wait=camera.shake]`, `[wait=camera.zoom]`, `[wait=camera.rotate]`
     - Also fire event `'wait.camera'`
        ```javascript
         txt.on('wait.camera', function(effectName) {
-            // effectName : 'fadein', 'fadeout', 'flash', 'shake', 'zoom'
+            // effectName : 'camera.fadein', 'camera.fadeout', 'camera.flash', 'camera.shake', 'camera.zoom', 'camera.rotate'
         })
        ```
 - Wait ease task of sprite's property : `[wait=sprite.name.prop]`

@@ -21,6 +21,7 @@ import ParseFadeOutCameraTag from './camera/OnParseFadeOutCameraTag.js';
 import ParseShakeCameraTag from './camera/OnParseShakeCameraTag.js';
 import ParseFlashCameraTag from './camera/OnParseFlashCameraTag.js';
 import ParseZoomCameraTag from './camera/OnParseZoomCameraTag.js';
+import ParseRotateCameraTag from './camera/OnParseRotateCameraTag.js';
 import ParseWaitTag from './wait/OnParseWaitTag.js';
 import ParseAddSpriteTag from './sprites/OnParseAddSpriteTag.js';
 import ParseRemoveAllSpriteTag from './sprites/OnParseRemoveAllSpritesTag.js';
@@ -39,7 +40,7 @@ const ParseCallbacks = [
     ParseTypingSpeedTag,
     ParsePlaySoundEffectTag, ParseFadeInSoundEffectTag, ParseFadeOutSoundEffectTag, ParseSetSoundEffectVolumeTag,
     ParsePlayBackgroundMusicTag, ParseFadeInBackgroundMusicTag, ParseFadeOutBackgroundMusicTag, ParseCrossFadeBackgroundMusicTag, ParsePauseBackgroundMusicTag,
-    ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag,
+    ParseFadeInCameraTag, ParseFadeOutCameraTag, ParseShakeCameraTag, ParseFlashCameraTag, ParseZoomCameraTag, ParseRotateCameraTag,
     ParseWaitTag,
     ParseAddSpriteTag, ParseRemoveAllSpriteTag,
     ParsePlayAnimationTag, ParseChainAnimationTag,
