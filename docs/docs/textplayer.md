@@ -486,6 +486,9 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Fade-out effect : `[fadeout]`, `[fadeout=1000]`, or `[fadeout=duration,red,green,blue]`
 - Flash effect : `[flash]`, `[flash=1000]`, or `[flash=duration,red,green,blue]`
 - Shake effect : `[shake]`, `[shake=1000]`, or `[shake=duration,intensity]`
+- Zoom
+    - Set zoom : `[zoom=2]`
+    - Zoom to : `[zoom.to=1,1000]`, or `[zoom.to=1,1000,Cubic]`
 
 #### Sprite
 
@@ -537,11 +540,11 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
             // var key = music.key;
         })
        ```
-- Wait camera effect : `[wait=fadein]`, `[wait=fadeout]`, `[wait=flash]`, `[wait=shake]`
+- Wait camera effect : `[wait=fadein]`, `[wait=fadeout]`, `[wait=flash]`, `[wait=shake]`, `[wait=zoom]`
     - Also fire event `'wait.camera'`
        ```javascript
         txt.on('wait.camera', function(effectName) {
-            // effectName : 'fadein', 'fadeout', 'flash', 'shake'
+            // effectName : 'fadein', 'fadeout', 'flash', 'shake', 'zoom'
         })
        ```
 - Wait ease task of sprite's property : `[wait=sprite.name.prop]`

@@ -40,6 +40,9 @@ class Demo extends Phaser.Scene {
         });
 
         var content = `
+[zoom=2][zoom.to=1,1000,Cubic][wait=zoom][wait=300]
+
+[shake=500][flash]
 [color=red][size=24]H[/color]ello 
 
 // Comments : dude sprite

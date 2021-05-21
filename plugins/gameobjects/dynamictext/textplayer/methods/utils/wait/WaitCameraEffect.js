@@ -8,6 +8,7 @@ var IsWaitCameraEffect = function (name) {
         case 'fadeout':
         case 'flash':
         case 'shake':
+        case 'zoom':
             return true;
         default:
             return false;
@@ -80,6 +81,20 @@ var WaitCameraEffect = function (textPlayer, effectName, callback, args, scope) 
             }
             break;
 
+        case 'zoom':
+            if (!camera.zoomEffect.isRunning) {
+                textPlayer.emit('wait.camera', effectName);
+                wrapCallback();
+
+            } else {
+                // Remove all wait events
+                textPlayer.once(RemoveWaitEvents, function (removeFrom) {
+                    camera.off('camerazoomcomplete', wrapCallback, textPlayer);
+                });
+                camera.once('camerazoomcomplete', wrapCallback, textPlayer);
+                textPlayer.emit('wait.camera', effectName);
+            }
+            break;
     }
 }
 

@@ -6368,6 +6368,11 @@
 <li>Fade-out effect : <code>[fadeout]</code>, <code>[fadeout=1000]</code>, or <code>[fadeout=duration,red,green,blue]</code></li>
 <li>Flash effect : <code>[flash]</code>, <code>[flash=1000]</code>, or <code>[flash=duration,red,green,blue]</code></li>
 <li>Shake effect : <code>[shake]</code>, <code>[shake=1000]</code>, or <code>[shake=duration,intensity]</code></li>
+<li>Zoom<ul>
+<li>Set zoom : <code>[zoom=2]</code></li>
+<li>Zoom to : <code>[zoom.to=1,1000]</code>, or <code>[zoom.to=1,1000,Cubic]</code></li>
+</ul>
+</li>
 </ul>
 <h4 id="sprite">Sprite<a class="headerlink" href="#sprite" title="Permanent link">&para;</a></h4>
 <ul>
@@ -6434,10 +6439,10 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Wait camera effect : <code>[wait=fadein]</code>, <code>[wait=fadeout]</code>, <code>[wait=flash]</code>, <code>[wait=shake]</code><ul>
+<li>Wait camera effect : <code>[wait=fadein]</code>, <code>[wait=fadeout]</code>, <code>[wait=flash]</code>, <code>[wait=shake]</code>, <code>[wait=zoom]</code><ul>
 <li>Also fire event <code>'wait.camera'</code>
    <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.camera&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">effectName</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// effectName : &#39;fadein&#39;, &#39;fadeout&#39;, &#39;flash&#39;, &#39;shake&#39;</span>
+     <span class="c1">// effectName : &#39;fadein&#39;, &#39;fadeout&#39;, &#39;flash&#39;, &#39;shake&#39;, &#39;zoom&#39;</span>
  <span class="p">})</span>
 </code></pre></div></li>
 </ul>
