@@ -488,10 +488,13 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
 - Shake effect : `[camera.shake]`, `[camera.shake=1000]`, or `[camera.shake=duration,intensity]`
 - Zoom
     - Set zoom : `[camera.zoom=2]`
-    - Zoom to : `[camera.zoom.to=1,1000]`, or `[camera.zoom.to=1,1000,Cubic]`
+    - Zoom to : `[camera.zoom.to=1,1000]`, or `[camera.zoom.to=zoomValue,duration,Cubic]`
 - Rotate
     - Set angle : `[camera.rotate=90]`, angle in degrees
-    - Rotate to : `[camera.rotate.to=0,1000]`, or `[camera.rotate.to=0,1000,Cubic]`, angle in degrees
+    - Rotate to : `[camera.rotate.to=0,1000]`, or `[camera.rotate.to=deg,duration,Cubic]`, angle in degrees
+- Scroll
+    - Scroll x,y : `[camera.scroll=0,200]`
+    - Scroll x,y to : `[camera.scroll.to=0,200,1000]`, or `[camera.rotate.to=x,y,duration,Cubic]`
 
 #### Sprite
 
@@ -543,11 +546,11 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
             // var key = music.key;
         })
        ```
-- Wait camera effect : `[wait=camera.fadein]`, `[wait=camera.fadeout]`, `[wait=camera.flash]`, `[wait=camera.shake]`, `[wait=camera.zoom]`, `[wait=camera.rotate]`
+- Wait camera effect : `[wait=camera.fadein]`, `[wait=camera.fadeout]`, `[wait=camera.flash]`, `[wait=camera.shake]`, `[wait=camera.zoom]`, `[wait=camera.rotate]`, `[wait=camera.scroll]`
     - Also fire event `'wait.camera'`
        ```javascript
         txt.on('wait.camera', function(effectName) {
-            // effectName : 'camera.fadein', 'camera.fadeout', 'camera.flash', 'camera.shake', 'camera.zoom', 'camera.rotate'
+            // effectName : 'camera.fadein', 'camera.fadeout', 'camera.flash', 'camera.shake', 'camera.zoom', 'camera.rotate', 'camera.scroll'
         })
        ```
 - Wait ease task of sprite's property : `[wait=sprite.name.prop]`

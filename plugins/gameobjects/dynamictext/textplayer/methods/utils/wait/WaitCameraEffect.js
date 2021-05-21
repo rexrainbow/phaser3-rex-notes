@@ -2,7 +2,6 @@ import GetWrapCallback from './GetWrapCallback.js';
 import { RemoveWaitEvents } from '../Events.js';
 
 var IsWaitCameraEffect = function (name) {
-    // fadein, fadeout, shake, flash
     switch (name) {
         case 'camera.fadein':
         case 'camera.fadeout':
@@ -10,6 +9,7 @@ var IsWaitCameraEffect = function (name) {
         case 'camera.shake':
         case 'camera.zoom':
         case 'camera.rotate':
+        case 'camera.scroll':
             return true;
         default:
             return false;
@@ -51,6 +51,11 @@ var WaitCameraEffect = function (textPlayer, effectName, callback, args, scope) 
         case 'camera.rotate':
             effect = camera.rotateToEffect;
             completeEventName = 'camerarotatecomplete';
+            break;
+
+        case 'camera.scroll':
+            effect = camera.panEffect;
+            completeEventName = 'camerapancomplete';
             break;
     }
 

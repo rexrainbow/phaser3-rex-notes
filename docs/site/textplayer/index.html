@@ -6370,12 +6370,17 @@
 <li>Shake effect : <code>[camera.shake]</code>, <code>[camera.shake=1000]</code>, or <code>[camera.shake=duration,intensity]</code></li>
 <li>Zoom<ul>
 <li>Set zoom : <code>[camera.zoom=2]</code></li>
-<li>Zoom to : <code>[camera.zoom.to=1,1000]</code>, or <code>[camera.zoom.to=1,1000,Cubic]</code></li>
+<li>Zoom to : <code>[camera.zoom.to=1,1000]</code>, or <code>[camera.zoom.to=zoomValue,duration,Cubic]</code></li>
 </ul>
 </li>
 <li>Rotate<ul>
 <li>Set angle : <code>[camera.rotate=90]</code>, angle in degrees</li>
-<li>Rotate to : <code>[camera.rotate.to=0,1000]</code>, or <code>[camera.rotate.to=0,1000,Cubic]</code>, angle in degrees</li>
+<li>Rotate to : <code>[camera.rotate.to=0,1000]</code>, or <code>[camera.rotate.to=deg,duration,Cubic]</code>, angle in degrees</li>
+</ul>
+</li>
+<li>Scroll<ul>
+<li>Scroll x,y : <code>[camera.scroll=0,200]</code></li>
+<li>Scroll x,y to : <code>[camera.scroll.to=0,200,1000]</code>, or <code>[camera.rotate.to=x,y,duration,Cubic]</code></li>
 </ul>
 </li>
 </ul>
@@ -6444,10 +6449,10 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li>Wait camera effect : <code>[wait=camera.fadein]</code>, <code>[wait=camera.fadeout]</code>, <code>[wait=camera.flash]</code>, <code>[wait=camera.shake]</code>, <code>[wait=camera.zoom]</code>, <code>[wait=camera.rotate]</code><ul>
+<li>Wait camera effect : <code>[wait=camera.fadein]</code>, <code>[wait=camera.fadeout]</code>, <code>[wait=camera.flash]</code>, <code>[wait=camera.shake]</code>, <code>[wait=camera.zoom]</code>, <code>[wait=camera.rotate]</code>, <code>[wait=camera.scroll]</code><ul>
 <li>Also fire event <code>'wait.camera'</code>
    <div class="codehilite"><pre><span></span><code> <span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wait.camera&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">effectName</span><span class="p">)</span> <span class="p">{</span>
-     <span class="c1">// effectName : &#39;camera.fadein&#39;, &#39;camera.fadeout&#39;, &#39;camera.flash&#39;, &#39;camera.shake&#39;, &#39;camera.zoom&#39;, &#39;camera.rotate&#39;</span>
+     <span class="c1">// effectName : &#39;camera.fadein&#39;, &#39;camera.fadeout&#39;, &#39;camera.flash&#39;, &#39;camera.shake&#39;, &#39;camera.zoom&#39;, &#39;camera.rotate&#39;, &#39;camera.scroll&#39;</span>
  <span class="p">})</span>
 </code></pre></div></li>
 </ul>

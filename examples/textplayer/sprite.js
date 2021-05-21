@@ -40,11 +40,13 @@ class Demo extends Phaser.Scene {
         });
 
         var content = `
-[camera.zoom=2][camera.zoom.to=1,2000,Cubic]
+[camera.scroll=0,200]
 [camera.rotate=-90][camera.rotate.to=0,2000,Cubic]
-[wait=camera.zoom][wait=300]
-
+[camera.zoom=2][camera.zoom.to=1,2000,Cubic][wait=camera.zoom][wait=300]
+[camera.scroll.to=0,0,2000,Cubic][wait=camera.scroll]
 [camera.shake=500][camera.flash]
+
+// Content
 [color=red][size=24]H[/color]ello 
 
 // Comments : dude sprite
@@ -56,6 +58,7 @@ class Demo extends Phaser.Scene {
 [sprite.knight.play=idle,guard]
 [sprite.knight.x=400][sprite.knight.y=300]
     
+// Content
 [color=yellow]phaser3[/color]
 
 [wait=sprite.dude.x][/sprite.dude]
@@ -63,6 +66,8 @@ class Demo extends Phaser.Scene {
 
 // Wait until all sprites are fade out
 [/sprite][wait=sprite]
+
+// Wait camera fade out
 [camera.fadeout][wait=camera.fadeout]
 `
 
