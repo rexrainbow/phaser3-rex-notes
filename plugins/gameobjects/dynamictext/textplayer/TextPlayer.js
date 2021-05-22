@@ -119,6 +119,10 @@ class TextPlayer extends DynamicText {
 
         super.destroy(fromScene);
     }
+
+    get isPageTyping() {
+        return this.typeWriter.isPageTyping;
+    }
 }
 
 Object.assign(

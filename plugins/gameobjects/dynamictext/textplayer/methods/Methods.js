@@ -4,6 +4,7 @@ import SetNextPageInput from './SetNextPageInput.js';
 import AddImage from './AddImage.js';
 import Play from './Play.js';
 import PlayPromise from './PlayPromise.js';
+import TypingNextPage from './TypingNextPage.js';
 import Pause from './Pause.js';
 import Resume from './Resume.js';
 import SetTimeScale from './SetTimeScale.js';
@@ -17,6 +18,7 @@ export default {
     addImage: AddImage,
     play: Play,
     playPromise: PlayPromise,
+    typingNextPage: TypingNextPage,
     pause: Pause,
     resume: Resume,
     setTimeScale: SetTimeScale,

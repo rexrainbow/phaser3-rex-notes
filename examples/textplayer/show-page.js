@@ -96,6 +96,7 @@ class Demo extends Phaser.Scene {
         this.input.once('pointerdown', function () {
             text.playPromise(content)
                 .then(function () {
+                    print.setText('Play complete');
                     console.log('Play complete');
                 })
 

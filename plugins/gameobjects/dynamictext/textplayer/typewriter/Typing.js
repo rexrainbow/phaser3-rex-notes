@@ -14,9 +14,11 @@ var Typing = function (offsetTime) {
             if (this.timeline.isRunning) {
                 // Wait until last animationConfig is end
                 this.timeline.once('complete', function () {
+                    this.isPageTyping = false;
                     this.emit('complete');
                 }, this);
             } else {
+                this.isPageTyping = false;
                 this.emit('complete');
             }
             break;  // Leave this typing loop

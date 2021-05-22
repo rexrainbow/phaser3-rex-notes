@@ -8,6 +8,7 @@ class TypeWriter {
     constructor(textPlayer, config) {
         this.setEventEmitter();
         this.textPlayer = textPlayer;
+        this.isPageTyping = false;
         this.timeline = new Timeline(textPlayer);
         this.typingTimer = undefined;  // Typing delay
         this.pauseTypingTimer = undefined;  // Wait time
@@ -72,10 +73,6 @@ class TypeWriter {
         var child = this.children[this.index];
         this.index = Math.min(this.index + 1, this.children.length);  // Point to next child
         return child;
-    }
-
-    isTypingComplete() {
-        return this.index === this.children.length;
     }
 }
 
