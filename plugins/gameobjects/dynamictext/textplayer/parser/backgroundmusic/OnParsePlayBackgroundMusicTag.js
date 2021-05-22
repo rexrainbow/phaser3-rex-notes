@@ -29,14 +29,16 @@ var PlayBackgroundMusic = function (params) {
     var name = params[0];
     var fadeInTime = params[1];
 
-    this.soundManager.playBackgroundMusic(name);  // this: textPlayer
+    // this: textPlayer
+    this.soundManager.playBackgroundMusic(name);
     if (fadeInTime) {
         this.soundManager.fadeInBackgroundMusic(fadeInTime);
     }
 }
 
 var StopBackgroundMusic = function () {
-    this.soundManager.stopBackgroundMusic();  // this: textPlayer
+    // this: textPlayer
+    this.soundManager.stopBackgroundMusic();
 }
 
 export default OnParsePlayBackgroundMusicTag;

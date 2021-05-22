@@ -77,7 +77,15 @@ class SpriteManager {
 
     add(name, textureKey, frameName) {
         this.remove(name);
-        var sprite = this.createCallback(this.scene, textureKey, frameName);
+
+        var sprite;
+        if (arguments.length === 3) {
+            sprite = this.createCallback(this.scene, textureKey, frameName);
+        } else {
+            var args = Array.prototype.slice.call(arguments, 1);
+            sprite = this.createCallback(this.scene, ...args);
+        }
+
         if (this.fadeTime > 0) {
             AddTintRGBProperties(sprite);
         }

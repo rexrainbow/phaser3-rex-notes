@@ -10,7 +10,7 @@ var IsAddSpriteTag = function (tags, prefix) {
 var OnParseAddSpriteTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
     parser
-        .on('+', function (tag, textureKey, frameKey) {
+        .on('+', function (tag, ...args) {
             if (parser.skipEventFlag) {  // Has been processed before
                 return;
             }
@@ -20,10 +20,10 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
             if (IsAddSpriteTag(tags, prefix)) {
                 var name = tags[1];
                 AppendCommandBase.call(textPlayer,
-                    'sprite.add',                   // name
-                    AddSprite,                      // callback
-                    [name, textureKey, frameKey],   // params
-                    textPlayer,                     // scope
+                    'sprite.add',      // name
+                    AddSprite,         // callback
+                    [name, ...args],   // params
+                    textPlayer,        // scope
                 );
             } else {
                 return;
@@ -55,13 +55,12 @@ var OnParseAddSpriteTag = function (textPlayer, parser, config) {
 }
 
 var AddSprite = function (params) {
-    var name = params[0];
-    var textureKey = params[1];
-    var frameKey = params[2];
-    this.spriteManager.add(name, textureKey, frameKey);  // this: textPlayer
+    // this: textPlayer
+    this.spriteManager.add(...params);
 }
 
 var RemoveSprite = function (name) {
+    // this: textPlayer
     this.spriteManager.remove(name);
 }
 

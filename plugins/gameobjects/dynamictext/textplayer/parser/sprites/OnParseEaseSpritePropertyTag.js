@@ -44,8 +44,8 @@ var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
 }
 
 var EaseProperty = function (params) {
-    var self = this.spriteManager;    // this: textPlayer
-    self.easeProperty.apply(self, params);
+    // this: textPlayer
+    this.spriteManager.easeProperty(...params);
 }
 
 export default OnParseEaseSpritePropertyTag;

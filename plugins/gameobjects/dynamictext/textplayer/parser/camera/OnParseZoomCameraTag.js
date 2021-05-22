@@ -8,7 +8,7 @@ var OnParseZoomCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (value) {
             AppendCommandBase.call(textPlayer,
                 'camera.zoom',   // name
-                ZoomCamera,      // callback
+                Zoom,      // callback
                 value,           // params
                 textPlayer,      // scope
             );
@@ -17,7 +17,7 @@ var OnParseZoomCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}.to`, function (value, duration, ease) {
             AppendCommandBase.call(textPlayer,
                 'camera.zoom.to',         // name
-                ZoomToCamera,             // callback
+                ZoomTo,             // callback
                 [value, duration, ease],  // params
                 textPlayer,               // scope
             );
@@ -25,15 +25,14 @@ var OnParseZoomCameraTag = function (textPlayer, parser, config) {
         })
 }
 
-var ZoomCamera = function (value) {
-    this.camera.setZoom(value);  // this: textPlayer
+var Zoom = function (value) {
+    // this: textPlayer
+    this.camera.setZoom(value);
 }
 
-var ZoomToCamera = function (params) {
-    var value = params[0];
-    var duration = params[1];
-    var ease = params[2];
-    this.camera.zoomTo(value, duration, ease);  // this: textPlayer
+var ZoomTo = function (params) {
+    // this: textPlayer
+    this.camera.zoomTo(...params);
 }
 
 export default OnParseZoomCameraTag;

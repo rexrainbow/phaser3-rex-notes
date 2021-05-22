@@ -20,11 +20,8 @@ var OnParseCrossFadeBackgroundMusicTag = function (textPlayer, parser, config) {
 }
 
 var CrossFadeBackgroundMusic = function (params) {
-    var name = params[0];
-    var fadeTime = params[1];
-
     // this: textPlayer
-    this.soundManager.crossFadeBackgroundMusic(name ,fadeTime);
+    this.soundManager.crossFadeBackgroundMusic(...params);
 }
 
 export default OnParseCrossFadeBackgroundMusicTag;

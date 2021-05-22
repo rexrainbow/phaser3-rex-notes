@@ -6,8 +6,13 @@ var OnParseFadeOutSoundEffectTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.se.fadeout', 'se.fadeout');
     parser
         .on(`+${tagName}`, function (time, isStopped) {
-            isStopped = (isStopped ==='stop');
-            AppendCommand(textPlayer, time, isStopped);            
+            isStopped = (isStopped === 'stop');
+            AppendCommandBase.call(textPlayer,
+                'se.fadeout',        // name
+                FadeOutSoundEffect,  // callback
+                [time, isStopped],   // params
+                textPlayer,          // scope
+            );
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
@@ -16,16 +21,8 @@ var OnParseFadeOutSoundEffectTag = function (textPlayer, parser, config) {
 }
 
 var FadeOutSoundEffect = function (params) {
-    this.soundManager.fadeOutSoundEffect.apply(this.soundManager, params);  // this: textPlayer
-}
-
-var AppendCommand = function (textPlayer, time, isStopped) {
-    AppendCommandBase.call(textPlayer,
-        'se.fadeout',        // name
-        FadeOutSoundEffect,  // callback
-        [time, isStopped],   // params
-        textPlayer,          // scope
-    );
+    // this: textPlayer
+    this.soundManager.fadeOutSoundEffect(...params);
 }
 
 export default OnParseFadeOutSoundEffectTag;

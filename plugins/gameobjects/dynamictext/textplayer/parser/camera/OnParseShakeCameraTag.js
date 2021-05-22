@@ -8,7 +8,7 @@ var OnParseShakeCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (duration, intensity) {
             AppendCommandBase.call(textPlayer,
                 'camera.shake',         // name
-                PlayShakeCameraEffect,  // callback
+                PlayShakeEffect,        // callback
                 [duration, intensity],  // params
                 textPlayer,             // scope
             );
@@ -16,11 +16,9 @@ var OnParseShakeCameraTag = function (textPlayer, parser, config) {
         })
 }
 
-var PlayShakeCameraEffect = function (params) {
-    var duration = params[0];
-    var intensity = params[1];
-
-    this.camera.shake(duration, intensity) // this: textPlayer
+var PlayShakeEffect = function (params) {
+    // this: textPlayer
+    this.camera.shake(...params);
 }
 
 export default OnParseShakeCameraTag;

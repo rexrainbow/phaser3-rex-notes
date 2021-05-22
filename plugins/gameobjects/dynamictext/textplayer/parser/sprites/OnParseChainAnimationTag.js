@@ -35,9 +35,8 @@ var OnParseChainAnimationTag = function (textPlayer, parser, config) {
 }
 
 var ChainAnimation = function (params) {
-    var name = params[0];
-    var keys = params[1];
-    this.spriteManager.chainAnimation(name, keys);  // this: textPlayer
+    // this: textPlayer
+    this.spriteManager.chainAnimation(...params);  
 }
 
 export default OnParseChainAnimationTag;

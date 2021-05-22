@@ -27,6 +27,7 @@ var OnParseRemoveAllSpritesTag = function (textPlayer, parser, config) {
 }
 
 var RemoveAllSprites = function () {
+    // this: textPlayer
     this.spriteManager.removeAll();
 }
 

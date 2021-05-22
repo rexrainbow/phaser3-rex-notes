@@ -8,7 +8,7 @@ var OnParseFadeOutCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (duration, red, green, blue) {
             AppendCommandBase.call(textPlayer,
                 'camera.fadeout',              // name
-                PlayFadeOutCameraEffect,       // callback
+                PlayFadeOutEffect,             // callback
                 [duration, red, green, blue],  // params
                 textPlayer,                    // scope
             );
@@ -16,13 +16,9 @@ var OnParseFadeOutCameraTag = function (textPlayer, parser, config) {
         })
 }
 
-var PlayFadeOutCameraEffect = function (params) {
-    var duration = params[0];
-    var red = params[1];
-    var green = params[2];
-    var blue = params[2];
-
-    this.camera.fadeOut(duration, red, green, blue);  // this: textPlayer
+var PlayFadeOutEffect = function (params) {
+    // this: textPlayer
+    this.camera.fadeOut(...params);
 }
 
 export default OnParseFadeOutCameraTag;

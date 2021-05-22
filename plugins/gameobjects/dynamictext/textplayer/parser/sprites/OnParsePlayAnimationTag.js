@@ -84,15 +84,17 @@ var OnParsePlayAnimationTag = function (textPlayer, parser, config) {
 var PlayAnimation = function (params) {
     var name = params[0];
     var keys = params[1];
-
     var key = keys.shift();
-    this.spriteManager.playAnimation(name, key);  // this: textPlayer
+
+    // this: textPlayer
+    this.spriteManager.playAnimation(name, key);
     if (keys.length > 0) {
-        this.spriteManager.chainAnimation(name, keys);  // this: textPlayer
+        this.spriteManager.chainAnimation(name, keys);
     }
 }
 
 var StopAnimation = function (name) {
+    // this: textPlayer
     this.spriteManager.stopAnimation(name);
 }
 

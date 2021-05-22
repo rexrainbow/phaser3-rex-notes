@@ -26,11 +26,13 @@ var OnParsePauseBackgroundMusicTag = function (textPlayer, parser, config) {
 }
 
 var PauseBackgroundMusic = function () {
-    this.soundManager.pauseBackgroundMusic();  // this: textPlayer
+    // this: textPlayer
+    this.soundManager.pauseBackgroundMusic();
 }
 
 var ResumeBackgroundMusic = function () {
-    this.soundManager.resumeBackgroundMusic();  // this: textPlayer
+    // this: textPlayer
+    this.soundManager.resumeBackgroundMusic();
 }
 
 export default OnParsePauseBackgroundMusicTag;

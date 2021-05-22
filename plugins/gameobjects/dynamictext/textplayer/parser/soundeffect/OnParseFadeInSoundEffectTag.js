@@ -6,7 +6,12 @@ var OnParseFadeInSoundEffectTag = function (textPlayer, parser, config) {
     var tagName = GetValue(config, 'tags.se.fadein', 'se.fadein');
     parser
         .on(`+${tagName}`, function (time) {
-            AppendCommand(textPlayer, time);
+            AppendCommandBase.call(textPlayer,
+                'se.fadein',         // name
+                FadeInSoundEffect,   // callback
+                time,                // params
+                textPlayer,          // scope
+            );
             parser.skipEvent();
         })
         .on(`-${tagName}`, function () {
@@ -15,16 +20,8 @@ var OnParseFadeInSoundEffectTag = function (textPlayer, parser, config) {
 }
 
 var FadeInSoundEffect = function (time) {
-    this.soundManager.fadeInSoundEffect(time);  // this: textPlayer
-}
-
-var AppendCommand = function (textPlayer, time) {
-    AppendCommandBase.call(textPlayer,
-        'se.fadein',         // name
-        FadeInSoundEffect,   // callback
-        time,                // params
-        textPlayer,          // scope
-    );
+    // this: textPlayer
+    this.soundManager.fadeInSoundEffect(time);
 }
 
 export default OnParseFadeInSoundEffectTag;

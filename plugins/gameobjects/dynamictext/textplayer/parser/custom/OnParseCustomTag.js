@@ -30,10 +30,11 @@ var OnParseCustomTag = function (textPlayer, parser, config) {
 
 var FireEvent = function (param, tagName) {
     var eventName = `tag.${tagName}`;
+    // this: textPlayer
     if (param == null) {
-        this.emit(eventName);  // this: textPlayer
+        this.emit(eventName);
     } else {
-        this.emit(eventName, ...param);  // this: textPlayer
+        this.emit(eventName, ...param);
     }
 
 }

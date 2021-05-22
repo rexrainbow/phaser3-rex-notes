@@ -35,10 +35,8 @@ var OnParseSetSpritePropertyTag = function (textPlayer, parser, config) {
 }
 
 var SetProperty = function (params) {
-    var name = params[0];
-    var property = params[1];
-    var value = params[2];
-    this.spriteManager.setProperty(name, property, value);  // this: textPlayer
+    // this: textPlayer
+    this.spriteManager.setProperty(...params);
 }
 
 export default OnParseSetSpritePropertyTag;

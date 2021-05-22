@@ -8,7 +8,7 @@ var OnParseFlashCameraTag = function (textPlayer, parser, config) {
         .on(`+${tagName}`, function (duration, red, green, blue) {
             AppendCommandBase.call(textPlayer,
                 'camera.flash',                // name
-                PlayFlashCameraEffect,         // callback
+                PlayFlashEffect,               // callback
                 [duration, red, green, blue],  // params
                 textPlayer,                    // scope
             );
@@ -16,13 +16,9 @@ var OnParseFlashCameraTag = function (textPlayer, parser, config) {
         })
 }
 
-var PlayFlashCameraEffect = function (params) {
-    var duration = params[0];
-    var red = params[1];
-    var green = params[2];
-    var blue = params[2];
-
-    this.camera.flash(duration, red, green, blue) // this: textPlayer
+var PlayFlashEffect = function (params) {
+    // this: textPlayer
+    this.camera.flash(...params);
 }
 
 export default OnParseFlashCameraTag;
