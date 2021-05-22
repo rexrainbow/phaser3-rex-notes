@@ -367,6 +367,12 @@ txt.playPromise(content)
     })
 ```
 
+#### Show current page
+
+```javascript
+txt.showPage();
+```
+
 #### Events
 
 - On typing content complete
