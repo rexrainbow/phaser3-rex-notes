@@ -373,6 +373,10 @@ txt.playPromise(content)
 txt.showPage();
 ```
 
+- Set typing speed to `0`.
+- Set animation progress to `1`.
+- Skip all waiting events.
+
 #### Events
 
 - On typing content complete
