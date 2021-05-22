@@ -48,9 +48,6 @@ var Typing = function (offsetTime) {
             delay += (this.speed + offsetTime);
             offsetTime = 0;
             var isLastChild = (this.index === this.children.length);  // this.index: Point to next child
-            if (isLastChild) {
-                debugger
-            }
             if ((delay > 0) && !isLastChild) {
                 // Process next character later
                 this.typingTimer = this.timeline.addTimer({
