@@ -166,6 +166,15 @@ class SpriteManager {
         return this;
     }
 
+    setTexture(name, textureKey, frameKey) {
+        if (!this.has(name)) {
+            return this;
+        }
+
+        this.get(name).setTexture(textureKey, frameKey);
+        return this;
+    }
+
     playAnimation(name, key) {
         if (!this.has(name)) {
             this.add(name);

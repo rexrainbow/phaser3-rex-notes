@@ -63,6 +63,11 @@ class SpriteData {
         return this;
     }
 
+    setTexture(textureKey, frameKey) {
+        this.sprite.setTexture(textureKey, frameKey);
+        return this;
+    }
+
     playAnimation(key) {
         this.sprite.play(key);
         return this;
