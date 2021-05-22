@@ -87,8 +87,7 @@ class Demo extends Phaser.Scene {
                     }
                 },
 
-                clickTarget: this,
-                nextPageInput: 'ENTER'
+                clickTarget: this
             }
         )
 
@@ -102,8 +101,16 @@ class Demo extends Phaser.Scene {
 
         })
 
-        this.input.keyboard.on('keydown-ENTER', function(){
-            text.showPage();  // Show all characters in this page
+        this.input.keyboard.on('keydown-ENTER', function () {
+            if (!text.isPlaying) {
+                return;
+            }
+
+            if (text.isPageTyping) {
+                text.showPage();  // Show all characters in this page
+            } else {
+                text.typingNextPage();
+            }
         })
 
         // Events

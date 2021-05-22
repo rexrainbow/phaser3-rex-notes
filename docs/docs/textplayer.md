@@ -9,6 +9,7 @@ Typing characters on [dynamic text](textplayer.md), waiting click or key enter, 
 
 - [Play](https://codepen.io/rexrainbow/pen/oNZbbJv)
 - [Sprite control](https://codepen.io/rexrainbow/pen/jOBroeY)
+- [Show page](https://codepen.io/rexrainbow/pen/XWMMpjE)
 
 ## Usage
 
@@ -177,7 +178,7 @@ var txt = scene.add.rexTextPlayer({
 
     clickTarget: this,  // This text player
     
-    nextPageInput: 'click',
+    nextPageInput: null,
 
     text: undefined
 });
@@ -289,7 +290,9 @@ var txt = scene.add.rexTextPlayer({
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.
 - `nextPageInput` : Wait condition to type next page
-    - `'click'` : Wait click, default behavior.
+    - `null`, or `false` : Stop tying next page. Default behavior
+        - Typing next manually via `txt.typingNextPage()`.
+    - `'click'` : Wait click.
     - `'click|2000'` : Wait one of condition: click, or 2000ms.
     - `'click|enter|2000'` : Wait one of condition: click, enter key down, or 2000ms.
     - A function callback : 
@@ -298,7 +301,6 @@ var txt = scene.add.rexTextPlayer({
             // Invoke `callback()` to continue typing
         }
         ```
-    - `null` : Typing next page without waiting condition.
 - `clickTarget` : Click target, default is text player itself.
     - `scene` : Any pointer down on this scene.
 - `text` : Content of text to play.
@@ -376,6 +378,25 @@ txt.showPage();
 - Set typing speed to `0`.
 - Set animation progress to `1`.
 - Skip all waiting events.
+
+#### Typing next page
+
+```javascript
+txt.typingNextPage();
+```
+
+- Set `nextPageInput` to `null`, or `false` in config.
+
+#### Status
+
+- Is playing : After `txt.play(content)`, before typing all pages completed
+    ```javascript
+    var isPlaying = txt.isPlaying
+    ```
+- Is page typing : After `txt.play(content)`, or `txt.typingNextPage()`, before page typing completed
+    ```javascript
+    var isPageTyping = txt.isPageTYyping;
+    ```
 
 #### Events
 

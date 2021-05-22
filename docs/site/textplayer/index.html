@@ -1166,6 +1166,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typing-next-page" class="md-nav__link">
+    Typing next page
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5711,6 +5725,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#typing-next-page" class="md-nav__link">
+    Typing next page
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5861,6 +5889,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oNZbbJv">Play</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jOBroeY">Sprite control</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/XWMMpjE">Show page</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textplaayer">Sample code</a></p>
@@ -6016,7 +6045,7 @@
 
     <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player</span>
 
-    <span class="nx">nextPageInput</span><span class="o">:</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span>
+    <span class="nx">nextPageInput</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -6189,7 +6218,11 @@
 </ul>
 </li>
 <li><code>nextPageInput</code> : Wait condition to type next page<ul>
-<li><code>'click'</code> : Wait click, default behavior.</li>
+<li><code>null</code>, or <code>false</code> : Stop tying next page. Default behavior<ul>
+<li>Typing next manually via <code>txt.typingNextPage()</code>.</li>
+</ul>
+</li>
+<li><code>'click'</code> : Wait click.</li>
 <li><code>'click|2000'</code> : Wait one of condition: click, or 2000ms.</li>
 <li><code>'click|enter|2000'</code> : Wait one of condition: click, enter key down, or 2000ms.</li>
 <li>A function callback : 
@@ -6197,7 +6230,6 @@
     <span class="c1">// Invoke `callback()` to continue typing</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li><code>null</code> : Typing next page without waiting condition.</li>
 </ul>
 </li>
 <li><code>clickTarget</code> : Click target, default is text player itself.<ul>
@@ -6270,6 +6302,22 @@
 <li>Set typing speed to <code>0</code>.</li>
 <li>Set animation progress to <code>1</code>.</li>
 <li>Skip all waiting events.</li>
+</ul>
+<h4 id="typing-next-page">Typing next page<a class="headerlink" href="#typing-next-page" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">typingNextPage</span><span class="p">();</span>
+</code></pre></div>
+
+<ul>
+<li>Set <code>nextPageInput</code> to <code>null</code>, or <code>false</code> in config.</li>
+</ul>
+<h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Is playing : After <code>txt.play(content)</code>, before typing all pages completed
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">isPlaying</span>
+</code></pre></div></li>
+<li>Is page typing : After <code>txt.play(content)</code>, or <code>txt.typingNextPage()</code>, before page typing completed
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPageTyping</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">isPageTYyping</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>

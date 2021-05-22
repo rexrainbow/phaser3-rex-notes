@@ -26,7 +26,7 @@ var TypingNextPage = function () {
             if (this.nextPageInput) {
                 this.nextPageInput(TypingNextPage, [], this);
             } else {
-                TypingNextPage.call(this);
+                // Stop here, don't typing next page.
             }
 
         }
