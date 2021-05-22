@@ -70,12 +70,12 @@ class TypeWriter {
 
     getNextChild() {
         var child = this.children[this.index];
-        this.index++; // Point to next child
+        this.index = Math.min(this.index + 1, this.children.length);  // Point to next child
         return child;
     }
 
     isTypingComplete() {
-        return this.index >= this.children.length;
+        return this.index === this.children.length;
     }
 }
 
