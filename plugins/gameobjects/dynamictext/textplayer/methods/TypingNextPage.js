@@ -3,7 +3,7 @@ import { StopPlayEvent } from './utils/Events.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var TypingNextPage = function () {
-    if (this.isPageTyping) {
+    if (!this.isPlaying || this.isPageTyping) {
         return this;
     }
 
