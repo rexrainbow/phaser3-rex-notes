@@ -1,6 +1,6 @@
 var ShowPage = function () {
     // Only can work after playing, and before processing last child
-    if (!this.isPlaying || this.typeWriter.isLastChild()) {
+    if (!this.isPlaying || this.typeWriter.isTypingComplete()) {
         return this;
     }
 

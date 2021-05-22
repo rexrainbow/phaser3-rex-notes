@@ -74,8 +74,8 @@ class TypeWriter {
         return child;
     }
 
-    isLastChild() {
-        return this.index === (this.children.length - 1);
+    isTypingComplete() {
+        return this.index >= this.children.length;
     }
 }
 

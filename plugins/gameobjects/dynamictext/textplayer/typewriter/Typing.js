@@ -20,7 +20,9 @@ var Typing = function (offsetTime) {
                 this.emit('complete');
             }
             break;  // Leave this typing loop
-        } else if (IsTypeable(child)) {
+        }
+
+        if (IsTypeable(child)) {
             // Typing this char
             var animationConfig = this.animationConfig;
             if (animationConfig.duration > 0) {
@@ -45,7 +47,11 @@ var Typing = function (offsetTime) {
 
             delay += (this.speed + offsetTime);
             offsetTime = 0;
-            if ((delay > 0) && !this.isLastChild()) {
+            var isLastChild = (this.index === this.children.length);  // this.index: Point to next child
+            if (isLastChild) {
+                debugger
+            }
+            if ((delay > 0) && !isLastChild) {
                 // Process next character later
                 this.typingTimer = this.timeline.addTimer({
                     name: TypingDelayTimerType,
