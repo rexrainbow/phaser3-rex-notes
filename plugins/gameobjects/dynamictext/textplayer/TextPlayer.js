@@ -95,23 +95,23 @@ class TextPlayer extends DynamicText {
         this.parser.destroy();
         this.parser = undefined;
 
-        this.typeWriter.destroy();
+        this.typeWriter.destroy(fromScene);
         this.typeWriter = undefined;
 
         if (this._imageManager) {
-            this._imageManager.destroy();
+            this._imageManager.destroy(fromScene);
         }
         this._imageManager = undefined;
 
         if (this._soundManager) {
-            this._soundManager.destroy();
+            this._soundManager.destroy(fromScene);
         }
         this._soundManager = undefined;
 
         this.camera = undefined;
 
         if (this._spriteManager) {
-            this._spriteManager.destroy();
+            this._spriteManager.destroy(fromScene);
         }
         this._spriteManager = undefined;
 

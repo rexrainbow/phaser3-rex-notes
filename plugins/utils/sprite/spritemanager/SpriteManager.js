@@ -18,8 +18,10 @@ class SpriteManager {
         this.removedSprites = [];
     }
 
-    destroy() {
-        this.clear();
+    destroy(fromScene) {
+        if (!fromScene) {
+            this.clear();
+        }       
         this.createCallback = undefined;
         this.scene = undefined;
     }

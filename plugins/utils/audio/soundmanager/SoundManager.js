@@ -22,13 +22,13 @@ class SoundManager {
         }
     }
 
-    destroy() {
-        if (this.soundEffect) {
+    destroy(fromScene) {
+        if (this.soundEffect && !fromScene) {
             this.soundEffect.destroy();
             this.soundEffect = undefined;
         }
 
-        if (this.backgroundMusic) {
+        if (this.backgroundMusic && !fromScene) {
             this.backgroundMusic.destroy();
             this.backgroundMusic = undefined;
         }
