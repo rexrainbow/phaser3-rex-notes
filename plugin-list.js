@@ -182,7 +182,7 @@ module.exports = {
     'label': './templates/ui/label/Label.js',
     'menu': './templates/ui/menu/Menu.js',
     'ninepatch': './templates/ui/ninepatch/NinePatch.js',
-    'badge': './templates/ui/badge/Badge.js',
+    'badgelabel': './templates/ui/badgelabel/BadgeLabel.js',
     'pages': './templates/ui/pages/Pages.js',
     'pan': './templates/ui/pan/Pan.js',
     'pinch': './templates/ui/pinch/Pinch.js',

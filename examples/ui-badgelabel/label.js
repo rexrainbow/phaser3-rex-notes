@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var item = this.rexUI.add.badge({
+        var item = this.rexUI.add.badgeLabel({
             x: 400, y: 300,
             width: 80, height: 80,
             space: { left: 5, right: 5, top: 5, bottom: 5 },

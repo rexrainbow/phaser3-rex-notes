@@ -30,7 +30,7 @@ import GridTable from './gridtable/GridTable.js';
 import Menu from './menu/Menu.js';
 import TextBox from './textbox/TextBox.js';
 import NumberBar from './numberbar/NumberBar.js';
-import Badge from './badge/Badge.js';
+import BadgeLabel from './badgelabel/BadgeLabel.js';
 import Pages from './pages/Pages.js';
 import TextArea from './textarea/TextArea.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
@@ -93,7 +93,7 @@ export {
     Menu,
     TextBox,
     NumberBar,
-    Badge,
+    BadgeLabel,
     Pages,
     TextArea,
     ScrollablePanel,
