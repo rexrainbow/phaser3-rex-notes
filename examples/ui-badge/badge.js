@@ -4,8 +4,6 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -15,58 +13,38 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('volume', './assets/images/volume.png');
     }
 
     create() {
-        var knob0 = CreateKnob(this, 200, 300, 'pan').layout();
-        var print0 = this.add.text(0, 0, '');
-        knob0
-            .on('valuechange', function (value) { print0.text = value; })
-            .setValue(0.5);
-        this.add.text(0, 580, 'Pan this knob');
+        var item = this.rexUI.add.badge({
+            x: 400, y: 300,
+            width: 80, height: 80,
+            space: { left: 5, right: 5, top: 5, bottom: 5 },
 
-        var knob1 = CreateKnob(this, 600, 300, 'click').layout();
-        var print1 = this.add.text(400, 0, '');
-        knob1
-            .on('valuechange', function (value) { print1.text = value; })
-            .setValue(0.5);
-        this.add.text(400, 580, 'Click this knob');
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
+
+            main: this.add.text(0, 0, 'Item', { fontSize: '20px', color: 'white' }),
+
+            'right-bottom': this.add.text(0, 0, '', { color: 'yellow', align: 'right' }),
+        })
+            .layout()
+
+        item.on('changedata-itemCount', function (parent, value, previousValue) {
+            item.getElement('right-bottom').setText(value);
+            item.layout();
+        }, item)
+
+        item.setData('itemCount', undefined)
+            .setData('itemCount', 3)
+
+        item
+            .setInteractive()
+            .on('pointerdown', function () {
+                item.setData('itemCount', item.getData('itemCount') + 1)
+            })
     }
 
     update() { }
-}
-
-var CreateKnob = function (scene, x, y, inputMode) {
-    return scene.rexUI.add.knob({
-        x: x, y: y,
-        width: 200, height: 200,
-
-        space: { left: 20, right: 20, top: 20, bottom: 20 },
-
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
-
-        trackColor: COLOR_DARK,
-        barColor: COLOR_LIGHT,
-        // centerColor: COLOR_PRIMARY,
-        // anticlockwise: true,
-
-        text: scene.rexUI.add.label({
-            text: scene.add.text(0, 0, '', {
-                fontSize: '30px',
-            }),
-            icon: scene.add.image(0, 0, 'volume'),
-            space: {
-                icon: 10
-            }
-        }).setDepth(1),
-        textFormatCallback: function (value) {
-            return Math.floor(value * 100).toString();
-        },
-
-        easeValue: { duration: 250 },
-        input: inputMode
-    })
 }
 
 var config = {
