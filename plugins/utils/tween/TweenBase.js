@@ -24,14 +24,15 @@ class TweenBase {
     }
 
     boot() {
-        if (IsGameObject(this.parent)) { // Parent is Game Object
-            if (this.parent.once) { // oops, bob object does not have event emitter
-                this.parent.on('destroy', this.destroy, this);
-            }
-        } else if (IsSceneObject(this.parent)) { // Parent is Scene Object
-            this.parent.events.once('shutdown', this.destroy, this);
-        } else {
-            // ??
+        var eventEmitter;
+        if (this.parent.once) {  // Game object
+            eventEmitter = this.parent;
+        } else if (this.parent.events && this.parent.events.once) { // Scene
+            eventEmitter = this.parent.events;
+        }
+
+        if (eventEmitter) {
+            eventEmitter.once('destroy', this.destroy, this);
         }
     }
 

@@ -6,9 +6,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 class Fade extends TweenBase {
     constructor(scene, sound, config) {
-        super(scene);
+        sound.scene = scene;
+        super(sound);
         this.sound = sound;
-        this.sound.on('destroy', this.destroy, this);
 
         this.volume = {};
         this.resetFromJSON(config);
@@ -35,6 +35,10 @@ class Fade extends TweenBase {
     }
 
     shutdown() {
+        // Already shutdown
+        if (!this.sound) {
+            return this;
+        }
         this.sound.off('destroy', this.destroy, this);
         this.sound = undefined;
         super.shutdown();

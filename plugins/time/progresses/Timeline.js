@@ -15,6 +15,11 @@ class Timeline extends Clock {
     }
 
     shutdown() {
+        // Already shutdown
+        if (!this.parent) {
+            return;
+        }
+
         this.timerPool
             .freeMultiple(this.addedTimers)
             .freeMultiple(this.timers);

@@ -35,6 +35,10 @@ class Fade extends TweenBase {
     }
 
     shutdown() {
+        // Already shutdown
+        if (!this.gameObject) {
+            return this;
+        }
         super.shutdown();
         this.gameObject = undefined;
         return this;

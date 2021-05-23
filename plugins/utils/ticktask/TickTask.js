@@ -26,6 +26,7 @@ class TickTask {
         if (this.tickingState) {
             this.stopTicking();
         }
+        this.parent = undefined;
     }
 
     destroy() {
