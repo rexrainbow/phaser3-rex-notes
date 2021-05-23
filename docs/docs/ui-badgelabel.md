@@ -127,8 +127,8 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
 - `'right-bottom'` : Badge game object at right-bottom side, optional.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-    - `space.icon` : Space between icon game object and text game object.
-    - `space.text` : Space between text game object and action icon game object.
+        - Positive number : Indent badge game objects inside background.
+        - Negative number : Exceed badge game objects out of background.
 - `name` : Set name of this badgeLabel.
 - `draggable` : Set `true` to drag to-most badgeLabel.
 

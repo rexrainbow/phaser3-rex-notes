@@ -5762,9 +5762,11 @@
 <li><code>'center-bottom'</code> : Badge game object at center-bottom side, optional.</li>
 <li><code>'right-bottom'</code> : Badge game object at right-bottom side, optional.</li>
 <li><code>space</code> : Pads spaces.<ul>
-<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
-<li><code>space.icon</code> : Space between icon game object and text game object.</li>
-<li><code>space.text</code> : Space between text game object and action icon game object.</li>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.<ul>
+<li>Positive number : Indent badge game objects inside background.</li>
+<li>Negative number : Exceed badge game objects out of background.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this badgeLabel.</li>
