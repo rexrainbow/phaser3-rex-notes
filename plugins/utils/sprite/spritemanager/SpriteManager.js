@@ -201,6 +201,15 @@ class SpriteManager {
         this.get(name).chainAnimation(keys);
         return this;
     }
+
+    pauseAnimation(name) {
+        if (!this.has(name)) {
+            return this;
+        }
+
+        this.get(name).pauseAnimation();
+        return this;
+    }
 }
 
 Object.assign(

@@ -82,6 +82,11 @@ class SpriteData {
         this.sprite.chain(keys);
         return this;
     }
+
+    pauseAnimation() {
+        this.sprite.anims.pause();
+        return this;
+    }
 }
 
 export default SpriteData;
