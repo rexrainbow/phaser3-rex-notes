@@ -1,11 +1,11 @@
 import OverlapSizer from '../overlapsizer/OverlapSizer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const BadgeKeys = [
-    'left-top', 'center-top', 'right-top',
-    'left-center', 'center', 'right-center',
-    'left-bottom', 'center-bottom', 'right-bottom',
-];
+const BadgeKeys = {
+    leftTop: 'left-top', centerTop: 'center-top', rightTop: 'right-top',
+    leftCenter: 'left-center', center: 'center', rightCenter: 'right-center',
+    leftBottom: 'left-bottom', centerBottom: 'center-bottom', rightBottom: 'right-bottom'
+}
 
 class Badge extends OverlapSizer {
     constructor(scene, config) {
@@ -32,17 +32,16 @@ class Badge extends OverlapSizer {
         this.addChildrenMap('main', main);
 
         // Badges
-        for (var i = 0, cnt = BadgeKeys.length; i < cnt; i++) {
-            var key = BadgeKeys[i];
+        for (var key in BadgeKeys) {
             var badge = GetValue(config, key, undefined);
             if (badge) {
                 this.add(badge, {
                     key: key,
-                    align: key,
+                    align: BadgeKeys[key],
                     expand: false,
                 })
-            }
-            this.addChildrenMap(key, badge);
+                this.addChildrenMap(key, badge);
+            }            
         }
     }
 }

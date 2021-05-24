@@ -11,7 +11,7 @@ A container with badges above a main item.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-badgeLabel)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/uiBadgeLabel)
 
 ### Install plugin
 
@@ -63,7 +63,7 @@ A container with badges above a main item.
     ```
 - Import class
     ```javascript
-    import { BadgeLabel } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
+    import { BadgeLabel } from 'phaser3-rex-plugins/templates/ui/uiComponents.js';
     ```
 - Add badge-label object
     ```javascript    
@@ -84,15 +84,15 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
     background: backgroundGameObject,
     main: mainItemGameObject,
 
-    'left-top': leftTopBadgeGameObject,
-    'center-top': centerTopBadgeGameObject,
-    'right-top': rightTopBadgeGameObject,
-    'left-center': leftCenterBadgeGameObject,
-    'center': centerBadgeGameObject,
-    'right-center': rightCenterBadgeGameObject,
-    'left-bottom': leftBottomBadgeGameObject,
-    'center-bottom': centerBottomBadgeGameObject,
-    'right-bottom': rightBottomBadgeGameObject,
+    leftTop: leftTopBadgeGameObject,
+    centerTop: centerTopBadgeGameObject,
+    rightTop: rightTopBadgeGameObject,
+    leftCenter: leftCenterBadgeGameObject,
+    center: centerBadgeGameObject,
+    rightCenter: rightCenterBadgeGameObject,
+    leftBottom: leftBottomBadgeGameObject,
+    centerBottom: centerBottomBadgeGameObject,
+    rightBottom: rightBottomBadgeGameObject,
 
     space: {
         left: 0,
@@ -114,17 +114,17 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
+- `background` : [Game object of background](uiBasesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
 - `main` : Game object of main item, optional.
-- `'left-top'` : Badge game object at left-top side, optional.
-- `'center-top'` : Badge game object at center-top side, optional.
-- `'right-top'` : Badge game object at right-top side, optional.
-- `'left-center'` : Badge game object at left-center side, optional.
-- `'center'` : Badge game object at center side, optional.
-- `'right-center'` : Badge game object at right-center side, optional.
-- `'left-bottom'` : Badge game object at left-bottom side, optional.
-- `'center-bottom'` : Badge game object at center-bottom side, optional.
-- `'right-bottom'` : Badge game object at right-bottom side, optional.
+- `leftTop` : Badge game object at leftTop side, optional.
+- `centerTop` : Badge game object at centerTop side, optional.
+- `rightTop` : Badge game object at rightTop side, optional.
+- `leftCenter` : Badge game object at leftCenter side, optional.
+- `center` : Badge game object at center side, optional.
+- `rightCenter` : Badge game object at rightCenter side, optional.
+- `leftBottom` : Badge game object at leftBottom side, optional.
+- `centerBottom` : Badge game object at centerBottom side, optional.
+- `rightBottom` : Badge game object at rightBottom side, optional.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
         - Positive number : Indent badge game objects inside background.
@@ -158,7 +158,7 @@ Arrange position of all elements.
 badgeLabel.layout();
 ```
 
-See also - [dirty](ui-basesizer.md#dirty)
+See also - [dirty](uiBasesizer.md#dirty)
 
 ### Get element
 
@@ -171,41 +171,41 @@ See also - [dirty](ui-basesizer.md#dirty)
         ```javascript
         var item = badgeLabel.getElement('main');
         ```
-    - Left-top badge game object
+    - LeftTop badge game object
         ```javascript
-        var badge = badgeLabel.getElement('left-top');
+        var badge = badgeLabel.getElement('leftTop');
         ```
-    - Center-top badge game object
+    - CenterTop badge game object
         ```javascript
-        var badge = badgeLabel.getElement('center-top');
+        var badge = badgeLabel.getElement('centerTop');
         ```
-    - Right-top badge game object
+    - RightTop badge game object
         ```javascript
-        var badge = badgeLabel.getElement('right-top');
+        var badge = badgeLabel.getElement('rightTop');
         ```
-    - Left-center badge game object
+    - LeftCenter badge game object
         ```javascript
-        var badge = badgeLabel.getElement('left-center');
+        var badge = badgeLabel.getElement('leftCenter');
         ```
     - Center badge game object
         ```javascript
         var badge = badgeLabel.getElement('center');
         ```
-    - Right-center badge game object
+    - RightCenter badge game object
         ```javascript
-        var badge = badgeLabel.getElement('right-center');
+        var badge = badgeLabel.getElement('rightCenter');
         ```        
-    - Left-bottom badge game object
+    - LeftBottom badge game object
         ```javascript
-        var badge = badgeLabel.getElement('left-bottom');
+        var badge = badgeLabel.getElement('leftBottom');
         ```
-    - Center-bottom badge game object
+    - CenterBottom badge game object
         ```javascript
-        var badge = badgeLabel.getElement('center-bottom');
+        var badge = badgeLabel.getElement('centerBottom');
         ```
-    - Right-bottom badge game object
+    - RightBottom badge game object
         ```javascript
-        var badge = badgeLabel.getElement('right-bottom');
+        var badge = badgeLabel.getElement('rightBottom');
         ```
 - Get by name
     ```javascript
@@ -221,4 +221,4 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 ### Other properties
 
-See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md).
+See [overlap sizer object](ui-overlapsizer.md), [base sizer object](uiBasesizer.md).

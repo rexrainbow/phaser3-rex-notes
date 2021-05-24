@@ -5652,7 +5652,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/GRWWbdg">Badge</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-badgeLabel">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/uiBadgeLabel">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5695,7 +5695,7 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">BadgeLabel</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">BadgeLabel</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/uiComponents.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add badge-label object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badgeLabel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BadgeLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -5713,15 +5713,15 @@
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
     <span class="nx">main</span><span class="o">:</span> <span class="nx">mainItemGameObject</span><span class="p">,</span>
 
-    <span class="s1">&#39;left-top&#39;</span><span class="o">:</span> <span class="nx">leftTopBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;center-top&#39;</span><span class="o">:</span> <span class="nx">centerTopBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;right-top&#39;</span><span class="o">:</span> <span class="nx">rightTopBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;left-center&#39;</span><span class="o">:</span> <span class="nx">leftCenterBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;center&#39;</span><span class="o">:</span> <span class="nx">centerBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;right-center&#39;</span><span class="o">:</span> <span class="nx">rightCenterBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;left-bottom&#39;</span><span class="o">:</span> <span class="nx">leftBottomBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;center-bottom&#39;</span><span class="o">:</span> <span class="nx">centerBottomBadgeGameObject</span><span class="p">,</span>
-    <span class="s1">&#39;right-bottom&#39;</span><span class="o">:</span> <span class="nx">rightBottomBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">leftTop</span><span class="o">:</span> <span class="nx">leftTopBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">centerTop</span><span class="o">:</span> <span class="nx">centerTopBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">rightTop</span><span class="o">:</span> <span class="nx">rightTopBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">leftCenter</span><span class="o">:</span> <span class="nx">leftCenterBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">centerBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">rightCenter</span><span class="o">:</span> <span class="nx">rightCenterBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">leftBottom</span><span class="o">:</span> <span class="nx">leftBottomBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">centerBottom</span><span class="o">:</span> <span class="nx">centerBottomBadgeGameObject</span><span class="p">,</span>
+    <span class="nx">rightBottom</span><span class="o">:</span> <span class="nx">rightBottomBadgeGameObject</span><span class="p">,</span>
 
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5750,17 +5750,17 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of badgeLabel.</li>
+<li><code>background</code> : <a href="uiBasesizer.md#background">Game object of background</a>, optional. This background game object will be resized to fit the size of badgeLabel.</li>
 <li><code>main</code> : Game object of main item, optional.</li>
-<li><code>'left-top'</code> : Badge game object at left-top side, optional.</li>
-<li><code>'center-top'</code> : Badge game object at center-top side, optional.</li>
-<li><code>'right-top'</code> : Badge game object at right-top side, optional.</li>
-<li><code>'left-center'</code> : Badge game object at left-center side, optional.</li>
-<li><code>'center'</code> : Badge game object at center side, optional.</li>
-<li><code>'right-center'</code> : Badge game object at right-center side, optional.</li>
-<li><code>'left-bottom'</code> : Badge game object at left-bottom side, optional.</li>
-<li><code>'center-bottom'</code> : Badge game object at center-bottom side, optional.</li>
-<li><code>'right-bottom'</code> : Badge game object at right-bottom side, optional.</li>
+<li><code>leftTop</code> : Badge game object at leftTop side, optional.</li>
+<li><code>centerTop</code> : Badge game object at centerTop side, optional.</li>
+<li><code>rightTop</code> : Badge game object at rightTop side, optional.</li>
+<li><code>leftCenter</code> : Badge game object at leftCenter side, optional.</li>
+<li><code>center</code> : Badge game object at center side, optional.</li>
+<li><code>rightCenter</code> : Badge game object at rightCenter side, optional.</li>
+<li><code>leftBottom</code> : Badge game object at leftBottom side, optional.</li>
+<li><code>centerBottom</code> : Badge game object at centerBottom side, optional.</li>
+<li><code>rightBottom</code> : Badge game object at rightBottom side, optional.</li>
 <li><code>space</code> : Pads spaces.<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.<ul>
 <li>Positive number : Indent badge game objects inside background.</li>
@@ -5793,7 +5793,7 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 
-<p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<p>See also - <a href="uiBasesizer.md#dirty">dirty</a></p>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get element<ul>
@@ -5803,32 +5803,32 @@
 <li>Main item game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Left-top badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;left-top&#39;</span><span class="p">);</span>
+<li>LeftTop badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftTop&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Center-top badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;center-top&#39;</span><span class="p">);</span>
+<li>CenterTop badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;centerTop&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Right-top badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;right-top&#39;</span><span class="p">);</span>
+<li>RightTop badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightTop&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Left-center badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;left-center&#39;</span><span class="p">);</span>
+<li>LeftCenter badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftCenter&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Center badge game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;center&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Right-center badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;right-center&#39;</span><span class="p">);</span>
+<li>RightCenter badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightCenter&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Left-bottom badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;left-bottom&#39;</span><span class="p">);</span>
+<li>LeftBottom badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftBottom&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Center-bottom badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;center-bottom&#39;</span><span class="p">);</span>
+<li>CenterBottom badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;centerBottom&#39;</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Right-bottom badge game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;right-bottom&#39;</span><span class="p">);</span>
+<li>RightBottom badge game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">badge</span> <span class="o">=</span> <span class="nx">badgeLabel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightBottom&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -5845,7 +5845,7 @@
 </li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-overlapsizer/">overlap sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
+<p>See <a href="../ui-overlapsizer/">overlap sizer object</a>, <a href="uiBasesizer.md">base sizer object</a>.</p>
                 
                   
                 

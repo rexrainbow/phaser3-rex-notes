@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
 
             main: this.add.text(0, 0, 'Item', { fontSize: '20px', color: 'white' }),
 
-            'right-bottom': this.add.text(0, 0, '', {
+            rightBottom: this.add.text(0, 0, '', {
                 color: 'yellow',
                 align: 'right',
                 backgroundColor: '#260e04',
@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
             .layout()
 
         item.on('changedata-itemCount', function (parent, value, previousValue) {
-            item.getElement('right-bottom').setText(value);
+            item.getElement('rightBottom').setText(value);
             item.layout();
         }, item)
 
