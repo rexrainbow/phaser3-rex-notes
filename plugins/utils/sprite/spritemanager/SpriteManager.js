@@ -19,9 +19,7 @@ class SpriteManager {
     }
 
     destroy(fromScene) {
-        if (!fromScene) {
-            this.clear();
-        }       
+        this.clear(!fromScene);
         this.createCallback = undefined;
         this.scene = undefined;
     }
@@ -68,9 +66,14 @@ class SpriteManager {
         return IsEmpty(this.sprites) && (this.removedSprites.length === 0);
     }
 
-    clear() {
+    clear(destroyChild) {
+        if (destroyChild === undefined) {
+            destroyChild = true;
+        }
         for (var name in this.sprites) {
-            this.sprites[name].destroy();
+            if (destroyChild) {
+                this.sprites[name].destroy();
+            }
             delete this.sprites[name];
         }
         this.removedSprites.length = 0;
