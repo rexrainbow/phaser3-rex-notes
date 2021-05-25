@@ -116,6 +116,14 @@ list.moveDown(child);
 ```
 
 ```javascript
+list.moveAbove(child1, child2);  // Move child1 above child2
+```
+
+```javascript
+list.moveBelow(child1, child2);  // Move child1 below child2
+```
+
+```javascript
 list.swap(child1, child2);
 ```
 

@@ -194,6 +194,14 @@ container.moveDown(child);
 ```
 
 ```javascript
+container.moveAbove(child1, child2);  // Move child1 above child2
+```
+
+```javascript
+container.moveBelow(child1, child2);  // Move child1 below child2
+```
+
+```javascript
 container.swap(child1, child2);
 ```
 

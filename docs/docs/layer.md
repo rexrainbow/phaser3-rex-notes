@@ -178,6 +178,14 @@ to add it back.
     ```javascript
     layer.moveDown(gameObject);
     ```
+- Move child1 above child2
+    ```javascript
+    layer.moveAbove(child1, child2);
+    ```
+- Move child1 below child2
+    ```javascript
+    layer.moveBelow(child1, child2);
+    ```
 - Sort
     ```javascript
     layer.sort(property);

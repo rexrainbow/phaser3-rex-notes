@@ -201,6 +201,15 @@ The rotate3d() CSS function defines a transformation that rotates an element aro
 domElement.rotate3d.set(x, y, z, a);
 ```
 
+or
+
+```javascript
+domElement.rotate3d.x = x;
+domElement.rotate3d.y = y;
+domElement.rotate3d.z = z;
+domElement.rotate3d.w = a;
+```
+
 [Reference](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotate3d)
 
 ### Other properties
