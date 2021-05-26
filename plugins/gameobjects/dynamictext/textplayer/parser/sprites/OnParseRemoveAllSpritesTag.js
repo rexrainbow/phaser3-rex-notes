@@ -4,6 +4,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var OnParseRemoveAllSpritesTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on('-', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before

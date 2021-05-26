@@ -9,6 +9,9 @@ var IsChainAnimationTag = function (tags, prefix) {
 
 var OnParseChainAnimationTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
@@ -36,7 +39,7 @@ var OnParseChainAnimationTag = function (textPlayer, parser, config) {
 
 var ChainAnimation = function (params) {
     // this: textPlayer
-    this.spriteManager.chainAnimation(...params);  
+    this.spriteManager.chainAnimation(...params);
 }
 
 export default OnParseChainAnimationTag;

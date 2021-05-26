@@ -14,6 +14,9 @@ var IsStopAnimationTag = function (tags, prefix) {
 
 var OnParsePlayAnimationTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before

@@ -9,6 +9,9 @@ var IsPauseAnimationTag = function (tags, prefix) {
 
 var OnParsePauseAnimationTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on('+', function (tag) {
             if (parser.skipEventFlag) {  // Has been processed before
@@ -35,7 +38,7 @@ var OnParsePauseAnimationTag = function (textPlayer, parser, config) {
 
 var PauseAnimation = function (name) {
     // this: textPlayer
-    this.spriteManager.pauseAnimation(name);  
+    this.spriteManager.pauseAnimation(name);
 }
 
 export default OnParsePauseAnimationTag;

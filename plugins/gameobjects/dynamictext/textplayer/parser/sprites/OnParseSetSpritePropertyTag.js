@@ -9,6 +9,9 @@ var IsSetPropertyTag = function (tags, prefix) {
 
 var OnParseSetSpritePropertyTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on(`+`, function (tag, value) {
             if (parser.skipEventFlag) {  // Has been processed before

@@ -14,6 +14,9 @@ var IsEasePropertyTag = function (tags, prefix) {
 
 var OnParseEaseSpritePropertyTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on(`+`, function (tag, value, duration, ease) {
             if (parser.skipEventFlag) {  // Has been processed before

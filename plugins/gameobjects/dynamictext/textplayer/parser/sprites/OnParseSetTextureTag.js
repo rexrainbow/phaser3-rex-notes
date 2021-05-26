@@ -9,6 +9,9 @@ var IsSetTextureTag = function (tags, prefix) {
 
 var OnParseSetTextureTag = function (textPlayer, parser, config) {
     var prefix = GetValue(config, 'sprite', 'sprite');
+    if (!prefix) {
+        return;
+    }
     parser
         .on('+', function (tag, textureKey, frameKey) {
             if (parser.skipEventFlag) {  // Has been processed before
