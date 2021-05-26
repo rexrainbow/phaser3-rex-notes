@@ -197,6 +197,7 @@ nav:
         - Swirl: shader-swirl.md
         - Pixelation: shader-pixelation.md
     - Transition:
+        - Warp: shader-warp.md
         - Dissolve: shader-dissolve.md
 - Logic:
     - Events:

@@ -31,12 +31,13 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     remove(gameObject, name) {
+        var PostFxPipelineClass = this.PostFxPipelineClass;
         if (name === undefined) {
             var result = [];
             var pipelines = gameObject.postPipelines;
             for (var i = (pipelines.length - 1); i >= 0; i--) {
                 var instance = pipelines[i];
-                if (instance instanceof this.PostFxPipelineClass) {
+                if (instance instanceof PostFxPipelineClass) {
                     instance.destroy();
                     SpliceOne(pipelines, i);
                 }
@@ -46,7 +47,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
                 var instance = pipelines[i];
-                if ((instance instanceof this.PostFxPipelineClass) && (instance.name === name)) {
+                if ((instance instanceof PostFxPipelineClass) && (instance.name === name)) {
                     instance.destroy();
                     SpliceOne(pipelines, i);
                 }
@@ -55,12 +56,13 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     get(gameObject, name) {
+        var PostFxPipelineClass = this.PostFxPipelineClass;
         if (name === undefined) {
             var result = [];
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
                 var instance = pipelines[i];
-                if (instance instanceof this.PostFxPipelineClass) {
+                if (instance instanceof PostFxPipelineClass) {
                     result.push(instance)
                 }
             }
@@ -69,7 +71,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
                 var instance = pipelines[i];
-                if ((instance instanceof this.PostFxPipelineClass) && (instance.name === name)) {
+                if ((instance instanceof PostFxPipelineClass) && (instance.name === name)) {
                     return instance;
                 }
             }

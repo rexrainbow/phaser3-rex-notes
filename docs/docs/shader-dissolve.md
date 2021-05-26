@@ -162,6 +162,21 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
     // pipelineInstance.setTransitionTargetTexture(textureKey, frameName, resizeMode);
     ```
 
+### Progress
+
+- Get
+    ```javascript
+    var progress = pipelineInstance.progress;
+    ```
+- Set
+    ```javascript
+    pipelineInstance.setProgress(value);  // value: 0~1
+    ```
+    or
+    ```javascript
+    pipelineInstance.progress = value;  // value: 0~1
+    ```
+
 #### Resize mode
 
 - Get

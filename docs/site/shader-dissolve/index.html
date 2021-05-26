@@ -3159,6 +3159,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../shader-warp/" title="Warp" class="md-nav__link">
+      Warp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -3263,6 +3275,13 @@
           <li class="md-nav__item">
   <a href="#transition-target-texture" class="md-nav__link">
     Transition target texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress" class="md-nav__link">
+    Progress
   </a>
   
     <nav class="md-nav">
@@ -5628,6 +5647,13 @@
     Transition target texture
   </a>
   
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress" class="md-nav__link">
+    Progress
+  </a>
+  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
@@ -5836,6 +5862,18 @@
 <span class="c1">// pipelineInstance.setTransitionTargetTexture(textureKey, frameName, resizeMode);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="progress">Progress<a class="headerlink" href="#progress" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progress</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setProgress</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0~1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">progress</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>  <span class="c1">// value: 0~1</span>
+</code></pre></div></li>
+</ul>
 <h4 id="resize-mode">Resize mode<a class="headerlink" href="#resize-mode" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Get
@@ -5930,7 +5968,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../shader-pixelation/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-warp/" title="Warp" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5939,7 +5977,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Pixelation
+                Warp
               </span>
             </div>
           </a>

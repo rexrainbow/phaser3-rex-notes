@@ -3026,6 +3026,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-post-fx-pipeline" class="md-nav__link">
+    Remove post-fx pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#color-matrix" class="md-nav__link">
     Color matrix
   </a>
@@ -3254,6 +3261,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-warp/" title="Warp" class="md-nav__link">
+      Warp
+    </a>
+  </li>
+
         
           
           
@@ -5547,6 +5566,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-post-fx-pipeline" class="md-nav__link">
+    Remove post-fx pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#color-matrix" class="md-nav__link">
     Color matrix
   </a>
@@ -5703,6 +5729,10 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getPostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
+<h3 id="remove-post-fx-pipeline">Remove post-fx pipeline<a class="headerlink" href="#remove-post-fx-pipeline" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
+</code></pre></div>
+
 <h3 id="color-matrix">Color matrix<a class="headerlink" href="#color-matrix" title="Permanent link">&para;</a></h3>
 <p>Use color martix to change RGB render result, and more...</p>
 <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyPostFxClass</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span> <span class="p">{</span>

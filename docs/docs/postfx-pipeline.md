@@ -115,6 +115,12 @@ Set uniform values in `onPreRender` method.
     var pipelineInstance = camera.getPostPipeline(MyPostFxClass);
     ```
 
+### Remove post-fx pipeline
+
+```javascript
+gameObject.removePostPipeline(MyPostFxClass);
+```
+
 ### Color matrix
 
 Use color martix to change RGB render result, and more...
