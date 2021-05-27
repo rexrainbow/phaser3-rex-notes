@@ -15,10 +15,12 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
     this.columns.count = (columns) ? columns.length : 0;
     this.columns.stretch = 0;
     this.columns.minWidth = 0;
+    this.columns.scale = 1;
     this.rows.data = rows;
     this.rows.count = (rows) ? rows.length : 0;
     this.rows.stretch = 0;
     this.rows.minHeight = 0;
+    this.rows.scale = 1;
 
     var texture = this.scene.textures.get(key);
     if (!texture) {

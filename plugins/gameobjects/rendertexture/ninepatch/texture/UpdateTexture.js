@@ -11,24 +11,48 @@ var UpdateTexture = function () {
         return this;
     }
 
-    var stretchWidth = this.width - this.columns.minWidth;
-    var proportionWidth, fixedPartScaleX;
-    if (stretchWidth >= 0) {
+    var minWidth = this.columns.minWidth,
+        minHeight = this.rows.minHeight;
+    var stretchWidth = this.width - minWidth;
+    var stretchHeight = this.height - minHeight;
+    var fixedPartScaleX = (stretchWidth >= 0) ? 1 : (this.width / minWidth);
+    var fixedPartScaleY = (stretchHeight >= 0) ? 1 : (this.height / minHeight);
+    if (this.preserveRatio) {
+        var minScale = Math.min(fixedPartScaleX, fixedPartScaleY);
+        if (fixedPartScaleX > minScale) {
+            var compensationWidth = (fixedPartScaleX - minScale) * minWidth;
+            if (stretchWidth >= 0) {
+                stretchWidth += compensationWidth;
+            } else {
+                stretchWidth = compensationWidth;
+            }
+            fixedPartScaleX = minScale;
+        }
+        if (fixedPartScaleY > minScale) {
+            var compensationHeight = (fixedPartScaleY - minScale) * minHeight;
+            if (stretchHeight >= 0) {
+                stretchHeight += compensationHeight;
+            } else {
+                stretchHeight = compensationHeight;
+            }
+            fixedPartScaleY = minScale;
+        }
+    }
+    this.columns.scale = fixedPartScaleX;
+    this.rows.scale = fixedPartScaleY;
+
+    var proportionWidth;
+    if (stretchWidth > 0) {
         proportionWidth = (this.columns.stretch > 0) ? (stretchWidth / this.columns.stretch) : 0;
-        fixedPartScaleX = 1;
     } else {
         proportionWidth = 0;
-        fixedPartScaleX = (this.width / this.columns.minWidth);
     }
 
-    var stretchHeight = this.height - this.rows.minHeight;
-    var proportionHeight, fixedPartScaleY;
-    if (stretchHeight >= 0) {
+    var proportionHeight;
+    if (stretchHeight > 0) {
         proportionHeight = (this.rows.stretch > 0) ? (stretchHeight / this.rows.stretch) : 0;
-        fixedPartScaleY = 1;
     } else {
         proportionHeight = 0;
-        fixedPartScaleY = (this.height / this.rows.minHeight);
     }
 
     var frameName, col, row, colWidth, rowHeight;

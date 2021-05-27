@@ -77,7 +77,8 @@ Stretchable image.
 
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, baseFrame, columns, rows, {
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     getFrameNameCallback: undefined
 });
 ```
@@ -86,7 +87,8 @@ or
 
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, {
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
 });
@@ -99,7 +101,8 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, {
     columns: undefined,
     rows: undefined,
 
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
 });
@@ -113,7 +116,8 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, {
     columns: undefined,
     rows: undefined,
 
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
 });
@@ -128,7 +132,8 @@ var ninePatch = scene.add.rexNinePatch(x, y, {
     columns: undefined,
     rows: undefined,
 
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
 });
@@ -144,7 +149,8 @@ var ninePatch = scene.add.rexNinePatch({
     columns: undefined,
     rows: undefined,
 
-    stretchMode: 0,
+    // preserveRatio: true,
+    // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
 });
@@ -163,6 +169,7 @@ var ninePatch = scene.add.rexNinePatch({
     - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Height of each row. `undefined` value will be replaced by remainder value from texture width.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+- `preserveRatio` : Preserve ratio of fixed parts (i.e. displaying in origin size). Default is `true`.
 - `stretchMode` : Stretch mode of edges and internal cells.
     - A number (`0`, or `1`), or a string (`'scale'`, or `'repeat'`): 
         - `0`, or `'scale'` : Stretch each edge and internal cell by scaled image. Default value.

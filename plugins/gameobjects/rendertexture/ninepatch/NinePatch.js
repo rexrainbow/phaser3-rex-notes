@@ -57,6 +57,7 @@ class NinePatch extends RenderTexture {
         this.setOrigin(0.5, 0.5);
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
+        this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
         this.setTexture(key, baseFrame, columns, rows); // Also update render texture
     }
 
@@ -74,6 +75,14 @@ class NinePatch extends RenderTexture {
 
     get minHeight() {
         return this.rows.minHeight;
+    }
+
+    get fixedPartScaleX() {
+        return this.columns.scale;
+    }
+
+    get fixedPartScaleY() {
+        return this.rows.scale;
     }
 
     resize(width, height) {
