@@ -1,5 +1,3 @@
-import UIPlugin from '../../templates/ui/ui-plugin.js';
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -7,7 +5,8 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {
+    }
 
     create() {
     }
@@ -16,7 +15,7 @@ class Demo extends Phaser.Scene {
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,
