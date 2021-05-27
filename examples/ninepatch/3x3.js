@@ -43,6 +43,14 @@ class Demo extends Phaser.Scene {
             columns: [20, undefined, 20],
             rows: [20, undefined, 20],
         })
+
+        this.add.rexNinePatch({
+            x: 600, y: 430,
+            width: 30, height: 30,
+            key: 'bg2',
+            columns: [20, undefined, 20],
+            rows: [20, undefined, 20],
+        })
     }
 
     update() {
