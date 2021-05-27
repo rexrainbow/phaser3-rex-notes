@@ -114,7 +114,7 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
                     // Do nothing if frameName is existed
                 }
             } else {
-                console.warn(`Size of Grid(${i},${j}) = ${colWidth}x${rowHeight}, which is invalid`);
+                // console.warn(`Size of Grid(${i},${j}) = ${colWidth}x${rowHeight}, which is invalid`);
             }
             offsetX += colWidth;
         }
