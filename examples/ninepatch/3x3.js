@@ -51,6 +51,7 @@ class Demo extends Phaser.Scene {
             columns: [20, undefined, 20],
             rows: [20, undefined, 20],
         })
+        this.add.rectangle(600, 430, 30, 30).setStrokeStyle(2, 0xff0000)
     }
 
     update() {
