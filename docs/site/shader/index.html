@@ -5648,8 +5648,12 @@
 <li><code>key</code> : The key of the shader to use from the <em>shader cache</em>, or a <a href="./#baseshader">BaseShader instance</a>.</li>
 <li><code>x</code>, <code>y</code> : Position.</li>
 <li><code>width</code>, <code>height</code> : Size.</li>
-<li><code>textures</code> : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms. Lots of shaders expect textures to be <strong>power-of-two sized</strong>.</li>
+<li><code>textures</code> : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms.</li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Lots of shaders expect textures to be <strong>power-of-two sized</strong>.</p>
+</div>
 <p>Add shader object from JSON</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">shader</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">shader</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>

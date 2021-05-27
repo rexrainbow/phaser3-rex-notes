@@ -23,7 +23,10 @@ var shader = scene.add.shader(key, x, y, width, height, textures);
 - `key` : The key of the shader to use from the *shader cache*, or a [BaseShader instance](shader.md#baseshader).
 - `x`, `y` : Position.
 - `width`, `height` : Size.
-- `textures` : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms. Lots of shaders expect textures to be **power-of-two sized**.
+- `textures` : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms.
+
+!!! note
+    Lots of shaders expect textures to be **power-of-two sized**.
 
 Add shader object from JSON
 
