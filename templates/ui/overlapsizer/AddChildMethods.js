@@ -18,8 +18,9 @@ export default {
             expand = GetValue(config, 'expand', true);
 
             if (!gameObject.isRexSizer) {
-                minWidth = GetValue(config, 'minWidth', undefined);
-                minHeight = GetValue(config, 'minHeight', undefined);
+                // Get minWidth,minHeight from config
+                minWidth = GetValue(config, 'minWidth', gameObject._minWidth);
+                minHeight = GetValue(config, 'minHeight', undefingameObject._minHeighted);
             }
         }
 
@@ -40,6 +41,15 @@ export default {
         if (expand === undefined) {
             expand = true;
         }
+        if (!gameObject.isRexSizer) {
+            // Get minWidth,minHeight from game object
+            if (minWidth === undefined) {
+                minWidth = gameObject._minWidth;
+            }
+            if (minHeight === undefined) {
+                minHeight = gameObject._minHeight;
+            }
+        }
 
         var config = this.getSizerConfig(gameObject);
         config.align = align;
@@ -55,11 +65,13 @@ export default {
 
         if (!gameObject.isRexSizer) {  // Expand normal game object
             if (config.expandWidth) {
+                // minWidth is still undefined, uses current display width
                 gameObject.minWidth = (minWidth === undefined) ? GetDisplayWidth(gameObject) : minWidth;
             } else {
                 gameObject.minWidth = undefined;
             }
             if (config.expandHeight) {
+                // minHeight is still undefined, uses current display height
                 gameObject.minHeight = (minHeight === undefined) ? GetDisplayHeight(gameObject) : minHeight;
             } else {
                 gameObject.minHeight = undefined;

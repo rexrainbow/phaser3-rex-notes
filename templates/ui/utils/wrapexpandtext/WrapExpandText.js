@@ -14,7 +14,7 @@ var WrapExpandText = function (textObject, minWidth) {
         minWidth = 0;
     }
 
-    textObject.minWidth = minWidth;
+    textObject._minWidth = minWidth;
 
     textObject.runWidthWrap =
         IsDynamicTextGameObject(textObject) ? DynamicTextRunWidthWrap(textObject) :

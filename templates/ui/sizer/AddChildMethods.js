@@ -31,7 +31,7 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
         index = GetValue(config, 'index', undefined);
 
         if (!gameObject.isRexSizer) {
-            minSize = GetValue(config, 'minWidth', undefined);
+            // Get minSize from config
             if (this.orientation === 0) { // x
                 minSize = GetValue(config, 'minWidth', undefined);
             } else {  // y
@@ -56,6 +56,14 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
     if (expand === undefined) {
         expand = false;
     }
+    if (!gameObject.isRexSizer && (minSize === undefined)) {
+        // Get minSize from game object
+        if (this.orientation === 0) { // x
+            minSize = gameObject._minWidth;
+        } else {  // y
+            minSize = gameObject._minHeight;
+        }
+    }
 
     var config = this.getSizerConfig(gameObject);
     config.proportion = proportion;
@@ -70,10 +78,12 @@ var Add = function (gameObject, proportion, align, paddingConfig, expand, childK
 
     if (!gameObject.isRexSizer && (proportion > 0)) { // Expand normal game object
         if (this.orientation === 0) { // x
+            // minSize is still undefined, uses current display width
             gameObject.minWidth = (minSize === undefined) ? GetDisplayWidth(gameObject) : minSize;
             gameObject.minHeight = undefined;
         } else {
             gameObject.minWidth = undefined;
+            // minSize is still undefined, uses current display height
             gameObject.minHeight = (minSize === undefined) ? GetDisplayHeight(gameObject) : minSize;
         }
     }

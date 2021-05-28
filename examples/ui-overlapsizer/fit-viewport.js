@@ -18,8 +18,10 @@ class Demo extends Phaser.Scene {
 
         var print = this.add.text(0, 0, '');
         var graphics = this.add.graphics();
-        this.scale.on('resize', function () {
-            var viewport = this.rexUI.viewport;
+
+        var scene = this;
+        var onResize = function () {
+            var viewport = scene.rexUI.viewport;
             win
                 .setPosition(viewport.centerX, viewport.centerY)
                 .setMinSize(viewport.width - 50, viewport.height - 50)
@@ -33,7 +35,10 @@ class Demo extends Phaser.Scene {
                 .clear()
                 .lineStyle(20, 0xff0000)
                 .strokeRectShape(viewport)
-        }, this);
+        }
+        this.scale.on('resize', onResize);
+
+        onResize();
     }
 
     update() { }
