@@ -1,12 +1,12 @@
 import RoundUpPowerOf2 from '../../../utils/math/RoundUpPowerOf2.js';
 
-const Image = Phaser.GameObjects.Image;
+const Shader = Phaser.GameObjects.Shader;
 const AddItem = Phaser.Utils.Array.Add;
 const RemoveItem = Phaser.Utils.Array.Remove;
 
-class EffectLayer extends Image {
+class EffectLayer extends Shader {
     constructor(scene, key, x, y, width, height) {
-        // gameObjects -> render-texture -> shader -> image
+        // gameObjects -> render-texture -> shader
 
         if (typeof (x) === 'object') {
             var config = x;
@@ -22,21 +22,15 @@ class EffectLayer extends Image {
         width = RoundUpPowerOf2(width);
         height = RoundUpPowerOf2(height);
         var rt = scene.make.renderTexture({ x: x, y: y, width: width, height: height, add: false });
-        var shader = scene.add.shader(key, x, y, width, height);
-        shader.setSampler2DBuffer('iChannel0', rt.glTexture, width, height, 0);
 
-        // shader -> image
-        var textureKey = `el${Date.now()}`; // Private texture
-        shader.setRenderToTexture(textureKey, true);
-
-        super(scene, x, y, textureKey);
+        super(scene, key, x, y, width, height);
         this.type = 'rexEffectLayer';
 
         this
+            .setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0)
             .setScrollFactor(0)
             .setOrigin(0);
 
-        this.shader = shader;
         this.rt = rt;
 
         this.children = [];
@@ -57,9 +51,7 @@ class EffectLayer extends Image {
 
         super.destroy(fromScene);
 
-        this.shader.destroy(fromScene);
         this.rt.destroy(fromScene);
-        this.shader = null;
         this.rt = null;
     }
 
@@ -84,28 +76,28 @@ class EffectLayer extends Image {
     }
 
     set1f(key, value) {
-        this.shader.setUniform(`${key}.value`, value);
+        this.setUniform(`${key}.value`, value);
         return this;
     }
 
     set2f(key, x, y) {
-        this.shader.setUniform(`${key}.value.x`, x);
-        this.shader.setUniform(`${key}.value.y`, y);
+        this.setUniform(`${key}.value.x`, x);
+        this.setUniform(`${key}.value.y`, y);
         return this;
     }
 
     set3f(key, x, y, z) {
-        this.shader.setUniform(`${key}.value.x`, x);
-        this.shader.setUniform(`${key}.value.y`, y);
-        this.shader.setUniform(`${key}.value.z`, z);
+        this.setUniform(`${key}.value.x`, x);
+        this.setUniform(`${key}.value.y`, y);
+        this.setUniform(`${key}.value.z`, z);
         return this;
     }
 
     setFloat4(key, x, y, z, w) {
-        this.shader.setUniform(`${key}.value.x`, x);
-        this.shader.setUniform(`${key}.value.y`, y);
-        this.shader.setUniform(`${key}.value.z`, z);
-        this.shader.setUniform(`${key}.value.w`, w);
+        this.setUniform(`${key}.value.x`, x);
+        this.setUniform(`${key}.value.y`, y);
+        this.setUniform(`${key}.value.z`, z);
+        this.setUniform(`${key}.value.w`, w);
         return this;
     }
 
@@ -152,31 +144,14 @@ class EffectLayer extends Image {
         width = RoundUpPowerOf2(width);
         height = RoundUpPowerOf2(height);
 
-        var shader = this.shader;
         var rt = this.rt;
-
-        // Free texture
-        this.setTexture();
 
         // Set size of render texture
         rt.setSize(width, height);
-        shader.setSampler2DBuffer('iChannel0', rt.glTexture, width, height, 0);
+        this.setSampler2DBuffer('iChannel0', rt.frame.glTexture, width, height, 0);
 
         // Set size of shader
-        shader.setSize(width, height);
-        // Free old texture
-        shader.renderer.deleteFramebuffer(shader.framebuffer);
-        shader.texture.destroy();
-        shader.framebuffer = null;
-        shader.glTexture = null;
-        shader.texture = null;
-        // call shader.setRenderToTexture again
-        shader.renderToTexture = false;
-        var textureKey = `el${Date.now()}`; // Create new gl texture
-        shader.setRenderToTexture(textureKey, true);
-
-        // Set new texture to image
-        this.setTexture(textureKey);
+        this.setSize(width, height);
         return this;
     }
 

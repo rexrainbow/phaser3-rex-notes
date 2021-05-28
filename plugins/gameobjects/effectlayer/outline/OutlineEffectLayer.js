@@ -33,7 +33,7 @@ class OutlineEffectLayer extends EffectLayer {
     resetFromJSON(o) {
         this.setKnockout(GetValue(o, 'knockout', false));
         this.setThickness(GetValue(o, 'thickness', 3));
-        this.setOutlineColor(GetValue(o, 'outlineColor', 0x000000));
+        this.setOutlineColor(GetValue(o, 'outlineColor', 0xffffff));
         return this;
     }
 
