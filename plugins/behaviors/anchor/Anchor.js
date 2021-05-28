@@ -60,19 +60,24 @@ class Anchor {
 
     boot() {
         this.scene.scale.on('resize', this.anchor, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
 
         this.anchor();
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.scene.scale.off('resize', this.anchor, this);
         this.gameObject = undefined;
         this.scene = undefined;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+    
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+        return this;
     }
 
     setAlign(x, y) {

@@ -15,7 +15,7 @@ var SetAcceleration = function (gameObject, ax, ay, onChange) {
     var body = gameObject.body;
     var preAx = body.acceleration.x,
         preAy = body.acceleration.y;
-    if ((ax === prevAx) && (ay === prevAy)) {
+    if ((ax === preAx) && (ay === preAy)) {
         return;
     }
     body.setAcceleration(ax, ay);
@@ -27,7 +27,7 @@ var SetAcceleration = function (gameObject, ax, ay, onChange) {
 var SetAngularVelocity = function (gameObject, av, onChange) {
     var body = gameObject.body;
     var preAv = body.angularVelocity;
-    if (av === prevAv) {
+    if (av === preAv) {
         return;
     }
     body.setAngularVelocity(av);

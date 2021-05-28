@@ -22,18 +22,23 @@ class Boids {
 
     boot() {
         if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
+            this.gameObject.on('destroy', this.onParentDestroy, this);
         }
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.output = undefined;
         this.gameObject = undefined;
         // gameObject events will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+        return this;
     }
 
     setSeparationParameters(weight, distance) {

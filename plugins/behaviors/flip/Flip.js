@@ -7,7 +7,7 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 class Flip extends TweenBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: true });
-        this.gameObject = gameObject;
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
     }
@@ -21,12 +21,6 @@ class Flip extends TweenBase {
         this.setFrontFace(GetValue(o, 'front', undefined));
         this.setBackFace(GetValue(o, 'back', undefined));
         this.setFace(GetValue(o, 'face', 0));
-        return this;
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
         return this;
     }
 
@@ -66,9 +60,9 @@ class Flip extends TweenBase {
         }
         this._face = face;
         if ((face === 0) && this.frontFaceCallback) {
-            this.frontFaceCallback(this.gameObject);
+            this.frontFaceCallback(this.parent);
         } else if ((face === 1) && this.backFaceCallback) {
-            this.backFaceCallback(this.gameObject);
+            this.backFaceCallback(this.parent);
         }
     }
 
@@ -84,12 +78,12 @@ class Flip extends TweenBase {
     }
 
     setFrontFace(key, frame) {
-        this.frontFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
+        this.frontFaceCallback = GetFaceUpdatingCallback(key, frame, this.parent);
         return this;
     }
 
     setBackFace(key, frame) {
-        this.backFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
+        this.backFaceCallback = GetFaceUpdatingCallback(key, frame, this.parent);
         return this;
     }
 
@@ -99,7 +93,7 @@ class Flip extends TweenBase {
         }
 
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
             delay: this.delay,
             duration: this.duration / 2,
             ease: this.ease,

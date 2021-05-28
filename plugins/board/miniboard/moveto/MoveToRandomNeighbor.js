@@ -2,7 +2,7 @@ import Clone from '../../../utils/object/Clone.js';
 import Shuffle from '../../../utils/array/Shuffle.js';
 
 var MoveToRandomNeighbor = function () {
-    var miniBoard = this.miniBoard;
+    var miniBoard = this.parent;
     var mainBoard = miniBoard.mainBoard;
     // Not on a mainBoard
     if (mainBoard == null) {

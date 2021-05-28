@@ -1,6 +1,5 @@
 import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../system/GetSceneObject.js';
-import IsGameObject from '../system/IsGameObject.js';
 import IsSceneObject from '../system/IsSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,14 +31,19 @@ class TweenBase {
         }
 
         if (eventEmitter) {
-            eventEmitter.once('destroy', this.destroy, this);
+            eventEmitter.once('destroy', this.onParentDestroy, this);
         }
     }
 
-    shutdown() {
+    shutdown(fromScene) {
+        // Already shutdown
+        if (!this.parent) {
+            return this;
+        }
+
         this.stop();
         if (IsSceneObject(this.parent)) {  // Parent is Scene Object
-            this.parent.events.off('shutdown', this.destroy, this);
+            this.parent.events.off('shutdown', this.onParentDestroy, this);
         }
         this.destroyEventEmitter();
         this.parent = undefined;
@@ -47,9 +51,13 @@ class TweenBase {
         return this;
     }
 
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+        return this;
+    }
 
-    destroy() {
-        this.shutdown();
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
         return this;
     }
 

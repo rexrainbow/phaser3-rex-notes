@@ -6,7 +6,7 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 class Fade extends TweenBase {
     constructor(gameObject, config) {
         super(gameObject);
-        this.gameObject = gameObject;
+        // this.parent = gameObject;
 
         this.alphaStart = undefined;
         this.alphaEnd = undefined;
@@ -16,7 +16,7 @@ class Fade extends TweenBase {
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
         this.setAlphaRange(
-            GetAdvancedValue(o, 'start', this.gameObject.alpha),
+            GetAdvancedValue(o, 'start', this.parent.alpha),
             GetAdvancedValue(o, 'end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
@@ -32,16 +32,6 @@ class Fade extends TweenBase {
             delay: this.delay,
             duration: this.duration
         };
-    }
-
-    shutdown() {
-        // Already shutdown
-        if (!this.gameObject) {
-            return this;
-        }
-        super.shutdown();
-        this.gameObject = undefined;
-        return this;
     }
 
     setMode(m) {
@@ -74,9 +64,9 @@ class Fade extends TweenBase {
         }
 
         // Set alpha to start value now
-        this.gameObject.setAlpha(this.alphaStart);
+        this.parent.setAlpha(this.alphaStart);
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
             alpha: this.alphaEnd,
 
             delay: this.delay,
@@ -86,7 +76,7 @@ class Fade extends TweenBase {
             repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: function () {
                 if (this.mode === 1) {
-                    this.gameObject.destroy();
+                    this.parent.destroy();
                 }
             },
             onCompleteScope: this

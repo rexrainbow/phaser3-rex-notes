@@ -8,7 +8,6 @@ class LoopInTicks extends TickTask {
     constructor(scene, config) {
         super(scene, config);
 
-        this.scene = scene;
         this.deltaPeriod = 1000 / scene.game.loop.targetFps;
         this.deltaPercentage = 1;
         this.loopIndexGenerator = new LoopIndexGenerator();
@@ -23,16 +22,6 @@ class LoopInTicks extends TickTask {
         this.loopIndexGenerator.reset();
         Clear(this.currentIndexes);
         return this;
-    }
-
-    boot() {
-        super.boot();
-        this.scene.events.once('shutdown', this.destroy, this);
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.scene = undefined;
     }
 
     startTicking() {

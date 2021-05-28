@@ -6,7 +6,7 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 class Flip extends TweenBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: true });
-        this.gameObject = gameObject;
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
     }
@@ -17,12 +17,6 @@ class Flip extends TweenBase {
         this.setEase(GetValue(o, 'ease', 'Cubic'));
         this.setFrontToBackDirection(GetValue(o, 'frontToBack', 0));
         this.setBackToFrontDirection(GetValue(o, 'backToFront', 1));
-        return this;
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
         return this;
     }
 
@@ -66,15 +60,15 @@ class Flip extends TweenBase {
         }
 
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             repeat: 0
         }
 
-        var propKey = (this.gameObject.orientation === 0) ? 'angleY' : 'angleX';
-        var isFrontToBack = (this.gameObject.face === 0);
+        var propKey = (this.parent.orientation === 0) ? 'angleY' : 'angleX';
+        var isFrontToBack = (this.parent.face === 0);
         config[propKey] = {
             start: (isFrontToBack) ? 0 : this.endAngleBF,
             to: (isFrontToBack) ? this.endAngleFB : 0
@@ -94,13 +88,13 @@ class Flip extends TweenBase {
         this.start();
 
         // Set face index
-        var faceIndex = this.gameObject.currentFaceIndex;
-        this.gameObject.currentFaceIndex = (faceIndex === 0) ? 1 : 0;
+        var faceIndex = this.parent.currentFaceIndex;
+        this.parent.currentFaceIndex = (faceIndex === 0) ? 1 : 0;
         return this;
     }
 
     flipRight(duration) {
-        if (this.gameObject.currentFaceIndex === 0) { // Front to back
+        if (this.parent.currentFaceIndex === 0) { // Front to back
             this.setFrontToBackDirection(0);
         } else {  // Back to front
             this.setBackToFrontDirection(0);
@@ -110,7 +104,7 @@ class Flip extends TweenBase {
     }
 
     flipLeft(duration) {
-        if (this.gameObject.currentFaceIndex === 0) { // Front to back
+        if (this.parent.currentFaceIndex === 0) { // Front to back
             this.setFrontToBackDirection(1);
         } else {  // Back to front
             this.setBackToFrontDirection(1);

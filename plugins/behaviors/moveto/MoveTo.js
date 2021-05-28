@@ -1,5 +1,4 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -10,9 +9,7 @@ const AngleBetween = Phaser.Math.Angle.Between;
 class MoveTo extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
-
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
         this.boot();
@@ -40,19 +37,6 @@ class MoveTo extends TickTask {
             targetY: this.targetY,
             tickingMode: this.tickingMode
         };
-    }
-
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
     }
 
     startTicking() {
@@ -108,7 +92,7 @@ class MoveTo extends TickTask {
             return this;
         }
 
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var curX = gameObject.x,
             curY = gameObject.y;
         var targetX = this.targetX,

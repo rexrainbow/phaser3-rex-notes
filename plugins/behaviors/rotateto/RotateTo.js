@@ -1,5 +1,4 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
@@ -12,9 +11,7 @@ const AngleBetween = Phaser.Math.Angle.Between;
 class RotateTo extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
-
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
         this.boot();
@@ -39,19 +36,6 @@ class RotateTo extends TickTask {
             dir: this.dir,
             tickingMode: this.tickingMode
         };
-    }
-
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
     }
 
     startTicking() {
@@ -99,7 +83,7 @@ class RotateTo extends TickTask {
     }
 
     rotateTowardsPosition(x, y, dir, speed) {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var rad = AngleBetween(gameObject.x, gameObject.y, x, y);
         var angle = RadToDeg(rad);
         this.rotateTo(angle, dir, speed);
@@ -111,9 +95,9 @@ class RotateTo extends TickTask {
             return this;
         }
 
+        var gameObject = this.parent;
         var target = this.target; // 0~360
         var targetRad = WrapAngle(DegToRad(target)); // -PI~PI
-        var gameObject = this.gameObject;
         if (targetRad === gameObject.rotation) {
             this.complete();
             return this;

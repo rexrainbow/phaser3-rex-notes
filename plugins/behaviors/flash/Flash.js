@@ -1,14 +1,12 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Flash extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
-
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        // this.parent = gameObject;
+        
         this.resetFromJSON(config);
         this.boot();
     }
@@ -34,19 +32,6 @@ class Flash extends TickTask {
             timeScale: this.timeScale,
             tickingMode: this.tickingMode
         };
-    }
-
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
     }
 
     startTicking() {
@@ -109,7 +94,7 @@ class Flash extends TickTask {
     }
 
     stop() {
-        this.gameObject.setVisible(true);
+        this.parent.setVisible(true);
         super.stop();
         return this;
     }
@@ -123,9 +108,10 @@ class Flash extends TickTask {
             return this;
         }
 
+        var gameObject = this.parent;
         this.nowTime += (delta * this.timeScale);
         var visible = (this.nowTime <= (this.duration / 2)) ? false : true;
-        this.gameObject.setVisible(visible);
+        gameObject.setVisible(visible);
 
         if (this.nowTime >= this.duration) {
             if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {

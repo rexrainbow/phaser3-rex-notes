@@ -1,10 +1,12 @@
 import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
+import GetSceneObject from '../system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TickTask {
     constructor(parent, config) {
         this.parent = parent;
+        this.scene = GetSceneObject(parent);
         this._isRunning = false;
         this.isPaused = false;
         this.tickingState = false;
@@ -15,22 +17,33 @@ class TickTask {
 
     // override
     boot() {
+        if (this.parent === this.scene) { // parent is a scene instance
+            this.scene.events.once('shutdown', this.destroy, this);
+        } else if (this.parent.once) { // oops, bob object does not have event emitter
+            this.parent.on('destroy', this.onParentDestroy, this);
+        }
         if ((this.tickingMode === 2) && (!this.tickingState)) {
             this.startTicking();
         }
     }
 
     // override
-    shutdown() {
+    shutdown(fromScene) {
         this.destroyEventEmitter();
         if (this.tickingState) {
             this.stopTicking();
         }
         this.parent = undefined;
+        this.scene = undefined;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
+        return this;
     }
 
     setTickingMode(mode) {
@@ -94,7 +107,7 @@ class TickTask {
 
     stop() {
         this.isPaused = false;
-        this.isRunning = false;        
+        this.isRunning = false;
         return this;
     }
 
