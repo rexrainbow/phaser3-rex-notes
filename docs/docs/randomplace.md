@@ -102,8 +102,8 @@ scene.plugins.get('rexRandomPlace').randomPlace(gameObjects, {
         }
         ```
 - `area` : A geom object, which has `getRandomPoint` method.
-    - A [circle](geom-circle.md) : `new new Phaser.Geom.Circle(x, y, radius)`
-    - A [rectangle](geom-rectangle.md) : `new new Phaser.Geom.Rectangle(x, y, width, height)`
-    - A [triangle](geom-triangle.md) : `new new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
-    - An [ellipse](geom-ellipse.md) : `new new Phaser.Geom.Ellipse(x, y, width, height)`
+    - A [circle](geom-circle.md) : `new Phaser.Geom.Circle(x, y, radius)`
+    - A [rectangle](geom-rectangle.md) : `new Phaser.Geom.Rectangle(x, y, width, height)`
+    - A [triangle](geom-triangle.md) : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
+    - An [ellipse](geom-ellipse.md) : `new Phaser.Geom.Ellipse(x, y, width, height)`
     - `undefined` : A rectangle (0, 0, gameWidth, gameHeight)

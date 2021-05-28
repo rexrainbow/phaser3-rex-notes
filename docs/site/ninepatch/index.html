@@ -5736,14 +5736,16 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">baseFrame</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -5754,7 +5756,8 @@
     <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -5766,7 +5769,8 @@
     <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -5779,7 +5783,8 @@
     <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -5793,7 +5798,8 @@
     <span class="nx">columns</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// preserveRatio: true,</span>
+    <span class="c1">// stretchMode: 0,</span>
     <span class="nx">baseFrame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
@@ -5823,6 +5829,7 @@
 </li>
 </ul>
 </li>
+<li><code>preserveRatio</code> : Preserve ratio of fixed parts (i.e. displaying in origin size). Default is <code>true</code>.</li>
 <li><code>stretchMode</code> : Stretch mode of edges and internal cells.<ul>
 <li>A number (<code>0</code>, or <code>1</code>), or a string (<code>'scale'</code>, or <code>'repeat'</code>): <ul>
 <li><code>0</code>, or <code>'scale'</code> : Stretch each edge and internal cell by scaled image. Default value.</li>
