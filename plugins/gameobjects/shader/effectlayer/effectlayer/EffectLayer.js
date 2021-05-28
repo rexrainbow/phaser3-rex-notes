@@ -1,4 +1,4 @@
-import RoundUpPowerOf2 from '../../../utils/math/RoundUpPowerOf2.js';
+import RoundUpPowerOf2 from '../../../../utils/math/RoundUpPowerOf2.js';
 
 const Shader = Phaser.GameObjects.Shader;
 const AddItem = Phaser.Utils.Array.Add;

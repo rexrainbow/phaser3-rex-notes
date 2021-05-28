@@ -1,6 +1,6 @@
-import Factory from './gameobjects/effectlayer/effectlayer/Factory.js';
-import Creator from './gameobjects/effectlayer/effectlayer/Creator.js';
-import EffectLayer from './gameobjects/effectlayer/effectlayer/EffectLayer.js';
+import Factory from './gameobjects/shader/effectlayer/effectlayer/Factory.js';
+import Creator from './gameobjects/shader/effectlayer/effectlayer/Creator.js';
+import EffectLayer from './gameobjects/shader/effectlayer/effectlayer/EffectLayer.js';
 import SetValue from './utils/object/SetValue.js';
 
 class EffectLayerPlugin extends Phaser.Plugins.BasePlugin {
