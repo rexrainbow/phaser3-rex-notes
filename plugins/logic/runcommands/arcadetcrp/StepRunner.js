@@ -1,37 +1,28 @@
-import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../../utils/behaviorbase/BehaviorBase.js';
 import RunCommands from '../../../runcommands.js';
 
-class StepRunner {
+class StepRunner extends BehaviorBase {
     constructor(parent) {
-        this.parent = parent;
-        this.scene = GetSceneObject(parent);
+        super(parent, { eventEmitter: false });
 
         this.commands = [];
-
         this.boot();
     }
 
     boot() {
-        if (this.parent === this.scene) {
-            this.scene.events.on('shutdown', this.destroy, this);
-        } else if (this.parent) {
-            this.parent.on('destroy', this.destroy, this);
-        }
-
         this.scene.physics.world.on('worldstep', this.update, this);
         //  'worldstep' event is emitted *after* the bodies and colliders have been updated.
     }
 
-    shutdown() {
+    shutdown(fromScene) {
+        if (!this.parent) {
+            return;
+        }
+
         this.scene.physics.world.off('worldstep', this.update, this);
-
-        this.parent = undefined;
-        this.scene = undefined;
         this.commands = undefined;
-    }
 
-    destroy() {
-        this.shutdown();
+        super.shutdown(fromScene)
     }
 
     add(commands, scope) {

@@ -49,8 +49,8 @@ var createBtn = function (scene, config) {
     btn.button = scene.plugins.get('rexButton').add(btn, {
         // clickInterval: 1000  // ms
     });
-    btn.button.on('click', function (button) {
-        scene.print.text += 'click ' + button.gameObject.name + '\n';
+    btn.button.on('click', function (button, gameObject) {
+        scene.print.text += 'click ' + gameObject.name + '\n';
     });
     return btn;
 }

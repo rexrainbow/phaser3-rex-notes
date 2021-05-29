@@ -1,17 +1,20 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import DragStart from '../../utils/input/DragStart.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
-class Drag {
+class Drag extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        if (config === undefined) {
+            config = {};
+        }
+        config.eventEmitter = false; // No event emitter
+        super(gameObject, config);
 
         this._enable = undefined;
-        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -33,26 +36,25 @@ class Drag {
     }
 
     boot() {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         gameObject.on('dragstart', this.onDragStart, this);
         gameObject.on('drag', this.onDrag, this);
         gameObject.on('dragend', this.onDragEnd, this);
-        gameObject.on('destroy', this.onParentDestroy, this);
     }
 
     shutdown(fromScene) {
+        // Already shutdown
+        if (!this.parent) {
+            return;
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.on('dragstart', this.onDragStart, this);
+        // this.parent.on('drag', this.onDrag, this);
+        // this.parent.on('dragend', this.onDragEnd, this);
         this.pointer = undefined;
-        this.gameObject = undefined;
-        this.scene = undefined;
-        // gameObject events will be removed when this gameObject destroyed 
-    }
 
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -68,7 +70,7 @@ class Drag {
             this.pointer = undefined;
         }
         this._enable = e;
-        this.scene.input.setDraggable(this.gameObject, e);
+        this.scene.input.setDraggable(this.parent, e);
         return this;
     }
 
@@ -100,7 +102,7 @@ class Drag {
     }
 
     drag() {
-        DragStart(this.gameObject);
+        DragStart(this.parent);
         return this;
     }
 
@@ -123,7 +125,7 @@ class Drag {
         if (this.pointer !== pointer) {
             return;
         }
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         if (this.axisMode === 0) {
             gameObject.x = dragX;
             gameObject.y = dragY;
@@ -135,22 +137,20 @@ class Drag {
             }
         } else {
             var dist;
-            P1.x = dragX;
-            P1.y = dragY;
-
-            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
-            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, -this.axisRotation, dist);
+            var p1 = { x: dragX, y: dragY };
+            dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
+            p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, -this.axisRotation, dist);
 
             if (this.axisMode === 1) {
-                P1.y = gameObject.y;
+                p1.y = gameObject.y;
             } else if (this.axisMode === 2) {
-                P1.x = gameObject.x;
+                p1.x = gameObject.x;
             }
-            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
-            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, this.axisRotation, dist);
+            dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
+            p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, this.axisRotation, dist);
 
-            gameObject.x = P1.x;
-            gameObject.y = P1.y;
+            gameObject.x = p1.x;
+            gameObject.y = p1.y;
         }
 
     }
@@ -167,9 +167,6 @@ class Drag {
     }
 }
 
-var P1 = {}; // reuse this point object
-
-/** @private */
 const DIRECTIONNODE = {
     'both': 0,
     'h&v': 0,

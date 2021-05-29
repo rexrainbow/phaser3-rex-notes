@@ -13,7 +13,7 @@ class BehaviorBase {
 
         // Register callback of parent destroy event, also see `shutdown` method
         if (this.parent === this.scene) { // parent is a scene instance
-            this.scene.events.once('shutdown', this.destroy, this);
+            this.scene.events.once('shutdown', this.onSceneDestroy, this);
         } else if (this.parent.once) { // bob object does not have event emitter
             this.parent.on('destroy', this.onParentDestroy, this);
         }
@@ -26,7 +26,7 @@ class BehaviorBase {
         }
 
         if (this.parent === this.scene) { // parent is a scene instance
-            this.scene.events.off('shutdown', this.onParentDestroy, this);
+            this.scene.events.off('shutdown', this.destroy, this);
         } else if (this.parent.once) { // bob object does not have event emitter
             this.parent.off('destroy', this.onParentDestroy, this);
         }
@@ -40,9 +40,14 @@ class BehaviorBase {
         this.shutdown(fromScene);
     }
 
+    onSceneDestroy() {
+        this.destroy(true);
+    }
+
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
     }
+
 };
 
 Object.assign(

@@ -1,4 +1,4 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import IsTextGameObject from '../../utils/text/IsTextGameObject.js';
 import IsBitmapTextGameObject from '../../utils/bitmaptext/IsBitmapTextGameObject.js';
 
@@ -8,10 +8,14 @@ const TextType = 0;
 const TagTextType = 1;
 const BitmapTextType = 2;
 
-class TextPage {
+class TextPage extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        if (config === undefined) {
+            config = {};
+        }
+        config.eventEmitter = false; // No event emitter
+        super(gameObject, config);
+
         this.setTextObjectType();
 
         this.lines = undefined;
@@ -21,7 +25,6 @@ class TextPage {
         this.totalLinesCount = 0;
 
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -44,12 +47,11 @@ class TextPage {
         };
     }
 
-    boot() {
-        this.gameObject.on('destroy', this.onParentDestroy, this);
-        return this;
-    }
-
     shutdown(fromScene) {
+        if (!this.parent) {
+            return;
+        }
+
         if (this.lines === undefined) {
             // Do nothing
         } else {
@@ -66,24 +68,13 @@ class TextPage {
             }
         }
 
-        this.gameObject = undefined;
-        this.scene = undefined;
-
-        return this;
-    }
-
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
+        super.shutdown(fromScene);
     }
 
     setTextObjectType() {
         this.textObjectType =
-            (IsBitmapTextGameObject(this.gameObject)) ? BitmapTextType :
-                (IsTextGameObject(this.gameObject)) ? TextType :
+            (IsBitmapTextGameObject(this.parent)) ? BitmapTextType :
+                (IsTextGameObject(this.parent)) ? TextType :
                     TagTextType;
 
         return this;
@@ -106,15 +97,15 @@ class TextPage {
         // Wrap content in lines
         switch (this.textObjectType) {
             case TextType:
-                this.lines = this.gameObject.getWrappedText(this.text); // Array of string
+                this.lines = this.parent.getWrappedText(this.text); // Array of string
                 this.totalLinesCount = this.lines.length;
                 break;
             case TagTextType:
-                this.lines = this.gameObject.getPenManager(this.text, this.lines); // Pens-manager
+                this.lines = this.parent.getPenManager(this.text, this.lines); // Pens-manager
                 this.totalLinesCount = this.lines.linesCount;
                 break;
             case BitmapTextType:
-                this.lines = this.gameObject
+                this.lines = this.parent
                     .setText(text)
                     .getTextBounds().wrappedText.split('\n');
                 this.totalLinesCount = this.lines.length;
@@ -209,7 +200,7 @@ class TextPage {
             switch (this.textObjectType) {
                 case TextType:
                 case TagTextType:
-                    var maxLines = this.gameObject.style.maxLines;
+                    var maxLines = this.parent.style.maxLines;
                     if (maxLines > 0) {
                         count = maxLines;
                     } else {
@@ -249,7 +240,7 @@ class TextPage {
     }
 
     displayText(text) {
-        this.gameObject.setText(text);
+        this.parent.setText(text);
     }
 }
 
