@@ -30,7 +30,7 @@ class Obstacles {
         }
 
         if (gameObject.on) {
-            gameObject.on('destroy', this.remove, this);
+            gameObject.on('destroy', this.onChildDestroy, this);
         }
         return this;
     }
@@ -45,7 +45,7 @@ class Obstacles {
         }
 
         if (gameObject.off) {
-            gameObject.off('destroy', this.remove, this);
+            gameObject.off('destroy', this.onChildDestroy, this);
         }
         return this;
     }
@@ -88,6 +88,10 @@ class Obstacles {
 
         this.removeDestroyCallback(gameObject);
         return this;
+    }
+
+    onChildDestroy(child, fromScene) {
+        this.remove(child);
     }
 
     update(gameObject, polygon) {

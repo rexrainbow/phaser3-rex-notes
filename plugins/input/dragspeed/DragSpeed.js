@@ -35,17 +35,17 @@ class DragSpeed {
 
     boot() {
         // Drag start only when pointer down
-        this.gameObject.on('pointerdown', this.onPointIn, this); 
+        this.gameObject.on('pointerdown', this.onPointIn, this);
         // this.gameObject.on('pointerover', this.onPointIn, this);
 
         this.gameObject.on('pointerup', this.onPointOut, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
         this.scene.events.on('preupdate', this.preupdate, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         if (this.scene) { // Scene might be destoryed
             this.scene.events.off('preupdate', this.preupdate, this);
         }
@@ -56,8 +56,12 @@ class DragSpeed {
         this.destroyEventEmitter();
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

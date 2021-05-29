@@ -59,18 +59,22 @@ class Slider {
 
     boot() {
         this.gameObject.on('drag', this.onDragging, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.destroyEventEmitter();
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject event 'drag' will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdownfromScene();
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

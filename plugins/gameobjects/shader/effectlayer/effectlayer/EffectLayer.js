@@ -109,16 +109,19 @@ class EffectLayer extends Shader {
         AddItem(this.children, gameObjects, 0,
             // Callback of item added
             function (gameObject) {
-                gameObject.on('destroy', this.remove, this);
+                gameObject.on('destroy', this.onChildDestroy, this);
             }, this);
         return this;
     }
 
     remove(gameObjects, destroyChild) {
+        if (destroyChild === undefined) {
+            destroyChild = false;
+        }
         RemoveItem(this.children, gameObjects,
             // Callback of item removed
             function (gameObject) {
-                gameObject.off('destroy', this.remove, this);
+                gameObject.off('destroy', this.onChildDestroy, this);
                 if (destroyChild) {
                     gameObject.destroy();
                 }
@@ -131,13 +134,17 @@ class EffectLayer extends Shader {
         var gameObject;
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
             gameObject = this.children[i];
-            gameObject.off('destroy', this.remove, this);
+            gameObject.off('destroy', this.onChildDestroy, this);
             if (destroyChild) {
                 gameObject.destroy();
             }
         }
         this.children.length = 0;
         return this;
+    }
+
+    onChildDestroy(child, fromScene) {
+        this.remove(child, !fromScene);
     }
 
     resize(width, height) {

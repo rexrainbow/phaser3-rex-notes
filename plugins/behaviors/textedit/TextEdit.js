@@ -16,12 +16,12 @@ class TextEdit {
     }
 
     boot() {
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
 
         return this;
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.close();
         this.gameObject = undefined;
         this.scene = undefined;
@@ -31,9 +31,13 @@ class TextEdit {
         return this;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
         return this;
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     open(config, onCloseCallback) {

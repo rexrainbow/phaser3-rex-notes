@@ -104,7 +104,7 @@ class Interception extends TickTask {
     }
 
     onTargetDestroy(target, fromScene) {
-        this.target = undefined;
+        this.setTarget();
         return this;
     }
 

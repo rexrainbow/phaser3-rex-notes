@@ -39,10 +39,10 @@ class TouchState {
         this.gameObject.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('postupdate', this.postupdate, this);
 
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         if (this.scene) { // Scene might be destoryed
             this.scene.events.off('postupdate', this.postupdate, this);
         }
@@ -53,8 +53,12 @@ class TouchState {
         // gameObject events will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

@@ -77,7 +77,6 @@ class Anchor {
     
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
-        return this;
     }
 
     setAlign(x, y) {

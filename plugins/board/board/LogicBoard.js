@@ -31,19 +31,19 @@ class Board extends EE {
         }
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.removeAllChess(true, true);
         super.shutdown();
-        this.boardData.shutdown();
+        this.boardData.shutdown(fromScene);
 
         this.scene = undefined;
         this.boardData = undefined;
         return this;
     }
 
-    destroy() {
-        this.emit('destroy');
-        this.shutdown();
+    destroy(fromScene) {
+        this.emit('destroy', this, fromScene);
+        this.shutdown(fromScene);
         return this;
     }
 

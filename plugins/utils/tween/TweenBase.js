@@ -58,7 +58,6 @@ class TweenBase {
 
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
-        return this;
     }
 
     start(tweenConfig) {

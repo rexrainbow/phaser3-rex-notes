@@ -16,11 +16,11 @@ class Chess {
     boot() {
         var type = typeof (this.parent);
         if ((type !== 'number') && (type !== 'string') && this.parent.on) {
-            this.parent.on('destroy', this.destroy, this);
+            this.parent.on('destroy', this.onParentDestroy, this);
         }
     }
 
-    destroy() {
+    destroy(fromScene) {
         if (this.board) {
             this.board.removeChess(this[uidKey]);
         }
@@ -28,6 +28,10 @@ class Chess {
 
         this.parent = undefined;
         this.board = null;
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     setBoard(board) {

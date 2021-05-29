@@ -8,14 +8,14 @@ class BoardData {
         this.clear();
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.XYZToUID = undefined;
         this.UIDToXYZ = undefined;
         return this;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
         return this;
     }
 

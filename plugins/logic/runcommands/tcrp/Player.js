@@ -3,7 +3,6 @@ import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import Clock from '../../../clock.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
-import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 import IsArray from '../../../utils/object/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -49,9 +48,10 @@ class Player {
     }
 
     boot() {
-        var parentEE = GetEventEmitter(this.parent);
-        if (parentEE) {
-            parentEE.on('destroy', this.destroy, this);
+        if (this.parent === this.scene) {
+            this.scene.events.on('shutdown', this.destroy, this);
+        } else if (this.parent) {
+            this.parent.on('destroy', this.destroy, this);
         }
     }
 

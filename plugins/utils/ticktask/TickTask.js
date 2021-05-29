@@ -43,7 +43,6 @@ class TickTask {
 
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
-        return this;
     }
 
     setTickingMode(mode) {

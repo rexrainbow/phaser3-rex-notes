@@ -39,11 +39,11 @@ class PathFinder {
 
     boot() {
         if (this.gameObject && this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
+            this.gameObject.on('destroy', this.onParentDestroy, this);
         }
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         if (this.nodeManager !== undefined) {
             this.nodeManager.destroy();
         }
@@ -51,9 +51,13 @@ class PathFinder {
         return this;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
         return this;
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     setChess(gameObject) {
@@ -61,13 +65,13 @@ class PathFinder {
             if (this.gameObject !== gameObject) {
                 // Remove attatched event from previous gameObject
                 if (this.gameObject && this.gameObject.once) {
-                    this.gameObject.off('destroy', this.setChess, this);
+                    this.gameObject.off('destroy', this.onParentDestroy, this);
                 }
                 this.gameObject = gameObject;
                 this.chessData = GetChessData(gameObject);
                 // Attach event
                 if (this.gameObject && this.gameObject.once) {
-                    this.gameObject.on('destroy', this.setChess, this);
+                    this.gameObject.on('destroy', this.onParentDestroy, this);
                 }
             }
         } else {

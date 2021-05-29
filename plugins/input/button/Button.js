@@ -31,10 +31,10 @@ class Button {
         this.gameObject.on('pointerup', this.onRelease, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onMove, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.destroyEventEmitter();
         this.pointer = null;
         this.gameObject = null;
@@ -42,8 +42,12 @@ class Button {
         // gameObject events will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

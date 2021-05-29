@@ -70,10 +70,10 @@ class Scroller {
 
     boot() {
         this.scene.events.on('update', this._state.update, this._state);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.destroyEventEmitter();
         if (this.scene) { // Scene might be destoryed
             this.scene.events.off('update', this._state.update, this._state);
@@ -85,8 +85,12 @@ class Scroller {
         // gameObject events will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

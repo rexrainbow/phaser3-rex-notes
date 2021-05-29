@@ -59,7 +59,7 @@ class OnePointerTracer extends TickTask {
         if (this.scene) {
             this.scene.input.off('pointerup', this.onPointerUp, this);
             this.scene.input.off('pointermove', this.onPointerMove, this);
-            this.scene.events.off('destroy', this.destroy, this);
+            this.scene.events.off('shutdown', this.destroy, this);
             this.scene = undefined;
         }
 

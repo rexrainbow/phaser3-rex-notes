@@ -15,10 +15,11 @@ Base class of all game object in phaser.
 - Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.
 - Event
     ```javascript
-    gameObject.once('destroy', function(gameObject) {
-    
+    gameObject.once('destroy', function(gameObject, fromScene) {
+
     }, scope);
     ```
+    - `fromScene` : `true` if game object is destroyed during scene is shutdown. When scene is shutdown, all game objects will be destroyed.
 
 ### Position
 

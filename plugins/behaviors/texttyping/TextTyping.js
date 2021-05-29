@@ -7,19 +7,14 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class TextTyping {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);        
+        this.scene = GetSceneObject(gameObject);
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-        
+
         this.timer = null;
         this.resetFromJSON(config);
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setTypeMode(GetValue(o, 'typeMode', 0));
         this.setTypeSpeed(GetValue(o, 'speed', 333));
@@ -39,10 +34,6 @@ class TextTyping {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         var elapsed;
         var timer = this.getTimer();
@@ -67,14 +58,11 @@ class TextTyping {
     }
 
     boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-
+        this.gameObject.on('destroy', this.onParentDestroy, this);
         return this;
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.destroyEventEmitter();
         this.freeTimer();
         this.gameObject = undefined;
@@ -82,9 +70,13 @@ class TextTyping {
         return this;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
         return this;
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     setTypeMode(m) {

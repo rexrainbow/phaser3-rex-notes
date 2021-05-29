@@ -376,3 +376,14 @@ var gameObjects = group.createMultiple(config);    // config in array
     - `classType` :
         - [Sprite](sprite.md): `Phaser.GameObjects.Sprite`
         - [Image](image.md): `Phaser.GameObjects.Image`
+
+### Destroy
+
+- Destroy group only
+    ```javascript
+    group.destroy();
+    ```
+- Destroy group and children
+    ```javascript
+    group.destroy(true);
+    ```

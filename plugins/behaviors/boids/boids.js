@@ -38,7 +38,6 @@ class Boids {
 
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
-        return this;
     }
 
     setSeparationParameters(weight, distance) {

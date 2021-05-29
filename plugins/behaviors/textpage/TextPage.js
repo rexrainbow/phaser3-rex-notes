@@ -45,10 +45,11 @@ class TextPagePlugin {
     }
 
     boot() {
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.on('destroy', this.onParentDestroy, this);
+        return this;
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         if (this.lines === undefined) {
             // Do nothing
         } else {
@@ -71,8 +72,12 @@ class TextPagePlugin {
         return this;
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     setTextObjectType() {

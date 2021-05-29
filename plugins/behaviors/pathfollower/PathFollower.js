@@ -57,7 +57,6 @@ class PathFollower {
 
     onParentDestroy(parent, fromScene) {
         this.destroy(fromScene);
-        return this;
     }
 
     setPath(path) {

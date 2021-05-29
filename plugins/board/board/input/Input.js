@@ -23,10 +23,10 @@ class Input {
         this.press = InstallPress.call(this);
         this.swipe = InstallSwipe.call(this);
 
-        board.on('destroy', this.destroy, this);
+        board.on('destroy', this.onParentDestroy, this);
     }
 
-    destroy() {
+    destroy(fromScene) {
         var scene = this.board.scene;
         if (scene) {
             scene.input.off('pointerdown', OnPointerDown, this);
@@ -34,9 +34,13 @@ class Input {
             scene.input.off('pointermove', OnPointerMove, this);
         }
 
-        this.tap.destroy();
-        this.press.destroy();
-        this.swipe.destroy();
+        this.tap.destroy(fromScene);
+        this.press.destroy(fromScene);
+        this.swipe.destroy(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

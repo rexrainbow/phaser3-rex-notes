@@ -1,5 +1,4 @@
 import GetSceneObject from '../../../utils/system/GetSceneObject.js';
-import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 import RunCommands from '../../../runcommands.js';
 
 class StepRunner {
@@ -13,9 +12,10 @@ class StepRunner {
     }
 
     boot() {
-        var parentEE = GetEventEmitter(this.parent);
-        if (parentEE) {
-            parentEE.on('destroy', this.destroy, this);
+        if (this.parent === this.scene) {
+            this.scene.events.on('shutdown', this.destroy, this);
+        } else if (this.parent) {
+            this.parent.on('destroy', this.destroy, this);
         }
 
         this.scene.physics.world.on('worldstep', this.update, this);

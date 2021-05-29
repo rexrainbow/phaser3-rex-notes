@@ -37,18 +37,22 @@ class Drag {
         gameObject.on('dragstart', this.onDragStart, this);
         gameObject.on('drag', this.onDrag, this);
         gameObject.on('dragend', this.onDragEnd, this);
-        gameObject.on('destroy', this.destroy, this);
+        gameObject.on('destroy', this.onParentDestroy, this);
     }
 
-    shutdown() {
+    shutdown(fromScene) {
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject events will be removed when this gameObject destroyed 
     }
 
-    destroy() {
-        this.shutdown();
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     get enable() {

@@ -23,7 +23,7 @@ export default {
         }
 
         if (gameObject.on) {
-            gameObject.on('destroy', this.remove, this);
+            gameObject.on('destroy', this.onChildDestroy, this);
         }
         return this;
     },
@@ -42,7 +42,7 @@ export default {
         }
 
         if (gameObject.off) {
-            gameObject.off('destroy', this.remove, this);
+            gameObject.off('destroy', this.onChildDestroy, this);
         }
         return this;
     }
