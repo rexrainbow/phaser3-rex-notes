@@ -8,7 +8,7 @@ const TextType = 0;
 const TagTextType = 1;
 const BitmapTextType = 2;
 
-class TextPagePlugin {
+class TextPage {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
@@ -263,4 +263,4 @@ var transferText = function (text) {
 }
 
 
-export default TextPagePlugin;
+export default TextPage;
