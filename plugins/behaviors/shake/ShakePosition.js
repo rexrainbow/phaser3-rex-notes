@@ -1,4 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
+import TickTask from '../../utils/behaviorbase/TickTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

@@ -1,9 +1,9 @@
-import TweenBase from '../../utils/tween/TweenBase.js';
+import TweenTask from '../../utils/behaviorbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Fade extends TweenBase {
+class Fade extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject);
         // this.parent = gameObject;

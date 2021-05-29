@@ -1,4 +1,4 @@
-import TweenBase from '../../../utils/tween/TweenBase.js';
+import TweenTask from '../../../utils/behaviorbase/TweenTask.js';
 import FaceNameToIndex from './FaceNameToIndex.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -9,7 +9,7 @@ const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const Wrap = Phaser.Math.Wrap;
 
-class Roll extends TweenBase {
+class Roll extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: true });
         // this.parent = gameObject;

@@ -1,4 +1,4 @@
-import TweenBase from '../../../plugins/utils/tween/TweenBase.js';
+import TweenTask from '../../../plugins/utils/behaviorbase/TweenTask.js';
 
 var Start = function (duration) {
     if (duration !== undefined) {
@@ -6,7 +6,7 @@ var Start = function (duration) {
     }
 
     if (!this.tweenTask) {
-        this.tweenTask = new TweenBase(this);
+        this.tweenTask = new TweenTask(this);
     }
     this.setValue(0);
     this.tweenTask.start({
