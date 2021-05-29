@@ -8,6 +8,7 @@ class TextEdit extends BehaviorBase {
     constructor(gameObject) {
         // No event emitter
         super(gameObject, { eventEmitter: false });
+        // this.parent = gameObject;
 
         this.inputText = undefined;
         this.onClose = undefined;
@@ -15,6 +16,7 @@ class TextEdit extends BehaviorBase {
     }
 
     shutdown(fromScene) {
+        // Already shutdown
         if (!this.parent) {
             return;
         }

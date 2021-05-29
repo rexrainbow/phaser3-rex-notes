@@ -4,6 +4,7 @@ import RunCommands from '../../../runcommands.js';
 class StepRunner extends BehaviorBase {
     constructor(parent) {
         super(parent, { eventEmitter: false });
+        // this.parent = gameObject;
 
         this.commands = [];
         this.boot();
@@ -15,6 +16,7 @@ class StepRunner extends BehaviorBase {
     }
 
     shutdown(fromScene) {
+        // Already shutdown
         if (!this.parent) {
             return;
         }

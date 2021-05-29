@@ -6,6 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class TextTyping extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this.timer = null;
         this.resetFromJSON(config);
@@ -54,6 +55,7 @@ class TextTyping extends BehaviorBase {
     }
 
     shutdown(fromScene) {
+        // Already shutdown
         if (!this.parent) {
             return;
         }

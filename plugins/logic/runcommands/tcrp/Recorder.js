@@ -32,6 +32,7 @@ class Recorder extends BehaviorBase {
     }
 
     shutdown(fromScene) {
+        // Already shutdown
         if (!this.parent) {
             return;
         }

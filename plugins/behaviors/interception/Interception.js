@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import SpeedMonitor from '../../utils/speedmonitor/SpeedMonitor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -35,20 +35,13 @@ class Interception extends TickTask {
     }
 
     shutdown(fromScene) {
-        this.setTarget();
-        super.shutdown(fromScene);        
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
+        // Already shutdown
+        if (!this.parent) {
+            return;
         }
+
+        this.setTarget();
+        super.shutdown(fromScene);
     }
 
     setEnable(e) {

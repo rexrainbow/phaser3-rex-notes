@@ -6,6 +6,7 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 class TouchState extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         this.parent.setInteractive(GetValue(config, "inputConfig", undefined));
@@ -53,14 +54,6 @@ class TouchState extends BehaviorBase {
         
         this.pointer = undefined;
         super.shutdown(fromScene);
-    }
-
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
     }
 
     get enable() {

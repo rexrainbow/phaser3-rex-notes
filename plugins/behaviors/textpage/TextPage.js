@@ -15,6 +15,7 @@ class TextPage extends BehaviorBase {
         }
         config.eventEmitter = false; // No event emitter
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this.setTextObjectType();
 
@@ -48,6 +49,7 @@ class TextPage extends BehaviorBase {
     }
 
     shutdown(fromScene) {
+        // Already shutdown
         if (!this.parent) {
             return;
         }

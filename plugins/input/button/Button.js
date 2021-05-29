@@ -5,6 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Button extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));

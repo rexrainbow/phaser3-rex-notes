@@ -6,6 +6,7 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 class DragSpeed extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));

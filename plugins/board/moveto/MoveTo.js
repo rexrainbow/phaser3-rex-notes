@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import Methods from './Methods.js';
 import MoveToTask from '../../behaviors/moveto/MoveTo.js';
 import GetChessData from '../chess/GetChessData.js';
@@ -58,18 +58,6 @@ class MoveTo extends TickTask {
     shutdown(fromScene) {
         this.moveToTask.shutdown(fromScene);
         super.shutdown(fromScene);
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     set enable(value) {

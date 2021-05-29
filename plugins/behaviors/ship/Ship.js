@@ -1,6 +1,6 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
-import TickTask from '../../utils/behaviorbase/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import { SetAcceleration, SetAngularVelocity } from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,18 +32,6 @@ class Ship extends TickTask {
         return {
             tickingMode: this.tickingMode
         };
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     get enable() {

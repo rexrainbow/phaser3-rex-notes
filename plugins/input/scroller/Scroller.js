@@ -8,6 +8,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Scroller extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         var enable = GetValue(config, 'enable', true);
         var stateConfig = {
@@ -75,8 +76,8 @@ class Scroller extends BehaviorBase {
         }
 
         this.scene.events.off('update', this._state.update, this._state);
-        this._state.destroy();
-        this.dragState.destroy();
+        this._state.destroy(fromScene);
+        this.dragState.destroy(fromScene);
 
         super.shutdown(fromScene);
     }

@@ -12,6 +12,7 @@ class Drag extends BehaviorBase {
         }
         config.eventEmitter = false; // No event emitter
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));

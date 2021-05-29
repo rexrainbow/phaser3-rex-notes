@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
@@ -36,18 +36,6 @@ class RotateTo extends TickTask {
             dir: this.dir,
             tickingMode: this.tickingMode
         };
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     setEnable(e) {

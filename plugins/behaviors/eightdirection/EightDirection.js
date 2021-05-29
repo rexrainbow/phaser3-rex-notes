@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import {
     SetVelocity
 } from '../../utils/arcade/Helpers.js';
@@ -31,18 +31,6 @@ class EightDirection extends TickTask {
         return {
             tickingMode: this.tickingMode
         };
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     get enable() {
@@ -158,7 +146,6 @@ class EightDirection extends TickTask {
     }
 }
 
-/** @private */
 const DIRMODE = {
     'up&down': 0,
     'left&right': 1,

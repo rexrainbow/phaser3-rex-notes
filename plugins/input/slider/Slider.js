@@ -11,6 +11,7 @@ const Percent = Phaser.Math.Percent;
 class Slider extends BehaviorBase {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         this._value = undefined;

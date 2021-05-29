@@ -11,6 +11,7 @@ class PathFollower extends BehaviorBase {
         }
         config.eventEmitter = false; // No event emitter
         super(gameObject, config);
+        // this.parent = gameObject;
 
         this._t = 0;
         this.pathVector = undefined;
