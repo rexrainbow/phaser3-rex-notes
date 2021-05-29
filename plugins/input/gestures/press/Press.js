@@ -79,6 +79,9 @@ class Press extends OnePointerTracer {
     }
 
     preUpdate(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return;
+        }
         if (this.state === BEGIN) {
             var holdTime = time - this.pointer.downTime;
             if (holdTime >= this.holdTime) {

@@ -71,7 +71,7 @@ class LoopInTicks extends TickTask {
     }
 
     preupdate(time, delta) {
-        if (!this.callback) {
+        if ((!this.isRunning) || (!this.callback)) {
             return;
         }
 

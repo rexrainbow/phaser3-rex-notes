@@ -7,21 +7,16 @@ class BehaviorBase {
     constructor(parent, config) {
         this.parent = parent;  // gameObject or scene
         this.scene = GetSceneObject(parent);
-        this.isSceneParent = (this.parent === this.scene);
 
         // Event emitter, default is private event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', true));
 
         // Register callback of parent destroy event, also see `shutdown` method
-        if (this.isSceneParent) { // parent is a scene
+        if (this.parent === this.scene) { // parent is a scene
             this.scene.events.once('shutdown', this.onSceneDestroy, this);
         } else if (this.parent.once) { // bob object does not have event emitter
             this.parent.on('destroy', this.onParentDestroy, this);
         }
-    }
-
-    get gameObject() {
-        return (this.isSceneParent) ? null : this.parent;
     }
 
     shutdown(fromScene) {
@@ -30,7 +25,7 @@ class BehaviorBase {
             return;
         }
 
-        if (this.isSceneParent) { // parent is a scene instance
+        if (this.parent === this.scene) { // parent is a scene instance
             this.scene.events.off('shutdown', this.destroy, this);
         } else if (this.parent.once) { // bob object does not have event emitter
             this.parent.off('destroy', this.onParentDestroy, this);

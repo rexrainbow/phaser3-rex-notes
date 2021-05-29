@@ -84,6 +84,9 @@ class Swipe extends OnePointerTracer {
     }
 
     postUpdate(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return;
+        }
         // Clear RECOGNIZED after update()
         if (this.state === RECOGNIZED) {
             this.state = IDLE;
