@@ -28,7 +28,7 @@ class BehaviorBase {
 
         // parent might not be shutdown yet
         if (this.parent && (this.parent === this.scene)) { // parent is a scene
-            this.scene.events.off('shutdown', this.destroy, this);
+            this.scene.events.off('shutdown', this.onSceneDestroy, this);
         } else if (this.parent && this.parent.once) { // bob object does not have event emitter
             this.parent.off('destroy', this.onParentDestroy, this);
         }
