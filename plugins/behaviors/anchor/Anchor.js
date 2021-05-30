@@ -3,11 +3,8 @@ import GetViewport from '../../utils/system/GetViewport.js';
 
 class Anchor extends BehaviorBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.eventEmitter = false; // No event emitter
-        super(gameObject, config);
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
         // this.parent = gameObject;
 
         this.resetFromJSON(config);
@@ -71,11 +68,12 @@ class Anchor extends BehaviorBase {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 
         this.scene.scale.off('resize', this.anchor, this);
+
         super.shutdown(fromScene);
     }
 

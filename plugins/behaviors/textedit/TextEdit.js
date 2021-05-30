@@ -17,7 +17,7 @@ class TextEdit extends BehaviorBase {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 

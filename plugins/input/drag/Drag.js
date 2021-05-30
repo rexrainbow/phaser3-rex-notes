@@ -7,11 +7,8 @@ const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
 class Drag extends BehaviorBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.eventEmitter = false; // No event emitter
-        super(gameObject, config);
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
         // this.parent = gameObject;
 
         this._enable = undefined;
@@ -45,7 +42,7 @@ class Drag extends BehaviorBase {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 

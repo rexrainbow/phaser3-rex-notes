@@ -6,11 +6,8 @@ const AngleBetween = Phaser.Math.Angle.Between;
 
 class PathFollower extends BehaviorBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.eventEmitter = false; // No event emitter
-        super(gameObject, config);
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
         // this.parent = gameObject;
 
         this._t = 0;

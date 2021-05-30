@@ -36,11 +36,12 @@ class Interception extends TickTask {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 
         this.setTarget();
+
         super.shutdown(fromScene);
     }
 

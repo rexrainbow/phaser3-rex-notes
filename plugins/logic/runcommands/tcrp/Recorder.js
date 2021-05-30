@@ -6,11 +6,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Recorder extends BehaviorBase {
     constructor(parent, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.eventEmitter = false; // No event emitter
-        super(parent, config);
+        super(parent, { eventEmitter: false });
+        // No event emitter
 
         var clockClass = GetValue(config, 'clockClass', Clock);
         this.clock = new clockClass(parent);
@@ -33,7 +30,7 @@ class Recorder extends BehaviorBase {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 

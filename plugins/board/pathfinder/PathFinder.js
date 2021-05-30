@@ -1,3 +1,4 @@
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import GetChessData from '../chess/GetChessData.js';
 import Methods from './Methods.js';
 import CONST from './const.js';
@@ -7,17 +8,17 @@ import GetValue from '../../utils/object/GetValue.js';
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 
-class PathFinder {
+class PathFinder extends BehaviorBase {
     constructor(gameObject, config) {
         if (IsPlainObject(gameObject)) {
             config = gameObject;
             gameObject = undefined;
         }
+        super(gameObject, { eventEmitter: false });
 
         this.setChess(gameObject);
         this.nodeManager = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -37,45 +38,37 @@ class PathFinder {
         return this;
     }
 
-    boot() {
-        if (this.gameObject && this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.onParentDestroy, this);
-        }
-    }
 
     shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
         if (this.nodeManager !== undefined) {
             this.nodeManager.destroy();
         }
-        this.setChess();
-        return this;
-    }
+        this.chessData = undefined;
 
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-        return this;
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
+        super.shutdown(fromScene);
     }
 
     setChess(gameObject) {
         if (gameObject) {
-            if (this.gameObject !== gameObject) {
+            this.chessData = GetChessData(gameObject);
+            if (this.parent !== gameObject) {
                 // Remove attatched event from previous gameObject
-                if (this.gameObject && this.gameObject.once) {
-                    this.gameObject.off('destroy', this.onParentDestroy, this);
+                if (this.parent && this.parent.once) {
+                    this.parent.off('destroy', this.onParentDestroy, this);
                 }
-                this.gameObject = gameObject;
-                this.chessData = GetChessData(gameObject);
                 // Attach event
-                if (this.gameObject && this.gameObject.once) {
-                    this.gameObject.on('destroy', this.onParentDestroy, this);
+                this.parent = gameObject;
+                if (this.parent && this.parent.once) {
+                    this.parent.on('destroy', this.onParentDestroy, this);
                 }
             }
         } else {
-            this.gameObject = undefined;
+            this.parent = undefined;
             this.chessData = undefined;
         }
         return this;

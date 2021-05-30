@@ -1,3 +1,4 @@
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import Methods from './Methods.js';
 import GetChessData from '../chess/GetChessData.js';
 import CONST from './const.js';
@@ -6,9 +7,12 @@ import GetValue from '../../utils/object/GetValue.js';
 const BLOCKER = CONST.BLOCKER;
 const STOP = CONST.STOP;
 
-class Monopoly {
+class Monopoly extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
+        // this.parent = gameObject;
+
         this.chessData = GetChessData(gameObject);
         this.resetFromJSON(config);
     }
@@ -27,25 +31,15 @@ class Monopoly {
         return this;
     }
 
-    boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.onParentDestroy, this);
-        }
-    }
-
     shutdown(fromScene) {
-        this.gameObject = undefined;
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
         this.chessData = undefined;
-        return this;
-    }
 
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-        return this;
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
+        super.shutdown(fromScene);
     }
 
     setFace(direction) {

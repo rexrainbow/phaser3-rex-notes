@@ -49,7 +49,7 @@ class MoveTo extends TickTask {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 

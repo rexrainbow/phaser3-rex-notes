@@ -10,11 +10,8 @@ const BitmapTextType = 2;
 
 class TextPage extends BehaviorBase {
     constructor(gameObject, config) {
-        if (config === undefined) {
-            config = {};
-        }
-        config.eventEmitter = false; // No event emitter
-        super(gameObject, config);
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
         // this.parent = gameObject;
 
         this.setTextObjectType();
@@ -50,7 +47,7 @@ class TextPage extends BehaviorBase {
 
     shutdown(fromScene) {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 
