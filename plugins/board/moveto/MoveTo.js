@@ -1,4 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import Methods from './Methods.js';
 import MoveToTask from '../../behaviors/moveto/MoveTo.js';
 import GetChessData from '../chess/GetChessData.js';
@@ -7,8 +7,8 @@ import GetValue from '../../utils/object/GetValue.js';
 class MoveTo extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
-        this.gameObject = gameObject;
         this.chessData = GetChessData(gameObject);
         this.scene = gameObject.scene;
         this.moveToTask = new MoveToTask(gameObject, moveToTaskConfig);
@@ -55,30 +55,9 @@ class MoveTo extends TickTask {
         };
     }
 
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        this.moveToTask.shutdown();
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
+    shutdown(fromScene) {
+        this.moveToTask.shutdown(fromScene);
+        super.shutdown(fromScene);
     }
 
     set enable(value) {
@@ -186,19 +165,17 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    /** @private */
     moveAlongLine(startX, startY, endX, endY) {
         if (startX !== undefined) {
-            this.gameObject.x = startX;
+            this.parent.x = startX;
         }
         if (startY !== undefined) {
-            this.gameObject.y = startY;
+            this.parent.y = startY;
         }
         this.moveToTask.moveTo(endX, endY);
         return this;
     };
 
-    /** @private */
     addMoveLine(startX, startY, endX, endY) {
         if (!this.moveToTask.hasOwnProperty('nextlines')) {
             this.moveToTask.nextlines = [];
@@ -209,7 +186,6 @@ class MoveTo extends TickTask {
         return this;
     };
 
-    /** @private */
     moveNextLine() {
         var nextlines = this.moveToTask.nextlines;
         if (!nextlines) {
@@ -224,7 +200,6 @@ class MoveTo extends TickTask {
         return true;
     }
 
-    /** @private */
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;

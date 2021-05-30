@@ -1,25 +1,17 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextTyping {
+class TextTyping extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);        
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
-        
+        super(gameObject, config);
+        // this.parent = gameObject;
+
         this.timer = null;
         this.resetFromJSON(config);
-        this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setTypeMode(GetValue(o, 'typeMode', 0));
         this.setTypeSpeed(GetValue(o, 'speed', 333));
@@ -39,10 +31,6 @@ class TextTyping {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         var elapsed;
         var timer = this.getTimer();
@@ -66,25 +54,15 @@ class TextTyping {
         };
     }
 
-    boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
 
-        return this;
-    }
-
-    shutdown() {
-        this.destroyEventEmitter();
         this.freeTimer();
-        this.gameObject = undefined;
-        this.scene = undefined;
-        return this;
-    }
 
-    destroy() {
-        this.shutdown();
-        return this;
+        super.shutdown(fromScene);
     }
 
     setTypeMode(m) {
@@ -149,7 +127,7 @@ class TextTyping {
             this.typingIdx = this.textLen;
             this.setText(this.text);
             this.emit('type');
-            this.emit('complete', this, this.gameObject);
+            this.emit('complete', this, this.parent);
         }
 
         return this;
@@ -184,7 +162,7 @@ class TextTyping {
 
         if (this.isLastChar) {
             this.freeTimer();
-            this.emit('complete', this, this.gameObject);
+            this.emit('complete', this, this.parent);
         } else {
             this.timer.delay = this.speed; // delay of next typing            
             this.typingIdx++;
@@ -284,11 +262,11 @@ class TextTyping {
                 text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
             }
         }
-        this.gameObject.setText(text);
+        this.parent.setText(text);
     }
 
     getTextLength(text) {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var len;
         if (gameObject.getPlainText) {
             len = gameObject.getPlainText(text).length;
@@ -300,7 +278,7 @@ class TextTyping {
     }
 
     getSubString(text, startIdx, endIdx) {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var result;
         if (gameObject.getSubString) {
             result = gameObject.getSubString(text, startIdx, endIdx);
@@ -311,11 +289,6 @@ class TextTyping {
         return result;
     }
 }
-
-Object.assign(
-    TextTyping.prototype,
-    EventEmitterMethods
-);
 
 var transferText = function (text) {
     if (Array.isArray(text)) {

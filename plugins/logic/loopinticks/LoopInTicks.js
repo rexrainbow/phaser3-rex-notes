@@ -1,4 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
+import TickTask from '../../utils/behaviorbase/TickTask.js';
 import LoopIndexGenerator from '../loopindexgenerator/LoopIndexGenerator.js';
 import Clear from '../../utils/object/Clear.js';
 
@@ -8,7 +8,6 @@ class LoopInTicks extends TickTask {
     constructor(scene, config) {
         super(scene, config);
 
-        this.scene = scene;
         this.deltaPeriod = 1000 / scene.game.loop.targetFps;
         this.deltaPercentage = 1;
         this.loopIndexGenerator = new LoopIndexGenerator();
@@ -23,16 +22,6 @@ class LoopInTicks extends TickTask {
         this.loopIndexGenerator.reset();
         Clear(this.currentIndexes);
         return this;
-    }
-
-    boot() {
-        super.boot();
-        this.scene.events.once('shutdown', this.destroy, this);
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.scene = undefined;
     }
 
     startTicking() {
@@ -82,7 +71,7 @@ class LoopInTicks extends TickTask {
     }
 
     preupdate(time, delta) {
-        if (!this.callback) {
+        if ((!this.isRunning) || (!this.callback)) {
             return;
         }
 

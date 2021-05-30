@@ -1,14 +1,11 @@
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Button {
+class Button extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
@@ -27,23 +24,27 @@ class Button {
     }
 
     boot() {
-        this.gameObject.on('pointerdown', this.onPress, this);
-        this.gameObject.on('pointerup', this.onRelease, this);
-        this.gameObject.on('pointerout', this.onPointOut, this);
-        this.gameObject.on('pointermove', this.onMove, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        var gameObject = this.parent;
+        gameObject.on('pointerdown', this.onPress, this);
+        gameObject.on('pointerup', this.onRelease, this);
+        gameObject.on('pointerout', this.onPointOut, this);
+        gameObject.on('pointermove', this.onMove, this);
     }
 
-    shutdown() {
-        this.destroyEventEmitter();
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.on('pointerdown', this.onPress, this);
+        // this.parent.on('pointerup', this.onRelease, this);
+        // this.parent.on('pointerout', this.onPointOut, this);
+        // this.parent.on('pointermove', this.onMove, this);
         this.pointer = null;
-        this.gameObject = null;
-        this.scene = null;
-        // gameObject events will be removed when this gameObject destroyed 
-    }
 
-    destroy() {
-        this.shutdown();
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -61,7 +62,7 @@ class Button {
         this._enable = e;
 
         var eventName = (e) ? 'enable' : 'disable';
-        this.emit(eventName, this, this.gameObject);
+        this.emit(eventName, this, this.parent);
     }
 
     setEnable(e) {
@@ -145,7 +146,7 @@ class Button {
 
         if (nowTime === undefined) {
             // fires 'click' event manually
-            this.emit('click', this, this.gameObject, pointer, event);
+            this.emit('click', this, this.parent, pointer, event);
             return this;
         }
 
@@ -156,7 +157,7 @@ class Button {
             return this;
         }
         this.lastClickTime = nowTime;
-        this.emit('click', this, this.gameObject, pointer, event);
+        this.emit('click', this, this.parent, pointer, event);
         return this;
     }
 
@@ -165,11 +166,6 @@ class Button {
         return this;
     }
 }
-
-Object.assign(
-    Button.prototype,
-    EventEmitterMethods
-);
 
 const CLICKMODE = {
     press: 0,

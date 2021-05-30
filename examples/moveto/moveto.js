@@ -7,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var dot = this.add.circle(100, 100, 20, 0xffffff);
@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

@@ -115,6 +115,9 @@ class Tap extends OnePointerTracer {
     }
 
     preUpdate(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return;
+        }
         if (this.state === BEGIN) {
             var pointer = this.lastPointer;
             if (pointer.isDown) {
@@ -136,6 +139,9 @@ class Tap extends OnePointerTracer {
     }
 
     postUpdate(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return;
+        }
         // Clear RECOGNIZED after update()
         if (this.state === RECOGNIZED) {
             this.state = IDLE;

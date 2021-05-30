@@ -1,12 +1,12 @@
-import TweenBase from '../../utils/tween/TweenBase.js';
+import TweenTask from '../../utils/behaviorbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Scale extends TweenBase {
+class Scale extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject);
-        this.gameObject = gameObject;
+        // this.parent = gameObject;
 
         this.scaleStart = {};
         this.scaleEnd = {};
@@ -50,8 +50,8 @@ class Scale extends TweenBase {
             this.startX = start;
             this.startY = start;
         } else {
-            this.startX = GetAdvancedValue(start, 'x', this.gameObject.scaleX);
-            this.startY = GetAdvancedValue(start, 'y', this.gameObject.scaleY);
+            this.startX = GetAdvancedValue(start, 'x', this.parent.scaleX);
+            this.startY = GetAdvancedValue(start, 'y', this.parent.scaleY);
         }
         if (typeof (end) === 'number') {
             this.endX = end;
@@ -87,7 +87,7 @@ class Scale extends TweenBase {
         }
 
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
 
             delay: this.delay,
             duration: this.duration,
@@ -96,18 +96,18 @@ class Scale extends TweenBase {
             repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: function () {
                 if (this.mode === 1) {
-                    this.gameObject.destroy();
+                    this.parent.destroy();
                 }
             },
             onCompleteScope: this
         }
         // Set scale to start value now
         if ((this.startX !== undefined) && (this.endX !== undefined)) {
-            this.gameObject.scaleX = this.startX;
+            this.parent.scaleX = this.startX;
             config.scaleX = this.endX
         }
         if ((this.startY !== undefined) && (this.endY !== undefined)) {
-            this.gameObject.scaleY = this.startY;
+            this.parent.scaleY = this.startY;
             config.scaleY = this.endY;
         }
         super.start(config);

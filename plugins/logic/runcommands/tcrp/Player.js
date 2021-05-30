@@ -1,26 +1,20 @@
-import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
-import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../../utils/behaviorbase/BehaviorBase.js';
 import Clock from '../../../clock.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
-import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 import IsArray from '../../../utils/object/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Player {
+class Player extends BehaviorBase {
     constructor(parent, config) {
-        this.parent = parent;
-        this.scene = GetSceneObject(parent);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(parent, config);
 
         var clockClass = GetValue(config, 'clockClass', Clock);
         this.clock = new clockClass(parent, { eventEmitter: this.getEventEmitter() });
         this.clock.on('update', this.update, this);
 
         this.resetFromJSON(config); // this function had been called in super(config)
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -48,22 +42,16 @@ class Player {
         };
     }
 
-    boot() {
-        var parentEE = GetEventEmitter(this.parent);
-        if (parentEE) {
-            parentEE.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-    }
 
-    shutdown() {
-        this.clock.shutdown();
-        this.parent = undefined;
-        this.scene = undefined;
+        this.clock.shutdown(fromScene);
         this.commands = undefined;
-    }
 
-    destroy() {
-        this.shutdown();
+        super.shutdown(fromScene);
     }
 
     load(commands, scope, config) {
@@ -219,11 +207,6 @@ class Player {
         return this;
     }
 }
-
-Object.assign(
-    Player.prototype,
-    EventEmitterMethods
-);
 
 var CMD = []; // reuse this array
 

@@ -102,7 +102,7 @@ var MoveToTile = function (tileX, tileY, direction) {
             }
         }
     }
-    board.moveChess(this.gameObject, tileX, tileY, tileZ, false);
+    board.moveChess(this.parent, tileX, tileY, tileZ, false);
 
     this.isRunning = true;
     this.lastMoveResult = true;

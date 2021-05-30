@@ -1,16 +1,16 @@
-import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
+import BehaviorBase from './BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TickTask {
+class TickTask extends BehaviorBase {
     constructor(parent, config) {
-        this.parent = parent;
+        super(parent, config);
+
         this._isRunning = false;
         this.isPaused = false;
         this.tickingState = false;
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.setTickingMode(GetValue(config, 'tickingMode', 1));
+        // boot() later
     }
 
     // override
@@ -21,16 +21,16 @@ class TickTask {
     }
 
     // override
-    shutdown() {
-        this.destroyEventEmitter();
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
         if (this.tickingState) {
             this.stopTicking();
         }
-        this.parent = undefined;
-    }
-
-    destroy() {
-        this.shutdown();
+        super.shutdown(fromScene);
     }
 
     setTickingMode(mode) {
@@ -94,7 +94,7 @@ class TickTask {
 
     stop() {
         this.isPaused = false;
-        this.isRunning = false;        
+        this.isRunning = false;
         return this;
     }
 
@@ -104,11 +104,6 @@ class TickTask {
         this.emit('complete', this.parent, this);
     }
 }
-
-Object.assign(
-    TickTask.prototype,
-    EventEmitterMethods
-);
 
 const TICKINGMODE = {
     'no': 0,

@@ -1,15 +1,12 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class DragSpeed {
+class DragSpeed extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
@@ -35,29 +32,32 @@ class DragSpeed {
 
     boot() {
         // Drag start only when pointer down
-        this.gameObject.on('pointerdown', this.onPointIn, this); 
-        // this.gameObject.on('pointerover', this.onPointIn, this);
+        this.parent.on('pointerdown', this.onPointIn, this);
+        // this.parent.on('pointerover', this.onPointIn, this);
 
-        this.gameObject.on('pointerup', this.onPointOut, this);
-        this.gameObject.on('pointerout', this.onPointOut, this);
-        this.gameObject.on('pointermove', this.onPointerMove, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.parent.on('pointerup', this.onPointOut, this);
+        this.parent.on('pointerout', this.onPointOut, this);
+        this.parent.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('preupdate', this.preupdate, this);
     }
 
-    shutdown() {
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.preupdate, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-        this.pointer = undefined;
-        this.gameObject = undefined;
-        this.scene = undefined;
-        // GameObject events will be removed when this gameObject destroyed 
-        this.destroyEventEmitter();
-    }
 
-    destroy() {
-        this.shutdown();
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.off('pointerdown', this.onPointIn, this);
+        // this.parent.off('pointerup', this.onPointOut, this);
+        // this.parent.off('pointerout', this.onPointOut, this);
+        // this.parent.off('pointermove', this.onPointerMove, this);
+
+        this.scene.events.off('preupdate', this.preupdate, this);
+
+        this.pointer = undefined;
+
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -206,10 +206,5 @@ class DragSpeed {
         }
     }
 }
-
-Object.assign(
-    DragSpeed.prototype,
-    EventEmitterMethods
-);
 
 export default DragSpeed;

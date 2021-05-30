@@ -1,5 +1,5 @@
 import MoveToTask from '../../../behaviors/moveto/MoveTo.js';
-import TickTask from '../../../utils/ticktask/TickTask.js';
+import TickTask from '../../../utils/behaviorbase/SceneUpdateTickTask.js';
 
 import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';
@@ -11,10 +11,9 @@ import GetValue from '../../../utils/object/GetValue.js';
 class MoveTo extends TickTask {
     constructor(miniBoard, config) {
         super(miniBoard, config);
+        // this.parent = miniBoard;
 
-        this.miniBoard = miniBoard;
-        this.scene = miniBoard.scene;
-        this.moveToTask = new MoveToTask(miniBoard, moveToTaskConfig);
+        this.moveToTask = new MoveToTask(miniBoard, { tickingMode: 0 });
 
         this.resetFromJSON(config);
         this.boot();
@@ -48,30 +47,14 @@ class MoveTo extends TickTask {
         };
     }
 
-    boot() {
-        super.boot();
-        if (this.miniBoard.once) { // oops, bob object does not have event emitter
-            this.miniBoard.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-    }
 
-    shutdown() {
-        this.moveToTask.shutdown();
-        super.shutdown();
-        this.miniBoard = undefined;
-        this.scene = undefined;
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
+        this.moveToTask.shutdown(fromScene);
+        super.shutdown(fromScene);
     }
 
     set enable(value) {
@@ -126,19 +109,17 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    /** @private */
     moveAlongLine(startX, startY, endX, endY) {
         if (startX !== undefined) {
-            this.miniBoard.x = startX;
+            this.parent.x = startX;
         }
         if (startY !== undefined) {
-            this.miniBoard.y = startY;
+            this.parent.y = startY;
         }
         this.moveToTask.moveTo(endX, endY);
         return this;
     };
 
-    /** @private */
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
@@ -153,10 +134,6 @@ class MoveTo extends TickTask {
         return this;
     }
 }
-
-const moveToTaskConfig = {
-    tickingMode: 0
-};
 
 var methods = {
     canMoveTo: CanMoveToTile,

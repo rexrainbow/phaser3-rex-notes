@@ -98,6 +98,10 @@ export default {
         return this;
     },
 
+    onChildDestroy(child, fromScene) {
+        this.remove(child);
+    },
+
     removeFirst() {
         this.remove(undefined, 0);
         return this;

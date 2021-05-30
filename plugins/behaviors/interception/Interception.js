@@ -1,5 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import SpeedMonitor from '../../utils/speedmonitor/SpeedMonitor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -10,9 +9,8 @@ const AngleBetweenPoint = Phaser.Math.Angle.BetweenPoints;
 class Interception extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
+        // this.parent = gameObject;
 
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
         this._target = undefined;
         this.mySpeedMonitor = new SpeedMonitor();
         this.targetSpeedMonitor = new SpeedMonitor();
@@ -36,29 +34,15 @@ class Interception extends TickTask {
         };
     }
 
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-    }
 
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
+        this.setTarget();
 
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
+        super.shutdown(fromScene);
     }
 
     setEnable(e) {
@@ -83,12 +67,12 @@ class Interception extends TickTask {
         } else {
             // Remove previous target
             if (this.target) {
-                this.target.off('destroy', this.setTarget, this);
+                this.target.off('destroy', this.onTargetDestroy, this);
             }
 
             // Add new target
             if (target) {
-                target.on('destroy', this.setTarget, this);
+                target.on('destroy', this.onTargetDestroy, this);
             }
             this._target = target;
         }
@@ -100,7 +84,7 @@ class Interception extends TickTask {
         } else { // !this.isRunning
             if (this.target !== undefined) {
                 // Start speed monitor
-                this.mySpeedMonitor.init(this.gameObject.x, this.gameObject.y);
+                this.mySpeedMonitor.init(this.parent.x, this.parent.y);
                 this.targetSpeedMonitor.init(this.target.x, this.target.y);
                 super.start();
             }
@@ -110,6 +94,11 @@ class Interception extends TickTask {
 
     setTarget(target) {
         this.target = target;
+        return this;
+    }
+
+    onTargetDestroy(target, fromScene) {
+        this.setTarget();
         return this;
     }
 
@@ -125,8 +114,9 @@ class Interception extends TickTask {
             return this;
         }
 
+        var gameObject = this.parent;
         delta /= 1000; // delta in sec
-        this.mySpeedMonitor.update(this.gameObject.x, this.gameObject.y, delta);
+        this.mySpeedMonitor.update(gameObject.x, gameObject.y, delta);
         this.targetSpeedMonitor.update(this.target.x, this.target.y, delta);
 
         var relatedVelocityX = this.targetSpeedMonitor.velocity.x - this.mySpeedMonitor.velocity.x;
@@ -136,7 +126,7 @@ class Interception extends TickTask {
             this.predictedPosition.copy(this.target);
         } else {
             var relatedSpeed = Distance(0, 0, relatedVelocityX, relatedVelocityY);
-            var distanceToTarget = Distance(this.target.x, this.target.y, this.gameObject.x, this.gameObject.y);
+            var distanceToTarget = Distance(this.target.x, this.target.y, gameObject.x, gameObject.y);
             var time = distanceToTarget / relatedSpeed;
             this.predictedPosition.set(
                 this.target.x + (this.targetSpeedMonitor.velocity.x * time),
@@ -147,7 +137,7 @@ class Interception extends TickTask {
     }
 
     get predictedAngle() {
-        return AngleBetweenPoint(this.gameObject, this.predictedPosition);
+        return AngleBetweenPoint(this.parent, this.predictedPosition);
     }
 }
 

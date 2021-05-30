@@ -16,7 +16,7 @@ class Timeline extends Clock {
 
     shutdown() {
         // Already shutdown
-        if (!this.parent) {
+        if (this.isShutdown) {
             return;
         }
 

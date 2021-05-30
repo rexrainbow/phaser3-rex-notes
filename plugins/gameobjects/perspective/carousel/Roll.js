@@ -1,4 +1,4 @@
-import TweenBase from '../../../utils/tween/TweenBase.js';
+import TweenTask from '../../../utils/behaviorbase/TweenTask.js';
 import FaceNameToIndex from './FaceNameToIndex.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -9,10 +9,10 @@ const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const Wrap = Phaser.Math.Wrap;
 
-class Roll extends TweenBase {
+class Roll extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: true });
-        this.gameObject = gameObject;
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
     }
@@ -21,12 +21,6 @@ class Roll extends TweenBase {
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Cubic'));
-        return this;
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
         return this;
     }
 
@@ -54,7 +48,7 @@ class Roll extends TweenBase {
         }
 
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
             rotationY: `+=${deltaRotation}`,
             delay: this.delay,
             duration: this.duration,
@@ -71,7 +65,7 @@ class Roll extends TweenBase {
             return this;
         }
 
-        var carousel = this.gameObject;
+        var carousel = this.parent;
 
         if (typeof (index) === 'string') {
             index = FaceNameToIndex(carousel.faces, index);
@@ -95,19 +89,19 @@ class Roll extends TweenBase {
     }
 
     toNext(duration) {
-        var index = this.gameObject.currentFaceIndex + 1;
+        var index = this.parent.currentFaceIndex + 1;
         this.to(index, duration);
         return this;
     }
 
     toPrevious(duration) {
-        var index = this.gameObject.currentFaceIndex - 1;
+        var index = this.parent.currentFaceIndex - 1;
         this.to(index, duration);
         return this;
     }
 
     toRight(duration) {
-        if (!this.gameObject.rtl) {
+        if (!this.parent.rtl) {
             this.toNext(duration);
         } else {
             this.toPrevious(duration);
@@ -116,7 +110,7 @@ class Roll extends TweenBase {
     }
 
     toLeft(duration) {
-        if (!this.gameObject.rtl) {
+        if (!this.parent.rtl) {
             this.toPrevious(duration);
         } else {
             this.toNext(duration);

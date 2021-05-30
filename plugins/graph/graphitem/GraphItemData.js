@@ -14,11 +14,11 @@ class GraphItemData {
     boot() {
         var type = typeof (this.parent);
         if ((type !== 'number') && (type !== 'string') && this.parent.once) {
-            this.parent.on('destroy', this.destroy, this);
+            this.parent.on('destroy', this.onParentDestroy, this);
         }
     }
 
-    destroy() {
+    shutdown(fromScene) {
         if (this.graph) {
             this.graph.remove(this[uidKey]);
         }
@@ -26,6 +26,14 @@ class GraphItemData {
 
         this.parent = undefined;
         this.setGraph(null);
+    }
+
+    destroy(fromScene) {
+        this.shutdown(fromScene);
+    }
+
+    onParentDestroy(parent, fromScene) {
+        this.destroy(fromScene);
     }
 
     setGraph(graph) {

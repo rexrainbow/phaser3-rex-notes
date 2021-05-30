@@ -1,14 +1,14 @@
-import TweenBase from '../../utils/tween/TweenBase.js';
+import TweenTask from '../../utils/behaviorbase/TweenTask.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Fade extends TweenBase {
+class Fade extends TweenTask {
     constructor(scene, sound, config) {
         sound.scene = scene;
-        super(sound);
-        this.sound = sound;
+        super(sound);  
+        // this.parent = sound
 
         this.volume = {};
         this.resetFromJSON(config);
@@ -17,7 +17,7 @@ class Fade extends TweenBase {
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
         this.setVolumeRange(
-            GetAdvancedValue(o, 'volume.start', this.sound.volume),
+            GetAdvancedValue(o, 'volume.start', this.parent.volume),
             GetAdvancedValue(o, 'volume.end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
@@ -32,16 +32,6 @@ class Fade extends TweenBase {
             delay: this.delay,
             duration: this.duration
         };
-    }
-
-    shutdown() {
-        // Already shutdown
-        if (!this.sound) {
-            return this;
-        }
-        this.sound.off('destroy', this.destroy, this);
-        this.sound = undefined;
-        super.shutdown();
     }
 
     setMode(m) {
@@ -75,9 +65,9 @@ class Fade extends TweenBase {
 
         var v0 = this.volume.start;
         var v1 = this.volume.end;
-        this.sound.setVolume(v0);
+        this.parent.setVolume(v0);
         var config = {
-            targets: this.sound,
+            targets: this.parent,
             volume: {
                 start: v0,
                 from: v0,
@@ -90,10 +80,10 @@ class Fade extends TweenBase {
             onComplete: function () {
                 switch (this.mode) {
                     case 1:
-                        this.sound.stop();
+                        this.parent.stop();
                         break;
                     case 2:
-                        this.sound.destroy();
+                        this.parent.destroy();
                         break;
                 }
             },

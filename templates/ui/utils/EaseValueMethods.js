@@ -1,4 +1,4 @@
-import TweenTask from '../../../plugins/utils/tween/TweenBase.js';
+import TweenTask from '../../../plugins/utils/behaviorbase/TweenTask.js';
 
 var SetEaseValueDuration = function (duration) {
     this.easeValueDuration = duration;

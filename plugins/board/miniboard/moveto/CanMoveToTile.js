@@ -1,5 +1,5 @@
 var CanMoveToTile = function (tileX, tileY, direction) {
-    var miniBoard = this.miniBoard;
+    var miniBoard = this.parent;
     var mainBoard = miniBoard.mainBoard;
     // Not on a mainBoard
     if (mainBoard == null) {

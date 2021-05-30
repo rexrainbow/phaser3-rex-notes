@@ -1,39 +1,32 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import CreateInputTextFromText from './CreateInputText.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextEdit {
+class TextEdit extends BehaviorBase {
     constructor(gameObject) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        // No event emitter
+        super(gameObject, { eventEmitter: false });
+        // this.parent = gameObject;
 
         this.inputText = undefined;
         this.onClose = undefined;
         this.delayCall = undefined;
-        this.boot();
     }
 
-    boot() {
-        this.gameObject.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
 
-        return this;
-    }
-
-    shutdown() {
         this.close();
-        this.gameObject = undefined;
-        this.scene = undefined;
         if (globLastOpenedEditor === this) {
             globLastOpenedEditor = undefined;
         }
-        return this;
-    }
 
-    destroy() {
-        this.shutdown();
-        return this;
+        super.shutdown(fromScene);
     }
 
     open(config, onCloseCallback) {
@@ -53,17 +46,17 @@ class TextEdit {
         var onOpenCallback = GetValue(config, 'onOpen', undefined);
         var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
 
-        this.inputText = CreateInputTextFromText(this.gameObject, config)
+        this.inputText = CreateInputTextFromText(this.parent, config)
             .on('textchange', function (inputText) {
                 var text = inputText.text;
                 if (customOnTextChanged) { // Custom on-text-changed callback
-                    customOnTextChanged(this.gameObject, text);
+                    customOnTextChanged(this.parent, text);
                 } else { // Default on-text-changed callback
-                    this.gameObject.text = text;
+                    this.parent.text = text;
                 }
             }, this)
             .setFocus();
-        this.gameObject.setVisible(false); // Set parent text invisible
+            this.parent.setVisible(false); // Set parent text invisible
 
         // Attach close event
         this.onClose = onCloseCallback;
@@ -76,7 +69,7 @@ class TextEdit {
 
             // Open editor completly, invoke onOpenCallback
             if (onOpenCallback) {
-                onOpenCallback(this.gameObject)
+                onOpenCallback(this.parent)
             }
 
         }, [], this);
@@ -92,7 +85,7 @@ class TextEdit {
             return this;
         }
 
-        this.gameObject.setVisible(true); // Set parent text visible
+        this.parent.setVisible(true); // Set parent text visible
 
         this.inputText.destroy();
         this.inputText = undefined;
@@ -106,7 +99,7 @@ class TextEdit {
         this.scene.input.off('pointerdown', this.close, this);
 
         if (this.onClose) {
-            this.onClose(this.gameObject);
+            this.onClose(this.parent);
         }
         return this;
     }
@@ -116,7 +109,7 @@ class TextEdit {
     }
 
     get text() {
-        return (this.isOpened) ? this.inputText.text : this.gameObject.text;
+        return (this.isOpened) ? this.inputText.text : this.parent.text;
     }
 }
 

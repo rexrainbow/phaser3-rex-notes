@@ -1,7 +1,9 @@
 import IsSceneObject from './IsSceneObject.js';
 
 var GetSceneObject = function (object) {
-    if (IsSceneObject(object)) { // object = scene
+    if ((object == null) || (typeof (object) !== 'object')) {
+        return null;
+    } else if (IsSceneObject(object)) { // object = scene
         return object;
     } else if (object.scene && IsSceneObject(object.scene)) { // object = game object
         return object.scene;

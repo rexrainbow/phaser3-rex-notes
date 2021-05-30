@@ -1,18 +1,15 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class TouchState {
+class TouchState extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
-        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+        this.parent.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -32,29 +29,31 @@ class TouchState {
     }
 
     boot() {
-        this.gameObject.on('pointerdown', this.onPointIn, this);
-        this.gameObject.on('pointerover', this.onPointIn, this);
-        this.gameObject.on('pointerup', this.onPointOut, this);
-        this.gameObject.on('pointerout', this.onPointOut, this);
-        this.gameObject.on('pointermove', this.onPointerMove, this);
+        var gameObject = this.parent;
+        gameObject.on('pointerdown', this.onPointIn, this);
+        gameObject.on('pointerover', this.onPointIn, this);
+        gameObject.on('pointerup', this.onPointOut, this);
+        gameObject.on('pointerout', this.onPointOut, this);
+        gameObject.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('postupdate', this.postupdate, this);
-
-        this.gameObject.on('destroy', this.destroy, this);
     }
 
-    shutdown() {
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('postupdate', this.postupdate, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-        this.destroyEventEmitter();
-        this.pointer = undefined;
-        this.gameObject = undefined;
-        this.scene = undefined;
-        // gameObject events will be removed when this gameObject destroyed 
-    }
 
-    destroy() {
-        this.shutdown();
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.off('pointerdown', this.onPointIn, this);
+        // this.parent.off('pointerover', this.onPointIn, this);
+        // this.parent.off('pointerup', this.onPointOut, this);
+        // this.parent.off('pointerout', this.onPointOut, this);
+        // this.parent.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('postupdate', this.postupdate, this);
+        
+        this.pointer = undefined;
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -176,10 +175,5 @@ class TouchState {
     }
 
 }
-
-Object.assign(
-    TouchState.prototype,
-    EventEmitterMethods
-);
 
 export default TouchState;

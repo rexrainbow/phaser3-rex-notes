@@ -1,12 +1,12 @@
-import TweenBase from '../../utils/tween/TweenBase.js';
+import TweenTask from '../../utils/behaviorbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class EaseMove extends TweenBase {
+class EaseMove extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject);
-        this.gameObject = gameObject;
+        // this.parent = gameObject
 
         this.resetFromJSON(config);
     }
@@ -52,8 +52,8 @@ class EaseMove extends TweenBase {
         if ((typeof (x) === 'number') || (typeof (y) === 'number')) {
             // endX, endY
             // x,y : a number, or undefined
-            this.startX = this.gameObject.x;
-            this.startY = this.gameObject.y;
+            this.startX = this.parent.x;
+            this.startY = this.parent.y;
             this.endX = x;
             this.endY = y;
         } else {
@@ -90,7 +90,7 @@ class EaseMove extends TweenBase {
         }
 
         var config = {
-            targets: this.gameObject,
+            targets: this.parent,
             delay: this.delay,
             duration: this.duration,
             ease: this.ease,
@@ -98,18 +98,18 @@ class EaseMove extends TweenBase {
             repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: function () {
                 if (this.mode === 1) {
-                    this.gameObject.destroy();
+                    this.parent.destroy();
                 }
             },
             onCompleteScope: this
         };
         // Set position to start value now
         if ((this.startX !== undefined) && (this.endX !== undefined)) {
-            this.gameObject.setX(this.startX);
+            this.parent.setX(this.startX);
             config.x = this.endX;
         }
         if ((this.startY !== undefined) && (this.endY !== undefined)) {
-            this.gameObject.setY(this.startY);
+            this.parent.setY(this.startY);
             config.y = this.endY;
         }
         super.start(config);

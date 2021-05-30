@@ -33,7 +33,7 @@ class Base extends Zone {
         AddItem(this.children, gameObjects, 0,
             // Callback of item added
             function (gameObject) {
-                gameObject.on('destroy', OnChildDestroy, parent);
+                gameObject.on('destroy', parent.onChildDestroy, parent);
             }, this);
         return this;
     }
@@ -43,7 +43,7 @@ class Base extends Zone {
         RemoveItem(this.children, gameObjects,
             // Callback of item removed
             function (gameObject) {
-                gameObject.off('destroy', OnChildDestroy, parent);
+                gameObject.off('destroy', parent.onChildDestroy, parent);
                 if (destroyChild) {
                     gameObject.destroy();
                 }
@@ -52,12 +52,16 @@ class Base extends Zone {
         return this;
     }
 
+    onChildDestroy(child, fromScene) {
+        this.remove(child, !fromScene);
+    }
+
     clear(destroyChild) {
         var parent = this;
         var gameObject;
         for (var i = 0, cnt = this.children.length; i < cnt; i++) {
             gameObject = this.children[i];
-            gameObject.off('destroy', OnChildDestroy, parent);
+            gameObject.off('destroy', parent.onChildDestroy, parent);
             if (destroyChild) {
                 gameObject.destroy();
             }
@@ -65,10 +69,6 @@ class Base extends Zone {
         this.children.length = 0;
         return this;
     }
-}
-
-var OnChildDestroy = function (child, destroyFromScene) {
-    this.remove(child, !destroyFromScene);
 }
 
 const Components = Phaser.GameObjects.Components;

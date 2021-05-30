@@ -1,5 +1,4 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
@@ -9,12 +8,10 @@ const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
 
-class Slider {
+class Slider extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(gameObject, config);
+        // this.parent = gameObject;
 
         this._enable = undefined;
         this._value = undefined;
@@ -34,7 +31,7 @@ class Slider {
             this.on('valuechange', callback, scope);
         }
 
-        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+        this.parent.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -58,19 +55,19 @@ class Slider {
     }
 
     boot() {
-        this.gameObject.on('drag', this.onDragging, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.parent.on('drag', this.onDragging, this);
     }
 
-    shutdown() {
-        this.destroyEventEmitter();
-        this.gameObject = undefined;
-        this.scene = undefined;
-        // gameObject event 'drag' will be removed when this gameObject destroyed 
-    }
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
 
-    destroy() {
-        this.shutdown();
+        // GameObject events will be removed when this gameObject destroyed 
+        // this.parent.off('drag', this.onDragging, this);
+
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -83,7 +80,7 @@ class Slider {
         }
 
         this._enable = e;
-        this.scene.input.setDraggable(this.gameObject, e);
+        this.scene.input.setDraggable(this.parent, e);
         return this;
     }
 
@@ -161,7 +158,7 @@ class Slider {
     }
 
     get isDragging() {
-        return (this.gameObject.input.dragState > 0);
+        return (this.parent.input.dragState > 0);
     }
 
     onDragging(pointer, dragX, dragY) {
@@ -176,39 +173,31 @@ class Slider {
             var max = Math.max(endPoints[0].y, endPoints[1].y);
             newValue = Percent(dragY, min, max);
         } else {
-            var gameObject = this.gameObject;
+            var gameObject = this.parent;
             var dist;
-            P1.x = dragX;
-            P1.y = dragY;
+            var p1 = { x: dragX, y: dragY };
 
-            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
-            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, -this.axisRotation, dist);
-            P1.y = gameObject.y;
-            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
-            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, this.axisRotation, dist);
+            dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
+            p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, -this.axisRotation, dist);
+            p1.y = gameObject.y;
+            dist = DistanceBetween(p1.x, p1.y, gameObject.x, gameObject.y);
+            p1 = RotateAroundDistance(p1, gameObject.x, gameObject.y, this.axisRotation, dist);
 
             var min = Math.min(endPoints[0].x, endPoints[1].x);
             var max = Math.max(endPoints[0].x, endPoints[1].x);
-            newValue = Percent(P1.x, min, max);
+            newValue = Percent(p1.x, min, max);
         }
 
         this.value = newValue;
     }
 
     updatePos() {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var points = this.endPoints;
         gameObject.x = Linear(points[0].x, points[1].x, this._value);
         gameObject.y = Linear(points[0].y, points[1].y, this._value);
         return this;
     }
 }
-
-var P1 = {}; // reuse this point object
-
-Object.assign(
-    Slider.prototype,
-    EventEmitterMethods
-);
 
 export default Slider;

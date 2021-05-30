@@ -1,33 +1,33 @@
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import ChessBank from './ChessBank.js';
 import GetTileDirection from './GetTileDirection.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 const uidKey = ChessBank.uidKey;
 
-class Chess {
+class Chess extends BehaviorBase {
     constructor(parent, uid) {
-        this.parent = parent;
+        super(parent, { eventEmitter: false });
+
         ChessBank.add(this, uid); // uid is stored in `this.$uid`
         this.board = null;
         this.blocker = false;
-        this.boot();
     }
 
-    boot() {
-        var type = typeof (this.parent);
-        if ((type !== 'number') && (type !== 'string') && this.parent.on) {
-            this.parent.on('destroy', this.destroy, this);
+
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-    }
 
-    destroy() {
         if (this.board) {
             this.board.removeChess(this[uidKey]);
         }
         ChessBank.remove(this[uidKey]);
-
-        this.parent = undefined;
         this.board = null;
+
+        super.shutdown(fromScene);
     }
 
     setBoard(board) {
@@ -98,4 +98,5 @@ Object.assign(
     Chess.prototype,
     methods
 );
+
 export default Chess;

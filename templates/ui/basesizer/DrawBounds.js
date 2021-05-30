@@ -27,8 +27,8 @@ var DrawBounds = function (graphics, config) {
 
     if (createTextCallback && !graphics.children) {
         graphics.children = new Group(scene);
-        graphics.on('destroy', function () {
-            graphics.children.destroy(true);
+        graphics.on('destroy', function (graphics, fromScene) {
+            graphics.children.destroy(!fromScene);
             graphics.children = undefined;
         })
         var graphicsClear = graphics.clear.bind(graphics);

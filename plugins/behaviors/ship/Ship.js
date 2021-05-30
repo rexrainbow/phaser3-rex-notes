@@ -1,27 +1,22 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
-import TickTask from '../../utils/ticktask/TickTask.js';
-import {
-    SetAcceleration,
-    SetAngularVelocity
-} from '../../utils/arcade/Helpers.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
+import { SetAcceleration, SetAngularVelocity } from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Ship extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
-
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
+        // this.parent = gameObject;
 
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        if (!this.gameObject.body) {
-            this.scene.physics.add.existing(this.gameObject, false);
+        if (!this.parent.body) {
+            this.scene.physics.add.existing(this.parent, false);
         }
         this.setEnable(GetValue(o, 'enable', true));
         this.setMaxSpeed(GetValue(o, 'maxSpeed', 200));
@@ -39,31 +34,6 @@ class Ship extends TickTask {
         };
     }
 
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
-    }
-
     get enable() {
         return this.isRunning;
     }
@@ -71,8 +41,8 @@ class Ship extends TickTask {
     set enable(value) {
         this.isRunning = value;
         if (!value) {
-            SetAcceleration(this.gameObject, 0, 0);
-            SetAngularVelocity(this.gameObject, 0);
+            SetAcceleration(this.parent, 0, 0);
+            SetAngularVelocity(this.parent, 0);
         }
     }
 
@@ -85,7 +55,7 @@ class Ship extends TickTask {
     }
 
     setMaxSpeed(speed) {
-        var body = this.gameObject.body;
+        var body = this.parent.body;
         body.setMaxSpeed(speed);
         return this;
     }
@@ -96,7 +66,7 @@ class Ship extends TickTask {
     }
 
     setDrag(drag) {
-        var body = this.gameObject.body;
+        var body = this.parent.body;
         body.setDrag(drag);
         this.drag = drag;
 
@@ -140,28 +110,29 @@ class Ship extends TickTask {
     }
 
     update(time, delta) {
+        var gameObject = this.parent;
         if (!this.enable) {
-            SetAcceleration(this.gameObject, 0, 0);
-            SetAngularVelocity(this.gameObject, 0);
+            SetAcceleration(gameObject, 0, 0);
+            SetAngularVelocity(gameObject, 0);
             return this;
         }
 
         // speed up
         if (this.isUp) {
-            var rotation = this.gameObject.rotation;
+            var rotation = gameObject.rotation;
             var ax = Math.cos(rotation) * this.acceleration;
             var ay = Math.sin(rotation) * this.acceleration;
-            SetAcceleration(this.gameObject, ax, ay);
+            SetAcceleration(gameObject, ax, ay);
         } else {
-            SetAcceleration(this.gameObject, 0, 0);
+            SetAcceleration(gameObject, 0, 0);
         }
 
         // turn left/right
         var dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
-        SetAngularVelocity(this.gameObject, this.angularVelocity * dx);
+        SetAngularVelocity(gameObject, this.angularVelocity * dx);
 
         if (this.wrap) {
-            this.gameObject.body.world.wrap(this.gameObject, this.padding);
+            gameObject.body.world.wrap(gameObject, this.padding);
         }
     }
 }

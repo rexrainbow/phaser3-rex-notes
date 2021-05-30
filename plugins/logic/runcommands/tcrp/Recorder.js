@@ -1,20 +1,18 @@
-import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import BehaviorBase from '../../../utils/behaviorbase/BehaviorBase.js';
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
-import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Recorder {
+class Recorder extends BehaviorBase {
     constructor(parent, config) {
-        this.parent = parent;
-        this.scene = GetSceneObject(parent);
+        super(parent, { eventEmitter: false });
+        // No event emitter
 
         var clockClass = GetValue(config, 'clockClass', Clock);
         this.clock = new clockClass(parent);
 
         this.resetFromJSON(config); // This function had been called in super(config)
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -30,22 +28,16 @@ class Recorder {
         };
     }
 
-    boot() {
-        var parentEE = GetEventEmitter(this.parent);
-        if (parentEE) {
-            parentEE.on('destroy', this.destroy, this);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-    }
 
-    shutdown() {
-        this.clock.shutdown();
-        this.parent = undefined;
-        this.scene = undefined;
         this.commands = undefined;
-    }
+        this.clock.shutdown(fromScene);
 
-    destroy() {
-        this.shutdown();
+        super.shutdown(fromScene);
     }
 
     start(startAt) {

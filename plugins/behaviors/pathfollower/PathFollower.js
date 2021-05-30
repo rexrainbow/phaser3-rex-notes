@@ -1,18 +1,18 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import DegToRad from '../../utils/math/DegToRad.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
-class PathFollower {
+class PathFollower extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
+        // this.parent = gameObject;
 
         this._t = 0;
         this.pathVector = undefined;
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -38,21 +38,6 @@ class PathFollower {
             rotateToPath: this.rotateToPath,
             rotationOffset: this.rotationOffset
         };
-    }
-
-    boot() {
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
-
-    destroy() {
-        this.shutdown();
     }
 
     setPath(path) {
@@ -85,7 +70,7 @@ class PathFollower {
             return;
         }
 
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         var curX = gameObject.x,
             curY = gameObject.y;
         this.pathVector = this.path.getPoint(this.t, this.pathVector);

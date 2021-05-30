@@ -1,9 +1,12 @@
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 
-class Anchor {
+class Anchor extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
+        super(gameObject, { eventEmitter: false });
+        // No event emitter
+        // this.parent = gameObject;
+
         this.resetFromJSON(config);
         this.boot();
     }
@@ -60,19 +63,18 @@ class Anchor {
 
     boot() {
         this.scene.scale.on('resize', this.anchor, this);
-        this.gameObject.on('destroy', this.destroy, this);
-
         this.anchor();
     }
 
-    shutdown() {
-        this.scene.scale.off('resize', this.anchor, this);
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
 
-    destroy() {
-        this.shutdown();
+        this.scene.scale.off('resize', this.anchor, this);
+
+        super.shutdown(fromScene);
     }
 
     setAlign(x, y) {
@@ -100,7 +102,7 @@ class Anchor {
     }
 
     updatePosition() {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
 
         if (this.alignX === null) {
             gameObject.x = this.anchorX;
@@ -109,7 +111,7 @@ class Anchor {
         }
 
         if (this.alignY === null) {
-            this.gameObject.y = this.anchorY;
+            gameObject.y = this.anchorY;
         } else if (this.alignY !== undefined) {
             gameObject.y = this.anchorY + (gameObject.displayHeight * (gameObject.originY - this.alignY));
         }

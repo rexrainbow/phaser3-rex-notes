@@ -1,17 +1,14 @@
-import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
 import State from './State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Scroller {
+class Scroller extends BehaviorBase {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
-        // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        super(gameObject, config);
+        // this.parent = gameObject;
 
         var enable = GetValue(config, 'enable', true);
         var stateConfig = {
@@ -70,23 +67,19 @@ class Scroller {
 
     boot() {
         this.scene.events.on('update', this._state.update, this._state);
-        this.gameObject.on('destroy', this.destroy, this);
     }
 
-    shutdown() {
-        this.destroyEventEmitter();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this._state.update, this._state);
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
         }
-        this.gameObject = undefined;
-        this.scene = undefined;
-        this._state.destroy();
-        this.dragState.destroy();
-        // gameObject events will be removed when this gameObject destroyed 
-    }
 
-    destroy() {
-        this.shutdown();
+        this.scene.events.off('update', this._state.update, this._state);
+        this._state.destroy(fromScene);
+        this.dragState.destroy(fromScene);
+
+        super.shutdown(fromScene);
     }
 
     get enable() {
@@ -317,12 +310,6 @@ class Scroller {
 
 }
 
-Object.assign(
-    Scroller.prototype,
-    EventEmitterMethods
-);
-
-/** @private */
 const ORIENTATIONMODE = {
     y: 0,
     v: 0,

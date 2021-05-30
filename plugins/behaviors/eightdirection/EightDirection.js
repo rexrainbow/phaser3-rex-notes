@@ -1,4 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
+import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
 import {
     SetVelocity
 } from '../../utils/arcade/Helpers.js';
@@ -9,17 +9,15 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class EightDirection extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
-
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
+        // this.parent = gameObject;
         
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        if (!this.gameObject.body) {
-            this.scene.physics.add.existing(this.gameObject, false);
+        if (!this.parent.body) {
+            this.scene.physics.add.existing(this.parent, false);
         }
         this.setEnable(GetValue(o, 'enable', true));
         this.setDirMode(GetValue(o, 'dir', '8dir'));
@@ -33,31 +31,6 @@ class EightDirection extends TickTask {
         return {
             tickingMode: this.tickingMode
         };
-    }
-
-    boot() {
-        super.boot();
-        if (this.gameObject.once) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
-    }
-
-    shutdown() {
-        super.shutdown();
-        this.gameObject = undefined;
-        this.scene = undefined;
-    }
-
-    startTicking() {
-        super.startTicking();
-        this.scene.events.on('update', this.update, this);
-    }
-
-    stopTicking() {
-        super.stopTicking();
-        if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('update', this.update, this);
-        }
     }
 
     get enable() {
@@ -77,7 +50,7 @@ class EightDirection extends TickTask {
         }
         this.enable = e;
         if (e && (this.body === undefined)) {
-            this.scene.physics.add.existing(this.gameObject, false);
+            this.scene.physics.add.existing(this.parent, false);
         }
         return this;
     }
@@ -126,14 +99,15 @@ class EightDirection extends TickTask {
 
     update(time, delta) {
         if (!this.enable) {
-            SetVelocity(this.gameObject, 0, 0);
+            SetVelocity(this.parent, 0, 0);
             return this;
         }
 
+        var gameObject = this.parent;
         var dy = ((this.isUp) ? -1 : 0) + ((this.isDown) ? 1 : 0),
             dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
         if ((dx === 0) && (dy === 0)) {
-            SetVelocity(this.gameObject, 0, 0);
+            SetVelocity(gameObject, 0, 0);
             return this;
         }
         switch (this.dirMode) {
@@ -164,15 +138,14 @@ class EightDirection extends TickTask {
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }
-        SetVelocity(this.gameObject, vx, vy);
+        SetVelocity(gameObject, vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
-            this.gameObject.rotation = rotation;
+            gameObject.rotation = rotation;
         }
         return this;
     }
 }
 
-/** @private */
 const DIRMODE = {
     'up&down': 0,
     'left&right': 1,
