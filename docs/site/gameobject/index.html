@@ -6010,10 +6010,13 @@
 </code></pre></div></li>
 <li>Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.</li>
 <li>Event
-    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">fromScene</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>fromScene</code> : <code>true</code> if game object is destroyed during scene is shutdown. When scene is shutdown, all game objects will be destroyed.</li>
+</ul>
+</li>
 </ul>
 <h3 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h3>
 <ul>

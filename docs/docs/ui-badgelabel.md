@@ -114,7 +114,7 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `background` : [Game object of background](uiBasesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
+- `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
 - `main` : Game object of main item, optional.
 - `leftTop` : Badge game object at leftTop side, optional.
 - `centerTop` : Badge game object at centerTop side, optional.
@@ -158,7 +158,7 @@ Arrange position of all elements.
 badgeLabel.layout();
 ```
 
-See also - [dirty](uiBasesizer.md#dirty)
+See also - [dirty](ui-basesizer.md#dirty)
 
 ### Get element
 
@@ -221,4 +221,4 @@ See also - [dirty](uiBasesizer.md#dirty)
 
 ### Other properties
 
-See [overlap sizer object](ui-overlapsizer.md), [base sizer object](uiBasesizer.md).
+See [overlap sizer object](ui-overlapsizer.md), [base sizer object](ui-basesizer.md).

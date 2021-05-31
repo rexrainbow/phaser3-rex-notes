@@ -206,8 +206,8 @@ SceneEventPauseSleep --> Pause
 Pause --> |"scene.scene.resume()<br>scene.scene.wake()"|SceneEventResumeWake
 SceneEventResumeWake --> SceneUpdate
 
-SceneUpdate --> |"scene.scene.stop()"|Stop
-Pause --> |"scene.scene.stop()"|SceneEventDestroy
+SceneUpdate --> |"scene.scene.stop()<br>scene.scene.restart()"|Stop
+Pause --> |"scene.scene.stop()<br>scene.scene.restart()"|SceneEventDestroy
 SceneEventDestroy --> Stop
 
 Stop --> |"scene.scene.start()<br>scene.scene.launch()<br>scene.scene.restart()"|SceneEventStart
@@ -223,6 +223,28 @@ See also
 - [Pause/resume](scenemanager.md#pauseresume-scene)
 - [Stop](scenemanager.md#stop-scene)
 - [Main loop](mainloop.md)
+
+### Start
+
+1. Invoke `scene.preload()`
+1. Invoke `scene.create()`
+
+`scene.scene.restart()` is equal to
+
+```javascript
+scene.scene.stop();
+scene.scene.start();
+```
+
+### Stop
+
+- All game objects will be destroyed.
+    - Registered events on game objects will also be clear, too.
+- Touch, keyboard and GamePad events will be clear.
+- Cameras will be destroyed.
+- Loader will be stopped.
+    - Assets will be stored in global cache.
+- Events registered on scene plugin (`scene.events.on`) **won't be clear**.
 
 ## Members
 
