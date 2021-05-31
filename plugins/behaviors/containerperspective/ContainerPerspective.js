@@ -21,12 +21,16 @@ class ContainerPerspective extends Base {
     }
 
     boot() {
-        var parentContainer = this.rexContainer.parent;
-        parentContainer.on('destroy', this.onParentDestroy, this);
+        this.rexContainer.parent.on('destroy', this.onParentDestroy, this);
     }
 
     destroy(fromScene) {
+        if (!this.scene) {
+            return;
+        }
+
         this.exit();
+        this.rexContainer.parent.off('destroy', this.onParentDestroy, this);
         super.destroy(fromScene);
     }
 

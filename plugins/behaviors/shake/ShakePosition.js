@@ -53,6 +53,7 @@ class ShakePosition extends TickTask {
 
     stopTicking() {
         super.stopTicking();
+
         if (this.scene) { // Scene might be destoryed
             if (this.mode === 0) { // Effect mode
                 this.scene.game.events.off('poststep', this.update, this);

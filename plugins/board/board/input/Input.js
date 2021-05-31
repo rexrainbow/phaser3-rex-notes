@@ -37,6 +37,8 @@ class Input {
         this.tap.destroy(fromScene);
         this.press.destroy(fromScene);
         this.swipe.destroy(fromScene);
+
+        // board.off('destroy', this.onBoardDestroy, this);
     }
 
     onBoardDestroy(parent, fromScene) {

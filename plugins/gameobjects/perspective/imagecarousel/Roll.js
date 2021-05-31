@@ -1,9 +1,9 @@
 import Base from '../carousel/Roll.js';
 
 class Roll extends Base {
-    
+
     toNext(duration) {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         if (!gameObject.repeat && gameObject.isLastImage) {
             return this;
         }
@@ -21,7 +21,7 @@ class Roll extends Base {
     }
 
     toPrevious(duration) {
-        var gameObject = this.gameObject;
+        var gameObject = this.parent;
         if (!gameObject.repeat && gameObject.isFirstImage) {
             return this;
         }
