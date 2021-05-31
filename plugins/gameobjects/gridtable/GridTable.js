@@ -68,7 +68,7 @@ class GridTable extends ContainerLite {
         this.updateTable();
     }
 
-    destroy(fromScene) {
+    destroy(fromScene) {  // preDestroy method does not have fromScene parameter
         //  This Game Object has already been destroyed
         if (!this.scene) {
             return;
@@ -84,6 +84,7 @@ class GridTable extends ContainerLite {
             this.cellContainersPool.destroy(true);
             this.cellContainersPool = undefined;
         }
+
         super.destroy(fromScene);
     }
 

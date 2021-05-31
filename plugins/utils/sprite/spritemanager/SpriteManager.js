@@ -94,7 +94,7 @@ class SpriteManager {
         if (this.fadeTime > 0) {
             AddTintRGBProperties(sprite);
         }
-        sprite.on('destroy', function () {
+        sprite.once('destroy', function () {
             RemoveItem(this.removedSprites, sprite);
             if (this.isEmpty) {
                 this.emit('empty');

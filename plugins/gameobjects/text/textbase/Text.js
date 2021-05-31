@@ -119,9 +119,28 @@ class Text extends GameObject {
 
         this.setText(text);
 
-        scene.sys.game.events.on('contextrestored', function () {
-            this.dirty = true;
-        }, this);
+        scene.sys.game.events.on('contextrestored', this.onContextRestored, this);
+    }
+
+    onContextRestored() {
+        this.dirty = true;
+    }
+
+    preDestroy() {
+        if (this.style.rtl) {
+            RemoveFromDOM(this.canvas);
+        }
+
+        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
+
+        CanvasPool.remove(this.canvas);
+        this.canvasText.destroy();
+        this.canvasText = undefined;
+
+        if (this._imageManager) {
+            this._imageManager.destroy();
+            this._imageManager = undefined;
+        }
     }
 
     set text(value) {
@@ -436,21 +455,6 @@ class Text extends GameObject {
         out.data = data;
 
         return out;
-    }
-
-    preDestroy() {
-        if (this.style.rtl) {
-            RemoveFromDOM(this.canvas);
-        }
-
-        CanvasPool.remove(this.canvas);
-        this.canvasText.destroy();
-        this.canvasText = undefined;
-
-        if (this._imageManager) {
-            this._imageManager.destroy();
-            this._imageManager = undefined;
-        }
     }
 
     setInteractive(shape, callback, dropZone) {

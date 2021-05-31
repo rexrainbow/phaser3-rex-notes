@@ -23,7 +23,7 @@ class Input {
         this.press = InstallPress.call(this);
         this.swipe = InstallSwipe.call(this);
 
-        board.on('destroy', this.onBoardDestroy, this);
+        board.once('destroy', this.onBoardDestroy, this);
     }
 
     destroy(fromScene) {

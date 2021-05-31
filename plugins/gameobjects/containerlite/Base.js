@@ -33,7 +33,7 @@ class Base extends Zone {
         AddItem(this.children, gameObjects, 0,
             // Callback of item added
             function (gameObject) {
-                gameObject.on('destroy', parent.onChildDestroy, parent);
+                gameObject.once('destroy', parent.onChildDestroy, parent);
             }, this);
         return this;
     }

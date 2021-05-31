@@ -72,7 +72,7 @@ class Interception extends TickTask {
 
             // Add new target
             if (target) {
-                target.on('destroy', this.onTargetDestroy, this);
+                target.once('destroy', this.onTargetDestroy, this);
             }
             this._target = target;
         }

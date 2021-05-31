@@ -30,7 +30,7 @@ class Obstacles {
         }
 
         if (gameObject.on) {
-            gameObject.on('destroy', this.onChildDestroy, this);
+            gameObject.once('destroy', this.onChildDestroy, this);
         }
         return this;
     }

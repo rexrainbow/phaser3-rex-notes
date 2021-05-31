@@ -1,39 +1,30 @@
+import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js'
 import ObjBank from './ObjBank.js';
 
 const uidKey = ObjBank.uidKey;
 
-class GraphItemData {
+class GraphItemData extends BehaviorBase {
     constructor(parent, uid) {
-        this.parent = parent;
+        super(parent, { eventEmitter: false });
+
         ObjBank.add(this, uid); // uid is stored in `this.$uid`
         this.graph = null;
         this.type = undefined;
-        this.boot();
-    }
-
-    boot() {
-        var type = typeof (this.parent);
-        if ((type !== 'number') && (type !== 'string') && this.parent.once) {
-            this.parent.on('destroy', this.onParentDestroy, this);
-        }
     }
 
     shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
         if (this.graph) {
             this.graph.remove(this[uidKey]);
         }
         ObjBank.remove(this[uidKey]);
-
-        this.parent = undefined;
         this.setGraph(null);
-    }
 
-    destroy(fromScene) {
-        this.shutdown(fromScene);
-    }
-
-    onParentDestroy(parent, fromScene) {
-        this.destroy(fromScene);
+        super.shutdown(fromScene);
     }
 
     setGraph(graph) {

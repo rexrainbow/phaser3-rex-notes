@@ -64,7 +64,7 @@ class PathFinder extends BehaviorBase {
                 // Attach event
                 this.parent = gameObject;
                 if (this.parent && this.parent.once) {
-                    this.parent.on('destroy', this.onParentDestroy, this);
+                    this.parent.once('destroy', this.onParentDestroy, this);
                 }
             }
         } else {

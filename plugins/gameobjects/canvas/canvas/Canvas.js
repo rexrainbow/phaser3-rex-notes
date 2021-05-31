@@ -56,9 +56,20 @@ class Canvas extends GameObject {
 
         this.dirty = true;
 
-        scene.sys.game.events.on('contextrestored', function () {
-            this.dirty = true;
-        }, this);
+        scene.sys.game.events.on('contextrestored', this.onContextRestored, this);
+    }
+
+    onContextRestored() {
+        this.dirty = true;
+    }
+
+    preDestroy() {
+        this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
+        CanvasPool.remove(this.canvas);
+        this.texture.destroy();
+
+        this.canvas = null;
+        this.context = null;
     }
 
     get width() {
@@ -137,10 +148,6 @@ class Canvas extends GameObject {
     needRedraw() {
         this.dirty = true;
         return this;
-    }
-
-    preDestroy() {
-        CanvasPool.remove(this.canvas);
     }
 
     resize(width, height) {

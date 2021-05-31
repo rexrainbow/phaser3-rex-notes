@@ -109,7 +109,7 @@ class EffectLayer extends Shader {
         AddItem(this.children, gameObjects, 0,
             // Callback of item added
             function (gameObject) {
-                gameObject.on('destroy', this.onChildDestroy, this);
+                gameObject.once('destroy', this.onChildDestroy, this);
             }, this);
         return this;
     }

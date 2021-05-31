@@ -21,7 +21,7 @@ class ContainerPerspective extends Base {
     }
 
     boot() {
-        this.rexContainer.parent.on('destroy', this.onParentDestroy, this);
+        this.rexContainer.parent.once('destroy', this.onParentDestroy, this);
     }
 
     destroy(fromScene) {
@@ -30,7 +30,6 @@ class ContainerPerspective extends Base {
         }
 
         this.exit();
-        this.rexContainer.parent.off('destroy', this.onParentDestroy, this);
         super.destroy(fromScene);
     }
 

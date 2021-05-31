@@ -9,7 +9,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
 
     start() {
         var eventEmitter = this.game.events;
-        eventEmitter.on('destroy', this.destroy, this);
+        eventEmitter.once('destroy', this.destroy, this);
 
         this.game.renderer.pipelines.addPostPipeline(this.postFxPipelineName, this.PostFxPipelineClass);
     }

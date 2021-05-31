@@ -7,7 +7,7 @@ var MakeChildImageGameObject = function (parent, key, className) {
             add: false,
             origin: { x: 0, y: 0 },
         });
-        parent.on('destroy', function () {
+        parent.once('destroy', function () {
             if (parent[key]) {
                 parent[key].destroy();
                 parent[key] = undefined;
