@@ -1,7 +1,7 @@
 ## List of my plugins
 
 !!! note "Version of phaser3"
-    Please upgrade your phaser3 to version >= **3.52**.
+    Please upgrade your phaser3 to version >= **3.55.2**.
 
 1. [Anchor](anchor.md): Set position based on visible window.
 1. [Arcade-TCRP/Player](arcade-tcrp-player.md): Run commands on step of Arcade.

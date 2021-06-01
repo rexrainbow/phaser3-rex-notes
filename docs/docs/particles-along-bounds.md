@@ -7,7 +7,7 @@ Emit [particles](particles.md) along bounds of game object.
 
 ## Live demos
 
-- [Particles-aline-bounds](https://codepen.io/rexrainbow/pen/gOaVRmP)
+- [Particles-along-bounds](https://codepen.io/rexrainbow/pen/gOaVRmP)
 
 ## Usage
 
