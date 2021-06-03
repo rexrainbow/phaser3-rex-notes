@@ -139,6 +139,7 @@ module.exports = {
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
     'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
     'dissolvepipelineplugin': './plugins/dissolvepipeline-plugin.js',
+    'crossstitchingpipelineplugin': './plugins/crossstitchingpipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',

@@ -21,6 +21,7 @@ Shader effect of camera.
 
 Some post-fx pipelines:
 
+- [Cross-stitching](shader-crossstitching): Cross-stitching post processing filter.
 - [Glow-filter](shader-glowfilter): Glow post processing filter.
 - [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 - [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.

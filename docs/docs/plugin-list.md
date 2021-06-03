@@ -97,6 +97,7 @@
 1. [Script-tag loader](scripttagloader.md): Load script tag in preload stage.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
+1. [Shader/cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
 1. [Shader/dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 1. [Shader/glow-filter](shader-glowfilter.md): Glow post processing filter.
 1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.

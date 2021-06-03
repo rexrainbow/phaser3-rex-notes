@@ -1,4 +1,4 @@
-// reference : https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/
+// reference : https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/
 
 const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH

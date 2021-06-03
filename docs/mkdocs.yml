@@ -189,13 +189,14 @@ nav:
         - Glow: shader-glowfilter.md
         - Gray scale: shader-grayscale.md
         - Inverse: shader-inverse.md
-        - HSL adjust: shader-hsladjust.md
+        - HSL adjust: shader-hsladjust.md        
     - Outline:
         - Outline: shader-outline.md
         - Toonify: shader-toonify.md
     - Position:
         - Swirl: shader-swirl.md
         - Pixelation: shader-pixelation.md
+        - Cross-stitching: shader-crossstitching.md
     - Transition:
         - Warp: shader-warp.md
         - Dissolve: shader-dissolve.md
