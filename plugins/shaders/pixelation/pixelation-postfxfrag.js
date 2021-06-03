@@ -15,8 +15,6 @@ varying vec2 outTexCoord;
 // Effect parameters
 uniform vec2 texSize;
 uniform vec2 pixelSize;
-uniform float radius;
-uniform float angle;
 
 void main (void) {
   if ((pixelSize.x > 0.0) || (pixelSize.y > 0.0)) {
