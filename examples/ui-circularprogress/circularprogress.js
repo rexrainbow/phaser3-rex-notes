@@ -1,0 +1,76 @@
+import UIPlugin from '../../templates/ui/ui-plugin.js';
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() { }
+
+    create() {
+        this.rexUI.add.overlapSizer(400, 300, 300, 300, { space: 10 })
+            // .addBackground(this.rexUI.add.roundRectangle(0, 0, 0, 0, 0, 0xffffff))
+            .add(
+                this.rexUI.add.circularProgress({
+                    trackColor: COLOR_DARK,
+                    barColor: COLOR_LIGHT,
+                    centerColor: COLOR_PRIMARY,
+                    // anticlockwise: true,
+        
+                    value: 0.75
+                }),
+                'main' // key
+            )
+            .add(
+                this.rexUI.add.label({
+                    background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_DARK),
+                    icon: this.rexUI.add.roundRectangle(0, 0, 24, 24, 10, COLOR_LIGHT),
+                    text: this.add.text(0, 0, 'Label'),
+                    space: {
+                        left: 20, right: 20, top: 20, bottom: 20,
+                        icon: 10
+                    }
+                }), // child
+                'center', // key
+                'center', // align
+                0, // padding
+                false // expand
+            )
+            .layout()
+            .drawBounds(this.add.graphics(), 0xff0000)
+
+        this.input.on('pointerdown', function () {
+            console.log('restart')
+            this.scene.restart()
+        }, this)
+    }
+
+    update() { }
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
+};
+
+var game = new Phaser.Game(config);

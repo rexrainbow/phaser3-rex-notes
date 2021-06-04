@@ -20,7 +20,7 @@ export default {
             if (!gameObject.isRexSizer) {
                 // Get minWidth,minHeight from config
                 minWidth = GetValue(config, 'minWidth', gameObject._minWidth);
-                minHeight = GetValue(config, 'minHeight', undefingameObject._minHeighted);
+                minHeight = GetValue(config, 'minHeight', gameObject._minHeighted);
             }
         }
 
