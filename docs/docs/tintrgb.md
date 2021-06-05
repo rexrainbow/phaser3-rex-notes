@@ -11,6 +11,7 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
 ## Live demos
 
 - [Fade](https://codepen.io/rexrainbow/pen/OJpRvwQ)
+- [Yellow to green](https://codepen.io/rexrainbow/pen/abJGNOp)
 
 ## Usage
 
