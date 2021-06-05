@@ -27,7 +27,7 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
     ```
 - Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties.
     ```javascript
-    scene.plugins.get('rextintrgbplugin').add(gameObject);
+    scene.plugins.get('rextintrgbplugin').add(gameObject, tintRGB);
     gameObject.tintGray = 128;
     ```
 
@@ -57,7 +57,7 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
     ```
 - Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties.
     ```javascript
-    scene.plugins.get('rexTintRGB').add(gameObject);
+    scene.plugins.get('rexTintRGB').add(gameObject, tintRGB);
     gameObject.tintGray = 128;
     ```
 
@@ -73,20 +73,21 @@ Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties to a game object.
     ```
 - Attach `tintR`, `tintG`, `tintB`, and `tintGray` properties.
     ```javascript
-    AddTintRGBProperties(gameObject);
+    AddTintRGBProperties(gameObject, tintRGB);
     gameObject.tintGray = 128;
     ```
 
 ### Attach properties
 
 ```javascript
-scene.plugins.get('rexTintRGB').add(gameObject);
+scene.plugins.get('rexTintRGB').add(gameObject, tintRGB);
 gameObject.tintGray = 128;
 // gameObject.tintR = 128;
 // gameObject.tintG = 128;
 // gameObject.tintB = 128;
 ```
 
+- `tintRGB` : Initial tintRGB value in `0xRRGGBB`.
 - `tintR` : color R of tint, `0`~`255`. Default is `255`.
 - `tintG` : color G of tint, `0`~`255`. Default is `255`.
 - `tintB` : color B of tint, `0`~`255`. Default is `255`.
