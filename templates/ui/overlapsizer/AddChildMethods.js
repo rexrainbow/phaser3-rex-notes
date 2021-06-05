@@ -5,6 +5,7 @@ import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/G
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+const UUID = Phaser.Utils.String.UUID;
 
 export default {
     add(gameObject, key, align, padding, expand, minWidth, minHeight) {
@@ -25,7 +26,7 @@ export default {
         }
 
         if (key === undefined) {
-            key = Date.now();
+            key = UUID();
         }
 
         if (typeof (align) === 'string') {

@@ -5,6 +5,7 @@ const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
+const UUID = Phaser.Utils.String.UUID;
 
 class YoutubePlayer extends DOMElement {
     constructor(scene, x, y, width, height, config) {
@@ -33,7 +34,7 @@ class YoutubePlayer extends DOMElement {
         this.paddingCallbacks = [];
 
         // Create DIV element and add it
-        var elementId = 'YT' + Date.now();
+        var elementId = `YT${UUID()}`;
         var element = document.createElement('div');
         element.id = elementId;
         this.setElement(element);
