@@ -3,7 +3,7 @@
 Warp transition post processing filter.
 
 - Author: Richard Davey
-- A camera filter
+- A post-fx shader effect
 
 ## Usage
 

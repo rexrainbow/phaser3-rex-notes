@@ -3,7 +3,7 @@
 Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/)
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 

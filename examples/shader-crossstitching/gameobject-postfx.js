@@ -1,4 +1,4 @@
-import CrossStitchingPipelinePlugin from '../../plugins/crossstitchingpipeline-plugin'
+import CrossStitchingPipelinePlugin from '../../plugins/crossstitchingpipeline-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {

@@ -3,7 +3,7 @@
 Gray scale post processing filter.
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 

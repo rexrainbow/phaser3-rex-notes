@@ -3,7 +3,7 @@
 Dissolve transition post processing filter. ([Reference](https://github.com/ykob/glsl-dissolve/))
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 

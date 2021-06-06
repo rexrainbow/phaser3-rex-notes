@@ -3,7 +3,7 @@
 Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filters/blob/master/filters/outline/src/outline.frag)
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 

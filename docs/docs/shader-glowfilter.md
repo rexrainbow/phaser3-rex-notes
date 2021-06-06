@@ -3,7 +3,7 @@
 Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/032c325ef8577c6d0188)
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 

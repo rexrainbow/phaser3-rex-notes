@@ -3,7 +3,7 @@
 Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/20110408/cross-stitching-post-processing-shader-glsl-filter-geexlab-pixel-bender/)
 
 - Author: Rex
-- A camera filter
+- A post-fx shader effect
 
 ## Live demos
 
