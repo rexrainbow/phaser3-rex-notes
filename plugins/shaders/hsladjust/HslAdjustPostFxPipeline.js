@@ -12,9 +12,9 @@ class HslAdjustPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._hueRotate = 0;
-        this._satAdjust = 1;
-        this._lumAdjust = 0.5;
+        this.hueRotate = 0;
+        this.satAdjust = 1;
+        this.lumAdjust = 0.5;
     }
 
     resetFromJSON(o) {
@@ -25,50 +25,26 @@ class HslAdjustPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('hueRotate', (this._hueRotate) % 1);
-        this.set1f('satAdjust', this._satAdjust);
-        this.set1f('lumAdjust', this._lumAdjust);
+        this.set1f('hueRotate', (this.hueRotate) % 1);
+        this.set1f('satAdjust', this.satAdjust);
+        this.set1f('lumAdjust', this.lumAdjust);
     }
 
     // hueRotate
-    get hueRotate() {
-        return this._hueRotate;
-    }
-
-    set hueRotate(value) {
-        this._hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
-    }
-
     setHueRotate(value) {
-        this.hueRotate = value;
+        this.hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
         return this;
     }
 
     // satAdjust
-    get satAdjust() {
-        return this._satAdjust;
-    }
-
-    set satAdjust(value) {
-        this._satAdjust = value; // 0: gray, 1: original color, > 1: 
-    }
-
     setSatAdjust(value) {
-        this.satAdjust = value;
+        this.satAdjust = value;  // 0: gray, 1: original color, > 1: 
         return this;
     }
 
     // lumAdjust
-    get lumAdjust() {
-        return this._lumAdjust;
-    }
-
-    set lumAdjust(value) {
-        this._lumAdjust = value; // 0: dark, 0.5: original color, 1: white
-    }
-
     setLumAdjust(value) {
-        this.lumAdjust = value;
+        this.lumAdjust = value;  // 0: dark, 0.5: original color, 1: white
         return this;
     }
 }

@@ -11,9 +11,9 @@ precision highmedp float;
 // Scene buffer
 uniform sampler2D uMainSampler; 
 varying vec2 outTexCoord;
-uniform vec2 texSize;
 
 // Effect parameters
+uniform vec2 texSize;
 uniform vec2 center;
 uniform float radius;
 uniform float angle;

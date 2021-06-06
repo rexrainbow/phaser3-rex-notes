@@ -14,10 +14,10 @@ class SwirlPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._centerX = 0; // position wo resolution
-        this._centerY = 0; // position wo resolution
-        this._radius = 0;
-        this._rotation = 0;
+        this.centerX = 0; // position wo resolution
+        this.centerY = 0; // position wo resolution
+        this.radius = 0;
+        this.rotation = 0;
     }
 
     resetFromJSON(o) {
@@ -33,38 +33,22 @@ class SwirlPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('radius', this._radius);
-        this.set1f('angle', this._rotation);
+        this.set1f('radius', this.radius);
+        this.set1f('angle', this.rotation);
 
         var texWidth = this.renderer.width,
             textHeight = this.renderer.height;
-        this.set2f('center', this._centerX, (textHeight - this._centerY));
+        this.set2f('center', this.centerX, (textHeight - this.centerY));
         this.set2f('texSize', texWidth, textHeight);
     }
 
     // radius
-    get radius() {
-        return this._radius;
-    }
-
-    set radius(value) {
-        this._radius = value;
-    }
-
     setRadius(value) {
         this.radius = value;
         return this;
     }
 
     // rotation
-    get rotation() {
-        return this._rotation;
-    }
-
-    set rotation(value) {
-        this._rotation = value;
-    }
-
     setRotation(value) {
         this.rotation = value;
         return this;
@@ -84,29 +68,13 @@ class SwirlPostFxPipeline extends PostFXPipeline {
     }
 
     // center
-    get centerX() {
-        return this._centerX;
-    }
-
-    set centerX(x) {
-        this._centerX = x;
-    }
-
-    get centerY() {
-        return this._centerY;
-    }
-
-    set centerY(y) {
-        this._centerY = y;
-    }
-
     setCenter(x, y) {
         if (x === undefined) {
             x = this.renderer.width / 2;
             y = this.renderer.height / 2;
         }
-        this._centerX = x;
-        this._centerY = y;
+        this.centerX = x;
+        this.centerY = y;
         return this;
     }
 }

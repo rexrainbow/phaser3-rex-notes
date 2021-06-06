@@ -29,6 +29,7 @@ class GrayScalePostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
+        this.setProgress(GetValue(o, 'progress', 0));
         this.setTransitionTargetTexture(GetValue(o, 'toTexture', '__DEFAULT'), GetValue(o, 'toFrame', undefined), GetValue(o, 'resizeMode', 1));
         this.setNoise(GetValue(o, 'noiseX', undefined), GetValue(o, 'noiseY', undefined), GetValue(o, 'noiseZ', undefined));
         this.setFromEdge(GetValue(o, 'fromEdgeStart', 0.01), GetValue(o, 'fromEdgeWidth', 0.05));

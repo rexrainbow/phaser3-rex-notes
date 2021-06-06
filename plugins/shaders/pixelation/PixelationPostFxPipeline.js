@@ -13,8 +13,8 @@ class PixelationPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._pixelWidth = 4; // width of pixel wo resolution
-        this._pixelHeight = 4; // height of pixel wo resolution
+        this.pixelWidth = 4; // width of pixel wo resolution
+        this.pixelHeight = 4; // height of pixel wo resolution
     }
 
     resetFromJSON(o) {
@@ -23,33 +23,17 @@ class PixelationPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set2f('pixelSize', this._pixelWidth, this._pixelHeight);
+        this.set2f('pixelSize', this.pixelWidth, this.pixelHeight);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
     // pixelWidth
-    get pixelWidth() {
-        return this._pixelWidth;
-    }
-
-    set pixelWidth(value) {
-        this._pixelWidth = value;
-    }
-
     setPixelWidth(value) {
         this.pixelWidth = value;
         return this;
     }
 
     // pixelHeight
-    get pixelHeight() {
-        return this._pixelHeight;
-    }
-
-    set pixelHeight(value) {
-        this._pixelHeight = value;
-    }
-
     setPixelHeight(value) {
         this.pixelHeight = value;
         return this;
@@ -59,8 +43,8 @@ class PixelationPostFxPipeline extends PostFXPipeline {
         if (height === undefined) {
             height = width;
         }
-        this._pixelWidth = width;
-        this._pixelHeight = height;
+        this.pixelWidth = width;
+        this.pixelHeight = height;
         return this;
     }
 }

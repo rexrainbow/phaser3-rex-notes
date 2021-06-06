@@ -14,9 +14,8 @@ class ToonifyPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._edgeGain = 0;
-        this._edgeThreshold = 0;
-        this._hueLevels = 0;
+        this.edgeThreshold = 0;
+        this.hueLevels = 0;
         this._satLevels = 0;
         this._valLevels = 0;
         this._edgeColor = new Color();
@@ -32,7 +31,7 @@ class ToonifyPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('edgeThreshold', this._edgeThreshold);
+        this.set1f('edgeThreshold', this.edgeThreshold);
         this.set1f('hStep', this.hueStep);
         this.set1f('sStep', this.satStep);
         this.set1f('vStep', this.valStep);
@@ -41,36 +40,20 @@ class ToonifyPostFxPipeline extends PostFXPipeline {
     }
 
     // edgeThreshold
-    get edgeThreshold() {
-        return this._edgeThreshold;
-    }
-
-    set edgeThreshold(value) {
-        this._edgeThreshold = value;
-    }
-
     setEdgeThreshold(value) {
         this.edgeThreshold = value;
         return this;
     }
 
     // hueLevels
-    get hueLevels() {
-        return this._hueLevels;
-    }
-
-    set hueLevels(value) {
-        this._hueLevels = value;
-    }
-
     setHueLevels(value) {
         this.hueLevels = value;
         return this;
     }
 
     get hueStep() {
-        if (this._hueLevels > 0) {
-            return 360 / this._hueLevels;
+        if (this.hueLevels > 0) {
+            return 360 / this.hueLevels;
         } else {
             return 0;
         }

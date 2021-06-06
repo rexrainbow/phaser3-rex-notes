@@ -13,8 +13,8 @@ class CrossStitchingPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._stitchingWidth = 6; // width of stitching wo resolution
-        this._stitchingHeight = 6; // height of stitching wo resolution
+        this.stitchingWidth = 6; // width of stitching wo resolution
+        this.stitchingHeight = 6; // height of stitching wo resolution
         this._brightness = 0;
     }
 
@@ -25,34 +25,18 @@ class CrossStitchingPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set2f('stitchingSize', this._stitchingWidth, this._stitchingHeight);
+        this.set2f('stitchingSize', this.stitchingWidth, this.stitchingHeight);
         this.set2f('texSize', this.renderer.width, this.renderer.height);
         this.set1f('brightness', this._brightness);
     }
 
     // stitchingWidth
-    get stitchingWidth() {
-        return this._stitchingWidth;
-    }
-
-    set stitchingWidth(value) {
-        this._stitchingWidth = value;
-    }
-
     setStitchingWidth(value) {
         this.stitchingWidth = value;
         return this;
     }
 
     // stitchingHeight
-    get stitchingHeight() {
-        return this._stitchingHeight;
-    }
-
-    set stitchingHeight(value) {
-        this._stitchingHeight = value;
-    }
-
     setStitchingHeight(value) {
         this.stitchingHeight = value;
         return this;
@@ -62,8 +46,8 @@ class CrossStitchingPostFxPipeline extends PostFXPipeline {
         if (height === undefined) {
             height = width;
         }
-        this._stitchingWidth = width;
-        this._stitchingHeight = height;
+        this.stitchingWidth = width;
+        this.stitchingHeight = height;
         return this;
     }
 

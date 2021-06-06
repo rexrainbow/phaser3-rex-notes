@@ -16,7 +16,7 @@ class OutlinePostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._thickness = 0;
+        this.thickness = 0;
         this._outlineColor = new Color();
     }
 
@@ -27,19 +27,11 @@ class OutlinePostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('thickness', this._thickness);
-        if (this._thickness > 0) {
+        this.set1f('thickness', this.thickness);
+        if (this.thickness > 0) {
             this.set3f('outlineColor', this._outlineColor.redGL, this._outlineColor.greenGL, this._outlineColor.blueGL);
         }
         this.set2f('texSize', this.renderer.width, this.renderer.height);
-    }
-
-    get thickness() {
-        return this._thickness;
-    }
-
-    set thickness(value) {
-        this._thickness = value;
     }
 
     setThickness(value) {
