@@ -8,6 +8,7 @@ import Wait from './Wait.js';
 import SetTimeScale from './SetTimeScale.js';
 import SetIgnoreWait from './SetIgnoreWait.js';
 import SetSkipTypingAnimation from './SetSkipTypingAnimation.js';
+import SetSkipSoundEffect from './SetSkipSoundEffect.js';
 import SkipCurrentTypingDelay from './SkipCurrentTypingDelay.js';
 
 export default {
@@ -21,5 +22,6 @@ export default {
     setTimeScale: SetTimeScale,
     setIgnoreWait: SetIgnoreWait,
     setSkipTypingAnimation: SetSkipTypingAnimation,
+    setSkipSoundEffect: SetSkipSoundEffect,
     skipCurrentTypingDelay: SkipCurrentTypingDelay,
 }

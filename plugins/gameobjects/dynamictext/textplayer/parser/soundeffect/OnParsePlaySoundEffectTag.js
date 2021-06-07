@@ -20,6 +20,10 @@ var OnParsePlaySoundEffectTag = function (textPlayer, parser, config) {
 }
 
 var PlaySoundEffect = function (params) {
+    if (this.skipSoundEffect) {
+        return;
+    }
+
     var name = params[0];
     var fadeInTime = params[1];
 

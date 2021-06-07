@@ -378,6 +378,7 @@ txt.showPage();
 - Set typing speed to `0`.
 - Set animation progress to `1`.
 - Skip all waiting events.
+- Stop current sound effects, and ignore remainder sound effects.
 
 #### Typing next page
 

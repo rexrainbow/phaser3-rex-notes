@@ -28,7 +28,7 @@ var WaitMultiple = function (textPlayer, names, callback, args, scope) {
             WaitClick(textPlayer, callback, args, scope);
 
         } else if (name === 'se') {
-            var music = textPlayer.soundManager.getSoundEffect();
+            var music = textPlayer.soundManager.getLastSoundEffect();
             WaitMusic(textPlayer, music, callback, args, scope);
 
         } else if (name === 'bgm') {

@@ -2,13 +2,14 @@ import FadeIn from '../../../audio/fade/fadeIn.js';
 import FadeOut from '../../../audio/fade/fadeOut.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const RemoveItem = Phaser.Utils.Array.Remove;
 
 class SoundManager {
     constructor(scene, config) {
         this.scene = scene;
 
         // Sound effect will be destroyed when completed
-        this.soundEffect = undefined;
+        this.soundEffects = [];
 
         // Background music will be (fade out)destroyed when play next one.
         this.backgroundMusic = undefined;
@@ -23,15 +24,17 @@ class SoundManager {
     }
 
     destroy(fromScene) {
-        if (this.soundEffect && !fromScene) {
-            this.soundEffect.destroy();
-            this.soundEffect = undefined;
+        if (this.soundEffects.length && !fromScene) {
+            for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+                this.soundEffects[i].destroy();
+            }
         }
+        this.soundEffects.length = 0;
 
         if (this.backgroundMusic && !fromScene) {
             this.backgroundMusic.destroy();
-            this.backgroundMusic = undefined;
         }
+        this.backgroundMusic = undefined;
 
         this.scene = undefined;
     }
@@ -46,8 +49,12 @@ class SoundManager {
         return this;
     }
 
-    getSoundEffect() {
-        return this.soundEffect;
+    getSoundEffects() {
+        return this.soundEffects;
+    }
+
+    getLastSoundEffect() {
+        return this.soundEffects[this.soundEffects.length - 1];
     }
 
     getBackgroundMusic() {
@@ -55,14 +62,25 @@ class SoundManager {
     }
 
     playSoundEffect(key) {
-        this.soundEffect = this.scene.sound.add(key);
-        this.soundEffect
+        var soundEffect = this.scene.sound.add(key);
+        this.soundEffects.push(soundEffect);
+
+        soundEffect
             .once('complete', function () {
-                this.soundEffect.destroy();
-                this.soundEffect = undefined;
+                soundEffect.destroy();
+
+                // SoundManager has been destroyed
+                if (!this.scene) {
+                    return;
+                }
+                RemoveItem(this.soundEffects, soundEffect);
             }, this)
             .once('destroy', function () {
-                this.soundEffect = undefined;
+                // SoundManager has been destroyed
+                if (!this.scene) {
+                    return;
+                }
+                RemoveItem(this.soundEffects, soundEffect);
             }, this)
             .play();
 
@@ -70,24 +88,35 @@ class SoundManager {
     }
 
     setSoundEffectVolume(volume) {
-        if (this.soundEffect) {
-            this.soundEffect.setVolume(volume);
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+            soundEffect.setVolume(volume);
         }
 
         return this;
     }
 
     fadeInSoundEffect(time) {
-        if (this.soundEffect) {
-            FadeIn(this.scene, this.soundEffect, time);
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+            FadeIn(this.scene, soundEffect, time);
         }
 
         return this;
     }
 
     fadeOutSoundEffect(time, isStopped) {
-        if (this.soundEffect) {
-            FadeOut(this.scene, this.soundEffect, time, isStopped);
+        var soundEffect = this.getLastSoundEffect();
+        if (soundEffect) {
+            FadeOut(this.scene, soundEffect, time, isStopped);
+        }
+
+        return this;
+    }
+
+    fadeOutAllSoundEffects(time, isStopped) {
+        for (var i = this.soundEffects.length - 1; i >= 0; i--) {
+            FadeOut(this.scene, this.soundEffects[i], time, isStopped);
         }
 
         return this;

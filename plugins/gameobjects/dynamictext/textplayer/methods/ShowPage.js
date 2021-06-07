@@ -8,6 +8,7 @@ var ShowPage = function () {
     var typingSpeedSave = this.typeWriter.speed;
     var ignoreWaitSave = this.typeWriter.ignoreWait;
     var skipTypingAnimationSave = this.typeWriter.skipTypingAnimation;
+    var skipSoundEffectSave = this.typeWriter.skipSoundEffect;
 
     this.typeWriter
         .once('complete', function () {
@@ -16,12 +17,15 @@ var ShowPage = function () {
                 .setSpeed(typingSpeedSave)
                 .setIgnoreWait(ignoreWaitSave)
                 .setSkipTypingAnimation(skipTypingAnimationSave)
+                .setSkipSoundEffect(skipSoundEffectSave)
 
         }, this)
+
         .setSpeed(0)
         .skipCurrentTypingDelay()
         .setIgnoreWait(true)
         .setSkipTypingAnimation(true)
+        .setSkipSoundEffect(true)
 
     return this;
 }

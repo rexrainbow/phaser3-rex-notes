@@ -9,11 +9,15 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('dude', 'assets/images/phaser-dude.png');
+        this.load.audio('theme1', [
+            'assets/audio/jungle.ogg',
+            'assets/audio/jungle.mp3'
+        ]);
     }
 
     create() {
         var content = `\
-[color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
+[se=theme1][color=#FFF8DC][b]Pha[shadow]ser[/b][/shadow] [img=dude] is a [i][stroke]fa[stroke=red]st[/stroke][/i], 
 [size=24][shadow=yellow]free[/shadow][/size], a[y=-8]n[y=-16]d[/y] f[wait=1000]un 
 [click][color=green]open[/color] source HTML5 game framework[r]
 
