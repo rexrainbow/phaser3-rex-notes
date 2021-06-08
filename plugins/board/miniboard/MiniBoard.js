@@ -22,7 +22,6 @@ class MiniBoard extends Container {
         this.putTestCallbackScpe = undefined;
 
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
@@ -35,25 +34,17 @@ class MiniBoard extends Container {
         return this;
     }
 
-    boot() {
-        this.scene.events.once('shutdown', this.destroy, this);
-    }
+    destroy(fromScene) {
+        if (!this.scene) {
+            return
+        }
 
-    shutdown() {
-        this.clear(true);
-        this.board.shutdown();
-        super.shutdown();
-
-        this.scene = undefined;
+        this.clear(!fromScene);
+        this.board.shutdown(fromScene);
         this.board = undefined;
         this.setPutTestCallback(undefined, undefined);
-        return this;
-    }
 
-    destroy() {
-        this.emit('destroy');
-        this.shutdown();
-        return this;
+        super.destroy(fromScene);
     }
 
     setFace(direction) {

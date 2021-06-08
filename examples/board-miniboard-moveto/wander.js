@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var graphics = this.add.graphics({
@@ -28,10 +28,10 @@ class Demo extends Phaser.Scene {
             type: 0
         });
         var mainBoard = this.rexBoard.add.board({
-                grid: grid,
-                width: 8,
-                height: 8
-            })
+            grid: grid,
+            width: 8,
+            height: 8
+        })
             .forEachTileXY(function (tileXY, board) {
                 var points = board.getGridPoints(tileXY.x, tileXY.y, true);
                 graphics.strokePoints(points, true);
@@ -44,10 +44,10 @@ class Demo extends Phaser.Scene {
         });
 
         var map = [
-                '0  ',
-                '000',
-                '  0'
-            ],
+            '0  ',
+            '000',
+            '  0'
+        ],
             line;
         for (var i = 0, icnt = map.length; i < icnt; i++) {
             line = map[i].split('');
@@ -76,9 +76,13 @@ class Demo extends Phaser.Scene {
         }
         moveToRandomNeighbor();
 
+        // this.input.on('pointerdown', function () {
+        //     this.scene.restart()
+        // }, this)
+
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

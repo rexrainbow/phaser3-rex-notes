@@ -7,8 +7,10 @@ import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 class Board extends EE {
     constructor(scene, config) {
+        // scene: scene instance, or undefined
         super();
 
+        this.isShutdown = false;
         this.scene = scene;
         this.boardData = new BoardData();
         this.resetFromJSON(config);
@@ -16,7 +18,7 @@ class Board extends EE {
     }
 
     resetFromJSON(o) {
-        this.isBoard = GetValue(o, 'isBoard', true);
+        this.isBoard = GetValue(o, 'isBoard', true);  // false: in Miniboard
         this.setGrid(GetValue(o, 'grid', undefined));
         this.setWrapMode(GetValue(o, 'wrap', false));
         this.setInfinityMode(GetValue(o, 'infinity', false));
@@ -26,25 +28,42 @@ class Board extends EE {
     }
 
     boot() {
-        if (this.scene) {
+        if (this.scene && this.isBoard) {
             this.scene.events.once('shutdown', this.destroy, this);
         }
     }
 
     shutdown(fromScene) {
-        this.removeAllChess(true, true);
+        if (this.isShutdown) {
+            return;
+        }
+
+        if (this.scene && this.isBoard) {
+            this.scene.events.off('shutdown', this.destroy, this);
+        }
+
+        if (this.isBoard) {
+            this.removeAllChess(!fromScene, true);
+        } else {
+
+        }
+
         super.shutdown();
         this.boardData.shutdown(fromScene);
 
         this.scene = undefined;
         this.boardData = undefined;
+        this.isShutdown = true;
+
         return this;
     }
 
     destroy(fromScene) {
+        if (this.isShutdown) {
+            return;
+        }
         this.emit('destroy', this, fromScene);
         this.shutdown(fromScene);
-        return this;
     }
 
     setGrid(grid) {

@@ -7,6 +7,7 @@ class Graph extends EE {
         // scene: scene instance, or undefined
         super();
 
+        this.isShutdown = false;
         this.scene = scene;
         this.vertices = {}; // {vertex: {edge:vertexUidB, ...} }
         this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
@@ -23,6 +24,10 @@ class Graph extends EE {
     }
 
     shutdown(fromScene) {
+        if (this.isShutdown) {
+            return;
+        }
+
         if (this.scene) {
             this.scene.events.off('shutdown', this.destroy, this);
         }
@@ -35,10 +40,15 @@ class Graph extends EE {
         this.edges = undefined;
         this.vertexCount = 0;
         this.edgeCount = 0;
+        this.isShutdown = true;
         return this;
     }
 
     destroy(fromScene) {
+        if (this.isShutdown) {
+            return;
+        }
+
         this.emit('destroy');
         this.shutdown(fromScene);
     }
