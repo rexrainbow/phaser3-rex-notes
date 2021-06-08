@@ -51,24 +51,26 @@ class OnePointerTracer extends TickTask {
     }
 
     shutdown(fromScene) {
+        if (!this.scene) {
+            return
+        }
+
         if (this.gameObject) {
             // GameObject events will be removed when this gameObject destroyed 
             // this.gameObject.off('pointerdown', this.onPointerDown, this);
-        } else if (this.scene) {
+        } else {
             this.scene.input.off('pointerdown', this.onPointerDown, this);
         }
-        if (this.scene) {
-            this.scene.input.off('pointerup', this.onPointerUp, this);
-            this.scene.input.off('pointermove', this.onPointerMove, this);
-            this.scene.events.off('shutdown', this.destroy, this);
-            this.scene = undefined;
-        }
+        this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
 
         this.gameObject = undefined;
         this.bounds = undefined;
         this.pointer = undefined;
         this.lastPointer = undefined; // Last catched pointer
         this.movedState = false;
+
         super.shutdown(fromScene);
     }
 

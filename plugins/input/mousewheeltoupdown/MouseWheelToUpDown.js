@@ -2,7 +2,7 @@ import CursorKeys from '../../utils/input/CursorKeys.js';
 
 class MouseWheelToUpDown extends CursorKeys {
     constructor(scene, config) {
-        super();
+        super(scene);
 
         this.scene = scene;
         this.boot();
@@ -15,10 +15,16 @@ class MouseWheelToUpDown extends CursorKeys {
     }
 
     shutdown() {
-        if (this.scene) {
-            this.scene.input.off('wheel', this.onWheeling, this);
-            this.scene.events.off('postupdate', this.clearAllKeysState, this);
+        if (!this.scene) {
+            return
         }
+
+        this.scene.input.off('wheel', this.onWheeling, this);
+        this.scene.events.off('postupdate', this.clearAllKeysState, this);
+        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene = undefined;
+
+        super.shutdown();
     }
 
     destroy() {

@@ -42,16 +42,17 @@ class TwoPointersTracer {
     }
 
     shutdown() {
+        if (!this.scene) {
+            return
+        }
+
         this.destroyEventEmitter();
         this.pointers.length = 0;
         Clear(this.movedState);
-        if (this.scene) {
-            this.scene.input.off('pointerdown', this.onPointerDown, this);
-            this.scene.input.off('pointerup', this.onPointerUp, this);
-            this.scene.input.off('pointermove', this.onPointerMove, this);
-            this.scene.events.off('shutdown', this.destroy, this);
-            this.scene = undefined;
-        }
+        this.scene.input.off('pointerdown', this.onPointerDown, this);
+        this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
     }
 

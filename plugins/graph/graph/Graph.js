@@ -4,6 +4,7 @@ import GetObjUID from '../graphitem/GetObjUID.js';
 
 class Graph extends EE {
     constructor(scene) {
+        // scene: scene instance, or undefined
         super();
 
         this.scene = scene;
@@ -21,7 +22,11 @@ class Graph extends EE {
         }
     }
 
-    shutdown() {
+    shutdown(fromScene) {
+        if (this.scene) {
+            this.scene.events.off('shutdown', this.destroy, this);
+        }
+
         this.clear();
         super.shutdown();
 
@@ -33,10 +38,9 @@ class Graph extends EE {
         return this;
     }
 
-    destroy() {
+    destroy(fromScene) {
         this.emit('destroy');
-        this.shutdown();
-        return this;
+        this.shutdown(fromScene);
     }
 
     exists(gameObject) {

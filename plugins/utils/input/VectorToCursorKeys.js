@@ -8,8 +8,8 @@ const GetDist = Phaser.Math.Distance.Between;
 const GetAngle = Phaser.Math.Angle.Between;
 
 class VectorToCursorKeys extends CursorKeys {
-    constructor(config) {
-        super();
+    constructor(scene, config) {
+        super(scene);
         this.resetFromJSON(config);
     }
 

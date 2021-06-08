@@ -55,8 +55,13 @@ class CSVScenario {
     }
 
     shutdown() {
+        if (!this.scene) {
+            return
+        }
+
         this.destroyEventEmitter();
         this.clear();
+        this.scene.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
     }
 

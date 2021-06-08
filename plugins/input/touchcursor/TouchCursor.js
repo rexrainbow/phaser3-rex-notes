@@ -7,7 +7,8 @@ const CircleContains = Phaser.Geom.Circle.Contains;
 
 class TouchCursor extends VectorToCursorKeys {
     constructor(gameObject, config) {
-        super(config);
+        var scene = gameObject.scene;
+        super(scene, config);
         //this.resetFromJSON(config); // this function had been called in super(config)
 
         // Event emitter
@@ -15,7 +16,7 @@ class TouchCursor extends VectorToCursorKeys {
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
-        this.scene = gameObject.scene;
+        this.scene = scene;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
         gameObject.setInteractive(new CircleClass(gameObject.displayOriginX, gameObject.displayOriginY, this.radius), CircleContains);
@@ -63,6 +64,8 @@ class TouchCursor extends VectorToCursorKeys {
         this.pointer = undefined;
         this.scene = undefined;
         this.gameObject = undefined;
+
+        super.shutdown();
     }
 
     destroy(fromScene) {

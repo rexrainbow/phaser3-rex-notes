@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CursorAtBound extends CursorKeys {
     constructor(scene, config) {
-        super();
+        super(scene);
 
         this.scene = scene;
         this.sensitiveDistance = GetValue(config, 'sensitiveDistance', 20);
@@ -25,9 +25,15 @@ class CursorAtBound extends CursorKeys {
     }
 
     shutdown() {
-        if (this.scene) {
-            this.scene.input.off('pointermove', this.onPointerMove, this);
+        if (!this.scene) {
+            return;
         }
+
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
+        this.scene = undefined;
+
+        super.shutdown();
     }
 
     destroy() {

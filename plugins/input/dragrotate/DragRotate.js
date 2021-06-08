@@ -34,13 +34,15 @@ class DragRotate {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
-        if (this.scene) {
-            this.scene.input.off('pointerdown', this.onPointerDown, this);
-            this.scene.input.off('pointerup', this.onPointerUp, this);
-            this.scene.input.off('pointermove', this.onPointerMove, this);
-            this.scene.events.off('shutdown', this.destroy, this);
+        if (!this.scene) {
+            return
         }
+
+        this.destroyEventEmitter();
+        this.scene.input.off('pointerdown', this.onPointerDown, this);
+        this.scene.input.off('pointerup', this.onPointerUp, this);
+        this.scene.input.off('pointermove', this.onPointerMove, this);
+        this.scene.events.off('shutdown', this.destroy, this);
         this.scene = undefined;
     }
 
