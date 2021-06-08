@@ -13,7 +13,7 @@ export default {
         return this;
     },
 
-    hide() {
+    hide(gameObject) {
         if (gameObject === undefined) {
             gameObject = this;
         }
@@ -21,7 +21,7 @@ export default {
         return this;
     },
 
-    isShow() {
+    isShow(gameObject) {
         if (gameObject === undefined) {
             gameObject = this;
         }
