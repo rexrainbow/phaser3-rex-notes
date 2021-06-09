@@ -53,7 +53,8 @@ class Base extends Zone {
     }
 
     onChildDestroy(child, fromScene) {
-        this.remove(child, !fromScene);
+        // Only remove reference
+        this.remove(child, false);
     }
 
     clear(destroyChild) {

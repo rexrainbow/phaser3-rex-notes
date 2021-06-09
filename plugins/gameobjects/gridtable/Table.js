@@ -24,9 +24,8 @@ class Table {
     }
 
     destroy(fromScene) {
-        for (var i = 0, cnt = this.cells.length; i < cnt; i++) {
-            this.freeCell(this.cells[i], fromScene);
-        }
+        // GridTable is destroyed, all cell containers will also be destroyed too
+        // Don't have to freeCell
         this.cellPool.destroy();
         this.cells = undefined;
         this.parent = undefined;
@@ -320,7 +319,7 @@ class Table {
         return this.parent;
     }
 
-    freeCell(cell, fromScene) {
+    freeCell(cell) {
         if (typeof (cell) === 'number') {
             cell = this.cells[cell];
         }
@@ -329,10 +328,8 @@ class Table {
             return this;
         }
 
-        cell.destroy(fromScene);
-        if (!fromScene) {
-            this.cellPool.push(cell);
-        }
+        cell.destroy();
+        this.cellPool.push(cell);
         return this;
     }
 }
