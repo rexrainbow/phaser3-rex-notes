@@ -413,7 +413,7 @@ class Text extends GameObject {
 
         context.restore();
 
-        if (this.renderer.gl) {
+        if (this.renderer && this.renderer.gl) {
             this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
         }

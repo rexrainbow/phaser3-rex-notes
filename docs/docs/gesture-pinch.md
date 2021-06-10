@@ -5,9 +5,9 @@ Get scale factor from 2 dragging touch pointers.
 - Author: Rex
 - Member of scene
 
-## Usage
+## Live demos
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gesture-pinch)
+[Pinch-zoom](https://codepen.io/rexrainbow/pen/BvyVOL)
 
 ## Usage
 
