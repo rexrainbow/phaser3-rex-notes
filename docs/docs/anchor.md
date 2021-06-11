@@ -5,9 +5,6 @@ Set position based on visible window.
 !!! note
     Visible window will be changed when scale mode is *ENVELOP*, *WIDTH_CONTROLS_HEIGHT*, or *HEIGHT_CONTROLS_WIDTH*.
 
-!!! note
-    This anchor behavior only works when `scale.autoCenter` is set to `Phaser.Scale.CENTER_BOTH`.
-
 - Author: Rex
 - Behavior of game object
 
@@ -43,10 +40,6 @@ Set position based on visible window.
     import AnchorPlugin from 'phaser3-rex-plugins/plugins/anchor-plugin.js';
     var config = {
         // ...
-        scale: {
-            mode: Phaser.Scale.ENVELOP, // Phaser.Scale.WIDTH_CONTROLS_HEIGHT, Phaser.Scale.HEIGHT_CONTROLS_WIDTH
-            autoCenter: Phaser.Scale.CENTER_BOTH,
-        },
         plugins: {
             global: [{
                 key: 'rexAnchor',
