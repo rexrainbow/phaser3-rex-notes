@@ -5643,6 +5643,10 @@
 <p class="admonition-title">Note</p>
 <p>Visible window will be changed when scale mode is <em>ENVELOP</em>, <em>WIDTH_CONTROLS_HEIGHT</em>, or <em>HEIGHT_CONTROLS_WIDTH</em>.</p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This anchor behavior only works when <code>scale.autoCenter</code> is set to <code>Phaser.Scale.CENTER_BOTH</code>.</p>
+</div>
 <ul>
 <li>Author: Rex</li>
 <li>Behavior of game object</li>
@@ -5672,6 +5676,10 @@
     <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">AnchorPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/anchor-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
+    <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">ENVELOP</span><span class="p">,</span> <span class="c1">// Phaser.Scale.WIDTH_CONTROLS_HEIGHT, Phaser.Scale.HEIGHT_CONTROLS_WIDTH</span>
+        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexAnchor&#39;</span><span class="p">,</span>
