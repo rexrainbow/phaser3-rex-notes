@@ -10,16 +10,16 @@ var GetViewport = function (scene, out) {
 
     var scaleManager = scene.scale;
     var baseSize = scaleManager.baseSize;
-    var bounds = scaleManager.canvasBounds;
-    var scale = scaleManager.displayScale;
+    var canvasBounds = scaleManager.canvasBounds;
+    var displayScale = scaleManager.displayScale;
     var parentSize = scaleManager.parentSize;
 
-    out.x = (bounds.x >= 0) ? 0 : -(bounds.x * scale.x);
-    out.y = (bounds.y >= 0) ? 0 : -(bounds.y * scale.y);
+    out.x = (canvasBounds.x >= 0) ? 0 : -(canvasBounds.x * displayScale.x);
+    out.y = (canvasBounds.y >= 0) ? 0 : -(canvasBounds.y * displayScale.y);
 
-    var width = baseSize.width - (bounds.width - parentSize.width) * scale.x;
+    var width = baseSize.width - (canvasBounds.width - parentSize.width) * displayScale.x;
     out.width = Math.min(baseSize.width, width);
-    var height = baseSize.height - (bounds.height - parentSize.height) * scale.y;
+    var height = baseSize.height - (canvasBounds.height - parentSize.height) * displayScale.y;
     out.height = Math.min(baseSize.height, height);
 
     return out;
