@@ -61,6 +61,10 @@ See [touch events](touchevents.md#register-interactive)
 
 ### Drop zones
 
+- Default drop zone
+    ```javascript
+    zone.setDropZone();
+    ```
 - Rectangle drop zone
     ```javascript
     zone.setRectangleDropZone(width, height);
@@ -71,7 +75,7 @@ See [touch events](touchevents.md#register-interactive)
     ```
 - Custom drop zone
     ```javascript
-    zone.setInteractive(shape, callback, true);
+    zone.setDropZone(shape, callback);
     ```
     - `callback`
         ```javascript
