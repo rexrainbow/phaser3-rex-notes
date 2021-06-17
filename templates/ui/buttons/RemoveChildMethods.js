@@ -6,8 +6,7 @@ const SizerRmove = Sizer.prototype.remove;
 const SizerClear = Sizer.prototype.clear;
 
 var Remove = function (gameObject, destroyChild) {
-    var gameObject = this.getButton(gameObject);
-    if (!gameObject) {
+    if (this.getParentSizer(gameObject) !== this) {
         return this;
     }
 
@@ -18,6 +17,7 @@ var Remove = function (gameObject, destroyChild) {
 
 export default {
     remove(gameObject, destroyChild) {
+        // Remove gameObject no matter it is a button or not
         if (IsArray(gameObject)) {
             var gameObjects = gameObject;
             for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -36,6 +36,11 @@ export default {
     },
 
     removeButton(gameObject, destroyChild) {
+        var gameObject = this.getButton(gameObject);
+        // Don't remove this gameObject, it is not a button
+        if (!gameObject) {
+            return this;
+        }
         this.remove(gameObject, destroyChild);
         return this;
     },

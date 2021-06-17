@@ -16,11 +16,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var buttons = this.rexUI.add.buttons({
-            anchor: {
-                left: 'left+10',
-                centerY: 'center'
-            },
-
+            x: 100, y: 300,
             orientation: 'y',
 
             buttons: [
@@ -31,6 +27,14 @@ class Demo extends Phaser.Scene {
             space: { item: 8 }
 
         })
+            // Add a titile child, which is not part of buttons
+            .add(createButton(this, 'Title'),
+                {
+                    index: 0
+                }
+            )
+            // Add a footer child, which is not part of buttons
+            .add(createButton(this, 'Footer'))
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
 

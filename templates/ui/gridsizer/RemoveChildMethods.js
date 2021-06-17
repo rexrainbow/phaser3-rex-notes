@@ -33,7 +33,7 @@ export default {
     },
 
     removeAll(destroyChild) {
-        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
+        for (var i = this.sizerChildren.length - 1; i >= 0; i--) {
             var child = this.sizerChildren[i];
             if (child) {
                 this.remove(child, destroyChild);
