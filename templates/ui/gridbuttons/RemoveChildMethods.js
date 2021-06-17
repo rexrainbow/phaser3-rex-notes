@@ -41,7 +41,9 @@ export default {
     },
 
     clearButtons(destroyChild) {
-        this.clear(destroyChild);
+        for (var i = this.buttons.length - 1; i >= 0; i--) {
+            Remove.call(this, this.buttons[i], destroyChild);
+        }
         return this;
     }
 }

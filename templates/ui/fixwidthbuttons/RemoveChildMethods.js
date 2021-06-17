@@ -11,12 +11,8 @@ var Remove = function (gameObject, destroyChild) {
         return this;
     }
 
-    if (this.buttons.length === 1) {
-        this.clear(destroyChild);
-    } else {
-        RemoveItem(this.buttons, gameObject);
-        SizerRmove.call(this, gameObject, destroyChild);
-    }
+    RemoveItem(this.buttons, gameObject);
+    SizerRmove.call(this, gameObject, destroyChild);
     return this;
 };
 
@@ -45,7 +41,9 @@ export default {
     },
 
     clearButtons(destroyChild) {
-        this.clear(destroyChild);
+        for (var i = this.buttons.length - 1; i >= 0; i--) {
+            Remove.call(this, this.buttons[i], destroyChild);
+        }
         return this;
     }
 }
