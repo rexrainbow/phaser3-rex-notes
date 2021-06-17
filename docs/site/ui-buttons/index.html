@@ -4889,15 +4889,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-button" class="md-nav__link">
-    Add button
+  <a href="#add-child" class="md-nav__link">
+    Add child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-buttton" class="md-nav__link">
-    Remove buttton
+  <a href="#remove-child" class="md-nav__link">
+    Remove child
   </a>
   
 </li>
@@ -5761,15 +5761,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-button" class="md-nav__link">
-    Add button
+  <a href="#add-child" class="md-nav__link">
+    Add child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-buttton" class="md-nav__link">
-    Remove buttton
+  <a href="#remove-child" class="md-nav__link">
+    Remove child
   </a>
   
 </li>
@@ -5849,6 +5849,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="https://codepen.io/rexrainbow/pen/eYvxqLJ">Buttons with header and footer</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/XWbRZLR">Expand</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/PowMEjX">Checkboxes/radio</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/dypEePL">Popup each button</a></li>
@@ -6166,18 +6167,32 @@
 </ul>
 </li>
 </ul>
-<h3 id="add-button">Add button<a class="headerlink" href="#add-button" title="Permanent link">&para;</a></h3>
+<h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Add button
+<li>Add button child
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">addButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : A game object, or an array of game objects.</li>
 </ul>
 </li>
+<li>Add non-button child, see <a href="../ui-sizer/#add-child"><code>sizer.add()</code></a> method.
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="nx">proportion</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
+        <span class="nx">expand</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div></li>
 </ul>
-<h3 id="remove-buttton">Remove buttton<a class="headerlink" href="#remove-buttton" title="Permanent link">&para;</a></h3>
+<h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Remove button
+<li>Remove button child
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">removeButton</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>gameObject</code> : <ul>
@@ -6189,12 +6204,18 @@
 <li><code>destroyChild</code> : Set <code>true</code> to destroy button game object.</li>
 </ul>
 </li>
-<li>Remove all buttton
+<li>Remove all buttton children
     <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">clearButtons</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>destroyChild</code> : Set <code>true</code> to destroy button game objects.</li>
 </ul>
 </li>
+<li>Remove a button or non-button child, see <a href="../ui-sizer/#remove-child"><code>sizer.remove()</code></a> method.
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove all button or non-button children, see <a href="../ui-sizer/#remove-child"><code>sizer.remove()</code></a> method.
+    <div class="codehilite"><pre><span></span><code><span class="nx">buttons</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
 <p>Hidden elements won't be counted when layouting. 

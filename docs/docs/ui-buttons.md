@@ -7,6 +7,7 @@ A container with a group of buttons.
 
 ## Live demos
 
+- [Buttons with header and footer](https://codepen.io/rexrainbow/pen/eYvxqLJ)
 - [Expand](https://codepen.io/rexrainbow/pen/XWbRZLR)
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
 - [Popup each button](https://codepen.io/rexrainbow/pen/dypEePL)
@@ -335,17 +336,32 @@ buttons.emitButtonClick(index);
     ```
     - `recursive` : Set `true` to search all children recursively.
 
-### Add button
+### Add child
 
-- Add button
+- Add button child
     ```javascript
     buttons.addButton(gameObject)
     ```
     - `gameObject` : A game object, or an array of game objects.
+- Add non-button child, see [`sizer.add()`](ui-sizer.md#add-child) method.
+    ```javascript
+    buttons.add(gameObject,
+        {
+            proportion: 0,
+            align: 'center',
+            padding: {left: 0, right: 0, top: 0, bottom: 0},
+            expand: false,
+            key: undefined,
+            index: undefined,
+            minWidth: undefined,
+            minHeight: undefined
+        }
+    )
+    ```
 
-### Remove buttton
+### Remove child
 
-- Remove button
+- Remove button child
     ```javascript
     buttons.removeButton(gameObject, destroyChild);
     ```
@@ -354,11 +370,19 @@ buttons.emitButtonClick(index);
         - A number, or array of numbers : Index of button game object.
         - A string, or array of strings : Name of button game object.
     - `destroyChild` : Set `true` to destroy button game object.
-- Remove all buttton
+- Remove all buttton children
     ```javascript
     buttons.clearButtons(destroyChild);
     ```
     - `destroyChild` : Set `true` to destroy button game objects.
+- Remove a button or non-button child, see [`sizer.remove()`](ui-sizer.md#remove-child) method.
+    ```javascript
+    buttons.remove(gameObject, destroyChild);
+    ```
+- Remove all button or non-button children, see [`sizer.remove()`](ui-sizer.md#remove-child) method.
+    ```javascript
+    buttons.removeAll(destroyChild);
+    ```
 
 ### Show/hide button
 

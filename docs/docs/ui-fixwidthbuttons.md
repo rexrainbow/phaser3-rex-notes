@@ -335,17 +335,27 @@ buttons.emitButtonClick(index);
     ```
     - `recursive` : Set `true` to search all children recursively.
 
-### Add button
+### Add child
 
-- Add button
+- Add button child
     ```javascript
     buttons.addButton(gameObject)
     ```
     - `gameObject` : A game object, or an array of game objects.
+- Add non-button child, see [`fixWidthSizer.add()`](ui-fixWidthsizer.md#add-child) method.
+    ```javascript
+    buttons.add(gameObject,
+        {
+            padding: {left: 0, right: 0, top: 0, bottom: 0},
+            key: undefined,
+            index: undefined
+        }
+    )
+    ```
 
-### Remove buttton
+### Remove child
 
-- Remove button
+- Remove button child
     ```javascript
     buttons.removeButton(gameObject, destroyChild);
     ```
@@ -354,11 +364,19 @@ buttons.emitButtonClick(index);
         - A number, or array of numbers : Index of button game object.
         - A string, or array of strings : Name of button game object.
     - `destroyChild` : Set `true` to destroy button game object.
-- Remove all buttton
+- Remove all buttton children
     ```javascript
     buttons.clearButtons(destroyChild);
     ```
     - `destroyChild` : Set `true` to destroy button game objects.
+- Remove a button or non-button child, see [`fixWidthSizer.remove()`](ui-fixwidthSizer.md#remove-child) method.
+    ```javascript
+    buttons.remove(gameObject, destroyChild);
+    ```
+- Remove all button or non-button children, see [`fixWidthSizer.remove()`](ui-fixwidthSizer.md#remove-child) method.
+    ```javascript
+    buttons.removeAll(destroyChild);
+    ```
 
 ### Show/hide button
 
