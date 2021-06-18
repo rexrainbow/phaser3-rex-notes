@@ -16,8 +16,8 @@ class CursorKeys {
     shutdown(fromScene) {
         for (var key in this.cursorKeys) {
             this.cursorKeys[key].destroy();
-            delete this.cursorKeys;
         }
+        delete this.cursorKeys;
     }
 
     destroy(fromScene) {
