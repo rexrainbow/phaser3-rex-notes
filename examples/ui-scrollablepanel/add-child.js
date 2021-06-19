@@ -40,8 +40,10 @@ class Demo extends Phaser.Scene {
                 CreatePaper(this,
                     'GGGG',
                     this.rexUI.add.roundRectangle(0, 0, 200, 400, 20, COLOR_PRIMARY))
-            )
-        panel.layout()
+            );
+
+        // Layout scrollable panel again
+        panel.layout();
 
     }
 
