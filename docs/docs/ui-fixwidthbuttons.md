@@ -342,7 +342,7 @@ buttons.emitButtonClick(index);
     buttons.addButton(gameObject)
     ```
     - `gameObject` : A game object, or an array of game objects.
-- Add non-button child, see [`fixWidthSizer.add()`](ui-fixWidthsizer.md#add-child) method.
+- Add non-button child, see [`fixWidthSizer.add()`](ui-fixwidthsizer.md#add-child) method.
     ```javascript
     buttons.add(gameObject,
         {
@@ -369,11 +369,11 @@ buttons.emitButtonClick(index);
     buttons.clearButtons(destroyChild);
     ```
     - `destroyChild` : Set `true` to destroy button game objects.
-- Remove a button or non-button child, see [`fixWidthSizer.remove()`](ui-fixwidthSizer.md#remove-child) method.
+- Remove a button or non-button child, see [`fixWidthSizer.remove()`](ui-fixwidthsizer.md#remove-child) method.
     ```javascript
     buttons.remove(gameObject, destroyChild);
     ```
-- Remove all button or non-button children, see [`fixWidthSizer.remove()`](ui-fixwidthSizer.md#remove-child) method.
+- Remove all button or non-button children, see [`fixWidthSizer.remove()`](ui-fixwidthsizer.md#remove-child) method.
     ```javascript
     buttons.removeAll(destroyChild);
     ```
