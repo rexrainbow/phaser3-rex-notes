@@ -1,3 +1,5 @@
+import 'phaser';
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -9,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(400, 300, 'Hello Phaser3');
+        this.add.text(400, 300, 'Hello Phaser3').setOrigin(0.5);
     }
 
     update() { }
