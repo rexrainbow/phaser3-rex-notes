@@ -1,3 +1,4 @@
+import 'phaser';
 import WaitEventsPlugin from '../../plugins/waitevents-plugin.js';
 
 class Demo extends Phaser.Scene {

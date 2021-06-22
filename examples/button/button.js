@@ -1,3 +1,4 @@
+import 'phaser';
 import ButtonPlugin from '../../plugins/button-plugin.js';
 
 class Demo extends Phaser.Scene {

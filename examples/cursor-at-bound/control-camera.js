@@ -1,3 +1,4 @@
+import 'phaser';
 import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
 import MouseWheelToUpDownPlugin from '../../plugins/mousewheeltoupdown-plugin.js';
 

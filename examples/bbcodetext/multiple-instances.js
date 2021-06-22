@@ -1,3 +1,4 @@
+import 'phaser';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 class Demo extends Phaser.Scene {

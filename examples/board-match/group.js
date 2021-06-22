@@ -1,3 +1,4 @@
+import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import FileChooserPlugin from '../../plugins/filechooser-plugin.js';
 
 class Demo extends Phaser.Scene {

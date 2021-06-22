@@ -1,3 +1,4 @@
+import 'phaser';
 import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

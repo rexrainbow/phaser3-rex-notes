@@ -1,3 +1,4 @@
+import 'phaser';
 import LifeTimePlugin from '../../plugins/lifetime-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin.js';
 
 class Demo extends Phaser.Scene {

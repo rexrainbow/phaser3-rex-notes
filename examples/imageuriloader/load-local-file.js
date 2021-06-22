@@ -1,3 +1,4 @@
+import 'phaser';
 import ImageURILoaderPlugin from '../../plugins/imageuriloader-plugin.js';
 
 class Demo extends Phaser.Scene {

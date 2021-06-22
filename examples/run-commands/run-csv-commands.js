@@ -1,3 +1,4 @@
+import 'phaser';
 import RunCommandsPlugin from '../../plugins/runcommands-plugin.js';
 import CSVToArray from '../../plugins/csvtoarray.js';
 

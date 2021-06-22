@@ -1,3 +1,4 @@
+import 'phaser';
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
 
 class Demo extends Phaser.Scene {

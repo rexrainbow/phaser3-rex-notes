@@ -1,3 +1,4 @@
+import 'phaser';
 import BracketParserPlugin from '../../plugins/bracketparser-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import ShakePlugin from '../../plugins/shakeposition-plugin.js';
 
 class Demo extends Phaser.Scene {

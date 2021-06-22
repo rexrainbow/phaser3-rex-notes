@@ -1,3 +1,4 @@
+import 'phaser';
 import ScrollerPlugin from '../../plugins/scroller-plugin.js';
 
 const slidingDeceleration = 5000;

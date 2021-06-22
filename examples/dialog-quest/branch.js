@@ -1,3 +1,4 @@
+import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import DialogQuest from '../../templates/dialog-quest/DialogQuest.js';
 

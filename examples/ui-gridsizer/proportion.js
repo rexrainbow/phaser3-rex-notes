@@ -1,3 +1,4 @@
+import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const RandomInt = Phaser.Math.Between;

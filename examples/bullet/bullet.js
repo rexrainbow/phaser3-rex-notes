@@ -1,3 +1,4 @@
+import 'phaser';
 import BulletPlugin from '../../plugins/bullet-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import PixelationPipelinePlugin from '../../plugins/pixelationpipeline-plugin.js';
 
 class Demo extends Phaser.Scene {

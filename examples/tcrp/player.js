@@ -1,3 +1,4 @@
+import 'phaser';
 import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 
 class ActionKlass {

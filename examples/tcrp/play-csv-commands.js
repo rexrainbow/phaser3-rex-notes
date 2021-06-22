@@ -1,3 +1,4 @@
+import 'phaser';
 import CSVToArrayPlugin from '../../plugins/csvtoarray-plugin.js';
 import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 

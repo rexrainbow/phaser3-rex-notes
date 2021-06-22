@@ -1,3 +1,4 @@
+import 'phaser';
 import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import CircularProgressPlugin from '../../plugins/circularprogress-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;

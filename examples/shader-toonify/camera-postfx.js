@@ -1,3 +1,4 @@
+import 'phaser';
 import ToonifyPipelinePlugin from '../../plugins/toonifypipeline-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

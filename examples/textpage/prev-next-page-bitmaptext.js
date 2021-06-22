@@ -1,3 +1,4 @@
+import 'phaser';
 import TextPagePlugin from '../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {

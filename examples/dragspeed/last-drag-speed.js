@@ -1,3 +1,4 @@
+import 'phaser';
 import DragSpeedPlugin from '../../plugins/dragspeed-plugin.js';
 
 class Demo extends Phaser.Scene {

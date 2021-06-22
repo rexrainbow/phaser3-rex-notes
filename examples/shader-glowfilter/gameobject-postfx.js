@@ -1,3 +1,4 @@
+import 'phaser';
 import GlowFilterPipelinePlugin from '../../plugins/glowfilterpipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;

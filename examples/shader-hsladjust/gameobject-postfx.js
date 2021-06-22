@@ -1,3 +1,4 @@
+import 'phaser';
 import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js';
 
 class Demo extends Phaser.Scene {

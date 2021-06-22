@@ -1,3 +1,4 @@
+import 'phaser';
 import QuestPlugin from '../../plugins/quest-plugin.js';
 
 const csvString = `type,name

@@ -1,3 +1,4 @@
+import 'phaser';
 import InversePipelinePlugin from '../../plugins/inversepipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

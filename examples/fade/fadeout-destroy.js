@@ -1,3 +1,4 @@
+import 'phaser';
 import FadePlugin from '../../plugins/fade-plugin.js';
 
 class Demo extends Phaser.Scene {

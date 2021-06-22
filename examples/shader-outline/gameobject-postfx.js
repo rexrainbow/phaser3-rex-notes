@@ -1,3 +1,4 @@
+import 'phaser';
 import OutlinePipelinePlugin from '../../plugins/outlinepipeline-plugin.js';
 
 class Demo extends Phaser.Scene {

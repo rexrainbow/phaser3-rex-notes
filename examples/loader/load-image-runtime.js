@@ -1,5 +1,4 @@
-const ImageFile = Phaser.Loader.FileTypes.ImageFile;
-const XHRLoader = Phaser.Loader.XHRLoader;
+import 'phaser';
 
 class Demo extends Phaser.Scene {
     constructor() {

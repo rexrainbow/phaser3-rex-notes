@@ -1,3 +1,4 @@
+import 'phaser';
 import localforage from '../../plugins/utils/storage/localforage/localforage.min.js';
 
 class Demo extends Phaser.Scene {

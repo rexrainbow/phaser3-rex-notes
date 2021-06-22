@@ -1,3 +1,4 @@
+import 'phaser';
 import TextPagePlugin from '../../plugins/textpage-plugin.js'
 import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 

@@ -1,3 +1,4 @@
+import 'phaser';
 import AnchorPlugin from '../../plugins/anchor-plugin.js';
 
 class Demo extends Phaser.Scene {

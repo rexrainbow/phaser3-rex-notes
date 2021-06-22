@@ -1,3 +1,4 @@
+import 'phaser';
 import SpiralCurvePlugin from '../../plugins/spiralcurve-plugin.js';
 
 class Demo extends Phaser.Scene {

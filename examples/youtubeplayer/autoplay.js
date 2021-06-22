@@ -1,3 +1,4 @@
+import 'phaser';
 import YoutubePlayerPlugin from '../../plugins/youtubeplayer-plugin.js'
 
 class Demo extends Phaser.Scene {

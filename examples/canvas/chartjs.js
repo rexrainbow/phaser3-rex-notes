@@ -1,3 +1,4 @@
+import 'phaser';
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
 import Chart from 'chart.js/dist/Chart.js';
 

@@ -1,3 +1,5 @@
+import 'phaser';
+
 const DegToRad = Phaser.Math.DegToRad;
 
 class Demo extends Phaser.Scene {

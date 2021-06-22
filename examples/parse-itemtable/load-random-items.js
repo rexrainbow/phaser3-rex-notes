@@ -1,3 +1,4 @@
+import 'phaser';
 import ParsePlugin from '../../plugins/parse-plugin.js';
 
 const Random = Phaser.Math.Between;

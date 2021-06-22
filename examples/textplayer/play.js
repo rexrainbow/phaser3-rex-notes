@@ -1,3 +1,4 @@
+import 'phaser';
 import TextPlayerPlugin from '../../plugins/textplayer-plugin.js';
 
 class Demo extends Phaser.Scene {

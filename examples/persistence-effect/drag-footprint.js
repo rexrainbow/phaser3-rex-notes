@@ -1,3 +1,4 @@
+import 'phaser';
 import PersistenceEffectPlugin from '../../plugins/persistenceeffect-plugin.js';
 import CreateCircleTexture from '../../plugins/utils/texture/CreateCircleTexture.js';
 

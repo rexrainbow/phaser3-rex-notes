@@ -1,3 +1,4 @@
+import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;

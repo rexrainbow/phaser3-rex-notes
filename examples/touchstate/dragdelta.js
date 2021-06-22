@@ -1,3 +1,4 @@
+import 'phaser';
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 
 class Demo extends Phaser.Scene {

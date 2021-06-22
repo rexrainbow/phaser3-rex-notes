@@ -1,3 +1,4 @@
+import 'phaser';
 import CustomShapesPlugin from '../../plugins/customshapes-plugin.js';
 
 class Demo extends Phaser.Scene {

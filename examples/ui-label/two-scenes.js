@@ -1,4 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import 'phaser';
 
 class MainScene extends Phaser.Scene {
     constructor() {

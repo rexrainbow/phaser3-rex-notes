@@ -1,3 +1,4 @@
+import 'phaser';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 import TextEditPlugin from '../../plugins/textedit-plugin.js';
 

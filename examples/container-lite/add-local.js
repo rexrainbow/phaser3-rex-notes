@@ -1,3 +1,4 @@
+import 'phaser';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
 class Demo extends Phaser.Scene {

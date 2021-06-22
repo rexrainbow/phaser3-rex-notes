@@ -1,3 +1,4 @@
+import 'phaser';
 import FlipPlugin from '../../plugins/flip-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import CreateCircleTexture from '../../plugins/utils/texture/CreateCircleTexture.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import EventPromisePlugin from '../../plugins/eventpromise-plugin.js';
 
 class Demo extends Phaser.Scene {

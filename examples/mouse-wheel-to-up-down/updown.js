@@ -1,3 +1,4 @@
+import 'phaser';
 import MouseWheelToUpDownPlugin from '../../plugins/mousewheeltoupdown-plugin.js';
 
 class Demo extends Phaser.Scene {

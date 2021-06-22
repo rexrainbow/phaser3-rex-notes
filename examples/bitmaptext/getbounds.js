@@ -1,3 +1,4 @@
+import 'phaser';
 class Demo extends Phaser.Scene {
     constructor() {
         super({

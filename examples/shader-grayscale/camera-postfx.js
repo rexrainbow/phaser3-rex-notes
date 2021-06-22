@@ -1,3 +1,4 @@
+import 'phaser';
 import GrayScalePipelinePlugin from '../../plugins/grayscalepipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import TagTextPlugin from '../../plugins/tagtext-plugin.js';
 import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 

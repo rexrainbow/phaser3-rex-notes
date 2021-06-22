@@ -1,3 +1,4 @@
+import 'phaser';
 import NinePatchPlugin from '../../plugins/ninepatch-plugin.js'
 
 class Demo extends Phaser.Scene {

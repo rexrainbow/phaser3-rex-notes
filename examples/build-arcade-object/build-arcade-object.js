@@ -1,3 +1,4 @@
+import 'phaser';
 import BuildArcadeObjectPlugin from '../../plugins/buildarcadeobject-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import ParsePlugin from '../../plugins/parse-plugin.js';
 
 class Demo extends Phaser.Scene {

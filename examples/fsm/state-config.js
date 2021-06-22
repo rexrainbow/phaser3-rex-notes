@@ -1,3 +1,4 @@
+import 'phaser';
 import FSMPlugin from '../../plugins/fsm-plugin.js';
 
 var stateConfig = {

@@ -1,3 +1,4 @@
+import 'phaser';
 import MoveToPlugin from '../../plugins/moveto-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import RotateToPlugin from '../../plugins/rotateto-plugin.js';
 
 class Demo extends Phaser.Scene {

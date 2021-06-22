@@ -1,3 +1,4 @@
+import 'phaser';
 import EightDirectionPlugin from '../../plugins/eightdirection-plugin.js';
 
 class Demo extends Phaser.Scene {

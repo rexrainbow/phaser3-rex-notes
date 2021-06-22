@@ -1,5 +1,5 @@
+import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
-import PathFinder from '../../plugins/board/pathfinder/PathFinder.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

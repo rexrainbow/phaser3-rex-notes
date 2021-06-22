@@ -1,3 +1,4 @@
+import 'phaser';
 import GesturesPlugin from '../../plugins/gestures-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;

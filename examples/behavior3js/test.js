@@ -1,3 +1,4 @@
+import 'phaser';
 import Behavior3jsPlugin from '../../plugins/behavior3js-plugin.js';
 
 const Action = RexPlugins.Behavior3Js.Action;

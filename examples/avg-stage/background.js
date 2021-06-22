@@ -1,3 +1,4 @@
+import 'phaser';
 import Stage from '../../templates/avg/stage/Stage.js';
 
 class Demo extends Phaser.Scene {

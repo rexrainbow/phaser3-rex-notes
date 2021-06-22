@@ -1,3 +1,4 @@
+import 'phaser';
 import SwirlPipelinePlugin from '../../plugins/swirlpipeline-plugin.js';
 
 class Demo extends Phaser.Scene {

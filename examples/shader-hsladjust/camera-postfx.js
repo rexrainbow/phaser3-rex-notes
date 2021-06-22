@@ -1,3 +1,4 @@
+import 'phaser';
 import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js';
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

@@ -1,3 +1,4 @@
+import 'phaser';
 import CircleMaskImagePlugin from '../../plugins/circlemaskimage-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import PerlinPlugin from '../../plugins/perlin-plugin.js';
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
 

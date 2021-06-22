@@ -1,3 +1,4 @@
+import 'phaser';
 import ExpressionParserPlugin from '../../plugins/expressionparser-plugin';
 
 class Demo extends Phaser.Scene {

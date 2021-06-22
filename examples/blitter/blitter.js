@@ -1,3 +1,4 @@
+import 'phaser';
 import Blitter from '../../plugins/gameobjects/blitter/blitterbase/Blitter.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'

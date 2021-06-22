@@ -1,3 +1,4 @@
+import 'phaser';
 import AwayTimePlugin from '../../plugins/awaytime-plugin.js';
 
 class Demo extends Phaser.Scene {

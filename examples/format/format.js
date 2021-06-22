@@ -1,3 +1,5 @@
+import 'phaser';
+
 const Format = Phaser.Utils.String.Format;
 
 class Demo extends Phaser.Scene {

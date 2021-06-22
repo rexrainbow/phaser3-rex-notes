@@ -1,3 +1,4 @@
+import 'phaser';
 import Snapshot from '../../plugins/utils/rendertexture/Snapshot.js';
 import PerspectiveImagePlugin from '../../plugins/perspectiveimage-plugin.js';
 import UIPlugin from '../../templates/ui/ui-plugin.js';

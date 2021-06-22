@@ -1,3 +1,4 @@
+import 'phaser';
 import BitmapZonePlugin from '../../plugins/bitmapzone-plugin.js';
 
 class Demo extends Phaser.Scene {

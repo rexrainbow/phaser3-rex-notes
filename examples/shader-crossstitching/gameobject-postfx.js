@@ -1,3 +1,4 @@
+import 'phaser';
 import CrossStitchingPipelinePlugin from '../../plugins/crossstitchingpipeline-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

@@ -1,3 +1,4 @@
+import 'phaser';
 import InputTextPlugin from '../../plugins/inputtext-plugin.js'
 
 class Demo extends Phaser.Scene {

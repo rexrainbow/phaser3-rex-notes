@@ -1,3 +1,4 @@
+import 'phaser';
 import BBCodeText from '../../plugins/bbcodetext.js';
 import TextPage from '../../plugins/textpage.js'
 import TextTyping from '../../plugins/texttyping.js';

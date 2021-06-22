@@ -1,3 +1,4 @@
+import 'phaser';
 import PerlinGrivatyWellPlugin from '../../plugins/perlingrivatywell-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import HitTest from '../../plugins/utils/input/HitTest.js';
 
 class Demo extends Phaser.Scene {

@@ -1,3 +1,4 @@
+import 'phaser';
 import DynamicTextPlugin from '../../plugins/dynamictext-plugin.js';
 
 class Demo extends Phaser.Scene {

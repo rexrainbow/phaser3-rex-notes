@@ -1,3 +1,4 @@
+import 'phaser';
 import TCRPPlugin from '../../plugins/arcadetcrp-plugin.js'
 
 class PlayerSprite extends Phaser.GameObjects.Line {

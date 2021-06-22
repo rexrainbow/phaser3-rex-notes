@@ -1,3 +1,4 @@
+import 'phaser';
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'

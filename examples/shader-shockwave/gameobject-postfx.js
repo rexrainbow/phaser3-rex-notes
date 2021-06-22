@@ -1,3 +1,4 @@
+import 'phaser';
 import ShockwavePipelinePlugin from '../../plugins/shockwavepipeline-plugin.js'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 

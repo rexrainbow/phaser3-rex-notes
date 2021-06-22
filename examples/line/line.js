@@ -1,3 +1,4 @@
+import 'phaser';
 import CreateDashedTexture from '../../plugins/utils/texture/CreateDashedTexture.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 import CreateCircleTexture from '../../plugins/utils/texture/CreateCircleTexture.js';

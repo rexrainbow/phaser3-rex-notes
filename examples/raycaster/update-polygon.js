@@ -1,3 +1,4 @@
+import 'phaser';
 import RaycasterPlugin from '../../plugins/raycaster-plugin.js';
 
 class Demo extends Phaser.Scene {

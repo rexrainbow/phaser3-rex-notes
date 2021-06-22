@@ -1,3 +1,4 @@
+import 'phaser';
 import ShatterImagePlugin from '../../plugins/shatterimage-plugin.js'
 
 class Demo extends Phaser.Scene {

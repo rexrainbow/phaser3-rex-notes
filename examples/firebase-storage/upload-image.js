@@ -1,3 +1,4 @@
+import 'phaser';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import firebaseConfig from './firebaseConfig.js';

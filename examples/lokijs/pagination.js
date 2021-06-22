@@ -1,3 +1,4 @@
+import 'phaser';
 import loki from 'lokijs/src/lokijs.js';
 
 class Demo extends Phaser.Scene {

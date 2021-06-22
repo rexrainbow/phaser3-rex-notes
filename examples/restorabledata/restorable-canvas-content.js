@@ -1,3 +1,4 @@
+import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 import RDataPlugin from '../../plugins/restorabledata-plugin.js';
 import LZStringPlugin from '../../plugins/lzstring-plugin.js';

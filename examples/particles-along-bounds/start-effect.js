@@ -1,3 +1,4 @@
+import 'phaser';
 import ParticlesAlongBoundsPlugin from '../../plugins/particlesalongbounds-plugin.js';
 
 class Demo extends Phaser.Scene {

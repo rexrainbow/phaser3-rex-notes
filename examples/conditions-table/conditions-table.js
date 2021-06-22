@@ -1,3 +1,4 @@
+import 'phaser';
 import ConditionsTablePlugin from '../../plugins/conditionstable-plugin.js';
 
 class Demo extends Phaser.Scene {

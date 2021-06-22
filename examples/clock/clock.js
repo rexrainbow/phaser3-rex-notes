@@ -1,3 +1,4 @@
+import 'phaser';
 import ClockPlugin from '../../plugins/clock-plugin.js';
 
 class Demo extends Phaser.Scene {
