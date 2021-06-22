@@ -34,7 +34,6 @@ module.exports = {
     mode: 'development',
     entry: {
         app: [
-            '@babel/polyfill',
             projectMain
         ],
         vendor: ['phaser']
@@ -84,6 +83,10 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.ts$/,
+                loaders: ['babel-loader', 'awesome-typescript-loader'],
+            },
+            {
                 test: /\.js$/,
                 use: ['babel-loader'],
                 include: path.join(__dirname, 'src')
@@ -106,6 +109,7 @@ module.exports = {
             'phaser': phaser,
             // 'rexPlugins': path.resolve(__dirname, 'plugins/'),
             // 'rexTemplates': path.resolve(__dirname, 'templates/'),
-        }
+        },
+        extensions: ['.ts', '.js']
     }
 }
