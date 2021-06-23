@@ -20,25 +20,18 @@ uniform float spaceBottom;
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;
+  tc -= separator;
 
   if (
-    ((tc.x > (separator.x - spaceLeft)) && (tc.x < (separator.x + spaceRight))) ||
-    ((tc.y > (separator.y - spaceTop)) && (tc.y < (separator.y + spaceBottom)))
+    ((tc.x > -spaceLeft) && (tc.x < spaceRight)) ||
+    ((tc.y > -spaceTop) && (tc.y < spaceBottom))
   ) {
     gl_FragColor = vec4(0,0,0,0);
   } else {
-    if (tc.x < separator.x) {
-      tc.x += spaceLeft;
-    } else {
-      tc.x -= spaceRight;
-    }
-  
-    if (tc.y < separator.y) {
-      tc.y += spaceTop;
-    } else {
-      tc.y -= spaceBottom;
-    }
-  
+    tc.x += (tc.x < 0.0)? spaceLeft: -spaceRight;
+    tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;
+
+    tc += separator;
     gl_FragColor = texture2D(uMainSampler, tc / texSize);
   }
 

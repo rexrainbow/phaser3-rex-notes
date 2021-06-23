@@ -1,9 +1,9 @@
 import FragSrc from './swirl-postfxfrag.js';
-import DegToRad from '../../utils/math/DegToRad.js';
-import RadToDeg from '../../utils/math/RadToDeg.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const DegToRad = Phaser.Math.DegToRad;
+const RadToDeg = Phaser.Math.RadToDeg;
 
 class SwirlPostFxPipeline extends PostFXPipeline {
     constructor(game) {
