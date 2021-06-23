@@ -13,7 +13,6 @@ class ShockwavePostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._progress = 0;
         this.centerX = 0; // position wo resolution
         this.centerY = 0; // position wo resolution
         this.waveWidth = 20;
