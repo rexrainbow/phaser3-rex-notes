@@ -29,8 +29,8 @@ class Demo extends Phaser.Scene {
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'splitX', 0, 800);
         gui.add(postFxPipeline, 'splitY', 0, 600);
-        gui.add(postFxPipeline, 'separatedWidth', 0, 800);
-        gui.add(postFxPipeline, 'separatedHeight', 0, 600);
+        gui.add(postFxPipeline, 'splittedWidth', 0, 800);
+        gui.add(postFxPipeline, 'splittedHeight', 0, 600);
         gui.add(postFxPipeline, 'shiftEnable');
     }
 

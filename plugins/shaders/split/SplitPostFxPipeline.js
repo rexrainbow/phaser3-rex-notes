@@ -22,20 +22,20 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
-        var separatedWidth = GetValue(o, 'width', undefined);
-        if (separatedWidth === undefined) {
+        var splittedWidth = GetValue(o, 'width', undefined);
+        if (splittedWidth === undefined) {
             this.spaceLeft = GetValue(o, 'left', 0);
             this.spaceRight = GetValue(o, 'right', 0);
         } else {
-            this.separatedWidth = separatedWidth;
+            this.splittedWidth = splittedWidth;
         }
 
-        var separatedHeight = GetValue(o, 'height', undefined);
-        if (separatedHeight === undefined) {
+        var splittedHeight = GetValue(o, 'height', undefined);
+        if (splittedHeight === undefined) {
             this.spaceTop = GetValue(o, 'top', 0);
             this.spaceBottom = GetValue(o, 'bottom', 0);
         } else {
-            this.separatedHeight = separatedHeight;
+            this.splittedHeight = splittedHeight;
         }
 
         this.splitX = GetValue(o, 'x', this.renderer.width / 2);
@@ -76,10 +76,10 @@ class SplitPostFxPipeline extends PostFXPipeline {
     separateAtCenter(width, height) {
         this.setSplit(this.renderer.width / 2, this.renderer.height / 2)
         if (width !== undefined) {
-            this.setSeparatedWidth(width);
+            this.setSplittedWidth(width);
         }
         if (height !== undefined) {
-            this.setSeparatedHeight(height);
+            this.setSplittedHeight(height);
         }
         return this;
     }
@@ -105,31 +105,31 @@ class SplitPostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    get separatedWidth() {
+    get splittedWidth() {
         return this.spaceLeft + this.spaceRight;
     }
 
-    set separatedWidth(value) {
+    set splittedWidth(value) {
         this.spaceLeft = value / 2;
         this.spaceRight = this.spaceLeft;
     }
 
-    setSeparatedWidth(width) {
-        this.separatedWidth = width;
+    setSplittedWidth(width) {
+        this.splittedWidth = width;
         return this;
     }
 
-    get separatedHeight() {
+    get splittedHeight() {
         return this.spaceTop + this.spaceBottom;
     }
 
-    set separatedHeight(value) {
+    set splittedHeight(value) {
         this.spaceTop = value / 2;
         this.spaceBottom = this.spaceTop;
     }
 
-    setSeparatedHeight(height) {
-        this.separatedHeight = height;
+    setSplittedHeight(height) {
+        this.splittedHeight = height;
         return this;
     }
 
