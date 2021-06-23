@@ -4,6 +4,12 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 
 class Base extends Zone {
     constructor(scene, x, y, width, height) {
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
         if (width === undefined) {
             width = 1;
         }

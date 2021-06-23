@@ -16,7 +16,7 @@ class DefaultMask extends Graphics {
         this.parent = parent;
         this.shape = shape;
         this.padding = padding;
-        this.setPosition().resize();
+        this.setPosition().resize().setVisible(false);
         // Don't add it to display list
         // Graphics does not have origin, bounds
     }
