@@ -31,7 +31,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: '../index.html',
             template: htmlTemplate,
-            chunks: ['vendor', 'app'],
+            chunks: ['app'],
             chunksSortMode: 'manual',
             minify: {
                 removeAttributeQuotes: false,
