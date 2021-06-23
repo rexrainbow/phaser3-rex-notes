@@ -141,7 +141,7 @@ module.exports = {
     'dissolvepipelineplugin': './plugins/dissolvepipeline-plugin.js',
     'crossstitchingpipelineplugin': './plugins/crossstitchingpipeline-plugin.js',
     'shockwavepipelineplugin': './plugins/shockwavepipeline-plugin.js',
-    'separatorpipelineplugin': './plugins/separatorpipeline-plugin.js',
+    'splitpipelineplugin': './plugins/splitpipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',

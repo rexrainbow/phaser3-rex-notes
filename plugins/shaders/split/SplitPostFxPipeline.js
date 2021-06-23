@@ -1,19 +1,19 @@
-import FragSrc from './separator-postfxfrag.js';
+import FragSrc from './split-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class SeparatorPostFxPipeline extends PostFXPipeline {
+class SplitPostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
-            name: 'rexSeparatorPostFx',
+            name: 'rexSplitPostFx',
             game: game,
             renderTarget: true,
             fragShader: FragSrc
         });
 
-        this.separatorX = 0;
-        this.separatorY = 0;
+        this.splitX = 0;
+        this.splitY = 0;
         this.spaceLeft = 0;
         this.spaceRight = 0;
         this.spaceTop = 0;
@@ -27,7 +27,7 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
             this.spaceLeft = GetValue(o, 'left', 0);
             this.spaceRight = GetValue(o, 'right', 0);
         } else {
-            this.setSeparatedWidth(separatedWidth);
+            this.separatedWidth = separatedWidth;
         }
 
         var separatedHeight = GetValue(o, 'height', undefined);
@@ -35,11 +35,11 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
             this.spaceTop = GetValue(o, 'top', 0);
             this.spaceBottom = GetValue(o, 'bottom', 0);
         } else {
-            this.setSeparatedHeight(separatedHeight);
+            this.separatedHeight = separatedHeight;
         }
 
-        this.separatorX = GetValue(o, 'x', this.renderer.width / 2);
-        this.separatorY = GetValue(o, 'Y', this.renderer.height / 2);
+        this.splitX = GetValue(o, 'x', this.renderer.width / 2);
+        this.splitY = GetValue(o, 'Y', this.renderer.height / 2);
 
         this.shiftEnable = GetValue(o, 'shiftEnable', true);
         return this;
@@ -48,7 +48,7 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
     onPreRender() {
         var texWidth = this.renderer.width,
             textHeight = this.renderer.height;
-        this.set2f('separator', this.separatorX, (textHeight - this.separatorY));
+        this.set2f('split', this.splitX, (textHeight - this.splitY));
         this.set2f('texSize', texWidth, textHeight);
 
         this.set1f('spaceLeft', this.spaceLeft);
@@ -59,8 +59,8 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
         this.set1f('shiftEnable', (this.shiftEnable) ? 1 : 0);
     }
 
-    // separator
-    setSeparator(x, y) {
+    // split
+    setSplit(x, y) {
         if (x === undefined) {
             x = 0;
         }
@@ -68,13 +68,13 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
             y = 0;
         }
 
-        this.separatorX = x;
-        this.separatorY = y;
+        this.splitX = x;
+        this.splitY = y;
         return this;
     }
 
     separateAtCenter(width, height) {
-        this.setSeparator(this.renderer.width / 2, this.renderer.height / 2)
+        this.setSplit(this.renderer.width / 2, this.renderer.height / 2)
         if (width !== undefined) {
             this.setSeparatedWidth(width);
         }
@@ -114,6 +114,11 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
         this.spaceRight = this.spaceLeft;
     }
 
+    setSeparatedWidth(width) {
+        this.separatedWidth = width;
+        return this;
+    }
+
     get separatedHeight() {
         return this.spaceTop + this.spaceBottom;
     }
@@ -121,11 +126,6 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
     set separatedHeight(value) {
         this.spaceTop = value / 2;
         this.spaceBottom = this.spaceTop;
-    }
-
-    setSeparatedWidth(width) {
-        this.separatedWidth = width;
-        return this;
     }
 
     setSeparatedHeight(height) {
@@ -143,4 +143,4 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
     }
 }
 
-export default SeparatorPostFxPipeline;
+export default SplitPostFxPipeline;

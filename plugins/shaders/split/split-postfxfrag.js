@@ -12,7 +12,7 @@ varying vec2 outTexCoord;
 
 // Effect parameters
 uniform vec2 texSize;
-uniform vec2 separator;
+uniform vec2 split;
 uniform float spaceLeft;
 uniform float spaceRight;
 uniform float spaceTop;
@@ -21,7 +21,7 @@ uniform float shiftEnable;
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;
-  tc -= separator;
+  tc -= split;
 
   if (
     ((tc.x > -spaceLeft) && (tc.x < spaceRight)) ||
@@ -34,7 +34,7 @@ void main (void) {
       tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;
     }
 
-    tc += separator;
+    tc += split;
     gl_FragColor = texture2D(uMainSampler, tc / texSize);
   }
 
