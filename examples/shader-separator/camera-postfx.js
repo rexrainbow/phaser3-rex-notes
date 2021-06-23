@@ -18,7 +18,6 @@ class Demo extends Phaser.Scene {
 
         var postFxPlugin = this.plugins.get('rexSeparatorPipelinePlugin');
         var postFxPipeline = postFxPlugin.add(this.cameras.main, {
-            center: true,
             width: 20,
             height: 20
         });
@@ -32,6 +31,7 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'separatorY', 0, 600);
         gui.add(postFxPipeline, 'separatedWidth', 0, 800);
         gui.add(postFxPipeline, 'separatedHeight', 0, 600);
+        gui.add(postFxPipeline, 'shiftEnable');
     }
 
     update() {

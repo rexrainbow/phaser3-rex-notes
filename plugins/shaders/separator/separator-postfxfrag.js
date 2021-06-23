@@ -17,6 +17,7 @@ uniform float spaceLeft;
 uniform float spaceRight;
 uniform float spaceTop;
 uniform float spaceBottom;
+uniform float shiftEnable;
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;
@@ -28,8 +29,10 @@ void main (void) {
   ) {
     gl_FragColor = vec4(0,0,0,0);
   } else {
-    tc.x += (tc.x < 0.0)? spaceLeft: -spaceRight;
-    tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;
+    if (shiftEnable > 0.0) {
+      tc.x += (tc.x < 0.0)? spaceLeft: -spaceRight;
+      tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;
+    }
 
     tc += separator;
     gl_FragColor = texture2D(uMainSampler, tc / texSize);

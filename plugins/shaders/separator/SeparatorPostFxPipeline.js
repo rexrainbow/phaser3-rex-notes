@@ -18,45 +18,45 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
         this.spaceRight = 0;
         this.spaceTop = 0;
         this.spaceBottom = 0;
+        this.shiftEnable = true;
     }
 
     resetFromJSON(o) {
         var separatedWidth = GetValue(o, 'width', undefined);
         if (separatedWidth === undefined) {
-            this.spaceLeft = GetValue(o, 'space.left', 0);
-            this.spaceRight = GetValue(o, 'space.right', 0);
+            this.spaceLeft = GetValue(o, 'left', 0);
+            this.spaceRight = GetValue(o, 'right', 0);
         } else {
             this.setSeparatedWidth(separatedWidth);
         }
 
         var separatedHeight = GetValue(o, 'height', undefined);
         if (separatedHeight === undefined) {
-            this.spaceTop = GetValue(o, 'space.top', 0);
-            this.spaceBottom = GetValue(o, 'space.bottom', 0);
+            this.spaceTop = GetValue(o, 'top', 0);
+            this.spaceBottom = GetValue(o, 'bottom', 0);
         } else {
             this.setSeparatedHeight(separatedHeight);
         }
 
-        var separateAtCenter = GetValue(o, 'center', undefined);
-        if (separateAtCenter) {
-            this.separateAtCenter();
-        } else {
-            this.separatorX = GetValue(o, 'x', 0);
-            this.separatorY = GetValue(o, 'Y', 0);
-        }
+        this.separatorX = GetValue(o, 'x', this.renderer.width / 2);
+        this.separatorY = GetValue(o, 'Y', this.renderer.height / 2);
+
+        this.shiftEnable = GetValue(o, 'shiftEnable', true);
         return this;
     }
 
     onPreRender() {
+        var texWidth = this.renderer.width,
+            textHeight = this.renderer.height;
+        this.set2f('separator', this.separatorX, (textHeight - this.separatorY));
+        this.set2f('texSize', texWidth, textHeight);
+
         this.set1f('spaceLeft', this.spaceLeft);
         this.set1f('spaceRight', this.spaceRight);
         this.set1f('spaceTop', this.spaceTop);
         this.set1f('spaceBottom', this.spaceBottom);
 
-        var texWidth = this.renderer.width,
-            textHeight = this.renderer.height;
-        this.set2f('separator', this.separatorX, (textHeight - this.separatorY));
-        this.set2f('texSize', texWidth, textHeight);
+        this.set1f('shiftEnable', (this.shiftEnable) ? 1 : 0);
     }
 
     // separator
@@ -131,6 +131,15 @@ class SeparatorPostFxPipeline extends PostFXPipeline {
     setSeparatedHeight(height) {
         this.separatedHeight = height;
         return this;
+    }
+
+    // shiftEnable
+    setShiftEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.shiftEnable = enable;
+        return true;
     }
 }
 
