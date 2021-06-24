@@ -23,7 +23,7 @@ Apply mask on game object. Built-in render of phaser.
             var mask = new Phaser.Display.Masks.BitmapMask(scene, shape);
             ```
         WebGL only
-    - Create mask from graphics
+    - Create mask from [graphics](graphics.md)
         1. Create graphics
             ```javascript
             var shape = scene.make.graphics();
