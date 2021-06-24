@@ -637,6 +637,12 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 var isTouching = sizer.isInTouching();
 ```
 
+### Change properties of child
+
+- [Set property of child from sizer](containerlite.md#set-properties-of-child)
+- Set property of child, then [reset local state of child](containerlite.md#reset-local-state-of-child)
+- [Tween local state of child](containerlite.md#tween-local-state)
+
 ### Other properties
 
 This game object inherits from [ContainerLite](containerlite.md).

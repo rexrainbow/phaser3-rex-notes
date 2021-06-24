@@ -36,4 +36,12 @@ export default {
         this.updateChildActive(child);
         return this;
     },
+
+    resetLocalActiveState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildActiveState(this);
+        }
+        return this;
+    }
 };

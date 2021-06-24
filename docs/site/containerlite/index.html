@@ -1835,6 +1835,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-local-state-of-child" class="md-nav__link">
+    Reset local state of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-local-state" class="md-nav__link">
     Tween local state
   </a>
@@ -5937,6 +5944,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reset-local-state-of-child" class="md-nav__link">
+    Reset local state of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-local-state" class="md-nav__link">
     Tween local state
   </a>
@@ -6286,6 +6300,31 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 </code></pre></div></li>
 <li>Local scale
     <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalScale</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="reset-local-state-of-child">Reset local state of child<a class="headerlink" href="#reset-local-state-of-child" title="Permanent link">&para;</a></h4>
+<p>Reset local state of child according to current properties of children</p>
+<ul>
+<li>Reset local state of all properties
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of position
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildPositionState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of rotation
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildRotationState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of scale
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildScaleState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of alpha
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildAlphaState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of visible
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildVisibleState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Reset local state of active
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">resetChildActiveState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="tween-local-state">Tween local state<a class="headerlink" href="#tween-local-state" title="Permanent link">&para;</a></h4>

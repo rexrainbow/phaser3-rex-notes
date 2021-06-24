@@ -329,6 +329,39 @@ var localState = child.rexContainer;
     container.setChildLocalScale(child, scaleX, scaleY);
     ```
 
+#### Reset local state of child
+
+Reset local state of child according to current properties of children
+
+- Reset local state of all properties
+    ```javascript
+    container.resetChildState(child);
+    ```
+- Reset local state of position
+    ```javascript
+    container.resetChildPositionState(child);
+    ```
+- Reset local state of rotation
+    ```javascript
+    container.resetChildRotationState(child);
+    ```
+- Reset local state of scale
+    ```javascript
+    container.resetChildScaleState(child);
+    ```
+- Reset local state of alpha
+    ```javascript
+    container.resetChildAlphaState(child);
+    ```
+- Reset local state of visible
+    ```javascript
+    container.resetChildVisibleState(child);
+    ```
+- Reset local state of active
+    ```javascript
+    container.resetChildActiveState(child);
+    ```
+
 #### Tween local state
 
 ```javascript
