@@ -93,7 +93,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 ### Apply effect
 
-- Apply effect to game object. A game object only can add 1 cross-stitching effect.
+- Apply effect to game object. A game object only can add 1 shockwave effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(gameObject, {
         // waveRadius: 0,
@@ -107,7 +107,7 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
     - `waveRadius` : Radius of shockwave, in pixels.
     - `waveWidth` : Width of shockwave, in pixels.
     - `powBaseScale`, `powExponent` : Parameters of shockwave.
-- Apply effect to camera. A camera only can add 1 cross-stitching effect.
+- Apply effect to camera. A camera only can add 1 shockwave effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(camera, config);
     ```

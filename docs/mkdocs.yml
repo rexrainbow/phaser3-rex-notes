@@ -198,6 +198,7 @@ nav:
         - Pixelation: shader-pixelation.md
         - Cross-stitching: shader-crossstitching.md
         - Shockwave: shader-shockwave.md
+        - Split: shader-split.md
     - Transition:
         - Warp: shader-warp.md
         - Dissolve: shader-dissolve.md

@@ -299,6 +299,7 @@ Some post-fx pipelines:
 - [Shockwave](shader-shockwave.md): Shockwave post processing filter.
 - [Swirl](shader-swirl.md): Swirl post processing filter.
 - [Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
+- [Split](shader-split.md): Split image into 4 parts.
 
 #### Add post-fx pipeline
 

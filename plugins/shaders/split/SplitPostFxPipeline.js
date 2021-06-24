@@ -73,7 +73,7 @@ class SplitPostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    separateAtCenter(width, height) {
+    splitAtCenter(width, height) {
         this.setSplit(this.renderer.width / 2, this.renderer.height / 2)
         if (width !== undefined) {
             this.setSplittedWidth(width);

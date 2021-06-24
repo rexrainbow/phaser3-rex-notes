@@ -106,6 +106,7 @@
 1. [Shader/outline](shader-outline.md): Outline post processing filter.
 1. [Shader/pixelation](shader-pixelation.md): Pixelation post processing filter.
 1. [Shader/shockwave](shader-shockwave.md): Shockwave post processing filter.
+1. [Shader/split](shader-split.md): Split image into 4 parts.
 1. [Shader/swirl](shader-swirl.md): Swirl post processing filter.
 1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
