@@ -26,7 +26,7 @@ Render texture with perspective rotation.
     ```
 - Add render texture object
     ```javascript
-    var image = scene.add.rexPerspectiveRenderTexturege(x, y, width, height, config);
+    var image = scene.add.rexPerspectiveRenderTexture(x, y, width, height, config);
     ```
 
 #### Import plugin

@@ -69,4 +69,12 @@ export default {
         this.updateChildPosition(child);
         return this;
     },
+
+    resetLocalPositionState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildPositionState(this);
+        }
+        return this;
+    }
 };

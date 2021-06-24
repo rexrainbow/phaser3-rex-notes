@@ -385,6 +385,14 @@ container.tweenChild({
    container.setScrollFactor(x, y);
    ```
 
+### Change origin
+
+```javascript
+container.changeOrigin(originX, originY);
+```
+
+This method also wull reset all local state of children.
+
 ## Compare with Official Container
 
 - Position/anlge/scale of a child object :

@@ -34,4 +34,12 @@ export default {
         this.updateChildRotation(child);
         return this;
     },
+
+    resetLocalRotationState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildRotationState(this);
+        }
+        return this;
+    },
 }

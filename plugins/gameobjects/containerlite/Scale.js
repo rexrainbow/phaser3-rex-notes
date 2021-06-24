@@ -50,5 +50,13 @@ export default {
         child.setDisplaySize(width, height);
         this.resetChildScaleState(child);
         return this;
-    }
+    },
+
+    resetLocalScaleState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildScaleState(this);
+        }
+        return this;
+    },
 }

@@ -35,4 +35,12 @@ export default {
         this.updateChildAlpha(child);
         return this;
     },
+
+    resetLocalAlphaState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildAlphaState(this);
+        }
+        return this;
+    }
 };

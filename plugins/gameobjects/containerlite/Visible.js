@@ -65,5 +65,13 @@ export default {
         localState.maskVisible = visible;
         this.updateChildVisible(child);
         return this;
+    },
+
+    resetLocalVisibleState() {
+        var parent = GetLocalState(this).parent;
+        if (parent) {
+            parent.resetChildVisibleState(this);
+        }
+        return this;
     }
 };
