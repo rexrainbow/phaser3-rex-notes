@@ -15,7 +15,11 @@ import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
 
-var methods = {};
+import ChangeOrigin from './ChangeOrigin.js';
+
+var methods = {
+    changeOrigin: ChangeOrigin
+};
 
 Object.assign(
     methods,
