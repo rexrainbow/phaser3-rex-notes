@@ -8,6 +8,7 @@ A container with an icon, text, and background.
 ## Live demos
 
 - [Align](https://codepen.io/rexrainbow/pen/WNvpoWw)
+- [Add to layer](https://codepen.io/rexrainbow/pen/oNZKmKZ)
 
 ## Usage
 
