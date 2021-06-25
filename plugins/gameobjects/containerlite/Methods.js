@@ -15,10 +15,12 @@ import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
 
+import AddToLayer from './AddToLayer.js';
 import ChangeOrigin from './ChangeOrigin.js';
 
 var methods = {
-    changeOrigin: ChangeOrigin
+    changeOrigin: ChangeOrigin,
+    addToLayer: AddToLayer,
 };
 
 Object.assign(

@@ -426,6 +426,14 @@ container.changeOrigin(originX, originY);
 
 This method also wull reset all local state of children.
 
+### Add to layer
+
+```javascript
+container.addToLayer(layer);
+```
+
+- `layer` : [Layer](layer.md) game object.
+
 ## Compare with Official Container
 
 - Position/anlge/scale of a child object :

@@ -42,66 +42,73 @@ class Demo extends Phaser.Scene {
 
         };
 
-        var scrollablePanel = this.rexUI.add.scrollablePanel({
-            x: 400,
-            y: 300,
-            width: 400,
-            // height: 220,
-
-            scrollMode: 1,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
-
-            panel: {
-                child: createPanel(this, data),
-
-                mask: {
-                    padding: 1
-                },
-            },
-
-            slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-            },
-
-            space: {
-                left: 10,
-                right: 10,
-                top: 10,
-                bottom: 10,
-
-                panel: 10,
-            }
-        })
+        var scrollablePanel = CreateScrollablePanel(this, data)
+            .setPosition(400, 300)
             .layout()
         // .drawBounds(this.add.graphics(), 0xff0000);
         // .popUp(300)
 
-        // Set icon interactive
-        var print = this.add.text(0, 0, '');
-        this.input.topOnly = false;
-        var labels = [];
-        labels.push(...scrollablePanel.getElement('#skills.items', true));
-        labels.push(...scrollablePanel.getElement('#items.items', true));
-        var scene = this;
-        labels.forEach(function (label) {
-            if (!label) {
-                return;
-            }
-
-            var click = scene.rexUI.add.click(label.getElement('icon'), { threshold: 10 })
-                .on('click', function () {
-                    if (!label.getTopmostSizer().isInTouching()) {
-                        return;
-                    }
-                    var category = label.getParentSizer().name;
-                    print.text += `${category}:${label.text}\n`;
-                });
-        })
+        var layer = this.add.layer();
+        scrollablePanel.addToLayer(layer);
     }
 
     update() { }
+}
+
+var CreateScrollablePanel = function (scene, data) {
+    var scrollablePanel = scene.rexUI.add.scrollablePanel({
+        width: 400,
+        // height: 220,
+
+        scrollMode: 1,
+
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
+
+        panel: {
+            child: createPanel(scene, data),
+
+            mask: {
+                padding: 1
+            },
+        },
+
+        slider: {
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+        },
+
+        space: {
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+
+            panel: 10,
+        }
+    })
+
+    // Set icon interactive
+    var print = scene.add.text(0, 0, '');
+    scene.input.topOnly = false;
+    var labels = [];
+    labels.push(...scrollablePanel.getElement('#skills.items', true));
+    labels.push(...scrollablePanel.getElement('#items.items', true));
+    labels.forEach(function (label) {
+        if (!label) {
+            return;
+        }
+
+        var click = scene.rexUI.add.click(label.getElement('icon'), { threshold: 10 })
+            .on('click', function () {
+                if (!label.getTopmostSizer().isInTouching()) {
+                    return;
+                }
+                var category = label.getParentSizer().name;
+                print.text += `${category}:${label.text}\n`;
+            });
+    })
+
+    return scrollablePanel;
 }
 
 var createPanel = function (scene, data) {
