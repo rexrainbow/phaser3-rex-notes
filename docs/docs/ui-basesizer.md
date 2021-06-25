@@ -643,6 +643,14 @@ var isTouching = sizer.isInTouching();
 - Set property of child, then [reset local state of child](containerlite.md#reset-local-state-of-child)
 - [Tween local state of child](containerlite.md#tween-local-state)
 
+### Add to layer
+
+```javascript
+sizer.addToLayer(layer);
+```
+
+- `layer` : [Layer](layer.md) game object.
+
 ### Other properties
 
 This game object inherits from [ContainerLite](containerlite.md).
