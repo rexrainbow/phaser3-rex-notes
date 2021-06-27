@@ -1,2 +1,2 @@
-import TagText from '../../../plugins/gameobjects/text/tagtext/TagText.js';
+import TagText from '../../../plugins/tagtext.js';
 export default TagText;

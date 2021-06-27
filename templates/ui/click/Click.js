@@ -1,2 +1,2 @@
-import Click from '../../../plugins/input/button/Button.js'
+import Click from '../../../plugins/button.js'
 export default Click;

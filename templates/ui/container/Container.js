@@ -1,2 +1,2 @@
-import Container from '../../../plugins/gameobjects/containerlite/ContainerLite.js';
+import Container from '../../../plugins/containerlite.js';
 export default Container;

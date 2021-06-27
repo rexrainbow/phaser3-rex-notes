@@ -1,2 +1,2 @@
-import TextPlayer from '../../../plugins/gameobjects/dynamictext/textplayer/TextPlayer.js';
+import TextPlayer from '../../../plugins/textplayer.js';
 export default TextPlayer;

@@ -1,2 +1,2 @@
-import Press from '../../../plugins/input/gestures/press/Press.js';
+import { Press } from '../../../plugins/gestures.js';
 export default Press;

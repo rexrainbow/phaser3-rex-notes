@@ -1,2 +1,2 @@
-import CircularProgress from '../../../plugins/gameobjects/shape/circularprogress/CircularProgress.js';
+import CircularProgress from '../../../plugins/circularprogress.js';
 export default CircularProgress;

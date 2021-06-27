@@ -1,2 +1,2 @@
-import Swipe from '../../../plugins/input/gestures/swipe/Swipe.js';
+import { Swipe } from '../../../plugins/gestures.js';
 export default Swipe;

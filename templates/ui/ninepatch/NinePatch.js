@@ -1,2 +1,2 @@
-import NinePatch from '../../../plugins/gameobjects/rendertexture/ninepatch/NinePatch.js'
+import NinePatch from '../../../plugins/ninepatch.js'
 export default NinePatch;

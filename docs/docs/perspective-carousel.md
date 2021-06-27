@@ -67,11 +67,11 @@ A [container](containerlite.md) with [cards](perspective-carousel.md).
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveCarousel } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add carousel object
     ```javascript    
-    var carousel = new Perspective.PerspectiveCarousel(scene, config);
+    var carousel = new PerspectiveCarousel(scene, config);
     sscene.add.existing(carousel);
     ```
 

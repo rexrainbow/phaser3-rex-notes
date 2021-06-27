@@ -66,11 +66,11 @@ Render texture with perspective rotation.
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveRenderTexture } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add render texture object
     ```javascript
-    var image = new Perspective.PerspectiveRenderTexturege(scene, x, y, width, height, config);
+    var image = new PerspectiveRenderTexture(scene, x, y, width, height, config);
     sscene.add.existing(image);
     ```
 

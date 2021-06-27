@@ -1,2 +1,2 @@
-import CircleMaskImage from '../../../plugins/gameobjects/canvas/circlemaskimage/CircleMaskImage.js';
+import CircleMaskImage from '../../../plugins/circlemaskimage.js';
 export default CircleMaskImage;

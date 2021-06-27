@@ -1,2 +1,2 @@
-import Pinch from '../../../plugins/input/gestures/pinch/Pinch.js';
+import { Pinch } from '../../../plugins/gestures.js';
 export default Pinch;

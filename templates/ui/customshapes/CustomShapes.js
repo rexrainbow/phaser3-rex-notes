@@ -1,2 +1,2 @@
-import CustomShapes from '../../../plugins/gameobjects/shape/customshapes/CustomShapes.js';
+import CustomShapes from '../../../plugins/customshapes.js';
 export default CustomShapes;

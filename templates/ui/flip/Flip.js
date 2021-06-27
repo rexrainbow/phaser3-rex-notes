@@ -1,2 +1,2 @@
-import Flip from '../../../plugins/behaviors/flip/Flip.js';
+import Flip from '../../../plugins/flip.js';
 export default Flip;

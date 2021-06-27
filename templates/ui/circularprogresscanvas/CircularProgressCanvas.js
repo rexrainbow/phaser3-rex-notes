@@ -1,2 +1,2 @@
-import CircularProgressCanvas from '../../../plugins/gameobjects/canvas/circularprogress/CircularProgress.js';
+import CircularProgressCanvas from '../../../plugins/circularprogresscanvas.js';
 export default CircularProgressCanvas;

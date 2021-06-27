@@ -66,11 +66,11 @@ Image with perspective rotation.
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveImage } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add image object
     ```javascript    
-    var image = new Perspective.PerspectiveImage(scene, x, y, texture, frame, config);
+    var image = new PerspectiveImage(scene, x, y, texture, frame, config);
     sscene.add.existing(image);
     ```
 

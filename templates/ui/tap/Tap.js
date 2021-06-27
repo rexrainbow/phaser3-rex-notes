@@ -1,2 +1,2 @@
-import Tap from '../../../plugins/input/gestures/tap/Tap.js';
+import { Tap } from '../../../plugins/gestures.js';
 export default Tap;

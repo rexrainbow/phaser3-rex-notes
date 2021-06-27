@@ -1,2 +1,2 @@
-import Canvas from '../../../plugins/gameobjects/canvas/canvas/Canvas.js';
+import Canvas from '../../../plugins/canvas.js';
 export default Canvas;

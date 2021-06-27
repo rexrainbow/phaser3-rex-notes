@@ -66,11 +66,11 @@ A [container](containerlite.md) with two [perspective-images](perspective-card.m
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveCard } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add card object
     ```javascript    
-    var card = new Perspective.PerspectiveCard(scene, config);
+    var card = new PerspectiveCard(scene, config);
     sscene.add.existing(card);
     ```
 

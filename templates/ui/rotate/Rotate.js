@@ -1,2 +1,2 @@
-import Rotate from '../../../plugins/input/gestures/rotate/Rotate.js';
+import { Rotate } from '../../../plugins/gestures.js';
 export default Rotate;

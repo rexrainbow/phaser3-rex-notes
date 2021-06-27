@@ -66,11 +66,11 @@ Display list of images.
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { PerspectiveImageCarousel } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add carousel object
     ```javascript    
-    var carousel = new Perspective.PerspectiveImageCarousel(scene, config);
+    var carousel = new PerspectiveImageCarousel(scene, config);
     sscene.add.existing(carousel);
     ```
 

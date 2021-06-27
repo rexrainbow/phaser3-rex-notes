@@ -1,2 +1,2 @@
-import Perspective from '../../../plugins/behaviors/containerperspective/ContainerPerspective.js';
-export default Perspective;
+import { ContainerPerspective } from '../../../plugins/perspectiveimage.js';
+export default ContainerPerspective;

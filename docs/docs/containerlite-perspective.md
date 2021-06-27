@@ -61,12 +61,12 @@ Snapshot children of [containerlite](containerlite.md), to a [perspective render
     ```
 - Import class
     ```javascript
-    import Perspective from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
+    import { ContainerPerspective } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
 - Add perspective behavior
     ```javascript
     // var container = scene.add.rexContainerLite(x, y);
-    var perspective = new Perspective.ContainerPerspective(container, config);
+    var perspective = new ContainerPerspective(container, config);
     ```
 
 ### Create instance
