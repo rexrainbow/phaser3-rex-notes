@@ -6,10 +6,12 @@ export default class NumberBar extends Sizer {
         scene: Phaser.Scene,
 
         config?: {
-            x?: number;
-            y?: number;
-            width?: number;
-            height?: number;
+            x?: number,
+            y?: number,
+            width?: number,
+            height?: number,
+
+            orientation?: 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom',
 
             space?: {
                 left?: number,
@@ -19,7 +21,7 @@ export default class NumberBar extends Sizer {
 
                 icon?: number,
                 slider?: number,
-            };
+            },
 
             anchor?: {
                 left?: string, right?: string, centerX?: string, x?: string,

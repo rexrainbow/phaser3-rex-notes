@@ -7,6 +7,7 @@ import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
+import SizerFactory from './sizer/Factory';
 
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
@@ -19,5 +20,6 @@ export default class UIFactories {
         menu: MenuFactory,
         numberBar: NumberBarFactory,
         roundRectangle: RoundRectangleFactory,
+        sizer: SizerFactory,
     }
 }

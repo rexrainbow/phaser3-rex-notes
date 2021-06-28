@@ -3,10 +3,12 @@ import NumberBar from './NumberBar';
 
 declare type NumberBarFactory = (
     config?: {
-        x?: number;
-        y?: number;
-        width?: number;
-        height?: number;
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+
+        orientation?: 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom',
 
         space?: {
             left?: number,
@@ -16,7 +18,7 @@ declare type NumberBarFactory = (
 
             icon?: number,
             slider?: number,
-        };
+        },
 
         anchor?: {
             left?: string, right?: string, centerX?: string, x?: string,
