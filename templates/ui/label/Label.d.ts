@@ -18,11 +18,17 @@ export default class Label extends Sizer {
                 right?: number,
                 top?: number,
                 bottom?: number,
-                item?: number,
 
                 icon?: number,
                 text?: number,
             };
+
+            anchor?: {
+                left?: string, right?: string, centerX?: string, x?: string,
+                top?: string, bottom?: string, centerY?: string, y?: string
+            },
+
+            draggable?: boolean | string | Phaser.GameObjects.GameObject,
 
             name?: string,
 

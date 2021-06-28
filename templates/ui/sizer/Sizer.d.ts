@@ -24,14 +24,14 @@ export default class Sizer extends BaseSizer {
                 item?: number,
             };
 
-            name?: string,
-
             anchor?: {
                 left?: string, right?: string, centerX?: string, x?: string,
                 top?: string, bottom?: string, centerY?: string, y?: string
             },
 
-            draggable?: boolean | string | Phaser.GameObjects.GameObject
+            draggable?: boolean | string | Phaser.GameObjects.GameObject;
+
+            name?: string;
         }
     );
 

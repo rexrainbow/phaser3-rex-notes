@@ -104,11 +104,6 @@ export default {
         return this;
     },
 
-    moveTo(child, index) {
-        ArrayUtils.MoveTo(this.children, child, index);
-        return this;
-    },
-
     setAll(property, value, startIndex, endIndex) {
         ArrayUtils.SetAll(this.children, property, value, startIndex, endIndex);
         return this;

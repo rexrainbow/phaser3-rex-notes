@@ -15,13 +15,19 @@ declare type LabelFactory = (
             right?: number,
             top?: number,
             bottom?: number,
-            item?: number,
 
             icon?: number,
             text?: number,
         };
 
-        name?: string,
+        anchor?: {
+            left?: string, right?: string, centerX?: string, x?: string,
+            top?: string, bottom?: string, centerY?: string, y?: string
+        },
+
+        draggable?: boolean | string | Phaser.GameObjects.GameObject;
+
+        name?: string;
 
         background?: Phaser.GameObjects.GameObject,
 

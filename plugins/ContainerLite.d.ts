@@ -147,11 +147,6 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         child2: Phaser.GameObjects.GameObject
     ): number;
 
-    moveTo(
-        child: Phaser.GameObjects.GameObject,
-        index: number
-    ): this;
-
     setAll(
         property: string,
         value?: unknown,

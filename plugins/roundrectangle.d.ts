@@ -38,10 +38,20 @@ export default class RoundRectangle extends Phaser.GameObjects.Shape {
 
     radius: number;
 
-    setRadius(value: number): this;
+    setRadius(
+        value: number |
+        {
+            tl?: number | { x?: number, y?: number },
+            tr?: number | { x?: number, y?: number },
+            bl?: number | { x?: number, y?: number },
+            br?: number | { x?: number, y?: number }
+        }
+    ): this;
 
-    cornerRadius: number;
-
-    setCornerRadius(value: number): this;
-
+    get cornerRadius(): {
+        tl: { x: number, y: number },
+        tr: { x: number, y: number },
+        bl: { x: number, y: number },
+        br: { x: number, y: number }
+    };
 }
