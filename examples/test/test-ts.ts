@@ -1,5 +1,4 @@
 import 'phaser';
-import { Label } from '../../templates/ui/ui-components'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,18 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var label = new Label(this, {
-            x: 400,
-            y: 300,
-            orientation: 'y',
-            space: {
-                left: 10, right: 10, top: 10, bottom: 10
-            },
-
-            text: this.add.text(0, 0, 'aabb')
-        })
-
-        label.layout()
+        this.add.text(400, 300, 'Hello Phaser3').setOrigin(0.5);
 
     }
 

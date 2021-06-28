@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import Sizer from '../sizer/Sizer'
+import Sizer from '../sizer/Sizer';
 
 export default class Label extends Sizer {
     constructor(
@@ -41,10 +41,6 @@ export default class Label extends Sizer {
             actionMask?: boolean,
 
             align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
-
-
-
-
         }
     );
 
