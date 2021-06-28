@@ -35,7 +35,6 @@ export default class Label extends Sizer {
             background?: Phaser.GameObjects.GameObject,
 
             icon?: Phaser.GameObjects.GameObject,
-
             iconMask?: boolean,
 
             text?: Phaser.GameObjects.GameObject,
@@ -43,7 +42,6 @@ export default class Label extends Sizer {
             expandTextHeight?: boolean,
 
             action?: Phaser.GameObjects.GameObject,
-
             actionMask?: boolean,
 
             align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
