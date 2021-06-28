@@ -94,37 +94,73 @@ export default class Dialog extends Sizer {
         }
     );
 
-    emitChoiceClick(index: number): this;
+    emitChoiceClick(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    emitActionClick(index: number): this;
+    emitActionClick(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    emitToolbarClick(index: number): this;
+    emitToolbarClick(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    emitLeftToolbarClick(index: number): this;
+    emitLeftToolbarClick(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    setChoiceEnable(index: number, enable?: boolean): this;
+    setChoiceEnable(
+        index: number | Phaser.GameObjects.GameObject,
+        enable?: boolean
+    ): this;
 
-    setActionEnable(index: number, enable?: boolean): this;
+    setActionEnable(
+        index: number | Phaser.GameObjects.GameObject,
+        enable?: boolean
+    ): this;
 
-    setToolbarEnable(index: number, enable?: boolean): this;
+    setToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject,
+        enable?: boolean
+    ): this;
 
-    setLeftToolbarEnable(index: number, enable?: boolean): this;
+    setLeftToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject,
+        enable?: boolean
+    ): this;
 
-    toggleChoiceEnable(index: number): this;
+    toggleChoiceEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    toggleActionEnable(index: number): this;
+    toggleActionEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    toggleToolbarEnable(index: number): this;
+    toggleToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    toggleLeftToolbarEnable(index: number): this;
+    toggleLeftToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    getChoiceEnable(index: number): boolean;
+    getChoiceEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): boolean;
 
-    getActionEnable(index: number): boolean;
+    getActionEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): boolean;
 
-    getToolbarEnable(index: number): boolean;
+    getToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): boolean;
 
-    getLeftToolbarEnable(index: number): boolean;
+    getLeftToolbarEnable(
+        index: number | Phaser.GameObjects.GameObject
+    ): boolean;
 
     addChoice(gameObject: Phaser.GameObjects.GameObject): this;
 
@@ -134,13 +170,25 @@ export default class Dialog extends Sizer {
 
     addLeftToolbar(gameObject: Phaser.GameObjects.GameObject): this;
 
-    removeChoice(index: number, destroyChild?: boolean): this;
+    removeChoice(
+        index: number | Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
 
-    removeAction(index: number, destroyChild?: boolean): this;
+    removeAction(
+        index: number | Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
 
-    removeToolbar(index: number, destroyChild?: boolean): this;
+    removeToolbar(
+        index: number | Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
 
-    removeLeftToolbar(index: number, destroyChild?: boolean): this;
+    removeLeftToolbar(
+        index: number | Phaser.GameObjects.GameObject,
+        destroyChild?: boolean
+    ): this;
 
     clearChoices(destroyChild?: boolean): this;
 
@@ -150,21 +198,37 @@ export default class Dialog extends Sizer {
 
     clearLeftToolbar(destroyChild?: boolean): this;
 
-    showChoice(index: number): this;
+    showChoice(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    showAction(index: number): this;
+    showAction(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    showToolbar(index: number): this;
+    showToolbar(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    showLeftToolbar(index: number): this;
+    showLeftToolbar(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    hideChoice(index: number): this;
+    hideChoice(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    hideAction(index: number): this;
+    hideAction(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    hideToolbar(index: number): this;
+    hideToolbar(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
-    hideLeftToolbar(index: number): this;
+    hideLeftToolbar(
+        index: number | Phaser.GameObjects.GameObject
+    ): this;
 
     forEachChoice(
         callback: (button: Phaser.GameObjects.GameObject, index: number, buttons: Phaser.GameObjects.GameObject[]) => void,
