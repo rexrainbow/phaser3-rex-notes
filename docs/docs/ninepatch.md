@@ -266,7 +266,7 @@ ninePatch.setGetFrameNameCallback(callback);
 
 - `callback` : Return a string, or `undefined`.
     ```javascript
-    function(colIndex, rowIndex) {
+    function(colIndex, rowIndex, baseFrame) {
         return `${colIndex},${rowIndex}`
     }
     ```

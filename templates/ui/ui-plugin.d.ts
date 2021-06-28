@@ -5,6 +5,7 @@ import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
+import NinePatchFactory from './ninepatch/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import SizerFactory from './sizer/Factory';
@@ -18,6 +19,7 @@ export default class UIFactories {
         dialog: DialogFactory,
         label: LabelFactory,
         menu: MenuFactory,
+        ninePatch: NinePatchFactory,
         numberBar: NumberBarFactory,
         roundRectangle: RoundRectangleFactory,
         sizer: SizerFactory,
