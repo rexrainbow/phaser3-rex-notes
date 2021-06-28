@@ -4,6 +4,7 @@ import ButtonsFactory from './buttons/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import LabelFactory from './label/Factory';
+import MenuFactory from './menu/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 
 export default class UIFactories {
@@ -14,6 +15,7 @@ export default class UIFactories {
         container: ContainerFactory,
         dialog: DialogFactory,
         label: LabelFactory,
-        roundRectangle: RoundRectangleFactory
+        menu: MenuFactory
+        roundRectangle: RoundRectangleFactory,
     }
 }

@@ -86,11 +86,11 @@ var menu = scene.rexUI.add.menu({
 
     createBackgroundCallback: function(items) {
         var scene = items.scene;
-        // container = ...
-        return container;
+        // background = ...
+        return background;
     },
-
     createBackgroundCallbackScope: undefined,
+
     createButtonCallback: function(item, index, items) {
         var scene = item.scene;
         // var isFirstButton = (index === 0);
@@ -162,10 +162,10 @@ var menu = scene.rexUI.add.menu({
     - `'button.over'`
 - `subMenuSide` : Side of sub-menu
     - `undefined` : Determine side of sub-menu automatically.
-    - `right`, or `0` : Put sub-menu at right side. Used with `orientation` is set to `y`.
-    - `left`, or `2` : Put sub-menu at left side. Used with `orientation` is set to `y`.
-    - `up`, or `3` : Put sub-menu at up side. Used with `orientation` is set to `x`.
-    - `down`, or `1` : Put sub-menu at down side. Used with `orientation` is set to `x`.
+    - `'right'`, or `0` : Put sub-menu at right side. Used with `orientation` is set to `y`.
+    - `'left'`, or `2` : Put sub-menu at left side. Used with `orientation` is set to `y`.
+    - `'up'`, or `3` : Put sub-menu at up side. Used with `orientation` is set to `x`.
+    - `'down'`, or `1` : Put sub-menu at down side. Used with `orientation` is set to `x`.
 - `name` : Set name of this menu.
 
 ### Custom class
