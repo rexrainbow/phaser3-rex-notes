@@ -323,7 +323,7 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     ```
 - Font
     ```javascript
-    circularProgress.setTextFont(fontSize, fontFamily, fontStyle)
+    circularProgress.setTextFont(fontSize, fontFamily, fontStyle);
     ```
 - Format callback
     ```javascript

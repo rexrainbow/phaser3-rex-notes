@@ -3,6 +3,7 @@ import * as Phaser from 'phaser';
 import ButtonsFactory from './buttons/Factory';
 import CanvasFactory from './canvas/Factory';
 import CircleMaskImageFactory from './circlemaskimage/Factory';
+import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import LabelFactory from './label/Factory';
@@ -19,6 +20,7 @@ export default class UIFactories {
         buttons: ButtonsFactory,
         canvas: CanvasFactory,
         circleMaskImage: CircleMaskImageFactory,
+        circularProgressCanvas: CircularProgressCanvasFactory,
         container: ContainerFactory,
         dialog: DialogFactory,
         label: LabelFactory,
