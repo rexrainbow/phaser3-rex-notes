@@ -2,16 +2,24 @@ import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/ContainerLite.js';
 
 export interface IConfig {
+    space?: {
+        left?: number, right?: number, top?: number, bottom?: number,
+    },
+
     anchor?: {
         left?: string, right?: string, centerX?: string, x?: string,
         top?: string, bottom?: string, centerY?: string, y?: string
     },
+
     draggable?: boolean | string | Phaser.GameObjects.GameObject,
+    
     name?: string
 }
 
 export default class BaseSizer extends ContainerLite {
     isRexSizer: true;
+
+    space: { [name: string]: number };
 
     constructor(
         scene: Phaser.Scene,
