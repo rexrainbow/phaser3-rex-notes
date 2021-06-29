@@ -363,7 +363,7 @@ See also - [dirty](ui-basesizer.md#dirty)
 ### Reset grid
 
 ```javascript
-sizer.setupGrid(column, row, columnProportions, rowProportions, space);
+sizer.resetGrid(column, row, columnProportions, rowProportions, space);
 ```
 
 - `column` : Amount of column grids.

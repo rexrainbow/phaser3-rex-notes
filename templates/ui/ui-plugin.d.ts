@@ -11,6 +11,7 @@ import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
+import GridSizerFactory from './gridsizer/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
@@ -40,6 +41,7 @@ export default class UIFactories {
         dialog: DialogFactory,
         fixWidthButtons: FixWidthButtonsFactory,
         fixWidthSizer: FixWidthSizerFactory,
+        gridSizer: GridSizerFactory,
         knob: KnobFactory,
         label: LabelFactory,
         menu: MenuFactory,
