@@ -1,6 +1,6 @@
-import Canvas from './canvas';
+import * as Phaser from 'phaser';
 
-export default class CircularProgressCanvas extends Canvas {
+export default class CircularProgress extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
         config?: {
@@ -13,15 +13,6 @@ export default class CircularProgressCanvas extends Canvas {
             thickness?: number,
             startAngle?: number,
             anticlockwise?: boolean,
-
-            textColor?: string | number,
-            textStrokeColor?: string | number,
-            textStrokeThickness?: number,
-            textSize?: string,
-            textFamily?: string,
-            textStyle?: string,
-            textFormatCallback?: (value: number) => string,
-            textFormatCallbackScope?: unknown,
 
             value?: number,
         }
@@ -49,19 +40,4 @@ export default class CircularProgressCanvas extends Canvas {
 
     centerColor: string;
     setCenterColor(centerColor?: string | number): this;
-
-    textColor: string;
-    setTextColor(color?: string | number): this;
-
-    textStrokeColor: string;
-    textStrokeThickness: number;
-    setTextStrokeColor(color?: string | number, thickness?: number): this;
-
-    textFont: string;
-    setTextFont(fontSize: string, fontFamily: string, fontStyle: string): this;
-
-    setTextFormatCallback(
-        callback: (value: number) => string,
-        scope?: unknown
-    ): this
 }

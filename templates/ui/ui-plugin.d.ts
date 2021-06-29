@@ -4,6 +4,7 @@ import ButtonsFactory from './buttons/Factory';
 import CanvasFactory from './canvas/Factory';
 import CircleMaskImageFactory from './circlemaskimage/Factory';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
+import CircularProgressFactory from './circularprogress/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import LabelFactory from './label/Factory';
@@ -21,6 +22,7 @@ export default class UIFactories {
         canvas: CanvasFactory,
         circleMaskImage: CircleMaskImageFactory,
         circularProgressCanvas: CircularProgressCanvasFactory,
+        circularProgress: CircularProgressFactory,
         container: ContainerFactory,
         dialog: DialogFactory,
         label: LabelFactory,
