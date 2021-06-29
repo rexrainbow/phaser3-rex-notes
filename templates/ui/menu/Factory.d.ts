@@ -6,3 +6,4 @@ declare type MenuFactory = (
 ) => Menu;
 
 export default MenuFactory;
+export { Menu, IConfig };

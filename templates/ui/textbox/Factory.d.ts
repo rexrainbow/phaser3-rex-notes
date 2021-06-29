@@ -6,3 +6,4 @@ declare type TextBoxFactory = (
 ) => TextBox;
 
 export default TextBoxFactory;
+export { TextBox, IConfig };

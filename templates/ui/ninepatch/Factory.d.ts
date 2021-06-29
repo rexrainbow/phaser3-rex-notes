@@ -6,3 +6,4 @@ declare type NinePatchFactory = (
 ) => NinePatch;
 
 export default NinePatchFactory;
+export { NinePatch, IConfig };

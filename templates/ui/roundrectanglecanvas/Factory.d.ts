@@ -21,3 +21,4 @@ declare type RoundRectangleCanvasFactory = (
 ) => RoundRectangleCanvas;
 
 export default RoundRectangleCanvasFactory;
+export { RoundRectangleCanvas };

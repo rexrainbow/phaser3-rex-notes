@@ -6,3 +6,4 @@ declare type DialogFactory = (
 ) => Dialog;
 
 export default DialogFactory;
+export { Dialog, IConfig };

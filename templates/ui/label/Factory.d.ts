@@ -6,3 +6,4 @@ declare type LabelFactory = (
 ) => Label;
 
 export default LabelFactory;
+export { Label, IConfig };

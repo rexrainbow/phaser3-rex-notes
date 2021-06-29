@@ -6,3 +6,4 @@ declare type SizerFactory = (
 ) => Sizer;
 
 export default SizerFactory;
+export { Sizer, IConfig };

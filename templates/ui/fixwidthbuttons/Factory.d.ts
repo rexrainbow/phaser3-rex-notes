@@ -6,3 +6,4 @@ declare type FixWidthButtonsFactory = (
 ) => FixWidthButtons;
 
 export default FixWidthButtonsFactory;
+export { FixWidthButtons, IConfig };

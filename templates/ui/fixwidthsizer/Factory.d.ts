@@ -6,3 +6,4 @@ declare type FixWidthSizerFactory = (
 ) => FixWidthSizer;
 
 export default FixWidthSizerFactory;
+export { FixWidthSizer, IConfig };

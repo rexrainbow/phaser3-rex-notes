@@ -6,3 +6,4 @@ declare type CanvasFactory = (
 ) => Canvas;
 
 export default CanvasFactory;
+export { Canvas };

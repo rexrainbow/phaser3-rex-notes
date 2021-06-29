@@ -10,3 +10,4 @@ declare type CircleMaskImageFactory = (
 ) => CircleMaskImage;
 
 export default CircleMaskImageFactory;
+export { CircleMaskImage, IConfig };

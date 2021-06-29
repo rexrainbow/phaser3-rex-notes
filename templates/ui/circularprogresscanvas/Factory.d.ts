@@ -6,3 +6,4 @@ declare type CircularProgressCanvasFactory = (
 ) => CircularProgressCanvas;
 
 export default CircularProgressCanvasFactory;
+export { CircularProgressCanvas, IConfig };

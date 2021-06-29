@@ -17,3 +17,4 @@ declare type RoundRectangleFactory = (
 ) => RoundRectangle;
 
 export default RoundRectangleFactory;
+export { RoundRectangle }

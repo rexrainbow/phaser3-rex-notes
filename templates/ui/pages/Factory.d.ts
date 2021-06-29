@@ -6,3 +6,4 @@ declare type PageFactory = (
 ) => Page;
 
 export default PageFactory;
+export { Page, IConfig };
