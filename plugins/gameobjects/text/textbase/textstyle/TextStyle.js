@@ -184,7 +184,7 @@ class TextStyle {
         var fill = GetValue(style, 'fill', null);
 
         if (fill !== null) {
-            this.color = fill;
+            this.color = GetStyle(fill);
         }
 
         if (updateText) {

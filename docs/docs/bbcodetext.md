@@ -139,7 +139,6 @@ Default style
     lineSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
-    lineSpacing: 0,
     testString: '|MÉqgy',
     wrap: {
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
@@ -200,9 +199,9 @@ var txt = scene.make.rexBBCodeText({
 
 - Alignment
     - `halign`, or `align` : Horizontal alignment.
-        - `left`, `center`, `right`
+        - `'left'`, `'center'`, `'right'`
     - `valign` : Vertical alignment.
-        - `top`, `center`, `bottom`
+        - `'top'`, `'center'`, `'bottom'`
 
 ### Custom class
 
@@ -407,6 +406,35 @@ txt.setFontStyle(style);
         txt.setShadowFill(enabled);
         ```
         - `color` : `null`, css string, or number.
+
+### Align
+
+- Horizontal align
+    - Get
+        ```javascript
+        var align = txt.style.halign;
+        ```
+        - `align` : `'left'`, `'center'`, `'right'`
+    - Set
+        ```javascript
+        txt.setHAlign(align);    
+        ```
+        or
+        ```javascript
+        txt.setAlign(align);    
+        ```
+        - `align` : `'left'`, `'center'`, `'right'`
+- Vertical align
+    - Get
+        ```javascript
+        var align = txt.style.valign;
+        ```
+        - `align` : `'top'`, `'center'`, `'bottom'`
+    - Set
+        ```javascript
+        txt.setVAlign(align);    
+        ```
+        - `align` : `'top'`, `'center'`, `'bottom'`
 
 ### Image
 

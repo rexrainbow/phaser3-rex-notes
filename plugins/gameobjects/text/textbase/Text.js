@@ -275,6 +275,12 @@ class Text extends GameObject {
     setAlign(align) {
         return this.style.setHAlign(align);
     }
+    setHAlign(align) {
+        return this.style.setHAlign(align);
+    }
+    setVAlign(align) {
+        return this.style.setVAlign(align);
+    }
 
     setLineSpacing(value) {
         return this.style.setLineSpacing(value);

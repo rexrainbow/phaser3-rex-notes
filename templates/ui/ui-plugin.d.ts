@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 
+import BBCodeTextFactory from './bbcodetext/Factory';
 import ButtonsFactory from './buttons/Factory';
 import CanvasFactory from './canvas/Factory';
 import CircleMaskImageFactory from './circlemaskimage/Factory';
@@ -20,6 +21,7 @@ export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
     add: {
+        BBCodeText: BBCodeTextFactory,
         buttons: ButtonsFactory,
         canvas: CanvasFactory,
         circleMaskImage: CircleMaskImageFactory,
