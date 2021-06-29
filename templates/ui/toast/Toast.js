@@ -145,7 +145,7 @@ class Toast extends Label {
         this.player
             .load(commands, this)
             .once('complete', function () {
-                this.show();
+                this.showMessage();
             }, this)
             .start();
 
