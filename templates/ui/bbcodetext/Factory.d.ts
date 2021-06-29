@@ -8,4 +8,3 @@ declare type BBCodeTextFactory = (
 ) => BBCodeText;
 
 export default BBCodeTextFactory;
-export { BBCodeText, TextStyle };

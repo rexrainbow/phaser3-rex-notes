@@ -6,4 +6,3 @@ declare type NumberBarFactory = (
 ) => NumberBar;
 
 export default NumberBarFactory;
-export { NumberBar, IConfig };

@@ -8,4 +8,3 @@ declare type ContainerFactory = (
 ) => Container;
 
 export default ContainerFactory;
-export { Container };

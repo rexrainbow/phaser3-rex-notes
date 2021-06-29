@@ -6,4 +6,3 @@ declare type CircularProgressFactory = (
 ) => CircularProgress;
 
 export default CircularProgressFactory;
-export { CircularProgress, IConfig };

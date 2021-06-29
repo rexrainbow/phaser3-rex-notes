@@ -6,4 +6,3 @@ declare type ToastFactory = (
 ) => Toast;
 
 export default ToastFactory;
-export { Toast, IConfig }

@@ -6,4 +6,3 @@ declare type KnobFactory = (
 ) => Knob;
 
 export default KnobFactory;
-export { Knob, IConfig };

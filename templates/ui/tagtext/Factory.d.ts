@@ -8,4 +8,3 @@ declare type TagTextFactory = (
 ) => TagText;
 
 export default TagTextFactory;
-export { TagText, TextStyle };

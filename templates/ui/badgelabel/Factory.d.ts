@@ -6,4 +6,3 @@ declare type BadgeLabelFactory = (
 ) => BadgeLabel;
 
 export default BadgeLabelFactory;
-export { BadgeLabel, IConfig };

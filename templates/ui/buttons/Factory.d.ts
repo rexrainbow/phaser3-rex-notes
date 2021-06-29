@@ -6,4 +6,3 @@ declare type ButtonsFactory = (
 ) => Buttons;
 
 export default ButtonsFactory;
-export { Buttons, IConfig };

@@ -6,4 +6,3 @@ declare type OverlapSizerFactory = (
 ) => OverlapSizer;
 
 export default OverlapSizerFactory;
-export { OverlapSizer, IConfig };
