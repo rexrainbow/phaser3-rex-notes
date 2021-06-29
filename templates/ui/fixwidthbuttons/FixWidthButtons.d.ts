@@ -1,15 +1,9 @@
 import * as Phaser from 'phaser';
-import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigBase } from '../sizer/Sizer';
+import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
+import { IConfig as IConfigBase } from '../fixwidthsizer/FixWidthSizer';
 
 export interface IConfig extends IConfigBase {
-    background?: Phaser.GameObjects.GameObject,
-
     buttons?: Phaser.GameObjects.GameObject[],
-
-    expand?: boolean,
-
-    align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
 
     click?: {
         mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
@@ -27,7 +21,7 @@ export interface IConfig extends IConfigBase {
     setValueCallbackScope?: unknown
 }
 
-export default class Buttons extends Sizer {
+export default class FixWidthButtons extends FixWidthSizer {
     constructor(
         scene: Phaser.Scene,
         config?: IConfig

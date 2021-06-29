@@ -148,11 +148,11 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     - `false` : Place children from left-to-right/top-to-bottom, default value.
     - `true` : Place children from right-to-left/bottom-to-top.
 - `align` : Align children of a line.
-    - `0`, `'left'`, `'top'` : Align children of a line to left/top side.
-    - `1`, `'right'`, `'bottom'` : Align children of a line to right/bottom side.
+    - `0`, `'left'` : Align children of a line to left/top side.
+    - `1`, `'right'` : Align children of a line to right/bottom side.
     - `2`, `'center'` : Align children of a line to ceter.
-    - `3`, `'justify'`, `'justify-left'`, `'justify-top'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
-    - `4`, `'justify-right'`, `'justify-bottom'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
+    - `3`, `'justify'`, `'justify-left'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
+    - `4`, `'justify-right'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
     - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
 
 ### Custom class

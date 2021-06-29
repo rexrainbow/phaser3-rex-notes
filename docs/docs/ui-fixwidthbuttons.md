@@ -81,8 +81,6 @@ var buttons = scene.rexUI.add.fixWidthButtons({
     // width: undefined,
     // height: undefined,
 
-    orientation: 0,
-
     // Elements
     // background: backgroundGameObject,
 
@@ -119,17 +117,14 @@ var buttons = scene.rexUI.add.fixWidthButtons({
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
-- `orientation` : Main orientation of button game objects.
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange button game objects from left ot right.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top to bottom.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : 1d/2d array of button game objects.
 - `align` : Align children of a line.
-    - `0`, `'left'`, `'top'` : Align children of a line to left/top side.
-    - `1`, `'right'`, `'bottom'` : Align children of a line to right/bottom side.
+    - `0`, `'left'` : Align children of a line to left/top side.
+    - `1`, `'right'` : Align children of a line to right/bottom side.
     - `2`, `'center'` : Align children of a line to ceter.
-    - `3`, `'justify'`, `'justify-left'`, `'justify-top'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
-    - `4`, `'justify-right'`, `'justify-bottom'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
+    - `3`, `'justify'`, `'justify-left'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
+    - `4`, `'justify-right'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
     - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
 - `click`: Configuration of [button clicking](button.md).
     - `click.mode` :
@@ -430,7 +425,7 @@ buttons.forEachButtton(callback, scope);
     - `type` : Set type to `'checkboxes'`, or `'radio'`.
     - `setValueCallback` : Callback to set value of a button.
         ```javascript
-        function(button, value) {
+        function(button, value, previousValue) {
             // ...
         }
         ```
