@@ -13,6 +13,7 @@ import NinePatchFactory from './ninepatch/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import SizerFactory from './sizer/Factory';
+import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
 
 export default class UIFactories {
@@ -32,6 +33,7 @@ export default class UIFactories {
         numberBar: NumberBarFactory,
         roundRectangle: RoundRectangleFactory,
         sizer: SizerFactory,
+        textBox: TextBoxFactory,
         toast: ToastFactory,
     }
 }
