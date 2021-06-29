@@ -139,18 +139,18 @@ var toast = scene.rexUI.add.toast({
     - `duration.in` : Duration of transit-in stage.
     - `duration.hold` : Duration of hold stage.
     - `duration.out` : Duration of transit-out stage.
-- `transitIn` : Callback of transit-in.
-    - `0`, or `popUp` : Pop-up.
-    - `1`, or `fadeIn` : Fade-in.
+- `transitIn` : Transit-in action.
+    - `0`, or `'popUp'` : Pop-up.
+    - `1`, or `'fadeIn'` : Fade-in.
     - A callback : Custom transit-in function
         ```javascript
         function(toast, duration) {
             // ...
         }
         ```
-- `transitOut` : Callback of transit-out.
-    - `0`, or `scaleDown` : Scale-down.
-    - `1`, or `fadeOut` : Fade-out.
+- `transitOut` : Transit-out action.
+    - `0`, or `'scaleDown'` : Scale-down.
+    - `1`, or `'fadeOut'` : Fade-out.
     - A callback : Custom transit-out function
         ```javascript
         function(toast, duration) {
@@ -197,6 +197,65 @@ toast.showMessage(message);
 
 Toast displays message follows these steps : *transit-in*, *hold*, *transit-out*.
 New message will be pending until toast is back to idle.
+
+### Display time
+
+- Transit-in time (`duration.in`)
+    - Get
+        ```javascript
+        var time = toast.transitInTime;
+        ```
+    - Set
+        ```javascript
+        toast.setTransitInTime(time);
+        ```
+- Display time (`duration.hold`)
+    - Get
+        ```javascript
+        var time = toast.displayTime;
+        ```
+    - Set
+        ```javascript
+        toast.setDisplayTime(time);
+        ```
+- Transit-out time (`duration.out`)
+    - Get
+        ```javascript
+        var time = toast.transitOutTime;
+        ```
+    - Set
+        ```javascript
+        toast.setTransitOutTime(time);
+        ```
+
+### Transit action
+
+- Set transit-in action
+    ```javascript
+    toast.setTransitInCallback(callback);
+    ```
+    - `callback` : Transit-in action
+        - `0`, or `'popUp'` : Pop-up.
+        - `1`, or `'fadeIn'` : Fade-in.
+        - A callback : Custom transit-in function
+            ```javascript
+            function(toast, duration) {
+                // ...
+            }
+            ```
+- Set transit-out action
+    ```javascript
+    toast.setTransitOutCallback(callback);
+    ```
+    - `callback` : Transit-out action
+        - `0`, or `'scaleDown'` : Scale-down.
+        - `1`, or `'fadeOut'` : Fade-out.
+        - A callback : Custom transit-out function
+            ```javascript
+            function(toast, duration) {
+                // ...
+            }
+            ```
 
 ### Other properties
 
