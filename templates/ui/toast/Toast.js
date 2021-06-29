@@ -94,7 +94,7 @@ class Toast extends Label {
         return this;
     }
 
-    show(callback) {
+    showMessage(callback) {
         if (callback === undefined) {
             // Try pop up a pendding message
             if (this.messages.length === 0) {
