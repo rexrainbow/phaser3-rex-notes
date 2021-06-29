@@ -1,5 +1,6 @@
 import * as Phaser from 'phaser';
 
+import BadgeLabelFactory from './badgelabel/Factory';
 import BBCodeTextFactory from './bbcodetext/Factory';
 import ButtonsFactory from './buttons/Factory';
 import CanvasFactory from './canvas/Factory';
@@ -27,6 +28,7 @@ export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
     add: {
+        badgeLabel: BadgeLabelFactory,
         BBCodeText: BBCodeTextFactory,
         buttons: ButtonsFactory,
         canvas: CanvasFactory,

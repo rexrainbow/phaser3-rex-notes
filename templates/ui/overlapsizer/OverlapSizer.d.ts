@@ -9,7 +9,7 @@ export interface IConfig extends IConfigBase {
     height?: number,
 }
 
-export default class Sizer extends BaseSizer {
+export default class OverlapSizer extends BaseSizer {
     sizerChildren: { [name: string]: Phaser.GameObjects.GameObject };
 
     constructor(
