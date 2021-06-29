@@ -119,6 +119,8 @@ var numberBar = scene.rexUI.add.numberBar({
         icon: 0,
         slider: 0,
     },
+    
+    enable: true,
 
     // name: '',
     // draggable: false
@@ -143,9 +145,9 @@ var numberBar = scene.rexUI.add.numberBar({
   - `slider.indicator` : Game object of slider indicator, optional.
   - `slider.thumb` : Game object of slider thumb, optional.
   - `slider.input` :
-    - `'drag'` : Control slider by dragging thumb game object.
-    - `'click'` : Control slider by touching track game object.
-    - `'none'` : Disable sider controlling. Default setting.
+    - `'pan'`, `'drag'`, or `0` : Control knob by panning/dragging thumb game object. Default setting.
+    - `'click'`, or `1` : Control slider by touching track game object.
+    - `'none'`, or `-1` : Disable sider controlling.
   - `slider.gap` : Snap a value to nearest grid slice, using rounding.
     - `undefined` : Disable this feature.
   - `slider.easeValue` : Easing value when `input` is `'click'`.
@@ -157,6 +159,7 @@ var numberBar = scene.rexUI.add.numberBar({
   - `space.icon` : Space between icon game object and text game object.
   - `space.slider` : Space between slider game object and text game object.
 - `valuechangeCallback` : callback function when value changed.
+- `enable` : Set `false` to disable controlling.
 - `name` : Set name of this numberBar.
 
 ### Custom class
@@ -231,6 +234,21 @@ See also - [dirty](ui-basesizer.md#dirty)
   ```
   - `recursive` : Set `true` to search all children recursively.
 
+### Enable
+
+- Get
+    ```javascript
+    var enable = numberBar.enable;
+    ```
+- Set
+    ```javascript
+    numberBar.setEanble(enable);
+    ```
+    or
+    ```javascript
+    numberBar.enable = enable;
+    ```
+
 ### Value
 
 Change value will also change the position of slider thumb and width of slider indicator.
@@ -282,13 +300,17 @@ Change value will also change the position of slider thumb and width of slider i
     ```javascript
     numberBar.easeValueTo(value);  // value: 0 ~ 1
     ```
+- Stop ease
+    ```javascript
+    numberBar.stopEaseValue();
+    ```
 - Set ease duration
     ```javascript
-    numberBar.getElement('slider').setEaseValueDuration(duration);
+    numberBar.setEaseValueDuration(duration);
     ```
 - Set ease function
     ```javascript
-    numberBar.getElement('slider').setEaseValueFunction(ease);
+    numberBar.setEaseValueFunction(ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
 

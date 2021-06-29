@@ -92,12 +92,6 @@ var knob = scene.rexUI.add.knob({
     knobDepth: 0,
 
     text: undefined,
-    textColor: undefined,
-    textStrokeColor: undefined,
-    textStrokeThickness: undefined,
-    textSize: '16px',
-    textFamily: 'Courier',
-    textStyle: '',
     textFormatCallback: undefined,
     textFormatCallbackScope: undefined,
 
@@ -157,7 +151,7 @@ var knob = scene.rexUI.add.knob({
     ```
     Default value is `undefined`.
 - `input` :
-    - `'pan'`, or `0` : Control knob by panning circular progress. Default setting.
+    - `'pan'`, `'drag'`, or `0` : Control knob by panning circular progress. Default setting.
     - `'click'`, or `1` : Control knob by touching circular progress.
     - `'none'`, or `-1` : Disable knob controlling.
 - `value` : Initial value (0 ~ 1).
@@ -166,9 +160,9 @@ var knob = scene.rexUI.add.knob({
 - `easeValue` : Easing value when `input` is `'click'`.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
-- `valuechangeCallback` : callback function when value changed.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+- `valuechangeCallback` : callback function when value changed.
 - `enable` : Set `false` to disable controlling.
 - `name` : Set name of this knob.
 
@@ -226,6 +220,21 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = knob.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Enable
+
+- Get
+    ```javascript
+    var enable = knob.enable;
+    ```
+- Set
+    ```javascript
+    knob.setEanble(enable);
+    ```
+    or
+    ```javascript
+    knob.enable = enable;
+    ```
 
 ### Value
 

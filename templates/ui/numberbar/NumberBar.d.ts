@@ -24,7 +24,7 @@ export interface IConfig extends IConfigBase {
         track?: Phaser.GameObjects.GameObject,
         indicator?: Phaser.GameObjects.GameObject,
         thumb?: Phaser.GameObjects.GameObject,
-        input?: 'drag' | 'click' | 'none',
+        input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
         gap?: number,
         easeValue?: {
             duration?: number,
@@ -44,17 +44,18 @@ export default class NumberBar extends Sizer {
     );
 
     value: number;
-
     getValue(min?: number, max?: number): number;
-
     setValue(value?: number, min?: number, max?: number): this;
-
     addValue(inc?: number, min?: number, max?: number): this;
-
     easeValueTo(value?: number, min?: number, max?: number): this;
+    stopEaseValue(): this;
+    setEaseValueDuration(duration: number): this;
+    setEaseValueFunction(ease: string): this;
+
+    setEnable(enable?: boolean): this;
+    enable: boolean;
 
     text: string;
-
     setText(text: string): this;
 
 }

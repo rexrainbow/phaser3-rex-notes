@@ -96,10 +96,25 @@ class NumberBar extends Sizer {
         this.setValue(GetValue(config, 'value', 0));
     }
 
-    setEnable(enable) {
+    get enable() {
         if (this.childrenMap.slider) {
-            this.childrenMap.slider.setEnable(enable);
+            return this.childrenMap.slider.enable;
+        } else {
+            return false;
         }
+    }
+
+    set enable(value) {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.setEnable(value);
+        }
+    }
+
+    setEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.enable = enable;
         return this;
     }
 
@@ -143,6 +158,27 @@ class NumberBar extends Sizer {
     easeValueTo(value, min, max) {
         if (this.childrenMap.slider) {
             this.childrenMap.slider.easeValueTo(value, min, max);
+        }
+        return this;
+    }
+
+    stopEaseValue() {
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.stopEaseValue();
+        }
+        return this;
+    }
+
+    setEaseValueDuration(duration){
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.setEaseValueDuration(duration);
+        }
+        return this;
+    }
+
+    setEaseValueFunction(ease){
+        if (this.childrenMap.slider) {
+            this.childrenMap.slider.setEaseValueFunction(ease);
         }
         return this;
     }

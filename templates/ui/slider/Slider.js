@@ -5,7 +5,6 @@ import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import UpdateIndicator from './UpdateIndicator.js';
-import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import EaseValueMethods from '../utils/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -161,6 +160,7 @@ class Slider extends Sizer {
 }
 
 const INPUTMODE = {
+    pan: 0,
     drag: 0,
     click: 1,
     none: -1,

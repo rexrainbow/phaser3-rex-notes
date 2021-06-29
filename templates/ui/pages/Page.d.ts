@@ -7,7 +7,6 @@ export interface IConfig extends IConfigBase {
 }
 
 export default class Page extends OverlapSizer {
-
     constructor(
         scene: Phaser.Scene,
         config?: IConfig

@@ -141,6 +141,7 @@ class Knob extends OverlapSizer {
 
 const INPUTMODE = {
     pan: 0,
+    drag: 0,
     click: 1,
     none: -1,
 }

@@ -5,8 +5,8 @@ var SetEaseValueDuration = function (duration) {
     return this;
 }
 
-var SetEaseValueFunction = function (mode) {
-    this.easeValueMode = mode;
+var SetEaseValueFunction = function (ease) {
+    this.easeFunction = ease;
     return this;
 }
 
@@ -36,7 +36,7 @@ var EaseValueTo = function (value, min, max) {
             targets: this,
             value: value,
             duration: this.easeValueDuration,
-            ease: this.easeValueMode
+            ease: this.easeFunction
         });
 
     return this;
