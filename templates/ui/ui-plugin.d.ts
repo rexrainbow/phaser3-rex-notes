@@ -12,6 +12,7 @@ import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
 import NumberBarFactory from './numberbar/Factory';
+import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import SizerFactory from './sizer/Factory';
 import TagTextFactory from './tagtext/Factory';
@@ -34,6 +35,7 @@ export default class UIFactories {
         menu: MenuFactory,
         ninePatch: NinePatchFactory,
         numberBar: NumberBarFactory,
+        roundRectangleCanvas: RoundRectangleCanvasFactory,
         roundRectangle: RoundRectangleFactory,
         sizer: SizerFactory,
         tagText: TagTextFactory,
