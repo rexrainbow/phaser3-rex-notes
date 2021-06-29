@@ -78,7 +78,8 @@ export default class BaseSizer extends ContainerLite {
 
     addBackground(
         gameObject: Phaser.GameObjects.GameObject,
-        padding?: {
+        padding?: number |
+        {
             left?: number,
             right?: number,
             top?: number,

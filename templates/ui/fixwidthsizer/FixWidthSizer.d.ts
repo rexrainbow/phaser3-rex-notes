@@ -7,16 +7,20 @@ export interface IConfig extends IConfigBase {
     y?: number,
     width?: number,
     height?: number,
-    orientation?: 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom',
+
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
 
-        item?: number,
+        item?: number, line?: number,
     },
+
+    rtl?: boolean,
+
+    align?: 0 | 1 | 2 | 3 | 4 | 5 |
+    'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-cneter'
 }
 
 export default class Sizer extends BaseSizer {
-
     sizerChildren: Phaser.GameObjects.GameObject[];
 
     constructor(
@@ -24,19 +28,9 @@ export default class Sizer extends BaseSizer {
         config?: IConfig
     );
 
-    setOrientation(
-        orientation?: 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom'
-    ): this;
-
-    setItemSpacing(value: number): this;
-
-    add(gameObject: Phaser.GameObjects.GameObject,
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
         config?: {
-            proportion?: number,
-            align?: number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-            'left-top' | 'left-center' | 'left-bottom' |
-            'center-top' | 'center-center' | 'center-bottom' |
-            'right-top' | 'right-center' | 'right-bottom',
             padding?: number |
             {
                 left?: number,
@@ -44,17 +38,12 @@ export default class Sizer extends BaseSizer {
                 top?: number,
                 bottom?: number
             },
-            expand?: boolean,
-            childKey?: string,
-            index?: number
-            minWidth?: number,
-            minHeight?: number
+            key?: string,
+            index?: number,
         }
     ): this;
 
-    addSpace(
-        proportion?: number
-    ): this;
+    addNewLine(): this;
 
     remove(
         gameObject: Phaser.GameObjects.GameObject,

@@ -4,10 +4,7 @@ import { IConfig as IConfigBase } from '../sizer/Sizer';
 
 export interface IConfig extends IConfigBase {
     space?: {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number,
+        left?: number, right?: number, top?: number, bottom?: number,
 
         icon?: number,
         text?: number,

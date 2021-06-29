@@ -8,6 +8,7 @@ import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
+import FixWidthSizerFactory from './fixwidthsizer/Factory';
 import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
@@ -31,6 +32,7 @@ export default class UIFactories {
         circularProgress: CircularProgressFactory,
         container: ContainerFactory,
         dialog: DialogFactory,
+        fixWidthSizer: FixWidthSizerFactory,
         label: LabelFactory,
         menu: MenuFactory,
         ninePatch: NinePatchFactory,
