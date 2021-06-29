@@ -1,23 +1,23 @@
 import * as Phaser from 'phaser';
-import BaseSizer from '../basesizer/BaseSizer.js';
-import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
+import OverlapSizer from '../overlapsizer/OverlapSizer';
+import { IConfig as IConfigBase } from '../overlapsizer/OverlapSizer';
 
 export interface IConfig extends IConfigBase {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
+    swapMode?: 0 | 1 | 'invisible' | 'destroy'
 }
 
-export default class Sizer extends BaseSizer {
-    sizerChildren: { [name: string]: Phaser.GameObjects.GameObject };
+export default class Page extends OverlapSizer {
 
     constructor(
         scene: Phaser.Scene,
         config?: IConfig
     );
 
-    add(
+    setSwapMode(
+        mode: 0 | 1 | 'invisible' | 'destroy'
+    ): this;
+
+    addPage(
         gameObject: Phaser.GameObjects.GameObject,
         config?: {
             key?: string,
@@ -47,20 +47,12 @@ export default class Sizer extends BaseSizer {
         }
     ): this;
 
-    remove(
-        gameObject: Phaser.GameObjects.GameObject,
-        destroyChild?: boolean
-    ): this;
+    swapPage(key: string): this;
+    currentKey: string;
+    previousKey: string;
+    keys: string[];
 
-    removeAll(
-        destroyChild?: boolean
-    ): this;
-
-    clear(
-        destroyChild?: boolean
-    ): this;
-
-    childToKey(
-        gameObject: Phaser.GameObjects.GameObject
-    ): string;
+    getPage(key: string): Phaser.GameObjects.GameObject;
+    currentPage: Phaser.GameObjects.GameObject;
+    previousPage: Phaser.GameObjects.GameObject;
 }

@@ -81,6 +81,7 @@ var pages = scene.rexUI.add.pages({
     // width: undefined,
     // height: undefined,
     // space: { left: 0, right:0, top:0, bottom:0 },
+    // swapMode: 0,
 
     // name: '',
     // draggable: false
@@ -97,6 +98,9 @@ var pages = scene.rexUI.add.pages({
 - `width`, `height` : Minimum width, minimum height.
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+- `swapMode` : Set to invisible or destroy swapped page.
+    - 0, `'invisible'` : Set swapped page to invisible.
+    - 1, `'destroy'` : Destroy swapped page.
 - `name` : Set name of this pages.
 
 ### Custom class

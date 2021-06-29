@@ -15,6 +15,7 @@ import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import OverlapSizerFactory from './overlapsizer/Factory';
+import PageFactory from './pages/Factory';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import SizerFactory from './sizer/Factory';
@@ -41,6 +42,7 @@ export default class UIFactories {
         ninePatch: NinePatchFactory,
         numberBar: NumberBarFactory,
         overlapSizer: OverlapSizerFactory,
+        page: PageFactory,
         roundRectangleCanvas: RoundRectangleCanvasFactory,
         roundRectangle: RoundRectangleFactory,
         sizer: SizerFactory,
