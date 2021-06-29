@@ -259,6 +259,21 @@ var txt = scene.make.rexTagText({
     var txt = new MyText(scene, x, y, '<style="tag0">h</style>ello', {tags:tags});
     ```
 
+### Add tag
+
+- Add a tag
+    ```javascript
+    txt.addTag(name, prop);
+    ```
+    - `name` : Tag name.
+    - `prop` : See [Properties of tag](tagtext.md#properties-of-tag)
+- Add tags
+    ```javascript
+    txt.addTags({
+        name: prop
+    });
+    ```
+
 ### Wrap
 
 - Wrap by word or character.
