@@ -1,21 +1,8 @@
 import NinePatch from "./NinePatch";
+import { IConfig } from '../../../plugins/ninepatch';
 
 declare type NinePatchFactory = (
-    x?: number, y?: number,
-    width?: number, height?: number,
-
-    key?: string, baseFrame?: string,
-    getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
-
-    columns?: (number | undefined)[],
-    rows?: (number | undefined)[],
-
-    preserveRatio?: boolean,
-    stretchMode?: 0 | 1 | 'scale' | 'repeat' |
-    {
-        edge?: 0 | 1 | 'scale' | 'repeat',
-        internal?: 0 | 1 | 'scale' | 'repeat',
-    },
+    config?: IConfig
 ) => NinePatch;
 
 export default NinePatchFactory;

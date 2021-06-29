@@ -1,5 +1,14 @@
 import * as Phaser from 'phaser';
-import ContainerLite from '../../../plugins/ContainerLite.js'
+import ContainerLite from '../../../plugins/ContainerLite.js';
+
+export interface IConfig {
+    anchor?: {
+        left?: string, right?: string, centerX?: string, x?: string,
+        top?: string, bottom?: string, centerY?: string, y?: string
+    },
+    draggable?: boolean | string | Phaser.GameObjects.GameObject,
+    name?: string
+}
 
 export default class BaseSizer extends ContainerLite {
     isRexSizer: true;
@@ -8,13 +17,7 @@ export default class BaseSizer extends ContainerLite {
         scene: Phaser.Scene,
         x?: number, y?: number,
         minWidth?: number, minHeight?: number,
-        config?: {
-            anchor?: {
-                left?: string, right?: string, centerX?: string, x?: string,
-                top?: string, bottom?: string, centerY?: string, y?: string
-            },
-            draggable?: boolean | string | Phaser.GameObjects.GameObject
-        }
+        config?: IConfig
     );
 
     setMinSize(minWidth: number, minHeight: number): this;

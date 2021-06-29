@@ -1,5 +1,12 @@
 import * as Phaser from 'phaser';
 
+export interface IRadiusConfig {
+    tl?: (number | { x?: number, y?: number }),
+    tr?: (number | { x?: number, y?: number }),
+    bl?: (number | { x?: number, y?: number }),
+    br?: (number | { x?: number, y?: number })
+}
+
 export default class RoundRectangle extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
@@ -7,25 +14,11 @@ export default class RoundRectangle extends Phaser.GameObjects.Shape {
         y: number,
         width: number,
         height: number,
-        radiusConfig?: number |
-        { x?: number, y?: number } |
-        {
-            tl?: number | { x?: number, y?: number },
-            tr?: number | { x?: number, y?: number },
-            bl?: number | { x?: number, y?: number },
-            br?: number | { x?: number, y?: number }
-        } |
-        {
-            radius?: number |
-            { x?: number, y?: number } |
-            {
-                tl?: number | { x?: number, y?: number },
-                tr?: number | { x?: number, y?: number },
-                bl?: number | { x?: number, y?: number },
-                br?: number | { x?: number, y?: number }
-            },
-            iteration?: number
-        },
+        radiusConfig?: number | ({ x?: number, y?: number }) | IRadiusConfig |
+            ({
+                radius?: (number | ({ x?: number, y?: number }) | IRadiusConfig),
+                iteration?: number
+            }),
         fillColor?: number,
         fillAlpha?: number
     );
@@ -39,13 +32,7 @@ export default class RoundRectangle extends Phaser.GameObjects.Shape {
     radius: number;
 
     setRadius(
-        value: number |
-        {
-            tl?: number | { x?: number, y?: number },
-            tr?: number | { x?: number, y?: number },
-            bl?: number | { x?: number, y?: number },
-            br?: number | { x?: number, y?: number }
-        }
+        value: number | IRadiusConfig
     ): this;
 
     get cornerRadius(): {

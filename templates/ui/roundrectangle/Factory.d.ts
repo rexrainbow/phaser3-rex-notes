@@ -1,29 +1,16 @@
 import RoundRectangle from './RoundRectangle';
+import { IRadiusConfig } from '../../../plugins/roundrectangle';
 
 declare type RoundRectangleFactory = (
     x: number,
     y: number,
     width: number,
     height: number,
-    radiusConfig?: number |
-    { x?: number, y?: number } |
-    {
-        tl?: number | { x?: number, y?: number },
-        tr?: number | { x?: number, y?: number },
-        bl?: number | { x?: number, y?: number },
-        br?: number | { x?: number, y?: number }
-    } |
-    {
-        radius?: number |
-        { x?: number, y?: number } |
-        {
-            tl?: number | { x?: number, y?: number },
-            tr?: number | { x?: number, y?: number },
-            bl?: number | { x?: number, y?: number },
-            br?: number | { x?: number, y?: number }
-        },
-        iteration?: number
-    },
+    radiusConfig?: number | ({ x?: number, y?: number }) | IRadiusConfig |
+        ({
+            radius?: (number | ({ x?: number, y?: number }) | IRadiusConfig),
+            iteration?: number
+        }),
     fillColor?: number,
     fillAlpha?: number
 

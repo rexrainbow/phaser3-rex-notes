@@ -28,7 +28,7 @@ export interface TextStyle {
         fill: false
     },
 
-    underline: {
+    underline?: {
         color?: number | string,
         thickness?: number,
         offset?: number,

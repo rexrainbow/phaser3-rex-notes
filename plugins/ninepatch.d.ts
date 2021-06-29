@@ -1,5 +1,23 @@
 import * as Phaser from 'phaser';
 
+export interface IConfig {
+    x?: number, y?: number,
+    width?: number, height?: number,
+
+    key?: string, baseFrame?: string,
+    getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
+
+    columns?: (number | undefined)[],
+    rows?: (number | undefined)[],
+
+    preserveRatio?: boolean,
+    stretchMode?: 0 | 1 | 'scale' | 'repeat' |
+    {
+        edge?: 0 | 1 | 'scale' | 'repeat',
+        internal?: 0 | 1 | 'scale' | 'repeat',
+    },
+}
+
 export default class NinePatch extends Phaser.GameObjects.RenderTexture {
     constructor(
         scene: Phaser.Scene,
