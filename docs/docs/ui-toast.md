@@ -144,7 +144,7 @@ var toast = scene.rexUI.add.toast({
     - `1`, or `fadeIn` : Fade-in.
     - A callback : Custom transit-in function
         ```javascript
-        function(gameObject, duration) {
+        function(toast, duration) {
             // ...
         }
         ```
@@ -153,7 +153,7 @@ var toast = scene.rexUI.add.toast({
     - `1`, or `fadeOut` : Fade-out.
     - A callback : Custom transit-out function
         ```javascript
-        function(gameObject, duration) {
+        function(toast, duration) {
             // ...
         }
         ```
@@ -181,7 +181,7 @@ Toast object will be invisible at beginning.
 ### Show message
 
 ```javascript
-toast.show(message);
+toast.showMessage(message);
 ```
 
 - `message` : A string, or a callback.
