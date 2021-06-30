@@ -13,19 +13,25 @@ export interface IConfig extends IConfigBase {
 
     background?: Phaser.GameObjects.GameObject,
 
-    slider?: {
-        background?: Phaser.GameObjects.GameObject,
-        track?: Phaser.GameObjects.GameObject,
-        thumb?: Phaser.GameObjects.GameObject,
-        input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
-        position?: 0 | 1 | 'right' | 'bottom' | 'left' | 'top',
-    },
+    slider?: (
+        {
+            background?: Phaser.GameObjects.GameObject,
+            track?: Phaser.GameObjects.GameObject,
+            thumb?: Phaser.GameObjects.GameObject,
+            input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
+            position?: 0 | 1 | 'right' | 'bottom' | 'left' | 'top',
+        } |
+        false
+    ),
 
-    scroller?: {
-        threshold?: number,
-        slidingDeceleration?: number,
-        backDeceleration?: number,
-    },
+    scroller?: (
+        {
+            threshold?: number,
+            slidingDeceleration?: number | false,
+            backDeceleration?: number | false,
+        } |
+        false
+    ),
 
     clamplChildOY?: boolean,
 

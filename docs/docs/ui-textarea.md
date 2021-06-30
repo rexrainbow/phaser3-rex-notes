@@ -88,6 +88,7 @@ var textArea = scene.rexUI.add.textArea({
     text: textGameObject,
     // textWidth: undefined,
     // textHeight: undefined,
+    // textMask: true,
 
     slider: {
         background: sliderBackgroundGameObject,
@@ -154,6 +155,9 @@ var textArea = scene.rexUI.add.textArea({
 - `text` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
 - `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.
 - `textHeight` : Fixed height of text game object. Set `undefined` to ignore this feature.
+- `textMask` :
+    - `true` : Apply mask on text. Default behavior.
+    - `false` : Don't apply mask on text.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
@@ -191,7 +195,7 @@ var textArea = scene.rexUI.add.textArea({
     - `space.footer` : Space between footer and text object.
 - `expand` : Expand width or height of element
     - `expand.header` : Set `true` to expand width or height of header game object.
-    - `expand.footer`
+    - `expand.footer` : Set `true` to expand width or height of footer game object.
 - `align` : Align element
     - `align.header`
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.

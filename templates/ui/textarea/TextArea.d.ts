@@ -6,7 +6,7 @@ export interface IConfig extends IConfigBase {
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
 
-        panel?: number | {
+        text?: number | {
             left?: number, right?: number, top?: number, bottom?: number,
         },
 
@@ -14,22 +14,23 @@ export interface IConfig extends IConfigBase {
         footer?: number,
     },
 
-    panel: {
-        child: Phaser.GameObjects.GameObject,
-        mask?: (
-            {
-                padding?: 0,
-                updateMode?: 0 | 1 | 'update' | 'everyTick'
-            } |
-            boolean
-        ),
-    },
+    text: Phaser.GameObjects.GameObject,
+    textWidth?: number,
+    textHeight?: number,
+    textMask?: boolean
+
+    content?: string
 }
 
-export default class ScrollablePanel extends Scrollable {
+export default class TextArea extends Scrollable {
     constructor(
         scene: Phaser.Scene,
         config?: IConfig
     );
 
+    text: string;
+    setText(text: string): this;
+    appendText(text: string): this;
+
+    get linesCount(): number;
 }

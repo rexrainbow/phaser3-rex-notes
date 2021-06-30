@@ -206,7 +206,7 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `space.footer` : Space between footer and panel.
 - `expand` : Expand width or height of element
     - `expand.header` : Set `true` to expand width or height of header game object.
-    - `expand.footer`
+    - `expand.footer` : Set `true` to expand width or height of footer game object.
 - `align` : Align element
     - `align.header`
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
