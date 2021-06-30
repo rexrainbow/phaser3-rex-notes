@@ -28,7 +28,7 @@ class GridButtons extends GridSizer {
         config.columnProportions = buttonProportion;
         config.rowProportions = buttonProportion;
 
-        // Create        
+        // Create
         super(scene, config);
         this.type = 'rexGridButtons';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);

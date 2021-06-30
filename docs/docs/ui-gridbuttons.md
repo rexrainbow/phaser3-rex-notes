@@ -103,7 +103,13 @@ var buttons = scene.rexUI.add.gridButtons({
     // },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // eventEmitter: this,
+    // groupName: undefined,
+
+    // type: undefined,
+    // setValueCallback: undefined,
+    // setValueCallbackScope: undefined
 });
 ```
 
@@ -127,6 +133,24 @@ var buttons = scene.rexUI.add.gridButtons({
     - `space.row` : Space between 2 rows
         - A number
         - A number array
+- `name` : Set name of this button game objects.
+- `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
+- `groupName` : Optional group name for argument of touch events.
+- `type` : Type/behavior of these buttons.
+    - `undefined` : No extra behavior, default value.
+    - `'checkboxes'` : Set these buttons to checkboxes.
+    - `'radio'` : Set these buttons to radio.
+- `setValueCallback` : Callback to set value of a button.
+    - `undefined` : No callback, default value.
+    - A function object.
+        ```javascript
+        function(button, value, previousValue) {
+            // ...
+        }
+        ```
+        - `button` : Button game object.
+        - `value`: `true`, or `false`.
+        - `previousValue` : `true`, or `false`.
 
 ### Custom class
 

@@ -1,6 +1,6 @@
 import * as Phaser from 'phaser';
-import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
-import { IConfig as IConfigBase } from '../fixwidthsizer/FixWidthSizer';
+import GridSizer from '../gridsizer/GridSizer';
+import { IConfig as IConfigBase } from '../gridsizer/GridSizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
 import { IButtons } from '../utils/buttons/Buttons';
 
@@ -8,10 +8,12 @@ import { IButtons } from '../utils/buttons/Buttons';
 export interface IConfig extends IConfigBase, IConfigButtons {
     background?: Phaser.GameObjects.GameObject,
 
-    buttons?: Phaser.GameObjects.GameObject[],
+    buttons?: Phaser.GameObjects.GameObject[][],
 }
 
-export default class FixWidthButtons extends FixWidthSizer implements IButtons {
+export default class GridButtons extends GridSizer implements IButtons {
+    sizerChildren: (Phaser.GameObjects.GameObject | null)[];
+
     constructor(
         scene: Phaser.Scene,
         config?: IConfig

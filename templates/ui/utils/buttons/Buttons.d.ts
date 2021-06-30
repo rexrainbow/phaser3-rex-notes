@@ -1,22 +1,21 @@
-import * as Phaser from 'phaser';
-import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
-import { IConfig as IConfigBase } from '../fixwidthsizer/FixWidthSizer';
-import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
-import { IButtons } from '../utils/buttons/Buttons';
+export interface IConfig {
+    click?: {
+        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
+        clickInterval?: number
+    },
+    
+    groupName?: string,
 
+    eventEmitter?: Phaser.GameObjects.GameObject,
 
-export interface IConfig extends IConfigBase, IConfigButtons {
-    background?: Phaser.GameObjects.GameObject,
+    type?: 'checkboxes' | 'radio',
 
-    buttons?: Phaser.GameObjects.GameObject[],
+    setValueCallback?: (button: Phaser.GameObjects.GameObject, value: boolean, previousValue: boolean) => void,
+
+    setValueCallbackScope?: unknown
 }
 
-export default class FixWidthButtons extends FixWidthSizer implements IButtons {
-    constructor(
-        scene: Phaser.Scene,
-        config?: IConfig
-    );
-
+export interface IButtons {
     emitButtonClick(
         index: number | Phaser.GameObjects.GameObject
     ): this;

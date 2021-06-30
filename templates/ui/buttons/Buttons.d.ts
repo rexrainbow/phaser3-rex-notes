@@ -1,8 +1,11 @@
 import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
+import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
+import { IButtons } from '../utils/buttons/Buttons';
 
-export interface IConfig extends IConfigBase {
+
+export interface IConfig extends IConfigBase, IConfigButtons {
     background?: Phaser.GameObjects.GameObject,
 
     buttons?: Phaser.GameObjects.GameObject[],
@@ -10,24 +13,9 @@ export interface IConfig extends IConfigBase {
     expand?: boolean,
 
     align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
-
-    click?: {
-        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-        clickInterval?: number
-    },
-
-    groupName?: string,
-
-    eventEmitter?: Phaser.GameObjects.GameObject,
-
-    type?: 'checkboxes' | 'radio',
-
-    setValueCallback?: (button: Phaser.GameObjects.GameObject, value: boolean, previousValue: boolean) => void,
-
-    setValueCallbackScope?: unknown
 }
 
-export default class Buttons extends Sizer {
+export default class Buttons extends Sizer implements IButtons {
     constructor(
         scene: Phaser.Scene,
         config?: IConfig
