@@ -26,6 +26,7 @@ import RoundRectangleFactory from './roundrectangle/Factory';
 import ScrollablePanelFactory from './scrollablepanel/Factory';
 import SizerFactory from './sizer/Factory';
 import SliderFactory from './slider/Factory';
+import TabsFactory from './tabs/Factory';
 import TagTextFactory from './tagtext/Factory';
 import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
@@ -61,6 +62,7 @@ export default class UIFactories {
         scrollablePanel: ScrollablePanelFactory,
         sizer: SizerFactory,
         slider: SliderFactory,
+        tabs: TabsFactory,
         tagText: TagTextFactory,
         textArea: TextAreaFactory,
         textBox: TextBoxFactory,

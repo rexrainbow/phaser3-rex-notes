@@ -11,8 +11,6 @@ export interface IConfig extends IConfigBase, IConfigButtons {
 }
 
 export default class GridButtons extends GridSizer {
-    sizerChildren: (Phaser.GameObjects.GameObject | null)[];
-
     constructor(
         scene: Phaser.Scene,
         config?: IConfig
@@ -34,6 +32,10 @@ export default class GridButtons extends GridSizer {
     getButtonEnable(
         index: number | Phaser.GameObjects.GameObject
     ): boolean;
+
+    getButton(
+        index: number
+    ): Phaser.GameObjects.GameObject | null;
 
     addButton(
         gameObject: Phaser.GameObjects.GameObject

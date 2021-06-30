@@ -33,6 +33,10 @@ export default class FixWidthButtons extends FixWidthSizer {
         index: number | Phaser.GameObjects.GameObject
     ): boolean;
 
+    getButton(
+        index: number
+    ): Phaser.GameObjects.GameObject | null;
+
     addButton(
         gameObject: Phaser.GameObjects.GameObject
     ): this;

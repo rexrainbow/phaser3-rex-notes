@@ -273,10 +273,10 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `index` : A number index, or a button game object.
 - Enable left/right/top/bottom button
     ```javascript
-    tabs.setLeftEnable(index);
-    tabs.setRightEnable(index);
-    tabs.setTopEnable(index);
-    tabs.setBottomEnable(index);
+    tabs.setLeftButtonEnable(index);
+    tabs.setRightButtonEnable(index);
+    tabs.setTopButtonEnable(index);
+    tabs.setBottomButtonEnable(index);
     ```
     - `index` : A number index, or a button game object.
 - Disable button input in a given group
@@ -287,10 +287,10 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `index` : A number index, or a button game object.
 - Disable choice/action/toolbar/left-toolbar button's input
     ```javascript
-    tabs.setLeftEnable(index, false);
-    tabs.setRightEnable(index, false);
-    tabs.setTopEnable(index, false);
-    tabs.setBottomEnable(index, false);
+    tabs.setLeftButtonEnable(index, false);
+    tabs.setRightButtonEnable(index, false);
+    tabs.setTopButtonEnable(index, false);
+    tabs.setBottomButtonEnable(index, false);
     ```
     - `index` : A number index, or a button game object.
 - Toggle button input in a given group
@@ -301,10 +301,10 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `index` : A number index, or a button game object.    
 - Toggle choice/action/toolbar/left-toolbar button's input
     ```javascript
-    tabs.toggleLeftEnable(index);
-    tabs.toggleRightEnable(index);
-    tabs.toggleTopEnable(index);
-    tabs.toggleBottomEnable(index);
+    tabs.toggleLeftButtonEnable(index);
+    tabs.toggleRightButtonEnable(index);
+    tabs.toggleTopButtonEnable(index);
+    tabs.toggleBottomButtonEnable(index);
     ```
     - `index` : A number index, or a button game object.
 - Get button input enable in a given group
@@ -315,10 +315,10 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
     - `index` : A number index, or a button game object.  
 - Get choice/action/toolbar/left-toolbar button's input enable
     ```javascript
-    var enabled = tabs.getLeftEnable(index);
-    var enabled = tabs.getRightEnable(index);
-    var enabled = tabs.getTopEnable(index);
-    var enabled = tabs.getBottomEnable(index);
+    var enabled = tabs.getLeftButtonEnable(index);
+    var enabled = tabs.getRightButtonEnable(index);
+    var enabled = tabs.getTopButtonEnable(index);
+    var enabled = tabs.getBottomButtonEnable(index);
     ```
     - `index` : A number index, or a button game object.
 
@@ -334,7 +334,13 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
         var panel = tabs.getElement('panel');
         ```
     - Buttons
-        - Left button game objects
+        - Button game object in a group
+            ```javascript
+            var bottons = tabs.getButton(groupName, index)
+            ```
+            - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+            - `index` : A number index.
+        - Left button game object
             ```javascript
             var bottons = tabs.getElement('leftButtons');
             ```
@@ -347,7 +353,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
             var bottons = tabs.getElement('leftButtons[0]');
             ```
             - First button of left buttons.
-        - Right button game objects
+        - Right button game object
             ```javascript
             var bottons = tabs.getElement('rightButtons');
             ```
@@ -360,7 +366,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
             var bottons = tabs.getElement('rightButtons[0]');
             ```
             - First button of right buttons.
-        - Top button game objects
+        - Top button game object
             ```javascript
             var bottons = tabs.getElement('topButtons');
             ```
@@ -373,7 +379,7 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
             var bottons = tabs.getElement('topButtons[0]');
             ```
             - First button of top buttons.
-        - Bottom button game objects
+        - Bottom button game object
             ```javascript
             var bottons = tabs.getElement('bottomButtons');
             ```
@@ -484,16 +490,22 @@ Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
 
 ### For each button
 
-```javascript
-tabs.forEachLeftButton(callback, scope);
-tabs.forEachRightButton(callback, scope);
-tabs.forEachTopButton(callback, scope);
-tabs.forEachBottomButton(callback, scope);
-```
-
-- `callback` : 
+- For each button in a group
     ```javascript
-    function(button, index, buttons) {
-        // ...
-    }
+    var enabled = tabs.forEachButton(groupName, index);
     ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object. 
+- For each button in left/right/top/bottom group
+    ```javascript
+    tabs.forEachLeftButton(callback, scope);
+    tabs.forEachRightButton(callback, scope);
+    tabs.forEachTopButton(callback, scope);
+    tabs.forEachBottomButton(callback, scope);
+    ```
+    - `callback` : 
+        ```javascript
+        function(button, index, buttons) {
+            // ...
+        }
+        ```

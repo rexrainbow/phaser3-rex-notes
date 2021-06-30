@@ -248,6 +248,11 @@ export default {
         return this;
     },
 
+    forEachButton(groupName, callback, scope) {
+        this.getButtonsSizer(groupName).forEachButtton(callback, scope);
+        return this;
+    },
+
     forEachLeftButton(callback, scope) {
         this.childrenMap.leftButtonsSizer.forEachButtton(callback, scope);
         return this;
