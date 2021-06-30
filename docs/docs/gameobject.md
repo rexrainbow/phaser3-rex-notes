@@ -101,6 +101,10 @@ var out = gameObject.getLocalPoint(x, y, out, camera);
     // gameObject.alphaBottomLeft = alpha;
     // gameObject.alphaBottomRight = alpha;
     ```
+- Clear (set to `1`)
+    ```javascript
+    gameObject.clearAlpha();
+    ```
 
 ### FlipX, FlipY
 
@@ -270,6 +274,10 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     - `'XOR'`, or `Phaser.BlendModes.XOR`, or `27`
         - Canvas render mode only
 - Canvas has more available depending on browser support.
+
+### Mask
+
+See [Mask](mask.md).
 
 ### Post-fx pipeline
 

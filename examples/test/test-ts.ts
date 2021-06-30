@@ -1,4 +1,5 @@
 import 'phaser';
+import Canvas from '../../plugins/canvas'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,8 +12,10 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(400, 300, 'Hello Phaser3').setOrigin(0.5);
+        var canvas = new Canvas(this, 400, 300, 100, 100);
+        this.add.existing(canvas);
 
+        canvas.fill('red').setAlpha(0.5);
     }
 
     update() { }
