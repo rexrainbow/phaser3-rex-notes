@@ -1,4 +1,4 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Circle, Line } from '../utils/Geoms.js'
 
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -8,7 +8,7 @@ const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const DegToRad = Phaser.Math.DegToRad;
 const Rad270 = Phaser.Math.DegToRad(270);
 
-class Clock extends BaseSpinner {
+class Clock extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerClock';

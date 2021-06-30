@@ -1,9 +1,9 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Arc } from '../utils/Geoms.js';
 
 const Linear = Phaser.Math.Linear;
 
-class Pie extends BaseSpinner {
+class Pie extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerPie';

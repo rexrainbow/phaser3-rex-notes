@@ -1,4 +1,4 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Circle } from '../utils/Geoms.js';
 import Yoyo from '../utils/Yoyo.js';
 
@@ -7,7 +7,7 @@ const Linear = Phaser.Math.Linear;
 const RowNum = 3;
 const ColNum = 3;
 
-class Grid extends BaseSpinner {
+class Grid extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerGrid';

@@ -1,11 +1,11 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Circle, Lines } from '../utils/Geoms.js';
 import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 const ExpoIn = Phaser.Math.Easing.Expo.In;
 
-class Radio extends BaseSpinner {
+class Radio extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerRadio';

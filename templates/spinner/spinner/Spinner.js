@@ -1,8 +1,8 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Arc } from '../utils/Geoms.js'
 import Yoyo from '../utils/Yoyo.js';
 
-class Spinner extends BaseSpinner {
+class Spinner extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerSpinner';

@@ -3,7 +3,7 @@ import TweenMethods from './TweenMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class BaseSpinner extends BaseShapes {
+class Base extends BaseShapes {
     constructor(scene, config) {
         var x = GetValue(config, 'x', 0);
         var y = GetValue(config, 'y', 0);
@@ -78,8 +78,8 @@ class BaseSpinner extends BaseShapes {
 }
 
 Object.assign(
-    BaseSpinner.prototype,
+    Base.prototype,
     TweenMethods
 );
 
-export default BaseSpinner;
+export default Base;

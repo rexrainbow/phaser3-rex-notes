@@ -1,4 +1,4 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Line } from '../utils/Geoms.js';
 import Yoyo from '../utils/Yoyo.js';
 
@@ -7,7 +7,7 @@ const ExpoIn = Phaser.Math.Easing.Expo.In;
 const RowNum = 2;
 const ColNum = 2;
 
-class Cube extends BaseSpinner {
+class Cube extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerCube';

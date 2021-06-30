@@ -1,10 +1,10 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Circle } from '../utils/Geoms.js'
 import Yoyo from '../utils/Yoyo.js';
 
 const Linear = Phaser.Math.Linear;
 
-class Ball extends BaseSpinner {
+class Ball extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerBall';

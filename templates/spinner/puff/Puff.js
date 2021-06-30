@@ -1,9 +1,9 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Circle } from '../utils/Geoms.js';
 import Yoyo from '../utils/Yoyo.js';
 
 
-class Puff extends BaseSpinner {
+class Puff extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerPuff';

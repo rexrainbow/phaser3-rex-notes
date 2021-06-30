@@ -1,8 +1,8 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Arc, Circle } from '../utils/Geoms.js'
 
 
-class Oval extends BaseSpinner {
+class Oval extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerOval';

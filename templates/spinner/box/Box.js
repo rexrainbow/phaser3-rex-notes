@@ -1,9 +1,9 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Lines } from '../utils/Geoms.js';
 
 const Linear = Phaser.Math.Linear;
 
-class Box extends BaseSpinner {
+class Box extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerCube';

@@ -1,9 +1,9 @@
-import BaseSpinner from '../base/BaseSpinner.js';
+import Base from '../base/Base.js';
 import { Line } from '../utils/Geoms.js';
 
 const Linear = Phaser.Math.Linear;
 
-class Audio extends BaseSpinner {
+class Audio extends Base {
     constructor(scene, config) {
         super(scene, config);
         this.type = 'rexSpinnerAudio';
