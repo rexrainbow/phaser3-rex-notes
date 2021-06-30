@@ -35,6 +35,8 @@ export interface IConfig extends IConfigBase {
     text?: Phaser.GameObjects.GameObject,
 
     valuechangeCallback?: (newValue: number, oldValue: number, numberBar: NumberBar) => void,
+
+    enable?: boolean,
 }
 
 export default class NumberBar extends Sizer {

@@ -23,6 +23,7 @@ import PageFactory from './pages/Factory';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import SizerFactory from './sizer/Factory';
+import SliderFactory from './slider/Factory';
 import TagTextFactory from './tagtext/Factory';
 import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
@@ -54,6 +55,7 @@ export default class UIFactories {
         roundRectangleCanvas: RoundRectangleCanvasFactory,
         roundRectangle: RoundRectangleFactory,
         sizer: SizerFactory,
+        slider: SliderFactory,
         tagText: TagTextFactory,
         textBox: TextBoxFactory,
         toast: ToastFactory,

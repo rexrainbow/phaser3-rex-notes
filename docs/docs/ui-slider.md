@@ -129,7 +129,7 @@ var slider = scene.rexUI.add.slider({
 - `indicator` : Game object of indicator, optional.
 - `thumb` : Game object of thumb, optional.
 - `input` :
-    - `'drag'`, or `0` : Control slider by dragging thumb game object. Default setting.
+    - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
     - `'click'`, or `1` : Control slider by touching track game object.
     - `'none'`, or `-1` : Disable sider controlling.
 - `value` : Initial value (0 ~ 1).
@@ -202,6 +202,21 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = slider.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Enable
+
+- Get
+    ```javascript
+    var enable = slider.enable;
+    ```
+- Set
+    ```javascript
+    slider.setEanble(enable);
+    ```
+    or
+    ```javascript
+    slider.enable = enable;
+    ```
 
 ### Value
 
