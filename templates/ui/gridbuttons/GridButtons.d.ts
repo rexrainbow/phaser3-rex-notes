@@ -2,7 +2,6 @@ import * as Phaser from 'phaser';
 import GridSizer from '../gridsizer/GridSizer';
 import { IConfig as IConfigBase } from '../gridsizer/GridSizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
-import { IButtons } from '../utils/buttons/Buttons';
 
 
 export interface IConfig extends IConfigBase, IConfigButtons {
@@ -11,7 +10,7 @@ export interface IConfig extends IConfigBase, IConfigButtons {
     buttons?: Phaser.GameObjects.GameObject[][],
 }
 
-export default class GridButtons extends GridSizer implements IButtons {
+export default class GridButtons extends GridSizer {
     sizerChildren: (Phaser.GameObjects.GameObject | null)[];
 
     constructor(

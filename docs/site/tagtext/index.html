@@ -1140,6 +1140,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-tag" class="md-nav__link">
+    Add tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrap" class="md-nav__link">
     Wrap
   </a>
@@ -5749,6 +5756,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-tag" class="md-nav__link">
+    Add tag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#wrap" class="md-nav__link">
     Wrap
   </a>
@@ -6117,6 +6131,21 @@
 </li>
 <li>Create instance
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+</code></pre></div></li>
+</ul>
+<h3 id="add-tag">Add tag<a class="headerlink" href="#add-tag" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Add a tag
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addTag</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">prop</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>name</code> : Tag name.</li>
+<li><code>prop</code> : See <a href="./#properties-of-tag">Properties of tag</a></li>
+</ul>
+</li>
+<li>Add tags
+    <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addTags</span><span class="p">({</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">prop</span>
+<span class="p">});</span>
 </code></pre></div></li>
 </ul>
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>

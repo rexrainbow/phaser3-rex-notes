@@ -5922,8 +5922,6 @@
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
 
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
     <span class="c1">// Elements</span>
     <span class="c1">// background: backgroundGameObject,</span>
 
@@ -5967,19 +5965,14 @@
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>orientation</code> : Main orientation of button game objects.<ul>
-<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange button game objects from left ot right.</li>
-<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange button game objects from top to bottom.</li>
-</ul>
-</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of grid table.</li>
 <li><code>buttons</code> : 1d/2d array of button game objects.</li>
 <li><code>align</code> : Align children of a line.<ul>
-<li><code>0</code>, <code>'left'</code>, <code>'top'</code> : Align children of a line to left/top side.</li>
-<li><code>1</code>, <code>'right'</code>, <code>'bottom'</code> : Align children of a line to right/bottom side.</li>
+<li><code>0</code>, <code>'left'</code> : Align children of a line to left/top side.</li>
+<li><code>1</code>, <code>'right'</code> : Align children of a line to right/bottom side.</li>
 <li><code>2</code>, <code>'center'</code> : Align children of a line to ceter.</li>
-<li><code>3</code>, <code>'justify'</code>, <code>'justify-left'</code>, <code>'justify-top'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.</li>
-<li><code>4</code>, <code>'justify-right'</code>, <code>'justify-bottom'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.</li>
+<li><code>3</code>, <code>'justify'</code>, <code>'justify-left'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.</li>
+<li><code>4</code>, <code>'justify-right'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.</li>
 <li><code>5</code>, <code>'justify-cneter'</code> : If remainder space is less or equal than 25%, then justify children. Else align children to center.</li>
 </ul>
 </li>
@@ -6272,7 +6265,7 @@ Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show
 </li>
 <li><code>type</code> : Set type to <code>'checkboxes'</code>, or <code>'radio'</code>.</li>
 <li><code>setValueCallback</code> : Callback to set value of a button.
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div><ul>

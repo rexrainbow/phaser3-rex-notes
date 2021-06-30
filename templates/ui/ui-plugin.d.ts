@@ -22,6 +22,7 @@ import OverlapSizerFactory from './overlapsizer/Factory';
 import PageFactory from './pages/Factory';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
+import ScrollablePanelFactory from './scrollablepanel/Factory';
 import SizerFactory from './sizer/Factory';
 import SliderFactory from './slider/Factory';
 import TagTextFactory from './tagtext/Factory';
@@ -54,6 +55,7 @@ export default class UIFactories {
         page: PageFactory,
         roundRectangleCanvas: RoundRectangleCanvasFactory,
         roundRectangle: RoundRectangleFactory,
+        scrollablePanel: ScrollablePanelFactory,
         sizer: SizerFactory,
         slider: SliderFactory,
         tagText: TagTextFactory,

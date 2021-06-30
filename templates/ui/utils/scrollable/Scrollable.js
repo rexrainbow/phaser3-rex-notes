@@ -147,7 +147,7 @@ class Scrollable extends Sizer {
     get sliderEnable() {
         var slider = this.childrenMap.slider;
         if (!slider) {
-            return undefined;
+            return false;
         }
 
         return slider.enable;
@@ -172,7 +172,7 @@ class Scrollable extends Sizer {
     get scrollerEnable() {
         var scroller = this.childrenMap.scroller;
         if (!scroller) {
-            return undefined;
+            return false;
         }
 
         return scroller.enable;

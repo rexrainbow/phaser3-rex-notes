@@ -2,7 +2,6 @@ import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
-import { IButtons } from '../utils/buttons/Buttons';
 
 
 export interface IConfig extends IConfigBase, IConfigButtons {
@@ -15,7 +14,7 @@ export interface IConfig extends IConfigBase, IConfigButtons {
     align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
 }
 
-export default class Buttons extends Sizer implements IButtons {
+export default class Buttons extends Sizer {
     constructor(
         scene: Phaser.Scene,
         config?: IConfig

@@ -4903,6 +4903,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5678,6 +5685,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5857,7 +5871,7 @@
 <li><code>indicator</code> : Game object of indicator, optional.</li>
 <li><code>thumb</code> : Game object of thumb, optional.</li>
 <li><code>input</code> :<ul>
-<li><code>'drag'</code>, or <code>0</code> : Control slider by dragging thumb game object. Default setting.</li>
+<li><code>'pan'</code>, <code>'drag'</code>, or <code>0</code> : Control slider by panning/dragging thumb game object. Default setting.</li>
 <li><code>'click'</code>, or <code>1</code> : Control slider by touching track game object.</li>
 <li><code>'none'</code>, or <code>-1</code> : Disable sider controlling.</li>
 </ul>
@@ -5930,6 +5944,18 @@
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
 </li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">setEanble</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">slider</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
 <p>Change value will also change the position of slider thumb and width of slider indicator.</p>

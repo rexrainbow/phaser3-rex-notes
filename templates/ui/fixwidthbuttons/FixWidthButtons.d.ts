@@ -2,7 +2,6 @@ import * as Phaser from 'phaser';
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
 import { IConfig as IConfigBase } from '../fixwidthsizer/FixWidthSizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
-import { IButtons } from '../utils/buttons/Buttons';
 
 
 export interface IConfig extends IConfigBase, IConfigButtons {
@@ -11,7 +10,7 @@ export interface IConfig extends IConfigBase, IConfigButtons {
     buttons?: Phaser.GameObjects.GameObject[],
 }
 
-export default class FixWidthButtons extends FixWidthSizer implements IButtons {
+export default class FixWidthButtons extends FixWidthSizer {
     constructor(
         scene: Phaser.Scene,
         config?: IConfig

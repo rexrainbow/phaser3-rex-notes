@@ -98,9 +98,11 @@ var panel = scene.rexUI.add.scrollablePanel({
     }.
 
     slider: {
+        background: sliderBackgroundGameObject,
         track: trackGameObject,
         thumb: thumbGameObject,
-        position: 0,
+        input: 'drag',
+        position: 'right',
     },
 
     scroller: {
@@ -172,9 +174,9 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `slider.track` : Game object of track.
     - `slider.thumb` : Game object of thumb.
     - `slider.input` :
-        - `'drag'` : Control slider by dragging thumb game object. Default setting.
-        - `'click'` : Control slider by touching track game object.
-        - `'none'` : Disable sider controlling.
+        - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
+        - `'click'`, or `1` : Control slider by touching track game object.
+        - `'none'`, or `-1` : Disable sider controlling.
     - `slider.position` : Position of this sldier.
         - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
         - `1`, `'left'`, `'top'` : Sldier at left/top side.

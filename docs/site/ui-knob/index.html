@@ -4975,6 +4975,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5678,6 +5685,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5811,12 +5825,6 @@
     <span class="nx">knobDepth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">textColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">textStrokeColor</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">textStrokeThickness</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">textSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
-    <span class="nx">textFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
-    <span class="nx">textStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">textFormatCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
@@ -5886,7 +5894,7 @@
 </code></pre></div>
     Default value is <code>undefined</code>.</li>
 <li><code>input</code> :<ul>
-<li><code>'pan'</code>, or <code>0</code> : Control knob by panning circular progress. Default setting.</li>
+<li><code>'pan'</code>, <code>'drag'</code>, or <code>0</code> : Control knob by panning circular progress. Default setting.</li>
 <li><code>'click'</code>, or <code>1</code> : Control knob by touching circular progress.</li>
 <li><code>'none'</code>, or <code>-1</code> : Disable knob controlling.</li>
 </ul>
@@ -5901,11 +5909,11 @@
 <li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
-<li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 </ul>
 </li>
+<li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>enable</code> : Set <code>false</code> to disable controlling.</li>
 <li><code>name</code> : Set name of this knob.</li>
 </ul>
@@ -5956,6 +5964,18 @@
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
 </li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">knob</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">knob</span><span class="p">.</span><span class="nx">setEanble</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">knob</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
 </ul>
 <h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
 <p>Change value will also change the position of knob thumb and width of knob indicator.</p>

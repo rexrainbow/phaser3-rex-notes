@@ -90,8 +90,11 @@ var textArea = scene.rexUI.add.textArea({
     // textHeight: undefined,
 
     slider: {
+        background: sliderBackgroundGameObject,
         track: trackGameObject,
         thumb: thumbGameObject,
+        input: 'drag',
+        position: 'right',
     },
 
     scroller: {
@@ -156,12 +159,12 @@ var textArea = scene.rexUI.add.textArea({
     - `slider.track` : Game object of track.
     - `slider.thumb` : Game object of thumb.
     - `slider.input` :
-        - `'drag'` : Control slider by dragging thumb game object. Default setting.
-        - `'click'` : Control slider by touching track game object.
-        - `'none'` : Disable sider controlling.
+        - `'pan'`, `'drag'`, or `0` : Control slider by panning/dragging thumb game object. Default setting.
+        - `'click'`, or `1` : Control slider by touching track game object.
+        - `'none'`, or `-1` : Disable sider controlling.
     - `slider.position` : Position of this sldier.
         - `0`, `'right'`, `'bottom'` : Sldier at right/bottom side. Default value.
-        - `1`, `'left'`, `'top'` : Sldier at left/top side.      
+        - `1`, `'left'`, `'top'` : Sldier at left/top side.
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.

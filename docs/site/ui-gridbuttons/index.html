@@ -5822,7 +5822,13 @@
     <span class="c1">// },</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// eventEmitter: this,</span>
+    <span class="c1">// groupName: undefined,</span>
+
+    <span class="c1">// type: undefined,</span>
+    <span class="c1">// setValueCallback: undefined,</span>
+    <span class="c1">// setValueCallbackScope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5855,6 +5861,29 @@
 <li><code>space.row</code> : Space between 2 rows<ul>
 <li>A number</li>
 <li>A number array</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this button game objects.</li>
+<li><code>eventEmitter</code> : Dispatch buttons' touch events to other game object, default is this buttons game object.</li>
+<li><code>groupName</code> : Optional group name for argument of touch events.</li>
+<li><code>type</code> : Type/behavior of these buttons.<ul>
+<li><code>undefined</code> : No extra behavior, default value.</li>
+<li><code>'checkboxes'</code> : Set these buttons to checkboxes.</li>
+<li><code>'radio'</code> : Set these buttons to radio.</li>
+</ul>
+</li>
+<li><code>setValueCallback</code> : Callback to set value of a button.<ul>
+<li><code>undefined</code> : No callback, default value.</li>
+<li>A function object.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>button</code> : Button game object.</li>
+<li><code>value</code>: <code>true</code>, or <code>false</code>.</li>
+<li><code>previousValue</code> : <code>true</code>, or <code>false</code>.</li>
 </ul>
 </li>
 </ul>

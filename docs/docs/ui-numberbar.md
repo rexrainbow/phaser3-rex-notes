@@ -97,7 +97,7 @@ var numberBar = scene.rexUI.add.numberBar({
         track: sliderTrackGameObject,
         indicator: sliderIndicatorGameObject,
         thumb: sliderThumbGameObject,
-        input: 'none',
+        input: 'drag',
         gap: undefined,        
         easeValue: {
             duration: 0,

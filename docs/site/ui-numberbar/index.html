@@ -4963,6 +4963,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5685,6 +5692,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#value" class="md-nav__link">
     Value
   </a>
@@ -5830,7 +5844,7 @@
         <span class="nx">track</span><span class="o">:</span> <span class="nx">sliderTrackGameObject</span><span class="p">,</span>
         <span class="nx">indicator</span><span class="o">:</span> <span class="nx">sliderIndicatorGameObject</span><span class="p">,</span>
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">sliderThumbGameObject</span><span class="p">,</span>
-        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;drag&#39;</span><span class="p">,</span>
         <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>        
         <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -5852,6 +5866,8 @@
         <span class="nx">icon</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">slider</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
+
+    <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// draggable: false</span>
@@ -5879,9 +5895,9 @@
 <li><code>slider.indicator</code> : Game object of slider indicator, optional.</li>
 <li><code>slider.thumb</code> : Game object of slider thumb, optional.</li>
 <li><code>slider.input</code> :<ul>
-<li><code>'drag'</code> : Control slider by dragging thumb game object.</li>
-<li><code>'click'</code> : Control slider by touching track game object.</li>
-<li><code>'none'</code> : Disable sider controlling. Default setting.</li>
+<li><code>'pan'</code>, <code>'drag'</code>, or <code>0</code> : Control knob by panning/dragging thumb game object. Default setting.</li>
+<li><code>'click'</code>, or <code>1</code> : Control slider by touching track game object.</li>
+<li><code>'none'</code>, or <code>-1</code> : Disable sider controlling.</li>
 </ul>
 </li>
 <li><code>slider.gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
@@ -5899,6 +5915,7 @@
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
 <li><code>space.slider</code> : Space between slider game object and text game object.</li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
+<li><code>enable</code> : Set <code>false</code> to disable controlling.</li>
 <li><code>name</code> : Set name of this numberBar.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
@@ -5960,6 +5977,18 @@
 </code></pre></div></li>
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setEanble</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="nx">enable</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
 <p>Change value will also change the position of slider thumb and width of slider indicator.</p>
 <ul>
@@ -5999,11 +6028,14 @@
     or
     <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
+<li>Stop ease
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">stopEaseValue</span><span class="p">();</span>
+</code></pre></div></li>
 <li>Set ease duration
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Set ease function
-    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider&#39;</span><span class="p">).</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
 </ul>

@@ -5763,11 +5763,11 @@
 
     <span class="nx">createBackgroundCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-        <span class="c1">// container = ...</span>
-        <span class="k">return</span> <span class="nx">container</span><span class="p">;</span>
+        <span class="c1">// background = ...</span>
+        <span class="k">return</span> <span class="nx">background</span><span class="p">;</span>
     <span class="p">},</span>
-
     <span class="nx">createBackgroundCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
     <span class="nx">createButtonCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">item</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
         <span class="c1">// var isFirstButton = (index === 0);</span>
@@ -5872,10 +5872,10 @@
 </li>
 <li><code>subMenuSide</code> : Side of sub-menu<ul>
 <li><code>undefined</code> : Determine side of sub-menu automatically.</li>
-<li><code>right</code>, or <code>0</code> : Put sub-menu at right side. Used with <code>orientation</code> is set to <code>y</code>.</li>
-<li><code>left</code>, or <code>2</code> : Put sub-menu at left side. Used with <code>orientation</code> is set to <code>y</code>.</li>
-<li><code>up</code>, or <code>3</code> : Put sub-menu at up side. Used with <code>orientation</code> is set to <code>x</code>.</li>
-<li><code>down</code>, or <code>1</code> : Put sub-menu at down side. Used with <code>orientation</code> is set to <code>x</code>.</li>
+<li><code>'right'</code>, or <code>0</code> : Put sub-menu at right side. Used with <code>orientation</code> is set to <code>y</code>.</li>
+<li><code>'left'</code>, or <code>2</code> : Put sub-menu at left side. Used with <code>orientation</code> is set to <code>y</code>.</li>
+<li><code>'up'</code>, or <code>3</code> : Put sub-menu at up side. Used with <code>orientation</code> is set to <code>x</code>.</li>
+<li><code>'down'</code>, or <code>1</code> : Put sub-menu at down side. Used with <code>orientation</code> is set to <code>x</code>.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this menu.</li>

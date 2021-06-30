@@ -4848,6 +4848,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#display-time" class="md-nav__link">
+    Display time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transit-action" class="md-nav__link">
+    Transit action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5643,6 +5657,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#display-time" class="md-nav__link">
+    Display time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transit-action" class="md-nav__link">
+    Transit action
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -5815,9 +5843,9 @@
 <li><code>duration.out</code> : Duration of transit-out stage.</li>
 </ul>
 </li>
-<li><code>transitIn</code> : Callback of transit-in.<ul>
-<li><code>0</code>, or <code>popUp</code> : Pop-up.</li>
-<li><code>1</code>, or <code>fadeIn</code> : Fade-in.</li>
+<li><code>transitIn</code> : Transit-in action.<ul>
+<li><code>0</code>, or <code>'popUp'</code> : Pop-up.</li>
+<li><code>1</code>, or <code>'fadeIn'</code> : Fade-in.</li>
 <li>A callback : Custom transit-in function
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">toast</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -5825,9 +5853,9 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li><code>transitOut</code> : Callback of transit-out.<ul>
-<li><code>0</code>, or <code>scaleDown</code> : Scale-down.</li>
-<li><code>1</code>, or <code>fadeOut</code> : Fade-out.</li>
+<li><code>transitOut</code> : Transit-out action.<ul>
+<li><code>0</code>, or <code>'scaleDown'</code> : Scale-down.</li>
+<li><code>1</code>, or <code>'fadeOut'</code> : Fade-out.</li>
 <li>A callback : Custom transit-out function
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">toast</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -5872,6 +5900,69 @@
 </ul>
 <p>Toast displays message follows these steps : <em>transit-in</em>, <em>hold</em>, <em>transit-out</em>.
 New message will be pending until toast is back to idle.</p>
+<h3 id="display-time">Display time<a class="headerlink" href="#display-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Transit-in time (<code>duration.in</code>)<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">toast</span><span class="p">.</span><span class="nx">transitInTime</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">toast</span><span class="p">.</span><span class="nx">setTransitInTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Display time (<code>duration.hold</code>)<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">toast</span><span class="p">.</span><span class="nx">displayTime</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">toast</span><span class="p">.</span><span class="nx">setDisplayTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Transit-out time (<code>duration.out</code>)<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">toast</span><span class="p">.</span><span class="nx">transitOutTime</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">toast</span><span class="p">.</span><span class="nx">setTransitOutTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="transit-action">Transit action<a class="headerlink" href="#transit-action" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set transit-in action
+    <div class="codehilite"><pre><span></span><code><span class="nx">toast</span><span class="p">.</span><span class="nx">setTransitInCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code> : Transit-in action<ul>
+<li><code>0</code>, or <code>'popUp'</code> : Pop-up.</li>
+<li><code>1</code>, or <code>'fadeIn'</code> : Fade-in.</li>
+<li>A callback : Custom transit-in function
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">toast</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set transit-out action
+    <div class="codehilite"><pre><span></span><code><span class="nx">toast</span><span class="p">.</span><span class="nx">setTransitOutCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>callback</code> : Transit-out action<ul>
+<li><code>0</code>, or <code>'scaleDown'</code> : Scale-down.</li>
+<li><code>1</code>, or <code>'fadeOut'</code> : Fade-out.</li>
+<li>A callback : Custom transit-out function
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">toast</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-label/">label object</a>, <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
                 
