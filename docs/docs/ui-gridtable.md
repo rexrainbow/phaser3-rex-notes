@@ -199,8 +199,10 @@ var table = scene.rexUI.add.gridTable({
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `false` : No mask.
-    - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click).
-    - `table.reuseCellContainer` : Set `true` to reuse cell container when creating new cell container.
+    - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click). Default value is `true`.
+    - `table.reuseCellContainer` : 
+        - `true` : Reuse cell container when creating new cell container. 
+        - `false` : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.

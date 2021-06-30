@@ -15,8 +15,8 @@ export interface IConfig extends IConfigBase {
     },
 
     text: Phaser.GameObjects.GameObject,
-    textWidth?: number,
-    textHeight?: number,
+    textWidth?: number|undefined,
+    textHeight?: number|undefined,
     textMask?: boolean
 
     content?: string

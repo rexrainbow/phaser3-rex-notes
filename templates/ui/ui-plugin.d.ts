@@ -13,6 +13,7 @@ import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
 import GridButtonsFactory from './gridbuttons/Factory';
 import GridSizerFactory from './gridsizer/Factory';
+import GridTableFactory from './gridtable/Factory';
 import KnobFactory from './knob/Factory';
 import LabelFactory from './label/Factory';
 import MenuFactory from './menu/Factory';
@@ -47,6 +48,7 @@ export default class UIFactories {
         fixWidthSizer: FixWidthSizerFactory,
         gridButtons: GridButtonsFactory,
         gridSizer: GridSizerFactory,
+        gridTable: GridTableFactory,
         knob: KnobFactory,
         label: LabelFactory,
         menu: MenuFactory,

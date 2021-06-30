@@ -63,7 +63,7 @@ class GridTable extends Scrollable {
         var eventName = (scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
         table.on(eventName, function () {
             this.resizeControllerFlag = true;
-        }, this);        
+        }, this);
 
         if (GetValue(tableConfig, 'interactive', true)) {
             TableSetInteractive.call(this, table, tableConfig);
@@ -93,6 +93,11 @@ class GridTable extends Scrollable {
     refresh() {
         this.setItems(this.items);
         return this;
+    }
+
+    getCell(cellIdx) {
+        var table = this.childrenMap.child;
+        return table.getCell(cellIdx);
     }
 
     getCellContainer(cellIdx) {

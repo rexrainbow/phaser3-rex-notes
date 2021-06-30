@@ -18,7 +18,7 @@ export interface IConfig extends IConfigBase {
         child: Phaser.GameObjects.GameObject,
         mask?: (
             {
-                padding?: 0,
+                padding?: number,
                 updateMode?: 0 | 1 | 'update' | 'everyTick'
             } |
             boolean
