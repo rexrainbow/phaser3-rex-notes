@@ -300,29 +300,34 @@ nav:
     - Away time: awaytime.md
 - UI:
     - Overview: ui-overview.md
-    - Sizer: ui-sizer.md
-    - Grid sizer: ui-gridsizer.md
-    - Fix-width sizer: ui-fixwidthsizer.md
-    - Overlap sizer: ui-overlapsizer.md
-    - Label: ui-label.md
-    - Text box: ui-textbox.md
-    - Text area: ui-textarea.md
-    - Toast: ui-toast.md
-    - Buttons: ui-buttons.md
-    - Grid buttons: ui-gridbuttons.md
-    - Fix-width buttons: ui-fixwidthbuttons.md
-    - Slider: ui-slider.md
-    - Dialog: ui-dialog.md
-    - Grid table: ui-gridtable.md
-    - Tabs: ui-tabs.md
-    - Menu: ui-menu.md
-    - Number bar: ui-numberbar.md
-    - Knob: ui-knob.md
-    - Badge label: ui-badgelabel.md
-    - Pages: ui-pages.md    
-    - Scroll-able panel: ui-scrollablepanel.md
-    - Chart: ui-chart.md
     - Base sizer: ui-basesizer.md
+    - Sizer:    
+        - Sizer: ui-sizer.md
+        - Grid sizer: ui-gridsizer.md
+        - Fix-width sizer: ui-fixwidthsizer.md
+        - Overlap sizer: ui-overlapsizer.md
+    - Buttons:
+        - Buttons: ui-buttons.md
+        - Grid buttons: ui-gridbuttons.md
+        - Fix-width buttons: ui-fixwidthbuttons.md
+    - Scrollable:
+        - Scroll-able panel: ui-scrollablepanel.md
+        - Grid table: ui-gridtable.md
+        - Text area: ui-textarea.md
+    - Slider:
+        - Slider: ui-slider.md
+        - Number bar: ui-numberbar.md
+        - Knob: ui-knob.md
+    - Label:
+        - Label: ui-label.md
+        - Badge label: ui-badgelabel.md
+    - Dialog: ui-dialog.md
+    - Menu: ui-menu.md    
+    - Text box: ui-textbox.md   
+    - Toast: ui-toast.md    
+    - Tabs: ui-tabs.md    
+    - Pages: ui-pages.md
+    - Chart: ui-chart.md    
 - Board:
     - Overview: board-overview.md
     - Board: board.md

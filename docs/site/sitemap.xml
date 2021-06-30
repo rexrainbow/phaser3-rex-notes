@@ -1161,6 +1161,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-basesizer/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-sizer/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
@@ -1181,26 +1186,6 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-label/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textbox/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textarea/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-toast/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-buttons/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
@@ -1216,12 +1201,7 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-slider/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-dialog/</loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-scrollablepanel/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -1231,12 +1211,12 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-tabs/</loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textarea/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-menu/</loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-slider/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -1251,7 +1231,37 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-label/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-badgelabel/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-dialog/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-menu/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textbox/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-toast/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-tabs/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -1261,17 +1271,7 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-scrollablepanel/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-chart/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-basesizer/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>

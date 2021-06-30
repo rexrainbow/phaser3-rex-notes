@@ -43,6 +43,7 @@
 
 ### UI components
 
+1. [Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [Buttons](ui-buttons.md): A container with a group of buttons.
 1. [Dialog](ui-dialog.md): A container with a title, content, buttons and background.
 1. [Fix-width-buttons](ui-fixwidthbuttons.md): A container with a group of fix-width buttons.
@@ -55,7 +56,6 @@
 1. [Menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Number-bar](ui-numberbar.md): A container with an icon, slider, text, and background.
 1. [Overlap sizer](ui-overlapsizer.md): Layout children game objects overlapped.
-1. [Badge label](ui-badgelabel.md): A container with badges above a main item.
 1. [Pages](ui-pages.md): A container with pages, only current page is visible.
 1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
 1. [Sizer](ui-sizer.md): Layout children game objects.
