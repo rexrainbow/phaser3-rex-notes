@@ -1186,6 +1186,16 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-label/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-badgelabel/</loc>
+     <lastmod>2021-06-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-buttons/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
@@ -1227,16 +1237,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-knob/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-label/</loc>
-     <lastmod>2021-06-30</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-badgelabel/</loc>
      <lastmod>2021-06-30</lastmod>
      <changefreq>daily</changefreq>
     </url>

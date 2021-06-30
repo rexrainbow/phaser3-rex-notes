@@ -306,6 +306,9 @@ nav:
         - Grid sizer: ui-gridsizer.md
         - Fix-width sizer: ui-fixwidthsizer.md
         - Overlap sizer: ui-overlapsizer.md
+    - Label:
+        - Label: ui-label.md
+        - Badge label: ui-badgelabel.md
     - Buttons:
         - Buttons: ui-buttons.md
         - Grid buttons: ui-gridbuttons.md
@@ -318,9 +321,6 @@ nav:
         - Slider: ui-slider.md
         - Number bar: ui-numberbar.md
         - Knob: ui-knob.md
-    - Label:
-        - Label: ui-label.md
-        - Badge label: ui-badgelabel.md
     - Dialog: ui-dialog.md
     - Menu: ui-menu.md    
     - Text box: ui-textbox.md   

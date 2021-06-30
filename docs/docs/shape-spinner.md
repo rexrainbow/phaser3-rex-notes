@@ -137,6 +137,17 @@ var spinner = scene.rexSpinner.add.audio({
 
 ### Play animation
 
+#### Start
+
+- Start playing, won't restart when playing
+    ```javascript
+    spinner.start();
+    ```
+- Restart with new duration
+    ```javascript
+    spinner.start(duration);
+    ```
+
 #### Pause
 
 ```javascript
@@ -168,6 +179,52 @@ spinner.stop();
     ```
     - `t` : `0` ~ `1`
 
+### Color
+
+- Get
+    ```javascript
+    var color = spinner.color;
+    ```
+- Set
+    ```javascript
+    spinner.setColor(color);
+    ```
+    or
+    ```javascript
+    spinner.color = color;
+    ```
+    - `color` : Fill color, or stroke color, in number.
+
+### Duration
+
+- Get
+    ```javascript
+    var duration = spinner.duration;
+    ```
+- Set, will apply to next animation playing.
+    ```javascript
+    spinner.setDuration(duration);
+    ```
+    or
+    ```javascript
+    spinner.duration = duration;
+    ```
+
+### Ease
+
+- Get
+    ```javascript
+    var ease = spinner.ease;
+    ```
+- Set, will apply to next animation playing.
+    ```javascript
+    spinner.setEasen(ease);
+    ```
+    or
+    ```javascript
+    spinner.ease = ease;
+    ```
+
 ### Custom spinner
 
 ```javascript
@@ -196,6 +253,7 @@ var customSpinner = this.rexSpinner.add.custom({
     },
 })
 ```
+
 - `create` : Callback to create shapes
     - A plain object with `shapeType: name`, or `shapeType: number`
         - `shapeType` : 

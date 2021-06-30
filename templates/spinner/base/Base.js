@@ -12,8 +12,8 @@ class Base extends BaseShapes {
 
         super(scene, x, y, width, height);
 
-        this.duration = GetValue(config, 'duration', 1000);
-        this.ease = GetValue(config, 'ease', 'Linear');
+        this.setDuration(GetValue(config, 'duration', 1000));
+        this.setEase(GetValue(config, 'ease', 'Linear'));
         var color = GetValue(config, 'color', 0xffffff);
         var start = GetValue(config, 'start', true);
 
@@ -73,6 +73,16 @@ class Base extends BaseShapes {
 
     setValue(value) {
         this.value = value;
+        return this;
+    }
+
+    setDuration(duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    setEase(ease) {
+        this.ease = ease;
         return this;
     }
 }
