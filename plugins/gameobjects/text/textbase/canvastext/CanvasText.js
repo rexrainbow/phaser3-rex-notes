@@ -67,6 +67,10 @@ class CanvasText {
         var canvas = this.canvas;
         var context = this.context;
 
+        var MeasureText = function (text) { 
+            return context.measureText(text).width; 
+        }        
+
         var cursorX = 0,
             cursorY = 0;
 
@@ -102,12 +106,10 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
 
-                var getTextWidth = function (text) { 
-                    return context.measureText(text).width; 
-                }
+
                 wrapLines = WrapText(
                     plainText,
-                    getTextWidth,
+                    MeasureText,
                     wrapMode, wrapWidth,
                     cursorX
                 );

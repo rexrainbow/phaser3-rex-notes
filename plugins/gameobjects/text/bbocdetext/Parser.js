@@ -250,6 +250,7 @@ var parser = {
                 case 'color':
                 case 'stroke':
                 case 'img':
+                case 'area':
                 case 'y':
                     headers.push(`[${k}=${value}]`);
                     break;
