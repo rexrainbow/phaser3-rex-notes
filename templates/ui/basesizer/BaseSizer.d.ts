@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import ContainerLite from '../../../plugins/ContainerLite.js';
+import ContainerLite from '../../../plugins/containerlite.js';
 
 export interface IConfig {
     space?: {
