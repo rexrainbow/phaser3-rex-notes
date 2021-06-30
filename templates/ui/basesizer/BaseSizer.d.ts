@@ -64,21 +64,21 @@ export default class BaseSizer extends ContainerLite {
         bounds?: Phaser.Geom.Rectangle | { left?: number, right?: number, top?: number, bottom?: number }
     ): this;
 
-    get innerLeft(): number;
+    readonly innerLeft: number;
 
-    get innerRight(): number;
+    readonly innerRight: number;
 
-    get innerTop(): number;
+    readonly innerTop: number;
 
-    get innerBottom(): number;
+    readonly innerBottom: number;
 
-    get innerWidth(): number;
+    readonly innerWidth: number;
 
-    get innerHeight(): number;
+    readonly innerHeight: number;
 
-    get minInnerWidth(): number;
+    readonly minInnerWidth: number;
 
-    get minInnerHeigt(): number;
+    readonly minInnerHeigt: number;
 
     pin(
         gameObject: Phaser.GameObjects.GameObject

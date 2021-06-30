@@ -45,11 +45,11 @@ export default class NinePatch extends Phaser.GameObjects.RenderTexture {
         callback: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined)
     ): this;
 
-    get minWidth(): number;
+    readonly minWidth: number;
 
-    get minHeight(): number;
+    readonly minHeight: number;
 
-    get fixedPartScaleX(): number;
+    readonly fixedPartScaleX: number;
 
-    get fixedPartScaleY(): number;
+    readonly fixedPartScaleY: number;
 }

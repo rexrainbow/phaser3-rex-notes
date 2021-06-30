@@ -56,8 +56,8 @@ export default class Scrollable extends Sizer {
     scrollToBottom(): this;
 
     childOY: number;
-    get topChildOY(): number;
-    get bottomChildOY(): number;
+    readonly topChildOY: number;
+    readonly bottomChildOY: number;
     setChildOY(value: number): this;
 
     sliderEnable: boolean;

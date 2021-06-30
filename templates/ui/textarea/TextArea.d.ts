@@ -32,5 +32,5 @@ export default class TextArea extends Scrollable {
     setText(text: string): this;
     appendText(text: string): this;
 
-    get linesCount(): number;
+    readonly linesCount: number;
 }
