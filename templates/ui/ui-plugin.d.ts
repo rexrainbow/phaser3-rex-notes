@@ -43,6 +43,7 @@ import ToastFactory from './toast/Factory';
 import Edit from '../../plugins/behaviors/textedit/Edit';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
+import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 
@@ -97,6 +98,7 @@ export default class UIFactories {
     hide: Hide;
     show: Show;
     isShown: IsShown;
+    setChildrenInteractive: SetChildrenInteractive;
     waitEvent: WaitEvent;
     waitComplete: WaitComplete;
     wrapExpandText: WrapExpandText;
