@@ -51,11 +51,7 @@ import PerspectiveFactory from './perspective/Factory.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
-import {
-    Show,
-    Hide,
-    IsShown,
-} from './utils/Hide.js';
+import { Show, Hide, IsShown, } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
