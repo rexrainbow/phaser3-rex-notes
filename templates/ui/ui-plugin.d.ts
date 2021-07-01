@@ -7,6 +7,7 @@ import CanvasFactory from './canvas/Factory';
 import CircleMaskImageFactory from './circlemaskimage/Factory';
 import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
+import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
@@ -43,6 +44,7 @@ export default class UIFactories {
         circleMaskImage: CircleMaskImageFactory,
         circularProgressCanvas: CircularProgressCanvasFactory,
         circularProgress: CircularProgressFactory,
+        clickFactory: ClickFactory,
         container: ContainerFactory,
         dialog: DialogFactory,
         fixWidthButtons: FixWidthButtonsFactory,
