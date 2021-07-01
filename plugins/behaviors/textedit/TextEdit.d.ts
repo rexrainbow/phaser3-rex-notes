@@ -1,15 +1,15 @@
-import { TextGameObjectType } from '../../utils/types/TextGameObjectType';
+import { CanvasTextGameObjectType } from '../../utils/types/CanvasTextGameObjectType';
 
-export { TextGameObjectType };
+export { CanvasTextGameObjectType };
 
 export interface IConfigOpen {
     type?: string,
     enterClose?: boolean,
     selectAll?: boolean,
 
-    onOpen?: (textObject: TextGameObjectType) => void,
-    onTextChanged?: (textObject: TextGameObjectType, text: string) => void,
-    onClose?: (textObject: TextGameObjectType) => void,
+    onOpen?: (textObject: CanvasTextGameObjectType) => void,
+    onTextChanged?: (textObject: CanvasTextGameObjectType, text: string) => void,
+    onClose?: (textObject: CanvasTextGameObjectType) => void,
 
     text?: string,
     fontFamily?: string,
@@ -21,12 +21,12 @@ export interface IConfigOpen {
 
 export default class TextEdit {
     constructor(
-        textObject: TextGameObjectType
+        textObject: CanvasTextGameObjectType
     );
 
     open(
         config?: IConfigOpen,
-        onCloseCallback?: (textObject: TextGameObjectType) => void
+        onCloseCallback?: (textObject: CanvasTextGameObjectType) => void
     ): this;
 
     close(): this;

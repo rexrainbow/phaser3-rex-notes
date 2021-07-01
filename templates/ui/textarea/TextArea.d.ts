@@ -1,7 +1,7 @@
 import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
 import { IConfig as IConfigBase } from '../utils/scrollable/Scrollable';
-import { TextGameObjectType } from '../../../plugins/utils/types/TextGameObjectType';
+import { CanvasTextGameObjectType } from '../../../plugins/utils/types/CanvasTextGameObjectType';
 
 
 export interface IConfig extends IConfigBase {
@@ -16,9 +16,9 @@ export interface IConfig extends IConfigBase {
         footer?: number,
     },
 
-    text: TextGameObjectType,
-    textWidth?: number|undefined,
-    textHeight?: number|undefined,
+    text: CanvasTextGameObjectType | Phaser.GameObjects.BitmapText,
+    textWidth?: number | undefined,
+    textHeight?: number | undefined,
     textMask?: boolean
 
     content?: string

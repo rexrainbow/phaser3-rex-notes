@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import CanvasGameObjectBase from '../../canvas/canvas/CanvasGameObjectBase';
+import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
 
 export interface TextStyle {
     fontFamily?: string,

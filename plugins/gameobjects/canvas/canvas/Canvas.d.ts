@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import CanvasGameObjectBase from './CanvasGameObjectBase';
+import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
 
 export default class Canvas extends CanvasGameObjectBase {
     constructor(
