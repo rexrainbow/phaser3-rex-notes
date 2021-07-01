@@ -190,3 +190,34 @@ var drag1Vector = rotate.drag1Vector; // {x, y}
     ```javascript
     var pointer0 = rotate.pointers[1];
     ```
+
+### Is rotated
+
+```javascript
+var isRotated = rotate.isRotated;
+```
+
+Return `true` if pinched.
+
+### Other properties
+
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = rotate.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        rotate.setDragThreshold(dragThreshold);
+        // rotate.dragThreshold = dragThreshold;
+        ```
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = rotate.bounds;
+        ```
+    - Set
+        ```javascript
+        rotate.setDetectBounds(bounds);
+        // rotate.bounds = bounds;
+        ```
