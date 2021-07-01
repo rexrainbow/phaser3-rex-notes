@@ -17,7 +17,7 @@ export interface IConfig {
 
 export default class Tap extends Phaser.Events.EventEmitter {
     constructor(
-        gameObject: Phaser.GameObjects.GameObject,
+        gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
     )
 
@@ -25,21 +25,21 @@ export default class Tap extends Phaser.Events.EventEmitter {
     setEnable(enable?: boolean): this;
     toggleEnable(): this;
 
-    setHoldTime(time:number):this;
-    holdTime:number;
-    setTapInterval(time:number):this;
-    tapInterval:number;
+    setHoldTime(time: number): this;
+    holdTime: number;
+    setTapInterval(time: number): this;
+    tapInterval: number;
 
-    setDragThreshold(distance:number):this;
-    dragThreshold:number;
-    setTapOffset(distance:number):this;
-    tapOffset:number;
+    setDragThreshold(distance: number): this;
+    dragThreshold: number;
+    setTapOffset(distance: number): this;
+    tapOffset: number;
 
-    setMaxTaps(amount:number):this;
-    maxTaps:number;
-    setMaxTaps(amount:number):this;
-    minTaps:number;
-    setTaps(minTaps:number, maxTaps:number):this;
+    setMaxTaps(amount: number): this;
+    maxTaps: number;
+    setMaxTaps(amount: number): this;
+    minTaps: number;
+    setTaps(minTaps: number, maxTaps: number): this;
 
     readonly isTapped: boolean;
 }

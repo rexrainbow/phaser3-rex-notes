@@ -3,7 +3,7 @@ import Tap from "./Tap";
 import { IConfig } from '../../../plugins/input/gestures/tap/Tap';
 
 declare type TapFactory = (
-    gameObject: Phaser.GameObjects.GameObject,
+    gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
     config?: IConfig
 ) => Tap;
 

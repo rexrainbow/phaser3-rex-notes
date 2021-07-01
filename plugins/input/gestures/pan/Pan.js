@@ -83,7 +83,7 @@ class Pan extends OnePointerTracer {
         }
     }
 
-    get isPanning() {
+    get isPanned() {
         return (this.state === RECOGNIZED);
     }
 

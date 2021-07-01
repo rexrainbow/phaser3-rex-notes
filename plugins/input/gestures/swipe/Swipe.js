@@ -59,7 +59,7 @@ class Swipe extends OnePointerTracer {
     resetFromJSON(o) {
         super.resetFromJSON(o);
         this.setDragThreshold(GetValue(o, 'threshold', 10));
-        this.setMinDragVelocity(GetValue(o, 'velocityThreshold', 1000));
+        this.setVelocityThreshold(GetValue(o, 'velocityThreshold', 1000));
         this.setDirectionMode(GetValue(o, 'dir', '8dir'));
         return this;
     }
@@ -77,7 +77,7 @@ class Swipe extends OnePointerTracer {
             if (!this.validDrag) {
                 this.validDrag = (this.dragThreshold === 0) || (this.pointer.getDistance() >= this.dragThreshold);
             }
-            if (this.validDrag && (this.dragVelocity > this.minDragVelocity)) {
+            if (this.validDrag && (this.dragVelocity > this.velocityThreshold)) {
                 this.state = RECOGNIZED;
             }
         }
@@ -112,8 +112,8 @@ class Swipe extends OnePointerTracer {
         return this;
     }
 
-    setMinDragVelocity(velocity) {
-        this.minDragVelocity = velocity;
+    setVelocityThreshold(velocity) {
+        this.velocityThreshold = velocity;
         return this;
     }
 

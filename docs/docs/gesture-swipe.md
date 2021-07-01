@@ -75,7 +75,7 @@ Get swipe events of a game object.
 
 ### Create instance
 
-- Pan input
+- Swipe input
     ```javascript
     var swipe = scene.rexGestures.add.swipe({
         // enable: true,
@@ -94,7 +94,7 @@ Get swipe events of a game object.
         - `'left&right'`, or `1` : Get `left` or `right` state only.
         - `'4dir'`, or `2` : Get `up`, `down`, `left` or `right` state.
         - `'8dir'`, or `3` : Get `up`, `up`/`left`, `up`/`right`, `down`, `down`/`left`, `down`/`right`, `left`, or `right` state.
-- Pan behavior of game object
+- Swipe behavior of game object
     ```javascript
     var swipe = scene.rexGestures.add.swipe(gameObject, {
         // enable: true,
@@ -136,3 +136,44 @@ swipe.on('swipe', function(swipe, gameObject, lastPointer){
 - `swipe.dragVelocity` : Velocity of dragging.
 - `gameObject`, `swipe.gameObject` : Parent gameobject of this pan behavior.
 - `lastPointer` : Last touch pointer.
+
+### Is swiped
+
+```javascript
+var isSwiped = swipe.isSwiped;
+```
+
+Return `true` if panning.
+
+### Other properties
+
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = swipe.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        swipe.setDragThreshold(dragThreshold);
+        // swipe.dragThreshold = dragThreshold;
+        ```
+- Velocity threshold
+    - Get
+        ```javascript
+        var velocityThreshold = swipe.velocityThreshold;
+        ```
+    - Set
+        ```javascript
+        swipe.setVelocityThreshold(velocityThreshold);
+        // swipe.velocityThreshold = velocityThreshold;
+        ```
+- Direction mode
+    - Get
+        ```javascript
+        var dirMode = swipe.dirMode;  // 0,1,2,3
+        ```
+    - Set
+        ```javascript
+        swipe.setDirectionMode(dirMode);  // 0,1,2,3,'up&down','left&right','4dir','8dir'
+        // swipe.dirMode = dirMode;  // 0,1,2,3
+        ```   

@@ -2,13 +2,15 @@ import * as Phaser from 'phaser';
 
 export interface IConfig {
     threshold?: number,
+    velocityThreshold?: number,
+    dir: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir',
 
     enable?: boolean,
 
     eventEmitter?: boolean | Phaser.Events.EventEmitter
 }
 
-export default class Pan extends Phaser.Events.EventEmitter {
+export default class Swipe extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
@@ -21,5 +23,13 @@ export default class Pan extends Phaser.Events.EventEmitter {
     setDragThreshold(distance: number): this;
     dragThreshold: number;
 
-    readonly isPanned: boolean;
+    setVelocityThreshold(velocity: number): this;
+    velocityThreshold: number;
+
+    setDirectionMode(
+        dirMode: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir'
+    ): this;
+    dirMode: number;
+
+    readonly isSwiped: boolean;
 }
