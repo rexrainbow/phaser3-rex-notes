@@ -165,7 +165,7 @@ tap.on('tappingstart', function(tap){
 }, scope);
 ```
 
-### Is tap
+### Is tapped
 
 ```javascript
 var isTapped = tap.isTapped;

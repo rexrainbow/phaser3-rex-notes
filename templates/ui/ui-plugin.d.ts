@@ -24,6 +24,7 @@ import NumberBarFactory from './numberbar/Factory';
 import OverlapSizerFactory from './overlapsizer/Factory';
 import PageFactory from './pages/Factory';
 import PanFactory from './pan/Factory';
+import PressFactory from './press/Factory';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory';
 import RoundRectangleFactory from './roundrectangle/Factory';
 import ScrollablePanelFactory from './scrollablepanel/Factory';
@@ -65,6 +66,7 @@ export default class UIFactories {
         overlapSizer: OverlapSizerFactory,
         page: PageFactory,
         pan: PanFactory,
+        press: PressFactory,
         roundRectangleCanvas: RoundRectangleCanvasFactory,
         roundRectangle: RoundRectangleFactory,
         scrollablePanel: ScrollablePanelFactory,

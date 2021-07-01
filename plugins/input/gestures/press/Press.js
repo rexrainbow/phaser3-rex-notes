@@ -53,7 +53,7 @@ class Press extends OnePointerTracer {
     resetFromJSON(o) {
         super.resetFromJSON(o);
         this.setDragThreshold(GetValue(o, 'threshold', 9));
-        this.setMinHoldTime(GetValue(o, 'time', 251));
+        this.setHoldTime(GetValue(o, 'time', 251));
         return this;
     }
 
@@ -94,13 +94,13 @@ class Press extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
-    setDragThreshold(distance) {
-        this.dragThreshold = distance;
+    setHoldTime(time) {
+        this.holdTime = time; // ms
         return this;
     }
 
-    setMinHoldTime(time) {
-        this.holdTime = time; // ms
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
         return this;
     }
 }

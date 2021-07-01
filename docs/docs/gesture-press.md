@@ -134,3 +134,34 @@ press.on('pressstart', function(press, gameObject, lastPointer){
 press.on('pressend', function(press, gameObject, lastPointer){
 }, scope);
 ```
+
+### Is pressed
+
+```javascript
+var isPressed = press.isPressed;
+```
+
+Return `true` if pressed.
+
+### Other properties
+
+- Hold time
+    - Get
+        ```javascript
+        var holdTime = press.holdTime;
+        ```
+    - Set
+        ```javascript
+        press.setHoldTime(holdTime);
+        // press.holdTime = holdTime;
+        ```
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = press.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        press.setDragThreshold(dragThreshold);
+        // press.dragThreshold = dragThreshold;
+        ```
