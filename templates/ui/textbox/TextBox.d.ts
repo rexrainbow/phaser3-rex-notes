@@ -1,11 +1,11 @@
 import * as Phaser from 'phaser';
 import Label from '../label/Label';
 import { IConfig as IConfigBase } from '../label/Label';
-import { CanvasTextGameObjectType } from '../../../plugins/utils/types/CanvasTextGameObjectType';
+import { TextGameObjectType } from '../../../plugins/utils/types/TextGameObjectType';
 
 
 export interface IConfig extends IConfigBase {
-    text: CanvasTextGameObjectType | Phaser.GameObjects.BitmapText,
+    text: TextGameObjectType,
 
     page?: {
         maxLines?: number

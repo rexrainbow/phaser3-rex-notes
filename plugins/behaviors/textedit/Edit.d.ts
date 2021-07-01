@@ -1,5 +1,5 @@
 import TextEdit from './TextEdit';
-import { CanvasTextGameObjectType } from '../../utils/types/CanvasTextGameObjectType';
+import { CanvasTextGameObjectType } from '../../utils/types/TextGameObjectType';
 import { IConfigOpen as IConfig } from './TextEdit';
 
 export { IConfig };

@@ -41,6 +41,7 @@ import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
 
 import Edit from '../../plugins/behaviors/textedit/Edit';
+import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
@@ -88,4 +89,14 @@ export default class UIFactories {
     }
 
     edit: Edit;
+    wrapExpandText: WrapExpandText;
+
+    isInTouching(
+        gameObject: Phaser.GameObjects.GameObject,
+        pointer?: Phaser.Input.Pointer,
+        preTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+        postTest?: (gameObject: Phaser.GameObjects.GameObject, x: number, y: number) => boolean,
+    ): boolean;
+
+    readonly viewport: Phaser.Geom.Rectangle;
 }

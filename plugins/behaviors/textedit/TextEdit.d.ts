@@ -1,4 +1,4 @@
-import { CanvasTextGameObjectType } from '../../utils/types/CanvasTextGameObjectType';
+import { CanvasTextGameObjectType } from '../../utils/types/TextGameObjectType';
 
 export { CanvasTextGameObjectType };
 
