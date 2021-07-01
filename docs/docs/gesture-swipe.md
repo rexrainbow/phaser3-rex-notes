@@ -79,6 +79,7 @@ Get swipe events of a game object.
     ```javascript
     var swipe = scene.rexGestures.add.swipe({
         // enable: true,
+        // bounds: undefined,
     
         // threshold: 10,
         // velocityThreshold: 1000,
@@ -86,6 +87,8 @@ Get swipe events of a game object.
     });
     ```
     - `enable` : Set `false` to disable input events.
+    - `bounds` : Touch detecting area [rectangle](geom-rectangle.md), if game obect is not given.
+        - `undefined` : Ignore this feature, default behavior.
     - `time` : Max time of the pointer to be down.
     - `threshold` : Minimal movement when pointer is down.
     - `velocityThreshold` : Minimal dragging speed.
@@ -177,3 +180,13 @@ Return `true` if panning.
         swipe.setDirectionMode(dirMode);  // 0,1,2,3,'up&down','left&right','4dir','8dir'
         // swipe.dirMode = dirMode;  // 0,1,2,3
         ```   
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = swipe.bounds;
+        ```
+    - Set
+        ```javascript
+        swipe.setDetectBounds(bounds);
+        // swipe.bounds = bounds;
+        ```

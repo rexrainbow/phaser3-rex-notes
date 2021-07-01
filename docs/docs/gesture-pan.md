@@ -79,11 +79,14 @@ Get pan events of a game object.
     ```javascript
     var pan = scene.rexGestures.add.pan({
         // enable: true,
+        // bounds: undefined,
     
         // threshold: 10,
     });
     ```
     - `enable` : Set `false` to disable input events.
+    - `bounds` : Touch detecting area [rectangle](geom-rectangle.md), if game obect is not given.
+        - `undefined` : Ignore this feature, default behavior.
     - `threshold` : Minimal movement when pointer is down.
 - Pan behavior of game object
     ```javascript
@@ -168,4 +171,14 @@ Return `true` if panned.
         ```javascript
         pan.setDragThreshold(dragThreshold);
         // pan.dragThreshold = dragThreshold;
+        ```
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = pan.bounds;
+        ```
+    - Set
+        ```javascript
+        pan.setDetectBounds(bounds);
+        // pan.bounds = bounds;
         ```

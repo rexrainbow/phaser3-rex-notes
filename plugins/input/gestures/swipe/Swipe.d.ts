@@ -1,24 +1,19 @@
 import * as Phaser from 'phaser';
+import OnePointerTracer from '../onepointertracer/OnePointerTracer';
+import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
-export interface IConfig {
+
+export interface IConfig extends IConfigBase{
     threshold?: number,
     velocityThreshold?: number,
     dir: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir',
-
-    enable?: boolean,
-
-    eventEmitter?: boolean | Phaser.Events.EventEmitter
 }
 
-export default class Swipe extends Phaser.Events.EventEmitter {
+export default class Swipe extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
     )
-
-    enable: boolean;
-    setEnable(enable?: boolean): this;
-    toggleEnable(): this;
 
     setDragThreshold(distance: number): this;
     dragThreshold: number;

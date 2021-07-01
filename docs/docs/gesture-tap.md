@@ -79,6 +79,7 @@ Get tap/multi-taps events of a game object.
     ```javascript
     var tap = scene.rexGestures.add.tap({
         // enable: true,
+        // bounds: undefined,
     
         // time: 250,
         // tapInterval: 200,
@@ -91,6 +92,8 @@ Get tap/multi-taps events of a game object.
     });
     ```
     - `enable` : Set `false` to disable input events.
+    - `bounds` : Touch detecting area [rectangle](geom-rectangle.md), if game obect is not given.
+        - `undefined` : Ignore this feature, default behavior.
     - `time` : Max time of the pointer to be down.
     - `tapInterval` : Max time between the multi-tap taps.
     - `threshold` : Minimal movement when pointer is down.
@@ -240,3 +243,13 @@ Return `true` if tapped end.
     taps.setTaps(taps);
     // taps.setTaps(minTaps, maxTaps);
     ```
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = taps.bounds;
+        ```
+    - Set
+        ```javascript
+        taps.setDetectBounds(bounds);
+        // taps.bounds = bounds;
+        ```

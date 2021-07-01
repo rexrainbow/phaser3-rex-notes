@@ -181,3 +181,34 @@ var drag1Vector = pinch.drag1Vector; // {x, y}
     ```javascript
     var pointer0 = pinch.pointers[1];
     ```
+
+### Is pinched
+
+```javascript
+var isPinched = pinch.isPinched;
+```
+
+Return `true` if pinched.
+
+### Other properties
+
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = pinch.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        pinch.setDragThreshold(dragThreshold);
+        // pinch.dragThreshold = dragThreshold;
+        ```
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = pinch.bounds;
+        ```
+    - Set
+        ```javascript
+        pinch.setDetectBounds(bounds);
+        // pinch.bounds = bounds;
+        ```

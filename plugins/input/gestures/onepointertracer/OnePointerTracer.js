@@ -21,12 +21,13 @@ class OnePointerTracer extends TickTask {
     }
 
     resetFromJSON(o) {
-        this.setEnable(GetValue(o, "enable", true));
+        this.setEnable(GetValue(o, 'enable', true));
 
+        this.setDetectBounds()
         if (this.gameObject === undefined) {
-            this.bounds = GetValue(o, 'bounds', undefined);
+            this.setDetectBounds(GetValue(o, 'bounds', undefined));
         } else {
-            this.bounds = undefined;
+            this.setDetectBounds();
         }
 
         this.tracerState = TOUCH0;
@@ -96,6 +97,11 @@ class OnePointerTracer extends TickTask {
         }
 
         this.enable = e;
+        return this;
+    }
+
+    setDetectBounds(bounds) {
+        this.bounds = bounds;
         return this;
     }
 

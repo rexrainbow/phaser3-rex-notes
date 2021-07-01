@@ -1,13 +1,13 @@
 import * as Phaser from 'phaser';
-import OnePointerTracer from '../onepointertracer/OnePointerTracer';
-import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
+import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer';
+import { IConfig as IConfigBase } from '../twopointerstracer/TwoPointersTracer';
 
 
 export interface IConfig extends IConfigBase {
     threshold?: number,
 }
 
-export default class Pan extends OnePointerTracer {
+export default class Pinch extends TwoPointersTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
@@ -16,5 +16,6 @@ export default class Pan extends OnePointerTracer {
     setDragThreshold(distance: number): this;
     dragThreshold: number;
 
-    readonly isPanned: boolean;
+    readonly scaleFactor: number;
+    readonly isPinched: boolean;
 }

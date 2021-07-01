@@ -79,12 +79,15 @@ Get press events of a game object.
     ```javascript
     var press = scene.rexGestures.add.press({
         // enable: true,
+        // bounds: undefined,
     
         // time: 251,
         // threshold: 9,
     });
     ```
     - `enable` : Set `false` to disable input events.
+    - `bounds` : Touch detecting area [rectangle](geom-rectangle.md), if game obect is not given.
+        - `undefined` : Ignore this feature, default behavior.
     - `time` : Minimal time of the pointer to be pressed.
     - `threshold` : Minimal movement when pointer is down.
 - Press behavior of game object
@@ -164,4 +167,14 @@ Return `true` if pressed.
         ```javascript
         press.setDragThreshold(dragThreshold);
         // press.dragThreshold = dragThreshold;
+        ```
+- Detect bounds
+    - Get
+        ```javascript
+        var bounds = press.bounds;
+        ```
+    - Set
+        ```javascript
+        press.setDetectBounds(bounds);
+        // press.bounds = bounds;
         ```

@@ -74,7 +74,7 @@ class Pinch extends TwoPointersTracer {
         }
     }
 
-    get isPinch() {
+    get isPinched() {
         return (this.state === RECOGNIZED);
     }
 

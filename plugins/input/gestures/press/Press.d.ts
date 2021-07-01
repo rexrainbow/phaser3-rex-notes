@@ -1,23 +1,18 @@
 import * as Phaser from 'phaser';
+import OnePointerTracer from '../onepointertracer/OnePointerTracer';
+import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
-export interface IConfig {
+
+export interface IConfig extends IConfigBase {
     time?: number,
     threshold?: number,
-
-    enable?: boolean,
-
-    eventEmitter?: boolean | Phaser.Events.EventEmitter
 }
 
-export default class Press extends Phaser.Events.EventEmitter {
+export default class Press extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
     )
-
-    enable: boolean;
-    setEnable(enable?: boolean): this;
-    toggleEnable(): this;
 
     setHoldTime(time: number): this;
     holdTime: number;

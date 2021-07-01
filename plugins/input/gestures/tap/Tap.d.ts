@@ -1,6 +1,8 @@
 import * as Phaser from 'phaser';
+import OnePointerTracer from '../onepointertracer/OnePointerTracer';
+import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
-export interface IConfig {
+export interface IConfig extends IConfigBase{
     time?: number,
     tapInterval?: number,
     threshold?: number,
@@ -9,21 +11,13 @@ export interface IConfig {
     taps?: number | undefined,
     minTaps?: number | undefined,
     maxTaps?: number | undefined,
-
-    enable?: boolean,
-
-    eventEmitter?: boolean | Phaser.Events.EventEmitter
 }
 
-export default class Tap extends Phaser.Events.EventEmitter {
+export default class Tap extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
         config?: IConfig
     )
-
-    enable: boolean;
-    setEnable(enable?: boolean): this;
-    toggleEnable(): this;
 
     setHoldTime(time: number): this;
     holdTime: number;
