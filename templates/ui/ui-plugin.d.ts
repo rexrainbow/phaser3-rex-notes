@@ -41,6 +41,7 @@ import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
 
 import Edit from '../../plugins/behaviors/textedit/Edit';
+import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 
 export default class UIFactories {
@@ -89,6 +90,8 @@ export default class UIFactories {
     }
 
     edit: Edit;
+    getParentSizer: GetParentSizer;
+    getTopmostSizer: GetTopmostSizer;
     wrapExpandText: WrapExpandText;
 
     isInTouching(
