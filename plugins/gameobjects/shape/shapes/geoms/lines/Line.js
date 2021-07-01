@@ -2,6 +2,11 @@ import PathBase from './PathBase.js';
 
 class Line extends PathBase {
     constructor(x0, y0, x1, y1) {
+        if (x0 === undefined) { x0 = 0; }
+        if (y0 === undefined) { y0 = 0; }
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+
         super();
 
         this.setP0(x0, y0);
@@ -55,7 +60,7 @@ class Line extends PathBase {
         this.y1 = y;
         return this;
     }
-    
+
     updateData() {
         this.pathData.length = 0;
         this.pathData.push(this.x0, this.y0);

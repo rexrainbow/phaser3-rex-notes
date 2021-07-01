@@ -7,18 +7,10 @@ const Utils = Phaser.Renderer.WebGL.Utils;
 
 class Rectangle extends BaseGeom {
     constructor(x, y, width, height) {
-        if (x === undefined) {
-            x = 0;
-        }
-        if (y === undefined) {
-            y = 0;
-        }
-        if (width === undefined) {
-            width = 0;
-        }
-        if (height === undefined) {
-            height = width;
-        }
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (width === undefined) { width = 0; }
+        if (height === undefined) { height = width; }
 
         super();
 

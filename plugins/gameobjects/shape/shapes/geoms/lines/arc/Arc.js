@@ -6,9 +6,14 @@ const DegToRad = Phaser.Math.DegToRad;
 
 class Arc extends PathBase {
     constructor(x, y, radiusX, radiusY, startAngle, endAngle, anticlockwise, pie) {
-        if (pie === undefined) {
-            pie = false;
-        }
+        if (x === undefined) { x = 0; }
+        if (y === undefined) { y = 0; }
+        if (radiusX === undefined) { radiusX = 0; }
+        if (radiusY === undefined) { radiusY = 0; }
+        if (startAngle === undefined) { startAngle = 0; }
+        if (endAngle === undefined) { endAngle = 360; }
+        if (anticlockwise === undefined) { anticlockwise = false; }
+        if (pie === undefined) { pie = false; }
 
         super();
 
@@ -38,6 +43,9 @@ class Arc extends PathBase {
     }
 
     setCenterPosition(x, y) {
+        if (y === undefined) {
+            y = x;
+        }
         this.x = x;
         this.y = y;
         return this;

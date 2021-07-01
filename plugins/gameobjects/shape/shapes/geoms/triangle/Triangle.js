@@ -7,6 +7,13 @@ const Utils = Phaser.Renderer.WebGL.Utils;
 
 class Triangle extends BaseGeom {
     constructor(x0, y0, x1, y1, x2, y2) {
+        if (x0 === undefined) { x0 = 0; }
+        if (y0 === undefined) { y0 = 0; }
+        if (x1 === undefined) { x1 = 0; }
+        if (y1 === undefined) { y1 = 0; }
+        if (x2 === undefined) { x2 = 0; }
+        if (y2 === undefined) { y2 = 0; }
+
         super();
 
         this.pathData = [];

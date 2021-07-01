@@ -20,6 +20,7 @@ import Spinner from './spinner/Spinner';
 import { IConfig as ICongfigBase } from './base/Base';
 import { IConfig as IConfigCustom } from './custom/Custom';
 
+
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
@@ -44,3 +45,6 @@ export default class UIFactories {
         spinner: (config?: ICongfigBase) => Spinner,
     }
 }
+
+import * as ShapeTypes from '../../plugins/gameobjects/shape/shapes/geoms';
+export { ShapeTypes };
