@@ -172,3 +172,71 @@ var isTapped = tap.isTapped;
 ```
 
 Return `true` if tapped end.
+
+### Other properties
+
+- Hold time
+    - Get
+        ```javascript
+        var holdTime = tap.holdTime;
+        ```
+    - Set
+        ```javascript
+        tap.setHoldTime(holdTime);
+        // tap.holdTime = holdTime;
+        ```
+- Tap interval
+    - Get
+        ```javascript
+        var tapInterval = tap.tapInterval;
+        ```
+    - Set
+        ```javascript
+        tap.setTapInterval(tapInterval);
+        // tap.tapInterval = tapInterval;
+        ```
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = tap.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        tap.setDragThreshold(dragThreshold);
+        // tap.dragThreshold = dragThreshold;
+        ```
+- Tap offset
+    - Get
+        ```javascript
+        var tapOffset = tap.tapOffset;
+        ```
+    - Set
+        ```javascript
+        tap.setTapOffset(tapOffset);
+        // tap.tapOffset = tapOffset;
+        ```
+- Max taps
+    - Get
+        ```javascript
+        var maxTaps = tap.maxTaps;
+        ```
+    - Set
+        ```javascript
+        tap.setMaxTaps(maxTaps);
+        // tap.maxTaps = maxTaps;
+        ```
+- Min taps
+    - Get
+        ```javascript
+        var minTaps = tap.minTaps;
+        ```
+    - Set
+        ```javascript
+        tap.setMinTaps(minTaps);
+        // tap.minTaps = minTaps;
+        ```
+- Taps
+    ```javascript
+    taps.setTaps(taps);
+    // taps.setTaps(minTaps, maxTaps);
+    ```

@@ -53,7 +53,7 @@ class Tap extends OnePointerTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setMaxHoldTime(GetValue(o, 'time', 250)); // min-hold-time of Press is 251
+        this.setHoldTime(GetValue(o, 'time', 250)); // min-hold-time of Press is 251
         this.setTapInterval(GetValue(o, 'tapInterval', 200));
         this.setDragThreshold(GetValue(o, 'threshold', 9));
         this.setTapOffset(GetValue(o, 'tapOffset', 10));
@@ -152,7 +152,7 @@ class Tap extends OnePointerTracer {
         return (this.state === RECOGNIZED);
     }
 
-    setMaxHoldTime(time) {
+    setHoldTime(time) {
         this.holdTime = time; // ms
         return this;
     }

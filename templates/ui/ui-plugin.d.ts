@@ -30,6 +30,7 @@ import SizerFactory from './sizer/Factory';
 import SliderFactory from './slider/Factory';
 import TabsFactory from './tabs/Factory';
 import TagTextFactory from './tagtext/Factory';
+import TapFactory from './tap/Factory';
 import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
@@ -68,6 +69,7 @@ export default class UIFactories {
         slider: SliderFactory,
         tabs: TabsFactory,
         tagText: TagTextFactory,
+        tap: TapFactory,
         textArea: TextAreaFactory,
         textBox: TextBoxFactory,
         toast: ToastFactory,
