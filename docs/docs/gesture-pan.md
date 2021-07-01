@@ -148,3 +148,24 @@ pan.on('panend', function(pan, gameObject, lastPointer){
 - `pan.endX`, `pan.endY` : Scene position of pan-end pointer.
 - `gameObject`, `pan.gameObject` : Parent gameobject of this pan behavior.
 - `lastPointer` : Last touch pointer.
+
+### Is pan
+
+```javascript
+var isPanning = pan.isPanning;
+```
+
+Return `true` if panning.
+
+### Other properties
+
+- Drag threshold
+    - Get
+        ```javascript
+        var dragThreshold = pan.dragThreshold;
+        ```
+    - Set
+        ```javascript
+        pan.setDragThreshold(dragThreshold);
+        // pan.dragThreshold = dragThreshold;
+        ```
