@@ -10,6 +10,7 @@ import CircularProgressFactory from './circularprogress/Factory';
 import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
 import DialogFactory from './dialog/Factory';
+import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
 import GridButtonsFactory from './gridbuttons/Factory';
@@ -47,6 +48,7 @@ export default class UIFactories {
         clickFactory: ClickFactory,
         container: ContainerFactory,
         dialog: DialogFactory,
+        flip: FlipFactory,
         fixWidthButtons: FixWidthButtonsFactory,
         fixWidthSizer: FixWidthSizerFactory,
         gridButtons: GridButtonsFactory,

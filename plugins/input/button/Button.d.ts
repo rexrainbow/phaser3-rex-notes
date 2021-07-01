@@ -1,9 +1,11 @@
 import * as Phaser from 'phaser';
 
 export interface IConfig {
-    mode?: 0 | 1 | 'pointerdown' | 'press' | 'pointerup' | 'release',
+    mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
     clickInterval?: number,
-    enable?: boolean
+    enable?: boolean,
+
+    eventEmitter?: boolean | Phaser.Events.EventEmitter
 }
 
 export default class Buttons extends Phaser.Events.EventEmitter {

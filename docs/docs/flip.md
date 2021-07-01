@@ -140,6 +140,7 @@ flip.setEase(ease);
 - Set
     ```javascript
     flip.setFace(face);
+    // flip.face = face;
     ```
     - `0`, `'front'` : Front face.
     - `1`, `'back'` : Back face.
