@@ -56,7 +56,7 @@ class TextEdit extends BehaviorBase {
                 }
             }, this)
             .setFocus();
-            this.parent.setVisible(false); // Set parent text invisible
+        this.parent.setVisible(false); // Set parent text invisible
 
         // Attach close event
         this.onClose = onCloseCallback;
@@ -73,8 +73,6 @@ class TextEdit extends BehaviorBase {
             }
 
         }, [], this);
-
-
 
         return this;
     }

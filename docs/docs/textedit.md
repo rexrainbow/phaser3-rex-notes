@@ -106,17 +106,26 @@ Create an [input text object](textedit.md) above a text object to edit string co
 [An easy way](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js) to open a text editor.
 
 ```javascript
-var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
+var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
+    // type: 'text',   //'text','password','number'
+    // enterClose: true,
+    // selectAll: false,
+
+    // onOpen: undefined,
+    // onTextChanged: undefined,
+    // onClose: undefined,
+
+    // text: '',
+});
 // var editor = scene.plugins.get('rexTextEdit').edit(textObject, config, onClose);
 ```
 
 - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 - `config` : 
     - `config.type` : 
-        - `text` (default), or 
-        - `password`
-        - `number`
-    - `config.text` : Initial string content.
+        - `'text'` (default), or 
+        - `'password'`
+        - `'number'`
     - `config.onOpen` : Callback invoked when input text is created.
         ```javascript
         function (textObject) {
@@ -135,6 +144,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
         ```
     - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
     - `config.selectAll` : Set `true` to select all text.
+    - `config.text` : Initial string content. Default is the string content of textObject.
     - [More configuration parameters](textedit.md#add-text-object)...
 - `onClose` : Callback invoked when input text is closed.
     ```javascript

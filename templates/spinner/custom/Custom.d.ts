@@ -6,7 +6,15 @@ export interface IConfig extends IConfigBase {
     type?: string,
 
     create?: (
-        Record<('arc' | 'circle' | 'ellipse' | 'line' | 'lines' | 'rectangle' | 'triangle'), (number | string | string[])> |
+        {
+            arc?: number | string | string[],
+            circle?: number | string | string[],
+            ellipse?: number | string | string[],
+            line?: number | string | string[],
+            lines?: number | string | string[],
+            rectangle?: number | string | string[],
+            triangle?: number | string | string[],
+        } |
         (() => void)
     );
 

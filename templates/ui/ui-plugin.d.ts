@@ -40,6 +40,8 @@ import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
 import ToastFactory from './toast/Factory';
 
+import Edit from '../../plugins/behaviors/textedit/Edit';
+
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
@@ -84,4 +86,6 @@ export default class UIFactories {
         textBox: TextBoxFactory,
         toast: ToastFactory,
     }
+
+    edit: Edit;
 }

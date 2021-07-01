@@ -1,6 +1,8 @@
 import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
 import { IConfig as IConfigBase } from '../utils/scrollable/Scrollable';
+import { TextGameObjectType } from '../../../plugins/utils/types/TextGameObjectType';
+
 
 export interface IConfig extends IConfigBase {
     space?: {
@@ -14,7 +16,7 @@ export interface IConfig extends IConfigBase {
         footer?: number,
     },
 
-    text: Phaser.GameObjects.GameObject,
+    text: TextGameObjectType,
     textWidth?: number|undefined,
     textHeight?: number|undefined,
     textMask?: boolean
