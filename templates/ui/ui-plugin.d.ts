@@ -49,52 +49,54 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 
+declare class Factories {
+    badgeLabel: BadgeLabelFactory;
+    BBCodeText: BBCodeTextFactory;
+    buttons: ButtonsFactory;
+    canvas: CanvasFactory;
+    circleMaskImage: CircleMaskImageFactory;
+    circularProgressCanvas: CircularProgressCanvasFactory;
+    circularProgress: CircularProgressFactory;
+    clickFactory: ClickFactory;
+    container: ContainerFactory;
+    customShapes: CustomShapesFactory;
+    dialog: DialogFactory;
+    flip: FlipFactory;
+    fixWidthButtons: FixWidthButtonsFactory;
+    fixWidthSizer: FixWidthSizerFactory;
+    gridButtons: GridButtonsFactory;
+    gridSizer: GridSizerFactory;
+    gridTable: GridTableFactory;
+    knob: KnobFactory;
+    label: LabelFactory;
+    menu: MenuFactory;
+    ninePatch: NinePatchFactory;
+    numberBar: NumberBarFactory;
+    overlapSizer: OverlapSizerFactory;
+    pages: PagesFactory;
+    pan: PanFactory;
+    perspective: PerspectiveFactory;
+    pinch: PinchFactory;
+    press: PressFactory;
+    rotate: RotateFactory;
+    roundRectangleCanvas: RoundRectangleCanvasFactory;
+    roundRectangle: RoundRectangleFactory;
+    scrollablePanel: ScrollablePanelFactory;
+    sizer: SizerFactory;
+    slider: SliderFactory;
+    swipe: SwipeFactory;
+    tabs: TabsFactory;
+    tagText: TagTextFactory;
+    tap: TapFactory;
+    textArea: TextAreaFactory;
+    textBox: TextBoxFactory;
+    toast: ToastFactory;
+}
+
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
-    add: {
-        badgeLabel: BadgeLabelFactory,
-        BBCodeText: BBCodeTextFactory,
-        buttons: ButtonsFactory,
-        canvas: CanvasFactory,
-        circleMaskImage: CircleMaskImageFactory,
-        circularProgressCanvas: CircularProgressCanvasFactory,
-        circularProgress: CircularProgressFactory,
-        clickFactory: ClickFactory,
-        container: ContainerFactory,
-        customShapes: CustomShapesFactory,
-        dialog: DialogFactory,
-        flip: FlipFactory,
-        fixWidthButtons: FixWidthButtonsFactory,
-        fixWidthSizer: FixWidthSizerFactory,
-        gridButtons: GridButtonsFactory,
-        gridSizer: GridSizerFactory,
-        gridTable: GridTableFactory,
-        knob: KnobFactory,
-        label: LabelFactory,
-        menu: MenuFactory,
-        ninePatch: NinePatchFactory,
-        numberBar: NumberBarFactory,
-        overlapSizer: OverlapSizerFactory,
-        pages: PagesFactory,
-        pan: PanFactory,
-        perspective: PerspectiveFactory,
-        pinch: PinchFactory,
-        press: PressFactory,
-        rotate: RotateFactory,
-        roundRectangleCanvas: RoundRectangleCanvasFactory,
-        roundRectangle: RoundRectangleFactory,
-        scrollablePanel: ScrollablePanelFactory,
-        sizer: SizerFactory,
-        slider: SliderFactory,
-        swipe: SwipeFactory,
-        tabs: TabsFactory,
-        tagText: TagTextFactory,
-        tap: TapFactory,
-        textArea: TextAreaFactory,
-        textBox: TextBoxFactory,
-        toast: ToastFactory,
-    }
+    add: Factories;
 
     edit: Edit;
     getParentSizer: GetParentSizer;
