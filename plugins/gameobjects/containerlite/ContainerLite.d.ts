@@ -183,4 +183,25 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         originX: number,
         originY: number
     ): this;
+
+
+    // Components
+    clearAlpha(): this;
+    setAlpha(topLeft?: number, topRight?: number, bottomLeft?: number, bottomRight?: number): this;
+    alpha: number;
+    alphaTopLeft: number;
+    alphaTopRight: number;
+    alphaBottomLeft: number;
+    alphaBottomRight: number;
+
+
+    flipX: boolean;
+    flipY: boolean;
+    toggleFlipX(): this;
+    toggleFlipY(): this;
+    setFlipX(value: boolean): this;
+    setFlipY(value: boolean): this;
+    setFlip(x: boolean, y: boolean): this;
+    resetFlip(): this;
+
 }
