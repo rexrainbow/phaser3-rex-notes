@@ -13,7 +13,7 @@ var FillStyle = function (color, alpha) {
 }
 
 var LineStyle = function (lineWidth, color, alpha) {
-    if (lineWidth === undefined) {
+    if ((lineWidth === undefined) || (color === undefined)) {
         this.isStroked = false;
     } else {
         if (alpha === undefined) {

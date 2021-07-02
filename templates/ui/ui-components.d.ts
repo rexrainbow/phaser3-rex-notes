@@ -123,3 +123,6 @@ export {
     GetViewport,
     SetChildrenInteractive
 }
+
+import { GeomTypes as CustomShapesGeomTypes } from '../../plugins/customshapes';
+export { CustomShapesGeomTypes };

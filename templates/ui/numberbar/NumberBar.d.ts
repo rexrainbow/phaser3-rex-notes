@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 
+type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+
 export interface IConfig extends IConfigBase {
     space?: {
         left?: number,
@@ -24,7 +26,7 @@ export interface IConfig extends IConfigBase {
         track?: Phaser.GameObjects.GameObject,
         indicator?: Phaser.GameObjects.GameObject,
         thumb?: Phaser.GameObjects.GameObject,
-        input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
+        input?: SliderInputTypes,
         gap?: number,
         easeValue?: {
             duration?: number,

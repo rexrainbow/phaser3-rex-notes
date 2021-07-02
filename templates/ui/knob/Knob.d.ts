@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import OverlapSizer from '../overlapsizer/OverlapSizer';
 import { IConfig as IConfigBase } from '../overlapsizer/OverlapSizer';
 
+type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+
 export interface IConfig extends IConfigBase {
     background?: Phaser.GameObjects.GameObject,
 
@@ -17,7 +19,7 @@ export interface IConfig extends IConfigBase {
     textFormatCallback?: (value: number) => string,
     textFormatCallbackScope?: unknown,
 
-    input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
+    input?: InputTypes,
 
     value?: number,
 

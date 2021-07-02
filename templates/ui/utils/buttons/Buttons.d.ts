@@ -1,9 +1,11 @@
+interface IConfigClick {
+    mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
+    clickInterval?: number
+}
+
 export interface IConfig {
-    click?: {
-        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-        clickInterval?: number
-    },
-    
+    click?: IConfigClick,
+
     groupName?: string,
 
     eventEmitter?: Phaser.GameObjects.GameObject,

@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
 import { IConfig as IConfigBase } from '../utils/scrollable/Scrollable';
 
+type MaskUpdateModeTyps = 0 | 1 | 'update' | 'everyTick';
+
 export interface CellData {
     scene: Phaser.Scene,
     width: number,
@@ -35,7 +37,7 @@ export interface IConfig extends IConfigBase {
         mask?: (
             {
                 padding?: number,
-                updateMode?: 0 | 1 | 'update' | 'everyTick'
+                updateMode?: MaskUpdateModeTyps
             } |
             boolean
         ),

@@ -1,6 +1,18 @@
 import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
 
+type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+    'left-top' | 'left-center' | 'left-bottom' |
+    'center-top' | 'center-center' | 'center-bottom' |
+    'right-top' | 'right-center' | 'right-bottom';
+type PaddingTypes = number |
+{
+    left?: number,
+    right?: number,
+    top?: number,
+    bottom?: number
+};
+
 export interface IConfig {
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
@@ -12,7 +24,7 @@ export interface IConfig {
     },
 
     draggable?: boolean | string | Phaser.GameObjects.GameObject,
-    
+
     name?: string
 }
 
@@ -86,13 +98,7 @@ export default class BaseSizer extends ContainerLite {
 
     addBackground(
         gameObject: Phaser.GameObjects.GameObject,
-        padding?: number |
-        {
-            left?: number,
-            right?: number,
-            top?: number,
-            bottom?: number
-        },
+        padding?: PaddingTypes,
         childKey?: string
     ): this;
 
@@ -111,10 +117,7 @@ export default class BaseSizer extends ContainerLite {
             {
                 createTextCallback: (scene: Phaser.Scene) => Phaser.GameObjects.GameObject,
                 createTextCallbackScope?: any,
-                align?: number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-                'left-top' | 'left-center' | 'left-bottom' |
-                'center-top' | 'center-center' | 'center-bottom' |
-                'right-top' | 'right-center' | 'right-bottom'
+                align?: AlignTypes
             }
         }
     ): this;

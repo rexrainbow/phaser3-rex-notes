@@ -2,13 +2,15 @@ import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 
+type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+
 export interface IConfig extends IConfigBase {
     background?: Phaser.GameObjects.GameObject,
     track?: Phaser.GameObjects.GameObject,
     indicator?: Phaser.GameObjects.GameObject,
     thumb?: Phaser.GameObjects.GameObject,
 
-    input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
+    input?: InputTypes,
 
     gap?: number,
 

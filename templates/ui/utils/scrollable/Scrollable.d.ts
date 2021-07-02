@@ -1,6 +1,11 @@
 import Sizer from '../../sizer/Sizer';
 import { IConfig as IConfigBase } from '../../sizer/Sizer';
 
+type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal';
+type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
+type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'
+
 export interface IConfig extends IConfigBase {
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
@@ -9,7 +14,7 @@ export interface IConfig extends IConfigBase {
         footer?: number,
     },
 
-    scrollMode?: 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal',
+    scrollMode?: scrollModeTypes,
 
     background?: Phaser.GameObjects.GameObject,
 
@@ -18,8 +23,8 @@ export interface IConfig extends IConfigBase {
             background?: Phaser.GameObjects.GameObject,
             track?: Phaser.GameObjects.GameObject,
             thumb?: Phaser.GameObjects.GameObject,
-            input?: 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none',
-            position?: 0 | 1 | 'right' | 'bottom' | 'left' | 'top',
+            input?: SliderInputTypes,
+            position?: SliderPositionTypes,
         } |
         false
     ),
@@ -39,8 +44,8 @@ export interface IConfig extends IConfigBase {
     footer?: Phaser.GameObjects.GameObject,
 
     align?: {
-        header?: 'left' | 'top' | 'right' | 'bottom' | 'center',
-        footer?: 'left' | 'top' | 'right' | 'bottom' | 'center',
+        header?: AlignTypes,
+        footer?: AlignTypes,
     },
 
     expand?: {

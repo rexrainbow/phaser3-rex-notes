@@ -9,6 +9,7 @@ import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
 import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
+import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
@@ -60,6 +61,7 @@ export default class UIFactories {
         circularProgress: CircularProgressFactory,
         clickFactory: ClickFactory,
         container: ContainerFactory,
+        customShapes: CustomShapesFactory,
         dialog: DialogFactory,
         flip: FlipFactory,
         fixWidthButtons: FixWidthButtonsFactory,
@@ -112,3 +114,6 @@ export default class UIFactories {
 
     readonly viewport: Phaser.Geom.Rectangle;
 }
+
+import { GeomTypes as CustomShapesGeomTypes } from '../../plugins/customshapes';
+export { CustomShapesGeomTypes };

@@ -2,6 +2,12 @@ import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 
+type AlignTypes = number | 'left' | 'center' | 'right';
+interface IConfigClick {
+    mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
+    clickInterval?: number
+}
+
 export interface IConfig extends IConfigBase {
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
@@ -60,17 +66,14 @@ export interface IConfig extends IConfigBase {
     },
 
     align?: {
-        title?: number | 'left' | 'center' | 'right',
-        content?: number | 'left' | 'center' | 'right',
-        description?: number | 'left' | 'center' | 'right',
-        choices?: number | 'left' | 'center' | 'right',
-        actions?: number | 'left' | 'center' | 'right',
+        title?: AlignTypes,
+        content?: AlignTypes,
+        description?: AlignTypes,
+        choices?: AlignTypes,
+        actions?: AlignTypes,
     },
 
-    click?: {
-        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-        clickInterval?: number
-    }
+    click?: IConfigClick
 }
 
 export default class Dialog extends Sizer {

@@ -1,19 +1,18 @@
 import Base from '../base/Base';
 import { IConfig as IConfigBase } from '../base/Base';
 
+type NameTypes = string | string[] | number;
+
 export interface IConfig extends IConfigBase {
-    create?: (
-        {
-            arc?: number | string | string[],
-            circle?: number | string | string[],
-            ellipse?: number | string | string[],
-            line?: number | string | string[],
-            lines?: number | string | string[],
-            rectangle?: number | string | string[],
-            triangle?: number | string | string[],
-        } |
-        ((this: Custom) => void)
-    );
+    create?: {
+        arc?: NameTypes,
+        circle?: NameTypes,
+        ellipse?: NameTypes,
+        line?: NameTypes,
+        lines?: NameTypes,
+        rectangle?: NameTypes,
+        triangle?: NameTypes,
+    } | ((this: Custom) => void);
 
     update?: (this: Custom) => void;
 
@@ -21,4 +20,8 @@ export interface IConfig extends IConfigBase {
 }
 
 export default class Custom extends Base {
+    constructor(
+        scene: Phaser.Scene,
+        config?: IConfig
+    )
 }

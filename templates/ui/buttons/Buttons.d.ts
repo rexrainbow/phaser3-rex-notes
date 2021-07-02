@@ -3,6 +3,7 @@ import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
 
+type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
 
 export interface IConfig extends IConfigBase, IConfigButtons {
     background?: Phaser.GameObjects.GameObject,
@@ -11,7 +12,7 @@ export interface IConfig extends IConfigBase, IConfigButtons {
 
     expand?: boolean,
 
-    align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
+    align?: AlignTypes,
 }
 
 export default class Buttons extends Sizer {

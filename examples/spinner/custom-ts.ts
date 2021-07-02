@@ -1,6 +1,6 @@
 import 'phaser';
 import SpinnerPlugin from '../../templates/spinner/spinner-plugin';
-import { ShapeTypes } from '../../templates/spinner/spinner-plugin';
+import { GeomTypes } from '../../templates/spinner/spinner-plugin';
 
 class Demo extends Phaser.Scene {
     rexSpinner: SpinnerPlugin;
@@ -58,7 +58,7 @@ var AddAudioSpinner = function (
             var prevValue: number = this.getData('prevValue');
             if ((prevValue === undefined) || (prevValue > this.value)) {
                 for (var i = 0; i < cnt; i++) {
-                    let line = shapes[i] as ShapeTypes.Line;
+                    let line = shapes[i] as GeomTypes.Line;
                     let from = (prevValue === undefined) ? Math.random() : line.getData('to');
                     line
                         .setData('from', from)
@@ -68,7 +68,7 @@ var AddAudioSpinner = function (
             this.setData('prevValue', this.value);
 
             for (var i = 0; i < cnt; i++) {
-                let line = shapes[i] as ShapeTypes.Line;
+                let line = shapes[i] as GeomTypes.Line;
                 let from: number = line.getData('from'),
                     to: number = line.getData('to'),
                     current = Phaser.Math.Linear(from, to, this.value);
@@ -107,8 +107,8 @@ var AddBoxSpinner = function (
                 top = centerY - halfWidth,
                 bottom = centerY + halfWidth;
 
-            var border = this.getShape('border') as ShapeTypes.Lines;
-            var fill = this.getShape('fill') as ShapeTypes.Lines;
+            var border = this.getShape('border') as GeomTypes.Lines;
+            var fill = this.getShape('fill') as GeomTypes.Lines;
 
             border
                 .lineStyle(2, this.color, 1)

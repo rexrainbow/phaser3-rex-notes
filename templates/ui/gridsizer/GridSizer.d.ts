@@ -2,6 +2,18 @@ import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
 import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
+type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+    'left-top' | 'left-center' | 'left-bottom' |
+    'center-top' | 'center-center' | 'center-bottom' |
+    'right-top' | 'right-center' | 'right-bottom';
+type PaddingTypes = number |
+{
+    left?: number,
+    right?: number,
+    top?: number,
+    bottom?: number
+};
+
 export interface IConfig extends IConfigBase {
     x?: number,
     y?: number,
@@ -39,18 +51,9 @@ export default class GridSizer extends BaseSizer {
             column?: number,
             row?: number,
 
-            align?: number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-            'left-top' | 'left-center' | 'left-bottom' |
-            'center-top' | 'center-center' | 'center-bottom' |
-            'right-top' | 'right-center' | 'right-bottom',
+            align?: AlignTypes,
 
-            padding?: number |
-            {
-                left?: number,
-                right?: number,
-                top?: number,
-                bottom?: number
-            },
+            padding?: PaddingTypes,
 
             expand: boolean,
 

@@ -46,5 +46,5 @@ export default class UIFactories {
     }
 }
 
-import * as ShapeTypes from '../../plugins/gameobjects/shape/shapes/geoms';
-export { ShapeTypes };
+import * as GeomTypes from '../../plugins/gameobjects/shape/shapes/geoms';
+export { GeomTypes };

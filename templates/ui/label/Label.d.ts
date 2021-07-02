@@ -2,6 +2,8 @@ import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 
+type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
+
 export interface IConfig extends IConfigBase {
     space?: {
         left?: number, right?: number, top?: number, bottom?: number,
@@ -22,7 +24,7 @@ export interface IConfig extends IConfigBase {
     action?: Phaser.GameObjects.GameObject,
     actionMask?: boolean,
 
-    align?: 'left' | 'top' | 'right' | 'bottom' | 'center',
+    align?: AlignTypes,
 }
 
 export default class Label extends Sizer {

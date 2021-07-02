@@ -1,18 +1,20 @@
 import BaseShapes from "../shapes/BaseShapes";
 
+type NameTypes = string | string[] | number;
+
 export interface IConfig {
     x?: number, y?: number,
     width?: number, height?: number,
 
     create?: (
         {
-            arc?: number | string | string[],
-            circle?: number | string | string[],
-            ellipse?: number | string | string[],
-            line?: number | string | string[],
-            lines?: number | string | string[],
-            rectangle?: number | string | string[],
-            triangle?: number | string | string[],
+            arc?: NameTypes,
+            circle?: NameTypes,
+            ellipse?: NameTypes,
+            line?: NameTypes,
+            lines?: NameTypes,
+            rectangle?: NameTypes,
+            triangle?: NameTypes,
         } |
         ((this: CustomShapes) => void)
     );
