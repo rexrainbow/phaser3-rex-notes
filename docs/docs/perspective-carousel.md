@@ -120,10 +120,10 @@ var carousel = scene.add.rexPerspectiveCarousel({
     - `roll.ease` : Ease function. Default value is `'Cubic'`.
     - `false` : Don't add rolling behavior.
 
-Add perspectiveimage from JSON
+Add carousel from JSON
 
 ```javascript
-var perspectiveimage = scene.make.rexPerspectiveCarousel({
+var carousel = scene.make.rexPerspectiveCarousel({
     x: 0,
     y: 0,
 

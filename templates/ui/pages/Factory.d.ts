@@ -1,8 +1,8 @@
-import Page from './Page';
-import { IConfig } from './Page';
+import Pages from './Pages';
+import { IConfig } from './Pages';
 
-declare type PageFactory = (
+declare type PagesFactory = (
     config?: IConfig
-) => Page;
+) => Pages;
 
-export default PageFactory;
+export default PagesFactory;

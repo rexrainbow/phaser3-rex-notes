@@ -1,15 +1,19 @@
 import * as Phaser from 'phaser';
 
-export interface IConfig {
-    face?: 0 | 1 | 'front' | 'back',
-    front?: string |
-    { key?: string, frame?: string } |
-    ((gameObject: Phaser.GameObjects.GameObject) => void),
-    back?: string |
-    { key?: string, frame?: string } |
-    ((gameObject: Phaser.GameObjects.GameObject) => void),
+type FaceTypes = 0 | 1 | 'front' | 'back';
 
-    orientation?: 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical',
+type FaceDefTypes = string |
+{ key?: string, frame?: string } |
+    ((gameObject: Phaser.GameObjects.GameObject) => void);
+
+type OrientationTypes = 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical';
+
+export interface IConfig {
+    face?: FaceTypes,
+    front?: FaceDefTypes,
+    back?: FaceDefTypes,
+
+    orientation?: OrientationTypes,
     duration?: number,
     delay?: number,
     ease?: string,

@@ -23,8 +23,9 @@ import MenuFactory from './menu/Factory';
 import NinePatchFactory from './ninepatch/Factory';
 import NumberBarFactory from './numberbar/Factory';
 import OverlapSizerFactory from './overlapsizer/Factory';
-import PageFactory from './pages/Factory';
+import PagesFactory from './pages/Factory';
 import PanFactory from './pan/Factory';
+import PerspectiveFactory from './perspective/Factory';
 import PinchFactory from './pinch/Factory';
 import PressFactory from './press/Factory';
 import RotateFactory from './rotate/Factory';
@@ -75,8 +76,9 @@ export default class UIFactories {
         ninePatch: NinePatchFactory,
         numberBar: NumberBarFactory,
         overlapSizer: OverlapSizerFactory,
-        page: PageFactory,
+        pages: PagesFactory,
         pan: PanFactory,
+        perspective: PerspectiveFactory,
         pinch: PinchFactory,
         press: PressFactory,
         rotate: RotateFactory,

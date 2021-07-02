@@ -1,11 +1,11 @@
-import Base from '../../gameobjects/perspective/rendertexture/RenderTexture.js';
+import RenderTexture from '../../gameobjects/perspective/rendertexture/RenderTexture.js';
 import Container from '../../gameobjects/containerlite/ContainerLite.js';
 import Snapshot from '../../utils/rendertexture/Snapshot.js';
 
 const ContainerAdd = Container.prototype.add;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class ContainerPerspective extends Base {
+class ContainerPerspective extends RenderTexture {
     constructor(parentContainer, config) {
         var scene = parentContainer.scene;
         super(scene, parentContainer.x, parentContainer.y, 1, 1, config);
