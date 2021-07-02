@@ -72,9 +72,6 @@ var game = new Phaser.Game({
 ```
 
 - `'phaser3-rex-plugins/templates/ui/ui-plugin.js'` : Factories of rexUI component.
-    ```javascript
-    scene.rexUI.add.sizer({ });
-    ```
 - `'phaser3-rex-plugins/templates/ui/ui-components'` : Classed of rexUI component.
     ```javascript
     import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components';
