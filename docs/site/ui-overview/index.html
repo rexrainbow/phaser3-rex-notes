@@ -4694,6 +4694,19 @@
     Install from npm package
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-typescript-declaration-file" class="md-nav__link">
+    Using typescript declaration file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -5799,6 +5812,19 @@
     Install from npm package
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-typescript-declaration-file" class="md-nav__link">
+    Using typescript declaration file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -6022,6 +6048,45 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
+<h4 id="using-typescript-declaration-file">Using typescript declaration file<a class="headerlink" href="#using-typescript-declaration-file" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">RexUIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">CustomShapes</span><span class="p">,</span> <span class="nx">CustomShapesGeomTypes</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">Game</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
+    <span class="nx">rexUI</span><span class="o">:</span> <span class="nx">RexUIPlugin</span><span class="p">;</span>  <span class="c1">// Declare scene property &#39;rexUI&#39; as RexUIPlugin type</span>
+
+    <span class="nx">create</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
+            <span class="c1">// ...</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">({</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="nx">Game</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RexUIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<ul>
+<li><code>'phaser3-rex-plugins/templates/ui/ui-plugin.js'</code> : Factories of rexUI component.
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span> <span class="p">});</span>
+</code></pre></div></li>
+<li><code>'phaser3-rex-plugins/templates/ui/ui-components'</code> : Classed of rexUI component.
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sizer</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<p>See this <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts">example</a></p>
 <h2 id="list-of-ui-plugins">List of ui plugins<a class="headerlink" href="#list-of-ui-plugins" title="Permanent link">&para;</a></h2>
 <h3 id="ui-components">UI components<a class="headerlink" href="#ui-components" title="Permanent link">&para;</a></h3>
 <ol>

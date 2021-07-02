@@ -39,6 +39,49 @@
     var game = new Phaser.Game(config);
     ```
 
+#### Using typescript declaration file
+
+```javascript
+import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
+import { CustomShapes, CustomShapesGeomTypes } from 'phaser3-rex-plugins/templates/ui/ui-components';
+
+class Game extends Phaser.Scene {
+    rexUI: RexUIPlugin;  // Declare scene property 'rexUI' as RexUIPlugin type
+
+    create() {
+        var sizer = this.rexUI.add.sizer({
+            // ...
+        })
+    }
+}
+
+var game = new Phaser.Game({
+    scene: Game,
+    // ...
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: RexUIPlugin,
+            mapping: 'rexUI'
+        },
+        // ...
+        ]
+    }
+    // ...
+});
+```
+
+- `'phaser3-rex-plugins/templates/ui/ui-plugin.js'` : Factories of rexUI component.
+    ```javascript
+    scene.rexUI.add.sizer({ });
+    ```
+- `'phaser3-rex-plugins/templates/ui/ui-components'` : Classed of rexUI component.
+    ```javascript
+    import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components';
+    ```
+
+See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts)
+
 ## List of ui plugins
 
 ### UI components
