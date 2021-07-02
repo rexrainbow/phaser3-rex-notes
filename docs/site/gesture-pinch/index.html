@@ -2731,6 +2731,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-pinched" class="md-nav__link">
+    Is pinched
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5843,6 +5857,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-pinched" class="md-nav__link">
+    Is pinched
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6025,6 +6053,34 @@
 <li><a href="../touchevents/#properties-of-point">Pointer</a> 1, available when state is <code>2</code>
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
 </code></pre></div></li>
+</ul>
+<h3 id="is-pinched">Is pinched<a class="headerlink" href="#is-pinched" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPinched</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isPinched</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Return <code>true</code> if pinched.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Drag threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dragThreshold</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">dragThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pinch</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">dragThreshold</span><span class="p">);</span>
+<span class="c1">// pinch.dragThreshold = dragThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Detect bounds<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pinch</span><span class="p">.</span><span class="nx">setDetectBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+<span class="c1">// pinch.bounds = bounds;</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   

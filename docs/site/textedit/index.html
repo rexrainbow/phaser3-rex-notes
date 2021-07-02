@@ -5934,7 +5934,17 @@
 </ul>
 <h3 id="open-text-editor">Open text editor<a class="headerlink" href="#open-text-editor" title="Permanent link">&para;</a></h3>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/behaviors/textedit/Edit.js">An easy way</a> to open a text editor.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">editor</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextEdit&#39;</span><span class="p">).</span><span class="nx">edit</span><span class="p">(</span><span class="nx">textObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// type: &#39;text&#39;,   //&#39;text&#39;,&#39;password&#39;,&#39;number&#39;</span>
+    <span class="c1">// enterClose: true,</span>
+    <span class="c1">// selectAll: false,</span>
+
+    <span class="c1">// onOpen: undefined,</span>
+    <span class="c1">// onTextChanged: undefined,</span>
+    <span class="c1">// onClose: undefined,</span>
+
+    <span class="c1">// text: &#39;&#39;,</span>
+<span class="p">});</span>
 <span class="c1">// var editor = scene.plugins.get(&#39;rexTextEdit&#39;).edit(textObject, config, onClose);</span>
 </code></pre></div>
 
@@ -5942,12 +5952,11 @@
 <li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</li>
 <li><code>config</code> : <ul>
 <li><code>config.type</code> : <ul>
-<li><code>text</code> (default), or </li>
-<li><code>password</code></li>
-<li><code>number</code></li>
+<li><code>'text'</code> (default), or </li>
+<li><code>'password'</code></li>
+<li><code>'number'</code></li>
 </ul>
 </li>
-<li><code>config.text</code> : Initial string content.</li>
 <li><code>config.onOpen</code> : Callback invoked when input text is created.
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">textObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">}</span>
@@ -5963,6 +5972,7 @@
 </code></pre></div></li>
 <li><code>enterClose</code> : Set <code>true</code> to close input text when enter-key was pressed. Default value is <code>true</code>.</li>
 <li><code>config.selectAll</code> : Set <code>true</code> to select all text.</li>
+<li><code>config.text</code> : Initial string content. Default is the string content of textObject.</li>
 <li><a href="./#add-text-object">More configuration parameters</a>...</li>
 </ul>
 </li>

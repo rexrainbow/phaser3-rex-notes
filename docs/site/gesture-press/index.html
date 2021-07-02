@@ -2650,6 +2650,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-pressed" class="md-nav__link">
+    Is pressed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5801,6 +5815,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-pressed" class="md-nav__link">
+    Is pressed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5895,12 +5923,17 @@
 <li>Press input
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">press</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">press</span><span class="p">({</span>
     <span class="c1">// enable: true,</span>
+    <span class="c1">// bounds: undefined,</span>
 
     <span class="c1">// time: 251,</span>
     <span class="c1">// threshold: 9,</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
+<li><code>bounds</code> : Touch detecting area <a href="../geom-rectangle/">rectangle</a>, if game obect is not given.<ul>
+<li><code>undefined</code> : Ignore this feature, default behavior.</li>
+</ul>
+</li>
 <li><code>time</code> : Minimal time of the pointer to be pressed.</li>
 <li><code>threshold</code> : Minimal movement when pointer is down.</li>
 </ul>
@@ -5944,6 +5977,45 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lastPointer</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
+
+<h3 id="is-pressed">Is pressed<a class="headerlink" href="#is-pressed" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPressed</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">isPressed</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Return <code>true</code> if pressed.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hold time<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">holdTime</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">holdTime</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">setHoldTime</span><span class="p">(</span><span class="nx">holdTime</span><span class="p">);</span>
+<span class="c1">// press.holdTime = holdTime;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Drag threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dragThreshold</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">dragThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">dragThreshold</span><span class="p">);</span>
+<span class="c1">// press.dragThreshold = dragThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Detect bounds<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">press</span><span class="p">.</span><span class="nx">setDetectBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+<span class="c1">// press.bounds = bounds;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
                 
                   
                 

@@ -2639,8 +2639,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-tap" class="md-nav__link">
-    Is tap
+  <a href="#is-tapped" class="md-nav__link">
+    Is tapped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -5809,8 +5816,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-tap" class="md-nav__link">
-    Is tap
+  <a href="#is-tapped" class="md-nav__link">
+    Is tapped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -5909,6 +5923,7 @@
 <li>Pan input
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tap</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tap</span><span class="p">({</span>
     <span class="c1">// enable: true,</span>
+    <span class="c1">// bounds: undefined,</span>
 
     <span class="c1">// time: 250,</span>
     <span class="c1">// tapInterval: 200,</span>
@@ -5921,6 +5936,10 @@
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
+<li><code>bounds</code> : Touch detecting area <a href="../geom-rectangle/">rectangle</a>, if game obect is not given.<ul>
+<li><code>undefined</code> : Ignore this feature, default behavior.</li>
+</ul>
+</li>
 <li><code>time</code> : Max time of the pointer to be down.</li>
 <li><code>tapInterval</code> : Max time between the multi-tap taps.</li>
 <li><code>threshold</code> : Minimal movement when pointer is down.</li>
@@ -5993,11 +6012,88 @@
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
-<h3 id="is-tap">Is tap<a class="headerlink" href="#is-tap" title="Permanent link">&para;</a></h3>
+<h3 id="is-tapped">Is tapped<a class="headerlink" href="#is-tapped" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isTapped</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">isTapped</span><span class="p">;</span>
 </code></pre></div>
 
 <p>Return <code>true</code> if tapped end.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hold time<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">holdTime</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">holdTime</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setHoldTime</span><span class="p">(</span><span class="nx">holdTime</span><span class="p">);</span>
+<span class="c1">// tap.holdTime = holdTime;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Tap interval<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tapInterval</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">tapInterval</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setTapInterval</span><span class="p">(</span><span class="nx">tapInterval</span><span class="p">);</span>
+<span class="c1">// tap.tapInterval = tapInterval;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Drag threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dragThreshold</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">dragThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">dragThreshold</span><span class="p">);</span>
+<span class="c1">// tap.dragThreshold = dragThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Tap offset<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tapOffset</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">tapOffset</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setTapOffset</span><span class="p">(</span><span class="nx">tapOffset</span><span class="p">);</span>
+<span class="c1">// tap.tapOffset = tapOffset;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Max taps<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">maxTaps</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">maxTaps</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setMaxTaps</span><span class="p">(</span><span class="nx">maxTaps</span><span class="p">);</span>
+<span class="c1">// tap.maxTaps = maxTaps;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Min taps<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">minTaps</span> <span class="o">=</span> <span class="nx">tap</span><span class="p">.</span><span class="nx">minTaps</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">tap</span><span class="p">.</span><span class="nx">setMinTaps</span><span class="p">(</span><span class="nx">minTaps</span><span class="p">);</span>
+<span class="c1">// tap.minTaps = minTaps;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Taps
+    <div class="codehilite"><pre><span></span><code><span class="nx">taps</span><span class="p">.</span><span class="nx">setTaps</span><span class="p">(</span><span class="nx">taps</span><span class="p">);</span>
+<span class="c1">// taps.setTaps(minTaps, maxTaps);</span>
+</code></pre></div></li>
+<li>Detect bounds<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">taps</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">taps</span><span class="p">.</span><span class="nx">setDetectBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+<span class="c1">// taps.bounds = bounds;</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
                 
                   
                 

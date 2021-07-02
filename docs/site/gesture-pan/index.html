@@ -2681,6 +2681,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-panned" class="md-nav__link">
+    Is panned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5815,6 +5829,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-panned" class="md-nav__link">
+    Is panned
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5909,11 +5937,16 @@
 <li>Pan input
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pan</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pan</span><span class="p">({</span>
     <span class="c1">// enable: true,</span>
+    <span class="c1">// bounds: undefined,</span>
 
     <span class="c1">// threshold: 10,</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
+<li><code>bounds</code> : Touch detecting area <a href="../geom-rectangle/">rectangle</a>, if game obect is not given.<ul>
+<li><code>undefined</code> : Ignore this feature, default behavior.</li>
+</ul>
+</li>
 <li><code>threshold</code> : Minimal movement when pointer is down.</li>
 </ul>
 </li>
@@ -5972,6 +6005,34 @@
 <li><code>pan.endX</code>, <code>pan.endY</code> : Scene position of pan-end pointer.</li>
 <li><code>gameObject</code>, <code>pan.gameObject</code> : Parent gameobject of this pan behavior.</li>
 <li><code>lastPointer</code> : Last touch pointer.</li>
+</ul>
+<h3 id="is-panned">Is panned<a class="headerlink" href="#is-panned" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPanned</span> <span class="o">=</span> <span class="nx">pan</span><span class="p">.</span><span class="nx">isPanned</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Return <code>true</code> if panned.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Drag threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dragThreshold</span> <span class="o">=</span> <span class="nx">pan</span><span class="p">.</span><span class="nx">dragThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">dragThreshold</span><span class="p">);</span>
+<span class="c1">// pan.dragThreshold = dragThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Detect bounds<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">pan</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pan</span><span class="p">.</span><span class="nx">setDetectBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+<span class="c1">// pan.bounds = bounds;</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   

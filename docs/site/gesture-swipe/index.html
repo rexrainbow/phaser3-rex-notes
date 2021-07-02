@@ -2655,6 +2655,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-swiped" class="md-nav__link">
+    Is swiped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5787,6 +5801,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#is-swiped" class="md-nav__link">
+    Is swiped
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5878,9 +5906,10 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Pan input
+<li>Swipe input
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">swipe</span><span class="p">({</span>
     <span class="c1">// enable: true,</span>
+    <span class="c1">// bounds: undefined,</span>
 
     <span class="c1">// threshold: 10,</span>
     <span class="c1">// velocityThreshold: 1000,</span>
@@ -5888,6 +5917,10 @@
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
+<li><code>bounds</code> : Touch detecting area <a href="../geom-rectangle/">rectangle</a>, if game obect is not given.<ul>
+<li><code>undefined</code> : Ignore this feature, default behavior.</li>
+</ul>
+</li>
 <li><code>time</code> : Max time of the pointer to be down.</li>
 <li><code>threshold</code> : Minimal movement when pointer is down.</li>
 <li><code>velocityThreshold</code> : Minimal dragging speed.</li>
@@ -5900,7 +5933,7 @@
 </li>
 </ul>
 </li>
-<li>Pan behavior of game object
+<li>Swipe behavior of game object
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// enable: true,</span>
 
@@ -5936,6 +5969,54 @@
 <li><code>swipe.dragVelocity</code> : Velocity of dragging.</li>
 <li><code>gameObject</code>, <code>swipe.gameObject</code> : Parent gameobject of this pan behavior.</li>
 <li><code>lastPointer</code> : Last touch pointer.</li>
+</ul>
+<h3 id="is-swiped">Is swiped<a class="headerlink" href="#is-swiped" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isSwiped</span> <span class="o">=</span> <span class="nx">swipe</span><span class="p">.</span><span class="nx">isSwiped</span><span class="p">;</span>
+</code></pre></div>
+
+<p>Return <code>true</code> if panning.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Drag threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dragThreshold</span> <span class="o">=</span> <span class="nx">swipe</span><span class="p">.</span><span class="nx">dragThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">setDragThreshold</span><span class="p">(</span><span class="nx">dragThreshold</span><span class="p">);</span>
+<span class="c1">// swipe.dragThreshold = dragThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Velocity threshold<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">velocityThreshold</span> <span class="o">=</span> <span class="nx">swipe</span><span class="p">.</span><span class="nx">velocityThreshold</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">setVelocityThreshold</span><span class="p">(</span><span class="nx">velocityThreshold</span><span class="p">);</span>
+<span class="c1">// swipe.velocityThreshold = velocityThreshold;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Direction mode<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">dirMode</span> <span class="o">=</span> <span class="nx">swipe</span><span class="p">.</span><span class="nx">dirMode</span><span class="p">;</span>  <span class="c1">// 0,1,2,3</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">setDirectionMode</span><span class="p">(</span><span class="nx">dirMode</span><span class="p">);</span>  <span class="c1">// 0,1,2,3,&#39;up&amp;down&#39;,&#39;left&amp;right&#39;,&#39;4dir&#39;,&#39;8dir&#39;</span>
+<span class="c1">// swipe.dirMode = dirMode;  // 0,1,2,3</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Detect bounds<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">swipe</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">swipe</span><span class="p">.</span><span class="nx">setDetectBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+<span class="c1">// swipe.bounds = bounds;</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   
