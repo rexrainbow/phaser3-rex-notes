@@ -3033,6 +3033,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-crossstitching/" title="Cross-stitching" class="md-nav__link">
+      Cross-stitching
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -3127,18 +3139,6 @@
   <li class="md-nav__item">
     <a href="../shader-pixelation/" title="Pixelation" class="md-nav__link">
       Pixelation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../shader-crossstitching/" title="Cross-stitching" class="md-nav__link">
-      Cross-stitching
     </a>
   </li>
 
@@ -5899,12 +5899,16 @@
 <ul>
 <li>Apply effect to game object. A game object only can add 1 shockwave effect.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShockwavePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// center: {</span>
+    <span class="c1">//    x: windowWidth / 2,</span>
+    <span class="c1">//    y: windowHeight / 2</span>
+    <span class="c1">//}</span>
     <span class="c1">// waveRadius: 0,</span>
     <span class="c1">// waveWidth: 20,</span>
     <span class="c1">// powBaseScale: 0.8,</span>
     <span class="c1">// powExponent: 0.1,</span>
 
-    <span class="c1">// nane: &#39;rexShockwavePostFx&#39;</span>
+    <span class="c1">// name: &#39;rexShockwavePostFx&#39;</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>waveRadius</code> : Radius of shockwave, in pixels.</li>
@@ -5979,7 +5983,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../shader-crossstitching/" title="Cross-stitching" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-pixelation/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5988,7 +5992,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Cross-stitching
+                Pixelation
               </span>
             </div>
           </a>

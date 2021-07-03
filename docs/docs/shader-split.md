@@ -108,7 +108,7 @@ Split image into 4 parts.
 
         // shiftEnable: true,
 
-        // nane: 'rexSplitPostFx'
+        // name: 'rexSplitPostFx'
     });
     ```
     - `x` : Vertical split position. Default value is center of **render width**.

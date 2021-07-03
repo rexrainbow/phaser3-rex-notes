@@ -8,13 +8,13 @@ export default class BaseShapes extends Phaser.GameObjects.Shape {
         width?: number, height?: number
     );
 
-    width: number;
-    height: number;
     setSize(width: number, height: number): this;
     resize(width: number, height: number): this;
+    width: number;
+    height: number;
 
-    dirty: boolean;
     setDirty(dirty?: boolean): this;
+    dirty: boolean;
 
     updateShapes(): this;
 

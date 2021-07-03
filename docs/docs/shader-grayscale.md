@@ -98,7 +98,7 @@ Gray scale post processing filter.
     var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').add(gameObject, {
         // intensity: 1,
         
-        // nane: 'rexGrayScalePostFx'
+        // name: 'rexGrayScalePostFx'
     });
     ```
     - `intensity` : 0(original color) ~ 1(gray scale). Default value is `1`.

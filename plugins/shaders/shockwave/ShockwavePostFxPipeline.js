@@ -21,11 +21,11 @@ class ShockwavePostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
+        this.setCenter(GetValue(o, 'center.x', undefined), GetValue(o, 'center.y', undefined));
         this.setWaveRadius(GetValue(o, 'waveRadius', 0));
         this.setWaveWidth(GetValue(o, 'waveWidth', 20));
         this.setPowBaseScale(GetValue(o, 'powBaseScale', 0.8));
-        this.setPowExponent(GetValue(o, 'powExponent', 0.1));
-        this.setCenter(GetValue(o, 'center.x', undefined), GetValue(o, 'center.y', undefined));
+        this.setPowExponent(GetValue(o, 'powExponent', 0.1));        
         return this;
     }
 
@@ -41,14 +41,31 @@ class ShockwavePostFxPipeline extends PostFXPipeline {
         this.set2f('texSize', texWidth, textHeight);
     }
 
+    // center
+    setCenter(x, y) {
+        if (x === undefined) {
+            x = this.renderer.width / 2;
+            y = this.renderer.height / 2;
+        }
+        this.centerX = x;
+        this.centerY = y;
+        return this;
+    }
+
     // waveRadius
     setWaveRadius(value) {
+        if (value === undefined) {
+            value = 0;
+        }
         this.waveRadius = value;
         return this;
     }
 
     // waveWidth
     setWaveWidth(value) {
+        if (value === undefined) {
+            value = 0;
+        }
         this.waveWidth = value;
         return this;
     }
@@ -65,16 +82,6 @@ class ShockwavePostFxPipeline extends PostFXPipeline {
         return this;
     }
 
-    // center
-    setCenter(x, y) {
-        if (x === undefined) {
-            x = this.renderer.width / 2;
-            y = this.renderer.height / 2;
-        }
-        this.centerX = x;
-        this.centerY = y;
-        return this;
-    }
 }
 
 export default ShockwavePostFxPipeline;

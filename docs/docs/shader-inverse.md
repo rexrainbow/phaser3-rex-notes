@@ -94,7 +94,7 @@ Inverse color post processing filter.
     var pipelineInstance = scene.plugins.get('rexInversePipeline').add(gameObject, {
         // intensity: 1,
 
-        // nane: 'rexInversePostFx'
+        // name: 'rexInversePostFx'
     });
     ```
     - `intensity` : 0(original color) ~ 1(inverse scale). Default value is `1`.

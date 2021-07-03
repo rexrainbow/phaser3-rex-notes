@@ -42,7 +42,6 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
                     SpliceOne(pipelines, i);
                 }
             }
-            return result;
         } else {
             var pipelines = gameObject.postPipelines;
             for (var i = 0, cnt = pipelines.length; i < cnt; i++) {
@@ -53,6 +52,7 @@ class BasePostFxPipelinePlugin extends Phaser.Plugins.BasePlugin {
                 }
             }
         }
+        return this;
     }
 
     get(gameObject, name) {

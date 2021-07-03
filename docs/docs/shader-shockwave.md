@@ -96,12 +96,16 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 - Apply effect to game object. A game object only can add 1 shockwave effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexShockwavePipeline').add(gameObject, {
+        // center: {
+        //    x: windowWidth / 2,
+        //    y: windowHeight / 2
+        //}
         // waveRadius: 0,
         // waveWidth: 20,
         // powBaseScale: 0.8,
         // powExponent: 0.1,
 
-        // nane: 'rexShockwavePostFx'
+        // name: 'rexShockwavePostFx'
     });
     ```
     - `waveRadius` : Radius of shockwave, in pixels.

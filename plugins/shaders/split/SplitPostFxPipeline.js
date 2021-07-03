@@ -115,6 +115,9 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 
     setSplittedWidth(width) {
+        if (width === undefined) {
+            width = 0;
+        }
         this.splittedWidth = width;
         return this;
     }
@@ -129,6 +132,9 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 
     setSplittedHeight(height) {
+        if (height === undefined) {
+            height = 0;
+        }
         this.splittedHeight = height;
         return this;
     }

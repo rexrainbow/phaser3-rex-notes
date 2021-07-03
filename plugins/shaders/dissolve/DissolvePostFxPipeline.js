@@ -4,7 +4,7 @@ const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-class GrayScalePostFxPipeline extends PostFXPipeline {
+class DissolvePostFxPipeline extends PostFXPipeline {
     constructor(game) {
         super({
             name: 'rexDissolvePostFx',
@@ -156,4 +156,4 @@ var ResizeMode = {
     cover: 2
 }
 
-export default GrayScalePostFxPipeline;
+export default DissolvePostFxPipeline;

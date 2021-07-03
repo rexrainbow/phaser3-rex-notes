@@ -99,7 +99,7 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
         // thickness: 3,
         // outlineColor: 0x000000,
 
-        // nane: 'rexOutlinePostFx'
+        // name: 'rexOutlinePostFx'
     });
     ```
     - `thickness` : Thickness of outline.

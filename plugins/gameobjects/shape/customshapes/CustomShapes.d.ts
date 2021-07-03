@@ -29,4 +29,8 @@ export default class CustomShapes extends BaseShapes {
         scene: Phaser.Scene,
         config?: IConfig
     );
+
+    setUpdateShapesCallback(
+        callback: (this: CustomShapes) => void
+    ): this;
 }

@@ -110,7 +110,7 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
         // progress: 0,
         
-        // nane: 'rexDissolvePostFx'
+        // name: 'rexDissolvePostFx'
     });
     ```
     - `toTexture`, `toFrame` : Texture key and frame name of transition target texture.

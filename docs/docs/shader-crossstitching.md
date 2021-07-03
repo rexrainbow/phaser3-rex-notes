@@ -100,7 +100,7 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
         // stitchingHeight: 6,
         // brightness: 0,
 
-        // nane: 'rexCrossStitchingPostFx'
+        // name: 'rexCrossStitchingPostFx'
     });
     ```
     - `stitchingWidth`, `stitchingHeight` : Stitching size.

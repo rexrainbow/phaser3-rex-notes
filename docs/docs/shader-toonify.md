@@ -102,7 +102,7 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
         // vLevels: 0,
         // edgeColor: 0,
 
-        // nane: 'rexToonifyPostFx'
+        // name: 'rexToonifyPostFx'
     });
     ```
     - `edgeThreshold` : Threshold of edge. Set `1.1` (or any number larger then `1`) to disable this feature.

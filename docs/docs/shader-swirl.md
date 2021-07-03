@@ -103,7 +103,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
         // radius: 0,
         // rotation: 0,  // or angle: 0,
 
-        // nane: 'rexSwirlPostFx'
+        // name: 'rexSwirlPostFx'
     });
     ```
     - `center.x`, `center.y` : Local position of swirl center.

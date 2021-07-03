@@ -99,7 +99,7 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
         // pixelWidth: 0,
         // pixelHeight: 0,
 
-        // nane: 'rexPixelationPostFx'
+        // name: 'rexPixelationPostFx'
     });
     ```
     - `pixelWidth`, `pixelHeight` : Pixel size.
