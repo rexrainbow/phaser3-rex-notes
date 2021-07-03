@@ -49,7 +49,7 @@ interface IConfigImage {
 type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
 type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
 
-interface IConfigWordWrap {
+export interface IConfigWordWrap {
     padding?: {
         top?: number, bottom?: number,
     },
@@ -62,7 +62,7 @@ interface IConfigWordWrap {
     charWrap?: boolean
 }
 
-interface IConfigVerticalWrap {
+export interface IConfigVerticalWrap {
     padding: {
         top?: number, left?: number, right?: number, bottom?: number,
     },
@@ -77,18 +77,18 @@ interface IConfigVerticalWrap {
     vAlign?: VAlignTypes,
 }
 
+export type RenderChildTypes = CharBob | ImageBob;
+export type ChildTypes = CharBob | ImageBob | CommandBob;
+
 interface IWrapResult {
-    children: BobTypes[],
+    children: ChildTypes[],
     lines: ({
-        children: BobTypes[],
+        children: ChildTypes[],
         width: number,
         height: number
     })[],
     isLastPage: boolean
 }
-
-type BobTypes = CharBob | ImageBob | CommandBob;
-
 
 export interface IConfig {
     x?: number, y?: number,
@@ -133,7 +133,7 @@ export default class DynamicText extends Canvas {
         config?: IConfigVerticalWrap
     ): IWrapResult;
 
-    getChildren(): BobTypes[];
-    getLastAppendedChildren(): BobTypes[];
-    getActiveChildren(): BobTypes[];
+    getChildren(): ChildTypes[];
+    getLastAppendedChildren(): ChildTypes[];
+    getActiveChildren(): ChildTypes[];
 }

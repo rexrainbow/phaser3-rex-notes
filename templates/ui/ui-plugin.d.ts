@@ -41,6 +41,7 @@ import TagTextFactory from './tagtext/Factory';
 import TapFactory from './tap/Factory';
 import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
+import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 
 import Edit from '../../plugins/behaviors/textedit/Edit';
@@ -92,6 +93,7 @@ declare class Factories {
     tap: TapFactory;
     textArea: TextAreaFactory;
     textBox: TextBoxFactory;
+    textPlayer: TextPlayerFactory;
     toast: ToastFactory;
 }
 

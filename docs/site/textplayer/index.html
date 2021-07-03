@@ -6209,6 +6209,7 @@
 
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// key: {width, height}</span>
+        <span class="c1">// key: {key, frame, width, height}</span>
     <span class="p">},</span>
 
     <span class="nx">sounds</span><span class="o">:</span> <span class="p">{</span>
@@ -6389,6 +6390,7 @@
 </li>
 </ul>
 </li>
+<li><code>images</code> : Configuration of images.</li>
 <li><code>sprite</code> : Configuration of sprites.<ul>
 <li><code>sprite.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
@@ -6569,14 +6571,14 @@
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// key: {width, height},</span>
-        <span class="c1">// key: {textureKey, frameKey, width, height}</span>
+        <span class="c1">// key: {key, frame, width, height}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Set render size by method
     <div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">({</span>
     <span class="c1">// key: {width, height},</span>
-    <span class="c1">// key: {textureKey, frameKey, width, height}</span>
+    <span class="c1">// key: {key, frame, width, height}</span>
 <span class="p">})</span>
 </code></pre></div></li>
 <li>Use origin render size by default</li>

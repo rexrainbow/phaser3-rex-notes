@@ -162,6 +162,7 @@ var txt = scene.add.rexTextPlayer({
 
     images: {
         // key: {width, height}
+        // key: {key, frame, width, height}
     },
 
     sounds: {
@@ -285,6 +286,7 @@ var txt = scene.add.rexTextPlayer({
     - `sounds.bgm.fade` :
         - `0` : No fade-in or fade-out when starting or stopping a background music.
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
+- `images` : Configuration of images.
 - `sprite` : Configuration of sprites.
     - `sprite.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
@@ -470,7 +472,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     {
         images: {
             // key: {width, height},
-            // key: {textureKey, frameKey, width, height}
+            // key: {key, frame, width, height}
         }
     }
     ```
@@ -478,7 +480,7 @@ New line symbol `'\n'` will be removed, use `[r]` to insert a new line character
     ```javascript
     txt.addImage({
         // key: {width, height},
-        // key: {textureKey, frameKey, width, height}
+        // key: {key, frame, width, height}
     })
     ```
 - Use origin render size by default
