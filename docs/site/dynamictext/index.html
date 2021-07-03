@@ -6141,11 +6141,11 @@
 </ul>
 </li>
 <li><code>background</code> : Properties of background round-rectangle.<ul>
-<li><code>background.color</code> : Fill color.<ul>
+<li><code>background.color</code> : Fill color, number or string.<ul>
 <li><code>null</code> : No filling.</li>
 </ul>
 </li>
-<li><code>background.color2</code> : Gradient fill color.<ul>
+<li><code>background.color2</code> : Gradient fill color, number or string.<ul>
 <li><code>null</code> : No gradient filling.</li>
 </ul>
 </li>
@@ -6154,7 +6154,7 @@
 <li><code>false</code> : Vertical gradient filling.</li>
 </ul>
 </li>
-<li><code>background.stroke</code> : Stroke color.<ul>
+<li><code>background.stroke</code> : Stroke color, number or string.<ul>
 <li><code>null</code> : No stroke.</li>
 </ul>
 </li>
@@ -6168,11 +6168,11 @@
 </ul>
 </li>
 <li><code>innerBounds</code> : Properties of inner-bounds.<ul>
-<li><code>innerBounds.color</code> : Fill color.<ul>
+<li><code>innerBounds.color</code> : Fill color, number or string.<ul>
 <li><code>null</code> : No filling.</li>
 </ul>
 </li>
-<li><code>innerBounds.color2</code> : Gradient fill color.<ul>
+<li><code>innerBounds.color2</code> : Gradient fill color, number or string.<ul>
 <li><code>null</code> : No gradient filling.</li>
 </ul>
 </li>
@@ -6181,7 +6181,7 @@
 <li><code>false</code> : Vertical gradient filling.</li>
 </ul>
 </li>
-<li><code>innerBounds.stroke</code> : Stroke color.<ul>
+<li><code>innerBounds.stroke</code> : Stroke color, number or string.<ul>
 <li><code>null</code> : No stroke.</li>
 </ul>
 </li>
@@ -6191,12 +6191,12 @@
 <li><code>style</code> : Initial text-style.<ul>
 <li><code>style.bold</code> : Bold</li>
 <li><code>style.italic</code> : Italic</li>
-<li><code>style.fontSize</code> : Font size</li>
+<li><code>style.fontSize</code> : Font size, number or string.</li>
 <li><code>style.fontFamily</code> : Font family</li>
-<li><code>style.color</code> : Fill color</li>
-<li><code>style.stroke</code> : Stroke color</li>
+<li><code>style.color</code> : Fill color, number or string.</li>
+<li><code>style.stroke</code> : Stroke color, number or string.</li>
 <li><code>style.strokeThickness</code> : Line width of stroke.</li>
-<li><code>style.shadowColor</code> : Shadow color.<ul>
+<li><code>style.shadowColor</code> : Shadow color, number or string.<ul>
 <li><code>null</code> : No shadow.</li>
 </ul>
 </li>
@@ -6256,7 +6256,7 @@
 </code></pre></div></li>
 </ul>
 <h3 id="clear-content">Clear content<a class="headerlink" href="#clear-content" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">clearContent</span><span class="p">();</span>
 </code></pre></div>
 
 <h3 id="append-text">Append text<a class="headerlink" href="#append-text" title="Permanent link">&para;</a></h3>
@@ -6415,7 +6415,7 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 </code></pre></div>
 
 <ul>
-<li><code>children</code> : <a href="./#character-data">Character</a>/<a href="./#image-data">Image</a> data in this page.</li>
+<li><code>children</code> : <a href="./#character">Character</a>/<a href="./#image">Image</a> data in this page.</li>
 <li><code>lines</code> : Array of line data. A line data contains
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">children</span><span class="o">:</span> <span class="p">[],</span>
@@ -6423,7 +6423,7 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
     <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1">// Vertical-wrapping.        </span>
 <span class="p">}</span>
 </code></pre></div><ul>
-<li><code>children</code> : <a href="./#character-data">Character</a>/<a href="./#image-data">Image</a> data in this line.</li>
+<li><code>children</code> : <a href="./#character">Character</a>/<a href="./#image">Image</a> data in this line.</li>
 <li><code>width</code> : Width of this line, in result of horizontal-wrapping.</li>
 <li><code>height</code> : Height of this line, in result of vertical-wrapping.</li>
 </ul>
@@ -6532,6 +6532,10 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
 <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">stroke</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">stroke</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">strokeThickness</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strokeThickness</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">shaodwColor</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">shadowBlur</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowBlur</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">shadowOffsetX</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">shadowOffsetY</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetY</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">xOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">yOffset</span> <span class="o">=</span> <span class="kr">char</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
@@ -6544,9 +6548,40 @@ Uses <a href="./#word-wrap">word-wrap</a> method to rearrange position of charac
     <span class="c1">// color: &#39;#fff&#39;,</span>
     <span class="c1">// stroke: &#39;#fff&#39;,</span>
     <span class="c1">// strokeThickness: 0,</span>
+    <span class="c1">// shaodwColor: null,</span>
+    <span class="c1">// shadowBlur: 0,</span>
+    <span class="c1">// shadowOffsetX: 0,</span>
+    <span class="c1">// shadowOffsetY: 0,</span>
     <span class="c1">// offsetX: 0,</span>
     <span class="c1">// offsetY: 0</span>
 <span class="p">})</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setBold</span><span class="p">();</span>
+<span class="c1">// char.setBold(false);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setItalic</span><span class="p">();</span>
+<span class="c1">// char.setItalic(false);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setFontSize</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">);</span> <span class="c1">// number, string</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setFontFamily</span><span class="p">(</span><span class="nx">fontFamily</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span> <span class="c1">// number, string</span>
+<span class="c1">// char.setColor(); // No filling color</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">);</span>
+<span class="c1">// char.setStrokeStyle();  // No stroke</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setShadowColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<span class="c1">// char.setShadowColor();  // No shadow</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setShadowOffset</span><span class="p">(</span><span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setShadowBlur</span><span class="p">(</span><span class="nx">blur</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="kr">char</span><span class="p">.</span><span class="nx">setOffsetX</span><span class="p">(</span><span class="nx">offsetX</span><span class="p">);</span>
+<span class="kr">char</span><span class="p">.</span><span class="nx">setOffsetY</span><span class="p">(</span><span class="nx">offsetY</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>

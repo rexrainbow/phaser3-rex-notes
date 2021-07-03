@@ -24,6 +24,24 @@ class ImageData extends Base {
 
     set offsetY(value) { }
 
+    get key() {
+        return this._key;
+    }
+
+    set key(value) {
+        this.setDirty(this._key != value);
+        this._key = value;
+    }
+
+    get frame() {
+        return this._frame;
+    }
+
+    set frame(value) {
+        this.setDirty(this._frame != value);
+        this._frame = value;
+    }
+
     setTexture(key, frame) {
         this.key = key;
         this.frame = frame;

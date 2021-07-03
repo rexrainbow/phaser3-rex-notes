@@ -173,38 +173,57 @@ class TextStyle {
     }
 
     setShadowOffset(offsetX, offsetY) {
+        if (offsetX === undefined) {
+            offsetX = 0
+        }
+        if (offsetY === undefined) {
+            offsetY = 0
+        }
+
         this.shadowOffsetX = offsetX;
         this.shadowOffsetY = offsetY;
         return this;
     }
 
     setShadowBlur(blur) {
+        if (blur === undefined) {
+            blur = 0
+        }
+
         this.shaodwBlur = blur;
         return this;
     }
 
     setShadow(color, offsetX, offsetY, blur) {
-        this.shadowColor = GetStyle(color);
-        this.shadowOffsetX = offsetX;
-        this.shadowOffsetY = offsetY;
-        this.shaodwBlur = blur;
+        this
+            .setShadowColor(color)
+            .setShadowOffset(offsetX, offsetY)
+            .setShadowBlur(blur);
         return this;
     }
 
-
     setOffsetX(offsetX) {
+        if (offsetX === undefined) {
+            offsetX = 0
+        }
+
         this.offsetX = offsetX;
         return this;
     }
 
     setOffsetY(offsetY) {
+        if (offsetY === undefined) {
+            offsetY = 0
+        }
+
         this.offsetY = offsetY;
         return this;
     }
 
     setOffset(offsetX, offsetY) {
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
+        this
+            .setOffsetX(offsetX)
+            .setOffsetY(offsetY);
         return this;
     }
 

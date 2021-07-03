@@ -139,14 +139,14 @@ var txt = scene.add.rexDynamicText({
     - A number 
     - `padding.left`, `padding.right`, `padding.top`, `padding.bottom`
 - `background` : Properties of background round-rectangle.
-    - `background.color` : Fill color.
+    - `background.color` : Fill color, number or string.
         - `null` : No filling.
-    - `background.color2` : Gradient fill color.
+    - `background.color2` : Gradient fill color, number or string.
         - `null` : No gradient filling.
     - `background.horizontalGradient` : Horizontal or vertical gradient filling.
         - `true` : Horizontal gradient filling.
         - `false` : Vertical gradient filling.
-    - `background.stroke` : Stroke color.
+    - `background.stroke` : Stroke color, number or string.
         - `null` : No stroke.
     - `background.strokeThickness` : Line width of stroke.
     - `background.cornerRadius` : Corner-radius of round rectangle.
@@ -154,25 +154,25 @@ var txt = scene.add.rexDynamicText({
         - `null` : Draw corner-radius via arc directly.
         - A number : Draw corner-radius via lines
 - `innerBounds` : Properties of inner-bounds.
-    - `innerBounds.color` : Fill color.
+    - `innerBounds.color` : Fill color, number or string.
         - `null` : No filling.
-    - `innerBounds.color2` : Gradient fill color.
+    - `innerBounds.color2` : Gradient fill color, number or string.
         - `null` : No gradient filling.
     - `innerBounds.horizontalGradient` : Horizontal or vertical gradient filling.
         - `true` : Horizontal gradient filling.
         - `false` : Vertical gradient filling.
-    - `innerBounds.stroke` : Stroke color.
+    - `innerBounds.stroke` : Stroke color, number or string.
         - `null` : No stroke.
     - `innerBounds.strokeThickness` : Line width of stroke.
 - `style` : Initial text-style.
     - `style.bold` : Bold
     - `style.italic` : Italic
-    - `style.fontSize` : Font size
+    - `style.fontSize` : Font size, number or string.
     - `style.fontFamily` : Font family
-    - `style.color` : Fill color
-    - `style.stroke` : Stroke color
+    - `style.color` : Fill color, number or string.
+    - `style.stroke` : Stroke color, number or string.
     - `style.strokeThickness` : Line width of stroke.
-    - `style.shadowColor` : Shadow color.
+    - `style.shadowColor` : Shadow color, number or string.
         - `null` : No shadow.
     - `style.shadowOffsetX` : OffsetX of shadow.
     - `style.shadowOffsetY` : OffsetY of shadow.
@@ -234,7 +234,7 @@ var txt = scene.make.rexDynamicText({
 ### Clear content
 
 ```javascript
-txt.setText();
+txt.clearContent();
 ```
 
 ### Append text
@@ -382,7 +382,7 @@ var result = txt.runVerticalWrap({
 }
 ```
 
-- `children` : [Character](dynamictext.md#character-data)/[Image](dynamictext.md#image-data) data in this page.
+- `children` : [Character](dynamictext.md#character)/[Image](dynamictext.md#image) data in this page.
 - `lines` : Array of line data. A line data contains
     ```javascript
     {
@@ -391,7 +391,7 @@ var result = txt.runVerticalWrap({
         height: 0,    // Vertical-wrapping.        
     }
     ```
-    - `children` : [Character](dynamictext.md#character-data)/[Image](dynamictext.md#image-data) data in this line.
+    - `children` : [Character](dynamictext.md#character)/[Image](dynamictext.md#image) data in this line.
     - `width` : Width of this line, in result of horizontal-wrapping.
     - `height` : Height of this line, in result of vertical-wrapping.
 - `isLastPage` : 
@@ -500,6 +500,10 @@ txt.setWrapConfig(config);
         var color = char.style.color;
         var stroke = char.style.stroke;
         var strokeThickness = char.style.strokeThickness;
+        var shaodwColor = char.style.shadowColor;
+        var shadowBlur = char.style.shadowBlur;
+        var shadowOffsetX = char.style.shadowOffsetX;
+        var shadowOffsetY = char.style.shadowOffsetY;
         var xOffset = char.style.x;
         var yOffset = char.style.y;
         ```
@@ -513,9 +517,50 @@ txt.setWrapConfig(config);
             // color: '#fff',
             // stroke: '#fff',
             // strokeThickness: 0,
+            // shaodwColor: null,
+            // shadowBlur: 0,
+            // shadowOffsetX: 0,
+            // shadowOffsetY: 0,
             // offsetX: 0,
             // offsetY: 0
         })
+        ```
+        or
+        ```javascript
+        char.setBold();
+        // char.setBold(false);
+        ```
+        ```javascript
+        char.setItalic();
+        // char.setItalic(false);
+        ```
+        ```javascript
+        char.setFontSize(fontSize); // number, string
+        ```
+        ```javascript
+        char.setFontFamily(fontFamily);
+        ```
+        ```javascript
+        char.setColor(color); // number, string
+        // char.setColor(); // No filling color
+        ```
+        ```javascript
+        char.setStrokeStyle(color, thickness);
+        // char.setStrokeStyle();  // No stroke
+        ``` 
+        ```javascript
+        char.setShadowColor(color);
+        // char.setShadowColor();  // No shadow
+        ```
+        ```javascript
+        char.setShadowOffset(offsetX, offsetY);
+        ```
+        ```javascript
+        char.setShadowBlur(blur);
+        ```
+        ```javascript
+        char.setOffsetX(offsetX);
+        char.setOffsetY(offsetY);
         ```
 
 #### Image

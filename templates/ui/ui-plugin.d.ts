@@ -11,6 +11,7 @@ import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
 import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
+import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
@@ -61,6 +62,7 @@ declare class Factories {
     container: ContainerFactory;
     customShapes: CustomShapesFactory;
     dialog: DialogFactory;
+    dynamicTextFactory: DynamicTextFactory;
     flip: FlipFactory;
     fixWidthButtons: FixWidthButtonsFactory;
     fixWidthSizer: FixWidthSizerFactory;
