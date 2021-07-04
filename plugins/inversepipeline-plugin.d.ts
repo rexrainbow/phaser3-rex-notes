@@ -7,7 +7,7 @@ interface IConfig {
     name?: string,
 }
 
-export default class InversePipelinePlugin {
+export default class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

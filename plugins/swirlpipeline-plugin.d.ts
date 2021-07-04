@@ -12,7 +12,7 @@ interface IConfig {
     name?: string
 }
 
-export default class SwirlPipelinePlugin {
+export default class SwirlPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

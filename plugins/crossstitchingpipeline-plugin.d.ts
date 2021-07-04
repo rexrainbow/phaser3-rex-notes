@@ -9,7 +9,7 @@ export interface IConfig {
     name?: string,
 }
 
-export default class CrossStitchingPipelinePlugin {
+export default class CrossStitchingPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

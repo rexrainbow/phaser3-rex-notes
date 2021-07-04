@@ -7,7 +7,7 @@ interface IConfig {
     name?: string,
 }
 
-export default class GrayScalePipelinePlugin {
+export default class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

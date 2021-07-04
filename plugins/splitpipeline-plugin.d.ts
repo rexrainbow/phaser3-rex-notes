@@ -12,7 +12,7 @@ interface IConfig {
     name?: string
 }
 
-export default class SplitPipelinePlugin {
+export default class SplitPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

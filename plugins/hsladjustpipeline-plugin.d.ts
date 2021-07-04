@@ -7,7 +7,7 @@ interface IConfig {
     name?: string,
 }
 
-export default class HslAdjustPipelinePlugin {
+export default class HslAdjustPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

@@ -11,7 +11,7 @@ interface IConfig {
     name?: string,
 }
 
-export default class ShockwavePipelinePlugin {
+export default class ShockwavePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

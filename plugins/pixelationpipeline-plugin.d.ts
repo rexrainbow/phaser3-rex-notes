@@ -8,7 +8,7 @@ interface IConfig {
     name?: string,
 }
 
-export default class PixelationPipelinePlugin {
+export default class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig

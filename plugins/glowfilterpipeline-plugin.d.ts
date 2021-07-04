@@ -7,7 +7,7 @@ export interface IConfig {
     name?: string,
 }
 
-export default class GlowFilterPipelinePlugin {
+export default class GlowFilterPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: IConfig
