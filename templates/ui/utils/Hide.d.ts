@@ -1,12 +1,12 @@
 import * as Phaser from 'phaser';
 
-export type Show = (
+export function Show(
     gameObject: Phaser.GameObjects.GameObject
-) => void;
-export type Hide = (
+): void;
+export function Hide(
     gameObject: Phaser.GameObjects.GameObject
-) => void;
+): void;
 
-export type IsShown = (
+export function IsShown(
     gameObject: Phaser.GameObjects.GameObject
-) => boolean;
+): boolean;

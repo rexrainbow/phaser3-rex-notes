@@ -1,10 +1,10 @@
 import * as Phaser from 'phaser';
 
-export type WaitEvent = (
+export function WaitEvent(
     eventEmitter: Phaser.Events.EventEmitter,
     eventName: string
-) => Promise<any>;
+): Promise<any>;
 
-export type WaitComplete = (
+export function WaitComplete(
     eventEmitter: Phaser.Events.EventEmitter,
-) => Promise<any>;
+): Promise<any>;

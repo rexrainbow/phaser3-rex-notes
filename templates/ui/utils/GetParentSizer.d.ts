@@ -1,10 +1,10 @@
 import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer';
 
-export type GetParentSizer = (
+export function GetParentSizer(
     gameObject: Phaser.GameObjects.GameObject
-) => BaseSizer;
+): BaseSizer;
 
-export type GetTopmostSizer = (
+export function GetTopmostSizer(
     gameObject: Phaser.GameObjects.GameObject
-) => BaseSizer;
+): BaseSizer;
