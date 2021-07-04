@@ -1,8 +1,6 @@
 import TextBox from './TextBox';
 import { IConfig } from './TextBox';
 
-declare type TextBoxFactory = (
+export default function (
     config?: IConfig
-) => TextBox;
-
-export default TextBoxFactory;
+): TextBox;

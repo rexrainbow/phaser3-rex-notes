@@ -1,8 +1,6 @@
 import Knob from './Knob';
 import { IConfig } from './Knob';
 
-declare type KnobFactory = (
+export default function (
     config?: IConfig
-) => Knob;
-
-export default KnobFactory;
+): Knob;

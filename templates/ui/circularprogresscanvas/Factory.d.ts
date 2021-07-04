@@ -1,8 +1,6 @@
 import CircularProgressCanvas from './CircularProgressCanvas';
 import { IConfig } from '../../../plugins/circularprogresscanvas'
 
-declare type CircularProgressCanvasFactory = (
+export default function (
     config?: IConfig
-) => CircularProgressCanvas;
-
-export default CircularProgressCanvasFactory;
+): CircularProgressCanvas;

@@ -1,8 +1,6 @@
 import BadgeLabel from './BadgeLabel';
 import { IConfig } from './BadgeLabel';
 
-declare type BadgeLabelFactory = (
+export default function (
     config?: IConfig
-) => BadgeLabel;
-
-export default BadgeLabelFactory;
+): BadgeLabel;

@@ -1,8 +1,6 @@
 import CustomShapes from "./CustomShapes";
 import { IConfig } from '../../../plugins/gameobjects/shape/customshapes/CustomShapes';
 
-declare type CustomShapesFactory = (
+export default function (
     config?: IConfig
-) => CustomShapes;
-
-export default CustomShapesFactory;
+): CustomShapes;

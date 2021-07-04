@@ -1,8 +1,6 @@
 import Tabs from './Tabs';
 import { IConfig } from './Tabs';
 
-declare type TabsFactory = (
+export default function (
     config?: IConfig
-) => Tabs;
-
-export default TabsFactory;
+): Tabs;

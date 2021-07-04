@@ -1,8 +1,6 @@
 import ScrollablePanel from './ScrollablePanel';
 import { IConfig } from './ScrollablePanel';
 
-declare type ScrollablePanelFactory = (
+export default function (
     config?: IConfig
-) => ScrollablePanel;
-
-export default ScrollablePanelFactory;
+): ScrollablePanel;

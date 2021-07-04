@@ -1,8 +1,6 @@
 import TextArea from './TextArea';
 import { IConfig } from './TextArea';
 
-declare type TextAreaFactory = (
+export default function (
     config?: IConfig
-) => TextArea;
-
-export default TextAreaFactory;
+): TextArea;

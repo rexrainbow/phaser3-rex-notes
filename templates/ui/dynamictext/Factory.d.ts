@@ -1,8 +1,6 @@
 import DynamicText from "./DynamicText";
 import { IConfig } from '../../../plugins/gameobjects/dynamictext/dynamictext/DynamicText';
 
-declare type DynamicTextFactory = (
+export default function (
     config?: IConfig
-) => DynamicText;
-
-export default DynamicTextFactory;
+): DynamicText;

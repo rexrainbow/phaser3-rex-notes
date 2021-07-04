@@ -1,8 +1,6 @@
 import FixWidthButtons from './FixWidthButtons';
 import { IConfig } from './FixWidthButtons';
 
-declare type FixWidthButtonsFactory = (
+export default function (
     config?: IConfig
-) => FixWidthButtons;
-
-export default FixWidthButtonsFactory;
+): FixWidthButtons;

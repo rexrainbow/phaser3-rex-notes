@@ -1,8 +1,6 @@
 import Pages from './Pages';
 import { IConfig } from './Pages';
 
-declare type PagesFactory = (
+export default function (
     config?: IConfig
-) => Pages;
-
-export default PagesFactory;
+): Pages;

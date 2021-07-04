@@ -1,8 +1,6 @@
 import GridSizer from './GridSizer';
 import { IConfig } from './GridSizer';
 
-declare type GridSizerFactory = (
+export default function (
     config?: IConfig
-) => GridSizer;
-
-export default GridSizerFactory;
+): GridSizer;

@@ -1,8 +1,6 @@
 import FixWidthSizer from './FixWidthSizer';
 import { IConfig } from './FixWidthSizer';
 
-declare type FixWidthSizerFactory = (
+export default function (
     config?: IConfig
-) => FixWidthSizer;
-
-export default FixWidthSizerFactory;
+): FixWidthSizer;

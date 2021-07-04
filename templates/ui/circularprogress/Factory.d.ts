@@ -1,8 +1,6 @@
 import CircularProgress from './CircularProgress';
 import { IConfig } from '../../../plugins/circularprogress';
 
-declare type CircularProgressFactory = (
+export default function (
     config?: IConfig
-) => CircularProgress;
-
-export default CircularProgressFactory;
+): CircularProgress;

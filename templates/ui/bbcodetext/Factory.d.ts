@@ -1,10 +1,8 @@
 import BBCodeText from './BBCodeText';
 import { TextStyle } from '../../../plugins/bbcodetext';
 
-declare type BBCodeTextFactory = (
+export default function (
     x?: number, y?: number,
     content?: string,
     style?: TextStyle
-) => BBCodeText;
-
-export default BBCodeTextFactory;
+): BBCodeText;

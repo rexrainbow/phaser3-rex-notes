@@ -1,8 +1,6 @@
 import GridButtons from './GridButtons';
 import { IConfig } from './GridButtons';
 
-declare type GridButtonsFactory = (
+export default function (
     config?: IConfig
-) => GridButtons;
-
-export default GridButtonsFactory;
+): GridButtons;

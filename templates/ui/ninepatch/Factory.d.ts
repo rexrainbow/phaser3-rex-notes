@@ -1,8 +1,6 @@
 import NinePatch from "./NinePatch";
 import { IConfig } from '../../../plugins/ninepatch';
 
-declare type NinePatchFactory = (
+export default function (
     config?: IConfig
-) => NinePatch;
-
-export default NinePatchFactory;
+): NinePatch;

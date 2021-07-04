@@ -1,8 +1,6 @@
 import OverlapSizer from './OverlapSizer';
 import { IConfig } from './OverlapSizer';
 
-declare type OverlapSizerFactory = (
+export default function (
     config?: IConfig
-) => OverlapSizer;
-
-export default OverlapSizerFactory;
+): OverlapSizer;

@@ -1,7 +1,7 @@
 import RoundRectangleCanvas from './RoundRectangleCanvas';
 import { IRadiusConfig } from '../../../plugins/roundrectanglecanvas';
 
-declare type RoundRectangleCanvasFactory = (
+export default function (
     x: number,
     y: number,
     width: number,
@@ -18,6 +18,4 @@ declare type RoundRectangleCanvasFactory = (
     fillColor2?: number | string | null,
     isHorizontalGradient?: boolean
 
-) => RoundRectangleCanvas;
-
-export default RoundRectangleCanvasFactory;
+): RoundRectangleCanvas;

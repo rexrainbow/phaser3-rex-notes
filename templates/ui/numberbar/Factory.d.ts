@@ -1,8 +1,6 @@
 import NumberBar from './NumberBar';
 import { IConfig } from './NumberBar';
 
-declare type NumberBarFactory = (
+export default function (
     config?: IConfig
-) => NumberBar;
-
-export default NumberBarFactory;
+): NumberBar;

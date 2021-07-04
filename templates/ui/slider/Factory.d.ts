@@ -1,8 +1,6 @@
 import Slider from './Slider';
 import { IConfig } from './Slider';
 
-declare type SliderFactory = (
+export default function (
     config?: IConfig
-) => Slider;
-
-export default SliderFactory;
+): Slider;

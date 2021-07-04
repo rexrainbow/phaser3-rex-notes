@@ -2,9 +2,7 @@ import * as Phaser from 'phaser';
 import Click from "./Click";
 import { IConfig } from '../../../plugins/button';
 
-declare type ClickFactory = (
+export default function (
     gameObject: Phaser.GameObjects.GameObject,
     config?: IConfig
-) => Click;
-
-export default ClickFactory;
+): Click;

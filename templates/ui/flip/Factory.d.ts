@@ -2,9 +2,7 @@ import * as Phaser from 'phaser';
 import Flip from "./Flip";
 import { IConfig } from '../../../plugins/flip';
 
-declare type FlipFactory = (
+export default function (
     gameObject: Phaser.GameObjects.GameObject,
     config?: IConfig
-) => Flip;
-
-export default FlipFactory;
+): Flip;

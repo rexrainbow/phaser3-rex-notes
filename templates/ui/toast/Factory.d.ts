@@ -1,8 +1,6 @@
 import Toast from './Toast';
 import { IConfig } from './Toast';
 
-declare type ToastFactory = (
+export default function (
     config?: IConfig
-) => Toast;
-
-export default ToastFactory;
+): Toast;

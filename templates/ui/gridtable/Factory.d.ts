@@ -1,8 +1,6 @@
 import GridTable from './GridTable';
 import { IConfig } from './GridTable';
 
-declare type GridTableFactory = (
+export default function (
     config?: IConfig
-) => GridTable;
-
-export default GridTableFactory;
+): GridTable;

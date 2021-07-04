@@ -1,7 +1,7 @@
 import RoundRectangle from './RoundRectangle';
 import { IRadiusConfig } from '../../../plugins/roundrectangle';
 
-declare type RoundRectangleFactory = (
+export default function (
     x: number,
     y: number,
     width: number,
@@ -14,6 +14,4 @@ declare type RoundRectangleFactory = (
     fillColor?: number,
     fillAlpha?: number
 
-) => RoundRectangle;
-
-export default RoundRectangleFactory;
+): RoundRectangle;

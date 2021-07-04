@@ -1,8 +1,6 @@
 import Dialog from './Dialog';
 import { IConfig } from './Dialog';
 
-declare type DialogFactory = (
+export default function (
     config?: IConfig
-) => Dialog;
-
-export default DialogFactory;
+): Dialog;

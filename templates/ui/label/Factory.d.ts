@@ -1,8 +1,6 @@
 import Label from './Label';
 import { IConfig } from './Label';
 
-declare type LabelFactory = (
+export default function (
     config?: IConfig
-) => Label;
-
-export default LabelFactory;
+): Label;

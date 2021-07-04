@@ -1,8 +1,6 @@
 import Sizer from './Sizer';
 import { IConfig } from './Sizer';
 
-declare type SizerFactory = (
+export default function (
     config?: IConfig
-) => Sizer;
-
-export default SizerFactory;
+): Sizer;

@@ -1,8 +1,6 @@
 import Menu from './Menu';
 import { IConfig } from './Menu';
 
-declare type MenuFactory = (
+export default function (
     config?: IConfig
-) => Menu;
-
-export default MenuFactory;
+): Menu;
