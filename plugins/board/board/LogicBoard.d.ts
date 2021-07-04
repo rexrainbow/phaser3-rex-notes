@@ -21,7 +21,10 @@ export interface WorldXYType { x: number, y: number }
 type ForEachTileXYOrderTypes = 0 | 1 | 2 | 3 | 'x+' | 'x-' | 'y+' | 'y-';
 
 export interface IConfigQuadGrid {
-    gridType: 'quadGrid',
+    /**
+     * 'quadGrid'
+     */
+    gridType: string,
 
     x?: number, y?: number,
     cellWidth?: number, cellHeight?: number,
@@ -32,7 +35,10 @@ export interface IConfigQuadGrid {
 }
 
 export interface IConfigHexagonGrid {
-    gridType: 'hexagonGrid',
+    /**
+     * 'hexagonGrid'
+     */
+    gridType: string,
 
     x?: number, y?: number,
     cellWidth?: number, cellHeight?: number,
@@ -47,7 +53,7 @@ export interface IConfig {
     height?: number
 }
 
-export default class Board<ChessType> extends EE {
+export default class Board<ChessType = unknown> extends EE {
     constructor(
         scene: unknown,
         config?: IConfig
@@ -142,7 +148,7 @@ export default class Board<ChessType> extends EE {
     ): boolean;
 
     forEachTileXY(
-        callback: ((tileXY: TileXYType, board: Board<ChessType>) => boolean | undefined),
+        callback: ((tileXY: TileXYType, board: Board<ChessType>) => void | boolean),
         scope?: unknown,
         order?: ForEachTileXYOrderTypes
     ): this;
@@ -156,7 +162,7 @@ export default class Board<ChessType> extends EE {
     worldXYToTileXY(
         worldX: number,
         worldY: number,
-        out?: TileXYType
+        out?: TileXYType | true
     ): TileXYType;
 
     worldXYSnapToGrid(
@@ -274,7 +280,7 @@ export default class Board<ChessType> extends EE {
     getNeighborTileXYAtAngle(
         srcTileXY: ChessType | TileXYType,
         angle: number,
-        out?: TileXYType
+        out?: TileXYType | true
     ): TileXYType;
 
     getNeighborChess(
@@ -297,7 +303,7 @@ export default class Board<ChessType> extends EE {
 
     getRandomEmptyTileXY(
         tileZ: number | string,
-        out?: TileXYType
+        out?: TileXYType | true
     ): TileXYType;
 
     getEmptyTileXYArray(

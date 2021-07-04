@@ -6703,7 +6703,11 @@
 
 <ul>
 <li><code>chess</code> : A game object.</li>
-<li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.</li>
+<li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.<ul>
+<li><code>tileX</code> , <code>tileY</code> : Number.</li>
+<li><code>tileZ</code> : Number or string.</li>
+</ul>
+</li>
 <li><code>align</code> : Set <code>true</code> to align (i.e. set position) chess to grid (tileX, tileY). Default is <code>true</code>.</li>
 </ul>
 <div class="admonition note">
@@ -6809,7 +6813,7 @@
 <ul>
 <li>Get chess at (worldX, worldY)
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToChessArray</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-<span class="c1">// var out = board.worldXYToChessArray(tileX, tileY, out);</span>
+<span class="c1">// var out = board.worldXYToChessArray(worldX, worldY, out);</span>
 </code></pre></div><ul>
 <li><code>out</code> : An array of chess</li>
 </ul>
@@ -6846,22 +6850,24 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var tileX = tileXY.x;</span>
     <span class="c1">// var tileY = tileXY.y;</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">order</span><span class="p">);</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <p>Iteration order :</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var tileX = tileXY.x;</span>
     <span class="c1">// var tileY = tileXY.y;</span>
+
+    <span class="c1">// return isBreak;</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">order</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>order</code> :<ul>
-<li><code>0</code>, or <code>x+</code> : Increasing x, increasing y.</li>
-<li><code>1</code>, or <code>x-</code> : Decreasing x, increasing y.</li>
-<li><code>2</code>, or <code>y+</code> : Increasing y, increasing x.</li>
-<li><code>3</code>, or <code>y-</code> : Decreasing y, increasing x.</li>
+<li><code>0</code>, or <code>'x+'</code> : Increasing x, increasing y.</li>
+<li><code>1</code>, or <code>'x-'</code> : Decreasing x, increasing y.</li>
+<li><code>2</code>, or <code>'y+'</code> : Increasing y, increasing x.</li>
+<li><code>3</code>, or <code>'y-'</code> : Decreasing y, increasing x.</li>
 </ul>
 </li>
 </ul>
@@ -6895,13 +6901,16 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getDistance</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
 </code></pre></div>
 
+<ul>
+<li><code>tileA</code>, <code>tileB</code> : Chess object, or tileXY <code>{x, y}</code>. </li>
+</ul>
 <h3 id="ring-tile-position">Ring -&gt; tile position<a class="headerlink" href="#ring-tile-position" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get array of tile position around a ring.
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ringToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 <span class="c1">// var out = board.ringToTileXYArray(centerTileXY, radius, out);</span>
 </code></pre></div><ul>
-<li><code>centerTileXY</code> : Tile position <code>{x, y}</code> of ring center.</li>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 <li><code>radius</code> : Radius of the ring.</li>
 </ul>
 </li>
@@ -6911,7 +6920,7 @@
 <span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, out);</span>
 <span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar, out);</span>
 </code></pre></div><ul>
-<li><code>centerTileXY</code> : Tile position <code>{x, y}</code> of ring center.</li>
+<li><code>centerTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 <li><code>radius</code> : Radius of the ring.</li>
 <li><code>nearToFar</code> : From near ring to far ring. Default value is <code>true</code>.</li>
 </ul>
@@ -6987,19 +6996,19 @@
 <li><code>out</code> : An array of tile position</li>
 </ul>
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileXY0</span><span class="p">,</span> <span class="nx">tileXY1</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
+<li><code>tileA</code>, <code>tileB</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 <li><code>radian</code> : Angle between world position of 2 tiles, in radian.</li>
-<li><code>tileXY0</code>, <code>tileXY1</code> : tile position <code>{x, y}</code></li>
 </ul>
 <h3 id="is-angle-in-cone">Is angle in cone<a class="headerlink" href="#is-angle-in-cone" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInCone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isAngleInCone</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">face</span><span class="p">,</span> <span class="nx">cone</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
-<li><code>chessA</code>, <code>chessB</code> : Direction from chessA to chessB. Chess object, or tileXY. </li>
+<li><code>chessA</code>, <code>chessB</code> : Chess object, or tileXY <code>{x, y}</code>. </li>
 <li><code>face</code>, <code>cone</code> : Range of compared angle is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Angle in radian.</li>
 </ul>
 <h3 id="direction-between-2-tiles">Direction between 2 tiles<a class="headerlink" href="#direction-between-2-tiles" title="Permanent link">&para;</a></h3>
@@ -7029,7 +7038,7 @@
 </code></pre></div>
 
 <ul>
-<li><code>chessA</code>, <code>chessB</code> : Direction from chessA to chessB. Chess object, or tileXY. </li>
+<li><code>chessA</code>, <code>chessB</code> : Chess object, or tileXY <code>{x, y}</code>.</li>
 <li><code>face</code>, <code>cone</code> : Range of compared direction is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Integer number, or float number.<ul>
 <li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, or float number between 0~1, 1~2, 2~3, 3~4.</li>
 <li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.</li>
@@ -7040,12 +7049,19 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getOppositeDirection</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
 
-<h3 id="angle-snap-to-direction">Angle snap to direction<a class="headerlink" href="#angle-snap-to-direction" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleSnapToDirection</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getOppositeDirection</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
-<li><code>chess</code> : Chess object, or tileXY, or <code>undefined</code>.</li>
+<li><code>tileXY</code> : Chess object, or tileXY <code>{x, y}</code>.</li>
+</ul>
+<h3 id="angle-snap-to-direction">Angle snap to direction<a class="headerlink" href="#angle-snap-to-direction" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleSnapToDirection</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>tileXY</code> : Chess object, or tileXY <code>{x, y}</code>, or <code>undefined</code>.</li>
 <li><code>angle</code> : Angle in radius.</li>
 <li><code>direction</code> : Integer number.<ul>
 <li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>.</li>
@@ -7077,7 +7093,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 <span class="c1">// var out = board.getNeighborTileXY(srcTileXY, direction, out);</span>
 </code></pre></div><ul>
-<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
+<li><code>srcTileXY</code> : Chess object, or tileXY <code>{x, y}</code> of source.</li>
 <li><code>direction</code> : Number, or string number.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
 <li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
@@ -7109,12 +7125,13 @@
 <li>Get direction between 2 tile positions
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileDirection</span><span class="p">(</span><span class="nx">srcTile</span><span class="p">,</span> <span class="nx">neighborTileXY</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>direction</code> : Return <code>null</code> if these 2 tile positions are not neighbors.</li>
+<li><code>srcTile</code>, <code>neighborTileXY</code> : Chess object, or tileXY <code>{x, y}</code>.</li>
+<li><code>direction</code> : Retu1rn <code>null</code> if these 2 tile positions are not neighbors.</li>
 </ul>
 </li>
 <li>Get neighbor tile position at angle
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXYAtAngle</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
-<span class="c1">// var out = board.getNeighborTileXY(srcTileXY, angle, out);</span>
+<span class="c1">// var out = board.getNeighborTileXYAtAngle(srcTileXY, angle, out);</span>
 </code></pre></div><ul>
 <li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
 <li><code>angle</code> : Angle in radius.</li>
@@ -7128,7 +7145,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">neighborChess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
 <span class="c1">// var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);</span>
 </code></pre></div><ul>
-<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>chess</code> : A chess object, or tile position <code>{x, y, z}</code>.</li>
 <li><code>direction</code> : Number, or string number.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
 <li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
@@ -7155,7 +7172,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
 <span class="c1">// var out = board.getNeighborChess(chess, null, neighborTileZ);</span>
 </code></pre></div><ul>
-<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>chess</code> : A chess object, or tile position <code>{x, y, z}</code>.</li>
 <li><code>out</code> : Chess array of all neighbors.</li>
 </ul>
 </li>
@@ -7166,8 +7183,9 @@
 </ul>
 </li>
 <li>Are 2 chess neighbors?
-   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
+   <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
 </code></pre></div></li>
+<li><code>tileA</code>, <code>tileB</code> : A chess object, or tile position <code>{x, y}</code>.</li>
 <li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
 </ul>
 <h3 id="tile-at-direction">Tile at direction<a class="headerlink" href="#tile-at-direction" title="Permanent link">&para;</a></h3>
@@ -7176,7 +7194,7 @@
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTileXYAtDirection</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
 <span class="c1">// var out = board.getTileXYAtDirection(srcTileXY, direction, distance, out);</span>
 </code></pre></div><ul>
-<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
+<li><code>srcTileXY</code> : A chess object, or tile position <code>{x, y}</code> of source.</li>
 <li><code>direction</code> : Number, or string number.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
 <li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
@@ -7202,7 +7220,7 @@
 </li>
 <li><code>out</code> :<ul>
 <li>A single tile position, if <code>distance</code> is a number.</li>
-<li>Tile position <code>{x, y}</code> array, if <code>distance</code> is a JSON or an array.</li>
+<li>Tile position <code>{x, y}</code> array, if <code>distance</code> is a JSON or a number array.</li>
 </ul>
 </li>
 </ul>
@@ -7261,9 +7279,11 @@
 <li>Set blocker property : See <a href="../board-chessdata/#blocker">chess data</a></li>
 <li>Has blocker at tile position (tileX, tileY, tileZ)
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasBlocker</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">hasBlocker</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var hasBlocker = board.hasBlocker(chess);  // chess or tileXYZ</span>
 </code></pre></div></li>
 <li>Any chess at (tileX, tileY) has <code>blocker</code> property
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasBlocker</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">hasBlocker</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// var hasBlocker = board.hasBlocker(chess);  // chess or tileXY</span>
 </code></pre></div></li>
 </ul>
 <h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
@@ -7553,7 +7573,11 @@
 <li>Get an array of grid points at tile position (tileX, tileY).
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getGridPoints</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 <span class="c1">// var out = board.getGridPoints(tileX, tileY, out);</span>
-</code></pre></div></li>
+<span class="c1">// var points = board.getGridPoints(chess, out);  // chess or tileXY</span>
+</code></pre></div><ul>
+<li><code>points</code> :　World position <code>{x, y}</code>.</li>
+</ul>
+</li>
 <li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
     <div class="codehilite"><pre><span></span><code><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
