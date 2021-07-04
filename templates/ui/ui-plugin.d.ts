@@ -97,21 +97,19 @@ declare class Factories {
     toast: ToastFactory;
 }
 
-export default class UIFactories {
-    constructor(scene: Phaser.Scene);
-
+export default class UIFactories extends Phaser.Plugins.ScenePlugin {    
     add: Factories;
 
     edit: Edit;
-    getParentSizer: GetParentSizer;
-    getTopmostSizer: GetTopmostSizer;
-    hide: Hide;
-    show: Show;
-    isShown: IsShown;
+    getParentSizer: typeof GetParentSizer;
+    getTopmostSizer: typeof GetTopmostSizer;
+    hide: typeof Hide;
+    show: typeof Show;
+    isShown: typeof IsShown;
     setChildrenInteractive: SetChildrenInteractive;
-    waitEvent: WaitEvent;
-    waitComplete: WaitComplete;
-    wrapExpandText: WrapExpandText;
+    waitEvent: typeof WaitEvent;
+    waitComplete: typeof WaitComplete;
+    wrapExpandText: typeof WrapExpandText;
 
     isInTouching(
         gameObject: Phaser.GameObjects.GameObject,
