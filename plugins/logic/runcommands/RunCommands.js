@@ -4,28 +4,28 @@ import IsArray from '../../utils/object/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var runCommands = function (queue, scope, config) {
+var RunCommands = function (queue, scope, config) {
     var reverse = GetValue(config, 'reverse', false);
 
     var retVal;
     if (IsArray(queue[0])) {
         if (!reverse) {
             for (var i = 0, len = queue.length; i < len; i++) {
-                retVal = runCommands(queue[i], scope, config);
+                retVal = RunCommands(queue[i], scope, config);
             }
         } else {
             for (var len = queue.length, i = len - 1; i >= 0; i--) {
-                retVal = runCommands(queue[i], scope, config);
+                retVal = RunCommands(queue[i], scope, config);
             }
         }
     } else {
-        retVal = runCommand(queue, scope, config);
+        retVal = RunCommand(queue, scope, config);
     }
 
     return retVal;
 }
 
-var runCommand = function (cmd, scope, config) {
+var RunCommand = function (cmd, scope, config) {
     var argsConvert = GetValue(config, 'argsConvert', undefined);
     var argsConvertScope = GetValue(config, 'argsConvertScope', undefined);
 
@@ -62,4 +62,4 @@ var runCommand = function (cmd, scope, config) {
 }
 var ARGS = []; // reuse this array
 
-export default runCommands;
+export default RunCommands;
