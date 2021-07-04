@@ -32,27 +32,53 @@ var grid = scene.rexBoard.add.quadGrid({
     - `4` or `'4dir'` : Left/Down/Right/Up
     - `8` or `'8dir'` : Left/Down/Right/Up/Left-down/Down-right/Right-up/Up-left
 
-### Set world position of tile (0, 0)
+### World position of tile (0, 0)
 
-```javascript
-grid.setOriginPosition(worldX, worldY);
-```
+- Get
+    ```javascript
+    var worldX = grid.x;
+    var worldY = grid.y;
+    ```
+- Set
+    ```javascript
+    grid.setOriginPosition(worldX, worldY);
+    ```
+    or
+    ```javascript
+    grid.x = worldX;
+    grid.y = worldY;
+    ```
 
-### Set cell size
+### Cell size
 
-```javascript
-grid.setCellSize(cellWidth, cellHeight);
-```
+- Get
+    ```javascript
+    var width = grid.width;
+    var height = grid.height;
+    ```
+- Set
+    ```javascript
+    grid.setCellSize(width, height);
+    ```
+    or
+    ```javascript
+    grid.width = width;
+    grid.height = height;
+    ```
 
-### Set grid type
+### Grid type
 
-```javascript
-grid.setType(type);
-```
-
-- `type`
-    - `0`, or `orthogonal`
-    - `1`, or `isometric`
+- Get
+    ```javascript
+    var mode = grid.mode;
+    ```
+- Set
+    ```javascript
+    grid.setType(mode);
+    ```
+    - `mode`
+        - `0`, or `orthogonal`
+        - `1`, or `isometric`
 
 ### Get world position
 
@@ -64,8 +90,8 @@ var worldXY = grid.getWorldXY(tileX, tileY);  // worldXY: {x, y}
 ### Get tile position
 
 ```javascript
-var tileXY = grid.getWorldXY(tileX, tileY);  // tileXY: {x, y}
-// var out = grid.getWorldXY(tileX, tileY, out);
+var tileXY = grid.getTileXY(worldX, worldY);  // tileXY: {x, y}
+// var out = grid.getTileXY(worldX, worldY, out);
 ```
 
 ### Directions

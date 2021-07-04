@@ -1,4 +1,9 @@
 import EE from '../../utils/eventemitter/EventEmitter';
+import QuadGrid from '../grid/quad/Quad';
+import HexagonGrid from '../grid/hexagon/Hexagon';
+import { IConfig as IConfigQuadGridBase } from '../grid/quad/Quad';
+import { IConfig as IConfigHexagonGridBase } from '../grid/hexagon/Hexagon';
+import { TileXYZType, TileXYType, WorldXYType } from '../types/Position';
 import Line from '../../utils/geom/line/Line';
 import Circle from '../../utils/geom/circle/Circle';
 import Rectangle from '../../utils/geom/rectangle/Rectangle';
@@ -6,49 +11,18 @@ import Ellipse from '../../utils/geom/ellipse/Ellipse';
 import Triangle from '../../utils/geom/triangle/Triangle';
 import Polygon from '../../utils/geom/polygon/Polygon';
 
-
-// Quad
-type QuadGridTypes = 0 | 1 | 'orthogonal' | 'isometric';
-type QuadGridDirTypes = 4 | 8 | '4dir' | '8dir';
-// Hexagon
-type HexagonGridStaggerAxisTypes = 0 | 1 | 'y' | 'x';
-type HexagonGridStaggerindexTypes = 0 | 1 | 'even' | 'odd';
-
-export interface TileXYZType { x: number, y: number, z: (number | string) }
-export interface TileXYType { x: number, y: number, z?: (number | string) }
-export interface WorldXYType { x: number, y: number }
-
 type ForEachTileXYOrderTypes = 0 | 1 | 2 | 3 | 'x+' | 'x-' | 'y+' | 'y-';
 
-export interface IConfigQuadGrid {
-    /**
-     * 'quadGrid'
-     */
-    gridType: string,
-
-    x?: number, y?: number,
-    cellWidth?: number, cellHeight?: number,
-
-    type?: QuadGridTypes,
-
-    dir?: QuadGridDirTypes
+export interface IConfigQuadGrid extends IConfigQuadGridBase {
+    gridType: 'quadGrid',
 }
 
-export interface IConfigHexagonGrid {
-    /**
-     * 'hexagonGrid'
-     */
-    gridType: string,
-
-    x?: number, y?: number,
-    cellWidth?: number, cellHeight?: number,
-
-    staggeraxis?: HexagonGridStaggerAxisTypes,
-    staggerindex?: HexagonGridStaggerindexTypes
+export interface IConfigHexagonGrid extends IConfigHexagonGridBase {
+    gridType: 'hexagonGrid',
 }
 
 export interface IConfig {
-    grid?: IConfigQuadGrid | IConfigHexagonGrid,
+    grid?: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid,
     width?: number,
     height?: number
 }
@@ -60,6 +34,9 @@ export default class Board<ChessType = unknown> extends EE {
     );
 
     scene: unknown;
+
+    setGrid(grid: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid): this;
+    grid: QuadGrid | HexagonGrid;
 
     setBoardWidth(width: number): this;
     readonly width: number;

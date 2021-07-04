@@ -1037,3 +1037,14 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     ```javascript
     var scene = board.scene;
     ```
+- Grid object
+    - Get
+        ```javascript
+        var grid = board.grid;
+        ```
+        - `grid` : [Quad grid](board-quadgrid.md), or [hexagon grid](board-hexagongrid.md).
+    - Set
+        ```javascript
+        board.setGrid(grid);
+        ```
+        - `grid` : [Quad grid](board-quadgrid.md), or [hexagon grid](board-hexagongrid.md).

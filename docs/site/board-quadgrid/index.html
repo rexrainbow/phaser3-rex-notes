@@ -5174,22 +5174,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-world-position-of-tile-0-0" class="md-nav__link">
-    Set world position of tile (0, 0)
+  <a href="#world-position-of-tile-0-0" class="md-nav__link">
+    World position of tile (0, 0)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-cell-size" class="md-nav__link">
-    Set cell size
+  <a href="#cell-size" class="md-nav__link">
+    Cell size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-grid-type" class="md-nav__link">
-    Set grid type
+  <a href="#grid-type" class="md-nav__link">
+    Grid type
   </a>
   
 </li>
@@ -5690,22 +5690,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-world-position-of-tile-0-0" class="md-nav__link">
-    Set world position of tile (0, 0)
+  <a href="#world-position-of-tile-0-0" class="md-nav__link">
+    World position of tile (0, 0)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-cell-size" class="md-nav__link">
-    Set cell size
+  <a href="#cell-size" class="md-nav__link">
+    Cell size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-grid-type" class="md-nav__link">
-    Set grid type
+  <a href="#grid-type" class="md-nav__link">
+    Grid type
   </a>
   
 </li>
@@ -5791,22 +5791,47 @@
 </ul>
 </li>
 </ul>
-<h3 id="set-world-position-of-tile-0-0">Set world position of tile (0, 0)<a class="headerlink" href="#set-world-position-of-tile-0-0" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setOriginPosition</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-</code></pre></div>
-
-<h3 id="set-cell-size">Set cell size<a class="headerlink" href="#set-cell-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setCellSize</span><span class="p">(</span><span class="nx">cellWidth</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
-</code></pre></div>
-
-<h3 id="set-grid-type">Set grid type<a class="headerlink" href="#set-grid-type" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">type</span><span class="p">);</span>
-</code></pre></div>
-
+<h3 id="world-position-of-tile-0-0">World position of tile (0, 0)<a class="headerlink" href="#world-position-of-tile-0-0" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>type</code><ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setOriginPosition</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">worldX</span><span class="p">;</span>
+<span class="nx">grid</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">worldY</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="cell-size">Cell size<a class="headerlink" href="#cell-size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setCellSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">grid</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="grid-type">Grid type<a class="headerlink" href="#grid-type" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">mode</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">mode</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">grid</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>mode</code><ul>
 <li><code>0</code>, or <code>orthogonal</code></li>
 <li><code>1</code>, or <code>isometric</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -5816,8 +5841,8 @@
 </code></pre></div>
 
 <h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
-<span class="c1">// var out = grid.getWorldXY(tileX, tileY, out);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
+<span class="c1">// var out = grid.getTileXY(worldX, worldY, out);</span>
 </code></pre></div>
 
 <h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>

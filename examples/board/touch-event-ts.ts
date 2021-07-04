@@ -20,8 +20,17 @@ class Demo extends Phaser.Scene {
 
     create() {
         var board = this.rexBoard.add.board({
-            grid: GetHexagonGrid(),
-            // grid: GetQuadGrid(),
+            // grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
+            grid: {
+                gridType: 'hexagonGrid',
+                x: 50,
+                y: 50,
+                size: 50,
+                staggeraxis: 'x',
+                staggerindex: 'odd'
+            },
+
             width: 20,
             height: 20
         })
@@ -98,28 +107,26 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var GetQuadGrid = function () {
-    return {
-        gridType: 'quadGrid',
+var getQuadGrid = function (scene: Demo) {
+    var grid = scene.rexBoard.add.quadGrid({
         x: 400,
         y: 100,
         cellWidth: 100,
         cellHeight: 50,
         type: 1
-    };
+    });
+    return grid;
 }
 
-var GetHexagonGrid = function () {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    return {
-        gridType: 'hexagonGrid',
+var getHexagonGrid = function (scene: Demo) {
+    var grid = scene.rexBoard.add.hexagonGrid({
         x: 50,
         y: 50,
         size: 50,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    }
+        staggeraxis: 'x',
+        staggerindex: 'odd'
+    })
+    return grid;
 };
 
 var config = {

@@ -25,15 +25,9 @@ class Hexagon {
         this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
         this.setDirectionMode();
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
-        this.size = GetValue(o, 'size', undefined);
-        if (this.size !== undefined) {
-            var hexagon = {
-                size: this.size,
-                type: this.staggeraxis
-            }
-            var cellWidth = GetCellWidth(hexagon);
-            var cellHeight = GetCellHeight(hexagon);
-            this.setCellSize(cellWidth, cellHeight);
+        var size = GetValue(o, 'size', undefined);
+        if (size !== undefined) {
+            this.setCellRadius(size);
         } else {
             this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
         }
@@ -89,6 +83,18 @@ class Hexagon {
     setCellSize(width, height) {
         this.width = width;
         this.height = height;
+        return this;
+    }
+
+    setCellRadius(size) {
+        this.size = size;
+        var hexagon = {
+            size: this.size,
+            type: this.staggeraxis
+        }
+        var cellWidth = GetCellWidth(hexagon);
+        var cellHeight = GetCellHeight(hexagon);
+        this.setCellSize(cellWidth, cellHeight);
         return this;
     }
 
