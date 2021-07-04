@@ -68,6 +68,12 @@ var count = ee.listenerCount(eventName);
 var listeners = ee.listeners(eventName);
 ```
 
+### Get event names
+
+```javascript
+var names = ee.eventNames();
+```
+
 #### Listener
 
 ```javascript

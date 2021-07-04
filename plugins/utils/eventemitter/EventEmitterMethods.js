@@ -80,5 +80,12 @@ export default {
             return this._eventEmitter.listeners.apply(this._eventEmitter, arguments);
         }
         return [];
+    },
+
+    eventNames: function() {
+        if (this._eventEmitter) {
+            return this._eventEmitter.eventNames.apply(this._eventEmitter, arguments);
+        }
+        return [];
     }
 };
