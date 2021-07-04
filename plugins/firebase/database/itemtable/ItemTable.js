@@ -19,7 +19,7 @@ class ItemTable {
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
-        this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
+        this.eventNameMap = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.database = firebase.database();
         this.table = new Table();
@@ -54,7 +54,7 @@ class ItemTable {
         this.updater = new UpdaterClass({
             type: type,
             eventEmitter: this.getEventEmitter(),
-            eventNames: this.eventNames,
+            eventNames: this.eventNameMap,
             table: this.table
         })
 

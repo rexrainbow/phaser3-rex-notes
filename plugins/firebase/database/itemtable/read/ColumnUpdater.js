@@ -22,16 +22,16 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.addkey0, key, value);
+                this.emit(this.eventNameMap.addkey0, key, value);
                 break;
             case 2:
-                this.emit(this.eventNames.addkey1, this.key, key, value);
+                this.emit(this.eventNameMap.addkey1, this.key, key, value);
                 break;
             default: // 3
-                this.emit(this.eventNames.addkey2, this.pageKey, this.key, key, value);
+                this.emit(this.eventNameMap.addkey2, this.pageKey, this.key, key, value);
                 break;
         }
-        this.emit(this.eventNames.update, this.table.data);
+        this.emit(this.eventNameMap.update, this.table.data);
     }
 
     removeCol(snapshot) {
@@ -40,16 +40,16 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.removekey0, key);
+                this.emit(this.eventNameMap.removekey0, key);
                 break;
             case 2:
-                this.emit(this.eventNames.removekey1, this.key, key);
+                this.emit(this.eventNameMap.removekey1, this.key, key);
                 break;
             default: // 3
-                this.emit(this.eventNames.removekey2, this.pageKey, this.key, key);
+                this.emit(this.eventNameMap.removekey2, this.pageKey, this.key, key);
                 break;
         }
-        this.emit(this.eventNames.update, this.table.data);        
+        this.emit(this.eventNameMap.update, this.table.data);        
     }
 
     changeColValue(snapshot) {
@@ -59,16 +59,16 @@ class ColumnUpdater extends BaseUpdater {
 
         switch (this.type) {
             case 1:
-                this.emit(this.eventNames.changekey0, key, value);
+                this.emit(this.eventNameMap.changekey0, key, value);
                 break;
             case 2:
-                this.emit(this.eventNames.changekey1, this.key, key, value);
+                this.emit(this.eventNameMap.changekey1, this.key, key, value);
                 break;
             default: // 3
-                this.emit(this.eventNames.changekey2, this.pageKey, this.key, key, value);
+                this.emit(this.eventNameMap.changekey2, this.pageKey, this.key, key, value);
                 break;
         }
-        this.emit(this.eventNames.update, this.table.data);        
+        this.emit(this.eventNameMap.update, this.table.data);        
     }
 
     get pageKey() {

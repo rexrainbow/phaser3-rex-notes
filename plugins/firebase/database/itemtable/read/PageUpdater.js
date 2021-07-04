@@ -23,14 +23,14 @@ class PageUpdater extends BaseUpdater {
             value = snapshot.val();
         this.setData(key, value);
 
-        this.emit(this.eventNames.addkey0, key, value);
+        this.emit(this.eventNameMap.addkey0, key, value);
     }
 
     removePage(snapshot) {
         var key = snapshot.key;
         this.removeChild(key);
 
-        this.emit(this.eventNames.removekey0, key);
+        this.emit(this.eventNameMap.removekey0, key);
     }
 
     get childClass() {

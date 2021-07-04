@@ -39,7 +39,7 @@ var OnReceive = function (snapshot) {
 
     delete d.stamp;
     this.history.add(d);
-    this.emit(this.eventNames.receive, d);
+    this.emit(this.eventNameMap.receive, d);
 }
 
 export default methods;

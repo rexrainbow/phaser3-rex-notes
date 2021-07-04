@@ -13,7 +13,7 @@ class BaseUpdater {
             this.fullKeyPath = '';
         }
         this.type = config.type;
-        this.eventNames = config.eventNames;
+        this.eventNameMap = config.eventNames;
         this.table = config.table;
 
         this.database = firebase.database();
@@ -108,7 +108,7 @@ class BaseUpdater {
                     key: key,
                     type: this.type,
                     eventEmitter: this.getEventEmitter(),
-                    eventNames: this.eventNames,
+                    eventNames: this.eventNameMap,
                     table: this.table
                 });
                 child.startUpdate();

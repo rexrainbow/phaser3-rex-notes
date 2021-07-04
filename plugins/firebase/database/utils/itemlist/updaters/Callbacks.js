@@ -4,8 +4,8 @@ var AddChildCallback = function (snapshot, prevName) {
     var item = AddItem.call(this, snapshot, prevName);
     this.updateItemID2Index();
 
-    this.emit(this.eventNames.add, item);
-    this.emit(this.eventNames.update, this.items);
+    this.emit(this.eventNameMap.add, item);
+    this.emit(this.eventNameMap.update, this.items);
 }
 
 var ChangeChildCallback = function (snapshot, prevName) {
@@ -14,16 +14,16 @@ var ChangeChildCallback = function (snapshot, prevName) {
     var newItem = AddItem.call(this, snapshot, prevName);
     this.updateItemID2Index();
 
-    this.emit(this.eventNames.change, newItem, prevItem);
-    this.emit(this.eventNames.update, this.items);
+    this.emit(this.eventNameMap.change, newItem, prevItem);
+    this.emit(this.eventNameMap.update, this.items);
 }
 
 var RemoveChildCallback = function (snapshot) {
     var item = RemoveItem.call(this, snapshot);
     this.updateItemID2Index();
 
-    this.emit(this.eventNames.remove, item);
-    this.emit(this.eventNames.update, this.items);
+    this.emit(this.eventNameMap.remove, item);
+    this.emit(this.eventNameMap.update, this.items);
 }
 
 var GetAllChildrenCallback = function (snapshot) {
@@ -33,7 +33,7 @@ var GetAllChildrenCallback = function (snapshot) {
     }).bind(this));
     this.updateItemID2Index();
 
-    this.emit(this.eventNames.update, this.items);
+    this.emit(this.eventNameMap.update, this.items);
 }
 
 var AddItem = function(snapshot, prevName, pushMode) {

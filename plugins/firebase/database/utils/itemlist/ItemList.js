@@ -11,7 +11,7 @@ class ItemList {
         var eventEmitter = GetValue(config, 'eventEmitter', undefined);
         var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
         this.setEventEmitter(eventEmitter, EventEmitterClass);
-        this.eventNames = GetValue(config, 'eventNames', DefaultEventNames);
+        this.eventNameMap = GetValue(config, 'eventNames', DefaultEventNames);
 
         this.isUpdating = false;
         this.items = [];
