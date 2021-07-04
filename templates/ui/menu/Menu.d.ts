@@ -18,11 +18,11 @@ export interface IConfig extends IConfigBase {
 
     createBackgroundCallback?: (items: any[]) => Phaser.GameObjects.GameObject,
 
-    createBackgroundCallbackScope?: unknown,
+    createBackgroundCallbackScope?: object,
 
     createButtonCallback?: (item: any, index: number, items: any[]) => Phaser.GameObjects.GameObject,
 
-    createButtonCallbackScope?: unknown,
+    createButtonCallbackScope?: object,
 
     easeIn?: EaseConfigTypes,
     easeOut?: EaseConfigTypes,

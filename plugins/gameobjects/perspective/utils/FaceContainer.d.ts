@@ -35,7 +35,7 @@ export default class FaceContainer extends Container {
 
     forEachFace(
         callback: (face: FaceTypes, i: number, faces: FacesTypes) => boolean | undefined,
-        scope?: unknown,
+        scope?: object,
         ignoreInvalid?: boolean
     ): this;
 }

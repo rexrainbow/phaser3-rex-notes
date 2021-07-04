@@ -18,7 +18,7 @@ export interface IConfig {
     textFamily?: string,
     textStyle?: string,
     textFormatCallback?: (value: number) => string,
-    textFormatCallbackScope?: unknown,
+    textFormatCallbackScope?: object,
 
     value?: number,
 }
@@ -64,6 +64,6 @@ export default class CircularProgressCanvas extends Canvas {
 
     setTextFormatCallback(
         callback: (value: number) => string,
-        scope?: unknown
+        scope?: object
     ): this
 }

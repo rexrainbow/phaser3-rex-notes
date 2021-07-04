@@ -24,7 +24,7 @@ export default class Canvas extends CanvasGameObjectBase {
 
     updateTexture(
         callback?: (canvasElem: HTMLCanvasElement, context: CanvasRenderingContext2D) => void,
-        scope?: unknown
+        scope?: object
     ): this;
 
     generateTexture(

@@ -15,7 +15,7 @@ export interface IConfig extends IConfigBase {
         speed?: number,
         typeMode?: 0 | 1 | 2 | 3 | 'left-to-right' | 'right-to-left' | 'middle-to-sides' | 'sides-to-middle',
         setTextCallback?: (text: string, isLastChar: boolean, insertIdx: number) => string;
-        setTextCallbackScope?: unknown
+        setTextCallbackScope?: object
     }
 }
 

@@ -17,7 +17,7 @@ export interface IConfig extends IConfigBase {
 
     text?: Phaser.GameObjects.GameObject,
     textFormatCallback?: (value: number) => string,
-    textFormatCallbackScope?: unknown,
+    textFormatCallbackScope?: object,
 
     input?: InputTypes,
 

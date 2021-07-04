@@ -14,7 +14,7 @@ export interface IConfig {
 
     setValueCallback?: (button: Phaser.GameObjects.GameObject, value: boolean, previousValue: boolean) => void,
 
-    setValueCallbackScope?: unknown
+    setValueCallbackScope?: object
 }
 
 export interface IButtons {

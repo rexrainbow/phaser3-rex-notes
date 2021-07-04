@@ -116,7 +116,7 @@ export default class BaseSizer extends ContainerLite {
             name?: boolean |
             {
                 createTextCallback: (scene: Phaser.Scene) => Phaser.GameObjects.GameObject,
-                createTextCallbackScope?: any,
+                createTextCallbackScope?: object,
                 align?: AlignTypes
             }
         }
