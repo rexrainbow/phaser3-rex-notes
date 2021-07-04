@@ -1,5 +1,5 @@
-var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
-    var tileXYZ = this.chessToTileXYZ(chess);
+var GetNeighborChess = function (tileXYZ, directions, neighborTileZ, out) {
+    var tileXYZ = this.chessToTileXYZ(tileXYZ);
     if (tileXYZ === null) {
         return null;
     }

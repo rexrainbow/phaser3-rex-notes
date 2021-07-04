@@ -1,4 +1,11 @@
 var HasBlocker = function (tileX, tileY, tileZ) {
+    if (tileX && (typeof (tileX) !== 'number')) {
+        var tileXYZ = this.chessToTileXYZ(tileX);  // tileX is a Chess or TileXY
+        tileX = tileXYZ.x;
+        tileY = tileXYZ.y;
+        tileZ = tileXYZ.z;
+    }
+
     var chess, blocker;
     if (tileZ === undefined) {
         // any chess at (tileX, tileY) has blocker

@@ -13,6 +13,8 @@ var FilledRingToTileXYArray = function (centerTileXY, radius, nearToFar, out) {
         out = [];
     }
 
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
+
     var level;
     for (var i = 0; i <= radius; i++) {
         level = (nearToFar) ? i : (radius - i);

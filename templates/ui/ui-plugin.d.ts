@@ -97,7 +97,7 @@ declare class Factories {
     toast: typeof ToastFactory;
 }
 
-export default class UIFactories extends Phaser.Plugins.ScenePlugin {
+export default class UIPlugin extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
     edit: Edit;

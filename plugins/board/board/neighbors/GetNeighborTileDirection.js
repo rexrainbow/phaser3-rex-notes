@@ -4,9 +4,14 @@ var GetNeighborTileDirection = function (srcTileXY, neighborTileXY) {
     if ((srcTileXY === null) || (neighborTileXY === null)) {
         return null;
     }
+
+    srcTileXY = this.chessToTileXYZ(srcTileXY);
+    neighborTileXY = this.chessToTileXYZ(neighborTileXY);
+
     if (AreTileXYEqual(srcTileXY, neighborTileXY)) {
         return null;
     }
+
     var direction = this.grid.getNeighborTileDirection(srcTileXY, neighborTileXY);
     if (this.wrapMode && (direction === null)) {
         globNeighborTileXYArray = this.getNeighborTileXY(srcTileXY, null, globNeighborTileXYArray);

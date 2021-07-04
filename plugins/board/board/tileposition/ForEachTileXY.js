@@ -4,56 +4,76 @@ var ForEachTileXY = function (callback, scope, order) {
     }
     switch (order) {
         case 0: // x+,y+
+            var isBreak;
             for (var tileY = 0; tileY < this.height; tileY++) {
                 for (var tileX = 0; tileX < this.width; tileX++) {
                     globTileXY.x = tileX;
                     globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, globTileXY, this);
+                        isBreak = callback.call(scope, globTileXY, this);
                     } else {
-                        callback(globTileXY, this);
+                        isBreak = callback(globTileXY, this);
+                    }
+
+                    if (isBreak) {
+                        break;
                     }
                 }
             }
             break;
 
         case 1: // x-,y+
+            var isBreak;
             for (var tileY = 0; tileY < this.height; tileY++) {
                 for (var tileX = this.width - 1; tileX >= 0; tileX--) {
                     globTileXY.x = tileX;
                     globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, globTileXY, this);
+                        isBreak = callback.call(scope, globTileXY, this);
                     } else {
-                        callback(globTileXY, this);
+                        isBreak = callback(globTileXY, this);
+                    }
+
+                    if (isBreak) {
+                        break;
                     }
                 }
             }
             break;
 
         case 2: // y+,x+
+            var isBreak;
             for (var tileX = 0; tileX < this.width; tileX++) {
                 for (var tileY = 0; tileY < this.height; tileY++) {
                     globTileXY.x = tileX;
                     globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, globTileXY, this);
+                        isBreak = callback.call(scope, globTileXY, this);
                     } else {
-                        callback(globTileXY, this);
+                        isBreak = callback(globTileXY, this);
+                    }
+
+                    if (isBreak) {
+                        break;
                     }
                 }
             }
             break;
 
         case 3: // y-,x+
+            var isBreak;
             for (var tileX = 0; tileX < this.width; tileX++) {
                 for (var tileY = this.height - 1; tileY >= 0; tileY--) {
                     globTileXY.x = tileX;
                     globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, globTileXY, this);
+                        isBreak = callback.call(scope, globTileXY, this);
                     } else {
-                        callback(globTileXY, this);
+                        isBreak = callback(globTileXY, this);
+                    }
+
+                    if (isBreak) {
+                        break;
                     }
                 }
             }

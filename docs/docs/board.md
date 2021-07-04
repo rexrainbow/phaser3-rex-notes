@@ -174,6 +174,8 @@ board.addChess(chess, tileX, tileY, tileZ, align);
 
 - `chess` : A game object.
 - `tileX` , `tileY` , `tileZ` : Tile position.
+    - `tileX` , `tileY` : Number.
+    - `tileZ` : Number or string.
 - `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY). Default is `true`.
 
 !!! note "Chess and tile position"
@@ -278,7 +280,7 @@ var tileXYZ = board.chessToTileXYZ(chess);
 - Get chess at (worldX, worldY)
     ```javascript
     var out = board.worldXYToChessArray(worldX, worldY);
-    // var out = board.worldXYToChessArray(tileX, tileY, out);
+    // var out = board.worldXYToChessArray(worldX, worldY, out);
     ```
     - `out` : An array of chess
 - Get chess at (worldX, worldY), tileZ
@@ -314,7 +316,7 @@ var tileXYZ = board.chessToTileXYZ(chess);
 board.forEachTileXY(function(tileXY, board) {
     // var tileX = tileXY.x;
     // var tileY = tileXY.y;
-}, scope, order);
+}, scope);
 ```
 
 Iteration order :
@@ -323,14 +325,16 @@ Iteration order :
 board.forEachTileXY(function(tileXY, board) {
     // var tileX = tileXY.x;
     // var tileY = tileXY.y;
+    
+    // return isBreak;
 }, scope, order);
 ```
 
 - `order` :
-    - `0`, or `x+` : Increasing x, increasing y.
-    - `1`, or `x-` : Decreasing x, increasing y.
-    - `2`, or `y+` : Increasing y, increasing x.
-    - `3`, or `y-` : Decreasing y, increasing x.
+    - `0`, or `'x+'` : Increasing x, increasing y.
+    - `1`, or `'x-'` : Decreasing x, increasing y.
+    - `2`, or `'y+'` : Increasing y, increasing x.
+    - `3`, or `'y-'` : Decreasing y, increasing x.
 
 Or using for-loop
 
@@ -371,6 +375,8 @@ var gridWorldXY = board.worldXYSnapToGrid(worldX, worldY);
 var distance = board.getDistance(tileA, tileB);
 ```
 
+- `tileA`, `tileB` : Chess object, or tileXY `{x, y}`. 
+
 ### Ring -> tile position
 
 - Get array of tile position around a ring.
@@ -378,7 +384,7 @@ var distance = board.getDistance(tileA, tileB);
     var out = board.ringToTileXYArray(centerTileXY, radius);
     // var out = board.ringToTileXYArray(centerTileXY, radius, out);
     ```
-    - `centerTileXY` : Tile position `{x, y}` of ring center.
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
     - `radius` : Radius of the ring.
 - Get array of tile position within a filled ring.
     ```javascript
@@ -387,7 +393,7 @@ var distance = board.getDistance(tileA, tileB);
     // var out = board.filledRingToTileXYArray(centerTileXY, radius, out);
     // var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar, out);
     ```
-    - `centerTileXY` : Tile position `{x, y}` of ring center.
+    - `centerTileXY` : Chess object, or tileXY `{x, y}` of ring center.
     - `radius` : Radius of the ring.
     - `nearToFar` : From near ring to far ring. Default value is `true`.
 
@@ -477,11 +483,11 @@ var out = board.polygonToTileXYArray(polygon);
 ### Angle between world position of 2 tiles
 
 ```javascript
-var radian = board.angleBetween(tileXY0, tileXY1);
+var radian = board.angleBetween(tileA, tileB);
 ```
 
+- `tileA`, `tileB` : Chess object, or tileXY `{x, y}` of ring center.
 - `radian` : Angle between world position of 2 tiles, in radian.
-- `tileXY0`, `tileXY1` : tile position `{x, y}`
 
 ### Is angle in cone
 
@@ -489,7 +495,7 @@ var radian = board.angleBetween(tileXY0, tileXY1);
 var isInCone = board.isAngleInCone(chessA, chessB, face, cone);
 ```
 
-- `chessA`, `chessB` : Direction from chessA to chessB. Chess object, or tileXY. 
+- `chessA`, `chessB` : Chess object, or tileXY `{x, y}`. 
 - `face`, `cone` : Range of compared angle is between `face - (cone/2)` to `face + (cone/2)`. Angle in radian.
 
 ### Direction between 2 tiles
@@ -517,7 +523,7 @@ var direction = board.directionBetween(chessA, chessB, false);
 var isInCone = board.isDirectionInCone(chessA, chessB, face, cone);
 ```
 
-- `chessA`, `chessB` : Direction from chessA to chessB. Chess object, or tileXY. 
+- `chessA`, `chessB` : Chess object, or tileXY `{x, y}`.
 - `face`, `cone` : Range of compared direction is between `face - (cone/2)` to `face + (cone/2)`. Integer number, or float number.
     - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float number between 0~1, 1~2, 2~3, 3~4.
     - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
@@ -528,13 +534,21 @@ var isInCone = board.isDirectionInCone(chessA, chessB, face, cone);
 var direction = board.getOppositeDirection(tileX, tileY, direction);
 ```
 
+or
+
+```javascript
+var direction = board.getOppositeDirection(tileXY, direction);
+```
+
+- `tileXY` : Chess object, or tileXY `{x, y}`.
+
 ### Angle snap to direction
 
 ```javascript
-var direction = board.angleSnapToDirection(chess, angle);
+var direction = board.angleSnapToDirection(tileXY, angle);
 ```
 
-- `chess` : Chess object, or tileXY, or `undefined`.
+- `tileXY` : Chess object, or tileXY `{x, y}`, or `undefined`.
 - `angle` : Angle in radius.
 - `direction` : Integer number.
     - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`.
@@ -572,7 +586,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     var neighborTileXY = board.getNeighborTileXY(srcTileXY, direction);
     // var out = board.getNeighborTileXY(srcTileXY, direction, out);
     ```
-    - `srcTileXY` : Tile position `{x, y}` of source.
+    - `srcTileXY` : Chess object, or tileXY `{x, y}` of source.
     - `direction` : Number, or string number.
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
@@ -597,11 +611,12 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     ```javascript
     var direction = board.getNeighborTileDirection(srcTile, neighborTileXY);
     ```
-    - `direction` : Return `null` if these 2 tile positions are not neighbors.
+    - `srcTile`, `neighborTileXY` : Chess object, or tileXY `{x, y}`.
+    - `direction` : Retu1rn `null` if these 2 tile positions are not neighbors.
 - Get neighbor tile position at angle
     ```javascript
     var neighborTileXY = board.getNeighborTileXYAtAngle(srcTileXY, angle);
-    // var out = board.getNeighborTileXY(srcTileXY, angle, out);
+    // var out = board.getNeighborTileXYAtAngle(srcTileXY, angle, out);
     ```
     - `srcTileXY` : Tile position `{x, y}` of source.
     - `angle` : Angle in radius.
@@ -614,7 +629,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     var neighborChess = board.getNeighborChess(chess, direction); // neighborTileZ = tileZ of chess
     // var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);
     ```
-    - `chess` : A chess object, or tile position `{x,y,z}`.
+    - `chess` : A chess object, or tile position `{x, y, z}`.
     - `direction` : Number, or string number.
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
@@ -635,7 +650,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     var out = board.getNeighborChess(chess, null); // neighborTileZ = tileZ of chess
     // var out = board.getNeighborChess(chess, null, neighborTileZ);
     ```
-    - `chess` : A chess object, or tile position `{x,y,z}`.
+    - `chess` : A chess object, or tile position `{x, y, z}`.
     - `out` : Chess array of all neighbors.
 - Get direction between 2 chess
     ```javascript
@@ -644,8 +659,9 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     - `direction` : Return `null` if these 2 chess are not neighbors.
 - Are 2 chess neighbors?
    ```javascript
-   var areNeighbor = board.areNeighbors(chessA, chessB);
+   var areNeighbor = board.areNeighbors(tileA, tileB);
    ```
+   - `tileA`, `tileB` : A chess object, or tile position `{x, y}`.
    - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
 
 ### Tile at direction
@@ -655,7 +671,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     var out = board.getTileXYAtDirection(srcTileXY, direction, distance);
     // var out = board.getTileXYAtDirection(srcTileXY, direction, distance, out);
     ```
-    - `srcTileXY` : Tile position `{x, y}` of source.
+    - `srcTileXY` : A chess object, or tile position `{x, y}` of source.
     - `direction` : Number, or string number.
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
@@ -676,7 +692,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
         - Array of numbers, `[2, 3, 5]` : Array of distances.
     - `out` :
         - A single tile position, if `distance` is a number.
-        - Tile position `{x, y}` array, if `distance` is a JSON or an array.
+        - Tile position `{x, y}` array, if `distance` is a JSON or a number array.
 - Get tile positions at directions
     ```javascript
     var neighborTileXY = board.getTileXYAtDirection(srcTileXY, directions, distance);
@@ -730,10 +746,12 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
 - Has blocker at tile position (tileX, tileY, tileZ)
     ```javascript
     var hasBlocker = board.hasBlocker(tileX, tileY, tileZ);
+    // var hasBlocker = board.hasBlocker(chess);  // chess or tileXYZ
     ```
 - Any chess at (tileX, tileY) has `blocker` property
     ```javascript
     var hasBlocker = board.hasBlocker(tileX, tileY);
+    // var hasBlocker = board.hasBlocker(chess);  // chess or tileXY
     ```
 
 ### Touch events
@@ -1005,7 +1023,9 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     ```javascript
     var points = board.getGridPoints(tileX, tileY);
     // var out = board.getGridPoints(tileX, tileY, out);
+    // var points = board.getGridPoints(chess, out);  // chess or tileXY
     ```
+    - `points` :　World position `{x, y}`.
 - Draw grid polygon on [graphics object](graphics.md#lines)
     ```javascript
     graphics.strokePoints(points, true);

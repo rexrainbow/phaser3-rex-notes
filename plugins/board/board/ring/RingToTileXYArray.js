@@ -3,6 +3,7 @@ var RingToTileXYArray = function (centerTileXY, radius, out) {
         out = [];
     }
 
+    centerTileXY = this.chessToTileXYZ(centerTileXY);
     this.grid.ringToTileXYArray(centerTileXY, radius, globTileArray);
     var tileXY;
     for (var i = 0, cnt = globTileArray.length; i < cnt; i++) {
