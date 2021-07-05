@@ -4,10 +4,8 @@ import { IConfigOpen as IConfig } from './TextEdit';
 
 export { IConfig };
 
-type Edit = (
+export default function Edit(
     textObject: CanvasTextGameObjectType,
     config?: IConfig,
     onCloseCallback?: (textObject: CanvasTextGameObjectType) => void
-) => TextEdit;
-
-export default Edit;
+): TextEdit;

@@ -11,7 +11,7 @@ import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCan
 import CircularProgress from './circularprogress/CircularProgress';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
-import Chart from './chart/Chart';
+// import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 
 import Sizer from './sizer/Sizer';
@@ -35,7 +35,7 @@ import Pages from './pages/Pages';
 import TextArea from './textarea/TextArea';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel';
 import Toast from './toast/Toast';
-import Sides from './sides/Sides';
+// import Sides from './sides/Sides';
 
 import Click from './click/Click';
 import Tap from './tap/Tap';
@@ -70,7 +70,7 @@ export {
     CircleMaskImage,
     DynamicText,
     TextPlayer,
-    Chart,
+    // Chart,
     CircularProgressCanvas,
     CircularProgress,
     Knob,
@@ -98,7 +98,7 @@ export {
     TextArea,
     ScrollablePanel,
     Toast,
-    Sides,
+    // Sides,
 
     Click,
     Tap,
@@ -123,6 +123,3 @@ export {
     GetViewport,
     SetChildrenInteractive
 }
-
-import { GeomTypes as CustomShapesGeomTypes } from '../../plugins/customshapes';
-export { CustomShapesGeomTypes };

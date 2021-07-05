@@ -100,13 +100,13 @@ declare class Factories {
 export default class UIPlugin extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
-    edit: Edit;
+    edit: typeof Edit;
     getParentSizer: typeof GetParentSizer;
     getTopmostSizer: typeof GetTopmostSizer;
     hide: typeof Hide;
     show: typeof Show;
     isShown: typeof IsShown;
-    setChildrenInteractive: SetChildrenInteractive;
+    setChildrenInteractive: typeof SetChildrenInteractive;
     waitEvent: typeof WaitEvent;
     waitComplete: typeof WaitComplete;
     wrapExpandText: typeof WrapExpandText;

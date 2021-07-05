@@ -18,9 +18,7 @@ export interface IConfig {
     eventEmitter?: Phaser.Events.EventEmitter,
 }
 
-type SetChildrenInteractive = (
+export default function SetChildrenInteractive(
     gameObject: Phaser.GameObjects.GameObject,
     config?: IConfig
-) => Phaser.GameObjects.GameObject;
-
-export default SetChildrenInteractive
+): Phaser.GameObjects.GameObject;
