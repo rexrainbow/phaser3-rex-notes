@@ -52,10 +52,17 @@ export default class Board<ChessType = unknown> extends EE {
     ): this;
 
     removeChess(
-        chess: ChessType | null,
-        tileX?: number | null,
-        tileY?: number | null,
-        tileZ?: number | string | null,
+        chess: ChessType,
+        tileX?: null,
+        tileY?: null,
+        tileZ?: null,
+        destroy?: boolean
+    ): this;
+    removeChess(
+        chess: null,
+        tileX: number,
+        tileY: number,
+        tileZ: number | string,
         destroy?: boolean
     ): this;
 
@@ -98,7 +105,11 @@ export default class Board<ChessType = unknown> extends EE {
 
     tileXYArrayToChessArray(
         tileXYArray: TileXYType[],
-        tileZ?: number | string | ChessType[],
+        tileZ?: number | string,
+        out?: ChessType[]
+    ): ChessType[];
+    tileXYArrayToChessArray(
+        tileXYArray: TileXYType[],
         out?: ChessType[]
     ): ChessType[];
 
@@ -125,7 +136,7 @@ export default class Board<ChessType = unknown> extends EE {
     ): boolean;
 
     forEachTileXY(
-        callback: ((tileXY: TileXYType, board: Board<ChessType>) => void | boolean),
+        callback: (tileXY: TileXYType, board: Board<ChessType>) => void | boolean,
         scope?: unknown,
         order?: ForEachTileXYOrderTypes
     ): this;
@@ -162,15 +173,24 @@ export default class Board<ChessType = unknown> extends EE {
     filledRingToTileXYArray(
         centerTileXY: ChessType | TileXYType,
         radius: number,
-        nearToFar?: boolean | TileXYType[],
+        nearToFar?: boolean,
+        out?: TileXYType[]
+    ): TileXYType[];
+    filledRingToTileXYArray(
+        centerTileXY: ChessType | TileXYType,
+        radius: number,
         out?: TileXYType[]
     ): TileXYType[];
 
     lineToTileXYArray(
-        startWorldX: number | Line,
-        startWorldY?: number | TileXYType[],
-        endWorldX?: number,
-        endWorldY?: number,
+        line: Line,
+        out?: TileXYType[]
+    ): TileXYType[];
+    lineToTileXYArray(
+        startWorldX: number,
+        startWorldY: number,
+        endWorldX: number,
+        endWorldY: number,
         out?: TileXYType[]
     ): TileXYType[];
 
@@ -245,6 +265,11 @@ export default class Board<ChessType = unknown> extends EE {
 
     getNeighborTileXY(
         srcTileXY: ChessType | TileXYType,
+        direction: number,
+        out?: TileXYType | true
+    ): TileXYType;
+    getNeighborTileXY(
+        srcTileXY: ChessType | TileXYType,
         direction: number | number[] | string | null,
         out?: TileXYType[]
     ): TileXYType | TileXYType[];
@@ -264,7 +289,7 @@ export default class Board<ChessType = unknown> extends EE {
         tileXYZ: ChessType | TileXYType,
         direction: number | number[] | string | null,
         neighborTileZ?: number
-    ): ChessType;
+    ): ChessType | ChessType[];
 
     areNeighbors(
         tileA: ChessType | TileXYType,
@@ -299,8 +324,12 @@ export default class Board<ChessType = unknown> extends EE {
     ): boolean;
 
     getGridPoints(
-        tileX: number | ChessType | TileXYType,
-        tileY?: number | WorldXYType[],
+        tileX: number,
+        tileY?: number,
         out?: WorldXYType[]
-    ): WorldXYType;
+    ): WorldXYType[];
+    getGridPoints(
+        tileXY: ChessType | TileXYType,
+        out?: WorldXYType[]
+    ): WorldXYType[];
 }

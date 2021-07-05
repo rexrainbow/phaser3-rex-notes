@@ -20,8 +20,13 @@ export default class Match {
     constructor(config?: IConfig);
 
     setBoard(board: Board): this;
+    readonly board: Board;
+
     refreshSymbols(
-        callback: (tileXY: TileXYType, board: Board) => string | number | null,
+        callback: (
+            tileXY: TileXYType,
+            board: Board
+        ) => string | number | null,
         scope?: unknown
     ): this;
 
@@ -31,16 +36,23 @@ export default class Match {
         symbol: string | number | null
     ): this;
 
-    getSymbol(tileX: number,
+    getSymbol(
+        tileX: number,
         tileY: number
     ): string | number | null;
 
     forEach(
-        callback: (tileXY: TileXYType, symbol: string | number | null, board: Board) => void | boolean,
+        callback: (
+            tileXY: TileXYType,
+            symbol: string | number | null,
+            board: Board
+        ) => void | boolean,
         scope?: unknown
     ): this;
 
-    setWildcard(symbol: string | number): this;
+    setWildcard(
+        symbol: string | number
+    ): this;
     wildcard: string | number;
 
     setDirMask(
@@ -49,15 +61,38 @@ export default class Match {
     ): this;
 
     match(
-        n: number |
-            (string | number)[],
-        callback: (result: MatchResultType, board: Board) => void | boolean,
+        n: number,
+        callback: (
+            result: {
+                tileXY: TileXYType[],
+                direction: number,
+                pattern: string | number
+            },
+            board: Board
+        ) => void | boolean,
+        scope?: unknown
+    ): this;
+
+
+    match(
+        n: (string | number)[],
+        callback: (
+            result: {
+                tileXY: TileXYType[],
+                direction: number,
+                pattern: (string | number)[]
+            },
+            board: Board
+        ) => void | boolean,
         scope?: unknown
     ): this;
 
     anyMatch(
-        n: number |
-            (string | number)[]
+        n: number
+    ): boolean;
+
+    anyMatch(
+        n: (string | number)[]
     ): boolean;
 
     group(
