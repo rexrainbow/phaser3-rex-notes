@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import BaseGeom from './geoms/base/BaseGeom';
 
 export default class BaseShapes extends Phaser.GameObjects.Shape {

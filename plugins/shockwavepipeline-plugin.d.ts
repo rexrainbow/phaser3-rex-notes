@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import ShockwavePostFxPipeline from './shockwavepipeline';
 
 interface IConfig {

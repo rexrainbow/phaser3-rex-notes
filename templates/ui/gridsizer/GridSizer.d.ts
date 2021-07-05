@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
 import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 

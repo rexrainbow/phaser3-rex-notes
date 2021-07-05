@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Canvas from '../../canvas/canvas/Canvas';
 import { IConfigTextStyle } from './bob/char/TextStyle';
 import CharBob from './bob/char/CharData';

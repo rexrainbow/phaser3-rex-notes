@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Swipe from "./Swipe";
 import { IConfig } from '../../../plugins/input/gestures/swipe/Swipe';
 

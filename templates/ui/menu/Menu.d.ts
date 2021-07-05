@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Buttons from '../buttons/Buttons';
 import { IConfig as IConfigBase } from '../buttons/Buttons';
 

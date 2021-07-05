@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class SplitPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setSplit(x?: number, y?: number): this;

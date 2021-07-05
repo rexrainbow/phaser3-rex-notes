@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
 
 export interface TextStyle {

@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import PathBase from "./PathBase";
 
 export default class Curve extends PathBase {

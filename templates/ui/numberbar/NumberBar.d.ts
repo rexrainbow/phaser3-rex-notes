@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
 import { IConfig as IConfigBase } from '../sizer/Sizer';
 

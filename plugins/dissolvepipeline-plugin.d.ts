@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import DissolvePostFxPipeline from './dissolvepipeline';
 import { ResizeModeType } from './shaders/dissolve/DissolvePostFxPipeline'
 

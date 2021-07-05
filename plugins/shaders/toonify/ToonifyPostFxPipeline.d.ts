@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class ToonifyPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setEdgeThreshold(value: number): this;

@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export interface IConfig {
     mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',

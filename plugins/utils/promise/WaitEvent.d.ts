@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export function WaitEvent(
     eventEmitter: Phaser.Events.EventEmitter,

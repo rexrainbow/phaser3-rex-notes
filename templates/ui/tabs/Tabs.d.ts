@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import GridSizer from '../gridsizer/GridSizer';
 import { IConfig as IConfigBase } from '../gridsizer/GridSizer';
 

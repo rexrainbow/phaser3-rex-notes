@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import VirtualJoyStick from './virtualjoystick';
 import { IConfig } from './input/virtualjoystick/VirtualJoyStick';
 

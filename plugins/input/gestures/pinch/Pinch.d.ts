@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer';
 import { IConfig as IConfigBase } from '../twopointerstracer/TwoPointersTracer';
 

@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Label from '../label/Label';
 import { IConfig as IConfigBase } from '../label/Label';
 

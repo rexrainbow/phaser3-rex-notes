@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Press from "./Press";
 import { IConfig } from '../../../plugins/input/gestures/press/Press';
 

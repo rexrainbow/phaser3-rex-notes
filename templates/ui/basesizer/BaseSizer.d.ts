@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
 
 type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |

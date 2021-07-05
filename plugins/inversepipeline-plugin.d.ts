@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import InversePostFxPipeline from './inversepipeline';
 
 interface IConfig {

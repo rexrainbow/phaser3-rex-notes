@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class CrossStitchingPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setStitchingWidth(value: number): this;

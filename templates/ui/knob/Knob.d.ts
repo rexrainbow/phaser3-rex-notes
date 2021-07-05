@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import OverlapSizer from '../overlapsizer/OverlapSizer';
 import { IConfig as IConfigBase } from '../overlapsizer/OverlapSizer';
 

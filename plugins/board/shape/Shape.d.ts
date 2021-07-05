@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Board from '../board/LogicBoard';
 
 export default class Shape extends Phaser.GameObjects.Polygon {

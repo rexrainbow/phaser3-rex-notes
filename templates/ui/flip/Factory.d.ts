@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Flip from "./Flip";
 import { IConfig } from '../../../plugins/flip';
 

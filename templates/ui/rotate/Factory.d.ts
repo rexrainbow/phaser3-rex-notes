@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Rotate from "./Rotate";
 import { IConfig } from '../../../plugins/input/gestures/rotate/Rotate';
 

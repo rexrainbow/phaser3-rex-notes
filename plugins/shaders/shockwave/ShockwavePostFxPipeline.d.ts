@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class ShockwavePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setCenter(x?: number, y?: number): this;

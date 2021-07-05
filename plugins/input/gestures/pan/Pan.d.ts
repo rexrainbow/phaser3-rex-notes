@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import OnePointerTracer from '../onepointertracer/OnePointerTracer';
 import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 

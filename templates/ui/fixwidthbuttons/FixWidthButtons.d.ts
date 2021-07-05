@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
 import { IConfig as IConfigBase } from '../fixwidthsizer/FixWidthSizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';

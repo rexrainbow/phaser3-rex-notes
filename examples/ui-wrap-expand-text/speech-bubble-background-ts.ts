@@ -1,6 +1,6 @@
 import 'phaser';
-import UIPlugin from '../../templates/ui/ui-plugin.js';
-import { CustomShapes, CustomShapesGeomTypes } from '../../templates/ui/ui-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin';
+import { CustomShapes, CustomShapesGeomTypes } from '../../templates/ui/ui-components';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;

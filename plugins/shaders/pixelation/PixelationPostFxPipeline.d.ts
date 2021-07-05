@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class PixelationPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setPixelSize(width: number, height?: number): this;

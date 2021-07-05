@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
 import { IConfig as IConfigBase } from '../utils/scrollable/Scrollable';
 

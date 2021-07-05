@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import GlowFilterPostFxPipeline from './glowfilterpipeline';
 
 export interface IConfig {

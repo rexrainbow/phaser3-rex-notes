@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export default class HslAdjustPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setHueRotate(value: number): this;

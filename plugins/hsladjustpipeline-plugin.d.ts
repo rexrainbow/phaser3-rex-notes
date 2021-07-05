@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import HslAdjustPostFxPipeline from './hsladjustpipeline';
 
 interface IConfig {

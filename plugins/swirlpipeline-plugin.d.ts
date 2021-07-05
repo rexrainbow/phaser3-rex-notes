@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import SwirlPostFxPipeline from './swirlpipeline';
 
 interface IConfig {

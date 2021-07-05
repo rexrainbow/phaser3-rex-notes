@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export type ResizeModeType = 0 | 1 | 2 | 'stretch' | 'contain' | 'cover';
 

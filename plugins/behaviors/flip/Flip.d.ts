@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 type FaceTypes = 0 | 1 | 'front' | 'back';
 

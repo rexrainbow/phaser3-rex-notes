@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import DynamicText from "../dynamictext/DynamicText";
 import {
     IConfig as IConfigBase,

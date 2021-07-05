@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import FaceContainer from '../utils/FaceContainer';
 import Image from '../image/Image';
 import RenderTexture from '../rendertexture/RenderTexture';

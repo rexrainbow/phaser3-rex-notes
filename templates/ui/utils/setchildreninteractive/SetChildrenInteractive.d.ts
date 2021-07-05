@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import { IConfig as IConfigClick } from '../../../../plugins/button';
 import { IConfig as IConfigTap } from '../../../../plugins/input/gestures/tap/Tap';
 import { IConfig as IConfigPress } from '../../../../plugins/input/gestures/press/Press';

@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 
 export interface IRadiusConfig {
     tl?: (number | { x?: number, y?: number }),

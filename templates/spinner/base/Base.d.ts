@@ -1,4 +1,4 @@
-import * as Phaser from 'phaser';
+// import * as Phaser from 'phaser';
 import BaseShape from '../../../plugins/gameobjects/shape/shapes/BaseShapes';
 
 export interface IConfig {
