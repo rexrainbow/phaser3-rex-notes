@@ -7,7 +7,7 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
         dirMask = this.dirMask;
     var width = board.width,
         height = board.height;
-    var result;
+    var result, isBreak;
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
         dir = directions[i];
         if (dirMask[dir] === false) {
@@ -23,14 +23,22 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
 
                 if (callback) {
                     if (scope) {
-                        callback.call(scope, result, board);
+                        isBreak = callback.call(scope, result, board);
                     } else {
-                        callback(result, board);
+                        isBreak = callback(result, board);
                     }
                 }
                 if (getFirst) {
                     return result;
                 }
+
+                if (isBreak) {
+                    break;
+                }
+            }
+
+            if (isBreak) {
+                break;
             }
         }
     }

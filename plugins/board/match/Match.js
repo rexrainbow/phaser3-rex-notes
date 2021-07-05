@@ -83,13 +83,17 @@ class Match {
     forEach(callback, scope) {
         var board = this.board;
         var tileXY, symbol;
+        var isBreak;
         for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
             symbol = this.symbols[i];
             tileXY = this.keyToTileXY(i);
             if (scope) {
-                callback.call(scope, tileXY, symbol, board);
+                isBreak = callback.call(scope, tileXY, symbol, board);
             } else {
-                callback(tileXY, symbol, board);
+                isBreak = callback(tileXY, symbol, board);
+            }
+            if (isBreak) {
+                break;
             }
         }
         return this;

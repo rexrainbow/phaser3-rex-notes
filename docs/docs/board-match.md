@@ -169,6 +169,7 @@ var symbol = match.getSymbol(tileX, tileY);
 
 ```javascript
 match.forEach(function(tileXY, symbol, board) {
+    // return true; // Break for each loop
 }, scope)
 ```
 
@@ -214,6 +215,8 @@ match.setDirMask(dir, value);
 match.match(n, function (result, board) {
     // var chess = board.tileXYArrayToChess(result.tileXY, 0);
     // GroupCall(chess, function (chess) { chess.setScale(0.8); });
+
+    // return true; // Break for each loop
 }, scope);
 ```
 

@@ -102,4 +102,4 @@ Grid (polygon) shape object.
 
 ### Other properties
 
-See [game object](gameobject.md)
+See [polygon shape game object](shape-polygon.md), [game object](gameobject.md)
