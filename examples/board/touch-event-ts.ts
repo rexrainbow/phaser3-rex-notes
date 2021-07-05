@@ -35,11 +35,16 @@ class Demo extends Phaser.Scene {
             height: 20
         })
             .forEachTileXY(function (tileXY, board) {
-                var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff), 0.7);
+                var scene = board.scene as Demo;
+                var chess = scene.rexBoard.add.shape(
+                    board,
+                    tileXY.x, tileXY.y, 0,
+                    Random(0, 0xffffff), 0.7
+                );
                 this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
                     .setOrigin(0.5)
                     .setTint(0x0);
-            }, this);
+            });
 
         board
             .setInteractive()

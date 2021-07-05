@@ -26,7 +26,7 @@ class Shape extends Base {
             worldY = tileY;
         }
         var points = board.getGridPoints(undefined, undefined, true);
-        shiftToO(points);
+        ShiftToO(points);
         super(scene, worldX, worldY, points, fillColor, fillAlpha);
 
         if (addToBoard) {
@@ -41,7 +41,7 @@ class Shape extends Base {
     }
 }
 
-var shiftToO = function (points) {
+var ShiftToO = function (points) {
     var minX = Infinity;
     var minY = Infinity;
     var point;
