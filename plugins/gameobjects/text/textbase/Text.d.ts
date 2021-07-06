@@ -3,7 +3,7 @@ import CanvasGameObjectBase from '../../../utils/types/CanvasGameObjectBase';
 
 export interface TextStyle {
     fontFamily?: string,
-    fontSiz?: string,
+    fontSize?: string,
     fontStyle?: string,
 
     backgroundColor?: null | string | number,
@@ -25,8 +25,8 @@ export interface TextStyle {
         offsetY?: number,
         color?: number | string,
         blur?: number,
-        stroke: false,
-        fill: false
+        stroke?: false,
+        fill?: false
     },
 
     underline?: {
