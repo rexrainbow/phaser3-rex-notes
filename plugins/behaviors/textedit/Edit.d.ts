@@ -1,11 +1,10 @@
 import TextEdit from './TextEdit';
-import { CanvasTextGameObjectType } from '../../utils/types/TextGameObjectType';
 import { IConfigOpen as IConfig } from './TextEdit';
 
 export { IConfig };
 
 export default function Edit(
-    textObject: CanvasTextGameObjectType,
+    textObject: Phaser.GameObjects.GameObject,
     config?: IConfig,
-    onCloseCallback?: (textObject: CanvasTextGameObjectType) => void
+    onCloseCallback?: (textObject: Phaser.GameObjects.GameObject) => void
 ): TextEdit;

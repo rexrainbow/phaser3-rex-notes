@@ -1,6 +1,4 @@
-import { TextGameObjectType } from '../../../../plugins/utils/types/TextGameObjectType'
-
 export default function (
-    textObject: TextGameObjectType,
+    textObject: Phaser.GameObjects.GameObject,
     minWidth?: number
-): TextGameObjectType;
+): Phaser.GameObjects.GameObject;
