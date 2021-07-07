@@ -22,4 +22,4 @@ var NormalX = function (line)
     return Math.cos(Angle(line) - MATH_CONST.TAU);
 };
 
-module.exports = NormalX;
+export default NormalX;

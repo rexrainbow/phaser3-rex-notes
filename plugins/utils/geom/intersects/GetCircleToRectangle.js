@@ -41,4 +41,4 @@ var GetCircleToRectangle = function (circle, rect, out)
     return out;
 };
 
-module.exports = GetCircleToRectangle;
+export default GetCircleToRectangle;

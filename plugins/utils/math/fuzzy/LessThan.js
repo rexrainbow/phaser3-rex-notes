@@ -25,4 +25,4 @@ var LessThan = function (a, b, epsilon)
     return a < b + epsilon;
 };
 
-module.exports = LessThan;
+export default LessThan;

@@ -31,4 +31,4 @@ Triangle.Rotate = require('./Rotate');
 Triangle.RotateAroundPoint = require('./RotateAroundPoint');
 Triangle.RotateAroundXY = require('./RotateAroundXY');
 
-module.exports = Triangle;
+export default Triangle;

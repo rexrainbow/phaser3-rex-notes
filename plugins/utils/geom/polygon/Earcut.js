@@ -26,7 +26,7 @@
 
 'use strict';
 
-module.exports = earcut;
+export default earcut;
 
 function earcut(data, holeIndices, dim) {
 

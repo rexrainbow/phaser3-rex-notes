@@ -42,4 +42,4 @@ var Intersection = function (rectA, rectB, out)
     return out;
 };
 
-module.exports = Intersection;
+export default Intersection;

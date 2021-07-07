@@ -33,4 +33,4 @@ var CircumferencePoint = function (ellipse, angle, out)
     return out;
 };
 
-module.exports = CircumferencePoint;
+export default CircumferencePoint;

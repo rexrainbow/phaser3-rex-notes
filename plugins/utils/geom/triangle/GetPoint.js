@@ -78,4 +78,4 @@ var GetPoint = function (triangle, position, out)
     return out;
 };
 
-module.exports = GetPoint;
+export default GetPoint;

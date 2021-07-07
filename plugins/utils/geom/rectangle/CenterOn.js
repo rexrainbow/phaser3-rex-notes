@@ -28,4 +28,4 @@ var CenterOn = function (rect, x, y)
     return rect;
 };
 
-module.exports = CenterOn;
+export default CenterOn;

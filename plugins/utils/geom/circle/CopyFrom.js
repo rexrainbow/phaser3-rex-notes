@@ -23,4 +23,4 @@ var CopyFrom = function (source, dest)
     return dest.setTo(source.x, source.y, source.radius);
 };
 
-module.exports = CopyFrom;
+export default CopyFrom;

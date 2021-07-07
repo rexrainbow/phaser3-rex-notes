@@ -32,4 +32,4 @@ var Random = function (ellipse, out)
     return out;
 };
 
-module.exports = Random;
+export default Random;

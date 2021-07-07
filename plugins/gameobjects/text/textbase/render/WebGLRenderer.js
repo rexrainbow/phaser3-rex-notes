@@ -64,4 +64,4 @@ var TextWebGLRenderer = function (renderer, src, camera, parentMatrix) {
     renderer.pipelines.postBatch(src);
 };
 
-module.exports = TextWebGLRenderer;
+export default  TextWebGLRenderer;

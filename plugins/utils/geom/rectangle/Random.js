@@ -29,4 +29,4 @@ var Random = function (rect, out)
     return out;
 };
 
-module.exports = Random;
+export default Random;

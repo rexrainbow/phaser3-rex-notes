@@ -33,4 +33,4 @@ var Inflate = function (rect, x, y)
     return CenterOn(rect, cx, cy);
 };
 
-module.exports = Inflate;
+export default Inflate;

@@ -26,4 +26,4 @@ var FloorAll = function (rect)
     return rect;
 };
 
-module.exports = FloorAll;
+export default FloorAll;

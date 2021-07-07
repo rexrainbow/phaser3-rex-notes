@@ -630,4 +630,4 @@ Vector2.DOWN = new Vector2(0, 1);
  */
 Vector2.ONE = new Vector2(1, 1);
 
-module.exports = Vector2;
+export default Vector2;

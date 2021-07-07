@@ -63,4 +63,4 @@ var MATH_CONST = {
 
 };
 
-module.exports = MATH_CONST;
+export default MATH_CONST;

@@ -22,4 +22,4 @@ var Floor = function (value, epsilon)
     return Math.floor(value + epsilon);
 };
 
-module.exports = Floor;
+export default Floor;

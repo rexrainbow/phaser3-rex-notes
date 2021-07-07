@@ -25,4 +25,4 @@ var Area = function (ellipse)
     return (ellipse.getMajorRadius() * ellipse.getMinorRadius() * Math.PI);
 };
 
-module.exports = Area;
+export default Area;

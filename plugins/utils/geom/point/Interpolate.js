@@ -32,4 +32,4 @@ var Interpolate = function (pointA, pointB, t, out)
     return out;
 };
 
-module.exports = Interpolate;
+export default Interpolate;

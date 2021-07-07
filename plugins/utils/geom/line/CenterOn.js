@@ -31,4 +31,4 @@ var CenterOn = function (line, x, y)
     return line;
 };
 
-module.exports = CenterOn;
+export default CenterOn;

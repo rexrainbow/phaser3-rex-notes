@@ -34,4 +34,4 @@ var GetFastValue = function (source, key, defaultValue)
     }
 };
 
-module.exports = GetFastValue;
+export default GetFastValue;

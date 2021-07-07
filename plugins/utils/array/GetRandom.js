@@ -26,4 +26,4 @@ var GetRandom = function (array, startIndex, length)
     return (array[randomIndex] === undefined) ? null : array[randomIndex];
 };
 
-module.exports = GetRandom;
+export default GetRandom;

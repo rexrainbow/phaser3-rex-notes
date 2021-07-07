@@ -40,4 +40,4 @@ var GetTriangleToTriangle = function (triangleA, triangleB, out)
     return out;
 };
 
-module.exports = GetTriangleToTriangle;
+export default GetTriangleToTriangle;

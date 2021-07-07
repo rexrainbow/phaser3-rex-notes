@@ -31,4 +31,4 @@ var SetToAngle = function (line, x, y, angle, length)
     return line;
 };
 
-module.exports = SetToAngle;
+export default SetToAngle;

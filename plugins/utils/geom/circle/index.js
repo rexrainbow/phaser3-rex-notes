@@ -22,4 +22,4 @@ Circle.Offset = require('./Offset');
 Circle.OffsetPoint = require('./OffsetPoint');
 Circle.Random = require('./Random');
 
-module.exports = Circle;
+export default Circle;

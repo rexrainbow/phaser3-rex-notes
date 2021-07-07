@@ -84,4 +84,4 @@ var RectangleToTriangle = function (rect, triangle)
     return (within.length > 0);
 };
 
-module.exports = RectangleToTriangle;
+export default RectangleToTriangle;

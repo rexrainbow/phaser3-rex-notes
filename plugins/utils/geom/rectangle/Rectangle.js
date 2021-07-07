@@ -490,4 +490,4 @@ var Rectangle = new Class({
 
 });
 
-module.exports = Rectangle;
+export default Rectangle;

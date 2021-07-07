@@ -40,4 +40,4 @@ var ShortestBetween = function (angle1, angle2)
 
 };
 
-module.exports = ShortestBetween;
+export default ShortestBetween;

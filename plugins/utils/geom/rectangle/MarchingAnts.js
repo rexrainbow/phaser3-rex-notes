@@ -110,4 +110,4 @@ var MarchingAnts = function (rect, step, quantity, out)
     return out;
 };
 
-module.exports = MarchingAnts;
+export default MarchingAnts;

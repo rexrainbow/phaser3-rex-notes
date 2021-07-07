@@ -29,4 +29,4 @@ var Offset = function (line, x, y)
     return line;
 };
 
-module.exports = Offset;
+export default Offset;

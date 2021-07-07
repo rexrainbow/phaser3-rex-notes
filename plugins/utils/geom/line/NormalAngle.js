@@ -25,4 +25,4 @@ var NormalAngle = function (line)
     return Wrap(angle, -Math.PI, Math.PI);
 };
 
-module.exports = NormalAngle;
+export default NormalAngle;

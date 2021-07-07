@@ -75,4 +75,4 @@ var LineToCircle = function (line, circle, nearest)
     );
 };
 
-module.exports = LineToCircle;
+export default LineToCircle;

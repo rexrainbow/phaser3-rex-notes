@@ -27,4 +27,4 @@ var Equals = function (triangle, toCompare)
     );
 };
 
-module.exports = Equals;
+export default Equals;

@@ -44,4 +44,4 @@ var FitInside = function (target, source)
     );
 };
 
-module.exports = FitInside;
+export default FitInside;

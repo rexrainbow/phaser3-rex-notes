@@ -27,4 +27,4 @@ var Rotate = function (line, angle)
     return RotateAroundXY(line, x, y, angle);
 };
 
-module.exports = Rotate;
+export default Rotate;

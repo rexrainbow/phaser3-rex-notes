@@ -31,4 +31,4 @@ var Random = function (line, out)
     return out;
 };
 
-module.exports = Random;
+export default Random;

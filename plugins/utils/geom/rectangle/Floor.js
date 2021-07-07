@@ -24,4 +24,4 @@ var Floor = function (rect)
     return rect;
 };
 
-module.exports = Floor;
+export default Floor;

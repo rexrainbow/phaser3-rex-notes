@@ -40,4 +40,4 @@ var Contains = function (polygon, x, y)
     return inside;
 };
 
-module.exports = Contains;
+export default Contains;

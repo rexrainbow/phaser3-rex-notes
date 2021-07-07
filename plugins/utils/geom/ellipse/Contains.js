@@ -33,4 +33,4 @@ var Contains = function (ellipse, x, y)
     return (normx + normy < 0.25);
 };
 
-module.exports = Contains;
+export default Contains;

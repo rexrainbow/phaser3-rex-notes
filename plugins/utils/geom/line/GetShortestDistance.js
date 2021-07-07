@@ -38,4 +38,4 @@ var GetShortestDistance = function (line, point)
     return Math.abs(s) * Math.sqrt(L2);
 };
 
-module.exports = GetShortestDistance;
+export default GetShortestDistance;

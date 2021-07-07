@@ -8,7 +8,7 @@
  * @namespace Phaser.Geom
  */
 
-module.exports = {
+export default {
     
     Circle: require('./circle'),
     Ellipse: require('./ellipse'),

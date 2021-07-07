@@ -26,4 +26,4 @@ var CeilAll = function (rect)
     return rect;
 };
 
-module.exports = CeilAll;
+export default CeilAll;

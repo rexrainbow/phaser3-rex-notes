@@ -50,4 +50,4 @@ var GetTriangleToLine = function (triangle, line, out)
     return out;
 };
 
-module.exports = GetTriangleToLine;
+export default GetTriangleToLine;

@@ -44,4 +44,4 @@ var FitOutside = function (target, source)
     );
 };
 
-module.exports = FitOutside;
+export default FitOutside;

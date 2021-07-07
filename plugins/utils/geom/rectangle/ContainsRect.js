@@ -31,4 +31,4 @@ var ContainsRect = function (rectA, rectB)
     );
 };
 
-module.exports = ContainsRect;
+export default ContainsRect;

@@ -33,4 +33,4 @@ var Union = function (rectA, rectB, out)
     return out.setTo(x, y, w, h);
 };
 
-module.exports = Union;
+export default Union;

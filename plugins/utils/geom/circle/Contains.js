@@ -32,4 +32,4 @@ var Contains = function (circle, x, y)
     }
 };
 
-module.exports = Contains;
+export default Contains;

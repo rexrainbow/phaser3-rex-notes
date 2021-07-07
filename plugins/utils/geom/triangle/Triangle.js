@@ -426,4 +426,4 @@ var Triangle = new Class({
 
 });
 
-module.exports = Triangle;
+export default Triangle;

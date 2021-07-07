@@ -29,4 +29,4 @@ var TextCanvasRenderer = function (renderer, src, camera, parentMatrix) {
     renderer.batchSprite(src, src.frame, camera, parentMatrix);
 };
 
-module.exports = TextCanvasRenderer;
+export default TextCanvasRenderer;

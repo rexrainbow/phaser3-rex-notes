@@ -28,4 +28,4 @@ var Decompose = function (rect, out)
     return out;
 };
 
-module.exports = Decompose;
+export default Decompose;

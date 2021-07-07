@@ -32,4 +32,4 @@ var Offset = function (triangle, x, y)
     return triangle;
 };
 
-module.exports = Offset;
+export default Offset;

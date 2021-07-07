@@ -40,4 +40,4 @@ var FillPathWebGL = function (pipeline, calcMatrix, src, alpha, dx, dy)
     }
 };
 
-module.exports = FillPathWebGL;
+export default FillPathWebGL;

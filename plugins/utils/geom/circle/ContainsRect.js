@@ -27,4 +27,4 @@ var ContainsRect = function (circle, rect)
     );
 };
 
-module.exports = ContainsRect;
+export default ContainsRect;

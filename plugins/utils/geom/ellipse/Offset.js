@@ -26,4 +26,4 @@ var Offset = function (ellipse, x, y)
     return ellipse;
 };
 
-module.exports = Offset;
+export default Offset;

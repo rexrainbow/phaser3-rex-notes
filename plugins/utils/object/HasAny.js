@@ -28,4 +28,4 @@ var HasAny = function (source, keys)
     return false;
 };
 
-module.exports = HasAny;
+export default HasAny;

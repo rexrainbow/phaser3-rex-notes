@@ -78,4 +78,4 @@ var GetAdvancedValue = function (source, key, defaultValue)
     return value;
 };
 
-module.exports = GetAdvancedValue;
+export default GetAdvancedValue;

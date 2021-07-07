@@ -212,4 +212,4 @@ var Polygon = new Class({
 
 });
 
-module.exports = Polygon;
+export default Polygon;

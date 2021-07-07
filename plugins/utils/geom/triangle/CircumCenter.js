@@ -67,4 +67,4 @@ var CircumCenter = function (triangle, out)
     return out;
 };
 
-module.exports = CircumCenter;
+export default CircumCenter;

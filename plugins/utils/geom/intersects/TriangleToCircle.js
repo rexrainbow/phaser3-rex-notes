@@ -56,4 +56,4 @@ var TriangleToCircle = function (triangle, circle)
     return false;
 };
 
-module.exports = TriangleToCircle;
+export default TriangleToCircle;

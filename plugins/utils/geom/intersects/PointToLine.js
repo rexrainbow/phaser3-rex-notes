@@ -61,4 +61,4 @@ var PointToLine = function (point, line, lineThickness)
     }
 };
 
-module.exports = PointToLine;
+export default PointToLine;

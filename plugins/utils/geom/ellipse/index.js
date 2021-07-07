@@ -22,4 +22,4 @@ Ellipse.Offset = require('./Offset');
 Ellipse.OffsetPoint = require('./OffsetPoint');
 Ellipse.Random = require('./Random');
 
-module.exports = Ellipse;
+export default Ellipse;

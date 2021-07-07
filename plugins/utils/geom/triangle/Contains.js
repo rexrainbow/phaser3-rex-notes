@@ -44,4 +44,4 @@ var Contains = function (triangle, x, y)
     return (u >= 0 && v >= 0 && (u + v < 1));
 };
 
-module.exports = Contains;
+export default Contains;

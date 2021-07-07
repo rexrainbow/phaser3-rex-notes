@@ -22,4 +22,4 @@ var Ceil = function (value, epsilon)
     return Math.ceil(value - epsilon);
 };
 
-module.exports = Ceil;
+export default Ceil;

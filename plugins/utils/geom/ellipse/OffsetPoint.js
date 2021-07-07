@@ -25,4 +25,4 @@ var OffsetPoint = function (ellipse, point)
     return ellipse;
 };
 
-module.exports = OffsetPoint;
+export default OffsetPoint;

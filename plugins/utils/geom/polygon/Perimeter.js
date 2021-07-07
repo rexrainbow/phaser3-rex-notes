@@ -39,4 +39,4 @@ var Perimeter = function (polygon)
     return perimeter;
 };
 
-module.exports = Perimeter;
+export default Perimeter;

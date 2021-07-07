@@ -67,4 +67,4 @@ var Smooth = function (polygon)
     return polygon.setTo(output);
 };
 
-module.exports = Smooth;
+export default Smooth;

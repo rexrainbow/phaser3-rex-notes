@@ -40,4 +40,4 @@ var BuildRight = function (x, y, width, height)
     return new Triangle(x1, y1, x2, y2, x3, y3);
 };
 
-module.exports = BuildRight;
+export default BuildRight;

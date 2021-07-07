@@ -25,4 +25,4 @@ var GreaterThan = function (a, b, epsilon)
     return a > b - epsilon;
 };
 
-module.exports = GreaterThan;
+export default GreaterThan;

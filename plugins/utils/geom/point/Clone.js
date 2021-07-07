@@ -21,4 +21,4 @@ var Clone = function (source)
     return new Point(source.x, source.y);
 };
 
-module.exports = Clone;
+export default Clone;

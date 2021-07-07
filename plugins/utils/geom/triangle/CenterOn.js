@@ -44,4 +44,4 @@ var CenterOn = function (triangle, x, y, centerFunc)
     return Offset(triangle, diffX, diffY);
 };
 
-module.exports = CenterOn;
+export default CenterOn;

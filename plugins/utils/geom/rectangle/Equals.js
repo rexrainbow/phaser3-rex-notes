@@ -25,4 +25,4 @@ var Equals = function (rect, toCompare)
     );
 };
 
-module.exports = Equals;
+export default Equals;

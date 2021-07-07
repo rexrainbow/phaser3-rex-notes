@@ -26,4 +26,4 @@ var UUID = function ()
     });
 };
 
-module.exports = UUID;
+export default UUID;

@@ -24,4 +24,4 @@ var Ceil = function (rect)
     return rect;
 };
 
-module.exports = Ceil;
+export default Ceil;

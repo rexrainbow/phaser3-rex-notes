@@ -67,4 +67,4 @@ var LineToLine = function (line1, line2, out)
     return false;
 };
 
-module.exports = LineToLine;
+export default LineToLine;

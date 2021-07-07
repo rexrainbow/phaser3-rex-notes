@@ -35,4 +35,4 @@ var SetMagnitude = function (point, magnitude)
     return point;
 };
 
-module.exports = SetMagnitude;
+export default SetMagnitude;

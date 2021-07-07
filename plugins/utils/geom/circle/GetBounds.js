@@ -31,4 +31,4 @@ var GetBounds = function (circle, out)
     return out;
 };
 
-module.exports = GetBounds;
+export default GetBounds;

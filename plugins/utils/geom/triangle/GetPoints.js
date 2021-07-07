@@ -84,4 +84,4 @@ var GetPoints = function (triangle, quantity, stepRate, out)
     return out;
 };
 
-module.exports = GetPoints;
+export default GetPoints;

@@ -40,4 +40,4 @@ var MergePoints = function (target, points)
     return target;
 };
 
-module.exports = MergePoints;
+export default MergePoints;

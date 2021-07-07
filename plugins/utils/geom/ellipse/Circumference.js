@@ -23,4 +23,4 @@ var Circumference = function (ellipse)
     return (Math.PI * (rx + ry)) * (1 + ((3 * h) / (10 + Math.sqrt(4 - (3 * h)))));
 };
 
-module.exports = Circumference;
+export default Circumference;

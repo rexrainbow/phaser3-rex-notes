@@ -38,4 +38,4 @@ var MergeRect = function (target, source)
     return target;
 };
 
-module.exports = MergeRect;
+export default MergeRect;

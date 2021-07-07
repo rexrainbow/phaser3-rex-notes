@@ -74,4 +74,4 @@ var CircumCircle = function (triangle, out)
     return out;
 };
 
-module.exports = CircumCircle;
+export default CircumCircle;

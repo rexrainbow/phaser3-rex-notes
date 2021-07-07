@@ -359,4 +359,4 @@ var Ellipse = new Class({
 
 });
 
-module.exports = Ellipse;
+export default Ellipse;

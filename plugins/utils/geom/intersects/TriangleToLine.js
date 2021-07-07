@@ -47,4 +47,4 @@ var TriangleToLine = function (triangle, line)
     return false;
 };
 
-module.exports = TriangleToLine;
+export default TriangleToLine;

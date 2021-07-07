@@ -65,4 +65,4 @@ var BresenhamPoints = function (line, stepRate, results)
     return results;
 };
 
-module.exports = BresenhamPoints;
+export default BresenhamPoints;

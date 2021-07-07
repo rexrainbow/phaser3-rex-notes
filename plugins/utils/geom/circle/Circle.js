@@ -354,4 +354,4 @@ var Circle = new Class({
 
 });
 
-module.exports = Circle;
+export default Circle;

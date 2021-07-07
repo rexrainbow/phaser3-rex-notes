@@ -23,4 +23,4 @@ var Reverse = function (polygon)
     return polygon;
 };
 
-module.exports = Reverse;
+export default Reverse;

@@ -68,4 +68,4 @@ var GetPoints = function (polygon, quantity, stepRate, out)
     return out;
 };
 
-module.exports = GetPoints;
+export default GetPoints;

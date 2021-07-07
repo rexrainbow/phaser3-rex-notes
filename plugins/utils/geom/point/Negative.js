@@ -26,4 +26,4 @@ var Negative = function (point, out)
     return out.setTo(-point.x, -point.y);
 };
 
-module.exports = Negative;
+export default Negative;

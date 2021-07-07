@@ -245,4 +245,4 @@ Class.extend = extend;
 Class.mixin = mixin;
 Class.ignoreFinals = false;
 
-module.exports = Class;
+export default Class;

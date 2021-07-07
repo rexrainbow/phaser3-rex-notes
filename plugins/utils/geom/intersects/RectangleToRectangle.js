@@ -27,4 +27,4 @@ var RectangleToRectangle = function (rectA, rectB)
     return !(rectA.right < rectB.x || rectA.bottom < rectB.y || rectA.x > rectB.right || rectA.y > rectB.bottom);
 };
 
-module.exports = RectangleToRectangle;
+export default RectangleToRectangle;

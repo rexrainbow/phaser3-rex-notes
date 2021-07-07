@@ -26,4 +26,4 @@ var Equals = function (ellipse, toCompare)
     );
 };
 
-module.exports = Equals;
+export default Equals;

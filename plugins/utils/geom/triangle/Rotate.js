@@ -27,4 +27,4 @@ var Rotate = function (triangle, angle)
     return RotateAroundXY(triangle, point.x, point.y, angle);
 };
 
-module.exports = Rotate;
+export default Rotate;

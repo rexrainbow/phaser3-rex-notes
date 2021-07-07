@@ -25,4 +25,4 @@ var Overlaps = function (rectA, rectB)
     );
 };
 
-module.exports = Overlaps;
+export default Overlaps;

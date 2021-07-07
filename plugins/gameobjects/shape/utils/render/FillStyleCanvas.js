@@ -10,4 +10,4 @@ var FillStyleCanvas = function (ctx, src, altColor, altAlpha)
     ctx.fillStyle = 'rgba(' + red + ',' + green + ',' + blue + ',' + fillAlpha + ')';
 };
 
-module.exports = FillStyleCanvas;
+export default FillStyleCanvas;

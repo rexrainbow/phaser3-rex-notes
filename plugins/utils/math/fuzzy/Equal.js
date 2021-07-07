@@ -25,4 +25,4 @@ var Equal = function (a, b, epsilon)
     return Math.abs(a - b) < epsilon;
 };
 
-module.exports = Equal;
+export default Equal;

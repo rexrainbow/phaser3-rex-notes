@@ -30,4 +30,4 @@ var GetPoint = function (line, position, out)
     return out;
 };
 
-module.exports = GetPoint;
+export default GetPoint;

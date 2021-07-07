@@ -25,4 +25,4 @@ var OffsetPoint = function (rect, point)
     return rect;
 };
 
-module.exports = OffsetPoint;
+export default OffsetPoint;

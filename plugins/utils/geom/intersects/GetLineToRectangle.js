@@ -51,4 +51,4 @@ var GetLineToRectangle = function (line, rect, out)
     return out;
 };
 
-module.exports = GetLineToRectangle;
+export default GetLineToRectangle;

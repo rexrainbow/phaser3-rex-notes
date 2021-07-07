@@ -30,4 +30,4 @@ var Area = function (triangle)
     return Math.abs(((x3 - x1) * (y2 - y1) - (x2 - x1) * (y3 - y1)) / 2);
 };
 
-module.exports = Area;
+export default Area;

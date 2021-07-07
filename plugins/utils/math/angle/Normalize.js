@@ -28,4 +28,4 @@ var Normalize = function (angle)
     }
 };
 
-module.exports = Normalize;
+export default Normalize;

@@ -45,4 +45,4 @@ var GetPoints = function (ellipse, quantity, stepRate, out)
     return out;
 };
 
-module.exports = GetPoints;
+export default GetPoints;

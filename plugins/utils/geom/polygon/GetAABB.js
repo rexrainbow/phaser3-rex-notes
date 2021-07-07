@@ -47,4 +47,4 @@ var GetAABB = function (polygon, out)
     return out;
 };
 
-module.exports = GetAABB;
+export default GetAABB;

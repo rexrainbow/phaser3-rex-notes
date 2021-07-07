@@ -35,4 +35,4 @@ Line.SetToAngle = require('./SetToAngle');
 Line.Slope = require('./Slope');
 Line.Width = require('./Width');
 
-module.exports = Line;
+export default Line;

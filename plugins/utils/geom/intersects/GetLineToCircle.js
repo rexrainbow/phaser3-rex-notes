@@ -83,4 +83,4 @@ var GetLineToCircle = function (line, circle, out)
     return out;
 };
 
-module.exports = GetLineToCircle;
+export default GetLineToCircle;

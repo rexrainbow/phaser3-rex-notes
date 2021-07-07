@@ -23,4 +23,4 @@ var Wrap = function (value, min, max)
     return (min + ((((value - min) % range) + range) % range));
 };
 
-module.exports = Wrap;
+export default Wrap;

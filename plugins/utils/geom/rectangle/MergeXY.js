@@ -35,4 +35,4 @@ var MergeXY = function (target, x, y)
     return target;
 };
 
-module.exports = MergeXY;
+export default MergeXY;

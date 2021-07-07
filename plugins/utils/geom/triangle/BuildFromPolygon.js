@@ -66,4 +66,4 @@ var BuildFromPolygon = function (data, holes, scaleX, scaleY, out)
     return out;
 };
 
-module.exports = BuildFromPolygon;
+export default BuildFromPolygon;

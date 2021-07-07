@@ -31,4 +31,4 @@ var RectangleToValues = function (rect, left, right, top, bottom, tolerance)
     );
 };
 
-module.exports = RectangleToValues;
+export default RectangleToValues;

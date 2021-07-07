@@ -21,4 +21,4 @@ var DegToRad = function (degrees)
     return degrees * DEG_TO_RAD;
 };
 
-module.exports = DegToRad;
+export default DegToRad;

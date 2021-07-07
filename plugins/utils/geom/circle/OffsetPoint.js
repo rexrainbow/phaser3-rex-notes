@@ -25,4 +25,4 @@ var OffsetPoint = function (circle, point)
     return circle;
 };
 
-module.exports = OffsetPoint;
+export default OffsetPoint;

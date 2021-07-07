@@ -28,4 +28,4 @@ var HasAll = function (source, keys)
     return true;
 };
 
-module.exports = HasAll;
+export default HasAll;

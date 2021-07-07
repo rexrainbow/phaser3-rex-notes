@@ -8,7 +8,7 @@
  * @namespace Phaser.Geom.Intersects
  */
 
-module.exports = {
+export default {
 
     CircleToCircle: require('./CircleToCircle'),
     CircleToRectangle: require('./CircleToRectangle'),

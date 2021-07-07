@@ -78,4 +78,4 @@ var ContainsArray = function (triangle, points, returnFirst, out)
     return out;
 };
 
-module.exports = ContainsArray;
+export default ContainsArray;

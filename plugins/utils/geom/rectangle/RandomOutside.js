@@ -62,4 +62,4 @@ var RandomOutside = function (outer, inner, out)
     return out;
 };
 
-module.exports = RandomOutside;
+export default RandomOutside;

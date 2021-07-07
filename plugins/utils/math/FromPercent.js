@@ -25,4 +25,4 @@ var FromPercent = function (percent, min, max)
     return (max - min) * percent;
 };
 
-module.exports = FromPercent;
+export default FromPercent;

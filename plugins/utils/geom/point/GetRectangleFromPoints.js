@@ -61,4 +61,4 @@ var GetRectangleFromPoints = function (points, out)
     return out;
 };
 
-module.exports = GetRectangleFromPoints;
+export default GetRectangleFromPoints;

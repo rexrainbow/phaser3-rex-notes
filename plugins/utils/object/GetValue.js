@@ -62,4 +62,4 @@ var GetValue = function (source, key, defaultValue)
     }
 };
 
-module.exports = GetValue;
+export default GetValue;

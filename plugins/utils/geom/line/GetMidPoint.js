@@ -29,4 +29,4 @@ var GetMidPoint = function (line, out)
     return out;
 };
 
-module.exports = GetMidPoint;
+export default GetMidPoint;

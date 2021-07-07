@@ -40,4 +40,4 @@ var GetTriangleToCircle = function (triangle, circle, out)
     return out;
 };
 
-module.exports = GetTriangleToCircle;
+export default GetTriangleToCircle;

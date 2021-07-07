@@ -27,4 +27,4 @@ var ContainsRect = function (ellipse, rect)
     );
 };
 
-module.exports = ContainsRect;
+export default ContainsRect;

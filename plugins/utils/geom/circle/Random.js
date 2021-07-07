@@ -35,4 +35,4 @@ var Random = function (circle, out)
     return out;
 };
 
-module.exports = Random;
+export default Random;

@@ -92,4 +92,4 @@ var LineToRectangle = function (line, rect)
     return false;
 };
 
-module.exports = LineToRectangle;
+export default LineToRectangle;

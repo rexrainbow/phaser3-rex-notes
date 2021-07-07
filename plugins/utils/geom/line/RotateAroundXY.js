@@ -39,4 +39,4 @@ var RotateAroundXY = function (line, x, y, angle)
     return line;
 };
 
-module.exports = RotateAroundXY;
+export default RotateAroundXY;

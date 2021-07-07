@@ -30,4 +30,4 @@ var CircumferencePoint = function (circle, angle, out)
     return out;
 };
 
-module.exports = CircumferencePoint;
+export default CircumferencePoint;

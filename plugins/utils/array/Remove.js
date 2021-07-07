@@ -82,4 +82,4 @@ var Remove = function (array, item, callback, context)
     return item;
 };
 
-module.exports = Remove;
+export default Remove;

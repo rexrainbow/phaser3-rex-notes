@@ -35,4 +35,4 @@ var GetNormal = function (line, out)
     return out;
 };
 
-module.exports = GetNormal;
+export default GetNormal;

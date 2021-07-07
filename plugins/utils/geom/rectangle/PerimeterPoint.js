@@ -48,4 +48,4 @@ var PerimeterPoint = function (rectangle, angle, out)
     return out;
 };
 
-module.exports = PerimeterPoint;
+export default PerimeterPoint;

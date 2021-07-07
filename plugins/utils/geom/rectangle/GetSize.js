@@ -31,4 +31,4 @@ var GetSize = function (rect, out)
     return out;
 };
 
-module.exports = GetSize;
+export default GetSize;

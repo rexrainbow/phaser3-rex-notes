@@ -22,4 +22,4 @@ Point.Project = require('./Project');
 Point.ProjectUnit = require('./ProjectUnit');
 Point.SetMagnitude = require('./SetMagnitude');
 
-module.exports = Point;
+export default Point;

@@ -46,4 +46,4 @@ var GetNearestPoint = function (line, point, out)
     return out;
 };
 
-module.exports = GetNearestPoint;
+export default GetNearestPoint;

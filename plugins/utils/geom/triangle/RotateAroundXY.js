@@ -45,4 +45,4 @@ var RotateAroundXY = function (triangle, x, y, angle)
     return triangle;
 };
 
-module.exports = RotateAroundXY;
+export default RotateAroundXY;

@@ -45,4 +45,4 @@ var CircleToRectangle = function (circle, rect)
     }
 };
 
-module.exports = CircleToRectangle;
+export default CircleToRectangle;

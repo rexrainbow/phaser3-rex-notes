@@ -26,4 +26,4 @@ var Contains = function (rect, x, y)
     return (rect.x <= x && rect.x + rect.width >= x && rect.y <= y && rect.y + rect.height >= y);
 };
 
-module.exports = Contains;
+export default Contains;

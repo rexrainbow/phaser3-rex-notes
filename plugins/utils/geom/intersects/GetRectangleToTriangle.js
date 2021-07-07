@@ -39,4 +39,4 @@ var GetRectangleToTriangle = function (rect, triangle, out)
     return out;
 };
 
-module.exports = GetRectangleToTriangle;
+export default GetRectangleToTriangle;

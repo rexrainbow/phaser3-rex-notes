@@ -21,4 +21,4 @@ var RadToDeg = function (radians)
     return radians * RAD_TO_DEG;
 };
 
-module.exports = RadToDeg;
+export default RadToDeg;

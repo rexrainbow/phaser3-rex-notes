@@ -40,4 +40,4 @@ var GetRectangleIntersection = function (rectA, rectB, output)
     return output;
 };
 
-module.exports = GetRectangleIntersection;
+export default GetRectangleIntersection;

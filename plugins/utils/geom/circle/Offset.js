@@ -26,4 +26,4 @@ var Offset = function (circle, x, y)
     return circle;
 };
 
-module.exports = Offset;
+export default Offset;

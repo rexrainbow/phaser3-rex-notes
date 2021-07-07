@@ -29,4 +29,4 @@ var GetCenter = function (rect, out)
     return out;
 };
 
-module.exports = GetCenter;
+export default GetCenter;

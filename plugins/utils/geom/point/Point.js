@@ -72,4 +72,4 @@ var Point = new Class({
 
 });
 
-module.exports = Point;
+export default Point;

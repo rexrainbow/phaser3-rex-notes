@@ -30,4 +30,4 @@ var Scale = function (rect, x, y)
     return rect;
 };
 
-module.exports = Scale;
+export default Scale;

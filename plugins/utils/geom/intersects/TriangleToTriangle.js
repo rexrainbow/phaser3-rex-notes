@@ -81,4 +81,4 @@ var TriangleToTriangle = function (triangleA, triangleB)
     return false;
 };
 
-module.exports = TriangleToTriangle;
+export default TriangleToTriangle;

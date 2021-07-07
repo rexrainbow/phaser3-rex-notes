@@ -35,4 +35,4 @@ var ProjectUnit = function (pointA, pointB, out)
     return out;
 };
 
-module.exports = ProjectUnit;
+export default ProjectUnit;

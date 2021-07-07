@@ -85,4 +85,4 @@ var GetCircleToCircle = function (circleA, circleB, out)
     return out;
 };
 
-module.exports = GetCircleToCircle;
+export default GetCircleToCircle;

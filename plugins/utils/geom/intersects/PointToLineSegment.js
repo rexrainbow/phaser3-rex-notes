@@ -32,4 +32,4 @@ var PointToLineSegment = function (point, line)
     return ((point.x >= xMin && point.x <= xMax) && (point.y >= yMin && point.y <= yMax));
 };
 
-module.exports = PointToLineSegment;
+export default PointToLineSegment;

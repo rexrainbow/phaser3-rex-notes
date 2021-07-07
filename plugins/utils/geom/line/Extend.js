@@ -49,4 +49,4 @@ var Extend = function (line, left, right)
     return line;
 };
 
-module.exports = Extend;
+export default Extend;

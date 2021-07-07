@@ -44,4 +44,4 @@ Rectangle.SameDimensions = require('./SameDimensions');
 Rectangle.Scale = require('./Scale');
 Rectangle.Union = require('./Union');
 
-module.exports = Rectangle;
+export default Rectangle;

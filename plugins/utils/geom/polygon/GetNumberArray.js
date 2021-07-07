@@ -34,4 +34,4 @@ var GetNumberArray = function (polygon, output)
     return output;
 };
 
-module.exports = GetNumberArray;
+export default GetNumberArray;

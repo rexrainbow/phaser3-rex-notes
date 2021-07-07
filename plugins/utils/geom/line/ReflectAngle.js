@@ -25,4 +25,4 @@ var ReflectAngle = function (lineA, lineB)
     return (2 * NormalAngle(lineB) - Math.PI - Angle(lineA));
 };
 
-module.exports = ReflectAngle;
+export default ReflectAngle;

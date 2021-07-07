@@ -11,4 +11,4 @@ var LineStyleCanvas = function (ctx, src, altColor, altAlpha)
     ctx.lineWidth = src.lineWidth;
 };
 
-module.exports = LineStyleCanvas;
+export default LineStyleCanvas;

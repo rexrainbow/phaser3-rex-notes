@@ -59,4 +59,4 @@ var GetCalcMatrix = function (src, camera, parentMatrix) {
     return result;
 };
 
-module.exports = GetCalcMatrix;
+export default GetCalcMatrix;

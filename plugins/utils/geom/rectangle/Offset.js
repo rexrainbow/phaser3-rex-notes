@@ -26,4 +26,4 @@ var Offset = function (rect, x, y)
     return rect;
 };
 
-module.exports = Offset;
+export default Offset;

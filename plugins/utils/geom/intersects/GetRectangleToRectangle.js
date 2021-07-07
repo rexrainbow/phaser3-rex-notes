@@ -42,4 +42,4 @@ var GetRectangleToRectangle = function (rectA, rectB, out)
     return out;
 };
 
-module.exports = GetRectangleToRectangle;
+export default GetRectangleToRectangle;

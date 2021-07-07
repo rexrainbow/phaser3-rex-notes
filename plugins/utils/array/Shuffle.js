@@ -29,4 +29,4 @@ var Shuffle = function (array)
     return array;
 };
 
-module.exports = Shuffle;
+export default Shuffle;

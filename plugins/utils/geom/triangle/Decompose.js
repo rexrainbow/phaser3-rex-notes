@@ -26,4 +26,4 @@ var Decompose = function (triangle, out)
     return out;
 };
 
-module.exports = Decompose;
+export default Decompose;

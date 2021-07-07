@@ -76,4 +76,4 @@ var FromPoints = function (points, out)
     return out;
 };
 
-module.exports = FromPoints;
+export default FromPoints;

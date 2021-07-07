@@ -35,4 +35,4 @@ var Centroid = function (triangle, out)
     return out;
 };
 
-module.exports = Centroid;
+export default Centroid;

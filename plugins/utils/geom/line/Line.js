@@ -316,4 +316,4 @@ var Line = new Class({
 
 });
 
-module.exports = Line;
+export default Line;

@@ -22,4 +22,4 @@ var ContainsPoint = function (polygon, point)
     return Contains(polygon, point.x, point.y);
 };
 
-module.exports = ContainsPoint;
+export default ContainsPoint;

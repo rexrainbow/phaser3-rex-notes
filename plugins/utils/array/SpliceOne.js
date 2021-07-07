@@ -37,4 +37,4 @@ var SpliceOne = function (array, index)
     return item;
 };
 
-module.exports = SpliceOne;
+export default SpliceOne;

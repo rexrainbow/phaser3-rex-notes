@@ -27,4 +27,4 @@ var Perimeter = function (triangle)
     return (Length(line1) + Length(line2) + Length(line3));
 };
 
-module.exports = Perimeter;
+export default Perimeter;

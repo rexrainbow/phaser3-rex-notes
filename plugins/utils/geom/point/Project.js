@@ -37,4 +37,4 @@ var Project = function (pointA, pointB, out)
     return out;
 };
 
-module.exports = Project;
+export default Project;

@@ -25,4 +25,4 @@ var DistanceBetween = function (x1, y1, x2, y2)
     return Math.sqrt(dx * dx + dy * dy);
 };
 
-module.exports = DistanceBetween;
+export default DistanceBetween;

@@ -47,4 +47,4 @@ var Random = function (triangle, out)
     return out;
 };
 
-module.exports = Random;
+export default Random;

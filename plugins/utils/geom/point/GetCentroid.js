@@ -55,4 +55,4 @@ var GetCentroid = function (points, out)
     return out;
 };
 
-module.exports = GetCentroid;
+export default GetCentroid;

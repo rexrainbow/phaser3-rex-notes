@@ -56,4 +56,4 @@ var InCenter = function (triangle, out)
     return out;
 };
 
-module.exports = InCenter;
+export default InCenter;
