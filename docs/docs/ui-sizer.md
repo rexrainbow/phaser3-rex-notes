@@ -182,13 +182,6 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, proportion, align, padding, expand, key, index);
-// sizer.add(child, proportion, align, padding, expand, key, index);
-```
-
-or
-
-```javascript
 sizer.add(child,
     {
         proportion: 0,
@@ -201,6 +194,13 @@ sizer.add(child,
         minHeight: undefined
     }
 );
+```
+
+or
+
+```javascript
+sizer.add(child, proportion, align, padding, expand, key, index);
+// sizer.add(child, proportion, align, padding, expand, key, index);
 ```
 
 - `child` : A game object.

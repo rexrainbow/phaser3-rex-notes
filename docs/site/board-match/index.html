@@ -6156,6 +6156,7 @@
 
 <h4 id="for-each-symbol-cahce">For each symbol cahce<a class="headerlink" href="#for-each-symbol-cahce" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">match</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">symbol</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return true; // Break for each loop</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
 </code></pre></div>
 
@@ -6198,6 +6199,8 @@
 <div class="codehilite"><pre><span></span><code><span class="nx">match</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var chess = board.tileXYArrayToChess(result.tileXY, 0);</span>
     <span class="c1">// GroupCall(chess, function (chess) { chess.setScale(0.8); });</span>
+
+    <span class="c1">// return true; // Break for each loop</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 

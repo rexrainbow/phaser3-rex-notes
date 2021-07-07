@@ -160,12 +160,6 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, key, align, padding, expand);
-```
-
-or
-
-```javascript
 sizer.add(child,
     {
         key: undefined,
@@ -176,6 +170,12 @@ sizer.add(child,
         minHeight: undefined
     }
 );
+```
+
+or
+
+```javascript
+sizer.add(child, key, align, padding, expand);
 ```
 
 - `child` : A game object.

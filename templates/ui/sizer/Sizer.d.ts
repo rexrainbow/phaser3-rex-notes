@@ -2,7 +2,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
-type orientationTypes = 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom';
+export type orientationTypes = 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom';
 type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
     'left-top' | 'left-center' | 'left-bottom' |
     'center-top' | 'center-center' | 'center-bottom' |
@@ -34,6 +34,27 @@ export default class Sizer extends BaseSizer {
 
     constructor(
         scene: Phaser.Scene,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        orientation?: orientationTypes,
         config?: IConfig
     );
 

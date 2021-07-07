@@ -200,12 +200,6 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, padding, key, index);
-```
-
-or
-
-```javascript
 sizer.add(child,
     {
         padding: {left: 0, right: 0, top: 0, bottom: 0},
@@ -213,6 +207,12 @@ sizer.add(child,
         index: undefined
     }
 );
+```
+
+or
+
+```javascript
+sizer.add(child, padding, key, index);
 ```
 
 - `child` : A game object

@@ -37,6 +37,19 @@ export default class Sizer extends BaseSizer {
         config?: IConfig
     );
 
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        config?: IConfig
+    );
+
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: {

@@ -42,6 +42,27 @@ export default class GridSizer extends BaseSizer {
         config?: IConfig
     );
 
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        config?: IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        column: number, row: number,
+        config?: IConfig
+    );
+
     setColumnProportion(columnIndex: number, proportion: number): this;
     setRowProportion(rowIndex: number, proportion: number): this;
 

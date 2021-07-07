@@ -217,12 +217,6 @@ gridSizer.add(child, column, row);
 or
 
 ```javascript
-gridSizer.add(child, column, row, align, padding, expand, key);
-```
-
-or
-
-```javascript
 gridSizer.add(child,
     {
         column: 0,
@@ -233,6 +227,12 @@ gridSizer.add(child,
         key: undefined
     }
 );
+```
+
+or
+
+```javascript
+gridSizer.add(child, column, row, align, padding, expand, key);
 ```
 
 - `child` : A game object

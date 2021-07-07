@@ -1,7 +1,8 @@
 import 'phaser';
-import Canvas from '../../plugins/canvas'
+import UIPlugin from '../../templates/ui/ui-plugin';
 
 class Demo extends Phaser.Scene {
+    rexUI: UIPlugin;
     constructor() {
         super({
             key: 'examples'
@@ -12,10 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var canvas = new Canvas(this, 400, 300, 100, 100);
-        this.add.existing(canvas);
 
-        canvas.fill('red').setAlpha(0.5);
     }
 
     update() { }
@@ -30,7 +28,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
