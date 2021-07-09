@@ -5,6 +5,10 @@ Run script in csv format. Csv could be edited by excel or google document.
 - Author: Rex
 - Member of scene
 
+## Live demos
+
+[CSV-scenario](https://codepen.io/rexrainbow/pen/OELGaR)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario)
