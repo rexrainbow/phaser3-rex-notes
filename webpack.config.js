@@ -59,13 +59,25 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                loaders: ['babel-loader', 'awesome-typescript-loader'],
+                test: /\.ts$/i,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        '@babel/preset-env',
+                        '@babel/preset-typescript'
+                    ]
+                }
             },
             {
-                test: /\.js$/,
-                use: ['babel-loader'],
-                include: path.join(__dirname, 'src')
+                test: /\.js$/i,
+                exclude: /node_modules/,
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        '@babel/preset-env',
+                    ]
+                }
             },
             {
                 test: /phaser-split\.js$/,
