@@ -45,8 +45,9 @@ export default class Base {
     offsetX: number;
     offsetY: number;
 
-    // scene: Phaser.Scene;
-    // canvas: HTMLCanvasElement;
-    // context: CanvasRenderingContext2D;
     setDirty(dirty?: boolean): this;
+
+    scene: Phaser.Scene;
+    canvas: HTMLCanvasElement;
+    context: CanvasRenderingContext2D;
 }

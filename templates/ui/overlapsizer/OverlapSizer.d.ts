@@ -52,7 +52,7 @@ export default class OverlapSizer extends BaseSizer {
 
             padding?: PaddingTypes,
 
-            expand: boolean |
+            expand?: boolean |
             {
                 width?: boolean,
                 height?: boolean,
@@ -60,8 +60,22 @@ export default class OverlapSizer extends BaseSizer {
 
             minWidth?: number,
 
-            minHeight?: number
+            minHeight?: number,
         }
+    ): this;
+
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
+        key?: string,
+        align?: AlignTypes,
+        padding?: PaddingTypes,
+        expand?: boolean |
+        {
+            width?: boolean,
+            height?: boolean,
+        },
+        minWidth?: number,
+        minHeight?: number
     ): this;
 
     remove(

@@ -76,10 +76,20 @@ export default class GridSizer extends BaseSizer {
 
             padding?: PaddingTypes,
 
-            expand: boolean,
+            expand?: boolean,
 
             key?: string
         }
+    ): this;
+
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
+        columnIndex?: number,
+        rowIndex?: number,
+        align?: AlignTypes,
+        padding?: PaddingTypes,
+        expand?: boolean,
+        childKey?: string
     ): this;
 
     remove(

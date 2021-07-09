@@ -59,6 +59,20 @@ export default class Sizer extends BaseSizer {
         }
     ): this;
 
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
+        padding?: PaddingTypes,
+        childKey?: string,
+        index?: number
+    ): this;
+
+    insert(
+        index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        paddingConfig?: PaddingTypes,
+        childKey?: string
+    ): this;
+
     addNewLine(): this;
 
     remove(

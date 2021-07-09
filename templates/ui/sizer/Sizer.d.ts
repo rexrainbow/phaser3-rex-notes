@@ -64,7 +64,8 @@ export default class Sizer extends BaseSizer {
 
     setItemSpacing(value: number): this;
 
-    add(gameObject: Phaser.GameObjects.GameObject,
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
         config?: {
             proportion?: number,
 
@@ -76,12 +77,33 @@ export default class Sizer extends BaseSizer {
 
             childKey?: string,
 
-            index?: number
+            index?: number,
 
             minWidth?: number,
 
             minHeight?: number
         }
+    ): this;
+
+    add(
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion?: number,
+        align?: AlignTypes,
+        padding?: PaddingTypes,
+        expand?: boolean,
+        childKey?: string,
+        index?: number,
+        minSize?: number
+    ): this;
+
+    insert(
+        index: number,
+        gameObject: Phaser.GameObjects.GameObject,
+        proportion?: number,
+        align?: AlignTypes,
+        padding?: PaddingTypes,
+        expand?: boolean,
+        childKey?: string
     ): this;
 
     addSpace(
