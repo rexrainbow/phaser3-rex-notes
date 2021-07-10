@@ -333,12 +333,12 @@ class Text extends GameObject {
         return this.updateText(false);
     }
 
-    setResolution(value) {
-        return this.style.setResolution(value);
-    }
-
     setMaxLines(max) {
         return this.style.setMaxLines(max);
+    }
+
+    setResolution(value) {
+        return this.style.setResolution(value);
     }
 
     updateText(runWrap) {

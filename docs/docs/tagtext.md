@@ -559,6 +559,17 @@ This value is *added* to the height of the font when calculating the overall lin
     txt.setFixedSize(width, height);
     ```
 
+### Resolution
+
+- Get
+    ```javascript
+    var resolution = txt.style.resolution;
+    ```
+- Set
+    ```javascript
+    txt.setResolution(resolution);
+    ```
+
 ### Inline style
 
 Define style inline text.

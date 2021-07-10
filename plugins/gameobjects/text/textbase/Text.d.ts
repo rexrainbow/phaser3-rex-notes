@@ -52,6 +52,8 @@ export interface TextStyle {
     fixedWidth?: number,
     fixedHeight?: number,
 
+    resolution?: number,
+
     testString?: string,
 
     wrap?: {
@@ -200,6 +202,8 @@ export default class Text extends CanvasGameObjectBase {
 
     setMaxLines(max?: number): this;
 
+    setResolution(value: number): this;
+
     setFixedSize(width?: number, height?: number): this;
     setSize(width?: number, height?: number): this;
     resize(width?: number, height?: number): this;
@@ -238,6 +242,8 @@ export default class Text extends CanvasGameObjectBase {
 
         lineSpacing: number,
         maxLines: number,
+
+        resolution: number,
 
         fixedWidth: number,
         fixedHeight: number,
