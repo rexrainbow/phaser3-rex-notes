@@ -25,7 +25,7 @@ declare namespace PathFinder {
     )
         => number | BLOCKER | INFINITY;
 
-    export interface IConfig {
+    interface IConfig {
         occupiedTest?: boolean,
         blockerTest?: boolean,
 

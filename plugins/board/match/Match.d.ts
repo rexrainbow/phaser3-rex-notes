@@ -2,22 +2,28 @@ import Board from '../board/LogicBoard';
 import { TileXYType } from '../types/Position';
 
 
-export interface IConfig {
-    board: Board,
-    wildcard?: string | number,
-    dirMask?: { [dir: number]: boolean },
+export default Match;
+
+declare namespace Match {
+
+    interface IConfig {
+        board: Board,
+        wildcard?: string | number,
+        dirMask?: { [dir: number]: boolean },
+    }
+
+    type MatchResultType = {
+        tileXY: TileXYType[],
+        direction: number,
+
+        pattern: string | number |
+        (string | number)[]
+    }
+
 }
 
-export type MatchResultType = {
-    tileXY: TileXYType[],
-    direction: number,
-
-    pattern: string | number |
-    (string | number)[]
-}
-
-export default class Match {
-    constructor(config?: IConfig);
+declare class Match {
+    constructor(config?: Match.IConfig);
 
     setBoard(board: Board): this;
     readonly board: Board;

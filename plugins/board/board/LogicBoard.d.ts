@@ -1,8 +1,8 @@
 import EE from '../../utils/eventemitter/EventEmitter';
 import QuadGrid from '../grid/quad/Quad';
 import HexagonGrid from '../grid/hexagon/Hexagon';
-import { IConfig as IConfigQuadGridBase } from '../grid/quad/Quad';
-import { IConfig as IConfigHexagonGridBase } from '../grid/hexagon/Hexagon';
+import Quad from '../grid/quad/Quad';
+import Hexagon from '../grid/hexagon/Hexagon';
 import { TileXYZType, TileXYType, WorldXYType } from '../types/Position';
 import Line from '../../utils/geom/line/Line';
 import Circle from '../../utils/geom/circle/Circle';
@@ -16,11 +16,11 @@ export default Board;
 declare namespace Board {
     type ForEachTileXYOrderTypes = 0 | 1 | 2 | 3 | 'x+' | 'x-' | 'y+' | 'y-';
 
-    interface IConfigQuadGrid extends IConfigQuadGridBase {
+    interface IConfigQuadGrid extends Quad.IConfig {
         gridType: 'quadGrid',
     }
 
-    interface IConfigHexagonGrid extends IConfigHexagonGridBase {
+    interface IConfigHexagonGrid extends Hexagon.IConfig {
         gridType: 'hexagonGrid',
     }
 

@@ -15,9 +15,9 @@ declare namespace MoveTo {
 
 }
 
-declare class MoveTo {
+declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> {
     constructor(
-        gameObject: Phaser.GameObjects.GameObject,
+        gameObject: ChessType,
         config?: MoveTo.IConfig
     );
 

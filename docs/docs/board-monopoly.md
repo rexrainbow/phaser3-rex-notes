@@ -91,16 +91,12 @@ var monopoly = scene.rexBoard.add.monopoly(chess, {
 - Cost function
     - `pathTileZ` : TileZ of path tiles.
     - `cost` : A constant cost for each non-blocked tile
-    - `costCallback`, `costCallbackScope` :  Get cost via callback
+    - `costCallback`, `costCallbackScope` :  [Get cost via callback](board-monopoly.md#cost-function)
         ```javascript
-        function(curTile, monopoly) {
+        function(curTileXY, preTileXY, monopoly) {
             return cost;
         }
         ```
-        - Board : `monopoly.board`
-        - Chess game object : `monopoly.gameObject`
-        - Cost of stop : `monopoly.STOP`
-        - Cost of blocker : `monopoly.BLOCKER`
 
 ### Cost function
 

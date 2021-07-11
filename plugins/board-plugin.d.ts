@@ -7,6 +7,11 @@ import ShapeFactory from './board/shape/Factory';
 import MoveToFactory from './board/moveto/Factory';
 import PathFinderFactory from './board/pathfinder/Factory';
 import MatchFactory from './board/match/Factory';
+import FieldOfViewFactory from './board/fieldofview/Factory';
+import MonopolyFactory from './board/monopoly/Factory';
+
+import HexagonMap from './board/hexagonmap/index';
+import CreateTileTexture from './board/texture/CreateTileTexture'
 
 declare class Factories {
     board: typeof BoardFactory;
@@ -16,8 +21,13 @@ declare class Factories {
     moveTo: typeof MoveToFactory;
     pathFinder: typeof PathFinderFactory;
     match: typeof MatchFactory;
+    fieldOfView: typeof FieldOfViewFactory;
+    monopoly: typeof MonopolyFactory;
 }
 
 export default class BoardPlugin extends Phaser.Plugins.ScenePlugin {
-    add: Factories
+    add: Factories;
+
+    hexagonMap: HexagonMap;
+    createTileTexture: typeof CreateTileTexture;
 }
