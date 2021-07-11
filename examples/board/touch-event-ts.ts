@@ -1,12 +1,11 @@
 import 'phaser';
 import BoardPlugin from '../../plugins/board-plugin.js';
-import { Board } from '../../plugins/board-plugin.js';
 
 const Random = Phaser.Math.Between;
 
 class Demo extends Phaser.Scene {
     rexBoard: BoardPlugin;
-    board: Board;
+    board: BoardPlugin.Board;
     print: Phaser.GameObjects.Text;
     cameraController: Phaser.Cameras.Controls.SmoothedKeyControl;
 

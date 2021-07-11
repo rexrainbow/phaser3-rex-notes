@@ -1,9 +1,9 @@
 // import * as Phaser from 'phaser';
 import Canvas from '../../canvas/canvas/Canvas';
 import { IConfigTextStyle } from './bob/char/TextStyle';
-import CharBobT from './bob/char/CharData';
-import ImageBobT from './bob/image/ImageData';
-import CommandBobT from './bob/command/Command';
+import CharBobClass from './bob/char/CharData';
+import ImageBobClass from './bob/image/ImageData';
+import CommandBobClass from './bob/command/Command';
 
 
 export default DynamicText;
@@ -81,9 +81,9 @@ declare namespace DynamicText {
         vAlign?: VAlignTypes,
     }
 
-    type CharBob = CharBobT;
-    type ImageBob = ImageBobT;
-    type CommandBob = CommandBobT;
+    type CharBob = CharBobClass;
+    type ImageBob = ImageBobClass;
+    type CommandBob = CommandBobClass;
     type RenderChildTypes = CharBob | ImageBob;
     type ChildTypes = CharBob | ImageBob | CommandBob;
 

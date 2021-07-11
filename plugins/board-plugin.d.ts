@@ -13,6 +13,8 @@ import MonopolyFactory from './board/monopoly/Factory';
 import HexagonMap from './board/hexagonmap/index';
 import CreateTileTexture from './board/texture/CreateTileTexture'
 
+export default BoardPlugin;
+
 declare class Factories {
     board: typeof BoardFactory;
     quadGrid: typeof QuadGridFactory;
@@ -25,9 +27,31 @@ declare class Factories {
     monopoly: typeof MonopolyFactory;
 }
 
-export default class BoardPlugin extends Phaser.Plugins.ScenePlugin {
+declare class BoardPlugin extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
     hexagonMap: HexagonMap;
     createTileTexture: typeof CreateTileTexture;
+}
+
+import BoardClass from './board/board/Board';
+import HexagonClass from './board/grid/hexagon/Hexagon';
+import QuadClass from './board/grid/quad/Quad';
+import ShapeClass from './board/shape/Shape';
+import MoveToClass from './board/moveto/MoveTo';
+import MatchClass from './board/match/Match';
+import PathFinderClass from './board/pathfinder/PathFinder';
+import FieldOfViewClass from './board/fieldofview/FieldOfView';
+import MonopolyClass from './board/monopoly/Monopoly';
+
+declare namespace BoardPlugin {
+    type Board = BoardClass;
+    type Quad = QuadClass;
+    type Hexagon = HexagonClass;
+    type Shape = ShapeClass;
+    type MoveTo = MoveToClass;
+    type Match = MatchClass;
+    type PathFinder = PathFinderClass;
+    type FieldOfView = FieldOfViewClass;
+    type Monopoly = MonopolyClass;
 }
