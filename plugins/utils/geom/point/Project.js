@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point');
-var GetMagnitudeSq = require('./GetMagnitudeSq');
+import Point from './Point.js';
+import GetMagnitudeSq from './GetMagnitudeSq.js';
 
 /**
  * [description]
@@ -21,15 +21,13 @@ var GetMagnitudeSq = require('./GetMagnitudeSq');
  *
  * @return {Phaser.Geom.Point} [description]
  */
-var Project = function (pointA, pointB, out)
-{
+var Project = function (pointA, pointB, out) {
     if (out === undefined) { out = new Point(); }
 
     var dot = ((pointA.x * pointB.x) + (pointA.y * pointB.y));
     var amt = dot / GetMagnitudeSq(pointB);
 
-    if (amt !== 0)
-    {
+    if (amt !== 0) {
         out.x = amt * pointB.x;
         out.y = amt * pointB.y;
     }

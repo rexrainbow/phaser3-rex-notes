@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point';
 
 //  This is based off an explanation and expanded math presented by Paul Bourke:
 //  See http:'local.wasp.uwa.edu.au/~pbourke/geometry/lineline2d/
@@ -21,8 +21,7 @@ var Point = require('../point/Point');
  *
  * @return {boolean} `true` if the two Lines intersect, and the `out` object will be populated, if given. Otherwise, `false`.
  */
-var LineToLine = function (line1, line2, out)
-{
+var LineToLine = function (line1, line2, out) {
     if (out === undefined) { out = new Point(); }
 
     var x1 = line1.x1;
@@ -43,8 +42,7 @@ var LineToLine = function (line1, line2, out)
     //  If numA and numB were both equal to zero the lines would be on top of each other (coincidental).
     //  This check is not done because it is not necessary for this implementation (the parallel check accounts for this).
 
-    if (deNom === 0)
-    {
+    if (deNom === 0) {
         return false;
     }
 
@@ -56,8 +54,7 @@ var LineToLine = function (line1, line2, out)
     //  The fractional point will be between 0 and 1 inclusive if the lines intersect.
     //  If the fractional calculation is larger than 1 or smaller than 0 the lines would need to be longer to intersect.
 
-    if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1)
-    {
+    if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
         out.x = x1 + (uA * (x2 - x1));
         out.y = y1 + (uA * (y2 - y1));
 

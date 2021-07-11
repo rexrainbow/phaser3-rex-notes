@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point');
+import Point from './Point.js';
 
 /**
  * Inverts a Point's coordinates.
@@ -19,8 +19,7 @@ var Point = require('./Point');
  *
  * @return {Phaser.Geom.Point} The modified `out` Point, or a new Point if none was provided.
  */
-var Negative = function (point, out)
-{
+var Negative = function (point, out) {
     if (out === undefined) { out = new Point(); }
 
     return out.setTo(-point.x, -point.y);

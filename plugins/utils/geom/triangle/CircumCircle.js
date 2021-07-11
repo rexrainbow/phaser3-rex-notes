@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circle = require('../circle/Circle');
+import Circle from '../circle/Circle';
 
 //  Adapted from https://gist.github.com/mutoo/5617691
 
@@ -21,8 +21,7 @@ var Circle = require('../circle/Circle');
  *
  * @return {Phaser.Geom.Circle} The updated `out` Circle, or a new Circle if none was provided.
  */
-var CircumCircle = function (triangle, out)
-{
+var CircumCircle = function (triangle, out) {
     if (out === undefined) { out = new Circle(); }
 
     //  A
@@ -51,8 +50,7 @@ var CircumCircle = function (triangle, out)
     //  If the points of the triangle are collinear, then just find the
     //  extremes and use the midpoint as the center of the circumcircle.
 
-    if (Math.abs(G) < 0.000001)
-    {
+    if (Math.abs(G) < 0.000001) {
         var minX = Math.min(x1, x2, x3);
         var minY = Math.min(y1, y2, y3);
         dx = (Math.max(x1, x2, x3) - minX) * 0.5;
@@ -62,8 +60,7 @@ var CircumCircle = function (triangle, out)
         out.y = minY + dy;
         out.radius = Math.sqrt(dx * dx + dy * dy);
     }
-    else
-    {
+    else {
         out.x = (D * E - B * F) / G;
         out.y = (A * F - C * E) / G;
         dx = out.x - x1;

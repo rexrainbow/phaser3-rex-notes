@@ -4,9 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../object/Class');
-var Contains = require('./Contains');
-var GetPoints = require('./GetPoints');
+import Class from'../../object/Class.js';
+import Contains from'./Contains.js';
+import GetPoints from'./GetPoints.js';
 
 /**
  * @classdesc

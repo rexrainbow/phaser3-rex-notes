@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle');
-var Intersects = require('../intersects/RectangleToRectangle');
+import Rectangle from './Rectangle.js';
+import Intersects from '../intersects/RectangleToRectangle.js';
 
 /**
  * Takes two Rectangles and first checks to see if they intersect.
@@ -23,19 +23,16 @@ var Intersects = require('../intersects/RectangleToRectangle');
  *
  * @return {Phaser.Geom.Rectangle} The intersection result. If the width and height are zero, no intersection occurred.
  */
-var Intersection = function (rectA, rectB, out)
-{
+var Intersection = function (rectA, rectB, out) {
     if (out === undefined) { out = new Rectangle(); }
 
-    if (Intersects(rectA, rectB))
-    {
+    if (Intersects(rectA, rectB)) {
         out.x = Math.max(rectA.x, rectB.x);
         out.y = Math.max(rectA.y, rectB.y);
         out.width = Math.min(rectA.right, rectB.right) - out.x;
         out.height = Math.min(rectA.bottom, rectB.bottom) - out.y;
     }
-    else
-    {
+    else {
         out.setEmpty();
     }
 

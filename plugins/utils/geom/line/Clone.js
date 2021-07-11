@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Line = require('./Line');
+import Line from './Line.js';
 
 /**
  * Clone the given line.
@@ -16,8 +16,7 @@ var Line = require('./Line');
  *
  * @return {Phaser.Geom.Line} The cloned line.
  */
-var Clone = function (source)
-{
+var Clone = function (source) {
     return new Line(source.x1, source.y1, source.x2, source.y2);
 };
 

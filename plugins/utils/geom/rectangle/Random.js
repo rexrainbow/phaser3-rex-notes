@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * Returns a random point within a Rectangle.
@@ -19,8 +19,7 @@ var Point = require('../point/Point');
  *
  * @return {Phaser.Geom.Point} The modified `out` object, or a new Point if none was provided.
  */
-var Random = function (rect, out)
-{
+var Random = function (rect, out) {
     if (out === undefined) { out = new Point(); }
 
     out.x = rect.x + (Math.random() * rect.width);

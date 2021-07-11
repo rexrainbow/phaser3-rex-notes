@@ -5,8 +5,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
-var LineToCircle = require('./LineToCircle');
+import Point from '../point/Point.js';
+import LineToCircle from './LineToCircle.js';
 
 /**
  * Checks for intersection between the line segment and circle,
@@ -21,12 +21,10 @@ var LineToCircle = require('./LineToCircle');
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetLineToCircle = function (line, circle, out)
-{
+var GetLineToCircle = function (line, circle, out) {
     if (out === undefined) { out = []; }
 
-    if (LineToCircle(line, circle))
-    {
+    if (LineToCircle(line, circle)) {
         var lx1 = line.x1;
         var ly1 = line.y1;
 
@@ -50,31 +48,26 @@ var GetLineToCircle = function (line, circle, out)
 
         var x, y;
 
-        if (lambda === 0)
-        {
+        if (lambda === 0) {
             var root = -coefficientB / (2 * coefficientA);
             x = lx1 + root * lDirX;
             y = ly1 + root * lDirY;
-            if (root >= 0 && root <= 1)
-            {
+            if (root >= 0 && root <= 1) {
                 out.push(new Point(x, y));
             }
         }
-        else if (lambda > 0)
-        {
+        else if (lambda > 0) {
             var root1 = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA);
             x = lx1 + root1 * lDirX;
             y = ly1 + root1 * lDirY;
-            if (root1 >= 0 && root1 <= 1)
-            {
+            if (root1 >= 0 && root1 <= 1) {
                 out.push(new Point(x, y));
             }
 
             var root2 = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA);
             x = lx1 + root2 * lDirX;
             y = ly1 + root2 * lDirY;
-            if (root2 >= 0 && root2 <= 1)
-            {
+            if (root2 >= 0 && root2 <= 1) {
                 out.push(new Point(x, y));
             }
         }

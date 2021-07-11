@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * [description]
@@ -19,8 +19,7 @@ var Point = require('../point/Point');
  *
  * @return {Phaser.Geom.Point} [description]
  */
-var Random = function (triangle, out)
-{
+var Random = function (triangle, out) {
     if (out === undefined) { out = new Point(); }
 
     //  Basis vectors
@@ -35,8 +34,7 @@ var Random = function (triangle, out)
     var s = Math.random();
 
     //  Point outside the triangle? Remap it.
-    if (r + s >= 1)
-    {
+    if (r + s >= 1) {
         r = 1 - r;
         s = 1 - s;
     }

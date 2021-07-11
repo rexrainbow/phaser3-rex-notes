@@ -5,8 +5,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetLineToCircle = require('./GetLineToCircle');
-var CircleToRectangle = require('./CircleToRectangle');
+import GetLineToCircle from './GetLineToCircle.js';
+import CircleToRectangle from './CircleToRectangle.js';
 
 /**
  * Checks for intersection between a circle and a rectangle,

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CenterOn = require('./CenterOn');
+import CenterOn from './CenterOn.js';
 
 
 /**
@@ -23,8 +23,7 @@ var CenterOn = require('./CenterOn');
  *
  * @return {Phaser.Geom.Rectangle} The inflated Rectangle.
  */
-var Inflate = function (rect, x, y)
-{
+var Inflate = function (rect, x, y) {
     var cx = rect.centerX;
     var cy = rect.centerY;
 

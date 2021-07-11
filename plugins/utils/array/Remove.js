@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var SpliceOne = require('./SpliceOne');
+import SpliceOne from './SpliceOne.js';
 
 /**
  * Removes the given item, or array of items, from the array.

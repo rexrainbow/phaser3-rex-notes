@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Polygon = require('./Polygon');
+import Polygon from './Polygon.js';
 
 /**
  * Create a new polygon which is a copy of the specified polygon
@@ -16,8 +16,7 @@ var Polygon = require('./Polygon');
  *
  * @return {Phaser.Geom.Polygon} A new separate Polygon cloned from the specified polygon, based on the same points.
  */
-var Clone = function (polygon)
-{
+var Clone = function (polygon) {
     return new Polygon(polygon.points);
 };
 

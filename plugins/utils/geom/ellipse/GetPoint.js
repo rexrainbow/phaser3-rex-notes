@@ -4,10 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var CircumferencePoint = require('./CircumferencePoint');
-var FromPercent = require('../../math/FromPercent');
-var MATH_CONST = require('../../math/const');
-var Point = require('../point/Point');
+import CircumferencePoint from './CircumferencePoint.js';
+import FromPercent from '../../math/FromPercent.js';
+import MATH_CONST from '../../math/const.js';
+import Point from '../point/Point.js';
 
 /**
  * Returns a Point object containing the coordinates of a point on the circumference of the Ellipse
@@ -25,8 +25,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
  */
-var GetPoint = function (ellipse, position, out)
-{
+var GetPoint = function (ellipse, position, out) {
     if (out === undefined) { out = new Point(); }
 
     var angle = FromPercent(position, 0, MATH_CONST.PI2);

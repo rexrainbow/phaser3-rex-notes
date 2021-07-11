@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const');
-var Angle = require('./Angle');
+import MATH_CONST from '../../math/const.js';
+import Angle from './Angle.js';
 
 /**
  * [description]
@@ -17,8 +17,7 @@ var Angle = require('./Angle');
  *
  * @return {number} [description]
  */
-var NormalX = function (line)
-{
+var NormalX = function (line) {
     return Math.cos(Angle(line) - MATH_CONST.TAU);
 };
 

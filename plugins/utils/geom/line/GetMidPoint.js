@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * Get the midpoint of the given line.
@@ -19,8 +19,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} The midpoint of the Line.
  */
-var GetMidPoint = function (line, out)
-{
+var GetMidPoint = function (line, out) {
     if (out === undefined) { out = new Point(); }
 
     out.x = (line.x1 + line.x2) / 2;

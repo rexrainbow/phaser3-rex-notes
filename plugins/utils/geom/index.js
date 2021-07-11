@@ -8,15 +8,24 @@
  * @namespace Phaser.Geom
  */
 
+import Circle from './circle.js';
+import Ellipse from './ellipse.js';
+import Intersects from './intersects.js';
+import Line from './line.js';
+import Point from './point.js';
+import Polygon from './point.js';
+import Rectangle from './rectangle.js';
+import Triangle from './triangle.js';
+
 export default {
-    
-    Circle: require('./circle'),
-    Ellipse: require('./ellipse'),
-    Intersects: require('./intersects'),
-    Line: require('./line'),
-    Point: require('./point'),
-    Polygon: require('./polygon'),
-    Rectangle: require('./rectangle'),
-    Triangle: require('./triangle')
+
+    Circle: Circle,
+    Ellipse: Ellipse,
+    Intersects: Intersects,
+    Line: Line,
+    Point: Point,
+    Polygon: Polygon,
+    Rectangle: Rectangle,
+    Triangle: Triangle
 
 };

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * Returns a uniformly distributed random point from anywhere within the given Ellipse.
@@ -19,8 +19,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
  */
-var Random = function (ellipse, out)
-{
+var Random = function (ellipse, out) {
     if (out === undefined) { out = new Point(); }
 
     var p = Math.random() * Math.PI * 2;

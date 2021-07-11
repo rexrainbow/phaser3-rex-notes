@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Centroid = require('./Centroid');
-var Offset = require('./Offset');
+import Centroid from './Centroid.js';
+import Offset from './Offset.js';
 
 /**
  * @callback CenterFunction
@@ -30,8 +30,7 @@ var Offset = require('./Offset');
  *
  * @return {Phaser.Geom.Triangle} The Triangle that was centered.
  */
-var CenterOn = function (triangle, x, y, centerFunc)
-{
+var CenterOn = function (triangle, x, y, centerFunc) {
     if (centerFunc === undefined) { centerFunc = Centroid; }
 
     //  Get the center of the triangle

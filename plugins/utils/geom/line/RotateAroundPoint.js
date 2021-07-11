@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateAroundXY = require('./RotateAroundXY');
+import RotateAroundXY from './RotateAroundXY.js';
 
 /**
  * Rotate a line around a point by the given angle in radians.
@@ -20,8 +20,7 @@ var RotateAroundXY = require('./RotateAroundXY');
  *
  * @return {Phaser.Geom.Line} The rotated line.
  */
-var RotateAroundPoint = function (line, point, angle)
-{
+var RotateAroundPoint = function (line, point, angle) {
     return RotateAroundXY(line, point.x, point.y, angle);
 };
 

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains');
+import Contains from './Contains.js';
 
 /**
  * [description]
@@ -17,8 +17,7 @@ var Contains = require('./Contains');
  *
  * @return {boolean} [description]
  */
-var ContainsPoint = function (polygon, point)
-{
+var ContainsPoint = function (polygon, point) {
     return Contains(polygon, point.x, point.y);
 };
 

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateAroundXY = require('./RotateAroundXY');
+import RotateAroundXY from './RotateAroundXY.js';
 
 /**
  * Rotate a line around its midpoint by the given angle in radians.
@@ -19,8 +19,7 @@ var RotateAroundXY = require('./RotateAroundXY');
  *
  * @return {Phaser.Geom.Line} The rotated line.
  */
-var Rotate = function (line, angle)
-{
+var Rotate = function (line, angle) {
     var x = (line.x1 + line.x2) / 2;
     var y = (line.y1 + line.y2) / 2;
 

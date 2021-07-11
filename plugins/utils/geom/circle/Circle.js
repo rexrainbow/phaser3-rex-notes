@@ -4,11 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../object/Class');
-var Contains = require('./Contains');
-var GetPoint = require('./GetPoint');
-var GetPoints = require('./GetPoints');
-var Random = require('./Random');
+import Class from '../../object/Class.js';
+import Contains from './Contains.js';
+import GetPoint from './GetPoint.js';
+import GetPoints from './GetPoints.js';
+import Random from './Random.js';
 
 /**
  * @classdesc
@@ -31,52 +31,51 @@ var Circle = new Class({
 
     initialize:
 
-    function Circle (x, y, radius)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (radius === undefined) { radius = 0; }
+        function Circle(x, y, radius) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (radius === undefined) { radius = 0; }
 
-        /**
-         * The x position of the center of the circle.
-         *
-         * @name Phaser.Geom.Circle#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
+            /**
+             * The x position of the center of the circle.
+             *
+             * @name Phaser.Geom.Circle#x
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x = x;
 
-        /**
-         * The y position of the center of the circle.
-         *
-         * @name Phaser.Geom.Circle#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
+            /**
+             * The y position of the center of the circle.
+             *
+             * @name Phaser.Geom.Circle#y
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y = y;
 
-        /**
-         * The internal radius of the circle.
-         *
-         * @name Phaser.Geom.Circle#_radius
-         * @type {number}
-         * @private
-         * @since 3.0.0
-         */
-        this._radius = radius;
+            /**
+             * The internal radius of the circle.
+             *
+             * @name Phaser.Geom.Circle#_radius
+             * @type {number}
+             * @private
+             * @since 3.0.0
+             */
+            this._radius = radius;
 
-        /**
-         * The internal diameter of the circle.
-         *
-         * @name Phaser.Geom.Circle#_diameter
-         * @type {number}
-         * @private
-         * @since 3.0.0
-         */
-        this._diameter = radius * 2;
-    },
+            /**
+             * The internal diameter of the circle.
+             *
+             * @name Phaser.Geom.Circle#_diameter
+             * @type {number}
+             * @private
+             * @since 3.0.0
+             */
+            this._diameter = radius * 2;
+        },
 
     /**
      * Check to see if the Circle contains the given x / y coordinates.
@@ -89,8 +88,7 @@ var Circle = new Class({
      *
      * @return {boolean} True if the coordinates are within the circle, otherwise false.
      */
-    contains: function (x, y)
-    {
+    contains: function (x, y) {
         return Contains(this, x, y);
     },
 
@@ -109,8 +107,7 @@ var Circle = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the circle.
      */
-    getPoint: function (position, point)
-    {
+    getPoint: function (position, point) {
         return GetPoint(this, position, point);
     },
 
@@ -129,8 +126,7 @@ var Circle = new Class({
      *
      * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the circle.
      */
-    getPoints: function (quantity, stepRate, output)
-    {
+    getPoints: function (quantity, stepRate, output) {
         return GetPoints(this, quantity, stepRate, output);
     },
 
@@ -146,8 +142,7 @@ var Circle = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
      */
-    getRandomPoint: function (point)
-    {
+    getRandomPoint: function (point) {
         return Random(this, point);
     },
 
@@ -163,8 +158,7 @@ var Circle = new Class({
      *
      * @return {Phaser.Geom.Circle} This Circle object.
      */
-    setTo: function (x, y, radius)
-    {
+    setTo: function (x, y, radius) {
         this.x = x;
         this.y = y;
         this._radius = radius;
@@ -182,8 +176,7 @@ var Circle = new Class({
      *
      * @return {Phaser.Geom.Circle} This Circle object.
      */
-    setEmpty: function ()
-    {
+    setEmpty: function () {
         this._radius = 0;
         this._diameter = 0;
 
@@ -201,8 +194,7 @@ var Circle = new Class({
      *
      * @return {Phaser.Geom.Circle} This Circle object.
      */
-    setPosition: function (x, y)
-    {
+    setPosition: function (x, y) {
         if (y === undefined) { y = x; }
 
         this.x = x;
@@ -219,8 +211,7 @@ var Circle = new Class({
      *
      * @return {boolean} True if the Circle is empty, otherwise false.
      */
-    isEmpty: function ()
-    {
+    isEmpty: function () {
         return (this._radius <= 0);
     },
 
@@ -233,13 +224,11 @@ var Circle = new Class({
      */
     radius: {
 
-        get: function ()
-        {
+        get: function () {
             return this._radius;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this._radius = value;
             this._diameter = value * 2;
         }
@@ -255,13 +244,11 @@ var Circle = new Class({
      */
     diameter: {
 
-        get: function ()
-        {
+        get: function () {
             return this._diameter;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this._diameter = value;
             this._radius = value * 0.5;
         }
@@ -277,13 +264,11 @@ var Circle = new Class({
      */
     left: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x - this._radius;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.x = value + this._radius;
         }
 
@@ -298,13 +283,11 @@ var Circle = new Class({
      */
     right: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x + this._radius;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.x = value - this._radius;
         }
 
@@ -319,13 +302,11 @@ var Circle = new Class({
      */
     top: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y - this._radius;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.y = value + this._radius;
         }
 
@@ -340,13 +321,11 @@ var Circle = new Class({
      */
     bottom: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y + this._radius;
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.y = value - this._radius;
         }
 

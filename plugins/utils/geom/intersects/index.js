@@ -8,30 +8,54 @@
  * @namespace Phaser.Geom.Intersects
  */
 
+import CircleToCircle from './CircleToCircle.js';
+import CircleToRectangle from './CircleToRectangle.js';
+import GetCircleToCircle from './GetCircleToCircle.js';
+import GetCircleToRectangle from './GetCircleToRectangle.js';
+import GetLineToCircle from './GetLineToCircle.js';
+import GetLineToRectangle from './GetLineToRectangle.js';
+import GetRectangleIntersection from './GetRectangleIntersection.js';
+import GetRectangleToRectangle from './GetRectangleToRectangle.js';
+import GetRectangleToTriangle from './GetRectangleToTriangle.js';
+import GetTriangleToCircle from './GetTriangleToCircle.js';
+import GetTriangleToLine from './GetTriangleToLine.js';
+import GetTriangleToTriangle from './GetTriangleToTriangle.js';
+import LineToCircle from './LineToCircle.js';
+import LineToLine from './LineToLine.js';
+import LineToRectangle from './LineToRectangle.js';
+import PointToLine from './PointToLine.js';
+import PointToLineSegment from './PointToLineSegment.js';
+import RectangleToRectangle from './RectangleToRectangle.js';
+import RectangleToTriangle from './RectangleToTriangle.js';
+import RectangleToValues from './RectangleToValues.js';
+import TriangleToCircle from './TriangleToCircle.js';
+import TriangleToLine from './TriangleToLine.js';
+import TriangleToTriangle from './TriangleToTriangle.js';
+
 export default {
 
-    CircleToCircle: require('./CircleToCircle'),
-    CircleToRectangle: require('./CircleToRectangle'),
-    GetCircleToCircle: require('./GetCircleToCircle'),
-    GetCircleToRectangle: require('./GetCircleToRectangle'),
-    GetLineToCircle: require('./GetLineToCircle'),
-    GetLineToRectangle: require('./GetLineToRectangle'),
-    GetRectangleIntersection: require('./GetRectangleIntersection'),
-    GetRectangleToRectangle: require('./GetRectangleToRectangle'),
-    GetRectangleToTriangle: require('./GetRectangleToTriangle'),
-    GetTriangleToCircle: require('./GetTriangleToCircle'),
-    GetTriangleToLine: require('./GetTriangleToLine'),
-    GetTriangleToTriangle: require('./GetTriangleToTriangle'),
-    LineToCircle: require('./LineToCircle'),
-    LineToLine: require('./LineToLine'),
-    LineToRectangle: require('./LineToRectangle'),
-    PointToLine: require('./PointToLine'),
-    PointToLineSegment: require('./PointToLineSegment'),
-    RectangleToRectangle: require('./RectangleToRectangle'),
-    RectangleToTriangle: require('./RectangleToTriangle'),
-    RectangleToValues: require('./RectangleToValues'),
-    TriangleToCircle: require('./TriangleToCircle'),
-    TriangleToLine: require('./TriangleToLine'),
-    TriangleToTriangle: require('./TriangleToTriangle')
+    CircleToCircle: CircleToCircle,
+    CircleToRectangle: CircleToRectangle,
+    GetCircleToCircle: GetCircleToCircle,
+    GetCircleToRectangle: GetCircleToRectangle,
+    GetLineToCircle: GetLineToCircle,
+    GetLineToRectangle: GetLineToRectangle,
+    GetRectangleIntersection: GetRectangleIntersection,
+    GetRectangleToRectangle: GetRectangleToRectangle,
+    GetRectangleToTriangle: GetRectangleToTriangle,
+    GetTriangleToCircle: GetTriangleToCircle,
+    GetTriangleToLine: GetTriangleToLine,
+    GetTriangleToTriangle: GetTriangleToTriangle,
+    LineToCircle: LineToCircle,
+    LineToLine: LineToLine,
+    LineToRectangle: LineToRectangle,
+    PointToLine: PointToLine,
+    PointToLineSegment: PointToLineSegment,
+    RectangleToRectangle: RectangleToRectangle,
+    RectangleToTriangle: RectangleToTriangle,
+    RectangleToValues: RectangleToValues,
+    TriangleToCircle: TriangleToCircle,
+    TriangleToLine: TriangleToLine,
+    TriangleToTriangle: TriangleToTriangle
 
 };

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains');
+import Contains from './Contains.js';
 
 /**
  * Determines whether the specified point is contained within the rectangular region defined by this Rectangle object.
@@ -17,8 +17,7 @@ var Contains = require('./Contains');
  *
  * @return {boolean} A value of true if the Rectangle object contains the specified point, otherwise false.
  */
-var ContainsPoint = function (rect, point)
-{
+var ContainsPoint = function (rect, point) {
     return Contains(rect, point.x, point.y);
 };
 

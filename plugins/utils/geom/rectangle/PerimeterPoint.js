@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
-var DegToRad = require('../../math/DegToRad');
+import Point from '../point/Point.js';
+import DegToRad from '../../math/DegToRad.js';
 
 /**
  * [description]
@@ -21,8 +21,7 @@ var DegToRad = require('../../math/DegToRad');
  *
  * @return {Phaser.Geom.Point} [description]
  */
-var PerimeterPoint = function (rectangle, angle, out)
-{
+var PerimeterPoint = function (rectangle, angle, out) {
     if (out === undefined) { out = new Point(); }
 
     angle = DegToRad(angle);
@@ -33,12 +32,10 @@ var PerimeterPoint = function (rectangle, angle, out)
     var dx = (c > 0) ? rectangle.width / 2 : rectangle.width / -2;
     var dy = (s > 0) ? rectangle.height / 2 : rectangle.height / -2;
 
-    if (Math.abs(dx * s) < Math.abs(dy * c))
-    {
+    if (Math.abs(dx * s) < Math.abs(dy * c)) {
         dy = (dx * s) / c;
     }
-    else
-    {
+    else {
         dx = (dy * c) / s;
     }
 

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('../line/Length');
+import Length from '../line/Length.js';
 
 // The 2D area of a triangle. The area value is always non-negative.
 
@@ -18,8 +18,7 @@ var Length = require('../line/Length');
  *
  * @return {number} [description]
  */
-var Perimeter = function (triangle)
-{
+var Perimeter = function (triangle) {
     var line1 = triangle.getLineA();
     var line2 = triangle.getLineB();
     var line3 = triangle.getLineC();

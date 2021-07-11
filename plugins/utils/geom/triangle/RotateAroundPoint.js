@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateAroundXY = require('./RotateAroundXY');
+import RotateAroundXY from './RotateAroundXY.js';
 
 /**
  * Rotates a Triangle at a certain angle about a given Point or object with public `x` and `y` properties.
@@ -20,8 +20,7 @@ var RotateAroundXY = require('./RotateAroundXY');
  *
  * @return {Phaser.Geom.Triangle} The rotated Triangle.
  */
-var RotateAroundPoint = function (triangle, point, angle)
-{
+var RotateAroundPoint = function (triangle, point, angle) {
     return RotateAroundXY(triangle, point.x, point.y, angle);
 };
 

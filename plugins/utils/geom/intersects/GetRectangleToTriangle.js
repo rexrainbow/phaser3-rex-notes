@@ -5,8 +5,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RectangleToTriangle = require('./RectangleToTriangle');
-var GetLineToRectangle = require('./GetLineToRectangle');
+import RectangleToTriangle from './RectangleToTriangle.js';
+import GetLineToRectangle from './GetLineToRectangle.js';
 
 /**
  * Checks for intersection between Rectangle shape and Triangle shape,
@@ -21,12 +21,10 @@ var GetLineToRectangle = require('./GetLineToRectangle');
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetRectangleToTriangle = function (rect, triangle, out)
-{
+var GetRectangleToTriangle = function (rect, triangle, out) {
     if (out === undefined) { out = []; }
 
-    if (RectangleToTriangle(rect, triangle))
-    {
+    if (RectangleToTriangle(rect, triangle)) {
         var lineA = triangle.getLineA();
         var lineB = triangle.getLineB();
         var lineC = triangle.getLineC();

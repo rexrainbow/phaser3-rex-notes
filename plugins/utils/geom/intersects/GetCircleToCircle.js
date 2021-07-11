@@ -5,8 +5,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
-var CircleToCircle = require('./CircleToCircle');
+import Point from '../point/Point.js';
+import CircleToCircle from './CircleToCircle.js';
 
 /**
  * Checks if two Circles intersect and returns the intersection points as a Point object array.
@@ -20,12 +20,10 @@ var CircleToCircle = require('./CircleToCircle');
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetCircleToCircle = function (circleA, circleB, out)
-{
+var GetCircleToCircle = function (circleA, circleB, out) {
     if (out === undefined) { out = []; }
 
-    if (CircleToCircle(circleA, circleB))
-    {
+    if (CircleToCircle(circleA, circleB)) {
         var x0 = circleA.x;
         var y0 = circleA.y;
         var r0 = circleA.radius;
@@ -36,8 +34,7 @@ var GetCircleToCircle = function (circleA, circleB, out)
 
         var coefficientA, coefficientB, coefficientC, lambda, x;
 
-        if (y0 === y1)
-        {
+        if (y0 === y1) {
             x = ((r1 * r1) - (r0 * r0) - (x1 * x1) + (x0 * x0)) / (2 * (x0 - x1));
 
             coefficientA = 1;
@@ -46,18 +43,15 @@ var GetCircleToCircle = function (circleA, circleB, out)
 
             lambda = (coefficientB * coefficientB) - (4 * coefficientA * coefficientC);
 
-            if (lambda === 0)
-            {
+            if (lambda === 0) {
                 out.push(new Point(x, (-coefficientB / (2 * coefficientA))));
             }
-            else if (lambda > 0)
-            {
+            else if (lambda > 0) {
                 out.push(new Point(x, (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA)));
                 out.push(new Point(x, (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA)));
             }
         }
-        else
-        {
+        else {
             var v1 = (x0 - x1) / (y0 - y1);
             var n = (r1 * r1 - r0 * r0 - x1 * x1 + x0 * x0 - y1 * y1 + y0 * y0) / (2 * (y0 - y1));
 
@@ -67,13 +61,11 @@ var GetCircleToCircle = function (circleA, circleB, out)
 
             lambda = (coefficientB * coefficientB) - (4 * coefficientA * coefficientC);
 
-            if (lambda === 0)
-            {
+            if (lambda === 0) {
                 x = (-coefficientB / (2 * coefficientA));
                 out.push(new Point(x, (n - (x * v1))));
             }
-            else if (lambda > 0)
-            {
+            else if (lambda > 0) {
                 x = (-coefficientB + Math.sqrt(lambda)) / (2 * coefficientA);
                 out.push(new Point(x, (n - (x * v1))));
                 x = (-coefficientB - Math.sqrt(lambda)) / (2 * coefficientA);

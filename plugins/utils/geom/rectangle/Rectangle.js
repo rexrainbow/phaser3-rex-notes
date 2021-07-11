@@ -4,12 +4,12 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../object/Class');
-var Contains = require('./Contains');
-var GetPoint = require('./GetPoint');
-var GetPoints = require('./GetPoints');
-var Line = require('../line/Line');
-var Random = require('./Random');
+import Class from '../../object/Class.js';
+import Contains from './Contains.js';
+import GetPoint from './GetPoint.js';
+import GetPoints from './GetPoints.js';
+import Line from '../line/Line.js';
+import Random from './Random.js';
 
 /**
  * @classdesc
@@ -29,53 +29,52 @@ var Rectangle = new Class({
 
     initialize:
 
-    function Rectangle (x, y, width, height)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (width === undefined) { width = 0; }
-        if (height === undefined) { height = 0; }
+        function Rectangle(x, y, width, height) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (width === undefined) { width = 0; }
+            if (height === undefined) { height = 0; }
 
-        /**
-         * The X coordinate of the top left corner of the Rectangle.
-         *
-         * @name Phaser.Geom.Rectangle#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
+            /**
+             * The X coordinate of the top left corner of the Rectangle.
+             *
+             * @name Phaser.Geom.Rectangle#x
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x = x;
 
-        /**
-         * The Y coordinate of the top left corner of the Rectangle.
-         *
-         * @name Phaser.Geom.Rectangle#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
+            /**
+             * The Y coordinate of the top left corner of the Rectangle.
+             *
+             * @name Phaser.Geom.Rectangle#y
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y = y;
 
-        /**
-         * The width of the Rectangle, i.e. the distance between its left side (defined by `x`) and its right side.
-         *
-         * @name Phaser.Geom.Rectangle#width
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.width = width;
+            /**
+             * The width of the Rectangle, i.e. the distance between its left side (defined by `x`) and its right side.
+             *
+             * @name Phaser.Geom.Rectangle#width
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.width = width;
 
-        /**
-         * The height of the Rectangle, i.e. the distance between its top side (defined by `y`) and its bottom side.
-         *
-         * @name Phaser.Geom.Rectangle#height
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.height = height;
-    },
+            /**
+             * The height of the Rectangle, i.e. the distance between its top side (defined by `y`) and its bottom side.
+             *
+             * @name Phaser.Geom.Rectangle#height
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.height = height;
+        },
 
     /**
      * Checks if the given point is inside the Rectangle's bounds.
@@ -88,8 +87,7 @@ var Rectangle = new Class({
      *
      * @return {boolean} `true` if the point is within the Rectangle's bounds, otherwise `false`.
      */
-    contains: function (x, y)
-    {
+    contains: function (x, y) {
         return Contains(this, x, y);
     },
 
@@ -110,8 +108,7 @@ var Rectangle = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} The updated `output` object, or a new Point if no `output` object was given.
      */
-    getPoint: function (position, output)
-    {
+    getPoint: function (position, output) {
         return GetPoint(this, position, output);
     },
 
@@ -129,8 +126,7 @@ var Rectangle = new Class({
      *
      * @return {(array|Phaser.Geom.Point[])} The modified `output` array, or a new array if none was provided.
      */
-    getPoints: function (quantity, stepRate, output)
-    {
+    getPoints: function (quantity, stepRate, output) {
         return GetPoints(this, quantity, stepRate, output);
     },
 
@@ -146,8 +142,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Point} The updated `point`, or a new Point if none was provided.
      */
-    getRandomPoint: function (point)
-    {
+    getRandomPoint: function (point) {
         return Random(this, point);
     },
 
@@ -164,8 +159,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Rectangle} This Rectangle object.
      */
-    setTo: function (x, y, width, height)
-    {
+    setTo: function (x, y, width, height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -182,8 +176,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Rectangle} This Rectangle object.
      */
-    setEmpty: function ()
-    {
+    setEmpty: function () {
         return this.setTo(0, 0, 0, 0);
     },
 
@@ -198,8 +191,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Rectangle} This Rectangle object.
      */
-    setPosition: function (x, y)
-    {
+    setPosition: function (x, y) {
         if (y === undefined) { y = x; }
 
         this.x = x;
@@ -219,8 +211,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Rectangle} This Rectangle object.
      */
-    setSize: function (width, height)
-    {
+    setSize: function (width, height) {
         if (height === undefined) { height = width; }
 
         this.width = width;
@@ -237,8 +228,7 @@ var Rectangle = new Class({
      *
      * @return {boolean} `true` if the Rectangle is empty. A Rectangle object is empty if its width or height is less than or equal to 0.
      */
-    isEmpty: function ()
-    {
+    isEmpty: function () {
         return (this.width <= 0 || this.height <= 0);
     },
 
@@ -254,8 +244,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to the top of this Rectangle.
      */
-    getLineA: function (line)
-    {
+    getLineA: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.x, this.y, this.right, this.y);
@@ -275,8 +264,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to the right of this Rectangle.
      */
-    getLineB: function (line)
-    {
+    getLineB: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.right, this.y, this.right, this.bottom);
@@ -296,8 +284,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to the bottom of this Rectangle.
      */
-    getLineC: function (line)
-    {
+    getLineC: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.right, this.bottom, this.x, this.bottom);
@@ -317,8 +304,7 @@ var Rectangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to the left of this Rectangle.
      */
-    getLineD: function (line)
-    {
+    getLineD: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.x, this.bottom, this.x, this.y);
@@ -336,19 +322,15 @@ var Rectangle = new Class({
      */
     left: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x;
         },
 
-        set: function (value)
-        {
-            if (value >= this.right)
-            {
+        set: function (value) {
+            if (value >= this.right) {
                 this.width = 0;
             }
-            else
-            {
+            else {
                 this.width = this.right - value;
             }
 
@@ -367,19 +349,15 @@ var Rectangle = new Class({
      */
     right: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x + this.width;
         },
 
-        set: function (value)
-        {
-            if (value <= this.x)
-            {
+        set: function (value) {
+            if (value <= this.x) {
                 this.width = 0;
             }
-            else
-            {
+            else {
                 this.width = value - this.x;
             }
         }
@@ -396,19 +374,15 @@ var Rectangle = new Class({
      */
     top: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y;
         },
 
-        set: function (value)
-        {
-            if (value >= this.bottom)
-            {
+        set: function (value) {
+            if (value >= this.bottom) {
                 this.height = 0;
             }
-            else
-            {
+            else {
                 this.height = (this.bottom - value);
             }
 
@@ -427,19 +401,15 @@ var Rectangle = new Class({
      */
     bottom: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y + this.height;
         },
 
-        set: function (value)
-        {
-            if (value <= this.y)
-            {
+        set: function (value) {
+            if (value <= this.y) {
                 this.height = 0;
             }
-            else
-            {
+            else {
                 this.height = value - this.y;
             }
         }
@@ -455,13 +425,11 @@ var Rectangle = new Class({
      */
     centerX: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x + (this.width / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.x = value - (this.width / 2);
         }
 
@@ -476,13 +444,11 @@ var Rectangle = new Class({
      */
     centerY: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y + (this.height / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.y = value - (this.height / 2);
         }
 

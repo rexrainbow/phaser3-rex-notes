@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * Returns a random point on a given Line.
@@ -19,8 +19,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} A random Point on the Line.
  */
-var Random = function (line, out)
-{
+var Random = function (line, out) {
     if (out === undefined) { out = new Point(); }
 
     var t = Math.random();

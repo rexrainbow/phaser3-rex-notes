@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Triangle = require('./Triangle');
+import Triangle from './Triangle';
 
 //  Builds a right triangle, with one 90 degree angle and two acute angles
 //  The x/y is the coordinate of the 90 degree angle (and will map to x1/y1 in the resulting Triangle)
@@ -23,8 +23,7 @@ var Triangle = require('./Triangle');
  *
  * @return {Phaser.Geom.Triangle} The constructed right Triangle.
  */
-var BuildRight = function (x, y, width, height)
-{
+var BuildRight = function (x, y, width, height) {
     if (height === undefined) { height = width; }
 
     //  90 degree angle

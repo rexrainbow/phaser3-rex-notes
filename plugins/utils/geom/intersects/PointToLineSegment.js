@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var PointToLine = require('./PointToLine');
+import PointToLine from './PointToLine.js';
 
 /**
  * Checks if a Point is located on the given line segment.
@@ -17,10 +17,8 @@ var PointToLine = require('./PointToLine');
  *
  * @return {boolean} `true` if the Point is on the given line segment, otherwise `false`.
  */
-var PointToLineSegment = function (point, line)
-{
-    if (!PointToLine(point, line))
-    {
+var PointToLineSegment = function (point, line) {
+    if (!PointToLine(point, line)) {
         return false;
     }
 

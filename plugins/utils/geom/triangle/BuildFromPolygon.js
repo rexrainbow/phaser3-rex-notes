@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var EarCut = require('../polygon/Earcut');
-var Triangle = require('./Triangle');
+import EarCut from '../polygon/Earcut.js';
+import Triangle from './Triangle.js';
 
 /**
  * [description]
@@ -23,8 +23,7 @@ var Triangle = require('./Triangle');
  *
  * @return {(array|Phaser.Geom.Triangle[])} [description]
  */
-var BuildFromPolygon = function (data, holes, scaleX, scaleY, out)
-{
+var BuildFromPolygon = function (data, holes, scaleX, scaleY, out) {
     if (holes === undefined) { holes = null; }
     if (scaleX === undefined) { scaleX = 1; }
     if (scaleY === undefined) { scaleY = 1; }
@@ -45,8 +44,7 @@ var BuildFromPolygon = function (data, holes, scaleX, scaleY, out)
     var x3;
     var y3;
 
-    for (var i = 0; i < tris.length; i += 3)
-    {
+    for (var i = 0; i < tris.length; i += 3) {
         a = tris[i];
         b = tris[i + 1];
         c = tris[i + 2];

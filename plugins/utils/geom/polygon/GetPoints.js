@@ -4,9 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Length = require('../line/Length');
-var Line = require('../line/Line');
-var Perimeter = require('./Perimeter');
+import Length from '../line/Length.js';
+import Line from '../line/Line.js';
+import Perimeter from './Perimeter.js';
 
 /**
  * Returns an array of Point objects containing the coordinates of the points around the perimeter of the Polygon,
@@ -22,26 +22,22 @@ var Perimeter = require('./Perimeter');
  *
  * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the perimeter of the Polygon.
  */
-var GetPoints = function (polygon, quantity, stepRate, out)
-{
+var GetPoints = function (polygon, quantity, stepRate, out) {
     if (out === undefined) { out = []; }
 
     var points = polygon.points;
     var perimeter = Perimeter(polygon);
 
     //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity)
-    {
+    if (!quantity) {
         quantity = perimeter / stepRate;
     }
 
-    for (var i = 0; i < quantity; i++)
-    {
+    for (var i = 0; i < quantity; i++) {
         var position = perimeter * (i / quantity);
         var accumulatedPerimeter = 0;
 
-        for (var j = 0; j < points.length; j++)
-        {
+        for (var j = 0; j < points.length; j++) {
             var pointA = points[j];
             var pointB = points[(j + 1) % points.length];
             var line = new Line(
@@ -52,8 +48,7 @@ var GetPoints = function (polygon, quantity, stepRate, out)
             );
             var length = Length(line);
 
-            if (position < accumulatedPerimeter || position > accumulatedPerimeter + length)
-            {
+            if (position < accumulatedPerimeter || position > accumulatedPerimeter + length) {
                 accumulatedPerimeter += length;
                 continue;
             }

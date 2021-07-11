@@ -4,11 +4,11 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../object/Class');
-var Contains = require('./Contains');
-var GetPoint = require('./GetPoint');
-var GetPoints = require('./GetPoints');
-var Random = require('./Random');
+import Class from '../../object/Class.js';
+import Contains from './Contains.js';
+import GetPoint from './GetPoint.js';
+import GetPoints from './GetPoints.js';
+import Random from './Random.js';
 
 /**
  * @classdesc
@@ -32,53 +32,52 @@ var Ellipse = new Class({
 
     initialize:
 
-    function Ellipse (x, y, width, height)
-    {
-        if (x === undefined) { x = 0; }
-        if (y === undefined) { y = 0; }
-        if (width === undefined) { width = 0; }
-        if (height === undefined) { height = 0; }
+        function Ellipse(x, y, width, height) {
+            if (x === undefined) { x = 0; }
+            if (y === undefined) { y = 0; }
+            if (width === undefined) { width = 0; }
+            if (height === undefined) { height = 0; }
 
-        /**
-         * The x position of the center of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = x;
+            /**
+             * The x position of the center of the ellipse.
+             *
+             * @name Phaser.Geom.Ellipse#x
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x = x;
 
-        /**
-         * The y position of the center of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = y;
+            /**
+             * The y position of the center of the ellipse.
+             *
+             * @name Phaser.Geom.Ellipse#y
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y = y;
 
-        /**
-         * The width of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#width
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.width = width;
+            /**
+             * The width of the ellipse.
+             *
+             * @name Phaser.Geom.Ellipse#width
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.width = width;
 
-        /**
-         * The height of the ellipse.
-         *
-         * @name Phaser.Geom.Ellipse#height
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.height = height;
-    },
+            /**
+             * The height of the ellipse.
+             *
+             * @name Phaser.Geom.Ellipse#height
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.height = height;
+        },
 
     /**
      * Check to see if the Ellipse contains the given x / y coordinates.
@@ -91,8 +90,7 @@ var Ellipse = new Class({
      *
      * @return {boolean} True if the coordinates are within the ellipse, otherwise false.
      */
-    contains: function (x, y)
-    {
+    contains: function (x, y) {
         return Contains(this, x, y);
     },
 
@@ -111,8 +109,7 @@ var Ellipse = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} A Point, or point-like object, containing the coordinates of the point around the ellipse.
      */
-    getPoint: function (position, point)
-    {
+    getPoint: function (position, point) {
         return GetPoint(this, position, point);
     },
 
@@ -129,8 +126,7 @@ var Ellipse = new Class({
      *
      * @return {Phaser.Geom.Point[]} An array of Point objects pertaining to the points around the circumference of the ellipse.
      */
-    getPoints: function (quantity, stepRate, output)
-    {
+    getPoints: function (quantity, stepRate, output) {
         return GetPoints(this, quantity, stepRate, output);
     },
 
@@ -146,8 +142,7 @@ var Ellipse = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} A Point object with the random values set in the `x` and `y` properties.
      */
-    getRandomPoint: function (point)
-    {
+    getRandomPoint: function (point) {
         return Random(this, point);
     },
 
@@ -164,8 +159,7 @@ var Ellipse = new Class({
      *
      * @return {Phaser.Geom.Ellipse} This Ellipse object.
      */
-    setTo: function (x, y, width, height)
-    {
+    setTo: function (x, y, width, height) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -183,8 +177,7 @@ var Ellipse = new Class({
      *
      * @return {Phaser.Geom.Ellipse} This Ellipse object.
      */
-    setEmpty: function ()
-    {
+    setEmpty: function () {
         this.width = 0;
         this.height = 0;
 
@@ -202,8 +195,7 @@ var Ellipse = new Class({
      *
      * @return {Phaser.Geom.Ellipse} This Ellipse object.
      */
-    setPosition: function (x, y)
-    {
+    setPosition: function (x, y) {
         if (y === undefined) { y = x; }
 
         this.x = x;
@@ -224,8 +216,7 @@ var Ellipse = new Class({
      *
      * @return {Phaser.Geom.Ellipse} This Ellipse object.
      */
-    setSize: function (width, height)
-    {
+    setSize: function (width, height) {
         if (height === undefined) { height = width; }
 
         this.width = width;
@@ -242,8 +233,7 @@ var Ellipse = new Class({
      *
      * @return {boolean} True if the Ellipse is empty, otherwise false.
      */
-    isEmpty: function ()
-    {
+    isEmpty: function () {
         return (this.width <= 0 || this.height <= 0);
     },
 
@@ -255,8 +245,7 @@ var Ellipse = new Class({
      *
      * @return {number} The minor radius.
      */
-    getMinorRadius: function ()
-    {
+    getMinorRadius: function () {
         return Math.min(this.width, this.height) / 2;
     },
 
@@ -268,8 +257,7 @@ var Ellipse = new Class({
      *
      * @return {number} The major radius.
      */
-    getMajorRadius: function ()
-    {
+    getMajorRadius: function () {
         return Math.max(this.width, this.height) / 2;
     },
 
@@ -282,13 +270,11 @@ var Ellipse = new Class({
      */
     left: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x - (this.width / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.x = value + (this.width / 2);
         }
 
@@ -303,13 +289,11 @@ var Ellipse = new Class({
      */
     right: {
 
-        get: function ()
-        {
+        get: function () {
             return this.x + (this.width / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.x = value - (this.width / 2);
         }
 
@@ -324,13 +308,11 @@ var Ellipse = new Class({
      */
     top: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y - (this.height / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.y = value + (this.height / 2);
         }
 
@@ -345,13 +327,11 @@ var Ellipse = new Class({
      */
     bottom: {
 
-        get: function ()
-        {
+        get: function () {
             return this.y + (this.height / 2);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             this.y = value - (this.height / 2);
         }
 

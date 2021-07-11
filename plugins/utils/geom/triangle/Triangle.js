@@ -4,12 +4,12 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../object/Class');
-var Contains = require('./Contains');
-var GetPoint = require('./GetPoint');
-var GetPoints = require('./GetPoints');
-var Line = require('../line/Line');
-var Random = require('./Random');
+import Class from '../../object/Class.js';
+import Contains from './Contains.js';
+import GetPoint from './GetPoint.js';
+import GetPoints from './GetPoints.js';
+import Line from '../line/Line.js';
+import Random from './Random.js';
 
 /**
  * @classdesc
@@ -33,75 +33,74 @@ var Triangle = new Class({
 
     initialize:
 
-    function Triangle (x1, y1, x2, y2, x3, y3)
-    {
-        if (x1 === undefined) { x1 = 0; }
-        if (y1 === undefined) { y1 = 0; }
-        if (x2 === undefined) { x2 = 0; }
-        if (y2 === undefined) { y2 = 0; }
-        if (x3 === undefined) { x3 = 0; }
-        if (y3 === undefined) { y3 = 0; }
+        function Triangle(x1, y1, x2, y2, x3, y3) {
+            if (x1 === undefined) { x1 = 0; }
+            if (y1 === undefined) { y1 = 0; }
+            if (x2 === undefined) { x2 = 0; }
+            if (y2 === undefined) { y2 = 0; }
+            if (x3 === undefined) { x3 = 0; }
+            if (y3 === undefined) { y3 = 0; }
 
-        /**
-         * `x` coordinate of the first point.
-         *
-         * @name Phaser.Geom.Triangle#x1
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x1 = x1;
+            /**
+             * `x` coordinate of the first point.
+             *
+             * @name Phaser.Geom.Triangle#x1
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x1 = x1;
 
-        /**
-         * `y` coordinate of the first point.
-         *
-         * @name Phaser.Geom.Triangle#y1
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y1 = y1;
+            /**
+             * `y` coordinate of the first point.
+             *
+             * @name Phaser.Geom.Triangle#y1
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y1 = y1;
 
-        /**
-         * `x` coordinate of the second point.
-         *
-         * @name Phaser.Geom.Triangle#x2
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x2 = x2;
+            /**
+             * `x` coordinate of the second point.
+             *
+             * @name Phaser.Geom.Triangle#x2
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x2 = x2;
 
-        /**
-         * `y` coordinate of the second point.
-         *
-         * @name Phaser.Geom.Triangle#y2
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y2 = y2;
+            /**
+             * `y` coordinate of the second point.
+             *
+             * @name Phaser.Geom.Triangle#y2
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y2 = y2;
 
-        /**
-         * `x` coordinate of the third point.
-         *
-         * @name Phaser.Geom.Triangle#x3
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x3 = x3;
+            /**
+             * `x` coordinate of the third point.
+             *
+             * @name Phaser.Geom.Triangle#x3
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x3 = x3;
 
-        /**
-         * `y` coordinate of the third point.
-         *
-         * @name Phaser.Geom.Triangle#y3
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y3 = y3;
-    },
+            /**
+             * `y` coordinate of the third point.
+             *
+             * @name Phaser.Geom.Triangle#y3
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y3 = y3;
+        },
 
     /**
      * Checks whether a given points lies within the triangle.
@@ -114,8 +113,7 @@ var Triangle = new Class({
      *
      * @return {boolean} `true` if the coordinate pair is within the triangle, otherwise `false`.
      */
-    contains: function (x, y)
-    {
+    contains: function (x, y) {
         return Contains(this, x, y);
     },
 
@@ -132,8 +130,7 @@ var Triangle = new Class({
      *
      * @return {(Phaser.Geom.Point|object)} Calculated `Point` that represents the requested position. It is the same as `output` when this parameter has been given.
      */
-    getPoint: function (position, output)
-    {
+    getPoint: function (position, output) {
         return GetPoint(this, position, output);
     },
 
@@ -151,8 +148,7 @@ var Triangle = new Class({
      *
      * @return {(array|Phaser.Geom.Point[])} Returns a list of calculated `Point` instances or the filled array passed as parameter `output`.
      */
-    getPoints: function (quantity, stepRate, output)
-    {
+    getPoints: function (quantity, stepRate, output) {
         return GetPoints(this, quantity, stepRate, output);
     },
 
@@ -168,8 +164,7 @@ var Triangle = new Class({
      *
      * @return {Phaser.Geom.Point} Random `Point`. When parameter `point` has been provided it will be returned.
      */
-    getRandomPoint: function (point)
-    {
+    getRandomPoint: function (point) {
         return Random(this, point);
     },
 
@@ -188,8 +183,7 @@ var Triangle = new Class({
      *
      * @return {Phaser.Geom.Triangle} This Triangle object.
      */
-    setTo: function (x1, y1, x2, y2, x3, y3)
-    {
+    setTo: function (x1, y1, x2, y2, x3, y3) {
         if (x1 === undefined) { x1 = 0; }
         if (y1 === undefined) { y1 = 0; }
         if (x2 === undefined) { x2 = 0; }
@@ -221,8 +215,7 @@ var Triangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to line A of this Triangle.
      */
-    getLineA: function (line)
-    {
+    getLineA: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.x1, this.y1, this.x2, this.y2);
@@ -242,8 +235,7 @@ var Triangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to line B of this Triangle.
      */
-    getLineB: function (line)
-    {
+    getLineB: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.x2, this.y2, this.x3, this.y3);
@@ -263,8 +255,7 @@ var Triangle = new Class({
      *
      * @return {Phaser.Geom.Line} A Line object that corresponds to line C of this Triangle.
      */
-    getLineC: function (line)
-    {
+    getLineC: function (line) {
         if (line === undefined) { line = new Line(); }
 
         line.setTo(this.x3, this.y3, this.x1, this.y1);
@@ -281,25 +272,20 @@ var Triangle = new Class({
      */
     left: {
 
-        get: function ()
-        {
+        get: function () {
             return Math.min(this.x1, this.x2, this.x3);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             var diff = 0;
 
-            if (this.x1 <= this.x2 && this.x1 <= this.x3)
-            {
+            if (this.x1 <= this.x2 && this.x1 <= this.x3) {
                 diff = this.x1 - value;
             }
-            else if (this.x2 <= this.x1 && this.x2 <= this.x3)
-            {
+            else if (this.x2 <= this.x1 && this.x2 <= this.x3) {
                 diff = this.x2 - value;
             }
-            else
-            {
+            else {
                 diff = this.x3 - value;
             }
 
@@ -319,25 +305,20 @@ var Triangle = new Class({
      */
     right: {
 
-        get: function ()
-        {
+        get: function () {
             return Math.max(this.x1, this.x2, this.x3);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             var diff = 0;
 
-            if (this.x1 >= this.x2 && this.x1 >= this.x3)
-            {
+            if (this.x1 >= this.x2 && this.x1 >= this.x3) {
                 diff = this.x1 - value;
             }
-            else if (this.x2 >= this.x1 && this.x2 >= this.x3)
-            {
+            else if (this.x2 >= this.x1 && this.x2 >= this.x3) {
                 diff = this.x2 - value;
             }
-            else
-            {
+            else {
                 diff = this.x3 - value;
             }
 
@@ -357,25 +338,20 @@ var Triangle = new Class({
      */
     top: {
 
-        get: function ()
-        {
+        get: function () {
             return Math.min(this.y1, this.y2, this.y3);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             var diff = 0;
 
-            if (this.y1 <= this.y2 && this.y1 <= this.y3)
-            {
+            if (this.y1 <= this.y2 && this.y1 <= this.y3) {
                 diff = this.y1 - value;
             }
-            else if (this.y2 <= this.y1 && this.y2 <= this.y3)
-            {
+            else if (this.y2 <= this.y1 && this.y2 <= this.y3) {
                 diff = this.y2 - value;
             }
-            else
-            {
+            else {
                 diff = this.y3 - value;
             }
 
@@ -395,25 +371,20 @@ var Triangle = new Class({
      */
     bottom: {
 
-        get: function ()
-        {
+        get: function () {
             return Math.max(this.y1, this.y2, this.y3);
         },
 
-        set: function (value)
-        {
+        set: function (value) {
             var diff = 0;
 
-            if (this.y1 >= this.y2 && this.y1 >= this.y3)
-            {
+            if (this.y1 >= this.y2 && this.y1 >= this.y3) {
                 diff = this.y1 - value;
             }
-            else if (this.y2 >= this.y1 && this.y2 >= this.y3)
-            {
+            else if (this.y2 >= this.y1 && this.y2 >= this.y3) {
                 diff = this.y2 - value;
             }
-            else
-            {
+            else {
                 diff = this.y3 - value;
             }
 

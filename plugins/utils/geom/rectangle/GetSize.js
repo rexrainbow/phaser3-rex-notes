@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 
 /**
@@ -21,8 +21,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} [description]
  */
-var GetSize = function (rect, out)
-{
+var GetSize = function (rect, out) {
     if (out === undefined) { out = new Point(); }
 
     out.x = rect.width;

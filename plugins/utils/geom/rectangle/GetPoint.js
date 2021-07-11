@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Perimeter = require('./Perimeter');
-var Point = require('../point/Point');
+import Perimeter from './Perimeter.js';
+import Point from '../point/Point';
 
 /**
  * Position is a value between 0 and 1 where 0 = the top-left of the rectangle and 0.5 = the bottom right.
@@ -21,12 +21,10 @@ var Point = require('../point/Point');
  *
  * @return {Phaser.Geom.Point} [description]
  */
-var GetPoint = function (rectangle, position, out)
-{
+var GetPoint = function (rectangle, position, out) {
     if (out === undefined) { out = new Point(); }
 
-    if (position <= 0 || position >= 1)
-    {
+    if (position <= 0 || position >= 1) {
         out.x = rectangle.x;
         out.y = rectangle.y;
 
@@ -35,31 +33,26 @@ var GetPoint = function (rectangle, position, out)
 
     var p = Perimeter(rectangle) * position;
 
-    if (position > 0.5)
-    {
+    if (position > 0.5) {
         p -= (rectangle.width + rectangle.height);
 
-        if (p <= rectangle.width)
-        {
+        if (p <= rectangle.width) {
             //  Face 3
             out.x = rectangle.right - p;
             out.y = rectangle.bottom;
         }
-        else
-        {
+        else {
             //  Face 4
             out.x = rectangle.x;
             out.y = rectangle.bottom - (p - rectangle.width);
         }
     }
-    else if (p <= rectangle.width)
-    {
+    else if (p <= rectangle.width) {
         //  Face 1
         out.x = rectangle.x + p;
         out.y = rectangle.y;
     }
-    else
-    {
+    else {
         //  Face 2
         out.x = rectangle.right;
         out.y = rectangle.y + (p - rectangle.width);

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('../rectangle/Rectangle');
+import Rectangle from '../rectangle/Rectangle.js';
 
 /**
  * Calculates the bounding AABB rectangle of a polygon.
@@ -19,8 +19,7 @@ var Rectangle = require('../rectangle/Rectangle');
  *
  * @return {(Phaser.Geom.Rectangle|object)} The resulting rectangle or object that is passed in with position and dimensions of the polygon's AABB.
  */
-var GetAABB = function (polygon, out)
-{
+var GetAABB = function (polygon, out) {
     if (out === undefined) { out = new Rectangle(); }
 
     var minX = Infinity;
@@ -29,8 +28,7 @@ var GetAABB = function (polygon, out)
     var maxY = -minY;
     var p;
 
-    for (var i = 0; i < polygon.points.length; i++)
-    {
+    for (var i = 0; i < polygon.points.length; i++) {
         p = polygon.points[i];
 
         minX = Math.min(minX, p.x);

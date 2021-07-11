@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var RotateAroundXY = require('./RotateAroundXY');
-var InCenter = require('./InCenter');
+import RotateAroundXY from './RotateAroundXY.js';
+import InCenter from './InCenter.js';
 
 /**
  * Rotates a Triangle about its incenter, which is the point at which its three angle bisectors meet.
@@ -20,8 +20,7 @@ var InCenter = require('./InCenter');
  *
  * @return {Phaser.Geom.Triangle} The rotated Triangle.
  */
-var Rotate = function (triangle, angle)
-{
+var Rotate = function (triangle, angle) {
     var point = InCenter(triangle);
 
     return RotateAroundXY(triangle, point.x, point.y, angle);

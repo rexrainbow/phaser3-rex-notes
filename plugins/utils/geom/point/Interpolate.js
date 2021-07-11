@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('./Point');
+import Point from './Point.js';
 
 /**
  * [description]
@@ -21,8 +21,7 @@ var Point = require('./Point');
  *
  * @return {(Phaser.Geom.Point|object)} Either the object from the `out` argument with the properties `x` and `y` set to the result of the interpolation or a newly created `Point` object.
  */
-var Interpolate = function (pointA, pointB, t, out)
-{
+var Interpolate = function (pointA, pointB, t, out) {
     if (t === undefined) { t = 0; }
     if (out === undefined) { out = new Point(); }
 

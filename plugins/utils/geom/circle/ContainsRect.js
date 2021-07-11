@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains');
+import Contains from './Contains.js';
 
 /**
  * Check to see if the Circle contains all four points of the given Rectangle object.
@@ -17,8 +17,7 @@ var Contains = require('./Contains');
  *
  * @return {boolean} True if all of the Rectangle coordinates are within the circle, otherwise false.
  */
-var ContainsRect = function (circle, rect)
-{
+var ContainsRect = function (circle, rect) {
     return (
         Contains(circle, rect.x, rect.y) &&
         Contains(circle, rect.right, rect.y) &&

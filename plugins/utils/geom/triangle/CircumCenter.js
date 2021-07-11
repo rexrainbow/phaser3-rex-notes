@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Vector2 = require('../../math/Vector2');
+import Vector2 from '../../math/Vector2.js';
 
 //  Adapted from http://bjornharrtell.github.io/jsts/doc/api/jsts_geom_Triangle.js.html
 
@@ -22,8 +22,7 @@ var Vector2 = require('../../math/Vector2');
  *
  * @return {number} the determinant.
  */
-function det (m00, m01, m10, m11)
-{
+function det(m00, m01, m10, m11) {
     return (m00 * m11) - (m01 * m10);
 }
 
@@ -44,8 +43,7 @@ function det (m00, m01, m10, m11)
  *
  * @return {Phaser.Math.Vector2} [description]
  */
-var CircumCenter = function (triangle, out)
-{
+var CircumCenter = function (triangle, out) {
     if (out === undefined) { out = new Vector2(); }
 
     var cx = triangle.x3;

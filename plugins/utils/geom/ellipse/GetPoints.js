@@ -4,10 +4,10 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circumference = require('./Circumference');
-var CircumferencePoint = require('./CircumferencePoint');
-var FromPercent = require('../../math/FromPercent');
-var MATH_CONST = require('../../math/const');
+import Circumference from './Circumference.js';
+import CircumferencePoint from './CircumferencePoint.js';
+import FromPercent from '../../math/FromPercent.js';
+import MATH_CONST from '../../math/const.js';
 
 /**
  * Returns an array of Point objects containing the coordinates of the points around the circumference of the Ellipse,
@@ -25,18 +25,15 @@ var MATH_CONST = require('../../math/const');
  *
  * @return {(array|Phaser.Geom.Point[])} An array of Point objects pertaining to the points around the circumference of the ellipse.
  */
-var GetPoints = function (ellipse, quantity, stepRate, out)
-{
+var GetPoints = function (ellipse, quantity, stepRate, out) {
     if (out === undefined) { out = []; }
 
     //  If quantity is a falsey value (false, null, 0, undefined, etc) then we calculate it based on the stepRate instead.
-    if (!quantity)
-    {
+    if (!quantity) {
         quantity = Circumference(ellipse) / stepRate;
     }
 
-    for (var i = 0; i < quantity; i++)
-    {
+    for (var i = 0; i < quantity; i++) {
         var angle = FromPercent(i / quantity, 0, MATH_CONST.PI2);
 
         out.push(CircumferencePoint(ellipse, angle));

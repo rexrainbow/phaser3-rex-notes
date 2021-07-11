@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Circle = require('./Circle');
+import Circle from './Circle.js';
 
 /**
  * Creates a new Circle instance based on the values contained in the given source.
@@ -16,8 +16,7 @@ var Circle = require('./Circle');
  *
  * @return {Phaser.Geom.Circle} A clone of the source Circle.
  */
-var Clone = function (source)
-{
+var Clone = function (source) {
     return new Circle(source.x, source.y, source.radius);
 };
 

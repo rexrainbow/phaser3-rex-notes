@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
-var Length = require('../line/Length');
+import Point from '../point/Point.js';
+import Length from '../line/Length.js';
 
 /**
  * Returns a Point from around the perimeter of a Triangle.
@@ -21,16 +21,14 @@ var Length = require('../line/Length');
  *
  * @return {(Phaser.Geom.Point|object)} A Point object containing the given position from the perimeter of the triangle.
  */
-var GetPoint = function (triangle, position, out)
-{
+var GetPoint = function (triangle, position, out) {
     if (out === undefined) { out = new Point(); }
 
     var line1 = triangle.getLineA();
     var line2 = triangle.getLineB();
     var line3 = triangle.getLineC();
 
-    if (position <= 0 || position >= 1)
-    {
+    if (position <= 0 || position >= 1) {
         out.x = line1.x1;
         out.y = line1.y1;
 
@@ -48,16 +46,14 @@ var GetPoint = function (triangle, position, out)
 
     //  Which line is it on?
 
-    if (p < length1)
-    {
+    if (p < length1) {
         //  Line 1
         localPosition = p / length1;
 
         out.x = line1.x1 + (line1.x2 - line1.x1) * localPosition;
         out.y = line1.y1 + (line1.y2 - line1.y1) * localPosition;
     }
-    else if (p > length1 + length2)
-    {
+    else if (p > length1 + length2) {
         //  Line 3
         p -= length1 + length2;
         localPosition = p / length3;
@@ -65,8 +61,7 @@ var GetPoint = function (triangle, position, out)
         out.x = line3.x1 + (line3.x2 - line3.x1) * localPosition;
         out.y = line3.y1 + (line3.y2 - line3.y1) * localPosition;
     }
-    else
-    {
+    else {
         //  Line 2
         p -= length1;
         localPosition = p / length2;

@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle');
+import Rectangle from './Rectangle.js';
 
 /**
  * Creates a new Rectangle or repositions and/or resizes an existing Rectangle so that it encompasses the two given Rectangles, i.e. calculates their union.
@@ -20,8 +20,7 @@ var Rectangle = require('./Rectangle');
  *
  * @return {Phaser.Geom.Rectangle} The modified `out` Rectangle, or a new Rectangle if none was provided.
  */
-var Union = function (rectA, rectB, out)
-{
+var Union = function (rectA, rectB, out) {
     if (out === undefined) { out = new Rectangle(); }
 
     //  Cache vars so we can use one of the input rects as the output rect

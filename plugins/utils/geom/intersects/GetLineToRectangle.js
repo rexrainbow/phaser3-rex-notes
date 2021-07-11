@@ -5,9 +5,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
-var LineToLine = require('./LineToLine');
-var LineToRectangle = require('./LineToRectangle');
+import Point from '../point/Point.js';
+import LineToLine from './LineToLine.js';
+import LineToRectangle from './LineToRectangle.js';
 
 /**
  * Checks for intersection between the Line and a Rectangle shape,
@@ -22,18 +22,16 @@ var LineToRectangle = require('./LineToRectangle');
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetLineToRectangle = function (line, rect, out)
-{
+var GetLineToRectangle = function (line, rect, out) {
     if (out === undefined) { out = []; }
 
-    if (LineToRectangle(line, rect))
-    {
+    if (LineToRectangle(line, rect)) {
         var lineA = rect.getLineA();
         var lineB = rect.getLineB();
         var lineC = rect.getLineC();
         var lineD = rect.getLineD();
 
-        var output = [ new Point(), new Point(), new Point(), new Point() ];
+        var output = [new Point(), new Point(), new Point(), new Point()];
 
         var result = [
             LineToLine(lineA, line, output[0]),
@@ -42,8 +40,7 @@ var GetLineToRectangle = function (line, rect, out)
             LineToLine(lineD, line, output[3])
         ];
 
-        for (var i = 0; i < 4; i++)
-        {
+        for (var i = 0; i < 4; i++) {
             if (result[i]) { out.push(output[i]); }
         }
     }

@@ -5,8 +5,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var TriangleToTriangle = require('./TriangleToTriangle');
-var GetTriangleToLine = require('./GetTriangleToLine');
+import TriangleToTriangle from './TriangleToTriangle.js';
+import GetTriangleToLine from './GetTriangleToLine.js';
 
 /**
  * Checks if two Triangles intersect, and returns the intersection points as a Point object array.
@@ -22,12 +22,10 @@ var GetTriangleToLine = require('./GetTriangleToLine');
  *
  * @return {array} An array with the points of intersection if objects intersect, otherwise an empty array.
  */
-var GetTriangleToTriangle = function (triangleA, triangleB, out)
-{
+var GetTriangleToTriangle = function (triangleA, triangleB, out) {
     if (out === undefined) { out = []; }
 
-    if (TriangleToTriangle(triangleA, triangleB))
-    {
+    if (TriangleToTriangle(triangleA, triangleB)) {
         var lineA = triangleB.getLineA();
         var lineB = triangleB.getLineB();
         var lineC = triangleB.getLineC();

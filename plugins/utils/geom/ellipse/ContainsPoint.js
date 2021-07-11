@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('./Contains');
+import Contains from './Contains.js';
 
 /**
  * Check to see if the Ellipse contains the given Point object.
@@ -17,8 +17,7 @@ var Contains = require('./Contains');
  *
  * @return {boolean} True if the Point coordinates are within the circle, otherwise false.
  */
-var ContainsPoint = function (ellipse, point)
-{
+var ContainsPoint = function (ellipse, point) {
     return Contains(ellipse, point.x, point.y);
 };
 

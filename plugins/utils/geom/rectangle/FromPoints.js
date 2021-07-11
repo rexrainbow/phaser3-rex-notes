@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('./Rectangle');
+import Rectangle from './Rectangle.js';
 
 //  points is an array of Point-like objects,
 //  either 2 dimensional arrays, or objects with public x/y properties:
@@ -27,12 +27,10 @@ var Rectangle = require('./Rectangle');
  *
  * @return {Phaser.Geom.Rectangle} The adjusted `out` Rectangle, or a new Rectangle if none was provided.
  */
-var FromPoints = function (points, out)
-{
+var FromPoints = function (points, out) {
     if (out === undefined) { out = new Rectangle(); }
 
-    if (points.length === 0)
-    {
+    if (points.length === 0) {
         return out;
     }
 
@@ -46,17 +44,14 @@ var FromPoints = function (points, out)
     var px;
     var py;
 
-    for (var i = 0; i < points.length; i++)
-    {
+    for (var i = 0; i < points.length; i++) {
         p = points[i];
 
-        if (Array.isArray(p))
-        {
+        if (Array.isArray(p)) {
             px = p[0];
             py = p[1];
         }
-        else
-        {
+        else {
             px = p.x;
             py = p.y;
         }

@@ -5,7 +5,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 /**
  * Get the nearest point on a line perpendicular to the given point.
@@ -21,8 +21,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} The nearest point on the line.
  */
-var GetNearestPoint = function (line, point, out)
-{
+var GetNearestPoint = function (line, point, out) {
     if (out === undefined) { out = new Point(); }
 
     var x1 = line.x1;
@@ -33,8 +32,7 @@ var GetNearestPoint = function (line, point, out)
 
     var L2 = (((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
 
-    if (L2 === 0)
-    {
+    if (L2 === 0) {
         return out;
     }
 

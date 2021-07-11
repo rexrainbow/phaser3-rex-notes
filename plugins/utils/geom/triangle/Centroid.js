@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Point = require('../point/Point');
+import Point from '../point/Point.js';
 
 //  The three medians (the lines drawn from the vertices to the bisectors of the opposite sides)
 //  meet in the centroid or center of mass (center of gravity).
@@ -25,8 +25,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} The `out` object with modified `x` and `y` properties, or a new Point if none was provided.
  */
-var Centroid = function (triangle, out)
-{
+var Centroid = function (triangle, out) {
     if (out === undefined) { out = new Point(); }
 
     out.x = (triangle.x1 + triangle.x2 + triangle.x3) / 3;

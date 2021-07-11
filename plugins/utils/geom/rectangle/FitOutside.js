@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var GetAspectRatio = require('./GetAspectRatio');
+import GetAspectRatio from './GetAspectRatio.js';
 
 /**
  * Adjusts the target rectangle, changing its width, height and position,
@@ -23,17 +23,14 @@ var GetAspectRatio = require('./GetAspectRatio');
  *
  * @return {Phaser.Geom.Rectangle} The modified target rectangle instance.
  */
-var FitOutside = function (target, source)
-{
+var FitOutside = function (target, source) {
     var ratio = GetAspectRatio(target);
 
-    if (ratio > GetAspectRatio(source))
-    {
+    if (ratio > GetAspectRatio(source)) {
         //  Wider than Tall
         target.setSize(source.height * ratio, source.height);
     }
-    else
-    {
+    else {
         //  Taller than Wide
         target.setSize(source.width, source.width / ratio);
     }

@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('../circle/Contains');
-var Point = require('../point/Point');
+import Contains from '../circle/Contains.js';
+import Point from '../point/Point.js';
 
 var tmp = new Point();
 
@@ -23,20 +23,17 @@ var tmp = new Point();
  *
  * @return {boolean} `true` if the two objects intersect, otherwise `false`.
  */
-var LineToCircle = function (line, circle, nearest)
-{
+var LineToCircle = function (line, circle, nearest) {
     if (nearest === undefined) { nearest = tmp; }
 
-    if (Contains(circle, line.x1, line.y1))
-    {
+    if (Contains(circle, line.x1, line.y1)) {
         nearest.x = line.x1;
         nearest.y = line.y1;
 
         return true;
     }
 
-    if (Contains(circle, line.x2, line.y2))
-    {
+    if (Contains(circle, line.x2, line.y2)) {
         nearest.x = line.x2;
         nearest.y = line.y2;
 
@@ -54,8 +51,7 @@ var LineToCircle = function (line, circle, nearest)
     var px = dx;
     var py = dy;
 
-    if (dLen2 > 0)
-    {
+    if (dLen2 > 0) {
         var dp = ((lcx * dx) + (lcy * dy)) / dLen2;
 
         px *= dp;
@@ -64,10 +60,10 @@ var LineToCircle = function (line, circle, nearest)
 
     nearest.x = line.x1 + px;
     nearest.y = line.y1 + py;
-    
+
     //  len2 of p
     var pLen2 = (px * px) + (py * py);
-    
+
     return (
         pLen2 <= dLen2 &&
         ((px * dx) + (py * dy)) >= 0 &&

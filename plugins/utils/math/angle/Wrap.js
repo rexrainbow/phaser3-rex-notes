@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MathWrap = require('../Wrap');
+import MathWrap from '../Wrap.js';
 
 /**
  * Wrap an angle.
@@ -18,8 +18,7 @@ var MathWrap = require('../Wrap');
  *
  * @return {number} The wrapped angle, in radians.
  */
-var Wrap = function (angle)
-{
+var Wrap = function (angle) {
     return MathWrap(angle, -Math.PI, Math.PI);
 };
 

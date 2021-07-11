@@ -4,8 +4,8 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Contains = require('../triangle/Contains');
-var LineToLine = require('./LineToLine');
+import Contains from '../triangle/Contains.js';
+import LineToLine from './LineToLine.js';
 
 /**
  * Checks if a Triangle and a Line intersect.
@@ -20,27 +20,22 @@ var LineToLine = require('./LineToLine');
  *
  * @return {boolean} `true` if the Triangle and the Line intersect, otherwise `false`.
  */
-var TriangleToLine = function (triangle, line)
-{
+var TriangleToLine = function (triangle, line) {
     //  If the Triangle contains either the start or end point of the line, it intersects
-    if (Contains(triangle, line.getPointA()) || Contains(triangle, line.getPointB()))
-    {
+    if (Contains(triangle, line.getPointA()) || Contains(triangle, line.getPointB())) {
         return true;
     }
 
     //  Now check the line against each line of the Triangle
-    if (LineToLine(triangle.getLineA(), line))
-    {
+    if (LineToLine(triangle.getLineA(), line)) {
         return true;
     }
 
-    if (LineToLine(triangle.getLineB(), line))
-    {
+    if (LineToLine(triangle.getLineB(), line)) {
         return true;
     }
 
-    if (LineToLine(triangle.getLineC(), line))
-    {
+    if (LineToLine(triangle.getLineC(), line)) {
         return true;
     }
 

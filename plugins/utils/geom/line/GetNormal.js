@@ -4,9 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var MATH_CONST = require('../../math/const');
-var Angle = require('./Angle');
-var Point = require('../point/Point');
+import MATH_CONST from '../../math/const.js';
+import Angle from './Angle.js';
+import Point from '../point/Point.js';
 
 /**
  * Calculate the normal of the given line.
@@ -23,8 +23,7 @@ var Point = require('../point/Point');
  *
  * @return {(Phaser.Geom.Point|object)} The normal of the Line.
  */
-var GetNormal = function (line, out)
-{
+var GetNormal = function (line, out) {
     if (out === undefined) { out = new Point(); }
 
     var a = Angle(line) - MATH_CONST.TAU;

@@ -7,7 +7,7 @@
 //  Adapted from [gl-matrix](https://github.com/toji/gl-matrix) by toji
 //  and [vecmath](https://github.com/mattdesl/vecmath) by mattdesl
 
-var Class = require('../object/Class');
+import Class from '../object/Class.js';
 
 /**
  * @classdesc
@@ -27,41 +27,38 @@ var Vector2 = new Class({
 
     initialize:
 
-    function Vector2 (x, y)
-    {
-        /**
-         * The x component of this Vector.
-         *
-         * @name Phaser.Math.Vector2#x
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.x = 0;
+        function Vector2(x, y) {
+            /**
+             * The x component of this Vector.
+             *
+             * @name Phaser.Math.Vector2#x
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.x = 0;
 
-        /**
-         * The y component of this Vector.
-         *
-         * @name Phaser.Math.Vector2#y
-         * @type {number}
-         * @default 0
-         * @since 3.0.0
-         */
-        this.y = 0;
+            /**
+             * The y component of this Vector.
+             *
+             * @name Phaser.Math.Vector2#y
+             * @type {number}
+             * @default 0
+             * @since 3.0.0
+             */
+            this.y = 0;
 
-        if (typeof x === 'object')
-        {
-            this.x = x.x || 0;
-            this.y = x.y || 0;
-        }
-        else
-        {
-            if (y === undefined) { y = x; }
+            if (typeof x === 'object') {
+                this.x = x.x || 0;
+                this.y = x.y || 0;
+            }
+            else {
+                if (y === undefined) { y = x; }
 
-            this.x = x || 0;
-            this.y = y || 0;
-        }
-    },
+                this.x = x || 0;
+                this.y = y || 0;
+            }
+        },
 
     /**
      * Make a clone of this Vector2.
@@ -71,8 +68,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} A clone of this Vector2.
      */
-    clone: function ()
-    {
+    clone: function () {
         return new Vector2(this.x, this.y);
     },
 
@@ -86,8 +82,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    copy: function (src)
-    {
+    copy: function (src) {
         this.x = src.x || 0;
         this.y = src.y || 0;
 
@@ -104,8 +99,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    setFromObject: function (obj)
-    {
+    setFromObject: function (obj) {
         this.x = obj.x || 0;
         this.y = obj.y || 0;
 
@@ -123,8 +117,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    set: function (x, y)
-    {
+    set: function (x, y) {
         if (y === undefined) { y = x; }
 
         this.x = x;
@@ -144,8 +137,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    setTo: function (x, y)
-    {
+    setTo: function (x, y) {
         return this.set(x, y);
     },
 
@@ -160,8 +152,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    setToPolar: function (azimuth, radius)
-    {
+    setToPolar: function (azimuth, radius) {
         if (radius == null) { radius = 1; }
 
         this.x = Math.cos(azimuth) * radius;
@@ -182,8 +173,7 @@ var Vector2 = new Class({
      *
      * @return {boolean} Whether the given Vector is equal to this Vector.
      */
-    equals: function (v)
-    {
+    equals: function (v) {
         return ((this.x === v.x) && (this.y === v.y));
     },
 
@@ -195,14 +185,12 @@ var Vector2 = new Class({
      *
      * @return {number} The angle between this Vector, and the positive x-axis, given in radians.
      */
-    angle: function ()
-    {
+    angle: function () {
         // computes the angle in radians with respect to the positive x-axis
 
         var angle = Math.atan2(this.y, this.x);
 
-        if (angle < 0)
-        {
+        if (angle < 0) {
             angle += 2 * Math.PI;
         }
 
@@ -219,8 +207,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    add: function (src)
-    {
+    add: function (src) {
         this.x += src.x;
         this.y += src.y;
 
@@ -237,8 +224,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    subtract: function (src)
-    {
+    subtract: function (src) {
         this.x -= src.x;
         this.y -= src.y;
 
@@ -257,8 +243,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    multiply: function (src)
-    {
+    multiply: function (src) {
         this.x *= src.x;
         this.y *= src.y;
 
@@ -275,15 +260,12 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    scale: function (value)
-    {
-        if (isFinite(value))
-        {
+    scale: function (value) {
+        if (isFinite(value)) {
             this.x *= value;
             this.y *= value;
         }
-        else
-        {
+        else {
             this.x = 0;
             this.y = 0;
         }
@@ -303,8 +285,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    divide: function (src)
-    {
+    divide: function (src) {
         this.x /= src.x;
         this.y /= src.y;
 
@@ -319,8 +300,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    negate: function ()
-    {
+    negate: function () {
         this.x = -this.x;
         this.y = -this.y;
 
@@ -337,8 +317,7 @@ var Vector2 = new Class({
      *
      * @return {number} The distance from this Vector to the given Vector.
      */
-    distance: function (src)
-    {
+    distance: function (src) {
         var dx = src.x - this.x;
         var dy = src.y - this.y;
 
@@ -355,8 +334,7 @@ var Vector2 = new Class({
      *
      * @return {number} The distance from this Vector to the given Vector, squared.
      */
-    distanceSq: function (src)
-    {
+    distanceSq: function (src) {
         var dx = src.x - this.x;
         var dy = src.y - this.y;
 
@@ -371,8 +349,7 @@ var Vector2 = new Class({
      *
      * @return {number} The length of this Vector.
      */
-    length: function ()
-    {
+    length: function () {
         var x = this.x;
         var y = this.y;
 
@@ -387,8 +364,7 @@ var Vector2 = new Class({
      *
      * @return {number} The length of this Vector, squared.
      */
-    lengthSq: function ()
-    {
+    lengthSq: function () {
         var x = this.x;
         var y = this.y;
 
@@ -405,14 +381,12 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    normalize: function ()
-    {
+    normalize: function () {
         var x = this.x;
         var y = this.y;
         var len = x * x + y * y;
 
-        if (len > 0)
-        {
+        if (len > 0) {
             len = 1 / Math.sqrt(len);
 
             this.x = x * len;
@@ -430,8 +404,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    normalizeRightHand: function ()
-    {
+    normalizeRightHand: function () {
         var x = this.x;
 
         this.x = this.y * -1;
@@ -450,8 +423,7 @@ var Vector2 = new Class({
      *
      * @return {number} The dot product of this Vector and the given Vector.
      */
-    dot: function (src)
-    {
+    dot: function (src) {
         return this.x * src.x + this.y * src.y;
     },
 
@@ -465,8 +437,7 @@ var Vector2 = new Class({
      *
      * @return {number} The cross product of this Vector and the given Vector.
      */
-    cross: function (src)
-    {
+    cross: function (src) {
         return this.x * src.y - this.y * src.x;
     },
 
@@ -483,8 +454,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    lerp: function (src, t)
-    {
+    lerp: function (src, t) {
         if (t === undefined) { t = 0; }
 
         var ax = this.x;
@@ -506,8 +476,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    transformMat3: function (mat)
-    {
+    transformMat3: function (mat) {
         var x = this.x;
         var y = this.y;
         var m = mat.val;
@@ -528,8 +497,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    transformMat4: function (mat)
-    {
+    transformMat4: function (mat) {
         var x = this.x;
         var y = this.y;
         var m = mat.val;
@@ -548,8 +516,7 @@ var Vector2 = new Class({
      *
      * @return {Phaser.Math.Vector2} This Vector2.
      */
-    reset: function ()
-    {
+    reset: function () {
         this.x = 0;
         this.y = 0;
 

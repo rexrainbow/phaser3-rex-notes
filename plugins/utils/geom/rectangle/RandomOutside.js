@@ -4,9 +4,9 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Between = require('../../math/Between');
-var ContainsRect = require('./ContainsRect');
-var Point = require('../point/Point');
+import Between from '../../math/Between.js';
+import ContainsRect from './ContainsRect.js';
+import Point from '../point/Point.js';
 
 /**
  * Calculates a random point that lies within the `outer` Rectangle, but outside of the `inner` Rectangle.
@@ -23,20 +23,17 @@ var Point = require('../point/Point');
  *
  * @return {Phaser.Geom.Point} A Point object containing the random values in its `x` and `y` properties.
  */
-var RandomOutside = function (outer, inner, out)
-{
+var RandomOutside = function (outer, inner, out) {
     if (out === undefined) { out = new Point(); }
 
-    if (ContainsRect(outer, inner))
-    {
+    if (ContainsRect(outer, inner)) {
         //  Pick a random quadrant
         //
         //  The quadrants don't extend the full widths / heights of the outer rect to give
         //  us a better uniformed distribution, otherwise you get clumping in the corners where
         //  the 4 quads would overlap
 
-        switch (Between(0, 3))
-        {
+        switch (Between(0, 3)) {
             case 0: // Top
                 out.x = outer.x + (Math.random() * (inner.right - outer.x));
                 out.y = outer.y + (Math.random() * (inner.top - outer.y));

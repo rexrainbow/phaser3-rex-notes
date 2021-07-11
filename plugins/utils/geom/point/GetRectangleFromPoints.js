@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Rectangle = require('../rectangle/Rectangle');
+import Rectangle from '../rectangle/Rectangle.js';
 
 /**
  * Calculates the Axis Aligned Bounding Box (or aabb) from an array of points.
@@ -19,8 +19,7 @@ var Rectangle = require('../rectangle/Rectangle');
  *
  * @return {Phaser.Geom.Rectangle} [description]
  */
-var GetRectangleFromPoints = function (points, out)
-{
+var GetRectangleFromPoints = function (points, out) {
     if (out === undefined) { out = new Rectangle(); }
 
     var xMax = Number.NEGATIVE_INFINITY;
@@ -28,27 +27,22 @@ var GetRectangleFromPoints = function (points, out)
     var yMax = Number.NEGATIVE_INFINITY;
     var yMin = Number.POSITIVE_INFINITY;
 
-    for (var i = 0; i < points.length; i++)
-    {
+    for (var i = 0; i < points.length; i++) {
         var point = points[i];
 
-        if (point.x > xMax)
-        {
+        if (point.x > xMax) {
             xMax = point.x;
         }
 
-        if (point.x < xMin)
-        {
+        if (point.x < xMin) {
             xMin = point.x;
         }
 
-        if (point.y > yMax)
-        {
+        if (point.y > yMax) {
             yMax = point.y;
         }
 
-        if (point.y < yMin)
-        {
+        if (point.y < yMin) {
             yMin = point.y;
         }
     }
