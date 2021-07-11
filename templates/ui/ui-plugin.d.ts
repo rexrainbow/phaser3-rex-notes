@@ -51,6 +51,8 @@ import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenIn
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 
+export default UIPlugins;
+
 declare class Factories {
     badgeLabel: typeof BadgeLabelFactory;
     BBCodeText: typeof BBCodeTextFactory;
@@ -97,7 +99,7 @@ declare class Factories {
     toast: typeof ToastFactory;
 }
 
-export default class UIPlugin extends Phaser.Plugins.ScenePlugin {
+declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
     edit: typeof Edit;
@@ -119,4 +121,94 @@ export default class UIPlugin extends Phaser.Plugins.ScenePlugin {
     ): boolean;
 
     readonly viewport: Phaser.Geom.Rectangle;
+}
+
+import BadgeLabelClass from './badgelabel/BadgeLabel';
+import BBCodeTextClass from './bbcodetext/BBCodeText';
+import ButtonsClass from './buttons/Buttons';
+import CanvasClass from './canvas/Canvas';
+import CircleMaskImageClass from './circlemaskimage/CircleMaskImage';
+import CircularProgressCanvasClass from './circularprogresscanvas/CircularProgressCanvas';
+import CircularProgressClass from './circularprogress/CircularProgress';
+import ClickClass from './click/Click';
+import ContainerClass from './container/Container';
+import CustomShapesClass from './customshapes/CustomShapes';
+import DialogClass from './dialog/Dialog';
+import DynamicTextClass from './dynamictext/DynamicText';
+import FlipClass from './flip/Flip';
+import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
+import FixWidthSizerClass from './fixwidthsizer/FixWidthSizer';
+import GridButtonsClass from './gridbuttons/GridButtons';
+import GridSizerClass from './gridsizer/GridSizer';
+import GridTableClass from './gridtable/GridTable';
+import KnobClass from './knob/Knob';
+import LabelClass from './label/Label';
+import MenuClass from './menu/Menu';
+import NinePatchClass from './ninepatch/NinePatch';
+import NumberBarClass from './numberbar/NumberBar';
+import OverlapSizerClass from './overlapsizer/OverlapSizer';
+import PagesClass from './pages/Pages';
+import PanClass from './pan/Pan';
+import PerspectiveClass from './perspective/Perspective';
+import PinchClass from './pinch/Pinch';
+import PressClass from './press/Press';
+import RotateClass from './rotate/Rotate';
+import RoundRectangleCanvasClass from './roundrectanglecanvas/RoundRectangleCanvas';
+import RoundRectangleClass from './roundrectangle/RoundRectangle';
+import ScrollablePanelClass from './scrollablepanel/ScrollablePanel';
+import SizerClass from './sizer/Sizer';
+import SliderClass from './slider/Slider';
+import SwipeClass from './swipe/Swipe';
+import TabsClass from './tabs/Tabs';
+import TagTextClass from './tagtext/TagText';
+import TapClass from './tap/Tap';
+import TextAreaClass from './textarea/TextArea';
+import TextBoxClass from './textbox/TextBox';
+import TextPlayerClass from './textplayer/TextPlayer';
+import ToastClass from './toast/Toast';
+
+declare namespace UIPlugins {
+    type BadgeLabel = BadgeLabelClass;
+    type BBCodeText = BBCodeTextClass;
+    type Buttons = ButtonsClass;
+    type Canvas = CanvasClass;
+    type CircleMaskImage = CircleMaskImageClass;
+    type CircularProgressCanvas = CircularProgressCanvasClass;
+    type CircularProgress = CircularProgressClass;
+    type Click = ClickClass;
+    type Container = ContainerClass;
+    type CustomShapes = CustomShapesClass;
+    type Dialog = DialogClass;
+    type DynamicText = DynamicTextClass;
+    type Flip = FlipClass;
+    type FixWidthButtons = FixWidthButtonsClass;
+    type FixWidthSizer = FixWidthSizerClass;
+    type GridButtons = GridButtonsClass;
+    type GridSizer = GridSizerClass;
+    type GridTable = GridTableClass;
+    type Knob = KnobClass;
+    type Label = LabelClass;
+    type Menu = MenuClass;
+    type NinePatch = NinePatchClass;
+    type NumberBar = NumberBarClass;
+    type OverlapSizer = OverlapSizerClass;
+    type Pages = PagesClass;
+    type Pan = PanClass;
+    type Perspective = PerspectiveClass;
+    type Pinch = PinchClass;
+    type Press = PressClass;
+    type Rotate = RotateClass;
+    type RoundRectangleCanvas = RoundRectangleCanvasClass;
+    type RoundRectangle = RoundRectangleClass;
+    type ScrollablePanel = ScrollablePanelClass;
+    type Sizer = SizerClass;
+    type Slider = SliderClass;
+    type Swipe = SwipeClass;
+    type Tabs = TabsClass;
+    type TagText = TagTextClass;
+    type Tap = TapClass;
+    type TextArea = TextAreaClass;
+    type TextBox = TextBoxClass;
+    type TextPlayer = TextPlayerClass;
+    type Toast = ToastClass;
 }

@@ -5903,17 +5903,11 @@
 <li>Cost function<ul>
 <li><code>pathTileZ</code> : TileZ of path tiles.</li>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>
-<li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">monopoly</span><span class="p">)</span> <span class="p">{</span>
+<li><code>costCallback</code>, <code>costCallbackScope</code> :  <a href="./#cost-function">Get cost via callback</a>
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">curTileXY</span><span class="p">,</span> <span class="nx">preTileXY</span><span class="p">,</span> <span class="nx">monopoly</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div><ul>
-<li>Board : <code>monopoly.board</code></li>
-<li>Chess game object : <code>monopoly.gameObject</code></li>
-<li>Cost of stop : <code>monopoly.STOP</code></li>
-<li>Cost of blocker : <code>monopoly.BLOCKER</code></li>
-</ul>
-</li>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
