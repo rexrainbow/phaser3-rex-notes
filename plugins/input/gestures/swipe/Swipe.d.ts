@@ -1,18 +1,22 @@
 // import * as Phaser from 'phaser';
 import OnePointerTracer from '../onepointertracer/OnePointerTracer';
-import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
+export default Swipe;
 
-export interface IConfig extends IConfigBase{
-    threshold?: number,
-    velocityThreshold?: number,
-    dir: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir',
+declare namespace Swipe {
+
+    interface IConfig extends OnePointerTracer.IConfig {
+        threshold?: number,
+        velocityThreshold?: number,
+        dir: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir',
+    }
+
 }
 
-export default class Swipe extends OnePointerTracer {
+declare class Swipe extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-        config?: IConfig
+        config?: Swipe.IConfig
     )
 
     setDragThreshold(distance: number): this;

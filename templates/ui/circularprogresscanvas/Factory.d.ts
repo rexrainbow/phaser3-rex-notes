@@ -1,6 +1,5 @@
 import CircularProgressCanvas from './CircularProgressCanvas';
-import { IConfig } from '../../../plugins/circularprogresscanvas'
 
 export default function (
-    config?: IConfig
+    config?: CircularProgressCanvas.IConfig
 ): CircularProgressCanvas;

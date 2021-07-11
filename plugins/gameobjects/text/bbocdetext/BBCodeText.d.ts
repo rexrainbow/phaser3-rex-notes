@@ -1,6 +1,10 @@
 import Text from '../textbase/Text';
-import { TextStyle as TextStyleBase } from '../textbase/Text';
 
-export interface TextStyle extends TextStyleBase { }
+export default BBCodeText;
 
-export default class BBCodeText extends Text { }
+declare namespace BBCodeText {
+
+    interface TextStyle extends Text.TextStyle { }
+}
+
+declare class BBCodeText extends Text { }

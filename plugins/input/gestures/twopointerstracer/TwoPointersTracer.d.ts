@@ -1,12 +1,18 @@
 // import * as Phaser from 'phaser';
 
-export interface IConfig {
-    enable?: boolean,
-    bounds?: Phaser.Geom.Rectangle,
-    eventEmitter?: boolean | Phaser.Events.EventEmitter,
+export default TwoPointersTracer;
+
+declare namespace TwoPointersTracer {
+
+    interface IConfig {
+        enable?: boolean,
+        bounds?: Phaser.Geom.Rectangle,
+        eventEmitter?: boolean | Phaser.Events.EventEmitter,
+    }
+
 }
 
-export default class TwoPointersTracer extends Phaser.Events.EventEmitter {
+declare class TwoPointersTracer extends Phaser.Events.EventEmitter {
 
     enable: boolean;
     setEnable(enable?: boolean): this;

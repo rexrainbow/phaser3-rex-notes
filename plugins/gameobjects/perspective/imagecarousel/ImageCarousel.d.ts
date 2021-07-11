@@ -1,28 +1,33 @@
 import Carousel from "../carousel/Carousel";
-import { IConfigRoll, Roll } from '../carousel/Carousel';
 
-export interface IConfig {
-    x?: number,
-    y?: number,
+export default ImageCarousel;
 
-    images?: ({ key: string, frame?: string })[],
-    index?: number,
-    rtl?: boolean,
-    repeat?: boolean,
+declare namespace ImageCarousel {
 
-    width?: number,
-    height?: number,
-    faceCount?: number,
+    interface IConfig {
+        x?: number,
+        y?: number,
 
-    z?: number,
-    zEnd?: number,
+        images?: ({ key: string, frame?: string })[],
+        index?: number,
+        rtl?: boolean,
+        repeat?: boolean,
 
-    roll?: IConfigRoll | false,
+        width?: number,
+        height?: number,
+        faceCount?: number,
+
+        z?: number,
+        zEnd?: number,
+
+        roll?: Carousel.IConfigRoll | false,
+    }
+
 }
 
-export default class ImageCarousel extends Carousel {
+declare class ImageCarousel extends Carousel {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: ImageCarousel.IConfig
     );
 }

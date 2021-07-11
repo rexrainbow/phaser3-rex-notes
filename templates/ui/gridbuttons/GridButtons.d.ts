@@ -1,19 +1,23 @@
 // import * as Phaser from 'phaser';
 import GridSizer from '../gridsizer/GridSizer';
-import { IConfig as IConfigBase } from '../gridsizer/GridSizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
 
 
-export interface IConfig extends IConfigBase, IConfigButtons {
-    background?: Phaser.GameObjects.GameObject,
+export default GridButtons;
 
-    buttons?: Phaser.GameObjects.GameObject[][],
+declare namespace GridButtons {
+
+    interface IConfig extends GridSizer.IConfig, IConfigButtons {
+        background?: Phaser.GameObjects.GameObject,
+
+        buttons?: Phaser.GameObjects.GameObject[][],
+    }
 }
 
-export default class GridButtons extends GridSizer {
+declare class GridButtons extends GridSizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: GridButtons.IConfig
     );
 
     emitButtonClick(

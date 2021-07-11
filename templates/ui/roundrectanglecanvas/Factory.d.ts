@@ -1,14 +1,13 @@
 import RoundRectangleCanvas from './RoundRectangleCanvas';
-import { IRadiusConfig } from '../../../plugins/roundrectanglecanvas';
 
 export default function (
     x: number,
     y: number,
     width: number,
     height: number,
-    radiusConfig?: number | ({ x?: number, y?: number }) | IRadiusConfig |
+    radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangleCanvas.IRadiusConfig |
         ({
-            radius?: (number | ({ x?: number, y?: number }) | IRadiusConfig),
+            radius?: (number | ({ x?: number, y?: number }) | RoundRectangleCanvas.IRadiusConfig),
             iteration?: number
         }),
     fillStyle?: number | string | null,

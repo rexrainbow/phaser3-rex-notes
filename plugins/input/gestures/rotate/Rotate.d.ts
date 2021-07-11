@@ -1,16 +1,21 @@
 // import * as Phaser from 'phaser';
 import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer';
-import { IConfig as IConfigBase } from '../twopointerstracer/TwoPointersTracer';
 
 
-export interface IConfig extends IConfigBase {
-    threshold?: number,
+export default Rotate;
+
+declare namespace Rotate {
+
+    interface IConfig extends TwoPointersTracer.IConfig {
+        threshold?: number,
+    }
+
 }
 
-export default class Rotate extends TwoPointersTracer {
+declare class Rotate extends TwoPointersTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-        config?: IConfig
+        config?: Rotate.IConfig
     )
 
     setDragThreshold(distance: number): this;

@@ -1,11 +1,17 @@
-export interface IConfig {
-    reverse?: boolean,
-    argsConvert?: ((s: any, cmd?: any[]) => any) | boolean,
+export default RunCommands;
+
+declare namespace RunCommands {
+
+    interface IConfig {
+        reverse?: boolean,
+        argsConvert?: ((s: any, cmd?: any[]) => any) | boolean,
+
+    }
 
 }
 
-export default function (
+declare function RunCommands(
     queue: any[],
     scope?: object,
-    config?: IConfig
+    config?: RunCommands.IConfig
 ): any

@@ -1,27 +1,24 @@
 import GridSizer from './GridSizer';
-import { IConfig } from './GridSizer';
 
 
-declare function Factoty(
-    config?: IConfig
+export default function (
+    config?: GridSizer.IConfig
 ): GridSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
-    config?: IConfig
+    config?: GridSizer.IConfig
 ): GridSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
     width: number, height: number,
-    config?: IConfig
+    config?: GridSizer.IConfig
 ): GridSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
     width: number, height: number,
     column: number, row: number,
-    config?: IConfig
+    config?: GridSizer.IConfig
 ): GridSizer;
-
-export default Factoty;

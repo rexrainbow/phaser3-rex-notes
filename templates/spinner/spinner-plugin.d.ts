@@ -1,3 +1,4 @@
+import Base from './base/Base';
 import Audio from './audio/Audio';
 import Ball from './ball/Ball';
 import Bars from './bars/Bars';
@@ -17,34 +18,29 @@ import Radio from './radio/Radio';
 import Rings from './rings/Rings';
 import Spinner from './spinner/Spinner';
 
-import { IConfig as ICongfigBase } from './base/Base';
-import { IConfig as IConfigCustom } from './custom/Custom';
-
+declare class Factories {
+    audio: (config?: Base.IConfig) => Audio;
+    ball: (config?: Base.IConfig) => Ball;
+    bars: (config?: Base.IConfig) => Bars;
+    box: (config?: Base.IConfig) => Box;
+    clock: (config?: Base.IConfig) => Clock;
+    cube: (config?: Base.IConfig) => Cube;
+    custom: (config?: Custom.IConfig) => Custom;
+    dots: (config?: Base.IConfig) => Dots;
+    facebook: (config?: Base.IConfig) => Facebook;
+    grid: (config?: Base.IConfig) => Grid;
+    los: (config?: Base.IConfig) => Los;
+    orbit: (config?: Base.IConfig) => Orbit;
+    oval: (config?: Base.IConfig) => Oval;
+    pie: (config?: Base.IConfig) => Pie;
+    puff: (config?: Base.IConfig) => Puff;
+    radio: (config?: Base.IConfig) => Radio;
+    rings: (config?: Base.IConfig) => Rings;
+    spinner: (config?: Base.IConfig) => Spinner;
+}
 
 export default class UIFactories {
     constructor(scene: Phaser.Scene);
 
-    add: {
-        audio: (config?: ICongfigBase) => Audio,
-        ball: (config?: ICongfigBase) => Ball,
-        bars: (config?: ICongfigBase) => Bars,
-        box: (config?: ICongfigBase) => Box,
-        clock: (config?: ICongfigBase) => Clock,
-        cube: (config?: ICongfigBase) => Cube,
-        custom: (config?: IConfigCustom) => Custom,
-        dots: (config?: ICongfigBase) => Dots,
-        facebook: (config?: ICongfigBase) => Facebook,
-        grid: (config?: ICongfigBase) => Grid,
-        los: (config?: ICongfigBase) => Los,
-        orbit: (config?: ICongfigBase) => Orbit,
-        oval: (config?: ICongfigBase) => Oval,
-        pie: (config?: ICongfigBase) => Pie,
-        puff: (config?: ICongfigBase) => Puff,
-        radio: (config?: ICongfigBase) => Radio,
-        rings: (config?: ICongfigBase) => Rings,
-        spinner: (config?: ICongfigBase) => Spinner,
-    }
+    add: Factories;
 }
-
-import * as GeomTypes from '../../plugins/gameobjects/shape/shapes/geoms';
-export { GeomTypes };

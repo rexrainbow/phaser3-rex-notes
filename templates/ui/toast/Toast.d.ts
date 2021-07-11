@@ -1,25 +1,30 @@
 // import * as Phaser from 'phaser';
 import Label from '../label/Label';
-import { IConfig as IConfigBase } from '../label/Label';
 
-export interface IConfig extends IConfigBase {
-    duration?: {
-        in?: number,
-        hold?: number,
-        out?: number,
-    },
 
-    transitIn?: 0 | 1 | 'popUp' | 'fadeIn' |
-    ((toast: Toast, duration: number) => void),
+export default Toast;
 
-    transitOut?: 0 | 1 | 'scaleDown' | 'fadeOut' |
-    ((toast: Toast, duration: number) => void),
+declare namespace Toast {
+
+    interface IConfig extends Label.IConfig {
+        duration?: {
+            in?: number,
+            hold?: number,
+            out?: number,
+        },
+
+        transitIn?: 0 | 1 | 'popUp' | 'fadeIn' |
+        ((toast: Toast, duration: number) => void),
+
+        transitOut?: 0 | 1 | 'scaleDown' | 'fadeOut' |
+        ((toast: Toast, duration: number) => void),
+    }
 }
 
-export default class Toast extends Label {
+declare class Toast extends Label {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Toast.IConfig
     );
 
     showMessage(

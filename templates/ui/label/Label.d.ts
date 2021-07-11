@@ -1,36 +1,40 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigBase } from '../sizer/Sizer';
 
-type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
+export default Label;
 
-export interface IConfig extends IConfigBase {
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
+declare namespace Label {
 
-        icon?: number,
-        text?: number,
-    },
+    type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
 
-    background?: Phaser.GameObjects.GameObject,
+    interface IConfig extends Sizer.IConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
 
-    icon?: Phaser.GameObjects.GameObject,
-    iconMask?: boolean,
+            icon?: number,
+            text?: number,
+        },
 
-    text?: Phaser.GameObjects.GameObject,
-    expandTextWidth?: boolean,
-    expandTextHeight?: boolean,
+        background?: Phaser.GameObjects.GameObject,
 
-    action?: Phaser.GameObjects.GameObject,
-    actionMask?: boolean,
+        icon?: Phaser.GameObjects.GameObject,
+        iconMask?: boolean,
 
-    align?: AlignTypes,
+        text?: Phaser.GameObjects.GameObject,
+        expandTextWidth?: boolean,
+        expandTextHeight?: boolean,
+
+        action?: Phaser.GameObjects.GameObject,
+        actionMask?: boolean,
+
+        align?: AlignTypes,
+    }
 }
 
-export default class Label extends Sizer {
+declare class Label extends Sizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Label.IConfig
     );
 
     text: string;

@@ -3,48 +3,52 @@ import FaceContainer from '../utils/FaceContainer';
 import Image from '../image/Image';
 import RenderTexture from '../rendertexture/RenderTexture';
 
+export default Card;
 
-type FaceTypes = 0 | 1 | 'front' | 'back';
+declare namespace Card {
 
-type FaceDefType = { key: string, frame?: string } |
-{ width: number, height: number } |
-    Image |
-    RenderTexture;
+    type FaceTypes = 0 | 1 | 'front' | 'back';
 
-type OrientationTypes = 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical';
+    type FaceDefType = { key: string, frame?: string } |
+    { width: number, height: number } |
+        Image |
+        RenderTexture;
 
-type FlipDirTypes = 0 | 1 | 'right' | 'left' | 'left-to-right' | 'right-to-left';
-interface IConfigFlip {
-    frontToBack?: FlipDirTypes,
-    backToFront?: FlipDirTypes,
-    duration?: number,
-    ease?: string,
-    delay?: number,
+    type OrientationTypes = 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical';
+
+    type FlipDirTypes = 0 | 1 | 'right' | 'left' | 'left-to-right' | 'right-to-left';
+    interface IConfigFlip {
+        frontToBack?: FlipDirTypes,
+        backToFront?: FlipDirTypes,
+        duration?: number,
+        ease?: string,
+        delay?: number,
+    }
+
+    interface IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+
+        face?: FaceTypes,
+        back?: FaceDefType,
+        front?: FaceDefType,
+
+        orientation?: OrientationTypes,
+
+        flip?: IConfigFlip | false,
+    }
+
 }
 
-
-export interface IConfig {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
-
-    face?: FaceTypes,
-    back?: FaceDefType,
-    front?: FaceDefType,
-
-    orientation?: OrientationTypes,
-
-    flip?: IConfigFlip | false,
-}
-
-export default class Card extends FaceContainer {
+declare class Card extends FaceContainer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Card.IConfig
     );
 
-    setFace(face: FaceTypes): this;
+    setFace(face: Card.FaceTypes): this;
     toggleFace(): this;
     face: number;
 

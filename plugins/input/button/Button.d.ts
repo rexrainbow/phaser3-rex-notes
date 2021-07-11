@@ -1,17 +1,22 @@
 // import * as Phaser from 'phaser';
 
-export interface IConfig {
-    mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
-    clickInterval?: number,
-    enable?: boolean,
+export default Buttons;
 
-    eventEmitter?: boolean | Phaser.Events.EventEmitter
+declare namespace Buttons {
+
+    interface IConfig {
+        mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
+        clickInterval?: number,
+        enable?: boolean,
+
+        eventEmitter?: boolean | Phaser.Events.EventEmitter
+    }
 }
 
-export default class Buttons extends Phaser.Events.EventEmitter {
+declare class Buttons extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: Buttons.IConfig
     )
 
     enable: boolean;

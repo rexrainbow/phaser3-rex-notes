@@ -1,6 +1,5 @@
 import GridTable from './GridTable';
-import { IConfig } from './GridTable';
 
 export default function (
-    config?: IConfig
+    config?: GridTable.IConfig
 ): GridTable;

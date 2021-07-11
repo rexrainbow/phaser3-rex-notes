@@ -1,33 +1,38 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigBase } from '../sizer/Sizer';
 
-type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
-export interface IConfig extends IConfigBase {
-    background?: Phaser.GameObjects.GameObject,
-    track?: Phaser.GameObjects.GameObject,
-    indicator?: Phaser.GameObjects.GameObject,
-    thumb?: Phaser.GameObjects.GameObject,
+export default Slider;
 
-    input?: InputTypes,
+declare namespace Slider {
 
-    gap?: number,
+    type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
-    easeValue?: {
-        duration?: number,
-        ease?: string
-    },
+    interface IConfig extends Sizer.IConfig {
+        background?: Phaser.GameObjects.GameObject,
+        track?: Phaser.GameObjects.GameObject,
+        indicator?: Phaser.GameObjects.GameObject,
+        thumb?: Phaser.GameObjects.GameObject,
 
-    valuechangeCallback: (newValue: number, oldValue: number, slider: Slider) => void
+        input?: InputTypes,
 
-    enable?: boolean,
+        gap?: number,
+
+        easeValue?: {
+            duration?: number,
+            ease?: string
+        },
+
+        valuechangeCallback: (newValue: number, oldValue: number, slider: Slider) => void
+
+        enable?: boolean,
+    }
 }
 
-export default class Slider extends Sizer {
+declare class Slider extends Sizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Slider.IConfig
     );
 
     value: number;

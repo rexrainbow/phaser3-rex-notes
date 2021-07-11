@@ -1,48 +1,53 @@
 // import * as Phaser from 'phaser';
 import GridSizer from '../gridsizer/GridSizer';
-import { IConfig as IConfigBase } from '../gridsizer/GridSizer';
 
 
-export interface IConfig extends IConfigBase {
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
+export default Tabs;
 
-        leftButtonsOffset?: number,
-        rightButtonsOffset?: number,
-        topButtonsOffset?: number,
-        bottomButtonsOffset?: number,
+declare namespace Tabs {
 
-        leftButton?: number,
-        rightButton?: number,
-        topButton?: number,
-        bottomButton?: number,
-    },
+    interface IConfig extends GridSizer.IConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
 
-    background?: Phaser.GameObjects.GameObject,
-    panel?: Phaser.GameObjects.GameObject,
+            leftButtonsOffset?: number,
+            rightButtonsOffset?: number,
+            topButtonsOffset?: number,
+            bottomButtonsOffset?: number,
 
-    leftButtons?: Phaser.GameObjects.GameObject[],
-    leftButtonsBackground?: Phaser.GameObjects.GameObject,
+            leftButton?: number,
+            rightButton?: number,
+            topButton?: number,
+            bottomButton?: number,
+        },
 
-    rightButtons?: Phaser.GameObjects.GameObject[],
-    rightButtonsBackground?: Phaser.GameObjects.GameObject,
+        background?: Phaser.GameObjects.GameObject,
+        panel?: Phaser.GameObjects.GameObject,
 
-    topButtons?: Phaser.GameObjects.GameObject[],
-    topButtonsBackground?: Phaser.GameObjects.GameObject,
+        leftButtons?: Phaser.GameObjects.GameObject[],
+        leftButtonsBackground?: Phaser.GameObjects.GameObject,
 
-    bottomButtons?: Phaser.GameObjects.GameObject[],
-    bottomButtonsBackground?: Phaser.GameObjects.GameObject,
+        rightButtons?: Phaser.GameObjects.GameObject[],
+        rightButtonsBackground?: Phaser.GameObjects.GameObject,
 
-    click?: {
-        mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
-        clickInterval?: number
-    },
+        topButtons?: Phaser.GameObjects.GameObject[],
+        topButtonsBackground?: Phaser.GameObjects.GameObject,
+
+        bottomButtons?: Phaser.GameObjects.GameObject[],
+        bottomButtonsBackground?: Phaser.GameObjects.GameObject,
+
+        click?: {
+            mode: 0 | 1 | 'pointerup' | 'pointerdown' | 'release' | 'press',
+            clickInterval?: number
+        },
+    }
+
 }
 
-export default class Tabs extends GridSizer {
+declare class Tabs extends GridSizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Tabs.IConfig
     );
 
     emitButtonClick(

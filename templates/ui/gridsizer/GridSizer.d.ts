@@ -1,58 +1,63 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
-import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
-type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-    'left-top' | 'left-center' | 'left-bottom' |
-    'center-top' | 'center-center' | 'center-bottom' |
-    'right-top' | 'right-center' | 'right-bottom';
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
-};
+export default GridSizer;
 
-export interface IConfig extends IConfigBase {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
+declare namespace GridSizer {
+    type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+        'left-top' | 'left-center' | 'left-bottom' |
+        'center-top' | 'center-center' | 'center-bottom' |
+        'right-top' | 'right-center' | 'right-bottom';
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    };
 
-    column?: number,
-    row?: number,
+    interface IConfig extends BaseSizer.IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
 
-    columnProportions?: number | number[],
-    rowProportions?: number | number[],
+        column?: number,
+        row?: number,
 
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
+        columnProportions?: number | number[],
+        rowProportions?: number | number[],
 
-        column?: number | number[],
-        row?: number | number[],
-    },
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+
+            column?: number | number[],
+            row?: number | number[],
+        },
+    }
+
 }
 
-export default class GridSizer extends BaseSizer {
+
+declare class GridSizer extends BaseSizer {
     sizerChildren: (Phaser.GameObjects.GameObject | null)[];
 
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: GridSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
-        config?: IConfig
+        config?: GridSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
-        config?: IConfig
+        config?: GridSizer.IConfig
     );
 
     constructor(
@@ -60,7 +65,7 @@ export default class GridSizer extends BaseSizer {
         x: number, y: number,
         width: number, height: number,
         column: number, row: number,
-        config?: IConfig
+        config?: GridSizer.IConfig
     );
 
     setColumnProportion(columnIndex: number, proportion: number): this;
@@ -72,9 +77,9 @@ export default class GridSizer extends BaseSizer {
             column?: number,
             row?: number,
 
-            align?: AlignTypes,
+            align?: GridSizer.AlignTypes,
 
-            padding?: PaddingTypes,
+            padding?: GridSizer.PaddingTypes,
 
             expand?: boolean,
 
@@ -86,8 +91,8 @@ export default class GridSizer extends BaseSizer {
         gameObject: Phaser.GameObjects.GameObject,
         columnIndex?: number,
         rowIndex?: number,
-        align?: AlignTypes,
-        padding?: PaddingTypes,
+        align?: GridSizer.AlignTypes,
+        padding?: GridSizer.PaddingTypes,
         expand?: boolean,
         childKey?: string
     ): this;

@@ -1,74 +1,76 @@
 // import * as Phaser from 'phaser';
 import DynamicText from "../dynamictext/DynamicText";
-import {
-    IConfig as IConfigBase,
-    RenderChildTypes as ChildTypes
-} from '../dynamictext/DynamicText';
 
-interface IConfigParser {
-    delimiters?: string,
-    comment?: string
-}
+export default TextPlayer;
 
-interface IConfigTyping {
-    speed?: number,
-    onTypingStart?: (children: ChildTypes[]) => void,
-    animation?: {
-        duration?: number,
-        yoyo?: boolean,
-        onStart?: (child: ChildTypes) => void,
-        onProgress: (child: ChildTypes, t: number) => void,
-        onComplete: (child: ChildTypes) => void
+declare namespace TextPlayer {
+
+    interface IConfigParser {
+        delimiters?: string,
+        comment?: string
     }
-}
 
-interface IConfigImages {
-    [name: string]: {
-        width?: number,
-        height?: number,
-        key?: string,
-        frame?: string
+    interface IConfigTyping {
+        speed?: number,
+        onTypingStart?: (children: DynamicText.RenderChildTypes[]) => void,
+        animation?: {
+            duration?: number,
+            yoyo?: boolean,
+            onStart?: (child: DynamicText.RenderChildTypes) => void,
+            onProgress: (child: DynamicText.RenderChildTypes, t: number) => void,
+            onComplete: (child: DynamicText.RenderChildTypes) => void
+        }
     }
-}
 
-interface IConfigSounds {
-    bgm?: {
-        initial?: string,
-        loop?: boolean,
+    interface IConfigImages {
+        [name: string]: {
+            width?: number,
+            height?: number,
+            key?: string,
+            frame?: string
+        }
+    }
+
+    interface IConfigSounds {
+        bgm?: {
+            initial?: string,
+            loop?: boolean,
+            fade?: number
+        }
+    }
+
+    interface IConfigSprite {
         fade?: number
     }
+
+    type NextPageInputTypes = string | ((callback: Function) => void) | null;
+
+    type ClickTrgetTypes = Phaser.GameObjects.GameObject | Phaser.Scene;
+
+    interface IConfig extends DynamicText.IConfig {
+        parser?: IConfigParser,
+
+        typing?: IConfigTyping,
+
+        images?: IConfigImages,
+
+        sounds?: IConfigSounds
+
+        sprite?: IConfigSprite,
+
+        nextPageInput?: NextPageInputTypes,
+
+        clickTarget?: ClickTrgetTypes,
+
+        text?: string
+    }
+
 }
 
-interface IConfigSprite {
-    fade?: number
-}
-
-type NextPageInputTypes = string | ((callback: Function) => void) | null;
-
-type ClickTrgetTypes = Phaser.GameObjects.GameObject | Phaser.Scene;
-
-export interface IConfig extends IConfigBase {
-    parser?: IConfigParser,
-
-    typing?: IConfigTyping,
-
-    images?: IConfigImages,
-
-    sounds?: IConfigSounds
-
-    sprite?: IConfigSprite,
-
-    nextPageInput?: NextPageInputTypes,
-
-    clickTarget?: ClickTrgetTypes,
-
-    text?: string
-}
-
-export default class TextPlayer extends DynamicText {
+declare class TextPlayer extends DynamicText {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: TextPlayer.IConfig
     );
 
     play(content: string): this;
@@ -80,5 +82,5 @@ export default class TextPlayer extends DynamicText {
     readonly isPlaying: boolean;
     readonly isPageTYyping: boolean;
 
-    addImage(config: IConfigImages): this;
+    addImage(config: TextPlayer.IConfigImages): this;
 }

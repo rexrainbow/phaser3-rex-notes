@@ -1,27 +1,72 @@
 // import * as Phaser from 'phaser';
 
-export interface IConfig {
-    x?: number, y?: number,
-    width?: number, height?: number,
+export default NinePatch;
 
-    key?: string, baseFrame?: string,
-    getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
+declare namespace NinePatch {
 
-    columns?: (number | undefined)[],
-    rows?: (number | undefined)[],
+    interface IConfig {
+        x?: number, y?: number,
+        width?: number, height?: number,
 
-    preserveRatio?: boolean,
-    stretchMode?: 0 | 1 | 'scale' | 'repeat' |
-    {
-        edge?: 0 | 1 | 'scale' | 'repeat',
-        internal?: 0 | 1 | 'scale' | 'repeat',
-    },
+        key?: string, baseFrame?: string,
+        getFrameNameCallback?: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined),
+
+        columns?: (number | undefined)[],
+        rows?: (number | undefined)[],
+
+        preserveRatio?: boolean,
+        stretchMode?: 0 | 1 | 'scale' | 'repeat' |
+        {
+            edge?: 0 | 1 | 'scale' | 'repeat',
+            internal?: 0 | 1 | 'scale' | 'repeat',
+        },
+    }
+
 }
 
-export default class NinePatch extends Phaser.GameObjects.RenderTexture {
+declare class NinePatch extends Phaser.GameObjects.RenderTexture {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: NinePatch.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config?: NinePatch.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        config?: NinePatch.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        key: string,
+        config?: NinePatch.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        key: string,
+        columns: (number | undefined)[], rows: (number | undefined)[],
+        config?: NinePatch.IConfig
+    )
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        key: string, baseFrame: string,
+        columns: (number | undefined)[], rows: (number | undefined)[],
+        config?: NinePatch.IConfig
     )
 
     resize(width: number, height: number): this;

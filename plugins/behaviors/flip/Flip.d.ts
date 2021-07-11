@@ -1,30 +1,36 @@
 // import * as Phaser from 'phaser';
 
-type FaceTypes = 0 | 1 | 'front' | 'back';
+export default Flip;
 
-type FaceDefTypes = string |
-{ key?: string, frame?: string } |
-    ((gameObject: Phaser.GameObjects.GameObject) => void);
+declare namespace Flip {
 
-type OrientationTypes = 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical';
+    type FaceTypes = 0 | 1 | 'front' | 'back';
 
-export interface IConfig {
-    face?: FaceTypes,
-    front?: FaceDefTypes,
-    back?: FaceDefTypes,
+    type FaceDefTypes = string |
+    { key?: string, frame?: string } |
+        ((gameObject: Phaser.GameObjects.GameObject) => void);
 
-    orientation?: OrientationTypes,
-    duration?: number,
-    delay?: number,
-    ease?: string,
+    type OrientationTypes = 0 | 1 | 'x' | 'y' | 'horizontal' | 'vertical';
 
-    eventEmitter?: boolean | Phaser.Events.EventEmitter
+    interface IConfig {
+        face?: FaceTypes,
+        front?: FaceDefTypes,
+        back?: FaceDefTypes,
+
+        orientation?: OrientationTypes,
+        duration?: number,
+        delay?: number,
+        ease?: string,
+
+        eventEmitter?: boolean | Phaser.Events.EventEmitter
+    }
+
 }
 
-export default class Buttons extends Phaser.Events.EventEmitter {
+declare class Flip extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: Flip.IConfig
     )
 
     flip(duration?: number): this;
@@ -52,7 +58,6 @@ export default class Buttons extends Phaser.Events.EventEmitter {
             ((gameObject: Phaser.GameObjects.GameObject) => void),
         frame?: string
     ): this;
-
 
     readonly isRunning: boolean;
 }

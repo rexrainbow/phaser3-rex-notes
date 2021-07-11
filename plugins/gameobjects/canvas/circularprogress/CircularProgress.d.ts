@@ -1,32 +1,37 @@
 import Canvas from '../canvas/Canvas';
 
-export interface IConfig {
-    x?: number, y?: number,
-    radius?: number,
+export default CircularProgressCanvas;
 
-    color?: string | number,
-    trackColor?: string | number,
-    centerColor?: string | number,
-    thickness?: number,
-    startAngle?: number,
-    anticlockwise?: boolean,
+declare namespace CircularProgressCanvas {
 
-    textColor?: string | number,
-    textStrokeColor?: string | number,
-    textStrokeThickness?: number,
-    textSize?: string,
-    textFamily?: string,
-    textStyle?: string,
-    textFormatCallback?: (value: number) => string,
-    textFormatCallbackScope?: object,
+    interface IConfig {
+        x?: number, y?: number,
+        radius?: number,
 
-    value?: number,
+        color?: string | number,
+        trackColor?: string | number,
+        centerColor?: string | number,
+        thickness?: number,
+        startAngle?: number,
+        anticlockwise?: boolean,
+
+        textColor?: string | number,
+        textStrokeColor?: string | number,
+        textStrokeThickness?: number,
+        textSize?: string,
+        textFamily?: string,
+        textStyle?: string,
+        textFormatCallback?: (value: number) => string,
+        textFormatCallbackScope?: object,
+
+        value?: number,
+    }
 }
 
-export default class CircularProgressCanvas extends Canvas {
+declare class CircularProgressCanvas extends Canvas {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: CircularProgressCanvas.IConfig
     );
 
     value: number;

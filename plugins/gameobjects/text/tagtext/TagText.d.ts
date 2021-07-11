@@ -1,58 +1,63 @@
 import Text from '../textbase/Text';
-import { TextStyle as TextStyleBase } from '../textbase/Text';
 
-export interface TagProg {
-    color?: string,
+export default TagText;
 
-    stroke: {
+declare namespace TagText {
+
+    interface TagProg {
         color?: string,
-        thinkness?: number,
-    },
 
-    fontSize?: string,
-    fontFamily?: string,
-    fontStyle?: string,
+        stroke: {
+            color?: string,
+            thinkness?: number,
+        },
 
-    shadow?: {
-        color?: string,
-        offsetX?: number,
-        offsetY?: number,
-        blur?: number,
-    },
+        fontSize?: string,
+        fontFamily?: string,
+        fontStyle?: string,
 
-    underline?: {
-        color?: string,
-        thinkness?: number,
-        offset?: number,
-    },
+        shadow?: {
+            color?: string,
+            offsetX?: number,
+            offsetY?: number,
+            blur?: number,
+        },
 
-    y?: number,
+        underline?: {
+            color?: string,
+            thinkness?: number,
+            offset?: number,
+        },
 
-    img?: string,
+        y?: number,
 
-    area?: string
-}
+        img?: string,
 
-export interface TextStyle extends TextStyleBase { 
-    tags?: {
-        [name: string]: TagProg
+        area?: string
     }
+
+    interface TextStyle extends Text.TextStyle {
+        tags?: {
+            [name: string]: TagProg
+        }
+    }
+
 }
 
-export default class TagText extends Text {
+declare class TagText extends Text {
     constructor(
         scene: Phaser.Scene,
         x?: number, y?: number,
         content?: string,
-        style?: TextStyle
+        style?: TagText.TextStyle
     );
 
     addTag(
         name: string,
-        prop: TagProg
+        prop: TagText.TagProg
     ): this;
 
     addTags(
-        tags: { [name: string]: TagProg }
+        tags: { [name: string]: TagText.TagProg }
     ): this;
 }

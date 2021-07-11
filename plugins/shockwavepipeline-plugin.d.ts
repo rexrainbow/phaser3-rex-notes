@@ -1,20 +1,27 @@
 // import * as Phaser from 'phaser';
 import ShockwavePostFxPipeline from './shockwavepipeline';
 
-interface IConfig {
-    center?: { x?: number, y?: number },
-    waveRadius?: number,
-    waveWidth?: number,
-    powBaseScale?: number,
-    powExponent?: number,
 
-    name?: string,
+export default ShockwavePipelinePlugin;
+
+declare namespace ShockwavePipelinePlugin {
+
+    interface IConfig {
+        center?: { x?: number, y?: number },
+        waveRadius?: number,
+        waveWidth?: number,
+        powBaseScale?: number,
+        powExponent?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class ShockwavePipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class ShockwavePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: ShockwavePipelinePlugin.IConfig
     ): ShockwavePostFxPipeline;
 
     remove(

@@ -1,20 +1,26 @@
 // import * as Phaser from 'phaser';
 import ToonifyPostFxPipeline from './toonifypipeline';
 
-interface IConfig {
-    edgeThreshold?: number,
-    hueLevels?: number,
-    sLevels?: number,
-    vLevels?: number,
-    edgeColor?: number,
+export default ToonifyPipelinePlugin;
 
-    name?: string,
+declare namespace ToonifyPipelinePlugin {
+
+    interface IConfig {
+        edgeThreshold?: number,
+        hueLevels?: number,
+        sLevels?: number,
+        vLevels?: number,
+        edgeColor?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class ToonifyPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class ToonifyPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: ToonifyPipelinePlugin.IConfig
     ): ToonifyPostFxPipeline;
 
     remove(

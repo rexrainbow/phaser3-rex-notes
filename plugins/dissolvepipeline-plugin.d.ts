@@ -1,29 +1,34 @@
 // import * as Phaser from 'phaser';
 import DissolvePostFxPipeline from './dissolvepipeline';
-import { ResizeModeType } from './shaders/dissolve/DissolvePostFxPipeline'
 
-export interface IConfig {
-    toTexture?: string,
-    toFrame?: string,
-    resizeMode?: ResizeModeType
+export default DissolvePipelinePlugin;
 
-    noiseX?: number,
-    noiseY?: number,
-    noiseZ?: number,
-    fromEdgeStart?: number,
-    fromEdgeWidth?: number,
-    toEdgeStart?: number,
-    toEdgeWidth?: number,
+declare namespace DissolvePipelinePlugin {
 
-    progress?: number,
+    interface IConfig {
+        toTexture?: string,
+        toFrame?: string,
+        resizeMode?: DissolvePostFxPipeline.ResizeModeType
 
-    name?: string,
+        noiseX?: number,
+        noiseY?: number,
+        noiseZ?: number,
+        fromEdgeStart?: number,
+        fromEdgeWidth?: number,
+        toEdgeStart?: number,
+        toEdgeWidth?: number,
+
+        progress?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class DissolvePipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class DissolvePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: DissolvePipelinePlugin.IConfig
     ): DissolvePostFxPipeline;
 
     remove(

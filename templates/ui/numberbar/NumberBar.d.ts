@@ -1,50 +1,54 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigBase } from '../sizer/Sizer';
 
-type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+export default NumberBar;
 
-export interface IConfig extends IConfigBase {
-    space?: {
-        left?: number,
-        right?: number,
-        top?: number,
-        bottom?: number,
+declare namespace NumberBar {
 
-        icon?: number,
-        slider?: number,
-    },
+    type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
-    background?: Phaser.GameObjects.GameObject,
+    interface IConfig extends Sizer.IConfig {
+        space?: {
+            left?: number,
+            right?: number,
+            top?: number,
+            bottom?: number,
 
-    icon?: Phaser.GameObjects.GameObject,
-
-    iconMask?: boolean,
-
-    slider?: {
-        background?: Phaser.GameObjects.GameObject,
-        track?: Phaser.GameObjects.GameObject,
-        indicator?: Phaser.GameObjects.GameObject,
-        thumb?: Phaser.GameObjects.GameObject,
-        input?: SliderInputTypes,
-        gap?: number,
-        easeValue?: {
-            duration?: number,
-            ease?: string
+            icon?: number,
+            slider?: number,
         },
+
+        background?: Phaser.GameObjects.GameObject,
+
+        icon?: Phaser.GameObjects.GameObject,
+
+        iconMask?: boolean,
+
+        slider?: {
+            background?: Phaser.GameObjects.GameObject,
+            track?: Phaser.GameObjects.GameObject,
+            indicator?: Phaser.GameObjects.GameObject,
+            thumb?: Phaser.GameObjects.GameObject,
+            input?: SliderInputTypes,
+            gap?: number,
+            easeValue?: {
+                duration?: number,
+                ease?: string
+            },
+        }
+
+        text?: Phaser.GameObjects.GameObject,
+
+        valuechangeCallback?: (newValue: number, oldValue: number, numberBar: NumberBar) => void,
+
+        enable?: boolean,
     }
-
-    text?: Phaser.GameObjects.GameObject,
-
-    valuechangeCallback?: (newValue: number, oldValue: number, numberBar: NumberBar) => void,
-
-    enable?: boolean,
 }
 
-export default class NumberBar extends Sizer {
+declare class NumberBar extends Sizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: NumberBar.IConfig
     );
 
     value: number;

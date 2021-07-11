@@ -200,7 +200,7 @@ moveTo.setSpeed(speed);
 moveTo.setRotateToTarget(rotateToTarget);
 ```
 
-- `rotateToTarget` : Set true to change angle towards target
+- `rotateToTarget` : Set `true` to change angle towards target
 
 ### Events
 

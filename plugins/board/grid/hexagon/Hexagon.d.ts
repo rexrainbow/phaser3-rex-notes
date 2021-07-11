@@ -1,19 +1,26 @@
 import { WorldXYType, TileXYType } from '../../types/Position';
 
-type HexagonGridStaggerAxisTypes = 0 | 1 | 'y' | 'x';
-type HexagonGridStaggerindexTypes = 0 | 1 | 'even' | 'odd';
 
-export interface IConfig {
-    x?: number, y?: number,
-    size?: number,
-    cellWidth?: number, cellHeight?: number,
+export default Hexagon;
 
-    staggeraxis?: HexagonGridStaggerAxisTypes,
-    staggerindex?: HexagonGridStaggerindexTypes
+declare namespace Hexagon {
+
+    type HexagonGridStaggerAxisTypes = 0 | 1 | 'y' | 'x';
+    type HexagonGridStaggerindexTypes = 0 | 1 | 'even' | 'odd';
+
+    interface IConfig {
+        x?: number, y?: number,
+        size?: number,
+        cellWidth?: number, cellHeight?: number,
+
+        staggeraxis?: HexagonGridStaggerAxisTypes,
+        staggerindex?: HexagonGridStaggerindexTypes
+    }
+
 }
 
-export default class Hexagon {
-    constructor(config?: IConfig);
+declare class Hexagon {
+    constructor(config?: Hexagon.IConfig);
 
     setOriginPosition(
         worldX: number,
@@ -32,8 +39,8 @@ export default class Hexagon {
     readonly size: number;
 
     setType(
-        staggeraxis: HexagonGridStaggerAxisTypes,
-        staggerindex: HexagonGridStaggerindexTypes
+        staggeraxis: Hexagon.HexagonGridStaggerAxisTypes,
+        staggerindex: Hexagon.HexagonGridStaggerindexTypes
     ): this;
     readonly staggeraxis: number;
     readonly staggerindex: number;

@@ -1,24 +1,28 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigBase } from '../sizer/Sizer';
 import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
 
-type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
+export default Buttons;
 
-export interface IConfig extends IConfigBase, IConfigButtons {
-    background?: Phaser.GameObjects.GameObject,
+declare namespace Buttons {
 
-    buttons?: Phaser.GameObjects.GameObject[],
+    type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
 
-    expand?: boolean,
+    interface IConfig extends Sizer.IConfig, IConfigButtons {
+        background?: Phaser.GameObjects.GameObject,
 
-    align?: AlignTypes,
+        buttons?: Phaser.GameObjects.GameObject[],
+
+        expand?: boolean,
+
+        align?: AlignTypes,
+    }
 }
 
-export default class Buttons extends Sizer {
+declare class Buttons extends Sizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Buttons.IConfig
     );
 
     emitButtonClick(

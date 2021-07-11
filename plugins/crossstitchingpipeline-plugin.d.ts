@@ -1,18 +1,25 @@
 // import * as Phaser from 'phaser';
 import CrossStitchingPostFxPipeline from './crossstitchingpipeline';
 
-export interface IConfig {
-    stitchingWidth?: number,
-    stitchingHeight?: number,
-    brightness?: number,
 
-    name?: string,
+export default CrossStitchingPipelinePlugin;
+
+declare namespace CrossStitchingPipelinePlugin {
+
+    interface IConfig {
+        stitchingWidth?: number,
+        stitchingHeight?: number,
+        brightness?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class CrossStitchingPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class CrossStitchingPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: CrossStitchingPipelinePlugin.IConfig
     ): CrossStitchingPostFxPipeline;
 
     remove(

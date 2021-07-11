@@ -123,6 +123,3 @@ export {
     GetViewport,
     SetChildrenInteractive
 }
-
-import { CustomShapesGeoms } from '../../plugins/customshapes'
-export { CustomShapesGeoms };

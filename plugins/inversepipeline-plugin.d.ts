@@ -1,16 +1,23 @@
 // import * as Phaser from 'phaser';
 import InversePostFxPipeline from './inversepipeline';
 
-interface IConfig {
-    intensity?: number,
 
-    name?: string,
+export default InversePipelinePlugin;
+
+declare namespace InversePipelinePlugin {
+
+    interface IConfig {
+        intensity?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: InversePipelinePlugin.IConfig
     ): InversePostFxPipeline;
 
     remove(

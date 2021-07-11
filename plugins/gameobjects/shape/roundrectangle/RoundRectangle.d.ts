@@ -1,22 +1,28 @@
 // import * as Phaser from 'phaser';
 
-export interface IRadiusConfig {
-    tl?: (number | { x?: number, y?: number }),
-    tr?: (number | { x?: number, y?: number }),
-    bl?: (number | { x?: number, y?: number }),
-    br?: (number | { x?: number, y?: number })
+export default RoundRectangle;
+
+declare namespace RoundRectangle {
+
+    export interface IRadiusConfig {
+        tl?: (number | { x?: number, y?: number }),
+        tr?: (number | { x?: number, y?: number }),
+        bl?: (number | { x?: number, y?: number }),
+        br?: (number | { x?: number, y?: number })
+    }
+
 }
 
-export default class RoundRectangle extends Phaser.GameObjects.Shape {
+declare class RoundRectangle extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
         x: number,
         y: number,
         width: number,
         height: number,
-        radiusConfig?: number | ({ x?: number, y?: number }) | IRadiusConfig |
+        radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
             ({
-                radius?: (number | ({ x?: number, y?: number }) | IRadiusConfig),
+                radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
                 iteration?: number
             }),
         fillColor?: number,
@@ -32,7 +38,7 @@ export default class RoundRectangle extends Phaser.GameObjects.Shape {
     radius: number;
 
     setRadius(
-        value: number | IRadiusConfig
+        value: number | RoundRectangle.IRadiusConfig
     ): this;
 
     readonly cornerRadius: {

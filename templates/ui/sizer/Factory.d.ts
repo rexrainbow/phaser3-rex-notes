@@ -1,26 +1,23 @@
 import Sizer from './Sizer';
-import { IConfig, orientationTypes } from './Sizer';
 
-declare function Factoty(
-    config?: IConfig
+export default function (
+    config?: Sizer.IConfig
 ): Sizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
-    config?: IConfig
+    config?: Sizer.IConfig
 ): Sizer;
 
-declare function Factoty(
-    x: number, y: number,
-    width: number, height: number,
-    config?: IConfig
-): Sizer;
-
-declare function Factoty(
+export default function (
     x: number, y: number,
     width: number, height: number,
-    orientation?: orientationTypes,
-    config?: IConfig
+    config?: Sizer.IConfig
 ): Sizer;
 
-export default Factoty;
+export default function (
+    x: number, y: number,
+    width: number, height: number,
+    orientation?: Sizer.OrientationTypes,
+    config?: Sizer.IConfig
+): Sizer;

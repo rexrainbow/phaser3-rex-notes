@@ -105,8 +105,11 @@ class MoveTo extends TickTask {
         return this.moveToTask.rotateToTarget;
     }
 
-    setRotateToTarget(rotateToTarget) {
-        this.rotateToTarget = rotateToTarget;
+    setRotateToTarget(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.rotateToTarget = enable;
         return this;
     }
 

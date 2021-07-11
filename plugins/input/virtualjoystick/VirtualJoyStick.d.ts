@@ -1,23 +1,30 @@
 // import * as Phaser from 'phaser';
 
-type DirTypes = 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir';
+export default VirtualJoyStick;
 
-export interface IConfig {
-    x?: number, y?: number,
-    radius?: number,
+declare namespace VirtualJoyStick {
 
-    base?: Phaser.GameObjects.GameObject,
-    thumb?: Phaser.GameObjects.GameObject,
-    dir?: DirTypes,
+    type DirTypes = 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir';
 
-    forceMin?: number,
-    fixed?: boolean,
-    enable?: boolean,
+    export interface IConfig {
+        x?: number, y?: number,
+        radius?: number,
+
+        base?: Phaser.GameObjects.GameObject,
+        thumb?: Phaser.GameObjects.GameObject,
+        dir?: DirTypes,
+
+        forceMin?: number,
+        fixed?: boolean,
+        enable?: boolean,
+    }
+
 }
-export default class VirtualJoyStick {
+
+declare class VirtualJoyStick {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: VirtualJoyStick.IConfig
     )
 
     createCursorKeys(): {

@@ -4,37 +4,58 @@ import Card from '../card/Card';
 import Image from '../image/Image';
 import RenderTexture from '../rendertexture/RenderTexture';
 
+export default Carousel;
 
-export interface IConfigRoll {
-    duration?: number,
-    ease?: string,
-    delay?: number,
+declare namespace Carousel {
+
+    interface IConfigRoll {
+        duration?: number,
+        ease?: string,
+        delay?: number,
+    }
+
+    interface IConfig {
+        x?: number,
+        y?: number,
+
+        faces?: (Card | Image | RenderTexture)[],
+        face?: number,
+        rtl?: boolean,
+
+        width?: number,
+        height?: number,
+
+        faceWidth?: number,
+        faceSpace?: number,
+
+        z?: number,
+        zEnd?: number,
+
+        roll?: IConfigRoll | false,
+    }
+
+    class Roll extends Phaser.Events.EventEmitter {
+        toNext(duration?: number): this;
+        toPrevious(duration?: number): this;
+        toRight(duration?: number): this;
+        toLeft(duration?: number): this;
+        to(faceIndex: number, duration?: number): this;
+        stop(): this;
+
+        setDuration(duration: number): this;
+        duration: this;
+
+        setEase(ease: string): this
+        ease: string;
+
+        readonly isRunning: boolean;
+    }
 }
 
-export interface IConfig {
-    x?: number,
-    y?: number,
-
-    faces?: (Card | Image | RenderTexture)[],
-    face?: number,
-    rtl?: boolean,
-
-    width?: number,
-    height?: number,
-
-    faceWidth?: number,
-    faceSpace?: number,
-
-    z?: number,
-    zEnd?: number,
-
-    roll?: IConfigRoll | false,
-}
-
-export default class Carousel extends FaceContainer {
+declare class Carousel extends FaceContainer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Carousel.IConfig
     );
 
     faces: (Card | Image | RenderTexture)[];
@@ -42,22 +63,6 @@ export default class Carousel extends FaceContainer {
     setFace(face: number): this;
     face: number;
 
-    roll: Roll | undefined;
+    roll: Carousel.Roll | undefined;
 }
 
-export class Roll extends Phaser.Events.EventEmitter {
-    toNext(duration?: number): this;
-    toPrevious(duration?: number): this;
-    toRight(duration?: number): this;
-    toLeft(duration?: number): this;
-    to(faceIndex: number, duration?: number): this;
-    stop(): this;
-
-    setDuration(duration: number): this;
-    duration: this;
-
-    setEase(ease: string): this
-    ease: string;
-
-    readonly isRunning: boolean;
-}

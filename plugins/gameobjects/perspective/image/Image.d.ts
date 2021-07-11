@@ -1,22 +1,28 @@
 // import * as Phaser from 'phaser';
 
-export interface IConfig {
-    x: number, y: number,
-    key?: string,
-    frame?: string,
-    hideCCW?: boolean,
-    gridWidth?: number,
-    girdHeight?: number
+export default Image;
+
+declare namespace Image {
+
+    interface IConfig {
+        x: number, y: number,
+        key?: string,
+        frame?: string,
+        hideCCW?: boolean,
+        gridWidth?: number,
+        girdHeight?: number
+    }
+
 }
 
-export default class Image extends Phaser.GameObjects.Mesh {
+declare class Image extends Phaser.GameObjects.Mesh {
     constructor(
         scene: Phaser.Scene,
-        x?: number | IConfig,
+        x?: number | Image.IConfig,
         y?: number,
         key?: string,
         frame?: string | null,
-        config?: IConfig
+        config?: Image.IConfig
     )
 
     transformVerts(

@@ -1,23 +1,27 @@
 // import * as Phaser from 'phaser';
+export default CircularProgress;
 
-export interface IConfig {
-    x?: number, y?: number,
-    radius?: number,
+declare namespace CircularProgress {
 
-    color?: string | number,
-    trackColor?: string | number,
-    centerColor?: string | number,
-    thickness?: number,
-    startAngle?: number,
-    anticlockwise?: boolean,
+    interface IConfig {
+        x?: number, y?: number,
+        radius?: number,
 
-    value?: number,
+        color?: string | number,
+        trackColor?: string | number,
+        centerColor?: string | number,
+        thickness?: number,
+        startAngle?: number,
+        anticlockwise?: boolean,
+
+        value?: number,
+    }
 }
 
-export default class CircularProgress extends Phaser.GameObjects.Shape {
+declare class CircularProgress extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: CircularProgress.IConfig
     );
 
     value: number;

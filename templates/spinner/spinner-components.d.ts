@@ -16,7 +16,6 @@ import Puff from './puff/Puff';
 import Radio from './radio/Radio';
 import Rings from './rings/Rings';
 import Spinner from './spinner/Spinner';
-import * as GeomTypes from '../../plugins/gameobjects/shape/shapes/geoms';
 
 export {
     Audio,
@@ -36,6 +35,5 @@ export {
     Puff,
     Radio,
     Rings,
-    Spinner,
-    GeomTypes
+    Spinner
 }

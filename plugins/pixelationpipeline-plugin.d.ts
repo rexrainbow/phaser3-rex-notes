@@ -1,17 +1,23 @@
 // import * as Phaser from 'phaser';
 import PixelationPostFxPipeline from './pixelationpipeline';
 
-interface IConfig {
-    pixelWidth?: number,
-    pixelHeight?: number,
+export default PixelationPipelinePlugin;
 
-    name?: string,
+declare namespace PixelationPipelinePlugin {
+
+    interface IConfig {
+        pixelWidth?: number,
+        pixelHeight?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: PixelationPipelinePlugin.IConfig
     ): PixelationPostFxPipeline;
 
     remove(

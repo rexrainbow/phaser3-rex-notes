@@ -1,65 +1,71 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
-import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
-export type orientationTypes = 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom';
-type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-    'left-top' | 'left-center' | 'left-bottom' |
-    'center-top' | 'center-center' | 'center-bottom' |
-    'right-top' | 'right-center' | 'right-bottom';
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
+export default Sizer;
+
+declare namespace Sizer {
+
+    type OrientationTypes = 0 | 1 | 'x' | 'y' | 'h' | 'v' | 'horizontal' | 'vertical' | 'left-to-right' | 'top-to-bottom';
+
+    type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+        'left-top' | 'left-center' | 'left-bottom' |
+        'center-top' | 'center-center' | 'center-bottom' |
+        'right-top' | 'right-center' | 'right-bottom';
+
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    }
+
+    interface IConfig extends BaseSizer.IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+        orientation?: OrientationTypes,
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+
+            item?: number,
+        },
+    }
 }
 
-export interface IConfig extends IConfigBase {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
-    orientation?: orientationTypes,
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
-
-        item?: number,
-    },
-}
-
-export default class Sizer extends BaseSizer {
+declare class Sizer extends BaseSizer {
 
     sizerChildren: Phaser.GameObjects.GameObject[];
 
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Sizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
-        config?: IConfig
-    );
-
-    constructor(
-        scene: Phaser.Scene,
-        x: number, y: number,
-        width: number, height: number,
-        config?: IConfig
+        config?: Sizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
-        orientation?: orientationTypes,
-        config?: IConfig
+        config?: Sizer.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x: number, y: number,
+        width: number, height: number,
+        orientation?: Sizer.OrientationTypes,
+        config?: Sizer.IConfig
     );
 
     setOrientation(
-        orientation?: orientationTypes
+        orientation?: Sizer.OrientationTypes
     ): this;
 
     setItemSpacing(value: number): this;
@@ -69,9 +75,9 @@ export default class Sizer extends BaseSizer {
         config?: {
             proportion?: number,
 
-            align?: AlignTypes,
+            align?: Sizer.AlignTypes,
 
-            padding?: PaddingTypes,
+            padding?: Sizer.PaddingTypes,
 
             expand?: boolean,
 
@@ -88,8 +94,8 @@ export default class Sizer extends BaseSizer {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         proportion?: number,
-        align?: AlignTypes,
-        padding?: PaddingTypes,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
         expand?: boolean,
         childKey?: string,
         index?: number,
@@ -100,8 +106,8 @@ export default class Sizer extends BaseSizer {
         index: number,
         gameObject: Phaser.GameObjects.GameObject,
         proportion?: number,
-        align?: AlignTypes,
-        padding?: PaddingTypes,
+        align?: Sizer.AlignTypes,
+        padding?: Sizer.PaddingTypes,
         expand?: boolean,
         childKey?: string
     ): this;

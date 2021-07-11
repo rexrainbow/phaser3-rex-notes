@@ -1,17 +1,21 @@
 // import * as Phaser from 'phaser';
 import OnePointerTracer from '../onepointertracer/OnePointerTracer';
-import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
+export default Press;
 
-export interface IConfig extends IConfigBase {
-    time?: number,
-    threshold?: number,
+declare namespace Press {
+
+    export interface IConfig extends OnePointerTracer.IConfig {
+        time?: number,
+        threshold?: number,
+    }
+
 }
 
-export default class Press extends OnePointerTracer {
+declare class Press extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-        config?: IConfig
+        config?: Press.IConfig
     )
 
     setHoldTime(time: number): this;

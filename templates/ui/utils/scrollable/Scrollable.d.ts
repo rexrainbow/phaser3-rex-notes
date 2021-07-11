@@ -1,60 +1,66 @@
 import Sizer from '../../sizer/Sizer';
-import { IConfig as IConfigBase } from '../../sizer/Sizer';
 
-type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal';
-type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
-type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
-type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'
 
-export interface IConfig extends IConfigBase {
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
+export default Scrollable;
 
-        header?: number,
-        footer?: number,
-    },
+declare namespace Scrollable {
 
-    scrollMode?: scrollModeTypes,
+    type scrollModeTypes = 0 | 1 | 'v' | 'h' | 'vertical' | 'horizontal';
+    type AlignTypes = 'left' | 'top' | 'right' | 'bottom' | 'center';
+    type SliderInputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
+    type SliderPositionTypes = 0 | 1 | 'right' | 'bottom' | 'left' | 'top'
 
-    background?: Phaser.GameObjects.GameObject,
+    interface IConfig extends Sizer.IConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
 
-    slider?: (
-        {
-            background?: Phaser.GameObjects.GameObject,
-            track?: Phaser.GameObjects.GameObject,
-            thumb?: Phaser.GameObjects.GameObject,
-            input?: SliderInputTypes,
-            position?: SliderPositionTypes,
-        } |
-        false
-    ),
+            header?: number,
+            footer?: number,
+        },
 
-    scroller?: (
-        {
-            threshold?: number,
-            slidingDeceleration?: number | false,
-            backDeceleration?: number | false,
-        } |
-        false
-    ),
+        scrollMode?: scrollModeTypes,
 
-    clamplChildOY?: boolean,
+        background?: Phaser.GameObjects.GameObject,
 
-    header?: Phaser.GameObjects.GameObject,
-    footer?: Phaser.GameObjects.GameObject,
+        slider?: (
+            {
+                background?: Phaser.GameObjects.GameObject,
+                track?: Phaser.GameObjects.GameObject,
+                thumb?: Phaser.GameObjects.GameObject,
+                input?: SliderInputTypes,
+                position?: SliderPositionTypes,
+            } |
+            false
+        ),
 
-    align?: {
-        header?: AlignTypes,
-        footer?: AlignTypes,
-    },
+        scroller?: (
+            {
+                threshold?: number,
+                slidingDeceleration?: number | false,
+                backDeceleration?: number | false,
+            } |
+            false
+        ),
 
-    expand?: {
-        header?: boolean,
-        footer?: boolean,
-    },
+        clamplChildOY?: boolean,
+
+        header?: Phaser.GameObjects.GameObject,
+        footer?: Phaser.GameObjects.GameObject,
+
+        align?: {
+            header?: AlignTypes,
+            footer?: AlignTypes,
+        },
+
+        expand?: {
+            header?: boolean,
+            footer?: boolean,
+        },
+    }
+
 }
 
-export default class Scrollable extends Sizer {
+declare class Scrollable extends Sizer {
     t: number;
     setT(value: number): this;
     scrollToTop(): this;

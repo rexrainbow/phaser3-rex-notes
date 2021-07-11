@@ -1,27 +1,34 @@
 // import * as Phaser from 'phaser';
 import OverlapSizer from '../overlapsizer/OverlapSizer';
-import { IConfig as IConfigBase } from '../overlapsizer/OverlapSizer';
 
-type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-    'left-top' | 'left-center' | 'left-bottom' |
-    'center-top' | 'center-center' | 'center-bottom' |
-    'right-top' | 'right-center' | 'right-bottom';
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
-};
 
-export interface IConfig extends IConfigBase {
-    swapMode?: 0 | 1 | 'invisible' | 'destroy'
+export default Page;
+
+declare namespace Page {
+
+    type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+        'left-top' | 'left-center' | 'left-bottom' |
+        'center-top' | 'center-center' | 'center-bottom' |
+        'right-top' | 'right-center' | 'right-bottom';
+
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    };
+
+    interface IConfig extends OverlapSizer.IConfig {
+        swapMode?: 0 | 1 | 'invisible' | 'destroy'
+    }
+
 }
 
-export default class Page extends OverlapSizer {
+declare class Page extends OverlapSizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Page.IConfig
     );
 
     setSwapMode(
@@ -33,9 +40,9 @@ export default class Page extends OverlapSizer {
         config?: {
             key?: string,
 
-            align?: AlignTypes,
+            align?: Page.AlignTypes,
 
-            padding?: PaddingTypes,
+            padding?: Page.PaddingTypes,
 
             expand: boolean |
             {

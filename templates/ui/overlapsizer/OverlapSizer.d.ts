@@ -1,46 +1,49 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
-import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
-type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-    'left-top' | 'left-center' | 'left-bottom' |
-    'center-top' | 'center-center' | 'center-bottom' |
-    'right-top' | 'right-center' | 'right-bottom';
+export default OverlapSizer;
 
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
-};
+declare namespace OverlapSizer {
+    type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+        'left-top' | 'left-center' | 'left-bottom' |
+        'center-top' | 'center-center' | 'center-bottom' |
+        'right-top' | 'right-center' | 'right-bottom';
 
-export interface IConfig extends IConfigBase {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    };
+
+    interface IConfig extends BaseSizer.IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
+    }
 }
 
-export default class OverlapSizer extends BaseSizer {
+declare class OverlapSizer extends BaseSizer {
     sizerChildren: { [name: string]: Phaser.GameObjects.GameObject };
 
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: OverlapSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
-        config?: IConfig
+        config?: OverlapSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
-        config?: IConfig
+        config?: OverlapSizer.IConfig
     );
 
     add(
@@ -48,9 +51,9 @@ export default class OverlapSizer extends BaseSizer {
         config?: {
             key?: string,
 
-            align?: AlignTypes,
+            align?: OverlapSizer.AlignTypes,
 
-            padding?: PaddingTypes,
+            padding?: OverlapSizer.PaddingTypes,
 
             expand?: boolean |
             {
@@ -67,8 +70,8 @@ export default class OverlapSizer extends BaseSizer {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         key?: string,
-        align?: AlignTypes,
-        padding?: PaddingTypes,
+        align?: OverlapSizer.AlignTypes,
+        padding?: OverlapSizer.PaddingTypes,
         expand?: boolean |
         {
             width?: boolean,

@@ -1,22 +1,27 @@
 // import * as Phaser from 'phaser';
 import OnePointerTracer from '../onepointertracer/OnePointerTracer';
-import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
-export interface IConfig extends IConfigBase{
-    time?: number,
-    tapInterval?: number,
-    threshold?: number,
-    tapOffset?: number,
+export default Tap;
 
-    taps?: number | undefined,
-    minTaps?: number | undefined,
-    maxTaps?: number | undefined,
+declare namespace Tap {
+
+    export interface IConfig extends OnePointerTracer.IConfig {
+        time?: number,
+        tapInterval?: number,
+        threshold?: number,
+        tapOffset?: number,
+
+        taps?: number | undefined,
+        minTaps?: number | undefined,
+        maxTaps?: number | undefined,
+    }
+
 }
 
-export default class Tap extends OnePointerTracer {
+declare class Tap extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-        config?: IConfig
+        config?: Tap.IConfig
     )
 
     setHoldTime(time: number): this;

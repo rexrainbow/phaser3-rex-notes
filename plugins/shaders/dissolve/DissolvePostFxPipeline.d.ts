@@ -1,8 +1,14 @@
 // import * as Phaser from 'phaser';
 
-export type ResizeModeType = 0 | 1 | 2 | 'stretch' | 'contain' | 'cover';
+export default DissolvePostFxPipeline;
 
-export default class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+declare namespace DissolvePostFxPipeline {
+
+    type ResizeModeType = 0 | 1 | 2 | 'stretch' | 'contain' | 'cover';
+
+}
+
+declare class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     setProgress(value: number): this;
     progress: number;
 
@@ -13,10 +19,10 @@ export default class DissolvePostFxPipeline extends Phaser.Renderer.WebGL.Pipeli
 
     setTransitionTargetTexture(
         key?: string, frame?: string,
-        resizeMode?: ResizeModeType
+        resizeMode?: DissolvePostFxPipeline.ResizeModeType
     ): this
 
-    setResizeMode(mode: ResizeModeType): this;
+    setResizeMode(mode: DissolvePostFxPipeline.ResizeModeType): this;
     resizeMode: number;
 
     setFromEdge(edgeStart: number, edgeWidth: number): this;

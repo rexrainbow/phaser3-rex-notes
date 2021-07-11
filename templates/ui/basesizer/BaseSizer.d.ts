@@ -1,34 +1,39 @@
 // import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
 
-type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
-    'left-top' | 'left-center' | 'left-bottom' |
-    'center-top' | 'center-center' | 'center-bottom' |
-    'right-top' | 'right-center' | 'right-bottom';
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
-};
+export default BaseSizer;
 
-export interface IConfig {
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
-    },
+declare namespace BaseSizer {
+    type AlignTypes = number | 'center' | 'left' | 'right' | 'top' | 'bottom' |
+        'left-top' | 'left-center' | 'left-bottom' |
+        'center-top' | 'center-center' | 'center-bottom' |
+        'right-top' | 'right-center' | 'right-bottom';
 
-    anchor?: {
-        left?: string, right?: string, centerX?: string, x?: string,
-        top?: string, bottom?: string, centerY?: string, y?: string
-    },
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    };
 
-    draggable?: boolean | string | Phaser.GameObjects.GameObject,
+    interface IConfig {
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
+        },
 
-    name?: string
+        anchor?: {
+            left?: string, right?: string, centerX?: string, x?: string,
+            top?: string, bottom?: string, centerY?: string, y?: string
+        },
+
+        draggable?: boolean | string | Phaser.GameObjects.GameObject,
+
+        name?: string
+    }
 }
 
-export default class BaseSizer extends ContainerLite {
+declare class BaseSizer extends ContainerLite {
     isRexSizer: true;
 
     space: { [name: string]: number };
@@ -37,7 +42,7 @@ export default class BaseSizer extends ContainerLite {
         scene: Phaser.Scene,
         x?: number, y?: number,
         minWidth?: number, minHeight?: number,
-        config?: IConfig
+        config?: BaseSizer.IConfig
     );
 
     setMinSize(minWidth: number, minHeight: number): this;
@@ -98,7 +103,7 @@ export default class BaseSizer extends ContainerLite {
 
     addBackground(
         gameObject: Phaser.GameObjects.GameObject,
-        padding?: PaddingTypes,
+        padding?: BaseSizer.PaddingTypes,
         childKey?: string
     ): this;
 
@@ -117,7 +122,7 @@ export default class BaseSizer extends ContainerLite {
             {
                 createTextCallback: (scene: Phaser.Scene) => Phaser.GameObjects.GameObject,
                 createTextCallbackScope?: object,
-                align?: AlignTypes
+                align?: BaseSizer.AlignTypes
             }
         }
     ): this;

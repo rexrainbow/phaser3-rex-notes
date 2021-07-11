@@ -1,20 +1,17 @@
 import FixWidthSizer from './FixWidthSizer';
-import { IConfig } from './FixWidthSizer';
 
 
-declare function Factoty(
-    config?: IConfig
+export default function (
+    config?: FixWidthSizer.IConfig
 ): FixWidthSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
-    config?: IConfig
+    config?: FixWidthSizer.IConfig
 ): FixWidthSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
     width: number, height: number,
-    config?: IConfig
+    config?: FixWidthSizer.IConfig
 ): FixWidthSizer;
-
-export default Factoty;

@@ -1,21 +1,27 @@
 // import * as Phaser from 'phaser';
 import SplitPostFxPipeline from './splitpipeline';
 
-interface IConfig {
-    x?: number, y?: number,
+export default SplitPipelinePlugin;
 
-    width?: number, height?: number,
-    left?: number, right?: number, top?: number, bottom?: number,
+declare namespace SplitPipelinePlugin {
 
-    shiftEnable?: boolean,
+    interface IConfig {
+        x?: number, y?: number,
 
-    name?: string
+        width?: number, height?: number,
+        left?: number, right?: number, top?: number, bottom?: number,
+
+        shiftEnable?: boolean,
+
+        name?: string
+    }
+
 }
 
-export default class SplitPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class SplitPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: SplitPipelinePlugin.IConfig
     ): SplitPostFxPipeline;
 
     remove(

@@ -1,6 +1,5 @@
 import 'phaser';
 import CustomShapes from '../../plugins/customshapes';
-import { CustomShapesGeoms } from '../../plugins/customshapes';
 
 class SpeechBubble extends CustomShapes {
     constructor(
@@ -22,7 +21,7 @@ class SpeechBubble extends CustomShapes {
 
                 var left = 0, right = this.width,
                     top = 0, bottom = this.height, boxBottom = bottom - indent;
-                var lines = this.getShapes()[0] as CustomShapesGeoms.Lines;
+                var lines = this.getShapes()[0] as CustomShapes.LinesShape
                 lines
                     .lineStyle(2, strokeColor, 1)
                     .fillStyle(fillColor, 1)

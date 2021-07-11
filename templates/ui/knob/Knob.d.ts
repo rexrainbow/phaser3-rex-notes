@@ -1,45 +1,51 @@
 // import * as Phaser from 'phaser';
 import OverlapSizer from '../overlapsizer/OverlapSizer';
-import { IConfig as IConfigBase } from '../overlapsizer/OverlapSizer';
 
-type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
-export interface IConfig extends IConfigBase {
-    background?: Phaser.GameObjects.GameObject,
+export default Knob;
 
-    color?: number | string,
-    trackColor?: number | string,
-    centerColor?: number | string,
-    thickness?: number,
-    startAngle?: number,
-    anticlockwise?: boolean,
-    knobDepth?: number,
+declare namespace Knob {
 
-    text?: Phaser.GameObjects.GameObject,
-    textFormatCallback?: (value: number) => string,
-    textFormatCallbackScope?: object,
+    type InputTypes = 0 | 1 | -1 | 'drag' | 'pan' | 'click' | 'none';
 
-    input?: InputTypes,
+    interface IConfig extends OverlapSizer.IConfig {
+        background?: Phaser.GameObjects.GameObject,
 
-    value?: number,
+        color?: number | string,
+        trackColor?: number | string,
+        centerColor?: number | string,
+        thickness?: number,
+        startAngle?: number,
+        anticlockwise?: boolean,
+        knobDepth?: number,
 
-    gap?: number,
+        text?: Phaser.GameObjects.GameObject,
+        textFormatCallback?: (value: number) => string,
+        textFormatCallbackScope?: object,
 
-    easeValue?: {
-        duration?: number,
-        ease?: string
-    },
+        input?: InputTypes,
 
-    valuechangeCallback: (newValue: number, oldValue: number, knob: Knob) => void,
+        value?: number,
 
-    enable?: boolean,
+        gap?: number,
+
+        easeValue?: {
+            duration?: number,
+            ease?: string
+        },
+
+        valuechangeCallback: (newValue: number, oldValue: number, knob: Knob) => void,
+
+        enable?: boolean,
+
+    }
 
 }
 
-export default class Knob extends OverlapSizer {
+declare class Knob extends OverlapSizer {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: Knob.IConfig
     );
 
     value: number;

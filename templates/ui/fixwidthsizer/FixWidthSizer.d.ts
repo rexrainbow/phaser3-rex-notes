@@ -1,59 +1,63 @@
 // import * as Phaser from 'phaser';
 import BaseSizer from '../basesizer/BaseSizer.js';
-import { IConfig as IConfigBase } from '../basesizer/BaseSizer';
 
-type AlignTypes = 0 | 1 | 2 | 3 | 4 | 5 |
-    'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-cneter';
-type PaddingTypes = number |
-{
-    left?: number,
-    right?: number,
-    top?: number,
-    bottom?: number
-};
+export default FixWidthSizer;
 
-export interface IConfig extends IConfigBase {
-    x?: number,
-    y?: number,
-    width?: number,
-    height?: number,
+declare namespace FixWidthSizer {
+    type AlignTypes = 0 | 1 | 2 | 3 | 4 | 5 |
+        'left' | 'right' | 'center' | 'justify' | 'justify-left' | 'justify-right' | 'justify-cneter';
 
-    space?: {
-        left?: number, right?: number, top?: number, bottom?: number,
+    type PaddingTypes = number |
+    {
+        left?: number,
+        right?: number,
+        top?: number,
+        bottom?: number
+    };
 
-        item?: number, line?: number,
-    },
+    interface IConfig extends BaseSizer.IConfig {
+        x?: number,
+        y?: number,
+        width?: number,
+        height?: number,
 
-    rtl?: boolean,
+        space?: {
+            left?: number, right?: number, top?: number, bottom?: number,
 
-    align?: AlignTypes;
+            item?: number, line?: number,
+        },
+
+        rtl?: boolean,
+
+        align?: AlignTypes;
+    }
 }
 
-export default class Sizer extends BaseSizer {
+declare class FixWidthSizer extends BaseSizer {
     sizerChildren: Phaser.GameObjects.GameObject[];
 
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: FixWidthSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
-        config?: IConfig
+        config?: FixWidthSizer.IConfig
     );
 
     constructor(
         scene: Phaser.Scene,
         x: number, y: number,
         width: number, height: number,
-        config?: IConfig
+        config?: FixWidthSizer.IConfig
     );
 
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: {
-            padding?: PaddingTypes,
+            padding?: FixWidthSizer.PaddingTypes,
             key?: string,
             index?: number,
         }
@@ -61,7 +65,7 @@ export default class Sizer extends BaseSizer {
 
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        padding?: PaddingTypes,
+        padding?: FixWidthSizer.PaddingTypes,
         childKey?: string,
         index?: number
     ): this;
@@ -69,7 +73,7 @@ export default class Sizer extends BaseSizer {
     insert(
         index: number,
         gameObject: Phaser.GameObjects.GameObject,
-        paddingConfig?: PaddingTypes,
+        paddingConfig?: FixWidthSizer.PaddingTypes,
         childKey?: string
     ): this;
 

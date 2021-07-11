@@ -1,6 +1,5 @@
 import NumberBar from './NumberBar';
-import { IConfig } from './NumberBar';
 
 export default function (
-    config?: IConfig
+    config?: NumberBar.IConfig
 ): NumberBar;

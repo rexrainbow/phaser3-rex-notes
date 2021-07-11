@@ -1,19 +1,16 @@
 import OverlapSizer from './OverlapSizer';
-import { IConfig } from './OverlapSizer';
 
-declare function Factoty(
-    config?: IConfig
+export default function (
+    config?: OverlapSizer.IConfig
 ): OverlapSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
-    config?: IConfig
+    config?: OverlapSizer.IConfig
 ): OverlapSizer;
 
-declare function Factoty(
+export default function (
     x: number, y: number,
     width: number, height: number,
-    config?: IConfig
+    config?: OverlapSizer.IConfig
 ): OverlapSizer;
-
-export default Factoty;

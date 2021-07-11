@@ -1,8 +1,11 @@
+// import * as Phaser from 'phaser';
 
 import BoardFactory from './board/board/Factory.js';
 import QuadGridFactory from './board/grid/quad/Factory';
 import HexagonGridFactory from './board/grid/hexagon/Factory';
 import ShapeFactory from './board/shape/Factory';
+import MoveToFactory from './board/moveto/Factory';
+import PathFinderFactory from './board/pathfinder/Factory';
 import MatchFactory from './board/match/Factory';
 
 declare class Factories {
@@ -10,25 +13,11 @@ declare class Factories {
     quadGrid: typeof QuadGridFactory;
     hexagonGrid: typeof HexagonGridFactory;
     shape: typeof ShapeFactory;
+    moveTo: typeof MoveToFactory;
+    pathFinder: typeof PathFinderFactory;
     match: typeof MatchFactory;
 }
 
 export default class BoardPlugin extends Phaser.Plugins.ScenePlugin {
     add: Factories
-}
-
-
-// Export class definitions
-import Board from './board/board/Board';
-import Hexagon from './board/grid/hexagon/Hexagon';
-import Quad from './board/grid/quad/Quad';
-import Shape from './board/shape/Shape';
-import Match from './board/match/Match';
-
-export {
-    Board,
-    Hexagon,
-    Quad,
-    Shape,
-    Match
 }

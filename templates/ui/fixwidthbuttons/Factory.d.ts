@@ -1,6 +1,5 @@
 import FixWidthButtons from './FixWidthButtons';
-import { IConfig } from './FixWidthButtons';
 
 export default function (
-    config?: IConfig
+    config?: FixWidthButtons.IConfig
 ): FixWidthButtons;

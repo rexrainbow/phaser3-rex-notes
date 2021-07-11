@@ -1,116 +1,125 @@
 // import * as Phaser from 'phaser';
 import Canvas from '../../canvas/canvas/Canvas';
 import { IConfigTextStyle } from './bob/char/TextStyle';
-import CharBob from './bob/char/CharData';
-import ImageBob from './bob/image/ImageData';
-import CommandBob from './bob/command/Command';
+import CharBobT from './bob/char/CharData';
+import ImageBobT from './bob/image/ImageData';
+import CommandBobT from './bob/command/Command';
 
 
-type PaddingTypes = number |
-{ left?: number, right?: number, top?: number, bottom?: number };
+export default DynamicText;
 
-interface IRadiusConfig {
-    tl?: (number | { x?: number, y?: number }),
-    tr?: (number | { x?: number, y?: number }),
-    bl?: (number | { x?: number, y?: number }),
-    br?: (number | { x?: number, y?: number })
-}
+declare namespace DynamicText {
 
-interface IConfigBackground {
-    color?: string | number | null,
-    color2?: string | number | null,
-    horizontalGradient?: boolean,
+    type PaddingTypes = number |
+    { left?: number, right?: number, top?: number, bottom?: number };
 
-    stroke?: string | number | null,
-    strokeThickness?: number,
+    interface IRadiusConfig {
+        tl?: (number | { x?: number, y?: number }),
+        tr?: (number | { x?: number, y?: number }),
+        bl?: (number | { x?: number, y?: number }),
+        br?: (number | { x?: number, y?: number })
+    }
 
-    cornerRadius?: number |
-    ({ x?: number, y?: number }) |
-    IRadiusConfig,
-    cornerIteration?: number
-}
+    interface IConfigBackground {
+        color?: string | number | null,
+        color2?: string | number | null,
+        horizontalGradient?: boolean,
 
-interface IConfigInnerBounds {
-    color?: string | number | null,
-    color2?: string | number | null,
-    horizontalGradient?: boolean,
+        stroke?: string | number | null,
+        strokeThickness?: number,
 
-    stroke?: string | number | null,
-    strokeThickness?: number,
-}
+        cornerRadius?: number |
+        ({ x?: number, y?: number }) |
+        IRadiusConfig,
+        cornerIteration?: number
+    }
 
-interface IConfigImage {
-    width?: number,
-    height?: number,
-    scaleX?: number,
-    scaleY?: number,
-}
+    interface IConfigInnerBounds {
+        color?: string | number | null,
+        color2?: string | number | null,
+        horizontalGradient?: boolean,
 
-type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
-type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
+        stroke?: string | number | null,
+        strokeThickness?: number,
+    }
 
-export interface IConfigWordWrap {
-    padding?: {
-        top?: number, bottom?: number,
-    },
-    lineHeight?: number,
-    maxLines?: number,
-    wrapWidth?: number,
-    letterSpacing?: number,
-    hAlign?: HAlignTypes,
-    vAlign?: VAlignTypes,
-    charWrap?: boolean
-}
+    interface IConfigImage {
+        width?: number,
+        height?: number,
+        scaleX?: number,
+        scaleY?: number,
+    }
 
-export interface IConfigVerticalWrap {
-    padding: {
-        top?: number, left?: number, right?: number, bottom?: number,
-    },
-    lineWidth?: number,
-    maxLines?: number,
-    fixedChildHeight?: number,
-    charPerLine?: number,
-    wrapHeight?: number,
-    letterSpacing?: number,
-    rtl?: boolean,
-    hAlign?: HAlignTypes,
-    vAlign?: VAlignTypes,
-}
+    type HAlignTypes = 0 | 1 | 2 | 'left' | 'center' | 'right';
+    type VAlignTypes = 0 | 1 | 2 | 'top' | 'center' | 'bottom';
 
-export type RenderChildTypes = CharBob | ImageBob;
-export type ChildTypes = CharBob | ImageBob | CommandBob;
+    interface IConfigWordWrap {
+        padding?: {
+            top?: number, bottom?: number,
+        },
+        lineHeight?: number,
+        maxLines?: number,
+        wrapWidth?: number,
+        letterSpacing?: number,
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
+        charWrap?: boolean
+    }
 
-interface IWrapResult {
-    children: ChildTypes[],
-    lines: ({
+    interface IConfigVerticalWrap {
+        padding: {
+            top?: number, left?: number, right?: number, bottom?: number,
+        },
+        lineWidth?: number,
+        maxLines?: number,
+        fixedChildHeight?: number,
+        charPerLine?: number,
+        wrapHeight?: number,
+        letterSpacing?: number,
+        rtl?: boolean,
+        hAlign?: HAlignTypes,
+        vAlign?: VAlignTypes,
+    }
+
+    type CharBob = CharBobT;
+    type ImageBob = ImageBobT;
+    type CommandBob = CommandBobT;
+    type RenderChildTypes = CharBob | ImageBob;
+    type ChildTypes = CharBob | ImageBob | CommandBob;
+
+    interface IWrapResult {
         children: ChildTypes[],
-        width: number,
-        height: number
-    })[],
-    isLastPage: boolean
+        lines: ({
+            children: ChildTypes[],
+            width: number,
+            height: number
+        })[],
+        isLastPage: boolean
+    }
+
+    interface IConfig {
+        x?: number, y?: number,
+        width?: number, height?: number,
+
+        padding: PaddingTypes,
+
+        background?: IConfigBackground,
+
+        innerBounds?: IConfigInnerBounds,
+
+        style?: IConfigTextStyle,
+
+        text?: string,
+
+        wrap?: IConfigWordWrap | IConfigVerticalWrap
+    }
+
 }
 
-export interface IConfig {
-    x?: number, y?: number,
-    width?: number, height?: number,
-
-    padding: PaddingTypes,
-
-    background?: IConfigBackground,
-
-    innerBounds?: IConfigInnerBounds,
-
-    style?: IConfigTextStyle,
-
-    text?: string,
-
-    wrap?: IConfigWordWrap | IConfigVerticalWrap
-}
-
-export default class DynamicText extends Canvas {
+declare class DynamicText extends Canvas {
     constructor(
         scene: Phaser.Scene,
-        config?: IConfig
+        config?: DynamicText.IConfig
     );
 
     clearContent(): this;
@@ -122,18 +131,18 @@ export default class DynamicText extends Canvas {
 
     appendImage(
         key: string, frame?: string | null,
-        config?: IConfigImage
+        config?: DynamicText.IConfigImage
     ): this;
 
     runWordWrap(
-        config?: IConfigWordWrap
-    ): IWrapResult;
+        config?: DynamicText.IConfigWordWrap
+    ): DynamicText.IWrapResult;
 
     runVerticalWrap(
-        config?: IConfigVerticalWrap
-    ): IWrapResult;
+        config?: DynamicText.IConfigVerticalWrap
+    ): DynamicText.IWrapResult;
 
-    getChildren(): ChildTypes[];
-    getLastAppendedChildren(): ChildTypes[];
-    getActiveChildren(): ChildTypes[];
+    getChildren(): DynamicText.ChildTypes[];
+    getLastAppendedChildren(): DynamicText.ChildTypes[];
+    getActiveChildren(): DynamicText.ChildTypes[];
 }

@@ -1,22 +1,28 @@
 import Canvas from '../canvas/Canvas';
 
-export interface IRadiusConfig {
-    tl?: (number | { x?: number, y?: number }),
-    tr?: (number | { x?: number, y?: number }),
-    bl?: (number | { x?: number, y?: number }),
-    br?: (number | { x?: number, y?: number })
+export default RoundRectangle;
+
+declare namespace RoundRectangle {
+
+    interface IRadiusConfig {
+        tl?: (number | { x?: number, y?: number }),
+        tr?: (number | { x?: number, y?: number }),
+        bl?: (number | { x?: number, y?: number }),
+        br?: (number | { x?: number, y?: number })
+    }
+
 }
 
-export default class RoundRectangle extends Canvas {
+declare class RoundRectangle extends Canvas {
     constructor(
         scene: Phaser.Scene,
         x: number,
         y: number,
         width: number,
         height: number,
-        radiusConfig?: number | ({ x?: number, y?: number }) | IRadiusConfig |
+        radiusConfig?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig |
             ({
-                radius?: (number | ({ x?: number, y?: number }) | IRadiusConfig),
+                radius?: (number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig),
                 iteration?: number
             }),
         fillStyle?: number | string | null,
@@ -43,9 +49,9 @@ export default class RoundRectangle extends Canvas {
         lineWidth?: number,
     ): this;
 
-    radius: number | ({ x?: number, y?: number }) | IRadiusConfig;
+    radius: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig;
     setRadius(
-        value?: number | ({ x?: number, y?: number }) | IRadiusConfig
+        value?: number | ({ x?: number, y?: number }) | RoundRectangle.IRadiusConfig
     ): this;
 
     iteration: number;

@@ -1,16 +1,21 @@
 // import * as Phaser from 'phaser';
 import OnePointerTracer from '../onepointertracer/OnePointerTracer';
-import { IConfig as IConfigBase } from '../onepointertracer/OnePointerTracer';
 
 
-export interface IConfig extends IConfigBase {
-    threshold?: number,
+export default Pan;
+
+declare namespace Pan {
+
+    interface IConfig extends OnePointerTracer.IConfig {
+        threshold?: number,
+    }
+
 }
 
-export default class Pan extends OnePointerTracer {
+declare class Pan extends OnePointerTracer {
     constructor(
         gameObject: Phaser.GameObjects.GameObject | Phaser.Scene,
-        config?: IConfig
+        config?: Pan.IConfig
     )
 
     setDragThreshold(distance: number): this;

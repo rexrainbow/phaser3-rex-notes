@@ -1,16 +1,23 @@
 // import * as Phaser from 'phaser';
 import HslAdjustPostFxPipeline from './hsladjustpipeline';
 
-interface IConfig {
-    intensity?: number,
 
-    name?: string,
+export default HslAdjustPipelinePlugin;
+
+declare namespace HslAdjustPipelinePlugin {
+
+    interface IConfig {
+        intensity?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class HslAdjustPipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class HslAdjustPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: HslAdjustPipelinePlugin.IConfig
     ): HslAdjustPostFxPipeline;
 
     remove(

@@ -1,6 +1,6 @@
 import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin';
-import { CustomShapes, CustomShapesGeoms } from '../../templates/ui/ui-components';
+import { CustomShapes } from '../../templates/ui/ui-components';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -20,7 +20,7 @@ class SpeechBubble extends CustomShapes {
 
                 var left = 0, right = this.width,
                     top = 0, bottom = this.height, boxBottom = bottom - indent;
-                var lines = this.getShapes()[0] as CustomShapesGeoms.Lines;
+                var lines = this.getShapes()[0] as CustomShapes.LinesShape;
                 lines
                     .lineStyle(2, this.getData('strokeColor'), 1)
                     .fillStyle(this.getData('fillColor'), 1)

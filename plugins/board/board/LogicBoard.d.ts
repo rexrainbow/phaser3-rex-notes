@@ -11,31 +11,36 @@ import Ellipse from '../../utils/geom/ellipse/Ellipse';
 import Triangle from '../../utils/geom/triangle/Triangle';
 import Polygon from '../../utils/geom/polygon/Polygon';
 
-type ForEachTileXYOrderTypes = 0 | 1 | 2 | 3 | 'x+' | 'x-' | 'y+' | 'y-';
+export default Board;
 
-export interface IConfigQuadGrid extends IConfigQuadGridBase {
-    gridType: 'quadGrid',
+declare namespace Board {
+    type ForEachTileXYOrderTypes = 0 | 1 | 2 | 3 | 'x+' | 'x-' | 'y+' | 'y-';
+
+    interface IConfigQuadGrid extends IConfigQuadGridBase {
+        gridType: 'quadGrid',
+    }
+
+    interface IConfigHexagonGrid extends IConfigHexagonGridBase {
+        gridType: 'hexagonGrid',
+    }
+
+    interface IConfig {
+        grid?: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid,
+        width?: number,
+        height?: number
+    }
+
 }
 
-export interface IConfigHexagonGrid extends IConfigHexagonGridBase {
-    gridType: 'hexagonGrid',
-}
-
-export interface IConfig {
-    grid?: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid,
-    width?: number,
-    height?: number
-}
-
-export default class Board<ChessType = unknown> extends EE {
+declare class Board<ChessType = unknown> extends EE {
     constructor(
         scene: unknown,
-        config?: IConfig
+        config?: Board.IConfig
     );
 
     scene: unknown;
 
-    setGrid(grid: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid): this;
+    setGrid(grid: QuadGrid | HexagonGrid | Board.IConfigQuadGrid | Board.IConfigHexagonGrid): this;
     grid: QuadGrid | HexagonGrid;
 
     setBoardWidth(width: number): this;
@@ -138,7 +143,7 @@ export default class Board<ChessType = unknown> extends EE {
     forEachTileXY(
         callback: (tileXY: TileXYType, board: Board<ChessType>) => void | boolean,
         scope?: unknown,
-        order?: ForEachTileXYOrderTypes
+        order?: Board.ForEachTileXYOrderTypes
     ): this;
 
     tileXYToWorldXY(

@@ -1,10 +1,10 @@
-import { IConfig } from './logic/runcommands/RunCommands';
+import RunCommands from './logic/runcommands/RunCommands';
 
 export default class RunCommandsPlugin extends Phaser.Plugins.BasePlugin {
     run(
         queue: any[],
         scope?: object,
-        config?: IConfig
+        config?: RunCommands.IConfig
     ): any;
 
 }

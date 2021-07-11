@@ -1,16 +1,22 @@
 // import * as Phaser from 'phaser';
 import GrayScalePostFxPipeline from './grayscalepipeline';
 
-interface IConfig {
-    intensity?: number,
+export default GrayScalePipelinePlugin;
 
-    name?: string,
+declare namespace GrayScalePipelinePlugin {
+
+    interface IConfig {
+        intensity?: number,
+
+        name?: string,
+    }
+
 }
 
-export default class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: IConfig
+        config?: GrayScalePipelinePlugin.IConfig
     ): GrayScalePostFxPipeline;
 
     remove(

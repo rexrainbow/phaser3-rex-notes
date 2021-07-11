@@ -1,19 +1,25 @@
 import { WorldXYType, TileXYType } from '../../types/Position';
 
-type QuadGridTypes = 0 | 1 | 'orthogonal' | 'isometric';
-type QuadGridDirTypes = 4 | 8 | '4dir' | '8dir';
+export default Quad;
 
-export interface IConfig {
-    x?: number, y?: number,
-    cellWidth?: number, cellHeight?: number,
+declare namespace Quad {
 
-    type?: QuadGridTypes,
+    type QuadGridTypes = 0 | 1 | 'orthogonal' | 'isometric';
+    type QuadGridDirTypes = 4 | 8 | '4dir' | '8dir';
 
-    dir?: QuadGridDirTypes
+    interface IConfig {
+        x?: number, y?: number,
+        cellWidth?: number, cellHeight?: number,
+
+        type?: QuadGridTypes,
+
+        dir?: QuadGridDirTypes
+    }
+
 }
 
-export default class Quad {
-    constructor(config?: IConfig);
+declare class Quad {
+    constructor(config?: Quad.IConfig);
 
     setOriginPosition(
         worldX: number,
@@ -30,7 +36,7 @@ export default class Quad {
     height: number;
 
     setType(
-        type: QuadGridTypes
+        type: Quad.QuadGridTypes
     ): this;
     readonly mode: number;
 
