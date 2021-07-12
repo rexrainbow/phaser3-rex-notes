@@ -21,7 +21,7 @@ class SpeechBubble extends CustomShapes {
 
                 var left = 0, right = this.width,
                     top = 0, bottom = this.height, boxBottom = bottom - indent;
-                var lines = this.getShapes()[0] as CustomShapes.LinesShape
+                var lines = this.getShapes()[0] as CustomShapes.Lines;
                 lines
                     .lineStyle(2, strokeColor, 1)
                     .fillStyle(fillColor, 1)

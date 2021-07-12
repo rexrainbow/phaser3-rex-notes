@@ -7,16 +7,16 @@ declare namespace CustomShapes {
 
     type NameTypes = string | string[] | number;
 
-    type ArcShape = Geoms.Arc;
-    type CircleShape = Geoms.Circle;
-    type CurveShape = Geoms.Curve;
-    type EllipseShape = Geoms.Ellipse;
-    type LineShape = Geoms.Line;
-    type LinesShape = Geoms.Lines;
-    type RectangleShape = Geoms.Rectangle;
-    type TriangleShape = Geoms.Triangle;
-    type ShapeTypes = ArcShape | CircleShape | CurveShape | CurveShape | EllipseShape |
-        LineShape | LinesShape | RectangleShape | TriangleShape;
+    type Arc = Geoms.Arc;
+    type Circle = Geoms.Circle;
+    type Curve = Geoms.Curve;
+    type Ellipse = Geoms.Ellipse;
+    type Line = Geoms.Line;
+    type Lines = Geoms.Lines;
+    type Rectangle = Geoms.Rectangle;
+    type Triangle = Geoms.Triangle;
+    type ShapeTypes = Arc | Circle | Curve | Ellipse |
+        Line | Lines | Rectangle | Triangle;
 
     interface IConfig {
         x?: number, y?: number,

@@ -1,9 +1,9 @@
 import 'phaser';
-import SpinnerPlugin from '../../templates/spinner/spinner-plugin';
-import { GeomTypes } from '../../templates/spinner/spinner-plugin';
+import SpinnerPlugins from '../../templates/spinner/spinner-plugin';
+import {Custom} from '../../templates/spinner/spinner-components';
 
 class Demo extends Phaser.Scene {
-    rexSpinner: SpinnerPlugin;
+    rexSpinner: SpinnerPlugins;
 
     constructor() {
         super({
@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
 var AddAudioSpinner = function (
     scene: Demo,
     x: number, y: number, width: number, height: number
-) {
+): SpinnerPlugins.Custom {
 
     return scene.rexSpinner.add.custom({
         x: x, y: y, width: width, height: height,
@@ -58,7 +58,7 @@ var AddAudioSpinner = function (
             var prevValue: number = this.getData('prevValue');
             if ((prevValue === undefined) || (prevValue > this.value)) {
                 for (var i = 0; i < cnt; i++) {
-                    let line = shapes[i] as GeomTypes.Line;
+                    let line = shapes[i] as Custom.Line;
                     let from = (prevValue === undefined) ? Math.random() : line.getData('to');
                     line
                         .setData('from', from)
@@ -68,7 +68,7 @@ var AddAudioSpinner = function (
             this.setData('prevValue', this.value);
 
             for (var i = 0; i < cnt; i++) {
-                let line = shapes[i] as GeomTypes.Line;
+                let line = shapes[i] as  Custom.Line;
                 let from: number = line.getData('from'),
                     to: number = line.getData('to'),
                     current = Phaser.Math.Linear(from, to, this.value);
@@ -88,7 +88,8 @@ var AddAudioSpinner = function (
 var AddBoxSpinner = function (
     scene: Demo,
     x: number, y: number, width: number, height: number
-) {
+): SpinnerPlugins.Custom {
+
     return scene.rexSpinner.add.custom({
         x: x, y: y, width: width, height: height,
 
@@ -107,8 +108,8 @@ var AddBoxSpinner = function (
                 top = centerY - halfWidth,
                 bottom = centerY + halfWidth;
 
-            var border = this.getShape('border') as GeomTypes.Lines;
-            var fill = this.getShape('fill') as GeomTypes.Lines;
+            var border = this.getShape('border') as Custom.Lines;
+            var fill = this.getShape('fill') as Custom.Lines;
 
             border
                 .lineStyle(2, this.color, 1)
@@ -149,7 +150,7 @@ var config = {
     plugins: {
         scene: [{
             key: 'rexSpinner',
-            plugin: SpinnerPlugin,
+            plugin: SpinnerPlugins,
             mapping: 'rexSpinner'
         }]
     }

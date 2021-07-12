@@ -1,46 +1,87 @@
-import Base from './base/Base';
-import Audio from './audio/Audio';
-import Ball from './ball/Ball';
-import Bars from './bars/Bars';
-import Box from './box/Box';
-import Clock from './clock/Clock';
-import Cube from './cube/Cube';
-import Custom from './custom/Custom';
-import Dots from './dots/Dots';
-import Facebook from './facebook/Facebook';
-import Grid from './grid/Grid';
-import Los from './los/Los';
-import Orbit from './orbit/Orbit';
-import Oval from './oval/Oval';
-import Pie from './pie/Pie';
-import Puff from './puff/Puff';
-import Radio from './radio/Radio';
-import Rings from './rings/Rings';
-import Spinner from './spinner/Spinner';
+import AudioFactory from './audio/Factory';
+import BallFactory from './ball/Factory';
+import BarsFactory from './bars/Factory';
+import BoxFactory from './box/Factory';
+import ClockFactory from './clock/Factory';
+import CubeFactory from './cube/Factory';
+import CustomFactory from './custom/Factory';
+import DotsFactory from './dots/Factory';
+import FacebookFactory from './facebook/Factory';
+import GridFactory from './grid/Factory';
+import LosFactory from './los/Factory';
+import OrbitFactory from './orbit/Factory';
+import OvalFactory from './oval/Factory';
+import PieFactory from './pie/Factory';
+import PuffFactory from './puff/Factory';
+import RadioFactory from './radio/Factory';
+import RingsFactory from './rings/Factory';
+import SpinnerFactory from './spinner/Factory';
+
+export default SpinnerPlugins;
 
 declare class Factories {
-    audio: (config?: Base.IConfig) => Audio;
-    ball: (config?: Base.IConfig) => Ball;
-    bars: (config?: Base.IConfig) => Bars;
-    box: (config?: Base.IConfig) => Box;
-    clock: (config?: Base.IConfig) => Clock;
-    cube: (config?: Base.IConfig) => Cube;
-    custom: (config?: Custom.IConfig) => Custom;
-    dots: (config?: Base.IConfig) => Dots;
-    facebook: (config?: Base.IConfig) => Facebook;
-    grid: (config?: Base.IConfig) => Grid;
-    los: (config?: Base.IConfig) => Los;
-    orbit: (config?: Base.IConfig) => Orbit;
-    oval: (config?: Base.IConfig) => Oval;
-    pie: (config?: Base.IConfig) => Pie;
-    puff: (config?: Base.IConfig) => Puff;
-    radio: (config?: Base.IConfig) => Radio;
-    rings: (config?: Base.IConfig) => Rings;
-    spinner: (config?: Base.IConfig) => Spinner;
+    audio: typeof AudioFactory;
+    ball: typeof BallFactory;
+    bars: typeof BarsFactory;
+    box: typeof BoxFactory;
+    clock: typeof ClockFactory;
+    cube: typeof CubeFactory;
+    custom: typeof CustomFactory;
+    dots: typeof DotsFactory;
+    facebook: typeof FacebookFactory;
+    grid: typeof GridFactory;
+    los: typeof LosFactory;
+    orbit: typeof OrbitFactory;
+    oval: typeof OvalFactory;
+    pie: typeof PieFactory;
+    puff: typeof PuffFactory;
+    radio: typeof RadioFactory;
+    rings: typeof RingsFactory;
+    spinner: typeof SpinnerFactory;
 }
 
-export default class UIFactories {
+declare class SpinnerPlugins {
     constructor(scene: Phaser.Scene);
 
     add: Factories;
+}
+
+import AudioClass from './audio/Audio';
+import BallClass from './ball/Ball';
+import BarsClass from './bars/Bars';
+import BoxClass from './box/Box';
+import ClockClass from './clock/Clock';
+import CubeClass from './cube/Cube';
+import CustomClass from './custom/Custom';
+import DotsClass from './dots/Dots';
+import FacebookClass from './facebook/Facebook';
+import GridClass from './grid/Grid';
+import LosClass from './los/Los';
+import OrbitClass from './orbit/Orbit';
+import OvalClass from './oval/Oval';
+import PieClass from './pie/Pie';
+import PuffClass from './puff/Puff';
+import RadioClass from './radio/Radio';
+import RingsClass from './rings/Rings';
+import SpinnerClass from './spinner/Spinner';
+
+declare namespace SpinnerPlugins {
+    type Audio = AudioClass;
+    type Ball = BallClass;
+    type Bars = BarsClass
+    type Box = BoxClass;
+    type Clock = ClockClass;
+    type Cube = CubeClass;
+    type Custom = CustomClass;
+    type Dots = DotsClass;
+    type Facebook = FacebookClass;
+    type Grid = GridClass;
+    type Los = LosClass;
+    type Orbit = OrbitClass;
+    type Oval = OvalClass;
+    type Pie = PieClass;
+    type Puff = PuffClass;
+    type Radio = RadioClass;
+    type Rings = RingsClass;
+    type Spinner = SpinnerClass;
 }
