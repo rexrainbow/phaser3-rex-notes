@@ -41,6 +41,8 @@ var board = gameObject.rexChess.board;
 
 - `board` : [Board object](board.md), or `null` if this chess is not added to any board.
 
+[See also](board.md#get-board)
+
 ### Blocker
 
 - Set

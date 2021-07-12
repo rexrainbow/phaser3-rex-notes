@@ -76,6 +76,8 @@ import FilledRingToTileXYArray from './ring/FilledRingToTileXYArray.js';
 import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
 
+import GetBoard from './chess/GetBoard.js';
+
 export default {
     getChessData: GetChessData,
     getChessUID: GetChessUID,
@@ -156,4 +158,6 @@ export default {
     hasEdgeBlocker: HasEdgeBlocker,
 
     getGridPoints: GetGridPoints,
+
+    chessToBoard: GetBoard,
 };

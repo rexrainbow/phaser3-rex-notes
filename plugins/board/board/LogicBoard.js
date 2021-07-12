@@ -4,6 +4,7 @@ import BoardData from './boarddata/BoardData.js';
 import DefaultGrids from '../grid/index.js';
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
+import GetBoard from './chess/GetBoard.js';
 
 class Board extends EE {
     constructor(scene, config) {
@@ -114,6 +115,10 @@ class Board extends EE {
         this.removeAllChess(destroy, true);
         this.boardData.clear();
         return this;
+    }
+
+    static GetBoard(chess) {
+        return GetBoard(chess);
     }
 }
 

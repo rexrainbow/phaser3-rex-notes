@@ -346,4 +346,8 @@ declare class Board<ChessType = unknown> extends EE {
         tileXY: ChessType | TileXYType,
         out?: WorldXYType[] | true
     ): WorldXYType[];
+
+    chessToBoard(chess: any): Board;
+    static GetBoard(chess: any): Board;
+
 }

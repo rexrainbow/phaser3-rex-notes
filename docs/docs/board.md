@@ -1037,6 +1037,28 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     graphics.strokePoints(points, true);
     ```
 
+### Get Board
+
+- Static method 
+    ```javascript
+    var board = Board.GetBoard(chess);
+    ```
+    - `GetBoard` is a static method of `Board` class.
+
+- Member method
+    ```javascript
+    var board = board.chessToBoard(chess);
+    ```
+- Board property
+    - Chess
+        ```javascript
+        var board = chess.rexChess.board;
+        ```
+    - [Miniboard](board-miniboard.md)
+        ```javascript
+        var board = miniboard.mainBoard;
+        ```
+
 ### Other properties
 
 - Scene

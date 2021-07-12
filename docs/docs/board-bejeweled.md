@@ -7,7 +7,7 @@ Match3-like gameplay template.
 
 ## Live demos
 
-- [Default](https://codepen.io/rexrainbow/pen/wEVYoY)
+- [Events](https://codepen.io/rexrainbow/pen/wEVYoY)
 - [Custom input](https://codepen.io/rexrainbow/pen/XWWyELV)
 
 ## Usage
@@ -487,26 +487,3 @@ Helper methods
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
-
-### Events
-
-- `'match'` event
-    ```javascript
-    bejeweled.on('match', function(lines, board, bejeweled) {
-
-    }, scope);
-    ```
-    - `lines` : An array of matched lines, each line is a [built-in Set object](structs-set.md).
-- `'eliminate'` event
-    ```javascript
-    bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
-
-    }, scope);
-    ```
-    - `chessArray` : An array of chess (Game Object) to be eliminated.
-- `'fall'` event
-    ```javascript
-    bejeweled.on('fall', function(board, bejeweled) {
-
-    }, scope);
-    ```

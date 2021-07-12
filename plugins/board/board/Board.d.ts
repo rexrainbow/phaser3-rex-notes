@@ -12,4 +12,7 @@ declare class Board<ChessType = Phaser.GameObjects.GameObject> extends LogicBoar
     scene: Phaser.Scene;
 
     setInteractive(enable?: boolean): this;
+
+    chessToBoard(chess: any): Board;
+    static GetBoard(chess: any): Board;
 }
