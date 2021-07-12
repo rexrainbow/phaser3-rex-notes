@@ -16,10 +16,14 @@ var CanPutOnMainBoard = function (mainBoard, tileX, tileY, chessTileXYMap) {
 
         if (this.putTestCallback) {
             // Custom test function
+            targetTileXY.x = mappedTileXY.x;
+            targetTileXY.y = mappedTileXY.x;
+            targetTileXY.z = chessTileXYZ.z;
+            var chess = this.board.uidToChess(uid);
             if (this.putTestCallbackScpe) {
-                isOccupied = this.putTestCallback.call(this.putTestCallbackScpe, mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z, mainBoard);
+                isOccupied = this.putTestCallback.call(this.putTestCallbackScpe, targetTileXY, mainBoard, chess);
             } else {
-                isOccupied = this.putTestCallback(mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z, mainBoard);
+                isOccupied = this.putTestCallback(targetTileXY, mainBoard, chess);
             }
         } else {
             // Default test function
@@ -31,5 +35,7 @@ var CanPutOnMainBoard = function (mainBoard, tileX, tileY, chessTileXYMap) {
     }
     return true;
 }
+
+var targetTileXY = { x: 0, y: 0, z: 0, };
 
 export default CanPutOnMainBoard;

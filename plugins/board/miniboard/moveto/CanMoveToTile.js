@@ -6,18 +6,18 @@ var CanMoveToTile = function (tileX, tileY, direction) {
         return false;
     }
 
-    myTileXY.x = miniBoard.tileX;
-    myTileXY.y = miniBoard.tileY;
-    targetTileXY.x = tileX;
-    targetTileXY.y = tileY;
+    myTileXYZ.x = miniBoard.tileX;
+    myTileXYZ.y = miniBoard.tileY;
+    targetTileXYZ.x = tileX;
+    targetTileXYZ.y = tileY;
     // Move to current position
-    if ((targetTileXY.x === myTileXY.x) && (targetTileXY.y === myTileXY.y)) {
+    if ((targetTileXYZ.x === myTileXYZ.x) && (targetTileXYZ.y === myTileXYZ.y)) {
         return true;
     }
 
     miniBoard.pullOutFromMainBoard();
     // Can not put on main board
-    if (!miniBoard.canPutOnMainBoard(mainBoard, targetTileXY.x, targetTileXY.y)) {
+    if (!miniBoard.canPutOnMainBoard(mainBoard, targetTileXYZ.x, targetTileXYZ.y)) {
         miniBoard.putBack();
         return false;
     }
@@ -25,13 +25,12 @@ var CanMoveToTile = function (tileX, tileY, direction) {
     // Custom moveable test
     if (this.moveableTestCallback) {
         if (direction === undefined) {
-            direction = mainBoard.getNeighborTileDirection(myTileXY, targetTileXY);
+            direction = mainBoard.getNeighborTileDirection(myTileXYZ, targetTileXYZ);
         }
-        targetTileXY.direction = direction;
         if (this.moveableTestScope) {
-            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, targetTileXY, mainBoard);
+            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, targetTileXYZ, direction, mainBoard);
         } else {
-            var moveable = this.moveableTestCallback(myTileXYZ, targetTileXY, mainBoard);
+            var moveable = this.moveableTestCallback(myTileXYZ, targetTileXYZ, direction, mainBoard);
         }
         if (!moveable) {
             miniBoard.putBack();
@@ -43,14 +42,7 @@ var CanMoveToTile = function (tileX, tileY, direction) {
     return true;
 }
 
-var myTileXY = {
-    x: 0,
-    y: 0
-};
-var targetTileXY = {
-    x: 0,
-    y: 0,
-    direction: null
-};
+var myTileXYZ = { x: 0, y: 0, z: 0 };
+var targetTileXYZ = { x: 0, y: 0, z: 0 };
 
 export default CanMoveToTile;

@@ -1,21 +1,35 @@
-import { TileXYType } from '../types/Position';
+import TickTask from '../../utils/behaviorbase/TickTask';
+import { TileXYType, TileXYZType } from '../types/Position';
+import Board from '../board/Board';
 
 
 export default MoveTo;
 
 declare namespace MoveTo {
 
+
+    type MoveableTestCallbackType = (
+        fromTileXYZ: TileXYZType,
+        toTileXYZ: TileXYZType,
+        direction: number,
+        board: Board
+    ) => boolean;
+
     interface IConfig {
         speed?: number,
         rotateToTarget?: boolean,
+
         occupiedTest?: boolean,
         blockerTest?: boolean,
+        moveableTest?: MoveableTestCallbackType,
+        moveableTestScope?: unknown,
+
         sneak?: boolean,
     }
 
 }
 
-declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> {
+declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> extends TickTask {
     constructor(
         gameObject: ChessType,
         config?: MoveTo.IConfig
@@ -42,17 +56,28 @@ declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> {
     readonly destinationTileY: number;
     readonly destinationDirection: number;
 
-    pause(): this;
-    resume(): this;
-    stop(): this;
-    readonly isRunning: boolean;
-
     setEnable(enable?: boolean): this;
     enable: boolean;
 
     setSpeed(speed: number): this;
     speed: number;
 
-    setRotateToTarget(enable?: boolean): this;
+    timeScale: number;
 
+    setRotateToTarget(enable?: boolean): this;
+    rotateToTarget: boolean;
+
+    setSneakEnable(enable?: boolean): this;
+
+    setOccupiedTest(enable?: boolean): this;
+    occupiedTest: boolean;
+    setBlockerTest(enable?: boolean): this;
+    blockerTest: boolean;
+    setEdgeBlockerTest(enable?: boolean): this;
+    edgeBlockerTest: boolean;
+
+    setMoveableTestCallback(
+        callback: MoveTo.MoveableTestCallbackType,
+        scope?: unknown
+    ): this;
 }

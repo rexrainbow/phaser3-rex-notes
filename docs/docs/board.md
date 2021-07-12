@@ -87,8 +87,10 @@ Core object of Board system.
             cellHeight: 0,
             type: 'orthogonal'  // 'orthogonal'|'isometric'
         },
-        width: 0,
-        height: 0
+        // width: 0,
+        // height: 0,
+        // wrap: false,
+        // infinity: false,
     });
     ```
 - Hexagon board
@@ -103,8 +105,10 @@ Core object of Board system.
             staggeraxis: 'x',   // 'x'|'y'
             staggerindex: 'odd' // 'odd'|'even'
         },
-        width: 0,
-        height: 0
+        // width: 0,
+        // height: 0,
+        // wrap: false,
+        // infinity: false,
     });
     ```
 
@@ -116,6 +120,8 @@ Configuration
         - `'hexagonGrid'` : [hexagon grid](board-hexagongrid.md)
 - `width` : Board width in tiles
 - `height` : Board height in tiles
+- `wrap` : Set `true` to wrap board bounds. Default value is `false`.
+- `infinity` : Infinity board size if set to `true`. Default value is `false`.
 
 ### Custom class
 

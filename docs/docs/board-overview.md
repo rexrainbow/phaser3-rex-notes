@@ -41,6 +41,45 @@
     var board = scene.rexBoard.add.board(config);
     ```
 
+#### Using typescript declaration file
+
+```typescript
+import BoardPlugin from 'phaser3-rex-plugins/plugins/board-plugin.js';
+
+class Game extends Phaser.Scene {
+    rexBoard: BoardPlugin;  // Declare scene property 'rexBoard' as BoardPlugin type
+
+    create() {
+        var board = this.rexBoard.add.board({
+            // ...
+        })
+    }
+}
+
+var game = new Phaser.Game({
+    scene: Game,
+    // ...
+    plugins: {
+        scene: [{
+            key: 'rexBoard',
+            plugin: BoardPlugin,
+            mapping: 'rexBoard'
+        },
+        // ...
+        ]
+    }
+    // ...
+});
+```
+
+- `'phaser3-rex-plugins/plugins/board-plugin'` : Factories of board components.
+- `'phaser3-rex-plugins/plugins/board-components'` : Class of board components.
+    ```typescript
+    import { Board } from 'phaser3-rex-plugins/plugins/board-components';
+    ```
+
+See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/board/touch-event-ts.ts)
+
 ## List of board plugins
 
 ### Board

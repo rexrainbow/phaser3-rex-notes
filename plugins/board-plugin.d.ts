@@ -9,6 +9,7 @@ import PathFinderFactory from './board/pathfinder/Factory';
 import MatchFactory from './board/match/Factory';
 import FieldOfViewFactory from './board/fieldofview/Factory';
 import MonopolyFactory from './board/monopoly/Factory';
+import MiniBoardFactory from './board/miniboard/Factory';
 
 import HexagonMap from './board/hexagonmap/index';
 import CreateTileTexture from './board/texture/CreateTileTexture'
@@ -25,6 +26,7 @@ declare class Factories {
     match: typeof MatchFactory;
     fieldOfView: typeof FieldOfViewFactory;
     monopoly: typeof MonopolyFactory;
+    miniBoard: typeof MiniBoardFactory;
 }
 
 declare class BoardPlugin extends Phaser.Plugins.ScenePlugin {
@@ -43,6 +45,7 @@ import MatchClass from './board/match/Match';
 import PathFinderClass from './board/pathfinder/PathFinder';
 import FieldOfViewClass from './board/fieldofview/FieldOfView';
 import MonopolyClass from './board/monopoly/Monopoly';
+import MiniBoardClass from './board/miniboard/MiniBoard';
 
 declare namespace BoardPlugin {
     type Board = BoardClass;
@@ -54,4 +57,5 @@ declare namespace BoardPlugin {
     type PathFinder = PathFinderClass;
     type FieldOfView = FieldOfViewClass;
     type Monopoly = MonopolyClass;
+    type MiniBoard = MiniBoardClass;
 }

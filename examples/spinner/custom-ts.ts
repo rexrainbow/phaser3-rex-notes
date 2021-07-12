@@ -1,9 +1,9 @@
 import 'phaser';
-import SpinnerPlugins from '../../templates/spinner/spinner-plugin';
+import SpinnerPlugin from '../../templates/spinner/spinner-plugin';
 import {Custom} from '../../templates/spinner/spinner-components';
 
 class Demo extends Phaser.Scene {
-    rexSpinner: SpinnerPlugins;
+    rexSpinner: SpinnerPlugin;
 
     constructor() {
         super({
@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
 var AddAudioSpinner = function (
     scene: Demo,
     x: number, y: number, width: number, height: number
-): SpinnerPlugins.Custom {
+): SpinnerPlugin.Custom {
 
     return scene.rexSpinner.add.custom({
         x: x, y: y, width: width, height: height,
@@ -88,7 +88,7 @@ var AddAudioSpinner = function (
 var AddBoxSpinner = function (
     scene: Demo,
     x: number, y: number, width: number, height: number
-): SpinnerPlugins.Custom {
+): SpinnerPlugin.Custom {
 
     return scene.rexSpinner.add.custom({
         x: x, y: y, width: width, height: height,
@@ -150,7 +150,7 @@ var config = {
     plugins: {
         scene: [{
             key: 'rexSpinner',
-            plugin: SpinnerPlugins,
+            plugin: SpinnerPlugin,
             mapping: 'rexSpinner'
         }]
     }

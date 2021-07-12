@@ -18,9 +18,6 @@ class MiniBoard extends Container {
         this.mainBoardRef = new MainBoardReference();
         this.lastMainBoardRef = new MainBoardReference();
 
-        this.putTestCallback = undefined;
-        this.putTestCallbackScpe = undefined;
-
         this.resetFromJSON(config);
     }
 
@@ -30,6 +27,7 @@ class MiniBoard extends Container {
         if (dragEnable !== undefined) {
             this.setDraggable(dragEnable);
         }
+        this.setPutTestCallback(GetValue(o, 'putTestCallback', undefined), GetValue(o, 'putTestCallbackScpe', undefined));       
         this.lastTransferResult = GetValue(o, 'lastTransferResult', undefined);
         return this;
     }

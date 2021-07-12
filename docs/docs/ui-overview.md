@@ -41,9 +41,8 @@
 
 #### Using typescript declaration file
 
-```javascript
+```typescript
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import { CustomShapes, CustomShapesGeomTypes } from 'phaser3-rex-plugins/templates/ui/ui-components';
 
 class Game extends Phaser.Scene {
     rexUI: RexUIPlugin;  // Declare scene property 'rexUI' as RexUIPlugin type
@@ -71,9 +70,9 @@ var game = new Phaser.Game({
 });
 ```
 
-- `'phaser3-rex-plugins/templates/ui/ui-plugin.js'` : Factories of rexUI component.
-- `'phaser3-rex-plugins/templates/ui/ui-components'` : Classed of rexUI component.
-    ```javascript
+- `'phaser3-rex-plugins/templates/ui/ui-plugin'` : Factories of rexUI components.
+- `'phaser3-rex-plugins/templates/ui/ui-components'` : Class of rexUI components.
+    ```typescript
     import { Sizer } from 'phaser3-rex-plugins/templates/ui/ui-components';
     ```
 

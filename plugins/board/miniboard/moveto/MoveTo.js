@@ -94,21 +94,6 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    pause() {
-        this.isRunning = false;
-        return this;
-    }
-
-    resume() {
-        this.isRunning = true;
-        return this;
-    }
-
-    stop() {
-        this.isRunning = false;
-        return this;
-    }
-
     moveAlongLine(startX, startY, endX, endY) {
         if (startX !== undefined) {
             this.parent.x = startX;

@@ -76,19 +76,19 @@ class Board extends EE {
         return this;
     }
 
-    setWrapMode(mode) {
-        if (mode === undefined) {
-            mode = true;
+    setWrapMode(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.wrapMode = mode;
+        this.wrapMode = enable;
         return this;
     }
 
-    setInfinityMode(mode) {
-        if (mode === undefined) {
-            mode = true;
+    setInfinityMode(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.infinityMode = mode;
+        this.infinityMode = enable;
         return this;
     }
 

@@ -27,7 +27,10 @@ declare namespace Board {
     interface IConfig {
         grid?: QuadGrid | HexagonGrid | IConfigQuadGrid | IConfigHexagonGrid,
         width?: number,
-        height?: number
+        height?: number,
+
+        wrap?: boolean,
+        infinity?: boolean
     }
 
 }
@@ -47,6 +50,12 @@ declare class Board<ChessType = unknown> extends EE {
     readonly width: number;
     setBoardHeight(height: number): this;
     readonly height: number;
+
+    setWrapMode(enable?: boolean): this;
+    wrapMode: boolean;
+
+    setInfinityMode(enable?: boolean): this;
+    infinityMode: boolean;
 
     addChess(
         chess: ChessType,
@@ -149,7 +158,7 @@ declare class Board<ChessType = unknown> extends EE {
     tileXYToWorldXY(
         tileX: number,
         tileY: number,
-        out?: WorldXYType
+        out?: WorldXYType | true
     ): WorldXYType;
 
     worldXYToTileXY(
@@ -161,7 +170,7 @@ declare class Board<ChessType = unknown> extends EE {
     worldXYSnapToGrid(
         worldX: number,
         worldY: number,
-        out?: WorldXYType
+        out?: WorldXYType | true
     ): WorldXYType;
 
     getDistance(
@@ -331,10 +340,10 @@ declare class Board<ChessType = unknown> extends EE {
     getGridPoints(
         tileX: number,
         tileY?: number,
-        out?: WorldXYType[]
+        out?: WorldXYType[] | true
     ): WorldXYType[];
     getGridPoints(
         tileXY: ChessType | TileXYType,
-        out?: WorldXYType[]
+        out?: WorldXYType[] | true
     ): WorldXYType[];
 }

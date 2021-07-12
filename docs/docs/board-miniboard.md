@@ -93,6 +93,8 @@ miniBoard.addChess(gameObject, tileX, tileY, tileZ);
 
 - `chess` : A game object.
 - `tileX` , `tileY` , `tileZ` : Tile position.
+    - `tileX` , `tileY` : Number.
+    - `tileZ` : Number or string.
 
 !!! note "Chess and tile position"
     - Any chess has a **(tileX, tileY, tileZ)** index
@@ -293,7 +295,7 @@ Always return `true` if this mini-board is not on a main-board.
 #### Mirror
 
 ```javascript
-miniBoard.rotate(mode);
+miniBoard.mirror(mode);
 ```
 
 - `mode` :

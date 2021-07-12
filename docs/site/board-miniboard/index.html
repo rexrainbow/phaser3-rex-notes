@@ -6247,7 +6247,11 @@
 
 <ul>
 <li><code>chess</code> : A game object.</li>
-<li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.</li>
+<li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.<ul>
+<li><code>tileX</code> , <code>tileY</code> : Number.</li>
+<li><code>tileZ</code> : Number or string.</li>
+</ul>
+</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Chess and tile position</p>
@@ -6425,7 +6429,7 @@
 </ul>
 <p>Always return <code>true</code> if this mini-board is not on a main-board.</p>
 <h4 id="mirror_1">Mirror<a class="headerlink" href="#mirror_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">mirror</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>

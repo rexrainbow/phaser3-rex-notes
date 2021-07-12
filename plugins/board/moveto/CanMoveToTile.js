@@ -36,13 +36,13 @@ var CanMoveToTile = function (tileX, tileY, direction) {
         if (direction === undefined) {
             direction = this.chessData.getTileDirection(tileX, tileY);
         }
-        globTileXYZ.x = tileX;
-        globTileXYZ.y = tileY;
-        globTileXYZ.direction = direction;
+        targetTileXY.x = tileX;
+        targetTileXY.y = tileY;
+        targetTileXY.z = myTileZ;
         if (this.moveableTestScope) {
-            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, globTileXYZ, board);
+            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, targetTileXY, direction, board);
         } else {
-            var moveable = this.moveableTestCallback(myTileXYZ, globTileXYZ, board);
+            var moveable = this.moveableTestCallback(myTileXYZ, targetTileXY, direction, board);
         }
         if (!moveable) {
             return false;
@@ -69,10 +69,6 @@ var CanMoveToTile = function (tileX, tileY, direction) {
     return true;
 }
 
-var globTileXYZ = {
-    x: 0,
-    y: 0,
-    direction: null
-};
+var targetTileXY = { x: 0, y: 0, z: 0, };
 
 export default CanMoveToTile;
