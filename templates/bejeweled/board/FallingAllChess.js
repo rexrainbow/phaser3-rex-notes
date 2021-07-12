@@ -17,7 +17,7 @@ var FallingAllChess = function (board, bejeweled) {
                 moveTo.moveToward(1);
             } while (moveTo.lastMoveResult)
             if (moveTo.isRunning) {
-                bejeweled.waitEvents.waitEvent(moveTo, 'complete');
+                bejeweled.waitEvent(moveTo, 'complete');
             }
         }
     }

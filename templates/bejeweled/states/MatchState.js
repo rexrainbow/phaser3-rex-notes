@@ -15,15 +15,12 @@ class State extends FSM {
         this.eliminatedChessArray;
 
         // callbacks
-        // on matched lines
-        this.onMatchLinesCallback = GetValue(config, 'onMatchLinesCallback', undefined);
-        this.onMatchLinesCallbackScope = GetValue(config, 'onMatchLinesCallbackScope', undefined);
-        // on eliminating chess
-        this.onEliminatingChessCallback = GetValue(config, 'onEliminatingChessCallback', undefined);
-        this.onEliminatingChessCallbackScope = GetValue(config, 'onEliminatingChessCallbackScope', undefined);
+        // Eliminating action
+        this.eliminatingAction = GetValue(config, 'eliminatingAction', EliminateChess);
+        this.eliminatingActionScope = GetValue(config, 'eliminatingActionScope', undefined);
         // on falling chess
-        this.onFallingChessCallback = GetValue(config, 'onFallingChessCallback', undefined);
-        this.onFallingChessCallbackScope = GetValue(config, 'onFallingChessCallback', undefined);
+        this.fallingAction = GetValue(config, 'fallingAction', FallingAllChess);
+        this.fallingActionScope = GetValue(config, 'fallingActionScope', undefined);
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -39,12 +36,11 @@ class State extends FSM {
         this.board = undefined;
 
         this.eliminatedChessArray = undefined;
-        this.onMatchLinesCallback = undefined;
-        this.onMatchLinesCallbackScope = undefined;
-        this.onEliminatingChessCallback = undefined;
-        this.onEliminatingChessCallbackScope = undefined;
-        this.onFallingChessCallback = undefined;
-        this.onFallingChessCallbackScope = undefined;
+        // Actions
+        this.eliminatingAction = undefined;
+        this.eliminatingActionScope = undefined;
+        this.fallingAction = undefined;
+        this.fallingActionScope = undefined;
         return this;
     }
 
@@ -56,7 +52,10 @@ class State extends FSM {
     // START
     enter_START() {
         this.totalMatchedLinesCount = 0;
-        this.next()
+
+        this.parent.emit('match-start', this.board.board, this.parent);
+
+        this.next();
     }
     next_START() {
         return 'MATCH3';
@@ -66,25 +65,13 @@ class State extends FSM {
     // MATCH3
     enter_MATCH3() {
         var matchedLines = this.board.getAllMatch();
-        this.totalMatchedLinesCount += matchedLines.length;
 
-        this.parent.emit('match', matchedLines, board, this.parent);
+        var board = this.board.board;
+        this.parent.emit('match', matchedLines, this.board.board, this.parent);
 
-        // callback
-        var callback = this.onMatchLinesCallback,
-            scope = this.onMatchLinesCallbackScope;
-        if (callback) {
-            var board = this.board.board;
-            if (scope) {
-                callback.call(scope, matchedLines, board, this.parent);
-            } else {
-                callback(matchedLines, board, this.parent);
-            }
-            // add or remove eliminated chess
-        }
-
-
-        switch (matchedLines.length) {
+        var matchedLinesCount = matchedLines.length;
+        this.totalMatchedLinesCount += matchedLinesCount;
+        switch (matchedLinesCount) {
             case 0:
                 this.eliminatedChessArray = [];
                 break;
@@ -94,7 +81,7 @@ class State extends FSM {
             default:
                 // Put all chess to a set
                 var newSet = new SetStruct();
-                for (var i = 0, cnt = matchedLines.length; i < cnt; i++) {
+                for (var i = 0; i < matchedLinesCount; i++) {
                     matchedLines[i].entries.forEach(function (value) {
                         newSet.set(value);
                     });
@@ -119,22 +106,15 @@ class State extends FSM {
     enter_ELIMINATING() {
         var board = this.board.board,
             chessArray = this.eliminatedChessArray,
-            callback = this.onEliminatingChessCallback,
-            scope = this.onEliminatingChessCallbackScope,
-            skipDefaultAction = false;
+            callback = this.eliminatingAction,
+            scope = this.eliminatingActionScope;
 
         this.parent.emit('eliminate', chessArray, board, this.parent);
 
-        if (callback) {
-            if (scope) {
-                skipDefaultAction = callback.call(scope, chessArray, board, this.parent);
-            } else {
-                skipDefaultAction = callback(chessArray, board, this.parent);
-            }
-        }
-
-        if (!skipDefaultAction) {
-            EliminateChess(chessArray, board, this.parent);
+        if (scope) {
+            callback.call(scope, chessArray, board, this.parent);
+        } else {
+            callback(chessArray, board, this.parent);
         }
 
         // Remove eliminated chess
@@ -159,22 +139,15 @@ class State extends FSM {
     // FALLING
     enter_FALLING() {
         var board = this.board.board,
-            callback = this.onFallingChessCallback,
-            scope = this.onFallingChessCallbackScope,
-            skipDefaultAction = false;
+            callback = this.fallingAction,
+            scope = this.fallingActionScope;
 
         this.parent.emit('fall', board, this.parent);
 
-        if (callback) {
-            if (scope) {
-                skipDefaultAction = callback.call(scope, board, this.parent);
-            } else {
-                skipDefaultAction = callback(board, this.parent);
-            }
-        }
-
-        if (!skipDefaultAction) {
-            FallingAllChess(board, this.parent);
+        if (scope) {
+            callback.call(scope, board, this.parent);
+        } else {
+            callback(board, this.parent);
         }
 
         // To next state when all completed
@@ -193,6 +166,9 @@ class State extends FSM {
     // FILL
     enter_FILL() {
         this.board.fill();
+
+        this.parent.emit('fill', this.board.board, this.parent);
+
         this.next();
     }
     next_FILL() {
@@ -202,6 +178,8 @@ class State extends FSM {
 
     // END
     enter_END() {
+        this.parent.emit('match-end', this.board.board, this.parent);
+
         this.emit('complete');
     }
     // END

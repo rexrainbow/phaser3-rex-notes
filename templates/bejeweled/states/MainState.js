@@ -76,6 +76,8 @@ class State extends FSM {
     enter_SELECT1() {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
+
+        this.parent.emit('select1', this.board.board, this.parent);
     }
     next_SELECT1() {
         var nextState;
@@ -87,7 +89,10 @@ class State extends FSM {
     // SELECT1
 
 
-    // SELECT2    
+    // SELECT2
+    enter_SELECT2() {
+        this.parent.emit('select2', this.board.board, this.parent);
+    }
     next_SELECT2() {
         var nextState;
         if (this.selectedChess2 &&
@@ -103,6 +108,8 @@ class State extends FSM {
     // SWAP
     enter_SWAP() {
         this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+
+        this.parent.emit('swap', this.board.board, this.parent);
     }
     next_SWAP() {
         return 'MATCH3';
@@ -129,6 +136,8 @@ class State extends FSM {
     // UNDO_SWAP
     enter_UNDOSWAP() {
         this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+
+        this.parent.emit('undo-swap', this.board.board, this.parent);
     }
     next_UNDOSWAP() {
         return 'SELECT1';

@@ -111,22 +111,11 @@ var bejeweled = new Bejeweled(scene, {
         // tileZ: 1,
     },
 
-    // callback of matched lines = 'match' event
-    onMatchLinesCallback: function (lines, board) {
-    },
-    onMatchLinesCallbackScope: undefined,
+    eliminatingAction: undefined,
+    eliminatingActionScope: undefined,
 
-    // callback of eliminating chess = 'eliminate' event
-    onEliminatingChessCallback: function (chessArray, board, bejeweled) {
-        // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
-    },
-    onEliminatingChessCallbackScope: undefined,
-
-    // callback of falling chess = 'fall' event
-    onFallingChessCallback: function (board, bejeweled) {
-        // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
-    },
-    onFallingChessCallbackScope: undefined,
+    fallingAction: undefined,
+    fallingActionScope: undefined,
 
     // input: true
 })
@@ -144,10 +133,9 @@ Configurations
     - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](board-bejeweled.md#generate-symbol)
     - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
-- Callbacks
-    - `onMatchLinesCallback`, `onMatchLinesCallbackScope` : [On matched lines](board-bejeweled.md#on-matched-lines)
-    - `onEliminatingChessCallback`, `onEliminatingChessCallbackScope` : [On eliminating chess](board-bejeweled.md#on-eliminating-chess)
-    - `onFallingChessCallback`, `onFallingChessCallback` : [On falling chess](board-bejeweled.md#on-falling-chess)
+- Custom actions    
+    - `eliminatingAction`, `eliminatingActionScope` : [Custon eliminating action](board-bejeweled.md#custom-eliminating-action)
+    - `fallingAction`, `fallingActionScope` : [Custon falling action](board-bejeweled.md#custom-falling-action)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
 
@@ -194,26 +182,98 @@ function(board) {
 
 Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of `'symbol'` key to change the appearance of game object via new symbol value.
 
-#### Callbacks
+### States
 
-##### On matched lines
+```mermaid
+graph TD
 
-```javascript
-function(lines, board) {
+Select1[select1] --> select2[select2]
+select2 --> Swap[swap]
+Swap --> MatchStart[match-start]
+MatchStart --> Match[match]
+Match --> Eliminate[eliminate]
+Match --> MatchEnd[match-end]
+Eliminate --> Fall[fall]
+Fall --> Fill[fill]
+Fill --> Match
 
-}
+MatchEnd --> UndoSwap[undo-swap]
+UndoSwap --> Select1
+MatchEnd --> Select1
 ```
 
-- Also fire `'match'` event.
-    ```javascript
-    bejeweled.on('match', function(lines, board, bejeweled) {
+#### Select first chess
 
-    }, scope);
-    ```
+Fire `'select1'` event
+
+```javascript
+bejeweled.on('select1', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+
+#### Select second chess
+
+Fire `'select2'` event
+
+```javascript
+bejeweled.on('select2', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+    - Selected first chess : `bejeweled.selectedChess1`
+
+#### Swap selected chess
+
+Fire `'swap'` event
+
+```javascript
+bejeweled.on('select2', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+    - Selected first chess : `bejeweled.selectedChess1`
+    - Selected second chess : `bejeweled.selectedChess2`
+
+#### Match start
+
+Fire `'match-start'` event
+
+```javascript
+bejeweled.on('match-start', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+
+#### Match lines
+
+Fire `'match'` event
+
+```javascript
+bejeweled.on('match', function(lines, board, bejeweled) {
+
+}, scope);
+```
+
 - `lines` : An array of matched lines, each line is a [built-in Set object](structs-set.md).
     - Length of each line (`lines[i].size`) could be *5*, *4*, or *3*.
     - `lines[i].entries` : An array of chess (Game Object) in a matched line.
-    - All chess game objects in matched lines will be eliminated in next stage. Add/remove chess game object in these lines, or add new line in `lines` array to change the eliminated targets.
+    - Get cross chess of two lines via `lineA.intersect(lineB)`.
+    - All chess game objects in matched lines will be eliminated in next stage. 
+        - Add/remove chess game object in a line.
+        - Add new line/remove a line in `lines` array to change the eliminated targets.
 - `board` : [Board object](board.md).
     - Get tile position `{x,y,z}` of a chess game object via
         ```javascript
@@ -228,61 +288,121 @@ function(lines, board) {
         ```javascript
         var gameObjects = board.getNeighborChess(chess, null);
         ```
+- `bejeweled` : This bejeweled object.
 
-Use cases:
+#### Eliminating chess
 
-- Get cross chess of two lines via `lineA.intersect(lineB)`.
-- Add chess into line(s) to eliminate more chess.
-
-##### On eliminating chess
+Fire `'eliminate'` event
 
 ```javascript
-function(chessArray, board, bejeweled) {
-    // bejeweled.waitEvent(eventEmitter, 'complete');
-    // return skipAction;
-}
+bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
+
+}, scope);
 ```
 
-- Also fire `'eliminate'` event.
-    ```javascript
-    bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
-
-    }, scope);
-    ```
 - `chessArray` : An array of chess (Game Object) to be eliminated.
 - `board` : [Board object](board.md)
 - `bejeweled` : This bejeweled object.
-    - `bejeweled.waitEvent(eventEmitter, 'complete');`
-- `skipAction` : Return `true` to skip default elimination action.
 
-Use csees:
+##### Custom Eliminating Action
 
-- Accumulate scores via amount of eliminated chess.
-- Custom eliminating action.
-
-##### On falling chess
+Default fliminating action:
 
 ```javascript
-function(board, bejeweled) {
-    // bejeweled.waitEvent(eventEmitter, 'complete');
-    // return skipAction;
+function (chessArray, board, bejeweled) {
+    const duration = 500; //ms
+    for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+        var fade = FadeOutDestroy(chessArray[i], duration);
+        bejeweled.waitEvent(fade, 'complete');
+    }
 }
 ```
 
-- Also fire `'fall'` event.
-    ```javascript
-    bejeweled.on('fall', function(board, bejeweled) {
+- `bejeweled.waitEvent(fade, 'complete')` : Wait 'complete' event of this [fade-out-destroy behavior](fadeoutdestroy.md).
 
-    }, scope);
-    ```
+#### Falling chess
+
+Fire `'fall'` event
+
+```javascript
+bejeweled.on('fall', function(board, bejeweled) {
+
+}, scope);
+```
+
 - `board` : [Board object](board.md)
 - `bejeweled` : This bejeweled object.
-    - `bejeweled.waitEvent(eventEmitter, 'complete');`
-- `skipAction` : Return `true` to skip default falling action.
 
-Use csees:
+##### Custom Falling Action
 
-- Custom falling down action.
+Default falling action:
+
+```javascript
+function (board, bejeweled) {
+    var tileZ = bejeweled.chessTileZ,
+        chess, moveTo;
+
+    for (var tileY = (board.height - 1); tileY >= 0; tileY--) { // bottom to top
+        for (var tileX = 0, cnt = board.width; tileX < cnt; tileX++) { // left to right
+            chess = board.tileXYZToChess(tileX, tileY, tileZ);
+            if (chess === null) {
+                continue;
+            }
+            moveTo = bejeweled.getChessMoveTo(chess);
+            do {
+                moveTo.moveToward(1);
+            } while (moveTo.lastMoveResult)
+            if (moveTo.isRunning) {
+                bejeweled.waitEvent(moveTo, 'complete');
+            }
+        }
+    }
+}
+```
+
+- `bejeweled.getChessMoveTo(chess)` : Get [moveTo behavior](board-moveto.md) of a chess.
+- `bejeweled.waitEvent(moveTo, 'complete')` : Wait 'complete' event of this [moveTo behavior](board-moveto.md).
+
+#### Fill chess
+
+Fire `'fill'` event
+
+```javascript
+bejeweled.on('fill', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+
+#### Match end
+
+Fire `'match-end'` event
+
+```javascript
+bejeweled.on('match-end', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+
+#### Undo-swap selected chess
+
+Fire `'undo-swap'` event
+
+```javascript
+bejeweled.on('undo-swap', function(board, bejeweled) {
+
+}, scope);
+```
+
+- `board` : [Board object](board.md).
+- `bejeweled` : This bejeweled object.
+    - Selected first chess : `bejeweled.selectedChess1`
+    - Selected second chess : `bejeweled.selectedChess2`
 
 ### Start gameplay
 

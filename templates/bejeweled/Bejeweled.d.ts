@@ -19,22 +19,16 @@ declare namespace Bejeweled {
         board: Board
     ) => Phaser.GameObjects.GameObject;
 
-    type OnMatchLinesCallbackType = (
-        lines: Phaser.Structs.Set<Phaser.GameObjects.GameObject>[],
+    type EliminatingActionType = (
+        chessArray: Phaser.GameObjects.GameObject[],
         board: Board,
         bejeweled: Bejeweled,
     ) => void;
 
-    type OnEliminatingChessCallbackType = (
-        chessArray: Phaser.GameObjects.GameObject[],
+    type FallingActionType = (
         board: Board,
         bejeweled: Bejeweled,
-    ) => void | boolean;
-
-    type OnFallingChessCallbackType = (
-        board: Board,
-        bejeweled: Bejeweled,
-    ) => void | boolean;
+    ) => void;
 
     interface IConfig {
         rexBoard?: string,
@@ -55,14 +49,11 @@ declare namespace Bejeweled {
         },
 
 
-        onMatchLinesCallback?: OnMatchLinesCallbackType,
-        onMatchLinesCallbackScope?: unknown,
+        eliminatingAction?: EliminatingActionType,
+        eliminatingActionScope?: unknown,
 
-        onEliminatingChessCallback?: OnEliminatingChessCallbackType,
-        onEliminatingChessCallbackScope?: unknown,
-
-        onFallingChessCallback?: OnFallingChessCallbackType,
-        onFallingChessCallbackScope?: unknown,
+        fallingAction?: FallingActionType,
+        fallingActionScope?: unknown,
 
         input?: boolean,
 
