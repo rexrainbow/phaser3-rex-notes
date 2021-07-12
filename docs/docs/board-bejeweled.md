@@ -111,19 +111,19 @@ var bejeweled = new Bejeweled(scene, {
         // tileZ: 1,
     },
 
-    // callback of matched lines
+    // callback of matched lines = 'match' event
     onMatchLinesCallback: function (lines, board) {
     },
     onMatchLinesCallbackScope: undefined,
 
-    // callback of eliminating chess
-    onEliminatingChessCallback: function (chess, board) {
+    // callback of eliminating chess = 'eliminate' event
+    onEliminatingChessCallback: function (chessArray, board, bejeweled) {
         // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
     },
     onEliminatingChessCallbackScope: undefined,
 
-    // callback of falling chess
-    onFallingChessCallback: function (board) {
+    // callback of falling chess = 'fall' event
+    onFallingChessCallback: function (board, bejeweled) {
         // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
     },
     onFallingChessCallback: undefined,
@@ -150,8 +150,6 @@ Configurations
     - `onFallingChessCallback`, `onFallingChessCallback` : [On falling chess](board-bejeweled.md#on-falling-chess)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
-
-It also install [Board plugins](board.md) into Game system.
 
 #### Board height
 
@@ -194,7 +192,7 @@ function(board) {
 }
 ```
 
-Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.
+Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of `'symbol'` key to change the appearance of game object via new symbol value.
 
 #### Callbacks
 
@@ -206,6 +204,12 @@ function(lines, board) {
 }
 ```
 
+- Also fire `'match'` event.
+    ```javascript
+    bejeweled.on('match', function(lines, board, bejeweled) {
+
+    }, scope);
+    ```
 - `lines` : An array of matched lines, each line is a [built-in Set object](structs-set.md).
     - Length of each line (`lines[i].size`) could be *5*, *4*, or *3*.
     - `lines[i].entries` : An array of chess (Game Object) in a matched line.
@@ -213,7 +217,8 @@ function(lines, board) {
 - `board` : [Board object](board.md).
     - Get tile position `{x,y,z}` of a chess game object via
         ```javascript
-        var tileXYZ = gameObject.rexChess.tileXYZ;
+        var tileXYZ = board.chessToTileXYZ(gameObject);
+        //var tileXYZ = gameObject.rexChess.tileXYZ;
         ```
     - Get chess game object of a tile position `{x,y,z}` via
         ```javascript
@@ -232,19 +237,52 @@ Use cases:
 ##### On eliminating chess
 
 ```javascript
-function(chessArray, board) {
-    // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
+function(chessArray, board, bejeweled) {
+    // bejeweled.waitEvent(eventEmitter, 'complete');
+    // return skipAction;
 }
 ```
 
-- `chessArray` : An array of chess (Game Object) to be eliminated
+- Also fire `'eliminate'` event.
+    ```javascript
+    bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
+
+    }, scope);
+    ```
+- `chessArray` : An array of chess (Game Object) to be eliminated.
 - `board` : [Board object](board.md)
+- `bejeweled` : This bejeweled object.
+    - `bejeweled.waitEvent(eventEmitter, 'complete');`
+- `skipAction` : Return `true` to skip default elimination action.
 
 Use csees:
 
-- Accumulate scores via amount of eliminated chess
+- Accumulate scores via amount of eliminated chess.
+- Custom eliminating action.
 
 ##### On falling chess
+
+```javascript
+function(board, bejeweled) {
+    // bejeweled.waitEvent(eventEmitter, 'complete');
+    // return skipAction;
+}
+```
+
+- Also fire `'fall'` event.
+    ```javascript
+    bejeweled.on('fall', function(board, bejeweled) {
+
+    }, scope);
+    ```
+- `board` : [Board object](board.md)
+- `bejeweled` : This bejeweled object.
+    - `bejeweled.waitEvent(eventEmitter, 'complete');`
+- `skipAction` : Return `true` to skip default falling action.
+
+Use csees:
+
+- Custom falling down action.
 
 ### Start gameplay
 
@@ -301,6 +339,8 @@ bejeweled.start();
             }
         }, scene);
     ```
+    - Invoke `bejeweled.selectChess1(chess)`, and `bejeweled.selectChess2(chess)` under custom logic.
+
 
 Helper methods
 
@@ -327,3 +367,26 @@ Helper methods
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+
+### Events
+
+- `'match'` event
+    ```javascript
+    bejeweled.on('match', function(lines, board, bejeweled) {
+
+    }, scope);
+    ```
+    - `lines` : An array of matched lines, each line is a [built-in Set object](structs-set.md).
+- `'eliminate'` event
+    ```javascript
+    bejeweled.on('eliminate', function(chessArray, board, bejeweled) {
+
+    }, scope);
+    ```
+    - `chessArray` : An array of chess (Game Object) to be eliminated.
+- `'fall'` event
+    ```javascript
+    bejeweled.on('fall', function(board, bejeweled) {
+
+    }, scope);
+    ```

@@ -39,7 +39,7 @@ class WaitEvents {
 
     remove(callback) {
         this.events.delete(callback);
-        if (this.events.size === 0) {
+        if (this.noWaitEvent) {
             if (this.scope) {
                 this.completeCallback.call(this.scope);
             } else {
@@ -47,6 +47,15 @@ class WaitEvents {
             }
         }
         return this;
+    }
+
+    clear() {
+        this.events.clear();
+        return this;
+    }
+
+    get noWaitEvent() {
+        return this.events.size === 0;
     }
 }
 

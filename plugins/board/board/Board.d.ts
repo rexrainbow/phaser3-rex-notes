@@ -9,6 +9,7 @@ declare namespace Board {
 
 declare class Board<ChessType = Phaser.GameObjects.GameObject> extends LogicBoard<ChessType> {
     constructor(scene: Phaser.Scene, config?: Board.IConfig);
+    scene: Phaser.Scene;
 
     setInteractive(enable?: boolean): this;
 }

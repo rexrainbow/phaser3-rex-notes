@@ -7,7 +7,7 @@ export default Match;
 declare namespace Match {
 
     interface IConfig {
-        board: Board,
+        board?: Board,
         wildcard?: string | number,
         dirMask?: { [dir: number]: boolean },
     }

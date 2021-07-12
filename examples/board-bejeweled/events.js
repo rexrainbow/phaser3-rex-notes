@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.data.set('scores', undefined);  // Initial 'scores' value
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             color: '#fff'
         });
 
-        this.data.events.on('changedata-scores', function (scene, value, previousValue) {            
+        this.data.events.on('changedata-scores', function (scene, value, previousValue) {
             txtScore.setText(value);
         });
         this.data.set('scores', 0);
@@ -70,9 +70,8 @@ class Demo extends Phaser.Scene {
                 },
                 // tileZ: 1,                
             },
-
-            // callback of matched lines
-            onMatchLinesCallback: function (lines, board) {
+        })
+            .on('match', function (lines, board) {
                 // get Game object/tile position of matched lines
                 var line, gameObject, tileXYZ;
                 for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -86,29 +85,17 @@ class Demo extends Phaser.Scene {
                     }
                     console.log(s);
                 }
-            },
-            onMatchLinesCallbackScope: undefined,
-
-            // callback of eliminating chess
-            onEliminatingChessCallback: function (chessArray, board) {
+            })
+            .on('eliminate', function (chessArray, board) {
                 var scene = board.scene;
                 // Accumulate scores 
                 scene.data.set('scores', scene.data.get('scores') + chessArray.length);
-                // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
-            },
-            onEliminatingChessCallbackScope: undefined,
+            })
 
-            // callback of falling chess
-            onFallingChessCallback: function (board) {
-                // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
-            },
-            onFallingChessCallback: undefined,
-
-        });
         this.bejeweled.start();
     }
 
-    update() {}
+    update() { }
 }
 
 var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);

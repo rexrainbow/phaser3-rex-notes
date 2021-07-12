@@ -1,6 +1,7 @@
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 import Input from './input/Input.js';
+import WaitEvents from '../../plugins/waitevents.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -15,6 +16,7 @@ class Bejeweled extends EE {
         this.board = new Board(this, config);
         this.mainState = new MainState(this, config);
         this.input = new Input(this, config);
+        this.waitEvents = new WaitEvents();
 
         this.boot();
     }
@@ -28,10 +30,12 @@ class Bejeweled extends EE {
         this.input.shutdown();
         this.board.shutdown();
         this.mainState.shutdown();
+        this.waitEvents.destroy();
 
         this.scene = undefined;
         this.board = undefined;
         this.mainState = undefined;
+        this.waitEvents = undefined;
         return this;
     }
 
@@ -54,6 +58,10 @@ class Bejeweled extends EE {
     // Input methods
     get selectedChess1() {
         return this.mainState.selectedChess1;
+    }
+
+    get selectedChess2() {
+        return this.mainState.selectedChess2;
     }
 
     selectChess1(chess) {
@@ -86,6 +94,24 @@ class Bejeweled extends EE {
 
     getNeighborChessAtDirection(chess, direction) {
         return this.board.getNeighborChessAtDirection(chess, direction);
+    }
+
+    // Chess properties
+    getChessMoveTo(chess) {
+        return (chess) ? chess.rexMoveTo : undefined;
+    }
+
+    get chessTileZ() {
+        return this.board.chessTileZ;
+    }
+
+    // Custom eliminateChess, falling action
+    waitEvent(eventEmitter, eventName) {
+        if (eventName === undefined) {
+            eventName = 'complete';
+        }
+        this.waitEvents.waitEvent(eventEmitter, eventName);
+        return this;
     }
 
 }

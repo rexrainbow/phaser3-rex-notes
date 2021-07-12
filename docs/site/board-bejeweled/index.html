@@ -5473,6 +5473,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5903,6 +5910,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6031,19 +6045,19 @@
         <span class="c1">// tileZ: 1,</span>
     <span class="p">},</span>
 
-    <span class="c1">// callback of matched lines</span>
+    <span class="c1">// callback of matched lines = &#39;match&#39; event</span>
     <span class="nx">onMatchLinesCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
     <span class="nx">onMatchLinesCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="c1">// callback of eliminating chess</span>
-    <span class="nx">onEliminatingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// callback of eliminating chess = &#39;eliminate&#39; event</span>
+    <span class="nx">onEliminatingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
     <span class="p">},</span>
     <span class="nx">onEliminatingChessCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="c1">// callback of falling chess</span>
-    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// callback of falling chess = &#39;fall&#39; event</span>
+    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// return eventEmitter; // custom falling task, fires &#39;complete&#39; event to continue FSM</span>
     <span class="p">},</span>
     <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -6079,7 +6093,6 @@
 </ul>
 </li>
 </ul>
-<p>It also install <a href="../board/">Board plugins</a> into Game system.</p>
 <h4 id="board-height">Board height<a class="headerlink" href="#board-height" title="Permanent link">&para;</a></h4>
 <p>Board is separated into two parts: upper and bottom</p>
 <ul>
@@ -6114,7 +6127,7 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.</p>
+<p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of <code>'symbol'</code> key to change the appearance of game object via new symbol value.</p>
 <h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
 <h5 id="on-matched-lines">On matched lines<a class="headerlink" href="#on-matched-lines" title="Permanent link">&para;</a></h5>
 <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
@@ -6123,6 +6136,11 @@
 </code></pre></div>
 
 <ul>
+<li>Also fire <code>'match'</code> event.
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 <li><code>lines</code> : An array of matched lines, each line is a <a href="../structs-set/">built-in Set object</a>.<ul>
 <li>Length of each line (<code>lines[i].size</code>) could be <em>5</em>, <em>4</em>, or <em>3</em>.</li>
 <li><code>lines[i].entries</code> : An array of chess (Game Object) in a matched line.</li>
@@ -6131,7 +6149,8 @@
 </li>
 <li><code>board</code> : <a href="../board/">Board object</a>.<ul>
 <li>Get tile position <code>{x,y,z}</code> of a chess game object via
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">chessToTileXYZ</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">//var tileXYZ = gameObject.rexChess.tileXYZ;</span>
 </code></pre></div></li>
 <li>Get chess game object of a tile position <code>{x,y,z}</code> via
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
@@ -6148,20 +6167,55 @@
 <li>Add chess into line(s) to eliminate more chess.</li>
 </ul>
 <h5 id="on-eliminating-chess">On eliminating chess<a class="headerlink" href="#on-eliminating-chess" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// bejeweled.waitEvent(eventEmitter, &#39;complete&#39;);</span>
+    <span class="c1">// return skipAction;</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <ul>
-<li><code>chessArray</code> : An array of chess (Game Object) to be eliminated</li>
+<li>Also fire <code>'eliminate'</code> event.
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eliminate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li><code>chessArray</code> : An array of chess (Game Object) to be eliminated.</li>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
+<li><code>bejeweled</code> : This bejeweled object.<ul>
+<li><code>bejeweled.waitEvent(eventEmitter, 'complete');</code></li>
+</ul>
+</li>
+<li><code>skipAction</code> : Return <code>true</code> to skip default elimination action.</li>
 </ul>
 <p>Use csees:</p>
 <ul>
-<li>Accumulate scores via amount of eliminated chess</li>
+<li>Accumulate scores via amount of eliminated chess.</li>
+<li>Custom eliminating action.</li>
 </ul>
 <h5 id="on-falling-chess">On falling chess<a class="headerlink" href="#on-falling-chess" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// bejeweled.waitEvent(eventEmitter, &#39;complete&#39;);</span>
+    <span class="c1">// return skipAction;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<ul>
+<li>Also fire <code>'fall'</code> event.
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fall&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li><code>board</code> : <a href="../board/">Board object</a></li>
+<li><code>bejeweled</code> : This bejeweled object.<ul>
+<li><code>bejeweled.waitEvent(eventEmitter, 'complete');</code></li>
+</ul>
+</li>
+<li><code>skipAction</code> : Return <code>true</code> to skip default falling action.</li>
+</ul>
+<p>Use csees:</p>
+<ul>
+<li>Custom falling down action.</li>
+</ul>
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </code></pre></div>
@@ -6210,7 +6264,10 @@
             <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">},</span> <span class="nx">scene</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Invoke <code>bejeweled.selectChess1(chess)</code>, and <code>bejeweled.selectChess2(chess)</code> under custom logic.</li>
+</ul>
+</li>
 </ol>
 <p>Helper methods</p>
 <ul>
@@ -6239,6 +6296,30 @@
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>'match'</code> event
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>lines</code> : An array of matched lines, each line is a <a href="../structs-set/">built-in Set object</a>.</li>
+</ul>
+</li>
+<li><code>'eliminate'</code> event
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;eliminate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>chessArray</code> : An array of chess (Game Object) to be eliminated.</li>
+</ul>
+</li>
+<li><code>'fall'</code> event
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fall&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
                 
                   

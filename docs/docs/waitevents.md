@@ -118,3 +118,15 @@ waitEvents.remove(callback);
 ```
 
 - `callback` : A function object created via `waitEvents.waitCallback()`
+
+### Clear all waiting events
+
+```javascript
+waitEvents.clear();
+```
+
+#### No wait event
+
+```javascript
+var noWaitEvent = waitEvents.noWaitEvent;
+```

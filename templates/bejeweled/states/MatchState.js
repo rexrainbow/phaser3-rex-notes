@@ -1,4 +1,6 @@
 import FSM from '../../../plugins/fsm.js';
+import EliminateChess from '../board/EliminateChess.js';
+import FallingAllChess from '../board/FallingAllChess.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SetStruct = Phaser.Structs.Set;
@@ -35,6 +37,7 @@ class State extends FSM {
         this.parent = undefined;
         this.scene = undefined;
         this.board = undefined;
+
         this.eliminatedChessArray = undefined;
         this.onMatchLinesCallback = undefined;
         this.onMatchLinesCallbackScope = undefined;
@@ -64,18 +67,23 @@ class State extends FSM {
     enter_MATCH3() {
         var matchedLines = this.board.getAllMatch();
         this.totalMatchedLinesCount += matchedLines.length;
+
+        this.parent.emit('match', matchedLines, board, this.parent);
+
         // callback
         var callback = this.onMatchLinesCallback,
             scope = this.onMatchLinesCallbackScope;
         if (callback) {
             var board = this.board.board;
             if (scope) {
-                callback.call(scope, matchedLines, board);
+                callback.call(scope, matchedLines, board, this.parent);
             } else {
-                callback(matchedLines, board);
+                callback(matchedLines, board, this.parent);
             }
             // add or remove eliminated chess
         }
+
+
         switch (matchedLines.length) {
             case 0:
                 this.eliminatedChessArray = [];
@@ -109,29 +117,35 @@ class State extends FSM {
 
     // ELIMINATING
     enter_ELIMINATING() {
-        // callback
-        var task;
-        var chessArray = this.eliminatedChessArray,
+        var board = this.board.board,
+            chessArray = this.eliminatedChessArray,
             callback = this.onEliminatingChessCallback,
-            scope = this.onEliminatingChessCallbackScope;
+            scope = this.onEliminatingChessCallbackScope,
+            skipDefaultAction = false;
+
+        this.parent.emit('eliminate', chessArray, board, this.parent);
+
         if (callback) {
-            var board = this.board.board;
             if (scope) {
-                task = callback.call(scope, chessArray, board);
+                skipDefaultAction = callback.call(scope, chessArray, board, this.parent);
             } else {
-                task = callback(chessArray, board);
+                skipDefaultAction = callback(chessArray, board, this.parent);
             }
         }
-        // remove eliminated chess
-        var board = this.board.board;
+
+        if (!skipDefaultAction) {
+            EliminateChess(chessArray, board, this.parent);
+        }
+
+        // Remove eliminated chess
         chessArray.forEach(board.removeChess, board);
-        // run eliminating task
-        if (task) {
-            // custom eliminating task, wait for 'complete' event
-            task.once('complete', this.next, this);
+
+        // To next state when all completed
+        var waitEvents = this.parent.waitEvents;
+        if (waitEvents.noWaitEvent) {
+            this.next();
         } else {
-            // default eliminating task
-            this.board.eliminateChess(chessArray, this.next, this);
+            waitEvents.setCompleteCallback(this.next, this);
         }
     }
     next_ELIMINATING() {
@@ -144,25 +158,31 @@ class State extends FSM {
 
     // FALLING
     enter_FALLING() {
-        // callback
-        var task;
-        var callback = this.onFallingChessCallback,
-            scope = this.onFallingChessCallbackScope;
+        var board = this.board.board,
+            callback = this.onFallingChessCallback,
+            scope = this.onFallingChessCallbackScope,
+            skipDefaultAction = false;
+
+        this.parent.emit('fall', board, this.parent);
+
         if (callback) {
-            var board = this.board.board;
             if (scope) {
-                task = callback.call(scope, board);
+                skipDefaultAction = callback.call(scope, board, this.parent);
             } else {
-                task = callback(board);
+                skipDefaultAction = callback(board, this.parent);
             }
         }
-        // run falling task
-        if (task) {
-            // custom falling task, wait for 'complete' event
-            task.once('complete', this.next, this);
+
+        if (!skipDefaultAction) {
+            FallingAllChess(board, this.parent);
+        }
+
+        // To next state when all completed
+        var waitEvents = this.parent.waitEvents;
+        if (waitEvents.noWaitEvent) {
+            this.next();
         } else {
-            // default falling task
-            this.board.falling(this.next, this);
+            waitEvents.setCompleteCallback(this.next, this);
         }
     }
     next_FALLING() {

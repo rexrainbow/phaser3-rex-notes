@@ -5,15 +5,14 @@ import CreateChess from './chess/CreateChess.js';
 import Fill from './Fill.js';
 import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
-import EliminateChess from './EliminateChess.js';
-import Falling from './Falling.js';
 import SwapChess from './SwapChess.js';
 import GetAllMatch from './match/GetAllMatch.js';
+import WaitEvents from '../../../plugins/waitevents.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
     constructor(parent, config) {
-        var scene = parent.scene;        
+        var scene = parent.scene;
         this.scene = scene;
         this.rexBoard = parent.rexBoard;
         this.board = this.rexBoard.add.board(GetValue(config, 'board', undefined));
@@ -28,10 +27,6 @@ class Board {
         this.chessCreateCallback = GetValue(config, 'chess.create', undefined);
         this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
         this.chessMoveTo.occupiedTest = true;
-
-        // internal reference
-        this.eliminatingTimer = undefined; // EliminateChess
-        this.waitEvents = undefined; // Falling
     }
 
     shutdown() {
@@ -40,20 +35,13 @@ class Board {
 
         this.board = undefined;
         this.match = undefined;
+
         this.initSymbolsMap = undefined;
         this.candidateSymbols = undefined;
         this.chessCallbackScope = undefined;
         this.chessCreateCallback = undefined;
         this.chessMoveTo = undefined;
 
-        if (this.eliminatingTimer) {
-            this.eliminatingTimer.remove();
-            this.eliminatingTimer = undefined;
-        }
-        if (this.waitEvents) {
-            this.waitEvents.destroy();
-            this.waitEvents = undefined;
-        }
         return this;
     }
 
@@ -116,8 +104,6 @@ var methods = {
     fill: Fill,
     breakMatch3: BreakMatch3,
     preTest: PreTest,
-    eliminateChess: EliminateChess,
-    falling: Falling,
     swapChess: SwapChess,
     getAllMatch: GetAllMatch,
 }
