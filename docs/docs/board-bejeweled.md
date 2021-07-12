@@ -126,7 +126,7 @@ var bejeweled = new Bejeweled(scene, {
     onFallingChessCallback: function (board, bejeweled) {
         // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
     },
-    onFallingChessCallback: undefined,
+    onFallingChessCallbackScope: undefined,
 
     // input: true
 })
