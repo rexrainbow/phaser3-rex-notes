@@ -5418,12 +5418,38 @@
     Select first chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-select-first-chess-action" class="md-nav__link">
+    Custom Select first chess Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#select-second-chess" class="md-nav__link">
     Select second chess
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-select-second-chess-action" class="md-nav__link">
+    Custom Select second chess Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5963,12 +5989,38 @@
     Select first chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-select-first-chess-action" class="md-nav__link">
+    Custom Select first chess Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#select-second-chess" class="md-nav__link">
     Select second chess
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-select-second-chess-action" class="md-nav__link">
+    Custom Select second chess Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -6261,17 +6313,12 @@
         <span class="c1">// tileZ: 1,</span>
     <span class="p">},</span>
 
+    <span class="nx">select1Action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">select2Action</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">swapAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">swapActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
     <span class="nx">undoSwapAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">undoSwapActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
     <span class="nx">eliminatingAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">eliminatingActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
     <span class="nx">fallingAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">fallingActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="c1">// input: true</span>
 <span class="p">})</span>
@@ -6294,10 +6341,12 @@
 </ul>
 </li>
 <li>Custom actions<ul>
-<li><code>swapAction</code>, <code>swapActionScope</code> : <a href="./#custom-swap-action">Custon swap action</a></li>
-<li><code>undoSwapAction</code>, <code>undoSwapActionScope</code> : <a href="./#custom-undo-swap-action">Custon undo-swap action</a></li>
-<li><code>eliminatingAction</code>, <code>eliminatingActionScope</code> : <a href="./#custom-eliminating-action">Custon eliminating action</a></li>
-<li><code>fallingAction</code>, <code>fallingActionScope</code> : <a href="./#custom-falling-action">Custon falling action</a></li>
+<li><code>select1Action</code> : <a href="./#custom-select-first-chess-action">Custom select first chess Action</a></li>
+<li><code>select2Action</code> : <a href="./#custom-select-second-chess-action">Custom select second chess Action</a></li>
+<li><code>swapAction</code> : <a href="./#custom-swap-action">Custon swap action</a></li>
+<li><code>undoSwapAction</code> : <a href="./#custom-undo-swap-action">Custon undo-swap action</a></li>
+<li><code>eliminatingAction</code> : <a href="./#custom-eliminating-action">Custon eliminating action</a></li>
+<li><code>fallingAction</code> : <a href="./#custom-falling-action">Custon falling action</a></li>
 </ul>
 </li>
 <li>Touch input<ul>
@@ -6343,8 +6392,10 @@
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TD
 
-Start((Start)) --&gt; Select1[select1]
-Select1 --&gt; select2[select2]
+Start((Start)) --&gt; Select1Start[select1-start]
+Select1Start --&gt; |Input| Select1[select1]
+Select1 --&gt; select2Start[select2-start]
+select2Start --&gt; |Input| select2[select2]
 select2 --&gt; Swap[swap]
 Swap --&gt; MatchStart[match-start]
 
@@ -6372,6 +6423,13 @@ MatchEnd --&gt; Select1</code></pre>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
 </ul>
+<h5 id="custom-select-first-chess-action">Custom Select first chess Action<a class="headerlink" href="#custom-select-first-chess-action" title="Permanent link">&para;</a></h5>
+<p>Default select action:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do nothing</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h4 id="select-second-chess">Select second chess<a class="headerlink" href="#select-second-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'select2'</code> event</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;select2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
@@ -6386,6 +6444,8 @@ MatchEnd --&gt; Select1</code></pre>
 </ul>
 </li>
 </ul>
+<h5 id="custom-select-second-chess-action">Custom Select second chess Action<a class="headerlink" href="#custom-select-second-chess-action" title="Permanent link">&para;</a></h5>
+<p>Default select action: The same as Select first chess Action</p>
 <h4 id="swap-selected-chess">Swap selected chess<a class="headerlink" href="#swap-selected-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'swap'</code> event</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selectedChess1</span><span class="p">,</span> <span class="nx">selectedChess2</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>

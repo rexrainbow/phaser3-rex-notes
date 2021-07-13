@@ -16,7 +16,14 @@ class Bejeweled extends EE {
         this.scene = scene;
         this.board = new Board(this, config);
         this.mainState = new MainState(this, config);
-        this.input = new Input(this, config);
+
+        var defaultInput = GetValue(config, 'input', true);
+        if (defaultInput) {
+            this.input = new Input(this, config);
+        } else {
+            this.input = undefined;
+        }
+
         this.waitEvents = new WaitEvents();
 
         this.boot();
@@ -28,9 +35,12 @@ class Bejeweled extends EE {
 
     shutdown() {
         super.shutdown();
-        this.input.shutdown();
-        this.board.shutdown();
-        this.mainState.shutdown();
+
+        if (this.input) {
+            this.input.destroy();
+        }
+        this.board.destroy();
+        this.mainState.destroy();
         this.waitEvents.destroy();
 
         this.destroyDataManager();
@@ -38,6 +48,7 @@ class Bejeweled extends EE {
         this.scene = undefined;
         this.board = undefined;
         this.mainState = undefined;
+        this.input = undefined;
         this.waitEvents = undefined;
         return this;
     }
@@ -78,7 +89,9 @@ class Bejeweled extends EE {
     }
 
     setInputEnable(enable) {
-        this.input.setEnable(enable);
+        if (this.input) {
+            this.input.setEnable(enable);
+        }
         return this;
     }
 

@@ -56,16 +56,12 @@ declare namespace Bejeweled {
         },
 
         swapAction?: SwapActionType,
-        swapActionScope?: unknown,
 
         undoSwapAction?: SwapActionType,
-        undoSwapActionScope?: unknown,
 
         eliminatingAction?: EliminatingActionType,
-        eliminatingActionScope?: unknown,
 
         fallingAction?: FallingActionType,
-        fallingActionScope?: unknown,
 
         input?: boolean,
 

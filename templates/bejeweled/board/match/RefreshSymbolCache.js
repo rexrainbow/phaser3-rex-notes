@@ -1,6 +1,6 @@
 var RefreshSymbolCache = function () {
     this.match.refreshSymbols(function (tileXY, board) {
-        // TODO: Return null if not in valid area
+        // Return null in upper board
         if (tileXY.y < (board.height / 2)) {
             return null;
         }

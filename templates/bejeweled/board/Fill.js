@@ -2,11 +2,21 @@
 1. Fill empty grids
 */
 
-var Fill = function (map) {
+var Fill = function (map, upperBoard) {
+    if (typeof (map) === 'boolean') {
+        upperBoard = map;
+        map = undefined;
+    }
+
     var symbol;
     var board = this.board,
         symbols = this.candidateSymbols;
-    for (var tileY = 0, height = this.board.height; tileY < height; tileY++) {
+
+    var height = this.board.height;
+    if (upperBoard) {
+        height /= 2;
+    }
+    for (var tileY = 0; tileY < height; tileY++) {
         for (var tileX = 0, width = this.board.width; tileX < width; tileX++) {
             if (board.contains(tileX, tileY, this.chessTileZ)) { // not empty                
                 continue;

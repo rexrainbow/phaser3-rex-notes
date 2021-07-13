@@ -1,26 +1,24 @@
-import FSM from '../../../plugins/fsm.js';
-import EliminateChess from '../board/actions/EliminateChess.js';
-import FallingAllChess from '../board/actions/FallingAllChess.js';
+import BaseState from './BaseState.js';
+import EliminateChess from '../actions/EliminateChess.js';
+import FallingAllChess from '../actions/FallingAllChess.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SetStruct = Phaser.Structs.Set;
 
-class State extends FSM {
+class State extends BaseState {
     constructor(parent, config) {
-        super(config);
-        this.parent = parent;            // Bejeweled
-        this.scene = parent.scene;       // Bejeweled.scene
-        this.board = parent.board;       // Bejeweled.board
+        super(parent, config);
+        // this.parent = parent;            // Bejeweled
+        // this.board = parent.board;       // Bejeweled.board
+
         this.totalMatchedLinesCount = 0;
         this.eliminatedChessArray;
 
         // Actions
         // Eliminating action
         this.eliminatingAction = GetValue(config, 'eliminatingAction', EliminateChess);
-        this.eliminatingActionScope = GetValue(config, 'eliminatingActionScope', undefined);
         // on falling chess
         this.fallingAction = GetValue(config, 'fallingAction', FallingAllChess);
-        this.fallingActionScope = GetValue(config, 'fallingActionScope', undefined);
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -31,16 +29,10 @@ class State extends FSM {
     shutdown() {
         super.shutdown();
 
-        this.parent = undefined;
-        this.scene = undefined;
-        this.board = undefined;
-
         this.eliminatedChessArray = undefined;
         // Actions
         this.eliminatingAction = undefined;
-        this.eliminatingActionScope = undefined;
         this.fallingAction = undefined;
-        this.fallingActionScope = undefined;
         return this;
     }
 
@@ -104,28 +96,17 @@ class State extends FSM {
     // ELIMINATING
     enter_ELIMINATING() {
         var board = this.board.board,
-            chessArray = this.eliminatedChessArray,
-            callback = this.eliminatingAction,
-            scope = this.eliminatingActionScope;
+            chessArray = this.eliminatedChessArray;
 
         this.parent.emit('eliminate', chessArray, board, this.parent);
 
-        if (scope) {
-            callback.call(scope, chessArray, board, this.parent);
-        } else {
-            callback(chessArray, board, this.parent);
-        }
+        this.eliminatingAction(chessArray, board, this.parent);
 
         // Remove eliminated chess
         chessArray.forEach(board.removeChess, board);
 
         // To next state when all completed
-        var waitEvents = this.parent.waitEvents;
-        if (waitEvents.noWaitEvent) {
-            this.next();
-        } else {
-            waitEvents.setCompleteCallback(this.next, this);
-        }
+        this.next();
     }
     next_ELIMINATING() {
         return 'FALLING';
@@ -137,25 +118,14 @@ class State extends FSM {
 
     // FALLING
     enter_FALLING() {
-        var board = this.board.board,
-            callback = this.fallingAction,
-            scope = this.fallingActionScope;
+        var board = this.board.board;
 
         this.parent.emit('fall', board, this.parent);
 
-        if (scope) {
-            callback.call(scope, board, this.parent);
-        } else {
-            callback(board, this.parent);
-        }
+        this.fallingAction(board, this.parent);
 
         // To next state when all completed
-        var waitEvents = this.parent.waitEvents;
-        if (waitEvents.noWaitEvent) {
-            this.next();
-        } else {
-            waitEvents.setCompleteCallback(this.next, this);
-        }
+        this.next();
     }
     next_FALLING() {
         return 'FILL';
@@ -164,7 +134,7 @@ class State extends FSM {
 
     // FILL
     enter_FILL() {
-        this.board.fill();
+        this.board.fill(true); // Fill upper board only
 
         this.parent.emit('fill', this.board.board, this.parent);
 

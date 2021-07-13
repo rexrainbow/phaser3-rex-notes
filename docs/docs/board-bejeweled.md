@@ -111,17 +111,12 @@ var bejeweled = new Bejeweled(scene, {
         // tileZ: 1,
     },
 
+    select1Action: undefined,
+    select2Action: undefined,
     swapAction: undefined,
-    swapActionScope: undefined,
-
     undoSwapAction: undefined,
-    undoSwapActionScope: undefined,
-
     eliminatingAction: undefined,
-    eliminatingActionScope: undefined,
-
     fallingAction: undefined,
-    fallingActionScope: undefined,
 
     // input: true
 })
@@ -140,10 +135,12 @@ Configurations
     - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
 - Custom actions
-    - `swapAction`, `swapActionScope` : [Custon swap action](board-bejeweled.md#custom-swap-action)
-    - `undoSwapAction`, `undoSwapActionScope` : [Custon undo-swap action](board-bejeweled.md#custom-undo-swap-action)
-    - `eliminatingAction`, `eliminatingActionScope` : [Custon eliminating action](board-bejeweled.md#custom-eliminating-action)
-    - `fallingAction`, `fallingActionScope` : [Custon falling action](board-bejeweled.md#custom-falling-action)
+    - `select1Action` : [Custom select first chess Action](board-bejeweled.md#custom-select-first-chess-action)
+    - `select2Action` : [Custom select second chess Action](board-bejeweled.md#custom-select-second-chess-action)
+    - `swapAction` : [Custon swap action](board-bejeweled.md#custom-swap-action)
+    - `undoSwapAction` : [Custon undo-swap action](board-bejeweled.md#custom-undo-swap-action)
+    - `eliminatingAction` : [Custon eliminating action](board-bejeweled.md#custom-eliminating-action)
+    - `fallingAction` : [Custon falling action](board-bejeweled.md#custom-falling-action)
 - Touch input
     - `input` : Set `true` to register default touch input logic.
 
@@ -195,8 +192,10 @@ Each chess has a `symbol` value stored in `'symbol'` key in private data. Add da
 ```mermaid
 graph TD
 
-Start((Start)) --> Select1[select1]
-Select1 --> select2[select2]
+Start((Start)) --> Select1Start[select1-start]
+Select1Start --> |Input| Select1[select1]
+Select1 --> select2Start[select2-start]
+select2Start --> |Input| select2[select2]
 select2 --> Swap[swap]
 Swap --> MatchStart[match-start]
 
@@ -227,6 +226,16 @@ bejeweled.on('select1', function(board, bejeweled) {
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
 
+##### Custom Select first chess Action
+
+Default select action:
+
+```javascript
+function (chess, board, bejeweled) {
+    // Do nothing
+}
+```
+
 #### Select second chess
 
 Fire `'select2'` event
@@ -240,6 +249,10 @@ bejeweled.on('select2', function(board, bejeweled) {
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
     - Selected first chess : `bejeweled.selectedChess1`
+
+##### Custom Select second chess Action
+
+Default select action: The same as Select first chess Action
 
 #### Swap selected chess
 

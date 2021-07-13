@@ -3,6 +3,9 @@ import GetValue from '../../../utils/object/GetValue.js';
 
 var GetTileXYAtDirection = function (chess, directions, distance, out) {
     var srcTileXY = this.chessToTileXYZ(chess);
+    if (!srcTileXY) {
+        return null;
+    }
 
     if (typeof (directions) === 'string') {
         if (directions.indexOf(',') === -1) {
