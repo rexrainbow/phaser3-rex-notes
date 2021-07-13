@@ -5,9 +5,7 @@ import CreateChess from './chess/CreateChess.js';
 import Fill from './Fill.js';
 import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
-import SwapChess from './SwapChess.js';
 import GetAllMatch from './match/GetAllMatch.js';
-import WaitEvents from '../../../plugins/waitevents.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
@@ -104,7 +102,6 @@ var methods = {
     fill: Fill,
     breakMatch3: BreakMatch3,
     preTest: PreTest,
-    swapChess: SwapChess,
     getAllMatch: GetAllMatch,
 }
 Object.assign(

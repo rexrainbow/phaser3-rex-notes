@@ -1,6 +1,6 @@
 import FSM from '../../../plugins/fsm.js';
-import EliminateChess from '../board/EliminateChess.js';
-import FallingAllChess from '../board/FallingAllChess.js';
+import EliminateChess from '../board/actions/EliminateChess.js';
+import FallingAllChess from '../board/actions/FallingAllChess.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SetStruct = Phaser.Structs.Set;
@@ -8,13 +8,13 @@ const SetStruct = Phaser.Structs.Set;
 class State extends FSM {
     constructor(parent, config) {
         super(config);
-        this.parent = parent; // Bejeweled
-        this.scene = parent.scene; // Bejeweled.scene
-        this.board = parent.board; // Bejeweled.board
+        this.parent = parent;            // Bejeweled
+        this.scene = parent.scene;       // Bejeweled.scene
+        this.board = parent.board;       // Bejeweled.board
         this.totalMatchedLinesCount = 0;
         this.eliminatedChessArray;
 
-        // callbacks
+        // Actions
         // Eliminating action
         this.eliminatingAction = GetValue(config, 'eliminatingAction', EliminateChess);
         this.eliminatingActionScope = GetValue(config, 'eliminatingActionScope', undefined);
@@ -66,7 +66,6 @@ class State extends FSM {
     enter_MATCH3() {
         var matchedLines = this.board.getAllMatch();
 
-        var board = this.board.board;
         this.parent.emit('match', matchedLines, this.board.board, this.parent);
 
         var matchedLinesCount = matchedLines.length;

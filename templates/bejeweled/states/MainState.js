@@ -1,5 +1,6 @@
 import FSM from '../../../plugins/fsm.js';
 import MatchState from './MatchState.js';
+import SwapChess from '../board/actions/SwapChess.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -11,7 +12,15 @@ class State extends FSM {
         this.board = parent.board; // Bejeweled.board
         this.selectedChess1;
         this.selectedChess2;
-        this.matchState = new MatchState(parent, config); // sub-state        
+        this.matchState = new MatchState(parent, config); // sub-state
+
+        // Actions
+        // Swap action
+        this.swapAction = GetValue(config, 'swapAction', SwapChess);
+        this.swapActionScope = GetValue(config, 'swapActionScope', undefined);
+        // UndoSwap action
+        this.undoSwapAction = GetValue(config, 'undoSwapAction', this.swapAction);
+        this.undoSwapActionScope = GetValue(config, 'undoSwapActionScope', this.swapActionScope);
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -107,9 +116,27 @@ class State extends FSM {
 
     // SWAP
     enter_SWAP() {
-        this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+        var board = this.board.board,
+            chess1 = this.selectedChess1,
+            chess2 = this.selectedChess2,
+            callback = this.swapAction,
+            scope = this.swapActionScope;
 
-        this.parent.emit('swap', this.board.board, this.parent);
+        this.parent.emit('swap', chess1, chess2, board, this.parent);
+
+        if (scope) {
+            callback.call(scope, chess1, chess2, board, this.parent);
+        } else {
+            callback(chess1, chess2, board, this.parent);
+        }
+
+        // To next state when all completed
+        var waitEvents = this.parent.waitEvents;
+        if (waitEvents.noWaitEvent) {
+            this.next();
+        } else {
+            waitEvents.setCompleteCallback(this.next, this);
+        }
     }
     next_SWAP() {
         return 'MATCH3';
@@ -135,9 +162,27 @@ class State extends FSM {
 
     // UNDO_SWAP
     enter_UNDOSWAP() {
-        this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+        var board = this.board.board,
+            chess1 = this.selectedChess1,
+            chess2 = this.selectedChess2,
+            callback = this.undoSwapAction,
+            scope = this.undoSwapActionScope;
 
-        this.parent.emit('undo-swap', this.board.board, this.parent);
+        this.parent.emit('undo-swap', chess1, chess2, board, this.parent);
+
+        if (scope) {
+            callback.call(scope, chess1, chess2, board, this.parent);
+        } else {
+            callback(chess1, chess2, board, this.parent);
+        }
+
+        // To next state when all completed
+        var waitEvents = this.parent.waitEvents;
+        if (waitEvents.noWaitEvent) {
+            this.next();
+        } else {
+            waitEvents.setCompleteCallback(this.next, this);
+        }
     }
     next_UNDOSWAP() {
         return 'SELECT1';

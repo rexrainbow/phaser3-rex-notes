@@ -111,6 +111,12 @@ var bejeweled = new Bejeweled(scene, {
         // tileZ: 1,
     },
 
+    swapAction: undefined,
+    swapActionScope: undefined,
+
+    undoSwapAction: undefined,
+    undoSwapActionScope: undefined,
+
     eliminatingAction: undefined,
     eliminatingActionScope: undefined,
 
@@ -133,7 +139,9 @@ Configurations
     - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](board-bejeweled.md#generate-symbol)
     - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
-- Custom actions    
+- Custom actions
+    - `swapAction`, `swapActionScope` : [Custon swap action](board-bejeweled.md#custom-swap-action)
+    - `undoSwapAction`, `undoSwapActionScope` : [Custon undo-swap action](board-bejeweled.md#custom-undo-swap-action)
     - `eliminatingAction`, `eliminatingActionScope` : [Custon eliminating action](board-bejeweled.md#custom-eliminating-action)
     - `fallingAction`, `fallingActionScope` : [Custon falling action](board-bejeweled.md#custom-falling-action)
 - Touch input
@@ -238,15 +246,51 @@ bejeweled.on('select2', function(board, bejeweled) {
 Fire `'swap'` event
 
 ```javascript
-bejeweled.on('select2', function(board, bejeweled) {
+bejeweled.on('swap', function(selectedChess1, selectedChess2, board, bejeweled) {
 
 }, scope);
 ```
 
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
-    - Selected first chess : `bejeweled.selectedChess1`
-    - Selected second chess : `bejeweled.selectedChess2`
+
+##### Custom Swap Action
+
+Default swap action:
+
+```javascript
+function (chess1, chess2, board, bejeweled) {
+    var tileXYZ1 = board.chessToTileXYZ(chess1);
+    var tileXYZ2 = board.chessToTileXYZ(chess2);
+    var tileX1 = tileXYZ1.x,
+        tileY1 = tileXYZ1.y,
+        tileX2 = tileXYZ2.x,
+        tileY2 = tileXYZ2.y,
+        tileZ = tileXYZ1.z;
+
+    // TileZ of chess1 and chess2 are the same, change tileZ of chess2 to a different value
+    board.moveChess(chess2, tileX2, tileY2, `#${tileZ}`, false);
+
+    // Move chess1 to tileXYZ2, chess2 to tileXYZ1
+    var moveTo1 = bejeweled.getChessMoveTo(chess1);
+    var moveTo2 = bejeweled.getChessMoveTo(chess2);
+    moveTo1.moveTo(tileX2, tileY2);
+    moveTo2.moveTo(tileX1, tileY1);
+
+    // Change tileZ of chess2 back
+    board.moveChess(chess2, tileX1, tileY1, tileZ, false);
+
+    if (moveTo1.isRunning) {
+        bejeweled.waitEvent(moveTo1, 'complete');
+    }
+    if (moveTo2.isRunning) {
+        bejeweled.waitEvent(moveTo2, 'complete');
+    }
+};
+```
+
+- `bejeweled.getChessMoveTo(chess)` : Get [moveTo behavior](board-moveto.md) of a chess.
+- `bejeweled.waitEvent(moveTo, 'complete')` : Wait 'complete' event of this [moveTo behavior](board-moveto.md).
 
 #### Match start
 
@@ -398,15 +442,17 @@ bejeweled.on('match-end', function(board, bejeweled) {
 Fire `'undo-swap'` event
 
 ```javascript
-bejeweled.on('undo-swap', function(board, bejeweled) {
+bejeweled.on('undo-swap', function(selectedChess1, selectedChess2, board, bejeweled) {
 
 }, scope);
 ```
 
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
-    - Selected first chess : `bejeweled.selectedChess1`
-    - Selected second chess : `bejeweled.selectedChess2`
+
+##### Custom Undo-Swap Action
+
+Default undo-swap action : Equal to Swap action
 
 ### Start gameplay
 
@@ -528,3 +574,16 @@ See [data manager](datamanager.md)
 
 !!! note
     Ensure data manager is created before binding any data-changed events.
+
+### Misc
+
+- Board instance
+    ```javascript
+    var board = bejeweled.getBoard();
+    ```
+    - `board` : [Board](board.md) instance.
+- Match instance
+    ```javascript
+    var match = bejeweled.getMatch();
+    ```
+    - `match` : [Match](board-match.md) instance.

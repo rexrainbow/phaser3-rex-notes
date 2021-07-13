@@ -19,6 +19,13 @@ declare namespace Bejeweled {
         board: Board
     ) => Phaser.GameObjects.GameObject;
 
+    type SwapActionType = (
+        chess1: Phaser.GameObjects.GameObject,
+        chess2: Phaser.GameObjects.GameObject,
+        board: Board,
+        bejeweled: Bejeweled,
+    ) => void;
+
     type EliminatingActionType = (
         chessArray: Phaser.GameObjects.GameObject[],
         board: Board,
@@ -48,6 +55,11 @@ declare namespace Bejeweled {
             tileZ?: number | string,
         },
 
+        swapAction?: SwapActionType,
+        swapActionScope?: unknown,
+
+        undoSwapAction?: SwapActionType,
+        undoSwapActionScope?: unknown,
 
         eliminatingAction?: EliminatingActionType,
         eliminatingActionScope?: unknown,
@@ -122,4 +134,7 @@ declare class Bejeweled extends Phaser.Events.EventEmitter {
     toggleData(key: string): this;
     getData(key: string): any;
     data: Phaser.Data.DataManager;
+
+    getBoard(): Board;
+    getMatch(): Match;
 }

@@ -5432,6 +5432,19 @@
     Swap selected chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-swap-action" class="md-nav__link">
+    Custom Swap Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5507,6 +5520,19 @@
     Undo-swap selected chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-undo-swap-action" class="md-nav__link">
+    Custom Undo-Swap Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -5551,6 +5577,13 @@
           <li class="md-nav__item">
   <a href="#data" class="md-nav__link">
     Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
   </a>
   
 </li>
@@ -5944,6 +5977,19 @@
     Swap selected chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-swap-action" class="md-nav__link">
+    Custom Swap Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -6019,6 +6065,19 @@
     Undo-swap selected chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custom-undo-swap-action" class="md-nav__link">
+    Custom Undo-Swap Action
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -6063,6 +6122,13 @@
           <li class="md-nav__item">
   <a href="#data" class="md-nav__link">
     Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#misc" class="md-nav__link">
+    Misc
   </a>
   
 </li>
@@ -6195,6 +6261,12 @@
         <span class="c1">// tileZ: 1,</span>
     <span class="p">},</span>
 
+    <span class="nx">swapAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">swapActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">undoSwapAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">undoSwapActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
     <span class="nx">eliminatingAction</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">eliminatingActionScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
@@ -6221,7 +6293,9 @@
 <li><code>chess.moveTo.speed</code> : Constant moving speed of chess, in pixel per-second.</li>
 </ul>
 </li>
-<li>Custom actions    <ul>
+<li>Custom actions<ul>
+<li><code>swapAction</code>, <code>swapActionScope</code> : <a href="./#custom-swap-action">Custon swap action</a></li>
+<li><code>undoSwapAction</code>, <code>undoSwapActionScope</code> : <a href="./#custom-undo-swap-action">Custon undo-swap action</a></li>
 <li><code>eliminatingAction</code>, <code>eliminatingActionScope</code> : <a href="./#custom-eliminating-action">Custon eliminating action</a></li>
 <li><code>fallingAction</code>, <code>fallingActionScope</code> : <a href="./#custom-falling-action">Custon falling action</a></li>
 </ul>
@@ -6314,18 +6388,50 @@ MatchEnd --&gt; Select1</code></pre>
 </ul>
 <h4 id="swap-selected-chess">Swap selected chess<a class="headerlink" href="#swap-selected-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'swap'</code> event</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;select2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selectedChess1</span><span class="p">,</span> <span class="nx">selectedChess2</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
-<li><code>bejeweled</code> : This bejeweled object.<ul>
-<li>Selected first chess : <code>bejeweled.selectedChess1</code></li>
-<li>Selected second chess : <code>bejeweled.selectedChess2</code></li>
+<li><code>bejeweled</code> : This bejeweled object.</li>
 </ul>
-</li>
+<h5 id="custom-swap-action">Custom Swap Action<a class="headerlink" href="#custom-swap-action" title="Permanent link">&para;</a></h5>
+<p>Default swap action:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">chess1</span><span class="p">,</span> <span class="nx">chess2</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tileXYZ1</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">chessToTileXYZ</span><span class="p">(</span><span class="nx">chess1</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">tileXYZ2</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">chessToTileXYZ</span><span class="p">(</span><span class="nx">chess2</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">tileX1</span> <span class="o">=</span> <span class="nx">tileXYZ1</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+        <span class="nx">tileY1</span> <span class="o">=</span> <span class="nx">tileXYZ1</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+        <span class="nx">tileX2</span> <span class="o">=</span> <span class="nx">tileXYZ2</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span>
+        <span class="nx">tileY2</span> <span class="o">=</span> <span class="nx">tileXYZ2</span><span class="p">.</span><span class="nx">y</span><span class="p">,</span>
+        <span class="nx">tileZ</span> <span class="o">=</span> <span class="nx">tileXYZ1</span><span class="p">.</span><span class="nx">z</span><span class="p">;</span>
+
+    <span class="c1">// TileZ of chess1 and chess2 are the same, change tileZ of chess2 to a different value</span>
+    <span class="nx">board</span><span class="p">.</span><span class="nx">moveChess</span><span class="p">(</span><span class="nx">chess2</span><span class="p">,</span> <span class="nx">tileX2</span><span class="p">,</span> <span class="nx">tileY2</span><span class="p">,</span> <span class="sb">`#</span><span class="si">${</span><span class="nx">tileZ</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+    <span class="c1">// Move chess1 to tileXYZ2, chess2 to tileXYZ1</span>
+    <span class="kd">var</span> <span class="nx">moveTo1</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessMoveTo</span><span class="p">(</span><span class="nx">chess1</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">moveTo2</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessMoveTo</span><span class="p">(</span><span class="nx">chess2</span><span class="p">);</span>
+    <span class="nx">moveTo1</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tileX2</span><span class="p">,</span> <span class="nx">tileY2</span><span class="p">);</span>
+    <span class="nx">moveTo2</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tileX1</span><span class="p">,</span> <span class="nx">tileY1</span><span class="p">);</span>
+
+    <span class="c1">// Change tileZ of chess2 back</span>
+    <span class="nx">board</span><span class="p">.</span><span class="nx">moveChess</span><span class="p">(</span><span class="nx">chess2</span><span class="p">,</span> <span class="nx">tileX1</span><span class="p">,</span> <span class="nx">tileY1</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">moveTo1</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">moveTo1</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">moveTo2</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">moveTo2</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<ul>
+<li><code>bejeweled.getChessMoveTo(chess)</code> : Get <a href="../board-moveto/">moveTo behavior</a> of a chess.</li>
+<li><code>bejeweled.waitEvent(moveTo, 'complete')</code> : Wait 'complete' event of this <a href="../board-moveto/">moveTo behavior</a>.</li>
 </ul>
 <h4 id="match-start">Match start<a class="headerlink" href="#match-start" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'match-start'</code> event</p>
@@ -6461,19 +6567,17 @@ MatchEnd --&gt; Select1</code></pre>
 </ul>
 <h4 id="undo-swap-selected-chess">Undo-swap selected chess<a class="headerlink" href="#undo-swap-selected-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'undo-swap'</code> event</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;undo-swap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;undo-swap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selectedChess1</span><span class="p">,</span> <span class="nx">selectedChess2</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
-<li><code>bejeweled</code> : This bejeweled object.<ul>
-<li>Selected first chess : <code>bejeweled.selectedChess1</code></li>
-<li>Selected second chess : <code>bejeweled.selectedChess2</code></li>
+<li><code>bejeweled</code> : This bejeweled object.</li>
 </ul>
-</li>
-</ul>
+<h5 id="custom-undo-swap-action">Custom Undo-Swap Action<a class="headerlink" href="#custom-undo-swap-action" title="Permanent link">&para;</a></h5>
+<p>Default undo-swap action : Equal to Swap action</p>
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </code></pre></div>
@@ -6588,6 +6692,21 @@ MatchEnd --&gt; Select1</code></pre>
 <p class="admonition-title">Note</p>
 <p>Ensure data manager is created before binding any data-changed events.</p>
 </div>
+<h3 id="misc">Misc<a class="headerlink" href="#misc" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Board instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getBoard</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>board</code> : <a href="../board/">Board</a> instance.</li>
+</ul>
+</li>
+<li>Match instance
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getMatch</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>match</code> : <a href="../board-match/">Match</a> instance.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 

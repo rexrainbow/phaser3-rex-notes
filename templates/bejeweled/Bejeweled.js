@@ -117,6 +117,15 @@ class Bejeweled extends EE {
         return this;
     }
 
+    // Expose board instance
+    getBoard() {
+        return this.board.board;
+    }
+
+    // Expose match instance
+    getMatch() {
+        return this.board.match;
+    }
 }
 
 Object.assign(

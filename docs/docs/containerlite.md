@@ -438,7 +438,7 @@ This method also wull reset all local state of children.
     ```javascript
     container.addToContainer(container);
     ```
-    - `container` : [Container](laycontainerer.md) game object.
+    - `container` : [Container](container.md) game object.
 - Add to [Layer](layer.md)
     ```javascript
     container.addToLayer(layer);

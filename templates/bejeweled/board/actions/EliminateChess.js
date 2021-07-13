@@ -2,7 +2,7 @@
 1. Fade-out-destroy chess
 */
 
-import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
+import FadeOutDestroy from '../../../../plugins/fade-out-destroy.js';
 
 var EliminateChess = function (chessArray, board, bejeweled) {
     const duration = 500; //ms
