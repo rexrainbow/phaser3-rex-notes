@@ -70,14 +70,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.js$/i,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        '@babel/preset-env',
-                    ]
-                }
+                test: /\.js$/,
+                use: ['babel-loader'],
             },
             {
                 test: /phaser-split\.js$/,

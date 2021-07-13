@@ -1,3 +1,5 @@
+import DeepClone from "../../../../utils/object/DeepClone.js";
+
 var SetTexture = function (key, baseFrameName, columns, rows) {
     if (Array.isArray(baseFrameName)) {
         rows = columns;
@@ -8,6 +10,9 @@ var SetTexture = function (key, baseFrameName, columns, rows) {
     if (baseFrameName === undefined) {
         baseFrameName = '__BASE';
     }
+
+    columns = DeepClone(columns);
+    rows = DeepClone(rows);
 
     this.textureKey = key;
     this.baseFrameName = baseFrameName;
