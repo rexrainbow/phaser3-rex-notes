@@ -432,13 +432,21 @@ container.changeOrigin(originX, originY);
 
 This method also wull reset all local state of children.
 
-### Add to layer
+### Add to container
 
-```javascript
-container.addToLayer(layer);
-```
+- Add to [built-in container](container.md)
+    ```javascript
+    container.addToContainer(container);
+    ```
+    - `container` : [Container](laycontainerer.md) game object.
+- Add to [Layer](layer.md)
+    ```javascript
+    container.addToLayer(layer);
+    ```
+    - `layer` : [Layer](layer.md) game object.
 
-- `layer` : [Layer](layer.md) game object.
+!!! note
+    `container.add(containerLite)`, or `layer.add(containerLite)` won't add children of containerLite.
 
 ## Compare with Official Container
 

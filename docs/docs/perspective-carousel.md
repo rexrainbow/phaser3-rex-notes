@@ -275,3 +275,7 @@ carousel.roll.setEase(ease);
     ```javascript
     carousel.rotationY = rotationY; // Angle in radians
     ```
+
+### Other properties
+
+See [container](containerlite.md).

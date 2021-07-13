@@ -1882,8 +1882,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-to-layer" class="md-nav__link">
-    Add to layer
+  <a href="#add-to-container" class="md-nav__link">
+    Add to container
   </a>
   
 </li>
@@ -6118,8 +6118,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-to-layer" class="md-nav__link">
-    Add to layer
+  <a href="#add-to-container" class="md-nav__link">
+    Add to container
   </a>
   
 </li>
@@ -6518,13 +6518,25 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
 </code></pre></div>
 
 <p>This method also wull reset all local state of children.</p>
-<h3 id="add-to-layer">Add to layer<a class="headerlink" href="#add-to-layer" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addToLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
-</code></pre></div>
-
+<h3 id="add-to-container">Add to container<a class="headerlink" href="#add-to-container" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Add to <a href="../container/">built-in container</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addToContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>container</code> : <a href="laycontainerer.md">Container</a> game object.</li>
+</ul>
+</li>
+<li>Add to <a href="../layer/">Layer</a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addToLayer</span><span class="p">(</span><span class="nx">layer</span><span class="p">);</span>
+</code></pre></div><ul>
 <li><code>layer</code> : <a href="../layer/">Layer</a> game object.</li>
 </ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>container.add(containerLite)</code>, or <code>layer.add(containerLite)</code> won't add children of containerLite.</p>
+</div>
 <h2 id="compare-with-official-container">Compare with Official Container<a class="headerlink" href="#compare-with-official-container" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Position/anlge/scale of a child object :<ul>

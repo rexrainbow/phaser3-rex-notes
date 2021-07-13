@@ -300,3 +300,7 @@ card.flip.setEase(ease);
     debugGraphics.clear();
     debugGraphics.lineStyle(1, 0x00ff00);
     ```
+
+### Other properties
+
+See [container](containerlite.md).

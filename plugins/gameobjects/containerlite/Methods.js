@@ -14,13 +14,12 @@ import Mask from './Mask.js';
 import Depth from './Depth.js';
 import Children from './Children.js';
 import Tween from './Tween.js';
+import AddToContainer from './AddToContainer.js';
 
-import AddToLayer from './AddToLayer.js';
 import ChangeOrigin from './ChangeOrigin.js';
 
 var methods = {
     changeOrigin: ChangeOrigin,
-    addToLayer: AddToLayer,
 };
 
 Object.assign(
@@ -40,7 +39,8 @@ Object.assign(
     Mask,
     Depth,
     Children,
-    Tween
+    Tween,
+    AddToContainer
 );
 
 export default methods;
