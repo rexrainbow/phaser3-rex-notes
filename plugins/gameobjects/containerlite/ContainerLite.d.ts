@@ -179,6 +179,10 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         layer: Phaser.GameObjects.Layer
     ): this;
 
+    addToContainer(
+        container: Phaser.GameObjects.Container
+    ): this;
+
     changeOrigin(
         originX: number,
         originY: number

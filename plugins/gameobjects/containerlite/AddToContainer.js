@@ -1,6 +1,6 @@
 import SortGameObjectsByDepth from '../../utils/system/SortGameObjectsByDepth.js';
 
-var AddToContainer = function (layer) {
+var AddToLayer = function (layer) {
     var gameObjects = this.getAllChildren([this]);
     SortGameObjectsByDepth(gameObjects)
     layer.add(gameObjects);
@@ -8,7 +8,6 @@ var AddToContainer = function (layer) {
 }
 
 export default {
-    addToContainer: AddToContainer,
-    addToLayer: AddToContainer,
-
+    addToLayer: AddToLayer,
+    addToContainer: AddToLayer,
 }
