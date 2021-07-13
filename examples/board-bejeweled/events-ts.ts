@@ -13,17 +13,6 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.data.set('scores', undefined);  // Initial 'scores' value
-        var txtScore = this.add.text(650, 30, '?', {
-            fontSize: '24px',
-            color: '#fff'
-        });
-
-        this.data.events.on('changedata-scores', function (scene: Demo, value: number, previousValue: number) {
-            txtScore.setText(value.toString());
-        });
-        this.data.set('scores', 0);
-
         var bejeweled = new Bejeweled(this, {
             // debug: true, // Show state changed log
             board: {
@@ -48,7 +37,7 @@ class Demo extends Phaser.Scene {
                 // symbols: function(board, tileX, tileY, excluded) { return symbol; }
 
                 // User-defined chess game object
-                create: function (board:BoardPlugin.Board) {
+                create: function (board: BoardPlugin.Board) {
                     var scene = board.scene as Demo;
                     var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
                         .setScale(0.95)
@@ -74,7 +63,8 @@ class Demo extends Phaser.Scene {
         })
             .on('match', function (
                 lines: Phaser.Structs.Set<BoardPlugin.Shape>[],
-                board: BoardPlugin.Board
+                board: BoardPlugin.Board,
+                bejeweled: Bejeweled
             ) {
 
                 // get Game object/tile position of matched lines
@@ -93,13 +83,25 @@ class Demo extends Phaser.Scene {
             })
             .on('eliminate', function (
                 chessArray: BoardPlugin.Shape[],
-                board: BoardPlugin.Board
+                board: BoardPlugin.Board,
+                bejeweled: Bejeweled
             ) {
-
-                var scene = board.scene as Demo;
-                // Accumulate scores 
-                scene.data.set('scores', scene.data.get('scores') + chessArray.length);
+                bejeweled.incData('scores', chessArray.length);
             })
+            .setData('scores', 0)
+
+        // Mointor 'scores' variable
+        var txtScore = this.add.text(
+            650, 30,
+            bejeweled.getData('scores'),
+            { fontSize: '24px', color: '#fff' }
+        );
+        bejeweled.on(
+            'changedata-scores',
+            function (bejeweled: Bejeweled, value: any, previousValue: any) {
+                txtScore.setText(value);
+            }
+        );
 
         bejeweled.start();
     }

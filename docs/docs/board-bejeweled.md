@@ -491,3 +491,40 @@ Helper methods
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+
+### Data
+
+- Get
+    ```javascript
+    var value = bejeweled.getData(key);
+    var values = bejeweled.getData(keys); // keys: an array of keys
+    var value = bejeweled.data.values[key];
+    ```
+- Set
+    ```javascript
+    bejeweled.setData(key, value);
+    bejeweled.setData(obj); // obj: {key0:value0, key1:value1, ...}
+    bejeweled.data.values[key] = value;
+    bejeweled.data.values[key] += inc;
+    ```
+- Enable
+    ```javascript
+    bejeweled.setDataEnabled();
+    ```
+- Events : 
+    - Set data evant
+        ```javascript
+        bejeweled.on('setdata', function(bejeweled, key, value){ /* ... */ });
+        ```
+    - Change data event
+        ```javascript
+        bejeweled.on('changedata', function(bejeweled, key, value, previousValue){ /* ... */ });
+        ```
+        ```javascript
+        bejeweled.on('changedata-' + key, function(bejeweled, value, previousValue){ /* ... */ });
+        ```
+
+See [data manager](datamanager.md)
+
+!!! note
+    Ensure data manager is created before binding any data-changed events.

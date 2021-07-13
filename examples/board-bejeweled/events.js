@@ -12,18 +12,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.data.set('scores', undefined);  // Initial 'scores' value
-        var txtScore = this.add.text(650, 30, '?', {
-            fontSize: '24px',
-            color: '#fff'
-        });
-
-        this.data.events.on('changedata-scores', function (scene, value, previousValue) {
-            txtScore.setText(value);
-        });
-        this.data.set('scores', 0);
-
-        this.bejeweled = new Bejeweled(this, {
+        var bejeweled = new Bejeweled(this, {
             // debug: true, // Show state changed log
             board: {
                 grid: {
@@ -71,7 +60,7 @@ class Demo extends Phaser.Scene {
                 // tileZ: 1,                
             },
         })
-            .on('match', function (lines, board) {
+            .on('match', function (lines, board, bejeweled) {
                 // get Game object/tile position of matched lines
                 var line, gameObject, tileXYZ;
                 for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -86,13 +75,24 @@ class Demo extends Phaser.Scene {
                     console.log(s);
                 }
             })
-            .on('eliminate', function (chessArray, board) {
-                var scene = board.scene;
-                // Accumulate scores 
-                scene.data.set('scores', scene.data.get('scores') + chessArray.length);
+            .on('eliminate', function (chessArray, board, bejeweled) {
+                bejeweled.incData('scores', chessArray.length);
             })
+            .setData('scores', 0)
 
-        this.bejeweled.start();
+        // Mointor 'scores' variable
+        var txtScore = this.add.text(
+            650, 30,
+            bejeweled.getData('scores'),
+            { fontSize: '24px', color: '#fff' }
+        );
+        bejeweled.on(
+            'changedata-scores',
+            function (bejeweled, value, previousValue) {
+                txtScore.setText(value);
+            });
+
+        bejeweled.start();
     }
 
     update() { }

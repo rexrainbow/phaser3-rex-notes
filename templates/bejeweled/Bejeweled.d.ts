@@ -115,4 +115,11 @@ declare class Bejeweled extends Phaser.Events.EventEmitter {
         eventName?: string
     ): this;
 
+    // Data manager
+    setDataEnabled(): this;
+    setData(key: string, value: any): this;
+    incData(key: string, value: number): this;
+    toggleData(key: string): this;
+    getData(key: string): any;
+    data: Phaser.Data.DataManager;
 }

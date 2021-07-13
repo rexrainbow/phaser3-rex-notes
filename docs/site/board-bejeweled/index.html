@@ -5548,6 +5548,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6053,6 +6060,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6541,6 +6555,39 @@ MatchEnd --&gt; Select1</code></pre>
 </ul>
 </li>
 </ul>
+<h3 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">keys</span><span class="p">);</span> <span class="c1">// keys: an array of keys</span>
+<span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// obj: {key0:value0, key1:value1, ...}</span>
+<span class="nx">bejeweled</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="nx">bejeweled</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Enable
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">setDataEnabled</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Events : <ul>
+<li>Set data evant
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;setdata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bejeweled</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+<li>Change data event
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bejeweled</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bejeweled</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+<p>See <a href="../datamanager/">data manager</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure data manager is created before binding any data-changed events.</p>
+</div>
                 
                   
                 

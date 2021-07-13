@@ -438,14 +438,14 @@ See [touch event](touchevents.md#quick-start)
 - Events : 
     - Set data evant
         ```javascript
-        gameObject.on('setdata', function(parent, key, value){ /* ... */ });
+        gameObject.on('setdata', function(gameObject, key, value){ /* ... */ });
         ```
     - Change data event
         ```javascript
-        gameObject.on('changedata', function(parent, key, value, previousValue){ /* ... */ });
+        gameObject.on('changedata', function(gameObject, key, value, previousValue){ /* ... */ });
         ```
         ```javascript
-        gameObject.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
+        gameObject.on('changedata-' + key, function(gameObject, value, previousValue){ /* ... */ });
         ```
 
 See [data manager](datamanager.md)

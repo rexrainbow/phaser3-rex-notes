@@ -2,6 +2,7 @@ import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 import Input from './input/Input.js';
 import WaitEvents from '../../plugins/waitevents.js';
+import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -31,6 +32,8 @@ class Bejeweled extends EE {
         this.board.shutdown();
         this.mainState.shutdown();
         this.waitEvents.destroy();
+
+        this.destroyDataManager();
 
         this.scene = undefined;
         this.board = undefined;
@@ -115,5 +118,10 @@ class Bejeweled extends EE {
     }
 
 }
+
+Object.assign(
+    Bejeweled.prototype,
+    DataManagerMethods
+);
 
 export default Bejeweled;
