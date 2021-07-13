@@ -3,8 +3,16 @@ import { GetParent } from './GetParent.js';
 const ArrayUtils = Phaser.Utils.Array;
 
 export default {
-    getChildren() {
-        return this.children;
+    getChildren(out) {
+        if (!out) {
+            out = this.children; // Return internal children array
+        } else {
+            for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+                out.push(this.children[i]);
+            }
+            // Copy children
+        }
+        return out;
     },
 
     getAllChildren(out) {

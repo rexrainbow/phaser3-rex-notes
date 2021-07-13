@@ -220,9 +220,15 @@ For example, container-lite is at (100, 100), and child is at **(10, 10)**, then
     // var gameObject = container.getRandom(startIndex, length);
     ```
 - Get children in this container-lite
-    ```javascript
-    var gameObjects = container.getChildren();
-    ```
+    - Internal children array
+        ```javascript
+        var gameObjects = container.getChildren();
+        ```
+    - Copy of children array
+        ```javascript
+        var gameObjects = container.getChildren([]);
+        // var gameObjects = container.getChildren(out);
+        ```
 - Get all children under this container-lite recursively
     ```javascript
     var gameObjects = container.getAllChildren();

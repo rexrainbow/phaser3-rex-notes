@@ -6255,15 +6255,19 @@
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TD
 
-Select1[select1] --&gt; select2[select2]
+Start((Start)) --&gt; Select1[select1]
+Select1 --&gt; select2[select2]
 select2 --&gt; Swap[swap]
 Swap --&gt; MatchStart[match-start]
-MatchStart --&gt; Match[match]
-Match --&gt; Eliminate[eliminate]
-Match --&gt; MatchEnd[match-end]
-Eliminate --&gt; Fall[fall]
-Fall --&gt; Fill[fill]
-Fill --&gt; Match
+
+subgraph Match states
+  MatchStart --&gt; Match[match]
+  Match --&gt; Eliminate[eliminate]
+  Match --&gt; MatchEnd[match-end]
+  Eliminate --&gt; Fall[fall]
+  Fall --&gt; Fill[fill]
+  Fill --&gt; Match
+end
 
 MatchEnd --&gt; UndoSwap[undo-swap]
 UndoSwap --&gt; Select1

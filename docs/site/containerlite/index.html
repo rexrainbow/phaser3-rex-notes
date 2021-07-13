@@ -6352,9 +6352,16 @@ For example, container-lite is at (100, 100), and child is at <strong>(10, 10)</
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getRandom</span><span class="p">();</span>
 <span class="c1">// var gameObject = container.getRandom(startIndex, length);</span>
 </code></pre></div></li>
-<li>Get children in this container-lite
+<li>Get children in this container-lite<ul>
+<li>Internal children array
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
 </code></pre></div></li>
+<li>Copy of children array
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">([]);</span>
+<span class="c1">// var gameObjects = container.getChildren(out);</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Get all children under this container-lite recursively
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getAllChildren</span><span class="p">();</span>
 </code></pre></div><ul>

@@ -187,15 +187,19 @@ Each chess has a `symbol` value stored in `'symbol'` key in private data. Add da
 ```mermaid
 graph TD
 
-Select1[select1] --> select2[select2]
+Start((Start)) --> Select1[select1]
+Select1 --> select2[select2]
 select2 --> Swap[swap]
 Swap --> MatchStart[match-start]
-MatchStart --> Match[match]
-Match --> Eliminate[eliminate]
-Match --> MatchEnd[match-end]
-Eliminate --> Fall[fall]
-Fall --> Fill[fill]
-Fill --> Match
+
+subgraph Match states
+  MatchStart --> Match[match]
+  Match --> Eliminate[eliminate]
+  Match --> MatchEnd[match-end]
+  Eliminate --> Fall[fall]
+  Fall --> Fill[fill]
+  Fill --> Match
+end
 
 MatchEnd --> UndoSwap[undo-swap]
 UndoSwap --> Select1
