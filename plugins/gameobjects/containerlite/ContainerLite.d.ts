@@ -100,7 +100,9 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         config: any
     ): this
 
-    getChildren(): Phaser.GameObjects.GameObject[];
+    getChildren(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
 
     getAllChildren(
         out?: Phaser.GameObjects.GameObject[]
