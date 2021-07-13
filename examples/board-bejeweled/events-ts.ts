@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var bejeweled = new Bejeweled(this, {
+        let bejeweled = new Bejeweled(this, {
             // debug: true, // Show state changed log
             board: {
                 grid: {
@@ -38,14 +38,14 @@ class Demo extends Phaser.Scene {
 
                 // User-defined chess game object
                 create: function (board: BoardPlugin.Board) {
-                    var scene = board.scene as Demo;
-                    var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
+                    let scene = board.scene as Demo;
+                    let gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
                         .setScale(0.95)
                         // Initial 'symbol' value
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
-                    gameObject.data.events.on('changedata-symbol', function (gameObject: BoardPlugin.Shape, value: number, previousValue: number) {
+                    gameObject.on('changedata-symbol', function (gameObject: BoardPlugin.Shape, value: number, previousValue: number) {
                         gameObject.setFillStyle(GetColor(value));
                     });
                     return gameObject;
@@ -68,17 +68,16 @@ class Demo extends Phaser.Scene {
             ) {
 
                 // get Game object/tile position of matched lines
-                var line, gameObject, tileXYZ;
-                for (var i = 0, icnt = lines.length; i < icnt; i++) {
-                    line = lines[i];
-                    var s = 'Get matched ' + line.size;
-                    var chessArray = line.entries;
-                    for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
-                        gameObject = chessArray[j];
-                        tileXYZ = gameObject.rexChess.tileXYZ;
-                        s += ' (' + tileXYZ.x + ',' + tileXYZ.y + ')';
+                for (let i = 0, icnt = lines.length; i < icnt; i++) {
+                    let line = lines[i];
+                    let s = [`Get matched ${line.size}`];
+                    let chessArray = line.entries;
+                    for (let j = 0, jcnt = chessArray.length; j < jcnt; j++) {
+                        let gameObject = chessArray[j];
+                        let tileXYZ = board.chessToTileXYZ(gameObject);
+                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
                     }
-                    console.log(s);
+                    console.log(s.join(' '));
                 }
             })
             .on('eliminate', function (
@@ -91,7 +90,7 @@ class Demo extends Phaser.Scene {
             .setData('scores', 0)
 
         // Mointor 'scores' variable
-        var txtScore = this.add.text(
+        let txtScore = this.add.text(
             650, 30,
             bejeweled.getData('scores'),
             { fontSize: '24px', color: '#fff' }

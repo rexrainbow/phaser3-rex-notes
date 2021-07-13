@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
-                    gameObject.data.events.on('changedata-symbol', function (gameObject, value, previousValue) {
+                    gameObject.on('changedata-symbol', function (gameObject, value, previousValue) {
                         gameObject.setFillStyle(getColor(value));
                     });
                     return gameObject;
@@ -65,14 +65,14 @@ class Demo extends Phaser.Scene {
                 var line, gameObject, tileXYZ;
                 for (var i = 0, icnt = lines.length; i < icnt; i++) {
                     line = lines[i];
-                    var s = 'Get matched ' + line.size;
+                    var s = [`Get matched ${line.size}`];
                     var chessArray = line.entries;
                     for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
                         gameObject = chessArray[j];
                         tileXYZ = gameObject.rexChess.tileXYZ;
-                        s += ' (' + tileXYZ.x + ',' + tileXYZ.y + ')';
+                        s.push(`(${tileXYZ.x},${tileXYZ.y})`);
                     }
-                    console.log(s);
+                    console.log(s.join(' '));
                 }
             })
             .on('eliminate', function (chessArray, board, bejeweled) {
