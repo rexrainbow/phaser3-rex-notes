@@ -3,7 +3,7 @@
 */
 
 var FallingAllChess = function (board, bejeweled) {
-    var tileZ = bejeweled.chessTileZ,
+    var tileZ = bejeweled.getChessTileZ(),
         chess, moveTo;
 
     for (var tileY = (board.height - 1); tileY >= 0; tileY--) { // bottom to top

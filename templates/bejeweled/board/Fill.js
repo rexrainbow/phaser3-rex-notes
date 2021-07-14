@@ -2,7 +2,8 @@
 1. Fill empty grids
 */
 
-var Fill = function (map, upperBoard) {
+var Fill = function (map) {
+    var upperBoard = false;
     if (typeof (map) === 'boolean') {
         upperBoard = map;
         map = undefined;

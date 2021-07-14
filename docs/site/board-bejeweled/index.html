@@ -6393,9 +6393,18 @@
 <pre class="mermaid"><code>graph TD
 
 Start((Start)) --&gt; Select1Start[select1-start]
-Select1Start --&gt; |Input| Select1[select1]
+
+subgraph Select 1 states
+  Select1Start --&gt; |Input| Select1[select1]
+end
+
 Select1 --&gt; select2Start[select2-start]
-select2Start --&gt; |Input| select2[select2]
+
+subgraph Select 2 states
+  select2Start --&gt; |Input| select2[select2]
+end
+
+select2Start --&gt; Select1Start
 select2 --&gt; Swap[swap]
 Swap --&gt; MatchStart[match-start]
 
@@ -6409,8 +6418,8 @@ subgraph Match states
 end
 
 MatchEnd --&gt; UndoSwap[undo-swap]
-UndoSwap --&gt; Select1
-MatchEnd --&gt; Select1</code></pre>
+UndoSwap --&gt; Select1Start
+MatchEnd --&gt; Select1Start</code></pre>
 
 <h4 id="select-first-chess">Select first chess<a class="headerlink" href="#select-first-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'select1'</code> event</p>
@@ -6440,7 +6449,9 @@ MatchEnd --&gt; Select1</code></pre>
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.<ul>
-<li>Selected first chess : <code>bejeweled.selectedChess1</code></li>
+<li>Selected first chess : 
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getSelectedChess1</span><span class="p">();</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
@@ -6682,7 +6693,7 @@ MatchEnd --&gt; Select1</code></pre>
             <span class="k">return</span><span class="p">;</span>
         <span class="p">}</span>
         <span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">worldXYToChess</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectedChess1</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getSelectedChess1</span><span class="p">()))</span> <span class="p">{</span>
             <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">selectChess2</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">},</span> <span class="nx">scene</span><span class="p">);</span>

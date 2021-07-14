@@ -193,9 +193,18 @@ Each chess has a `symbol` value stored in `'symbol'` key in private data. Add da
 graph TD
 
 Start((Start)) --> Select1Start[select1-start]
-Select1Start --> |Input| Select1[select1]
+
+subgraph Select 1 states
+  Select1Start --> |Input| Select1[select1]
+end
+
 Select1 --> select2Start[select2-start]
-select2Start --> |Input| select2[select2]
+
+subgraph Select 2 states
+  select2Start --> |Input| select2[select2]
+end
+
+select2Start --> Select1Start
 select2 --> Swap[swap]
 Swap --> MatchStart[match-start]
 
@@ -209,8 +218,8 @@ subgraph Match states
 end
 
 MatchEnd --> UndoSwap[undo-swap]
-UndoSwap --> Select1
-MatchEnd --> Select1
+UndoSwap --> Select1Start
+MatchEnd --> Select1Start
 ```
 
 #### Select first chess
@@ -248,7 +257,10 @@ bejeweled.on('select2', function(board, bejeweled) {
 
 - `board` : [Board object](board.md).
 - `bejeweled` : This bejeweled object.
-    - Selected first chess : `bejeweled.selectedChess1`
+    - Selected first chess : 
+        ```javascript
+        var chess = bejeweled.getSelectedChess1();
+        ```
 
 ##### Custom Select second chess Action
 
@@ -517,7 +529,7 @@ bejeweled.start();
                 return;
             }
             var chess = bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
-            if (chess && (chess !== this.bejeweled.selectedChess1)) {
+            if (chess && (chess !== this.bejeweled.getSelectedChess1())) {
                 bejeweled.selectChess2(chess);
             }
         }, scene);

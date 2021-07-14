@@ -103,25 +103,28 @@ declare class Bejeweled extends Phaser.Events.EventEmitter {
     selectChess1(
         chess: Phaser.GameObjects.GameObject
     ): this;
-    readonly selectedChess1: Phaser.GameObjects.GameObject;
+    getSelectedChess1(): Phaser.GameObjects.GameObject;
 
     selectChess2(
         chess: Phaser.GameObjects.GameObject
     ): this;
-    readonly selectedChess2: Phaser.GameObjects.GameObject;
+    getSelectedChess2(): Phaser.GameObjects.GameObject;
 
-    // Chess properties
     getChessMoveTo(
         chess: Phaser.GameObjects.GameObject
     ): MoveTo | undefined;
 
-    readonly chessTileZ: number;
+    getChessTileZ(): number | string;
+
+    getBoard(): Board;
+    getMatch(): Match;
 
     // Custom eliminateChess, falling action
     waitEvent(
         eventEmitter: Phaser.Events.EventEmitter,
         eventName?: string
     ): this;
+    isWaitingEvent(): boolean;
 
     // Data manager
     setDataEnabled(): this;
@@ -131,6 +134,5 @@ declare class Bejeweled extends Phaser.Events.EventEmitter {
     getData(key: string): any;
     data: Phaser.Data.DataManager;
 
-    getBoard(): Board;
-    getMatch(): Match;
+
 }

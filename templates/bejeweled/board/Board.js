@@ -58,16 +58,6 @@ class Board {
         return this;
     }
 
-    setCandidateSymbols(symbols) {
-        this.candidateSymbols = symbols;
-        return this;
-    }
-
-    setChessTileZ(tileZ) {
-        this.chessTileZ = tileZ;
-        return this;
-    }
-
     setInitSymbolsMap(map) {
         this.initSymbolsMap = map; // 2d array
         return this;

@@ -71,7 +71,7 @@ class State extends BaseState {
     next_PRETEST() {
         var nextState;
         if (this.board.preTest()) {
-            nextState = 'SELECT1';
+            nextState = 'SELECT1START';
         } else {
             nextState = 'RESET';
         }
@@ -79,7 +79,7 @@ class State extends BaseState {
     }
     // PRETEST
 
-    // SELECT1
+    // SELECT1START
     enter_SELECT1() {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
@@ -87,56 +87,75 @@ class State extends BaseState {
         this.parent.emit('select1-start', this.board.board, this.parent);
     }
     selectChess1(chess) {
-        if (this.state === 'SELECT1') {
+        if (this.state === 'SELECT1START') {
             this.selectedChess1 = chess;
-
-            var board = this.board.board;
-            this.parent.emit('select1', chess, board, this.parent);
-            
-            this.select1Action(chess, board, this.parent);
-
-            // To next state when all completed
             this.next();
         }
         return this;
     }
-    next_SELECT1() {
+    next_SELECT1START() {
         var nextState;
         if (this.selectedChess1) {
-            nextState = 'SELECT2';
-        }
-        return nextState;
-    }
-    // SELECT1
-
-
-    // SELECT2
-    enter_SELECT2() {
-        this.parent.emit('select2-start', this.board.board, this.parent);
-    }
-    selectChess2(chess) {
-        if (this.state === 'SELECT2') {
-            this.selectedChess2 = chess;
-
-            var board = this.board.board;
-            this.parent.emit('select2', chess, board, this.parent);
-            
-            this.select2Action(chess, board, this.parent);
-
-            // To next state when all completed
-            this.next();
-        }
-        return this;
-    }
-    next_SELECT2() {
-        var nextState;
-        if (this.selectedChess2 &&
-            this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
-            nextState = 'SWAP';
-        } else {
             nextState = 'SELECT1';
         }
         return nextState;
+    }
+    // SELECT1START
+
+    // SELECT1
+    enter_SELECT1() {
+        var board = this.board.board,
+            chess = this.selectedChess1;
+
+        this.parent.emit('select1', chess, board, this.parent);
+
+        this.select1Action(chess, board, this.parent);
+
+        // To next state when all completed
+        this.next();
+    }
+    next_SELECT1() {
+        return 'SELECT2START';
+    }
+    // SELECT1
+
+    // SELECT2START
+    enter_SELECT2START() {
+        this.parent.emit('select2-start', this.board.board, this.parent);
+    }
+    selectChess2(chess) {
+        if (this.state === 'SELECT2START') {
+            this.selectedChess2 = chess;
+            this.next();
+        }
+        return this;
+    }
+    next_SELECT2START() {
+        var nextState;
+        if (this.selectedChess2 &&
+            this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
+            nextState = 'SELECT2';
+        } else {
+            nextState = 'SELECT1START';
+        }
+        return nextState;
+    }
+    // SELECT2START
+
+    // SELECT2
+    enter_SELECT2() {
+        var board = this.board.board,
+            chess = this.selectedChess2;
+
+        this.parent.emit('select2', chess, board, this.parent);
+
+        this.select2Action(chess, board, this.parent);
+
+        // To next state when all completed
+        this.next();
+    }
+    next_SELECT2() {
+        return 'SWAP';
     }
     // SELECT2
 
@@ -189,7 +208,7 @@ class State extends BaseState {
         this.next();
     }
     next_UNDOSWAP() {
-        return 'SELECT1';
+        return 'SELECT1START';
     }
     // UNDO_SWAP
 
@@ -197,16 +216,6 @@ class State extends BaseState {
     printState() {
         console.log('Main state: ' + this.prevState + ' -> ' + this.state);
     }
-
-    // Select chess
-    selectChess1(chess) {
-        if (this.state === 'SELECT1') {
-            this.selectedChess1 = chess;
-            this.next();
-        }
-        return this;
-    }
-
 
 }
 

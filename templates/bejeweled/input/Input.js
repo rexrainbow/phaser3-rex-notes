@@ -45,7 +45,7 @@ class Input {
             var chess1 = this.parent.worldXYToChess(pointer.worldX, pointer.worldY);
             this.parent.selectChess1(chess1);
         } else { // pointer-up
-            var chess1 = this.parent.selectedChess1;
+            var chess1 = this.parent.getSelectedChess1();
             if (chess1) {
                 var chess2 = this.parent.getNeighborChessAtAngle(chess1, pointer.getAngle());
                 this.parent.selectChess2(chess2);

@@ -4,14 +4,16 @@ class BaseState extends FSM {
     constructor(parent, config) {
         super(config);
 
-        this.parent = parent; // Bejeweled
-        this.board = parent.board; // Bejeweled.board
+        this.parent = parent;                 // Bejeweled
+        this.board = parent.board;            // Bejeweled.board
+        this.waitEvents = parent.waitEvents;  // Bejeweled.waitEvents
     }
 
     shutdown() {
         super.shutdown();
         this.parent = undefined;
         this.board = undefined;
+        this.waitEvents = undefined;
     }
 
     destroy() {
@@ -21,14 +23,12 @@ class BaseState extends FSM {
 
     next() {
         // Wait until all events are completed
-        var waitEvents = this.parent.waitEvents;
-        if (waitEvents.noWaitEvent) {
+        if (this.waitEvents.noWaitEvent) {
             // Go to next state
             super.next();  
         } else {
             // Try again later
-            waitEvents.setCompleteCallback(this.next, this);
-            console.log('wait')
+            this.waitEvents.setCompleteCallback(this.next, this);
         }
     }
 }
