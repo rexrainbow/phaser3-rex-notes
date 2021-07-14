@@ -26,6 +26,8 @@ var Start = function (duration) {
         yoyo: false
     });
 
+    this.setDirty();
+
     return this;
 }
 
@@ -34,6 +36,7 @@ var Stop = function () {
         return this;
     }
     this.tweenTask.stop();
+    this.setDirty();
     return this;
 }
 
@@ -42,6 +45,7 @@ var Pause = function () {
         return this;
     }
     this.tweenTask.pause();
+    this.setDirty();
     return this;
 }
 
@@ -50,6 +54,7 @@ var Resume = function () {
         return this;
     }
     this.tweenTask.pause();
+    this.setDirty();
     return this;
 }
 

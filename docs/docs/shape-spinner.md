@@ -179,6 +179,12 @@ spinner.stop();
     ```
     - `t` : `0` ~ `1`
 
+#### Is running
+
+```javascript
+var isRunning = spinner.isRunning;
+```
+
 ### Color
 
 - Get

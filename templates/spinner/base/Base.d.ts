@@ -28,6 +28,7 @@ declare class Base extends BaseShape {
     pause(): this;
     resume(): this;
     stop(): this;
+    readonly isRunning: boolean;
 
     setValue(t: number): this;
     value: number;

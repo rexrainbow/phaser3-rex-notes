@@ -85,6 +85,10 @@ class Base extends BaseShapes {
         this.ease = ease;
         return this;
     }
+
+    get isRunning() {
+        return (this.tweenTask) ? this.tweenTask.isRunning : false;
+    }
 }
 
 Object.assign(
