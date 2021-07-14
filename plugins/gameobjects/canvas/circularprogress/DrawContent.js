@@ -7,17 +7,23 @@ var DrawContent = function () {
     var lineWidth = this.thickness * this.radius;
     var barRadius = this.radius - (lineWidth / 2);
     var centerRadius = this.radius - lineWidth;
+    var canvas = this.canvas,
+        context = this.context;
 
     // Draw track
     if (this.trackColor && (lineWidth > 0)) {
+        context.save();
+
         DrawCicle(
-            this.canvas, this.context,
+            canvas, context,
             x, x,
             barRadius, barRadius,
             undefined,
             this.trackColor,
             lineWidth
         );
+
+        context.restore();
     }
 
     // Draw bar
@@ -33,8 +39,11 @@ var DrawContent = function () {
             var deltaAngle = 2 * Math.PI * ((anticlockwise) ? (1 - this.value) : this.value);
             endAngle = deltaAngle + startAngle;
         }
+
+        context.save();
+
         DrawCicle(
-            this.canvas, this.context,
+            canvas, context,
             x, x,
             barRadius, barRadius,
             undefined,
@@ -42,6 +51,8 @@ var DrawContent = function () {
             lineWidth,
             startAngle, endAngle, anticlockwise
         );
+
+        context.restore();
     }
 
     // Draw center
@@ -55,24 +66,33 @@ var DrawContent = function () {
             fillStyle = this.centerColor;
         }
 
+        context.save();
+
         DrawCicle(
-            this.canvas, this.context,
+            canvas, context,
             x, x,
             centerRadius, centerRadius,
             fillStyle
         );
+
+        context.restore();
     }
 
     // Draw text
     if (this.textFormatCallback && (this.textColor || this.textStrokeColor)) {
+
+        context.save();
+
         DrawText(
-            this.canvas, this.context,
+            canvas, context,
             x, x,
             this.getFormatText(), this.textFont,
             this.textColor, this.textStrokeColor, this.textStrokeThickness,
             'center',  // textAlign
             'middle'   // textBaseline
         )
+
+        context.restore();
     }
 }
 

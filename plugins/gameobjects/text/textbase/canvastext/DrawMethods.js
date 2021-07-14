@@ -156,7 +156,7 @@ export default {
         }
 
         var context = this.context;
-        if (style.strokeThickness) {
+        if (style.stroke && (style.stroke !== 'none') && (style.strokeThickness > 0)) {
             style.syncShadow(context, style.shadowStroke);
             context.strokeText(text, x, y);
         }

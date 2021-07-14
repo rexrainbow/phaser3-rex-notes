@@ -23,8 +23,11 @@ class Demo extends Phaser.Scene {
             barColor: COLOR_LIGHT,
             centerColor: COLOR_PRIMARY,
 
-            textColor: 0xffffff,
+            // textColor: 0xffffff,
+            textStrokeColor: 'red',
+            textStrokeThickness: 3,
             textSize: '50px',
+            textStyle: 'bold',
             textFormatCallback: function (value) {
                 return Math.floor(value * 100).toString();
             },

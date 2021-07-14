@@ -22,15 +22,21 @@ var DrawText = function (
     context.textAlign = textAlign;
     context.textBaseline = textBaseline;
 
-    if (fillStyle != null) {
-        context.fillStyle = fillStyle;
-        context.fillText(text, x, y);
-    }
-    if ((strokeStyle != null) && (strokeThickness > 0)) {
-        context.strokeStyle = strokeStyle;
-        context.lineWidth = lineWidth;
+    context.fillStyle = fillStyle;
+    context.strokeStyle = strokeStyle;
+
+    context.lineWidth = lineWidth;
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
+
+    if ((strokeStyle != null) && (strokeStyle !== 'none') && (lineWidth > 0)) {
         context.strokeText(text, x, y);
     }
+
+    if ((fillStyle != null) && (fillStyle !== 'none')) {
+        context.fillText(text, x, y);
+    }
+
 }
 
 export default DrawText;
