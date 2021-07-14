@@ -75,6 +75,7 @@ declare class CircularProgressCanvas extends Canvas {
 
     textFont: string;
     setTextFont(fontSize: string, fontFamily: string, fontStyle: string): this;
+    setTextFont(font: string): this;
 
     setTextFormatCallback(
         callback: (value: number) => string,
