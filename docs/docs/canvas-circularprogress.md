@@ -95,7 +95,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, value, {
+var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, barColor, value, {
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -105,6 +105,7 @@ var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, color, 
     textColor: undefined,
     textStrokeColor: undefined,
     textStrokeThickness: undefined,
+    // textFont: ,
     textSize: '16px',
     textFamily: 'Courier',
     textStyle: '',
@@ -121,7 +122,7 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
     y: 0,
     radius: 1,
 
-    color: undefined,
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -131,6 +132,7 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
     textColor: undefined,
     textStrokeColor: undefined,
     textStrokeThickness: undefined,
+    // textFont: ,
     textSize: '16px',
     textFamily: 'Courier',
     textStyle: '',
@@ -143,7 +145,7 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
 
 - `x`, `y` : Position of this object.
 - `radius` : Radius of this circle. Size will be `(radius*2, radius*2)`.
-- `color` : Color of circular bar, in number or css string value.
+- `barColor` : Color of circular bar, in number or css string value.
 - `trackColor` : Color of circular track, in number or css string value.
 - `centerColor` : Color of center circle, in number or css string value.
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
@@ -170,7 +172,7 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     y: 0,
     radius: 1,
 
-    color: undefined,
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -197,8 +199,8 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
 - Define class
     ```javascript
     class MyCircularProgressCanvas extends CircularProgressCanvas {
-        constructor(scene, x, y, radius, color, value, config) {
-            super(scene, x, y, radius, color, value, config);
+        constructor(scene, x, y, radius, barColor, value, config) {
+            super(scene, x, y, radius, barColor, value, config);
             // ...
             scene.add.existing(this);
         }

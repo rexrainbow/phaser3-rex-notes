@@ -95,7 +95,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var circularProgress = scene.add.rexCircularProgress(x, y, radius, color, value, {
+var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, value, {
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -112,7 +112,7 @@ var circularProgress = scene.add.rexCircularProgress({
     y: 0,
     radius: 1,
 
-    color: undefined,
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,
@@ -125,7 +125,7 @@ var circularProgress = scene.add.rexCircularProgress({
 
 - `x`, `y` : Position of this object.
 - `radius` : Radius of this circle. Size will be `(radius*2, radius*2)`.
-- `color` : Color of circular bar, in number or css string value.
+- `barColor` : Color of circular bar, in number or css string value.
 - `trackColor` : Color of circular track, in number or css string value.
 - `centerColor` : Color of center circle, in number or css string value.
 - `thickness` : `0` ~ `1`, thickness of circular bar. Default value is `0.2` (`0.2*radius`)
@@ -142,7 +142,7 @@ var circularProgress = scene.make.rexCircularProgress({
     y: 0,
     radius: 1,
 
-    color: undefined,
+    barColor: undefined,
     trackColor: undefined,
     centerColor: undefined,
     thickness: 0.2,

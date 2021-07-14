@@ -7,7 +7,7 @@ declare namespace CircularProgress {
         x?: number, y?: number,
         radius?: number,
 
-        color?: string | number,
+        barColor?: string | number,
         trackColor?: string | number,
         centerColor?: string | number,
         thickness?: number,
@@ -21,6 +21,15 @@ declare namespace CircularProgress {
 declare class CircularProgress extends Phaser.GameObjects.Shape {
     constructor(
         scene: Phaser.Scene,
+        config?: CircularProgress.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        radius?: number,
+        barColor?: string | number,
+        value?: number,
         config?: CircularProgress.IConfig
     );
 

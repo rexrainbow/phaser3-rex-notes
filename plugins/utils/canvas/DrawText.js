@@ -1,17 +1,26 @@
 var DrawText = function (
     canvas, context,
     x, y,
-    text,
-    textAlign, font,
-    fillStyle, strokeStyle, lineWidth
+    text, font,
+    fillStyle, strokeStyle, lineWidth,
+    textAlign, textBaseline
 ) {
 
     if ((lineWidth === undefined) && (strokeStyle != null)) {
         lineWidth = 2;
     }
 
+    if (textAlign === undefined) {
+        textAlign = 'start';
+    }
+
+    if (textBaseline === undefined) {
+        textBaseline = 'alphabetic';
+    }
+
     context.font = font;
     context.textAlign = textAlign;
+    context.textBaseline = textBaseline;
 
     if (fillStyle != null) {
         context.fillStyle = fillStyle;

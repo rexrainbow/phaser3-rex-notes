@@ -68,11 +68,10 @@ var DrawContent = function () {
         DrawText(
             this.canvas, this.context,
             x, x,
-            this.getFormatText(),
-            'center',
-            this.textFont,
-            this.textColor,
-            this.textStrokeColor, this.textStrokeThickness
+            this.getFormatText(), this.textFont,
+            this.textColor, this.textStrokeColor, this.textStrokeThickness,
+            'center',  // textAlign
+            'middle'   // textBaseline
         )
     }
 }

@@ -8,7 +8,7 @@ declare namespace CircularProgressCanvas {
         x?: number, y?: number,
         radius?: number,
 
-        color?: string | number,
+        barColor?: string | number,
         trackColor?: string | number,
         centerColor?: string | number,
         thickness?: number,
@@ -31,6 +31,15 @@ declare namespace CircularProgressCanvas {
 declare class CircularProgressCanvas extends Canvas {
     constructor(
         scene: Phaser.Scene,
+        config?: CircularProgressCanvas.IConfig
+    );
+
+    constructor(
+        scene: Phaser.Scene,
+        x?: number, y?: number,
+        radius?: number,
+        barColor?: string | number,
+        value?: number,
         config?: CircularProgressCanvas.IConfig
     );
 

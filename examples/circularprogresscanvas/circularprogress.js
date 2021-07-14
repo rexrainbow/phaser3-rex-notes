@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
             centerColor: COLOR_PRIMARY,
 
             textColor: 0xffffff,
-            textFont: '20px',
+            textSize: '50px',
             textFormatCallback: function (value) {
                 return Math.floor(value * 100).toString();
             },

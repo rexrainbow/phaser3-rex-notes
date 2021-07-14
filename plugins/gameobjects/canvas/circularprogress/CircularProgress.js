@@ -36,11 +36,17 @@ class CircularProgress extends Canvas {
             GetValue(config, 'textStrokeColor', undefined),
             GetValue(config, 'textStrokeThickness', undefined)
         );
-        this.setTextFont(
-            GetValue(config, 'textSize', '16px'),
-            GetValue(config, 'textFamily', 'Courier'),
-            GetValue(config, 'textStyle', '')
-        );
+
+        var textFont = GetValue(config, 'textFont', undefined);
+        if (textFont) {
+            this.setTextFont(textFont);
+        } else {
+            this.setTextFont(
+                GetValue(config, 'textSize', '16px'),
+                GetValue(config, 'textFamily', 'Courier'),
+                GetValue(config, 'textStyle', '')
+            );
+        }
         this.setTextFormatCallback(
             GetValue(config, 'textFormatCallback', undefined),
             GetValue(config, 'textFormatCallbackScope', undefined)
@@ -246,7 +252,12 @@ class CircularProgress extends Canvas {
     }
 
     setTextFont(fontSize, fontFamily, fontStyle) {
-        var font = fontStyle + ' ' + fontSize + ' ' + fontFamily;
+        var font;
+        if (fontFamily === undefined) {
+            font = fontSize;
+        } else {
+            font = fontStyle + ' ' + fontSize + ' ' + fontFamily;
+        }
         this.textFont = font;
         return this;
     }
