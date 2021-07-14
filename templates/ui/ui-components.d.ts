@@ -11,6 +11,7 @@ import CircularProgressCanvas from './circularprogresscanvas/CircularProgressCan
 import CircularProgress from './circularprogress/CircularProgress';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
+import CustomProgress from './customprogress/CustomProgress';
 // import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 
@@ -75,6 +76,7 @@ export {
     CircularProgress,
     Knob,
     CustomShapes,
+    CustomProgress,
     NinePatch,
 
     Sizer,

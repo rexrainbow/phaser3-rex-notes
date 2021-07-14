@@ -1,5 +1,9 @@
 import 'phaser';
-import CustomProgressPlugin from '../../plugins/customprogress-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,31 +15,46 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var progressBar = CreateReactCircleProgressBar(this, 0, 0xF08080, 0xA9A9A9)
-            .setPosition(400, 300)
-            .setSize(200, 100)
-
-        var graphics = this.add.graphics({
-            lineStyle: {
-                width: 2, color: 0xff0000, alpha: 1
-            }
-        })
-            .strokeRectShape(progressBar.getBounds())
+        var progressBar = CreateProgressBar(this);
 
         this.tweens.add({
             targets: progressBar,
-            value: 1,
+            value: 0.75,
             duration: 3000,
             ease: 'Cubic',
         })
-
     }
 
     update() { }
 }
 
+var CreateProgressBar = function (scene) {
+    var label = scene.rexUI.add.badgeLabel({
+        x: 400, y: 300,
+        width: 200, height: 200,
+
+        background: CreateReactCircleProgressBar(scene, 0, 0xF08080, 0xA9A9A9),
+        center: CreateText(scene)
+    });
+
+    Object.defineProperty(label, 'value', {
+        get: function () {
+            return label.getElement('background').value;
+        },
+        set: function (newValue) {
+            label.getElement('background').value = newValue;
+            label.getElement('center').text = Math.floor(newValue * 100)
+            label.layout();
+        },
+    })
+
+    label.value = 0;
+
+    return label;
+}
+
 var CreateReactCircleProgressBar = function (scene, value, barColor, trackColor) {
-    return scene.add.rexCustomProgress({
+    return scene.rexUI.add.customProgress({
         type: 'ReactCircularProgress',
         create: {
             arc: ['track', 'bar'],
@@ -85,6 +104,17 @@ var CreateReactCircleProgressBar = function (scene, value, barColor, trackColor)
     })
 }
 
+var CreateText = function (scene) {
+    return scene.rexUI.add.label({
+        icon: scene.rexUI.add.roundRectangle(0, 0, 24, 24, 10, COLOR_LIGHT),
+        text: scene.add.text(0, 0, 'Label', { fontSize: '24px' }),
+        space: {
+            left: 20, right: 20, top: 20, bottom: 20,
+            icon: 10
+        }
+    })
+}
+
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
@@ -96,10 +126,10 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'CustomProgressPlugin',
-            plugin: CustomProgressPlugin,
-            start: true
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
         }]
     }
 };

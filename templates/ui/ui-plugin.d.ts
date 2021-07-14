@@ -9,6 +9,7 @@ import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
 import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
+import CustomProgressFactory from './customprogress/Factory';
 import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
 import DynamicTextFactory from './dynamictext/Factory';
@@ -63,6 +64,7 @@ declare class Factories {
     circularProgress: typeof CircularProgressFactory;
     clickFactory: typeof ClickFactory;
     container: typeof ContainerFactory;
+    customProgress: typeof CustomProgressFactory;
     customShapes: typeof CustomShapesFactory;
     dialog: typeof DialogFactory;
     dynamicTextFactory: typeof DynamicTextFactory;
@@ -123,6 +125,7 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     readonly viewport: Phaser.Geom.Rectangle;
 }
 
+
 import BadgeLabelClass from './badgelabel/BadgeLabel';
 import BBCodeTextClass from './bbcodetext/BBCodeText';
 import ButtonsClass from './buttons/Buttons';
@@ -132,6 +135,7 @@ import CircularProgressCanvasClass from './circularprogresscanvas/CircularProgre
 import CircularProgressClass from './circularprogress/CircularProgress';
 import ClickClass from './click/Click';
 import ContainerClass from './container/Container';
+import CustomProgressClass from './customprogress/CustomProgress';
 import CustomShapesClass from './customshapes/CustomShapes';
 import DialogClass from './dialog/Dialog';
 import DynamicTextClass from './dynamictext/DynamicText';
@@ -177,6 +181,7 @@ declare namespace UIPlugins {
     type CircularProgress = CircularProgressClass;
     type Click = ClickClass;
     type Container = ContainerClass;
+    type CustomProgress = CustomProgressClass;
     type CustomShapes = CustomShapesClass;
     type Dialog = DialogClass;
     type DynamicText = DynamicTextClass;
