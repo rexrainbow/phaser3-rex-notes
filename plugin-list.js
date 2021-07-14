@@ -13,6 +13,7 @@ module.exports = {
     'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
     'customshapesplugin': './plugins/customshapes-plugin.js',
     'circularprogressplugin': './plugins/circularprogress-plugin.js',
+    'customprogressplugin': './plugins/customprogress-plugin.js',
     'inputtextplugin': './plugins/inputtext-plugin.js',
     'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
     'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
