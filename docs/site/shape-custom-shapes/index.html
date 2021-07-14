@@ -6000,11 +6000,17 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// type: &#39;rexCustomShapes&#39;,</span>
 
-    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// shapeType: [name0, name1, ...],</span>
-        <span class="c1">// shapeType: number,</span>
-        <span class="c1">// shapeType: name,</span>
-    <span class="p">},</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name1</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+
+    <span class="c1">// create: {</span>
+    <span class="c1">//     shapeType: [name0, name1, ...],</span>
+    <span class="c1">//     shapeType: number,</span>
+    <span class="c1">//     shapeType: name,</span>
+    <span class="c1">// },</span>
 
     <span class="c1">// create: function() {</span>
     <span class="c1">// </span>
@@ -6024,11 +6030,17 @@
     <span class="c1">// height: 64,</span>
     <span class="c1">// type: &#39;rexCustomShapes&#39;,</span>
 
-    <span class="nx">create</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// shapeType: [name0, name1, ...],</span>
-        <span class="c1">// shapeType: number,</span>
-        <span class="c1">// shapeType: name,</span>
-    <span class="p">},</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name1</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+
+    <span class="c1">// create: {</span>
+    <span class="c1">//     shapeType: [name0, name1, ...],</span>
+    <span class="c1">//     shapeType: number,</span>
+    <span class="c1">//     shapeType: name,</span>
+    <span class="c1">// },</span>
 
     <span class="c1">// create: function() {</span>
     <span class="c1">// </span>
@@ -6044,7 +6056,9 @@
 <li><code>x</code>, <code>y</code> : Position of this object.</li>
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>create</code> : Callback to create shapes<ul>
-<li>A plain object with <code>shapeType: name</code>, or <code>shapeType: number</code><ul>
+<li>An array of object with <code>name</code> and <code>type</code>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span> <span class="p">}</span>
+</code></pre></div><ul>
 <li><code>shapeType</code> : <ul>
 <li><code>'arc'</code> : Create <a href="./#arc">Arc shape</a>.</li>
 <li><code>'circle'</code> : Create <a href="./#circle">Circle shape</a>.</li>
@@ -6055,6 +6069,10 @@
 <li><code>'triangle'</code> : Create <a href="./#triangle">Triangle shape</a>.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>A plain object with <code>shapeType: name</code>, or <code>shapeType: number</code><ul>
+<li><code>shapeType</code> : <code>arc</code>, <code>circle</code>, <code>ellipse</code>, <code>line</code>, <code>rectangle</code>, <code>triangle</code></li>
 <li><code>nameArray</code> : An array of unique string name for each shape.</li>
 <li><code>name</code> : An unique string name of this shape.</li>
 <li><code>number</code> : Amount of shapes to create.</li>

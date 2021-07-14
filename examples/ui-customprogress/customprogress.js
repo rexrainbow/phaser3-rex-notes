@@ -56,10 +56,11 @@ var CreateProgressBar = function (scene) {
 var CreateReactCircleProgressBar = function (scene, value, barColor, trackColor) {
     return scene.rexUI.add.customProgress({
         type: 'ReactCircularProgress',
-        create: {
-            arc: ['track', 'bar'],
-            circle: ['thumb']
-        },
+        create: [
+            { name: 'track', type: 'arc' },
+            { name: 'bar', type: 'arc' },
+            { name: 'thumb', type: 'circle' },
+        ],
         update: function () {
             var centerX = this.centerX,
                 centerY = this.centerY,

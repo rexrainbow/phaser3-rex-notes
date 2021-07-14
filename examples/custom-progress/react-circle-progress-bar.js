@@ -37,10 +37,11 @@ class Demo extends Phaser.Scene {
 var CreateReactCircleProgressBar = function (scene, value, barColor, trackColor) {
     return scene.add.rexCustomProgress({
         type: 'ReactCircularProgress',
-        create: {
-            arc: ['track', 'bar'],
-            circle: ['thumb']
-        },
+        create: [
+            { name: 'track', type: 'arc' },
+            { name: 'bar', type: 'arc' },
+            { name: 'thumb', type: 'circle' },
+        ],
         update: function () {
             var centerX = this.centerX,
                 centerY = this.centerY,

@@ -77,11 +77,17 @@ Custom shapes on shape.
 var customShapes = scene.add.rexCustomShapes(x, y, width, height, {
     // type: 'rexCustomShapes',
 
-    create: {
-        // shapeType: [name0, name1, ...],
-        // shapeType: number,
-        // shapeType: name,
-    },
+    create: [
+        { name: name0, type: shapeType},
+        { name: name1, type: shapeType},
+        ...
+    ],
+
+    // create: {
+    //     shapeType: [name0, name1, ...],
+    //     shapeType: number,
+    //     shapeType: name,
+    // },
 
     // create: function() {
     // 
@@ -103,11 +109,17 @@ var customShapes = scene.add.rexCustomShapes({
     // height: 64,
     // type: 'rexCustomShapes',
 
-    create: {
-        // shapeType: [name0, name1, ...],
-        // shapeType: number,
-        // shapeType: name,
-    },
+    create: [
+        { name: name0, type: shapeType},
+        { name: name1, type: shapeType},
+        ...
+    ],
+
+    // create: {
+    //     shapeType: [name0, name1, ...],
+    //     shapeType: number,
+    //     shapeType: name,
+    // },
 
     // create: function() {
     // 
@@ -122,7 +134,10 @@ var customShapes = scene.add.rexCustomShapes({
 - `x`, `y` : Position of this object.
 - `width`, `height` : Size of this object.
 - `create` : Callback to create shapes
-    - A plain object with `shapeType: name`, or `shapeType: number`
+    - An array of object with `name` and `type`
+        ```javascript
+        { name: name0, type: shapeType }
+        ```
         - `shapeType` : 
             - `'arc'` : Create [Arc shape](shape-custom-shapes.md#arc).
             - `'circle'` : Create [Circle shape](shape-custom-shapes.md#circle).
@@ -131,6 +146,8 @@ var customShapes = scene.add.rexCustomShapes({
             - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
             - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
             - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
+    - A plain object with `shapeType: name`, or `shapeType: number`
+        - `shapeType` : `arc`, `circle`, `ellipse`, `line`, `rectangle`, `triangle`
         - `nameArray` : An array of unique string name for each shape.
         - `name` : An unique string name of this shape.
         - `number` : Amount of shapes to create.

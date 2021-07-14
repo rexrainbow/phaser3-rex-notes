@@ -18,22 +18,27 @@ declare namespace CustomShapes {
     type ShapeTypes = Arc | Circle | Curve | Ellipse |
         Line | Lines | Rectangle | Triangle;
 
+    type ShapeMapType = {
+        arc?: NameTypes,
+        circle?: NameTypes,
+        curve?: NameTypes,
+        ellipse?: NameTypes,
+        line?: NameTypes,
+        lines?: NameTypes,
+        rectangle?: NameTypes,
+        triangle?: NameTypes,
+    };
+    type ShapeArrayType = {
+        name: string,
+        type: 'arc' | 'circle' | 'curve' | 'ellipse' | 'line' | 'rectangle' | 'triangle'
+    }[];
+    type CreatrShapeCallbackType = (this: CustomShapes) => void
+
     interface IConfig {
         x?: number, y?: number,
         width?: number, height?: number,
 
-        create?: (
-            {
-                arc?: NameTypes,
-                circle?: NameTypes,
-                ellipse?: NameTypes,
-                line?: NameTypes,
-                lines?: NameTypes,
-                rectangle?: NameTypes,
-                triangle?: NameTypes,
-            } |
-            ((this: CustomShapes) => void)
-        );
+        create?: ShapeMapType | ShapeArrayType | CreatrShapeCallbackType;
 
         update?: (this: CustomShapes) => void;
 

@@ -42,9 +42,8 @@ export default {
 
     buildShapes(config) {
         var createCallback = GetValue(config, 'create', undefined);
-        if (typeof (createCallback) === 'function') {
-            createCallback.call(this);
-        } else if (IsPlainObject(createCallback)) {
+
+        if (IsPlainObject(createCallback)) {
             var shapes = createCallback;
             for (var shapeType in shapes) {
                 var name = shapes[shapeType];
@@ -67,6 +66,16 @@ export default {
                         break;
                 }
             }
+        } else if (Array.isArray(createCallback)) {
+            var shapes = createCallback;
+            for (var i = 0, cnt = shapes.length; i < cnt; i++) {
+                var shape = shapes[i];
+                this.addShape(this.createShape(shape.type, shape.name));
+            }
+
+        } else if (typeof (createCallback) === 'function') {
+            createCallback.call(this);
+
         }
 
         this.setUpdateShapesCallback(GetValue(config, 'update'));
