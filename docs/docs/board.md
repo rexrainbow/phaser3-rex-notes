@@ -231,6 +231,8 @@ board.moveChess(chess, toTileX, toTileY, toTileZ, align);
 - `toTileX`, `toTileY`, `toTileZ` : Target tile position
 - `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY). Default is `true`.
 
+Do nothing if chess is not at this board.
+
 ### Set tileZ of chess
 
 ```javascript

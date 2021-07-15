@@ -8,6 +8,7 @@ const uidKey = ChessBank.uidKey;
 class Chess extends BehaviorBase {
     constructor(parent, uid) {
         super(parent, { eventEmitter: false });
+        // this.parent
 
         ChessBank.add(this, uid); // uid is stored in `this.$uid`
         this.board = null;
@@ -46,8 +47,8 @@ class Chess extends BehaviorBase {
         if (this.board == null) {
             return this;
         }
-        var tileXYZ = this.tileXYZ;
-        this.board.addChess(this.$uid, tileXYZ.x, tileXYZ.y, tileZ, false);
+        this.board.setChessTileZ(this.parent, tileZ);
+        return this;
     }
 
     setBlocker(value) {
