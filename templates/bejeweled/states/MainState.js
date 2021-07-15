@@ -7,14 +7,14 @@ import SwapChess from '../actions/SwapChess.js'
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class State extends BaseState {
-    constructor(parent, config) {
-        super(parent, config);
-        // this.parent = parent;      // Bejeweled
-        // this.board = parent.board; // Bejeweled.board
+    constructor(bejeweled, config) {
+        super(bejeweled, config);
+        // this.bejeweled = bejeweled;      // Bejeweled
+        // this.board = bejeweled.board; // Bejeweled.board
 
         this.selectedChess1;
         this.selectedChess2;
-        this.matchState = new MatchState(parent, config); // sub-state
+        this.matchState = new MatchState(bejeweled, config); // sub-state
 
         // Actions
         // select1 action
@@ -84,7 +84,7 @@ class State extends BaseState {
         this.selectedChess1 = undefined;
         this.selectedChess2 = undefined;
 
-        this.parent.emit('select1-start', this.board.board, this.parent);
+        this.bejeweled.emit('select1-start', this.board.board, this.bejeweled);
     }
     selectChess1(chess) {
         if (this.state === 'SELECT1START') {
@@ -107,9 +107,9 @@ class State extends BaseState {
         var board = this.board.board,
             chess = this.selectedChess1;
 
-        this.parent.emit('select1', chess, board, this.parent);
+        this.bejeweled.emit('select1', chess, board, this.bejeweled);
 
-        this.select1Action(chess, board, this.parent);
+        this.select1Action(chess, board, this.bejeweled);
 
         // To next state when all completed
         this.next();
@@ -121,7 +121,7 @@ class State extends BaseState {
 
     // SELECT2START
     enter_SELECT2START() {
-        this.parent.emit('select2-start', this.board.board, this.parent);
+        this.bejeweled.emit('select2-start', this.board.board, this.bejeweled);
     }
     selectChess2(chess) {
         if (this.state === 'SELECT2START') {
@@ -147,9 +147,9 @@ class State extends BaseState {
         var board = this.board.board,
             chess = this.selectedChess2;
 
-        this.parent.emit('select2', chess, board, this.parent);
+        this.bejeweled.emit('select2', chess, board, this.bejeweled);
 
-        this.select2Action(chess, board, this.parent);
+        this.select2Action(chess, board, this.bejeweled);
 
         // To next state when all completed
         this.next();
@@ -165,9 +165,9 @@ class State extends BaseState {
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;
 
-        this.parent.emit('swap', chess1, chess2, board, this.parent);
+        this.bejeweled.emit('swap', chess1, chess2, board, this.bejeweled);
 
-        this.swapAction(chess1, chess2, board, this.parent);
+        this.swapAction(chess1, chess2, board, this.bejeweled);
 
         // To next state when all completed
         this.next();
@@ -200,9 +200,9 @@ class State extends BaseState {
             chess1 = this.selectedChess1,
             chess2 = this.selectedChess2;
 
-        this.parent.emit('undo-swap', chess1, chess2, board, this.parent);
+        this.bejeweled.emit('undo-swap', chess1, chess2, board, this.bejeweled);
 
-        this.undoSwapAction(chess1, chess2, board, this.parent);
+        this.undoSwapAction(chess1, chess2, board, this.bejeweled);
 
         // To next state when all completed
         this.next();

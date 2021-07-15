@@ -6,10 +6,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const SetStruct = Phaser.Structs.Set;
 
 class State extends BaseState {
-    constructor(parent, config) {
-        super(parent, config);
-        // this.parent = parent;            // Bejeweled
-        // this.board = parent.board;       // Bejeweled.board
+    constructor(bejeweled, config) {
+        super(bejeweled, config);
+        // this.bejeweled = bejeweled;            // Bejeweled
+        // this.board = bejeweled.board;       // Bejeweled.board
 
         this.totalMatchedLinesCount = 0;
         this.eliminatedChessArray;
@@ -45,7 +45,7 @@ class State extends BaseState {
     enter_START() {
         this.totalMatchedLinesCount = 0;
 
-        this.parent.emit('match-start', this.board.board, this.parent);
+        this.bejeweled.emit('match-start', this.board.board, this.bejeweled);
 
         this.next();
     }
@@ -58,7 +58,7 @@ class State extends BaseState {
     enter_MATCH3() {
         var matchedLines = this.board.getAllMatch();
 
-        this.parent.emit('match', matchedLines, this.board.board, this.parent);
+        this.bejeweled.emit('match', matchedLines, this.board.board, this.bejeweled);
 
         var matchedLinesCount = matchedLines.length;
         this.totalMatchedLinesCount += matchedLinesCount;
@@ -98,9 +98,9 @@ class State extends BaseState {
         var board = this.board.board,
             chessArray = this.eliminatedChessArray;
 
-        this.parent.emit('eliminate', chessArray, board, this.parent);
+        this.bejeweled.emit('eliminate', chessArray, board, this.bejeweled);
 
-        this.eliminatingAction(chessArray, board, this.parent);
+        this.eliminatingAction(chessArray, board, this.bejeweled);
 
         // Remove eliminated chess
         chessArray.forEach(board.removeChess, board);
@@ -120,9 +120,9 @@ class State extends BaseState {
     enter_FALLING() {
         var board = this.board.board;
 
-        this.parent.emit('fall', board, this.parent);
+        this.bejeweled.emit('fall', board, this.bejeweled);
 
-        this.fallingAction(board, this.parent);
+        this.fallingAction(board, this.bejeweled);
 
         // To next state when all completed
         this.next();
@@ -136,7 +136,7 @@ class State extends BaseState {
     enter_FILL() {
         this.board.fill(true); // Fill upper board only
 
-        this.parent.emit('fill', this.board.board, this.parent);
+        this.bejeweled.emit('fill', this.board.board, this.bejeweled);
 
         this.next();
     }
@@ -147,7 +147,7 @@ class State extends BaseState {
 
     // END
     enter_END() {
-        this.parent.emit('match-end', this.board.board, this.parent);
+        this.bejeweled.emit('match-end', this.board.board, this.bejeweled);
 
         this.emit('complete');
     }

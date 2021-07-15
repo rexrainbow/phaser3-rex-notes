@@ -1,8 +1,8 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Input {
-    constructor(parent, config) {
-        this.parent = parent;      // Bejeweled
-        this.scene = parent.scene; // Bejeweled.scene
+    constructor(bejeweled, config) {
+        this.bejeweled = bejeweled;      // Bejeweled
+        this.scene = bejeweled.scene; // Bejeweled.scene
 
         this.setEnable(GetValue(config, 'input.enable', true));
         this.boot();
@@ -11,15 +11,15 @@ class Input {
     boot() {
         // Touch control
         this.scene.input
-            .on('pointerdown', this.selectChess, this)
-            .on('pointerup', this.selectChess, this);
+            .on('pointerdown', this.selectChess1, this)
+            .on('pointermove', this.selectChess2, this);
     }
 
     shutdown() {
         this.scene.input
-            .off('pointerdown', this.selectChess, this)
-            .off('pointerup', this.selectChess, this);
-        this.parent = undefined;
+            .off('pointerdown', this.selectChess1, this)
+            .off('pointermove', this.selectChess2, this);
+        this.bejeweled = undefined;
         this.scene = undefined;
     }
 
@@ -36,20 +36,27 @@ class Input {
         return this;
     }
 
-    selectChess(pointer) {
+    selectChess1(pointer) {
+        if (!this.enable) {
+            return this;
+        }
+        var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+        if (chess) {
+            this.bejeweled.selectChess1(chess);
+        }
+    }
+
+    selectChess2(pointer) {
         if (!this.enable) {
             return this;
         }
 
-        if (pointer.isDown) {
-            var chess1 = this.parent.worldXYToChess(pointer.worldX, pointer.worldY);
-            this.parent.selectChess1(chess1);
-        } else { // pointer-up
-            var chess1 = this.parent.getSelectedChess1();
-            if (chess1) {
-                var chess2 = this.parent.getNeighborChessAtAngle(chess1, pointer.getAngle());
-                this.parent.selectChess2(chess2);
-            }
+        if (!pointer.isDown) {
+            return;
+        }
+        var chess = this.bejeweled.worldXYToChess(pointer.worldX, pointer.worldY);
+        if (chess && (chess !== this.bejeweled.getSelectedChess1())) {
+            this.bejeweled.selectChess2(chess);
         }
     }
 }

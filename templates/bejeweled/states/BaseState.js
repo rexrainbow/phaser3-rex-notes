@@ -1,17 +1,17 @@
 import FSM from '../../../plugins/fsm.js';
 
 class BaseState extends FSM {
-    constructor(parent, config) {
+    constructor(bejeweled, config) {
         super(config);
 
-        this.parent = parent;                 // Bejeweled
-        this.board = parent.board;            // Bejeweled.board
-        this.waitEvents = parent.waitEvents;  // Bejeweled.waitEvents
+        this.bejeweled = bejeweled;                 // Bejeweled
+        this.board = bejeweled.board;            // Bejeweled.board
+        this.waitEvents = bejeweled.waitEvents;  // Bejeweled.waitEvents
     }
 
     shutdown() {
         super.shutdown();
-        this.parent = undefined;
+        this.bejeweled = undefined;
         this.board = undefined;
         this.waitEvents = undefined;
     }

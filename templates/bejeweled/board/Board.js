@@ -9,10 +9,10 @@ import GetAllMatch from './match/GetAllMatch.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
-    constructor(parent, config) {
-        var scene = parent.scene;
+    constructor(bejeweled, config) {
+        var scene = bejeweled.scene;
         this.scene = scene;
-        this.rexBoard = parent.rexBoard;
+        this.rexBoard = bejeweled.rexBoard;
         this.board = this.rexBoard.add.board(GetValue(config, 'board', undefined));
         this.match = this.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
