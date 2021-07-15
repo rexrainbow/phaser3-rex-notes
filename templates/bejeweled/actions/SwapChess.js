@@ -8,7 +8,7 @@ var SwapChess = function (chess1, chess2, board, bejeweled) {
         tileZ = tileXYZ1.z;
 
     // TileZ of chess1 and chess2 are the same, change tileZ of chess2 to a different value
-    board.moveChess(chess2, tileX2, tileY2, `#${tileZ}`, false);
+    board.setChessTileZ(chess2, `#${tileZ}`);
 
     // Move chess1 to tileXYZ2, chess2 to tileXYZ1
     var moveTo1 = bejeweled.getChessMoveTo(chess1);
@@ -17,7 +17,7 @@ var SwapChess = function (chess1, chess2, board, bejeweled) {
     moveTo2.moveTo(tileX1, tileY1);
 
     // Change tileZ of chess2 back
-    board.moveChess(chess2, tileX1, tileY1, tileZ, false);
+    board.setChessTileZ(chess2, tileZ);
 
     if (moveTo1.isRunning) {
         bejeweled.waitEvent(moveTo1, 'complete');

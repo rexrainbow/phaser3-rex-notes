@@ -90,6 +90,12 @@ declare class Board<ChessType = unknown> extends EE {
         align?: boolean
     ): this;
 
+    setChessTileZ(
+        chess: ChessType,
+        toTileZ: number | string,
+        align?: boolean
+    ): this;
+
     swapChess(
         chessA: ChessType,
         chessB: ChessType,

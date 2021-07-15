@@ -229,7 +229,17 @@ board.moveChess(chess, toTileX, toTileY, toTileZ, align);
 
 - `chess` : A game object
 - `toTileX`, `toTileY`, `toTileZ` : Target tile position
-- `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY).
+- `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY). Default is `true`.
+
+### Set tileZ of chess
+
+```javascript
+board.setChessTileZ(chess, toTileZ, align);
+```
+
+- `chess` : A game object
+- `toTileZ` : Target tileZ
+- `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY). Default is `false`.
 
 ### Swap chess
 

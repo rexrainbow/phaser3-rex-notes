@@ -36,6 +36,7 @@ import ShapeToTileXYArray from './shape/ShapeToTileXYArray.js';
 
 import UidToChess from './chess/UidToChess.js';
 import AddChess from './chess/AddChess.js';
+import SetChessTileZ from './chess/SetChessTileZ.js';
 import RemoveChess from './chess/RemoveChess.js';
 import RemoveAllChess from './chess/RemoveAllChess.js';
 import SwapChess from './chess/SwapChess.js';
@@ -121,6 +122,7 @@ export default {
     removeAllChess: RemoveAllChess,
     swapChess: SwapChess,
     moveChess: AddChess,
+    setChessTileZ: SetChessTileZ,
     getAllChess: GetAllChess,
 
     contains: Contains,
