@@ -18,6 +18,7 @@ var item = Phaser.Utils.Array.GetRandom(arr);
 
 ```javascript
 var item = Phaser.Utils.Array.RemoveRandomElement(arr);
+// var item = Phaser.Utils.Array.RemoveRandomElement(arr, startIndex, length);
 ```
 
 ### Shuffle
