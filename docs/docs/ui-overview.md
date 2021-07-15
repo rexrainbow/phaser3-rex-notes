@@ -173,6 +173,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
             scene.add.existing(this);
         }
         // ...
+    }
+    ```
+1. [Custom progress](shape-custom-progress.md): Custom progress on shape.
+    ```javascript
+    var customProgress = scene.rexUI.add.customProgress(x, y, width, height, config);
+    ```
+    or
+    ```javascript
+    class MyCustomProgress extends RexPlugins.UI.CustomProgress {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
     }    
     ```
 1. [Canvas-round-rectangle](canvas-roundrectangle.md): Round rectangle on canvas.

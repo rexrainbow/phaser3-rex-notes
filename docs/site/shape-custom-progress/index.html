@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-pages/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-custom-progress/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Pages - Notes of Phaser 3</title>
+        <title>Custom progress - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Pages
+                Custom progress
               
             </span>
           
@@ -537,10 +537,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1180,10 +1182,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5" type="checkbox" id="nav-4-5" checked>
     
     <label class="md-nav__link" for="nav-4-5">
       Graphics
@@ -1223,10 +1227,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-5-3" type="checkbox" id="nav-4-5-3" checked>
     
     <label class="md-nav__link" for="nav-4-5-3">
       Shape
@@ -1434,11 +1440,153 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shape-custom-progress/" title="Custom progress" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Custom progress
+      </label>
+    
+    <a href="./" title="Custom progress" class="md-nav__link md-nav__link--active">
       Custom progress
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-custom-shapes-object" class="md-nav__link">
+    Add custom shapes object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-update-shape-callback" class="md-nav__link">
+    Set update shape callback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-value" class="md-nav__link">
+    Progress value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ease-progress-value" class="md-nav__link">
+    Ease progress value
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refresh" class="md-nav__link">
+    Refresh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4641,12 +4789,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
     
     <label class="md-nav__link" for="nav-15">
       UI
@@ -5046,169 +5192,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Pages
-      </label>
-    
-    <a href="./" title="Pages" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../ui-pages/" title="Pages" class="md-nav__link">
       Pages
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#live-demos" class="md-nav__link">
-    Live demos
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-pages-object" class="md-nav__link">
-    Add pages object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-background" class="md-nav__link">
-    Add background
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-page" class="md-nav__link">
-    Add page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#swap-to-page" class="md-nav__link">
-    Swap to page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#page-name" class="md-nav__link">
-    Page name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#page-object" class="md-nav__link">
-    Page object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5796,72 +5784,56 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-pages-object" class="md-nav__link">
-    Add pages object
+  <a href="#add-custom-shapes-object" class="md-nav__link">
+    Add custom shapes object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-update-shape-callback" class="md-nav__link">
+    Set update shape callback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-value" class="md-nav__link">
+    Progress value
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
+  <a href="#ease-progress-value" class="md-nav__link">
+    Ease progress value
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refresh" class="md-nav__link">
+    Refresh
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-background" class="md-nav__link">
-    Add background
+  <a href="#shape-class" class="md-nav__link">
+    Shape class
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#add-page" class="md-nav__link">
-    Add page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#swap-to-page" class="md-nav__link">
-    Swap to page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#page-name" class="md-nav__link">
-    Page name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#page-object" class="md-nav__link">
-    Page object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -5886,31 +5858,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-pages.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-custom-progress.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Pages</h1>
+                  <h1>Custom progress</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A container with pages, only current page is visible.</p>
+<p>Custom progress bar based on <a href="../shape-custom-shapes/">custom-shapes</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://codepen.io/rexrainbow/pen/vPWzBa">Pages</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/abWpYWd">react-circle-progress-bar</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-pages">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/custom-progress">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="s1">&#39;rexuiplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcustomprogressplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcustomprogressplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add pages object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pages</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -5919,14 +5891,14 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CustomProgressPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/customprogress-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCustomProgressPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CustomProgressPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -5935,8 +5907,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add pages object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pages</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -5945,230 +5917,217 @@
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Pages</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">CustomProgress</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/bbcodetext.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add pages object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pages</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">pages</span><span class="p">);</span>
+<li>Add custom shapes object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CustomProgress</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">customProgress</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="add-pages-object">Add pages object<a class="headerlink" href="#add-pages-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pages</span><span class="p">({</span>
+<h3 id="add-custom-shapes-object">Add custom shapes object<a class="headerlink" href="#add-custom-shapes-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// type: &#39;rexCustomProgress&#39;,</span>
+
+    <span class="nx">create</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name1</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+
+    <span class="c1">// create: {</span>
+    <span class="c1">//     shapeType: [name0, name1, ...],</span>
+    <span class="c1">//     shapeType: number,</span>
+    <span class="c1">//     shapeType: name,</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// create: function() {</span>
+    <span class="c1">// </span>
+    <span class="c1">// },</span>
+
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+
+    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCustomProgress</span><span class="p">({</span>
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
-    <span class="c1">// anchor: undefined,</span>
-    <span class="c1">// width: undefined,</span>
-    <span class="c1">// height: undefined,</span>
-    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 },</span>
-    <span class="c1">// swapMode: 0,</span>
+    <span class="c1">// width: 64,</span>
+    <span class="c1">// height: 64,</span>
+    <span class="c1">// type: &#39;rexCustomProgress&#39;,</span>
 
-    <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name1</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span><span class="p">},</span>
+        <span class="p">...</span>
+    <span class="p">],</span>
+
+    <span class="c1">// create: {</span>
+    <span class="c1">//     shapeType: [name0, name1, ...],</span>
+    <span class="c1">//     shapeType: number,</span>
+    <span class="c1">//     shapeType: name,</span>
+    <span class="c1">// },</span>
+
+    <span class="c1">// create: function() {</span>
+    <span class="c1">// </span>
+    <span class="c1">// },</span>
+
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">},</span>
+
+    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
-<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
-<li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
-<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
-<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
-<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+<li><code>x</code>, <code>y</code> : Position of this object.</li>
+<li><code>width</code>, <code>height</code> : Size of this object.</li>
+<li><code>create</code> : Callback to create shapes<ul>
+<li>An array of object with <code>name</code> and <code>type</code>
+    <div class="codehilite"><pre><span></span><code><span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">name0</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="nx">shapeType</span> <span class="p">}</span>
+</code></pre></div><ul>
+<li><code>shapeType</code> : <ul>
+<li><code>'arc'</code> : Create <a href="../shape-custom-shapes/#arc">Arc shape</a>.</li>
+<li><code>'circle'</code> : Create <a href="../shape-custom-shapes/#circle">Circle shape</a>.</li>
+<li><code>'ellipse'</code> : Create <a href="../shape-custom-shapes/#ellipse">Ellipse shape</a>.</li>
+<li><code>'line'</code> : Create <a href="../shape-custom-shapes/#line">Line shape</a>.</li>
+<li><code>'lines'</code> : Create <a href="../shape-custom-shapes/#lines">Lines shape</a>.</li>
+<li><code>'rectangle'</code> : Create <a href="../shape-custom-shapes/#rectangle">Rectangle shape</a>.</li>
+<li><code>'triangle'</code> : Create <a href="../shape-custom-shapes/#triangle">Triangle shape</a>.</li>
 </ul>
 </li>
-<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li>A plain object with <code>shapeType: name</code>, or <code>shapeType: number</code><ul>
+<li><code>shapeType</code> : <code>arc</code>, <code>circle</code>, <code>ellipse</code>, <code>line</code>, <code>rectangle</code>, <code>triangle</code></li>
+<li><code>nameArray</code> : An array of unique string name for each shape.</li>
+<li><code>name</code> : An unique string name of this shape.</li>
+<li><code>number</code> : Amount of shapes to create.</li>
+</ul>
+</li>
+<li>A callback
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="nx">shapeType</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">addShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li><code>this.createShape(shapeType, name)</code> : Crate a shape instance, with an unique name.</li>
+<li><code>this.addShape(shape)</code> : Add this shape instance to this custom custom shapes.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
-<li><code>space</code> : Pads spaces.<ul>
-<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>update</code> : Callback when refresh
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object     </span>
+    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>Shape instances : Change properties of shape instances.<ul>
+<li><code>this.getShapes()</code> : Return all shapes in an array.</li>
+<li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
 </ul>
 </li>
-<li><code>swapMode</code> : Set to invisible or destroy swapped page.<ul>
-<li>0, <code>'invisible'</code> : Set swapped page to invisible.</li>
-<li>1, <code>'destroy'</code> : Destroy swapped page.</li>
 </ul>
 </li>
-<li><code>name</code> : Set name of this pages.</li>
+<li><code>value</code> : <code>0</code> ~ <code>1</code>, progress value. Default is <code>0</code>.</li>
+<li><code>easeValue</code> : Parameters of easing value.<ul>
+<li><code>easeValue.duration</code> : Duration of value easing, default is <code>0</code> (no easing).</li>
+<li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
-<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h4 id="set-update-shape-callback">Set update shape callback<a class="headerlink" href="#set-update-shape-callback" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setUpdateShapesCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</code></pre></div>
+
 <ul>
-<li>Define class
-    <div class="codehilite"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyPages</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pages</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-        <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
+<li><code>callback</code> :
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this : This custom shapes game object     </span>
+    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
-<li>Create instance
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pages</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPages</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</code></pre></div></li>
 </ul>
-<h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
-</code></pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
+<h3 id="progress-value">Progress value<a class="headerlink" href="#progress-value" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> : Extra padded space. Default is 0.</li>
-<li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
-<li><code>undefined</code> : Don't add this child. Default value.</li>
-</ul>
-</li>
-</ul>
-<h3 id="add-page">Add page<a class="headerlink" href="#add-page" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
-</code></pre></div>
-
-<p>or </p>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">addPage</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> 
-    <span class="p">{</span>
-        <span class="nx">key</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">align</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Align</span><span class="p">.</span><span class="nx">TOP_LEFT</span><span class="p">,</span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> 
-        <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span>
-    <span class="p">}</span>
-<span class="p">);</span>
-</code></pre></div>
-
-<ul>
-<li><code>child</code> : A game object.</li>
-<li><code>key</code> : Unique name of this page.</li>
-<li><code>align</code> :<ul>
-<li><code>'left-top'</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> : Align game object at left-top. Default value.</li>
-<li><code>'left-center'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
-<li><code>'left-bottom'</code>, or <code>Phaser.Display.Align.LEFT_BOTTOM</code> : Align game object at left-bottom.</li>
-<li><code>'center-top'</code>, or <code>Phaser.Display.Align.TOP_CENTER</code> : Align game object at center-top.</li>
-<li><code>'center-center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center-center.</li>
-<li><code>'center-bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at center-bottom.</li>
-<li><code>'right-top'</code>, or <code>Phaser.Display.Align.TOP_RIGHT</code> : Align game object at right-top.</li>
-<li><code>'right-center'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
-<li><code>'right-bottom'</code>, or <code>Phaser.Display.Align.RIGHT_BOTTOM</code> : Align game object at right-bottom.</li>
-</ul>
-</li>
-<li><code>padding</code> : Add space between bounds. Default is 0.<ul>
-<li>A number for left/right/top/bottom bounds,</li>
-<li>Or a plain object.
-    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
-<span class="p">}</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li><code>expand</code> : Expand width and height of the page.<ul>
-<li><code>true</code> : Expand width and height.</li>
-<li><code>false</code> : Don't expand width or height.</li>
-<li>A plain object, to expand width or height
-    <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li><code>expand.width</code> : Expand width.</li>
-<li><code>expand.height</code> : Expand height.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="swap-to-page">Swap to page<a class="headerlink" href="#swap-to-page" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">swapPage</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div>
-
-<ul>
-<li><code>key</code> : Unique name of this page.</li>
-</ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This method will run <code>pages.layout()</code> to arrange position of current page.</p>
-</div>
-<h3 id="page-name">Page name<a class="headerlink" href="#page-name" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Current page name
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageName</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">currentKey</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
-<li>
-<p>Previous page name
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageName</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">previousKey</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
-<li>Name of all pages
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">keys</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-<h3 id="page-object">Page object<a class="headerlink" href="#page-object" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get page object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getPage</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>pageObject</code> : A game object or <code>null</code>.</li>
-</ul>
-</li>
-<li>Current page object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">currentPage</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Previous page object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pageObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">previousPage</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get element<ul>
-<li>All page game objects
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-</ul>
-</li>
-<li>Get by name
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = pages.getElement(&#39;#&#39; + name, recursive);</span>
+<li>Get value
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">customProgress</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">pages</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-<span class="c1">// var gameObject = pages.getByName(&#39;#&#39; + name, recursive);</span>
-</code></pre></div><ul>
-<li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">customProgress</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">customProgress</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Set value
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Increase value
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
+</code></pre></div></li>
 </ul>
-</li>
-</ul>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h3 id="ease-progress-value">Ease progress value<a class="headerlink" href="#ease-progress-value" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set page invisible, triggered when page is swapped out.
-    <div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+<li>Ease value to
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Stop ease
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">stopEaseValue</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Set ease duration
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set ease function
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>pageObject</code> : Game object of page.</li>
-<li><code>key</code> : Page name.</li>
-<li><code>pages</code> : Pages object</li>
-</ul>
-</li>
-<li>Set page visible, triggered when page is shown.
-    <div class="codehilite"><pre><span></span><code><span class="nx">pages</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pagevisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pageObject</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">pages</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>pageObject</code> : Game object of page.</li>
-<li><code>key</code> : Page name.</li>
-<li><code>pages</code> : Pages object</li>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
 </ul>
 </li>
 </ul>
+<h4 id="refresh">Refresh<a class="headerlink" href="#refresh" title="Permanent link">&para;</a></h4>
+<p>Redraw shapes when</p>
+<ul>
+<li>Value changed : <code>customProgress.setValue(newValue)</code>, <code>customProgress.easeValueTo(newValue)</code></li>
+<li>Resize : <code>customProgress.resize(width, height)</code></li>
+<li>Set dirty : <code>customProgress.setDirty()</code></li>
+<li>Set update shape callback : <code>customProgress.setUpdateShapesCallback(callback)</code></li>
+</ul>
+<h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
+<p>See <a href="../shape-custom-shapes/#shape-class">Shape class</a></p>
                 
                   
                 
@@ -6190,7 +6149,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ui-tabs/" title="Tabs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shape-custom-shapes/" title="Custom shapes" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -6199,19 +6158,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Tabs
+                Custom shapes
               </span>
             </div>
           </a>
         
         
-          <a href="../ui-chart/" title="Chart" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../canvas/" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Chart
+                Canvas
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

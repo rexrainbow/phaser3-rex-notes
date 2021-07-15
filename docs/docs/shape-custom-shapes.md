@@ -474,3 +474,9 @@ Redraw shapes when
 ##### Ellipse
 
 The same as Circle.
+
+### Compare with similar plugins
+
+- [Custom Shapes](shape-custom-shapes.md) : Draw shapes.
+- [Custom Porgress](shape-custom-progress.md) : Similar with custom-shapes, plus a `value` property
+- [Custom Spinner](shape-spinner.md#custom-spinner) : Similar with custom-progress, plus a `value` tween task.
