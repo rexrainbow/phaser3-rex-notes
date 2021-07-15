@@ -5,11 +5,24 @@ export default CustomProgress;
 declare namespace CustomProgress {
 
     interface IConfig extends CustomShapes.IConfig {
-        value?: number
+        value?: number,
+
+        easeValue?: {
+            duration?: number,
+            ease?: string
+        },
+
     }
 }
 
 declare class CustomProgress extends CustomShapes {
     value: number;
-    setValue(value: number): this;
+    getValue(min?: number, max?: number): number;
+    setValue(value?: number, min?: number, max?: number): this;
+    addValue(inc?: number, min?: number, max?: number): this;
+
+    easeValueTo(value?: number, min?: number, max?: number): this;
+    stopEaseValue(): this;
+    setEaseValueDuration(duration: number): this;
+    setEaseValueFunction(ease: string): this;
 }

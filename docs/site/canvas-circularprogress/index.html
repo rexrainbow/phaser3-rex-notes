@@ -1597,6 +1597,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-progress-value" class="md-nav__link">
+    Ease progress value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#radius" class="md-nav__link">
     Radius
   </a>
@@ -5816,6 +5823,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ease-progress-value" class="md-nav__link">
+    Ease progress value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#radius" class="md-nav__link">
     Radius
   </a>
@@ -5978,7 +5992,12 @@
     <span class="nx">textFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
     <span class="nx">textStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">textFormatCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span>
+    <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6005,7 +6024,11 @@
     <span class="nx">textFormatCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6028,6 +6051,11 @@
 </code></pre></div>
     Default value is <code>undefined</code>.</li>
 <li><code>value</code> : <code>0</code> ~ <code>1</code>, progress value. Default is <code>0</code>.</li>
+<li><code>easeValue</code> : Parameters of easing value.<ul>
+<li><code>easeValue.duration</code> : Duration of value easing, default is <code>0</code> (no easing).</li>
+<li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
+</ul>
+</li>
 </ul>
 <p>Add circular-progress from JSON</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">({</span>
@@ -6084,14 +6112,52 @@
 </ul>
 <h3 id="progress-value">Progress value<a class="headerlink" href="#progress-value" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">circularProgress</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<li>Get value
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">circularProgress</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">circularProgress</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">circularProgress</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
 </code></pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="nx">circularProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<li>Set value
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Increase value
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
+</code></pre></div></li>
+</ul>
+<h3 id="ease-progress-value">Ease progress value<a class="headerlink" href="#ease-progress-value" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Ease value to
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// value: min ~ max</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">easeValueTo</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// value: 0 ~ 1</span>
+</code></pre></div></li>
+<li>Stop ease
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">stopEaseValue</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Set ease duration
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setEaseValueDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Set ease function
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">setEaseValueFunction</span><span class="p">(</span><span class="nx">ease</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>value</code> : <code>0</code> ~ <code>1</code>.</li>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>.</li>
 </ul>
 </li>
 </ul>

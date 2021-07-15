@@ -25,6 +25,12 @@ declare namespace CircularProgressCanvas {
         textFormatCallbackScope?: object,
 
         value?: number,
+
+        easeValue?: {
+            duration?: number,
+            ease?: string
+        },
+
     }
 }
 
@@ -44,7 +50,14 @@ declare class CircularProgressCanvas extends Canvas {
     );
 
     value: number;
-    setValue(value: number): this;
+    getValue(min?: number, max?: number): number;
+    setValue(value?: number, min?: number, max?: number): this;
+    addValue(inc?: number, min?: number, max?: number): this;
+
+    easeValueTo(value?: number, min?: number, max?: number): this;
+    stopEaseValue(): this;
+    setEaseValueDuration(duration: number): this;
+    setEaseValueFunction(ease: string): this;
 
     radius: number;
     setRadius(radius: number): this;

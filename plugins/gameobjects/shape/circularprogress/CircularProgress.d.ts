@@ -15,6 +15,12 @@ declare namespace CircularProgress {
         anticlockwise?: boolean,
 
         value?: number,
+
+        easeValue?: {
+            duration?: number,
+            ease?: string
+        },
+
     }
 }
 
@@ -34,7 +40,14 @@ declare class CircularProgress extends Phaser.GameObjects.Shape {
     );
 
     value: number;
-    setValue(value: number): this;
+    getValue(min?: number, max?: number): number;
+    setValue(value?: number, min?: number, max?: number): this;
+    addValue(inc?: number, min?: number, max?: number): this;
+
+    easeValueTo(value?: number, min?: number, max?: number): this;
+    stopEaseValue(): this;
+    setEaseValueDuration(duration: number): this;
+    setEaseValueFunction(ease: string): this;
 
     radius: number;
     setRadius(radius: number): this;

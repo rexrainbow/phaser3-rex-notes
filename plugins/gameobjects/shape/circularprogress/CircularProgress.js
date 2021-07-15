@@ -1,9 +1,12 @@
 import BaseShapes from '../shapes/BaseShapes.js';
 import { Arc, Circle } from '../shapes/geoms';
+import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
+const Linear = Phaser.Math.Linear;
+const Percent = Phaser.Math.Percent;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -36,6 +39,11 @@ class CircularProgress extends BaseShapes {
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
 
+        this
+            .setEaseValuePropName('value')
+            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
+            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
+
         this.setValue(value);
     }
 
@@ -60,9 +68,32 @@ class CircularProgress extends BaseShapes {
         this._value = value;
     }
 
-    setValue(value) {
+    setValue(value, min, max) {
+        if ((value === undefined) || (value === null)) {
+            return this;
+        }
+
+        if (min !== undefined) {
+            value = Percent(value, min, max);
+        }
         this.value = value;
         return this;
+    }
+
+    addValue(inc, min, max) {
+        if (min !== undefined) {
+            inc = Percent(inc, min, max);
+        }
+        this.value += inc;
+        return this;
+    }
+
+    getValue(min, max) {
+        var value = this.value;
+        if (min !== undefined) {
+            value = Linear(min, max, value);
+        }
+        return value;
     }
 
     get radius() {
@@ -221,5 +252,10 @@ class CircularProgress extends BaseShapes {
         }
     }
 }
+
+Object.assign(
+    CircularProgress.prototype,
+    EaseValueMethods
+);
 
 export default CircularProgress;

@@ -22,12 +22,10 @@ class Demo extends Phaser.Scene {
         })
             .strokeRectShape(progressBar.getBounds())
 
-        this.tweens.add({
-            targets: progressBar,
-            value: 1,
-            duration: 3000,
-            ease: 'Cubic',
-        })
+        progressBar
+            .setEaseValueFunction('Cubic')
+            .setEaseValueDuration(3000)
+            .easeValueTo(1)
 
     }
 

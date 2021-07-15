@@ -101,6 +101,11 @@ var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, val
     thickness: 0.2,
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
+
+    easeValue: {
+        duration: 0,
+        ease: 'Linear'
+    },
 });
 ```
 
@@ -119,7 +124,11 @@ var circularProgress = scene.add.rexCircularProgress({
     startAngle: Phaser.Math.DegToRad(270),
     anticlockwise: false,
 
-    value: 0
+    value: 0,
+    easeValue: {
+        duration: 0,
+        ease: 'Linear'
+    },
 });
 ```
 
@@ -132,7 +141,9 @@ var circularProgress = scene.add.rexCircularProgress({
 - `startAngle` : Start angle of circular bar, in radians. Default value is 270 degrees.
 - `anticlockwise` : Set `true` to put anticlockwise circular bar. Default value is `false`.
 - `value` : `0` ~ `1`, progress value. Default is `0`.
-
+- `easeValue` : Parameters of easing value.
+    - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
+    - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 
 Add circular-progress from JSON
 
@@ -150,6 +161,10 @@ var circularProgress = scene.make.rexCircularProgress({
     anticlockwise: false,
 
     value: 0,
+    easeValue: {
+        duration: 0,
+        ease: 'Linear'
+    },
     
     add: true
 });
@@ -180,16 +195,66 @@ var circularProgress = scene.make.rexCircularProgress({
 
 ### Progress value
 
-- Get
+- Get value
     ```javascript
-    var value = circularProgress.value;
+    var value = circularProgress.getValue(min, max); // value : min ~ max
     ```
-- Set
+    or
     ```javascript
-    circularProgress.setValue(value);
-    circularProgress.value = value;
+    var value = circularProgress.getValue(); // value: 0 ~ 1
     ```
-    - `value` : `0` ~ `1`.
+    or
+    ```javascript
+    var value = circularProgress.value; // value: 0 ~ 1
+    ```
+- Set value
+    ```javascript
+    circularProgress.setValue(value, min, max); // value: min ~ max
+    ```
+    or
+    ```javascript
+    circularProgress.setValue(value); // value: 0 ~ 1
+    ```
+    or
+    ```javascript
+    circularProgress.value = value; // value: 0 ~ 1
+    ```
+- Increase value
+    ```javascript
+    circularProgress.addValue(inc, min, max); // inc: min ~ max
+    ```
+    or
+    ```javascript
+    circularProgress.addValue(inc); // inc: 0 ~ 1
+    ```
+    or
+    ```javascript
+    circularProgress.value += inc; // inc: 0 ~ 1
+    ```
+
+### Ease progress value
+
+- Ease value to
+    ```javascript
+    circularProgress.easeValueTo(value, min, max);  // value: min ~ max
+    ```
+    or
+    ```javascript
+    circularProgress.easeValueTo(value);  // value: 0 ~ 1
+    ```
+- Stop ease
+    ```javascript
+    circularProgress.stopEaseValue();
+    ```
+- Set ease duration
+    ```javascript
+    circularProgress.setEaseValueDuration(duration);
+    ```
+- Set ease function
+    ```javascript
+    circularProgress.setEaseValueFunction(ease);
+    ```
+    - `ease` : [Ease function](tween.md/#ease-equations).
 
 ### Radius
 

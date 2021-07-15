@@ -1,4 +1,9 @@
-import TweenTask from '../../../plugins/utils/behaviorbase/TweenTask.js';
+import TweenTask from '../behaviorbase/TweenTask.js';
+
+var SetEaseValuePropName = function (name) {
+    this.easeValuePropName = name;
+    return this;
+}
 
 var SetEaseValueDuration = function (duration) {
     this.easeValueDuration = duration;
@@ -30,19 +35,21 @@ var EaseValueTo = function (value, min, max) {
         this.tweenValueTask = new TweenTask(this, { eventEmitter: null })
     }
 
+    var config = {};
+    config.targets = this;
+    config[this.easeValuePropName] = value;
+    config.duration = this.easeValueDuration;
+    config.ease = this.easeFunction;
+
     this.tweenValueTask
         .stop()
-        .start({
-            targets: this,
-            value: value,
-            duration: this.easeValueDuration,
-            ease: this.easeFunction
-        });
+        .start(config);
 
     return this;
 }
 
 export default {
+    setEaseValuePropName: SetEaseValuePropName,
     setEaseValueDuration: SetEaseValueDuration,
     setEaseValueFunction: SetEaseValueFunction,
     stopEaseValue: StopEaseValue,

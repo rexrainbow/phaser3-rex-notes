@@ -1,10 +1,13 @@
 import Canvas from '../canvas/Canvas.js';
 import GetStyle from '../../../utils/canvas/GetStyle.js';
 import DrawContent from './DrawContent.js';
+import EaseValueMethods from '../../../utils/ease/EaseValueMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Clamp = Phaser.Math.Clamp;
+const Linear = Phaser.Math.Linear;
+const Percent = Phaser.Math.Percent;
 
 const DefaultStartAngle = Phaser.Math.DegToRad(270);
 
@@ -52,6 +55,11 @@ class CircularProgress extends Canvas {
             GetValue(config, 'textFormatCallbackScope', undefined)
         );
 
+        this
+            .setEaseValuePropName('value')
+            .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
+            .setEaseValueFunction(GetValue(config, 'easeValue.ease', 'Linear'))
+
         this.setValue(value);
     }
 
@@ -76,9 +84,32 @@ class CircularProgress extends Canvas {
         this._value = value;
     }
 
-    setValue(value) {
+    setValue(value, min, max) {
+        if ((value === undefined) || (value === null)) {
+            return this;
+        }
+
+        if (min !== undefined) {
+            value = Percent(value, min, max);
+        }
         this.value = value;
         return this;
+    }
+
+    addValue(inc, min, max) {
+        if (min !== undefined) {
+            inc = Percent(inc, min, max);
+        }
+        this.value += inc;
+        return this;
+    }
+
+    getValue(min, max) {
+        var value = this.value;
+        if (min !== undefined) {
+            value = Linear(min, max, value);
+        }
+        return value;
     }
 
     get radius() {
@@ -289,5 +320,10 @@ class CircularProgress extends Canvas {
         return text;
     }
 }
+
+Object.assign(
+    CircularProgress.prototype,
+    EaseValueMethods
+);
 
 export default CircularProgress;

@@ -39,6 +39,7 @@ declare class Slider extends Sizer {
     getValue(min?: number, max?: number): number;
     setValue(value?: number, min?: number, max?: number): this;
     addValue(inc?: number, min?: number, max?: number): this;
+
     easeValueTo(value?: number, min?: number, max?: number): this;
     stopEaseValue(): this;
     setEaseValueDuration(duration: number): this;

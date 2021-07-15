@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var circularProgress = this.add.rexCircularProgress({
+        var progressBar = this.add.rexCircularProgress({
             x: 400, y: 300,
             radius: 50,
 
@@ -27,12 +27,10 @@ class Demo extends Phaser.Scene {
             value: 0
         })
 
-        this.tweens.add({
-            targets: circularProgress,
-            value: 0.75,
-            duration: 2000,
-            ease: 'Cubic',
-        })
+        progressBar
+            .setEaseValueFunction('Cubic')
+            .setEaseValueDuration(2000)
+            .easeValueTo(0.75);
     }
 
     update() { }
