@@ -22,7 +22,7 @@ declare namespace MoveTo {
         occupiedTest?: boolean,
         blockerTest?: boolean,
         moveableTest?: MoveableTestCallbackType,
-        moveableTestScope?: unknown,
+        moveableTestScope?: object,
 
         sneak?: boolean,
     }

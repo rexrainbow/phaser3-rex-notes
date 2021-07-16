@@ -31,7 +31,7 @@ declare namespace PathFinder {
 
         cost?: number,
         costCallback?: CostCallbackType,
-        costCallbackScope?: unknown,
+        costCallbackScope?: object,
         cacheCost?: boolean,
 
         pathMode?: PathModeTypes,

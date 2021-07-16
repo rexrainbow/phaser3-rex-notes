@@ -32,11 +32,11 @@ declare namespace FieldOfView {
         occupiedTest?: boolean,
         blockerTest?: boolean,
         preTestCallback: PreTestCallbackType,
-        preTestCallbackScope?: unknown,
+        preTestCallbackScope?: object,
 
         // cost 
         costCallback: CostCallbackType,
-        costCallbackScope?: unknown,
+        costCallbackScope?: object,
         cost?: number,
 
         debug?: {

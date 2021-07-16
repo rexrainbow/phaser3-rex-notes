@@ -25,7 +25,7 @@ declare namespace Monopoly {
         pathTileZ?: number,
         cost?: number,
         costCallback?: CostCallbackType,
-        costCallbackScope?: unknown,
+        costCallbackScope?: object,
     }
 }
 
