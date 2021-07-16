@@ -76,7 +76,7 @@ declare class MiniBoard extends Container {
 
     setPutTestCallback(
         callback: MiniBoard.PutTestCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     canPutOnMainBoard(

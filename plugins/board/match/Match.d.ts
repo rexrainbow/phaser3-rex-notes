@@ -33,7 +33,7 @@ declare class Match {
             tileXY: TileXYType,
             board: Board
         ) => string | number | null,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setSymbol(
@@ -53,7 +53,7 @@ declare class Match {
             symbol: string | number | null,
             board: Board
         ) => void | boolean,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setWildcard(
@@ -76,7 +76,7 @@ declare class Match {
             },
             board: Board
         ) => void | boolean,
-        scope?: unknown
+        scope?: object
     ): this;
 
 
@@ -90,7 +90,7 @@ declare class Match {
             },
             board: Board
         ) => void | boolean,
-        scope?: unknown
+        scope?: object
     ): this;
 
     anyMatch(

@@ -57,13 +57,13 @@ declare class FieldOfView<ChessType = Phaser.GameObjects.GameObject> {
 
     setPreTestFunction(
         callback: FieldOfView.PreTestCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setCostFunction(cost: number): this;
     setCostFunction(
         callback: FieldOfView.CostCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     isInLOS(

@@ -78,6 +78,6 @@ declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> extends TickTask
 
     setMoveableTestCallback(
         callback: MoveTo.MoveableTestCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 }

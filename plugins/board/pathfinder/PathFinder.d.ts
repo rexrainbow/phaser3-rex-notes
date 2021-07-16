@@ -58,7 +58,7 @@ declare class PathFinder {
     setCostFunction(cost: number): this;
     setCostFunction(
         callback: PathFinder.CostCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setPathMode(

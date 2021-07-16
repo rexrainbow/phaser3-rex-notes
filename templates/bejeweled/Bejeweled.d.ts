@@ -48,7 +48,7 @@ declare namespace Bejeweled {
 
             create: CreateChessCallbackType,
 
-            scope?: unknown,
+            scope?: object,
 
             moveTo?: MoveTo.IConfig,
 

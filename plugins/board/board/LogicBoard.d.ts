@@ -157,7 +157,7 @@ declare class Board<ChessType = unknown> extends EE {
 
     forEachTileXY(
         callback: (tileXY: TileXYType, board: Board<ChessType>) => void | boolean,
-        scope?: unknown,
+        scope?: object,
         order?: Board.ForEachTileXYOrderTypes
     ): this;
 

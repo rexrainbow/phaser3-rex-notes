@@ -41,7 +41,7 @@ declare class Monopoly<ChessType = Phaser.GameObjects.GameObject> {
     setCostFunction(cost: number): this;
     setCostFunction(
         callback: Monopoly.CostCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setFace(direction: number): this;
