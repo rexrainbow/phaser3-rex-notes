@@ -25,7 +25,7 @@ export default {
         // draw lines
         startX += this.startXOffset;
         startY += this.startYOffset;
-        var halign = defaultStyle.halign,
+        var defaultHalign = defaultStyle.halign,
             valign = defaultStyle.valign;
 
         var lineWidth, lineHeight = defaultStyle.lineHeight;
@@ -63,6 +63,18 @@ export default {
                 continue;
             }
 
+            var pens = lines[lineIdx],
+                penCount = pens.length;
+            var halign = defaultHalign;
+            // Seek if there has algin tag
+            for (var penIdx = 0; penIdx < penCount; penIdx++) {
+                var penAlign = pens[penIdx].prop.align
+                if (penAlign) {
+                    halign = penAlign;
+                    break;
+                }
+            }
+
             if (halign === 'center') { // center
                 offsetX = (boxWidth - lineWidth) / 2;
             } else if (halign === 'right') { // right
@@ -72,8 +84,7 @@ export default {
             }
             offsetX += startX;
 
-            var pens = lines[lineIdx];
-            for (var penIdx = 0, pensLen = pens.length; penIdx < pensLen; penIdx++) {
+            for (var penIdx = 0; penIdx < penCount; penIdx++) {
                 this.drawPen(pens[penIdx], offsetX, offsetY);
             }
         }

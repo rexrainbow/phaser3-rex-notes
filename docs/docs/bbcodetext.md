@@ -88,6 +88,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Superscript, subscript : `[y=-12]text[y]`
 - Image : `[img=imgKey]`
 - Hit area of words : `[area=key]text[/area]`
+- Line alignment : `[align=left]text[/align]`, `[align=center]text[/align]`, `[align=right]text[/align]`
 
 ### Add text object
 

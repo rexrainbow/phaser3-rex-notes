@@ -123,6 +123,13 @@ var parser = {
         } else if (RE_AREA_CLOSE.test(text)) {
             UpdateProp(prevProp, PROP_REMOVE, 'area');
             plainText = '';
+        } else if (RE_ALIGN_OPEN.test(text)) {
+            innerMatch = text.match(RE_ALIGN_OPEN);
+            UpdateProp(prevProp, PROP_ADD, 'align', innerMatch[1]);
+            plainText = '';
+        } else if (RE_ALIGN_CLOSE.test(text)) {
+            UpdateProp(prevProp, PROP_REMOVE, 'align');
+            plainText = '';
         } else {
             plainText = text
         }
@@ -249,9 +256,10 @@ var parser = {
 
                 case 'color':
                 case 'stroke':
+                case 'y':
                 case 'img':
                 case 'area':
-                case 'y':
+                case 'align':
                     headers.push(`[${k}=${value}]`);
                     break;
 
@@ -301,7 +309,7 @@ var GetFontStyle = function (isBold, isItalic) {
     }
 };
 
-var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[y=([-.0-9]+)\]|\[\/y\]/ig;
+var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[y=([-.0-9]+)\]|\[\/y\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]|\[align=([^\]]+)\]|\[\/align\]/ig;
 
 var RE_BLOD_OPEN = /\[b\]/i;
 var RE_BLOD_CLOSE = /\[\/b\]/i;
@@ -325,6 +333,8 @@ var RE_IMAGE_OPEN = /\[img=([^\]]+)\]/i;
 var RE_IMAGE_CLOSE = /\[\/img\]/i;
 var RE_AREA_OPEN = /\[area=([^\]]+)\]/i;
 var RE_AREA_CLOSE = /\[\/area\]/i;
+var RE_ALIGN_OPEN = /\[align=([^\]]+)\]/i;
+var RE_ALIGN_CLOSE = /\[\/align\]/i;
 const PROP_REMOVE = false;
 const PROP_ADD = true;
 

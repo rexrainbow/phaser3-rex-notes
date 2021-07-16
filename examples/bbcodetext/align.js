@@ -11,12 +11,20 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var s = '[size=24][color=yellow]abc[/color][/size]'
+        var s = `\
+[align=left]LeftLeftLeftLeftLeftLeftLeft[/align]
+[align=center]CenterCenterCenterCenter[/align]
+[color=yellow]abc[/color]\
+`
         this.add.rexBBCodeText(400, 300, s, {
             fixedWidth: 200,
             fixedHeight: 200,
             halign: 'right',
             valign: 'bottom',
+            wrap: {
+                mode: 'char',
+                width: 160
+            },
             backgroundColor: '#333333',
             padding: {
                 left: 20,
