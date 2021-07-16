@@ -187,6 +187,11 @@ class TextStyle {
             this.color = GetStyle(fill);
         }
 
+        var imageData = GetValue(style, 'images', undefined);
+        if (imageData) {
+            this.parent.addImage(imageData);
+        }
+
         if (updateText) {
             return this.update(true);
         } else {

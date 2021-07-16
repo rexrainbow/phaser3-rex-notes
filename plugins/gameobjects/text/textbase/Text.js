@@ -43,6 +43,8 @@ class Text extends GameObject {
 
         this.context = this.canvas.getContext('2d');
 
+        this._imageManager = undefined;
+
         if (style) {
             // Override align
             if (style.hasOwnProperty('align')) {
@@ -114,8 +116,6 @@ class Text extends GameObject {
         if (style && style.padding) {
             this.setPadding(style.padding);
         }
-
-        this._imageManager = undefined;
 
         this.setText(text);
 

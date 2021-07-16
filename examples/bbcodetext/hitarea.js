@@ -9,6 +9,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('key', 'assets/images/key.png');
     }
 
     create() {
@@ -18,7 +19,9 @@ class Demo extends Phaser.Scene {
 [area=DEF] DEF [/area] 90 [area=GHI]GHI[/area]
 
 [area=url:https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html]Document[/area]
-[area=url:https://github.com/rexrainbow/phaser3-rex-notes/]Github[/area]`;
+[area=url:https://github.com/rexrainbow/phaser3-rex-notes/]Github[/area]
+[area=KEY][img=key][/area]
+`;
         var text = this.add.rexBBCodeText(400, 30, s1, {
             backgroundColor: '#555',
             fontSize: '24px',
@@ -27,6 +30,10 @@ class Demo extends Phaser.Scene {
                 mode: 'char',
                 width: 200
             },
+
+            images: {
+                key: { y: -8 }
+            }
         })
             .drawAreaBounds(this.add.graphics(), 0xff0000)
             .setInteractive()
@@ -50,7 +57,7 @@ var IsURLKey = function (key) {
     return (key.substring(0, 4) === 'url:');
 }
 
-var GetURL = function(key) {
+var GetURL = function (key) {
     return key.substring(4, key.length);
 }
 

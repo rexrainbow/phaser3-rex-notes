@@ -154,6 +154,10 @@ Default style
     //     descent: 0,
     //     fontSize: 0
     // },
+
+    // images: {
+    //    key: { y:-8 }
+    // }
 }
 ```
 
@@ -169,8 +173,9 @@ var txt = scene.add.rexBBCodeText({
         fontFamily: 'Arial',
         color: '#ffffff',
         align: 'center',
-        backgroundColor: '#ff00ff'
-    }
+        backgroundColor: '#ff00ff',
+        // ...
+    },
 })
 ```
 
@@ -194,7 +199,8 @@ var txt = scene.make.rexBBCodeText({
         fontFamily: 'Arial',
         color: '#ffffff',
         align: 'center',
-        backgroundColor: '#ff00ff'
+        backgroundColor: '#ff00ff',
+        // ...
     },
     // origin: {x: 0.5, y: 0.5},
     add: true
@@ -206,6 +212,7 @@ var txt = scene.make.rexBBCodeText({
         - `'left'`, `'center'`, `'right'`
     - `valign` : Vertical alignment.
         - `'top'`, `'center'`, `'bottom'`
+- `images` : See [Image](bbcodetext.md#image)
 
 ### Custom class
 

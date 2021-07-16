@@ -41,7 +41,7 @@ class ImageManager {
     }
 
     get(key) {
-        if (!this.images.hasOwnProperty(key)) {
+        if (!this.has(key)) {
             if (this.textureManager.exists(key)) {
                 this.add(key);
             }

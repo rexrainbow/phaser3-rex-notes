@@ -145,6 +145,10 @@ Default style
     //     fontSize: 0
     // },
 
+    // images: {
+    //    key: { y:-8 }
+    // }
+
     tags: {
         //tag0: {
         //  color: 'red'
@@ -205,6 +209,7 @@ var txt = scene.make.rexTagText({
         - `left`, `center`, `right`
     - `valign` : Vertical alignment.
         - `top`, `center`, `bottom`
+- `images` : See [Image](tagtext.md#image)
 
 
 #### Properties of tag
