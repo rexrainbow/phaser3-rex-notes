@@ -139,6 +139,10 @@ var slider = scene.rexUI.add.slider({
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - `valuechangeCallback` : callback function when value changed.
+    ```javascript
+    function(newValue, oldValue, slider) {
+    }
+    ```
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `enable` : Set `false` to disable controlling.
@@ -283,10 +287,6 @@ Change value will also change the position of slider thumb and width of slider i
     ```
     - `ease` : [Ease function](tween.md/#ease-equations).
 
-### Other properties
-
-See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
-
 ### Events
 
 - On value changed
@@ -295,3 +295,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         //
     }, scope);
     ```
+
+### Other properties
+
+See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

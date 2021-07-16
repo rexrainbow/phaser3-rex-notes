@@ -116,6 +116,8 @@ var circularProgress = scene.add.rexCircularProgressCanvas(x, y, radius, barColo
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },
 });
 ```
 
@@ -149,6 +151,8 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },
 });
 ```
 
@@ -174,6 +178,11 @@ var circularProgress = scene.add.rexCircularProgressCanvas({
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
+- `valuechangeCallback` : callback function when value changed.
+    ```javascript
+    function(newValue, oldValue, circularProgress) {
+    }
+    ```
 
 Add circular-progress from JSON
 
@@ -200,6 +209,12 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
     textFormatCallbackScope: undefined,
 
     value: 0,
+    easeValue: {
+        duration: 0,
+        ease: 'Linear'
+    },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },
     
     add: true
 });
@@ -398,6 +413,15 @@ var circularProgress = scene.make.rexCircularProgressCanvas({
             return Math.floor(value * 100).toString(); 
         }
         ```
+
+### Events
+
+- On value changed
+    ```javascript
+    circularProgress.on('valuechange', function(newValue, oldValue, circularProgress){
+        //
+    }, scope);
+    ```
 
 ### Compare with Circular-progress shape
 

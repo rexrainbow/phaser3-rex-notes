@@ -12,6 +12,8 @@ declare namespace CustomProgress {
             ease?: string
         },
 
+        valuechangeCallback: (newValue: number, oldValue: number, customProgress: CustomProgress) => void,
+
     }
 }
 

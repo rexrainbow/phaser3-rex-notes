@@ -1574,6 +1574,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5837,6 +5844,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5953,6 +5967,8 @@
         <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
     <span class="p">},</span>
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5988,6 +6004,8 @@
     <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -6052,6 +6070,10 @@
 <li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
+<li><code>valuechangeCallback</code> : callback function when value changed.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">customProgress</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <h4 id="set-update-shape-callback">Set update shape callback<a class="headerlink" href="#set-update-shape-callback" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setUpdateShapesCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
@@ -6128,6 +6150,14 @@
 </ul>
 <h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
 <p>See <a href="../shape-custom-shapes/#shape-class">Shape class</a></p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On value changed
+    <div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">customProgress</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
                 
                   
                 

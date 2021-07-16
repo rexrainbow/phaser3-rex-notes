@@ -24,6 +24,7 @@ class CircularProgress extends Canvas {
         var width = radius * 2;
         super(scene, x, y, width, width);
         this.type = 'rexCircularProgressCanvas';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         this.setRadius(radius);
         this.setTrackColor(GetValue(config, 'trackColor', undefined));
@@ -55,6 +56,12 @@ class CircularProgress extends Canvas {
             GetValue(config, 'textFormatCallbackScope', undefined)
         );
 
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+        }
+
         this
             .setEaseValuePropName('value')
             .setEaseValueDuration(GetValue(config, 'easeValue.duration', 0))
@@ -80,8 +87,15 @@ class CircularProgress extends Canvas {
 
     set value(value) {
         value = Clamp(value, 0, 1);
-        this.dirty = this.dirty || (this._value != value);
+
+        var oldValue = this._value;
+        var valueChanged = (oldValue != value);
+        this.dirty = this.dirty || valueChanged;
         this._value = value;
+
+        if (valueChanged) {
+            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
+        }
     }
 
     setValue(value, min, max) {

@@ -1651,6 +1651,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-circular-progress-shape" class="md-nav__link">
     Compare with Circular-progress shape
   </a>
@@ -5877,6 +5884,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compare-with-circular-progress-shape" class="md-nav__link">
     Compare with Circular-progress shape
   </a>
@@ -6010,6 +6024,8 @@
         <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
     <span class="p">},</span>
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6041,6 +6057,8 @@
         <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
     <span class="p">},</span>
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6068,6 +6086,10 @@
 <li><code>easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
+<li><code>valuechangeCallback</code> : callback function when value changed.
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ul>
 <p>Add circular-progress from JSON</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCircularProgressCanvas</span><span class="p">({</span>
@@ -6092,6 +6114,12 @@
     <span class="nx">textFormatCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">easeValue</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
 
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
@@ -6281,6 +6309,14 @@
 </code></pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On value changed
+    <div class="codehilite"><pre><span></span><code><span class="nx">circularProgress</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="compare-with-circular-progress-shape">Compare with Circular-progress shape<a class="headerlink" href="#compare-with-circular-progress-shape" title="Permanent link">&para;</a></h3>
 <ul>

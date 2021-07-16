@@ -24,6 +24,7 @@ class CircularProgress extends BaseShapes {
         var width = radius * 2;
         super(scene, x, y, width, width);
         this.type = 'rexCircularProgress';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         this
             .addShape((new Circle()).setName('track'))
@@ -38,6 +39,12 @@ class CircularProgress extends BaseShapes {
         this.setThickness(GetValue(config, 'thickness', 0.2));
         this.setStartAngle(GetValue(config, 'startAngle', DefaultStartAngle));
         this.setAnticlockwise(GetValue(config, 'anticlockwise', false));
+
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.eventEmitter.on('valuechange', callback, scope);
+        }
 
         this
             .setEaseValuePropName('value')
@@ -64,8 +71,15 @@ class CircularProgress extends BaseShapes {
 
     set value(value) {
         value = Clamp(value, 0, 1);
-        this.dirty = this.dirty || (this._value != value);
+
+        var oldValue = this._value;
+        var valueChanged = (oldValue != value);
+        this.dirty = this.dirty || valueChanged;
         this._value = value;
+
+        if (valueChanged) {
+            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
+        }
     }
 
     setValue(value, min, max) {

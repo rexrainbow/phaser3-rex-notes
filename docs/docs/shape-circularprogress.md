@@ -66,7 +66,7 @@ Circular progress bar shape.
     import CircularProgress from 'phaser3-rex-plugins/plugins/circularprogress.js';
     ```
 - Add circular-progress object
-    ```javascript    
+    ```javascript
     var circularProgress = new CircularProgress(scene, x, y, radius, color, value, config);
     sscene.add.existing(image);
     ```
@@ -106,6 +106,8 @@ var circularProgress = scene.add.rexCircularProgress(x, y, radius, barColor, val
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },
 });
 ```
 
@@ -129,6 +131,8 @@ var circularProgress = scene.add.rexCircularProgress({
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },  
 });
 ```
 
@@ -144,6 +148,11 @@ var circularProgress = scene.add.rexCircularProgress({
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
+- `valuechangeCallback` : callback function when value changed.
+    ```javascript
+    function(newValue, oldValue, circularProgress) {
+    }
+    ```
 
 Add circular-progress from JSON
 
@@ -165,6 +174,8 @@ var circularProgress = scene.make.rexCircularProgress({
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },  
     
     add: true
 });
@@ -338,6 +349,15 @@ var circularProgress = scene.make.rexCircularProgress({
         circularProgress.setCenterColor(centerColor);
         // circularProgress.centerColor = centerColor;
         ```
+
+### Events
+
+- On value changed
+    ```javascript
+    circularProgress.on('valuechange', function(newValue, oldValue, circularProgress){
+        //
+    }, scope);
+    ```
 
 ### Compare with Circular-progress canvas
 

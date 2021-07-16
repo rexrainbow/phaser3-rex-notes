@@ -1,6 +1,5 @@
 import Slider from './Slider';
-import { IConfig } from './Slider';
 
 export default function (
-    config?: IConfig
+    config?: Slider.IConfig
 ): Slider;

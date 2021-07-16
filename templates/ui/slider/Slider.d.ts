@@ -23,7 +23,7 @@ declare namespace Slider {
             ease?: string
         },
 
-        valuechangeCallback: (newValue: number, oldValue: number, slider: Slider) => void
+        valuechangeCallback: (newValue: number, oldValue: number, slider: Slider) => void,
 
         enable?: boolean,
     }

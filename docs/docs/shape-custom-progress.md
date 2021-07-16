@@ -102,6 +102,8 @@ var customProgress = scene.add.rexCustomProgress(x, y, width, height, {
         duration: 0,
         ease: 'Linear'
     },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
+    },
 });
 ```
 
@@ -139,6 +141,8 @@ var customProgress = scene.add.rexCustomProgress({
     easeValue: {
         duration: 0,
         ease: 'Linear'
+    },
+    valuechangeCallback: function(newValue, oldValue, circularProgress) {
     },
 });
 ```
@@ -189,7 +193,11 @@ var customProgress = scene.add.rexCustomProgress({
 - `easeValue` : Parameters of easing value.
     - `easeValue.duration` : Duration of value easing, default is `0` (no easing).
     - `easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
-
+- `valuechangeCallback` : callback function when value changed.
+    ```javascript
+    function(newValue, oldValue, customProgress) {
+    }
+    ```
 
 #### Set update shape callback
 
@@ -282,3 +290,12 @@ Redraw shapes when
 #### Shape class
 
 See [Shape class](shape-custom-shapes.md#shape-class)
+
+### Events
+
+- On value changed
+    ```javascript
+    customProgress.on('valuechange', function(newValue, oldValue, customProgress){
+        //
+    }, scope);
+    ```

@@ -31,6 +31,8 @@ declare namespace CircularProgressCanvas {
             ease?: string
         },
 
+        valuechangeCallback: (newValue: number, oldValue: number, circularProgress: CircularProgressCanvas) => void,
+
     }
 }
 
