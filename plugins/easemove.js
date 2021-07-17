@@ -33,8 +33,8 @@ var EaseMoveTo = function (gameObject, duration, endX, endY, ease, destroyMode, 
     return easeMove;
 };
 
-var EaseMoveToDestroy = function (gameObject, duration, startX, startY, ease, easeMove) {
-    return EaseMoveTo(gameObject, duration, startX, startY, ease, true, easeMove);
+var EaseMoveToDestroy = function (gameObject, duration, endX, endY, ease, easeMove) {
+    return EaseMoveTo(gameObject, duration, endX, endY, ease, true, easeMove);
 }
 
 var EaseMoveFrom = function (gameObject, duration, startX, startY, ease, destroyMode, easeMove) {

@@ -1,5 +1,4 @@
 import 'phaser';
-import ContainerLite from '../../plugins/gameobjects/containerlite/ContainerLite';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,12 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var container = new ContainerLite(this, 400, 300, 200, 200)
-        this.add.existing(container)
-        var rect = new Phaser.GameObjects.Rectangle(this, 400, 300, 200, 200, 0xff0000);
-        container.add(rect);
-        this.scene.stop();
-        debugger
+        this.add.text(400, 300, 'Hello Phaser3').setOrigin(0.5);
     }
 
     update() { }
