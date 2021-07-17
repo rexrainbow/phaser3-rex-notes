@@ -74,10 +74,9 @@ Emit [particles](particles.md) along bounds of game object.
 
 ```javascript
 var particles = scene.plugins.get('rexParticlesAlongBounds').startEffect(gameObject, {
-    // padding: 0,
-
     textureKey: key,
     // textureFrames: undefined,
+    // padding: 0,
     // blendMode: 'ADD',
     // lifespan: 1000,
     // stepRate: 10,

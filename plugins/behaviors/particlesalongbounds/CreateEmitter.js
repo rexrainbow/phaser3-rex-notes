@@ -23,18 +23,16 @@ var CreateEmitter = function (particles, config) {
     var gravityX = GetValue(config, 'gravityX', 0);
     var gravityY = GetValue(config, 'gravityY', 0);
     if ((gravityX !== 0) || (gravityY !== 0)) {
-        if (globGravityVector === undefined) {
-            globGravityVector = new Vector2();
-        }
+        var gravityVector = new Vector2();
         var gameObject = config.gameObject;
         emitter.preUpdate = (function (time, delta) {
             var localGravityX, localGravityY;
             if (gameObject.rotation !== 0) {
-                globGravityVector
+                gravityVector
                     .setTo(gravityX, gravityY)
                     .rotate(-gameObject.rotation);
-                localGravityX = globGravityVector.x;
-                localGravityY = globGravityVector.y;
+                localGravityX = gravityVector.x;
+                localGravityY = gravityVector.y;
             } else {
                 localGravityX = gravityX;
                 localGravityY = gravityY;
@@ -46,7 +44,5 @@ var CreateEmitter = function (particles, config) {
 
     return emitter;
 }
-
-var globGravityVector;
 
 export default CreateEmitter;
