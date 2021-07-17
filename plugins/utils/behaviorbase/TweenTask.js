@@ -39,8 +39,8 @@ class TweenTask extends BehaviorBase {
         return this;
     }
 
-    restart() {
-        this.stop().start();
+    restart(tweenConfig) {
+        this.stop().start(tweenConfig);
         return this;
     }
 

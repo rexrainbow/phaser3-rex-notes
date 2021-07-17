@@ -10,20 +10,20 @@ var FadeOutDestroy = function (gameObject, duration, destroyMode, fade) {
         destroyMode = true;
     }
 
-    defaultConfig.mode = (destroyMode) ? 1 : 0;
-    defaultConfig.end = 0;
-    defaultConfig.duration = duration;
+    var config = {
+        mode: (destroyMode) ? 1 : 0,
+        end: 0,
+        duration: duration,
+    }
 
     if (fade === undefined) {
-        fade = new Fade(gameObject, defaultConfig);
+        fade = new Fade(gameObject, config);
     } else {
-        fade.resetFromJSON(defaultConfig);
+        fade.resetFromJSON(config);
     }
     fade.restart();
 
     return fade;
 };
-
-var defaultConfig = {}; // reuse this config
 
 export default FadeOutDestroy;

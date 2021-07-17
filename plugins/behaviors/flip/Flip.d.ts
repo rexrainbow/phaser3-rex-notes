@@ -1,4 +1,5 @@
 // import * as Phaser from 'phaser';
+import TweenTask from "../../utils/behaviorbase/TweenTask";
 
 export default Flip;
 
@@ -27,14 +28,13 @@ declare namespace Flip {
 
 }
 
-declare class Flip extends Phaser.Events.EventEmitter {
+declare class Flip extends TweenTask {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Flip.IConfig
     )
 
     flip(duration?: number): this;
-    stop(): this;
 
     setDuration(duration: number): this;
     duratiion: number;
@@ -58,6 +58,4 @@ declare class Flip extends Phaser.Events.EventEmitter {
             ((gameObject: Phaser.GameObjects.GameObject) => void),
         frame?: string
     ): this;
-
-    readonly isRunning: boolean;
 }

@@ -16,21 +16,22 @@ var FadeIn = function (gameObject, duration, alpha, fade) {
     if (endAlpha === undefined) {
         endAlpha = gameObject.alpha;
     }
-    defaultConfig.mode = 0;
-    defaultConfig.start = startAlpha;
-    defaultConfig.end = endAlpha;
-    defaultConfig.duration = duration;
+
+    var config = {
+        mode: 0,
+        start: startAlpha,
+        end: endAlpha,
+        duration: duration,
+    }
 
     if (fade === undefined) {
-        fade = new Fade(gameObject, defaultConfig);
+        fade = new Fade(gameObject, config);
     } else {
-        fade.resetFromJSON(defaultConfig);
+        fade.resetFromJSON(config);
     }
     fade.restart();
 
     return fade;
 };
-
-var defaultConfig = {}; // reuse this config
 
 export default FadeIn;
