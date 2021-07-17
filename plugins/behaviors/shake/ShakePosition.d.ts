@@ -1,0 +1,45 @@
+import TickTask from '../../utils/behaviorbase/TickTask';
+
+export default ShakePosition;
+
+declare namespace ShakePosition {
+
+    type ModeType = 0 | 1 | 'effect' | 'behavior';
+    type MagnitudeModeType = 0 | 1 | 'constant' | 'decay';
+
+    interface IConfig {
+        mode?: ModeType,
+        duration?: number,
+        magnitude?: number,
+        magnitudeMode?: MagnitudeModeType
+    }
+}
+
+declare class ShakePosition extends TickTask {
+    constructor(
+        gameObject: Phaser.GameObjects.GameObject,
+        config?: ShakePosition.IConfig
+    )
+
+    setEnable(enable?: boolean): this;
+    enable: boolean;
+
+    shake(duration?: number, magnitude?: number): this;
+    shake(config: {
+        duration?: number,
+        magnitude?: number,
+    }): this;
+
+    setMode(mode: ShakePosition.ModeType): this;
+    mode: number;
+
+    setDuration(duration: number): this;
+    duration: number;
+
+    setMagnitude(magnitude: number): this;
+    magnitude: number;
+
+    setMagnitudeMode(magnitudeMode: ShakePosition.MagnitudeModeType): this;
+    magnitudeMode: number;
+
+}
