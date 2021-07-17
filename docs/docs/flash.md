@@ -130,6 +130,7 @@ flash.setDuration(duration);
 
 ```javascript
 flash.setRepeat(repeat);
+// flash.repeat = repeat;
 ```
 
 ### Events
