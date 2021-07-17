@@ -122,5 +122,5 @@ pathFollower.setPath(path);
 pathFollower.setRotateToPath(rotateToPath, rotationOffset);
 ```
 
-- `rotateToPath` : Set true to change angle towards path
+- `rotateToPath` : Set `true` to change angle towards path
 - `rotationOffset` : Rotation offset in radian
