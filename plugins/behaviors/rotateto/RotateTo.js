@@ -51,7 +51,7 @@ class RotateTo extends TickTask {
         return this;
     }
 
-    rotateTo(angle, dir) {
+    rotateTo(angle, dir, speed) {
         if (typeof (angle) !== 'number') {
             var config = angle;
             angle = GetValue(config, 'angle', undefined);
@@ -66,6 +66,9 @@ class RotateTo extends TickTask {
             dir = 0;
         }
         this.dir = (typeof (dir) === 'string') ? DIRMODE[dir] : dir;
+        if (speed !== undefined) {
+            this.setSpeed(speed);
+        }
         super.start();
         return this;
     }

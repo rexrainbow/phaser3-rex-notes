@@ -88,11 +88,13 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
 - Clockwise/counter-clockwise
     ```javascript
     rotateTo.rotateTowardsPosition(x, y, dir);
+    // rotateTo.rotateTowardsPosition(x, y, dir, speed);
     ```
     - `dir` :
         - `0` : Shortest angle
         - `1`, or `'cw'` : Clockwise
         - `2`, or `'ccw'` : Counter-clockwise
+    - `speed` : Turn speed, degrees in second
 
 #### Rotate game object to angle
 
@@ -110,6 +112,7 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
         - `0` : Shortest angle
         - `1`, or `cw` : Clockwise
         - `2`, or `ccw` : Counter-clockwise
+    - `speed` : Turn speed, degrees in second
 
 ### Enable
 
