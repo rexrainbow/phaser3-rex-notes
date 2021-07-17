@@ -26,6 +26,20 @@ class Base extends Zone {
             return;
         }
 
+        if (fromScene) {
+            // Stop scene
+            var child;
+            for (var i = this.children.length - 1; i >= 0; i--) {
+                child = this.children[i];
+                if (!child.parentContainer &&  // Not in container
+                    !child.displayList         // Not in scene, neither in layer
+                ) {
+                    // Destroy child which is not in scene, container, or layer manually
+                    child.destroy();
+                }
+            }
+        }
+
         this.clear(!fromScene);
         super.destroy(fromScene);
     }

@@ -1,4 +1,4 @@
-import Fade from './behaviors/fade/Fade';
+import Fade from './fade';
 
 export default function FadeOutDestroy(
     gameObject: Phaser.GameObjects.GameObject,
