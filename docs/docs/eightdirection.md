@@ -109,6 +109,8 @@ var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
     speed: 200,
     // dir: '8dir',     // 0|'up&down'|1|'left&right'|2|'4dir'|3|'8dir'
     // rotateToDirection: false,
+    // wrap: false,
+    // padding: 0,
     // enable: true,
     // cursorKeys: scene.input.keyboard.createCursorKeys()
 });
@@ -121,6 +123,9 @@ var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
     - `'4dir'`, or `2` : Aaccept up, down, left or right cursor keys.
     - `'8dir'`, or `3` : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
 - `rotateToDirection` : Set true to change angle towards moving direction.
+- [Wrap](arcade-world.md#wrap)
+    - `wrap` : Set `true` to enable wrap mode. Default value is `false`.
+    - `padding`
 - `enable` : set `false` to disable moving.
 - `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.
 
@@ -150,3 +155,11 @@ eightDirection.setDirMode(dir);
     - `'left&right'`, or `1` : Aaccept left or right cursor keys only.
     - `'4dir'`, or `2` : Aaccept up, down, left or right cursor keys.
     - `'8dir'`, or `3` : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
+
+### Set wrap mode
+
+```javascript
+ship.setWrapMode(wrap, padding);
+```
+
+- `wrap` : Set `true` to enable wrap mode.

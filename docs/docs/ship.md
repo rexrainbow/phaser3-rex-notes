@@ -120,7 +120,7 @@ var ship = scene.plugins.get('rexShip').add(gameObject, {
 - Rotation
     - [`turnSpeed`](arcade-body.md#angular-velocity) : Angular velocity
 - [Wrap](arcade-world.md#wrap)
-    - `wrap` : Set `true` to enable wrap mode.
+    - `wrap` : Set `true` to enable wrap mode. Default value is `true`.
     - `padding`
 - `enable` : set `false` to disable moving.
 - `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.

@@ -1,10 +1,9 @@
 import TickTask from '../../utils/behaviorbase/TickTask';
 
-export default EightDirection;
+export default Ship;
 
-declare namespace EightDirection {
+declare namespace Ship {
 
-    type DirectionModeType = 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir';
     type CursorKeys = {
         up: Phaser.Input.Keyboard.Key,
         down: Phaser.Input.Keyboard.Key,
@@ -13,9 +12,11 @@ declare namespace EightDirection {
     }
 
     interface IConfig {
-        speed?: number,
-        dir?: DirectionModeType,
-        rotateToDirection?: boolean,
+
+        maxSpeed?: number,
+        acceleration?: number,
+        drag?: number,
+        turnSpeed?: number,
         enable?: boolean,
         wrap?: boolean,
         padding?: number,
@@ -23,28 +24,31 @@ declare namespace EightDirection {
     }
 }
 
-declare class EightDirection extends TickTask {
+declare class Ship extends TickTask {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: EightDirection.IConfig
+        config?: Ship.IConfig
     )
 
     setEnable(enable?: boolean): this;
     enable: boolean;
 
     setCursorKeys(
-        cursorKeys: EightDirection.CursorKeys
+        cursorKeys: Ship.CursorKeys
     ): this;
-    cursorKeys: EightDirection.CursorKeys;
+    cursorKeys: Ship.CursorKeys;
 
-    setSpeed(speed: number): this;
-    speed: number;
+    setMaxSpeed(maxSpeed: number): this;
+    maxSpeed: number;
 
-    setRotateToTarget(enable?: boolean): this;
-    rotateToTarget: boolean;
+    setAcceleration(acceleration: number): this;
+    acceleration: number;
 
-    setDirMode(dir: EightDirection.DirectionModeType): this;
-    dirMode: number;
+    setDrag(drag: number): this;
+    drag: number;
+
+    setTurnSpeed(angularVelocity: number): this;
+    angularVelocity: number;
 
     setWrapMode(
         wrap?: boolean,

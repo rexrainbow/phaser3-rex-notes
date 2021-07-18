@@ -2191,6 +2191,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-running" class="md-nav__link">
+    Is running
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5749,6 +5756,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-running" class="md-nav__link">
+    Is running
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5843,10 +5857,9 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexParticlesAlongBounds&#39;</span><span class="p">).</span><span class="nx">startEffect</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// padding: 0,</span>
-
     <span class="nx">textureKey</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
     <span class="c1">// textureFrames: undefined,</span>
+    <span class="c1">// padding: 0,</span>
     <span class="c1">// blendMode: &#39;ADD&#39;,</span>
     <span class="c1">// lifespan: 1000,</span>
     <span class="c1">// stepRate: 10,</span>
@@ -5930,6 +5943,10 @@
 <li><code>{min, max, steps}</code> : Pick values between min to max, with steps.</li>
 <li><code>{onEmit: function(particle, key, t, value) {return value}}</code> : Get return value from a function invoking.</li>
 </ul>
+<h3 id="is-running">Is running<a class="headerlink" href="#is-running" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+</code></pre></div>
+
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On fire completed, i.e. last particle is dead

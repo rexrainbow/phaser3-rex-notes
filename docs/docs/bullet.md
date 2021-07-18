@@ -103,11 +103,16 @@ Move game object toward current angle of game object, with a constant speed.
 ```javascript
 var bullet = scene.plugins.get('rexBullet').add(gameObject, {
     speed: 200,
+    // wrap: false,
+    // padding: 0,
     // enable: true
 });
 ```
 
 - `speed` : moving speed, pixels in second.
+- [Wrap](arcade-world.md#wrap)
+    - `wrap` : Set `true` to enable wrap mode. Default value is `false`.
+    - `padding`
 - `enable` : set `false` to disable moving.
 
 ### Speed
@@ -121,3 +126,11 @@ var bullet = scene.plugins.get('rexBullet').add(gameObject, {
     ```javascript
     var speed = bullet.speed;
     ```
+
+### Set wrap mode
+
+```javascript
+ship.setWrapMode(wrap, padding);
+```
+
+- `wrap` : Set `true` to enable wrap mode.

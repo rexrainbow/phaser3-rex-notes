@@ -16,15 +16,10 @@ class Bullet extends TickTask {
         if (!this.parent.body) {
             this.scene.physics.add.existing(this.parent, false);
         }
+        this.setWrapMode(GetValue(o, 'wrap', false), GetValue(o, 'padding', 0));
         this.setEnable(GetValue(o, 'enable', true));
         this.setSpeed(GetValue(o, 'speed', 200));
         return this;
-    }
-
-    toJSON() {
-        return {
-            tickingMode: this.tickingMode
-        };
     }
 
     get enable() {
@@ -51,6 +46,15 @@ class Bullet extends TickTask {
         return this;
     }
 
+    setWrapMode(wrap, padding) {
+        if (wrap === undefined) {
+            wrap = true;
+        }
+        this.wrap = wrap;
+        this.padding = padding;
+        return this;
+    }
+
     update(time, delta) {
         if (!this.enable) {
             SetVelocity(this.parent, 0, 0);
@@ -62,6 +66,11 @@ class Bullet extends TickTask {
         var vx = this.speed * Math.cos(rotation);
         var vy = this.speed * Math.sin(rotation);
         SetVelocity(gameObject, vx, vy);
+
+        if (this.wrap) {
+            gameObject.body.world.wrap(gameObject, this.padding);
+        }
+
         return this;
     }
 }

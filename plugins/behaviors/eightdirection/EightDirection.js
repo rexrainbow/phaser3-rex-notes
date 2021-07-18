@@ -10,7 +10,7 @@ class EightDirection extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
-        
+
         this.resetFromJSON(config);
         this.boot();
     }
@@ -23,14 +23,9 @@ class EightDirection extends TickTask {
         this.setDirMode(GetValue(o, 'dir', '8dir'));
         this.setSpeed(GetValue(o, 'speed', 200));
         this.setRotateToDirection(GetValue(o, 'rotateToDirection', false));
+        this.setWrapMode(GetValue(o, 'wrap', false), GetValue(o, 'padding', 0));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
         return this;
-    }
-
-    toJSON() {
-        return {
-            tickingMode: this.tickingMode
-        };
     }
 
     get enable() {
@@ -70,6 +65,15 @@ class EightDirection extends TickTask {
 
     setRotateToDirection(rotateToDirection) {
         this.rotateToDirection = rotateToDirection;
+        return this;
+    }
+
+    setWrapMode(wrap, padding) {
+        if (wrap === undefined) {
+            wrap = true;
+        }
+        this.wrap = wrap;
+        this.padding = padding;
         return this;
     }
 
@@ -141,6 +145,10 @@ class EightDirection extends TickTask {
         SetVelocity(gameObject, vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
             gameObject.rotation = rotation;
+        }
+
+        if (this.wrap) {
+            gameObject.body.world.wrap(gameObject, this.padding);
         }
         return this;
     }

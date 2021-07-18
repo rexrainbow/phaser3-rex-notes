@@ -28,12 +28,6 @@ class Ship extends TickTask {
         return this;
     }
 
-    toJSON() {
-        return {
-            tickingMode: this.tickingMode
-        };
-    }
-
     get enable() {
         return this.isRunning;
     }
@@ -54,9 +48,18 @@ class Ship extends TickTask {
         return this;
     }
 
-    setMaxSpeed(speed) {
+    get maxSpeed() {
+        return this._maxSpeed;
+    }
+
+    set maxSpeed(value) {
+        this._maxSpeed = value;
         var body = this.parent.body;
-        body.setMaxSpeed(speed);
+        body.setMaxSpeed(value);
+    }
+
+    setMaxSpeed(speed) {
+        this.maxSpeed = speed;
         return this;
     }
 
@@ -65,12 +68,19 @@ class Ship extends TickTask {
         return this;
     }
 
-    setDrag(drag) {
-        var body = this.parent.body;
-        body.setDrag(drag);
-        this.drag = drag;
+    get drag() {
+        return this._drag;
+    }
 
+    set drag(value) {
+        this._drag = value;
+        var body = this.parent.body;
+        body.setDrag(value);
         body.useDamping = true;
+    }
+
+    setDrag(drag) {
+        this.drag = drag;
         return this;
     }
 
@@ -80,6 +90,9 @@ class Ship extends TickTask {
     }
 
     setWrapMode(wrap, padding) {
+        if (wrap === undefined) {
+            wrap = true;
+        }
         this.wrap = wrap;
         this.padding = padding;
         return this;

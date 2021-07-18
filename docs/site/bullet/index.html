@@ -2307,6 +2307,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-wrap-mode" class="md-nav__link">
+    Set wrap mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5743,6 +5750,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-wrap-mode" class="md-nav__link">
+    Set wrap mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5858,12 +5872,19 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">bullet</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBullet&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">speed</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="c1">// wrap: false,</span>
+    <span class="c1">// padding: 0,</span>
     <span class="c1">// enable: true</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
 <li><code>speed</code> : moving speed, pixels in second.</li>
+<li><a href="../arcade-world/#wrap">Wrap</a><ul>
+<li><code>wrap</code> : Set <code>true</code> to enable wrap mode. Default value is <code>false</code>.</li>
+<li><code>padding</code></li>
+</ul>
+</li>
 <li><code>enable</code> : set <code>false</code> to disable moving.</li>
 </ul>
 <h3 id="speed">Speed<a class="headerlink" href="#speed" title="Permanent link">&para;</a></h3>
@@ -5875,6 +5896,13 @@
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">speed</span> <span class="o">=</span> <span class="nx">bullet</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span>
 </code></pre></div></li>
+</ul>
+<h3 id="set-wrap-mode">Set wrap mode<a class="headerlink" href="#set-wrap-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">ship</span><span class="p">.</span><span class="nx">setWrapMode</span><span class="p">(</span><span class="nx">wrap</span><span class="p">,</span> <span class="nx">padding</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>wrap</code> : Set <code>true</code> to enable wrap mode.</li>
 </ul>
                 
                   
