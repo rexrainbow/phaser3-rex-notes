@@ -19,7 +19,7 @@ class TextTyping extends BehaviorBase {
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.text = transferText(GetFastValue(o, 'text', ''));
+        this.text = TransferText(GetFastValue(o, 'text', ''));
         this.textLen = GetFastValue(o, 'textLen', 0);
         this.insertIdx = GetFastValue(o, 'insertIdx', null);
 
@@ -108,7 +108,7 @@ class TextTyping extends BehaviorBase {
     }
 
     appendText(text) {
-        var newText = this.text.concat(transferText(text));
+        var newText = this.text.concat(TransferText(text));
         if (this.isTyping) {
             this.setTypingContent(newText);
         } else {
@@ -150,7 +150,7 @@ class TextTyping extends BehaviorBase {
     }
 
     setTypingContent(text) {
-        this.text = transferText(text);
+        this.text = TransferText(text);
         this.textLen = this.getTextLength(this.text);
         return this;
     }
@@ -290,7 +290,7 @@ class TextTyping extends BehaviorBase {
     }
 }
 
-var transferText = function (text) {
+var TransferText = function (text) {
     if (Array.isArray(text)) {
         text = text.join('\n');
     } else if (typeof (text) === 'number') {
@@ -299,7 +299,6 @@ var transferText = function (text) {
     return text;
 }
 
-/** @private */
 const TYPEMODE = {
     'left-to-right': 0,
     'right-to-left': 1,

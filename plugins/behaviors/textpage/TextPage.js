@@ -144,7 +144,7 @@ class TextPage extends BehaviorBase {
     }
 
     showPage(idx) {
-        this.displayText(this.getPage());
+        this.displayText(this.getPage(idx));
         return this;
     }
 

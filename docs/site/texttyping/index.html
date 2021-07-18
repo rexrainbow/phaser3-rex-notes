@@ -5978,10 +5978,14 @@
 <li><code>setTextCallbackScope</code> : Scope of setTextCallback function.</li>
 </ul>
 <h3 id="start-typing">Start typing<a class="headerlink" href="#start-typing" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">typing</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">&#39;ABCDEFG&#39;</span><span class="p">);</span>
-<span class="c1">// typing.start(&#39;ABCDEFG&#39;, 333);  // speed in ms</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">typing</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+<span class="c1">// typing.start(text, speed); </span>
 </code></pre></div>
 
+<ul>
+<li><code>text</code> : Typing content string.</li>
+<li><code>speed</code> : Typing speed in ms.</li>
+</ul>
 <h4 id="typing-more-text">Typing more text<a class="headerlink" href="#typing-more-text" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">typing</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </code></pre></div>
@@ -6002,6 +6006,7 @@
 </ul>
 <h3 id="set-typing-speed">Set typing speed<a class="headerlink" href="#set-typing-speed" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>  <span class="c1">// speed in ms</span>
+<span class="c1">// typing.speed = speed;</span>
 </code></pre></div>
 
 <p>Set speed in <code>typing</code> event or setTextCallback to change typing speed of remaining text.</p>

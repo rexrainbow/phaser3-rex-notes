@@ -110,6 +110,10 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```javascript
     page.showPreviousPage();
     ```
+- Display page by index
+    ```javascript
+    page.showPage(index);
+    ```
 
 !!! note
     Initial page index is `-1`, so user could call `page.showNextPage()` to display first page.
@@ -127,6 +131,10 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - Get lines of previous page
     ```javascript
     var lines = page.getPreviousPage();
+    ```
+- Get lines of page by index
+    ```javascript
+    var lines = page.getPage(index);
     ```
 
 ### Other properties
