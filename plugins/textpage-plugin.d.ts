@@ -1,4 +1,4 @@
-import TextPage from './texttyping';
+import TextPage from './textpage';
 
 export default class TextPagePlugin extends Phaser.Plugins.BasePlugin {
     add(
