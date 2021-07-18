@@ -96,9 +96,12 @@ var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
 ### Start typing
 
 ```javascript
-typing.start('ABCDEFG');
-// typing.start('ABCDEFG', 333);  // speed in ms
+typing.start(text);
+// typing.start(text, speed); 
 ```
+
+- `text` : Typing content string.
+- `speed` : Typing speed in ms.
 
 #### Typing more text
 
@@ -128,6 +131,7 @@ typing.stop();
 
 ```javascript
 typing.setTypeSpeed(speed);  // speed in ms
+// typing.speed = speed;
 ```
 
 Set speed in `typing` event or setTextCallback to change typing speed of remaining text.
