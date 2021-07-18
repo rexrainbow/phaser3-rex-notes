@@ -343,7 +343,6 @@ class GridTable extends ContainerLite {
 // mixin
 Object.assign(
     GridTable.prototype,
-    Components.GetBounds,
     Methods
 );
 
