@@ -1,22 +1,15 @@
 // import * as Phaser from 'phaser';
 import Scrollable from '../utils/scrollable/Scrollable';
+import GridTableCore from '../../../plugins/gridtable'
 
 export default GridTable;
 
 declare namespace GridTable {
 
-    type MaskUpdateModeTyps = 0 | 1 | 'update' | 'everyTick';
-
-    interface CellData {
-        scene: Phaser.Scene,
-        width: number,
-        height: number,
-        item: unknown,
-        index: number,
-
-        setHeight(value: number): void;
-        setWidth(value: number): void;
-    }
+    type CreateCellContainerCallbackType = (
+        cell: GridTableCore.CellData,
+        cellContainer: Phaser.GameObjects.GameObject | null
+    ) => Phaser.GameObjects.GameObject | null;
 
     interface IConfig extends Scrollable.IConfig {
         space?: {
@@ -30,6 +23,8 @@ declare namespace GridTable {
             footer?: number,
         },
 
+        scrollMode?: GridTableCore.ScrollModeType,
+
         table: {
             width?: number | undefined,
             height?: number | undefined,
@@ -37,21 +32,12 @@ declare namespace GridTable {
             cellWidth?: number | undefined,
             cellHeight?: number | undefined,
             columns?: number,
-            mask?: (
-                {
-                    padding?: number,
-                    updateMode?: MaskUpdateModeTyps
-                } |
-                boolean
-            ),
+            mask?: GridTableCore.MaskConfig,
             interactive?: boolean,
             reuseCellContainer?: boolean,
         },
 
-        createCellContainerCallback: (
-            (cell: CellData, cellContainer: Phaser.GameObjects.GameObject | null)
-                => Phaser.GameObjects.GameObject | null
-        ),
+        createCellContainerCallback: CreateCellContainerCallbackType,
 
         items: unknown[]
     }
@@ -68,6 +54,6 @@ declare class GridTable extends Scrollable {
     refresh(): this;
     updateVisibleCell(cellIndex: number): this;
 
-    getCell(cellIndex: number): GridTable.CellData;
+    getCell(cellIndex: number): GridTableCore.CellData;
     getCellContainer(cellIndex: number): Phaser.GameObjects.GameObject | null;
 }

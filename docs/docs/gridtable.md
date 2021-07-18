@@ -86,10 +86,12 @@ var config = {
     cellWidth: 30,
 
     cellVisibleCallback: null,
+    // cellVisibleCallback: function (cell, cellContainer, table) {},
     cellVisibleCallbackScope: undefined,
     reuseCellContainer: false,
 
     cellInvisibleCallback: null,
+    // cellInvisibleCallback: function(cell) {},
     cellInvisibleCallbackScope: undefined,
 
     clamplTableOXY: true,
@@ -108,9 +110,24 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
     - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
 - `cellWidth` : Width of each cell.
     - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.
-- `cellVisibleCallback` , `cellVisibleCallbackScope` : Callback when cell begins visible.
+- `cellVisibleCallback` , `cellVisibleCallbackScope` : [Callback when cell begins visible](gridtable.md#cell-begins-visible).
+    ```javascript
+    function (cell, cellContainer, table) {
+        if (cellContainer === null) { // No reusable cell container, create a new one
+            var scene = cell.scene;
+            // cellContainer = scene.add.container();
+        }
+        // Set child properties of cell container ...
+        cell.setContainer(cellContainer); // Assign cell container
+    }
+    ```
 - `reuseCellContainer` : Set `true` to reuse cell container when cell is visible.
-- `cellInvisibleCallback`, `cellInvisibleCallbackScope`: Callback when cell begins invisible.
+- `cellInvisibleCallback`, `cellInvisibleCallbackScope`: [Callback when cell begins invisible](gridtable.md#cell-begins-invisible)
+    ```javascript
+    function (cell) {
+        // var container = cell.popContainer();
+    }
+    ```
 - `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
     - Set `false` when dragging by [scroller](scroller.md)
 - `scrollMode` :
@@ -264,7 +281,7 @@ It is equal to `cellInvisibleCallback` in configuration.
 ```javascript
 {
     // ...
-    cellInvisibleCallback: function(cell) { 
+    cellInvisibleCallback: function(cell) {
         // var container = cell.popContainer();
     },
     // ...
