@@ -220,7 +220,7 @@ fileChooser.setAccept(accept);
 scene.plugins.get('rexFileChooser').open({
     // accept: '',
     // multiple: false,
-    // delay: 200
+    // closeDelay: 200
 })
     .then(function(result) {
         // var files = result.files;
