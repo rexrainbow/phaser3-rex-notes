@@ -9,8 +9,10 @@ var CreateEmitter = function (particles, config) {
     var emitter = particles.createEmitter(CreateEmitterConfig(config));
     BuildRepeatEdgeEmitter(emitter, config);
 
+    particles.isRunning = true;
     var reuse = GetValue(config, 'reuse', false);
     particles.on('complete', function () {
+        particles.isRunning = false;
         particles.removeEmitter(emitter);
         emitter = null;
         if (!reuse) {

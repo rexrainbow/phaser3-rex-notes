@@ -148,6 +148,12 @@ Format of `spread`, `scale`, `alpha`, `tint` parameters :
 - `{min, max, steps}` : Pick values between min to max, with steps.
 - `{onEmit: function(particle, key, t, value) {return value}}` : Get return value from a function invoking.
 
+### Is running
+
+```javascript
+var isRunning = particles.isRunning;
+```
+
 ### Events
 
 - On fire completed, i.e. last particle is dead
