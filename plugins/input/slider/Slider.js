@@ -15,14 +15,9 @@ class Slider extends BehaviorBase {
 
         this._enable = undefined;
         this._value = undefined;
-        this.endPoints = [{
-            x: 0,
-            y: 0
-        },
-        {
-            x: 0,
-            y: 0
-        }
+        this.endPoints = [
+            { x: 0, y: 0 },
+            { x: 0, y: 0 }
         ];
 
         var callback = GetValue(config, 'valuechangeCallback', null);
