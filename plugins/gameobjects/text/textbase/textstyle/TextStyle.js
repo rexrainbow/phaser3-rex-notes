@@ -105,7 +105,7 @@ class TextStyle {
         this._font;
 
         //  Set to defaults + user style
-        this.setStyle(style, false);
+        this.setStyle(style, false, true);
 
         var metrics = GetValue(style, 'metrics', false);
 
@@ -134,9 +134,12 @@ class TextStyle {
         return (this.fixedWidth > 0) && (this.wrapMode !== CONST.NO_WRAP) && (this.wrapWidth === 0);
     }
 
-    setStyle(style, updateText) {
+    setStyle(style, updateText, setDefaults) {
         if (updateText === undefined) {
             updateText = true;
+        }
+        if (setDefaults === undefined) {
+            setDefaults = false;
         }
 
         if (style && style.hasOwnProperty('wrap')) {
@@ -161,7 +164,7 @@ class TextStyle {
         for (var key in propertyMap) {
             var prop = propertyMap[key];  // [ Object Key, Default Value, preCallback ]
             var objKey = prop[0];
-            var defaultValue = prop[1];
+            var defaultValue = (setDefaults) ? prop[1] : this[key];
             var postCallback = prop[2];
 
             var value = GetAdvancedValue(style, objKey, defaultValue);
@@ -230,7 +233,7 @@ class TextStyle {
 
     update(recalculateMetrics) {
         if (recalculateMetrics) {
-            this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
+            this._font = `${this.fontStyle} ${this.fontSize} ${this.fontFamily}`.trim();
 
             this.metrics = MeasureText(this);
         }
@@ -239,7 +242,7 @@ class TextStyle {
     }
 
     buildFont() {
-        var newFont = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
+        var newFont = `${this.fontStyle} ${this.fontSize} ${this.fontFamily}`.trim();
         if (newFont !== this._font) {
             this._font = newFont;
             //this.metrics = MeasureText(this);
@@ -553,6 +556,25 @@ class TextStyle {
             descent: metrics.descent,
             fontSize: metrics.fontSize
         };
+    }
+
+    setTextMetrics(metrics, font) {
+        this.ascent = metrics.ascent;
+        this.descent = metrics.descent;
+        this.fontSize = metrics.fontSize;
+
+        if (font) {
+            if (typeof font === 'string') {
+                this.fontFamily = font;
+                this.fontSize = '';
+                this.fontStyle = '';
+            } else {
+                this.fontFamily = GetValue(font, 'fontFamily', this.fontFamily);
+                this.fontSize = GetValue(font, 'fontSize', this.fontSize);
+                this.fontStyle = GetValue(font, 'fontStyle', this.fontStyle);
+            }
+        }
+        return this.parent.updateText(true);
     }
 
     get lineHeight() {

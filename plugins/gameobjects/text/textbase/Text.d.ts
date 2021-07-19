@@ -218,7 +218,21 @@ declare class Text extends CanvasGameObjectBase {
         ascent: number,
         descent: number,
         fontSize: number
-    }
+    };
+
+    setTextMetrics(
+        metrics: {
+            ascent: number,
+            descent: number,
+            fontSize: number
+        },
+        font: string |
+        {
+            fontFamily?: string,
+            fontSize?: string,
+            fontStyle?: string
+        }
+    ): this;
 
     style: {
         color: string | null,

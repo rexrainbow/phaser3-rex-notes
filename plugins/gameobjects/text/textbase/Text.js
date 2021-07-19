@@ -440,6 +440,10 @@ class Text extends GameObject {
         return this.style.getTextMetrics();
     }
 
+    setTextMetrics(metrics, font) {
+        return this.style.setTextMetrics(metrics, font);
+    }
+
     toJSON() {
         var out = Components.ToJSON(this);
 
