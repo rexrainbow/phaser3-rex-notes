@@ -21,17 +21,16 @@ class Demo extends Phaser.Scene {
             },
         })
 
-        var txt1 =  this.add.rexBBCodeText(400, 30, s, {         
+        var txt1 = this.add.rexBBCodeText(400, 30, s, {
             wrap: {
                 mode: 'char',
                 width: 200
             },
         })
 
-        debugger
         txt1.setTextMetrics(
             txt0.getTextMetrics(),
-            {fontSize: '60px'}
+            { fontSize: txt0.style.fontSize }
         )
     }
 

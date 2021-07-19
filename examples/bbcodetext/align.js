@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     create() {
         var s = `\
 [align=left]LeftLeftLeftLeftLeftLeftLeft[/align]
-[align=center]CenterCenterCenterCenter[/align]
+[color=blue][align=center]CenterCenterCenterCenter[/align][/color]
 [color=yellow]abc[/color]\
 `
         this.add.rexBBCodeText(400, 300, s, {
