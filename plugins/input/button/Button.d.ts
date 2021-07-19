@@ -19,9 +19,9 @@ declare class Buttons extends Phaser.Events.EventEmitter {
         config?: Buttons.IConfig
     )
 
-    enable: boolean;
     setEnable(enable?: boolean): this;
     toggleEnable(): this;
+    enable: boolean;
 
     setMode(
         mode?: 0 | 1 | 'pointerdown' | 'press' | 'pointerup' | 'release'

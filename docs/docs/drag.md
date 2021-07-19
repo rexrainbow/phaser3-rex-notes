@@ -123,6 +123,7 @@ var isDragging = drag.isDragging;
 
 ```javascript
 drag.setAxisRotation(rad);
+// drag.axisRotation = rad;
 ```
 
 ### Set axis mode
