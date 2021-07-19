@@ -1,5 +1,4 @@
-import TextEdit from './textedit.js';
-import Edit from './behaviors/textedit/Edit.js';
+import { TextEdit, Edit } from './textedit.js';
 
 class TextEditPlugin extends Phaser.Plugins.BasePlugin {
 
