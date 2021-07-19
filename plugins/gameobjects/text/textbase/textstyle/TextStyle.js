@@ -559,20 +559,18 @@ class TextStyle {
     }
 
     setTextMetrics(metrics, font) {
-        this.ascent = metrics.ascent;
-        this.descent = metrics.descent;
-        this.fontSize = metrics.fontSize;
+        this.metrics.ascent = metrics.ascent;
+        this.metrics.descent = metrics.descent;
+        this.metrics.fontSize = metrics.fontSize;
 
-        if (font) {
-            if (typeof font === 'string') {
-                this.fontFamily = font;
-                this.fontSize = '';
-                this.fontStyle = '';
-            } else {
-                this.fontFamily = GetValue(font, 'fontFamily', this.fontFamily);
-                this.fontSize = GetValue(font, 'fontSize', this.fontSize);
-                this.fontStyle = GetValue(font, 'fontStyle', this.fontStyle);
-            }
+        if (typeof font === 'string') {
+            this.fontFamily = font;
+            this.fontSize = '';
+            this.fontStyle = '';
+        } else {
+            this.fontFamily = GetValue(font, 'fontFamily', this.fontFamily);
+            this.fontSize = GetValue(font, 'fontSize', this.fontSize);
+            this.fontStyle = GetValue(font, 'fontStyle', this.fontStyle);
         }
         return this.parent.updateText(true);
     }

@@ -5,6 +5,19 @@ export default Text;
 
 declare namespace Text {
 
+    type MetricsType = {
+        ascent: number,
+        descent: number,
+        fontSize: number
+    };
+
+    type FontConfigType = string |
+    {
+        fontFamily?: string,
+        fontSize?: string,
+        fontStyle?: string
+    };
+
     interface TextStyle {
         fontFamily?: string,
         fontSize?: string,
@@ -110,14 +123,7 @@ declare class Text extends CanvasGameObjectBase {
     ): this;
     setWrapWidth(width: number): this;
 
-    setFont(
-        font: string |
-        {
-            fontFamily?: string,
-            fontSize?: string,
-            fontStyle?: string
-        }
-    ): this;
+    setFont(font: Text.FontConfigType): this;
     setFontFamily(family: string): this;
     setFontSize(size: number | string): this;
     setFontStyle(style: string): this;
@@ -214,24 +220,11 @@ declare class Text extends CanvasGameObjectBase {
     setSize(width?: number, height?: number): this;
     resize(width?: number, height?: number): this;
 
-    getTextMetrics(): {
-        ascent: number,
-        descent: number,
-        fontSize: number
-    };
+    getTextMetrics(): Text.MetricsType;
 
     setTextMetrics(
-        metrics: {
-            ascent: number,
-            descent: number,
-            fontSize: number
-        },
-        font: string |
-        {
-            fontFamily?: string,
-            fontSize?: string,
-            fontStyle?: string
-        }
+        metrics: Text.MetricsType,
+        font: Text.FontConfigType
     ): this;
 
     style: {
