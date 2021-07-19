@@ -1,3 +1,5 @@
+import InputText from "../../inputtext";
+
 export interface IConfigOpen {
     type?: string,
     enterClose?: boolean,
@@ -30,4 +32,5 @@ export default class TextEdit {
     readonly isOpened: boolean;
     readonly text: string;
 
+    readonly inputText: InputText;
 }

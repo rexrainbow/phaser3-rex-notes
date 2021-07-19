@@ -94,7 +94,7 @@ Create an [input text object](textedit.md) above a text object to edit string co
     - Set `dom.createContainer` to `true`.
 - Import class
     ```javascript
-    import TextEdit from 'phaser3-rex-plugins/plugins/textedit.js';
+    import { TextEdit } from 'phaser3-rex-plugins/plugins/textedit.js';
     ```
 - Add text-edit behavior
     ```javascript

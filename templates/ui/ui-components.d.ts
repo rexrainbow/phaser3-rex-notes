@@ -55,7 +55,7 @@ import {
     Hide,
     IsShown,
 } from './utils/Hide';
-import Edit from '../../plugins/behaviors/textedit/Edit';
+import { Edit } from '../../plugins/textedit';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent';
 import GetViewport from '../../plugins/utils/system/GetViewport';

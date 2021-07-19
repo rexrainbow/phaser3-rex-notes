@@ -1,2 +1,3 @@
 import TextEdit from './behaviors/textedit/TextEdit.js';
-export default TextEdit;
+import Edit from './behaviors/textedit/Edit.js';
+export { TextEdit, Edit };

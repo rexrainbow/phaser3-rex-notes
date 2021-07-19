@@ -45,7 +45,7 @@ import TextBoxFactory from './textbox/Factory';
 import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 
-import Edit from '../../plugins/behaviors/textedit/Edit';
+import { Edit } from '../../plugins/textedit';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
