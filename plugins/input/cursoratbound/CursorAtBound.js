@@ -59,6 +59,26 @@ class CursorAtBound extends CursorKeys {
         this.setKeyState('up', atTopBound);
         this.setKeyState('down', atBottomBound);
     }
+
+    get up() {
+        return this.upKeyDown;
+    }
+
+    get down() {
+        return this.downKeyDown;
+    }
+
+    get left() {
+        return this.leftKeyDown;
+    }
+
+    get right() {
+        return this.rightKeyDown;
+    }
+    
+    get noKey() {
+        return this.noKeyDown;
+    }
 }
 
 export default CursorAtBound;
