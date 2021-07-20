@@ -1,7 +1,7 @@
-import soundFade from './soundfade.js';
+import SoundFade from './soundfade.js';
 
-const fadeIn = soundFade.fadeIn;
-const fadeOut = soundFade.fadeOut;
+const FadeIn = SoundFade.fadeIn;
+const FadeOut = SoundFade.fadeOut;
 
 class SoundFadePlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -14,11 +14,11 @@ class SoundFadePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     fadeIn(scene, sound, duration, endVolume, startVolume) {
-        return fadeIn(scene, sound, duration, endVolume, startVolume);
+        return FadeIn(scene, sound, duration, endVolume, startVolume);
     }
 
     fadeOut(scene, sound, duration, destroy) {
-        return fadeOut(scene, sound, duration, destroy);
+        return FadeOut(scene, sound, duration, destroy);
     }
 }
 
