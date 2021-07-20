@@ -115,8 +115,14 @@ seq.start();
     ```javascript
     var eventEmitter = actionScope[fnName].call(actionScope, param0, param1 ...);
     ```
-        - Return an [event emitter](eventemitter3.md) to pause the sequence, otherwise run next command  
-        - Sequence will continue when that event emitter fires `complete` event
+    - Return an [event emitter](eventemitter3.md) to pause the sequence, otherwise run next command  
+    - Sequence will continue when that event emitter fires `complete` event
+
+### Stop
+
+```javascript
+seq.stop();
+```
 
 ### Events
 
@@ -170,3 +176,53 @@ Now this scope supports 3 commands
 - print(msg): `['print', msg]`
 - waitClick(): `['wait-click']`
 - waitTime(delay): `['wait-time', delay]`
+
+### State
+
+```javascript
+var state = seq.state;
+```
+
+- `0` : Idle
+- `1` : Run
+- `2` : Last command
+- `3` : Completed
+
+
+```javascript
+var completed = seq.completed; // seq.state === 3
+```
+
+### Other properties
+
+- Yoyo
+    - Get
+        ```javascript
+        var yoyo = seq.yoyo;
+        ```
+    - Set
+        ```javascript
+        seq.setYoyo();
+        seq.setYoyo(fals);
+        // seq.yoyo = yoyo;
+        ```
+- Repeat
+    - Get
+        ```javascript
+        var repeat = seq.repeat;
+        ```
+    - Set
+        ```javascript
+        seq.setRepeat(count);
+        ```
+- Loop
+    - Get
+        ```javascript
+        var loop = seq.loop;
+        ```
+    - Set
+        ```javascript
+        seq.setLoop();
+        seq.setLoop(fals);
+        // seq.loop = loop;
+        ```

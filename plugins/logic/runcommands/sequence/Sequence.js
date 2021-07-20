@@ -17,7 +17,7 @@ class Sequence {
         this.setYoyo(GetValue(config, 'yoyo', false));
         this.setRepeat(GetValue(config, 'repeat', 0));
         this.setLoop(GetValue(config, 'loop', false));
-        this.state = 0; // 0: idle, 1: run, 2: run-last
+        this.state = 0; // 0: idle, 1: run, 2: run-last, 3: completed
         this.task = undefined;
     }
 
@@ -61,16 +61,19 @@ class Sequence {
     }
 
     stop() {
-        this.state = 0;
         if (this.task) {
             this.task.off('complete', this.runNextCommands, this);
             this.task = undefined;
         }
+        this.state = 0;
         return this;
     }
 
-    setYoyo(m) {
-        this.yoyo = m;
+    setYoyo(yoyo) {
+        if (yoyo === undefined) {
+            yoyo = true;
+        }
+        this.yoyo = yoyo;
         return this;
     }
 
@@ -80,8 +83,11 @@ class Sequence {
         return this;
     }
 
-    setLoop(m) {
-        this.loop = m;
+    setLoop(loop) {
+        if (loop === undefined) {
+            loop = true;
+        }
+        this.loop = loop;
         this.resetRepeatCount();
         return this;
     }
@@ -92,7 +98,7 @@ class Sequence {
     }
 
     get completed() {
-        return (this.state === 0);
+        return (this.state === 3);
     }
 
     get currentCommandIndex() {
@@ -123,7 +129,7 @@ class Sequence {
                     if (this.repeatCount > 0) {
                         this.repeatCount--;
                     } else {
-                        this.state = 2; // goto idle at next running
+                        this.state = 2; // goto completed at next running
                     }
                 } else {
                     this.index += this.indexStep;
@@ -136,7 +142,7 @@ class Sequence {
                     if (this.repeatCount > 0) {
                         this.repeatCount--;
                     } else {
-                        this.state = 2; // goto idle at next running
+                        this.state = 2; // goto completed at next running
                     }
                 } else {
                     this.index += this.indexStep;
@@ -150,7 +156,7 @@ class Sequence {
     }
 
     complete() {
-        this.state = 0;
+        this.state = 3;
         this.emit('complete', this);
     }
 }
