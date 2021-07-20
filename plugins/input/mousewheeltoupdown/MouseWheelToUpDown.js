@@ -35,6 +35,18 @@ class MouseWheelToUpDown extends CursorKeys {
         this.setKeyState('up', dy < 0);
         this.setKeyState('down', dy > 0);
     }
+    
+    get up() {
+        return this.upKeyDown;
+    }
+
+    get down() {
+        return this.downKeyDown;
+    }
+        
+    get noKey() {
+        return this.noKeyDown;
+    }
 }
 
 export default MouseWheelToUpDown;
