@@ -3453,6 +3453,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -3462,6 +3469,20 @@
           <li class="md-nav__item">
   <a href="#action-of-commands" class="md-nav__link">
     Action of commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -5784,6 +5805,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -5793,6 +5821,20 @@
           <li class="md-nav__item">
   <a href="#action-of-commands" class="md-nav__link">
     Action of commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -5919,10 +5961,16 @@
 <ul>
 <li>Run command :
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">eventEmitter</span> <span class="o">=</span> <span class="nx">actionScope</span><span class="p">[</span><span class="nx">fnName</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">actionScope</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span> <span class="p">...);</span>
-</code></pre></div>
-        - Return an <a href="../eventemitter3/">event emitter</a> to pause the sequence, otherwise run next command<br />
-        - Sequence will continue when that event emitter fires <code>complete</code> event</li>
+</code></pre></div><ul>
+<li>Return an <a href="../eventemitter3/">event emitter</a> to pause the sequence, otherwise run next command  </li>
+<li>Sequence will continue when that event emitter fires <code>complete</code> event</li>
 </ul>
+</li>
+</ul>
+<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">seq</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div>
+
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On sequence completed :</li>
@@ -5971,6 +6019,53 @@
 <li>print(msg): <code>['print', msg]</code></li>
 <li>waitClick(): <code>['wait-click']</code></li>
 <li>waitTime(delay): <code>['wait-time', delay]</code></li>
+</ul>
+<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+</code></pre></div>
+
+<ul>
+<li><code>0</code> : Idle</li>
+<li><code>1</code> : Run</li>
+<li><code>2</code> : Last command</li>
+<li><code>3</code> : Completed</li>
+</ul>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">.</span><span class="nx">completed</span><span class="p">;</span> <span class="c1">// seq.state === 3</span>
+</code></pre></div>
+
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Yoyo<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">yoyo</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">.</span><span class="nx">yoyo</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">seq</span><span class="p">.</span><span class="nx">setYoyo</span><span class="p">();</span>
+<span class="nx">seq</span><span class="p">.</span><span class="nx">setYoyo</span><span class="p">(</span><span class="nx">fals</span><span class="p">);</span>
+<span class="c1">// seq.yoyo = yoyo;</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Repeat<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">repeat</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">.</span><span class="nx">repeat</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">seq</span><span class="p">.</span><span class="nx">setRepeat</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Loop<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">loop</span> <span class="o">=</span> <span class="nx">seq</span><span class="p">.</span><span class="nx">loop</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">seq</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">();</span>
+<span class="nx">seq</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="nx">fals</span><span class="p">);</span>
+<span class="c1">// seq.loop = loop;</span>
+</code></pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   
