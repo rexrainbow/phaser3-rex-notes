@@ -8,7 +8,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateScrollableSizer = function (config) {
     var scene = this.scene;
     var scrollMode = GetScrollMode(config);
-    var scrollableSizer = new Sizer(scene, { orientation: scrollMode });
+    var scrollableSizer = new Sizer(scene, { orientation: scrollMode });  
+    // A child which not put into scene
 
     var child = GetValue(config, 'child.gameObject', undefined);
     var sliderConfig = GetValue(config, 'slider', undefined),

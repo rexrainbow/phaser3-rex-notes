@@ -35,7 +35,7 @@ class Base extends Zone {
                     !child.displayList         // Not in scene, neither in layer
                 ) {
                     // Destroy child which is not in scene, container, or layer manually
-                    child.destroy();
+                    child.destroy(fromScene);
                 }
             }
         }
