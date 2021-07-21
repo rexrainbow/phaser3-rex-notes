@@ -40,6 +40,7 @@ class Base extends Zone {
             }
         }
 
+        // Destroy/remove children
         this.clear(!fromScene);
         super.destroy(fromScene);
     }
