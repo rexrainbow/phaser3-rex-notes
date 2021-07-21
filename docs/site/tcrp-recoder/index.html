@@ -3505,6 +3505,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clear-commands" class="md-nav__link">
+    Clear commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause-resume-stop-recording" class="md-nav__link">
     Pause, Resume, stop recording
   </a>
@@ -5814,6 +5821,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#clear-commands" class="md-nav__link">
+    Clear commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pause-resume-stop-recording" class="md-nav__link">
     Pause, Resume, stop recording
   </a>
@@ -5931,6 +5945,16 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTCRP&#39;</span><span class="p">).</span><span class="nx">addRecorder</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div>
 
+<ul>
+<li>Destroy when scene stopped</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTCRP&#39;</span><span class="p">).</span><span class="nx">addRecorder</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li>Destroy when game object destroyed</li>
+</ul>
 <h3 id="start-recording">Start recording<a class="headerlink" href="#start-recording" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">recorder</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 <span class="c1">// recorder.start(startAt);  // start-at time in ms</span>
@@ -5954,6 +5978,10 @@
     <span class="p">[</span><span class="nx">time</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span><span class="nx">command1</span><span class="p">]],</span>
     <span class="p">...</span>
 <span class="p">]</span>
+</code></pre></div>
+
+<h3 id="clear-commands">Clear commands<a class="headerlink" href="#clear-commands" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">recorder</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
 
 <h3 id="pause-resume-stop-recording">Pause, Resume, stop recording<a class="headerlink" href="#pause-resume-stop-recording" title="Permanent link">&para;</a></h3>

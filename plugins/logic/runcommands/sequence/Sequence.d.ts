@@ -1,5 +1,3 @@
-import EventEmitter from '../../../utils/eventemitter/EventEmitter';
-
 export default Sequence;
 
 declare namespace Sequence {
@@ -10,7 +8,7 @@ declare namespace Sequence {
     }
 }
 
-declare class Sequence extends EventEmitter {
+declare class Sequence extends Phaser.Events.EventEmitter {
     constructor(config?: Sequence.IConfig);
 
     load(

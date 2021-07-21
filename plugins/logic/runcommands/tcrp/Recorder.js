@@ -78,6 +78,11 @@ class Recorder extends BehaviorBase {
         this.clock.timeScale = timeScale;
     }
 
+    setTimeScale(timeScale) {
+        this.timeScale = timeScale;
+        return this;
+    }
+
     get now() {
         return this.clock.now;
     }
@@ -109,6 +114,7 @@ class Recorder extends BehaviorBase {
 
     clear() {
         this.commands.length = 0;
+        return this;
     }
 }
 

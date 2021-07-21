@@ -136,9 +136,21 @@ class Player extends BehaviorBase {
         return (this.state === 2);
     }
 
-    setTimeScale(value) {
-        this.clock.timeScale = value;
+    get timeScale() {
+        return this.clock.timeScale;
+    }
+
+    set timeScale(timeScale) {
+        this.clock.timeScale = timeScale;
+    }
+
+    setTimeScale(timeScale) {
+        this.timeScale = timeScale;
         return this;
+    }
+
+    get now() {
+        return this.clock.now;
     }
 
     update(now) {

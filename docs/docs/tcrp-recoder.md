@@ -76,6 +76,16 @@ Recorder of **T** ime-**C** ommand-**R** ecorder-**P** layer, to store commands 
 var recorder = scene.plugins.get('rexTCRP').addRecorder(scene);
 ```
 
+- Destroy when scene stopped
+
+or
+
+```javascript
+var recorder = scene.plugins.get('rexTCRP').addRecorder(gameObject);
+```
+
+- Destroy when game object destroyed
+
 ### Start recording
 
 ```javascript
@@ -108,6 +118,12 @@ Format of return commands:
     [time, [command0,command1]],
     ...
 ]
+```
+
+### Clear commands
+
+```javascript
+recorder.clear();
 ```
 
 ### Pause, Resume, stop recording
