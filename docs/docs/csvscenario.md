@@ -96,6 +96,12 @@ scenario.load(csvString, scope, {
 - `argsConvertScope`: scope of argsConvert
 - `delimiter` : Delimiter of CSV string.
 
+#### Append csv script
+
+```javascript
+scenario.append(csvString);
+```
+
 ### Start running instructions
 
 ```javascript
@@ -201,6 +207,15 @@ Example: A label named 'AA'
 #LABEL,AA
 ```
 
+- Last label :
+    ```javascript
+    var label = scenario.lastLabel;
+    ```
+- Previous label :
+    ```javascript
+    var previousLabel = scenario.previousLabel;
+    ```
+
 #### Exit
 
 Exit current execution.
@@ -290,19 +305,36 @@ Example:
     #WAIT,click
     ```
     ```javascript
-    scenario.continue('click')
+    scenario.continue('click');
     ```
 
-### Other methods
-
-#### Pause
+### Pause
 
 ```javascript
-scenario.pause()
+scenario.pause();
 ```
 
-#### Resume
+### Resume
 
 ```javascript
-scenario.resume()
+scenario.resume();
 ```
+
+### Clear
+
+Stop running and clear instructions.
+
+```javascript
+scenario.clear();
+```
+
+### States
+
+- Is running
+    ```javascript
+    var isRunning = scenario.isRunning;
+    ```
+- Is paused
+    ```javascript
+    var isPaused = scenario.isPaused;
+    ```

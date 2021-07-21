@@ -3455,6 +3455,19 @@
     Load csv script
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append-csv-script" class="md-nav__link">
+    Append csv script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3554,14 +3567,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#pause" class="md-nav__link">
     Pause
   </a>
@@ -3575,8 +3580,17 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states" class="md-nav__link">
+    States
+  </a>
   
 </li>
         
@@ -5876,6 +5890,19 @@
     Load csv script
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append-csv-script" class="md-nav__link">
+    Append csv script
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5975,14 +6002,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#pause" class="md-nav__link">
     Pause
   </a>
@@ -5996,8 +6015,17 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#states" class="md-nav__link">
+    States
+  </a>
   
 </li>
         
@@ -6110,6 +6138,10 @@
 <li><code>argsConvertScope</code>: scope of argsConvert</li>
 <li><code>delimiter</code> : Delimiter of CSV string.</li>
 </ul>
+<h4 id="append-csv-script">Append csv script<a class="headerlink" href="#append-csv-script" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">csvString</span><span class="p">);</span>
+</code></pre></div>
+
 <h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
     <span class="c1">// label: &#39;&#39;,</span>
@@ -6189,6 +6221,14 @@
 <div class="codehilite"><pre><span></span><code><span class="err">#LABEL,AA</span>
 </code></pre></div>
 
+<ul>
+<li>Last label :
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scenario</span><span class="p">.</span><span class="nx">lastLabel</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Previous label :
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">previousLabel</span> <span class="o">=</span> <span class="nx">scenario</span><span class="p">.</span><span class="nx">previousLabel</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
 <h4 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h4>
 <p>Exit current execution.</p>
 <p>Format:</p>
@@ -6264,17 +6304,31 @@
 <li>Wait until 'click'
     <div class="codehilite"><pre><span></span><code><span class="err">#WAIT,click</span>
 </code></pre></div>
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
-<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">()</span>
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
 
-<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">()</span>
+<h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
+
+<h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
+<p>Stop running and clear instructions.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is running
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">scenario</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Is paused
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">scenario</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
                 
                   
                 
