@@ -85,6 +85,11 @@ class FSM {
         return this;
     }
 
+    toggleEnable() {
+        this.setEnable(!this.enable);
+        return this;
+    }
+
     set state(newState) {
         if (!this.enable || this._stateLock) {
             return;

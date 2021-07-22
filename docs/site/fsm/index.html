@@ -3634,6 +3634,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-new-state" class="md-nav__link">
+    Add new state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5861,6 +5868,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-new-state" class="md-nav__link">
+    Add new state
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6103,7 +6117,29 @@ end</code></pre>
 <span class="c1">// state.setEnable(false); // disable</span>
 </code></pre></div>
 
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
+</code></pre></div>
+
 <p><code>state.next()</code> and <code>state.goto()</code> will be ignored if disabled.</p>
+<h3 id="add-new-state">Add new state<a class="headerlink" href="#add-new-state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">addState</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
+    <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">})</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">state</span><span class="p">.</span><span class="nx">addStates</span><span class="p">({</span>
+    <span class="s1">&#39;D&#39;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
+        <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+        <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="p">},</span>
+    <span class="c1">// ...</span>
+<span class="p">})</span>
+</code></pre></div>
                 
                   
                 

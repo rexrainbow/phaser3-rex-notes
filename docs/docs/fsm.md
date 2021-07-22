@@ -241,4 +241,33 @@ state.setEnable();
 // state.setEnable(false); // disable
 ```
 
+or
+
+```javascript
+state.toggleEnable();
+```
+
 `state.next()` and `state.goto()` will be ignored if disabled.
+
+### Add new state
+
+```javascript
+state.addState(name, {
+    next: 'B',  // function() { return 'B'; }
+    enter: function() {},
+    exit: function() {}
+})
+```
+
+or
+
+```javascript
+state.addStates({
+    'D' : {
+        next: 'B',  // function() { return 'B'; }
+        enter: function() {},
+        exit: function() {}
+    },
+    // ...
+})
+```
