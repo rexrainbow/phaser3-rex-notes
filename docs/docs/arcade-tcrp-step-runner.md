@@ -1,6 +1,6 @@
 ## Introduction
 
-Execute command in next WORLD_STEP(`worldstep`) event, to synchronize command execution with step-counter of [Arcade-TCRP stepRunner](arcade-tcrp-recorder.md).
+Execute command in next WORLD_STEP(`worldstep`) event, to synchronize command execution with step-counter of [Recorder of Arcade-TCRP](arcade-tcrp-recorder.md).
 
 - Author: Rex
 - Member of scene
