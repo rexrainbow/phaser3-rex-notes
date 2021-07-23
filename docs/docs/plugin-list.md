@@ -145,7 +145,7 @@
 1. [UI/slider](ui-slider.md): A container with a track, indicator, thumb and background.
 1. [UI/tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [UI/text area](ui-textarea.md): A container with a text, slider, and scroller.
-1. [UI/text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
+1. [UI/text box](ui-textbox.md): A container with an icon, (typing and paging) text, and background.
 1. [UI/toast](ui-toast.md): Show text message for a short while.
 1. [Unique item list](uniqueitemlist.md): List of unique items. Support array and set methods.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
