@@ -39,6 +39,23 @@ class ConditionsTable {
         return this;
     }
 
+    getTestResults(values) {
+        var results = {};
+        var name, f;
+        for (var i = 0, cnt = this.tests.length; i < cnt; i++) {
+            name = this.tests[i].name;
+            f = this.tests[i].function;
+
+            if (f(values)) {
+                results[name] = true;
+            } else if (!results.hasOwnProperty(name)) {
+                results[name] = false;
+            }
+        }
+
+        return results;
+    }
+
     anyPassTest(values, callback, scope) {
         var name, f;
         for (var i = 0, cnt = this.tests.length; i < cnt; i++) {

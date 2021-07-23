@@ -102,6 +102,15 @@ Test2: (B==3)
 
 ### Test
 
+#### Get test results
+
+```javascript
+var results = table.getTestResults(values);
+```
+
+- `values` : Inputs in Key-value pairs
+- `results` : `{name: boolean}`, use OR operation to combine result of tests with the same name.
+
 #### Get first pass test name
 
 ```javascript
