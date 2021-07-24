@@ -5959,6 +5959,15 @@
 <p>Version starts from <code>0</code> which has no data. Each <code>data.commit()</code> will increase this version number.</p>
 <h3 id="saveload-status">Save/load status<a class="headerlink" href="#saveload-status" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Get current status
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Load status
+    <div class="codehilite"><pre><span></span><code><span class="nx">data</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<p>or</p>
+<ul>
 <li>Get current status via JSON string
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 </code></pre></div></li>

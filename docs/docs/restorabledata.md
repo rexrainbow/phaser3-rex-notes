@@ -144,6 +144,17 @@ Version starts from `0` which has no data. Each `data.commit()` will increase th
 
 ### Save/load status
 
+- Get current status
+    ```javascript
+    var o = data.toJSON();
+    ```
+- Load status
+    ```javascript
+    data.resetFromJSON(o);
+    ```
+
+or
+
 - Get current status via JSON string
     ```javascript
     var s = JSON.stringify(data);
