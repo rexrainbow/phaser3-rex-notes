@@ -217,7 +217,7 @@ Next --> EventUpdateChoice
     ```
 - Multiple value
     ```javascript
-    quest.mulData(key, inc, defaultValue);
+    quest.mulData(key, mul, defaultValue);
     ```
 - Clear all data
     ```javascript
