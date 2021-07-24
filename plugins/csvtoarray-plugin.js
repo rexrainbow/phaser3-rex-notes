@@ -10,8 +10,8 @@ class CSVToArrayPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    convert(strData, config) {
-        return CSVToArray(strData, config);
+    convert(csvString, config) {
+        return CSVToArray(csvString, config);
     }
 }
 
