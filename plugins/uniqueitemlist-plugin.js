@@ -11,8 +11,8 @@ class UniqueItemListPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(items) {
-        return new UniqueItemList(items);
+    add(config) {
+        return new UniqueItemList(config);
     }
 
 }
