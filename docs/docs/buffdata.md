@@ -121,7 +121,7 @@ A value is composed of `baseValue`, and some `buffs`, clamped by `min`, `max` va
         ```
     - Get a buff value
         ```javascript
-        var buffValue = data.getBuffs(key, buffKey).value;
+        var buffValue = data.getBuffValue(key, buffKey);
         ```
 - Min, max bounds, optional.
     - Set
@@ -137,8 +137,8 @@ A value is composed of `baseValue`, and some `buffs`, clamped by `min`, `max` va
         - `min`, `max` : Clamp buffed result value between `min` and `max` value. Set `undefined` to ignore it.
     - Get
         ```javascript
-        var min = data.getBounds(key).min;
-        var max = data.getBounds(key).max;
+        var min = data.getMinBound(key);
+        var max = data.getMaxBound(key);
         ```
 - Buffed result
     - Get
