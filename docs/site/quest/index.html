@@ -6267,9 +6267,11 @@
 <li>Other key-value parameters.</li>
 </ul>
 </li>
-<li>Option object : <code>{key, param, ...}</code></li>
+<li>Option object : <code>{key, param, ...}</code><ul>
 <li><code>key</code> : An unique key string. Create a key string <code>'_' + serialNumber</code> if not given.</li>
 <li>Other key-value parameters.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>A csv string :
@@ -6315,12 +6317,14 @@
 </code></pre></div></li>
 </ul>
 </li>
-<li><code>quest</code> : Create a private quest task object.</li>
+<li><code>quest</code> : Create a private quest task object.<ul>
 <li><code>undefined</code> : Don't create a private quest task object.</li>
 <li><code>true</code> : Create a private quest task object with default configuration.</li>
 <li>Configuration of quest task :<ul>
 <li><code>quest.shuffleQuestions</code> : Set <code>true</code> to shuffle questions.</li>
 <li><code>quest.shuffleOptions</code> : Set <code>true</code> to shuffle options.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -6365,7 +6369,7 @@
 </ul>
 </li>
 <li>Remove all question objects
-    <div class="codehilite"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">questionManager</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h4 id="get-question">Get question<a class="headerlink" href="#get-question" title="Permanent link">&para;</a></h4>

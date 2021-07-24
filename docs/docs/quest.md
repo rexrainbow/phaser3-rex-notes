@@ -144,8 +144,8 @@ var questionManager = scene.plugins.get('rexQuest').add({
             - `options` : An array of option objects.
             - Other key-value parameters.
         - Option object : `{key, param, ...}`
-           - `key` : An unique key string. Create a key string `'_' + serialNumber` if not given.
-           - Other key-value parameters.
+            - `key` : An unique key string. Create a key string `'_' + serialNumber` if not given.
+            - Other key-value parameters.
     - A csv string :
         ```raw
         type,key,param0,param1,...
@@ -180,11 +180,11 @@ var questionManager = scene.plugins.get('rexQuest').add({
         }
         ```
 - `quest` : Create a private quest task object.
-   - `undefined` : Don't create a private quest task object.
-   - `true` : Create a private quest task object with default configuration.
-   - Configuration of quest task :
-       - `quest.shuffleQuestions` : Set `true` to shuffle questions.
-       - `quest.shuffleOptions` : Set `true` to shuffle options.
+     - `undefined` : Don't create a private quest task object.
+     - `true` : Create a private quest task object with default configuration.
+     - Configuration of quest task :
+        - `quest.shuffleQuestions` : Set `true` to shuffle questions.
+        - `quest.shuffleOptions` : Set `true` to shuffle options.
 
 #### Add questions
 
@@ -221,7 +221,7 @@ questionManager.add(questions, config);
     - `key` : An unique key string.
 - Remove all question objects
     ```javascript
-    questionManager.removeAll(key);
+    questionManager.removeAll();
     ```
 
 #### Get question
@@ -330,7 +330,7 @@ questionManager.restartQuest();
     ```
 - Multiple value
     ```javascript
-    questionManager.mulData(key, inc, defaultValue);
+    questionManager.mulData(key, mul, defaultValue);
     ```
 - Clear all data
     ```javascript

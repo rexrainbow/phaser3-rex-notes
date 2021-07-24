@@ -2,7 +2,7 @@ export default CSVScenario;
 
 declare namespace CSVScenario {
     type TimeUnitType = 0 | 1 | 'ms' | 's' | 'sec';
-    type ConvertCallbackType = (s: string, instruction: any[]) => string;
+    type ConvertCallbackType = (s: string, instruction: any[]) => any;
 
     interface IConfig {
         timeUnit?: TimeUnitType,
