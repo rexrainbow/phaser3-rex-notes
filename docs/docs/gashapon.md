@@ -85,103 +85,102 @@ var gashapon = scene.plugins.get('rexGashapon').add({
     - `'shuffle'`, or `0` : pick item from box without put it back.
     - `'random'`, or `1` : pick item from box then put it back.
 - `reload` : set `true` to reload items when box is empty for `shuffle` mode.
-- `items` : initial items in box
+- `items` : initial items `{ name:count }` in box.
 - `rnd` : Use [random data generator](random-data-generator.md) to generate result.
     - `undefined` : Use `Math.random()` to generate result.
     - `Phaser.Math.RND` : Use pre-defined random data generator.
 
 ### Pick item
 
-#### Pick a random item
-
-```javascript
-var item = gashapon.next();
-```
-
-- return `null` if pick nothing
-
-#### Pick specific item
-
-```javascript
-var item = gashapon.next('a');
-```
-
-- return `null` if pick nothing
-
-#### Last picked item
-
-```javascript
-var item = gashapon.result;
-```
+- Pick a random item
+    ```javascript
+    var item = gashapon.next();
+    ```
+    - return `null` if pick nothing
+- Pick specific item
+    ```javascript
+    var item = gashapon.next(name);
+    ```
+    - return `null` if pick nothing
+- Last picked item
+    ```javascript
+    var item = gashapon.result;
+    ```
 
 ### Set item
 
-#### Set item
-
-```javascript
-gashapon.setItem('a', 1);
-// gashapon.setItem('a', 1).setItem('b', 2).setItem('c', 3);
-```
-
-#### Add item
-
-```javascript
-gashapon.addItem('a',1);
-```
+- Set item
+    ```javascript
+    gashapon.setItem(name, count);
+    ```
+- Add item
+    ```javascript
+    gashapon.addItem(name, count);
+    ```
+- Put item back
+    ```javascript
+    gashapon.putItemBack(name, count);
+    ```
 
 ### Remove item
 
-#### Remove item
-
-```javascript
-gashapon.removeItem('a');
-// gashapon.removeItem('b').gashapon.removeItem('c');
-```
-
-#### Remove all items
-
-```javascript
-gashapon.removeAllItems();
-```
+- Remove item
+    ```javascript
+    gashapon.removeItem(name);
+    ```
+- Remove all items
+    ```javascript
+    gashapon.removeAllItems();
+    ```
 
 ### Current status
 
-#### Get current status
-
-```javascript
-var status = gashapon.toJSON();
-```
-
-#### Clone object
-
-```javascript
-var status = gashapon.toJSON();
-var gashapon2 = new Gashapon(status);
-```
-
-#### Overwrite current status
-
-```javascript
-var status = gashapon.toJSON();
-// gashapon.next()...
-gashapon.resetFromJSON(status);
-```
+- Get current status
+    ```javascript
+    var status = gashapon.toJSON();
+    ```
+- Clone object
+    ```javascript
+    var state = gashapon.toJSON();
+    var gashapon2 = new Gashapon(state);
+    ```
+- Overwrite current status
+    ```javascript
+    var status = gashapon.toJSON();
+    // gashapon.next()...
+    gashapon.resetFromJSON(status);
+    ```
 
 ### Get items
 
-#### For each item
+- Get initial items
+    ```javascript
+    var items = gashapon.getItems();
+    ```
+- Get remainder items
+    ```javascript
+    var items = gashapon.getRemain();
+    ```
+- Get initial item count
+    ```javascript
+    var count = gashapon.getItemCount(name);
+    ```
+- Get remainder item count
+    ```javascript
+    var count = gashapon.getRemainCount(name);
+    ```
+- For each initial item
+    ```javascript
+    gashapon.forEachItem(function(name, count) {
 
-```javascript
-gashapon.eachItem(function(name, count){
-    console.log(name + ": " + count);
-});
-```
+    }, scope);
+    ```
+- For each remainder item
+    ```javascript
+    gashapon.forEachRemain(function(name, count) {
 
-#### Get items
-
-```javascript
-var items = gashapon.getItems();
-```
+    }, scope);
+    ```
 
 ### Set random generator
 
@@ -190,5 +189,5 @@ gashapon.setRND(rnd);
 ```
 
 - `rnd` : Use [random data generator](random-data-generator.md) to generate result.
-    - `undefined` : Use `Math.random()` to generate result.
+    - `undefined`, or `null` : Use `Math.random()` to generate result.
     - `Phaser.Math.RND` : Use pre-defined random data generator.

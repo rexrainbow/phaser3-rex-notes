@@ -9,6 +9,12 @@ class Gashapon {
         this.resetFromJSON(config);
     }
 
+    destroy() {
+        this.items = undefined;
+        this.remainder = undefined;
+        this._list = undefined;
+    }
+
     resetFromJSON(o) {
         if (this.items == undefined) {
             this.items = {};
@@ -254,21 +260,6 @@ class Gashapon {
 
         this.result = result;
         return result;
-    }
-
-    destroy() {
-        // data
-        Clear(this.items);
-        Clear(this.remainder);
-        Clear(this._list);
-
-        // result
-        this.result = null;
-
-        // flags
-        this._restartFlag = false;
-
-        return this;
     }
 
     /** @private */

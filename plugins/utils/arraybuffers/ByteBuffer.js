@@ -3,6 +3,12 @@ class ByteBuffer {
         this.resize(size);
     }
 
+    destroy() {
+        this._rows = undefined;
+        this._buf = undefined;
+        this._bytes = undefined;
+    }
+
     get(offset) {
         return this._bytes[offset];
     }

@@ -21,6 +21,8 @@ declare namespace CsvToHashTable {
 declare class CsvToHashTable {
     constructor();
 
+    destroy(): void;
+
     loadCSV(
         csvString: string,
         config?: CsvToHashTable.ILoadConfig

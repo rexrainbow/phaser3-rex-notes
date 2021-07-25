@@ -26,9 +26,16 @@ class CsvToHashTable {
         };
     }
 
-    shutdown() {}
+    shutdown() {
+        this.table = undefined;
+        this.rowKeys = undefined;
+        this.colKeys = undefined;
+        this.cursor = undefined;
+    }
 
-    destroy() {}
+    destroy() {
+        this.shutdown();
+    }
 
     loadCSV(csvString, config) {
         var delimiter = GetValue(config, 'delimiter', ',');

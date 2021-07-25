@@ -11,6 +11,8 @@ declare namespace CanvasData {
 
 declare class CanvasData {
 
+    destroy(): void;
+
     color32ToColorInt(value: number): number;
 
     color32ToAlpha(value: number): number;

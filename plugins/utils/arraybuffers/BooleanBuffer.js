@@ -6,6 +6,12 @@ class BooleanBuffer {
         this.resize(size);
     }
 
+    destroy() {
+        this._rows = undefined;
+        this._buf = undefined;
+        this._bin = undefined;
+    }
+
     get(offset) {
         var row = offset >> SHIFT;
         var col = offset % COLS;

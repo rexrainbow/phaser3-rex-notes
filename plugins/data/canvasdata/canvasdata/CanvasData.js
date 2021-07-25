@@ -14,6 +14,11 @@ class CanvasData {
         this.buffer = new BufferClass(width * height);
     }
 
+    destroy() {
+        this.buffer.destroy();
+        this.buffer = undefined;
+    }
+
     getOffset(x, y) {
         return y * this.width + x;
     }

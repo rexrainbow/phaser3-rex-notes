@@ -3,6 +3,12 @@ class FourBytesBuffer {
         this.resize(size);
     }
 
+    destroy() {
+        this._rows = undefined;
+        this._buf = undefined;
+        this._colors = undefined;
+    }
+
     get(offset) {
         return this._colors[offset];
     }
