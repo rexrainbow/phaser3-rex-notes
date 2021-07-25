@@ -124,7 +124,7 @@ var canvasData = scene.plugins.get('rexCanvasData').canvasObjectToBitmap(gameObj
             var alpha = value >>> 24;
             ```
             ```javascript
-            var alpha = canvasData.color32TAlpha(value);
+            var alpha = canvasData.color32ToAlpha(value);
             ```
 
 ### Canvas data
