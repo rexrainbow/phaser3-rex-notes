@@ -88,6 +88,8 @@ var createUI = function (scene) {
                 print.text += `${category}:${label.text}\n`;
             });
     })
+
+    return scrollablePanel;
 }
 
 var createPanel = function (scene, data) {

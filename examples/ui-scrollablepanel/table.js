@@ -39,6 +39,11 @@ class Demo extends Phaser.Scene {
                 // position: 'left'
             },
 
+            mouseWheelScroller: {
+                focus: false,
+                speed: 0.1
+            },
+
             header: this.rexUI.add.label({
                 height: 30,
 

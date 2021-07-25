@@ -111,6 +111,12 @@ var panel = scene.rexUI.add.scrollablePanel({
         backDeceleration: 2000,
     },
 
+    mouseWheelScroller: false,
+    // mouseWheelScroller: {
+    //     focus: false,
+    //     speed: 0.1
+    // },
+
     clamplChildOY: false,
 
     header: headerGameObject,
@@ -188,6 +194,12 @@ var panel = scene.rexUI.add.scrollablePanel({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
+- `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
+    - `mouseWheelScroller.focus` : 
+        - `true` : Only scrolling when cursor is over panel.
+        - `false` : Scrolling without checking cursor. Default behavior.
+    - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
+    - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `header` : Game object of header, optional.
 - `footer` : Game object of footer, optional.
@@ -247,30 +259,24 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Set
     ```javascript
-    panel.setChildOY(oy);
-    ```
-    or
-    ```javascript
     panel.childOY = oy;
+    // panel.setChildOY(oy);
     ```
+- Set and clamp
+    ```javascript
+    panel.setChildOY(oy, true);
+    ```
+- Add
+    ```javascript
+    panel.addChildOY(oy);
+    ```
+- Add and clamp
+    ```javascript
+    panel.addChildOY(oy, true);
+    ```    
 - Get
     ```javascript
     var childOY = panel.childOY;
-    ```
-
-#### Scroll by percentage
-
-- Set
-    ```javascript
-    panel.setT(t);  // t: 0~1
-    ```
-    or
-    ```javascript
-    panel.t = t;
-    ```
-- Get
-    ```javascript
-    var t = panel.t;
     ```
 - Top OY
     ```javascript
@@ -279,6 +285,22 @@ See also - [dirty](ui-basesizer.md#dirty)
 - Bottom OY
     ```javascript
     var bottomOY = panel.bottomChildOY;
+    ```
+
+#### Scroll by percentage
+
+- Set
+    ```javascript
+    panel.t = t;  // t: 0~1
+    // panel.setT(t);  
+    ```
+- Set and clamp
+    ```javascript    
+    panel.setT(t, true);
+    ```
+- Get
+    ```javascript
+    var t = panel.t;
     ```
 
 #### Scroll to top/bottom

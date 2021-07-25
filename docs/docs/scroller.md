@@ -146,10 +146,24 @@ var value = scroller.value;
 
 ### Set value
 
-```javascript
-scroller.value = newValue;
-// scroller.setValue(newValue);
-```
+- Set value
+    ```javascript
+    scroller.value = newValue;
+    // scroller.setValue(newValue);
+    ```
+- Set value, clamp between minValue and maxValue
+    ```javascript
+    scroller.setValue(newValue, true);
+    ```
+- Add value
+    ```javascript
+    scroller.value += inc;
+    // scroller.addValue(inc);
+    ```
+- Add value, clamp between minValue and maxValue
+    ```javascript
+    scroller.addValue(inc, true);
+    ```
 
 Fires `valuechange` event if new value is not equal to current value.
 

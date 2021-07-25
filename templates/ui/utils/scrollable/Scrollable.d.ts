@@ -62,14 +62,16 @@ declare namespace Scrollable {
 
 declare class Scrollable extends Sizer {
     t: number;
-    setT(value: number): this;
+    setT(value: number, clamp?: boolean): this;
+    addT(inc: number, clamp?: boolean): this;
     scrollToTop(): this;
     scrollToBottom(): this;
 
     childOY: number;
     readonly topChildOY: number;
     readonly bottomChildOY: number;
-    setChildOY(value: number): this;
+    setChildOY(value: number, clamp?: boolean): this;
+    addChildOY(inc: number, clamp?: boolean): this;
 
     sliderEnable: boolean;
     setSliderEnable(enable?: boolean): this;

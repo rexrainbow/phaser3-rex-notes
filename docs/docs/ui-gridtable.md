@@ -120,6 +120,12 @@ var table = scene.rexUI.add.gridTable({
         backDeceleration: 2000,
     },
 
+    mouseWheelScroller: false,
+    // mouseWheelScroller: {
+    //     focus: false,
+    //     speed: 0.1
+    // }.
+
     clamplChildOY: false,
 
     header: headerGameObject,
@@ -222,6 +228,12 @@ var table = scene.rexUI.add.gridTable({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
+- `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
+    - `mouseWheelScroller.focus` : 
+        - `true` : Only scrolling when cursor is over table.
+        - `false` : Scrolling without checking cursor. Default behavior.
+    - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
+    - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `createCellContainerCallback` : Callback to return a container object, or `null` of each visible cell.
     - Properties of `cell` parameter
@@ -347,12 +359,21 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Set
     ```javascript
-    table.setChildOY(oy);
-    ```
-    or
-    ```javascript
     table.childOY = oy;
+    // table.setChildOY(oy);
     ```
+- Set and clamp
+    ```javascript
+    table.setChildOY(oy, true);
+    ```
+- Add
+    ```javascript
+    table.addChildOY(oy);
+    ```
+- Add and clamp
+    ```javascript
+    table.addChildOY(oy, true);
+    ```    
 - Get
     ```javascript
     var childOY = table.childOY;
@@ -370,11 +391,12 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Set
     ```javascript
-    table.setT(t);  // t: 0~1
+    table.t = t;  // t: 0~1
+    // table.setT(t);  
     ```
-    or
-    ```javascript
-    table.t = t;
+- Set and clamp
+    ```javascript    
+    table.setT(t, true);
     ```
 - Get
     ```javascript

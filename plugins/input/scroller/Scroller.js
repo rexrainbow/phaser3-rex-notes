@@ -4,6 +4,7 @@ import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 class Scroller extends BehaviorBase {
     constructor(gameObject, config) {
@@ -78,6 +79,8 @@ class Scroller extends BehaviorBase {
         this.scene.events.off('update', this._state.update, this._state);
         this._state.destroy(fromScene);
         this.dragState.destroy(fromScene);
+        this._state = undefined;
+        this.dragState = undefined;
 
         super.shutdown(fromScene);
     }
@@ -94,6 +97,7 @@ class Scroller extends BehaviorBase {
         this._enable = e;
         this._state.setEnable(e);
         this.dragState.setEnable(e);
+
         return this;
     }
 
@@ -181,8 +185,22 @@ class Scroller extends BehaviorBase {
         this.emit('valuechange', value, oldValue);
     }
 
-    setValue(value) {
+    setValue(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+
+        if (clamp) {
+            value = Clamp(value, this.minValue, this.maxValue);
+        }
+
         this.value = value;
+        return this;
+    }
+
+    addValue(inc, clamp) {
+        this.setValue(this.value + inc, clamp);
+        return this;
     }
 
     get state() {

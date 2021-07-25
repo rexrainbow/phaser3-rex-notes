@@ -64,6 +64,11 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
+            
+            mouseWheelScroller: {
+                focus: false,
+                speed: 0.1
+            },
 
             space: {
                 left: 10,

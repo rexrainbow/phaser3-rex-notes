@@ -6025,6 +6025,12 @@
         <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="nx">mouseWheelScroller</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// mouseWheelScroller: {</span>
+    <span class="c1">//     focus: false,</span>
+    <span class="c1">//     speed: 0.1</span>
+    <span class="c1">// },</span>
+
     <span class="nx">clamplChildOY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="nx">header</span><span class="o">:</span> <span class="nx">headerGameObject</span><span class="p">,</span>
@@ -6119,6 +6125,16 @@
 <li>Set to <code>false</code> to skip creating scroller.</li>
 </ul>
 </li>
+<li><code>mouseWheelScroller</code> : Configuration of mouse-wheel-scroller behavior.<ul>
+<li><code>mouseWheelScroller.focus</code> : <ul>
+<li><code>true</code> : Only scrolling when cursor is over textArea.</li>
+<li><code>false</code> : Scrolling without checking cursor. Default behavior.</li>
+</ul>
+</li>
+<li><code>mouseWheelScroller.speed</code> : Scrolling speed, default value is <code>0.1</code>.</li>
+<li>Set to <code>false</code> to skip creating mouse-wheel-scroller. Default behavior.</li>
+</ul>
+</li>
 <li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
 <li><code>header</code> : Game object of header, optional.</li>
 <li><code>footer</code> : Game object of footer, optional.</li>
@@ -6200,10 +6216,17 @@
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">setChildOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
-</code></pre></div>
-    or
     <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">childOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
+<span class="c1">// textArea.setChildOY(oy);</span>
+</code></pre></div></li>
+<li>Set and clamp
+    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">setChildOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add
+    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">addChildOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add and clamp
+    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">addChildOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">childOY</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">childOY</span><span class="p">;</span>
@@ -6218,10 +6241,11 @@
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
-</code></pre></div>
-    or
-    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>  <span class="c1">// t: 0~1</span>
+<span class="c1">// textArea.setT(t);  </span>
+</code></pre></div></li>
+<li>Set and clamp
+    <div class="codehilite"><pre><span></span><code><span class="nx">textArea</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>

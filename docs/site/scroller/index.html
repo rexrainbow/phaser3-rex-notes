@@ -6043,10 +6043,22 @@
 </code></pre></div>
 
 <h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">scroller</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>
+<ul>
+<li>Set value
+    <div class="codehilite"><pre><span></span><code><span class="nx">scroller</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>
 <span class="c1">// scroller.setValue(newValue);</span>
-</code></pre></div>
-
+</code></pre></div></li>
+<li>Set value, clamp between minValue and maxValue
+    <div class="codehilite"><pre><span></span><code><span class="nx">scroller</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Add value
+    <div class="codehilite"><pre><span></span><code><span class="nx">scroller</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span>
+<span class="c1">// scroller.addValue(inc);</span>
+</code></pre></div></li>
+<li>Add value, clamp between minValue and maxValue
+    <div class="codehilite"><pre><span></span><code><span class="nx">scroller</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
 <p>Fires <code>valuechange</code> event if new value is not equal to current value.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>

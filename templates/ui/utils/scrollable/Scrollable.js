@@ -5,6 +5,7 @@ import ResizeController from './ResizeController.js';
 import UpdateController from './UpdateController.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 class Scrollable extends Sizer {
     constructor(scene, config) {
@@ -124,13 +125,35 @@ class Scrollable extends Sizer {
         return this.childrenMap.child.bottomChildOY - this.childPadding.bottom;
     }
 
-    setChildOY(value) {
+    setChildOY(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, this.bottomChildOY, this.topChildOY);
+        }
         this.childOY = value;
         return this;
     }
 
-    setT(value) {
+    addChildOY(inc, clamp) {
+        this.setChildOY(this.childOY + inc, clamp);
+        return this;
+    }
+
+    setT(value, clamp) {
+        if (clamp === undefined) {
+            clamp = false;
+        }
+        if (clamp) {
+            value = Clamp(value, 0, 1);
+        }
         this.t = value;
+        return this;
+    }
+
+    addT(inc, clamp) {
+        this.setT(this.t + inc, clamp);
         return this;
     }
 
@@ -191,6 +214,31 @@ class Scrollable extends Sizer {
             enabled = true;
         }
         this.scrollerEnable = enabled;
+        return this;
+    }
+
+    get mouseWheelScrollerEnable() {
+        var mouseWheelScroller = this.childrenMap.mouseWheelScroller;
+        if (!mouseWheelScroller) {
+            return false;
+        }
+
+        return mouseWheelScroller.enable;
+    }
+
+    set mouseWheelScrollerEnable(value) {
+        var mouseWheelScroller = this.childrenMap.mouseWheelScrollerEnable;
+        if (!mouseWheelScroller) {
+            return;
+        }
+        mouseWheelScroller.setEnable(value);
+    }
+
+    setMouseWheelScrollerEnable(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.mouseWheelScrollerEnable = enabled;
         return this;
     }
 }

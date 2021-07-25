@@ -44,7 +44,8 @@ declare class Scroller extends Phaser.Events.EventEmitter {
     setSlidingDeceleration(dec: number | false): this;
     setBackDeceleration(dec: number | false): this;
 
-    setValue(newValue: number): this;
+    setValue(value: number, clamp?: boolean): this;
+    addValue(inc: number, clamp?: boolean): this;
     value: number;
 
     readonly isDragging: boolean;

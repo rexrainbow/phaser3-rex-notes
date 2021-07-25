@@ -104,6 +104,12 @@ var textArea = scene.rexUI.add.textArea({
         backDeceleration: 2000,
     },
 
+    mouseWheelScroller: false,
+    // mouseWheelScroller: {
+    //     focus: false,
+    //     speed: 0.1
+    // },
+
     clamplChildOY: false,
 
     header: headerGameObject,
@@ -177,6 +183,12 @@ var textArea = scene.rexUI.add.textArea({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
+- `mouseWheelScroller` : Configuration of mouse-wheel-scroller behavior.
+    - `mouseWheelScroller.focus` : 
+        - `true` : Only scrolling when cursor is over textArea.
+        - `false` : Scrolling without checking cursor. Default behavior.
+    - `mouseWheelScroller.speed` : Scrolling speed, default value is `0.1`.
+    - Set to `false` to skip creating mouse-wheel-scroller. Default behavior.
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `header` : Game object of header, optional.
 - `footer` : Game object of footer, optional.
@@ -252,12 +264,21 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Set
     ```javascript
-    textArea.setChildOY(oy);
-    ```
-    or
-    ```javascript
     textArea.childOY = oy;
+    // textArea.setChildOY(oy);
     ```
+- Set and clamp
+    ```javascript
+    textArea.setChildOY(oy, true);
+    ```
+- Add
+    ```javascript
+    textArea.addChildOY(oy);
+    ```
+- Add and clamp
+    ```javascript
+    textArea.addChildOY(oy, true);
+    ```    
 - Get
     ```javascript
     var childOY = textArea.childOY;
@@ -275,11 +296,12 @@ See also - [dirty](ui-basesizer.md#dirty)
 
 - Set
     ```javascript
-    textArea.setT(t);  // t: 0~1
+    textArea.t = t;  // t: 0~1
+    // textArea.setT(t);  
     ```
-    or
-    ```javascript
-    textArea.t = t;
+- Set and clamp
+    ```javascript    
+    textArea.setT(t, true);
     ```
 - Get
     ```javascript
