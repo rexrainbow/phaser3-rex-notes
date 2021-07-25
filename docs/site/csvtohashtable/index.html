@@ -3983,15 +3983,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-a-row" class="md-nav__link">
-    Remove a row
+  <a href="#remove-a-column" class="md-nav__link">
+    Remove a column
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-a-column" class="md-nav__link">
-    Remove a column
+  <a href="#remove-a-row" class="md-nav__link">
+    Remove a row
   </a>
   
 </li>
@@ -5903,15 +5903,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-a-row" class="md-nav__link">
-    Remove a row
+  <a href="#remove-a-column" class="md-nav__link">
+    Remove a column
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-a-column" class="md-nav__link">
-    Remove a column
+  <a href="#remove-a-row" class="md-nav__link">
+    Remove a row
   </a>
   
 </li>
@@ -6117,10 +6117,10 @@
 </code></pre></div>
 
 <h3 id="value-in-column-or-row">Value in column or row<a class="headerlink" href="#value-in-column-or-row" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 
 <h3 id="create-table">Create table<a class="headerlink" href="#create-table" title="Permanent link">&para;</a></h3>
@@ -6141,8 +6141,8 @@
 </code></pre></div>
 
 <h4 id="append-a-row">Append a row<a class="headerlink" href="#append-a-row" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">appendRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
-<span class="c1">// table.appendRow(colKey, callback, scope);  // get initValue from callback</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">appendRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
+<span class="c1">// table.appendRow(rowKey, callback, scope);  // get initValue from callback</span>
 </code></pre></div>
 
 <p>Callback</p>
@@ -6152,21 +6152,21 @@
 <span class="p">};</span>
 </code></pre></div>
 
-<h4 id="remove-a-row">Remove a row<a class="headerlink" href="#remove-a-row" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">removeRol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
-</code></pre></div>
-
 <h4 id="remove-a-column">Remove a column<a class="headerlink" href="#remove-a-column" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">removeCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
 </code></pre></div>
 
+<h4 id="remove-a-row">Remove a row<a class="headerlink" href="#remove-a-row" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">removeRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>
+</code></pre></div>
+
 <h3 id="sort-column-or-row">Sort column or row<a class="headerlink" href="#sort-column-or-row" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">sortCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
-<span class="c1">// table.sortCol(callback, scope);  // sort column by callback</span>
+<span class="c1">// table.sortCol(callback, scope);  // sort columns by callback</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">sortRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
-<span class="c1">// table.sortRow(callback, scope);  // sort column by callback</span>
+<span class="c1">// table.sortRow(callback, scope);  // sort rows by callback</span>
 </code></pre></div>
 
 <p>Mode:</p>

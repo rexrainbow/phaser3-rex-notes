@@ -176,11 +176,11 @@ var hasCell = table.hasKey(rowKey, colKey);
 ### Value in column or row
 
 ```javascript
-var existed = table.isValueInRol(rowKey, data);
+var existed = table.isValueInRol(rowKey, value);
 ```
 
 ```javascript
-var existed = table.isValueInCol(colKey, data);
+var existed = table.isValueInCol(colKey, value);
 ```
 
 ### Create table
@@ -210,8 +210,8 @@ var callback = function (table, rowKey, colKey) {
 #### Append a row
 
 ```javascript
-table.appendRow(colKey, initValue);
-// table.appendRow(colKey, callback, scope);  // get initValue from callback
+table.appendRow(rowKey, initValue);
+// table.appendRow(rowKey, callback, scope);  // get initValue from callback
 ```
 
 Callback
@@ -223,28 +223,28 @@ var callback = function (table, rowKey, colKey) {
 };
 ```
 
-#### Remove a row
-
-```javascript
-table.removeRol(colKey);
-```
-
 #### Remove a column
 
 ```javascript
 table.removeCol(colKey);
 ```
 
+#### Remove a row
+
+```javascript
+table.removeRol(rowKey);
+```
+
 ### Sort column or row
 
 ```javascript
 table.sortCol(colKey, mode);
-// table.sortCol(callback, scope);  // sort column by callback
+// table.sortCol(callback, scope);  // sort columns by callback
 ```
 
 ```javascript
 table.sortRow(rowKey, mode);
-// table.sortRow(callback, scope);  // sort column by callback
+// table.sortRow(callback, scope);  // sort rows by callback
 ```
 
 Mode:

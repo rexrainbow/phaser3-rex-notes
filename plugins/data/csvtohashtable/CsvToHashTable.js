@@ -144,7 +144,7 @@ class CsvToHashTable {
         return this.hasRowKey(rowKey) && this.hasColKey(colKey);
     }
 
-    isValueInRol(rowKey, data) {
+    isValueInRol(rowKey, value) {
         if (!this.hasRowKey(rowKey)) {
             return false;
         }
@@ -153,7 +153,7 @@ class CsvToHashTable {
         var colKey, colKeys = this.colKeys;
         for (var i = 0, len = colKeys.length; i < len; i++) {
             colKey = colKeys[i];
-            if (row[colKey] === data) {
+            if (row[colKey] === value) {
                 return true;
             }
         }
@@ -161,15 +161,14 @@ class CsvToHashTable {
         return false;
     }
 
-    isValueInCol(colKey, data) {
+    isValueInCol(colKey, value) {
         if (!this.hasColKey(colKey)) {
             return false;
         }
-        var table = this.table,
-            row;
+        var table = this.table;
         var rowKey, rowKeys = this.rowKeys
         for (var i = 0, len = rowKeys.length; i < len; i++) {
-            if (table[rowKey][colKey] === data) {
+            if (table[rowKey][colKey] === value) {
                 return true;
             }
         }
