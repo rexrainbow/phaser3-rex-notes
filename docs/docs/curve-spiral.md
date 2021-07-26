@@ -109,7 +109,7 @@ Spiral curve.
             - Set `startXRadius`, and `startYRadius` to `startRadius`.
             - Set `endXRadius`, and `endYRadius` to `endRadius`.
     - Angle
-        - `startAngle`, `endAngle`, `easeAngle` : Ease angle.
+        - `startAngle`, `endAngle`, `easeAngle` : Ease angle, in degrees.
             - `easeAngle` : [Ease equation](tween.md#ease-equations), default value is `'Linear'`.
     - `rotation` : Rotate curve.
 - Simple spiral curve
@@ -173,7 +173,7 @@ Spiral curve.
         spiral.endXRadius = endXRadius;
         spiral.endYRadius = endYRadius;
         ```
-- Angle
+- Angle, in degrees.
     - Get
         ```javascript
         var startAnlge = spiral.startAngle;
