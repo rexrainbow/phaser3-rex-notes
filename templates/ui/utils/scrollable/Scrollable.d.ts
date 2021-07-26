@@ -30,7 +30,7 @@ declare namespace Scrollable {
                 input?: SliderInputTypes,
                 position?: SliderPositionTypes,
             } |
-            false
+            boolean
         ),
 
         scroller?: (
@@ -39,7 +39,15 @@ declare namespace Scrollable {
                 slidingDeceleration?: number | false,
                 backDeceleration?: number | false,
             } |
-            false
+            boolean
+        ),
+
+        mouseWheelScroller?: (
+            {
+                focus?: boolean,
+                speed?: number,
+            } |
+            boolean
         ),
 
         clamplChildOY?: boolean,
@@ -78,4 +86,8 @@ declare class Scrollable extends Sizer {
 
     scrollerEnable: boolean;
     setScrollerEnable(enable?: boolean): this;
+
+    mouseWheelScrollerEnable: boolean;
+    setMouseWheelScrollerEnable(enable?: boolean): this;
+
 }
