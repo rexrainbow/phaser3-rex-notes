@@ -46,6 +46,7 @@ module.exports = {
     'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
     'cursoratboundplugin': './plugins/cursoratbound-plugin.js',
     'mousewheeltoupdownplugin': './plugins/mousewheeltoupdown-plugin.js',
+    'mousewheelscrollerplugin': './plugins/mousewheelscroller-plugin.js',
     'pinchplugin': './plugins/pinch-plugin.js',
     'dragrotateplugin': './plugins/dragrotate-plugin.js',
     'gesturesplugin': './plugins/gestures-plugin.js',

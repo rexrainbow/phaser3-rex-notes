@@ -12,7 +12,8 @@ class MouseWheelScroller extends BehaviorBase {
         } else {
             this.focusMode = false;
         }
-        this.speed = GetValue(config, 'speed', 0.1);
+
+        this.setSpeed(GetValue(config, 'speed', 0.1));
         this.setEnable(GetValue(config, 'enable', true));
 
         if (!this.focusMode) { // Register on scene
@@ -53,8 +54,14 @@ class MouseWheelScroller extends BehaviorBase {
         return this;
     }
 
+    setSpeed(speed) {
+        this.speed = speed;
+        return this;
+    }
+
     scroll(dy) {
-        this.emit('scroll', this.speed * dy, this);
+        dy *= this.speed;
+        this.emit('scroll', dy, this.parent, this);
     }
 }
 

@@ -586,11 +586,6 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mousewheel/</loc>
-     <lastmod>2021-07-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-overview/</loc>
      <lastmod>2021-07-26</lastmod>
      <changefreq>daily</changefreq>
@@ -661,17 +656,27 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mousewheeltoupdown/</loc>
-     <lastmod>2021-07-26</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/keyboardevents/</loc>
      <lastmod>2021-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/keyboardcombo/</loc>
+     <lastmod>2021-07-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mousewheel/</loc>
+     <lastmod>2021-07-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mousewheelscroller/</loc>
+     <lastmod>2021-07-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mousewheeltoupdown/</loc>
      <lastmod>2021-07-26</lastmod>
      <changefreq>daily</changefreq>
     </url>

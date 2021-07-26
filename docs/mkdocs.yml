@@ -150,8 +150,7 @@ nav:
     - Input: input.md
     - Touch:
         - Touch events: touchevents.md
-        - Cursor: cursor.md
-        - Mouse wheel: mousewheel.md
+        - Cursor: cursor.md        
         - Gestures:
             - Overview: gesture-overview.md
             - One pointer gesture:
@@ -169,10 +168,14 @@ nav:
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
         - Drag rotate: dragrotate.md
-        - Mouse-wheel to up/down: mousewheeltoupdown.md
+        
     - Keyboard:
         - Keyboard events: keyboardevents.md
         - Combo events: keyboardcombo.md
+    - Mouse wheel:
+        - Mouse wheel: mousewheel.md
+        - Mouse wheel scroller: mousewheelscroller.md
+        - Mouse-wheel to up/down: mousewheeltoupdown.md
 - Audio:
     - Audio: audio.md
     - Volume fading: fadevolume.md
