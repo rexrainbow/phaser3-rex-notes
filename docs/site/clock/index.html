@@ -5974,10 +5974,15 @@
 </code></pre></div>
 
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</code></pre></div>
-
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">clock</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">timeScale</span><span class="p">);</span>
+<span class="c1">// clock.timeScale = timeScale;</span>
+</code></pre></div></li>
+</ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On ticking

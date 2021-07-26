@@ -111,10 +111,15 @@ var isRunning = clock.isRunning;
 
 ### Time-scale
 
-```javascript
-var timeScale = clock.timeScale;
-clock.timeScale = 0.5;
-```
+- Get
+    ```javascript
+    var timeScale = clock.timeScale;
+    ```
+- Set
+    ```javascript
+    clock.setTimeScale(timeScale);
+    // clock.timeScale = timeScale;
+    ```
 
 ### Events
 
