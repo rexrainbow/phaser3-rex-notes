@@ -20,12 +20,14 @@ class MouseWheelScroller extends BehaviorBase {
             this.scene.input.on('wheel', this.onSceneScroll, this);
         } else {
             var gameObject = this.parent;
-            gameObject.on('wheel', function (pointer, dx, dy, dz, event) {
-                if (!this.enable) {
-                    return;
-                }
-                this.scroll(dy);
-            }, this);
+            gameObject
+                .setInteractive(GetValue(config, "inputConfig", undefined))
+                .on('wheel', function (pointer, dx, dy, dz, event) {
+                    if (!this.enable) {
+                        return;
+                    }
+                    this.scroll(dy);
+                }, this);
 
         }
     }
