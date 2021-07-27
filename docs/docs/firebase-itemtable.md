@@ -208,9 +208,9 @@ var table = scene.plugins.get('rexFirebase').add.itemTable({
     ```
 - Set value when current user disconnect
     ```javascript
-    table.setDataOnDisconnect(key0)
-    // table.setDataOnDisconnect(key0, key1)
-    // table.setDataOnDisconnect(key0, key1, key2)
+    table.setDataOnDisconnect(key0, value)
+    // table.setDataOnDisconnect(key0, key1, value)
+    // table.setDataOnDisconnect(key0, key1, key2, value)
         .then(function() { })
         .catch(function() { })        
     ```
