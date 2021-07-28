@@ -124,11 +124,13 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexOutlinePipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexOutlinePipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexOutlinePipeline').get(camera);
     ```
 
 ### Thickness

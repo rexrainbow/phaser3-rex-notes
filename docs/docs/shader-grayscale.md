@@ -122,11 +122,13 @@ Gray scale post processing filter.
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexGrayScalePipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexGrayScalePipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexGrayScalePipeline').get(camera);
     ```
 
 ### Intensity

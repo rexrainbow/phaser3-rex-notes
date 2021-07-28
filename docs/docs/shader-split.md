@@ -139,11 +139,13 @@ Split image into 4 parts.
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSplitPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexSplitPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexSplitPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSplitPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexSplitPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexSplitPipeline').get(camera);
     ```
 
 ### Split position

@@ -121,11 +121,13 @@ Glow post processing filter. [Reference](https://gist.github.com/MatthewBarker/0
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexGlowFilterPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexGlowFilterPipeline').get(camera);
     ```
 
 ### Intensity

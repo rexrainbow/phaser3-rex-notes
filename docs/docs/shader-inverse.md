@@ -118,11 +118,13 @@ Inverse color post processing filter.
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexInversePipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexInversePipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexInversePipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexInversePipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexInversePipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexInversePipeline').get(camera);
     ```
 
 ### Intensity

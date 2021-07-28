@@ -129,11 +129,13 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexSwirlPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexSwirlPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexSwirlPipeline').get(camera);
     ```
 
 ### Radius

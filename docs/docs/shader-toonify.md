@@ -130,11 +130,13 @@ Draw outlines and quantize color in HSV domain, post processing filter. [Referen
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexToonifyPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexToonifyPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexToonifyPipeline').get(camera);
     ```
 
 ### Edge threshold

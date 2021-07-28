@@ -142,11 +142,13 @@ Dissolve transition post processing filter. ([Reference](https://github.com/ykob
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexDissolvePipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexDissolvePipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexDissolvePipeline').get(camera);
     ```
 
 ### Transition target texture

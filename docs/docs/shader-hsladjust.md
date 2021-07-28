@@ -135,11 +135,13 @@ Adjust color in HSL domain, post processing filter.
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexHslAdjustPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexHslAdjustPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexHslAdjustPipeline').get(camera);
     ```
 
 ### Hue rotation

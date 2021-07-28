@@ -125,11 +125,13 @@ Cross-stitching post processing filter. [Reference](https://www.geeks3d.com/2011
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexCrossStitchingPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexCrossStitchingPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexCrossStitchingPipeline').get(camera);
     ```
 
 ### Stitching size

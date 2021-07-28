@@ -123,11 +123,13 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexPixelationPipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexPixelationPipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexPixelationPipeline').get(camera);
     ```
 
 ### Pixel size

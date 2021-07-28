@@ -131,11 +131,13 @@ Shockwave post processing filter. [Reference](https://www.geeks3d.com/20091116/s
 
 - Get effect from game object
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(gameObject);
+    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(gameObject)[0];
+    // var pipelineInstances = scene.plugins.get('rexShockwavePipeline').get(gameObject);
     ```
 - Get effect from camera
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(camera);
+    var pipelineInstance = scene.plugins.get('rexShockwavePipeline').get(camera)[0];
+    // var pipelineInstances = scene.plugins.get('rexShockwavePipeline').get(camera);
     ```
 
 ### Wave radius
