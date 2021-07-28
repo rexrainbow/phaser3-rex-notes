@@ -30,6 +30,9 @@ declare class Files {
         config: { userID: string }
     ): this;
 
+    userID: string;
+    readonly userInfo: { userID?: string, userName?: string };
+
     save(
         fileID: string,
         header?: Files.IHeader,

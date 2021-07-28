@@ -6078,9 +6078,9 @@
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">})</span>        
 </code></pre></div></li>
 <li>Set value when current user disconnect
-    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setDataOnDisconnect</span><span class="p">(</span><span class="nx">key0</span><span class="p">)</span>
-<span class="c1">// table.setDataOnDisconnect(key0, key1)</span>
-<span class="c1">// table.setDataOnDisconnect(key0, key1, key2)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">setDataOnDisconnect</span><span class="p">(</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+<span class="c1">// table.setDataOnDisconnect(key0, key1, value)</span>
+<span class="c1">// table.setDataOnDisconnect(key0, key1, key2, value)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="p">})</span>        
 </code></pre></div></li>
@@ -6105,10 +6105,19 @@
 <li><code>data</code> : Number, string, or JSON data.</li>
 </ul>
 </li>
+<li>Read all data stored in client
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
+</code></pre></div><ul>
+<li><code>data</code> : JSON data.</li>
+</ul>
+</li>
 <li>Clone data stored in client
     <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cloneData</span><span class="p">(</span><span class="nx">key0</span><span class="p">);</span>
 <span class="c1">// var data = table.cloneData(key0, key1);</span>
 <span class="c1">// var data = table.cloneData(key0, key1, key2);    </span>
+</code></pre></div></li>
+<li>Clone all data stored in client
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cloneData</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

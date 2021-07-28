@@ -5956,6 +5956,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">messager</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="c1">// senderID: &#39;&#39;,</span>
+    <span class="c1">// senderName: &#39;&#39;,</span>
     <span class="c1">// receiverID: &#39;&#39;,</span>
     <span class="c1">// history: 0</span>
 <span class="p">});</span>
@@ -5963,6 +5965,8 @@
 
 <ul>
 <li><code>root</code> : Path of this messager.</li>
+<li><code>senderID</code> : ID of sender.</li>
+<li><code>senderName</code> : Name of sender.</li>
 <li><code>receiverID</code> : ID of receiver/channel.</li>
 <li><code>history</code> : Stored received (history)  messages in client side.<ul>
 <li><code>0</code>, or <code>false</code> : No history message stored.</li>
@@ -5993,7 +5997,9 @@
 </ul>
 </li>
 <li>Send message to receiverID.
-    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">messager</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="c1">// .then(function() { })</span>
+<span class="c1">// .catch(function() { })</span>
 </code></pre></div><ul>
 <li><code>message</code> : A string message, or a JSON data.</li>
 </ul>

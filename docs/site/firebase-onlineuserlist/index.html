@@ -5986,13 +5986,18 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">userList</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">onlineUserList</span><span class="p">({</span>
     <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// maxUsers: 0</span>
+    <span class="c1">// maxUsers: 0,</span>
+
+    <span class="c1">// userID: &#39;&#39;,</span>
+    <span class="c1">// userName: &#39;&#39;,</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
 <li><code>root</code> : Path of this online user list.</li>
 <li><code>maxUsers</code>: Maximum users in this list. Set to <code>0</code> to have infinity users.</li>
+<li><code>userID</code> : ID of user.</li>
+<li><code>userName</code> : Name of user.</li>
 </ul>
 <h3 id="join">Join<a class="headerlink" href="#join" title="Permanent link">&para;</a></h3>
 <ol>
@@ -6010,19 +6015,27 @@
 </ul>
 </li>
 <li>Join list.
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
+<span class="c1">// .then(function() { })</span>
+<span class="c1">// .catch(function() { })</span>
 </code></pre></div></li>
 </ol>
 <h3 id="leave">Leave<a class="headerlink" href="#leave" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">()</span>
+<span class="c1">// .then(function() { })</span>
+<span class="c1">// .catch(function() { })</span>
 </code></pre></div>
 
 <h3 id="kick-user">Kick user<a class="headerlink" href="#kick-user" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">(</span><span class="nx">userID</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">(</span><span class="nx">userID</span><span class="p">)</span>
+<span class="c1">// .then(function() { })</span>
+<span class="c1">// .catch(function() { })</span>
 </code></pre></div>
 
 <h3 id="change-user-name">Change user name<a class="headerlink" href="#change-user-name" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">)</span>
+<span class="c1">// .then(function() { })</span>
+<span class="c1">// .catch(function() { })</span>
 </code></pre></div>
 
 <h3 id="user-list">User list<a class="headerlink" href="#user-list" title="Permanent link">&para;</a></h3>

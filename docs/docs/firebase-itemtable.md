@@ -234,11 +234,20 @@ var table = scene.plugins.get('rexFirebase').add.itemTable({
     // var data = table.getData(key0, key1, key2);
     ```
     - `data` : Number, string, or JSON data.
+- Read all data stored in client
+    ```javascript
+    var data = table.getData();
+    ```
+    - `data` : JSON data.
 - Clone data stored in client
     ```javascript
     var data = table.cloneData(key0);
     // var data = table.cloneData(key0, key1);
     // var data = table.cloneData(key0, key1, key2);    
+    ```
+- Clone all data stored in client
+    ```javascript
+    var data = table.cloneData();
     ```
 
 ### Events

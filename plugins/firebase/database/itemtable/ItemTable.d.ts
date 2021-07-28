@@ -117,6 +117,9 @@ declare class ItemTable extends EventEmitter {
     stopUpdate(): this;
 
     getData(
+    ): ItemTable.ValueType;
+
+    getData(
         key0: string,
     ): ItemTable.ValueType;
 
@@ -126,6 +129,9 @@ declare class ItemTable extends EventEmitter {
 
     getData(
         key0: string, key1: string, key2: string,
+    ): ItemTable.ValueType;
+
+    cloneData(
     ): ItemTable.ValueType;
 
     cloneData(

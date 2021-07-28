@@ -45,11 +45,17 @@ declare class LeaderBoard {
         config: { userID: string, userName?: string }
     ): this;
 
+    userID: string;
+    readonly userInfo: { userID?: string, userName?: string };
+
     setBoardID(boardID?: string): this;
+    readonly boardID: string;
 
     setTag(tag?: string): this;
+    readonly tag: string;
 
     setTimeFilterType(type: LeaderBoard.TimeFilterType): this;
+    readonly timeFilters: boolean | LeaderBoard.TimeFiltersType;
 
     post(
         score: number,

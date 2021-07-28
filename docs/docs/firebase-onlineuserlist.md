@@ -131,12 +131,17 @@ Online user list, using [firebase-database](https://firebase.google.com/docs/dat
 ```javascript
 var userList = scene.plugins.get('rexFirebase').add.onlineUserList({
     root: '',
-    // maxUsers: 0
+    // maxUsers: 0,
+
+    // userID: '',
+    // userName: '',
 });
 ```
 
 - `root` : Path of this online user list.
 - `maxUsers`: Maximum users in this list. Set to `0` to have infinity users.
+- `userID` : ID of user.
+- `userName` : Name of user.
 
 ### Join
 
@@ -155,25 +160,33 @@ var userList = scene.plugins.get('rexFirebase').add.onlineUserList({
     - `userName` : Display name.
 1. Join list.
     ```javascript
-    userList.join();
+    userList.join()
+    // .then(function() { })
+    // .catch(function() { })
     ```
 
 ### Leave
 
 ```javascript
-userList.leave();
+userList.leave()
+// .then(function() { })
+// .catch(function() { })
 ```
 
 ### Kick user
 
 ```javascript
-userList.leave(userID);
+userList.leave(userID)
+// .then(function() { })
+// .catch(function() { })
 ```
 
 ### Change user name
 
 ```javascript
-userList.changeUserName(newUserName);
+userList.changeUserName(newUserName)
+// .then(function() { })
+// .catch(function() { })
 ```
 
 ### User list

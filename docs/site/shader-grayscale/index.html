@@ -5957,10 +5957,12 @@
 <h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get effect from game object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexGrayScalePipeline&#39;).get(gameObject);</span>
 </code></pre></div></li>
 <li>Get effect from camera
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexGrayScalePipeline&#39;).get(camera);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="intensity">Intensity<a class="headerlink" href="#intensity" title="Permanent link">&para;</a></h3>

@@ -131,13 +131,19 @@ Chat room, using [firebase-database](https://firebase.google.com/docs/database/)
 ```javascript
 var room = scene.plugins.get('rexFirebase').add.singleRoom({
     root: '',
+    // maxUsers: 0,
+    // userID: '',
+    // userName: '',
     // broadcast: true,
-    // tables: undefined
+    // tables: undefined,
+
 });
 ```
 
 - `root` : Path of this room.
-- `receiverID` : ID of receiver/channel.
+- `maxUsers`: Maximum users in this list. Set to `0` to have infinity users.
+- `userID` : ID of user.
+- `userName` : Name of user.
 - `broadcast` : [Broadcast](firebase-broadcast.md) chat messages.
     - `true` : Enable broadcasting, without storing received (history) messages. Default behavior.
     - `false` : Disable broadcasting.

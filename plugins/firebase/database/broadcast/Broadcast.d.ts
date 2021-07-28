@@ -5,8 +5,10 @@ export default Broadcast;
 declare namespace Broadcast {
     interface IConfig {
         root?: string,
+        senderID?: string,
+        senderName?: string,
         receiverID?: string,
-        history?: number,
+        history?: number | boolean,
 
         eventEmitter?: EventEmitter | false,
     }
@@ -34,7 +36,12 @@ declare class Broadcast extends EventEmitter {
         config: { userID: string, userName?: string }
     ): this;
 
+    userID: string;
+    userName: string;
+    readonly userInfo: { userID?: string, userName?: string };
+
     setReceiver(receiverID: string): this;
+    receiverID: string;
 
     send(
         message: Broadcast.MessageType

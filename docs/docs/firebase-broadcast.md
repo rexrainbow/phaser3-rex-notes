@@ -131,12 +131,16 @@ Broadcast real-time messages, using [firebase-database](https://firebase.google.
 ```javascript
 var messager = scene.plugins.get('rexFirebase').add.broadcast({
     root: '',
+    // senderID: '',
+    // senderName: '',
     // receiverID: '',
     // history: 0
 });
 ```
 
 - `root` : Path of this messager.
+- `senderID` : ID of sender.
+- `senderName` : Name of sender.
 - `receiverID` : ID of receiver/channel.
 - `history` : Stored received (history)  messages in client side.
     - `0`, or `false` : No history message stored.
@@ -165,7 +169,9 @@ var messager = scene.plugins.get('rexFirebase').add.broadcast({
     - `receiverID` : ID of receiver/channel.
 1. Send message to receiverID.
     ```javascript
-    messager.send(message);
+    messager.send(message)
+    // .then(function() { })
+    // .catch(function() { })
     ```
     - `message` : A string message, or a JSON data.
 
