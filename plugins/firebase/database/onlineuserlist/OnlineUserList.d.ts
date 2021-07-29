@@ -8,8 +8,7 @@ declare namespace OnlineUserList {
         root?: string,
         maxUsers?: number,
 
-        userID?: string,
-        userName?: string,
+        userID?: string, userName?: string,
 
         eventEmitter?: EventEmitter | false,
     }

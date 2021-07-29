@@ -17,8 +17,7 @@ declare namespace Broadcast {
     { [name: string]: number | string | boolean };
 
     interface IReceiveData {
-        senderID: string,
-        senderName?: string,
+        senderID: string, senderName?: string,
         message: MessageType
     }
 }

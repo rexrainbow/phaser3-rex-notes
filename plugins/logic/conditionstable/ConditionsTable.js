@@ -5,18 +5,8 @@ import CreateTestFunction from './CreateTestFunction.js';
 
 
 class ConditionsTable {
-    constructor(config) {
+    constructor() {
         this.tests = [];
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        var table = GetValue(o, 'table', undefined);
-        var delimiter = GetValue(o, 'delimiter', ',');
-        if (table !== undefined) {
-            this.loadTable(table, delimiter);
-        }
-        return this;
     }
 
     loadCSV(csvString, config) {

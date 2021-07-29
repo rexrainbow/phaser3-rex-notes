@@ -3664,20 +3664,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-each-pass-test-name" class="md-nav__link">
-    Get each pass test name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-result-of-each-test" class="md-nav__link">
-    Get result of each test
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3696,6 +3682,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../achievements/" title="Achievements table" class="md-nav__link">
+      Achievements table
+    </a>
   </li>
 
         
@@ -5649,6 +5647,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../firebase-messages/" title="Messages" class="md-nav__link">
+      Messages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../firebase-idalias/" title="ID-alias" class="md-nav__link">
       ID-alias
     </a>
@@ -5840,20 +5850,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-each-pass-test-name" class="md-nav__link">
-    Get each pass test name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-result-of-each-test" class="md-nav__link">
-    Get result of each test
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5996,29 +5992,12 @@
 <li><code>results</code> : <code>{name: boolean}</code>, use OR operation to combine result of tests with the same name.</li>
 </ul>
 <h4 id="get-first-pass-test-name">Get first pass test name<a class="headerlink" href="#get-first-pass-test-name" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">testName</span><span class="p">){</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">testName</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>values</code> : Inputs in Key-value pairs</li>
 </ul>
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">testName</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="get-each-pass-test-name">Get each pass test name<a class="headerlink" href="#get-each-pass-test-name" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">eachPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">testName</span><span class="p">){</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
-
-<h4 id="get-result-of-each-test">Get result of each test<a class="headerlink" href="#get-result-of-each-test" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">eachTest</span><span class="p">(</span><span class="nx">values</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">testName</span><span class="p">,</span> <span class="nx">result</span><span class="p">){</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div>
                 
                   
                 
@@ -6055,13 +6034,13 @@
           </a>
         
         
-          <a href="../quest/" title="Quest" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../achievements/" title="Achievements table" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Quest
+                Achievements table
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

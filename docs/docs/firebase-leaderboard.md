@@ -134,6 +134,8 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     // timeFilters: false,
     // timeFilterType: 'year',
     // pageItemCount: 100,
+    // userID: '',
+    // userName: '',
     // boardID: undefined,
     // tag: undefined
 });
@@ -160,6 +162,8 @@ var leaderBoard = scene.plugins.get('rexFirebase').add.leaderBoard({
     - `'year'`, `'y'` : Filter scores by current year. Default value.
     - `'all'`, `'a'` : No time filter to track all scores.
 - `pageItemCount` : Item count of a page, default value is `100`
+- `userID` : ID of user.
+- `userName` : Name of user.
 - `boardID` : Board ID, optional.
 - `tag` : Custom tag, optional.
 

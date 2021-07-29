@@ -19,8 +19,7 @@ declare namespace SingleRoom {
         },
         tables?: undefined | ITableConfig[],
 
-        userID?: string,
-        userName?: string,
+        userID?: string, userName?: string,
 
         eventEmitter?: EventEmitter | false,
     }

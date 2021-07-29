@@ -114,31 +114,7 @@ var results = table.getTestResults(values);
 #### Get first pass test name
 
 ```javascript
-table.anyPassTest(values, function(testName){
-
-}, scope);
-```
-
-- `values` : Inputs in Key-value pairs
-
-or
-
-```javascript
 var testName = table.anyPassTest(values);
 ```
 
-#### Get each pass test name
-
-```javascript
-table.eachPassTest(values, function(testName){
-
-}, scope);
-```
-
-#### Get result of each test
-
-```javascript
-table.eachTest(values, function(testName, result){
-
-}, scope);
-```
+- `values` : Inputs in Key-value pairs

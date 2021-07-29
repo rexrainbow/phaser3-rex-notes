@@ -15,7 +15,6 @@ declare namespace ConditionsTable {
 }
 
 declare class ConditionsTable {
-    constructor();
 
     loadCSV(
         csvString: string,

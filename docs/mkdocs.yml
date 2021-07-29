@@ -225,6 +225,7 @@ nav:
     - FSM: fsm.md
     - CSV table:
         - Conditions table: conditionstable.md
+        - Achievements table: achievements.md
     - Quest: 
         - Quest: quest.md
         - Dialog-quest: dialog-quest.md
@@ -361,6 +362,7 @@ nav:
         - Online user list: firebase-onlineuserlist.md
         - Broadcast: firebase-broadcast.md
         - Item table: firebase-itemtable.md
+        - Messages : firebase-messages.md
         - ID-alias: firebase-idalias.md
 - Storage:
     - LocalStorage: localstorage.md

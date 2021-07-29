@@ -5,15 +5,9 @@ import Achievement from './Achievement.js';
 
 
 class Achievements {
-    constructor(config) {
+    constructor() {
         this.achievements = {};
         this.obtainedStates = {};
-        this.resetFromJSON(config);
-    }
-
-    resetFromJSON(o) {
-        this.setObtainedState(GetValue(o, 'obtained', {}));
-        return this;
     }
 
     loadCSV(csvString, config) {
@@ -42,31 +36,27 @@ class Achievements {
         return this.achievements[levelName];
     }
 
-    getAchievementNames(levelName, out) {
-        if (out === undefined) {
-            out = [];
-        }
-        var achievements = this.getAchievements(levelName);
-        if (!achievements) {
-            return out;
-        }
-        for (var i = 0, cnt = achievements.length; i < cnt; i++) {
-            out.push(achievements[i].name);
-        }
-        return names;
-    }
-
     getObtainedState(levelName, achievementName) {
+        if (levelName === undefined) {
+            return this.obtainedStates;
+        }
+
         if (!this.obtainedStates.hasOwnProperty(levelName)) {
             this.obtainedStates[levelName] = {};
         }
-        if (!this.obtainedStates[levelName].hasOwnProperty(achievementName)) {
-            this.obtainedStates[levelName][achievementName] = {
+        var obtainedStates = this.obtainedStates[levelName];
+
+        if (achievementName === undefined) {
+            return obtainedStates;
+        }
+
+        if (!obtainedStates.hasOwnProperty(achievementName)) {
+            obtainedStates[achievementName] = {
                 wasObtained: false,
                 justObtained: false
             };
         }
-        return this.obtainedStates[levelName][achievementName];
+        return obtainedStates[achievementName];
     }
 
     runTest(levelName, values) {
@@ -94,6 +84,11 @@ class Achievements {
         return this;
     }
 
+    getTestResults(levelName, values) {
+        this.runTest(levelName, values);
+        return this.getObtainedState(levelName);
+    }
+
     forEachObtainedState(levelName, callback, scope) {
         var achievements = this.getAchievements(levelName);
         if (achievements === undefined) {
@@ -113,25 +108,52 @@ class Achievements {
         return this;
     }
 
-    setObtainedState(levelName, achievementName, value) {
-        if (value === undefined) {
-            value = true;
+    getLevelNames(out) {
+        if (out === undefined) {
+            out = [];
         }
-        var obtainedState = this.getObtainedState(levelName, achievementName);
-        if (obtainedState.wasObtained !== value) {
-            obtainedState.justObtained = value;
-            obtainedState.wasObtained = value;
+        for (var levelName in this.achievements) {
+            out.push(levelName);
         }
-        return this;
+        return out;
+    }
+
+    getAchievementNames(levelName, out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var achievements = this.getAchievements(levelName);
+        if (!achievements) {
+            return out;
+        }
+        for (var i = 0, cnt = achievements.length; i < cnt; i++) {
+            out.push(achievements[i].name);
+        }
+        return names;
     }
 
     loadObtainedStates(states) {
-        this.obtainedStates = states; // TODO: 
+        this.obtainedStates = states;
         return this;
     }
 
     getObtainedStates() {
         return this.obtainedStates;
+    }
+
+    setObtainedState(levelName, achievementName, value) {
+        if (value === undefined) {
+            value = true;
+        }
+        var obtainedState = this.getObtainedState(levelName, achievementName);
+        obtainedState.wasObtained = value;
+        obtainedState.justObtained = value;        
+        return this;
+    }
+
+    clearObtainedState(levelName, achievementName) {
+        this.setObtainedState(levelName, achievementName, gfalse);
+        return this;
     }
 }
 export default Achievements;
