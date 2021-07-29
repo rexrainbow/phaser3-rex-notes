@@ -1,8 +1,8 @@
 // import * as Phaser from 'phaser';
 
-export default Buttons;
+export default Button;
 
-declare namespace Buttons {
+declare namespace Button {
 
     interface IConfig {
         mode?: 0 | 1 | 'pointerdown' | 'pointerup' | 'press' | 'release',
@@ -11,12 +11,33 @@ declare namespace Buttons {
 
         eventEmitter?: boolean | Phaser.Events.EventEmitter
     }
+
+    namespace Events {
+        type ClickCallbackType =
+            (
+                button: Button,
+                gameObject: Phaser.GameObjects.GameObject,
+                pointer: Phaser.Input.Pointer,
+                event: Phaser.Types.Input.EventData
+            ) => void;
+
+        type EnableCallbackType = (
+            button: Button,
+            gameObject: Phaser.GameObjects.GameObject,
+        ) => void;
+
+        type DisableCallbackType = (
+            button: Button,
+            gameObject: Phaser.GameObjects.GameObject,
+        ) => void;
+
+    }
 }
 
-declare class Buttons extends Phaser.Events.EventEmitter {
+declare class Button extends Phaser.Events.EventEmitter {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: Buttons.IConfig
+        config?: Button.IConfig
     )
 
     setEnable(enable?: boolean): this;
