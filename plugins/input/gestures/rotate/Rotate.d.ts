@@ -10,6 +10,11 @@ declare namespace Rotate {
         threshold?: number,
     }
 
+    namespace Events {
+        type RotateCallbackType = (
+            rotate: Rotate,
+        ) => void;
+    }
 }
 
 declare class Rotate extends TwoPointersTracer {

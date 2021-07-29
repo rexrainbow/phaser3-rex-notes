@@ -164,7 +164,7 @@ tap.on(tapsCount + 'tap', function(tap, gameObject, lastPointer){
 Each pointer-down will increase taps count and fire `tappingstart` event.
 
 ```javascript
-tap.on('tappingstart', function(tap){
+tap.on('tappingstart', function(tap, gameObject, lastPointer){
 }, scope);
 ```
 

@@ -9,6 +9,11 @@ declare namespace Pinch {
         threshold?: number,
     }
 
+    namespace Events {
+        type PinchCallbackType = (
+            pinch: Pinch,
+        ) => void;
+    }
 }
 
 declare class Pinch extends TwoPointersTracer {

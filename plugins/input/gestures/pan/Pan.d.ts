@@ -10,6 +10,13 @@ declare namespace Pan {
         threshold?: number,
     }
 
+    namespace Events {
+        type PanCallbackType = (
+            pan: Pan,
+            gameObject: Phaser.GameObjects.GameObject,
+            lastPointer: Phaser.Input.Pointer
+        ) => void;
+    }
 }
 
 declare class Pan extends OnePointerTracer {

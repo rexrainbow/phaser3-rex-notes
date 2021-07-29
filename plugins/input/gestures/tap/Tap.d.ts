@@ -16,6 +16,14 @@ declare namespace Tap {
         maxTaps?: number | undefined,
     }
 
+    namespace Events {
+        type TapCallbackType = (
+            tap: Tap,
+            gameObject: Phaser.GameObjects.GameObject,
+            lastPointer: Phaser.Input.Pointer
+        ) => void;
+    }
+
 }
 
 declare class Tap extends OnePointerTracer {

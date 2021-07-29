@@ -10,6 +10,13 @@ declare namespace Press {
         threshold?: number,
     }
 
+    namespace Events {
+        type PressCallbackType = (
+            press: Press,
+            gameObject: Phaser.GameObjects.GameObject,
+            lastPointer: Phaser.Input.Pointer
+        ) => void;
+    }
 }
 
 declare class Press extends OnePointerTracer {

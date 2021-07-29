@@ -11,6 +11,13 @@ declare namespace Swipe {
         dir: 0 | 1 | 2 | 3 | 'up&down' | 'left&right' | '4dir' | '8dir',
     }
 
+    namespace Events {
+        type SwipeCallbackType = (
+            swipe: Swipe,
+            gameObject: Phaser.GameObjects.GameObject,
+            lastPointer: Phaser.Input.Pointer
+        ) => void;
+    }
 }
 
 declare class Swipe extends OnePointerTracer {
