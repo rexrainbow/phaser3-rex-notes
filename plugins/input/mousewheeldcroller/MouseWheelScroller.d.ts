@@ -6,6 +6,14 @@ declare namespace MouseWheelScroller {
         speed?: number,
         enable?: boolean
     }
+
+    namespace Events {
+        type ScrollCallbackType = (
+            inc: number,
+            gameObject: Phaser.GameObjects.GameObject,
+            scroller: MouseWheelScroller
+        ) => void;
+    }
 }
 
 declare class MouseWheelScroller extends Phaser.Events.EventEmitter {

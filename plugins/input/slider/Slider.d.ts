@@ -14,6 +14,10 @@ declare namespace Slider {
         valuechangeCallback?: ValuechangeCallbackType,
         valuechangeCallbackScope?: Object
     }
+
+    namespace Events {
+        type ValueChageCallbackType = ValuechangeCallbackType;
+    }
 }
 
 declare class Slider extends Phaser.Events.EventEmitter {

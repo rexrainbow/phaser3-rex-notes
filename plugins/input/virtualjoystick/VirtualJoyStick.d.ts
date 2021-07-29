@@ -19,6 +19,9 @@ declare namespace VirtualJoyStick {
         enable?: boolean,
     }
 
+    namespace Events {
+        type UpdateCallbackType = () => void;
+    }
 }
 
 declare class VirtualJoyStick {

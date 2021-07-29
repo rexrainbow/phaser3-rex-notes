@@ -26,6 +26,10 @@ declare namespace Scroller {
         overminCallback?: ValuechangeCallbackType,
         overminCallbackScope?: Object,
     }
+
+    namespace Events {
+        type ValueChageCallbackType = ValuechangeCallbackType;
+    }
 }
 
 declare class Scroller extends Phaser.Events.EventEmitter {

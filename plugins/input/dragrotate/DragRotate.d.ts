@@ -8,6 +8,12 @@ declare namespace DragRotate {
         minRadius?: number,
         enable?: boolean,
     }
+
+    namespace Evenets {
+        type DragCallbackType = (
+            dragRotate: DragRotate
+        ) => void;
+    }
 }
 
 declare class DragRotate {
