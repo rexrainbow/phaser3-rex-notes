@@ -10,8 +10,8 @@ class AchievementsPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(config) {
-        return new Achievements(config);
+    add() {
+        return new Achievements();
     }
 }
 

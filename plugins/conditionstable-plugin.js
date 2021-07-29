@@ -10,8 +10,8 @@ class ConditionsTablePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    add(config) {
-        return new ConditionsTable(config);
+    add() {
+        return new ConditionsTable();
     }
 }
 
