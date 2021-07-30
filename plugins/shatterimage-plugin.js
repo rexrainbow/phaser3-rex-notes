@@ -1,6 +1,6 @@
-import Factory from './gameobjects/shatterimage/Factory.js';
-import Creator from './gameobjects/shatterimage/Creator.js';
-import ShatterImage from './gameobjects/shatterimage/ShatterImage.js';
+import Factory from './gameobjects/mesh/shatterimage/Factory.js';
+import Creator from './gameobjects/mesh/shatterimage/Creator.js';
+import ShatterImage from './gameobjects/mesh/shatterimage/ShatterImage.js';
 import SetValue from './utils/object/SetValue.js';
 
 class ShatterImagePlugin extends Phaser.Plugins.BasePlugin {

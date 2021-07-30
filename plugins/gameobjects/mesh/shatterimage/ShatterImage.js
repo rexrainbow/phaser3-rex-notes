@@ -1,4 +1,4 @@
-import ShatterRectangleToTriangles from '../../utils/math/triangulate/ShatterRectangleToTriangles.js';
+import ShatterRectangleToTriangles from '../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
 import Face from './Face.js';
 
 const Mesh = Phaser.GameObjects.Mesh;

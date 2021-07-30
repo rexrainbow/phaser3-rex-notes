@@ -1,2 +1,2 @@
-import ShatterImage from './gameobjects/shatterimage/ShatterImage';
+import ShatterImage from './gameobjects/mesh/shatterimage/ShatterImage';
 export default ShatterImage;
