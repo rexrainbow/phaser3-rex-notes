@@ -1,4 +1,4 @@
-import RenderTexture from '../../gameobjects/perspective/rendertexture/RenderTexture.js';
+import RenderTexture from '../../gameobjects/mesh/perspective/rendertexture/RenderTexture.js';
 import Container from '../../gameobjects/containerlite/ContainerLite.js';
 import Snapshot from '../../utils/rendertexture/Snapshot.js';
 

@@ -1,7 +1,5 @@
-import IsArray from '../../../utils/object/IsArray';
-
 var ForEachFace = function (faces, callback, scope, ignoreInvalid) {
-    if (IsArray(faces)) {
+    if (Array.isArray(faces)) {
         var isBreak = false;
         for (var i = 0, cnt = faces.length; i < cnt; i++) {
             var face = faces[i];

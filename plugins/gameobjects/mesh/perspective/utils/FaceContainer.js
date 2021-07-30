@@ -1,4 +1,4 @@
-import Container from '../../containerlite/ContainerLite.js';
+import Container from '../../../containerlite/ContainerLite.js';
 import ForEachFace from './ForEachFace.js';
 
 const RadToDeg = Phaser.Math.RadToDeg;

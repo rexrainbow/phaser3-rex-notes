@@ -1,22 +1,22 @@
-import PerspectiveImageFactory from './gameobjects/perspective/image/Factory.js';
-import PerspectiveImageCreator from './gameobjects/perspective/image/Creator.js';
-import PerspectiveImage from './gameobjects/perspective/image/Image.js';
+import PerspectiveImageFactory from './gameobjects/mesh/perspective/image/Factory.js';
+import PerspectiveImageCreator from './gameobjects/mesh/perspective/image/Creator.js';
+import PerspectiveImage from './gameobjects/mesh/perspective/image/Image.js';
 
-import PerspectiveRenderTextureFactory from './gameobjects/perspective/rendertexture/Factory.js';
-import PerspectiveRenderTextureCreator from './gameobjects/perspective/rendertexture/Creator.js';
-import PerspectiveRenderTexture from './gameobjects/perspective/rendertexture/RenderTexture.js';
+import PerspectiveRenderTextureFactory from './gameobjects/mesh/perspective/rendertexture/Factory.js';
+import PerspectiveRenderTextureCreator from './gameobjects/mesh/perspective/rendertexture/Creator.js';
+import PerspectiveRenderTexture from './gameobjects/mesh/perspective/rendertexture/RenderTexture.js';
 
-import PerspectiveCardFactory from './gameobjects/perspective/card/Factory.js';
-import PerspectiveCardCreator from './gameobjects/perspective/card/Creator.js';
-import PerspectiveCard from './gameobjects/perspective/card/Card.js';
+import PerspectiveCardFactory from './gameobjects/mesh/perspective/card/Factory.js';
+import PerspectiveCardCreator from './gameobjects/mesh/perspective/card/Creator.js';
+import PerspectiveCard from './gameobjects/mesh/perspective/card/Card.js';
 
-import PerspectiveCarouselFactory from './gameobjects/perspective/carousel/Factory.js';
-import PerspectiveCarouselCreator from './gameobjects/perspective/carousel/Creator.js';
-import PerspectiveCarousel from './gameobjects/perspective/carousel/Carousel.js';
+import PerspectiveCarouselFactory from './gameobjects/mesh/perspective/carousel/Factory.js';
+import PerspectiveCarouselCreator from './gameobjects/mesh/perspective/carousel/Creator.js';
+import PerspectiveCarousel from './gameobjects/mesh/perspective/carousel/Carousel.js';
 
-import PerspectiveImageCarouselFactory from './gameobjects/perspective/imagecarousel/Factory';
-import PerspectiveImageCarouselCreator from './gameobjects/perspective/imagecarousel/Creator.js';
-import PerspectiveImageCarousel from './gameobjects/perspective/imagecarousel/ImageCarousel.js';
+import PerspectiveImageCarouselFactory from './gameobjects/mesh/perspective/imagecarousel/Factory';
+import PerspectiveImageCarouselCreator from './gameobjects/mesh/perspective/imagecarousel/Creator.js';
+import PerspectiveImageCarousel from './gameobjects/mesh/perspective/imagecarousel/ImageCarousel.js';
 
 import ContainerPerspective from './behaviors/containerperspective/ContainerPerspective.js';
 
