@@ -12,25 +12,25 @@ declare namespace DialogQuest {
         type UpdateChoiceCallbackType = (
             choice: Phaser.GameObjects.GameObject,
             option: QuestManager.QuestionType,
-            quest: QuestManager.QuestType
+            quest: QuestManager.Quest
         ) => void;
 
         type UpdateDialogCallbackType = (
             dialog: Dialog,
             question: QuestManager.QuestionType,
-            quest: QuestManager.QuestType
+            quest: QuestManager.Quest
         ) => void;
 
         type ClickChoiceCallbackType = (
             choice: Phaser.GameObjects.GameObject,
             dialog: Dialog,
-            quest: QuestManager.QuestType
+            quest: QuestManager.Quest
         ) => void;
 
         type ClickActionCallbackType = (
             action: Phaser.GameObjects.GameObject,
             dialog: Dialog,
-            quest: QuestManager.QuestType
+            quest: QuestManager.Quest
         ) => void;
     }
 }

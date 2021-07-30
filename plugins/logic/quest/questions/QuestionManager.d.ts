@@ -40,7 +40,7 @@ declare namespace QuestionManager {
         ) => void;
     }
 
-    type QuestType = Quest;
+    export class Quest { }
 
 }
 
