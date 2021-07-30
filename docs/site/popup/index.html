@@ -2099,6 +2099,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5787,6 +5794,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5872,26 +5886,35 @@
 <h3 id="pop-up">Pop up<a class="headerlink" href="#pop-up" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Pop up width and height
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// popUp(gameObject, duration, undefined, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// var scale = popUp(gameObject, duration, undefined, ease);</span>
 </code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
 <li>Pop up width only
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
-<span class="c1">// popUp(gameObject, duration, &#39;x&#39;, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = popUp(gameObject, duration, &#39;x&#39;, ease);</span>
 </code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
 <li>Pop up height only
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
-<span class="c1">// popUp(gameObject, duration, &#39;y&#39;, ease);</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexScale&#39;</span><span class="p">).</span><span class="nx">popup</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = popUp(gameObject, duration, &#39;y&#39;, ease);</span>
 </code></pre></div><ul>
 <li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<p>See <a href="../tween/#events">Events of tween task</a></p>
+<ul>
+<li>Scale completes or is stopped.
+    <div class="codehilite"><pre><span></span><code><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scale</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
                 
                   

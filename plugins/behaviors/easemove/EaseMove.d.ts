@@ -16,6 +16,13 @@ declare namespace EaseMove {
         delay?: number,
         ease?: string
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            easeMove: EaseMove
+        ) => void;
+    }
 }
 
 declare class EaseMove extends TweenTask {

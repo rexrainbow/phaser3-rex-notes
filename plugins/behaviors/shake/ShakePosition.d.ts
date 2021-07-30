@@ -13,6 +13,14 @@ declare namespace ShakePosition {
         magnitude?: number,
         magnitudeMode?: MagnitudeModeType
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            shake: ShakePosition
+        ) => void;
+    }
+
 }
 
 declare class ShakePosition extends TickTask {

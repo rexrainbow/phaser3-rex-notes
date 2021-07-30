@@ -24,6 +24,12 @@ declare namespace FSM {
 
         eventEmitter?: EventEmitter | false,
     }
+
+    namespace Events {
+        type StateChangeCallbackType = (state: FSM) => void;
+        type ExitStateCallbackType = (state: FSM) => void;
+        type EnterStateCallbackType = (state: FSM) => void;
+    }
 }
 
 declare class FSM extends EventEmitter {

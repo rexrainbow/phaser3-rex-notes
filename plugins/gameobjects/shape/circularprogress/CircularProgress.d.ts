@@ -3,6 +3,12 @@ export default CircularProgress;
 
 declare namespace CircularProgress {
 
+    type ValueChangeCallbackType = (
+        newValue: number,
+        oldValue: number,
+        circularProgress: CircularProgress
+    ) => void;
+
     interface IConfig {
         x?: number, y?: number,
         radius?: number,
@@ -21,8 +27,16 @@ declare namespace CircularProgress {
             ease?: string
         },
 
-        valuechangeCallback: (newValue: number, oldValue: number, circularProgress: CircularProgress) => void,
+        valuechangeCallback: ValueChangeCallbackType,
 
+    }
+
+    namespace Events {
+        type ValueChangeCallbackType = (
+            newValue: number,
+            oldValue: number,
+            circularProgress: CircularProgress
+        ) => void;
     }
 }
 

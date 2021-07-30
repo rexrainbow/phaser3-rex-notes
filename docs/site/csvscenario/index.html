@@ -6216,16 +6216,24 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Complete
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scenario</span><span class="p">){});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">scenario</span><span class="p">){</span> 
+
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Label has changed
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;labelchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;labelchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">lastLabel</span><span class="p">,</span> <span class="nx">prevLabel</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">scenario</span><span class="p">){</span> 
+
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Dump execution log
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">scenario</span><span class="p">){</span> 
+
+<span class="p">});</span>
 </code></pre></div></li>
 <li>Notify error
-    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">msg</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">scenario</span><span class="p">){</span> 
+
+<span class="p">});</span>
 </code></pre></div></li>
 </ul>
 <h3 id="types-of-instructions">Types of instructions<a class="headerlink" href="#types-of-instructions" title="Permanent link">&para;</a></h3>

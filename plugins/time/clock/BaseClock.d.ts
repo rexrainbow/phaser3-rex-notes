@@ -4,6 +4,10 @@ declare namespace BaseClock {
     interface IConfig {
         timeScale?: number
     }
+
+    namespace Events {
+        type UpdateCallbackType = (now: number, delta: number) => void;
+    }
 }
 
 declare class BaseClock extends Phaser.Events.EventEmitter {

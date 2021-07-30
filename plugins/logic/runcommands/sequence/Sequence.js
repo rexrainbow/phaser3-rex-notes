@@ -157,7 +157,7 @@ class Sequence {
 
     complete() {
         this.state = 3;
-        this.emit('complete', this);
+        this.emit('complete', this.scope, this);
     }
 }
 

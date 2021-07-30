@@ -13,6 +13,13 @@ declare namespace Scale {
         delay?: number,
         ease?: string
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            scale: Scale
+        ) => void;
+    }
 }
 
 declare class Scale extends TweenTask {

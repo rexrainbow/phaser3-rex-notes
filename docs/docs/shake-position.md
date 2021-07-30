@@ -173,7 +173,7 @@ shake.setMagnitudeMode(magnitudeMode);
 
 - On reached target
     ```javascript
-    shake.on('complete', function(shake, gameObject){});
+    shake.on('complete', function(gameObject, shake){});
     ```
 
 ### Status

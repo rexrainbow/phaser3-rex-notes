@@ -118,19 +118,27 @@ scenario.start({
 
 - Complete
     ```javascript
-    scenario.on('complete', function(scenario){});
+    scenario.on('complete', function(scope, scenario){ 
+
+    });
     ```
 - Label has changed
     ```javascript
-    scenario.on('labelchange', function(){});
+    scenario.on('labelchange', function(lastLabel, prevLabel, scope, scenario){ 
+
+    });
     ```    
 - Dump execution log
     ```javascript
-    scenario.on('log', function(){});
+    scenario.on('log', function(msg, scope, scenario){ 
+        
+    });
     ```
 - Notify error
     ```javascript
-    scenario.on('error', function(){});
+    scenario.on('error', function(msg, scope, scenario){ 
+        
+    });
     ```
 
 ### Types of instructions

@@ -8,7 +8,9 @@ import Quest from '../quest/Quest';
 export default QuestionManager;
 
 declare namespace QuestionManager {
+
     type QuestionType = QuestionTypeRef;
+
     type OptionsType = OptionsTypeRef;
 
     type ConvertParamCallbackType = (s: string, key: string) => any;
@@ -29,6 +31,17 @@ declare namespace QuestionManager {
 
         eventEmitter?: EventEmitter | false,
     }
+
+    namespace Events {
+        type QuestCallbackType = (
+            question: QuestionTypeRef,
+            questionManager: QuestionManager,
+            quest: Quest
+        ) => void;
+    }
+
+    type QuestType = Quest;
+
 }
 
 declare class QuestionManager extends EventEmitter {

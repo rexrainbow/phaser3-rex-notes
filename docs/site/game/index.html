@@ -6017,6 +6017,30 @@
 <p>Global <a href="../scenemanager/">scene manager</a> in <code>game.scene</code>, or <code>scene.scene</code> in each scene.</p>
 <h3 id="global-data">Global data<a class="headerlink" href="#global-data" title="Permanent link">&para;</a></h3>
 <p>Instance of <a href="../datamanager/">data manager</a> in <code>game.registry</code>, or <code>scene.registry</code> in each scene.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var value = game.registry.get(key);</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="c1">// game.registry.set(key, value);</span>
+</code></pre></div></li>
+<li>Event<ul>
+<li>Set data event
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;setdata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// game.registry.events.on(&#39;setdata&#39;, function(parent, key, value){ /* ... */ })</span>
+</code></pre></div></li>
+<li>Change data event
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// game.registry.events.on(&#39;changedata&#39;, function(parent, key, value, previousValue){ /* ... */ })</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">registry</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="c1">// game.registry.events.on(&#39;changedata-&#39; + key, function(parent, value, previousValue){ /* ... */ });</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
 <h2 id="game-time">Game time<a class="headerlink" href="#game-time" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The time that the current game step started at.

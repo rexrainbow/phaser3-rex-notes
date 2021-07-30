@@ -187,6 +187,32 @@ Global [scene manager](scenemanager.md) in `game.scene`, or `scene.scene` in eac
 
 Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.
 
+- Get
+    ```javascript
+    var value = scene.registry.get(key);
+    // var value = game.registry.get(key);
+    ```
+- Set
+    ```javascript
+    scene.registry.set(key, value);
+    // game.registry.set(key, value);
+    ```
+- Event
+    - Set data event
+        ```javascript
+        scene.registry.events.on('setdata', function(parent, key, value){ /* ... */ });
+        // game.registry.events.on('setdata', function(parent, key, value){ /* ... */ })
+        ```
+    - Change data event
+        ```javascript
+        scene.registry.events.on('changedata', function(parent, key, value, previousValue){ /* ... */ });
+        // game.registry.events.on('changedata', function(parent, key, value, previousValue){ /* ... */ })
+        ```
+        ```javascript
+        scene.registry.events.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
+        // game.registry.events.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
+        ```
+
 ## Game time
 
 - The time that the current game step started at.

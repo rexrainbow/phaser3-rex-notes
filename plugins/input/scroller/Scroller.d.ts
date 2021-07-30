@@ -3,7 +3,7 @@ export default Scroller;
 declare namespace Scroller {
 
     type OrientationType = 0 | 1 | 'x' | 'y' | 'v' | 'vertical' | 'h' | 'horizontal';
-    type ValuechangeCallbackType = (newValue: number, oldValue: number) => void
+    type ValueChangeCallbackType = (newValue: number, oldValue: number) => void;
 
     interface IConfig {
         bounds?: [
@@ -17,18 +17,18 @@ declare namespace Scroller {
         enable?: boolean,
         orientation?: OrientationType,
 
-        valuechangeCallback?: ValuechangeCallbackType,
+        valuechangeCallback?: ValueChangeCallbackType,
         valuechangeCallbackScope?: Object,
 
-        overmaxCallback?: ValuechangeCallbackType,
+        overmaxCallback?: ValueChangeCallbackType,
         overmaxCallbackScope?: Object,
 
-        overminCallback?: ValuechangeCallbackType,
+        overminCallback?: ValueChangeCallbackType,
         overminCallbackScope?: Object,
     }
 
     namespace Events {
-        type ValueChageCallbackType = ValuechangeCallbackType;
+        type ValueChageCallbackType = (newValue: number, oldValue: number) => void;
     }
 }
 

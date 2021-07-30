@@ -8,6 +8,13 @@ declare namespace MoveTo {
         speed?: number,
         rotateToTarget?: boolean
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            moveTo: MoveTo
+        ) => void;
+    }
 }
 
 declare class MoveTo extends TickTask {

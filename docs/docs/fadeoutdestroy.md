@@ -78,7 +78,7 @@ See [Events of tween task](tween.md#events)
 
 - Scale completes or is stopped.
     ```javascript
-    fade.on('complete', function(){
+    fade.on('complete', function(gameObject, fade){
 
     }, scope);
     ```

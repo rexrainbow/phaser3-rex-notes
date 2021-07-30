@@ -166,7 +166,7 @@ class CSVScenario {
     }
 
     complete() {
-        this.emit('complete', this);
+        this.emit('complete', this.scope, this);
         this.stop();
         return this;
     }
@@ -315,7 +315,7 @@ class CSVScenario {
     }
 
     log(msg) {
-        this.emit('log', msg, this);
+        this.emit('log', msg, this.scope, this);
         return this;
     }
 
@@ -324,7 +324,7 @@ class CSVScenario {
     }
 
     error(msg) {
-        this.emit('error', msg, this);
+        this.emit('error', msg, this.scope, this);
         return this;
     }
 }

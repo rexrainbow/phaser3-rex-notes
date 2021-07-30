@@ -9,6 +9,13 @@ declare namespace RotateTo {
     interface IConfig {
         speed?: number
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            rotateTo: RotateTo
+        ) => void;
+    }
 }
 
 declare class RotateTo extends TickTask {

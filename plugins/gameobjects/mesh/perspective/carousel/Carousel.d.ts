@@ -50,6 +50,10 @@ declare namespace Carousel {
 
         readonly isRunning: boolean;
     }
+
+    namespace Events {
+        type RollCompleteCallbackType = () => void;
+    }
 }
 
 declare class Carousel extends FaceContainer {

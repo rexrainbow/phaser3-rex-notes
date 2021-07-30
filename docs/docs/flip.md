@@ -184,7 +184,7 @@ flip.setEase(ease);
 
 - On flipping complete
     ```javascript
-    flip.on('complete', function(){
+    flip.on('complete', function(gameObject, flip){
         // ...
     });
     ```

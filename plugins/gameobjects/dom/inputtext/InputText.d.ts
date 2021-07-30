@@ -36,6 +36,14 @@ declare namespace InputText {
 
         selectAll?: boolean,
     }
+
+    namespace Events {
+        type TextChangeCallbackType = (inputText: InputText, e: Event) => void;
+        type FocusCallbackType = (inputText: InputText, e: Event) => void;
+        type BlurCallbackType = (inputText: InputText, e: Event) => void;
+        type ClickCallbackType = (inputText: InputText, e: Event) => void;
+        type DoubleClickCallbackType = (inputText: InputText, e: Event) => void;
+    }
 }
 
 declare class InputText extends Phaser.GameObjects.DOMElement {

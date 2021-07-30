@@ -14,6 +14,19 @@ declare namespace BracketParser {
 
         eventEmitter?: EventEmitter | false,
     }
+
+    namespace Events {
+        type StartCallbackType = (parser: BracketParser) => void;
+        type CompleteCallbackType = (parser: BracketParser) => void;
+        type PauseCallbackType = (parser: BracketParser) => void;
+        type ResumeCallbackType = (parser: BracketParser) => void;
+
+        type TagOnCallbackType = (...values: any) => void;
+        type AnyTagOnCallbackType = (tagName: string, ...values: any) => void;
+        type TagOffCallbackType = () => void;
+        type AnyTagOffCallbackType = (tagName: string) => void;
+        type ContentCallbackType = (content: string) => void;
+    }
 }
 
 declare class BracketParser extends EventEmitter {

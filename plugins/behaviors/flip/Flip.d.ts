@@ -26,6 +26,13 @@ declare namespace Flip {
         eventEmitter?: boolean | Phaser.Events.EventEmitter
     }
 
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            flip: Flip
+        ) => void;
+    }
+
 }
 
 declare class Flip extends TweenTask {

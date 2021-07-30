@@ -6,6 +6,10 @@ declare namespace FileChooser {
         accept?: string,
         multiple?: boolean
     }
+
+    namespace Events {
+        type ValueChangeCallbackType = (fileChooser: FileChooser) => void;
+    }
 }
 
 declare class FileChooser extends Phaser.GameObjects.DOMElement {
@@ -31,8 +35,8 @@ declare class FileChooser extends Phaser.GameObjects.DOMElement {
 
     readonly files: File[];
 
-    setAccept(accept:string):this;
+    setAccept(accept: string): this;
 
-    setMultiple(multiple?:boolean):this;
-    
+    setMultiple(multiple?: boolean): this;
+
 }

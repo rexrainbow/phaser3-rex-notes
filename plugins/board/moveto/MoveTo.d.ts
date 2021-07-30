@@ -7,7 +7,6 @@ export default MoveTo;
 
 declare namespace MoveTo {
 
-
     type MoveableTestCallbackType = (
         fromTileXYZ: TileXYZType,
         toTileXYZ: TileXYZType,
@@ -27,6 +26,18 @@ declare namespace MoveTo {
         sneak?: boolean,
     }
 
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            moveTo: MoveTo
+        ) => void;
+
+        type OccupyCallbackType = (
+            occupiedGameObject: Phaser.GameObjects.GameObject,
+            gameObject: Phaser.GameObjects.GameObject,
+            moveTo: MoveTo
+        ) => void;
+    }
 }
 
 declare class MoveTo<ChessType = Phaser.GameObjects.GameObject> extends TickTask {

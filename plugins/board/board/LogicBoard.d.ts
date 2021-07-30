@@ -33,6 +33,14 @@ declare namespace Board {
         infinity?: boolean
     }
 
+    namespace Events {
+        type KickOutCallbackType = (
+            chessToAdd: unknown,
+            occupiedChess: unknown,
+            tileXYZ: TileXYZType
+        ) => void;
+    }
+
 }
 
 declare class Board<ChessType = unknown> extends EE {

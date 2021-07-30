@@ -23,6 +23,9 @@ declare namespace ImageCarousel {
         roll?: Carousel.IConfigRoll | false,
     }
 
+    namespace Events {
+        type RollCompleteCallbackType = () => void;
+    }
 }
 
 declare class ImageCarousel extends Carousel {

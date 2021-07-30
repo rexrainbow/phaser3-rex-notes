@@ -13,6 +13,15 @@ declare namespace YoutubePlayer {
         modestBranding?: boolean,
         loop?: boolean,
     }
+
+    namespace Events {
+        type PlayingCallbackType = (player: YoutubePlayer) => void;
+        type PauseCallbackType = (player: YoutubePlayer) => void;
+        type EndedCallbackType = (player: YoutubePlayer) => void;
+        type BufferingCallbackType = (player: YoutubePlayer) => void;
+        type CuedCallbackType = (player: YoutubePlayer) => void;
+        type ErrorCallbackType = (player: YoutubePlayer) => void;
+    }
 }
 
 declare class YoutubePlayer extends Phaser.GameObjects.DOMElement {

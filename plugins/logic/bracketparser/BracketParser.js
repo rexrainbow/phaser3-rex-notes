@@ -191,23 +191,23 @@ class BracketParser {
 
     onStart() {
         this.isRunning = true;
-        this.emit('start');
+        this.emit('start', this);
     }
 
     onComplete() {
         this.isRunning = false;
-        this.emit('complete');
+        this.emit('complete', this);
         this.resetIndex();
     }
 
     onPause() {
         this.isPaused = true;
-        this.emit('pause');
+        this.emit('pause', this);
     }
 
     onResume() {
         this.isPaused = false;
-        this.emit('resume');
+        this.emit('resume', this);
     }
 }
 

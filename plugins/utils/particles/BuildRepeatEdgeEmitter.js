@@ -27,7 +27,7 @@ var BuildRepeatEdgeEmitter = function (emitter, config) {
     var deathCallback = function () {
         if (emitter.alive.length === 0) {
             var particles = emitter.manager;
-            particles.emit('complete', particles, emitter);
+            particles.emit('emitter.complete', particles, emitter);
         }
     }
     emitter.deathCallback = Override(

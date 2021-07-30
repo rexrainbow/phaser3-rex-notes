@@ -86,6 +86,21 @@ declare namespace Text {
         },
     }
 
+    namespace Events {
+        type AnyAreaCallbackType = (
+            key: string,
+            pointer: Phaser.Input.Pointer,
+            localX: number,
+            localY: number
+        ) => void;
+
+        type AreaCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            localX: number,
+            localY: number
+        ) => void;
+    }
+
 }
 
 declare class Text extends CanvasGameObjectBase {

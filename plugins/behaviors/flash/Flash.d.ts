@@ -8,6 +8,13 @@ declare namespace Flash {
         duration?: number,
         repeat?: number,
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            flash: Flash
+        ) => void;
+    }
 }
 
 declare class Flash extends TickTask {

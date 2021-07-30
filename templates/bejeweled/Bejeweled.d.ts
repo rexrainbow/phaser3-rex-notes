@@ -68,6 +68,57 @@ declare namespace Bejeweled {
         debug?: boolean
 
     }
+
+    namespace Events {
+        type Select1CallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type Select2CallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type SwapCallbackType = (
+            selectedChess1: Phaser.GameObjects.GameObject,
+            selectedChess2: Phaser.GameObjects.GameObject,
+            board: Board, bejeweled: Bejeweled
+        ) => void;
+
+        type MatchStartCallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type MatchCallbackType = (
+            lines: Phaser.Structs.Set<Phaser.GameObjects.GameObject>[],
+            board: Board, bejeweled: Bejeweled
+        ) => void;
+
+        type EliminateCallbackType = (
+            chessArray: Phaser.GameObjects.GameObject[],
+            board: Board, bejeweled: Bejeweled
+        ) => void;
+
+        type FallCallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type FillCallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type MatchEndCallbackType = (board: Board, bejeweled: Bejeweled) => void;
+
+        type UndoSwapCallbackType = (
+            selectedChess1: Phaser.GameObjects.GameObject,
+            selectedChess2: Phaser.GameObjects.GameObject,
+            board: Board, bejeweled: Bejeweled
+        ) => void;
+
+        type SetDataCallback = (
+            bejeweled: Bejeweled,
+            key: string, value: any
+        ) => void;
+
+        type ChangeetAnyDataCallback = (
+            bejeweled: Bejeweled,
+            key: string, value: any, previousValue: any
+        ) => void;
+
+        type ChangeetDataCallback = (
+            bejeweled: Bejeweled,
+            value: any, previousValue: any
+        ) => void;
+    }
 }
 
 declare class Bejeweled extends Phaser.Events.EventEmitter {

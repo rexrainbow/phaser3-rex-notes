@@ -26,8 +26,44 @@ declare namespace MiniBoard {
 
     type MirrorModeType = 0 | 1 | 3 | 'x' | 'y' | 'x&y';
 
-
     type TileXYZMapType = { [uid: number]: TileXYZType };
+
+    namespace Events {
+        type PointerDownCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            miniBoard: MiniBoard
+        ) => void;
+
+        type ChessDownCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            gameObject: Phaser.GameObjects.GameObject
+        ) => void;
+
+        type PointerUpCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            miniBoard: MiniBoard
+        ) => void;
+
+        type ChessUpCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            gameObject: Phaser.GameObjects.GameObject
+        ) => void;
+
+        type PointerMoveCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            miniBoard: MiniBoard
+        ) => void;
+
+        type ChessMoveCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            gameObject: Phaser.GameObjects.GameObject
+        ) => void;
+
+        type DragCallbackType = (
+            pointer: Phaser.Input.Pointer,
+            dragX: number, dragY: number
+        ) => void;
+    }
 }
 
 declare class MiniBoard extends Container {

@@ -70,19 +70,30 @@ Scale up (i.e. ease scaleX, scaleY from `0` to `1`) game object.
 
 - Pop up width and height
     ```javascript
-    scene.plugins.get('rexScale').popup(gameObject, duration);
-    // popUp(gameObject, duration, undefined, ease);
+    var scale = scene.plugins.get('rexScale').popup(gameObject, duration);
+    // var scale = popUp(gameObject, duration, undefined, ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
 - Pop up width only
     ```javascript
-    scene.plugins.get('rexScale').popup(gameObject, duration, 'x');
-    // popUp(gameObject, duration, 'x', ease);
+    var scale = scene.plugins.get('rexScale').popup(gameObject, duration, 'x');
+    // var scale = popUp(gameObject, duration, 'x', ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
 - Pop up height only
     ```javascript
-    scene.plugins.get('rexScale').popup(gameObject, duration, 'y');
-    // popUp(gameObject, duration, 'y', ease);
+    var scale = scene.plugins.get('rexScale').popup(gameObject, duration, 'y');
+    // var scale = popUp(gameObject, duration, 'y', ease);
     ```
     - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
+
+### Events
+
+See [Events of tween task](tween.md#events)
+
+- Scale completes or is stopped.
+    ```javascript
+    scale.on('complete', function(gameObject, scale){
+
+    }, scope);
+    ```

@@ -11,7 +11,7 @@ class Player extends BehaviorBase {
         super(parent, config);
 
         var clockClass = GetValue(config, 'clockClass', Clock);
-        this.clock = new clockClass(parent, { eventEmitter: this.getEventEmitter() });
+        this.clock = new clockClass(parent);
         this.clock.on('update', this.update, this);
 
         this.resetFromJSON(config); // this function had been called in super(config)
@@ -186,8 +186,9 @@ class Player extends BehaviorBase {
     }
 
     complete() {
-        this.clock.complete();
+        this.clock.stop();
         this.state = 2;
+        this.emit('complete', this.parent, this);
     }
 
     getNextDt(currentDt) {

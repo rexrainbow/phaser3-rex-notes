@@ -40,6 +40,10 @@ declare namespace Card {
         flip?: IConfigFlip | false,
     }
 
+    namespace Events {
+        type FlipCompleteCallbackType = () => void;
+    }
+
 }
 
 declare class Card extends FaceContainer {

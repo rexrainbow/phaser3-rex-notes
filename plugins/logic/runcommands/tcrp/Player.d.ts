@@ -1,3 +1,5 @@
+import EventEmitter from "../../../utils/eventemitter/EventEmitter";
+
 export default Player;
 
 declare namespace Player {
@@ -9,16 +11,27 @@ declare namespace Player {
         dtMode?: DtModeType,
         commands?: any[],
         timeScale?: number,
-        scope?: object
+        scope?: object,
+
+        eventEmitter?: EventEmitter | false,
     }
 
     interface ILoadConfig {
         timeUnit?: TimeUnitType
         dtMode?: DtModeType,
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            parent: Phaser.Scene | Phaser.GameObjects.GameObject,
+            player: Player
+        ) => void;
+
+        type RunCommandCallbackType = (command: any[], scope: object) => void;
+    }
 }
 
-declare class Player extends Phaser.Events.EventEmitter {
+declare class Player extends EventEmitter {
     constructor(
         parent: Phaser.Scene | Phaser.GameObjects.GameObject,
         config?: Player.IConfig

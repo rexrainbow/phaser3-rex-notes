@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import DynamicText from "../dynamictext/DynamicText";
+import Parser from '../../../logic/bracketparser/BracketParser';
 
 export default TextPlayer;
 
@@ -65,6 +66,40 @@ declare namespace TextPlayer {
         text?: string
     }
 
+    namespace Events {
+        type TypingCompleteCallbackType = () => void;
+
+        type TypingChildCallbackType = (
+            child: DynamicText.RenderChildTypes
+        ) => void
+
+        type PageStartCallbackType = () => void;
+
+        type PageCompleteCallbackType = () => void;
+
+        type WaitClickCallbackType = () => void;
+
+        type WaitKeyDownCallbackType = (keyName: string) => void;
+
+        type WaitTimeCallbackType = (time: number) => void;
+
+        type WaitMusicCompleteCallbackType = (
+            music: Phaser.Sound.BaseSound
+        ) => void;
+
+        type WaitCameraEffectCompleteCallbackType = (effectName: string) => void;
+
+        type WaitSpriteActionCompleteCallbackType = (name?: string, prop?: string) => void;
+
+        type WaitCallbackType = (
+            callback: () => void
+        ) => void;
+
+        type ParseCustomTagOnCallbackType = (parser: Parser, ...values: any) => void;
+        type ExecuteCustomTagOnCallbackType = (...values: any) => void;
+        type ParseCustomTagOffCallbackType = (parser: Parser) => void;
+        type ExecuteCustomTagOffCallbackType = () => void;
+    }
 }
 
 declare class TextPlayer extends DynamicText {

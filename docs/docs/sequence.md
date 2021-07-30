@@ -129,7 +129,7 @@ seq.stop();
 - On sequence completed :
 
 ```javascript
-seq.on('complete', function(seq){});
+seq.on('complete', function(actionScope, seq){ });
 ```
 
 ### Action of commands

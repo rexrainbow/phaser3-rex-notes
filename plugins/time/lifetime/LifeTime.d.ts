@@ -8,6 +8,13 @@ declare namespace LifeTime {
         destroy?: boolean,
         start?: boolean
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            lifeTime: LifeTime
+        ) => void;
+    }
 }
 
 declare class LifeTime extends Clock {

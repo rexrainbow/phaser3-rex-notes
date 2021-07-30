@@ -16,6 +16,27 @@ declare namespace CSVScenario {
         label?: string
         offset?: number
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            scope: object, scenario: CSVScenario
+        ) => void;
+
+        type LabelChangeCallbackType = (
+            lastLabel: string, prevLabel: string,
+            scope: object, scenario: CSVScenario
+        ) => void;
+
+        type LogCallbackType = (
+            msg: string,
+            scope: object, scenario: CSVScenario
+        ) => void;
+
+        type ErrorCallbackType = (
+            msg: string,
+            scope: object, scenario: CSVScenario
+        ) => void;
+    }
 }
 
 declare class CSVScenario extends Phaser.Events.EventEmitter {
@@ -26,7 +47,7 @@ declare class CSVScenario extends Phaser.Events.EventEmitter {
 
     load(
         csvString: string,
-        scope: Object,
+        scope: object,
         config?: CSVScenario.IConfig
     ): this;
 

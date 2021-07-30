@@ -105,7 +105,7 @@ See [Events of tween task](tween.md#events)
 
 - Move completes or is stopped.
     ```javascript
-    easemove.on('complete', function(){
+    easemove.on('complete', function(gameObject, easemove){
 
     }, scope);
     ```

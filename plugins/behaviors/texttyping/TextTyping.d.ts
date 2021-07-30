@@ -11,6 +11,11 @@ declare namespace TextTyping {
         setTextCallback?: SetTextCallbackType,
         setTextCallbackScope?: Object
     }
+
+    namespace Events {
+        type TypingCallbackType = () => void;
+        type TypingCompleteCallbackType = (typing: TextTyping, txt: string) => void;
+    }
 }
 
 declare class TextTyping extends Phaser.Events.EventEmitter {

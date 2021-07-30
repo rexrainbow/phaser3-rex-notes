@@ -1,7 +1,7 @@
 export default Slider;
 
 declare namespace Slider {
-    type ValuechangeCallbackType = (newValue: number, oldValue: number) => void;
+    type ValueChangeCallbackType = (newValue: number, oldValue: number) => void;
 
     interface IConfig {
         endPoints?: [
@@ -11,12 +11,12 @@ declare namespace Slider {
         value?: number,
         enable?: boolean,
 
-        valuechangeCallback?: ValuechangeCallbackType,
+        valuechangeCallback?: ValueChangeCallbackType,
         valuechangeCallbackScope?: Object
     }
 
     namespace Events {
-        type ValueChageCallbackType = ValuechangeCallbackType;
+        type ValueChangeCallbackType = (newValue: number, oldValue: number) => void;
     }
 }
 

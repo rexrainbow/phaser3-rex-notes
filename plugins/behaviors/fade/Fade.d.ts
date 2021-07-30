@@ -12,6 +12,13 @@ declare namespace Fade {
         duration?: number,
         delay?: number
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            fade: Fade
+        ) => void;
+    }
 }
 
 declare class Fade extends TweenTask {

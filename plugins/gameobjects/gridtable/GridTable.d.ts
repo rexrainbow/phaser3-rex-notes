@@ -61,6 +61,28 @@ declare namespace GridTable {
         scrollMode?: ScrollModeType,
         mask?: MaskConfig
     }
+
+    namespace Events {
+        type CellvisibleCallbackType = (
+            cell: CellData,
+            cellContainer: Phaser.GameObjects.GameObject | null,
+            table: GridTable
+        ) => void;
+
+        type CellInvisibleCallbackType = (cell: CellData) => void;
+
+        type CellHeightchange= (
+            cell: CellData,
+            cellContainer: Phaser.GameObjects.GameObject | null,
+            table: GridTable
+        ) => void;
+
+        type CellWidthchange= (
+            cell: CellData,
+            cellContainer: Phaser.GameObjects.GameObject | null,
+            table: GridTable
+        ) => void;  
+    }
 }
 
 declare class GridTable extends ContainerLite {
@@ -111,10 +133,10 @@ declare class GridTable extends ContainerLite {
     setCellWidth(cellIndex: number, cellWidth: number): this;
 
     iterateVisibleCell(
-        callback:(cell:GridTable.CellData)=>void
-    ):this;
+        callback: (cell: GridTable.CellData) => void
+    ): this;
 
     eachVisibleCell(
-        callback:(cell:GridTable.CellData)=>void
-    ):this;
+        callback: (cell: GridTable.CellData) => void
+    ): this;
 }

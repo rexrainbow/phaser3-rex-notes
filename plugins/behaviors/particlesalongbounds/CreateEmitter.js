@@ -11,10 +11,13 @@ var CreateEmitter = function (particles, config) {
 
     particles.isRunning = true;
     var reuse = GetValue(config, 'reuse', false);
-    particles.on('complete', function () {
+    particles.once('emitter.complete', function () {
         particles.isRunning = false;
         particles.removeEmitter(emitter);
         emitter = null;
+
+        particles.emit('complete', config.gameObject, particles);
+
         if (!reuse) {
             particles.destroy();
             particles = null;

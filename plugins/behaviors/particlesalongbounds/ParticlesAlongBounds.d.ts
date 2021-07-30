@@ -29,6 +29,13 @@ declare namespace ParticlesAlongBounds {
         gravityY?: number,
         duration?: number
     }
+
+    namespace Events {
+        type CompleteCallbackType = (
+            gameObject: Phaser.GameObjects.GameObject,
+            particles: Phaser.GameObjects.Particles.ParticleEmitterManager,           
+        ) => void;
+    }
 }
 
 declare function ParticlesAlongBounds(

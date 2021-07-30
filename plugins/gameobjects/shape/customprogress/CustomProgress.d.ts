@@ -4,6 +4,12 @@ export default CustomProgress;
 
 declare namespace CustomProgress {
 
+    type ValueChangeCallbackType = (
+        newValue: number,
+        oldValue: number,
+        customProgress: CustomProgress
+    ) => void;
+
     interface IConfig extends CustomShapes.IConfig {
         value?: number,
 
@@ -12,8 +18,15 @@ declare namespace CustomProgress {
             ease?: string
         },
 
-        valuechangeCallback: (newValue: number, oldValue: number, customProgress: CustomProgress) => void,
+        valuechangeCallback: ValueChangeCallbackType,
+    }
 
+    namespace Events {
+        type ValueChangeCallbackType = (
+            newValue: number,
+            oldValue: number,
+            customProgress: CustomProgress
+        ) => void;
     }
 }
 

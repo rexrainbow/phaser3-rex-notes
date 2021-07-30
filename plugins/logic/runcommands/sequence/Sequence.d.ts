@@ -1,3 +1,5 @@
+import EventEmitter from "../../../utils/eventemitter/EventEmitter";
+
 export default Sequence;
 
 declare namespace Sequence {
@@ -5,15 +7,21 @@ declare namespace Sequence {
         yoyo?: boolean,
         repeat?: number,
         loop?: boolean,
+
+        eventEmitter?: EventEmitter | false,
+    }
+
+    namespace Events {
+        type CompleteCallbackType = (actionScope: object, seq: Sequence) => void;
     }
 }
 
-declare class Sequence extends Phaser.Events.EventEmitter {
+declare class Sequence extends EventEmitter {
     constructor(config?: Sequence.IConfig);
 
     load(
         commands: any[],
-        actionScope: Object
+        actionScope: object
     ): this;
 
     start(): this;

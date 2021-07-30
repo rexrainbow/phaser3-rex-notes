@@ -4,6 +4,13 @@ export default CircularProgressCanvas;
 
 declare namespace CircularProgressCanvas {
 
+    type ValueChangeCallbackType = (
+        newValue: number,
+        oldValue: number,
+        circularProgress: CircularProgressCanvas
+    ) => void;
+
+
     interface IConfig {
         x?: number, y?: number,
         radius?: number,
@@ -31,8 +38,16 @@ declare namespace CircularProgressCanvas {
             ease?: string
         },
 
-        valuechangeCallback: (newValue: number, oldValue: number, circularProgress: CircularProgressCanvas) => void,
+        valuechangeCallback: ValueChangeCallbackType,
 
+    }
+
+    namespace Events {
+        type ValueChangeCallbackType = (
+            newValue: number,
+            oldValue: number,
+            circularProgress: CircularProgressCanvas
+        ) => void;
     }
 }
 

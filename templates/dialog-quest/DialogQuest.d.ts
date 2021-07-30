@@ -7,6 +7,32 @@ declare namespace DialogQuest {
     interface IConfig extends QuestManager.IConfig {
         dialog: Dialog,
     }
+
+    namespace Events {
+        type UpdateChoiceCallbackType = (
+            choice: Phaser.GameObjects.GameObject,
+            option: QuestManager.QuestionType,
+            quest: QuestManager.QuestType
+        ) => void;
+
+        type UpdateDialogCallbackType = (
+            dialog: Dialog,
+            question: QuestManager.QuestionType,
+            quest: QuestManager.QuestType
+        ) => void;
+
+        type ClickChoiceCallbackType = (
+            choice: Phaser.GameObjects.GameObject,
+            dialog: Dialog,
+            quest: QuestManager.QuestType
+        ) => void;
+
+        type ClickActionCallbackType = (
+            action: Phaser.GameObjects.GameObject,
+            dialog: Dialog,
+            quest: QuestManager.QuestType
+        ) => void;
+    }
 }
 
 declare class DialogQuest extends Phaser.Events.EventEmitter {
@@ -14,11 +40,11 @@ declare class DialogQuest extends Phaser.Events.EventEmitter {
         config?: DialogQuest.IConfig
     );
 
-    start():this;
+    start(): this;
 
-    next(key?:string):this;
+    next(key?: string): this;
 
-    isLast():boolean;
+    isLast(): boolean;
 
     getData(
         key: string,

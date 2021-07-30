@@ -158,7 +158,7 @@ var isRunning = particles.isRunning;
 
 - On fire completed, i.e. last particle is dead
     ```javascript
-    particles.on('complete', function(particles, gameObject){
+    particles.on('complete', function(gameObject, particles){
 
     }, scope);
     ```

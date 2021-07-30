@@ -114,7 +114,7 @@ class Cell {
 
         if (tableHeightChanged) {
             var eventName = (this.scrollMode === 0) ? 'cellheightchange' : 'cellwidthchange';
-            this.parentContainer.emit(eventName);
+            this.parentContainer.emit(eventName, this, this.container, this.parentContainer);
         }
     }
 
