@@ -36,7 +36,7 @@ class TextBox extends Label {
     }
 
     typeNextPage() {
-        if (!this.page.isLastPage) {
+        if (!this.isLastPage) {
             var txt = this.page.getNextPage();
             this.typing.start(txt);
         } else {
@@ -97,6 +97,10 @@ class TextBox extends Label {
 
     onPageEnd() {
         this.emit('pageend');
+
+        if (this.isLastPage) {
+            this.emit('complete');
+        }
     }
 
 }

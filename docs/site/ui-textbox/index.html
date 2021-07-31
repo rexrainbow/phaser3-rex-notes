@@ -6123,12 +6123,19 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On typing a character
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
 <li>On Typing the last character of current page.
-    <div class="codehilite"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pageend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">textBox</span><span class="p">.</span><span class="nx">isLastPage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...            </span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>On typing all pages complete, equal to <code>'pageend'</code> event with <code>textBox.isLastPage</code>.
+    <div class="codehilite"><pre><span></span><code><span class="nx">textBox</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>

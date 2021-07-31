@@ -228,13 +228,21 @@ var textBox = scene.rexUI.add.textBox({
 
 - On typing a character
     ```javascript
-    dialog.on('type', function() {
+    textBox.on('type', function() {
         // ...
     }, scope);
     ```
 - On Typing the last character of current page.
     ```javascript
-    dialog.on('pageend', function() {
+    textBox.on('pageend', function() {
+        if (textBox.isLastPage) {
+            // ...            
+        }
+    }, scope);
+    ```
+- On typing all pages complete, equal to `'pageend'` event with `textBox.isLastPage`.
+    ```javascript
+    textBox.on('complete', function() {
         // ...
     }, scope);
     ```

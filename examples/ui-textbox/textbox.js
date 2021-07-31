@@ -71,8 +71,10 @@ var createTextBox = function (scene, x, y, config) {
             this.resetChildVisibleState(icon);
             if (this.isTyping) {
                 this.stop(true);
-            } else {
+            } else if (!this.isLastPage) {
                 this.typeNextPage();
+            } else {
+                // Next actions
             }
         }, textBox)
         .on('pageend', function () {
@@ -92,6 +94,9 @@ var createTextBox = function (scene, x, y, config) {
                 yoyo: false
             });
         }, textBox)
+        .on('complete', function () {
+            console.log('all pages typing complete')
+        })
     //.on('type', function () {
     //})
 
