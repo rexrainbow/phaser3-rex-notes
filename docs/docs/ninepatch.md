@@ -10,6 +10,8 @@ Stretchable image.
 - [3x3](https://codepen.io/rexrainbow/pen/gOYzydR)
 - [5x5](https://codepen.io/rexrainbow/pen/vYBzYer)
 - [Custom frame name](https://codepen.io/rexrainbow/pen/poJzywP)
+- [Custom base frame name](https://codepen.io/rexrainbow/pen/YzXzbNj)
+- [Preserve ratio](https://codepen.io/rexrainbow/pen/OJpjZWV)
 
 ## Usage
 
