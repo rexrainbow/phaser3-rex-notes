@@ -74,8 +74,8 @@ declare class GridSizer extends BaseSizer {
     add(
         gameObject: Phaser.GameObjects.GameObject,
         config?: {
-            column?: number,
-            row?: number,
+            column?: number | undefined,
+            row?: number | undefined | true,
 
             align?: GridSizer.AlignTypes,
 
