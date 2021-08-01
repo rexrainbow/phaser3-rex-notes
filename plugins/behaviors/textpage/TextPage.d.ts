@@ -15,6 +15,8 @@ declare class TextPage {
 
     setText(text: string | string[]): this;
     appendText(text: string | string[]): this;
+    appendPage(text: string | string[]): this;
+    clearContent(): this;
 
     showPage(pageIndex?: number): this;
     showNextPage(): this;

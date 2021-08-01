@@ -55,7 +55,7 @@ class CanvasText {
         if (penManager === undefined) {
             penManager = this.penManager;
         }
-        penManager.freePens();
+        penManager.clear();
         if (text === "") {
             return penManager;
         }

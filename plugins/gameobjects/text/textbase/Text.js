@@ -175,7 +175,7 @@ class Text extends GameObject {
     }
 
     setText(value) {
-        if (!value && value !== 0) {
+        if (value == null) {
             value = '';
         }
 
@@ -189,6 +189,18 @@ class Text extends GameObject {
             this.updateText();
         }
 
+        return this;
+    }
+
+    appendText(value) {
+        if (value == null) {
+            return this;
+        }
+        if (Array.isArray(value)) {
+            value = value.join('\n');
+        }
+
+        this.setText(this.text + value.toString())
         return this;
     }
 

@@ -23,14 +23,15 @@ class PenManager {
     }
 
     destroy() {
-        this.freePens();
+        this.clear();
         this.tagToText = undefined;
         this.tagToTextScope = undefined;
     }
 
-    freePens() {
-        for (var i = 0, len = this.lines.length; i < len; i++)
+    clear() {
+        for (var i = 0, len = this.lines.length; i < len; i++) {
             this.lines[i].length = 0;
+        }
 
         this.PensPool.pushMultiple(this.pens);
         this.LinesPool.pushMultiple(this.lines);
@@ -96,7 +97,7 @@ class PenManager {
         if (targetPenManager == null)
             targetPenManager = new PenManager();
 
-        targetPenManager.freePens();
+        targetPenManager.clear();
 
         for (var li = 0, llen = this.lines.length; li < llen; li++) {
             var pens = this.lines[li];
@@ -265,6 +266,15 @@ class PenManager {
         }
 
         return txt;
+    }
+
+    get length() {
+        return this.lines.length;
+    }
+
+    set length(value) {
+        // Only for set length to 0 (clear)
+        this.clear();
     }
 };
 

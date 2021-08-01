@@ -8,24 +8,33 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.bitmapFont('gothic', 'assets/fonts/gothic.png', 'assets/fonts/gothic.xml');
-    }
+    preload() { }
 
     create() {
         this.textPage = this.plugins.get('rexTextPage');
 
         var lines = [];
-        for (var i = 0; i < 50; i++) {
-            lines.push(i.toString());
+        for (var i = 0; i < 55; i++) {
+            lines.push(`${i}\n`);
+            if ((i % 10) === 9) {
+                lines.push('Page-break here<PB>\n');
+            }
         }
+        lines = lines.join('')
 
-        var txt = this.add.bitmapText(100, 100, 'gothic')
-            .setFontSize(20)
-            .setMaxWidth(500)
+        var txt = this.add.text(100, 100, '', {
+            wordWrap: {
+                width: 300
+            },
+            maxLines: 7,
+
+            fixedWidth: 200,
+            fixedHeight: 130,
+            backgroundColor: '#0000CD'
+        });
         txt.page = this.textPage.add(txt, {
+            pageBreak: '<PB>\n',
             //text: lines
-            maxLines: 7
         });
         txt.page.setText(lines);
         txt.page.showPage();
@@ -36,10 +45,8 @@ class Demo extends Phaser.Scene {
 
         var printPageIdx = function () {
             var page = txt.page;
-            var s = `${page.pageIndex + 1}/${page.pageCount}`;
-            if (page.pageIndex === 0) {
-                s += '-- first page'
-            } else if (page.isLastPage) {
+            var s = page.pageIndex + "/" + page.pageCount
+            if (page.isLastPage) {
                 s += "-- last page"
             }
             console.log(s);
