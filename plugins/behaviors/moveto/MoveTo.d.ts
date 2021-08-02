@@ -32,6 +32,12 @@ declare class MoveTo extends TickTask {
         y: number,
         speed?: number
     }): this;
+    moveFrom(x: number, y: number): this;
+    moveFrom(config: {
+        x: number,
+        y: number,
+        speed?: number
+    }): this;
 
     setSpeed(speed: number): this;
     speed: number;

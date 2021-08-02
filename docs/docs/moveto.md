@@ -84,22 +84,32 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
 
 ### Start moving
 
-```javascript
-moveTo.moveTo(x, y);
-```
-
-- `x` , `y` : Target position
-
-or
-
-```javascript
-var config = {
-    x: 0,
-    y: 0,
-    // speed: 0
-}
-moveTo.moveTo(config);
-```
+- Move to target position
+    ```javascript
+    moveTo.moveTo(x, y);
+    ```
+    or
+    ```javascript
+    moveTo.moveTo({
+        x: 0,
+        y: 0,
+        // speed: 0
+    });
+    ```
+    - `x` , `y` : Target position    
+- Move from start position to current position
+    ```javascript
+    moveTo.moveFrom(x, y);
+    ```
+    or
+    ```javascript
+    moveTo.moveFrom({
+        x: 0,
+        y: 0,
+        // speed: 0
+    });
+    ```
+    - `x` , `y` : Start position
 
 ### Enable
 

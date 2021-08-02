@@ -1,5 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -8,14 +9,21 @@ var LayoutChildren = function () {
     var innerWidth = this.innerWidth,
         innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
+    var prevChildState;
     var childWidth, childHeight;
 
     // Layout current page
     var children = this.sizerChildren;
     for (var key in children) {
         child = children[key];
+        if (child.rexSizer.hidden) {
+            continue;
+        }
+
         childConfig = child.rexSizer;
         padding = childConfig.padding;
+
+        prevChildState = CopyState(child, true);
 
         // Set size
         if (child.isRexSizer) {
@@ -42,7 +50,10 @@ var LayoutChildren = function () {
         height = innerHeight - padding.top - padding.bottom;
 
         AlignIn(child, x, y, width, height, childConfig.align);
+        child.emit('layout', prevChildState, child, this);
+
         this.resetChildPositionState(child);
+        child.emit('postlayout', prevChildState, child, this);
     }
 }
 

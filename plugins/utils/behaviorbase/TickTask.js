@@ -27,6 +27,7 @@ class TickTask extends BehaviorBase {
             return;
         }
 
+        this.stop();
         if (this.tickingState) {
             this.stopTicking();
         }

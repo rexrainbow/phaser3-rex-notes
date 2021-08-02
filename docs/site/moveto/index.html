@@ -5997,21 +5997,34 @@
 <li><code>rotateToTarget</code> : Set true to change angle towards path.</li>
 </ul>
 <h3 id="start-moving">Start moving<a class="headerlink" href="#start-moving" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</code></pre></div>
-
 <ul>
-<li><code>x</code> , <code>y</code> : Target position</li>
-</ul>
-<p>or</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<li>Move to target position
+    <div class="codehilite"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="c1">// speed: 0</span>
-<span class="p">}</span>
-<span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>x</code> , <code>y</code> : Target position    </li>
+</ul>
+</li>
+<li>Move from start position to current position
+    <div class="codehilite"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// speed: 0</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>x</code> , <code>y</code> : Start position</li>
+</ul>
+</li>
+</ul>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Enable (default)

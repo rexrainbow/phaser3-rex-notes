@@ -4887,6 +4887,19 @@
     Layout children
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5911,6 +5924,19 @@
     Layout children
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -6251,6 +6277,20 @@
 </code></pre></div>
 
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
+<p>Fire <code>'postlayout'</code> event to all children after layout.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">prevState</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">parentSizer</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div>
+
+<ul>
+<li><code>prevState</code> : Properties before layout.<ul>
+<li><code>prevState.x</code>, <code>prevState.y</code> : Child position before layout.</li>
+<li><code>prevState.width</code>, <code>prevState.height</code>, <code>prevState.displayWidth</code>, <code>prevState.displayHeight</code>, <code>prevState.scaleX</code>, <code>prevState.scaleY</code> : Child size before layout.</li>
+</ul>
+</li>
+</ul>
 <h3 id="grid-index-child">Grid index &lt;-&gt; child<a class="headerlink" href="#grid-index-child" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Grid index -&gt; child

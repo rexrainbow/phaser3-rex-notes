@@ -1,5 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import CopyState from '../utils/CopyState.js';
 
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
@@ -13,6 +14,7 @@ var LayoutBackgrounds = function () {
         y = this.top,
         width = this.width,
         height = this.height;
+    var prevChildState;
     var child, childConfig, padding,
         childTLX, childTLY, childWidth, childHeight;
     for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
@@ -23,13 +25,20 @@ var LayoutBackgrounds = function () {
         }
 
         padding = childConfig.padding;
+
+        prevChildState = CopyState(child, true);
+
         childTLX = x + padding.left;
         childTLY = y + padding.top;
         childWidth = width - padding.left - padding.right;
         childHeight = height - padding.top - padding.bottom;
+
         ResizeGameObject(child, childWidth, childHeight);
         AlignIn(child, childTLX, childTLY, childWidth, childHeight, ALIGN_CENTER);
+        child.emit('layout', prevChildState, child, this);
+
         this.resetChildPositionState(child);
+        child.emit('postlayout', prevChildState, child, this);
     }
 }
 

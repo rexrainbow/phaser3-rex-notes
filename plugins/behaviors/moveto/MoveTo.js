@@ -75,6 +75,29 @@ class MoveTo extends TickTask {
         return this;
     }
 
+    moveFrom(x, y) {
+        if (typeof (x) !== 'number') {
+            var config = x;
+            x = GetValue(config, 'x', undefined);
+            y = GetValue(config, 'y', undefined);
+        }
+
+        // invalid position
+        if ((x == null) || (y == null)) {
+            return this;
+        }
+
+        var gameObject = this.parent;
+        var targetX = gameObject.x;
+        var targetY = gameObject.y;
+
+        gameObject.setPosition(x, y);
+
+        this.moveTo(targetX, targetY);
+
+        return this;
+    }
+
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;

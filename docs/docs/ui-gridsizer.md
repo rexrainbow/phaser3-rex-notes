@@ -282,6 +282,20 @@ gridSizer.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
+#### Events
+
+Fire `'postlayout'` event to all children after layout.
+
+```javascript
+child.on('postlayout', function(prevState, child, parentSizer){
+
+})
+```
+
+- `prevState` : Properties before layout.
+    - `prevState.x`, `prevState.y` : Child position before layout.
+    - `prevState.width`, `prevState.height`, `prevState.displayWidth`, `prevState.displayHeight`, `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+
 ### Grid index <-> child
 
 - Grid index -> child
