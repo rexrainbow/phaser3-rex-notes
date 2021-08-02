@@ -85,7 +85,7 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - `maxLines` : Max lines of a page.
     - `undefined` : Use style property `maxLines`, for [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md). Default value.
     - A number : Max lines of a page, for [bitmap text object](bitmaptext.md)
-- `pageBreak` : Symbol of page-break. Default value is `'\f\n'`.
+- `pageBreak` : Symbol of page-break. Default value is `'\f\n'`. String after this page-break symbol will be placed to a new page. 
 
 ### Set content
 
@@ -93,14 +93,13 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```javascript
     page.setText(content);
     ```
-    - `content` : String, number, or string array. 
-      Can insert `pageBreak` symbol to place next line to a new page.
+    - `content` : String, number, or string array. Can insert `pageBreak` symbol.
+        - `pageBreak` symbol at tail of content (i.e. no new string after last `pageBreak` symbol), will be ignored.
 - Append content
     ```javascript
     page.appendText(content);
     ```
-    - `content` : String, number, or string array. 
-      Can insert `pageBreak` symbol to place next line to a new page.    
+    - `content` : String, number, or string array. Can insert `pageBreak` symbol.
 - Clear content
     ```javascript
     page.clearText()
@@ -109,8 +108,7 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     ```javascript
     page.appendPage(content);   // content in string or array
     ```
-    - `content` : String, number, or string array. 
-      Don't insert `pageBreak` symbol.
+    - `content` : String, number, or string array. **Don't** insert `pageBreak` symbol.
 
 ### Show page
 

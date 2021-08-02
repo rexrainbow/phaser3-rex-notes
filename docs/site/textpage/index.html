@@ -5961,22 +5961,23 @@
 <li>A number : Max lines of a page, for <a href="../bitmaptext/">bitmap text object</a></li>
 </ul>
 </li>
-<li><code>pageBreak</code> : Symbol of page-break. Default value is <code>'\f\n'</code>.</li>
+<li><code>pageBreak</code> : Symbol of page-break. Default value is <code>'\f\n'</code>. String after this page-break symbol will be placed to a new page. </li>
 </ul>
 <h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set content
     <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>content</code> : String, number, or string array. 
-  Can insert <code>pageBreak</code> symbol to place next line to a new page.</li>
+<li><code>content</code> : String, number, or string array. Can insert <code>pageBreak</code> symbol.<ul>
+<li><code>pageBreak</code> symbol at tail of content (i.e. no new string after last <code>pageBreak</code> symbol), will be ignored.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Append content
     <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
 </code></pre></div><ul>
-<li><code>content</code> : String, number, or string array. 
-  Can insert <code>pageBreak</code> symbol to place next line to a new page.    </li>
+<li><code>content</code> : String, number, or string array. Can insert <code>pageBreak</code> symbol.</li>
 </ul>
 </li>
 <li>Clear content
@@ -5985,8 +5986,7 @@
 <li>Append page
     <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">appendPage</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>   <span class="c1">// content in string or array</span>
 </code></pre></div><ul>
-<li><code>content</code> : String, number, or string array. 
-  Don't insert <code>pageBreak</code> symbol.</li>
+<li><code>content</code> : String, number, or string array. <strong>Don't</strong> insert <code>pageBreak</code> symbol.</li>
 </ul>
 </li>
 </ul>
