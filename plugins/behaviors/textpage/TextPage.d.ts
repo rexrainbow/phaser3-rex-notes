@@ -4,6 +4,7 @@ declare namespace TextPage {
     interface IConfig {
         text?: string | string[],
         maxLines?: number,
+        pageBreak?: string,
     }
 }
 
@@ -12,6 +13,12 @@ declare class TextPage {
         gameObject: Phaser.GameObjects.GameObject,
         config?: TextPage.IConfig
     );
+
+    setMaxLines(maxLines: number): this;
+    maxLines: number;
+
+    setPageBreak(pageBreak?: string): this;
+    pageBreak: string;
 
     setText(text: string | string[]): this;
     appendText(text: string | string[]): this;

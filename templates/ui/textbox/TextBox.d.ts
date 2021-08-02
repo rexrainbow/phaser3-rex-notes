@@ -10,7 +10,8 @@ declare namespace TextBox {
         text: Phaser.GameObjects.GameObject,
 
         page?: {
-            maxLines?: number
+            maxLines?: number,
+            pageBreak?: string,
         },
 
         type?: {
