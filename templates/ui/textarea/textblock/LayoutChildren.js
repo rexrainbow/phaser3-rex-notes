@@ -1,7 +1,6 @@
 import ResizeText from './ResizeText.js';
 import ResetTextObjectPosition from './ResetTextObjectPosition.js';
-import GlobZone from '../../../../plugins/utils/actions/GlobZone.js';
-import AlignIn from '../../../../plugins/utils/align/align/in/QuickSet.js';
+import AlignIn from '../../../../plugins/utils/actions/AlignIn.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -20,8 +19,8 @@ var LayoutChildren = function () {
         width = this.width - padding.left - padding.right;
         height = this.height - padding.top - padding.bottom;
         ResizeText.call(this, child, width, height);
-        GlobZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, GlobZone, childConfig.align);
+
+        AlignIn(child, x, y, width, height, childConfig.align);
 
         childConfig.preOffsetY = 0; // Clear preOffsetY
         ResetTextObjectPosition.call(this);

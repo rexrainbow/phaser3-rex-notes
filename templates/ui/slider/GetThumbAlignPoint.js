@@ -1,5 +1,4 @@
-import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
-import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
+import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 
 var GetThumbAlignPoint = function (align, out) {
     if (out === undefined) {
@@ -9,8 +8,7 @@ var GetThumbAlignPoint = function (align, out) {
     var currentX = thumb.x;
     var currentY = thumb.y;
 
-    GlobZone.setPosition(this.innerLeft, this.innerTop).setSize(this.innerWidth, this.innerHeight);
-    AlignIn(thumb, GlobZone, align);
+    AlignIn(thumb, this.innerLeft, this.innerTop, this.innerWidth, this.innerHeight, align);
     out.x = thumb.x;
     out.y = thumb.y;
 

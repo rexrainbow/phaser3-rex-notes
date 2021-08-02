@@ -1,6 +1,5 @@
 import ALIGNMODE from '../utils/AlignConst.js';
-import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
-import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Group = Phaser.GameObjects.Group;
@@ -48,7 +47,7 @@ var DrawBounds = function (graphics, config) {
         if (color) {
             graphics
                 .lineStyle(1, color)
-                .strokeRectShape(child.getBounds(globRect));
+                .strokeRectShape(child.getBounds(GlobRect));
         }
 
         if (child.name && createTextCallback) {
@@ -61,8 +60,7 @@ var DrawBounds = function (graphics, config) {
                 nameText.setText(child.name);
                 graphics.children.add(nameText);
 
-                GlobZone.setPosition(globRect.x, globRect.y).setSize(globRect.width, globRect.height);
-                AlignIn(nameText, GlobZone, textAlign);
+                AlignIn(nameText, GlobRect.x, GlobRect.y, GlobRect.width, GlobRect.height, textAlign);
             }
         }
     }
@@ -73,6 +71,6 @@ var DefaultCreateTextCallback = function (scene, child, childBoundsRect) {
     return scene.add.text(0, 0, '');
 }
 
-var globRect = new Phaser.Geom.Rectangle();
+var GlobRect = new Phaser.Geom.Rectangle();
 
 export default DrawBounds;

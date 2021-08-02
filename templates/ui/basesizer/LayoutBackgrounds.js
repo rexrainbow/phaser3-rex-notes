@@ -1,6 +1,5 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
-import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
@@ -29,8 +28,7 @@ var LayoutBackgrounds = function () {
         childWidth = width - padding.left - padding.right;
         childHeight = height - padding.top - padding.bottom;
         ResizeGameObject(child, childWidth, childHeight);
-        GlobZone.setPosition(childTLX, childTLY).setSize(childWidth, childHeight);
-        AlignIn(child, GlobZone, ALIGN_CENTER);
+        AlignIn(child, childTLX, childTLY, childWidth, childHeight, ALIGN_CENTER);
         this.resetChildPositionState(child);
     }
 }

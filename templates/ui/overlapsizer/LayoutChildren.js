@@ -1,8 +1,7 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
-import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
+import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 
-var LayoutChildren = function() {
+var LayoutChildren = function () {
     var child, childConfig, padding;
     var startX = this.innerLeft,
         startY = this.innerTop;
@@ -41,8 +40,8 @@ var LayoutChildren = function() {
         width = innerWidth - padding.left - padding.right;
         y = (startY + padding.top);
         height = innerHeight - padding.top - padding.bottom;
-        GlobZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, GlobZone, childConfig.align);
+
+        AlignIn(child, x, y, width, height, childConfig.align);
         this.resetChildPositionState(child);
     }
 }
