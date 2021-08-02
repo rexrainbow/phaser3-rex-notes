@@ -94,7 +94,6 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     page.setText(content);
     ```
     - `content` : String, number, or string array. Can insert `pageBreak` symbol.
-        - `pageBreak` symbol at tail of content (i.e. no new string after last `pageBreak` symbol), will be ignored.
 - Append content
     ```javascript
     page.appendText(content);

@@ -48,9 +48,9 @@ export default {
         this.clearText();
 
         var sections = GetString(text).split(this.pageBreak);
-        if (sections[sections.length - 1] === '') { // Last section is an empty string
-            sections.length -= 1;
-        }
+        // if (sections[sections.length - 1] === '') { // Last section is an empty string
+        //     sections.length -= 1;
+        // }
 
         for (var i = 0, cnt = sections.length; i < cnt; i++) {
             this.appendPage(sections[i]);

@@ -23,7 +23,10 @@ class Demo extends Phaser.Scene {
             for (var l = 0; l < 6; l++) {
                 lines.push(`- Line ${l}\n`)
             }
-            lines.push('\f\n'); // Page-break
+
+            if (i < 2) {
+                lines.push('\f\n'); // Page-break
+            }
         }
         var content = lines.join('');
 
