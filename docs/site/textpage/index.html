@@ -5948,7 +5948,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextPage&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// text: &#39;&#39;,              // content in string or array</span>
-    <span class="c1">// maxLines: undefined</span>
+    <span class="c1">// maxLines: undefined,</span>
+    <span class="c1">// pageBreak: &#39;\f\n&#39;,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5960,15 +5961,34 @@
 <li>A number : Max lines of a page, for <a href="../bitmaptext/">bitmap text object</a></li>
 </ul>
 </li>
+<li><code>pageBreak</code> : Symbol of page-break. Default value is <code>'\f\n'</code>.</li>
 </ul>
 <h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set text
-    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>   <span class="c1">// content in string or array</span>
+<li>Set content
+    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>content</code> : String, number, or string array. 
+  Can insert <code>pageBreak</code> symbol to place next line to a new page.</li>
+</ul>
+</li>
+<li>Append content
+    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>content</code> : String, number, or string array. 
+  Can insert <code>pageBreak</code> symbol to place next line to a new page.    </li>
+</ul>
+</li>
+<li>Clear content
+    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">clearText</span><span class="p">()</span>
 </code></pre></div></li>
-<li>Append text
-    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span> <span class="c1">// content in string or array</span>
-</code></pre></div></li>
+<li>Append page
+    <div class="codehilite"><pre><span></span><code><span class="nx">page</span><span class="p">.</span><span class="nx">appendPage</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>   <span class="c1">// content in string or array</span>
+</code></pre></div><ul>
+<li><code>content</code> : String, number, or string array. 
+  Don't insert <code>pageBreak</code> symbol.</li>
+</ul>
+</li>
 </ul>
 <h3 id="show-page">Show page<a class="headerlink" href="#show-page" title="Permanent link">&para;</a></h3>
 <ul>

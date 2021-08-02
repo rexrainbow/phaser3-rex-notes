@@ -105,7 +105,10 @@ var textBox = scene.rexUI.add.textBox({
     // name: '',
     // draggable: false,
 
-    // page: { maxLines: undefined },
+    // page: { 
+    //    maxLines: undefined,
+    //    pageBreak: '\f\n',
+    // },
     // type: { speed: 333 }
 
 });
@@ -145,6 +148,7 @@ var textBox = scene.rexUI.add.textBox({
 - `draggable` : Set `true` to drag to-most sizer.
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
     - `page.maxLines` : Max lines of a page.
+    - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.
 - `type` : Configuration of [type behavior](texttyping.md#create-instance)
     - `type.speed` : Typing speed in ms, default value is `333`.
 

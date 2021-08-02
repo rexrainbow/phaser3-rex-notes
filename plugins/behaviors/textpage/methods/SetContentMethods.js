@@ -10,7 +10,7 @@ var GetString = function (text) {
 }
 
 export default {
-    clearContent() {
+    clearText() {
         this.sections.length = 0;
         this.pageStartIndexes.length = 0;
         this.lines.length = 0;
@@ -45,9 +45,13 @@ export default {
             this.resetPageIdx();
         }
 
-        this.clearContent();
+        this.clearText();
 
         var sections = GetString(text).split(this.pageBreak);
+        if (sections[sections.length - 1] === '') { // Last section is an empty string
+            sections.length -= 1;
+        }
+
         for (var i = 0, cnt = sections.length; i < cnt; i++) {
             this.appendPage(sections[i]);
         }

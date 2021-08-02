@@ -75,7 +75,8 @@ Display text page by page on [text object](text.md), [bbcode text object](bbcode
 ```javascript
 var page = scene.plugins.get('rexTextPage').add(textGameObject, {
     // text: '',              // content in string or array
-    // maxLines: undefined
+    // maxLines: undefined,
+    // pageBreak: '\f\n',
 });
 ```
 
@@ -84,17 +85,32 @@ var page = scene.plugins.get('rexTextPage').add(textGameObject, {
 - `maxLines` : Max lines of a page.
     - `undefined` : Use style property `maxLines`, for [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md). Default value.
     - A number : Max lines of a page, for [bitmap text object](bitmaptext.md)
+- `pageBreak` : Symbol of page-break. Default value is `'\f\n'`.
 
 ### Set content
 
-- Set text
+- Set content
     ```javascript
-    page.setText(text);   // content in string or array
+    page.setText(content);
     ```
-- Append text
+    - `content` : String, number, or string array. 
+      Can insert `pageBreak` symbol to place next line to a new page.
+- Append content
     ```javascript
-    page.appendText(text); // content in string or array
+    page.appendText(content);
     ```
+    - `content` : String, number, or string array. 
+      Can insert `pageBreak` symbol to place next line to a new page.    
+- Clear content
+    ```javascript
+    page.clearText()
+    ```
+- Append page
+    ```javascript
+    page.appendPage(content);   // content in string or array
+    ```
+    - `content` : String, number, or string array. 
+      Don't insert `pageBreak` symbol.
 
 ### Show page
 
