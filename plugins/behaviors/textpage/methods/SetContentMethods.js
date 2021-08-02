@@ -11,7 +11,7 @@ var GetString = function (text) {
 
 export default {
     clearContent() {
-        this.textParts.length = 0;
+        this.sections.length = 0;
         this.pageStartIndexes.length = 0;
         this.lines.length = 0;
 
@@ -21,8 +21,8 @@ export default {
     appendPage(text) {
         var pageStartIndex = this.totalLinesCount;
 
-        this.textParts.push(GetString(text));
-        var text = this.textParts.join('\n');
+        this.sections.push(GetString(text));
+        var text = this.sections.join('\n');
         this.lines = TextToLines(this.parent, text, this.lines);
 
         var newLinesCount = this.totalLinesCount - pageStartIndex;
@@ -47,9 +47,9 @@ export default {
 
         this.clearContent();
 
-        var textParts = GetString(text).split(this.pageBreak);
-        for (var i = 0, cnt = textParts.length; i < cnt; i++) {
-            this.appendPage(textParts[i]);
+        var sections = GetString(text).split(this.pageBreak);
+        for (var i = 0, cnt = sections.length; i < cnt; i++) {
+            this.appendPage(sections[i]);
         }
 
         return this;

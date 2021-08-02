@@ -1,4 +1,5 @@
-import { TextType, TagTextType, BitmapTextType } from './TextObjectTypes.js';
+import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/system/GetTextObjectType.js'
+import GetTextObjectType from '../../../../plugins/utils/system/GetTextObjectType.js'
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
@@ -71,10 +72,7 @@ class TextBlock extends BaseSizer {
         sizerConfig.expand = true;
         this.textObject = textObject;
 
-        this.textObjectType =
-            (IsBitmapTextGameObject(textObject)) ? BitmapTextType :
-                (IsTextGameObject(textObject)) ? TextType :
-                    TagTextType;
+        this.textObjectType = GetTextObjectType(textObject);
 
         // Add more variables
         sizerConfig.preOffsetY = 0;

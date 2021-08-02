@@ -24,7 +24,7 @@ class TextPage extends BehaviorBase {
         // Bitmap text object : array of string
         this.lines = TextToLines(this.parent, '');
 
-        this.textParts = [];
+        this.sections = [];
 
         this.resetFromJSON(config);
     }
@@ -67,11 +67,11 @@ class TextPage extends BehaviorBase {
         }
 
         this.pageStartIndexes.length = 0;
-        this.textParts.length = 0;
+        this.sections.length = 0;
 
         this.lines = undefined;
         this.pageStartIndexes = undefined;
-        this.textParts = undefined;
+        this.sections = undefined;
 
         super.shutdown(fromScene);
     }
@@ -142,7 +142,7 @@ class TextPage extends BehaviorBase {
     }
 
     get content() {
-        return this.textParts.join(this.pageBreak);
+        return this.sections.join(this.pageBreak);
     }
 }
 

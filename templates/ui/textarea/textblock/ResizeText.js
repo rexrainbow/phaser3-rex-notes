@@ -1,4 +1,4 @@
-import { TextType, TagTextType, BitmapTextType } from './TextObjectTypes.js';
+import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/system/GetTextObjectType.js'
 
 var ResizeText = function (textObject, width, height) {
     height += this.textLineHeight + this.textLineSpacing; // Add 1 line
