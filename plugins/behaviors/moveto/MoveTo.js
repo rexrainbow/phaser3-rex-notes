@@ -60,13 +60,8 @@ class MoveTo extends TickTask {
     moveTo(x, y) {
         if (typeof (x) !== 'number') {
             var config = x;
-            x = GetValue(config, 'x', undefined);
-            y = GetValue(config, 'y', undefined);
-        }
-
-        // invalid position
-        if ((x == null) || (y == null)) {
-            return this;
+            x = config.x;
+            y = config.y;
         }
 
         this.targetX = x;
@@ -78,13 +73,8 @@ class MoveTo extends TickTask {
     moveFrom(x, y) {
         if (typeof (x) !== 'number') {
             var config = x;
-            x = GetValue(config, 'x', undefined);
-            y = GetValue(config, 'y', undefined);
-        }
-
-        // invalid position
-        if ((x == null) || (y == null)) {
-            return this;
+            x = config.x;
+            y = config.y;
         }
 
         var gameObject = this.parent;
@@ -95,6 +85,14 @@ class MoveTo extends TickTask {
 
         this.moveTo(targetX, targetY);
 
+        return this;
+    }
+
+    moveToward(angle, distance) {
+        var gameObject = this.parent;
+        var targetX = gameObject.x + Math.cos(angle) * distance;
+        var targetY = gameObject.y + Math.sin(angle) * distance;
+        this.moveTo(targetX, targetY);
         return this;
     }
 

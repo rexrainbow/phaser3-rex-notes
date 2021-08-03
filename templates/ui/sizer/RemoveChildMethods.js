@@ -1,16 +1,17 @@
-import Container from '../container/Container.js';
+import BaseSizer from '../basesizer/BaseSizer.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
-const ContainerRemove = Container.prototype.remove;
-const ContainerClear = Container.prototype.clear;
+const BaseSizerRemove = BaseSizer.prototype.remove;
+const BaseSizerClear = BaseSizer.prototype.clear;
 
 export default {
     remove(gameObject, destroyChild) {
         if (this.getParentSizer(gameObject) !== this) {
             return this;
         }
+
         RemoveItem(this.sizerChildren, gameObject);
-        ContainerRemove.call(this, gameObject, destroyChild);
+        BaseSizerRemove.call(this, gameObject, destroyChild);
         return this;
     },
 
@@ -18,16 +19,12 @@ export default {
         for (var i = this.sizerChildren.length - 1; i >= 0; i--) {
             this.remove(this.sizerChildren[i], destroyChild);
         }
-        this.sizerChildren.length = 0;
         return this;
     },
 
     clear(destroyChild) {
         this.sizerChildren.length = 0;
-        if (this.backgroundChildren) {
-            this.backgroundChildren.length = 0;
-        }
-        ContainerClear.call(this, destroyChild);
+        BaseSizerClear.call(this, destroyChild);
         return this;
     }
 }

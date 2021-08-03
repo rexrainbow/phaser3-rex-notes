@@ -1,9 +1,9 @@
-import Container from '../container/Container.js';
+import BaseSizer from '../basesizer/BaseSizer.js';
 import ArrayFill from '../../../plugins/utils/array/Fill.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
-const ContainerRemove = Container.prototype.remove;
-const ContainerClear = Container.prototype.clear;
+const BaseSizerRemove = BaseSizer.prototype.remove;
+const BaseSizerClear = BaseSizer.prototype.clear;
 
 export default {
     remove(gameObject, destroyChild) {
@@ -11,16 +11,12 @@ export default {
             return this;
         }
 
-        if (this.isBackground(gameObject)) {
-            RemoveItem(this.backgroundChildren, gameObject);
-        } else {
-            var idx = this.sizerChildren.indexOf(gameObject);
-            if (idx !== -1) {
-                this.sizerChildren[idx] = null;
-            }
+        var idx = this.sizerChildren.indexOf(gameObject);
+        if (idx !== -1) {
+            this.sizerChildren[idx] = null;
         }
 
-        ContainerRemove.call(this, gameObject, destroyChild);
+        BaseSizerRemove.call(this, gameObject, destroyChild);
         return this;
     },
 
@@ -35,19 +31,18 @@ export default {
     removeAll(destroyChild) {
         for (var i = this.sizerChildren.length - 1; i >= 0; i--) {
             var child = this.sizerChildren[i];
-            if (child) {
-                this.remove(child, destroyChild);
+            if (!child) {
+                continue;
             }
+
+            this.remove(child, destroyChild);
         }
         return this;
     },
 
     clear(destroyChild) {
         ArrayFill(this.sizerChildren, null);
-        if (this.backgroundChildren) {
-            this.backgroundChildren.length = 0;
-        }
-        ContainerClear.call(this, destroyChild);
+        BaseSizerClear.call(this, destroyChild);
         return this;
     }
 }

@@ -66,10 +66,14 @@ var LayoutChildren = function () {
         }
 
         AlignIn(child, x, y, width, height, childConfig.align);
-        child.emit('layout', prevChildState, child, this);
+        if (this.sizerEventsEnable) {
+            child.emit('sizer.layout', prevChildState, child, this);
+        }
 
         this.resetChildPositionState(child);
-        child.emit('postlayout', prevChildState, child, this);
+        if (this.sizerEventsEnable) {
+            child.emit('sizer.postlayout', prevChildState, child, this);
+        }
 
         if (this.orientation === 0) { // x
             itemX += (width + padding.left + padding.right + this.space.item);

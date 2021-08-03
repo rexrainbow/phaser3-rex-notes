@@ -46,10 +46,14 @@ var LayoutChildren = function () {
             height = rowHeight - padding.top - padding.bottom;
 
             AlignIn(child, x, y, width, height, childConfig.align);
-            child.emit('layout', prevChildState, child, this);
+            if (this.sizerEventsEnable) {
+                child.emit('sizer.layout', prevChildState, child, this);
+            }
 
             this.resetChildPositionState(child);
-            child.emit('postlayout', prevChildState, child, this);
+            if (this.sizerEventsEnable) {
+                child.emit('sizer.postlayout', prevChildState, child, this);
+            }
 
             itemX += (colWidth + columnSpace[columnIndex]);
         }

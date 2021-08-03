@@ -86,6 +86,11 @@ declare class OverlapSizer extends BaseSizer {
         destroyChild?: boolean
     ): this;
 
+    remove(
+        key: string,
+        destroyChild?: boolean
+    ): this;
+
     removeAll(
         destroyChild?: boolean
     ): this;

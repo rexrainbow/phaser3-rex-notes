@@ -23,6 +23,7 @@ class Base extends Container {
 
         this.setInnerPadding(GetValue(config, 'space', 0));
         this.setDraggable(GetValue(config, 'draggable', false));
+        this.setSizerEventsEnable(GetValue(config, 'sizerEvents', false));
         this.setDirty(true);
     }
 
@@ -63,6 +64,15 @@ class Base extends Container {
             dirty = true;
         }
         this.dirty = dirty;
+        return this;
+    }
+
+    setSizerEventsEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.sizerEventsEnable = enable;
         return this;
     }
 

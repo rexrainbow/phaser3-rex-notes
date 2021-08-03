@@ -30,7 +30,9 @@ class Demo extends Phaser.Scene {
                 bottom: 3,
                 item: 8,
                 line: 8,
-            }
+            },
+
+            sizerEvents: true
         })
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY))
             .layout()
@@ -40,6 +42,12 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerdown', function () {
                 AddWord(panel, GetRandomWord(Phaser.Math.Between(2, 6)));
+            })
+
+        this.add.text(0, 240, 'Clear')
+            .setInteractive()
+            .on('pointerdown', function () {
+                panel.removeAll();
             })
 
         for (var i = 0; i < 10; i++) {
@@ -64,14 +72,16 @@ var AddWord = function (panel, word) {
     var moveTo = new MoveTo(child);
 
     child
-        .on('postlayout', function (prevState, child, parent) {
+        .on('sizer.postlayout', function (prevState, child, parent) {
             moveTo.moveFrom(prevState.x, prevState.y);
+        })
+        .on('sizer.remove', function (child, parent) {
+            child.fadeOutDestroy(500);
+            moveTo.moveToward(Math.random() * 2 * Math.PI, 400);
         })
         .setInteractive()
         .once('pointerdown', function () {
             panel.remove(child).layout();
-            child.fadeOutDestroy(500);
-            moveTo.moveTo(Math.random() * 800, Math.random() * 600);
         })
 
     panel.add(child).layout();

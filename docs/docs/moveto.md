@@ -110,6 +110,11 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
     });
     ```
     - `x` , `y` : Start position
+- Move toward angle
+    ```javascript
+    moveTo.moveToward(angle, distance);
+    ```
+    - `angle` : Angle in radian.
 
 ### Enable
 

@@ -38,6 +38,7 @@ declare class MoveTo extends TickTask {
         y: number,
         speed?: number
     }): this;
+    moveToward(angle: number, distance: number): this;
 
     setSpeed(speed: number): this;
     speed: number;
