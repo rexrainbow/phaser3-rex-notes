@@ -23,7 +23,9 @@ var LayoutChildren = function () {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
-        prevChildState = CopyState(child, true);
+        if (this.sizerEventsEnable) {
+            prevChildState = CopyState(child, true);
+        }
 
         // Set size
         if (child.isRexSizer) {

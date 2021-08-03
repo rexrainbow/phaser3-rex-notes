@@ -28,7 +28,9 @@ var LayoutChildren = function () {
                 continue;
             }
 
-            prevChildState = CopyState(child, true);
+            if (this.sizerEventsEnable) {
+                prevChildState = CopyState(child, true);
+            }
 
             childWidth = this.getExpandedChildWidth(child, colWidth);
             childHeight = this.getExpandedChildHeight(child, rowHeight);
