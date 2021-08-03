@@ -71,9 +71,7 @@ var AddWord = function (panel, word) {
         .once('pointerdown', function () {
             panel.remove(child).layout();
             child.fadeOutDestroy(500);
-            var x = child.x, y = child.y;
-            child.setRandomPosition();
-            moveTo.moveFrom(x, y);
+            moveTo.moveTo(Math.random() * 800, Math.random() * 600);
         })
 
     panel.add(child).layout();
