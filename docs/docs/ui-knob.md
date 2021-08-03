@@ -116,7 +116,8 @@ var knob = scene.rexUI.add.knob({
     enable: true,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -164,7 +165,9 @@ var knob = scene.rexUI.add.knob({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `valuechangeCallback` : callback function when value changed.
 - `enable` : Set `false` to disable controlling.
-- `name` : Set name of this knob.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

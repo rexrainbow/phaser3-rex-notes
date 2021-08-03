@@ -84,7 +84,8 @@ var pages = scene.rexUI.add.pages({
     // swapMode: 0,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -101,7 +102,9 @@ var pages = scene.rexUI.add.pages({
 - `swapMode` : Set to invisible or destroy swapped page.
     - 0, `'invisible'` : Set swapped page to invisible.
     - 1, `'destroy'` : Destroy swapped page.
-- `name` : Set name of this pages.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

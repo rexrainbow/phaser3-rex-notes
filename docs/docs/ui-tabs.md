@@ -133,7 +133,8 @@ var tabs = scene.rexUI.add.tabs({
     }
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -160,7 +161,9 @@ var tabs = scene.rexUI.add.tabs({
         - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
         - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
-- `name` : Set name of this tabs.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

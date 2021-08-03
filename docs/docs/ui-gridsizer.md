@@ -145,7 +145,8 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     // },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -171,6 +172,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     - `space.row` : Space between 2 rows
         - A number
         - A number array
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 
@@ -282,20 +286,6 @@ gridSizer.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
-#### Events
-
-Fire `'postlayout'` event to all children after layout.
-
-```javascript
-child.on('postlayout', function(prevState, child, parentSizer){
-
-})
-```
-
-- `prevState` : Properties before layout.
-    - `prevState.x`, `prevState.y` : Child position before layout.
-    - `prevState.width`, `prevState.height`, `prevState.displayWidth`, `prevState.displayHeight`, `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
-
 ### Grid index <-> child
 
 - Grid index -> child
@@ -395,6 +385,29 @@ sizer.resetGrid(column, row, columnProportions, rowProportions, space);
 
 !!! note
     Children game objects will be removed without destroyed.
+
+### Events
+
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
+- Fire `'sizer.postlayout'` event to all children after layout.
+    ```javascript
+    child.on('sizer.postlayout', function(prevState, child, parentSizer){
+    
+    })
+    ```
+    - `prevState` : Properties before layout.
+        - `prevState.x`, `prevState.y` : Child position before layout.
+        - `prevState.width`, `prevState.height`, 
+          `prevState.displayWidth`, `prevState.displayHeight`, 
+          `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+- Fire `'sizer.remove'` event to removed without destroyed child.
+    ```javascript
+    child.on('sizer.remove', function(child, parentSizer){
+    
+    })
+    ```
 
 ### Other properties
 

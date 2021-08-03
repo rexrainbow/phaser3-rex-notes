@@ -86,7 +86,11 @@ var sizer = scene.rexUI.add.sizer({
     // anchor: undefined,
     // width: undefined,
     // height: undefined,
-    // space: { left: 0, right:0, top:0, bottom:0, item:0 }
+    // space: { left: 0, right:0, top:0, bottom:0, item:0 },
+
+    // name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -99,7 +103,11 @@ var sizer = scene.rexUI.add.sizer(x, y, {
     // width: undefined,
     // height: undefined,
     // anchor: undefined,
-    // space: { left: 0, right:0, top:0, bottom:0, item:0 }
+    // space: { left: 0, right:0, top:0, bottom:0, item:0 },
+
+    // name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -109,7 +117,11 @@ or
 var sizer = scene.rexUI.add.sizer(x, y, width, height, {
     orientation: 0,
     // anchor: undefined,
-    // space: { left: 0, right:0, top:0, bottom:0, item:0 }
+    // space: { left: 0, right:0, top:0, bottom:0, item:0 },
+
+    // name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -136,6 +148,9 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation, {
 - `space` : Pads spaces.
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space between 2 children game objects.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 
@@ -254,20 +269,6 @@ sizer.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
-#### Events
-
-Fire `'postlayout'` event to all children after layout.
-
-```javascript
-child.on('postlayout', function(prevState, child, parentSizer){
-
-})
-```
-
-- `prevState` : Properties before layout.
-    - `prevState.x`, `prevState.y` : Child position before layout.
-    - `prevState.width`, `prevState.height`, `prevState.displayWidth`, `prevState.displayHeight`, `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
-
 ### Remove child
 
 - Remove a child
@@ -313,6 +314,29 @@ child.on('postlayout', function(prevState, child, parentSizer){
     // var gameObject = sizer.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Events
+
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
+- Fire `'sizer.postlayout'` event to all children after layout.
+    ```javascript
+    child.on('sizer.postlayout', function(prevState, child, parentSizer){
+    
+    })
+    ```
+    - `prevState` : Properties before layout.
+        - `prevState.x`, `prevState.y` : Child position before layout.
+        - `prevState.width`, `prevState.height`, 
+          `prevState.displayWidth`, `prevState.displayHeight`, 
+          `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+- Fire `'sizer.remove'` event to removed without destroyed child.
+    ```javascript
+    child.on('sizer.remove', function(child, parentSizer){
+    
+    })
+    ```
 
 ### Other properties
 

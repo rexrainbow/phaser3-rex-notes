@@ -5986,15 +5986,15 @@
         <span class="nx">text</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
-    <span class="c1">// name: &#39;&#39;,</span>
-    <span class="c1">// draggable: false,</span>
-
     <span class="c1">// page: { </span>
     <span class="c1">//    maxLines: undefined,</span>
     <span class="c1">//    pageBreak: &#39;\f\n&#39;,</span>
     <span class="c1">// },</span>
-    <span class="c1">// type: { speed: 333 }</span>
+    <span class="c1">// type: { speed: 333 },</span>
 
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6045,8 +6045,9 @@
 <li><code>space.text</code> : Space between text game object and action icon game object.</li>
 </ul>
 </li>
-<li><code>name</code> : Set name of this textBox.</li>
-<li><code>draggable</code> : Set <code>true</code> to drag to-most sizer.</li>
+<li><code>name</code> : Set name of this game object.</li>
+<li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire sizer events. Default value is <code>false</code>.</li>
 <li><code>page</code> : Configuration of <a href="../textpage/#create-instance">page behavior</a><ul>
 <li><code>page.maxLines</code> : Max lines of a page.</li>
 <li><code>page.pageBreak</code> : Symbol of page-break. Default value is <code>'\f\n'</code>.</li>

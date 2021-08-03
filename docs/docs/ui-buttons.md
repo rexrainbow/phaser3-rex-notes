@@ -106,6 +106,7 @@ var buttons = scene.rexUI.add.buttons({
 
     // name: '',
     // draggable: false,
+    // sizerEvents: false,
     // eventEmitter: this,
     // groupName: undefined,
 
@@ -143,7 +144,9 @@ var buttons = scene.rexUI.add.buttons({
     - An object: Padding of button game objects.
         - `space.top`, `space.bottom`, `space.left`, `space.right` : Padding around bottons.
         - `space.item` : Space between 2 button game objects.       
-- `name` : Set name of this button game objects.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 - `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
 - `type` : Type/behavior of these buttons.

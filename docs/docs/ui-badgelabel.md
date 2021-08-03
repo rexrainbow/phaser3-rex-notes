@@ -102,7 +102,8 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
     },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -129,8 +130,9 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
         - Positive number : Indent badge game objects inside background.
         - Negative number : Exceed badge game objects out of background.
-- `name` : Set name of this badgeLabel.
-- `draggable` : Set `true` to drag to-most badgeLabel.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

@@ -92,7 +92,8 @@ var sizer = scene.rexUI.add.fixWidthSizer({
     // align: 0,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -154,6 +155,9 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     - `3`, `'justify'`, `'justify-left'` : If remainder space is less or equal than 25%, then justify children. Else align children to left/top side.
     - `4`, `'justify-right'` : If remainder space is less or equal than 25%, then justify children. Else align children to right/bottom side.
     - `5`, `'justify-cneter'` : If remainder space is less or equal than 25%, then justify children. Else align children to center.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 
@@ -249,20 +253,6 @@ sizer.layout();
 
 See also - [dirty](ui-basesizer.md#dirty)
 
-#### Events
-
-Fire `'postlayout'` event to all children after layout.
-
-```javascript
-child.on('postlayout', function(prevState, child, parentSizer){
-
-})
-```
-
-- `prevState` : Properties before layout.
-    - `prevState.x`, `prevState.y` : Child position before layout.
-    - `prevState.width`, `prevState.height`, `prevState.displayWidth`, `prevState.displayHeight`, `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
-
 ### Remove child
 
 - Remove a child
@@ -308,6 +298,29 @@ child.on('postlayout', function(prevState, child, parentSizer){
     // var gameObject = sizer.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
+
+### Events
+
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
+- Fire `'sizer.postlayout'` event to all children after layout.
+    ```javascript
+    child.on('sizer.postlayout', function(prevState, child, parentSizer){
+    
+    })
+    ```
+    - `prevState` : Properties before layout.
+        - `prevState.x`, `prevState.y` : Child position before layout.
+        - `prevState.width`, `prevState.height`, 
+          `prevState.displayWidth`, `prevState.displayHeight`, 
+          `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+- Fire `'sizer.remove'` event to removed without destroyed child.
+    ```javascript
+    child.on('sizer.remove', function(child, parentSizer){
+    
+    })
+    ```
 
 ### Other properties
 

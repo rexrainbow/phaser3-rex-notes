@@ -105,7 +105,8 @@ var label = scene.rexUI.add.label({
     },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -138,8 +139,9 @@ var label = scene.rexUI.add.label({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
-- `name` : Set name of this label.
-- `draggable` : Set `true` to drag to-most label.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 #### Expand size of text
 

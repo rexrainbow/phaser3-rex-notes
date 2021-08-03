@@ -109,7 +109,9 @@ var toast = scene.rexUI.add.toast({
     // transitIn: 0,
     // transitOut: 0,
 
-    name: ''
+    // name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -134,7 +136,9 @@ var toast = scene.rexUI.add.toast({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
-- `name` : Set name of this toast.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 - `duration` : Duration of displaying message
     - `duration.in` : Duration of transit-in stage.
     - `duration.hold` : Duration of hold stage.

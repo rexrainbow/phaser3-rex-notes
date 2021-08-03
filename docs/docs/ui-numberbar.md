@@ -123,7 +123,8 @@ var numberBar = scene.rexUI.add.numberBar({
     enable: true,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -160,7 +161,9 @@ var numberBar = scene.rexUI.add.numberBar({
   - `space.slider` : Space between slider game object and text game object.
 - `valuechangeCallback` : callback function when value changed.
 - `enable` : Set `false` to disable controlling.
-- `name` : Set name of this numberBar.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

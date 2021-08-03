@@ -145,7 +145,8 @@ var textArea = scene.rexUI.add.textArea({
     content: '',
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -215,7 +216,9 @@ var textArea = scene.rexUI.add.textArea({
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `align.footer`
 - `content` : Content of this text area.
-- `name` : Set name of this textArea.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

@@ -174,7 +174,8 @@ var table = scene.rexUI.add.gridTable({
     items: [],
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -271,7 +272,9 @@ var table = scene.rexUI.add.gridTable({
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `align.footer`
 - `items` : Array of item data for each cell.
-- `name` : Set name of this gridTable.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

@@ -103,15 +103,15 @@ var textBox = scene.rexUI.add.textBox({
         text: 0,
     },
 
-    // name: '',
-    // draggable: false,
-
     // page: { 
     //    maxLines: undefined,
     //    pageBreak: '\f\n',
     // },
-    // type: { speed: 333 }
+    // type: { speed: 333 },
 
+    // name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -145,8 +145,9 @@ var textBox = scene.rexUI.add.textBox({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
-- `name` : Set name of this textBox.
-- `draggable` : Set `true` to drag to-most sizer.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
     - `page.maxLines` : Max lines of a page.
     - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.

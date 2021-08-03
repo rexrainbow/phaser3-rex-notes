@@ -150,7 +150,8 @@ var panel = scene.rexUI.add.scrollablePanel({
     },
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -225,7 +226,9 @@ var panel = scene.rexUI.add.scrollablePanel({
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `align.footer`
-- `name` : Set name of this panel.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

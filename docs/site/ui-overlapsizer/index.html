@@ -4904,19 +4904,6 @@
     Layout children
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -4929,6 +4916,13 @@
           <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -5889,19 +5883,6 @@
     Layout children
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -5914,6 +5895,13 @@
           <li class="md-nav__item">
   <a href="#get-element" class="md-nav__link">
     Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -6019,7 +6007,11 @@
     <span class="c1">// anchor: undefined,</span>
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
-    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 },</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6028,14 +6020,22 @@
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
     <span class="c1">// anchor: undefined,</span>
-    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 },</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">overlapSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// anchor: undefined,</span>
-    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 }</span>
+    <span class="c1">// space: { left: 0, right:0, top:0, bottom:0 },</span>
+
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false,</span>
+    <span class="c1">// sizerEvents: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6058,6 +6058,9 @@
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 </ul>
 </li>
+<li><code>name</code> : Set name of this game object.</li>
+<li><code>draggable</code> : Set <code>true</code> to drag top-most object.</li>
+<li><code>sizerEvents</code> : Set <code>true</code> to fire sizer events. Default value is <code>false</code>.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6170,20 +6173,6 @@
 </code></pre></div>
 
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
-<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
-<p>Fire <code>'postlayout'</code> event to all children after layout.</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">prevState</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">parentSizer</span><span class="p">){</span>
-
-<span class="p">})</span>
-</code></pre></div>
-
-<ul>
-<li><code>prevState</code> : Properties before layout.<ul>
-<li><code>prevState.x</code>, <code>prevState.y</code> : Child position before layout.</li>
-<li><code>prevState.width</code>, <code>prevState.height</code>, <code>prevState.displayWidth</code>, <code>prevState.displayHeight</code>, <code>prevState.scaleX</code>, <code>prevState.scaleY</code> : Child size before layout.</li>
-</ul>
-</li>
-</ul>
 <h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Remove a child
@@ -6233,6 +6222,32 @@
 <li><code>recursive</code> : Set <code>true</code> to search all children recursively.</li>
 </ul>
 </li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enable sizer events by set <code>sizerEvents</code> to <code>true</code> in config.</p>
+</div>
+<ul>
+<li>Fire <code>'sizer.postlayout'</code> event to all children after layout.
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">prevState</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">parentSizer</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div><ul>
+<li><code>prevState</code> : Properties before layout.<ul>
+<li><code>prevState.x</code>, <code>prevState.y</code> : Child position before layout.</li>
+<li><code>prevState.width</code>, <code>prevState.height</code>, 
+  <code>prevState.displayWidth</code>, <code>prevState.displayHeight</code>, 
+  <code>prevState.scaleX</code>, <code>prevState.scaleY</code> : Child size before layout.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fire <code>'sizer.remove'</code> event to removed without destroyed child.
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.remove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">parentSizer</span><span class="p">){</span>
+
+<span class="p">})</span>
+</code></pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>

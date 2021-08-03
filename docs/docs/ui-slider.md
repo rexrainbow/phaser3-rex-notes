@@ -109,7 +109,8 @@ var slider = scene.rexUI.add.slider({
     enable: true,
 
     // name: '',
-    // draggable: false
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -146,7 +147,9 @@ var slider = scene.rexUI.add.slider({
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `enable` : Set `false` to disable controlling.
-- `name` : Set name of this slider.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 

@@ -100,6 +100,7 @@ var buttons = scene.rexUI.add.fixWidthButtons({
 
     // name: '',
     // draggable: false,
+    // sizerEvents: false,
     // eventEmitter: this,
     // groupName: undefined,
 
@@ -137,7 +138,9 @@ var buttons = scene.rexUI.add.fixWidthButtons({
        - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
        - `space.item` : Space betwen each child of a line.
        - `space.line` : Space between each line.
-- `name` : Set name of this button game objects.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 - `eventEmitter` : Dispatch buttons' touch events to other game obhect, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
 - `type` : Type/behavior of these buttons.

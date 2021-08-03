@@ -115,7 +115,9 @@ var menu = scene.rexUI.add.menu({
     // },
     // expandEvent: 'button.click',
 
-    name: ''
+    name: '',
+    // draggable: false,
+    // sizerEvents: false,
 });
 ```
 
@@ -166,7 +168,9 @@ var menu = scene.rexUI.add.menu({
     - `'left'`, or `2` : Put sub-menu at left side. Used with `orientation` is set to `y`.
     - `'up'`, or `3` : Put sub-menu at up side. Used with `orientation` is set to `x`.
     - `'down'`, or `1` : Put sub-menu at down side. Used with `orientation` is set to `x`.
-- `name` : Set name of this menu.
+- `name` : Set name of this game object.
+- `draggable` : Set `true` to drag top-most object.
+- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
 
 ### Custom class
 
