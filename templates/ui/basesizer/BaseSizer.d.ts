@@ -27,9 +27,11 @@ declare namespace BaseSizer {
             top?: string, bottom?: string, centerY?: string, y?: string
         },
 
+        name?: string
+
         draggable?: boolean | string | Phaser.GameObjects.GameObject,
 
-        name?: string
+        sizerEvents?: boolean,
     }
 }
 
@@ -52,6 +54,9 @@ declare class BaseSizer extends ContainerLite {
     setMinHeight(minHeight: number): this;
 
     setDirty(dirty?: boolean): this;
+
+    setSizerEventsEnable(enable?: boolean): this;
+    sizerEventsEnable: boolean;
 
     left: number;
 
