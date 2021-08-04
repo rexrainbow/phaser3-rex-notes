@@ -1,4 +1,4 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import AddSeparationForce from './AddSeparationForce.js';
 import AddAlignmentForce from './AddAlignmentForce.js';
 import AddCohesionForce from './AddCohesionForce.js';
@@ -6,7 +6,7 @@ import AddCohesionForce from './AddCohesionForce.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Vector2 = Phaser.Math.Vector2;
 
-class Boids extends SubSystemBase {
+class Boids extends ComponentBase {
     constructor(parent, config) {
         super(parent, { eventEmitter: false });
         // No event emitter

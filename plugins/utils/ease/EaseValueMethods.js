@@ -1,4 +1,4 @@
-import TweenTask from '../subsystembase/TweenTask.js';
+import TweenTask from '../componentbase/TweenTask.js';
 
 var SetEaseValuePropName = function (name) {
     this.easeValuePropName = name;

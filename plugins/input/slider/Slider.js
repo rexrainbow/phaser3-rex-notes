@@ -1,4 +1,4 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
@@ -8,7 +8,7 @@ const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
 
-class Slider extends SubSystemBase {
+class Slider extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

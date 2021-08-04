@@ -1,4 +1,4 @@
-import SubSystemBase from '../../plugins/utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../plugins/utils/componentbase/ComponentBase.js';
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 import Input from './input/Input.js';
@@ -11,7 +11,7 @@ import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Bejeweled extends SubSystemBase {
+class Bejeweled extends ComponentBase {
     constructor(scene, config) {
         super(scene, config);
         // this.scene

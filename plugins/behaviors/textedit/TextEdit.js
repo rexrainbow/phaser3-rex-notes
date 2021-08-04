@@ -1,10 +1,10 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CreateInputTextFromText from './CreateInputText.js';
 import IsFunction from '../../utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextEdit extends SubSystemBase {
+class TextEdit extends ComponentBase {
     constructor(gameObject) {
         // No event emitter
         super(gameObject, { eventEmitter: false });

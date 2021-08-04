@@ -1,4 +1,4 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import State from './State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
@@ -6,7 +6,7 @@ import SlowDown from '../../utils/movement/SlowDown.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-class Scroller extends SubSystemBase {
+class Scroller extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

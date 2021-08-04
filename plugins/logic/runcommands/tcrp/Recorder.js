@@ -1,10 +1,10 @@
-import SubSystemBase from '../../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../../utils/componentbase/ComponentBase.js';
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Recorder extends SubSystemBase {
+class Recorder extends ComponentBase {
     constructor(parent, config) {
         super(parent, { eventEmitter: false });
         // No event emitter

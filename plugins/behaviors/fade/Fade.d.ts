@@ -1,4 +1,4 @@
-import TweenTask from "../../utils/subsystembase/TweenTask";
+import TweenTask from "../../utils/componentbase/TweenTask";
 
 export default Fade;
 

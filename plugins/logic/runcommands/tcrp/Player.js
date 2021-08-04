@@ -1,4 +1,4 @@
-import SubSystemBase from '../../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../../utils/componentbase/ComponentBase.js';
 import Clock from '../../../clock.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
@@ -6,7 +6,7 @@ import IsArray from '../../../utils/object/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Player extends SubSystemBase {
+class Player extends ComponentBase {
     constructor(parent, config) {
         super(parent, config);
 

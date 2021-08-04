@@ -1,8 +1,8 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Button extends SubSystemBase {
+class Button extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

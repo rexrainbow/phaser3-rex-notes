@@ -1,5 +1,5 @@
 // import * as Phaser from 'phaser';
-import TweenTask from "../../utils/subsystembase/TweenTask";
+import TweenTask from "../../utils/componentbase/TweenTask";
 
 export default Flip;
 

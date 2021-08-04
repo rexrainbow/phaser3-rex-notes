@@ -1,7 +1,7 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 
-class Anchor extends SubSystemBase {
+class Anchor extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter

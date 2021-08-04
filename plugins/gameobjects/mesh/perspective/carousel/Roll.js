@@ -1,4 +1,4 @@
-import TweenTask from '../../../../utils/subsystembase/TweenTask.js';
+import TweenTask from '../../../../utils/componentbase/TweenTask.js';
 import FaceNameToIndex from './FaceNameToIndex.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

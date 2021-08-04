@@ -1,9 +1,9 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextTyping extends SubSystemBase {
+class TextTyping extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

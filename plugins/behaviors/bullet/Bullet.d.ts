@@ -1,4 +1,4 @@
-import TickTask from '../../utils/subsystembase/TickTask';
+import TickTask from '../../utils/componentbase/TickTask';
 
 export default Bullet;
 

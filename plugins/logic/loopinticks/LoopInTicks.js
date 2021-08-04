@@ -1,4 +1,4 @@
-import TickTask from '../../utils/subsystembase/TickTask.js';
+import TickTask from '../../utils/componentbase/TickTask.js';
 import LoopIndexGenerator from '../loopindexgenerator/LoopIndexGenerator.js';
 import Clear from '../../utils/object/Clear.js';
 

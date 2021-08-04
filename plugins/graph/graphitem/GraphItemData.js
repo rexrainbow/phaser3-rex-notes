@@ -1,9 +1,9 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js'
+import ComponentBase from '../../utils/componentbase/ComponentBase.js'
 import ObjBank from './ObjBank.js';
 
 const uidKey = ObjBank.uidKey;
 
-class GraphItemData extends SubSystemBase {
+class GraphItemData extends ComponentBase {
     constructor(parent, uid) {
         super(parent, { eventEmitter: false });
 

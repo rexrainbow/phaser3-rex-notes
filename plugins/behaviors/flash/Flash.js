@@ -1,4 +1,4 @@
-import TickTask from '../../utils/subsystembase/SceneUpdateTickTask.js';
+import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

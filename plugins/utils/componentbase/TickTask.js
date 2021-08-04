@@ -1,8 +1,8 @@
-import SubSystemBase from './SubSystemBase.js';
+import ComponentBase from './ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TickTask extends SubSystemBase {
+class TickTask extends ComponentBase {
     constructor(parent, config) {
         super(parent, config);
 

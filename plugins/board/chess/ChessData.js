@@ -1,11 +1,11 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import ChessBank from './ChessBank.js';
 import GetTileDirection from './GetTileDirection.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 const uidKey = ChessBank.uidKey;
 
-class Chess extends SubSystemBase {
+class Chess extends ComponentBase {
     constructor(parent, uid) {
         super(parent, { eventEmitter: false });
         // this.parent

@@ -1,6 +1,6 @@
-import SubSystemBase from './SubSystemBase.js';
+import ComponentBase from './ComponentBase.js';
 
-class TweenTask extends SubSystemBase {
+class TweenTask extends ComponentBase {
     constructor(parent, config) {
         if (config === undefined) {
             config = {};

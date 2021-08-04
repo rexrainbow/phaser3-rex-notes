@@ -1,10 +1,10 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
-class PathFollower extends SubSystemBase {
+class PathFollower extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter

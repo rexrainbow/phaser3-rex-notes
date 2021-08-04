@@ -1,11 +1,11 @@
-import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
+import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import DragStart from '../../utils/input/DragStart.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
-class Drag extends SubSystemBase {
+class Drag extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter
