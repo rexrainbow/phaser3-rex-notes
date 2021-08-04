@@ -1,4 +1,4 @@
-import TweenTask from "../../utils/behaviorbase/TweenTask";
+import TweenTask from "../../utils/subsystembase/TweenTask";
 
 export default Scale;
 

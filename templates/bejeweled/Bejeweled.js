@@ -1,3 +1,4 @@
+import SubSystemBase from '../../plugins/utils/subsystembase/SubSystemBase.js';
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 import Input from './input/Input.js';
@@ -7,17 +8,16 @@ import BoardMethods from './methods/BoardMethods.js';
 import WaitEventMethods from './methods/WaitEventMethods.js';
 import DataManagerMethods from '../../plugins/utils/data/DataManagerMethods.js';
 
-const EE = Phaser.Events.EventEmitter;
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Bejeweled extends EE {
+class Bejeweled extends SubSystemBase {
     constructor(scene, config) {
-        super();
+        super(scene, config);
+        // this.scene
 
         var rexBoardKey = GetValue(config, 'rexBoard', 'rexBoard');
         this.rexBoard = scene[rexBoardKey];
-
-        this.scene = scene;
 
         this.board = new Board(this, config);
 
@@ -39,8 +39,8 @@ class Bejeweled extends EE {
         this.scene.events.once('shutdown', this.destroy, this);
     }
 
-    shutdown() {
-        super.shutdown();
+    shutdown(fromScene) {
+        super.shutdown(fromScene);
 
         if (this.input) {
             this.input.destroy();
@@ -51,17 +51,17 @@ class Bejeweled extends EE {
 
         this.destroyDataManager();
 
-        this.scene = undefined;
         this.board = undefined;
         this.mainState = undefined;
         this.input = undefined;
         this.waitEvents = undefined;
+
         return this;
     }
 
-    destroy() {
+    destroy(fromScene) {
         this.emit('destroy');
-        this.shutdown();
+        super.destroy(fromScene);
         return this;
     }
 

@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask';
+import TickTask from '../../utils/subsystembase/TickTask';
 
 export default Ship;
 

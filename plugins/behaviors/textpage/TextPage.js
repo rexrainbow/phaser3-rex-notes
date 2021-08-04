@@ -1,4 +1,4 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 import {
     TextType, TagTextType, BitmapTextType
 } from '../../utils/system/GetTextObjectType.js';
@@ -9,7 +9,7 @@ import Methods from './methods/Methods.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-class TextPage extends BehaviorBase {
+class TextPage extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter

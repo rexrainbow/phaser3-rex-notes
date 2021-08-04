@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
+import TickTask from '../../utils/subsystembase/SceneUpdateTickTask.js';
 import Methods from './Methods.js';
 import MoveToTask from '../../behaviors/moveto/MoveTo.js';
 import GetChessData from '../chess/GetChessData.js';

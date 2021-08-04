@@ -1,5 +1,5 @@
 import MoveToTask from '../../../behaviors/moveto/MoveTo.js';
-import TickTask from '../../../utils/behaviorbase/SceneUpdateTickTask.js';
+import TickTask from '../../../utils/subsystembase/SceneUpdateTickTask.js';
 
 import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';

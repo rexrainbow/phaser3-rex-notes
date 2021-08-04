@@ -1,10 +1,10 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
-class PathFollower extends BehaviorBase {
+class PathFollower extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter

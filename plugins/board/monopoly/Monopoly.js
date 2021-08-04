@@ -1,4 +1,4 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 import Methods from './Methods.js';
 import GetChessData from '../chess/GetChessData.js';
 import CONST from './const.js';
@@ -7,7 +7,7 @@ import GetValue from '../../utils/object/GetValue.js';
 const BLOCKER = CONST.BLOCKER;
 const STOP = CONST.STOP;
 
-class Monopoly extends BehaviorBase {
+class Monopoly extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter

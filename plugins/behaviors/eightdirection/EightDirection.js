@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
+import TickTask from '../../utils/subsystembase/SceneUpdateTickTask.js';
 import {
     SetVelocity
 } from '../../utils/arcade/Helpers.js';

@@ -1,9 +1,9 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextTyping extends BehaviorBase {
+class TextTyping extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

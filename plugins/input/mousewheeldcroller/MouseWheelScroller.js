@@ -1,8 +1,8 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class MouseWheelScroller extends BehaviorBase {
+class MouseWheelScroller extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

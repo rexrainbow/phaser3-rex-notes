@@ -1,9 +1,9 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js'
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js'
 import ObjBank from './ObjBank.js';
 
 const uidKey = ObjBank.uidKey;
 
-class GraphItemData extends BehaviorBase {
+class GraphItemData extends SubSystemBase {
     constructor(parent, uid) {
         super(parent, { eventEmitter: false });
 

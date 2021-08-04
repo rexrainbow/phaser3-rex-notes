@@ -3,7 +3,7 @@ import GetSceneObject from '../system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class BehaviorBase {
+class SubSystemBase {
     constructor(parent, config) {
         this.parent = parent;  // gameObject or scene
         this.scene = GetSceneObject(parent);
@@ -54,8 +54,8 @@ class BehaviorBase {
 };
 
 Object.assign(
-    BehaviorBase.prototype,
+    SubSystemBase.prototype,
     EventEmitterMethods
 );
 
-export default BehaviorBase;
+export default SubSystemBase;

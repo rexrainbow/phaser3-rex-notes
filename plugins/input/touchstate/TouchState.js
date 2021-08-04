@@ -1,9 +1,9 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class TouchState extends BehaviorBase {
+class TouchState extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

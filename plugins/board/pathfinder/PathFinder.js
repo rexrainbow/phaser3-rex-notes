@@ -1,4 +1,4 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 import GetChessData from '../chess/GetChessData.js';
 import Methods from './Methods.js';
 import CONST from './const.js';
@@ -8,7 +8,7 @@ import GetValue from '../../utils/object/GetValue.js';
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 
-class PathFinder extends BehaviorBase {
+class PathFinder extends SubSystemBase {
     constructor(gameObject, config) {
         if (IsPlainObject(gameObject)) {
             config = gameObject;

@@ -1,4 +1,4 @@
-import BehaviorBase from '../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../utils/subsystembase/SubSystemBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
@@ -8,7 +8,7 @@ const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
 
-class Slider extends BehaviorBase {
+class Slider extends SubSystemBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

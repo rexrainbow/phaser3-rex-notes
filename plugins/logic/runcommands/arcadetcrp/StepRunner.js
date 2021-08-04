@@ -1,7 +1,7 @@
-import BehaviorBase from '../../../utils/behaviorbase/BehaviorBase.js';
+import SubSystemBase from '../../../utils/subsystembase/SubSystemBase.js';
 import RunCommands from '../../../runcommands.js';
 
-class StepRunner extends BehaviorBase {
+class StepRunner extends SubSystemBase {
     constructor(parent) {
         super(parent, { eventEmitter: false });
         // this.parent = gameObject;

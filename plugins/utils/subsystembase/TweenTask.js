@@ -1,6 +1,6 @@
-import BehaviorBase from './BehaviorBase.js';
+import SubSystemBase from './SubSystemBase.js';
 
-class TweenTask extends BehaviorBase {
+class TweenTask extends SubSystemBase {
     constructor(parent, config) {
         if (config === undefined) {
             config = {};

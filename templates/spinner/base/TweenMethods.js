@@ -1,4 +1,4 @@
-import TweenTask from '../../../plugins/utils/behaviorbase/TweenTask.js';
+import TweenTask from '../../../plugins/utils/subsystembase/TweenTask.js';
 
 var Start = function (duration) {
     if (!this.tweenTask) {

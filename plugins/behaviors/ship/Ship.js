@@ -1,6 +1,6 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
-import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
+import TickTask from '../../utils/subsystembase/SceneUpdateTickTask.js';
 import { SetAcceleration, SetAngularVelocity } from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

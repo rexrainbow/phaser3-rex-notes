@@ -1,8 +1,8 @@
-import BehaviorBase from './BehaviorBase.js';
+import SubSystemBase from './SubSystemBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TickTask extends BehaviorBase {
+class TickTask extends SubSystemBase {
     constructor(parent, config) {
         super(parent, config);
 

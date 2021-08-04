@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/TickTask';
+import TickTask from '../../utils/subsystembase/TickTask';
 import { TileXYType, TileXYZType } from '../types/Position';
 import Board from '../board/Board';
 

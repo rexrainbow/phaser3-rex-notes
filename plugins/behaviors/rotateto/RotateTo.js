@@ -1,4 +1,4 @@
-import TickTask from '../../utils/behaviorbase/SceneUpdateTickTask.js';
+import TickTask from '../../utils/subsystembase/SceneUpdateTickTask.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import RadToDeg from '../../utils/math/RadToDeg.js';
 
