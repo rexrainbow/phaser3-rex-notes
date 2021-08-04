@@ -32,10 +32,22 @@ class Base extends Container {
         if (!this.scene) {
             return;
         }
-        if (this.backgroundChildren !== undefined) {
-            this.backgroundChildren.length = 0;
+
+        if (fromScene) {
+            // In this case, children will be cleared and destroy in scene level
+            var sizers = this.getAllChildrenSizers([this]);
+            for (var i = 0, cnt = sizers.length; i < cnt; i++) {
+                sizers[i].sizerEventsEnable = false;
+            }
         }
+
         super.destroy(fromScene);
+
+        this.backgroundChildren = undefined;
+        this.sizerChildren = undefined;
+        this.childrenMap = undefined;
+        this.space = undefined;
+        this.rexSizer = undefined;
     }
 
     setMinSize(minWidth, minHeight) {

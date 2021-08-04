@@ -92,11 +92,10 @@ class TextBlock extends BaseSizer {
         if (!this.scene) {
             return;
         }
+
         this.textObject = undefined;
         this.textMask = undefined;
-        if (this.lines === undefined) {
-            // Do nothing
-        } else {
+        if (this.lines) {
             switch (this.textObjectType) {
                 case TextType:
                     this.lines.length = 0;
@@ -108,7 +107,9 @@ class TextBlock extends BaseSizer {
                     this.lines.length = 0;
                     break;
             }
+            this.lines = undefined;
         }
+
         super.destroy(fromScene);
     }
 

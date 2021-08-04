@@ -27,6 +27,7 @@ export default {
 
     // Override
     clear(destroyChild) {
+        // This method also will be invoked in sizer.destroy() <- containerLite.destroy()
         // Override to clear this.sizerChildren
 
         if (this.backgroundChildren) {

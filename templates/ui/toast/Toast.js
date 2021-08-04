@@ -38,6 +38,7 @@ class Toast extends Label {
         this.player.destroy();
         this.player = undefined;
         this.messages = undefined;
+
         super.destroy(fromScene);
     }
 

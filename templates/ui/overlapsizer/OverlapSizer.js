@@ -28,15 +28,6 @@ class OverlapSizer extends BaseSizer {
         this.addChildrenMap('items', this.sizerChildren);
     }
 
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-        Clear(this.sizerChildren);
-        super.destroy(fromScene);
-    }
-
     childToKey(gameObject) {
         if (typeof (gameObject) === 'string') {
             var key = gameObject;

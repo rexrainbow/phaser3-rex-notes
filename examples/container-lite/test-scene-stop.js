@@ -156,7 +156,8 @@ var createTable = function (scene, data, key, rows) {
 
         rowProportions: 1,
         space: { column: 10, row: 10 },
-        name: key  // Search this name to get table back
+        name: key,  // Search this name to get table back
+        sizerEvents: true
     });
 
     var item;
@@ -202,7 +203,11 @@ var createIcon = function (scene, item, iconWidth, iconHeight) {
         text: scene.add.text(0, 0, item.name),
 
         space: { icon: 3 }
-    });
+    })
+        .on('sizer.remove', function () {
+            // Should not fire this event when scene stop
+            console.log('sizer.remove')
+        })
 
     return label;
 };

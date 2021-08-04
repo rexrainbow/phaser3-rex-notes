@@ -54,8 +54,14 @@ class GridSizer extends BaseSizer {
         if (!this.scene) {
             return;
         }
-        this.sizerChildren.length = 0;
+
         super.destroy(fromScene);
+
+        // More free resources
+        this.columnProportions = undefined;
+        this.rowProportions = undefined;
+        this.columnWidth = undefined;
+        this.rowHeight = undefined;
     }
 
     setColumnProportion(columnIndex, proportion) {

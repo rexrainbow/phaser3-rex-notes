@@ -38,15 +38,6 @@ class Sizer extends BaseSizer {
         this.addChildrenMap('items', this.sizerChildren);
     }
 
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-        this.sizerChildren.length = 0;
-        super.destroy(fromScene);
-    }
-
     setOrientation(orientation) {
         this.orientation = GetOrientationMode(orientation);
         return this;
