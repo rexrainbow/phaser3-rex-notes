@@ -56,12 +56,16 @@ class Bullet extends TickTask {
     }
 
     update(time, delta) {
-        if (!this.enable) {
-            SetVelocity(this.parent, 0, 0);
+        var gameObject = this.parent;
+        if (!gameObject.active) {
             return this;
         }
 
-        var gameObject = this.parent;
+        if (!this.enable) {
+            SetVelocity(gameObject, 0, 0);
+            return this;
+        }
+
         var rotation = gameObject.rotation;
         var vx = this.speed * Math.cos(rotation);
         var vy = this.speed * Math.sin(rotation);

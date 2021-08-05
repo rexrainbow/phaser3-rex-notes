@@ -102,12 +102,17 @@ class EightDirection extends TickTask {
     }
 
     update(time, delta) {
-        if (!this.enable) {
-            SetVelocity(this.parent, 0, 0);
+        var gameObject = this.parent;
+        if (!gameObject.active) {
             return this;
         }
 
-        var gameObject = this.parent;
+        if (!this.enable) {
+            SetVelocity(gameObject, 0, 0);
+            return this;
+        }
+
+      
         var dy = ((this.isUp) ? -1 : 0) + ((this.isDown) ? 1 : 0),
             dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
         if ((dx === 0) && (dy === 0)) {

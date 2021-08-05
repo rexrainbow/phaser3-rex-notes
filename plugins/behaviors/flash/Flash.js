@@ -88,6 +88,11 @@ class Flash extends TickTask {
     }
 
     update(time, delta) {
+        var gameObject = this.parent;
+        if (!gameObject.active) {
+            return this;
+        }
+
         if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
@@ -96,7 +101,6 @@ class Flash extends TickTask {
             return this;
         }
 
-        var gameObject = this.parent;
         this.nowTime += (delta * this.timeScale);
         var visible = (this.nowTime <= (this.duration / 2)) ? false : true;
         gameObject.setVisible(visible);

@@ -82,11 +82,15 @@ class RotateTo extends TickTask {
     }
 
     update(time, delta) {
+        var gameObject = this.parent;
+        if (!gameObject.active) {
+            return this;
+        }
+
         if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 
-        var gameObject = this.parent;
         var target = this.target; // 0~360
         var targetRad = WrapAngle(DegToRad(target)); // -PI~PI
         if (targetRad === gameObject.rotation) {

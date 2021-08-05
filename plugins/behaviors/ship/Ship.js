@@ -124,6 +124,10 @@ class Ship extends TickTask {
 
     update(time, delta) {
         var gameObject = this.parent;
+        if (!gameObject.active) {
+            return this;
+        }
+
         if (!this.enable) {
             SetAcceleration(gameObject, 0, 0);
             SetAngularVelocity(gameObject, 0);
