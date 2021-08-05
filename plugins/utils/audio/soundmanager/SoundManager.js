@@ -1,5 +1,5 @@
-import FadeIn from '../../../audio/fade/fadeIn.js';
-import FadeOut from '../../../audio/fade/fadeOut.js';
+import FadeIn from '../../../audio/fade/FadeIn.js';
+import FadeOut from '../../../audio/fade/FadeOut.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveItem = Phaser.Utils.Array.Remove;
