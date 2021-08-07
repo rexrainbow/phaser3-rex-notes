@@ -1,5 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import GetChildPrevState from '../utils/GetChildPrevState.js';
 import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
@@ -29,7 +30,7 @@ var LayoutChildren = function () {
             }
 
             if (this.sizerEventsEnable) {
-                prevChildState = CopyState(child, true);
+                prevChildState = CopyState(child, GetChildPrevState(child));
             }
 
             childWidth = this.getExpandedChildWidth(child, colWidth);

@@ -6,7 +6,7 @@ class Flash extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
-        
+
         this.resetFromJSON(config);
         this.boot();
     }
@@ -88,12 +88,12 @@ class Flash extends TickTask {
     }
 
     update(time, delta) {
-        var gameObject = this.parent;
-        if (!gameObject.active) {
+        if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 
-        if ((!this.isRunning) || (!this.enable)) {
+        var gameObject = this.parent;
+        if (!gameObject.active) {
             return this;
         }
 

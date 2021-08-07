@@ -124,12 +124,12 @@ class ShakePosition extends TickTask {
     }
 
     update(time, delta) {
-        var gameObject = this.parent;
-        if (!gameObject.active) {
+        if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 
-        if ((!this.isRunning) || (!this.enable)) {
+        var gameObject = this.parent;
+        if (!gameObject.active) {
             return this;
         }
 

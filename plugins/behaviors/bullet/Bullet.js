@@ -57,12 +57,12 @@ class Bullet extends TickTask {
 
     update(time, delta) {
         var gameObject = this.parent;
-        if (!gameObject.active) {
+        if (!this.enable) {
+            SetVelocity(gameObject, 0, 0);
             return this;
         }
 
-        if (!this.enable) {
-            SetVelocity(gameObject, 0, 0);
+        if (!gameObject.active) {
             return this;
         }
 

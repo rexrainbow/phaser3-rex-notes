@@ -1,5 +1,6 @@
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import GetChildPrevState from '../utils/GetChildPrevState.js';
 import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
@@ -62,7 +63,7 @@ var LayoutChildren = function () {
             padding = childConfig.padding;
 
             if (this.sizerEventsEnable) {
-                prevChildState = CopyState(child, true);
+                prevChildState = CopyState(child, GetChildPrevState(child));
             }
 
             x = (itemX + padding.left);
