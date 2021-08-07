@@ -1,3 +1,4 @@
+import { AddChild } from '../basesizer/AddChildMethods.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import Space from '../utils/Space.js';
@@ -12,7 +13,7 @@ const PROPORTIONMODE = {
 }
 
 var Add = function (gameObject, proportion, align, paddingConfig, expand, childKey, index, minSize) {
-    this.pin(gameObject);
+    AddChild.call(this, gameObject);
 
     var proportionType = typeof (proportion);
     if (proportion === null) {

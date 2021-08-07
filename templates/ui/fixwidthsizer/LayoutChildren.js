@@ -1,6 +1,5 @@
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-import GetChildPrevState from '../utils/GetChildPrevState.js';
 import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
@@ -11,12 +10,7 @@ var LayoutChildren = function () {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-
-    var prevChildState, layoutedChildren;
-    if (this.sizerEventsEnable) {
-        layoutedChildren = [];
-    }
-
+    var prevChildState;
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -67,8 +61,8 @@ var LayoutChildren = function () {
             padding = childConfig.padding;
 
             if (this.sizerEventsEnable) {
-                prevChildState = CopyState(child, GetChildPrevState(child));
-                layoutedChildren.push(child);
+                prevChildState = CopyState(child, this.getChildPrevState(child));
+                this.layoutedChildren.push(child);
             }
 
             x = (itemX + padding.left);
@@ -95,11 +89,6 @@ var LayoutChildren = function () {
         itemX = startX;
         itemY += line.height + this.space.line;
     }
-
-    if (this.sizerEventsEnable) {
-        this.emit('postlayout', layoutedChildren, this);
-    }
-
 }
 
 var GetJustifySpace = function (total, remainder, childCount) {

@@ -1,3 +1,4 @@
+import { AddChild } from '../basesizer/AddChildMethods.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
@@ -11,7 +12,7 @@ var Add = function (gameObject, paddingConfig, childKey, index) {
         return this;
     }
 
-    this.pin(gameObject);
+    AddChild.call(this, gameObject);
 
     if (IsPlainObject(paddingConfig)) {
         var config = paddingConfig;

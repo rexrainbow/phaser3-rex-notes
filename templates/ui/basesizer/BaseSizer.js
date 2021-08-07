@@ -15,6 +15,7 @@ class Base extends Container {
         this.space = {};
         this.backgroundChildren = undefined;
         this.sizerChildren = undefined; // [] or {}
+        this.layoutedChildren = undefined;
 
         var anchorConfig = GetValue(config, 'anchor', undefined);
         if (anchorConfig) {
@@ -48,6 +49,7 @@ class Base extends Container {
         this.childrenMap = undefined;
         this.space = undefined;
         this.rexSizer = undefined;
+        this.layoutedChildren = undefined;
     }
 
     setMinSize(minWidth, minHeight) {

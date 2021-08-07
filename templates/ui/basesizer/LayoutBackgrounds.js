@@ -26,7 +26,10 @@ var LayoutBackgrounds = function () {
 
         padding = childConfig.padding;
 
-        prevChildState = CopyState(child, true);
+        if (this.sizerEventsEnable) {
+            prevChildState = CopyState(child, this.getChildPrevState(child));
+            this.layoutedChildren.push(child);
+        }
 
         childTLX = x + padding.left;
         childTLY = y + padding.top;

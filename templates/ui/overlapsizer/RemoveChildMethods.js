@@ -1,7 +1,4 @@
-import BaseSizer from '../basesizer/BaseSizer.js';
-
-const BaseSizerRemove = BaseSizer.prototype.remove;
-const BaseSizerClear = BaseSizer.prototype.clear;
+import { RemoveChild, ClearChildren } from '../basesizer/RemoveChildMethods.js';
 
 export default {
     remove(gameObject, destroyChild) {
@@ -21,7 +18,7 @@ export default {
         if (key) {
             delete this.sizerChildren[key];
         }
-        BaseSizerRemove.call(this, gameObject, destroyChild);
+        RemoveChild.call(this, gameObject, destroyChild);
         return this;
     },
 
@@ -36,7 +33,7 @@ export default {
         for (var key in this.sizerChildren) {
             delete this.sizerChildren[key];
         }
-        BaseSizerClear.call(this, destroyChild);
+        ClearChildren.call(this, destroyChild);
         return this;
     }
 }

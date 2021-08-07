@@ -170,7 +170,7 @@ var menu = scene.rexUI.add.menu({
     - `'down'`, or `1` : Put sub-menu at down side. Used with `orientation` is set to `x`.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
 ### Custom class
 

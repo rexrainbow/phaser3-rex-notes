@@ -1,3 +1,4 @@
+import { AddChild } from '../basesizer/AddChildMethods.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
@@ -8,7 +9,7 @@ const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
 var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight) {
-    this.pin(gameObject);
+    AddChild.call(this, gameObject);
 
     if (IsPlainObject(key)) {
         var config = key;

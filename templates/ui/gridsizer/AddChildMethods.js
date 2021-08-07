@@ -1,3 +1,4 @@
+import { AddChild } from '../basesizer/AddChildMethods.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
@@ -52,7 +53,7 @@ var GetEmptyItemIndex = function (columnIndex, rowIndex, items, columnCount, row
 }
 
 var Add = function (gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
-    this.pin(gameObject);
+    AddChild.call(this, gameObject);
     if (IsPlainObject(columnIndex)) {
         var config = columnIndex;
         columnIndex = GetValue(config, 'column', undefined);

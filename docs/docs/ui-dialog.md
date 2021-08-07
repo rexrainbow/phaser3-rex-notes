@@ -244,7 +244,7 @@ var dialog = scene.rexUI.add.dialog({
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`..
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`..
 
 ### Custom class
 

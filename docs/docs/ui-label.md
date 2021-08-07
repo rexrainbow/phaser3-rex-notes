@@ -141,7 +141,7 @@ var label = scene.rexUI.add.label({
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
 #### Expand size of text
 

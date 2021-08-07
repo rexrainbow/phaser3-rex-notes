@@ -1,8 +1,6 @@
-import BaseSizer from '../basesizer/BaseSizer.js';
+import { RemoveChild, ClearChildren } from '../basesizer/RemoveChildMethods.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
-const BaseSizerRemove = BaseSizer.prototype.remove;
-const BaseSizerClear = BaseSizer.prototype.clear;
 
 export default {
     remove(gameObject, destroyChild) {
@@ -11,7 +9,7 @@ export default {
         }
 
         RemoveItem(this.sizerChildren, gameObject);
-        BaseSizerRemove.call(this, gameObject, destroyChild);
+        RemoveChild.call(this, gameObject, destroyChild);
         return this;
     },
 
@@ -24,7 +22,7 @@ export default {
 
     clear(destroyChild) {
         this.sizerChildren.length = 0;
-        BaseSizerClear.call(this, destroyChild);
+        ClearChildren.call(this, destroyChild);
         return this;
     }
 }

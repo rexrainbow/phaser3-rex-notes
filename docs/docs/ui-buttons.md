@@ -146,7 +146,7 @@ var buttons = scene.rexUI.add.buttons({
         - `space.item` : Space between 2 button game objects.       
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `eventEmitter` : Dispatch buttons' touch events to other game object, default is this buttons game object.
 - `groupName` : Optional group name for argument of touch events.
 - `type` : Type/behavior of these buttons.

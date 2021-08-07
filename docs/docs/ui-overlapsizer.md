@@ -128,7 +128,7 @@ var sizer = scene.rexUI.add.overlapSizer(x, y, width, height, {
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
 ### Custom class
 
@@ -300,38 +300,6 @@ See also - [dirty](ui-basesizer.md#dirty)
     // var gameObject = sizer.getByName('#' + name, recursive);
     ```
     - `recursive` : Set `true` to search all children recursively.
-
-### Events
-
-!!! note
-    Enable sizer events by set `sizerEvents` to `true` in config.
-
-- Fire `'sizer.postlayout'` event to all children after layout.
-    ```javascript
-    child.on('sizer.postlayout', function(prevState, child, sizer){
-    
-    })
-    ```
-    - `prevState` : Properties before layout.
-        - `prevState.x`, `prevState.y` : Child position before layout.
-        - `prevState.width`, `prevState.height`, 
-          `prevState.displayWidth`, `prevState.displayHeight`, 
-          `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
-- Fire `'postlayout'` event.
-    ```javascript
-    sizer.on('postlayout', function(children, sizer) {
-        for(var i=0, cnt=children.length; i<cnt; i++) {
-            var prevState = sizer.getChildPrevState(children[i]);
-            // ...
-        }
-    })
-    ```
-- Fire `'sizer.remove'` event to removed without destroyed child.
-    ```javascript
-    child.on('sizer.remove', function(child, sizer){
-    
-    })
-    ```
 
 ### Other properties
 

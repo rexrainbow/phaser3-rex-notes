@@ -274,7 +274,7 @@ var table = scene.rexUI.add.gridTable({
 - `items` : Array of item data for each cell.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 
 ### Custom class
 

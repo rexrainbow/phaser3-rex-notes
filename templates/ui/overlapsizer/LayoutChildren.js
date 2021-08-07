@@ -1,6 +1,5 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
-import GetChildPrevState from '../utils/GetChildPrevState.js';
 import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
@@ -11,12 +10,7 @@ var LayoutChildren = function () {
         innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
-
-    var prevChildState, layoutedChildren;
-    if (this.sizerEventsEnable) {
-        layoutedChildren = [];
-    }
-
+    var prevChildState;
     // Layout current page
     var children = this.sizerChildren;
     for (var key in children) {
@@ -29,8 +23,8 @@ var LayoutChildren = function () {
         padding = childConfig.padding;
 
         if (this.sizerEventsEnable) {
-            prevChildState = CopyState(child, GetChildPrevState(child));
-            layoutedChildren.push(child);
+            prevChildState = CopyState(child, this.getChildPrevState(child));
+            this.layoutedChildren.push(child);
         }
 
         // Set size
@@ -67,11 +61,6 @@ var LayoutChildren = function () {
             child.emit('sizer.postlayout', prevChildState, child, this);
         }
     }
-
-    if (this.sizerEventsEnable) {
-        this.emit('postlayout', layoutedChildren, this);
-    }
-
 }
 
 export default LayoutChildren;

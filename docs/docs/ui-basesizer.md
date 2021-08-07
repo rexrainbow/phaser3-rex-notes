@@ -651,6 +651,64 @@ sizer.addToLayer(layer);
 
 - `layer` : [Layer](layer.md) game object.
 
+### Events
+
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
+#### Layout children
+
+- Fire `'sizer.postlayout'` event to all children after layout.
+    ```javascript
+    child.on('sizer.postlayout', function(prevState, child, sizer){
+    
+    })
+    ```
+    - `prevState` : Properties before layout.
+        - `prevState.x`, `prevState.y` : Child position before layout.
+        - `prevState.width`, `prevState.height`, 
+          `prevState.displayWidth`, `prevState.displayHeight`, 
+          `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+- Fire `'postlayout'` event.
+    ```javascript
+    sizer.on('postlayout', function(children, sizer) {
+        for(var i=0, cnt=children.length; i<cnt; i++) {
+            var prevState = sizer.getChildPrevState(children[i]);
+            // ...
+        }
+    })
+    ```
+
+#### Remove child
+
+- Fire `'sizer.remove'` event to removed without destroyed child.
+    ```javascript
+    child.on('sizer.remove', function(child, sizer){
+    
+    })
+    ```
+- Fire `'remove'` event.
+    ```javascript
+    sizer.on('remove', function(child, sizer){
+    
+    })
+    ```
+
+#### Add child
+
+- Fire `'sizer.add'` event to added child.
+    ```javascript
+    child.on('sizer.add', function(child, sizer){
+    
+    })
+    ```
+- Fire `'add'` event.
+    ```javascript
+    sizer.on('add', function(child, sizer){
+    
+    })
+    ```
+
 ### Other properties
 
 This game object inherits from [ContainerLite](containerlite.md).

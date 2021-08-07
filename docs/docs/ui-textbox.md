@@ -147,7 +147,7 @@ var textBox = scene.rexUI.add.textBox({
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
-- `sizerEvents` : Set `true` to fire sizer events. Default value is `false`.
+- `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
 - `page` : Configuration of [page behavior](textpage.md#create-instance)
     - `page.maxLines` : Max lines of a page.
     - `page.pageBreak` : Symbol of page-break. Default value is `'\f\n'`.

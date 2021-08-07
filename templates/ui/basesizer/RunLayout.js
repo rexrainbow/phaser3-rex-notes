@@ -23,11 +23,22 @@ var RunLayout = function (parent, newWidth, newHeight) {
     // Resize parent
     this.resize(newWidth, newHeight);
 
+    if (this.sizerEventsEnable) {
+        if (this.layoutedChildren === undefined) {
+            this.layoutedChildren = [];
+        }
+    }
+
     // Layout children    
     this.layoutChildren();
 
     // Layout background children
     this.layoutBackgrounds();
+
+    if (this.sizerEventsEnable) {
+        this.emit('postlayout', this.layoutedChildren, this);
+        this.layoutedChildren.length = 0;
+    }
 
     return this.postLayout();
 }
