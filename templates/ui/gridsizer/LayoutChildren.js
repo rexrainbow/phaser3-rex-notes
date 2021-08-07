@@ -11,7 +11,12 @@ var LayoutChildren = function () {
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
-    var prevChildState;
+
+    var prevChildState, layoutedChildren;
+    if (this.sizerEventsEnable) {
+        layoutedChildren = [];
+    }
+
     // Layout grid children
     var columnSpace = this.space.column;
     var rowSpace = this.space.row;
@@ -31,6 +36,7 @@ var LayoutChildren = function () {
 
             if (this.sizerEventsEnable) {
                 prevChildState = CopyState(child, GetChildPrevState(child));
+                layoutedChildren.push(child);
             }
 
             childWidth = this.getExpandedChildWidth(child, colWidth);
@@ -63,6 +69,11 @@ var LayoutChildren = function () {
 
         itemY += (rowHeight + rowSpace[rowIndex]);
     }
+
+    if (this.sizerEventsEnable) {
+        this.emit('postlayout', layoutedChildren, this);
+    }
+
 }
 
 export default LayoutChildren;

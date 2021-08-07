@@ -1,4 +1,5 @@
 import GetSizerConfig from '../utils/GetSizerConfig.js';
+import GetChildPrevState from '../utils/GetChildPrevState.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
@@ -37,6 +38,7 @@ import SetDraggable from './SetDraggable.js';
 
 var methods = {
     getSizerConfig: GetSizerConfig,
+    getChildPrevState: GetChildPrevState,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
     resolveWidth: ResolveWidth,
@@ -65,7 +67,8 @@ var methods = {
     setAnchor: SetAnchor,
     isInTouching: IsInTouching,
     pointToChild: PointToChild,
-    setDraggable: SetDraggable
+    setDraggable: SetDraggable,
+
 };
 
 Object.assign(

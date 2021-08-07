@@ -10,8 +10,12 @@ var LayoutChildren = function () {
     var innerWidth = this.innerWidth,
         innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
-    var prevChildState;
     var childWidth, childHeight;
+
+    var prevChildState, layoutedChildren;
+    if (this.sizerEventsEnable) {
+        layoutedChildren = [];
+    }
 
     // Layout current page
     var children = this.sizerChildren;
@@ -26,7 +30,9 @@ var LayoutChildren = function () {
 
         if (this.sizerEventsEnable) {
             prevChildState = CopyState(child, GetChildPrevState(child));
+            layoutedChildren.push(child);
         }
+
         // Set size
         if (child.isRexSizer) {
             child.runLayout(
@@ -61,6 +67,11 @@ var LayoutChildren = function () {
             child.emit('sizer.postlayout', prevChildState, child, this);
         }
     }
+
+    if (this.sizerEventsEnable) {
+        this.emit('postlayout', layoutedChildren, this);
+    }
+
 }
 
 export default LayoutChildren;

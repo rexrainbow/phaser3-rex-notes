@@ -393,7 +393,7 @@ sizer.resetGrid(column, row, columnProportions, rowProportions, space);
 
 - Fire `'sizer.postlayout'` event to all children after layout.
     ```javascript
-    child.on('sizer.postlayout', function(prevState, child, parentSizer){
+    child.on('sizer.postlayout', function(prevState, child, sizer){
     
     })
     ```
@@ -402,9 +402,18 @@ sizer.resetGrid(column, row, columnProportions, rowProportions, space);
         - `prevState.width`, `prevState.height`, 
           `prevState.displayWidth`, `prevState.displayHeight`, 
           `prevState.scaleX`, `prevState.scaleY` : Child size before layout.
+- Fire `'postlayout'` event.
+    ```javascript
+    sizer.on('postlayout', function(children, sizer) {
+        for(var i=0, cnt=children.length; i<cnt; i++) {
+            var prevState = sizer.getChildPrevState(children[i]);
+            // ...
+        }
+    })
+    ```
 - Fire `'sizer.remove'` event to removed without destroyed child.
     ```javascript
-    child.on('sizer.remove', function(child, parentSizer){
+    child.on('sizer.remove', function(child, sizer){
     
     })
     ```

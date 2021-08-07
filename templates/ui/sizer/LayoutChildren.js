@@ -15,7 +15,12 @@ var LayoutChildren = function () {
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
-    var prevChildState;
+
+    var prevChildState, layoutedChildren;
+    if (this.sizerEventsEnable) {
+        layoutedChildren = [];
+    }
+
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child.rexSizer.hidden) {
@@ -27,6 +32,7 @@ var LayoutChildren = function () {
 
         if (this.sizerEventsEnable) {
             prevChildState = CopyState(child, GetChildPrevState(child));
+            layoutedChildren.push(child);
         }
 
         // Set size
@@ -84,6 +90,11 @@ var LayoutChildren = function () {
             itemY += (height + padding.top + padding.bottom + this.space.item);
         }
     }
+
+    if (this.sizerEventsEnable) {
+        this.emit('postlayout', layoutedChildren, this);
+    }
+
 }
 
 export default LayoutChildren;

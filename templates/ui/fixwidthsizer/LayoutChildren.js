@@ -11,7 +11,11 @@ var LayoutChildren = function () {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var prevChildState;
+
+    var prevChildState, layoutedChildren;
+    if (this.sizerEventsEnable) {
+        layoutedChildren = [];
+    }
 
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
@@ -64,6 +68,7 @@ var LayoutChildren = function () {
 
             if (this.sizerEventsEnable) {
                 prevChildState = CopyState(child, GetChildPrevState(child));
+                layoutedChildren.push(child);
             }
 
             x = (itemX + padding.left);
@@ -90,6 +95,11 @@ var LayoutChildren = function () {
         itemX = startX;
         itemY += line.height + this.space.line;
     }
+
+    if (this.sizerEventsEnable) {
+        this.emit('postlayout', layoutedChildren, this);
+    }
+
 }
 
 var GetJustifySpace = function (total, remainder, childCount) {
