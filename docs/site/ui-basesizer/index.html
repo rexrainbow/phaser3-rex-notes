@@ -6708,8 +6708,8 @@
 <h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Fire <code>'sizer.postlayout'</code> event to all children after layout.
-    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">prevState</span><span class="p">,</span> <span class="nx">child</span><span class="p">,</span> <span class="nx">sizer</span><span class="p">){</span>
-
+    <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">sizer</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">prevState</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getChildPrevState</span><span class="p">(</span><span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
 <span class="p">})</span>
 </code></pre></div><ul>
 <li><code>prevState</code> : Properties before layout.<ul>

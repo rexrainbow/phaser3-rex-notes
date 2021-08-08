@@ -1,4 +1,4 @@
-import { AddChild } from '../basesizer/AddChildMethods.js';
+import AddChild from '../basesizer/utils/AddChild.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';

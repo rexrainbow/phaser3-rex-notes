@@ -1,6 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
-import CopyState from '../utils/CopyState.js';
+import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
+import LayoutChild from '../basesizer/utils/LayoutChild.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -10,7 +10,6 @@ var LayoutChildren = function () {
         innerHeight = this.innerHeight;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
-    var prevChildState;
     // Layout current page
     var children = this.sizerChildren;
     for (var key in children) {
@@ -22,10 +21,7 @@ var LayoutChildren = function () {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
-        if (this.sizerEventsEnable) {
-            prevChildState = CopyState(child, this.getChildPrevState(child));
-            this.layoutedChildren.push(child);
-        }
+        PreLayoutChild.call(this, child);
 
         // Set size
         if (child.isRexSizer) {
@@ -51,15 +47,7 @@ var LayoutChildren = function () {
         y = (startY + padding.top);
         height = innerHeight - padding.top - padding.bottom;
 
-        AlignIn(child, x, y, width, height, childConfig.align);
-        if (this.sizerEventsEnable) {
-            child.emit('sizer.layout', prevChildState, child, this);
-        }
-
-        this.resetChildPositionState(child);
-        if (this.sizerEventsEnable) {
-            child.emit('sizer.postlayout', prevChildState, child, this);
-        }
+        LayoutChild.call(this, child, x, y, width, height, childConfig.align);
     }
 }
 

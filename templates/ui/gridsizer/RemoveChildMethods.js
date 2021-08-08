@@ -1,4 +1,5 @@
-import { RemoveChild, ClearChildren } from '../basesizer/RemoveChildMethods.js';
+import RemoveChild from '../basesizer/utils/RemoveChild.js';
+import ClearChildren from '../basesizer/utils/ClearChildren.js';
 import ArrayFill from '../../../plugins/utils/array/Fill.js';
 
 export default {

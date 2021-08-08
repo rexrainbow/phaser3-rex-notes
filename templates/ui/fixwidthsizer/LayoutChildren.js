@@ -1,6 +1,7 @@
-import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
+import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-import CopyState from '../utils/CopyState.js';
+
 
 var LayoutChildren = function () {
     var innerLineWidth = this.innerWidth;
@@ -10,7 +11,6 @@ var LayoutChildren = function () {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var prevChildState;
     var lines = this.widthWrapResult.lines;
     var line, lineChlidren, remainderLineWidth;
     for (var i = 0, icnt = lines.length; i < icnt; i++) {
@@ -60,10 +60,7 @@ var LayoutChildren = function () {
             childConfig = child.rexSizer;
             padding = childConfig.padding;
 
-            if (this.sizerEventsEnable) {
-                prevChildState = CopyState(child, this.getChildPrevState(child));
-                this.layoutedChildren.push(child);
-            }
+            PreLayoutChild.call(this, child);
 
             x = (itemX + padding.left);
             if (j > 0) {
@@ -75,15 +72,7 @@ var LayoutChildren = function () {
             height = GetDisplayHeight(child);
             itemX = x + width + padding.right + justifySpace;
 
-            AlignIn(child, x, y, width, height, childConfig.align);
-            if (this.sizerEventsEnable) {
-                child.emit('sizer.layout', prevChildState, child, this);
-            }
-
-            this.resetChildPositionState(child);
-            if (this.sizerEventsEnable) {
-                child.emit('sizer.postlayout', prevChildState, child, this);
-            }
+            LayoutChild.call(this, child, x, y, width, height, childConfig.align);
         }
 
         itemX = startX;

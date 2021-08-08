@@ -1,7 +1,7 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
+import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
+import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
-import CopyState from '../utils/CopyState.js';
 
 var LayoutChildren = function () {
     var children = this.sizerChildren;
@@ -14,7 +14,6 @@ var LayoutChildren = function () {
         itemY = startY;
     var x, y, width, height; // Align zone
     var childWidth, childHeight;
-    var prevChildState;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child.rexSizer.hidden) {
@@ -24,10 +23,7 @@ var LayoutChildren = function () {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
-        if (this.sizerEventsEnable) {
-            prevChildState = CopyState(child, this.getChildPrevState(child));
-            this.layoutedChildren.push(child);
-        }
+        PreLayoutChild.call(this, child);
 
         // Set size
         childWidth = this.getExpandedChildWidth(child);
@@ -68,15 +64,7 @@ var LayoutChildren = function () {
             }
         }
 
-        AlignIn(child, x, y, width, height, childConfig.align);
-        if (this.sizerEventsEnable) {
-            child.emit('sizer.layout', prevChildState, child, this);
-        }
-
-        this.resetChildPositionState(child);
-        if (this.sizerEventsEnable) {
-            child.emit('sizer.postlayout', prevChildState, child, this);
-        }
+        LayoutChild.call(this, child, x, y, width, height, childConfig.align);
 
         if (this.orientation === 0) { // x
             itemX += (width + padding.left + padding.right + this.space.item);

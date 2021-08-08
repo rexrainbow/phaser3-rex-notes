@@ -1,6 +1,6 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import AlignIn from '../../../plugins/utils/actions/AlignIn.js';
-import CopyState from '../utils/CopyState.js';
+import PreLayoutChild from './utils/PreLayoutChild.js';
+import LayoutChild from './utils/LayoutChild.js';
 
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
@@ -10,13 +10,12 @@ var LayoutBackgrounds = function () {
     }
     var backgrounds = this.backgroundChildren;
 
-    var x = this.left,
-        y = this.top,
-        width = this.width,
-        height = this.height;
-    var prevChildState;
+    var startX = this.left,
+        startY = this.top;
+    var parentWidth = this.width,
+        parentHeight = this.height;
     var child, childConfig, padding,
-        childTLX, childTLY, childWidth, childHeight;
+        x, y, width, height;
     for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
         child = backgrounds[i];
         childConfig = child.rexSizer;
@@ -26,22 +25,16 @@ var LayoutBackgrounds = function () {
 
         padding = childConfig.padding;
 
-        if (this.sizerEventsEnable) {
-            prevChildState = CopyState(child, this.getChildPrevState(child));
-            this.layoutedChildren.push(child);
-        }
+        PreLayoutChild.call(this, child);
 
-        childTLX = x + padding.left;
-        childTLY = y + padding.top;
-        childWidth = width - padding.left - padding.right;
-        childHeight = height - padding.top - padding.bottom;
+        x = startX + padding.left;
+        y = startY + padding.top;
+        width = parentWidth - padding.left - padding.right;
+        height = parentHeight - padding.top - padding.bottom;
 
-        ResizeGameObject(child, childWidth, childHeight);
-        AlignIn(child, childTLX, childTLY, childWidth, childHeight, ALIGN_CENTER);
-        child.emit('layout', prevChildState, child, this);
+        ResizeGameObject(child, width, height);
 
-        this.resetChildPositionState(child);
-        child.emit('postlayout', prevChildState, child, this);
+        LayoutChild.call(this, child, x, y, width, height, ALIGN_CENTER);
     }
 }
 

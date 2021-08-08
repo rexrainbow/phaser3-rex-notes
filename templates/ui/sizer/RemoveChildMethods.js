@@ -1,4 +1,5 @@
-import { RemoveChild, ClearChildren } from '../basesizer/RemoveChildMethods.js';
+import RemoveChild from '../basesizer/utils/RemoveChild.js';
+import ClearChildren from '../basesizer/utils/ClearChildren.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
 

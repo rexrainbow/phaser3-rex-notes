@@ -72,7 +72,8 @@ var AddWord = function (panel, word) {
     var moveTo = new MoveTo(child);
 
     child
-        .on('sizer.postlayout', function (prevState, child, parent) {
+        .on('sizer.postlayout', function (child, parent) {
+            var prevState = parent.getChildPrevState(child);
             moveTo.moveFrom(prevState.x, prevState.y);
         })
         .on('sizer.remove', function (child, parent) {

@@ -1,20 +1,8 @@
 import Container from '../container/Container.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
+import AddChild from './utils/AddChild.js';
 
 const ContainerAdd = Container.prototype.add;
-
-var AddChild = function (gameObject) {
-    ContainerAdd.call(this, gameObject);
-
-    if (this.sizerEventsEnable) {
-        gameObject.emit('sizer.add', gameObject, this);
-        this.emit('add', gameObject, this);
-    }
-
-    return this;
-}
-
-export { AddChild };
 
 export default {
     pin(gameObject) {

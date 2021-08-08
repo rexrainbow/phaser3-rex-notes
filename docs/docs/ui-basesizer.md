@@ -660,8 +660,8 @@ sizer.addToLayer(layer);
 
 - Fire `'sizer.postlayout'` event to all children after layout.
     ```javascript
-    child.on('sizer.postlayout', function(prevState, child, sizer){
-    
+    child.on('sizer.postlayout', function(child, sizer){
+        var prevState = sizer.getChildPrevState(children[i]);
     })
     ```
     - `prevState` : Properties before layout.
