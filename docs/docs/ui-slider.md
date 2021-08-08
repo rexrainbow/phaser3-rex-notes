@@ -8,6 +8,7 @@ A container with a track, indicator, thumb and background.
 ## Live demos
 
 - [Slider bar](https://codepen.io/rexrainbow/pen/dwYaaQ)
+- [Color picker](https://codepen.io/rexrainbow/pen/XWmgMaX)
 
 ## Usage
 
