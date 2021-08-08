@@ -33,6 +33,14 @@ declare namespace BaseSizer {
 
         sizerEvents?: boolean,
     }
+
+    type PrevState = {
+        x: number,
+        y: number,
+        width: number, height: number,
+        displayWidth: number, displayHeight: number,
+        scaleX: number, scaleY: number
+    }
 }
 
 declare class BaseSizer extends ContainerLite {
@@ -149,6 +157,10 @@ declare class BaseSizer extends ContainerLite {
     getTopmostSizer(
         gameObject?: Phaser.GameObjects.GameObject
     ): BaseSizer | null;
+
+    getChildPrevState(
+        gameObject: Phaser.GameObjects.GameObject
+    ): BaseSizer.PrevState;
 
     isInTouching(): boolean;
 
