@@ -11,7 +11,7 @@ class MoveTo extends TickTask {
 
         this.chessData = GetChessData(gameObject);
         this.scene = gameObject.scene;
-        this.moveToTask = new MoveToTask(gameObject, moveToTaskConfig);
+        this.moveToTask = new MoveToTask(gameObject, { tickingMode: 0 });
 
         this.resetFromJSON(config);
         this.boot();
@@ -204,10 +204,6 @@ class MoveTo extends TickTask {
         return this;
     }
 }
-
-const moveToTaskConfig = {
-    tickingMode: 0
-};
 
 Object.assign(
     MoveTo.prototype,

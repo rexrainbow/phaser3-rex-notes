@@ -57,10 +57,6 @@ class RotateTo extends TickTask {
             angle = GetValue(config, 'angle', undefined);
             dir = GetValue(config, 'dir', undefined);
         }
-        // invalid target angle
-        if (angle == null) {
-            return this;
-        }
         this.target = MathWrap(angle, 0, 360); // 0~360
         if (dir === undefined) {
             dir = 0;

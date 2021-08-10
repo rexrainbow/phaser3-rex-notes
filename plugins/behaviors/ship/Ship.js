@@ -134,7 +134,7 @@ class Ship extends TickTask {
             return this;
         }
 
-        // speed up
+        // Speed up
         if (this.isUp) {
             var rotation = gameObject.rotation;
             var ax = Math.cos(rotation) * this.acceleration;
@@ -144,7 +144,7 @@ class Ship extends TickTask {
             SetAcceleration(gameObject, 0, 0);
         }
 
-        // turn left/right
+        // Turn left/right
         var dx = ((this.isLeft) ? -1 : 0) + ((this.isRight) ? 1 : 0);
         SetAngularVelocity(gameObject, this.angularVelocity * dx);
 
