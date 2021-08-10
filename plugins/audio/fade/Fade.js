@@ -1,26 +1,21 @@
 import TweenTask from '../../utils/componentbase/TweenTask.js';
 
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const Linear = Phaser.Math.Linear;
 
 class Fade extends TweenTask {
     constructor(scene, sound, config) {
         sound.scene = scene;
-
-        super(sound);
+        super(sound);  
         // this.parent = sound
-        // this.timer
 
         this.volume = {};
         this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'mode', 0));
-        this.setEnable(GetValue(o, 'enable', true));
         this.setVolumeRange(
             GetAdvancedValue(o, 'volume.start', this.parent.volume),
             GetAdvancedValue(o, 'volume.end', 0)
@@ -32,21 +27,11 @@ class Fade extends TweenTask {
 
     toJSON() {
         return {
-            timer: this.timer.toJSON(),
-            enable: this.enable,
             mode: this.mode,
             volume: this.volume,
             delay: this.delay,
             duration: this.duration
         };
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
-        return this;
     }
 
     setMode(m) {
@@ -74,47 +59,37 @@ class Fade extends TweenTask {
     }
 
     start() {
-        if (this.timer.isRunning) {
+        if (this.isRunning) {
             return this;
         }
 
-        this.parent.setVolume(this.volume.start);
+        var v0 = this.volume.start;
+        var v1 = this.volume.end;
+        this.parent.setVolume(v0);
+        var config = {
+            targets: this.parent,
+            volume: {
+                start: v0,
+                from: v0,
+                to: v1
+            },
 
-        this.timer
-            .setDelay(this.delay)
-            .setDuration(this.duration);
-
-        super.start();
-        return this;
-    }
-
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
+            delay: this.delay,
+            duration: this.duration,
+            ease: 'Linear',
+            onComplete: function () {
+                switch (this.mode) {
+                    case 1:
+                        this.parent.stop();
+                        break;
+                    case 2:
+                        this.parent.destroy();
+                        break;
+                }
+            },
+            onCompleteScope: this
         }
-
-        this.timer.update(time, delta);
-
-        var sound = this.parent;
-        sound.volume = Linear(this.volume.start, this.volume.end, this.timer.t);
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
-    }
-
-    complete() {
-        super.complete();
-
-        switch (this.mode) {
-            case 1:
-                this.parent.stop();
-                break;
-            case 2:
-                this.parent.destroy();
-                break;
-        }
+        super.start(config);
 
         return this;
     }

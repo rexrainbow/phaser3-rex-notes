@@ -2,35 +2,21 @@ import TweenTask from '../../../../utils/componentbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-const Linear = Phaser.Math.Linear;
 
 class Flip extends TweenTask {
     constructor(gameObject, config) {
-        super(gameObject);
+        super(gameObject, { eventEmitter: true });
         // this.parent = gameObject;
-        // this.timer
 
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Cubic'));
         this.setFrontToBackDirection(GetValue(o, 'frontToBack', 0));
         this.setBackToFrontDirection(GetValue(o, 'backToFront', 1));
-        return this;
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -49,7 +35,6 @@ class Flip extends TweenTask {
             ease = 'Linear';
         }
         this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
@@ -70,24 +55,26 @@ class Flip extends TweenTask {
     }
 
     start() {
-        if (this.timer.isRunning) {
+        if (this.isRunning) {
             return this;
         }
 
-        this.timer
-            .setDelay(this.delay)
-            .setDuration(this.duration);
-
-        var gameObject = this.parent;
-        if (gameObject.face === 0) {  // isFrontToBack
-            this.startAngle = 0
-            this.endAngle = this.endAngleFB;
-        } else {
-            this.startAngle = this.endAngleBF
-            this.endAngle = 0;
+        var config = {
+            targets: this.parent,
+            delay: this.delay,
+            duration: this.duration,
+            ease: this.ease,
+            repeat: 0
         }
 
-        super.start();
+        var propKey = (this.parent.orientation === 0) ? 'angleY' : 'angleX';
+        var isFrontToBack = (this.parent.face === 0);
+        config[propKey] = {
+            start: (isFrontToBack) ? 0 : this.endAngleBF,
+            to: (isFrontToBack) ? this.endAngleFB : 0
+        };
+
+        super.start(config);
         return this;
     }
 
@@ -126,31 +113,6 @@ class Flip extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-        var t = this.easeFn(this.timer.t);
-
-        var value = Linear(this.startAngle, this.endAngle, t);
-        if (this.parent.orientation === 0) {
-            gameObject.angleY = value;
-        } else {
-            gameObject.angleX = value;
-        }
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
-    }
 }
 
 const DIRMODE = {
