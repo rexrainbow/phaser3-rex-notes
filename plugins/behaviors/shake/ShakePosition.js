@@ -1,5 +1,4 @@
 import TickTask from '../../utils/componentbase/TickTask.js';
-import Timer from '../../utils/timer/Timer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,19 +7,19 @@ class ShakePosition extends TickTask {
         super(gameObject, config);
         // this.parent = gameObject;
 
-        this.timer = new Timer();
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
         this.setMode(GetValue(o, 'mode', 1));
         this.isRunning = GetValue(o, 'isRunning', false);
         this.setEnable(GetValue(o, 'enable', true));
+        this.timeScale = GetValue(o, 'timeScale', 1);
         this.setMagnitudeMode(GetValue(o, 'magnitudeMode', 1));
         this.setDuration(GetValue(o, 'duration', 500));
         this.setMagnitude(GetValue(o, 'magnitude', 10));
+        this.nowTime = GetValue(o, 'nowTime', 0);
         this.ox = GetValue(o, 'ox', undefined);
         this.oy = GetValue(o, 'oy', undefined);
         return this;
@@ -28,28 +27,17 @@ class ShakePosition extends TickTask {
 
     toJSON() {
         return {
-            timer: this.timer.toJSON(),
             mode: this.mode,
             isRunning: this.isRunning,
             enable: this.enable,
+            timeScale: this.timeScale,
             magnitudeMode: magnitudeMode,
             duration: this.duration,
             magnitude: this.magnitude,
+            nowTime: this.nowTime,
             ox: this.ox,
             oy: this.oy,
         };
-    }
-
-    shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-            return;
-        }
-
-        this.timer.destroy();
-        this.timer = undefined;
-
-        super.shutdown(fromScene);
     }
 
     startTicking() {
@@ -102,14 +90,6 @@ class ShakePosition extends TickTask {
         return this;
     }
 
-    get duration() {
-        return this.timer.duration;
-    }
-
-    set duration(value) {
-        this.timer.duration = value;
-    }
-
     setDuration(duration) {
         this.duration = duration;
         return this;
@@ -133,14 +113,8 @@ class ShakePosition extends TickTask {
             this.setDuration(duration);
         }
 
-        this.timer.start();
+        this.nowTime = 0;
         super.start();
-        return this;
-    }
-
-    stop() {
-        this.timer.stop();
-        super.stop();
         return this;
     }
 
@@ -159,8 +133,8 @@ class ShakePosition extends TickTask {
             return this;
         }
 
-        this.timer.update(time, delta);
-        if (this.timer.isDone) {
+        this.nowTime += (delta * this.timeScale);
+        if (this.nowTime >= this.duration) {
             this.backToOrigin();
             this.complete();
         } else {
@@ -172,7 +146,7 @@ class ShakePosition extends TickTask {
             var magnitude = this.magnitude;
             if (this.magnitudeMode === 1) // decay
             {
-                magnitude *= (1 - this.timer.t);
+                magnitude *= (this.duration - this.nowTime) / this.duration;
             }
             var a = Math.random() * Math.PI * 2;
             var offsetX = Math.cos(a) * magnitude;
