@@ -3,22 +3,16 @@ import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-const Linear = Phaser.Math.Linear;
 
 class Flip extends TweenTask {
     constructor(gameObject, config) {
-        super(gameObject);
+        super(gameObject, { eventEmitter: true });
         // this.parent = gameObject;
-        // this.timer
 
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
         this.setOrientation(GetValue(o, 'orientation', 0));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 500));
@@ -27,14 +21,6 @@ class Flip extends TweenTask {
         this.setFrontFace(GetValue(o, 'front', undefined));
         this.setBackFace(GetValue(o, 'back', undefined));
         this.setFace(GetValue(o, 'face', 0));
-        return this;
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -61,7 +47,6 @@ class Flip extends TweenTask {
             ease = 'Linear';
         }
         this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
@@ -103,16 +88,26 @@ class Flip extends TweenTask {
     }
 
     start() {
-        if (this.timer.isRunning) {
+        if (this.isRunning) {
             return this;
         }
 
-        this.timer
-            .setDelay(this.delay)
-            .setDuration(this.duration / 2)
-            .setRepeat(1);  // 2 times
+        var config = {
+            targets: this.parent,
+            delay: this.delay,
+            duration: this.duration / 2,
+            ease: this.ease,
+            yoyo: true,
+            repeat: 0,
 
-        super.start();
+            onYoyo: this.toggleFace,
+            onYoyoScope: this
+        }
+
+        var propKey = (this.orientation === 0) ? 'scaleX' : 'scaleY';
+        config[propKey] = { start: 1, to: 0 };
+
+        super.start(config);
         return this;
     }
 
@@ -124,42 +119,6 @@ class Flip extends TweenTask {
             this.setDuration(duration);
         }
         this.start();
-        return this;
-    }
-
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        var prevRepeatCounter = this.timer.repeatCounter;
-        this.timer.update(time, delta);
-
-        if ((prevRepeatCounter === 0) && (this.timer.repeatCounter === 1)) {
-            this.toggleFace();
-        }
-
-        var t = this.timer.t;
-        if (this.timer.isOddIteration) {  // Yoyo
-            t = 1 - t;
-        }
-        t = this.easeFn(t);
-
-        var value = Linear(1, 0, t);
-        if (this.orientation === 0) {
-            gameObject.scaleX = value;
-        } else {
-            gameObject.scaleY = value;
-        }
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
         return this;
     }
 }

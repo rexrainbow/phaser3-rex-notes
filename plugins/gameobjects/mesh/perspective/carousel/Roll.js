@@ -8,33 +8,19 @@ const DegToRad = Phaser.Math.DegToRad;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees;
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const Wrap = Phaser.Math.Wrap;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
-const Linear = Phaser.Math.Linear;
 
 class Roll extends TweenTask {
     constructor(gameObject, config) {
-        super(gameObject);
+        super(gameObject, { eventEmitter: true });
         // this.parent = gameObject;
-        // this.timer
 
         this.resetFromJSON(config);
-        this.boot();
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Cubic'));
-        return this;
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -53,24 +39,24 @@ class Roll extends TweenTask {
             ease = 'Linear';
         }
         this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
     start(deltaRotation) {
-        if (this.timer.isRunning) {
+        if (this.isRunning) {
             return this;
         }
 
-        this.timer
-            .setDelay(this.delay)
-            .setDuration(this.duration);
+        var config = {
+            targets: this.parent,
+            rotationY: `+=${deltaRotation}`,
+            delay: this.delay,
+            duration: this.duration,
+            ease: this.ease,
+            repeat: 0
+        }
 
-        var gameObject = this.parent;
-        this.startRotationY = gameObject.rotationY;
-        this.endRotationY = this.startRotationY + deltaRotation;
-
-        super.start();
+        super.start(config);
         return this;
     }
 
@@ -128,27 +114,6 @@ class Roll extends TweenTask {
             this.toPrevious(duration);
         } else {
             this.toNext(duration);
-        }
-        return this;
-    }
-
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-        var t = this.easeFn(this.timer.t);
-
-        gameObject.rotationY = Linear(this.startRotationY, this.endRotationY, t);
-
-        if (this.timer.isDone) {
-            this.complete();
         }
         return this;
     }

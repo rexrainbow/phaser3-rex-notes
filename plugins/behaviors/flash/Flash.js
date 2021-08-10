@@ -24,7 +24,6 @@ class Flash extends TickTask {
     toJSON() {
         return {
             timer: this.timer.toJSON(),
-            enable: this.enable,
             isRunning: this.isRunning,
             duration: this.duration,
             repeat: this.repeat,
