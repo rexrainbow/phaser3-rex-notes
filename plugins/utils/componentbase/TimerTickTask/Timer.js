@@ -140,19 +140,11 @@ class Timer {
     }
 
     get isRunning() {
-        return this.state === DELAY || this.state === COUNTDOWN;
+        return this.state === IDLE || this.state === COUNTDOWN;
     }
 
     get isDone() {
         return this.state === DONE;
-    }
-
-    get isOddIteration() {
-        return (this.repeatCounter & 1) === 1;
-    }
-
-    get isEvenIteration() {
-        return (this.repeatCounter & 1) === 0;
     }
 
 }
