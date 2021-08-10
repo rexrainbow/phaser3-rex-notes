@@ -38,25 +38,9 @@ class Flash extends TickTask {
         return this;
     }
 
-    get duration() {
-        return this.timer.duration;
-    }
-
-    set duration(value) {
-        this.timer.duration = value;
-    }
-
     setDuration(duration) {
         this.duration = duration;
         return this;
-    }
-
-    get repeat() {
-        return this.timer.repeat;
-    }
-
-    set repeat(value) {
-        this.timer.repeat = value;
     }
 
     setRepeat(repeat) {
@@ -76,6 +60,10 @@ class Flash extends TickTask {
         if (repeat !== undefined) {
             this.setRepeat(repeat);
         }
+
+        this.timer
+            .setDuration(this.duration)
+            .setRepeat(this.repeat);
 
         if (this.isRunning) {
             // pend task

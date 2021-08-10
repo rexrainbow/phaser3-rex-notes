@@ -89,14 +89,6 @@ class ShakePosition extends TickTask {
         return this;
     }
 
-    get duration() {
-        return this.timer.duration;
-    }
-
-    set duration(value) {
-        this.timer.duration = value;
-    }
-
     setDuration(duration) {
         this.duration = duration;
         return this;
@@ -119,6 +111,8 @@ class ShakePosition extends TickTask {
         if (duration !== undefined) {
             this.setDuration(duration);
         }
+
+        this.timer.setDuration(this.duration);
 
         super.start();
         return this;
