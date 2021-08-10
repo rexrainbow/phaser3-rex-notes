@@ -1,4 +1,5 @@
-import TickTask from '../../utils/componentbase/TimerTickTask/TimerTask';
+import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
+import Timer from '../../utils/timer/Timer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -6,8 +7,8 @@ class Flash extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
-        // this.timer
 
+        this.timer = new Timer();
         this.resetFromJSON(config);
         this.boot();
     }
@@ -28,6 +29,18 @@ class Flash extends TickTask {
             duration: this.duration,
             repeat: this.repeat,
         };
+    }
+
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.timer.destroy();
+        this.timer = undefined;
+
+        super.shutdown(fromScene);
     }
 
     setEnable(e) {
@@ -81,6 +94,7 @@ class Flash extends TickTask {
             // pend task
             this.timer.repeatCounter = -1;
         } else {
+            this.timer.start();
             super.start();
         }
         return this;
@@ -93,6 +107,7 @@ class Flash extends TickTask {
 
     stop() {
         this.parent.setVisible(true);
+        this.timer.stop();
         super.stop();
         return this;
     }
