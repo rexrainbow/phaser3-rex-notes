@@ -1,4 +1,5 @@
 import TickTask from '../../utils/componentbase/SceneUpdateTickTask.js';
+import Timer from '../../utils/timer/Timer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -7,31 +8,39 @@ class Flash extends TickTask {
         super(gameObject, config);
         // this.parent = gameObject;
 
+        this.timer = new Timer();
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
+        this.timer.resetFromJSON(GetValue(o, 'timer'));
         this.isRunning = GetValue(o, 'isRunning', false);
         this.setEnable(GetValue(o, 'enable', true));
         this.setDuration(GetValue(o, 'duration', 500));
         this.setRepeat(GetValue(o, 'repeat', 2));
-        this.repeatCounter = GetValue(o, 'repeatCounter', 0);
-        this.nowTime = GetValue(o, 'nowTime', 0);
-        this.timeScale = GetValue(o, 'timeScale', 1);
         return this;
     }
 
     toJSON() {
         return {
+            timer: this.timer.toJSON(),
             isRunning: this.isRunning,
             duration: this.duration,
             repeat: this.repeat,
-            repeatCounter: this.repeatCounter,
-            nowTime: this.nowTime,
-            timeScale: this.timeScale,
-            tickingMode: this.tickingMode
         };
+    }
+
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        this.timer.destroy();
+        this.timer = undefined;
+
+        super.shutdown(fromScene);
     }
 
     setEnable(e) {
@@ -42,9 +51,25 @@ class Flash extends TickTask {
         return this;
     }
 
+    get duration() {
+        return this.timer.duration;
+    }
+
+    set duration(value) {
+        this.timer.duration = value;
+    }
+
     setDuration(duration) {
         this.duration = duration;
         return this;
+    }
+
+    get repeat() {
+        return this.timer.repeat;
+    }
+
+    set repeat(value) {
+        this.timer.repeat = value;
     }
 
     setRepeat(repeat) {
@@ -67,10 +92,9 @@ class Flash extends TickTask {
 
         if (this.isRunning) {
             // pend task
-            this.repeatCounter = -1;
+            this.timer.repeatCounter = -1;
         } else {
-            this.repeatCounter = 0;
-            this.nowTime = 0;
+            this.timer.start();
             super.start();
         }
         return this;
@@ -83,6 +107,7 @@ class Flash extends TickTask {
 
     stop() {
         this.parent.setVisible(true);
+        this.timer.stop();
         super.stop();
         return this;
     }
@@ -97,21 +122,11 @@ class Flash extends TickTask {
             return this;
         }
 
-        if ((this.timeScale === 0) || (delta === 0)) {
-            return this;
-        }
+        this.timer.update(time, delta);
+        gameObject.setVisible((this.timer.t > 0.5));
 
-        this.nowTime += (delta * this.timeScale);
-        var visible = (this.nowTime <= (this.duration / 2)) ? false : true;
-        gameObject.setVisible(visible);
-
-        if (this.nowTime >= this.duration) {
-            if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {
-                this.repeatCounter++;
-                this.nowTime -= this.duration;
-            } else {
-                this.complete();
-            }
+        if (this.timer.isDone) {
+            this.complete();
         }
         return this;
     }
