@@ -2,18 +2,25 @@ import TweenTask from '../../utils/componentbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
+const Linear = Phaser.Math.Linear;
 
 class Scale extends TweenTask {
     constructor(gameObject, config) {
         super(gameObject);
         // this.parent = gameObject;
+        // this.timer
 
         this.scaleStart = {};
         this.scaleEnd = {};
+
         this.resetFromJSON(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
+        this.timer.resetFromJSON(GetValue(o, 'timer'));
+        this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'mode', 0));
         this.setScaleRange(
             GetAdvancedValue(o, 'start', undefined),
@@ -21,20 +28,31 @@ class Scale extends TweenTask {
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        this.setEase(GetValue(o, 'ease', undefined));
+        this.setEase(GetValue(o, 'ease', 'Linear'));
         return this;
     }
 
     toJSON() {
         return {
+            timer: this.timer.toJSON(),
+            enable: this.enable,
             mode: this.mode,
             startX: this.startX,
             startY: this.startY,
             endX: this.endX,
             endY: this.endY,
             delay: this.delay,
-            duration: this.duration
+            duration: this.duration,
+            ease: this.ease,
         };
+    }
+
+    setEnable(e) {
+        if (e == undefined) {
+            e = true;
+        }
+        this.enable = e;
+        return this;
     }
 
     setMode(m) {
@@ -60,6 +78,9 @@ class Scale extends TweenTask {
             this.endX = GetAdvancedValue(end, 'x', undefined);
             this.endY = GetAdvancedValue(end, 'y', undefined);
         }
+
+        this.hasScaleX = (this.startX !== undefined) && (this.endX !== undefined);
+        this.hasScaleY = (this.startY !== undefined) && (this.endY !== undefined);
         return this;
     }
 
@@ -78,39 +99,69 @@ class Scale extends TweenTask {
             ease = 'Linear';
         }
         this.ease = ease;
+        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
     start() {
-        if (this.isRunning) {
+        if (this.timer.isRunning) {
             return this;
         }
 
-        var config = {
-            targets: this.parent,
+        var gameObject = this.parent;
+        if (this.hasScaleX) {
+            gameObject.scaleX = this.startX;
+        }
+        if (this.hasScaleY) {
+            gameObject.scaleY = this.startY;
+        }
 
-            delay: this.delay,
-            duration: this.duration,
-            ease: this.ease,
-            yoyo: (this.mode == 2),
-            repeat: ((this.mode == 2) ? -1 : 0),
-            onComplete: function () {
-                if (this.mode === 1) {
-                    this.parent.destroy();
-                }
-            },
-            onCompleteScope: this
+        this.timer
+            .setDelay(this.delay)
+            .setDuration(this.duration)
+            .setRepeat((this.mode === 2) ? -1 : 0);
+
+        super.start();
+        return this;
+    }
+
+    update(time, delta) {
+        if ((!this.isRunning) || (!this.enable)) {
+            return this;
         }
-        // Set scale to start value now
-        if ((this.startX !== undefined) && (this.endX !== undefined)) {
-            this.parent.scaleX = this.startX;
-            config.scaleX = this.endX
+
+        var gameObject = this.parent;
+        if (!gameObject.active) {
+            return this;
         }
-        if ((this.startY !== undefined) && (this.endY !== undefined)) {
-            this.parent.scaleY = this.startY;
-            config.scaleY = this.endY;
+
+        this.timer.update(time, delta);
+        var t = this.timer.t;
+        if (this.timer.isOddIteration) {  // Yoyo
+            t = 1 - t;
         }
-        super.start(config);
+        t = this.easeFn(t);
+
+        if (this.hasScaleX) {
+            gameObject.scaleX = Linear(this.startX, this.endX, t);
+        }
+        if (this.hasScaleY) {
+            gameObject.scaleY = Linear(this.startY, this.endY, t);
+        }
+
+        if (this.timer.isDone) {
+            this.complete();
+        }
+        return this;
+    }
+
+    complete() {
+        super.complete();
+
+        if (this.mode === 1) {
+            this.parent.destroy();
+            // Will also destroy this behavior
+        }
         return this;
     }
 }

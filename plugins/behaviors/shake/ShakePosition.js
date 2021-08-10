@@ -14,9 +14,9 @@ class ShakePosition extends TickTask {
 
     resetFromJSON(o) {
         this.timer.resetFromJSON(GetValue(o, 'timer'));
+        this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'mode', 1));
         this.isRunning = GetValue(o, 'isRunning', false);
-        this.setEnable(GetValue(o, 'enable', true));
         this.setMagnitudeMode(GetValue(o, 'magnitudeMode', 1));
         this.setDuration(GetValue(o, 'duration', 500));
         this.setMagnitude(GetValue(o, 'magnitude', 10));
@@ -28,9 +28,9 @@ class ShakePosition extends TickTask {
     toJSON() {
         return {
             timer: this.timer.toJSON(),
+            enable: this.enable,
             mode: this.mode,
             isRunning: this.isRunning,
-            enable: this.enable,
             magnitudeMode: magnitudeMode,
             duration: this.duration,
             magnitude: this.magnitude,
