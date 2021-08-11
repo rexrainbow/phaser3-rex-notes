@@ -337,10 +337,15 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.moveFrom(duration, x, y);
     // sizer.moveFrom(duration, x, y, ease);
+    // sizer.moveFrom({x, y, duration, ease});
+    // sizer.moveFrom({x, y, speed, ease});
     ```
     or
     ```javascript
-    sizer.moveFromPromise(duration, x, y, ease)
+    sizer
+        .moveFromPromise(duration, x, y, ease)
+        // .moveFromPromise({x, y, duration, ease})
+        // .moveFromPromise({x, y, speed, ease})
         .then(function(){
             // ...
         })    
@@ -349,15 +354,21 @@ sizer.pushIntoBounds(bounds);
         - Number : Start position x/y.
         - String(`+=300`) : Related position of current position x/y.
         - `undefined` : Current position x/y.
+    - `speed` : Get `duration` according to `speed` and distance between current sizer position to `{x, y}`
     - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - Move-from destroy
     ```javascript
     sizer.moveFromDestroy(duration, x, y);
     // sizer.moveFrom(duration, x, y, ease);
+    // sizer.moveFrom({x, y, duration, ease});
+    // sizer.moveFrom({x, y, speed, ease});
     ```
     or
     ```javascript
-    sizer.moveFromDestroyPromise(duration, x, y, ease)
+    sizer
+        .moveFromDestroyPromise(duration, x, y, ease)
+        // .moveFromDestroyPromise({x, y, duration, ease})
+        // .moveFromDestroyPromise({x, y, speed, ease})
         .then(function(){
             // ...
         })    
@@ -366,10 +377,15 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.moveTo(duration, x, y);
     // sizer.moveTo(duration, x, y, ease);
+    // sizer.moveTo({x, y, duration, ease});
+    // sizer.moveTo({x, y, speed, ease});
     ```
     or
     ```javascript
-    sizer.moveToPromise(duration, x, y, ease)
+    sizer
+        .moveToPromise(duration, x, y, ease)
+        // .moveToPromise({x, y, duration, ease})
+        // .moveToPromise({x, y, speed, ease})
         .then(function(){
             // ...
         })    
@@ -378,15 +394,21 @@ sizer.pushIntoBounds(bounds);
         - Number : End position x/y.
         - String(`+=300`) : Related position of current position x/y.
         - `undefined` : Current position x/y.
+    - `speed` : Get `duration` according to `speed` and distance between current sizer position to `{x, y}`
     - `ease` : `'Linear'`, `'Cubic'`, `'Elastic'`, `'Bounce'`, `'Back'` ...
 - Move-to destroy
     ```javascript
     sizer.moveToDestroy(duration, x, y);
     // sizer.moveTo(duration, x, y, ease);
+    // sizer.moveTo({x, y, duration, ease});
+    // sizer.moveTo({x, y, speed, ease});
     ```
     or
     ```javascript
-    sizer.moveToDestroyPromise(duration, x, y, ease)
+    sizer
+        .moveToDestroyPromise(duration, x, y, ease)
+        // .moveToDestroyPromise({x, y, duration, ease})
+        // .moveToDestroyPromise({x, y, speed, ease})
         .then(function(){
             // ...
         })    

@@ -2,6 +2,7 @@ import { EaseMoveTo, EaseMoveFrom } from '../../../plugins/easemove.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const DistanceBetween = Phaser.Math.Distance.Between;
 
 var OnInitEaseMove = function (gameObject, easeMove) {
     // Route 'complete' of easeMove to gameObject
@@ -24,11 +25,16 @@ var OnInitEaseMove = function (gameObject, easeMove) {
 
 export default {
     moveFrom(duration, x, y, ease, destroyMode) {
-        if (IsPlainObject(x)) {
-            var config = x;
+        if (IsPlainObject(duration)) {
+            var config = duration;
             x = config.x;
             y = config.y;
-            duration = config.duration;
+            if (config.hasOwnProperty('speed')) {
+                duration = (DistanceBetween(x, y, this.x, this.y) * 1000) / config.speed;
+            } else {
+                duration = config.duration;
+            }
+
             ease = config.ease;
         }
 
@@ -61,11 +67,16 @@ export default {
     },
 
     moveTo(duration, x, y, ease, destroyMode) {
-        if (IsPlainObject(x)) {
-            var config = x;
+        if (IsPlainObject(duration)) {
+            var config = duration;
             x = config.x;
             y = config.y;
-            duration = config.duration;
+            if (config.hasOwnProperty('speed')) {
+                duration = (DistanceBetween(x, y, this.x, this.y) * 1000) / config.speed;
+            } else {
+                duration = config.duration;
+            }
+
             ease = config.ease;
         }
 

@@ -6382,9 +6382,14 @@
 <li>Move from
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFrom</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// sizer.moveFrom(duration, x, y, ease);</span>
+<span class="c1">// sizer.moveFrom({x, y, duration, ease});</span>
+<span class="c1">// sizer.moveFrom({x, y, speed, ease});</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="p">.</span><span class="nx">moveFromPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="c1">// .moveFromPromise({x, y, duration, ease})</span>
+    <span class="c1">// .moveFromPromise({x, y, speed, ease})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
@@ -6395,15 +6400,21 @@
 <li><code>undefined</code> : Current position x/y.</li>
 </ul>
 </li>
+<li><code>speed</code> : Get <code>duration</code> according to <code>speed</code> and distance between current sizer position to <code>{x, y}</code></li>
 <li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
 </ul>
 </li>
 <li>Move-from destroy
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// sizer.moveFrom(duration, x, y, ease);</span>
+<span class="c1">// sizer.moveFrom({x, y, duration, ease});</span>
+<span class="c1">// sizer.moveFrom({x, y, speed, ease});</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveFromDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="p">.</span><span class="nx">moveFromDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="c1">// .moveFromDestroyPromise({x, y, duration, ease})</span>
+    <span class="c1">// .moveFromDestroyPromise({x, y, speed, ease})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
@@ -6411,9 +6422,14 @@
 <li>Move to
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// sizer.moveTo(duration, x, y, ease);</span>
+<span class="c1">// sizer.moveTo({x, y, duration, ease});</span>
+<span class="c1">// sizer.moveTo({x, y, speed, ease});</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="p">.</span><span class="nx">moveToPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="c1">// .moveToPromise({x, y, duration, ease})</span>
+    <span class="c1">// .moveToPromise({x, y, speed, ease})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    
@@ -6424,15 +6440,21 @@
 <li><code>undefined</code> : Current position x/y.</li>
 </ul>
 </li>
+<li><code>speed</code> : Get <code>duration</code> according to <code>speed</code> and distance between current sizer position to <code>{x, y}</code></li>
 <li><code>ease</code> : <code>'Linear'</code>, <code>'Cubic'</code>, <code>'Elastic'</code>, <code>'Bounce'</code>, <code>'Back'</code> ...</li>
 </ul>
 </li>
 <li>Move-to destroy
     <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// sizer.moveTo(duration, x, y, ease);</span>
+<span class="c1">// sizer.moveTo({x, y, duration, ease});</span>
+<span class="c1">// sizer.moveTo({x, y, speed, ease});</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">moveToDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">sizer</span>
+    <span class="p">.</span><span class="nx">moveToDestroyPromise</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">ease</span><span class="p">)</span>
+    <span class="c1">// .moveToDestroyPromise({x, y, duration, ease})</span>
+    <span class="c1">// .moveToDestroyPromise({x, y, speed, ease})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// ...</span>
     <span class="p">})</span>    

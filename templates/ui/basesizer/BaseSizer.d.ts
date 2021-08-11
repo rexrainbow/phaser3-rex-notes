@@ -171,11 +171,31 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): this;
 
+    moveFrom(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
+    ): this;
+
     moveFromPromise(
         duration: number,
         x: number,
         y: number,
         ease?: string
+    ): Promise<any>;
+
+    moveFromPromise(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
     ): Promise<any>;
 
     moveFromDestroy(
@@ -185,11 +205,31 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): this;
 
+    moveFromDestroy(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
+    ): this;
+
     moveFromDestroyPromise(
         duration: number,
         x: number,
         y: number,
         ease?: string
+    ): Promise<any>;
+
+    moveFromDestroyPromise(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
     ): Promise<any>;
 
     moveTo(
@@ -199,11 +239,31 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): this;
 
+    moveTo(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
+    ): this;
+
     moveToPromise(
         duration: number,
         x: number,
         y: number,
         ease?: string
+    ): Promise<any>;
+
+    moveToPromise(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
     ): Promise<any>;
 
     moveToDestroy(
@@ -213,11 +273,31 @@ declare class BaseSizer extends ContainerLite {
         ease?: string
     ): this;
 
+    moveToDestroy(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
+    ): this;
+
     moveToDestroyPromise(
         duration: number,
         x: number,
         y: number,
         ease?: string
+    ): Promise<any>;
+
+    moveToDestroyPromise(
+        config: {
+            x: number,
+            y: number,
+            speed?: number,
+            duration?: number,
+            ease?: string,
+        }
     ): Promise<any>;
 
     fadeIn(
