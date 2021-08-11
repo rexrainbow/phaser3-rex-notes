@@ -81,6 +81,15 @@ class EaseMove extends TweenTask {
         return this;
     }
 
+    initGOProperties(gameObject) {
+        if (this.hasMoveX) {
+            gameObject.x = this.startX;
+        }
+        if (this.hasMoveY) {
+            gameObject.y = this.startY;
+        }
+    }
+
     updateGameObject(gameObject, timer) {
         var t = timer.t;
         if (timer.isOddIteration) {   // Yoyo
