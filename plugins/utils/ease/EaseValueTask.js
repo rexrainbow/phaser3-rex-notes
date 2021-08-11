@@ -38,7 +38,6 @@ class EaseValueTask extends EaseValueTaskBase {
         t = this.easeFn(t);
 
         gameObject[this.propertyKey] = Linear(this.fromValue, this.toValue, t);
-        console.log(t, gameObject[this.propertyKey])
     }
 }
 
