@@ -29,7 +29,7 @@ class Timer {
     }
 
     destroy() {
-        
+
     }
 
     setTimeScale(timeScale) {
@@ -60,13 +60,9 @@ class Timer {
         return this;
     }
 
-    start(startAt) {
-        if (startAt === undefined) {
-            startAt = 0;
-        }
-
-        this.nowTime = startAt - this.delay;
-        this.state = (this.nowTime >= 0) ? RUN : DELAY;
+    start() {
+        this.nowTime = (this.delay > 0) ? -this.delay : 0;
+        this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
         this.repeatCounter = 0;
         return this;
     }
@@ -84,7 +80,7 @@ class Timer {
         }
 
         this.nowTime += (delta * this.timeScale);
-        this.state = (this.nowTime >= 0) ? RUN : DELAY;
+        this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
 
         if (this.nowTime >= this.duration) {
             if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {
@@ -105,7 +101,7 @@ class Timer {
                 t = 0;
                 break;
 
-            case RUN:
+            case COUNTDOWN:
                 t = this.nowTime / this.duration;
                 break;
 
@@ -122,7 +118,7 @@ class Timer {
             this.state = DELAY;
             this.nowTime = -this.delay * value;
         } else {
-            this.state = RUN;
+            this.state = COUNTDOWN;
             this.nowTime = this.duration * value;
 
             if ((value === 1) && (this.repeat !== 0)) {
@@ -139,8 +135,12 @@ class Timer {
         return this.state === DELAY;
     }
 
+    get isCountDown() {
+        return this.state === COUNTDOWN;
+    }
+
     get isRunning() {
-        return this.state === RUN;
+        return this.state === IDLE || this.state === COUNTDOWN;
     }
 
     get isDone() {
@@ -151,7 +151,7 @@ class Timer {
 
 const IDLE = 0;
 const DELAY = 1;
-const RUN = 2;
+const COUNTDOWN = 2;
 const DONE = -1;
 
 export default Timer;
