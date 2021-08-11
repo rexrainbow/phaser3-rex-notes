@@ -1,10 +1,10 @@
-import EaseValueTask from '../../utils/componentbase/EaseValueTask.js';
+import EaseValueTaskBase from '../../utils/componentbase/EaseValueTaskBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Linear = Phaser.Math.Linear;
 
-class Fade extends EaseValueTask {
+class Fade extends EaseValueTaskBase {
     constructor(scene, sound, config) {
         sound.scene = scene;
         sound.active = true;

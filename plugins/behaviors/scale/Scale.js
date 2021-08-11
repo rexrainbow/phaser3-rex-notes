@@ -1,10 +1,10 @@
-import EaseValueTask from '../../utils/componentbase/EaseValueTask.js';
+import EaseValueTaskBase from '../../utils/componentbase/EaseValueTaskBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Linear = Phaser.Math.Linear;
 
-class Scale extends EaseValueTask {
+class Scale extends EaseValueTaskBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

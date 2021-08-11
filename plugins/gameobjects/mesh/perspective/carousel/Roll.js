@@ -1,4 +1,4 @@
-import EaseValueTask from '../../../../utils/componentbase/EaseValueTask.js';
+import EaseValueTaskBase from '../../../../utils/componentbase/EaseValueTaskBase.js';
 import FaceNameToIndex from './FaceNameToIndex.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -9,7 +9,7 @@ const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
 const Wrap = Phaser.Math.Wrap;
 const Linear = Phaser.Math.Linear;
 
-class Roll extends EaseValueTask {
+class Roll extends EaseValueTaskBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

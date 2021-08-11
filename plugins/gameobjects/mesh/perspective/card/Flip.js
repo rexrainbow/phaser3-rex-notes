@@ -1,9 +1,9 @@
-import EaseValueTask from '../../../../utils/componentbase/EaseValueTask.js';
+import EaseValueTaskBase from '../../../../utils/componentbase/EaseValueTaskBase.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Linear = Phaser.Math.Linear;
 
-class Flip extends EaseValueTask {
+class Flip extends EaseValueTaskBase {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;

@@ -1,10 +1,10 @@
-import TickTask from "./TimerTickTask/TimerTask";
+import TickTask from "./timerticktask/TimerTask";
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 
-class EaseValueTask extends TickTask {
+class EaseValueTaskBase extends TickTask {
     resetFromJSON(o) {
         this.timer.resetFromJSON(GetValue(o, 'timer'));
         this.setEnable(GetValue(o, 'enable', true));
@@ -95,4 +95,4 @@ class EaseValueTask extends TickTask {
     }
 }
 
-export default EaseValueTask;
+export default EaseValueTaskBase;
