@@ -14,6 +14,7 @@ class Timer {
         this.repeatCounter = GetValue(o, 'repeatCounter', 0);
         this.duration = GetValue(o, 'duration', 0);
         this.nowTime = GetValue(o, 'nowTime', 0);
+        this.justRestart = GetValue(o, 'justRestart', false);
     }
 
     toJSON() {
@@ -25,6 +26,7 @@ class Timer {
             repeatCounter: this.repeatCounter,
             duration: this.duration,
             nowTime: this.nowTime,
+            justRestart: this.justRestart,
         }
     }
 
@@ -82,9 +84,11 @@ class Timer {
         this.nowTime += (delta * this.timeScale);
         this.state = (this.nowTime >= 0) ? COUNTDOWN : DELAY;
 
+        this.justRestart = false;
         if (this.nowTime >= this.duration) {
             if ((this.repeat === -1) || (this.repeatCounter < this.repeat)) {
                 this.repeatCounter++;
+                this.justRestart = true;
                 this.nowTime -= this.duration;
             } else {
                 this.nowTime = this.duration;

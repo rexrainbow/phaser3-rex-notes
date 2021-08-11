@@ -3,7 +3,6 @@ import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 const Linear = Phaser.Math.Linear;
 
 class Flip extends TweenTask {
@@ -17,24 +16,14 @@ class Flip extends TweenTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
-        this.setOrientation(GetValue(o, 'orientation', 0));
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
+        super.resetFromJSON(o);
         this.setDuration(GetAdvancedValue(o, 'duration', 500));
         this.setEase(GetValue(o, 'ease', 'Sine'));
 
+        this.setOrientation(GetValue(o, 'orientation', 0));
         this.setFrontFace(GetValue(o, 'front', undefined));
         this.setBackFace(GetValue(o, 'back', undefined));
         this.setFace(GetValue(o, 'face', 0));
-        return this;
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -43,25 +32,6 @@ class Flip extends TweenTask {
             orientation = ORIENTATIONMODE[orientation];
         }
         this.orientation = orientation;
-        return this;
-    }
-
-    setDelay(time) {
-        this.delay = time;
-        return this;
-    }
-
-    setDuration(time) {
-        this.duration = time;
-        return this;
-    }
-
-    setEase(ease) {
-        if (ease === undefined) {
-            ease = 'Linear';
-        }
-        this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
@@ -127,25 +97,13 @@ class Flip extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        var prevRepeatCounter = this.timer.repeatCounter;
-        this.timer.update(time, delta);
-
-        if ((prevRepeatCounter === 0) && (this.timer.repeatCounter === 1)) {
+    updateGameObject(gameObject, timer) {
+        if (timer.justRestart) {
             this.toggleFace();
         }
 
-        var t = this.timer.t;
-        if (this.timer.isOddIteration) {  // Yoyo
+        var t = timer.t;
+        if (timer.isOddIteration) {  // Yoyo
             t = 1 - t;
         }
         t = this.easeFn(t);
@@ -156,11 +114,6 @@ class Flip extends TweenTask {
         } else {
             gameObject.scaleY = value;
         }
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
     }
 }
 

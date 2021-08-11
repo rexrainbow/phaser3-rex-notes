@@ -13,6 +13,10 @@ class SceneUpdateTickTask extends TickTask {
         }
     }
 
+    // update(time, delta) {
+    //     
+    // }
+
 }
 
 export default SceneUpdateTickTask;

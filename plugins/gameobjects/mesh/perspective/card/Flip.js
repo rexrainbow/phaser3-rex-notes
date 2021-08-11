@@ -1,8 +1,6 @@
 import TweenTask from '../../../../utils/componentbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 const Linear = Phaser.Math.Linear;
 
 class Flip extends TweenTask {
@@ -16,40 +14,11 @@ class Flip extends TweenTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
+        super.resetFromJSON(o);
         this.setEase(GetValue(o, 'ease', 'Cubic'));
+
         this.setFrontToBackDirection(GetValue(o, 'frontToBack', 0));
         this.setBackToFrontDirection(GetValue(o, 'backToFront', 1));
-        return this;
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
-        return this;
-    }
-
-    setDelay(time) {
-        this.delay = time;
-        return this;
-    }
-
-    setDuration(time) {
-        this.duration = time;
-        return this;
-    }
-
-    setEase(ease) {
-        if (ease === undefined) {
-            ease = 'Linear';
-        }
-        this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
         return this;
     }
 
@@ -126,30 +95,15 @@ class Flip extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-        var t = this.easeFn(this.timer.t);
+    updateGameObject(gameObject, timer) {
+        var t = this.easeFn(timer.t);
 
         var value = Linear(this.startAngle, this.endAngle, t);
-        if (this.parent.orientation === 0) {
+        if (gameObject.orientation === 0) {
             gameObject.angleY = value;
         } else {
             gameObject.angleX = value;
         }
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
     }
 }
 

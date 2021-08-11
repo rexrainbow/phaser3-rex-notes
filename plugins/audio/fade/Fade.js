@@ -7,6 +7,7 @@ const Linear = Phaser.Math.Linear;
 class Fade extends TweenTask {
     constructor(scene, sound, config) {
         sound.scene = scene;
+        sound.active = true;
 
         super(sound);
         // this.parent = sound
@@ -17,35 +18,13 @@ class Fade extends TweenTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
+        super.resetFromJSON(o);
         this.setMode(GetValue(o, 'mode', 0));
         this.setEnable(GetValue(o, 'enable', true));
         this.setVolumeRange(
             GetAdvancedValue(o, 'volume.start', this.parent.volume),
             GetAdvancedValue(o, 'volume.end', 0)
         );
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
-        return this;
-    }
-
-    toJSON() {
-        return {
-            timer: this.timer.toJSON(),
-            enable: this.enable,
-            mode: this.mode,
-            volume: this.volume,
-            delay: this.delay,
-            duration: this.duration
-        };
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -60,16 +39,6 @@ class Fade extends TweenTask {
     setVolumeRange(start, end) {
         this.volume.start = start;
         this.volume.end = end;
-        return this;
-    }
-
-    setDelay(time) {
-        this.delay = time;
-        return this;
-    }
-
-    setFadeOutTime(time) {
-        this.duration = time;
         return this;
     }
 
@@ -88,20 +57,8 @@ class Fade extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-
-        var sound = this.parent;
-        sound.volume = Linear(this.volume.start, this.volume.end, this.timer.t);
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
+    updateGameObject(sound, timer) {
+        sound.volume = Linear(this.volume.start, this.volume.end, timer.t);
     }
 
     complete() {

@@ -15,35 +15,13 @@ class Fade extends TweenTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
+        super.resetFromJSON(o);
+
         this.setMode(GetValue(o, 'mode', 0));
         this.setAlphaRange(
             GetAdvancedValue(o, 'start', this.parent.alpha),
             GetAdvancedValue(o, 'end', 0)
         );
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        return this;
-    }
-
-    toJSON() {
-        return {
-            timer: this.timer.toJSON(),
-            enable: this.enable,
-            mode: this.mode,
-            start: this.alphaStart,
-            end: this.alphaEnd,
-            delay: this.delay,
-            duration: this.duration
-        };
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -58,16 +36,6 @@ class Fade extends TweenTask {
     setAlphaRange(start, end) {
         this.alphaStart = start;
         this.alphaEnd = end;
-        return this;
-    }
-
-    setDelay(time) {
-        this.delay = time;
-        return this;
-    }
-
-    setDuration(time) {
-        this.duration = time;
         return this;
     }
 
@@ -88,28 +56,13 @@ class Fade extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-        var t = this.timer.t;
-        if (this.timer.isOddIteration) {  // Yoyo
+    updateGameObject(gameObject, timer) {
+        var t = timer.t;
+        if (timer.isOddIteration) {  // Yoyo
             t = 1 - t;
         }
 
         gameObject.alpha = Linear(this.alphaStart, this.alphaEnd, t);
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
     }
 
     complete() {

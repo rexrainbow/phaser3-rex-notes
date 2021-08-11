@@ -2,7 +2,6 @@ import TweenTask from '../../utils/componentbase/TweenTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetEaseFunction = Phaser.Tweens.Builders.GetEaseFunction;
 const Linear = Phaser.Math.Linear;
 
 class EaseMove extends TweenTask {
@@ -16,8 +15,7 @@ class EaseMove extends TweenTask {
     }
 
     resetFromJSON(o) {
-        this.timer.resetFromJSON(GetValue(o, 'timer'));
-        this.setEnable(GetValue(o, 'enable', true));
+        super.resetFromJSON(o);
 
         this.setMode(GetValue(o, 'mode', 0));
 
@@ -29,31 +27,6 @@ class EaseMove extends TweenTask {
             this.setTargetPosition(o);
         }
 
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
-        this.setEase(GetValue(o, 'ease', 'Linear'));
-        return this;
-    }
-
-    toJSON() {
-        return {
-            timer: this.timer.toJSON(),
-            enable: this.enable,
-            mode: this.mode,
-            startX: this.startX,
-            startY: this.startY,
-            endX: this.endX,
-            endY: this.endY,
-            delay: this.delay,
-            duration: this.duration
-        };
-    }
-
-    setEnable(e) {
-        if (e == undefined) {
-            e = true;
-        }
-        this.enable = e;
         return this;
     }
 
@@ -86,25 +59,6 @@ class EaseMove extends TweenTask {
         return this;
     }
 
-    setDelay(time) {
-        this.delay = time;
-        return this;
-    }
-
-    setDuration(time) {
-        this.duration = time;
-        return this;
-    }
-
-    setEase(ease) {
-        if (ease === undefined) {
-            ease = 'Linear';
-        }
-        this.ease = ease;
-        this.easeFn = GetEaseFunction(ease);
-        return this;
-    }
-
     start() {
         if (this.timer.isRunning) {
             return this;
@@ -127,19 +81,9 @@ class EaseMove extends TweenTask {
         return this;
     }
 
-    update(time, delta) {
-        if ((!this.isRunning) || (!this.enable)) {
-            return this;
-        }
-
-        var gameObject = this.parent;
-        if (!gameObject.active) {
-            return this;
-        }
-
-        this.timer.update(time, delta);
-        var t = this.timer.t;
-        if (this.timer.isOddIteration) {   // Yoyo
+    updateGameObject(gameObject, timer) {
+        var t = timer.t;
+        if (timer.isOddIteration) {   // Yoyo
             t = 1 - t;
         }
         t = this.easeFn(t);
@@ -150,11 +94,6 @@ class EaseMove extends TweenTask {
         if (this.hasMoveY) {
             gameObject.y = Linear(this.startY, this.endY, t);
         }
-
-        if (this.timer.isDone) {
-            this.complete();
-        }
-        return this;
     }
 
     complete() {
