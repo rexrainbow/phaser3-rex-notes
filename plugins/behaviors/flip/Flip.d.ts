@@ -1,5 +1,5 @@
 // import * as Phaser from 'phaser';
-import TweenTask from "../../utils/componentbase/tweentask/TweenTask";
+import EaseValueTaskBase from "../../utils/componentbase/tweentask/EaseValueTaskBase";
 
 export default Flip;
 
@@ -35,19 +35,13 @@ declare namespace Flip {
 
 }
 
-declare class Flip extends TweenTask {
+declare class Flip extends EaseValueTaskBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Flip.IConfig
     )
 
     flip(duration?: number): this;
-
-    setDuration(duration: number): this;
-    duratiion: number;
-
-    setEase(ease: string): this;
-    ease: string;
 
     setFace(
         face: 0 | 1 | 'front' | 'back'

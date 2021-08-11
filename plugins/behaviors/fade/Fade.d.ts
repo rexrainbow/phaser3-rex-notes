@@ -1,4 +1,4 @@
-import TweenTask from "../../utils/componentbase/tweentask/TweenTask";
+import EaseValueTaskBase from "../../utils/componentbase/tweentask/EaseValueTaskBase";
 
 export default Fade;
 
@@ -21,7 +21,7 @@ declare namespace Fade {
     }
 }
 
-declare class Fade extends TweenTask {
+declare class Fade extends EaseValueTaskBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: Fade.IConfig
@@ -33,12 +33,4 @@ declare class Fade extends TweenTask {
     setAlphaRange(start: number, end: number): this;
     alphaStart: number;
     alphaEnd: number;
-
-    setDelay(time: number): this;
-    delay: number;
-
-    setDuration(time: number): this;
-    duration: number;
-
-    start(): this;
 }

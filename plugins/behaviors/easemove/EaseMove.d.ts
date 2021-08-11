@@ -1,4 +1,4 @@
-import TweenTask from "../../utils/componentbase/tweentask/TweenTask";
+import EaseValueTaskBase from "../../utils/componentbase/tweentask/EaseValueTaskBase";
 
 export default EaseMove;
 
@@ -25,7 +25,7 @@ declare namespace EaseMove {
     }
 }
 
-declare class EaseMove extends TweenTask {
+declare class EaseMove extends EaseValueTaskBase {
     constructor(
         gameObject: Phaser.GameObjects.GameObject,
         config?: EaseMove.IConfig
@@ -45,15 +45,4 @@ declare class EaseMove extends TweenTask {
     startY: number;
     endX: number;
     endY: number;
-
-    setDelay(time: number): this;
-    delay: number;
-
-    setDuration(time: number): this;
-    duration: number;
-
-    setEase(ease: string): this;
-    ease: string;
-
-    start(): this;
 }
