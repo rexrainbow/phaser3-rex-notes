@@ -4,6 +4,25 @@ import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
+var OnInitScale = function (gameObject, scale) {
+    // Route 'complete' of scale to gameObject
+    scale.completeEventName = undefined;
+    scale.on('complete', function () {
+        if (scale.completeEventName) {
+            gameObject.emit(scale.completeEventName, gameObject);
+            scale.completeEventName = undefined;
+        }
+    })
+
+    // Update local state
+    scale.on('update', function () {
+        var parent = gameObject.getParentSizer();
+        if (parent) {
+            parent.resetChildPositionState(gameObject);
+        }
+    })
+}
+
 export default {
     popUp(duration, orientation, ease) {
         if (IsPlainObject(duration)) {
@@ -13,18 +32,16 @@ export default {
             ease = config.ease;
         }
 
-        this._scale = PopUp(this, duration, orientation, ease, this._scale);
-        this._scale.once('complete', function () {
-            this.emit('popup.complete', this);
-        }, this);
+        var isInit = (this._scale === undefined);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._scale.on('update', function () {
-                parent.resetChildPositionState(child);
-            })
+        this._scale = PopUp(this, duration, orientation, ease, this._scale);
+
+        if (isInit) {
+            OnInitScale(this, this._scale);
         }
+
+        this._scale.completeEventName = 'popup.complete';
+
         return this;
     },
 
@@ -42,18 +59,16 @@ export default {
             destroyMode = config.destroy;
         }
 
-        this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
-        this._scale.once('complete', function () {
-            this.emit('scaledown.complete', this);
-        }, this);
+        var isInit = (this._scale === undefined);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._scale.on('update', function () {
-                parent.resetChildPositionState(child);
-            })
+        this._scale = ScaleDownDestroy(this, duration, orientation, ease, destroyMode, this._scale);
+
+        if (isInit) {
+            OnInitScale(this, this._scale);
         }
+
+        this._scale.completeEventName = 'scaledown.complete';
+
         return this;
     },
 

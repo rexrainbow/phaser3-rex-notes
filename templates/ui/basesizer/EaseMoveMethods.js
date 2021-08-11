@@ -3,6 +3,25 @@ import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
+var OnInitEaseMove = function (gameObject, easeMove) {
+    // Route 'complete' of easeMove to gameObject
+    easeMove.completeEventName = undefined;
+    easeMove.on('complete', function () {
+        if (easeMove.completeEventName) {
+            gameObject.emit(easeMove.completeEventName, gameObject);
+            easeMove.completeEventName = undefined;
+        }
+    })
+
+    // Update local state
+    easeMove.on('update', function () {
+        var parent = gameObject.getParentSizer();
+        if (parent) {
+            parent.resetChildPositionState(gameObject);
+        }
+    })
+}
+
 export default {
     moveFrom(duration, x, y, ease, destroyMode) {
         if (IsPlainObject(x)) {
@@ -13,18 +32,16 @@ export default {
             ease = config.ease;
         }
 
-        this._easeMove = EaseMoveFrom(this, duration, x, y, ease, destroyMode, this._easeMove);
-        this._easeMove.once('complete', function () {
-            this.emit('movefrom.complete', this);
-        }, this);
+        var isInit = (this._easeMove === undefined);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._easeMove.on('update', function () {
-                parent.resetChildPositionState(child);
-            })
+        this._easeMove = EaseMoveFrom(this, duration, x, y, ease, destroyMode, this._easeMove);
+
+        if (isInit) {
+            OnInitEaseMove(this, this._easeMove);
         }
+
+        this._easeMove.completeEventName = 'movefrom.complete';
+
         return this;
     },
 
@@ -52,18 +69,16 @@ export default {
             ease = config.ease;
         }
 
-        this._easeMove = EaseMoveTo(this, duration, x, y, ease, destroyMode, this._easeMove);
-        this._easeMove.once('complete', function () {
-            this.emit('moveto.complete', this);
-        }, this);
+        var isInit = (this._easeMove === undefined);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._easeMove.on('update', function () {
-                parent.resetChildPositionState(child);
-            })
+        this._easeMove = EaseMoveTo(this, duration, x, y, ease, destroyMode, this._easeMove);
+
+        if (isInit) {
+            OnInitEaseMove(this, this._easeMove);
         }
+
+        this._easeMove.completeEventName = 'moveto.complete';
+
         return this;
     },
 

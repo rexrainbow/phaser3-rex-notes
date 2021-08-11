@@ -4,6 +4,25 @@ import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
+var OnInitFade = function (gameObject, fade) {
+    // Route 'complete' of fade to gameObject
+    fade.completeEventName = undefined;
+    fade.on('complete', function () {
+        if (fade.completeEventName) {
+            gameObject.emit(fade.completeEventName, gameObject);
+            fade.completeEventName = undefined;
+        }
+    })
+
+    // Update local state
+    fade.on('update', function () {
+        var parent = gameObject.getParentSizer();
+        if (parent) {
+            parent.resetChildAlphaState(gameObject);
+        }
+    })
+}
+
 export default {
     fadeIn(duration, alpha) {
         if (IsPlainObject(duration)) {
@@ -11,18 +30,16 @@ export default {
             duration = config.duration;
         }
 
-        this._fade = FadeIn(this, duration, alpha, this._fade);
-        this._fade.once('complete', function () {
-            this.emit('fadein.complete', this);
-        }, this);
+        var isInit = (this._fade === undefined);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._fade.on('update', function () {
-                parent.resetChildAlphaState(child);
-            })
+        this._fade = FadeIn(this, duration, alpha, this._fade);
+
+        if (isInit) {
+            OnInitFade(this, this._fade);
         }
+
+        this._fade.completeEventName = 'fadein.complete';
+
         return this;
     },
 
@@ -37,18 +54,17 @@ export default {
             duration = config.duration;
             destroyMode = config.destroy;
         }
-        this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
-        this._fade.once('complete', function () {
-            this.emit('fadeout.complete', this);
-        }, this);
 
-        var parent = this.getParentSizer();
-        if (parent) {
-            var child = this;
-            this._fade.on('update', function () {
-                parent.resetChildAlphaState(child);
-            })
+        var isInit = (this._fade === undefined);
+
+        this._fade = FadeOutDestroy(this, duration, destroyMode, this._fade);
+
+        if (isInit) {
+            OnInitFade(this, this._fade);
         }
+
+        this._fade.completeEventName = 'fadeout.complete';
+
         return this;
     },
 
