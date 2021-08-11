@@ -1,4 +1,4 @@
-import TweenTask from "../../utils/componentbase/TweenTask";
+import TweenTask from "../../utils/componentbase/tweentask/TweenTask";
 
 export default Scale;
 

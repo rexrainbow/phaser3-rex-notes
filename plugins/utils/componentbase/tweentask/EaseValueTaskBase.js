@@ -1,4 +1,4 @@
-import TickTask from "./timerticktask/TimerTask";
+import TickTask from "../timerticktask/TimerTask";
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

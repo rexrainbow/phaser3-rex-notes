@@ -1,4 +1,4 @@
-import EaseValueTaskBase from '../../utils/componentbase/EaseValueTaskBase.js';
+import EaseValueTaskBase from '../../utils/componentbase/tweentask/EaseValueTaskBase.js';
 import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

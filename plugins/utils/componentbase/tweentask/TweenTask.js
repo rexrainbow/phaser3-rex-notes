@@ -1,4 +1,4 @@
-import ComponentBase from './ComponentBase.js';
+import ComponentBase from '../ComponentBase.js';
 
 class TweenTask extends ComponentBase {
     constructor(parent, config) {
