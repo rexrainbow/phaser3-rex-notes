@@ -35,15 +35,14 @@ var EaseValueTo = function (value, min, max) {
         this.tweenValueTask = new TweenTask(this, { eventEmitter: null })
     }
 
-    var config = {};
-    config.targets = this;
+    var config = {
+        targets: this,
+        duration: this.easeValueDuration,
+        ease: this.easeFunction
+    };
     config[this.easeValuePropName] = value;
-    config.duration = this.easeValueDuration;
-    config.ease = this.easeFunction;
 
-    this.tweenValueTask
-        .stop()
-        .start(config);
+    this.tweenValueTask.restart(config);
 
     return this;
 }

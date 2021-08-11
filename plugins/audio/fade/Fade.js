@@ -1,15 +1,15 @@
-import TweenTask from '../../utils/componentbase/TweenTask.js';
+import EaseValueTask from '../../utils/componentbase/EaseValueTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Linear = Phaser.Math.Linear;
 
-class Fade extends TweenTask {
+class Fade extends EaseValueTask {
     constructor(scene, sound, config) {
         sound.scene = scene;
         sound.active = true;
 
-        super(sound);
+        super(sound, config);
         // this.parent = sound
         // this.timer
 

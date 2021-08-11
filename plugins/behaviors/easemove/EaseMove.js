@@ -1,12 +1,12 @@
-import TweenTask from '../../utils/componentbase/TweenTask.js';
+import EaseValueTask from '../../utils/componentbase/EaseValueTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Linear = Phaser.Math.Linear;
 
-class EaseMove extends TweenTask {
+class EaseMove extends EaseValueTask {
     constructor(gameObject, config) {
-        super(gameObject);
+        super(gameObject, config);
         // this.parent = gameObject;
         // this.timer
 
