@@ -1,4 +1,4 @@
-import TweenTask from '../componentbase/tweentask/TweenTask.js';
+import EaseValueTask from './EaseValueTask.js';
 
 var SetEaseValuePropName = function (name) {
     this.easeValuePropName = name;
@@ -16,8 +16,8 @@ var SetEaseValueFunction = function (ease) {
 }
 
 var StopEaseValue = function () {
-    if (this.tweenValueTask) {
-        this.tweenValueTask.stop();
+    if (this.easeValueTask) {
+        this.easeValueTask.stop();
     }
     return this;
 }
@@ -31,18 +31,16 @@ var EaseValueTo = function (value, min, max) {
         value = Percent(value, min, max);
     }
 
-    if (this.tweenValueTask === undefined) {
-        this.tweenValueTask = new TweenTask(this, { eventEmitter: null })
+    if (this.easeValueTask === undefined) {
+        this.easeValueTask = new EaseValueTask(this, { eventEmitter: null })
     }
 
-    var config = {
-        targets: this,
+    this.easeValueTask.restart({
+        key: this.easeValuePropName,
+        to: value,
         duration: this.easeValueDuration,
         ease: this.easeFunction
-    };
-    config[this.easeValuePropName] = value;
-
-    this.tweenValueTask.restart(config);
+    });
 
     return this;
 }

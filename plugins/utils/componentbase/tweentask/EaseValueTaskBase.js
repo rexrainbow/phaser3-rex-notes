@@ -60,7 +60,7 @@ class EaseValueTaskBase extends TickTask {
 
     restart() {
         this.timer.stop();
-        this.start();
+        this.start.apply(this, arguments);
         return this;
     }
 
@@ -77,7 +77,8 @@ class EaseValueTaskBase extends TickTask {
         var timer = this.timer;
         timer.update(time, delta);
 
-        if (timer.isCountDown) {
+        // isDelay, isCountDown, isDone
+        if (!timer.isDelay) {
             this.updateGameObject(gameObject, timer);
         }
 
