@@ -1,6 +1,5 @@
 import 'phaser';
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import MoveTo from '../../plugins/moveto';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -69,16 +68,23 @@ var AddWord = function (panel, word) {
     })
         .setRandomPosition()
 
-    var moveTo = new MoveTo(child);
-
     child
         .on('sizer.postlayout', function (child, parent) {
             var prevState = parent.getChildPrevState(child);
-            moveTo.moveFrom(prevState.x, prevState.y);
+            child.moveFrom({
+                x: prevState.x, y: prevState.y,
+                speed: 400
+            });
         })
         .on('sizer.remove', function (child, parent) {
             child.fadeOutDestroy(500);
-            moveTo.moveToward(Math.random() * 2 * Math.PI, 400);
+            var angle = Math.random() * 2 * Math.PI;
+            var x = child.x + Math.cos(angle) * 400;
+            var y = child.y + Math.sin(angle) * 400;
+            child.moveTo({
+                x: x, y: y,
+                speed: 400,
+            })
         })
         .setInteractive()
         .once('pointerdown', function () {
