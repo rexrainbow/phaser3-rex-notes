@@ -14,7 +14,6 @@ class PathBase extends BaseGeom {
         this.pathData = [];
         this.pathIndexes = [];
         this.closePath = false;
-        this.pathLengths = [];
     }
 
     updateData() {
@@ -69,11 +68,6 @@ class PathBase extends BaseGeom {
             ctx.stroke();
         }
     }
-
-    getPoint(t, out) {
-        return GetPoint(t, this.pathData, this.pathLengths, out);
-    }
-
 }
 
 export default PathBase;

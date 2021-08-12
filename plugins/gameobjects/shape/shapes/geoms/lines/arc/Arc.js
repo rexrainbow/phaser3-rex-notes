@@ -150,7 +150,6 @@ class Arc extends PathBase {
 
     updateData() {
         this.pathData.length = 0;
-        this.pathLengths.length = 0;
         if (this.pie) {
             this.pathData.push(this.x, this.y);
         }

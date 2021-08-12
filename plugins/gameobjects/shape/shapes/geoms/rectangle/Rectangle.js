@@ -17,7 +17,6 @@ class Rectangle extends BaseGeom {
 
         this.pathData = [];
         this.closePath = true;
-        this.pathLengths = [];
 
         this.setTopLeftPosition(x, y);
         this.setSize(width, height);
@@ -73,7 +72,6 @@ class Rectangle extends BaseGeom {
 
     updateData() {
         this.pathData.length = 0;
-        this.pathLengths.length = 0;
         var x0 = this.x,
             x1 = x0 + this.width,
             y0 = this.y,
@@ -116,10 +114,6 @@ class Rectangle extends BaseGeom {
             ctx.rect(-dx, -dy, this.width, this.height);
             ctx.stroke();
         }
-    }
-
-    getPoint(t, out) {
-        return GetPoint(t, this.pathData, this.pathLengths, out);
     }
 }
 

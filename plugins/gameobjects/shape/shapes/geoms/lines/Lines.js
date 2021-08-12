@@ -29,7 +29,6 @@ class Lines extends PathBase {
     startAt(x, y) {
         this.dirty = true;
         this.pathData.length = 0;
-        this.pathLengths.length = 0;
         this.pathData.push(x, y);
         this.lastPointX = x;
         this.lastPointY = y;
