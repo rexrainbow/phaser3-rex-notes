@@ -11,6 +11,7 @@ class EaseValueTaskBase extends TickTask {
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', 'Linear'));
+        this.setRepeat(GetValue(o, 'repeat', 0));
 
         return this;
     }
