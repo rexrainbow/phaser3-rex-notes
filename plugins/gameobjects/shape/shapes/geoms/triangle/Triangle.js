@@ -2,6 +2,7 @@ import BaseGeom from '../base/BaseGeom.js';
 import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
+import GetPoint from '../../../../../geom/utils/GetPoint.js';
 
 const Utils = Phaser.Renderer.WebGL.Utils;
 
@@ -18,6 +19,7 @@ class Triangle extends BaseGeom {
 
         this.pathData = [];
         this.closePath = true;
+        this.pathLengths = [];
 
         this.setP0(x0, y0);
         this.setP1(x1, y1);
@@ -99,6 +101,7 @@ class Triangle extends BaseGeom {
 
     updateData() {
         this.pathData.length = 0;
+        this.pathLengths.length = 0;
         this.pathData.push(this.x0, this.y0);
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x2, this.y2);
@@ -157,6 +160,10 @@ class Triangle extends BaseGeom {
             LineStyleCanvas(ctx, this);
             ctx.stroke();
         }
+    }
+
+    getPoint(t, out) {
+        return GetPoint(t, this.pathData, this.pathLengths, out);
     }
 }
 

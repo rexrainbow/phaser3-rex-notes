@@ -2,6 +2,7 @@ import BaseGeom from '../base/BaseGeom.js';
 import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
+import GetPoint from '../../../../../geom/utils/GetPoint.js';
 
 const Utils = Phaser.Renderer.WebGL.Utils;
 
@@ -16,6 +17,7 @@ class Rectangle extends BaseGeom {
 
         this.pathData = [];
         this.closePath = true;
+        this.pathLengths = [];
 
         this.setTopLeftPosition(x, y);
         this.setSize(width, height);
@@ -71,6 +73,7 @@ class Rectangle extends BaseGeom {
 
     updateData() {
         this.pathData.length = 0;
+        this.pathLengths.length = 0;
         var x0 = this.x,
             x1 = x0 + this.width,
             y0 = this.y,
@@ -115,6 +118,9 @@ class Rectangle extends BaseGeom {
         }
     }
 
+    getPoint(t, out) {
+        return GetPoint(t, this.pathData, this.pathLengths, out);
+    }
 }
 
 export default Rectangle;

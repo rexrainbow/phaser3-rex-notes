@@ -63,6 +63,7 @@ class Line extends PathBase {
 
     updateData() {
         this.pathData.length = 0;
+        this.pathLengths.length = 0;
         this.pathData.push(this.x0, this.y0);
         this.pathData.push(this.x1, this.y1);
         this.pathData.push(this.x0, this.y0);
