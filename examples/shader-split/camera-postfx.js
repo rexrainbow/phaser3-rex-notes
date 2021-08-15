@@ -19,7 +19,8 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexSplitPipelinePlugin');
         var postFxPipeline = postFxPlugin.add(this.cameras.main, {
             width: 20,
-            height: 20
+            height: 20,
+            angle: 30
         });
 
         this.input.on('pointerdown', function (pointer) {
