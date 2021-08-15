@@ -17,6 +17,11 @@ export default class SplitPostFxPipeline extends Phaser.Renderer.WebGL.Pipelines
 
     splitAtCenter(width?: number, height?: number): this;
 
+    setAngle(angle: number): this;
+    setRotation(rotation: number): this;
+    angle: number;
+    rotation: number;
+
     setShiftEnable(enable?: boolean): this;
     shiftEnable: boolean;
 }

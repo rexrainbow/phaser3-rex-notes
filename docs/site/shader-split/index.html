@@ -3336,6 +3336,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation-axis-of-split-edge" class="md-nav__link">
+    Rotation Axis of Split edge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shift-enable" class="md-nav__link">
     Shift enable
   </a>
@@ -5891,6 +5898,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation-axis-of-split-edge" class="md-nav__link">
+    Rotation Axis of Split edge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shift-enable" class="md-nav__link">
     Shift enable
   </a>
@@ -6021,6 +6035,9 @@
     <span class="c1">// top: 0,</span>
     <span class="c1">// bottom: 0,</span>
 
+    <span class="c1">// angle: undefined,  // Degrees</span>
+    <span class="c1">// rotation: 0,       // Radian</span>
+
     <span class="c1">// shiftEnable: true,</span>
 
     <span class="c1">// name: &#39;rexSplitPostFx&#39;</span>
@@ -6031,6 +6048,7 @@
 <li><code>width</code>, <code>height</code> : Vertical/Horizontal split length.</li>
 <li><code>left</code>, <code>right</code> : Specify left/right part length of vertical split. Default value is half Vertical split length.</li>
 <li><code>top</code>, <code>bottom</code> : Specify top/bottom part length of horizontal split. Default value is half Horizontal split length.</li>
+<li><code>angle</code>, <code>rotation</code> : Rotation of split axis. Default value is <code>0</code>.</li>
 <li><code>shiftEnable</code> :<ul>
 <li><code>true</code> : Shift splitted parts out. Default value.</li>
 <li><code>false</code> : Don't shift splitted parts. Equal to apply mask on this image.</li>
@@ -6112,6 +6130,19 @@
 </code></pre></div>
     or
     <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setSpace</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="rotation-axis-of-split-edge">Rotation Axis of Split edge<a class="headerlink" href="#rotation-axis-of-split-edge" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span> <span class="c1">// Degrees</span>
+<span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span> <span class="c1">// Radian</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// Degrees</span>
+<span class="c1">// pipelineInstance.angle = angle;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// Radian</span>
+<span class="c1">// pipelineInstance.rotation = rotation;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="shift-enable">Shift enable<a class="headerlink" href="#shift-enable" title="Permanent link">&para;</a></h3>

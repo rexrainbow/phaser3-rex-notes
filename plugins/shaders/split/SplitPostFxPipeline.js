@@ -2,6 +2,8 @@ import FragSrc from './split-postfxfrag.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const DegToRad = Phaser.Math.DegToRad;
+const RadToDeg = Phaser.Math.RadToDeg;
 
 class SplitPostFxPipeline extends PostFXPipeline {
     constructor(game) {
@@ -18,6 +20,7 @@ class SplitPostFxPipeline extends PostFXPipeline {
         this.spaceRight = 0;
         this.spaceTop = 0;
         this.spaceBottom = 0;
+        this.rotation = 0;
         this.shiftEnable = true;
     }
 
@@ -41,6 +44,13 @@ class SplitPostFxPipeline extends PostFXPipeline {
         this.splitX = GetValue(o, 'x', this.renderer.width / 2);
         this.splitY = GetValue(o, 'Y', this.renderer.height / 2);
 
+        var angle = GetValue(o, 'angle', undefined);
+        if (angle === undefined) {
+            this.rotation = GetValue(o, 'rotation', 0);
+        } else {
+            this.angle = angle;
+        }
+
         this.shiftEnable = GetValue(o, 'shiftEnable', true);
         return this;
     }
@@ -49,6 +59,7 @@ class SplitPostFxPipeline extends PostFXPipeline {
         var texWidth = this.renderer.width,
             textHeight = this.renderer.height;
         this.set2f('split', this.splitX, (textHeight - this.splitY));
+        this.set1f('rotation', this.rotation);
         this.set2f('texSize', texWidth, textHeight);
 
         this.set1f('spaceLeft', this.spaceLeft);
@@ -81,6 +92,25 @@ class SplitPostFxPipeline extends PostFXPipeline {
         if (height !== undefined) {
             this.setSplittedHeight(height);
         }
+        return this;
+    }
+
+    // rotation
+    get angle() {
+        return RadToDeg(this.rotation);
+    }
+
+    set angle(value) {
+        this.rotation = DegToRad(value);
+    }
+
+    setAngle(angle) {
+        this.angle = angle;
+        return this;
+    }
+
+    setRotation(rotation) {
+        this.rotation = rotation;
         return this;
     }
 

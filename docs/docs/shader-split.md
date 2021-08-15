@@ -106,6 +106,9 @@ Split image into 4 parts.
         // top: 0,
         // bottom: 0,
 
+        // angle: undefined,  // Degrees
+        // rotation: 0,       // Radian
+
         // shiftEnable: true,
 
         // name: 'rexSplitPostFx'
@@ -116,6 +119,7 @@ Split image into 4 parts.
     - `width`, `height` : Vertical/Horizontal split length.
     - `left`, `right` : Specify left/right part length of vertical split. Default value is half Vertical split length.
     - `top`, `bottom` : Specify top/bottom part length of horizontal split. Default value is half Horizontal split length.
+    - `angle`, `rotation` : Rotation of split axis. Default value is `0`.
     - `shiftEnable` :
         - `true` : Shift splitted parts out. Default value.
         - `false` : Don't shift splitted parts. Equal to apply mask on this image.
@@ -209,6 +213,21 @@ or specify left/right/top/bottom of split length
     or
     ```javascript
     pipelineInstance.setSpace(left, right, top, bottom);
+    ```
+
+### Rotation Axis of Split edge
+
+- Get
+    ```javascript
+    var angle = pipelineInstance.angle; // Degrees
+    var rotation = pipelineInstance.rotation; // Radian
+    ```
+- Set
+    ```javascript
+    pipelineInstance.setAngle(angle); // Degrees
+    // pipelineInstance.angle = angle;
+    pipelineInstance.setRotation(angle); // Radian
+    // pipelineInstance.rotation = rotation;
     ```
 
 ### Shift enable

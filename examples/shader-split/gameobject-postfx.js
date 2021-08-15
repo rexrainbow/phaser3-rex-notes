@@ -37,6 +37,7 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'splitY', 0, 600);
         gui.add(postFxPipeline, 'splittedWidth', 0, 800);
         gui.add(postFxPipeline, 'splittedHeight', 0, 600);
+        gui.add(postFxPipeline, 'angle', 0, 360);
         gui.add(postFxPipeline, 'shiftEnable');
     }
 
