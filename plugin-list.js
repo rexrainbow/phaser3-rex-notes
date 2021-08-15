@@ -144,6 +144,7 @@ module.exports = {
     'crossstitchingpipelineplugin': './plugins/crossstitchingpipeline-plugin.js',
     'shockwavepipelineplugin': './plugins/shockwavepipeline-plugin.js',
     'splitpipelineplugin': './plugins/splitpipeline-plugin.js',
+    'fisheyepipelineplugin': './plugins/fisheyepipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',

@@ -17,21 +17,22 @@ uniform float spaceLeft;
 uniform float spaceRight;
 uniform float spaceTop;
 uniform float spaceBottom;
-uniform float rotation;
+uniform float angle;
 uniform float shiftEnable;
 
-vec2 rotate(vec2 uv, float rotation) {
-  vec2 rot = vec2(sin(rotation), cos(rotation));
+vec2 rotate(vec2 uv, float angle) {
+  float s = sin(angle);
+  float c = cos(angle);
   return vec2(
-    uv.x * rot.y + uv.y * rot.x,
-    uv.y * rot.y - uv.x * rot.x
+    uv.x * c + uv.y * s,
+    uv.y * c - uv.x * s
   );
 }
 
 void main (void) {
   vec2 tc = outTexCoord * texSize;  
   tc -= split;
-  tc = rotate(tc, -rotation);
+  tc = rotate(tc, -angle);
 
   if (
     ((tc.x > -spaceLeft) && (tc.x < spaceRight)) ||
@@ -44,7 +45,7 @@ void main (void) {
       tc.y += (tc.y < 0.0)? spaceTop: -spaceBottom;
     }
 
-    tc = rotate(tc, rotation);
+    tc = rotate(tc, angle);
     tc += split;
     gl_FragColor = texture2D(uMainSampler, tc / texSize);
   }

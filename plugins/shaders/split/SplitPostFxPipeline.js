@@ -44,11 +44,11 @@ class SplitPostFxPipeline extends PostFXPipeline {
         this.splitX = GetValue(o, 'x', this.renderer.width / 2);
         this.splitY = GetValue(o, 'Y', this.renderer.height / 2);
 
-        var angle = GetValue(o, 'angle', undefined);
-        if (angle === undefined) {
-            this.rotation = GetValue(o, 'rotation', 0);
+        var rotation = GetValue(o, 'rotation', undefined);
+        if (rotation === undefined) {
+            this.setAngle(GetValue(o, 'angle', 0));
         } else {
-            this.angle = angle;
+            this.setRotation(rotation);
         }
 
         this.shiftEnable = GetValue(o, 'shiftEnable', true);
@@ -59,7 +59,7 @@ class SplitPostFxPipeline extends PostFXPipeline {
         var texWidth = this.renderer.width,
             textHeight = this.renderer.height;
         this.set2f('split', this.splitX, (textHeight - this.splitY));
-        this.set1f('rotation', this.rotation);
+        this.set1f('angle', this.rotation);
         this.set2f('texSize', texWidth, textHeight);
 
         this.set1f('spaceLeft', this.spaceLeft);
