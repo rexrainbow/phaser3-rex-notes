@@ -18,7 +18,8 @@ class Demo extends Phaser.Scene {
 
         var postFxPlugin = this.plugins.get('rexFishEyePipelinePlugin');
         var postFxPipeline = postFxPlugin.add(this.cameras.main, {
-            radius: 300
+            radius: 300,
+            mode:'asin'
         });
 
         this.input.on('pointerdown', function (pointer) {
@@ -29,6 +30,8 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'centerX', 0, 800);
         gui.add(postFxPipeline, 'centerY', 0, 600);
         gui.add(postFxPipeline, 'radius', 0, 800);
+        gui.add(postFxPipeline, 'intensity', 0, 1);
+        gui.add(postFxPipeline, 'fishEyeMode', 0, 1, 1);
     }
 
     update() {

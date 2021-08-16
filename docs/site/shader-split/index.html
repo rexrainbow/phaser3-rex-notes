@@ -3197,6 +3197,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../shader-fisheye/" title="Fisheye" class="md-nav__link">
+      Fisheye
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../shader-shockwave/" title="Shockwave" class="md-nav__link">
       Shockwave
     </a>
@@ -6135,14 +6147,18 @@
 <h3 id="rotation-axis-of-split-edge">Rotation Axis of Split edge<a class="headerlink" href="#rotation-axis-of-split-edge" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span> <span class="c1">// Degrees</span>
-<span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span> <span class="c1">// Radian</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>  <span class="c1">// radians</span>
+<span class="c1">// var angle = pipelineInstance.angle;     // degrees</span>
 </code></pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// Degrees</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">rotation</span><span class="p">;</span>
+<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="nx">value</span><span class="p">;</span>
 <span class="c1">// pipelineInstance.angle = angle;</span>
-<span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span> <span class="c1">// Radian</span>
-<span class="c1">// pipelineInstance.rotation = rotation;</span>
+<span class="c1">// pipelineInstance.angle += value;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">rotation</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.setAngle(angle);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="shift-enable">Shift enable<a class="headerlink" href="#shift-enable" title="Permanent link">&para;</a></h3>

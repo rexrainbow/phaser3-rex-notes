@@ -2,7 +2,6 @@ import FragSrc from './glowfilter-postfxfrag';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class GlowFilterPostFxPipeline extends PostFXPipeline {
     constructor(game) {
@@ -13,7 +12,7 @@ class GlowFilterPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._intensity = 0;
+        this.intensity = 0;
     }
 
     resetFromJSON(o) {
@@ -22,18 +21,10 @@ class GlowFilterPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('intensity', this._intensity);
+        this.set1f('intensity', this.intensity);
     }
 
     // intensity
-    get intensity() {
-        return this._intensity;
-    }
-
-    set intensity(value) {
-        this._intensity = Clamp(value, 0, 1);
-    }
-
     setIntensity(value) {
         this.intensity = value;
         return this;

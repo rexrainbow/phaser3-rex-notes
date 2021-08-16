@@ -96,6 +96,11 @@ class SplitPostFxPipeline extends PostFXPipeline {
     }
 
     // rotation
+    setRotation(value) {
+        this.rotation = value;
+        return this;
+    }
+
     get angle() {
         return RadToDeg(this.rotation);
     }
@@ -104,13 +109,8 @@ class SplitPostFxPipeline extends PostFXPipeline {
         this.rotation = DegToRad(value);
     }
 
-    setAngle(angle) {
-        this.angle = angle;
-        return this;
-    }
-
-    setRotation(rotation) {
-        this.rotation = rotation;
+    setAngle(value) {
+        this.angle = value;
         return this;
     }
 

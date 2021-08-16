@@ -13,7 +13,7 @@ class InversePostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._intensity = 1;
+        this.intensity = 1;
     }
 
     resetFromJSON(o) {
@@ -22,18 +22,10 @@ class InversePostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        this.set1f('intensity', this._intensity);
+        this.set1f('intensity', this.intensity);
     }
 
     // intensity
-    get intensity() {
-        return this._intensity;
-    }
-
-    set intensity(value) {
-        this._intensity = Clamp(value, 0, 1);
-    }
-
     setIntensity(value) {
         this.intensity = value;
         return this;

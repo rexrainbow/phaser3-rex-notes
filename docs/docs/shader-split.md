@@ -219,15 +219,20 @@ or specify left/right/top/bottom of split length
 
 - Get
     ```javascript
-    var angle = pipelineInstance.angle; // Degrees
-    var rotation = pipelineInstance.rotation; // Radian
+    var rotation = pipelineInstance.rotation;  // radians
+    // var angle = pipelineInstance.angle;     // degrees
     ```
 - Set
     ```javascript
-    pipelineInstance.setAngle(angle); // Degrees
+    pipelineInstance.rotation = rotation;
+    pipelineInstance.rotation += value;
     // pipelineInstance.angle = angle;
-    pipelineInstance.setRotation(angle); // Radian
-    // pipelineInstance.rotation = rotation;
+    // pipelineInstance.angle += value;
+    ```
+    or
+    ```javascript
+    pipelineInstance.setRotation(rotation);
+    // pipelineInstance.setAngle(angle);
     ```
 
 ### Shift enable
