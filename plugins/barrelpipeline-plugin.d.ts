@@ -1,18 +1,20 @@
 // import * as Phaser from 'phaser';
-import FishEyePostFxPipeline from './fisheyepipeline';
+import BarrelPostFxPipeline from './barrelpipeline';
 
-export default FishEyePipelinePlugin;
+export default BarrelPipelinePlugin;
 
-declare namespace FishEyePipelinePlugin {
+declare namespace BarrelPipelinePlugin {
 
     interface IConfig {
-        mode?: 0 | 1 | 'asin' | 'sin',
+        shrink?: boolean,
 
         center?: {
             x?: number, y?: number
         },
 
         radius?: number,
+
+        power?: number,
 
         intensity?: number,
 
@@ -21,11 +23,11 @@ declare namespace FishEyePipelinePlugin {
 
 }
 
-declare class FishEyePipelinePlugin extends Phaser.Plugins.BasePlugin {
+declare class BarrelPipelinePlugin extends Phaser.Plugins.BasePlugin {
     add(
         gameObject: Phaser.GameObjects.GameObject,
-        config?: FishEyePipelinePlugin.IConfig
-    ): FishEyePostFxPipeline;
+        config?: BarrelPipelinePlugin.IConfig
+    ): BarrelPostFxPipeline;
 
     remove(
         gameObject: Phaser.GameObjects.GameObject,
@@ -35,5 +37,5 @@ declare class FishEyePipelinePlugin extends Phaser.Plugins.BasePlugin {
     get(
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
-    ): FishEyePostFxPipeline | FishEyePostFxPipeline[];
+    ): BarrelPostFxPipeline | BarrelPostFxPipeline[];
 }
