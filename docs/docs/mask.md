@@ -43,6 +43,9 @@ Apply mask on game object. Built-in render of phaser.
     ```
     A mask object could be added to many game objects.
 
+!!! error
+    Don't put game object and its mask into a [container](container.md) together.
+
 ### Clear mask
 
 - Clear mask
