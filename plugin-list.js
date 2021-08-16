@@ -145,6 +145,7 @@ module.exports = {
     'shockwavepipelineplugin': './plugins/shockwavepipeline-plugin.js',
     'splitpipelineplugin': './plugins/splitpipeline-plugin.js',
     'fisheyepipelineplugin': './plugins/fisheyepipeline-plugin.js',
+    'barrelpipelineplugin': './plugins/barrelpipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',

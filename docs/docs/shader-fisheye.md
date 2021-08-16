@@ -171,7 +171,7 @@ Fish-eye post processing filter. [Reference](https://www.geeks3d.com/20140213/gl
     ```
     or
     ```javascript
-    pipelineInstance.setIntensity(radius);
+    pipelineInstance.setIntensity(intensity);
     ```
     - `intensity` : 0(original) ~ 1(fisheye)
 
@@ -201,7 +201,7 @@ Default value is center of window.
     ```javascript
     var mode = pipelineInstance.fishEyeMode;
     ```
-- Ser
+- Set
     ```javascript
     pipelineInstance.setFishEyeMode(mode);
     ```

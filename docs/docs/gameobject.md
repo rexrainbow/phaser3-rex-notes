@@ -308,6 +308,7 @@ Some post-fx pipelines:
 - [Swirl](shader-swirl.md): Swirl post processing filter.
 - [Dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 - [Split](shader-split.md): Split image into 4 parts.
+- [Barrel](shader-barrel.md): Barrel post processing filter.
 - [Fish eye](shader-fisheye.md): Fish-eye post processing filter.
 
 #### Add post-fx pipeline

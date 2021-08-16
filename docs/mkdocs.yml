@@ -201,6 +201,7 @@ nav:
     - Position:
         - Swirl: shader-swirl.md
         - Pixelation: shader-pixelation.md        
+        - Barrel: shader-barrel.md
         - Fisheye: shader-fisheye.md
         - Shockwave: shader-shockwave.md
         - Split: shader-split.md
