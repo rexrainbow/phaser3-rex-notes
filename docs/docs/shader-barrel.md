@@ -7,7 +7,7 @@ Barrel post processing filter. [Reference](http://www.geeks3d.com/20140213/glsl-
 
 ## Live demos
 
-- [Barrel](https://codepen.io/rexrainbow/pen/mdmgLZY)
+- [Barrel](https://codepen.io/rexrainbow/pen/OJmGGVB)
 
 ## Usage
 
