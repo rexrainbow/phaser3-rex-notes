@@ -11,8 +11,10 @@ var ChangeOrigin = function (gameObject, originX, originY) {
     }
     RotateAround(deltaXY, 0, 0, gameObject.rotation);
 
-    gameObject.setOrigin(originX, originY);
-    gameObject.setPosition(gameObject.x + deltaXY.x, gameObject.y + deltaXY.y);
+    gameObject.originX = originX;
+    gameObject.originY = originY;
+    gameObject.x = gameObject.x + deltaXY.x;
+    gameObject.y = gameObject.y + deltaXY.y;
 
     return gameObject;
 }
