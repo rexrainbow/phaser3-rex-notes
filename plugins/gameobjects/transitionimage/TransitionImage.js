@@ -120,7 +120,9 @@ class TransitionImage extends Container {
     }
 
     setOrigin(originX, originY) {
-        this.changeOrigin(originX, originY);
+        super.setOrigin(originX, originY);
+        this.frontImage.setOrigin(originX, originY);
+        this.backImage.setOrigin(originX, originY);
         return this;
     }
 

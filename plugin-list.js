@@ -21,6 +21,7 @@ module.exports = {
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
+    'transitionimageplugin': './plugins/transitionimage-plugin.js',
     // effect layer (shader)
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',

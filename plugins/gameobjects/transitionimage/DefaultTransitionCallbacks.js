@@ -1,4 +1,4 @@
-var OnStart = function (frontImage, backImage) {
+var OnStart = function (frontImage, backImage, t) {
     backImage.setVisible(true);
 }
 
@@ -7,7 +7,7 @@ var OnProgress = function (frontImage, backImage, t) {
     backImage.setAlpha(t);
 }
 
-var OnComplete = function (frontImage, backImage) {
+var OnComplete = function (frontImage, backImage, t) {
     frontImage.setAlpha(1);
 }
 

@@ -14,7 +14,8 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.rexTransitionImage(400, 300, 'classroom')
+        var image = this.add.rexTransitionImage(0, 0, 'classroom')
+            .setOrigin(0)
 
         image.transit('road', undefined, 3000)
             .once('complete', function () {
