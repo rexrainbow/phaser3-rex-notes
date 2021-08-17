@@ -13,7 +13,7 @@ export default {
 
     setTransitionCompleteCallback(callback, scope) {
         this.onCompleteCallback = callback; // function(frontImage, backImage, t) {}
-        this.onProgressCallbackScope = scope;
+        this.onCompleteCallbackScope = scope;
         return this;
     },
 

@@ -59,6 +59,25 @@ class TransitionImage extends Container {
         this.setDuration(GetValue(config, 'duration', 1000));
     }
 
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+
+        super.destroy(fromScene);
+
+        this.backImage = undefined;
+        this.frontImage = undefined;
+        this.onStartCallback = undefined;
+        this.onStartCallbackScope = undefined;
+        this.onProgressCallback = undefined;
+        this.onProgressCallbackScope = undefined;
+        this.onCompleteCallback = undefined;
+        this.onCompleteCallbackScope = undefined;
+        this.easeValueTask = undefined;
+    }
+
     get texture() {
         return this.backImage.texture;
     }
@@ -97,7 +116,7 @@ class TransitionImage extends Container {
 
         if (value === 1) {
             RunCallback(
-                this.onCompleteCallback, this.onProgressCallbackScope,
+                this.onCompleteCallback, this.onCompleteCallbackScope,
                 this.frontImage, this.backImage, value
             );
 
