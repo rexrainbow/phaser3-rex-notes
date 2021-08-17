@@ -29,6 +29,8 @@ class EaseValueTask extends EaseValueTaskBase {
 
         this.timer.setDuration(this.duration);
 
+        gameObject[this.propertyKey] = this.fromValue;
+
         super.start();
         return this;
     }
