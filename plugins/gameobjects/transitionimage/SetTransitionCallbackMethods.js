@@ -1,18 +1,18 @@
 export default {
     setTransitionStartCallback(callback, scope) {
-        this.onStartCallback = callback;  // function(frontImage, backImage, t) {}
+        this.onStartCallback = callback;
         this.onStartCallbackScope = scope;
         return this;
     },
 
     setTransitionProgressCallback(callback, scope) {
-        this.onProgressCallback = callback;  // function(frontImage, backImage, t) {}
+        this.onProgressCallback = callback;
         this.onProgressCallbackScope = scope;
         return this;
     },
 
     setTransitionCompleteCallback(callback, scope) {
-        this.onCompleteCallback = callback; // function(frontImage, backImage, t) {}
+        this.onCompleteCallback = callback;
         this.onCompleteCallbackScope = scope;
         return this;
     },

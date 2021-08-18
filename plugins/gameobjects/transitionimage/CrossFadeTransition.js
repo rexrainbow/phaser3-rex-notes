@@ -1,16 +1,14 @@
-var OnStart = function (frontImage, backImage, t, parent) {
-    frontImage.setAlpha(1);
-    backImage.setVisible(true);
+var OnStart = function (currentImage, nextImage, t, parent) {
+    nextImage.setVisible(true);
 }
 
-var OnProgress = function (frontImage, backImage, t, parent) {
-    frontImage.setAlpha(1 - t);
-    backImage.setAlpha(t);
+var OnProgress = function (currentImage, nextImage, t, parent) {
+    currentImage.setAlpha(1 - t);
+    nextImage.setAlpha(t);
 }
 
-var OnComplete = function (frontImage, backImage, t, parent) {
-    frontImage.setAlpha(1);
-    backImage.setVisible(false);
+var OnComplete = function (currentImage, nextImage, t, parent) {
+    currentImage.setAlpha(1);
 }
 
 export {

@@ -7,7 +7,6 @@ import {
     OnComplete as DefaultOnComplete
 } from './CrossFadeTransition.js';
 
-
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -26,7 +25,7 @@ class TransitionImage extends Container {
         }
 
         var backImage = scene.add.image(x, y, texture, frame).setVisible(false);
-        var frontImage = scene.add.image(x, y, texture, frame);     
+        var frontImage = scene.add.image(x, y, texture, frame);
         var width = GetValue(config, 'width', frontImage.width);
         var height = GetValue(config, 'height', frontImage.height);
         super(scene, x, y, width, height, [backImage, frontImage]);
@@ -39,26 +38,30 @@ class TransitionImage extends Container {
         var onStart = GetValue(config, 'onStart', undefined);
         var onProgress = GetValue(config, 'onProgress', undefined);
         var onComplete = GetValue(config, 'onComplete', undefined);
+        var dir = GetValue(config, 'dir', 0);
         if ((onStart === undefined) && (onProgress === undefined) && (onComplete === undefined)) {
             onStart = DefaultOnStart;
             onProgress = DefaultOnProgress;
             onComplete = DefaultOnComplete;
+            dir = 0;
         }
 
-        this.setTransitionStartCallback(
-            onStart,
-            GetValue(config, 'onStartScope', undefined)
-        );
-        this.setTransitionProgressCallback(
-            onProgress,
-            GetValue(config, 'onProgressScope', undefined)
-        );
-        this.setTransitionCompleteCallback(
-            onComplete,
-            GetValue(config, 'onCompleteScope', undefined)
-        );
-
-        this.setDuration(GetValue(config, 'duration', 1000));
+        this
+            .setTransitionStartCallback(
+                onStart,
+                GetValue(config, 'onStartScope', undefined)
+            )
+            .setTransitionProgressCallback(
+                onProgress,
+                GetValue(config, 'onProgressScope', undefined)
+            )
+            .setTransitionCompleteCallback(
+                onComplete,
+                GetValue(config, 'onCompleteScope', undefined)
+            )
+            .setTransitionDirection(dir)
+            .setDuration(GetValue(config, 'duration', 1000))
+            .setEaseFunction(GetValue(config, 'ease', 'Linear'))
     }
 
     destroy(fromScene) {
@@ -80,8 +83,12 @@ class TransitionImage extends Container {
         this.easeValueTask = undefined;
     }
 
-    get image() {
-        return this.frontImage;
+    get currentImage() {
+        return (this.dir === 0) ? this.frontImage : this.backImage;
+    }
+
+    get nextImage() {
+        return (this.dir === 0) ? this.backImage : this.frontImage;
     }
 
     get texture() {
@@ -90,11 +97,6 @@ class TransitionImage extends Container {
 
     get frame() {
         return this.backImage.frame;
-    }
-
-    setDuration(duration) {
-        this.duration = duration;
-        return this;
     }
 
     get t() {
@@ -108,26 +110,36 @@ class TransitionImage extends Container {
         }
         this._t = value;
 
+        var currentImage = this.currentImage;
+        var nextImage = this.nextImage;
+
+        // Start
         if (value === 0) {
+            this.frontImage.setVisible(true);
+            this.backImage.setVisible(true);
             RunCallback(
                 this.onStartCallback, this.onStartCallbackScope,
-                this.frontImage, this.backImage, value, this
+                currentImage, nextImage, value, this
             );
         }
 
+        // Progress
         RunCallback(
             this.onProgressCallback, this.onProgressCallbackScope,
-            this.frontImage, this.backImage, value, this
+            currentImage, nextImage, value, this
         );
 
+        // Complete
         if (value === 1) {
             RunCallback(
                 this.onCompleteCallback, this.onCompleteCallbackScope,
-                this.frontImage, this.backImage, value, this
+                currentImage, nextImage, value, this
             );
 
-            this.frontImage.setTexture(this.texture.key, this.frame.name);
-            this.backImage.setVisible(false);
+            var key = nextImage.texture.key,
+                frame = nextImage.frame.name;
+            this.frontImage.setTexture(key, frame).setVisible(true);
+            this.backImage.setTexture(key, frame).setVisible(false);
         }
 
         this
@@ -159,15 +171,15 @@ class TransitionImage extends Container {
     }
 }
 
-var RunCallback = function (callback, scope, frontImage, backImage, t, parent) {
+var RunCallback = function (callback, scope, currentImage, nextImage, t, parent) {
     if (!callback) {
         return;
     }
 
     if (scope) {
-        callback.callback(scope, frontImage, backImage, t, parent);
+        callback.callback(scope, currentImage, nextImage, t, parent);
     } else {
-        callback(frontImage, backImage, t, parent);
+        callback(currentImage, nextImage, t, parent);
     }
 }
 

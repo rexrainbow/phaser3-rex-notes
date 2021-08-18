@@ -1,18 +1,61 @@
 import EaseValueTask from '../../utils/ease/EaseValueTask.js'
 
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 export default {
-    setNextTexture(texture, frame) {
-        this.backImage.setTexture(texture, frame);
+    setTransitionDirection(dir) {
+        if (typeof (dir) === 'string') {
+            dir = DirMode[dir];
+        }
+        this.dir = dir;
         return this;
     },
 
-    transit(texture, frame, duration) {
-        if (typeof (frame) === 'number') {
-            duration = frame;
-            frame = undefined;
-        }
-        if (duration !== undefined) {
-            this.setDuration(duration);
+    setDuration(duration) {
+        this.duration = duration;
+        return this;
+    },
+
+    setEaseFunction(ease) {
+        this.easeFunction = ease;
+        return this;
+    },
+
+    setNextTexture(texture, frame) {
+        this.nextImage.setTexture(texture, frame);
+        return this;
+    },
+
+    transit(texture, frame) {
+        if (IsPlainObject(texture)) {
+            var config = texture;
+            texture = GetValue(config, 'key', undefined);
+            frame = GetValue(config, 'frame', undefined);
+
+            this
+                .setDuration(GetValue(config, 'duration', this.duration))
+                .setEaseFunction(GetValue(config, 'ease', this.easeFunction))
+                .setTransitionDirection(GetValue(config, 'dir', this.dir))
+
+            var onStart = GetValue(config, 'onStart', undefined);
+            var onProgress = GetValue(config, 'onProgress', undefined);
+            var onComplete = GetValue(config, 'onComplete', undefined);
+            if ((onStart !== undefined) || (onProgress !== undefined) || (onComplete !== undefined)) {
+                this
+                    .setTransitionStartCallback(
+                        onStart,
+                        GetValue(config, 'onStartScope', undefined)
+                    )
+                    .setTransitionProgressCallback(
+                        onProgress,
+                        GetValue(config, 'onProgressScope', undefined)
+                    )
+                    .setTransitionCompleteCallback(
+                        onComplete,
+                        GetValue(config, 'onCompleteScope', undefined)
+                    )
+            }
         }
 
         this.setNextTexture(texture, frame);
@@ -27,7 +70,8 @@ export default {
         }
         this.easeValueTask.restart({
             key: 't', from: 0, to: 1,
-            duration: this.duration
+            duration: this.duration,
+            ease: this.easeFunction
         });
         return this;
     },
@@ -53,4 +97,9 @@ export default {
         this.setT(1);
         return this;
     },
+}
+
+var DirMode = {
+    out: 0,
+    in: 1
 }
