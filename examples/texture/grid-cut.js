@@ -1,5 +1,5 @@
 import 'phaser';
-import GridCut from '../../plugins/utils/texture/GridCut.js';
+import GridCut from '../../plugins/utils/texture/gridcut/GridCut.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,21 +13,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var colWidth = 50, rowHeight = 50;
-        var columns = 800 / colWidth, rows = 600 / rowHeight;
-        GridCut(this, 'classroom', undefined, columns, rows);
+        var cellWidth = 50, cellHeight = 50;
+        var columns = 800 / cellWidth, rows = 600 / cellHeight;
+        var result = GridCut(this, 'classroom', undefined, columns, rows);
 
-        var offsetX = colWidth / 2, offsetY = rowHeight / 2;
+        var getFrameNameCallback = result.getFrameNameCallback;
+        var offsetX = cellWidth / 2, offsetY = cellHeight / 2;
         for (var y = 0; y < rows; y++) {
             for (var x = 0; x < columns; x++) {
                 this.add.image(
-                    offsetX + (colWidth * x),
-                    offsetY + (rowHeight * y),
-                    'classroom', `${x},${y}`
+                    offsetX + (cellWidth * x),
+                    offsetY + (cellHeight * y),
+                    'classroom', getFrameNameCallback(x, y)
                 )
                     .setInteractive()
                     .on('pointerover', function () {
-                        this.setAlpha(0.7)
+                        this.setAlpha(0.5)
                     })
                     .on('pointerout', function () {
                         this.setAlpha(1)
