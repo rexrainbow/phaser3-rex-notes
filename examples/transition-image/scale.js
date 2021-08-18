@@ -58,8 +58,7 @@ var ScaleUp = function (transitionImage, key, frame) {
 
         duration: 500,  ease: 'Cubic', dir: 'in',
 
-        onStart: function (currentImage, nextImage, t, parent) {
-            nextImage.setScale(0);
+        onStart: function (currentImage, nextImage, t, parent) {            
         },
         onProgress: function (currentImage, nextImage, t, parent) {
             nextImage.setScale(t);
