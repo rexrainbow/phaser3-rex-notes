@@ -146,6 +146,7 @@ class TransitionImage extends Container {
             this
                 .setChildVisible(this.frontImage, true)
                 .setChildVisible(this.backImage, false)
+                .setMaskEnable(false)
         }
 
         if (value === 1) {
