@@ -334,6 +334,14 @@ var localState = child.rexContainer;
     ```javascript
     container.setChildLocalScale(child, scaleX, scaleY);
     ```
+- Local alpha
+    ```javascript
+    container.setChildLocalAlpha(child, alpha);
+    ```
+- Local visible
+    ```javascript
+    container.setChildLocalVisible(child, visible);
+    ```
 
 #### Reset local state of child
 
