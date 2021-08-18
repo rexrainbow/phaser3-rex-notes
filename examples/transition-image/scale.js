@@ -40,12 +40,12 @@ var ScaleDown = function (transitionImage, key, frame) {
 
         duration: 500, ease: 'Linear', dir: 'out',
 
-        onStart: function (currentImage, nextImage, t, parent) {
+        onStart: function (parent, currentImage, nextImage, t) {
         },
-        onProgress: function (currentImage, nextImage, t, parent) {
+        onProgress: function (parent, currentImage, nextImage, t) {
             currentImage.setScale(1 - t);
         },
-        onComplete: function (currentImage, nextImage, t, parent) {
+        onComplete: function (parent, currentImage, nextImage, t) {
             currentImage.setScale(1);
         },
     })
@@ -56,14 +56,14 @@ var ScaleUp = function (transitionImage, key, frame) {
     transitionImage.transit({
         key: key, frame: frame,
 
-        duration: 500,  ease: 'Cubic', dir: 'in',
+        duration: 500, ease: 'Cubic', dir: 'in',
 
-        onStart: function (currentImage, nextImage, t, parent) {            
+        onStart: function (parent, currentImage, nextImage, t) {
         },
-        onProgress: function (currentImage, nextImage, t, parent) {
+        onProgress: function (parent, currentImage, nextImage, t) {
             nextImage.setScale(t);
         },
-        onComplete: function (currentImage, nextImage, t, parent) {
+        onComplete: function (parent, currentImage, nextImage, t) {
             nextImage.setScale(1);
         },
     })

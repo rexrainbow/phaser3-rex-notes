@@ -119,21 +119,21 @@ class TransitionImage extends Container {
             this.backImage.setVisible(true);
             RunCallback(
                 this.onStartCallback, this.onStartCallbackScope,
-                currentImage, nextImage, value, this
+                this, currentImage, nextImage, value
             );
         }
 
         // Progress
         RunCallback(
             this.onProgressCallback, this.onProgressCallbackScope,
-            currentImage, nextImage, value, this
+            this, currentImage, nextImage, value
         );
 
         // Complete
         if (value === 1) {
             RunCallback(
                 this.onCompleteCallback, this.onCompleteCallbackScope,
-                currentImage, nextImage, value, this
+                this, currentImage, nextImage, value
             );
 
             var key = nextImage.texture.key,
@@ -171,15 +171,15 @@ class TransitionImage extends Container {
     }
 }
 
-var RunCallback = function (callback, scope, currentImage, nextImage, t, parent) {
+var RunCallback = function (callback, scope, parent, currentImage, nextImage, t) {
     if (!callback) {
         return;
     }
 
     if (scope) {
-        callback.callback(scope, currentImage, nextImage, t, parent);
+        callback.call(scope, parent, currentImage, nextImage, t);
     } else {
-        callback(currentImage, nextImage, t, parent);
+        callback(parent, currentImage, nextImage, t);
     }
 }
 
