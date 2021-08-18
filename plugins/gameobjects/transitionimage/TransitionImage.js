@@ -26,8 +26,7 @@ class TransitionImage extends Container {
         }
 
         var backImage = scene.add.image(x, y, texture, frame).setVisible(false);
-        var frontImage = scene.add.image(x, y, texture, frame);
-        // Size is equal to initial texture size
+        var frontImage = scene.add.image(x, y, texture, frame);     
         var width = GetValue(config, 'width', frontImage.width);
         var height = GetValue(config, 'height', frontImage.height);
         super(scene, x, y, width, height, [backImage, frontImage]);
