@@ -50,7 +50,7 @@ class Label extends Sizer {
             this.add(icon, 0, 'center', padding);
 
             if (iconMask) {
-                iconMask = this.addChildMask(icon, icon, 1); // Circle mask
+                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
             }
         }
 
@@ -78,7 +78,7 @@ class Label extends Sizer {
             this.add(action);
 
             if (actionMask) {
-                actionMask = this.addChildMask(action, action, 1); // Circle mask
+                actionMask = AddChildMask.call(this, action, action, 1); // Circle mask
             }
         }
 
@@ -167,14 +167,5 @@ class Label extends Sizer {
         return this;
     }
 }
-
-var methods = {
-    addChildMask: AddChildMask
-}
-
-Object.assign(
-    Label.prototype,
-    methods
-);
 
 export default Label;

@@ -76,6 +76,8 @@ class GridTable extends ContainerLite {
 
         if (this.cellsMask) {
             this.scene.game.events.off('poststep', this.maskCells, this);
+            this.cellsMask.destroy();
+            this.cellsMask = undefined;
         }
 
         this.table.destroy(fromScene);

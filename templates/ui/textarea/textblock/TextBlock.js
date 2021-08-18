@@ -1,5 +1,6 @@
 import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/system/GetTextObjectType.js'
-import GetTextObjectType from '../../../../plugins/utils/system/GetTextObjectType.js'
+import GetTextObjectType from '../../../../plugins/utils/system/GetTextObjectType.js';
+import AddChildMask from '../../utils/AddChildMask.js';
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
@@ -80,7 +81,7 @@ class TextBlock extends BaseSizer {
 
         // Create mask of text object
         if (textMaskEnable) {
-            this.textMask = this.addChildMask(this.textObject, this);
+            this.textMask = AddChildMask.call(this, this.textObject, this);
         }
 
         this.addChildrenMap('background', background);

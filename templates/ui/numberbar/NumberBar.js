@@ -40,7 +40,7 @@ class NumberBar extends Sizer {
             this.add(icon, 0, 'center', padding);
 
             if (iconMask) {
-                iconMask = this.addChildMask(icon, icon, 1); // Circle mask
+                iconMask = AddChildMask.call(this, icon, icon, 1); // Circle mask
             }
         }
 
@@ -169,14 +169,14 @@ class NumberBar extends Sizer {
         return this;
     }
 
-    setEaseValueDuration(duration){
+    setEaseValueDuration(duration) {
         if (this.childrenMap.slider) {
             this.childrenMap.slider.setEaseValueDuration(duration);
         }
         return this;
     }
 
-    setEaseValueFunction(ease){
+    setEaseValueFunction(ease) {
         if (this.childrenMap.slider) {
             this.childrenMap.slider.setEaseValueFunction(ease);
         }
@@ -214,14 +214,5 @@ class NumberBar extends Sizer {
         return this;
     }
 }
-
-var methods = {
-    addChildMask: AddChildMask
-}
-
-Object.assign(
-    NumberBar.prototype,
-    methods
-);
 
 export default NumberBar;

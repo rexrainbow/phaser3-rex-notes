@@ -92,11 +92,11 @@ class TransitionImage extends Container {
     }
 
     get texture() {
-        return this.backImage.texture;
+        return this.nextImage.texture;
     }
 
     get frame() {
-        return this.backImage.frame;
+        return this.nextImage.frame;
     }
 
     get t() {

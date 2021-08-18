@@ -24,10 +24,8 @@ export default {
         this.scene.game.events.off('poststep', this.maskChildren, this);
     },
 
-    addChildMask: AddChildMask,
-
     enableChildrenMask(maskPadding) {
-        var maskGameObject = this.addChildMask(null, this, 0, maskPadding);
+        var maskGameObject = AddChildMask.call(this, null, this, 0, maskPadding);
         this.childrenMask = maskGameObject.createGeometryMask();
         // this.childrenMask is a mask object, not a (Graphics) game object
         return this;
