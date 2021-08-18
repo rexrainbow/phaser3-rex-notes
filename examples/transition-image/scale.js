@@ -43,10 +43,10 @@ var ScaleDown = function (transitionImage, key, frame) {
         onStart: function (parent, currentImage, nextImage, t) {
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            currentImage.setScale(1 - t);
+            parent.setChildScale(currentImage, 1 - t)
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            currentImage.setScale(1);
+            parent.setChildScale(currentImage, 1)
         },
     })
     return transitionImage;
@@ -61,10 +61,10 @@ var ScaleUp = function (transitionImage, key, frame) {
         onStart: function (parent, currentImage, nextImage, t) {
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            nextImage.setScale(t);
+            parent.setChildScale(nextImage, t)
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            nextImage.setScale(1);
+            parent.setChildScale(nextImage, 1)
         },
     })
     return transitionImage;

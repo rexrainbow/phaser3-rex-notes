@@ -2,12 +2,13 @@ var OnStart = function (parent, currentImage, nextImage, t) {
 }
 
 var OnProgress = function (parent, currentImage, nextImage, t) {
-    currentImage.setAlpha(1 - t);
-    nextImage.setAlpha(t);
+    parent
+        .setChildAlpha(currentImage, 1 - t)
+        .setChildAlpha(nextImage, t)
 }
 
 var OnComplete = function (parent, currentImage, nextImage, t) {
-    currentImage.setAlpha(1);
+    parent.setChildAlpha(currentImage, 1)
 }
 
 export {

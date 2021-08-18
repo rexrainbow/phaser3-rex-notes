@@ -115,8 +115,10 @@ class TransitionImage extends Container {
 
         // Start
         if (value === 0) {
-            this.frontImage.setVisible(true);
-            this.backImage.setVisible(true);
+            this
+                .setChildVisible(this.frontImage, true)
+                .setChildVisible(this.backImage, true)
+
             RunCallback(
                 this.onStartCallback, this.onStartCallbackScope,
                 this, currentImage, nextImage, value
@@ -138,13 +140,13 @@ class TransitionImage extends Container {
 
             var key = nextImage.texture.key,
                 frame = nextImage.frame.name;
-            this.frontImage.setTexture(key, frame).setVisible(true);
-            this.backImage.setTexture(key, frame).setVisible(false);
-        }
+            this.frontImage.setTexture(key, frame);
+            this.backImage.setTexture(key, frame);
 
-        this
-            .resetChildState(this.frontImage)
-            .resetChildState(this.backImage);
+            this
+                .setChildVisible(this.frontImage, true)
+                .setChildVisible(this.backImage, false)
+        }
 
         if (value === 1) {
             this.emit('complete');
