@@ -5,7 +5,7 @@ import {
     OnStart as DefaultOnStart,
     OnProgress as DefaultOnProgress,
     OnComplete as DefaultOnComplete
-} from './DefaultTransitionCallbacks.js';
+} from './CrossFadeTransition.js';
 
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -18,8 +18,11 @@ class TransitionImage extends Container {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            texture = GetValue(config, 'key', '');
-            frame = GetValue(config, 'frame', '');
+            texture = GetValue(config, 'key', undefined);
+            frame = GetValue(config, 'frame', undefined);
+        } else if (IsPlainObject(frame)) {
+            config = frame;
+            frame = undefined;
         }
 
         var backImage = scene.add.image(x, y, texture, frame).setVisible(false);
@@ -36,7 +39,7 @@ class TransitionImage extends Container {
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);
         var onProgress = GetValue(config, 'onProgress', undefined);
-        var onComplete = GetValue(config, 'onCompleteScope', undefined);
+        var onComplete = GetValue(config, 'onComplete', undefined);
         if ((onStart === undefined) && (onProgress === undefined) && (onComplete === undefined)) {
             onStart = DefaultOnStart;
             onProgress = DefaultOnProgress;
@@ -78,6 +81,10 @@ class TransitionImage extends Container {
         this.easeValueTask = undefined;
     }
 
+    get image() {
+        return this.frontImage;
+    }
+
     get texture() {
         return this.backImage.texture;
     }
@@ -105,19 +112,19 @@ class TransitionImage extends Container {
         if (value === 0) {
             RunCallback(
                 this.onStartCallback, this.onStartCallbackScope,
-                this.frontImage, this.backImage, value
+                this.frontImage, this.backImage, value, this
             );
         }
 
         RunCallback(
             this.onProgressCallback, this.onProgressCallbackScope,
-            this.frontImage, this.backImage, value
+            this.frontImage, this.backImage, value, this
         );
 
         if (value === 1) {
             RunCallback(
                 this.onCompleteCallback, this.onCompleteCallbackScope,
-                this.frontImage, this.backImage, value
+                this.frontImage, this.backImage, value, this
             );
 
             this.frontImage.setTexture(this.texture.key, this.frame.name);
@@ -153,11 +160,15 @@ class TransitionImage extends Container {
     }
 }
 
-var RunCallback = function (callback, scope, frontImage, backImage, t) {
+var RunCallback = function (callback, scope, frontImage, backImage, t, parent) {
+    if (!callback) {
+        return;
+    }
+
     if (scope) {
-        callback.callback(scope, frontImage, backImage, t);
+        callback.callback(scope, frontImage, backImage, t, parent);
     } else {
-        callback(frontImage, backImage, t);
+        callback(frontImage, backImage, t, parent);
     }
 }
 

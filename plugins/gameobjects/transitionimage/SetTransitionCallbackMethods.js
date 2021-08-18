@@ -16,11 +16,4 @@ export default {
         this.onCompleteCallbackScope = scope;
         return this;
     },
-
-    setTransitionCallbacks(onStart, onProgress, onComplete) {
-        this.setTransitionStartCallback(onStart);
-        this.setTransitionProgressCallback(onProgress);
-        this.setTransitionCompleteCallback(onComplete);
-        return this;
-    }
 }

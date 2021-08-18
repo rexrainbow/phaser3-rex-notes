@@ -7,10 +7,16 @@ export default {
     },
 
     transit(texture, frame, duration) {
+        if (typeof (frame) === 'number') {
+            duration = frame;
+            frame = undefined;
+        }
         if (duration !== undefined) {
             this.setDuration(duration);
         }
+
         this.setNextTexture(texture, frame);
+
         this.start();
         return this;
     },
@@ -44,6 +50,7 @@ export default {
         if (this.easeValueTask) {
             this.easeValueTask.stop();
         }
+        this.setT(1);
         return this;
     },
 }

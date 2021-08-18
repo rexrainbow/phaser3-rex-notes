@@ -14,10 +14,25 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.rexTransitionImage(0, 0, 'classroom')
-            .setOrigin(0)
+        var image = this.add.rexTransitionImage(400, 300, 'classroom', {
+            duration: 500,
 
-        image.transit('road', undefined, 3000)
+            onStart: function (frontImage, backImage, t, parent) {
+                frontImage.setScale(1);
+                backImage.setVisible(true);
+            },
+
+            onProgress: function (frontImage, backImage, t, parent) {
+                frontImage.setScale(1 - t);
+            },
+
+            onComplete: function (frontImage, backImage, t, parent) {
+                frontImage.setScale(1);
+                backImage.setVisible(false);
+            },
+        })
+
+        image.transit('road')
             .once('complete', function () {
                 console.log('complete')
             })
