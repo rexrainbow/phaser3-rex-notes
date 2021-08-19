@@ -47,6 +47,12 @@ export default {
     },
 
     transit(texture, frame) {
+        if (this.isRunning) {
+            this.ignoreCompleteEvent = true;
+            this.stop();
+            this.ignoreCompleteEvent = false;
+        }
+
         if (IsPlainObject(texture)) {
             var config = texture;
             texture = GetValue(config, 'key', undefined);

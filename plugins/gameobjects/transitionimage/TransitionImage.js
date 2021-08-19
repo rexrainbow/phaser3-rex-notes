@@ -75,6 +75,8 @@ class TransitionImage extends Container {
             .setTransitionDirection(dir)
             .setDuration(GetValue(config, 'duration', 1000))
             .setEaseFunction(GetValue(config, 'ease', 'Linear'))
+
+        this.ignoreCompleteEvent = false;
     }
 
     destroy(fromScene) {
@@ -168,7 +170,7 @@ class TransitionImage extends Container {
                 .setMaskEnable(false)
         }
 
-        if (value === 1) {
+        if ((value === 1) && (!this.ignoreCompleteEvent)) {
             this.emit('complete');
         }
     }
@@ -176,6 +178,10 @@ class TransitionImage extends Container {
     setT(value) {
         this.t = value;
         return this;
+    }
+
+    get isRunning() {
+        return (this.easeValueTask) ? this.easeValueTask.isRunning : false;
     }
 
     setOrigin(originX, originY) {
