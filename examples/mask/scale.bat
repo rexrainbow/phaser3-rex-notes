@@ -1,5 +1,5 @@
 set testmode=0
-set main=./examples/mask/test.js
+set main=./examples/mask/scale.js
 cd ..
 cd ..
 npm run watch

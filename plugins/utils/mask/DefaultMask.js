@@ -1,3 +1,5 @@
+import DrawShape from './DrawShape.js';
+
 const Graphics = Phaser.GameObjects.Graphics;
 
 class DefaultMask extends Graphics {
@@ -18,7 +20,6 @@ class DefaultMask extends Graphics {
         this.padding = padding;
         this.setPosition().resize().setVisible(false);
         // Don't add it to display list
-        // Graphics does not have origin, bounds
     }
 
     destroy() {
@@ -54,28 +55,43 @@ class DefaultMask extends Graphics {
             return this;
         }
 
-        this.clear().fillStyle(0xffffff);
-        switch (this.shape) {
-            case 1: // circle
-                var radius = Math.min(width, height) / 2;
-                this.fillCircle(
-                    0,
-                    0,
-                    radius + padding
-                );
-                break;
-            default: // 0|'rectangle'
-                this.fillRect(
-                    -(width * parent.originX) - padding,
-                    -(height * parent.originY) - padding,
-                    width + (2 * padding),
-                    height + (2 * padding)
-                );
-                break;
-        }
         this.widthSave = width;
         this.heightSave = height;
         this.paddingSave = padding;
+        this.originXSave = parent.originX;
+        this.originYSave = parent.originY;
+
+        DrawShape.call(this,
+            width, height, padding,
+            parent.originX, parent.originY
+        );
+
+        return this;
+    }
+
+    setOrigin(originX, originY) {
+        if (originY === undefined) {
+            originY = originX;
+        }
+
+        var parent = this.parent;
+        if (originX === undefined) {
+            originX = parent.originX;
+        }
+        if (originY === undefined) {
+            originY = parent.originY;
+        }
+        if ((this.originXSave === originX) && (this.originYSave === orginY)) {
+            return this;
+        }
+
+        this.originXSave = originX;
+        this.originYSave = originY;
+
+        DrawShape.call(this,
+            this.widthSave, this.heightSave, this.paddingSave,
+            originX, originY,
+        );
         return this;
     }
 }

@@ -15,14 +15,12 @@ class Demo extends Phaser.Scene {
         var image = this.add.image(400, 300, 'classroom')
             .setScale(0.5)
         var maskGameObject = this.make.graphics({ x: 400, y: 300 });
-        var mask = maskGameObject.createGeometryMask();
+        image.setMask(maskGameObject.createGeometryMask());
 
         maskGameObject
             .fillStyle(0x330000)
             .fillRect(-200, -200, 400, 400)
             .setScale(0.5)
-
-        image.setMask(mask);
 
     }
 

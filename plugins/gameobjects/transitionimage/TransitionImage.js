@@ -70,6 +70,10 @@ class TransitionImage extends Container {
             return;
         }
 
+        if (this.childrenMask) {
+            this.childrenMask.destroy();
+        }
+
         super.destroy(fromScene);
 
         this.backImage = undefined;
