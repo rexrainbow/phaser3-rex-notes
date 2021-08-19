@@ -26,15 +26,16 @@ module.exports = {
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',
 
-    // custom file loader      
+    // custom file loader
     'webfontloaderplugin': './plugins/webfontloader-plugin.js',
     'awaitloaderplugin': './plugins/awaitloader-plugin.js',
     'scripttagloaderplugin': './plugins/scripttagloader-plugin.js',
     'imageuriloaderplugin': './plugins/imageuriloader-plugin.js',
 
-    // actions                    
+    // actions
     'gridalignplugin': './plugins/gridalign-plugin.js',
     'randomplaceplugin': './plugins/randomplace-plugin.js',
+    'gridcutimageplugin': './plugins/gridcutimage-plugin.js',
 
     // input
     'touchstateplugin': './plugins/touchstate-plugin.js',
