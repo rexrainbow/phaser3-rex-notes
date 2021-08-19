@@ -20,6 +20,7 @@ class Demo extends Phaser.Scene {
             })
 
         this.input.on('pointerdown', function () {
+            image.stop();
             var currentKey = image.texture.key;
             if (currentKey === 'classroom') {
                 ScaleDown(image, 'road');
