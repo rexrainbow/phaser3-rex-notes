@@ -1,4 +1,5 @@
 import Container from '../containerlite/ContainerLite.js';
+import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 import SetTransitionCallbackMethods from './SetTransitionCallbackMethods.js';
 import TransitionMethods from './TransitionMethods.js';
 import {
@@ -24,15 +25,27 @@ class TransitionImage extends Container {
             frame = undefined;
         }
 
-        var backImage = scene.add.image(x, y, texture, frame).setVisible(false);
-        var frontImage = scene.add.image(x, y, texture, frame);
+        var backImage = GetValue(config, 'back', undefined);
+        var frontImage = GetValue(config, 'front', undefined);
+        if (!backImage) {
+            backImage = scene.add.image(x, y, texture, frame);
+        }
+        if (!frontImage) {
+            frontImage = scene.add.image(x, y, texture, frame);
+        }
         var width = GetValue(config, 'width', frontImage.width);
         var height = GetValue(config, 'height', frontImage.height);
-        super(scene, x, y, width, height, [backImage, frontImage]);
+
+        super(scene, x, y, width, height);
+
+        backImage.setVisible(false);
+        var maskGraphics = new DefaultMaskGraphics(this);
+        this.addMultiple([backImage, frontImage, maskGraphics])
 
         this.type = 'rexTransitionImage';
         this.backImage = backImage;
         this.frontImage = frontImage;
+        this.maskGraphics = maskGraphics;
 
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);
@@ -72,12 +85,14 @@ class TransitionImage extends Container {
 
         if (this.childrenMask) {
             this.childrenMask.destroy();
+            this.childrenMask = undefined;
         }
+        this.backImage = undefined;
+        this.frontImage = undefined;
+        this.maskGraphics = undefined;
 
         super.destroy(fromScene);
 
-        this.backImage = undefined;
-        this.frontImage = undefined;
         this.onStartCallback = undefined;
         this.onStartCallbackScope = undefined;
         this.onProgressCallback = undefined;
@@ -165,8 +180,11 @@ class TransitionImage extends Container {
 
     setOrigin(originX, originY) {
         super.setOrigin(originX, originY);
-        this.frontImage.setOrigin(originX, originY);
+
         this.backImage.setOrigin(originX, originY);
+        this.frontImage.setOrigin(originX, originY);
+        this.maskGraphics.setOrigin(originX, originY);
+
         return this;
     }
 

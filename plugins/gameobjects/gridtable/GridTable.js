@@ -1,6 +1,6 @@
 import ContainerLite from '../containerlite/ContainerLite.js';
 import Table from './Table.js';
-import DefaultMask from '../../utils/mask/DefaultMask.js';
+import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
 import Methods from './methods/Methods.js';
@@ -223,7 +223,7 @@ class GridTable extends ContainerLite {
         this.maskCellsFlag = true;
         this.maskUpdateMode = maskUpdateMode; // 0,1,undefined
         if (maskEnable) {
-            var maskGameObject = new DefaultMask(this, 0, maskPadding);
+            var maskGameObject = new DefaultMaskGraphics(this, 0, maskPadding);
             this.cellsMask = maskGameObject.createGeometryMask();
             this.add(maskGameObject);
             if (typeof (maskUpdateMode) === 'string') {

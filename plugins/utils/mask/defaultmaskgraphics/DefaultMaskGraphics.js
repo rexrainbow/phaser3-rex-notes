@@ -2,7 +2,7 @@ import DrawShape from './DrawShape.js';
 
 const Graphics = Phaser.GameObjects.Graphics;
 
-class DefaultMask extends Graphics {
+class DefaultMaskGraphics extends Graphics {
     constructor(parent, shape, padding) {
         if (shape === undefined) {
             shape = 0;
@@ -100,4 +100,4 @@ const SHAPEMODE = {
     rectangle: 0,
     circle: 1,
 }
-export default DefaultMask;
+export default DefaultMaskGraphics;

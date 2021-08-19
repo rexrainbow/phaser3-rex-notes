@@ -1,7 +1,7 @@
-import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
+import DefaultMaskGraphics from '../../../plugins/utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
-    var maskGameObject = new DefaultMask(sizeTarget, shape, padding); // A Graphics game object
+    var maskGameObject = new DefaultMaskGraphics(sizeTarget, shape, padding); // A Graphics game object
     if (maskTarget && !maskTarget.isRexSizer) { // Sizer game object can't apply mask
         var mask = maskGameObject.createGeometryMask();
         maskTarget.setMask(mask);

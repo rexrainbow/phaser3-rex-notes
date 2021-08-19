@@ -14,9 +14,9 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var image = this.add.rexTransitionImage(512, 384, 'classroom')
-            //.setScale(0.5)
-            //.setAngle(-30)
+        var image = this.add.rexTransitionImage(400, 300, 'classroom')
+            .setScale(0.5)
+            // .setAngle(-30)
             .on('complete', function () {
                 console.log('complete')
             })
@@ -78,8 +78,8 @@ var SlideInLeft = function (transitionImage, key, frame) {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 1024,
-    height: 768,
+    width: 800,
+    height: 600,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

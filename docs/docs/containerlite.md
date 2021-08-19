@@ -254,13 +254,13 @@ Return true if child is under this container-lite (nested).
 var hasChild = container.contains(child);
 ```
 
-### Children group
+### Children
 
 ```javascript
-var group = container.children;
+var children = container.children;
 ```
 
-Reference [Group](group.md)
+- `children` : Array of child game objects.
 
 ### Set properties of child
 
