@@ -87,17 +87,19 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     // onCompleteScope: undefined,    
     // duration: 1000,
     // ease: 'Linear',
+    // mask: false,
 });
 ```
 
 - `dir` : Transition direction.
-    - `0`, or `'out'` : Transit current texture out.
-    - `1`, or `'in'` : Transit next texture in.
+    - `0`, or `'out'` : Transit current texture/[image](image.md) out.
+    - `1`, or `'in'` : Transit next texture/[image](image.md) in.
 - `onStart`, `onStartScope` : Callback and scope of transition-start. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
 - `onProgress`, `onProgressScope` : Callback and scope of transition-progress. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
 - `onComplete`, `onCompleteScope` : Callback and scope of transition-complete. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
 - `duration` : Duration of transition.
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+- `mask` : Set `true` to apply a mask to current and next textures/[images](image.md).
 
 Add transitionimage from JSON
 
@@ -117,6 +119,7 @@ var image = scene.make.rexTransitionImage({
     // onCompleteScope: undefined,
     // duration: 1000,
     // ease: 'Linear',
+    // mask: false,
 
     // origin: {x: 0.5, y: 0.5},
     add: true
@@ -157,6 +160,7 @@ image
     // .setTransitionCompleteCallback(onComplete, onCompleteScope)
     // .setDuration(duration)
     // .setEaseFunction(ease)
+    // .setMaskEnable(enable)
     .transit(texture, frame)
 ```
 
@@ -173,6 +177,7 @@ image.transit({
     // onCompleteScope: undefined,
     // duration: 1000,
     // ease: 'Linear',
+    // mask: false,
 })
 ```
 
@@ -231,6 +236,14 @@ image.setEaseFunction(ease);
 ```
 
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
+
+### Enable mask
+
+```javascript
+image.setMaskEnable(enable);
+```
+
+- `enable` : Set `true` to apply a mask to current and next textures/[images](image.md).
 
 ### Pause/Resume
 

@@ -795,6 +795,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable-mask" class="md-nav__link">
+    Enable mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pauseresume" class="md-nav__link">
     Pause/Resume
   </a>
@@ -5931,6 +5938,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enable-mask" class="md-nav__link">
+    Enable mask
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pauseresume" class="md-nav__link">
     Pause/Resume
   </a>
@@ -6052,13 +6066,14 @@
     <span class="c1">// onCompleteScope: undefined,    </span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
+    <span class="c1">// mask: false,</span>
 <span class="p">});</span>
 </code></pre></div>
 
 <ul>
 <li><code>dir</code> : Transition direction.<ul>
-<li><code>0</code>, or <code>'out'</code> : Transit current texture out.</li>
-<li><code>1</code>, or <code>'in'</code> : Transit next texture in.</li>
+<li><code>0</code>, or <code>'out'</code> : Transit current texture/<a href="../image/">image</a> out.</li>
+<li><code>1</code>, or <code>'in'</code> : Transit next texture/<a href="../image/">image</a> in.</li>
 </ul>
 </li>
 <li><code>onStart</code>, <code>onStartScope</code> : Callback and scope of transition-start. See <a href="./#set-transition-callbacks">Set transition callbacks</a></li>
@@ -6066,6 +6081,7 @@
 <li><code>onComplete</code>, <code>onCompleteScope</code> : Callback and scope of transition-complete. See <a href="./#set-transition-callbacks">Set transition callbacks</a></li>
 <li><code>duration</code> : Duration of transition.</li>
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
+<li><code>mask</code> : Set <code>true</code> to apply a mask to current and next textures/<a href="../image/">images</a>.</li>
 </ul>
 <p>Add transitionimage from JSON</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexTransitionImage</span><span class="p">({</span>
@@ -6083,6 +6099,7 @@
     <span class="c1">// onCompleteScope: undefined,</span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
+    <span class="c1">// mask: false,</span>
 
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
@@ -6122,6 +6139,7 @@
     <span class="c1">// .setTransitionCompleteCallback(onComplete, onCompleteScope)</span>
     <span class="c1">// .setDuration(duration)</span>
     <span class="c1">// .setEaseFunction(ease)</span>
+    <span class="c1">// .setMaskEnable(enable)</span>
     <span class="p">.</span><span class="nx">transit</span><span class="p">(</span><span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">)</span>
 </code></pre></div>
 
@@ -6136,6 +6154,7 @@
     <span class="c1">// onCompleteScope: undefined,</span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
+    <span class="c1">// mask: false,</span>
 <span class="p">})</span>
 </code></pre></div>
 
@@ -6193,6 +6212,13 @@
 
 <ul>
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
+</ul>
+<h3 id="enable-mask">Enable mask<a class="headerlink" href="#enable-mask" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>enable</code> : Set <code>true</code> to apply a mask to current and next textures/<a href="../image/">images</a>.</li>
 </ul>
 <h3 id="pauseresume">Pause/Resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>

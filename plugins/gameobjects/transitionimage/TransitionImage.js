@@ -75,6 +75,7 @@ class TransitionImage extends Container {
             .setTransitionDirection(dir)
             .setDuration(GetValue(config, 'duration', 1000))
             .setEaseFunction(GetValue(config, 'ease', 'Linear'))
+            .setMaskEnable(GetValue(config, 'mask', false))
 
         this.ignoreCompleteEvent = false;
     }
