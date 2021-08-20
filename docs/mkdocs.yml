@@ -29,6 +29,7 @@ nav:
             - Animation: animation.md
             - Video: video.md
             - Circle mask image: circlemaskimage.md
+            - Transition image: transitionimage.md
         - Multiple images: 
             - Blitter: blitter.md
             - Particles:

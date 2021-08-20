@@ -15,15 +15,20 @@ class Demo extends Phaser.Scene {
 
     create() {
         // Default transition behavior is cross-fade
-        var image = this.add.rexTransitionImage(0, 0, 'classroom', {
-            duration: 3000
-        })
-            .setOrigin(0)
-
-        image.transit('road')
-            .once('complete', function () {
+        var image = this.add.rexTransitionImage(400, 300, 'classroom')
+            .on('complete', function () {
                 console.log('complete')
             })
+
+        this.input.on('pointerdown', function () {
+            var currentKey = image.texture.key;
+            if (currentKey === 'classroom') {
+                image.transit('road');
+            } else {
+                image.transit('classroom');
+            }
+
+        })
 
     }
 
