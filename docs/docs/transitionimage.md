@@ -101,6 +101,8 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
 - `mask` : Set `true` to apply a mask to current and next textures/[images](image.md).
 
+If `onStart`, `onProgress` and `onComplete` are all `undefined`, it will use **cross-fade** as default transition callbacks.
+
 Add transitionimage from JSON
 
 ```javascript
@@ -168,6 +170,8 @@ or
 
 ```javascript
 image.transit({
+    key: undefined,
+    // frame: undefined,
     // dir: 0,
     // onStart: function(parent, currentImage, nextImage, t) { },
     // onStartScope: undefined,
@@ -243,7 +247,9 @@ image.setEaseFunction(ease);
 image.setMaskEnable(enable);
 ```
 
-- `enable` : Set `true` to apply a mask to current and next textures/[images](image.md).
+- `enable` : 
+    - `true` : Apply a mask to current and next textures/[images](image.md).
+    - `false` : Clear mask from current and next textures/[images](image.md).
 
 ### Pause/Resume
 

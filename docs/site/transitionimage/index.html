@@ -6083,6 +6083,7 @@
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
 <li><code>mask</code> : Set <code>true</code> to apply a mask to current and next textures/<a href="../image/">images</a>.</li>
 </ul>
+<p>If <code>onStart</code>, <code>onProgress</code> and <code>onComplete</code> are all <code>undefined</code>, it will use <strong>cross-fade</strong> as default transition callbacks.</p>
 <p>Add transitionimage from JSON</p>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexTransitionImage</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -6145,6 +6146,8 @@
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">transit</span><span class="p">({</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// frame: undefined,</span>
     <span class="c1">// dir: 0,</span>
     <span class="c1">// onStart: function(parent, currentImage, nextImage, t) { },</span>
     <span class="c1">// onStartScope: undefined,</span>
@@ -6218,7 +6221,11 @@
 </code></pre></div>
 
 <ul>
-<li><code>enable</code> : Set <code>true</code> to apply a mask to current and next textures/<a href="../image/">images</a>.</li>
+<li><code>enable</code> : <ul>
+<li><code>true</code> : Apply a mask to current and next textures/<a href="../image/">images</a>.</li>
+<li><code>false</code> : Clear mask from current and next textures/<a href="../image/">images</a>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="pauseresume">Pause/Resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
