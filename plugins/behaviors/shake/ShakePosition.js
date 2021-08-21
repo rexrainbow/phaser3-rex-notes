@@ -1,4 +1,5 @@
-import TickTask from '../../utils/componentbase/timerticktask/TimerTask';
+import TickTask from '../../utils/componentbase/TickTask';
+import Timer from '../../utils/componentbase/timerticktask/Timer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -6,8 +7,8 @@ class ShakePosition extends TickTask {
     constructor(gameObject, config) {
         super(gameObject, config);
         // this.parent = gameObject;
-        // this.timer
 
+        this.timer = new Timer();
         this.resetFromJSON(config);
         this.boot();
     }
@@ -37,6 +38,18 @@ class ShakePosition extends TickTask {
             ox: this.ox,
             oy: this.oy,
         };
+    }
+
+    // override
+    shutdown(fromScene) {
+        // Already shutdown
+        if (this.isShutdown) {
+            return;
+        }
+
+        super.shutdown(fromScene);
+        this.timer.destroy();
+        this.timer = undefined;
     }
 
     startTicking() {
@@ -112,7 +125,9 @@ class ShakePosition extends TickTask {
             this.setDuration(duration);
         }
 
-        this.timer.setDuration(this.duration);
+        this.timer
+            .setDuration(this.duration)
+            .start()
 
         super.start();
         return this;
