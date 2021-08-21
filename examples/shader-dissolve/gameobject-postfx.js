@@ -1,5 +1,6 @@
 import 'phaser';
-import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js'
+import DissolvePipelinePlugin from '../../plugins/dissolvepipeline-plugin.js';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -17,20 +18,39 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexDissolvePipelinePlugin');
         var gameObject = this.add.image(400, 300, 'classroom');
         var postFxPipeline = postFxPlugin.add(gameObject, {
-            toTexture: 'road',
-        });
-        var tween = this.tweens.add({
-            targets: postFxPipeline,
-            progress: 1,
-            ease: 'Quad',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 3000,
-            repeat: 0,            // -1: infinity
-            yoyo: false
+           
         });
 
+        var tweenTask;
         this.input.on('pointerdown', function () {
-            this.scene.restart();
+            if (tweenTask) {
+                tweenTask.stop();
+            }
+
+            var key = gameObject.texture.key;
+            var nextKey = (key === 'classroom') ? 'road' : 'classroom';
+            postFxPipeline.setTransitionTargetTexture(nextKey).setProgress(0);
+            tweenTask = this.tweens.add({
+                targets: postFxPipeline,
+                progress: 1,
+                ease: 'Quad',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 3000,
+                repeat: 0,            // -1: infinity
+                yoyo: false
+            })
+                .on('complete', function () {
+                    postFxPipeline.setProgress(0);
+                    gameObject.setTexture(nextKey);
+                    tweenTask = undefined;
+                })
         }, this)
+
+        var gui = new Dat.GUI();
+        gui.add(postFxPipeline, 'noiseX', 0, 100);
+        gui.add(postFxPipeline, 'noiseY', 0, 100);
+        gui.add(postFxPipeline, 'noiseZ', 0, 100);
+        gui.add(postFxPipeline, 'fromEdgeStart', 0, 1);
+        gui.add(postFxPipeline, 'fromEdgeWidth', 0, 1);
     }
 
     update() {
