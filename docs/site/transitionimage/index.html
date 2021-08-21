@@ -6176,7 +6176,13 @@
 </code></pre></div><ul>
 <li><code>onStart</code>
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">currentImage</span><span class="p">,</span> <span class="nx">nextImage</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>parent</code> : Transition image game object, extends from <a href="../containerlite/">ContainerLite</a></li>
+<li><code>currentImage</code> : <a href="../image/">Image game object</a> to display current texture.</li>
+<li><code>nextImage</code> : <a href="../image/">Image game object</a> to display next texture.</li>
+<li><code>t</code> : Progress percentage. It is <code>0</code> in this case.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Set transition-progress callback
@@ -6189,9 +6195,15 @@
     <span class="c1">// parent.setChildLocalPosition(currentImage, x, 0);</span>
 <span class="p">}</span>
 </code></pre></div><ul>
+<li><code>parent</code> : Transition image game object, extends from <a href="../containerlite/">ContainerLite</a></li>
+<li><code>currentImage</code> : <a href="../image/">Image game object</a> to display current texture.<ul>
 <li>Set alpha of currentImage, or nextImage by <code>parent.setChildLocalAlpha(currentImage, alpha)</code>.</li>
 <li>Set scale of currentImage, or nextImage by <code>parent.setChildLocalScale(currentImage, scale)</code>.</li>
-<li>Set position of currentImage, or nextImage by <code>parent.setChildLocalScale(currentImage, x, y)</code>.</li>
+<li>Set position of currentImage, or nextImage by <code>parent.setChildLocalScale(currentImage, x, y)</code>.        </li>
+</ul>
+</li>
+<li><code>nextImage</code> : <a href="../image/">Image game object</a> to display next texture.</li>
+<li><code>t</code> : Progress percentage. <code>0</code>~<code>1</code>.</li>
 </ul>
 </li>
 </ul>
@@ -6201,7 +6213,13 @@
 </code></pre></div><ul>
 <li><code>onComplete</code>
     <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">currentImage</span><span class="p">,</span> <span class="nx">nextImage</span><span class="p">,</span> <span class="nx">t</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li><code>parent</code> : Transition image game object, extends from <a href="../containerlite/">ContainerLite</a></li>
+<li><code>currentImage</code> : <a href="../image/">Image game object</a> to display current texture.</li>
+<li><code>nextImage</code> : <a href="../image/">Image game object</a> to display next texture.</li>
+<li><code>t</code> : Progress percentage. It is <code>1</code> in this case.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

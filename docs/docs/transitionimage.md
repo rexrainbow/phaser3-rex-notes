@@ -203,6 +203,10 @@ Fire `'complete'` event when transition completed.
         ```javascript
         function(parent, currentImage, nextImage, t) { }
         ```
+        - `parent` : Transition image game object, extends from [ContainerLite](containerlite.md)
+        - `currentImage` : [Image game object](image.md) to display current texture.
+        - `nextImage` : [Image game object](image.md) to display next texture.
+        - `t` : Progress percentage. It is `0` in this case.
 - Set transition-progress callback
     ```javascript
     image.setTransitionProgressCallback(onProgress, onProgressScope)
@@ -215,9 +219,13 @@ Fire `'complete'` event when transition completed.
             // parent.setChildLocalPosition(currentImage, x, 0);
         }
         ```
-        - Set alpha of currentImage, or nextImage by `parent.setChildLocalAlpha(currentImage, alpha)`.
-        - Set scale of currentImage, or nextImage by `parent.setChildLocalScale(currentImage, scale)`.
-        - Set position of currentImage, or nextImage by `parent.setChildLocalScale(currentImage, x, y)`.
+        - `parent` : Transition image game object, extends from [ContainerLite](containerlite.md)
+        - `currentImage` : [Image game object](image.md) to display current texture.
+            - Set alpha of currentImage, or nextImage by `parent.setChildLocalAlpha(currentImage, alpha)`.
+            - Set scale of currentImage, or nextImage by `parent.setChildLocalScale(currentImage, scale)`.
+            - Set position of currentImage, or nextImage by `parent.setChildLocalScale(currentImage, x, y)`.        
+        - `nextImage` : [Image game object](image.md) to display next texture.
+        - `t` : Progress percentage. `0`~`1`.
 - Set transition-complete callback
     ```javascript
     image.setTransitionCompleteCallback(onComplete, onCompleteScope)
@@ -226,6 +234,10 @@ Fire `'complete'` event when transition completed.
         ```javascript
         function(parent, currentImage, nextImage, t) { }
         ```
+        - `parent` : Transition image game object, extends from [ContainerLite](containerlite.md)
+        - `currentImage` : [Image game object](image.md) to display current texture.
+        - `nextImage` : [Image game object](image.md) to display next texture.
+        - `t` : Progress percentage. It is `1` in this case.
 
 ### Set transition duration
 
