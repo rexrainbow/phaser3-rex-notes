@@ -126,7 +126,7 @@ var CellIn = function (transitionImage, key, frame) {
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var delay = cellImages[i].getData('delay');
                 var cellT = Clamp((t - delay) / ProgressT, 0, 1);
-                var scale = Linear(0, 1, cellT);
+                var scale = Linear(0, 1, CubicEase(cellT));
                 parent.setChildLocalScale(cellImages[i], scale);
             }
         },
