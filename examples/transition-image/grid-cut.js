@@ -39,6 +39,8 @@ class Demo extends Phaser.Scene {
 const Random = Phaser.Math.FloatBetween;
 var DelayMax = 0.5, ProgressT = 1 - DelayMax;
 const CubicEase = Phaser.Tweens.Builders.GetEaseFunction('Cubic');
+const Clamp = Phaser.Math.Clamp;
+const Linear = Phaser.Math.Linear;
 
 var CellOut = function (transitionImage, key, frame) {
     if (frame === undefined) {
@@ -69,17 +71,8 @@ var CellOut = function (transitionImage, key, frame) {
             var cellImages = transitionImage.cellImages;
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var delay = cellImages[i].getData('delay');
-                var alpha;
-                if (t > delay) {
-                    var cellT = t - delay;
-                    if (cellT > ProgressT) {
-                        alpha = 0;
-                    } else {
-                        alpha = 1 - (cellT / ProgressT);
-                    }
-                } else {
-                    alpha = 1;
-                }
+                var cellT = Clamp((t - delay) / ProgressT, 0, 1);
+                var alpha = Linear(1, 0, cellT);
                 parent.setChildLocalAlpha(cellImages[i], alpha);
             }
         },
@@ -132,17 +125,8 @@ var CellIn = function (transitionImage, key, frame) {
             var cellImages = transitionImage.cellImages;
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var delay = cellImages[i].getData('delay');
-                var scale;
-                if (t > delay) {
-                    var cellT = t - delay;
-                    if (cellT > ProgressT) {
-                        scale = 1;
-                    } else {
-                        scale = CubicEase(cellT / ProgressT);
-                    }
-                } else {
-                    scale = 0;
-                }
+                var cellT = Clamp((t - delay) / ProgressT, 0, 1);
+                var scale = Linear(0, 1, cellT);
                 parent.setChildLocalScale(cellImages[i], scale);
             }
         },
