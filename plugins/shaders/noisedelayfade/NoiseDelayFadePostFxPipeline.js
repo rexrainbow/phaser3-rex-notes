@@ -73,10 +73,10 @@ class NoiseDelayFadePostFxPipeline extends PostFXPipeline {
 
     setNoise(x, y, z) {
         if (x === undefined) {
-            x = 4 + Math.random() * 6;
+            x = 4 + Math.random() * 30;
         }
         if (y === undefined) {
-            y = 4 + Math.random() * 6;
+            y = 4 + Math.random() * 30;
         }
         if (z === undefined) {
             z = Math.random() * 10;

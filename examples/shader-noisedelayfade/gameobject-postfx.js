@@ -1,5 +1,6 @@
 import 'phaser';
 import NoiseDelayFadePipelinePlugin from '../../plugins/noisedelayfadepipeline-plugin';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -22,21 +23,12 @@ class Demo extends Phaser.Scene {
             activeRate: 0.5
         });
 
-        this.input.on('pointerdown', function (pointer) {
-            postFxPipeline
-                .setNoise()
-                .setProgress(0)
-
-            this.tweens.add({
-                targets: postFxPipeline,
-                progress: 1,
-                ease: 'Linear',
-                duration: 3000,
-                repeat: 0,
-                yoyo: false
-            });
-
-        }, this)
+        var gui = new Dat.GUI();
+        gui.add(postFxPipeline, 'progress', 0, 1);
+        gui.add(postFxPipeline, 'activeRate', 0, 1);
+        gui.add(postFxPipeline, 'noiseX', 0, 100);
+        gui.add(postFxPipeline, 'noiseY', 0, 100);
+        gui.add(postFxPipeline, 'noiseZ', 0, 100);
     }
 
     update() {
