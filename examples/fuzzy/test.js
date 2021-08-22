@@ -18,13 +18,13 @@ var fuzzyModule = BuildFuzzyModule({
             ['+', 0.5, 0.75, 1]
         ],
     },
-    rules: [
-        'A- AND B- => C-',
-        'A AND B- => C-',
-        'A+ AND B- => C',
-        'A+ AND B => C',
-        'A+ AND B+ => C+',
-    ]
+    rules: `
+        A- AND B- => C-
+        A AND B- => C-
+        A+ AND B- => C
+        A+ AND B => C
+        A+ AND B+ => C+
+    `
 })
 
 fuzzyModule
