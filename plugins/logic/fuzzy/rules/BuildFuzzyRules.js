@@ -1,4 +1,5 @@
 import BuildFuzzyRule from './BuildFuzzyRule';
+import IsInvalidLine from '../utils/IsInvalidLine';
 
 var BuildFuzzyRules = function (fuzzyModule, rules, fuzzySets) {
     if (typeof (rules) === 'string') {
@@ -6,7 +7,7 @@ var BuildFuzzyRules = function (fuzzyModule, rules, fuzzySets) {
     }
     for (var i = 0, cnt = rules.length; i < cnt; i++) {
         var rule = rules[i];
-        if (rule.length === 0 || !rule.trim()) {
+        if (IsInvalidLine(rule)) {
             continue;
         }
         fuzzyModule.addRule(BuildFuzzyRule(rule, fuzzySets));

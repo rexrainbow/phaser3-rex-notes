@@ -1,19 +1,22 @@
 import BuildFuzzyVariable from './BuildFuzzyVariable';
 import ParseVariable from './variableparser/ParseVariable.js';
+import IsInvalidLine from '../utils/IsInvalidLine';
 
 var BuildFuzzyVariables = function (fuzzyModule, variables) {
+    // String -> FuzzySets array
     if (typeof (variables) === 'string') {
         var lines = variables.split('\n');
         variables = [];
         for (var i = 0, cnt = lines.length; i < cnt; i++) {
             var line = lines[i];
-            if (line.length === 0 || !line.trim()) {
+            if (IsInvalidLine(line)) {
                 continue;
             }
             variables.push(ParseVariable(line));
         }
     }
 
+    // FuzzySets array -> Variables dictionary
     if (Array.isArray(variables)) {  // Fuzzy sets in array
         variables = BindFuzzySets(variables);
     }
