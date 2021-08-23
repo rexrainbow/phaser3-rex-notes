@@ -14,7 +14,7 @@
 "("                   return '('
 ")"                   return ')'
 "=>"                  return '=>'
-[0-9a-zA-Z_]+[+-]*    return 'NAME'
+[0-9a-zA-Z_.]+[+-]*   return 'NAME'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
 

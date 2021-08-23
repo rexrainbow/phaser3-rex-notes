@@ -1,32 +1,29 @@
 import BuildFuzzyModule from '../../plugins/logic/fuzzy/BuildFuzzyModule.js';
 
-var fuzzyModule = BuildFuzzyModule({
-    variables: `
-        // A
-        A- : 0, 0.25, 0.5
-        A  : 0.25, 0.5, 0.75
-        A+ : 0.5, 0.75, 1
+var config = `
+// A
+A- : 0, 0.25, 0.5
+A  : 0.25, 0.5, 0.75
+A+ : 0.5, 0.75, 1
 
-        // B
-        B- : 0, 0.25, 0.5
-        B  : 0.25, 0.5, 0.75
-        B+ : 0.5, 0.75, 1
+// B
+B- : 0, 0.25, 0.5
+B  : 0.25, 0.5, 0.75
+B+ : 0.5, 0.75, 1
 
-        // C
-        C- : 0, 0.25, 0.5
-        C  : 0.25, 0.5, 0.75
-        C+ : 0.5, 0.75, 1
-    `,
-    rules: `
-        A- AND B- => C-
-        A AND B- => C-
-        A+ AND B- => C
-        A+ AND B => C
-        A+ AND B+ => C+
+// C
+C- : 0, 0.25, 0.5
+C  : 0.25, 0.5, 0.75
+C+ : 0.5, 0.75, 1
 
-        // TODO
-    `
-})
+// Rules
+A- AND B-  => C-
+A AND B-   => C-
+A+ AND B-  => C
+A+ AND B   => C
+A+ AND B+  => C+
+`;
+var fuzzyModule = BuildFuzzyModule(config);
 
 fuzzyModule
     .fuzzify('A', 0.5)

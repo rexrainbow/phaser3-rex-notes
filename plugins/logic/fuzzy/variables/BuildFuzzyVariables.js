@@ -5,19 +5,27 @@ import IsInvalidLine from '../utils/IsInvalidLine';
 var BuildFuzzyVariables = function (fuzzyModule, variables) {
     // String -> FuzzySets array
     if (typeof (variables) === 'string') {
-        var lines = variables.split('\n');
+        variables = variables.split('\n');
+    }
+
+    // FuzzySets array -> Variables dictionary
+    if (Array.isArray(variables)) {  // Fuzzy sets in array
+        var lines = variables;
         variables = [];
         for (var i = 0, cnt = lines.length; i < cnt; i++) {
             var line = lines[i];
+            if (typeof (line) !== 'string') {
+                variables.push(line);
+                continue;
+            }
+
+            // Fuzzy set might be string
             if (IsInvalidLine(line)) {
                 continue;
             }
             variables.push(ParseVariable(line));
         }
-    }
-
-    // FuzzySets array -> Variables dictionary
-    if (Array.isArray(variables)) {  // Fuzzy sets in array
+        // Bind fuzzy set to variables
         variables = BindFuzzySets(variables);
     }
 
