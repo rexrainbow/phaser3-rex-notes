@@ -9,9 +9,13 @@ var BuildFuzzyRule = function (ruleInput, fuzzySets) {
     return rule;
 }
 
-var BuildFuzzyCompositeTerm = function (compositeTermJson, fuzzySets) {
-    var op0 = compositeTermJson[1],
-        op1 = compositeTermJson[2];
+var BuildFuzzyCompositeTerm = function (compositeTerm, fuzzySets) {
+    if (typeof (compositeTerm) === 'string') {
+        return fuzzySets[compositeTerm];
+    }
+
+    var op0 = compositeTerm[1],
+        op1 = compositeTerm[2];
     if (typeof (op0) === 'string') {
         op0 = fuzzySets[op0];
     } else if (op0) {
@@ -24,7 +28,7 @@ var BuildFuzzyCompositeTerm = function (compositeTermJson, fuzzySets) {
     }
 
     var compositeTerm;
-    switch (compositeTermJson[0]) {
+    switch (compositeTerm[0]) {
         case 'and': compositeTerm = new FuzzyAND(op0, op1); break;
         case 'or': compositeTerm = new FuzzyOR(op0, op1); break;
     }
