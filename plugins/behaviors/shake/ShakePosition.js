@@ -57,7 +57,7 @@ class ShakePosition extends TickTask {
 
         if (this.mode === 0) { // Effect mode
             this.scene.game.events.on('poststep', this.update, this);
-            this.scene.game.events.on('step', this.backToOrigin, this);
+            this.scene.game.events.on('prestep', this.backToOrigin, this);
         } else { // Behavior Mode
             this.scene.events.on('preupdate', this.update, this);
         }
@@ -69,7 +69,7 @@ class ShakePosition extends TickTask {
         if (this.scene) { // Scene might be destoryed
             if (this.mode === 0) { // Effect mode
                 this.scene.game.events.off('poststep', this.update, this);
-                this.scene.game.events.off('step', this.backToOrigin, this);
+                this.scene.game.events.off('prestep', this.backToOrigin, this);
             } else { // Behavior Mode
                 this.scene.events.off('preupdate', this.update, this);
             }
