@@ -6,7 +6,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.print;
     }
 
     preload() {}
