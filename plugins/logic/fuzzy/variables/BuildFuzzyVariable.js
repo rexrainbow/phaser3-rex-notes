@@ -1,4 +1,4 @@
-import { FuzzyVariable, } from 'yuka/build/yuka.module';
+import { FuzzyVariable } from 'yuka/build/yuka.module';
 import BuildFuzzySet from './BuildFuzzySet';
 
 var BuildFuzzyVariable = function (setsConfig) {
