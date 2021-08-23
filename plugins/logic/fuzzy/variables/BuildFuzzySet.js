@@ -4,39 +4,26 @@ import {
     TriangularFuzzySet, SingletonFuzzySet, NormalDistFuzzySet,
 } from 'yuka/build/yuka.module';
 
-const LeftPartFuzzySets = {
-    shoulder: LeftShoulderFuzzySet,
-    sCurve: LeftSCurveFuzzySet,
-}
-const RightPartFuzzySets = {
-    shoulder: RightShoulderFuzzySet,
-    sCurve: RightSCurveFuzzySet,
-}
-const MiddlePartFuzzySets = {
+const FuzzySetClasses = {
+    leftShoulder: LeftShoulderFuzzySet,
+    leftSCurve: LeftSCurveFuzzySet,
+
+    rightShoulder: RightShoulderFuzzySet,
+    rightSCurve: RightSCurveFuzzySet,
+
     triangular: TriangularFuzzySet,
     singleton: SingletonFuzzySet,
     normal: NormalDistFuzzySet
 }
 
 var BuildFuzzySet = function (partType, setType, left, middle, right) {
-    var fuzzySetClass;
-    if (partType === 0) {  // Left part
-        if (setType === undefined) {
-            setType = 'shoulder';
-        }
-        fuzzySetClass = LeftPartFuzzySets[setType];
-    } else if (partType === 2) {  // Right part
-        if (setType === undefined) {
-            setType = 'shoulder';
-        }
-        fuzzySetClass = RightPartFuzzySets[setType];
-    } else { // Others
-        if (setType === undefined) {
-            setType = 'triangular';
-        }
-        fuzzySetClass = MiddlePartFuzzySets[setType];
+    if (setType === undefined) {
+        setType = (partType === 0) ? 'leftShoulder' :  // Left part
+            (partType === 2) ? 'rightShoulder' :       // Right part
+                'triangular';                          // Middle part
     }
-    var fuzzySet = new fuzzySetClass(left, middle, right);
+
+    var fuzzySet = new FuzzySetClasses[setType](left, middle, right);
     return fuzzySet;
 }
 
