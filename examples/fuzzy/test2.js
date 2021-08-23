@@ -27,7 +27,7 @@ HP- => HEAL+
 HP and AGG- => HEAL
 HP+ and AGG- => HEAL-
 
-// Aggressive
+// Attack
 HP+ or AGG+ => ATK+
 HP and AGG => ATK
 HP- and AGG- => ATK-
