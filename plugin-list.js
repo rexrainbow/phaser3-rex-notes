@@ -123,6 +123,7 @@ module.exports = {
     'perlinplugin': './plugins/perlin-plugin.js',
     'raycasterplugin': './plugins/raycaster-plugin.js',
     'expressionparserplugin': './plugins/expressionparser-plugin.js',
+    'fuzzyplugin': './plugins/fuzzy-plugin.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',
