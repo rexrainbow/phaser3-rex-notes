@@ -1,5 +1,5 @@
 set testmode=0
-set main=./examples/fuzzy/test.js
+set main=./examples/fuzzy/gui.js
 cd ..
 cd ..
 npm run watch

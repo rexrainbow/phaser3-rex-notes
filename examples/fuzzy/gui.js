@@ -62,28 +62,28 @@ class Demo extends Phaser.Scene {
                 this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK)
             )
             .add(
-                CreateInput(this, 'Health point'),
+                CreateBar(this, 'Health point'),
                 {
                     expand: true,
                     key: 'HP'
                 }
             )
             .add(
-                CreateInput(this, 'Aggressive'),
+                CreateBar(this, 'Aggressive'),
                 {
                     expand: true,
                     key: 'AGG'
                 }
             )
             .add(
-                CreateOutput(this, 'Heal'),
+                CreateBar(this, 'Heal', true),
                 {
                     expand: true,
                     key: 'HEAL'
                 }
             )
             .add(
-                CreateOutput(this, 'Attack'),
+                CreateBar(this, 'Attack', true),
                 {
                     expand: true,
                     key: 'ATK'
@@ -125,7 +125,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateInput = function (scene, text) {
+var CreateBar = function (scene, text, readOnly) {
     return scene.rexUI.add.numberBar({
         // background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
 
@@ -134,7 +134,7 @@ var CreateInput = function (scene, text) {
         slider: {
             track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
             indicator: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-            input: 'click',
+            input: (readOnly) ? 'none' : 'click',
         },
 
         text: scene.add.text(0, 0).setFixedSize(30, 0),
@@ -154,38 +154,6 @@ var CreateInput = function (scene, text) {
         },
 
         value: Math.random(),
-
-        gap: 0.01,
-    })
-}
-
-var CreateOutput = function (scene, text) {
-    return scene.rexUI.add.numberBar({
-        // background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
-
-        icon: scene.add.text(0, 0, text).setFixedSize(120, 0),
-
-        slider: {
-            track: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
-            indicator: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-            input: 'none',
-        },
-
-        text: scene.add.text(0, 0).setFixedSize(30, 0),
-
-        space: {
-            left: 10,
-            right: 10,
-            top: 20,
-            bottom: 20,
-
-            icon: 10,
-            slider: 10,
-        },
-
-        valuechangeCallback: function (newValue, oldValue, numberBar) {
-            numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
-        },
 
         gap: 0.01,
     })
