@@ -288,6 +288,7 @@ nav:
         - Spiral curve: curve-spiral.md
     - Raycaster: raycaster.md
     - Expression parser: expression-parser.md
+    - Fuzzy: fuzzy.md
 - String:
     - Format:
         - Format: format.md

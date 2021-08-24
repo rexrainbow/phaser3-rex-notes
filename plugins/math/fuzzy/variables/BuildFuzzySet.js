@@ -18,7 +18,7 @@ const FuzzySetClasses = {
     normal: NormalDistFuzzySet
 }
 
-var BuildFuzzySet = function (partType, setType, left, middle, right) {
+var BuildFuzzySet = function (left, middle, right, setType, partType) {
     if (setType === undefined) {
         setType = (partType === 0) ? 'leftShoulder' :  // Left part
             (partType === 2) ? 'rightShoulder' :       // Right part

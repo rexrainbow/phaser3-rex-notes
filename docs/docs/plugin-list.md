@@ -59,6 +59,7 @@
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
+1. [Fuzzy](fuzzy.md): A wrap of fuzzy logic.
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Geom/Hexagon](geom-hexagon.md): Hexagon geometry object.
 1. [Geom/Rhombus](geom-rhombus.md): Rhombus shape and methods.
