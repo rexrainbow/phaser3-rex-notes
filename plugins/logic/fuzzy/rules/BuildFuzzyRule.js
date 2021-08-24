@@ -10,29 +10,22 @@ var BuildFuzzyRule = function (ruleInput, fuzzySets) {
 }
 
 var BuildFuzzyCompositeTerm = function (compositeTerm, fuzzySets) {
-    if (typeof (compositeTerm) === 'string') {
+    // compositeTerm: undefined, string, or array
+    if (!compositeTerm) {
+        return null;
+    } else if (typeof (compositeTerm) === 'string') {
         return fuzzySets[compositeTerm];
     }
 
-    var op0 = compositeTerm[1],
-        op1 = compositeTerm[2];
-    if (typeof (op0) === 'string') {
-        op0 = fuzzySets[op0];
-    } else if (op0) {
-        op0 = BuildFuzzyCompositeTerm(op0, fuzzySets);
-    }
-    if (typeof (op1) === 'string') {
-        op1 = fuzzySets[op1];
-    } else if (op1) {
-        op1 = BuildFuzzyCompositeTerm(op1, fuzzySets);
-    }
-
-    var compositeTerm;
+    // Array
+    var op0 = BuildFuzzyCompositeTerm(compositeTerm[1], fuzzySets);
+    var op1 = BuildFuzzyCompositeTerm(compositeTerm[2], fuzzySets);
+    var result;
     switch (compositeTerm[0]) {
-        case 'and': compositeTerm = new FuzzyAND(op0, op1); break;
-        case 'or': compositeTerm = new FuzzyOR(op0, op1); break;
+        case 'and': result = new FuzzyAND(op0, op1); break;
+        case 'or': result = new FuzzyOR(op0, op1); break;
     }
-    return compositeTerm;
+    return result;
 }
 
 export default BuildFuzzyRule;
