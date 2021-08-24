@@ -29,16 +29,16 @@ Lv1,AchC,>= 50,`;
         }
         console.log('---- Run test ----');
         achievements
-            .runTest('1', {
+            .runTest('Lv1', {
                 A: 30
             })
-            .forEachObtainedState('1', dumpState);
+            .forEachObtainedState('Lv1', dumpState);
         console.log('---- Run test ----');
         achievements
-            .runTest('1', {
+            .runTest('Lv1', {
                 A: 100
             })
-            .forEachObtainedState('1', dumpState);
+            .forEachObtainedState('Lv1', dumpState);
     }
 
     update() {}
