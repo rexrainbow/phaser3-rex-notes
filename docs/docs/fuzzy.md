@@ -5,6 +5,10 @@ A wrap of [fuzzy logic](https://github.com/Mugen87/yuka/tree/master/src/fuzzy) (
 - Author of wrap : Rex , Core API : [Michael Herzog](https://github.com/Mugen87)
 - Member of scene, or game object
 
+## Live demos
+
+- [Fuzzy](https://codepen.io/rexrainbow/pen/GRERQGG)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fuzzy)
