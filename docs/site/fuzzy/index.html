@@ -4558,15 +4558,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fuzzify-input" class="md-nav__link">
-    Fuzzify input
+  <a href="#set-input" class="md-nav__link">
+    Set input
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#defuzzify-result" class="md-nav__link">
-    Defuzzify result
+  <a href="#get-result" class="md-nav__link">
+    Get result
   </a>
   
 </li>
@@ -5862,15 +5862,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fuzzify-input" class="md-nav__link">
-    Fuzzify input
+  <a href="#set-input" class="md-nav__link">
+    Set input
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#defuzzify-result" class="md-nav__link">
-    Defuzzify result
+  <a href="#get-result" class="md-nav__link">
+    Get result
   </a>
   
 </li>
@@ -5983,8 +5983,11 @@
 <li>A multiple lines string contains<ul>
 <li><code>FuzzySetName : left, middle, right, setType</code> : Declare a fuzzy set<ul>
 <li><code>FuzzySetName</code> : Fuzzy set name in one of these format<ul>
-<li>VariableName with postfix <code>'+'</code>, or <code>'-'</code>. For example, <code>HP-</code>, <code>HP</code>, <code>HP+</code>, <code>HP--</code>, <code>HP++</code>, the variable name is <code>HP</code>.</li>
-<li><code>variableName.setName</code>. For example, <code>DIST.near</code>, <code>DIST.middle</code>, <code>DIST.far</code>, the variable name is <code>DIST</code>.</li>
+<li>Variable name with postfix <code>'+'</code>, or <code>'-'</code>. For example, <code>HP-</code>, <code>HP</code>, <code>HP+</code>, <code>HP--</code>, <code>HP++</code>, the variable name is <code>HP</code>.</li>
+<li><code>variableName.setName</code>. For example, <code>DIST.near</code>, <code>DIST.middle</code>, <code>DIST.far</code>, the variable name is <code>DIST</code>.<ul>
+<li>Variable name and set name are composed of number(0-9) or English characters (A-Za-z).</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>left</code>, <code>middle</code>, <code>right</code> : Left, middle, right point of fuzzy set, in numbers.<ul>
@@ -6043,7 +6046,7 @@
 <li><a href="https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L131">Declare a fuzzy set</a></li>
 <li><a href="https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L157">Declare a fuzzy rule</a></li>
 </ul>
-<h3 id="fuzzify-input">Fuzzify input<a class="headerlink" href="#fuzzify-input" title="Permanent link">&para;</a></h3>
+<h3 id="set-input">Set input<a class="headerlink" href="#set-input" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">fuzzify</span><span class="p">(</span><span class="nx">variableName</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 
@@ -6051,7 +6054,7 @@
 <li><code>variableName</code> : A antecedent variable name string.</li>
 <li><code>value</code> : A number.</li>
 </ul>
-<h3 id="defuzzify-result">Defuzzify result<a class="headerlink" href="#defuzzify-result" title="Permanent link">&para;</a></h3>
+<h3 id="get-result">Get result<a class="headerlink" href="#get-result" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">defuzzify</span><span class="p">(</span><span class="nx">variableName</span><span class="p">);</span>
 </code></pre></div>
 

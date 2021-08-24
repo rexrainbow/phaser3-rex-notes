@@ -93,8 +93,9 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
     - A multiple lines string contains
         - `FuzzySetName : left, middle, right, setType` : Declare a fuzzy set
             - `FuzzySetName` : Fuzzy set name in one of these format
-                - VariableName with postfix `'+'`, or `'-'`. For example, `HP-`, `HP`, `HP+`, `HP--`, `HP++`, the variable name is `HP`.
+                - Variable name with postfix `'+'`, or `'-'`. For example, `HP-`, `HP`, `HP+`, `HP--`, `HP++`, the variable name is `HP`.
                 - `variableName.setName`. For example, `DIST.near`, `DIST.middle`, `DIST.far`, the variable name is `DIST`.
+                    - Variable name and set name are composed of number(0-9) or English characters (A-Za-z).
             - `left`, `middle`, `right` : Left, middle, right point of fuzzy set, in numbers.
                 - `left`, `right` : Two numbers for left and right point, middle point is the average of (left + right).
             - `setType` : 
@@ -134,7 +135,7 @@ Fuzzy plugin will parse string input into JSON object then invoke fuzzy api inte
 - [Declare a fuzzy set](https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L131)
 - [Declare a fuzzy rule](https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L157)
 
-### Fuzzify input
+### Set input
 
 ```javascript
 fuzzyModule.fuzzify(variableName, value);
@@ -143,7 +144,7 @@ fuzzyModule.fuzzify(variableName, value);
 - `variableName` : A antecedent variable name string.
 - `value` : A number.
 
-### Defuzzify result
+### Get result
 
 ```javascript
 var result = fuzzyModule.defuzzify(variableName);
