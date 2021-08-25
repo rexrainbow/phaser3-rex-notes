@@ -5981,7 +5981,7 @@
 <ul>
 <li><code>config</code> can be a multiple lines string, or a plain object<ul>
 <li>A multiple lines string contains<ul>
-<li><code>FuzzySetName : left, middle, right, setType</code> : Declare a fuzzy set<ul>
+<li><code>FuzzySetName : left, middle, right, setType</code> : A line with ':', declare a fuzzy set.<ul>
 <li><code>FuzzySetName</code> : Fuzzy set name in one of these format<ul>
 <li>Variable name with postfix <code>'+'</code>, or <code>'-'</code>. For example, <code>HP-</code>, <code>HP</code>, <code>HP+</code>, <code>HP--</code>, <code>HP++</code>, the variable name is <code>HP</code>.</li>
 <li><code>variableName.setName</code>. For example, <code>DIST.near</code>, <code>DIST.middle</code>, <code>DIST.far</code>, the variable name is <code>DIST</code>.<ul>
@@ -6014,7 +6014,7 @@
 </li>
 </ul>
 </li>
-<li><code>FuzzySetNameA and FuzzySetNameB =&gt; FuzzySetNameT</code> : Declare a fuzzy rule.</li>
+<li><code>FuzzySetNameA and FuzzySetNameB =&gt; FuzzySetNameT</code> : A line with '=&gt;', declare a fuzzy rule.</li>
 <li><code>// ...</code> : Comment lines</li>
 </ul>
 </li>
@@ -6051,7 +6051,7 @@
 </code></pre></div>
 
 <ul>
-<li><code>variableName</code> : A antecedent variable name string.</li>
+<li><code>variableName</code> : An antecedent variable name string.</li>
 <li><code>value</code> : A number.</li>
 </ul>
 <h3 id="get-result">Get result<a class="headerlink" href="#get-result" title="Permanent link">&para;</a></h3>

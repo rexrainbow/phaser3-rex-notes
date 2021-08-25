@@ -91,7 +91,7 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
 
 - `config` can be a multiple lines string, or a plain object
     - A multiple lines string contains
-        - `FuzzySetName : left, middle, right, setType` : Declare a fuzzy set
+        - `FuzzySetName : left, middle, right, setType` : A line with ':', declare a fuzzy set.
             - `FuzzySetName` : Fuzzy set name in one of these format
                 - Variable name with postfix `'+'`, or `'-'`. For example, `HP-`, `HP`, `HP+`, `HP--`, `HP++`, the variable name is `HP`.
                 - `variableName.setName`. For example, `DIST.near`, `DIST.middle`, `DIST.far`, the variable name is `DIST`.
@@ -106,7 +106,7 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
                         - Default value is `rightShoulder` for last fuzzy set of a variable.
                     - Middle parts : `triangular`, `singleton`, `normal`. 
                         - Default value is `triangular` for other fuzzy sets of a variable.
-        - `FuzzySetNameA and FuzzySetNameB => FuzzySetNameT` : Declare a fuzzy rule.
+        - `FuzzySetNameA and FuzzySetNameB => FuzzySetNameT` : A line with '=>', declare a fuzzy rule.
         - `// ... ` : Comment lines
     - A plain object
         ```javascript
@@ -141,7 +141,7 @@ Fuzzy plugin will parse string input into JSON object then invoke fuzzy api inte
 fuzzyModule.fuzzify(variableName, value);
 ```
 
-- `variableName` : A antecedent variable name string.
+- `variableName` : An antecedent variable name string.
 - `value` : A number.
 
 ### Get result

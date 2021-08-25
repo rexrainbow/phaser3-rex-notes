@@ -124,6 +124,7 @@ module.exports = {
     'raycasterplugin': './plugins/raycaster-plugin.js',
     'expressionparserplugin': './plugins/expressionparser-plugin.js',
     'fuzzyplugin': './plugins/fuzzy-plugin.js',
+    'fuzzy': './plugins/fuzzy.js',
     // geom
     'rhombusplugin': './plugins/rhombus-plugin.js',
     'hexagonplugin': './plugins/hexagon-plugin.js',
