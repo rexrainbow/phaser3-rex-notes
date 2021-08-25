@@ -12,10 +12,12 @@
 "=>"                  return '=>'
 "or"                  return "or"
 "and"                 return "and"
+"very"                return "very"
+"fairly"              return "fairly"
 "OR"                  return "or"
 "AND"                 return "and"
-"||"                  return "or"
-"&&"                  return "and"
+"VERY"                return "very"
+"FAIRLY"              return "fairly"
 "("                   return '('
 ")"                   return ')'
 // Vairable
@@ -30,8 +32,10 @@
 /* operator associations and precedence */
 
 %left '=>'
-%left 'or'
+%left 'fairly'
+%left 'very'
 %left 'and'
+%left 'or'
 %start expressions
 
 %% /* language grammar */
@@ -83,15 +87,50 @@ ruleExp
         {
             $$ = $2
         }
-    | ruleExp 'or' ruleExp
+    | 'fairly' ruleExp
         {
-            $$ = ['or', $1, $3];
+            $$ = ['fairly', $1];
+        }        
+    | 'very' ruleExp
+        {
+            $$ = ['very', $1];
         }
     | ruleExp 'and' ruleExp
         {
-            $$ = ['and', $1, $3];
+            $$ = ['and'];
+            if (Array.isArray($1) && ($1[0] === 'and')) {
+                for(var i=1, cnt=$1.length; i<cnt; i++) {
+                    $$.push($1[i]);
+                }
+            } else {
+                $$.push($1);
+            }
+            if (Array.isArray($3) && ($3[0] === 'and')) {
+                for(var i=1, cnt=$3.length; i<cnt; i++) {
+                    $$.push($3[i]);
+                }
+            } else {
+                $$.push($3);
+            }
         }
-
+    | ruleExp 'or' ruleExp
+        {
+            $$ = ['or'];
+            if (Array.isArray($1) && ($1[0] === 'or')) {
+                for(var i=1, cnt=$1.length; i<cnt; i++) {
+                    $$.push($1[i]);
+                }
+            } else {
+                $$.push($1);
+            }
+            if (Array.isArray($3) && ($3[0] === 'or')) {
+                for(var i=1, cnt=$3.length; i<cnt; i++) {
+                    $$.push($3[i]);
+                }
+            } else {
+                $$.push($3);
+            }
+        }
     | ruleExp '=>' NAME
         {
             $$ = ['=>', $1, $3];
