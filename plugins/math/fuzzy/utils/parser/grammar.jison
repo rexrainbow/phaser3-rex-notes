@@ -10,14 +10,14 @@
 ","                   return ","
 // Rule
 "=>"                  return '=>'
-"or"                  return "or"
-"and"                 return "and"
-"very"                return "very"
-"fairly"              return "fairly"
-"OR"                  return "or"
-"AND"                 return "and"
-"VERY"                return "very"
-"FAIRLY"              return "fairly"
+"or"                  return 'OP2'
+"and"                 return 'OP2'
+"OR"                  return 'OP2'
+"AND"                 return 'OP2'
+"very"                return 'OP1'
+"fairly"              return 'OP1'
+"VERY"                return 'OP1'
+"FAIRLY"              return 'OP1'
 "("                   return '('
 ")"                   return ')'
 // Vairable
@@ -32,10 +32,8 @@
 /* operator associations and precedence */
 
 %left '=>'
-%left 'fairly'
-%left 'very'
-%left 'and'
-%left 'or'
+%left 'OP1'
+%left 'OP2'
 %start expressions
 
 %% /* language grammar */
@@ -87,49 +85,31 @@ ruleExp
         {
             $$ = $2
         }
-    | 'fairly' ruleExp
+    | OP1 ruleExp
         {
-            $$ = ['fairly', $1];
+            var operator = $1.toLowerCase();
+            $$ = [operator, $2];
         }        
-    | 'very' ruleExp
+    | ruleExp OP2 ruleExp
         {
-            $$ = ['very', $1];
-        }
-    | ruleExp 'and' ruleExp
-        {
-            $$ = ['and'];
-            if (Array.isArray($1) && ($1[0] === 'and')) {
-                for(var i=1, cnt=$1.length; i<cnt; i++) {
-                    $$.push($1[i]);
+            var operator = $2.toLowerCase();
+            var op1 = $1, op2 = $3;
+            var result = [operator];
+            if (Array.isArray(op1) && (op1[0] === operator)) {
+                for(var i=1, cnt=op1.length; i<cnt; i++) {
+                    result.push(op1[i]);
                 }
             } else {
-                $$.push($1);
+                result.push(op1);
             }
-            if (Array.isArray($3) && ($3[0] === 'and')) {
-                for(var i=1, cnt=$3.length; i<cnt; i++) {
-                    $$.push($3[i]);
+            if (Array.isArray(op2) && (op2[0] === operator)) {
+                for(var i=1, cnt=op2.length; i<cnt; i++) {
+                    result.push(op2[i]);
                 }
             } else {
-                $$.push($3);
+                result.push(op2);
             }
-        }
-    | ruleExp 'or' ruleExp
-        {
-            $$ = ['or'];
-            if (Array.isArray($1) && ($1[0] === 'or')) {
-                for(var i=1, cnt=$1.length; i<cnt; i++) {
-                    $$.push($1[i]);
-                }
-            } else {
-                $$.push($1);
-            }
-            if (Array.isArray($3) && ($3[0] === 'or')) {
-                for(var i=1, cnt=$3.length; i<cnt; i++) {
-                    $$.push($3[i]);
-                }
-            } else {
-                $$.push($3);
-            }
+            $$ = result;
         }
     | ruleExp '=>' NAME
         {

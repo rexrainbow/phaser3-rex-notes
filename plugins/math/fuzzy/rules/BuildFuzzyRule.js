@@ -27,8 +27,8 @@ var BuildFuzzyCompositeTerm = function (terms, fuzzySets) {
         operations.push(BuildFuzzyCompositeTerm(terms[i], fuzzySets));
     }
     var operatorClass = OperatorClasses[terms[0]];
-    var rule = new operatorClass(...operations);
-    return rule;
+    var operator = new operatorClass(...operations);
+    return operator;
 }
 
 const OperatorClasses = {
