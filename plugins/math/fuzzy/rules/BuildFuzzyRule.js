@@ -1,10 +1,10 @@
 import { FuzzyRule } from '../../../utils/yuka/fuzzy/FuzzyRule.js';
 import { FuzzyAND } from '../../../utils/yuka/fuzzy/operators/FuzzyAND.js';
 import { FuzzyOR } from '../../../utils/yuka/fuzzy/operators/FuzzyOR.js';
-import ParseRule from './ruleparser/ParseRule';
+import Parse from '../utils/parser/Parse';
 
 var BuildFuzzyRule = function (ruleInput, fuzzySets) {
-    var ruleJson = ParseRule(ruleInput);
+    var ruleJson = Parse(ruleInput);
     var antecedent = BuildFuzzyCompositeTerm(ruleJson[1], fuzzySets);
     var consequence = fuzzySets[ruleJson[2]];
     var rule = new FuzzyRule(antecedent, consequence);

@@ -1,5 +1,5 @@
 import BuildFuzzyVariable from './BuildFuzzyVariable';
-import ParseVariable from './variableparser/ParseVariable.js';
+import Parse from '../utils/parser/Parse';
 import IsInvalidLine from '../utils/IsInvalidLine';
 
 var BuildFuzzyVariables = function (fuzzyModule, variables) {
@@ -23,7 +23,7 @@ var BuildFuzzyVariables = function (fuzzyModule, variables) {
             if (IsInvalidLine(line)) {
                 continue;
             }
-            variables.push(ParseVariable(line));
+            variables.push(Parse(line));
         }
         // Bind fuzzy set to variables
         variables = BindFuzzySets(variables);
