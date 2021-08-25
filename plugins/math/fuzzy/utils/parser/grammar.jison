@@ -10,14 +10,14 @@
 ","                   return ","
 // Rule
 "=>"                  return '=>'
-"or"                  return 'OP2'
-"and"                 return 'OP2'
-"OR"                  return 'OP2'
-"AND"                 return 'OP2'
-"very"                return 'OP1'
-"fairly"              return 'OP1'
-"VERY"                return 'OP1'
-"FAIRLY"              return 'OP1'
+"or"                  return 'OR'
+"OR"                  return 'OR'
+"and"                 return 'AND'
+"AND"                 return 'AND'
+"very"                return 'VERY'
+"VERY"                return 'VERY'
+"fairly"              return 'FAIRLY'
+"FAIRLY"              return 'FAIRLY'
 "("                   return '('
 ")"                   return ')'
 // Vairable
@@ -29,11 +29,39 @@
 
 /lex
 
+%{
+    function GetOperator1(operator, op1) {
+        operator = operator.toLowerCase();
+        return [operator, op1];
+    }
+
+    function GetOperator2(operator, op1, op2) {
+        operator = operator.toLowerCase();
+        var result = [operator];
+        if (Array.isArray(op1) && (op1[0] === operator)) {
+            for(var i=1, cnt=op1.length; i<cnt; i++) {
+                result.push(op1[i]);
+            }
+        } else {
+            result.push(op1);
+        }
+        if (Array.isArray(op2) && (op2[0] === operator)) {
+            for(var i=1, cnt=op2.length; i<cnt; i++) {
+                result.push(op2[i]);
+            }
+        } else {
+            result.push(op2);
+        }
+        return result;
+    }
+%}
+
 /* operator associations and precedence */
 
 %left '=>'
-%left 'OP1'
-%left 'OP2'
+%left 'VERY' 'FAIRLY'
+%left 'AND'
+%left 'OR'
 %start expressions
 
 %% /* language grammar */
@@ -81,36 +109,26 @@ varExp
     ;
 
 ruleExp
-    : '(' ruleExp ')'
+    : VERY ruleExp
+        {            
+            $$ = GetOperator1($1, $2)
+        }   
+    | FAIRLY ruleExp
+        {            
+            $$ = GetOperator1($1, $2)
+        }      
+    | ruleExp AND ruleExp
+        {
+            $$ = GetOperator2($2, $1, $3);
+        }
+    | ruleExp OR ruleExp
+        {
+            $$ = GetOperator2($2, $1, $3);
+        }     
+    | '(' ruleExp ')'
         {
             $$ = $2
-        }
-    | OP1 ruleExp
-        {
-            var operator = $1.toLowerCase();
-            $$ = [operator, $2];
-        }        
-    | ruleExp OP2 ruleExp
-        {
-            var operator = $2.toLowerCase();
-            var op1 = $1, op2 = $3;
-            var result = [operator];
-            if (Array.isArray(op1) && (op1[0] === operator)) {
-                for(var i=1, cnt=op1.length; i<cnt; i++) {
-                    result.push(op1[i]);
-                }
-            } else {
-                result.push(op1);
-            }
-            if (Array.isArray(op2) && (op2[0] === operator)) {
-                for(var i=1, cnt=op2.length; i<cnt; i++) {
-                    result.push(op2[i]);
-                }
-            } else {
-                result.push(op2);
-            }
-            $$ = result;
-        }
+        }   
     | ruleExp '=>' NAME
         {
             $$ = ['=>', $1, $3];
