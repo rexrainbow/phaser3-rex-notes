@@ -85,7 +85,10 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
     // top: '0%+0',
     // bottom: '0%+0',
     // centerY: '0%+0',
-    // y: '0%+0'
+    // y: '0%+0',
+
+    // onUpdateViewportCallback: function(viewport, gameObject, anchor) {}
+    // onUpdateViewportCallbackScope: undefined,
 });
 ```
 
@@ -104,6 +107,19 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 }
 ```
 
+- `onUpdateViewportCallback`, `onUpdateViewportCallback` : Callback invoked when viewport changed (anchor)
+    ```javascript
+    fucntion(viewport, gameObject, anchor) {
+        // Can change properties of viewport here
+        // var centerX = viewport.centerX,
+        //     centerY = viewport.centerY;
+        // viewport.width *= 0.8;
+        // viewport.height *= 0.9;
+        // viewport.centerX = centerX;
+        // viewport.centerY = centerY;
+    }
+    ```
+
 ### Reset config
 
 ```javascript
@@ -116,7 +132,10 @@ anchor.resetFromJSON({
     // top: '0%+0',
     // bottom: '0%+0',
     // centerY: '0%+0',
-    // y: '0%+0'
+    // y: '0%+0',
+
+    // onUpdateViewportCallback: function(viewport, gameObject, anchor) {}
+    // onUpdateViewportCallbackScope: undefined,
 })
 ```
 
@@ -125,3 +144,28 @@ anchor.resetFromJSON({
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`
+
+### Set OnUpdateViewport callbacl
+
+```javascript
+anchor.setUpdateViewportCallback(callback, scope);
+```
+
+- `callback` : 
+    ```javascript
+    fucntion(viewport, gameObject, anchor) {
+        // Can change properties of viewport here
+        // var centerX = viewport.centerX,
+        //     centerY = viewport.centerY;
+        // viewport.width *= 0.8;
+        // viewport.height *= 0.9;
+        // viewport.centerX = centerX;
+        // viewport.centerY = centerY;
+    }
+    ```
+
+### Manual anchor
+
+```javascript
+anchor.anchor();
+```

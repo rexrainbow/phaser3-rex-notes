@@ -1,15 +1,14 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 
-const Rectangle = Phaser.Geom.Rectangle;
-
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter
         // this.parent = gameObject;
 
-        this.viewport = new Rectangle();
+        this.viewport = undefined;
+
         this.resetFromJSON(config);
         this.boot();
     }
@@ -85,6 +84,8 @@ class Anchor extends ComponentBase {
         this.scene.scale.off('resize', this.anchor, this);
 
         super.shutdown(fromScene);
+
+        this.viewport = undefined;
     }
 
     setAlign(x, y) {
@@ -108,6 +109,7 @@ class Anchor extends ComponentBase {
     setUpdateViewportCallback(callback, scope) {
         this.onUpdateViewportCallback = callback;
         this.onUpdateViewportCallbackScope = scope;
+        return this;
     }
 
     anchor() {
@@ -142,7 +144,10 @@ class Anchor extends ComponentBase {
     }
 
     updateViewport() {
-        this.viewport = GetViewport(this.scene, this.viewport);
+        this.viewport = GetViewport(
+            this.scene,
+            (this.viewport) ? this.viewport : true
+        );
 
         var callback = this.onUpdateViewportCallback,
             scope = this.onUpdateViewportCallbackScope;

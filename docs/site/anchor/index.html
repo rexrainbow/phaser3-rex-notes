@@ -2185,6 +2185,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-onupdateviewport-callbacl" class="md-nav__link">
+    Set OnUpdateViewport callbacl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-anchor" class="md-nav__link">
+    Manual anchor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5863,6 +5877,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-onupdateviewport-callbacl" class="md-nav__link">
+    Set OnUpdateViewport callbacl
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-anchor" class="md-nav__link">
+    Manual anchor
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5963,7 +5991,10 @@
     <span class="c1">// top: &#39;0%+0&#39;,</span>
     <span class="c1">// bottom: &#39;0%+0&#39;,</span>
     <span class="c1">// centerY: &#39;0%+0&#39;,</span>
-    <span class="c1">// y: &#39;0%+0&#39;</span>
+    <span class="c1">// y: &#39;0%+0&#39;,</span>
+
+    <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {}</span>
+    <span class="c1">// onUpdateViewportCallbackScope: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -5985,6 +6016,19 @@
 <span class="p">}</span>
 </code></pre></div>
 
+<ul>
+<li><code>onUpdateViewportCallback</code>, <code>onUpdateViewportCallback</code> : Callback invoked when viewport changed (anchor)
+    <div class="codehilite"><pre><span></span><code><span class="nx">fucntion</span><span class="p">(</span><span class="nx">viewport</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Can change properties of viewport here</span>
+    <span class="c1">// var centerX = viewport.centerX,</span>
+    <span class="c1">//     centerY = viewport.centerY;</span>
+    <span class="c1">// viewport.width *= 0.8;</span>
+    <span class="c1">// viewport.height *= 0.9;</span>
+    <span class="c1">// viewport.centerX = centerX;</span>
+    <span class="c1">// viewport.centerY = centerY;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
 <h3 id="reset-config">Reset config<a class="headerlink" href="#reset-config" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">({</span>
     <span class="c1">// left: &#39;0%+0&#39;,</span>
@@ -5995,7 +6039,10 @@
     <span class="c1">// top: &#39;0%+0&#39;,</span>
     <span class="c1">// bottom: &#39;0%+0&#39;,</span>
     <span class="c1">// centerY: &#39;0%+0&#39;,</span>
-    <span class="c1">// y: &#39;0%+0&#39;</span>
+    <span class="c1">// y: &#39;0%+0&#39;,</span>
+
+    <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {}</span>
+    <span class="c1">// onUpdateViewportCallbackScope: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 
@@ -6010,6 +6057,26 @@
 </ul>
 </li>
 </ul>
+<h3 id="set-onupdateviewport-callbacl">Set OnUpdateViewport callbacl<a class="headerlink" href="#set-onupdateviewport-callbacl" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">setUpdateViewportCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+
+<ul>
+<li><code>callback</code> : 
+    <div class="codehilite"><pre><span></span><code><span class="nx">fucntion</span><span class="p">(</span><span class="nx">viewport</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Can change properties of viewport here</span>
+    <span class="c1">// var centerX = viewport.centerX,</span>
+    <span class="c1">//     centerY = viewport.centerY;</span>
+    <span class="c1">// viewport.width *= 0.8;</span>
+    <span class="c1">// viewport.height *= 0.9;</span>
+    <span class="c1">// viewport.centerX = centerX;</span>
+    <span class="c1">// viewport.centerY = centerY;</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h3 id="manual-anchor">Manual anchor<a class="headerlink" href="#manual-anchor" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">anchor</span><span class="p">();</span>
+</code></pre></div>
                 
                   
                 
