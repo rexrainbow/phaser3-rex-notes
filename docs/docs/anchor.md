@@ -119,6 +119,7 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
         // viewport.centerY = centerY;
     }
     ```
+    - `viewport`： A [rectangle object](geom-rectangle.md)
 
 ### Reset config
 
@@ -163,6 +164,7 @@ anchor.setUpdateViewportCallback(callback, scope);
         // viewport.centerY = centerY;
     }
     ```
+    - `viewport`： A [rectangle object](geom-rectangle.md)
 
 ### Manual anchor
 
