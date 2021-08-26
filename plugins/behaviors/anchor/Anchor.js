@@ -1,12 +1,15 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
 
+const Rectangle = Phaser.Geom.Rectangle;
+
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
         super(gameObject, { eventEmitter: false });
         // No event emitter
         // this.parent = gameObject;
 
+        this.viewport = new Rectangle();
         this.resetFromJSON(config);
         this.boot();
     }
@@ -58,6 +61,13 @@ class Anchor extends ComponentBase {
         this.setAlign(alignX, alignY);
         this.setPercentage(percentageX, percentageY);
         this.setOffset(offsetX, offsetY);
+
+        var onUpdateViewportCallback = o.onUpdateViewportCallback;
+        var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
+        if (onUpdateViewportCallback !== undefined) {
+            this.setUpdateViewportCallback(onUpdateViewportCallback, onUpdateViewportCallbackScope);
+        }
+
         return this;
     }
 
@@ -95,8 +105,13 @@ class Anchor extends ComponentBase {
         return this;
     }
 
+    setUpdateViewportCallback(callback, scope) {
+        this.onUpdateViewportCallback = callback;
+        this.onUpdateViewportCallbackScope = scope;
+    }
+
     anchor() {
-        this.viewport = GetViewport(this.scene, true);
+        this.updateViewport();
         this.updatePosition();
         return this;
     }
@@ -124,6 +139,20 @@ class Anchor extends ComponentBase {
 
     get anchorY() {
         return this.viewport.y + (this.viewport.height * this.percentageY) + this.offsetY;
+    }
+
+    updateViewport() {
+        this.viewport = GetViewport(this.scene, this.viewport);
+
+        var callback = this.onUpdateViewportCallback,
+            scope = this.onUpdateViewportCallbackScope;
+        if (callback) {
+            if (scope) {
+                callback.call(scope, this.viewport, this.parent, this);
+            } else {
+                callback(this.viewport, this.parent, this);
+            }
+        }
     }
 }
 
