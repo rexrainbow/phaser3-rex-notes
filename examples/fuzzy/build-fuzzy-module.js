@@ -35,14 +35,22 @@ HP- and AGG-  => ATK-
 
 var fuzzyModule = BuildFuzzyModule(fuzzyModuleConfig);
 
-fuzzyModule
-    .fuzzify('HP', 0.35)
-    .fuzzify('AGG', 0.5)
+var result;
 
-console.log(`HEAL=${fuzzyModule.defuzzify('HEAL')}, ATK=${fuzzyModule.defuzzify('ATK')}`);
+result = fuzzyModule
+    .fuzzify({
+        HP: 0.35,
+        AGG: 0.5
+    })
+    .defuzzify(['HEAL', 'ATK']);
 
-fuzzyModule
-    .fuzzify('HP', 0.35)
-    .fuzzify('AGG', 0.75)
+console.log(`HEAL=${result.HEAL}, ATK=${result.ATK}`);
 
-console.log(`HEAL=${fuzzyModule.defuzzify('HEAL')}, ATK=${fuzzyModule.defuzzify('ATK')}`);
+result = fuzzyModule
+    .fuzzify({
+        HP: 0.35,
+        AGG: 0.75
+    })
+    .defuzzify(['HEAL', 'ATK']);
+
+console.log(`HEAL=${result.HEAL}, ATK=${result.ATK}`);

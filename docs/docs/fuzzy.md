@@ -144,6 +144,14 @@ fuzzyModule.fuzzify(variableName, value);
 - `variableName` : An antecedent variable name string.
 - `value` : A number.
 
+or
+
+```javascript
+fuzzyModule.fuzzify({
+    varName: value,
+});
+```
+
 ### Get result
 
 ```javascript
@@ -151,3 +159,20 @@ var result = fuzzyModule.defuzzify(variableName);
 ```
 
 - `variableName` : A consequence variable name string.
+
+or
+
+```javascript
+var result = fuzzyModule.defuzzify([varName0, varName1, ...]);
+```
+
+- `result` : `{varName0: value0, varName1, value1, ...}`
+
+or
+
+```javascript
+var result = fuzzyModule.defuzzify();
+```
+
+- `result` : `{varName0: value0, varName1, value1, ...}`
+    - Grab variable names from all consequence of rules.

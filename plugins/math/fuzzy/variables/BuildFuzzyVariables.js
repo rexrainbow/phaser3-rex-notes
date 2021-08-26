@@ -1,6 +1,7 @@
-import BuildFuzzyVariable from './BuildFuzzyVariable';
-import Parse from '../utils/parser/Parse';
-import IsInvalidLine from '../utils/IsInvalidLine';
+import BuildFuzzyVariable from './BuildFuzzyVariable.js';
+import Parse from '../utils/parser/Parse.js';
+import IsInvalidLine from '../utils/IsInvalidLine.js';
+import GetVariableName from '../utils/GetVariableName.js'
 
 var BuildFuzzyVariables = function (fuzzyModule, variables) {
     // String -> FuzzySets array
@@ -46,14 +47,6 @@ var BindFuzzySets = function (fuzzySets) {
         variables[variableName].push(fuzzySet);
     }
     return variables;
-}
-
-var GetVariableName = function (setName) {
-    if (setName.indexOf('.') !== -1) {
-        return setName.split('.')[0];
-    } else {
-        return setName.replace(/[+-]*/g, '')
-    }
 }
 
 export default BuildFuzzyVariables;

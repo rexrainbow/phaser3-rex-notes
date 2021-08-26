@@ -92,18 +92,17 @@ class Demo extends Phaser.Scene {
             .layout()
 
         var UpdateFuzzyModule = function () {
-            // Get input
-            var healthPoint = ui.getElement('HP').value;
-            var aggressive = ui.getElement('AGG').value;
-
             // Compute
-            fuzzyModule
-                .fuzzify('HP', healthPoint)
-                .fuzzify('AGG', aggressive)
+            var result = fuzzyModule
+                .fuzzify({
+                    HP: ui.getElement('HP').value,
+                    AGG: ui.getElement('AGG').value
+                })
+                .defuzzify();
 
             // Get output
-            var heal = fuzzyModule.defuzzify('HEAL');
-            var attack = fuzzyModule.defuzzify('ATK');
+            var heal = result.HEAL;
+            var attack = result.ATK;
 
             // Display output
             ui.getElement('HEAL').setValue(heal);

@@ -1,4 +1,4 @@
-import { FuzzyModule } from '../../utils/yuka/fuzzy/FuzzyModule.js';
+import { FuzzyModule } from './FuzzyModule.js';
 import BuildFuzzyVariables from './variables/BuildFuzzyVariables.js';
 import GetFuzzySets from './variables/GetFuzzySets.js';
 import BuildFuzzyRules from './rules/BuildFuzzyRules.js';

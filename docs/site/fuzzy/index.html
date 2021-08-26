@@ -6054,12 +6054,35 @@
 <li><code>variableName</code> : An antecedent variable name string.</li>
 <li><code>value</code> : A number.</li>
 </ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">fuzzify</span><span class="p">({</span>
+    <span class="nx">varName</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+
 <h3 id="get-result">Get result<a class="headerlink" href="#get-result" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">defuzzify</span><span class="p">(</span><span class="nx">variableName</span><span class="p">);</span>
 </code></pre></div>
 
 <ul>
 <li><code>variableName</code> : A consequence variable name string.</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">defuzzify</span><span class="p">([</span><span class="nx">varName0</span><span class="p">,</span> <span class="nx">varName1</span><span class="p">,</span> <span class="p">...]);</span>
+</code></pre></div>
+
+<ul>
+<li><code>result</code> : <code>{varName0: value0, varName1, value1, ...}</code></li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">defuzzify</span><span class="p">();</span>
+</code></pre></div>
+
+<ul>
+<li><code>result</code> : <code>{varName0: value0, varName1, value1, ...}</code><ul>
+<li>Grab variable names from all consequence of rules.</li>
+</ul>
+</li>
 </ul>
                 
                   

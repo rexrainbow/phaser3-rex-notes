@@ -1,4 +1,4 @@
-import { FuzzyModule } from '../../utils/yuka/fuzzy/FuzzyModule.js';
+import { FuzzyModule } from './FuzzyModule';
 export default BuildFuzzyModule;
 
 declare namespace BuildFuzzyModule {
