@@ -23,19 +23,19 @@ class Demo extends Phaser.Scene {
             left: 'left+10',
             top: 'top+10',
 
-            onUpdateViewportCallback: function (viewPort, gameObject, anchor) {
-                var centerX = viewPort.centerX,
-                    centerY = viewPort.centerY;
-                viewPort.width *= 0.8;
-                viewPort.height *= 0.9;
-                viewPort.centerX = centerX;
-                viewPort.centerY = centerY;
+            onUpdateViewportCallback: function (viewport, gameObject, anchor) {
+                var centerX = viewport.centerX,
+                    centerY = viewport.centerY;
+                viewport.width *= 0.8;
+                viewport.height *= 0.9;
+                viewport.centerX = centerX;
+                viewport.centerY = centerY;
 
                 // For debug
                 graphics
                     .clear()
                     .lineStyle(2, 0xff0000)
-                    .strokeRectShape(viewPort)
+                    .strokeRectShape(viewport)
             }
         });
 
