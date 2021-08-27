@@ -1,8 +1,8 @@
-import { FuzzyRule } from '../../../utils/yuka/fuzzy/FuzzyRule.js';
-import { FuzzyAND } from '../../../utils/yuka/fuzzy/operators/FuzzyAND.js';
-import { FuzzyOR } from '../../../utils/yuka/fuzzy/operators/FuzzyOR.js';
-import { FuzzyFAIRLY } from '../../../utils/yuka/fuzzy/operators/FuzzyFAIRLY.js'
-import { FuzzyVERY } from '../../../utils/yuka/fuzzy/operators/FuzzyVERY.js'
+import  FuzzyRule  from './FuzzyRule.js';
+import  FuzzyAND  from './operators/FuzzyAND.js';
+import  FuzzyOR  from './operators/FuzzyOR.js';
+import  FuzzyFAIRLY  from './operators/FuzzyFAIRLY.js'
+import  FuzzyVERY  from './operators/FuzzyVERY.js'
 import Parse from '../utils/parser/Parse';
 
 var BuildFuzzyRule = function (ruleInput, fuzzySets) {

@@ -1,6 +1,6 @@
-import { FuzzyModule } from './FuzzyModule.js';
+import FuzzyModule from './FuzzyModule.js';
 import BuildFuzzyVariables from './variables/BuildFuzzyVariables.js';
-import GetFuzzySets from './variables/GetFuzzySets.js';
+import GetAllFuzzySets from './variables/GetAllFuzzySets.js';
 import BuildFuzzyRules from './rules/BuildFuzzyRules.js';
 import IsInvalidLine from './utils/IsInvalidLine.js';
 
@@ -28,7 +28,7 @@ var BuildFuzzyModule = function (config) {
 
     var fuzzyModule = new FuzzyModule();
     BuildFuzzyVariables(fuzzyModule, config.variables);
-    BuildFuzzyRules(fuzzyModule, config.rules, GetFuzzySets(fuzzyModule));
+    BuildFuzzyRules(fuzzyModule, config.rules, GetAllFuzzySets(fuzzyModule));
 
     return fuzzyModule;
 }

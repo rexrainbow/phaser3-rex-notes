@@ -1,10 +1,10 @@
-import { LeftShoulderFuzzySet } from '../../../utils/yuka/fuzzy/sets/LeftShoulderFuzzySet.js';
-import { LeftSCurveFuzzySet } from '../../../utils/yuka/fuzzy/sets/LeftSCurveFuzzySet.js';
-import { RightShoulderFuzzySet } from '../../../utils/yuka/fuzzy/sets/RightShoulderFuzzySet.js';
-import { RightSCurveFuzzySet } from '../../../utils/yuka/fuzzy/sets/RightSCurveFuzzySet.js';
-import { TriangularFuzzySet } from '../../../utils/yuka/fuzzy/sets/TriangularFuzzySet.js';
-import { SingletonFuzzySet } from '../../../utils/yuka/fuzzy/sets/SingletonFuzzySet.js';
-import { NormalDistFuzzySet } from '../../../utils/yuka/fuzzy/sets/NormalDistFuzzySet.js';
+import LeftShoulderFuzzySet from './sets/LeftShoulderFuzzySet.js';
+import LeftSCurveFuzzySet from './sets/LeftSCurveFuzzySet.js';
+import RightShoulderFuzzySet from './sets/RightShoulderFuzzySet.js';
+import RightSCurveFuzzySet from './sets/RightSCurveFuzzySet.js';
+import TriangularFuzzySet from './sets/TriangularFuzzySet.js';
+import SingletonFuzzySet from './sets/SingletonFuzzySet.js';
+import NormalDistFuzzySet from './sets/NormalDistFuzzySet.js';
 
 const FuzzySetClasses = {
     leftShoulder: LeftShoulderFuzzySet,

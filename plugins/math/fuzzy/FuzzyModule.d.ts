@@ -1,4 +1,4 @@
-export { FuzzyModule };
+export default FuzzyModule;
 
 declare class FuzzyModule {
 

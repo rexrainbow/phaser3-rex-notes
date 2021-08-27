@@ -1,104 +1,155 @@
-import { FuzzyModule as FuzzyModuleBase } from '../../utils/yuka/fuzzy/FuzzyModule.js';
-import GetVariableName from './utils/GetVariableName.js';
+// https://github.com/Mugen87/yuka
+/**
+* @author {@link https://github.com/Mugen87|Mugen87}
+*/
+class FuzzyModule {
+	constructor() {
+		this.rules = [];
+		this.flvs = {};
 
-class FuzzyModule extends FuzzyModuleBase {
-    constructor() {
-        super();
+	}
 
-        this.dirty = true;
-    }
+	addFLV(name, flv) {
+		this.flvs[name] = flv;
+		return this;
 
-    _fuzzify(name, value) {
-        const flv = this.flvs.get(name);
-        flv.fuzzify(value);
+	}
 
-        this.dirty = true;
-    }
+	removeFLV(name) {
+		delete this.flvs[name];
+		return this;
 
-    fuzzify(name, value) {
-        if (typeof (name) === 'string') {
-            this._fuzzify(name, value);
+	}
 
-        } else {
-            let names = name;
-            for (name in names) {
-                this._fuzzify(name, names[name]);
-            }
-        }
+	hasFLV(name) {
+		return this.flvs.hasOwnProperty(name);
+	}
 
-        return this;
-    }
+	addRule(rule) {
+		this.rules.push(rule);
+		return this;
 
-    _evaluate() {
-        if (!this.dirty) {
-            return;
-        }
+	}
 
-        const rules = this.rules;
+	removeRule(rule) {
+		const rules = this.rules;
+		const index = rules.indexOf(rule);
+		rules.splice(index, 1);
+		return this;
 
-        this._initConsequences();
+	}
 
-        for (let i = 0, l = rules.length; i < l; i++) {
-            rules[i].evaluate();
-        }
+	fuzzify(name, value) {
+		if (typeof (name) === 'string') {
+			this._fuzzify(name, value);
 
-        this.dirty = false;
-    }
+		} else {
+			let names = name;
+			for (name in names) {
+				this._fuzzify(name, names[name]);
+			}
+		}
 
-    _defuzzify(name, type = FuzzyModule.DEFUZ_TYPE.MAXAV) {
-        const flv = this.flvs.get(name);
+		this.dirty = true;
+		return this;
+	}
 
-        let value;
-        switch (type) {
-            case FuzzyModule.DEFUZ_TYPE.MAXAV:
-                value = flv.defuzzifyMaxAv();
-                break;
+	_fuzzify(name, value) {
+		if (!this.hasFLV(name)) {
+			return;
+		}
 
-            case FuzzyModule.DEFUZ_TYPE.CENTROID:
-                value = flv.defuzzifyCentroid();
-                break;
+		this.flvs[name].fuzzify(value);
+	}
 
-            default:
-                Logger.warn('YUKA.FuzzyModule: Unknown defuzzification method:', type);
-                value = flv.defuzzifyMaxAv(); // use MaxAv as fallback
-        }
+	defuzzify(name, type = FuzzyModule.DEFUZ_TYPE.MAXAV) {
 
-        return value;
-    }
+		this._evaluate();
 
-    defuzzify(name, type = FuzzyModule.DEFUZ_TYPE.MAXAV) {
+		let result;
+		if (typeof (name) === 'string') {
+			result = this._defuzzify(name, type);
 
-        this._evaluate();
+		} else if (Array.isArray(name)) {
+			result = {};
+			let names = name;
+			for (let i = 0, cnt = names.length; i < cnt; i++) {
+				name = names[i];
+				result[name] = this._defuzzify(name, type);
+			}
+		} else {
+			// Get all variable names of consequence        
+			let names = [];
+			let rules = this.rules;
+			for (let i = 0, cnt = rules.length; i < cnt; i++) {
+				let consequence = rules[i].consequence;
+				let name = GetVariableName(consequence.name);
 
-        let result;
-        if (typeof (name) === 'string') {
-            result = this._defuzzify(name, type);
+				if (names.indexOf(name) === -1) {
+					names.push(name);
+				}
+			}
+			result = this.defuzzify(names, type);
 
-        } else if (Array.isArray(name)) {
-            result = {};
-            let names = name;
-            for (let i = 0, cnt = names.length; i < cnt; i++) {
-                name = names[i];
-                result[name] = this._defuzzify(name, type);
-            }
-        } else {
-            // Get all variable names of consequence        
-            let names = [];
-            let rules = this.rules;
-            for (let i = 0, cnt = rules.length; i < cnt; i++) {
-                let consequence = rules[i].consequence;
-                let name = GetVariableName(consequence.name);
+		}
 
-                if (names.indexOf(name) === -1) {
-                    names.push(name);
-                }
-            }
-            result = this.defuzzify(names, type);
+		return result;
+	}
 
-        }
+	_defuzzify(name, type = FuzzyModule.DEFUZ_TYPE.MAXAV) {
+		if (!this.hasFLV(name)) {
+			return;
+		}
 
-        return result;
-    }
+		const flv = this.flvs[name];
+
+		let value;
+		switch (type) {
+			case FuzzyModule.DEFUZ_TYPE.MAXAV:
+				value = flv.defuzzifyMaxAv();
+				break;
+
+			case FuzzyModule.DEFUZ_TYPE.CENTROID:
+				value = flv.defuzzifyCentroid();
+				break;
+
+			default:
+				Logger.warn('YUKA.FuzzyModule: Unknown defuzzification method:', type);
+				value = flv.defuzzifyMaxAv(); // use MaxAv as fallback
+		}
+
+		return value;
+	}
+
+	_evaluate() {
+		if (!this.dirty) {
+			return;
+		}
+
+		const rules = this.rules;
+		this._initConsequences();
+		for (let i = 0, l = rules.length; i < l; i++) {
+			rules[i].evaluate();
+		}
+
+		this.dirty = false;
+	}
+
+	_initConsequences() {
+		const rules = this.rules;
+		// initializes the consequences of all rules.
+		for (let i = 0, l = rules.length; i < l; i++) {
+			const rule = rules[i];
+			rule.initConsequence();
+		}
+		return this;
+
+	}
 }
 
-export { FuzzyModule };
+FuzzyModule.DEFUZ_TYPE = Object.freeze({
+	MAXAV: 0,
+	CENTROID: 1
+});
+
+export default FuzzyModule;
