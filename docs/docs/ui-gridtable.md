@@ -389,6 +389,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var bottomOY = table.bottomChildOY;
     ```
+- Is overflow (height of content is larger than display height)
+    ```javascript
+    var isOverflow = textArea.isOverflow;
+    ```
 
 #### Scroll by percentage
 

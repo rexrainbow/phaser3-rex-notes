@@ -289,6 +289,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var bottomOY = panel.bottomChildOY;
     ```
+- Is overflow (height of content is larger than display height)
+    ```javascript
+    var isOverflow = panel.isOverflow;
+    ```
 
 #### Scroll by percentage
 
