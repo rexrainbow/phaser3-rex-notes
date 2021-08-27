@@ -14,10 +14,10 @@ var BuildFuzzyModule = function (config) {
             if (IsInvalidLine(line)) {
                 continue;
             }
-            if (line.indexOf(':') !== -1) {
-                variables.push(line);
-            } else {
+            if (line.indexOf('=>') !== -1) {
                 rules.push(line);
+            } else {
+                variables.push(line);
             }
         }
         config = {
