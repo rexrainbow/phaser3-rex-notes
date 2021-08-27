@@ -74,37 +74,51 @@ expressions
     ;
 
 varExp
-    : NAME ':' NUMBER ',' NUMBER ',' NUMBER ',' NAME
+    : NAME ':' NUMBER ',' NUMBER ',' NUMBER ',' NUMBER ',' NAME
         {
-            var left = Number($3),
-                right = Number($7),
-                middle = Number($5);
-            // setName, left, middle, right, type
-            $$ = [$1,   left, middle, right, $9];
+            var setName = $1, setType = $11;
+            var left = Number($3), middle = Number($5), right = Number($7),
+                arg0 = Number($9);
+            $$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right, arg0],
+            }
+        }    
+    | NAME ':' NUMBER ',' NUMBER ',' NUMBER ',' NAME
+        {
+            var setName = $1, setType = $9;
+            var left = Number($3), middle = Number($5), right = Number($7);
+            $$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         }
     | NAME ':' NUMBER ',' NUMBER ',' NUMBER
         {
-            var left = Number($3),
-                right = Number($7),
-                middle = Number($5);
-            // setName, left, middle, right, type
-            $$ = [$1,   left, middle, right, undefined];
+            var setName = $1, setType = undefined;
+            var left = Number($3), middle = Number($5), right = Number($7);
+            $$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         }
     | NAME ':' NUMBER ',' NUMBER
         {
-            var left = Number($3),
-                right = Number($5),
-                middle = (left + right)/2;
-            // setName, left, middle, right, type
-            $$ = [$1,   left, middle, right, undefined];
+            var setName = $1, setType = undefined;
+            var left = Number($3), right = Number($5), middle = (left+right)/2;
+            $$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         }
     | NAME ':' NUMBER ',' NUMBER ',' NAME
         {
-            var left = Number($3),
-                right = Number($5),
-                middle = (left + right)/2;            
-            // setName, left, middle, right, type
-            $$ = [$1,   left, middle, right, $7];
+            var setName = $1, setType = $7;
+            var left = Number($3), right = Number($5), middle = (left+right)/2;
+            $$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         }
     ;
 

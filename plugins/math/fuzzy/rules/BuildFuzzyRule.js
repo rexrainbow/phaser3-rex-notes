@@ -18,6 +18,9 @@ var BuildFuzzyCompositeTerm = function (terms, fuzzySets) {
     if (!terms) {
         return null;
     } else if (typeof (terms) === 'string') {
+        if (!fuzzySets.hasOwnProperty(terms)) {
+            throw `Can't find fuzzy set ${terms}`;
+        }
         return fuzzySets[terms];
     }
 

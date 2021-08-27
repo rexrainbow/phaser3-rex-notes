@@ -40,7 +40,7 @@ var BindFuzzySets = function (fuzzySets) {
     var variables = {};
     for (var i = 0, cnt = fuzzySets.length; i < cnt; i++) {
         var fuzzySet = fuzzySets[i];
-        var variableName = GetVariableName(fuzzySet[0]);
+        var variableName = GetVariableName(fuzzySet.name);
         if (!variables.hasOwnProperty(variableName)) {
             variables[variableName] = [];
         }

@@ -100,11 +100,11 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
                 - `left`, `right` : Two numbers for left and right point, middle point is the average of (left + right).
             - `setType` : 
                 - Can be one of these string, or none.
-                    - Left part : `leftShoulder`, `leftSCurve`. 
+                    - Left part : `leftShoulder`, `leftSCurve`.
                         - Default value is `leftShoulder` for first fuzzy set of a variable.
-                    - Right part : `rightShoulder`, `rightSCurve`. 
+                    - Right part : `rightShoulder`, `rightSCurve`.
                         - Default value is `rightShoulder` for last fuzzy set of a variable.
-                    - Middle parts : `triangular`, `singleton`, `normal`. 
+                    - Middle parts : `triangular`, `singleton`, `normal`.
                         - Default value is `triangular` for other fuzzy sets of a variable.
         - `FuzzySetNameA and FuzzySetNameB => FuzzySetNameT` : A line with '=>', declare a fuzzy rule.
         - `// ... ` : Comment lines
@@ -113,9 +113,18 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
         {
             variables: {
                 VariableName: [
-                    [leftSetName, left, middle, right, setType],
-                    [middleSetName, left, middle, right, setType],
-                    [rightSetName, left, middle, right, setType],
+                    {
+                        name: leftSetName, setType: undefined,
+                        parameters: [left, middle, right]
+                    },
+                    {
+                        name: middleSetName, setType: undefined,
+                        parameters: [left, middle, right]
+                    },
+                    {
+                        name: rightSetName, setType: undefined,
+                        parameters: [left, middle, right]
+                    },
                 ],
                 // ....
             },
@@ -129,11 +138,6 @@ FuzzySetNameA or (FuzzySetNameA and FuzzySetNameB) => FuzzySetNameT
 
         }
         ```
-
-Fuzzy plugin will parse string input into JSON object then invoke fuzzy api internally.
-
-- [Declare a fuzzy set](https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L131)
-- [Declare a fuzzy rule](https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L157)
 
 ### Set input
 

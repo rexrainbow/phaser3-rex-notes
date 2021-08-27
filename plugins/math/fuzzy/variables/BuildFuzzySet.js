@@ -18,14 +18,15 @@ const FuzzySetClasses = {
     normal: NormalDistFuzzySet
 }
 
-var BuildFuzzySet = function (left, middle, right, setType, partType) {
+var BuildFuzzySet = function (config, partType) {
+    var setType = config.type;
     if (setType === undefined) {
         setType = (partType === 0) ? 'leftShoulder' :  // Left part
             (partType === 2) ? 'rightShoulder' :       // Right part
                 'triangular';                          // Middle part
     }
 
-    var fuzzySet = new FuzzySetClasses[setType](left, middle, right);
+    var fuzzySet = new FuzzySetClasses[setType](...config.parameters);
     return fuzzySet;
 }
 

@@ -5996,15 +5996,15 @@
 </li>
 <li><code>setType</code> : <ul>
 <li>Can be one of these string, or none.<ul>
-<li>Left part : <code>leftShoulder</code>, <code>leftSCurve</code>. <ul>
+<li>Left part : <code>leftShoulder</code>, <code>leftSCurve</code>.<ul>
 <li>Default value is <code>leftShoulder</code> for first fuzzy set of a variable.</li>
 </ul>
 </li>
-<li>Right part : <code>rightShoulder</code>, <code>rightSCurve</code>. <ul>
+<li>Right part : <code>rightShoulder</code>, <code>rightSCurve</code>.<ul>
 <li>Default value is <code>rightShoulder</code> for last fuzzy set of a variable.</li>
 </ul>
 </li>
-<li>Middle parts : <code>triangular</code>, <code>singleton</code>, <code>normal</code>. <ul>
+<li>Middle parts : <code>triangular</code>, <code>singleton</code>, <code>normal</code>.<ul>
 <li>Default value is <code>triangular</code> for other fuzzy sets of a variable.</li>
 </ul>
 </li>
@@ -6022,9 +6022,18 @@
     <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nx">variables</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">VariableName</span><span class="o">:</span> <span class="p">[</span>
-            <span class="p">[</span><span class="nx">leftSetName</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">setType</span><span class="p">],</span>
-            <span class="p">[</span><span class="nx">middleSetName</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">setType</span><span class="p">],</span>
-            <span class="p">[</span><span class="nx">rightSetName</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">setType</span><span class="p">],</span>
+            <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">leftSetName</span><span class="p">,</span> <span class="nx">setType</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+                <span class="nx">parameters</span><span class="o">:</span> <span class="p">[</span><span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">middleSetName</span><span class="p">,</span> <span class="nx">setType</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+                <span class="nx">parameters</span><span class="o">:</span> <span class="p">[</span><span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="nx">rightSetName</span><span class="p">,</span> <span class="nx">setType</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+                <span class="nx">parameters</span><span class="o">:</span> <span class="p">[</span><span class="nx">left</span><span class="p">,</span> <span class="nx">middle</span><span class="p">,</span> <span class="nx">right</span><span class="p">]</span>
+            <span class="p">},</span>
         <span class="p">],</span>
         <span class="c1">// ....</span>
     <span class="p">},</span>
@@ -6040,11 +6049,6 @@
 </code></pre></div></li>
 </ul>
 </li>
-</ul>
-<p>Fuzzy plugin will parse string input into JSON object then invoke fuzzy api internally.</p>
-<ul>
-<li><a href="https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L131">Declare a fuzzy set</a></li>
-<li><a href="https://github.com/Mugen87/yuka/blob/master/examples/fuzzy/src/Soldier.js#L157">Declare a fuzzy rule</a></li>
 </ul>
 <h3 id="set-input">Set input<a class="headerlink" href="#set-input" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">fuzzyModule</span><span class="p">.</span><span class="nx">fuzzify</span><span class="p">(</span><span class="nx">variableName</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>

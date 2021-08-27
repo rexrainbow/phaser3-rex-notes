@@ -113,8 +113,7 @@ class FuzzyModule {
 				value = flv.defuzzifyCentroid();
 				break;
 
-			default:
-				Logger.warn('YUKA.FuzzyModule: Unknown defuzzification method:', type);
+			default:	
 				value = flv.defuzzifyMaxAv(); // use MaxAv as fallback
 		}
 

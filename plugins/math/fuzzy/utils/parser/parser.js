@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,7],$V3=[1,10],$V4=[1,11],$V5=[1,12],$V6=[2,13],$V7=[1,15],$V8=[5,16,17],$V9=[5,13,14,16,17];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,6],$V2=[1,7],$V3=[1,10],$V4=[1,11],$V5=[1,12],$V6=[2,14],$V7=[1,15],$V8=[5,16,17],$V9=[5,13,14,16,17];
 var parser = {trace: function trace () { },
 yy: {},
 symbols_: {"error":2,"expressions":3,"varExp":4,"EOF":5,"ruleExp":6,"NAME":7,":":8,"NUMBER":9,",":10,"VERY":11,"FAIRLY":12,"AND":13,"OR":14,"(":15,")":16,"=>":17,"$accept":0,"$end":1},
 terminals_: {2:"error",5:"EOF",7:"NAME",8:":",9:"NUMBER",10:",",11:"VERY",12:"FAIRLY",13:"AND",14:"OR",15:"(",16:")",17:"=>"},
-productions_: [0,[3,2],[3,2],[4,9],[4,7],[4,5],[4,7],[6,2],[6,2],[6,3],[6,3],[6,3],[6,3],[6,1]],
+productions_: [0,[3,2],[3,2],[4,11],[4,9],[4,7],[4,5],[4,7],[6,2],[6,2],[6,3],[6,3],[6,3],[6,3],[6,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -88,69 +88,84 @@ return $$[$0-1];
 break;
 case 3:
 
-            var left = Number($$[$0-6]),
-                right = Number($$[$0-2]),
-                middle = Number($$[$0-4]);
-            // setName, left, middle, right, type
-            this.$ = [$$[$0-8],   left, middle, right, $$[$0]];
+            var setName = $$[$0-10], setType = $$[$0];
+            var left = Number($$[$0-8]), middle = Number($$[$0-6]), right = Number($$[$0-4]),
+                arg0 = Number($$[$0-2]);
+            this.$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right, arg0],
+            }
         
 break;
 case 4:
 
-            var left = Number($$[$0-4]),
-                right = Number($$[$0]),
-                middle = Number($$[$0-2]);
-            // setName, left, middle, right, type
-            this.$ = [$$[$0-6],   left, middle, right, undefined];
+            var setName = $$[$0-8], setType = $$[$0];
+            var left = Number($$[$0-6]), middle = Number($$[$0-4]), right = Number($$[$0-2]);
+            this.$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         
 break;
 case 5:
 
-            var left = Number($$[$0-2]),
-                right = Number($$[$0]),
-                middle = (left + right)/2;
-            // setName, left, middle, right, type
-            this.$ = [$$[$0-4],   left, middle, right, undefined];
+            var setName = $$[$0-6], setType = undefined;
+            var left = Number($$[$0-4]), middle = Number($$[$0-2]), right = Number($$[$0]);
+            this.$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         
 break;
 case 6:
 
-            var left = Number($$[$0-4]),
-                right = Number($$[$0-2]),
-                middle = (left + right)/2;            
-            // setName, left, middle, right, type
-            this.$ = [$$[$0-6],   left, middle, right, $$[$0]];
+            var setName = $$[$0-4], setType = undefined;
+            var left = Number($$[$0-2]), right = Number($$[$0]), middle = (left+right)/2;
+            this.$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
         
 break;
-case 7: case 8:
+case 7:
+
+            var setName = $$[$0-6], setType = $$[$0];
+            var left = Number($$[$0-4]), right = Number($$[$0-2]), middle = (left+right)/2;
+            this.$ = {
+                name: setName, type: setType,
+                parameters: [left, middle, right],
+            }
+        
+break;
+case 8: case 9:
             
             this.$ = GetOperator1($$[$0-1], $$[$0])
         
 break;
-case 9: case 10:
+case 10: case 11:
 
             this.$ = GetOperator2($$[$0-1], $$[$0-2], $$[$0]);
         
 break;
-case 11:
+case 12:
 
             this.$ = $$[$0-1]
         
 break;
-case 12:
+case 13:
 
             this.$ = ['=>', $$[$0-2], $$[$0]];
         
 break;
-case 13:
+case 14:
 
             this.$ = $$[$0];
         
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:[1,4],11:$V0,12:$V1,15:$V2},{1:[3]},{5:[1,8]},{5:[1,9],13:$V3,14:$V4,17:$V5},o([5,13,14,17],$V6,{8:[1,13]}),{6:14,7:$V7,11:$V0,12:$V1,15:$V2},{6:16,7:$V7,11:$V0,12:$V1,15:$V2},{6:17,7:$V7,11:$V0,12:$V1,15:$V2},{1:[2,1]},{1:[2,2]},{6:18,7:$V7,11:$V0,12:$V1,15:$V2},{6:19,7:$V7,11:$V0,12:$V1,15:$V2},{7:[1,20]},{9:[1,21]},o($V8,[2,7],{13:$V3,14:$V4}),o($V9,$V6),o($V8,[2,8],{13:$V3,14:$V4}),{13:$V3,14:$V4,16:[1,22],17:$V5},o([5,13,16,17],[2,9],{14:$V4}),o($V9,[2,10]),o($V9,[2,12]),{10:[1,23]},o($V9,[2,11]),{9:[1,24]},{5:[2,5],10:[1,25]},{7:[1,27],9:[1,26]},{5:[2,4],10:[1,28]},{5:[2,6]},{7:[1,29]},{5:[2,3]}],
-defaultActions: {8:[2,1],9:[2,2],27:[2,6],29:[2,3]},
+table: [{3:1,4:2,6:3,7:[1,4],11:$V0,12:$V1,15:$V2},{1:[3]},{5:[1,8]},{5:[1,9],13:$V3,14:$V4,17:$V5},o([5,13,14,17],$V6,{8:[1,13]}),{6:14,7:$V7,11:$V0,12:$V1,15:$V2},{6:16,7:$V7,11:$V0,12:$V1,15:$V2},{6:17,7:$V7,11:$V0,12:$V1,15:$V2},{1:[2,1]},{1:[2,2]},{6:18,7:$V7,11:$V0,12:$V1,15:$V2},{6:19,7:$V7,11:$V0,12:$V1,15:$V2},{7:[1,20]},{9:[1,21]},o($V8,[2,8],{13:$V3,14:$V4}),o($V9,$V6),o($V8,[2,9],{13:$V3,14:$V4}),{13:$V3,14:$V4,16:[1,22],17:$V5},o([5,13,16,17],[2,10],{14:$V4}),o($V9,[2,11]),o($V9,[2,13]),{10:[1,23]},o($V9,[2,12]),{9:[1,24]},{5:[2,6],10:[1,25]},{7:[1,27],9:[1,26]},{5:[2,5],10:[1,28]},{5:[2,7]},{7:[1,30],9:[1,29]},{10:[1,31]},{5:[2,4]},{7:[1,32]},{5:[2,3]}],
+defaultActions: {8:[2,1],9:[2,2],27:[2,7],30:[2,4],32:[2,3]},
 parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);

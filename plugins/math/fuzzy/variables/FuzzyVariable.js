@@ -55,11 +55,8 @@ class FuzzyVariable {
 	fuzzify(value) {
 
 		if (value < this.minRange || value > this.maxRange) {
-
-			// TODO:
 			// Logger.warn('YUKA.FuzzyVariable: Value for fuzzification out of range.');
 			return;
-
 		}
 
 		const fuzzySets = this.fuzzySets;
