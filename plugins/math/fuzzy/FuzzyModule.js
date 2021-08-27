@@ -1,3 +1,5 @@
+import GetVariableName from './utils/GetVariableName.js';
+
 // https://github.com/Mugen87/yuka
 /**
 * @author {@link https://github.com/Mugen87|Mugen87}
