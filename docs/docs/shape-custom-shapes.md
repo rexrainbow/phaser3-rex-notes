@@ -8,6 +8,7 @@ Custom shapes on shape.
 ## Live demos
 
 - [Speech bubble](https://codepen.io/rexrainbow/pen/vYgjyPJ)
+- [Jigsaw](https://codepen.io/rexrainbow/pen/vYZNZwr)
 
 ## Usage
 
