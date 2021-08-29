@@ -2,7 +2,7 @@ import LineTo from './LineTo.js';
 
 const DegToRad = Phaser.Math.DegToRad;
 
-var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, out) {
+var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, antiClockWise, iteration, pathData) {
     // startAngle, endAngle: 0 ~ 360
     if (antiClockWise && (endAngle > startAngle)) {
         endAngle -= 360;
@@ -17,8 +17,8 @@ var ArcTo = function (centerX, centerY, radiusX, radiusY, startAngle, endAngle, 
         var angle = startAngle + (step * i);
         var x = centerX + (radiusX * Math.cos(angle));
         var y = centerY + (radiusY * Math.sin(angle));
-        LineTo(x, y, out);
+        LineTo(x, y, pathData);
     }
-    return out;
+    return pathData;
 }
 export default ArcTo;

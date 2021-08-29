@@ -305,6 +305,10 @@ Redraw shapes when
     ```javascript
     lines.close();
     ```
+- Offset all points
+    ```javascript
+    lines.offset(x, y);
+    ```
 - Rotation all points
     ```javascript
     lines.rotateAround(centerX, centerY, angle);

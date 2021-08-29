@@ -1,5 +1,5 @@
 import PathBase from '../PathBase.js';
-import ArcTo from '../../../../utils/pathData/ArcTo.js';
+import ArcTo from '../../../../../../geom/pathdata/ArcTo.js';
 import FillStyleCanvas from '../../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../../utils/render/LineStyleCanvas.js';
 const DegToRad = Phaser.Math.DegToRad;

@@ -44,6 +44,7 @@ var CreateSpeechBubbleShape = function (scene) {
             this.getShapes()[0]
                 .lineStyle(2, strokeColor, 1)
                 .fillStyle(fillColor, 1)
+                .setIterations(8)
                 // top line, right arc
                 .startAt(left + radius, top).lineTo(right - radius, top).arc(right - radius, top + radius, radius, 270, 360)
                 // right line, bottom arc

@@ -49,6 +49,7 @@ var CreateJigsawShape = function (scene, convexEdges, fillColor, strokeColor) {
             var polygon = this.getShapes()[0]
                 .lineStyle(2, strokeColor, 1)
                 .fillStyle(fillColor, 1)
+                .setIterations(8)
                 .startAt(0, 0)
 
             var convexTop = convexEdges.top;

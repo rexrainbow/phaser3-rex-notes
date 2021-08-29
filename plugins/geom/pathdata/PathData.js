@@ -1,30 +1,26 @@
-import PathBase from './PathBase.js';
-import StartAt from '../../../../../geom/pathdata/StartAt';
-import LineTo from '../../../../../geom/pathdata/LineTo.js';
-import ArcTo from '../../../../../geom/pathdata/ArcTo.js';
-import QuadraticBezierTo from '../../../../../geom/pathdata/QuadraticBezierTo.js';
-import CubicBezierCurveTo from '../../../../../geom/pathdata/CubicBezierCurveTo.js';
-import RotateAround from '../../../../../geom/pathdata/RotateAround.js'
-import Offset from '../../../../../geom/pathdata/Offset.js';
+import StartAt from './StartAt.js';
+import LineTo from './LineTo.js';
+import ArcTo from './ArcTo.js';
+import QuadraticBezierTo from './QuadraticBezierTo.js';
+import CubicBezierCurveTo from './QuadraticBezierTo.js';
+import RotateAround from './RotateAround.js';
+import Offset from './Offset.js';
+import ToPoints from './ToPoints.js';
 
-const DegToRad = Phaser.Math.DegToRad;
-const PointRotateAround = Phaser.Math.RotateAround;
+const Polygon = Phaser.Geom.Polygon;
 
-class Lines extends PathBase {
-    constructor() {
-        super();
+class PathData {
+    constructor(pathData) {
+        if (pathData === undefined) {
+            pathData = [];
+        }
+
+        this.pathData = pathData;
+        this.closePath = false;
         this.setIterations(32);
+
         this.lastPointX = undefined;
         this.lastPointY = undefined;
-    }
-
-    get iterations() {
-        return this._iterations;
-    }
-
-    set iterations(value) {
-        this.dirty = this.dirty || (this._iterations !== value);
-        this._iterations = value;
     }
 
     setIterations(iterations) {
@@ -34,8 +30,6 @@ class Lines extends PathBase {
 
     startAt(x, y) {
         StartAt(x, y, this.pathData);
-
-        this.dirty = true;
         this.lastPointX = x;
         this.lastPointY = y;
         return this;
@@ -52,7 +46,6 @@ class Lines extends PathBase {
 
         LineTo(x, y, this.pathData);
 
-        this.dirty = true;
         this.lastPointX = x;
         this.lastPointY = y;
         return this;
@@ -81,7 +74,6 @@ class Lines extends PathBase {
             this.pathData
         );
 
-        this.dirty = true;
         var pathDataCnt = this.pathData.length;
         this.lastPointX = this.pathData[pathDataCnt - 2];
         this.lastPointY = this.pathData[pathDataCnt - 1];
@@ -100,7 +92,6 @@ class Lines extends PathBase {
             this.pathData
         );
 
-        this.dirty = true;
         this.lastPointX = x;
         this.lastPointY = y;
         this.lastCX = cx;
@@ -122,7 +113,6 @@ class Lines extends PathBase {
             this.pathData
         );
 
-        this.dirty = true;
         this.lastPointX = x;
         this.lastPointY = y;
         this.lastCX = cx1;
@@ -138,7 +128,6 @@ class Lines extends PathBase {
     }
 
     close() {
-        this.dirty = true;
         this.closePath = true;
         return this;
     }
@@ -152,7 +141,6 @@ class Lines extends PathBase {
 
         RotateAround(centerX, centerY, angle, this.pathData);
 
-        this.dirty = true;
         var pathDataCnt = this.pathData.length;
         this.lastPointX = this.pathData[pathDataCnt - 2];
         this.lastPointY = this.pathData[pathDataCnt - 1];
@@ -172,6 +160,32 @@ class Lines extends PathBase {
         Offset(x, y, this.pathData);
         return this;
     }
+
+    toPoints() {
+        return ToPoints(this.pathData);
+    }
+
+    toPolygon(polygon) {
+        if (polygon === undefined) {
+            polygon = new Polygon();
+        }
+        polygon.setTo(this.pathData);
+        return polygon;
+    }
+
+    draw(graphics, isFill, isStroke) {
+        var points = this.toPoints();
+        if (isFill) {
+            graphics
+                .fillPoints(points, this.closePath, this.closePath);
+        }
+        if (isStroke) {
+            graphics.strokePoints(points, this.closePath, this.closePath);
+        }
+
+        return this;
+    }
+
 }
 
-export default Lines;
+export default PathData;
