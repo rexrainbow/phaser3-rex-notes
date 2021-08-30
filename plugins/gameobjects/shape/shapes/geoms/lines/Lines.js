@@ -120,6 +120,10 @@ class Lines extends PathBase {
         this.dirty = true;
         return this;
     }
+
+    toPolygon(polygon) {
+        return this.builder.toPolygon(polygon);
+    }
 }
 
 export default Lines;

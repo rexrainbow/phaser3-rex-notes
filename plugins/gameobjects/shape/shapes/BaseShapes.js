@@ -81,6 +81,10 @@ class BaseShapes extends Shape {
     }
 
     updateData() {
+        if (!this.dirty) {
+            return this;
+        }
+
         this.updateShapes();
         var shapes = this.geom;
         for (var i = 0, cnt = shapes.length; i < cnt; i++) {
@@ -89,6 +93,10 @@ class BaseShapes extends Shape {
                 shape.updateData();
             }
         }
+
+        this.dirty = false;
+        this.isSizeChanged = false;
+
         return this;
     }
 

@@ -207,6 +207,10 @@ Redraw shapes when
 - Set dirty : `customShapes.setDirty()`
 - Set update shape callback : `customShapes.setUpdateShapesCallback(callback)`
 
+#### Update shape data
+
+Shape data will be updated during rendering, or call `shape.updateData()` to update shape data before rendering.
+
 #### Shape class
 
 ##### Common properties
@@ -322,6 +326,17 @@ Redraw shapes when
     lines.rotateAround(centerX, centerY, angle);
     ```
     - `angle` : Rotate angle in degrees.
+- Get polygon
+    ```javascript
+    var polygon = lines.toPolygon();
+    ```
+    - Can be used in [`setInteractive method`](touchevents.md#register-interactive)
+        ```javascript
+        shape.setInteractive({
+            hitArea: shape.getShapes()[0].toPolygon(),
+            hitAreaCallback: Phaser.Geom.Polygon.Contains,
+        })
+        ```
 
 ##### Rectangle
 

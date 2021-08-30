@@ -6,9 +6,9 @@ import CubicBezierCurveTo from './QuadraticBezierTo.js';
 import RotateAround from './RotateAround.js';
 import Offset from './Offset.js';
 import ToPoints from './ToPoints.js';
+import ToPolygon from './ToPolygon.js';
 
 const DegToRad = Phaser.Math.DegToRad;
-const Polygon = Phaser.Geom.Polygon;
 
 class PathData {
     constructor(pathData) {
@@ -167,11 +167,7 @@ class PathData {
     }
 
     toPolygon(polygon) {
-        if (polygon === undefined) {
-            polygon = new Polygon();
-        }
-        polygon.setTo(this.pathData);
-        return polygon;
+        return ToPolygon(this.pathData, polygon);
     }
 
     draw(graphics, isFill, isStroke) {

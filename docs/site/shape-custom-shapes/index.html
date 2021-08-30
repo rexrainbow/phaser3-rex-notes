@@ -1543,6 +1543,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update-shape-data" class="md-nav__link">
+    Update shape data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-class" class="md-nav__link">
     Shape class
   </a>
@@ -5963,6 +5970,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#update-shape-data" class="md-nav__link">
+    Update shape data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#shape-class" class="md-nav__link">
     Shape class
   </a>
@@ -6277,6 +6291,8 @@
 <li>Set dirty : <code>customShapes.setDirty()</code></li>
 <li>Set update shape callback : <code>customShapes.setUpdateShapesCallback(callback)</code></li>
 </ul>
+<h4 id="update-shape-data">Update shape data<a class="headerlink" href="#update-shape-data" title="Permanent link">&para;</a></h4>
+<p>Shape data will be updated during rendering, or call <code>shape.updateData()</code> to update shape data before rendering.</p>
 <h4 id="shape-class">Shape class<a class="headerlink" href="#shape-class" title="Permanent link">&para;</a></h4>
 <h5 id="common-properties">Common properties<a class="headerlink" href="#common-properties" title="Permanent link">&para;</a></h5>
 <ul>
@@ -6384,6 +6400,17 @@
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">rotateAround</span><span class="p">(</span><span class="nx">centerX</span><span class="p">,</span> <span class="nx">centerY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>angle</code> : Rotate angle in degrees.</li>
+</ul>
+</li>
+<li>Get polygon
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">toPolygon</span><span class="p">();</span>
+</code></pre></div><ul>
+<li>Can be used in <a href="../touchevents/#register-interactive"><code>setInteractive method</code></a>
+    <div class="codehilite"><pre><span></span><code><span class="nx">shape</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
+    <span class="nx">hitArea</span><span class="o">:</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toPolygon</span><span class="p">(),</span>
+    <span class="nx">hitAreaCallback</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Contains</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>

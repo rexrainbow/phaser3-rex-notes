@@ -20,6 +20,17 @@ class Demo extends Phaser.Scene {
             .setPosition(400, 300)
             .setSize(100, 100)
 
+        jigsaw
+            .updateData()
+            .setInteractive({
+                hitArea: jigsaw.getShapes()[0].toPolygon(),
+                hitAreaCallback: Phaser.Geom.Polygon.Contains,
+                draggable: true
+            })
+            .on('drag', function (pointer, dragX, dragY) {
+                this.setPosition(dragX, dragY);
+            })
+
         //var graphics = this.add.graphics({
         //    lineStyle: {
         //        width: 2, color: 0xff0000, alpha: 1

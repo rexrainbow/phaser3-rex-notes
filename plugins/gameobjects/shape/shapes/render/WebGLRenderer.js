@@ -1,12 +1,7 @@
 import GetCalcMatrix from '../../../utils/GetCalcMatrix.js';
 
 var WebGLRenderer = function (renderer, src, camera, parentMatrix) {
-    if (src.dirty) {
-        src.updateData();
-        src.dirty = false;
-        src.isSizeChanged = false;
-    }
-
+    src.updateData();
     camera.addToRenderList(src);
 
     var pipeline = renderer.pipelines.set(src.pipeline);
