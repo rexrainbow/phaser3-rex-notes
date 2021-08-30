@@ -94,15 +94,15 @@ var CreateNumberInputSizer = function (parent) {
 
     scene.rexUI.add.click(numberInput)
         .on('click', function (button, numberInput) {
-            scene.rexUI.edit(
-                numberInput.getElement('text'), {
+            var config = {
                 type: 'number',
                 onTextChanged: function (textObject, text) {
                     textObject.text = text;
 
                     parent.setData('value', Number(text))
                 }
-            });
+            }
+            scene.rexUI.edit(numberInput.getElement('text'), config);
         })
 
     scene.rexUI.add.click(incBtn)
