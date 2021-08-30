@@ -83,7 +83,7 @@ var shake = scene.plugins.get('rexShake').add(gameObject, {
 ```
 
 - `mode` :
-    - `'effect'`, or `0` : Shake position in `'poststep'` game event, and restore in `'step'` game event.
+    - `'effect'`, or `0` : Shake position in `'poststep'` game event, and restore in `'prestep'` game event.
     - `'behavior'`, or `1` : Shake position in `'preupdate'` scene event.
 - `duration` : Duration of shaking, in millisecond.
 - `magnitude` : The strength of the shake, in pixels.
