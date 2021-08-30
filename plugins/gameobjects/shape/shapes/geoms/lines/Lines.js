@@ -1,30 +1,19 @@
 import PathBase from './PathBase.js';
-import StartAt from '../../../../../geom/pathdata/StartAt';
-import LineTo from '../../../../../geom/pathdata/LineTo.js';
-import ArcTo from '../../../../../geom/pathdata/ArcTo.js';
-import QuadraticBezierTo from '../../../../../geom/pathdata/QuadraticBezierTo.js';
-import CubicBezierCurveTo from '../../../../../geom/pathdata/CubicBezierCurveTo.js';
-import RotateAround from '../../../../../geom/pathdata/RotateAround.js'
-import Offset from '../../../../../geom/pathdata/Offset.js';
-
-const DegToRad = Phaser.Math.DegToRad;
-const PointRotateAround = Phaser.Math.RotateAround;
+import PathDataBuilder from '../../../../../geom/pathdata/PathData.js';
 
 class Lines extends PathBase {
     constructor() {
         super();
-        this.setIterations(32);
-        this.lastPointX = undefined;
-        this.lastPointY = undefined;
+        this.builder = new PathDataBuilder(this.pathData);
     }
 
     get iterations() {
-        return this._iterations;
+        return this.builder.iterations;
     }
 
     set iterations(value) {
-        this.dirty = this.dirty || (this._iterations !== value);
-        this._iterations = value;
+        this.dirty = this.dirty || (this.builder.iterations !== value);
+        this.builder.setIterations(value);
     }
 
     setIterations(iterations) {
@@ -32,144 +21,103 @@ class Lines extends PathBase {
         return this;
     }
 
+    get lastPointX() {
+        return this.builder.lastPointX;
+    }
+
+    get lastPointY() {
+        return this.builder.lastPointY;
+    }
+
     startAt(x, y) {
-        StartAt(x, y, this.pathData);
+        this.builder.startAt(x, y);
 
         this.dirty = true;
-        this.lastPointX = x;
-        this.lastPointY = y;
         return this;
     }
 
     lineTo(x, y, relative) {
-        if (relative === undefined) {
-            relative = false;
-        }
-        if (relative) {
-            x += this.lastPointX;
-            y += this.lastPointY;
-        }
-
-        LineTo(x, y, this.pathData);
+        this.builder.lineTo(x, y, relative);
 
         this.dirty = true;
-        this.lastPointX = x;
-        this.lastPointY = y;
         return this;
     }
 
     verticalLineTo(x, relative) {
-        this.lineTo(x, this.lastPointY, relative);
+        this.builder.verticalLineTo(x, relative);
+
+        this.dirty = true;
         return this;
     }
 
     horizontalLineTo(y, relative) {
-        this.lineTo(this.lastPointX, y, relative);
+        this.builder.horizontalLineTo(y, relative);
+
+        this.dirty = true;
         return this;
     }
 
     ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise) {
-        if (anticlockwise === undefined) {
-            anticlockwise = false;
-        }
-
-        ArcTo(
-            centerX, centerY,
-            radiusX, radiusY,
-            startAngle, endAngle, anticlockwise,
-            this.iterations,
-            this.pathData
-        );
+        this.builder.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
 
         this.dirty = true;
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
         return this;
     }
 
     arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise) {
-        this.ellipticalArc(centerX, centerY, radius, radius, startAngle, endAngle, anticlockwise)
+        this.builder.arc(centerX, centerY, radius, startAngle, endAngle, anticlockwise);
+
+        this.dirty = true;
         return this;
     }
 
     quadraticBezierTo(cx, cy, x, y) {
-        QuadraticBezierTo(
-            cx, cy, x, y,
-            this.iterations,
-            this.pathData
-        );
+        this.builder.quadraticBezierTo(cx, cy, x, y);
 
         this.dirty = true;
-        this.lastPointX = x;
-        this.lastPointY = y;
-        this.lastCX = cx;
-        this.lastCY = cy;
         return this;
     }
 
     smoothQuadraticBezierTo(x, y) {
-        var cx = this.lastPointX * 2 - this.lastCX;
-        var cy = this.lastPointY * 2 - this.lastCY;
+        this.builder.smoothQuadraticBezierTo(x, y);
 
-        return this.quadraticBezierTo(cx, cy, x, y);
+        this.dirty = true;
+        return this;
     }
 
     cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
-        CubicBezierCurveTo(
-            cx0, cy0, cx1, cy1, x, y,
-            this.iterations,
-            this.pathData
-        );
+        this.builder.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
 
         this.dirty = true;
-        this.lastPointX = x;
-        this.lastPointY = y;
-        this.lastCX = cx1;
-        this.lastCY = cy1;
         return this;
     }
 
     smoothCubicBezierCurveTo(cx1, cy1, x, y) {
-        var cx0 = this.lastPointX * 2 - this.lastCX;
-        var cy0 = this.lastPointY * 2 - this.lastCY;
+        this.builder.smoothCubicBezierCurveTo(cx1, cy1, x, y);
 
-        return this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        this.dirty = true;
+        return this;
     }
 
     close() {
+        this.builder.close();
+
+        this.closePath = this.builder.closePath;
         this.dirty = true;
-        this.closePath = true;
         return this;
     }
 
     rotateAround(centerX, centerY, angle) {
-        if (this.pathData.length === 0) {
-            return this;
-        }
-
-        angle = DegToRad(angle);
-
-        RotateAround(centerX, centerY, angle, this.pathData);
+        this.builder.rotateAround(centerX, centerY, angle);
 
         this.dirty = true;
-        var pathDataCnt = this.pathData.length;
-        this.lastPointX = this.pathData[pathDataCnt - 2];
-        this.lastPointY = this.pathData[pathDataCnt - 1];
-        if (this.lastCX !== undefined) {
-            var point = {
-                x: this.lastCX,
-                y: this.lastCY
-            }
-            PointRotateAround(point, centerX, centerY, angle);
-            this.lastCX = point.x;
-            this.lastCY = point.y;
-        }
         return this;
     }
 
     offset(x, y) {
-        Offset(x, y, this.pathData);
+        this.builder.offset(x, y);
+
+        this.dirty = true;
         return this;
     }
 }

@@ -7,6 +7,7 @@ import RotateAround from './RotateAround.js';
 import Offset from './Offset.js';
 import ToPoints from './ToPoints.js';
 
+const DegToRad = Phaser.Math.DegToRad;
 const Polygon = Phaser.Geom.Polygon;
 
 class PathData {
@@ -102,8 +103,8 @@ class PathData {
     smoothQuadraticBezierTo(x, y) {
         var cx = this.lastPointX * 2 - this.lastCX;
         var cy = this.lastPointY * 2 - this.lastCY;
-
-        return this.quadraticBezierTo(cx, cy, x, y);
+        this.quadraticBezierTo(cx, cy, x, y);
+        return this;
     }
 
     cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y) {
@@ -123,8 +124,8 @@ class PathData {
     smoothCubicBezierCurveTo(cx1, cy1, x, y) {
         var cx0 = this.lastPointX * 2 - this.lastCX;
         var cy0 = this.lastPointY * 2 - this.lastCY;
-
-        return this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        this.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+        return this;
     }
 
     close() {
@@ -176,8 +177,7 @@ class PathData {
     draw(graphics, isFill, isStroke) {
         var points = this.toPoints();
         if (isFill) {
-            graphics
-                .fillPoints(points, this.closePath, this.closePath);
+            graphics.fillPoints(points, this.closePath, this.closePath);
         }
         if (isStroke) {
             graphics.strokePoints(points, this.closePath, this.closePath);
