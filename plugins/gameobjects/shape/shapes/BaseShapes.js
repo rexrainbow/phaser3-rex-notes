@@ -23,13 +23,14 @@ class BaseShapes extends Shape {
 
         this._width = -1;
         this._height = -1;
+        this.dirty = true;
+        this.isSizeChanged = true;
         this.shapes = {};
 
         this.setPosition(x, y);
         this.setSize(width, height);
 
         this.updateDisplayOrigin();
-        this.dirty = true;
     }
 
     get width() {
@@ -57,7 +58,8 @@ class BaseShapes extends Shape {
     }
 
     setSize(width, height) {
-        this.dirty = this.dirty || (this._width !== width) || (this._height !== height);
+        this.isSizeChanged = this.isSizeChanged || (this._width !== width) || (this._height !== height);
+        this.dirty = this.dirty || this.isSizeChanged;
         this._width = width;
         this._height = height;
         this.updateDisplayOrigin();

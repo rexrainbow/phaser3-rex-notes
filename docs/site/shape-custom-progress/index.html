@@ -6113,6 +6113,7 @@
         <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span>
     <span class="p">},</span>
+
     <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">circularProgress</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
 <span class="p">});</span>
@@ -6194,8 +6195,17 @@
     <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
     <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
     <span class="c1">// ...</span>
+    <span class="c1">// var isSizeChanged = this.isSizeChanged;</span>
 <span class="p">}</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Shape instances : Change properties of shape instances.<ul>
+<li><code>this.getShapes()</code> : Return all shapes in an array.</li>
+<li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
+</ul>
+</li>
+<li>Is size changed: <code>this.isSizeChanged</code></li>
+</ul>
+</li>
 </ul>
 <h3 id="progress-value">Progress value<a class="headerlink" href="#progress-value" title="Permanent link">&para;</a></h3>
 <ul>

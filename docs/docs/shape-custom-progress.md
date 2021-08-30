@@ -142,6 +142,7 @@ var customProgress = scene.add.rexCustomProgress({
         duration: 0,
         ease: 'Linear'
     },
+
     valuechangeCallback: function(newValue, oldValue, circularProgress) {
     },
 });
@@ -212,8 +213,13 @@ customProgress.setUpdateShapesCallback(callback);
         var shapes = this.getShapes();
         var shape = this.getShape(name);
         // ...
+        // var isSizeChanged = this.isSizeChanged;
     }
     ```
+    - Shape instances : Change properties of shape instances.
+        - `this.getShapes()` : Return all shapes in an array.
+        - `this.getShape(name)` : Return a shape by the unique string name.
+    - Is size changed: `this.isSizeChanged`
 
 ### Progress value
 

@@ -4,6 +4,7 @@ var CanvasRenderer = function (renderer, src, camera, parentMatrix) {
     if (src.dirty) {
         src.updateData();
         src.dirty = false;
+        src.isSizeChanged = false;
     }
 
     camera.addToRenderList(src);

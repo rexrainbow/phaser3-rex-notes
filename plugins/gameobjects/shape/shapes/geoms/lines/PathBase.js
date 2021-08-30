@@ -3,7 +3,6 @@ import FillPathWebGL from '../../../utils/render/FillPathWebGL.js';
 import StrokePathWebGL from '../../../utils/render/StrokePathWebGL.js';
 import FillStyleCanvas from '../../../utils/render/FillStyleCanvas.js';
 import LineStyleCanvas from '../../../utils/render/LineStyleCanvas.js';
-import GetPoint from '../../../../../geom/utils/GetPoint.js';
 
 const Earcut = Phaser.Geom.Polygon.Earcut;
 
@@ -18,7 +17,6 @@ class PathBase extends BaseGeom {
 
     updateData() {
         this.pathIndexes = Earcut(this.pathData);
-        this.dirty = false;
         return this;
     }
 
