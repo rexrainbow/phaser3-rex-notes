@@ -6683,9 +6683,13 @@ or
 </code></pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">incData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>    
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span> <span class="c1">// obj: {key0:value0, key1:value1, ...}</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">values</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">toggleData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Enable
     <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDataEnabled</span><span class="p">();</span>

@@ -429,9 +429,14 @@ See [touch event](touchevents.md#quick-start)
 - Set
     ```javascript
     gameObject.setData(key, value);
+    gameObject.incData(key, value);    
     gameObject.setData(obj); // obj: {key0:value0, key1:value1, ...}
     gameObject.data.values[key] = value;
     gameObject.data.values[key] += inc;
+    ```
+    or
+    ```javascript
+    gameObject.toggleData(key);
     ```
 - Enable
     ```javascript
