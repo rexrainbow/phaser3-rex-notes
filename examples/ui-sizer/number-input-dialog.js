@@ -111,8 +111,7 @@ var CreateNumberInputSizer = function (topWin) {
             var config = {
                 type: 'number',
                 onTextChanged: function (textObject, text) {
-                    textObject.text = text;
-
+                    // textObject.text = text;
                     topWin.setData('value', Number(text))
                 }
             }
