@@ -26,7 +26,7 @@ for (var key in pluginList) {
         },
         external: ['phaser'],
         plugins: [
-            nodeResolve(),
+            nodeResolve({ browser: true, preferBuiltins: true }),
             commonjs(),
             globals(),
             builtins(),
