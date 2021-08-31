@@ -15,10 +15,10 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        CreateDialog(this, 'Title', 'Content', 'Description')
-            .setMinWidth(200)
-            .setPosition(400, 300)
+        var topWin = CreateDialog(this, 'Title', 'Content', 'Description')
+            .setMinWidth(300)
             .layout()
+            .setPosition(400, 300)
             .setData('value', 100)
     }
 
@@ -26,61 +26,75 @@ class Demo extends Phaser.Scene {
 }
 
 var CreateDialog = function (scene, title, content, description) {
-    var ui = scene.rexUI.add.sizer({
+    // Number input value is stored in topWin's data manager
+    var topWin = scene.rexUI.add.sizer({
         orientation: 'y',
-        space: { left: 15, right: 15, top: 15, bottom: 15, item: 10 }
+        space: { left: 20, right: 20, top: 20, bottom: 20, item: 25 }
     })
         .setData('value', undefined);
 
-    ui
+    topWin
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 1, 1, 20, COLOR_PRIMARY)
         )
         .add(
-            CreateLabel(ui, title),
+            CreateLabel(topWin, title),
             { expand: false, align: 'center' }
         )
         .add(
-            CreateNumberInputSizer(ui),
+            CreateNumberInputSizer(topWin),
             { expand: true }
         )
         .add(
-            CreateLabel(ui, content),
+            CreateLabel(topWin, content),
             { expand: true }
         )
         .add(
-            CreateLabel(ui, description),
+            CreateLabel(topWin, description),
             { expand: true }
         )
 
-    return ui;
+    return topWin;
 }
 
-var CreateLabel = function (parent, text) {
-    var scene = parent.scene;
+var CreateLabel = function (topWin, text) {
+    var scene = topWin.scene;
     return scene.rexUI.add.label({
         text: scene.rexUI.add.BBCodeText(0, 0, text, { fontSize: '20px' })
     })
 }
 
-var CreateNumberInputSizer = function (parent) {
-    var scene = parent.scene;
+var CreateNumberInputSizer = function (topWin) {
+    var scene = topWin.scene;
     var numberInputSizer = scene.rexUI.add.sizer({
+        height: 30,
         orientation: 'x',
-        space: { item: 3 }
+        space: { item: 5 }
     })
         .add(
             scene.rexUI.add.label({
+                background: scene.rexUI.add.roundRectangle(0, 0, 1, 1, 10, COLOR_DARK),
                 text: scene.rexUI.add.BBCodeText(0, 0, '', { fontSize: '20px', fixedWidth: 120, fixedHeight: 20, valign: 'center' }),
+                space: { left: 10, right: 10 }
             }),
             { proportion: 1, expand: true, key: 'numberInput' }
         )
         .add(
-            CreateLabel(parent, '+'),
+            scene.rexUI.add.label({
+                width: 30,
+                background: scene.rexUI.add.roundRectangle(0, 0, 1, 1, 10, COLOR_DARK),
+                text: scene.rexUI.add.BBCodeText(0, 0, '+', { fontSize: '20px' }),
+                align: 'center'
+            }),
             { expand: true, key: 'inc' }
         )
         .add(
-            CreateLabel(parent, '-'),
+            scene.rexUI.add.label({
+                width: 30,
+                background: scene.rexUI.add.roundRectangle(0, 0, 1, 1, 10, COLOR_DARK),
+                text: scene.rexUI.add.BBCodeText(0, 0, '-', { fontSize: '20px' }),
+                align: 'center'
+            }),
             { expand: true, key: 'dec' }
         )
 
@@ -88,7 +102,7 @@ var CreateNumberInputSizer = function (parent) {
     var incBtn = numberInputSizer.getElement('inc');
     var decBtn = numberInputSizer.getElement('dec')
 
-    parent.on('changedata-value', function (top, value) {
+    topWin.on('changedata-value', function (top, value) {
         numberInput.setText(value);
     })
 
@@ -99,7 +113,7 @@ var CreateNumberInputSizer = function (parent) {
                 onTextChanged: function (textObject, text) {
                     textObject.text = text;
 
-                    parent.setData('value', Number(text))
+                    topWin.setData('value', Number(text))
                 }
             }
             scene.rexUI.edit(numberInput.getElement('text'), config);
@@ -107,12 +121,12 @@ var CreateNumberInputSizer = function (parent) {
 
     scene.rexUI.add.click(incBtn)
         .on('click', function () {
-            parent.incData('value', 1);
+            topWin.incData('value', 1);
         })
 
     scene.rexUI.add.click(decBtn)
         .on('click', function () {
-            parent.incData('value', -1);
+            topWin.incData('value', -1);
         })
 
     return numberInputSizer;
