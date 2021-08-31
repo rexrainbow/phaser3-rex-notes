@@ -7,7 +7,8 @@ Custom progress bar based on [custom-shapes](shape-custom-shapes.md).
 
 ## Live demos
 
-- [react-circle-progress-bar](https://codepen.io/rexrainbow/pen/abWpYWd)
+- [React-circle-progress-bar](https://codepen.io/rexrainbow/pen/abWpYWd)
+- [Trapezoid Mask](https://codepen.io/rexrainbow/pen/BaZKBpj)
 
 ## Usage
 
