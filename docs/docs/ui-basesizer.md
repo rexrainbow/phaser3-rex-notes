@@ -675,10 +675,10 @@ sizer.addToLayer(layer);
 
 ### Events
 
+#### Layout children
+
 !!! note
     Enable sizer events by set `sizerEvents` to `true` in config.
-
-#### Layout children
 
 - Fire `'sizer.postlayout'` event to all children after layout.
     ```javascript
@@ -703,6 +703,9 @@ sizer.addToLayer(layer);
 
 #### Remove child
 
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
 - Fire `'sizer.remove'` event to removed without destroyed child.
     ```javascript
     child.on('sizer.remove', function(child, sizer){
@@ -718,6 +721,9 @@ sizer.addToLayer(layer);
 
 #### Add child
 
+!!! note
+    Enable sizer events by set `sizerEvents` to `true` in config.
+
 - Fire `'sizer.add'` event to added child.
     ```javascript
     child.on('sizer.add', function(child, sizer){
@@ -730,6 +736,22 @@ sizer.addToLayer(layer);
     
     })
     ```
+
+#### Broadcast event
+
+Fire event to sizer itself and all children
+
+```javascript
+sizer.broadcastEvent(eventName, parameter0, parameter1, ...);
+```
+
+Receive event
+
+```javascript
+child.on(eventName, function(parameter0, parameter1, ...) {
+
+}, scope);
+```
 
 ### Other properties
 

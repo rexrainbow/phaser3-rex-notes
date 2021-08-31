@@ -35,6 +35,7 @@ import PointToChild from './PointToChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
+import BroadcastEvent from './BroadcastEvent.js';
 
 var methods = {
     getSizerConfig: GetSizerConfig,
@@ -68,6 +69,7 @@ var methods = {
     isInTouching: IsInTouching,
     pointToChild: PointToChild,
     setDraggable: SetDraggable,
+    broadcastEvent: BroadcastEvent,
 
 };
 

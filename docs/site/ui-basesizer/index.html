@@ -4971,6 +4971,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#broadcast-event" class="md-nav__link">
+    Broadcast event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6087,6 +6094,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#broadcast-event" class="md-nav__link">
+    Broadcast event
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6771,11 +6785,11 @@
 <li><code>layer</code> : <a href="../layer/">Layer</a> game object.</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Enable sizer events by set <code>sizerEvents</code> to <code>true</code> in config.</p>
 </div>
-<h4 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Fire <code>'sizer.postlayout'</code> event to all children after layout.
     <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.postlayout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">sizer</span><span class="p">){</span>
@@ -6801,6 +6815,10 @@
 </code></pre></div></li>
 </ul>
 <h4 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enable sizer events by set <code>sizerEvents</code> to <code>true</code> in config.</p>
+</div>
 <ul>
 <li>Fire <code>'sizer.remove'</code> event to removed without destroyed child.
     <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.remove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">sizer</span><span class="p">){</span>
@@ -6814,6 +6832,10 @@
 </code></pre></div></li>
 </ul>
 <h4 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Enable sizer events by set <code>sizerEvents</code> to <code>true</code> in config.</p>
+</div>
 <ul>
 <li>Fire <code>'sizer.add'</code> event to added child.
     <div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sizer.add&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">sizer</span><span class="p">){</span>
@@ -6826,6 +6848,17 @@
 <span class="p">})</span>
 </code></pre></div></li>
 </ul>
+<h4 id="broadcast-event">Broadcast event<a class="headerlink" href="#broadcast-event" title="Permanent link">&para;</a></h4>
+<p>Fire event to sizer itself and all children</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">broadcastEvent</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">parameter0</span><span class="p">,</span> <span class="nx">parameter1</span><span class="p">,</span> <span class="p">...);</span>
+</code></pre></div>
+
+<p>Receive event</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">child</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parameter0</span><span class="p">,</span> <span class="nx">parameter1</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
+
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>This game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
                 
