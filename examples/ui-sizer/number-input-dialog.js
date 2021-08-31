@@ -38,7 +38,7 @@ var CreateDialog = function (scene, title, content, description) {
         )
         .add(
             CreateLabel(ui, title),
-            { expand: true }
+            { expand: false, align: 'center' }
         )
         .add(
             CreateNumberInputSizer(ui),
