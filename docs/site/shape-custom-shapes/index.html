@@ -6390,6 +6390,34 @@
 <li><code>startAngle</code>, <code>endAngle</code> : Start and end angle in degrees.</li>
 </ul>
 </li>
+<li>Add quadratic bezier of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">quadraticBezierTo</span><span class="p">(</span><span class="nx">cx</span><span class="p">,</span> <span class="nx">cy</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>cx</code>, <code>cy</code> : Control point</li>
+<li><code>x</code>, <code>y</code> : End point</li>
+</ul>
+</li>
+<li>Add smooth quadratic bezier of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">smoothQuadraticBezierTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>x</code>, <code>y</code> : End point</li>
+</ul>
+</li>
+<li>Add cubic bezier of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">cubicBezierCurveTo</span><span class="p">(</span><span class="nx">cx0</span><span class="p">,</span> <span class="nx">cy0</span><span class="p">,</span> <span class="nx">cx1</span><span class="p">,</span> <span class="nx">cy1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>cx0</code>, <code>cy0</code> : Control point0</li>
+<li><code>cx1</code>, <code>cy1</code> : Control point1</li>
+<li><code>x</code>, <code>y</code> : End point</li>
+</ul>
+</li>
+<li>Add smooth cubic bezier of lines
+    <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">smoothCubicBezierCurveTo</span><span class="p">(</span><span class="nx">cx1</span><span class="p">,</span> <span class="nx">cy1</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>cx1</code>, <code>cy1</code> : Control point1</li>
+<li><code>x</code>, <code>y</code> : End point</li>
+</ul>
+</li>
 <li>Close path
     <div class="codehilite"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div></li>

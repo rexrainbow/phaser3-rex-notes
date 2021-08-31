@@ -313,6 +313,30 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
     lines.ellipticalArc(centerX, centerY, radiusX, radiusY, startAngle, endAngle, anticlockwise);
     ```
     - `startAngle`, `endAngle` : Start and end angle in degrees.
+- Add quadratic bezier of lines
+    ```javascript
+    lines.quadraticBezierTo(cx, cy, x, y);
+    ```
+    - `cx`, `cy` : Control point
+    - `x`, `y` : End point
+- Add smooth quadratic bezier of lines
+    ```javascript
+    lines.smoothQuadraticBezierTo(x, y);
+    ```
+    - `x`, `y` : End point
+- Add cubic bezier of lines
+    ```javascript
+    lines.cubicBezierCurveTo(cx0, cy0, cx1, cy1, x, y);
+    ```
+    - `cx0`, `cy0` : Control point0
+    - `cx1`, `cy1` : Control point1
+    - `x`, `y` : End point
+- Add smooth cubic bezier of lines
+    ```javascript
+    lines.smoothCubicBezierCurveTo(cx1, cy1, x, y);
+    ```
+    - `cx1`, `cy1` : Control point1
+    - `x`, `y` : End point
 - Close path
     ```javascript
     lines.close();
