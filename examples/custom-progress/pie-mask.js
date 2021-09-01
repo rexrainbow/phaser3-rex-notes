@@ -37,29 +37,19 @@ var CreateMask = function (scene) {
     return scene.add.rexCustomProgress({
         type: 'Graphics',
         create: [
-            { name: 'trapezoid0', type: 'lines' },
-            { name: 'trapezoid1', type: 'lines' },
+            { name: 'pie', type: 'arc' },
         ],
         update: function () {
-            var height = this.height * this.value;
-            var width0 = this.width * 0.4;
-            var width1 = this.width * (0.4 + 0.2 * this.value);
+            var radius = Math.max(this.width, this.height) * 2;
+            var deltaAngle = 90 * this.value;
 
-            this.getShape('trapezoid0')
+            this.getShape('pie')
                 .fillStyle(0xffffff)
-                .startAt(0, this.height)
-                .lineTo(width0, this.height)
-                .lineTo(width1, this.height - height)
-                .lineTo(0, this.height - height)
-                .close()
+                .setCenterPosition(this.centerX, 0)
+                .setRadius(radius)
+                .setAngle(90 - deltaAngle, 90 + deltaAngle)
+                .setPie();
 
-            this.getShape('trapezoid1')
-                .fillStyle(0xffffff)
-                .startAt(this.width, 0)
-                .lineTo(this.width - width0, 0)
-                .lineTo(this.width - width1, height)
-                .lineTo(this.width, height)
-                .close()
         },
     })
         .setVisible(false)
