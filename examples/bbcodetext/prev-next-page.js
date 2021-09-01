@@ -1,6 +1,6 @@
 import 'phaser';
 import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
-import TextPagePlugin from '../../plugins/textpage-plugin.js'
+import TextPage from '../../plugins/textpage.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -31,7 +31,7 @@ class Demo extends Phaser.Scene {
             },
             maxLines: 7
         });
-        txt.page = new TextPagePlugin(txt, {
+        txt.page = new TextPage(txt, {
             //text: lines
         });
         txt.page.setText(lines);
