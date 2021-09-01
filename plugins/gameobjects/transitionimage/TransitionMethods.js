@@ -35,12 +35,12 @@ export default {
 
         if (enable) {
             if (!this.childrenMask) {
-                if (!this.defaultMaskGameObject) {
-                    this.defaultMaskGameObject = (new DefaultMaskGraphics(this))
+                if (!this.maskGameObject) {
+                    this.maskGameObject = (new DefaultMaskGraphics(this))
                         .setScale(this.scaleX, this.scaleY);
-                    this.add(this.defaultMaskGameObject)
+                    this.add(this.maskGameObject)
                 }
-                this.childrenMask = this.defaultMaskGameObject.createGeometryMask();
+                this.childrenMask = this.maskGameObject.createGeometryMask();
             }
             this.backImage.setMask(this.childrenMask);
             this.frontImage.setMask(this.childrenMask);

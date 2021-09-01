@@ -44,7 +44,7 @@ class TransitionImage extends Container {
         this.type = 'rexTransitionImage';
         this.backImage = backImage;
         this.frontImage = frontImage;
-        this.defaultMaskGameObject = undefined;
+        this.maskGameObject = undefined;
 
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);
@@ -91,7 +91,7 @@ class TransitionImage extends Container {
         }
         this.backImage = undefined;
         this.frontImage = undefined;
-        this.defaultMaskGameObject = undefined;
+        this.maskGameObject = undefined;
 
         super.destroy(fromScene);
 
@@ -190,8 +190,8 @@ class TransitionImage extends Container {
         this.backImage.setOrigin(originX, originY);
         this.frontImage.setOrigin(originX, originY);
 
-        if (this.defaultMaskGameObject) {
-            this.defaultMaskGameObject.setOrigin(originX, originY);
+        if (this.maskGameObject) {
+            this.maskGameObject.setOrigin(originX, originY);
         }
 
         return this;
