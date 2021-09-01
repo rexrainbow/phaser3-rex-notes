@@ -1,7 +1,7 @@
 import Container from '../containerlite/ContainerLite.js';
-import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 import SetTransitionCallbackMethods from './SetTransitionCallbackMethods.js';
 import TransitionMethods from './TransitionMethods.js';
+import MaskMethods from './MaskMethods.js';
 import {
     OnStart as DefaultOnStart,
     OnProgress as DefaultOnProgress,
@@ -74,7 +74,12 @@ class TransitionImage extends Container {
             .setTransitionDirection(dir)
             .setDuration(GetValue(config, 'duration', 1000))
             .setEaseFunction(GetValue(config, 'ease', 'Linear'))
-            .setMaskEnable(GetValue(config, 'mask', false))
+
+        var maskGameObject = GetValue(config, 'mask', undefined);
+        if (maskGameObject) {
+            this.setMaskGameObject(maskGameObject);
+        }
+        this.setMaskEnable(false);
 
         this.ignoreCompleteEvent = false;
     }
@@ -221,7 +226,8 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
 Object.assign(
     TransitionImage.prototype,
     SetTransitionCallbackMethods,
-    TransitionMethods
+    TransitionMethods,
+    MaskMethods
 );
 
 export default TransitionImage;

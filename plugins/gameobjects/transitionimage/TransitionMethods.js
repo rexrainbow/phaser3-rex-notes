@@ -1,5 +1,4 @@
 import EaseValueTask from '../../utils/ease/EaseValueTask.js';
-import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -28,31 +27,7 @@ export default {
         return this;
     },
 
-    setMaskEnable(enable) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        if (enable) {
-            if (!this.childrenMask) {
-                if (!this.maskGameObject) {
-                    this.maskGameObject = (new DefaultMaskGraphics(this))
-                        .setScale(this.scaleX, this.scaleY);
-                    this.add(this.maskGameObject)
-                }
-                this.childrenMask = this.maskGameObject.createGeometryMask();
-            }
-            this.backImage.setMask(this.childrenMask);
-            this.frontImage.setMask(this.childrenMask);
-        } else {
-            this.backImage.clearMask();
-            this.frontImage.clearMask();
-        }
-
-        return this;
-    },
-
-    transit(texture, frame) {
+    transit(texture, frame) {        
         if (this.isRunning) {
             this.ignoreCompleteEvent = true;
             this.stop();
@@ -68,7 +43,12 @@ export default {
                 .setDuration(GetValue(config, 'duration', this.duration))
                 .setEaseFunction(GetValue(config, 'ease', this.easeFunction))
                 .setTransitionDirection(GetValue(config, 'dir', this.dir))
-                .setMaskEnable(GetValue(config, 'mask', false));
+
+            var maskGameObject = GetValue(config, 'mask', undefined);
+            if (maskGameObject) {
+                this.setMaskGameObject(maskGameObject);
+            }
+            this.setMaskEnable(maskGameObject === true);
 
             var onStart = GetValue(config, 'onStart', undefined);
             var onProgress = GetValue(config, 'onProgress', undefined);

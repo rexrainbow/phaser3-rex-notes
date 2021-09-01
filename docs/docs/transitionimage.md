@@ -88,7 +88,7 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
     // onCompleteScope: undefined,    
     // duration: 1000,
     // ease: 'Linear',
-    // mask: false,
+    // mask: undefined,
 });
 ```
 
@@ -100,7 +100,9 @@ var image = scene.add.rexTransitionImage(x, y, texture, frame, {
 - `onComplete`, `onCompleteScope` : Callback and scope of transition-complete. See [Set transition callbacks](transitionimage.md#set-transition-callbacks)
 - `duration` : Duration of transition.
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
-- `mask` : Set `true` to apply a mask to current and next textures/[images](image.md).
+- `mask` : Mask game object.
+    - `true` : Default graphics game object.
+    - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
 
 If `onStart`, `onProgress` and `onComplete` are all `undefined`, it will use **cross-fade** as default transition callbacks.
 
@@ -122,13 +124,12 @@ var image = scene.make.rexTransitionImage({
     // onCompleteScope: undefined,
     // duration: 1000,
     // ease: 'Linear',
-    // mask: false,
+    // mask: undefined,
 
     // origin: {x: 0.5, y: 0.5},
     add: true
 });
 ```
-
 
 ### Custom class
 
@@ -182,9 +183,28 @@ image.transit({
     // onCompleteScope: undefined,
     // duration: 1000,
     // ease: 'Linear',
-    // mask: false,
+    // mask: undefined,
 })
 ```
+
+- `mask` : Mask game object.
+    - `true` : Default graphics game object. Also apply this mask to current and next textures/[images](image.md)
+    - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
+        - Apply mask to current texture : 
+            ```javascript
+            parent.setCurrentImageMaskEnable();
+            // parent.setCurrentImageMaskEnable(enable, invertAlpha);
+            ```
+        - Apply mask to next texture : 
+            ```javascript
+            parent.setNextImageMaskEnable();
+            // parent.setNextImageMaskEnable(enable, invertAlpha);
+            ```
+        - Apply mask to both current and next trextures :
+            ```javascript
+            parent.setMaskEnable();
+            // parent.setMaskEnable(enable, invertAlpha);
+            ```
 
 Fire `'complete'` event when transition completed.
 
@@ -256,13 +276,21 @@ image.setEaseFunction(ease);
 
 ### Enable mask
 
-```javascript
-image.setMaskEnable(enable);
-```
-
-- `enable` : 
-    - `true` : Apply a mask to current and next textures/[images](image.md).
-    - `false` : Clear mask from current and next textures/[images](image.md).
+- Apply mask to current texture : 
+    ```javascript
+    parent.setCurrentImageMaskEnable();
+    // parent.setCurrentImageMaskEnable(enable, invertAlpha);
+    ```
+- Apply mask to next texture : 
+    ```javascript
+    parent.setNextImageMaskEnable();
+    // parent.setNextImageMaskEnable(enable, invertAlpha);
+    ```
+- Apply mask to both current and next trextures :
+    ```javascript
+    parent.setMaskEnable();
+    // parent.setMaskEnable(enable, invertAlpha);
+    ```
 
 ### Pause/Resume
 

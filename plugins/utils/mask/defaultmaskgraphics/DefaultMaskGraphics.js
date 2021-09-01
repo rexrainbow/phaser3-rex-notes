@@ -81,7 +81,7 @@ class DefaultMaskGraphics extends Graphics {
         if (originY === undefined) {
             originY = parent.originY;
         }
-        if ((this.originXSave === originX) && (this.originYSave === orginY)) {
+        if ((this.originXSave === originX) && (this.originYSave === originY)) {
             return this;
         }
 

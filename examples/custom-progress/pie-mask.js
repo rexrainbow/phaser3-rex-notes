@@ -10,18 +10,18 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-        this.load.image('road', 'assets/images/backgrounds/road.png');
     }
 
     create() {
-        var image1 = this.add.image(400, 300, 'road').setScale(0.75);
         var image0 = this.add.image(400, 300, 'classroom').setScale(0.75);
 
         var maskGameObject = CreateMask(this)
             .setSize(800, 600).setScale(0.75)
             .setPosition(400, 300)
 
-        image0.setMask(maskGameObject.createGeometryMask());
+        image0.setMask(
+            maskGameObject.createGeometryMask().setInvertAlpha()
+        );
 
         maskGameObject
             .setEaseValueFunction('Cubic')
@@ -39,7 +39,7 @@ var CreateMask = function (scene) {
         create: [
             { name: 'pie', type: 'arc' },
         ],
-        update: function () {
+        update: function () {            
             var radius = Math.max(this.width, this.height) * 2;
             var deltaAngle = 90 * this.value;
 

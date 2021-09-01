@@ -6079,7 +6079,7 @@
     <span class="c1">// onCompleteScope: undefined,    </span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
-    <span class="c1">// mask: false,</span>
+    <span class="c1">// mask: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
 
@@ -6094,7 +6094,11 @@
 <li><code>onComplete</code>, <code>onCompleteScope</code> : Callback and scope of transition-complete. See <a href="./#set-transition-callbacks">Set transition callbacks</a></li>
 <li><code>duration</code> : Duration of transition.</li>
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
-<li><code>mask</code> : Set <code>true</code> to apply a mask to current and next textures/<a href="../image/">images</a>.</li>
+<li><code>mask</code> : Mask game object.<ul>
+<li><code>true</code> : Default graphics game object.</li>
+<li>Any shape game object, or <a href="../shape-custom-shapes/">custom shape</a>, <a href="../shape-custom-progress/">custom progress</a> game object.</li>
+</ul>
+</li>
 </ul>
 <p>If <code>onStart</code>, <code>onProgress</code> and <code>onComplete</code> are all <code>undefined</code>, it will use <strong>cross-fade</strong> as default transition callbacks.</p>
 <p>Add transitionimage from JSON</p>
@@ -6113,7 +6117,7 @@
     <span class="c1">// onCompleteScope: undefined,</span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
-    <span class="c1">// mask: false,</span>
+    <span class="c1">// mask: undefined,</span>
 
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
@@ -6170,10 +6174,31 @@
     <span class="c1">// onCompleteScope: undefined,</span>
     <span class="c1">// duration: 1000,</span>
     <span class="c1">// ease: &#39;Linear&#39;,</span>
-    <span class="c1">// mask: false,</span>
+    <span class="c1">// mask: undefined,</span>
 <span class="p">})</span>
 </code></pre></div>
 
+<ul>
+<li><code>mask</code> : Mask game object.<ul>
+<li><code>true</code> : Default graphics game object. Also apply this mask to current and next textures/<a href="../image/">images</a></li>
+<li>Any shape game object, or <a href="../shape-custom-shapes/">custom shape</a>, <a href="../shape-custom-progress/">custom progress</a> game object.<ul>
+<li>Apply mask to current texture : 
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setCurrentImageMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+<li>Apply mask to next texture : 
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setNextImageMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+<li>Apply mask to both current and next trextures :
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <p>Fire <code>'complete'</code> event when transition completed.</p>
 <h3 id="set-transition-callbacks">Set transition callbacks<a class="headerlink" href="#set-transition-callbacks" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6248,15 +6273,19 @@
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
 </ul>
 <h3 id="enable-mask">Enable mask<a class="headerlink" href="#enable-mask" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
-</code></pre></div>
-
 <ul>
-<li><code>enable</code> : <ul>
-<li><code>true</code> : Apply a mask to current and next textures/<a href="../image/">images</a>.</li>
-<li><code>false</code> : Clear mask from current and next textures/<a href="../image/">images</a>.</li>
-</ul>
-</li>
+<li>Apply mask to current texture : 
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setCurrentImageMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+<li>Apply mask to next texture : 
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setNextImageMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+<li>Apply mask to both current and next trextures :
+    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
+<span class="c1">// parent.setMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
 </ul>
 <h3 id="pauseresume">Pause/Resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
