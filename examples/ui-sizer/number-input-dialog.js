@@ -31,7 +31,6 @@ var CreateDialog = function (scene, title, content, description) {
         orientation: 'y',
         space: { left: 20, right: 20, top: 20, bottom: 20, item: 25 }
     })
-        .setData('value', undefined);
 
     topWin
         .addBackground(
@@ -42,7 +41,7 @@ var CreateDialog = function (scene, title, content, description) {
             { expand: false, align: 'center' }
         )
         .add(
-            CreateNumberInputSizer(topWin),
+            CreateNumberInputSizer(topWin, 'value'),
             { expand: true }
         )
         .add(
@@ -64,8 +63,11 @@ var CreateLabel = function (topWin, text) {
     })
 }
 
-var CreateNumberInputSizer = function (topWin) {
-    var scene = topWin.scene;
+var CreateNumberInputSizer = function (parent, dataKey) {
+    var scene = parent.scene;
+
+    parent.setData(dataKey, undefined);
+
     var numberInputSizer = scene.rexUI.add.sizer({
         height: 30,
         orientation: 'x',
@@ -102,7 +104,7 @@ var CreateNumberInputSizer = function (topWin) {
     var incBtn = numberInputSizer.getElement('inc');
     var decBtn = numberInputSizer.getElement('dec')
 
-    topWin.on('changedata-value', function (top, value) {
+    parent.on('changedata-value', function (top, value) {
         numberInput.setText(value);
     })
 
@@ -112,7 +114,7 @@ var CreateNumberInputSizer = function (topWin) {
                 type: 'number',
                 onTextChanged: function (textObject, text) {
                     // textObject.text = text;
-                    topWin.setData('value', Number(text))
+                    parent.setData(dataKey, Number(text))
                 }
             }
             scene.rexUI.edit(numberInput.getElement('text'), config);
@@ -120,12 +122,12 @@ var CreateNumberInputSizer = function (topWin) {
 
     scene.rexUI.add.click(incBtn)
         .on('click', function () {
-            topWin.incData('value', 1);
+            parent.incData(dataKey, 1);
         })
 
     scene.rexUI.add.click(decBtn)
         .on('click', function () {
-            topWin.incData('value', -1);
+            parent.incData(dataKey, -1);
         })
 
     return numberInputSizer;
