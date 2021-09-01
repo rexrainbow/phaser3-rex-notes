@@ -1,4 +1,5 @@
 import EaseValueTask from '../../utils/ease/EaseValueTask.js';
+import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -34,7 +35,12 @@ export default {
 
         if (enable) {
             if (!this.childrenMask) {
-                this.childrenMask = this.maskGraphics.createGeometryMask();
+                if (!this.defaultMaskGameObject) {
+                    this.defaultMaskGameObject = (new DefaultMaskGraphics(this))
+                        .setScale(this.scaleX, this.scaleY);
+                    this.add(this.defaultMaskGameObject)
+                }
+                this.childrenMask = this.defaultMaskGameObject.createGeometryMask();
             }
             this.backImage.setMask(this.childrenMask);
             this.frontImage.setMask(this.childrenMask);
