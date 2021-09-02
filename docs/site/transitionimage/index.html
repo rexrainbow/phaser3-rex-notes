@@ -795,8 +795,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-mask" class="md-nav__link">
-    Enable mask
+  <a href="#mask" class="md-nav__link">
+    Mask
   </a>
   
 </li>
@@ -5950,8 +5950,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#enable-mask" class="md-nav__link">
-    Enable mask
+  <a href="#mask" class="md-nav__link">
+    Mask
   </a>
   
 </li>
@@ -6183,16 +6183,16 @@
 <li><code>true</code> : Default graphics game object. Also apply this mask to current and next textures/<a href="../image/">images</a></li>
 <li>Any shape game object, or <a href="../shape-custom-shapes/">custom shape</a>, <a href="../shape-custom-progress/">custom progress</a> game object.<ul>
 <li>Apply mask to current texture : 
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setCurrentImageMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setCurrentImageMaskEnable(enable, invertAlpha);</span>
 </code></pre></div></li>
 <li>Apply mask to next texture : 
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setNextImageMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setNextImageMaskEnable(enable, invertAlpha);</span>
 </code></pre></div></li>
 <li>Apply mask to both current and next trextures :
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setMaskEnable(enable, invertAlpha);</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -6272,19 +6272,25 @@
 <ul>
 <li><code>ease</code> : <a href="../tween/#ease-equations">Ease function</a> of transition-progress.</li>
 </ul>
-<h3 id="enable-mask">Enable mask<a class="headerlink" href="#enable-mask" title="Permanent link">&para;</a></h3>
+<h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Apply mask to current texture : 
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setCurrentImageMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setCurrentImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setCurrentImageMaskEnable(enable, invertAlpha);</span>
 </code></pre></div></li>
 <li>Apply mask to next texture : 
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setNextImageMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setNextImageMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setNextImageMaskEnable(enable, invertAlpha);</span>
 </code></pre></div></li>
 <li>Apply mask to both current and next trextures :
-    <div class="codehilite"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
-<span class="c1">// parent.setMaskEnable(enable, invertAlpha);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskEnable</span><span class="p">();</span>
+<span class="c1">// image.setMaskEnable(enable, invertAlpha);</span>
+</code></pre></div></li>
+<li>Assign default mask game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskGameObject</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Assign custom mask game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">setMaskGameObject</span><span class="p">(</span><span class="nx">maskGameObject</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="pauseresume">Pause/Resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>

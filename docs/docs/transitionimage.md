@@ -192,18 +192,18 @@ image.transit({
     - Any shape game object, or [custom shape](shape-custom-shapes.md), [custom progress](shape-custom-progress.md) game object.
         - Apply mask to current texture : 
             ```javascript
-            parent.setCurrentImageMaskEnable();
-            // parent.setCurrentImageMaskEnable(enable, invertAlpha);
+            image.setCurrentImageMaskEnable();
+            // image.setCurrentImageMaskEnable(enable, invertAlpha);
             ```
         - Apply mask to next texture : 
             ```javascript
-            parent.setNextImageMaskEnable();
-            // parent.setNextImageMaskEnable(enable, invertAlpha);
+            image.setNextImageMaskEnable();
+            // image.setNextImageMaskEnable(enable, invertAlpha);
             ```
         - Apply mask to both current and next trextures :
             ```javascript
-            parent.setMaskEnable();
-            // parent.setMaskEnable(enable, invertAlpha);
+            image.setMaskEnable();
+            // image.setMaskEnable(enable, invertAlpha);
             ```
 
 Fire `'complete'` event when transition completed.
@@ -274,22 +274,30 @@ image.setEaseFunction(ease);
 
 - `ease` : [Ease function](tween.md#ease-equations) of transition-progress.
 
-### Enable mask
+### Mask
 
 - Apply mask to current texture : 
     ```javascript
-    parent.setCurrentImageMaskEnable();
-    // parent.setCurrentImageMaskEnable(enable, invertAlpha);
+    image.setCurrentImageMaskEnable();
+    // image.setCurrentImageMaskEnable(enable, invertAlpha);
     ```
 - Apply mask to next texture : 
     ```javascript
-    parent.setNextImageMaskEnable();
-    // parent.setNextImageMaskEnable(enable, invertAlpha);
+    image.setNextImageMaskEnable();
+    // image.setNextImageMaskEnable(enable, invertAlpha);
     ```
 - Apply mask to both current and next trextures :
     ```javascript
-    parent.setMaskEnable();
-    // parent.setMaskEnable(enable, invertAlpha);
+    image.setMaskEnable();
+    // image.setMaskEnable(enable, invertAlpha);
+    ```
+- Assign default mask game object
+    ```javascript
+    image.setMaskGameObject(true);
+    ```
+- Assign custom mask game object
+    ```javascript
+    image.setMaskGameObject(maskGameObject);
     ```
 
 ### Pause/Resume

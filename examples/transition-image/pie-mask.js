@@ -29,9 +29,9 @@ class Demo extends Phaser.Scene {
         this.input.on('pointerdown', function () {
             var currentKey = image.texture.key;
             if (currentKey === 'classroom') {
-                CustomMask(image, 'road');
+                CustomMaskOut(image, 'road');
             } else {
-                CustomMask(image, 'classroom');
+                CustomMaskIn(image, 'classroom');
             }
 
         })
@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CustomMask = function (transitionImage, key, frame) {
+var CustomMaskOut = function (transitionImage, key, frame) {
     transitionImage.transit({
         key: key, frame: frame,
 
@@ -60,35 +60,45 @@ var CustomMask = function (transitionImage, key, frame) {
     return transitionImage;
 }
 
+var CustomMaskIn = function (transitionImage, key, frame) {
+    transitionImage.transit({
+        key: key, frame: frame,
+
+        duration: 3000, ease: 'Linear', dir: 'in',
+
+        onStart: function (parent, currentImage, nextImage, t) {
+            parent.setNextImageMaskEnable(true);
+            parent.maskGameObject.setValue(1-t);
+        },
+        onProgress: function (parent, currentImage, nextImage, t) {
+            parent.maskGameObject.setValue(1-t);
+        },
+        onComplete: function (parent, currentImage, nextImage, t) {
+        },
+    })
+    return transitionImage;
+}
+
 var CreateMask = function (scene) {
     return scene.add.rexCustomProgress({
         type: 'Graphics',
         create: [
-            { name: 'trapezoid0', type: 'lines' },
-            { name: 'trapezoid1', type: 'lines' },
+            { name: 'pie', type: 'arc' },
         ],
         update: function () {            
-            var height = this.height * this.value;
-            var width0 = this.width * 0.4;
-            var width1 = this.width * (0.4 + 0.2 * this.value);
+            var radius = Math.max(this.width, this.height) * 2;
+            var deltaAngle = 90 * this.value;
 
-            this.getShape('trapezoid0')
+            this.getShape('pie')
                 .fillStyle(0xffffff)
-                .startAt(0, this.height)
-                .lineTo(width0, this.height)
-                .lineTo(width1, this.height - height)
-                .lineTo(0, this.height - height)
-                .close()
+                .setCenterPosition(this.centerX, 0)
+                .setRadius(radius)
+                .setAngle(90 - deltaAngle, 90 + deltaAngle)
+                .setPie();
 
-            this.getShape('trapezoid1')
-                .fillStyle(0xffffff)
-                .startAt(this.width, 0)
-                .lineTo(this.width - width0, 0)
-                .lineTo(this.width - width1, height)
-                .lineTo(this.width, height)
-                .close()
         },
     })
+        .setVisible(false)
 }
 
 var config = {
