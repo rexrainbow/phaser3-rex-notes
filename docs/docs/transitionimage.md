@@ -12,6 +12,7 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
 - [Slide](https://codepen.io/rexrainbow/pen/GRmbEbE)
 - [Split](https://codepen.io/rexrainbow/pen/OJmeqXX)
 - [Dissolve](https://codepen.io/rexrainbow/pen/qBjObWp)
+- [Pie mask](https://codepen.io/rexrainbow/pen/OJgXMmw)
 
 ## Usage
 
