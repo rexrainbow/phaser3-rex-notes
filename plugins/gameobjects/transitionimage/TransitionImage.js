@@ -175,6 +175,7 @@ class TransitionImage extends Container {
                 .setChildVisible(this.frontImage, true)
                 .setChildVisible(this.backImage, false)
                 .setMaskEnable(false)
+                .freeCellImages()
         }
 
         if ((value === 1) && (!this.ignoreCompleteEvent)) {

@@ -1,6 +1,5 @@
 import 'phaser';
 import TransitionImagePlugin from '../../plugins/transitionimage-plugin';
-import GridCutImagePlugin from '../../plugins/gridcutimage-plugin';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -54,21 +53,13 @@ var CellOut = function (transitionImage, key, frame) {
         duration: 2000, ease: 'Linear', dir: 'out',
 
         onStart: function (parent, currentImage, nextImage, t) {
-            var cellImages = scene.plugins.get('rexGridCutImage').gridCut(currentImage, 20, 15, {
-                objectPool: transitionImage.cellImagePool
-            })
-            parent.addMultiple(cellImages);
-            currentImage.setVisible(false);
-
-            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                parent.setChildLocalVisible(cellImages[i], true);
+            var cellImages = parent.gridCutCurrentImage(20, 15);
+            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {                
                 cellImages[i].setData('delay', Random(0, DelayMax));
             }
-
-            transitionImage.cellImages = cellImages;
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            var cellImages = transitionImage.cellImages;
+            var cellImages = parent.getCellImages();
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var delay = cellImages[i].getData('delay');
                 var cellT = Clamp((t - delay) / ProgressT, 0, 1);
@@ -77,22 +68,6 @@ var CellOut = function (transitionImage, key, frame) {
             }
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            var texture = currentImage.texture;
-            var cellImages = transitionImage.cellImages;
-            if (cellImages) {
-                for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                    var cellImage = cellImages[i];
-                    parent
-                        .setChildLocalAlpha(cellImage, 1)
-                        .setChildLocalVisible(cellImage, false)
-
-                    var frameName = cellImage.frame.name;
-                    cellImage.setTexture();
-                    texture.remove(frameName);
-                }
-                transitionImage.cellImagePool = transitionImage.cellImages;
-                transitionImage.cellImages = undefined;
-            }
         },
     })
     return transitionImage;
@@ -110,21 +85,13 @@ var CellIn = function (transitionImage, key, frame) {
         duration: 2000, ease: 'Linear', dir: 'in',
 
         onStart: function (parent, currentImage, nextImage, t) {
-            var cellImages = scene.plugins.get('rexGridCutImage').gridCut(nextImage, 20, 15, {
-                objectPool: transitionImage.cellImagePool
-            });
-            parent.addMultiple(cellImages);
-            nextImage.setVisible(false);
-
-            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                parent.setChildLocalVisible(cellImages[i], true);
+            var cellImages = parent.gridCutNextImage(20, 15);
+            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {                
                 cellImages[i].setData('delay', Random(0, DelayMax))
             }
-
-            transitionImage.cellImages = cellImages;
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            var cellImages = transitionImage.cellImages;
+            var cellImages = parent.getCellImages();
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var delay = cellImages[i].getData('delay');
                 var cellT = Clamp((t - delay) / ProgressT, 0, 1);
@@ -133,22 +100,6 @@ var CellIn = function (transitionImage, key, frame) {
             }
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            var texture = nextImage.texture;
-            var cellImages = transitionImage.cellImages;
-            if (cellImages) {
-                for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                    var cellImage = cellImages[i];
-                    parent
-                        .setChildLocalScale(cellImage, 1)
-                        .setChildLocalVisible(cellImage, false);
-
-                    var frameName = cellImage.frame.name;
-                    cellImage.setTexture();
-                    texture.remove(frameName);
-                }
-                transitionImage.cellImagePool = transitionImage.cellImages;
-                transitionImage.cellImages = undefined;
-            }
         },
     })
     return transitionImage;
@@ -165,18 +116,11 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [
-            {
-                key: 'rexTransitionImage',
-                plugin: TransitionImagePlugin,
-                start: true
-            },
-            {
-                key: 'rexGridCutImage',
-                plugin: GridCutImagePlugin,
-                start: true
-            }
-        ]
+        global: [{
+            key: 'rexTransitionImage',
+            plugin: TransitionImagePlugin,
+            start: true
+        }]
     }
 };
 

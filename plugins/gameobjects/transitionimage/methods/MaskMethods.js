@@ -78,9 +78,18 @@ export default {
         return this;
     },
 
+    setCellImagesMaskEnable(enable, invertAlpha) {
+        var cellImages = this.getCellImages();
+        for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
+            this.setImageMaskEnable(cellImages[i], enable, invertAlpha);
+        }
+        return this;
+    },
+
     setMaskEnable(enable, invertAlpha) {
         this.setImageMaskEnable(this.backImage, enable, invertAlpha);
         this.setImageMaskEnable(this.frontImage, enable, invertAlpha);
+        this.setCellImagesMaskEnable(enable, invertAlpha);
         return this;
     }
 }
