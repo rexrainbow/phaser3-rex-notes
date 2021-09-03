@@ -1548,8 +1548,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reset-shapes" class="md-nav__link">
-    Reset shapes
+  <a href="#recreate-shapes" class="md-nav__link">
+    Recreate shapes
   </a>
   
 </li>
@@ -5921,8 +5921,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#reset-shapes" class="md-nav__link">
-    Reset shapes
+  <a href="#recreate-shapes" class="md-nav__link">
+    Recreate shapes
   </a>
   
 </li>
@@ -6200,50 +6200,9 @@
 </code></pre></div></li>
 </ul>
 <h4 id="set-update-shape-callback">Set update shape callback<a class="headerlink" href="#set-update-shape-callback" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><code><span class="nx">customProgress</span><span class="p">.</span><span class="nx">setUpdateShapesCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-</code></pre></div>
-
-<ul>
-<li><code>callback</code> :
-    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// this : This custom shapes game object     </span>
-    <span class="kd">var</span> <span class="nx">shapes</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShapes</span><span class="p">();</span>
-    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-    <span class="c1">// ...</span>
-    <span class="c1">// var isSizeChanged = this.isSizeChanged;</span>
-<span class="p">}</span>
-</code></pre></div><ul>
-<li>Shape instances : Change properties of shape instances.<ul>
-<li><code>this.getShapes()</code> : Return all shapes in an array.</li>
-<li><code>this.getShape(name)</code> : Return a shape by the unique string name.</li>
-</ul>
-</li>
-<li>Is size changed: <code>this.isSizeChanged</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="reset-shapes">Reset shapes<a class="headerlink" href="#reset-shapes" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Clear all shapes
-    <div class="codehilite"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Add new shape
-    <div class="codehilite"><pre><span></span><code><span class="nx">customShapes</span><span class="p">.</span><span class="nx">createShape</span><span class="p">(</span><span class="nx">shapeType</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>shapeType</code> : <ul>
-<li><code>'arc'</code> : Create <a href="../shape-custom-shapes/#arc">Arc shape</a>.</li>
-<li><code>'circle'</code> : Create <a href="../shape-custom-shapes/#circle">Circle shape</a>.</li>
-<li><code>'ellipse'</code> : Create <a href="../shape-custom-shapes/#ellipse">Ellipse shape</a>.</li>
-<li><code>'line'</code> : Create <a href="../shape-custom-shapes/#line">Line shape</a>.</li>
-<li><code>'lines'</code> : Create <a href="../shape-custom-shapes/#lines">Lines shape</a>.</li>
-<li><code>'rectangle'</code> : Create <a href="../shape-custom-shapes/#rectangle">Rectangle shape</a>.</li>
-<li><code>'triangle'</code> : Create <a href="../shape-custom-shapes/#triangle">Triangle shape</a>.</li>
-</ul>
-</li>
-<li><code>name</code> : A string name of this shape.</li>
-</ul>
-</li>
-</ul>
+<p>See <a href="../shape-custom-shapes/#set-update-shape-callback">Shape class</a></p>
+<h4 id="recreate-shapes">Recreate shapes<a class="headerlink" href="#recreate-shapes" title="Permanent link">&para;</a></h4>
+<p>See <a href="../shape-custom-shapes/#recreate-shapes">Shape class</a></p>
 <h3 id="progress-value">Progress value<a class="headerlink" href="#progress-value" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get value

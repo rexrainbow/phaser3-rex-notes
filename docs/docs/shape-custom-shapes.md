@@ -198,7 +198,7 @@ customShapes.setUpdateShapesCallback(callback);
         - `this.getShape(name)` : Return a shape by the unique string name.
     - Is size changed: `this.isSizeChanged`
 
-#### Reset shapes
+#### Recreate shapes
 
 - Clear all shapes
     ```javascript

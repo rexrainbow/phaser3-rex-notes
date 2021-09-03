@@ -203,44 +203,11 @@ var customProgress = scene.add.rexCustomProgress({
 
 #### Set update shape callback
 
-```javascript
-customProgress.setUpdateShapesCallback(callback);
-```
+See [Shape class](shape-custom-shapes.md#set-update-shape-callback)
 
-- `callback` :
-    ```javascript
-    function() {
-        // this : This custom shapes game object     
-        var shapes = this.getShapes();
-        var shape = this.getShape(name);
-        // ...
-        // var isSizeChanged = this.isSizeChanged;
-    }
-    ```
-    - Shape instances : Change properties of shape instances.
-        - `this.getShapes()` : Return all shapes in an array.
-        - `this.getShape(name)` : Return a shape by the unique string name.
-    - Is size changed: `this.isSizeChanged`
+#### Recreate shapes
 
-#### Reset shapes
-
-- Clear all shapes
-    ```javascript
-    customShapes.clear();
-    ```
-- Add new shape
-    ```javascript
-    customShapes.createShape(shapeType, name);
-    ```
-    - `shapeType` : 
-        - `'arc'` : Create [Arc shape](shape-custom-shapes.md#arc).
-        - `'circle'` : Create [Circle shape](shape-custom-shapes.md#circle).
-        - `'ellipse'` : Create [Ellipse shape](shape-custom-shapes.md#ellipse).
-        - `'line'` : Create [Line shape](shape-custom-shapes.md#line).
-        - `'lines'` : Create [Lines shape](shape-custom-shapes.md#lines).
-        - `'rectangle'` : Create [Rectangle shape](shape-custom-shapes.md#rectangle).
-        - `'triangle'` : Create [Triangle shape](shape-custom-shapes.md#triangle).
-    - `name` : A string name of this shape.
+See [Shape class](shape-custom-shapes.md#recreate-shapes)
 
 ### Progress value
 
