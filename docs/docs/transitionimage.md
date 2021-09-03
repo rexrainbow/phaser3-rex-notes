@@ -357,13 +357,11 @@ Also will fire `'complete'` event.
 
 - Ease property of current/next image.
     - [Scale](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/scale.js)
-    - [Slide](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/slide.js), 
-        - Apply mask to current/next image.
+    - [Slide](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/slide.js), apply mask to current/next image.
 - Apply shader effect to current/next image, then ease property this shader effect.
     - [Dissolve](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/dissolve.js)
     - [Split](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/split.js)
 - Grid cut current/next image to cell images, then ease property of cell images
     - [Grid cut](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/grid-cut.js)
 - Morph custom mask game object
-    - [Pie-mask](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/pie-mask.js)
-        - Mask current/next image by a [custom-progress game object](shape-custom-progress.md).
+    - [Pie-mask](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/pie-mask.js), mask current/next image by a [custom-progress game object](shape-custom-progress.md).
