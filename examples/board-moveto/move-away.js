@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var config = {
@@ -118,11 +118,21 @@ class ChessA extends RexPlugins.Board.Shape {
         if (this.moveTo.isRunning) {
             return;
         }
-        this.moveTo
-            .once('complete', function () {
-                this.moveAway(tileX, tileY);
-            }, this)
-            .moveAway(tileX, tileY, this.moveAwayMode);
+
+        if (this.moveAwayMode) {
+            this.moveTo
+                .once('complete', function () {
+                    this.moveAway(tileX, tileY);
+                }, this)
+                .moveAway(tileX, tileY);
+        } else {
+            this.moveTo
+                .once('complete', function () {
+                    this.moveAway(tileX, tileY);
+                }, this)
+                .moveCloser(tileX, tileY);
+        }
+
     }
 }
 
