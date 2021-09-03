@@ -1,4 +1,4 @@
-import DefaultMaskGraphics from '../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
+import DefaultMaskGraphics from '../../../utils/mask/defaultmaskgraphics/DefaultMaskGraphics.js';
 
 export default {
     setMaskGameObject(gameObject) {
@@ -46,7 +46,7 @@ export default {
         return this;
     },
 
-    setCurrentImageMaskEnable(enable, invertAlpha) {
+    setImageMaskEnable(gameObject, enable, invertAlpha) {
         if (enable === undefined) {
             enable = true;
         }
@@ -57,60 +57,30 @@ export default {
         }
 
         if (enable) {
-            this.currentImage.setMask(this.childrenMask);
+            gameObject.setMask(this.childrenMask);
             if (invertAlpha) {
                 this.childrenMask.setInvertAlpha();
             }
         } else {
-            this.currentImage.clearMask();
+            gameObject.clearMask();
         }
 
+        return this;
+    },
+
+    setCurrentImageMaskEnable(enable, invertAlpha) {
+        this.setImageMaskEnable(this.currentImage, enable, invertAlpha);
         return this;
     },
 
     setNextImageMaskEnable(enable, invertAlpha) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        // Use DefaultMaskGraphics if not given
-        if (!this.childrenMask) {
-            this.setMaskGameObject(true);
-        }
-
-        if (enable) {
-            this.nextImage.setMask(this.childrenMask);
-            if (invertAlpha) {
-                this.childrenMask.setInvertAlpha();
-            }
-        } else {
-            this.nextImage.clearMask();
-        }
-
+        this.setImageMaskEnable(this.nextImage, enable, invertAlpha);
         return this;
     },
 
     setMaskEnable(enable, invertAlpha) {
-        if (enable === undefined) {
-            enable = true;
-        }
-
-        // Use DefaultMaskGraphics if not given
-        if (!this.childrenMask) {
-            this.setMaskGameObject(true);
-        }
-
-        if (enable) {
-            this.backImage.setMask(this.childrenMask);
-            this.frontImage.setMask(this.childrenMask);
-            if (invertAlpha) {
-                this.childrenMask.setInvertAlpha();
-            }
-        } else {
-            this.backImage.clearMask();
-            this.frontImage.clearMask();
-        }
-
+        this.setImageMaskEnable(this.backImage, enable, invertAlpha);
+        this.setImageMaskEnable(this.frontImage, enable, invertAlpha);
         return this;
     }
 }

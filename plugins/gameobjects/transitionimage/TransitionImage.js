@@ -1,12 +1,10 @@
 import Container from '../containerlite/ContainerLite.js';
-import SetTransitionCallbackMethods from './SetTransitionCallbackMethods.js';
-import TransitionMethods from './TransitionMethods.js';
-import MaskMethods from './MaskMethods.js';
+import Methods from './methods/Methods.js';
 import {
     OnStart as DefaultOnStart,
     OnProgress as DefaultOnProgress,
     OnComplete as DefaultOnComplete
-} from './CrossFadeTransition.js';
+} from './methods/CrossFadeTransition.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -45,6 +43,8 @@ class TransitionImage extends Container {
         this.backImage = backImage;
         this.frontImage = frontImage;
         this.maskGameObject = undefined;
+        this.cellImages = [];
+        this.imagesPool = [];
 
         // Transition parameters
         var onStart = GetValue(config, 'onStart', undefined);
@@ -97,6 +97,8 @@ class TransitionImage extends Container {
         this.backImage = undefined;
         this.frontImage = undefined;
         this.maskGameObject = undefined;
+        this.cellImages.length = 0;
+        this.imagesPool.length = 0;
 
         super.destroy(fromScene);
 
@@ -225,9 +227,7 @@ var RunCallback = function (callback, scope, parent, currentImage, nextImage, t)
 // mixin
 Object.assign(
     TransitionImage.prototype,
-    SetTransitionCallbackMethods,
-    TransitionMethods,
-    MaskMethods
+    Methods
 );
 
 export default TransitionImage;

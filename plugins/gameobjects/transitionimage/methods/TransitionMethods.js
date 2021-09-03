@@ -1,7 +1,12 @@
-import EaseValueTask from '../../utils/ease/EaseValueTask.js';
+import EaseValueTask from '../../../utils/ease/EaseValueTask.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+
+var DirMode = {
+    out: 0,
+    in: 1
+}
 
 export default {
     setTransitionDirection(dir) {
@@ -109,9 +114,4 @@ export default {
         this.setT(1);
         return this;
     },
-}
-
-var DirMode = {
-    out: 0,
-    in: 1
 }
