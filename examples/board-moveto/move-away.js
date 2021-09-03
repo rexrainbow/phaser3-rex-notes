@@ -119,18 +119,15 @@ class ChessA extends RexPlugins.Board.Shape {
             return;
         }
 
+        this.moveTo
+            .once('complete', function () {
+                this.moveAway(tileX, tileY);
+            }, this)
+
         if (this.moveAwayMode) {
-            this.moveTo
-                .once('complete', function () {
-                    this.moveAway(tileX, tileY);
-                }, this)
-                .moveAway(tileX, tileY);
+            this.moveTo.moveAway(tileX, tileY);
         } else {
-            this.moveTo
-                .once('complete', function () {
-                    this.moveAway(tileX, tileY);
-                }, this)
-                .moveCloser(tileX, tileY);
+            this.moveTo.moveCloser(tileX, tileY);
         }
 
     }
