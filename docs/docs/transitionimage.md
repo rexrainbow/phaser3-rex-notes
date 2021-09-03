@@ -301,6 +301,32 @@ image.setEaseFunction(ease);
     image.setMaskGameObject(maskGameObject);
     ```
 
+### Grid cut
+
+Grid cut texture to cells.
+
+- Grid cut current texture :
+    ```javascript
+    var cellImageGameObjects = image.gridCutCurrentImage(columns, rows);
+    ```
+    - `cellImageGameObjects` : Array of cell game objects.
+- Grid cut next texture :
+    ```javascript
+    var cellImageGameObjects = image.gridCutNextImage(columns, rows);
+    ```
+    - `cellImageGameObjects` : Array of cell game objects.
+- Get cut cell image game objects, after cutting.
+    ```javascript
+    var cellImageGameObjects = image.getCellImages();
+    ```
+- Apply mask to cell images
+    ```javascript
+    image.setCellImagesMaskEnable();
+    // image.setCellImagesMaskEnable(enable, invertAlpha);
+    ```
+
+Cut cell image game objects will be set to invisible after transition complete.
+
 ### Pause/Resume
 
 ```javascript
@@ -326,3 +352,18 @@ Also will fire `'complete'` event.
    image.on('complete', function(){
    })
    ```
+
+### Use cases
+
+- Ease property of current/next image.
+    - [Scale](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/scale.js)
+    - [Slide](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/slide.js), 
+        - Apply mask to current/next image.
+- Apply shader effect to current/next image, then ease property this shader effect.
+    - [Dissolve](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/dissolve.js)
+    - [Split](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/split.js)
+- Grid cut current/next image to cell images, then ease property of cell images
+    - [Grid cut](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/grid-cut.js)
+- Morph custom mask game object
+    - [Pie-mask](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/pie-mask.js)
+        - Mask current/next image by a [custom-progress game object](shape-custom-progress.md).
