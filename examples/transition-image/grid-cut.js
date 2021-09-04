@@ -45,7 +45,6 @@ var CellOut = function (transitionImage, key, frame) {
     if (frame === undefined) {
         frame = '__BASE';
     }
-    var scene = transitionImage.scene;
 
     transitionImage.transit({
         key: key, frame: frame,
@@ -77,7 +76,6 @@ var CellIn = function (transitionImage, key, frame) {
     if (frame === undefined) {
         frame = '__BASE';
     }
-    var scene = transitionImage.scene;
 
     transitionImage.transit({
         key: key, frame: frame,
