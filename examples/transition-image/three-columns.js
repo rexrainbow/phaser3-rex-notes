@@ -48,43 +48,20 @@ var CellOut = function (transitionImage, key, frame) {
         duration: 2000, ease: 'Cubic', dir: 'out', mask: true,
 
         onStart: function (parent, currentImage, nextImage, t) {
-            var cellImages = scene.plugins.get('rexGridCutImage').gridCut(currentImage, 3, 1, {
-                objectPool: transitionImage.cellImagePool
-            })
-            parent.addMultiple(cellImages);
-            currentImage.setVisible(false);
-
-            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                parent.setChildLocalVisible(cellImages[i], true);
-            }
-
-            transitionImage.cellImages = cellImages;
+            parent.gridCutCurrentImage(3, 1);
+            parent.setCellImagesMaskEnable();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            var cellImages = transitionImage.cellImages;
-            var dy = parent.displayHeight* 0.5 * t;
+            var cellImages = parent.getCellImages();
+            var dy = parent.displayHeight * t;
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var cellImage = cellImages[i];
-                var y = cellImage.y + ((i % 2)? dy : -dy);
+                var y = parent.y + ((i % 2) ? dy : -dy);
                 cellImage.setY(y);
                 parent.resetChildPositionState(cellImage);
             }
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            var texture = currentImage.texture;
-            var cellImages = transitionImage.cellImages;
-            if (cellImages) {
-                for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                    var cellImage = cellImages[i];
-                    parent.setChildLocalVisible(cellImage, false);
-
-                    var frameName = cellImage.frame.name;
-                    cellImage.setTexture();
-                    texture.remove(frameName);
-                }
-                transitionImage.cellImagePool = transitionImage.cellImages;
-                transitionImage.cellImages = undefined;
-            }
         },
     })
     return transitionImage;
@@ -102,43 +79,20 @@ var CellIn = function (transitionImage, key, frame) {
         duration: 2000, ease: 'Cubic', dir: 'in', mask: true,
 
         onStart: function (parent, currentImage, nextImage, t) {
-            var cellImages = scene.plugins.get('rexGridCutImage').gridCut(nextImage, 3, 1, {
-                objectPool: transitionImage.cellImagePool
-            });
-            parent.addMultiple(cellImages);
-            nextImage.setVisible(false);
-
-            for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                parent.setChildLocalVisible(cellImages[i], true);
-            }
-
-            transitionImage.cellImages = cellImages;
+            parent.gridCutCurrentImage(3, 1);
+            parent.setCellImagesMaskEnable();
         },
         onProgress: function (parent, currentImage, nextImage, t) {
-            var cellImages = transitionImage.cellImages;
-            var dy = parent.displayHeight* 0.5 * t;
+            var cellImages = parent.getCellImages();
+            var dy = parent.displayHeight * t;
             for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
                 var cellImage = cellImages[i];
-                var y = cellImage.y + ((i % 2)? -dy : dy);
+                var y = parent.y + ((i % 2) ? dy : -dy);
                 cellImage.setY(y);
                 parent.resetChildPositionState(cellImage);
             }
         },
         onComplete: function (parent, currentImage, nextImage, t) {
-            var texture = nextImage.texture;
-            var cellImages = transitionImage.cellImages;
-            if (cellImages) {
-                for (var i = 0, cnt = cellImages.length; i < cnt; i++) {
-                    var cellImage = cellImages[i];
-                    parent.setChildLocalVisible(cellImage, false);
-
-                    var frameName = cellImage.frame.name;
-                    cellImage.setTexture();
-                    texture.remove(frameName);
-                }
-                transitionImage.cellImagePool = transitionImage.cellImages;
-                transitionImage.cellImages = undefined;
-            }
         },
     })
     return transitionImage;
