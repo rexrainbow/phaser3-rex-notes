@@ -7,12 +7,17 @@ Transit texture to another one. A [containerLite game object](containerlite.md) 
 
 ## Live demos
 
-- [Cross-fade](https://codepen.io/rexrainbow/pen/XWRwQNm)
-- [Scale](https://codepen.io/rexrainbow/pen/YzVoXBo)
-- [Slide](https://codepen.io/rexrainbow/pen/GRmbEbE)
-- [Split](https://codepen.io/rexrainbow/pen/OJmeqXX)
-- [Dissolve](https://codepen.io/rexrainbow/pen/qBjObWp)
-- [Pie mask](https://codepen.io/rexrainbow/pen/OJgXMmw)
+- Ease property of current/next image
+    - [Cross-fade](https://codepen.io/rexrainbow/pen/XWRwQNm)
+    - [Scale](https://codepen.io/rexrainbow/pen/YzVoXBo)
+    - [Slide](https://codepen.io/rexrainbow/pen/GRmbEbE)
+- Apply shader effect to current/next image, then ease property this shader effect.
+    - [Split](https://codepen.io/rexrainbow/pen/OJmeqXX)
+    - [Dissolve](https://codepen.io/rexrainbow/pen/qBjObWp)
+- Grid cut current/next image to cell images, then ease property of cell images
+    - [Grid cut](https://codepen.io/rexrainbow/pen/RwVzXbK)
+- Morph custom mask game object
+    - [Pie mask](https://codepen.io/rexrainbow/pen/OJgXMmw)
 
 ## Usage
 
