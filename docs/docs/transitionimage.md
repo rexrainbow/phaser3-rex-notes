@@ -369,6 +369,6 @@ Also will fire `'complete'` event.
     - [Split](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/split.js)
 - Grid cut current/next image to cell images, then ease property of cell images
     - [Grid cut](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/grid-cut.js)
-    - [three-columns](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/three-columns.js), apply mask to cell images.
+    - [Three-columns](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/three-columns.js), apply mask to cell images.
 - Morph custom mask game object
     - [Pie-mask](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/transition-image/pie-mask.js), mask current/next image by a [custom-progress game object](shape-custom-progress.md).

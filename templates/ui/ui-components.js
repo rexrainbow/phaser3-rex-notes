@@ -1,3 +1,4 @@
+import NinePatch from './ninepatch/NinePatch.js';
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import RoundRectangleCanvas from './roundrectanglecanvas/RoundRectangleCanvas.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
@@ -12,8 +13,8 @@ import CircularProgress from './circularprogress/CircularProgress.js';
 import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
+import TransitionImage from './transitionimage/TransitionImage.js';
 import Chart from './chart/Chart.js';
-import NinePatch from './ninepatch/NinePatch.js';
 
 import Sizer from './sizer/Sizer.js';
 import GridSizer from './gridsizer/GridSizer.js';
@@ -62,6 +63,7 @@ import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 
 export {
+    NinePatch,
     RoundRectangle,
     RoundRectangleCanvas,
     BBCodeText,
@@ -77,7 +79,7 @@ export {
     Knob,
     CustomShapes,
     CustomProgress,
-    NinePatch,
+    TransitionImage,
 
     Sizer,
     GridSizer,

@@ -320,6 +320,24 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     }
     ```
 
+#### Transition image
+
+1. [Transition image](transitionimage.md): Transit texture to another one.
+    ```javascript
+    var image = scene.rexUI.add.transitionImage(x, y, texture, frame, config);
+    ```
+    or
+    ```javascript
+    class MyTransitionImage extends RexPlugins.UI.TransitionImage {
+        constructor(scene, x, y, texture, frame, config) {
+            super(scene, x, y, texture, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
 #### Behaviors of text
 
 1. [Text editor](textedit.md): Create an [input text object](inputtext.md) above a text object to edit string content.

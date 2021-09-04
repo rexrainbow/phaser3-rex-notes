@@ -1,5 +1,6 @@
 import ObjectFactory from './ObjectFactory.js';
 
+import NinePatchFactory from './ninepatch/Factory.js';
 import RoundRectangleFactory from './roundrectangle/Factory.js';
 import RoundRectangleCanvasFactory from './roundrectanglecanvas/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
@@ -14,8 +15,8 @@ import CircularProgressFactory from './circularprogress/Factory.js';
 import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
+import TransitionImageFactory from './transitionimage/Factory.js';
 import ChartFactory from './chart/Factory.js';
-import NinePatchFactory from './ninepatch/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';
 import GridSizerFactory from './gridsizer/Factory.js';
