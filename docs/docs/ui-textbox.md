@@ -219,7 +219,7 @@ var textBox = scene.rexUI.add.textBox({
     ```
 - Is first page
     ```javascript
-    var isLastPage = textBox.isFirstPage;
+    var isFirstPage = textBox.isFirstPage;
     ```
 - Current page index
     ```javascript
