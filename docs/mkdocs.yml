@@ -198,6 +198,7 @@ nav:
         - Cross-stitching: shader-crossstitching.md
     - Outline:
         - Outline: shader-outline.md
+        - Glow: shader-glowfilter2.md
         - Toonify: shader-toonify.md
     - Position:
         - Swirl: shader-swirl.md

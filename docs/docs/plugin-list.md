@@ -106,6 +106,7 @@
 1. [Shader/dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 1. [Shader/fish-eye](shader-fisheye.md): Fish-eye post processing filter.
 1. [Shader/glow-filter](shader-glowfilter.md): Glow post processing filter.
+1. [Shader/Glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
 1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.
 1. [Shader/hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 1. [Shader/inverse](shader-inverse.md): Inverse color post processing filter.

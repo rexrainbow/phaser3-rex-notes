@@ -297,7 +297,8 @@ See [Mask](mask.md).
 Some post-fx pipelines:
 
 - [Cross-stitching](shader-crossstitching): Cross-stitching post processing filter.
-- [Glow-filter](shader-glowfilter): Glow post processing filter.
+- [Glow-filter](shader-glowfilter.md): Glow post processing filter.
+- [Glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
 - [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 - [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 - [Inverse](shader-inverse.md): Inverse color post processing filter.

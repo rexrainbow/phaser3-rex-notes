@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/random-data-generator/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-glowfilter2/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Random data generator - Notes of Phaser 3</title>
+        <title>Glow - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Random data generator
+                Glow
               
             </span>
           
@@ -2997,10 +2997,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Shader effects
@@ -3112,10 +3114,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3" checked>
     
     <label class="md-nav__link" for="nav-9-3">
       Outline
@@ -3143,11 +3147,155 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shader-glowfilter2/" title="Glow" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Glow
+      </label>
+    
+    <a href="./" title="Glow" class="md-nav__link md-nav__link--active">
       Glow
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outer-strength" class="md-nav__link">
+    Outer strength
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-strength" class="md-nav__link">
+    Inner strength
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glow-color" class="md-nav__link">
+    Glow color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distance" class="md-nav__link">
+    Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality" class="md-nav__link">
+    Quality
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4017,12 +4165,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       Math
@@ -4158,12 +4304,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-5" type="checkbox" id="nav-12-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-5" type="checkbox" id="nav-12-5">
     
     <label class="md-nav__link" for="nav-12-5">
       Random
@@ -4191,93 +4335,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Random data generator
-      </label>
-    
-    <a href="./" title="Random data generator" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../random-data-generator/" title="Random data generator" class="md-nav__link">
       Random data generator
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#random-data-generator" class="md-nav__link">
-    Random data generator
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-seed" class="md-nav__link">
-    Set seed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-random-value" class="md-nav__link">
-    Get random value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-random-item" class="md-nav__link">
-    Get random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shuffle-array" class="md-nav__link">
-    Shuffle array
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5793,6 +5855,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -5801,36 +5870,91 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#random-data-generator" class="md-nav__link">
-    Random data generator
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-seed" class="md-nav__link">
-    Set seed
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-random-value" class="md-nav__link">
-    Get random value
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-random-item" class="md-nav__link">
-    Get random item
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#shuffle-array" class="md-nav__link">
-    Shuffle array
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outer-strength" class="md-nav__link">
+    Outer strength
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inner-strength" class="md-nav__link">
+    Inner strength
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#glow-color" class="md-nav__link">
+    Glow color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distance" class="md-nav__link">
+    Distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality" class="md-nav__link">
+    Quality
   </a>
   
 </li>
@@ -5856,105 +5980,222 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/random-data-generator.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-glowfilter2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Random data generator</h1>
+                  <h1>Glow</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get random value from a random generator, built-in methods of phaser.</p>
+<p>Glow post processing filter, port from pixi. <a href="https://github.com/pixijs/filters/blob/main/filters/glow/src/glow.frag">Reference</a></p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>A post-fx shader effect</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/WNOoNyj">Glow filter</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="random-data-generator">Random data generator<a class="headerlink" href="#random-data-generator" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-glowfilter2">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Pre-defined random data generator
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rnd</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RND</span><span class="p">;</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexglowfilter2pipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexglowfilter2pipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>New random generator
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">rnd</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomDataGenerator</span><span class="p">(</span><span class="nx">seed</span><span class="p">);</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexglowfilter2pipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexglowfilter2pipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="set-seed">Set seed<a class="headerlink" href="#set-seed" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Set seed in game config for pre-defined random data generator
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
+</code></pre></div></li>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">GlowFilterPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/glowfilter2pipeline-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-    <span class="nx">seed</span><span class="o">:</span> <span class="nx">seed</span><span class="p">,</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GlowFilterPipelinePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
     <span class="c1">// ...</span>
-<span class="p">}</span>
+<span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>seed</code> : <ul>
-<li>An array of string, like <code>[(Date.now() * Math.random()).toString()]</code></li>
+</code></pre></div></li>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Set seed
-    <div class="codehilite"><pre><span></span><code><span class="nx">rnd</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">seed</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>seed</code> : A string or an array of string.</li>
-</ul>
-</li>
-</ul>
-<h3 id="get-random-value">Get random value<a class="headerlink" href="#get-random-value" title="Permanent link">&para;</a></h3>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Random real number between <code>0</code> and <code>1</code>.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">frac</span><span class="p">();</span>
+<li>Install rex plugins from npm
+    <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Random integer between <code>0</code> and <code>2^32</code>.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">integer</span><span class="p">();</span>
+<li>Add to game config
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">GlowFilterPostFx</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/glowfilter2pipeline.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="nx">GlowFilterPostFx</span><span class="p">]</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Random real number between 0 and 2^32.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">real</span><span class="p">();</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">GlowFilterPostFx</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Random integer between and including min and max.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">between</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-<span class="c1">// var value = rnd.integerInRange(min, max);</span>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">GlowFilterPostFx</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Random real number between min and max.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">realInRange</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Random real number between -1 and 1.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">normal</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Random angle between <code>-180</code> and <code>180</code>.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">angle</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Random rotation in radians, between <code>-3.141</code> and <code>3.141</code>.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">rotation</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Random timestamp between min and max.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">timestamp</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>min</code> : Default value is the beginning of 2000.</li>
-<li><code>max</code> : Default value is the end of 2020.</li>
-</ul>
-</li>
-<li><a href="../uuid/">UUID</a>
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">uuid</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Random sign value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">sign</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">sign</span><span class="p">();</span>
-</code></pre></div><ul>
-<li><code>sign</code> : <code>-1</code> or <code>1</code></li>
 </ul>
 </li>
 </ul>
-<h3 id="get-random-item">Get random item<a class="headerlink" href="#get-random-item" title="Permanent link">&para;</a></h3>
+<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Random element from within the given array.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">pick</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Random element from within the given array, favoring the earlier entries.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">weightedPick</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<li>Apply effect to game object. A game object only can add 1 glowfilter effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// outerStrength: 4,</span>
+    <span class="c1">// innerStrength: 0,</span>
+    <span class="c1">// glowColor: 0xffffff,</span>
+
+    <span class="c1">// name: &#39;rexGlowFilterPostFx&#39;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>outerStrength</code> : The strength of the glow outward from the edge of the texture.</li>
+<li><code>innerStrength</code> : The strength of the glow inward from the edge of the texture.</li>
+<li><code>glowColor</code> : The color of the glow.</li>
+</ul>
+</li>
+<li>Apply effect to camera. A camera only can add 1 glowfilter effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="shuffle-array">Shuffle array<a class="headerlink" href="#shuffle-array" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">rnd</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexGlowFilterPipeline&#39;).get(gameObject);</span>
+</code></pre></div></li>
+<li>Get effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexGlowFilterPipeline&#39;).get(camera);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="outer-strength">Outer strength<a class="headerlink" href="#outer-strength" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">outerStrength</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">outerStrength</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">outerStrength</span> <span class="o">=</span> <span class="nx">outerStrength</span><span class="p">;</span>
+<span class="c1">// pipelineInstance.outerStrength += value;</span>
 </code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setOuterStrength</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="inner-strength">Inner strength<a class="headerlink" href="#inner-strength" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerStrength</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">innerStrength</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">innerStrength</span> <span class="o">=</span> <span class="nx">innerStrength</span><span class="p">;</span>
+<span class="c1">// pipelineInstance.innerStrength += value;</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setInnerStrength</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="glow-color">Glow color<a class="headerlink" href="#glow-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">glowColor</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color</a> object.<ul>
+<li>Red: <code>color.red</code>, 0~255.</li>
+<li>Green: <code>color.green</code>, 0~255.</li>
+<li>Blue: <code>color.blue</code>, 0~255.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setGlowColor</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">glowColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="distance">Distance<a class="headerlink" href="#distance" title="Permanent link">&para;</a></h3>
+<p>The distance of the glow. Make it 2 times more for resolution=2. 
+It can't be changed after filter creation.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">distance</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setDistance</span><span class="p">(</span><span class="nx">distance</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">distance</span> <span class="o">=</span> <span class="nx">distance</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>distance</code> : The distance of the glow.</li>
+</ul>
+</li>
+</ul>
+<h3 id="quality">Quality<a class="headerlink" href="#quality" title="Permanent link">&para;</a></h3>
+<p>A number between 0 and 1 that describes the quality of the glow. 
+The higher the number the less performant.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">quality</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setQuality</span><span class="p">(</span><span class="nx">quality</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">quality</span> <span class="o">=</span> <span class="nx">quality</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>quality</code> : <code>0</code> ~ <code>1</code>, default is <code>0.1</code>.<ul>
+<li><code>0.1</code> : 10 sample points.</li>
+<li><code>0.08</code> : 8 sample points.</li>
+<li><code>1</code> : 100 sample points.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -5976,7 +6217,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../random/" title="Random number" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-outline/" title="Outline" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5985,19 +6226,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Random number
+                Outline
               </span>
             </div>
           </a>
         
         
-          <a href="../gashapon/" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-toonify/" title="Toonify" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Gashapon
+                Toonify
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

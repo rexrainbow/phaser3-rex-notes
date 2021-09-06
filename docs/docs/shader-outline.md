@@ -170,6 +170,9 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
 
 ### Quality
 
+The quality of the outline from 0 to 1, using a higher quality setting will 
+result in slower performance and more accuracy.
+
 - Get
     ```javascript
     var quality = pipelineInstance.quality;
