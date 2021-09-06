@@ -8,6 +8,7 @@ declare namespace OutlinePipelinePlugin {
 
     interface IConfig {
         intensity?: number,
+        outlineColor?: number,
 
         name?: string,
     }
@@ -29,4 +30,7 @@ declare class OutlinePipelinePlugin extends Phaser.Plugins.BasePlugin {
         gameObject: Phaser.GameObjects.GameObject,
         name?: string
     ): OutlinePostFxPipeline | OutlinePostFxPipeline[];
+
+    setQuality(value: number): this;
+    quality: number;
 }
