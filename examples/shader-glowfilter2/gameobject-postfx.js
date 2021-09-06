@@ -27,7 +27,8 @@ class Demo extends Phaser.Scene {
                         .setDistance(15)
                         .add(gameObject, {
                             outerStrength: 8,
-                            innerStrength: 2
+                            innerStrength: 2,
+                            glowColor: 0xff0000
                         });
                 })
                 .on('pointerout', function () {
