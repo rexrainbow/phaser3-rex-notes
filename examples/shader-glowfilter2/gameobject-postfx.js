@@ -1,5 +1,6 @@
 import 'phaser';
 import GlowFilterPipelinePlugin from '../../plugins/glowfilter2pipeline-plugin.js'
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,30 +14,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        const Between = Phaser.Math.Between;
-        var postFxPlugin = this.plugins.get('rexGlowFilterPipeline');
-        for (var i = 0; i < 20; i++) {
-            let gameObject = this.add.image(0, 0, 'mushroom')
-                .setRandomPosition(100, 100, 600, 400)
 
-            gameObject
-                .setInteractive()
-                .on('pointerover', function () {
-                    // Add postfx pipeline
-                    postFxPlugin
-                        .setDistance(15)
-                        .add(gameObject, {
-                            outerStrength: 8,
-                            innerStrength: 2,
-                            glowColor: 0xff0000
-                        });
-                })
-                .on('pointerout', function () {
-                    // Remove postfx pipeline
-                    postFxPlugin
-                        .remove(gameObject)
-                })
-        }
+        var gameObject = this.add.image(400, 300, 'mushroom')
+
+        var postFxPlugin = this.plugins.get('rexGlowFilterPipeline');
+        var postFxPipeline = postFxPlugin
+            .setDistance(15)
+            .add(gameObject, {
+                // outerStrength: 8,
+                // innerStrength: 2,
+                glowColor: 0xff0000
+            });
+
+        var gui = new Dat.GUI();
+        gui.add(postFxPipeline, 'outerStrength', 0, 30);
+        gui.add(postFxPipeline, 'innerStrength', 0, 10);        
+
     }
 
     update() {
