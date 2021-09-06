@@ -1,3 +1,5 @@
+// https://gist.github.com/MatthewBarker/032c325ef8577c6d0188
+
 const frag = `\
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp

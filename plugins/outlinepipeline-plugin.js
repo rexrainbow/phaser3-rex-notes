@@ -8,8 +8,8 @@ class OutlinePipelinePlugin extends BasePostFxPipelinePlugin {
         this.setPostPipelineClass(OutlinePostFxPipeline, 'rexOutlinePostFx');
     }
 
-    setQuality(quality) {
-        OutlinePostFxPipeline.setQuality(quality);
+    setQuality(value) {
+        OutlinePostFxPipeline.setQuality(value);
         return this;
     }
 
