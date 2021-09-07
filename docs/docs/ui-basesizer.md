@@ -146,7 +146,7 @@ Default value is `true`.
 - Minimum inner size
     ```javascript
     var minInnerWidth = sizer.minInnerWidth;
-    var minInnerHeigt = sizer.minInnerHeigt;
+    var minInnerHeight = sizer.minInnerHeight;
     ```
 
 ### Push into bounds

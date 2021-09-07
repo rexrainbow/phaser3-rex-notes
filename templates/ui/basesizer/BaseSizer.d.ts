@@ -108,7 +108,7 @@ declare class BaseSizer extends ContainerLite {
 
     readonly minInnerWidth: number;
 
-    readonly minInnerHeigt: number;
+    readonly minInnerHeight: number;
 
     pin(
         gameObject: Phaser.GameObjects.GameObject

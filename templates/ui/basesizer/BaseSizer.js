@@ -216,7 +216,7 @@ class Base extends Container {
         return Math.max(result, 0);
     }
 
-    get minInnerHeigt() {
+    get minInnerHeight() {
         var result = this.minHeight - this.space.top - this.space.bottom;
         return Math.max(result, 0);
     }
