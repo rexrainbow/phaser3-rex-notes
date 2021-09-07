@@ -121,6 +121,34 @@ Default value is `true`.
     sizer.alignCenterY(centerYBound);
     ```
 
+### Size of sizer
+
+- Size
+    ```javascript
+    var width = sizer.width;
+    var height = sizer.height;
+    ```
+- Display size
+    ```javascript
+    var displayWidth = sizer.displayWidth;
+    var displayHeight = sizer.displayHeight;
+    ```
+- Inner size
+    ```javascript
+    var innerWidth = sizer.innerWidth;
+    var innerHeight = sizer.innerHeight;
+    ```
+- Minimum size
+    ```javascript
+    var minWidth = sizer.minWidth;
+    var minHeight = sizer.minHeight;
+    ```
+- Minimum inner size
+    ```javascript
+    var minInnerWidth = sizer.minInnerWidth;
+    var minInnerHeigt = sizer.minInnerHeigt;
+    ```
+
 ### Push into bounds
 
 Align sizer to bound if overlapping it.
