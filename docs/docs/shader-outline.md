@@ -99,11 +99,14 @@ Outline post processing filter. [Reference](https://github.com/pixijs/pixi-filte
         // thickness: 3,
         // outlineColor: 0x000000,
 
+        // quality: 0.1,
+
         // name: 'rexOutlinePostFx'
     });
     ```
     - `thickness` : Thickness of outline.
     - `outlineColor` : Color of outline.
+    - `quality` : 0~1. The higher the number the less performant. It can't be changed after filter creation.
 - Apply effect to camera. A camera only can add 1 outline effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexOutlinePipeline').add(camera, config);

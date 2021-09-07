@@ -6072,10 +6072,14 @@
 <h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Apply effect to game object. A game object only can add 1 glowfilter effect.
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGlowFilterPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>    
     <span class="c1">// outerStrength: 4,</span>
     <span class="c1">// innerStrength: 0,</span>
     <span class="c1">// glowColor: 0xffffff,</span>
+    <span class="c1">// knockout: false,</span>
+
+    <span class="c1">// distance: 10,</span>
+    <span class="c1">// quality: 0.1,</span>
 
     <span class="c1">// name: &#39;rexGlowFilterPostFx&#39;</span>
 <span class="p">});</span>
@@ -6083,6 +6087,13 @@
 <li><code>outerStrength</code> : The strength of the glow outward from the edge of the texture.</li>
 <li><code>innerStrength</code> : The strength of the glow inward from the edge of the texture.</li>
 <li><code>glowColor</code> : The color of the glow.</li>
+<li><code>knockout</code> :<ul>
+<li><code>true</code> : Only show effect.</li>
+<li><code>false</code> : Show content and effect.</li>
+</ul>
+</li>
+<li><code>distance</code> : The distance of the glow. It can't be changed after filter creation.</li>
+<li><code>quality</code> : 0~1. The higher the number the less performant. It can't be changed after filter creation.</li>
 </ul>
 </li>
 <li>Apply effect to camera. A camera only can add 1 glowfilter effect.
