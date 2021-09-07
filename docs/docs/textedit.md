@@ -145,7 +145,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, {
     - `enterClose` : Set `true` to close input text when enter-key was pressed. Default value is `true`.
     - `config.selectAll` : Set `true` to select all text.
     - `config.text` : Initial string content. Default is the string content of textObject.
-    - [More configuration parameters](textedit.md#add-text-object)...
+    - [More configuration parameters](inputtext.md#add-input-text-object)...
 - `onClose` : Callback invoked when input text is closed.
     ```javascript
     var callback = function(textObject) {
