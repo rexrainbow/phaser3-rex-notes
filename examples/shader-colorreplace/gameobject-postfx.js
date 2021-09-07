@@ -1,5 +1,5 @@
 import 'phaser';
-import GlowFilterPipelinePlugin from '../../plugins/glowfilter2pipeline-plugin.js'
+import ColorReplacePipelinePlugin from '../../plugins/colorreplacepipeline-plugin'
 import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
@@ -14,21 +14,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.add.image(300, 300, 'mushroom')
         var gameObject = this.add.image(400, 300, 'mushroom')
-
-        var postFxPlugin = this.plugins.get('rexGlowFilterPipeline');
+        var postFxPlugin = this.plugins.get('rexColorReplacePipeline');
         var postFxPipeline = postFxPlugin
-            .setDistance(15)
             .add(gameObject, {
-                // outerStrength: 8,
-                // innerStrength: 2,
-                glowColor: 0xff0000
+                originalColor: 0xffffff,
+                newColor: 0x0000ff,
+                epsilon: 0.01
             });
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'outerStrength', 0, 30);
-        gui.add(postFxPipeline, 'innerStrength', 0, 10);
-
+        gui.add(postFxPipeline, 'epsilon', 0, 1);
     }
 
     update() {
@@ -47,8 +44,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexGlowFilterPipeline',
-            plugin: GlowFilterPipelinePlugin,
+            key: 'rexColorReplacePipeline',
+            plugin: ColorReplacePipelinePlugin,
             start: true
         }]
     }
