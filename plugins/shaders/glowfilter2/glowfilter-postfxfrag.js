@@ -17,6 +17,7 @@ uniform vec2 texSize;
 uniform float outerStrength;
 uniform float innerStrength;
 uniform vec4 glowColor; // (0, 0, 0);
+uniform float knockout;
 
 // const
 const float PI = 3.14159265358979323846264;
@@ -61,7 +62,13 @@ void main(void) {
 
   vec4 outerGlowColor = outerGlowStrength * glowColor.rgba;
   
-  gl_FragColor = innerColor + outerGlowColor;
+  if (knockout > 0.) {
+    float resultAlpha = outerGlowAlpha + innerGlowAlpha;
+    gl_FragColor = vec4(glowColor.rgb * resultAlpha, resultAlpha);
+  }
+  else {
+    gl_FragColor = innerColor + outerGlowColor;
+  }
 }
 `;
 

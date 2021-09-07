@@ -20,12 +20,14 @@ class GlowFilterPostFxPipeline extends PostFXPipeline {
         this.outerStrength = 0;
         this.innerStrength = 0;
         this._glowColor = new Color();
+        this.knockout = false;
     }
 
     resetFromJSON(o) {
         this.setOuterStrength(GetValue(o, 'outerStrength', 4));
         this.setInnerStrength(GetValue(o, 'innerStrength', 0));
         this.setGlowColor(GetValue(o, 'glowColor', 0xffffff));
+        this.setKnockout(GetValue(o, 'knockout', false));
         return this;
     }
 
@@ -35,6 +37,9 @@ class GlowFilterPostFxPipeline extends PostFXPipeline {
 
         var color = this._glowColor;
         this.set4f('glowColor', color.redGL, color.greenGL, color.blueGL, color.alphaGL);
+
+        this.set1f('knockout', (this.knockout) ? 1 : 0);
+
         this.set2f('texSize', this.renderer.width, this.renderer.height);
     }
 
@@ -64,6 +69,12 @@ class GlowFilterPostFxPipeline extends PostFXPipeline {
 
     setGlowColor(value) {
         this.glowColor = value;
+        return this;
+    }
+
+    // knockout
+    setKnockout(value) {
+        this.knockout = value;
         return this;
     }
 

@@ -95,17 +95,26 @@ Glow post processing filter, port from pixi. [Reference](https://github.com/pixi
 
 - Apply effect to game object. A game object only can add 1 glowfilter effect.
     ```javascript
-    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(gameObject, {
+    var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(gameObject, {    
         // outerStrength: 4,
         // innerStrength: 0,
         // glowColor: 0xffffff,
+        // knockout: false,
+
+        // distance: 10,
+        // quality: 0.1,
 
         // name: 'rexGlowFilterPostFx'
     });
-    ```
+    ```    
     - `outerStrength` : The strength of the glow outward from the edge of the texture.
     - `innerStrength` : The strength of the glow inward from the edge of the texture.
     - `glowColor` : The color of the glow.
+    - `knockout` :
+        - `true` : Only show effect.
+        - `false` : Show content and effect.
+    - `distance` : The distance of the glow. It can't be changed after filter creation.
+    - `quality` : 0~1. The higher the number the less performant. It can't be changed after filter creation.
 - Apply effect to camera. A camera only can add 1 glowfilter effect.
     ```javascript
     var pipelineInstance = scene.plugins.get('rexGlowFilterPipeline').add(camera, config);

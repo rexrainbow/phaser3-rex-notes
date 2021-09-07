@@ -18,16 +18,18 @@ class Demo extends Phaser.Scene {
 
         var postFxPlugin = this.plugins.get('rexGlowFilterPipeline');
         var postFxPipeline = postFxPlugin
-            .setDistance(15)
             .add(gameObject, {
+                distance: 15,
+
                 // outerStrength: 8,
                 // innerStrength: 2,
-                glowColor: 0xff0000
+                glowColor: 0xff0000,
             });
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'outerStrength', 0, 30);
         gui.add(postFxPipeline, 'innerStrength', 0, 10);
+        gui.add(postFxPipeline, 'knockout');
 
     }
 
