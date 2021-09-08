@@ -27,6 +27,7 @@ Some post-fx pipelines:
 - [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 - [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 - [Inverse](shader-inverse.md): Inverse color post processing filter.
+- [Color replace](shader-colorreplace.md): Replace color post processing filter.
 - [Outline](shader-outline.md): Outline post processing filter.
 - [Pixelation](shader-pixelation.md): Pixelation post processing filter.
 - [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.

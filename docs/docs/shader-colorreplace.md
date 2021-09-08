@@ -1,6 +1,6 @@
 ## Introduction
 
-Replace color, post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/color-replace/src/colorReplace.frag)
+Replace color post processing filter. [Reference](https://github.com/pixijs/filters/blob/main/filters/color-replace/src/colorReplace.frag)
 
 - Author: Rex
 - A post-fx shader effect
