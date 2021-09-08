@@ -151,6 +151,7 @@ module.exports = {
     'splitpipelineplugin': './plugins/splitpipeline-plugin.js',
     'fisheyepipelineplugin': './plugins/fisheyepipeline-plugin.js',
     'barrelpipelineplugin': './plugins/barrelpipeline-plugin.js',
+    'colorreplacepipelineplugin': './plugins/colorreplacepipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',
