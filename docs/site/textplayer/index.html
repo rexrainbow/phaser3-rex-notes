@@ -3349,6 +3349,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../shader-colorreplace/" title="Color replace" class="md-nav__link">
+      Color replace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../shader-crossstitching/" title="Cross-stitching" class="md-nav__link">
       Cross-stitching
     </a>
@@ -6353,6 +6365,7 @@
     <span class="p">},</span>
 
     <span class="nx">sprite</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// createCallback: &#39;sprite&#39;,</span>
         <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
     <span class="p">},</span> 
 
@@ -6524,6 +6537,16 @@
 </li>
 <li><code>images</code> : Configuration of images.</li>
 <li><code>sprite</code> : Configuration of sprites.<ul>
+<li><code>sprite.createCallback</code> : <ul>
+<li><code>'sprite'</code> : Create sprite game object. Default behavior.</li>
+<li><code>'image'</code> : Create image game object.</li>
+<li>Callback to return a game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return scene.add.sprite(0, 0, textureKey, frameName);</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li><code>sprite.fade</code> :<ul>
 <li><code>0</code> : No fade-in or fade-out when adding or removing a sprite.</li>
 <li>A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is <code>500</code>.</li>

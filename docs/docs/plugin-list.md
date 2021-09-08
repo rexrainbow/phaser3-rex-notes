@@ -102,6 +102,7 @@
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Shader/barrel](shader-barrel.md): Barrel post processing filter.
+1. [Shader/color-replace](shader-colorreplace.md): Replace color post processing filter.
 1. [Shader/cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
 1. [Shader/dissolve](shader-dissolve.md): Dissolve transition post processing filter.
 1. [Shader/fish-eye](shader-fisheye.md): Fish-eye post processing filter.

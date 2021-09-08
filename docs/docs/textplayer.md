@@ -174,6 +174,7 @@ var txt = scene.add.rexTextPlayer({
     },
 
     sprite: {
+        // createCallback: 'sprite',
         fade: 500
     }, 
 
@@ -288,6 +289,15 @@ var txt = scene.add.rexTextPlayer({
         - A number : Fade-in or fade-out (cross-fade) when starting or stopping a background music. Default value is `500`.
 - `images` : Configuration of images.
 - `sprite` : Configuration of sprites.
+    - `sprite.createCallback` : 
+        - `'sprite'` : Create sprite game object. Default behavior.
+        - `'image'` : Create image game object.
+        - Callback to return a game object
+            ```javascript
+            function(scene, textureKey, frameName) {
+                // return scene.add.sprite(0, 0, textureKey, frameName);
+            }
+            ```
     - `sprite.fade` :
         - `0` : No fade-in or fade-out when adding or removing a sprite.
         - A number : Tint-fade-in or Tint-fade-out when adding or removing a sprite. Default value is `500`.

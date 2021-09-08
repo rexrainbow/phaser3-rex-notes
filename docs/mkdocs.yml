@@ -195,6 +195,7 @@ nav:
         - Gray scale: shader-grayscale.md
         - Inverse: shader-inverse.md
         - HSL adjust: shader-hsladjust.md
+        - Color replace: shader-colorreplace.md
         - Cross-stitching: shader-crossstitching.md
     - Outline:
         - Outline: shader-outline.md

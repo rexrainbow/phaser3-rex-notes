@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-onlineuserlist/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-colorreplace/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Online user list - Notes of Phaser 3</title>
+        <title>Color replace - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Online user list
+                Color replace
               
             </span>
           
@@ -2997,10 +2997,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Shader effects
@@ -3028,10 +3030,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2" checked>
     
     <label class="md-nav__link" for="nav-9-2">
       Color
@@ -3095,11 +3099,141 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shader-colorreplace/" title="Color replace" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Color replace
+      </label>
+    
+    <a href="./" title="Color replace" class="md-nav__link md-nav__link--active">
       Color replace
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#original-color" class="md-nav__link">
+    Original color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#new-color" class="md-nav__link">
+    New color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon" class="md-nav__link">
+    Epsilon
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -5445,12 +5579,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-17" type="checkbox" id="nav-17" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-17" type="checkbox" id="nav-17">
     
     <label class="md-nav__link" for="nav-17">
       Firebase
@@ -5502,12 +5634,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-17-4" type="checkbox" id="nav-17-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-17-4" type="checkbox" id="nav-17-4">
     
     <label class="md-nav__link" for="nav-17-4">
       Applications
@@ -5559,141 +5689,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Online user list
-      </label>
-    
-    <a href="./" title="Online user list" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../firebase-onlineuserlist/" title="Online user list" class="md-nav__link">
       Online user list
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-plugin" class="md-nav__link">
-    Install plugin
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-minify-file" class="md-nav__link">
-    Load minify file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-plugin" class="md-nav__link">
-    Import plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#import-class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#join" class="md-nav__link">
-    Join
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#leave" class="md-nav__link">
-    Leave
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#kick-user" class="md-nav__link">
-    Kick user
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#change-user-name" class="md-nav__link">
-    Change user name
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#user-list" class="md-nav__link">
-    User list
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -5853,6 +5853,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -5895,50 +5902,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" class="md-nav__link">
-    Create instance
+  <a href="#apply-effect" class="md-nav__link">
+    Apply effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#join" class="md-nav__link">
-    Join
+  <a href="#remove-effect" class="md-nav__link">
+    Remove effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#leave" class="md-nav__link">
-    Leave
+  <a href="#get-effect" class="md-nav__link">
+    Get effect
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#kick-user" class="md-nav__link">
-    Kick user
+  <a href="#original-color" class="md-nav__link">
+    Original color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#change-user-name" class="md-nav__link">
-    Change user name
+  <a href="#new-color" class="md-nav__link">
+    New color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#user-list" class="md-nav__link">
-    User list
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" class="md-nav__link">
-    Events
+  <a href="#epsilon" class="md-nav__link">
+    Epsilon
   </a>
   
 </li>
@@ -5964,220 +5964,190 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/firebase-onlineuserlist.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-colorreplace.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Online user list</h1>
+                  <h1>Color replace</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Online user list, using <a href="https://firebase.google.com/docs/database/">firebase-database</a>.</p>
+<p>Replace color, post processing filter. <a href="https://github.com/pixijs/filters/blob/main/filters/color-replace/src/colorReplace.frag">Reference</a></p>
 <ul>
 <li>Author: Rex</li>
+<li>A post-fx shader effect</li>
+</ul>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/mdwRpvW">Color replace</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/firebase-onlineuserlist">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-colorreplace">Sample code</a></p>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
-    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
-</code></pre></div></li>
 <li>Load plugin (minify file) in preload stage
-    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexfirebaseplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexcolorreplacepipelineplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcolorreplacepipelineplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
-   <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-<span class="p">})</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcolorreplacepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add online-user-list object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">userList</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexfirebaseplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">onlineUserList</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexcolorreplacepipelineplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
-    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
-</code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ColorReplacePipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/colorreplacepipeline-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFirebase&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FirebasePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ColorReplacePipelinePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}]</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
-   <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-<span class="p">})</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add online-user-list object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">userList</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">onlineUserList</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Install rex plugins from npm
     <div class="codehilite"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li><a href="https://firebase.google.com/docs/web/setup">Add Firebase SDKs</a>
-    <div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services --&gt;</span>
-    <span class="c">&lt;!-- Firebase App (the core Firebase SDK) is always required and must be listed first --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-app.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Add Firebase products that you want to use --&gt;</span>
-    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/__/firebase/7.7.0/firebase-database.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
+<li>Add to game config
+    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="nx">ColorReplacePostFx</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/colorreplacepipeline.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="nx">ColorReplacePostFx</span><span class="p">]</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Initialize firebase application.
-    <div class="codehilite"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
-   <span class="nx">apiKey</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">authDomain</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">databaseURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">projectId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-   <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-<span class="p">})</span>
+<li>Apply effect<ul>
+<li>Apply effect to game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">ColorReplacePostFx</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Import class
-    <div class="codehilite"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">OnlineUserList</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Add online-user-list object
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">userList</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">OnlineUserList</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<li>Apply effect to camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">ColorReplacePostFx</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">userList</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFirebase&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">.</span><span class="nx">onlineUserList</span><span class="p">({</span>
-    <span class="nx">root</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// maxUsers: 0,</span>
-
-    <span class="c1">// userID: &#39;&#39;,</span>
-    <span class="c1">// userName: &#39;&#39;,</span>
-<span class="p">});</span>
-</code></pre></div>
-
+</li>
+</ul>
+<h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>root</code> : Path of this online user list.</li>
-<li><code>maxUsers</code>: Maximum users in this list. Set to <code>0</code> to have infinity users.</li>
-<li><code>userID</code> : ID of user.</li>
-<li><code>userName</code> : Name of user.</li>
+<li>Apply effect to game object. A game object only can add 1 colorreplace effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">originalColor</span><span class="o">:</span> <span class="mh">0xFF0000</span><span class="p">,</span>
+    <span class="nx">newColor</span><span class="o">:</span> <span class="mh">0x000000</span><span class="p">,</span>
+    <span class="c1">// epsilon: 0.4,</span>
+
+    <span class="c1">// name: &#39;rexColorReplacePostFx&#39;</span>
+<span class="p">});</span>
+</code></pre></div><ul>
+<li><code>originalColor</code> : The color (<code>0xRRGGBB</code>) that will be changed.</li>
+<li><code>newColor</code> : The resulting color (<code>0xRRGGBB</code>).</li>
+<li><code>epsilon</code> : Tolerance/sensitivity of the floating-point comparison between colors (lower = more exact, higher = more inclusive)    </li>
 </ul>
-<h3 id="join">Join<a class="headerlink" href="#join" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Set userID and user name.
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">setUser</span><span class="p">(</span><span class="nx">userID</span><span class="p">,</span> <span class="nx">userName</span><span class="p">);</span>
+</li>
+<li>Apply effect to camera. A camera only can add 1 colorreplace effect.
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Remove effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Remove effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get effect from game object
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexColorReplacePipeline&#39;).get(gameObject);</span>
+</code></pre></div></li>
+<li>Get effect from camera
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">pipelineInstance</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexColorReplacePipeline&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="nx">camera</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="c1">// var pipelineInstances = scene.plugins.get(&#39;rexColorReplacePipeline&#39;).get(camera);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="original-color">Original color<a class="headerlink" href="#original-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">originalColor</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color</a> object.<ul>
+<li>Red: <code>color.red</code>, 0~255.</li>
+<li>Green: <code>color.green</code>, 0~255.</li>
+<li>Blue: <code>color.blue</code>, 0~255.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setOriginalColor</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">originalColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="new-color">New color<a class="headerlink" href="#new-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">newColor</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color</a> object.<ul>
+<li>Red: <code>color.red</code>, 0~255.</li>
+<li>Green: <code>color.green</code>, 0~255.</li>
+<li>Blue: <code>color.blue</code>, 0~255.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setNewColor</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</code></pre></div>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">newColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</code></pre></div><ul>
+<li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="epsilon">Epsilon<a class="headerlink" href="#epsilon" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">epsilon</span> <span class="o">=</span> <span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">epsilon</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">epsilon</span> <span class="o">=</span> <span class="nx">epsilon</span><span class="p">;</span>
+<span class="c1">// pipelineInstance.epsilon += value;</span>
 </code></pre></div>
     or
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">setUser</span><span class="p">({</span>
-    <span class="nx">userID</span><span class="o">:</span> <span class="nx">userID</span><span class="p">,</span>
-    <span class="nx">userName</span><span class="o">:</span> <span class="nx">userName</span>
-<span class="p">});</span>
-</code></pre></div><ul>
-<li><code>userID</code> : User ID.</li>
-<li><code>userName</code> : Display name.</li>
-</ul>
-</li>
-<li>Join list.
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
-<span class="c1">// .then(function() { })</span>
-<span class="c1">// .catch(function() { })</span>
-</code></pre></div></li>
-</ol>
-<h3 id="leave">Leave<a class="headerlink" href="#leave" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">()</span>
-<span class="c1">// .then(function() { })</span>
-<span class="c1">// .catch(function() { })</span>
-</code></pre></div>
-
-<h3 id="kick-user">Kick user<a class="headerlink" href="#kick-user" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">leave</span><span class="p">(</span><span class="nx">userID</span><span class="p">)</span>
-<span class="c1">// .then(function() { })</span>
-<span class="c1">// .catch(function() { })</span>
-</code></pre></div>
-
-<h3 id="change-user-name">Change user name<a class="headerlink" href="#change-user-name" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">)</span>
-<span class="c1">// .then(function() { })</span>
-<span class="c1">// .catch(function() { })</span>
-</code></pre></div>
-
-<h3 id="user-list">User list<a class="headerlink" href="#user-list" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get users in user list
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">getUsers</span><span class="p">();</span>
-</code></pre></div><ul>
-<li><code>users</code> : Array of user <code>{userID, userName}</code></li>
-</ul>
-</li>
-<li>Is first user in user list?
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isFirstUser</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isFirstUser</span><span class="p">(</span><span class="nx">userID</span><span class="p">);</span>
-<span class="c1">// var isFirstUser = userList.isFirstUser();  // Current user is first user</span>
-</code></pre></div></li>
-<li>User list is full
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isFull</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isFull</span><span class="p">();</span>
-</code></pre></div></li>
-<li>Maximun users setting value
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">maxUsers</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">maxUsers</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Current user is in list
-    <div class="codehilite"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInList</span> <span class="o">=</span> <span class="nx">userList</span><span class="p">.</span><span class="nx">isInList</span><span class="p">;</span>
-</code></pre></div></li>
-</ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Any user join
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;join&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>user</code> : <code>{userID, userName}</code></li>
-</ul>
-</li>
-<li>Any user leave
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;leave&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>user</code> : <code>{userID, userName}</code></li>
-</ul>
-</li>
-<li>User list updated, includes user join, user leave, and user name changed
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="nx">users</span><span class="p">);</span>
-</code></pre></div><ul>
-<li><code>users</code> : Array of user <code>{userID, userName}</code></li>
-</ul>
-</li>
-<li>User name is changed
-    <div class="codehilite"><pre><span></span><code><span class="nx">userList</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changename&#39;</span><span class="p">,</span> <span class="nx">userID</span><span class="p">,</span> <span class="nx">userName</span><span class="p">,</span> <span class="nx">prevUserName</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setEpsilon</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
                 
@@ -6201,7 +6171,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../firebase-singleroom/" title="Single room" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-hsladjust/" title="HSL adjust" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -6210,19 +6180,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Single room
+                HSL adjust
               </span>
             </div>
           </a>
         
         
-          <a href="../firebase-broadcast/" title="Broadcast" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-crossstitching/" title="Cross-stitching" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Broadcast
+                Cross-stitching
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
