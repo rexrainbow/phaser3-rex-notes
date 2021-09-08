@@ -77,7 +77,6 @@ class RoadTile extends Phaser.GameObjects.Image {
         scene.add.existing(this);
 
         this.board = board;
-        // this.txtDebug = scene.add.text(0, 0, '', { color: '#00F' }).setOrigin(0.5);
 
         this.setData('road', !!isRoad);
         this.on('changedata-road', function (gameObject, value, previousValue) {
@@ -91,29 +90,30 @@ class RoadTile extends Phaser.GameObjects.Image {
     }
 
     updateFrame() {
-        var frameIndex = 0;
         if (this.getData('road')) {
-            frameIndex = 0;
+            var neighborRoads = [0, 0, 0, 0];
+            var hasNeighobrRoad = false;
             for (var i = 0; i < 4; i++) {
                 var neighbor = this.board.getNeighborChess(this, i);
                 if (neighbor) {
                     if (neighbor.getData('road')) {
-                        frameIndex |= (1 << i);
+                        neighborRoads[i] = 1;
+                        hasNeighobrRoad = true;
                     }
                 }
             }
 
-            // At least it shows default road
-            if (frameIndex === 0) {
-                frameIndex = (Math.random() > 0.5) ? 1 : 2;
+            if (hasNeighobrRoad) {
+                var right = neighborRoads[0],
+                    bottom = neighborRoads[1],
+                    left = neighborRoads[2],
+                    top = neighborRoads[3];
+                this.setFrame(`${top}${left}${bottom}${right}`);
+            } else {  // At least it shows default road
+                this.setFrame('0001');
             }
-        }
-        this.setFrame(`${Pad(frameIndex, 3, '0', 1)}`);
-
-        if (this.txtDebug) {
-            this.txtDebug
-                .setPosition(this.x, this.y)
-                .setText(`${this.getData('road') ? 1 : 0}:${frameIndex}`);
+        } else {
+            this.setFrame('0000');
         }
         return this;
     }
