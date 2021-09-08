@@ -19,9 +19,9 @@ class Demo extends Phaser.Scene {
         var postFxPlugin = this.plugins.get('rexColorReplacePipeline');
         var postFxPipeline = postFxPlugin
             .add(gameObject, {
-                originalColor: 0xffffff,
-                newColor: 0x0000ff,
-                epsilon: 0.01
+                originalColor: 0x008800,
+                newColor: 0xff0000,
+                epsilon: 0.4
             });
 
         var gui = new Dat.GUI();
