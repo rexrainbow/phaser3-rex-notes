@@ -90,11 +90,6 @@ class RoadTile extends Phaser.GameObjects.Image {
         })
     }
 
-    setRoad(isRoad) {
-        this.setData('road', !!isRoad);
-        return this;
-    }
-
     updateFrame() {
         var frameIndex = 0;
         if (this.getData('road')) {
