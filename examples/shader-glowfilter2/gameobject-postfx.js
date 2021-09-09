@@ -29,6 +29,7 @@ class Demo extends Phaser.Scene {
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'outerStrength', 0, 30);
         gui.add(postFxPipeline, 'innerStrength', 0, 10);
+        gui.addColor(postFxPipeline, 'glowColor');
         gui.add(postFxPipeline, 'knockout');
 
     }

@@ -25,6 +25,8 @@ class Demo extends Phaser.Scene {
             });
 
         var gui = new Dat.GUI();
+        gui.addColor(postFxPipeline, 'originalColor');
+        gui.addColor(postFxPipeline, 'newColor');
         gui.add(postFxPipeline, 'epsilon', 0, 1);
     }
 
