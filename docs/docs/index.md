@@ -15,6 +15,7 @@
 ### Rex plugins
 
 - [Plugin list](plugin-list.md)
+   - [Demos](https://codepen.io/rexrainbow/pens/public)
 - [Discord channel](https://discord.gg/kWkuFZK)
 - [Bug report](https://github.com/rexrainbow/phaser3-rex-notes/issues)
 - [Feature suggestion & discussion](https://github.com/rexrainbow/phaser3-rex-notes/discussions)
