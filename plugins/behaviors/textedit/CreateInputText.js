@@ -1,4 +1,5 @@
 import InputText from '../../gameobjects/dom/inputtext/InputText.js';
+import IsTextGameObject from '../../utils/text/IsTextGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -22,15 +23,10 @@ var CreateInputText = function (text, config) {
     config.direction = GetValue(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
     config.align = GetValue(config, 'align', GetHAlign(style));
 
-    // In RTL mode, align left is align right, align right is align left
-    if (config.direction === 'rtl') {
-        if (config.align === 'left') {
-            config.align = 'right';
-        } else if (config.align === 'right') {
-            config.align = 'left';
-        }
+    // Built-in text game object with RTL only has 'right' align
+    if ((config.direction === 'rtl') && (IsTextGameObject(text))) {
+        config.align = 'right';
     }
-
 
     // config.paddingLeft = 0;
     // config.paddingRight = 0;

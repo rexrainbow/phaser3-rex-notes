@@ -156,6 +156,11 @@ class TextStyle {
             }
         }
 
+        // default halign of RTL is 'right'
+        if (style && style.rtl && setDefaults && (!style.hasOwnProperty('halign'))) {
+            style.halign = 'right';
+        }
+
         //  Avoid type mutation
         if (style && style.hasOwnProperty('fontSize') && typeof style.fontSize === 'number') {
             style.fontSize = style.fontSize.toString() + 'px';
