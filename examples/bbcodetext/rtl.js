@@ -34,6 +34,22 @@ class Demo extends Phaser.Scene {
                 rtl: true
             }
         );
+
+        this.add.rexBBCodeText(
+            400, 450,
+            'יא פרו.[color=red].[color=blue].',
+            {
+                fixedWidth: 200,
+                fixedHeight: 80,
+                padding: {
+                    left: 15, right: 15, top: 15, bottom: 15
+                },
+                backgroundColor: '#333333',
+                backgroundCornerRadius: 10,
+                //align: 'center',
+                rtl: true
+            }
+        );
     }
 
     update() { }
