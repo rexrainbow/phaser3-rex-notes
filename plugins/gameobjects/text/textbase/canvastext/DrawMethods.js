@@ -49,6 +49,7 @@ export default {
         drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
         var offsetX, offsetY;
+        var rtl = this.rtl, rtlOffset;
         if (valign === 'center') { // center
             offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
         } else if (valign === 'bottom') { // bottom
@@ -84,17 +85,22 @@ export default {
             }
             offsetX += startX;
 
+            rtlOffset = (rtl) ? lineWidth : undefined;
             for (var penIdx = 0; penIdx < penCount; penIdx++) {
-                this.drawPen(pens[penIdx], offsetX, offsetY);
+                this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset);
             }
         }
 
         context.restore();
     },
 
-    drawPen(pen, offsetX, offsetY) {
+    drawPen(pen, offsetX, offsetY, rtlOffset) {
         offsetX += pen.x;
         offsetY += pen.y + (pen.prop.y || 0);
+
+        if (rtlOffset !== undefined) {
+            offsetX = rtlOffset - offsetX;
+        }
 
         var canvas = this.canvas;
         var context = this.context;

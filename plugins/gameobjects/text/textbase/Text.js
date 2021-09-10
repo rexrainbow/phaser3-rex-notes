@@ -111,7 +111,7 @@ class Text extends GameObject {
             pensPool: PensPools[type]
         });
 
-        //this.initRTL();
+        this.initRTL();
 
         if (style && style.padding) {
             this.setPadding(style.padding);
