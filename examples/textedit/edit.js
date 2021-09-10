@@ -18,7 +18,8 @@ class Demo extends Phaser.Scene {
             fixedWidth: 200,
             fixedHeight: 80,
             backgroundColor: '#333333',
-            valign: 'center'
+            valign: 'center',
+            // rtl: true
         })
             .setOrigin(0.5)
             .setInteractive()

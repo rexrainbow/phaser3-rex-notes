@@ -20,6 +20,7 @@ var CreateInputText = function (text, config) {
     config.color = GetValue(config, 'color', style.color);
     config.backgroundColor = backgroundColor;
     config.align = GetValue(config, 'align', GetHAlign(style));
+    config.direction = GetValue(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
 
     // config.paddingLeft = 0;
     // config.paddingRight = 0;

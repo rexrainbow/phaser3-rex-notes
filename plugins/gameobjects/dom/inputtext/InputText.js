@@ -253,6 +253,7 @@ const StyleProperties = {
     border: ['border', 0],
     borderColor: ['borderColor', 'transparent'],
     outline: ['outline', 'none'],
+    direction: ['direction', undefined]
 };
 
 const ElementEvents = {
