@@ -19,8 +19,18 @@ var CreateInputText = function (text, config) {
     config.fontSize = GetValue(config, 'fontSize', style.fontSize);
     config.color = GetValue(config, 'color', style.color);
     config.backgroundColor = backgroundColor;
-    config.align = GetValue(config, 'align', GetHAlign(style));
     config.direction = GetValue(config, 'rtl', style.rtl) ? 'rtl' : 'ltr';
+    config.align = GetValue(config, 'align', GetHAlign(style));
+
+    // In RTL mode, align left is align right, align right is align left
+    if (config.direction === 'rtl') {
+        if (config.align === 'left') {
+            config.align = 'right';
+        } else if (config.align === 'right') {
+            config.align = 'left';
+        }
+    }
+
 
     // config.paddingLeft = 0;
     // config.paddingRight = 0;

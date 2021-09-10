@@ -14,13 +14,25 @@ class Demo extends Phaser.Scene {
         this.add.text(
             400, 250,
             'יא פרו...',
-            { rtl: true }
+            {
+                fixedWidth: 200,
+                fixedHeight: 80,
+                backgroundColor: '#333333',
+                align: 'center',
+                rtl: true
+            }
         );
 
         this.add.rexBBCodeText(
             400, 350,
             'יא פרו.[color=red].[color=blue].',
-            { rtl: true }
+            {
+                fixedWidth: 200,
+                fixedHeight: 80,
+                backgroundColor: '#333333',
+                align: 'center',
+                rtl: true
+            }
         );
     }
 

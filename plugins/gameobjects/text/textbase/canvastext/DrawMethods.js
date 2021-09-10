@@ -85,7 +85,7 @@ export default {
             }
             offsetX += startX;
 
-            rtlOffset = (rtl) ? lineWidth : undefined;
+            rtlOffset = (rtl) ? boxWidth : undefined;
             for (var penIdx = 0; penIdx < penCount; penIdx++) {
                 this.drawPen(pens[penIdx], offsetX, offsetY, rtlOffset);
             }
