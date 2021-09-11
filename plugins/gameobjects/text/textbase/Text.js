@@ -422,11 +422,13 @@ class Text extends GameObject {
         context.scale(resolution, resolution);
 
         // draw
+        var startX = (!this.style.rtl) ? padding.left : padding.right;
+        var startY = padding.top;
         canvasText.draw(
-            padding.left,
-            padding.top,
+            startX,
+            startY,
             textWidth,
-            textHeight
+            textHeight,
         );
 
         context.restore();

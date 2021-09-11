@@ -1,7 +1,7 @@
 import DrawRoundRectangleBackground from '../../../canvas/utils/DrawRoundRectangleBackground.js';
 
 export default {
-    draw(startX, startY, boxWidth, boxHeight) {
+    draw(startX, startY, textWidth, textHeight) {
         var penManager = this.penManager;
         this.hitAreaManager.clear();
 
@@ -50,11 +50,11 @@ export default {
 
         var offsetX, offsetY;
         var rtl = this.rtl,
-            rtlOffset = (rtl) ? boxWidth : undefined;
+            rtlOffset = (rtl) ? this.parent.width : undefined;
         if (valign === 'center') { // center
-            offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
+            offsetY = Math.max((textHeight - (drawLinesNum * lineHeight)) / 2, 0);
         } else if (valign === 'bottom') { // bottom
-            offsetY = Math.max(boxHeight - (drawLinesNum * lineHeight) - 2, 0);
+            offsetY = Math.max(textHeight - (drawLinesNum * lineHeight) - 2, 0);
         } else {
             offsetY = 0;
         }
@@ -78,11 +78,11 @@ export default {
             }
 
             if (halign === 'center') { // center
-                offsetX = (boxWidth - lineWidth) / 2;
+                offsetX = (textWidth - lineWidth) / 2;
             } else if (halign === 'right') { // right
-                offsetX = (!rtl) ? (boxWidth - lineWidth) : 0;
+                offsetX = (!rtl) ? (textWidth - lineWidth) : 0;
             } else {
-                offsetX = (!rtl) ? 0 : (boxWidth - lineWidth);
+                offsetX = (!rtl) ? 0 : (textWidth - lineWidth);
             }
             offsetX += startX;
 

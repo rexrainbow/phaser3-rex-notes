@@ -138,6 +138,7 @@ Default style
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
         width: null
     },
+    // rtl: false,
     metrics: false,
     // metrics: {
     //     ascent: 0,

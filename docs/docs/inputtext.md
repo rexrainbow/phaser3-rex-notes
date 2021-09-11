@@ -145,6 +145,7 @@ Default configuration
     backgroundColor: 'transparent',
     borderColor: 'transparent',
     outline: 'none',
+    direction: 'ltr',
 
     selectAll: false
 }
@@ -173,6 +174,7 @@ Default configuration
     - `backgroundColor` : `backgroundColor` style property.
     - `border`, `borderColor` : `border`, `borderColor` style property.
     - `outline` : `outline` style property.
+    - `direction` : `direction` style property.
 - `selectAll` : Set `true` to select all text.
 
 ### Custom class
