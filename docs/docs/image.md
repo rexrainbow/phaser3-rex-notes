@@ -85,6 +85,10 @@ var image = scene.make.image({
     var image = new MyImage(scene, x, y, key);
     ```
 
+### Texture
+
+See [game object - texture](gameobject.md#texture)
+
 ### Other properties
 
 See [game object](gameobject.md)

@@ -105,6 +105,10 @@ var sprite = scene.make.sprite({
     var sprite = new MySprite(scene, x, y, key);
     ```
 
+### Texture
+
+See [game object - texture](gameobject.md#texture)
+
 ### Other properties
 
 See [game object](gameobject.md)
