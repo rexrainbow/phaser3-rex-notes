@@ -141,8 +141,7 @@ module.exports = {
     'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
     'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
     'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
-    'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
-    'glowfilter2pipelineplugin': './plugins/glowfilter2pipeline-plugin.js',
+    'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',    
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
     'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
     'dissolvepipelineplugin': './plugins/dissolvepipeline-plugin.js',
@@ -151,7 +150,9 @@ module.exports = {
     'splitpipelineplugin': './plugins/splitpipeline-plugin.js',
     'fisheyepipelineplugin': './plugins/fisheyepipeline-plugin.js',
     'barrelpipelineplugin': './plugins/barrelpipeline-plugin.js',
+    'glowfilter2pipelineplugin': './plugins/glowfilter2pipeline-plugin.js',
     'colorreplacepipelineplugin': './plugins/colorreplacepipeline-plugin.js',
+    'kawaseblurpipelineplugin': './plugins/kawaseblurpipeline-plugin.js',
 
     // board
     'boardplugin': './plugins/board-plugin.js',
