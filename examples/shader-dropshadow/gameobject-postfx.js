@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
 
         var gui = new Dat.GUI();
         gui.add(postFxPipeline, 'distance', 0, 30);
-        gui.add(postFxPipeline, 'angle', 0, 360);
+        gui.add(postFxPipeline, 'angle', -360, 360);
         gui.addColor(postFxPipeline, 'shadowColor');
         gui.add(postFxPipeline, 'alpha', 0, 1);
 

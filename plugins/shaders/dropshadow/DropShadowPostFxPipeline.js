@@ -66,11 +66,10 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
 
         // Add renderTarget to result
         if (!this.shadowOnly) {
-            this.copyFrame(renderTarget, sourceFrame, 1, false, false);
+            this.copyFrame(renderTarget, sourceFrame, 1, false);
         }
 
-        // Copy result to renderTarget, return it
-        this.copyFrame(sourceFrame, renderTarget);
+        this.copyToGame(sourceFrame);
     }
 
     // rotation

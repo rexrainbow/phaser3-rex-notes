@@ -16,7 +16,7 @@ uniform vec3 color;
 uniform vec2 offset;
 
 void main (void) {
-  vec4 sample = texture2D(uMainSampler, outTexCoord + offset);
+  vec4 sample = texture2D(uMainSampler, outTexCoord - offset);
 
   // Premultiply alpha
   sample.rgb = color.rgb * sample.a;
