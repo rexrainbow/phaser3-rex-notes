@@ -96,8 +96,8 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     - Steps
         1. Copy frame to `pipelineInstance.fullFrame1`
             ```javascript
-            pipelineInstance.copyFrame(renderTarget, target);
-            // pipelineInstance.copyFrame(renderTarget, target, brightness, clear, clearAlpha);
+            pipelineInstance.copyFrame(source, target);
+            // pipelineInstance.copyFrame(source, target, brightness, clear, clearAlpha);
             ```
         1. [Set uniform values](postfx-pipeline.md#set-uniform-values)
         1. Bind and draw on `pipelineInstance.fullFrame1`, `pipelineInstance.fullFrame2`.

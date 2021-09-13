@@ -1,4 +1,5 @@
 import FragSrc from './kawaseblurFilter-postfxfrag.js';
+import GetAnother from '../utils/GetAnother.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -36,33 +37,26 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     onDraw(renderTarget) {
-        var target1 = this.fullFrame1,
-            target2 = this.fullFrame2,
-            lastTarget;
-
-        this.copyFrame(renderTarget, target1);
-        lastTarget = target1;
+        this.copyFrame(renderTarget, this.fullFrame1);
+        var sourceFrame = this.fullFrame1;
+        var targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
 
         var uvX = this.pixelWidth / this.renderer.width;
         var uvY = this.pixelHeight / this.renderer.height;
         var offset, uOffsetX, uOffsetY;
         for (var i = 0; i < this._quality; i++) {
+            // Set uniforms
             offset = this._kernels[i] + 0.5;
             uOffsetX = offset * uvX;
             uOffsetY = offset * uvY;
-            this.set2f('uOffset', uOffsetX, uOffsetY);          
-
-            if ((i % 2) === 0) {  // 0,2,4,...
-                this.bindAndDraw(target1, target2);
-                lastTarget = target2;
-            } else {  // 1,3,5,...
-                this.bindAndDraw(target2, target1);
-                lastTarget = target1;
-            }
-
+            this.set2f('uOffset', uOffsetX, uOffsetY);
+            // Bind and draw
+            this.bindAndDraw(sourceFrame, targetFrame);
+            sourceFrame = targetFrame;
+            targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
         }
 
-        this.bindAndDraw(lastTarget);
+        this.bindAndDraw(sourceFrame);
     }
 
     // blur
@@ -71,10 +65,12 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     set blur(value) {
-        if (this._blur !== value) {
-            GenerateKernels(value, this._quality, this._kernels);
+        if (this._blur === value) {
+            return;
         }
+
         this._blur = value;
+        GenerateKernels(this._blur, this._quality, this._kernels);
     }
 
     setBlur(value) {
@@ -88,10 +84,12 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     set quality(value) {
-        if (this._quality !== value) {
-            GenerateKernels(this._blur, value, this._kernels);
+        if (this._quality === value) {
+            return;
         }
+
         this._quality = value;
+        GenerateKernels(this._blur, this._quality, this._kernels);
     }
 
     setQuality(value) {
