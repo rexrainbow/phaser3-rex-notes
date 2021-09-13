@@ -44,19 +44,21 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
         var uvX = this.pixelWidth / this.renderer.width;
         var uvY = this.pixelHeight / this.renderer.height;
         var offset, uOffsetX, uOffsetY;
-        for (var i = 0; i < this._quality; i++) {
+        for (var i = 0, last = this._quality - 1; i <= last; i++) {
             // Set uniforms
             offset = this._kernels[i] + 0.5;
             uOffsetX = offset * uvX;
             uOffsetY = offset * uvY;
             this.set2f('uOffset', uOffsetX, uOffsetY);
             // Bind and draw
-            this.bindAndDraw(sourceFrame, targetFrame);
-            sourceFrame = targetFrame;
-            targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
+            if (i < last) {
+                this.bindAndDraw(sourceFrame, targetFrame);
+                sourceFrame = targetFrame;
+                targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
+            } else { // Last step
+                this.bindAndDraw(sourceFrame);
+            }
         }
-
-        this.bindAndDraw(sourceFrame);
     }
 
     // blur

@@ -13,9 +13,14 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
         super({
             name: 'rexDropShadowPostFx',
             game: game,
-            renderTarget: true,
-            fragShader: FragSrc
+            shaders: [
+                {
+                    fragShader: FragSrc,
+                },
+            ],
         });
+
+        this.dropShader = this.shaders[0];
 
         this.rotation = 0;
         this.distance = 0;
@@ -58,7 +63,7 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
         this.set3f('color', this._shadowColor.redGL, this._shadowColor.greenGL, this._shadowColor.blueGL);
         this.set1f('alpha', this.alpha);
         // Bind and draw
-        this.bindAndDraw(sourceFrame, targetFrame);
+        this.bindAndDraw(sourceFrame, targetFrame, true, true, this.dropShader);
         sourceFrame = targetFrame;
         targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
 
