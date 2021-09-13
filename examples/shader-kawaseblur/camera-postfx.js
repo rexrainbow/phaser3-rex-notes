@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
         });
 
         var gui = new Dat.GUI();
-        gui.add(postFxPipeline, 'blur', 0, 10);
+        gui.add(postFxPipeline, 'blur', 0, 30);
         gui.add(postFxPipeline, 'pixelWidth', 0, 600);
         gui.add(postFxPipeline, 'pixelHeight', 0, 800);
     }

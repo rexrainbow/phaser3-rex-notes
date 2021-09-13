@@ -3062,6 +3062,33 @@
     Post fx pipeline class
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-uniform-values" class="md-nav__link">
+    Set uniform values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onprerender" class="md-nav__link">
+    onPreRender
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ondraw" class="md-nav__link">
+    onDraw
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5842,6 +5869,33 @@
     Post fx pipeline class
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-uniform-values" class="md-nav__link">
+    Set uniform values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onprerender" class="md-nav__link">
+    onPreRender
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ondraw" class="md-nav__link">
+    onDraw
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -5945,57 +5999,90 @@
     <span class="nx">onPreRender</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="s1">&#39;intensity&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_intensity</span><span class="p">);</span>
     <span class="p">}</span>
+
+    <span class="nx">onDraw</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<p>Set uniform values in <code>onPreRender</code> method.</p>
+<h4 id="set-uniform-values">Set uniform values<a class="headerlink" href="#set-uniform-values" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Property with 1 value<ul>
 <li>Float
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </code></pre></div></li>
 <li>uniform1fv
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set1fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Int
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set1i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 2 values<ul>
 <li>Float
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set2f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
 </code></pre></div></li>
 <li>uniform2fv
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set2fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Int
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set2i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 3 value<ul>
 <li>Float
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set3f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
 </code></pre></div></li>
 <li>uniform3fv
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set3fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Int
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set3i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 4 values<ul>
 <li>Float
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set4f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
 </code></pre></div></li>
 <li>uniform4fv
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set4fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Int
-    <div class="codehilite"><pre><span></span><code><span class="k">this</span><span class="p">.</span><span class="nx">set4i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
 </code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="onprerender">onPreRender<a class="headerlink" href="#onprerender" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="./#set-uniform-values">Set uniform values</a> in <code>onPreRender</code> method.</li>
+</ul>
+<h4 id="ondraw">onDraw<a class="headerlink" href="#ondraw" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Ping-pong drawing<ul>
+<li>Variables : <ul>
+<li><code>renderTarget</code> : Render target, parameter of <code>onDraw</code> method.</li>
+<li><code>pipelineInstance.fullFrame1</code>, <code>pipelineInstance.fullFrame2</code> : Ping-pong render texture.</li>
+</ul>
+</li>
+<li>Steps<ol>
+<li>Copy frame to <code>pipelineInstance.fullFrame1</code>
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">copyFrame</span><span class="p">(</span><span class="nx">renderTarget</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.copyFrame(renderTarget, target, brightness, clear, clearAlpha);</span>
+</code></pre></div></li>
+<li><a href="./#set-uniform-values">Set uniform values</a></li>
+<li>Bind and draw on <code>pipelineInstance.fullFrame1</code>, <code>pipelineInstance.fullFrame2</code>.
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, currentShader);</span>
+</code></pre></div></li>
+<li>Draw result back
+    <div class="codehilite"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
+</li>
 </ul>
 </li>
 </ul>

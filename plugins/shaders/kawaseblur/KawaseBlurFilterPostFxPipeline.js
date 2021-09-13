@@ -12,16 +12,22 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
-        this._kernels = [];
-        this._blur = 4;
-        this._quality = 3;
+        this._kernels = [0];
+        this._blur = 0;
+        this._quality = 1;
         this.pixelWidth = 1; // width of pixel wo resolution
         this.pixelHeight = 1; // height of pixel wo resolution
     }
 
     resetFromJSON(o) {
-        this.setBlur(GetValue(o, 'blur', 4));
-        this.setQuality(GetValue(o, 'quality', 3))
+        var kernels = GetValue(o, 'kernels', undefined);
+        if (kernels) {
+            this.setKernela(kernels);
+        } else {
+            this.setBlur(GetValue(o, 'blur', 4));
+            this.setQuality(GetValue(o, 'quality', 3))
+        }
+
         this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
         return this;
     }
@@ -44,8 +50,7 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
             offset = this._kernels[i] + 0.5;
             uOffsetX = offset * uvX;
             uOffsetY = offset * uvY;
-            this.set2f('uOffset', uOffsetX, uOffsetY);
-            this.bindAndDraw(target1, target2);
+            this.set2f('uOffset', uOffsetX, uOffsetY);          
 
             if ((i % 2) === 0) {  // 0,2,4,...
                 this.bindAndDraw(target1, target2);
@@ -66,8 +71,10 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     set blur(value) {
+        if (this._blur !== value) {
+            GenerateKernels(value, this._quality, this._kernels);
+        }
         this._blur = value;
-        GenerateKernels(this._blur, this._quality, this._kernels);
     }
 
     setBlur(value) {
@@ -81,8 +88,10 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     set quality(value) {
+        if (this._quality !== value) {
+            GenerateKernels(this._blur, value, this._kernels);
+        }
         this._quality = value;
-        GenerateKernels(this._blur, this._quality, this._kernels);
     }
 
     setQuality(value) {
@@ -96,6 +105,10 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     set kernels(value) {
+        if (value === undefined) {
+            value = [0];
+        }
+
         this._kernels = value;
         this._quality = value.length;
         this._blur = Math.max(...value);

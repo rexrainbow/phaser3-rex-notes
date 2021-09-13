@@ -22,63 +22,93 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     onPreRender() {
         this.set1f('intensity', this._intensity);
     }
+
+    onDraw(renderTarget) {
+    }
 }
 ```
 
-Set uniform values in `onPreRender` method.
+#### Set uniform values
 
 - Property with 1 value
     - Float
         ```javascript
-        this.set1f(name, value0);
+        pipelineInstance.set1f(name, value0);
         ```
     - uniform1fv
         ```javascript
-        this.set1fv(name, value0);
+        pipelineInstance.set1fv(name, value0);
         ```
     - Int
         ```javascript
-        this.set1i(name, value0);
+        pipelineInstance.set1i(name, value0);
         ```
 - Property with 2 values
     - Float
         ```javascript
-        this.set2f(name, value0, value1);
+        pipelineInstance.set2f(name, value0, value1);
         ```
     - uniform2fv
         ```javascript
-        this.set2fv(name, value0, value1);
+        pipelineInstance.set2fv(name, value0, value1);
         ```
     - Int
         ```javascript
-        this.set2i(name, value0, value1);
+        pipelineInstance.set2i(name, value0, value1);
         ``` 
 - Property with 3 value
     - Float
         ```javascript
-        this.set3f(name, value0, value1, value2);
+        pipelineInstance.set3f(name, value0, value1, value2);
         ```
     - uniform3fv
         ```javascript
-        this.set3fv(name, value0, value1, value2);
+        pipelineInstance.set3fv(name, value0, value1, value2);
         ```
     - Int
         ```javascript
-        this.set3i(name, value0, value1, value2);
+        pipelineInstance.set3i(name, value0, value1, value2);
         ```
 - Property with 4 values
     - Float
         ```javascript
-        this.set4f(name, value0, value1, value2, value3);
+        pipelineInstance.set4f(name, value0, value1, value2, value3);
         ```
     - uniform4fv
         ```javascript
-        this.set4fv(name, value0, value1, value2, value3);
+        pipelineInstance.set4fv(name, value0, value1, value2, value3);
         ```
     - Int
         ```javascript
-        this.set4i(name, value0, value1, value2, value3);
+        pipelineInstance.set4i(name, value0, value1, value2, value3);
         ```
+
+#### onPreRender
+
+- [Set uniform values](postfx-pipeline.md#set-uniform-values) in `onPreRender` method.
+
+#### onDraw
+
+- Ping-pong drawing
+    - Variables : 
+        - `renderTarget` : Render target, parameter of `onDraw` method.
+        - `pipelineInstance.fullFrame1`, `pipelineInstance.fullFrame2` : Ping-pong render texture.
+    - Steps
+        1. Copy frame to `pipelineInstance.fullFrame1`
+            ```javascript
+            pipelineInstance.copyFrame(renderTarget, target);
+            // pipelineInstance.copyFrame(renderTarget, target, brightness, clear, clearAlpha);
+            ```
+        1. [Set uniform values](postfx-pipeline.md#set-uniform-values)
+        1. Bind and draw on `pipelineInstance.fullFrame1`, `pipelineInstance.fullFrame2`.
+            ```javascript
+            pipelineInstance.bindAndDraw(source, target);
+            // pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, currentShader);
+            ```
+        1. Draw result back
+            ```javascript
+            pipelineInstance.bindAndDraw(source);
+            ```
 
 ### Register post-fx pipeline
 
