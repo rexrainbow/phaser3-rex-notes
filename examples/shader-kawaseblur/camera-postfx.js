@@ -1,5 +1,6 @@
 import 'phaser';
 import KawaseBlurPipelinePlugin from '../../plugins/kawaseblurpipeline-plugin';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -16,10 +17,15 @@ class Demo extends Phaser.Scene {
         var gameObject = this.add.image(400, 300, 'classroom');
 
         var postFxPlugin = this.plugins.get('rexKawaseBlurPipelinePlugin');
-        var postFxPipelines = postFxPlugin.add(this.cameras.main, {
+        var postFxPipeline = postFxPlugin.add(this.cameras.main, {
             blur: 4,
             quality: 3
         });
+
+        var gui = new Dat.GUI();
+        gui.add(postFxPipeline, 'blur', 0, 10);
+        gui.add(postFxPipeline, 'pixelWidth', 0, 600);
+        gui.add(postFxPipeline, 'pixelHeight', 0, 800);
     }
 
     update() {
