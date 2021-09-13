@@ -21,7 +21,7 @@ class ColorReplacePostFxPipeline extends PostFXPipeline {
 
     resetFromJSON(o) {
         this.setEpsilon(GetValue(o, 'epsilon', 0.4));
-        this.setOriginalColor(GetValue(o, 'originalColor', 0xFF0000));
+        this.setOriginalColor(GetValue(o, 'originalColor', 0xff0000));
         this.setNewColor(GetValue(o, 'newColor', 0x000000));
         return this;
     }

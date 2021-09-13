@@ -38,7 +38,6 @@ class PathFinder extends ComponentBase {
         return this;
     }
 
-
     shutdown(fromScene) {
         // Already shutdown
         if (this.isShutdown) {
@@ -51,6 +50,10 @@ class PathFinder extends ComponentBase {
         this.chessData = undefined;
 
         super.shutdown(fromScene);
+    }
+
+    get gameObject() {
+        return this.parent;
     }
 
     setChess(gameObject) {

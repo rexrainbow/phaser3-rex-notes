@@ -27,12 +27,6 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     onPreRender() {
-        var uvX = this.pixelWidth / this.renderer.width;
-        var uvY = this.pixelHeight / this.renderer.height;
-        var offset = this.blur + 0.5,
-            uOffsetX = offset * uvX,
-            uOffsetY = offset * uvY;
-        this.set2f('uOffset', uOffsetX, uOffsetY);
     }
 
     onDraw(renderTarget) {
@@ -41,6 +35,7 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
             lastTarget;
 
         this.copyFrame(renderTarget, target1);
+        lastTarget = target1;
 
         var uvX = this.pixelWidth / this.renderer.width;
         var uvY = this.pixelHeight / this.renderer.height;
@@ -52,18 +47,17 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
             this.set2f('uOffset', uOffsetX, uOffsetY);
             this.bindAndDraw(target1, target2);
 
-            if (i % 2) {  // 1,3,5,...
-                this.bindAndDraw(target2, target1);
-                lastTarget = target1;
-            } else {  // 0,2,4,...
+            if ((i % 2) === 0) {  // 0,2,4,...
                 this.bindAndDraw(target1, target2);
                 lastTarget = target2;
+            } else {  // 1,3,5,...
+                this.bindAndDraw(target2, target1);
+                lastTarget = target1;
             }
 
         }
 
         this.bindAndDraw(lastTarget);
-
     }
 
     // blur
