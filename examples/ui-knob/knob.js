@@ -60,7 +60,7 @@ var CreateKnob = function (scene, x, y, inputMode) {
             space: {
                 icon: 10
             }
-        }).setDepth(1),
+        }),
         textFormatCallback: function (value) {
             return Math.floor(value * 100).toString();
         },
