@@ -15,7 +15,12 @@ var CreateScrollableSizer = function (config) {
     var child = GetValue(config, 'child.gameObject', undefined);
     var sliderConfig = GetValue(config, 'slider', undefined),
         slider,
-        sliderPosition;
+        sliderPosition = GetValue(sliderConfig, 'position', 0);
+    if (typeof (sliderPosition) === 'string') {
+        sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
+    }
+    var isRightSlider = (sliderPosition === 0);  // Right/bottom slider
+
     var scrollerConfig = GetValue(config, 'scroller', true),
         scroller;
     var mouseWheelScrollerConfig = GetValue(config, 'mouseWheelScroller', false),
@@ -24,37 +29,36 @@ var CreateScrollableSizer = function (config) {
     // Child, slider, scroller, mouseWheelScroller
     if (child) {
         var childSpace = GetValue(config, 'space.child', 0);
-        this.childPadding = {};
+        var childPadding = {};
+        this.childMargin = {};
         if (typeof (childSpace) !== 'number') {
-            var childPadding = childSpace;
+            var paddingConfig = childSpace;
             if (scrollMode === 0) {
-                childSpace = GetValue(childPadding, 'right', 0);
-                this.childPadding.top = GetValue(childPadding, 'top', 0);
-                this.childPadding.bottom = GetValue(childPadding, 'bottom', 0);
+                childPadding.left = GetValue(paddingConfig, 'left', 0);
+                childPadding.right = GetValue(paddingConfig, 'right', 0);
+                this.childMargin.top = GetValue(paddingConfig, 'top', 0);
+                this.childMargin.bottom = GetValue(paddingConfig, 'bottom', 0);
             } else {
-                childSpace = GetValue(childPadding, 'bottom', 0);
-                this.childPadding.top = GetValue(childPadding, 'left', 0);
-                this.childPadding.bottom = GetValue(childPadding, 'right', 0);
+                childPadding.top = GetValue(paddingConfig, 'top', 0);
+                childPadding.bottom = GetValue(paddingConfig, 'bottom', 0);
+                this.childMargin.top = GetValue(paddingConfig, 'left', 0);
+                this.childMargin.bottom = GetValue(paddingConfig, 'right', 0);
             }
         } else {
-            this.childPadding.top = 0;
-            this.childPadding.bottom = 0;
+            if (sliderConfig) { // Has slider
+                if (scrollMode === 0) {
+                    childPadding = (isRightSlider) ? { right: childSpace } : { left: childSpace };
+                } else {
+                    childPadding = (isRightSlider) ? { bottom: childSpace } : { top: childSpace };
+                }
+            }
+            this.childMargin.top = 0;
+            this.childMargin.bottom = 0;
         }
 
         if (sliderConfig) {
             if (sliderConfig === true) {
                 sliderConfig = {};
-            }
-            sliderPosition = GetValue(sliderConfig, 'position', 0);
-            if (typeof (sliderPosition) === 'string') {
-                sliderPosition = SLIDER_POSITION_MAP[sliderPosition];
-            }
-
-            var padding;
-            if (scrollMode === 0) {
-                padding = (sliderPosition === 0) ? { left: childSpace } : { right: childSpace };
-            } else {
-                padding = (sliderPosition === 0) ? { top: childSpace } : { bottom: childSpace };
             }
 
             // Vertical slider(orientation=1) for left-right scrollableSizer(orientation=0)
@@ -76,18 +80,37 @@ var CreateScrollableSizer = function (config) {
         }
 
         // Add slider to parent sizer at left/top side
-        if (slider && (sliderPosition === 1)) {
-            scrollableSizer.add(slider, 0, 'center', padding, true);
+        if (slider && (!isRightSlider)) {
+            scrollableSizer.add(slider,
+                {
+                    proportion: 0,
+                    align: 'center',
+                    expand: true
+                }
+            );
         }
 
         // Add child to parent sizer
         var proportion = GetValue(config, 'child.proportion', 1);
         var expand = GetValue(config, 'child.expand', true);
-        scrollableSizer.add(child, proportion, 'center', 0, expand);
+        scrollableSizer.add(child,
+            {
+                proportion: proportion,
+                align: 'center',
+                padding: childPadding,
+                expand: expand,
+            }
+        );
 
         // Add slider to parent sizer at right/bottom side
-        if (slider && (sliderPosition === 0)) {
-            scrollableSizer.add(slider, 0, 'center', padding, true);
+        if (slider && isRightSlider) {
+            scrollableSizer.add(slider,
+                {
+                    proportion: 0,
+                    align: 'center',
+                    expand: true
+                }
+            );
         }
 
     }
