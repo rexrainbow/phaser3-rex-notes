@@ -1,4 +1,4 @@
-import TextureMethods from './texture/TextureMethods.js';
+import Methods from './Methods.js';
 import DefaultGetFrameNameCallback from './utils/DefaultGetFrameNameCallback.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -58,6 +58,7 @@ class NinePatch extends RenderTexture {
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
         this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
+        this.setMaxFixedPartScale(GetValue(config, 'maxFixedPartScaleX', 1), GetValue(config, 'maxFixedPartScaleY', undefined));
         this.setTexture(key, baseFrame, columns, rows); // Also update render texture
     }
 
@@ -98,7 +99,7 @@ class NinePatch extends RenderTexture {
 
 Object.assign(
     NinePatch.prototype,
-    TextureMethods
+    Methods
 );
 
 export default NinePatch;

@@ -17,6 +17,14 @@ var UpdateTexture = function () {
     var stretchHeight = this.height - minHeight;
     var fixedPartScaleX = (stretchWidth >= 0) ? 1 : (this.width / minWidth);
     var fixedPartScaleY = (stretchHeight >= 0) ? 1 : (this.height / minHeight);
+
+    if (fixedPartScaleX > this.maxFixedPartScaleX) {
+        fixedPartScaleX = this.maxFixedPartScaleX;
+    }
+    if (fixedPartScaleY > this.maxFixedPartScaleY) {
+        fixedPartScaleY = this.maxFixedPartScaleY;
+    }
+
     if (this.preserveRatio) {
         var minScale = Math.min(fixedPartScaleX, fixedPartScaleY);
         if (fixedPartScaleX > minScale) {
