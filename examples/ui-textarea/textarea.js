@@ -27,7 +27,10 @@ class Demo extends Phaser.Scene {
             text: this.rexUI.add.BBCodeText(),
             // textMask: false,
 
-            slider: false,
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+            },
 
             space: {
                 left: 0,
@@ -51,12 +54,27 @@ class Demo extends Phaser.Scene {
                 speed: 0.1
             },
 
+            header: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Header'),
+            }),
+
+            footer: this.rexUI.add.label({
+                height: 30,
+
+                orientation: 0,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Footer'),
+            }),
+
             content: CreateContent(10000),
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
 
-        textArea.destroy()
         //textArea.setText(CreateContent(10000));
     }
 
