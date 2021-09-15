@@ -41,7 +41,7 @@ class Base extends Zone {
         }
 
         // Destroy/remove children
-        Clear.call(this, !fromScene); // Call Clear() directly, clear method might be override
+        this.clear(!fromScene);
         super.destroy(fromScene);
     }
 
@@ -79,23 +79,18 @@ class Base extends Zone {
     }
 
     clear(destroyChild) {
-        Clear.call(this, destroyChild);
+        var parent = this;
+        var gameObject;
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            gameObject = this.children[i];
+            gameObject.off('destroy', parent.onChildDestroy, parent);
+            if (destroyChild) {
+                gameObject.destroy();
+            }
+        }
+        this.children.length = 0;
         return this;
     }
-}
-
-var Clear = function (destroyChild) {
-    var parent = this;
-    var gameObject;
-    for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-        gameObject = this.children[i];
-        gameObject.off('destroy', parent.onChildDestroy, parent);
-        if (destroyChild) {
-            gameObject.destroy();
-        }
-    }
-    this.children.length = 0;
-    return this;
 }
 
 const Components = Phaser.GameObjects.Components;

@@ -3,7 +3,6 @@ import GetChildPrevState from '../utils/GetChildPrevState.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from './DrawBounds.js';
 import AddChildMethods from './AddChildMethods.js';
-import RemoveChildMethods from './RemoveChildMethods.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
 import PaddingMethods from './PaddingMethods.js';
@@ -77,7 +76,6 @@ Object.assign(
     methods,
     PaddingMethods,
     AddChildMethods,
-    RemoveChildMethods,
     GetParentSizerMethods,
     ScaleMethods,
     FadeMethods,
