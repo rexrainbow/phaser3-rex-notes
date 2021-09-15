@@ -4,8 +4,6 @@ import AddChildMask from '../../utils/AddChildMask.js';
 import BaseSizer from '../../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
 import GetBoundsConfig from '../../utils/GetBoundsConfig.js';
-import IsTextGameObject from '../../../../plugins/utils/text/IsTextGameObject.js';
-import IsBitmapTextGameObject from '../../../../plugins/utils/bitmaptext/IsBitmapTextGameObject.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 

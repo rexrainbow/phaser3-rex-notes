@@ -6,8 +6,8 @@ var AddChildMask = function (maskTarget, sizeTarget, shape, padding) {
         var mask = maskGameObject.createGeometryMask();
         maskTarget.setMask(mask);
         this.once('destroy', function () {
+            maskTarget.setMask();
             mask.destroy();
-            mask = undefined;
         })
     }
     this.pin(maskGameObject);
