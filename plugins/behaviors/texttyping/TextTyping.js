@@ -1,4 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
+import GetWrapText from './GetWrapText.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -13,14 +14,14 @@ class TextTyping extends ComponentBase {
     }
 
     resetFromJSON(o) {
+        this.setWrapEnable(GetValue(o, 'wrapEnable', false));
         this.setTypeMode(GetValue(o, 'typeMode', 0));
         this.setTypeSpeed(GetValue(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
+        this.setTypingContent(GetFastValue(o, 'text', ''));
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.text = TransferText(GetFastValue(o, 'text', ''));
-        this.textLen = GetFastValue(o, 'textLen', 0);
         this.insertIdx = GetFastValue(o, 'insertIdx', null);
 
         var elapsed = GetFastValue(o, 'elapsed', null);
@@ -29,29 +30,6 @@ class TextTyping extends ComponentBase {
         }
 
         return this;
-    }
-
-    toJSON() {
-        var elapsed;
-        var timer = this.getTimer();
-        if (timer) {
-            elapsed = timer.elapsed;
-        } else {
-            elapsed = null;
-        }
-
-        return {
-            typeMode: this.typeMode,
-            speed: this.speed,
-            setTextCallback: this.setTextCallback,
-            setTextCallbackScope: this.setTextCallbackScope,
-
-            typingIdx: this.typingIdx,
-            text: this.text,
-            textLen: this.textLen,
-            insertIdx: this.insertIdx,
-            elapsed: elapsed
-        };
     }
 
     shutdown(fromScene) {
@@ -76,6 +54,27 @@ class TextTyping extends ComponentBase {
     setTypeSpeed(speed) {
         this.speed = speed;
         return this;
+    }
+
+    setWrapEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.wrapEnable = enable;
+        return this;
+    }
+
+    set text(value) {
+        var text = TransferText(value);
+        if (this.wrapEnable) {
+            text = GetWrapText(this.parent, text);
+        }
+
+        this._text = text;
+    }
+
+    get text() {
+        return this._text;
     }
 
     get isTyping() {
@@ -150,7 +149,7 @@ class TextTyping extends ComponentBase {
     }
 
     setTypingContent(text) {
-        this.text = TransferText(text);
+        this.text = text;
         this.textLen = this.getTextLength(this.text);
         return this;
     }

@@ -496,8 +496,11 @@ class Text extends GameObject {
         return this.canvasText.getPlainText(text, start, end);
     }
 
-    getText(text, start, end) {
-        return this.canvasText.getText(text, start, end, false);
+    getText(text, start, end, wrap) {
+        if (wrap === undefined) {
+            wrap = false;
+        }
+        return this.canvasText.getText(text, start, end, wrap);
     }
 
     getSubString(text, start, end) {
