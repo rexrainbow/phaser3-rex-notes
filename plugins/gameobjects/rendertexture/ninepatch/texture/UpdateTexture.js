@@ -11,19 +11,12 @@ var UpdateTexture = function () {
         return this;
     }
 
-    var minWidth = this.columns.minWidth,
-        minHeight = this.rows.minHeight;
+    var minWidth = this.columns.minWidth * this.maxFixedPartScaleX;  // Fixed-part width
+    var minHeight = this.rows.minHeight * this.maxFixedPartScaleY;   // Fixed-part height
     var stretchWidth = this.width - minWidth;
     var stretchHeight = this.height - minHeight;
-    var fixedPartScaleX = (stretchWidth >= 0) ? 1 : (this.width / minWidth);
-    var fixedPartScaleY = (stretchHeight >= 0) ? 1 : (this.height / minHeight);
-
-    if (fixedPartScaleX > this.maxFixedPartScaleX) {
-        fixedPartScaleX = this.maxFixedPartScaleX;
-    }
-    if (fixedPartScaleY > this.maxFixedPartScaleY) {
-        fixedPartScaleY = this.maxFixedPartScaleY;
-    }
+    var fixedPartScaleX = (stretchWidth >= 0) ? this.maxFixedPartScaleX : (this.width / minWidth);
+    var fixedPartScaleY = (stretchHeight >= 0) ? this.maxFixedPartScaleY : (this.height / minHeight);
 
     if (this.preserveRatio) {
         var minScale = Math.min(fixedPartScaleX, fixedPartScaleY);

@@ -58,7 +58,11 @@ class NinePatch extends RenderTexture {
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
         this.setPreserveRatio(GetValue(config, 'preserveRatio', true));
-        this.setMaxFixedPartScale(GetValue(config, 'maxFixedPartScaleX', 1), GetValue(config, 'maxFixedPartScaleY', undefined));
+
+        var maxFixedPartScale = GetValue(config, 'maxFixedPartScale', 1);
+        var maxFixedPartScaleX = GetValue(config, 'maxFixedPartScaleX', maxFixedPartScale);
+        var maxFixedPartScaleY = GetValue(config, 'maxFixedPartScaleY', undefined);
+        this.setMaxFixedPartScale(maxFixedPartScaleX, maxFixedPartScaleY);
         this.setTexture(key, baseFrame, columns, rows); // Also update render texture
     }
 
