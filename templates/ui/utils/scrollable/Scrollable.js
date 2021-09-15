@@ -80,12 +80,12 @@ class Scrollable extends Sizer {
 
     set t(t) {
         // Get inner childT
-        var childPadding = this.childPadding;
-        if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
+        var childMargin = this.childMargin;
+        if ((childMargin.top !== 0) || (childMargin.bottom !== 0)) {
             var child = this.childrenMap.child;
             var innerHeight = (child.topChildOY - child.bottomChildOY);
-            var outerHeight = innerHeight + childPadding.top + childPadding.bottom;
-            var innerChildOY = (outerHeight * t) - childPadding.top;
+            var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
+            var innerChildOY = (outerHeight * t) - childMargin.top;
             t = innerChildOY / innerHeight;
         }
 
@@ -97,12 +97,12 @@ class Scrollable extends Sizer {
         var t = this.childrenMap.child.t;
 
         // Get outer childT
-        var childPadding = this.childPadding;
-        if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
+        var childMargin = this.childMargin;
+        if ((childMargin.top !== 0) || (childMargin.bottom !== 0)) {
             var child = this.childrenMap.child;
             var innerHeight = (child.topChildOY - child.bottomChildOY);
-            var outerHeight = innerHeight + childPadding.top + childPadding.bottom;
-            var outerChildOY = (innerHeight * t) + childPadding.top;
+            var outerHeight = innerHeight + childMargin.top + childMargin.bottom;
+            var outerChildOY = (innerHeight * t) + childMargin.top;
             t = outerChildOY / outerHeight;
         }
         return t;
@@ -118,11 +118,11 @@ class Scrollable extends Sizer {
     }
 
     get topChildOY() {
-        return this.childrenMap.child.topChildOY + this.childPadding.top;
+        return this.childrenMap.child.topChildOY + this.childMargin.top;
     }
 
     get bottomChildOY() {
-        return this.childrenMap.child.bottomChildOY - this.childPadding.bottom;
+        return this.childrenMap.child.bottomChildOY - this.childMargin.bottom;
     }
 
     get isOverflow() {

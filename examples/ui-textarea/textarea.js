@@ -32,10 +32,27 @@ class Demo extends Phaser.Scene {
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
 
+            space: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+
+                text: 10,
+                // text: {
+                //     top: 20,
+                //     bottom: 20,
+                //     left: 20,
+                //     right: 20,
+                // },
+                header: 0,
+                footer: 0,
+            },
+
             mouseWheelScroller: {
                 focus: false,
                 speed: 0.1
-            },            
+            },
 
             header: this.rexUI.add.label({
                 height: 30,
