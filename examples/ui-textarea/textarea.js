@@ -76,8 +76,6 @@ class Demo extends Phaser.Scene {
             .drawBounds(this.add.graphics(), 0xff0000);
 
         //textArea.setText(CreateContent(10000));
-
-        textArea.destroy()
     }
 
     update() { }
