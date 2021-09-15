@@ -403,15 +403,9 @@ theme:
     favicon: images/logo.svg
     icon:
         repo: fontawesome/brands/github
-    palette: 
-        - scheme: default
-          toggle:
-              icon: material/toggle-switch-off-outline
-              name: Switch to dark mode
-        - scheme: slate
-          toggle:
-              icon: material/toggle-switch
-              name: Switch to light mode
+    palette:
+        primary: 'blue'
+        accent: 'blue'
     features:
         - navigation.top
         - search.suggest
