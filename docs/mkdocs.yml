@@ -377,36 +377,48 @@ nav:
 - Tools: tools.md
 
 
-extra_javascript:
-- js/mermaid/mermaid.min.js
-- js/umlconvert.js 
-
-theme:
-    name: 'material'
-    logo:
-        icon: 'memory'
-    favicon: 'images/logo.svg'
-    palette:
-        primary: 'blue'
-        accent: 'blue'
-
 site_author: rexrainbow
-site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
+site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/
 
 repo_name: 'phaser3-rex-notes'
-repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes'
+repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes/'
+
+extra_javascript:
+- js/mermaid/mermaid.min.js
+- js/umlconvert.js
 
 extra:
-    social:
-        - type: 'twitter'
+    analytics:
+        provider: google
+        property: UA-119804412-1
+    social:    
+        - icon: fontawesome/brands/twitter
           link: https://twitter.com/rexrainbow
-        - type: github
+        - icon: fontawesome/brands/github
           link: https://github.com/rexrainbow/
 
+theme:
+    name: material
+    logo: images/logo.svg
+    favicon: images/logo.svg
+    icon:
+        repo: fontawesome/brands/github
+    palette: 
+        - scheme: default
+          toggle:
+              icon: material/toggle-switch-off-outline
+              name: Switch to dark mode
+        - scheme: slate
+          toggle:
+              icon: material/toggle-switch
+              name: Switch to light mode
+    features:
+        - navigation.top
+        - search.suggest
+        - search.highlight
 
-google_analytics:
-    - 'UA-119804412-1'
-    - 'auto'      
+plugins:
+    - search
 
 markdown_extensions:
 - admonition
@@ -425,7 +437,9 @@ markdown_extensions:
 - pymdownx.critic
 - pymdownx.details
 - pymdownx.emoji:
-    emoji_generator: !!python/name:pymdownx.emoji.to_png
+    emoji_index: !!python/name:materialx.emoji.twemoji
+    emoji_generator: !!python/name:materialx.emoji.to_svg
+- pymdownx.highlight
 - pymdownx.inlinehilite
 - pymdownx.magiclink
 - pymdownx.mark
@@ -436,3 +450,4 @@ markdown_extensions:
     ]
 - pymdownx.tasklist
 - pymdownx.tilde
+
