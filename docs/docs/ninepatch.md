@@ -12,6 +12,7 @@ Stretchable image.
 - [Custom frame name](https://codepen.io/rexrainbow/pen/poJzywP)
 - [Custom base frame name](https://codepen.io/rexrainbow/pen/YzXzbNj)
 - [Preserve ratio](https://codepen.io/rexrainbow/pen/OJpjZWV)
+- [Max-fixed-part-scale](https://codepen.io/rexrainbow/pen/wverQQm)
 
 ## Usage
 
@@ -80,6 +81,7 @@ Stretchable image.
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, baseFrame, columns, rows, {
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     getFrameNameCallback: undefined
 });
@@ -90,6 +92,7 @@ or
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, {
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -104,6 +107,7 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, {
     rows: undefined,
 
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -119,6 +123,7 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, {
     rows: undefined,
 
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -135,6 +140,7 @@ var ninePatch = scene.add.rexNinePatch(x, y, {
     rows: undefined,
 
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -152,6 +158,7 @@ var ninePatch = scene.add.rexNinePatch({
     rows: undefined,
 
     // preserveRatio: true,
+    // maxFixedPartScale: 1,
     // stretchMode: 0,
     baseFrame: undefined,
     getFrameNameCallback: undefined
@@ -172,6 +179,7 @@ var ninePatch = scene.add.rexNinePatch({
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
 - `preserveRatio` : Preserve ratio of fixed parts (i.e. displaying in origin size). Default is `true`.
+- `maxFixedPartScale` : Max scale value of fixed-part.
 - `stretchMode` : Stretch mode of edges and internal cells.
     - A number (`0`, or `1`), or a string (`'scale'`, or `'repeat'`): 
         - `0`, or `'scale'` : Stretch each edge and internal cell by scaled image. Default value.
@@ -223,6 +231,8 @@ var ninePatch = scene.add.rexNinePatch({
 ninePatch.resize(width, height);
 ```
 
+Will [update texture](ninepatch.md#update-texture)
+
 ### Set texture of source image
 
 ```javascript
@@ -241,6 +251,8 @@ ninePatch.setTexture(key, baseFrame, columns, rows);
     - A number array, like `[20, 20, 20]` : Height of each row.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
+
+Will [update texture](ninepatch.md#update-texture)
 
 ### Set stretch mode
 
@@ -272,3 +284,34 @@ ninePatch.setGetFrameNameCallback(callback);
         return `${colIndex},${rowIndex}`
     }
     ```
+
+### Fixed-part scale
+
+- Fixed-part scale
+    - Get
+        ```javascript
+        var scaleX = ninePatch.fixedPartScaleX;
+        var scaleY = ninePatch.fixedPartScaleY;
+        ```
+- Max fixed-part scale
+    - Get
+        ```javascript
+        var scaleX = ninePatch.maxFixedPartScaleX;
+        var scaleY = ninePatch.maxFixedPartScaleY;
+        ```
+    - Set
+        ```javascript
+        ninePatch.setMaxFixedPartScale(scale);
+        // ninePatch.setMaxFixedPartScale(scaleX, scaleY);
+        ```
+        or
+        ```javascript
+        ninePatch.maxFixedPartScaleX = scaleX;
+        ninePatch.maxFixedPartScaleY = scaleY;
+        ```
+
+### Update texture
+
+```javascript
+ninePatch.updateTexture();
+```

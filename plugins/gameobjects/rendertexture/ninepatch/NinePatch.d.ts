@@ -14,12 +14,17 @@ declare namespace NinePatch {
         columns?: (number | undefined)[],
         rows?: (number | undefined)[],
 
-        preserveRatio?: boolean,
         stretchMode?: 0 | 1 | 'scale' | 'repeat' |
         {
             edge?: 0 | 1 | 'scale' | 'repeat',
             internal?: 0 | 1 | 'scale' | 'repeat',
         },
+
+        maxFixedPartScale?: number,
+        maxFixedPartScaleX?: number,
+        maxFixedPartScaleY?: number,
+
+        preserveRatio?: boolean,
     }
 
 }
@@ -89,6 +94,15 @@ declare class NinePatch extends Phaser.GameObjects.RenderTexture {
     setGetFrameNameCallback(
         callback: (colIndex: number, rowIndex: number, baseFrame: string) => (string | undefined)
     ): this;
+
+    updateTexture(): this;
+
+    setPreserveRatio(enable?: boolean): this;
+    preserveRatio: boolean;
+
+    setMaxFixedPartScale(scaleX: number, scaleY?: number): this;
+    maxFixedPartScaleX: number;
+    maxFixedPartScaleY: number;
 
     readonly minWidth: number;
 
