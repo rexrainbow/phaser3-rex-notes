@@ -613,12 +613,49 @@ sizer.pin(gameObject);
 - Get outter padding
     - Get outter padding values
         ```javascript
-        var innerPadding = sizer.getOutterrPadding();
+        var outterPadding = sizer.getOutterrPadding();
         ```
     - Get specific outter padding
         ```javascript
         var value = sizer.getOutterPadding(key);
         ```
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+- Set outter padding of child
+    - Set outter padding via config
+        ```javascript
+        sizer.setChildOuterPadding(
+            child,
+            {
+                left: leftPadding, 
+                right: rightPadding,
+                top: topPadding,
+                bottom: bottomPadding
+            }
+        );
+        ```
+        - `child` : A string key or game object.
+    - Set outter padding via single number
+        ```javascript
+        sizer.setChildOuterPadding(child, value);
+        ```
+        - `child` : A string key or game object.
+    - Set specific outter padding
+        ```javascript
+        sizer.setChildOuterPadding(child, key, value);
+        ```
+        - `child` : A string key or game object.
+        - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
+- Get outter padding of child
+    - Get outter padding values
+        ```javascript
+        var outterPadding = sizer.getChildOutterPadding(child);
+        ```
+        - `child` : A string key or game object.
+    - Get specific outter padding
+        ```javascript
+        var value = sizer.getChildOutterPadding(child, key);
+        ```
+        - `child` : A string key or game object.
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
 
 ### Anchor

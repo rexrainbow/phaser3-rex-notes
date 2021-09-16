@@ -18,4 +18,19 @@ export default {
         SetPadding(this.getSizerConfig(this).padding, key, value);
         return this;
     },
+
+    getChildOutterPadding(child, key) {
+        if (typeof (child) === 'string') {
+            child = this.getElement(child);
+        }
+        return GetPadding(this.getSizerConfig(child).padding, key);
+    },
+
+    setChildOuterPadding(child, key, value) {
+        if (typeof (child) === 'string') {
+            child = this.getElement(child);
+        }
+        SetPadding(this.getSizerConfig(child).padding, key, value);
+        return this;
+    },
 }

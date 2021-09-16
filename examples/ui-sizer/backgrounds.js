@@ -11,29 +11,44 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.rexUI.add.sizer({
+        var sizer = this.rexUI.add.sizer({
             x: 400, y: 300,
             width: 200, height: 40,
             orientation: 'x',
         })
             .addBackground(
                 this.rexUI.add.roundRectangle(0, 0, 1, 1, 0).setStrokeStyle(2, 0x98D998), // child
-                { top: 5, left: 5 }                                                       // padding
+                { top: 5, left: 5 },                                                      // padding
+                'bg0'                                                                     // key
             )
             .addBackground(
                 this.rexUI.add.roundRectangle(0, 0, 1, 1, 0).setStrokeStyle(2, 0x1860A3), // child
-                { bottom: 5, right: 5 }                                                   // padding
+                { bottom: 5, right: 5 },                                                  // padding
+                'bg1'                                                                     // key
             )
             .addSpace()
             .add(
                 this.add.text(0, 0, 'Hello'),// child
-                0,                           // proportion, fixed width
-                'center',                    // align vertically
-                0,                           // padding
-                false                        // expand vertically
+                {
+                    proportion: 0,
+                    align: 'center',
+                    expand: false
+                }
             )
             .addSpace()
             .layout()
+
+
+        this.input.once('pointerdown', function () {
+            sizer
+                .setChildOuterPadding(
+                    'bg0',
+                    {
+                        left: -20, right: -20, top: -20, bottom: -20
+                    }
+                )
+                .layout();
+        })
     }
 
     update() { }
