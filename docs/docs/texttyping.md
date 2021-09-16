@@ -73,7 +73,7 @@ Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [
 
 ```javascript
 var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
-    // wrapEnable: false,
+    // wrap: false,
     // speed: 333,       // typing speed in ms
     // typeMode: 0,      //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
     // setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text
@@ -82,7 +82,7 @@ var typing = scene.plugins.get('rexTextTyping').add(textGameObject, {
 ```
 
 - `textObject` : [Text object](text.md), [bbcode text object](bbcodetext.md), [tag text boject](tagtext.md), or [bitmap text object](bitmaptext.md)
-- `wrapEnable` : 
+- `wrap` : 
     - `false` : Don't insert `\n`, default behavior.
     - `true` : Insert `\n` to wrap content according to style of text, to prevent typing jittering.
 - `speed` : Typing speed in ms, default value is `333`.

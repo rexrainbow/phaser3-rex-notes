@@ -31,12 +31,13 @@ class Demo extends Phaser.Scene {
         });
 
         txt.typing = this.plugins.get('rexTextTyping').add(txt, {
-            wrapEnable: true,
+            wrap: true,
             speed: 0.1 * 1000,
         });
 
         var content = `\
-AAAAAAA AAAAAAA AAAAAAA AAAAAAA AAAAAAA BBBBBBB BBBBBBB BBBBBBB\
+AAAAAAA AAAAAAA AAAAAAA AAAAAAA AAAAAAA BBBBBBB BBBBBBB BBBBBBB
+CCCCCCC CCCCCCC CCCCCCC CCCCCCC CCCCCCC CCCCCCC CCCCCCC CCCCCCC\
 `;
         this.input.on('pointerdown', function () {
             txt.typing.start(content);

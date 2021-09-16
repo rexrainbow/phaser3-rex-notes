@@ -14,7 +14,7 @@ class TextTyping extends ComponentBase {
     }
 
     resetFromJSON(o) {
-        this.setWrapEnable(GetValue(o, 'wrapEnable', false));
+        this.setTextWrapEnable(GetValue(o, 'wrap', false));
         this.setTypeMode(GetValue(o, 'typeMode', 0));
         this.setTypeSpeed(GetValue(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
@@ -56,17 +56,17 @@ class TextTyping extends ComponentBase {
         return this;
     }
 
-    setWrapEnable(enable) {
+    setTextWrapEnable(enable) {
         if (enable === undefined) {
             enable = true;
         }
-        this.wrapEnable = enable;
+        this.textWrapEnable = enable;
         return this;
     }
 
     set text(value) {
         var text = TransferText(value);
-        if (this.wrapEnable) {
+        if (this.textWrapEnable) {
             text = GetWrapText(this.parent, text);
         }
 

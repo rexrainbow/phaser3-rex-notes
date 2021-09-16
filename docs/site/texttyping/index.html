@@ -6359,14 +6359,20 @@
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">typing</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">textGameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">//speed: 333,       // typing speed in ms</span>
-    <span class="c1">//typeMode: 0,      //0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
-    <span class="c1">//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text</span>
-    <span class="c1">//setTextCallbackScope: null</span>
+    <span class="c1">// wrap: false,</span>
+    <span class="c1">// speed: 333,       // typing speed in ms</span>
+    <span class="c1">// typeMode: 0,      //0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
+    <span class="c1">// setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text</span>
+    <span class="c1">// setTextCallbackScope: null,   </span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
 <li><code>textObject</code> : <a href="../text/">Text object</a>, <a href="../bbcodetext/">bbcode text object</a>, <a href="../tagtext/">tag text boject</a>, or <a href="../bitmaptext/">bitmap text object</a></li>
+<li><code>wrap</code> : <ul>
+<li><code>false</code> : Don't insert <code>\n</code>, default behavior.</li>
+<li><code>true</code> : Insert <code>\n</code> to wrap content according to style of text, to prevent typing jittering.</li>
+</ul>
+</li>
 <li><code>speed</code> : Typing speed in ms, default value is <code>333</code>.</li>
 <li><code>typeMode</code> :<ul>
 <li><code>'left-to-right'</code>, or <code>0</code> : Typing characters from left to right.</li>
