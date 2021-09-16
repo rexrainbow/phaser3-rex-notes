@@ -7,6 +7,7 @@ var GetWrapText = function (textObject, text) {
     var textObjectType = GetTextObjectType(textObject);
     switch (textObjectType) {
         case TextType:
+            textObject.style.syncFont(textObject.canvas, textObject.context);
             text = textObject.runWordWrap(text);
             break;
         case TagTextType:
