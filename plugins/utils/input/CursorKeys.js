@@ -84,6 +84,7 @@ class CursorKeys {
 }
 
 var FakeEvent = {
+    timeStamp: 0,
     altKey: false,
     ctrlKey: false,
     shiftKey: false,
