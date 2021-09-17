@@ -562,7 +562,7 @@ sizer.pin(gameObject);
 
 ### Padding
 
-- Set inner padding
+- Set inner padding, will indent children position.
     - Set inner padding via config
         ```javascript
         sizer.setInnerPadding({
@@ -591,7 +591,7 @@ sizer.pin(gameObject);
         var value = sizer.getInnerPadding(key);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Set outter padding
+- Set outter padding, will shrink layout size.
     - Set outter padding via config
         ```javascript
         sizer.setOutterPadding({
@@ -620,7 +620,7 @@ sizer.pin(gameObject);
         var value = sizer.getOutterPadding(key);
         ```
         - `key` : `'left'`, `'right'`, `'top'`, `'bottom'`
-- Set outter padding of child
+- Set outter padding of child, will shrink layout size.
     - Set outter padding via config
         ```javascript
         sizer.setChildOuterPadding(
