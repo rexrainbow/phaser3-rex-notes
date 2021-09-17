@@ -1,5 +1,8 @@
 import FragSrc from './dropshadow-postfxfrag.js';
-import GetAnother from '../utils/GetAnother.js';
+import KawaseBlurFragSrc from '../kawaseblur/kawaseblurFilter-postfxfrag.js';
+import GenerateKernels from '../kawaseblur/GenerateKernels.js';
+import ShadowDrawer from './ShadowDrawer.js'
+import KawaseBlurDrawer from '../kawaseblur/KawaseBlurDrawer.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,19 +17,26 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
             name: 'rexDropShadowPostFx',
             game: game,
             shaders: [
-                {
-                    fragShader: FragSrc,
-                },
+                { fragShader: FragSrc, },
+                { fragShader: KawaseBlurFragSrc, },
             ],
         });
 
-        this.dropShader = this.shaders[0];
+        this.shadowDrawer = new ShadowDrawer(this, this.shaders[0]);
+        this.kawaseBlurDrawer = new KawaseBlurDrawer(this, this.shaders[1]);
 
         this.rotation = 0;
         this.distance = 0;
         this._shadowColor = new Color();
         this.alpha = 0.5;
         this.shadowOnly = false;
+
+        // KawaseBlur
+        this._kernels = [0];
+        this._blur = 0;
+        this._quality = 1;
+        this.pixelWidth = 1; // width of pixel wo resolution
+        this.pixelHeight = 1; // height of pixel wo resolution
     }
 
     resetFromJSON(o) {
@@ -44,6 +54,17 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
 
         this.setShadowOnly(GetValue(o, 'shadowOnly', false));
 
+        // KawaseBlur
+        var kernels = GetValue(o, 'kernels', undefined);
+        if (kernels) {
+            this.setKernela(kernels);
+        } else {
+            this.setBlur(GetValue(o, 'blur', 4));
+            this.setQuality(GetValue(o, 'quality', 3))
+        }
+
+        this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
+
         return this;
     }
 
@@ -51,30 +72,21 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
     }
 
     onDraw(renderTarget) {
-        this.copyFrame(renderTarget, this.fullFrame1);
-        var sourceFrame = this.fullFrame1;
-        var targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
+        var startFrame = this.fullFrame1;
+        this.copyFrame(renderTarget, startFrame);
 
-        // Draw shadow
-        // Set uniforms
-        var offsetX = (this.distance / this.renderer.width) * Math.cos(this.rotation);
-        var offsetY = (this.distance / this.renderer.height) * Math.sin(this.rotation)
-        this.set2f('offset', offsetX, offsetY);
-        this.set3f('color', this._shadowColor.redGL, this._shadowColor.greenGL, this._shadowColor.blueGL);
-        this.set1f('alpha', this.alpha);
-        // Bind and draw
-        this.bindAndDraw(sourceFrame, targetFrame, true, true, this.dropShader);
-        sourceFrame = targetFrame;
-        targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
+        // shadow
+        var targetFrame = this.shadowDrawer.draw(startFrame, true);
 
-        // TODO: kawase-blur
+        // kawase-blur
+        targetFrame = this.kawaseBlurDrawer.draw(targetFrame, true);
 
         // Add renderTarget to result
         if (!this.shadowOnly) {
-            this.copyFrame(renderTarget, sourceFrame, 1, false);
+            this.copyFrame(renderTarget, targetFrame, 1, false);
         }
 
-        this.copyToGame(sourceFrame);
+        this.copyToGame(targetFrame);
     }
 
     // rotation
@@ -132,6 +144,86 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
         }
 
         this.shadowOnly = enable;
+        return this;
+    }
+
+    // KawaseBlur
+    // blur
+    get blur() {
+        return this._blur;
+    }
+
+    set blur(value) {
+        if (this._blur === value) {
+            return;
+        }
+
+        this._blur = value;
+        GenerateKernels(this._blur, this._quality, this._kernels);
+    }
+
+    setBlur(value) {
+        this.blur = value;
+        return this;
+    }
+
+    // quality
+    get quality() {
+        return this._quality;
+    }
+
+    set quality(value) {
+        if (this._quality === value) {
+            return;
+        }
+
+        this._quality = value;
+        GenerateKernels(this._blur, this._quality, this._kernels);
+    }
+
+    setQuality(value) {
+        this.quality = value;
+        return this;
+    }
+
+    // kernels
+    get kernels() {
+        return this._kernels;
+    }
+
+    set kernels(value) {
+        if (value === undefined) {
+            value = [0];
+        }
+
+        this._kernels = value;
+        this._quality = value.length;
+        this._blur = Math.max(...value);
+    }
+
+    setKernela(value) {
+        this.kernels = value;
+        return this;
+    }
+
+    // pixelWidth
+    setPixelWidth(value) {
+        this.pixelWidth = value;
+        return this;
+    }
+
+    // pixelHeight
+    setPixelHeight(value) {
+        this.pixelHeight = value;
+        return this;
+    }
+
+    setPixelSize(width, height) {
+        if (height === undefined) {
+            height = width;
+        }
+        this.pixelWidth = width;
+        this.pixelHeight = height;
         return this;
     }
 }

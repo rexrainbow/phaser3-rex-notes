@@ -31,6 +31,9 @@ class Demo extends Phaser.Scene {
         gui.add(postFxPipeline, 'angle', -360, 360);
         gui.addColor(postFxPipeline, 'shadowColor');
         gui.add(postFxPipeline, 'alpha', 0, 1);
+        gui.add(postFxPipeline, 'blur', 0, 30);
+        gui.add(postFxPipeline, 'pixelWidth', 0, 600);
+        gui.add(postFxPipeline, 'pixelHeight', 0, 800);
 
     }
 

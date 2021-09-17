@@ -1,5 +1,6 @@
 import FragSrc from './kawaseblurFilter-postfxfrag.js';
-import GetAnother from '../utils/GetAnother.js';
+import GenerateKernels from './GenerateKernels.js';
+import KawaseBlurDrawer from './KawaseBlurDrawer.js';
 
 const PostFXPipeline = Phaser.Renderer.WebGL.Pipelines.PostFXPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -13,6 +14,7 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
             fragShader: FragSrc
         });
 
+        this.drawer = new KawaseBlurDrawer(this);
         this._kernels = [0];
         this._blur = 0;
         this._quality = 1;
@@ -37,28 +39,9 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     onDraw(renderTarget) {
-        this.copyFrame(renderTarget, this.fullFrame1);
-        var sourceFrame = this.fullFrame1;
-        var targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
-
-        var uvX = this.pixelWidth / this.renderer.width;
-        var uvY = this.pixelHeight / this.renderer.height;
-        var offset, uOffsetX, uOffsetY;
-        for (var i = 0, last = this._quality - 1; i <= last; i++) {
-            // Set uniforms
-            offset = this._kernels[i] + 0.5;
-            uOffsetX = offset * uvX;
-            uOffsetY = offset * uvY;
-            this.set2f('uOffset', uOffsetX, uOffsetY);
-            // Bind and draw
-            if (i < last) {
-                this.bindAndDraw(sourceFrame, targetFrame);
-                sourceFrame = targetFrame;
-                targetFrame = GetAnother(sourceFrame, this.fullFrame1, this.fullFrame2);
-            } else { // Last step
-                this.bindAndDraw(sourceFrame);
-            }
-        }
+        var startFrame = this.fullFrame1;
+        this.copyFrame(renderTarget, startFrame);
+        this.drawer.draw(startFrame, false);
     }
 
     // blur
@@ -139,18 +122,6 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
         this.pixelHeight = height;
         return this;
     }
-}
-
-var GenerateKernels = function (blur, quality, out) {
-    if (out === undefined) {
-        out = [];
-    } else {
-        out.length = 0;
-    }
-    for (var i = quality; i > 0; i--) {
-        out.push(blur * (i / quality));
-    }
-    return out;
 }
 
 export default KawaseBlurFilterPostFxPipeline;
