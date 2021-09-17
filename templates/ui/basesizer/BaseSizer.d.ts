@@ -402,6 +402,17 @@ declare class BaseSizer extends ContainerLite {
         value?: number
     ): this;
 
+    getChildOutterPadding(
+        child: string | Phaser.GameObjects.GameObject,
+        key?: string
+    ): number | { left: number, right: number, top: number, bottom: number };
+
+    setChildOuterPadding(
+        child: string | Phaser.GameObjects.GameObject,
+        key: string | number | { left?: number, right?: number, top?: number, bottom?: number },
+        value?: number
+    ): this;
+
     pointToChild(
         x: number,
         y: number,
