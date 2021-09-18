@@ -1,5 +1,3 @@
-import GetAnother from './GetAnother';
-
 class Drawer {
     constructor(postFXPipeline, shader) {
         this.postFXPipeline = postFXPipeline;
@@ -8,7 +6,9 @@ class Drawer {
 
     getAnotherFrame(frame) {
         var self = this.postFXPipeline;
-        return GetAnother(frame, self.fullFrame1, self.fullFrame2);
+        var frame1 = self.fullFrame1,
+            frame2 = self.fullFrame2;
+        return (frame === frame1) ? frame2 : frame1;
     }
 
     init(renderTarget, startFrame) {
@@ -23,12 +23,16 @@ class Drawer {
 
     // Override
     draw(startFrame, returnLastFrame) {
-        //var self = this.postFXPipeline;
-        //var currentShader = this.shader;
+        // var self = this.postFXPipeline;
+        // var shader = this.shader;
 
         // var sourceFrame = startFrame;
         // var targetFrame = this.getAnotherFrame(sourceFrame);
         // var returnFrame;
+
+        // ...
+
+        // return returnFrame;
     }
 
 

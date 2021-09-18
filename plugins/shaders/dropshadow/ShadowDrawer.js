@@ -1,4 +1,4 @@
-import Drawer from '../utils/Drawer';
+import Drawer from '../utils/drawer/Drawer.js';
 
 class ShadowDrawer extends Drawer {
     draw(startFrame, returnLastFrame) {

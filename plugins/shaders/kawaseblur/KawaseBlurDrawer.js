@@ -1,4 +1,4 @@
-import Drawer from '../utils/Drawer.js';
+import Drawer from '../utils/drawer/Drawer.js';
 
 class KawaseBlurDrawer extends Drawer {
     draw(startFrame, returnLastFrame) {
