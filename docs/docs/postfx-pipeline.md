@@ -34,53 +34,65 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     - Float
         ```javascript
         pipelineInstance.set1f(name, value0);
+        // pipelineInstance.set1f(name, value0, shader);
         ```
     - uniform1fv
         ```javascript
         pipelineInstance.set1fv(name, value0);
+        // pipelineInstance.set1fv(name, value0, shader);
         ```
     - Int
         ```javascript
         pipelineInstance.set1i(name, value0);
+        // pipelineInstance.set1i(name, value0, shader);
         ```
 - Property with 2 values
     - Float
         ```javascript
         pipelineInstance.set2f(name, value0, value1);
+        // pipelineInstance.set2f(name, value0, value1, shader);
         ```
     - uniform2fv
         ```javascript
         pipelineInstance.set2fv(name, value0, value1);
+        // pipelineInstance.set2fv(name, value0, value1, shader);
         ```
     - Int
         ```javascript
         pipelineInstance.set2i(name, value0, value1);
+        // pipelineInstance.set2i(name, value0, value1, shader);
         ``` 
 - Property with 3 value
     - Float
         ```javascript
         pipelineInstance.set3f(name, value0, value1, value2);
+        // pipelineInstance.set3f(name, value0, value1, value2, shader);
         ```
     - uniform3fv
         ```javascript
         pipelineInstance.set3fv(name, value0, value1, value2);
+        // pipelineInstance.set3fv(name, value0, value1, value2, shader);
         ```
     - Int
         ```javascript
         pipelineInstance.set3i(name, value0, value1, value2);
+        // pipelineInstance.set3i(name, value0, value1, value2, shader);
         ```
 - Property with 4 values
     - Float
         ```javascript
         pipelineInstance.set4f(name, value0, value1, value2, value3);
+        // pipelineInstance.set4f(name, value0, value1, value2, value3, shader);
         ```
     - uniform4fv
         ```javascript
         pipelineInstance.set4fv(name, value0, value1, value2, value3);
+        // pipelineInstance.set4fv(name, value0, value1, value2, value3, shader);
         ```
     - Int
         ```javascript
         pipelineInstance.set4i(name, value0, value1, value2, value3);
+        // pipelineInstance.set4i(name, value0, value1, value2, value3, shader);
         ```
 
 #### onPreRender
@@ -103,7 +115,7 @@ class MyPostFxClass extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
         1. Bind and draw on `pipelineInstance.fullFrame1`, `pipelineInstance.fullFrame2`.
             ```javascript
             pipelineInstance.bindAndDraw(source, target);
-            // pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, currentShader);
+            // pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, shader);
             ```
         1. Draw result back
             ```javascript

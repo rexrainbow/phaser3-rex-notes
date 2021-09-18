@@ -11,6 +11,16 @@ class Drawer {
         return GetAnother(frame, self.fullFrame1, self.fullFrame2);
     }
 
+    init(renderTarget, startFrame) {
+        var self = this.postFXPipeline;
+        if (startFrame === undefined) {
+            startFrame = self.fullFrame1;
+        }
+
+        self.copyFrame(renderTarget, startFrame);
+        return startFrame;
+    }
+
     // Override
     draw(startFrame, returnLastFrame) {
         //var self = this.postFXPipeline;

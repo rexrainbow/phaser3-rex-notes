@@ -23,12 +23,12 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     resetFromJSON(o) {
-        var kernels = GetValue(o, 'kernels', undefined);
-        if (kernels) {
-            this.setKernela(kernels);
+        var blur = GetValue(o, 'blur', 4);
+        if (typeof(blur) === 'number') {
+            this.setBlur(blur);
+            this.setQuality(GetValue(o, 'quality', 3));
         } else {
-            this.setBlur(GetValue(o, 'blur', 4));
-            this.setQuality(GetValue(o, 'quality', 3))
+            this.setKernela(blur);
         }
 
         this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
@@ -39,9 +39,7 @@ class KawaseBlurFilterPostFxPipeline extends PostFXPipeline {
     }
 
     onDraw(renderTarget) {
-        var startFrame = this.fullFrame1;
-        this.copyFrame(renderTarget, startFrame);
-        this.drawer.draw(startFrame, false);
+        this.drawer.draw(this.drawer.init(renderTarget));
     }
 
     // blur

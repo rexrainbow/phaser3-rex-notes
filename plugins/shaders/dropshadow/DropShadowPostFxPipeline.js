@@ -55,12 +55,12 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
         this.setShadowOnly(GetValue(o, 'shadowOnly', false));
 
         // KawaseBlur
-        var kernels = GetValue(o, 'kernels', undefined);
-        if (kernels) {
-            this.setKernela(kernels);
+        var blur = GetValue(o, 'blur', 4);
+        if (typeof(blur) === 'number') {
+            this.setBlur(blur);
+            this.setQuality(GetValue(o, 'quality', 3));
         } else {
-            this.setBlur(GetValue(o, 'blur', 4));
-            this.setQuality(GetValue(o, 'quality', 3))
+            this.setKernela(blur);
         }
 
         this.setPixelSize(GetValue(o, 'pixelWidth', 1), GetValue(o, 'pixelHeight', 1));
@@ -72,11 +72,10 @@ class DropShadowPostFxPipeline extends PostFXPipeline {
     }
 
     onDraw(renderTarget) {
-        var startFrame = this.fullFrame1;
-        this.copyFrame(renderTarget, startFrame);
-
+        var targetFrame;
+        
         // shadow
-        var targetFrame = this.shadowDrawer.draw(startFrame, true);
+        targetFrame = this.shadowDrawer.draw(this.shadowDrawer.init(renderTarget), true);
 
         // kawase-blur
         targetFrame = this.kawaseBlurDrawer.draw(targetFrame, true);
