@@ -3652,11 +3652,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6463,11 +6541,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TagTextPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tagtext-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TagTextPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tagtext-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTagTextPlugin&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">TagTextPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6477,7 +6555,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add text object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -6489,10 +6567,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TagText</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tagtext.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TagText</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tagtext.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add text object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TagText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TagText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">txt</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -6508,6 +6586,7 @@
 <span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 <span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
 </code></pre></div>
+
 <ul>
 <li><code>tags</code> : <code>{tagName:tag}</code>, see <a href="./#properties-of-tag">Properties of tag</a>.</li>
 </ul>
@@ -6520,39 +6599,39 @@
     <span class="nx">backgroundColor2</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">backgroundHorizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">backgroundStrokeColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">backgroundStrokeLineWidth</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
-    <span class="nx">backgroundCornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">backgroundStrokeLineWidth</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">backgroundCornerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">backgroundCornerIteration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> 
     <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
     <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-    <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-        <span class="nx">blur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">blur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
     <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
-        <span class="nx">thinkness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span>
+        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">},</span>
     <span class="c1">// align: &#39;left&#39;,  // Equal to halign</span>
     <span class="nx">halign</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="c1">// &#39;left&#39;|&#39;center&#39;|&#39;right&#39;</span>
     <span class="nx">valign</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>  <span class="c1">// &#39;top&#39;|&#39;center&#39;|&#39;bottom&#39;</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="nx">maxLines</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">fixedWidth</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">fixedHeight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">maxLines</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">fixedWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">fixedHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">testString</span><span class="o">:</span> <span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
     <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>     <span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
@@ -6580,9 +6659,10 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;64px&#39;</span><span class="p">,</span>
@@ -6594,15 +6674,16 @@
     <span class="p">}</span>
 <span class="p">})</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mf">64</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mf">16</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mf">20</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mf">40</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">64</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">40</span>
         <span class="c1">//x: 32,    // 32px padding on the left/right</span>
         <span class="c1">//y: 16     // 16px padding on the top/bottom</span>
     <span class="p">},</span>
@@ -6619,6 +6700,7 @@
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li>Alignment<ul>
 <li><code>halign</code>, or <code>align</code> : Horizontal alignment.<ul>
@@ -6641,30 +6723,31 @@
     <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>            <span class="c1">// or &#39;font-color&#39;</span>
     <span class="nx">stroke</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-        <span class="nx">thinkness</span><span class="o">:</span> <span class="mf">1</span>
+        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">1</span>
     <span class="p">},</span>
     <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-        <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
-        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
-        <span class="nx">blur</span><span class="o">:</span> <span class="mf">2</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="nx">blur</span><span class="o">:</span> <span class="mi">2</span>
     <span class="p">},</span>
     <span class="nx">underline</span><span class="o">:</span> <span class="p">{</span>            <span class="c1">// or &#39;u&#39;</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-        <span class="nx">thinkness</span><span class="o">:</span> <span class="mf">3</span><span class="p">,</span>
-        <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span>
+        <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span>
     <span class="p">},</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">img</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
     <span class="nx">area</span><span class="o">:</span> <span class="nx">areaKey</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyText</span> <span class="k">extends</span> <span class="nx">TagText</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">TagText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6681,7 +6764,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-tag">Add tag<a class="headerlink" href="#add-tag" title="Permanent link">&para;</a></h3>
@@ -6703,8 +6786,8 @@
 <ul>
 <li>Wrap by word or character.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">400</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;The sky above the port was the color of television, tuned to a dead channel.&#39;</span><span class="p">,</span>
     <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mf">0.5</span> <span class="p">},</span>
     <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
@@ -6712,7 +6795,7 @@
         <span class="nx">fill</span><span class="o">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
         <span class="nx">wrap</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;word&#39;</span>     <span class="c1">// 0|&#39;none&#39;|1|&#39;word&#39;|2|&#39;char&#39;|&#39;character&#39;</span>
-            <span class="nx">width</span><span class="o">:</span> <span class="mf">300</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mi">300</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
@@ -6761,6 +6844,7 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setFontSize</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setFontStyle</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Text color<ul>
@@ -6874,9 +6958,9 @@
     <span class="nx">frame</span><span class="o">:</span> <span class="nx">frameName</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li><code>imgKey</code> : Image key used in text content, i.e. <code>[img=imgKey]</code>.</li>
@@ -6923,6 +7007,7 @@
 <h4 id="draw-hit-areas">Draw hit-areas<a class="headerlink" href="#draw-hit-areas" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">drawAreaBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>color</code> : Default value is <code>0xffffff</code></li>
@@ -7002,11 +7087,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -7089,7 +7169,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

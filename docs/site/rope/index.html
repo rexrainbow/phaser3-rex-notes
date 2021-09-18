@@ -3554,11 +3554,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6254,11 +6332,13 @@
 <h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Reference: <a href="../loader/#image">load image</a></p>
 <h3 id="add-object">Add object<a class="headerlink" href="#add-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rope</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">);</span>
 <span class="c1">// var rope = scene.add.rope(x, y, texture, frame, points, horizontal, colors, alphas);</span>
 </code></pre></div>
+
 <ul>
 <li><code>points</code> : <ul>
 <li>A number : Segments to split the texture frame into.</li>
@@ -6275,8 +6355,8 @@
 </ul>
 <p>Add rope from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rope</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">horizontal</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -6293,12 +6373,13 @@
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <h3 id="custom-rope-class">Custom rope class<a class="headerlink" href="#custom-rope-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyRope</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Rope</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyRope</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Rope</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6315,7 +6396,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyRope</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rope</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyRope</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">horizontal</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h3>
@@ -6325,6 +6406,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 <span class="c1">// rope.setPoints(points, colors, alphas);</span>
 </code></pre></div>
+
 <ul>
 <li><code>points</code> : <ul>
 <li>A number : Segments to split the texture frame into.</li>
@@ -6358,10 +6440,12 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span> <span class="o">+</span> <span class="nx">rope</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div>
+
 <h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// rope.play(key, ignoreIfPlaying, startFrame);</span>
 </code></pre></div>
+
 <ul>
 <li><code>ignoreIfPlaying</code> : If an animation is already playing then ignore this call. Default value is <code>false</code>.</li>
 <li><code>startFrame</code> : Optionally start the animation playing from this frame index. Default value is <code>0</code>.</li>
@@ -6397,6 +6481,7 @@
 <p>Sets the tint fill mode.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setTintFill</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>mode</code> : <ul>
 <li><code>0</code> : Additive tint, blends the vertices colors with the texture. Default behavior.</li>
@@ -6409,12 +6494,14 @@
 <div class="highlight"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">flipX</span> <span class="o">=</span> <span class="nx">flip</span><span class="p">;</span>
 <span class="nx">rope</span><span class="p">.</span><span class="nx">flipY</span> <span class="o">=</span> <span class="nx">flip</span><span class="p">;</span>
 </code></pre></div>
+
 <p>If this Game Object has a physics body, it will not change the body. This is a rendering toggle only.</p>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <p>Draw debug mesh each render tick.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">rope</span><span class="p">.</span><span class="nx">setDebug</span><span class="p">(</span><span class="nx">graphic</span><span class="p">);</span>
 <span class="c1">// rope.setDebug(graphic, callback);</span>
 </code></pre></div>
+
 <ul>
 <li><code>graphic</code> : <a href="../graphics/">Graphics game object</a></li>
 <li><code>callback</code> : Callback of rendering debug graphics (<a href="https://github.com/photonstorm/phaser/blob/master/src/gameobjects/rope/Rope.js#L996-L1024">default callback</a>)
@@ -6445,11 +6532,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6532,7 +6614,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

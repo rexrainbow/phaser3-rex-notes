@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6399,26 +6477,28 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">path</span><span class="p">();</span>
 <span class="c1">// var path = scene.add.path(x, y);  // curve start from (x, y)</span>
 </code></pre></div>
+
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">();</span>
 <span class="c1">// var path = new Phaser.Curves.Path(x, y);  // curve start from (x, y)</span>
 </code></pre></div>
+
 <h4 id="add-path-object-with-curves">Add path object with curves<a class="headerlink" href="#add-path-object-with-curves" title="Permanent link">&para;</a></h4>
 <p><a href="./#curves-to-json">Curves in JSON</a></p>
 <p><div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </code></pre></div>
 or
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </code></pre></div></p>
 <h3 id="add-curve">Add curve<a class="headerlink" href="#add-curve" title="Permanent link">&para;</a></h3>
 <h4 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add line object<ol>
 <li>Create line object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y0</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y1</span><span class="p">});</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y0</span><span class="p">},</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y1</span><span class="p">});</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">]);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">]);</span>
 </code></pre></div></li>
 <li>Add to path
     <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
@@ -6429,7 +6509,7 @@ or
     <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">endX</span><span class="p">,</span> <span class="nx">endY</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Vector2</span><span class="p">({</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">}));</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Vector2</span><span class="p">({</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">}));</span>
 </code></pre></div></li>
 </ul>
 <p>Properties:</p>
@@ -6448,13 +6528,13 @@ or
 <li>Add circle/ellipse/arc object<ol>
 <li>Create circle/ellipse/arc object<ul>
 <li>Circle
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Ellipse
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Arc
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">clockwise</span><span class="p">,</span>     <span class="nx">rotation</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">xRadius</span><span class="p">,</span> <span class="nx">yRadius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">clockwise</span><span class="p">,</span>     <span class="nx">rotation</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -6494,14 +6574,14 @@ or
 <ul>
 <li>Add spline object<ol>
 <li>Create spline object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
     <span class="nx">p0</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="nx">p1</span><span class="p">,</span>            <span class="c1">// {x, y}, or [x, y]</span>
     <span class="c1">// ...</span>
 <span class="p">]);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Spline</span><span class="p">([</span>
     <span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span>
     <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span>
     <span class="c1">// ...</span>
@@ -6531,10 +6611,11 @@ or
 <h5 id="append-point">Append point<a class="headerlink" href="#append-point" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">addPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="quadratic-bezier-curve">Quadratic bezier curve<a class="headerlink" href="#quadratic-bezier-curve" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create quadratic bezier curve object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
@@ -6542,7 +6623,7 @@ or
     <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span>     <span class="c1">// control point</span>
     <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span>      <span class="c1">// end point</span>
 <span class="p">];</span>
-<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add to path
     <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
@@ -6557,7 +6638,7 @@ or
 <h4 id="cubic-bezier-curve">Cubic bezier curve<a class="headerlink" href="#cubic-bezier-curve" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create quadratic bezier curve object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint1</span><span class="p">,</span> <span class="nx">controlPoint2</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">startPoint</span><span class="p">,</span> <span class="nx">controlPoint1</span><span class="p">,</span> <span class="nx">controlPoint2</span><span class="p">,</span> <span class="nx">endPoint</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span>
@@ -6566,7 +6647,7 @@ or
     <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span>     <span class="c1">// control point2</span>
     <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span>      <span class="c1">// end point</span>
 <span class="p">];</span>
-<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">curve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add to path
     <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">curve</span><span class="p">);</span>
@@ -6581,16 +6662,20 @@ or
 <h4 id="move-to-point">Move to point<a class="headerlink" href="#move-to-point" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="add-curves-from-json">Add curves from <a href="./#curves-to-json">JSON</a><a class="headerlink" href="#add-curves-from-json" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="get-curves">Get curves<a class="headerlink" href="#get-curves" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">curves</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">curves</span><span class="p">;</span>
 </code></pre></div>
+
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">path</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
 <span class="c1">// path.draw(graphics, pointsTotal);</span>
 </code></pre></div>
+
 <ul>
 <li><code>pointsTotal</code> : The number of points to draw for each Curve.</li>
 </ul>
@@ -6598,6 +6683,7 @@ or
 <div class="highlight"><pre><span></span><code><span class="nx">curve</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
 <span class="c1">// curve.draw(graphics, pointsTotal);</span>
 </code></pre></div>
+
 <ul>
 <li><code>pointsTotal</code> : The resolution of the curve.</li>
 </ul>
@@ -6735,11 +6821,6 @@ or
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
-        
       </main>
       
         
@@ -6821,7 +6902,7 @@ or
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

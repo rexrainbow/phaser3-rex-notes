@@ -3506,11 +3506,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6156,8 +6234,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mf">1024</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mf">768</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
@@ -6165,8 +6243,9 @@
     <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>scale.mode</code> :<ul>
 <li><code>Phaser.Scale.NONE</code> : No scaling happens at all.</li>
@@ -6188,14 +6267,17 @@
 <h3 id="resize-canvas-element">Resize canvas element<a class="headerlink" href="#resize-canvas-element" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Modify the size of the Phaser canvas element directly. You should only use this if you are using the <code>NO_SCALE</code> scale mode,</p>
 <h3 id="set-game-size">Set game size<a class="headerlink" href="#set-game-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">setGameSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>
+
 <ul>
 <li><code>gameSize</code><ul>
 <li><code>gameSize.width</code>, <code>gameSize.height</code></li>
@@ -6224,11 +6306,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6311,7 +6388,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

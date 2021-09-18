@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6460,7 +6538,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install ui plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">RexUIPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">RexUIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -6475,23 +6553,23 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
 <h4 id="using-typescript-declaration-file">Using typescript declaration file<a class="headerlink" href="#using-typescript-declaration-file" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">RexUIPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">RexUIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
-<span class="kd">class</span> <span class="nx">Game</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
+<span class="kr">class</span> <span class="nx">Game</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
     <span class="nx">rexUI</span>: <span class="kt">RexUIPlugin</span><span class="p">;</span>  <span class="c1">// Declare scene property &#39;rexUI&#39; as RexUIPlugin type</span>
 
-    <span class="nx">create</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">create() {</span>
         <span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
             <span class="c1">// ...</span>
         <span class="p">})</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">({</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">({</span>
     <span class="nx">scene</span>: <span class="kt">Game</span><span class="p">,</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -6506,10 +6584,11 @@
     <span class="c1">// ...</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>'phaser3-rex-plugins/templates/ui/ui-plugin'</code> : Factories of rexUI components.</li>
 <li><code>'phaser3-rex-plugins/templates/ui/ui-components'</code> : Class of rexUI components.
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Sizer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Sizer</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <p>See this <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/ui-wrap-expand-text/speech-bubble-background-ts.ts">example</a></p>
@@ -6552,9 +6631,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyContainer</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Container</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyContainer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Container</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6568,9 +6647,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyRoundRectangle</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangle</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyRoundRectangle</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangle</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6581,9 +6660,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">ninePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyNinePatch</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyNinePatch</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NinePatch</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6594,9 +6673,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">customShapes</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">customShapes</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCustomShapes</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomShapes</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCustomShapes</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomShapes</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6607,9 +6686,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">customProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">customProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCustomProgress</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomProgress</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCustomProgress</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CustomProgress</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6620,9 +6699,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">roundRectangleCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radiusConfig</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">fillColor2</span><span class="p">,</span> <span class="nx">isHorizontalGradient</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyRoundRectangleCanvas</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangleCanvas</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radiusConfig</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">fillColor2</span><span class="p">,</span> <span class="nx">isHorizontalGradient</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radiusConfig</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">fillColor2</span><span class="p">,</span> <span class="nx">isHorizontalGradient</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyRoundRectangleCanvas</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">RoundRectangleCanvas</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radiusConfig</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">fillColor2</span><span class="p">,</span> <span class="nx">isHorizontalGradient</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radiusConfig</span><span class="p">,</span> <span class="nx">fillStyle</span><span class="p">,</span> <span class="nx">strokeStyle</span><span class="p">,</span> <span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">fillColor2</span><span class="p">,</span> <span class="nx">isHorizontalGradient</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6637,9 +6716,9 @@
 <span class="c1">// var canvas = scene.rexUI.add.canvas(x, y, width, height);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCanvas</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Canvas</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCanvas</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Canvas</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6651,9 +6730,9 @@
 <span class="c1">// var image = scene.rexUI.add.circleMaskImage(x, y, key, frame, config);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyImage</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleMaskImage</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyImage</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircleMaskImage</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6664,9 +6743,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgress</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCircularProgress</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgress</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCircularProgress</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgress</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6677,9 +6756,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">circularProgress</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circularProgressCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCircularProgress</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgressCanvas</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyCircularProgress</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">CircularProgressCanvas</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">barColor</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6694,9 +6773,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">BBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyText</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">BBCodeText</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">BBCodeText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6707,9 +6786,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyText</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TagText</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TagText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6720,9 +6799,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dynamicText</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyText</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">DynamicText</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">DynamicText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6736,9 +6815,9 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">transitionImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyTransitionImage</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TransitionImage</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyTransitionImage</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TransitionImage</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6761,8 +6840,8 @@
 <li><a href="../bitmaptext/">Bitmap text object</a></li>
 <li><a href="../dynamictext/">Dynamic text object</a>, With default wrap configuration, ex:
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">lineHeight</span><span class="o">:</span> <span class="mf">24</span><span class="p">,</span> 
-    <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">bottom</span><span class="o">:</span> <span class="mf">12</span><span class="p">}</span>
+    <span class="nx">lineHeight</span><span class="o">:</span> <span class="mi">24</span><span class="p">,</span> 
+    <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">bottom</span><span class="o">:</span> <span class="mi">12</span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -6776,43 +6855,43 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">click</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">click</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Click</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">click</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Click</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-tap/">Tap</a>: Get tap/multi-taps events of a game object.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tap</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tap</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Tap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Tap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-press/">Press</a>: Get press events of a game object.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">press</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">press</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">press</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-swipe/">Swipe</a>: Get swipe events of a game object.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">swipe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Swipe</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-pan/">Pan</a>: Get pan events of a game object.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pan</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pan</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pan</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pan</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pan</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-pinch/">Pinch</a>: Get scale factor from 2 dragging touch pointers.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../gesture-rotate/">Rotste</a>: Get spin angle from 2 dragging touch pointers.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>
@@ -6835,6 +6914,7 @@
     <span class="c1">// eventEmitter: undefined</span>
 <span class="p">})</span>
 </code></pre></div>
+
 <ul>
 <li><code>targetSizers</code> : Array of target children-sizer.</li>
 <li><code>click</code> : <a href="../button/#create-instance">Configuration</a> of Button behavior.<ul>
@@ -6918,13 +6998,13 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">flip</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">flip</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">flip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li><a href="../containerlite-perspective/">Perspective</a>: Snapshot children of <a href="../containerlite/">containerlite</a>, to a <a href="../perspective-rendertexture/">perspective render texture</a>.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspective</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">perspective</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspective</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Perspective</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspective</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Perspective</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
 <h3 id="helper-methods">Helper methods<a class="headerlink" href="#helper-methods" title="Permanent link">&para;</a></h3>
@@ -6961,6 +7041,7 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInBounds</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">isInTouching</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// var isInBounds = scene.rexUI.isInTouching(gameObject, pointer);</span>
 </code></pre></div>
+
 <h3 id="event-promise"><a href="../eventpromise/">Event promise</a><a class="headerlink" href="#event-promise" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../eventpromise/#get-event-promise">Get event promise</a>
@@ -6986,6 +7067,7 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <p>View port is a <a href="../geom-rectangle/">rectangle</a> of current visible area.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">viewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
 </code></pre></div>
+
 <p>Which will be changed after <a href="../scalemanager/#events">resizing</a></p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">viewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">viewport</span><span class="p">;</span>
@@ -6997,6 +7079,7 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
 <span class="cm">    */</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <h2 id="demos">Demos<a class="headerlink" href="#demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a><ul>
@@ -7033,11 +7116,6 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -7120,7 +7198,7 @@ Use <a href="../ui-buttons/">Button</a> if user needs to enable/disable input be
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

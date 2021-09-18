@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6267,11 +6345,11 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ExpressionParserPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/expressionparser-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">ExpressionParserPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/expressionparser-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ExpressionParserPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6281,7 +6359,7 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add parser
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
@@ -6293,15 +6371,16 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ExpressionParser</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/expressionparser.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">ExpressionParser</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/expressionparser.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add parser
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">ExpressionParser</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ExpressionParser</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexExpressionParserPlugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="execute">Execute<a class="headerlink" href="#execute" title="Permanent link">&para;</a></h3>
 <h4 id="compile-then-execute">Compile then execute<a class="headerlink" href="#compile-then-execute" title="Permanent link">&para;</a></h4>
 <ol>
@@ -6325,9 +6404,9 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <li><code>f</code> : Function object from compiled result.</li>
 <li><code>context</code> : Varables used in expression.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">a</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>  <span class="c1">// Number</span>
-    <span class="nx">b</span><span class="o">:</span> <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mf">10</span><span class="p">},</span>  <span class="c1">// Objet with number property</span>
-    <span class="nx">c</span><span class="o">:</span> <span class="mf">20</span><span class="p">,</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>  <span class="c1">// Number</span>
+    <span class="nx">b</span><span class="o">:</span> <span class="p">{</span><span class="nx">c</span><span class="o">:</span> <span class="mi">10</span><span class="p">},</span>  <span class="c1">// Objet with number property</span>
+    <span class="nx">c</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
     <span class="nx">randomInt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Custom method</span>
         <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6339,9 +6418,11 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <h4 id="execute-directly">Execute directly<a class="headerlink" href="#execute-directly" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">expressionString</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">f</span><span class="p">,</span> <span class="nx">context</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="custom-method">Custom method<a class="headerlink" href="#custom-method" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add method into parser instance
@@ -6352,18 +6433,18 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
 <span class="c1">// var value = parser.exec(&#39;randomInt(a, b)&#39;, {a:10, b:20});</span>
 </code></pre></div></li>
 <li>Declare method into class of parser
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyParser</span> <span class="k">extends</span> <span class="nx">ExpressionParser</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyParser</span> <span class="kr">extends</span> <span class="nx">ExpressionParser</span> <span class="p">{</span>
     <span class="nx">randomInt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span> 
     <span class="p">}</span>
 <span class="p">}</span>
-<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyParser</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyParser</span><span class="p">();</span>
 <span class="c1">// var value = parser.exec(&#39;randomInt(a, b)&#39;, {a:10, b:20});</span>
 </code></pre></div></li>
 <li>Add method into context
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">a</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-    <span class="nx">b</span><span class="o">:</span> <span class="mf">20</span><span class="p">,</span>
+    <span class="nx">a</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">b</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
     <span class="nx">randomInt</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// Custom method</span>
         <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="p">(</span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">)</span><span class="o">+</span><span class="nx">a</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6381,11 +6462,6 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6468,7 +6544,7 @@ Parser is generated from <a href="https://github.com/zaach/jison">jison</a></p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

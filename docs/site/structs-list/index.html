@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6248,33 +6326,43 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">list</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">List</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">addAt</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="exist">Exist<a class="headerlink" href="#exist" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasChild</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">firstChild</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">nextChild</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">prevChild</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">previous</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">lastChild</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">last</span><span class="p">;</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">getRandom</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">getAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">list</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
+
 <h3 id="sort-children">Sort children<a class="headerlink" href="#sort-children" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Sort by property
@@ -6284,7 +6372,7 @@
 <li><code>property</code> : The property to lexically sort by.</li>
 <li><code>handler</code> :
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">childA</span><span class="p">,</span> <span class="nx">childB</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="mf">0</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -6293,39 +6381,55 @@
 <h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">removeBetween</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="order-of-child">Order of child<a class="headerlink" href="#order-of-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>  <span class="c1">// Move child1 above child2</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>  <span class="c1">// Move child1 below child2</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="replace-child">Replace child<a class="headerlink" href="#replace-child" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">oldChild</span><span class="p">,</span> <span class="nx">newChild</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">list</span><span class="p">.</span><span class="nx">setAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="for-each-child">For each child<a class="headerlink" href="#for-each-child" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Iterate current children list
@@ -6354,11 +6458,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6441,7 +6540,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

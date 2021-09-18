@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6607,7 +6685,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">BoardPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -6621,7 +6699,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add container
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">miniBoard</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">miniBoard</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -6633,10 +6711,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">MiniBoard</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">MiniBoard</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add match object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">miniBoard</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MiniBoard</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">miniBoard</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MiniBoard</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-container">Add Container<a class="headerlink" href="#add-container" title="Permanent link">&para;</a></h3>
@@ -6645,6 +6723,7 @@
     <span class="nx">draggable</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>grid</code> : Create <a href="../board/">board object</a> first, then get grid object via <code>board.grid</code>.<ul>
 <li><code>gridType</code> :<ul>
@@ -6659,6 +6738,7 @@
 <h4 id="add-chess">Add chess<a class="headerlink" href="#add-chess" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">addChess</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chess</code> : A game object.</li>
 <li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.<ul>
@@ -6735,6 +6815,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">putOnMainBoard</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 <span class="c1">// miniBoard.putOnMainBoard(mainBoard, tileX, tileY, align);</span>
 </code></pre></div>
+
 <ul>
 <li><code>mainBoard</code> : <a href="../board/">Board object</a>.</li>
 <li><code>tileX</code>, <code>tileY</code> : Tile position to put on.</li>
@@ -6743,25 +6824,31 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">putOnMainBoard</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">);</span>
 </code></pre></div>
+
 <p>To put this mini-board to nearest grid of main-board.</p>
 <h4 id="pull-out-from-main-board">Pull out from main-board<a class="headerlink" href="#pull-out-from-main-board" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">pullOutFromMainBoard</span><span class="p">();</span>
 </code></pre></div>
+
 <p>Remove all chess from main-board.</p>
 <h4 id="put-back-to-previous-main-board">Put back to previous main-board<a class="headerlink" href="#put-back-to-previous-main-board" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">putBack</span><span class="p">();</span>
 </code></pre></div>
+
 <p>Previous main-board and tile position will be remembered for putting back.</p>
 <h4 id="is-overlapping-to-main-board">Is overlapping to main-board<a class="headerlink" href="#is-overlapping-to-main-board" title="Permanent link">&para;</a></h4>
 <p>Return <code>true</code> if any chess is overlapping to main-board.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">isOverlapping</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">isOverlapping</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="align-world-position-to-grid-of-main-board">Align world position to grid of main-board<a class="headerlink" href="#align-world-position-to-grid-of-main-board" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">alignToMainBoard</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>mainBoard</code> : <a href="../board/">Board object</a></li>
 <li><code>tileX</code>, <code>tileY</code> : Tile position on main-board</li>
@@ -6769,10 +6856,12 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">alignToMainBoard</span><span class="p">(</span><span class="nx">mainBoard</span><span class="p">);</span>
 </code></pre></div>
+
 <p>to align this mini-board to nearest grid of main-board.</p>
 <h4 id="get-current-main-board">Get current main-board<a class="headerlink" href="#get-current-main-board" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">miniBoard</span><span class="p">.</span><span class="nx">mainBoard</span><span class="p">;</span>
 </code></pre></div>
+
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
 </ul>
@@ -6781,12 +6870,14 @@
 <h4 id="can-rotate">Can rotate<a class="headerlink" href="#can-rotate" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">canRotate</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>n</code> : Rotate to direction <code>current direction + n</code></li>
 </ul>
 <p>or </p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">canRotateTo</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>direction</code> : Rotate to direction<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a>.</li>
@@ -6798,12 +6889,14 @@
 <h4 id="rotate_1">Rotate<a class="headerlink" href="#rotate_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>n</code> : Rotate direction to <code>current direction + n</code></li>
 </ul>
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">rotateTo</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>direction</code> : Rotate to direction<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a>.</li>
@@ -6814,10 +6907,12 @@
 <p>Return <code>true</code> if this rotating request is accepted.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isSuccess</span> <span class="o">=</span> <span class="nx">miniBoard</span><span class="p">.</span><span class="nx">lastTransferResult</span><span class="p">;</span>
 </code></pre></div>
+
 <h3 id="mirror">Mirror<a class="headerlink" href="#mirror" title="Permanent link">&para;</a></h3>
 <h4 id="can-mirror">Can mirror<a class="headerlink" href="#can-mirror" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">canMirror</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>mode</code> :<ul>
 <li><code>0</code>, or <code>'x'</code> : Set tileX to <code>-tileX</code></li>
@@ -6830,6 +6925,7 @@
 <h4 id="mirror_1">Mirror<a class="headerlink" href="#mirror_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">miniBoard</span><span class="p">.</span><span class="nx">mirror</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>mode</code> :<ul>
 <li><code>0</code>, or <code>'x'</code> : Set tileX to <code>-tileX</code></li>
@@ -6841,6 +6937,7 @@
 <p>Return <code>true</code> if this mirroring request is accepted.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isSuccess</span> <span class="o">=</span> <span class="nx">miniBoard</span><span class="p">.</span><span class="nx">lastTransferResult</span><span class="p">;</span>
 </code></pre></div>
+
 <h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
 <h4 id="set-interactive">Set interactive<a class="headerlink" href="#set-interactive" title="Permanent link">&para;</a></h4>
 <ul>
@@ -6961,11 +7058,6 @@
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
-        
       </main>
       
         
@@ -7047,7 +7139,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

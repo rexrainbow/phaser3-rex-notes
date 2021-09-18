@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6122,15 +6200,16 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">GetValue</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetValue</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="kr">const</span> <span class="nx">GetValue</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetValue</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">myMethod</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mf">0</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mf">0</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mf">0</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="mf">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Retrieves a value from an object.
@@ -6155,11 +6234,11 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetAdvancedValue</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Implicit
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mf">4</span><span class="p">};</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">4</span><span class="p">};</span>
 <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetAdvancedValue</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="c1">// value = 4</span>
 </code></pre></div></li>
 <li>From function
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">){</span><span class="k">return</span> <span class="mf">4</span><span class="p">;}};</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">){</span><span class="k">return</span> <span class="mi">4</span><span class="p">;}};</span>
 <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetAdvancedValue</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="c1">// value = 4</span>
 </code></pre></div><ul>
 <li>Pass <code>key</code> to function's 1<sup>st</sup> parameter, and get return value as final result.</li>
@@ -6183,6 +6262,7 @@
 <h3 id="is-plain-object">Is plain object<a class="headerlink" href="#is-plain-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPlainObject</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">IsPlainObject</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Plain object:</p>
 <ul>
 <li><code>var obj = {};</code></li>
@@ -6198,11 +6278,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6285,7 +6360,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

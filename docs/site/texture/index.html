@@ -3588,11 +3588,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6335,6 +6413,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var color = scene.textures.getPixel(x, y, key, frame);</span>
 </code></pre></div>
+
 <p>Properties of <code>color</code></p>
 <ul>
 <li><code>r</code> : 0 ~ 255</li>
@@ -6346,6 +6425,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getPixelAlpha</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var alpha = scene.textures.getPixelAlpha(x, y, key, frame);</span>
 </code></pre></div>
+
 <p>alpha : 0 ~ 255</p>
 <p>Return <code>null</code> if the coordinates were out of bounds.</p>
 <h3 id="generate-texture-from-array">Generate texture from array<a class="headerlink" href="#generate-texture-from-array" title="Permanent link">&para;</a></h3>
@@ -6355,8 +6435,8 @@
     <span class="c1">// [ &#39;...&#39;,</span>
     <span class="c1">//   &#39;...&#39;,</span>
     <span class="c1">//   &#39;...&#39; ]</span>
-    <span class="nx">pixelWidth</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>    <span class="c1">// pixel width of each data</span>
-    <span class="nx">pixelHeight</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>   <span class="c1">// pixel height of each data</span>
+    <span class="nx">pixelWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1">// pixel width of each data</span>
+    <span class="nx">pixelHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1">// pixel height of each data</span>
     <span class="nx">preRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// callback, function(canvas, ctx) {}</span>
     <span class="nx">postRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback, function(canvas, ctx) {}</span>
 
@@ -6366,27 +6446,34 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="remove-texture">Remove texture<a class="headerlink" href="#remove-texture" title="Permanent link">&para;</a></h3>
 <p>Remove texture stored in texture cache.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="get-base64">Get base64<a class="headerlink" href="#get-base64" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getBase64</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>  <span class="c1">// type= &#39;image/png&#39;, encoderOptions= 0.92</span>
 <span class="c1">// var s = scene.textures.getBase64(key, frame, type, encoderOptions);</span>
 </code></pre></div>
+
 <h3 id="texture">Texture<a class="headerlink" href="#texture" title="Permanent link">&para;</a></h3>
 <h4 id="get-texture">Get texture<a class="headerlink" href="#get-texture" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="has-frame">Has frame<a class="headerlink" href="#has-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasFrame</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">frameName</span><span class="p">,</span> <span class="nx">sourceIndex</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>key</code> : Texture key.</li>
 <li><code>frameName</code> : The name of this Frame. The name is unique within the Texture.</li>
@@ -6397,6 +6484,7 @@
 <h4 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">removed</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">frameName</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="default-textures">Default textures<a class="headerlink" href="#default-textures" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Default : <code>'__DEFAULT'</code></li>
@@ -6407,6 +6495,7 @@
 <h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>frame.source.image</code> : Image of texture source.</li>
@@ -6425,11 +6514,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6512,7 +6596,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

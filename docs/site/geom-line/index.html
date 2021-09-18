@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6274,15 +6352,18 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">line0</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeLineShape</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All properties
@@ -6292,16 +6373,16 @@
     <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">CopyFrom</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">dest</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Position
-    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>    <span class="c1">// min(x1, x2)</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>     <span class="c1">// min(y1, y2)</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>   <span class="c1">// max(x1, x2)</span>
-<span class="nx">line</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>  <span class="c1">// max(y1, y2)</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">line</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">// min(x1, x2)</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="c1">// min(y1, y2)</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="c1">// max(x1, x2)</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// max(y1, y2)</span>
 </code></pre></div><ul>
 <li>Offset start, end
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">Offset</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">);</span> 
@@ -6475,6 +6556,7 @@
 <h3 id="equal">Equal<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">line0</span><span class="p">,</span> <span class="nx">line1</span><span class="p">);</span>
 </code></pre></div>
+
 <p>x1, y2, x2, y2 are equal.</p>
 <h3 id="intersection">Intersection<a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h3>
 <h4 id="line-to-circle">Line to <a href="../geom-circle/">circle</a><a class="headerlink" href="#line-to-circle" title="Permanent link">&para;</a></h4>
@@ -6537,11 +6619,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6624,7 +6701,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

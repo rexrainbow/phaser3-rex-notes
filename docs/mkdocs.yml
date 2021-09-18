@@ -200,7 +200,7 @@ nav:
     - Outline:
         - Outline: shader-outline.md
         - Glow: shader-glowfilter2.md
-        - Toonify: shader-toonify.md
+        - Toonify: shader-toonify.md        
     - Position:
         - Swirl: shader-swirl.md
         - Pixelation: shader-pixelation.md        
@@ -208,6 +208,10 @@ nav:
         - Fisheye: shader-fisheye.md
         - Shockwave: shader-shockwave.md
         - Split: shader-split.md
+    - Blur:
+        - Kawase blur: shader-kawaseblur.md
+    - Others:
+        - Drop shadow: shader-dropshadow.md
     - Transition:
         - Warp: shader-warp.md
         - Dissolve: shader-dissolve.md
@@ -407,7 +411,6 @@ theme:
         primary: 'blue'
         accent: 'blue'
     features:
-        - navigation.top
         - search.suggest
         - search.highlight
 

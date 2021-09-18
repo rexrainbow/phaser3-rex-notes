@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6302,11 +6380,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">WaitEventsPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/waitevents-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">WaitEventsPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/waitevents-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexWaitEvents&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">WaitEventsPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6316,7 +6394,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waitEvents</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexWaitEvents&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">completeCallback</span><span class="p">,</span> <span class="nx">completeCallbackScope</span><span class="p">);</span>
@@ -6328,21 +6406,23 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">WaitEvents</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/waitevents.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">WaitEvents</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/waitevents.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waitEvents</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">WaitEvents</span><span class="p">(</span><span class="nx">completeCallback</span><span class="p">,</span> <span class="nx">completeCallbackScope</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waitEvents</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WaitEvents</span><span class="p">(</span><span class="nx">completeCallback</span><span class="p">,</span> <span class="nx">completeCallbackScope</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">waitEvents</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexWaitEvents&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">completeCallback</span><span class="p">,</span> <span class="nx">completeCallbackScope</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>completeCallback</code>, <code>completeCallbackScope</code> : Callback when all waitting events are fired.</li>
 </ul>
 <h3 id="set-complete-callback">Set complete callback<a class="headerlink" href="#set-complete-callback" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">setCompleteCallback</span><span class="p">(</span><span class="nx">completeCallback</span><span class="p">,</span> <span class="nx">completeCallbackScope</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>completeCallback</code>, <code>completeCallbackScope</code> : Callback when all waitting events are fired.</li>
 </ul>
@@ -6350,29 +6430,35 @@
 <h4 id="callback">Callback<a class="headerlink" href="#callback" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">();</span>
 </code></pre></div>
+
 <ul>
 <li><code>callback</code> : A function object which invoked when waitting event finished.</li>
 </ul>
 <p>For example, invokes <code>completeCallback</code> when all timers are time-out.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mf">500</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mf">1000</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mf">1500</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="mi">1500</span><span class="p">,</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitCallback</span><span class="p">());</span>
 </code></pre></div>
+
 <h4 id="callback-from-event-emitter">Callback from event emitter<a class="headerlink" href="#callback-from-event-emitter" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">eventEmitter</span><span class="p">,</span> <span class="nx">eventName</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="remove-waiting-event">Remove waiting event<a class="headerlink" href="#remove-waiting-event" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">callback</span><span class="p">();</span>
 </code></pre></div>
+
 <p>or </p>
 <div class="highlight"><pre><span></span><code><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>callback</code> : A function object created via <code>waitEvents.waitCallback()</code></li>
 </ul>
 <h3 id="clear-all-waiting-events">Clear all waiting events<a class="headerlink" href="#clear-all-waiting-events" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">waitEvents</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
+
 <h4 id="no-wait-event">No wait event<a class="headerlink" href="#no-wait-event" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">noWaitEvent</span> <span class="o">=</span> <span class="nx">waitEvents</span><span class="p">.</span><span class="nx">noWaitEvent</span><span class="p">;</span>
 </code></pre></div>
@@ -6386,11 +6472,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6473,7 +6554,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

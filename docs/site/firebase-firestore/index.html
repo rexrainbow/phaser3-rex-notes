@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6220,8 +6298,8 @@
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Import firestore
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">firebase</span> <span class="kr">from</span> <span class="s1">&#39;firebase/app&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="s1">&#39;firebase/firestore&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">firebase</span> <span class="nx">from</span> <span class="s1">&#39;firebase/app&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">&#39;firebase/firestore&#39;</span><span class="p">;</span>
 </code></pre></div>
     Firebase has been included in <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/package.json">package.json</a>.</li>
 <li>Initialize
@@ -6273,7 +6351,7 @@
 
 <span class="nx">batch</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">),</span> <span class="nx">keyValues</span><span class="p">);</span>
 <span class="nx">batch</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">),</span> <span class="nx">keyValues</span><span class="p">);</span>
-<span class="nx">batch</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">));</span>
+<span class="nx">batch</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">));</span>
 <span class="c1">// ...</span>
 
 <span class="c1">// Commit the batch</span>
@@ -6283,13 +6361,13 @@
 </code></pre></div>
     Maximum document writting in a commit : 500</li>
 <li>Delete a document
-    <div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="ow">delete</span><span class="p">()</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="k">delete</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div></li>
 <li>Delete a field
     <div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">update</span><span class="p">({</span>
-        <span class="nx">key</span><span class="o">:</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="ow">delete</span><span class="p">()</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="k">delete</span><span class="p">()</span>
     <span class="p">})</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
@@ -6316,6 +6394,7 @@
 <h4 id="server-timestamp">Server timestamp<a class="headerlink" href="#server-timestamp" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="nx">serverTimestamp</span><span class="p">()</span>
 </code></pre></div>
+
 <h3 id="load">Load<a class="headerlink" href="#load" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get a document
@@ -6389,7 +6468,7 @@
 </ul>
 </li>
 <li>Next page
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">lastDoc</span> <span class="o">=</span> <span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">[</span><span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mf">1</span><span class="p">];</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">lastDoc</span> <span class="o">=</span> <span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">[</span><span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
 <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">orderBy</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">startAfter</span><span class="p">(</span><span class="nx">lastDoc</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
@@ -6446,11 +6525,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6533,7 +6607,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

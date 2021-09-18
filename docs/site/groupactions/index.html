@@ -3640,11 +3640,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6422,9 +6500,11 @@
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="set-any-property">Set any property<a class="headerlink" href="#set-any-property" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PropertyValueSet</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>gameObjects</code> : An array of game objects.</li>
 <li><code>key</code> : The property to be updated.</li>
@@ -6439,41 +6519,53 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PropertyValueInc</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SmootherStep</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">inc</span><span class="p">));</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SmoothStep</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">inc</span><span class="p">));</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">Spread</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">inc</span><span class="p">));</span>
 </code></pre></div>
+
 <h3 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetX</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">IncX</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">IncY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetXY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">stepX</span><span class="p">,</span> <span class="nx">stepY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">IncXY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">stepX</span><span class="p">,</span> <span class="nx">stepY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="shift-position">Shift position<a class="headerlink" href="#shift-position" title="Permanent link">&para;</a></h3>
 <p>Set the position of first game object to (x, y), others to the position of previous game object.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">ShiftPosition</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">output</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="position-on-shape">Position on shape<a class="headerlink" href="#position-on-shape" title="Permanent link">&para;</a></h3>
 <h4 id="grid-align">Grid align<a class="headerlink" href="#grid-align" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">GridAlign</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
-    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="nx">position</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Align</span><span class="p">.</span><span class="nx">TOP_LEFT</span><span class="p">,</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>width</code> : The width of the grid in items (not pixels). -1 means lay all items out horizontally, regardless of quantity.</li>
 <li><code>height</code> : The height of the grid in items (not pixels). -1 means lay all items out vertically, regardless of quantity.</li>
@@ -6499,95 +6591,128 @@
 </ul>
 <h4 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h4>
 <p><a href="../geom-line/">Line</a> :</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Line</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlaceOnLine</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">line</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RandomLine</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">line</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="circle">Circle<a class="headerlink" href="#circle" title="Permanent link">&para;</a></h4>
 <p><a href="../geom-circle/">Circle</a> :</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlaceOnCircle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">circle</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RandomCircle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">circle</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="ellipse">Ellipse<a class="headerlink" href="#ellipse" title="Permanent link">&para;</a></h4>
 <p><a href="../geom-ellipse/">Ellipse</a> :</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ellipse</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ellipse</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlaceOnEllipse</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">ellipse</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h4>
 <p><a href="../geom-triangle/">Triangle</a> :</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Triangle</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Triangle</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlaceOnTriangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">triangle</span><span class="p">,</span> <span class="nx">stepRate</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RandomTriangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">triangle</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h4>
 <p><a href="../geom-rectangle/">Rectangle</a> :</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlaceOnRectangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">rect</span><span class="p">,</span> <span class="nx">shift</span><span class="p">;</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RandomRectangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">WrapInRectangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">rect</span><span class="p">,</span> <span class="nx">padding</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">Angle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 <span class="c1">// value: angle in radians</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">Rotate</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 <span class="c1">// value: angle in degree</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RotateAround</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
 <span class="c1">// point: {x, y}, angle: angle in radians</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">RotateAroundDistance</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">point</span><span class="p">,</span> <span class="nx">angle</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
 <span class="c1">// point: {x, y}, angle: angle in radians</span>
 </code></pre></div>
+
 <h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetVisible</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">ToggleVisible</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetAlpha</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="tint">Tint<a class="headerlink" href="#tint" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">setTint</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 <span class="c1">//Phaser.Actions.setTint(gameObjects, topLeft, topRight, bottomLeft, bottomRight);</span>
 </code></pre></div>
+
 <h3 id="origin">Origin<a class="headerlink" href="#origin" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetOrigin</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">originX</span><span class="p">,</span> <span class="nx">originY</span><span class="p">,</span> <span class="nx">stepX</span><span class="p">,</span> <span class="nx">stepY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">ScaleX</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">ScaleY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">ScaleXY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">stepX</span><span class="p">,</span> <span class="nx">stepY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetScrollFactorX</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetScrollFactorY</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetScrollFactor</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">stepX</span><span class="p">,</span> <span class="nx">stepY</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetDepth</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="hit-area">Hit area<a class="headerlink" href="#hit-area" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetHitArea</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">hitArea</span><span class="p">,</span> <span class="nx">hitAreaCallback</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="blend-mode">Blend mode<a class="headerlink" href="#blend-mode" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">SetBlendMode</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">blendMode</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>blendMode</code> :<ul>
 <li><code>Phaser.BlendModes.SKIP_CHECK</code></li>
@@ -6614,6 +6739,7 @@
 <h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">PlayAnimation</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">ignoreIfPlaying</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">);</span>
 </code></pre></div>
@@ -6627,11 +6753,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6714,7 +6835,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

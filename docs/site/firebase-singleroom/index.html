@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6454,11 +6532,11 @@
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>    
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">FirebasePlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">FirebasePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFirebase&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FirebasePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6466,7 +6544,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Initialize firebase application.
     <div class="highlight"><pre><span></span><code><span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">({</span>
@@ -6507,10 +6585,10 @@
 <span class="p">})</span>
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">SingleRoom</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">SingleRoom</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/firebase-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add single-room object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">SingleRoom</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SingleRoom</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
@@ -6524,6 +6602,7 @@
 
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>root</code> : Path of this room.</li>
 <li><code>maxUsers</code>: Maximum users in this list. Set to <code>0</code> to have infinity users.</li>
@@ -6534,7 +6613,7 @@
 <li><code>false</code> : Disable broadcasting.</li>
 <li>A JSON object :
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">history</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">history</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>history</code> : Stored received (history) messages in client side.<ul>
@@ -6588,9 +6667,11 @@
 <h3 id="leave-room">Leave room<a class="headerlink" href="#leave-room" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">leaveRoom</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="kick-user">Kick user<a class="headerlink" href="#kick-user" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">kickUser</span><span class="p">(</span><span class="nx">userID</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="user-list">User list<a class="headerlink" href="#user-list" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get users in room(user list)
@@ -6616,6 +6697,7 @@
 <h3 id="send-message">Send message<a class="headerlink" href="#send-message" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>message</code> : A string message, or a JSON data.</li>
 </ul>
@@ -6643,6 +6725,7 @@
 <h3 id="change-user-name">Change user name<a class="headerlink" href="#change-user-name" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">room</span><span class="p">.</span><span class="nx">changeUserName</span><span class="p">(</span><span class="nx">newUserName</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get table
@@ -6716,11 +6799,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6803,7 +6881,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

@@ -3809,11 +3809,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6770,8 +6848,9 @@
     <span class="p">}</span>
     <span class="c1">// ....</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="no-audio">No audio<a class="headerlink" href="#no-audio" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ....</span>
@@ -6780,15 +6859,18 @@
     <span class="p">}</span>
     <span class="c1">// ....</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="load-audio-file">Load audio file<a class="headerlink" href="#load-audio-file" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>  <span class="c1">// urls: an array of file url</span>
 </code></pre></div>
+
 <p>See <a href="../loader/#audio">loader</a></p>
 <h4 id="decode-audio">Decode audio<a class="headerlink" href="#decode-audio" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">decodeAudio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">audioData</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>audioData</code> : Audio data<ul>
 <li>A base64 encoded string</li>
@@ -6800,6 +6882,7 @@
 <p>Or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">decodeAudio</span><span class="p">(</span><span class="nx">audioFiles</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>audioFiles</code> : An array of <code>{key, data}</code><ul>
 <li><code>data</code> : Audio data<ul>
@@ -6823,24 +6906,28 @@
 <h3 id="play-sound">Play sound<a class="headerlink" href="#play-sound" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Sound instance will be destroyed when playback ends.</p>
 <h3 id="sound-instance">Sound instance<a class="headerlink" href="#sound-instance" title="Permanent link">&para;</a></h3>
 <h4 id="create-sound-instance">Create sound instance<a class="headerlink" href="#create-sound-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <h5 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">mute</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">volume</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">rate</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">detune</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">seek</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">volume</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">rate</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">detune</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">seek</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h4 id="play-sound-instance">Play sound instance<a class="headerlink" href="#play-sound-instance" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start playing
@@ -6981,49 +7068,55 @@
 <p>Sound instance will be destroyed when playback ends.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">marker</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="marker">Marker<a class="headerlink" href="#marker" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">start</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="nx">music</span><span class="p">.</span><span class="nx">duration</span><span class="p">,</span>
     <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mute</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">volume</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-        <span class="nx">rate</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-        <span class="nx">detune</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">seek</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">volume</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">rate</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">detune</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">seek</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span>
+        <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h3 id="markers-in-sound-instance">Markers in sound instance<a class="headerlink" href="#markers-in-sound-instance" title="Permanent link">&para;</a></h3>
 <h4 id="add-marker">Add marker<a class="headerlink" href="#add-marker" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">music</span><span class="p">.</span><span class="nx">addMarker</span><span class="p">(</span><span class="nx">marker</span><span class="p">);</span>
 </code></pre></div>
+
 <p><a href="./#marker">Marker</a></p>
 <h4 id="play-marked-sound_1">Play marked sound<a class="headerlink" href="#play-marked-sound_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">music</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">markerName</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">music</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">markerName</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p><a href="./#configuration_1">config</a></p>
 <h3 id="audio-sprite">Audio sprite<a class="headerlink" href="#audio-sprite" title="Permanent link">&para;</a></h3>
 <h4 id="load-audio-sprite">Load audio sprite<a class="headerlink" href="#load-audio-sprite" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">markersConfig</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p>See <a href="../loader/#audio-sprite">loader</a></p>
 <p>Format of markersConfig
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">resources</span><span class="o">:</span> <span class="nx">urls</span><span class="p">,</span> <span class="c1">// an array of audio files</span>
     <span class="nx">spritemap</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">markerName0</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">end</span><span class="o">:</span> <span class="mf">0</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">},</span>
         <span class="nx">markerName1</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">end</span><span class="o">:</span> <span class="mf">0</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">}</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
@@ -7033,17 +7126,21 @@
 <p>Create a sound instance then play the marked section, this sound instance will be destroyed when playback ends.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">playAudioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">markerName</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p><a href="./#configuration_1">config</a></p>
 <h4 id="sound-instance_1">Sound instance<a class="headerlink" href="#sound-instance_1" title="Permanent link">&para;</a></h4>
 <p>Create a sound instance with markers.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">addAudioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p><a href="./#configuration_1">config</a></p>
 <h4 id="play-sound-instance_1">Play sound instance<a class="headerlink" href="#play-sound-instance_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">music</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">markerName</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">music</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">markerName</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p><a href="./#configuration_1">config</a></p>
 <h3 id="sound-manager">Sound manager<a class="headerlink" href="#sound-manager" title="Permanent link">&para;</a></h3>
 <h4 id="mute_1">Mute<a class="headerlink" href="#mute_1" title="Permanent link">&para;</a></h4>
@@ -7126,10 +7223,10 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">analyser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">createAnalyser</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Configure analyser node
-    <div class="highlight"><pre><span></span><code><span class="nx">analyser</span><span class="p">.</span><span class="nx">smoothingTimeConstant</span> <span class="o">=</span> <span class="mf">1</span><span class="p">;</span>
-<span class="nx">analyser</span><span class="p">.</span><span class="nx">fftSize</span> <span class="o">=</span> <span class="mf">8192</span><span class="p">;</span>
-<span class="nx">analyser</span><span class="p">.</span><span class="nx">minDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mf">90</span><span class="p">;</span>
-<span class="nx">analyser</span><span class="p">.</span><span class="nx">maxDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">analyser</span><span class="p">.</span><span class="nx">smoothingTimeConstant</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">fftSize</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">minDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">maxDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div><ul>
 <li><code>smoothingTimeConstant</code> : Averaging constant with the last analysis frame.<ul>
 <li><code>0</code>(no time averaging) ~ <code>1</code>. Default value is <code>0.8</code>.</li>
@@ -7163,13 +7260,13 @@
 </code></pre></div></li>
 <li>Create output data array
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">dataArrayLength</span> <span class="o">=</span> <span class="nx">analyser</span><span class="p">.</span><span class="nx">frequencyBinCount</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dataArray</span> <span class="o">=</span> <span class="ow">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nx">dataArrayLength</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">dataArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">dataArrayLength</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get output data
     <div class="highlight"><pre><span></span><code><span class="nx">analyser</span><span class="p">.</span><span class="nx">getByteTimeDomainData</span><span class="p">(</span><span class="nx">dataArray</span><span class="p">);</span>
 </code></pre></div><ul>
 <li>Retrieve output data
-    <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">dataArrayLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">dataArrayLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
 <span class="p">}</span>
 </code></pre></div></li>
@@ -7186,11 +7283,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -7273,7 +7365,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

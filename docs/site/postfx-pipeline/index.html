@@ -3558,11 +3558,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6258,9 +6336,9 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="post-fx-pipeline-class">Post fx pipeline class<a class="headerlink" href="#post-fx-pipeline-class" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyPostFxClass</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyPostFxClass</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">({</span>
             <span class="nx">game</span><span class="o">:</span> <span class="nx">game</span><span class="p">,</span>
             <span class="nx">renderTarget</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>  <span class="c1">// GLSL shader</span>
@@ -6276,53 +6354,66 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h4 id="set-uniform-values">Set uniform values<a class="headerlink" href="#set-uniform-values" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Property with 1 value<ul>
 <li>Float
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set1f(name, value0, shader);</span>
 </code></pre></div></li>
 <li>uniform1fv
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set1fv(name, value0, shader);</span>
 </code></pre></div></li>
 <li>Int
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set1i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set1i(name, value0, shader);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 2 values<ul>
 <li>Float
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set2f(name, value0, value1, shader);</span>
 </code></pre></div></li>
 <li>uniform2fv
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set2fv(name, value0, value1, shader);</span>
 </code></pre></div></li>
 <li>Int
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set2i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set2i(name, value0, value1, shader);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 3 value<ul>
 <li>Float
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set3f(name, value0, value1, value2, shader);</span>
 </code></pre></div></li>
 <li>uniform3fv
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set3fv(name, value0, value1, value2, shader);</span>
 </code></pre></div></li>
 <li>Int
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set3i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set3i(name, value0, value1, value2, shader);</span>
 </code></pre></div></li>
 </ul>
 </li>
 <li>Property with 4 values<ul>
 <li>Float
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4f</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set4f(name, value0, value1, value2, value3, shader);</span>
 </code></pre></div></li>
 <li>uniform4fv
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4fv</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set4fv(name, value0, value1, value2, value3, shader);</span>
 </code></pre></div></li>
 <li>Int
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">set4i</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+<span class="c1">// pipelineInstance.set4i(name, value0, value1, value2, value3, shader);</span>
 </code></pre></div></li>
 </ul>
 </li>
@@ -6347,7 +6438,7 @@
 <li><a href="./#set-uniform-values">Set uniform values</a></li>
 <li>Bind and draw on <code>pipelineInstance.fullFrame1</code>, <code>pipelineInstance.fullFrame2</code>.
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
-<span class="c1">// pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, currentShader);</span>
+<span class="c1">// pipelineInstance.bindAndDraw(source, target, clear, clearAlpha, shader);</span>
 </code></pre></div></li>
 <li>Draw result back
     <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">bindAndDraw</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
@@ -6360,13 +6451,13 @@
 <h3 id="register-post-fx-pipeline">Register post-fx pipeline<a class="headerlink" href="#register-post-fx-pipeline" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Register post-fx pipeline in game config
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">MyPostFxClass</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">MyPostFxClass</span> <span class="nx">from</span> <span class="s1">&#39;path&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="nx">MyPostFxClass</span><span class="p">]</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="apply-effect">Apply effect<a class="headerlink" href="#apply-effect" title="Permanent link">&para;</a></h3>
@@ -6390,11 +6481,12 @@
 <h3 id="remove-post-fx-pipeline">Remove post-fx pipeline<a class="headerlink" href="#remove-post-fx-pipeline" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">MyPostFxClass</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="color-matrix">Color matrix<a class="headerlink" href="#color-matrix" title="Permanent link">&para;</a></h3>
 <p>Use color martix to change RGB render result, and more...</p>
-<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyPostFxClass</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyPostFxClass</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">PostFXPipeline</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">game</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">({</span>
             <span class="nx">game</span><span class="o">:</span> <span class="nx">game</span><span class="p">,</span>
             <span class="nx">renderTarget</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>  <span class="c1">// GLSL shader</span>
@@ -6414,6 +6506,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <h4 id="color-adjusting">Color adjusting<a class="headerlink" href="#color-adjusting" title="Permanent link">&para;</a></h4>
 <p>Invoke before <code>drawFrame()</code>.</p>
 <ul>
@@ -6521,11 +6614,6 @@
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
-        
       </main>
       
         
@@ -6607,7 +6695,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

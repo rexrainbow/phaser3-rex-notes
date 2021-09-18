@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6313,7 +6391,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">UIPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -6327,7 +6405,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add sizer object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -6339,10 +6417,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FixWidthSizer</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">FixWidthSizer</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/ui/ui-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add sizer object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">FixWidthSizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FixWidthSizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">sizer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
@@ -6367,6 +6445,7 @@
     <span class="c1">// sizerEvents: false,</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// width: 2,</span>
@@ -6383,6 +6462,7 @@
     <span class="c1">// draggable: false</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// space: {</span>
@@ -6397,6 +6477,7 @@
     <span class="c1">// draggable: false</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
 <li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
@@ -6439,9 +6520,9 @@
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MySizer</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FixWidthSizer</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MySizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FixWidthSizer</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6449,15 +6530,17 @@
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">,</span> <span class="nx">space</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span> <span class="nx">key</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span> <span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> : Extra padded space. Default is 0.</li>
 <li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
@@ -6469,28 +6552,31 @@
 <p>Add a game obejct to sizer</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span>
     <span class="p">{</span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">index</span><span class="o">:</span> <span class="kc">undefined</span>
     <span class="p">}</span>
 <span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>child</code> : A game object</li>
 <li><code>padding</code> : Add space between bounds. Default is 0.<ul>
 <li>A number for left/right/top/bottom bounds</li>
 <li>Or a plain object
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -6508,10 +6594,12 @@
 <h3 id="add-new-line">Add new line<a class="headerlink" href="#add-new-line" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addNewLine</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
+
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
 <h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6566,11 +6654,6 @@
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6653,7 +6736,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

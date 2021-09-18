@@ -3672,11 +3672,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6505,11 +6583,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TextPlayerPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textplayer-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TextPlayerPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textplayer-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTextPlayerPlugin&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">TextPlayerPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6519,7 +6597,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add text-player object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTextPlayer</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -6531,21 +6609,21 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TextPlayer</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textplayer.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TextPlayer</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/textplayer.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add text-player object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TextPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 <span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">txt</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTextPlayer</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> 
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> 
     <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">padding</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// {left: 0, right: 0, top: 0, bottom: 0}</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// {left: 0, right: 0, top: 0, bottom: 0}</span>
 
     <span class="nx">background</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">color</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -6553,9 +6631,9 @@
         <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
         <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
 
-        <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">cornerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">cornerIteration</span><span class="o">:</span> <span class="kc">null</span>
     <span class="p">},</span>
 
@@ -6565,7 +6643,7 @@
         <span class="nx">horizontalGradient</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
         <span class="nx">stroke</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">2</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">2</span>
     <span class="p">},</span>
 
     <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
@@ -6575,13 +6653,13 @@
         <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
         <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
-        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">shadowColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span>
+        <span class="nx">shadowOffsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">shadowOffsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">shadowBlur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span>
     <span class="p">},</span>
 
     <span class="nx">parser</span><span class="o">:</span> <span class="p">{</span>
@@ -6593,23 +6671,23 @@
         <span class="nx">callback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="c1">// Default wrapping callback is dynamicText.runWordWrap()</span>
         <span class="nx">lineHeight</span><span class="o">:</span>
         <span class="c1">// maxLines: </span>
-        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
-        <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">hAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// 0|&#39;left&#39;|1|&#39;center&#39;|2|&#39;right&#39;</span>
-        <span class="nx">vAlign</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="c1">// 0|&#39;top&#39;|1|&#39;center&#39;|2|&#39;bottom&#39;</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">},</span>
+        <span class="nx">letterSpacing</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">hAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;left&#39;|1|&#39;center&#39;|2|&#39;right&#39;</span>
+        <span class="nx">vAlign</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;top&#39;|1|&#39;center&#39;|2|&#39;bottom&#39;</span>
         <span class="nx">charWrap</span><span class="o">:</span> <span class="kc">false</span>
     <span class="p">},</span>
 
     <span class="nx">typing</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">speed</span><span class="o">:</span> <span class="mf">250</span><span class="p">,</span>
+        <span class="nx">speed</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
         <span class="nx">onTypingStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">},</span>  <span class="c1">// Default: set all children invisible</span>
         <span class="nx">animation</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// Default: no typing animation, only invoke onStart callback</span>
         <span class="nx">animation</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+            <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
             <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="nx">onStart</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">child</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">child</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
@@ -6632,13 +6710,13 @@
         <span class="nx">bgm</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">initial</span><span class="o">:</span> <span class="nx">undefinied</span><span class="p">,</span>
             <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+            <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
         <span class="p">}</span>
     <span class="p">},</span>
 
     <span class="nx">sprite</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// createCallback: &#39;sprite&#39;,</span>
-        <span class="nx">fade</span><span class="o">:</span> <span class="mf">500</span>
+        <span class="nx">fade</span><span class="o">:</span> <span class="mi">500</span>
     <span class="p">},</span> 
 
     <span class="nx">clickTarget</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span>  <span class="c1">// This text player</span>
@@ -6648,6 +6726,7 @@
     <span class="nx">text</span><span class="o">:</span> <span class="kc">undefined</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this text-player game object.</li>
 <li><code>width</code> : Fixed width.<ul>
@@ -6740,7 +6819,7 @@
 <li><code>typing.speed</code> : Default typing speed of each character.</li>
 <li><code>typing.onTypingStart</code> : Callback when typing start. Default is to set all children to invisible.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">children</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
     <span class="p">}</span>
 </code></pre></div><ul>
@@ -6849,13 +6928,15 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTextPlayer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTextPlayer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Add textplayer from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexTextPlayer</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
     <span class="c1">// fill: null,</span>
@@ -6863,12 +6944,13 @@
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyTextPlayer</span> <span class="k">extends</span> <span class="nx">TextPlayer</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyTextPlayer</span> <span class="kr">extends</span> <span class="nx">TextPlayer</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6885,21 +6967,24 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyTextPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyTextPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="typing-content">Typing content<a class="headerlink" href="#typing-content" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">content</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">playPromise</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
         <span class="c1">// Typing content complete</span>
     <span class="p">})</span>
 </code></pre></div>
+
 <h4 id="show-current-page">Show current page<a class="headerlink" href="#show-current-page" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">showPage</span><span class="p">();</span>
 </code></pre></div>
+
 <ul>
 <li>Set typing speed to <code>0</code>.</li>
 <li>Set animation progress to <code>1</code>.</li>
@@ -6909,6 +6994,7 @@
 <h4 id="typing-next-page">Typing next page<a class="headerlink" href="#typing-next-page" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">typingNextPage</span><span class="p">();</span>
 </code></pre></div>
+
 <ul>
 <li>Set <code>nextPageInput</code> to <code>null</code>, or <code>false</code> in config.</li>
 </ul>
@@ -7201,11 +7287,6 @@
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
-        
       </main>
       
         
@@ -7287,7 +7368,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

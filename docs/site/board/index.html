@@ -3418,11 +3418,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -7017,7 +7095,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">BoardPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -7031,7 +7109,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add board object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -7043,10 +7121,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Board</span><span class="p">,</span> <span class="nx">HexagonGrid</span><span class="p">,</span> <span class="nx">QuadGrid</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Board</span><span class="p">,</span> <span class="nx">HexagonGrid</span><span class="p">,</span> <span class="nx">QuadGrid</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add board object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Board</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Board</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-board-object">Add board object<a class="headerlink" href="#add-board-object" title="Permanent link">&para;</a></h3>
@@ -7055,10 +7133,10 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">({</span>
     <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span>  <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;</span>
     <span class="p">},</span>
     <span class="c1">// width: 0,</span>
@@ -7071,10 +7149,10 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">({</span>
     <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;hexagonGrid&#39;</span><span class="p">,</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">staggeraxis</span><span class="o">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>   <span class="c1">// &#39;x&#39;|&#39;y&#39;</span>
         <span class="nx">staggerindex</span><span class="o">:</span> <span class="s1">&#39;odd&#39;</span> <span class="c1">// &#39;odd&#39;|&#39;even&#39;</span>
     <span class="p">},</span>
@@ -7103,19 +7181,19 @@
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyBoard</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">Board</span><span class="p">.</span><span class="nx">Board</span> <span class="p">{</span>
-    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyBoard</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">Board</span><span class="p">.</span><span class="nx">Board</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
             <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
                 <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
-                <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-                <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+                <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span>  <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;</span>
             <span class="p">},</span>
-            <span class="nx">width</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-            <span class="nx">height</span><span class="o">:</span> <span class="mf">0</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">});</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
@@ -7123,7 +7201,7 @@
 <span class="p">}</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyBoard</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyBoard</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="board-size">Board size<a class="headerlink" href="#board-size" title="Permanent link">&para;</a></h3>
@@ -7150,6 +7228,7 @@
 <h3 id="add-chess">Add chess<a class="headerlink" href="#add-chess" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">addChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chess</code> : A game object.</li>
 <li><code>tileX</code> , <code>tileY</code> , <code>tileZ</code> : Tile position.<ul>
@@ -7173,6 +7252,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;kickout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">chessToAdd</span><span class="p">,</span> <span class="nx">occupiedChess</span><span class="p">,</span> <span class="nx">tileXYZ</span><span class="p">){</span>
 <span class="p">})</span>
 </code></pre></div>
+
 <p><code>chessToAdd</code> kicks out <code>occupiedChess</code> at tile position <code>tileXYZ</code>(<code>{x,y,z}</code>).</p>
 <h3 id="remove-chess">Remove chess<a class="headerlink" href="#remove-chess" title="Permanent link">&para;</a></h3>
 <ul>
@@ -7200,6 +7280,7 @@
 <h3 id="move-chess">Move chess<a class="headerlink" href="#move-chess" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">moveChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">toTileX</span><span class="p">,</span> <span class="nx">toTileY</span><span class="p">,</span> <span class="nx">toTileZ</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chess</code> : A game object</li>
 <li><code>toTileX</code>, <code>toTileY</code>, <code>toTileZ</code> : Target tile position</li>
@@ -7209,6 +7290,7 @@
 <h3 id="set-tilez-of-chess">Set tileZ of chess<a class="headerlink" href="#set-tilez-of-chess" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">setChessTileZ</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">toTileZ</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chess</code> : A game object</li>
 <li><code>toTileZ</code> : Target tileZ</li>
@@ -7217,6 +7299,7 @@
 <h3 id="swap-chess">Swap chess<a class="headerlink" href="#swap-chess" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">swapChess</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chessA</code>, <code>chessB</code> : Game objects</li>
 <li><code>align</code> : Set <code>true</code> to align (i.e. set position) chess to grid (tileX, tileY).</li>
@@ -7224,6 +7307,7 @@
 <h3 id="chess-tile-position">Chess -&gt; tile position<a class="headerlink" href="#chess-tile-position" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">chessToTileXYZ</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chess</code> : A game object</li>
 <li><code>tileXYZ</code> : <code>{x,y,z}</code> or <code>null</code> if chess is not added to board.</li>
@@ -7306,6 +7390,7 @@
     <span class="c1">// var tileY = tileXY.y;</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Iteration order :</p>
 <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var tileX = tileXY.x;</span>
@@ -7314,6 +7399,7 @@
     <span class="c1">// return isBreak;</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">order</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>order</code> :<ul>
 <li><code>0</code>, or <code>'x+'</code> : Increasing x, increasing y.</li>
@@ -7324,12 +7410,13 @@
 </li>
 </ul>
 <p>Or using for-loop</p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">tileY</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileY</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <ul>
 <li><code>board.width</code> , <code>board.height</code> : Board width/height in tiles.</li>
 </ul>
@@ -7337,17 +7424,21 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// worldXY: {x, y}</span>
 <span class="c1">// var out = board.tileXYToWorldXY(tileX, tileY, out);</span>
 </code></pre></div>
+
 <h3 id="world-position-tile-position">World position -&gt; tile position<a class="headerlink" href="#world-position-tile-position" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
 <span class="c1">// var out = board.worldXYToTileXY(worldX, worldY, out);</span>
 </code></pre></div>
+
 <h4 id="world-position-grid-world-position">World position -&gt; Grid world position<a class="headerlink" href="#world-position-grid-world-position" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gridWorldXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYSnapToGrid</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 <span class="c1">// var out = board.worldXYSnapToGrid(worldX, worldY, out);</span>
 </code></pre></div>
+
 <h3 id="grid-distance">Grid distance<a class="headerlink" href="#grid-distance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getDistance</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileA</code>, <code>tileB</code> : Chess object, or tileXY <code>{x, y}</code>. </li>
 </ul>
@@ -7379,6 +7470,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">startWorldX</span><span class="p">,</span> <span class="nx">startWorldY</span><span class="p">,</span> <span class="nx">endWorldX</span><span class="p">,</span> <span class="nx">endWorldY</span><span class="p">);</span>
 <span class="c1">// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Start and end pointer of a line</li>
 <li><code>out</code> : An array of tile position</li>
@@ -7387,6 +7479,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
 <span class="c1">// var out = board.lineToTileXYArray(line, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>line</code> : <a href="../geom-line/">Line object</a></li>
 </ul>
@@ -7395,6 +7488,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">circleToTileXYArray</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 <span class="c1">// var out = board.circleToTileXYArray(circle, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>circle</code> : <a href="../geom-circle/">Circle shape</a></li>
 <li><code>out</code> : An array of tile position</li>
@@ -7404,6 +7498,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">rectangleToTileXYArray</span><span class="p">(</span><span class="nx">rectangle</span><span class="p">);</span>
 <span class="c1">// var out = board.rectangleToTileXYArray(rectangle, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>rectangle</code> : <a href="../geom-rectangle/">Rectangle shape</a></li>
 <li><code>out</code> : An array of tile position</li>
@@ -7413,6 +7508,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ellipseToTileXYArray</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
 <span class="c1">// var out = board.ellipseToTileXYArray(ellipse, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>ellipse</code> : <a href="../geom-ellipse/">Ellipse shape</a></li>
 <li><code>out</code> : An array of tile position</li>
@@ -7422,6 +7518,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">triangleToTileXYArray</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span>
 <span class="c1">// var out = board.triangleToTileXYArray(triangle, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>triangle</code> : <a href="../geom-triangle/">Triangle shape</a></li>
 <li><code>out</code> : An array of tile position</li>
@@ -7431,6 +7528,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">polygonToTileXYArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 <span class="c1">// var out = board.polygonToTileXYArray(polygon, out);</span>
 </code></pre></div>
+
 <ul>
 <li><code>polygon</code> : <a href="../geom-polygon/">Polygon shape</a></li>
 <li><code>out</code> : An array of tile position</li>
@@ -7438,6 +7536,7 @@
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileA</span><span class="p">,</span> <span class="nx">tileB</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileA</code>, <code>tileB</code> : Chess object, or tileXY <code>{x, y}</code> of ring center.</li>
 <li><code>radian</code> : Angle between world position of 2 tiles, in radian.</li>
@@ -7445,6 +7544,7 @@
 <h3 id="is-angle-in-cone">Is angle in cone<a class="headerlink" href="#is-angle-in-cone" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInCone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isAngleInCone</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">face</span><span class="p">,</span> <span class="nx">cone</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chessA</code>, <code>chessB</code> : Chess object, or tileXY <code>{x, y}</code>. </li>
 <li><code>face</code>, <code>cone</code> : Range of compared angle is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Angle in radian.</li>
@@ -7452,6 +7552,7 @@
 <h3 id="direction-between-2-tiles">Direction between 2 tiles<a class="headerlink" href="#direction-between-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chessA</code>, <code>chessB</code> : A chess object, or tile position <code>{x,y}</code>.</li>
 <li><code>direction</code> : Integer number.<ul>
@@ -7462,6 +7563,7 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>direction</code> : Integer number, or float number.<ul>
 <li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6, 6~7.</li>
@@ -7472,6 +7574,7 @@
 <h3 id="is-direction-in-cone">Is direction in cone<a class="headerlink" href="#is-direction-in-cone" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInCone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isDirectionInCone</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">face</span><span class="p">,</span> <span class="nx">cone</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>chessA</code>, <code>chessB</code> : Chess object, or tileXY <code>{x, y}</code>.</li>
 <li><code>face</code>, <code>cone</code> : Range of compared direction is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Integer number, or float number.<ul>
@@ -7483,15 +7586,18 @@
 <h3 id="opposite-direction">Opposite direction<a class="headerlink" href="#opposite-direction" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getOppositeDirection</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getOppositeDirection</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileXY</code> : Chess object, or tileXY <code>{x, y}</code>.</li>
 </ul>
 <h3 id="angle-snap-to-direction">Angle snap to direction<a class="headerlink" href="#angle-snap-to-direction" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleSnapToDirection</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileXY</code> : Chess object, or tileXY <code>{x, y}</code>, or <code>undefined</code>.</li>
 <li><code>angle</code> : Angle in radius.</li>
@@ -7513,9 +7619,11 @@
 <h3 id="is-overlapping-with-world-position">Is overlapping with world position<a class="headerlink" href="#is-overlapping-with-world-position" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isOverlappingPoint</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isOverlappingPoint</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
 </code></pre></div>
+
 <h3 id="neighbors">Neighbors<a class="headerlink" href="#neighbors" title="Permanent link">&para;</a></h3>
 <h4 id="neighbor-tile-position">Neighbor tile position<a class="headerlink" href="#neighbor-tile-position" title="Permanent link">&para;</a></h4>
 <ul>
@@ -7634,9 +7742,9 @@
 <li><code>distance</code> : A JSON, number, or number array.<ul>
 <li>JSON : Range of distances. <code>{end: 3}</code> is equal to <code>[1,2,3]</code>.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">start</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">end</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
-    <span class="nx">step</span><span class="o">:</span> <span class="mf">1</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">end</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">step</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>start</code> : Start distance. Default value is <code>1</code>.</li>
@@ -7695,9 +7803,11 @@
 <h3 id="get-all-chess">Get all chess<a class="headerlink" href="#get-all-chess" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">chessArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getAllChess</span><span class="p">();</span>
 </code></pre></div>
+
 <h3 id="fit">Fit<a class="headerlink" href="#fit" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">fit</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileXYArray</code> : An array of tile position <code>{x,y}</code>.</li>
 </ul>
@@ -8067,11 +8177,6 @@
           </div>
         </div>
         
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
-        
       </main>
       
         
@@ -8153,7 +8258,7 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

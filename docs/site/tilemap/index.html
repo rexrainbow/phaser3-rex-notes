@@ -3802,11 +3802,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6751,6 +6829,7 @@ map --&gt; layerB
 
 layerA --&gt; tilesA["tiles&lt;br&gt;(layer.data[x][y])"]
 layerB --&gt; tilesB["tiles"]</code></pre>
+
 <ul>
 <li><a href="./#map"><code>map</code></a> : A container for Tilemap data.</li>
 <li><a href="./#layer"><code>layer</code></a> : A <a href="../gameobject/">Game Object</a> that renders LayerData from a map when used in combination with one or more <a href="./#tileset">tileset</a>.</li>
@@ -6764,6 +6843,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapTiledJSON</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// JSON</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>          <span class="c1">// CSV</span>
 </code></pre></div>
+
 <h3 id="add-tile-map-object">Add tile map object<a class="headerlink" href="#add-tile-map-object" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create <a href="./#map"><code>map</code></a><ul>
@@ -6774,17 +6854,17 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li>Create map from 2d array
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
     <span class="c1">// data: tileIdxArray,  // [ [], [], ... ]</span>
-    <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mf">10</span>
+    <span class="nx">tileWidth</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">10</span>
 <span class="p">});</span>
 </code></pre></div></li>
 <li>Create map from csv
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>     <span class="c1">// csv file</span>
-    <span class="nx">tileWidth</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
-    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mf">32</span>
+    <span class="nx">tileWidth</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">tileHeight</span><span class="o">:</span> <span class="mi">32</span>
 <span class="p">});</span>
 </code></pre></div></li>
 </ul>
@@ -6877,6 +6957,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mapWidth</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">mapHeight</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </code></pre></div>
+
 <h4 id="tile-size">Tile size<a class="headerlink" href="#tile-size" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
@@ -6901,22 +6982,27 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="tile-at-world-xy">Tile at world XY<a class="headerlink" href="#tile-at-world-xy" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasTile</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">hasTileAtWorldXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasTile</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">hasTileAtWorldXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="draw-on-graphics">Draw on graphics<a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">renderDebug</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">renderDebug</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">tileColor</span><span class="o">:</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mf">105</span><span class="p">,</span> <span class="mf">210</span><span class="p">,</span> <span class="mf">231</span><span class="p">,</span> <span class="mf">150</span><span class="p">),</span>         <span class="c1">// null</span>
-    <span class="nx">collidingTileColor</span><span class="o">:</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mf">243</span><span class="p">,</span> <span class="mf">134</span><span class="p">,</span> <span class="mf">48</span><span class="p">,</span> <span class="mf">200</span><span class="p">),</span> <span class="c1">// null</span>
-    <span class="nx">faceColor</span><span class="o">:</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mf">40</span><span class="p">,</span> <span class="mf">39</span><span class="p">,</span> <span class="mf">37</span><span class="p">,</span> <span class="mf">150</span><span class="p">)</span>             <span class="c1">// null</span>
+    <span class="nx">tileColor</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span>         <span class="c1">// null</span>
+    <span class="nx">collidingTileColor</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mi">243</span><span class="p">,</span> <span class="mi">134</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="c1">// null</span>
+    <span class="nx">faceColor</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>             <span class="c1">// null</span>
 <span class="p">});</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">renderDebug</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">styleConfig</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>graphics</code> : <a href="../graphics/">Graphics game object</a>.</li>
 </ul>
@@ -6937,12 +7023,15 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="render-pipeline">Render pipeline<a class="headerlink" href="#render-pipeline" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">setPostPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
 </code></pre></div>
+
 <p>See <a href="../gameobject/#render-pipeline">Render pipeline section</a> of Game object.</p>
 <h4 id="render-order">Render order<a class="headerlink" href="#render-order" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">setRenderOrder</span><span class="p">(</span><span class="nx">renderOrder</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>renderOrder</code><ul>
 <li><code>0</code>, or <code>'right-down'</code></li>
@@ -6984,8 +7073,8 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li>Weight randomize current layer
     <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mf">4</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mf">4</span> <span class="p">}</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
     <span class="p">},</span>
     <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
@@ -7001,8 +7090,8 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <li>Weight randomize layer
     <div class="highlight"><pre><span></span><code><span class="nx">layer</span><span class="p">.</span><span class="nx">weightedRandomize</span><span class="p">(</span>
     <span class="p">{</span>
-        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mf">4</span> <span class="p">},</span>
-        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mf">4</span> <span class="p">}</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="nx">index</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nx">weight</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
     <span class="p">},</span>
     <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
@@ -7114,10 +7203,12 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tile</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTileAt</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 <span class="c1">// var tile = map.getTileAtWorldXY(worldX, worldY);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tile</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTileAt</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>  <span class="c1">// Return a Tile object with an index of -1 for empty tile</span>
 <span class="c1">// var tile = map.getTileAtWorldXY(worldX, worldY, true, camera, layer);</span>
 </code></pre></div>
+
 <ul>
 <li><code>layer</code> : The tile layer to use. Default is current layer (<code>map.setLayer(layer)</code>)</li>
 <li><code>tile</code> : A tile, or <code>null</code> if <code>layer</code> is invalid.</li>
@@ -7125,6 +7216,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="get-tiles-within-a-rectangle-area">Get tiles within a rectangle area<a class="headerlink" href="#get-tiles-within-a-rectangle-area" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithin</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithin</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// isNotEmpty: false,</span>
@@ -7132,6 +7224,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="c1">// hasInterestingFace: false</span>
 <span class="p">},</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileX</code> , <code>tileY</code> : The left/top most tile index (in tile coordinates) to use as the origin of the area. Default is <code>0</code>/<code>0</code>.</li>
 <li><code>width</code> , <code>height</code> : How many tiles wide/tall from the <code>tileX</code>/<code>tileY</code> index the area will be. Default is <code>map.width</code>/<code>map.height</code>.</li>
@@ -7147,6 +7240,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="get-tiles-within-world-xy">Get tiles within world XY<a class="headerlink" href="#get-tiles-within-world-xy" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithinWorldXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithinWorldXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span>  <span class="p">{</span>
     <span class="c1">// isNotEmpty: false,</span>
@@ -7154,6 +7248,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="c1">// hasInterestingFace: false</span>
 <span class="p">},</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>worldX</code> , <code>worldY</code> : The world x/y coordinate for the top-left of the area.</li>
 <li><code>width</code> , <code>height</code> : The width/height of the area. Default is <code>map.width</code>/<code>map.height</code>.</li>
@@ -7170,6 +7265,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="get-tiles-within-shape">Get tiles within shape<a class="headerlink" href="#get-tiles-within-shape" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">vat</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithinShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">vat</span> <span class="nx">tiles</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTilesWithinShape</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// isNotEmpty: false,</span>
@@ -7177,6 +7273,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <span class="c1">// hasInterestingFace: false</span>
 <span class="p">},</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <p>Shape:</p>
 <ul>
 <li><code>new Phaser.Geom.Rectangle(x0, y0, width, height)</code></li>
@@ -7187,6 +7284,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="for-each-tile-in-layer">For each tile in layer<a class="headerlink" href="#for-each-tile-in-layer" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">forEachTile</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tile</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">tileArray</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span> <span class="nx">context</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">map</span><span class="p">.</span><span class="nx">forEachTile</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tile</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">tileArray</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">},</span> <span class="nx">context</span><span class="p">,</span>
     <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
@@ -7195,6 +7293,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
         <span class="c1">// hasInterestingFace: false</span>
     <span class="p">},</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li><code>tileX</code> , <code>tileY</code> : The left/top most tile index (in tile coordinates) to use as the origin of the area to search.</li>
 <li><code>width</code> , <code>height</code> : How many tiles wide/tall from the <code>tileX</code>/<code>tileY</code> index the area will be. Default is <code>map.width</code>/<code>map.height</code>.</li>
@@ -7223,6 +7322,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div>
+
 <h4 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
@@ -7312,8 +7412,10 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">properties</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">properties</span><span class="p">;</span>  <span class="c1">// object or null</span>
 <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">properties</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">tile</span><span class="p">.</span><span class="nx">properties</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </code></pre></div>
+
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
 <h4 id="enable-collision">Enable collision<a class="headerlink" href="#enable-collision" title="Permanent link">&para;</a></h4>
 <ul>
@@ -7389,9 +7491,11 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="get-collision-group">Get collision group<a class="headerlink" href="#get-collision-group" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collisionGroup</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">getCollisionGroup</span><span class="p">();</span>
 </code></pre></div>
+
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collisionGroup</span> <span class="o">=</span> <span class="nx">tileset</span><span class="p">.</span><span class="nx">getTileCollisionGroup</span><span class="p">(</span><span class="nx">tile</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span> <span class="c1">// array of collision shapes, or null</span>
 </code></pre></div>
+
 <p>Types of collision shape (<code>collisionGroup.objects[i]</code>)</p>
 <ul>
 <li><code>object.rectangle</code> :
@@ -7416,8 +7520,8 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li><code>x</code>, <code>y</code> : Offset position related top-left of tile.
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">getLeft</span><span class="p">()</span> <span class="o">+</span> <span class="nx">object</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mf">2</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">getTop</span><span class="p">()</span> <span class="o">+</span> <span class="nx">object</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mf">2</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">getLeft</span><span class="p">()</span> <span class="o">+</span> <span class="nx">object</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">tile</span><span class="p">.</span><span class="nx">getTop</span><span class="p">()</span> <span class="o">+</span> <span class="nx">object</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
 </code></pre></div></li>
 <li><code>width</code>, <code>height</code> : Width/height of ellipse area in pixels.</li>
 </ul>
@@ -7454,9 +7558,11 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="arcade-collision">Arcade collision<a class="headerlink" href="#arcade-collision" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">arcadeGO</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <p>or, in update stage:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">collide</span><span class="p">(</span><span class="nx">arcadeGO</span><span class="p">,</span> <span class="nx">layer</span><span class="p">);</span>
 </code></pre></div>
+
 <p>See <a href="../arcade-world/#collision">Collision section</a> of Arcade-world.</p>
 <h4 id="matter-collision">Matter collision<a class="headerlink" href="#matter-collision" title="Permanent link">&para;</a></h4>
 <ul>
@@ -7468,6 +7574,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
 <h4 id="get-tileset">Get tileset<a class="headerlink" href="#get-tileset" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileset</span> <span class="o">=</span> <span class="nx">map</span><span class="p">.</span><span class="nx">getTileset</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
+
 <h4 id="change-texture-of-tileset">Change texture of tileset<a class="headerlink" href="#change-texture-of-tileset" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="nx">tileset</span><span class="p">.</span><span class="nx">setImage</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
@@ -7482,11 +7589,6 @@ layerB --&gt; tilesB["tiles"]</code></pre>
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -7569,7 +7671,7 @@ layerB --&gt; tilesB["tiles"]</code></pre>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>

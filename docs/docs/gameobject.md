@@ -296,13 +296,15 @@ See [Mask](mask.md).
 
 Some post-fx pipelines:
 
-- [Cross-stitching](shader-crossstitching): Cross-stitching post processing filter.
+- [Color replace](shader-colorreplace.md): Replace color post processing filter.
+- [Cross-stitching](shader-crossstitching.md): Cross-stitching post processing filter.
+- [Drop-shadow](shader-dropshadow.md): Drop-shadow post processing filter.
 - [Glow-filter](shader-glowfilter.md): Glow post processing filter.
 - [Glow-filter](shader-glowfilter2.md): Glow post processing filter, ported from pixi.
 - [Gray-scale](shader-grayscale.md): Gray scale post processing filter.
 - [Hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 - [Inverse](shader-inverse.md): Inverse color post processing filter.
-- [Color replace](shader-colorreplace.md): Replace color post processing filter.
+- [Kawase-blur](shader-kawaseblur.md): Kawase-blur post processing filter.
 - [Outline](shader-outline.md): Outline post processing filter.
 - [Pixelation](shader-pixelation.md): Pixelation post processing filter.
 - [Toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.

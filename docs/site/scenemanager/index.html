@@ -3561,11 +3561,89 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_5" type="checkbox" id="__nav_9_5" >
       
       <label class="md-nav__link" for="__nav_9_5">
+        Blur
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Blur" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_5">
+          <span class="md-nav__icon md-icon"></span>
+          Blur
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-kawaseblur/" class="md-nav__link">
+        Kawase blur
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_6" type="checkbox" id="__nav_9_6" >
+      
+      <label class="md-nav__link" for="__nav_9_6">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="2">
+        <label class="md-nav__title" for="__nav_9_6">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shader-dropshadow/" class="md-nav__link">
+        Drop shadow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9_7" type="checkbox" id="__nav_9_7" >
+      
+      <label class="md-nav__link" for="__nav_9_7">
         Transition
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Transition" data-md-level="2">
-        <label class="md-nav__title" for="__nav_9_5">
+        <label class="md-nav__title" for="__nav_9_7">
           <span class="md-nav__icon md-icon"></span>
           Transition
         </label>
@@ -6263,6 +6341,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">newScene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="c1">// var newScene = game.scene.add(key, sceneConfig, autoStart, data);</span>
 </code></pre></div>
+
 <ul>
 <li><code>key</code> : A unique key used to reference the Scene.</li>
 <li><code>sceneConfig</code> : The <a href="../scene/#configuration-of-scene">config for the Scene</a>, or a <a href="../scene/#es6-class">scene</a> class.</li>
@@ -6282,6 +6361,7 @@
 <h2 id="destroy-scene">Destroy scene<a class="headerlink" href="#destroy-scene" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <ul>
 <li>Fires scene.events <code>destroy</code></li>
 </ul>
@@ -6337,28 +6417,35 @@
 If not running at all, it will be started.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </code></pre></div>
+
 <h2 id="stop-scene">Stop scene<a class="headerlink" href="#stop-scene" title="Permanent link">&para;</a></h2>
 <p>Shutdown the Scene, clearing display list, timers, etc.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop();  // stop myself</span>
 </code></pre></div>
+
 <h2 id="set-visible">Set visible<a class="headerlink" href="#set-visible" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>  <span class="c1">// value: true/false</span>
 <span class="c1">// scene.scene.setVisible(value);    // set visible to myself</span>
 </code></pre></div>
+
 <h2 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isSleep = scene.scene.isSleeping();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isPaused = scene.scene.isPaused();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isActive = scene.scene.isActive();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isVisible = scene.scene.isVisible();</span>
 </code></pre></div>
+
 <table>
 <thead>
 <tr>
@@ -6396,31 +6483,39 @@ If not running at all, it will be started.</p>
 <h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+
 <h2 id="order-of-scenes">Order of scenes<a class="headerlink" href="#order-of-scenes" title="Permanent link">&para;</a></h2>
 <p>Swaps the position of two scenes in the Scenes list.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">swapPosition</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop(keyA);</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveAbove(keyA);</span>
 </code></pre></div>
+
 <p>Scene B is directly above Scene A.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveBelow(keyA);</span>
 </code></pre></div>
+
 <p>Scene B is directly below Scene A.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveBelow();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveDown();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.bringToTop();</span>
 </code></pre></div>
+
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.sendToBack();</span>
 </code></pre></div>
+
 <h2 id="transition">Transition<a class="headerlink" href="#transition" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">transition</span><span class="p">({</span>
     <span class="nx">target</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
@@ -6428,7 +6523,7 @@ If not running at all, it will be started.</p>
     <span class="c1">// moveAbove: false,</span>
     <span class="c1">// moveBelow: false,</span>
 
-    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 
     <span class="c1">// remove: false,</span>
     <span class="c1">// sleep: false,</span>
@@ -6438,6 +6533,7 @@ If not running at all, it will be started.</p>
     <span class="c1">// onUpdateScope: scene</span>
 <span class="p">})</span>
 </code></pre></div>
+
 <ul>
 <li><code>target</code> : The Scene key to transition to.</li>
 <li><code>data</code> : An object containing any data you wish to be passed to the target scenes init / create methods.</li>
@@ -6517,11 +6613,6 @@ If not running at all, it will be started.</p>
             </article>
           </div>
         </div>
-        
-          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
-            Back to top
-          </a>
         
       </main>
       
@@ -6604,7 +6695,7 @@ If not running at all, it will be started.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.756773cc.min.js"></script>
