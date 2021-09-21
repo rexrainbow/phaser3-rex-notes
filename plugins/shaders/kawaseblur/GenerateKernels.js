@@ -1,11 +1,11 @@
 var GenerateKernels = function (blur, quality, out) {
     if (out === undefined) {
         out = [];
-    } else {
-        out.length = 0;
     }
+
+    out.length = quality;
     for (var i = quality; i > 0; i--) {
-        out.push(blur * (i / quality));
+        out[i] = blur * (i / quality);
     }
     return out;
 }
