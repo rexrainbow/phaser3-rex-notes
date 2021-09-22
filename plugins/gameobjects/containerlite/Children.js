@@ -21,7 +21,7 @@ export default {
         }
         var children = this.children,
             child;
-        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
             out.push(child);
 
