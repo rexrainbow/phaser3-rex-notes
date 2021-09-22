@@ -1,5 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
+import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
@@ -14,6 +15,11 @@ class Anchor extends ComponentBase {
     }
 
     resetFromJSON(o) {
+        if (o === undefined) {
+            o = {};
+        }
+
+        // Position
         var alignX, configX;
         if (o.x !== undefined) {
             alignX = null;
@@ -57,9 +63,30 @@ class Anchor extends ComponentBase {
             offsetY = (configY[1] === '') ? 0 : parseFloat(configY[1]);
         }
 
+        // Size
+        var configWidth = o.width;
+        var percentageWidth, paddingWidth;
+        if (configWidth !== undefined) {
+            configWidth = configWidth.split('%');
+            percentageWidth = parseFloat(configWidth[0]) / 100;
+            paddingWidth = (configWidth[1] === '') ? 0 : parseFloat(configWidth[1]);
+        }
+
+        var configHeight = o.height;
+        var percentageHeight, paddingHeight;
+        if (configHeight !== undefined) {
+            configHeight = configHeight.split('%');
+            percentageHeight = parseFloat(configHeight[0]) / 100;
+            paddingHeight = (configHeight[1] === '') ? 0 : parseFloat(configHeight[1]);
+        }
+
+        // Position
         this.setAlign(alignX, alignY);
         this.setPercentage(percentageX, percentageY);
         this.setOffset(offsetX, offsetY);
+        // Size
+        this.setSizePercentage(percentageWidth, percentageHeight);
+        this.setSizePadding(paddingWidth, paddingHeight);
 
         var onUpdateViewportCallback = o.onUpdateViewportCallback;
         var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
@@ -88,6 +115,7 @@ class Anchor extends ComponentBase {
         this.viewport = undefined;
     }
 
+    // Position
     setAlign(x, y) {
         this.alignX = x;
         this.alignY = y;
@@ -106,6 +134,19 @@ class Anchor extends ComponentBase {
         return this;
     }
 
+    // Size
+    setSizePercentage(width, height) {
+        this.percentageWidth = width;
+        this.percentageHeight = height;
+        return this;
+    }
+
+    setSizePadding(width, height) {
+        this.paddingWidth = width;
+        this.paddingHeight = height;
+        return this;
+    }
+
     setUpdateViewportCallback(callback, scope) {
         this.onUpdateViewportCallback = callback;
         this.onUpdateViewportCallbackScope = scope;
@@ -121,6 +162,8 @@ class Anchor extends ComponentBase {
     updatePosition() {
         var gameObject = this.parent;
 
+        ResizeGameObject(gameObject, this.anchorWidth, this.anchorHeight);
+
         if (this.alignX === null) {
             gameObject.x = this.anchorX;
         } else if (this.alignX !== undefined) {
@@ -132,6 +175,7 @@ class Anchor extends ComponentBase {
         } else if (this.alignY !== undefined) {
             gameObject.y = this.anchorY + (gameObject.displayHeight * (gameObject.originY - this.alignY));
         }
+
         return this;
     }
 
@@ -141,6 +185,20 @@ class Anchor extends ComponentBase {
 
     get anchorY() {
         return this.viewport.y + (this.viewport.height * this.percentageY) + this.offsetY;
+    }
+
+    get anchorWidth() {
+        if (this.percentageWidth === undefined) {
+            return undefined;
+        }
+        return (this.viewport.width * this.percentageWidth) + this.paddingWidth;
+    }
+
+    get anchorHeight() {
+        if (this.percentageHeight === undefined) {
+            return undefined;
+        }
+        return (this.viewport.height * this.percentageHeight) + this.paddingHeight;
     }
 
     updateViewport() {

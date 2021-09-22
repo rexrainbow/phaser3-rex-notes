@@ -87,6 +87,9 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
     // centerY: '0%+0',
     // y: '0%+0',
 
+    // width: '100%+0',
+    // height: '100%+0',
+
     // onUpdateViewportCallback: function(viewport, gameObject, anchor) {}
     // onUpdateViewportCallbackScope: undefined,
 });
@@ -97,8 +100,14 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`.
+- `width`, `height` : Size based on visible window, which composed of
+    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+    - Padding : `'+n'`, or `'-n'`.
 
-For example, anchor game object's left bound to viewport's left+10, and centerY to viewport's center :
+For example, anchor game object's 
+
+- left bound to viewport's left+10
+- centerY to viewport's center
 
 ```javascript
 {
@@ -135,6 +144,9 @@ anchor.resetFromJSON({
     // centerY: '0%+0',
     // y: '0%+0',
 
+    // width: '100%+0',
+    // height: '100%+0',    
+
     // onUpdateViewportCallback: function(viewport, gameObject, anchor) {}
     // onUpdateViewportCallbackScope: undefined,
 })
@@ -145,6 +157,9 @@ anchor.resetFromJSON({
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`
+- `width`, `height` : Size based on visible window, which composed of
+    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+    - Padding : `'+n'`, or `'-n'`.
 
 ### Set OnUpdateViewport callbacl
 

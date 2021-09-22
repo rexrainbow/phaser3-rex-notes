@@ -11,6 +11,9 @@ declare namespace Anchor {
         left?: string, right?: string, centerX?: string, x?: string,
         top?: string, bottom?: string, centerY?: string, y?: string,
 
+        width?: string,
+        height?: string,
+
         onUpdateViewportCallback?: OnUpdateViewportCallbackType,
         onUpdateViewportCallbackScope?: unknown
     }
@@ -29,5 +32,5 @@ declare class Anchor {
         scope?: unknown
     ): this;
 
-    anchor():this;
+    anchor(): this;
 }
