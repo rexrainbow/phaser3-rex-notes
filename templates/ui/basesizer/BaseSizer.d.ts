@@ -384,6 +384,14 @@ declare class BaseSizer extends ContainerLite {
         gameObject: Phaser.GameObjects.GameObject
     ): boolean;
 
+    getShownChildren(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
+    getAllShownChildren(
+        out?: Phaser.GameObjects.GameObject[]
+    ): Phaser.GameObjects.GameObject[];
+
     getInnerPadding(
         key?: string
     ): number | { left: number, right: number, top: number, bottom: number };
