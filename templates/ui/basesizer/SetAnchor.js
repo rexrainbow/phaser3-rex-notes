@@ -4,7 +4,11 @@ var SetAnchor = function (config) {
     if (config === undefined) {
         config = {};
     }
-    config.OnResizeCallback = OnResizeCallback;
+
+    // Assign default onResizeCallback if not given
+    if (!config.hasOwnProperty('onResizeCallback')) {
+        config.onResizeCallback = OnResizeCallback;
+    }
 
     if (this._anchor === undefined) {
         this._anchor = new Anchor(this, config);
