@@ -17,6 +17,7 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
+import GetShownChildrenMethods from './GetShownChildrenMethods.js';
 import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
 import RunLayout from './RunLayout.js';
@@ -80,7 +81,8 @@ Object.assign(
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods,
-    HideMethods
+    HideMethods,
+    GetShownChildrenMethods
 );
 
 export default methods;

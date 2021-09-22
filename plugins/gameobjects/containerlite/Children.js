@@ -19,14 +19,14 @@ export default {
         if (out === undefined) {
             out = [];
         }
-        var myCildren = this.children,
-            myChild;
+        var children = this.children,
+            child;
         for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
-            myChild = myCildren[i];
-            out.push(myChild);
+            child = children[i];
+            out.push(child);
 
-            if (myChild.hasOwnProperty('isRexContainerLite')) {
-                out.push(...myChild.getAllChildren());
+            if (child.hasOwnProperty('isRexContainerLite')) {
+                out.push(...child.getAllChildren());
             }
         }
 
@@ -37,17 +37,17 @@ export default {
         if (out === undefined) {
             out = [];
         }
-        var myCildren = this.children,
-            myChild;
-        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
-            myChild = myCildren[i];
-            if (!myChild.visible) {
+        var children = this.children,
+            child;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = children[i];
+            if (!child.visible) {
                 continue;
             }
-            out.push(myChild);
+            out.push(child);
 
-            if (myChild.hasOwnProperty('isRexContainerLite')) {
-                out.push(...myChild.getAllVisibleChildren());
+            if (child.hasOwnProperty('isRexContainerLite')) {
+                out.push(...child.getAllVisibleChildren());
             }
         }
 

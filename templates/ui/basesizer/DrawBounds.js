@@ -37,7 +37,7 @@ var DrawBounds = function (graphics, config) {
         }
     }
 
-    var children = this.getAllChildren([this]), child;
+    var children = this.getAllShownChildren([this]), child;
     var nameText;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
