@@ -47,6 +47,7 @@ import Pinch from './pinch/Pinch';
 import Rotate from './rotate/Rotate';
 import Flip from './flip/Flip';
 import Perspective from './perspective/Perspective';
+import Anchor from './anchor/Anchor';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds';
@@ -111,6 +112,7 @@ export {
     Rotate,
     Flip,
     Perspective,
+    Anchor,
 
     GetParentSizer,
     GetTopmostSizer,

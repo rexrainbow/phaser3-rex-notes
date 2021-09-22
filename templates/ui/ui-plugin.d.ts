@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 
+import AnchorFactory from './anchor/Factory.js';
 import BadgeLabelFactory from './badgelabel/Factory';
 import BBCodeTextFactory from './bbcodetext/Factory';
 import ButtonsFactory from './buttons/Factory';
@@ -55,6 +56,7 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText';
 export default UIPlugins;
 
 declare class Factories {
+    anchor: typeof AnchorFactory;
     badgeLabel: typeof BadgeLabelFactory;
     BBCodeText: typeof BBCodeTextFactory;
     buttons: typeof ButtonsFactory;

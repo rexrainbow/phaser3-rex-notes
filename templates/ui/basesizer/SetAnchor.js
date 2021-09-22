@@ -1,4 +1,4 @@
-import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
+import Anchor from '../anchor/Anchor.js';
 
 var SetAnchor = function (config) {
     if (this._anchor === undefined) {
