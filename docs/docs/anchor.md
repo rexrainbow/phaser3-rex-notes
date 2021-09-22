@@ -1,6 +1,6 @@
 ## Introduction
 
-Set position based on visible window.
+Set size and position based on visible window.
 
 !!! note
     Visible window will be changed when scale mode is *ENVELOP*, *WIDTH_CONTROLS_HEIGHT*, or *HEIGHT_CONTROLS_WIDTH*.
