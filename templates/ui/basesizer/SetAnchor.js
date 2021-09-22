@@ -5,9 +5,22 @@ var SetAnchor = function (config) {
         config = {};
     }
 
-    // Assign default onResizeCallback if not given
-    if (!config.hasOwnProperty('onResizeCallback')) {
-        config.onResizeCallback = OnResizeCallback;
+    // Assign default onResizeCallback if not given    
+    var hasMinWidth = config.hasOwnProperty('width');
+    var hasMinHeight = config.hasOwnProperty('height');
+    var hasOnResizeCallback = config.hasOwnProperty('onResizeCallback');
+    if ((hasMinWidth || hasMinHeight) && !hasOnResizeCallback) {
+        config.onResizeCallback = function (width, height, sizer) {
+            if (hasMinWidth) {
+                sizer.setMinWidth(width);
+            }
+
+            if (hasMinHeight) {
+                sizer.setMinHeight(height);
+            }
+
+            sizer.layout();
+        }
     }
 
     if (this._anchor === undefined) {
@@ -16,10 +29,6 @@ var SetAnchor = function (config) {
         this._anchor.resetFromJSON(config)
     }
     return this;
-}
-
-var OnResizeCallback = function (sizer, width, height) {
-    sizer.setMinSize(width, height).layout();
 }
 
 export default SetAnchor;

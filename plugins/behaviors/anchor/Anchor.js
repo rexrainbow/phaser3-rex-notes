@@ -188,9 +188,9 @@ class Anchor extends ComponentBase {
         }
 
         if (scope) {
-            callback.call(scope, gameObject, newWidth, newHeight, this);
+            callback.call(scope, newWidth, newHeight, gameObject, this);
         } else {
-            callback(gameObject, newWidth, newHeight, this);
+            callback(newWidth, newHeight, gameObject, this);
         }
     }
 

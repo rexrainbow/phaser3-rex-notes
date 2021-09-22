@@ -2249,8 +2249,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-onupdateviewport-callbacl" class="md-nav__link">
-    Set OnUpdateViewport callbacl
+  <a href="#set-onupdateviewport-callback" class="md-nav__link">
+    Set OnUpdateViewport callback
   </a>
   
 </li>
@@ -6254,8 +6254,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-onupdateviewport-callbacl" class="md-nav__link">
-    Set OnUpdateViewport callbacl
+  <a href="#set-onupdateviewport-callback" class="md-nav__link">
+    Set OnUpdateViewport callback
   </a>
   
 </li>
@@ -6292,7 +6292,7 @@
                   <h1>Anchor</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Set position based on visible window.</p>
+<p>Set size and position based on visible window.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Visible window will be changed when scale mode is <em>ENVELOP</em>, <em>WIDTH_CONTROLS_HEIGHT</em>, or <em>HEIGHT_CONTROLS_WIDTH</em>.</p>
@@ -6304,6 +6304,7 @@
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oVxWVB">Anchor</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/ZEyRVov">Resize</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/anchor">Sample code</a></p>
@@ -6367,7 +6368,12 @@
     <span class="c1">// centerY: &#39;0%+0&#39;,</span>
     <span class="c1">// y: &#39;0%+0&#39;,</span>
 
-    <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {}</span>
+    <span class="c1">// width: &#39;100%+0&#39;,</span>
+    <span class="c1">// height: &#39;100%+0&#39;,</span>
+    <span class="c1">// onResizeCallback: function(width, height, gameObject, anchor) {},</span>
+    <span class="c1">// onResizeCallbackScope: undefined,</span>
+
+    <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {},</span>
     <span class="c1">// onUpdateViewportCallbackScope: undefined,</span>
 <span class="p">});</span>
 </code></pre></div>
@@ -6383,7 +6389,7 @@
 </ul>
 </li>
 </ul>
-<p>For example, anchor game object's left bound to viewport's left+10, and centerY to viewport's center :</p>
+<p>For example, anchor game object's left bound to viewport's left+10, centerY to viewport's center</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">left</span><span class="o">:</span> <span class="s1">&#39;left+10&#39;</span><span class="p">,</span>
     <span class="nx">centerY</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span>
@@ -6391,7 +6397,22 @@
 </code></pre></div>
 
 <ul>
-<li><code>onUpdateViewportCallback</code>, <code>onUpdateViewportCallback</code> : Callback invoked when viewport changed (anchor)
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>onResizeCallback</code>, <code>onResizeCallbackScope</code> : Callback of resizing game object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// gameObject.setSize(width, height);</span>
+    <span class="c1">// gameObject.setDisplaySize(width, height);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><code>onUpdateViewportCallback</code>, <code>onUpdateViewportCallback</code> : Callback invoked when viewport changed (anchor)
     <div class="highlight"><pre><span></span><code><span class="nx">fucntion</span><span class="p">(</span><span class="nx">viewport</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Can change properties of viewport here</span>
     <span class="c1">// var centerX = viewport.centerX,</span>
@@ -6401,7 +6422,8 @@
     <span class="c1">// viewport.centerX = centerX;</span>
     <span class="c1">// viewport.centerY = centerY;</span>
 <span class="p">}</span>
-</code></pre></div><ul>
+</code></pre></div></p>
+<ul>
 <li><code>viewport</code>： A <a href="../geom-rectangle/">rectangle object</a></li>
 </ul>
 </li>
@@ -6418,6 +6440,9 @@
     <span class="c1">// centerY: &#39;0%+0&#39;,</span>
     <span class="c1">// y: &#39;0%+0&#39;,</span>
 
+    <span class="c1">// width: &#39;100%+0&#39;,</span>
+    <span class="c1">// height: &#39;100%+0&#39;,    </span>
+
     <span class="c1">// onUpdateViewportCallback: function(viewport, gameObject, anchor) {}</span>
     <span class="c1">// onUpdateViewportCallbackScope: undefined,</span>
 <span class="p">})</span>
@@ -6433,8 +6458,20 @@
 <li>Offset : <code>'+n'</code>, or <code>'-n'</code></li>
 </ul>
 </li>
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
 </ul>
-<h3 id="set-onupdateviewport-callbacl">Set OnUpdateViewport callbacl<a class="headerlink" href="#set-onupdateviewport-callbacl" title="Permanent link">&para;</a></h3>
+</li>
+<li><code>onResizeCallback</code>, <code>onResizeCallbackScope</code> : Callback of resizing game object
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">anchor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// gameObject.setSize(width, height);</span>
+    <span class="c1">// gameObject.setDisplaySize(width, height);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ul>
+<h3 id="set-onupdateviewport-callback">Set OnUpdateViewport callback<a class="headerlink" href="#set-onupdateviewport-callback" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">anchor</span><span class="p">.</span><span class="nx">setUpdateViewportCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
 

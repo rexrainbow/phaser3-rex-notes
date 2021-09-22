@@ -130,35 +130,39 @@ var numberBar = scene.rexUI.add.numberBar({
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
 - `anchor` : See [anchor](anchor.md#create-instance).
-  - `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y` : Position based on visible window, which composed of
-    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
-      - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
-      - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
-    - Offset : `'+n'`, or `'-n'`.
+    - `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y` : Position based on visible window, which composed of
+        - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
+            - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
+            - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
+        - Offset : `'+n'`, or `'-n'`.
+    - `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
+        - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+        - Padding : `'+n'`, or `'-n'`.
+    - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of numberBar.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a _circle_ mask on icon game object.
 - `slider` : Slider game object which composed of
-  - `slider.width` : Fixed width of slider, optional. Width of slider will be extended if this value is not set.
-  - `slider.background` : Game object of slider background, optional.
-  - `slider.track` : Game object of slider track.
-  - `slider.indicator` : Game object of slider indicator, optional.
-  - `slider.thumb` : Game object of slider thumb, optional.
-  - `slider.input` :
-    - `'pan'`, `'drag'`, or `0` : Control knob by panning/dragging thumb game object. Default setting.
-    - `'click'`, or `1` : Control slider by touching track game object.
-    - `'none'`, or `-1` : Disable sider controlling.
-  - `slider.gap` : Snap a value to nearest grid slice, using rounding.
-    - `undefined` : Disable this feature.
-  - `slider.easeValue` : Easing value when `input` is `'click'`.
-      - `slider.easeValue.duration` : Duration of value easing, default is `0` (no easing).
-      - `slider.easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
+    - `slider.width` : Fixed width of slider, optional. Width of slider will be extended if this value is not set.
+    - `slider.background` : Game object of slider background, optional.
+    - `slider.track` : Game object of slider track.
+    - `slider.indicator` : Game object of slider indicator, optional.
+    - `slider.thumb` : Game object of slider thumb, optional.
+    - `slider.input` :
+        - `'pan'`, `'drag'`, or `0` : Control knob by panning/dragging thumb game object. Default setting.
+        - `'click'`, or `1` : Control slider by touching track game object.
+        - `'none'`, or `-1` : Disable sider controlling.
+    - `slider.gap` : Snap a value to nearest grid slice, using rounding.
+        - `undefined` : Disable this feature.
+    - `slider.easeValue` : Easing value when `input` is `'click'`.
+          - `slider.easeValue.duration` : Duration of value easing, default is `0` (no easing).
+          - `slider.easeValue.ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - `text` : Game object of text, optional.
 - `space` : Pads spaces
-  - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
-  - `space.icon` : Space between icon game object and text game object.
-  - `space.slider` : Space between slider game object and text game object.
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.icon` : Space between icon game object and text game object.
+    - `space.slider` : Space between slider game object and text game object.
 - `valuechangeCallback` : callback function when value changed.
 - `enable` : Set `false` to disable controlling.
 - `name` : Set name of this game object.

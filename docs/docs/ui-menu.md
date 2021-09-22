@@ -128,6 +128,10 @@ var menu = scene.rexUI.add.menu({
             - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
+    - `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
+        - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+        - Padding : `'+n'`, or `'-n'`.
+    - `onResizeCallback` : A default resize callback will be assigned interanlly. 
 - `orientation` : Main orientation of the menu, default is `1` (top to bottom)
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange buttons from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange buttons from top to bottom.

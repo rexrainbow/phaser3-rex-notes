@@ -6493,19 +6493,29 @@
 
 <ul>
 <li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
-<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
 <li><code>left</code>, <code>right</code>, <code>centerX</code>, <code>x</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code>, <code>y</code> : Position based on visible window, which composed of<ul>
-<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.</li>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
 <li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
 <li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+</ul>
+</li>
 <li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Set size (invoke <code>onResizeCallback</code>) based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.        </li>
+<li>Padding : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
+<li><code>onResizeCallback</code> : A default resize callback will be assigned interanlly. </li>
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of numberBar.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
-<li><code>slider</code> : Slider game object which composed of</li>
+<li><code>slider</code> : Slider game object which composed of<ul>
 <li><code>slider.width</code> : Fixed width of slider, optional. Width of slider will be extended if this value is not set.</li>
 <li><code>slider.background</code> : Game object of slider background, optional.</li>
 <li><code>slider.track</code> : Game object of slider track.</li>
@@ -6526,11 +6536,15 @@
 <li><code>slider.easeValue.ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
 </ul>
 </li>
+</ul>
+</li>
 <li><code>text</code> : Game object of text, optional.</li>
-<li><code>space</code> : Pads spaces</li>
+<li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
 <li><code>space.slider</code> : Space between slider game object and text game object.</li>
+</ul>
+</li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>enable</code> : Set <code>false</code> to disable controlling.</li>
 <li><code>name</code> : Set name of this game object.</li>

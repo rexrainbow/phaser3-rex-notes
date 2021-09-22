@@ -114,6 +114,10 @@ var badgeLabel = scene.rexUI.add.badgeLabel({
             - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
             - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
         - Offset : `'+n'`, or `'-n'`.
+    - `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
+        - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+        - Padding : `'+n'`, or `'-n'`.
+    - `onResizeCallback` : A default resize callback will be assigned interanlly.    
 - `width`, `height` : Minimum width, minimum height.
 - `background` : [Game object of background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of badgeLabel.
 - `main` : Game object of main item, optional.

@@ -90,7 +90,7 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
 
     // width: '100%+0',
     // height: '100%+0',
-    // onResizeCallback: function(gameObject, width, height, anchor) {},
+    // onResizeCallback: function(width, height, gameObject, anchor) {},
     // onResizeCallbackScope: undefined,
 
     // onUpdateViewportCallback: function(viewport, gameObject, anchor) {},
@@ -118,7 +118,7 @@ For example, anchor game object's left bound to viewport's left+10, centerY to v
     - Padding : `'+n'`, or `'-n'`.
 - `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
     ```javascript
-    function(gameObject, width, height, anchor) {
+    function(width, height, gameObject, anchor) {
         // gameObject.setSize(width, height);
         // gameObject.setDisplaySize(width, height);
         // ...
@@ -171,7 +171,7 @@ anchor.resetFromJSON({
     - Padding : `'+n'`, or `'-n'`.
 - `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
     ```javascript
-    function(gameObject, width, height, anchor) {
+    function(width, height, gameObject, anchor) {
         // gameObject.setSize(width, height);
         // gameObject.setDisplaySize(width, height);
         // ...

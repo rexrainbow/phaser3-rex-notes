@@ -24,10 +24,11 @@ class Demo extends Phaser.Scene {
 
             width: '30%',
             // height: '30%',
-            onResizeCallback: function (gameObject, width, height) {
-                gameObject.setSize(width, height)
+            onResizeCallback: function (width, height) {
+                this.setSize(width, height)
                     .updateDisplayOrigin()  // Bug, fixed in p3.60
-            }
+            },
+            onResizeCallbackScope: leftTopPanel,
         });
 
     }
