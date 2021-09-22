@@ -15,16 +15,19 @@ class Demo extends Phaser.Scene {
     create() {
         var bg = this.add.image(400, 300, 'classroom');
 
-        var leftTopPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
+        var leftTopPanel = this.add.rectangle(400, 300, 50, 200, 0xffffff)
             .setStrokeStyle(4, 0x00ff00);
 
-        var graphics = this.add.graphics();
         this.plugins.get('rexAnchor').add(leftTopPanel, {
             left: 'left+10',
             top: 'top+10',
 
             width: '30%',
-            height: '30%'
+            // height: '30%',
+            onResizeCallback: function (gameObject, width, height) {
+                gameObject.setSize(width, height)
+                    .updateDisplayOrigin()  // Bug, fixed in p3.60
+            }
         });
 
     }

@@ -11,6 +11,7 @@ Set position based on visible window.
 ## Live demos
 
 - [Anchor](https://codepen.io/rexrainbow/pen/oVxWVB)
+- [Resize](https://codepen.io/rexrainbow/pen/ZEyRVov)
 
 ## Usage
 
@@ -89,8 +90,10 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
 
     // width: '100%+0',
     // height: '100%+0',
+    // onResizeCallback: function(gameObject, width, height, anchor) {},
+    // onResizeCallbackScope: undefined,
 
-    // onUpdateViewportCallback: function(viewport, gameObject, anchor) {}
+    // onUpdateViewportCallback: function(viewport, gameObject, anchor) {},
     // onUpdateViewportCallbackScope: undefined,
 });
 ```
@@ -100,14 +103,8 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`.
-- `width`, `height` : Size based on visible window, which composed of
-    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
-    - Padding : `'+n'`, or `'-n'`.
 
-For example, anchor game object's 
-
-- left bound to viewport's left+10
-- centerY to viewport's center
+For example, anchor game object's left bound to viewport's left+10, centerY to viewport's center
 
 ```javascript
 {
@@ -115,6 +112,18 @@ For example, anchor game object's
     centerY: 'center'
 }
 ```
+
+- `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
+    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
+    - Padding : `'+n'`, or `'-n'`.
+- `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
+    ```javascript
+    function(gameObject, width, height, anchor) {
+        // gameObject.setSize(width, height);
+        // gameObject.setDisplaySize(width, height);
+        // ...
+    }
+    ```
 
 - `onUpdateViewportCallback`, `onUpdateViewportCallback` : Callback invoked when viewport changed (anchor)
     ```javascript
@@ -157,11 +166,19 @@ anchor.resetFromJSON({
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`
-- `width`, `height` : Size based on visible window, which composed of
+- `width`, `height` : Set size (invoke `onResizeCallback`) based on visible window, which composed of
     - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.        
     - Padding : `'+n'`, or `'-n'`.
+- `onResizeCallback`, `onResizeCallbackScope` : Callback of resizing game object
+    ```javascript
+    function(gameObject, width, height, anchor) {
+        // gameObject.setSize(width, height);
+        // gameObject.setDisplaySize(width, height);
+        // ...
+    }
+    ```
 
-### Set OnUpdateViewport callbacl
+### Set OnUpdateViewport callback
 
 ```javascript
 anchor.setUpdateViewportCallback(callback, scope);

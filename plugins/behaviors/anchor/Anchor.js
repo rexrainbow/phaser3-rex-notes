@@ -1,6 +1,5 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import GetViewport from '../../utils/system/GetViewport.js';
-import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 
 class Anchor extends ComponentBase {
     constructor(gameObject, config) {
@@ -9,7 +8,6 @@ class Anchor extends ComponentBase {
         // this.parent = gameObject;
 
         this.viewport = undefined;
-
         this.resetFromJSON(config);
         this.boot();
     }
@@ -88,6 +86,12 @@ class Anchor extends ComponentBase {
         this.setSizePercentage(percentageWidth, percentageHeight);
         this.setSizePadding(paddingWidth, paddingHeight);
 
+        var onResizeCallback = o.onResizeCallback;
+        var onResizeCallbackScope = o.onResizeCallbackScope;
+        if (onResizeCallback !== undefined) {
+            this.setResizeCallback(onResizeCallback, onResizeCallbackScope);
+        }
+
         var onUpdateViewportCallback = o.onUpdateViewportCallback;
         var onUpdateViewportCallbackScope = o.onUpdateViewportCallbackScope;
         if (onUpdateViewportCallback !== undefined) {
@@ -147,6 +151,12 @@ class Anchor extends ComponentBase {
         return this;
     }
 
+    setResizeCallback(callback, scope) {
+        this.onResizeCallback = callback;
+        this.onResizeCallbackScope = scope;
+        return this;
+    }
+
     setUpdateViewportCallback(callback, scope) {
         this.onUpdateViewportCallback = callback;
         this.onUpdateViewportCallbackScope = scope;
@@ -155,14 +165,37 @@ class Anchor extends ComponentBase {
 
     anchor() {
         this.updateViewport();
+        this.updateSize();
         this.updatePosition();
         return this;
     }
 
+    updateSize() {
+        var callback = this.onResizeCallback,
+            scope = this.onResizeCallbackScope;
+        var newWidth = this.anchorWidth,
+            newHeight = this.anchorHeight;
+        if (((newWidth === undefined) && (newHeight === undefined)) || !callback) {
+            return;
+        }
+
+        var gameObject = this.parent;
+        if (newWidth === undefined) {
+            newWidth = gameObject.width;
+        }
+        if (newHeight === undefined) {
+            newHeight = gameObject.height;
+        }
+
+        if (scope) {
+            callback.call(scope, gameObject, newWidth, newHeight, this);
+        } else {
+            callback(gameObject, newWidth, newHeight, this);
+        }
+    }
+
     updatePosition() {
         var gameObject = this.parent;
-
-        ResizeGameObject(gameObject, this.anchorWidth, this.anchorHeight);
 
         if (this.alignX === null) {
             gameObject.x = this.anchorX;
