@@ -316,3 +316,11 @@ This value is *added* to the height of the font when calculating the overall lin
     ```javascript
     txt.setFixedSize(width, height);
     ```
+
+### Test string
+
+Set the test string to use when measuring the font.
+
+```javascript
+txt.style.setTestString(text);
+```

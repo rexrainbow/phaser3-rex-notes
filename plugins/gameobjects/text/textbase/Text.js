@@ -224,6 +224,10 @@ class Text extends GameObject {
         return this.style.setFontStyle(style);
     }
 
+    setTestString(string) {
+        return this.style.setTestString(string);
+    }
+
     setFixedSize(width, height) {
         return this.style.setFixedSize(width, height);
     }

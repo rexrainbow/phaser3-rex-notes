@@ -144,6 +144,7 @@ declare class Text extends CanvasGameObjectBase {
     setFontSize(size: number | string): this;
     setFontStyle(style: string): this;
     setStyle(style: Text.TextStyle): this;
+    setTestString(string: string): this;
 
     setColor(
         color?: null | string | number

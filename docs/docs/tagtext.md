@@ -590,3 +590,11 @@ Define style inline text.
 Or mix them
 
 - `<style='color:red;size:30px'>Some text</style>`
+
+### Test string
+
+Set the test string to use when measuring the font.
+
+```javascript
+txt.setTestString(text);
+```

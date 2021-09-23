@@ -578,3 +578,11 @@ This value is *added* to the height of the font when calculating the overall lin
     ```javascript
     txt.setResolution(resolution);
     ```
+
+### Test string
+
+Set the test string to use when measuring the font.
+
+```javascript
+txt.setTestString(text);
+```
