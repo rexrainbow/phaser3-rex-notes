@@ -3,7 +3,7 @@
 In-memory JavaScript Datastore with Persistence.
 
 - [Reference](https://www.npmjs.com/package/lokijs)
-- [API](https://rawgit.com/techfort/LokiJS/master/jsdoc/index.html)
+- [Document](https://techfort.github.io/LokiJS/)
 
 ## Usage
 
