@@ -22,6 +22,12 @@ var db = new loki();
 var collection = db.addCollection(name);
 ```
 
+### Get collection
+
+```javascript
+var collection = db.getCollection(name);
+```
+
 ### Insert document
 
 ```javascript
