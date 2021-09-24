@@ -54,6 +54,12 @@ collection.insert(docArray);  // documents in array
 var doc = collection.get(id);  // id: `$loki`
 ```
 
+#### Get doc by unique index
+
+```javascript
+var doc = collection.by(key, value);
+```
+
 #### Filter documents
 
 - **$eq** : filter for document(s) with property of (strict) equality
