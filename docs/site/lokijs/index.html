@@ -4287,6 +4287,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-collection" class="md-nav__link">
+    Get collection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#insert-document" class="md-nav__link">
     Insert document
   </a>
@@ -4317,6 +4324,13 @@
           <li class="md-nav__item">
   <a href="#get-document-by-id" class="md-nav__link">
     Get document by id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-doc-by-unique-index" class="md-nav__link">
+    Get doc by unique index
   </a>
   
 </li>
@@ -6316,6 +6330,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-collection" class="md-nav__link">
+    Get collection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#insert-document" class="md-nav__link">
     Insert document
   </a>
@@ -6346,6 +6367,13 @@
           <li class="md-nav__item">
   <a href="#get-document-by-id" class="md-nav__link">
     Get document by id
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-doc-by-unique-index" class="md-nav__link">
+    Get doc by unique index
   </a>
   
 </li>
@@ -6514,6 +6542,10 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
 
+<h3 id="get-collection">Get collection<a class="headerlink" href="#get-collection" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div>
+
 <h3 id="insert-document">Insert document<a class="headerlink" href="#insert-document" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docInColl</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>  <span class="c1">// doc: an object</span>
 </code></pre></div>
@@ -6529,6 +6561,10 @@
 <h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
 <h4 id="get-document-by-id">Get document by id<a class="headerlink" href="#get-document-by-id" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>  <span class="c1">// id: `$loki`</span>
+</code></pre></div>
+
+<h4 id="get-doc-by-unique-index">Get doc by unique index<a class="headerlink" href="#get-doc-by-unique-index" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
 
 <h4 id="filter-documents">Filter documents<a class="headerlink" href="#filter-documents" title="Permanent link">&para;</a></h4>

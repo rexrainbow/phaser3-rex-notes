@@ -4,6 +4,8 @@ import IsFunction from '../../utils/object/IsFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+var LastOpenedEditor = undefined;
+
 class TextEdit extends ComponentBase {
     constructor(gameObject) {
         // No event emitter
@@ -22,19 +24,19 @@ class TextEdit extends ComponentBase {
         }
 
         this.close();
-        if (globLastOpenedEditor === this) {
-            globLastOpenedEditor = undefined;
+        if (LastOpenedEditor === this) {
+            LastOpenedEditor = undefined;
         }
 
         super.shutdown(fromScene);
     }
 
     open(config, onCloseCallback) {
-        if (globLastOpenedEditor !== undefined) {
-            globLastOpenedEditor.close();
+        if (LastOpenedEditor !== undefined) {
+            LastOpenedEditor.close();
         }
 
-        globLastOpenedEditor = this;
+        LastOpenedEditor = this;
         if (IsFunction(config)) {
             onCloseCallback = config;
             config = undefined;
@@ -78,7 +80,7 @@ class TextEdit extends ComponentBase {
     }
 
     close() {
-        globLastOpenedEditor = undefined;
+        LastOpenedEditor = undefined;
         if (!this.inputText) {
             return this;
         }
@@ -110,7 +112,5 @@ class TextEdit extends ComponentBase {
         return (this.isOpened) ? this.inputText.text : this.parent.text;
     }
 }
-
-var globLastOpenedEditor = undefined;
 
 export default TextEdit;
