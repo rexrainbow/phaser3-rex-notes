@@ -13,16 +13,21 @@ class GridButtons extends GridSizer {
         }
         var row = GetValue(config, 'row', 0);
         var col = GetValue(config, 'col', 0);
+        var createCellContainerCallback = GetValue(config, 'createCellContainerCallback');
         var buttons = GetValue(config, 'buttons', undefined);
         var buttonsExpand = GetValue(config, 'expand', true);
         var buttonProportion = (buttonsExpand) ? 1 : 0;
 
+        if (createCellContainerCallback) {
+            config.createCellContainerCallback = undefined;
+        }
         if (buttons !== undefined) {
             row = Math.max(row, buttons.length);
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                 col = Math.max(col, buttons[i].length);
             }
         }
+
         config.row = row;
         config.column = col;
         config.columnProportions = buttonProportion;
@@ -61,7 +66,17 @@ class GridButtons extends GridSizer {
                     }
                 }
             }
+        } else if (createCellContainerCallback) {
+            for (var y = 0; y < row; y++) {
+                for (var x = 0; x < col; x++) {
+                    var button = createCellContainerCallback(scene, x, y);
+                    if (button) {
+                        this.addButton(button, x, y);
+                    }
+                }
+            }
         }
+
         SetType.call(this, config);
 
         this.addChildrenMap('background', background);

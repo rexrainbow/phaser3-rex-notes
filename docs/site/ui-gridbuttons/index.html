@@ -6419,12 +6419,18 @@
 
     <span class="c1">// Elements</span>
     <span class="c1">// background: backgroundGameObject,</span>
+
     <span class="nx">buttons</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">[</span><span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="p">...],</span>
         <span class="p">[</span><span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="p">...],</span>
         <span class="p">[</span><span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="nx">buttonGameObject</span><span class="p">,</span> <span class="p">...],</span>
         <span class="p">...</span>
     <span class="p">],</span>
+    <span class="c1">// row: 0, </span>
+    <span class="c1">// col: 0,</span>
+    <span class="c1">// createCellContainerCallback: function(scene, x, y) {</span>
+    <span class="c1">//       return cellContainer;</span>
+    <span class="c1">// },    </span>
     <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">click</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
@@ -6472,7 +6478,12 @@
 <li><code>width</code> : Minimum width. i.e. Width of this gridButtons will larger then this value.</li>
 <li><code>height</code> : Minimum height. i.e. Hieght of this gridButtons will larger then this value.</li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of grid table.</li>
-<li><code>buttons</code> : 2d array of button game objects.</li>
+<li><code>buttons</code> : 2d array of button game objects, or create buttons via <code>row</code>, <code>col</code>, and <code>createCellContainerCallback</code>.</li>
+<li><code>createCellContainerCallback</code> : Callback to create buttons.
+    <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cellContainer</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></li>
 <li><code>expand</code> : Set <code>true</code> to expand width and height of buton game objects.</li>
 <li><code>space</code> : Space around this sizer, and space between columns/rows<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space around this sizer.</li>
