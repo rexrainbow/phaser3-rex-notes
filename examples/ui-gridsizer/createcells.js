@@ -16,29 +16,19 @@ class Demo extends Phaser.Scene {
         var sizer = this.rexUI.add.gridSizer({
             x: 400, y: 300,
             width: 400, height: 400,
-            column: 3, row: 3,
+            column: 8, row: 8,
             columnProportions: 1, rowProportions: 1,
             space: {
-                top: 20, bottom: 20, left: 10, right: 10,
-                column: 20, row: 10
+                // top: 20, bottom: 20, left: 10, right: 10,
+                column: 4, row: 4
+            },
+
+            createCellContainerCallback: function (scene, x, y, config) {
+                config.expand = true;
+                return scene.rexUI.add.roundRectangle(0, 0, 0, 0, 14, RandomInt(0, 0x1000000))
             }
         })
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                sizer.add(
-                    this.rexUI.add.roundRectangle(0, 0, 0, 0, 14, RandomInt(0, 0x1000000)), // child
-                    i, // columnIndex
-                    j, // rowIndex
-                    'center', // align
-                    0, // paddingConfig
-                    true, // expand
-                )
-            }
-        }
-
-        sizer
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000)
     }
 
     update() { }

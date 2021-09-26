@@ -47,6 +47,19 @@ class GridSizer extends BaseSizer {
         );
 
         this.addChildrenMap('items', this.sizerChildren);
+
+        var createCellContainerCallback = GetValue(config, 'createCellContainerCallback');
+        if (createCellContainerCallback) {
+            for (var y = 0, ycnt = this.rowCount; y < ycnt; y++) {
+                for (var x = 0, xcnt = this.columnCount; x < xcnt; x++) {
+                    var addConfig = { column: x, row: y };
+                    var child = createCellContainerCallback(scene, x, y, addConfig);
+                    if (child) {
+                        this.add(child, addConfig);
+                    }
+                }
+            }
+        }
     }
 
     destroy(fromScene) {

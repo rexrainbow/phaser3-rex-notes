@@ -92,6 +92,11 @@ var gridSizer = scene.rexUI.add.gridSizer({
     //     row: 0     // [0, 0, 0]
     // },
 
+    // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
+    //     config.expand = true;
+    //     return cellContainer;
+    // },
+
     // name: '',
     // draggable: false
 });
@@ -112,6 +117,11 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, {
     //     row: 0     // [0, 0, 0]
     // },
 
+    // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
+    //     config.expand = true;
+    //     return cellContainer;
+    // },
+
     // width: undefined,
     // height: undefined
 });
@@ -130,7 +140,12 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
     //     row: 0     // [0, 0, 0]
-    // },    
+    // },
+
+    // createCellContainerCallback: function(scene, x, y, config) {
+    //     config.expand = true;
+    //     return cellContainer;
+    // },
 });
 ```
 
@@ -142,6 +157,11 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     //     left: 0, right: 0, top: 0, bottom:0,
     //     column: 0, // [0, 0, 0]
     //     row: 0     // [0, 0, 0]
+    // },
+
+    // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
+    //     config.expand = true;
+    //     return cellContainer;
     // },
 
     // name: '',
@@ -176,6 +196,21 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, {
     - `space.row` : Space between 2 rows
         - A number
         - A number array
+- `createCellContainerCallback` : Callback to create container(sizer) of each cell.
+    ```javascript
+    function(scene, x, y, config) {
+        return cellContainer;
+    }
+    ```
+    - `x`, `y` : Column, row index of this cell.
+    - `config` : Config of [adding child](ui-gridsizer.md#add-child)
+        ```javascript
+        config.align = 'center';
+        config.padding = {left: 0, right: 0, top: 0, bottom: 0};
+        config.expand = false;
+        config.key = undefined;
+        ```
+    - `cellContainer` : Return a game object for this cell.
 - `name` : Set name of this game object.
 - `draggable` : Set `true` to drag top-most object.
 - `sizerEvents` : Set `true` to fire [sizer events](ui-basesizer.md#events). Default value is `false`.
