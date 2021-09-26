@@ -6,11 +6,24 @@ import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
 export default GridButtons;
 
 declare namespace GridButtons {
+    type CreateCellContainerCallbackType = (
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config: {
+            column?: number, row?: number,
+
+            align?: GridSizer.AlignTypes,
+            padding?: GridSizer.PaddingTypes,
+            expand?: boolean,
+            key?: string
+        }
+    ) => Phaser.GameObjects.GameObject;
 
     interface IConfig extends GridSizer.IConfig, IConfigButtons {
         background?: Phaser.GameObjects.GameObject,
 
         buttons?: Phaser.GameObjects.GameObject[][],
+        createCellContainerCallback?: CreateCellContainerCallbackType
     }
 }
 
