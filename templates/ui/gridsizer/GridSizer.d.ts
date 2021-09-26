@@ -16,6 +16,19 @@ declare namespace GridSizer {
         bottom?: number
     };
 
+    type CreateCellContainerCallbackType = (
+        scene: Phaser.Scene,
+        x: number, y: number,
+        config: {
+            column?: number, row?: number,
+
+            align?: GridSizer.AlignTypes,
+            padding?: GridSizer.PaddingTypes,
+            expand?: boolean,
+            key?: string
+        }
+    ) => Phaser.GameObjects.GameObject;
+
     interface IConfig extends BaseSizer.IConfig {
         x?: number,
         y?: number,
@@ -34,6 +47,8 @@ declare namespace GridSizer {
             column?: number | number[],
             row?: number | number[],
         },
+
+        createCellContainerCallback?: CreateCellContainerCallbackType
     }
 
 }

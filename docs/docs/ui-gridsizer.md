@@ -93,7 +93,7 @@ var gridSizer = scene.rexUI.add.gridSizer({
     //     row: 0     // [0, 0, 0]
     // },
 
-    // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
+    // createCellContainerCallback: function(scene, x, y, config) {
     //     config.expand = true;
     //     return cellContainer;
     // },
@@ -118,7 +118,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, {
     //     row: 0     // [0, 0, 0]
     // },
 
-    // createCellContainerCallback: function(scene, x, y, config, gridSizer) {
+    // createCellContainerCallback: function(scene, x, y, config) {
     //     config.expand = true;
     //     return cellContainer;
     // },
