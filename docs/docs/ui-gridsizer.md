@@ -384,6 +384,10 @@ See also - [dirty](ui-basesizer.md#dirty)
     ```javascript
     var rowCount = gridSizer.rowCount;
     ```
+- Amount of grid = columnCount * rowCount
+    ```javascript
+    var gridCount = gridSizer.gridCount;
+    ```
 
 ### Get element
 

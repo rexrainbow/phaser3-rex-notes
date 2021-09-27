@@ -12,6 +12,7 @@ var ResetGrid = function (columnCount, rowCount, columnProportions, rowProportio
 
     this.columnCount = columnCount;
     this.rowCount = rowCount;
+    this.gridCount = columnCount * rowCount;
 
     // children
     if (this.sizerChildren === undefined) {
