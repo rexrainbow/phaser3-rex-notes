@@ -53,6 +53,7 @@ module.exports = {
     'dragrotateplugin': './plugins/dragrotate-plugin.js',
     'gesturesplugin': './plugins/gestures-plugin.js',
     'touchhelperplugin': './plugins/touchhelper-plugin.js',
+    'keyshubplugin': './plugins/keyshub-plugin.js',
 
     // member of game object
     'fadeplugin': './plugins/fade-plugin.js',
@@ -141,7 +142,7 @@ module.exports = {
     'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
     'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
     'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
-    'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',    
+    'glowfilterpipelineplugin': './plugins/glowfilterpipeline-plugin.js',
     'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
     'outlinepipelineplugin': './plugins/outlinepipeline-plugin.js',
     'dissolvepipelineplugin': './plugins/dissolvepipeline-plugin.js',
