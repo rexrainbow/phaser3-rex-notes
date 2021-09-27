@@ -40,6 +40,7 @@ class CursorKeys {
 
         if (key.isDown !== isDown) {
             FakeEvent.timeStamp = Date.now();
+            FakeEvent.keyCode = key.keyCode;
             if (isDown) {
                 key.onDown(FakeEvent);
             } else {
@@ -85,6 +86,7 @@ class CursorKeys {
 
 var FakeEvent = {
     timeStamp: 0,
+    keyCode: 0,
     altKey: false,
     ctrlKey: false,
     shiftKey: false,

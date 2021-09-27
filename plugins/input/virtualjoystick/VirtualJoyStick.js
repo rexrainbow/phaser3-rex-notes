@@ -41,6 +41,7 @@ class VirtualJoyStick {
         this.base.destroy(); // Also destroy touchCursor behavior
         this.thumb.destroy();
 
+        this.scene = undefined;
         this.base = undefined;
         this.thumb = undefined;
         this.touchCursor = undefined;
