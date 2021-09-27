@@ -66,10 +66,6 @@ class KeyHub extends Key {
             return;
         }
 
-        event = FakeEvent;
-        event.timeStamp = Date.now();
-        event.keyCode = this.keyCode;
-
         var isDown = false;
         for (var i = 0, cnt = this.ports.length; i < cnt; i++) {
             if (this.ports[i].isDown) {
@@ -79,6 +75,10 @@ class KeyHub extends Key {
         }
 
         if (this.isDown !== isDown) {
+            event = FakeEvent;
+            event.timeStamp = Date.now();
+            event.keyCode = this.keyCode;
+
             if (isDown) {
                 this.onDown(event);
             } else {
