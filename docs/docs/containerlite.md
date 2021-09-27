@@ -262,6 +262,18 @@ var children = container.children;
 
 - `children` : Array of child game objects.
 
+### Get parent
+
+```javascript
+var parentContainer = scene.plugins.get('rexContainerLitePlugin').getParent(child);
+```
+
+or
+
+```javascript
+var parentContainer = Container.GetParent(child); // Static method
+```
+
 ### Set properties of child
 
 #### Position

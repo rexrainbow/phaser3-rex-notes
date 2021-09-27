@@ -1,5 +1,6 @@
 import Base from './Base.js';
 import Methods from './Methods.js';
+import { GetParent } from './GetParent.js';
 
 class ContainerLite extends Base {
     constructor(scene, x, y, width, height, children) {
@@ -213,6 +214,10 @@ class ContainerLite extends Base {
     // Compatiable with container plugin
     get list() {
         return this.children;
+    }
+
+    static GetParent(child) {
+        return GetParent(child);
     }
 }
 

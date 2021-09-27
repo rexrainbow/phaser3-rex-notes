@@ -16,6 +16,10 @@ class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.on('destroy', this.destroy, this);
     }
+
+    getParent(child) {
+        return ContainerLite.GetParent(child);
+    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.ContainerLite', ContainerLite);
