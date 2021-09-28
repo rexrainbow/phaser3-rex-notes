@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6394,15 +6433,13 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="create-from-points">Create from points<a class="headerlink" href="#create-from-points" title="Permanent link">&para;</a></h4>
 <p>All of the given points are on or within its bounds.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">FromPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 <span class="c1">// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // push rect</span>
 </code></pre></div>
-
 <ul>
 <li><code>points</code> : an array with 4 points. <code>[x, y]</code>, or <code>{x:0, y:0}</code></li>
 </ul>
@@ -6410,11 +6447,9 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">FromXY</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
 <span class="c1">// var rect = Phaser.Geom.Rectangle.FromXY(x1, y1, x2, y2, rect);  // push rect</span>
 </code></pre></div>
-
 <h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rect1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">rect0</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fill shape
@@ -6443,16 +6478,16 @@
     <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// rect.x, rect.width</span>
-<span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// rect.y, rect.height</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>       <span class="c1">// rect.x, rect.width</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>        <span class="c1">// rect.y, rect.height</span>
 <span class="c1">// rect.right = 0;   // rect.x, rect.width</span>
 <span class="c1">// rect.bottom = 0;  // rect.y, rect.height</span>
-<span class="nx">rect</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">// rect.x</span>
-<span class="nx">rect</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c1">// rect.y</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>    <span class="c1">// rect.x</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>    <span class="c1">// rect.y</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Offset</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">);</span> <span class="c1">// rect.x += dx, rect.y += dy</span>
@@ -6468,8 +6503,8 @@
 <span class="c1">// rect.setSize(width);   // height = width</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">rect</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
 </code></pre></div><ul>
 <li>Scale
     <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Scale</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span> <span class="c1">// rect.width *= x, rect.height *= y;</span>

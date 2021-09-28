@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6284,41 +6323,32 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nb">Set</span><span class="p">();</span>
 </code></pre></div>
-
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">elements</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nb">Set</span><span class="p">(</span><span class="nx">elements</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="add-an-element">Add an element<a class="headerlink" href="#add-an-element" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="remove-an-element">Remove an element<a class="headerlink" href="#remove-an-element" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="remove-all-elements">Remove all elements<a class="headerlink" href="#remove-all-elements" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="has-element">Has element<a class="headerlink" href="#has-element" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">set</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="get-elements">Get elements<a class="headerlink" href="#get-elements" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">entries</span><span class="p">;</span>
 </code></pre></div>
-
 <p>or get a shallow copy of elements</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">getArray</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="element-counts">Element counts<a class="headerlink" href="#element-counts" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="for-each-element">For each element<a class="headerlink" href="#for-each-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>For when you know this Set will be modified during the iteration.

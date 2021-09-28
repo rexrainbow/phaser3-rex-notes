@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6377,11 +6416,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TCRPPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tcrp-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TCRPPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tcrp-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTCRP&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">TCRPPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6391,7 +6430,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTCRP&#39;</span><span class="p">).</span><span class="nx">addPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -6403,10 +6442,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TCRP</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tcrp.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TCRP</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tcrp.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TCRP</span><span class="p">.</span><span class="nx">Player</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">TCRP</span><span class="p">.</span><span class="nx">Player</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
@@ -6418,7 +6457,6 @@
     <span class="c1">// scope: undefined</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>timeUnit</code> : see <a href="./#load-commands">next section</a></li>
 <li><code>dtMode</code> : see <a href="./#load-commands">next section</a></li>
@@ -6431,7 +6469,6 @@
     <span class="c1">// dtMode: 0           // &#39;abs&#39;|&#39;absolute&#39;|0|&#39;inc&#39;|&#39;increment&#39;|1</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li>Commands : see also <a href="../runcommands/">Run commands</a>
     <div class="highlight"><pre><span></span><code><span class="p">[</span>
@@ -6466,7 +6503,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 <span class="c1">// player.start(startAt);  // Start-at time in ms</span>
 </code></pre></div>
-
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Complete
@@ -6481,17 +6517,14 @@
 <span class="nx">player</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 <span class="nx">player</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">player</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// Elapsed time in ms</span>
 </code></pre></div>
-
 <h3 id="state-of-player">State of player<a class="headerlink" href="#state-of-player" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">completed</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set

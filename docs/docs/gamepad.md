@@ -61,16 +61,7 @@ Gamepad's state of buttons, or axis.
 
 ### Gamepad
 
-#### Properties
-
-- `gamepad.index` : An integer that is unique for each Gamepad currently connected to the system.
-    This can be used to distinguish multiple controllers. 
-    Note that disconnecting a device and then connecting a new device may reuse the previous index.
-- `gamepad.id` : A string containing some information about the controller.
-- `gamepad.buttons` : An array of Gamepad Button objects, corresponding to the different buttons available on the Gamepad.
-- `gamepad.axes` : An array of Gamepad Axis objects, corresponding to the different axes available on the Gamepad, if any.
-
-#### State of buttons
+#### Buttons
 
 - Cursor buttons
     ```javascript
@@ -105,3 +96,12 @@ Gamepad's state of buttons, or axis.
         - Angle : `leftStick.angle()`
         - Length : `leftStick.length()`
         - x, y : `leftStick.x` , `leftStick.y`
+
+#### Properties
+
+- `gamepad.index` : An integer that is unique for each Gamepad currently connected to the system.
+    This can be used to distinguish multiple controllers. 
+    Note that disconnecting a device and then connecting a new device may reuse the previous index.
+- `gamepad.id` : A string containing some information about the controller.
+- `gamepad.buttons` : An array of Gamepad Button objects, corresponding to the different buttons available on the Gamepad.
+- `gamepad.axes` : An array of Gamepad Axis objects, corresponding to the different axes available on the Gamepad, if any.

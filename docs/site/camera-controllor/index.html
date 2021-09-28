@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6189,7 +6228,7 @@
 <ol>
 <li>Create controllor
     <div class="highlight"><pre><span></span><code><span class="c1">// var cursors = scene.input.keyboard.createCursorKeys();</span>
-<span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">SmoothedKeyControl</span><span class="p">({</span>
+<span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">SmoothedKeyControl</span><span class="p">({</span>
     <span class="nx">camera</span><span class="o">:</span> <span class="nx">camera</span><span class="p">,</span>
 
     <span class="nx">left</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>    <span class="c1">// { isDown, isUp }</span>
@@ -6201,7 +6240,7 @@
 
     <span class="nx">zoomSpeed</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="nx">minZoom</span><span class="o">:</span> <span class="mf">0.001</span><span class="p">,</span>
-    <span class="nx">maxZoom</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">maxZoom</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
 
     <span class="nx">acceleration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="c1">// acceleration: {</span>
@@ -6223,7 +6262,7 @@
 <span class="p">});</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">FixedKeyControl</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">FixedKeyControl</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Update
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{</span>

@@ -2975,11 +2975,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6274,28 +6313,22 @@
 <h3 id="create-canvas-texture">Create canvas texture<a class="headerlink" href="#create-canvas-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="get-canvas-element">Get canvas element<a class="headerlink" href="#get-canvas-element" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getContext</span><span class="p">();</span>
 </code></pre></div>
-
 <p><a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas api</a></p>
 <h3 id="draw-frame">Draw frame<a class="headerlink" href="#draw-frame" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">drawFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="refresh-texture">Refresh texture<a class="headerlink" href="#refresh-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
@@ -6324,7 +6357,6 @@
 <h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">sourceIndex</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>name</code> : The name of this Frame. The name is unique within the Texture.</li>
 <li><code>sourceIndex</code> : The index of the TextureSource that this Frame is a part of.</li>

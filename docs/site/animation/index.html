@@ -3051,11 +3051,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6428,17 +6467,17 @@
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">skipMissedFrames</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">defaultTextureKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">startFrame</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">startFrame</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="c1">// time</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">frameRate</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">timeScale</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">timeScale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
 
     <span class="c1">// repeat</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>              <span class="c1">// set to (-1) to repeat forever</span>
-    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>              <span class="c1">// set to (-1) to repeat forever</span>
+    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="c1">// visible</span>
@@ -6446,14 +6485,13 @@
     <span class="nx">hideOnComplete</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>frames</code> : An array of <code>{key, frame}</code><ul>
 <li>Properties
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">// string, or number</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div></li>
@@ -6465,10 +6503,10 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span>
 <span class="p">{</span>
     <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">end</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// outputArray: [], // Append frames into this array</span>
 <span class="p">});</span>
 </code></pre></div><ul>
@@ -6481,7 +6519,7 @@
 <span class="p">{</span>
     <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span> <span class="p">...</span> <span class="p">]</span>
     <span class="c1">// outputArray: [], // Append frames into this array</span>
 <span class="p">});</span>
@@ -6497,7 +6535,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">createFromAseprite</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// scene.anims.createFromAseprite(key, tags);</span>
 </code></pre></div>
-
 <ul>
 <li><code>key</code> : The key of the loaded Aseprite atlas.</li>
 <li><code>tags</code> :<ul>
@@ -6509,7 +6546,6 @@
 <h4 id="remove-animation">Remove animation<a class="headerlink" href="#remove-animation" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="delay-between-two-animations">Delay between two animations<a class="headerlink" href="#delay-between-two-animations" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add
@@ -6543,15 +6579,12 @@
 <h4 id="pause-all-animations">Pause all animations<a class="headerlink" href="#pause-all-animations" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">pauseAll</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="resume-all-animations">Resume all animations<a class="headerlink" href="#resume-all-animations" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">resumeAll</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="has-animation">Has animation<a class="headerlink" href="#has-animation" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasAnim</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="exportload">Export/load<a class="headerlink" href="#exportload" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Export JSON
@@ -6588,7 +6621,6 @@
 <h3 id="animation-object">Animation object<a class="headerlink" href="#animation-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Append frames
@@ -6631,7 +6663,7 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">anim</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">anim</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
                 

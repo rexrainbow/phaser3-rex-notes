@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6246,8 +6285,8 @@
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Import firestore
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">firebase</span> <span class="nx">from</span> <span class="s1">&#39;firebase/app&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="s1">&#39;firebase/storage&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">firebase</span> <span class="kr">from</span> <span class="s1">&#39;firebase/app&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;firebase/storage&#39;</span><span class="p">;</span>
 </code></pre></div>
     Firebase has been included in <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/package.json">package.json</a>.</li>
 <li>Initialize
@@ -6297,7 +6336,7 @@
 <li>Copy image to canvas
    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">CanvasPool</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
-<span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+<span class="nx">ctx</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Get blob from canvas, then upload this blob.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">uploadTask</span><span class="p">;</span>
@@ -6333,7 +6372,7 @@
     <div class="highlight"><pre><span></span><code><span class="nx">uploadTask</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;state_changed&#39;</span><span class="p">,</span> 
     <span class="kd">function</span><span class="p">(</span><span class="nx">snapshot</span><span class="p">){</span>
         <span class="c1">// Observe state change events such as progress, pause, and resume</span>
-        <span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="p">(</span><span class="nx">snapshot</span><span class="p">.</span><span class="nx">bytesTransferred</span> <span class="o">/</span> <span class="nx">snapshot</span><span class="p">.</span><span class="nx">totalBytes</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="p">(</span><span class="nx">snapshot</span><span class="p">.</span><span class="nx">bytesTransferred</span> <span class="o">/</span> <span class="nx">snapshot</span><span class="p">.</span><span class="nx">totalBytes</span><span class="p">)</span> <span class="o">*</span> <span class="mf">100</span><span class="p">;</span>
         <span class="k">switch</span> <span class="p">(</span><span class="nx">snapshot</span><span class="p">.</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">case</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">storage</span><span class="p">.</span><span class="nx">TaskState</span><span class="p">.</span><span class="nx">PAUSED</span><span class="o">:</span> <span class="c1">// or &#39;paused&#39;</span>
                 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Upload is paused&#39;</span><span class="p">);</span>
@@ -6382,7 +6421,7 @@
 </ol>
 <h3 id="delete-file">Delete file<a class="headerlink" href="#delete-file" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">fileRef</span> <span class="o">=</span> <span class="nx">storageRef</span><span class="p">.</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;path/to/filename&#39;</span><span class="p">);</span>
-<span class="nx">fileRef</span><span class="p">.</span><span class="k">delete</span><span class="p">()</span>
+<span class="nx">fileRef</span><span class="p">.</span><span class="ow">delete</span><span class="p">()</span>
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>

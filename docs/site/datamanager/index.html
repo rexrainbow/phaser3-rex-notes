@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6497,81 +6536,64 @@
 <h4 id="set-values">Set values<a class="headerlink" href="#set-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>    <span class="c1">// data: {key:value, ...}</span>
 </code></pre></div>
-
 <h4 id="merge-values">Merge values<a class="headerlink" href="#merge-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>  <span class="c1">// data: {key:value, ...}</span>
 <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>  <span class="c1">// won&#39;t overwrite existed keys</span>
 </code></pre></div>
-
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <p>Fires <code>setdata</code> event when a value is first set.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;setdata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <p>Fires <code>changedata</code>, and <code>changedata- + key</code> events when a value is set that already exists.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="read">Read<a class="headerlink" href="#read" title="Permanent link">&para;</a></h3>
 <h4 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="get-values">Get values<a class="headerlink" href="#get-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">keys</span><span class="p">);</span> <span class="c1">// values: [value, value, ...], keys: [key, key, ...]</span>
 </code></pre></div>
-
 <h4 id="get-all-values">Get all values<a class="headerlink" href="#get-all-values" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">allValues</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>  <span class="c1">// return a copy of data</span>
 </code></pre></div>
-
 <h4 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h4>
 <p>Using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">string.match()</a> to pick matched keys.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">rgExp</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h3>
 <h4 id="remove-key">Remove key<a class="headerlink" href="#remove-key" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="remove-keys">Remove keys<a class="headerlink" href="#remove-keys" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">keys</span><span class="p">);</span>  <span class="c1">// keys: [key, key, ...]</span>
 </code></pre></div>
-
 <h4 id="pop-key">Pop key<a class="headerlink" href="#pop-key" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Get and remove that key.</p>
 <h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
 <p>Fires <code>removedata</code> event when a key is removed.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="freeze">Freeze<a class="headerlink" href="#freeze" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isFrozen</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">freeze</span><span class="p">;</span>
 <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">freeze</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </code></pre></div>
-
 <p>No changes can be written to it.</p>
 <h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="for-each-key">For each key<a class="headerlink" href="#for-each-key" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
     <span class="cm">/* ... */</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="count-of-data">Count of data<a class="headerlink" href="#count-of-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="reset">Reset<a class="headerlink" href="#reset" title="Permanent link">&para;</a></h3>
 <p>Reset status and clear all keys.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">reset</span><span class="p">()</span>

@@ -3060,11 +3060,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6442,13 +6481,11 @@
 <h3 id="load-video">Load video<a class="headerlink" href="#load-video" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Reference: <a href="../loader/#video">load video</a></p>
 <h3 id="add-video-object">Add video object<a class="headerlink" href="#add-video-object" title="Permanent link">&para;</a></h3>
 <h4 id="reference-video-from-video-cache">Reference video from Video Cache<a class="headerlink" href="#reference-video-from-video-cache" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>key</code> : Key of the Video this Game Object will play, as stored in the Video Cache.</li>
 </ul>
@@ -6485,7 +6522,6 @@ Video game object with the same <em>key</em> will reference the same video eleme
 <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 <span class="c1">// video.play(loop, markerIn, markerOut);</span>
 </code></pre></div>
-
 <ul>
 <li><code>loop</code> : Should the video loop automatically when it reaches the end? <strong>Not all browsers support <em>seamless</em> video looping for all encoding formats</strong>.</li>
 <li><code>markerIn</code>, <code>markerOut</code> : Optional in/out marker time, in <em>seconds</em>, for playback of a sequence of the video.</li>
@@ -6512,7 +6548,6 @@ Video game object with the same <em>key</em> will reference the same video eleme
 <p>Stops the video playing and clears all internal event listeners.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">video</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="is-playing">Is playing<a class="headerlink" href="#is-playing" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is playing
@@ -6565,7 +6600,6 @@ Video game object with the same <em>key</em> will reference the same video eleme
 <h3 id="duration">Duration<a class="headerlink" href="#duration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">getDuration</span><span class="p">();</span>  <span class="c1">// time in seconds</span>
 </code></pre></div>
-
 <h3 id="volume">Volume<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -6657,7 +6691,6 @@ Video game object with the same <em>key</em> will reference the same video eleme
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">saveTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var texture = video.saveTexture(key, flipY);</span>
 </code></pre></div>
-
 <ul>
 <li><code>flipY</code> : Set to <code>true</code> if use it as the input for a Shader.</li>
 </ul>

@@ -3052,11 +3052,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6426,17 +6465,15 @@
 <h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Reference: <a href="../loader/#image">load image</a></p>
 <h3 id="add-blitter-container">Add blitter container<a class="headerlink" href="#add-blitter-container" title="Permanent link">&para;</a></h3>
 <p>Add blitter container</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">blitter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">blitter</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Add blitter container from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">blitter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">blitter</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 
     <span class="c1">// angle: 0,</span>
@@ -6448,13 +6485,12 @@
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyBlitter</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Blitter</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyBlitter</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Blitter</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6471,14 +6507,13 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">blitter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyBlitter</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">blitter</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyBlitter</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="add-bob-object">Add bob object<a class="headerlink" href="#add-bob-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var bob = blitter.create(x, y, frame, visible, index);</span>
 </code></pre></div>
-
 <ul>
 <li>frame : The Frame the Bob will use. It must be part of the Texture the parent Blitter object is using.</li>
 <li>visible : Should the created Bob render or not?</li>
@@ -6487,7 +6522,6 @@
 <h4 id="add-mutiple-bob-objects">Add mutiple bob objects<a class="headerlink" href="#add-mutiple-bob-objects" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">createMultiple</span><span class="p">(</span><span class="nx">quantity</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li>quantity : The quantity of Bob objects to create.</li>
 </ul>
@@ -6495,15 +6529,12 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">createFromCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">)</span>
 <span class="c1">// var callback = function(bob, i){};</span>
 </code></pre></div>
-
 <h3 id="get-bob-objects">Get bob objects<a class="headerlink" href="#get-bob-objects" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">list</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="clear-all-bob-objects">Clear all bob objects<a class="headerlink" href="#clear-all-bob-objects" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">blitter</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="bob-object">Bob object<a class="headerlink" href="#bob-object" title="Permanent link">&para;</a></h3>
 <p>A Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.</p>
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
@@ -6587,7 +6618,6 @@
 <h4 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">bob</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>  <span class="c1">// {}</span>
 </code></pre></div>

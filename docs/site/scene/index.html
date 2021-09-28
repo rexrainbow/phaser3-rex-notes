@@ -2981,11 +2981,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6292,7 +6331,6 @@
     <span class="c1">// input: {}</span>
 <span class="p">};</span>
 </code></pre></div>
-
 <ul>
 <li><code>key</code> : The unique key of this Scene. Must be unique within the entire Game instance.</li>
 <li><code>active</code> : Does the Scene start as active or not? An active Scene updates each step.</li>
@@ -6301,14 +6339,14 @@
 <li><code>cameras</code> : An optional <a href="../camera/#create-cameras-from-json">Camera configuration object</a>.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
-    <span class="nx">zoom</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">rotation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">scrollX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">scrollY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">zoom</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">scrollX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">scrollY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">roundPixels</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -6332,18 +6370,18 @@
     <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">enableParallel</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
     <span class="nx">crossOrigin</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="k">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mf">0</span>
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>plugins</code> : The plugin configuration object for the Scene.
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="nx">global</span><span class="o">:</span> <span class="p">[</span>
+    <span class="nb">global</span><span class="o">:</span> <span class="p">[</span>
         <span class="c1">//{key, plugin, start}</span>
     <span class="p">],</span>
     <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
@@ -6360,22 +6398,22 @@
         <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">},</span>
-    <span class="nx">activePointers</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">activePointers</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
         <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
     <span class="p">},</span>
-    <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">gamepad</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">windowEvents</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
 <h3 id="es6-class">ES6 class<a class="headerlink" href="#es6-class" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyScene</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyScene</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
 
-    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+    <span class="kr">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="nx">init</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
@@ -6385,12 +6423,11 @@
 
 <span class="p">}</span>
 </code></pre></div>
-
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#start-scene">starting scene</a></li>
 </ul>
 <h3 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">MyScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">MyScene</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
 
     <span class="nx">Extends</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">,</span>
 
@@ -6407,7 +6444,6 @@
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#start-scene">starting scene</a></li>
 </ul>
@@ -6417,7 +6453,7 @@
 <span class="p">{</span>
 <span class="p">};</span>
 
-<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">;</span>
+<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">constructor</span> <span class="o">=</span> <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">;</span>
 
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
@@ -6426,19 +6462,17 @@
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">};</span>
 </code></pre></div>
-
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#start-scene">starting scene</a></li>
 </ul>
 <h3 id="override">Override<a class="headerlink" href="#override" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span>
 
 <span class="nx">demo</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
 <span class="nx">demo</span><span class="p">.</span><span class="nx">preload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
 <span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
 <span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){};</span>
 </code></pre></div>
-
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#start-scene">starting scene</a></li>
 </ul>
@@ -6480,7 +6514,6 @@ Pause --&gt; |"scene.scene.stop()&lt;br&gt;scene.scene.restart()"|SceneEventDest
 SceneEventDestroy --&gt; Stop
 
 Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.scene.restart()"|SceneEventStart</code></pre>
-
 <ul>
 <li><code>Run</code> : Update and render</li>
 <li><code>Pause</code> : Render but no update</li>
@@ -6502,7 +6535,6 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All game objects will be destroyed.<ul>

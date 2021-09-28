@@ -3045,11 +3045,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6430,20 +6469,20 @@
     <span class="c1">// image</span>
     <span class="nx">image</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">offset</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
     <span class="c1">// characters</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="nx">chars</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">charsPerRow</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">charsPerRow</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
     <span class="c1">// spacing</span>
     <span class="nx">spacing</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
-    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mf">0</span>
 <span class="p">}</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">RetroFont</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">));</span>
 </code></pre></div><ul>
@@ -6476,7 +6515,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">bitmapText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
 <span class="c1">// var txt = scene.bitmapText(x, y, key, text, size, align);</span>
 </code></pre></div>
-
 <ul>
 <li><code>size</code> : The size of the font</li>
 <li><code>align</code> : The alignment of the text in a <em>multi-line</em> BitmapText object.<ul>
@@ -6488,23 +6526,22 @@
 </ul>
 <p>Add text from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">bitmapText</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Text\nGame Object\nCreated from config&#39;</span><span class="p">,</span>
     <span class="nx">font</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">size</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">align</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">align</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// origin: {x: 0.5, y: 0.5},</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyText</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6521,17 +6558,15 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="set-text">Set text<a class="headerlink" href="#set-text" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="set-align">Set align<a class="headerlink" href="#set-align" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Left aligned
@@ -6547,7 +6582,6 @@
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">align</span> <span class="o">=</span> <span class="nx">align</span><span class="p">;</span>
 </code></pre></div>
-
 <ul>
 <li><code>align</code> :<ul>
 <li><code>0</code> : Left aligned (default)</li>
@@ -6559,25 +6593,20 @@
 <h3 id="set-letter-spacing">Set letter spacing<a class="headerlink" href="#set-letter-spacing" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setLetterSpacing</span><span class="p">(</span><span class="nx">spacing</span><span class="p">);</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">letterSpacing</span> <span class="o">=</span> <span class="nx">spacing</span><span class="p">;</span>
 </code></pre></div>
-
 <p>Can be a positive value to increase the space, or negative to reduce it.</p>
 <h3 id="set-font-size">Set font size<a class="headerlink" href="#set-font-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFontSize</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nx">size</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="set-font">Set font<a class="headerlink" href="#set-font" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setFont</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// txt.setFont(key, size, align);</span>
 </code></pre></div>
-
 <h3 id="color-of-characters">Color of characters<a class="headerlink" href="#color-of-characters" title="Permanent link">&para;</a></h3>
 <ul>
 <li>By character
@@ -6625,14 +6654,12 @@
 <h3 id="drop-shadow-effect">Drop shadow effect<a class="headerlink" href="#drop-shadow-effect" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setDropShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">dropShadowX</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">dropShadowY</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">dropShadowColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">dropShadowAlpha</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">;</span>
 </code></pre></div>
-
 <ul>
 <li><code>x</code>, <code>y</code> : The horizontal/vertical offset of the drop shadow.</li>
 <li><code>color</code> : The color of the drop shadow.</li>
@@ -6649,14 +6676,13 @@
 </ul>
 </li>
 <li>Disable wrapping
-    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setMaxWidth</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">txt</span><span class="p">.</span><span class="nx">setMaxWidth</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="get-bound">Get bound<a class="headerlink" href="#get-bound" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getTextBounds</span><span class="p">(</span><span class="nx">round</span><span class="p">);</span>
 <span class="c1">// bounds = {</span>
@@ -6685,7 +6711,6 @@
 <span class="c1">//     scaleY: 0</span>
 <span class="c1">// };</span>
 </code></pre></div>
-
 <ul>
 <li><code>round</code> : Set <code>true</code> to round the results to the nearest integer.</li>
 <li><code>local</code> : The BitmapText based on fontSize and 0x0 coords.</li>
@@ -6726,7 +6751,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getCharacterAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var data = txt.getCharacterAt(x, y, camera);</span>
 </code></pre></div>
-
 <ul>
 <li><code>x</code>, <code>y</code> : World position.</li>
 <li><code>camera</code> : The Camera which is being tested against.</li>

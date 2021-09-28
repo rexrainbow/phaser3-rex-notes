@@ -3154,11 +3154,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6631,7 +6670,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imag</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 <span class="c1">// var image = scene.matter.add.imag(x, y, key, frame, config);</span>
 </code></pre></div>
-
 <ul>
 <li><code>config</code> : <a href="./#config">Config object</a></li>
 </ul>
@@ -6639,7 +6677,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 <span class="c1">// var image = scene.matter.add.sprite(x, y, key, frame, config);</span>
 </code></pre></div>
-
 <ul>
 <li><code>config</code> : <a href="./#config">Config object</a></li>
 </ul>
@@ -6647,7 +6684,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gameObject</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// var gameObject = scene.matter.add.gameObject(gameObject, config);</span>
 </code></pre></div>
-
 <ul>
 <li><code>config</code> : <a href="./#config">Config object</a></li>
 </ul>
@@ -6656,7 +6692,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">composite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imageStack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">);</span>
 <span class="c1">// var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows, columnGap, rowGap, options);</span>
 </code></pre></div>
-
 <ul>
 <li><code>key</code>, <code>frame</code> : Texture key and frame name.</li>
 <li><code>x</code>, <code>y</code> : Top-left position of these game objects.</li>
@@ -6680,19 +6715,19 @@
     <span class="nx">ignoreGravity</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">ignorePointer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
-    <span class="nx">sleepThreshold</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="nx">sleepThreshold</span><span class="o">:</span> <span class="mf">60</span><span class="p">,</span>
     <span class="nx">density</span><span class="o">:</span> <span class="mf">0.001</span><span class="p">,</span>
-    <span class="nx">restitution</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">restitution</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">friction</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="nx">frictionStatic</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span>
     <span class="nx">frictionAir</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
 
-    <span class="nx">force</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span> <span class="p">},</span>
-    <span class="nx">angle</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">torque</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">force</span><span class="o">:</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span> <span class="p">},</span>
+    <span class="nx">angle</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">torque</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="nx">collisionFilter</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">group</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">group</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">category</span><span class="o">:</span> <span class="mh">0x0001</span><span class="p">,</span>
         <span class="nx">mask</span><span class="o">:</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
     <span class="p">},</span>
@@ -6707,10 +6742,9 @@
 
     <span class="nx">slop</span><span class="o">:</span> <span class="mf">0.05</span><span class="p">,</span>
 
-    <span class="nx">timeScale</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">timeScale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <ul>
 <li><code>label</code> : An arbitrary <code>String</code> name to help the user identify and manage bodies.</li>
 <li><code>shape</code> : <ul>
@@ -6825,13 +6859,10 @@
 <h4 id="velocity">Velocity<a class="headerlink" href="#velocity" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocityX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocityY</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="acceleration">Acceleration<a class="headerlink" href="#acceleration" title="Permanent link">&para;</a></h4>
 <h5 id="force">Force<a class="headerlink" href="#force" title="Permanent link">&para;</a></h5>
 <ul>
@@ -6891,22 +6922,17 @@
 <h5 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFriction</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">air</span><span class="p">,</span> <span class="nx">fstatic</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrictionAir</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrictionStatic</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h3>
 <h4 id="fixed-rotation">Fixed rotation<a class="headerlink" href="#fixed-rotation" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFixedRotation</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="angular-velocity">Angular velocity<a class="headerlink" href="#angular-velocity" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAngularVelocity</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="collision_1">Collision<a class="headerlink" href="#collision_1" title="Permanent link">&para;</a></h3>
 <h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
 <ul>
@@ -6947,7 +6973,6 @@
     <span class="c1">// var pairs = event.pairs;</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>event</code> : <ul>
 <li><code>event.pairs</code> : An array of collision pairs<ul>
@@ -7014,17 +7039,14 @@
 <h4 id="bounce">Bounce<a class="headerlink" href="#bounce" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setBounce</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li>restitution</li>
 </ul>
 <h3 id="mass">Mass<a class="headerlink" href="#mass" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setMass</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDensity</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="sleep">Sleep<a class="headerlink" href="#sleep" title="Permanent link">&para;</a></h3>
 <h4 id="enable_1">Enable<a class="headerlink" href="#enable_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
@@ -7039,11 +7061,9 @@
 
 <span class="p">}</span>
 </code></pre></div>
-
 <h4 id="sleep-threshold">Sleep threshold<a class="headerlink" href="#sleep-threshold" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setSleepThreshold</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="sleep-events">Sleep events<a class="headerlink" href="#sleep-events" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Sleeping start

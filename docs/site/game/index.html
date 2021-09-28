@@ -2974,11 +2974,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6267,8 +6306,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1024</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">768</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
@@ -6276,16 +6315,15 @@
 
     <span class="nx">scene</span><span class="o">:</span> <span class="kc">null</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <p><a href="https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig">Reference</a></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="s1">&#39;phaser-example&#39;</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
@@ -6297,13 +6335,12 @@
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="mh">0x333333</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <p>or</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NONE</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NO_CENTER</span>
@@ -6333,18 +6370,18 @@
             <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
-        <span class="nx">activePointers</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">activePointers</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
         <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
             <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
-        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">gamepad</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">windowEvents</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="nx">disableContextMenu</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
-    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="nx">render</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">antialias</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -6358,9 +6395,9 @@
         <span class="nx">premultipliedAlpha</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">failIfMajorPerformanceCaveat</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">powerPreference</span><span class="o">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="c1">// &#39;high-performance&#39;, &#39;low-power&#39; or &#39;default&#39;</span>
-        <span class="nx">batchSize</span><span class="o">:</span> <span class="mi">4096</span><span class="p">,</span>
-        <span class="nx">maxLights</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">maxTextures</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="nx">batchSize</span><span class="o">:</span> <span class="mf">4096</span><span class="p">,</span>
+        <span class="nx">maxLights</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+        <span class="nx">maxTextures</span><span class="o">:</span> <span class="o">-</span><span class="mf">1</span><span class="p">,</span>
         <span class="nx">mipmapFilter</span><span class="o">:</span> <span class="s1">&#39;LINEAR&#39;</span><span class="p">,</span> <span class="c1">// &#39;NEAREST&#39;, &#39;LINEAR&#39;, &#39;NEAREST_MIPMAP_NEAREST&#39;, &#39;LINEAR_MIPMAP_NEAREST&#39;, &#39;NEAREST_MIPMAP_LINEAR&#39;, &#39;LINEAR_MIPMAP_LINEAR&#39;</span>
         <span class="nx">pipeline</span><span class="o">:</span><span class="p">[]</span>
     <span class="p">},</span>
@@ -6373,13 +6410,13 @@
         <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="nx">enableParallel</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-        <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
         <span class="nx">crossOrigin</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="k">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
         <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-        <span class="nx">timeout</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">timeout</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">},</span>
 
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
@@ -6393,7 +6430,7 @@
     <span class="p">},</span>
 
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[</span>
             <span class="c1">//{key, plugin, start}</span>
         <span class="p">],</span>
         <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
@@ -6404,10 +6441,10 @@
     <span class="nx">pipeline</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="o">:</span><span class="nx">PipelineClass</span> <span class="p">},</span>
 
     <span class="nx">fps</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">min</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">target</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="nx">min</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="mf">60</span><span class="p">,</span>
         <span class="nx">forceSetTimeOut</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">deltaHistory</span><span class="o">:</span> <span class="mi">10</span>
+        <span class="nx">deltaHistory</span><span class="o">:</span> <span class="mf">10</span>
     <span class="p">},</span>
 
     <span class="nx">disableContextMenu</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -6424,12 +6461,10 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <h2 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">game</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 <span class="c1">// game.destroy(removeCanvas, noReturn);</span>
 </code></pre></div>
-
 <ul>
 <li><code>removeCanvas</code> : Set to <code>true</code> if you would like the parent canvas element removed from the DOM, or <code>false</code> to leave it in place.</li>
 <li><code>noReturn</code> : If <code>true</code> all the core Phaser plugins are destroyed. You cannot create another instance of Phaser on the same web page if you do this.</li>

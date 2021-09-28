@@ -2933,11 +2933,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6196,7 +6235,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setDefaultCursor</span><span class="p">(</span><span class="nx">CSSString</span><span class="p">);</span>
 <span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
 </code></pre></div>
-
 <h3 id="set-cursor-of-a-game-object">Set cursor of a Game Object<a class="headerlink" href="#set-cursor-of-a-game-object" title="Permanent link">&para;</a></h3>
 <p>Change cursor image when cursor is over that Game Object.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
@@ -6204,12 +6242,10 @@
 <span class="p">});</span>
 <span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
 </code></pre></div>
-
 <p>Set cursor image directly after <code>gameObject.setInteractive()</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="nx">CSSString</span><span class="p">;</span>
 <span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
 </code></pre></div>
-
 <p>Use pointer (hand cursor).</p>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
     <span class="nx">useHandCursor</span><span class="o">:</span> <span class="kc">true</span>

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6408,7 +6447,7 @@
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="c1">// alpha: &#39;+=1&#39;,</span>
     <span class="c1">// alpha: { from: 0, to: 1 },</span>
     <span class="c1">// alpha: { start: 0, to: 1 },  </span>
@@ -6420,12 +6459,11 @@
     <span class="c1">//      getEnd: function (target, key, value, targetIndex, totalTargets, tween) { return newValue; }</span>
     <span class="c1">// },</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>key: value2</code> : Tween to <code>value2</code>.</li>
 <li><code>key: '+=deltaValue'</code> : Tween to current value + deltaValue<ul>
@@ -6468,10 +6506,10 @@
     <span class="nx">onStartParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// initial delay</span>
-    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
 
     <span class="c1">// tween duration</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>
     <span class="nx">easeParams</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
@@ -6481,7 +6519,7 @@
     <span class="nx">onUpdateParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// delay between tween and yoyo</span>
-    <span class="nx">hold</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
+    <span class="nx">hold</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>  <span class="c1">// true to tween backward</span>
     <span class="nx">flipX</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">flipY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -6490,23 +6528,23 @@
     <span class="nx">onYoyoParams</span><span class="o">:</span> <span class="p">[],</span>
 
     <span class="c1">// repeat count (-1: infinite)</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
     <span class="nx">onRepeat</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onRepeatScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onRepeatParams</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// delay to next pass</span>
-    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
+    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>  <span class="c1">// function(target, targetKey, value, targetIndex, totalTargets, tween) { },</span>
 
     <span class="c1">// loop count (-1: infinite)</span>
-    <span class="nx">loop</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">onLoop</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onLoopScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onLoopParams</span><span class="o">:</span> <span class="p">[],</span>
     <span class="c1">// delay to next loop</span>
-    <span class="nx">loopDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">loopDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
 
     <span class="c1">// delay to onComplete callback</span>
-    <span class="nx">completeDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">completeDelay</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onCompleteScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onCompleteParams</span><span class="o">:</span> <span class="p">[],</span>
@@ -6514,7 +6552,7 @@
 
     <span class="c1">// properties:</span>
     <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;+=600&#39;</span><span class="p">,</span>        <span class="c1">// start from current value</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>
     <span class="nx">rotation</span><span class="o">:</span> <span class="p">...</span>
     <span class="nx">angle</span><span class="o">:</span> <span class="p">...</span>
     <span class="nx">alpha</span><span class="o">:</span> <span class="p">...</span>
@@ -6522,16 +6560,16 @@
 
     <span class="c1">// or</span>
     <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;+=600&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Power2&#39;</span> <span class="p">},</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;500&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mi">1500</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Bounce.easeOut&#39;</span> <span class="p">}</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;+=600&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mf">3000</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Power2&#39;</span> <span class="p">},</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;500&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mf">1500</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Bounce.easeOut&#39;</span> <span class="p">}</span>
     <span class="p">},</span>
 
     <span class="c1">// or</span>
     <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">duration</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+            <span class="nx">duration</span><span class="o">:</span> <span class="mf">400</span><span class="p">,</span>
             <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="nx">repeat</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="nx">repeat</span><span class="o">:</span> <span class="mf">8</span><span class="p">,</span>
             <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Sine.easeInOut&#39;</span><span class="p">,</span>
             <span class="nx">value</span><span class="o">:</span> <span class="p">{</span>
                 <span class="nx">getActive</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span>
@@ -6540,11 +6578,11 @@
                 <span class="p">},</span>
                 <span class="nx">getStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span>
                 <span class="p">{</span>
-                    <span class="k">return</span> <span class="nx">value</span> <span class="o">+</span> <span class="mi">30</span><span class="p">;</span>
+                    <span class="k">return</span> <span class="nx">value</span> <span class="o">+</span> <span class="mf">30</span><span class="p">;</span>
                 <span class="p">},</span>
                 <span class="nx">getEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">targetIndex</span><span class="p">,</span> <span class="nx">totalTargets</span><span class="p">,</span> <span class="nx">tween</span><span class="p">)</span>
                 <span class="p">{</span>
-                    <span class="nx">destX</span> <span class="o">-=</span> <span class="mi">30</span><span class="p">;</span>
+                    <span class="nx">destX</span> <span class="o">-=</span> <span class="mf">30</span><span class="p">;</span>
                     <span class="k">return</span> <span class="nx">destX</span><span class="p">;</span>
                 <span class="p">}</span>
             <span class="p">}</span>
@@ -6556,7 +6594,6 @@
     <span class="nx">useFrames</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>targets</code> : The targets the tween is updating.</li>
 <li><code>delay</code> : The time the tween will wait before it first starts<ul>
@@ -6746,32 +6783,25 @@
 <h3 id="pause-resume-task">Pause / Resume task<a class="headerlink" href="#pause-resume-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="stop-task">Stop task<a class="headerlink" href="#stop-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="play-task">Play task<a class="headerlink" href="#play-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="restart-task">Restart task<a class="headerlink" href="#restart-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="remove-task">Remove task<a class="headerlink" href="#remove-task" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="get-tweens">Get tweens<a class="headerlink" href="#get-tweens" title="Permanent link">&para;</a></h3>
 <p>Returns an array of all Tweens or Timelines in the Tween Manager which affect the given target or array of targets.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tweens</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">getTweensOf</span><span class="p">(</span><span class="nx">target</span><span class="p">);</span>
 <span class="c1">// var tweens = scene.tweens.getTweensOf(target, includePending);</span>
 </code></pre></div>
-
 <ul>
 <li><code>tweens</code> : Array of tweens, or timelines.</li>
 <li><code>includePending</code> : Set <code>true</code> to search pending tweens.</li>
@@ -6780,18 +6810,14 @@
 <div class="highlight"><pre><span></span><code><span class="nx">tween</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 <span class="c1">// tween.timeScale = timescale;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getTimeScale</span><span class="p">();</span>
 <span class="c1">// var timeScale = tween.timeScale;</span>
 </code></pre></div>
-
 <h4 id="global-time-scale">Global time-scale<a class="headerlink" href="#global-time-scale" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timescale</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Tween becomes active within the Tween Manager.
@@ -6858,18 +6884,18 @@
 <ol>
 <li>Create tween task
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="kr">from</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
-    <span class="nx">from</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">to</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="kr">from</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">to</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
 </code></pre></div></li>
@@ -6887,7 +6913,6 @@
     <span class="c1">// ...</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TB
 
@@ -6918,7 +6943,6 @@ LoopDelay --&gt; DurationForward
 IsLoop --&gt; |No| CompleteDelay
 CompleteDelay["completeDelay"] --&gt; CallbackOnComplete&gt;"Callback: onComplete"]
 CallbackOnComplete --&gt; End((End))</code></pre>
-
 <h3 id="tween-data">Tween data<a class="headerlink" href="#tween-data" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>tween.data</code> : An array of TweenData objects, each containing a unique property and target being tweened.<ul>

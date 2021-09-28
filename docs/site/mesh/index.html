@@ -3014,11 +3014,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6363,8 +6402,8 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">mesh</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
     <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -6395,10 +6434,10 @@
     <span class="nx">mesh</span><span class="o">:</span> <span class="nx">mesh</span><span class="p">,</span>
     <span class="nx">texture</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="nx">frameName</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">widthSegments</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">heightSegments</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">widthSegments</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">heightSegments</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
 
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
@@ -6444,8 +6483,8 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">mesh</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div></li>
@@ -6467,9 +6506,9 @@
 <h3 id="custom-mesh-class">Custom mesh class<a class="headerlink" href="#custom-mesh-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyMesh</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">mesh</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyMesh</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">mesh</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">vertices</span><span class="p">,</span> <span class="nx">uvs</span><span class="p">,</span> <span class="nx">indicies</span><span class="p">,</span> <span class="nx">containsZ</span><span class="p">,</span> <span class="nx">normals</span><span class="p">,</span> <span class="nx">colors</span><span class="p">,</span> <span class="nx">alphas</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6488,7 +6527,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMesh</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mesh</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyMesh</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
@@ -6548,7 +6587,6 @@
 <p>Mesh is composed of triangle faces.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">faces</span> <span class="o">=</span> <span class="nx">mesh</span><span class="p">.</span><span class="nx">faces</span><span class="p">;</span>
 </code></pre></div>
-
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Alpha<ul>
@@ -6606,7 +6644,7 @@
 </code></pre></div></li>
 <li>Update <a href="../graphics/">Graphics</a> in <code>scene.update()</code> method.
     <div class="highlight"><pre><span></span><code><span class="nx">debugGraphics</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-<span class="nx">debugGraphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0x00ff00</span><span class="p">);</span>
+<span class="nx">debugGraphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span> <span class="mh">0x00ff00</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
                 

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6327,11 +6366,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">ConditionsTablePlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/conditionstable-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ConditionsTablePlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/conditionstable-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexConditionsTable&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ConditionsTablePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6341,7 +6380,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add conditions-table object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">conditionstable</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexConditionsTable&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
@@ -6353,22 +6392,20 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">ConditionsTable</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/conditionstable.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">ConditionsTable</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/conditionstable.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add conditions-table object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">conditionstable</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ConditionsTable</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">conditionstable</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">ConditionsTable</span><span class="p">();</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexConditionsTable&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="load-table-from-csv-string">Load table from csv string<a class="headerlink" href="#load-table-from-csv-string" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">loadCSV</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// delimiter: &#39;,&#39;</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <p>For exameple, csv string</p>
 <table>
 <thead>
@@ -6394,21 +6431,18 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><span class="err">,A,A,B</span>
-<span class="err">Test1,&gt;= 10,&lt;= 20,</span>
-<span class="err">Test2,,,3</span>
+<div class="highlight"><pre><span></span><code>,A,A,B
+Test1,&gt;= 10,&lt;= 20,
+Test2,,,3
 </code></pre></div>
-
 <p>means that:</p>
-<div class="highlight"><pre><span></span><code><span class="err">Test1: (A&gt;=10) &amp;&amp; (A&lt;=20)</span>
-<span class="err">Test2: (B==3)</span>
+<div class="highlight"><pre><span></span><code>Test1: (A&gt;=10) &amp;&amp; (A&lt;=20)
+Test2: (B==3)
 </code></pre></div>
-
 <h3 id="test">Test<a class="headerlink" href="#test" title="Permanent link">&para;</a></h3>
 <h4 id="get-test-results">Get test results<a class="headerlink" href="#get-test-results" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getTestResults</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>values</code> : Inputs in Key-value pairs</li>
 <li><code>results</code> : <code>{name: boolean}</code>, use OR operation to combine result of tests with the same name.</li>
@@ -6416,7 +6450,6 @@
 <h4 id="get-first-pass-test-name">Get first pass test name<a class="headerlink" href="#get-first-pass-test-name" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">testName</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">anyPassTest</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>values</code> : Inputs in Key-value pairs</li>
 </ul>

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6312,18 +6351,15 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">point0</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1">// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPointShape</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All properties
@@ -6333,8 +6369,8 @@
     <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">CopyFrom</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">dest</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Position
-    <div class="highlight"><pre><span></span><code><span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">point</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+<span class="nx">point</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Round<ul>
 <li>Ceil : Apply <code>Math.ceil()</code> to each coordinate of the given Point
@@ -6369,7 +6405,6 @@
 <h3 id="equal">Equal<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">point0</span><span class="p">,</span> <span class="nx">point1</span><span class="p">);</span>
 </code></pre></div>
-
 <p>x, y are equal.</p>
 <h3 id="points">Points<a class="headerlink" href="#points" title="Permanent link">&para;</a></h3>
 <ul>
@@ -6405,11 +6440,11 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">magnitudeSq</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">GetMagnitudeSq</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Project
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">Project</span><span class="p">(</span><span class="nx">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">Project</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>
 <span class="c1">// var out = Phaser.Geom.Point.Project(from, to, out);  // modify out</span>
 </code></pre></div>
     or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">ProjectUnit</span><span class="p">(</span><span class="nx">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>  <span class="c1">// vector `from` and `to` are unit vector (length = 1)</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Point</span><span class="p">.</span><span class="nx">ProjectUnit</span><span class="p">(</span><span class="kr">from</span><span class="p">,</span> <span class="nx">to</span><span class="p">);</span>  <span class="c1">// vector `from` and `to` are unit vector (length = 1)</span>
 <span class="c1">// var out = Phaser.Geom.Point.ProjectUnit(from, to, out);  // modify out</span>
 </code></pre></div></li>
 </ul>

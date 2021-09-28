@@ -3111,11 +3111,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6670,7 +6709,7 @@
     <span class="nx">useHandCursor</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">cursor</span><span class="o">:</span> <span class="nx">CSSString</span><span class="p">,</span>
     <span class="nx">pixelPerfect</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">alphaTolerance</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">alphaTolerance</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">});</span>
 </code></pre></div><ul>
 <li>Hit area<ul>
@@ -6806,20 +6845,17 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>dropped</code> : <code>'dragend'</code> and also <code>'drop'</code>.</li>
 </ul>
 <h4 id="dragging-properties">Dragging properties<a class="headerlink" href="#dragging-properties" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragDistanceThreshold</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragTimeThreshold</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragDistanceThreshold</span> <span class="o">=</span> <span class="mf">16</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragTimeThreshold</span> <span class="o">=</span> <span class="mf">500</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="drop-zone">Drop zone<a class="headerlink" href="#drop-zone" title="Permanent link">&para;</a></h3>
 <h4 id="enable-drop-zone">Enable drop zone<a class="headerlink" href="#enable-drop-zone" title="Permanent link">&para;</a></h4>
 <ul>
@@ -6833,7 +6869,6 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <h4 id="disable-drop-zone">Disable drop zone<a class="headerlink" href="#disable-drop-zone" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dropZone</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </code></pre></div>
-
 <h4 id="dropping-events">Dropping events<a class="headerlink" href="#dropping-events" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 
@@ -6841,36 +6876,31 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragenter&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </code></pre></div>
-
 <h3 id="single-touch">Single touch<a class="headerlink" href="#single-touch" title="Permanent link">&para;</a></h3>
 <h4 id="pointer">Pointer<a class="headerlink" href="#pointer" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">activePointer</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="multi-touch">Multi-touch<a class="headerlink" href="#multi-touch" title="Permanent link">&para;</a></h3>
 <h4 id="amount-of-active-pointers">Amount of active pointers<a class="headerlink" href="#amount-of-active-pointers" title="Permanent link">&para;</a></h4>
 <p>Set amount of active pointers in game configuration</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">activePointers</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">activePointers</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Or add pointers in run-time.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">addPointer</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>  <span class="c1">// total points = num + 1</span>
 </code></pre></div>
-
 <h4 id="pointers">Pointers<a class="headerlink" href="#pointers" title="Permanent link">&para;</a></h4>
 <ul>
 <li>pointer 1 ~ 10
@@ -6985,13 +7015,12 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <p>Get touch position from interpolation of previous touch position and current touch position.</p>
 <div class="highlight"><pre><span></span><code>Touch-position = (current-touch-position * smooth-factor) + (previous-touch-position * (1 - smooth-factor))
 </code></pre></div>
-
 <ol>
 <li>Set smooth factor. In <a href="../game/#configuration">game configuration</a>
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ....</span>
     <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></li>

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6241,7 +6280,6 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mapData</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Tilemaps</span><span class="p">.</span><span class="nx">Parsers</span><span class="p">.</span><span class="nx">Tiled</span><span class="p">.</span><span class="nx">ParseJSONTiled</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">insertNull</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>name</code> : The name of the tilemap, used to set the name on the MapData.</li>
 <li><code>json</code> : The Tiled JSON object.</li>
@@ -6255,7 +6293,6 @@
 <h4 id="map-type">Map type<a class="headerlink" href="#map-type" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mapType</span> <span class="o">=</span> <span class="nx">mapData</span><span class="p">.</span><span class="nx">orientation</span><span class="p">;</span>
 </code></pre></div>
-
 <ul>
 <li><code>mapType</code> : <code>orthogonal</code>, <code>isometric</code>, <code>hexagonal</code></li>
 </ul>
@@ -6274,11 +6311,9 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileWidth</span> <span class="o">=</span> <span class="nx">mapData</span><span class="p">.</span><span class="nx">tileWidth</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">tileHeight</span> <span class="o">=</span> <span class="nx">mapData</span><span class="p">.</span><span class="nx">tileHeight</span><span class="p">;</span>
 </code></pre></div>
-
 <h4 id="layer">Layer<a class="headerlink" href="#layer" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">layers</span> <span class="o">=</span> <span class="nx">mapData</span><span class="p">.</span><span class="nx">layers</span><span class="p">;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">mapData</span><span class="p">.</span><span class="nx">layers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">layer</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 
@@ -6295,7 +6330,7 @@
     <span class="nx">layer</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">gid</span><span class="p">,</span> <span class="nx">index</span><span class="p">){</span>
         <span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">index</span> <span class="o">%</span> <span class="nx">width</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">index</span> <span class="o">/</span> <span class="nx">width</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">gid</span> <span class="o">===</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Empty</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">gid</span> <span class="o">===</span> <span class="o">-</span><span class="mf">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Empty</span>
 
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 

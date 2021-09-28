@@ -2954,11 +2954,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6234,8 +6273,8 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">1024</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">768</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
@@ -6243,9 +6282,8 @@
     <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>scale.mode</code> :<ul>
 <li><code>Phaser.Scale.NONE</code> : No scaling happens at all.</li>
@@ -6267,17 +6305,14 @@
 <h3 id="resize-canvas-element">Resize canvas element<a class="headerlink" href="#resize-canvas-element" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Modify the size of the Phaser canvas element directly. You should only use this if you are using the <code>NO_SCALE</code> scale mode,</p>
 <h3 id="set-game-size">Set game size<a class="headerlink" href="#set-game-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">setGameSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameSize</code><ul>
 <li><code>gameSize.width</code>, <code>gameSize.height</code></li>

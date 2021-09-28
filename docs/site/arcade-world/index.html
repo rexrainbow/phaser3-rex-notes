@@ -3201,11 +3201,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6761,9 +6800,8 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Default updating : World updating every tick</li>
@@ -6788,7 +6826,6 @@
 <p>Advances the simulation by one step.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
 </code></pre></div>
-
 <h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>
 <ul>
 <li>World step
@@ -6802,11 +6839,9 @@
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pause world
@@ -6835,7 +6870,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">enable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// scene.physics.world.enable(gameObject, bodyType);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObject</code> : A game object, or array of game objects, or game objects in a <a href="../group/">Group</a></li>
 <li><code>bodyType</code> :<ul>
@@ -6847,12 +6881,10 @@
 <p>Or</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">bodyType</span><span class="p">);</span>
 </code></pre></div>
-
 <p>See <a href="../arcade-body/#get-physics-body">arcade-body</a></p>
 <h4 id="disable">Disable<a class="headerlink" href="#disable" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">disable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObject</code> : A game object, or array of game objects, or game objects in a <a href="../group/">Group</a></li>
 </ul>
@@ -7009,7 +7041,6 @@
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">wrap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">padding</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li>gameObject:<ul>
 <li>game object</li>
@@ -7101,7 +7132,6 @@
 <p>Draw debug body &amp; velocity on a <a href="../graphics/">Graphics object</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">graphics</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">debugGraphic</span><span class="p">;</span>
 </code></pre></div>
-
 <ul>
 <li>Set visible
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">debugGraphic</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>

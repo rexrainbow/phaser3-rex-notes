@@ -3009,11 +3009,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6341,7 +6380,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">newScene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="c1">// var newScene = game.scene.add(key, sceneConfig, autoStart, data);</span>
 </code></pre></div>
-
 <ul>
 <li><code>key</code> : A unique key used to reference the Scene.</li>
 <li><code>sceneConfig</code> : The <a href="../scene/#configuration-of-scene">config for the Scene</a>, or a <a href="../scene/#es6-class">scene</a> class.</li>
@@ -6361,7 +6399,6 @@
 <h2 id="destroy-scene">Destroy scene<a class="headerlink" href="#destroy-scene" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li>Fires scene.events <code>destroy</code></li>
 </ul>
@@ -6417,35 +6454,28 @@
 If not running at all, it will be started.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </code></pre></div>
-
 <h2 id="stop-scene">Stop scene<a class="headerlink" href="#stop-scene" title="Permanent link">&para;</a></h2>
 <p>Shutdown the Scene, clearing display list, timers, etc.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop();  // stop myself</span>
 </code></pre></div>
-
 <h2 id="set-visible">Set visible<a class="headerlink" href="#set-visible" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>  <span class="c1">// value: true/false</span>
 <span class="c1">// scene.scene.setVisible(value);    // set visible to myself</span>
 </code></pre></div>
-
 <h2 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isSleep = scene.scene.isSleeping();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isPaused = scene.scene.isPaused();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isActive = scene.scene.isActive();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var isVisible = scene.scene.isVisible();</span>
 </code></pre></div>
-
 <table>
 <thead>
 <tr>
@@ -6483,39 +6513,31 @@ If not running at all, it will be started.</p>
 <h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <h2 id="order-of-scenes">Order of scenes<a class="headerlink" href="#order-of-scenes" title="Permanent link">&para;</a></h2>
 <p>Swaps the position of two scenes in the Scenes list.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">swapPosition</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop(keyA);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveAbove(keyA);</span>
 </code></pre></div>
-
 <p>Scene B is directly above Scene A.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveBelow(keyA);</span>
 </code></pre></div>
-
 <p>Scene B is directly below Scene A.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveBelow();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.moveDown();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.bringToTop();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
 <span class="c1">// scene.scene.sendToBack();</span>
 </code></pre></div>
-
 <h2 id="transition">Transition<a class="headerlink" href="#transition" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">transition</span><span class="p">({</span>
     <span class="nx">target</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
@@ -6523,7 +6545,7 @@ If not running at all, it will be started.</p>
     <span class="c1">// moveAbove: false,</span>
     <span class="c1">// moveBelow: false,</span>
 
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
 
     <span class="c1">// remove: false,</span>
     <span class="c1">// sleep: false,</span>
@@ -6533,7 +6555,6 @@ If not running at all, it will be started.</p>
     <span class="c1">// onUpdateScope: scene</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <ul>
 <li><code>target</code> : The Scene key to transition to.</li>
 <li><code>data</code> : An object containing any data you wish to be passed to the target scenes init / create methods.</li>

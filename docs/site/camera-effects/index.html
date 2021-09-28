@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6416,11 +6455,9 @@
 <span class="c1">// camera.fadeIn(duration, red, green, blue, callback, context);</span>
 <span class="c1">// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 255.</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.fadeOut(duration, red, green, blue, callback, context);</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
@@ -6429,15 +6466,12 @@
 <h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerafadeincomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">fade</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerafadeoutcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">fade</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="flash">Flash<a class="headerlink" href="#flash" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.flash(duration, red, green, blue, force, callback, context);</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
@@ -6446,15 +6480,12 @@
 <h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cameraflashstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">flash</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cameraflashcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">flash</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="shake">Shake<a class="headerlink" href="#shake" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">shake</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.shake(duration, intensity, force, callback, context);  // callback: invoked when completed</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
@@ -6463,15 +6494,12 @@
 <h4 id="events_2">Events<a class="headerlink" href="#events_2" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerashakestart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">shake</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">intensity</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerashakecomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">shake</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="pan">Pan<a class="headerlink" href="#pan" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.pan(x, y, duration, ease, force, callback, context);</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{}</span>
@@ -6480,15 +6508,12 @@
 <h4 id="events_3">Events<a class="headerlink" href="#events_3" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerapanstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">pan</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerapancomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">pan</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="zoom">Zoom<a class="headerlink" href="#zoom" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">zoomTo</span><span class="p">(</span><span class="nx">zoomValue</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.zoomTo(zoomValue, duration, ease, force, callback, context);</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">zoomValue</span><span class="p">)</span> <span class="p">{}</span>
@@ -6497,15 +6522,12 @@
 <h4 id="events_4">Events<a class="headerlink" href="#events_4" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">zoomValue</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="rotate-to">Rotate to<a class="headerlink" href="#rotate-to" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">rotateTo</span><span class="p">(</span><span class="nx">radians</span><span class="p">,</span> <span class="nx">shortestPath</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
 <span class="c1">// camera.rotateTo(radians, shortestPath, duration, ease, force, callback, context);</span>
 </code></pre></div>
-
 <ul>
 <li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
     <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">angle</span><span class="p">)</span> <span class="p">{}</span>
@@ -6514,10 +6536,8 @@
 <h4 id="events_5">Events<a class="headerlink" href="#events_5" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerarotatestart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">rotateTo</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerarotatecomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">rorotateTotate</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add mask

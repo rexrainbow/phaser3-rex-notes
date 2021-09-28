@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6345,7 +6384,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">BoardPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -6359,7 +6398,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create tile positions
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hexagonMap</span><span class="p">.</span><span class="nx">hexagon</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
@@ -6373,7 +6412,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">HexagonMap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HexagonMap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-components.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create tile positions
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">HexagonMap</span><span class="p">.</span><span class="nx">hexagon</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
@@ -6386,7 +6425,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">hexagonMap</span><span class="p">.</span><span class="nx">hexagon</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 <span class="c1">// var out = scene.rexBoard.hexagonMap.hexagon(board, radius, out);</span>
 </code></pre></div>
-
 <ul>
 <li><code>tileXYArray</code> : An array of tile position <code>{x, y}</code>.</li>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
@@ -6412,7 +6450,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">hexagonMap</span><span class="p">.</span><span class="nx">parallelogram</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 <span class="c1">// var out = scene.rexBoard.hexagonMap.parallelogram(board, type, width, height, out);</span>
 </code></pre></div>
-
 <ul>
 <li><code>tileXYArray</code> : An array of tile position <code>{x, y}</code>.</li>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
@@ -6448,7 +6485,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">hexagonMap</span><span class="p">.</span><span class="nx">triangle</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 <span class="c1">// var out = scene.rexBoard.hexagonMap.triangle(board, type, height, out);</span>
 </code></pre></div>
-
 <ul>
 <li><code>tileXYArray</code> : An array of tile position <code>{x, y}</code>.</li>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
@@ -6482,7 +6518,7 @@
 </code></pre></div></li>
 <li>Retrieve tile positions
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span><span class="p">;</span>
-<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">tileXYArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">tileXYArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">tileXYArray</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>

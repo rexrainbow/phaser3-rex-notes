@@ -3032,11 +3032,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6471,34 +6510,30 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="drag-object">Drag object<a class="headerlink" href="#drag-object" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">mouseSpring</span><span class="p">();</span>
 <span class="c1">// scene.matter.add.mouseSpring(options);</span>
 </code></pre></div>
-
 <ul>
 <li><code>options</code>
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">length</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="nx">stiffness</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
     <span class="nx">collisionFilter</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">category</span><span class="o">:</span> <span class="mh">0x0001</span><span class="p">,</span>
         <span class="nx">mask</span><span class="o">:</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
-        <span class="nx">group</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">group</span><span class="o">:</span> <span class="mf">0</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div><ul>
@@ -6536,7 +6571,6 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">constraint</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">);</span>
 <span class="c1">// var constraint = scene.matter.add.constraint(gameObjectA, gameObjectB, length, stiffness, options);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObjectA</code>, <code>gameObjectB</code> : Matter game object, or matter body object.</li>
 <li><code>length</code> : The target resting length of the constraint.<ul>
@@ -6551,15 +6585,15 @@
 <li><code>options</code> :
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">pointA</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="nx">pointB</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// render: {</span>
     <span class="c1">//     visible: true</span>
     <span class="c1">// }</span>
@@ -6573,11 +6607,9 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spring</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">joint</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="constraint-to-world-position">Constraint to world position<a class="headerlink" href="#constraint-to-world-position" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">worldConstraint</span><span class="p">(</span><span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObjectB</code> : Matter game object, or matter body object.</li>
 <li><code>length</code> : The target resting length of the constraint.<ul>
@@ -6592,15 +6624,15 @@
 <li><code>options</code> :
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">pointA</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="nx">pointB</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// render: {</span>
     <span class="c1">//     visible: true</span>
     <span class="c1">// }</span>
@@ -6614,7 +6646,6 @@
 <h4 id="chain-game-objects">Chain game objects<a class="headerlink" href="#chain-game-objects" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">composite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span> <span class="nx">xOffsetA</span><span class="p">,</span> <span class="nx">yOffsetA</span><span class="p">,</span> <span class="nx">xOffsetB</span><span class="p">,</span> <span class="nx">yOffsetB</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>composite</code> : <a href="../matterjs-gameobject/#image-composite">Image composite</a></li>
 <li><code>xOffsetA</code>, <code>yOffsetA</code> : Offset position of gameObjectA, in scale.<ul>
@@ -6626,9 +6657,9 @@
 <li><code>options</code> : 
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">length</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">stiffness</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">stiffness</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// render: {</span>
     <span class="c1">//     visible: true</span>
     <span class="c1">// }</span>

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6559,19 +6598,18 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="c1">// scene.cameras.fromJSON(configArray);</span>
 </code></pre></div>
-
 <ul>
 <li><code>config</code> :
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
-    <span class="nx">zoom</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">rotation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">scrollX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">scrollY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">zoom</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">scrollX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">scrollY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">roundPixels</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -6582,11 +6620,9 @@
 <h3 id="remove-camera">Remove camera<a class="headerlink" href="#remove-camera" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="destroy-camera">Destroy camera<a class="headerlink" href="#destroy-camera" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="view-port">View port<a class="headerlink" href="#view-port" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
@@ -6650,39 +6686,29 @@ An invisible camera will not render anything and will skip input tests.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// camera.visible = value</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 <span class="c1">// camera.alpha = value;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="scroll">Scroll<a class="headerlink" href="#scroll" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setScroll</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">scrollX</span> <span class="o">=</span> <span class="nx">scrollX</span><span class="p">;</span>
 <span class="nx">camera</span><span class="p">.</span><span class="nx">scrollY</span> <span class="o">=</span> <span class="nx">scrollY</span><span class="p">;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">centerToBounds</span><span class="p">();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>  <span class="c1">// centered on the given coordinates</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">centerOnX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
 <span class="nx">camera</span><span class="p">.</span><span class="nx">centerOnY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">centerToSize</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="follow-game-object">Follow game object<a class="headerlink" href="#follow-game-object" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Start following
@@ -6772,12 +6798,10 @@ An invisible camera will not render anything and will skip input tests.</p>
 <h3 id="set-background-color">Set background color<a class="headerlink" href="#set-background-color" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="ignore-game-object">Ignore game object<a class="headerlink" href="#ignore-game-object" title="Permanent link">&para;</a></h3>
 <p>Ignored game objects won't show at that camera.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObject</code> :<ul>
 <li>A game object</li>
@@ -6789,7 +6813,6 @@ An invisible camera will not render anything and will skip input tests.</p>
 <h3 id="get-cameras-below-pointer">Get cameras below pointer<a class="headerlink" href="#get-cameras-below-pointer" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cameras</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">getCamerasBelowPointer</span><span class="p">(</span><span class="nx">pointer</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>cameras</code> : An array of cameras.</li>
 <li><code>pointer</code> : <code>{x, y}</code></li>
@@ -6818,7 +6841,6 @@ Camera --&gt; Game
 Camera --&gt; Texture
 Texture --&gt; GO["Image Game object"]
 GO --&gt; Game</code></pre>
-
 <h4 id="pause-resume">Pause, resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pause
@@ -6831,7 +6853,6 @@ GO --&gt; Game</code></pre>
 <h4 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="children">Children<a class="headerlink" href="#children" title="Permanent link">&para;</a></h3>
 <h4 id="visible-children">Visible children<a class="headerlink" href="#visible-children" title="Permanent link">&para;</a></h4>
 <ul>
@@ -6846,7 +6867,6 @@ GO --&gt; Game</code></pre>
 <h4 id="render-children">Render children<a class="headerlink" href="#render-children" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">renderList</span><span class="p">;</span>
 </code></pre></div>
-
 <p>Read only.</p>
                 
               

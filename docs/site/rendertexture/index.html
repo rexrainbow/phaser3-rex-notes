@@ -3023,11 +3023,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6382,10 +6421,10 @@
 </ul>
 <p>Add render texture from JSON</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mf">32</span><span class="p">,</span>
     <span class="c1">// key: undefined,</span>
     <span class="c1">// frame: undefined,</span>
 
@@ -6402,7 +6441,6 @@
     <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <div class="admonition note">
 <p class="admonition-title">Origin position</p>
 <p>Origin position of this render texture is <code>(0,0)</code> (top-left)</p>
@@ -6410,9 +6448,9 @@
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyRenderTexture</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">RenderTexture</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyRenderTexture</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">RenderTexture</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6429,7 +6467,7 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyRenderTexture</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyRenderTexture</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="paste-texture">Paste texture<a class="headerlink" href="#paste-texture" title="Permanent link">&para;</a></h3>
@@ -6463,38 +6501,31 @@
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">setGlobalAlpha</span><span class="p">(</span><span class="nx">alpha</span><span class="p">);</span>
 <span class="c1">// rt.globalAlpha = alpha;</span>
 </code></pre></div>
-
 <h4 id="global-tint">Global tint<a class="headerlink" href="#global-tint" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">setGlobalTint</span><span class="p">(</span><span class="nx">tint</span><span class="p">);</span>
 <span class="c1">// rt.globalTint = tint;</span>
 </code></pre></div>
-
 <h3 id="erase">Erase<a class="headerlink" href="#erase" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>gameObject</code> : a game object, or an array of game objects</li>
 </ul>
 <h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="fill">Fill<a class="headerlink" href="#fill" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 <span class="c1">// rt.fill(rgb, alpha, x, y, width, height);</span>
 </code></pre></div>
-
 <h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 <span class="c1">// rt.resize(width, height);</span>
 </code></pre></div>
-
 <h3 id="save-texture">Save texture<a class="headerlink" href="#save-texture" title="Permanent link">&para;</a></h3>
 <p>Stores a copy of this Render Texture in the Texture Manager using the given key.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">rt</span><span class="p">.</span><span class="nx">saveTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Calling <code>saveTexture</code> again will not save another copy of the same texture, it will just rename the key of the existing copy.</p>
 <h3 id="internal-camera">Internal camera<a class="headerlink" href="#internal-camera" title="Permanent link">&para;</a></h3>
 <p>Internal camera <code>rt.camera</code></p>
@@ -6528,7 +6559,6 @@
 <h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">rt</span><span class="p">.</span><span class="nx">createBitmapMask</span><span class="p">();</span>
 </code></pre></div>
-
 <p>See <a href="../mask/">mask</a></p>
                 
               

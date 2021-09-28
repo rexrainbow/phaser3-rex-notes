@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6534,39 +6573,31 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs">Sample code</a></p>
 <h3 id="create-database">Create database<a class="headerlink" href="#create-database" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">loki</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">loki</span><span class="p">();</span>
 <span class="c1">// var db = new loki(&#39;loki.json&#39;);  // load database from file</span>
 </code></pre></div>
-
 <h3 id="create-collection">Create collection<a class="headerlink" href="#create-collection" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="get-collection">Get collection<a class="headerlink" href="#get-collection" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="insert-document">Insert document<a class="headerlink" href="#insert-document" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docInColl</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>  <span class="c1">// doc: an object</span>
 </code></pre></div>
-
 <p>Get Id</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">docInColl</span><span class="p">.</span><span class="nx">$loki</span><span class="p">;</span>
 </code></pre></div>
-
 <h4 id="insert-documents">Insert documents<a class="headerlink" href="#insert-documents" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">docArray</span><span class="p">);</span>  <span class="c1">// documents in array</span>
 </code></pre></div>
-
 <h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
 <h4 id="get-document-by-id">Get document by id<a class="headerlink" href="#get-document-by-id" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>  <span class="c1">// id: `$loki`</span>
 </code></pre></div>
-
 <h4 id="get-doc-by-unique-index">Get doc by unique index<a class="headerlink" href="#get-doc-by-unique-index" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="filter-documents">Filter documents<a class="headerlink" href="#filter-documents" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>$eq</strong> : filter for document(s) with property of (strict) equality
@@ -6577,7 +6608,7 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
 </code></pre></div>
     For example
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">coll</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="mi">20</span><span class="p">}});</span>  <span class="c1">// age == &#39;20&#39; or age == 20</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">coll</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="mf">20</span><span class="p">}});</span>  <span class="c1">// age == &#39;20&#39; or age == 20</span>
 </code></pre></div></li>
 <li><strong>$ne</strong> : filter for document(s) with property not equal to provided value
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$ne&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
@@ -6623,7 +6654,7 @@
 <span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;din&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="p">}});</span>
 </code></pre></div></li>
 <li><strong>$dteq</strong>: filter for document(s) with date property equal to provided date value
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$dteq&#39;</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;1/1/2017&#39;</span><span class="p">)});</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$dteq&#39;</span><span class="o">:</span> <span class="ow">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;1/1/2017&#39;</span><span class="p">)});</span>
 </code></pre></div></li>
 <li><strong>$type</strong> : filter for documents which have a property of a specified type
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$type&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span> <span class="c1">// &#39;string&#39;, or &#39;number&#39;, ...</span>
@@ -6646,14 +6677,12 @@
 <h4 id="find-one-document">Find one document<a class="headerlink" href="#find-one-document" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({});</span>
 </code></pre></div>
-
 <h4 id="filter-by-function">Filter by function<a class="headerlink" href="#filter-by-function" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">){</span>
     <span class="c1">// ...</span>
     <span class="k">return</span> <span class="nx">isPicked</span><span class="p">;</span>  <span class="c1">// true to pick this document</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <h4 id="sort">Sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Sort with a key
@@ -6682,7 +6711,6 @@
 <p>Get documents from <code>start</code> to <code>start+count-1</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">offset</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">data</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h4>
 <p>Update each filtered documents.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">update</span><span class="p">(</span>
@@ -6691,12 +6719,10 @@
         <span class="k">return</span> <span class="nx">doc</span><span class="p">;</span>
     <span class="p">});</span>
 </code></pre></div>
-
 <h4 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
 <p>Remove filtered documents.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">remove</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h4>
 <p>Map document into a new anonymous collection, won't affect original collection.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">map</span><span class="p">(</span>
@@ -6706,7 +6732,6 @@
     <span class="p">})</span>
     <span class="p">.</span><span class="nx">data</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="map-reduce">Map-reduce<a class="headerlink" href="#map-reduce" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Map document into a new anonymous collection</li>
@@ -6722,14 +6747,12 @@
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">mapReduce</span><span class="p">(</span><span class="nx">mapFn</span><span class="p">,</span> <span class="nx">reduceFn</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="clone-result-set">Clone result set<a class="headerlink" href="#clone-result-set" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">resultSet</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({});</span>
 <span class="kd">var</span> <span class="nx">resultSetClone</span> <span class="o">=</span> <span class="nx">resultSet</span><span class="p">.</span><span class="nx">branch</span><span class="p">();</span>
 
 <span class="c1">// resultSetClone.find({}).data();</span>
 </code></pre></div>
-
 <h3 id="dynamic-view">Dynamic view<a class="headerlink" href="#dynamic-view" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create dynamic view

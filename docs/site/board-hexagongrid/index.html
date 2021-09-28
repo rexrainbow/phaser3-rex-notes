@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6261,16 +6300,15 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board">Sample code</a></p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hexagonGrid</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// size: undefined,</span>
-    <span class="nx">staggeraxis</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">staggerindex</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">staggeraxis</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">staggerindex</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>x</code>, <code>y</code> : World position of origin tile (i.e. tileX = 0, tileY = 0)</li>
 <li><code>cellWidth</code> : The width of the cell, in pixels.</li>
@@ -6347,12 +6385,10 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// worldXY: {x, y}</span>
 <span class="c1">// var out = grid.getWorldXY(tileX, tileY, out);</span>
 </code></pre></div>
-
 <h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
 <span class="c1">// var out = grid.getTileXY(worldX, worldY, out);</span>
 </code></pre></div>
-
 <h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>
 <ul>
 <li>staggeraxis = <code>0</code>/<code>y</code><ul>

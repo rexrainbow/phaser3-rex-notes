@@ -3040,11 +3040,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6417,7 +6456,7 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">GesturesPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gestures-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">GesturesPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gestures-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -6431,7 +6470,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add pinch input
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pinch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
@@ -6443,10 +6482,10 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">Pinch</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gestures.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Pinch</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/gestures.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add pinch input
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pinch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Pinch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
@@ -6457,7 +6496,6 @@
     <span class="c1">// threshold: 0,</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
 <li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a> or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
@@ -6524,17 +6562,15 @@
 <h3 id="scale-factor">Scale factor<a class="headerlink" href="#scale-factor" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scaleFactor</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">scaleFactor</span><span class="p">;</span>
 </code></pre></div>
-
 <p>Rate of distance change between 2 catched touch pointers. 
 (i.e current distance between 2 catched touch pointers / previous distance ).</p>
 <h3 id="drag-vector-of-1st-touch-pointer">Drag vector of 1<sup>st</sup> touch pointer<a class="headerlink" href="#drag-vector-of-1st-touch-pointer" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">drag1Vector</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">drag1Vector</span><span class="p">;</span> <span class="c1">// {x, y}</span>
 </code></pre></div>
-
 <h3 id="catched-touch-pointers">Catched touch pointers<a class="headerlink" href="#catched-touch-pointers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="../touchevents/#properties-of-point">Pointer</a> 0, available when state is <code>1</code>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
 </code></pre></div><ul>
 <li>Position of pointer
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">pointer0</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
@@ -6545,13 +6581,12 @@
 </ul>
 </li>
 <li><a href="../touchevents/#properties-of-point">Pointer</a> 1, available when state is <code>2</code>
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
 </code></pre></div></li>
 </ul>
 <h3 id="is-pinched">Is pinched<a class="headerlink" href="#is-pinched" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isPinched</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isPinched</span><span class="p">;</span>
 </code></pre></div>
-
 <p>Return <code>true</code> if pinched.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <ul>

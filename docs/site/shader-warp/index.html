@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6328,13 +6367,13 @@
 <ul>
 <li>Get minify file from <a href="https://github.com/photonstorm/phaser3-warp-post-fx/tree/main/dist">github</a></li>
 <li>Add to game config
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="p">{</span> <span class="nx">WarpPostFX</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;./dist/WarpPostFX.js&#39;</span><span class="p">;</span>  <span class="c1">// Path to your minify file</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">WarpPostFX</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./dist/WarpPostFX.js&#39;</span><span class="p">;</span>  <span class="c1">// Path to your minify file</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">pipeline</span><span class="o">:</span> <span class="p">{</span> <span class="nx">WarpPostFX</span> <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Apply effect<ul>
 <li>Apply effect to game object
@@ -6349,7 +6388,6 @@
 <h3 id="remove-effect">Remove effect<a class="headerlink" href="#remove-effect" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removePostPipeline</span><span class="p">(</span><span class="nx">WarpPostFX</span><span class="p">);</span> <span class="c1">// WarpPostFX class</span>
 </code></pre></div>
-
 <h3 id="get-effect">Get effect<a class="headerlink" href="#get-effect" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get effect from game object
@@ -6362,7 +6400,6 @@
 <h4 id="set-texture">Set texture<a class="headerlink" href="#set-texture" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">pipelineInstance</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">resizeMode</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>textureKey</code> : The key of the texture to use.</li>
 <li><code>resizeMode</code> : <ul>

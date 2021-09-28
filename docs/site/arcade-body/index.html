@@ -3229,11 +3229,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6969,12 +7008,10 @@
 <h4 id="reset-position">Reset position<a class="headerlink" href="#reset-position" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h4>
 <p>Sets acceleration, velocity, and speed to zero.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div>
-
 <h5 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h5>
 <p>If this Body is <code>immovable</code> and in motion, this the proportion of this Body's movement received by the riding body on each axis.</p>
 <ul>
@@ -7058,11 +7095,9 @@
 <h5 id="offset">Offset<a class="headerlink" href="#offset" title="Permanent link">&para;</a></h5>
 <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">setOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="push-out">Push out<a class="headerlink" href="#push-out" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>objectsA</code>, <code>objectsB</code> :<ul>
 <li>A game object</li>
@@ -7077,7 +7112,6 @@
 <h4 id="point-inside">Point inside<a class="headerlink" href="#point-inside" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hit</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">hitTest</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="is-colliding">Is colliding<a class="headerlink" href="#is-colliding" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Is colliding this tick
@@ -7186,7 +7220,6 @@
 <p>Syncs the Bodies <em>position</em> and <em>size</em> with its parent Game Object.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">body</span><span class="p">.</span><span class="nx">updateFromGameObject</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Bounds of Body<ul>

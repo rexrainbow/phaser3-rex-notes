@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6563,11 +6602,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">CsvScenarioPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">CsvScenarioPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCsvScenario&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CsvScenarioPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6577,7 +6616,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add csv-scenario object
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCsvScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
@@ -6589,16 +6628,15 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">CsvScenario</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">CsvScenario</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/csvscenario.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Add csv-scenario object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CsvScenario</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">CsvScenario</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="load-csv-script">Load csv script<a class="headerlink" href="#load-csv-script" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
@@ -6608,7 +6646,6 @@
     <span class="c1">// delimiter: &#39;,&#39;</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <ul>
 <li><code>timeUnit</code>: time-unit of dt, for <a href="./#delay-execution">delay-execution</a><ul>
 <li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
@@ -6623,14 +6660,12 @@
 <h4 id="append-csv-script">Append csv script<a class="headerlink" href="#append-csv-script" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">csvString</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
     <span class="c1">// label: &#39;&#39;,</span>
     <span class="c1">// offset: 0</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <ul>
 <li><code>label</code> : Go to the label and execute. '' label is starting from 1<sup>st</sup> instruction</li>
 <li><code>offset</code> : Offset time</li>
@@ -6663,9 +6698,8 @@
 <h4 id="run-custom-function">Run custom function<a class="headerlink" href="#run-custom-function" title="Permanent link">&para;</a></h4>
 <p>Run custom function of <code>scope</code>, which passed from <code>scenario.load(...)</code></p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">-,fnName,param0,param1,...</span>
+<div class="highlight"><pre><span></span><code>-,fnName,param0,param1,...
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>-</code></li>
 <li>Parameters will be converted to number, boolean, null, or string by default.</li>
@@ -6673,9 +6707,8 @@
 <h5 id="delay-execution">Delay execution<a class="headerlink" href="#delay-execution" title="Permanent link">&para;</a></h5>
 <p>Run custom function after a delay.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">time,fnName,param0,param1,...</span>
+<div class="highlight"><pre><span></span><code>time,fnName,param0,param1,...
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: a number</li>
 <li>time-unit of delay is set from <code>scenario.load(...)</code></li>
@@ -6684,9 +6717,8 @@
 <h5 id="wait-then-execution">Wait then execution<a class="headerlink" href="#wait-then-execution" title="Permanent link">&para;</a></h5>
 <p>Run custom function until <code>scenario.continue(eventName)</code></p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">eventName,fnName,param0,param1,...</span>
+<div class="highlight"><pre><span></span><code>eventName,fnName,param0,param1,...
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: not a number, not a string start from <code>#</code></li>
 <li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
@@ -6700,17 +6732,15 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/label-exit.js">Sample code</a></p>
 <p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">#LABEL,label</span>
+<div class="highlight"><pre><span></span><code>#LABEL,label
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>#LABEL</code>, case insensitive.</li>
 <li>Label <code>''</code> is reserved, don't use <code>''</code> for label name.</li>
 </ul>
 <p>Example: A label named 'AA'</p>
-<div class="highlight"><pre><span></span><code><span class="err">#LABEL,AA</span>
+<div class="highlight"><pre><span></span><code>#LABEL,AA
 </code></pre></div>
-
 <ul>
 <li>Last label :
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scenario</span><span class="p">.</span><span class="nx">lastLabel</span><span class="p">;</span>
@@ -6722,9 +6752,8 @@
 <h4 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h4>
 <p>Exit current execution.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">#EXIT</span>
+<div class="highlight"><pre><span></span><code>#EXIT
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>#EXIT</code>, case insensitive.</li>
 </ul>
@@ -6732,24 +6761,21 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/goto.js">Sample code</a></p>
 <p>Go to <em>label</em> and execute.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">#GOTO,label</span>
+<div class="highlight"><pre><span></span><code>#GOTO,label
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>#GOTO</code>, case insensitive.</li>
 <li>An <code>error</code> event will be fired if label is not found.</li>
 </ul>
 <p>Example: Goto label 'AA'</p>
-<div class="highlight"><pre><span></span><code><span class="err">#GOTO,AA</span>
+<div class="highlight"><pre><span></span><code>#GOTO,AA
 </code></pre></div>
-
 <h4 id="if-goto">If-goto<a class="headerlink" href="#if-goto" title="Permanent link">&para;</a></h4>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/if.js">Sample code</a></p>
 <p>Go to <em>trueLabel</em> if condition is true, otherwise go to <em>falseLabel</em>.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">#IF,condition,trueLabel,falseLabel</span>
+<div class="highlight"><pre><span></span><code>#IF,condition,trueLabel,falseLabel
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>#IF</code>, case insensitive.</li>
 <li>conditon: boolean equation<ul>
@@ -6763,18 +6789,15 @@
 </li>
 </ul>
 <p>Example: Goto label 'AA' if (this.coin &gt; 100), else run next instruction</p>
-<div class="highlight"><pre><span></span><code><span class="err">#IF,this.coin &gt; 100,AA</span>
+<div class="highlight"><pre><span></span><code>#IF,this.coin &gt; 100,AA
 </code></pre></div>
-
 <h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
 <p>Run next instruction after a delay time, or <code>scenario.continue(eventName)</code>.</p>
 <p>Format:</p>
-<div class="highlight"><pre><span></span><code><span class="err">#WAIT,time</span>
+<div class="highlight"><pre><span></span><code>#WAIT,time
 </code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="err">#WAIT,eventName</span>
+<div class="highlight"><pre><span></span><code>#WAIT,eventName
 </code></pre></div>
-
 <ul>
 <li>1<sup>st</sup> column of instruction: <code>#WAIT</code>, case insensitive.</li>
 <li>2<sup>nd</sup> colume of instruction:<ul>
@@ -6789,10 +6812,10 @@
 <p>Example: </p>
 <ul>
 <li>Wait 1 time-unit
-    <div class="highlight"><pre><span></span><code><span class="err">#WAIT,1</span>
+    <div class="highlight"><pre><span></span><code>#WAIT,1
 </code></pre></div></li>
 <li>Wait until 'click'
-    <div class="highlight"><pre><span></span><code><span class="err">#WAIT,click</span>
+    <div class="highlight"><pre><span></span><code>#WAIT,click
 </code></pre></div>
     <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">);</span>
 </code></pre></div></li>
@@ -6800,16 +6823,13 @@
 <h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h3>
 <p>Stop running and clear instructions.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scenario</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is running

@@ -3037,11 +3037,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6418,11 +6457,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">VirtualJoystickPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/virtualjoystick-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">VirtualJoystickPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/virtualjoystick-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexVirtualJoystick&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">VirtualJoystickPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6432,7 +6471,7 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Create instance
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">joyStick</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexVirtualJoystick&#39;</span><span class="p">).</span><span class="nx">addPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
@@ -6444,17 +6483,17 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import class
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">VirtualJoystick</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/virtualjoystick.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">VirtualJoystick</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/virtualjoystick.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">joyStick</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VirtualJoystick</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">joyStick</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">VirtualJoystick</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">joystick</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexVirtualJoystick&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">x</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="nx">y</span><span class="p">,</span>
-    <span class="nx">radius</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="mf">100</span><span class="p">,</span>
     <span class="nx">base</span><span class="o">:</span> <span class="nx">baseGameObject</span><span class="p">,</span>
     <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
     <span class="c1">// dir: &#39;8dir&#39;,</span>
@@ -6463,7 +6502,6 @@
     <span class="c1">// enable: true</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>base</code> : Base game object.<ul>
 <li>Create a circle shape object if no base game object passed.</li>
@@ -6497,7 +6535,6 @@
 <span class="kd">var</span> <span class="nx">upKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">downKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 </code></pre></div>
-
 <p>Or</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">leftKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">rightKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
@@ -6505,7 +6542,6 @@
 <span class="kd">var</span> <span class="nx">downKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">down</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">noKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">noKey</span><span class="p">;</span>
 </code></pre></div>
-
 <h3 id="force-angle">Force &amp; Angle<a class="headerlink" href="#force-angle" title="Permanent link">&para;</a></h3>
 <p>Force : Distance between position of base game object to touch pointer.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">force</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">force</span><span class="p">;</span>
@@ -6515,7 +6551,6 @@
 <span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>  <span class="c1">// degree between -180 to 180</span>
 <span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span> <span class="c1">// radians</span>
 </code></pre></div>
-
 <h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
 <p>Visible of base game object.</p>
 <ul>
@@ -6558,7 +6593,7 @@
 <h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fix to camera
-    <div class="highlight"><pre><span></span><code><span class="nx">joystick</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">joystick</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="touch-pointer">Touch pointer<a class="headerlink" href="#touch-pointer" title="Permanent link">&para;</a></h3>
@@ -6575,7 +6610,6 @@
 <p>Destroy base &amp; thumb game object.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">joystick</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On joystick updated :

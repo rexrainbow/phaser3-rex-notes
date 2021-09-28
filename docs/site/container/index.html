@@ -3077,11 +3077,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6480,13 +6519,12 @@
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var container = scene.add.container(x, y, children); // children: an array of game object</span>
 </code></pre></div>
-
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyContainer</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Container</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyContainer</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Container</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
@@ -6503,143 +6541,110 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyContainer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyContainer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </code></pre></div>
-
 <p>Also destroy all children game objects.</p>
 <h4 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h4>
 <p>Reference <a href="../gameobject/">game object</a>, to set position, angle, visible, alpha, etc...</p>
 <h4 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Default size is 0x0.</p>
 <h4 id="set-scroll-factor">Set scroll factor<a class="headerlink" href="#set-scroll-factor" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Apply this scrollFactor to all Container children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="hit-area">Hit area<a class="headerlink" href="#hit-area" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">radius</span><span class="p">),</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Contains</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">radius</span><span class="p">),</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Contains</span><span class="p">);</span>
 <span class="c1">// container.setInteractive(false); // disable</span>
 </code></pre></div>
-
 <p>Assign hit area with a circle shape.</p>
 <h4 id="non-exclusive">Non-exclusive<a class="headerlink" href="#non-exclusive" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setExclusive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Allows a game object added to container many times.</p>
 <h3 id="children">Children<a class="headerlink" href="#children" title="Permanent link">&para;</a></h3>
 <h4 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object or an array of game objects</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">addAt</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="exist">Exist<a class="headerlink" href="#exist" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">hasChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">firstChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">nextChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">prevChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">previous</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">lastChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">last</span><span class="p">;</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getRandom</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
 </code></pre></div>
-
 <h4 id="sort-children">Sort children<a class="headerlink" href="#sort-children" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">property</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">childA</span><span class="p">,</span> <span class="nx">childB</span><span class="p">){</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
+    <span class="k">return</span> <span class="mf">0</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <h4 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="c1">// container.remove(child, true);  // remove child object and destroy it</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 <span class="c1">// container.removeAt(index, true);  // remove child object and destroy it</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">removeBetween</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 <span class="c1">// container.removeBetween(startIndex, endIndex, true);  // remove children objects and destroy them</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
 <span class="c1">// container.removeAll(true);  // remove all children objects and destroy them</span>
 </code></pre></div>
-
 <h4 id="order-of-child">Order of child<a class="headerlink" href="#order-of-child" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>  <span class="c1">// Move child1 above child2</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>  <span class="c1">// Move child1 below child2</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
 </code></pre></div>
-
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
 </code></pre></div>
-
 <h4 id="replace-child">Replace child<a class="headerlink" href="#replace-child" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">oldChild</span><span class="p">,</span> <span class="nx">newChild</span><span class="p">);</span>
 <span class="c1">// container.replace(oldChild, newChild, true);  // destroy oldChild</span>
 </code></pre></div>
-
 <h4 id="set-properties_1">Set properties<a class="headerlink" href="#set-properties_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">container</span><span class="p">.</span><span class="nx">setAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="for-each-child">For each child<a class="headerlink" href="#for-each-child" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Iterate current children list

@@ -2866,11 +2866,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6726,7 +6765,7 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="s1">&#39;rexbejeweled&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbejeweled.min.js&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add bejeweled object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexbejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">rexbejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-template">Import template<a class="headerlink" href="#import-template" title="Permanent link">&para;</a></h4>
@@ -6735,8 +6774,8 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install rexBoard plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">BoardPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">Bejeweled</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/bejeweled/Bejeweled.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">BoardPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/board-plugin.js&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Bejeweled</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/templates/bejeweled/Bejeweled.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
@@ -6751,27 +6790,27 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Add bejeweled object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-bejeweled-object">Create bejeweled object<a class="headerlink" href="#create-bejeweled-object" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// rexBoard: &#39;rexBoard&#39;,</span>
 
     <span class="nx">board</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
-            <span class="nx">x</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-            <span class="nx">y</span><span class="o">:</span> <span class="mi">30</span> <span class="o">-</span> <span class="mi">600</span><span class="p">,</span>
-            <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
-            <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="nx">x</span><span class="o">:</span> <span class="mf">30</span><span class="p">,</span>
+            <span class="nx">y</span><span class="o">:</span> <span class="mf">30</span> <span class="o">-</span> <span class="mf">600</span><span class="p">,</span>
+            <span class="nx">cellWidth</span><span class="o">:</span> <span class="mf">60</span><span class="p">,</span>
+            <span class="nx">cellHeight</span><span class="o">:</span> <span class="mf">60</span><span class="p">,</span>
             <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span> <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;</span>
         <span class="p">},</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">height</span><span class="o">:</span> <span class="mi">20</span> <span class="c1">// Prepared rows: upper 10 rows</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mf">20</span> <span class="c1">// Prepared rows: upper 10 rows</span>
     <span class="p">},</span>
     <span class="nx">match</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// wildcard: undefined</span>
@@ -6779,14 +6818,14 @@
     <span class="p">},</span>
     <span class="nx">chess</span><span class="o">:</span> <span class="p">{</span>
         <span class="c1">// pick random symbol from array, or a callback to return symbol</span>
-        <span class="nx">symbols</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="nx">symbols</span><span class="o">:</span> <span class="p">[</span><span class="mf">0</span><span class="p">,</span> <span class="mf">1</span><span class="p">,</span> <span class="mf">2</span><span class="p">,</span> <span class="mf">3</span><span class="p">,</span> <span class="mf">4</span><span class="p">,</span> <span class="mf">5</span><span class="p">],</span>
         <span class="c1">// symbols: function(board, tileX, tileY, excluded) { return symbol; }</span>
 
         <span class="c1">// User-defined chess game object</span>
         <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
             <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+            <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
             <span class="c1">// Initial &#39;symbol&#39; value</span>
             <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
             <span class="c1">// Add data changed event of &#39;symbol` key</span>
@@ -6802,7 +6841,7 @@
 
         <span class="c1">// moveTo behavior</span>
         <span class="nx">moveTo</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">speed</span><span class="o">:</span> <span class="mi">400</span>
+            <span class="nx">speed</span><span class="o">:</span> <span class="mf">400</span>
         <span class="p">},</span>
         <span class="c1">// tileZ: 1,</span>
     <span class="p">},</span>
@@ -6817,7 +6856,6 @@
     <span class="c1">// input: true</span>
 <span class="p">})</span>
 </code></pre></div>
-
 <p>Configurations</p>
 <ul>
 <li><code>rexBoard</code> : Key of 'rexBoard' plugin. Default is <code>'rexBoard'</code>.</li>
@@ -6861,7 +6899,6 @@
     <span class="k">return</span> <span class="nx">symbol</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <ul>
 <li><code>excluded</code> : <code>undefined</code> or a symbol array. Don't return these symbols.</li>
 </ul>
@@ -6870,7 +6907,7 @@
 <div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Create Game object (Image, Sprite, or Shape)</span>
     <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
     <span class="c1">// Initial &#39;symbol&#39; value</span>
     <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
     <span class="c1">// Add data changed event of &#39;symbol` key</span>
@@ -6881,7 +6918,6 @@
     <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of <code>'symbol'</code> key to change the appearance of game object via new symbol value.</p>
 <h3 id="states">States<a class="headerlink" href="#states" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph TD
@@ -6914,14 +6950,12 @@ end
 MatchEnd --&gt; UndoSwap[undo-swap]
 UndoSwap --&gt; Select1Start
 MatchEnd --&gt; Select1Start</code></pre>
-
 <h4 id="select-first-chess">Select first chess<a class="headerlink" href="#select-first-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'select1'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;select1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -6932,14 +6966,12 @@ MatchEnd --&gt; Select1Start</code></pre>
     <span class="c1">// Do nothing</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <h4 id="select-second-chess">Select second chess<a class="headerlink" href="#select-second-chess" title="Permanent link">&para;</a></h4>
 <p>Fire <code>'select2'</code> event</p>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;select2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.<ul>
@@ -6957,7 +6989,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -6993,7 +7024,6 @@ MatchEnd --&gt; Select1Start</code></pre>
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
-
 <ul>
 <li><code>bejeweled.getChessMoveTo(chess)</code> : Get <a href="../board-moveto/">moveTo behavior</a> of a chess.</li>
 <li><code>bejeweled.waitEvent(moveTo, 'complete')</code> : Wait 'complete' event of this <a href="../board-moveto/">moveTo behavior</a>.</li>
@@ -7004,7 +7034,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -7015,7 +7044,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>lines</code> : An array of matched lines, each line is a <a href="../structs-set/">built-in Set object</a>.<ul>
 <li>Length of each line (<code>lines[i].size</code>) could be <em>5</em>, <em>4</em>, or <em>3</em>.</li>
@@ -7049,7 +7077,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>chessArray</code> : An array of chess (Game Object) to be eliminated.</li>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
@@ -7058,14 +7085,13 @@ MatchEnd --&gt; Select1Start</code></pre>
 <h5 id="custom-eliminating-action">Custom Eliminating Action<a class="headerlink" href="#custom-eliminating-action" title="Permanent link">&para;</a></h5>
 <p>Default fliminating action:</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">bejeweled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">duration</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span> <span class="c1">//ms</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">chessArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">duration</span> <span class="o">=</span> <span class="mf">500</span><span class="p">;</span> <span class="c1">//ms</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">chessArray</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">fade</span> <span class="o">=</span> <span class="nx">FadeOutDestroy</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">duration</span><span class="p">);</span>
         <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">fade</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <ul>
 <li><code>bejeweled.waitEvent(fade, 'complete')</code> : Wait 'complete' event of this <a href="../fadeoutdestroy/">fade-out-destroy behavior</a>.</li>
 </ul>
@@ -7075,7 +7101,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a></li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -7086,15 +7111,15 @@ MatchEnd --&gt; Select1Start</code></pre>
     <span class="kd">var</span> <span class="nx">tileZ</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">chessTileZ</span><span class="p">,</span>
         <span class="nx">chess</span><span class="p">,</span> <span class="nx">moveTo</span><span class="p">;</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="p">(</span><span class="nx">board</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="nx">tileY</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// bottom to top</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// left to right</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="p">(</span><span class="nx">board</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="mf">1</span><span class="p">);</span> <span class="nx">tileY</span> <span class="o">&gt;=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// bottom to top</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&lt;</span> <span class="nx">cnt</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// left to right</span>
             <span class="nx">chess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">chess</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">continue</span><span class="p">;</span>
             <span class="p">}</span>
             <span class="nx">moveTo</span> <span class="o">=</span> <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">getChessMoveTo</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
             <span class="k">do</span> <span class="p">{</span>
-                <span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveToward</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+                <span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveToward</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
             <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">lastMoveResult</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">)</span> <span class="p">{</span>
                 <span class="nx">bejeweled</span><span class="p">.</span><span class="nx">waitEvent</span><span class="p">(</span><span class="nx">moveTo</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">);</span>
@@ -7103,7 +7128,6 @@ MatchEnd --&gt; Select1Start</code></pre>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-
 <ul>
 <li><code>bejeweled.getChessMoveTo(chess)</code> : Get <a href="../board-moveto/">moveTo behavior</a> of a chess.</li>
 <li><code>bejeweled.waitEvent(moveTo, 'complete')</code> : Wait 'complete' event of this <a href="../board-moveto/">moveTo behavior</a>.</li>
@@ -7114,7 +7138,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -7125,7 +7148,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -7136,7 +7158,6 @@ MatchEnd --&gt; Select1Start</code></pre>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
-
 <ul>
 <li><code>board</code> : <a href="../board/">Board object</a>.</li>
 <li><code>bejeweled</code> : This bejeweled object.</li>
@@ -7146,12 +7167,11 @@ MatchEnd --&gt; Select1Start</code></pre>
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="input-control">Input control<a class="headerlink" href="#input-control" title="Permanent link">&para;</a></h3>
 <h4 id="default-input">Default input<a class="headerlink" href="#default-input" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Enable default input control
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
@@ -7169,7 +7189,7 @@ MatchEnd --&gt; Select1Start</code></pre>
 <h4 id="custom-input">Custom input<a class="headerlink" href="#custom-input" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Discard default input control
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">input</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>

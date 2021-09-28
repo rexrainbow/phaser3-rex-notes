@@ -3141,11 +3141,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6602,7 +6641,6 @@
 <h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </code></pre></div>
-
 <p>Reference: <a href="../loader/#image">load image</a></p>
 <h3 id="add-particle">Add particle<a class="headerlink" href="#add-particle" title="Permanent link">&para;</a></h3>
 <ol>
@@ -6758,7 +6796,7 @@
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -6775,8 +6813,8 @@
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
 
-    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">stepRate</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">}</span>            
@@ -6809,7 +6847,6 @@
     <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span><span class="p">,</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, <a href="../bitmapzone/">BitmapZone</a>, or <a href="../path/">Path or Curve</a>, which has <code>getRandomPoint(point)</code> method<ul>
 <li>Custom zone
@@ -6833,19 +6870,17 @@
 <h4 id="clear-zone">Clear zone<a class="headerlink" href="#clear-zone" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="emit-edge">Emit edge<a class="headerlink" href="#emit-edge" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">({</span>
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;edge&#39;</span><span class="p">,</span>
     <span class="nx">source</span><span class="o">:</span> <span class="nx">curve</span><span class="p">,</span>
 
-    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">stepRate</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">stepRate</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">seamless</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a>, or <a href="../path/">Path or Curve</a>, which has <code>getPoints(quantity, stepRate)</code> method<ul>
 <li>Custom edge
@@ -6886,14 +6921,12 @@
 <h4 id="clear-edge-zone">Clear edge zone<a class="headerlink" href="#clear-edge-zone" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setEmitZone</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="death-zone">Death zone<a class="headerlink" href="#death-zone" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">({</span>
      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;onEnter&#39;</span><span class="p">,</span>
      <span class="nx">source</span><span class="o">:</span> <span class="nx">geom</span>
 <span class="p">});</span>
 </code></pre></div>
-
 <ul>
 <li><code>type</code> : 'onEnter' or 'onLeave'</li>
 <li><code>source</code> : Geom like <a href="../geom-circle/">Circle</a>, <a href="../geom-ellipse/">Ellipse</a>, <a href="../geom-rectangle/">Rectangle</a>,<a href="../geom-triangle/">Triangle</a>, <a href="../geom-polygon/">Polygon</a><ul>
@@ -6917,7 +6950,6 @@
 <h4 id="clear-zone_1">Clear zone<a class="headerlink" href="#clear-zone_1" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setDeathZone</span><span class="p">();</span>
 </code></pre></div>
-
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Start
@@ -6948,7 +6980,6 @@
 <h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div>
-
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Emitter<ul>
@@ -7024,7 +7055,7 @@
     <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">cycle</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">quantity</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="nx">quantity</span><span class="o">:</span> <span class="mf">1</span>
 <span class="p">}</span>
 </code></pre></div></li>
 </ul>
@@ -7085,7 +7116,6 @@
 <h4 id="quantity">Quantity<a class="headerlink" href="#quantity" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">emitter</span><span class="p">.</span><span class="nx">setQuantity</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
 </code></pre></div>
-
 <h3 id="particles">Particles<a class="headerlink" href="#particles" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Hard limit the amount of particle objects
@@ -7141,14 +7171,14 @@
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">emitter</span><span class="p">.</span><span class="nx">getParticleCount</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Custom particle class
-    <div class="highlight"><pre><span></span><code><span class="kr">class</span> <span class="nx">MyParticle</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Particles</span><span class="p">.</span><span class="nx">Particle</span> <span class="p">{</span>
-    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyParticle</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Particles</span><span class="p">.</span><span class="nx">Particle</span> <span class="p">{</span>
+    <span class="kr">constructor</span> <span class="p">(</span><span class="nx">emitter</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
         <span class="cm">/* ... */</span>
     <span class="p">}</span>
 
     <span class="nx">update</span> <span class="p">(</span><span class="nx">delta</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">processors</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">delta</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">processors</span><span class="p">);</span>
+        <span class="k">super</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">delta</span><span class="p">,</span> <span class="nx">step</span><span class="p">,</span> <span class="nx">processors</span><span class="p">);</span>
         <span class="cm">/* ... */</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -7222,7 +7252,6 @@
 <div class="highlight"><pre><span></span><code><span class="nx">particles</span><span class="p">.</span><span class="nx">emitParticleAt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// particles.emitParticleAt(x, y, count);</span>
 </code></pre></div>
-
 <h4 id="z-index-of-emitters">Z index of emitters<a class="headerlink" href="#z-index-of-emitters" title="Permanent link">&para;</a></h4>
 <p>Z index of emitters is the same as <code>particles.emitters</code> (an array).</p>
 <ul>

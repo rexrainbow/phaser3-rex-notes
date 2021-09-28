@@ -2976,11 +2976,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
       
       <label class="md-nav__link" for="__nav_5_4">
+        Gamepad
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Gamepad" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Gamepad
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gamepad/" class="md-nav__link">
+        Gamepad
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
         Mouse wheel
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="Mouse wheel" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           Mouse wheel
         </label>
@@ -6290,7 +6329,7 @@
 </code></pre></div></li>
 <li>Attach <code>tintR</code>, <code>tintG</code>, <code>tintB</code>, and <code>tintGray</code> properties.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rextintrgbplugin&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">tintRGB</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mf">128</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -6299,11 +6338,11 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Install plugin in <a href="../game/#configuration">configuration of game</a>
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">TintRGBPlugin</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tintrgb-plugin.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">TintRGBPlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tintrgb-plugin.js&#39;</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTintRGB&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">TintRGBPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
@@ -6313,11 +6352,11 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Attach <code>tintR</code>, <code>tintG</code>, <code>tintB</code>, and <code>tintGray</code> properties.
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTintRGB&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">tintRGB</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mf">128</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-method">Import method<a class="headerlink" href="#import-method" title="Permanent link">&para;</a></h4>
@@ -6326,21 +6365,20 @@
     <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
 <li>Import method
-    <div class="highlight"><pre><span></span><code><span class="kr">import</span> <span class="nx">AddTintRGBProperties</span> <span class="nx">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tintrgb.js&#39;</span><span class="p">;</span>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">AddTintRGBProperties</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/tintrgb.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Attach <code>tintR</code>, <code>tintG</code>, <code>tintB</code>, and <code>tintGray</code> properties.
     <div class="highlight"><pre><span></span><code><span class="nx">AddTintRGBProperties</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">tintRGB</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mf">128</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 <h3 id="attach-properties">Attach properties<a class="headerlink" href="#attach-properties" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTintRGB&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">tintRGB</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mi">128</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">tintGray</span> <span class="o">=</span> <span class="mf">128</span><span class="p">;</span>
 <span class="c1">// gameObject.tintR = 128;</span>
 <span class="c1">// gameObject.tintG = 128;</span>
 <span class="c1">// gameObject.tintB = 128;</span>
 </code></pre></div>
-
 <ul>
 <li><code>tintRGB</code> : Initial tintRGB value in <code>0xRRGGBB</code>.</li>
 <li><code>tintR</code> : color R of tint, <code>0</code>~<code>255</code>. Default is <code>255</code>.</li>
@@ -6354,11 +6392,11 @@
 <h3 id="fade">Fade<a class="headerlink" href="#fade" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="nx">tintR</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">tintG</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">tintB</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">tintR</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">tintG</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">tintB</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="c1">// tintGray: 0,</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">3000</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mf">3000</span>
 <span class="p">})</span>
 </code></pre></div>
                 
