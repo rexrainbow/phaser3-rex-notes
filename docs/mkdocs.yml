@@ -168,15 +168,16 @@ nav:
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
-        - Drag rotate: dragrotate.md
-        
+        - Drag rotate: dragrotate.md        
     - Keyboard:
         - Keyboard events: keyboardevents.md
         - Combo events: keyboardcombo.md
+    - Gamepad:
+        - Gamepad: gamepad.md
     - Mouse wheel:
         - Mouse wheel: mousewheel.md
         - Mouse wheel scroller: mousewheelscroller.md
-        - Mouse-wheel to up/down: mousewheeltoupdown.md
+        - Mouse-wheel to up/down: mousewheeltoupdown.md    
 - Audio:
     - Audio: audio.md
     - Volume fading: fadevolume.md
