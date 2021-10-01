@@ -38,6 +38,8 @@ export default {
                     break;
                 case 'scaleX':
                 case 'scaleY':
+                case 'displayWidth':
+                case 'displayHeight':
                     parent.updateChildScale(child);
                     break;
                 case 'alpha':
