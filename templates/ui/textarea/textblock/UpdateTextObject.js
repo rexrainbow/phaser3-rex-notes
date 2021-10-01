@@ -1,7 +1,7 @@
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import GetLines from './GetLines.js';
-import DisplayVisibleText from './DisplayVisibleText.js';
+import SetNoWrapText from '../../../../plugins/utils/text/SetNoWrapText.js';
 import ResetTextObjectPosition from './ResetTextObjectPosition.js';
 
 var UpdateTextObject = function () {
@@ -12,7 +12,7 @@ var UpdateTextObject = function () {
     var text = GetLines.call(this, startLineIndex);
 
     // Display visible content
-    DisplayVisibleText.call(this, text);
+    SetNoWrapText(this.textObject, text);
 
     this.textObject.rexSizer.offsetY = textOffset;
     ResetTextObjectPosition.call(this);

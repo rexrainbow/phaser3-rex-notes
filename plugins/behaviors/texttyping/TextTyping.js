@@ -1,5 +1,6 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-import GetWrapText from './GetWrapText.js';
+import GetWrapText from '../../utils/text/GetWrapText.js';
+import SetNoWrapText from '../../utils/text/SetNoWrapText.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -156,7 +157,13 @@ class TextTyping extends ComponentBase {
 
     onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
-        this.setText(newText);
+
+        if (this.textWrapEnable) {
+            SetNoWrapText(this.parent, newText);
+        } else {
+            this.setText(newText);
+        }
+
         this.emit('type');
 
         if (this.isLastChar) {
