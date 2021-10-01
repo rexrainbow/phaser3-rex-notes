@@ -15,6 +15,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         wrapMode = NO_WRAP;
     }
 
+    var isNoWrap = (wrapMode === NO_WRAP);
     var isWordWrap = (wrapMode === WORD_WRAP);
 
     var retLines = WRAP_RESULT;
@@ -30,17 +31,13 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         line = lines[i];
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 
-        if (wrapMode === NO_WRAP) {
+        if (isNoWrap) {
             var textWidth = getTextWidth(line);
             retLines.push(LinesPool.newline(line, textWidth, newLineMode));
             continue;
-        } else {
-            if (i === 0) {
-                remainWidth = wrapWidth - offset;
-            } else {
-                remainWidth = wrapWidth;
-            }
         }
+
+        remainWidth = (i === 0) ? (wrapWidth - offset) : wrapWidth;
 
         // short string testing
         if (line.length <= 100) {
@@ -51,58 +48,69 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
             }
         }
 
-        // character mode
-        var tokenArray;
+        var tokenArray, isSpaceCharacterEnd;
         if (isWordWrap) {
             // word mode
             tokenArray = line.split(' ');
+            isSpaceCharacterEnd = (tokenArray[tokenArray.length - 1] === '');
+            if (isSpaceCharacterEnd) {
+                tokenArray.length -= 1;
+            }
         } else {
             tokenArray = line;
         }
-        var token, tokenWidth;
-        var lineText = '',
-            currLineWidth, lineWidth = 0;
+        var token, tokenWidth, isLastToken;
+        var lineText = '', lineWidth = 0;
+        var currLineWidth;
         var whiteSpaceWidth = (isWordWrap) ? getTextWidth(' ') : undefined;
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
             tokenWidth = getTextWidth(token);
 
-            if (isWordWrap && (j < (tokenLen - 1))) {
+            isLastToken = (j === (tokenLen - 1));
+            if (isWordWrap && (!isLastToken || isSpaceCharacterEnd)) {
                 token += ' ';
                 tokenWidth += whiteSpaceWidth;
+            }
 
-                // Edge case
-                if (tokenWidth > wrapWidth) {
-                    if (lineText !== '') {
-                        retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
-                    }
-                    retLines.push(LinesPool.newline(token, tokenWidth, WRAPPED_NEWLINE));
-                    lineText = '';
-                    lineWidth = 0;
-                    continue;
+            // Special case : text width of single token is larger than a line width
+            if (isWordWrap && (tokenWidth > wrapWidth)) {
+                if (lineText !== '') {
+                    // Has pending lineText, flush it out
+                    retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+
+                } else if ((j === 0) && (offset > 0)) {
+                    // No pending lineText, but has previous text. Append a newline
+                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
+
                 }
+
+                // Flush this token out
+                retLines.push(LinesPool.newline(token, tokenWidth, (!isLastToken) ? WRAPPED_NEWLINE : newLineMode));
+                lineText = '';
+                lineWidth = 0;
+                continue;
             }
 
             currLineWidth = lineWidth + tokenWidth;
             if (currLineWidth > remainWidth) {
-                // new line
-                if (j === 0) {
-                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
-                } else {
-                    retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
-                    lineText = token;
-                    lineWidth = tokenWidth;
-                }
-
+                // New line
+                retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+                lineText = token;
+                lineWidth = tokenWidth;
                 remainWidth = wrapWidth;
+
             } else {
+                // Append token, continue
                 lineText += token;
                 lineWidth = currLineWidth;
             }
-        } // for token in tokenArray
 
-        // flush remain text
-        retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
+            if (isLastToken) {
+                // Flush remain text
+                retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
+            }
+        } // for token in tokenArray
 
     } // for each line in lines
 
