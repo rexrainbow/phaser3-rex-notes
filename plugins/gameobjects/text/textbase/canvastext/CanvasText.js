@@ -3,8 +3,9 @@ import PenManager from '../penmanger/PenManager.js';
 import HitAreaManager from '../hitareamanager/HitAreaManager.js';
 import SetInteractive from './SetInteractive.js';
 import CONST from '../const.js';
-import WrapText from './WrapText.js';
+import WrapText from '../wraptext/WrapText.js';
 import Clone from '../../../../utils/object/Clone.js';
+import { FreeLines, GetLine } from '../wraptext/LinePool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
@@ -59,9 +60,11 @@ class CanvasText {
         if (text === "") {
             return penManager;
         }
-        if (this.parent.style.isWrapFitMode) {
+
+        var textStyle = this.parent.style;
+        if (textStyle.isWrapFitMode) {
             var padding = this.parent.padding;
-            wrapWidth = this.parent.style.fixedWidth - padding.left - padding.right;
+            wrapWidth = textStyle.fixedWidth - padding.left - padding.right;
         }
 
         var canvas = this.canvas;
@@ -73,6 +76,10 @@ class CanvasText {
 
         var cursorX = 0,
             cursorY = 0;
+
+        var customTextWrapCallback = textStyle.wrapCallback,
+            customTextWrapCallbackScope = textStyle.wrapCallbackScope;
+        var reuseLines = true;
 
         var plainText, curProp, curStyle;
         var match = this.parser.splitText(text),
@@ -106,13 +113,33 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
 
-
-                wrapLines = WrapText(
-                    plainText,
-                    MeasureText,
-                    wrapMode, wrapWidth,
-                    cursorX
-                );
+                if (!customTextWrapCallback) {
+                    wrapLines = WrapText(
+                        plainText,
+                        MeasureText,
+                        wrapMode, wrapWidth,
+                        cursorX
+                    );
+                } else { // customTextWrapCallback
+                    wrapLines = customTextWrapCallback.call(customTextWrapCallbackScope,
+                        plainText,
+                        MeasureText,
+                        wrapWidth,
+                        cursorX
+                    );
+                    if (typeof (wrapLines) === 'string') {
+                        wrapLines = wrapLines.split('\n');
+                    }
+                    var n;
+                    for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
+                        n = wrapLines[j];
+                        if (typeof (n) === 'string') {
+                            wrapLines[j] = GetLine(n, MeasureText(n), (j < (jLen - 1)) ? 2 : 0);
+                        } else {
+                            reuseLines = false;
+                        }
+                    }
+                }  // customTextWrapCallback
 
                 // add pens
                 var n;
@@ -128,6 +155,12 @@ class CanvasText {
                     }
 
                 }
+
+                if (reuseLines) {
+                    FreeLines(wrapLines);
+                }
+                wrapLines = null;
+
                 context.restore();
 
             }

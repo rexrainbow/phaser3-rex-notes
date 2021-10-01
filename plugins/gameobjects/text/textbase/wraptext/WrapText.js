@@ -1,4 +1,4 @@
-import Pool from '../../../../pool.js';
+import { GetLine } from './LinePool.js';
 import CONST from '../const.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;
@@ -9,21 +9,18 @@ const WORD_WRAP = CONST.WORD_WRAP;
 const CHAR_WRAP = CONST.CHAR_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
-var WRAP_RESULT = [];
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     if (wrapWidth <= 0) {
         wrapMode = NO_WRAP;
     }
 
-    var isNoWrap = (wrapMode === NO_WRAP);
-    var isWordWrap = (wrapMode === WORD_WRAP);
-
-    var retLines = WRAP_RESULT;
-    LinesPool.pushMultiple(retLines);
-
+    var retLines = [];
     if (!text || !text.length) {
         return retLines;
     }
+
+    var isNoWrap = (wrapMode === NO_WRAP);
+    var isWordWrap = (wrapMode === WORD_WRAP);
 
     var lines = text.split(splitRegExp),
         line, remainWidth, newLineMode;
@@ -33,7 +30,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
 
         if (isNoWrap) {
             var textWidth = getTextWidth(line);
-            retLines.push(LinesPool.newline(line, textWidth, newLineMode));
+            retLines.push(GetLine(line, textWidth, newLineMode));
             continue;
         }
 
@@ -43,7 +40,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         if (line.length <= 100) {
             var textWidth = getTextWidth(line);
             if (textWidth <= remainWidth) {
-                retLines.push(LinesPool.newline(line, textWidth, newLineMode));
+                retLines.push(GetLine(line, textWidth, newLineMode));
                 continue;
             }
         }
@@ -77,16 +74,16 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
             if (isWordWrap && (tokenWidth > wrapWidth)) {
                 if (lineText !== '') {
                     // Has pending lineText, flush it out
-                    retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+                    retLines.push(GetLine(lineText, lineWidth, WRAPPED_NEWLINE));
 
                 } else if ((j === 0) && (offset > 0)) {
                     // No pending lineText, but has previous text. Append a newline
-                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
+                    retLines.push(GetLine('', 0, WRAPPED_NEWLINE));
 
                 }
 
                 // Flush this token out
-                retLines.push(LinesPool.newline(token, tokenWidth, (!isLastToken) ? WRAPPED_NEWLINE : newLineMode));
+                retLines.push(GetLine(token, tokenWidth, (!isLastToken) ? WRAPPED_NEWLINE : newLineMode));
                 lineText = '';
                 lineWidth = 0;
                 continue;
@@ -95,7 +92,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
             currLineWidth = lineWidth + tokenWidth;
             if (currLineWidth > remainWidth) {
                 // New line
-                retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+                retLines.push(GetLine(lineText, lineWidth, WRAPPED_NEWLINE));
                 lineText = token;
                 lineWidth = tokenWidth;
                 remainWidth = wrapWidth;
@@ -108,25 +105,13 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
 
             if (isLastToken) {
                 // Flush remain text
-                retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
+                retLines.push(GetLine(lineText, lineWidth, newLineMode));
             }
         } // for token in tokenArray
 
     } // for each line in lines
 
     return retLines;
-};
-
-var LinesPool = new Pool();
-LinesPool.newline = function (text, width, newLineMode) {
-    var l = this.pop();
-    if (l === null) {
-        l = {};
-    }
-    l.text = text;
-    l.width = width;
-    l.newLineMode = newLineMode;
-    return l;
 };
 
 export default WrapText;
