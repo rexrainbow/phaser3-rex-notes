@@ -24,7 +24,12 @@ export default {
 
         tweenConfig.targets = localTargets;
         var tween = scene.tweens.add(tweenConfig);
-        tween.on('update', function (tween, key, target) {
+        var tweenUpdateListener = function (tween, key, target) {
+            if (!target.parent) {
+                // target object was removed, so remove this tween too to avoid crashing
+                scene.tweens.remove(tween);
+                return;
+            }
             var parent = target.parent;
             var child = target.self;
             switch (key) {
@@ -46,8 +51,8 @@ export default {
                     parent.updateChildAlpha(child);
                     break;
             }
-
-        })
+        };
+        tween.on('update', tweenUpdateListener);
 
         return tween;
     },
