@@ -41,12 +41,24 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         y: number
     ): this;
 
+    setChildLocalPosition(
+        child: Phaser.GameObjects.GameObject,
+        x: number,
+        y: number
+    ): this;
+
     setChildRotation(
         child: Phaser.GameObjects.GameObject,
         rotation: number
     ): this;
 
     setChildScale(
+        child: Phaser.GameObjects.GameObject,
+        scaleX: number,
+        scaleY: number
+    ): this;
+
+    setChildLocalScale(
         child: Phaser.GameObjects.GameObject,
         scaleX: number,
         scaleY: number
@@ -60,10 +72,15 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
 
     setChildVisible(
         child: Phaser.GameObjects.GameObject,
-        visible: number
+        visible: boolean
     ): this;
 
     setChildAlpha(
+        child: Phaser.GameObjects.GameObject,
+        alpha: number
+    ): this;
+
+    setChildLocalAlpha(
         child: Phaser.GameObjects.GameObject,
         alpha: number
     ): this;
@@ -96,8 +113,12 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
         child: Phaser.GameObjects.GameObject
     ): this;
 
+    tween(
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
+    ): this
+
     tweenChild(
-        config: any
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): this
 
     getChildren(
