@@ -1,3 +1,5 @@
+import SetNoWrapText from '../../../utils/text/SetNoWrapText.js';
+
 export default {
     showPage(idx) {
         this.displayText(
@@ -42,6 +44,6 @@ export default {
     },
 
     displayText(text) {
-        this.parent.setText(text);
+        SetNoWrapText(this.parent, text);
     }
 }
