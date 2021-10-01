@@ -15,6 +15,9 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         wrapMode = NO_WRAP;
     }
 
+    var isNoWrap = (wrapMode === NO_WRAP);
+    var isWordWrap = (wrapMode === WORD_WRAP);
+
     var retLines = WRAP_RESULT;
     LinesPool.pushMultiple(retLines);
 
@@ -23,22 +26,18 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     }
 
     var lines = text.split(splitRegExp),
-        line, remainWidth, isLaseLine, newLineMode;
+        line, remainWidth, newLineMode;
     for (var i = 0, linesLen = lines.length; i < linesLen; i++) {
         line = lines[i];
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 
-        if (wrapMode === NO_WRAP) {
+        if (isNoWrap) {
             var textWidth = getTextWidth(line);
             retLines.push(LinesPool.newline(line, textWidth, newLineMode));
             continue;
-        } else {
-            if (i === 0) {
-                remainWidth = wrapWidth - offset;
-            } else {
-                remainWidth = wrapWidth;
-            }
         }
+
+        remainWidth = (i === 0) ? (wrapWidth - offset) : wrapWidth;
 
         // short string testing
         if (line.length <= 100) {
@@ -49,56 +48,69 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
             }
         }
 
-        // character mode
-        var tokenArray;
-        if (wrapMode === WORD_WRAP) {
+        var tokenArray, isSpaceCharacterEnd;
+        if (isWordWrap) {
             // word mode
             tokenArray = line.split(' ');
+            isSpaceCharacterEnd = (tokenArray[tokenArray.length - 1] === '');
+            if (isSpaceCharacterEnd) {
+                tokenArray.length -= 1;
+            }
         } else {
             tokenArray = line;
         }
-        var token;
-        var curLineText = '',
-            lineText = '',
-            currLineWidth, lineWidth = 0;
+        var token, tokenWidth, isLastToken;
+        var lineText = '', lineWidth = 0;
+        var currLineWidth;
+        var whiteSpaceWidth = (isWordWrap) ? getTextWidth(' ') : undefined;
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
+            tokenWidth = getTextWidth(token);
 
-            if (wrapMode === WORD_WRAP) {
-                curLineText += token;
-
-                if (j < (tokenLen - 1)) {
-                    curLineText += ' ';
-                }
-            } else {
-                curLineText += token;
+            isLastToken = (j === (tokenLen - 1));
+            if (isWordWrap && (!isLastToken || isSpaceCharacterEnd)) {
+                token += ' ';
+                tokenWidth += whiteSpaceWidth;
             }
 
-            currLineWidth = getTextWidth(curLineText);
-            if (currLineWidth > remainWidth) {
-                // new line
-                if (j === 0) {
-                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
-                } else {
+            // Special case : text width of single token is larger than a line width
+            if (isWordWrap && (tokenWidth > wrapWidth)) {
+                if (lineText !== '') {
+                    // Has pending lineText, flush it out
                     retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
-                    curLineText = token;
-                    if (wrapMode === WORD_WRAP) {
-                        if (j < (tokenLen - 1)) {
-                            curLineText += ' ';
-                        }
-                    }
-                    currLineWidth = getTextWidth(curLineText);
+
+                } else if ((j === 0) && (offset > 0)) {
+                    // No pending lineText, but has previous text. Append a newline
+                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
+
                 }
 
-                remainWidth = wrapWidth;
+                // Flush this token out
+                retLines.push(LinesPool.newline(token, tokenWidth, (!isLastToken) ? WRAPPED_NEWLINE : newLineMode));
+                lineText = '';
+                lineWidth = 0;
+                continue;
             }
 
-            lineText = curLineText;
-            lineWidth = currLineWidth;
-        } // for token in tokenArray
+            currLineWidth = lineWidth + tokenWidth;
+            if (currLineWidth > remainWidth) {
+                // New line
+                retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+                lineText = token;
+                lineWidth = tokenWidth;
+                remainWidth = wrapWidth;
 
-        // flush remain text
-        retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
+            } else {
+                // Append token, continue
+                lineText += token;
+                lineWidth = currLineWidth;
+            }
+
+            if (isLastToken) {
+                // Flush remain text
+                retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
+            }
+        } // for token in tokenArray
 
     } // for each line in lines
 

@@ -1,8 +1,8 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import {
     TextType, TagTextType, BitmapTextType
-} from '../../utils/system/GetTextObjectType.js';
-import GetTextObjectType from '../../utils/system/GetTextObjectType.js';
+} from '../../utils/text/GetTextObjectType.js';
+import GetTextObjectType from '../../utils/text/GetTextObjectType.js';
 import TextToLines from './methods/TextToLines.js';
 import Methods from './methods/Methods.js';
 

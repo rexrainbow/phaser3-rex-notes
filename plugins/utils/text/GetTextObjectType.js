@@ -1,4 +1,4 @@
-import IsTextGameObject from '../text/IsTextGameObject.js';
+import IsTextGameObject from './IsTextGameObject.js';
 import IsBitmapTextGameObject from '../bitmaptext/IsBitmapTextGameObject.js';
 
 const TextType = 0;

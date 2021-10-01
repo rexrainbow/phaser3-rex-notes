@@ -1,7 +1,7 @@
 import {
     TextType, TagTextType, BitmapTextType
-} from '../../utils/system/GetTextObjectType.js';
-import GetTextObjectType from '../../utils/system/GetTextObjectType.js';
+} from './GetTextObjectType.js';
+import GetTextObjectType from './GetTextObjectType.js';
 
 var GetWrapText = function (textObject, text) {
     var textObjectType = GetTextObjectType(textObject);

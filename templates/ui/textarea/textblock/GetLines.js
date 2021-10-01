@@ -1,4 +1,4 @@
-import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/system/GetTextObjectType.js'
+import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
 
 var GetLines = function (startLineIdx) {
     var endLineIdx = startLineIdx + this.visibleLinesCount;

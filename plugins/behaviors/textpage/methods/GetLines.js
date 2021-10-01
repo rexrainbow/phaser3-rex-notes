@@ -1,6 +1,6 @@
 import {
     TextType, TagTextType, BitmapTextType
-} from '../../../utils/system/GetTextObjectType.js';
+} from '../../../utils/text/GetTextObjectType.js';
 
 var GetLines = function (startLineIndex, endLineIdx) {
     if (startLineIndex === undefined) {
