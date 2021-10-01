@@ -114,11 +114,11 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
     ): this;
 
     tween(
-        config: Phaser.Types.Tweens.TweenBuilderConfig
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): this
 
     tweenChild(
-        config: Phaser.Types.Tweens.TweenBuilderConfig
+        config: Phaser.Types.Tweens.TweenBuilderConfig | object
     ): this
 
     getChildren(
