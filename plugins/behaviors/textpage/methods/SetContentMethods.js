@@ -1,4 +1,4 @@
-import TextToLines from "./TextToLines";
+import TextToLines from "../../../utils/text/TextToLines.js";
 
 var GetString = function (text) {
     if (Array.isArray(text)) {

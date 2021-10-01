@@ -1,7 +1,7 @@
 import {
     TextType, TagTextType, BitmapTextType
-} from '../../../utils/text/GetTextObjectType.js';
-import GetTextObjectType from '../../../utils/text/GetTextObjectType.js';
+} from './GetTextObjectType.js';
+import GetTextObjectType from './GetTextObjectType.js';
 
 var TextToLines = function (textObject, text, lines) {
     var textObjectType = GetTextObjectType(textObject);

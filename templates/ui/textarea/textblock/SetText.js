@@ -1,4 +1,4 @@
-import { TextType, TagTextType, BitmapTextType } from '../../../../plugins/utils/text/GetTextObjectType.js'
+import TextToLines from "../../../../plugins/utils/text/TextToLines.js";
 
 var SetText = function (text) {
     if (text !== undefined) {
@@ -6,22 +6,11 @@ var SetText = function (text) {
     }
 
     // Wrap content in lines
-    switch (this.textObjectType) {
-        case TextType:
-            this.lines = this.textObject.getWrappedText(this.text); // Array of string
-            this.linesCount = this.lines.length;
-            break;
-        case TagTextType:
-            this.lines = this.textObject.getPenManager(this.text, this.lines); // Pens-manager
-            this.linesCount = this.lines.linesCount;
-            break;
-        case BitmapTextType:
-            this.lines = this.textObject
-                .setText(this.text)
-                .getTextBounds().wrappedText.split('\n');
-            this.linesCount = this.lines.length;
-            break;
-    }
+    this.lines = TextToLines(this.textObject, this.text, this.lines);
+
+    // Get lines count
+    this.linesCount = this.lines.length;
+
     // Re-calculate these values later
     this._textHeight = undefined;
     this._textVisibleHeight = undefined;
