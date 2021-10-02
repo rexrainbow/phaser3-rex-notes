@@ -70,7 +70,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
                 tokenWidth += whiteSpaceWidth;
             }
 
-            // Special case : text width of single token is larger than a line width
+            // Text width of single token is larger than a line width
             if (isWordWrap && (tokenWidth > wrapWidth)) {
                 if (lineText !== '') {
                     // Has pending lineText, flush it out
@@ -87,9 +87,15 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
                 // Continue at last-wordBreak-line
                 var lastwordBreakLine = retLines.pop();
                 lineText = lastwordBreakLine.text;
-                lineWidth = lastwordBreakLine.width;
+                lineWidth = lastwordBreakLine.width;                
                 // Free this line
                 FreeLine(lastwordBreakLine);
+
+                // Special case : Start at a space character, discard it
+                if (lineText === ' ') {
+                    lineText = '';
+                    lineWidth = 0;
+                }
                 continue;
             }
 

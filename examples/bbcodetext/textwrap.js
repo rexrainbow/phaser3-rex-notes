@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var s1 = 'See loooooonnnnnggggg aaa loooooonnnnngggeeeerrr words';
+        var s1 = 'See loooooonnnnngg a loooooonnnnngggeeeerrr words';
 
         this.add.text(100, 0, 'Text with useAdvancedWrap');
         this.add.text(100, 30, s1, {
