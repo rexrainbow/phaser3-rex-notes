@@ -1,6 +1,22 @@
 // import * as Phaser from 'phaser';
+export default ContainerLite;
 
-export default class ContainerLite extends Phaser.GameObjects.Zone {
+declare namespace ContainerLite {
+    interface ILocalState {
+        parent: ContainerLite,
+        self: Phaser.GameObjects.GameObject,
+
+        x: number, y: number,
+        rotation: number, angle: number,
+        scaleX: number, scaleY: number, displayWidth: number, displayHeight: number,
+        flipX: boolean, flipY: boolean,
+        alpha: number,
+        visible: boolean,
+        active: boolean,
+    }
+}
+
+declare class ContainerLite extends Phaser.GameObjects.Zone {
     isRexContainerLite: true;
 
     constructor(
@@ -50,6 +66,11 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
     setChildRotation(
         child: Phaser.GameObjects.GameObject,
         rotation: number
+    ): this;
+
+    setChildAngle(
+        child: Phaser.GameObjects.GameObject,
+        angle: number
     ): this;
 
     setChildScale(
@@ -197,6 +218,10 @@ export default class ContainerLite extends Phaser.GameObjects.Zone {
     getTopmostParent(
         gameObject?: Phaser.GameObjects.GameObject
     ): ContainerLite;
+
+    getLocalState(
+        child: Phaser.GameObjects.GameObject
+    ): ContainerLite.ILocalState;
 
     addToLayer(
         layer: Phaser.GameObjects.Layer

@@ -28,6 +28,12 @@ export default {
         return this;
     },
 
+    setChildAngle(child, angle) {
+        child.angle = angle;
+        this.resetChildRotationState(child);
+        return this;
+    },
+
     setChildLocalRotation(child, rotation) {
         var localState = GetLocalState(child);
         localState.rotation = rotation;
