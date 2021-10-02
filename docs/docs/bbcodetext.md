@@ -11,6 +11,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Hit area of words](https://codepen.io/rexrainbow/pen/voXPRM)
 - [Align](https://codepen.io/rexrainbow/pen/qGxrjZ)
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
+- [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
 
 ## Usage
 
