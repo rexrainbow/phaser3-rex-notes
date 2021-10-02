@@ -1,4 +1,4 @@
-import { GetLine } from './LinePool.js';
+import { FreeLine, GetLine } from './LinePool.js';
 import CONST from '../const.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;
@@ -82,10 +82,14 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
 
                 }
 
-                // Flush this token out
-                retLines.push(GetLine(token, tokenWidth, (!isLastToken) ? WRAPPED_NEWLINE : newLineMode));
-                lineText = '';
-                lineWidth = 0;
+                // Word break
+                retLines.push(...WrapText(token, getTextWidth, CHAR_WRAP, wrapWidth, 0));
+                // Continue at last-wordBreak-line
+                var lastwordBreakLine = retLines.pop();
+                lineText = lastwordBreakLine.text;
+                lineWidth = lastwordBreakLine.width;
+                // Free this line
+                FreeLine(lastwordBreakLine);
                 continue;
             }
 

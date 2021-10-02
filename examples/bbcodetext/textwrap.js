@@ -13,21 +13,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var s1 = 'See loooooonnnnnggg words ABC ABC ABC ABC ABC ABC';
+        var s1 = 'See loooooonnnnnggggg aaa loooooonnnnngggeeeerrr words';
 
-        // Built-in character wrap
-        this.add.rexBBCodeText(100, 30, s1, {
+        this.add.text(100, 0, 'Text with useAdvancedWrap');
+        this.add.text(100, 30, s1, {
             fixedWidth: 180,
             backgroundColor: '#555',
             fontSize: '20px',
-            wrap: {
-                mode: 'char',
-                width: 180
+            wordWrap: {
+                width: 180,
+                useAdvancedWrap: true
             },
-        });
+        })
 
-        // Built-in word wrap
-        this.add.rexBBCodeText(300, 30, s1, {
+        // Character wrap
+        this.add.text(100, 150, 'BBCodeText with word wrap');
+        this.add.rexBBCodeText(100, 180, s1, {
             fixedWidth: 180,
             backgroundColor: '#555',
             fontSize: '20px',
@@ -37,8 +38,21 @@ class Demo extends Phaser.Scene {
             },
         });
 
+        // Built-in word wrap
+        this.add.text(500, 150, 'BBCodeText with character wrap');
+        this.add.rexBBCodeText(500, 180, s1, {
+            fixedWidth: 180,
+            backgroundColor: '#555',
+            fontSize: '20px',
+            wrap: {
+                mode: 'char',
+                width: 180
+            },
+        });
+
         // Custom wrap callback
-        this.add.rexBBCodeText(100, 300, s1, {
+        this.add.text(100, 300, 'BBCodeText with custom wrap callback');
+        this.add.rexBBCodeText(100, 330, s1, {
             fixedWidth: 180,
             backgroundColor: '#555',
             fontSize: '20px',

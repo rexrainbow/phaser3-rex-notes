@@ -2,6 +2,13 @@ import Pool from '../../../../pool.js';
 
 var LinesPool = new Pool();
 
+var FreeLine = function (line) {
+    if (!line) {
+        return;
+    }
+    LinesPool.push(line);
+}
+
 var FreeLines = function (lines) {
     if (!lines) {
         return;
@@ -21,6 +28,7 @@ var GetLine = function (text, width, newLineMode) {
 }
 
 export {
-    GetLine,
+    FreeLine,
     FreeLines,
+    GetLine,
 }
