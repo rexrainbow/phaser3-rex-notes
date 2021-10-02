@@ -402,6 +402,13 @@ container.tweenChild({
 
 [Paramters of configuration](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/tween/#create-tween-task) is the same as tween task.
 
+Supported properties :
+
+- `x`, `y`,
+- `angle`, `rotation`
+- `scaleX`, `scaleY`, `displayWidth`, `displayHeight`
+- `alpha`
+
 ### Depth
 
 - Get depth of container
