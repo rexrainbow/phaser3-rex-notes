@@ -13,13 +13,15 @@ In-memory JavaScript Datastore with Persistence.
 
 ```javascript
 var db = new loki();
-// var db = new loki('loki.json');  // load database from file
+// var db = new loki('loki.json', config);  // load database from file
 ```
+
 
 ### Create collection
 
 ```javascript
 var collection = db.addCollection(name);
+// var collection = db.addCollection(name, config);
 ```
 
 ### Get collection
