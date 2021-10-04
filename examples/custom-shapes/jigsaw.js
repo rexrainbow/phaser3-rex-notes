@@ -74,9 +74,9 @@ var CreateJigsawShape = function (scene, convexEdges, fillColor, strokeColor) {
 
             var convexRight = convexEdges.right;
             if (convexRight === 1) {
-                polygon.lineTo(width, 0).arc(width, y, radiusY, 270, 90).lineTo(width, height)
+                polygon.lineTo(width, segY).arc(width, y, radiusY, 270, 90).lineTo(width, height)
             } else if (convexRight === -1) {
-                polygon.lineTo(width, 0).arc(width, y, radiusY, 270, 90, true).lineTo(width, height)
+                polygon.lineTo(width, segY).arc(width, y, radiusY, 270, 90, true).lineTo(width, height)
             } else {
                 polygon.lineTo(width, height)
             }

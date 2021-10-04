@@ -76,6 +76,32 @@ class BaseShapes extends Shape {
         return this;
     }
 
+    setFillStyle(color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+
+        this.dirty = this.dirty ||
+            (this.fillColor !== color) ||
+            (this.fillAlpha !== alpha);
+
+        super.setFillStyle(color, alpha);
+        return this;
+    }
+
+    setStrokeStyle(lineWidth, color, alpha) {
+        if (alpha === undefined) {
+            alpha = 1;
+        }
+        this.dirty = this.dirty ||
+            (this.lineWidth !== lineWidth) ||
+            (this.strokeColor !== color) ||
+            (this.strokeAlpha !== alpha);
+
+        super.setStrokeStyle(lineWidth, color, alpha);
+        return this;
+    }
+
     updateShapes() {
 
     }
