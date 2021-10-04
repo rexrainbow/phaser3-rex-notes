@@ -7729,6 +7729,9 @@
     <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getShape</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
     <span class="c1">// ...</span>
     <span class="c1">// var isSizeChanged = this.isSizeChanged;</span>
+
+    <span class="c1">// var fillColor = this.fillColor;</span>
+    <span class="c1">// var strokeColor = this.strokeColor;</span>
 <span class="p">}</span>
 </code></pre></div><ul>
 <li>Shape instances : Change properties of shape instances.<ul>
@@ -7737,6 +7740,8 @@
 </ul>
 </li>
 <li>Is size changed: <code>this.isSizeChanged</code></li>
+<li>Fill color : <code>this.fillColor</code>, <code>this.fillAlpha</code></li>
+<li>Stroke color : <code>this.strokeColor</code>, <code>this.strokeAlpha</code>, <code>this.lineWidth</code></li>
 </ul>
 </li>
 </ul>
@@ -7791,6 +7796,8 @@
 <li><code>customShapes.isSizeChanged</code> will also be <code>true</code>.</li>
 </ul>
 </li>
+<li>Set fill color : <code>customShapes.setFillStyle(color, alpha)</code></li>
+<li>Set stroke color : <code>customShapes.setStrokeStyle(lineWidth, color, alpha)</code></li>
 <li>Set dirty : <code>customShapes.setDirty()</code></li>
 <li>Set update shape callback : <code>customShapes.setUpdateShapesCallback(callback)</code></li>
 </ul>

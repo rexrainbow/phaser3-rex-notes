@@ -7631,10 +7631,11 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs">Sample code</a></p>
 <h3 id="create-database">Create database<a class="headerlink" href="#create-database" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">loki</span><span class="p">();</span>
-<span class="c1">// var db = new loki(&#39;loki.json&#39;);  // load database from file</span>
+<span class="c1">// var db = new loki(&#39;loki.json&#39;, config);  // load database from file</span>
 </code></pre></div>
 <h3 id="create-collection">Create collection<a class="headerlink" href="#create-collection" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<span class="c1">// var collection = db.addCollection(name, config);</span>
 </code></pre></div>
 <h3 id="get-collection">Get collection<a class="headerlink" href="#get-collection" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
