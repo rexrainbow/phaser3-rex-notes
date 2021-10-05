@@ -84,6 +84,9 @@ module.exports = {
     'bitmapzoneplugin': './plugins/bitmapzone-plugin.js',
     'perlingrivatywellplugin': './plugins/perlingrivatywell-plugin.js',
 
+    // camera
+    'scaleouterplugin' : './plugins/scaleouter-plugin.js',
+
     // file chooser
     'filechooserplugin': './plugins/filechooser-plugin.js',
 

@@ -57,7 +57,7 @@ class OutlinePostFxPipeline extends PostFXPipeline {
         if (Quality === value) {
             return;
         }
-        Quality = quality;
+        Quality = value;
         FragSrc = GetFrag(value);
     }
 
