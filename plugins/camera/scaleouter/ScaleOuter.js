@@ -19,7 +19,7 @@ class ScaleOuter extends ComponentBase {
         scene.scale.on('resize', this.scale, this);
 
         // Scale manually at beginning
-        scene.events.once('start', this.scale, this);
+        scene.events.once('preupdate', this.scale, this);
     }
 
     destroy() {
