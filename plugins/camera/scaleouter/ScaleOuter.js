@@ -17,6 +17,9 @@ class ScaleOuter extends ComponentBase {
         this.zoom = 1;
 
         scene.scale.on('resize', this.scale, this);
+
+        // Scale manually at beginning
+        scene.events.once('start', this.scale, this);
     }
 
     destroy() {
