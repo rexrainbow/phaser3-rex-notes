@@ -231,6 +231,13 @@ Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registr
     // var delta = scene.game.loop.delta;
     ```
 
+## Game config
+
+```javascript
+var config = game.config;
+// var config = scene.game.config;
+```
+
 ## Window size
 
 - Width
