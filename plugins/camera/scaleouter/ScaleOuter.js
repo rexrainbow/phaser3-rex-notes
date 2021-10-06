@@ -1,10 +1,7 @@
-import ComponentBase from '../../utils/componentbase/ComponentBase.js';
-
 const SetStruct = Phaser.Structs.Set;
 
-class ScaleOuter extends ComponentBase {
+class ScaleOuter {
     constructor(scene) {
-        super(scene, { eventEmitter: false });
         this.scene = scene;
         // Set gameConfig.scale.mode to Phaser.Scale.RESIZE
 
@@ -26,10 +23,8 @@ class ScaleOuter extends ComponentBase {
         this.scene.scale.off('resize', this.scale, this);
         this.scene.events.off('preupdate', this.scale, this);
 
-        super.destroy();
-
-        this.scene = undefined;
         this.cameras.clear();
+        this.scene = undefined;
     }
 
     add(camera) {
@@ -39,7 +34,7 @@ class ScaleOuter extends ComponentBase {
     }
 
     scale() {
-        if (this.cameras.size == 0) {
+        if (this.cameras.size === 0) {
             this.cameras.set(this.scene.cameras.main);
         }
 

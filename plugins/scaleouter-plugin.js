@@ -11,6 +11,12 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
+    destroy() {
+        this.scaleOuter.destroy();
+        this.scaleOuter = undefined;
+        super.destroy();
+    }
+
     add(camera) {
         this.scaleOuter.add(camera);
         return this;
