@@ -7283,6 +7283,7 @@
     <span class="c1">//</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div></li>
+<li>InputPlugin.preUpdate()</li>
 <li>TweenManager.preUpdate() to arrange active targets</li>
 <li>UpdateList.preUpdate(), to arrange game objects in UpdateList</li>
 </ul>
@@ -7403,7 +7404,7 @@ SceneEventRender&gt;"scene.events: render"]
 end
 
 subgraph Update
-SceneEventPreUpdate&gt;"scene.events: preupdate&lt;br&gt;&lt;br&gt;TweenManager.preUpdate()&lt;br&gt;UpdateList.preUpdate()"]
+SceneEventPreUpdate&gt;"scene.events: preupdate&lt;br&gt;&lt;br&gt;InputPlugin.preUpdate()&lt;br&gt;TweenManager.preUpdate()&lt;br&gt;UpdateList.preUpdate()"]
 SceneEventUpdate&gt;"scene.events: update&lt;br&gt;&lt;br&gt;TweenManager.update()&lt;br&gt;UpdateList.update()&lt;br&gt;gameObject.preUpdate()"]
 SceneUpdate["scene.update()"]
 SceneEventPostUpdate&gt;"scene.events: postupdate"]

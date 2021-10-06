@@ -319,6 +319,12 @@ scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ });
 scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ });
 ```
 
+### First event of all
+
+```javascript
+scene.input.on('preupdate', function() { /* ... */ })
+```
+
 ### Single touch
 
 #### Pointer

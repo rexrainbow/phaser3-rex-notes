@@ -15,6 +15,7 @@
                 //
             }, scope);
             ```
+        - InputPlugin.preUpdate()
         - TweenManager.preUpdate() to arrange active targets
         - UpdateList.preUpdate(), to arrange game objects in UpdateList
     1.  scene.events `update` event
@@ -126,7 +127,7 @@ SceneEventRender>"scene.events: render"]
 end
 
 subgraph Update
-SceneEventPreUpdate>"scene.events: preupdate<br><br>TweenManager.preUpdate()<br>UpdateList.preUpdate()"]
+SceneEventPreUpdate>"scene.events: preupdate<br><br>InputPlugin.preUpdate()<br>TweenManager.preUpdate()<br>UpdateList.preUpdate()"]
 SceneEventUpdate>"scene.events: update<br><br>TweenManager.update()<br>UpdateList.update()<br>gameObject.preUpdate()"]
 SceneUpdate["scene.update()"]
 SceneEventPostUpdate>"scene.events: postupdate"]
