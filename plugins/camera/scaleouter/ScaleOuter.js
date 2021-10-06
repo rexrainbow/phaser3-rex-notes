@@ -23,6 +23,9 @@ class ScaleOuter extends ComponentBase {
     }
 
     destroy() {
+        this.scene.scale.off('resize', this.scale, this);
+        this.scene.events.off('preupdate', this.scale, this);
+
         super.destroy();
 
         this.scene = undefined;
