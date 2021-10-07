@@ -172,7 +172,7 @@ class CanvasText {
 
     get startXOffset() {
         var defaultStyle = this.defaultStyle;
-        return (defaultStyle.strokeThickness / 2);
+        return (defaultStyle.strokeThickness / 2) + defaultStyle.xOffset;
     }
 
     get startYOffset() {

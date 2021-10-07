@@ -1,6 +1,7 @@
 import Render from './render/Render.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
-import CanvasTextKlass from './canvastext/CanvasText.js';
+import MeasureTextMargins from './textstyle/MeasureTextMargins.js';
+import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import CONST from './const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
@@ -103,7 +104,7 @@ class Text extends GameObject {
         if (!PensPools.hasOwnProperty(type)) {
             PensPools[type] = new Pool();
         }
-        this.canvasText = new CanvasTextKlass({
+        this.canvasText = new CanvasText({
             parent: this,
             context: this.context,
             parser: parser,
@@ -301,6 +302,11 @@ class Text extends GameObject {
     setLineSpacing(value) {
         return this.style.setLineSpacing(value);
     }
+
+    setXOffset(value) {
+        return this.style.setXOffset(value);
+    }
+
 
     setPadding(left, top, right, bottom) {
         if (typeof left === 'object') {
@@ -549,6 +555,10 @@ class Text extends GameObject {
     drawAreaBounds(graphics, color) {
         this.canvasText.hitAreaManager.drawBounds(graphics, color, this);
         return this;
+    }
+
+    measureTextMargins(testString, out) {
+        return MeasureTextMargins(this.style, testString, out);
     }
 }
 

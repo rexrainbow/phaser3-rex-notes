@@ -46,6 +46,7 @@ var propertyMap = {
     fixedHeight: ['fixedHeight', 0, null],
     resolution: ['resolution', 0, null],
     lineSpacing: ['lineSpacing', 0, null],
+    xOffset: ['xOffset', 0, null],
 
     rtl: ['rtl', false, null],
     testString: ['testString', '|MÃ‰qgy', null],
@@ -96,6 +97,7 @@ class TextStyle {
         this.fixedHeight;
         this.resolution;
         this.lineSpacing;
+        this.xOffset;
 
         this.rtl;
         this.testString;
@@ -333,6 +335,12 @@ class TextStyle {
 
     setLineSpacing(value) {
         this.lineSpacing = value;
+
+        return this.update(false);
+    }
+
+    setXOffset(value) {
+        this.xOffset = value;
 
         return this.update(false);
     }
