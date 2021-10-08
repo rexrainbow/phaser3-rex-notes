@@ -32,7 +32,7 @@ var MeasureTextMargins = function (textStyle, testString, out) {
 
     out.left = 0;
 
-    if (!context.getImageData(0, 0, width, height)) {
+    if ((width === 0) || (height === 0) || !context.getImageData(0, 0, width, height)) {
         CanvasPool.remove(canvas);
         return out;
     }
