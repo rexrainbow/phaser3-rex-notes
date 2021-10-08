@@ -570,7 +570,7 @@ This value is *added* to the height of the font when calculating the overall lin
     txt.setFixedSize(width, height);
     ```
 
-### Left margin of text
+### Margin of text
 
 ```javascript
 var leftMargin = txt.measureTextMargins(testString).left;
