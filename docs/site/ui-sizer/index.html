@@ -7700,10 +7700,16 @@
 <li><code>minHeight</code> : Minimum height of normal (non-sizer) game object, used when <code>orientation</code> is <code>y</code>, and <code>proportion</code> is not <code>0</code>. Default value is current display height.</li>
 </ul>
 <h3 id="add-space">Add space<a class="headerlink" href="#add-space" title="Permanent link">&para;</a></h3>
-<p>Add a stretchable space.</p>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addSpace</span><span class="p">();</span>
+<ul>
+<li>Add a stretchable space.
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">addSpace</span><span class="p">();</span>
 <span class="c1">// sizer.addSpace(proportion);</span>
-</code></pre></div>
+</code></pre></div></li>
+<li>Insert a stretchable space.
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">insertSpace</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// sizer.insertSpace(index, proportion);</span>
+</code></pre></div></li>
+</ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

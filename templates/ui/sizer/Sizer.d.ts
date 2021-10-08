@@ -116,6 +116,11 @@ declare class Sizer extends BaseSizer {
         proportion?: number
     ): this;
 
+    insertSpace(
+        index?: number,
+        proportion?: number
+    ): this;
+
     remove(
         gameObject: Phaser.GameObjects.GameObject,
         destroyChild?: boolean

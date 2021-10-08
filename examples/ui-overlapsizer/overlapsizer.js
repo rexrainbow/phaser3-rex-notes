@@ -23,17 +23,20 @@ class Demo extends Phaser.Scene {
             )
             .add(
                 this.rexUI.add.roundRectangle(0, 0, 40, 0, 20, COLOR_DARK), // child
-                'right', // key
-                'right', // align
-                0, // padding
-                { height: true }
+                {
+                    key: 'right',
+                    align: 'right',
+                    expand: { height: true }
+                },
             )
             .add(
                 this.rexUI.add.roundRectangle(0, 0, 40, 40, 10, COLOR_LIGHT), // child
-                'bottom', // key
-                'center-bottom', // align
-                0, // padding
-                false // expand
+                {
+                    key: 'bottom',
+                    align: 'center-bottom',
+                    expand: false,
+                    padding: { left: -100 }
+                },
             )
             .add(
                 this.rexUI.add.label({
@@ -45,10 +48,11 @@ class Demo extends Phaser.Scene {
                         icon: 10
                     }
                 }), // child
-                'center', // key
-                'center', // align
-                0, // padding
-                false // expand
+                {
+                    key: 'center',
+                    align: 'center',
+                    expand: false
+                },
             )
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
