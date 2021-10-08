@@ -12,6 +12,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - [Align](https://codepen.io/rexrainbow/pen/qGxrjZ)
 - [Page, typing](https://codepen.io/rexrainbow/pen/yjZveb)
 - [Wrap](https://codepen.io/rexrainbow/pen/BaZEGOB)
+- [Measure margin of text](https://codepen.io/rexrainbow/pen/eYEOYzX)
 
 ## Usage
 
@@ -568,6 +569,20 @@ This value is *added* to the height of the font when calculating the overall lin
     ```javascript
     txt.setFixedSize(width, height);
     ```
+
+### Left margin of text
+
+```javascript
+var leftMargin = txt.measureTextMargins(testString).left;
+```
+
+- `testString` : Measure left margin of this text.
+
+### Shift start position of text
+
+```javascript
+txt.setXOffset(value);
+```
 
 ### Resolution
 

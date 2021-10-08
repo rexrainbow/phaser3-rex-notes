@@ -25,6 +25,17 @@ class Demo extends Phaser.Scene {
         })
 
         txt1.setXOffset(-txt1.measureTextMargins('ˊ').left);
+
+        var txt2 = this.add.rexBBCodeText(400, 320, 'ˊ', {
+            backgroundColor: '#333333',
+            fontSize: 72,
+            testString: 'ˊ'
+        })
+
+        txt2.setPadding({
+            left: -txt1.measureTextMargins('ˊ').left,
+            right: 0
+        });
     }
 
 }

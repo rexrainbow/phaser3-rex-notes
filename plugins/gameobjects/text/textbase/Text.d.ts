@@ -18,6 +18,10 @@ declare namespace Text {
         fontStyle?: string
     };
 
+    type TextMarginsType = {
+        left?: number
+    };
+
     interface TextStyle {
         fontFamily?: string,
         fontSize?: string,
@@ -220,6 +224,8 @@ declare class Text extends CanvasGameObjectBase {
 
     setLineSpacing(value: number): this;
 
+    setXOffset(value: number): this;
+
     setPadding(
         left?: number | {
             left?: number, right?: number, top?: number, bottom?: number
@@ -230,6 +236,11 @@ declare class Text extends CanvasGameObjectBase {
     ): this;
 
     setMaxLines(max?: number): this;
+
+    measureTextMargins(
+        testString: string,
+        out?: Text.TextMarginsType
+    ): Text.TextMarginsType;
 
     setResolution(value: number): this;
 
