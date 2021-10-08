@@ -52,6 +52,8 @@ declare class OverlapSizer extends BaseSizer {
             key?: string,
 
             align?: OverlapSizer.AlignTypes,
+            offsetX?: number,
+            offsetY?: number,
 
             padding?: OverlapSizer.PaddingTypes,
 
@@ -78,7 +80,9 @@ declare class OverlapSizer extends BaseSizer {
             height?: boolean,
         },
         minWidth?: number,
-        minHeight?: number
+        minHeight?: number,
+        offsetX?: number,
+        offsetY?: number,
     ): this;
 
     remove(

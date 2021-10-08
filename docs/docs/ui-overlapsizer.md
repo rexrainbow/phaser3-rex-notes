@@ -183,6 +183,8 @@ sizer.add(child,
     {
         key: undefined,
         align: 'center',
+        offsetX: 0,
+        offsetY: 0,
         padding: {left: 0, right: 0, top: 0, bottom: 0},
         expand: true,        
         minWidth: undefined,
@@ -194,7 +196,7 @@ sizer.add(child,
 or
 
 ```javascript
-sizer.add(child, key, align, padding, expand);
+sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offsetY);
 ```
 
 - `child` : A game object.
@@ -215,6 +217,7 @@ sizer.add(child, key, align, padding, expand);
     - `'right-top'` , or `Phaser.Display.Align.TOP_RIGHT` : Align game object at right-top.
     - `'right-center'` , or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `'right-bottom'` , or `Phaser.Display.Align.BOTTOM_RIGHT` : Align game object at right-bottom.
+- `offsetX`, `offsetY` : Apply offset to x, y coordinate after alignment.
 - `padding` : Extra padded space. Default is 0.
     - A number for left/right/top/bottom bounds,
     - Or a plain object.

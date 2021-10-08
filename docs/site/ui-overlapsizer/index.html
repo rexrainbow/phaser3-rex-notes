@@ -7607,6 +7607,8 @@
     <span class="p">{</span>
         <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
         <span class="nx">padding</span><span class="o">:</span> <span class="p">{</span><span class="nx">left</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">right</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">top</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">bottom</span><span class="o">:</span> <span class="mf">0</span><span class="p">},</span>
         <span class="nx">expand</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>        
         <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -7615,7 +7617,7 @@
 <span class="p">);</span>
 </code></pre></div>
 <p>or</p>
-<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">padding</span><span class="p">,</span> <span class="nx">expand</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">);</span>
 </code></pre></div>
 <ul>
 <li><code>child</code> : A game object.</li>
@@ -7640,6 +7642,7 @@
 <li><code>'right-bottom'</code> , or <code>Phaser.Display.Align.BOTTOM_RIGHT</code> : Align game object at right-bottom.</li>
 </ul>
 </li>
+<li><code>offsetX</code>, <code>offsetY</code> : Apply offset to x, y coordinate after alignment.</li>
 <li><code>padding</code> : Extra padded space. Default is 0.<ul>
 <li>A number for left/right/top/bottom bounds,</li>
 <li>Or a plain object.

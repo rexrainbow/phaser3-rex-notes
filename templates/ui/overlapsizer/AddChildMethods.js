@@ -8,13 +8,15 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
-var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight) {
+var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     AddChild.call(this, gameObject);
 
     if (IsPlainObject(key)) {
         var config = key;
         key = GetValue(config, 'key', undefined);
         align = GetValue(config, 'align', ALIGN_CENTER);
+        offsetX = GetValue(config, 'offsetX', 0);
+        offsetY = GetValue(config, 'offsetY', 0);
         padding = GetValue(config, 'padding', 0);
         expand = GetValue(config, 'expand', true);
 
@@ -36,6 +38,12 @@ var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight
     if (align === undefined) {
         align = ALIGN_CENTER;
     }
+    if (offsetX === undefined) {
+        offsetX = 0;
+    }
+    if (offsetY === undefined) {
+        offsetY = 0;
+    }
     if (padding === undefined) {
         padding = 0;
     }
@@ -54,6 +62,8 @@ var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight
 
     var config = this.getSizerConfig(gameObject);
     config.align = align;
+    config.alignOffsetX = offsetX;
+    config.alignOffsetY = offsetY;
     config.padding = GetBoundsConfig(padding);
 
     if (IsPlainObject(expand)) {

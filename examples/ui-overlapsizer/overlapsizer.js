@@ -34,8 +34,9 @@ class Demo extends Phaser.Scene {
                 {
                     key: 'bottom',
                     align: 'center-bottom',
+                    offsetX: -100,
+                    offsetY: -10,
                     expand: false,
-                    padding: { left: -100 }
                 },
             )
             .add(

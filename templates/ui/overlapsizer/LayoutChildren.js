@@ -48,6 +48,9 @@ var LayoutChildren = function () {
         height = innerHeight - padding.top - padding.bottom;
 
         LayoutChild.call(this, child, x, y, width, height, childConfig.align);
+
+        child.x += childConfig.alignOffsetX;
+        child.y += childConfig.alignOffsetY;
     }
 }
 
