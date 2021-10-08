@@ -257,12 +257,16 @@ sizer.add(child, proportion, align, padding, expand, key, index);
 
 ### Add space
 
-Add a stretchable space.
-
-```javascript
-sizer.addSpace();
-// sizer.addSpace(proportion);
-```
+-  Add a stretchable space.
+    ```javascript
+    sizer.addSpace();
+    // sizer.addSpace(proportion);
+    ```
+- Insert a stretchable space.
+    ```javascript
+    sizer.insertSpace(index);
+    // sizer.insertSpace(index, proportion);
+    ```
 
 ### Layout children
 

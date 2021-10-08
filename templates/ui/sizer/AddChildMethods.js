@@ -99,6 +99,11 @@ export default {
     add: Add, // sizer.add could be override
 
     addSpace(proportion) {
+        this.insertSpace(undefined, proportion);
+        return this;
+    },
+
+    insertSpace(index, proportion) {
         if (proportion === undefined) {
             proportion = 1;
         }
@@ -106,7 +111,8 @@ export default {
             {
                 proportion: proportion,
                 minWidth: 0,
-                minHeight: 0
+                minHeight: 0,
+                index: index
             }
         );
         // No problem if sizer.add is override
