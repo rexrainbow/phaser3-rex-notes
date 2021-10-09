@@ -1,6 +1,7 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
 import LayoutChild from '../basesizer/utils/LayoutChild.js';
+import CheckSize from '../basesizer/utils/CheckSize.js';
 
 var LayoutChildren = function () {
     var child, childConfig, padding;
@@ -28,7 +29,9 @@ var LayoutChildren = function () {
             child.runLayout(
                 this,
                 this.getExpandedChildWidth(child),
-                this.getExpandedChildHeight(child));
+                this.getExpandedChildHeight(child)
+            );
+            CheckSize(child, this);
         } else {
             childWidth = undefined;
             childHeight = undefined;

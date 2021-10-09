@@ -2,6 +2,7 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import PreLayoutChild from '../basesizer/utils/PreLayoutChild.js';
 import LayoutChild from '../basesizer/utils/LayoutChild.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
+import CheckSize from '../basesizer/utils/CheckSize.js';
 
 var LayoutChildren = function () {
     var children = this.sizerChildren;
@@ -30,6 +31,7 @@ var LayoutChildren = function () {
         childHeight = this.getExpandedChildHeight(child);
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
+            CheckSize(child, this);
         } else {
             ResizeGameObject(child, childWidth, childHeight);
         }
