@@ -5,6 +5,7 @@ import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/G
 
 var LayoutChildren = function () {
     var innerLineWidth = this.innerWidth;
+    var justifyPercentage = this.justifyPercentage;
     var child, childConfig, padding, justifySpace = 0;
     var startX = this.innerLeft,
         startY = this.innerTop;
@@ -32,17 +33,17 @@ var LayoutChildren = function () {
                 itemX += remainderLineWidth / 2;
                 break;
             case 3: // justify-left
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 break;
             case 4: // justify-right
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align right
                     itemX += remainderLineWidth;
                 }
                 break;
             case 5: // justify-center
-                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, lineChlidren.length);
+                justifySpace = GetJustifySpace(innerLineWidth, remainderLineWidth, justifyPercentage, lineChlidren.length);
                 if (justifySpace === 0) {
                     // Align center
                     itemX += remainderLineWidth / 2;
@@ -80,8 +81,8 @@ var LayoutChildren = function () {
     }
 }
 
-var GetJustifySpace = function (total, remainder, childCount) {
-    return ((remainder / total) <= 0.25) ? (remainder / (childCount - 1)) : 0;
+var GetJustifySpace = function (total, remainder, justifyPercentage, childCount) {
+    return ((remainder / total) <= justifyPercentage) ? (remainder / (childCount - 1)) : 0;
 }
 
 export default LayoutChildren;

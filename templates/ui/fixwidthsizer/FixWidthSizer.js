@@ -29,6 +29,7 @@ class FixWidthSizer extends BaseSizer {
         this.setItemSpacing(GetValue(config, 'space.item', 0));
         this.setLineSpacing(GetValue(config, 'space.line', 0));
         this.setAlign(GetValue(config, 'align', 0));
+        this.setJustifyPercentage(GetValue(config, 'justifyPercentage', 0.25));
         this.setRTL(GetValue(config, 'rtl', false));
 
         this.addChildrenMap('items', this.sizerChildren);
@@ -54,6 +55,11 @@ class FixWidthSizer extends BaseSizer {
             align = ALIGN[align];
         }
         this.align = align;
+        return this;
+    }
+
+    setJustifyPercentage(value) {
+        this.justifyPercentage = value;
         return this;
     }
 
