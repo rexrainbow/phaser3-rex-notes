@@ -94,6 +94,14 @@ Execute callback when time-out, built-in object of phaser.
     ```javascript
     var elapsed = timer.getElapsed();   // ms
     var elapsed = timer.getElapsedSeconds(); // sec
+    // var elapsed = timer.elapsed;  // ms
+    ```
+- Get remaining time
+    ```javascript
+    var remaining = timer.getRemaining();   // ms
+    var remaining = timer.getRemainingSeconds(); // sec
+    // var remaining = timer.getOverallRemaining();   // ms
+    // var remaining = timer.getOverallRemainingSeconds(); // sec
     ```
 - Get repeat count
     ```javascript
