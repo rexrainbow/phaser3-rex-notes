@@ -17,6 +17,7 @@ class Demo extends Phaser.Scene {
         img.drag = this.plugins.get('rexDrag').add(img);
 
         img.on('drag', function (pointer, dragX, dragY) {
+            console.log('drag')
             img.drag.enable = false;
         });
     }

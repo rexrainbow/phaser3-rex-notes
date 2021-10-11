@@ -65,7 +65,7 @@ class Drag extends ComponentBase {
         }
 
         if (!e) {
-            this.pointer = undefined;
+            this.dragend();
         }
         this._enable = e;
         this.scene.input.setDraggable(this.parent, e);
