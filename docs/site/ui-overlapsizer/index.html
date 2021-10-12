@@ -7595,6 +7595,7 @@
 <li><code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> : Extra padded space. Default is 0.</li>
 <li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Don't add this child. Default value.</li>
+<li><code>items</code> is a reserved key, which is used to store <a href="./#get-element">all children</a>.</li>
 </ul>
 </li>
 </ul>
@@ -7623,6 +7624,7 @@
 <li><code>child</code> : A game object.</li>
 <li><code>key</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
 <li><code>undefined</code> : Use current timestamp as key.</li>
+<li><code>items</code> is a reserved key, which is used to store <a href="./#get-element">all children</a>.</li>
 </ul>
 </li>
 <li><code>align</code> :<ul>
@@ -7706,12 +7708,15 @@
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get element<ul>
+<li>Get element</li>
+<li>A child
+        <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
+        or
+        <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items[&#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</code></pre></div><ul>
 <li>All children items
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">);</span>
-</code></pre></div></li>
-<li>A child
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items[&#39;</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 </li>

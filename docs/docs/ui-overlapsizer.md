@@ -167,6 +167,7 @@ sizer.addBackground(child, {left: 0, right: 0, top: 0, bottom: 0}, key);
 - `left`, `right`, `top`, `bottom` : Extra padded space. Default is 0.
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
+    - `items` is a reserved key, which is used to store [all children](ui-overlapsizer.md#get-element).
 
 ### Add child
 
@@ -202,6 +203,7 @@ sizer.add(child, key, align, padding, expand, minWidth, minHeight, offsetX, offs
 - `child` : A game object.
 - `key` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Use current timestamp as key.
+    - `items` is a reserved key, which is used to store [all children](ui-overlapsizer.md#get-element).
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
@@ -288,14 +290,18 @@ See also - [dirty](ui-basesizer.md#dirty)
 ### Get element
 
 - Get element
-    - All children items
+   - A child
         ```javascript
-        var items = sizer.getElement('items');
+        var item = sizer.getElement(key);
         ```
-    - A child
+        or
         ```javascript
         var item = sizer.getElement('items[' + key + ']');
         ```
+    - All children items
+        ```javascript
+        var items = sizer.getElement('items');
+        ``` 
 - Get by name
     ```javascript
     var gameObject = sizer.getElement('#' + name);

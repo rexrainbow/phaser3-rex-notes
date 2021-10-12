@@ -18,6 +18,9 @@ export default {
 
         if (key) {
             delete this.sizerChildren[key];
+            if (this.childrenMap.hasOwnProperty(key)) {
+                delete this.childrenMap[key];
+            }
         }
         RemoveChild.call(this, gameObject, destroyChild);
         return this;
@@ -33,6 +36,9 @@ export default {
     clear(destroyChild) {
         for (var key in this.sizerChildren) {
             delete this.sizerChildren[key];
+            if (this.childrenMap.hasOwnProperty(key)) {
+                delete this.childrenMap[key];
+            }
         }
         ClearChildren.call(this, destroyChild);
         return this;

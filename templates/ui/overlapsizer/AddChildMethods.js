@@ -8,12 +8,12 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const UUID = Phaser.Utils.String.UUID;
 
-var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
+var Add = function (gameObject, childKey, align, padding, expand, minWidth, minHeight, offsetX, offsetY) {
     AddChild.call(this, gameObject);
 
-    if (IsPlainObject(key)) {
-        var config = key;
-        key = GetValue(config, 'key', undefined);
+    if (IsPlainObject(childKey)) {
+        var config = childKey;
+        childKey = GetValue(config, 'key', undefined);
         align = GetValue(config, 'align', ALIGN_CENTER);
         offsetX = GetValue(config, 'offsetX', 0);
         offsetY = GetValue(config, 'offsetY', 0);
@@ -27,8 +27,9 @@ var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight
         }
     }
 
-    if (key === undefined) {
-        key = UUID();
+    var hasValidKey = (childKey !== undefined);
+    if (!hasValidKey) {
+        childKey = UUID();
     }
 
     if (typeof (align) === 'string') {
@@ -89,10 +90,14 @@ var Add = function (gameObject, key, align, padding, expand, minWidth, minHeight
         }
     }
 
-    if (this.sizerChildren.hasOwnProperty(key)) {
-        this.sizerChildren[key].destroy();
+    if (this.sizerChildren.hasOwnProperty(childKey)) {
+        this.sizerChildren[childKey].destroy();
     }
-    this.sizerChildren[key] = gameObject;
+    this.sizerChildren[childKey] = gameObject;
+
+    if (hasValidKey) {
+        this.addChildrenMap(childKey, gameObject)
+    }
     return this;
 }
 
