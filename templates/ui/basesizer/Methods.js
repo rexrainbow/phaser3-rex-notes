@@ -35,6 +35,7 @@ import PointToChild from './PointToChild.js';
 import GetParentSizerMethods from './GetParentSizerMethods.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
+import ClickMethods from './ClickMethods.js';
 import BroadcastEvent from './BroadcastEvent.js';
 
 var methods = {
@@ -81,8 +82,9 @@ Object.assign(
     ScaleMethods,
     FadeMethods,
     EaseMoveMethods,
+    ClickMethods,
     HideMethods,
-    GetShownChildrenMethods
+    GetShownChildrenMethods,
 );
 
 export default methods;

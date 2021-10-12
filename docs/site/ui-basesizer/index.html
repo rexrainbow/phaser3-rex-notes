@@ -6139,6 +6139,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#click" class="md-nav__link">
+    Click
+  </a>
+  
+    <nav class="md-nav" aria-label="Click">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#pin-game-object" class="md-nav__link">
     Pin game object
@@ -7481,6 +7494,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#click" class="md-nav__link">
+    Click
+  </a>
+  
+    <nav class="md-nav" aria-label="Click">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#pin-game-object" class="md-nav__link">
     Pin game object
@@ -8064,6 +8090,29 @@
 </ul>
 </li>
 </ul>
+<h2 id="click">Click<a class="headerlink" href="#click" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Add click event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">onClick</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="c1">// sizer.onClick(callback, scope, config);</span>
+</code></pre></div><ul>
+<li><code>config</code> : See <a href="../button/#create-instance">Button</a></li>
+</ul>
+</li>
+<li>Turn off click event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">offClick</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Enable click event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">enableClick</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Disable click event
+    <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">disableClick</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+<p>Equal to </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">click</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">click</span><span class="p">(</span><span class="nx">sizer</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">click</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="pin-game-object">Pin game object<a class="headerlink" href="#pin-game-object" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">sizer</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </code></pre></div>

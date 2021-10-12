@@ -483,6 +483,34 @@ sizer.pushIntoBounds(bounds);
         sizer.setDraggable(false);
         ```
 
+## Click
+
+- Add click event
+    ```javascript
+    sizer.onClick(callback, scope);
+    // sizer.onClick(callback, scope, config);
+    ```
+    - `config` : See [Button](button.md#create-instance)
+- Turn off click event
+    ```javascript
+    sizer.offClick(callback, scope);
+    ```
+- Enable click event
+    ```javascript
+    sizer.enableClick();
+    ```
+- Disable click event
+    ```javascript
+    sizer.disableClick();
+    ```
+
+Equal to 
+
+```javascript
+var click = scene.rexUI.add.click(sizer, config);
+click.on('click', callback, scope);
+```
+
 ### Pin game object
 
 ```javascript

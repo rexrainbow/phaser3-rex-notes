@@ -1,5 +1,6 @@
 // import * as Phaser from 'phaser';
 import ContainerLite from '../../../plugins/containerlite.js';
+import Click from '../click/Click';
 
 export default BaseSizer;
 
@@ -371,6 +372,26 @@ declare class BaseSizer extends ContainerLite {
         senser: boolean | string | Phaser.GameObjects.GameObject,
         draggable?: boolean
     ): this;
+
+    onClick(
+        callback: (
+            click: Click,
+            gameObject: Phaser.GameObjects.GameObject,
+            pointer: Phaser.Input.Pointer,
+            event: Phaser.Types.Input.EventData
+        ) => void,
+        scope?: object,
+        config?: Click.IConfig
+    ): this;
+
+    offClick(
+        callback: Function,
+        scope?: object
+    ): this;
+
+    enableClick(enabled?: boolean): this;
+
+    disableClick(): this;
 
     show(
         gameObject: Phaser.GameObjects.GameObject

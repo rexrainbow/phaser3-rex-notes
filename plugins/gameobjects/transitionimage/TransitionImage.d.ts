@@ -62,17 +62,17 @@ declare class TransitionImage extends ContainerLite {
 
     setTransitionStartCallback(
         callback: TransitionImage.TransitionCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setTransitionProgressCallback(
         callback: TransitionImage.TransitionCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setTransitionCompleteCallback(
         callback: TransitionImage.TransitionCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     setDuration(duration: number): this;

@@ -29,7 +29,7 @@ declare class Anchor {
 
     setUpdateViewportCallback(
         callback?: Anchor.OnUpdateViewportCallbackType,
-        scope?: unknown
+        scope?: object
     ): this;
 
     anchor(): this;
