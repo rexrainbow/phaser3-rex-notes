@@ -483,7 +483,7 @@ sizer.pushIntoBounds(bounds);
         sizer.setDraggable(false);
         ```
 
-## Click
+### Click
 
 - Add click event
     ```javascript
