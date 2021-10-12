@@ -14,7 +14,7 @@ var FadeIn = function (gameObject, duration, alpha, fade) {
         startAlpha = 0
     }
     if (endAlpha === undefined) {
-        endAlpha = gameObject.alpha;
+        endAlpha = 1;
     }
 
     var config = {
