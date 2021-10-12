@@ -2,6 +2,9 @@ import Click from '../click/Click.js';
 
 export default {
     onClick(callback, scope, config) {
+        if (!callback) {
+            return this;
+        }
         if (this._click === undefined) {
             this._click = new Click(this, config);
         }
