@@ -46,6 +46,7 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
     - Get
         ```javascript
         var color = star.fillColor;
+        var alpha = star.fillAlpha;
         ```
     - Set
         ```javascript

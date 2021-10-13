@@ -42,6 +42,7 @@ var circle = scene.add.circle(x, y, radius, fillColor);
     - Get
         ```javascript
         var color = circle.fillColor;
+        var alpha = circle.fillAlpha;
         ```
     - Set
         ```javascript

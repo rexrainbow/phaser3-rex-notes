@@ -43,6 +43,7 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
     - Get
         ```javascript
         var color = ellipse.fillColor;
+        var alpha = ellipse.fillAlpha;
         ```
     - Set
         ```javascript

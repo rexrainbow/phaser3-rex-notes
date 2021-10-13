@@ -42,6 +42,7 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
     - Get
         ```javascript
         var color = triangle.fillColor;
+        var alpha = triangle.fillAlpha;
         ```
     - Set
         ```javascript

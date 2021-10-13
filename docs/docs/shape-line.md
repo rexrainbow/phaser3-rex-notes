@@ -42,6 +42,7 @@ var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);
     - Get
         ```javascript
         var color = line.fillColor;
+        var alpha = line.fillAlpha;
         ```
     - Set
         ```javascript

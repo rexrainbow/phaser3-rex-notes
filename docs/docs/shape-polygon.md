@@ -50,6 +50,7 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
     - Get
         ```javascript
         var color = polygon.fillColor;
+        var alpha = polygon.fillAlpha;
         ```
     - Set
         ```javascript

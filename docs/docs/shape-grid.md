@@ -41,6 +41,7 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
     - Get
         ```javascript
         var color = grid.fillColor;
+        var alpha = grid.fillAlpha;
         ```
     - Set
         ```javascript

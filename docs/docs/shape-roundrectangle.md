@@ -196,6 +196,7 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
     - Get
         ```javascript
         var color = rect.fillColor;
+        var alpha = rect.fillAlpha;
         ```
     - Set
         ```javascript

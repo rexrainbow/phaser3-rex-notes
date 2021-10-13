@@ -44,6 +44,7 @@ var curve = scene.add.curve(x, y, path, fillColor);
     - Get
         ```javascript
         var color = curve.fillColor;
+        var alpha = curve.fillAlpha;
         ```
     - Set
         ```javascript

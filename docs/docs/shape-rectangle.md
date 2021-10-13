@@ -42,10 +42,11 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
     - Get
         ```javascript
         var color = rect.fillColor;
+        var alpha = rect.fillAlpha;
         ```
     - Set
         ```javascript
-        rect.setFillStyle(color, alpha);
+        rect.setFillStyle(color, alpha);        
         ```
     - Clear
         ```javascript

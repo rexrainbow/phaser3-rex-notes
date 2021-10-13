@@ -42,6 +42,7 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
     - Get
         ```javascript
         var color = arc.fillColor;
+        var alpha = arc.fillAlpha;
         ```
     - Set
         ```javascript
