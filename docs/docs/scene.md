@@ -114,7 +114,7 @@ class MyScene extends Phaser.Scene {
 }
 ```
 
-- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+- `data` : Parameters passed from [adding new scene](scenemanager.md#add-new-scene), or [starting scene](scenemanager.md#start-scene)
 
 ### Class
 
