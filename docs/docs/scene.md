@@ -137,7 +137,7 @@ var MyScene = new Phaser.Class({
 });
 ```
 
-- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+- `data` : Parameters passed from [adding new scene](scenemanager.md#add-new-scene), or [starting scene](scenemanager.md#start-scene)
 
 ```javascript
 var MyGame = {};
@@ -156,7 +156,7 @@ MyGame.Boot.prototype = {
 };
 ```
 
-- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+- `data` : Parameters passed from [adding new scene](scenemanager.md#add-new-scene), or [starting scene](scenemanager.md#start-scene)
 
 ### Override
 
@@ -169,7 +169,7 @@ demo.create = function (data){};
 demo.update = function (time, delta){};
 ```
 
-- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+- `data` : Parameters passed from [adding new scene](scenemanager.md#add-new-scene), or [starting scene](scenemanager.md#start-scene)
 
 ## Flow chart
 
