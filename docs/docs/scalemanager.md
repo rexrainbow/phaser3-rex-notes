@@ -13,12 +13,40 @@ Setup scale mode in [game configuration](game.md#configuration).
 ```javascript
 var config = {
     // ...
-    parent: null,
+    parent: divId,
+
+    // Game size
     width: 1024,
     height: 768,
+
     scale: {
+        // Or set parent divId here
+        parent: divId,
+
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+
+        // Or put game size here
+        // width: 1024,
+        // height: 768,
+
+        // Minimum size
+        min: {
+            width: 800,
+            height: 600
+        },
+        // Or set minimum size like these
+        // mixWidth: 800,
+        // mixHeight: 600,
+
+        // Maximum size
+        max: {
+            width: 1600,
+            height: 1200
+        }
+        // Or set maximum size like these
+        // maxWidth: 1600,
+        // maxHeight: 1200,
     },
     autoRound: false
     // ...
@@ -75,3 +103,47 @@ This method dose not have to be invoked, unless the canvas position, or visibili
 ```javascript
 scene.scale.updateBounds();
 ```
+
+### Full screen
+
+Under any touch event (`'pointerup'`, or `'pointerdown'`) :
+
+- Start full screen
+    ```javascript
+    scene.scale.startFullscreen();
+    ```
+- Stop full screen
+    ```javascript
+    scene.scale.stopFullscreen();
+    ```
+- Toggle full screen
+    ```javascript
+    scene.scale.toggleFullscreen();
+    ```
+- Is full screen
+    ```javascript
+    var isFullscreen = scene.scale.isFullscreen;
+    ```
+
+#### Events
+
+- Enter full screen
+    ```javascript
+    scene.scale.on('enterfullscreen', function() {}, scope);
+    ```
+- Enter full screen failed
+    ```javascript
+    scene.scale.on('fullscreenfailed', function(error) {}, scope);
+    ```
+- Leave full screen
+    ```javascript
+    scene.scale.on('leavefullscreen', function() {}, scope);
+    ```
+- Full screen unsupport
+    ```javascript
+    scene.scale.on('fullscreenunsupported', function() {}, scope);
+    ```
+- Leave full screen
+    ```javascript
+    scene.scale.on('leavefullscreen', function() {}, scope);
+    ```
