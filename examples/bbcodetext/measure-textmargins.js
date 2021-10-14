@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
 
 var config = {
     type: Phaser.AUTO,
-    parent: 'main',
+    parent: 'phaser-example',
     width: 800,
     height: 600,
     scale: {
