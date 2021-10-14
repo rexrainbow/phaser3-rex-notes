@@ -12,8 +12,12 @@ class ScaleOuter {
         this.scrollY = 0;
         this.zoom = 1;
 
-        scene.scale.on('resize', this.scale, this);
+        this.boot();
+    }
 
+    boot() {
+        var scene = this.scene;
+        scene.scale.on('resize', this.scale, this);
         // Scale manually at beginning
         scene.events.once('preupdate', this.scale, this);
     }

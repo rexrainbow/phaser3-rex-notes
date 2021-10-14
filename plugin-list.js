@@ -52,6 +52,7 @@ module.exports = {
     'pinchplugin': './plugins/pinch-plugin.js',
     'dragrotateplugin': './plugins/dragrotate-plugin.js',
     'gesturesplugin': './plugins/gestures-plugin.js',
+    'toucheventstopplugin': './plugins/toucheventstop-plugin.js',
     'touchhelperplugin': './plugins/touchhelper-plugin.js',
     'keyshubplugin': './plugins/keyshub-plugin.js',
 
@@ -85,7 +86,7 @@ module.exports = {
     'perlingrivatywellplugin': './plugins/perlingrivatywell-plugin.js',
 
     // camera
-    'scaleouterplugin' : './plugins/scaleouter-plugin.js',
+    'scaleouterplugin': './plugins/scaleouter-plugin.js',
 
     // file chooser
     'filechooserplugin': './plugins/filechooser-plugin.js',

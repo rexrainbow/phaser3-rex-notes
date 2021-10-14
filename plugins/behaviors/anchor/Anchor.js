@@ -114,9 +114,13 @@ class Anchor extends ComponentBase {
 
         this.scene.scale.off('resize', this.anchor, this);
 
-        super.shutdown(fromScene);
-
         this.viewport = undefined;
+        this.onUpdateViewportCallback = undefined;
+        this.onUpdateViewportCallbackScope = undefined;
+        this.onResizeCallback = undefined;
+        this.onResizeCallbackScope = undefined;
+
+        super.shutdown(fromScene);
     }
 
     // Position

@@ -1,5 +1,5 @@
 import 'phaser';
-import TouchEventStop from '../../plugins/input/toucheventstop/TouchEventStop.js';
+import TouchEventStopPlugin from '../../plugins/toucheventstop-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -20,12 +20,11 @@ class Demo extends Phaser.Scene {
             .on('pointerdown', function () {
                 console.log('Img pointer-down')
             })
-            .on('pointerover', function () {
-                console.log('Img pointer-over')
-            })
 
-        var cover = this.add.zone(400, 300, 800, 600)
-        var touchEventStop = new TouchEventStop(cover);
+        var rect = this.add.rectangle(300, 300, 100, 200, 0x880000)
+        this.plugins.get('rexTouchEventStop').add(rect, {
+            // hitAreaMode: 1
+        });
     }
 
     update(time, delta) {
@@ -42,7 +41,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTouchEventStop',
+            plugin: TouchEventStopPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
