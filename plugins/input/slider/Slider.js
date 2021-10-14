@@ -53,17 +53,15 @@ class Slider extends ComponentBase {
         this.parent.on('drag', this.onDragging, this);
     }
 
-    shutdown(fromScene) {
-        // Already shutdown
-        if (this.isShutdown) {
-            return;
-        }
-
-        // GameObject events will be removed when this gameObject destroyed 
-        // this.parent.off('drag', this.onDragging, this);
-
-        super.shutdown(fromScene);
-    }
+    // shutdown(fromScene) {
+    //     // Already shutdown
+    //     if (this.isShutdown) {
+    //         return;
+    //     }
+    //     // GameObject events will be removed when this gameObject destroyed 
+    //     // this.parent.off('drag', this.onDragging, this);
+    //     super.shutdown(fromScene);
+    // }
 
     get enable() {
         return this._enable;
