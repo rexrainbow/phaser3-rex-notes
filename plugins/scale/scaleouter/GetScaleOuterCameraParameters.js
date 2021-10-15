@@ -1,4 +1,4 @@
-var GetScaleOutParameters = function (scene, out) {
+var GetScaleOutCameraParameters = function (scene, out) {
     if (out === undefined) {
         out = {};
     }
@@ -20,4 +20,4 @@ var GetScaleOutParameters = function (scene, out) {
     return out;
 }
 
-export default GetScaleOutParameters;
+export default GetScaleOutCameraParameters;

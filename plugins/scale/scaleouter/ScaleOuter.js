@@ -1,4 +1,4 @@
-import GetScaleOutParameters from './GetScaleOuterParameters.js';
+import GetScaleOutCameraParameters from './GetScaleOuterCameraParameters.js';
 
 const SetStruct = Phaser.Structs.Set;
 
@@ -41,7 +41,7 @@ class ScaleOuter {
             this.cameras.set(this.scene.cameras.main);
         }
 
-        GetScaleOutParameters(this.scene, this);
+        GetScaleOutCameraParameters(this.scene, this);
 
         this.cameras.iterate(function (camera, index) {
             camera
