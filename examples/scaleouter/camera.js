@@ -38,8 +38,8 @@ ScrollY = ${camera.scrollY}
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 800,
-    height: 600,
+    width: 800,  // 768
+    height: 600,  // 1334
     backgroundColor: 0x333333,
     scale: {
         mode: Phaser.Scale.RESIZE,

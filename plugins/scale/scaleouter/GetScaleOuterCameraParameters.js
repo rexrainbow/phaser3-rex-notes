@@ -4,18 +4,23 @@ var GetScaleOutCameraParameters = function (scene, out) {
     }
 
     var gameConfig = scene.game.config;
-    var gameWindowCenterX = gameConfig.width / 2,
-        gameWindowCenterY = gameConfig.height / 2;
+    var gameWidth = gameConfig.width,
+        gameHeight = gameConfig.height;
+    var gameAspectRatio = (gameHeight === 0) ? 1 : gameWidth / gameHeight;
 
     var displaySize = scene.scale.displaySize;
-    var displayCentetX = displaySize.width / 2,
-        displayCentetY = displaySize.height / 2;
+    var displayWidth = displaySize.width,
+        displayHeight = displaySize.height;
+    var displayAspectRatio = (displayHeight === 0) ? 1 : displayWidth / displayHeight;
 
-    out.scrollX = gameWindowCenterX - displayCentetX;
-    out.scrollY = gameWindowCenterY - displayCentetY;
-    out.zoom = (gameWindowCenterX > gameWindowCenterY) ?
-        (displayCentetX / gameWindowCenterX) :
-        (displayCentetY / gameWindowCenterY);
+    out.scrollX = (gameWidth - displayWidth) / 2;
+    out.scrollY = (gameHeight - displayHeight) / 2;
+
+    if (gameAspectRatio < displayAspectRatio) {
+        out.zoom = (displayHeight / gameHeight);
+    } else {
+        out.zoom = (displayWidth / gameWidth)
+    }
 
     return out;
 }
