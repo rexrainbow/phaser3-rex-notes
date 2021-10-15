@@ -18,18 +18,25 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 0, '');
 
-        // this.tweens.add({
-        //     targets: this.cameras.main,
-        //     scrollX: -300
-        // })
+        // this.cameras.main.setZoom(0.5);
+
+        this.tweens.add({
+            targets: this.cameras.main,
+            duration: 3000,
+            scrollX: -300,
+            zoom: 0.5,            
+            repeat: -1,
+            yoyo: true
+        })
     }
 
     update() {
         var camera = this.cameras.main;
         this.print.text = `\
-Zoom = ${camera.zoom}
 ScrollX = ${camera.scrollX}
 ScrollY = ${camera.scrollY}
+ZoomX = ${camera.zoomX}
+ZoomY = ${camera.zoomY}
 \
 `
     }

@@ -62,7 +62,8 @@ class ScaleOuter {
 
     addScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
-            camera.zoom *= this.zoom;
+            camera.zoomX *= this.zoom;
+            camera.zoomY *= this.zoom;
             camera.scrollX += this.scrollX;
             camera.scrollY += this.scrollY;
         }, this);
@@ -70,7 +71,8 @@ class ScaleOuter {
 
     removeScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
-            camera.zoom /= this.zoom;
+            camera.zoomX /= this.zoom;
+            camera.zoomY /= this.zoom;
             camera.scrollX -= this.scrollX;
             camera.scrollY -= this.scrollY;
         }, this);
