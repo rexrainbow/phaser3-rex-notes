@@ -20,33 +20,59 @@ class ScaleOuter {
         scene.scale.on('resize', this.scale, this);
         // Scale manually at beginning
         scene.events.once('preupdate', this.scale, this);
+
+        scene.events.on('prerender', this.addScaleCameraParameters, this);
+        scene.events.on('render', this.removeScaleCameraParameters, this);
     }
 
     destroy() {
-        this.scene.scale.off('resize', this.scale, this);
-        this.scene.events.off('preupdate', this.scale, this);
+        var scene = this.scene;
+        scene.scale.off('resize', this.scale, this);
+        scene.events.off('preupdate', this.scale, this);
+
+        scene.events.off('prerender', this.addScaleCameraParameters, this);
+        scene.events.off('render', this.removeScaleCameraParameters, this);
 
         this.cameras.clear();
         this.scene = undefined;
     }
 
     add(camera) {
-        this.cameras.set(camera);
+        this.addCamera(camera);
         this.scale();
         return this;
     }
 
     scale() {
         if (this.cameras.size === 0) {
-            this.cameras.set(this.scene.cameras.main);
+            this.addCamera(this.scene.cameras.main);
         }
 
         GetScaleOutCameraParameters(this.scene, this);
+    }
 
+    // Internal methods
+    addCamera(camera) {
+        if (this.cameras.contains(camera)) {
+            return;
+        }
+
+        this.cameras.set(camera);
+    }
+
+    addScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
-            camera
-                .setScroll(this.scrollX, this.scrollY)
-                .setZoom(this.zoom)
+            camera.zoom *= this.zoom;
+            camera.scrollX += this.scrollX;
+            camera.scrollY += this.scrollY;
+        }, this);
+    }
+
+    removeScaleCameraParameters() {
+        this.cameras.iterate(function (camera, index) {
+            camera.zoom /= this.zoom;
+            camera.scrollX -= this.scrollX;
+            camera.scrollY -= this.scrollY;
         }, this);
     }
 }

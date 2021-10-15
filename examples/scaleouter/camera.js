@@ -15,16 +15,31 @@ class Demo extends Phaser.Scene {
         this.add.rectangle(0, 0, config.width, config.height)
             .setStrokeStyle(10, 0xff0000)
             .setOrigin(0)
+
+        this.print = this.add.text(0, 0, '');
+
+        // this.tweens.add({
+        //     targets: this.cameras.main,
+        //     scrollX: -300
+        // })
     }
 
-    update() { }
+    update() {
+        var camera = this.cameras.main;
+        this.print.text = `\
+Zoom = ${camera.zoom}
+ScrollX = ${camera.scrollX}
+ScrollY = ${camera.scrollY}
+\
+`
+    }
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent: 'phaser-example',
-    width: 768,
-    height: 1334,
+    width: 800,
+    height: 600,
     backgroundColor: 0x333333,
     scale: {
         mode: Phaser.Scale.RESIZE,
