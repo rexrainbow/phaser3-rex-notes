@@ -1,4 +1,4 @@
-import ScaleOuter from "./camera/scaleouter/ScaleOuter.js";
+import ScaleOuter from "./scaleouter.js";
 
 class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
