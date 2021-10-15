@@ -34,6 +34,7 @@ class ScaleOuter {
         scene.events.off('render', this.removeScaleCameraParameters, this);
 
         this.cameras.clear();
+        this.cameras = undefined;
         this.scene = undefined;
     }
 
