@@ -1,10 +1,41 @@
 import 'phaser';
 import ScaleOuterPlugin from '../../plugins/scaleouter-plugin.js';
 
-class Demo extends Phaser.Scene {
+class Background extends Phaser.Scene {
     constructor() {
         super({
-            key: 'examples'
+            key: 'background'
+        })
+    }
+
+    preload() {      
+    }
+
+    create() {
+        this.rexScaleOuter.destroy();
+
+        this.print = this.add.text(0, 0, '', { fontSize: 24 });
+
+        this.scene.launch('game');
+    }
+
+    update() {
+        var camera = this.cameras.main;
+
+        this.print.text = `\
+ScrollX = ${camera.scrollX}
+ScrollY = ${camera.scrollY}
+ZoomX = ${camera.zoomX}
+ZoomY = ${camera.zoomY}
+\
+`
+    }
+}
+
+class Game extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'game'
         })
     }
 
@@ -41,7 +72,7 @@ var config = {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.NONE,
     },
-    scene: Demo,
+    scene: [Background, Game],
     plugins: {
         scene: [{
             key: 'rexScaleOuter',
