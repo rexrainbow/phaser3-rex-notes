@@ -463,6 +463,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#full-screen" class="md-nav__link">
+    Full screen
+  </a>
+  
+    <nav class="md-nav" aria-label="Full screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orientation" class="md-nav__link">
+    Orientation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7295,6 +7322,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#full-screen" class="md-nav__link">
+    Full screen
+  </a>
+  
+    <nav class="md-nav" aria-label="Full screen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#events_1" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orientation" class="md-nav__link">
+    Orientation
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7329,12 +7383,42 @@
 <p>Setup scale mode in <a href="../game/#configuration">game configuration</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+
+    <span class="c1">// Game size</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mf">1024</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mf">768</span><span class="p">,</span>
+
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// Or set parent divId here</span>
+        <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
-        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
+        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span><span class="p">,</span>
+
+        <span class="c1">// Or put game size here</span>
+        <span class="c1">// width: 1024,</span>
+        <span class="c1">// height: 768,</span>
+
+        <span class="c1">// Minimum size</span>
+        <span class="nx">min</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mf">800</span><span class="p">,</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="mf">600</span>
+        <span class="p">},</span>
+        <span class="c1">// Or set minimum size like these</span>
+        <span class="c1">// mixWidth: 800,</span>
+        <span class="c1">// mixHeight: 600,</span>
+
+        <span class="c1">// Maximum size</span>
+        <span class="nx">max</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mf">1600</span><span class="p">,</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="mf">1200</span>
+        <span class="p">}</span>
+        <span class="c1">// Or set maximum size like these</span>
+        <span class="c1">// maxWidth: 1600,</span>
+        <span class="c1">// maxHeight: 1200,</span>
+
+        <span class="nx">zoom</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>  <span class="c1">// Size of game canvas = game size * zoom</span>
     <span class="p">},</span>
     <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span>
     <span class="c1">// ...</span>
@@ -7387,6 +7471,54 @@
 <h3 id="update-bounds">Update bounds<a class="headerlink" href="#update-bounds" title="Permanent link">&para;</a></h3>
 <p>This method dose not have to be invoked, unless the canvas position, or visibility is changed via any other method (i.e. via an Angular route).</p>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">updateBounds</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="full-screen">Full screen<a class="headerlink" href="#full-screen" title="Permanent link">&para;</a></h3>
+<p>Under <code>'pointerup'</code> touch event :</p>
+<ul>
+<li>Start full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">startFullscreen</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Stop full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">stopFullscreen</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Toggle full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">toggleFullscreen</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Is full screen
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isFullscreen</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<p>Games within an iframe will also be blocked from fullscreen 
+unless the iframe has the <code>allowfullscreen</code> attribute.</p>
+<p>Performing an action that navigates to another page, 
+or opens another tab, will automatically cancel fullscreen mode, 
+as will the user pressing the ESC key.</p>
+<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enter full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterfullscreen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Enter full screen failed
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fullscreenfailed&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Leave full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;leavefullscreen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Full screen unsupport
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fullscreenunsupported&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Leave full screen
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;leavefullscreen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span> <span class="nx">scope</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="orientation">Orientation<a class="headerlink" href="#orientation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;orientationchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">orientation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">orientation</span> <span class="o">===</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">PORTRAIT</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">orientation</span> <span class="o">===</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">LANDSCAPE</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </code></pre></div>
                 
               

@@ -47,6 +47,8 @@ var config = {
         // Or set maximum size like these
         // maxWidth: 1600,
         // maxHeight: 1200,
+
+        zoom: 1,  // Size of game canvas = game size * zoom
     },
     autoRound: false
     // ...
@@ -106,7 +108,7 @@ scene.scale.updateBounds();
 
 ### Full screen
 
-Under any touch event (`'pointerup'`, or `'pointerdown'`) :
+Under `'pointerup'` touch event :
 
 - Start full screen
     ```javascript
@@ -124,6 +126,13 @@ Under any touch event (`'pointerup'`, or `'pointerdown'`) :
     ```javascript
     var isFullscreen = scene.scale.isFullscreen;
     ```
+
+Games within an iframe will also be blocked from fullscreen 
+unless the iframe has the `allowfullscreen` attribute.
+
+Performing an action that navigates to another page, 
+or opens another tab, will automatically cancel fullscreen mode, 
+as will the user pressing the ESC key.
 
 #### Events
 
@@ -147,3 +156,15 @@ Under any touch event (`'pointerup'`, or `'pointerdown'`) :
     ```javascript
     scene.scale.on('leavefullscreen', function() {}, scope);
     ```
+
+### Orientation 
+
+```javascript
+scene.scale.on('orientationchange', function(orientation) {
+    if (orientation === Phaser.Scale.PORTRAIT) {
+
+    } else if (orientation === Phaser.Scale.LANDSCAPE) {
+
+    }
+}, scope);
+```
