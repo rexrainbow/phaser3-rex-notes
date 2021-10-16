@@ -98,6 +98,7 @@
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
+1. [Scale outer](scaleouter.md): Scroll and zoom camera to make default game window fit the display area, in RESIZE scale mode.
 1. [Script-tag loader](scripttagloader.md): Load script tag in preload stage.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
