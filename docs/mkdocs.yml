@@ -170,7 +170,8 @@ nav:
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
-        - Drag rotate: dragrotate.md        
+        - Drag rotate: dragrotate.md
+        - Touch event stop: toucheventstop.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
         - Combo events: keyboardcombo.md
