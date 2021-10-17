@@ -1,5 +1,6 @@
 import 'phaser';
 import FullWindowRectanglePlugin from '../../plugins/fullwindowrectangle-plugin.js';
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -26,6 +27,10 @@ class Demo extends Phaser.Scene {
             repeat: -1,
             yoyo: true
         });
+
+        var gui = new Dat.GUI();
+        gui.add(rect, 'alpha', 0, 1);
+        gui.addColor(rect, 'tint');
     }
 
     update() {
@@ -35,7 +40,7 @@ class Demo extends Phaser.Scene {
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
-    backgroundColor: 0x888888,
+    backgroundColor: 0xffffff,
     width: 800,
     height: 600,
     scale: {
