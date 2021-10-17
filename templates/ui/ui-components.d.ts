@@ -13,6 +13,7 @@ import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
 import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
+import Cover from './cover/Cover';
 // import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 
@@ -75,6 +76,7 @@ export {
     DynamicText,
     TextPlayer,
     FullWindowRectangle,
+    Cover,
     // Chart,
     CircularProgressCanvas,
     CircularProgress,

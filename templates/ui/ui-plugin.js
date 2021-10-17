@@ -17,6 +17,7 @@ import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
 import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
+import CoverFactory from './cover/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';

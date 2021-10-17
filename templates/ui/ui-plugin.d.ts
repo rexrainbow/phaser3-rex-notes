@@ -10,6 +10,7 @@ import CircularProgressCanvasFactory from './circularprogresscanvas/Factory';
 import CircularProgressFactory from './circularprogress/Factory';
 import ClickFactory from './click/Factory';
 import ContainerFactory from './container/Factory';
+import CoverFactory from './cover/Factory';
 import CustomProgressFactory from './customprogress/Factory';
 import CustomShapesFactory from './customshapes/Factory';
 import DialogFactory from './dialog/Factory';
@@ -68,6 +69,7 @@ declare class Factories {
     circularProgress: typeof CircularProgressFactory;
     clickFactory: typeof ClickFactory;
     container: typeof ContainerFactory;
+    cover: typeof CoverFactory;
     customProgress: typeof CustomProgressFactory;
     customShapes: typeof CustomShapesFactory;
     dialog: typeof DialogFactory;
@@ -141,6 +143,7 @@ import CircularProgressCanvasClass from './circularprogresscanvas/CircularProgre
 import CircularProgressClass from './circularprogress/CircularProgress';
 import ClickClass from './click/Click';
 import ContainerClass from './container/Container';
+import CoverClass from './cover/Cover';
 import CustomProgressClass from './customprogress/CustomProgress';
 import CustomShapesClass from './customshapes/CustomShapes';
 import DialogClass from './dialog/Dialog';
@@ -189,6 +192,7 @@ declare namespace UIPlugins {
     type CircularProgress = CircularProgressClass;
     type Click = ClickClass;
     type Container = ContainerClass;
+    type Cover = CoverClass;
     type CustomProgress = CustomProgressClass;
     type CustomShapes = CustomShapesClass;
     type Dialog = DialogClass;
