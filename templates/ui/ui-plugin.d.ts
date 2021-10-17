@@ -17,6 +17,7 @@ import DynamicTextFactory from './dynamictext/Factory';
 import FlipFactory from './flip/Factory';
 import FixWidthButtonsFactory from './fixwidthbuttons/Factory';
 import FixWidthSizerFactory from './fixwidthsizer/Factory';
+import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory';
 import GridSizerFactory from './gridsizer/Factory';
 import GridTableFactory from './gridtable/Factory';
@@ -45,6 +46,7 @@ import TextAreaFactory from './textarea/Factory';
 import TextBoxFactory from './textbox/Factory';
 import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
+import TouchEventStopFactory from './toucheventstop/Factory';
 
 import { Edit } from '../../plugins/textedit';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
@@ -73,6 +75,7 @@ declare class Factories {
     flip: typeof FlipFactory;
     fixWidthButtons: typeof FixWidthButtonsFactory;
     fixWidthSizer: typeof FixWidthSizerFactory;
+    fullWindowRectangle: typeof FullWindowRectangleFactory;
     gridButtons: typeof GridButtonsFactory;
     gridSizer: typeof GridSizerFactory;
     gridTable: typeof GridTableFactory;
@@ -101,6 +104,7 @@ declare class Factories {
     textBox: typeof TextBoxFactory;
     textPlayer: typeof TextPlayerFactory;
     toast: typeof ToastFactory;
+    touchEventStop: typeof TouchEventStopFactory;
 }
 
 declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
@@ -143,6 +147,7 @@ import DialogClass from './dialog/Dialog';
 import DynamicTextClass from './dynamictext/DynamicText';
 import FlipClass from './flip/Flip';
 import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
+import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
 import FixWidthSizerClass from './fixwidthsizer/FixWidthSizer';
 import GridButtonsClass from './gridbuttons/GridButtons';
 import GridSizerClass from './gridsizer/GridSizer';
@@ -172,6 +177,7 @@ import TextAreaClass from './textarea/TextArea';
 import TextBoxClass from './textbox/TextBox';
 import TextPlayerClass from './textplayer/TextPlayer';
 import ToastClass from './toast/Toast';
+import TouchEventStopClass from './toucheventstop/TouchEventStop';
 
 declare namespace UIPlugins {
     type BadgeLabel = BadgeLabelClass;
@@ -189,6 +195,7 @@ declare namespace UIPlugins {
     type DynamicText = DynamicTextClass;
     type Flip = FlipClass;
     type FixWidthButtons = FixWidthButtonsClass;
+    type FullWindowRectangle = FullWindowRectangleClass;
     type FixWidthSizer = FixWidthSizerClass;
     type GridButtons = GridButtonsClass;
     type GridSizer = GridSizerClass;
@@ -218,4 +225,5 @@ declare namespace UIPlugins {
     type TextBox = TextBoxClass;
     type TextPlayer = TextPlayerClass;
     type Toast = ToastClass;
+    type TouchEventStop = TouchEventStopClass;
 }

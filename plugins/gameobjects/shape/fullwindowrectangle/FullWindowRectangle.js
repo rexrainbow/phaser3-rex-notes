@@ -57,7 +57,7 @@ class FullWindowRectangle extends Rectangle {
             .setOrigin(0.5)
             .setScrollFactor(0)
             .setPosition(x, y)
-            .setScale(width, height)
+            .setSize(width, height)
     }
 
 }

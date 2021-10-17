@@ -14,6 +14,7 @@ import Knob from './knob/Knob.js';
 import CustomShapes from './customshapes/CustomShapes.js';
 import CustomProgress from './customprogress/CustomProgress.js';
 import TransitionImage from './transitionimage/TransitionImage.js';
+import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle.js';
 import Chart from './chart/Chart.js';
 
 import Sizer from './sizer/Sizer.js';
@@ -47,6 +48,7 @@ import Pan from './pan/Pan.js';
 import Pinch from './pinch/Pinch.js';
 import Rotate from './rotate/Rotate.js';
 import Flip from './flip/Flip.js';
+import TouchEventStop from './toucheventstop/TouchEventStop.js';
 import Perspective from './perspective/Perspective.js';
 import Anchor from './anchor/Anchor.js';
 
@@ -74,6 +76,7 @@ export {
     CircleMaskImage,
     DynamicText,
     TextPlayer,
+    FullWindowRectangle,
     Chart,
     CircularProgressCanvas,
     CircularProgress,
@@ -113,6 +116,7 @@ export {
     Pinch,
     Rotate,
     Flip,
+    TouchEventStop,
     Perspective,
     Anchor,
 

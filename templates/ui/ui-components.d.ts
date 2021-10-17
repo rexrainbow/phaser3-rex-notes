@@ -12,6 +12,7 @@ import CircularProgress from './circularprogress/CircularProgress';
 import Knob from './knob/Knob';
 import CustomShapes from './customshapes/CustomShapes';
 import CustomProgress from './customprogress/CustomProgress';
+import FullWindowRectangle from './fullwindowrectangle/FullWindowRectangle';
 // import Chart from './chart/Chart';
 import NinePatch from './ninepatch/NinePatch';
 
@@ -46,6 +47,7 @@ import Pan from './pan/Pan';
 import Pinch from './pinch/Pinch';
 import Rotate from './rotate/Rotate';
 import Flip from './flip/Flip';
+import TouchEventStop from './toucheventstop/TouchEventStop';
 import Perspective from './perspective/Perspective';
 import Anchor from './anchor/Anchor';
 
@@ -72,6 +74,7 @@ export {
     CircleMaskImage,
     DynamicText,
     TextPlayer,
+    FullWindowRectangle,
     // Chart,
     CircularProgressCanvas,
     CircularProgress,
@@ -111,6 +114,7 @@ export {
     Pinch,
     Rotate,
     Flip,
+    TouchEventStop,
     Perspective,
     Anchor,
 

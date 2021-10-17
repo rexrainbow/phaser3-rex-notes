@@ -16,6 +16,7 @@ import KnobFactory from './knob/Factory.js';
 import CustomShapesFactory from './customshapes/Factory.js';
 import CustomProgressFactory from './customprogress/Factory.js';
 import TransitionImageFactory from './transitionimage/Factory.js';
+import FullWindowRectangleFactory from './fullwindowrectangle/Factory.js';
 import ChartFactory from './chart/Factory.js';
 
 import SizerFactory from './sizer/Factory.js';
@@ -49,6 +50,7 @@ import PanFactory from './pan/Factory.js';
 import PinchFactory from './pinch/Factory.js';
 import RotateFactory from './rotate/Factory.js';
 import FlipFactory from './flip/Factory.js';
+import TouchEventStopFactory from './toucheventstop/Factory.js';
 import PerspectiveFactory from './perspective/Factory.js';
 import AnchorFactory from './anchor/Factory.js';
 

@@ -193,7 +193,7 @@ var rect = scene.add.rexRoundRectangleCanvas(x, y, width, height, radiusConfig, 
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var rect = new MyRoundRectangleCanvas(x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
+    var rect = new MyRoundRectangleCanvas(scene, x, y, width, height, radiusConfig, fillStyle, strokeStyle, lineWidth, fillColor2, isHorizontalGradient);
     ```
 
 ### Color

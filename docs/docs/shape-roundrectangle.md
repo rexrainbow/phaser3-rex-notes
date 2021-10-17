@@ -23,7 +23,7 @@ Round rectangle shape.
     ```
 - Add shape object
     ```javascript
-    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
+    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
     ```
 
 #### Import plugin
@@ -52,7 +52,7 @@ Round rectangle shape.
     ```
 - Add shape object
     ```javascript
-    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
+    var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
     ```
 
 #### Import class
@@ -67,15 +67,14 @@ Round rectangle shape.
     ```
 - Add shape object
     ```javascript    
-    var rect = new RoundRectangle(scene, x, y, width, height, radius, fillColor);
+    var rect = new RoundRectangle(scene, x, y, width, height, radius, fillColor, fillAlpha);
     scene.add.existing(rect);
     ```
 
 ### Create shape object
 
 ```javascript
-var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
-// var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
+var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
 ```
 
 - `width`, `height` : Size of rectangle.
@@ -187,7 +186,7 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var rect = new MyRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
+    var rect = new MyRoundRectangle(scene, x, y, width, height, radius, fillColor, fillAlpha);
     ```
 
 ### Color
