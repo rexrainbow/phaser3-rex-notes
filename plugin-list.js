@@ -22,6 +22,7 @@ module.exports = {
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
+    'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
     // effect layer (shader)
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',
