@@ -16,7 +16,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(400, 300, 'classroom');
-        var rect = this.add.rexFullWindowRectangle(0xFF0000, 0.3);
+        var rect = this.add.rexFullWindowRectangle(0x0, 0.8);
+
+        this.add.image(400, 400, 'classroom').setScale(0.5);
 
         var tween = this.tweens.add({
             duration: 2000,

@@ -7,6 +7,8 @@ Rectangle shape covered full window.
 
 ## Live demos
 
+- [Cover](https://codepen.io/rexrainbow/pen/MWvwrLM)
+
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fullwindowrectangle)
