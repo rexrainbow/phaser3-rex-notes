@@ -23,6 +23,7 @@ module.exports = {
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
+    'coverplugin': './plugins/cover-plugin.js',
     // effect layer (shader)
     'effectlayerplugin': './plugins/effectlayer-plugin.js',
     'outlineeffectlayerplugin': './plugins/outlineeffectlayer-plugin.js',

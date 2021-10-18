@@ -1,17 +1,2 @@
-import FullWindowRectangle from '../fullwindowrectangle/FullWindowRectangle';
-
+import Cover from '../../../plugins/gameobjects/shape/cover/Cover';
 export default Cover;
-
-declare namespace Cover {
-    interface IConfig {
-        color?: number,
-        alpha?: number,
-    }
-}
-
-declare class Cover extends FullWindowRectangle {
-    constructor(
-        scene: Phaser.Scene,
-        config?: Cover.IConfig
-    );
-}
