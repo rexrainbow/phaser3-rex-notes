@@ -52,6 +52,8 @@ import Flip from './flip/Flip.js';
 import TouchEventStop from './toucheventstop/TouchEventStop.js';
 import Perspective from './perspective/Perspective.js';
 import Anchor from './anchor/Anchor.js';
+import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
+import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer.js';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds.js';
@@ -121,6 +123,8 @@ export {
     TouchEventStop,
     Perspective,
     Anchor,
+    Fade, FadeIn, FadeOutDestroy,
+    EaseMove, EaseMoveTo, EaseMoveFrom,
 
     GetParentSizer,
     GetTopmostSizer,

@@ -1,5 +1,4 @@
-import FadeIn from '../../../plugins/fade-in.js';
-import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
+import { FadeIn, FadeOutDestroy } from '../fade/Fade.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

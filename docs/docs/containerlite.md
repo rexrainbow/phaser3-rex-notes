@@ -432,6 +432,14 @@ Supported properties :
     ```javascript
     container.incDepth(value);
     ```
+- Move game object below this container and all children
+    ```javascript
+    container.moveDepthBelow(gameObject);
+    ```
+- Move game object above this container and all children
+    ```javascript
+    container.moveDepthAbove(gameObject);
+    ```
 
 ### Mask
 

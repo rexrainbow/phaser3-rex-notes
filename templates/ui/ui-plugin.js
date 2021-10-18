@@ -63,6 +63,8 @@ import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
+import { FadeIn, FadeOutDestroy } from './fade/Fade.js';
+import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove.js'
 
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
@@ -101,6 +103,10 @@ var methods = {
     waitEvent: WaitEvent,
     waitComplete: WaitComplete,
     setChildrenInteractive: SetChildrenInteractive,
+    fadeIn: FadeIn,
+    fadeOutDestroy: FadeOutDestroy,
+    easeMoveTo: EaseMoveTo,
+    easeMoveFrom: EaseMoveFrom
 }
 
 Object.assign(

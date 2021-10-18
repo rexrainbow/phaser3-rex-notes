@@ -1,4 +1,4 @@
-import { EaseMoveTo, EaseMoveFrom } from '../../../plugins/easemove.js';
+import { EaseMoveTo, EaseMoveFrom } from '../easemove/EaseMove.js';
 import { WaitComplete } from '../utils/WaitEvent.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

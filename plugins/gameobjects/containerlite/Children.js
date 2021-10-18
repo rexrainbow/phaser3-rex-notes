@@ -1,4 +1,5 @@
 import { GetParent } from './GetParent.js';
+import SortGameObjectsByDepth from '../../utils/system/SortGameObjectsByDepth.js';
 
 const ArrayUtils = Phaser.Utils.Array;
 

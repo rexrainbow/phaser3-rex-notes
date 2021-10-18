@@ -211,6 +211,14 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
         inc: number
     ): this;
 
+    moveDepthBelow(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
+
+    moveDepthAbove(
+        gameObject: Phaser.GameObjects.GameObject
+    ): this;
+
     getParent(
         gameObject?: Phaser.GameObjects.GameObject
     ): ContainerLite;

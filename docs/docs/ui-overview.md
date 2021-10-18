@@ -520,6 +520,23 @@ scene.rexUI.setChildrenInteractive(sizer, {
     ```javascript
     var flip = new RexPlugins.UI.Flip(gameObject, config);
     ```
+1. Fade in, [fade out destroy](fadeoutdestroy.md#fade-out-destroy)
+    ```javascript
+    scene.rexUI.fadeIn(gameObject, duration);
+    // scene.rexUI.fadeIn(gameObject, duration, alpha);
+    ```
+    ```javascript
+    scene.rexUI.fadeOutDestroy(gameObject, duration);
+    ```
+1. [Ease-move to](easemove.md), ease-move from
+    ```javascript
+    scene.rexUI.easeMoveTo(gameObject, duration, x, y);
+    // scene.rexUI.easeMoveTo(gameObject, duration, x, y, ease);
+    ```
+    ```javascript
+    scene.rexUI.easeMoveFrom(gameObject, duration, x, y);
+    // scene.rexUI.easeMoveFrom(gameObject, duration, x, y, ease);
+    ```
 1. [Perspective](containerlite-perspective.md): Snapshot children of [containerlite](containerlite.md), to a [perspective render texture](perspective-rendertexture.md).
     ```javascript
     var perspective = scene.rexUI.add.perspective(gameObject, config);

@@ -49,7 +49,10 @@ import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
 
+
+import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import { Edit } from '../../plugins/textedit';
+import { FadeIn, FadeOutDestroy } from './fade/Fade';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
@@ -112,7 +115,12 @@ declare class Factories {
 declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     add: Factories;
 
+
+    easeMoveTo: typeof EaseMoveTo;
+    easeMoveFrom: typeof EaseMoveFrom;
     edit: typeof Edit;
+    fadeIn: typeof FadeIn;
+    fadeOutDestroy: typeof FadeOutDestroy;
     getParentSizer: typeof GetParentSizer;
     getTopmostSizer: typeof GetTopmostSizer;
     hide: typeof Hide;
@@ -148,6 +156,8 @@ import CustomProgressClass from './customprogress/CustomProgress';
 import CustomShapesClass from './customshapes/CustomShapes';
 import DialogClass from './dialog/Dialog';
 import DynamicTextClass from './dynamictext/DynamicText';
+import { EaseMove as EaseMoveClass } from './easemove/EaseMove'
+import { Fade as FadeClass } from './fade/Fade.js';
 import FlipClass from './flip/Flip';
 import FixWidthButtonsClass from './fixwidthbuttons/FixWidthButtons';
 import FullWindowRectangleClass from './fullwindowrectangle/FullWindowRectangle';
@@ -197,6 +207,8 @@ declare namespace UIPlugins {
     type CustomShapes = CustomShapesClass;
     type Dialog = DialogClass;
     type DynamicText = DynamicTextClass;
+    type EaseMove = EaseMoveClass;
+    type Fade = FadeClass;
     type Flip = FlipClass;
     type FixWidthButtons = FixWidthButtonsClass;
     type FullWindowRectangle = FullWindowRectangleClass;
