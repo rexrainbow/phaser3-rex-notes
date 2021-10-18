@@ -7892,6 +7892,19 @@
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></li>
+<li><a href="../shape-cover/">Cover</a>: <a href="../shape-cover/">Rectangle shape covered full window</a>, and <a href="../toucheventstop/">block all touch events</a>.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">cover</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyCover</span> <span class="k">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Cover</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div></li>
 </ol>
 <h3 id="canvasshape-objects">Canvas/Shape objects<a class="headerlink" href="#canvasshape-objects" title="Permanent link">&para;</a></h3>
 <ol>
@@ -8076,6 +8089,12 @@
 </code></pre></div>
     or
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Rotate</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div></li>
+<li><a href="../toucheventstop/">Touch event stop</a>: Stop touch events propagation.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">touchEventStop</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">toucheventstop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">touchEventStop</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TouchEventStop</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ol>
 <h4 id="set-children-interactive">Set children interactive<a class="headerlink" href="#set-children-interactive" title="Permanent link">&para;</a></h4>

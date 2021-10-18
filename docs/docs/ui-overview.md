@@ -205,6 +205,21 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
         // ...
     }
     ```
+1. [Cover](shape-cover.md): [Rectangle shape covered full window](shape-cover.md), and [block all touch events](toucheventstop.md).
+    ```javascript
+    var shape = scene.rexUI.add.cover(config);
+    ```
+    or
+    ```javascript
+    class MyCover extends RexPlugins.UI.Cover {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Canvas/Shape objects
 
@@ -418,6 +433,14 @@ See this [example](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/e
     or
     ```javascript
     var rotate = new RexPlugins.UI.Rotate(config);
+    ```
+1. [Touch event stop](toucheventstop.md): Stop touch events propagation.
+    ```javascript
+    var touchEventStop = scene.rexUI.add.toucheventstop(gameObject, config);
+    ```
+    or
+    ```javascript
+    var touchEventStop = new RexPlugins.UI.TouchEventStop(gameObject, config);
     ```
 
 #### Set children interactive
