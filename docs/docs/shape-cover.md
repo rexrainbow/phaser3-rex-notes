@@ -1,6 +1,6 @@
 ## Introduction
 
-[Rectangle shape covered full window](shape-cover.md), and [block all touch events](toucheventstop.md).
+[Rectangle shape covered full window](shape-fullwindowrectangle.md), and [block all touch events](toucheventstop.md).
 
 - Author: Rex
 - Game object
