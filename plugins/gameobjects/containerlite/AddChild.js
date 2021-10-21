@@ -27,8 +27,6 @@ var AddLocal = function (gameObject) {
     state.rotation = gameObject.rotation;
     state.scaleX = gameObject.scaleX;
     state.scaleY = gameObject.scaleY;
-    state.flipX = gameObject.flipX;
-    state.flipY = gameObject.flipY;
     // Alpha
     state.alpha = gameObject.alpha;
     // Visible

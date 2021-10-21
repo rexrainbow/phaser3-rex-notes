@@ -8,7 +8,6 @@ var GetLocalState = function (gameObject) {
             x: 0, y: 0,
             rotation: 0,
             scaleX: 0, scaleY: 0,
-            flipX: false, flipY: false,
             alpha: 0,
             visible: true,
             active: true,

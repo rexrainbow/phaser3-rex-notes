@@ -10,16 +10,10 @@ export default {
         // Scale
         point.x /= this.scaleX;
         point.y /= this.scaleY;
-        // Flip
-        point.x *= ((!this.flipX) ? 1 : -1);
-        point.y *= ((!this.flipY) ? 1 : -1);
         return point;
     },
 
     localToWorld(point) {
-        // Flip
-        point.x *= ((!this.flipX) ? 1 : -1);
-        point.y *= ((!this.flipY) ? 1 : -1);
         // Scale
         point.x *= this.scaleX;
         point.y *= this.scaleY;

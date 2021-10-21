@@ -98,9 +98,7 @@ var container = scene.make.rexContainerLite({
     height: 1,
 
     // angle: 0,
-    // alpha: 1
-    // flipX: true,
-    // flipY: true,
+    // alpha: 1,
     // scale : {
     //    x: 1,
     //    y: 1

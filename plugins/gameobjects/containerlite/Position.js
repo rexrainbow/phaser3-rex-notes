@@ -15,11 +15,6 @@ export default {
         child.scaleX = state.scaleX * parent.scaleX;
         child.scaleY = state.scaleY * parent.scaleY;
 
-        if (child.flipX !== undefined) {
-            child.flipX = (!parent.flipX) ? state.flipX : !state.flipX;
-            child.flipY = (!parent.flipY) ? state.flipY : !state.flipY;
-        }
-
         child.rotation = state.rotation + parent.rotation;
 
         if (child.isRexContainerLite) {
@@ -45,11 +40,6 @@ export default {
 
         state.scaleX = GetScale(child.scaleX, parent.scaleX);
         state.scaleY = GetScale(child.scaleY, parent.scaleY);
-
-        if (child.flipX !== undefined) {
-            state.flipX = child.flipX;
-            state.flipY = child.flipY;
-        }
 
         state.rotation = child.rotation - parent.rotation;
         return this;

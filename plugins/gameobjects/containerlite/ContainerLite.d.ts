@@ -9,7 +9,6 @@ declare namespace ContainerLite {
         x: number, y: number,
         rotation: number, angle: number,
         scaleX: number, scaleY: number, displayWidth: number, displayHeight: number,
-        flipX: boolean, flipY: boolean,
         alpha: number,
         visible: boolean,
         active: boolean,
@@ -255,8 +254,6 @@ declare class ContainerLite extends Phaser.GameObjects.Zone {
     alphaBottomRight: number;
 
 
-    flipX: boolean;
-    flipY: boolean;
     toggleFlipX(): this;
     toggleFlipY(): this;
     setFlipX(value: boolean): this;

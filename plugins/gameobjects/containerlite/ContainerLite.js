@@ -103,34 +103,6 @@ class ContainerLite extends Base {
     }
 
     // Override
-    get flipX() {
-        return super.flipX;
-    }
-
-    set flipX(value) {
-        if (super.flipX === value) {
-            return;
-        }
-        super.flipX = value;
-
-        this.syncPosition();
-    }
-
-    // Override
-    get flipY() {
-        return super.flipY;
-    }
-
-    set flipY(value) {
-        if (super.flipY === value) {
-            return;
-        }
-        super.flipY = value;
-
-        this.syncPosition();
-    }
-
-    // Override
     get visible() {
         return super.visible;
     }
