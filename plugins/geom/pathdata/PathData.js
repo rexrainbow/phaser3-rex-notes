@@ -133,6 +133,11 @@ class PathData {
         return this;
     }
 
+    end() {
+        this.pathData.push(this.lastPointX, this.lastPointY);
+        return this;
+    }
+
     rotateAround(centerX, centerY, angle) {
         if (this.pathData.length === 0) {
             return this;

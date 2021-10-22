@@ -8031,9 +8031,15 @@
 <li><code>x</code>, <code>y</code> : End point</li>
 </ul>
 </li>
-<li>Close path
+<li>End commands<ul>
+<li>Close path, to fill color
     <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
 </code></pre></div></li>
+<li>End path, to draw lines only
+    <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</code></pre></div></li>
+</ul>
+</li>
 <li>Offset all points
     <div class="highlight"><pre><span></span><code><span class="nx">lines</span><span class="p">.</span><span class="nx">offset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </code></pre></div></li>

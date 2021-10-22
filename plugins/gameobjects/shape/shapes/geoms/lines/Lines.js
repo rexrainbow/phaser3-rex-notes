@@ -107,6 +107,12 @@ class Lines extends PathBase {
         return this;
     }
 
+    end() {
+        this.builder.end();
+        this.dirty = true;
+        return this;
+    }
+
     rotateAround(centerX, centerY, angle) {
         this.builder.rotateAround(centerX, centerY, angle);
 

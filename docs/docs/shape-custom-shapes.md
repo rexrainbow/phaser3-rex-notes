@@ -364,10 +364,15 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
     ```
     - `cx1`, `cy1` : Control point1
     - `x`, `y` : End point
-- Close path
-    ```javascript
-    lines.close();
-    ```
+- End commands
+    - Close path, to fill color
+        ```javascript
+        lines.close();
+        ```
+    - End path, to draw lines only
+        ```javascript
+        lines.end();
+        ```
 - Offset all points
     ```javascript
     lines.offset(x, y);

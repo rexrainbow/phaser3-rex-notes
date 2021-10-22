@@ -85,7 +85,8 @@ class BaseShapes extends Shape {
             (this.fillColor !== color) ||
             (this.fillAlpha !== alpha);
 
-        super.setFillStyle(color, alpha);
+        this.fillColor = color;
+        this.fillAlpha = alpha;
         return this;
     }
 
@@ -98,7 +99,9 @@ class BaseShapes extends Shape {
             (this.strokeColor !== color) ||
             (this.strokeAlpha !== alpha);
 
-        super.setStrokeStyle(lineWidth, color, alpha);
+        this.lineWidth = lineWidth;
+        this.strokeColor = color;
+        this.strokeAlpha = alpha;
         return this;
     }
 
