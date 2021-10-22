@@ -554,6 +554,18 @@ Shape data will be updated during rendering, or call `shape.updateData()` to upd
 
 The same as Circle.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = shape.alpha;
+    ```
+- Set
+    ```javascript
+    shape.setAlpha(alpha);
+    // shape.alpha = alpha;
+    ```
+
 ### Compare with similar plugins
 
 - [Custom Shapes](shape-custom-shapes.md) : Draw shapes.

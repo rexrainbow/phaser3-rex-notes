@@ -73,6 +73,18 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
 !!! warning "No tint methods"
     Uses `star.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = star.alpha;
+    ```
+- Set
+    ```javascript
+    star.setAlpha(alpha);
+    // star.alpha = alpha;
+    ```
+
 ### Radius
 
 - Inner radius

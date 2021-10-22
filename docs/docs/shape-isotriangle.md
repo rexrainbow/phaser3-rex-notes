@@ -50,6 +50,18 @@ var isoTriangle = scene.add.isotriangle(x, y, width, height, reversed, fillTop, 
 !!! warning "No tint methods"
     Uses `isoTriangle.setFillStyle(fillTop, fillLeft, fillRight)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = isoTriangle.alpha;
+    ```
+- Set
+    ```javascript
+    isoTriangle.setAlpha(alpha);
+    // isoTriangle.alpha = alpha;
+    ```
+
 ### Projection
 
 - Get

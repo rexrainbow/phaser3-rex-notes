@@ -70,6 +70,18 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
 !!! warning "No tint methods"
     Uses `ellipse.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = ellipse.alpha;
+    ```
+- Set
+    ```javascript
+    ellipse.setAlpha(alpha);
+    // ellipse.alpha = alpha;
+    ```
+
 ### Size
 
 - Get

@@ -69,6 +69,18 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
 !!! warning "No tint methods"
     Uses `rect.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = rect.alpha;
+    ```
+- Set
+    ```javascript
+    rect.setAlpha(alpha);
+    // rect.alpha = alpha;
+    ```
+
 ### Size
 
 - Get

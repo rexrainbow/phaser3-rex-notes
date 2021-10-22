@@ -94,6 +94,18 @@ var grid = scene.add.grid(x, y, width, height, cellWidth, cellHeight, fillColor,
 !!! warning "No tint methods"
     Uses `grid.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = grid.alpha;
+    ```
+- Set
+    ```javascript
+    grid.setAlpha(alpha);
+    // grid.alpha = alpha;
+    ```
+
 ### Display size
 
 - Get

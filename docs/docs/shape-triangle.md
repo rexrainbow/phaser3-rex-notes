@@ -69,6 +69,18 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
 !!! warning "No tint methods"
     Uses `triangle.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = triangle.alpha;
+    ```
+- Set
+    ```javascript
+    triangle.setAlpha(alpha);
+    // triangle.alpha = alpha;
+    ```
+
 ### Set vertices
 
 ```javascript

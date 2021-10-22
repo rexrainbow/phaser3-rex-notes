@@ -77,6 +77,18 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
 !!! warning "No tint methods"
     Uses `polygon.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = polygon.alpha;
+    ```
+- Set
+    ```javascript
+    polygon.setAlpha(alpha);
+    // polygon.alpha = alpha;
+    ```
+
 ### Smooth
 
 Smooths the polygon over the number of iterations specified.

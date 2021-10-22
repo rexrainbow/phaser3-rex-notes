@@ -201,6 +201,18 @@ var isRunning = spinner.isRunning;
     ```
     - `color` : Fill color, or stroke color, in number.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = spinner.alpha;
+    ```
+- Set
+    ```javascript
+    spinner.setAlpha(alpha);
+    // spinner.alpha = alpha;
+    ```
+
 ### Duration
 
 - Get

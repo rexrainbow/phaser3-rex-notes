@@ -293,3 +293,15 @@ See [Shape class](shape-custom-shapes.md#shape-class)
         //
     }, scope);
     ```
+
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = customProgress.alpha;
+    ```
+- Set
+    ```javascript
+    customProgress.setAlpha(alpha);
+    // customProgress.alpha = alpha;
+    ```

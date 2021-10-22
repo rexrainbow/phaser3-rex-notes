@@ -359,6 +359,18 @@ var circularProgress = scene.make.rexCircularProgress({
     }, scope);
     ```
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = circularProgress.alpha;
+    ```
+- Set
+    ```javascript
+    circularProgress.setAlpha(alpha);
+    // circularProgress.alpha = alpha;
+    ```
+
 ### Compare with Circular-progress canvas
 
 - [Circular-progress canvas](canvas-circularprogress.md) creates a canvas then draw on that canvas, circular progress shape draw on GRAPHICS pipeline like Shape or Graphics game object.

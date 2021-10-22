@@ -71,6 +71,18 @@ var curve = scene.add.curve(x, y, path, fillColor);
 !!! warning "No tint methods"
     Uses `curve.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = curve.alpha;
+    ```
+- Set
+    ```javascript
+    curve.setAlpha(alpha);
+    // curve.alpha = alpha;
+    ```
+
 ### Smoothness
 
 The number of points used when rendering it. Increase this value for smoother curves, at the cost of more polygons being rendered.

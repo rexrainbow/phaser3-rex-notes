@@ -50,6 +50,18 @@ var isoBox = scene.add.isobox(x, y, width, height, fillTop, fillLeft, fillRight)
 !!! warning "No tint methods"
     Uses `isoBox.setFillStyle(fillTop, fillLeft, fillRight)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = isoBox.alpha;
+    ```
+- Set
+    ```javascript
+    isoBox.setAlpha(alpha);
+    // isoBox.alpha = alpha;
+    ```
+
 ### Projection
 
 - Get

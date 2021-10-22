@@ -2,8 +2,9 @@ const Rectangle = Phaser.GameObjects.Rectangle;
 
 class FullWindowRectangle extends Rectangle {
     constructor(scene, color, alpha) {
-        super(scene, 0, 0, 2, 2, color, alpha);
+        super(scene, 0, 0, 2, 2, color, 1);
 
+        this.setAlpha(alpha)
         this.setScrollFactor(0);
         this.boot();
     }
@@ -22,14 +23,6 @@ class FullWindowRectangle extends Rectangle {
         this.scene.events.off('prerender', this.resize, this);
 
         super.destroy(fromScene);
-    }
-
-    get alpha() {
-        return this.fillAlpha;
-    }
-
-    set alpha(value) {
-        this.setFillStyle(this.fillColor, value);
     }
 
     get tint() {

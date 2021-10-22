@@ -69,6 +69,18 @@ var circle = scene.add.circle(x, y, radius, fillColor);
 !!! warning "No tint methods"
     Uses `circle.setFillStyle(color, alpha)` to change color.
 
+### Alpha
+
+- Get
+    ```javascript
+    var alpha = circle.alpha;
+    ```
+- Set
+    ```javascript
+    circle.setAlpha(alpha);
+    // circle.alpha = alpha;
+    ```
+
 ### Radius
 
 - Radius
