@@ -7465,16 +7465,16 @@
                 <h2 id="define-a-scene">Define a scene<a class="headerlink" href="#define-a-scene" title="Permanent link">&para;</a></h2>
 <h3 id="configuration-of-scene">Configuration of scene<a class="headerlink" href="#configuration-of-scene" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="c1">// active: false,</span>
-    <span class="c1">// visible: true,</span>
-    <span class="c1">// pack: false,</span>
-    <span class="c1">// cameras: null,</span>
-    <span class="c1">// map: {},</span>
-    <span class="c1">// physics: {},</span>
-    <span class="c1">// loader: {},</span>
-    <span class="c1">// plugins: false,</span>
-    <span class="c1">// input: {}</span>
+  <span class="nx">key</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="c1">// active: false,</span>
+  <span class="c1">// visible: true,</span>
+  <span class="c1">// pack: false,</span>
+  <span class="c1">// cameras: null,</span>
+  <span class="c1">// map: {},</span>
+  <span class="c1">// physics: {},</span>
+  <span class="c1">// loader: {},</span>
+  <span class="c1">// plugins: false,</span>
+  <span class="c1">// input: {}</span>
 <span class="p">};</span>
 </code></pre></div>
 <ul>
@@ -7483,7 +7483,7 @@
 <li><code>visible</code> : Does the Scene start as visible or not? A visible Scene renders each step.</li>
 <li><code>pack</code> : An optional <a href="../loader/#file-pack">Loader Packfile</a> to be loaded before the Scene begins.</li>
 <li><code>cameras</code> : An optional <a href="../camera/#create-cameras-from-json">Camera configuration object</a>.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
@@ -7501,18 +7501,16 @@
 </code></pre></div></li>
 <li><code>map</code> : Overwrites the default injection map for a scene.</li>
 <li><code>physics</code> : The physics configuration object for the Scene.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;arcade&#39;</span><span class="p">,</span> <span class="c1">// &#39;arcade&#39;, or &#39;matter&#39;</span>
     <span class="nx">arcade</span><span class="o">:</span> <span class="p">{...},</span>
     <span class="nx">matter</span><span class="o">:</span> <span class="p">{...}</span>
 <span class="p">}</span>
-</code></pre></div><ul>
+</code></pre></div></li>
 <li><code>arcade</code> : <a href="../arcade-world/#configuration">Arcade Physics configuration</a>.</li>
 <li><code>matter</code> : <a href="../matterjs-world/#configuration">Matter Physics configuration</a>.</li>
-</ul>
-</li>
 <li><code>loader</code> : The loader configuration object for the Scene.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">enableParallel</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
@@ -7526,17 +7524,17 @@
 <span class="p">}</span>
 </code></pre></div></li>
 <li><code>plugins</code> : The plugin configuration object for the Scene.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nb">global</span><span class="o">:</span> <span class="p">[</span>
         <span class="c1">//{key, plugin, start}</span>
     <span class="p">],</span>
     <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
         <span class="c1">// ...</span>
     <span class="p">]</span>
-<span class="p">}</span>    
+<span class="p">}</span>
 </code></pre></div></li>
 <li><code>input</code> : The input configuration object for the Scene.
-    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <div class="highlight"><pre><span></span><code><span class="p">{</span>
     <span class="nx">keyboard</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">target</span><span class="o">:</span> <span class="nb">window</span>
     <span class="p">},</span>
@@ -7557,16 +7555,14 @@
 </ul>
 <h3 id="es6-class">ES6 class<a class="headerlink" href="#es6-class" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyScene</span> <span class="k">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+  <span class="p">}</span>
 
-    <span class="kr">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nx">init</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="nx">preload</span> <span class="p">()</span> <span class="p">{}</span>
-    <span class="nx">create</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span>  <span class="p">{}</span>
-    <span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
-
+  <span class="nx">init</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">preload</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="nx">create</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">}</span>
 </code></pre></div>
 <ul>
@@ -7574,20 +7570,16 @@
 </ul>
 <h3 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">MyScene</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
+  <span class="nx">Extends</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">,</span>
 
-    <span class="nx">Extends</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">,</span>
+  <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="nx">MyScene</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+  <span class="p">},</span>
 
-    <span class="nx">initialize</span><span class="o">:</span>
-
-    <span class="kd">function</span> <span class="nx">MyScene</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>
-    <span class="p">},</span>
-
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
 <span class="p">});</span>
 </code></pre></div>
 <ul>
@@ -7595,29 +7587,27 @@
 </ul>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">MyGame</span> <span class="o">=</span> <span class="p">{};</span>
 
-<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span>
-<span class="p">{</span>
-<span class="p">};</span>
+<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
 
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kr">constructor</span> <span class="o">=</span> <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">;</span>
 
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+  <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
+  <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{},</span>
 <span class="p">};</span>
 </code></pre></div>
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#add-new-scene">adding new scene</a>, or <a href="../scenemanager/#start-scene">starting scene</a></li>
 </ul>
 <h3 id="override">Override<a class="headerlink" href="#override" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s2">&quot;Demo&quot;</span><span class="p">);</span>
 
-<span class="nx">demo</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">preload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">preload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{};</span>
 </code></pre></div>
 <ul>
 <li><code>data</code> : Parameters passed from <a href="../scenemanager/#add-new-scene">adding new scene</a>, or <a href="../scenemanager/#start-scene">starting scene</a></li>
@@ -7683,16 +7673,12 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 </code></pre></div>
 <h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
 <ul>
-<li>All game objects will be destroyed.<ul>
+<li>All game objects will be destroyed.</li>
 <li>Registered events on game objects will also be clear, too.</li>
-</ul>
-</li>
 <li>Touch, keyboard and GamePad events will be clear.</li>
 <li>Cameras will be destroyed.</li>
-<li>Loader will be stopped.<ul>
+<li>Loader will be stopped.</li>
 <li>Assets will be stored in global cache.</li>
-</ul>
-</li>
 <li>Events registered on scene plugin (<code>scene.events.on</code>) <strong>won't be clear</strong>.</li>
 </ul>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
@@ -7707,7 +7693,7 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li><code>scene</code> : <a href="../scenemanager/">scenePlugin</a></li>
 <li><code>anims</code></li>
 <li><code>physics</code> : <a href="../arcade-world/">ArcadePhysics</a></li>
-<li><code>matter</code> :　MatterPhysics</li>
+<li><code>matter</code> :　 MatterPhysics</li>
 <li><code>registry</code> : Global <a href="../datamanager/">data manager</a></li>
 <li><code>data</code> : Local <a href="../datamanager/">data manager</a></li>
 <li><code>sys</code></li>
@@ -7719,12 +7705,14 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <li><code>add</code></li>
 <li><code>make</code></li>
 <li><code>children</code> : <a href="../structs-list/">DisplayList</a>
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span> <span class="c1">// Move child1 above child2</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span> <span class="c1">// Move child1 below child2</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>
 </code></pre></div></li>
 <li><code>lights</code></li>
@@ -7733,62 +7721,56 @@ Stop --&gt; |"scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.s
 <h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Start (Before <code>scene.init()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-<li>Every tick<ul>
+<li>Every tick</li>
 <li>Preupdate
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;preupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;preupdate&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Update
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;update&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Postupdate
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;postupdate&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Render
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;render&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-</ul>
-</li>
-<li>State changed<ul>
+<li>State changed</li>
 <li>Pause (from <code>scene.scene.pause()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;pause&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Resume (from <code>scene.scene.resume()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resume&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Sleep (from <code>scene.scene.sleep()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sleep&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;sleep&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Wake (from <code>scene.scene.wake()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;wake&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Stop/shutdown (from <code>scene.scene.stop()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;shutdown&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div><ul>
 <li><strong>Free-up any resources that may be in use by this scene</strong></li>
 </ul>
 </li>
-</ul>
-</li>
 <li>Destroy (from <code>scene.scene.remove()</code>)
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;destroy&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Resize
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resize&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Boot
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+  <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;boot&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>
 </code></pre></div></li>
-<li>Game object added to scene<ul>
+<li>Game object added to scene</li>
 <li>Add
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;addedtoscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){})</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;addedtoscene&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
 <li>Remove
-    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;removedfromscene&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">){})</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;removedfromscene&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">scene</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div></li>
-</ul>
-</li>
 </ul>
                 
               

@@ -4,16 +4,16 @@
 
 ```javascript
 var config = {
-    key: '',
-    // active: false,
-    // visible: true,
-    // pack: false,
-    // cameras: null,
-    // map: {},
-    // physics: {},
-    // loader: {},
-    // plugins: false,
-    // input: {}
+  key: "",
+  // active: false,
+  // visible: true,
+  // pack: false,
+  // cameras: null,
+  // map: {},
+  // physics: {},
+  // loader: {},
+  // plugins: false,
+  // input: {}
 };
 ```
 
@@ -22,95 +22,93 @@ var config = {
 - `visible` : Does the Scene start as visible or not? A visible Scene renders each step.
 - `pack` : An optional [Loader Packfile](loader.md#file-pack) to be loaded before the Scene begins.
 - `cameras` : An optional [Camera configuration object](camera.md#create-cameras-from-json).
-    ```javascript
-    {
-        name: '',
-        x: 0,
-        y: 0,
-        width: scene.sys.scale.width,
-        height: scene.sys.scale.height,
-        zoom: 1,
-        rotation: 0,
-        scrollX: 0,
-        scrollY: 0,
-        roundPixels: false,
-        visible: true,
-        backgroundColor: false,
-        bounds: null, // {x, y, width, height}
-    }
-    ```
+  ```javascript
+  {
+      name: '',
+      x: 0,
+      y: 0,
+      width: scene.sys.scale.width,
+      height: scene.sys.scale.height,
+      zoom: 1,
+      rotation: 0,
+      scrollX: 0,
+      scrollY: 0,
+      roundPixels: false,
+      visible: true,
+      backgroundColor: false,
+      bounds: null, // {x, y, width, height}
+  }
+  ```
 - `map` : Overwrites the default injection map for a scene.
 - `physics` : The physics configuration object for the Scene.
-    ```javascript
-    {
-        default: 'arcade', // 'arcade', or 'matter'
-        arcade: {...},
-        matter: {...}
-    }
-    ```
-    - `arcade` : [Arcade Physics configuration](arcade-world.md#configuration).
-    - `matter` : [Matter Physics configuration](matterjs-world.md#configuration).
+  ```javascript
+  {
+      default: 'arcade', // 'arcade', or 'matter'
+      arcade: {...},
+      matter: {...}
+  }
+  ```
+  - `arcade` : [Arcade Physics configuration](arcade-world.md#configuration).
+  - `matter` : [Matter Physics configuration](matterjs-world.md#configuration).
 - `loader` : The loader configuration object for the Scene.
-    ```javascript
-    {
-        baseURL: '',
-        path: '',
-        enableParallel: true,
-        maxParallelDownloads: 4,
-        crossOrigin: undefined,
-        responseType: '',
-        async: true,
-        user: '',
-        password: '',
-        timeout: 0
-    }
-    ```
+  ```javascript
+  {
+      baseURL: '',
+      path: '',
+      enableParallel: true,
+      maxParallelDownloads: 4,
+      crossOrigin: undefined,
+      responseType: '',
+      async: true,
+      user: '',
+      password: '',
+      timeout: 0
+  }
+  ```
 - `plugins` : The plugin configuration object for the Scene.
-    ```javascript
-    {
-        global: [
-            //{key, plugin, start}
-        ],
-        scene: [
-            // ...
-        ]
-    }    
-    ```
+  ```javascript
+  {
+      global: [
+          //{key, plugin, start}
+      ],
+      scene: [
+          // ...
+      ]
+  }
+  ```
 - `input` : The input configuration object for the Scene.
-    ```javascript
-    {
-        keyboard: {
-            target: window
-        },
-        mouse: {
-            target: null,
-            capture: true
-        },
-        activePointers: 1,
-        touch: {
-            target: null,
-            capture: true
-        },
-        smoothFactor: 0,
-        gamepad: false,
-        windowEvents: true,
-    }
-    ```
+  ```javascript
+  {
+      keyboard: {
+          target: window
+      },
+      mouse: {
+          target: null,
+          capture: true
+      },
+      activePointers: 1,
+      touch: {
+          target: null,
+          capture: true
+      },
+      smoothFactor: 0,
+      gamepad: false,
+      windowEvents: true,
+  }
+  ```
 
 ### ES6 class
 
 ```javascript
 class MyScene extends Phaser.Scene {
+  constructor(config) {
+    super(config);
+  }
 
-    constructor (config) {
-        super(config);
-    }
-
-    init(data) {}
-    preload () {}
-    create (data)  {}
-    update(time, delta) {}
-
+  init(data) {}
+  preload() {}
+  create(data) {}
+  update(time, delta) {}
 }
 ```
 
@@ -120,20 +118,16 @@ class MyScene extends Phaser.Scene {
 
 ```javascript
 var MyScene = new Phaser.Class({
+  Extends: Phaser.Scene,
 
-    Extends: Phaser.Scene,
+  initialize: function MyScene(config) {
+    Phaser.Scene.call(this, config);
+  },
 
-    initialize:
-
-    function MyScene (config)
-    {
-        Phaser.Scene.call(this, config)
-    },
-
-    init: function (data) {},
-    preload: function () {},
-    create: function (data) {},
-    update: function (time, delta) {}
+  init: function (data) {},
+  preload: function () {},
+  create: function (data) {},
+  update: function (time, delta) {},
 });
 ```
 
@@ -142,17 +136,15 @@ var MyScene = new Phaser.Class({
 ```javascript
 var MyGame = {};
 
-MyGame.Boot = function ()
-{
-};
+MyGame.Boot = function () {};
 
 MyGame.Boot.prototype.constructor = MyGame.Boot;
 
 MyGame.Boot.prototype = {
-    init: function (data) {},
-    preload: function () {},
-    create: function (data) {},
-    update: function (time, delta) {}
+  init: function (data) {},
+  preload: function () {},
+  create: function (data) {},
+  update: function (time, delta) {},
 };
 ```
 
@@ -161,12 +153,12 @@ MyGame.Boot.prototype = {
 ### Override
 
 ```javascript
-var demo = new Phaser.Scene('Demo');
+var demo = new Phaser.Scene("Demo");
 
-demo.init = function (data){};
-demo.preload = function (){};
-demo.create = function (data){};
-demo.update = function (time, delta){};
+demo.init = function (data) {};
+demo.preload = function () {};
+demo.create = function (data) {};
+demo.update = function (time, delta) {};
 ```
 
 - `data` : Parameters passed from [adding new scene](scenemanager.md#add-new-scene), or [starting scene](scenemanager.md#start-scene)
@@ -239,11 +231,11 @@ scene.scene.start();
 ### Stop
 
 - All game objects will be destroyed.
-    - Registered events on game objects will also be clear, too.
+  - Registered events on game objects will also be clear, too.
 - Touch, keyboard and GamePad events will be clear.
 - Cameras will be destroyed.
 - Loader will be stopped.
-    - Assets will be stored in global cache.
+  - Assets will be stored in global cache.
 - Events registered on scene plugin (`scene.events.on`) **won't be clear**.
 
 ## Members
@@ -258,7 +250,7 @@ scene.scene.start();
 - `scene` : [scenePlugin](scenemanager.md)
 - `anims`
 - `physics` : [ArcadePhysics](arcade-world.md)
-- `matter` :　MatterPhysics
+- `matter` :　 MatterPhysics
 - `registry` : Global [data manager](datamanager.md)
 - `data` : Local [data manager](datamanager.md)
 - `sys`
@@ -270,15 +262,17 @@ scene.scene.start();
 - `add`
 - `make`
 - `children` : [DisplayList](structs-list.md)
-    ```javascript
-    scene.children.bringToTop(child);
-    scene.children.sendToBack(child);
-    scene.children.moveUp(child);
-    scene.children.moveDown(child);
-    scene.children.moveUp(child);
-    scene.children.moveTo(child, index);
-    scene.children.swap(child1, child2);
-    ```
+  ```javascript
+  scene.children.bringToTop(child);
+  scene.children.sendToBack(child);
+  scene.children.moveUp(child);
+  scene.children.moveDown(child);
+  scene.children.moveUp(child);
+  scene.children.moveTo(child, index);
+  scene.children.moveAbove(child1, child2); // Move child1 above child2
+  scene.children.moveBelow(child1, child2); // Move child1 below child2
+  scene.children.swap(child1, child2);
+  ```
 - `lights`
 
 Preserve word in a scene.
@@ -286,66 +280,66 @@ Preserve word in a scene.
 ## Events
 
 - Start (Before `scene.init()`)
-    ```javascript
-    scene.events.on('start', function(){});
-    ```
+  ```javascript
+  scene.events.on("start", function () {});
+  ```
 - Every tick
-    - Preupdate
-        ```javascript
-        scene.events.on('preupdate', function(time, delta){});
-        ```
-    - Update
-        ```javascript
-        scene.events.on('update', function(time, delta){});
-        ```
-    - Postupdate
-        ```javascript
-        scene.events.on('postupdate', function(time, delta){});
-        ```
-    - Render
-        ```javascript
-        scene.events.on('render', function(){});
-        ```
+  - Preupdate
+    ```javascript
+    scene.events.on("preupdate", function (time, delta) {});
+    ```
+  - Update
+    ```javascript
+    scene.events.on("update", function (time, delta) {});
+    ```
+  - Postupdate
+    ```javascript
+    scene.events.on("postupdate", function (time, delta) {});
+    ```
+  - Render
+    ```javascript
+    scene.events.on("render", function () {});
+    ```
 - State changed
-    - Pause (from `scene.scene.pause()`)
-        ```javascript
-        scene.events.on('pause', function(){});
-        ```
-    - Resume (from `scene.scene.resume()`)
-        ```javascript
-        scene.events.on('resume', function(){});
-        ```
-    - Sleep (from `scene.scene.sleep()`)
-        ```javascript
-        scene.events.on('sleep', function(){});
-        ```
-    - Wake (from `scene.scene.wake()`)
-        ```javascript
-        scene.events.on('wake', function(){});
-        ```
-    - Stop/shutdown (from `scene.scene.stop()`)
-        ```javascript
-        scene.events.on('shutdown', function(){});
-        ```
-        - **Free-up any resources that may be in use by this scene**
+  - Pause (from `scene.scene.pause()`)
+    ```javascript
+    scene.events.on("pause", function () {});
+    ```
+  - Resume (from `scene.scene.resume()`)
+    ```javascript
+    scene.events.on("resume", function () {});
+    ```
+  - Sleep (from `scene.scene.sleep()`)
+    ```javascript
+    scene.events.on("sleep", function () {});
+    ```
+  - Wake (from `scene.scene.wake()`)
+    ```javascript
+    scene.events.on("wake", function () {});
+    ```
+  - Stop/shutdown (from `scene.scene.stop()`)
+    ```javascript
+    scene.events.on("shutdown", function () {});
+    ```
+    - **Free-up any resources that may be in use by this scene**
 - Destroy (from `scene.scene.remove()`)
-    ```javascript
-    scene.events.on('destroy', function(){});
-    ```
+  ```javascript
+  scene.events.on("destroy", function () {});
+  ```
 - Resize
-    ```javascript
-    scene.events.on('resize', function(){});
-    ```
+  ```javascript
+  scene.events.on("resize", function () {});
+  ```
 - Boot
-    ```javascript
-    scene.events.on('boot', function(){});
-    ```
+  ```javascript
+  scene.events.on("boot", function () {});
+  ```
 - Game object added to scene
-    - Add
-        ```javascript
-        scene.events.on('addedtoscene', function(gameObject, scene){})
-        ```
-    - Remove
-        ```javascript
-        scene.events.on('removedfromscene', function(gameObject, scene){})
-        ```
+  - Add
+    ```javascript
+    scene.events.on("addedtoscene", function (gameObject, scene) {});
+    ```
+  - Remove
+    ```javascript
+    scene.events.on("removedfromscene", function (gameObject, scene) {});
+    ```
