@@ -7,14 +7,9 @@ var GetExpandedChildWidth = function (child, parentWidth) {
     var childConfig = child.rexSizer;
     var padding = childConfig.padding;
     if (this.orientation === 0) { // x
-        if (childConfig.proportion > 0) {
-            if (this.proportionLength > 0) {
-                childWidth = (childConfig.proportion * this.proportionLength);
-            } else {
-                childWidth = child.minWidth;
-            }
+        if ((childConfig.proportion > 0) && (this.proportionLength > 0)) {
+            childWidth = (childConfig.proportion * this.proportionLength);
         }
-
     } else { // y
         if (childConfig.expand) {
             var innerWidth = parentWidth - this.space.left - this.space.right;
