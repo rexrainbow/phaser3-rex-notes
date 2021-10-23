@@ -107,7 +107,7 @@ export default {
         if (proportion === undefined) {
             proportion = 1;
         }
-        Add.call(this, Space(this.scene),
+        Add.call(this, new Space(this.scene),
             {
                 proportion: proportion,
                 minWidth: 0,

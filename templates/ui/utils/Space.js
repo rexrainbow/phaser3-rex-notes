@@ -1,7 +1,10 @@
 const Zone = Phaser.GameObjects.Zone;
-var Space = function (scene) {
-    var gameObject = new Zone(scene, 0, 0, 1, 1); // Don't add Zone into scene
-    gameObject.isRexSpace = true;
-    return gameObject;
+
+class Space extends Zone {
+    constructor(scene) {
+        super(scene, 0, 0, 1, 1);
+        // Don't add Zone into scene
+        this.isRexSpace = true;
+    }
 }
 export default Space;

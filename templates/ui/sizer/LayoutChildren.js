@@ -27,8 +27,13 @@ var LayoutChildren = function () {
         PreLayoutChild.call(this, child);
 
         // Set size
-        childWidth = this.getExpandedChildWidth(child);
-        childHeight = this.getExpandedChildHeight(child);
+        if (child.isRexSpace) {
+            childWidth = 0;
+            childHeight = 0;
+        } else {
+            childWidth = this.getExpandedChildWidth(child);
+            childHeight = this.getExpandedChildHeight(child);
+        }
         if (child.isRexSizer) {
             child.runLayout(this, childWidth, childHeight);
             CheckSize(child, this);
