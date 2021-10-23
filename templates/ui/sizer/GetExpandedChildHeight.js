@@ -12,8 +12,12 @@ var GetExpandedChildHeight = function (child, parentHeight) {
             childHeight = innerHeight - padding.top - padding.bottom;
         }
     } else { // y
-        if ((childConfig.proportion > 0) && (this.proportionLength > 0)) {
-            childHeight = (childConfig.proportion * this.proportionLength);
+        if (childConfig.proportion > 0) {
+            if (this.proportionLength > 0) {
+                childHeight = (childConfig.proportion * this.proportionLength);
+            } else {
+                childHeight = child.minHeight;
+            }
         }
     }
     return childHeight;
