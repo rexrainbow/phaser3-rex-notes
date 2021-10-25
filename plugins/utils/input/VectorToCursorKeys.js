@@ -15,10 +15,10 @@ class VectorToCursorKeys extends CursorKeys {
 
     resetFromJSON(o) {
         if (this.start == undefined) {
-            this.start = {};
+            this.start = { x: 0, y: 0 };
         }
         if (this.end == undefined) {
-            this.end = {};
+            this.end = { x: 0, y: 0 };
         }
         this._enable = undefined;
         this.setEnable(GetValue(o, 'enable', true));

@@ -8087,10 +8087,16 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <li>Position<ul>
 <li>Current touching<ul>
 <li>Position in screen : <code>pointer.x</code> , <code>pointer.y</code></li>
-<li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code><ul>
-<li>Get world position in a camera
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">positionToCamera</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>  <span class="c1">// out: {x, y}</span>
-<span class="c1">// var out = pointer.positionToCamera(camera, out);</span>
+<li>Position in camera :<ul>
+<li>Single camera :
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Multiple cameras :
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">positionToCamera</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>  <span class="c1">// worldXY: {x, y}</span>
+<span class="c1">// var worldXY = pointer.positionToCamera(camera, worldXY);</span>
+<span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">worldXY</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">worldXY</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </code></pre></div></li>
 </ul>
 </li>

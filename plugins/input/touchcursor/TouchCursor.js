@@ -17,9 +17,13 @@ class TouchCursor extends VectorToCursorKeys {
         this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this.scene = scene;
+        this.mainCamera = scene.cameras.main;
+        this.pointer = undefined;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
+
         gameObject.setInteractive(new CircleClass(gameObject.displayOriginX, gameObject.displayOriginY, this.radius), CircleContains);
+
         this.boot();
     }
 
@@ -61,8 +65,9 @@ class TouchCursor extends VectorToCursorKeys {
 
         this.destroyEventEmitter();
 
-        this.pointer = undefined;
         this.scene = undefined;
+        this.mainCamera = undefined;
+        this.pointer = undefined;
         this.gameObject = undefined;
 
         super.shutdown();
@@ -89,18 +94,33 @@ class TouchCursor extends VectorToCursorKeys {
         if (this.pointer !== pointer) {
             return;
         }
-        if (!pointer.camera) {
+
+        var camera = pointer.camera;
+        if (!camera) {
             // Pointer is outside of any camera, no worldX/worldY available
             return;
         }
 
         // Vector of world position
+        var gameObject = this.gameObject;
+        var worldXY = this.end;
+
+        // Note: pointer.worldX, pointer.worldY might not be the world position of this camera,
+        // if this camera is not main-camera
+        if (camera !== this.mainCamera) {
+            camera.getWorldPoint(pointer.x, pointer.y, worldXY);
+        } else {
+            worldXY.x = pointer.worldX;
+            worldXY.y = pointer.worldY;
+        }
+
         this.setVector(
-            (this.gameObject.x + pointer.camera.scrollX),
-            (this.gameObject.y + pointer.camera.scrollY),
-            pointer.worldX,
-            pointer.worldY
+            (gameObject.x + camera.scrollX),
+            (gameObject.y + camera.scrollY),
+            worldXY.x,
+            worldXY.y
         );
+
         this.emit('update');
     }
 
