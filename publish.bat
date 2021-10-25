@@ -1,3 +1,3 @@
 @echo off
-echo Installing dependencies......
+REM npm adduser
 npm publish
