@@ -17,7 +17,7 @@ class Modal extends ComponentBase {
         this.cover = (coverConfig !== false) ? CreateCover(gameObject, coverConfig) : undefined;
 
         // Close conditions:
-        // OK/Cancel buttons, invoke modal.close()
+        // OK/Cancel buttons, invoke modal.requestClose()
         var userInput = GetValue(config, 'userInput', true);
         // Timeout/any-touch
         if (!userInput) {
@@ -52,8 +52,14 @@ class Modal extends ComponentBase {
             return;
         }
 
+        // Registered in anyTouchClose()
+        if (!this.cover) {
+            this.scene.input.off('pointerup', this.requestClose, this);
+        }
+
         if (this.cover && !fromScene) {
             this.cover.destroy();
+            this.cover = undefined;
         }
 
         this.transitInCallback = undefined;
@@ -62,17 +68,14 @@ class Modal extends ComponentBase {
         this.timer.remove();
         this.timer = undefined;
 
-        // Registered in anyTouchClose()
-        this.scene.input.off('pointerup', this.close, this);
-
         super.shutdown(fromScene);
     }
 
     anyTouchClose() {
         if (this.cover) {
-            this.cover.once('pointerup', this.close, this);
+            this.cover.once('pointerup', this.requestClose, this);
         } else {
-            this.scene.input.once('pointerup', this.close, this);
+            this.scene.input.once('pointerup', this.requestClose, this);
         }
         return this;
     }
@@ -149,7 +152,7 @@ class Modal extends ComponentBase {
         return this;
     }
 
-    close() {
+    requestClose() {
         // Only can close modal in OPEN state
         if (this._state.state === 'OPEN') {
             this._state.next(); // OPEN -> TRANS_CLOSE 

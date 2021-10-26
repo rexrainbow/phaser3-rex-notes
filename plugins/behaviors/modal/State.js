@@ -36,7 +36,7 @@ class State extends FSM {
     }
     // TRANS_OPNE
 
-    // OPEN -> TRANS_CLOSE
+    // OPEN -> TRANS_CLOSE    
     next_OPEN() {
         return 'TRANS_CLOSE';
     }
@@ -52,6 +52,7 @@ class State extends FSM {
         var modalBehavior = this.parent;
         modalBehavior.removeDelayCall();
     }
+    // OPEN
 
     // TRANS_CLOSE -> CLOSE
     next_TRANS_CLOSE() {
@@ -70,6 +71,7 @@ class State extends FSM {
         var modalBehavior = this.parent;
         modalBehavior.removeDelayCall();
     }
+    // TRANS_CLOSE
 
     // CLOSE
     next_CLOSE() {
@@ -80,6 +82,7 @@ class State extends FSM {
     }
     exit_CLOSE() {
     }
+    // CLOSE
 }
 
 export default State;
