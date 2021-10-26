@@ -12,11 +12,10 @@ class Scroller extends ComponentBase {
         // this.parent = gameObject;
 
         var enable = GetValue(config, 'enable', true);
-        var stateConfig = {
+        this._state = new State(this, {
             enable: enable,
             eventEmitter: false,
-        }
-        this._state = new State(this, stateConfig);
+        });
 
         var drapSpeedConfig = {
             inputConfig: GetValue(config, 'inputConfig', undefined),

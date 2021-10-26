@@ -1,5 +1,4 @@
 import Label from '../label/Label.js';
-import Const from './Const.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
@@ -20,8 +19,8 @@ class Toast extends Label {
         this.setTransitInTime(GetValue(config, 'duration.in', 200));
         this.setDisplayTime(GetValue(config, 'duration.hold', 1200));
         this.setTransitOutTime(GetValue(config, 'duration.out', 200));
-        this.setTransitInCallback(GetValue(config, 'transitIn', Const.popUp));
-        this.setTransitOutCallback(GetValue(config, 'transitOut', Const.scaleDown));
+        this.setTransitInCallback(GetValue(config, 'transitIn', TransitionMode.popUp));
+        this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
 
         this.player = new Player(this, { dtMode: 1 });
         this.messages = [];
@@ -59,14 +58,14 @@ class Toast extends Label {
 
     setTransitInCallback(callback) {
         if (typeof (callback) === 'string') {
-            callback = Const[callback];
+            callback = TransitionMode[callback];
         }
 
         switch (callback) {
-            case Const.popUp:
+            case TransitionMode.popUp:
                 callback = DefaultTransitCallbacks.popUp;
                 break;
-            case Const.fadeIn:
+            case TransitionMode.fadeIn:
                 callback = DefaultTransitCallbacks.fadeIn;
                 break;
         }
@@ -78,14 +77,14 @@ class Toast extends Label {
 
     setTransitOutCallback(callback) {
         if (typeof (callback) === 'string') {
-            callback = Const[callback];
+            callback = TransitionMode[callback];
         }
 
         switch (callback) {
-            case Const.scaleDown:
+            case TransitionMode.scaleDown:
                 callback = DefaultTransitCallbacks.scaleDown;
                 break;
-            case Const.fadeOut:
+            case TransitionMode.fadeOut:
                 callback = DefaultTransitCallbacks.fadeOut;
                 break;
         }
@@ -152,6 +151,13 @@ class Toast extends Label {
 
         return this;
     }
+}
+
+const TransitionMode = {
+    popUp: 0,
+    fadeIn: 1,
+    scaleDown: 0,
+    fadeOut: 1,
 }
 
 export default Toast;
