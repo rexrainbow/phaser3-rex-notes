@@ -15,11 +15,15 @@ class Demo extends Phaser.Scene {
     create() {
         var print = this.add.text(0, 0, 'Click rectangle\n').setDepth(1);
 
-        this.add.image(400, 300, 'classroom');
+        this.add.image(400, 300, 'classroom')
+            .setInteractive()
+            .on('pointerup', function () {
+                print.text += 'Click bottom image\n';
+            })
 
         var button = this.add.rectangle(400, 300, 100, 100, 0xffffff)
             .on('destroy', function () {
-                print.text += 'parent destroy'
+                print.text += 'parent destroy\n'
             })
 
         var model = this.plugins.get('rexModal').add(button, {
