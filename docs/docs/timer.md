@@ -48,7 +48,18 @@ Execute callback when time-out, built-in object of phaser.
     ```
 - Reuse timer
     ```javascript
-    var timer = scene.time.addEvent(timer);
+    timer.reset({
+        delay: 500,                // ms
+        callback: callback,
+        args: [],
+        callbackScope: thisArg,
+        loop: false,
+        repeat: 0,
+        startAt: 0,
+        timeScale: 1,
+        paused: false
+    })
+    scene.time.addEvent(timer);
     ```
 
 ### Pause/resume

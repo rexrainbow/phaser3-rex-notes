@@ -7449,7 +7449,18 @@
 <span class="p">});</span>
 </code></pre></div></li>
 <li>Reuse timer
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">timer</span><span class="p">.</span><span class="nx">reset</span><span class="p">({</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>                <span class="c1">// ms</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
+    <span class="nx">args</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">startAt</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">timeScale</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">})</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">(</span><span class="nx">timer</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="pauseresume">Pause/resume<a class="headerlink" href="#pauseresume" title="Permanent link">&para;</a></h3>
