@@ -1,7 +1,9 @@
 import ComponentBase from '../../utils/componentbase/ComponentBase.js';
 import CreateCover from './CreateCover.js';
 import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
-import State from './State.js'
+import State from './State.js';
+import FadeIn from '../../fade-in.js';
+import FadeOutDestroy from '../../fade-out-destroy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Timer = Phaser.Time.TimerEvent;
@@ -18,9 +20,9 @@ class Modal extends ComponentBase {
 
         // Close conditions:
         // OK/Cancel buttons, invoke modal.requestClose()
-        var userInput = GetValue(config, 'userInput', true);
+        var manualClose = GetValue(config, 'manualClose', true);
         // Timeout/any-touch
-        if (!userInput) {
+        if (!manualClose) {
             this.setDisplayTime(GetValue(config, 'duration.hold', 2000));
             var anyTouchClose = GetValue(config, 'anyTouchClose', true);
             if (anyTouchClose) {
@@ -65,8 +67,7 @@ class Modal extends ComponentBase {
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
 
-        this.timer.remove();
-        this.timer = undefined;
+        this.removeDelayCall();
 
         super.shutdown(fromScene);
     }
@@ -80,22 +81,52 @@ class Modal extends ComponentBase {
         return this;
     }
 
-    delayCall(delay, callback, scope, args) {
-        if (args === undefined) {
-            args = [];
+    transitionIn() {
+        var duration = this.transitInTime;
+        if (this.transitInCallback) {
+            this.transitInCallback(this.parent, duration);
         }
-        this.timer.reset({
-            delay: delay,
-            callback: callback,
-            args: args,
-            callbackScope: scope
-        })
-        this.scene.time.addEvent(this.timer);
+
+        var cover = this.cover;
+        if (cover) {
+            FadeIn(cover, duration, cover.alpha);
+        }
+
+        return this;
+    }
+
+    transitionOut() {
+        var duration = this.transitOutTime;
+        if (this.transitOutCallback) {
+            this.transitOutCallback(this.parent, duration);
+        }
+
+        var cover = this.cover;
+        if (cover) {
+            FadeOutDestroy(cover, duration);
+        }
+
+        return this;
+    }
+
+    onOpen() {
+        this.emit('open', this.parent, this);
+    }
+
+    onClose() {
+        this.emit('close', this.parent, this);
+    }
+
+    delayCall(delay, callback, scope, args) {
+        this.timer = this.scene.time.delayedCall(delay, callback, args, scope);
         return this;
     }
 
     removeDelayCall() {
-        this.timer.remove();
+        if (this.timer) {
+            this.timer.remove(false);
+            this.timer = undefined;
+        }
         return this;
     }
 
@@ -129,7 +160,7 @@ class Modal extends ComponentBase {
         }
 
         this.transitInCallback = callback;
-        // callback = function(gameObject, cover, duration) {}
+        // callback = function(gameObject, duration) {}
         return this;
     }
 
@@ -148,7 +179,7 @@ class Modal extends ComponentBase {
         }
 
         this.transitOutCallback = callback;
-        // callback = function(gameObject, cover, duration) {}
+        // callback = function(gameObject, duration) {}
         return this;
     }
 

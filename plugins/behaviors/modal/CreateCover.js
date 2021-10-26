@@ -5,11 +5,11 @@ var CreateCover = function (gameObject, config) {
     var cover = new Cover(scene, config);
     scene.add.existing(cover);
 
-    // Put cover behind game object 
+    // Put cover behind game object
     if (gameObject.isRexContainerLite) {
         gameObject.moveDepthBelow(cover);
-    } else{
-        scene.children.moveBelow(gameObject, cover);
+    } else {
+        scene.children.moveBelow(cover, gameObject);
     }
     return cover;
 }

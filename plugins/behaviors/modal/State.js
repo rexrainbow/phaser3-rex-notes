@@ -23,12 +23,8 @@ class State extends FSM {
     }
     enter_TRANS_OPNE() {
         var modalBehavior = this.parent;
-        var duration = modalBehavior.transitInTime;
-        if (modalBehavior.transitInCallback) {
-            modalBehavior.transitInCallback(modalBehavior.parent, modalBehavior.cover, duration);
-        }
-
-        modalBehavior.delayCall(duration, this.next, this);
+        modalBehavior.transitionIn();
+        modalBehavior.delayCall(modalBehavior.transitInTime, this.next, this);
     }
     exit_TRANS_OPNE() {
         var modalBehavior = this.parent;
@@ -46,7 +42,7 @@ class State extends FSM {
         if (duration >= 0) {
             modalBehavior.delayCall(duration, this.next, this);
         }
-        modalBehavior.emit('open');
+        modalBehavior.onOpen();
     }
     exit_OPEN() {
         var modalBehavior = this.parent;
@@ -60,12 +56,8 @@ class State extends FSM {
     }
     enter_TRANS_CLOSE() {
         var modalBehavior = this.parent;
-        var duration = modalBehavior.transitOutTime;
-        if (modalBehavior.transitOutCallback) {
-            modalBehavior.transitOutCallback(modalBehavior.parent, modalBehavior.cover, duration);
-        }
-
-        modalBehavior.delayCall(duration, this.next, this);
+        modalBehavior.transitionOut();
+        modalBehavior.delayCall(modalBehavior.transitOutTime, this.next, this);
     }
     exit_TRANS_CLOSE() {
         var modalBehavior = this.parent;
@@ -78,7 +70,7 @@ class State extends FSM {
     }
     enter_CLOSE() {
         var modalBehavior = this.parent;
-        modalBehavior.emit('close');
+        modalBehavior.onClose();
     }
     exit_CLOSE() {
     }

@@ -4,35 +4,19 @@ import FadeIn from '../../fade-in.js';
 import FadeOutDestroy from '../../fade-out-destroy.js';
 
 export default {
-    popUp: function (gameObject, cover, duration) {
+    popUp: function (gameObject, duration) {
         PopUp(gameObject, duration);
-
-        if (cover) {
-            FadeIn(cover, duration, cover.alpha);
-        }
     },
 
-    scaleDown: function (gameObject, cover, duration) {
+    scaleDown: function (gameObject, duration) {
         ScaleDownDestroy(gameObject, duration);
-
-        if (cover) {
-            FadeOutDestroy(cover, duration);
-        }
     },
 
-    fadeIn: function (gameObject, cover, duration) {
+    fadeIn: function (gameObject, duration) {
         FadeIn(gameObject, duration);
-
-        if (cover) {
-            FadeIn(cover, duration, cover.alpha);
-        }
     },
 
-    fadeOut: function (gameObject, cover, duration) {
+    fadeOut: function (gameObject, duration) {
         FadeOutDestroy(gameObject, duration);
-
-        if (cover) {
-            FadeOutDestroy(cover, duration);
-        }
     },
 }
