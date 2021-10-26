@@ -17,7 +17,7 @@ class Modal extends ComponentBase {
         this.cover = (coverConfig !== false) ? CreateCover(gameObject, coverConfig) : undefined;
 
         // Close conditions:
-        // OK/Cancel buttons 
+        // OK/Cancel buttons, invoke modal.close()
         var userInput = GetValue(config, 'userInput', true);
         // Timeout/any-touch
         if (!userInput) {
@@ -70,17 +70,30 @@ class Modal extends ComponentBase {
 
     anyTouchClose() {
         if (this.cover) {
-            this.cover.once('pointerup', this.onAnyTouch, this);
+            this.cover.once('pointerup', this.close, this);
         } else {
-            this.scene.input.once('pointerup', this.onAnyTouch, this);
+            this.scene.input.once('pointerup', this.close, this);
         }
         return this;
     }
 
-    onAnyTouch() {
-        if (this._state.state === 'OPEN') {
-            this._state.next();
+    delayCall(delay, callback, scope, args) {
+        if (args === undefined) {
+            args = [];
         }
+        this.timer.reset({
+            delay: delay,
+            callback: callback,
+            args: args,
+            callbackScope: scope
+        })
+        this.scene.time.addEvent(this.timer);
+        return this;
+    }
+
+    removeDelayCall() {
+        this.timer.remove();
+        return this;
     }
 
     setTransitInTime(time) {
@@ -136,22 +149,11 @@ class Modal extends ComponentBase {
         return this;
     }
 
-    delayCall(delay, callback, scope, args) {
-        if (args === undefined) {
-            args = [];
+    close() {
+        // Only can close modal in OPEN state
+        if (this._state.state === 'OPEN') {
+            this._state.next(); // OPEN -> TRANS_CLOSE 
         }
-        this.timer.reset({
-            delay: delay,
-            callback: callback,
-            args: args,
-            callbackScope: scope
-        })
-        this.scene.time.addEvent(this.timer);
-        return this;
-    }
-
-    removeDelayCall() {
-        this.timer.remove();
         return this;
     }
 }
