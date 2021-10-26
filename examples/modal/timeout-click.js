@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var print = this.add.text(0, 0, 'Click rectangle\n').setDepth(1);
+        var print = this.add.text(0, 0, 'Any click or wait timeout\n').setDepth(1);
 
         this.add.image(400, 300, 'classroom')
             .setInteractive()
