@@ -32,6 +32,8 @@ class Demo extends Phaser.Scene {
                 in: 1000,
                 out: 1000
             },
+
+            // destroy: false
         })
 
         // Manual close Modal

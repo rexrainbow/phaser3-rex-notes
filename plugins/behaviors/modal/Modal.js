@@ -36,6 +36,7 @@ class Modal extends ComponentBase {
         this.setTransitOutTime(GetValue(config, 'duration.out', 200));
         this.setTransitInCallback(GetValue(config, 'transitIn', TransitionMode.popUp));
         this.setTransitOutCallback(GetValue(config, 'transitOut', TransitionMode.scaleDown));
+        this.destroyParent = GetValue(config, 'destroy', true);
 
         this.timer = new Timer();
         this._state = new State(this, { eventEmitter: false });
@@ -103,7 +104,7 @@ class Modal extends ComponentBase {
 
         var cover = this.cover;
         if (cover) {
-            FadeOutDestroy(cover, duration);
+            FadeOutDestroy(cover, duration, false);
         }
 
         return this;
@@ -115,6 +116,13 @@ class Modal extends ComponentBase {
 
     onClose() {
         this.emit('close', this.parent, this);
+
+        if (this.cover) {
+            this.cover.destroy();
+        }
+        if (this.destroyParent) {
+            this.parent.destroy();
+        }
     }
 
     delayCall(delay, callback, scope, args) {
