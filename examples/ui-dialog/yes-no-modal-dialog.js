@@ -22,16 +22,18 @@ class Demo extends Phaser.Scene {
                 print.text += 'Click bottom image\n';
             })
 
-        var dialog = CreateDialog(this)
-            .setPosition(400, 300)
-
-        this.rexUI.modalPromise(dialog, {
-            manaulClose: true,
-            duration: {
-                in: 500,
-                out: 500
+        this.rexUI.modalPromise(
+            // Game object
+            CreateDialog(this).setPosition(400, 300),
+            // Config
+            {
+                manaulClose: true,
+                duration: {
+                    in: 500,
+                    out: 500
+                }
             }
-        })
+        )
             .then(function (result) {
                 print.text += `Click button ${result.index}\n`;
             })
