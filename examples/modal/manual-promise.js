@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
                 // To invoke modal.requestClose() method
                 button.emit('modal.requestClose');
             })
+        // button will be destroyed after modal closing
         this.plugins.get('rexModal').promise(button, {
             manualClose: true,
             duration: {

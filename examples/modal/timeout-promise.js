@@ -22,6 +22,7 @@ class Demo extends Phaser.Scene {
             })
 
         var button = this.add.rectangle(400, 300, 100, 100, 0xffffff)
+        // button will be destroyed after modal closing
         this.plugins.get('rexModal').promise(button, {
             manualClose: false,
             duration: {
