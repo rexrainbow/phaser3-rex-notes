@@ -25,6 +25,7 @@ class Demo extends Phaser.Scene {
             .on('destroy', function () {
                 print.text += 'parent destroy\n'
             })
+        // button will be destroyed after modal closing
 
         var model = this.plugins.get('rexModal').add(button, {
             manualClose: false,
