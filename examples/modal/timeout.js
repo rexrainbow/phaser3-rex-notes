@@ -39,10 +39,10 @@ class Demo extends Phaser.Scene {
 
         model
             .on('open', function () {
-                print.text += 'model.open\n';
+                print.text += 'modal.open\n';
             })
             .on('close', function () {
-                print.text += 'model.close\n';
+                print.text += 'modal.close\n';
             })
     }
 

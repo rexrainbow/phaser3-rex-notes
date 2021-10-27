@@ -23,6 +23,12 @@ class Demo extends Phaser.Scene {
 
         var button = this.add.rectangle(400, 300, 100, 100, 0xffffff)
         button
+            .on('modal.open', function () {
+                print.text += 'modal.open\n';
+            })
+            .on('modal.close', function () {
+                print.text += 'modal.close\n';
+            })
             .setInteractive()
             .on('pointerup', function () {
                 // To invoke modal.requestClose() method
@@ -36,7 +42,7 @@ class Demo extends Phaser.Scene {
                 out: 1000
             },
         })
-            .then(function (button) {                
+            .then(function (button) {
                 print.text += 'Modal close\n';
             })
     }
