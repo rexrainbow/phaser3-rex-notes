@@ -38,8 +38,11 @@ var Add = function (gameObject) {
         }
     }
 
-    this.buttons.push(gameObject);
-    ButtonSetInteractive.call(this, gameObject, this.clickConfig);
+    // Space or other game object as button
+    if (!gameObject.isRexSpace) {
+        this.buttons.push(gameObject);
+        ButtonSetInteractive.call(this, gameObject, this.clickConfig);
+    }
     return this;
 };
 

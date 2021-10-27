@@ -23,6 +23,7 @@ import GridSizer from './gridsizer/GridSizer.js';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer.js';
 import OverlapSizer from './overlapsizer/OverlapSizer.js';
 
+import Space from './space/Space.js';
 import Label from './label/Label.js';
 import Buttons from './buttons/Buttons.js';
 import GridButtons from './gridbuttons/GridButtons.js';
@@ -95,6 +96,7 @@ export {
     FixWidthSizer,
     OverlapSizer,
 
+    Space,
     Label,
     Buttons,
     GridButtons,

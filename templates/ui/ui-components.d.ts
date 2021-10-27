@@ -22,6 +22,7 @@ import GridSizer from './gridsizer/GridSizer';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer';
 import OverlapSizer from './overlapsizer/OverlapSizer';
 
+import Space from './space/Space';
 import Label from './label/Label';
 import Buttons from './buttons/Buttons';
 import GridButtons from './gridbuttons/GridButtons';
@@ -93,6 +94,7 @@ export {
     FixWidthSizer,
     OverlapSizer,
 
+    Space,
     Label,
     Buttons,
     GridButtons,

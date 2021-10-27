@@ -25,6 +25,7 @@ import GridSizerFactory from './gridsizer/Factory.js';
 import FixWidthSizerFactory from './fixwidthsizer/Factory.js';
 import OverlapSizerFactory from './overlapsizer/Factory.js';
 
+import SpaceFactory from './space/Factory.js';
 import LabelFactory from './label/Factory.js';
 import ButtonsFactory from './buttons/Factory.js';
 import GridButtonsFactory from './gridbuttons/Factory.js';

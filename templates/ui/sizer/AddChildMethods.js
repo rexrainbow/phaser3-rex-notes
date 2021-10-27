@@ -1,7 +1,7 @@
 import AddChild from '../basesizer/utils/AddChild.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ALIGNMODE from '../utils/AlignConst.js';
-import Space from '../utils/Space.js';
+import Space from '../space/Space.js';
 import { GetDisplayWidth, GetDisplayHeight } from '../../../plugins/utils/size/GetDisplaySize.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
