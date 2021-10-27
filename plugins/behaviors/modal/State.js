@@ -40,7 +40,11 @@ class State extends FSM {
         var modalBehavior = this.parent;
         var duration = modalBehavior.displayTime;
         if (duration >= 0) {
-            modalBehavior.delayCall(duration, this.next, this);
+            modalBehavior.delayCall(
+                duration,
+                modalBehavior.requestClose, // callback
+                modalBehavior               // scope
+            );
         }
         modalBehavior.onOpen();
     }
