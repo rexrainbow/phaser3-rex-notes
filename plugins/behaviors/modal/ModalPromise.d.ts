@@ -8,4 +8,4 @@ export function Modal(
 export function ModalPromise(
     gameObject: Phaser.GameObjects.GameObject,
     config?: ModalBehavior.IConfig
-): Promise<void>
+): Promise<Phaser.GameObjects.GameObject>

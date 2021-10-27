@@ -23,7 +23,11 @@ var Modal = function (gameObject, config) {
 
 var ModalPromise = function (gameObject, config) {
     var modalBehavior = Modal(gameObject, config);
-    return WaitEvent(modalBehavior, 'close');
+    return new Promise(function (resolve, reject) {
+        modalBehavior.once('close', function (gameObject, modalBehavior) {
+            resolve(gameObject);
+        });
+    });
 }
 
 export { Modal, ModalPromise };
