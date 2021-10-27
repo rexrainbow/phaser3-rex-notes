@@ -49,10 +49,10 @@ import TextPlayerFactory from './textplayer/Factory';
 import ToastFactory from './toast/Factory';
 import TouchEventStopFactory from './toucheventstop/Factory';
 
-
 import { EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
 import { Edit } from '../../plugins/textedit';
 import { FadeIn, FadeOutDestroy } from './fade/Fade';
+import { Modal, ModalPromise } from './modal/Modal';
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import { Show, Hide, IsShown, } from './utils/Hide';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive';
@@ -121,6 +121,8 @@ declare class UIPlugins extends Phaser.Plugins.ScenePlugin {
     edit: typeof Edit;
     fadeIn: typeof FadeIn;
     fadeOutDestroy: typeof FadeOutDestroy;
+    modal: typeof Modal;
+    modalPromise: typeof ModalPromise;
     getParentSizer: typeof GetParentSizer;
     getTopmostSizer: typeof GetTopmostSizer;
     hide: typeof Hide;

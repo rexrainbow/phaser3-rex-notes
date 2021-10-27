@@ -53,6 +53,7 @@ import Perspective from './perspective/Perspective';
 import Anchor from './anchor/Anchor';
 import { Fade, FadeIn, FadeOutDestroy } from './fade/Fade.js';
 import { EaseMove, EaseMoveTo, EaseMoveFrom } from './easemove/EaseMove';
+import { Modal, ModalPromise } from './modal/Modal.js';
 
 import { GetParentSizer, GetTopmostSizer } from './utils/GetParentSizer';
 import IsPointerInBounds from '../../plugins/utils/input/IsPointerInBounds';
@@ -123,6 +124,7 @@ export {
     Anchor,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
+    Modal, ModalPromise,
 
     GetParentSizer,
     GetTopmostSizer,

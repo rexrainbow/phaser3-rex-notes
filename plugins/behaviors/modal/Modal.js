@@ -117,11 +117,11 @@ class Modal extends ComponentBase {
     onClose() {
         this.emit('close', this.parent, this);
 
-        if (this.cover) {
-            this.cover.destroy();
-        }
         if (this.destroyParent) {
-            this.parent.destroy();
+            this.parent.destroy();  
+            // Will invoke `this.destroy()`
+        } else {
+            this.destroy();
         }
     }
 

@@ -65,6 +65,7 @@ import {
 import { Edit } from '../../plugins/textedit.js';
 import WrapExpandText from './utils/wrapexpandtext/WrapExpandText.js';
 import { WaitEvent, WaitComplete } from './utils/WaitEvent.js';
+import { Modal, ModalPromise } from './modal/Modal.js';
 import GetViewport from '../../plugins/utils/system/GetViewport.js';
 import SetChildrenInteractive from './utils/setchildreninteractive/SetChildrenInteractive.js';
 
@@ -125,6 +126,7 @@ export {
     Anchor,
     Fade, FadeIn, FadeOutDestroy,
     EaseMove, EaseMoveTo, EaseMoveFrom,
+    Modal, ModalPromise,
 
     GetParentSizer,
     GetTopmostSizer,
