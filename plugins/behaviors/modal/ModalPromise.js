@@ -24,8 +24,8 @@ var Modal = function (gameObject, config) {
 var ModalPromise = function (gameObject, config) {
     var modalBehavior = Modal(gameObject, config);
     return new Promise(function (resolve, reject) {
-        modalBehavior.once('close', function (gameObject, modalBehavior) {
-            resolve(gameObject);
+        modalBehavior.once('close', function (closeEventData) {
+            resolve(closeEventData);
         });
     });
 }

@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
                 out: 1000
             },
         })
-            .then(function (button) {
+            .then(function () {
                 print.text += 'Modal close\n';
             })
     }

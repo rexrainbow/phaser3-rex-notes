@@ -40,6 +40,7 @@ class Modal extends ComponentBase {
 
         this.timer = new Timer();
         this._state = new State(this, { eventEmitter: false });
+        this.closeEventData = undefined;
 
         // Start
         this._state.next();
@@ -67,6 +68,7 @@ class Modal extends ComponentBase {
 
         this.transitInCallback = undefined;
         this.transitOutCallback = undefined;
+        this.closeEventData = undefined;
 
         this.removeDelayCall();
 
@@ -115,10 +117,10 @@ class Modal extends ComponentBase {
     }
 
     onClose() {
-        this.emit('close', this.parent, this);
+        this.emit('close', this.closeEventData);
 
         if (this.destroyParent) {
-            this.parent.destroy();  
+            this.parent.destroy();
             // Will invoke `this.destroy()`
         } else {
             this.destroy();
@@ -191,9 +193,10 @@ class Modal extends ComponentBase {
         return this;
     }
 
-    requestClose() {
+    requestClose(closeEventData) {
         // Only can close modal in OPEN state
         if (this._state.state === 'OPEN') {
+            this.closeEventData = (arguments.length > 0) ? closeEventData : this.parent;
             this._state.next(); // OPEN -> TRANS_CLOSE 
         }
         return this;
