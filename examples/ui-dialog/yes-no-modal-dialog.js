@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
             }
         )
             .then(function (result) {
-                print.text += `Click button ${result.index}\n`;
+                print.text += `Click button ${result.index}: ${result.text}\n`;
             })
     }
 
@@ -91,7 +91,7 @@ var CreateDialog = function (scene) {
 
     dialog
         .on('button.click', function (button, groupName, index, pointer, event) {
-            dialog.emit('modal.requestClose', { index: index });
+            dialog.emit('modal.requestClose', { index: index, text: button.text });
         })
         .on('button.over', function (button, groupName, index, pointer, event) {
             button.getElement('background').setStrokeStyle(1, 0xffffff);
