@@ -6161,49 +6161,40 @@
   var SizerAddSpace = Sizer.prototype.addSpace;
 
   var Add = function Add(gameObject) {
-    if (!this.buttonsExpand) {
-      var proportion = gameObject.isRexSpace ? 1 : 0;
+    var isNormalGameObject = !gameObject.isRexSpace;
+    var proportion = !isNormalGameObject || this.buttonsExpand ? 1 : 0;
 
-      if (this.buttons.length === 0) {
-        // 1st button
-        // Add space at first element
-        if (this.hasHeadSpace) {
-          SizerAddSpace.call(this);
-        }
+    if (this.sizerChildren.length === 0) {
+      if (isNormalGameObject && this.hasHeadSpace) {
+        SizerAddSpace.call(this);
+      }
 
+      SizerAdd.call(this, gameObject, {
+        proportion: proportion,
+        expand: true
+      }); // Add space at last element
+
+      if (isNormalGameObject && this.hasTailSpace) {
+        SizerAddSpace.call(this);
+      }
+    } else {
+      if (this.hasTailSpace) {
+        var lastIndex = this.sizerChildren.length - 1;
+        SizerAdd.call(this, gameObject, {
+          index: lastIndex,
+          proportion: proportion,
+          expand: true
+        });
+      } else {
         SizerAdd.call(this, gameObject, {
           proportion: proportion,
           expand: true
-        }); // Add space at last element
-
-        if (this.hasTailSpace) {
-          SizerAddSpace.call(this);
-        }
-      } else {
-        // Other buttons
-        if (this.hasTailSpace) {
-          var lastIndex = this.sizerChildren.length - 1;
-          SizerAdd.call(this, gameObject, {
-            index: lastIndex,
-            proportion: proportion,
-            expand: true
-          });
-        } else {
-          SizerAdd.call(this, gameObject, {
-            proportion: proportion,
-            expand: true
-          });
-        }
+        });
       }
-    } else {
-      SizerAdd.call(this, gameObject, {
-        proportion: 1,
-        expand: true
-      });
     } // Space or other game object as button
 
 
-    if (!gameObject.isRexSpace) {
+    if (isNormalGameObject) {
       this.buttons.push(gameObject);
       ButtonSetInteractive.call(this, gameObject, this.clickConfig);
     }
