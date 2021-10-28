@@ -9,6 +9,7 @@ A container with a group of buttons.
 
 - [Buttons with header and footer](https://codepen.io/rexrainbow/pen/eYvxqLJ)
 - [Expand](https://codepen.io/rexrainbow/pen/XWbRZLR)
+- [Space](https://codepen.io/rexrainbow/pen/abywwrQ)
 - [Checkboxes/radio](https://codepen.io/rexrainbow/pen/PowMEjX)
 - [Popup each button](https://codepen.io/rexrainbow/pen/dypEePL)
 
