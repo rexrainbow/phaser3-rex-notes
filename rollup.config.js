@@ -38,4 +38,34 @@ for (var key in pluginList) {
     })
 }
 
+// Export no-uglify files
+for (var key in pluginList) {
+    let inputFile = pluginList[key];
+    let outFile = `./dist/rex${key}.js`;
+    let libName = `rex${key}`;
+    // console.log(inputFile)
+    // console.log(outFile)
+    // console.log(libName)
+
+    // uglify
+    outputs.push({
+        input: inputFile,
+        output: {
+            file: outFile,
+            name: libName,
+            format: 'umd',
+        },
+        external: ['phaser'],
+        plugins: [
+            nodeResolve({ browser: true, preferBuiltins: true }),
+            commonjs(),
+            globals(),
+            builtins(),
+            babel({
+                exclude: 'node_modules/**'
+            }),
+        ]
+    })
+}
+
 export default outputs;
