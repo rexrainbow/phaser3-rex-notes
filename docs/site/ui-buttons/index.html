@@ -7784,12 +7784,12 @@
 </ul>
 </li>
 <li><code>background</code> : <a href="../ui-basesizer/#background">Game object of background</a>, optional. This background game object will be resized to fit the size of grid table.</li>
-<li><code>buttons</code> : Array of button game objects.</li>
+<li><code>buttons</code> : Array of button game objects, or Space (<code>scene.rexUI.add.space()</code>).</li>
 <li><code>expand</code> : Set <code>true</code> to expand width, or height of buton game objects.</li>
-<li><code>align</code> : Alignment of these button game objects. Only valid when <code>expand</code> is <code>false</code>.<ul>
+<li><code>align</code> : <strong>Note: Add Space (<code>scene.rexUI.add.space()</code>) into buttons parameter to have more flexible alignment style.</strong> Alignment of these button game objects. Only valid when <code>expand</code> is <code>false</code>.<ul>
 <li><code>undefined</code>, or <code>'left'</code>, or <code>'top'</code> : Align game objects at left, or top.</li>
 <li><code>'center'</code> : Align game objects at center.</li>
-<li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.</li>
+<li><code>'right'</code>, or <code>'bottom'</code> : Align game objects at right, or bottom.    </li>
 </ul>
 </li>
 <li><code>click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>

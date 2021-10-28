@@ -30,9 +30,10 @@ class Buttons extends Sizer {
 
         // Buttons properties
         this.buttonsExpand = GetValue(config, 'expand', false);
-        this.buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
-        // Button properties
-        this.buttonProportion = (this.buttonsExpand) ? 1 : 0;
+        var buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
+        this.hasHeadSpace = (!this.buttonsExpand) &&
+            ((buttonsAlign === 'right') || (buttonsAlign === 'center') || (buttonsAlign === 'bottom'));
+        this.hasTailSpace = (!this.buttonsExpand) && (buttonsAlign === 'center');
         this.clickConfig = GetValue(config, 'click', undefined);
 
         if (background) {

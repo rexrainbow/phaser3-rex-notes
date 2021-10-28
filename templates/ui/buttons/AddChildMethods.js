@@ -4,38 +4,48 @@ import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const SizerAdd = Sizer.prototype.add;
 const SizerAddSpace = Sizer.prototype.addSpace;
-const SizerInsert = Sizer.prototype.insert;
 
 var Add = function (gameObject) {
-    var buttonCount = this.buttons.length;
-    if (buttonCount === 0) { // 1st button
-        // Add space
-        if (!this.buttonsExpand) {
-            switch (this.buttonsAlign) {
-                case 'right':
-                case 'bottom':
-                case 'center':
-                    SizerAddSpace.call(this);
-                    break;
-            }
-        }
-
-        SizerAdd.call(this, gameObject, this.buttonProportion, 'center', 0, true);
-
-        // Add space
-        if (!this.buttonsExpand) {
-            if (this.buttonsAlign === 'center') {
+    if (!this.buttonsExpand) {
+        if (this.buttons.length === 0) { // 1st button
+            // Add space at first element
+            if (this.hasHeadSpace) {
                 SizerAddSpace.call(this);
             }
+
+            SizerAdd.call(this,
+                gameObject,
+                { proportion: 1, expand: true }
+            );
+
+            // Add space at last element
+            if (this.hasTailSpace) {
+                SizerAddSpace.call(this);
+            }
+
+        } else { // Other buttons
+            if (this.hasTailSpace) {
+                var lastIndex = this.sizerChildren.length - 1;
+                SizerAdd.call(this,
+                    gameObject,
+                    { index: lastIndex, proportion: 1, expand: true }
+                );
+
+            } else {
+                SizerAdd.call(this,
+                    gameObject,
+                    { proportion: 1, expand: true }
+                );
+            }
+
         }
+
     } else {
-        var lastIndex = this.sizerChildren.length - 1;
-        var lastChild = this.sizerChildren[lastIndex];
-        if (lastChild.isRexSpace) { // Last child is Space, insert new button in front of Space.
-            SizerInsert.call(this, lastIndex, gameObject, this.buttonProportion, 'center', 0, true);
-        } else {  // Last child is not Space, append new button directly.
-            SizerAdd.call(this, gameObject, this.buttonProportion, 'center', 0, true);
-        }
+        SizerAdd.call(this,
+            gameObject,
+            { expand: true }
+        );
+
     }
 
     // Space or other game object as button

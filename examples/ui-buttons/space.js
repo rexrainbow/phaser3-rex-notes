@@ -16,19 +16,23 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var align = 'right';
         var buttons = this.rexUI.add.buttons({
             x: 400, y: 300,
-            width: 300,
+            width: 500,
             orientation: 'x',
 
             buttons: [
+                this.rexUI.add.space(),
                 createButton(this, 'A'),
                 createButton(this, 'B'),
-                createButton(this, 'c'),
+                this.rexUI.add.space(),
+                createButton(this, 'C'),
+                createButton(this, 'D'),
+                this.rexUI.add.space(),
+                createButton(this, 'E'),
+                createButton(this, 'F'),
+                this.rexUI.add.space(),
             ],
-
-            align: align
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
