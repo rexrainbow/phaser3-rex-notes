@@ -13,9 +13,10 @@ var Add = function (gameObject) {
                 SizerAddSpace.call(this);
             }
 
+            var proportion = (gameObject.isRexSpace) ? 1 : 0;
             SizerAdd.call(this,
                 gameObject,
-                { proportion: 1, expand: true }
+                { proportion: proportion, expand: true }
             );
 
             // Add space at last element
@@ -26,9 +27,10 @@ var Add = function (gameObject) {
         } else { // Other buttons
             if (this.hasTailSpace) {
                 var lastIndex = this.sizerChildren.length - 1;
+                var proportion = (gameObject.isRexSpace) ? 1 : 0;
                 SizerAdd.call(this,
                     gameObject,
-                    { index: lastIndex, proportion: 1, expand: true }
+                    { index: lastIndex, proportion: proportion, expand: true }
                 );
 
             } else {
@@ -43,7 +45,7 @@ var Add = function (gameObject) {
     } else {
         SizerAdd.call(this,
             gameObject,
-            { expand: true }
+            { proportion: 1, expand: true }
         );
 
     }

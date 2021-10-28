@@ -33,6 +33,8 @@ class Demo extends Phaser.Scene {
                 createButton(this, 'F'),
                 this.rexUI.add.space(),
             ],
+
+            expand: true
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
