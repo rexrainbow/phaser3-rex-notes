@@ -9,6 +9,7 @@ A container with a title, content, buttons and background.
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
 - [Yes-no dialog](https://codepen.io/rexrainbow/pen/MPZWZG)
+- [Action buttons with Space](https://codepen.io/rexrainbow/pen/MWvoErY)
 - [Single choice dialog](https://codepen.io/rexrainbow/pen/ePoRVz)
 - [Pop-up dialog](https://codepen.io/rexrainbow/pen/NEpjmP)
 - [Ease-in, ease-out](https://codepen.io/rexrainbow/pen/qBdQRmq)
@@ -208,7 +209,7 @@ var dialog = scene.rexUI.add.dialog({
     - `undefined` : No extra behavior, default value.
     - `'checkboxes'` : Set these buttons to checkboxes.
     - `'radio'` : Set these buttons to radio.
-- `actions` : Array of Game objects for action-buttons group which arranged from left to right, optional.
+- `actions` : Array of Game objects, or Space (`scene.rexUI.add.space()`) for action-buttons group which arranged from left to right, optional.
     - `[]` : Assign an empty array if user will add button later.
 - `choicesBackground` : [Game object of choices buttons background](ui-basesizer.md#background), optional. This background game object will be resized to fit the size of dialog.
 - `space` : Pads spaces
@@ -234,9 +235,9 @@ var dialog = scene.rexUI.add.dialog({
     - `expand.actions` : Set `true` to expand width of actions game object. Default is `false`.
 - `align` : Align element
     - `align.title`
-        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value. *Will add Spaces at right and left sides.*
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
-        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center. *Will add a Space at right side.*
     - `align.content` : Align content game object to `'left'`/`'center'`/`'right'`, if `expand.title` is `false`.
     - `align.description` : Align description game object to `'left'`/`'center'`/`'right'`, if `expand.description` is `false`.
     - `align.choices` : Align choices game object to `'left'`/`'center'`/`'right'`, if `expand.choices` is `false`.

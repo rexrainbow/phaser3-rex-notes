@@ -7608,6 +7608,7 @@
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MPZWZG">Yes-no dialog</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/MWvoErY">Action buttons with Space</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/ePoRVz">Single choice dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/NEpjmP">Pop-up dialog</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/qBdQRmq">Ease-in, ease-out</a></li>
@@ -7810,7 +7811,7 @@
 <li><code>'radio'</code> : Set these buttons to radio.</li>
 </ul>
 </li>
-<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.<ul>
+<li><code>actions</code> : Array of Game objects, or Space (<code>scene.rexUI.add.space()</code>) for action-buttons group which arranged from left to right, optional.<ul>
 <li><code>[]</code> : Assign an empty array if user will add button later.</li>
 </ul>
 </li>
@@ -7842,9 +7843,9 @@
 </li>
 <li><code>align</code> : Align element<ul>
 <li><code>align.title</code><ul>
-<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value. <em>Will add Spaces at right and left sides.</em></li>
 <li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
-<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center. <em>Will add a Space at right side.</em></li>
 </ul>
 </li>
 <li><code>align.content</code> : Align content game object to <code>'left'</code>/<code>'center'</code>/<code>'right'</code>, if <code>expand.title</code> is <code>false</code>.</li>
