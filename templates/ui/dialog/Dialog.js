@@ -71,7 +71,10 @@ class Dialog extends Sizer {
                 padding = { bottom: titleSpace };
             }
             var expand = GetValue(config, 'expand.title', true);
-            this.add(title, 0, align, padding, expand);
+            this.add(
+                title,
+                { align: align, padding: padding, expand: expand }
+            );
         }
 
         // toolbar only
@@ -82,7 +85,10 @@ class Dialog extends Sizer {
                 padding = { bottom: titleSpace };
             }
             var expand = GetValue(config, 'expand.toolbar', true);
-            this.add(toolbarSizer, 0, 'right', padding, expand);
+            this.add(
+                toolbarSizer,
+                { align: 'right', padding: padding, expand: expand }
+            );
         }
 
         // leftToolbar only
@@ -93,7 +99,10 @@ class Dialog extends Sizer {
                 padding = { bottom: titleSpace };
             }
             var expand = GetValue(config, 'expand.leftToolbar', true);
-            this.add(leftToolbarSizer, 0, 'left', padding, expand);
+            this.add(
+                leftToolbarSizer,
+                { align: 'left', padding: padding, expand: expand }
+            );
         }
 
         // tilte and (toolbar or leftToolbar)
@@ -103,7 +112,10 @@ class Dialog extends Sizer {
             });
             // Add leftToolbar
             if (leftToolbarSizer) {
-                titleSizer.add(leftToolbarSizer, 0, 'right', 0, false);
+                titleSizer.add(
+                    leftToolbarSizer,
+                    { align: 'right', expand: false }
+                );
             }
             // Add title
             var align = GetValue(config, 'align.title', 'left');
@@ -120,7 +132,10 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.titleRight', 0)
             }
             var proportion = (expand) ? 1 : 0;
-            titleSizer.add(title, proportion, 'center', padding, expand);
+            titleSizer.add(
+                title,
+                { proportion: proportion, align: 'center', padding: padding, expand: expand }
+            );
             // Add space if not expand
             if (
                 !expand &&
@@ -130,7 +145,10 @@ class Dialog extends Sizer {
             }
             // Add toolbar
             if (toolbarSizer) {
-                titleSizer.add(toolbarSizer, 0, 'right', 0, false);
+                titleSizer.add(
+                    toolbarSizer,
+                    { align: 'right', expand: false }
+                );
             }
             // Add sizer to dialog
             var titleSpace = GetValue(config, 'space.title', 0);
@@ -138,7 +156,10 @@ class Dialog extends Sizer {
             if (content || description || choices || actions) {
                 padding = { bottom: titleSpace };
             }
-            this.add(titleSizer, 0, 'center', padding, true);
+            this.add(
+                titleSizer,
+                { align: 'center', padding: padding, expand: true }
+            );
         }
 
         if (content) {
@@ -150,7 +171,10 @@ class Dialog extends Sizer {
                 bottom: ((description || choices || actions) ? contentSpace : 0)
             }
             var expand = GetValue(config, 'expand.content', true);
-            this.add(content, 0, align, padding, expand);
+            this.add(
+                content,
+                { align: align, padding: padding, expand: expand }
+            );
         }
 
         if (description) {
@@ -161,8 +185,11 @@ class Dialog extends Sizer {
                 right: GetValue(config, 'space.descriptionRight', 0),
                 bottom: ((choices || actions) ? descriptionSpace : 0)
             }
-            var expand = GetValue(config, 'expand.description', true);
-            this.add(description, 0, align, padding, expand);
+            var expand = GetValue(config, 'expand.description', true);        
+            this.add(
+                description,
+                { align: align, padding: padding, expand: expand }
+            );
         }
 
         if (choices) {
@@ -186,7 +213,10 @@ class Dialog extends Sizer {
                 bottom: ((actions) ? choicesSpace : 0)
             }
             var expand = GetValue(config, 'expand.choices', true);
-            this.add(choicesSizer, 0, align, padding, expand);
+            this.add(
+                choicesSizer,
+                { align: align, padding: padding, expand: expand }
+            );
         }
 
         if (actions) {
@@ -205,7 +235,10 @@ class Dialog extends Sizer {
                 left: GetValue(config, 'space.actionsLeft', 0),
                 right: GetValue(config, 'space.actionsRight', 0)
             }
-            this.add(actionsSizer, 0, 'center', padding, true);
+            this.add(
+                actionsSizer,
+                { align: 'center', padding: padding, expand: true }
+            );
         }
 
         this.addChildrenMap('background', background);

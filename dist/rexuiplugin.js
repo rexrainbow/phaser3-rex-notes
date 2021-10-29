@@ -24357,19 +24357,37 @@
     var proportion = !isNormalGameObject || this.buttonsExpand ? 1 : 0;
 
     if (this.sizerChildren.length === 0) {
-      if (isNormalGameObject && this.hasHeadSpace) {
-        SizerAddSpace.call(this);
-      }
+      // First element
+      if (isNormalGameObject) {
+        // Add space at head
+        var hasHeadSpace = !this.buttonsExpand && (this.buttonsAlign === 'right' || this.buttonsAlign === 'center' || this.buttonsAlign === 'bottom');
 
-      SizerAdd$2.call(this, gameObject, {
-        proportion: proportion,
-        expand: true
-      }); // Add space at last element
+        if (hasHeadSpace) {
+          SizerAddSpace.call(this);
+        }
 
-      if (isNormalGameObject && this.hasTailSpace) {
-        SizerAddSpace.call(this);
+        SizerAdd$2.call(this, gameObject, {
+          proportion: proportion,
+          expand: true
+        }); // Add space at tail
+
+        var hasTailSpace = !this.buttonsExpand && this.buttonsAlign === 'center';
+
+        if (hasTailSpace) {
+          SizerAddSpace.call(this);
+        }
+
+        this.hasTailSpace = hasTailSpace;
+      } else {
+        // A space
+        SizerAdd$2.call(this, gameObject, {
+          proportion: proportion,
+          expand: true
+        });
+        this.hasTailSpace = false;
       }
     } else {
+      // Others
       if (this.hasTailSpace) {
         var lastIndex = this.sizerChildren.length - 1;
         SizerAdd$2.call(this, gameObject, {
@@ -24728,10 +24746,8 @@
       var buttons = GetValue$X(config, 'buttons', undefined); // Buttons properties
 
       _this.buttonsExpand = GetValue$X(config, 'expand', false);
-      var buttonsAlign = GetValue$X(config, 'align', undefined); // undefined/left/top: no space
+      _this.buttonsAlign = GetValue$X(config, 'align', undefined); // undefined/left/top: no space        
 
-      _this.hasHeadSpace = !_this.buttonsExpand && (buttonsAlign === 'right' || buttonsAlign === 'center' || buttonsAlign === 'bottom');
-      _this.hasTailSpace = !_this.buttonsExpand && buttonsAlign === 'center';
       _this.clickConfig = GetValue$X(config, 'click', undefined);
 
       if (background) {
@@ -25363,7 +25379,11 @@
 
         var expand = GetValue$U(config, 'expand.title', true);
 
-        _this.add(title, 0, align, padding, expand);
+        _this.add(title, {
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       } // toolbar only
 
 
@@ -25379,7 +25399,11 @@
 
         var expand = GetValue$U(config, 'expand.toolbar', true);
 
-        _this.add(toolbarSizer, 0, 'right', padding, expand);
+        _this.add(toolbarSizer, {
+          align: 'right',
+          padding: padding,
+          expand: expand
+        });
       } // leftToolbar only
 
 
@@ -25395,7 +25419,11 @@
 
         var expand = GetValue$U(config, 'expand.leftToolbar', true);
 
-        _this.add(leftToolbarSizer, 0, 'left', padding, expand);
+        _this.add(leftToolbarSizer, {
+          align: 'left',
+          padding: padding,
+          expand: expand
+        });
       } // tilte and (toolbar or leftToolbar)
 
 
@@ -25405,7 +25433,10 @@
         }); // Add leftToolbar
 
         if (leftToolbarSizer) {
-          titleSizer.add(leftToolbarSizer, 0, 'right', 0, false);
+          titleSizer.add(leftToolbarSizer, {
+            align: 'right',
+            expand: false
+          });
         } // Add title
 
 
@@ -25421,7 +25452,12 @@
           right: GetValue$U(config, 'space.titleRight', 0)
         };
         var proportion = expand ? 1 : 0;
-        titleSizer.add(title, proportion, 'center', padding, expand); // Add space if not expand
+        titleSizer.add(title, {
+          proportion: proportion,
+          align: 'center',
+          padding: padding,
+          expand: expand
+        }); // Add space if not expand
 
         if (!expand && (align === 'left' || align === 'center')) {
           titleSizer.addSpace();
@@ -25429,7 +25465,10 @@
 
 
         if (toolbarSizer) {
-          titleSizer.add(toolbarSizer, 0, 'right', 0, false);
+          titleSizer.add(toolbarSizer, {
+            align: 'right',
+            expand: false
+          });
         } // Add sizer to dialog
 
 
@@ -25442,7 +25481,11 @@
           };
         }
 
-        _this.add(titleSizer, 0, 'center', padding, true);
+        _this.add(titleSizer, {
+          align: 'center',
+          padding: padding,
+          expand: true
+        });
       }
 
       if (content) {
@@ -25455,7 +25498,11 @@
         };
         var expand = GetValue$U(config, 'expand.content', true);
 
-        _this.add(content, 0, align, padding, expand);
+        _this.add(content, {
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       }
 
       if (description) {
@@ -25468,7 +25515,11 @@
         };
         var expand = GetValue$U(config, 'expand.description', true);
 
-        _this.add(description, 0, align, padding, expand);
+        _this.add(description, {
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       }
 
       if (choices) {
@@ -25496,7 +25547,11 @@
         };
         var expand = GetValue$U(config, 'expand.choices', true);
 
-        _this.add(choicesSizer, 0, align, padding, expand);
+        _this.add(choicesSizer, {
+          align: align,
+          padding: padding,
+          expand: expand
+        });
       }
 
       if (actions) {
@@ -25519,7 +25574,11 @@
           right: GetValue$U(config, 'space.actionsRight', 0)
         };
 
-        _this.add(actionsSizer, 0, 'center', padding, true);
+        _this.add(actionsSizer, {
+          align: 'center',
+          padding: padding,
+          expand: true
+        });
       }
 
       _this.addChildrenMap('background', background);

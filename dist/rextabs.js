@@ -6915,19 +6915,37 @@
     var proportion = !isNormalGameObject || this.buttonsExpand ? 1 : 0;
 
     if (this.sizerChildren.length === 0) {
-      if (isNormalGameObject && this.hasHeadSpace) {
-        SizerAddSpace.call(this);
-      }
+      // First element
+      if (isNormalGameObject) {
+        // Add space at head
+        var hasHeadSpace = !this.buttonsExpand && (this.buttonsAlign === 'right' || this.buttonsAlign === 'center' || this.buttonsAlign === 'bottom');
 
-      SizerAdd.call(this, gameObject, {
-        proportion: proportion,
-        expand: true
-      }); // Add space at last element
+        if (hasHeadSpace) {
+          SizerAddSpace.call(this);
+        }
 
-      if (isNormalGameObject && this.hasTailSpace) {
-        SizerAddSpace.call(this);
+        SizerAdd.call(this, gameObject, {
+          proportion: proportion,
+          expand: true
+        }); // Add space at tail
+
+        var hasTailSpace = !this.buttonsExpand && this.buttonsAlign === 'center';
+
+        if (hasTailSpace) {
+          SizerAddSpace.call(this);
+        }
+
+        this.hasTailSpace = hasTailSpace;
+      } else {
+        // A space
+        SizerAdd.call(this, gameObject, {
+          proportion: proportion,
+          expand: true
+        });
+        this.hasTailSpace = false;
       }
     } else {
+      // Others
       if (this.hasTailSpace) {
         var lastIndex = this.sizerChildren.length - 1;
         SizerAdd.call(this, gameObject, {
@@ -7286,10 +7304,8 @@
       var buttons = GetValue$1(config, 'buttons', undefined); // Buttons properties
 
       _this.buttonsExpand = GetValue$1(config, 'expand', false);
-      var buttonsAlign = GetValue$1(config, 'align', undefined); // undefined/left/top: no space
+      _this.buttonsAlign = GetValue$1(config, 'align', undefined); // undefined/left/top: no space        
 
-      _this.hasHeadSpace = !_this.buttonsExpand && (buttonsAlign === 'right' || buttonsAlign === 'center' || buttonsAlign === 'bottom');
-      _this.hasTailSpace = !_this.buttonsExpand && buttonsAlign === 'center';
       _this.clickConfig = GetValue$1(config, 'click', undefined);
 
       if (background) {

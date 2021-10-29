@@ -10,20 +10,34 @@ var Add = function (gameObject) {
     var proportion = (!isNormalGameObject || this.buttonsExpand) ? 1 : 0;
 
     if (this.sizerChildren.length === 0) {  // First element
-        if (isNormalGameObject && this.hasHeadSpace) {
-            SizerAddSpace.call(this);
+        if (isNormalGameObject) {
+            // Add space at head
+            var hasHeadSpace = (!this.buttonsExpand) &&
+                ((this.buttonsAlign === 'right') || (this.buttonsAlign === 'center') || (this.buttonsAlign === 'bottom'));
+            if (hasHeadSpace) {
+                SizerAddSpace.call(this);
+            }
+
+            SizerAdd.call(this,
+                gameObject,
+                { proportion: proportion, expand: true }
+            );
+
+            // Add space at tail
+            var hasTailSpace = (!this.buttonsExpand) && (this.buttonsAlign === 'center');
+            if (hasTailSpace) {
+                SizerAddSpace.call(this);
+            }
+            this.hasTailSpace = hasTailSpace;
+
+        } else { // A space
+            SizerAdd.call(this,
+                gameObject,
+                { proportion: proportion, expand: true }
+            );
+            this.hasTailSpace = false;
+
         }
-
-        SizerAdd.call(this,
-            gameObject,
-            { proportion: proportion, expand: true }
-        );
-
-        // Add space at last element
-        if (isNormalGameObject && this.hasTailSpace) {
-            SizerAddSpace.call(this);
-        }
-
 
     } else {   // Others
         if (this.hasTailSpace) {
