@@ -238,7 +238,7 @@ var dialog = scene.rexUI.add.dialog({
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value. *Will add Spaces at right and left sides.*
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
         - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center. *Will add a Space at right side.*
-    - `align.content` : Align content game object to `'left'`/`'center'`/`'right'`, if `expand.title` is `false`.
+    - `align.content` : Align content game object to `'left'`/`'center'`/`'right'`, if `expand.content` is `false`.
     - `align.description` : Align description game object to `'left'`/`'center'`/`'right'`, if `expand.description` is `false`.
     - `align.choices` : Align choices game object to `'left'`/`'center'`/`'right'`, if `expand.choices` is `false`.
     - `align.actions` : Align action game objects to `'left'`/`'center'`/`'right'`, if `expand.actions` is `false`.
