@@ -289,12 +289,15 @@ scene.rexUI.modalPromise(dialog, config)
 ```
 
 - `config` : See [Modal behavior](modal.md#create-instance)
-- Close modal dialog:
-    ```javascript
-    dialog.emit('modal.requestClose');
-    // dialog.emit('modal.requestClose', closeEventData);
-    ```
-    - Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
+
+#### Close modal dialog
+
+```javascript
+dialog.emit('modal.requestClose');
+// dialog.emit('modal.requestClose', closeEventData);
+```
+
+- Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
 
 ### Other properties
 

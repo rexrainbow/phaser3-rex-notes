@@ -6675,6 +6675,19 @@
     Modal
   </a>
   
+    <nav class="md-nav" aria-label="Modal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#close-modal-dialog" class="md-nav__link">
+    Close modal dialog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -7578,6 +7591,19 @@
     Modal
   </a>
   
+    <nav class="md-nav" aria-label="Modal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#close-modal-dialog" class="md-nav__link">
+    Close modal dialog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -7971,13 +7997,13 @@
 </code></pre></div>
 <ul>
 <li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a></li>
-<li>Close modal dialog:
-    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">);</span>
-<span class="c1">// dialog.emit(&#39;modal.requestClose&#39;, closeEventData);</span>
-</code></pre></div><ul>
-<li>Fire <code>'modal.requestClose'</code> event on game object, which will invoke <code>modal.requestClose()</code> method. After closing dialog, <code>resolve</code> part of promise will be triggered.</li>
 </ul>
-</li>
+<h4 id="close-modal-dialog">Close modal dialog<a class="headerlink" href="#close-modal-dialog" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">);</span>
+<span class="c1">// dialog.emit(&#39;modal.requestClose&#39;, closeEventData);</span>
+</code></pre></div>
+<ul>
+<li>Fire <code>'modal.requestClose'</code> event on game object, which will invoke <code>modal.requestClose()</code> method. After closing dialog, <code>resolve</code> part of promise will be triggered.</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
