@@ -123,11 +123,11 @@ RequestCloseEvent["modal.requestClose(closeEventData)"]
 TimeOut["Timeout<br>Any touch"]
 OnClose["modal.on('close', function(closeEventData) {})"]
 
-Modal --> OnOpen
+Modal --> |Opening| OnOpen
 OnOpen --> |manualClose| RequestCloseEvent
 OnOpen --> |Not manualClose| TimeOut
-RequestCloseEvent --> OnClose
-TimeOut --> OnClose
+RequestCloseEvent --> |Colsing| OnClose
+TimeOut --> |Colsing| OnClose
 ```
 
 ### Events

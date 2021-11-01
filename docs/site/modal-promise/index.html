@@ -7600,11 +7600,11 @@ TimeOut["Timeout&lt;br&gt;Any touch"]
 OnClose["gameObject.on('modal.close')"]
 Resolve["then(function(closeEventData) { })"]
 
-Promise --&gt; OnOpen
+Promise --&gt; |Opening| OnOpen
 OnOpen --&gt; |manualClose| RequestCloseEvent
 OnOpen --&gt; |Not manualClose| TimeOut
-RequestCloseEvent --&gt; OnClose
-TimeOut --&gt; OnClose
+RequestCloseEvent --&gt; |Colsing| OnClose
+TimeOut --&gt; |Colsing| OnClose
 OnClose --&gt; Resolve</code></pre>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
