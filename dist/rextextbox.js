@@ -7043,6 +7043,7 @@
         if (this.speed === 0) {
           this.stop(true);
         } else {
+          this.setText('');
           this.startTimer(timerStartAt);
         }
 
@@ -7112,13 +7113,7 @@
       key: "onTyping",
       value: function onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
-
-        if (this.textWrapEnable) {
-          SetNoWrapText(this.parent, newText);
-        } else {
-          this.setText(newText);
-        }
-
+        this.setText(newText);
         this.emit('type');
 
         if (this.isLastChar) {
@@ -7235,7 +7230,11 @@
           }
         }
 
-        this.parent.setText(text);
+        if (this.textWrapEnable) {
+          SetNoWrapText(this.parent, text);
+        } else {
+          this.parent.setText(text);
+        }
       }
     }, {
       key: "getTextLength",
