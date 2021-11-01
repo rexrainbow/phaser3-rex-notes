@@ -134,6 +134,9 @@ nav:
         - Anchor: anchor.md
         - Interception: interception.md
         - Particles along bounds: particles-along-bounds.md
+        - Modal:
+            - Modal behavior: modal.md
+            - Modal promise: modal-promise.md
         - Arcade:
             - Engine:
                 - World: arcade-world.md

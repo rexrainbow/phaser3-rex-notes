@@ -77,6 +77,7 @@
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [Line](line.md): Draw a line with start/end/body textures.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
+1. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Mouse-wheel scroller](mousewheelscroller.md): Emit scroll event when mouse-wheeling.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.

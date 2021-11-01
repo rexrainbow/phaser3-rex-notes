@@ -1,6 +1,6 @@
 ## Introduction
 
-A [container](containerlite.md) with two [perspective-images](perspective-card.md).
+A [container](containerlite.md) with two [perspective-images](perspective-image.md).
 
 - Author: Rex
 - Game object

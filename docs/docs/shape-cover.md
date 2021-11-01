@@ -80,6 +80,9 @@ var cover = scene.add.rexCover({
 });
 ```
 
+- `color` : Color of cover.
+- `alpha` : Alpha value of cover.
+
 ### Custom class
 
 - Define class

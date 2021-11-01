@@ -2169,8 +2169,8 @@
     modalBehavior.on('open', function () {
       gameObject.emit('modal.open', modalBehavior);
     });
-    modalBehavior.on('close', function () {
-      gameObject.emit('modal.close', modalBehavior);
+    modalBehavior.on('close', function (closeEventData) {
+      gameObject.emit('modal.close', closeEventData, modalBehavior);
     }); // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
 
     gameObject.on('modal.requestClose', modalBehavior.requestClose, modalBehavior);

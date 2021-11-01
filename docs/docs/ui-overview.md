@@ -535,6 +535,17 @@ scene.rexUI.setChildrenInteractive(sizer, {
 
 ### Behaviors
 
+1. [Modal promise](modal-promise.md): [Modal behavior](modal.md) wrapped into promise.
+    ```javascript
+    scene.rexUI.modalPromise(gameObject, config)
+        .then(function(closeEventData){ })
+    ```
+    - Close modal dialog:
+        ```javascript
+        gameObject.emit('modal.requestClose');
+        // gameObject.emit('modal.requestClose', closeEventData);
+        ```
+        - Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
 1. [Flip](flip.md): Flip game object to another face by scaling width/height.
     ```javascript
     var flip = scene.rexUI.add.flip(gameObject, config);

@@ -1,5 +1,4 @@
 import ModalBehavior from './Modal.js';
-import { WaitEvent } from '../../eventpromise.js';
 
 var Modal = function (gameObject, config) {
     var modalBehavior = new ModalBehavior(gameObject, config);
@@ -8,8 +7,8 @@ var Modal = function (gameObject, config) {
     modalBehavior.on('open', function () {
         gameObject.emit('modal.open', modalBehavior);
     })
-    modalBehavior.on('close', function () {
-        gameObject.emit('modal.close', modalBehavior);
+    modalBehavior.on('close', function (closeEventData) {
+        gameObject.emit('modal.close', closeEventData, modalBehavior);
     })
 
     // Reigster 'modal.requestClose' event for invoking modalBehavior.requestClose() method
