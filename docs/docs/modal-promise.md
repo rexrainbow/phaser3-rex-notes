@@ -89,11 +89,11 @@ TimeOut["Timeout<br>Any touch"]
 OnClose["gameObject.on('modal.close')"]
 Resolve["then(function(closeEventData) { })"]
 
-Promise --> |Opening| OnOpen
+Promise --> |Transition-in| OnOpen
 OnOpen --> |manualClose| RequestCloseEvent
 OnOpen --> |Not manualClose| TimeOut
-RequestCloseEvent --> |Colsing| OnClose
-TimeOut --> |Colsing| OnClose
+RequestCloseEvent --> |Transition-out| OnClose
+TimeOut --> |Transition-out| OnClose
 OnClose --> Resolve
 ```
 

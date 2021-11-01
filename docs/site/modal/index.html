@@ -7647,11 +7647,11 @@ RequestCloseEvent["modal.requestClose(closeEventData)"]
 TimeOut["Timeout&lt;br&gt;Any touch"]
 OnClose["modal.on('close', function(closeEventData) {})"]
 
-Modal --&gt; |Opening| OnOpen
+Modal --&gt; |Transition-in| OnOpen
 OnOpen --&gt; |manualClose| RequestCloseEvent
 OnOpen --&gt; |Not manualClose| TimeOut
-RequestCloseEvent --&gt; |Colsing| OnClose
-TimeOut --&gt; |Colsing| OnClose</code></pre>
+RequestCloseEvent --&gt; |Transition-out| OnClose
+TimeOut --&gt; |Transition-out| OnClose</code></pre>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On opened dialog
