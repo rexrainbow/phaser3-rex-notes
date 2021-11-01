@@ -15,6 +15,7 @@ A container with a title, content, buttons and background.
 - [Ease-in, ease-out](https://codepen.io/rexrainbow/pen/qBdQRmq)
 - [Show/hide buttons](https://codepen.io/rexrainbow/pen/MWwPabw)
 - [Add button](https://codepen.io/rexrainbow/pen/gOpddxa)
+- [Modal dialog](https://codepen.io/rexrainbow/pen/VwzbqEP)
 
 ## Usage
 
@@ -278,6 +279,22 @@ dialog.layout();
 ```
 
 See also - [dirty](ui-basesizer.md#dirty)
+
+### Modal
+
+```javascript
+scene.rexUI.modalPromise(dialog, config)
+    .then(function(closeEventData) {
+    })
+```
+
+- `config` : See [Modal behavior](modal.md#create-instance)
+- Close modal dialog:
+    ```javascript
+    dialog.emit('modal.requestClose');
+    // dialog.emit('modal.requestClose', closeEventData);
+    ```
+    - Fire `'modal.requestClose'` event on game object, which will invoke `modal.requestClose()` method. After closing dialog, `resolve` part of promise will be triggered.
 
 ### Other properties
 

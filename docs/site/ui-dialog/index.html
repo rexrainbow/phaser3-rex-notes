@@ -6671,6 +6671,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modal" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -7567,6 +7574,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#modal" class="md-nav__link">
+    Modal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -7675,6 +7689,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/qBdQRmq">Ease-in, ease-out</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/MWwPabw">Show/hide buttons</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/gOpddxa">Add button</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/VwzbqEP">Modal dialog</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-dialog">Sample code</a></p>
@@ -7949,6 +7964,21 @@
 <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </code></pre></div>
 <p>See also - <a href="../ui-basesizer/#dirty">dirty</a></p>
+<h3 id="modal">Modal<a class="headerlink" href="#modal" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">modalPromise</span><span class="p">(</span><span class="nx">dialog</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">closeEventData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><code>config</code> : See <a href="../modal/#create-instance">Modal behavior</a></li>
+<li>Close modal dialog:
+    <div class="highlight"><pre><span></span><code><span class="nx">dialog</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;modal.requestClose&#39;</span><span class="p">);</span>
+<span class="c1">// dialog.emit(&#39;modal.requestClose&#39;, closeEventData);</span>
+</code></pre></div><ul>
+<li>Fire <code>'modal.requestClose'</code> event on game object, which will invoke <code>modal.requestClose()</code> method. After closing dialog, <code>resolve</code> part of promise will be triggered.</li>
+</ul>
+</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
