@@ -60,6 +60,7 @@
         "eventemitter3": "^3.1.2",
         "lokijs": "^1.5.12",
         "papaparse": "^5.3.1",
-        "webfontloader": "^1.6.28"
+        "webfontloader": "^1.6.28",
+        "localforage": "^1.10.0"
     }
 }
