@@ -64,6 +64,8 @@ class Input {
 
         }
 
+        this.board = undefined;
+
         // board.off('destroy', this.onBoardDestroy, this);
     }
 
@@ -84,6 +86,14 @@ class Input {
             this.pointer = null;
         }
         this._enable = e;
+
+        if (this.touchZone) {
+            if (e) {
+                this.touchZone.setInteractive();
+            } else {
+                this.touchZone.disableInteractive();
+            }
+        }
         this.tap.setEnable(e);
         this.press.setEnable(e);
         this.swipe.setEnable(e);

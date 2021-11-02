@@ -8808,8 +8808,9 @@
             scene.input.off('pointerup', OnPointerUp$1, this);
             scene.input.off('pointermove', OnPointerMove$1, this);
           }
-        } // board.off('destroy', this.onBoardDestroy, this);
+        }
 
+        this.board = undefined; // board.off('destroy', this.onBoardDestroy, this);
       }
     }, {
       key: "onBoardDestroy",
@@ -8831,6 +8832,15 @@
         }
 
         this._enable = e;
+
+        if (this.touchZone) {
+          if (e) {
+            this.touchZone.setInteractive();
+          } else {
+            this.touchZone.disableInteractive();
+          }
+        }
+
         this.tap.setEnable(e);
         this.press.setEnable(e);
         this.swipe.setEnable(e);
