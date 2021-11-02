@@ -8176,30 +8176,45 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Pointer-down cell
-    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.down&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
 <li>Pointer-up cell
-    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.up&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
 <li>Pointer-over cell
-    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
 <li>Pointer-out cell
-    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
 <li>Click cell
-    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</code></pre></div></li>
+</code></pre></div><ul>
+<li>Cancel remaining touched events : <code>event.stopPropagation()</code></li>
+</ul>
+</li>
 <li><a href="../gesture-tap/">Tap</a> cell
     <div class="highlight"><pre><span></span><code><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>

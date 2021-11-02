@@ -476,34 +476,39 @@ See [base sizer object](ui-basesizer.md).
 
 - Pointer-down cell
     ```javascript
-    table.on('cell.down', function(cellContainer, cellIndex, pointer) {
+    table.on('cell.down', function(cellContainer, cellIndex, pointer, event) {
         // ...
     }, scope);
     ```
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-up cell
     ```javascript
-    table.on('cell.up', function(cellContainer, cellIndex, pointer) {
+    table.on('cell.up', function(cellContainer, cellIndex, pointer, event) {
         // ...
     }, scope);
     ```
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over cell
     ```javascript
-    table.on('cell.over', function(cellContainer, cellIndex, pointer) {
+    table.on('cell.over', function(cellContainer, cellIndex, pointer, event) {
         // ...
     }, scope);
     ```
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out cell
     ```javascript
-    table.on('cell.out', function(cellContainer, cellIndex, pointer) {
+    table.on('cell.out', function(cellContainer, cellIndex, pointer, event) {
         // ...
     }, scope);
     ```
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Click cell
     ```javascript
-    table.on('cell.click', function(cellContainer, cellIndex, pointer) {
+    table.on('cell.click', function(cellContainer, cellIndex, pointer, event) {
         // ...
     }, scope);
     ```
+    - Cancel remaining touched events : `event.stopPropagation()`
 - [Tap](gesture-tap.md) cell
     ```javascript
     table.on(tapEventName, function(cellContainer, cellIndex, pointer) {

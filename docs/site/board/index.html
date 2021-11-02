@@ -7129,6 +7129,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#touch-zone" class="md-nav__link">
+    Touch Zone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pointer-down" class="md-nav__link">
     Pointer down
   </a>
@@ -8204,6 +8211,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#touch-zone" class="md-nav__link">
+    Touch Zone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#pointer-down" class="md-nav__link">
     Pointer down
   </a>
@@ -9043,9 +9057,41 @@
 <ul>
 <li>Enable
     <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span>
-</code></pre></div></li>
+<span class="c1">// board.setInteractive({ useTouchZone: false });</span>
+</code></pre></div><ul>
+<li><code>useTouchZone</code> : <ul>
+<li><code>true</code> : Detect touch input by input event of a <a href="./#touch-zone">zone game object</a>. Default behavior.</li>
+<li><code>false</code> : Detect touch input by input event of scene.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Disable
     <div class="highlight"><pre><span></span><code><span class="nx">board</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="touch-zone">Touch Zone<a class="headerlink" href="#touch-zone" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">touchZone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTouchZone</span><span class="p">();</span>
+<span class="c1">// var touchZone = board.touchZone;</span>
+</code></pre></div><ul>
+<li>Return <code>null</code> if <code>useTouchZone</code> is <code>false</code>.</li>
+</ul>
+</li>
+<li>Set depth
+    <div class="highlight"><pre><span></span><code><span class="nx">touchZone</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">depth</span><span class="p">);</span>
+</code></pre></div>
+    or
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span> <span class="c1">// Move touchZone above child</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span> <span class="c1">// Move touchZone below child</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">touchZone</span><span class="p">,</span> <span class="nx">child</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="pointer-down">Pointer down<a class="headerlink" href="#pointer-down" title="Permanent link">&para;</a></h4>

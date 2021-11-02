@@ -2,7 +2,8 @@ import Press from '../../../input/gestures/press/Press.js';
 import EmitChessEvent from './EmitChessEvent.js';
 
 var InstallPress = function () {
-    var press = new Press(this.board.scene);
+    var touchZone = (this.touchZone) ? this.touchZone : this.board.scene;
+    var press = new Press(touchZone);
     press
         .on('pressstart', OnPressStart, this)
         .on('pressend', OnPressEnd, this);

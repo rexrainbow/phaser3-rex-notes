@@ -6908,7 +6908,7 @@
     hexagonGrid: HexagonGrid
   };
 
-  var Board = /*#__PURE__*/function (_EE) {
+  var Board$1 = /*#__PURE__*/function (_EE) {
     _inherits(Board, _EE);
 
     var _super = _createSuper(Board);
@@ -7054,7 +7054,37 @@
     return Board;
   }(EventEmitter);
 
-  Object.assign(Board.prototype, LogicMethods);
+  Object.assign(Board$1.prototype, LogicMethods);
+
+  var Zone$1 = Phaser.GameObjects.Zone;
+
+  var TouchZone = /*#__PURE__*/function (_Zone) {
+    _inherits(TouchZone, _Zone);
+
+    var _super = _createSuper(TouchZone);
+
+    function TouchZone(scene) {
+      var _this;
+
+      _classCallCheck(this, TouchZone);
+
+      _this = _super.call(this, scene, 0, 0, 1, 1);
+      scene.add.existing(_assertThisInitialized(_this)); // Add to scene
+
+      _this.setScrollFactor(0);
+
+      _this.setInteractive({
+        hitArea: {},
+        hitAreaCallback: function hitAreaCallback() {
+          return true;
+        }
+      });
+
+      return _this;
+    }
+
+    return TouchZone;
+  }(Zone$1);
 
   var RENDER_MASK = Phaser.GameObjects.GameObject.RENDER_MASK;
 
@@ -8181,7 +8211,8 @@
   var RECOGNIZED$2 = 'RECOGNIZED';
 
   var InstallTap = function InstallTap() {
-    var tap = new Tap(this.board.scene);
+    var touchZone = this.touchZone ? this.touchZone : this.board.scene;
+    var tap = new Tap(touchZone);
     tap.on('tap', OnTap, this);
     return tap;
   };
@@ -8351,7 +8382,8 @@
   var RECOGNIZED$1 = 'RECOGNIZED';
 
   var InstallPress = function InstallPress() {
-    var press = new Press(this.board.scene);
+    var touchZone = this.touchZone ? this.touchZone : this.board.scene;
+    var press = new Press(touchZone);
     press.on('pressstart', OnPressStart, this).on('pressend', OnPressEnd, this);
     return press;
   };
@@ -8697,8 +8729,8 @@
   var RECOGNIZED = 'RECOGNIZED';
 
   var InstallSwipe = function InstallSwipe() {
-    var board = this.board;
-    var swipe = new Swipe(board.scene);
+    var touchZone = this.touchZone ? this.touchZone : this.board.scene;
+    var swipe = new Swipe(touchZone);
     swipe.on('swipe', OnSwipe, this);
     return swipe;
   };
@@ -8720,10 +8752,13 @@
   };
 
   var Input = /*#__PURE__*/function () {
-    function Input(board) {
+    function Input(board, config) {
       _classCallCheck(this, Input);
 
+      var enable = GetValue$7(config, 'enable', true);
+      var useTouchZone = GetValue$7(config, 'useTouchZone', true);
       this.board = board;
+      this.touchZone;
       this._enable = true;
       this.pointer = null;
       this.tilePosition = {
@@ -8735,29 +8770,46 @@
         y: undefined
       };
       var scene = board.scene;
-      scene.input.on('pointerdown', OnPointerDown$1, this);
-      scene.input.on('pointerup', OnPointerUp$1, this);
-      scene.input.on('pointermove', OnPointerMove$1, this);
+
+      if (useTouchZone) {
+        var touchZone = new TouchZone(scene);
+        touchZone.on('pointerdown', OnPointerDown$1, this);
+        touchZone.on('pointerup', OnPointerUp$1, this);
+        touchZone.on('pointermove', OnPointerMove$1, this);
+        this.touchZone = touchZone;
+      } else {
+        scene.input.on('pointerdown', OnPointerDown$1, this);
+        scene.input.on('pointerup', OnPointerUp$1, this);
+        scene.input.on('pointermove', OnPointerMove$1, this);
+      }
+
       this.tap = InstallTap.call(this);
       this.press = InstallPress.call(this);
       this.swipe = InstallSwipe.call(this);
       board.once('destroy', this.onBoardDestroy, this);
+      this.setEnable(enable);
     }
 
     _createClass(Input, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        var scene = this.board.scene;
-
-        if (scene) {
-          scene.input.off('pointerdown', OnPointerDown$1, this);
-          scene.input.off('pointerup', OnPointerUp$1, this);
-          scene.input.off('pointermove', OnPointerMove$1, this);
-        }
-
         this.tap.destroy(fromScene);
         this.press.destroy(fromScene);
-        this.swipe.destroy(fromScene); // board.off('destroy', this.onBoardDestroy, this);
+        this.swipe.destroy(fromScene);
+
+        if (this.touchZone) {
+          this.touchZone.destroy(fromScene);
+          this.touchZone = undefined;
+        } else {
+          var scene = this.board.scene;
+
+          if (scene) {
+            scene.input.off('pointerdown', OnPointerDown$1, this);
+            scene.input.off('pointerup', OnPointerUp$1, this);
+            scene.input.off('pointermove', OnPointerMove$1, this);
+          }
+        } // board.off('destroy', this.onBoardDestroy, this);
+
       }
     }, {
       key: "onBoardDestroy",
@@ -8798,19 +8850,47 @@
     return Input;
   }();
 
-  var SetInteractive$1 = function SetInteractive(enable) {
-    if (enable === undefined) {
-      enable = true;
-    } // Input
-
-
+  var SetInteractive$1 = function SetInteractive(config) {
+    // Input
     if (!this.input) {
-      this.input = new Input(this);
+      this.input = new Input(this, config);
+    } else {
+      var enable = config === false ? false : true;
+      this.input.setEnable(enable);
     }
 
-    this.input.setEnable(enable);
     return this;
   };
+
+  var Board = /*#__PURE__*/function (_LogicBoard) {
+    _inherits(Board, _LogicBoard);
+
+    var _super = _createSuper(Board);
+
+    function Board() {
+      _classCallCheck(this, Board);
+
+      return _super.apply(this, arguments);
+    }
+
+    _createClass(Board, [{
+      key: "touchZone",
+      get: function get() {
+        if (this.input) {
+          return this.input.touchZone;
+        } else {
+          return null;
+        }
+      }
+    }, {
+      key: "getTouchZone",
+      value: function getTouchZone() {
+        return this.touchZone;
+      }
+    }]);
+
+    return Board;
+  }(Board$1);
 
   var methods$2 = {
     setInteractive: SetInteractive$1
@@ -14640,7 +14720,7 @@
         infinity: true,
         wrap: false
       };
-      _this.board = new Board(scene, boardConfig);
+      _this.board = new Board$1(scene, boardConfig);
       _this.mainBoardRef = new MainBoardReference();
       _this.lastMainBoardRef = new MainBoardReference();
 

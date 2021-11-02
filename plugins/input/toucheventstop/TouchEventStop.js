@@ -52,7 +52,7 @@ class TouchEventStop extends ComponentBase {
         } else {
             gameObject.setInteractive({
                 hitArea: {},
-                hitAreaCallback: FullWindowHitCallback
+                hitAreaCallback: function () { return true; }
             });
         }
 
@@ -78,10 +78,6 @@ class TouchEventStop extends ComponentBase {
         this.setEnable(!this.enable);
         return this;
     }
-}
-
-var FullWindowHitCallback = function (shape, x, y, gameObject) {
-    return true;
 }
 
 var HitAreaMode = {

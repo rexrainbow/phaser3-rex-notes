@@ -365,7 +365,9 @@
         } else {
           gameObject.setInteractive({
             hitArea: {},
-            hitAreaCallback: FullWindowHitCallback
+            hitAreaCallback: function hitAreaCallback() {
+              return true;
+            }
           });
         }
 
@@ -397,10 +399,6 @@
 
     return TouchEventStop;
   }(ComponentBase);
-
-  var FullWindowHitCallback = function FullWindowHitCallback(shape, x, y, gameObject) {
-    return true;
-  };
 
   var HitAreaMode = {
     "default": 0,

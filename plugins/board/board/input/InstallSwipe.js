@@ -2,8 +2,8 @@ import Swipe from '../../../input/gestures/swipe/Swipe.js';
 import EmitChessEvent from './EmitChessEvent.js';
 
 var InstallSwipe = function () {
-    var board = this.board;
-    var swipe = new Swipe(board.scene);
+    var touchZone = (this.touchZone) ? this.touchZone : this.board.scene;
+    var swipe = new Swipe(touchZone);
     swipe
         .on('swipe', OnSwipe, this);
 

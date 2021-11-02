@@ -1,4 +1,4 @@
-var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer) {
+var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer, event) {
     var cellIndex;
     if (y === undefined) {
         cellIndex = x;
@@ -10,7 +10,7 @@ var EmitCellEvent = function (eventEmitter, eventName, table, x, y, pointer) {
     }
     var cellContainer = table.getCellContainer(cellIndex);
     if (cellContainer) {
-        eventEmitter.emit(eventName, cellContainer, cellIndex, pointer);
+        eventEmitter.emit(eventName, cellContainer, cellIndex, pointer, event);
     }
 }
 

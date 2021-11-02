@@ -2,7 +2,8 @@ import Tap from '../../../input/gestures/tap/Tap.js';
 import EmitChessEvent from './EmitChessEvent.js';
 
 var InstallTap = function () {
-    var tap = new Tap(this.board.scene);
+    var touchZone = (this.touchZone) ? this.touchZone : this.board.scene;
+    var tap = new Tap(touchZone);
     tap.on('tap', OnTap, this);
     return tap;
 }

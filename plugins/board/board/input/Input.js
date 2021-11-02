@@ -1,3 +1,6 @@
+import GetValue from '../../../utils/object/GetValue.js';
+import TouchZone from './TouchZone.js';
+
 import OnPointerDown from './OnPointerDown.js';
 import OnPointerUp from './OnPointerUp.js';
 import OnPointerMove from './OnPointerMove.js';
@@ -7,36 +10,59 @@ import InstallPress from './InstallPress.js';
 import InstallSwipe from './InstallSwipe.js';
 
 class Input {
-    constructor(board) {
+    constructor(board, config) {
+        var enable = GetValue(config, 'enable', true);
+        var useTouchZone = GetValue(config, 'useTouchZone', true);
+
         this.board = board;
+        this.touchZone;
         this._enable = true;
         this.pointer = null;
         this.tilePosition = { x: undefined, y: undefined };
         this.prevTilePosition = { x: undefined, y: undefined };
 
         var scene = board.scene;
-        scene.input.on('pointerdown', OnPointerDown, this);
-        scene.input.on('pointerup', OnPointerUp, this);
-        scene.input.on('pointermove', OnPointerMove, this);
+        if (useTouchZone) {
+            var touchZone = new TouchZone(scene);
+            touchZone.on('pointerdown', OnPointerDown, this);
+            touchZone.on('pointerup', OnPointerUp, this);
+            touchZone.on('pointermove', OnPointerMove, this);
+            this.touchZone = touchZone;
+
+        } else {
+            scene.input.on('pointerdown', OnPointerDown, this);
+            scene.input.on('pointerup', OnPointerUp, this);
+            scene.input.on('pointermove', OnPointerMove, this);
+
+        }
 
         this.tap = InstallTap.call(this);
         this.press = InstallPress.call(this);
         this.swipe = InstallSwipe.call(this);
 
         board.once('destroy', this.onBoardDestroy, this);
+
+        this.setEnable(enable);
     }
 
     destroy(fromScene) {
-        var scene = this.board.scene;
-        if (scene) {
-            scene.input.off('pointerdown', OnPointerDown, this);
-            scene.input.off('pointerup', OnPointerUp, this);
-            scene.input.off('pointermove', OnPointerMove, this);
-        }
-
         this.tap.destroy(fromScene);
         this.press.destroy(fromScene);
         this.swipe.destroy(fromScene);
+
+        if (this.touchZone) {
+            this.touchZone.destroy(fromScene);
+            this.touchZone = undefined;
+
+        } else {
+            var scene = this.board.scene;
+            if (scene) {
+                scene.input.off('pointerdown', OnPointerDown, this);
+                scene.input.off('pointerup', OnPointerUp, this);
+                scene.input.off('pointermove', OnPointerMove, this);
+            }
+
+        }
 
         // board.off('destroy', this.onBoardDestroy, this);
     }
@@ -60,7 +86,7 @@ class Input {
         this._enable = e;
         this.tap.setEnable(e);
         this.press.setEnable(e);
-        this.swipe.setEnable(e)
+        this.swipe.setEnable(e);
     }
 
     setEnable(e) {

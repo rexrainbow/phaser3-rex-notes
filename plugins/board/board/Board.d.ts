@@ -8,6 +8,11 @@ export default Board;
 declare namespace Board {
     interface IConfig extends LogicBoard.IConfig { }
 
+    interface SetInteractiveIConfig {
+        enable?: boolean;
+        useTouchZone?: boolean;
+    }
+
     namespace Events {
         type KickOutCallbackType = (
             chessToAdd: unknown,
@@ -127,7 +132,11 @@ declare class Board<ChessType = Phaser.GameObjects.GameObject> extends LogicBoar
     constructor(scene: Phaser.Scene, config?: Board.IConfig);
     scene: Phaser.Scene;
 
+    setInteractive(config?: Board.SetInteractiveIConfig): this;
     setInteractive(enable?: boolean): this;
+
+    getTouchZone(): Phaser.GameObjects.Zone;
+    readonly touchZone: Phaser.GameObjects.Zone;
 
     chessToBoard(chess: any): Board;
     static GetBoard(chess: any): Board;

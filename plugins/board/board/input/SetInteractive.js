@@ -1,15 +1,13 @@
 import Input from './Input.js';
 
-var SetInteractive = function (enable) {
-    if (enable === undefined) {
-        enable = true;
-    }
-
+var SetInteractive = function (config) {
     // Input
     if (!this.input) {
-        this.input = new Input(this);
+        this.input = new Input(this, config);
+    } else {
+        var enable = (config === false) ? false : true;
+        this.input.setEnable(enable);
     }
-    this.input.setEnable(enable);
 
     return this;
 };

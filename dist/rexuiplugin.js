@@ -21844,7 +21844,9 @@
         } else {
           gameObject.setInteractive({
             hitArea: {},
-            hitAreaCallback: FullWindowHitCallback
+            hitAreaCallback: function hitAreaCallback() {
+              return true;
+            }
           });
         }
 
@@ -21876,10 +21878,6 @@
 
     return TouchEventStop;
   }(ComponentBase);
-
-  var FullWindowHitCallback = function FullWindowHitCallback(shape, x, y, gameObject) {
-    return true;
-  };
 
   var HitAreaMode = {
     "default": 0,
@@ -29931,7 +29929,7 @@
     }, this);
   };
 
-  var EmitCellEvent = function EmitCellEvent(eventEmitter, eventName, table, x, y, pointer) {
+  var EmitCellEvent = function EmitCellEvent(eventEmitter, eventName, table, x, y, pointer, event) {
     var cellIndex;
 
     if (y === undefined) {
@@ -29947,15 +29945,15 @@
     var cellContainer = table.getCellContainer(cellIndex);
 
     if (cellContainer) {
-      eventEmitter.emit(eventName, cellContainer, cellIndex, pointer);
+      eventEmitter.emit(eventName, cellContainer, cellIndex, pointer, event);
     }
   };
 
   var PointerUpDownCell = function PointerUpDownCell(table, tableConfig) {
-    table.on('pointerdown', function (pointer) {
-      EmitCellEvent(this.eventEmitter, 'cell.down', table, pointer.x, pointer.y, pointer);
-    }, this).on('pointerup', function (pointer) {
-      EmitCellEvent(this.eventEmitter, 'cell.up', table, pointer.x, pointer.y, pointer);
+    table.on('pointerdown', function (pointer, localX, localY, event) {
+      EmitCellEvent(this.eventEmitter, 'cell.down', table, pointer.x, pointer.y, pointer, event);
+    }, this).on('pointerup', function (pointer, localX, localY, event) {
+      EmitCellEvent(this.eventEmitter, 'cell.up', table, pointer.x, pointer.y, pointer, event);
     }, this);
   };
 
@@ -29963,7 +29961,7 @@
     table.on('pointermove', OnMove$1, this).on('pointerover', OnMove$1, this).on('pointerout', OnOut$1, this); // pointer-up is included too
   };
 
-  var OnMove$1 = function OnMove(pointer) {
+  var OnMove$1 = function OnMove(pointer, localX, localY, event) {
     var table = this.childrenMap.child;
     var cellIndex = table.pointToCellIndex(pointer.x, pointer.y);
 
@@ -29973,15 +29971,15 @@
 
     var preCellIndex = table.input.lastOverCellIndex;
     table.input.lastOverCellIndex = cellIndex;
-    EmitCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex, undefined, pointer);
-    EmitCellEvent(this.eventEmitter, 'cell.over', table, cellIndex, undefined, pointer);
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex, undefined, pointer, event);
+    EmitCellEvent(this.eventEmitter, 'cell.over', table, cellIndex, undefined, pointer, event);
   };
 
-  var OnOut$1 = function OnOut(pointer) {
+  var OnOut$1 = function OnOut(pointer, event) {
     var table = this.childrenMap.child;
     var cellIndex = table.input.lastOverCellIndex;
     table.input.lastOverCellIndex = undefined;
-    EmitCellEvent(this.eventEmitter, 'cell.out', table, cellIndex, undefined, pointer);
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, cellIndex, undefined, pointer, event);
   };
 
   var GetValue$I = Phaser.Utils.Objects.GetValue;
@@ -29998,8 +29996,8 @@
     buttonConfig.threshold = 10;
     table._click = new Button(table, buttonConfig);
 
-    table._click.on('click', function (button, gameObject, pointer) {
-      EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.x, pointer.y, pointer);
+    table._click.on('click', function (button, gameObject, pointer, event) {
+      EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.x, pointer.y, pointer, event);
     }, this);
   };
 

@@ -779,10 +779,39 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
 - Enable
     ```javascript
     board.setInteractive();
+    // board.setInteractive({ useTouchZone: false });
     ```
+    - `useTouchZone` : 
+        - `true` : Detect touch input by input event of a [zone game object](board.md#touch-zone). Default behavior.
+        - `false` : Detect touch input by input event of scene.
 - Disable
     ```javascript
     board.setInteractive(false);
+    ```
+
+#### Touch Zone
+
+- Get
+    ```javascript
+    var touchZone = board.getTouchZone();
+    // var touchZone = board.touchZone;
+    ```
+    - Return `null` if `useTouchZone` is `false`.
+- Set depth
+    ```javascript
+    touchZone.setDepth(depth);
+    ```
+    or
+    ```javascript
+    scene.children.bringToTop(touchZone);
+    scene.children.sendToBack(touchZone);
+    scene.children.moveUp(touchZone);
+    scene.children.moveDown(touchZone);
+    scene.children.moveUp(touchZone);
+    scene.children.moveTo(touchZone, index);
+    scene.children.moveAbove(touchZone, child); // Move touchZone above child
+    scene.children.moveBelow(touchZone, child); // Move touchZone below child
+    scene.children.swap(touchZone, child);
     ```
 
 #### Pointer down
