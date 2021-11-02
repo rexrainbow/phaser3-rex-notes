@@ -782,7 +782,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     // board.setInteractive({ useTouchZone: false });
     ```
     - `useTouchZone` : 
-        - `true` : Detect touch input by input event of a [zone game object](board.md#touch-zone). Default behavior.
+        - `true` : Detect touch input by input event of a full-screen [zone game object](board.md#touch-zone). Default behavior.
         - `false` : Detect touch input by input event of scene.
 - Disable
     ```javascript
