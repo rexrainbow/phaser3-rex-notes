@@ -1,6 +1,7 @@
 import { GetHeaderKey, GetContentKey } from './GetKey.js';
 import GetItems from '../utils/GetItems.js';
 import SetItems from '../utils/SetItems.js';
+import { Zip, Unzip } from './Zip.js';
 
 var Save = function (fileID, header, content, updateMode) {
     if (typeof (content) === 'boolean') {
@@ -29,8 +30,8 @@ var Save = function (fileID, header, content, updateMode) {
         if (updateMode) {
             GetItems([headerKey, contentKey])
                 .then(function (data) {
-                    prevHeader = data[headerKey];
-                    prevContent = data[contentKey];
+                    prevHeader = (self.zipMode) ? Unzip(data[headerKey]) : data[headerKey];
+                    prevContent = (self.zipMode) ? Unzip(data[contentKey]) : data[contentKey];
                     resolve();
                 })
         } else {
@@ -49,10 +50,10 @@ var Save = function (fileID, header, content, updateMode) {
 
             var data = {};
             if (header) {
-                data[headerKey] = header;
+                data[headerKey] = (self.zipMode) ? Zip(header) : header;
             }
             if (content) {
-                data[contentKey] = content;
+                data[contentKey] = (self.zipMode) ? Zip(content) : content;
             }
 
             return SetItems(data, self.store);

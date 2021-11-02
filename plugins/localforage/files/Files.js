@@ -13,6 +13,7 @@ class Files {
             name: name
         });
 
+        this.zipMode = GetValue(config, 'zip', true);
         this.cacheHeaders = {};
     }
 }
