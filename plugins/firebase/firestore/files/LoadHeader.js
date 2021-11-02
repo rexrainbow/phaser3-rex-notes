@@ -1,5 +1,6 @@
 import DocToHeader from './DocToHeader.js';
 
+// Internal used
 var LoadHeader = function (fileID) {
     var userID = this.userID;
     let header = this.cacheHeaders[fileID];
