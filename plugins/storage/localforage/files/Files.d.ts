@@ -35,7 +35,7 @@ declare class Files {
     loadHeaders(
     ): Promise<
         {
-            headers: { [name: string]: Files.IHeader }
+            headers: { [fileID: string]: Files.IHeader }
         }
     >;
 

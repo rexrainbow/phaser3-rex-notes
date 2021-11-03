@@ -13,12 +13,21 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.plugins.get('rexLSData').extend(this.registry, {
-            init: { a: 10, b: 20 }
+            name: 'config',
+            default: { a: 10, b: 20 }
         })
 
-        this.registry.inc('a', 3)
+        var print = this.add.text(0, 0, '');
+        print.text = `a=${this.registry.get('a')}`;
 
-        console.log(this.registry.get('a'));
+        this.registry.events
+            .on('changedata-a', function (parent, value, previousValue) {
+                print.text = `a=${value}`;
+            })
+
+        this.input.on('pointerup', function () {
+            this.registry.inc('a', 3)
+        }, this);
     }
 
     update() { }

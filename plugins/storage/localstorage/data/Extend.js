@@ -28,7 +28,13 @@ var Extend = function (dataManager, config) {
     AddCallbacks(dataManager);
 
     dataManager.name = GetValue(config, 'name', '');
-    dataManager.load(GetValue(config, 'init', undefined), GetValue(config, 'reset', false));
+
+    var load = GetValue(config, 'load', true);
+    if (load) {
+        var defaultData = GetValue(config, 'default', undefined);
+        var resetFlag = GetValue(config, 'reset', false);
+        dataManager.load(defaultData, resetFlag);
+    }
 
     return dataManager;
 }

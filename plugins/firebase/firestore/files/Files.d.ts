@@ -46,7 +46,7 @@ declare class Files {
     ): Promise<
         {
             userID: string,
-            headers: { [name: string]: Files.IHeader }
+            headers: { [fileID: string]: Files.IHeader }
         }
     >;
 

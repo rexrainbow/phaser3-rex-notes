@@ -13,11 +13,20 @@ class Demo extends Phaser.Scene {
 
     create() {
         var data = this.plugins.get('rexLSData').add(this, {
-            init: { a: 10, b: 20 }
+            default: { a: 10, b: 20 }
         })
-            .inc('a', 3)
 
-        console.log(data.get('a'));
+        var print = this.add.text(0, 0, '');
+        print.text = `a=${data.get('a')}`;
+
+        data.events
+            .on('changedata-a', function (parent, value, previousValue) {
+                print.text = `a=${value}`;
+            })
+
+        this.input.on('pointerup', function () {
+            data.inc('a', 3)
+        });
     }
 
     update() { }
