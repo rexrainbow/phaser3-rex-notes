@@ -1,6 +1,6 @@
 import { IsHeaderKey, GetFileID } from './GetKey.js';
 import GetItems from '../utils/GetItems.js';
-import Clear from '../../utils/object/Clear.js';
+import Clear from '../../../utils/object/Clear.js';
 
 var LoadHeaders = function () {
     var self = this;

@@ -1,2 +1,2 @@
-import Files from './localforage/files/Files.js';
+import Files from './storage/localforage/files/Files.js';
 export default Files;

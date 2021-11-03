@@ -1,4 +1,4 @@
-import LZString from '../../utils/lzstring/lz-string.min.js';
+import LZString from '../../../utils/lzstring/lz-string.min.js';
 
 export default {
     toSaveData(data) {

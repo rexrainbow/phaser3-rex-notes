@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import GetValue from '../../utils/object/GetValue.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import Save from './Save.js';
 import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';

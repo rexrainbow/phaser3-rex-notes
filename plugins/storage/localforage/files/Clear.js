@@ -1,4 +1,4 @@
-import ClearObj from '../../utils/object/Clear.js';
+import ClearObj from '../../../utils/object/Clear.js';
 
 var Clear = function () {
     ClearObj(this.cacheHeaders);
