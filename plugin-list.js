@@ -128,6 +128,7 @@ module.exports = {
 
     // storage
     'localforagefilesplugin': './plugins/localforage-files-plugin.js',
+    'localstoragedataplugin': './plugins/localstorage-data-plugin.js',
 
     // math
     'gashaponplugin': './plugins/gashapon-plugin.js',
