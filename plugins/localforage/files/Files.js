@@ -5,12 +5,12 @@ import Load from './Load.js';
 import LoadHeaders from './LoadHeaders.js';
 import Delete from './Delete.js';
 import Clear from './Clear.js';
+import DataProcessMethods from './DataProcessMethods.js';
 
 class Files {
     constructor(config) {
-        var name = GetValue(config, 'name', 'files');
         this.store = localforage.createInstance({
-            name: name
+            name:  GetValue(config, 'name', 'files')
         });
 
         this.zipMode = GetValue(config, 'zip', true);
@@ -28,7 +28,8 @@ var methods = {
 
 Object.assign(
     Files.prototype,
-    methods
+    methods,
+    DataProcessMethods
 );
 
 export default Files;

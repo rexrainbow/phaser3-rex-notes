@@ -126,6 +126,9 @@ module.exports = {
     'canvasdataplugin': './plugins/canvasdata-plugin.js',
     'uniqueitemlistplugin': './plugins/uniqueitemlist-plugin.js',
 
+    // storage
+    'reslocalforagefilesplugin': './plugins/localforage-files-plugin.js',
+
     // math
     'gashaponplugin': './plugins/gashapon-plugin.js',
     'perlinplugin': './plugins/perlin-plugin.js',

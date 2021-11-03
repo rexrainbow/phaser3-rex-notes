@@ -8757,8 +8757,9 @@
 
       var enable = GetValue$7(config, 'enable', true);
       var useTouchZone = GetValue$7(config, 'useTouchZone', true);
+      var scene = board.scene;
       this.board = board;
-      this.touchZone;
+      this.touchZone = undefined;
       this._enable = true;
       this.pointer = null;
       this.tilePosition = {
@@ -8769,7 +8770,6 @@
         x: undefined,
         y: undefined
       };
-      var scene = board.scene;
 
       if (useTouchZone) {
         var touchZone = new TouchZone(scene);

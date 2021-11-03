@@ -1,7 +1,6 @@
 import { IsHeaderKey, GetFileID } from './GetKey.js';
 import GetItems from '../utils/GetItems.js';
 import Clear from '../../utils/object/Clear.js';
-import { Unzip } from './Zip.js';
 
 var LoadHeaders = function () {
     var self = this;
@@ -12,7 +11,7 @@ var LoadHeaders = function () {
         .then(function (data) {
             Clear(self.cacheHeaders);
             for (var key in data) {
-                self.cacheHeaders[GetFileID(key)] = (self.zipMode) ? Unzip(data[key]) : data[key];
+                self.cacheHeaders[GetFileID(key)] = self.toLoadData(data[key]);
             }
 
             return Promise.resolve({
