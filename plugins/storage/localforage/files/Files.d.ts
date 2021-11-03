@@ -2,13 +2,12 @@ export default Files;
 
 declare namespace Files {
     interface IConfig {
-        root?: string
+        name?: string;
+        zip?: boolean;
     }
 
     interface IBaseData {
-        userID?: string;
         fileID?: string;
-        type?: 'header' | 'content';
 
         // Other properties
         [name: string]: unknown;
@@ -24,28 +23,18 @@ declare class Files {
         config: Files.IConfig
     );
 
-    setOwner(userID: string): this;
-
-    setOwner(
-        config: { userID: string }
-    ): this;
-
-    userID: string;
-    readonly userInfo: { userID?: string, userName?: string };
-
     save(
         fileID: string,
         header?: Files.IHeader,
         content?: Files.IContent,
         updateMode?: boolean
     ): Promise<
-        { userID: string, fileID: string }
+        { fileID: string }
     >;
 
     loadHeaders(
     ): Promise<
         {
-            userID: string,
             headers: { [name: string]: Files.IHeader }
         }
     >;
@@ -54,7 +43,7 @@ declare class Files {
         fileID: string
     ): Promise<
         {
-            userID: string, fileID: string,
+            fileID: string,
             header: Files.IHeader,
             content: Files.IContent
         }
