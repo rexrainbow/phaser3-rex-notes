@@ -385,7 +385,9 @@ nav:
         - ID-alias: firebase-idalias.md
 - Storage:
     - LocalStorage: localstorage.md
-    - LocalForage: localforage.md
+    - LocalForage:
+        - LocalForage: localforage.md
+        - Files: localforage-files.md
 - Plugin list: plugin-list.md
 - Tools: tools.md
 

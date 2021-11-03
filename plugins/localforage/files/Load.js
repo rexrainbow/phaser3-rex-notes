@@ -16,6 +16,12 @@ var Load = function (fileID) {
                 content: content
             })
         })
+        .catch(function (error) {
+            return Promise.reject({
+                fileID: fileID,
+                error: error
+            })
+        })
 }
 
 export default Load;

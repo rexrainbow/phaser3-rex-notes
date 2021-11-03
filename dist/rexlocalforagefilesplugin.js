@@ -3122,6 +3122,11 @@
         header: header,
         content: content
       });
+    })["catch"](function (error) {
+      return Promise.reject({
+        fileID: fileID,
+        error: error
+      });
     });
   };
 

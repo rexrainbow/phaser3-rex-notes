@@ -76,6 +76,7 @@
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [Line](line.md): Draw a line with start/end/body textures.
+1. [LocalForage/files](localforage-files.md): Save JSON data, using localforage.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Modal promise](modal-promise.md): Modal behavior wrapped into promise.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.

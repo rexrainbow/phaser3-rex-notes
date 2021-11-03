@@ -184,7 +184,7 @@ var fileManager = scene.plugins.get('rexFirebase').add.files({
             // var userID = result.userID;
         })
     ```
-    - `headers` : An array of header objects. Each header contains these key
+    - `headers` : Get header by `headers[fileID]`, each header contains
         - `header.fileID` : Unique ID of this file.
         - `header.userID` : User ID of file owner.        
 
