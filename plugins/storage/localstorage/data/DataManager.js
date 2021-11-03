@@ -43,7 +43,7 @@ class DataManager extends Base {
                 }
                 this.removeItem(key);
                 this.dataKeys.delete(key);
-                this.setItem('__keys__', JSON.stringify(this.dataKeys.entries));
+                this.setItem('__keys__', this.dataKeys.entries);
             }, this);
 
         this.name = GetValue(config, 'name', '');
@@ -52,11 +52,10 @@ class DataManager extends Base {
 
     loadDataKeys() {
         this.dataKeys.clear();
-        var data = this.getItem('__keys__');
-        if (data) {
-            var keys = JSON.parse(data);
+        var keys = this.getItem('__keys__');
+        if (keys) {
             for (var i = 0, cnt = keys.length; i < cnt; i++) {
-                this.dataKeys.set(this.getDataKey(keys[i]));
+                this.dataKeys.set(keys[i]);
             }
         }
         return this;
@@ -83,7 +82,7 @@ class DataManager extends Base {
                     this.dataKeys.delete(dataKey);
                 }
             }, this);
-            this.setItem('__keys__', JSON.stringify(this.dataKeys.entries));
+            this.setItem('__keys__', this.dataKeys.entries);
         } else { // Load data from localstorage according to dataKeys
             this._syncEnable = false;
             this.dataKeys.iterate(function (dataKey, index) {
