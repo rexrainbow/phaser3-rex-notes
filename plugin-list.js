@@ -127,7 +127,7 @@ module.exports = {
     'uniqueitemlistplugin': './plugins/uniqueitemlist-plugin.js',
 
     // storage
-    'reslocalforagefilesplugin': './plugins/localforage-files-plugin.js',
+    'localforagefilesplugin': './plugins/localforage-files-plugin.js',
 
     // math
     'gashaponplugin': './plugins/gashapon-plugin.js',
