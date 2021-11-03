@@ -145,11 +145,110 @@
     }
   };
 
-  var Base = Phaser.Data.DataManager;
+  var LoadDataKeys = function LoadDataKeys() {
+    this.dataKeys.clear();
+    var keys = this.getItem('__keys__');
+
+    if (keys) {
+      for (var i = 0, cnt = keys.length; i < cnt; i++) {
+        this.dataKeys.set(keys[i]);
+      }
+    }
+
+    return this;
+  };
+
+  var Load = function Load(initialData, reset) {
+    LoadDataKeys.call(this);
+    this._syncEnable = false;
+    this.reset();
+    this._syncEnable = true;
+
+    if (initialData) {
+      // Load data according to initialData
+      var value, prevValue;
+
+      for (var dataKey in initialData) {
+        prevValue = reset ? undefined : this.getItem(dataKey);
+        value = prevValue === undefined ? initialData[dataKey] : prevValue;
+        this.set(dataKey, value);
+      }
+
+      this.dataKeys.each(function (dataKey, index) {
+        if (!(dataKey in initialData)) {
+          this.removeItem(dataKey);
+          this.dataKeys["delete"](dataKey);
+        }
+      }, this);
+      this.setItem('__keys__', this.dataKeys.entries);
+    } else {
+      // Load data from localstorage according to dataKeys
+      this._syncEnable = false;
+      this.dataKeys.iterate(function (dataKey, index) {
+        this.set(dataKey, this.getItem(dataKey));
+      }, this);
+      this._syncEnable = true;
+    }
+
+    return this;
+  };
+
+  var AddCallbacks = function AddCallbacks(dataManager) {
+    dataManager.events // Change value
+    .on('changedata', function (parent, key, value, previousValue) {
+      if (!this._syncEnable) {
+        return;
+      }
+
+      if (value === previousValue) {
+        return;
+      }
+
+      this.setItem(key, value);
+    }, dataManager) // Add key
+    .on('setdata', function (parent, key, value) {
+      if (!this._syncEnable) {
+        return;
+      }
+
+      this.setItem(key, value);
+      this.dataKeys.set(key);
+    }, dataManager) // Remove key
+    .on('removedata', function (parent, key, value) {
+      if (!this._syncEnable) {
+        return;
+      }
+
+      this.removeItem(key);
+      this.dataKeys["delete"](key);
+      this.setItem('__keys__', this.dataKeys.entries);
+    }, dataManager);
+  };
+
   var GetValue = Phaser.Utils.Objects.GetValue;
+  var SetStruct = Phaser.Structs.Set;
+  var methods = {
+    load: Load
+  };
+
+  var Extend = function Extend(dataManager, config) {
+    if (dataManager.hasOwnProperty('_syncEnable')) {
+      // Already extended
+      return dataManager;
+    }
+
+    dataManager._syncEnable = true;
+    dataManager.dataKeys = new SetStruct();
+    Object.assign(dataManager, StorageMethods, methods);
+    AddCallbacks(dataManager);
+    dataManager.name = GetValue(config, 'name', '');
+    dataManager.load(GetValue(config, 'init', undefined), GetValue(config, 'reset', false));
+    return dataManager;
+  };
+
+  var Base = Phaser.Data.DataManager;
   var EventEmitterKlass = Phaser.Events.EventEmitter;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-  var SetStruct = Phaser.Structs.Set;
 
   var DataManager = /*#__PURE__*/function (_Base) {
     _inherits(DataManager, _Base);
@@ -171,99 +270,12 @@
       }
 
       _this = _super.call(this, parent, eventEmitter);
-      _this._syncEnable = true;
-      _this.dataKeys = new SetStruct();
-
-      _this.events.on('changedata', function (parent, key, value, previousValue) {
-        if (!this._syncEnable) {
-          return;
-        }
-
-        if (value === previousValue) {
-          return;
-        }
-
-        this.setItem(key, value);
-      }, _assertThisInitialized(_this)).on('setdata', function (parent, key, value) {
-        if (!this._syncEnable) {
-          return;
-        }
-
-        this.setItem(key, value);
-        this.dataKeys.set(key);
-      }, _assertThisInitialized(_this)).on('removedata', function (parent, key, value) {
-        if (!this._syncEnable) {
-          return;
-        }
-
-        this.removeItem(key);
-        this.dataKeys["delete"](key);
-        this.setItem('__keys__', this.dataKeys.entries);
-      }, _assertThisInitialized(_this));
-
-      _this.name = GetValue(config, 'name', '');
-
-      _this.load(GetValue(config, 'init', undefined), GetValue(config, 'reset', false));
-
+      Extend(_assertThisInitialized(_this), config);
       return _this;
     }
 
-    _createClass(DataManager, [{
-      key: "loadDataKeys",
-      value: function loadDataKeys() {
-        this.dataKeys.clear();
-        var keys = this.getItem('__keys__');
-
-        if (keys) {
-          for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.dataKeys.set(keys[i]);
-          }
-        }
-
-        return this;
-      }
-    }, {
-      key: "load",
-      value: function load(initialData, reset) {
-        this.loadDataKeys();
-        this._syncEnable = false;
-        this.reset();
-        this._syncEnable = true;
-
-        if (initialData) {
-          // Load data according to initialData
-          var value, prevValue;
-
-          for (var dataKey in initialData) {
-            prevValue = reset ? undefined : this.getItem(dataKey);
-            value = prevValue === undefined ? initialData[dataKey] : prevValue;
-            this.set(dataKey, value);
-          }
-
-          this.dataKeys.each(function (dataKey, index) {
-            if (!(dataKey in initialData)) {
-              this.removeItem(dataKey);
-              this.dataKeys["delete"](dataKey);
-            }
-          }, this);
-          this.setItem('__keys__', this.dataKeys.entries);
-        } else {
-          // Load data from localstorage according to dataKeys
-          this._syncEnable = false;
-          this.dataKeys.iterate(function (dataKey, index) {
-            this.set(dataKey, this.getItem(dataKey));
-          }, this);
-          this._syncEnable = true;
-        }
-
-        return this;
-      }
-    }]);
-
     return DataManager;
   }(Base);
-
-  Object.assign(DataManager.prototype, StorageMethods);
 
   var DataManagerPlugin = /*#__PURE__*/function (_Phaser$Plugins$BaseP) {
     _inherits(DataManagerPlugin, _Phaser$Plugins$BaseP);
@@ -286,6 +298,11 @@
       key: "add",
       value: function add(parent, eventEmitter, config) {
         return new DataManager(parent, eventEmitter, config);
+      }
+    }, {
+      key: "extend",
+      value: function extend(dataManager, config) {
+        return Extend(dataManager, config);
       }
     }]);
 

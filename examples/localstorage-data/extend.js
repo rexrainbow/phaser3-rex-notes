@@ -12,12 +12,13 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var data = this.plugins.get('rexLSData').add(this, {
+        this.plugins.get('rexLSData').extend(this.registry, {
             init: { a: 10, b: 20 }
         })
-            .inc('a', 3)
 
-        console.log(data.get('a'));
+        this.registry.inc('a', 3)
+
+        console.log(this.registry.get('a'));
     }
 
     update() { }

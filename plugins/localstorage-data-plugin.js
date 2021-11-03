@@ -1,4 +1,5 @@
 import DataManager from './localstorage-data.js';
+import Extend from './storage/localstorage/data/Extend.js';
 
 class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -15,6 +16,9 @@ class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
         return new DataManager(parent, eventEmitter, config);
     }
 
+    extend(dataManager, config) {
+        return Extend(dataManager, config);
+    }
 }
 
 export default DataManagerPlugin;
