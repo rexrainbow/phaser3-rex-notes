@@ -6,10 +6,19 @@ const EventEmitterKlass = Phaser.Events.EventEmitter;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter, config) {
-        if (eventEmitter === undefined) {
+        var useDefaultEventEmitter = (eventEmitter === undefined);
+        if (useDefaultEventEmitter) {
             eventEmitter = new EventEmitterKlass();
         }
+
         super(parent, eventEmitter);
+
+        if (useDefaultEventEmitter) {
+            var parentEventEmitter = (parent.events) ? parent.events : parent;
+            if (parentEventEmitter) {
+                parentEventEmitter.once('destroy', this.destroy, this);
+            }
+        }
 
         this._recordEnable = true;
         this.resetFromJSON(config);

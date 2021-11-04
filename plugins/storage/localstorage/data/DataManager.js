@@ -10,10 +10,20 @@ class DataManager extends Base {
             config = eventEmitter;
             eventEmitter = undefined;
         }
-        if (eventEmitter === undefined) {
+
+        var useDefaultEventEmitter = (eventEmitter === undefined);
+        if (useDefaultEventEmitter) {
             eventEmitter = new EventEmitterKlass();
         }
+
         super(parent, eventEmitter);
+
+        if (useDefaultEventEmitter) {
+            var parentEventEmitter = (parent.events) ? parent.events : parent;
+            if (parentEventEmitter) {
+                parentEventEmitter.once('destroy', this.destroy, this);
+            }
+        }
 
         Extend(this, config);
     }

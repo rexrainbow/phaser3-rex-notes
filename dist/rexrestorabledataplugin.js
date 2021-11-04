@@ -161,11 +161,22 @@
 
       _classCallCheck(this, DataManager);
 
-      if (eventEmitter === undefined) {
+      var useDefaultEventEmitter = eventEmitter === undefined;
+
+      if (useDefaultEventEmitter) {
         eventEmitter = new EventEmitterKlass();
       }
 
       _this = _super.call(this, parent, eventEmitter);
+
+      if (useDefaultEventEmitter) {
+        var parentEventEmitter = parent.events ? parent.events : parent;
+
+        if (parentEventEmitter) {
+          parentEventEmitter.once('destroy', _this.destroy, _assertThisInitialized(_this));
+        }
+      }
+
       _this._recordEnable = true;
 
       _this.resetFromJSON(config);
