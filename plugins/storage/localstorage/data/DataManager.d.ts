@@ -11,12 +11,16 @@ declare namespace DataManager {
 
 declare class DataManager extends Phaser.Data.DataManager {
     constructor(
-        parent: object,
         config?: DataManager.IConfig
     );
 
     constructor(
-        parent: object,
+        parent?: object,
+        config?: DataManager.IConfig
+    );
+
+    constructor(
+        parent?: object,
         eventEmitter?: Phaser.Events.EventEmitter,
         config?: DataManager.IConfig
     );
@@ -25,4 +29,6 @@ declare class DataManager extends Phaser.Data.DataManager {
         defaultValue?: { [key: string]: any },
         reset?: boolean
     ): this;
+
+    getDefaultValue(key: string): any;
 }

@@ -1,5 +1,6 @@
 import StorageMethods from './StorageMethods.js';
 import Load from './Load.js';
+import GetDefaultValue from './GetDefaultValue.js';
 import AddCallbacks from './AddCallbacks.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -8,6 +9,7 @@ const SetStruct = Phaser.Structs.Set;
 
 var methods = {
     load: Load,
+    getDefaultValue: GetDefaultValue,
 }
 
 var Extend = function (dataManager, config) {
@@ -18,6 +20,7 @@ var Extend = function (dataManager, config) {
 
     dataManager._syncEnable = true;
     dataManager.dataKeys = new SetStruct();
+    dataManager.defaultData = undefined;
 
     Object.assign(
         dataManager,

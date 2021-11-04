@@ -11,6 +11,7 @@ var LoadDataKeys = function () {
 
 var Load = function (defaultData, reset) {
     LoadDataKeys.call(this);
+    this.defaultData = defaultData;
 
     this._syncEnable = false;
     this.reset();

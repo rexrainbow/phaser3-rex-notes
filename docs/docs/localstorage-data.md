@@ -129,3 +129,9 @@ See [built-in data manager](datamanager.md).
 #### Reserved keys
 
 `'__keys__'` is used internally by this plugin.
+
+### Get default value
+
+```javascript
+var value = data.getDefaultValue(key);
+```

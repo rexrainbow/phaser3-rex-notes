@@ -176,6 +176,7 @@
 
   var Load = function Load(defaultData, reset) {
     LoadDataKeys.call(this);
+    this.defaultData = defaultData;
     this._syncEnable = false;
     this.reset();
     this._syncEnable = true;
@@ -207,6 +208,10 @@
     }
 
     return this;
+  };
+
+  var GetDefaultValue = function GetDefaultValue(key) {
+    return this.defaultData ? this.defaultData[key] : undefined;
   };
 
   var AddCallbacks = function AddCallbacks(dataManager) {
@@ -244,7 +249,8 @@
   var GetValue = Phaser.Utils.Objects.GetValue;
   var SetStruct = Phaser.Structs.Set;
   var methods = {
-    load: Load
+    load: Load,
+    getDefaultValue: GetDefaultValue
   };
 
   var Extend = function Extend(dataManager, config) {
@@ -255,6 +261,7 @@
 
     dataManager._syncEnable = true;
     dataManager.dataKeys = new SetStruct();
+    dataManager.defaultData = undefined;
     Object.assign(dataManager, StorageMethods, methods);
     AddCallbacks(dataManager);
     dataManager.name = GetValue(config, 'name', '');
@@ -283,7 +290,11 @@
 
       _classCallCheck(this, DataManager);
 
-      if (IsPlainObject(eventEmitter)) {
+      if (IsPlainObject(parent)) {
+        config = parent;
+        parent = undefined;
+        eventEmitter = undefined;
+      } else if (IsPlainObject(eventEmitter)) {
         config = eventEmitter;
         eventEmitter = undefined;
       }
@@ -292,6 +303,10 @@
 
       if (useDefaultEventEmitter) {
         eventEmitter = new EventEmitterKlass();
+      }
+
+      if (parent === undefined) {
+        parent = eventEmitter;
       }
 
       _this = _super.call(this, parent, eventEmitter);

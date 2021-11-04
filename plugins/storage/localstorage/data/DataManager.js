@@ -6,7 +6,11 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter, config) {
-        if (IsPlainObject(eventEmitter)) {
+        if (IsPlainObject(parent)) {
+            config = parent;
+            parent = undefined;
+            eventEmitter = undefined;
+        } else if (IsPlainObject(eventEmitter)) {
             config = eventEmitter;
             eventEmitter = undefined;
         }
@@ -14,6 +18,9 @@ class DataManager extends Base {
         var useDefaultEventEmitter = (eventEmitter === undefined);
         if (useDefaultEventEmitter) {
             eventEmitter = new EventEmitterKlass();
+        }
+        if (parent === undefined) {
+            parent = eventEmitter;
         }
 
         super(parent, eventEmitter);
