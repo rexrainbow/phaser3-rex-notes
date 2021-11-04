@@ -125,3 +125,7 @@ data.load(defaultData);
 ### Get/set/remove value
 
 See [built-in data manager](datamanager.md).
+
+#### Reserved keys
+
+`'__keys__'` is used internally by this plugin.
