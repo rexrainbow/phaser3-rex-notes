@@ -1,4 +1,11 @@
-export default class DataManager extends Phaser.Data.DataManager {
+export default DataManager;
+
+declare class DataManager extends Phaser.Data.DataManager {
+    constructor(
+        parent: object,
+        eventEmitter?: Phaser.Events.EventEmitter
+    );
+
     constructor(
         parent: object,
         eventEmitter?: Phaser.Events.EventEmitter,
