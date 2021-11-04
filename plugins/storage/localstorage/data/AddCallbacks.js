@@ -6,7 +6,7 @@ var AddCallbacks = function (dataManager) {
             if (!this._syncEnable) {
                 return;
             }
-            if (value === previousValue) {
+            if ((typeof (value) !== 'object') && (value === previousValue)) {
                 return;
             }
             this.setItem(key, value);
