@@ -87,16 +87,16 @@ Sync data from [data manager](datamanager.md) to [local-storage](https://develop
 ### Create instance
 
 ```javascript
-var data = scene.plugins.get('rexLocalStorageData').add(parent, {
+var data = scene.plugins.get('rexLocalStorageData').add({
     // name: '',
     // load: true,
     // default: undefined,
     // reset: false
 });
+// var data = scene.plugins.get('rexLocalStorageData').add(parent, config);
 // var data = scene.plugins.get('rexRData').add(parent, eventEmitter, config);
 ```
 
-- `parent` : The object (a scene, or a game object) that this DataManager belongs to.
 - `name` : Prefix of key in local storage.
 - `load` :
     - `true` : Load data from local storage. Default behavior.
@@ -105,6 +105,7 @@ var data = scene.plugins.get('rexLocalStorageData').add(parent, {
     - `undefined` : Load all keys from local storage.
 - `reset` : 
     - `true` : Rest all data to default values (`default`). 
+- `parent` : The object (a scene, or a game object) that this DataManager belongs to.
 - `eventEmitter` : The DataManager's [event emitter](eventemitter3.md).
 
 ### Load
