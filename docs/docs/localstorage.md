@@ -25,6 +25,10 @@ localStorage.setItem(key, value);
 var value = localStorage.getItem(key);
 ```
 
+!!! note
+    The keys and the values are always strings. 
+    Objects, integer keys will be automatically converted to strings.
+
 ### Remove data
 
 ```javascript

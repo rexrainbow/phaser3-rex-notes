@@ -5,6 +5,9 @@ Sync data from [data manager](datamanager.md) to [local-storage](https://develop
 - Author: Rex
 - Member of scene
 
+!!! note "Max Size"
+    5MB per app per browser.
+
 ## Live demos
 
 - [Extend game registry](https://codepen.io/rexrainbow/pen/zYdpEOj)

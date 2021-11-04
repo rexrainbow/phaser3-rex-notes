@@ -7553,6 +7553,11 @@
 <h3 id="read-data">Read data<a class="headerlink" href="#read-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The keys and the values are always strings. 
+Objects, integer keys will be automatically converted to strings.</p>
+</div>
 <h3 id="remove-data">Remove data<a class="headerlink" href="#remove-data" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
