@@ -120,7 +120,7 @@ data.load(defaultData);
     - `true` : Rest all data to default values (`defaultData`). 
 
 !!! note
-    Already load data from local storage if `load` is `true`.
+    Data loaded from local storage already, if [`load` is `true`](localstorage-data.md#create-instance).
 
 ### Get/set/remove value
 
