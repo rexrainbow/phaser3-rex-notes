@@ -384,7 +384,9 @@ nav:
         - Messages : firebase-messages.md
         - ID-alias: firebase-idalias.md
 - Storage:
-    - LocalStorage: localstorage.md
+    - LocalStorage:
+        - LocalStorage: localstorage.md
+        - Data manager: localstorage-data.md
     - LocalForage:
         - LocalForage: localforage.md
         - Files: localforage-files.md

@@ -4,6 +4,9 @@ Store small data in key-value pairs locally within the user's browser.
 
 - Author: Built-in javascript function
 
+!!! note "Max Size"
+    5MB per app per browser.
+
 ## Usage
 
 [Reference](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)

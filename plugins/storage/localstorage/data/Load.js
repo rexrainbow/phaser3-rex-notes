@@ -9,23 +9,23 @@ var LoadDataKeys = function () {
     return this;
 }
 
-var Load = function (initialData, reset) {
+var Load = function (defaultData, reset) {
     LoadDataKeys.call(this);
 
     this._syncEnable = false;
     this.reset();
     this._syncEnable = true;
 
-    if (initialData) {  // Load data according to initialData
+    if (defaultData) {  // Load data according to defaultData
         var value, prevValue;
-        for (var dataKey in initialData) {
+        for (var dataKey in defaultData) {
             prevValue = (reset) ? undefined : this.getItem(dataKey);
-            value = (prevValue === undefined) ? initialData[dataKey] : prevValue;
+            value = (prevValue === undefined) ? defaultData[dataKey] : prevValue;
             this.set(dataKey, value);
         }
 
         this.dataKeys.each(function (dataKey, index) {
-            if (!(dataKey in initialData)) {
+            if (!(dataKey in defaultData)) {
                 this.removeItem(dataKey);
                 this.dataKeys.delete(dataKey);
             }
