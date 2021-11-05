@@ -123,40 +123,61 @@
     };
   }
 
+  var GetStoreKey = function GetStoreKey(key, prefix) {
+    if (prefix && prefix !== '') {
+      return "".concat(prefix, ".").concat(key);
+    } else {
+      return key;
+    }
+  };
+
+  var GetDataKey = function GetDataKey(key, prefix) {
+    if (prefix && prefix !== '') {
+      return key.substring(prefix.length + 1);
+    } else {
+      return key;
+    }
+  };
+
+  var SetItem = function SetItem(dataKey, prefix, value) {
+    // Ref : https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#basic_concepts
+    // **The keys and the values are always strings**
+    value = JSON.stringify([value]);
+    localStorage.setItem(GetStoreKey(dataKey, prefix), value);
+  };
+
+  var GetItem = function GetItem(dataKey, prefix) {
+    var value = localStorage.getItem(GetStoreKey(dataKey, prefix));
+
+    if (value == null) {
+      return undefined;
+    } else {
+      value = JSON.parse(value)[0];
+      return value;
+    }
+  };
+
+  var RemoveItem = function RemoveItem(dataKey, prefix) {
+    localStorage.removeItem(GetStoreKey(dataKey, prefix));
+    return this;
+  };
+
   var StorageMethods = {
-    getStoreKey: function getStoreKey(key) {
-      if (this.name !== '') {
-        return "".concat(this.name, ".").concat(key);
-      } else {
-        return key;
-      }
+    getStoreKey: function getStoreKey(dataKey) {
+      return GetStoreKey(dataKey, this.name);
     },
-    getDataKey: function getDataKey(key) {
-      if (this.name !== '') {
-        return key.substring(this.name.length + 1);
-      } else {
-        return key;
-      }
+    getDataKey: function getDataKey(storeKey) {
+      return GetDataKey(storeKey, this.name);
     },
     setItem: function setItem(dataKey, value) {
-      // Ref : https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#basic_concepts
-      // **The keys and the values are always strings**
-      value = JSON.stringify([value]);
-      localStorage.setItem(this.getStoreKey(dataKey), value);
+      SetItem(dataKey, this.name, value);
       return this;
     },
     getItem: function getItem(dataKey) {
-      var value = localStorage.getItem(this.getStoreKey(dataKey));
-
-      if (value == null) {
-        return undefined;
-      } else {
-        value = JSON.parse(value)[0];
-        return value;
-      }
+      return GetItem(dataKey, this.name);
     },
     removeItem: function removeItem(dataKey) {
-      localStorage.removeItem(this.getStoreKey(dataKey));
+      RemoveItem(dataKey, this.name);
       return this;
     }
   };
@@ -352,6 +373,23 @@
       key: "extend",
       value: function extend(dataManager, config) {
         return Extend(dataManager, config);
+      }
+    }, {
+      key: "setItem",
+      value: function setItem(dataKey, name, value) {
+        SetItem(dataKey, name, value);
+        return this;
+      }
+    }, {
+      key: "getItem",
+      value: function getItem(dataKey, name) {
+        return GetItem(dataKey, name);
+      }
+    }, {
+      key: "removeItem",
+      value: function removeItem(dataKey, name) {
+        RemoveItem(dataKey, name);
+        return this;
       }
     }]);
 

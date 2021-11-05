@@ -1,5 +1,7 @@
 import DataManager from './localstorage-data.js';
 import Extend from './storage/localstorage/data/Extend.js';
+import { SetItem, GetItem, RemoveItem } from './storage/localstorage/utils/StorageMethods.js';
+
 
 class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -18,6 +20,20 @@ class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
 
     extend(dataManager, config) {
         return Extend(dataManager, config);
+    }
+
+    setItem(dataKey, name, value) {
+        SetItem(dataKey, name, value);
+        return this;
+    }
+
+    getItem(dataKey, name) {
+        return GetItem(dataKey, name);
+    }
+
+    removeItem(dataKey, name) {
+        RemoveItem(dataKey, name);
+        return this;
     }
 }
 
