@@ -14,8 +14,6 @@ class ScaleOuter {
         this.scrollX = 0;
         this.scrollY = 0;
         this.zoom = 1;
-        this.innerViewport = GetInnerViewport(this);
-        this.outerViewport;
 
         if (CheckScaleMode(scene)) {
             this.boot();
@@ -43,6 +41,14 @@ class ScaleOuter {
         return this;
     }
 
+    get innerViewport() {
+        return GetInnerViewport(this);
+    }
+
+    get outerViewport() {
+        return GetOuterViewport(this);
+    }
+
     add(camera) {
         this.cameras.set(camera)
         this.scale();
@@ -61,7 +67,6 @@ class ScaleOuter {
     scale() {
         GetScaleOutCameraParameters(this.scene, this);
         this.setScaleCameraParameters();
-        this.outerViewport = GetOuterViewport(this, this.outerViewport);
         return this;
     }
 

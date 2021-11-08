@@ -222,8 +222,6 @@
       this.scrollX = 0;
       this.scrollY = 0;
       this.zoom = 1;
-      this.innerViewport = GetInnerViewport(this);
-      this.outerViewport;
 
       if (CheckScaleMode(scene)) {
         this.boot();
@@ -254,6 +252,16 @@
         return this;
       }
     }, {
+      key: "innerViewport",
+      get: function get() {
+        return GetInnerViewport(this);
+      }
+    }, {
+      key: "outerViewport",
+      get: function get() {
+        return GetOuterViewport(this);
+      }
+    }, {
       key: "add",
       value: function add(camera) {
         this.cameras.set(camera);
@@ -276,7 +284,6 @@
       value: function scale() {
         GetScaleOutCameraParameters(this.scene, this);
         this.setScaleCameraParameters();
-        this.outerViewport = GetOuterViewport(this, this.outerViewport);
         return this;
       }
     }, {
