@@ -7,6 +7,7 @@ Scroll and zoom camera to make default game window fit the display area, in [**R
 
 ## Live demos
 
+- [Viewport](https://codepen.io/rexrainbow/pen/MWvGvbR)
 - [Static camera](https://codepen.io/rexrainbow/pen/ExvPaqY)
 - [Tween camera](https://codepen.io/rexrainbow/pen/powXPBq)
 
@@ -88,6 +89,10 @@ var game = new Phaser.Game(config);
 ScaleOuter plugin is a scene plugin, which created as a member of scene (`scene.rexScaleOuter`) 
 for each scene. It does not have to create other scale outer instance.
 
+### Remove instance
+
+Invoke `scene.rexScaleOuter.destroy()` under `scene.create() { ... }`.
+
 ### Add camera
 
 - Add camera manually, under `scene.create() { ... }`
@@ -96,6 +101,13 @@ for each scene. It does not have to create other scale outer instance.
     ```
 - Scale outer will control main camera (`scene.cameras.main`) if no camera added.
 
-### Remove instance
+### Viewport
 
-Invoke `scene.rexScaleOuter.destroy()` under `scene.create() { ... }`.
+- Inner viewport, a [recangle object](geom-rectangle.md), for area of default size in game config after camera zoom/scroll.
+    ```javascript
+    var innerViewport = scene.rexScaleOuter.innerViewport;
+    ```
+- Outer viewport, a [recangle object](geom-rectangle.md), for the visible area after camera zoom/scroll.
+    ```javascript
+    var outerViewport = scene.rexScaleOuter.outerViewport;
+    ```
