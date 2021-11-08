@@ -15,15 +15,15 @@ class ScaleOuter {
         this.scrollY = 0;
         this.zoom = 1;
 
-        if (CheckScaleMode(scene)) {
-            this.boot();
-        }
+        this.boot();
     }
 
     boot() {
         var scene = this.scene;
-        scene.scale.on('resize', this.scale, this);
-        scene.events.once('preupdate', this.onFirstTick, this);  // Scale manually at beginning
+        if (CheckScaleMode(scene)) {
+            scene.scale.on('resize', this.scale, this);
+            scene.events.once('preupdate', this.onFirstTick, this);
+        }
     }
 
     destroy() {
@@ -66,17 +66,13 @@ class ScaleOuter {
 
     scale() {
         GetScaleOutCameraParameters(this.scene, this);
-        this.setScaleCameraParameters();
-        return this;
-    }
-
-    setScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
             camera.zoomX = this.zoom;
             camera.zoomY = this.zoom;
             camera.scrollX = this.scrollX;
             camera.scrollY = this.scrollY;
         }, this);
+        return this;
     }
 }
 

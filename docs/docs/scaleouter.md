@@ -111,3 +111,12 @@ Invoke `scene.rexScaleOuter.destroy()` under `scene.create() { ... }`.
     ```javascript
     var outerViewport = scene.rexScaleOuter.outerViewport;
     ```
+
+### Scale in create stage
+
+```javascript
+scene.rexScaleOuter.scale();
+```
+
+!!! note 
+    `'resize'` event of scale manager won't be fired in create stage

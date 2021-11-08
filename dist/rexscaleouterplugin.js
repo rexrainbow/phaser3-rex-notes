@@ -222,18 +222,18 @@
       this.scrollX = 0;
       this.scrollY = 0;
       this.zoom = 1;
-
-      if (CheckScaleMode(scene)) {
-        this.boot();
-      }
+      this.boot();
     }
 
     _createClass(ScaleOuter, [{
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-        scene.scale.on('resize', this.scale, this);
-        scene.events.once('preupdate', this.onFirstTick, this); // Scale manually at beginning
+
+        if (CheckScaleMode(scene)) {
+          scene.scale.on('resize', this.scale, this);
+          scene.events.once('preupdate', this.onFirstTick, this);
+        }
       }
     }, {
       key: "destroy",
@@ -283,18 +283,13 @@
       key: "scale",
       value: function scale() {
         GetScaleOutCameraParameters(this.scene, this);
-        this.setScaleCameraParameters();
-        return this;
-      }
-    }, {
-      key: "setScaleCameraParameters",
-      value: function setScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
           camera.zoomX = this.zoom;
           camera.zoomY = this.zoom;
           camera.scrollX = this.scrollX;
           camera.scrollY = this.scrollY;
         }, this);
+        return this;
       }
     }]);
 
@@ -334,6 +329,17 @@
       key: "add",
       value: function add(camera) {
         this.scaleOuter.add(camera);
+        return this;
+      }
+    }, {
+      key: "scale",
+      value: function scale() {
+        if (this.scaleOuter.cameras.size === 0) {
+          // Add default camera
+          this.add(this.scene.cameras.main);
+        }
+
+        this.scaleOuter.scale();
         return this;
       }
     }, {
