@@ -7388,6 +7388,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-default-value" class="md-nav__link">
+    Get default value
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7619,6 +7626,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-default-value" class="md-nav__link">
+    Get default value
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7717,16 +7731,16 @@
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLocalStorageData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLocalStorageData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="c1">// name: &#39;&#39;,</span>
     <span class="c1">// load: true,</span>
     <span class="c1">// default: undefined,</span>
     <span class="c1">// reset: false</span>
 <span class="p">});</span>
+<span class="c1">// var data = scene.plugins.get(&#39;rexLocalStorageData&#39;).add(parent, config);</span>
 <span class="c1">// var data = scene.plugins.get(&#39;rexRData&#39;).add(parent, eventEmitter, config);</span>
 </code></pre></div>
 <ul>
-<li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
 <li><code>name</code> : Prefix of key in local storage.</li>
 <li><code>load</code> :<ul>
 <li><code>true</code> : Load data from local storage. Default behavior.</li>
@@ -7741,6 +7755,7 @@
 <li><code>true</code> : Rest all data to default values (<code>default</code>). </li>
 </ul>
 </li>
+<li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
 <li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.</li>
 </ul>
 <h3 id="load">Load<a class="headerlink" href="#load" title="Permanent link">&para;</a></h3>
@@ -7765,6 +7780,9 @@
 <p>See <a href="../datamanager/">built-in data manager</a>.</p>
 <h4 id="reserved-keys">Reserved keys<a class="headerlink" href="#reserved-keys" title="Permanent link">&para;</a></h4>
 <p><code>'__keys__'</code> is used internally by this plugin.</p>
+<h3 id="get-default-value">Get default value<a class="headerlink" href="#get-default-value" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">getDefaultValue</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div>
                 
               
               

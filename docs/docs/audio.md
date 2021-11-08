@@ -89,6 +89,18 @@ scene.sound.play(key);
 
 Sound instance will be destroyed when playback ends.
 
+```javascript
+scene.sound.play(key, config);
+```
+
+Equal to 
+
+```javascript
+var sound = scene.sound.add(key);
+sound.play(config);
+```
+
+
 ### Sound instance
 
 #### Create sound instance

@@ -8242,6 +8242,12 @@
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div>
 <p>Sound instance will be destroyed when playback ends.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
+<p>Equal to </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sound</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</code></pre></div>
 <h3 id="sound-instance">Sound instance<a class="headerlink" href="#sound-instance" title="Permanent link">&para;</a></h3>
 <h4 id="create-sound-instance">Create sound instance<a class="headerlink" href="#create-sound-instance" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
