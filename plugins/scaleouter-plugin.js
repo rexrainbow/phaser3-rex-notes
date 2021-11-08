@@ -33,6 +33,14 @@ class ScaleOuterPlugin extends Phaser.Plugins.ScenePlugin {
     get zoom() {
         return this.scaleOuter.zoom;
     }
+
+    get innerViewport() {
+        return this.scaleOuter.innerViewport;
+    }
+
+    get outerViewport() {
+        return this.scaleOuter.outerViewport;
+    }
 }
 
 export default ScaleOuterPlugin;

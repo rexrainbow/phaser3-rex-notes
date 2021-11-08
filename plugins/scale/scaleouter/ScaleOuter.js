@@ -1,5 +1,7 @@
 import CheckScaleMode from './CheckScaleMode.js';
 import GetScaleOutCameraParameters from './GetScaleOuterCameraParameters.js';
+import GetInnerViewport from './GetInnerViewport.js';
+import GetOuterViewport from './GetOuterViewport.js';
 
 const SetStruct = Phaser.Structs.Set;
 
@@ -12,6 +14,8 @@ class ScaleOuter {
         this.scrollX = 0;
         this.scrollY = 0;
         this.zoom = 1;
+        this.innerViewport = GetInnerViewport(this);
+        this.outerViewport;
 
         if (CheckScaleMode(scene)) {
             this.boot();
@@ -21,24 +25,22 @@ class ScaleOuter {
     boot() {
         var scene = this.scene;
         scene.scale.on('resize', this.scale, this);
-        // Scale manually at beginning
-        scene.events.once('preupdate', this.onFirstTick, this);
-
-        scene.events.on('prerender', this.addScaleCameraParameters, this);
-        scene.events.on('render', this.removeScaleCameraParameters, this);
+        scene.events.once('preupdate', this.onFirstTick, this);  // Scale manually at beginning
     }
 
     destroy() {
-        var scene = this.scene;
-        scene.scale.off('resize', this.scale, this);
-        scene.events.off('preupdate', this.onFirstTick, this);
-
-        scene.events.off('prerender', this.addScaleCameraParameters, this);
-        scene.events.off('render', this.removeScaleCameraParameters, this);
+        this.stop();
 
         this.cameras.clear();
         this.cameras = undefined;
         this.scene = undefined;
+    }
+
+    stop() {
+        var scene = this.scene;
+        scene.scale.off('resize', this.scale, this);
+        scene.events.off('preupdate', this.onFirstTick, this);
+        return this;
     }
 
     add(camera) {
@@ -53,27 +55,22 @@ class ScaleOuter {
             // Add default camera
             this.add(this.scene.cameras.main);
         }
+        this.scale();
     }
 
     scale() {
         GetScaleOutCameraParameters(this.scene, this);
+        this.setScaleCameraParameters();
+        this.outerViewport = GetOuterViewport(this, this.outerViewport);
+        return this;
     }
 
-    addScaleCameraParameters() {
+    setScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
-            camera.zoomX *= this.zoom;
-            camera.zoomY *= this.zoom;
-            camera.scrollX += this.scrollX;
-            camera.scrollY += this.scrollY;
-        }, this);
-    }
-
-    removeScaleCameraParameters() {
-        this.cameras.iterate(function (camera, index) {
-            camera.zoomX /= this.zoom;
-            camera.zoomY /= this.zoom;
-            camera.scrollX -= this.scrollX;
-            camera.scrollY -= this.scrollY;
+            camera.zoomX = this.zoom;
+            camera.zoomY = this.zoom;
+            camera.scrollX = this.scrollX;
+            camera.scrollY = this.scrollY;
         }, this);
     }
 }

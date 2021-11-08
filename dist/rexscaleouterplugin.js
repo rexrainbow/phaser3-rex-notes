@@ -179,6 +179,37 @@
     return out;
   };
 
+  var Rectangle$1 = Phaser.Geom.Rectangle;
+
+  var GetInnerViewport = function GetInnerViewport(scaleOuter, out) {
+    if (out === undefined) {
+      out = new Rectangle$1();
+    }
+
+    var gameConfig = scaleOuter.scene.game.config;
+    var width = gameConfig.width,
+        height = gameConfig.height;
+    out.setTo(0, 0, width, height);
+    return out;
+  };
+
+  var Rectangle = Phaser.Geom.Rectangle;
+
+  var GetOuterViewport = function GetOuterViewport(scaleOuter, out) {
+    if (out === undefined) {
+      out = new Rectangle();
+    }
+
+    var scale = scaleOuter.zoom;
+    var displaySize = scaleOuter.scene.scale.displaySize;
+    out.width = displaySize.width / scale;
+    out.height = displaySize.height / scale;
+    var gameConfig = scaleOuter.scene.game.config;
+    out.centerX = gameConfig.width / 2;
+    out.centerY = gameConfig.height / 2;
+    return out;
+  };
+
   var SetStruct = Phaser.Structs.Set;
 
   var ScaleOuter = /*#__PURE__*/function () {
@@ -191,6 +222,8 @@
       this.scrollX = 0;
       this.scrollY = 0;
       this.zoom = 1;
+      this.innerViewport = GetInnerViewport(this);
+      this.outerViewport;
 
       if (CheckScaleMode(scene)) {
         this.boot();
@@ -201,23 +234,24 @@
       key: "boot",
       value: function boot() {
         var scene = this.scene;
-        scene.scale.on('resize', this.scale, this); // Scale manually at beginning
-
-        scene.events.once('preupdate', this.onFirstTick, this);
-        scene.events.on('prerender', this.addScaleCameraParameters, this);
-        scene.events.on('render', this.removeScaleCameraParameters, this);
+        scene.scale.on('resize', this.scale, this);
+        scene.events.once('preupdate', this.onFirstTick, this); // Scale manually at beginning
       }
     }, {
       key: "destroy",
       value: function destroy() {
-        var scene = this.scene;
-        scene.scale.off('resize', this.scale, this);
-        scene.events.off('preupdate', this.onFirstTick, this);
-        scene.events.off('prerender', this.addScaleCameraParameters, this);
-        scene.events.off('render', this.removeScaleCameraParameters, this);
+        this.stop();
         this.cameras.clear();
         this.cameras = undefined;
         this.scene = undefined;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        var scene = this.scene;
+        scene.scale.off('resize', this.scale, this);
+        scene.events.off('preupdate', this.onFirstTick, this);
+        return this;
       }
     }, {
       key: "add",
@@ -234,30 +268,25 @@
           // Add default camera
           this.add(this.scene.cameras.main);
         }
+
+        this.scale();
       }
     }, {
       key: "scale",
       value: function scale() {
         GetScaleOutCameraParameters(this.scene, this);
+        this.setScaleCameraParameters();
+        this.outerViewport = GetOuterViewport(this, this.outerViewport);
+        return this;
       }
     }, {
-      key: "addScaleCameraParameters",
-      value: function addScaleCameraParameters() {
+      key: "setScaleCameraParameters",
+      value: function setScaleCameraParameters() {
         this.cameras.iterate(function (camera, index) {
-          camera.zoomX *= this.zoom;
-          camera.zoomY *= this.zoom;
-          camera.scrollX += this.scrollX;
-          camera.scrollY += this.scrollY;
-        }, this);
-      }
-    }, {
-      key: "removeScaleCameraParameters",
-      value: function removeScaleCameraParameters() {
-        this.cameras.iterate(function (camera, index) {
-          camera.zoomX /= this.zoom;
-          camera.zoomY /= this.zoom;
-          camera.scrollX -= this.scrollX;
-          camera.scrollY -= this.scrollY;
+          camera.zoomX = this.zoom;
+          camera.zoomY = this.zoom;
+          camera.scrollX = this.scrollX;
+          camera.scrollY = this.scrollY;
         }, this);
       }
     }]);
@@ -314,6 +343,16 @@
       key: "zoom",
       get: function get() {
         return this.scaleOuter.zoom;
+      }
+    }, {
+      key: "innerViewport",
+      get: function get() {
+        return this.scaleOuter.innerViewport;
+      }
+    }, {
+      key: "outerViewport",
+      get: function get() {
+        return this.scaleOuter.outerViewport;
       }
     }]);
 
