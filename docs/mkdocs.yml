@@ -8,9 +8,6 @@ nav:
     - Scene:
         - Scene: scene.md
         - Scene manager: scenemanager.md
-        - Scale:
-            - Scale manager: scalemanager.md
-            - Scale outer: scaleouter.md
     - Full screen: fullscreen.md
     - Orientation: orientation.md
     - Snapshot: snapshot.md
