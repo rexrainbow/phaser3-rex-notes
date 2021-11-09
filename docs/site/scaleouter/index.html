@@ -526,6 +526,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-instance" class="md-nav__link">
+    Remove instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-camera" class="md-nav__link">
     Add camera
   </a>
@@ -533,8 +540,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-instance" class="md-nav__link">
-    Remove instance
+  <a href="#viewport" class="md-nav__link">
+    Viewport
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-in-create-stage" class="md-nav__link">
+    Scale in create stage
   </a>
   
 </li>
@@ -7596,6 +7610,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#remove-instance" class="md-nav__link">
+    Remove instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-camera" class="md-nav__link">
     Add camera
   </a>
@@ -7603,8 +7624,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-instance" class="md-nav__link">
-    Remove instance
+  <a href="#viewport" class="md-nav__link">
+    Viewport
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-in-create-stage" class="md-nav__link">
+    Scale in create stage
   </a>
   
 </li>
@@ -7641,6 +7669,7 @@
 </ul>
 <h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
 <ul>
+<li><a href="https://codepen.io/rexrainbow/pen/MWvGvbR">Viewport</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/ExvPaqY">Static camera</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/powXPBq">Tween camera</a></li>
 </ul>
@@ -7708,6 +7737,8 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <p>ScaleOuter plugin is a scene plugin, which created as a member of scene (<code>scene.rexScaleOuter</code>) 
 for each scene. It does not have to create other scale outer instance.</p>
+<h3 id="remove-instance">Remove instance<a class="headerlink" href="#remove-instance" title="Permanent link">&para;</a></h3>
+<p>Invoke <code>scene.rexScaleOuter.destroy()</code> under <code>scene.create() { ... }</code>.</p>
 <h3 id="add-camera">Add camera<a class="headerlink" href="#add-camera" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add camera manually, under <code>scene.create() { ... }</code>
@@ -7715,8 +7746,22 @@ for each scene. It does not have to create other scale outer instance.</p>
 </code></pre></div></li>
 <li>Scale outer will control main camera (<code>scene.cameras.main</code>) if no camera added.</li>
 </ul>
-<h3 id="remove-instance">Remove instance<a class="headerlink" href="#remove-instance" title="Permanent link">&para;</a></h3>
-<p>Invoke <code>scene.rexScaleOuter.destroy()</code> under <code>scene.create() { ... }</code>.</p>
+<h3 id="viewport">Viewport<a class="headerlink" href="#viewport" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inner viewport, a <a href="../geom-rectangle/">recangle object</a>, for area of default size in game config after camera zoom/scroll.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">innerViewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">innerViewport</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Outer viewport, a <a href="../geom-rectangle/">recangle object</a>, for the visible area after camera zoom/scroll.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">outerViewport</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">outerViewport</span><span class="p">;</span>
+</code></pre></div></li>
+</ul>
+<h3 id="scale-in-create-stage">Scale in create stage<a class="headerlink" href="#scale-in-create-stage" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">rexScaleOuter</span><span class="p">.</span><span class="nx">scale</span><span class="p">();</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>'resize'</code> event of scale manager won't be fired in create stage</p>
+</div>
                 
               
               
