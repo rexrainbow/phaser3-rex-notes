@@ -104,6 +104,11 @@ var table = scene.rexUI.add.gridTable({
         },
         interactive: true,
         reuseCellContainer: false,
+
+        // click: undefined,
+        // tap: undefined,
+        // press: undefined,
+        // swipe: undefined,
     },
 
     slider: {
@@ -210,10 +215,18 @@ var table = scene.rexUI.add.gridTable({
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `false` : No mask.
-    - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click). Default value is `true`.
     - `table.reuseCellContainer` : 
         - `true` : Reuse cell container when creating new cell container. 
         - `false` : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.
+    - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click). Default value is `true`.
+    - `table.click` : [Configuration of cell-click behavior](button.md#create-instance), if `table.interactive` is `true`.
+        - `undefined` : Use default click behavior.
+    - `table.tap` : [Configuration of cell-tap behavior](gesture-tap.md#create-instance), if `table.interactive` is `true`.
+        - `undefined` : Use default tap behavior.
+    - `table.press` : [Configuration of cell-press behavior](gesture-press.md#create-instance), if `table.interactive` is `true`.
+        - `undefined` : Use default press behavior.
+    - `table.swipe` : [Configuration of cell-swipe behavior](gesture-swipe.md#create-instance), if `table.interactive` is `true`.
+        - `undefined` : Use default swipe behavior.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.

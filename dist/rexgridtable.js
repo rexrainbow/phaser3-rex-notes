@@ -10535,7 +10535,7 @@
   var GetValue$a = Phaser.Utils.Objects.GetValue;
 
   var ClickCell = function ClickCell(table, tableConfig) {
-    var buttonConfig = GetValue$a(tableConfig, 'button', undefined);
+    var buttonConfig = GetValue$a(tableConfig, 'click', undefined);
 
     if (buttonConfig === false) {
       return;

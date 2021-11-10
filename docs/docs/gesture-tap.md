@@ -75,7 +75,7 @@ Get tap/multi-taps events of a game object.
 
 ### Create instance
 
-- Pan input
+- Tap input
     ```javascript
     var tap = scene.rexGestures.add.tap({
         // enable: true,
@@ -104,7 +104,7 @@ Get tap/multi-taps events of a game object.
         - `undefined` : Don't check taps count.
     - `maxTaps` : Fire `tap` event only when taps count is less than this value.
         - `undefined` : Don't check taps count.
-- Pan behavior of game object
+- Tap behavior of game object
     ```javascript
     var tap = scene.rexGestures.add.tap(gameObject, {
         // enable: true,

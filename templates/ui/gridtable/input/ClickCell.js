@@ -4,7 +4,7 @@ import EmitCellEvent from './EmitCellEvent.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ClickCell = function (table, tableConfig) {
-    var buttonConfig = GetValue(tableConfig, 'button', undefined);
+    var buttonConfig = GetValue(tableConfig, 'click', undefined);
     if (buttonConfig === false) {
         return;
     } else if (buttonConfig === undefined) {
