@@ -1,4 +1,5 @@
 import 'phaser';
+import AddDataMonitor from '../../plugins/utils/proxy/DataMonitor.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,6 +12,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var EE = new Phaser.Events.EventEmitter();
+        EE
+            .on('set-c.*', function (prop, value) {
+                console.log(prop, value);
+            })
+            .on('set-c.a', function (value) {
+                console.log('a', value);
+            })
+
+        var data = { a: 10, b: 20, c: { a: 10, b: 20 } };
+        data = AddDataMonitor(data, EE);
+        data.c.a += 30;
     }
 
     update() {
