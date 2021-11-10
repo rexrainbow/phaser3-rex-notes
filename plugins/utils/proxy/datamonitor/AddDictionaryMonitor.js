@@ -1,6 +1,6 @@
 import FireSetValueEvents from './FireSetValueEvents.js';
 
-var AddDictionaryMonitor = function (data, eventEmitter, prefix) {
+var AddDictionaryMonitor = function (eventEmitter, data, prefix) {
     return new Proxy(data, {
         set(target, prop, value) {
             var prevValue = Reflect.get(target, prop);

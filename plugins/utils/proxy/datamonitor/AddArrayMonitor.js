@@ -1,5 +1,5 @@
 // TODO
-var AddArrayMonitor = function (data, eventEmitter, prefix) {
+var AddArrayMonitor = function (eventEmitter, data, prefix) {
     return new Proxy(data, {
         set(target, prop, value) {
             Reflect.set(target, prop, value);

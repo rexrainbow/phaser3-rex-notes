@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
             })
 
         var data = { a: 10, b: 20, c: { a: 10, b: 20 } };
-        data = AddDataMonitor(data, EE);
+        data = AddDataMonitor(EE, data);
         data.c.a += 30;
     }
 
