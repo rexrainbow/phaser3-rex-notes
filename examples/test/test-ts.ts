@@ -1,5 +1,5 @@
 import 'phaser';
-import AddDataMonitor from '../../plugins/utils/proxy/DataMonitor';
+import AddDataMonitor from '../../plugins/utils/proxy/datamonitor/DataMonitor';
 
 class Demo extends Phaser.Scene {
     constructor() {
