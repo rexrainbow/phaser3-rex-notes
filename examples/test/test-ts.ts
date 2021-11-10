@@ -1,8 +1,7 @@
 import 'phaser';
-import UIPlugin from '../../templates/ui/ui-plugin';
+import AddDataMonitor from '../../plugins/utils/proxy/DataMonitor';
 
 class Demo extends Phaser.Scene {
-    rexUI: UIPlugin;
     constructor() {
         super({
             key: 'examples'
@@ -13,7 +12,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var EE = new Phaser.Events.EventEmitter();
+        EE
+            .on('set-c.*', function (prop: string, value: unknown) {
+                console.log(prop, value);
+            })
+            .on('set-c.a', function (value: unknown) {
+                console.log('a', value);
+            })
 
+        var data = { a: 10, b: 20, c: { a: 10, b: 20 } };
+        data = AddDataMonitor(data, EE);
+        data.c.a += 30;
     }
 
     update() { }
@@ -28,14 +38,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: UIPlugin,
-            mapping: 'rexUI'
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
