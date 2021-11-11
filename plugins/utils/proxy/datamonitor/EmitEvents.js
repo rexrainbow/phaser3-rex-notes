@@ -1,23 +1,25 @@
-var EmitEvents = function (eventEmitter, op, prefix, property, value, prevValue) {
-    var fullPropPath = (prefix === '') ? property : `${prefix}.${property}`;
-    eventEmitter.emit(`${op}-${fullPropPath}`, value, prevValue);
+import GetPropertyPath from './GetPropertyPath.js';
 
-    var parentPath = (prefix === '') ? '*' : `${prefix}.*`
+var EmitEvents = function (eventEmitter, op, parentPath, property, value, prevValue) {
+    var propertyPath = GetPropertyPath(parentPath, property);
+    eventEmitter.emit(`${op}-${propertyPath}`, value, prevValue);
+
+    var parentPath = (parentPath === '') ? '*' : `${parentPath}.*`
     eventEmitter.emit(`${op}-${parentPath}`, property, value, prevValue);
 
-    eventEmitter.emit(`${op}`, fullPropPath, value, prevValue);
+    eventEmitter.emit(`${op}`, propertyPath, value, prevValue);
 }
 
-var EmitAddKeyEvents = function (eventEmitter, prefix, property, value) {
-    EmitEvents(eventEmitter, 'add', prefix, property, value, undefined);
+var EmitAddKeyEvents = function (eventEmitter, parentPath, property, value) {
+    EmitEvents(eventEmitter, 'add', parentPath, property, value, undefined);
 }
 
-var EmitSetValueEvents = function (eventEmitter, prefix, property, value, prevValue) {
-    EmitEvents(eventEmitter, 'set', prefix, property, value, prevValue);
+var EmitSetValueEvents = function (eventEmitter, parentPath, property, value, prevValue) {
+    EmitEvents(eventEmitter, 'set', parentPath, property, value, prevValue);
 }
 
-var EmitDeleteKeyEvents = function (eventEmitter, prefix, property) {
-    EmitEvents(eventEmitter, 'del', prefix, property, undefined, undefined);
+var EmitDeleteKeyEvents = function (eventEmitter, parentPath, property) {
+    EmitEvents(eventEmitter, 'del', parentPath, property, undefined, undefined);
 }
 
 export {

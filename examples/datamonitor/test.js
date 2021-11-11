@@ -31,17 +31,18 @@ class Demo extends Phaser.Scene {
             })
 
         var data = {
-            // a: 10,
-            // b: 20,
+            a: 10,
+            b: 20,
             c: { a: 10, b: 20 },
             d: [1, 2, 3]
         };
         data = AddDataMonitor(EE, data);
 
+        // data.a += 10;
         // data.c.a += 30;
-        data.e = 100;
-        data.d.shift();
-        console.log(JSON.stringify(data.d));
+        // data.e = 100;
+        // data.d.shift();
+        // console.log(JSON.stringify(data.d));
     }
 
     update() {
