@@ -1,8 +1,11 @@
 import AddDictionaryMonitor from './AddDictionaryMonitor.js';
 import AddArrayMonitor from './AddArrayMonitor.js';
-import FireSetValueEvents from './FireSetValueEvents.js';
+import FireAddKeyEvents from './events/FireAddKeyEvents.js';
 
 var AddDataMonitor = function (eventEmitter, data) {
+    if (data === undefined) {
+        data = {};
+    }
     return AddMonitor(eventEmitter, data, '');
 }
 
@@ -20,7 +23,7 @@ var AddMonitor = function (eventEmitter, data, prefix) {
             var childPrefix = (prefix === '') ? key : `${prefix}.${key}`;
             monitor[key] = AddMonitor(eventEmitter, child, childPrefix);
         } else {
-            FireSetValueEvents(eventEmitter, prefix, key, child, undefined);
+            FireAddKeyEvents(eventEmitter, prefix, key, child, undefined);
         }
     }
 

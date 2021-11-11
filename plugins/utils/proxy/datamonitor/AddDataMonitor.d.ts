@@ -1,5 +1,5 @@
 export default function AddDataMonitor<T>(
     eventEmitter: Phaser.Events.EventEmitter,
-    data: T,
+    data?: T,
 ): T;
 
