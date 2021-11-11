@@ -7863,6 +7863,11 @@
         <span class="p">},</span>
         <span class="nx">interactive</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">reuseCellContainer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+        <span class="c1">// click: undefined,</span>
+        <span class="c1">// tap: undefined,</span>
+        <span class="c1">// press: undefined,</span>
+        <span class="c1">// swipe: undefined,</span>
     <span class="p">},</span>
 
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
@@ -7991,10 +7996,26 @@
 <li><code>false</code> : No mask.</li>
 </ul>
 </li>
-<li><code>table.interactive</code> : Set <code>true</code> to install touch events (tap/press/over/out/click). Default value is <code>true</code>.</li>
 <li><code>table.reuseCellContainer</code> : <ul>
 <li><code>true</code> : Reuse cell container when creating new cell container. </li>
 <li><code>false</code> : Destory cell container when cell is invisible, create new cell container when cell is visible. Default behavior.</li>
+</ul>
+</li>
+<li><code>table.interactive</code> : Set <code>true</code> to install touch events (tap/press/over/out/click). Default value is <code>true</code>.</li>
+<li><code>table.click</code> : <a href="../button/#create-instance">Configuration of cell-click behavior</a>, if <code>table.interactive</code> is <code>true</code>.<ul>
+<li><code>undefined</code> : Use default click behavior.</li>
+</ul>
+</li>
+<li><code>table.tap</code> : <a href="../gesture-tap/#create-instance">Configuration of cell-tap behavior</a>, if <code>table.interactive</code> is <code>true</code>.<ul>
+<li><code>undefined</code> : Use default tap behavior.</li>
+</ul>
+</li>
+<li><code>table.press</code> : <a href="../gesture-press/#create-instance">Configuration of cell-press behavior</a>, if <code>table.interactive</code> is <code>true</code>.<ul>
+<li><code>undefined</code> : Use default press behavior.</li>
+</ul>
+</li>
+<li><code>table.swipe</code> : <a href="../gesture-swipe/#create-instance">Configuration of cell-swipe behavior</a>, if <code>table.interactive</code> is <code>true</code>.<ul>
+<li><code>undefined</code> : Use default swipe behavior.</li>
 </ul>
 </li>
 </ul>
