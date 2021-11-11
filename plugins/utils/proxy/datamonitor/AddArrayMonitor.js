@@ -1,7 +1,5 @@
-import FireSetValueEvents from './events/FireSetValueEvents.js';
-import FireDeleteKeyEvents from './events/FireDeleteKeyEvents.js';
+import { EmitSetValueEvents, EmitDeleteKeyEvents } from './EmitEvents.js';
 
-// TODO
 var AddArrayMonitor = function (eventEmitter, data, prefix) {
     return new Proxy(data, {
         set(target, property, value) {
@@ -11,14 +9,14 @@ var AddArrayMonitor = function (eventEmitter, data, prefix) {
 
             var prevValue = Reflect.get(target, property);
             Reflect.set(target, property, value);
-            FireSetValueEvents(eventEmitter, prefix, property, value, prevValue);
+            EmitSetValueEvents(eventEmitter, prefix, property, value, prevValue);
             return true;
         },
 
         deleteProperty(target, property) {
             Reflect.deleteProperty(target, property);
             target.splice(property, 1);
-            FireDeleteKeyEvents(eventEmitter, prefix, property);
+            EmitDeleteKeyEvents(eventEmitter, prefix, property);
             return true;
         }
     });

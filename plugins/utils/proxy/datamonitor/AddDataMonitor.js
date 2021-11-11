@@ -1,6 +1,6 @@
 import AddDictionaryMonitor from './AddDictionaryMonitor.js';
 import AddArrayMonitor from './AddArrayMonitor.js';
-import FireAddKeyEvents from './events/FireAddKeyEvents.js';
+import { EmitAddKeyEvents } from './EmitEvents.js';
 
 var AddDataMonitor = function (eventEmitter, data) {
     if (data === undefined) {
@@ -23,7 +23,7 @@ var AddMonitor = function (eventEmitter, data, prefix) {
             var childPrefix = (prefix === '') ? key : `${prefix}.${key}`;
             monitor[key] = AddMonitor(eventEmitter, child, childPrefix);
         } else {
-            FireAddKeyEvents(eventEmitter, prefix, key, child, undefined);
+            EmitAddKeyEvents(eventEmitter, prefix, key, child, undefined);
         }
     }
 
