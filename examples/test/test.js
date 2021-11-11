@@ -20,18 +20,20 @@ class Demo extends Phaser.Scene {
             // .on('set-c.*', function (prop, value) {
             //     console.log(prop, value);
             // })
-            .on('set-c.a', function (value) {
-                console.log('a', value);
+            .on('set-d.*', function (prop, value) {
+                console.log(`d[${prop}]=${value}`);
             })
 
         var data = {
             a: 10,
             b: 20,
-            c: { a: 10, b: 20 }
+            c: { a: 10, b: 20 },
+            d: []
         };
         data = AddDataMonitor(EE, data);
 
-        data.c.a += 30;
+        // data.c.a += 30;
+        data.d.push(3);
     }
 
     update() {
