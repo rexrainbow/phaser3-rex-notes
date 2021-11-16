@@ -5,6 +5,7 @@ import CanvasText from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';
 import CONST from './const.js';
 import ImageManager from '../../../utils/texture/imagemanager/ImageManager.js';
+import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const AddToDOM = Phaser.DOM.AddToDOM;
@@ -562,6 +563,23 @@ class Text extends GameObject {
 
     measureTextMargins(testString, out) {
         return MeasureTextMargins(this.style, testString, out);
+    }
+
+    generateTexture(key, x, y, width, height) {
+        var srcCanvas = this.canvas;
+        if (width === undefined) {
+            width = srcCanvas.width;
+        } else {
+            width *= this.resolution;
+        }
+        if (height === undefined) {
+            height = srcCanvas.height;
+        } else {
+            height *= this.resolution;
+        }
+
+        CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
+        return this;
     }
 }
 

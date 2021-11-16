@@ -2801,6 +2801,53 @@
   };
   Object.assign(ImageManager.prototype, methods);
 
+  var CopyCanvasToTexture = function CopyCanvasToTexture(scene, srcCanvas, key, x, y, width, height) {
+    var textures = scene.textures;
+    var renderer = scene.renderer;
+
+    if (x === undefined) {
+      x = 0;
+    }
+
+    if (y === undefined) {
+      y = 0;
+    }
+
+    if (width === undefined) {
+      width = srcCanvas.width;
+    }
+
+    if (height === undefined) {
+      height = srcCanvas.height;
+    }
+
+    var texture;
+
+    if (textures.exists(key)) {
+      texture = textures.get(key);
+    } else {
+      texture = textures.createCanvas(key, width, height);
+    }
+
+    var destCanvas = texture.getSourceImage();
+
+    if (destCanvas.width !== width) {
+      destCanvas.width = width;
+    }
+
+    if (destCanvas.height !== height) {
+      destCanvas.height = height;
+    }
+
+    var destCtx = destCanvas.getContext('2d');
+    destCtx.clearRect(0, 0, width, height);
+    destCtx.drawImage(srcCanvas, x, y, width, height);
+
+    if (renderer.gl && texture) {
+      renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
+    }
+  };
+
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var AddToDOM = Phaser.DOM.AddToDOM;
   var CanvasPool = Phaser.Display.Canvas.CanvasPool;
@@ -3393,6 +3440,26 @@
       key: "measureTextMargins",
       value: function measureTextMargins(testString, out) {
         return MeasureTextMargins(this.style, testString, out);
+      }
+    }, {
+      key: "generateTexture",
+      value: function generateTexture(key, x, y, width, height) {
+        var srcCanvas = this.canvas;
+
+        if (width === undefined) {
+          width = srcCanvas.width;
+        } else {
+          width *= this.resolution;
+        }
+
+        if (height === undefined) {
+          height = srcCanvas.height;
+        } else {
+          height *= this.resolution;
+        }
+
+        CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
+        return this;
       }
     }]);
 

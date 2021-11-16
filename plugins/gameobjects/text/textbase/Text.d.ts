@@ -255,6 +255,12 @@ declare class Text extends CanvasGameObjectBase {
         font: Text.FontConfigType
     ): this;
 
+    generateTexture(
+        key: string,
+        x?: number, y?: number,
+        width?: number, height?: number
+    ): this;
+
     style: {
         color: string | null,
         stroke: string | null,

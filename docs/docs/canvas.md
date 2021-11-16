@@ -166,7 +166,8 @@ var canvas = scene.make.rexCanvas({
 
 - Save canvas to texuture
     ```javascript
-    canvas.generateTexture(key, x, y, width, height);
+    canvas.generateTexture(key);
+    // canvas.generateTexture(key, x, y, width, height);
     ```
 - Copy canvas from texture
     ```javascript

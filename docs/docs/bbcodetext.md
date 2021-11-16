@@ -602,3 +602,10 @@ Set the test string to use when measuring the font.
 ```javascript
 txt.setTestString(text);
 ```
+
+### Save texture
+
+```javascript
+txt.generateTexture(key);
+// txt.generateTexture(key, x, y, width, height);
+```

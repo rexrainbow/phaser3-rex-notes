@@ -1,3 +1,5 @@
+import CopyCanvasToTexture from '../../../utils/texture/CopyCanvasToTexture.js';
+
 export default {
     updateTexture(callback, scope) {
         if (callback) {
@@ -27,51 +29,18 @@ export default {
 
     generateTexture(key, x, y, width, height) {
         var srcCanvas = this.canvas;
-        var sys = this.scene.sys;
-        var renderer = sys.game.renderer;
-        var texture;
-
-        if (x === undefined) {
-            x = 0;
-        }
-
-        if (y === undefined) {
-            y = 0;
-        }
-
         if (width === undefined) {
             width = srcCanvas.width;
         } else {
             width *= this.resolution;
         }
-
         if (height === undefined) {
             height = srcCanvas.height;
         } else {
             height *= this.resolution;
         }
 
-
-        if (sys.textures.exists(key)) {
-            texture = sys.textures.get(key);
-        } else {
-            texture = sys.textures.createCanvas(key, width, height);
-        }
-
-        var destCanvas = texture.getSourceImage();
-        if (destCanvas.width !== width) {
-            destCanvas.width = width;
-        }
-        if (destCanvas.height !== height) {
-            destCanvas.height = height;
-        }
-
-        var destCtx = destCanvas.getContext('2d');
-        destCtx.clearRect(0, 0, width, height);
-        destCtx.drawImage(srcCanvas, x, y, width, height);
-        if (renderer.gl && texture) {
-            renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
-        }
+        CopyCanvasToTexture(this.scene, srcCanvas, key, x, y, width, height);
 
         return this;
     },
