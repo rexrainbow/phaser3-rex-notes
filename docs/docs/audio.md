@@ -42,6 +42,7 @@ var game = new Phaser.Game(config);
 
 ```javascript
 scene.load.audio(key, urls);  // urls: an array of file url
+// scene.load.audio(key, urls, {instances: 1}, xhrSettings);
 ```
 
 See [loader](loader.md#audio)
