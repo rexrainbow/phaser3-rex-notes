@@ -613,6 +613,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-file-complete-event" class="md-nav__link">
+    Load file complete event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-path" class="md-nav__link">
     Set path
   </a>
@@ -7732,6 +7739,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-file-complete-event" class="md-nav__link">
+    Load file complete event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-path" class="md-nav__link">
     Set path
   </a>
@@ -8007,6 +8021,11 @@
 <span class="c1">// scene.load.image(config); // config: {key, url}</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>
+</code></pre></div>
+<h3 id="load-file-complete-event">Load file complete event<a class="headerlink" href="#load-file-complete-event" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;filecomplete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{});</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;filecomplete-&#39;</span> <span class="o">+</span> <span class="nx">type</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{});</span>
 </code></pre></div>
 <h3 id="set-path">Set path<a class="headerlink" href="#set-path" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">loader</span><span class="p">.</span><span class="nx">setPath</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span>

@@ -24,6 +24,16 @@ scene.load.once('complete', callback);  // add callback of 'complete' event
 scene.load.start();                     // start loading
 ```
 
+### Load file complete event
+
+```javascript
+scene.load.on('filecomplete', function(key, type, data) {});
+```
+
+```javascript
+scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {});
+```
+
 ### Set path
 
 ```javascript
