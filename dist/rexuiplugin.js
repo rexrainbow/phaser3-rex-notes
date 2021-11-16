@@ -4681,7 +4681,6 @@
         }
 
         this.scene.sys.game.events.off('contextrestored', this.onContextRestored, this);
-        CanvasPool.remove(this.canvas);
         this.canvasText.destroy();
         this.canvasText = undefined;
 
@@ -4690,6 +4689,9 @@
 
           this._imageManager = undefined;
         }
+
+        CanvasPool.remove(this.canvas);
+        this.texture.destroy();
       }
     }, {
       key: "text",
