@@ -175,11 +175,11 @@ scene.load.animation(key, url);
 
 ```javascript
 scene.load.audio(key, urls);
-// scene.load.audio(key, urls, config, xhrSettings);
+// scene.load.audio(key, urls, {instances: 1}, xhrSettings);
 ```
 
 - `urls` : The absolute or relative URL to load the audio files from, or a blob.
-- `config` : An object containing an `instances` property for HTML5Audio. Defaults to `1`.
+- `config.instances` : Number of audio instances for HTML5Audio. Defaults to `1`.
 
 Get data from cache
 

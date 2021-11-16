@@ -8134,11 +8134,11 @@
 </code></pre></div>
 <h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
-<span class="c1">// scene.load.audio(key, urls, config, xhrSettings);</span>
+<span class="c1">// scene.load.audio(key, urls, {instances: 1}, xhrSettings);</span>
 </code></pre></div>
 <ul>
 <li><code>urls</code> : The absolute or relative URL to load the audio files from, or a blob.</li>
-<li><code>config</code> : An object containing an <code>instances</code> property for HTML5Audio. Defaults to <code>1</code>.</li>
+<li><code>config.instances</code> : Number of audio instances for HTML5Audio. Defaults to <code>1</code>.</li>
 </ul>
 <p>Get data from cache</p>
 <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">audio</span><span class="p">;</span>
