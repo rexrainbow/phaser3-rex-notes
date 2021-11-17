@@ -24524,7 +24524,7 @@
     } // Buttons is a child. Fire internal events.
 
 
-    if (this.isInternalButtons) {
+    if (this.eventEmitter !== this.parent) {
       this.parent.emit(eventName, button, index, pointer, event);
     }
 
@@ -24638,22 +24638,6 @@
     }
   };
 
-  var ButtonGroup = function ButtonGroup(config) {
-    _classCallCheck(this, ButtonGroup);
-
-    this.parent = config.parent;
-    this.eventEmitter = config.eventEmitter;
-    this.isInternalButtons = this.eventEmitter !== this.parent;
-    this.groupName = config.groupName;
-    this.clickConfig = config.clickConfig;
-    this.buttons = [];
-  };
-
-  var methods$8 = {
-    fireEvent: FireEvent
-  };
-  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, methods$8);
-
   var GetGameObjectByName = function GetGameObjectByName(children, name) {
     if (!children) {
       return null;
@@ -24694,7 +24678,8 @@
 
   var ButtonMethods$2 = {
     getButton: function getButton(index) {
-      var buttons = this.buttonGroup.buttons,
+      // buttonGroup and button-sizer have *buttons* member both
+      var buttons = this.buttons,
           button;
 
       var indexType = _typeof(index);
@@ -24721,7 +24706,8 @@
       return button;
     },
     setButtonEnable: function setButtonEnable(index, enabled) {
-      var buttons = this.buttonGroup.buttons;
+      // buttonGroup and button-sizer have *buttons* member both
+      var buttons = this.buttons;
 
       if (index === undefined || typeof index === 'boolean') {
         enabled = index;
@@ -24736,7 +24722,8 @@
       return this;
     },
     toggleButtonEnable: function toggleButtonEnable(index) {
-      var buttons = this.buttonGroup.buttons;
+      // buttonGroup and button-sizer have *buttons* member both
+      var buttons = this.buttons;
 
       if (index === undefined || typeof index === 'boolean') {
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
@@ -24757,7 +24744,9 @@
     },
     emitButtonClick: function emitButtonClick(index) {
       // index or button game object
-      this.buttonGroup.fireEvent('button.click', index);
+      // this: buttonGroup or button-sizer
+      var buttonGroup = this.buttonGroup ? this.buttonGroup : this;
+      buttonGroup.fireEvent('button.click', index);
       return this;
     },
     showButton: function showButton(index) {
@@ -24773,7 +24762,8 @@
       return this;
     },
     forEachButtton: function forEachButtton(callback, scope) {
-      var buttons = this.buttonGroup.buttons;
+      // buttonGroup and button-sizer have *buttons* member both
+      var buttons = this.buttons;
 
       for (var i = 0, cnt = buttons.length; i < cnt; i++) {
         if (scope) {
@@ -24786,6 +24776,35 @@
       return this;
     }
   };
+
+  var ButtonGroup = /*#__PURE__*/function () {
+    function ButtonGroup(config) {
+      _classCallCheck(this, ButtonGroup);
+
+      this.parent = config.parent;
+      this.eventEmitter = config.eventEmitter;
+      this.groupName = config.groupName;
+      this.clickConfig = config.clickConfig;
+      this.buttons = [];
+    }
+
+    _createClass(ButtonGroup, [{
+      key: "destroy",
+      value: function destroy() {
+        this.parent = undefined;
+        this.eventEmitter = undefined;
+        this.clickConfig = undefined;
+        this.buttons = undefined; // GameObjects will be destroyed outside
+      }
+    }]);
+
+    return ButtonGroup;
+  }();
+
+  var methods$8 = {
+    fireEvent: FireEvent
+  };
+  Object.assign(ButtonGroup.prototype, AddMethods, SetTypeMethods, ButtonMethods$2, methods$8);
 
   var GetValue$X = Phaser.Utils.Objects.GetValue;
 
@@ -24839,12 +24858,25 @@
 
       _this.addChildrenMap('background', background);
 
-      _this.addChildrenMap('buttons', _this.buttons);
+      _this.addChildrenMap('buttons', _this.buttonGroup.buttons);
 
       return _this;
     }
 
     _createClass(Buttons, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
+        }
+
+        _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
+
+        this.buttonGroup.destroy();
+        this.buttonGroup = undefined;
+      }
+    }, {
       key: "buttons",
       get: function get() {
         return this.buttonGroup.buttons;
@@ -25034,12 +25066,25 @@
 
       _this.addChildrenMap('background', background);
 
-      _this.addChildrenMap('buttons', _this.buttons);
+      _this.addChildrenMap('buttons', _this.buttonGroup.buttons);
 
       return _this;
     }
 
     _createClass(GridButtons, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
+        }
+
+        _get(_getPrototypeOf(GridButtons.prototype), "destroy", this).call(this, fromScene);
+
+        this.buttonGroup.destroy();
+        this.buttonGroup = undefined;
+      }
+    }, {
       key: "buttons",
       get: function get() {
         return this.buttonGroup.buttons;
@@ -25225,12 +25270,25 @@
 
       _this.addChildrenMap('background', background);
 
-      _this.addChildrenMap('buttons', _this.buttons);
+      _this.addChildrenMap('buttons', _this.buttonGroup.buttons);
 
       return _this;
     }
 
     _createClass(Buttons, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+          return;
+        }
+
+        _get(_getPrototypeOf(Buttons.prototype), "destroy", this).call(this, fromScene);
+
+        this.buttonGroup.destroy();
+        this.buttonGroup = undefined;
+      }
+    }, {
       key: "buttons",
       get: function get() {
         return this.buttonGroup.buttons;

@@ -3,7 +3,8 @@ import { Show, Hide, IsShown } from '../Hide.js';
 
 export default {
     getButton(index) {
-        var buttons = this.buttonGroup.buttons,
+        // buttonGroup and button-sizer have *buttons* member both
+        var buttons = this.buttons,
             button;
         var indexType = typeof (index);
         switch (indexType) {
@@ -24,7 +25,8 @@ export default {
     },
 
     setButtonEnable(index, enabled) {
-        var buttons = this.buttonGroup.buttons;
+        // buttonGroup and button-sizer have *buttons* member both
+        var buttons = this.buttons;
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             enabled = index;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
@@ -37,7 +39,8 @@ export default {
     },
 
     toggleButtonEnable(index) {
-        var buttons = this.buttonGroup.buttons;
+        // buttonGroup and button-sizer have *buttons* member both
+        var buttons = this.buttons;
         if ((index === undefined) || (typeof (index) === 'boolean')) {
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                 buttons[i]._buttonBehavior.toggleEnable();
@@ -57,7 +60,9 @@ export default {
 
     emitButtonClick(index) {
         // index or button game object
-        this.buttonGroup.fireEvent('button.click', index);
+        // this: buttonGroup or button-sizer
+        var buttonGroup = (this.buttonGroup) ? this.buttonGroup : this;
+        buttonGroup.fireEvent('button.click', index);
         return this;
     },
 
@@ -77,7 +82,8 @@ export default {
     },
 
     forEachButtton(callback, scope) {
-        var buttons = this.buttonGroup.buttons;
+        // buttonGroup and button-sizer have *buttons* member both
+        var buttons = this.buttons;
         for (var i = 0, cnt = buttons.length; i < cnt; i++) {
             if (scope) {
                 callback.call(scope, buttons[i], i, buttons);

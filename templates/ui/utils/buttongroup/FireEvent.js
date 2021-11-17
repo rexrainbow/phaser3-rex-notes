@@ -14,7 +14,7 @@ var FireEvent = function (eventName, button, pointer, event) {
     }
 
     // Buttons is a child. Fire internal events.
-    if (this.isInternalButtons) {
+    if (this.eventEmitter !== this.parent) {
         this.parent.emit(eventName, button, index, pointer, event);
     }
 

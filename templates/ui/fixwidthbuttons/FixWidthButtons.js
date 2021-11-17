@@ -45,7 +45,18 @@ class Buttons extends FixWidthSizer {
         this.buttonGroup.setType(config);
 
         this.addChildrenMap('background', background);
-        this.addChildrenMap('buttons', this.buttons);
+        this.addChildrenMap('buttons', this.buttonGroup.buttons);
+    }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+
+        super.destroy(fromScene);
+        this.buttonGroup.destroy();
+        this.buttonGroup = undefined;
     }
 
     get buttons() {
