@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer';
-import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
+import { IConfig as IConfigButtons } from '../utils/buttongroup/Buttons';
 
 
 export default FixWidthButtons;
@@ -68,5 +68,6 @@ declare class FixWidthButtons extends FixWidthSizer {
         scop?: unknown
     ): this;
 
+    readonly buttons: Phaser.GameObjects.GameObject[];
     value: unknown;
 }

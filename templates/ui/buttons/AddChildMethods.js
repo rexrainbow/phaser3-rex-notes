@@ -1,5 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import { ButtonSetInteractive } from '../utils/buttons/ButtonSetInteractive.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const SizerAdd = Sizer.prototype.add;
@@ -58,8 +57,7 @@ var Add = function (gameObject) {
 
     // Space or other game object as button
     if (isNormalGameObject) {
-        this.buttons.push(gameObject);
-        ButtonSetInteractive.call(this, gameObject, this.clickConfig);
+        this.buttonGroup.add(gameObject);
     }
 
     return this;

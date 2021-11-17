@@ -1,13 +1,11 @@
 import FixWidthSizer from '../fixwidthsizer/FixWidthSizer.js';
-import { ButtonSetInteractive } from '../utils/buttons/ButtonSetInteractive.js';
 import IsArray from '../../../plugins/utils/object/IsArray.js';
 
 const SizerAdd = FixWidthSizer.prototype.add;
 
 var Add = function (gameObject) {
     SizerAdd.call(this, gameObject);
-    this.buttons.push(gameObject);
-    ButtonSetInteractive.call(this, gameObject, this.clickConfig);
+    this.buttonGroup.add(gameObject);
     return this;
 };
 

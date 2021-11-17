@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import Sizer from '../sizer/Sizer';
-import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
+import { IConfig as IConfigButtons } from '../utils/buttongroup/Buttons';
 
 export default Buttons;
 
@@ -72,5 +72,6 @@ declare class Buttons extends Sizer {
         scop?: unknown
     ): this;
 
+    readonly buttons: Phaser.GameObjects.GameObject[];
     value: unknown;
 }

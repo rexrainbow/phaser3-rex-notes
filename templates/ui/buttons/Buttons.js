@@ -1,8 +1,8 @@
 import Sizer from '../sizer/Sizer.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
-import ButtonMethods from '../utils/buttons/ButtonMethods.js';
-import SetType from '../utils/buttons/types/SetType.js';
+import ButtonGroup from '../utils/buttongroup/ButtonGroup.js';
+import ButtonMethods from '../utils/buttongroup/ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,9 +20,12 @@ class Buttons extends Sizer {
         // Create
         super(scene, config);
         this.type = 'rexButtons';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
-        this.groupName = GetValue(config, 'groupName', undefined);
-        this.buttons = [];
+        this.buttonGroup = new ButtonGroup({
+            parent: this,
+            eventEmitter: GetValue(config, 'eventEmitter', this),
+            groupName: GetValue(config, 'groupName', undefined),
+            clickConfig: GetValue(config, 'click', undefined)
+        });
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -30,8 +33,7 @@ class Buttons extends Sizer {
 
         // Buttons properties
         this.buttonsExpand = GetValue(config, 'expand', false);
-        this.buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space        
-        this.clickConfig = GetValue(config, 'click', undefined);
+        this.buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space                
 
         if (background) {
             this.addBackground(background);
@@ -40,10 +42,27 @@ class Buttons extends Sizer {
         if (buttons) {
             this.addButtons(buttons);
         }
-        SetType.call(this, config);
+
+        this.buttonGroup.setType(config);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', this.buttons);
+    }
+
+    get buttons() {
+        return this.buttonGroup.buttons;
+    }
+
+    get groupName() {
+        return this.buttonGroup.groupName;
+    }
+
+    set groupName(value) {
+        this.buttonGroup.groupName = value;
+    }
+
+    get eventEmitter() {
+        return this.buttonGroup.eventEmitter;
     }
 }
 

@@ -1,8 +1,8 @@
 import GridSizer from '../gridsizer/GridSizer.js';
 import AddChildMethods from './AddChildMethods.js';
 import RemoveChildMethods from './RemoveChildMethods.js';
-import ButtonMethods from '../utils/buttons/ButtonMethods.js';
-import SetType from '../utils/buttons/types/SetType.js';
+import ButtonGroup from '../utils/buttongroup/ButtonGroup.js';
+import ButtonMethods from '../utils/buttongroup/ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -36,9 +36,12 @@ class GridButtons extends GridSizer {
         // Create
         super(scene, config);
         this.type = 'rexGridButtons';
-        this.eventEmitter = GetValue(config, 'eventEmitter', this);
-        this.groupName = GetValue(config, 'groupName', undefined);
-        this.buttons = [];
+        this.buttonGroup = new ButtonGroup({
+            parent: this,
+            eventEmitter: GetValue(config, 'eventEmitter', this),
+            groupName: GetValue(config, 'groupName', undefined),
+            clickConfig: GetValue(config, 'click', undefined)
+        });
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -49,7 +52,6 @@ class GridButtons extends GridSizer {
         if (typeof (space) === 'number') {
             space = { itemX: space, itemY: space };
         }
-        this.clickConfig = GetValue(config, 'click', undefined);
 
         if (background) {
             this.addBackground(background);
@@ -77,10 +79,26 @@ class GridButtons extends GridSizer {
             }
         }
 
-        SetType.call(this, config);
+        this.buttonGroup.setType(config);
 
         this.addChildrenMap('background', background);
         this.addChildrenMap('buttons', this.buttons);
+    }
+    
+    get buttons() {
+        return this.buttonGroup.buttons;
+    }
+
+    get groupName() {
+        return this.buttonGroup.groupName;
+    }
+
+    set groupName(value) {
+        this.buttonGroup.groupName = value;
+    }
+
+    get eventEmitter() {
+        return this.buttonGroup.eventEmitter;
     }
 }
 

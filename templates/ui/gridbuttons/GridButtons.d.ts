@@ -1,6 +1,6 @@
 // import * as Phaser from 'phaser';
 import GridSizer from '../gridsizer/GridSizer';
-import { IConfig as IConfigButtons } from '../utils/buttons/Buttons';
+import { IConfig as IConfigButtons } from '../utils/buttongroup/Buttons';
 
 
 export default GridButtons;
@@ -80,5 +80,6 @@ declare class GridButtons extends GridSizer {
         scop?: unknown
     ): this;
 
+    readonly buttons: Phaser.GameObjects.GameObject[];
     value: unknown;
 }
