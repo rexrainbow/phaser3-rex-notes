@@ -47,6 +47,7 @@ nav:
         - Perspective:
             - Image: perspective-image.md
             - Render texture: perspective-rendertexture.md
+            - Sprite: perspective-sprite.md
             - Card: perspective-card.md
             - Carousel: perspective-carousel.md
             - Image carousel: perspective-imagecarousel.md

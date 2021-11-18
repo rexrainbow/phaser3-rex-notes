@@ -93,6 +93,7 @@
 1. [Perspective/Image](perspective-image.md): Image with perspective rotation.
 1. [Perspective/ImageCarousel](perspective-imagecarousel.md): Display list of images.
 1. [Perspective/Render texture](perspective-rendertexture.md): Render texture with perspective rotation.
+1. [Perspective/Sprite](perspective-sprite.md): Sprite pasted on perspective-rendertexture.
 1. [Pop up](popup.md): Scale up game object.
 1. [Quest](quest.md): Question manager.
 1. [Raycaster](raycaster.md): Raycaster between obstacles.

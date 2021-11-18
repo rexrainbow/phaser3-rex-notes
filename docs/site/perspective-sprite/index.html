@@ -11,14 +11,14 @@
         <meta name="author" content="rexrainbow">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/geom-ellipse/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perspective-sprite/">
       
       <link rel="icon" href="../images/logo.svg">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
     
     
       
-        <title>Ellipse - Notes of Phaser 3</title>
+        <title>Sprite - Notes of Phaser 3</title>
       
     
     
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ellipse
+              Sprite
             
           </span>
         </div>
@@ -629,12 +629,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       
       
@@ -997,12 +999,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
       
       
       
@@ -1037,12 +1041,14 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_2" type="checkbox" id="__nav_4_3_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3_2" type="checkbox" id="__nav_4_3_2" checked>
       
       
       
@@ -1091,11 +1097,163 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../perspective-sprite/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Sprite
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Sprite
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+    <nav class="md-nav" aria-label="Install plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-sprite" class="md-nav__link">
+    Internal sprite
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal sprite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain" class="md-nav__link">
+    Chain
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart" class="md-nav__link">
+    Restart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -5244,14 +5402,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
       
       
       
@@ -5567,14 +5723,12 @@
               
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_8" type="checkbox" id="__nav_12_8" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_8" type="checkbox" id="__nav_12_8" >
       
       
       
@@ -5651,122 +5805,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Ellipse
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../geom-ellipse/" class="md-nav__link">
         Ellipse
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-shape" class="md-nav__link">
-    Create shape
-  </a>
-  
-    <nav class="md-nav" aria-label="Create shape">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#clone-shape" class="md-nav__link">
-    Clone shape
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw-on-graphics" class="md-nav__link">
-    Draw on graphics
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-properties" class="md-nav__link">
-    Set properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-properties" class="md-nav__link">
-    Get properties
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#points-shape" class="md-nav__link">
-    Point(s) &amp; shape
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#empty" class="md-nav__link">
-    Empty
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#equal" class="md-nav__link">
-    Equal
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -7538,6 +7581,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#live-demos" class="md-nav__link">
+    Live demos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -7546,16 +7596,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-shape" class="md-nav__link">
-    Create shape
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
-    <nav class="md-nav" aria-label="Create shape">
+    <nav class="md-nav" aria-label="Install plugin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#clone-shape" class="md-nav__link">
-    Clone shape
+  <a href="#load-minify-file" class="md-nav__link">
+    Load minify file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-plugin" class="md-nav__link">
+    Import plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
@@ -7566,43 +7630,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#draw-on-graphics" class="md-nav__link">
-    Draw on graphics
+  <a href="#create-instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-properties" class="md-nav__link">
-    Set properties
+  <a href="#custom-class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-properties" class="md-nav__link">
-    Get properties
+  <a href="#internal-sprite" class="md-nav__link">
+    Internal sprite
+  </a>
+  
+    <nav class="md-nav" aria-label="Internal sprite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" class="md-nav__link">
+    Play animation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#points-shape" class="md-nav__link">
-    Point(s) &amp; shape
+  <a href="#chain" class="md-nav__link">
+    Chain
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#empty" class="md-nav__link">
-    Empty
+  <a href="#stop" class="md-nav__link">
+    Stop
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#equal" class="md-nav__link">
-    Equal
+  <a href="#restart" class="md-nav__link">
+    Restart
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -7624,151 +7708,239 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/geom-ellipse.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/perspective-sprite.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  <h1>Ellipse</h1>
+                  <h1>Sprite</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Ellipse shape and methods, built-in methods of phaser.</p>
+<p>Sprite pasted on <a href="../perspective-rendertexture/">perspective-rendertexture</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Game object</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">WebGL only</p>
+<p>It only works in WebGL render mode.</p>
+</div>
+<h2 id="live-demos">Live demos<a class="headerlink" href="#live-demos" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://codepen.io/rexrainbow/pen/JjyxKLX">Play animation</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ellipse</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</code></pre></div>
-<h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">ellipse1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">ellipse0</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/perspective-sprite">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<h4 id="load-minify-file">Load minify file<a class="headerlink" href="#load-minify-file" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Fill shape
-    <div class="highlight"><pre><span></span><code><span class="c1">// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB</span>
-<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillEllipseShape</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
+<li>Load plugin (minify file) in preload stage
+    <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexperspectiveimageplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexperspectiveimageplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Stroke shape
-    <div class="highlight"><pre><span></span><code><span class="c1">// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB</span>
-<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeEllipseShape</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Negative width, height will be treated as positive width, height. i.e. <code>Math.abs(width)</code>, <code>Math.abs(height)</code></p>
-</div>
-<h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
+<h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
 <ul>
-<li>All properties
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">CopyFrom</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="nx">dest</span><span class="p">);</span>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Position
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
-<span class="nx">ellipse</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>       <span class="c1">// ellipse.x</span>
-<span class="nx">ellipse</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>        <span class="c1">// ellipse.y</span>
-<span class="c1">// ellipse.right = 0;   // ellipse.x</span>
-<span class="c1">// ellipse.bottom = 0;  // ellipse.y</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">Offset</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">);</span> <span class="c1">// ellipse.x += dx, ellipse.y += dy</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">OffsetPoint</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span> <span class="c1">// ellipse.x += point.x, ellipse.y += point.y</span>
+<li>Install plugin in <a href="../game/#configuration">configuration of game</a>
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nx">PerspectiveImagePlugin</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/perspectiveimage-plugin.js&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nb">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexPerspectiveImagePlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">PerspectiveImagePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Width, height
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
-<span class="nx">ellipse</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="get-properties">Get properties<a class="headerlink" href="#get-properties" title="Permanent link">&para;</a></h3>
+<h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Position
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+<li>Install rex plugins from npm
+    <div class="highlight"><pre><span></span><code>npm i phaser3-rex-plugins
 </code></pre></div></li>
-<li>Width, height
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+<li>Import class
+    <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PerspectiveSprite</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/perspectiveimage.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Bound
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">bound</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">GetBounds</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
-<span class="c1">// var bound = Phaser.Geom.Ellipse.GetBounds(ellipse, bound);  // push bound</span>
+<li>Add image object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">PerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">image</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+    <span class="c1">// hideCCW: true,</span>
+    <span class="c1">// gridWidth: 32,</span>
+    <span class="c1">// girdHeight: 32</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>or </p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="nx">key</span><span class="p">,</span>
+    <span class="c1">// frame: null,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+    <span class="c1">// hideCCW: true,</span>
+    <span class="c1">// gridWidth: 32,</span>
+    <span class="c1">// girdHeight: 32</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Add perspectiveimage from JSON</p>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">perspectiveimage</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+
+    <span class="nx">key</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
+    <span class="c1">// hideCCW: false,</span>
+    <span class="c1">// gridWidth: 32,</span>
+    <span class="c1">// girdHeight: 32,</span>
+
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="highlight"><pre><span></span><code><span class="kd">class</span> <span class="nx">MyPerspectiveSprite</span> <span class="k">extends</span> <span class="nx">PerspectiveSprite</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {</span>
+    <span class="c1">//     super.preUpdate(time, delta);</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
 </code></pre></div><ul>
-<li><code>bound</code> : A Rectangle shape object</li>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
 </ul>
 </li>
-<li>Area
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">Area</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Circumference
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">circumference</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">Circumference</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Type:
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span> <span class="c1">// 1</span>
-</code></pre></div></li>
-</ul>
-<h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get point at shape's edge
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">getPoint</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t : 0 ~ 1 (angle/360)</span>
-<span class="c1">// var point = ellipse.getPoint(t, point);  // modify point</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">CircumferencePoint</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in degrees</span>
-<span class="c1">// var point = Phaser.Geom.Ellipse.CircumferencePoint(ellipse, angle, point);  // modify point</span>
-</code></pre></div></li>
-<li>Get a random point inside shape
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">();</span>
-<span class="c1">// var point = ellipse.getRandomPoint(point);  // modify point</span>
-</code></pre></div></li>
-<li>Get points around shape's edge
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
-<span class="c1">// var points = ellipse.getPoints(quantity, null, points);  // push points</span>
-</code></pre></div>
-    or calculate quantity from steps
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
-<span class="c1">// var points = ellipse.getPoints(false, step, points);  // push points</span>
-</code></pre></div><ul>
-<li><code>points</code> : an array of point</li>
 </ul>
 </li>
-<li>Point is inside shape
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</code></pre></div>
-    or
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">ContainsPoint</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
-</code></pre></div></li>
-<li>Rectangle is inside shape
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">ContainsRect</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>  <span class="c1">// rect : 4 points</span>
+<li>Create instance
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyPerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="empty">Empty<a class="headerlink" href="#empty" title="Permanent link">&para;</a></h3>
+<h3 id="internal-sprite">Internal sprite<a class="headerlink" href="#internal-sprite" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">;</span>
+</code></pre></div>
 <ul>
-<li>Set empty
-    <div class="highlight"><pre><span></span><code><span class="nx">ellipse</span><span class="p">.</span><span class="nx">setEmpty</span><span class="p">();</span>     <span class="c1">// ellipse.width = 0, ellipse.height = 0</span>
-</code></pre></div></li>
-<li>Is empty
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEmpty</span> <span class="o">=</span> <span class="nx">ellipse</span><span class="p">.</span><span class="nx">isEmpty</span><span class="p">();</span>   <span class="c1">// ellipse.width &lt;= 0 || ellipse.height &lt;= 0</span>
+<li><code>sprite</code> : <a href="../sprite/">Sprite</a></li>
+</ul>
+<h4 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Play
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// sprite.play(key, ignoreIfPlaying);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Animation key string, or animation config<ul>
+<li>String key of animation</li>
+<li>Animation config, to override default config
+    <div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nx">key</span><span class="p">,</span>
+    <span class="nx">frameRate</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="p">,</span>
+    <span class="nx">delay</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="p">,</span>
+    <span class="nx">repeatDelay</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="p">,</span>
+    <span class="nx">showOnStart</span><span class="p">,</span>
+    <span class="nx">hideOnComplete</span><span class="p">,</span>
+    <span class="nx">startFrame</span><span class="p">,</span>
+    <span class="nx">timeScale</span>
+<span class="p">}</span>
 </code></pre></div></li>
 </ul>
-<h3 id="equal">Equal<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">ellipse0</span><span class="p">,</span> <span class="nx">ellipse1</span><span class="p">);</span>
+</li>
+</ul>
+</li>
+<li>Play in reverse
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playReverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// image.sprite.playReverse(key, ignoreIfPlaying);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Animation key string, or animation config</li>
+</ul>
+</li>
+<li>Play after delay
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterDelay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Animation key string, or animation config</li>
+</ul>
+</li>
+<li>Play after repeat
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterRepeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">repeatCount</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Animation key string, or animation config</li>
+</ul>
+</li>
+</ul>
+<h4 id="chain">Chain<a class="headerlink" href="#chain" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Chain next animation
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key</code> : Animation key string, or animation config</li>
+</ul>
+</li>
+<li>Chain next and next animation
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key0</span><span class="p">).</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key1</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>key0</code>, <code>key1</code> : Animation key string, or animation config</li>
+</ul>
+</li>
+</ul>
+<h4 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Immediately stop
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</code></pre></div></li>
+<li>Stop after delay
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterDelay</span><span class="p">(</span><span class="nx">delay</span><span class="p">);</span>
+</code></pre></div></li>
+<li>Stop at frame
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopOnFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
+</code></pre></div><ul>
+<li><code>frame</code> : Frame object in current animation.
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">currentAnim</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">currentAnim</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">currentAnim</span><span class="p">.</span><span class="nx">getFrameAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+</li>
+<li>Stop after repeat
+    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterRepeat</span><span class="p">(</span><span class="nx">repeatCount</span><span class="p">);</span>
+</code></pre></div></li>
+</ul>
+<h4 id="restart">Restart<a class="headerlink" href="#restart" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
+<span class="c1">// image.sprite.anims.restart(includeDelay, resetRepeats);</span>
 </code></pre></div>
-<p>Position and width, height are equal.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../perspective-rendertexture/">Perspective rendertexture</a>, <a href="../perspective-image/">Perspective image</a> game object.</p>
                 
               
               
@@ -7788,7 +7960,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../geom-point/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Point" rel="prev">
+        <a href="../perspective-rendertexture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Render texture" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -7797,20 +7969,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Point
+              Render texture
             </div>
           </div>
         </a>
       
       
         
-        <a href="../geom-triangle/" class="md-footer__link md-footer__link--next" aria-label="Next: Triangle" rel="next">
+        <a href="../perspective-card/" class="md-footer__link md-footer__link--next" aria-label="Next: Card" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Triangle
+              Card
             </div>
           </div>
           <div class="md-footer__button md-icon">
