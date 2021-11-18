@@ -26,7 +26,7 @@ class RenderTexture extends PerspectiveImage {
     destroy(fromScene) {
         super.destroy(fromScene);
 
-        this.rt.destroy(fromScene);
+        this.rt.destroy();
         this.rt = null;
     }
 }

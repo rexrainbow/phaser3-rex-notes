@@ -292,8 +292,8 @@
   };
 
   var Mesh = Phaser.GameObjects.Mesh;
-  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$c = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$6 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$d = Phaser.Utils.Objects.GetValue;
   var GenerateGridVerts = Phaser.Geom.Mesh.GenerateGridVerts;
   var RadToDeg$4 = Phaser.Math.RadToDeg;
   var DegToRad$5 = Phaser.Math.DegToRad;
@@ -310,12 +310,12 @@
 
       _classCallCheck(this, Image);
 
-      if (IsPlainObject$5(x)) {
+      if (IsPlainObject$6(x)) {
         config = x;
-        x = GetValue$c(config, 'x', 0);
-        y = GetValue$c(config, 'y', 0);
-        key = GetValue$c(config, 'key', null);
-        frame = GetValue$c(config, 'frame', null);
+        x = GetValue$d(config, 'x', 0);
+        y = GetValue$d(config, 'y', 0);
+        key = GetValue$d(config, 'key', null);
+        frame = GetValue$d(config, 'frame', null);
       }
 
       _this = _super.call(this, scene, x, y, key, frame);
@@ -327,9 +327,9 @@
 
       _this.panZ(PanZ);
 
-      _this.hideCCW = GetValue$c(config, 'hideCCW', true);
-      var girdWidth = GetValue$c(config, 'gridWidth', 32);
-      var girdHeight = GetValue$c(config, 'girdHeight', girdWidth);
+      _this.hideCCW = GetValue$d(config, 'hideCCW', true);
+      var girdWidth = GetValue$d(config, 'gridWidth', 32);
+      var girdHeight = GetValue$d(config, 'girdHeight', girdWidth);
 
       _this.resetVerts(girdWidth, girdHeight);
 
@@ -458,8 +458,8 @@
     return gameObject;
   }
 
-  var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject$4 = Phaser.GameObjects.BuildGameObject;
+  var GetAdvancedValue$3 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$5 = Phaser.GameObjects.BuildGameObject;
   function PerspectiveImageCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
@@ -469,16 +469,16 @@
       config.add = addToScene;
     }
 
-    var key = GetAdvancedValue$2(config, 'key', null);
-    var frame = GetAdvancedValue$2(config, 'frame', null);
+    var key = GetAdvancedValue$3(config, 'key', null);
+    var frame = GetAdvancedValue$3(config, 'frame', null);
     var gameObject = new Image(this.scene, 0, 0, key, frame, config);
-    BuildGameObject$4(this.scene, gameObject, config);
+    BuildGameObject$5(this.scene, gameObject, config);
     return gameObject;
   }
 
   var RT = Phaser.GameObjects.RenderTexture;
-  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
-  var GetValue$b = Phaser.Utils.Objects.GetValue;
+  var IsPlainObject$5 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$c = Phaser.Utils.Objects.GetValue;
 
   var RenderTexture = /*#__PURE__*/function (_PerspectiveImage) {
     _inherits(RenderTexture, _PerspectiveImage);
@@ -490,12 +490,12 @@
 
       _classCallCheck(this, RenderTexture);
 
-      if (IsPlainObject$4(x)) {
+      if (IsPlainObject$5(x)) {
         config = x;
-        x = GetValue$b(config, 'x', 0);
-        y = GetValue$b(config, 'y', 0);
-        width = GetValue$b(config, 'width', 32);
-        height = GetValue$b(config, 'height', 32);
+        x = GetValue$c(config, 'x', 0);
+        y = GetValue$c(config, 'y', 0);
+        width = GetValue$c(config, 'width', 32);
+        height = GetValue$c(config, 'height', 32);
       } // render-texture -> perspective-image
 
 
@@ -511,7 +511,7 @@
       value: function destroy(fromScene) {
         _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
 
-        this.rt.destroy(fromScene);
+        this.rt.destroy();
         this.rt = null;
       }
     }]);
@@ -525,8 +525,8 @@
     return gameObject;
   }
 
-  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
-  var BuildGameObject$3 = Phaser.GameObjects.BuildGameObject;
+  var GetAdvancedValue$2 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$4 = Phaser.GameObjects.BuildGameObject;
   function PerspectiveRenderTextureCreator (config, addToScene) {
     if (config === undefined) {
       config = {};
@@ -536,11 +536,96 @@
       config.add = addToScene;
     }
 
-    var x = GetAdvancedValue$1(config, 'x', 0);
-    var y = GetAdvancedValue$1(config, 'y', 0);
-    var width = GetAdvancedValue$1(config, 'width', 32);
-    var height = GetAdvancedValue$1(config, 'height', 32);
+    var x = GetAdvancedValue$2(config, 'x', 0);
+    var y = GetAdvancedValue$2(config, 'y', 0);
+    var width = GetAdvancedValue$2(config, 'width', 32);
+    var height = GetAdvancedValue$2(config, 'height', 32);
     var gameObject = new RenderTexture(this.scene, x, y, width, height, config);
+    BuildGameObject$4(this.scene, gameObject, config);
+    return gameObject;
+  }
+
+  var SPRITE = Phaser.GameObjects.Sprite;
+  var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
+  var GetValue$b = Phaser.Utils.Objects.GetValue;
+
+  var Sprite = /*#__PURE__*/function (_PerspectiveRenderTex) {
+    _inherits(Sprite, _PerspectiveRenderTex);
+
+    var _super = _createSuper(Sprite);
+
+    function Sprite(scene, x, y, key, frame, config) {
+      var _this;
+
+      _classCallCheck(this, Sprite);
+
+      if (IsPlainObject$4(x)) {
+        config = x;
+        x = GetValue$b(config, 'x', 0);
+        y = GetValue$b(config, 'y', 0);
+        key = GetValue$b(config, 'key', null);
+        frame = GetValue$b(config, 'frame', null);
+      } // sprite -> perspective-render-texture
+
+
+      var sprite = new SPRITE(scene, x, y, key, frame).setOrigin(0.5);
+      var width = GetValue$b(config, 'width', sprite.width);
+      var height = GetValue$b(config, 'height', sprite.height);
+      _this = _super.call(this, scene, x, y, width, height, config);
+      _this.type = 'rexPerspectiveSprite';
+      _this.sprite = sprite;
+      var rt = _this.rt;
+      sprite.on('animationupdate', function (currentAnim, currentFrame, sprite) {
+        DrawSprite(rt, sprite);
+      });
+      DrawSprite(rt, sprite);
+      return _this;
+    }
+
+    _createClass(Sprite, [{
+      key: "destroy",
+      value: function destroy(fromScene) {
+        _get(_getPrototypeOf(Sprite.prototype), "destroy", this).call(this, fromScene);
+
+        this.sprite.destroy();
+        this.sprite = null;
+      }
+    }, {
+      key: "preUpdate",
+      value: function preUpdate(time, delta) {
+        this.sprite.preUpdate(time, delta);
+
+        _get(_getPrototypeOf(Sprite.prototype), "preUpdate", this).call(this, time, delta);
+      }
+    }]);
+
+    return Sprite;
+  }(RenderTexture);
+
+  var DrawSprite = function DrawSprite(rt, sprite) {
+    rt.clear().draw(sprite, rt.width / 2, rt.height / 2);
+  };
+
+  function PerspectiveSpriteFactory (x, y, texture, frame, config) {
+    var gameObject = new Sprite(this.scene, x, y, texture, frame, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
+  }
+
+  var GetAdvancedValue$1 = Phaser.Utils.Objects.GetAdvancedValue;
+  var BuildGameObject$3 = Phaser.GameObjects.BuildGameObject;
+  function PerspectiveSpriteCreator (config, addToScene) {
+    if (config === undefined) {
+      config = {};
+    }
+
+    if (addToScene !== undefined) {
+      config.add = addToScene;
+    }
+
+    var key = GetAdvancedValue$1(config, 'key', null);
+    var frame = GetAdvancedValue$1(config, 'frame', null);
+    var gameObject = new Sprite(this.scene, 0, 0, key, frame, config);
     BuildGameObject$3(this.scene, gameObject, config);
     return gameObject;
   }
@@ -4058,6 +4143,7 @@
 
       pluginManager.registerGameObject('rexPerspectiveImage', PerspectiveImageFactory, PerspectiveImageCreator);
       pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);
+      pluginManager.registerGameObject('rexPerspectiveSprite', PerspectiveSpriteFactory, PerspectiveSpriteCreator);
       pluginManager.registerGameObject('rexPerspectiveCard', PerspectiveCardFactory, PerspectiveCardCreator);
       pluginManager.registerGameObject('rexPerspectiveCarousel', PerspectiveCarouselFactory, PerspectiveCarouselCreator);
       pluginManager.registerGameObject('rexPerspectiveImageCarousel', PerspectiveImageCarouselFactory, PerspectiveImageCarouselCreator);
@@ -4082,6 +4168,7 @@
 
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', Image);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', RenderTexture);
+  SetValue(window, 'RexPlugins.GameObjects.PerspectiveSprite', Sprite);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', Card);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', Carousel);
   SetValue(window, 'RexPlugins.GameObjects.PerspectiveImageCarousel', ImageCarousel);

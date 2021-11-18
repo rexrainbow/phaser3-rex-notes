@@ -36696,13 +36696,17 @@
       value: function destroy(fromScene) {
         _get(_getPrototypeOf(RenderTexture.prototype), "destroy", this).call(this, fromScene);
 
-        this.rt.destroy(fromScene);
+        this.rt.destroy();
         this.rt = null;
       }
     }]);
 
     return RenderTexture;
   }(Image$1);
+
+  Phaser.GameObjects.Sprite;
+  Phaser.Utils.Objects.IsPlainObject;
+  Phaser.Utils.Objects.GetValue;
 
   Phaser.Math.RadToDeg;
   Phaser.Math.DegToRad;

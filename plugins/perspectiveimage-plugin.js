@@ -6,6 +6,10 @@ import PerspectiveRenderTextureFactory from './gameobjects/mesh/perspective/rend
 import PerspectiveRenderTextureCreator from './gameobjects/mesh/perspective/rendertexture/Creator.js';
 import PerspectiveRenderTexture from './gameobjects/mesh/perspective/rendertexture/RenderTexture.js';
 
+import PerspectiveSpriteFactory from './gameobjects/mesh/perspective/sprite/Factory.js';
+import PerspectiveSpriteCreator from './gameobjects/mesh/perspective/sprite/Creator.js';
+import PerspectiveSprite from './gameobjects/mesh/perspective/sprite/Sprite.js';
+
 import PerspectiveCardFactory from './gameobjects/mesh/perspective/card/Factory.js';
 import PerspectiveCardCreator from './gameobjects/mesh/perspective/card/Creator.js';
 import PerspectiveCard from './gameobjects/mesh/perspective/card/Card.js';
@@ -30,6 +34,7 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
         //  Register our new Game Object type
         pluginManager.registerGameObject('rexPerspectiveImage', PerspectiveImageFactory, PerspectiveImageCreator);
         pluginManager.registerGameObject('rexPerspectiveRenderTexture', PerspectiveRenderTextureFactory, PerspectiveRenderTextureCreator);
+        pluginManager.registerGameObject('rexPerspectiveSprite', PerspectiveSpriteFactory, PerspectiveSpriteCreator);
         pluginManager.registerGameObject('rexPerspectiveCard', PerspectiveCardFactory, PerspectiveCardCreator);
         pluginManager.registerGameObject('rexPerspectiveCarousel', PerspectiveCarouselFactory, PerspectiveCarouselCreator);
         pluginManager.registerGameObject('rexPerspectiveImageCarousel', PerspectiveImageCarouselFactory, PerspectiveImageCarouselCreator);
@@ -47,6 +52,7 @@ class PerspectiveImagePlugin extends Phaser.Plugins.BasePlugin {
 
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveImage', PerspectiveImage);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveRenderTexture', PerspectiveRenderTexture);
+SetValue(window, 'RexPlugins.GameObjects.PerspectiveSprite', PerspectiveSprite);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCard', PerspectiveCard);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveCarousel', PerspectiveCarousel);
 SetValue(window, 'RexPlugins.GameObjects.PerspectiveImageCarousel', PerspectiveImageCarousel);
