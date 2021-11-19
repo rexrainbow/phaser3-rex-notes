@@ -20,18 +20,18 @@ Loader in preload stage will start loading automatically by scene.
 ```javascript
 scene.load.image(key, url);   // add task
 // scene.load.image(config); // config: {key, url}
-scene.load.once('complete', callback);  // add callback of 'complete' event
+scene.load.once('complete', callback, scope);  // add callback of 'complete' event
 scene.load.start();                     // start loading
 ```
 
 ### Load file complete event
 
 ```javascript
-scene.load.on('filecomplete', function(key, type, data) {});
+scene.load.on('filecomplete', function(key, type, data) {}, scope);
 ```
 
 ```javascript
-scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {});
+scene.load.on('filecomplete-' + type + '-' + key, function(key, type, data) {}, scope);
 ```
 
 ### Set path
@@ -44,23 +44,23 @@ scene.loader.setPath(path)
 
 - Start loading
     ```javascript
-    scene.load.once('start', function(){});
+    scene.load.once('start', function(){}, scope);
     ```
 - Loading progressing
     ```javascript
-    scene.load.on('progress', function(progress){});
+    scene.load.on('progress', function(progress){}, scope);
     ```
 - Loading a file object successful
     ```javascript
-    scene.load.once('load', function(fileObj){});
+    scene.load.once('load', function(fileObj){}, scope);
     ```
 - Loading a file object failed
     ```javascript
-    scene.load.once('loaderror', function(fileObj){});
+    scene.load.once('loaderror', function(fileObj){}, scope);
     ```
 - All loading completed
     ```javascript
-    scene.load.once('complete', function(){});
+    scene.load.once('complete', function(){}, scope);
     ```
 
 ### Status of loader
