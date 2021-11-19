@@ -78,17 +78,6 @@ class Image extends Mesh {
         return this;
     }
 
-    setTexture(key, frame) {
-        super.setTexture(key, frame);
-
-        if (this.afterInit) {
-            this.syncSize();
-        } else {
-            this.afterInit = true;
-        }
-        return this;
-    }
-
     get rotationX() {
         return this.modelRotation.x;
     }
