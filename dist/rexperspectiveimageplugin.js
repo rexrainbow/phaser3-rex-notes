@@ -545,12 +545,12 @@
     return gameObject;
   }
 
-  var SPRITE = Phaser.GameObjects.Sprite;
+  var AnimationState = Phaser.Animations.AnimationState;
   var IsPlainObject$4 = Phaser.Utils.Objects.IsPlainObject;
   var GetValue$b = Phaser.Utils.Objects.GetValue;
 
-  var Sprite = /*#__PURE__*/function (_PerspectiveRenderTex) {
-    _inherits(Sprite, _PerspectiveRenderTex);
+  var Sprite = /*#__PURE__*/function (_PerspectiveImage) {
+    _inherits(Sprite, _PerspectiveImage);
 
     var _super = _createSuper(Sprite);
 
@@ -565,46 +565,83 @@
         y = GetValue$b(config, 'y', 0);
         key = GetValue$b(config, 'key', null);
         frame = GetValue$b(config, 'frame', null);
-      } // sprite -> perspective-render-texture
+      }
 
-
-      var sprite = new SPRITE(scene, x, y, key, frame).setOrigin(0.5);
-      var width = GetValue$b(config, 'width', sprite.width);
-      var height = GetValue$b(config, 'height', sprite.height);
-      _this = _super.call(this, scene, x, y, width, height, config);
+      _this = _super.call(this, scene, x, y, key, frame, config);
       _this.type = 'rexPerspectiveSprite';
-      _this.sprite = sprite;
-      var rt = _this.rt;
-      sprite.on('animationupdate', function (currentAnim, currentFrame, sprite) {
-        DrawSprite(rt, sprite);
-      });
-      DrawSprite(rt, sprite);
+      _this.anims = new AnimationState(_assertThisInitialized(_this));
       return _this;
     }
 
     _createClass(Sprite, [{
       key: "destroy",
       value: function destroy(fromScene) {
-        _get(_getPrototypeOf(Sprite.prototype), "destroy", this).call(this, fromScene);
+        this.anims.destroy();
+        this.anims = undefined;
 
-        this.sprite.destroy();
-        this.sprite = null;
+        _get(_getPrototypeOf(Sprite.prototype), "destroy", this).call(this, fromScene);
       }
     }, {
       key: "preUpdate",
       value: function preUpdate(time, delta) {
-        this.sprite.preUpdate(time, delta);
+        var prevFrame = this.anims.currentFrame;
+        this.anims.update(time, delta);
+
+        if (this.anims.currentFrame !== prevFrame) {
+          this.syncSize();
+        }
 
         _get(_getPrototypeOf(Sprite.prototype), "preUpdate", this).call(this, time, delta);
+      }
+    }, {
+      key: "play",
+      value: function play(key, ignoreIfPlaying, startFrame) {
+        return this.anims.play(key, ignoreIfPlaying, startFrame);
+      }
+    }, {
+      key: "playReverse",
+      value: function playReverse(key, ignoreIfPlaying) {
+        return this.anims.playReverse(key, ignoreIfPlaying);
+      }
+    }, {
+      key: "playAfterDelay",
+      value: function playAfterDelay(key, delay) {
+        return this.anims.playAfterDelay(key, delay);
+      }
+    }, {
+      key: "playAfterRepeat",
+      value: function playAfterRepeat(key, repeatCount) {
+        return this.anims.playAfterRepeat(key, repeatCount);
+      }
+    }, {
+      key: "chain",
+      value: function chain(key) {
+        return this.anims.chain(key);
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        return this.anims.stop();
+      }
+    }, {
+      key: "stopAfterDelay",
+      value: function stopAfterDelay(delay) {
+        return this.anims.stopAfterDelay(delay);
+      }
+    }, {
+      key: "stopAfterRepeat",
+      value: function stopAfterRepeat(repeatCount) {
+        return this.anims.stopAfterRepeat(repeatCount);
+      }
+    }, {
+      key: "stopOnFrame",
+      value: function stopOnFrame(frame) {
+        return this.anims.stopOnFrame(frame);
       }
     }]);
 
     return Sprite;
-  }(RenderTexture);
-
-  var DrawSprite = function DrawSprite(rt, sprite) {
-    rt.clear().draw(sprite, rt.width / 2, rt.height / 2);
-  };
+  }(Image);
 
   function PerspectiveSpriteFactory (x, y, texture, frame, config) {
     var gameObject = new Sprite(this.scene, x, y, texture, frame, config);

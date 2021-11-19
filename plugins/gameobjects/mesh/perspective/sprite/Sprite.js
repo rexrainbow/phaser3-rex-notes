@@ -1,10 +1,10 @@
-import PerspectiveRenderTexture from '../rendertexture/RenderTexture.js';
+import PerspectiveImage from '../image/Image.js';
 
-const SPRITE = Phaser.GameObjects.Sprite;
+const AnimationState = Phaser.Animations.AnimationState;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Sprite extends PerspectiveRenderTexture {
+class Sprite extends PerspectiveImage {
     constructor(scene, x, y, key, frame, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -14,41 +14,62 @@ class Sprite extends PerspectiveRenderTexture {
             frame = GetValue(config, 'frame', null);
         }
 
-        // sprite -> perspective-render-texture
-        var sprite = (new SPRITE(scene, x, y, key, frame))
-            .setOrigin(0.5);
-        var width = GetValue(config, 'width', sprite.width);
-        var height = GetValue(config, 'height', sprite.height);
-
-        super(scene, x, y, width, height, config);
+        super(scene, x, y, key, frame, config);
         this.type = 'rexPerspectiveSprite';
-        this.sprite = sprite;
-
-        var rt = this.rt;
-        sprite.on('animationupdate', function (currentAnim, currentFrame, sprite) {
-            DrawSprite(rt, sprite);
-        });
-
-        DrawSprite(rt, sprite);
+        this.anims = new AnimationState(this);
     }
 
     destroy(fromScene) {
+        this.anims.destroy();
+        this.anims = undefined;
         super.destroy(fromScene);
-
-        this.sprite.destroy();
-        this.sprite = null;
     }
 
     preUpdate(time, delta) {
-        this.sprite.preUpdate(time, delta);
+        var prevFrame = this.anims.currentFrame;
+        this.anims.update(time, delta);
+        if (this.anims.currentFrame !== prevFrame) {
+            this.syncSize();
+        }
+
         super.preUpdate(time, delta);
     }
-}
 
-var DrawSprite = function (rt, sprite) {
-    rt
-        .clear()
-        .draw(sprite, rt.width / 2, rt.height / 2)
+    play(key, ignoreIfPlaying, startFrame) {
+        return this.anims.play(key, ignoreIfPlaying, startFrame);
+    }
+
+    playReverse(key, ignoreIfPlaying) {
+        return this.anims.playReverse(key, ignoreIfPlaying);
+    }
+
+    playAfterDelay(key, delay) {
+        return this.anims.playAfterDelay(key, delay);
+    }
+
+    playAfterRepeat(key, repeatCount) {
+        return this.anims.playAfterRepeat(key, repeatCount);
+    }
+
+    chain(key) {
+        return this.anims.chain(key);
+    }
+
+    stop() {
+        return this.anims.stop();
+    }
+
+    stopAfterDelay(delay) {
+        return this.anims.stopAfterDelay(delay);
+    }
+
+    stopAfterRepeat(repeatCount) {
+        return this.anims.stopAfterRepeat(repeatCount);
+    }
+
+    stopOnFrame(frame) {
+        return this.anims.stopOnFrame(frame);
+    }
 }
 
 export default Sprite;

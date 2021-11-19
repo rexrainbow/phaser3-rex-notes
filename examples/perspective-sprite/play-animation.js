@@ -42,12 +42,8 @@ class Demo extends Phaser.Scene {
         var sprite = this.add.rexPerspectiveSprite(300, 300, 'knight', null, { hideCCW: false })
             .setScale(2);
         this.input.once('pointerdown', function () {
-            sprite.sprite.play('idle');
+            sprite.play('idle');
         })
-
-
-        console.log(sprite.displayWidth, sprite.displayHeight);
-        console.log(sprite.sprite.displayWidth, sprite.sprite.displayHeight);
 
         var image = this.add.rexPerspectiveImage(500, 300, 'knight', null, { hideCCW: false })
             .setScale(2);

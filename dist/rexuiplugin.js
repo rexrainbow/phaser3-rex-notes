@@ -36704,7 +36704,7 @@
     return RenderTexture;
   }(Image$1);
 
-  Phaser.GameObjects.Sprite;
+  Phaser.Animations.AnimationState;
   Phaser.Utils.Objects.IsPlainObject;
   Phaser.Utils.Objects.GetValue;
 

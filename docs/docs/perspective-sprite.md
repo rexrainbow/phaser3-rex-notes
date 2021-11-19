@@ -1,6 +1,6 @@
 ## Introduction
 
-Sprite pasted on [perspective-rendertexture](perspective-rendertexture.md).
+Play animation on [perspective-image](perspective-image.md).
 
 - Author: Rex
 - Game object
@@ -24,9 +24,9 @@ Sprite pasted on [perspective-rendertexture](perspective-rendertexture.md).
     ```javascript
     scene.load.plugin('rexperspectiveimageplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexperspectiveimageplugin.min.js', true);
     ```
-- Add image object
+- Add sprite object
     ```javascript
-    var image = scene.add.rexPerspectiveSprite(x, y, texture, frame, config);
+    var sprite = scene.add.rexPerspectiveSprite(x, y, texture, frame, config);
     ```
 
 #### Import plugin
@@ -53,9 +53,9 @@ Sprite pasted on [perspective-rendertexture](perspective-rendertexture.md).
     };
     var game = new Phaser.Game(config);
     ```
-- Add image object
+- Add sprite object
     ```javascript
-    var image = scene.add.rexPerspectiveSprite(x, y, texture, frame, config);
+    var sprite = scene.add.rexPerspectiveSprite(x, y, texture, frame, config);
     ```
 
 #### Import class
@@ -68,16 +68,16 @@ Sprite pasted on [perspective-rendertexture](perspective-rendertexture.md).
     ```javascript
     import { PerspectiveSprite } from 'phaser3-rex-plugins/plugins/perspectiveimage.js';
     ```
-- Add image object
+- Add sprite object
     ```javascript    
-    var image = new PerspectiveSprite(scene, x, y, texture, frame, config);
-    sscene.add.existing(image);
+    var sprite = new PerspectiveSprite(scene, x, y, texture, frame, config);
+    sscene.add.existing(sprite);
     ```
 
 ### Create instance
 
 ```javascript
-var image = scene.add.rexPerspectiveSprite(x, y, texture, frame, {
+var sprite = scene.add.rexPerspectiveSprite(x, y, texture, frame, {
     // width: undefined,
     // height: undefined,
     // hideCCW: true,
@@ -89,7 +89,7 @@ var image = scene.add.rexPerspectiveSprite(x, y, texture, frame, {
 or 
 
 ```javascript
-var image = scene.add.rexPerspectiveImage({
+var sprite = scene.add.rexPerspectiveImage({
     // x: 0,
     // y: 0,
     key,
@@ -144,22 +144,14 @@ var perspectiveimage = scene.make.rexPerspectiveImage({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var image = new MyPerspectiveSprite(scene, x, y, texture, frame, config);
+    var sprite = new MyPerspectiveSprite(scene, x, y, texture, frame, config);
     ```
 
-### Internal sprite
-
-```javascript
-var sprite = image.sprite;
-```
-
-- `sprite` : [Sprite](sprite.md)
-
-#### Play animation
+### Play animation
 
 - Play
     ```javascript
-    image.sprite.play(key);
+    sprite.play(key);
     // sprite.play(key, ignoreIfPlaying);
     ```
     - `key` : Animation key string, or animation config
@@ -182,18 +174,18 @@ var sprite = image.sprite;
             ```
 - Play in reverse
     ```javascript
-    image.sprite.playReverse(key);
-    // image.sprite.playReverse(key, ignoreIfPlaying);
+    sprite.playReverse(key);
+    // sprite.playReverse(key, ignoreIfPlaying);
     ```
     - `key` : Animation key string, or animation config
 - Play after delay
     ```javascript
-    image.sprite.playAfterDelay(key, delay);
+    sprite.playAfterDelay(key, delay);
     ```
     - `key` : Animation key string, or animation config
 - Play after repeat
     ```javascript
-    image.sprite.playAfterRepeat(key, repeatCount);
+    sprite.playAfterRepeat(key, repeatCount);
     ```
     - `key` : Animation key string, or animation config
 
@@ -201,12 +193,12 @@ var sprite = image.sprite;
 
 - Chain next animation
     ```javascript
-    image.sprite.chain(key);
+    sprite.chain(key);
     ```
     - `key` : Animation key string, or animation config
 - Chain next and next animation
     ```javascript
-    image.sprite.chain(key0).chain(key1);
+    sprite.chain(key0).chain(key1);
     ```
     - `key0`, `key1` : Animation key string, or animation config
 
@@ -214,15 +206,15 @@ var sprite = image.sprite;
 
 - Immediately stop
     ```javascript
-    image.sprite.stop();
+    sprite.stop();
     ```
 - Stop after delay
     ```javascript
-    image.sprite.stopAfterDelay(delay);
+    sprite.stopAfterDelay(delay);
     ```
 - Stop at frame
     ```javascript
-    image.sprite.stopOnFrame(frame);
+    sprite.stopOnFrame(frame);
     ```
     - `frame` : Frame object in current animation.
         ```javascript
@@ -231,16 +223,16 @@ var sprite = image.sprite;
         ```
 - Stop after repeat
     ```javascript
-    image.sprite.stopAfterRepeat(repeatCount);
+    sprite.stopAfterRepeat(repeatCount);
     ```
 
 #### Restart
 
 ```javascript
-image.sprite.anims.restart();
-// image.sprite.anims.restart(includeDelay, resetRepeats);
+sprite.anims.restart();
+// sprite.anims.restart(includeDelay, resetRepeats);
 ```
 
 ### Other properties
 
-See [Perspective rendertexture](perspective-rendertexture.md), [Perspective image](perspective-image.md) game object.
+See [Perspective image](perspective-image.md) game object.
