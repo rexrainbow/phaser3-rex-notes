@@ -388,6 +388,19 @@
         return this;
       }
     }, {
+      key: "setTexture",
+      value: function setTexture(key, frame) {
+        _get(_getPrototypeOf(Image.prototype), "setTexture", this).call(this, key, frame);
+
+        if (this.afterInit) {
+          this.syncSize();
+        } else {
+          this.afterInit = true;
+        }
+
+        return this;
+      }
+    }, {
       key: "rotationX",
       get: function get() {
         return this.modelRotation.x;
