@@ -2,9 +2,9 @@ import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/LocalXY.js';
 
 
 class Vertex {
-    constructor(parent, vertexDataIndex, x, y) {
+    constructor(parent, vertexData, x, y) {
         this.parent = parent;
-        this.vertexDataIndex = vertexDataIndex;
+        this.vertexData = vertexData;
         this._localX = x;
         this._localY = y;
     }
@@ -19,7 +19,7 @@ class Vertex {
         var vy = (y / srcHeight) - vHalfHeight;
 
         var flipY = gameObject.frame.source.isRenderTexture;
-        var vertex = gameObject.vertices[this.vertexDataIndex];
+        var vertex = this.vertexData;
         vertex.x = vx;
         vertex.y = (flipY) ? vy : -vy;
         gameObject.forceUpdate();

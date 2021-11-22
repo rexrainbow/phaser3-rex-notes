@@ -1,4 +1,5 @@
 import Point from './Vertex.js';
+import InitFaces from './InitFaces.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
 const Vertex = Phaser.Geom.Mesh.Vertex;
@@ -21,21 +22,19 @@ class Image extends Mesh {
 
         super(scene, x, y, key, frame);
         this.type = 'rexQuadImage';
+        InitFaces(this);
         this.setSizeToFrame();
-
         this.resetPerspective();
         this.panZ(PanZ);
         this.hideCCW = GetValue(config, 'hideCCW', true);
         this.resetVerts();
 
-
-        var left = 0, right = this.width,
-            top = 0, bottom = this.height;
-
-        this.topLeft = new Point(this, 0, left, top);
-        this.topRight = new Point(this, 1, right, top);
-        this.bottomLeft = new Point(this, 2, left, bottom);
-        this.bottomRight = new Point(this, 3, right, bottom);
+        var top = 0, bottom = this.height,
+            left = 0, right = this.width;
+        this.topLeft = new Point(this, this.vertices[0], left, top);
+        this.topRight = new Point(this, this.vertices[1], right, top);
+        this.bottomLeft = new Point(this, this.vertices[2], left, bottom);
+        this.bottomRight = new Point(this, this.vertices[3], right, bottom);
     }
 
     resetPerspective() {
@@ -44,8 +43,7 @@ class Image extends Mesh {
     }
 
     resetVerts() {
-        // Clear faces and vertices
-        this.clear();
+        // Clear faces and vertices        
         this.dirtyCache[9] = -1;
 
         var top = 0, bottom = this.height,
@@ -55,10 +53,6 @@ class Image extends Mesh {
             [right, top],   // top-right
             [left, bottom], // bottom-left
             [right, bottom] // bottom-right
-        ];
-        var indices = [
-            0, 2, 1,
-            2, 3, 1
         ];
 
         // Calculate vertex data
@@ -75,7 +69,7 @@ class Image extends Mesh {
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0;
 
-        // Build vertex
+        // Update vertex
         for (var i = 0, cnt = vertices.length; i < cnt; i++) {
             var p = vertices[i];
             var px = p[0];
@@ -85,21 +79,10 @@ class Image extends Mesh {
             var y = (py / srcHeight) - vHalfHeight;
             var u = frameU0 + (frameU * (px / srcWidth));
             var v = frameV0 + (frameV * (py / srcHeight));
-            vertices[i] = new Vertex(x, -y, 0, u, v);
+            this.vertices[i]
+                .set(x, -y, 0)
+                .setUVs(u, v)
         }
-
-        // Build face
-        var faces = [];
-        for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
-            var vert1 = vertices[indices[i + 0]];
-            var vert2 = vertices[indices[i + 1]];
-            var vert3 = vertices[indices[i + 2]];
-            var face = new Face(vert1, vert2, vert3);
-            faces.push(face);
-        }
-
-        this.vertices.push(...vertices);
-        this.faces.push(...faces);
 
         return this;
     }
