@@ -146,7 +146,7 @@ image.shatter(centerX, centerY);
 // image.shatter();
 ```
 
-- `centerX`, `centerY` : Center position of shatter.
+- `centerX`, `centerY` : Center position of shatter. Local position of this image.
     - `undefined` : Default value is center of image.
 
 Shatter image into triangle faces.
