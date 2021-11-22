@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('card', 'assets/images/card.jpg');
         this.load.image('card2', 'assets/images/card2.png');
     }
 
