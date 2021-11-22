@@ -1,70 +1,95 @@
+import { LocalXYToWorldXY, WorldXYToLocalXY } from '../../utils/LocalXY.js';
+
+
 class Vertex {
     constructor(parent, vertexDataIndex, x, y) {
         this.parent = parent;
         this.vertexDataIndex = vertexDataIndex;
-        this._x = x;
-        this._y = y;
+        this._localX = x;
+        this._localY = y;
     }
 
-    get vertexData() {
-        return this.parent.vertices[this.vertexDataIndex];
+    updateVertexPosition(x, y) {
+        var gameObject = this.parent;
+        var srcHeight = gameObject.height;
+        var vHalfWidth = (gameObject.frame.cutWidth / srcHeight) / 2;
+        var vHalfHeight = (gameObject.frame.cutHeight / srcHeight) / 2;
+
+        var vx = (x / srcHeight) - vHalfWidth;
+        var vy = (y / srcHeight) - vHalfHeight;
+
+        var flipY = gameObject.frame.source.isRenderTexture;
+        var vertex = gameObject.vertices[this.vertexDataIndex];
+        vertex.x = vx;
+        vertex.y = (flipY) ? vy : -vy;
+        gameObject.forceUpdate();
+        return this;
     }
 
     get localX() {
-        return this._x;
+        return this._localX;
     }
 
     set localX(x) {
-        if (this._x !== x) {
-            this._x = x;
-
-            var gameObject = this.parent;
-            var srcHeight = gameObject.height;
-            var vHalfWidth = (gameObject.frame.cutWidth / srcHeight) / 2;
-            var vx = (x / srcHeight) - vHalfWidth;
-
-            this.vertexData.x = vx;
-            this.parent.forceUpdate();
-        }
+        this.setLocalXY(x, this._localY);
     }
 
     get localY() {
-        return this._y;
+        return this._localY;
     }
 
     set localY(y) {
-        if (this._y !== y) {
-            this._y = y;
+        this.setLocalXY(this._localX, y);
+    }
 
-            var gameObject = this.parent;
-            var srcHeight = gameObject.height;
-            var vHalfHeight = (gameObject.frame.cutHeight / srcHeight) / 2;
-            var vy = (y / srcHeight) - vHalfHeight;
-
-            var flipY = gameObject.frame.source.isRenderTexture;
-            this.vertexData.y = (flipY) ? vy : -vy;
-            this.parent.forceUpdate();
+    setLocalXY(x, y) {
+        if ((this._localX === x) && (this._localY === y)) {
+            return this;
         }
+
+        this._localX = x;
+        this._localY = y;
+        this.updateVertexPosition(x, y);
+
+        return this;
+    }
+
+    setWorldXY(x, y) {
+        if ((this._worldX === x) && (this._worldY === y)) {
+            return this;
+        }
+
+        var localXY = WorldXYToLocalXY(this.parent, x, y);
+        this.setLocalXY(localXY.x, localXY.y);
+
+        return this;
+    }
+
+    setPosition(x, y) {
+        this.setWorldXY(x, y);
+        return this;
+    }
+
+    getWorldXY() {
+        return LocalXYToWorldXY(this.parent, this._localX, this._localY);
     }
 
     get x() {
-        var gameObject = this.parent;
-        return (this.localX - (gameObject.width / 2)) * gameObject.scaleX + gameObject.x;
+        var worldXY = LocalXYToWorldXY(this.parent, this._localX, this._localY);
+        return worldXY.x;
     }
 
     set x(x) {
-        var gameObject = this.parent;
-        this.localX = ((x - gameObject.x) / gameObject.scaleX) + (gameObject.width / 2)
+        this.setWorldXY(x, this.y);
     }
 
     get y() {
-        var gameObject = this.parent;
-        return (this.localY - (gameObject.height / 2)) * gameObject.scaleY + gameObject.y;
+        var worldXY = LocalXYToWorldXY(this.parent, this._localX, this._localY);
+        return worldXY.y;
     }
 
     set y(y) {
-        var gameObject = this.parent;
-        this.localY = ((y - gameObject.y) / gameObject.scaleY) + (gameObject.height / 2)
+        this.setWorldXY(this.x, y);
     }
 }
 

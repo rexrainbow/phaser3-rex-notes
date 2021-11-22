@@ -1,5 +1,6 @@
 import ShatterRectangleToTriangles from '../../../utils/math/triangulate/ShatterRectangleToTriangles.js';
 import Face from './Face.js';
+import { WorldXYToLocalXY } from '../utils/LocalXY.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -58,7 +59,12 @@ class ShatterImage extends Mesh {
         if (centerX === undefined) {
             centerX = this.width / 2;
             centerY = this.height / 2;
+        } else {
+            var worldXY = WorldXYToLocalXY(this, centerX, centerY);
+            centerX = worldXY.x;
+            centerY = worldXY.y;
         }
+
         this.shatterCenter.x = centerX;
         this.shatterCenter.y = centerY;
 

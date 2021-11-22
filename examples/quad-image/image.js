@@ -37,8 +37,7 @@ var CreateControlPoint = function (scene, quadVertex) {
         .on('drag', function (pointer, dragX, dragY) {
             controlPoint.x = dragX;
             controlPoint.y = dragY;
-            quadVertex.x = dragX;
-            quadVertex.y = dragY;
+            quadVertex.setPosition(dragX, dragY);
         });
     return controlPoint;
 }
