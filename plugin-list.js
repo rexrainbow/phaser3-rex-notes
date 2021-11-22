@@ -20,6 +20,7 @@ module.exports = {
     'lineplugin': './plugins/line-plugin.js',
     'ninepatchplugin': './plugins/ninepatch-plugin.js',
     'perspectiveimageplugin': './plugins/perspectiveimage-plugin.js',
+    'quadimageplugin': './plugins/quadimage-plugin.js',
     'shatterimageplugin': './plugins/shatterimage-plugin.js',
     'transitionimageplugin': './plugins/transitionimage-plugin.js',
     'fullwindowrectangleplugin': './plugins/fullwindowrectangle-plugin.js',
