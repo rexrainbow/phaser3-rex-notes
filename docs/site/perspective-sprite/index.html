@@ -1198,19 +1198,12 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internal-sprite" class="md-nav__link">
-    Internal sprite
-  </a>
-  
-    <nav class="md-nav" aria-label="Internal sprite">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#play-animation" class="md-nav__link">
     Play animation
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Play animation">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#chain" class="md-nav__link">
@@ -7644,19 +7637,12 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#internal-sprite" class="md-nav__link">
-    Internal sprite
-  </a>
-  
-    <nav class="md-nav" aria-label="Internal sprite">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#play-animation" class="md-nav__link">
     Play animation
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Play animation">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#chain" class="md-nav__link">
@@ -7716,7 +7702,7 @@
                   <h1>Sprite</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Sprite pasted on <a href="../perspective-rendertexture/">perspective-rendertexture</a>.</p>
+<p>Play animation on <a href="../perspective-image/">perspective-image</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Game object</li>
@@ -7737,8 +7723,8 @@
 <li>Load plugin (minify file) in preload stage
     <div class="highlight"><pre><span></span><code><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">&#39;rexperspectiveimageplugin&#39;</span><span class="p">,</span> <span class="s1">&#39;https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexperspectiveimageplugin.min.js&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add image object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add sprite object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-plugin">Import plugin<a class="headerlink" href="#import-plugin" title="Permanent link">&para;</a></h4>
@@ -7763,8 +7749,8 @@
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
-<li>Add image object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<li>Add sprite object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h4>
@@ -7775,13 +7761,13 @@
 <li>Import class
     <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span> <span class="nx">PerspectiveSprite</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;phaser3-rex-plugins/plugins/perspectiveimage.js&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>Add image object
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">PerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">image</span><span class="p">);</span>
+<li>Add sprite object
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">PerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="nx">sscene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">sprite</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// width: undefined,</span>
     <span class="c1">// height: undefined,</span>
     <span class="c1">// hideCCW: true,</span>
@@ -7790,7 +7776,7 @@
 <span class="p">});</span>
 </code></pre></div>
 <p>or </p>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
+<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexPerspectiveImage</span><span class="p">({</span>
     <span class="c1">// x: 0,</span>
     <span class="c1">// y: 0,</span>
     <span class="nx">key</span><span class="p">,</span>
@@ -7843,19 +7829,13 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyPerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">MyPerspectiveSprite</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
-<h3 id="internal-sprite">Internal sprite<a class="headerlink" href="#internal-sprite" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">sprite</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">;</span>
-</code></pre></div>
-<ul>
-<li><code>sprite</code> : <a href="../sprite/">Sprite</a></li>
-</ul>
-<h4 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h4>
+<h3 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Play
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// sprite.play(key, ignoreIfPlaying);</span>
 </code></pre></div><ul>
 <li><code>key</code> : Animation key string, or animation config<ul>
@@ -7880,20 +7860,20 @@
 </ul>
 </li>
 <li>Play in reverse
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playReverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// image.sprite.playReverse(key, ignoreIfPlaying);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">playReverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// sprite.playReverse(key, ignoreIfPlaying);</span>
 </code></pre></div><ul>
 <li><code>key</code> : Animation key string, or animation config</li>
 </ul>
 </li>
 <li>Play after delay
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterDelay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterDelay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">delay</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key</code> : Animation key string, or animation config</li>
 </ul>
 </li>
 <li>Play after repeat
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterRepeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">repeatCount</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">playAfterRepeat</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">repeatCount</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key</code> : Animation key string, or animation config</li>
 </ul>
@@ -7902,13 +7882,13 @@
 <h4 id="chain">Chain<a class="headerlink" href="#chain" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Chain next animation
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key</code> : Animation key string, or animation config</li>
 </ul>
 </li>
 <li>Chain next and next animation
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key0</span><span class="p">).</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key1</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key0</span><span class="p">).</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key1</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>key0</code>, <code>key1</code> : Animation key string, or animation config</li>
 </ul>
@@ -7917,13 +7897,13 @@
 <h4 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Immediately stop
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </code></pre></div></li>
 <li>Stop after delay
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterDelay</span><span class="p">(</span><span class="nx">delay</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterDelay</span><span class="p">(</span><span class="nx">delay</span><span class="p">);</span>
 </code></pre></div></li>
 <li>Stop at frame
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopOnFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopOnFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
 </code></pre></div><ul>
 <li><code>frame</code> : Frame object in current animation.
     <div class="highlight"><pre><span></span><code><span class="kd">var</span> <span class="nx">currentAnim</span> <span class="o">=</span> <span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">currentAnim</span><span class="p">;</span>
@@ -7932,15 +7912,15 @@
 </ul>
 </li>
 <li>Stop after repeat
-    <div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterRepeat</span><span class="p">(</span><span class="nx">repeatCount</span><span class="p">);</span>
+    <div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">stopAfterRepeat</span><span class="p">(</span><span class="nx">repeatCount</span><span class="p">);</span>
 </code></pre></div></li>
 </ul>
 <h4 id="restart">Restart<a class="headerlink" href="#restart" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="nx">image</span><span class="p">.</span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
-<span class="c1">// image.sprite.anims.restart(includeDelay, resetRepeats);</span>
+<div class="highlight"><pre><span></span><code><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
+<span class="c1">// sprite.anims.restart(includeDelay, resetRepeats);</span>
 </code></pre></div>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../perspective-rendertexture/">Perspective rendertexture</a>, <a href="../perspective-image/">Perspective image</a> game object.</p>
+<p>See <a href="../perspective-image/">Perspective image</a> game object.</p>
                 
               
               
