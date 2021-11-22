@@ -123,73 +123,132 @@
     };
   }
 
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var LocalXYToWorldXY = function LocalXYToWorldXY(gameObject, localX, localY) {
+    var ox = gameObject.width / 2;
+    var oy = gameObject.height / 2;
+    out.x = localX - ox;
+    out.y = localY - oy;
+    RotateAround(out, ox, oy, gameObject.rotation);
+    out.x *= gameObject.scaleX;
+    out.y *= gameObject.scaleY;
+    out.x += gameObject.x;
+    out.y += gameObject.y;
+    return out;
+  };
+
+  var WorldXYToLocalXY = function WorldXYToLocalXY(gameObject, worldX, worldY) {
+    var ox = gameObject.width / 2;
+    var oy = gameObject.height / 2;
+    out.x = worldX - gameObject.x;
+    out.y = worldY - gameObject.y;
+    out.x /= gameObject.scaleX;
+    out.y /= gameObject.scaleY;
+    RotateAround(out, ox, oy, -gameObject.rotation);
+    out.x += ox;
+    out.y += oy;
+    return out;
+  };
+
+  var out = {
+    x: 0,
+    y: 0
+  };
+
   var Vertex$1 = /*#__PURE__*/function () {
     function Vertex(parent, vertexDataIndex, x, y) {
       _classCallCheck(this, Vertex);
 
       this.parent = parent;
       this.vertexDataIndex = vertexDataIndex;
-      this._x = x;
-      this._y = y;
+      this._localX = x;
+      this._localY = y;
     }
 
     _createClass(Vertex, [{
-      key: "vertexData",
-      get: function get() {
-        return this.parent.vertices[this.vertexDataIndex];
+      key: "updateVertexPosition",
+      value: function updateVertexPosition(x, y) {
+        var gameObject = this.parent;
+        var srcHeight = gameObject.height;
+        var vHalfWidth = gameObject.frame.cutWidth / srcHeight / 2;
+        var vHalfHeight = gameObject.frame.cutHeight / srcHeight / 2;
+        var vx = x / srcHeight - vHalfWidth;
+        var vy = y / srcHeight - vHalfHeight;
+        var flipY = gameObject.frame.source.isRenderTexture;
+        var vertex = gameObject.vertices[this.vertexDataIndex];
+        vertex.x = vx;
+        vertex.y = flipY ? vy : -vy;
+        gameObject.forceUpdate();
+        return this;
       }
     }, {
       key: "localX",
       get: function get() {
-        return this._x;
+        return this._localX;
       },
       set: function set(x) {
-        if (this._x !== x) {
-          this._x = x;
-          var gameObject = this.parent;
-          var srcHeight = gameObject.height;
-          var vHalfWidth = gameObject.frame.cutWidth / srcHeight / 2;
-          var vx = x / srcHeight - vHalfWidth;
-          this.vertexData.x = vx;
-          this.parent.forceUpdate();
-        }
+        this.setLocalXY(x, this._localY);
       }
     }, {
       key: "localY",
       get: function get() {
-        return this._y;
+        return this._localY;
       },
       set: function set(y) {
-        if (this._y !== y) {
-          this._y = y;
-          var gameObject = this.parent;
-          var srcHeight = gameObject.height;
-          var vHalfHeight = gameObject.frame.cutHeight / srcHeight / 2;
-          var vy = y / srcHeight - vHalfHeight;
-          var flipY = gameObject.frame.source.isRenderTexture;
-          this.vertexData.y = flipY ? vy : -vy;
-          this.parent.forceUpdate();
+        this.setLocalXY(this._localX, y);
+      }
+    }, {
+      key: "setLocalXY",
+      value: function setLocalXY(x, y) {
+        if (this._localX === x && this._localY === y) {
+          return this;
         }
+
+        this._localX = x;
+        this._localY = y;
+        this.updateVertexPosition(x, y);
+        return this;
+      }
+    }, {
+      key: "setWorldXY",
+      value: function setWorldXY(x, y) {
+        if (this._worldX === x && this._worldY === y) {
+          return this;
+        }
+
+        var localXY = WorldXYToLocalXY(this.parent, x, y);
+        this.setLocalXY(localXY.x, localXY.y);
+        return this;
+      }
+    }, {
+      key: "setPosition",
+      value: function setPosition(x, y) {
+        this.setWorldXY(x, y);
+        return this;
+      }
+    }, {
+      key: "getWorldXY",
+      value: function getWorldXY() {
+        return LocalXYToWorldXY(this.parent, this._localX, this._localY);
       }
     }, {
       key: "x",
       get: function get() {
-        var gameObject = this.parent;
-        return (this.localX - gameObject.width / 2) * gameObject.scaleX + gameObject.x;
+        var worldXY = LocalXYToWorldXY(this.parent, this._localX, this._localY);
+        return worldXY.x;
       },
       set: function set(x) {
-        var gameObject = this.parent;
-        this.localX = (x - gameObject.x) / gameObject.scaleX + gameObject.width / 2;
+        this.setWorldXY(x, this.y);
       }
     }, {
       key: "y",
       get: function get() {
-        var gameObject = this.parent;
-        return (this.localY - gameObject.height / 2) * gameObject.scaleY + gameObject.y;
+        var worldXY = LocalXYToWorldXY(this.parent, this._localX, this._localY);
+        return worldXY.y;
       },
       set: function set(y) {
-        var gameObject = this.parent;
-        this.localY = (y - gameObject.y) / gameObject.scaleY + gameObject.height / 2;
+        this.setWorldXY(this.x, y);
       }
     }]);
 

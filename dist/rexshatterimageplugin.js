@@ -538,6 +538,26 @@
     return Face;
   }(Base);
 
+  var RotateAround = Phaser.Math.RotateAround;
+
+  var WorldXYToLocalXY = function WorldXYToLocalXY(gameObject, worldX, worldY) {
+    var ox = gameObject.width / 2;
+    var oy = gameObject.height / 2;
+    out.x = worldX - gameObject.x;
+    out.y = worldY - gameObject.y;
+    out.x /= gameObject.scaleX;
+    out.y /= gameObject.scaleY;
+    RotateAround(out, ox, oy, -gameObject.rotation);
+    out.x += ox;
+    out.y += oy;
+    return out;
+  };
+
+  var out = {
+    x: 0,
+    y: 0
+  };
+
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
   var GetValue = Phaser.Utils.Objects.GetValue;
@@ -619,6 +639,10 @@
         if (centerX === undefined) {
           centerX = this.width / 2;
           centerY = this.height / 2;
+        } else {
+          var worldXY = WorldXYToLocalXY(this, centerX, centerY);
+          centerX = worldXY.x;
+          centerY = worldXY.y;
         }
 
         this.shatterCenter.x = centerX;
