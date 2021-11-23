@@ -9,6 +9,7 @@ declare namespace Image {
         key?: string,
         frame?: string,
         hideCCW?: boolean,
+        ninePointMode?: boolean,
     }
 
     class ControlPoint {
@@ -35,8 +36,13 @@ declare class Image extends Phaser.GameObjects.Mesh {
 
     readonly controlPoints: Image.ControlPoint[];
     readonly topLeft: Image.ControlPoint;
+    readonly topCenter: Image.ControlPoint;
     readonly topRight: Image.ControlPoint;
+    readonly centerLeft: Image.ControlPoint;
+    readonly center: Image.ControlPoint;
+    readonly centerRight: Image.ControlPoint;
     readonly bottomLeft: Image.ControlPoint;
+    readonly bottomCenter: Image.ControlPoint;
     readonly bottomRight: Image.ControlPoint;
 
 }
