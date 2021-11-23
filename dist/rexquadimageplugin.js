@@ -452,17 +452,20 @@
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0; // Update vertex
 
+        var controlPoints = this.controlPoints;
+
         for (var i = 0, cnt = points.length; i < cnt; i += 2) {
           var px = points[i + 0];
           var py = points[i + 1];
+          var vertexIndex = i / 2;
           var x = px / srcHeight - vHalfWidth;
           var y = py / srcHeight - vHalfHeight;
           var u = frameU0 + frameU * (px / srcWidth);
           var v = frameV0 + frameV * (py / srcHeight);
-          this.vertices[i / 2].set(x, -y, 0).setUVs(u, v);
+          this.vertices[vertexIndex].set(x, -y, 0).setUVs(u, v);
+          controlPoints[vertexIndex].setLocalXY(px, py, true);
         }
 
-        this.reesetControlPoints();
         return this;
       }
     }, {
@@ -473,20 +476,6 @@
         this.resetPerspective(); // Reset perspective
 
         this.resetVerts(); // Reset verts
-
-        return this;
-      }
-    }, {
-      key: "reesetControlPoints",
-      value: function reesetControlPoints() {
-        var points = GetPointPosition(this);
-        var controlPoints = this.controlPoints;
-
-        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
-          var px = points[i + 0];
-          var py = points[i + 1];
-          controlPoints[i / 2].setLocalXY(px, py, true);
-        }
 
         return this;
       }

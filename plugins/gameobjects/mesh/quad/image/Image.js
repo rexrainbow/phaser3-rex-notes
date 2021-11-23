@@ -56,20 +56,22 @@ class Image extends Mesh {
         var frameV = frameV1 - frameV0;
 
         // Update vertex
+        var controlPoints = this.controlPoints;
         for (var i = 0, cnt = points.length; i < cnt; i += 2) {
             var px = points[i + 0];
             var py = points[i + 1];
+            var vertexIndex = i / 2;
 
             var x = (px / srcHeight) - vHalfWidth;
             var y = (py / srcHeight) - vHalfHeight;
             var u = frameU0 + (frameU * (px / srcWidth));
             var v = frameV0 + (frameV * (py / srcHeight));
-            this.vertices[i / 2]
+            this.vertices[vertexIndex]
                 .set(x, -y, 0)
                 .setUVs(u, v)
-        }
 
-        this.reesetControlPoints();
+            controlPoints[vertexIndex].setLocalXY(px, py, true);
+        }
 
         return this;
     }
@@ -78,18 +80,6 @@ class Image extends Mesh {
         this.setSizeToFrame();  // Reset size
         this.resetPerspective();  // Reset perspective
         this.resetVerts();  // Reset verts
-        return this;
-    }
-
-    reesetControlPoints() {
-        var points = GetPointPosition(this);
-        var controlPoints = this.controlPoints;
-        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
-            var px = points[i + 0];
-            var py = points[i + 1];
-            controlPoints[i / 2].setLocalXY(px, py, true);
-        }
-
         return this;
     }
 
