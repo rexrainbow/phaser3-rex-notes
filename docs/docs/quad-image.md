@@ -1,6 +1,6 @@
 ## Introduction
 
-Image with 4 control points.
+Image with 4 vertex control points.
 
 - Author: Rex
 - Game object

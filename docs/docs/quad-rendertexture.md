@@ -1,6 +1,6 @@
 ## Introduction
 
-Render texture with 4 control points.
+Render texture with 4 vertex control points.
 
 - Author: Rex
 - Game object
