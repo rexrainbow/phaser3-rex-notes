@@ -926,6 +926,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/quad-image/</loc>
+         <lastmod>2021-11-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/quad-rendertexture/</loc>
+         <lastmod>2021-11-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/quest/</loc>
          <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>

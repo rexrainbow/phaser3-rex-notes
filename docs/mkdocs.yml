@@ -51,6 +51,9 @@ nav:
             - Card: perspective-card.md
             - Carousel: perspective-carousel.md
             - Image carousel: perspective-imagecarousel.md
+        - Quad:
+            - Image: quad-image.md
+            - Render texture: quad-rendertexture.md
         - Shatter image: shatter-image.md
         - Rope: rope.md
     - Text:
