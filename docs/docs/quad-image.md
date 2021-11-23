@@ -79,6 +79,7 @@ Image with 4 vertex control points.
 ```javascript
 var image = scene.add.rexQuadImage(x, y, texture, frame, {
     // hideCCW: true,
+    // ninePointMode: false,
 });
 ```
 
@@ -91,8 +92,13 @@ var image = scene.add.rexQuadImage({
     key,
     // frame: null,
     // hideCCW: true,
+    // ninePointMode: false,
 });
 ```
+
+- `ninePointMode` :
+    - `true` : Add 9 vertex control points.
+    - `false` : Add 4 vertex control points. Default behavior.
 
 Add quadimage from JSON
 
@@ -105,6 +111,7 @@ var quadimage = scene.make.rexQuadImage({
     frame: null,
 
     // hideCCW: false,
+    // ninePointMode: false,
 
     add: true
 });
@@ -135,16 +142,34 @@ var quadimage = scene.make.rexQuadImage({
     var image = new MyQuadImage(scene, x, y, texture, frame, config);
     ```
 
-### Control points
+### Vertex control points
 
-```javascript
-var topLeftPoint = image.topLeft;
-var topRightPoint = image.topRight;
-var bottomLeftPoint = image.bottomLeft;
-var bottomRightPoint = image.bottomRight;
-```
+- Array of vertex control points
+    ```javascript
+    var controlPoints = image.controlPoints;
+    ```
+    - 4, or 9 vertex control points
+- 4 vertex control points
+    ```javascript
+    var topLeftPoint = image.topLeft;         // image.controlPoints[0]
+    var topRightPoint = image.topRight;       // image.controlPoints[1]
+    var bottomLeftPoint = image.bottomLeft;   // image.controlPoints[2]
+    var bottomRightPoint = image.bottomRight; // image.controlPoints[3]
+    ```
+- 9 vertex control points
+    ```javascript
+    var topLeft = image.topLeft;               // image.controlPoints[0]
+    var topCenter = image.topCenter;           // image.controlPoints[1]
+    var topRight = image.topRight;             // image.controlPoints[2]
+    var centerLeft = image.centerLeft;         // image.controlPoints[3]
+    var center = image.center;                 // image.controlPoints[4]
+    var centerRight = image.centerRight;       // image.controlPoints[5]
+    var bottomLeft = image.bottomLeft;         // image.controlPoints[6]
+    var bottomCenter = image.bottomCenter;     // image.controlPoints[7]
+    var bottomRight = image.bottomRight;       // image.controlPoints[8]
+    ```
 
-### Position
+#### Position
 
 - Get
     ```javascript

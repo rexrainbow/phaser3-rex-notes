@@ -14,11 +14,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(400, 300, 'card2').setScale(0.5);
-        var image = this.add.rexQuadImage(400, 300, 'card2', null, { hideCCW: false }).setAlpha(0.8).setScale(0.5);
+        var image = this.add.rexQuadImage(400, 300, 'card2', null, { hideCCW: false, ninePointMode: true }).setAlpha(0.8).setScale(0.5);
 
         this.debug = this.add.graphics();
         image.setDebug(this.debug);
-        
+
         var controlPoints = image.controlPoints;
         for(var i=0,cnt=controlPoints.length; i<cnt; i++){
             CreateControlCircle(this, controlPoints[i]);

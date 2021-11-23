@@ -1,4 +1,5 @@
 import InitFaces from './InitFaces.js';
+import GetPointPosition from './GetPointPosition.js';
 
 const Mesh = Phaser.GameObjects.Mesh;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -19,6 +20,8 @@ class Image extends Mesh {
 
         super(scene, x, y, key, frame);
         this.type = 'rexQuadImage';
+        this.isNinePointMode = GetValue(config, 'ninePointMode', false);
+
         InitFaces(this);
         this.setSizeToFrame();
         this.resetPerspective();
@@ -36,14 +39,7 @@ class Image extends Mesh {
         // Clear faces and vertices        
         this.dirtyCache[9] = -1;
 
-        var top = 0, bottom = this.height,
-            left = 0, right = this.width;
-        var vertices = [
-            [left, top],    // top-left
-            [right, top],   // top-right
-            [left, bottom], // bottom-left
-            [right, bottom] // bottom-right
-        ];
+        var points = GetPointPosition(this);
 
         // Calculate vertex data
         var srcWidth = this.width;
@@ -60,16 +56,15 @@ class Image extends Mesh {
         var frameV = frameV1 - frameV0;
 
         // Update vertex
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-            var p = vertices[i];
-            var px = p[0];
-            var py = p[1];
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            var px = points[i + 0];
+            var py = points[i + 1];
 
             var x = (px / srcHeight) - vHalfWidth;
             var y = (py / srcHeight) - vHalfHeight;
             var u = frameU0 + (frameU * (px / srcWidth));
             var v = frameV0 + (frameV * (py / srcHeight));
-            this.vertices[i]
+            this.vertices[i / 2]
                 .set(x, -y, 0)
                 .setUVs(u, v)
         }
@@ -87,12 +82,14 @@ class Image extends Mesh {
     }
 
     reesetControlPoints() {
-        var top = 0, bottom = this.height,
-            left = 0, right = this.width;
-        this.topLeft.setLocalXY(left, top, true);
-        this.topRight.setLocalXY(right, top, true);
-        this.bottomLeft.setLocalXY(left, bottom, true);
-        this.bottomRight.setLocalXY(right, bottom, true);
+        var points = GetPointPosition(this);
+        var controlPoints = this.controlPoints;
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+            var px = points[i + 0];
+            var py = points[i + 1];
+            controlPoints[i / 2].setLocalXY(px, py, true);
+        }
+
         return this;
     }
 

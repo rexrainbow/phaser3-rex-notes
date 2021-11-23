@@ -4,22 +4,20 @@ const Vertex = Phaser.Geom.Mesh.Vertex;
 const Face = Phaser.Geom.Mesh.Face;
 
 var InitFaces = function (quad) {
-    /*
-    vertices: 
-        0 : top-left
-        1 : top-right
-        2 : bottom-left
-        3 : bottom-right
-    */
+    var isNinePointMode = quad.isNinePointMode;
+    var pointCount = (isNinePointMode) ? 9 : 4;
+
     quad.controlPoints = [];
     var vertices = quad.vertices;
     var faces = quad.faces;
     var controlPoints = quad.controlPoints;
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < pointCount; i++) {
         var vertex = new Vertex();
         vertices.push(vertex);
         controlPoints.push(new ControlPoint(quad, vertex));
     }
+
+    var indices = (isNinePointMode) ? NinePointsIndices : FourPointsIndices;
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
         var vert1 = vertices[indices[i + 0]];
         var vert2 = vertices[indices[i + 1]];
@@ -27,15 +25,47 @@ var InitFaces = function (quad) {
         faces.push(new Face(vert1, vert2, vert3));
     }
 
-    quad.topLeft = controlPoints[0];
-    quad.topRight = controlPoints[1];
-    quad.bottomLeft = controlPoints[2];
-    quad.bottomRight = controlPoints[3];
+    if (isNinePointMode) {
+        quad.topLeft = controlPoints[0];
+        quad.topCenter = controlPoints[1];
+        quad.topRight = controlPoints[2];
+        quad.centerLeft = controlPoints[3];
+        quad.center = controlPoints[4];
+        quad.centerRight = controlPoints[5];
+        quad.bottomLeft = controlPoints[6];
+        quad.bottomCenter = controlPoints[7];
+        quad.bottomRight = controlPoints[8];
+    } else {
+        quad.topLeft = controlPoints[0];
+        quad.topRight = controlPoints[1];
+        quad.bottomLeft = controlPoints[2];
+        quad.bottomRight = controlPoints[3];
+    }
 }
 
-const indices = [
-    0, 2, 1,
-    2, 3, 1
+/*
+0, 1,
+2, 3,
+*/
+const FourPointsIndices = [
+    0, 1, 3,
+    0, 2, 3,
+];
+
+/*
+0, 1, 2,
+3, 4, 5,
+6, 7, 8
+*/
+const NinePointsIndices = [
+    0, 1, 4,
+    1, 2, 4,
+    2, 5, 4,
+    8, 5, 4,
+    8, 7, 4,
+    6, 7, 4,
+    6, 3, 4,
+    0, 3, 4
 ];
 
 export default InitFaces;

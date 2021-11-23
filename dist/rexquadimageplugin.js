@@ -299,23 +299,20 @@
   var Face = Phaser.Geom.Mesh.Face;
 
   var InitFaces = function InitFaces(quad) {
-    /*
-    vertices: 
-        0 : top-left
-        1 : top-right
-        2 : bottom-left
-        3 : bottom-right
-    */
+    var isNinePointMode = quad.isNinePointMode;
+    var pointCount = isNinePointMode ? 9 : 4;
     quad.controlPoints = [];
     var vertices = quad.vertices;
     var faces = quad.faces;
     var controlPoints = quad.controlPoints;
 
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < pointCount; i++) {
       var vertex = new Vertex();
       vertices.push(vertex);
       controlPoints.push(new ControlPoint(quad, vertex));
     }
+
+    var indices = isNinePointMode ? NinePointsIndices : FourPointsIndices;
 
     for (var i = 0, cnt = indices.length; i < cnt; i += 3) {
       var vert1 = vertices[indices[i + 0]];
@@ -324,13 +321,68 @@
       faces.push(new Face(vert1, vert2, vert3));
     }
 
-    quad.topLeft = controlPoints[0];
-    quad.topRight = controlPoints[1];
-    quad.bottomLeft = controlPoints[2];
-    quad.bottomRight = controlPoints[3];
+    if (isNinePointMode) {
+      quad.topLeft = controlPoints[0];
+      quad.topCenter = controlPoints[1];
+      quad.topRight = controlPoints[2];
+      quad.centerLeft = controlPoints[3];
+      quad.center = controlPoints[4];
+      quad.centerRight = controlPoints[5];
+      quad.bottomLeft = controlPoints[6];
+      quad.bottomCenter = controlPoints[7];
+      quad.bottomRight = controlPoints[8];
+    } else {
+      quad.topLeft = controlPoints[0];
+      quad.topRight = controlPoints[1];
+      quad.bottomLeft = controlPoints[2];
+      quad.bottomRight = controlPoints[3];
+    }
   };
+  /*
+  0, 1,
+  2, 3,
+  */
 
-  var indices = [0, 2, 1, 2, 3, 1];
+
+  var FourPointsIndices = [0, 1, 3, 0, 2, 3];
+  /*
+  0, 1, 2,
+  3, 4, 5,
+  6, 7, 8
+  */
+
+  var NinePointsIndices = [0, 1, 4, 1, 2, 4, 2, 5, 4, 8, 5, 4, 8, 7, 4, 6, 7, 4, 6, 3, 4, 0, 3, 4];
+
+  var GetPointPosition = function GetPointPosition(quad) {
+    var points;
+    var top = 0,
+        bottom = quad.height,
+        left = 0,
+        right = quad.width;
+
+    if (quad.isNinePointMode) {
+      var centerX = (left + right) / 2;
+      var centerY = (top + bottom) / 2;
+      points = [left, top, // top-left
+      centerX, top, // top-center
+      right, top, // top-right
+      left, centerY, // center-left
+      centerX, centerY, // center-center
+      right, centerY, // top-right
+      left, bottom, // center-left
+      centerX, bottom, // bottom-center
+      right, bottom // bottom-right
+      ];
+    } else {
+      points = [left, top, // top-left
+      right, top, // top-right
+      left, bottom, // bottom-left
+      right, bottom // bottom-right
+      ];
+    }
+
+    return points;
+  };
 
   var Mesh = Phaser.GameObjects.Mesh;
   var IsPlainObject$1 = Phaser.Utils.Objects.IsPlainObject;
@@ -359,6 +411,7 @@
 
       _this = _super.call(this, scene, x, y, key, frame);
       _this.type = 'rexQuadImage';
+      _this.isNinePointMode = GetValue$1(config, 'ninePointMode', false);
       InitFaces(_assertThisInitialized(_this));
 
       _this.setSizeToFrame();
@@ -385,15 +438,7 @@
       value: function resetVerts() {
         // Clear faces and vertices        
         this.dirtyCache[9] = -1;
-        var top = 0,
-            bottom = this.height,
-            left = 0,
-            right = this.width;
-        var vertices = [[left, top], // top-left
-        [right, top], // top-right
-        [left, bottom], // bottom-left
-        [right, bottom] // bottom-right
-        ]; // Calculate vertex data
+        var points = GetPointPosition(this); // Calculate vertex data
 
         var srcWidth = this.width;
         var srcHeight = this.height;
@@ -407,15 +452,14 @@
         var frameU = frameU1 - frameU0;
         var frameV = frameV1 - frameV0; // Update vertex
 
-        for (var i = 0, cnt = vertices.length; i < cnt; i++) {
-          var p = vertices[i];
-          var px = p[0];
-          var py = p[1];
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+          var px = points[i + 0];
+          var py = points[i + 1];
           var x = px / srcHeight - vHalfWidth;
           var y = py / srcHeight - vHalfHeight;
           var u = frameU0 + frameU * (px / srcWidth);
           var v = frameV0 + frameV * (py / srcHeight);
-          this.vertices[i].set(x, -y, 0).setUVs(u, v);
+          this.vertices[i / 2].set(x, -y, 0).setUVs(u, v);
         }
 
         this.reesetControlPoints();
@@ -435,14 +479,15 @@
     }, {
       key: "reesetControlPoints",
       value: function reesetControlPoints() {
-        var top = 0,
-            bottom = this.height,
-            left = 0,
-            right = this.width;
-        this.topLeft.setLocalXY(left, top, true);
-        this.topRight.setLocalXY(right, top, true);
-        this.bottomLeft.setLocalXY(left, bottom, true);
-        this.bottomRight.setLocalXY(right, bottom, true);
+        var points = GetPointPosition(this);
+        var controlPoints = this.controlPoints;
+
+        for (var i = 0, cnt = points.length; i < cnt; i += 2) {
+          var px = points[i + 0];
+          var py = points[i + 1];
+          controlPoints[i / 2].setLocalXY(px, py, true);
+        }
+
         return this;
       }
     }, {
