@@ -20,6 +20,7 @@ class Scroller extends ComponentBase {
         var drapSpeedConfig = {
             inputConfig: GetValue(config, 'inputConfig', undefined),
             enable: enable,
+            pointerOutRelease: GetValue(config, 'pointerOutRelease', true),
             eventEmitter: false,
         };
         this.dragState = new DrapSpeed(gameObject, drapSpeedConfig);

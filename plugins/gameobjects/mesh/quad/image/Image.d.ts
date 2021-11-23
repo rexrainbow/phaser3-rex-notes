@@ -33,6 +33,7 @@ declare class Image extends Phaser.GameObjects.Mesh {
         config?: Image.IConfig
     )
 
+    readonly controlPoints: Image.ControlPoint[];
     readonly topLeft: Image.ControlPoint;
     readonly topRight: Image.ControlPoint;
     readonly bottomLeft: Image.ControlPoint;

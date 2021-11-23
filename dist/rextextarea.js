@@ -7148,9 +7148,10 @@
         this.localX = undefined;
         this.localY = undefined;
         this.justMoved = false;
-        this.setEnable(GetValue$7(o, "enable", true));
-        this.holdThreshold = GetValue$7(o, "holdThreshold", 50); // ms
+        this.setEnable(GetValue$7(o, 'enable', true));
+        this.holdThreshold = GetValue$7(o, 'holdThreshold', 50); // ms
 
+        this.pointerOutReleaseEnable = GetValue$7(o, 'pointerOutRelease', true);
         return this;
       }
     }, {
@@ -7160,7 +7161,11 @@
         this.parent.on('pointerdown', this.onPointIn, this); // this.parent.on('pointerover', this.onPointIn, this);
 
         this.parent.on('pointerup', this.onPointOut, this);
-        this.parent.on('pointerout', this.onPointOut, this);
+
+        if (this.pointerOutReleaseEnable) {
+          this.parent.on('pointerout', this.onPointOut, this);
+        }
+
         this.parent.on('pointermove', this.onPointerMove, this);
         this.scene.events.on('preupdate', this.preupdate, this);
       }
@@ -7213,6 +7218,16 @@
       key: "toggleEnable",
       value: function toggleEnable() {
         this.setEnable(!this.enable);
+        return this;
+      }
+    }, {
+      key: "setPointerOutReleaseEnable",
+      value: function setPointerOutReleaseEnable(enable) {
+        if (enable === undefined) {
+          enable = true;
+        }
+
+        this.pointerOutReleaseEnable = enable;
         return this;
       }
     }, {
@@ -7537,6 +7552,7 @@
       var drapSpeedConfig = {
         inputConfig: GetValue$5(config, 'inputConfig', undefined),
         enable: enable,
+        pointerOutRelease: GetValue$5(config, 'pointerOutRelease', true),
         eventEmitter: false
       };
       _this.dragState = new DragSpeed(gameObject, drapSpeedConfig);
