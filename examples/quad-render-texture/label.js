@@ -33,10 +33,10 @@ class Demo extends Phaser.Scene {
         })
         image.syncSize();
 
-        CreateControlPoint(this, image.topLeft);
-        CreateControlPoint(this, image.topRight);
-        CreateControlPoint(this, image.bottomLeft);
-        CreateControlPoint(this, image.bottomRight);
+        var controlPoints = image.controlPoints;
+        for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
+            CreateControlCircle(this, controlPoints[i]);
+        }
 
     }
 
@@ -44,15 +44,15 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var CreateControlPoint = function (scene, quadVertex) {
-    var controlPoint = scene.add.circle(quadVertex.x, quadVertex.y, 10, 0xff0000)
+var CreateControlCircle = function (scene, controlPoint) {
+    var circle = scene.add.circle(controlPoint.x, controlPoint.y, 10, 0xff0000)
         .setInteractive({ draggable: true })
         .on('drag', function (pointer, dragX, dragY) {
-            controlPoint.x = dragX;
-            controlPoint.y = dragY;
-            quadVertex.setPosition(dragX, dragY);
+            circle.x = dragX;
+            circle.y = dragY;
+            controlPoint.setPosition(dragX, dragY);
         });
-    return controlPoint;
+    return circle;
 }
 
 var CreateCard = function (scene) {

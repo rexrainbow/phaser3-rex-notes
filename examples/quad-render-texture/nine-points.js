@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             add: false
         }).setOrigin(1);
 
-        var image = this.add.rexQuadRenderTexture(400, 300, 150, 200);
+        var image = this.add.rexQuadRenderTexture(400, 300, 150, 200, { hideCCW: false, ninePointMode: true });
         image.rt
             .fill(0x888888)
             .draw(numberText, 150, 200)

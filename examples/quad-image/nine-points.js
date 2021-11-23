@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         image.setDebug(this.debug);
 
         var controlPoints = image.controlPoints;
-        for(var i=0,cnt=controlPoints.length; i<cnt; i++){
+        for (var i = 0, cnt = controlPoints.length; i < cnt; i++) {
             CreateControlCircle(this, controlPoints[i]);
         }
     }
